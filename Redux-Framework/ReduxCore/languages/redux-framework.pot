@@ -1,0 +1,653 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Redux Framework 3.2.5 Front-end\n"
+"Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
+"POT-Creation-Date: 2014-04-27 04:43:19+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Dovy Paukstys <dovy@reduxframework.com>\n"
+"Language-Team: ReduxFramework <language@reduxframework.com>\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"esc_html_x;_c;_nc: \n"
+"_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;: \n"
+"X-Poedit-KeywordsList: __;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;\n"
+"X-Poedit-Basepath: ../../\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ReduxCore\n"
+"X-Poedit-SearchPath-1: ReduxCore/languages\n"
+"X-Poedit-SearchPath-2: .\n"
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:447
+#: ReduxCore/framework.php:1635
+msgid "You have changes that are not saved. Would you like to save them now?"
+msgstr ""
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:448
+#: ReduxCore/framework.php:1636
+msgid "Are you sure? Resetting will lose all custom values."
+msgstr ""
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:449
+#: ReduxCore/framework.php:1638
+msgid "Your current options will be replaced with the values of this preset. Would you like to proceed?"
+msgstr ""
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:480
+msgid "You have changes that are not saved.  Would you like to save them now?"
+msgstr ""
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:481
+msgid "Are you sure?  Resetting will lose all custom values."
+msgstr ""
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:482
+msgid "Your current options will be replaced with the values of this preset.  Would you like to proceed?"
+msgstr ""
+
+#: ReduxCore/framework.php:228
+msgid "Options panel created using %1$s"
+msgstr ""
+
+#: ReduxCore/framework.php:228
+msgid "Redux Framework"
+msgstr ""
+
+#: ReduxCore/framework.php:231 ReduxCore/framework.php:234
+#: ReduxCore/framework.php:1227
+msgid "Options"
+msgstr ""
+
+#: ReduxCore/framework.php:1171 ReduxCore/framework.php:1172
+#: ReduxCore/framework.php:2978 ReduxCore/framework.php:3049
+msgid "System Info"
+msgstr ""
+
+#: ReduxCore/framework.php:1637
+msgid "Are you sure? Resetting will lose all custom values in this section."
+msgstr ""
+
+#: ReduxCore/framework.php:1639
+msgid "Please Wait"
+msgstr ""
+
+#: ReduxCore/framework.php:1776
+msgid "Hints"
+msgstr ""
+
+#: ReduxCore/framework.php:1885
+msgid "Default"
+msgstr ""
+
+#: ReduxCore/framework.php:2803
+msgid "Warning- This options panel will not work properly without javascript!"
+msgstr ""
+
+#: ReduxCore/framework.php:2862
+msgid "Expand"
+msgstr ""
+
+#: ReduxCore/framework.php:2864 ReduxCore/framework.php:3099
+msgid "Save Changes"
+msgstr ""
+
+#: ReduxCore/framework.php:2866 ReduxCore/framework.php:3101
+msgid "Reset Section"
+msgstr ""
+
+#: ReduxCore/framework.php:2868 ReduxCore/framework.php:3103
+msgid "Reset All"
+msgstr ""
+
+#: ReduxCore/framework.php:2871 ReduxCore/framework.php:3106
+msgid "Working..."
+msgstr ""
+
+#: ReduxCore/framework.php:2889
+msgid "Settings Imported!"
+msgstr ""
+
+#: ReduxCore/framework.php:2902
+msgid "All Defaults Restored!"
+msgstr ""
+
+#: ReduxCore/framework.php:2914
+msgid "Section Defaults Restored!"
+msgstr ""
+
+#: ReduxCore/framework.php:2921
+msgid "Settings Saved!"
+msgstr ""
+
+#: ReduxCore/framework.php:2930
+msgid "Settings have changed, you should save them!"
+msgstr ""
+
+#: ReduxCore/framework.php:2931
+msgid "error(s) were found!"
+msgstr ""
+
+#: ReduxCore/framework.php:2932
+msgid "warning(s) were found!"
+msgstr ""
+
+#: ReduxCore/inc/class.redux_functions.php:182
+msgid "Dismiss"
+msgstr ""
+
+#: ReduxCore/inc/debug.php:41 ReduxCore/inc/debug.php:69
+#: ReduxCore/inc/debug.php:76 ReduxCore/inc/debug.php:77
+msgid "Options Object"
+msgstr ""
+
+#: ReduxCore/inc/debug.php:54
+msgid "Show Object in Javascript Console Object"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:118
+#: ReduxCore/inc/fields/color/field_color.php:72
+#: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:81
+#: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:91
+#: ReduxCore/inc/fields/color_rgba/field_color_rgba.php:85
+msgid "Transparent"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:135
+msgid "Background Repeat"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:151
+msgid "Background Clip"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:167
+msgid "Background Origin"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:182
+msgid "Background Size"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:197
+msgid "Background Attachment"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:217
+msgid "Background Position"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:272
+#: ReduxCore/inc/fields/media/field_media.php:116
+msgid "No media selected"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:306
+#: ReduxCore/inc/fields/media/field_media.php:155
+#: ReduxCore/inc/fields/slides/field_slides.php:121
+#: ReduxCore/inc/fields/slides/field_slides.php:190
+msgid "Upload"
+msgstr ""
+
+#: ReduxCore/inc/fields/background/field_background.php:312
+#: ReduxCore/inc/fields/media/field_media.php:161
+#: ReduxCore/inc/fields/multi_text/field_multi_text.php:75
+#: ReduxCore/inc/fields/multi_text/field_multi_text.php:79
+#: ReduxCore/inc/fields/multi_text/field_multi_text.php:82
+#: ReduxCore/inc/fields/slides/field_slides.php:128
+#: ReduxCore/inc/fields/slides/field_slides.php:192
+msgid "Remove"
+msgstr ""
+
+#: ReduxCore/inc/fields/border/field_border.php:113
+#: ReduxCore/inc/fields/spacing/field_spacing.php:151
+msgid "All"
+msgstr ""
+
+#: ReduxCore/inc/fields/border/field_border.php:126
+#: ReduxCore/inc/fields/spacing/field_spacing.php:175
+msgid "Top"
+msgstr ""
+
+#: ReduxCore/inc/fields/border/field_border.php:133
+#: ReduxCore/inc/fields/spacing/field_spacing.php:182
+msgid "Right"
+msgstr ""
+
+#: ReduxCore/inc/fields/border/field_border.php:140
+#: ReduxCore/inc/fields/spacing/field_spacing.php:189
+msgid "Bottom"
+msgstr ""
+
+#: ReduxCore/inc/fields/border/field_border.php:147
+#: ReduxCore/inc/fields/spacing/field_spacing.php:196
+msgid "Left"
+msgstr ""
+
+#: ReduxCore/inc/fields/border/field_border.php:162
+msgid "Border style"
+msgstr ""
+
+#: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:73
+msgid "From "
+msgstr ""
+
+#: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:84
+msgid "To "
+msgstr ""
+
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:125
+msgid "Width"
+msgstr ""
+
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:141
+#: ReduxCore/inc/fields/typography/field_typography.php:380
+msgid "Height"
+msgstr ""
+
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:153
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:154
+#: ReduxCore/inc/fields/spacing/field_spacing.php:206
+#: ReduxCore/inc/fields/spacing/field_spacing.php:207
+msgid "Units"
+msgstr ""
+
+#: ReduxCore/inc/fields/gallery/field_gallery.php:77
+msgid "Add/Edit Gallery"
+msgstr ""
+
+#: ReduxCore/inc/fields/gallery/field_gallery.php:78
+msgid "Clear Gallery"
+msgstr ""
+
+#: ReduxCore/inc/fields/group/field_group.php:82
+msgid "New "
+msgstr ""
+
+#: ReduxCore/inc/fields/group/field_group.php:125
+msgid "Delete"
+msgstr ""
+
+#: ReduxCore/inc/fields/group/field_group.php:129
+msgid "Add"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:77
+msgid "Import / Export Options"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:80
+msgid "Import Options"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:81
+msgid "Import from file"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:81
+msgid "Import from URL"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:85
+msgid "Input your backup file below and hit Import to restore your sites options from a backup."
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:93
+msgid "Input the URL to another sites options set and hit Import to load the options from that site."
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:99
+msgid "Import"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:99
+msgid "WARNING! This will overwrite all existing option values, please proceed with caution!"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:102
+msgid "Export Options"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:105
+msgid "Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site)."
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:109
+msgid "Copy"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:109
+msgid "Download"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:109
+msgid "Copy Link"
+msgstr ""
+
+#: ReduxCore/inc/fields/import_export/import_export.php:149
+#: ReduxCore/inc/fields/import_export/import_export.php:158
+#: ReduxCore/inc/fields/import_export/import_export.php:159
+msgid "Import / Export"
+msgstr ""
+
+#: ReduxCore/inc/fields/link_color/field_link_color.php:91
+msgid "Regular"
+msgstr ""
+
+#: ReduxCore/inc/fields/link_color/field_link_color.php:95
+msgid "Hover"
+msgstr ""
+
+#: ReduxCore/inc/fields/link_color/field_link_color.php:99
+msgid "Visited"
+msgstr ""
+
+#: ReduxCore/inc/fields/link_color/field_link_color.php:103
+msgid "Active"
+msgstr ""
+
+#: ReduxCore/inc/fields/multi_text/field_multi_text.php:65
+msgid "Add More"
+msgstr ""
+
+#: ReduxCore/inc/fields/password/field_password.php:55
+msgid "Password"
+msgstr ""
+
+#: ReduxCore/inc/fields/password/field_password.php:56
+msgid "Username"
+msgstr ""
+
+#: ReduxCore/inc/fields/select/field_select.php:76
+#: ReduxCore/inc/fields/select_image/field_select_image.php:58
+msgid "Select an item"
+msgstr ""
+
+#: ReduxCore/inc/fields/select/field_select.php:117
+#: ReduxCore/inc/fields/select_image/field_select_image.php:133
+msgid "No items of this type were found."
+msgstr ""
+
+#: ReduxCore/inc/fields/slides/field_slides.php:133
+#: ReduxCore/inc/fields/slides/field_slides.php:197
+msgid "Title"
+msgstr ""
+
+#: ReduxCore/inc/fields/slides/field_slides.php:135
+#: ReduxCore/inc/fields/slides/field_slides.php:199
+msgid "Description"
+msgstr ""
+
+#: ReduxCore/inc/fields/slides/field_slides.php:137
+#: ReduxCore/inc/fields/slides/field_slides.php:201
+msgid "URL"
+msgstr ""
+
+#: ReduxCore/inc/fields/slides/field_slides.php:168
+#: ReduxCore/inc/fields/slides/field_slides.php:231
+msgid "Delete Slide"
+msgstr ""
+
+#: ReduxCore/inc/fields/slides/field_slides.php:234
+msgid "Add Slide"
+msgstr ""
+
+#: ReduxCore/inc/fields/switch/field_switch.php:42
+msgid "On"
+msgstr ""
+
+#: ReduxCore/inc/fields/switch/field_switch.php:49
+msgid "Off"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:167
+msgid "Font family"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:183
+msgid "Standard Fonts"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:247
+msgid "Backup Font Family"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:267
+#: ReduxCore/inc/fields/typography/field_typography.php:271
+msgid "Font style"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:271
+msgid "Style"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:300
+msgid "Font subsets"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:301
+msgid "Subsets"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:301
+msgid "Font script"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:318
+#: ReduxCore/inc/fields/typography/field_typography.php:319
+msgid "Text Align"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:342
+#: ReduxCore/inc/fields/typography/field_typography.php:343
+msgid "Text Transform"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:372
+msgid "Size"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:388
+msgid "Word Spacing"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:397
+msgid "Letter Spacing"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:414
+msgid "Font color"
+msgstr ""
+
+#: ReduxCore/inc/fields/typography/field_typography.php:751
+#: ReduxCore/inc/fields/typography/field_typography.php:779
+msgid "Google Webfonts"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:111
+msgid "Help improve Our Panel"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:112
+msgid "Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatability."
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:117
+msgid "Allow tracking"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:122
+msgid "Do not allow tracking"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:132
+msgid "Welcome to the Redux Demo Panel"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:133
+msgid "Getting Started"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:133
+msgid "This panel demonstrates the many features of Redux.  Before digging in, we suggest you get up to speed by reviewing %1$s."
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:133
+msgid "our documentation"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:134
+msgid "Redux Generator"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:134
+msgid "Want to get a head start? Use the %1$s. It will create a customized boilerplate theme or a standalone admin folder complete with all things Redux (with the help of Underscores and TGM). Save yourself a headache and try it today."
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:135
+msgid "Redux Extensions"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:135
+msgid "Did you know we have extensions, which greatly enhance the features of Redux?  Visit our %1$s to learn more!"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:135
+msgid "extensions directory"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:136
+msgid "Like Redux?"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:136
+msgid "If so, please %1$s and consider making a %2$s to keep development of Redux moving forward."
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:136
+msgid "leave us a favorable review on WordPress.org"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:136
+msgid "donation"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:137
+msgid "Newsletter"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:137
+msgid "If you'd like to keep up to with all things Redux, please subscribe to our newsletter"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:138
+msgid "Email address"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:138
+msgid "Subscribe"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:147
+msgid "Close"
+msgstr ""
+
+#: ReduxCore/inc/validation/color/validation_color.php:16
+#: ReduxCore/inc/validation/color_rgba/validation_color_rgba.php:15
+#: ReduxCore/inc/validation/colorrgba/validation_colorrgba.php:17
+msgid "This field must be a valid color value."
+msgstr ""
+
+#: ReduxCore/inc/validation/comma_numeric/validation_comma_numeric.php:17
+msgid "You must provide a comma separated list of numerical values for this option."
+msgstr ""
+
+#: ReduxCore/inc/validation/date/validation_date.php:17
+msgid "This field must be a valid date."
+msgstr ""
+
+#: ReduxCore/inc/validation/email/validation_email.php:17
+#: ReduxCore/inc/validation/email_not_empty/validation_email_not_empty.php:17
+msgid "You must provide a valid email for this option."
+msgstr ""
+
+#: ReduxCore/inc/validation/no_html/validation_no_html.php:16
+msgid "You must not enter any HTML in this field, all HTML tags have been removed."
+msgstr ""
+
+#: ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:17
+msgid "You must not enter any special characters in this field, all special characters have been removed."
+msgstr ""
+
+#: ReduxCore/inc/validation/not_empty/validation_not_empty.php:17
+msgid "This field cannot be empty. Please provide a value."
+msgstr ""
+
+#: ReduxCore/inc/validation/numeric/validation_numeric.php:17
+msgid "You must provide a numerical value for this option."
+msgstr ""
+
+#: ReduxCore/inc/validation/url/validation_url.php:17
+msgid "You must provide a valid URL for this option."
+msgstr ""
+
+#: class.redux-plugin.php:308
+msgid "Redux Framework has an embedded demo."
+msgstr ""
+
+#: class.redux-plugin.php:308
+msgid "Click here to activate the sample config file."
+msgstr ""
+
+#: class.redux-plugin.php:412
+msgid "Repo"
+msgstr ""
+
+#: class.redux-plugin.php:413
+msgid "Generator"
+msgstr ""
+
+#: class.redux-plugin.php:414
+msgid "Issues"
+msgstr ""
+
+#: class.redux-plugin.php:415
+msgid "Documentation"
+msgstr ""
+
+#: class.redux-plugin.php:420
+msgid "Deactivate Demo Mode"
+msgstr ""
+
+#: class.redux-plugin.php:422
+msgid "Activate Demo Mode"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:28
+msgid "Must call in of after the \"plugins_loaded\" action."
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:138
+msgid "Unknown action \"%1$s\" specified for %2$s"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:143
+msgid "The unknown action has been replaced with \"%s\""
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:158
+msgid "Automatic action performed: \"%s\""
+msgstr ""
+
+#: tests/includes/class-tivwp-dm.php:112
+msgid "Activate Development Plugins"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm.php:119
+msgid "Deactivate Development Plugins"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm.php:131
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
