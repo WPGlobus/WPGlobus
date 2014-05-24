@@ -88,7 +88,13 @@ class WPGlobus_Config {
 	 * @var array
 	 */
 	var $language_name = array();
-
+	
+	/*
+	 *
+	 * @var array
+	 */
+	var $en_language_name = array();
+	
 	/*
 	 * Use flag name for navigation menu : 'name' || 'code' || ''
 	 * @var string
@@ -173,7 +179,7 @@ class WPGlobus_Config {
 	function _set_language_name() {
 		// Names for languages in the corresponding language, add more if needed
 		$this->language_name['en'] = "English";
-		$this->language_name['ru'] = "Russian";
+		$this->language_name['ru'] = "Русский";
 		$this->language_name['de'] = "Deutsch";
 		$this->language_name['zh'] = "中文";
 		$this->language_name['fi'] = "suomi";
@@ -190,6 +196,25 @@ class WPGlobus_Config {
 		$this->language_name['pt'] = "Português";
 		$this->language_name['pl'] = "Polski";
 		$this->language_name['gl'] = "galego";
+		
+		$this->en_language_name['en'] = "";
+		$this->en_language_name['ru'] = "Russian";
+		$this->en_language_name['de'] = "German";
+		$this->en_language_name['zh'] = "China";
+		$this->en_language_name['fi'] = "suomi";
+		$this->en_language_name['fr'] = "Français";
+		$this->en_language_name['nl'] = "Nederlands";
+		$this->en_language_name['sv'] = "Svenska";
+		$this->en_language_name['it'] = "Italiano";
+		$this->en_language_name['ro'] = "Română";
+		$this->en_language_name['hu'] = "Magyar";
+		$this->en_language_name['ja'] = "Japanese";
+		$this->en_language_name['es'] = "Español";
+		$this->en_language_name['vi'] = "Vietnamese";
+		$this->en_language_name['ar'] = "Arabic";
+		$this->en_language_name['pt'] = "Português";
+		$this->en_language_name['pl'] = "Polish";
+		$this->en_language_name['gl'] = "galego";		
 	}
 
 	/*
@@ -203,28 +228,26 @@ class WPGlobus_Config {
 		/*
 		 * get default language
 		 */
-		if ( isset( $wpglobus_option['default_language'] ) ) {
-			$this->default_language = $wpglobus_option['default_language'];
+		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
+			reset( $wpglobus_option['enabled_languages'] );
+			$this->default_language = key( $wpglobus_option['enabled_languages'] );
 		}
 		if ( defined('WPGLOBUS_DEFAULT_LANGUAGE') ) {
 			$this->default_language = $wpglobus_option['default_language'];
 		}
 
 		/*
-		 * get enabled language
+		 * get enabled languages
 		 */
 		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
 
 			$this->enabled_languages = array();
 			$this->enabled_languages[] = $this->default_language;
 			foreach( $wpglobus_option['enabled_languages'] as $language=>$language_name ) {
-				//error_log( $language . '=>' . $language_name );
-				// error_log();
 				if ( ! empty( $language_name ) ) {
 					$this->enabled_languages[] = $language;
 				}
 			}
-			//$this->enabled_languages[] = 'ru';
 		}
 
 		/*

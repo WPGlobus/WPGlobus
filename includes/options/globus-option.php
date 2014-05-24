@@ -94,9 +94,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			 * LANGUAGES SECTION
 			 */
 
-			/** @var $all_languages contains all enabled languages */
-			$all_languages 		= array();
-
 			/** @var $enabled_languages contains all enabled languages except default language */
 			$enabled_languages	= array();
 
@@ -104,27 +101,33 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			$more_languages 	= array();
 
 			foreach ( $WPGlobus_Config->enabled_languages as $code ) {
-
-				$all_languages[$code] = $WPGlobus_Config->language_name[$code];
-
-				if ( $code != $WPGlobus_Config->default_language ) {
-					$enabled_languages[$code] = $WPGlobus_Config->language_name[$code];
-				}
-
+				$lang_in_en = '';
+				if ( isset( $WPGlobus_Config->en_language_name[$code] ) && ! empty( $WPGlobus_Config->en_language_name[$code] ) ) {
+					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$code] . ')';
+				}							
+				$enabled_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
 			}
+			
+			/** Add language from 'more_language' option to array $enabled_languages */
 			if ( isset($wpglobus_option['more_languages']) && ! empty($wpglobus_option['more_languages']) ) {
-				$all_languages[$wpglobus_option['more_languages']] = $WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
 				$enabled_languages[$wpglobus_option['more_languages']] = $WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
+			
+				$wpglobus_option['enabled_languages'][$wpglobus_option['more_languages']] = $WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
+				update_option('wpglobus_option', $wpglobus_option);
 			}
-
-
+			
+			//error_log( print_r( $wpglobus_option, true) );			
+			
+			/** Generate array $more_languages */
 			foreach ( $WPGlobus_Config->flag as $code=>$file ) {
-				if ( ! array_key_exists( $code, $all_languages ) ) {
-					$more_languages[$code] = $WPGlobus_Config->language_name[$code];
+				if ( ! array_key_exists( $code, $enabled_languages ) ) {
+					$lang_in_en = '';
+					if ( isset( $WPGlobus_Config->en_language_name[$code] ) && ! empty( $WPGlobus_Config->en_language_name[$code] ) ) {
+						$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$code] . ')';
+					}				
+					$more_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
 				}
 			}
-			//error_log( print_r( $wpglobus_option, true) );
-
 
 			$this->sections[] = array(
 				'title'     => __( 'Languages', 'redux-framework-demo' ),
@@ -132,19 +135,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				'icon'      => 'el-icon-home',
 				// 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
 				'fields'    => array(
-					array(
-						'id'        => 'default_language',
-						'type'      => 'select',
-						#'type'      => 'select_with_flag',
-						'title'     => __( 'Enabled/Default Language', 'redux-framework-demo' ),
-						'compiler'  => 'false',
-						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'placeholder'   => 'Select default language',
-						'options'   => $all_languages,
-						'default'   => 'en'
-					),
 					array(
 						'id'        => 'enabled_languages',
 						#'id'        => 'language_order',
@@ -156,16 +146,20 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'placeholder'   => 'navigation_menu_placeholder',
 						'options'   => $enabled_languages,
 						'mode'  	=> 'checkbox',
-						'class'		=> 'test-class'
+						'class'		=> '',
+						'hint'      => array(
+							#'title'     => '',
+						'content'   => 'First language is language by default',
+						)
 					),
 					array(
 						'id'        => 'more_languages',
 						'type'      => 'select',
 						#'type'      => 'image_select',
-						'title'     => __( 'More language', 'redux-framework-demo' ),
+						'title'     => __( 'More languages', 'redux-framework-demo' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( 'Select language and Save Change for add to Enabled languages', 'redux-framework-demo' ),
+						'desc'      => __( 'Select language and click "Save Changes" for add to Enabled languages', 'redux-framework-demo' ),
 						'subtitle'  => __( 'Subtitle', 'redux-framework-demo' ),
 						'placeholder'   => 'Select language',
 						'options'   => $more_languages,
