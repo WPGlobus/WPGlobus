@@ -30,9 +30,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			if ( ! empty($nav_menus) && count($nav_menus) > 1 ) {
 				$this->menus['all'] = 'All';
 			}
-			//$this->menus = array();
-			//error_log( print_r( $menus, true ) );
-
 
             // This is needed. Bah WordPress bugs.  ;)
             if (  true == Redux_Helpers::isTheme(__FILE__) ) {

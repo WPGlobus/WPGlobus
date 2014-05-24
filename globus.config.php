@@ -160,7 +160,7 @@ class WPGlobus_Config {
 		$this->flag['vi'] = 'vn.png';
 		$this->flag['ar'] = 'arle.png';
 		$this->flag['pt'] = 'br.png';
-		$this->flag['pt'] = 'br.png';
+		$this->flag['pl'] = 'pl.png';
 		$this->flag['gl'] = 'galego.png';
 
 		$this->_set_flags_url();
@@ -200,12 +200,12 @@ class WPGlobus_Config {
 		$this->en_language_name['en'] = "";
 		$this->en_language_name['ru'] = "Russian";
 		$this->en_language_name['de'] = "German";
-		$this->en_language_name['zh'] = "China";
+		$this->en_language_name['zh'] = "Chinese";
 		$this->en_language_name['fi'] = "suomi";
 		$this->en_language_name['fr'] = "French";
 		$this->en_language_name['nl'] = "Nederlands";
 		$this->en_language_name['sv'] = "Svenska";
-		$this->en_language_name['it'] = "Italiano";
+		$this->en_language_name['it'] = "Italian";
 		$this->en_language_name['ro'] = "Română";
 		$this->en_language_name['hu'] = "Magyar";
 		$this->en_language_name['ja'] = "Japanese";
