@@ -101,6 +101,12 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	var $nav_menu = '';
+	
+	/*
+	 * Custom CSS 
+	 * @var string
+	 */
+	var $custom_css = '';	
 
 	/*
 	 * Constructor
@@ -193,7 +199,6 @@ class WPGlobus_Config {
 	function _get_options(){
 
 		$wpglobus_option = get_option('wpglobus_option');
-		//error_log( print_r( $wpglobus_option, true ) );
 
 		/*
 		 * get default language
@@ -222,8 +227,6 @@ class WPGlobus_Config {
 			//$this->enabled_languages[] = 'ru';
 		}
 
-		//error_log( print_r( $this->enabled_languages, true) );
-
 		/*
 		 * get option 'show_flag_name'
 		 */
@@ -247,6 +250,14 @@ class WPGlobus_Config {
 		if ( defined('WPGLOBUS_USE_NAV_MENU') ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
 		}
+
+		/*
+		 * get custom CSS
+		 */
+		if ( isset($wpglobus_option['custom_css']) ) {
+			$this->custom_css = $wpglobus_option['custom_css'];
+		}
+		
 	}
 
 }	// end class WPGlobus_Config

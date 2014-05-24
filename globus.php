@@ -32,6 +32,10 @@ class WPGlobus {
 	 */
 	var $menus = array();
 
+	/*
+	 * WPGlobus option key
+	 * @var string
+	 */	
 	private $option = 'wpglobus_option';
 
 	/*
@@ -53,15 +57,13 @@ class WPGlobus {
 
 			$wpglobus_option = get_option( $this->option );
 
-			//error_log( print_r( $wpglobus_option, true) );
-
 		} else {
 
 			$this->menus = $this->_get_nav_menus();
 
-			add_filter( 'wp_list_pages', 		array( &$this, 'on_wp_list_pages' ), 10, 99 );
-			add_filter( 'wp_nav_menu_objects', 	array( &$this, 'on_add_item' ), 10, 99 );
-			add_action( 'wp_head', 				array( &$this, 'on_wp_head'  ) );
+			add_filter( 'wp_list_pages', 		array( &$this, 'on_wp_list_pages' ), 99, 2 );
+			add_filter( 'wp_nav_menu_objects', 	array( &$this, 'on_add_item' ), 99, 2 );
+			add_action( 'wp_head', 				array( &$this, 'on_wp_head'), 11 );
 			add_action( 'wp_print_styles', 		array( &$this, 'on_wp_styles' ) );
 		}
 
@@ -100,7 +102,8 @@ class WPGlobus {
 		foreach( $WPGlobus_Config->enabled_languages as $language) {
 			$css .= ".globus-flag-" . $language . " { background:url(" . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ") no-repeat }\n";
 		}
-		$css  .="</style>\n";
+		$css  .= $WPGlobus_Config->custom_css . "\n";
+		$css  .= "</style>\n";
 
 		echo $css;
 
@@ -168,7 +171,13 @@ class WPGlobus {
 			}
 		}
 
-		$item_classes = array( '', 'menu-item', 'menu-item-type-post_type', 'menu-item-globus-menu-switch' );
+		#$menu_item_classes = array( '', 'menu-item', 'menu-item-type-post_type', 'menu-item-globus-menu-switch' );
+		
+		/** main menu item classes */
+		$menu_item_classes    = array( '', 'menu-item-globus-menu-switch' );
+		
+		/** submenu item classes */
+		$submenu_item_classes = array( '', 'sub-menu-item-globus-menu-switch' );
 
 		$span_classes 	= array( 'globus-flag', 'globus-language-name' );
 
@@ -181,7 +190,7 @@ class WPGlobus {
 		$item->menu_item_parent = 0;
 		$item->title 			= '<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span>';
 		$item->url 				= globus_getUrl( $WPGlobus_Config->language );
-		$item->classes  		= $item_classes;
+		$item->classes  		= $menu_item_classes;
 
 		$sorted_menu_items[]  	= $item;
 
@@ -195,7 +204,7 @@ class WPGlobus {
 			$item->menu_item_parent = 9999999999;
 			$item->title 			= '<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
 			$item->url 				= globus_getUrl( $language );
-			$item->classes  		= $item_classes;
+			$item->classes  		= $submenu_item_classes;
 
 			$sorted_menu_items[]  	= $item;
 		}

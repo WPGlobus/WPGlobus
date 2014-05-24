@@ -3,7 +3,7 @@
 /**
   ReduxFramework Sample Config File
   For full documentation, please visit: https://docs.reduxframework.com
- * */
+ **/
 
 if (!class_exists('Redux_Framework_globus_option')) {
 
@@ -222,6 +222,30 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				)
 			);
 
+			/*
+			/ CSS Section
+			*/
+			$this->sections[] = array(
+				'title'     => __( 'CSS', 'redux-framework-demo' ),
+				'desc'      => __( '' ),
+				'icon'      => 'el-icon-home',
+				'fields'    => array(
+					array(
+						'id'        => 'custom_css',
+						'type'      => 'textarea',
+						'title'     => __( 'Custom CSS', 'redux-framework-demo' ),
+						'compiler'  => 'false',
+						'desc'      => __( '', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'default'  => '',
+						'hint'      => array(
+							'title'     => 'TITLE',
+							'content'   => 'content',
+						)
+					)
+				)
+			);
+			
         }
 
         public function setHelpTabs() {
