@@ -202,7 +202,7 @@ class WPGlobus_Config {
 		$this->en_language_name['de'] = "German";
 		$this->en_language_name['zh'] = "China";
 		$this->en_language_name['fi'] = "suomi";
-		$this->en_language_name['fr'] = "Français";
+		$this->en_language_name['fr'] = "French";
 		$this->en_language_name['nl'] = "Nederlands";
 		$this->en_language_name['sv'] = "Svenska";
 		$this->en_language_name['it'] = "Italiano";
@@ -243,9 +243,9 @@ class WPGlobus_Config {
 
 			$this->enabled_languages = array();
 			$this->enabled_languages[] = $this->default_language;
-			foreach( $wpglobus_option['enabled_languages'] as $language=>$language_name ) {
-				if ( ! empty( $language_name ) ) {
-					$this->enabled_languages[] = $language;
+			foreach( $wpglobus_option['enabled_languages'] as $code=>$language_name ) {
+				if ( $code != $this->default_language && !empty($language_name)  )  {
+					$this->enabled_languages[] = $code;
 				}
 			}
 		}

@@ -99,24 +99,29 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			/** @var $more_languages */
 			$more_languages 	= array();
-
+	
 			foreach ( $WPGlobus_Config->enabled_languages as $code ) {
 				$lang_in_en = '';
 				if ( isset( $WPGlobus_Config->en_language_name[$code] ) && ! empty( $WPGlobus_Config->en_language_name[$code] ) ) {
 					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$code] . ')';
-				}							
+				}		
+
 				$enabled_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
 			}
 			
 			/** Add language from 'more_language' option to array $enabled_languages */
 			if ( isset($wpglobus_option['more_languages']) && ! empty($wpglobus_option['more_languages']) ) {
-				$enabled_languages[$wpglobus_option['more_languages']] = $WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
+				$lang = $wpglobus_option['more_languages'];	
+				$lang_in_en = '';
+				if ( isset( $WPGlobus_Config->en_language_name[$lang] ) && ! empty( $WPGlobus_Config->en_language_name[$lang] ) ) {
+					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$lang] . ')';
+				}
+				
+				$enabled_languages[$lang] = $WPGlobus_Config->language_name[$lang] . $lang_in_en;
 			
 				$wpglobus_option['enabled_languages'][$wpglobus_option['more_languages']] = $WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
 				update_option('wpglobus_option', $wpglobus_option);
 			}
-			
-			//error_log( print_r( $wpglobus_option, true) );			
 			
 			/** Generate array $more_languages */
 			foreach ( $WPGlobus_Config->flag as $code=>$file ) {
