@@ -154,7 +154,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'class'		=> '',
 						'hint'      => array(
 							#'title'     => '',
-						'content'   => 'First language is language by default',
+							'content'   => 'First language is language by default',
 						)
 					),
 					array(
@@ -236,7 +236,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'compiler'  => 'false',
 						'desc'      => __( '', 'redux-framework-demo' ),
 						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'default'  => '',
+						'default'   => '',
+						'rows'		=> 15,
 						'hint'      => array(
 							'title'     => 'TITLE',
 							'content'   => 'content',
