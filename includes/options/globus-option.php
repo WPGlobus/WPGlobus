@@ -227,8 +227,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				'icon'      => 'el-icon-home',
 				'fields'    => array(
 					array(
-						'id'        => 'custom_css',
-						'type'      => 'textarea',
+						'id'        => 'css_editor',
+						'type'      => 'ace_editor',
 						'title'     => __( 'Custom CSS', 'redux-framework-demo' ),
 						'compiler'  => 'false',
 						'desc'      => __( '', 'redux-framework-demo' ),
@@ -242,6 +242,26 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					)
 				)
 			);
+			
+			/*
+			/ 
+			*/
+			$this->sections[] = array(
+				'title'     => __( 'Language table', 'redux-framework-demo' ),
+				'desc'      => __( '' ),
+				'icon'      => 'el-icon-home',
+				'fields'    => array(
+					array(
+						'id'        => 'lang_new',
+						'type'      => 'table',
+						#'type'      => 'raw',
+						#'class'		=> 'test-class',
+						'title'     => __( 'Custom table', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '', 'redux-framework-demo' ),
+					)
+				)
+			);			
 			
         }
 

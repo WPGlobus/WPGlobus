@@ -94,7 +94,13 @@ class WPGlobus_Config {
 	 * @var array
 	 */
 	var $en_language_name = array();
-	
+
+	/*
+	 *
+	 * @var array
+	 */
+	var $locale = array();
+
 	/*
 	 * Use flag name for navigation menu : 'name' || 'code' || ''
 	 * @var string
@@ -123,10 +129,7 @@ class WPGlobus_Config {
 		//$this->url_mode = self::GLOBUS_URL_QUERY;
 
 		#
-		$this->_set_flags();
-
-		#
-		$this->_set_language_name();
+		$this->_set_languages();
 
 		#
 		$this->_get_options();
@@ -176,7 +179,7 @@ class WPGlobus_Config {
 	/*
 	 *
 	 */
-	function _set_language_name() {
+	function _set_languages() {
 		// Names for languages in the corresponding language, add more if needed
 		$this->language_name['en'] = "English";
 		$this->language_name['ru'] = "Русский";
@@ -214,7 +217,30 @@ class WPGlobus_Config {
 		$this->en_language_name['ar'] = "Arabic";
 		$this->en_language_name['pt'] = "Português";
 		$this->en_language_name['pl'] = "Polish";
-		$this->en_language_name['gl'] = "galego";		
+		$this->en_language_name['gl'] = "galego";
+
+		// Locales
+		$this->locale['en'] = "en_US";
+		$this->locale['ru'] = "ru_RU";
+		$this->locale['de'] = "de_DE";
+		$this->locale['zh'] = "zh_CN";
+		$this->locale['fi'] = "fi";
+		$this->locale['fr'] = "fr_FR";
+		$this->locale['nl'] = "nl_NL";
+		$this->locale['sv'] = "sv_SE";
+		$this->locale['it'] = "it_IT";
+		$this->locale['ro'] = "ro_RO";
+		$this->locale['hu'] = "hu_HU";
+		$this->locale['ja'] = "ja";
+		$this->locale['es'] = "es_ES";
+		$this->locale['vi'] = "vi";
+		$this->locale['ar'] = "ar";
+		$this->locale['pt'] = "pt_BR";
+		$this->locale['pl'] = "pl_PL";
+		$this->locale['gl'] = "gl_ES";
+
+		#
+		$this->_set_flags();
 	}
 
 	/*
@@ -277,8 +303,8 @@ class WPGlobus_Config {
 		/*
 		 * get custom CSS
 		 */
-		if ( isset($wpglobus_option['custom_css']) ) {
-			$this->custom_css = $wpglobus_option['custom_css'];
+		if ( isset($wpglobus_option['css_editor']) ) {
+			$this->css_editor = $wpglobus_option['css_editor'];
 		}
 		
 	}

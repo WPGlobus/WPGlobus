@@ -50,7 +50,11 @@ class WPGlobus {
 
 			// add_filter( "redux/{$this->option}/field/class/radio_sorter", array( &$this, 'on_radio_sorter' ) );
 			// add_filter( "redux/{$this->option}/field/class/select_with_flag", array( &$this, 'on_select_with_flag' ) );
-			add_filter( "redux/{$this->option}/field/class/select", array( &$this, 'on_select' ) );
+			// add_filter( "redux/{$this->option}/field/class/select", array( &$this, 'on_select' ) );
+			add_filter( "redux/{$this->option}/field/class/table", array( &$this, 'on_field_table' ) );
+
+		 add_action( "redux/field/{$this->option}/table/render/before", array( &$this, 'on_field_table1' ), 10, 2 );
+			//add_filter( "redux/field/{$this->option}/table/render/after", array( &$this, 'on_field_table1' ), 10, 2 );
 
 			global $WPGlobusOption;
 			$WPGlobusOption = new Redux_Framework_globus_option();
@@ -72,9 +76,17 @@ class WPGlobus {
 	function on_select_with_flag($field){
 		return dirname(__FILE__) . '/includes/options/fields/select_with_flag/field_select_with_flag.php';
 	}
-	function on_select($field){
-		return dirname(__FILE__) . '/includes/options/fields/select/field_select.php';
+
+	function on_field_table1($field, $value){
+		//error_log( print_r($field, true) );
+		//error_log( print_r( $value, true ) );
+		return $field;
 	}
+
+	function on_field_table($field){
+		return dirname(__FILE__) . '/includes/options/fields/table/field_table.php';
+	}
+
 	/*
 	 * Enqueue styles
 	 * @return void
@@ -102,7 +114,7 @@ class WPGlobus {
 		foreach( $WPGlobus_Config->enabled_languages as $language) {
 			$css .= ".globus-flag-" . $language . " { background:url(" . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ") no-repeat }\n";
 		}
-		$css  .= $WPGlobus_Config->custom_css . "\n";
+		$css  .= $WPGlobus_Config->css_editor . "\n";
 		$css  .= "</style>\n";
 
 		echo $css;
