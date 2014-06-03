@@ -5,11 +5,3 @@
 .globus-language-name {
     padding-left:22px;
 }
-/* .globus-flag span { display:none } */
-.page-item-globus-menu-switch, .menu-item-globus-menu-switch {
-    height:30px;
-    width: 20px;
-}
-.page-item-globus-menu-switch a, .menu-item-globus-menu-switch a {
-
-}
