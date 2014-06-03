@@ -54,7 +54,7 @@ class LanguagesTable extends WP_List_table {
 				'order' 	=> 'desc'
 			),
 			'code' 	=> array(
-				'caption'	=> 'Language code',
+				'caption'	=> 'Code',
 				'sortable'  => true,
 				'order' 	=> 'desc',
 				'actions' => array(
@@ -88,9 +88,9 @@ class LanguagesTable extends WP_List_table {
 			$row['en_language_name'] = $WPGlobus_Config->en_language_name[$code];
 
 			$this->data[] = $row;
-			if ( $i < 1 ) {
-				$this->dummy_data[] = $row;
-			}
+			//if ( $i < 1 ) {
+			//	$this->dummy_data[] = $row;
+			//}
 			$i++;
 			//if ($code == 'ru')	break;
 		}
@@ -106,12 +106,15 @@ class LanguagesTable extends WP_List_table {
 		$this->prepare_items();
 		?>
 		<div class="flag-table-wrapper">
-			<input id="add_language" type="button" class="button button-primary" value="Add new language" onclick="return false;"/>
-
-			<?php $this->prepare_dummy_items(); ?>
+			<a id="add_language1111" href="/wp-admin/admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>" class="button button-primary" value="Add new language">Add new language</a>
+			<!--<input id="add_language" type="button" class="button button-primary" value="Add new language" onclick="return false;"/>
+			-->
+			
+			<?php  /** @todo remove dummy */   
+				//$this->prepare_dummy_items(); ?>
 			<div class="table-dummy hidden table-wrap wrap">
 				<form method="post">
-					<?php $this->display_dummy_table(); ?>
+					<?php //$this->display_dummy_table(); ?>
 				</form>
 			</div>	<!-- .wrap -->
 
@@ -136,7 +139,8 @@ class LanguagesTable extends WP_List_table {
 		$sortable = array();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
-		$this->items = $this->dummy_data;
+		/** @todo remove */
+		// $this->items = $this->dummy_data;
 	}
 
 	/**
