@@ -118,7 +118,31 @@ class WPGlobus_Config {
 	 * Custom CSS 
 	 * @var string
 	 */
-	var $custom_css = '';	
+	var $custom_css = '';
+
+	/*
+	 * WPGlobus option key
+	 * @var string
+	 */
+	var $option = 'wpglobus_option';
+
+	/*
+	 * WPGlobus
+	 * @var string
+	 */
+	var $option_default_language = 'wpglobus_option_default_language';
+
+	/*
+	 * WPGlobus
+	 * @var string
+	 */
+	var $option_language_names = 'wpglobus_option_language_names';
+
+	/*
+	 * WPGlobus
+	 * @var string
+	 */
+	var $option_flags = 'wpglobus_option_flags';
 
 	/*
 	 * Constructor
@@ -249,21 +273,24 @@ class WPGlobus_Config {
 	 */
 	function _get_options(){
 
-		$wpglobus_option = get_option('wpglobus_option');
+		$wpglobus_option = get_option($this->option);
 
 		/*
-		 * get default language
+		 * Get default language
+		 * just one main language
 		 */
 		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
 			reset( $wpglobus_option['enabled_languages'] );
 			$this->default_language = key( $wpglobus_option['enabled_languages'] );
 		}
+
 		if ( defined('WPGLOBUS_DEFAULT_LANGUAGE') ) {
-			$this->default_language = $wpglobus_option['default_language'];
+			$this->default_language = WPGLOBUS_DEFAULT_LANGUAGE;
 		}
 
 		/*
-		 * get enabled languages
+		 * Get enabled languages
+		 * for use at site ( posts, pages, menus, widgets )
 		 */
 		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
 
@@ -277,7 +304,17 @@ class WPGlobus_Config {
 		}
 
 		/*
-		 * get option 'show_flag_name'
+		 * Get languages name
+		 * big array of used languages
+		 */
+		$options  = get_option($this->option_language_names);
+		if ( ! empty( $options )  ) {
+
+		}
+		// $this->language_name['en'] = "English";
+
+		/*
+		 * Get option 'show_flag_name'
 		 */
 		if ( isset( $wpglobus_option['show_flag_name'] ) ) {
 			$this->show_flag_name = $wpglobus_option['show_flag_name'];
@@ -291,7 +328,7 @@ class WPGlobus_Config {
 		}
 
 		/*
-		 * get navigation menu slug for add flag in front-end 'use_nav_menu'
+		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'
 		 */
 		if ( isset($wpglobus_option['use_nav_menu']) ) {
 			$this->nav_menu = ( $wpglobus_option['use_nav_menu'] == 'all' ) ? '' : $wpglobus_option['use_nav_menu'];
@@ -301,12 +338,22 @@ class WPGlobus_Config {
 		}
 
 		/*
-		 * get custom CSS
+		 * Get custom CSS
 		 */
 		if ( isset($wpglobus_option['css_editor']) ) {
 			$this->css_editor = $wpglobus_option['css_editor'];
 		}
-		
+
+
+		/*
+		 *
+		 */
+		$option = get_option($this->option_flags);
+		if( ! empty($option) ) {
+			$this->flag = $option;
+		}
+		// error_log( print_r($this->flag,true) );
+
 	}
 
 }	// end class WPGlobus_Config

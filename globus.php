@@ -24,7 +24,12 @@ $WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 class WPGlobus {
 
-	public static $_version = '0.1';
+	public $_version = '0.1';
+
+	/*
+	 * Language edit page
+	 */
+	const LANGUAGE_EDIT_PAGE = 'wpglobus_language_edit';
 
 	/*
 	 * List navigation menus
@@ -32,16 +37,13 @@ class WPGlobus {
 	 */
 	var $menus = array();
 
-	/*
-	 * WPGlobus option key
-	 * @var string
-	 */	
-	private $option = 'wpglobus_option';
 
 	/*
 	 * Constructor
 	 */
 	function __construct() {
+
+		global $WPGlobus_Config;
 
 		if ( is_admin() ) {
 
@@ -51,15 +53,23 @@ class WPGlobus {
 			// add_filter( "redux/{$this->option}/field/class/radio_sorter", array( &$this, 'on_radio_sorter' ) );
 			// add_filter( "redux/{$this->option}/field/class/select_with_flag", array( &$this, 'on_select_with_flag' ) );
 			// add_filter( "redux/{$this->option}/field/class/select", array( &$this, 'on_select' ) );
-			add_filter( "redux/{$this->option}/field/class/table", array( &$this, 'on_field_table' ) );
+			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array( &$this, 'on_field_table' ) );
 
-		 add_action( "redux/field/{$this->option}/table/render/before", array( &$this, 'on_field_table1' ), 10, 2 );
+		 	//add_action( "redux/field/{$this->option}/table/render/before", array( &$this, 'on_field_table1' ), 10, 2 );
 			//add_filter( "redux/field/{$this->option}/table/render/after", array( &$this, 'on_field_table1' ), 10, 2 );
 
+			/*
+			$args = array(
+				'opt_name' => $WPGlobus_Config->option
+			);	//*/
 			global $WPGlobusOption;
 			$WPGlobusOption = new Redux_Framework_globus_option();
 
-			$wpglobus_option = get_option( $this->option );
+			//$wpglobus_option = get_option( $this->option );
+
+			add_action( 'admin_menu',  			array( &$this, 'on_admin_menu' ), 10 );
+			add_action( 'admin_print_scripts', 	array( &$this, 'on_admin_scripts' ) );
+			add_action( 'admin_print_styles', 	array( &$this, 'on_admin_styles' ) );
 
 		} else {
 
@@ -73,13 +83,90 @@ class WPGlobus {
 
 	}
 
+	/*
+	 * Enqueue admin scripts
+	 * @return void
+	 */
+	function on_admin_scripts() {
+
+		global $WPGlobus_Config;
+		$page = isset($_GET['page']) ? $_GET['page'] : '';
+
+		if ( self::LANGUAGE_EDIT_PAGE ==  $page ) {
+			wp_register_script(
+				'select2',
+				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
+				array('jquery'),
+				$this->_version,
+				true
+			);
+			wp_enqueue_script( 'select2' );
+
+			wp_register_script(
+				'admin-globus',
+				plugins_url( '/includes/js/admin.globus.js', __FILE__ ),
+				array('jquery'),
+				$this->_version,
+				true
+			);
+			wp_enqueue_script( 'admin-globus' );
+			wp_localize_script(
+				'admin-globus',
+				'aaAdminGlobus',
+				array(
+					'version'			=> $this->_version,
+					'ajaxurl'			=> admin_url( 'admin-ajax.php' ),
+					'parentClass'		=> __CLASS__,
+					'process_ajax' 		=> __CLASS__ . '_process_ajax',
+					'flag_url'			=> $WPGlobus_Config->flags_url,
+					'i18n'				=> '$i18n'
+				)
+			);
+
+		}
+	}
+
+	/*
+	 * Enqueue admin styles
+	 * @return void
+	 */
+	function on_admin_styles() {
+
+		$page = isset($_GET['page']) ? $_GET['page'] : '';
+
+		if ( self::LANGUAGE_EDIT_PAGE ==  $page ) {
+			wp_register_style(
+				'select2',
+				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
+				array(),
+				$this->_version,
+				'all'
+			);
+			wp_enqueue_style( 'select2' );
+		}
+	}
+
+	function on_admin_menu(){
+		add_submenu_page(
+			null,
+			'',
+			'',
+			'administrator',
+			self::LANGUAGE_EDIT_PAGE,
+			array( &$this, 'on_l' )
+		);
+	}
+
+	function on_l(){
+		include dirname(__FILE__) . '/includes/admin/class.language-edit.php';
+		new WPGlobus_language_edit();
+	}
+
 	function on_select_with_flag($field){
 		return dirname(__FILE__) . '/includes/options/fields/select_with_flag/field_select_with_flag.php';
 	}
 
 	function on_field_table1($field, $value){
-		//error_log( print_r($field, true) );
-		//error_log( print_r( $value, true ) );
 		return $field;
 	}
 

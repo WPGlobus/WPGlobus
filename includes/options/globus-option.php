@@ -14,7 +14,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
         public $theme;
         public $ReduxFramework;
 
-		private $menus		= array();
+		private $menus			= array();
+		//private $globus_opts	= array();
 
         public function __construct() {
 
@@ -62,7 +63,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			global $WPGlobus_Config;
 
-			$wpglobus_option = get_option('wpglobus_option');
+			$wpglobus_option = get_option($WPGlobus_Config->option);
 
             // ACTUAL DECLARATION OF SECTIONS
             $this->sections[] = array(
@@ -88,10 +89,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
             );
 
 			/*
-			 * LANGUAGES SECTION
+			 * SECTION: languages
 			 */
 
-			/** @var $enabled_languages contains all enabled languages except default language */
+			/** @var $enabled_languages contains all enabled languages */
 			$enabled_languages	= array();
 
 			/** @var $more_languages */
@@ -117,7 +118,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				$enabled_languages[$lang] = $WPGlobus_Config->language_name[$lang] . $lang_in_en;
 			
 				$wpglobus_option['enabled_languages'][$wpglobus_option['more_languages']] = $WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
-				update_option('wpglobus_option', $wpglobus_option);
+				update_option($WPGlobus_Config->option, $wpglobus_option);
 			}
 			
 			/** Generate array $more_languages */
@@ -170,8 +171,9 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				)
 			);
 
-			// miniGLOBUS SECTION
-
+			/*
+			 * SECTION: miniGLOBUS
+			 */
 			if ( empty( $this->menus ) ) {
 				$navigation_menu_placeholder = __('No navigation menu', 'redux-framework-demo');
 			} else {
@@ -192,6 +194,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
 						'desc'      => __( '', 'redux-framework-demo' ),
 						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1),
 						'options'   => array(
 							'code'  => 'Code',
 							'name'  => 'Full language name',
@@ -211,6 +214,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
 						'desc'      => __( '', 'redux-framework-demo' ),
 						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'select2'	=> array('allowClear' => true, 'minimumResultsForSearch' => -1),
 						'options'   => $this->menus,
 						'placeholder'   => $navigation_menu_placeholder,
 						'default'  => 'code'
@@ -219,7 +223,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			);
 
 			/*
-			/ CSS Section
+			 * SECTION:  CSS
 			*/
 			$this->sections[] = array(
 				'title'     => __( 'CSS', 'redux-framework-demo' ),
@@ -244,7 +248,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			);
 			
 			/*
-			/ 
+			*	SECTION: Language table
 			*/
 			$this->sections[] = array(
 				'title'     => __( 'Language table', 'redux-framework-demo' ),
@@ -261,7 +265,38 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'desc'      => __( '', 'redux-framework-demo' ),
 					)
 				)
-			);			
+			);
+
+			/*
+			*	SECTION: Language edit
+			*/
+			/*
+			$this->sections[] = array(
+				'title'     => __( 'Language edit', 'redux-framework-demo' ),
+				'desc'      => __( '' ),
+				'icon'      => 'el-icon-home',
+				'fields'    => array(
+					array(
+						'id'        => 'language_code',
+						'type'      => 'text',
+						#'type'      => 'raw',
+						#'class'		=> 'test-class',
+						'title'     => __( 'Language code', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', 'redux-framework-demo' ),
+					),
+					array(
+						'id'        => 'language_flag',
+						'type'      => 'select',
+						'title'     => __( 'Language flag', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( 'Choose the corresponding country flag for language. (Example: gb.png)', 'redux-framework-demo' ),
+						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1, 'events'=>'on_events'),
+						'options'	=> $this->_scaner(),
+						'args'		=> array('arg1' => false, 'arg2' => -1, 'arg3'=>'on_events')
+					)
+				)
+			); // */
 			
         }
 
@@ -285,18 +320,19 @@ if (!class_exists('Redux_Framework_globus_option')) {
         }
 
         /**
-
           All the possible arguments for Redux.
           For full documentation on arguments, please refer to: https://github.com/ReduxFramework/ReduxFramework/wiki/Arguments
-
-         * */
+         **/
         public function setArguments() {
 
-            $theme = wp_get_theme(); // For use with some settings. Not necessary.
+			global $WPGlobus_Config;
+
+			$theme = wp_get_theme(); // For use with some settings. Not necessary.
 
             $this->args = array(
                 // TYPICAL -> Change these values as you need/desire
-                'opt_name'          => 'wpglobus_option',         // This is where your data is stored in the database and also becomes your global variable name.
+                #'opt_name'          => 'wpglobus_option',         // This is where your data is stored in the database and also becomes your global variable name.
+                'opt_name'          => $WPGlobus_Config->option,         // This is where your data is stored in the database and also becomes your global variable name.
                 'display_name'      => $theme->get('Name'),     // Name that appears at the top of your panel
                 'display_version'   => $theme->get('Version'),  // Version that appears at the top of your panel
                 'menu_type'         => 'menu',                  //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
@@ -409,7 +445,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
             $this->args['footer_text'] = __( '', 'redux-framework-demo' );
         }
 
-    }
-    
+    }	// end class Redux_Framework_globus_option
 
-}
+}	// end if ( ! class_exists )
