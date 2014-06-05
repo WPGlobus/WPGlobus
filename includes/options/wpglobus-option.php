@@ -15,7 +15,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
         public $ReduxFramework;
 
 		private $menus			= array();
-		//private $globus_opts	= array();
 
         public function __construct() {
 
@@ -64,27 +63,42 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			global $WPGlobus_Config;
 
 			$wpglobus_option = get_option($WPGlobus_Config->option);
-
+			
+			// http://api.wordpress.org/plugins/info/1.0/redux-framework/
+			// @see http://code.tutsplus.com/tutorials/communicating-with-the-wordpressorg-plugin-api--wp-33069
+			
             // ACTUAL DECLARATION OF SECTIONS
             $this->sections[] = array(
                 'title'     => __('Home Settings', 'redux-framework-demo'),
-                'desc'      => __('Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'redux-framework-demo'),
+                'desc'      => __('', 'redux-framework-demo'),
                 'icon'      => 'el-icon-home',
                 // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                 'fields'    => array(
-                    array(
-                        'id'        => 'opt-web-fonts',
-                        'type'      => 'media',
-                        'title'     => __('Web Fonts', 'redux-framework-demo'),
+					array(
+                        'id'        => 'current_version',
+                        'type'      => 'info',
+                        'title'     => 'Current ReduxFramework version: ' . ReduxFramework::$_version,
                         'compiler'  => 'true',
-                        'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-                        'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
-                        'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                        'desc'      => __('', 'redux-framework-demo'),
+                        'subtitle'  => __('', 'redux-framework-demo'),
                         'hint'      => array(
-                            //'title'     => '',
-                            'content'   => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
+                            'title'     => '',
+                            'content'   => '',
                         )
                     ),
+                    #array(
+                        #'id'        => 'opt-web-fonts',
+                        #'type'      => 'media',
+                        #'title'     => __('Web Fonts', 'redux-framework-demo'),
+                        #'compiler'  => 'true',
+                        #'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+                        #'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
+                        #'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                        #'hint'      => array(
+                        #    //'title'     => '',
+                        #    'content'   => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
+                        #)
+                    #)					
                 )
             );
 
@@ -267,6 +281,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				)
 			);
 
+			
 			/*
 			*	SECTION: Language edit
 			*/
@@ -444,7 +459,13 @@ if (!class_exists('Redux_Framework_globus_option')) {
             // Add content after the form.
             $this->args['footer_text'] = __( '', 'redux-framework-demo' );
         }
-
+        
+		public function getReduxInfo() {
+	
+			
+	
+		}
+		
     }	// end class Redux_Framework_globus_option
 
 }	// end if ( ! class_exists )

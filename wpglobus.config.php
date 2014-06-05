@@ -8,7 +8,7 @@ class WPGlobus_Config {
 	/*
 	 * Plugin name
 	 */
-	const GLOBUS_PLUGIN_NAME = 'globus';
+	const GLOBUS_PLUGIN_NAME = 'wpglobus';
 
 	/*
 	 *	Url mode: query (questionmark)

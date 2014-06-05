@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Globus
-Description: Globus translation plugin
+Plugin Name: WPGlobus
+Description: WPGlobus translation plugin
 Text Domain: wpglobus
 Version: 0.1
 Author: Alex Gor
@@ -11,7 +11,7 @@ Author URI:
 // Exit if accessed directly
 if ( !defined('ABSPATH') ) exit;
 
-include( dirname(__FILE__) . '/globus.config.php' );
+include( dirname(__FILE__) . '/wpglobus.config.php' );
 global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();
 
@@ -21,10 +21,9 @@ include( dirname(__FILE__) . '/functions.php' );
 $WPGlobus_Config->url_info = globus_extractURL( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '' );
 $WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
-
 class WPGlobus {
 
-	public $_version = '0.1';
+	public static $_version = '0.1';
 
 	/*
 	 * Language edit page
@@ -48,7 +47,7 @@ class WPGlobus {
 		if ( is_admin() ) {
 
 			require_once 'Redux-Framework/ReduxCore/framework.php';
-			require_once 'includes/options/globus-option.php';
+			require_once 'includes/options/wpglobus-option.php';
 
 			// add_filter( "redux/{$this->option}/field/class/radio_sorter", array( &$this, 'on_radio_sorter' ) );
 			// add_filter( "redux/{$this->option}/field/class/select_with_flag", array( &$this, 'on_select_with_flag' ) );
