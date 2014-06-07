@@ -146,6 +146,16 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				}
 			}
 
+
+			/*
+			 * for miniGLOBUS
+			 */
+			if ( empty( $this->menus ) ) {
+				$navigation_menu_placeholder = __('No navigation menu', 'redux-framework-demo');
+			} else {
+				$navigation_menu_placeholder = __('Select navigation menu', 'redux-framework-demo');
+			}
+
 			$this->sections[] = array(
 				'title'     => __( 'Languages', 'redux-framework-demo' ),
 				'desc'      => __( '' ),
@@ -181,19 +191,59 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'placeholder'   => 'Select language',
 						'options'   => $more_languages,
 						#'default'  => 'code'
+					),
+					array(
+						'id'        => 'show_flag_name',
+						'type'      => 'select',
+						'title'     => __('Show flag name', 'redux-framework-demo'),
+						'compiler'  => 'false',
+						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+						'desc'      => __( '', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1),
+						'options'   => array(
+							'code'  => 'Code',
+							'name'  => 'Full language name',
+							'empty' => 'Don\'t show'
+						),
+						'default'  => 'code',
+						'hint'      => array(
+							//'title'     => '',
+							'content'   => 'Code - for example: &quot;en&quot;, &quot;ru&quot;',
+						)
+					),
+					array(
+						'id'        => 'use_nav_menu', # $WPGlobus_Config->nav_menu
+						'type'      => 'select',
+						'title'     => __( 'Use navigation menu', 'redux-framework-demo' ),
+						'compiler'  => 'false',
+						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+						'desc'      => __( '', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'select2'	=> array('allowClear' => true, 'minimumResultsForSearch' => -1),
+						'options'   => $this->menus,
+						'placeholder'   => $navigation_menu_placeholder,
+						'default'  => 'code'
+					),
+					array(
+						'id'        => 'css_editor',
+						'type'      => 'ace_editor',
+						'title'     => __( 'Custom CSS', 'redux-framework-demo' ),
+						'compiler'  => 'false',
+						'desc'      => __( '', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'default'   => '',
+						'rows'		=> 15,
+						'hint'      => array(
+							'title'     => 'ADD SOME CSS',
+							'content'   => 'See file readme.txt in plugin directory',
+						)
 					)
 				)
 			);
 
-			/*
-			 * SECTION: miniGLOBUS
-			 */
-			if ( empty( $this->menus ) ) {
-				$navigation_menu_placeholder = __('No navigation menu', 'redux-framework-demo');
-			} else {
-				$navigation_menu_placeholder = __('Select navigation menu', 'redux-framework-demo');
-			}
 
+			/*
 			$this->sections[] = array(
 				'title'     => __('miniGlobus Settings', 'redux-framework-demo'),
 				'desc'      => __(''),
@@ -234,11 +284,12 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'default'  => 'code'
 					)
 				)
-			);
+			); // */
 
 			/*
 			 * SECTION:  CSS
 			*/
+			/*
 			$this->sections[] = array(
 				'title'     => __( 'CSS', 'redux-framework-demo' ),
 				'desc'      => __( '' ),
@@ -260,7 +311,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					)
 				)
 			);
-			
+			// */
+
 			/*
 			*	SECTION: Language table
 			*/
