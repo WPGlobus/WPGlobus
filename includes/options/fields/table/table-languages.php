@@ -206,15 +206,11 @@ class LanguagesTable extends WP_List_table {
 
 		$columns = array();
 
-		/*
-		if ( $this->table_first_field_is_checkbox ) {
-			$columns['cb'] = '<input type="checkbox" />';
-		};	// */
-
 		foreach ( $this->table_fields as $field=>$attrs) {
 			$columns[$field] = $attrs['caption'];
 		}
 		return $columns;
+
 	}
 
 	function get_sortable_columns() {
@@ -227,11 +223,9 @@ class LanguagesTable extends WP_List_table {
 		return $sortable_columns;
 	}
 
-	function process_bulk_action() {
-	}
+	function process_bulk_action() {}
 
-	function process_row_action() {
-	}
+	function process_row_action() {}
 
 	/**
 	 * User's defined function
@@ -297,7 +291,8 @@ class LanguagesTable extends WP_List_table {
 
 		if ( isset( $this->table_fields['code']['actions'] ) && !empty( isset( $this->table_fields['code']['actions'] ) ) ) {
 
-			//error_log( print_r( $this->table_fields['code']['actions'], true ) );
+			global $WPGlobus_Config;
+
 			foreach( $this->table_fields['code']['actions'] as $action=>$data ) {
 				/** add actions for language code */
 				$class = $data['ajaxify'] ? 'class="ajaxify"' : '';
@@ -306,7 +301,11 @@ class LanguagesTable extends WP_List_table {
 					$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=edit', $data['caption'] );
 					break;
 				case 'delete' :
-					$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=delete', $data['caption'] );
+					if ( $item['code'] == $WPGlobus_Config->default_language ) {
+						$actions['delete'] = sprintf( '<a %1s href="#">%2s</a>', $class, 'Default language' );
+					} else {
+						$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=delete', $data['caption'] );
+					}
 					break;
 				}
 
