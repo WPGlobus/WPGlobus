@@ -11,7 +11,7 @@ Author URI:
 // Exit if accessed directly
 if ( !defined('ABSPATH') ) exit;
 
-include( dirname(__FILE__) . '/wpglobus.config.php' );
+include( dirname(__FILE__) . '/includes/wpglobus.config.php' );
 global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();
 
@@ -96,7 +96,7 @@ class WPGlobus {
 				'select2',
 				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
 				array('jquery'),
-				$this->_version,
+				self::$_version,
 				true
 			);
 			wp_enqueue_script( 'select2' );
@@ -105,7 +105,7 @@ class WPGlobus {
 				'admin-globus',
 				plugins_url( '/includes/js/admin.globus.js', __FILE__ ),
 				array('jquery'),
-				$this->_version,
+				self::$_version,
 				true
 			);
 			wp_enqueue_script( 'admin-globus' );
@@ -113,7 +113,7 @@ class WPGlobus {
 				'admin-globus',
 				'aaAdminGlobus',
 				array(
-					'version'			=> $this->_version,
+					'version'			=> self::$_version,
 					'ajaxurl'			=> admin_url( 'admin-ajax.php' ),
 					'parentClass'		=> __CLASS__,
 					'process_ajax' 		=> __CLASS__ . '_process_ajax',
@@ -138,7 +138,7 @@ class WPGlobus {
 				'select2',
 				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
 				array(),
-				$this->_version,
+				self::$_version,
 				'all'
 			);
 			wp_enqueue_style( 'select2' );

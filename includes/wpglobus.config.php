@@ -130,13 +130,14 @@ class WPGlobus_Config {
 	 * WPGlobus
 	 * @var string
 	 */
-	var $option_default_language = 'wpglobus_option_default_language';
-
-	/*
-	 * WPGlobus
-	 * @var string
-	 */
 	var $option_language_names = 'wpglobus_option_language_names';
+
+
+	var $option_en_language_names = 'wpglobus_option_en_language_names';
+
+
+	var $option_locale = 'wpglobus_option_locale';
+
 
 	/*
 	 * WPGlobus
@@ -153,7 +154,7 @@ class WPGlobus_Config {
 		//$this->url_mode = self::GLOBUS_URL_QUERY;
 
 		#
-		$this->_set_languages();
+		#$this->_set_languages();
 
 		#
 		$this->_get_options();
@@ -164,33 +165,6 @@ class WPGlobus_Config {
 	 */
 	function get_url_mode(){
 		return $this->url_mode;
-	}
-
-	/*
-	 *
-	 */
-	function _set_flags(){
-
-		$this->flag['en'] = 'gb.png';
-		$this->flag['ru'] = 'ru.png';
-		$this->flag['de'] = 'de.png';
-		$this->flag['zh'] = 'cn.png';
-		$this->flag['fi'] = 'fi.png';
-		$this->flag['fr'] = 'fr.png';
-		$this->flag['nl'] = 'nl.png';
-		$this->flag['sv'] = 'se.png';
-		$this->flag['it'] = 'it.png';
-		$this->flag['ro'] = 'ro.png';
-		$this->flag['hu'] = 'hu.png';
-		$this->flag['ja'] = 'jp.png';
-		$this->flag['es'] = 'es.png';
-		$this->flag['vi'] = 'vn.png';
-		$this->flag['ar'] = 'arle.png';
-		$this->flag['pt'] = 'br.png';
-		$this->flag['pl'] = 'pl.png';
-		$this->flag['gl'] = 'galego.png';
-
-		$this->_set_flags_url();
 	}
 
 	/*
@@ -223,8 +197,8 @@ class WPGlobus_Config {
 		$this->language_name['pt'] = "Português";
 		$this->language_name['pl'] = "Polski";
 		$this->language_name['gl'] = "galego";
-		
-		$this->en_language_name['en'] = "";
+
+		$this->en_language_name['en'] = "English";
 		$this->en_language_name['ru'] = "Russian";
 		$this->en_language_name['de'] = "German";
 		$this->en_language_name['zh'] = "Chinese";
@@ -264,7 +238,39 @@ class WPGlobus_Config {
 		$this->locale['gl'] = "gl_ES";
 
 		#
-		$this->_set_flags();
+		$this->flag['en'] = 'gb.png';
+		$this->flag['ru'] = 'ru.png';
+		$this->flag['de'] = 'de.png';
+		$this->flag['zh'] = 'cn.png';
+		$this->flag['fi'] = 'fi.png';
+		$this->flag['fr'] = 'fr.png';
+		$this->flag['nl'] = 'nl.png';
+		$this->flag['sv'] = 'se.png';
+		$this->flag['it'] = 'it.png';
+		$this->flag['ro'] = 'ro.png';
+		$this->flag['hu'] = 'hu.png';
+		$this->flag['ja'] = 'jp.png';
+		$this->flag['es'] = 'es.png';
+		$this->flag['vi'] = 'vn.png';
+		$this->flag['ar'] = 'arle.png';
+		#$this->flag['ar'] = 'argm.jpg';
+		$this->flag['pt'] = 'br.png';
+		$this->flag['pl'] = 'pl.png';
+		$this->flag['gl'] = 'galego.png';
+
+	}
+
+	/*
+	 * Set default options
+	 * @return void
+	 */
+	function _set_default_options(){
+
+		update_option( $this->option_language_names, $this->language_name );
+		update_option( $this->option_en_language_names, $this->en_language_name );
+		update_option( $this->option_locale, $this->locale );
+		update_option( $this->option_flags, $this->flag );
+
 	}
 
 	/*
@@ -274,44 +280,58 @@ class WPGlobus_Config {
 	function _get_options(){
 
 		$wpglobus_option = get_option($this->option);
-
+		//error_log( print_r( $this->enabled_languages, true ) );
 		/*
-		 * Get default language
-		 * just one main language
+		 * Get enabled languages and default language ( just one main language )
 		 */
 		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
+			$this->enabled_languages = array();
+			foreach ( $wpglobus_option['enabled_languages'] as $lang=>$value ) {
+				if ( ! empty( $value ) ) {
+					$this->enabled_languages[] = $lang;
+				}
+ 			}
+
+			/** get first language in $this->enabled_languages for default language */
 			reset( $wpglobus_option['enabled_languages'] );
 			$this->default_language = key( $wpglobus_option['enabled_languages'] );
 		}
-
+		/** check WPGLOBUS_DEFAULT_LANGUAGE defined in wp-config.php */
 		if ( defined('WPGLOBUS_DEFAULT_LANGUAGE') ) {
 			$this->default_language = WPGLOBUS_DEFAULT_LANGUAGE;
-		}
-
-		/*
-		 * Get enabled languages
-		 * for use at site ( posts, pages, menus, widgets )
-		 */
-		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
-
-			$this->enabled_languages = array();
-			$this->enabled_languages[] = $this->default_language;
-			foreach( $wpglobus_option['enabled_languages'] as $code=>$language_name ) {
-				if ( $code != $this->default_language && !empty($language_name)  )  {
-					$this->enabled_languages[] = $code;
-				}
+			if ( ! in_array( $this->default_language, $this->enabled_languages ) ) {
+				array_unshift( $this->enabled_languages, $this->default_language );
 			}
 		}
+		//error_log( print_r( $this->enabled_languages, true ) );
+		//error_log( $this->default_language );
+
+
+		/*
+		 *
+		 *
+		 */
+		$this->_set_flags_url();
+
 
 		/*
 		 * Get languages name
 		 * big array of used languages
 		 */
-		$options  = get_option($this->option_language_names);
-		if ( ! empty( $options )  ) {
-
+		$this->language_name  = get_option($this->option_language_names);
+		if ( empty( $this->language_name )  ) {
+			$this->_set_languages();
+			$this->_set_default_options();
+		} else {
+			$this->language_name  	= get_option( $this->option_language_names );
+			$this->en_language_name = get_option( $this->option_en_language_names );
+			$this->locale 			= get_option( $this->option_locale );
+			$this->flag 			= get_option( $this->option_flags );
 		}
-		// $this->language_name['en'] = "English";
+		//error_log( print_r( $this->language_name, true ) );
+
+
+
 
 		/*
 		 * Get option 'show_flag_name'

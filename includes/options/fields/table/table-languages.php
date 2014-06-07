@@ -38,6 +38,23 @@ class LanguagesTable extends WP_List_table {
 		global $WPGlobus_Config;
 
 		$this->table_fields =  array(
+			'code' 	=> array(
+				'caption'	=> 'Code',
+				'sortable'  => true,
+				'order' 	=> 'asc',
+				'actions' => array(
+					'edit' => array(
+						'action' => 'edit',
+						'caption' => 'Edit',
+						'ajaxify' => false
+					),
+					'delete' => array(
+						'action' => 'delete',
+						'caption' => 'Delete',
+						'ajaxify' => false
+					)
+				)
+			),
 			'file' 	=> array(
 				'caption'	=> 'File',
 				'sortable'  => false,
@@ -50,20 +67,8 @@ class LanguagesTable extends WP_List_table {
 			),
 			'locale' 	=> array(
 				'caption'	=> 'Locale',
-				'sortable'  => false,
-				'order' 	=> 'desc'
-			),
-			'code' 	=> array(
-				'caption'	=> 'Code',
 				'sortable'  => true,
-				'order' 	=> 'desc',
-				'actions' => array(
-					'edit' => array(
-						'action' => 'edit',
-						'caption' => 'Edit',
-						'ajaxify' => true
-					)
-				)
+				'order' 	=> 'desc'
 			),
 			'language_name' 	=> array(
 				'caption' => 'Language name',
@@ -106,10 +111,8 @@ class LanguagesTable extends WP_List_table {
 		$this->prepare_items();
 		?>
 		<div class="flag-table-wrapper">
-			<a id="add_language1111" href="/wp-admin/admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>" class="button button-primary" value="Add new language">Add new language</a>
-			<!--<input id="add_language" type="button" class="button button-primary" value="Add new language" onclick="return false;"/>
-			-->
-			
+			<a id="add_language1111" href="/wp-admin/admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>&action=add" class="button button-primary" value="Add new language">Add new language</a>
+
 			<?php  /** @todo remove dummy */   
 				//$this->prepare_dummy_items(); ?>
 			<div class="table-dummy hidden table-wrap wrap">
@@ -133,11 +136,11 @@ class LanguagesTable extends WP_List_table {
 	function prepare_dummy_items() {
 		//$this->prepare_items();
 
-		$columns  = $this->get_columns();
-		$hidden   = array();
+		//$columns  = $this->get_columns();
+		//$hidden   = array();
 		// $sortable = $this->get_sortable_columns();
-		$sortable = array();
-		$this->_column_headers = array( $columns, $hidden, $sortable );
+		//$sortable = array();
+		//$this->_column_headers = array( $columns, $hidden, $sortable );
 
 		/** @todo remove */
 		// $this->items = $this->dummy_data;
@@ -300,7 +303,10 @@ class LanguagesTable extends WP_List_table {
 				$class = $data['ajaxify'] ? 'class="ajaxify"' : '';
 				switch ( $action ) {
 				case 'edit' :
-					$actions['edit'] = sprintf( '<a %1s href="#">%2s</a>', $class, $data['caption'] );
+					$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=edit', $data['caption'] );
+					break;
+				case 'delete' :
+					$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=delete', $data['caption'] );
 					break;
 				}
 

@@ -5,71 +5,260 @@
 
 class WPGlobus_language_edit {
 
-	var $language_name = array();
 
-	var $flags = array();
+	var $all_flags = array();
+
+	var $action = '';
+
+	var $language_code 		= '';
+
+	var $language_name 		= '';
+	var $en_language_name 	= '';
+	var $locale 		  	= '';
+	var $flag 		  		= '';
+	var $submit				= false;
+	var $submit_messages	= array();
 
 	/*
 	 * Constructor
 	 */
 	function __construct() {
 
-		$this->get_data();
-		//error_log( print_r( $this->flags, true ) );
+		if ( isset($_GET['action']) && 'delete' == $_GET['action'] ) {
+			$this->action = 'delete';
+		} elseif ( isset($_GET['action']) && 'edit' == $_GET['action'] ) {
+			$this->action = 'edit';
+		} else {
+			$this->action = 'add';
+		}
+
+		if ( isset($_GET['lang']) && !empty($_GET['lang']) ) {
+			$this->language_code = $_GET['lang'];
+		}
+
+		if ( isset($_POST['submit'] ) ) {
+			$this->submit = true;
+			$this->process_submit();
+		} else {
+			$this->get_data();
+		}
+
 		$this->display_table();
 
 	}
 
-	function get_data() {
-		global $WPGlobus_Config;
-		$this->language_name = $WPGlobus_Config->language_name;
+	/*
+	 *
+	 */
+	function process_submit() {
 
+		$code = isset( $_POST['language_code'] ) ? $_POST['language_code'] : '';
+		if ( $this->language_code == $code ) {
+
+			if ( $this->check_fields($code ,false) ) {
+				/* save language data */
+				$this->save();
+				$this->submit_messages['success'][] = 'Options was saved';
+			}
+		} else {
+			if ( $this->check_fields($code) ) {
+				$this->save(true);
+				$this->submit_messages['success'][] = 'Options was saved';
+			}
+		}
+		$this->_get_flags();
+
+		//error_log( $_POST['language_code']  );
+		//error_log( $_POST['flags']  );
+		//error_log( $_POST['language_name']  );
+		//error_log( $_POST['en_language_name']  );
+		//error_log( $_POST['locale']  );
+	}
+
+	/*
+	 *
+	 */
+	function save( $update_code = false ) {
+
+		global $WPGlobus_Config;
+
+		if ( $update_code ) {
+			$old_code = isset( $_GET['lang'] ) ? $_GET['lang'] : '';
+			foreach( $WPGlobus_Config->language_name as $code=>$name ) {
+				if ( $code == $old_code ) {
+					unset( $WPGlobus_Config->language_name[$code] );
+					break;
+				}
+			}
+		}
+		//return;
+		$WPGlobus_Config->language_name[$this->language_code] = $this->language_name;
+		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
+
+		$WPGlobus_Config->flag[$this->language_code] = $this->flag;
+		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
+
+		$WPGlobus_Config->en_language_name[$this->language_code] = $this->en_language_name;
+		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
+
+		$WPGlobus_Config->locale[$this->language_code] = $this->locale;
+		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
+
+	}
+
+	/*
+	 *
+	 */
+	function check_fields($lang_code, $check_code = true) {
+		$this->submit_messages['errors'] = array();
+		if ( $check_code && empty($lang_code) ) {
+			$this->submit_messages['errors'][] = 'Need language code !';
+		}
+
+		if ( $check_code && $this->language_exists($lang_code) ) {
+			$this->submit_messages['errors'][] = 'Language code already exists !';
+		}
+
+		if ( empty($_POST['flags']) ) {
+			$this->submit_messages['errors'][] = 'Need language flag !';
+		}
+
+		if ( empty($_POST['language_name']) ) {
+			$this->submit_messages['errors'][] = 'Need language name !';
+		}
+
+		if ( empty($_POST['en_language_name']) ) {
+			$this->submit_messages['errors'][] = 'Need language name in English !';
+		}
+
+		if ( empty($_POST['locale']) ) {
+			$this->submit_messages['errors'][] = 'Need locale !';
+		}
+
+		$this->language_code 	= $lang_code;
+		$this->flag			 	= isset( $_POST['flags'] ) ? $_POST['flags']  : '';
+		$this->language_name 	= isset( $_POST['language_name'] ) ? $_POST['language_name'] : '';
+		$this->en_language_name = isset( $_POST['en_language_name'] ) ? $_POST['en_language_name'] : '';
+		$this->locale		 	= isset( $_POST['locale'] ) ? $_POST['locale'] : '';
+
+		if ( empty( $this->submit_messages['errors'] ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 *
+	 */
+	function language_exists($code) {
+		global $WPGlobus_Config;
+		if ( array_key_exists($code,$WPGlobus_Config->language_name) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 *
+	 */
+	function get_data() {
+
+		if ( 'edit' == $this->action || 'delete' == $this->action  ) {
+			global $WPGlobus_Config;
+			$this->language_name 	= $WPGlobus_Config->language_name[$this->language_code];
+			$this->en_language_name = $WPGlobus_Config->en_language_name[$this->language_code];
+			$this->locale 			= $WPGlobus_Config->locale[$this->language_code];
+			$this->flag 			= $WPGlobus_Config->flag[$this->language_code];
+		}
 		$this->_get_flags();
 	}
 
+	/*
+	 *
+	 */
 	function display_table() {
+		if ( 'edit' == $this->action ) {
+			$header = __('Edit Language','');
+		} elseif ( 'delete' == $this->action )  {
+			$header = __('Are you sure to delete?','');
+		} else {
+			$header = __('Add Language','');
+		}
 		?>
 		<div class="wrap">
-			<h2>Edit Language</h2>
+			<h2><?php echo $header; ?></h2>
+			<?php if ( $this->submit ) {
+				if ( ! empty($this->submit_messages['errors']) ) {
+					$mess = '';
+					foreach ( $this->submit_messages['errors'] as $message ) {
+						$mess .= $message . '<br />';
+					} 	?>
+					<div class="error"><?php echo $mess; ?></div> <?php
+				} elseif ( ! empty( $this->submit_messages['success'] ) ) {
+					$mess = '';
+					foreach ( $this->submit_messages['success'] as $message ) {
+						$mess .= $message . '<br />';
+					} 	?>
+					<div class="update-nag"><?php echo $mess; ?></div> <?php
+				}
+			} ?>
 			<form method="post" action="">
 				<table class="form-table">
 					<tr valign="top">
 						<th scope="row"><label for="language_code">Language code</label></th>
 						<td>
-							<input name="language_code" type="text" id="language_code" value="" class="regular-text" />
+							<input name="language_code" type="text" id="language_code" value="<?php echo $this->language_code; ?>" class="regular-text" />
 							<p class="description"><?php _e( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', '' ); ?></p>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row"><label for="flags">Language flag</label></th>
 						<td>
-							<select id="flags" style="width:300px;" class="populate">	<?php
-								foreach( $this->flags as $code=>$name ) {	?>
-									<option value="<?php echo $name; ?>"><?php echo $name; ?></option>	<?php
-								}	?>
+							<select id="flags" name="flags" style="width:300px;" class="populate">	<?php
+								foreach( $this->all_flags as $file_name ) :
+									if ( $this->flag == $file_name ) {
+										$selected = 'selected';
+									} else {
+										$selected = '';
+									}
+									?>
+									<option <?php echo $selected; ?> value="<?php echo $file_name; ?>"><?php echo $file_name; ?></option>	<?php
+								endforeach;	?>
 							</select>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row"><label for="language_name">Name</label></th>
-						<td><input name="language_name" type="text" id="language_name" value="" class="regular-text" />
+						<td><input name="language_name" type="text" id="language_name" value="<?php echo $this->language_name; ?>" class="regular-text" />
 							<p class="description">The Name of the language, which will be displayed on the site. (Example: English)</p></td>
 					</tr>
 					<tr valign="top">
+						<th scope="row"><label for="en_language_name">Name in English</label></th>
+						<td><input name="en_language_name" type="text" id="en_language_name" value="<?php echo $this->en_language_name; ?>" class="regular-text" />
+							<p class="description">The Name of the language in English</p></td>
+					</tr>
+					<tr valign="top">
 						<th scope="row"><label for="locale">Locale</label></th>
-						<td><input name="locale" type="text" id="locale" value="" class="regular-text" />
+						<td><input name="locale" type="text" id="locale" value="<?php echo $this->locale; ?>" class="regular-text" />
 							<p class="description">PHP and Wordpress Locale for the language. (Example: en_US)</p></td>
 					</tr>
-				</table>
-				<p class="submit"><input class="button button-primary" type="submit" name="submit" value="Save Changes"></p>
+				</table>	<?php
+
+				if ( 'edit' == $this->action || 'add' == $this->action  ) {	?>
+					<p class="submit"><input class="button button-primary" type="submit" name="submit" value="Save Changes"></p>	<?php
+				} elseif ( 'delete' == $this->action ) {	?>
+					<!-- <p class="submit"><input class="button button-primary" type="submit" name="delete" value="Delete language"></p> -->	<?php
+				}	?>
+
 			</form>
 		</div>
-		<?php
+	<?php
 	}
 
+	/*
+	 *
+	 */
 	function _get_flags() {
-
-		//$url = plugins_url(WPGlobus_Config::GLOBUS_PLUGIN_NAME . '/flags/');
 
 		$path = WP_PLUGIN_DIR . '/' . WPGlobus_Config::GLOBUS_PLUGIN_NAME . '/flags/';
 
@@ -78,11 +267,7 @@ class WPGlobus_language_edit {
 		foreach ($dir as $file) {
 
 			if ( $file->isFile() ) {
-
-				$this->flags[] = $file->getFilename();
-				//error_log( $file->getFilename() );
-				//error_log( $file->getPathname() );
-
+				$this->all_flags[] = $file->getFilename();
 			}
 		}
 

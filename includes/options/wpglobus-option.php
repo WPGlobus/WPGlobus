@@ -265,7 +265,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			*	SECTION: Language table
 			*/
 			$this->sections[] = array(
-				'title'     => __( 'Language table', 'redux-framework-demo' ),
+				'title'     => __( 'Languages table', 'redux-framework-demo' ),
 				'desc'      => __( '' ),
 				'icon'      => 'el-icon-home',
 				'fields'    => array(
