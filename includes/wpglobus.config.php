@@ -1,6 +1,6 @@
 <?php
 /**
- *
+ * WPGlobus_Config class
  */
 
 class WPGlobus_Config {
@@ -84,18 +84,21 @@ class WPGlobus_Config {
 	var $flags_url = '';
 
 	/*
+	 * Stores languages in  pairs code=>name
 	 *
 	 * @var array
 	 */
 	var $language_name = array();
 	
 	/*
+	 * Stores languages names in English
 	 *
 	 * @var array
 	 */
 	var $en_language_name = array();
 
 	/*
+	 * Stores locales
 	 *
 	 * @var array
 	 */
@@ -122,25 +125,36 @@ class WPGlobus_Config {
 
 	/*
 	 * WPGlobus option key
+	 *
 	 * @var string
 	 */
 	var $option = 'wpglobus_option';
 
 	/*
-	 * WPGlobus
+	 * WPGlobus option key for $language_name
+	 *
 	 * @var string
 	 */
 	var $option_language_names = 'wpglobus_option_language_names';
 
-
+	/*
+	 * WPGlobus option key for $en_language_name
+	 *
+	 * @var string
+	 */
 	var $option_en_language_names = 'wpglobus_option_en_language_names';
 
-
+	/*
+	 * WPGlobus option key for $locale
+	 *
+	 * @var string
+	 */
 	var $option_locale = 'wpglobus_option_locale';
 
 
 	/*
-	 * WPGlobus
+	 * WPGlobus option key for $flag
+	 *
 	 * @var string
 	 */
 	var $option_flags = 'wpglobus_option_flags';
@@ -154,21 +168,25 @@ class WPGlobus_Config {
 	}
 
 	/*
+	 * Return URL mode
 	 *
+	 * @int
 	 */
 	function get_url_mode(){
 		return $this->url_mode;
 	}
 
 	/*
+	 * Set flag URL
 	 *
+	 * @return void
 	 */
 	function _set_flags_url() {
 		$this->flags_url = plugins_url(self::GLOBUS_PLUGIN_NAME . '/flags/');
 	}
 
 	/*
-	 *
+	 *	Set languages by default
 	 */
 	function _set_languages() {
 		// Names for languages in the corresponding language, add more if needed
@@ -210,7 +228,7 @@ class WPGlobus_Config {
 		$this->en_language_name['pl'] = "Polish";
 		$this->en_language_name['gl'] = "galego";
 
-		// Locales
+		#Locales
 		$this->locale['en'] = "en_US";
 		$this->locale['ru'] = "ru_RU";
 		$this->locale['de'] = "de_DE";
@@ -230,7 +248,7 @@ class WPGlobus_Config {
 		$this->locale['pl'] = "pl_PL";
 		$this->locale['gl'] = "gl_ES";
 
-		#
+		#flags
 		$this->flag['en'] = 'gb.png';
 		$this->flag['ru'] = 'ru.png';
 		$this->flag['de'] = 'de.png';
@@ -255,6 +273,7 @@ class WPGlobus_Config {
 
 	/*
 	 * Set default options
+	 *
 	 * @return void
 	 */
 	function _set_default_options(){
@@ -268,12 +287,13 @@ class WPGlobus_Config {
 
 	/*
 	 * Get options from DB and wp-config.php
+	 *
 	 * @return void
 	 */
 	function _get_options(){
 
 		$wpglobus_option = get_option($this->option);
-		//error_log( print_r( $this->enabled_languages, true ) );
+
 		/*
 		 * Get enabled languages and default language ( just one main language )
 		 */
@@ -296,9 +316,6 @@ class WPGlobus_Config {
 				array_unshift( $this->enabled_languages, $this->default_language );
 			}
 		}
-		//error_log( print_r( $this->enabled_languages, true ) );
-		//error_log( $this->default_language );
-
 
 		/*
 		 *
@@ -330,10 +347,6 @@ class WPGlobus_Config {
 			$this->locale 			= get_option( $this->option_locale );
 			$this->flag 			= get_option( $this->option_flags );
 		}
-		//error_log( print_r( $this->language_name, true ) );
-
-
-
 
 		/*
 		 * Get option 'show_flag_name'
@@ -374,7 +387,6 @@ class WPGlobus_Config {
 		if( ! empty($option) ) {
 			$this->flag = $option;
 		}
-		// error_log( print_r($this->flag,true) );
 
 	}
 
