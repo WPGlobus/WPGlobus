@@ -5,11 +5,23 @@
 
 class WPGlobus_language_edit {
 
-
+	/*
+	 * All files of flag
+	 *
+	 * @var array
+	 */
 	var $all_flags = array();
 
+	/*
+	 * Current action
+	 *
+	 * @var string
+	 */
 	var $action = '';
 
+	/*
+	 *
+	 */
 	var $language_code 		= '';
 
 	var $language_name 		= '';
@@ -36,9 +48,11 @@ class WPGlobus_language_edit {
 			$this->language_code = $_GET['lang'];
 		}
 
-		if ( isset($_POST['submit'] ) ) {
+		if ( isset( $_POST['submit'] ) ) {
 			$this->submit = true;
 			$this->process_submit();
+		} elseif ( isset( $_POST['delete'] ) ) {
+			$this->process_delete();
 		} else {
 			$this->get_data();
 		}
@@ -48,15 +62,46 @@ class WPGlobus_language_edit {
 	}
 
 	/*
+	 *	Process delete language action
+	 */
+	function process_delete() {
+
+		global $WPGlobus_Config;
+
+		$opts = get_option( $WPGlobus_Config->option );
+
+		if ( isset( $opts['enabled_languages'][$this->language_code] ) ) {
+			unset( $opts['enabled_languages'][$this->language_code] );
+			update_option( $WPGlobus_Config->option, $opts );
+		}
+
+		unset( $WPGlobus_Config->language_name[$this->language_code] );
+		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
+
+		unset( $WPGlobus_Config->flag[$this->language_code] );
+		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
+
+		unset( $WPGlobus_Config->en_language_name[$this->language_code] );
+		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
+
+		unset( $WPGlobus_Config->locale[$this->language_code] );
+		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
+
+		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=_options';
+		wp_redirect( $location );
+
+	}
+
+	/*
+	 * Process submit action
 	 *
+	 * @return void
 	 */
 	function process_submit() {
 
 		$code = isset( $_POST['language_code'] ) ? $_POST['language_code'] : '';
 		if ( $this->language_code == $code ) {
-
 			if ( $this->check_fields($code ,false) ) {
-				/* save language data */
 				$this->save();
 				$this->submit_messages['success'][] = 'Options was saved';
 			}
@@ -68,15 +113,13 @@ class WPGlobus_language_edit {
 		}
 		$this->_get_flags();
 
-		//error_log( $_POST['language_code']  );
-		//error_log( $_POST['flags']  );
-		//error_log( $_POST['language_name']  );
-		//error_log( $_POST['en_language_name']  );
-		//error_log( $_POST['locale']  );
 	}
 
 	/*
+	 * Save data language to DB
 	 *
+	 * @param bool $update_code If need to change language code
+	 * @return void
 	 */
 	function save( $update_code = false ) {
 
@@ -91,7 +134,7 @@ class WPGlobus_language_edit {
 				}
 			}
 		}
-		//return;
+
 		$WPGlobus_Config->language_name[$this->language_code] = $this->language_name;
 		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
 
@@ -107,7 +150,11 @@ class WPGlobus_language_edit {
 	}
 
 	/*
+	 * Check fields
 	 *
+	 * @param string $lang_code
+	 * @param bool $check_code
+	 * @return bool True if no errors, false otherwise.
 	 */
 	function check_fields($lang_code, $check_code = true) {
 		$this->submit_messages['errors'] = array();
@@ -177,10 +224,12 @@ class WPGlobus_language_edit {
 	 *
 	 */
 	function display_table() {
+		$disabled = '';
 		if ( 'edit' == $this->action ) {
 			$header = __('Edit Language','');
 		} elseif ( 'delete' == $this->action )  {
 			$header = __('Are you sure to delete?','');
+			$disabled = 'disabled';
 		} else {
 			$header = __('Add Language','');
 		}
@@ -201,17 +250,17 @@ class WPGlobus_language_edit {
 					} 	?>
 					<div class="update-nag"><?php echo $mess; ?></div> <?php
 				}
-			} ?>
+			}				?>
 			<form method="post" action="">
 				<table class="form-table">
-					<tr valign="top">
+					<tr>
 						<th scope="row"><label for="language_code">Language code</label></th>
 						<td>
-							<input name="language_code" type="text" id="language_code" value="<?php echo $this->language_code; ?>" class="regular-text" />
+							<input name="language_code" <?php echo $disabled; ?> type="text" id="language_code" value="<?php echo $this->language_code; ?>" class="regular-text" />
 							<p class="description"><?php _e( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', '' ); ?></p>
 						</td>
 					</tr>
-					<tr valign="top">
+					<tr>
 						<th scope="row"><label for="flags">Language flag</label></th>
 						<td>
 							<select id="flags" name="flags" style="width:300px;" class="populate">	<?php
@@ -227,17 +276,17 @@ class WPGlobus_language_edit {
 							</select>
 						</td>
 					</tr>
-					<tr valign="top">
+					<tr>
 						<th scope="row"><label for="language_name">Name</label></th>
 						<td><input name="language_name" type="text" id="language_name" value="<?php echo $this->language_name; ?>" class="regular-text" />
 							<p class="description">The Name of the language, which will be displayed on the site. (Example: English)</p></td>
 					</tr>
-					<tr valign="top">
+					<tr>
 						<th scope="row"><label for="en_language_name">Name in English</label></th>
 						<td><input name="en_language_name" type="text" id="en_language_name" value="<?php echo $this->en_language_name; ?>" class="regular-text" />
 							<p class="description">The Name of the language in English</p></td>
 					</tr>
-					<tr valign="top">
+					<tr>
 						<th scope="row"><label for="locale">Locale</label></th>
 						<td><input name="locale" type="text" id="locale" value="<?php echo $this->locale; ?>" class="regular-text" />
 							<p class="description">PHP and Wordpress Locale for the language. (Example: en_US)</p></td>
@@ -247,7 +296,7 @@ class WPGlobus_language_edit {
 				if ( 'edit' == $this->action || 'add' == $this->action  ) {	?>
 					<p class="submit"><input class="button button-primary" type="submit" name="submit" value="Save Changes"></p>	<?php
 				} elseif ( 'delete' == $this->action ) {	?>
-					<!-- <p class="submit"><input class="button button-primary" type="submit" name="delete" value="Delete language"></p> -->	<?php
+					<p class="submit"><input class="button button-primary" type="submit" name="delete" value="Delete language"></p> 	<?php
 				}	?>
 
 			</form>
