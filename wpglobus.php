@@ -51,22 +51,10 @@ class WPGlobus {
 			require_once 'Redux-Framework/ReduxCore/framework.php';
 			require_once 'includes/options/wpglobus-option.php';
 
-			// add_filter( "redux/{$this->option}/field/class/radio_sorter", array( &$this, 'on_radio_sorter' ) );
-			// add_filter( "redux/{$this->option}/field/class/select_with_flag", array( &$this, 'on_select_with_flag' ) );
-			// add_filter( "redux/{$this->option}/field/class/select", array( &$this, 'on_select' ) );
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array( &$this, 'on_field_table' ) );
 
-		 	//add_action( "redux/field/{$this->option}/table/render/before", array( &$this, 'on_field_table1' ), 10, 2 );
-			//add_filter( "redux/field/{$this->option}/table/render/after", array( &$this, 'on_field_table1' ), 10, 2 );
-
-			/*
-			$args = array(
-				'opt_name' => $WPGlobus_Config->option
-			);	//*/
 			global $WPGlobusOption;
 			$WPGlobusOption = new Redux_Framework_globus_option();
-
-			//$wpglobus_option = get_option( $this->option );
 
 			add_action( 'admin_menu',  			array( &$this, 'on_admin_menu' ), 10 );
 			add_action( 'admin_print_scripts', 	array( &$this, 'on_admin_scripts' ) );
@@ -94,6 +82,7 @@ class WPGlobus {
 		$page = isset($_GET['page']) ? $_GET['page'] : '';
 
 		if ( self::LANGUAGE_EDIT_PAGE ==  $page ) {
+
 			wp_register_script(
 				'select2',
 				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
@@ -147,6 +136,11 @@ class WPGlobus {
 		}
 	}
 
+	/*
+	 * Add hidden submenu for Language edit page
+	 *
+	 * @return void
+	 */
 	function on_admin_menu(){
 		add_submenu_page(
 			null,
@@ -154,37 +148,40 @@ class WPGlobus {
 			'',
 			'administrator',
 			self::LANGUAGE_EDIT_PAGE,
-			array( &$this, 'on_l' )
+			array( &$this, 'on_language_edit' )
 		);
 	}
 
-	function on_l(){
+	/*
+	 * Include file for language edit page
+	 *
+	 * @return void
+	 */
+	function on_language_edit(){
 		include dirname(__FILE__) . '/includes/admin/class.language-edit.php';
 		new WPGlobus_language_edit();
 	}
 
-	function on_select_with_flag($field){
-		return dirname(__FILE__) . '/includes/options/fields/select_with_flag/field_select_with_flag.php';
-	}
-
-	function on_field_table1($field, $value){
-		return $field;
-	}
-
+	/*
+	 * Include file for new field 'table'
+	 *
+	 * @return string
+	 */
 	function on_field_table($field){
 		return dirname(__FILE__) . '/includes/options/fields/table/field_table.php';
 	}
 
 	/*
 	 * Enqueue styles
+	 *
 	 * @return void
 	 */
 	function on_wp_styles(){
 		wp_register_style(
 			'flags',
-			plugins_url( '/globus.flags.css', __FILE__ ),
+			plugins_url( '/includes/css/globus.flags.css', __FILE__ ),
 			array(),
-			'',
+			self::$_version,
 			'all'
 		);
 		wp_enqueue_style( 'flags' );
@@ -192,6 +189,7 @@ class WPGlobus {
 
 	/*
 	 * Add css styles to head section
+	 *
 	 * @return string
 	 */
 	function on_wp_head() {
@@ -212,6 +210,7 @@ class WPGlobus {
 
 	/*
 	 * Add item to navigation menu which was created with wp_list_pages
+	 *
 	 * @return string
 	 */
 	function on_wp_list_pages( $output, $r ) {
@@ -271,8 +270,6 @@ class WPGlobus {
 			}
 		}
 
-		#$menu_item_classes = array( '', 'menu-item', 'menu-item-type-post_type', 'menu-item-globus-menu-switch' );
-		
 		/** main menu item classes */
 		$menu_item_classes    = array( '', 'menu-item-globus-menu-switch' );
 		
@@ -285,7 +282,7 @@ class WPGlobus {
 		$span_classes_lang[] = 'globus-flag-' . $WPGlobus_Config->language;
 
 		$item = new stdClass();
-		$item->ID				= 9999999999; // 9 999 999 999
+		$item->ID				= 9999999999; # 9 999 999 999
 		$item->db_id			= 9999999999;
 		$item->menu_item_parent = 0;
 		$item->title 			= '<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span>';
@@ -336,6 +333,7 @@ class WPGlobus {
 
 	/*
 	 * Get navigation menus
+	 *
 	 * @return array
 	 */
 	public static function _get_nav_menus() {
@@ -355,42 +353,3 @@ class WPGlobus {
 }
 
 $WPGlobus = new WPGlobus();
-
-
-
-// globus_extractURL();
-
-//error_log( print_r( $menus, true ) );
-
-
-//add_filter( 'wp_nav_menu_items', 'on_add_item', 10, 2);  // 4 items from menu
-//add_filter( 'wp_nav_menu_args', 'on_add_item1', 10 );
-function on_add_item1( $args ) {
-	error_log( print_r( $args, true ) );
-	return $args;
-}
-
-//add_filter( 'wp_nav_menu', 'on_add_item', 10, 2);  // 6 items ( without switcher )
-function on_add_item( $items, $args ) {
-	global $globus_config;
-	
-	//error_log( print_r( $_SERVER, true ) );
-	
-	$url1 = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
-	
-	$item = '<ul class="globus-top-switch-submenu sub-menu">'; 	// position: relative;	
-		
-	foreach( $globus_config['enabled_languages'] as $language ) {
-		if ( $globus_config['language'] != $language ) {
-			$item .= '<li class="menu-item"><a href="' . $url1 . $language . $_SERVER['REQUEST_URI'] . '">' . $language . '</a></li>';
-		}
-	}
-	
-	$item .= '</ul>';
-
-	$items = str_replace('<span class="globus-switch-extend"></span></a>', '</a>' . $item, $items );
-	//error_log( print_r( $items, true ) );
-	//error_log( print_r( $args, true ) );
-	
-	return $items;
-}
