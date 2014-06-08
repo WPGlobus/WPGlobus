@@ -24,7 +24,11 @@ class WPGlobus_language_edit {
 	 */
 	var $language_code 		= '';
 
+	/*
+	 *
+	 */
 	var $language_name 		= '';
+	
 	var $en_language_name 	= '';
 	var $locale 		  	= '';
 	var $flag 		  		= '';
@@ -63,6 +67,8 @@ class WPGlobus_language_edit {
 
 	/*
 	 *	Process delete language action
+	 *
+	 * @return void
 	 */
 	function process_delete() {
 
@@ -87,6 +93,7 @@ class WPGlobus_language_edit {
 		unset( $WPGlobus_Config->locale[$this->language_code] );
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
+		/** @todo make "$location" available from WPGlobus_Config */
 		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=_options';
 		wp_redirect( $location );
 
@@ -125,35 +132,55 @@ class WPGlobus_language_edit {
 
 		global $WPGlobus_Config;
 
-		if ( $update_code ) {
+		if ( $update_code && 'edit' == $this->action ) {
 			$old_code = isset( $_GET['lang'] ) ? $_GET['lang'] : '';
-			foreach( $WPGlobus_Config->language_name as $code=>$name ) {
-				if ( $code == $old_code ) {
-					unset( $WPGlobus_Config->language_name[$code] );
-					break;
-				}
+			if ( isset( $WPGlobus_Config->language_name[$old_code] ) ) {
+				unset( $WPGlobus_Config->language_name[$old_code] );
+			}
+
+			$opts = get_option( $WPGlobus_Config->option );
+			if ( isset( $opts['enabled_languages'][$old_code] ) ) {
+				unset( $opts['enabled_languages'][$old_code] );
+				update_option( $WPGlobus_Config->option, $opts );
+			}
+			if ( isset( $opts['more_languages'] ) && $old_code == $opts['more_languages']  ) {
+				unset( $opts['more_languages'] );
+				update_option( $WPGlobus_Config->option, $opts );
 			}
 		}
-
 		$WPGlobus_Config->language_name[$this->language_code] = $this->language_name;
 		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
 
+		if ( $update_code && isset( $WPGlobus_Config->flag[$old_code] )  ) {
+			unset( $WPGlobus_Config->flag[$old_code] );
+		}
 		$WPGlobus_Config->flag[$this->language_code] = $this->flag;
 		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
 
+		if ( $update_code && isset( $WPGlobus_Config->en_language_name[$old_code] )  ) {
+			unset( $WPGlobus_Config->en_language_name[$old_code] );
+		}
 		$WPGlobus_Config->en_language_name[$this->language_code] = $this->en_language_name;
 		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
 
+		if ( $update_code && isset( $WPGlobus_Config->locale[$old_code] )  ) {
+			unset( $WPGlobus_Config->locale[$old_code] );
+		}
 		$WPGlobus_Config->locale[$this->language_code] = $this->locale;
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
+		if ( $update_code ) {
+			/** @todo make "$location" available from WPGlobus_Config */
+			$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=_options';
+			wp_redirect( $location );
+		}
 	}
 
 	/*
 	 * Check fields
 	 *
 	 * @param string $lang_code
-	 * @param bool $check_code
+	 * @param bool $check_code Use for existence check language code
 	 * @return bool True if no errors, false otherwise.
 	 */
 	function check_fields($lang_code, $check_code = true) {
@@ -248,7 +275,7 @@ class WPGlobus_language_edit {
 					foreach ( $this->submit_messages['success'] as $message ) {
 						$mess .= $message . '<br />';
 					} 	?>
-					<div class="update-nag"><?php echo $mess; ?></div> <?php
+					<div class="updated"><?php echo $mess; ?></div> <?php
 				}
 			}				?>
 			<form method="post" action="">
