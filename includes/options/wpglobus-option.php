@@ -193,6 +193,19 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						#'default'  => 'code'
 					),
 					array(
+						'id'        => 'url_mode',
+						'type'      => 'select',
+						#'type'      => 'image_select',
+						'title'     => __( 'Url mode', 'redux-framework-demo' ),
+						'compiler'  => 'false',
+						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+						'desc'      => __( '', 'redux-framework-demo' ),
+						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'placeholder'   => 'Select URL mode',
+						'options'   	=> $WPGlobus_Config->_getEnabledUrlMode(),
+						'default'  		=> ''
+					),
+					array(
 						'id'        => 'show_flag_name',
 						'type'      => 'select',
 						'title'     => __('Show flag name', 'redux-framework-demo'),

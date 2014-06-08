@@ -149,13 +149,6 @@ class WPGlobus_Config {
 	 * Constructor
 	 */
 	function __construct() {
-		# set default url mode
-		$this->url_mode = self::GLOBUS_URL_PATH;
-		//$this->url_mode = self::GLOBUS_URL_QUERY;
-
-		#
-		#$this->_set_languages();
-
 		#
 		$this->_get_options();
 	}
@@ -313,6 +306,15 @@ class WPGlobus_Config {
 		 */
 		$this->_set_flags_url();
 
+		/*
+		 * Get URL mode
+		 */
+		if ( isset( $wpglobus_option['url_mode'] ) && ! empty($wpglobus_option['url_mode'])  ) {
+			$this->url_mode = $wpglobus_option['url_mode'];
+		} else {
+			$this->url_mode = self::GLOBUS_URL_PATH;
+		}
+		/** @todo make loading url_mode from wp-config.php */
 
 		/*
 		 * Get languages name
@@ -374,6 +376,16 @@ class WPGlobus_Config {
 		}
 		// error_log( print_r($this->flag,true) );
 
+	}
+
+	/*
+	 * Hard coded enabled url modes
+	 *
+	 * @return array
+	 */
+	function _getEnabledUrlMode(){
+		$enabled_url_mode = array(self::GLOBUS_URL_QUERY=>'URL query', self::GLOBUS_URL_PATH=>'URL path');
+		return $enabled_url_mode;
 	}
 
 }	// end class WPGlobus_Config
