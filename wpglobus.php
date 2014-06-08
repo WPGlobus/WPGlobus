@@ -24,6 +24,8 @@ $WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 class WPGlobus {
 
 	public static $_version = '0.1';
+	
+	public static $minmalReduxFramework_version = '3.2.9.4';
 
 	/*
 	 * Language edit page

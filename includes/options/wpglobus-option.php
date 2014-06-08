@@ -68,6 +68,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			// @see http://code.tutsplus.com/tutorials/communicating-with-the-wordpressorg-plugin-api--wp-33069
 			
             // ACTUAL DECLARATION OF SECTIONS
+			
+			$title  = 'Current ReduxFramework version: ' . ReduxFramework::$_version . '<br /><br />';			
+			$title .= 'Minimal needed version		 : ' . WPGlobus::$minmalReduxFramework_version ;
+			
             $this->sections[] = array(
                 'title'     => __('Home Settings', 'redux-framework-demo'),
                 'desc'      => __('', 'redux-framework-demo'),
@@ -77,7 +81,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
                         'id'        => 'current_version',
                         'type'      => 'info',
-                        'title'     => 'Current ReduxFramework version: ' . ReduxFramework::$_version,
+                        'title'     => $title,
                         'compiler'  => 'true',
                         'desc'      => __('', 'redux-framework-demo'),
                         'subtitle'  => __('', 'redux-framework-demo'),
@@ -182,12 +186,11 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'more_languages',
 						'type'      => 'select',
-						#'type'      => 'image_select',
 						'title'     => __( 'More languages', 'redux-framework-demo' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
 						'desc'      => __( 'Select language and click "Save Changes" for add to Enabled languages', 'redux-framework-demo' ),
-						'subtitle'  => __( 'Subtitle', 'redux-framework-demo' ),
+						'subtitle'  => '',
 						'placeholder'   => 'Select language',
 						'options'   => $more_languages,
 						#'default'  => 'code'
@@ -417,8 +420,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
                 'display_version'   => $theme->get('Version'),  // Version that appears at the top of your panel
                 'menu_type'         => 'menu',                  //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
                 'allow_sub_menu'    => true,                    // Show the sections below the admin menu item or not
-                'menu_title'        => __('WPGlobus Options', 'redux-framework-demo'),
-                'page_title'        => __('WPGlobus Options', 'redux-framework-demo'),
+                'menu_title'        => __('WPGlobus', 'redux-framework-demo'),
+                'page_title'        => __('WPGlobus', 'redux-framework-demo'),
                 
                 // You will need to generate a Google API key to use this feature.
                 // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
