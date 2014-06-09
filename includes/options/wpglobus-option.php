@@ -62,14 +62,9 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			global $WPGlobus_Config;
 
-			$wpglobus_option = get_option($WPGlobus_Config->option);
-			
-			// http://api.wordpress.org/plugins/info/1.0/redux-framework/
-			// @see http://code.tutsplus.com/tutorials/communicating-with-the-wordpressorg-plugin-api--wp-33069
-			
-            // ACTUAL DECLARATION OF SECTIONS
-			
-			$title  = 'Current ReduxFramework version: ' . ReduxFramework::$_version . '<br /><br />';			
+			$wpglobus_option = get_option( $WPGlobus_Config->option );
+
+			$title  = 'Current ReduxFramework version: ' . ReduxFramework::$_version . '<br /><br />';
 			$title .= 'Minimal needed version		 : ' . WPGlobus::$minmalReduxFramework_version ;
 			
             $this->sections[] = array(
@@ -89,20 +84,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
                             'title'     => '',
                             'content'   => '',
                         )
-                    ),
-                    #array(
-                        #'id'        => 'opt-web-fonts',
-                        #'type'      => 'media',
-                        #'title'     => __('Web Fonts', 'redux-framework-demo'),
-                        #'compiler'  => 'true',
-                        #'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-                        #'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
-                        #'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-                        #'hint'      => array(
-                        #    //'title'     => '',
-                        #    'content'   => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
-                        #)
-                    #)					
+                    )
                 )
             );
 
@@ -164,7 +146,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				'title'     => __( 'Languages', 'redux-framework-demo' ),
 				'desc'      => __( '' ),
 				'icon'      => 'el-icon-home',
-				// 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
 				'fields'    => array(
 					array(
 						'id'        => 'enabled_languages',
@@ -193,15 +174,13 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'subtitle'  => '',
 						'placeholder'   => 'Select language',
 						'options'   => $more_languages,
-						#'default'  => 'code'
 					),
 					array(
 						'id'        => 'url_mode',
 						'type'      => 'select',
-						#'type'      => 'image_select',
 						'title'     => __( 'Url mode', 'redux-framework-demo' ),
 						'compiler'  => 'false',
-						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+						'mode'      => false,
 						'desc'      => __( '', 'redux-framework-demo' ),
 						'subtitle'  => __( '', 'redux-framework-demo' ),
 						'placeholder'   => 'Select URL mode',
@@ -213,7 +192,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'type'      => 'select',
 						'title'     => __('Show flag name', 'redux-framework-demo'),
 						'compiler'  => 'false',
-						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+						'mode'      => false,
 						'desc'      => __( '', 'redux-framework-demo' ),
 						'subtitle'  => __( '', 'redux-framework-demo' ),
 						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1),
@@ -258,77 +237,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				)
 			);
 
-
-			/*
-			$this->sections[] = array(
-				'title'     => __('miniGlobus Settings', 'redux-framework-demo'),
-				'desc'      => __(''),
-				'icon'      => 'el-icon-home',
-				// 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
-				'fields'    => array(
-					array(
-						'id'        => 'show_flag_name',
-						'type'      => 'select',
-						'title'     => __('Show flag name', 'redux-framework-demo'),
-						'compiler'  => 'false',
-						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1),
-						'options'   => array(
-							'code'  => 'Code',
-							'name'  => 'Full language name',
-							'empty' => 'Don\'t show'
-						),
-						'default'  => 'code',
-						'hint'      => array(
-							//'title'     => '',
-							'content'   => 'Code - for example: &quot;en&quot;, &quot;ru&quot;',
-						)
-					),
-					array(
-						'id'        => 'use_nav_menu', # $WPGlobus_Config->nav_menu
-						'type'      => 'select',
-						'title'     => __( 'Use navigation menu', 'redux-framework-demo' ),
-						'compiler'  => 'false',
-						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'select2'	=> array('allowClear' => true, 'minimumResultsForSearch' => -1),
-						'options'   => $this->menus,
-						'placeholder'   => $navigation_menu_placeholder,
-						'default'  => 'code'
-					)
-				)
-			); // */
-
-			/*
-			 * SECTION:  CSS
-			*/
-			/*
-			$this->sections[] = array(
-				'title'     => __( 'CSS', 'redux-framework-demo' ),
-				'desc'      => __( '' ),
-				'icon'      => 'el-icon-home',
-				'fields'    => array(
-					array(
-						'id'        => 'css_editor',
-						'type'      => 'ace_editor',
-						'title'     => __( 'Custom CSS', 'redux-framework-demo' ),
-						'compiler'  => 'false',
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'default'   => '',
-						'rows'		=> 15,
-						'hint'      => array(
-							'title'     => 'TITLE',
-							'content'   => 'content',
-						)
-					)
-				)
-			);
-			// */
-
 			/*
 			*	SECTION: Language table
 			*/
@@ -340,8 +248,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'lang_new',
 						'type'      => 'table',
-						#'type'      => 'raw',
-						#'class'		=> 'test-class',
 						'title'     => __( 'Custom table', 'redux-framework-demo' ),
 						'subtitle'  => __( '', 'redux-framework-demo' ),
 						'desc'      => __( '', 'redux-framework-demo' ),
@@ -349,38 +255,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				)
 			);
 
-			
-			/*
-			*	SECTION: Language edit
-			*/
-			/*
-			$this->sections[] = array(
-				'title'     => __( 'Language edit', 'redux-framework-demo' ),
-				'desc'      => __( '' ),
-				'icon'      => 'el-icon-home',
-				'fields'    => array(
-					array(
-						'id'        => 'language_code',
-						'type'      => 'text',
-						#'type'      => 'raw',
-						#'class'		=> 'test-class',
-						'title'     => __( 'Language code', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'desc'      => __( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', 'redux-framework-demo' ),
-					),
-					array(
-						'id'        => 'language_flag',
-						'type'      => 'select',
-						'title'     => __( 'Language flag', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'desc'      => __( 'Choose the corresponding country flag for language. (Example: gb.png)', 'redux-framework-demo' ),
-						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1, 'events'=>'on_events'),
-						'options'	=> $this->_scaner(),
-						'args'		=> array('arg1' => false, 'arg2' => -1, 'arg3'=>'on_events')
-					)
-				)
-			); // */
-			
         }
 
         public function setHelpTabs() {
@@ -486,31 +360,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
                     ),
                 )
             );
-
-
-            // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
-			/*
-            $this->args['share_icons'][] = array(
-                'url'   => 'https://github.com/ReduxFramework/ReduxFramework',
-                'title' => 'Visit us on GitHub',
-                'icon'  => 'el-icon-github'
-                //'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
-            );
-            $this->args['share_icons'][] = array(
-                'url'   => 'https://www.facebook.com/pages/Redux-Framework/243141545850368',
-                'title' => 'Like us on Facebook',
-                'icon'  => 'el-icon-facebook'
-            );
-            $this->args['share_icons'][] = array(
-                'url'   => 'http://twitter.com/reduxframework',
-                'title' => 'Follow us on Twitter',
-                'icon'  => 'el-icon-twitter'
-            );
-            $this->args['share_icons'][] = array(
-                'url'   => 'http://www.linkedin.com/company/redux-framework',
-                'title' => 'Find us on LinkedIn',
-                'icon'  => 'el-icon-linkedin'
-            );		// */
 
             // Panel Intro text -> before the form
             if (!isset($this->args['global_variable']) || $this->args['global_variable'] !== false) {
