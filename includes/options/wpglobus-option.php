@@ -167,7 +167,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'more_languages',
 						'type'      => 'select',
-						'title'     => __( 'More languages', 'redux-framework-demo' ),
+						'title'     => __( 'Add languages', 'redux-framework-demo' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
 						'desc'      => __( 'Select language and click "Save Changes" for add to Enabled languages', 'redux-framework-demo' ),
