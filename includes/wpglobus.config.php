@@ -221,7 +221,7 @@ class WPGlobus_Config {
 		$this->en_language_name['ro'] = "Română";
 		$this->en_language_name['hu'] = "Magyar";
 		$this->en_language_name['ja'] = "Japanese";
-		$this->en_language_name['es'] = "Español";
+		$this->en_language_name['es'] = "Spanish";
 		$this->en_language_name['vi'] = "Vietnamese";
 		$this->en_language_name['ar'] = "Arabic";
 		$this->en_language_name['pt'] = "Português";
