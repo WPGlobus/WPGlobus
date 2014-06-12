@@ -356,7 +356,11 @@ class WPGlobus {
 
 }
 
-add_action('init', function(){
-	$WPGlobus = new WPGlobus();
-});
+add_action( 'init', 'WPGlobus_init' );
 
+/**
+ * Start WPGlobus on "init" hook, so if there is another ReduxFramework, it will be loaded first. Hopefully :-)
+ */
+function WPGlobus_init() {
+	$GLOBALS['WPGlobus'] = new WPGlobus();
+}
