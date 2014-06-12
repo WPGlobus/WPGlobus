@@ -146,7 +146,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			$this->sections[] = array(
 				'title'     => __( 'Languages', 'redux-framework-demo' ),
 				'desc'      => __( '' ),
-				'icon'      => 'el-icon-home',
+				'icon'      => 'el-icon-user',
 				'fields'    => array(
 					array(
 						'id'        => 'enabled_languages',
@@ -244,7 +244,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			$this->sections[] = array(
 				'title'     => __( 'Languages table', 'redux-framework-demo' ),
 				'desc'      => __( '' ),
-				'icon'      => 'el-icon-home',
+				'icon'      => 'el-icon-th-list',
 				'fields'    => array(
 					array(
 						'id'        => 'lang_new',
