@@ -196,7 +196,7 @@ class WPGlobus_Config {
 		$this->language_name['ru'] = "Русский";
 		$this->language_name['de'] = "Deutsch";
 		$this->language_name['zh'] = "中文";
-		$this->language_name['fi'] = "suomi";
+		$this->language_name['fi'] = "Suomi";
 		$this->language_name['fr'] = "Français";
 		$this->language_name['nl'] = "Nederlands";
 		$this->language_name['sv'] = "Svenska";
@@ -209,26 +209,26 @@ class WPGlobus_Config {
 		$this->language_name['ar'] = "العربية";
 		$this->language_name['pt'] = "Português";
 		$this->language_name['pl'] = "Polski";
-		$this->language_name['gl'] = "galego";
+		$this->language_name['gl'] = "Galego";
 
 		$this->en_language_name['en'] = "English";
 		$this->en_language_name['ru'] = "Russian";
 		$this->en_language_name['de'] = "German";
 		$this->en_language_name['zh'] = "Chinese";
-		$this->en_language_name['fi'] = "suomi";
+		$this->en_language_name['fi'] = "Finnish";
 		$this->en_language_name['fr'] = "French";
-		$this->en_language_name['nl'] = "Nederlands";
-		$this->en_language_name['sv'] = "Svenska";
+		$this->en_language_name['nl'] = "Dutch";
+		$this->en_language_name['sv'] = "Swedish";
 		$this->en_language_name['it'] = "Italian";
-		$this->en_language_name['ro'] = "Română";
-		$this->en_language_name['hu'] = "Magyar";
+		$this->en_language_name['ro'] = "Romanian";
+		$this->en_language_name['hu'] = "Hungarian";
 		$this->en_language_name['ja'] = "Japanese";
 		$this->en_language_name['es'] = "Spanish";
 		$this->en_language_name['vi'] = "Vietnamese";
 		$this->en_language_name['ar'] = "Arabic";
-		$this->en_language_name['pt'] = "Português";
+		$this->en_language_name['pt'] = "Portuguese";
 		$this->en_language_name['pl'] = "Polish";
-		$this->en_language_name['gl'] = "galego";
+		$this->en_language_name['gl'] = "Galician";
 
 		#Locales
 		$this->locale['en'] = "en_US";
