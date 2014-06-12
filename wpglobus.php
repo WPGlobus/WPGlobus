@@ -3,7 +3,7 @@
 Plugin Name: WPGlobus
 Description: WPGlobus translation plugin
 Text Domain: wpglobus
-Version: 0.1
+Version: 0.2
 Author: Alex Gor
 Author URI: 
 */
@@ -23,7 +23,7 @@ $WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 class WPGlobus {
 
-	public static $_version = '0.1';
+	public static $_version = '0.2';
 	
 	public static $minmalReduxFramework_version = '3.2.9.4';
 
@@ -49,7 +49,7 @@ class WPGlobus {
 		if ( is_admin() ) {
 
 			require_once 'Redux-Framework/ReduxCore/framework.php';
-			require_once 'includes/options/wpglobus-option.php';
+			require_once 'includes/options/wpglobus.option.php';
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array( &$this, 'on_field_table' ) );
 
@@ -61,7 +61,9 @@ class WPGlobus {
 			add_action( 'admin_print_styles', 	array( &$this, 'on_admin_styles' ) );
 
 		} else {
-
+			
+			$test_str = __( 'Test str', 'wpglobus' );
+			
 			$this->menus = $this->_get_nav_menus();
 
 			add_filter( 'wp_list_pages', 		array( &$this, 'on_wp_list_pages' ), 99, 2 );
