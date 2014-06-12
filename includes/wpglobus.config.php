@@ -182,7 +182,9 @@ class WPGlobus_Config {
 	 * @return void
 	 */
 	function _set_flags_url() {
-		$this->flags_url = plugins_url(self::GLOBUS_PLUGIN_NAME . '/flags/');
+
+//		$this->flags_url = plugins_url(self::GLOBUS_PLUGIN_NAME . '/flags/');
+		$this->flags_url = plugins_url( basename( dirname( dirname( __FILE__ ) ) ) ) . '/flags/';
 	}
 
 	/*
