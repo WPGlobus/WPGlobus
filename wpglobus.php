@@ -25,7 +25,7 @@ class WPGlobus {
 
 	public static $_version = '0.2';
 	
-	public static $minmalReduxFramework_version = '3.2.9.4';
+	public static $minimalReduxFramework_version = '3.2.9.4';
 
 	/*
 	 * Language edit page

@@ -65,7 +65,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			$wpglobus_option = get_option( $WPGlobus_Config->option );
 
 			$title  = 'Current ReduxFramework version: ' . ReduxFramework::$_version . '<br /><br />';
-			$title .= 'Minimal needed version		 : ' . WPGlobus::$minmalReduxFramework_version ;
+			$title .= 'Minimal needed version		 : ' . WPGlobus::$minimalReduxFramework_version ;
 			
             $this->sections[] = array(
                 'title'     => __('Home Settings', 'redux-framework-demo'),
