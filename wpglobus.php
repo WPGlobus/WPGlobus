@@ -48,7 +48,9 @@ class WPGlobus {
 
 		if ( is_admin() ) {
 
-			require_once 'Redux-Framework/ReduxCore/framework.php';
+			if ( ! class_exists( 'ReduxFramework' ) ) {
+				require_once 'Redux-Framework/ReduxCore/framework.php';
+			}
 			require_once 'includes/options/wpglobus.option.php';
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array( &$this, 'on_field_table' ) );
@@ -354,4 +356,7 @@ class WPGlobus {
 
 }
 
-$WPGlobus = new WPGlobus();
+add_action('init', function(){
+	$WPGlobus = new WPGlobus();
+});
+

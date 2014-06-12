@@ -32,11 +32,12 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			}
 
             // This is needed. Bah WordPress bugs.  ;)
-            if (  true == Redux_Helpers::isTheme(__FILE__) ) {
-                $this->initSettings();
-            } else {
-                add_action('plugins_loaded', array($this, 'initSettings'), 10);
-            }
+//            if (  true == Redux_Helpers::isTheme(__FILE__) ) {
+//                $this->initSettings();
+//            } else {
+				$this->initSettings();
+//                add_action('plugins_loaded', array($this, 'initSettings'), 10);
+//            }
 
         }
 
