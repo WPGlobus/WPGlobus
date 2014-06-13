@@ -2,6 +2,7 @@
 /**
  *
  */
+if ( !defined('ABSPATH') ) exit;
 
 class WPGlobus_language_edit {
 
@@ -20,19 +21,52 @@ class WPGlobus_language_edit {
 	var $action = '';
 
 	/*
+	 * Language code
 	 *
+	 * @var string
 	 */
 	var $language_code 		= '';
 
 	/*
+	 * Language name
 	 *
+	 * @var string
 	 */
 	var $language_name 		= '';
-	
+
+	/*
+	 * Language name in english
+	 *
+	 * @var string
+	 */
 	var $en_language_name 	= '';
+
+	/*
+	 * Locale
+	 *
+	 * @var string
+	 */
 	var $locale 		  	= '';
+
+	/*
+	 * Flag of current language
+	 *
+	 * @var string
+	 */
 	var $flag 		  		= '';
+
+	/*
+	 * Set up to true at submit form action
+	 *
+	 * @var bool
+	 */
 	var $submit				= false;
+
+	/*
+	 * Messages for form submit
+	 *
+	 * @var array
+	 */
 	var $submit_messages	= array();
 
 	/*
@@ -66,7 +100,7 @@ class WPGlobus_language_edit {
 	}
 
 	/*
-	 *	Process delete language action
+	 * Process delete language action
 	 *
 	 * @return void
 	 */
@@ -131,9 +165,9 @@ class WPGlobus_language_edit {
 	function save( $update_code = false ) {
 
 		global $WPGlobus_Config;
-
+		$old_code = '';
 		if ( $update_code && 'edit' == $this->action ) {
-			$old_code = isset( $_GET['lang'] ) ? $_GET['lang'] : '';
+			$old_code = isset( $_GET['lang'] ) ? $_GET['lang'] : $old_code;
 			if ( isset( $WPGlobus_Config->language_name[$old_code] ) ) {
 				unset( $WPGlobus_Config->language_name[$old_code] );
 			}
@@ -177,7 +211,7 @@ class WPGlobus_language_edit {
 	}
 
 	/*
-	 * Check fields
+	 * Check form fields
 	 *
 	 * @param string $lang_code
 	 * @param bool $check_code Use for existence check language code
@@ -222,18 +256,23 @@ class WPGlobus_language_edit {
 	}
 
 	/*
+	 * Check existing language code in global $WPGlobus_Config
 	 *
+	 * @param string $code
+	 * @return bool true if language code exists
 	 */
 	function language_exists($code) {
 		global $WPGlobus_Config;
-		if ( array_key_exists($code,$WPGlobus_Config->language_name) ) {
+		if ( array_key_exists($code, $WPGlobus_Config->language_name) ) {
 			return true;
 		}
 		return false;
 	}
 
 	/*
+	 * Get data for form fields
 	 *
+	 * @return void
 	 */
 	function get_data() {
 
@@ -248,17 +287,19 @@ class WPGlobus_language_edit {
 	}
 
 	/*
+	 * Display language form
 	 *
+	 * @return void
 	 */
 	function display_table() {
 		$disabled = '';
 		if ( 'edit' == $this->action ) {
-			$header = __('Edit Language','');
+			$header = __( 'Edit Language', 'wpglobus' );
 		} elseif ( 'delete' == $this->action )  {
-			$header = __('Are you sure to delete?','');
+			$header = __( 'Are you sure to delete?', 'wpglobus' );
 			$disabled = 'disabled';
 		} else {
-			$header = __('Add Language','');
+			$header = __( 'Add Language', 'wpglobus' );
 		}
 		?>
 		<div class="wrap">
@@ -284,7 +325,7 @@ class WPGlobus_language_edit {
 						<th scope="row"><label for="language_code">Language code</label></th>
 						<td>
 							<input name="language_code" <?php echo $disabled; ?> type="text" id="language_code" value="<?php echo $this->language_code; ?>" class="regular-text" />
-							<p class="description"><?php _e( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', '' ); ?></p>
+							<p class="description"><?php _e( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', 'wpglobus' ); ?></p>
 						</td>
 					</tr>
 					<tr>
@@ -332,7 +373,9 @@ class WPGlobus_language_edit {
 	}
 
 	/*
+	 * Get flag files from directory
 	 *
+	 * @return void
 	 */
 	function _get_flags() {
 

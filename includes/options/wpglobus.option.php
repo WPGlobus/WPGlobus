@@ -84,11 +84,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
                         'type'      => 'info',
                         'title'     => $title,
                         'desc'      => __('', 'wpglobus'),
-                        'subtitle'  => __('', 'wpglobus'),
-                        'hint'      => array(
-                            'title'     => '',
-                            'content'   => '',
-                        )
+                        'subtitle'  => __('', 'wpglobus')
                     )
                 )
             );

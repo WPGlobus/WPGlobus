@@ -162,7 +162,7 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_language_edit(){
-		include dirname(__FILE__) . '/includes/admin/class.language-edit.php';
+		include dirname(__FILE__) . '/includes/admin/class.language.edit.php';
 		new WPGlobus_language_edit();
 	}
 
