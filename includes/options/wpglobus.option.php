@@ -159,16 +159,12 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'type'      => 'sortable',
 						'title'     => __( 'Enabled languages', 'wpglobus' ),
 						'compiler'  => 'false',
-						'desc'      => __( '', 'wpglobus' ),
+						'desc'      => __( 'Список доступных для вывода в меню языков, первый в списке это язык по умолчанию. Используйте иконки справа для изменения порядка.', 'wpglobus' ),
 						'subtitle'  => __( '', 'wpglobus' ),
 						'placeholder'   => 'navigation_menu_placeholder',
 						'options'   => $enabled_languages,
 						'mode'  	=> 'checkbox',
-						'class'		=> '',
-						'hint'      => array(
-							#'title'     => '',
-							'content'   => 'First language is language by default',
-						)
+						'class'		=> ''
 					),
 					array(
 						'id'        => 'more_languages',
@@ -176,7 +172,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'title'     => __( 'Add languages', 'wpglobus' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( 'Select language and click "Save Changes" for add to Enabled languages', 'wpglobus' ),
+						'desc'      => __( 'Выберите язык и жмите "Сохранить изменения" для добавления в список доступных языков', 'wpglobus' ),
 						'subtitle'  => '',
 						'placeholder'   => 'Select language',
 						'options'   => $more_languages,
@@ -187,7 +183,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'title'     => __( 'Url mode', 'wpglobus' ),
 						'compiler'  => 'false',
 						'mode'      => false,
-						'desc'      => __( '', 'wpglobus' ),
+						'desc'      => __( 'Выберите способ использования кода языка в URL', 'wpglobus' ),
 						'subtitle'  => __( '', 'wpglobus' ),
 						'placeholder'   => 'Select URL mode',
 						'options'   	=> $WPGlobus_Config->_getEnabledUrlMode(),
@@ -199,7 +195,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'title'     => __('Show flag name', 'wpglobus'),
 						'compiler'  => 'false',
 						'mode'      => false,
-						'desc'      => __( '', 'wpglobus' ),
+						'desc'      => __( 'Выберите режим отображения названия языка рядом с флагом', 'wpglobus' ),
 						'subtitle'  => __( '', 'wpglobus' ),
 						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1),
 						'options'   => array(
@@ -207,11 +203,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 							'name'  => 'Full language name',
 							'empty' => 'Don\'t show'
 						),
-						'default'  => 'code',
-						'hint'      => array(
-							//'title'     => '',
-							'content'   => 'Code - for example: &quot;en&quot;, &quot;ru&quot;',
-						)
+						'default'  => 'code'
 					),
 					array(
 						'id'        => 'use_nav_menu', # $WPGlobus_Config->nav_menu
@@ -219,7 +211,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'title'     => __( 'Use navigation menu', 'wpglobus' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( '', 'wpglobus' ),
+						'desc'      => __( 'Выберите навигационное меню, в котором будет выведен переключатель языков', 'wpglobus' ),
 						'subtitle'  => __( '', 'wpglobus' ),
 						'select2'	=> array('allowClear' => true, 'minimumResultsForSearch' => -1),
 						'options'   => $this->menus,
@@ -231,7 +223,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'type'      => 'ace_editor',
 						'title'     => __( 'Custom CSS', 'wpglobus' ),
 						'compiler'  => 'false',
-						'desc'      => __( '', 'wpglobus' ),
+						'desc'      => __( 'Укажите правила CSS, подходящие для активной темы, чтобы выровнять размеры ссылок по горизонтали до нужного размера. ', 'wpglobus' ),
 						'subtitle'  => __( '', 'wpglobus' ),
 						'default'   => '',
 						'rows'		=> 15,
