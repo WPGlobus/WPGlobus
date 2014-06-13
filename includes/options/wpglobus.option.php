@@ -67,7 +67,12 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			$title  = 'Current ReduxFramework version: ' . ReduxFramework::$_version . '<br /><br />';
 			$title .= 'Minimal needed version		 : ' . WPGlobus::$minimalReduxFramework_version ;
-			
+
+			if ( version_compare( ReduxFramework::$_version, WPGlobus::$minimalReduxFramework_version ) < 0 )  {
+				$title .= '<br /><br />';
+				$title .= '<div style="color:#f00;">' . __( 'You need to update Redux Framework for correct WPGlobus work.', 'wpglobus' ) . '</div>';
+			}
+
             $this->sections[] = array(
                 'title'     => __('Home Settings', 'redux-framework-demo'),
                 'desc'      => __('', 'redux-framework-demo'),
