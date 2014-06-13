@@ -15,7 +15,7 @@ include( dirname(__FILE__) . '/includes/wpglobus.config.php' );
 global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();
 
-include( dirname(__FILE__) . '/functions.php' );
+include( dirname(__FILE__) . '/includes/functions.php' );
 
 # extract url information
 $WPGlobus_Config->url_info = globus_extractURL( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '' );
