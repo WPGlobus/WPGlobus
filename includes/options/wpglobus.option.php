@@ -83,7 +83,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
                         'id'        => 'current_version',
                         'type'      => 'info',
                         'title'     => $title,
-                        'compiler'  => 'true',
                         'desc'      => __('', 'wpglobus'),
                         'subtitle'  => __('', 'wpglobus'),
                         'hint'      => array(
@@ -238,11 +237,20 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			/*
 			*	SECTION: Language table
 			*/
+			$title  = __( 'Используйте таблицу для добавления, редактирования или удаления языков. ', 'wpglobus' );
+			$title .= __( 'Внимание! Язык по умолчанию нельзя удалить.', 'wpglobus' );
 			$this->sections[] = array(
 				'title'     => __( 'Languages table', 'wpglobus' ),
 				'desc'      => __( '' ),
 				'icon'      => 'el-icon-th-list',
 				'fields'    => array(
+					array(
+						'id'        => 'description',
+						'type'      => 'info',
+						'title'     => $title,
+						'desc'      => __('', 'wpglobus'),
+						'subtitle'  => __('', 'wpglobus')
+					),
 					array(
 						'id'        => 'lang_new',
 						'type'      => 'table',
