@@ -64,7 +64,7 @@ class WPGlobus {
 
 		} else {
 			
-			$test_str = __( 'Test str', 'wpglobus' );
+			#$test_str = __( 'Test str', 'wpglobus' );
 			
 			$this->menus = $this->_get_nav_menus();
 
@@ -171,7 +171,7 @@ class WPGlobus {
 	 *
 	 * @return string
 	 */
-	function on_field_table($field){
+	function on_field_table(){
 		return dirname(__FILE__) . '/includes/options/fields/table/field_table.php';
 	}
 
@@ -217,7 +217,7 @@ class WPGlobus {
 	 *
 	 * @return string
 	 */
-	function on_wp_list_pages( $output, $r ) {
+	function on_wp_list_pages( $output ) {
 
 		global $WPGlobus_Config;
 
