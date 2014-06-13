@@ -74,8 +74,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			}
 
             $this->sections[] = array(
-                'title'     => __('Home Settings', 'redux-framework-demo'),
-                'desc'      => __('', 'redux-framework-demo'),
+                'title'     => __('Home Settings', 'wpglobus'),
+                'desc'      => __('', 'wpglobus'),
                 'icon'      => 'el-icon-home',
                 // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                 'fields'    => array(
@@ -84,8 +84,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
                         'type'      => 'info',
                         'title'     => $title,
                         'compiler'  => 'true',
-                        'desc'      => __('', 'redux-framework-demo'),
-                        'subtitle'  => __('', 'redux-framework-demo'),
+                        'desc'      => __('', 'wpglobus'),
+                        'subtitle'  => __('', 'wpglobus'),
                         'hint'      => array(
                             'title'     => '',
                             'content'   => '',
@@ -143,13 +143,13 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			 * for miniGLOBUS
 			 */
 			if ( empty( $this->menus ) ) {
-				$navigation_menu_placeholder = __('No navigation menu', 'redux-framework-demo');
+				$navigation_menu_placeholder = __('No navigation menu', 'wpglobus');
 			} else {
-				$navigation_menu_placeholder = __('Select navigation menu', 'redux-framework-demo');
+				$navigation_menu_placeholder = __('Select navigation menu', 'wpglobus');
 			}
 
 			$this->sections[] = array(
-				'title'     => __( 'Languages', 'redux-framework-demo' ),
+				'title'     => __( 'Languages', 'wpglobus' ),
 				'desc'      => __( '' ),
 				'icon'      => 'el-icon-user',
 				'fields'    => array(
@@ -157,10 +157,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'id'        => 'enabled_languages',
 						#'id'        => 'language_order',
 						'type'      => 'sortable',
-						'title'     => __( 'Enabled languages', 'redux-framework-demo' ),
+						'title'     => __( 'Enabled languages', 'wpglobus' ),
 						'compiler'  => 'false',
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '', 'wpglobus' ),
+						'subtitle'  => __( '', 'wpglobus' ),
 						'placeholder'   => 'navigation_menu_placeholder',
 						'options'   => $enabled_languages,
 						'mode'  	=> 'checkbox',
@@ -173,10 +173,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'more_languages',
 						'type'      => 'select',
-						'title'     => __( 'Add languages', 'redux-framework-demo' ),
+						'title'     => __( 'Add languages', 'wpglobus' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( 'Select language and click "Save Changes" for add to Enabled languages', 'redux-framework-demo' ),
+						'desc'      => __( 'Select language and click "Save Changes" for add to Enabled languages', 'wpglobus' ),
 						'subtitle'  => '',
 						'placeholder'   => 'Select language',
 						'options'   => $more_languages,
@@ -184,11 +184,11 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'url_mode',
 						'type'      => 'select',
-						'title'     => __( 'Url mode', 'redux-framework-demo' ),
+						'title'     => __( 'Url mode', 'wpglobus' ),
 						'compiler'  => 'false',
 						'mode'      => false,
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '', 'wpglobus' ),
+						'subtitle'  => __( '', 'wpglobus' ),
 						'placeholder'   => 'Select URL mode',
 						'options'   	=> $WPGlobus_Config->_getEnabledUrlMode(),
 						'default'  		=> ''
@@ -196,11 +196,11 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'show_flag_name',
 						'type'      => 'select',
-						'title'     => __('Show flag name', 'redux-framework-demo'),
+						'title'     => __('Show flag name', 'wpglobus'),
 						'compiler'  => 'false',
 						'mode'      => false,
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '', 'wpglobus' ),
+						'subtitle'  => __( '', 'wpglobus' ),
 						'select2'	=> array('allowClear' => false, 'minimumResultsForSearch' => -1),
 						'options'   => array(
 							'code'  => 'Code',
@@ -216,11 +216,11 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'use_nav_menu', # $WPGlobus_Config->nav_menu
 						'type'      => 'select',
-						'title'     => __( 'Use navigation menu', 'redux-framework-demo' ),
+						'title'     => __( 'Use navigation menu', 'wpglobus' ),
 						'compiler'  => 'false',
 						'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '', 'wpglobus' ),
+						'subtitle'  => __( '', 'wpglobus' ),
 						'select2'	=> array('allowClear' => true, 'minimumResultsForSearch' => -1),
 						'options'   => $this->menus,
 						'placeholder'   => $navigation_menu_placeholder,
@@ -229,10 +229,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
 					array(
 						'id'        => 'css_editor',
 						'type'      => 'ace_editor',
-						'title'     => __( 'Custom CSS', 'redux-framework-demo' ),
+						'title'     => __( 'Custom CSS', 'wpglobus' ),
 						'compiler'  => 'false',
-						'desc'      => __( '', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
+						'desc'      => __( '', 'wpglobus' ),
+						'subtitle'  => __( '', 'wpglobus' ),
 						'default'   => '',
 						'rows'		=> 15,
 						'hint'      => array(
@@ -247,16 +247,16 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			*	SECTION: Language table
 			*/
 			$this->sections[] = array(
-				'title'     => __( 'Languages table', 'redux-framework-demo' ),
+				'title'     => __( 'Languages table', 'wpglobus' ),
 				'desc'      => __( '' ),
 				'icon'      => 'el-icon-th-list',
 				'fields'    => array(
 					array(
 						'id'        => 'lang_new',
 						'type'      => 'table',
-						'title'     => __( 'Custom table', 'redux-framework-demo' ),
-						'subtitle'  => __( '', 'redux-framework-demo' ),
-						'desc'      => __( '', 'redux-framework-demo' ),
+						'title'     => __( 'Custom table', 'wpglobus' ),
+						'subtitle'  => __( '', 'wpglobus' ),
+						'desc'      => __( '', 'wpglobus' ),
 					)
 				)
 			);
@@ -268,18 +268,18 @@ if (!class_exists('Redux_Framework_globus_option')) {
             // Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
             $this->args['help_tabs'][] = array(
                 'id'        => 'redux-help-tab-1',
-                'title'     => __('Theme Information 1', 'redux-framework-demo'),
-                'content'   => __('<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo')
+                'title'     => __('Theme Information 1', 'wpglobus'),
+                'content'   => __('<p>This is the tab content, HTML is allowed.</p>', 'wpglobus')
             );
 
             $this->args['help_tabs'][] = array(
                 'id'        => 'redux-help-tab-2',
-                'title'     => __('Theme Information 2', 'redux-framework-demo'),
-                'content'   => __('<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo')
+                'title'     => __('Theme Information 2', 'wpglobus'),
+                'content'   => __('<p>This is the tab content, HTML is allowed.</p>', 'wpglobus')
             );
 
             // Set the help sidebar
-            $this->args['help_sidebar'] = __('<p>This is the sidebar content, HTML is allowed.</p>', 'redux-framework-demo');
+            $this->args['help_sidebar'] = __('<p>This is the sidebar content, HTML is allowed.</p>', 'wpglobus');
         }
 
         /**
@@ -300,8 +300,8 @@ if (!class_exists('Redux_Framework_globus_option')) {
                 'display_version'   => $theme->get('Version'),  // Version that appears at the top of your panel
                 'menu_type'         => 'menu',                  //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
                 'allow_sub_menu'    => true,                    // Show the sections below the admin menu item or not
-                'menu_title'        => __('WPGlobus', 'redux-framework-demo'),
-                'page_title'        => __('WPGlobus', 'redux-framework-demo'),
+                'menu_title'        => __('WPGlobus', 'wpglobus'),
+                'page_title'        => __('WPGlobus', 'wpglobus'),
                 
                 // You will need to generate a Google API key to use this feature.
                 // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
@@ -374,13 +374,13 @@ if (!class_exists('Redux_Framework_globus_option')) {
                 } else {
                     $v = str_replace('-', '_', $this->args['opt_name']);
                 }
-                $this->args['intro_text'] = sprintf( __( '', 'redux-framework-demo' ), $v );
+                $this->args['intro_text'] = sprintf( __( '', 'wpglobus' ), $v );
             } else {
-                $this->args['intro_text'] = __('<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework-demo');
+                $this->args['intro_text'] = __('<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'wpglobus');
             }
 
             // Add content after the form.
-            $this->args['footer_text'] = __( '', 'redux-framework-demo' );
+            $this->args['footer_text'] = __( '', 'wpglobus' );
         }
         
 		public function getReduxInfo() {
