@@ -93,10 +93,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
 			 * SECTION: languages
 			 */
 
-			/** @var $enabled_languages contains all enabled languages */
+			/** @var array $enabled_languages  contains all enabled languages */
 			$enabled_languages	= array();
 
-			/** @var $more_languages */
+			/** @var array $more_languages */
 			$more_languages 	= array();
 	
 			foreach ( $WPGlobus_Config->enabled_languages as $code ) {
@@ -313,7 +313,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
                 'page_priority'     => null,                    // Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
                 'page_parent'       => 'themes.php',            // For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
                 'page_permissions'  => 'manage_options',        // Permissions needed to access the options panel.
-                'menu_icon'         => '',                      // Specify a custom URL to an icon
+                'menu_icon'         => plugins_url( '../css/images/globus16.png', __FILE__ ),                      // Specify a custom URL to an icon
                 'last_tab'          => '',                      // Force your panel to always open to a specific tab (by id)
                 'page_icon'         => 'icon-themes',           // Icon displayed in the admin panel next to your menu_title
                 'page_slug'         => '_options',              // Page slug used to denote the panel
