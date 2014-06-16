@@ -217,14 +217,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
 						'type'      => 'ace_editor',
 						'title'     => __( 'Custom CSS', 'wpglobus' ),
 						'compiler'  => 'false',
-						'desc'      => __( 'Укажите правила CSS, подходящие для активной темы, чтобы выровнять размеры ссылок по горизонтали до нужного размера. ', 'wpglobus' ),
+						'desc'      => __( 'Укажите правила CSS, подходящие для активной темы, чтобы выровнять размеры ссылок по горизонтали до нужного размера. Примеры смотрите в файле readme.txt', 'wpglobus' ),
 						'subtitle'  => __( '', 'wpglobus' ),
 						'default'   => '',
-						'rows'		=> 15,
-						'hint'      => array(
-							'title'     => 'ADD SOME CSS',
-							'content'   => 'See file readme.txt in plugin directory',
-						)
+						'rows'		=> 15
 					)
 				)
 			);
