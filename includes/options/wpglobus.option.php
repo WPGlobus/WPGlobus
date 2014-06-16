@@ -285,10 +285,9 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
             $this->args = array(
                 // TYPICAL -> Change these values as you need/desire
-                #'opt_name'          => 'wpglobus_option',         // This is where your data is stored in the database and also becomes your global variable name.
                 'opt_name'          => $WPGlobus_Config->option,         // This is where your data is stored in the database and also becomes your global variable name.
-                'display_name'      => $theme->get('Name'),     // Name that appears at the top of your panel
-                'display_version'   => $theme->get('Version'),  // Version that appears at the top of your panel
+                'display_name'      => 'WPGlobus',     			// Name that appears at the top of your panel
+                'display_version'   => WPGlobus::$_version,     // Version that appears at the top of your panel
                 'menu_type'         => 'menu',                  //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
                 'allow_sub_menu'    => true,                    // Show the sections below the admin menu item or not
                 'menu_title'        => __('WPGlobus', 'wpglobus'),
