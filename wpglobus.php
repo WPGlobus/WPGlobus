@@ -28,6 +28,11 @@ class WPGlobus {
 	public static $minimalReduxFramework_version = '3.2.9.4';
 
 	/*
+	 * Options page slug needed to get access to settings page
+	 */
+	const OPTIONS_PAGE_SLUG = 'wpglobus_options';
+
+	/*
 	 * Language edit page
 	 */
 	const LANGUAGE_EDIT_PAGE = 'wpglobus_language_edit';
@@ -138,6 +143,16 @@ class WPGlobus {
 			);
 			wp_enqueue_style( 'select2' );
 		}
+
+		wp_register_style(
+			'globus.admin',
+			plugins_url( '/includes/css/globus.admin.css', __FILE__ ),
+			array(),
+			self::$_version,
+			'all'
+		);
+		wp_enqueue_style( 'globus.admin' );
+
 	}
 
 	/*

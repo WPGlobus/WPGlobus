@@ -150,7 +150,6 @@ if (!class_exists('Redux_Framework_globus_option')) {
 				'fields'    => array(
 					array(
 						'id'        => 'enabled_languages',
-						#'id'        => 'language_order',
 						'type'      => 'sortable',
 						'title'     => __( 'Enabled languages', 'wpglobus' ),
 						'compiler'  => 'false',
@@ -313,10 +312,10 @@ if (!class_exists('Redux_Framework_globus_option')) {
                 'page_priority'     => null,                    // Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
                 'page_parent'       => 'themes.php',            // For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
                 'page_permissions'  => 'manage_options',        // Permissions needed to access the options panel.
-                'menu_icon'         => plugins_url( '../css/images/globus16.png', __FILE__ ),                      // Specify a custom URL to an icon
+                'menu_icon'         => '',                      // Specify a custom URL to an icon
                 'last_tab'          => '',                      // Force your panel to always open to a specific tab (by id)
                 'page_icon'         => 'icon-themes',           // Icon displayed in the admin panel next to your menu_title
-                'page_slug'         => '_options',              // Page slug used to denote the panel
+                'page_slug'         => WPGlobus::OPTIONS_PAGE_SLUG,              // Page slug used to denote the panel
                 'save_defaults'     => true,                    // On load save the defaults to DB before user clicks save or not
                 'default_show'      => false,                   // If true, shows the default value next to each field that is not the default value.
                 'default_mark'      => '',                      // What to print by the field's title if the value shown is default. Suggested: *
