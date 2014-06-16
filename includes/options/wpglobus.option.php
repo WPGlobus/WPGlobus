@@ -281,7 +281,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			global $WPGlobus_Config;
 
-			$theme = wp_get_theme(); // For use with some settings. Not necessary.
+			#$theme = wp_get_theme(); // For use with some settings. Not necessary.
 
             $this->args = array(
                 // TYPICAL -> Change these values as you need/desire

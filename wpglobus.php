@@ -219,7 +219,7 @@ class WPGlobus {
 		foreach( $WPGlobus_Config->enabled_languages as $language) {
 			$css .= ".globus-flag-" . $language . " { background:url(" . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ") no-repeat }\n";
 		}
-		$css  .= $WPGlobus_Config->css_editor . "\n";
+		$css  .= strip_tags( $WPGlobus_Config->css_editor ) . "\n";
 		$css  .= "</style>\n";
 
 		echo $css;
