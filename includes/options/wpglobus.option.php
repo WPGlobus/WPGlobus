@@ -82,7 +82,7 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			if ( version_compare( ReduxFramework::$_version, WPGlobus::$minimalReduxFramework_version ) < 0 ) {
 				$fields_home[] =
 					array(
-						'id'     => 'wpglobus_version_warning',
+						'id'     => 'version_warning',
 						'type'   => 'info',
 						'title'  => __( 'WARNING: Redux Framework upgrade is highly recommended!', 'wpglobus' ),
 						'desc'   => sprintf(
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			 */
 			$fields_home[] =
 				array(
-					'id'     => 'wpglobus_welcome_intro',
+					'id'     => 'welcome_intro',
 					'type'   => 'info',
 					'title'  => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
 					'desc'   => '' .
@@ -148,6 +148,9 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 				$enabled_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
 			}
 
+			/**
+			 * @todo BUG: this part fails after "Reset All" options. $lang becomes array.
+			 */
 			/** Add language from 'more_language' option to array $enabled_languages */
 			if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
 				$lang       = $wpglobus_option['more_languages'];
