@@ -65,29 +65,63 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			$wpglobus_option = get_option( $WPGlobus_Config->option );
 
-			$title  = 'Current ReduxFramework version: ' . ReduxFramework::$_version . '<br /><br />';
-			$title .= 'Minimal needed version		 : ' . WPGlobus::$minimalReduxFramework_version ;
 
-			if ( version_compare( ReduxFramework::$_version, WPGlobus::$minimalReduxFramework_version ) < 0 )  {
-				$title .= '<br /><br />';
-				$title .= '<div style="color:#f00;">' . __( 'You need to update Redux Framework for correct WPGlobus work.', 'wpglobus' ) . '</div>';
+			$fields_home = array();
+
+			/**
+			 * Display warning if an old Redux is loaded
+			 * @todo Add link to FAQ explaining what to do.
+			 * @todo Tell the admin what did we load (plugin or someone else's Redux)
+			 */
+			if ( version_compare( ReduxFramework::$_version, WPGlobus::$minimalReduxFramework_version ) < 0 ) {
+				$fields_home[] =
+					array(
+						'id'     => 'wpglobus_version_warning',
+						'type'   => 'info',
+						'title'  => __( 'WARNING: Redux Framework upgrade is highly recommended!', 'wpglobus' ),
+						'desc'   => sprintf(
+							__( 'WPGlobus administration panel requires Redux Framework %2$s or later. The version you have installed is %1$s.' ),
+							ReduxFramework::$_version,
+							WPGlobus::$minimalReduxFramework_version
+						),
+						'style'  => 'critical',
+						'notice' => true,
+					);
 			}
 
-            $this->sections[] = array(
-                'title'     => __('Home Settings', 'wpglobus'),
-                'desc'      => __('', 'wpglobus'),
-                'icon'      => 'el-icon-home',
-                // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
-                'fields'    => array(
-					array(
-                        'id'        => 'current_version',
-                        'type'      => 'info',
-                        'title'     => $title,
-                        'desc'      => __( '', 'wpglobus' ),
-                        'subtitle'  => __( '', 'wpglobus' )
-                    )
-                )
-            );
+			/**
+			 * The Welcome message
+			 * @todo Link to Contact Us (site, Github)
+			 */
+			$fields_home[] =
+				array(
+					'id'     => 'wpglobus_welcome_intro',
+					'type'   => 'info',
+					'title'  => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
+					'desc' => ''.
+						'<br/>' .
+						'&bull; ' . __( 'Please click on the <strong>[Languages]</strong> tab at the left to setup the various options.', 'wpglobus' ) .
+						'<br/>' .
+						'&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
+						'<br/>' .
+						'<br/>' .
+						__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
+						'<br/>' .
+						'<em>' .
+						__( 'Sincerely Yours,', 'wpglobus' ).
+						'<br/>' .
+						__( 'The WPGlobus Team', 'wpglobus' ).
+						'<em>' .
+					'',
+					'style'  => 'info',
+					'notice' => false,
+				);
+
+			$this->sections[] = array(
+				'title'  => __( 'Welcome!', 'wpglobus' ),
+				'icon'   => 'el-icon-globe',
+				'fields' => $fields_home
+			);
 
 			/*
 			 * SECTION: languages
@@ -145,7 +179,7 @@ if (!class_exists('Redux_Framework_globus_option')) {
 
 			$this->sections[] = array(
 				'title'     => __( 'Languages', 'wpglobus' ),
-				'desc'      => __( '' ),
+//				'desc'      => __( '' ),
 				'icon'      => 'el-icon-user',
 				'fields'    => array(
 					array(
