@@ -28,24 +28,39 @@
 */
 
 // Exit if accessed directly
-if ( !defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-include( dirname(__FILE__) . '/includes/wpglobus.config.php' );
+require_once 'includes/wpglobus.config.php';
+require_once 'includes/functions.php';
+require_once 'class-wpglobus.php';
+
 global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();
 
-include( dirname(__FILE__) . '/includes/functions.php' );
-
-# extract url information
-$WPGlobus_Config->url_info = globus_extractURL( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '' );
+/**
+ * Extract url information
+ * @todo Why not within the class constructor?
+ */
+$WPGlobus_Config->url_info = globus_extractURL(
+	$_SERVER['REQUEST_URI'],
+	$_SERVER['HTTP_HOST'],
+	isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+);
 $WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
-
-require_once 'class-wpglobus.php';
-add_action( 'init', 'WPGlobus_init' );
 
 /**
  * Start WPGlobus on "init" hook, so if there is another ReduxFramework, it will be loaded first. Hopefully :-)
+ * Note: "init" hook is not guaranteed to stay in the future versions.
+ */
+add_action( 'init', 'WPGlobus_init' );
+
+/**
+ * Initialize WPGlobus
  */
 function WPGlobus_init() {
 	$GLOBALS['WPGlobus'] = new WPGlobus();
 }
+
+# --- EOF
