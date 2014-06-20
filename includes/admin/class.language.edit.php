@@ -127,7 +127,7 @@ class WPGlobus_language_edit {
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
 		/** @todo make "$location" available from WPGlobus_Config */
-		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=_options';
+		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 		wp_redirect( $location );
 
 	}
@@ -204,7 +204,7 @@ class WPGlobus_language_edit {
 		if ( $update_code ) {
 			/** @todo make "$location" available from WPGlobus_Config */
 			$location =
-				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=_options';
+				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 			wp_redirect( $location );
 		}
 	}

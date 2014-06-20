@@ -148,9 +148,6 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 				$enabled_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
 			}
 
-			/**
-			 * @todo BUG: this part fails after "Reset All" options. $lang becomes array.
-			 */
 			/** Add language from 'more_language' option to array $enabled_languages */
 			if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
 

@@ -101,6 +101,7 @@ class WPGlobus {
 
 	/**
 	 * Enqueue admin scripts
+	 *
 	 * @return void
 	 */
 	function on_admin_scripts() {

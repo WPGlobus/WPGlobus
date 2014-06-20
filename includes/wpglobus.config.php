@@ -79,6 +79,7 @@ class WPGlobus_Config {
 	/*
 	 * Location of flags (needs trailing slash!)
 	 * 'plugins/globus/flags/';
+	 *
 	 * @var string
 	 */
 	var $flags_url = '';
@@ -294,7 +295,22 @@ class WPGlobus_Config {
 	 */
 	function _get_options(){
 
-		$wpglobus_option = get_option($this->option);
+		$wpglobus_option = get_option( $this->option );
+
+		/*
+		 * FIX: after "Reset All" Redux options we must reset all WPGlobus options
+		 * first of all look at $wpglobus_option['more_languages']
+		 */
+		if ( isset( $wpglobus_option['more_languages'] ) && is_array( $wpglobus_option['more_languages'] ) ) {
+
+			$wpglobus_option = array();
+			delete_option( $this->option );
+			delete_option( $this->option_language_names );
+			delete_option( $this->option_en_language_names );
+			delete_option( $this->option_locale );
+			delete_option( $this->option_flags );
+
+		}
 
 		/*
 		 * Get enabled languages and default language ( just one main language )
@@ -339,16 +355,24 @@ class WPGlobus_Config {
 		 * Get languages name
 		 * big array of used languages
 		 */
-		$this->language_name  = get_option($this->option_language_names);
-		if ( empty( $this->language_name )  ) {
+		$this->language_name = get_option( $this->option_language_names );
+
+		if ( empty( $this->language_name ) ) {
+
 			$this->_set_languages();
 			$this->_set_default_options();
-		} else {
-			$this->language_name  	= get_option( $this->option_language_names );
-			$this->en_language_name = get_option( $this->option_en_language_names );
-			$this->locale 			= get_option( $this->option_locale );
-			$this->flag 			= get_option( $this->option_flags );
+
 		}
+
+		/*
+		 * Get locales
+		 */
+		$this->locale = get_option( $this->option_locale );
+
+		/*
+		 * Get en_language_name
+		 */
+		$this->en_language_name = get_option( $this->option_en_language_names );
 
 		/*
 		 * Get option 'show_flag_name'
@@ -367,6 +391,7 @@ class WPGlobus_Config {
 		/*
 		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'
 		 */
+		$this->nav_menu = '';
 		if ( isset($wpglobus_option['use_nav_menu']) ) {
 			$this->nav_menu = ( $wpglobus_option['use_nav_menu'] == 'all' ) ? '' : $wpglobus_option['use_nav_menu'];
 		}
