@@ -110,8 +110,15 @@ class WPGlobus_language_edit {
 		$opts = get_option( $WPGlobus_Config->option );
 
 		if ( isset( $opts['enabled_languages'][$this->language_code] ) ) {
+
 			unset( $opts['enabled_languages'][$this->language_code] );
+
+			/** FIX: reset $opts['more_languages'] */
+			if ( array_key_exists( 'more_languages', $opts ) ) {
+				$opts['more_languages'] = '';
+			}
 			update_option( $WPGlobus_Config->option, $opts );
+
 		}
 
 		unset( $WPGlobus_Config->language_name[$this->language_code] );
