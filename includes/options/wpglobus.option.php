@@ -125,7 +125,7 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 
 			$this->sections[] = array(
 				'title'  => __( 'Welcome!', 'wpglobus' ),
-				'icon'   => 'el-icon-globe',
+				'icon'   => 'el-icon-dribbble',
 				'fields' => $fields_home
 			);
 
@@ -193,59 +193,68 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			$this->sections[] = array(
 				'title'  => __( 'Languages', 'wpglobus' ),
 				//				'desc'      => __( '' ),
-				'icon'   => 'el-icon-user',
+				'icon'   => 'el-icon-wrench-alt',
 				'fields' => array(
 					array(
 						'id'          => 'enabled_languages',
 						'type'        => 'sortable',
-						'title'       => __( 'Enabled languages', 'wpglobus' ),
+						'title'       => __( 'Enabled Languages', 'wpglobus' ),
 						'compiler'    => 'false',
-						'desc'        => __( 'Список доступных для вывода в меню языков, первый в списке это язык по умолчанию. Используйте иконки справа для изменения порядка.', 'wpglobus' ),
-						'subtitle'    => __( '', 'wpglobus' ),
+						'desc'        => __( 'The first language in the list is the default one. <br>To reorder, drag and drop with the icons at the right.', 'wpglobus' ),
+						//						'desc'        => __( 'Список доступных для вывода в меню языков, первый в списке это язык по умолчанию. Используйте иконки справа для изменения порядка.', 'wpglobus' ),
+						'subtitle'    => __( 'Uncheck to remove from the list', 'wpglobus' ),
 						'placeholder' => 'navigation_menu_placeholder',
 						'options'     => $enabled_languages,
 						'mode'        => 'checkbox',
-						'class'       => ''
 					),
 					array(
 						'id'          => 'more_languages',
 						'type'        => 'select',
-						'title'       => __( 'Add languages', 'wpglobus' ),
+						'title'       => __( 'Add Languages', 'wpglobus' ),
 						'compiler'    => 'false',
 						'mode'        => false,
-						// Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'        => __( 'Выберите язык и жмите "Сохранить изменения" для добавления в список доступных языков', 'wpglobus' ),
-						'subtitle'    => '',
-						'placeholder' => 'Select language',
+						'desc'        => __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ),
+						//						'desc'        => __( 'Выберите язык и жмите "Сохранить изменения" для добавления в список доступных языков', 'wpglobus' ),
+						//						'subtitle'    => '',
+						'placeholder' => __( 'Select a language', 'wpglobus' ),
 						'options'     => $more_languages,
 					),
 					array(
 						'id'          => 'url_mode',
 						'type'        => 'select',
-						'title'       => __( 'Url mode', 'wpglobus' ),
+						'title'       => __( 'URL Mode', 'wpglobus' ),
 						'compiler'    => 'false',
 						'mode'        => false,
-						'desc'        => __( 'Выберите способ использования кода языка в URL', 'wpglobus' ),
-						'subtitle'    => __( '', 'wpglobus' ),
-						'placeholder' => 'Select URL mode',
+						'desc'        => '' .
+							__( 'Path Mode:', 'wpglobus' ) .
+							' ' . trailingslashit( home_url() ) . '<strong>en</strong>/page/' .
+							' <br> ' .
+							__( 'Query Mode:', 'wpglobus' ) .
+							' ' . trailingslashit( home_url() ) . 'page/?lang=<strong>en</strong>' .
+							'',
+						//						'desc'        => __( 'Выберите способ использования кода языка в URL', 'wpglobus' ),
+						'subtitle'    => __( 'Choose the method of URL modification', 'wpglobus' ),
+						'placeholder' => __( 'Select URL Mode', 'wpglobus' ),
 						'options'     => $WPGlobus_Config->_getEnabledUrlMode(),
-						'default'     => ''
+						'default'     => $WPGlobus_Config::GLOBUS_URL_PATH
 					),
 					array(
 						'id'       => 'show_flag_name',
 						'type'     => 'select',
-						'title'    => __( 'Show flag name', 'wpglobus' ),
+						'title'    => __( 'Language Selector Mode', 'wpglobus' ),
 						'compiler' => 'false',
 						'mode'     => false,
-						'desc'     => __( 'Выберите режим отображения названия языка рядом с флагом', 'wpglobus' ),
-						'subtitle' => __( '', 'wpglobus' ),
-						'select2'  => array( 'allowClear'              => false,
-											 'minimumResultsForSearch' => - 1
+						'desc'     => __( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' ),
+						//						'desc'     => __( 'Выберите режим отображения названия языка рядом с флагом', 'wpglobus' ),
+						//						'subtitle' => __( '', 'wpglobus' ),
+						'select2'  => array(
+							'allowClear'              => false,
+							'minimumResultsForSearch' => - 1
 						),
 						'options'  => array(
-							'code'  => 'Code',
-							'name'  => 'Full language name',
-							'empty' => 'Don\'t show'
+							'code'  => __( 'Two-letter Code (EN, RU, IT, etc.)', 'wpglobus' ),
+							'name'  => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
+							'empty' => __( 'Flags only', 'wpglobus' )
 						),
 						'default'  => 'code'
 					),
@@ -253,27 +262,28 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 						'id'          => 'use_nav_menu',
 						# $WPGlobus_Config->nav_menu
 						'type'        => 'select',
-						'title'       => __( 'Use navigation menu', 'wpglobus' ),
+						'title'       => __( 'Language Selector Menu', 'wpglobus' ),
 						'compiler'    => 'false',
 						'mode'        => false,
-						// Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'        => __( 'Выберите навигационное меню, в котором будет выведен переключатель языков', 'wpglobus' ),
-						'subtitle'    => __( '', 'wpglobus' ),
+						'desc'        => __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+						//						'desc'        => __( 'Выберите навигационное меню, в котором будет выведен переключатель языков', 'wpglobus' ),
+						//						'subtitle'    => __( '', 'wpglobus' ),
 						'select2'     => array(
 							'allowClear'              => true,
 							'minimumResultsForSearch' => - 1
 						),
 						'options'     => $this->menus,
 						'placeholder' => $navigation_menu_placeholder,
-						'default'     => 'code'
+						//						'default'     => 'code'
 					),
 					array(
 						'id'       => 'css_editor',
 						'type'     => 'ace_editor',
 						'title'    => __( 'Custom CSS', 'wpglobus' ),
 						'compiler' => 'false',
-						'desc'     => __( 'Укажите правила CSS, подходящие для активной темы, чтобы выровнять размеры ссылок по горизонтали до нужного размера. Примеры смотрите в файле readme.txt', 'wpglobus' ),
-						'subtitle' => __( '', 'wpglobus' ),
+						'desc'     => __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `readme.txt` file.', 'wpglobus' ),
+						//						'desc'     => __( 'Укажите правила CSS, подходящие для активной темы, чтобы выровнять размеры ссылок по горизонтали до нужного размера. Примеры смотрите в файле readme.txt', 'wpglobus' ),
+						'subtitle' => __( '(Optional)', 'wpglobus' ),
 						'default'  => '',
 						'rows'     => 15
 					)
@@ -283,26 +293,25 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			/*
 			*	SECTION: Language table
 			*/
-			$title = __( 'Используйте таблицу для добавления, редактирования или удаления языков. ', 'wpglobus' );
-			$title .= __( 'Внимание! Язык по умолчанию нельзя удалить.', 'wpglobus' );
 			$this->sections[] = array(
 				'title'  => __( 'Languages table', 'wpglobus' ),
-				'desc'   => __( '' ),
 				'icon'   => 'el-icon-th-list',
 				'fields' => array(
 					array(
 						'id'       => 'description',
 						'type'     => 'info',
-						'title'    => $title,
-						'desc'     => __( '', 'wpglobus' ),
-						'subtitle' => __( '', 'wpglobus' )
+						'title'    => __( 'Use this table to add, edit or delete languages.', 'wpglobus' ),
+						'subtitle' => __( 'NOTE: you cannot delete the default language.', 'wpglobus' ),
+						//						'title'    => __( 'Используйте таблицу для добавления, редактирования или удаления языков.', 'wpglobus' ),
+						//						'subtitle' => __( 'Внимание! Язык по умолчанию нельзя удалить.', 'wpglobus' ),
+						'style'    => 'info',
 					),
 					array(
-						'id'       => 'lang_new',
-						'type'     => 'table',
-						'title'    => __( 'Custom table', 'wpglobus' ),
-						'subtitle' => __( '', 'wpglobus' ),
-						'desc'     => __( '', 'wpglobus' ),
+						'id'    => 'lang_new',
+						'type'  => 'table',
+						'title' => __( 'Custom table', 'wpglobus' ),
+						//						'subtitle' => __( '', 'wpglobus' ),
+						//						'desc'     => __( '', 'wpglobus' ),
 					)
 				)
 			);
@@ -310,22 +319,22 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 		}
 
 		public function setHelpTabs() {
-
+			$this->args['help_tabs']    = array();
+			$this->args['help_sidebar'] = '';
 			// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
-			$this->args['help_tabs'][] = array(
-				'id'      => 'redux-help-tab-1',
-				'title'   => __( 'Theme Information 1', 'wpglobus' ),
-				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'wpglobus' )
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'redux-help-tab-2',
-				'title'   => __( 'Theme Information 2', 'wpglobus' ),
-				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'wpglobus' )
-			);
-
+			//			$this->args['help_tabs'][] = array(
+			//				'id'      => 'redux-help-tab-1',
+			//				'title'   => __( 'Theme Information 1', 'wpglobus' ),
+			//				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'wpglobus' )
+			//			);
+			//
+			//			$this->args['help_tabs'][] = array(
+			//				'id'      => 'redux-help-tab-2',
+			//				'title'   => __( 'Theme Information 2', 'wpglobus' ),
+			//				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'wpglobus' )
+			//			);
 			// Set the help sidebar
-			$this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'wpglobus' );
+			//			$this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'wpglobus' );
 		}
 
 		/**
@@ -439,22 +448,23 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			);
 
 			// Panel Intro text -> before the form
-			if ( ! isset( $this->args['global_variable'] ) || $this->args['global_variable'] !== false ) {
-				if ( ! empty( $this->args['global_variable'] ) ) {
-					$v = $this->args['global_variable'];
-				}
-				else {
-					$v = str_replace( '-', '_', $this->args['opt_name'] );
-				}
-				$this->args['intro_text'] = sprintf( __( '', 'wpglobus' ), $v );
-			}
-			else {
-				$this->args['intro_text'] =
-					__( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'wpglobus' );
-			}
+//			if ( ! isset( $this->args['global_variable'] ) || $this->args['global_variable'] !== false ) {
+//				if ( ! empty( $this->args['global_variable'] ) ) {
+//					$v = $this->args['global_variable'];
+//				}
+//				else {
+//					$v = str_replace( '-', '_', $this->args['opt_name'] );
+//				}
+//				$this->args['intro_text'] = sprintf( __( '', 'wpglobus' ), $v );
+//			}
+//			else {
+//				$this->args['intro_text'] =
+//					__( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'wpglobus' );
+//			}
+			$this->args['intro_text'] = '';
 
 			// Add content after the form.
-			$this->args['footer_text'] = __( '', 'wpglobus' );
+			$this->args['footer_text'] = '&copy; Copyright 2014, WPGlobus.';
 		}
 
 		public function getReduxInfo() {
