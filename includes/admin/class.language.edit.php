@@ -327,7 +327,7 @@ class WPGlobus_language_edit {
 			<form method="post" action="">
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="language_code">Language code</label></th>
+						<th scope="row"><label for="language_code"><?php _e( 'Language code', 'wpglobus' ); ?></label></th>
 						<td>
 							<input name="language_code" <?php echo $disabled; ?> type="text" id="language_code"
 								   value="<?php echo $this->language_code; ?>" class="regular-text"/>
@@ -336,7 +336,7 @@ class WPGlobus_language_edit {
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="flags">Language flag</label></th>
+						<th scope="row"><label for="flags"><?php _e( 'Language flag', 'wpglobus' ); ?></label></th>
 						<td>
 							<select id="flags" name="flags" style="width:300px;" class="populate">    <?php
 								foreach ( $this->all_flags as $file_name ) :
@@ -354,26 +354,26 @@ class WPGlobus_language_edit {
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="language_name">Name</label></th>
+						<th scope="row"><label for="language_name"><?php _e( 'Name', 'wpglobus' ); ?></label></th>
 						<td><input name="language_name" type="text" id="language_name"
 								   value="<?php echo $this->language_name; ?>" class="regular-text"/>
 
-							<p class="description">The Name of the language, which will be displayed on the site.
-								(Example: English)</p></td>
+							<p class="description"><?php _e( 'The Name of the language, which will be displayed on the site.
+								(Example: English)', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="en_language_name">Name in English</label></th>
+						<th scope="row"><label for="en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
 						<td><input name="en_language_name" type="text" id="en_language_name"
 								   value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
 
-							<p class="description">The Name of the language in English</p></td>
+							<p class="description"><?php _e( 'The Name of the language in English', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="locale">Locale</label></th>
+						<th scope="row"><label for="locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
 						<td><input name="locale" type="text" id="locale" value="<?php echo $this->locale; ?>"
 								   class="regular-text"/>
 
-							<p class="description">PHP and Wordpress Locale for the language. (Example: en_US)</p></td>
+							<p class="description"><?php _e( 'PHP and Wordpress Locale for the language. (Example: en_US)', 'wpglobus' ); ?></p></td>
 					</tr>
 				</table>    <?php
 
