@@ -153,7 +153,8 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			 */
 			/** Add language from 'more_language' option to array $enabled_languages */
 			if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
-				$lang       = $wpglobus_option['more_languages'];
+
+				$lang = $wpglobus_option['more_languages'];
 				$lang_in_en = '';
 				if ( isset( $WPGlobus_Config->en_language_name[$lang] ) && ! empty( $WPGlobus_Config->en_language_name[$lang] ) ) {
 					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$lang] . ')';
@@ -164,6 +165,7 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 				$wpglobus_option['enabled_languages'][$wpglobus_option['more_languages']] =
 					$WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
 				update_option( $WPGlobus_Config->option, $wpglobus_option );
+
 			}
 
 			/** Generate array $more_languages */
