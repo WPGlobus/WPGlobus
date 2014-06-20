@@ -5,7 +5,7 @@
  */
 class WPGlobus {
 
-	public static $_version = '0.2';
+	public static $_version = '0.3.0';
 
 	public static $minimalReduxFramework_version = '3.2.9.4';
 

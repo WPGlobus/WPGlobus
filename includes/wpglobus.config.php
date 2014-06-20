@@ -164,8 +164,22 @@ class WPGlobus_Config {
 	 * Constructor
 	 */
 	function __construct() {
-		#
+
+		add_action( 'plugins_loaded', array(
+			$this,
+			'on_load_textdomain'
+		) );
+		
 		$this->_get_options();
+	}
+
+	/**
+	 * Load textdomain
+	 *
+	 * @return void
+	 */
+	function on_load_textdomain() {
+		load_plugin_textdomain( 'wpglobus', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/*
