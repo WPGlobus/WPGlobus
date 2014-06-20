@@ -225,27 +225,27 @@ class WPGlobus_language_edit {
 	function check_fields( $lang_code, $check_code = true ) {
 		$this->submit_messages['errors'] = array();
 		if ( $check_code && empty( $lang_code ) ) {
-			$this->submit_messages['errors'][] = 'Need language code !';
+			$this->submit_messages['errors'][] = __( 'Need language code !', 'wpglobus' );
 		}
 
 		if ( $check_code && $this->language_exists( $lang_code ) ) {
-			$this->submit_messages['errors'][] = 'Language code already exists !';
+			$this->submit_messages['errors'][] = __( 'Language code already exists !', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['flags'] ) ) {
-			$this->submit_messages['errors'][] = 'Need language flag !';
+			$this->submit_messages['errors'][] = __( 'Need language flag !', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['language_name'] ) ) {
-			$this->submit_messages['errors'][] = 'Need language name !';
+			$this->submit_messages['errors'][] = __( 'Need language name !', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['en_language_name'] ) ) {
-			$this->submit_messages['errors'][] = 'Need language name in English !';
+			$this->submit_messages['errors'][] = __( 'Need language name in English !', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['locale'] ) ) {
-			$this->submit_messages['errors'][] = 'Need locale !';
+			$this->submit_messages['errors'][] = __( 'Need locale !', 'wpglobus' );
 		}
 
 		$this->language_code    = $lang_code;
