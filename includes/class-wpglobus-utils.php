@@ -143,9 +143,9 @@ class WPGlobus_Utils {
 
 		global $WPGlobus_Config;
 
-		$home         = globus_parseURL( get_option( 'home' ) );
+		$home         = self::parse_url( get_option( 'home' ) );
 		$home['path'] = trailingslashit( $home['path'] );
-		$referer      = globus_parseURL( $referer );
+		$referer      = self::parse_url( $referer );
 
 		$result                     = array();
 		$result['language']         = $WPGlobus_Config->default_language;
@@ -163,7 +163,7 @@ class WPGlobus_Utils {
 				if ( $url ) {
 					// might have language information
 					if ( preg_match( "#^([a-z]{2})(/.*)?$#i", $url, $match ) ) {
-						if ( globus_isEnabled( $match[1] ) ) {
+						if ( self::is_enabled( $match[1] ) ) {
 							// found language information
 							$result['language'] = $match[1];
 							$result['url']      = $home['path'] . substr( $url, 3 );
@@ -175,7 +175,7 @@ class WPGlobus_Utils {
 				// pre domain
 				if ( $host ) {
 					if ( preg_match( "#^([a-z]{2}).#i", $host, $match ) ) {
-						if ( globus_isEnabled( $match[1] ) ) {
+						if ( self::is_enabled( $match[1] ) ) {
 							// found language information
 							$result['language'] = $match[1];
 							$result['host']     = substr( $host, 3 );
@@ -186,12 +186,12 @@ class WPGlobus_Utils {
 		}
 
 		// check if referer is internal
-		if ( $referer['host'] == $result['host'] && globus_startsWith( $referer['path'], $home['path'] ) ) {
+		if ( $referer['host'] == $result['host'] && self::starts_with( $referer['path'], $home['path'] ) ) {
 			// user coming from internal link
 			$result['internal_referer'] = true;
 		}
 
-		if ( isset( $_GET['lang'] ) && globus_isEnabled( $_GET['lang'] ) ) {
+		if ( isset( $_GET['lang'] ) && self::is_enabled( $_GET['lang'] ) ) {
 			// language override given
 			$result['language'] = $_GET['lang'];
 			$result['url']      = preg_replace( "#(&|\?)lang=" . $result['language'] . "&?#i", "$1", $result['url'] );
@@ -208,7 +208,7 @@ class WPGlobus_Utils {
 			else {
 				// check if activating language detection is possible
 				if ( preg_match( "#^([a-z]{2}).#i", $referer['host'], $match ) ) {
-					if ( globus_isEnabled( $match[1] ) ) {
+					if ( self::is_enabled( $match[1] ) ) {
 						// found language information
 						$referer['host'] = substr( $referer['host'], 3 );
 					}

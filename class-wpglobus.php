@@ -274,13 +274,13 @@ class WPGlobus {
 		$span_classes_lang[] = 'globus-flag-' . $WPGlobus_Config->language;
 
 		$output .= '<li class="page_item page-item-globus-menu-switch page_item_has_children">
-						<a href="' . globus_getUrl( $WPGlobus_Config->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span></a>
+						<a href="' . WPGlobus_Utils::get_url( $WPGlobus_Config->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span></a>
 						<ul class="children">';
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   = $span_classes;
 			$span_classes_lang[] = 'globus-flag-' . $language;
 			$output .= '<li id="" class="page_item">
-								<a href="' . globus_getUrl( $language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span></a>
+								<a href="' . WPGlobus_Utils::get_url( $language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span></a>
 							</li>';
 		} // end foreach
 		$output .= '	</ul>
