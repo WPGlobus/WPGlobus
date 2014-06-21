@@ -42,7 +42,7 @@ class WPGlobus_Utils {
 			}
 			else {
 
-				$arr = globus_extractURL( $WPGlobus_Config->url_info['url'] );
+				$arr = self::extract_url( $WPGlobus_Config->url_info['url'] );
 
 				if ( false === strpos( $arr['url'], '?' ) ) {
 					$url = '?';
