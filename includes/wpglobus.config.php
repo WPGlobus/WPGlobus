@@ -179,7 +179,7 @@ class WPGlobus_Config {
 	 * @return void
 	 */
 	function on_load_textdomain() {
-		load_plugin_textdomain( 'wpglobus', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages/' );
 	}
 
 	/*
