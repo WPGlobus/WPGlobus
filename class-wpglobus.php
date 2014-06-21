@@ -344,7 +344,7 @@ class WPGlobus {
 		$item->menu_item_parent = 0;
 		$item->title            =
 			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span>';
-		$item->url              = globus_getUrl( $WPGlobus_Config->language );
+		$item->url              = WPGlobus_Utils::get_url( $WPGlobus_Config->language );
 		$item->classes          = $menu_item_classes;
 
 		$sorted_menu_items[] = $item;
@@ -359,7 +359,7 @@ class WPGlobus {
 			$item->menu_item_parent = 9999999999;
 			$item->title            =
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
-			$item->url              = globus_getUrl( $language );
+			$item->url              = WPGlobus_Utils::get_url( $language );
 			$item->classes          = $submenu_item_classes;
 
 			$sorted_menu_items[] = $item;
