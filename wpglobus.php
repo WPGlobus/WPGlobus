@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once 'includes/wpglobus.config.php';
 require_once 'includes/class-wpglobus-utils.php';
-require_once 'class-wpglobus.php';
+require_once 'includes/class-wpglobus.php';
 
 global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();

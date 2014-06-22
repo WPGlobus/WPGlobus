@@ -3,6 +3,9 @@ if( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
+/**
+ * Class LanguagesTable
+ */
 class LanguagesTable extends WP_List_table {
 
 	var $data = array();
@@ -103,7 +106,7 @@ class LanguagesTable extends WP_List_table {
 	}
 
 	function no_items() {
-		_e( 'No items found, dude.' );
+		_e( 'No items found', 'wpglobus' );
 	}
 
 	function display_table() {
@@ -111,7 +114,7 @@ class LanguagesTable extends WP_List_table {
 		$this->prepare_items();
 		?>
 		<div class="flag-table-wrapper">
-			<a id="add_language1111" href="/wp-admin/admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>&action=add" class="button button-primary" value="Add new language">Add new language</a>
+			<a id="add_language" href="<?php admin_url(); ?>admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>&amp;action=add" class="button button-primary"><?php esc_html_e('Add new Language'); ?></a>
 
 			<?php  /** @todo remove dummy */   
 				//$this->prepare_dummy_items(); ?>
@@ -171,7 +174,7 @@ class LanguagesTable extends WP_List_table {
 		$this->process_row_action();
 
 
-		usort( $this->data, array( &$this, 'usort_reorder' ) );
+		usort( $this->data, array( $this, 'usort_reorder' ) );
 
 		$per_page = 1000;
 		$current_page 	= $this->get_pagenum();
@@ -213,6 +216,19 @@ class LanguagesTable extends WP_List_table {
 
 	}
 
+	/**
+	 * Get a list of sortable columns. The format is:
+	 * 'internal-name' => 'orderby'
+	 * or
+	 * 'internal-name' => array( 'orderby', true )
+	 *
+	 * The second format will make the initial sorting order be descending
+	 *
+	 * @since 3.1.0
+	 * @access protected
+	 *
+	 * @return array
+	 */
 	function get_sortable_columns() {
 		$sortable_columns = array();
 		foreach ( $this->table_fields as $field=>$attrs ) {
@@ -238,7 +254,7 @@ class LanguagesTable extends WP_List_table {
 	function usort_reorder( $a, $b ) {
 		// If no sort, get the default
 		$i=0;
-		$default_field = 'source';
+		$field = $default_field = 'source';
 
 		foreach ( $this->table_fields as $field=>$attrs) {
 			$default_field = ($i==0) ? $field : $default_field;
@@ -289,7 +305,7 @@ class LanguagesTable extends WP_List_table {
 	 */
 	function column_code( $item  ) {
 
-		if ( isset( $this->table_fields['code']['actions'] ) && !empty( isset( $this->table_fields['code']['actions'] ) ) ) {
+		if ( !empty( $this->table_fields['code']['actions'] ) ) {
 
 			global $WPGlobus_Config;
 

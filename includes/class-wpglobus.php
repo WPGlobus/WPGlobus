@@ -37,10 +37,10 @@ class WPGlobus {
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
 				/** @todo Here we can set a flag to know that we are using the embedded Redux */
-				require_once 'Redux-Framework/ReduxCore/framework.php';
+				require_once '../Redux-Framework/ReduxCore/framework.php';
 			}
 
-			require_once 'includes/options/wpglobus.option.php';
+			require_once 'options/wpglobus.option.php';
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
@@ -114,7 +114,7 @@ class WPGlobus {
 			/** @todo Why needed? What if redux is loaded not from here? */
 			wp_register_script(
 				'select2',
-				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
+				plugins_url( '/../Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
 				array( 'jquery' ),
 				self::$_version,
 				true
@@ -123,7 +123,7 @@ class WPGlobus {
 
 			wp_register_script(
 				'admin-globus',
-				plugins_url( '/includes/js/admin.globus.js', __FILE__ ),
+				plugins_url( '/js/admin.globus.js', __FILE__ ),
 				array( 'jquery' ),
 				self::$_version,
 				true
@@ -157,7 +157,7 @@ class WPGlobus {
 			/** @todo Why needed? What if redux is loaded not from here? */
 			wp_register_style(
 				'select2',
-				plugins_url( '/Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
+				plugins_url( '/../Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
 				array(),
 				self::$_version,
 				'all'
@@ -167,7 +167,7 @@ class WPGlobus {
 
 		wp_register_style(
 			'globus.admin',
-			plugins_url( '/includes/css/globus.admin.css', __FILE__ ),
+			plugins_url( '/css/globus.admin.css', __FILE__ ),
 			array(),
 			self::$_version,
 			'all'
@@ -199,7 +199,7 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_language_edit() {
-		require_once dirname( __FILE__ ) . '/includes/admin/class.language.edit.php';
+		require_once 'admin/class.language.edit.php';
 		new WPGlobus_language_edit();
 	}
 
@@ -208,7 +208,7 @@ class WPGlobus {
 	 * @return string
 	 */
 	function on_field_table() {
-		return dirname( __FILE__ ) . '/includes/options/fields/table/field_table.php';
+		return dirname( __FILE__ ) . '/options/fields/table/field_table.php';
 	}
 
 	/**
@@ -218,7 +218,7 @@ class WPGlobus {
 	function on_wp_styles() {
 		wp_register_style(
 			'flags',
-			plugins_url( '/includes/css/globus.flags.css', __FILE__ ),
+			plugins_url( '/css/globus.flags.css', __FILE__ ),
 			array(),
 			self::$_version,
 			'all'

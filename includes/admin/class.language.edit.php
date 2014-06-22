@@ -151,13 +151,13 @@ class WPGlobus_language_edit {
 		if ( $this->language_code == $code ) {
 			if ( $this->check_fields( $code, false ) ) {
 				$this->save();
-				$this->submit_messages['success'][] = 'Options was saved';
+				$this->submit_messages['success'][] = __( 'Options updated', 'wpglobus' );
 			}
 		}
 		else {
 			if ( $this->check_fields( $code ) ) {
 				$this->save( true );
-				$this->submit_messages['success'][] = 'Options was saved';
+				$this->submit_messages['success'][] = __( 'Options updated', 'wpglobus' );
 			}
 		}
 		$this->_get_flags();
@@ -229,27 +229,27 @@ class WPGlobus_language_edit {
 	function check_fields( $lang_code, $check_code = true ) {
 		$this->submit_messages['errors'] = array();
 		if ( $check_code && empty( $lang_code ) ) {
-			$this->submit_messages['errors'][] = __( 'Need language code !', 'wpglobus' );
+			$this->submit_messages['errors'][] = __( 'Please enter a language code!', 'wpglobus' );
 		}
 
 		if ( $check_code && $this->language_exists( $lang_code ) ) {
-			$this->submit_messages['errors'][] = __( 'Language code already exists !', 'wpglobus' );
+			$this->submit_messages['errors'][] = __( 'Language code already exists!', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['flags'] ) ) {
-			$this->submit_messages['errors'][] = __( 'Need language flag !', 'wpglobus' );
+			$this->submit_messages['errors'][] = __( 'Please specify the language flag!', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['language_name'] ) ) {
-			$this->submit_messages['errors'][] = __( 'Need language name !', 'wpglobus' );
+			$this->submit_messages['errors'][] = __( 'Please enter the language name!', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['en_language_name'] ) ) {
-			$this->submit_messages['errors'][] = __( 'Need language name in English !', 'wpglobus' );
+			$this->submit_messages['errors'][] = __( 'Please enter the language name in English!', 'wpglobus' );
 		}
 
 		if ( empty( $_POST['locale'] ) ) {
-			$this->submit_messages['errors'][] = __( 'Need locale !', 'wpglobus' );
+			$this->submit_messages['errors'][] = __( 'Please enter the locale!', 'wpglobus' );
 		}
 
 		$this->language_code    = $lang_code;
@@ -303,7 +303,7 @@ class WPGlobus_language_edit {
 			$header = __( 'Edit Language', 'wpglobus' );
 		}
 		elseif ( 'delete' == $this->action ) {
-			$header   = __( 'Are you sure to delete?', 'wpglobus' );
+			$header   = __( 'Are you sure you want to delete?', 'wpglobus' );
 			$disabled = 'disabled';
 		}
 		else {
@@ -331,7 +331,7 @@ class WPGlobus_language_edit {
 			<form method="post" action="">
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="language_code"><?php _e( 'Language code', 'wpglobus' ); ?></label></th>
+						<th scope="row"><label for="language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label></th>
 						<td>
 							<input name="language_code" <?php echo $disabled; ?> type="text" id="language_code"
 								   value="<?php echo $this->language_code; ?>" class="regular-text"/>
@@ -362,22 +362,22 @@ class WPGlobus_language_edit {
 						<td><input name="language_name" type="text" id="language_name"
 								   value="<?php echo $this->language_name; ?>" class="regular-text"/>
 
-							<p class="description"><?php _e( 'The Name of the language, which will be displayed on the site.
-								(Example: English)', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'The name of the language in its native alphabet.
+								(Examples: English, Русский)', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
 						<td><input name="en_language_name" type="text" id="en_language_name"
 								   value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
 
-							<p class="description"><?php _e( 'The Name of the language in English', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'The name of the language in English', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
 						<td><input name="locale" type="text" id="locale" value="<?php echo $this->locale; ?>"
 								   class="regular-text"/>
 
-							<p class="description"><?php _e( 'PHP and Wordpress Locale for the language. (Example: en_US)', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)', 'wpglobus' ); ?></p></td>
 					</tr>
 				</table>    <?php
 
