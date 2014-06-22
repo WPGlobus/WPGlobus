@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WPGlobus_language_edit {
 
 	/**
-	 * All files of flag
+	 * All flag files
 	 * @var array
 	 */
 	var $all_flags = array();
@@ -36,7 +36,7 @@ class WPGlobus_language_edit {
 	var $language_name = '';
 
 	/**
-	 * Language name in english
+	 * Language name in English
 	 * @var string
 	 */
 	var $en_language_name = '';
@@ -48,7 +48,7 @@ class WPGlobus_language_edit {
 	var $locale = '';
 
 	/**
-	 * Flag of current language
+	 * Flag of the current language
 	 * @var string
 	 */
 	var $flag = '';
@@ -80,7 +80,7 @@ class WPGlobus_language_edit {
 			$this->action = 'add';
 		}
 
-		if ( isset( $_GET['lang'] ) && ! empty( $_GET['lang'] ) ) {
+		if ( ! empty( $_GET['lang'] ) ) {
 			$this->language_code = $_GET['lang'];
 		}
 
@@ -134,8 +134,10 @@ class WPGlobus_language_edit {
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
 		/** @todo make "$location" available from WPGlobus_Config */
-		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
+		$location = admin_url( '/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG );
+//		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 		wp_redirect( $location );
+		exit;
 
 	}
 
@@ -210,9 +212,11 @@ class WPGlobus_language_edit {
 
 		if ( $update_code ) {
 			/** @todo make "$location" available from WPGlobus_Config */
-			$location =
-				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
+			$location = admin_url( '/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG );
+//			$location =
+//				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 			wp_redirect( $location );
+			exit;
 		}
 	}
 
@@ -380,12 +384,12 @@ class WPGlobus_language_edit {
 				if ( 'edit' == $this->action || 'add' == $this->action ) {
 					?>
 					<p class="submit"><input class="button button-primary" type="submit" name="submit"
-											 value="Save Changes"></p>    <?php
+											 value="<?php esc_attr_e( 'Save Changes', 'wpglobus' ); ?>"></p>    <?php
 				}
 				elseif ( 'delete' == $this->action ) {
 					?>
 					<p class="submit"><input class="button button-primary" type="submit" name="delete"
-											 value="Delete language"></p>    <?php
+											 value="<?php esc_attr_e( 'Delete Language', 'wpglobus' ); ?>"></p>    <?php
 				}    ?>
 
 			</form>
