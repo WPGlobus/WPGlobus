@@ -34,8 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once 'includes/wpglobus.config.php';
 require_once 'includes/class-wpglobus-utils.php';
-// TODO this should go
-#require_once 'includes/functions.php';
 require_once 'class-wpglobus.php';
 
 global $WPGlobus_Config;
@@ -45,7 +43,6 @@ $WPGlobus_Config = new WPGlobus_Config();
  * Extract url information
  * @todo Why not within the class constructor?
  */
-//$WPGlobus_Config->url_info = globus_extractURL(
 $WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
 	$_SERVER['REQUEST_URI'],
 	$_SERVER['HTTP_HOST'],
