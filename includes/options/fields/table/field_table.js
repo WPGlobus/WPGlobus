@@ -1,4 +1,5 @@
-/* global redux_change */
+/*jslint browser: true*/
+/*global redux_change, jQuery */
 (function ($) {
     "use strict";
 
@@ -21,4 +22,4 @@
         $('.flag-table').html($t_flag);
 
     };
-})(jQuery);
+}(jQuery));
