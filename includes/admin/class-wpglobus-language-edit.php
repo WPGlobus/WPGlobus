@@ -1,15 +1,17 @@
 <?php
-/**
- *
- */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( class_exists( 'WPGlobus_Language_Edit' ) ) {
+	return;
+}
+
 /**
- * Class WPGlobus_language_edit
+ * Class WPGlobus_Language_Edit
  */
-class WPGlobus_language_edit {
+class WPGlobus_Language_Edit {
 
 	/**
 	 * All flag files

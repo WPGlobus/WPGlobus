@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once 'includes/wpglobus.config.php';
+require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
 require_once 'includes/class-wpglobus.php';
 

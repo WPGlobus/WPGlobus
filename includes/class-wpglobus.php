@@ -40,19 +40,18 @@ class WPGlobus {
 				require_once '../Redux-Framework/ReduxCore/framework.php';
 			}
 
-			require_once 'options/wpglobus.option.php';
+			/**
+			 * @todo We should not make globals in the middle of classes. Need to review this.
+			 */
+			require_once 'options/class-wpglobus-options.php';
+			global $WPGlobus_Options;
+			$WPGlobus_Options = new WPGlobus_Options();
+
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
 				'on_field_table'
 			) );
-
-			/**
-			 * @todo Let's follow the same format. Other vars had underscore.
-			 * @todo We should not make globals in the middle of classes. Need to review this.
-			 */
-			global $WPGlobusOption;
-			$WPGlobusOption = new Redux_Framework_globus_option();
 
 			add_action( 'admin_menu', array(
 				$this,
@@ -76,6 +75,7 @@ class WPGlobus {
 														   $_SERVER['HTTP_HOST'],
 														   isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
 			);
+
 			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 			$this->menus = $this->_get_nav_menus();
@@ -202,8 +202,8 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_language_edit() {
-		require_once 'admin/class.language.edit.php';
-		new WPGlobus_language_edit();
+		require_once 'admin/class-wpglobus-language-edit.php';
+		new WPGlobus_Language_Edit();
 	}
 
 	/**

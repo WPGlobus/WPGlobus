@@ -1,5 +1,13 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( class_exists( 'WPGlobus_Config' ) ) {
+	return;
+}
+
 /**
  * WPGlobus_Config class
  */
