@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package   WPGlobus
+ * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -467,8 +471,8 @@ class WPGlobus_Options {
 		$this->args['footer_text'] = '&copy; Copyright 2014, WPGlobus.';
 	}
 
-//	public function getReduxInfo() {
-//	}
+	//	public function getReduxInfo() {
+	//	}
 
 } // end class Redux_Framework_globus_option
 
