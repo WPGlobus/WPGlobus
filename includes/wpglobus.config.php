@@ -1,8 +1,8 @@
 <?php
+
 /**
  * WPGlobus_Config class
  */
-
 class WPGlobus_Config {
 
 	/**
@@ -11,44 +11,44 @@ class WPGlobus_Config {
 	const GLOBUS_PLUGIN_NAME = 'wpglobus';
 
 	/**
-	 *	Url mode: query (questionmark)
+	 *    Url mode: query (questionmark)
 	 */
 	const GLOBUS_URL_QUERY = 1;
 
 	/**
-	 *	Url mode: pre-path
+	 *    Url mode: pre-path
 	 */
 	const GLOBUS_URL_PATH = 2;
 
 	/**
-	 *	Url mode: pre-domain
+	 *    Url mode: pre-domain
 	 */
 	const GLOBUS_URL_DOMAIN = 3;
 
 	/**
 	 * Current language
-	 *
 	 * @public string
 	 */
 	public $language = 'en';
 
 	/**
 	 * Language by default
-	 *
 	 * @var string
 	 */
 	public $default_language = 'en';
 
 	/**
 	 * Enabled languages
-	 *
 	 * @var array
 	 */
-	public $enabled_languages = array('en','ru','de');
+	public $enabled_languages = array(
+		'en',
+		'ru',
+		'de'
+	);
 
 	/**
 	 * Hide from URL language by default
-	 *
 	 * @var bool
 	 */
 	public $hide_default_language = true;
@@ -56,22 +56,19 @@ class WPGlobus_Config {
 	/**
 	 * URL mode
 	 * query || pre-path || pre-domain
-	 *
 	 * @var int
 	 */
 	public $url_mode;
 
 	/**
-	 *	URL information
-	 *
+	 *    URL information
 	 * @var array
 	 */
 	public $url_info = array();
 
 	/**
-	 *	Flag images configuration
-	 *	Look in /flags/ directory for a huge list of flags for usage
-	 *
+	 *    Flag images configuration
+	 *    Look in /flags/ directory for a huge list of flags for usage
 	 * @var array
 	 */
 	public $flag = array();
@@ -79,28 +76,24 @@ class WPGlobus_Config {
 	/**
 	 * Location of flags (needs trailing slash!)
 	 * 'plugins/globus/flags/';
-	 *
 	 * @var string
 	 */
 	public $flags_url = '';
 
 	/**
 	 * Stores languages in  pairs code=>name
-	 *
 	 * @var array
 	 */
 	public $language_name = array();
-	
+
 	/**
 	 * Stores languages names in English
-	 *
 	 * @var array
 	 */
 	public $en_language_name = array();
 
 	/**
 	 * Stores locales
-	 *
 	 * @var array
 	 */
 	public $locale = array();
@@ -117,37 +110,33 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	public $nav_menu = '';
-	
+
 	/**
-	 * Custom CSS 
+	 * Custom CSS
 	 * @var string
 	 */
 	public $custom_css = '';
 
 	/**
 	 * WPGlobus option key
-	 *
 	 * @var string
 	 */
 	public $option = 'wpglobus_option';
 
 	/**
 	 * WPGlobus option key for $language_name
-	 *
 	 * @var string
 	 */
 	public $option_language_names = 'wpglobus_option_language_names';
 
 	/**
 	 * WPGlobus option key for $en_language_name
-	 *
 	 * @var string
 	 */
 	public $option_en_language_names = 'wpglobus_option_en_language_names';
 
 	/**
 	 * WPGlobus option key for $locale
-	 *
 	 * @var string
 	 */
 	public $option_locale = 'wpglobus_option_locale';
@@ -155,7 +144,6 @@ class WPGlobus_Config {
 
 	/**
 	 * WPGlobus option key for $flag
-	 *
 	 * @var string
 	 */
 	public $option_flags = 'wpglobus_option_flags';
@@ -174,13 +162,12 @@ class WPGlobus_Config {
 			$this,
 			'on_load_textdomain'
 		) );
-		
+
 		$this->_get_options();
 	}
 
 	/**
 	 * Load textdomain
-	 *
 	 * @return void
 	 */
 	function on_load_textdomain() {
@@ -189,26 +176,24 @@ class WPGlobus_Config {
 
 	/**
 	 * Return URL mode
-	 *
 	 * @int
 	 */
-	function get_url_mode(){
+	function get_url_mode() {
 		return $this->url_mode;
 	}
 
 	/**
 	 * Set flag URL
-	 *
 	 * @return void
 	 */
 	function _set_flags_url() {
 
-//		$this->flags_url = plugins_url(self::GLOBUS_PLUGIN_NAME . '/flags/');
+		//		$this->flags_url = plugins_url(self::GLOBUS_PLUGIN_NAME . '/flags/');
 		$this->flags_url = plugins_url( basename( dirname( dirname( __FILE__ ) ) ) ) . '/flags/';
 	}
 
 	/**
-	 *	Set languages by default
+	 *    Set languages by default
 	 */
 	function _set_languages() {
 		// Names for languages in the corresponding language, add more if needed
@@ -295,10 +280,9 @@ class WPGlobus_Config {
 
 	/**
 	 * Set default options
-	 *
 	 * @return void
 	 */
-	function _set_default_options(){
+	function _set_default_options() {
 
 		update_option( $this->option_language_names, $this->language_name );
 		update_option( $this->option_en_language_names, $this->en_language_name );
@@ -309,10 +293,9 @@ class WPGlobus_Config {
 
 	/**
 	 * Get options from DB and wp-config.php
-	 *
 	 * @return void
 	 */
-	function _get_options(){
+	function _get_options() {
 
 		$wpglobus_option = get_option( $this->option );
 
@@ -334,20 +317,20 @@ class WPGlobus_Config {
 		/*
 		 * Get enabled languages and default language ( just one main language )
 		 */
-		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty($wpglobus_option['enabled_languages'])  ) {
+		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty( $wpglobus_option['enabled_languages'] ) ) {
 			$this->enabled_languages = array();
-			foreach ( $wpglobus_option['enabled_languages'] as $lang=>$value ) {
+			foreach ( $wpglobus_option['enabled_languages'] as $lang => $value ) {
 				if ( ! empty( $value ) ) {
 					$this->enabled_languages[] = $lang;
 				}
- 			}
+			}
 
 			/** get first language in $this->enabled_languages for default language */
 			reset( $wpglobus_option['enabled_languages'] );
 			$this->default_language = key( $wpglobus_option['enabled_languages'] );
 		}
 		/** check WPGLOBUS_DEFAULT_LANGUAGE defined in wp-config.php */
-		if ( defined('WPGLOBUS_DEFAULT_LANGUAGE') ) {
+		if ( defined( 'WPGLOBUS_DEFAULT_LANGUAGE' ) ) {
 			$this->default_language = WPGLOBUS_DEFAULT_LANGUAGE;
 			if ( ! in_array( $this->default_language, $this->enabled_languages ) ) {
 				array_unshift( $this->enabled_languages, $this->default_language );
@@ -363,9 +346,10 @@ class WPGlobus_Config {
 		/*
 		 * Get URL mode
 		 */
-		if ( isset( $wpglobus_option['url_mode'] ) && ! empty($wpglobus_option['url_mode'])  ) {
+		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
 			$this->url_mode = $wpglobus_option['url_mode'];
-		} else {
+		}
+		else {
 			$this->url_mode = self::GLOBUS_URL_PATH;
 		}
 		/** @todo make loading url_mode from wp-config.php */
@@ -399,10 +383,11 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['show_flag_name'] ) ) {
 			$this->show_flag_name = $wpglobus_option['show_flag_name'];
 		}
-		if ( defined('WPGLOBUS_SHOW_FLAG_NAME') ) {
+		if ( defined( 'WPGLOBUS_SHOW_FLAG_NAME' ) ) {
 			if ( 'name' === WPGLOBUS_SHOW_FLAG_NAME ) {
 				$this->show_flag_name = 'name';
-			} elseif ( false === WPGLOBUS_SHOW_FLAG_NAME || '' === WPGLOBUS_SHOW_FLAG_NAME ) {
+			}
+			elseif ( false === WPGLOBUS_SHOW_FLAG_NAME || '' === WPGLOBUS_SHOW_FLAG_NAME ) {
 				$this->show_flag_name = '';
 			}
 		}
@@ -411,17 +396,17 @@ class WPGlobus_Config {
 		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'
 		 */
 		$this->nav_menu = '';
-		if ( isset($wpglobus_option['use_nav_menu']) ) {
+		if ( isset( $wpglobus_option['use_nav_menu'] ) ) {
 			$this->nav_menu = ( $wpglobus_option['use_nav_menu'] == 'all' ) ? '' : $wpglobus_option['use_nav_menu'];
 		}
-		if ( defined('WPGLOBUS_USE_NAV_MENU') ) {
+		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
 		}
 
 		/*
 		 * Get custom CSS
 		 */
-		if ( isset($wpglobus_option['css_editor']) ) {
+		if ( isset( $wpglobus_option['css_editor'] ) ) {
 			$this->css_editor = $wpglobus_option['css_editor'];
 		}
 
@@ -429,8 +414,8 @@ class WPGlobus_Config {
 		/*
 		 *
 		 */
-		$option = get_option($this->option_flags);
-		if( ! empty($option) ) {
+		$option = get_option( $this->option_flags );
+		if ( ! empty( $option ) ) {
 			$this->flag = $option;
 		}
 
@@ -438,12 +423,14 @@ class WPGlobus_Config {
 
 	/**
 	 * Hard-coded enabled url modes
-	 *
 	 * @return array
 	 */
-	function _getEnabledUrlMode(){
-		$enabled_url_mode = array(self::GLOBUS_URL_QUERY=>'URL query', self::GLOBUS_URL_PATH=>'URL path');
+	function _getEnabledUrlMode() {
+		$enabled_url_mode = array(
+			self::GLOBUS_URL_QUERY => 'URL query',
+			self::GLOBUS_URL_PATH  => 'URL path'
+		);
 		return $enabled_url_mode;
 	}
 
-}	// end class WPGlobus_Config
+} // end class WPGlobus_Config

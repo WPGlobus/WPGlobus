@@ -90,7 +90,7 @@ class WPGlobus_Utils {
 	 * @param string $url
 	 * @return array
 	 * @todo Why not use native PHP method?
-	 * @see parse_url()
+	 * @see  parse_url()
 	 */
 	public static function parse_url( $url ) {
 

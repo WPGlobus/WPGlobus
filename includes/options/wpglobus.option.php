@@ -151,7 +151,7 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			/** Add language from 'more_language' option to array $enabled_languages */
 			if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
 
-				$lang = $wpglobus_option['more_languages'];
+				$lang       = $wpglobus_option['more_languages'];
 				$lang_in_en = '';
 				if ( isset( $WPGlobus_Config->en_language_name[$lang] ) && ! empty( $WPGlobus_Config->en_language_name[$lang] ) ) {
 					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$lang] . ')';
@@ -445,19 +445,19 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 			);
 
 			// Panel Intro text -> before the form
-//			if ( ! isset( $this->args['global_variable'] ) || $this->args['global_variable'] !== false ) {
-//				if ( ! empty( $this->args['global_variable'] ) ) {
-//					$v = $this->args['global_variable'];
-//				}
-//				else {
-//					$v = str_replace( '-', '_', $this->args['opt_name'] );
-//				}
-//				$this->args['intro_text'] = sprintf( __( '', 'wpglobus' ), $v );
-//			}
-//			else {
-//				$this->args['intro_text'] =
-//					__( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'wpglobus' );
-//			}
+			//			if ( ! isset( $this->args['global_variable'] ) || $this->args['global_variable'] !== false ) {
+			//				if ( ! empty( $this->args['global_variable'] ) ) {
+			//					$v = $this->args['global_variable'];
+			//				}
+			//				else {
+			//					$v = str_replace( '-', '_', $this->args['opt_name'] );
+			//				}
+			//				$this->args['intro_text'] = sprintf( __( '', 'wpglobus' ), $v );
+			//			}
+			//			else {
+			//				$this->args['intro_text'] =
+			//					__( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'wpglobus' );
+			//			}
 			$this->args['intro_text'] = '';
 
 			// Add content after the form.
@@ -472,3 +472,5 @@ if ( ! class_exists( 'Redux_Framework_globus_option' ) ) {
 	} // end class Redux_Framework_globus_option
 
 } // end if ( ! class_exists )
+
+# --- EOF

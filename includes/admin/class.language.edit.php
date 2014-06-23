@@ -328,7 +328,8 @@ class WPGlobus_language_edit {
 			<form method="post" action="">
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label></th>
+						<th scope="row"><label for="language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label>
+						</th>
 						<td>
 							<input name="language_code" <?php echo $disabled; ?> type="text" id="language_code"
 								   value="<?php echo $this->language_code; ?>" class="regular-text"/>
@@ -363,18 +364,21 @@ class WPGlobus_language_edit {
 								(Examples: English, Русский)', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
+						<th scope="row"><label
+								for="en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
 						<td><input name="en_language_name" type="text" id="en_language_name"
 								   value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
 
-							<p class="description"><?php _e( 'The name of the language in English', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'The name of the language in English', 'wpglobus' ); ?></p>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
 						<td><input name="locale" type="text" id="locale" value="<?php echo $this->locale; ?>"
 								   class="regular-text"/>
 
-							<p class="description"><?php _e( 'PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)', 'wpglobus' ); ?></p>
+						</td>
 					</tr>
 				</table>    <?php
 

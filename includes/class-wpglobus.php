@@ -72,9 +72,9 @@ class WPGlobus {
 		}
 		else {
 			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
-		   		$_SERVER['REQUEST_URI'],
-			   	$_SERVER['HTTP_HOST'],
-			   	isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+													   $_SERVER['REQUEST_URI'],
+														   $_SERVER['HTTP_HOST'],
+														   isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
 			);
 			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
@@ -105,7 +105,6 @@ class WPGlobus {
 
 	/**
 	 * Enqueue admin scripts
-	 *
 	 * @return void
 	 */
 	function on_admin_scripts() {
