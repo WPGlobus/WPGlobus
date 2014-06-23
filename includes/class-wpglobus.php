@@ -71,8 +71,12 @@ class WPGlobus {
 
 		}
 		else {
-
-			#$test_str = __( 'Test str', 'wpglobus' );
+			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
+		   		$_SERVER['REQUEST_URI'],
+			   	$_SERVER['HTTP_HOST'],
+			   	isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+			);
+			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 			$this->menus = $this->_get_nav_menus();
 

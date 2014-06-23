@@ -40,17 +40,6 @@ global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();
 
 /**
- * Extract url information
- * @todo Why not within the class constructor?
- */
-$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
-	$_SERVER['REQUEST_URI'],
-	$_SERVER['HTTP_HOST'],
-	isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
-);
-$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
-
-/**
  * Start WPGlobus on "init" hook, so if there is another ReduxFramework, it will be loaded first. Hopefully :-)
  * Note: "init" hook is not guaranteed to stay in the future versions.
  */
