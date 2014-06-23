@@ -5,162 +5,167 @@
 
 class WPGlobus_Config {
 
-	/*
+	/**
 	 * Plugin name
 	 */
 	const GLOBUS_PLUGIN_NAME = 'wpglobus';
 
-	/*
+	/**
 	 *	Url mode: query (questionmark)
 	 */
 	const GLOBUS_URL_QUERY = 1;
 
-	/*
+	/**
 	 *	Url mode: pre-path
 	 */
 	const GLOBUS_URL_PATH = 2;
 
-	/*
+	/**
 	 *	Url mode: pre-domain
 	 */
 	const GLOBUS_URL_DOMAIN = 3;
 
-	/*
+	/**
 	 * Current language
 	 *
-	 * @var string
+	 * @public string
 	 */
 	public $language = 'en';
 
-	/*
+	/**
 	 * Language by default
 	 *
 	 * @var string
 	 */
-	var $default_language = 'en';
+	public $default_language = 'en';
 
-	/*
+	/**
 	 * Enabled languages
 	 *
 	 * @var array
 	 */
-	var $enabled_languages = array('en','ru','de');
+	public $enabled_languages = array('en','ru','de');
 
-	/*
+	/**
 	 * Hide from URL language by default
 	 *
 	 * @var bool
 	 */
-	var $hide_default_language = true;
+	public $hide_default_language = true;
 
-	/*
+	/**
 	 * URL mode
 	 * query || pre-path || pre-domain
 	 *
 	 * @var int
 	 */
-	var $url_mode;
+	public $url_mode;
 
-	/*
+	/**
 	 *	URL information
 	 *
 	 * @var array
 	 */
-	var $url_info = array();
+	public $url_info = array();
 
-	/*
+	/**
 	 *	Flag images configuration
 	 *	Look in /flags/ directory for a huge list of flags for usage
 	 *
 	 * @var array
 	 */
-	var $flag = array();
+	public $flag = array();
 
-	/*
+	/**
 	 * Location of flags (needs trailing slash!)
 	 * 'plugins/globus/flags/';
 	 *
 	 * @var string
 	 */
-	var $flags_url = '';
+	public $flags_url = '';
 
-	/*
+	/**
 	 * Stores languages in  pairs code=>name
 	 *
 	 * @var array
 	 */
-	var $language_name = array();
+	public $language_name = array();
 	
-	/*
+	/**
 	 * Stores languages names in English
 	 *
 	 * @var array
 	 */
-	var $en_language_name = array();
+	public $en_language_name = array();
 
-	/*
+	/**
 	 * Stores locales
 	 *
 	 * @var array
 	 */
-	var $locale = array();
+	public $locale = array();
 
-	/*
+	/**
 	 * Use flag name for navigation menu : 'name' || 'code' || ''
 	 * @var string
 	 */
-	var $show_flag_name = 'code';
+	public $show_flag_name = 'code';
 
-	/*
+	/**
 	 * Use navigation menu by slug
 	 * for use in all nav menu set value to ''
 	 * @var string
 	 */
-	var $nav_menu = '';
+	public $nav_menu = '';
 	
-	/*
+	/**
 	 * Custom CSS 
 	 * @var string
 	 */
-	var $custom_css = '';
+	public $custom_css = '';
 
-	/*
+	/**
 	 * WPGlobus option key
 	 *
 	 * @var string
 	 */
-	var $option = 'wpglobus_option';
+	public $option = 'wpglobus_option';
 
-	/*
+	/**
 	 * WPGlobus option key for $language_name
 	 *
 	 * @var string
 	 */
-	var $option_language_names = 'wpglobus_option_language_names';
+	public $option_language_names = 'wpglobus_option_language_names';
 
-	/*
+	/**
 	 * WPGlobus option key for $en_language_name
 	 *
 	 * @var string
 	 */
-	var $option_en_language_names = 'wpglobus_option_en_language_names';
+	public $option_en_language_names = 'wpglobus_option_en_language_names';
 
-	/*
+	/**
 	 * WPGlobus option key for $locale
 	 *
 	 * @var string
 	 */
-	var $option_locale = 'wpglobus_option_locale';
+	public $option_locale = 'wpglobus_option_locale';
 
 
-	/*
+	/**
 	 * WPGlobus option key for $flag
 	 *
 	 * @var string
 	 */
-	var $option_flags = 'wpglobus_option_flags';
+	public $option_flags = 'wpglobus_option_flags';
 
-	/*
+	/**
+	 * @var string
+	 */
+	public $css_editor = '';
+
+	/**
 	 * Constructor
 	 */
 	function __construct() {
@@ -182,7 +187,7 @@ class WPGlobus_Config {
 		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages/' );
 	}
 
-	/*
+	/**
 	 * Return URL mode
 	 *
 	 * @int
@@ -191,7 +196,7 @@ class WPGlobus_Config {
 		return $this->url_mode;
 	}
 
-	/*
+	/**
 	 * Set flag URL
 	 *
 	 * @return void
@@ -202,7 +207,7 @@ class WPGlobus_Config {
 		$this->flags_url = plugins_url( basename( dirname( dirname( __FILE__ ) ) ) ) . '/flags/';
 	}
 
-	/*
+	/**
 	 *	Set languages by default
 	 */
 	function _set_languages() {
@@ -288,7 +293,7 @@ class WPGlobus_Config {
 
 	}
 
-	/*
+	/**
 	 * Set default options
 	 *
 	 * @return void
@@ -302,7 +307,7 @@ class WPGlobus_Config {
 
 	}
 
-	/*
+	/**
 	 * Get options from DB and wp-config.php
 	 *
 	 * @return void
@@ -431,8 +436,8 @@ class WPGlobus_Config {
 
 	}
 
-	/*
-	 * Hard coded enabled url modes
+	/**
+	 * Hard-coded enabled url modes
 	 *
 	 * @return array
 	 */
