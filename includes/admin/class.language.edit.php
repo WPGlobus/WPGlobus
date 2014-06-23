@@ -135,7 +135,6 @@ class WPGlobus_language_edit {
 
 		/** @todo make "$location" available from WPGlobus_Config */
 		$location = admin_url( '/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG );
-//		$location = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 		wp_redirect( $location );
 		exit;
 
@@ -213,8 +212,6 @@ class WPGlobus_language_edit {
 		if ( $update_code ) {
 			/** @todo make "$location" available from WPGlobus_Config */
 			$location = admin_url( '/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG );
-//			$location =
-//				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 			wp_redirect( $location );
 			exit;
 		}
