@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package   WPGlobus
+ * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
+ */
 
 /**
  * Class WPGlobus
@@ -37,22 +41,21 @@ class WPGlobus {
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
 				/** @todo Here we can set a flag to know that we are using the embedded Redux */
-				require_once '../Redux-Framework/ReduxCore/framework.php';
+				require_once '../vendor/ReduxCore/framework.php';
 			}
 
-			require_once 'options/wpglobus.option.php';
+			/**
+			 * @todo We should not make globals in the middle of classes. Need to review this.
+			 */
+			require_once 'options/class-wpglobus-options.php';
+			global $WPGlobus_Options;
+			$WPGlobus_Options = new WPGlobus_Options();
+
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
 				'on_field_table'
 			) );
-
-			/**
-			 * @todo Let's follow the same format. Other vars had underscore.
-			 * @todo We should not make globals in the middle of classes. Need to review this.
-			 */
-			global $WPGlobusOption;
-			$WPGlobusOption = new Redux_Framework_globus_option();
 
 			add_action( 'admin_menu', array(
 				$this,
@@ -72,10 +75,11 @@ class WPGlobus {
 		}
 		else {
 			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
-		   		$_SERVER['REQUEST_URI'],
-			   	$_SERVER['HTTP_HOST'],
-			   	isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+													   $_SERVER['REQUEST_URI'],
+														   $_SERVER['HTTP_HOST'],
+														   isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
 			);
+
 			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 			$this->menus = $this->_get_nav_menus();
@@ -105,7 +109,6 @@ class WPGlobus {
 
 	/**
 	 * Enqueue admin scripts
-	 *
 	 * @return void
 	 */
 	function on_admin_scripts() {
@@ -118,7 +121,7 @@ class WPGlobus {
 			/** @todo Why needed? What if redux is loaded not from here? */
 			wp_register_script(
 				'select2',
-				plugins_url( '/../Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
+				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
 				array( 'jquery' ),
 				self::$_version,
 				true
@@ -161,7 +164,7 @@ class WPGlobus {
 			/** @todo Why needed? What if redux is loaded not from here? */
 			wp_register_style(
 				'select2',
-				plugins_url( '/../Redux-Framework/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
+				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
 				array(),
 				self::$_version,
 				'all'
@@ -203,8 +206,8 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_language_edit() {
-		require_once 'admin/class.language.edit.php';
-		new WPGlobus_language_edit();
+		require_once 'admin/class-wpglobus-language-edit.php';
+		new WPGlobus_Language_Edit();
 	}
 
 	/**

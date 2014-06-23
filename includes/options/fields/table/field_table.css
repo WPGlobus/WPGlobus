@@ -1,21 +1,27 @@
 .table-dummy .hidden {
-    display:none;
+    display: none;
 }
+
 th#code {
-    width:10%;
+    width: 10%;
 }
+
 th#file {
-    width:10%;
+    width: 10%;
 }
+
 th#flag {
-    width:10%;
+    width: 10%;
 }
+
 th#locale {
-    width:10%;
+    width: 10%;
 }
+
 th#language_name {
-    width:30%;
+    width: 30%;
 }
+
 th#en_language_name {
-    width:30%;
+    width: 30%;
 }

@@ -1,339 +1,350 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
-"POT-Creation-Date: 2014-06-23 21:06+0800\n"
-"PO-Revision-Date: 2014-06-24 07:33+0800\n"
-"Last-Translator: Alex <a@a.ru>\n"
-"Language-Team: Alex <a@a.ru>\n"
+"POT-Creation-Date: 2014-06-23 12:43-0500\n"
+"PO-Revision-Date: 2014-06-23 12:53-0500\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.5\n"
-"X-Poedit-Basepath: ../includes\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: includes\n"
 
-#: admin/class.language.edit.php:153 admin/class.language.edit.php:159
+#: includes/admin/class-wpglobus-language-edit.php:159
+#: includes/admin/class-wpglobus-language-edit.php:165
 msgid "Options updated"
-msgstr "Опции сохранены"
+msgstr "Настройки сохранены"
 
-#: admin/class.language.edit.php:229
+#: includes/admin/class-wpglobus-language-edit.php:235
 msgid "Please enter a language code!"
-msgstr "Введите код языка, пожалуйста!"
+msgstr "Пожалуйста, введите код языка!"
 
-#: admin/class.language.edit.php:233
+#: includes/admin/class-wpglobus-language-edit.php:239
 msgid "Language code already exists!"
 msgstr "Такой код языка уже существует!"
 
-#: admin/class.language.edit.php:237
+#: includes/admin/class-wpglobus-language-edit.php:243
 msgid "Please specify the language flag!"
-msgstr "Укажите флаг языка!"
+msgstr "Пожалуйста, укажите флаг для языка!"
 
-#: admin/class.language.edit.php:241
+#: includes/admin/class-wpglobus-language-edit.php:247
 msgid "Please enter the language name!"
-msgstr "Пожалуйста, введите имя языка!"
+msgstr "Пожалуйста, введите название языка!"
 
-#: admin/class.language.edit.php:245
+#: includes/admin/class-wpglobus-language-edit.php:251
 msgid "Please enter the language name in English!"
-msgstr "Пожалуйста, введите имя языка по английски!"
+msgstr "Пожалуйста, введите название языка по-английски!"
 
-#: admin/class.language.edit.php:249
+#: includes/admin/class-wpglobus-language-edit.php:255
+#, fuzzy
 msgid "Please enter the locale!"
-msgstr "Введите локаль!"
+msgstr "Пожалуйста, введите Ваш отзыв."
 
-#: admin/class.language.edit.php:300
+#: includes/admin/class-wpglobus-language-edit.php:306
 msgid "Edit Language"
-msgstr "Редактировать язык"
+msgstr "Изменить язык"
 
-#: admin/class.language.edit.php:303
+#: includes/admin/class-wpglobus-language-edit.php:309
 msgid "Are you sure you want to delete?"
-msgstr "Вы уверены, что хотите удалить?"
+msgstr "Удалить? Вы уверены?"
 
-#: admin/class.language.edit.php:307
+#: includes/admin/class-wpglobus-language-edit.php:313
 msgid "Add Language"
 msgstr "Добавить язык"
 
-#: admin/class.language.edit.php:331
+#: includes/admin/class-wpglobus-language-edit.php:337
 msgid "Language Code"
 msgstr "Код языка"
 
-#: admin/class.language.edit.php:336
+#: includes/admin/class-wpglobus-language-edit.php:343
 msgid ""
 "2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
-msgstr "укажите 2-ух буквенный ISO код языка. (Например: en)"
-
-#: admin/class.language.edit.php:340
-msgid "Language flag"
-msgstr "Флаг языка"
-
-#: admin/class.language.edit.php:358
-msgid "Name"
-msgstr "Имя"
-
-#: admin/class.language.edit.php:362
-msgid ""
-"The name of the language in its native alphabet.\n"
-"\t\t\t\t\t\t\t\t(Examples: English, Русский)"
 msgstr ""
-"Имя языка на родном алфавите.\n"
-"\t\t\t\t\t\t\t\t(Examples: English, Русский)"
+"Двухбуквенная ISO-кодировка языка, который Вы хотите добавить (Пример: en)"
 
-#: admin/class.language.edit.php:366
+#: includes/admin/class-wpglobus-language-edit.php:347
+msgid "Language flag"
+msgstr "Флаг"
+
+#: includes/admin/class-wpglobus-language-edit.php:365
+msgid "Name"
+msgstr "Название"
+
+#: includes/admin/class-wpglobus-language-edit.php:369
+msgid ""
+"The name of the language in its native alphabet. (Examples: English, Русский)"
+msgstr ""
+
+#: includes/admin/class-wpglobus-language-edit.php:373
 msgid "Name in English"
-msgstr "Имя по английски"
+msgstr "Название по-английски"
 
-#: admin/class.language.edit.php:370
+#: includes/admin/class-wpglobus-language-edit.php:377
 msgid "The name of the language in English"
-msgstr "Имя языка по английски"
+msgstr "Название языка по-английски"
 
-#: admin/class.language.edit.php:373
-#: options/fields/table/table-languages.php:74
+#: includes/admin/class-wpglobus-language-edit.php:381
+#: includes/options/fields/table/table-languages.php:76
 msgid "Locale"
-msgstr "Локаль"
+msgstr ""
 
-#: admin/class.language.edit.php:377
+#: includes/admin/class-wpglobus-language-edit.php:385
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
-msgstr "PHP/WordPress локаль языка. (Например: en_US, ru_RU)"
+msgstr ""
 
-#: admin/class.language.edit.php:384
+#: includes/admin/class-wpglobus-language-edit.php:393
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: admin/class.language.edit.php:389
+#: includes/admin/class-wpglobus-language-edit.php:398
 msgid "Delete Language"
 msgstr "Удалить язык"
 
-#: options/fields/table/table-languages.php:25
-msgid "item"
-msgstr "запись"
-
-#: options/fields/table/table-languages.php:26
-msgid "items"
-msgstr "записей"
-
-#: options/fields/table/table-languages.php:47
-msgid "Code"
-msgstr "Код"
-
-#: options/fields/table/table-languages.php:53
-msgid "Edit"
-msgstr "Редактировать"
-
-#: options/fields/table/table-languages.php:58
-msgid "Delete"
-msgstr "Удалить"
-
-#: options/fields/table/table-languages.php:64
-msgid "File"
-msgstr "Файл"
-
-#: options/fields/table/table-languages.php:69
-msgid "Flag"
-msgstr "Флаг"
-
-#: options/fields/table/table-languages.php:79
-msgid "Language name"
-msgstr "Имя языка"
-
-#: options/fields/table/table-languages.php:84
-msgid "English language name"
-msgstr "Имя языка по английски"
-
-#: options/fields/table/table-languages.php:106
-msgid "No items found"
-msgstr "Ничего не найдено"
-
-#: options/fields/table/table-languages.php:114
-msgid "Add new Language"
-msgstr "Добавить новый язык"
-
-#: options/fields/table/table-languages.php:292
-msgid "Default language"
-msgstr "Язык по умолчанию"
-
-#: options/wpglobus.option.php:87
+#: includes/options/class-wpglobus-options.php:94
 msgid "WARNING: Redux Framework upgrade is highly recommended!"
-msgstr ""
+msgstr "ВНИМАНИЕ: мы настоятельно рекомендуем обновить версию Redux Framework!"
 
-#: options/wpglobus.option.php:89
+#: includes/options/class-wpglobus-options.php:96
 #, php-format
 msgid ""
 "WPGlobus administration panel requires Redux Framework %2$s or later. The "
 "version you have installed is %1$s."
 msgstr ""
-"WPGlobus использует в своей работе Redux Framework %2$s или более новый. У "
-"вас установлена версия %1$s."
+"Для корректной работы панели администрации WPGlobus требуется Redux "
+"Framework %2$s или более поздняя версия. У Вас установлена версия %1$s."
 
-#: options/wpglobus.option.php:106
+#: includes/options/class-wpglobus-options.php:113
 msgid "Thank you for installing WPGlobus!"
-msgstr "Спасибо за использование WPGlobus!"
+msgstr "Спасибо за то, что Вы установили плагин WPGlobus!"
 
-#: options/wpglobus.option.php:109
+#: includes/options/class-wpglobus-options.php:116
 msgid ""
 "Please click on the <strong>[Languages]</strong> tab at the left to setup "
 "the various options."
-msgstr ""
-"Используйте закладку <strong>[Языки]</strong> слева для установки опций."
+msgstr "Настройки плагина находятся в разделе <strong>[Языки]</strong>."
 
-#: options/wpglobus.option.php:111
+#: includes/options/class-wpglobus-options.php:118
 msgid ""
 "Use the <strong>[Languages Table]</strong> section to add a new language or "
 "to edit the language attributes: name, code, flag icon, etc."
 msgstr ""
-"Используйте закладку <strong>[Таблица языков]</strong> для добавления языков "
-"или редактирования атрибутов."
+"Используйте раздел <strong>[Таблица языков]</strong> для того чтобы добавить "
+"язык или отредактировать аттрибуты (название, код, флаг и т.п.)"
 
-#: options/wpglobus.option.php:114
+#: includes/options/class-wpglobus-options.php:121
 msgid ""
 "Should you have any questions or comments, please do not hesitate to contact "
 "us."
-msgstr "Если у вас есть вопросы, пожалуйста, свяжитесь с нами."
+msgstr ""
+"Если у Вас есть вопросы или замечания, пожалуйста, обращайтесь к нам за "
+"поддержкой."
 
-#: options/wpglobus.option.php:117
+#: includes/options/class-wpglobus-options.php:124
 msgid "Sincerely Yours,"
-msgstr "С уважением,"
+msgstr "С Уважением,"
 
-#: options/wpglobus.option.php:119
+#: includes/options/class-wpglobus-options.php:126
 msgid "The WPGlobus Team"
 msgstr "Команда WPGlobus"
 
-#: options/wpglobus.option.php:127
+#: includes/options/class-wpglobus-options.php:134
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
 
-#: options/wpglobus.option.php:184
+#: includes/options/class-wpglobus-options.php:191
 msgid "No navigation menu"
 msgstr "Нет навигационного меню"
 
-#: options/wpglobus.option.php:187
+#: includes/options/class-wpglobus-options.php:194
 msgid "Select navigation menu"
 msgstr "Выберите навигационное меню"
 
-#: options/wpglobus.option.php:191
+#: includes/options/class-wpglobus-options.php:198
 msgid "Languages"
 msgstr "Языки"
 
-#: options/wpglobus.option.php:198
+#: includes/options/class-wpglobus-options.php:205
 msgid "Enabled Languages"
 msgstr "Доступные языки"
 
-#: options/wpglobus.option.php:200
+#: includes/options/class-wpglobus-options.php:207
 msgid ""
 "The first language in the list is the default one. <br>To reorder, drag and "
 "drop with the icons at the right."
 msgstr ""
-"Первый в списке язык - язык по умолчанию.<br>Используйте иконку справа для "
-"изменения порядка языков."
+"Первый в списке - язык по умолчанию. <br>Для сортировки используйте \"drag "
+"and drop\" иконки справа."
 
-#: options/wpglobus.option.php:202
+#: includes/options/class-wpglobus-options.php:209
+#, fuzzy
 msgid "Uncheck to remove from the list"
-msgstr "Снимите галочку в чекбоксе для удаления языка из списка"
+msgstr "Удалить из \"Фаворитов\""
 
-#: options/wpglobus.option.php:210
+#: includes/options/class-wpglobus-options.php:217
 msgid "Add Languages"
 msgstr "Добавить языки"
 
-#: options/wpglobus.option.php:213
+#: includes/options/class-wpglobus-options.php:220
 msgid ""
 "Choose a language you would like to enable. <br>Press the [Save Changes] "
 "button to confirm."
 msgstr ""
-"Выберите язык, который вы хотите добавить. <br>Нажмите [Сохранить изменения] "
-"для подтверждения."
+"Выберите из списка язык, который Вы хотите разрешить к использованию. <br> "
+"Нажмите [Сохранить изменения] для подтверждения."
 
-#: options/wpglobus.option.php:216
+#: includes/options/class-wpglobus-options.php:223
 msgid "Select a language"
 msgstr "Выберите язык"
 
-#: options/wpglobus.option.php:222
+#: includes/options/class-wpglobus-options.php:229
+#, fuzzy
 msgid "URL Mode"
-msgstr "Модификация URL"
+msgstr "Выберите режим"
 
-#: options/wpglobus.option.php:226
+#: includes/options/class-wpglobus-options.php:233
+#, fuzzy
 msgid "Path Mode:"
-msgstr ""
+msgstr "ТЕСТОВЫЙ РЕЖИМ "
 
-#: options/wpglobus.option.php:229
+#: includes/options/class-wpglobus-options.php:236
 #, fuzzy
 msgid "Query Mode:"
 msgstr "Тип запроса"
 
-#: options/wpglobus.option.php:233
+#: includes/options/class-wpglobus-options.php:240
 msgid "Choose the method of URL modification"
-msgstr "Выберите метод модификации URL"
+msgstr "Выберите метод спецификации языка в УРЛах"
 
-#: options/wpglobus.option.php:234
+#: includes/options/class-wpglobus-options.php:241
 msgid "Select URL Mode"
-msgstr "Модификация URL"
+msgstr "Выберите режим"
 
-#: options/wpglobus.option.php:241
+#: includes/options/class-wpglobus-options.php:248
+#, fuzzy
 msgid "Language Selector Mode"
-msgstr "Вид переключателя"
+msgstr "ТЕСТОВЫЙ РЕЖИМ "
 
-#: options/wpglobus.option.php:244
+#: includes/options/class-wpglobus-options.php:251
 msgid ""
 "Choose the way language name and country flag are shown in the drop-down menu"
-msgstr "Выберите вид переключателя"
+msgstr "Выберите способ показа названий языков и флагов в навигационном меню"
 
-#: options/wpglobus.option.php:252
-msgid "Two-letter Code (EN, RU, IT, etc.)"
-msgstr "Двухбуквенный код(en, ru, de и т.д.)"
+#: includes/options/class-wpglobus-options.php:259
+msgid "Two-letter Code (en, ru, it, etc.)"
+msgstr "Двухбуквенный код (en, ru, it, и т.п.)"
 
-#: options/wpglobus.option.php:253
+#: includes/options/class-wpglobus-options.php:260
 msgid "Full Name (English, Russian, Italian, etc.)"
-msgstr "Полное имя (English, Russian, Italian и т.д.)"
+msgstr "Полное название (English, Russian, Italian, и т. п.)"
 
-#: options/wpglobus.option.php:254
+#: includes/options/class-wpglobus-options.php:261
 msgid "Flags only"
 msgstr "Только флаги"
 
-#: options/wpglobus.option.php:262
+#: includes/options/class-wpglobus-options.php:269
+#, fuzzy
 msgid "Language Selector Menu"
-msgstr "Выбор навигационного меню"
+msgstr "Нет навигационного меню"
 
-#: options/wpglobus.option.php:265
+#: includes/options/class-wpglobus-options.php:272
 msgid "Choose the navigation menu where the language selector will be shown"
-msgstr "Выберите навигационное меню в котором будет выведен переключатель"
+msgstr ""
+"Выберите навигационное меню, в котором будет показан переключатель языков"
 
-#: options/wpglobus.option.php:279
+#: includes/options/class-wpglobus-options.php:286
 msgid "Custom CSS"
 msgstr "Пользовательский CSS"
 
-#: options/wpglobus.option.php:281
+#: includes/options/class-wpglobus-options.php:288
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `readme.txt` file."
 msgstr ""
-"Вы можете использовать свой CSS для переключателя языков. Смотрите файл "
-"`readme.txt` для примеров."
+"Сюда Вы можете поместить набор правил CSS для тонкой настройки меню выбора "
+"языков. Примеры для стандартных тем можно найти в файле `readme.txt`."
 
-#: options/wpglobus.option.php:283
+#: includes/options/class-wpglobus-options.php:290
 msgid "(Optional)"
-msgstr "(Опционально)"
+msgstr "(Не обязательно)"
 
-#: options/wpglobus.option.php:294
+#: includes/options/class-wpglobus-options.php:301
 msgid "Languages table"
 msgstr "Таблица языков"
 
-#: options/wpglobus.option.php:300
+#: includes/options/class-wpglobus-options.php:307
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
-"Используйте таблицу для добавления, редактирования или удаления языков."
+"Используйте эту таблицу, чтобы добавлять, удалять или редактировать языки."
 
-#: options/wpglobus.option.php:301
+#: includes/options/class-wpglobus-options.php:308
 msgid "NOTE: you cannot delete the default language."
-msgstr "ЗАМЕЧАНИЕ: Вы не можете удалить язык по умолчанию."
+msgstr "ВНИМАНИЕ: язык по умолчанию не может быть удален."
 
-#: options/wpglobus.option.php:309
+#: includes/options/class-wpglobus-options.php:316
+#, fuzzy
 msgid "Custom table"
-msgstr "Пользовательская таблица"
+msgstr "Пользовательский CSS"
 
-#: options/wpglobus.option.php:359 options/wpglobus.option.php:360
+#: includes/options/class-wpglobus-options.php:366
+#: includes/options/class-wpglobus-options.php:367
 msgid "WPGlobus"
-msgstr ""
+msgstr "WPGlobus"
+
+#: includes/options/fields/table/table-languages.php:25
+#, fuzzy
+msgid "item"
+msgstr "Удалить эту позицию"
+
+#: includes/options/fields/table/table-languages.php:27
+#, fuzzy
+msgid "items"
+msgstr "Нет записей"
+
+#: includes/options/fields/table/table-languages.php:49
+msgid "Code"
+msgstr "Код"
+
+#: includes/options/fields/table/table-languages.php:55
+msgid "Edit"
+msgstr "Изменить"
+
+#: includes/options/fields/table/table-languages.php:60
+msgid "Delete"
+msgstr "Удалить"
+
+#: includes/options/fields/table/table-languages.php:66
+msgid "File"
+msgstr "Файл"
+
+#: includes/options/fields/table/table-languages.php:71
+msgid "Flag"
+msgstr "Флаг"
+
+#: includes/options/fields/table/table-languages.php:81
+msgid "Language name"
+msgstr "Название языка"
+
+#: includes/options/fields/table/table-languages.php:86
+msgid "English language name"
+msgstr "Название языка по-английски"
+
+#: includes/options/fields/table/table-languages.php:109
+msgid "No items found"
+msgstr "Нет записей"
+
+#: includes/options/fields/table/table-languages.php:119
+msgid "Add new Language"
+msgstr "Добавить новый язык"
+
+#: includes/options/fields/table/table-languages.php:315
+msgid "Default language"
+msgstr "Язык по умолчанию"
