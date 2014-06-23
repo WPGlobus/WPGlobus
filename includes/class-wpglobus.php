@@ -240,7 +240,7 @@ class WPGlobus {
 
 		$css = '';
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-			$css .= '.globus-flag-' . $language .
+			$css .= '.wpglobus_flag_' . $language .
 				' { background:url(' .
 				$WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ') no-repeat }';
 		}
@@ -268,22 +268,22 @@ class WPGlobus {
 				$extra_languages[] = $languages;
 			}
 		}
-		/** @todo All CSS classes should start with wpglobus */
+
 		$span_classes = array(
-			'globus-flag',
-			'globus-language-name'
+			'wpglobus_flag',
+			'wpglobus_language_name'
 		);
 
 		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'globus-flag-' . $WPGlobus_Config->language;
+		$span_classes_lang[] = 'wpglobus_flag_' . $WPGlobus_Config->language;
 
-		$output .= '<li class="page_item page-item-globus-menu-switch page_item_has_children">
+		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">
 						<a href="' . WPGlobus_Utils::get_url( $WPGlobus_Config->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span></a>
 						<ul class="children">';
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   = $span_classes;
-			$span_classes_lang[] = 'globus-flag-' . $language;
-			$output .= '<li id="" class="page_item">
+			$span_classes_lang[] = 'wpglobus_flag_' . $language;
+			$output .= '<li class="page_item">
 								<a href="' . WPGlobus_Utils::get_url( $language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span></a>
 							</li>';
 		} // end foreach
@@ -325,22 +325,22 @@ class WPGlobus {
 		/** main menu item classes */
 		$menu_item_classes = array(
 			'',
-			'menu-item-globus-menu-switch'
+			'menu_item_wpglobus_menu_switch'
 		);
 
 		/** submenu item classes */
 		$submenu_item_classes = array(
 			'',
-			'sub-menu-item-globus-menu-switch'
+			'sub_menu_item_wpglobus_menu_switch'
 		);
 
 		$span_classes = array(
-			'globus-flag',
-			'globus-language-name'
+			'wpglobus_flag',
+			'wpglobus_language_name'
 		);
 
 		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'globus-flag-' . $WPGlobus_Config->language;
+		$span_classes_lang[] = 'wpglobus_flag_' . $WPGlobus_Config->language;
 
 		$item                   = new stdClass();
 		$item->ID               = 9999999999; # 9 999 999 999
@@ -355,11 +355,11 @@ class WPGlobus {
 
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   = $span_classes;
-			$span_classes_lang[] = 'globus-flag-' . $language;
+			$span_classes_lang[] = 'wpglobus_flag_' . $language;
 
 			$item                   = new stdClass();
-			$item->ID               = 'globus-menu-switch-' . $language;
-			$item->db_id            = 'globus-menu-switch-' . $language;
+			$item->ID               = 'wpglobus_menu_switch_' . $language;
+			$item->db_id            = 'wpglobus_menu_switch_' . $language;
 			$item->menu_item_parent = 9999999999;
 			$item->title            =
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
