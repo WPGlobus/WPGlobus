@@ -285,13 +285,13 @@ class LanguagesTable extends WP_List_table {
 
 				switch ( $action ) {
 				case 'edit' :
-					$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=edit', $data['caption'] );
+					$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=edit', $data['caption'] );
 					break;
 				case 'delete' :
 					if ( $item['code'] == $WPGlobus_Config->default_language ) {
-						$actions['delete'] = sprintf( '<a %1s href="#">%2s</a>', $class, 'Default language' );
+						$actions['delete'] = sprintf( '<a %1s href="#">%2s</a>', $class, __( 'Default language', 'wpglobus' ) );
 					} else {
-						$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=delete', $data['caption'] );
+						$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=delete', $data['caption'] );
 					}
 					break;
 				}
