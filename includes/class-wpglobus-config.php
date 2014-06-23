@@ -39,7 +39,7 @@ class WPGlobus_Config {
 
 	/**
 	 * Current language
-	 * @public string
+	 * @var string
 	 */
 	public $language = 'en';
 
@@ -445,4 +445,6 @@ class WPGlobus_Config {
 		return $enabled_url_mode;
 	}
 
-} // end class WPGlobus_Config
+} // end of class WPGlobus_Config
+
+# --- EOF
