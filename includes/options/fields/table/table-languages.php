@@ -12,21 +12,21 @@ class LanguagesTable extends WP_List_table {
 
 	var $table_fields	= array();
 
+	var $found_data = array();
+
+	var $_column_headers = array();
+
 	/**
 	 *  Constructor.
 	*/	
 	public function __construct() {
 
 		parent::__construct( array(
-			'singular'  => __( 'item' , '' ), 	// singular name of the listed records
-			'plural'	=> __( 'items', '' ),	// plural name of the listed records
+			'singular'  => __( 'item' , 'wpglobus' ), 	// singular name of the listed records
+			'plural'	=> __( 'items', 'wpglobus' ),	// plural name of the listed records
 			'ajax'		=> true					// does this table support ajax?
 		) );
 
-		/** @global wpdb $wpdb */
-		// global $wpdb;
-		
-	
 		$this->get_data();
 
 		$this->display_table();
@@ -34,7 +34,9 @@ class LanguagesTable extends WP_List_table {
 	}
 
 	/**
+	 * Fill out table_fields and data arrays
 	 *
+	 * @return void
 	 */
 	function get_data() {
 
@@ -42,49 +44,48 @@ class LanguagesTable extends WP_List_table {
 
 		$this->table_fields =  array(
 			'code' 	=> array(
-				'caption'	=> 'Code',
+				'caption'	=> __( 'Code', 'wpglobus' ),
 				'sortable'  => true,
 				'order' 	=> 'asc',
 				'actions' => array(
 					'edit' => array(
 						'action' => 'edit',
-						'caption' => 'Edit',
+						'caption' => __( 'Edit', 'wpglobus' ),
 						'ajaxify' => false
 					),
 					'delete' => array(
 						'action' => 'delete',
-						'caption' => 'Delete',
+						'caption' => __( 'Delete',  'wpglobus' ),
 						'ajaxify' => false
 					)
 				)
 			),
 			'file' 	=> array(
-				'caption'	=> 'File',
+				'caption'	=> __( 'File', 'wpglobus' ),
 				'sortable'  => false,
 				'order' 	=> 'desc'
 			),
 			'flag' 	=> array(
-				'caption'	=> 'Flag',
+				'caption'	=> __( 'Flag', 'wpglobus' ),
 				'sortable'  => false,
 				'order' 	=> 'desc'
 			),
 			'locale' 	=> array(
-				'caption'	=> 'Locale',
+				'caption'	=> __( 'Locale', 'wpglobus' ),
 				'sortable'  => true,
 				'order' 	=> 'desc'
 			),
 			'language_name' 	=> array(
-				'caption' => 'Language name',
+				'caption' => __( 'Language name', 'wpglobus' ),
 				'sortable' => false,
 				'order' => 'desc'
 			),
 			'en_language_name' => array(
-				'caption' => 'English language name',
+				'caption' => __( 'English language name', 'wpglobus' ),
 				'sortable' => true
 			)
 		);
 
-		$i = 0;
 		foreach( $WPGlobus_Config->language_name as $code=>$name ) {
 
 			$row['ID'] 		 		 = $code;
@@ -96,11 +97,7 @@ class LanguagesTable extends WP_List_table {
 			$row['en_language_name'] = $WPGlobus_Config->en_language_name[$code];
 
 			$this->data[] = $row;
-			//if ( $i < 1 ) {
-			//	$this->dummy_data[] = $row;
-			//}
-			$i++;
-			//if ($code == 'ru')	break;
+
 		}
 
 	}
@@ -114,15 +111,7 @@ class LanguagesTable extends WP_List_table {
 		$this->prepare_items();
 		?>
 		<div class="flag-table-wrapper">
-			<a id="add_language" href="<?php admin_url(); ?>admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>&amp;action=add" class="button button-primary"><?php esc_html_e('Add new Language'); ?></a>
-
-			<?php  /** @todo remove dummy */   
-				//$this->prepare_dummy_items(); ?>
-			<div class="table-dummy hidden table-wrap wrap">
-				<form method="post">
-					<?php //$this->display_dummy_table(); ?>
-				</form>
-			</div>	<!-- .wrap -->
+			<a id="wpglobus_add_language" href="<?php admin_url(); ?>admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>&amp;action=add" class="button button-primary"><?php esc_html_e('Add new Language', 'wpglobus'); ?></a>
 
 			<?php $this->prepare_items(); ?>
 			<div class="table-wrap wrap">
@@ -133,20 +122,6 @@ class LanguagesTable extends WP_List_table {
 			</div>	<!-- .wrap -->
 		</div>	<?php
 
-	}
-
-
-	function prepare_dummy_items() {
-		//$this->prepare_items();
-
-		//$columns  = $this->get_columns();
-		//$hidden   = array();
-		// $sortable = $this->get_sortable_columns();
-		//$sortable = array();
-		//$this->_column_headers = array( $columns, $hidden, $sortable );
-
-		/** @todo remove */
-		// $this->items = $this->dummy_data;
 	}
 
 	/**
@@ -169,7 +144,6 @@ class LanguagesTable extends WP_List_table {
 
 		/**
 		 * You can handle your row actions
-		 *
 		 */
 		$this->process_row_action();
 
@@ -192,18 +166,13 @@ class LanguagesTable extends WP_List_table {
 			'total_pages' => ceil( $total_items/$per_page )     //WE have to calculate the total number of pages
 		) );
 
-		/* 		$this->set_pagination_args( array(
-			'total_items' => $total_items,                  //WE have to calculate the total number of items
-			'per_page'    => $per_page                     //WE have to determine how many items to show on a page
-		) ); */
-//error_log( print_r($this->found_data, true) );
 		/** @var  WP_List_table class */
 		$this->items = $this->found_data;
 
 	}
 
 	/**
-	 *
+	 * @return array
 	 */
 	function get_columns() {
 
@@ -305,13 +274,15 @@ class LanguagesTable extends WP_List_table {
 	 */
 	function column_code( $item  ) {
 
-		if ( !empty( $this->table_fields['code']['actions'] ) ) {
+		if ( ! empty( $this->table_fields['code']['actions'] ) ) {
 
 			global $WPGlobus_Config;
+			$actions = array();
 
 			foreach( $this->table_fields['code']['actions'] as $action=>$data ) {
 				/** add actions for language code */
 				$class = $data['ajaxify'] ? 'class="ajaxify"' : '';
+
 				switch ( $action ) {
 				case 'edit' :
 					$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>', $class, '/wp-admin/admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=edit', $data['caption'] );
@@ -326,6 +297,7 @@ class LanguagesTable extends WP_List_table {
 				}
 
 			}
+
 			return sprintf( '%1s %2s', $item['code'], $this->row_actions( $actions ) );
 
 		} else {
@@ -341,6 +313,7 @@ class LanguagesTable extends WP_List_table {
 	 * Define function for add item actions by name 'column_default'
 	 * @since 1.0.0
 	 * @param  $item array
+	 * @param  $column_name string
 	 * @return string
 	 */
 	function column_default( $item, $column_name ) {
@@ -366,40 +339,13 @@ class LanguagesTable extends WP_List_table {
 	}
 
 	/**
-	 * Display the dummy table
-	 *
-	 * @since 3.1.0
-	 * @access public
-	 */
-	function display_dummy_table() {
-		extract( $this->_args );
-
-		?>
-		<table class="wp-list-table-dummy wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>" cellspacing="0">
-			<thead>
-			<tr>
-				<?php $this->print_column_headers(); ?>
-			</tr>
-			</thead>
-
-			<tbody id="the-list-dummy">
-				<?php $this->display_rows_or_placeholder(); ?>
-			</tbody>
-		</table>
-		<?php
-
-	}
-
-	/**
 	 * Generate the table navigation above or below the table
 	 *
 	 * @since 3.1.0
 	 * @access protected
 	 */
-	function display_tablenav( $which ) {
-		//if ( 'top' == $which )
-			//wp_nonce_field( 'bulk-' . $this->_args['plural'] );
-		?>
+	function display_tablenav( $which ) {		?>
+
 		<div class="tablenav <?php echo esc_attr( $which ); ?>">
 
 			<div class="alignleft actions bulkactions">
@@ -412,7 +358,8 @@ class LanguagesTable extends WP_List_table {
 
 			<br class="clear" />
 		</div>
-	<?php
+		<?php
+
 	}
 
 }	
