@@ -53,7 +53,7 @@ if (!class_exists('ReduxFramework_raw')) {
 
             if (!empty($this->field['content']) && isset($this->field['content'])) {
                 if (isset($this->field['markdown']) && $this->field['markdown'] == true) {
-                    require_once dirname(__FILE__) . "/parsedown.php";
+                    require_once dirname( __FILE__ ) . "/parsedown.php";
                     echo Parsedown::instance()->parse($this->field['content']);
                 } else {
                     echo $this->field['content'];

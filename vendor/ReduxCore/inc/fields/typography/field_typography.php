@@ -796,7 +796,7 @@ class ReduxFramework_typography {
 
         // Initialize the Wordpress filesystem, no more using file_put_contents function
         if (empty($wp_filesystem)) {
-            require_once (ABSPATH . '/wp-admin/includes/file.php');
+            require_once( ABSPATH . '/wp-admin/includes/file.php' );
             WP_Filesystem();
         }
 

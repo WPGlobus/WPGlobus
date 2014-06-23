@@ -39,8 +39,8 @@ if(has_action('ecpt_field_options_')) {
 
 if ( !class_exists( 'ReduxFrameworkInstances' ) ) {
     // Instance Container
-    include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
-    include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
+    include_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
+    include_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
 
 }
 
@@ -52,10 +52,10 @@ if ( class_exists( 'ReduxFrameworkInstances' ) ) {
 if( !class_exists( 'ReduxFramework' ) ) {
 
     // General helper functions
-    include_once(dirname(__FILE__).'/inc/class.redux_helpers.php');
+    include_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
 
     // General functions
-    include_once(dirname(__FILE__).'/inc/class.redux_functions.php');
+    include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
     
     
     /**
@@ -2109,7 +2109,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Not used by new sample-config, but in here for legacy builds
             // This is bad and can break things. Hehe.
             if( !function_exists( 'wp_get_current_user' ) ) {
-                include(ABSPATH . "wp-includes/pluggable.php");
+                include( ABSPATH . "wp-includes/pluggable.php" );
             }
 
             register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array( $this,'_validate_options' ) );
