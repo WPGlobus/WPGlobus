@@ -14,7 +14,7 @@ jQuery(document).ready(function () {
             }
 
             this.config = {
-                _log: true,
+                debug: true,
                 version: '0.0'
             };
 
@@ -24,11 +24,11 @@ jQuery(document).ready(function () {
 
             if (typeof aaAdminGlobus === 'undefined') {
                 this.status = 'error';
-                if (this.config._log) {
+                if (this.config.debug) {
                     console.log('Error options loading');
                 }
             } else {
-                if (this.config._log) {
+                if (this.config.debug) {
                     console.dir(aaAdminGlobus);
                 }
             }
@@ -58,6 +58,9 @@ jQuery(document).ready(function () {
             }
         };
 
+        /**
+         * @todo http://jslinterrors.com/do-not-use-new-for-side-effects
+         */
         new globusAdminApp.App();
 
         return globusAdminApp;
