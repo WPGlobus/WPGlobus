@@ -366,8 +366,7 @@ class WPGlobus_Language_Edit {
 						<td><input name="language_name" type="text" id="language_name"
 								   value="<?php echo $this->language_name; ?>" class="regular-text"/>
 
-							<p class="description"><?php _e( 'The name of the language in its native alphabet.
-								(Examples: English, Русский)', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'The name of the language in its native alphabet. (Examples: English, Русский)', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
 						<th scope="row"><label

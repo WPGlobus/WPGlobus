@@ -256,7 +256,7 @@ class WPGlobus_Options {
 						'minimumResultsForSearch' => - 1
 					),
 					'options'  => array(
-						'code'  => __( 'Two-letter Code (EN, RU, IT, etc.)', 'wpglobus' ),
+						'code'  => __( 'Two-letter Code (en, ru, it, etc.)', 'wpglobus' ),
 						'name'  => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
 						'empty' => __( 'Flags only', 'wpglobus' )
 					),
