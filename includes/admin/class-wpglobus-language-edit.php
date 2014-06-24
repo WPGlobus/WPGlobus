@@ -152,8 +152,8 @@ class WPGlobus_Language_Edit {
 	 */
 	function process_submit() {
 
-		$code = isset( $_POST['language_code'] ) ? $_POST['language_code'] : '';
-		if ( $this->language_code == $code ) {
+		$code = isset( $_POST['wpglobus_language_code'] ) ? $_POST['wpglobus_language_code'] : '';
+		if ( $this->language_code == $code && ! empty( $code ) ) {
 			if ( $this->check_fields( $code, false ) ) {
 				$this->save();
 				$this->submit_messages['success'][] = __( 'Options updated', 'wpglobus' );
@@ -239,27 +239,27 @@ class WPGlobus_Language_Edit {
 			$this->submit_messages['errors'][] = __( 'Language code already exists!', 'wpglobus' );
 		}
 
-		if ( empty( $_POST['flags'] ) ) {
+		if ( empty( $_POST['wpglobus_flags'] ) ) {
 			$this->submit_messages['errors'][] = __( 'Please specify the language flag!', 'wpglobus' );
 		}
 
-		if ( empty( $_POST['language_name'] ) ) {
+		if ( empty( $_POST['wpglobus_language_name'] ) ) {
 			$this->submit_messages['errors'][] = __( 'Please enter the language name!', 'wpglobus' );
 		}
 
-		if ( empty( $_POST['en_language_name'] ) ) {
+		if ( empty( $_POST['wpglobus_en_language_name'] ) ) {
 			$this->submit_messages['errors'][] = __( 'Please enter the language name in English!', 'wpglobus' );
 		}
 
-		if ( empty( $_POST['locale'] ) ) {
+		if ( empty( $_POST['wpglobus_locale'] ) ) {
 			$this->submit_messages['errors'][] = __( 'Please enter the locale!', 'wpglobus' );
 		}
 
 		$this->language_code    = $lang_code;
-		$this->flag             = isset( $_POST['flags'] ) ? $_POST['flags'] : '';
-		$this->language_name    = isset( $_POST['language_name'] ) ? $_POST['language_name'] : '';
-		$this->en_language_name = isset( $_POST['en_language_name'] ) ? $_POST['en_language_name'] : '';
-		$this->locale           = isset( $_POST['locale'] ) ? $_POST['locale'] : '';
+		$this->flag             = isset( $_POST['wpglobus_flags'] ) ? $_POST['wpglobus_flags'] : '';
+		$this->language_name    = isset( $_POST['wpglobus_language_name'] ) ? $_POST['wpglobus_language_name'] : '';
+		$this->en_language_name = isset( $_POST['wpglobus_en_language_name'] ) ? $_POST['wpglobus_en_language_name'] : '';
+		$this->locale           = isset( $_POST['wpglobus_locale'] ) ? $_POST['wpglobus_locale'] : '';
 
 		if ( empty( $this->submit_messages['errors'] ) ) {
 			return true;
@@ -334,19 +334,19 @@ class WPGlobus_Language_Edit {
 			<form method="post" action="">
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label>
+						<th scope="row"><label for="wpglobus_language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label>
 						</th>
 						<td>
-							<input name="language_code" <?php echo $disabled; ?> type="text" id="language_code"
+							<input name="wpglobus_language_code" <?php echo $disabled; ?> type="text" id="wpglobus_language_code"
 								   value="<?php echo $this->language_code; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', 'wpglobus' ); ?></p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="flags"><?php _e( 'Language flag', 'wpglobus' ); ?></label></th>
+						<th scope="row"><label for="wpglobus_flags"><?php _e( 'Language flag', 'wpglobus' ); ?></label></th>
 						<td>
-							<select id="wpglobus_flags" name="flags" style="width:300px;" class="populate">    <?php
+							<select id="wpglobus_flags" name="wpglobus_flags" style="width:300px;" class="populate">    <?php
 								foreach ( $this->all_flags as $file_name ) :
 									if ( $this->flag == $file_name ) {
 										$selected = 'selected';
@@ -362,24 +362,24 @@ class WPGlobus_Language_Edit {
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="language_name"><?php _e( 'Name', 'wpglobus' ); ?></label></th>
-						<td><input name="language_name" type="text" id="wpglobus_language_name"
+						<th scope="row"><label for="wpglobus_language_name"><?php _e( 'Name', 'wpglobus' ); ?></label></th>
+						<td><input name="wpglobus_language_name" type="text" id="wpglobus_language_name"
 								   value="<?php echo $this->language_name; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( 'The name of the language in its native alphabet. (Examples: English, Русский)', 'wpglobus' ); ?></p></td>
 					</tr>
 					<tr>
 						<th scope="row"><label
-								for="en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
-						<td><input name="en_language_name" type="text" id="wpglobus_en_language_name"
+								for="wpglobus_en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
+						<td><input name="wpglobus_en_language_name" type="text" id="wpglobus_en_language_name"
 								   value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( 'The name of the language in English', 'wpglobus' ); ?></p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
-						<td><input name="locale" type="text" id="wpglobus_locale" value="<?php echo $this->locale; ?>"
+						<th scope="row"><label for="wpglobus_locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
+						<td><input name="wpglobus_locale" type="text" id="wpglobus_locale" value="<?php echo $this->locale; ?>"
 								   class="regular-text"/>
 
 							<p class="description"><?php _e( 'PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)', 'wpglobus' ); ?></p>
