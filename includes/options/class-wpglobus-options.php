@@ -276,6 +276,8 @@ class WPGlobus_Options {
 					'id'       => 'css_editor',
 					'type'     => 'ace_editor',
 					'title'    => __( 'Custom CSS', 'wpglobus' ),
+					'mode'     => 'css',
+					'theme'    => 'chrome',
 					'compiler' => 'false',
 					'desc'     => __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `readme.txt` file.', 'wpglobus' ),
 					'subtitle' => __( '(Optional)', 'wpglobus' ),
@@ -300,8 +302,8 @@ class WPGlobus_Options {
 					'style'    => 'info',
 				),
 				array(
-					'id'    => 'lang_new',
-					'type'  => 'table'
+					'id'   => 'lang_new',
+					'type' => 'table'
 				)
 			)
 		);
