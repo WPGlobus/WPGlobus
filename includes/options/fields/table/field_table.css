@@ -1,23 +1,23 @@
-th#wpglobus_code {
+#wpglobus_code {
     width: 10%;
 }
 
-th#wpglobus_file {
+#wpglobus_file {
     width: 10%;
 }
 
-th#wpglobus_flag {
+#wpglobus_flag {
     width: 10%;
 }
 
-th#wpglobus_locale {
+#wpglobus_locale {
     width: 10%;
 }
 
-th#wpglobus_language_name {
+#wpglobus_language_name {
     width: 30%;
 }
 
-th#wpglobus_en_language_name {
+#wpglobus_en_language_name {
     width: 30%;
 }
