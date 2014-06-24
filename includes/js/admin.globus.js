@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global jQuery, console */
+/*global jQuery, console, aaAdminGlobus */
 jQuery(document).ready(function () {
     "use strict";
     window.globusAdminApp = (function (globusAdminApp, $) {
