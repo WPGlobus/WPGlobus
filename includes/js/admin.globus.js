@@ -58,9 +58,6 @@ jQuery(document).ready(function () {
             }
         };
 
-        /**
-         * @todo http://jslinterrors.com/do-not-use-new-for-side-effects
-         */
         new globusAdminApp.App();
 
         return globusAdminApp;
