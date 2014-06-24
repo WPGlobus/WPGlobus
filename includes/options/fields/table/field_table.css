@@ -1,27 +1,23 @@
-.table-dummy .hidden {
-    display: none;
-}
-
-th#code {
+th#wpglobus_code {
     width: 10%;
 }
 
-th#file {
+th#wpglobus_file {
     width: 10%;
 }
 
-th#flag {
+th#wpglobus_flag {
     width: 10%;
 }
 
-th#locale {
+th#wpglobus_locale {
     width: 10%;
 }
 
-th#language_name {
+th#wpglobus_language_name {
     width: 30%;
 }
 
-th#en_language_name {
+th#wpglobus_en_language_name {
     width: 30%;
 }

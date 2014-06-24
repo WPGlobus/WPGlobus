@@ -45,7 +45,7 @@ class LanguagesTable extends WP_List_table {
 		global $WPGlobus_Config;
 
 		$this->table_fields = array(
-			'code'             => array(
+			'wpglobus_code'             => array(
 				'caption'  => __( 'Code', 'wpglobus' ),
 				'sortable' => true,
 				'order'    => 'asc',
@@ -62,27 +62,27 @@ class LanguagesTable extends WP_List_table {
 					)
 				)
 			),
-			'file'             => array(
+			'wpglobus_file'             => array(
 				'caption'  => __( 'File', 'wpglobus' ),
 				'sortable' => false,
 				'order'    => 'desc'
 			),
-			'flag'             => array(
+			'wpglobus_flag'             => array(
 				'caption'  => __( 'Flag', 'wpglobus' ),
 				'sortable' => false,
 				'order'    => 'desc'
 			),
-			'locale'           => array(
+			'wpglobus_locale'           => array(
 				'caption'  => __( 'Locale', 'wpglobus' ),
 				'sortable' => true,
 				'order'    => 'desc'
 			),
-			'language_name'    => array(
+			'wpglobus_language_name'    => array(
 				'caption'  => __( 'Language name', 'wpglobus' ),
 				'sortable' => false,
 				'order'    => 'desc'
 			),
-			'en_language_name' => array(
+			'wpglobus_en_language_name' => array(
 				'caption'  => __( 'English language name', 'wpglobus' ),
 				'sortable' => true
 			)
@@ -90,14 +90,14 @@ class LanguagesTable extends WP_List_table {
 
 		foreach ( $WPGlobus_Config->language_name as $code => $name ) {
 
-			$row['ID']               = $code;
-			$row['file']             = $WPGlobus_Config->flag[$code];
-			$row['flag']             =
+			$row['wpglobus_ID']               = $code;
+			$row['wpglobus_file']             = $WPGlobus_Config->flag[$code];
+			$row['wpglobus_flag']             =
 				'<img src="' . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$code] . '" />';
-			$row['locale']           = $WPGlobus_Config->locale[$code];
-			$row['code']             = $code;
-			$row['language_name']    = $name;
-			$row['en_language_name'] = $WPGlobus_Config->en_language_name[$code];
+			$row['wpglobus_locale']           = $WPGlobus_Config->locale[$code];
+			$row['wpglobus_code']             = $code;
+			$row['wpglobus_language_name']    = $name;
+			$row['wpglobus_en_language_name'] = $WPGlobus_Config->en_language_name[$code];
 
 			$this->data[] = $row;
 
@@ -273,8 +273,8 @@ class LanguagesTable extends WP_List_table {
 	 * @param  $item array
 	 * @return string
 	 */
-	function column_flag( $item ) {
-		return $item['flag'];
+	function column_wpglobus_flag( $item ) {
+		return $item['wpglobus_flag'];
 	}
 
 	/**
@@ -283,8 +283,8 @@ class LanguagesTable extends WP_List_table {
 	 * @param  $item array
 	 * @return string
 	 */
-	function column_locale( $item ) {
-		return $item['locale'];
+	function column_wpglobus_locale( $item ) {
+		return $item['wpglobus_locale'];
 	}
 
 	/**
@@ -293,42 +293,42 @@ class LanguagesTable extends WP_List_table {
 	 * @param  $item array
 	 * @return string
 	 */
-	function column_code( $item ) {
+	function column_wpglobus_code( $item ) {
 
-		if ( ! empty( $this->table_fields['code']['actions'] ) ) {
+		if ( ! empty( $this->table_fields['wpglobus_code']['actions'] ) ) {
 
 			global $WPGlobus_Config;
 			$actions = array();
 
-			foreach ( $this->table_fields['code']['actions'] as $action => $data ) {
+			foreach ( $this->table_fields['wpglobus_code']['actions'] as $action => $data ) {
 				/** add actions for language code */
 				$class = $data['ajaxify'] ? 'class="ajaxify"' : '';
 
 				switch ( $action ) {
 					case 'edit' :
 						$actions['edit'] =
-							sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=edit', $data['caption'] );
+							sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['wpglobus_code'] . '&action=edit', $data['caption'] );
 						break;
 					case 'delete' :
-						if ( $item['code'] == $WPGlobus_Config->default_language ) {
+						if ( $item['wpglobus_code'] == $WPGlobus_Config->default_language ) {
 							$actions['delete'] =
 								sprintf( '<a %1s href="#">%2s</a>', $class, __( 'Default language', 'wpglobus' ) );
 						}
 						else {
 							$actions['delete'] =
-								sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['code'] . '&action=delete', $data['caption'] );
+								sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['wpglobus_code'] . '&action=delete', $data['caption'] );
 						}
 						break;
 				}
 
 			}
 
-			return sprintf( '%1s %2s', $item['code'], $this->row_actions( $actions ) );
+			return sprintf( '%1s %2s', $item['wpglobus_code'], $this->row_actions( $actions ) );
 
 		}
 		else {
 
-			return $item['code'];
+			return $item['wpglobus_code'];
 
 		}
 
