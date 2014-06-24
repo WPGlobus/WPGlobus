@@ -13,12 +13,12 @@
      * Table
      */
     $.redux.table = function () {
-        var $t_flag = $('.flag-table-wrapper').html(),
-            $t_form_table = $('.flag-table-wrapper').parents('table');
+        var $t_flag = $('.wpglobus_flag_table_wrapper').html(),
+            $t_form_table = $('.wpglobus_flag_table_wrapper').parents('table');
 
-        $t_form_table.wrap('<div style="overflow:hidden;" class="flag-table"><' + '/div>');
+        $t_form_table.wrap('<div style="overflow:hidden;" class="wpglobus_flag_table"><' + '/div>');
         $t_form_table.remove();
-        $('.flag-table').html($t_flag);
+        $('.wpglobus_flag_table').html($t_flag);
 
     };
 }(jQuery));

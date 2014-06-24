@@ -113,7 +113,7 @@ class LanguagesTable extends WP_List_table {
 
 		$this->prepare_items();
 		?>
-		<div class="flag-table-wrapper">
+		<div class="wpglobus_flag_table_wrapper">
 			<a id="wpglobus_add_language"
 			   href="<?php admin_url(); ?>admin.php?page=<?php echo WPGlobus::LANGUAGE_EDIT_PAGE; ?>&amp;action=add"
 			   class="button button-primary"><?php esc_html_e( 'Add new Language', 'wpglobus' ); ?></a>
