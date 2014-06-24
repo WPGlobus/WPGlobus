@@ -116,16 +116,18 @@ class WPGlobus {
 		global $WPGlobus_Config;
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
+		$suffix = SCRIPT_DEBUG ? '' : '.min';
+
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 
 			wp_register_script(
-				'select2',
-				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
+				'select2-js',
+				plugins_url( "/../vendor/ReduxCore/assets/js/vendor/select2/select2$suffix.js", __FILE__ ),
 				array( 'jquery' ),
 				self::$_version,
 				true
 			);
-			wp_enqueue_script( 'select2' );
+			wp_enqueue_script( 'select2-js' );
 
 			wp_register_script(
 				'admin-globus',
@@ -161,13 +163,13 @@ class WPGlobus {
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
-				'select2',
+				'select2-css',
 				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
 				array(),
 				self::$_version,
 				'all'
 			);
-			wp_enqueue_style( 'select2' );
+			wp_enqueue_style( 'select2-css' );
 		}
 
 		wp_register_style(
