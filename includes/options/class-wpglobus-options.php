@@ -218,8 +218,6 @@ class WPGlobus_Options {
 					'compiler'    => 'false',
 					'mode'        => false,
 					'desc'        => __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ),
-					//						'desc'        => __( 'Выберите язык и жмите "Сохранить изменения" для добавления в список доступных языков', 'wpglobus' ),
-					//						'subtitle'    => '',
 					'placeholder' => __( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
 				),
@@ -236,7 +234,6 @@ class WPGlobus_Options {
 						__( 'Query Mode:', 'wpglobus' ) .
 						' ' . trailingslashit( home_url() ) . 'page/?lang=<strong>en</strong>' .
 						'',
-					//						'desc'        => __( 'Выберите способ использования кода языка в URL', 'wpglobus' ),
 					'subtitle'    => __( 'Choose the method of URL modification', 'wpglobus' ),
 					'placeholder' => __( 'Select URL Mode', 'wpglobus' ),
 					'options'     => $WPGlobus_Config->_getEnabledUrlMode(),
@@ -249,8 +246,6 @@ class WPGlobus_Options {
 					'compiler' => 'false',
 					'mode'     => false,
 					'desc'     => __( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' ),
-					//						'desc'     => __( 'Выберите режим отображения названия языка рядом с флагом', 'wpglobus' ),
-					//						'subtitle' => __( '', 'wpglobus' ),
 					'select2'  => array(
 						'allowClear'              => false,
 						'minimumResultsForSearch' => - 1
@@ -270,15 +265,12 @@ class WPGlobus_Options {
 					'compiler'    => 'false',
 					'mode'        => false,
 					'desc'        => __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-					//						'desc'        => __( 'Выберите навигационное меню, в котором будет выведен переключатель языков', 'wpglobus' ),
-					//						'subtitle'    => __( '', 'wpglobus' ),
 					'select2'     => array(
 						'allowClear'              => true,
 						'minimumResultsForSearch' => - 1
 					),
 					'options'     => $this->menus,
 					'placeholder' => $navigation_menu_placeholder,
-					//						'default'     => 'code'
 				),
 				array(
 					'id'       => 'css_editor',
@@ -286,7 +278,6 @@ class WPGlobus_Options {
 					'title'    => __( 'Custom CSS', 'wpglobus' ),
 					'compiler' => 'false',
 					'desc'     => __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `readme.txt` file.', 'wpglobus' ),
-					//						'desc'     => __( 'Укажите правила CSS, подходящие для активной темы, чтобы выровнять размеры ссылок по горизонтали до нужного размера. Примеры смотрите в файле readme.txt', 'wpglobus' ),
 					'subtitle' => __( '(Optional)', 'wpglobus' ),
 					'default'  => '',
 					'rows'     => 15
@@ -306,8 +297,6 @@ class WPGlobus_Options {
 					'type'     => 'info',
 					'title'    => __( 'Use this table to add, edit or delete languages.', 'wpglobus' ),
 					'subtitle' => __( 'NOTE: you cannot delete the default language.', 'wpglobus' ),
-					//						'title'    => __( 'Используйте таблицу для добавления, редактирования или удаления языков.', 'wpglobus' ),
-					//						'subtitle' => __( 'Внимание! Язык по умолчанию нельзя удалить.', 'wpglobus' ),
 					'style'    => 'info',
 				),
 				array(
@@ -322,20 +311,6 @@ class WPGlobus_Options {
 	public function setHelpTabs() {
 		$this->args['help_tabs']    = array();
 		$this->args['help_sidebar'] = '';
-		// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
-		//			$this->args['help_tabs'][] = array(
-		//				'id'      => 'redux-help-tab-1',
-		//				'title'   => __( 'Theme Information 1', 'wpglobus' ),
-		//				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'wpglobus' )
-		//			);
-		//
-		//			$this->args['help_tabs'][] = array(
-		//				'id'      => 'redux-help-tab-2',
-		//				'title'   => __( 'Theme Information 2', 'wpglobus' ),
-		//				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'wpglobus' )
-		//			);
-		// Set the help sidebar
-		//			$this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'wpglobus' );
 	}
 
 	/**
@@ -345,8 +320,6 @@ class WPGlobus_Options {
 	public function setArguments() {
 
 		global $WPGlobus_Config;
-
-		#$theme = wp_get_theme(); // For use with some settings. Not necessary.
 
 		$this->args = array(
 			// TYPICAL -> Change these values as you need/desire
@@ -448,28 +421,11 @@ class WPGlobus_Options {
 			)
 		);
 
-		// Panel Intro text -> before the form
-		//			if ( ! isset( $this->args['global_variable'] ) || $this->args['global_variable'] !== false ) {
-		//				if ( ! empty( $this->args['global_variable'] ) ) {
-		//					$v = $this->args['global_variable'];
-		//				}
-		//				else {
-		//					$v = str_replace( '-', '_', $this->args['opt_name'] );
-		//				}
-		//				$this->args['intro_text'] = sprintf( __( '', 'wpglobus' ), $v );
-		//			}
-		//			else {
-		//				$this->args['intro_text'] =
-		//					__( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'wpglobus' );
-		//			}
 		$this->args['intro_text'] = '';
 
 		// Add content after the form.
 		$this->args['footer_text'] = '&copy; Copyright 2014, WPGlobus.';
 	}
-
-	//	public function getReduxInfo() {
-	//	}
 
 } // end class Redux_Framework_globus_option
 
