@@ -18,12 +18,7 @@ if ( class_exists( 'WPGlobus_Config' ) ) {
 class WPGlobus_Config {
 
 	/**
-	 * Plugin name
-	 */
-	const GLOBUS_PLUGIN_NAME = 'wpglobus';
-
-	/**
-	 *    Url mode: query (questionmark)
+	 *    Url mode: query (question mark)
 	 */
 	const GLOBUS_URL_QUERY = 1;
 
@@ -87,7 +82,6 @@ class WPGlobus_Config {
 
 	/**
 	 * Location of flags (needs trailing slash!)
-	 * 'plugins/globus/flags/';
 	 * @var string
 	 */
 	public $flags_url = '';
@@ -195,13 +189,11 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * Set flag URL
+	 * Set flags URL
 	 * @return void
 	 */
 	function _set_flags_url() {
-
-		//		$this->flags_url = plugins_url(self::GLOBUS_PLUGIN_NAME . '/flags/');
-		$this->flags_url = plugins_url( basename( dirname( dirname( __FILE__ ) ) ) ) . '/flags/';
+		$this->flags_url = WPGlobus::$PLUGIN_DIR_URL . 'flags/';
 	}
 
 	/**

@@ -9,25 +9,49 @@
  */
 class WPGlobus {
 
+	/**
+	 * @var string
+	 */
 	public static $_version = '0.1.0';
 
+	/**
+	 * @var string
+	 */
 	public static $minimalReduxFramework_version = '3.2.9.4';
 
-	/*
+	/**
 	 * Options page slug needed to get access to settings page
 	 */
 	const OPTIONS_PAGE_SLUG = 'wpglobus_options';
 
-	/*
+	/**
 	 * Language edit page
 	 */
 	const LANGUAGE_EDIT_PAGE = 'wpglobus_language_edit';
 
-	/*
+	/**
 	 * List navigation menus
 	 * @var array
 	 */
-	var $menus = array();
+	public $menus = array();
+
+	/**
+	 * Initialized at plugin loader
+	 * @var string
+	 */
+	public static $PLUGIN_DIR_PATH = '';
+
+	/**
+	 * Initialized at plugin loader
+	 * @var string
+	 */
+	public static $PLUGIN_DIR_URL = '';
+
+	/**
+	 * Are we using our version of Redux or someone else's?
+	 * @var string
+	 */
+	public $redux_framework_origin = 'external';
 
 
 	/**
@@ -40,8 +64,11 @@ class WPGlobus {
 		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
-				/** @todo Here we can set a flag to know that we are using the embedded Redux */
-				require_once '../vendor/ReduxCore/framework.php';
+				/** @noinspection PhpIncludeInspection */
+				require_once self::$PLUGIN_DIR_PATH . 'vendor/ReduxCore/framework.php';
+
+				/** Set a flag to know that we are using the embedded Redux */
+				$this->redux_framework_origin = 'embedded';
 			}
 
 			/**
@@ -120,9 +147,13 @@ class WPGlobus {
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 
+			/**
+			 * Using the same 'select2-js' ID as Redux Plugin does, to avoid duplicate enqueueing
+			 * @todo Check if we should do it only if redux origin is 'embedded'
+			 */
 			wp_register_script(
 				'select2-js',
-				plugins_url( "/../vendor/ReduxCore/assets/js/vendor/select2/select2$suffix.js", __FILE__ ),
+				self::$PLUGIN_DIR_URL . "vendor/ReduxCore/assets/js/vendor/select2/select2$suffix.js",
 				array( 'jquery' ),
 				self::$_version,
 				true
@@ -131,7 +162,7 @@ class WPGlobus {
 
 			wp_register_script(
 				'admin-globus',
-				plugins_url( '/js/admin.globus.js', __FILE__ ),
+				self::$PLUGIN_DIR_URL . 'includes/js/admin.globus.js',
 				array( 'jquery' ),
 				self::$_version,
 				true
@@ -164,7 +195,7 @@ class WPGlobus {
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
 				'select2-css',
-				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
+				self::$PLUGIN_DIR_URL . 'vendor/ReduxCore/assets/js/vendor/select2/select2.css',
 				array(),
 				self::$_version,
 				'all'
@@ -174,7 +205,7 @@ class WPGlobus {
 
 		wp_register_style(
 			'globus.admin',
-			plugins_url( '/css/globus.admin.css', __FILE__ ),
+			self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.css',
 			array(),
 			self::$_version,
 			'all'
@@ -225,7 +256,7 @@ class WPGlobus {
 	function on_wp_styles() {
 		wp_register_style(
 			'flags',
-			plugins_url( '/css/globus.flags.css', __FILE__ ),
+			self::$PLUGIN_DIR_URL . 'includes/css/globus.flags.css',
 			array(),
 			self::$_version,
 			'all'

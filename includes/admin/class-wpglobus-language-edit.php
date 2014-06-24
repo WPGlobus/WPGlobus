@@ -409,9 +409,7 @@ class WPGlobus_Language_Edit {
 	 */
 	function _get_flags() {
 
-		$path = WP_PLUGIN_DIR . '/' . WPGlobus_Config::GLOBUS_PLUGIN_NAME . '/flags/';
-
-		$dir = new DirectoryIterator( $path );
+		$dir = new DirectoryIterator( WPGlobus::$PLUGIN_DIR_PATH . 'flags/' );
 
 		foreach ( $dir as $file ) {
 			/** @var DirectoryIterator $file */
