@@ -118,7 +118,6 @@ class WPGlobus {
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 
-			/** @todo Why needed? What if redux is loaded not from here? */
 			wp_register_script(
 				'select2',
 				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.js', __FILE__ ),
@@ -161,7 +160,6 @@ class WPGlobus {
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
-			/** @todo Why needed? What if redux is loaded not from here? */
 			wp_register_style(
 				'select2',
 				plugins_url( '/../vendor/ReduxCore/assets/js/vendor/select2/select2.css', __FILE__ ),
