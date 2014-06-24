@@ -346,7 +346,7 @@ class WPGlobus_Language_Edit {
 					<tr>
 						<th scope="row"><label for="flags"><?php _e( 'Language flag', 'wpglobus' ); ?></label></th>
 						<td>
-							<select id="flags" name="flags" style="width:300px;" class="populate">    <?php
+							<select id="wpglobus_flags" name="flags" style="width:300px;" class="populate">    <?php
 								foreach ( $this->all_flags as $file_name ) :
 									if ( $this->flag == $file_name ) {
 										$selected = 'selected';
@@ -363,7 +363,7 @@ class WPGlobus_Language_Edit {
 					</tr>
 					<tr>
 						<th scope="row"><label for="language_name"><?php _e( 'Name', 'wpglobus' ); ?></label></th>
-						<td><input name="language_name" type="text" id="language_name"
+						<td><input name="language_name" type="text" id="wpglobus_language_name"
 								   value="<?php echo $this->language_name; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( 'The name of the language in its native alphabet. (Examples: English, Русский)', 'wpglobus' ); ?></p></td>
@@ -371,7 +371,7 @@ class WPGlobus_Language_Edit {
 					<tr>
 						<th scope="row"><label
 								for="en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
-						<td><input name="en_language_name" type="text" id="en_language_name"
+						<td><input name="en_language_name" type="text" id="wpglobus_en_language_name"
 								   value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( 'The name of the language in English', 'wpglobus' ); ?></p>
@@ -379,7 +379,7 @@ class WPGlobus_Language_Edit {
 					</tr>
 					<tr>
 						<th scope="row"><label for="locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
-						<td><input name="locale" type="text" id="locale" value="<?php echo $this->locale; ?>"
+						<td><input name="locale" type="text" id="wpglobus_locale" value="<?php echo $this->locale; ?>"
 								   class="regular-text"/>
 
 							<p class="description"><?php _e( 'PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)', 'wpglobus' ); ?></p>

@@ -44,7 +44,7 @@ jQuery(document).ready(function () {
                 this.start(config);
             },
             start: function (config) {
-                $('#flags').select2({
+                $('#wpglobus_flags').select2({
                     formatResult: this.format,
                     formatSelection: this.format,
                     minimumResultsForSearch: -1,
@@ -54,7 +54,7 @@ jQuery(document).ready(function () {
                 });
             },
             format: function (language) {
-                return '<img class="flag" src="' + aaAdminGlobus.flag_url + language.text + '"/>&nbsp;&nbsp;' + language.text;
+                return '<img class="wpglobus_flag" src="' + aaAdminGlobus.flag_url + language.text + '"/>&nbsp;&nbsp;' + language.text;
             }
         };
 
