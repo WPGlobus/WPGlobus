@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "POT-Creation-Date: 2014-06-24 08:15+0800\n"
-"PO-Revision-Date: 2014-06-24 08:15+0800\n"
+"PO-Revision-Date: 2014-06-24 11:45+0800\n"
 "Last-Translator: Alex <a@a.ru>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -81,7 +81,7 @@ msgstr "Название"
 #: includes/admin/class-wpglobus-language-edit.php:369
 msgid ""
 "The name of the language in its native alphabet. (Examples: English, Русский)"
-msgstr "Название языка на родном языке. (Пример: English, Русский)"
+msgstr "Название на языке оригинала. (Пример: English, Русский)"
 
 #: includes/admin/class-wpglobus-language-edit.php:373
 msgid "Name in English"
