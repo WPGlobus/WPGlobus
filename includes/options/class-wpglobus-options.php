@@ -312,10 +312,7 @@ class WPGlobus_Options {
 				),
 				array(
 					'id'    => 'lang_new',
-					'type'  => 'table',
-					'title' => __( 'Custom table', 'wpglobus' ),
-					//						'subtitle' => __( '', 'wpglobus' ),
-					//						'desc'     => __( '', 'wpglobus' ),
+					'type'  => 'table'
 				)
 			)
 		);

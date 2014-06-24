@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
-"POT-Creation-Date: 2014-06-23 12:43-0500\n"
-"PO-Revision-Date: 2014-06-24 08:02+0800\n"
+"POT-Creation-Date: 2014-06-24 08:15+0800\n"
+"PO-Revision-Date: 2014-06-24 08:15+0800\n"
 "Last-Translator: Alex <a@a.ru>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -210,7 +210,7 @@ msgstr "Спецификация УРЛ"
 #: includes/options/class-wpglobus-options.php:233
 #, fuzzy
 msgid "Path Mode:"
-msgstr "ТЕСТОВЫЙ РЕЖИМ "
+msgstr "Модификация URL"
 
 #: includes/options/class-wpglobus-options.php:236
 #, fuzzy
@@ -284,13 +284,8 @@ msgstr ""
 msgid "NOTE: you cannot delete the default language."
 msgstr "ВНИМАНИЕ: язык по умолчанию не может быть удален."
 
-#: includes/options/class-wpglobus-options.php:316
-#, fuzzy
-msgid "Custom table"
-msgstr "Пользовательский CSS"
-
-#: includes/options/class-wpglobus-options.php:366
-#: includes/options/class-wpglobus-options.php:367
+#: includes/options/class-wpglobus-options.php:359
+#: includes/options/class-wpglobus-options.php:360
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -341,3 +336,7 @@ msgstr "Добавить новый язык"
 #: includes/options/fields/table/table-languages.php:315
 msgid "Default language"
 msgstr "Язык по умолчанию"
+
+#, fuzzy
+#~ msgid "Custom table"
+#~ msgstr "Пользовательский CSS"
