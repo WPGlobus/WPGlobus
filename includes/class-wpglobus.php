@@ -59,7 +59,7 @@ class WPGlobus {
 	 */
 	function __construct() {
 
-		global $WPGlobus_Config;
+		global $WPGlobus_Config, $WPGlobus_Options;
 
 		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
@@ -71,13 +71,8 @@ class WPGlobus {
 				$this->redux_framework_origin = 'embedded';
 			}
 
-			/**
-			 * @todo We should not make globals in the middle of classes. Need to review this.
-			 */
 			require_once 'options/class-wpglobus-options.php';
-			global $WPGlobus_Options;
 			$WPGlobus_Options = new WPGlobus_Options();
-
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
@@ -132,6 +127,15 @@ class WPGlobus {
 			) );
 		}
 
+	}
+
+	/**
+	 * Start WPGlobus on "init" hook, so if there is another ReduxFramework, it will be loaded first. Hopefully :-)
+	 * Note: "init" hook is not guaranteed to stay in the future versions.
+	 */
+	public static function init() {
+		global $WPGlobus;
+		$WPGlobus = new self;
 	}
 
 	/**

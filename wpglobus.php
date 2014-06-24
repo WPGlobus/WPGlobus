@@ -43,6 +43,9 @@ if ( ! defined( 'SCRIPT_DEBUG' ) ) {
 	define( 'SCRIPT_DEBUG', false );
 }
 
+global $WPGlobus;
+global $WPGlobus_Config;
+global $WPGlobus_Options;
 
 require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
@@ -51,20 +54,11 @@ require_once 'includes/class-wpglobus.php';
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
 
-global $WPGlobus_Config;
 $WPGlobus_Config = new WPGlobus_Config();
 
 /**
- * Start WPGlobus on "init" hook, so if there is another ReduxFramework, it will be loaded first. Hopefully :-)
- * Note: "init" hook is not guaranteed to stay in the future versions.
+ * @see WPGlobus::init()
  */
-add_action( 'init', 'WPGlobus_init' );
-
-/**
- * Initialize WPGlobus
- */
-function WPGlobus_init() {
-	$GLOBALS['WPGlobus'] = new WPGlobus();
-}
+add_action( 'init', 'WPGlobus::init' );
 
 # --- EOF
