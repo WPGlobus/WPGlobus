@@ -29,8 +29,7 @@ class WPGlobus_Utils {
 				$language = '';
 			}
 
-			$url =
-				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
+			$url =	self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
 
 		}
 		elseif ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_QUERY ) {
@@ -53,12 +52,27 @@ class WPGlobus_Utils {
 				$url .= 'lang=' . $current_language;
 
 			}
-			//error_log( print_r( $r, true ) );
+
 			$url =
-				$_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER["HTTP_HOST"] . $WPGlobus_Config->url_info['url'] . $url;
+				self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $WPGlobus_Config->url_info['url'] . $url;
 		}
 
 		return $url;
+	}
+
+	/**
+	 * Get Request Scheme
+	 *
+	 * @return string
+	 */
+	public static function get_scheme() {
+		if ( isset( $_SERVER['REQUEST_SCHEME'] ) ) { 
+			return $_SERVER['REQUEST_SCHEME'];
+		}
+		if ( isset( $_SERVER['HTTPS'] ) && 'on' ==  $_SERVER['HTTPS'] ) {
+			return 'https';
+		}
+		return 'http';
 	}
 
 	/**
