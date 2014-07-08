@@ -106,11 +106,16 @@ class WPGlobus {
 
 			$this->menus = $this->_get_nav_menus();
 
-			add_filter( 'wp_list_pages', array(
+			/** @todo */
+			0 && add_filter( 'wp_list_pages', array(
 				$this,
 				'on_wp_list_pages'
 			), 99, 2 );
 
+			/**
+			 * Add language switcher to navigation menu
+			 * @see on_add_item
+			 */
 			add_filter( 'wp_nav_menu_objects', array(
 				$this,
 				'on_add_item'
@@ -332,7 +337,7 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add item to navigation menu
+	 * Add language switcher to navigation menu
 	 * @param array  $sorted_menu_items
 	 * @param object $args An object containing wp_nav_menu() arguments.
 	 * @return array
