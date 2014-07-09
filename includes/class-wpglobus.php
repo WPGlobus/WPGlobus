@@ -112,11 +112,17 @@ class WPGlobus {
 				'on_wp_list_pages'
 			), 99, 2 );
 
+			/** @todo */
+			1 && add_filter( 'wp_page_menu', array(
+				$this,
+				'on_wp_page_menu'
+			), 99, 2 );
+
 			/**
 			 * Add language switcher to navigation menu
 			 * @see on_add_item
 			 */
-			add_filter( 'wp_nav_menu_objects', array(
+			1 && add_filter( 'wp_nav_menu_objects', array(
 				$this,
 				'on_add_item'
 			), 99, 2 );
@@ -132,6 +138,18 @@ class WPGlobus {
 			) );
 		}
 
+	}
+
+	/**
+	 * Ugly hack.
+	 * @see wp_page_menu
+	 * @param string $html
+	 * @return string
+	 */
+	public function on_wp_page_menu( $html ) {
+		$switcher_html = $this->on_wp_list_pages( '' );
+		$html          = str_replace( '</ul></div>', $switcher_html . '</ul></div>', $html );
+		return $html;
 	}
 
 	/**
