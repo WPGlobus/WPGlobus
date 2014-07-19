@@ -66,10 +66,7 @@ class WPGlobus_Utils {
 	 * @return string
 	 */
 	public static function get_scheme() {
-		if ( isset( $_SERVER['REQUEST_SCHEME'] ) ) { 
-			return $_SERVER['REQUEST_SCHEME'];
-		}
-		if ( isset( $_SERVER['HTTPS'] ) && 'on' ==  $_SERVER['HTTPS'] ) {
+		if ( is_ssl() ) {
 			return 'https';
 		}
 		return 'http';
