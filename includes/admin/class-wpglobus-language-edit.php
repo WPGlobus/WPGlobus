@@ -96,13 +96,34 @@ class WPGlobus_Language_Edit {
 		}
 		elseif ( isset( $_POST['delete'] ) ) {
 			$this->process_delete();
+			$this->action = 'done';
 		}
 		else {
 			$this->get_data();
 		}
 
-		$this->display_table();
+		if ( $this->action != 'done' ) {
+			$this->display_table();
+		}
 
+		add_action( 'admin_footer', array( $this, 'on_print_scripts' ), 99 );
+
+	}
+
+	/**
+	 * Add script in admin footer
+	 * @return void
+	 */
+	function on_print_scripts() {
+		if ( 'done' == $this->action ) {
+			$location = '?page=' . WPGlobus::OPTIONS_PAGE_SLUG;		?>
+
+			<script type='text/javascript'>
+				jQuery(document).ready(function () {
+					window.location=window.location.protocol+'//'+window.location.host+window.location.pathname+'<?php echo $location; ?>'
+				})
+			</script>		<?php
+		}
 	}
 
 	/**
@@ -138,11 +159,6 @@ class WPGlobus_Language_Edit {
 
 		unset( $WPGlobus_Config->locale[$this->language_code] );
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
-
-		/** @todo make "$location" available from WPGlobus_Config */
-		$location = admin_url( '/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG );
-		wp_redirect( $location );
-		exit;
 
 	}
 
@@ -216,10 +232,7 @@ class WPGlobus_Language_Edit {
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
 		if ( $update_code ) {
-			/** @todo make "$location" available from WPGlobus_Config */
-			$location = admin_url( '/admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG );
-			wp_redirect( $location );
-			exit;
+			$this->action = 'done';
 		}
 	}
 
@@ -301,6 +314,7 @@ class WPGlobus_Language_Edit {
 	 * @return void
 	 */
 	function display_table() {
+
 		$disabled = '';
 		if ( 'edit' == $this->action ) {
 			$header = __( 'Edit Language', 'wpglobus' );
