@@ -187,6 +187,13 @@ class WPGlobus {
 			);
 			wp_enqueue_script( 'select2-js' );
 
+		}
+
+		if ( self::LANGUAGE_EDIT_PAGE === $page || self::OPTIONS_PAGE_SLUG === $page ) {
+
+			$i18n = array();
+			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
+
 			wp_register_script(
 				'admin-globus',
 				self::$PLUGIN_DIR_URL . 'includes/js/admin.globus.js',
@@ -204,11 +211,12 @@ class WPGlobus {
 					'parentClass'  => __CLASS__,
 					'process_ajax' => __CLASS__ . '_process_ajax',
 					'flag_url'     => $WPGlobus_Config->flags_url,
-					'i18n'         => '$i18n'
+					'i18n'         => $i18n
 				)
 			);
 
 		}
+
 	}
 
 	/**

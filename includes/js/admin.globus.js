@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
 
             this.config = {
                 debug: true,
-                version: '0.0'
+                version: aaAdminGlobus.version
             };
 
             $.extend(this.config, config);
@@ -51,6 +51,17 @@ jQuery(document).ready(function () {
                     escapeMarkup: function (m) {
                         return m;
                     }
+                });
+
+                /** disable checked off first language */
+                $('body').on('click', '#enabled_languages-list li:first input', function (event) {
+                    event.preventDefault();
+                    $('.redux-save-warn').css({'display':'none'});
+                    $('#enabled_languages-list li:first > input').val('1');
+                    if ($('#disable_first_language').length === 0) {
+                        $('<div id="disable_first_language" style="display:block;" class="redux-field-errors notice-red"><strong><span></span>'+aaAdminGlobus.i18n.cannot_disable_language+'</strong></div>').insertAfter('#info_bar');
+                    }
+                    return false;
                 });
             },
             format: function (language) {
