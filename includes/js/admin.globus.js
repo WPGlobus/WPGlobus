@@ -18,11 +18,9 @@ jQuery(document).ready(function () {
                 version: aaAdminGlobus.version
             };
 
-            $.extend(this.config, config);
-
             this.status = 'ok';
 
-            if (typeof aaAdminGlobus === 'undefined') {
+            if ('undefined' === aaAdminGlobus) {
                 this.status = 'error';
                 if (this.config.debug) {
                     console.log('Error options loading');
@@ -33,17 +31,29 @@ jQuery(document).ready(function () {
                 }
             }
 
+            this.config.disable_first_language = [
+                '<div id="disable_first_language" style="display:block;" class="redux-field-errors notice-red">',
+                '<strong>',
+                '<span>&nbsp;</span>',
+                aaAdminGlobus.i18n.cannot_disable_language,
+                '</strong>',
+                '</div>'
+            ].join('');
+
+            $.extend(this.config, config);
+
             if ('ok' === this.status) {
-                this.init(this.config);
+                this.init();
             }
         };
 
         globusAdminApp.App.prototype = {
 
-            init: function (config) {
-                this.start(config);
+            init: function () {
+                this.start();
             },
-            start: function (config) {
+            start: function () {
+                var t = this;
                 $('#wpglobus_flags').select2({
                     formatResult: this.format,
                     formatSelection: this.format,
@@ -56,10 +66,10 @@ jQuery(document).ready(function () {
                 /** disable checked off first language */
                 $('body').on('click', '#enabled_languages-list li:first input', function (event) {
                     event.preventDefault();
-                    $('.redux-save-warn').css({'display':'none'});
-                    $('#enabled_languages-list li:first > input').val('1');
+                    $('.redux-save-warn').css({'display': 'none'});
+                    $('#enabled_languages-list').find('li:first > input').val('1');
                     if ($('#disable_first_language').length === 0) {
-                        $('<div id="disable_first_language" style="display:block;" class="redux-field-errors notice-red"><strong><span></span>'+aaAdminGlobus.i18n.cannot_disable_language+'</strong></div>').insertAfter('#info_bar');
+                        $(t.config.disable_first_language).insertAfter('#info_bar');
                     }
                     return false;
                 });
@@ -70,7 +80,7 @@ jQuery(document).ready(function () {
         };
 
         new globusAdminApp.App();
-
+        
         return globusAdminApp;
 
     }(window.globusAdminApp || {}, jQuery));
