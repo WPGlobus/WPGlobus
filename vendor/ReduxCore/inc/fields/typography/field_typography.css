@@ -45,6 +45,9 @@
   -o-box-sizing: border-box;
   box-sizing: border-box;
 }
+.redux-main .redux-typography-container .select_wrapper.typography-family .select2-container {
+  width: 100%;
+}
 .redux-main .redux-typography-container .select_wrapper .redux-typography {
   font-size: 14px !important;
   display: block;
@@ -59,7 +62,7 @@
   box-sizing: border-box;
 }
 .redux-main .redux-typography-container .select_wrapper:nth-child(even) {
-  margin-right: 0 !important;
+  margin-right: 10px !important;
 }
 .redux-main .redux-typography-container .select_wrapper:nth-child(odd) {
   margin-right: 10px !important;
@@ -73,8 +76,8 @@
   -moz-border-radius: 3px;
   border-radius: 3px;
   /*  .wp-color-result {
-         margin-right:3px;
-        }*/
+             margin-right:3px;
+            }*/
 }
 .redux-main .redux-typography-container .input_wrapper {
   display: block;
@@ -98,12 +101,12 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  display: block;
+  /*            display:block;*/
   width: 78%;
   text-align: center;
   margin: 0;
   height: 28px;
-  position: absolute;
+  /*            position:absolute;*/
   top: 3px;
   padding: 0 2px 0 5px;
   text-decoration: none;
@@ -143,7 +146,7 @@
   cursor: default;
 }
 .redux-main .redux-typography-container .typography-preview {
-  display: block;
+  display: none;
   width: 100%;
   border: 1px dotted lightgray;
   max-width: 850px;
