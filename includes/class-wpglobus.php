@@ -174,7 +174,7 @@ class WPGlobus {
 
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
-		
+
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
