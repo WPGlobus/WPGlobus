@@ -61,7 +61,11 @@ class WPGlobus {
 
 		global $WPGlobus_Config, $WPGlobus_Options;
 
-		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+		/**
+		 * NOTE: do not check for !DOING_AJAX here. Redux uses AJAX, for example, for disabling tracking.
+		 * So, we need to load Redux on AJAX requests, too
+		 */
+		if ( is_admin() ) {
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
 				/** @noinspection PhpIncludeInspection */
