@@ -161,6 +161,7 @@ class WPGlobus {
 	 * Note: "init" hook is not guaranteed to stay in the future versions.
 	 */
 	public static function init() {
+		/** @global WPGlobus WPGlobus */
 		global $WPGlobus;
 		$WPGlobus = new self;
 	}
@@ -171,7 +172,9 @@ class WPGlobus {
 	 */
 	function on_admin_scripts() {
 
+		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
+		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
