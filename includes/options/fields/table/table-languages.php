@@ -375,9 +375,14 @@ class LanguagesTable extends WP_List_table {
 
 		<div class="tablenav <?php echo esc_attr( $which ); ?>">
 
+			<?php /** @todo The $which parameter is added in WP 4.0 -- waiting until
+			 * the ticket solved
+			 * @url https://core.trac.wordpress.org/ticket/28867#comment:8
 			<div class="alignleft actions bulkactions">
-				<?php $this->bulk_actions(); ?>
+			< ?php $this->bulk_actions('top'); ? >
 			</div>
+			 */
+			?>
 			<?php
 			$this->extra_tablenav( $which );
 			$this->pagination( $which );
