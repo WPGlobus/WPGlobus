@@ -1,4 +1,133 @@
 <?php
+/**
+ * Common filters
+ */
+add_filter( 'the_title', 'wpg_text_filter', 0 );
+add_filter( 'the_content', 'wpg_text_filter', 0 );
+
+/**
+ * @param string $text
+ *
+ * @return string
+ */
+function wpg_text_filter( $text = '' ) {
+
+	/**
+	 * @see function qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage
+	 */
+	if ( empty( $text ) ) {
+		// Nothing to do
+		return $text;
+	}
+	
+	$text = __wpg_text_filter( $text );
+	
+	return $text;
+
+}
+
+function __wpg_text_filter( $text = '', $language = '' ) {
+
+	/** @global string $wpg_default_language */	
+	//global $wpg_default_language;
+	
+	/** @global string $wpg_current_language */	
+	//global $wpg_current_language;
+	
+	global $WPGlobus_Config;	
+	
+	if ( empty( $text ) ) {
+		// Nothing to do
+		return $text;
+	}
+	
+	if ( empty( $language ) ) {
+		$language = $WPGlobus_Config->language;
+	}
+
+	/**
+	 * QA
+	 */
+	//	$text = '<!--:en-->English C<!--:--><!--:ru-->Russian C<!--:-->';
+	//	$text = '[:en]English S[:ru]Russian S';
+	//	$text = '[:ru]Russian S1[:en]English S1';
+	//	$text = '[:ru]Russian S2';
+	//	$text = 'Garbage[:en]English S3[:ru]Russian S3';
+	//	$text = 'Just заголовок';
+	//	$text = "<!--:en-->English\n\n ML<!--:--><!--:ru-->Russian \nML\n<!--:-->";
+	//	$text = "[:en]English\n\n ML[:ru]Russian \nML\n<!--:-->";
+
+	/**
+	 * qTranslate uses these two types of delimeters
+	 * @example
+	 * <!--:en-->English<!--:--><!--:ru-->Russian<!--:-->
+	 * [:en]English S[:ru]Russian S
+	 * The [] delimiter does not have the closing tag, so we will look for the next opening [: or
+	 * take the rest until end of end of the string
+	 */	
+	$possible_delimiters =
+		[
+			[
+				'start' => "<!--:{$language}-->",
+				'end'   => '<!--:-->',
+			],
+			[
+				'start' => "[:{$language}]",
+				'end'   => '[:',
+			],
+		];
+
+	/**
+	 * We do not know which delimiter was used, so we'll try both, in a loop
+	 */
+	foreach ( $possible_delimiters as $delimiters ) {
+		
+		$pos_start = false; 
+
+		/**
+		 * Try the starting position. If not found, continue the loop to the next set of delimiters
+		 */
+		$pos_start = mb_strpos( $text, $delimiters['start'] );
+		if ( $pos_start === false ) {
+			continue;
+		}
+
+		/**
+		 * The starting position found..adjust the pointer to the text start
+		 * (Do not need mb_strlen here, because we expect delimiters to be Latin only)
+		 */
+		$pos_start = $pos_start + strlen( $delimiters['start'] );
+
+		/**
+		 * Try to find the ending position.
+		 * If could not find, will extract the text until end of string by passing null to the `substr`
+		 */
+		$pos_end = mb_strpos( $text, $delimiters['end'], $pos_start );
+		if ( $pos_end === false ) {
+			// - Until end of string
+			$length = null;
+		} else {
+			$length = $pos_end - $pos_start;
+		}
+		
+		/**
+		 * Extract the text and end the loop
+		 */
+		$text = mb_substr( $text, $pos_start, $length );
+		break;
+
+	}
+
+	if ( false === $pos_start && $language != $WPGlobus_Config->default_language ) {
+		$text = __wpg_text_filter($text, $WPGlobus_Config->default_language);	
+	}
+	
+	return $text;
+
+}
+
+
+
 add_filter( 'locale', 'wpg_locale', 99 );
 function wpg_locale($locale){
 
