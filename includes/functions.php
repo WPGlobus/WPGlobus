@@ -21,7 +21,7 @@ function wpg_locale($locale){
 	return $WPGlobus_Config->locale[$WPGlobus_Config->language];
 }
 
-add_action('plugins_loaded', 'wpg_init', 2);
+add_action('init', 'wpg_init', 2);
 function wpg_init() {
 
 
