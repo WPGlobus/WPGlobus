@@ -47,14 +47,14 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 		public function enqueue() {
 
 			wp_enqueue_style(
-				'redux-table-css',
+				'field_table.css',
 				plugins_url( '/field_table.css', __FILE__ ),
 				time(),
 				true
 			);
 
 			wp_enqueue_script(
-				'field-table-js',
+				'field_table.js',
 				plugins_url( '/field_table.js', __FILE__ ),
 				array( 'jquery' ),
 				time(),
