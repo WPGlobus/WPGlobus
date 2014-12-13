@@ -5,6 +5,10 @@
 add_filter( 'the_title', 'wpg_text_filter', 0 );
 add_filter( 'the_content', 'wpg_text_filter', 0 );
 
+
+add_filter( 'wp_title', 'wpg_text_filter', 0 );
+add_filter( 'single_post_title', 'wpg_text_filter', 0 );
+
 /**
  * @param string $text
  *
@@ -210,6 +214,7 @@ function wpg_init() {
 	 * Add hack in 1 line for support AJAX
 	 * if(defined('WP_ADMIN')) {}
 	 */
+	/* 
 	if(defined('WP_ADMIN') && !(defined('DOING_AJAX') && DOING_AJAX) ) {
 		if(isset($_GET['lang']) && wpg_isEnabled($_GET['lang'])) {
 			$q_config['language'] = $q_config['url_info']['language'];
@@ -223,6 +228,7 @@ function wpg_init() {
 		// $q_config['language'] = $q_config['url_info']['language'];
 		$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 	}
+	// */
 	
 	//$q_config['language'] = apply_filters('qtranslate_language', $q_config['language']);
 	
