@@ -51,6 +51,8 @@ require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
 require_once 'includes/class-wpglobus.php';
 
+require_once 'includes/functions.php';
+
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
 
