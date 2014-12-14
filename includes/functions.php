@@ -1,4 +1,43 @@
 <?php
+
+/**
+ * Added wp_editor for enabled languages at post.php page
+ *
+ * @see action edit_form_after_editor in wp-admin\edit-form-advanced.php:542
+ */
+add_action( 'edit_form_after_editor', 'on_add_editors');
+function on_add_editors($post) {
+
+	/** @global WPGlobus_Config $WPGlobus_Config */
+	global $WPGlobus_Config;
+
+	foreach( $WPGlobus_Config->enabled_languages as $language ) :
+		if ( $language == $WPGlobus_Config->default_language ) { 
+			
+			continue; 
+		
+		} else {	?>
+		
+			<div id="postdivrich-<?php echo $language; ?>" class="postarea">	<?php
+				wp_editor( __wpg_text_filter($post->post_content, $language ), 'content-' . $language, array(
+					'dfw' => true,
+					'drag_drop_upload' => true,
+					'tabfocus_elements' => 'insert-media-button,save-post',
+					'editor_height' => 300,
+					'tinymce' => array(
+						'resize' => false,
+						'wp_autoresize_on' => true,
+						'add_unload_trigger' => false,
+					),
+				) ); ?>
+			</div> <?php
+		
+		}
+	endforeach;	
+} 
+
+
+
 /**
  * Common filters
  */
@@ -190,6 +229,8 @@ function wpg_init() {
 	
 	// extract url information
 	//$q_config['url_info'] = wpg_extractURL($_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+	
+	/** @todo check at class-wpglobus.php:103 for set url_info */
 	$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url($_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 	
 	//error_log( print_r( $WPGlobus_Config->url_info, true ));
@@ -300,3 +341,17 @@ function wpg_init() {
 	// fix url to prevent xss
 	//$q_config['url_info']['url'] = qtrans_convertURL(add_query_arg('lang',$q_config['default_language'],$q_config['url_info']['url']));
 }
+
+ /*
+add_filter( 'the_posts', 'wpg_postsFilter', 0 );
+function wpg_postsFilter($posts) {
+	if(is_array($posts)) {
+		foreach($posts as $post) {
+			$post->post_content = __wpg_text_filter($post->post_content);
+			
+			# @todo make function for translating $post object 	
+			#$post = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($post);
+		}
+	}
+	return $posts;
+} // */
