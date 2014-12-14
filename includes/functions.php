@@ -1,4 +1,43 @@
 <?php
+
+/**
+ * Added title fields for enabled languages at post.php page
+ */
+add_action( 'edit_form_after_title', 'on_title' );
+function on_title( $post ) {
+	
+	if ( ! post_type_supports($post->post_type, 'title') ) {
+		return;
+	}
+
+	/** @global WPGlobus_Config $WPGlobus_Config */
+	global $WPGlobus_Config;
+
+	foreach( $WPGlobus_Config->enabled_languages as $language ) :
+	
+		if ( $language == $WPGlobus_Config->default_language ) { 
+			
+			continue; 
+		
+		} else {	?>	
+		
+			<div id="titlediv-<?php echo $language;?>">
+				<div id="titlewrap-<?php echo $language;?>">
+					<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
+					<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language) ) ); ?>" id="title_<?php echo $language;?>" autocomplete="off" />
+				</div> <!-- #titlewrap -->
+			</div>	<!-- #titlediv -->
+			<div class="inside">
+				<div id="edit-slug-box-<?php echo $language; ?>" class="hide-if-no-js">
+					<b>Slug will be here</b>
+				</div>
+			</div> <!-- .inside -->	<?php
+		}
+		
+	endforeach;
+}
+
+ 
 /**
  * Join post content for enabled languages in func wp_insert_post
  *
