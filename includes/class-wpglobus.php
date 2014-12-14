@@ -204,6 +204,9 @@ class WPGlobus {
 			
 			/**
 			 * Set $post_content for default language
+			 * because we have text with all languages and delimiters in $post->post_content
+			 * next we send $post_content to js with localize script 
+			 * @see post_edit() in admin.globus.js 
 			 */
 			$post_content = __wpg_text_filter($post->post_content); 
 			#$post_content = $post->post_content; 
