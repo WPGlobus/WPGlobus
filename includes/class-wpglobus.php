@@ -210,6 +210,11 @@ class WPGlobus {
 			 */
 			$post_content = __wpg_text_filter($post->post_content); 
 			#$post_content = $post->post_content; 
+
+			/**
+			 * Set $post_title for default language
+			 */	
+			$post_title = __wpg_text_filter($post->post_title); 
 		}
 		
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
@@ -251,6 +256,7 @@ class WPGlobus {
 					'version'      => self::$_version,
 					'page'		   => $page,
 					'content'	   => $post_content,
+					'title'	   	   => $post_title,
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'parentClass'  => __CLASS__,
 					'process_ajax' => __CLASS__ . '_process_ajax',

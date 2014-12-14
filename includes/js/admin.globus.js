@@ -58,6 +58,7 @@ jQuery(document).ready(function () {
             },
             post_edit: function () {
 				$('#content').text(aaAdminGlobus.content);
+				$('#title').val(aaAdminGlobus.title);
 			},
             start: function () {
                 var t = this;
