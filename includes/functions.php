@@ -160,6 +160,15 @@ function wpg_text_filter( $text = '' ) {
 }
 
 function __wpg_text_filter( $text = '', $language = '' ) {
+	
+	
+	/**
+	 * Fix for case
+	 * &lt;!--:en--&gt;Hello world!&lt;!--:--&gt;&lt;!--:ru--&gt;Привет, мир!&lt;!--:--&gt;&lt;!--:de--&gt;Hallo Welt!&lt;!--:--&gt
+	 * 
+	 * @todo need careful investigation
+	 */
+	$text = htmlspecialchars_decode($text);
 
 	/** @global string $wpg_default_language */	
 	//global $wpg_default_language;
