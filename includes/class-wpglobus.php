@@ -194,6 +194,11 @@ class WPGlobus {
 		 */
 		$post_content = '';
 		
+		/**
+		 * Init $post_title
+		 */
+		$post_title = ''; 
+		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 		
 		if ( '' == $page ) {
