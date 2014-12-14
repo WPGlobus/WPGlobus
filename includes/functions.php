@@ -40,7 +40,11 @@ function on_save_post_data($data, $postarr) {
  */
 add_action( 'edit_form_after_editor', 'on_add_editors');
 function on_add_editors($post) {
-
+	
+	if ( ! post_type_supports($post->post_type, 'editor') ) {
+		return;
+	}
+	
 	/** @global WPGlobus_Config $WPGlobus_Config */
 	global $WPGlobus_Config;
 
