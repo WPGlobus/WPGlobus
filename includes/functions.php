@@ -1,4 +1,37 @@
 <?php
+/**
+ * Join post content for enabled languages in func wp_insert_post
+ *
+ * @see action in wp-includes\post.php:3326
+ */
+add_action( 'wp_insert_post_data' , 'on_save_post_data', 10, 2 );
+function on_save_post_data($data, $postarr) {
+	
+	/** @global WPGlobus_Config $WPGlobus_Config */	
+	global $WPGlobus_Config;
+	
+	$data['post_content'] = trim($data['post_content']);
+	
+	if ( !empty($data['post_content']) ) {
+		$data['post_content'] = "<!--:{$WPGlobus_Config->default_language}-->" . $data['post_content'] . "<!--:-->";
+	}
+	
+	foreach( $WPGlobus_Config->enabled_languages as $language ) :
+		if ( $language == $WPGlobus_Config->default_language ) { 
+			
+			continue; 
+		
+		} else {
+			$content = isset($postarr['content-' . $language]) ? trim($postarr['content-' . $language]) : '';
+			if ( !empty($content) ) {
+				$data['post_content'] .= "<!--:{$language}-->" . $postarr['content-' . $language] . "<!--:-->";
+			}
+		}
+	endforeach;
+	
+	return $data;
+	
+}
 
 /**
  * Added wp_editor for enabled languages at post.php page
