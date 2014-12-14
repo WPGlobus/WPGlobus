@@ -71,6 +71,9 @@ function on_save_post_data($data, $postarr) {
 				$data['post_content'] .= "<!--:{$language}-->" . $postarr['content-' . $language] . "<!--:-->";
 			}
 			
+			/**
+			 * Join post title for enabled languages
+			 */
 			$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
 			if ( !empty($title) ) {
 				$data['post_title'] .= "<!--:{$language}-->" . $postarr['post_title_' . $language] . "<!--:-->";
