@@ -45,15 +45,20 @@ function on_title( $post ) {
  */
 add_action( 'wp_insert_post_data' , 'on_save_post_data', 10, 2 );
 function on_save_post_data($data, $postarr) {
-	
+
 	/** @global WPGlobus_Config $WPGlobus_Config */	
 	global $WPGlobus_Config;
 	
 	$data['post_content'] = trim($data['post_content']);
-	
 	if ( !empty($data['post_content']) ) {
 		$data['post_content'] = "<!--:{$WPGlobus_Config->default_language}-->" . $data['post_content'] . "<!--:-->";
 	}
+	
+	$data['post_title'] = trim($data['post_title']);
+	if ( !empty($data['post_title']) ) {
+		$data['post_title'] = "<!--:{$WPGlobus_Config->default_language}-->" . $data['post_title'] . "<!--:-->";
+	}	
+	
 	
 	foreach( $WPGlobus_Config->enabled_languages as $language ) :
 		if ( $language == $WPGlobus_Config->default_language ) { 
@@ -65,6 +70,12 @@ function on_save_post_data($data, $postarr) {
 			if ( !empty($content) ) {
 				$data['post_content'] .= "<!--:{$language}-->" . $postarr['content-' . $language] . "<!--:-->";
 			}
+			
+			$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
+			if ( !empty($title) ) {
+				$data['post_title'] .= "<!--:{$language}-->" . $postarr['post_title_' . $language] . "<!--:-->";
+			}
+			
 		}
 	endforeach;
 	
