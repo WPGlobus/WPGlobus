@@ -171,12 +171,44 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_admin_scripts() {
+		
+		/** @global $pagenow */
+		global $pagenow;
 
+		/** @global $post */
+		global $post;
+		
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
-
+	
+		/**
+		 * Set array of enabled pages for loading js
+		 */
+		$enabled_pages = array();
+		$enabled_pages[] = self::LANGUAGE_EDIT_PAGE;
+		$enabled_pages[] = self::OPTIONS_PAGE_SLUG;
+		$enabled_pages[] = 'post.php';
+		
+		/**
+		 * Init $post_content 
+		 */
+		$post_content = '';
+		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
-
+		
+		if ( '' == $page ) {
+			/**
+			 * Now get $pagenow
+			 */
+			$page = isset( $pagenow ) ? $pagenow : '';
+			
+			/**
+			 * Set $post_content for default language
+			 */
+			$post_content = __wpg_text_filter($post->post_content); 
+			#$post_content = $post->post_content; 
+		}
+		
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
@@ -196,7 +228,7 @@ class WPGlobus {
 
 		}
 
-		if ( self::LANGUAGE_EDIT_PAGE === $page || self::OPTIONS_PAGE_SLUG === $page ) {
+		if ( in_array($page, $enabled_pages) ) {
 
 			$i18n = array();
 			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
@@ -214,6 +246,8 @@ class WPGlobus {
 				'aaAdminGlobus',
 				array(
 					'version'      => self::$_version,
+					'page'		   => $page,
+					'content'	   => $post_content,
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'parentClass'  => __CLASS__,
 					'process_ajax' => __CLASS__ . '_process_ajax',
