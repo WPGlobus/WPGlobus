@@ -14,7 +14,7 @@ jQuery(document).ready(function () {
             }
 
             this.config = {
-                debug: true,
+                debug: false,
                 version: aaAdminGlobus.version
             };
 
@@ -50,8 +50,15 @@ jQuery(document).ready(function () {
         globusAdminApp.App.prototype = {
 
             init: function () {
-                this.start();
+				if ( 'post.php' == aaAdminGlobus.page ) {
+					this.post_edit();
+				} else {
+					this.start();
+				}	
             },
+            post_edit: function () {
+				$('#content').text(aaAdminGlobus.content);
+			},
             start: function () {
                 var t = this;
                 $('#wpglobus_flags').select2({
