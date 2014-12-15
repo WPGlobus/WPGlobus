@@ -207,19 +207,28 @@ class WPGlobus {
 			 */
 			$page = isset( $pagenow ) ? $pagenow : '';
 			
-			/**
-			 * Set $post_content for default language
-			 * because we have text with all languages and delimiters in $post->post_content
-			 * next we send $post_content to js with localize script 
-			 * @see post_edit() in admin.globus.js 
-			 */
-			$post_content = __wpg_text_filter($post->post_content); 
-			#$post_content = $post->post_content; 
+			if ( 'post.php' == $page ) {
 
-			/**
-			 * Set $post_title for default language
-			 */	
-			$post_title = __wpg_text_filter($post->post_title); 
+				/**
+				 * We use $post_content, $post_title at edit post page 
+				 */			
+			
+				/**
+				 * Set $post_content for default language
+				 * because we have text with all languages and delimiters in $post->post_content
+				 * next we send $post_content to js with localize script 
+				 * @see post_edit() in admin.globus.js 
+				 */
+				$post_content = __wpg_text_filter($post->post_content); 
+				#$post_content = $post->post_content; 
+
+				/**
+				 * Set $post_title for default language
+				 */	
+				$post_title = __wpg_text_filter($post->post_title); 
+				
+			}
+			
 		}
 		
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
