@@ -57,7 +57,7 @@ function on_title( $post ) {
 
  
 /**
- * Join post content for enabled languages in func wp_insert_post
+ * Join post content and post title for enabled languages in func wp_insert_post
  *
  * @see action in wp-includes\post.php:3326
  */
@@ -84,6 +84,10 @@ function on_save_post_data($data, $postarr) {
 			continue; 
 		
 		} else {
+		
+			/**
+			 * Join post content for enabled languages
+			 */		
 			$content = isset($postarr['content-' . $language]) ? trim($postarr['content-' . $language]) : '';
 			if ( !empty($content) ) {
 				$data['post_content'] .= "<!--:{$language}-->" . $postarr['content-' . $language] . "<!--:-->";
