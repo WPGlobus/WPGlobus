@@ -1,4 +1,21 @@
 <?php
+/**
+ * Add language tabs for jQueryUI
+ */
+add_action( 'edit_form_after_editor', 'on_add_tabs' );
+function on_add_tabs() {
+
+	/** @global WPGlobus_Config $WPGlobus_Config */
+	global $WPGlobus_Config;	?>
+
+	<ul class="wpglobus-post-tabs-ul">	<?php
+		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+			$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
+			<li><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $language; ?></a></li> <?php
+		} ?>
+	</ul>	<?php
+
+}
 
 /**
  * Added title fields for enabled languages at post.php page
