@@ -1,0 +1,51 @@
+/* TinyMCE */
+#post-body .ui-widget-content input.like-default-title { padding: 3px 8px;font-size: 1.7em;line-height: 100%;width: 100%;outline: none; }
+.wp-editor-container { border:1px solid #ccc;} 
+.wp-editor-container { border:1px solid #ccc;} 
+.titlediv {margin-bottom: 20px;}
+.mceIframeContainer iframe { min-height: 150px!important;}
+
+/* Tabs */
+.tabs-nav { border-bottom: 1px solid #ccc; margin: 10px 0 20px 0; width: 100%; height: 30px; }
+.tabs-separator { border-bottom: 1px solid #ccc; margin: 10px 0 20px 0; width: 100%; height: 15px; }
+.ui-tabs .tabs-nav ul { list-style-type: none; margin: 0 10px; padding: 0em; }
+.ui-tabs li a,
+.ui-tabs ul li{ float: left; margin: 0; }
+.ui-tabs li.ui-state-default { border: 0; background: transparent; }
+.ui-tabs ul li.ui-state-default a {
+	display: block;
+	color: #999;
+	background-color: #f1f1f1;
+	background-image: -moz-linear-gradient(-90deg, #f9f9f9 , #ececec );
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
+	background-image: linear-gradient(top,#f9f9f9,#ececec);
+	border: 1px solid #ddd;
+	border-bottom: 0;
+	font-size: 15px;
+	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+	font-weight:normal;
+	height: 29px;
+	line-height: 29px;
+	margin-right: 5px;
+	padding: 0 10px;
+	text-decoration: none;
+	text-shadow: #fff 0 1px 1px;
+	-moz-border-radius-topleft: 3px;
+	-webkit-border-top-left-radius: 3px;
+	border-top-left-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-webkit-border-top-right-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.default-label { font-size: 13px; font-family: Trebuchet, Georgia, sans-serif; }
+.ui-tabs ul li a:hover { color: #666; }
+.ui-tabs ul li.ui-state-active a { background: none; border: 1px solid #ccc; border-bottom: 1px solid #fff; color: #464646; margin-bottom: -1px; font-weight:normal; }
+.ui-widget-content { border: 0; background: transparent; }
+.ui-widget-content .ui-state-hover{ border: 0; background: transparent; margin:0; margin-bottom: -1px; font-weight:normal; }
+.ui-widget-content .ui-widget-header{ border: 0; background: transparent; margin-bottom: 50px; }
+
+/* form-field description */
+#edittag #cat-tabs .form-field { margin: 0 0 10px; padding: 8px; }
+#edittag #cat-tabs .form-field p {  font-size: 12px; font-style: italic; font-family: sans-serif; margin: 2px 0 5px; color: #666; margin-top: 4px; }
+#edittag #cat-tabs label { display: block;}
+.post-excerpt { margin: 0; height: 4em; width: 98%; }
