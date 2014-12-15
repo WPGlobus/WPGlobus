@@ -371,11 +371,11 @@ function wpg_init() {
 	// */
 	
 	//$q_config['language'] = apply_filters('qtranslate_language', $q_config['language']);
-	
+
+
+	/*
 	// detect language and forward if needed
 	//if($q_config['detect_browser_language'] && $q_config['url_info']['redirect'] && !isset($_COOKIE['qtrans_cookie_test']) && $q_config['url_info']['language'] == $q_config['default_language']) {
-	if( $WPGlobus_Config->url_info['redirect'] && $WPGlobus_Config->url_info['language'] == $WPGlobus_Config->default_language ) {
-		
 		$target = false;
 		$prefered_languages = array();
 		if(isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) && preg_match_all("#([^;,]+)(;[^,0-9]*([0-9\.]+)[^,]*)?#i",$_SERVER["HTTP_ACCEPT_LANGUAGE"], $matches, PREG_SET_ORDER)) {
@@ -408,6 +408,7 @@ function wpg_init() {
 			//error_log( 'target is FALSE' );
 		}
 	}
+	// */
 	
 	/*
 	// Check for WP Secret Key Missmatch
