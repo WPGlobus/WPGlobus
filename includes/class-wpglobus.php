@@ -252,6 +252,30 @@ class WPGlobus {
 
 		if ( in_array($page, $enabled_pages) ) {
 
+			/**
+			 * Init $tabs_suffix
+			 */
+			$tabs_suffix = array();
+			
+			if ( 'post.php' == $page ) {
+				
+				/**
+				 * Enqueue jQueryUI tabs
+				 */
+				wp_enqueue_script( 'jquery-ui-tabs' );
+		
+				/**
+				 * Make suffixes for tabs
+				 */
+				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+					if ( $language == $WPGlobus_Config->default_language ) {
+						$tabs_suffix[] = 'default';
+					} else {
+						$tabs_suffix[] = $language;
+					}
+				}
+				
+			}	
 			$i18n = array();
 			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
 
@@ -275,6 +299,7 @@ class WPGlobus {
 					'parentClass'  => __CLASS__,
 					'process_ajax' => __CLASS__ . '_process_ajax',
 					'flag_url'     => $WPGlobus_Config->flags_url,
+					'tabs'		   => $tabs_suffix,
 					'i18n'         => $i18n
 				)
 			);
@@ -288,9 +313,21 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_admin_styles() {
-
+		
+		/** @global $pagenow */
+		global $pagenow;
+		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
+		wp_register_style(
+			'globus.admin',
+			self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.css',
+			array(),
+			self::$_version,
+			'all'
+		);
+		wp_enqueue_style( 'globus.admin' );
+		
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
 				'select2-css',
@@ -302,14 +339,19 @@ class WPGlobus {
 			wp_enqueue_style( 'select2-css' );
 		}
 
-		wp_register_style(
-			'globus.admin',
-			self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.css',
-			array(),
-			self::$_version,
-			'all'
-		);
-		wp_enqueue_style( 'globus.admin' );
+		if ( 'post.php' == $pagenow ) {
+			wp_register_style(
+				'globus.admin.tabs',
+				self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.tabs.css',
+				array(),
+				self::$_version,
+				'all'
+			);
+			wp_enqueue_style( 'globus.admin.tabs' );
+			
+		}
+		
+
 
 	}
 
