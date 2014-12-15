@@ -26,12 +26,13 @@ function on_title( $post ) {
 					<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
 					<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language) ) ); ?>" id="title_<?php echo $language;?>" autocomplete="off" />
 				</div> <!-- #titlewrap -->
-			</div>	<!-- #titlediv -->
-			<div class="inside">
-				<div id="edit-slug-box-<?php echo $language; ?>" class="hide-if-no-js">
-					<b>Slug will be here</b>
-				</div>
-			</div> <!-- .inside -->	<?php
+				<div class="inside">
+					<div id="edit-slug-box-<?php echo $language; ?>" class="hide-if-no-js">
+						<b>Slug will be here</b>
+					</div>
+				</div> <!-- .inside -->
+			</div>	<!-- #titlediv -->	<?php				
+
 		}
 		
 	endforeach;
