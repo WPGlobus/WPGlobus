@@ -57,6 +57,24 @@ jQuery(document).ready(function () {
 				}	
             },
             post_edit: function () {
+
+				// Make post-body-content as tabs container
+				$('#post-body-content').prepend($('.wpglobus-post-tabs-ul'));
+				$.each(aaAdminGlobus.tabs, function( index, suffix ) {
+					if ( 'default' == suffix ) {
+						$('#postdivrich').wrap('<div id="tab-default"></div>');
+						$($('#titlediv')).insertBefore('#postdivrich');				
+					} else {
+						$('#postdivrich-'+suffix).wrap('<div id="tab-'+suffix+'"></div>');
+						$($('#titlediv-'+suffix)).insertBefore('#postdivrich-'+suffix);			
+						
+					}
+				});
+
+				// tabs on
+				$('#post-body-content').tabs(); // #post-body-content
+				
+				// setup for default language
 				$('#content').text(aaAdminGlobus.content);
 				$('#title').val(aaAdminGlobus.title);
 			},
