@@ -101,9 +101,9 @@ class WPGlobus {
 		}
 		else {
 			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
-													   $_SERVER['REQUEST_URI'],
-														   $_SERVER['HTTP_HOST'],
-														   isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+				$_SERVER['REQUEST_URI'],
+				$_SERVER['HTTP_HOST'],
+				isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
 			);
 
 			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
@@ -317,8 +317,8 @@ class WPGlobus {
 		$css = '';
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
 			$css .= '.wpglobus_flag_' . $language .
-				' { background:url(' .
-				$WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ') no-repeat }';
+			        ' { background:url(' .
+			        $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ') no-repeat }';
 		}
 		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
@@ -427,6 +427,12 @@ class WPGlobus {
 		$item->url              = WPGlobus_Utils::get_url( $WPGlobus_Config->language );
 		$item->classes          = $menu_item_classes;
 
+		/**
+		 * Add description
+		 * Notice was in 'walker_nav_menu_start_el' filter in functions.php Twenty Fifteen theme
+		 */
+		$item->description 		= '';
+
 		$sorted_menu_items[] = $item;
 
 		foreach ( $extra_languages as $language ) {
@@ -441,6 +447,12 @@ class WPGlobus {
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
 			$item->url              = WPGlobus_Utils::get_url( $language );
 			$item->classes          = $submenu_item_classes;
+
+			/**
+			 * Add description
+			 * Notice was in 'walker_nav_menu_start_el' filter in functions.php Twenty Fifteen theme
+			 */
+			$item->description 		= '';
 
 			$sorted_menu_items[] = $item;
 		}

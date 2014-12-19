@@ -2,7 +2,7 @@
 Contributors: tivnet, alexgff
 Tags: bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, switcher, translate, translation, WPGlobus, TIVWP
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
@@ -52,3 +52,6 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 
 = 14.07.28 =
 * Initial release (language switcher)
+
+= 14.12.19 =
+* FIX: Notice 'walker_nav_menu_start_el' filter in functions.php twentyfifteen theme
