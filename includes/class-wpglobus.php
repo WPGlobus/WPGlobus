@@ -526,7 +526,8 @@ class WPGlobus {
 			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span>';
 		$item->url              = WPGlobus_Utils::get_url( $WPGlobus_Config->language );
 		$item->classes          = $menu_item_classes;
-
+		$item->description      = '';
+		
 		$sorted_menu_items[] = $item;
 
 		foreach ( $extra_languages as $language ) {
@@ -541,6 +542,7 @@ class WPGlobus {
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
 			$item->url              = WPGlobus_Utils::get_url( $language );
 			$item->classes          = $submenu_item_classes;
+			$item->description      = '';
 
 			$sorted_menu_items[] = $item;
 		}
