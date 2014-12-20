@@ -165,3 +165,8 @@
     padding-top: 3px;
     width: 100%;
 }
+
+.postdivrich-wpglobus  .wp-editor-tools {
+	background-color: #f1f1f1;
+    padding-top: 20px;
+}

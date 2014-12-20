@@ -130,7 +130,7 @@ function on_add_editors($post) {
 		
 		} else {	?>
 		
-			<div id="postdivrich-<?php echo $language; ?>" class="postarea">	<?php
+			<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
 				wp_editor( __wpg_text_filter($post->post_content, $language ), 'content-' . $language, array(
 					'dfw' => true,
 					'drag_drop_upload' => true,
