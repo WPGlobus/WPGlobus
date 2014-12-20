@@ -50,7 +50,7 @@ jQuery(document).ready(function () {
         globusAdminApp.App.prototype = {
 
             init: function () {
-				if ( 'post.php' == aaAdminGlobus.page ) {
+				if ( 'post-edit' == aaAdminGlobus.page ) {
 					this.post_edit();
 				} else {
 					this.start();

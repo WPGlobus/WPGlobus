@@ -188,6 +188,7 @@ class WPGlobus {
 		$enabled_pages[] = self::LANGUAGE_EDIT_PAGE;
 		$enabled_pages[] = self::OPTIONS_PAGE_SLUG;
 		$enabled_pages[] = 'post.php';
+		$enabled_pages[] = 'post-new.php';
 		
 		/**
 		 * Init $post_content 
@@ -207,7 +208,7 @@ class WPGlobus {
 			 */
 			$page = isset( $pagenow ) ? $pagenow : '';
 			
-			if ( 'post.php' == $page ) {
+			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 
 				/**
 				 * We use $post_content, $post_title at edit post page 
@@ -257,7 +258,7 @@ class WPGlobus {
 			 */
 			$tabs_suffix = array();
 			
-			if ( 'post.php' == $page ) {
+			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 				
 				/**
 				 * Enqueue jQueryUI tabs
@@ -292,7 +293,7 @@ class WPGlobus {
 				'aaAdminGlobus',
 				array(
 					'version'      => self::$_version,
-					'page'		   => $page,
+					'page'		   => ( 'post.php' == $page || 'post-new.php' == $page ) ? 'post-edit' : '',
 					'content'	   => $post_content,
 					'title'	   	   => $post_title,
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
@@ -339,7 +340,7 @@ class WPGlobus {
 			wp_enqueue_style( 'select2-css' );
 		}
 
-		if ( 'post.php' == $pagenow ) {
+		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
 			wp_register_style(
 				'globus.admin.tabs',
 				self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.tabs.css',
