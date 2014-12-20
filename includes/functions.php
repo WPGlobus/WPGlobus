@@ -38,17 +38,17 @@ function on_title( $post ) {
 		
 		} else {	?>	
 		
-			<div id="titlediv-<?php echo $language;?>">
-				<div id="titlewrap-<?php echo $language;?>">
+			<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
+				<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
 					<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-					<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language) ) ); ?>" id="title_<?php echo $language;?>" autocomplete="off" />
+					<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language) ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
 				</div> <!-- #titlewrap -->
 				<div class="inside">
 					<div id="edit-slug-box-<?php echo $language; ?>" class="hide-if-no-js">
 						<b>Slug will be here</b>
 					</div>
 				</div> <!-- .inside -->
-			</div>	<!-- #titlediv -->	<?php				
+			</div>	<!-- #titlediv -->	<?php					
 
 		}
 		
