@@ -137,7 +137,7 @@ function on_add_editors($post) {
 					'tabfocus_elements' => 'insert-media-button,save-post',
 					'editor_height' => 300,
 					'tinymce' => array(
-						'resize' => false,
+						'resize' => true,
 						'wp_autoresize_on' => true,
 						'add_unload_trigger' => false,
 					),
