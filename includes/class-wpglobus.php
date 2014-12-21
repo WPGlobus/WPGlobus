@@ -93,6 +93,11 @@ class WPGlobus {
 				'on_save_post_data'
 			), 10, 2 );
 
+			add_action( 'edit_form_after_editor', array(
+				$this,
+				'on_add_language_tabs'
+			));
+
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
 				'on_field_table'
@@ -710,6 +715,23 @@ class WPGlobus {
 		endforeach;
 
 		return $data;
+
+	}
+
+	/**
+	 * Add language tabs for jQueryUI
+	 */
+	function on_add_language_tabs() {
+
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;	?>
+
+		<ul class="wpglobus-post-tabs-ul">	<?php
+			foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+				$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
+				<li><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+			} ?>
+		</ul>	<?php
 
 	}
 
