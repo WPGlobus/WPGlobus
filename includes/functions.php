@@ -158,48 +158,6 @@ function on_save_post_data($data, $postarr) {
 }
 
 /**
- * Added wp_editor for enabled languages at post.php page
- *
- * @see action edit_form_after_editor in wp-admin\edit-form-advanced.php:542
- */
-add_action( 'edit_form_after_editor', 'on_add_editors');
-function on_add_editors($post) {
-	
-	if ( ! post_type_supports($post->post_type, 'editor') ) {
-		return;
-	}
-	
-	/** @global WPGlobus_Config $WPGlobus_Config */
-	global $WPGlobus_Config;
-
-	foreach( $WPGlobus_Config->enabled_languages as $language ) :
-		if ( $language == $WPGlobus_Config->default_language ) { 
-			
-			continue; 
-		
-		} else {	?>
-		
-			<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
-				wp_editor( __wpg_text_filter($post->post_content, $language ), 'content-' . $language, array(
-					'dfw' => true,
-					'drag_drop_upload' => true,
-					'tabfocus_elements' => 'insert-media-button,save-post',
-					'editor_height' => 300,
-					'tinymce' => array(
-						'resize' => true,
-						'wp_autoresize_on' => true,
-						'add_unload_trigger' => false,
-					),
-				) ); ?>
-			</div> <?php
-		
-		}
-	endforeach;	
-} 
-
-
-
-/**
  * Common filters
  */
 add_filter( 'the_title', 'wpg_text_filter', 0 );
