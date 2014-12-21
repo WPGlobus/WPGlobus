@@ -70,9 +70,29 @@ function on_title( $post ) {
  * @see action in wp-includes\post.php:3326
  */
 add_action( 'wp_insert_post_data' , 'on_save_post_data', 10, 2 );
+/**
+ * @param $data
+ * @param $postarr
+ *
+ * @return mixed
+ */
 function on_save_post_data($data, $postarr) {
 
-	/** @global WPGlobus_Config $WPGlobus_Config */	
+	global $pagenow;
+
+	/**
+	 * Now we save post content and post title for all enabled languages for post.php, post-new.php
+	 *
+	 * @todo Let's don't forget about other pages, like 'admin-ajax.php', 'nav-menus.php' and more
+	 */
+	$enabled_pages[] = 'post.php';
+	$enabled_pages[] = 'post-new.php';
+
+	if ( ! in_array($pagenow, $enabled_pages) ) {
+		return $data;
+	}
+
+	/** @global WPGlobus_Config $WPGlobus_Config */
 	global $WPGlobus_Config;
 	
 	$data['post_content'] = trim($data['post_content']);
