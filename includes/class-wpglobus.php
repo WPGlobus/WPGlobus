@@ -155,6 +155,14 @@ class WPGlobus {
 				$this,
 				'on_add_item'
 			), 99, 2 );
+			
+			/**
+			 * Convert url for menu items
+			 */
+			1 && add_filter( 'wp_nav_menu_objects', array(
+				$this,
+				'on_get_convert_url_menu_items'
+			), 10, 2 );			
 
 			add_action( 'wp_head', array(
 				$this,
@@ -409,6 +417,26 @@ class WPGlobus {
 	}
 
 	/**
+	 * We must convert url for nav_menu_item with type == custom
+	 * For other types url has language shortcode already
+	 *
+	 * @param $sorted_menu_items
+	 * @internal param $args
+	 * @return array
+	 */
+	function on_get_convert_url_menu_items( $sorted_menu_items ) {
+
+		foreach( $sorted_menu_items as $key=>$item ) {
+			if ( 'custom' == $item->type ) {
+				$sorted_menu_items[$key]->url = WPGlobus_Utils::get_convert_url($sorted_menu_items[$key]->url);
+			}
+		}
+
+		return $sorted_menu_items;
+
+	}
+
+	/**
 	 * Include file for new field 'table'
 	 * @return string
 	 */
@@ -431,6 +459,7 @@ class WPGlobus {
 		wp_enqueue_style( 'flags' );
 	}
 
+
 	/**
 	 * Add css styles to head section
 	 * @return string
@@ -452,7 +481,6 @@ class WPGlobus {
 		}
 
 	}
-
 
 	/**
 	 * Add item to navigation menu which was created with wp_list_pages
