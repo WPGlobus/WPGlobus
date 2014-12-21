@@ -1,4 +1,25 @@
 <?php
+add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
+/**
+ * This translates all taxonomy names, including categories
+ *
+ * @todo Should cache this and not parse on every page
+ *
+ * @param array $terms
+ *
+ * @return array
+ */
+function wpglobus_filter_get_terms( Array $terms = [ ] ) {
+
+	foreach ( $terms as &$term ) {
+		if ( ! empty( $term->name ) ) {
+			$term->name = __wpg_text_filter( $term->name );
+		}
+	}
+
+	return $terms;
+}
+
 /**
  * Add filter for convert home url
  */
