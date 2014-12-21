@@ -1,5 +1,13 @@
 <?php
 /**
+ * Add filter for convert home url
+ */
+add_filter( 'home_url', 'on_home_url', 10, 4 );
+function on_home_url($url, $path, $orig_scheme, $blog_id) {
+	return WPGlobus_Utils::get_convert_url($url);
+}
+
+/**
  * Add language tabs for jQueryUI
  */
 add_action( 'edit_form_after_editor', 'on_add_tabs' );
