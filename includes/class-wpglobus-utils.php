@@ -37,7 +37,14 @@ class WPGlobus_Utils {
 		switch ( $WPGlobus_Config->get_url_mode() ) :
 			case WPGlobus_Config::GLOBUS_URL_PATH:
 				// pre url
-				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . '/' . $language . $parsed_url['path'] ;
+
+				if ( $language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
+					$language = '';
+				} else {
+					$language = '/' . $language; 
+				}
+				
+				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] ;
 				break;
 			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
 				// pre domain
