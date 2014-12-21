@@ -10,6 +10,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WPGlobus_Utils {
 
 	/**
+	 * Get converted url
+	 *
+	 * @param string $url
+	 * @param string $language
+	 * @return string
+	 */
+	public static function get_convert_url( $url = '', $language = '' ) {
+		
+		global $WPGlobus_Config;
+
+		if ( empty($url) ) {
+			return $url;
+		}
+		
+		$converted_url = '';
+		
+		$language = ( '' == $language ) ? $WPGlobus_Config->language : $language;
+
+		$parsed_url = self::parse_url($url);	
+		
+		if ( ! $parsed_url ) {
+			return $url;
+		}
+		
+		switch ( $WPGlobus_Config->get_url_mode() ) :
+			case WPGlobus_Config::GLOBUS_URL_PATH:
+				// pre url
+				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . '/' . $language . $parsed_url['path'] ;
+				break;
+			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
+				// pre domain
+
+				break;
+			case WPGlobus_Config::GLOBUS_URL_QUERY:
+				// query (question mark)
+
+				break;
+		endswitch;	
+		
+		return $converted_url;
+	
+	}
+	
+	/**
 	 * Returns cleaned string and language information
 	 * Improved version, also understands $url without scheme:
 	 * //example.com, example.com/, and so on
@@ -99,11 +143,17 @@ class WPGlobus_Utils {
 
 	/**
 	 * @param string $url
+	 * @return false
 	 * @return array
+	 *
 	 * @todo Why not use native PHP method?
 	 * @see  parse_url()
 	 */
 	public static function parse_url( $url ) {
+	
+		if ( empty($url) ) {
+			return false;
+		}
 
 		$scheme   = '(?:(\w+)://)';
 		$userpass = '(?:(\w+)\:(\w+)@)';
