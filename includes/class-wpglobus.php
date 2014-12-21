@@ -97,6 +97,11 @@ class WPGlobus {
 				$this,
 				'on_add_language_tabs'
 			));
+			
+			add_action( 'edit_form_after_title', array(
+				$this,
+				'on_add_title_fields' 
+			));			
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
@@ -735,6 +740,45 @@ class WPGlobus {
 
 	}
 
+	/**
+	 * Add title fields for enabled languages at post.php, post-new.php page
+	 *
+	 * @param $post
+	 * @return void
+	 */
+	function on_add_title_fields( $post ) {
+		
+		if ( ! post_type_supports($post->post_type, 'title') ) {
+			return;
+		}
+
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;
+
+		foreach( $WPGlobus_Config->enabled_languages as $language ) :
+		
+			if ( $language == $WPGlobus_Config->default_language ) { 
+				
+				continue; 
+			
+			} else {	?>	
+			
+				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
+					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
+						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language) ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
+					</div> <!-- #titlewrap -->
+					<div class="inside">
+						<div id="edit-slug-box-<?php echo $language; ?>" class="hide-if-no-js">
+							<b>Slug will be here</b>
+						</div>
+					</div> <!-- .inside -->
+				</div>	<!-- #titlediv -->	<?php					
+
+			}
+			
+		endforeach;
+	}	
 }
 
 # --- EOF
