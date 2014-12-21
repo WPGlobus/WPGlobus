@@ -39,6 +39,8 @@ add_filter( 'the_content', 'wpg_text_filter', 0 );
 add_filter( 'wp_title', 'wpg_text_filter', 0 );
 add_filter( 'single_post_title', 'wpg_text_filter', 0 );
 
+add_filter( 'wpseo_title', 'wpg_text_filter', 0 );
+
 /**
  * @param string $text
  *
