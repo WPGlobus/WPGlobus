@@ -2,7 +2,6 @@
 add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 /**
  * This translates all taxonomy names, including categories
- *
  * @todo Should cache this and not parse on every page
  *
  * @param array $terms
@@ -20,12 +19,25 @@ function wpglobus_filter_get_terms( Array $terms = [ ] ) {
 	return $terms;
 }
 
+add_filter( 'home_url', 'on_home_url' );
+
 /**
- * Add filter for convert home url
+ * Localize home_url
+ *
+ * @param string $url
+ *
+ * @return string
  */
-add_filter( 'home_url', 'on_home_url', 10, 4 );
-function on_home_url($url, $path, $orig_scheme, $blog_id) {
-	return WPGlobus_Utils::get_convert_url($url);
+function on_home_url( $url ) {
+	return WPGlobus_Utils::get_convert_url( $url );
+}
+
+/**
+ * Yoast filters
+ */
+if ( defined( 'WPSEO_VERSION' ) ) {
+	add_filter( 'wpseo_title', 'wpg_text_filter', 0 );
+	add_filter( 'wpseo_metadesc', 'wpg_text_filter', 0 );
 }
 
 
@@ -38,8 +50,6 @@ add_filter( 'the_content', 'wpg_text_filter', 0 );
 
 add_filter( 'wp_title', 'wpg_text_filter', 0 );
 add_filter( 'single_post_title', 'wpg_text_filter', 0 );
-
-add_filter( 'wpseo_title', 'wpg_text_filter', 0 );
 
 /**
  * @param string $text
@@ -55,37 +65,42 @@ function wpg_text_filter( $text = '' ) {
 		// Nothing to do
 		return $text;
 	}
-	
+
 	$text = __wpg_text_filter( $text );
-	
+
 	return $text;
 
 }
 
+/**
+ * @param string $text
+ * @param string $language
+ *
+ * @return string
+ */
 function __wpg_text_filter( $text = '', $language = '' ) {
-	
-	
+
+
 	/**
 	 * Fix for case
 	 * &lt;!--:en--&gt;Hello world!&lt;!--:--&gt;&lt;!--:ru--&gt;Привет, мир!&lt;!--:--&gt;&lt;!--:de--&gt;Hallo Welt!&lt;!--:--&gt
-	 * 
 	 * @todo need careful investigation
 	 */
-	$text = htmlspecialchars_decode($text);
+	$text = htmlspecialchars_decode( $text );
 
-	/** @global string $wpg_default_language */	
+	/** @global string $wpg_default_language */
 	//global $wpg_default_language;
-	
-	/** @global string $wpg_current_language */	
+
+	/** @global string $wpg_current_language */
 	//global $wpg_current_language;
-	
-	global $WPGlobus_Config;	
-	
+
+	global $WPGlobus_Config;
+
 	if ( empty( $text ) ) {
 		// Nothing to do
 		return $text;
 	}
-	
+
 	if ( empty( $language ) ) {
 		$language = $WPGlobus_Config->language;
 	}
@@ -103,18 +118,22 @@ function __wpg_text_filter( $text = '', $language = '' ) {
 	//	$text = "[:en]English\n\n ML[:ru]Russian \nML\n<!--:-->";
 
 	/**
-	 * qTranslate uses these two types of delimeters
+	 * qTranslate uses these two types of delimiters
 	 * @example
 	 * <!--:en-->English<!--:--><!--:ru-->Russian<!--:-->
 	 * [:en]English S[:ru]Russian S
 	 * The [] delimiter does not have the closing tag, so we will look for the next opening [: or
 	 * take the rest until end of end of the string
-	 */	
+	 */
 	$possible_delimiters =
 		[
 			[
 				'start' => "<!--:{$language}-->",
 				'end'   => '<!--:-->',
+			],
+			[
+				'start' => "{:{$language}}",
+				'end'   => '{:}',
 			],
 			[
 				'start' => "[:{$language}]",
@@ -123,11 +142,14 @@ function __wpg_text_filter( $text = '', $language = '' ) {
 		];
 
 	/**
+	 * We'll use this flag after the loop to see if the loop was successful. See the `break` clause in the loop.
+	 */
+	$is_local_text_found = false;
+
+	/**
 	 * We do not know which delimiter was used, so we'll try both, in a loop
 	 */
 	foreach ( $possible_delimiters as $delimiters ) {
-		
-		$pos_start = false; 
 
 		/**
 		 * Try the starting position. If not found, continue the loop to the next set of delimiters
@@ -154,30 +176,41 @@ function __wpg_text_filter( $text = '', $language = '' ) {
 		} else {
 			$length = $pos_end - $pos_start;
 		}
-		
+
 		/**
 		 * Extract the text and end the loop
 		 */
-		$text = mb_substr( $text, $pos_start, $length );
+		$text                = mb_substr( $text, $pos_start, $length );
+		$is_local_text_found = true;
 		break;
 
 	}
 
-	if ( false === $pos_start && $language != $WPGlobus_Config->default_language ) {
-		$text = __wpg_text_filter($text, $WPGlobus_Config->default_language);	
+	/**
+	 * We could not find anything in the current language, so we'll try with the default language
+	 */
+	if ( ! $is_local_text_found && $language != $WPGlobus_Config->default_language ) {
+		$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
 	}
-	
+
 	return $text;
 
 }
 
 
-
 add_filter( 'locale', 'wpg_locale', 99 );
-function wpg_locale($locale){
+/**
+ * @param Array $locale
+ *
+ * @return mixed
+ */
+function wpg_locale(
+	/** @noinspection PhpUnusedParameterInspection */
+	$locale
+) {
 
 	global $WPGlobus_Config;
-	
+
 	// try to figure out the correct locale
 	/*
 	$locale = array();
@@ -188,29 +221,29 @@ function wpg_locale($locale){
 	$locale[] = $q_config['language'];
 	
 	// return the correct locale and most importantly set it (wordpress doesn't, which is bad)
-	// only set LC_TIME as everyhing else doesn't seem to work with windows
+	// only set LC_TIME as everything else doesn't seem to work with windows
 	setlocale(LC_TIME, $locale);
 	// */
 
-	return $WPGlobus_Config->locale[$WPGlobus_Config->language];
+	return $WPGlobus_Config->locale[ $WPGlobus_Config->language ];
 }
 
-add_action('init', 'wpg_init', 2);
+add_action( 'init', 'wpg_init', 2 );
 function wpg_init() {
 
 
 	// check if it isn't already initialized
-	if( defined('WPGLOBUS_INIT') ) {
+	if ( defined( 'WPGLOBUS_INIT' ) ) {
 		return;
-	}	
+	}
 
-	define('WPGLOBUS_INIT', true);
+	define( 'WPGLOBUS_INIT', true );
 
 	global $WPGlobus_Config;
-	
+
 	//wp_redirect('http://wpml2.dev/ru/news/hello-world');
 	//exit();	
-	
+
 	//wpg_loadConfig();
 	/*
 	if(isset($_COOKIE['qtrans_cookie_test'])) {
@@ -219,24 +252,25 @@ function wpg_init() {
 		$q_config['cookie_enabled'] = false;
 	}
 	// */
-	
+
 	// init Javascript functions
 	//qtrans_initJS();
-	
+
 	// update Gettext Databases if on Backend
 	//if(defined('WP_ADMIN') && $q_config['auto_update_mo']) qtrans_updateGettextDatabases();
-	
-	// update definitions if neccesary
+
+	// update definitions if necessary
 	//if(defined('WP_ADMIN') && current_user_can('manage_categories')) qtrans_updateTermLibrary();
-	
+
 	// extract url information
 	//$q_config['url_info'] = wpg_extractURL($_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
-	
+
 	/** @todo check at class-wpglobus.php:103 for set url_info */
-	$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url($_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
-	
+	$WPGlobus_Config->url_info =
+		WPGlobus_Utils::extract_url( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '' );
+
 	//error_log( print_r( $WPGlobus_Config->url_info, true ));
-	
+
 	/**
 	 * Add hack for support AJAX
 	 */
@@ -250,9 +284,9 @@ function wpg_init() {
 
 	// set test cookie
 	//setcookie('qtrans_cookie_test', 'qTranslate Cookie Test', 0, $q_config['url_info']['home'], $q_config['url_info']['host']);
-	
+
 	// check cookies for admin
-	
+
 	/**
 	 * Add hack in 1 line for support AJAX
 	 * if(defined('WP_ADMIN')) {}
@@ -272,7 +306,7 @@ function wpg_init() {
 		$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 	}
 	// */
-	
+
 	//$q_config['language'] = apply_filters('qtranslate_language', $q_config['language']);
 
 
@@ -280,7 +314,7 @@ function wpg_init() {
 	// detect language and forward if needed
 	//if($q_config['detect_browser_language'] && $q_config['url_info']['redirect'] && !isset($_COOKIE['qtrans_cookie_test']) && $q_config['url_info']['language'] == $q_config['default_language']) {
 		$target = false;
-		$prefered_languages = array();
+		$preferred_languages = array();
 		if(isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) && preg_match_all("#([^;,]+)(;[^,0-9]*([0-9\.]+)[^,]*)?#i",$_SERVER["HTTP_ACCEPT_LANGUAGE"], $matches, PREG_SET_ORDER)) {
 			$priority = 1.0;
 			foreach($matches as $match) {
@@ -290,10 +324,10 @@ function wpg_init() {
 				} else {
 					$pr = floatval($match[3]);
 				}
-				$prefered_languages[$match[1]] = $pr;
+				$preferred_languages[$match[1]] = $pr;
 			}
-			arsort($prefered_languages, SORT_NUMERIC);
-			foreach($prefered_languages as $language => $priority) {
+			arsort($preferred_languages, SORT_NUMERIC);
+			foreach($preferred_languages as $language => $priority) {
 				if(strlen($language)>2) $language = substr($language,0,2);
 				if(qtrans_isEnabled($language)) {
 					if($q_config['hide_default_language'] && $language == $q_config['default_language']) break;
@@ -312,16 +346,16 @@ function wpg_init() {
 		}
 	}
 	// */
-	
+
 	/*
-	// Check for WP Secret Key Missmatch
+	// Check for WP Secret Key Mismatch
 	global $wp_default_secret_key;
 	if(strpos($q_config['url_info']['url'],'wp-login.php')!==false && defined('AUTH_KEY') && isset($wp_default_secret_key) && $wp_default_secret_key != AUTH_KEY) {
 		global $error;
-		$error = __('Your $wp_default_secret_key is mismatchting with your AUTH_KEY. This might cause you not to be able to login anymore.','qtranslate');
+		$error = __('Your $wp_default_secret_key is mismatching with your AUTH_KEY. This might cause you not to be able to login anymore.','qtranslate');
 	}
 	*/
-	
+
 	// Filter all options for language tags
 	/*
 	if(!defined('WP_ADMIN')) {
@@ -330,22 +364,22 @@ function wpg_init() {
 			add_filter('option_'.$option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
 		}
 	} // */
-	
+
 	// load plugin translations
 	//load_plugin_textdomain('qtranslate', false, dirname(plugin_basename( __FILE__ )).'/lang');
-	
+
 	// remove traces of language (or better not?)
 	//unset($_GET['lang']);
 
-	
-	$_SERVER['REQUEST_URI'] = 	$WPGlobus_Config->url_info['url'];
-	$_SERVER['HTTP_HOST']   = 	$WPGlobus_Config->url_info['host'];
-	
+
+	$_SERVER['REQUEST_URI'] = $WPGlobus_Config->url_info['url'];
+	$_SERVER['HTTP_HOST']   = $WPGlobus_Config->url_info['host'];
+
 	// fix url to prevent xss
 	//$q_config['url_info']['url'] = qtrans_convertURL(add_query_arg('lang',$q_config['default_language'],$q_config['url_info']['url']));
 }
 
- /*
+/*
 add_filter( 'the_posts', 'wpg_postsFilter', 0 );
 function wpg_postsFilter($posts) {
 	if(is_array($posts)) {
