@@ -610,6 +610,8 @@ class WPGlobus {
 	 * Added wp_editor for enabled languages at post.php page
 	 *
 	 * @see action edit_form_after_editor in wp-admin\edit-form-advanced.php:542
+	 * @param WP_Post $post
+	 * @return void
 	 */
 	function on_add_wp_editors($post) {
 
