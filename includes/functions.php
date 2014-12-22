@@ -264,13 +264,24 @@ function wpg_locale(
 	// only set LC_TIME as everything else doesn't seem to work with windows
 	setlocale(LC_TIME, $locale);
 	// */
+	
+	$locale = $WPGlobus_Config->locale[ $WPGlobus_Config->language ];
+	
+	if ( is_admin() ) {
+		/**
+		 * Need check WPLANG option for WP4.1
+		 */
+		if ( ! empty(get_option('WPLANG')) ) {
+			$locale = get_option('WPLANG');
+		}
+	}	
 
-	return $WPGlobus_Config->locale[ $WPGlobus_Config->language ];
+	return $locale;
+
 }
 
 add_action( 'init', 'wpg_init', 2 );
 function wpg_init() {
-
 
 	// check if it isn't already initialized
 	if ( defined( 'WPGLOBUS_INIT' ) ) {
