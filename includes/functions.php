@@ -1,5 +1,5 @@
 <?php
-add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
+
 /**
  * This translates all taxonomy names, including categories
  * @todo Should cache this and not parse on every page
@@ -52,6 +52,10 @@ add_filter( 'wp_title', 'wpg_text_filter', 0 );
 add_filter( 'single_post_title', 'wpg_text_filter', 0 );
 
 add_filter( 'get_pages', 'wpg_text_filter', 0);
+
+add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
+add_filter( 'get_terms', 'wpglobus_filter_get_terms', 0 );
+
 
 /**
  * Option filters
