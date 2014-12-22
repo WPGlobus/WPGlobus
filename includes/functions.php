@@ -54,6 +54,16 @@ add_filter( 'single_post_title', 'wpg_text_filter', 0 );
 add_filter( 'get_pages', 'wpg_text_filter', 0);
 
 /**
+ * Option filters
+ */
+/** 
+ * At admin we need see string with language shortcodes 
+ */ 
+if ( ! is_admin() ) {
+	add_filter('option_blogdescription', 'wpg_text_filter', 0);
+}
+	
+/**
  * @param mixed $object
  *
  * @return mixed
