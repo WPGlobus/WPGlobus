@@ -173,6 +173,22 @@ class WPGlobus_Config {
 	}
 
 	/**
+	 * Set current language
+	 * @int
+	 */
+	function set_language($locale) {
+		/**
+		 * @todo Maybe use option for disable/enable setting current language corresponding with $locale ?
+		 */
+		foreach( $this->locale as $language=>$value ) {
+			if ( $locale == $value ) {
+				$this->language = $language;
+				break;
+			}	
+		}
+	}
+	
+	/**
 	 * Load textdomain
 	 * @return void
 	 */

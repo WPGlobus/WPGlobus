@@ -273,6 +273,7 @@ function wpg_locale(
 		 */
 		if ( ! empty(get_option('WPLANG')) ) {
 			$locale = get_option('WPLANG');
+			$WPGlobus_Config->set_language($locale);
 		}
 	}	
 
