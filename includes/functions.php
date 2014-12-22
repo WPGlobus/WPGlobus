@@ -51,24 +51,50 @@ add_filter( 'the_content', 'wpg_text_filter', 0 );
 add_filter( 'wp_title', 'wpg_text_filter', 0 );
 add_filter( 'single_post_title', 'wpg_text_filter', 0 );
 
+add_filter( 'get_pages', 'wpg_text_filter', 0);
+
 /**
- * @param string $text
+ * @param mixed $object
  *
- * @return string
+ * @return mixed
  */
-function wpg_text_filter( $text = '' ) {
+function wpg_text_filter( $object = '' ) {
 
 	/**
 	 * @see function qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage
 	 */
-	if ( empty( $text ) ) {
+	if ( empty( $object ) ) {
 		// Nothing to do
-		return $text;
+		return $object;
 	}
 
-	$text = __wpg_text_filter( $text );
+	/**
+	 * Check $object is array of WP_Post objects
+	 * for example see get_pages() function in \wp-includes\post.php
+	 */	
+	if ( is_array($object) ) {
+		
+		foreach( $object as &$post ) {
+			
+			if ( is_object($post) && 'WP_Post' == get_class($post) ) {
+			
+				$post->post_title    = __wpg_text_filter( $post->post_title );
 
-	return $text;
+				$post->post_content  = __wpg_text_filter( $post->post_content );
+				
+				$post->post_excerpt  = __wpg_text_filter( $post->post_excerpt );
+					
+			}
+
+		}	
+		
+		return $object;
+		
+	}
+	
+	$object = __wpg_text_filter( $object );
+
+	return $object;
 
 }
 
