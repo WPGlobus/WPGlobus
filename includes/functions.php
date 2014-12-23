@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
+ */
+add_filter( 'sanitize_title', 'wpg_text_title_filter', 0 );
+function wpg_text_title_filter($title) {
+	global $WPGlobus_Config;
+	return __wpg_text_filter( $title, $WPGlobus_Config->default_language );
+}
+
+/**
  * This translates all taxonomy names, including categories
  * @todo Should cache this and not parse on every page
  *
