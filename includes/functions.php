@@ -30,14 +30,23 @@ add_filter( 'home_url', 'on_home_url' );
  */
 function on_home_url( $url ) {
 	global $pagenow;
-	
+
 	if ( 'post.php' == $pagenow ) {
 		/** 
 		 * Don't convert url for permalink below post title field
 		 * For example, we had Постоянная ссылка: http://www.wpg.dev/ru/wordpress-4-1-is-out/
 		 *
-		 * @todo Need will check for other cases using url in post.php screen
+		 * @todo Need will check for other cases using url in post.php, post-new.php screens
 		 */
+		return $url;
+	}
+	
+	if ( 'admin-ajax.php' == $pagenow ) {
+		/** 
+		 * Don't convert url for ajax action
+		 * For example see $_POST array, $_POST[action] == heartbeat, $_POST[action] => sample-permalink
+		 *
+		 */	
 		return $url;
 	}
 	
