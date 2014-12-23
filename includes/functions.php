@@ -2,6 +2,8 @@
 
 /**
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
+ *
+ * @todo move to admin controller
  */
 add_filter( 'sanitize_title', 'wpg_text_title_filter', 0 );
 function wpg_text_title_filter($title) {
