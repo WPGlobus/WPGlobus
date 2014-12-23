@@ -31,6 +31,8 @@ add_filter( 'home_url', 'on_home_url' );
 function on_home_url( $url ) {
 	global $pagenow;
 
+	$ajaxify = false;
+	
 	if ( 'post.php' == $pagenow ) {
 		/** 
 		 * Don't convert url for permalink below post title field
@@ -43,10 +45,20 @@ function on_home_url( $url ) {
 	
 	if ( 'admin-ajax.php' == $pagenow ) {
 		/** 
-		 * Don't convert url for ajax action
-		 * For example see $_POST array, $_POST[action] == heartbeat, $_POST[action] => sample-permalink
+		 * Don't convert url for ajax action with $_POST[action] == heartbeat, $_POST[action] == sample-permalink
+		 * For more info see $_POST array
 		 *
 		 */	
+		if ( array_key_exists('action', $_POST) && ( $_POST['action'] == 'heartbeat' || $_POST['action'] == 'sample-permalink' ) ) {
+			return $url;
+		}	
+		$ajaxify = true;
+	}
+	
+	/**
+	 * @todo Need test this code! 
+	 */ 
+	if ( is_admin() && !$ajaxify ) {
 		return $url;
 	}
 	
