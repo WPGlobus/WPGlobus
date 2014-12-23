@@ -266,14 +266,18 @@ function wpg_locale(
 	// */
 	
 	$locale = $WPGlobus_Config->locale[ $WPGlobus_Config->language ];
-	
+
+	/** @todo What about AJAX? */
 	if ( is_admin() ) {
 		/**
-		 * Need check WPLANG option for WP4.1
+		 * Need to check WPLANG option for WP4.1
+		 * @todo There is a WP method
+		 * @see get_locale()
 		 */
-		if ( ! empty(get_option('WPLANG')) ) {
-			$locale = get_option('WPLANG');
-			$WPGlobus_Config->set_language($locale);
+		$db_locale = get_option( 'WPLANG' );
+		if ( ! empty( $db_locale ) ) {
+			$locale = $db_locale;
+			$WPGlobus_Config->set_language( $locale );
 		}
 	}	
 
