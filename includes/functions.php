@@ -160,10 +160,11 @@ function wpg_text_filter( $object = '' ) {
 /**
  * @param string $text
  * @param string $language
+ * @param string $return
  *
  * @return string
  */
-function __wpg_text_filter( $text = '', $language = '' ) {
+function __wpg_text_filter( $text = '', $language = '', $return = 'in_default_language' ) {
 
 
 	/**
@@ -277,13 +278,18 @@ function __wpg_text_filter( $text = '', $language = '' ) {
 
 	}
 
-	/**
-	 * We could not find anything in the current language, so we'll try with the default language
-	 */
-	if ( ! $is_local_text_found && $language != $WPGlobus_Config->default_language ) {
-		$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
+	if ( $return == 'empty' ) {
+		if ( ! $is_local_text_found ) {
+			$text = '';
+		}
+	} else {
+		/**
+		 * We could not find anything in the current language, so we'll try with the default language
+		 */
+		if ( ! $is_local_text_found && $language != $WPGlobus_Config->default_language ) {
+			$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
+		}
 	}
-
 	return $text;
 
 }
