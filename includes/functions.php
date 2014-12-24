@@ -164,7 +164,7 @@ function wpg_text_filter( $object = '' ) {
  *
  * @return string
  */
-function __wpg_text_filter( $text = '', $language = '', $return = 'in_default_language' ) {
+function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) {
 
 
 	/**
@@ -278,18 +278,20 @@ function __wpg_text_filter( $text = '', $language = '', $return = 'in_default_la
 
 	}
 
-	if ( $return == 'empty' ) {
-		if ( ! $is_local_text_found ) {
+	/**
+	 * If we could not find anything in the current language...
+	 */
+	if ( ! $is_local_text_found ) {
+		if ( $return === WPGlobus::RETURN_EMPTY ) {
+			/** We are forced to return empty string. */
 			$text = '';
-		}
-	} else {
-		/**
-		 * We could not find anything in the current language, so we'll try with the default language
-		 */
-		if ( ! $is_local_text_found && $language != $WPGlobus_Config->default_language ) {
+		} elseif ( $language !== $WPGlobus_Config->default_language ) {
+			/** Try the default language (recursion) */
 			$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
 		}
+		/** else - we do not change the input string, and if will be returned as-is */
 	}
+
 	return $text;
 
 }
