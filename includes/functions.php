@@ -127,6 +127,7 @@ function wpg_text_filter( $object = '' ) {
 	}
 
 	/**
+	 * @todo Make a separate method for WP_Post filter
 	 * Check $object is array of WP_Post objects
 	 * for example see get_pages() function in \wp-includes\post.php
 	 */	
@@ -211,13 +212,19 @@ function __wpg_text_filter( $text = '', $language = '' ) {
 	 */
 	$possible_delimiters =
 		[
+			/**
+			 * Our delimiters
+			 */
+			[
+				'start' => sprintf( WPGlobus::LOCALE_TAG_START, $language ),
+				'end'   => WPGlobus::LOCALE_TAG_END,
+			],
+			/**
+			 * qTranslate delimiters
+			 */
 			[
 				'start' => "<!--:{$language}-->",
 				'end'   => '<!--:-->',
-			],
-			[
-				'start' => "{:{$language}}",
-				'end'   => '{:}',
 			],
 			[
 				'start' => "[:{$language}]",

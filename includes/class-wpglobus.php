@@ -684,6 +684,21 @@ class WPGlobus {
 		endforeach;
 	}
 
+	const LOCALE_TAG = '{:%s}%s{:}';
+	const LOCALE_TAG_START = '{:%s}';
+	const LOCALE_TAG_END = '{:}';
+
+	/**
+	 * Surround text with language tags
+	 * @param string $text
+	 * @param string $language
+	 *
+	 * @return string
+	 */
+	public static function tag_text( $text, $language ) {
+		return sprintf( WPGlobus::LOCALE_TAG, $language, $text );
+	}
+
 	/**
 	 * @param $data
 	 * @param $postarr
@@ -711,12 +726,12 @@ class WPGlobus {
 
 		$data['post_content'] = trim($data['post_content']);
 		if ( !empty($data['post_content']) ) {
-			$data['post_content'] = "<!--:{$WPGlobus_Config->default_language}-->" . $data['post_content'] . "<!--:-->";
+			$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
 		}
 
 		$data['post_title'] = trim($data['post_title']);
 		if ( !empty($data['post_title']) ) {
-			$data['post_title'] = "<!--:{$WPGlobus_Config->default_language}-->" . $data['post_title'] . "<!--:-->";
+			$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
 		}
 
 
@@ -732,7 +747,7 @@ class WPGlobus {
 				 */
 				$content = isset($postarr['content-' . $language]) ? trim($postarr['content-' . $language]) : '';
 				if ( !empty($content) ) {
-					$data['post_content'] .= "<!--:{$language}-->" . $postarr['content-' . $language] . "<!--:-->";
+					$data['post_content'] .= WPGlobus::tag_text( $postarr['content-' . $language], $language );
 				}
 
 				/**
@@ -740,7 +755,7 @@ class WPGlobus {
 				 */
 				$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
 				if ( !empty($title) ) {
-					$data['post_title'] .= "<!--:{$language}-->" . $postarr['post_title_' . $language] . "<!--:-->";
+					$data['post_title'] .= WPGlobus::tag_text( $postarr['post_title_' . $language], $language );
 				}
 
 			}
