@@ -706,6 +706,21 @@ class WPGlobus {
 	 * @return mixed
 	 */
 	function on_save_post_data($data, $postarr) {
+	
+		if ( 'revision' == $postarr['post_type'] ) {
+			
+			/**
+			 * Don't working with revision
+			 * note: revision there are 2 types, its have some differences
+			 * 		- [post_name] => {post_id}-autosave-v1	and [post_name] => {post_id}-revision-v1
+			 * 		- when [post_name] == {post_id}-autosave-v1  $postarr has [post_content] and [post_title] in default_language
+			 * 		- [post_name] == {post_id}-revision-v1 $postarr has [post_content] and [post_title] in all enabled languages with delimiters
+			 * 
+			 * see $postarr for more info	
+			 */
+			return $data;
+			
+		}
 
 		global $pagenow;
 
