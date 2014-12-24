@@ -667,7 +667,7 @@ class WPGlobus {
 			} else {	?>
 
 				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
-					wp_editor( __wpg_text_filter($post->post_content, $language ), 'content-' . $language, array(
+					wp_editor( __wpg_text_filter($post->post_content, $language, 'empty'), 'content-' . $language, array(
 						'dfw' => true,
 						'drag_drop_upload' => true,
 						'tabfocus_elements' => 'insert-media-button,save-post',
@@ -823,7 +823,7 @@ class WPGlobus {
 				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
 					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
 						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-						<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language) ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language, 'empty') ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
 					</div> <!-- #titlewrap -->
 					<div class="inside">
 						<div id="edit-slug-box-<?php echo $language; ?>" class="hide-if-no-js">
