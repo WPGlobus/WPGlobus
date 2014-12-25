@@ -77,6 +77,14 @@ jQuery(document).ready(function () {
 				// setup for default language
 				$('#content').text(aaAdminGlobus.content);
 				$('#title').val(aaAdminGlobus.title);
+				
+                $('.ui-state-default').on('click', function (event) {
+					if ( 'link-tab-default' == $(this).attr('id') ) {
+						$(window).scrollTop($(window).scrollTop()+1);
+						$(window).scrollTop($(window).scrollTop()-1);
+					}	
+				});				
+				
 			},
             start: function () {
                 var t = this;
