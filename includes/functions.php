@@ -92,8 +92,16 @@ add_filter( 'the_title', 'wpg_text_filter', 0 );
 add_filter( 'the_content', 'wpg_text_filter', 0 );
 
 add_filter( 'wp_title', 'wpg_text_filter', 0 );
-add_filter( 'single_post_title', 'wpg_text_filter', 0 );
 add_filter( 'widget_title', 'wpg_text_filter', 0 );
+
+add_filter( 'single_post_title', 'wpg_text_filter', 0 );
+
+/**
+ * @see single_term_title()
+ */
+add_filter( 'single_cat_title', 'wpg_text_filter', 0 );
+add_filter( 'single_tag_title', 'wpg_text_filter', 0 );
+add_filter( 'single_term_title', 'wpg_text_filter', 0 );
 
 add_filter( 'get_pages', 'wpg_text_filter', 0);
 
