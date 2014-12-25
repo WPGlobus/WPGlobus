@@ -225,6 +225,7 @@ class WPGlobus {
 		$enabled_pages[] = self::OPTIONS_PAGE_SLUG;
 		$enabled_pages[] = 'post.php';
 		$enabled_pages[] = 'post-new.php';
+		$enabled_pages[] = 'nav-menus.php';
 		
 		/**
 		 * Init $post_content 
@@ -235,6 +236,11 @@ class WPGlobus {
 		 * Init $post_title
 		 */
 		$post_title = ''; 
+		
+		/**
+		 * For localize script
+		 */
+		$data = array();
 		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 		
@@ -315,6 +321,42 @@ class WPGlobus {
 			$i18n = array();
 			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
 
+			$page_action = ( 'post.php' == $page || 'post-new.php' == $page ) ? 'post-edit' : '';
+			
+			if ( 'nav-menus.php' == $page ) {
+				
+				$page_action = 'menu-edit';
+			
+				global $wpdb;
+				$items = $wpdb->get_results( "SELECT ID, post_title, post_excerpt FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
+			
+				
+				foreach( $items as $item ) {
+
+					$menu_items[$item->ID]['item-title']   = __wpg_text_filter( $item->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY );
+					
+					foreach( $WPGlobus_Config->enabled_languages as $language ) {
+						
+						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption']   = __wpg_text_filter( $item->post_title, $language, WPGlobus::RETURN_EMPTY );
+						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['caption'] = __wpg_text_filter( $item->post_excerpt, $language, WPGlobus::RETURN_EMPTY ); 
+
+						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['class']   = 'widefat wpglobus-menu-item wpglobus-item-title';
+						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['class'] = 'widefat wpglobus-menu-item wpglobus-item-attr'; 
+					}
+				}
+				
+				$data = array(
+					'default_language' => $WPGlobus_Config->default_language,
+					'language' => $WPGlobus_Config->language,
+					'enabled_languages' => $WPGlobus_Config->enabled_languages,
+					'en_language_name' => $WPGlobus_Config->en_language_name,
+					'items' => $menu_items,
+					'locale_tag_start' => self::LOCALE_TAG_START,
+					'locale_tag_end' => self::LOCALE_TAG_END
+				);
+			
+			}	
+			
 			wp_register_script(
 				'admin-globus',
 				self::$PLUGIN_DIR_URL . 'includes/js/admin.globus.js',
@@ -328,7 +370,7 @@ class WPGlobus {
 				'aaAdminGlobus',
 				array(
 					'version'      => self::$_version,
-					'page'		   => ( 'post.php' == $page || 'post-new.php' == $page ) ? 'post-edit' : '',
+					'page'		   => $page_action,
 					'content'	   => $post_content,
 					'title'	   	   => $post_title,
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
@@ -336,7 +378,8 @@ class WPGlobus {
 					'process_ajax' => __CLASS__ . '_process_ajax',
 					'flag_url'     => $WPGlobus_Config->flags_url,
 					'tabs'		   => $tabs_suffix,
-					'i18n'         => $i18n
+					'i18n'         => $i18n,
+					'data'		   => $data
 				)
 			);
 
