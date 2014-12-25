@@ -91,9 +91,9 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 add_filter( 'the_title', 'wpg_text_filter', 0 );
 add_filter( 'the_content', 'wpg_text_filter', 0 );
 
-
 add_filter( 'wp_title', 'wpg_text_filter', 0 );
 add_filter( 'single_post_title', 'wpg_text_filter', 0 );
+add_filter( 'widget_title', 'wpg_text_filter', 0 );
 
 add_filter( 'get_pages', 'wpg_text_filter', 0);
 
