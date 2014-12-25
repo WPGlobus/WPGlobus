@@ -100,6 +100,7 @@ add_filter( 'get_pages', 'wpg_text_filter', 0);
 add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 add_filter( 'get_terms', 'wpglobus_filter_get_terms', 0 );
 
+add_filter( 'wp_nav_menu_objects', 'wpglobus_filter_nav_menu', 0 );
 
 /**
  * Option filters
@@ -110,7 +111,42 @@ add_filter( 'get_terms', 'wpglobus_filter_get_terms', 0 );
 if ( ! is_admin() ) {
 	add_filter('option_blogdescription', 'wpg_text_filter', 0);
 }
+
+/**
+ * Filter for i18n before displaying a navigation menu.
+ * 
+ * @todo revising this filter because it now using for $post->attr_title and maybe $post->title translation only
+ * 
+ * @param array 
+ * @return array
+ */
+function wpglobus_filter_nav_menu($object) {
+
+	foreach( $object as &$post ) {
+		
+		if ( is_object($post) && 'WP_Post' == get_class($post) ) {
+		
+			$post->post_title    = __wpg_text_filter( $post->post_title );
+
+			$post->post_content  = __wpg_text_filter( $post->post_content );
+			
+			$post->post_excerpt  = __wpg_text_filter( $post->post_excerpt );
+			
+			if ( isset($post->title) && !empty($post->title) ) {
+				$post->title = __wpg_text_filter( $post->title );
+			}
+			
+			if ( isset($post->attr_title) && !empty($post->attr_title) ) {
+				$post->attr_title = __wpg_text_filter( $post->attr_title );
+			}			
+				
+		}
+
+	}
 	
+	return $object;
+}
+
 /**
  * @param mixed $object
  *
