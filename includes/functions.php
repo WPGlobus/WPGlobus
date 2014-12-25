@@ -132,11 +132,11 @@ function wpglobus_filter_nav_menu($object) {
 			
 			$post->post_excerpt  = __wpg_text_filter( $post->post_excerpt );
 			
-			if ( isset($post->title) && !empty($post->title) ) {
+			if ( !empty($post->title) ) {
 				$post->title = __wpg_text_filter( $post->title );
 			}
 			
-			if ( isset($post->attr_title) && !empty($post->attr_title) ) {
+			if ( !empty($post->attr_title) ) {
 				$post->attr_title = __wpg_text_filter( $post->attr_title );
 			}			
 				
