@@ -794,7 +794,7 @@ class WPGlobus {
 		<ul class="wpglobus-post-tabs-ul">	<?php
 			foreach ( $WPGlobus_Config->enabled_languages as $language ) {
 				$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-				<li><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
 			} ?>
 		</ul>	<?php
 
