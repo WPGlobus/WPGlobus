@@ -238,7 +238,7 @@ class WPGlobus {
 		$post_title = ''; 
 		
 		/**
-		 * For localize script
+		 * Init array data depending on the context for localize script
 		 */
 		$data = array();
 		
