@@ -59,8 +59,46 @@ jQuery(document).ready(function () {
 				}	
             },
             nav_menus: function () {
-
-				$('#menu-to-edit .menu-item').each(function( index, li ) {
+				var iID, menu_size,
+					menu_item = '#menu-to-edit .menu-item';
+				
+				var timer = function(){
+					if ( menu_size != $(menu_item).size() ) {
+						clearInterval(iID);
+						$(menu_item).each(function( index, li ) {
+							var $li = $(li);
+							if ( $li.hasClass('wpglobus-menu-item') ) {
+								return true; // the same as continue
+							}
+							var id = $(li).attr('id');
+							$.each(['input.edit-menu-item-title', 'input.edit-menu-item-attr-title'], function(input_index, input) { 
+								var i = $('#' + id + ' ' + input);
+								var $i = $(i);
+								if ( ! $i.hasClass('wpglobus-hidden') ) {
+									$i.addClass('wpglobus-hidden');
+									$i.css('display','none');
+									var l = $i.parent('label');
+									var p = $i.parents('p');
+									$(p).css('height', '80px')
+									$(l).append('<div style="color:#f00;">' + aaAdminGlobus.i18n.save_nav_menu + '</div>');
+								}
+							});
+							$li.addClass('wpglobus-menu-item');
+						});
+					}	
+				}
+				
+				$.ajaxSetup({
+					beforeSend: function(jqXHR, PlainObject) {
+						var i = PlainObject.data.indexOf('action=add-menu-item');
+						if ( i>=0 ) {
+							menu_size = $(menu_item).size();
+							iID = setInterval(timer, 500);
+						}
+					}
+				});
+				
+				$(menu_item).each(function( index, li ) {
 
 					var id = $(li).attr('id'),
 						item_id = id.replace('menu-item-', '');
@@ -94,11 +132,11 @@ jQuery(document).ready(function () {
 							height = index;
 						});
 						height = (height+1) * 40;
-						$(i).css('display','none').attr('class','').addClass('widefat');
+						$(i).css('display','none').attr('class','').addClass('widefat wpglobus-hidden');
 						$(p).css('height', height + 'px');
 
 					});	
-				
+					$(li).addClass('wpglobus-menu-item');
 				});
 				
 				$('.wpglobus-menu-item').on('blur', function(event) {
