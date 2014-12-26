@@ -220,8 +220,10 @@ class WPGlobus {
 		/** @global $post */
 		global $post;
 		
-		if ( in_array($post->post_type, $this->disabled_post_types) ) {
-			return;	
+		if ( is_object($post) && 'WP_Post' == get_class($post) ) {
+			if ( in_array($post->post_type, $this->disabled_post_types) ) {
+				return;	
+			}
 		}		
 		
 		/** @global WPGlobus_Config $WPGlobus_Config */
