@@ -56,14 +56,20 @@ class WPGlobus {
 	const RETURN_IN_DEFAULT_LANGUAGE = 'in_default_language';
 	const RETURN_EMPTY = 'empty';
 
-
+	/**
+	 * Don't make some updates at post screen and don't load scripts for this post types 
+	 */
+	public $disabled_post_types = array();
+	
 	/**
 	 * Constructor
 	 */
 	function __construct() {
-
+		
 		global $WPGlobus_Config, $WPGlobus_Options;
 
+		$this->disabled_post_types[] = 'attachment';
+		
 		/**
 		 * NOTE: do not check for !DOING_AJAX here. Redux uses AJAX, for example, for disabling tracking.
 		 * So, we need to load Redux on AJAX requests, too
@@ -213,6 +219,10 @@ class WPGlobus {
 
 		/** @global $post */
 		global $post;
+		
+		if ( in_array($post->post_type, $this->disabled_post_types) ) {
+			return;	
+		}		
 		
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
@@ -832,7 +842,13 @@ class WPGlobus {
 	 * Add language tabs for jQueryUI
 	 */
 	function on_add_language_tabs() {
-
+		
+		global $post;
+		
+		if ( in_array($post->post_type, $this->disabled_post_types) ) {
+			return;	
+		}
+		
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;	?>
 
@@ -852,6 +868,10 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_add_title_fields( $post ) {
+		
+		if ( in_array($post->post_type, $this->disabled_post_types) ) {
+			return;	
+		}		
 		
 		if ( ! post_type_supports($post->post_type, 'title') ) {
 			return;
