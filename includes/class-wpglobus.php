@@ -354,6 +354,8 @@ class WPGlobus {
 					'locale_tag_start' => self::LOCALE_TAG_START,
 					'locale_tag_end' => self::LOCALE_TAG_END
 				);
+				
+				$i18n['save_nav_menu'] = __( 'You must save navigation menu before edit.', 'wpglobus' );
 			
 			}	
 			
