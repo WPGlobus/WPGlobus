@@ -58,6 +58,6 @@ $WPGlobus_Config = new WPGlobus_Config();
 /**
  * @see WPGlobus::init()
  */
-add_action( 'plugins_loaded', 'WPGlobus::init' );
+add_action( 'plugins_loaded', 'WPGlobus::init', 0 );
 
 # --- EOF
