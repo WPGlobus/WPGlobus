@@ -27,6 +27,7 @@ function wpglobus_filter_get_terms( Array $terms = [ ] ) {
 		}
 	}
 
+	reset( $terms );
 	return $terms;
 }
 
@@ -174,8 +175,8 @@ function wpglobus_filter_nav_menu($object) {
 	
 	}
 
-		
-	
+
+	reset( $object );
 	return $object;
 }
 
@@ -213,8 +214,9 @@ function wpg_text_filter( $object = '' ) {
 					
 			}
 
-		}	
-		
+		}
+
+		reset( $object );
 		return $object;
 		
 	}
