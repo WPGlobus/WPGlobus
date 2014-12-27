@@ -123,7 +123,11 @@ add_filter( 'get_pages', 'wpg_text_filter', 0);
 
 add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 add_filter( 'get_terms', 'wpglobus_filter_get_terms', 0 );
-add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+
+if ( (defined('DOING_AJAX') && DOING_AJAX) || ! is_admin() ) {
+	add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+}
+
 
 /**
  * Filter for admin nav-menus.php screen
@@ -137,7 +141,7 @@ add_filter( 'wp_setup_nav_menu_item', 'wpglobus_filter_nav_menu', 0 );
 /** 
  * At admin we need see string with language shortcodes 
  */ 
-if ( ! is_admin() ) {
+if ( (defined('DOING_AJAX') && DOING_AJAX) || ! is_admin() ) {
 	add_filter('option_blogdescription', 'wpg_text_filter', 0);
 }
 
