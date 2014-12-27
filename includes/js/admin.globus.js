@@ -89,16 +89,23 @@ jQuery(document).ready(function () {
 				$('.wrap').tabs();
 				
 				$('.wpglobus-taxonomy').on('blur', function(event) {
-					var save_to = $(this).data('save-to'), s = '';
-					$('.wpglobus-taxonomy').each(function(index, element){
-						var $e = $(element);
-						if ( ! $e.hasClass('wpglobus-nosave') ) {
-							if ( save_to == $e.data('save-to') && $e.val() != '' ) {
-								s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
-							}
-						}
+					var $this = $(this), 
+						save_to = $this.data('save-to'), 
+						s = '';
 						
-					});
+					if ( 'parent' == save_to ) {
+						s = $this.val();
+					} else {
+						$('.wpglobus-taxonomy').each(function(index, element){
+							var $e = $(element);
+							if ( ! $e.hasClass('wpglobus-nosave') ) {
+								if ( save_to == $e.data('save-to') && $e.val() != '' ) {
+									s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
+								}
+							}
+							
+						});
+					}	
 					$('#' + save_to).val(s);
 				});	
 			},
