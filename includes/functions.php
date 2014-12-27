@@ -15,18 +15,33 @@ function wpg_text_title_filter($title) {
  * This translates all taxonomy names, including categories
  * @todo Should cache this and not parse on every page
  *
- * @param array $terms
+ * @param array|object $terms 
  *
- * @return array
+ * @return array|object
  */
-function wpglobus_filter_get_terms( Array $terms = [ ] ) {
-
-	foreach ( $terms as &$term ) {
-		if ( ! empty( $term->name ) ) {
-			$term->name = __wpg_text_filter( $term->name );
+function wpglobus_filter_get_terms($terms) {
+	
+	if ( is_array($terms) ) {
+		foreach ( $terms as &$term ) {
+			if ( ! empty( $term->name ) ) {
+				$term->name = __wpg_text_filter( $term->name );
+			}
+			if ( ! empty( $term->description ) ) {
+				$term->description = __wpg_text_filter( $term->description );
+			}
 		}
+	} else {
+		/**
+		 *  Filter 'get_term' use $terms as object
+		 */
+		if ( ! empty( $terms->name ) ) {
+			$terms->name = __wpg_text_filter( $terms->name );
+		}
+		if ( ! empty( $terms->description ) ) {
+			$terms->description = __wpg_text_filter( $terms->description );
+		}		
 	}
-
+	
 	reset( $terms );
 	return $terms;
 }
@@ -108,6 +123,7 @@ add_filter( 'get_pages', 'wpg_text_filter', 0);
 
 add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 add_filter( 'get_terms', 'wpglobus_filter_get_terms', 0 );
+add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
 
 /**
  * Filter for admin nav-menus.php screen
