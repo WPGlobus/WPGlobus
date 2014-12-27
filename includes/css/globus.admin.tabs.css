@@ -141,10 +141,7 @@
     border-top-color: -moz-use-text-color;
     border-top-style: none;
     border-top-width: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
+    padding: 0;
 }
 
 .titlediv-wpglobus  .title_wpglobus {
@@ -152,10 +149,7 @@
     font-size: 1.7em;
     height: 1.7em;
     line-height: 100%;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
+    margin: 0;
     outline-color: -moz-use-text-color;
     outline-style: none;
     outline-width: 0;
@@ -169,4 +163,9 @@
 .postdivrich-wpglobus  .wp-editor-tools {
 	background-color: #f1f1f1;
     padding-top: 20px;
+}
+
+/* Tabs at edit-tags.php screen */
+.edit-tags-php .wpglobus-post-tabs-ul {
+	padding-bottom:1px;
 }
