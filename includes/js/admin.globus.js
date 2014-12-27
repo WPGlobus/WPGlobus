@@ -68,14 +68,14 @@ jQuery(document).ready(function () {
 					var new_element = $(t[0].outerHTML);
 					new_element.attr('id', 'table-' + suffix);
 					var $e = $(new_element);
-					$e.find('#name').attr('id','name-'+suffix).attr('name','name-'+suffix);
-					$e.find('#slug').attr('id','slug-'+suffix).attr('name','slug-'+suffix);
-					$e.find('#parent').attr('id','parent-'+suffix).attr('name','parent-'+suffix);
-					$e.find('#description').attr('id','description-'+suffix).attr('name','description-'+suffix);
+					$e.find('#name').attr('value',aaAdminGlobus.data.i18n[suffix]['name']).attr('id','name-'+suffix).attr('name','name-'+suffix).addClass('wpglobus-taxonomy');
+					$e.find('#slug').attr('id','slug-'+suffix).attr('name','slug-'+suffix).addClass('wpglobus-taxonomy');
+					$e.find('#parent').attr('id','parent-'+suffix).attr('name','parent-'+suffix).addClass('wpglobus-taxonomy');
+					$e.find('#description').text(aaAdminGlobus.data.i18n[suffix]['description']).attr('id','description-'+suffix).attr('name','description-'+suffix).addClass('wpglobus-taxonomy');
 
 					if ( 'default' != suffix ) {
-						$e.find('#slug-'+suffix).parents('tr').css('display','none');
-						$e.find('#parent-'+suffix).parents('tr').css('display','none');
+						$e.find('#slug-'+suffix).addClass('wpglobus-nosave').parents('tr').css('display','none');
+						$e.find('#parent-'+suffix).addClass('wpglobus-nosave').parents('tr').css('display','none');
 					}					
 					$('#tab-' + suffix).append($e[0].outerHTML);	
 				});
