@@ -391,10 +391,16 @@ class WPGlobus {
 			
 			} else if ( 'edit-tags.php' == $page ) {
 				
+				global $tag;
+				
 				$page_action = 'taxonomy-edit';
 				
 				$data['tag_id'] = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
-			
+				
+				foreach( $WPGlobus_Config->enabled_languages as $language ) {
+					$language = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
+					$data['i18n'][$language] = __wpg_text_filter($tag->name, $language); 
+				}
 			}	
 			
 			wp_register_script(
