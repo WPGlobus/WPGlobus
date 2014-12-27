@@ -68,6 +68,8 @@ class WPGlobus {
 		
 		global $WPGlobus_Config, $WPGlobus_Options;
 
+		global $pagenow;
+		
 		$this->disabled_post_types[] = 'attachment';
 		
 		/**
@@ -87,11 +89,6 @@ class WPGlobus {
 			require_once 'options/class-wpglobus-options.php';
 			$WPGlobus_Options = new WPGlobus_Options();
 
-			add_action( 'edit_form_after_editor', array(
-				$this,
-				'on_add_wp_editors'
-			), 10 );
-
 			/**
 			 * Join post content and post title for enabled languages in func wp_insert_post
 			 *
@@ -102,6 +99,30 @@ class WPGlobus {
 				'on_save_post_data'
 			), 10, 2 );
 
+			if ( 'edit-tags.php' == $pagenow ) {
+				/**
+				 * Need to get taxonomy for using correct filter
+				 */
+				if ( !empty($_GET['taxonomy']) ) {
+					
+					add_action( "{$_GET['taxonomy']}_pre_edit_form", array(
+						$this,
+						'on_add_language_tabs_edit_taxonomy'
+					), 10, 2 );	
+					
+					add_action( "{$_GET['taxonomy']}_edit_form", array(
+						$this,
+						'on_add_taxonomy_form_wrapper'
+					), 10, 2 );		
+					
+				}
+			}
+	
+			add_action( 'edit_form_after_editor', array(
+				$this,
+				'on_add_wp_editors'
+			), 10 );
+			
 			add_action( 'edit_form_after_editor', array(
 				$this,
 				'on_add_language_tabs'
@@ -238,6 +259,7 @@ class WPGlobus {
 		$enabled_pages[] = 'post.php';
 		$enabled_pages[] = 'post-new.php';
 		$enabled_pages[] = 'nav-menus.php';
+		$enabled_pages[] = 'edit-tags.php';
 		
 		/**
 		 * Init $post_content 
@@ -252,7 +274,12 @@ class WPGlobus {
 		/**
 		 * Init array data depending on the context for localize script
 		 */
-		$data = array();
+		$data = array(
+			'default_language' => $WPGlobus_Config->default_language,
+			'language' => $WPGlobus_Config->language,
+			'enabled_languages' => $WPGlobus_Config->enabled_languages,
+			'en_language_name' => $WPGlobus_Config->en_language_name		
+		);
 		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 		
@@ -311,8 +338,7 @@ class WPGlobus {
 			 */
 			$tabs_suffix = array();
 			
-			if ( 'post.php' == $page || 'post-new.php' == $page ) {
-				
+			if ( in_array($page, array('post.php', 'post-new.php', 'edit-tags.php')) ) {				
 				/**
 				 * Enqueue jQueryUI tabs
 				 */
@@ -357,17 +383,17 @@ class WPGlobus {
 					}
 				}
 				
-				$data = array(
-					'default_language' => $WPGlobus_Config->default_language,
-					'language' => $WPGlobus_Config->language,
-					'enabled_languages' => $WPGlobus_Config->enabled_languages,
-					'en_language_name' => $WPGlobus_Config->en_language_name,
-					'items' => $menu_items,
-					'locale_tag_start' => self::LOCALE_TAG_START,
-					'locale_tag_end' => self::LOCALE_TAG_END
-				);
+				$data['items'] = $menu_items;
+				$data['locale_tag_start'] = self::LOCALE_TAG_START;
+				$data['locale_tag_end'] = self::LOCALE_TAG_END;
 				
 				$i18n['save_nav_menu'] = __( 'You must save navigation menu before edit.', 'wpglobus' );
+			
+			} else if ( 'edit-tags.php' == $page ) {
+				
+				$page_action = 'taxonomy-edit';
+				
+				$data['tag_id'] = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
 			
 			}	
 			
@@ -432,7 +458,7 @@ class WPGlobus {
 			wp_enqueue_style( 'select2-css' );
 		}
 
-		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
+		if ( in_array($pagenow, array('post.php', 'post-new.php', 'edit-tags.php')) ) {
 			wp_register_style(
 				'globus.admin.tabs',
 				self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.tabs.css',
@@ -839,7 +865,39 @@ class WPGlobus {
 		return $data;
 
 	}
+	
+	/**
+	 *
+	 */
+	function on_add_taxonomy_form_wrapper() {
+		
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;		
+		
+		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+			$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
+			<div id="tab-<?php echo $tab_suffix; ?>">
+			</div>	
+			<?php
+		}
+		
+	}
+	
+	/**
+	 *
+	 */
+	function on_add_language_tabs_edit_taxonomy() {
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;	?>
 
+		<ul class="wpglobus-post-tabs-ul">	<?php
+			foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+				$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
+				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+			} ?>
+		</ul>	<?php		
+	}
+	
 	/**
 	 * Add language tabs for jQueryUI
 	 */

@@ -54,10 +54,39 @@ jQuery(document).ready(function () {
 					this.post_edit();
 				} else if ( 'menu-edit' == aaAdminGlobus.page ) {
 					this.nav_menus();	
+				} else if ( 'taxonomy-edit' == aaAdminGlobus.page ) {
+					if ( aaAdminGlobus.data.tag_id ) {
+						this.taxonomy_edit();
+					}	
 				} else {
 					this.start();
 				}	
             },
+            taxonomy_edit: function () {
+				var t = $('.form-table');
+				$.each(aaAdminGlobus.tabs, function( index, suffix ) {
+					var new_element = $(t[0].outerHTML);
+					new_element.attr('id', 'table-' + suffix);
+					var $e = $(new_element);
+					$e.find('#name').attr('id','name-'+suffix).attr('name','name-'+suffix);
+					$e.find('#slug').attr('id','slug-'+suffix).attr('name','slug-'+suffix);
+					$e.find('#parent').attr('id','parent-'+suffix).attr('name','parent-'+suffix);
+					$e.find('#description').attr('id','description-'+suffix).attr('name','description-'+suffix);
+
+					if ( 'default' != suffix ) {
+						$e.find('#slug-'+suffix).parents('tr').css('display','none');
+						$e.find('#parent-'+suffix).parents('tr').css('display','none');
+					}					
+					$('#tab-' + suffix).append($e[0].outerHTML);	
+				});
+
+				$('.wpglobus-post-tabs-ul').insertAfter('#ajax-response');
+				t.css('display','none');
+				
+				// Make class wrap as tabs container
+				// tabs on
+				$('.wrap').tabs();
+			},
             nav_menus: function () {
 				var iID, menu_size,
 					menu_item = '#menu-to-edit .menu-item';
@@ -169,7 +198,6 @@ jQuery(document).ready(function () {
 							}
 							item_id = $e.data('item-id');
 						});
-							console.log(s);
 						$('input#edit-menu-item-attr-title-' + item_id).val(s); 	
 					}					
 					
