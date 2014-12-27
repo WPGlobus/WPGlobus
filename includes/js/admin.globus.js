@@ -66,12 +66,13 @@ jQuery(document).ready(function () {
 				var t = $('.form-table');
 				$.each(aaAdminGlobus.tabs, function( index, suffix ) {
 					var new_element = $(t[0].outerHTML);
+					var language = suffix == 'default' ? aaAdminGlobus.data.default_language : suffix;
 					new_element.attr('id', 'table-' + suffix);
 					var $e = $(new_element);
-					$e.find('#name').attr('value',aaAdminGlobus.data.i18n[suffix]['name']).attr('id','name-'+suffix).attr('name','name-'+suffix).addClass('wpglobus-taxonomy');
-					$e.find('#slug').attr('id','slug-'+suffix).attr('name','slug-'+suffix).addClass('wpglobus-taxonomy');
-					$e.find('#parent').attr('id','parent-'+suffix).attr('name','parent-'+suffix).addClass('wpglobus-taxonomy');
-					$e.find('#description').text(aaAdminGlobus.data.i18n[suffix]['description']).attr('id','description-'+suffix).attr('name','description-'+suffix).addClass('wpglobus-taxonomy');
+					$e.find('#name').attr('value',aaAdminGlobus.data.i18n[suffix]['name']).attr('id','name-'+suffix).attr('name','name-'+suffix).addClass('wpglobus-taxonomy').attr('data-save-to','name').attr('data-language',language);
+					$e.find('#slug').attr('id','slug-'+suffix).attr('name','slug-'+suffix).addClass('wpglobus-taxonomy').attr('data-save-to','slug').attr('data-language',language);
+					$e.find('#parent').attr('id','parent-'+suffix).attr('name','parent-'+suffix).addClass('wpglobus-taxonomy').attr('data-save-to','parent').attr('data-language',language);
+					$e.find('#description').text(aaAdminGlobus.data.i18n[suffix]['description']).attr('id','description-'+suffix).attr('name','description-'+suffix).addClass('wpglobus-taxonomy').attr('data-save-to','description').attr('data-language',language);
 
 					if ( 'default' != suffix ) {
 						$e.find('#slug-'+suffix).addClass('wpglobus-nosave').parents('tr').css('display','none');
@@ -86,6 +87,20 @@ jQuery(document).ready(function () {
 				// Make class wrap as tabs container
 				// tabs on
 				$('.wrap').tabs();
+				
+				$('.wpglobus-taxonomy').on('blur', function(event) {
+					var save_to = $(this).data('save-to'), s = '';
+					$('.wpglobus-taxonomy').each(function(index, element){
+						var $e = $(element);
+						if ( ! $e.hasClass('wpglobus-nosave') ) {
+							if ( save_to == $e.data('save-to') && $e.val() != '' ) {
+								s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
+							}
+						}
+						
+					});
+					$('#' + save_to).val(s);
+				});	
 			},
             nav_menus: function () {
 				var iID, menu_size,
