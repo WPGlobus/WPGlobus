@@ -278,7 +278,9 @@ class WPGlobus {
 			'default_language' => $WPGlobus_Config->default_language,
 			'language' => $WPGlobus_Config->language,
 			'enabled_languages' => $WPGlobus_Config->enabled_languages,
-			'en_language_name' => $WPGlobus_Config->en_language_name		
+			'en_language_name' => $WPGlobus_Config->en_language_name,
+			'locale_tag_start' => self::LOCALE_TAG_START,
+			'locale_tag_end' => self::LOCALE_TAG_END	
 		);
 		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
@@ -384,15 +386,13 @@ class WPGlobus {
 				}
 				
 				$data['items'] = $menu_items;
-				$data['locale_tag_start'] = self::LOCALE_TAG_START;
-				$data['locale_tag_end'] = self::LOCALE_TAG_END;
 				
 				$i18n['save_nav_menu'] = __( 'You must save navigation menu before edit.', 'wpglobus' );
 			
 			} else if ( 'edit-tags.php' == $page ) {
 				
 				global $tag;
-				
+
 				$page_action = 'taxonomy-edit';
 				
 				$data['tag_id'] = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
@@ -401,7 +401,7 @@ class WPGlobus {
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
 						$lang = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
 						$data['i18n'][$lang]['name'] = __wpg_text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
-						$data['i18n'][$lang]['description'] = 'Dummy ' . $language; 
+						$data['i18n'][$lang]['description'] = __wpg_text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
 					}
 				}	
 			}	
