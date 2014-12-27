@@ -399,9 +399,9 @@ class WPGlobus {
 				
 				if ( $data['tag_id'] ) {
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
-						$language = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
-						$data['i18n'][$language]['name'] = __wpg_text_filter($tag->name, $language); 
-						$data['i18n'][$language]['description'] = 'Dummy ' . $language; 
+						$lang = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
+						$data['i18n'][$lang]['name'] = __wpg_text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
+						$data['i18n'][$lang]['description'] = 'Dummy ' . $language; 
 					}
 				}	
 			}	
