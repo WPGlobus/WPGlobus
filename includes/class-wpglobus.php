@@ -399,7 +399,8 @@ class WPGlobus {
 				
 				foreach( $WPGlobus_Config->enabled_languages as $language ) {
 					$language = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
-					$data['i18n'][$language] = __wpg_text_filter($tag->name, $language); 
+					$data['i18n'][$language]['name'] = __wpg_text_filter($tag->name, $language); 
+					$data['i18n'][$language]['description'] = 'Dummy ' . $language; 
 				}
 			}	
 			
