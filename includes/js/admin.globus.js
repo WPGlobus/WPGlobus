@@ -63,7 +63,7 @@ jQuery(document).ready(function () {
 				}	
             },
             taxonomy_edit: function () {
-				var t = $('.form-table');
+				var t = $('.form-table').eq(0);
 				$.each(aaAdminGlobus.tabs, function( index, suffix ) {
 					var new_element = $(t[0].outerHTML);
 					var language = suffix == 'default' ? aaAdminGlobus.data.default_language : suffix;
