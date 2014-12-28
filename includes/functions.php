@@ -155,6 +155,14 @@ if ( (defined('DOING_AJAX') && DOING_AJAX) || ! is_admin() ) {
  */
 function wpglobus_filter_nav_menu($object) {
 
+	global $pagenow;
+	if ( 'nav-menus.php' == $pagenow && 'wp_setup_nav_menu_item' == current_filter() ) {
+		/**
+		 * Prevent reset i18n Navigation Labels and Title Attributes in navigation menu at nav-menus.php screen
+		 */
+		return $object;
+	}
+
 	if ( is_array($object) ) {
 		foreach( $object as &$post ) {
 			
