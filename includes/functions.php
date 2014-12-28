@@ -72,11 +72,11 @@ function on_home_url( $url ) {
 	
 	if ( 'admin-ajax.php' == $pagenow ) {
 		/** 
-		 * Don't convert url for ajax action with $_POST[action] == heartbeat, $_POST[action] == sample-permalink
+		 * Don't convert url for ajax action with $_POST[action] == heartbeat, sample-permalink, add-menu-item
 		 * For more info see $_POST array
 		 *
 		 */	
-		if ( array_key_exists('action', $_POST) && ( $_POST['action'] == 'heartbeat' || $_POST['action'] == 'sample-permalink' ) ) {
+		if ( array_key_exists('action', $_POST) && in_array($_POST['action'], array('heartbeat', 'sample-permalink', 'add-menu-item')) ) {
 			return $url;
 		}	
 		$ajaxify = true;
