@@ -30,6 +30,13 @@ class WPGlobus_Utils {
 
 		$parsed_url = self::parse_url($url);	
 		
+		if ( false === strpos(get_option('home'), $parsed_url['host']) ) {
+			/**
+			 * Don't convert external url
+			 */
+			return $url;
+		}
+		
 		if ( ! $parsed_url ) {
 			return $url;
 		}
