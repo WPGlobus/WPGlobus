@@ -381,10 +381,8 @@ function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETU
 	 */
 	if ( ! $is_local_text_found ) {
 		if ( $return === WPGlobus::RETURN_EMPTY ) { 
-			if ( $language != $WPGlobus_Config->default_language ) {
-				/** We are forced to return empty string. */
-				$text = '';
-			}	
+			/** We are forced to return empty string. */
+			$text = '';
 		} elseif ( $language !== $WPGlobus_Config->default_language ) {
 			/** Try the default language (recursion) */
 			$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );

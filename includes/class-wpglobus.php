@@ -303,12 +303,12 @@ class WPGlobus {
 				 * next we send $post_content to js with localize script 
 				 * @see post_edit() in admin.globus.js 
 				 */
-				$post_content = __wpg_text_filter($post->post_content, $WPGlobus_Config->default_language); 
+				$post_content = __wpg_text_filter($post->post_content, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY); 
 
 				/**
 				 * Set $post_title for default language
 				 */	
-				$post_title = __wpg_text_filter($post->post_title, $WPGlobus_Config->default_language); 
+				$post_title = __wpg_text_filter($post->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY); 
 				
 			}
 			
