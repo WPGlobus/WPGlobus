@@ -383,9 +383,20 @@ function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETU
 		if ( $return === WPGlobus::RETURN_EMPTY ) { 
 			/** We are forced to return empty string. */
 			$text = '';
-		} elseif ( $language !== $WPGlobus_Config->default_language ) {
-			/** Try the default language (recursion) */
-			$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
+		} else {
+			if ( $language == $WPGlobus_Config->default_language ) {
+				if ( 1 == preg_match('/(\[:|\{:|<!--:)[a-z]{2}/', $text) ) {
+					/**
+					 * Rarely case of text in default language doesn't exists
+					 *
+					 * @todo make option for return warning message or maybe another action
+					 */
+					$text = __('No text in default language', 'wpglobus');
+				}	
+			} else {
+				/** Try the default language (recursion) */
+				$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
+			}
 		}
 		/** else - we do not change the input string, and if will be returned as-is */
 	}
