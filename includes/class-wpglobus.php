@@ -368,7 +368,8 @@ class WPGlobus {
 			if ( 'nav-menus.php' == $page ) {
 				
 				$page_action = 'menu-edit';
-			
+				$menu_items  = array();
+ 			
 				global $wpdb;
 				$items = $wpdb->get_results( "SELECT ID, post_title, post_excerpt, post_name FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
 			
@@ -404,10 +405,6 @@ class WPGlobus {
 						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['class']   = 'widefat wpglobus-menu-item wpglobus-item-title';
 						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['class'] = 'widefat wpglobus-menu-item wpglobus-item-attr'; 
 					}
-
-
-					
-
 				}
 				
 				$data['items'] = $menu_items;
