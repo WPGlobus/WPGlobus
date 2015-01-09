@@ -163,10 +163,6 @@ jQuery(document).ready(function () {
 						var p = $('#' + id + ' ' + input).parents('p');
 						var height = 0;
 						
-						if ( aaAdminGlobus.data.items[item_id]['autocomplete-item-title'] && 'input.edit-menu-item-title' == input ) {
-							$('input#edit-menu-item-title-' + item_id).val(aaAdminGlobus.data.items[item_id]['autocomplete-item-title']);
-						}						
-						
 						$.each(aaAdminGlobus.data.enabled_languages, function(index, language) {
 							var new_element = $(i[0].outerHTML);
 							new_element.attr('id', $(i).attr('id') + '-' + language);
