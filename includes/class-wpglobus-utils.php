@@ -297,5 +297,18 @@ class WPGlobus_Utils {
 
 		return $result;
 	}
+	
+	/**
+	 * Check if string has language shortcodes
+	 *
+	 * @param string $string
+	 * @return bool
+	 */
+	public static function has_translations($string) {
+		if ( 1 == preg_match(WPGlobus::TAG_REGEXP, $string) ) {
+			return true;
+		}
+		return false;	
+	}	
 }
 # --- EOF
