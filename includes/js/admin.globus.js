@@ -185,7 +185,7 @@ jQuery(document).ready(function () {
 						});
 						height = (height+1) * 40;
 						$(i).css('display','none').attr('class','').addClass('widefat wpglobus-hidden');
-						$(p).css('height', height + 'px');
+						$(p).css('height', height + 'px').addClass('wpglobus-menu-item-box');
 
 					});	
 					$(li).addClass('wpglobus-menu-item');

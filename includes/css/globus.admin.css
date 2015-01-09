@@ -1,3 +1,10 @@
 #adminmenu li.toplevel_page_wpglobus_options div.wp-menu-image:before {
     content: "\f319";
 }
+.wpglobus-menu-item-box {
+	background-color:#e0e0e0;
+	padding-bottom: 20px;
+}
+.wpglobus-menu-item-box input{
+	border: 1px #0f0 solid;
+}
