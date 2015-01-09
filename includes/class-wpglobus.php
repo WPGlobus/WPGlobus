@@ -55,6 +55,8 @@ class WPGlobus {
 
 	const RETURN_IN_DEFAULT_LANGUAGE = 'in_default_language';
 	const RETURN_EMPTY = 'empty';
+	
+	const TAG_REGEXP = '/(\{:|\[:|<!--:)[a-z]{2}/';
 
 	/**
 	 * Don't make some updates at post screen and don't load scripts for this post types 

@@ -386,7 +386,7 @@ function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETU
 			$text = '';
 		} else {
 			if ( $language == $WPGlobus_Config->default_language ) {
-				if ( 1 == preg_match('/(\[:|\{:|<!--:)[a-z]{2}/', $text) ) {
+				if ( 1 == preg_match(WPGlobus::TAG_REGEXP, $text) ) {
 					/**
 					 * Rarely case of text in default language doesn't exists
 					 *
