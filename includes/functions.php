@@ -381,10 +381,19 @@ function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETU
 	 * If we could not find anything in the current language...
 	 */
 	if ( ! $is_local_text_found ) {
-		if ( $return === WPGlobus::RETURN_EMPTY ) { 
-			/** We are forced to return empty string. */
-			$text = '';
+		if ( $return === WPGlobus::RETURN_EMPTY ) {
+			if ( $language == $WPGlobus_Config->default_language && 0 == preg_match(WPGlobus::TAG_REGEXP, $text) ) {
+				/**
+				 * If text does not contains language delimiters nothing to do
+				 */
+			} else {
+				/** We are forced to return empty string. */
+				$text = '';
+			}	
 		} else {
+			/**
+			 * Try RETURN_IN_DEFAULT_LANGUAGE
+			 */
 			if ( $language == $WPGlobus_Config->default_language ) {
 				if ( 1 == preg_match(WPGlobus::TAG_REGEXP, $text) ) {
 					/**
