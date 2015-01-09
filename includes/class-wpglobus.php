@@ -370,12 +370,12 @@ class WPGlobus {
 				$page_action = 'menu-edit';
 			
 				global $wpdb;
-				$items = $wpdb->get_results( "SELECT ID, post_title, post_excerpt FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
+				$items = $wpdb->get_results( "SELECT ID, post_title, post_excerpt, post_name FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
 			
-				
 				foreach( $items as $item ) {
 
-					$menu_items[$item->ID]['item-title']   = __wpg_text_filter( $item->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY );
+					$menu_items[$item->ID]['item-title'] = __wpg_text_filter( $item->post_title, $WPGlobus_Config->default_language );
+					$menu_items[$item->ID]['autocomplete-item-title'] = false;
 					
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
 						
@@ -385,6 +385,28 @@ class WPGlobus {
 						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['class']   = 'widefat wpglobus-menu-item wpglobus-item-title';
 						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['class'] = 'widefat wpglobus-menu-item wpglobus-item-attr'; 
 					}
+
+					if ( ! WPGlobus_Utils::has_translations($item->post_title) ) :
+						/**
+						 * Check for menu item has post type page
+						 * autocomplete Navigation Label input field
+						 *
+						 * @todo saving after click Save Menu don't work with {:language}{:} tags
+						 */
+						$page = $wpdb->get_row( "SELECT ID, post_title, post_name, post_type FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_name='{$item->post_name}'" );
+
+						if ( !empty($page)) {
+							foreach( $WPGlobus_Config->enabled_languages as $language ) {
+								$menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption'] = __wpg_text_filter( $page->post_title, $language, WPGlobus::RETURN_EMPTY );
+								if ( ! empty($menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption']) ) {
+									// $menu_items[$item->ID]['autocomplete-item-title'] .= self::tag_text( $menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption'], $language );
+									$menu_items[$item->ID]['autocomplete-item-title'] .= '[:' . $language . ']' . $menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption'];
+								}
+							}
+						}
+					endif;
+					
+
 				}
 				
 				$data['items'] = $menu_items;
