@@ -248,6 +248,10 @@ jQuery(document).ready(function () {
 				$('#content').text(aaAdminGlobus.content);
 				$('#title').val(aaAdminGlobus.title);
 				
+				if (typeof aaWPGlobusVendor !== "undefined") {				
+					wpglobus_wpseo();
+				}
+				
                 $('.ui-state-default').on('click', function (event) {
 					if ( 'link-tab-default' == $(this).attr('id') ) {
 						$(window).scrollTop($(window).scrollTop()+1);

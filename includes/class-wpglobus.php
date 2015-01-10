@@ -52,6 +52,8 @@ class WPGlobus {
 	 * @var string
 	 */
 	public $redux_framework_origin = 'external';
+	
+	public $vendors_scripts = array();
 
 	const RETURN_IN_DEFAULT_LANGUAGE = 'in_default_language';
 	const RETURN_EMPTY = 'empty';
@@ -73,6 +75,10 @@ class WPGlobus {
 		global $pagenow;
 		
 		$this->disabled_post_types[] = 'attachment';
+		
+		if ( defined( 'WPSEO_VERSION' ) ) {
+			$this->vendors_scripts['WPSEO'] = true;
+		}
 		
 		/**
 		 * NOTE: do not check for !DOING_AJAX here. Redux uses AJAX, for example, for disabling tracking.
@@ -428,6 +434,25 @@ class WPGlobus {
 				}	
 			}	
 			
+			if ( ! empty($this->vendors_scripts) ) {
+				wp_register_script(
+					'wpglobus.vendor',
+					self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.vendor.js',
+					array( 'jquery' ),
+					self::$_version,
+					true
+				);
+				wp_enqueue_script( 'wpglobus.vendor' );
+				wp_localize_script(
+					'wpglobus.vendor',
+					'aaWPGlobusVendor',
+					array(
+						'version' => self::$_version,
+						'vendor' => $this->vendors_scripts
+					)
+				);
+			}			
+			
 			wp_register_script(
 				'wpglobus.admin',
 				self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.admin.js',
@@ -453,7 +478,7 @@ class WPGlobus {
 					'data'		   => $data
 				)
 			);
-
+			
 		}
 
 	}
