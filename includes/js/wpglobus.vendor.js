@@ -3,13 +3,10 @@
 jQuery(document).ready(function () {
 
 	wpglobus_wpseo = function() {
-
 		if (typeof wpseoMetaboxL10n === "undefined") {
 			return;
 		}	
-
-		yst_replaceVariables('%%title%% %%page%% %%sep%% %%sitename%%', function (title) {jQuery('#wpseosnippet_title').html(title);})
-
+		yst_updateTitle(false);
 	}
 
 });
