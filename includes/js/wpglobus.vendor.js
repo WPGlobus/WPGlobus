@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
 		if (typeof wpseoMetaboxL10n === "undefined") {
 			return;
 		}	
-		yst_updateTitle(false);
+		yst_updateSnippet();
 	}
 
 });
