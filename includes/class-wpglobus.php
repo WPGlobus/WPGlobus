@@ -877,12 +877,6 @@ class WPGlobus {
 	 * @return mixed
 	 */
 	function on_save_post_data($data, $postarr) {
-	
-		//if ( isset($_GET['devmode']) ) {
-			error_log( 'on_save_post_data' );
-			//error_log( print_r($data, true) ) ;
-			error_log( print_r($postarr, true) ) ;
-		//}
 		
 		if ( 'revision' == $postarr['post_type'] ) {
 			
