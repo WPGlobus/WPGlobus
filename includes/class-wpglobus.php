@@ -100,16 +100,6 @@ class WPGlobus {
 			require_once 'options/class-wpglobus-options.php';
 			$WPGlobus_Options = new WPGlobus_Options();
 
-			/**
-			 * Join post content and post title for enabled languages in func wp_insert_post
-			 *
-			 * @see action in wp-includes\post.php:3326
-			 */
-			add_action( 'wp_insert_post_data' , array(
-				$this,
-				'on_save_post_data'
-			), 10, 2 );
-
 			if ( 'edit-tags.php' == $pagenow ) {
 				/**
 				 * Need to get taxonomy for using correct filter
@@ -128,21 +118,45 @@ class WPGlobus {
 					
 				}
 			}
-	
-			add_action( 'edit_form_after_editor', array(
-				$this,
-				'on_add_wp_editors'
-			), 10 );
+
+			if ( ! isset($_GET['devmode']) || 'off' == $_GET['devmode'] ) {
+
+				/**
+				 * Join post content and post title for enabled languages in func wp_insert_post
+				 *
+				 * @see action in wp-includes\post.php:3326
+				 */
+				add_action( 'wp_insert_post_data' , array(
+					$this,
+					'on_save_post_data'
+				), 10, 2 );
+				
+				add_action( 'edit_form_after_editor', array(
+					$this,
+					'on_add_wp_editors'
+				), 10 );
+				
+				add_action( 'edit_form_after_editor', array(
+					$this,
+					'on_add_language_tabs'
+				));
+				
+				add_action( 'edit_form_after_title', array(
+					$this,
+					'on_add_title_fields' 
+				));		
+
+				add_action( 'admin_print_scripts', array(
+					$this,
+					'on_admin_scripts'
+				) );
 			
-			add_action( 'edit_form_after_editor', array(
+			}	
+
+			add_action( 'admin_print_styles', array(
 				$this,
-				'on_add_language_tabs'
-			));
-			
-			add_action( 'edit_form_after_title', array(
-				$this,
-				'on_add_title_fields' 
-			));			
+				'on_admin_styles'
+			) );			
 
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
 				$this,
@@ -154,16 +168,11 @@ class WPGlobus {
 				'on_admin_menu'
 			), 10 );
 
-			add_action( 'admin_print_scripts', array(
+			add_action('post_submitbox_misc_actions', array(
 				$this,
-				'on_admin_scripts'
+				'on_add_devmode_switcher'
 			) );
-
-			add_action( 'admin_print_styles', array(
-				$this,
-				'on_admin_styles'
-			) );
-
+			
 		}
 		else {
 			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
@@ -240,6 +249,23 @@ class WPGlobus {
 		$WPGlobus = new self;
 	}
 
+	/**
+	 * Add switcher to publish metabox
+	 */
+	function on_add_devmode_switcher() {
+		global $post;
+		$mode = 'on';
+		if ( isset($_GET['devmode']) && 'on' == $_GET['devmode'] ) {
+			$mode = 'off';
+		}
+		?>
+		<div class="misc-pub-section wpglobus-switch">
+			<span id="wpglobus-raw">&nbsp;&nbsp;Dev mode </span>
+			<a href="post.php?post=<?php echo $post->ID; ?>&action=edit&devmode=<?php echo $mode; ?>"><?php echo $mode; ?></a>
+		</div>	
+		<?php	
+	}
+	
 	/**
 	 * Enqueue admin scripts
 	 * @return void
@@ -852,6 +878,12 @@ class WPGlobus {
 	 */
 	function on_save_post_data($data, $postarr) {
 	
+		//if ( isset($_GET['devmode']) ) {
+			error_log( 'on_save_post_data' );
+			//error_log( print_r($data, true) ) ;
+			error_log( print_r($postarr, true) ) ;
+		//}
+		
 		if ( 'revision' == $postarr['post_type'] ) {
 			
 			/**
@@ -882,16 +914,30 @@ class WPGlobus {
 		}
 
 		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
+		global $WPGlobus_Config;		
+		
+		$devmode = true;	
+		foreach( $WPGlobus_Config->enabled_languages as $language ) {
+			if ( $language != $WPGlobus_Config->default_language ) {
+				if ( isset($postarr['content-' . $language]) ) {
+					$devmode = false;	
+					break;
+				}
+			}	
+		}
 
 		$data['post_content'] = trim($data['post_content']);
 		if ( !empty($data['post_content']) ) {
-			$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
+			if ( ! $devmode ) {
+				$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
+			}	
 		}
 
 		$data['post_title'] = trim($data['post_title']);
 		if ( !empty($data['post_title']) ) {
-			$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
+			if ( ! $devmode ) {
+				$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
+			}	
 		}
 
 

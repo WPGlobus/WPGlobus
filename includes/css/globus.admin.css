@@ -8,3 +8,13 @@
 .wpglobus-menu-item-box input{
 	border: 1px #0f0 solid;
 }
+
+.wpglobus-switch  #wpglobus-raw:before {
+	font: normal 20px/1 'dashicons';
+	content: '\f510';
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 20px/1 'dashicons';
+	vertical-align: text-bottom;
+	opacity:0.6;
+}
