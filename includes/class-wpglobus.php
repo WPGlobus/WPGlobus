@@ -53,6 +53,9 @@ class WPGlobus {
 	 */
 	public $redux_framework_origin = 'external';
 	
+	/**
+	 * Support third party plugin vendors
+	 */
 	public $vendors_scripts = array();
 
 	const RETURN_IN_DEFAULT_LANGUAGE = 'in_default_language';
