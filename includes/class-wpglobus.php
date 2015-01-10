@@ -429,15 +429,15 @@ class WPGlobus {
 			}	
 			
 			wp_register_script(
-				'admin-globus',
-				self::$PLUGIN_DIR_URL . 'includes/js/admin.globus.js',
+				'wpglobus.admin',
+				self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.admin.js',
 				array( 'jquery' ),
 				self::$_version,
 				true
 			);
-			wp_enqueue_script( 'admin-globus' );
+			wp_enqueue_script( 'wpglobus.admin' );
 			wp_localize_script(
-				'admin-globus',
+				'wpglobus.admin',
 				'aaAdminGlobus',
 				array(
 					'version'      => self::$_version,
