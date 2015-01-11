@@ -83,6 +83,12 @@ class WPGlobus {
 			$this->vendors_scripts['WPSEO'] = true;
 		}
 		
+		add_filter( 'wp_redirect', array(
+			$this,
+			'on_wp_redirect'
+		));
+
+		
 		/**
 		 * NOTE: do not check for !DOING_AJAX here. Redux uses AJAX, for example, for disabling tracking.
 		 * So, we need to load Redux on AJAX requests, too
@@ -151,7 +157,7 @@ class WPGlobus {
 					'on_admin_scripts'
 				) );
 			
-			}	
+			}	// endif $devmode 
 
 			add_action( 'admin_print_styles', array(
 				$this,
@@ -249,6 +255,18 @@ class WPGlobus {
 		$WPGlobus = new self;
 	}
 
+	/**
+	 * WP redirect hook
+	 */
+	function on_wp_redirect($location) {
+		if ( is_admin() ) { 
+			if ( false !== strpos($_POST['_wp_http_referer'], 'devmode=on') ) {
+				$location .= '&devmode=on';
+			}
+		}
+		return $location;
+	}	
+		
 	/**
 	 * Add switcher to publish metabox
 	 */
