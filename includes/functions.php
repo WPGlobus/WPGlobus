@@ -164,6 +164,17 @@ if ( (defined('DOING_AJAX') && DOING_AJAX) || ! is_admin() ) {
 }
 
 /**
+ * Filters for admin
+ */
+if ( is_admin() ) {
+	/**
+	 * @todo now use filter for admin only for get_terms_to_edit function. See meta-boxes.php file.
+	 */
+	add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
+}
+ 
+
+/**
  * Filter for i18n before displaying a navigation menu.
  * 
  * @todo revising this filter because it now using for $post->attr_title and maybe $post->title translation only
