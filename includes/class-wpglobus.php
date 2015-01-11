@@ -260,7 +260,7 @@ class WPGlobus {
 	 */
 	function on_wp_redirect($location) {
 		if ( is_admin() ) { 
-			if ( false !== strpos($_POST['_wp_http_referer'], 'devmode=on') ) {
+			if ( isset($_POST['_wp_http_referer']) && false !== strpos($_POST['_wp_http_referer'], 'devmode=on') ) {
 				$location .= '&devmode=on';
 			}
 		}
