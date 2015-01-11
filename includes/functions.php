@@ -20,16 +20,28 @@ function wpg_text_title_filter($title) {
  * @return array|object
  */
 function wpglobus_filter_get_terms($terms) {
-	
+
 	if ( is_array($terms) ) {
+	
 		foreach ( $terms as &$term ) {
-			if ( ! empty( $term->name ) ) {
-				$term->name = __wpg_text_filter( $term->name );
+			if ( is_object($term) ) {
+				if ( ! empty( $term->name ) ) {
+					$term->name = __wpg_text_filter( $term->name );
+				}
+				if ( ! empty( $term->description ) ) {
+					$term->description = __wpg_text_filter( $term->description );
+				}
+			} else {
+				/**
+				 * Case ajax-tag-search action from post.php screen
+				 * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
+				 */
+				if ( isset($term) ) {
+					$term = __wpg_text_filter( $term );
+				}	
 			}
-			if ( ! empty( $term->description ) ) {
-				$term->description = __wpg_text_filter( $term->description );
-			}
-		}
+		} // end foreach
+		
 	} else {
 		/**
 		 *  Filter 'get_term' use $terms as object
@@ -122,7 +134,12 @@ add_filter( 'single_term_title', 'wpg_text_filter', 0 );
 add_filter( 'get_pages', 'wpg_text_filter', 0);
 
 add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
-add_filter( 'get_terms', 'wpglobus_filter_get_terms', 0 );
+
+/**
+ * Set priority to 11 for case ajax-tag-search action from post.php screen
+ * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
+ */
+add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
 
 global $pagenow; 
 if ( (defined('DOING_AJAX') && DOING_AJAX) || in_array($pagenow, array('nav-menus.php')) || ! is_admin() ) {
