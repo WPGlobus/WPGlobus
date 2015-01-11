@@ -857,7 +857,8 @@ class WPGlobus {
 
 				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
 					wp_editor( __wpg_text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content-' . $language, array(
-						'dfw' => true,
+						'_content_editor_dfw' => true,
+						#'dfw' => true,
 						'drag_drop_upload' => true,
 						'tabfocus_elements' => 'insert-media-button,save-post',
 						'editor_height' => 300,
