@@ -494,10 +494,14 @@ class WPGlobus {
 			} else if ( 'edit-tags.php' == $page ) {
 				
 				global $tag;
-
-				$page_action = 'taxonomy-edit';
 				
 				$data['tag_id'] = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
+				
+				if ( $data['tag_id'] ) {
+					$page_action = 'taxonomy-edit';
+				} else {
+					$page_action = 'taxonomy-quick-edit';
+				}
 				
 				if ( $data['tag_id'] ) {
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
@@ -505,19 +509,15 @@ class WPGlobus {
 						$data['i18n'][$lang]['name'] = __wpg_text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
 						$data['i18n'][$lang]['description'] = __wpg_text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
 					}
-				}	
+				} else {
+					$data['template'] = $this->_get_quickedit_template(); 
+				}				
 				
 			} else if ( 'edit.php' == $page ) {
 
 				$page_action = 'edit.php';
-				$data['template'] = ''; 
-				foreach( $WPGlobus_Config->enabled_languages as $language ) {
-					$data['template'] .= '<label>';
-					$data['template'] .= '<span class="input-text-wrap">';
-					$data['template'] .= '<input data-lang="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'">';
-					$data['template'] .= '</span>';
-					$data['template'] .= '</label>';
-				}
+				$data['template'] = $this->_get_quickedit_template(); 
+
 			}	
 			
 			if ( ! empty($this->vendors_scripts) ) {
@@ -569,6 +569,24 @@ class WPGlobus {
 
 	}
 
+	/**
+	 * Get template for quick edit at edit-tags.php, edit.php screens
+	 *
+	 * @return string
+	 */
+	function _get_quickedit_template() {
+		global $WPGlobus_Config;
+		$t = '';
+		foreach( $WPGlobus_Config->enabled_languages as $language ) {
+			$t .= '<label>';
+			$t .= '<span class="input-text-wrap">';
+			$t .= '<input data-lang="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'">';
+			$t .= '</span>';
+			$t .= '</label>';
+		}
+		return $t;	
+	}
+	
 	/**
 	 * Enqueue admin styles
 	 * @return void
