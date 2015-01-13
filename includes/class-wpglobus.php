@@ -95,6 +95,8 @@ class WPGlobus {
 		 */
 		if ( is_admin() ) {
 
+			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );		
+		
 			if ( ! class_exists( 'ReduxFramework' ) ) {
 				/** @noinspection PhpIncludeInspection */
 				require_once self::$PLUGIN_DIR_PATH . 'vendor/ReduxCore/framework.php';
@@ -234,6 +236,30 @@ class WPGlobus {
 	}
 
 	/**
+	 * Handle ajax process
+ 	 */
+	public function on_process_ajax() {
+		$order = $_POST['order'];
+		
+		$result = '';
+		switch( $order['action'] ) :
+		case 'get_titles':
+			global $WPGlobus_Config;
+			$result = array();
+			foreach( $order['title'] as $id=>$title ) {
+				$result[$id]['source'] = $title['source']; 
+				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+					$result[$id][$language] = __wpg_text_filter($title['source'], $language, WPGlobus::RETURN_EMPTY);
+				}
+			}
+			break;
+		endswitch;
+
+		echo json_encode($result);
+		die();	
+	}
+	
+	/**
 	 * Ugly hack.
 	 * @see wp_page_menu
 	 * @param string $html
@@ -315,6 +341,7 @@ class WPGlobus {
 		$enabled_pages[] = 'post-new.php';
 		$enabled_pages[] = 'nav-menus.php';
 		$enabled_pages[] = 'edit-tags.php';
+		$enabled_pages[] = 'edit.php';
 		
 		/**
 		 * Init $post_content 
@@ -479,6 +506,18 @@ class WPGlobus {
 						$data['i18n'][$lang]['description'] = __wpg_text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
 					}
 				}	
+				
+			} else if ( 'edit.php' == $page ) {
+
+				$page_action = 'edit.php';
+				$data['template'] = ''; 
+				foreach( $WPGlobus_Config->enabled_languages as $language ) {
+					$data['template'] .= '<label>';
+					$data['template'] .= '<span class="input-text-wrap">';
+					$data['template'] .= '<input data-lang="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $language .'">';
+					$data['template'] .= '</span>';
+					$data['template'] .= '</label>';
+				}
 			}	
 			
 			if ( ! empty($this->vendors_scripts) ) {
