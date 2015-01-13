@@ -382,6 +382,8 @@ class WPGlobus {
 			
 			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 
+				$page_action = 'post-edit';			
+				
 				/**
 				 * We use $post_content, $post_title at edit post page 
 				 */			
@@ -450,8 +452,6 @@ class WPGlobus {
 			$i18n = array();
 			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
 
-			$page_action = ( 'post.php' == $page || 'post-new.php' == $page ) ? 'post-edit' : '';
-			
 			if ( 'nav-menus.php' == $page ) {
 				
 				$page_action = 'menu-edit';
