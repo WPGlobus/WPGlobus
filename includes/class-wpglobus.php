@@ -599,13 +599,13 @@ class WPGlobus {
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
 		wp_register_style(
-			'globus.admin',
-			self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.css',
+			'wpglobus.admin',
+			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.css',
 			array(),
 			self::$_version,
 			'all'
 		);
-		wp_enqueue_style( 'globus.admin' );
+		wp_enqueue_style( 'wpglobus.admin' );
 		
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
@@ -620,13 +620,13 @@ class WPGlobus {
 
 		if ( in_array($pagenow, array('post.php', 'post-new.php', 'edit-tags.php')) ) {
 			wp_register_style(
-				'globus.admin.tabs',
-				self::$PLUGIN_DIR_URL . 'includes/css/globus.admin.tabs.css',
+				'wpglobus.admin.tabs',
+				self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.tabs.css',
 				array(),
 				self::$_version,
 				'all'
 			);
-			wp_enqueue_style( 'globus.admin.tabs' );
+			wp_enqueue_style( 'wpglobus.admin.tabs' );
 			
 		}
 		
@@ -696,7 +696,7 @@ class WPGlobus {
 	function on_wp_styles() {
 		wp_register_style(
 			'flags',
-			self::$PLUGIN_DIR_URL . 'includes/css/globus.flags.css',
+			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.flags.css',
 			array(),
 			self::$_version,
 			'all'
