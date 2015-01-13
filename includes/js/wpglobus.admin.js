@@ -205,8 +205,10 @@ jQuery(document).ready(function () {
 				
 				$.ajaxSetup({
 					beforeSend: function(jqXHR, PlainObject) {
-						var i = PlainObject.data.indexOf('action=add-menu-item');
-						if ( i>=0 ) {
+						if ( typeof PlainObject.data === 'undefined' ) {
+							return;
+						}
+						if ( PlainObject.data.indexOf('action=add-menu-item') >= 0 ) {
 							menu_size = $(menu_item).size();
 							iID = setInterval(timer, 500);
 						}
