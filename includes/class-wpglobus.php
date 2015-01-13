@@ -315,6 +315,13 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_admin_scripts() {
+	
+		/**
+		 * Dequeue autosave for prevent alert from wp.autosave.server.postChanged() after run post_edit in wpglobus.admin.js
+		 *
+		 * @see wp-includes\js\autosave.js
+		 */
+		wp_dequeue_script('autosave');
 		
 		/** @global $pagenow */
 		global $pagenow;
@@ -566,7 +573,7 @@ class WPGlobus {
 			);
 			
 		}
-
+		wp_enqueue_script('autosave');
 	}
 
 	/**
