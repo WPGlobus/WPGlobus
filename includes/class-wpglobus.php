@@ -514,7 +514,7 @@ class WPGlobus {
 				foreach( $WPGlobus_Config->enabled_languages as $language ) {
 					$data['template'] .= '<label>';
 					$data['template'] .= '<span class="input-text-wrap">';
-					$data['template'] .= '<input data-lang="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $language .'">';
+					$data['template'] .= '<input data-lang="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'">';
 					$data['template'] .= '</span>';
 					$data['template'] .= '</label>';
 				}
