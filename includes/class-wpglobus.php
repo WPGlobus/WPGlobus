@@ -363,7 +363,7 @@ class WPGlobus {
 		/**
 		 * Init $post_title
 		 */
-		$post_excerpt = $post->post_excerpt; 		
+		$post_excerpt = ''; 		
 		
 		/**
 		 * Init array data depending on the context for localize script
@@ -404,7 +404,7 @@ class WPGlobus {
 				/**
 				 * Set $post_title for default language
 				 */	
-				$post_title = __wpg_text_filter($post->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY); 
+				$post_title = __wpg_text_filter($post->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY);
 				
 			}
 			
