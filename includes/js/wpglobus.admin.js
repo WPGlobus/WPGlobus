@@ -68,6 +68,9 @@ jQuery(document).ready(function () {
 				var id = 0;
 				$.ajaxSetup({
 					beforeSend: function(jqXHR, PlainObject) {
+						if ( typeof PlainObject.data === 'undefined' ) {
+							return;
+						}
 						if ( PlainObject.data.indexOf('action=inline-save')>=0 ) {
 							$(aaAdminGlobus.data.enabled_languages).each(function(i,l) {
 								if ( 'undefined' !== aaAdminGlobus.qedit_titles[id][l] ) {
