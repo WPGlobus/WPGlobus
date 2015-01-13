@@ -58,10 +58,71 @@ jQuery(document).ready(function () {
 					if ( aaAdminGlobus.data.tag_id ) {
 						this.taxonomy_edit();
 					}	
+				} else if ( 'edit.php' == aaAdminGlobus.page ) {
+					this.edit();
 				} else {
 					this.start();
 				}	
             },
+            edit: function () {
+				var id = 0;
+				$.ajaxSetup({
+					beforeSend: function(jqXHR, PlainObject) {
+						if ( PlainObject.data.indexOf('action=inline-save')>=0 ) {
+							$(aaAdminGlobus.data.enabled_languages).each(function(i,l) {
+								if ( 'undefined' !== aaAdminGlobus.qedit_titles[id][l] ) {
+									aaAdminGlobus.qedit_titles[id][l] = $('#'+l+id).val();
+								}	
+							});
+						}
+					}
+				});
+				
+				var title = {};
+				$('#the-list tr').each( function(i,e) {
+					var $e = $(e);
+					var id = $e.attr('id').replace('post-','');
+					title[id] = {};
+					title[id]['source'] = $e.find('.post_title').text();
+				});
+
+				var order = {};
+				order['action'] = 'get_titles';
+				order['title']  = title;
+				$.ajax({type:'POST', url:aaAdminGlobus.ajaxurl,	data:{action:aaAdminGlobus.process_ajax, order:order}, dataType:'json'})
+				.done(function(result){aaAdminGlobus.qedit_titles = result;})
+				.fail(function(error){})
+				.always(function(jqXHR, status){});				
+				
+				$('body').on('blur', '.wpglobus-quick-edit-title', function(event) {
+					var s = '';
+					$('.wpglobus-quick-edit-title').each(function(index, e){
+						var $e = $(e);
+						if ( $e.val() != '' ) {
+							s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('lang'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
+						}	
+					});	
+					$('input.ptitle').eq(0).val(s);
+				});
+				
+				$('#the-list').on('click', 'a.editinline', function(event) {
+					var t = $(this);
+					id = t.parents('tr').attr('id').replace('post-','');
+					var e = $('#edit-' + id + ' input.ptitle');
+					var p = e.parents('label');
+					e.addClass('hidden');
+					$(aaAdminGlobus.data.template).insertAfter(p);
+
+					$('.wpglobus-quick-edit-title').each( function(i,e) {
+						var l = $(e).data('lang');
+						$(e).attr('id',l+id);
+						if ( 'undefined' !== aaAdminGlobus.qedit_titles[id][l] ) {
+							$(e).attr('value', aaAdminGlobus.qedit_titles[id][l].replace(/\\\'/g,'\''));	
+						}	
+					});
+				});
+				
+			},
             taxonomy_edit: function () {
 				var t = $('.form-table').eq(0);
 				$.each(aaAdminGlobus.tabs, function( index, suffix ) {
