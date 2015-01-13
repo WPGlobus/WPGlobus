@@ -361,6 +361,11 @@ class WPGlobus {
 		$post_title = ''; 
 		
 		/**
+		 * Init $post_title
+		 */
+		$post_excerpt = $post->post_excerpt; 		
+		
+		/**
 		 * Init array data depending on the context for localize script
 		 */
 		$data = array(
@@ -452,7 +457,16 @@ class WPGlobus {
 			$i18n = array();
 			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
 
-			if ( 'nav-menus.php' == $page ) {
+			if ( 'post.php' == $page ) {
+			
+				$data['template'] = '';
+				foreach( $WPGlobus_Config->enabled_languages as $language ) {
+					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
+					$data['template'] .= __wpg_text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY);
+					$data['template'] .= '</textarea>';
+				}
+				
+			} else if ( 'nav-menus.php' == $page ) {
 				
 				$page_action = 'menu-edit';
 				$menu_items  = array();
@@ -562,6 +576,7 @@ class WPGlobus {
 					'page'		   => $page_action,
 					'content'	   => $post_content,
 					'title'	   	   => $post_title,
+					'excerpt'	   => $post_excerpt,
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'parentClass'  => __CLASS__,
 					'process_ajax' => __CLASS__ . '_process_ajax',

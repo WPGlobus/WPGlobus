@@ -323,13 +323,28 @@ jQuery(document).ready(function () {
 				$('#post-body-content').tabs(); // #post-body-content
 				
 				// setup for default language
-				$('#content').text(aaAdminGlobus.content);
 				$('#title').val(aaAdminGlobus.title);
+				$('#content').text(aaAdminGlobus.content);
+				// 
+				$('#excerpt').addClass('hidden');
 				
 				if (typeof aaWPGlobusVendor !== "undefined") {				
 					wpglobus_wpseo();
 				}
 				
+				$(aaAdminGlobus.data.template).insertAfter('#excerpt');
+				
+				$('body').on('blur', '.wpglobus-excerpt', function(event) {
+					var s = '';
+					$('.wpglobus-excerpt').each(function(index, e){
+						var $e = $(e);
+						if ( $e.val() != '' ) {
+							s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
+						}	
+					});	
+					$('#excerpt').eq(0).val(s);
+				});
+								
                 $('.ui-state-default').on('click', function (event) {
 					if ( 'link-tab-default' == $(this).attr('id') ) {
 						$(window).scrollTop($(window).scrollTop()+1);
