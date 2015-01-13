@@ -119,6 +119,13 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 add_filter( 'the_title', 'wpg_text_filter', 0 );
 add_filter( 'the_content', 'wpg_text_filter', 0 );
 
+/**
+ * We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
+ * @see function the_excerpt()
+ * @todo look at 'the_excerpt_export' filter where the post excerpt used for WXR exports. 
+ */
+add_filter( 'get_the_excerpt', 'wpg_text_filter', 0 );
+
 add_filter( 'wp_title', 'wpg_text_filter', 0 );
 add_filter( 'widget_title', 'wpg_text_filter', 0 );
 
