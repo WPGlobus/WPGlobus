@@ -58,13 +58,15 @@ jQuery(document).ready(function () {
 					if ( aaAdminGlobus.data.tag_id ) {
 						this.taxonomy_edit();
 					}	
+				} else if ( 'taxonomy-quick-edit' == aaAdminGlobus.page ) {
+					this.quick_edit('taxonomy');
 				} else if ( 'edit.php' == aaAdminGlobus.page ) {
-					this.edit();
+					this.quick_edit('post');
 				} else {
 					this.start();
 				}	
             },
-            edit: function () {
+            quick_edit: function (type = 'post') {
 				var id = 0;
 				$.ajaxSetup({
 					beforeSend: function(jqXHR, PlainObject) {
@@ -84,13 +86,19 @@ jQuery(document).ready(function () {
 				var title = {};
 				$('#the-list tr').each( function(i,e) {
 					var $e = $(e);
-					var id = $e.attr('id').replace('post-','');
+					var k  = type=='post' ? 'post-' : 'tag-';
+					var id = $e.attr('id').replace(k,'');
 					title[id] = {};
-					title[id]['source'] = $e.find('.post_title').text();
+					if ( 'post' == type ) {
+						title[id]['source'] = $e.find('.post_title').text();
+					} else if ( 'taxonomy' == type ) {
+						title[id]['source'] = $('#inline_' + id + ' .name').text();
+					}	
 				});
 
 				var order = {};
 				order['action'] = 'get_titles';
+				order['type']   = type;
 				order['title']  = title;
 				$.ajax({type:'POST', url:aaAdminGlobus.ajaxurl,	data:{action:aaAdminGlobus.process_ajax, order:order}, dataType:'json'})
 				.done(function(result){aaAdminGlobus.qedit_titles = result;})
@@ -110,8 +118,12 @@ jQuery(document).ready(function () {
 				
 				$('#the-list').on('click', 'a.editinline', function(event) {
 					var t = $(this);
-					id = t.parents('tr').attr('id').replace('post-','');
-					var e = $('#edit-' + id + ' input.ptitle');
+					if ( 'post' == type ) {	
+						id = t.parents('tr').attr('id').replace('post-','');
+					} else if ( 'taxonomy' == type ) {
+						id = t.parents('tr').attr('id').replace('tag-','');
+					}
+					var e = $('#edit-' + id + ' input.ptitle').eq(0);
 					var p = e.parents('label');
 					e.addClass('hidden');
 					$(aaAdminGlobus.data.template).insertAfter(p);
