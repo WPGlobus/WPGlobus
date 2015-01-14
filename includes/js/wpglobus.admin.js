@@ -67,6 +67,7 @@ jQuery(document).ready(function () {
 				}	
             },
             quick_edit: function (type = 'post') {
+				if ( typeof aaAdminGlobus.data.has_items === 'undefined' ) return;
 				if ( ! aaAdminGlobus.data.has_items ) return;
 				var id = 0;
 				$.ajaxSetup({
