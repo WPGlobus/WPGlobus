@@ -595,7 +595,7 @@ class WPGlobus {
 				wp_enqueue_script( 'wpglobus.vendor' );
 				wp_localize_script(
 					'wpglobus.vendor',
-					'aaWPGlobusVendor',
+					'WPGlobusVendor',
 					array(
 						'version' => self::$_version,
 						'vendor' => $this->vendors_scripts
@@ -613,7 +613,7 @@ class WPGlobus {
 			wp_enqueue_script( 'wpglobus.admin' );
 			wp_localize_script(
 				'wpglobus.admin',
-				'aaAdminGlobus',
+				'WPGlobusAdmin',
 				array(
 					'version'      => self::$_version,
 					'page'		   => $page_action,
