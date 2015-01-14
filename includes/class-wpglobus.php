@@ -529,7 +529,7 @@ class WPGlobus {
 					 * For example url: edit-tags.php?taxonomy=category
 					 * edit-tags.php?taxonomy=product_cat&post_type=product
 					 */		
-					if ( isset($_GET['taxonomy']) && empty( get_terms($_GET['taxonomy']) ) ) {
+					if ( isset($_GET['taxonomy']) && empty( get_terms($_GET['taxonomy'], array('hide_empty'=>false)) ) ) {
 						$data['has_items'] = false;
 					}
 					$page_action = 'taxonomy-quick-edit';
