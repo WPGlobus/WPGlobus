@@ -334,19 +334,21 @@ jQuery(document).ready(function () {
 					wpglobus_wpseo();
 				}
 				
-				$(aaAdminGlobus.data.template).insertAfter('#excerpt');
+				if ( aaAdminGlobus.data.modify_excerpt ) {
+					$(aaAdminGlobus.data.template).insertAfter('#excerpt');
+					
+					$('body').on('blur', '.wpglobus-excerpt', function(event) {
+						var s = '';
+						$('.wpglobus-excerpt').each(function(index, e){
+							var $e = $(e);
+							if ( $e.val() != '' ) {
+								s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
+							}	
+						});	
+						$('#excerpt').eq(0).val(s);
+					});
+				}
 				
-				$('body').on('blur', '.wpglobus-excerpt', function(event) {
-					var s = '';
-					$('.wpglobus-excerpt').each(function(index, e){
-						var $e = $(e);
-						if ( $e.val() != '' ) {
-							s = s + aaAdminGlobus.data.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + aaAdminGlobus.data.locale_tag_end;
-						}	
-					});	
-					$('#excerpt').eq(0).val(s);
-				});
-								
                 $('.ui-state-default').on('click', function (event) {
 					if ( 'link-tab-default' == $(this).attr('id') ) {
 						$(window).scrollTop($(window).scrollTop()+1);

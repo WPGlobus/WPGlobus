@@ -83,6 +83,11 @@ class WPGlobus {
 			$this->vendors_scripts['WPSEO'] = true;
 		}
 		
+		if ( function_exists('WC') ) {
+			$this->vendors_scripts['WOOCOMMERCE'] = true;
+			$this->disabled_post_types[] = 'product';
+		}
+		
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -298,6 +303,11 @@ class WPGlobus {
 	 */
 	function on_add_devmode_switcher() {
 		global $post;
+		
+		if ( $this->disabled_post_type($post->post_type) ) {
+			return;	
+		}			
+		
 		$mode = 'on';
 		if ( isset($_GET['devmode']) && 'on' == $_GET['devmode'] ) {
 			$mode = 'off';
@@ -330,9 +340,9 @@ class WPGlobus {
 		global $post;
 		
 		if ( is_object($post) && 'WP_Post' == get_class($post) ) {
-			if ( in_array($post->post_type, $this->disabled_post_types) ) {
+			if ( $this->disabled_post_type($post->post_type) ) {
 				return;	
-			}
+			}				
 		}		
 		
 		/** @global WPGlobus_Config $WPGlobus_Config */
@@ -464,6 +474,11 @@ class WPGlobus {
 					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
 					$data['template'] .= __wpg_text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY);
 					$data['template'] .= '</textarea>';
+				}
+				
+				$data['modify_excerpt'] = true;
+				if ( isset($this->vendors_scripts['WOOCOMMERCE']) && $this->vendors_scripts['WOOCOMMERCE'] ) {
+					$data['modify_excerpt'] = false;
 				}
 				
 			} else if ( 'nav-menus.php' == $page ) {
@@ -652,17 +667,21 @@ class WPGlobus {
 			);
 			wp_enqueue_style( 'select2-css' );
 		}
-
-		if ( in_array($pagenow, array('post.php', 'post-new.php', 'edit-tags.php')) ) {
-			wp_register_style(
-				'wpglobus.admin.tabs',
-				self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.tabs.css',
-				array(),
-				self::$_version,
-				'all'
-			);
-			wp_enqueue_style( 'wpglobus.admin.tabs' );
-			
+		
+		global $post;
+		//error_log(print_r($post, true));
+		$type = empty($post) ? '' : $post->post_type;
+		if ( ! $this->disabled_post_type($type) ) {
+			if ( in_array($pagenow, array('post.php', 'post-new.php', 'edit-tags.php')) ) {
+				wp_register_style(
+					'wpglobus.admin.tabs',
+					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.tabs.css',
+					array(),
+					self::$_version,
+					'all'
+				);
+				wp_enqueue_style( 'wpglobus.admin.tabs' );
+			}
 		}
 		
 		/**
@@ -940,6 +959,13 @@ class WPGlobus {
 			return;
 		}
 
+		if ( isset($this->vendors_scripts['WOOCOMMERCE']) && $this->vendors_scripts['WOOCOMMERCE'] && 'product' == $post->post_type ) {
+			/**
+			 * Don't add editors for WOOCOMMERCE
+			 */
+			return;
+		}
+		
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
 
@@ -993,7 +1019,6 @@ class WPGlobus {
 	function on_save_post_data($data, $postarr) {
 		
 		if ( 'revision' == $postarr['post_type'] ) {
-			
 			/**
 			 * Don't working with revision
 			 * note: revision there are 2 types, its have some differences
@@ -1004,9 +1029,12 @@ class WPGlobus {
 			 * see $postarr for more info	
 			 */
 			return $data;
-			
 		}
 
+		if ( $this->disabled_post_type($data['post_type']) ) {
+			return $data;	
+		}		
+		
 		global $pagenow;
 
 		/**
@@ -1047,7 +1075,6 @@ class WPGlobus {
 				$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
 			}	
 		}
-
 
 		foreach( $WPGlobus_Config->enabled_languages as $language ) :
 			if ( $language == $WPGlobus_Config->default_language ) {
@@ -1113,12 +1140,13 @@ class WPGlobus {
 	
 	/**
 	 * Add language tabs for jQueryUI
+	 * @return void
 	 */
 	function on_add_language_tabs() {
 		
 		global $post;
-		
-		if ( in_array($post->post_type, $this->disabled_post_types) ) {
+
+		if ( $this->disabled_post_type($post->post_type) ) {
 			return;	
 		}
 		
@@ -1142,7 +1170,7 @@ class WPGlobus {
 	 */
 	function on_add_title_fields( $post ) {
 		
-		if ( in_array($post->post_type, $this->disabled_post_types) ) {
+		if ( $this->disabled_post_type($post->post_type) ) {
 			return;	
 		}		
 		
@@ -1178,6 +1206,23 @@ class WPGlobus {
 			
 		endforeach;
 	}	
+	
+	/**
+	 * 
+	 *
+	 * @param
+	 * @return bool
+	 */
+	function disabled_post_type( $post_type = '' ) {
+		//error_log(print_r($this->disabled_post_types, true));
+		if ( empty($post_type) ) {
+			return false;
+		}	
+		if ( in_array($post_type, $this->disabled_post_types) ) {
+			return true;	
+		}
+		return false;	
+	}
 }
 
 # --- EOF
