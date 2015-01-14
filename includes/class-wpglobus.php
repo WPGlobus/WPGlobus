@@ -64,9 +64,9 @@ class WPGlobus {
 	const TAG_REGEXP = '/(\{:|\[:|<!--:)[a-z]{2}/';
 
 	/**
-	 * Don't make some updates at post screen and don't load scripts for this post types 
+	 * Don't make some updates at post screen and don't load scripts for this entities
 	 */
-	public $disabled_post_types = array();
+	public $disabled_post_entities = array();
 	
 	/**
 	 * Constructor
@@ -77,7 +77,7 @@ class WPGlobus {
 
 		global $pagenow;
 		
-		$this->disabled_post_types[] = 'attachment';
+		$this->disabled_entities[] = 'attachment';
 		
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$this->vendors_scripts['WPSEO'] = true;
@@ -85,7 +85,9 @@ class WPGlobus {
 		
 		if ( function_exists('WC') ) {
 			$this->vendors_scripts['WOOCOMMERCE'] = true;
-			$this->disabled_post_types[] = 'product';
+			$this->disabled_entities[] = 'product';
+			$this->disabled_entities[] = 'product_tag';
+			$this->disabled_entities[] = 'product_cat';
 		}
 		
 		add_filter( 'wp_redirect', array(
@@ -304,7 +306,7 @@ class WPGlobus {
 	function on_add_devmode_switcher() {
 		global $post;
 		
-		if ( $this->disabled_post_type($post->post_type) ) {
+		if ( $this->disabled_entity($post->post_type) ) {
 			return;	
 		}			
 		
@@ -339,10 +341,9 @@ class WPGlobus {
 		/** @global $post */
 		global $post;
 		
-		if ( is_object($post) && 'WP_Post' == get_class($post) ) {
-			if ( $this->disabled_post_type($post->post_type) ) {
-				return;	
-			}				
+		$type = empty($post) ? '' : $post->post_type;
+		if ( $this->disabled_entity($type) ) {
+			return;	
 		}		
 		
 		/** @global WPGlobus_Config $WPGlobus_Config */
@@ -669,10 +670,10 @@ class WPGlobus {
 		}
 		
 		global $post;
-		//error_log(print_r($post, true));
 		$type = empty($post) ? '' : $post->post_type;
-		if ( ! $this->disabled_post_type($type) ) {
+		if ( ! $this->disabled_entity($type) ) {
 			if ( in_array($pagenow, array('post.php', 'post-new.php', 'edit-tags.php')) ) {
+				
 				wp_register_style(
 					'wpglobus.admin.tabs',
 					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.tabs.css',
@@ -959,12 +960,9 @@ class WPGlobus {
 			return;
 		}
 
-		if ( isset($this->vendors_scripts['WOOCOMMERCE']) && $this->vendors_scripts['WOOCOMMERCE'] && 'product' == $post->post_type ) {
-			/**
-			 * Don't add editors for WOOCOMMERCE
-			 */
-			return;
-		}
+		if ( $this->disabled_entity($post->post_type) ) {
+			return;	
+		}			
 		
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
@@ -1031,7 +1029,7 @@ class WPGlobus {
 			return $data;
 		}
 
-		if ( $this->disabled_post_type($data['post_type']) ) {
+		if ( $this->disabled_entity($data['post_type']) ) {
 			return $data;	
 		}		
 		
@@ -1127,6 +1125,11 @@ class WPGlobus {
 	 *
 	 */
 	function on_add_language_tabs_edit_taxonomy() {
+	
+		if ( $this->disabled_entity() ) {
+			return;	
+		}
+	
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;	?>
 
@@ -1146,7 +1149,7 @@ class WPGlobus {
 		
 		global $post;
 
-		if ( $this->disabled_post_type($post->post_type) ) {
+		if ( $this->disabled_entity($post->post_type) ) {
 			return;	
 		}
 		
@@ -1170,7 +1173,7 @@ class WPGlobus {
 	 */
 	function on_add_title_fields( $post ) {
 		
-		if ( $this->disabled_post_type($post->post_type) ) {
+		if ( $this->disabled_entity($post->post_type) ) {
 			return;	
 		}		
 		
@@ -1208,17 +1211,21 @@ class WPGlobus {
 	}	
 	
 	/**
-	 * 
+	 * Check for disabled post_types, taxonomies
 	 *
-	 * @param
-	 * @return bool
+	 * @param string @entity
+	 * @return boolean
 	 */
-	function disabled_post_type( $post_type = '' ) {
-		//error_log(print_r($this->disabled_post_types, true));
-		if ( empty($post_type) ) {
-			return false;
+	function disabled_entity( $entity = '' ) {
+		if ( empty($entity) ) {
+			/**
+			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
+			 */
+			if ( isset($_GET['taxonomy']) ) { 
+				$entity = $_GET['taxonomy'];
+			}
 		}	
-		if ( in_array($post_type, $this->disabled_post_types) ) {
+		if ( in_array($entity, $this->disabled_entities) ) {
 			return true;	
 		}
 		return false;	
