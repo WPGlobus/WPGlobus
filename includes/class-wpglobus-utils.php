@@ -51,7 +51,9 @@ class WPGlobus_Utils {
 					$language = '/' . $language; 
 				}
 				
-				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] ;
+				$fragment = empty($parsed_url['fragment']) ? '' : '#' . $parsed_url['fragment'];
+				
+				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
 				break;
 			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
 				// pre domain
