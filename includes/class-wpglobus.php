@@ -601,7 +601,7 @@ class WPGlobus {
 			);
 			
 		}
-		wp_enqueue_script('autosave');
+
 	}
 
 	/**
@@ -665,7 +665,10 @@ class WPGlobus {
 			
 		}
 		
-
+		/**
+		 * See function on_admin_scripts()
+		 */
+		wp_enqueue_script('autosave');
 
 	}
 
