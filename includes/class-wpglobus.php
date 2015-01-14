@@ -165,6 +165,11 @@ class WPGlobus {
 					$this,
 					'on_admin_scripts'
 				) );
+				
+				add_action( 'admin_print_scripts', array(
+					$this,
+					'on_admin_enqueue_scripts'
+				), 99 );				
 			
 			}	// endif $devmode 
 
@@ -322,11 +327,28 @@ class WPGlobus {
 		<?php	
 	}
 	
+	function on_admin_enqueue_scripts() {
+		/**
+		 * See function on_admin_scripts()
+		 */
+		if ( ! wp_script_is( 'autosave', 'enqueued' ) ) {
+			wp_enqueue_script('autosave');
+		}
+	}
+	
 	/**
 	 * Enqueue admin scripts
 	 * @return void
 	 */
 	function on_admin_scripts() {
+
+		/** @global $post */
+		global $post;
+			
+		$type = empty($post) ? '' : $post->post_type;
+		if ( $this->disabled_entity($type) ) {
+			return;	
+		}	
 	
 		/**
 		 * Dequeue autosave for prevent alert from wp.autosave.server.postChanged() after run post_edit in wpglobus.admin.js
@@ -338,14 +360,6 @@ class WPGlobus {
 		/** @global $pagenow */
 		global $pagenow;
 
-		/** @global $post */
-		global $post;
-		
-		$type = empty($post) ? '' : $post->post_type;
-		if ( $this->disabled_entity($type) ) {
-			return;	
-		}		
-		
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
 	
@@ -617,7 +631,6 @@ class WPGlobus {
 			);
 			
 		}
-
 	}
 
 	/**
@@ -685,11 +698,6 @@ class WPGlobus {
 			}
 		}
 		
-		/**
-		 * See function on_admin_scripts()
-		 */
-		wp_enqueue_script('autosave');
-
 	}
 
 	/**
