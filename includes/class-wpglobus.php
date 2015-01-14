@@ -519,8 +519,14 @@ class WPGlobus {
 				$data['tag_id'] = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
 				
 				if ( $data['tag_id'] ) {
+					/**
+					 * For example url: edit-tags.php?action=edit&taxonomy=category&tag_ID=4&post_type=post
+					 */
 					$page_action = 'taxonomy-edit';
 				} else {
+					/**
+					 * For example url: edit-tags.php?taxonomy=category
+					 */				
 					$page_action = 'taxonomy-quick-edit';
 				}
 				
