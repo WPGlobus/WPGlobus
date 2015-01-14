@@ -1221,7 +1221,10 @@ class WPGlobus {
 			/**
 			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
 			 */
-			if ( isset($_GET['taxonomy']) ) { 
+			if ( isset($_GET['post_type']) ) {
+				$entity = $_GET['post_type'];
+			}	
+			if ( empty($entity) && isset($_GET['taxonomy']) ) { 
 				$entity = $_GET['taxonomy'];
 			}
 		}	
