@@ -516,8 +516,8 @@ class WPGlobus {
 				
 				global $tag;
 				
-				$data['tag_id'] = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
-				
+				$data['tag_id']    = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
+				$data['has_items'] = true;
 				if ( $data['tag_id'] ) {
 					/**
 					 * For example url: edit-tags.php?action=edit&taxonomy=category&tag_ID=4&post_type=post
@@ -526,7 +526,12 @@ class WPGlobus {
 				} else {
 					/**
 					 * For example url: edit-tags.php?taxonomy=category
-					 */				
+					 * edit-tags.php?taxonomy=product_cat&post_type=product
+					 */		
+					global $wp_query, $wp;
+					if ( isset($_GET['taxonomy']) && empty( get_terms($_GET['taxonomy']) ) ) {
+						$data['has_items'] = false;
+					}
 					$page_action = 'taxonomy-quick-edit';
 				}
 				

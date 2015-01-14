@@ -67,6 +67,7 @@ jQuery(document).ready(function () {
 				}	
             },
             quick_edit: function (type = 'post') {
+				if ( ! aaAdminGlobus.data.has_items ) return;
 				var id = 0;
 				$.ajaxSetup({
 					beforeSend: function(jqXHR, PlainObject) {
