@@ -112,7 +112,6 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	add_filter( 'wpseo_metadesc', 'wpg_text_filter', 0 );
 }
 
-
 /**
  * Common filters
  */
@@ -436,7 +435,7 @@ function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETU
 					 *
 					 * @todo make option for return warning message or maybe another action
 					 */
-					$text = __('No text in default language', 'wpglobus');
+					$text = __('(No text in default language)', 'wpglobus');
 				}	
 			} else {
 				/** Try the default language (recursion) */
