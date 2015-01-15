@@ -47,6 +47,9 @@ require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
 require_once 'includes/class-wpglobus.php';
 
+/** WOOCOMMERCE */
+require_once 'includes/class-wpglobus-wc.php';
+
 require_once 'includes/functions.php';
 require_once 'includes/qa.php';
 
@@ -54,6 +57,9 @@ WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
 
 $WPGlobus_Config = new WPGlobus_Config();
+
+/** WOOCOMMERCE */
+$WPGlobus_Woo = new WPGlobus_WC();
 
 /**
  * @see WPGlobus::init()
