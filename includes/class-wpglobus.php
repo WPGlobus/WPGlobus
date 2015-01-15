@@ -243,6 +243,11 @@ class WPGlobus {
 				$this,
 				'on_wp_styles'
 			) );
+			
+			add_action( 'wp_print_styles', array(
+				$this,
+				'on_wp_scripts'
+			) );			
 		}
 
 	}
@@ -770,6 +775,30 @@ class WPGlobus {
 		wp_enqueue_style( 'flags' );
 	}
 
+	/**
+	 * Enqueue scripts
+	 * @return void
+	 */
+	function on_wp_scripts() {
+		global $WPGlobus_Config;
+		
+		wp_register_script(
+			'wpglobus',
+			self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.js',
+			array( 'jquery', 'utils' ),
+			self::$_version,
+			true
+		);
+		wp_enqueue_script( 'wpglobus' );
+		wp_localize_script(
+			'wpglobus',
+			'WPGlobus',
+			array(
+				'version' => self::$_version,
+				'language' => $WPGlobus_Config->language
+			)
+		);		
+	}	
 
 	/**
 	 * Add css styles to head section
