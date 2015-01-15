@@ -26,8 +26,14 @@ class WPGlobus_Utils {
 		
 		$converted_url = '';
 		
-		$language = ( '' == $language ) ? $WPGlobus_Config->language : $language;
-
+		if ( empty($language)) {
+			if ( ! empty($_COOKIE['wpglobus-language']) ) {
+				$language = $_COOKIE['wpglobus-language'];
+			} else {
+				$language = $WPGlobus_Config->language;
+			}		
+		}	
+		
 		$parsed_url = self::parse_url($url);	
 		
 		if ( ! $parsed_url ) {
@@ -50,7 +56,7 @@ class WPGlobus_Utils {
 				} else {
 					$language = '/' . $language; 
 				}
-				
+
 				$fragment = empty($parsed_url['fragment']) ? '' : '#' . $parsed_url['fragment'];
 				
 				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
