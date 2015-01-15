@@ -170,14 +170,15 @@ if ( (defined('DOING_AJAX') && DOING_AJAX) || ! is_admin() ) {
 }
 
 /**
+ * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
+ * Frontend: WC breadcrumb
+ */
+add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
+
+
+/**
  * Filters for admin
  */
-if ( is_admin() ) {
-	/**
-	 * @todo now use filter for admin only for get_terms_to_edit function. See meta-boxes.php file.
-	 */
-	add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
-}
  
 
 /**
