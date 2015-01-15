@@ -306,6 +306,15 @@ class WPGlobus {
 			if ( isset($_POST['_wp_http_referer']) && false !== strpos($_POST['_wp_http_referer'], 'devmode=on') ) {
 				$location .= '&devmode=on';
 			}
+		} else {
+			/**
+			 * Get language code from cookie. Example: redirect $_SERVER[REQUEST_URI] = /wp-comments-post.php
+			 */
+			if ( false !== strpos($_SERVER['REQUEST_URI'], 'wp-comments-post.php') ) { 
+				if ( ! empty($_COOKIE['wpglobus-language']) ) {
+					$location = WPGlobus_Utils::get_convert_url($location, $_COOKIE['wpglobus-language']);
+				}
+			}	
 		}
 		return $location;
 	}	

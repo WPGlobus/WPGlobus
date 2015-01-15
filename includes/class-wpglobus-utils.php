@@ -26,13 +26,7 @@ class WPGlobus_Utils {
 		
 		$converted_url = '';
 		
-		if ( empty($language)) {
-			if ( ! empty($_COOKIE['wpglobus-language']) ) {
-				$language = $_COOKIE['wpglobus-language'];
-			} else {
-				$language = $WPGlobus_Config->language;
-			}		
-		}	
+		$language = empty($language) ? $WPGlobus_Config->language : $language;
 		
 		$parsed_url = self::parse_url($url);	
 		
