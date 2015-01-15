@@ -812,12 +812,12 @@ class WPGlobus {
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
 			$css .= '.wpglobus_flag_' . $language .
 				' { background:url(' .
-				$WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ') no-repeat }';
+				$WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$language] . ') no-repeat }' . "\n";
 		}
 		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
 		if ( ! empty( $css ) ) {
-			echo '<style>' . $css . '</style>';
+			echo '<style type="text/css" media="screen">' . "\n" . $css . "\n</style>";
 		}
 
 	}
