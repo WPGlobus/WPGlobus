@@ -66,7 +66,7 @@ class WPGlobus {
 	/**
 	 * Don't make some updates at post screen and don't load scripts for this entities
 	 */
-	public $disabled_post_entities = array();
+	public $disabled_entities = array();
 	
 	/**
 	 * Constructor
@@ -250,6 +250,14 @@ class WPGlobus {
 			) );			
 		}
 
+		/**
+		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $disabled_entities Array of disabled entities.
+		 */
+		$this->disabled_entities = apply_filters('wpg_disabled_entities', $this->disabled_entities);
 	}
 
 	/**
