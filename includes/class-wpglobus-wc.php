@@ -67,7 +67,7 @@ class WPGlobus_WC {
 				'Translations',
 				'administrator',
 				$this->page_menu,
-				array( $this, 'woo_translation_table' )
+				array( $this, 'wc_translation_table' )
 			);
 
 			//add_action( 'admin_print_styles-' . $this->admin_submenu, array( $this, 'on_admin_styles' ) );
@@ -88,7 +88,7 @@ class WPGlobus_WC {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function woo_translation_table() {
+	public function wc_translation_table() {
 		?>
 		<div class="wrap">
 			<h2><?php _e('Taxonomy translations', ''); ?></h2>
