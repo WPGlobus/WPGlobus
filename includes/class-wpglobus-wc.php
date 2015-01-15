@@ -51,7 +51,7 @@ class WPGlobus_WC {
 				'on_admin_menu' 
 			) );
 			
-			if ( 'edit-tags.php' == $pagenow ) {
+			if ( 'edit-tags.php' == $pagenow || 'edit.php' == $pagenow || 'post.php' == $pagenow ) {
 				add_filter( 'wpg_disabled_entities', array(
 					$this,
 					'on_enable_product'
