@@ -27,34 +27,66 @@ class WPGlobus_WC {
 	private $menu_parent_slug = 'edit.php?post_type=product';
 		
 	/**
-	 * Name for WPGlobus Woo page
+	 * Name for WPGlobus WC translations page
 	 *
 	 * @access private
 	 * @since 1.0.0
 	 * @var string	 
 	 */		
-	private $page_menu	 = 'wpglobus_woo_translations';
+	private $page_menu	 = 'wpglobus_wc_translations';
 	
 	/**
 	 * Constructor
 	 */
 	function __construct() {
-	
+		
+		global $pagenow;
+		
+		$this->enabled_entities[] = 'product';		
+		
 		if ( is_admin() ) {
 		
 			add_action( 'admin_menu', array( 
 				$this, 
 				'on_admin_menu' 
 			) );
+			
+			if ( 'edit-tags.php' == $pagenow ) {
+				add_filter( 'wpg_disabled_entities', array(
+					$this,
+					'on_enable_product'
+				) );	
+			}
+			
 		
-		}
+		} // is_admin()
 		
 	}
+	
+	/**
+	 * Make translatable product at WC pages
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	function on_enable_product($entities) {
+		if ( ! $this->enabled_entity('product') ) {
+			return $entities;
+		}
+		foreach( $entities as $key=>$entity ) {
+			if ( false !== strpos($entity, 'product') ) {
+				unset($entities[$key]);
+			}
+		}
+		return $entities;
+	}		
 	
 	/**
 	 * Add mainmenu or submenu
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return void
 	 */
 	public function on_admin_menu() {
@@ -82,6 +114,32 @@ class WPGlobus_WC {
 
 	}
 
+	/**
+	 * Check for enabled post_types, taxonomies
+	 *
+	 * @since 1.0.0	 
+	 *
+	 * @param $entity String
+	 * @return boolean
+	 */
+	function enabled_entity( $entity = '' ) {
+		if ( empty($entity) ) {
+			/**
+			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
+			 */
+			if ( isset($_GET['post_type']) ) {
+				$entity = $_GET['post_type'];
+			}	
+			if ( empty($entity) && isset($_GET['taxonomy']) ) { 
+				$entity = $_GET['taxonomy'];
+			}
+		}	
+		if ( in_array($entity, $this->enabled_entities) ) {
+			return true;	
+		}
+		return false;	
+	}	
+	
 	/**
 	 *
 	 *
