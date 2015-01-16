@@ -80,6 +80,11 @@ class WPGlobus_WC {
 	 * @return void
 	 */
 	function on_admin_scripts() {
+
+		global $post;
+		if ( $post->post_type != 'product' ) {
+			return;
+		}
 		
 		wp_register_script(
 			'wpglobus.wc',
