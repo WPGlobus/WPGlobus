@@ -17,7 +17,7 @@
 	padding-right:0;
 }
 /* WP_Editor */
-.wp-editor-expand #qt_content_dfw {
+.ed_button.qt-dfw {
 	font-family: dashicons !important;
 	font-size:1.4em;
 }
