@@ -80,12 +80,12 @@ class WPGlobus_WC {
 	 * @return void
 	 */
 	function on_admin_scripts() {
-
+		
 		wp_register_script(
 			'wpglobus.wc',
 			#plugins_url( '/includes/js/wpglobus.wc.js', __FILE__ ), in separate plugin
 			plugins_url( '/js/wpglobus.wc.js', __FILE__ ),
-			array( 'jquery' ),
+			array( 'jquery', 'jquery-ui-tabs' ),
 			WPGLOBUS_WC_VERSION,
 			true
 		);
@@ -95,7 +95,9 @@ class WPGlobus_WC {
 			'WPGlobusWC',
 			array(
 				'version' => WPGLOBUS_WC_VERSION,
-				#'vendor' => $this->vendors_scripts
+				'excerpt_template' => $this->get_template(),
+				'locale_tag_start' => WPGlobus::LOCALE_TAG_START,
+				'locale_tag_end'   => WPGlobus::LOCALE_TAG_END
 			)
 		);
 		
@@ -182,6 +184,7 @@ class WPGlobus_WC {
 	 *
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return void
 	 */
 	public function wc_translation_table() {
@@ -191,5 +194,54 @@ class WPGlobus_WC {
 		</div> <!-- .wrap -->
 		<?php
 	}
+	
+	/**
+	 * Get template
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	function get_template() {
+	
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;
+		
+		global $post;	
+	
+		$settings = array(
+			'textarea_name' => 'excerpt',
+			'quicktags'     => array( 'buttons' => 'em,strong,link' ),
+			'tinymce'       => array(
+				'theme_advanced_buttons1' => 'bold,italic,strikethrough,separator,bullist,numlist,separator,blockquote,separator,justifyleft,justifycenter,justifyright,separator,link,unlink,separator,undo,redo,separator',
+				'theme_advanced_buttons2' => '',
+			),
+			'editor_css'    => '<style>#wpglobus-wc-excerpt-tabs .wp-editor-area{height:175px; width:100%;}</style>'
+		);
+		$settings = apply_filters( 'woocommerce_product_short_description_editor_settings', $settings );
+		
+		$excerpt = htmlspecialchars_decode( $post->post_excerpt );
+		
+		ob_start(); ?>
+		<div id="wpglobus-wc-excerpt-tabs">
+			<ul>	<?php
+				foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>
+					<li id="wpglobus-excerpt-tab-<?php echo $language; ?>"><a href="#excerpt-tab-<?php echo $language; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+				} ?>
+			</ul>	<?php
+			
+			foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>
+				<div id="excerpt-tab-<?php echo $language; ?>" class="">
+					<?php 
+						wp_editor( __wpg_text_filter($excerpt, $language), 'excerpt-' . $language, $settings );
+					?>
+				</div>
+				<?php
+			} ?>
+		</div> <!--  #wpglobus-wc-excerpt-tabs"	 --> <?php
+		
+		return ob_get_clean();
+	
+	}	
 	
 }

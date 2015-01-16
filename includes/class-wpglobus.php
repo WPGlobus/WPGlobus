@@ -598,6 +598,7 @@ class WPGlobus {
 				}				
 				
 			} else if ( 'edit.php' == $page ) {
+			
 				$page_action = 'edit.php';
 				
 				global $posts;
