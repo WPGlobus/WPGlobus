@@ -47,13 +47,15 @@ require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
 require_once 'includes/class-wpglobus.php';
 
+require_once 'includes/functions.php';
+require_once 'includes/qa.php';
+
 /** WOOCOMMERCE */
 if ( function_exists('WC') ) {
 	require_once 'includes/class-wpglobus-wc.php';
 }
 
-require_once 'includes/functions.php';
-require_once 'includes/qa.php';
+
 
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
