@@ -46,18 +46,23 @@ class WPGlobus_WC {
 		
 		if ( is_admin() ) {
 		
-			add_action( 'admin_menu', array( 
-				$this, 
-				'on_admin_menu' 
-			) );
-			
 			if ( 'edit-tags.php' == $pagenow || 'edit.php' == $pagenow || 'post.php' == $pagenow ) {
 				add_filter( 'wpg_disabled_entities', array(
 					$this,
 					'on_enable_product'
 				) );	
 			}
+
+			add_action( 'admin_menu', array( 
+				$this, 
+				'on_admin_menu' 
+			) );
 			
+			add_action( 'admin_print_scripts', array(
+				$this,
+				'on_admin_scripts'
+			) );
+				
 			 // is_admin()
 		} else {
 			/**
@@ -65,6 +70,35 @@ class WPGlobus_WC {
 			 */
 			add_filter( 'woocommerce_short_description', 'wpg_text_filter' );
 		} 
+	}
+	
+	/**
+	 * Enqueue admin scripts
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	function on_admin_scripts() {
+
+		wp_register_script(
+			'wpglobus.wc',
+			#plugins_url( '/includes/js/wpglobus.wc.js', __FILE__ ), in separate plugin
+			plugins_url( '/js/wpglobus.wc.js', __FILE__ ),
+			array( 'jquery' ),
+			WPGLOBUS_WC_VERSION,
+			true
+		);
+		wp_enqueue_script( 'wpglobus.wc' );
+		wp_localize_script(
+			'wpglobus.wc',
+			'WPGlobusWC',
+			array(
+				'version' => WPGLOBUS_WC_VERSION,
+				#'vendor' => $this->vendors_scripts
+			)
+		);
+		
 	}
 	
 	/**
