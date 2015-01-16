@@ -514,7 +514,7 @@ class WPGlobus {
 				}
 				
 				$data['modify_excerpt'] = true;
-				if ( isset($this->vendors_scripts['WOOCOMMERCE']) && $this->vendors_scripts['WOOCOMMERCE'] ) {
+				if ( isset($this->vendors_scripts['WOOCOMMERCE']) && $this->vendors_scripts['WOOCOMMERCE'] && 'product' == $post->post_type ) {
 					$data['modify_excerpt'] = false;
 				}
 				
