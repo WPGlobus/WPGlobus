@@ -57,16 +57,20 @@ class WPGlobus_WC {
 				$this, 
 				'on_admin_menu' 
 			) );
-			
-			add_action( 'admin_print_scripts', array(
-				$this,
-				'on_admin_scripts'
-			) );
+
+			if ( ! isset($_GET['devmode']) || 'off' == $_GET['devmode'] ) {			
 				
-			add_action( 'admin_print_styles', array(
-				$this,
-				'on_admin_styles'
-			) );
+				add_action( 'admin_print_scripts', array(
+					$this,
+					'on_admin_scripts'
+				) );
+					
+				add_action( 'admin_print_styles', array(
+					$this,
+					'on_admin_styles'
+				) );
+			
+			}	
 			
 			 // is_admin()
 		} else {
