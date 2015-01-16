@@ -66,7 +66,7 @@ jQuery(document).ready(function () {
 					this.start();
 				}	
             },
-            quick_edit: function (type = 'post') {
+            quick_edit: function (type) {
 				if ( typeof WPGlobusAdmin.data.has_items === 'undefined' ) return;
 				if ( ! WPGlobusAdmin.data.has_items ) return;
 				var id = 0;
