@@ -1,8 +1,0 @@
-class_name: ApiTester
-modules:
-    enabled:
-        - PhpBrowser
-        - ApiHelper
-    config:
-        PhpBrowser:
-            url: 'http://www.wpglobus.com/'

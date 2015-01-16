@@ -7,8 +7,13 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser
-        - AcceptanceHelper
+        - WebDriver
+        - ApiHelper
+        - Asserts
     config:
-        PhpBrowser:
-            url: 'http://localhost/myapp/'
+        WebDriver:
+            url: 'http://www.wpglobus.com/'
+            browser: phantomjs
+            restart: true
+            window_size: 1024x768
+            clear_cookies: true
