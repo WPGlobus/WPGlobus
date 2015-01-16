@@ -52,6 +52,7 @@ require_once 'includes/qa.php';
 
 /** WOOCOMMERCE */
 if ( function_exists('WC') ) {
+	define( 'WPGLOBUS_WC_VERSION', '1.0.0' );
 	require_once 'includes/class-wpglobus-wc.php';
 }
 
