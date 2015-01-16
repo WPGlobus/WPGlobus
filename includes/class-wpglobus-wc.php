@@ -58,9 +58,13 @@ class WPGlobus_WC {
 				) );	
 			}
 			
-		
-		} // is_admin()
-		
+			 // is_admin()
+		} else {
+			/**
+			 * @see woocommerce\templates\single-product\short-description.php 
+			 */
+			add_filter( 'woocommerce_short_description', 'wpg_text_filter' );
+		} 
 	}
 	
 	/**
