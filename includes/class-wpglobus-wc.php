@@ -254,7 +254,7 @@ class WPGlobus_WC {
 			),
 			'editor_css'    => '<style>#wpglobus-wc-excerpt-tabs .wp-editor-area{height:175px; width:100%;}</style>'
 		);
-		$settings = apply_filters( 'woocommerce_product_short_description_editor_settings', $settings );
+		//$settings = apply_filters( 'woocommerce_product_short_description_editor_settings', $settings );
 		
 		$excerpt = htmlspecialchars_decode( $post->post_excerpt );
 		
@@ -266,7 +266,8 @@ class WPGlobus_WC {
 				} ?>
 			</ul>	<?php
 			
-			foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>
+			foreach ( $WPGlobus_Config->enabled_languages as $language ) { 
+				$settings['textarea_name'] = 'excerpt' . "-$language"; ?>
 				<div id="excerpt-tab-<?php echo $language; ?>" class="">
 					<?php 
 						wp_editor( __wpg_text_filter($excerpt, $language), 'excerpt-' . $language, $settings );
