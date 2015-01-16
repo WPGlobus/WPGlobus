@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global jQuery, console */
+/*global jQuery, console, WPGlobusVendor */
 jQuery(document).ready(function () {
 
 	wpglobus_wpseo = function() {
