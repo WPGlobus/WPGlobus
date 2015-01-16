@@ -343,7 +343,7 @@ class WPGlobus {
 		}
 		?>
 		<div class="misc-pub-section wpglobus-switch">
-			<span id="wpglobus-raw">&nbsp;&nbsp;Dev mode </span>
+			<span id="wpglobus-raw">&nbsp;&nbsp;WPGlobus is </span>
 			<a href="post.php?post=<?php echo $post->ID; ?>&action=edit&devmode=<?php echo $mode; ?>"><?php echo $mode; ?></a>
 		</div>	
 		<?php	
