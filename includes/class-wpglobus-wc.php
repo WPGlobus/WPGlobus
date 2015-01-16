@@ -63,6 +63,11 @@ class WPGlobus_WC {
 				'on_admin_scripts'
 			) );
 				
+			add_action( 'admin_print_styles', array(
+				$this,
+				'on_admin_styles'
+			) );
+			
 			 // is_admin()
 		} else {
 			/**
@@ -82,7 +87,7 @@ class WPGlobus_WC {
 	function on_admin_scripts() {
 
 		global $post;
-		if ( $post->post_type != 'product' ) {
+		if ( empty($post) || $post->post_type != 'product' ) {
 			return;
 		}
 		
@@ -106,6 +111,32 @@ class WPGlobus_WC {
 			)
 		);
 		
+	}
+	
+	/**
+	 * Enqueue admin styles
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */	
+	function on_admin_styles() {
+		
+		global $post;
+		if ( empty($post) || $post->post_type != 'product' ) {
+			return;
+		}
+	
+		wp_register_style(
+			'wpglobus.wc.tabs',
+			#plugins_url( '/includes/css/wpglobus.wc.tabs.css', __FILE__ ), in separate plugin
+			plugins_url( '/css/wpglobus.wc.tabs.css', __FILE__ ),			
+			array(),
+			WPGLOBUS_WC_VERSION,
+			'all'
+		);
+		wp_enqueue_style( 'wpglobus.wc.tabs' );
+
 	}
 	
 	/**
