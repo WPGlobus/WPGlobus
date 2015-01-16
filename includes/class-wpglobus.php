@@ -562,7 +562,7 @@ class WPGlobus {
 				
 				$data['items'] = $menu_items;
 				
-				$i18n['save_nav_menu'] = __( 'You must save navigation menu before edit.', 'wpglobus' );
+				$i18n['save_nav_menu'] = __( '*) Available after the menu is saved.', 'wpglobus' );
 			
 			} else if ( 'edit-tags.php' == $page ) {
 				
