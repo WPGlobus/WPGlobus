@@ -4,10 +4,6 @@
  * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 if ( class_exists( 'WPGlobus_Config' ) ) {
 	return;
 }
