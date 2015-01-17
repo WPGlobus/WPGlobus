@@ -174,7 +174,8 @@ class WPGlobus_Config {
 
 	/**
 	 * Set current language
-	 * @int
+	 *
+	 * @param string $locale
 	 */
 	function set_language($locale) {
 		/**

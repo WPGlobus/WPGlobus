@@ -369,6 +369,8 @@ class LanguagesTable extends WP_List_table {
 	 * Generate the table navigation above or below the table
 	 * @since  3.1.0
 	 * @access protected
+	 *
+	 * @param string $which
 	 */
 	function display_tablenav( $which ) {
 		?>

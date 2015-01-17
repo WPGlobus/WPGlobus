@@ -188,7 +188,7 @@ class WPGlobus_Utils {
 
 		preg_match( $r, $url, $out );
 
-		$result = @array(
+		$result = array(
 			"scheme"   => $out[1],
 			"host"     => $out[4] . ( ( $out[5] == '' ) ? '' : ':' . $out[5] ),
 			"user"     => $out[2],
@@ -207,7 +207,7 @@ class WPGlobus_Utils {
 
 			if ( preg_match( $r2, $url, $out2 ) ) {
 				$result['host'] = $out2[1] . $out2[2];
-				$result['path'] = @$out2[3];
+				$result['path'] = $out2[3];
 			}
 		}
 

@@ -6,6 +6,12 @@
  * @todo move to admin controller
  */
 add_filter( 'sanitize_title', 'wpg_text_title_filter', 0 );
+
+/**
+ * @param $title
+ *
+ * @return string
+ */
 function wpg_text_title_filter($title) {
 	global $WPGlobus_Config;
 	return __wpg_text_filter( $title, $WPGlobus_Config->default_language );

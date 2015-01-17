@@ -308,6 +308,10 @@ class WPGlobus {
 
 	/**
 	 * WP redirect hook
+	 *
+	 * @param string $location
+	 *
+	 * @return string
 	 */
 	function on_wp_redirect($location) {
 		if ( is_admin() ) { 
@@ -410,7 +414,9 @@ class WPGlobus {
 		/**
 		 * Init $post_title
 		 */
-		$post_excerpt = ''; 		
+		$post_excerpt = '';
+
+		$page_action = '';
 		
 		/**
 		 * Init array data depending on the context for localize script

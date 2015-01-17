@@ -34,6 +34,8 @@ class WPGlobus_WC {
 	 * @var string	 
 	 */		
 	private $page_menu	 = 'wpglobus_wc_translations';
+
+	private $admin_submenu = '';
 	
 	/**
 	 * Constructor
@@ -142,11 +144,12 @@ class WPGlobus_WC {
 		wp_enqueue_style( 'wpglobus.wc.tabs' );
 
 	}
-	
+
 	/**
 	 * Make translatable product at WC pages
-	 *
 	 * @since 1.0.0
+	 *
+	 * @param string[] $entities
 	 *
 	 * @return array
 	 */
