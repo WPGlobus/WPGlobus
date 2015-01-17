@@ -9,10 +9,16 @@ class WPGlobus_Core {
 	 * @param string $text
 	 * @param string $language
 	 * @param string $return
+	 * @param string $default_language
 	 *
 	 * @return string
 	 */
-	public static function text_filter( $text = '', $language = '', $return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) {
+	public static function text_filter(
+		$text = '',
+		$language = '',
+		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
+		$default_language = 'en'
+	) {
 
 		/**
 		 * Fix for case
@@ -27,15 +33,17 @@ class WPGlobus_Core {
 		/** @global string $wpg_current_language */
 		//global $wpg_current_language;
 
-		global $WPGlobus_Config;
 
 		if ( empty( $text ) ) {
 			// Nothing to do
 			return $text;
 		}
 
+//		global $WPGlobus_Config;
 		if ( empty( $language ) ) {
-			$language = $WPGlobus_Config->language;
+			/** @todo This is a changed behavior. Watch out when eliminate the deprecated __wpg function */
+			//			$language = $WPGlobus_Config->language;
+			$language = $default_language;
 		}
 
 		$possible_delimiters =
@@ -116,9 +124,9 @@ class WPGlobus_Core {
 		 */
 		if ( ! $is_local_text_found ) {
 			if ( $return === WPGlobus::RETURN_EMPTY ) {
-				if ( $language == $WPGlobus_Config->default_language && ! preg_match( WPGlobus::TAG_REGEXP, $text ) ) {
+				if ( $language === $default_language && ! preg_match( WPGlobus::TAG_REGEXP, $text ) ) {
 					/**
-					 * If text does not contains language delimiters nothing to do
+					 * If text does not contain language delimiters nothing to do
 					 */
 				} else {
 					/** We are forced to return empty string. */
@@ -128,17 +136,21 @@ class WPGlobus_Core {
 				/**
 				 * Try RETURN_IN_DEFAULT_LANGUAGE
 				 */
-				if ( $language == $WPGlobus_Config->default_language ) {
-					if ( 1 == preg_match( WPGlobus::TAG_REGEXP, $text ) ) {
+				if ( $language === $default_language ) {
+					if ( preg_match( WPGlobus::TAG_REGEXP, $text ) ) {
 						/**
-						 * Rarely case of text in default language doesn't exists
+						 * Rare case of text in default language doesn't exist
 						 * @todo make option for return warning message or maybe another action
 						 */
-						$text = __( '(No text in default language)', 'wpglobus' );
+						$text = '';
 					}
 				} else {
-					/** Try the default language (recursion) */
-					$text = __wpg_text_filter( $text, $WPGlobus_Config->default_language );
+					/**
+					 * Try the default language (recursion)
+					 * @qa  covered by the 'one_tag' case
+					 * @see WPGlobus_QA::_test_string_parsing()
+					 */
+					$text = self::text_filter( $text, $default_language );
 				}
 			}
 			/** else - we do not change the input string, and it will be returned as-is */

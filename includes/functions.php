@@ -2,7 +2,6 @@
 
 /**
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
- *
  * @todo move to admin controller
  */
 add_filter( 'sanitize_title', 'wpg_text_title_filter', 0 );
@@ -12,8 +11,9 @@ add_filter( 'sanitize_title', 'wpg_text_title_filter', 0 );
  *
  * @return string
  */
-function wpg_text_title_filter($title) {
+function wpg_text_title_filter( $title ) {
 	global $WPGlobus_Config;
+
 	return __wpg_text_filter( $title, $WPGlobus_Config->default_language );
 }
 
@@ -21,16 +21,16 @@ function wpg_text_title_filter($title) {
  * This translates all taxonomy names, including categories
  * @todo Should cache this and not parse on every page
  *
- * @param array|object $terms 
+ * @param array|object $terms
  *
  * @return array|object
  */
-function wpglobus_filter_get_terms($terms) {
+function wpglobus_filter_get_terms( $terms ) {
 
-	if ( is_array($terms) ) {
-	
+	if ( is_array( $terms ) ) {
+
 		foreach ( $terms as &$term ) {
-			if ( is_object($term) ) {
+			if ( is_object( $term ) ) {
 				if ( ! empty( $term->name ) ) {
 					$term->name = __wpg_text_filter( $term->name );
 				}
@@ -42,12 +42,12 @@ function wpglobus_filter_get_terms($terms) {
 				 * Case ajax-tag-search action from post.php screen
 				 * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
 				 */
-				if ( isset($term) ) {
+				if ( isset( $term ) ) {
 					$term = __wpg_text_filter( $term );
-				}	
+				}
 			}
 		} // end foreach
-		
+
 	} else {
 		/**
 		 *  Filter 'get_term' use $terms as object
@@ -57,10 +57,11 @@ function wpglobus_filter_get_terms($terms) {
 		}
 		if ( ! empty( $terms->description ) ) {
 			$terms->description = __wpg_text_filter( $terms->description );
-		}		
+		}
 	}
-	
+
 	reset( $terms );
+
 	return $terms;
 }
 
@@ -77,36 +78,40 @@ function on_home_url( $url ) {
 	global $pagenow;
 
 	$ajaxify = false;
-	
+
 	if ( 'post.php' == $pagenow ) {
-		/** 
+		/**
 		 * Don't convert url for permalink below post title field
 		 * For example, we had Постоянная ссылка: http://www.wpg.dev/ru/wordpress-4-1-is-out/
-		 *
 		 * @todo Need will check for other cases using url in post.php, post-new.php screens
 		 */
 		return $url;
 	}
-	
+
 	if ( 'admin-ajax.php' == $pagenow ) {
-		/** 
+		/**
 		 * Don't convert url for ajax action with $_POST[action] == heartbeat, sample-permalink, add-menu-item
 		 * For more info see $_POST array
-		 *
-		 */	
-		if ( array_key_exists('action', $_POST) && in_array($_POST['action'], array('heartbeat', 'sample-permalink', 'add-menu-item')) ) {
+
+		 */
+		if ( array_key_exists( 'action', $_POST ) && in_array( $_POST['action'], array(
+				'heartbeat',
+				'sample-permalink',
+				'add-menu-item'
+			) )
+		) {
 			return $url;
-		}	
+		}
 		$ajaxify = true;
 	}
-	
+
 	/**
-	 * @todo Need test this code! 
-	 */ 
-	if ( is_admin() && !$ajaxify ) {
+	 * @todo Need test this code!
+	 */
+	if ( is_admin() && ! $ajaxify ) {
 		return $url;
 	}
-	
+
 	return WPGlobus_Utils::get_convert_url( $url );
 }
 
@@ -126,8 +131,8 @@ add_filter( 'the_content', 'wpg_text_filter', 0 );
 
 /**
  * We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
- * @see function the_excerpt()
- * @todo look at 'the_excerpt_export' filter where the post excerpt used for WXR exports. 
+ * @see  function the_excerpt()
+ * @todo look at 'the_excerpt_export' filter where the post excerpt used for WXR exports.
  */
 add_filter( 'get_the_excerpt', 'wpg_text_filter', 0 );
 
@@ -143,7 +148,7 @@ add_filter( 'single_cat_title', 'wpg_text_filter', 0 );
 add_filter( 'single_tag_title', 'wpg_text_filter', 0 );
 add_filter( 'single_term_title', 'wpg_text_filter', 0 );
 
-add_filter( 'get_pages', 'wpg_text_filter', 0);
+add_filter( 'get_pages', 'wpg_text_filter', 0 );
 
 add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 
@@ -153,26 +158,26 @@ add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
  */
 add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
 
-global $pagenow; 
-if ( (defined('DOING_AJAX') && DOING_AJAX) || in_array($pagenow, array('nav-menus.php')) || ! is_admin() ) {
+global $pagenow;
+if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
 	add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
 }
 
 
 /**
  * Filter for admin nav-menus.php screen
- */ 
+ */
 add_filter( 'wp_nav_menu_objects', 'wpglobus_filter_nav_menu', 0 );
 add_filter( 'wp_setup_nav_menu_item', 'wpglobus_filter_nav_menu', 0 );
 
 /**
  * Option filters
  */
-/** 
- * At admin we need see string with language shortcodes 
- */ 
-if ( (defined('DOING_AJAX') && DOING_AJAX) || ! is_admin() ) {
-	add_filter('option_blogdescription', 'wpg_text_filter', 0);
+/**
+ * At admin we need see string with language shortcodes
+ */
+if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ! is_admin() ) {
+	add_filter( 'option_blogdescription', 'wpg_text_filter', 0 );
 }
 
 /**
@@ -185,17 +190,17 @@ add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
 /**
  * Filters for admin
  */
- 
+
 
 /**
  * Filter for i18n before displaying a navigation menu.
- * 
  * @todo revising this filter because it now using for $post->attr_title and maybe $post->title translation only
- * 
- * @param array 
+ *
+ * @param array
+ *
  * @return array
  */
-function wpglobus_filter_nav_menu($object) {
+function wpglobus_filter_nav_menu( $object ) {
 
 	global $pagenow;
 	if ( 'nav-menus.php' == $pagenow && 'wp_setup_nav_menu_item' == current_filter() ) {
@@ -205,48 +210,49 @@ function wpglobus_filter_nav_menu($object) {
 		return $object;
 	}
 
-	if ( is_array($object) ) {
-		foreach( $object as &$post ) {
-			
-			if ( is_object($post) && 'WP_Post' == get_class($post) ) {
-			
-				$post->post_title    = __wpg_text_filter( $post->post_title );
+	if ( is_array( $object ) ) {
+		foreach ( $object as &$post ) {
 
-				$post->post_content  = __wpg_text_filter( $post->post_content );
-				
-				$post->post_excerpt  = __wpg_text_filter( $post->post_excerpt );
-				
-				if ( !empty($post->title) ) {
+			if ( is_object( $post ) && 'WP_Post' == get_class( $post ) ) {
+
+				$post->post_title = __wpg_text_filter( $post->post_title );
+
+				$post->post_content = __wpg_text_filter( $post->post_content );
+
+				$post->post_excerpt = __wpg_text_filter( $post->post_excerpt );
+
+				if ( ! empty( $post->title ) ) {
 					$post->title = __wpg_text_filter( $post->title );
 				}
-				
-				if ( !empty($post->attr_title) ) {
+
+				if ( ! empty( $post->attr_title ) ) {
 					$post->attr_title = __wpg_text_filter( $post->attr_title );
-				}			
-					
+				}
+
 			}
 
 		}
-	} else if ( is_object($object) && 'WP_Post' == get_class($object) ) {
-	
-			$object->post_title    = __wpg_text_filter( $object->post_title );
+	} else if ( is_object( $object ) && 'WP_Post' == get_class( $object ) ) {
 
-			$object->post_content  = __wpg_text_filter( $object->post_content );
-			
-			$object->post_excerpt  = __wpg_text_filter( $object->post_excerpt );
-			
-			if ( !empty($object->title) ) {
-				$object->title = __wpg_text_filter( $object->title );
-			}
-			
-			if ( !empty($object->attr_title) ) {
-				$object->attr_title = __wpg_text_filter( $object->attr_title );
-			}					
-	
+		$object->post_title = __wpg_text_filter( $object->post_title );
+
+		$object->post_content = __wpg_text_filter( $object->post_content );
+
+		$object->post_excerpt = __wpg_text_filter( $object->post_excerpt );
+
+		if ( ! empty( $object->title ) ) {
+			$object->title = __wpg_text_filter( $object->title );
+		}
+
+		if ( ! empty( $object->attr_title ) ) {
+			$object->attr_title = __wpg_text_filter( $object->attr_title );
+		}
+
 	}
 
 
 	reset( $object );
+
 	return $object;
 }
 
@@ -269,28 +275,29 @@ function wpg_text_filter( $object = '' ) {
 	 * @todo Make a separate method for WP_Post filter
 	 * Check $object is array of WP_Post objects
 	 * for example see get_pages() function in \wp-includes\post.php
-	 */	
-	if ( is_array($object) ) {
-		
-		foreach( $object as &$post ) {
-			
-			if ( is_object($post) && 'WP_Post' == get_class($post) ) {
-			
-				$post->post_title    = __wpg_text_filter( $post->post_title );
+	 */
+	if ( is_array( $object ) ) {
 
-				$post->post_content  = __wpg_text_filter( $post->post_content );
-				
-				$post->post_excerpt  = __wpg_text_filter( $post->post_excerpt );
-					
+		foreach ( $object as &$post ) {
+
+			if ( is_object( $post ) && 'WP_Post' == get_class( $post ) ) {
+
+				$post->post_title = __wpg_text_filter( $post->post_title );
+
+				$post->post_content = __wpg_text_filter( $post->post_content );
+
+				$post->post_excerpt = __wpg_text_filter( $post->post_excerpt );
+
 			}
 
 		}
 
 		reset( $object );
+
 		return $object;
-		
+
 	}
-	
+
 	$object = __wpg_text_filter( $object );
 
 	return $object;
@@ -299,6 +306,7 @@ function wpg_text_filter( $object = '' ) {
 
 /**
  * @deprecated 15.01.17
+ *
  * @param string $text
  * @param string $language
  * @param string $return
@@ -306,7 +314,12 @@ function wpg_text_filter( $object = '' ) {
  * @return string
  */
 function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) {
-	return WPGlobus_Core::text_filter( $text, $language, $return );
+	global $WPGlobus_Config;
+	if ( empty( $language ) ) {
+		$language = $WPGlobus_Config->language;
+	}
+
+	return WPGlobus_Core::text_filter( $text, $language, $return, $WPGlobus_Config->default_language );
 }
 
 
@@ -336,7 +349,7 @@ function wpg_locale(
 	// only set LC_TIME as everything else doesn't seem to work with windows
 	setlocale(LC_TIME, $locale);
 	// */
-	
+
 	$locale = $WPGlobus_Config->locale[ $WPGlobus_Config->language ];
 
 	/** @todo What about AJAX? */
@@ -344,14 +357,14 @@ function wpg_locale(
 		/**
 		 * Need to check WPLANG option for WP4.1
 		 * @todo There is a WP method
-		 * @see get_locale()
+		 * @see  get_locale()
 		 */
 		$db_locale = get_option( 'WPLANG' );
 		if ( ! empty( $db_locale ) ) {
 			$locale = $db_locale;
 			$WPGlobus_Config->set_language( $locale );
 		}
-	}	
+	}
 
 	return $locale;
 
