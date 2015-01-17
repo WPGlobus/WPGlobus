@@ -1,8 +1,9 @@
 /*jslint browser: true*/
 /*global jQuery, console, WPGlobusWC */
 jQuery(document).ready(function ($) {
+	"use strict";
 
-	wpglobus_wc = function() {
+	var wpglobus_wc = function() {
 		if ( typeof(WPGlobusWC) === 'undefined' ) {
 			return;
 		}	
@@ -24,12 +25,12 @@ jQuery(document).ready(function ($) {
 			var s = '';
 			$('.wpglobus-wc-excerpt-textarea').each(function(i,e){
 				var $e = $(e);
-				if ( $e.val() != '' ) {
+				if ( $e.val() !== '' ) {
 					s = s + WPGlobusWC.locale_tag_start.replace('%s',$e.data('language'))  + $e.val() + WPGlobusWC.locale_tag_end;
 				}	
 			});	
 			$('#excerpt').eq(0).val(s);
 		});
-	}
+	};
 	wpglobus_wc();
 });
