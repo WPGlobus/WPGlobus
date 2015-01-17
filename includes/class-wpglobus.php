@@ -60,8 +60,6 @@ class WPGlobus {
 
 	const RETURN_IN_DEFAULT_LANGUAGE = 'in_default_language';
 	const RETURN_EMPTY = 'empty';
-	
-	const TAG_REGEXP = '/(\{:|\[:|<!--:)[a-z]{2}/';
 
 	/**
 	 * Don't make some updates at post screen and don't load scripts for this entities
@@ -1064,6 +1062,8 @@ class WPGlobus {
 	const LOCALE_TAG = '{:%s}%s{:}';
 	const LOCALE_TAG_START = '{:%s}';
 	const LOCALE_TAG_END = '{:}';
+	const LOCALE_TAG_OPEN = '{:';
+	const LOCALE_TAG_CLOSE = '}';
 
 	/**
 	 * Surround text with language tags

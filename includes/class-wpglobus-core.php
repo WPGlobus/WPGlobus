@@ -163,14 +163,28 @@ class WPGlobus_Core {
 
 	/**
 	 * Check if string has language delimiters
-	 *    const TAG_REGEXP = '/(\{:|\[:|<!--:)[a-z]{2}/';
 	 *
 	 * @param string $string
 	 *
 	 * @return bool
 	 */
 	public static function has_translations( $string ) {
-		return (bool) preg_match( WPGlobus::TAG_REGEXP, $string );
+
+		/**
+		 * This should detect majority of the strings with our delimiters without calling preg_match
+		 */
+		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN );
+		if ( $pos_start !== false ) {
+			if ( ctype_lower( $string[ $pos_start + 2 ] ) && ctype_lower( $string[ $pos_start + 3 ] ) ) {
+				return true;
+			}
+		}
+
+		/**
+		 * For compatibility, etc. - the universal procedure with regexp
+		 */
+
+		return (bool) preg_match( '/(\{:|\[:|<!--:)[a-z]{2}/', $string );
 	}
 
 

@@ -25,6 +25,10 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_tags ), 'QT tags' );
 		$this->assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_tags, 'ru' ), 'QT tags' );
 
+		$qt_comments = '<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->';
+		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_comments ), 'QT comments' );
+		$this->assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_comments, 'ru' ), 'QT comments' );
+
 		$no_tags = 'EN';
 		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags ), 'No tags' );
 		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags, null, WPGlobus::RETURN_EMPTY ), 'No tags, return empty' );
@@ -39,6 +43,8 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		/** @var string[] $positives */
 		$positives = [
 			'{:en}EN{:}{:ru}RU{:}',
+			'[:en]EN[:ru]RU',
+			'<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->',
 			"Multi-line\n\n {:en}E\nN{:}\n\n{:ru}RU{:}",
 			'{:xx',
 			'Lead {:xx',
