@@ -189,13 +189,13 @@ class WPGlobus_Utils {
 		preg_match( $r, $url, $out );
 
 		$result = array(
-			"scheme"   => $out[1],
-			"host"     => $out[4] . ( ( $out[5] == '' ) ? '' : ':' . $out[5] ),
-			"user"     => $out[2],
-			"pass"     => $out[3],
-			"path"     => $out[6],
-			"query"    => $out[7],
-			"fragment" => $out[8]
+			"scheme"   => ( empty( $out[1] ) ? '' : $out[1] ),
+			"host"     => ( empty( $out[4] ) ? '' : $out[4] ) . ( empty( $out[5] ) ? '' : ':' . $out[5] ),
+			"user"     => ( empty( $out[2] ) ? '' : $out[2] ),
+			"pass"     => ( empty( $out[3] ) ? '' : $out[3] ),
+			"path"     => ( empty( $out[6] ) ? '' : $out[6] ),
+			"query"    => ( empty( $out[7] ) ? '' : $out[7] ),
+			"fragment" => ( empty( $out[8] ) ? '' : $out[8] )
 		);
 
 		// Host can be in path in case of url with incorrect scheme. Try to find it in path
