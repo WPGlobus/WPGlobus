@@ -39,7 +39,7 @@ class WPGlobus_Core {
 			return $text;
 		}
 
-//		global $WPGlobus_Config;
+		//		global $WPGlobus_Config;
 		if ( empty( $language ) ) {
 			/** @todo This is a changed behavior. Watch out when eliminate the deprecated __wpg function */
 			//			$language = $WPGlobus_Config->language;
@@ -124,8 +124,9 @@ class WPGlobus_Core {
 		 */
 		if ( ! $is_local_text_found ) {
 			if ( $return === WPGlobus::RETURN_EMPTY ) {
-				if ( $language === $default_language && ! preg_match( WPGlobus::TAG_REGEXP, $text ) ) {
+				if ( $language === $default_language && ! self::has_translations( $text ) ) {
 					/**
+					 * @todo Check the above condition. What if only one part is true?
 					 * If text does not contain language delimiters nothing to do
 					 */
 				} else {
@@ -137,7 +138,7 @@ class WPGlobus_Core {
 				 * Try RETURN_IN_DEFAULT_LANGUAGE
 				 */
 				if ( $language === $default_language ) {
-					if ( preg_match( WPGlobus::TAG_REGEXP, $text ) ) {
+					if ( self::has_translations( $text ) ) {
 						/**
 						 * Rare case of text in default language doesn't exist
 						 * @todo make option for return warning message or maybe another action
@@ -159,6 +160,19 @@ class WPGlobus_Core {
 		return $text;
 
 	}
+
+	/**
+	 * Check if string has language delimiters
+	 *    const TAG_REGEXP = '/(\{:|\[:|<!--:)[a-z]{2}/';
+	 *
+	 * @param string $string
+	 *
+	 * @return bool
+	 */
+	public static function has_translations( $string ) {
+		return (bool) preg_match( WPGlobus::TAG_REGEXP, $string );
+	}
+
 
 } // class
 
