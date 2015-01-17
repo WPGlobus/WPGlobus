@@ -844,7 +844,11 @@ class WPGlobus {
 		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
 		if ( ! empty( $css ) ) {
-			echo '<style type="text/css" media="screen">' . "\n" . $css . "\n</style>";
+			?>
+			<style type="text/css" media="screen">
+				<?php echo $css; ?>
+			</style>
+		<?php
 		}
 
 	}
