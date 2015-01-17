@@ -43,11 +43,14 @@ global $WPGlobus;
 global $WPGlobus_Config;
 global $WPGlobus_Options;
 
+
 require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
 require_once 'includes/class-wpglobus.php';
 
+require_once 'includes/class-wpglobus-core.php';
 require_once 'includes/functions.php';
+
 require_once 'includes/qa.php';
 
 /** WOOCOMMERCE */
