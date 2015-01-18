@@ -203,7 +203,12 @@ class WPGlobus_Utils {
 
 			if ( preg_match( $r2, $url, $out2 ) ) {
 				$result['host'] = $out2[1] . $out2[2];
-				$result['path'] = $out2[3];
+				/** 
+				 * http://www.wpg.dev/wp-admin/edit.php?post_type=product
+				 * with WPGlobus WC 
+				 * has  PHP Notice:  Undefined offset: 3 in C:\cygwin\home\www.wpg.dev\wp-content\plugins\wpglobus\includes\class-wpglobus-utils.php
+				 */
+				$result['path'] = isset($out2[3]) ? $out2[3] : '';
 			}
 		}
 
