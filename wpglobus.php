@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WPGlobus Full
+ * Plugin Name: WPGlobus
  * Plugin URI: https://github.com/WPGlobus/WPGlobus
  * Description: WordPress internationalization helper
  * Text Domain: wpglobus
