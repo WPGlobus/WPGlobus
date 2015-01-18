@@ -53,23 +53,10 @@ require_once 'includes/functions.php';
 
 require_once 'includes/qa.php';
 
-/** WOOCOMMERCE */
-if ( function_exists('WC') ) {
-	define( 'WPGLOBUS_WC_VERSION', '1.0.0' );
-	require_once 'includes/class-wpglobus-wc.php';
-}
-
-
-
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
 
 $WPGlobus_Config = new WPGlobus_Config();
-
-/** WOOCOMMERCE */
-if ( function_exists('WC') ) {
-	$WPGlobus_Woo = new WPGlobus_WC();
-}
 
 /**
  * @see WPGlobus::init()
