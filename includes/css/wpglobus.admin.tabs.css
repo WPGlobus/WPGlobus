@@ -203,3 +203,7 @@
 .edit-tags-php .wpglobus-post-tabs-ul {
     padding-bottom: 1px;
 }
+/* metabox */
+#wpglobus-wpseo-tabs {
+	margin-top: -45px;
+}
