@@ -18,7 +18,7 @@ var wpglobus_wpseo = function () {
 			post_content = '#content-' + language;
 		}
 		// title
-		if (jQuery(title).length) {
+		if (jQuery(post_title).length) {
 			str = str.replace(/%%title%%/g, jQuery(post_title).val());
 		}
 
@@ -35,7 +35,7 @@ var wpglobus_wpseo = function () {
 		str = str.replace(/%%currentmonth%%/g, wpseoMetaboxL10n.currentmonth);
 		str = str.replace(/%%currentyear%%/g, wpseoMetaboxL10n.currentyear);
 
-		str = str.replace(/%%focuskw%%/g, jQuery('#yoast_wpseo_focuskw').val() );
+		str = str.replace(/%%focuskw%%/g, jQuery('#yoast_wpseo_focuskw' + '_' + language).val() );
 		// excerpt
 		var excerpt = '';
 		if (jQuery(post_excerpt).length) {
@@ -301,7 +301,7 @@ var wpglobus_wpseo = function () {
 			if ( 'focuskwresults' == id ) {
 				$id.addClass('wpglobus-focuskwresults');
 			}
-			if ( 'yoast_wpseo_metadesc' == id ) {
+			if ( wpseoMetaboxL10n.field_prefix + 'metadesc' == id ) {
 				$id.addClass('wpglobus-wpseo_metadesc').text($e.data('metadesc'));
 			}
 			$id.attr('id',id+'_'+l);
