@@ -17,7 +17,7 @@ class WPGlobus_Core {
 		$text = '',
 		$language = '',
 		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
-		$default_language = 'en'
+		$default_language = 'en' // TODO
 	) {
 
 		/**
@@ -185,6 +185,35 @@ class WPGlobus_Core {
 		 */
 
 		return (bool) preg_match( '/(\{:|\[:|<!--:)[a-z]{2}/', $string );
+	}
+
+	/**
+	 * @param WP_Post $post
+	 * @param string  $language
+	 * @param string  $return
+	 * @param string  $default_language
+	 */
+	public static function translate_wp_post(
+		WP_Post &$post,
+		$language = '',
+		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
+		$default_language = 'en' // TODO
+	) {
+
+		$fields = [
+			'post_title',
+			'post_content',
+		    'post_excerpt',
+		    'title',
+		    'attr_title',
+		];
+
+		foreach ( $fields as $_ ) {
+			if ( ! empty( $post->$_ ) ) {
+				$post->$_ = self::text_filter( $post->$_, $language, $return, $default_language );
+			}
+		}
+
 	}
 
 
