@@ -167,7 +167,14 @@ class WPGlobus {
 				add_action( 'admin_print_scripts', array(
 					$this,
 					'on_admin_enqueue_scripts'
-				), 99 );				
+				), 99 );	
+
+				if ( $this->vendors_scripts['WPSEO'] ) {
+					add_action( 'wpseo_tab_content', array(
+						$this,
+						'on_wpseo_tab_content'
+					), 11 );
+				}	
 			
 			}	// endif $devmode 
 
@@ -257,7 +264,36 @@ class WPGlobus {
 		 */
 		$this->disabled_entities = apply_filters('wpg_disabled_entities', $this->disabled_entities);
 	}
-
+	
+	/**
+	 * Add language tabs to wpseo metabox ( .wpseo-metabox-tabs-div )
+	 *
+	 * @return void
+	 */
+	function on_wpseo_tab_content() {
+	
+		//global $post;
+		//error_log(print_r($post, true));
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;	?>
+		<div id="wpglobus-wpseo-tabs"> 	
+			<span id="wpglobus-wpseo-input" data-ids="wpseosnippet,wpseosnippet_title,yoast_wpseo_focuskw,focuskwresults,yoast_wpseo_title,yoast_wpseo_metadesc"
+				data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc">
+			</span>
+			<ul>	<?php
+				foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>
+					<li id="wpseo-link-tab-<?php echo $language; ?>"><a href="#wpseo-tab-<?php echo $language; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+				} ?>
+			</ul> 	<?php
+			
+			foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>		
+				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" data-language="<?php echo $language; ?>">
+				</div> <?php
+			}	?>
+		</div>	
+		<?php		
+	}
+	
 	/**
 	 * Handle ajax process
  	 */
