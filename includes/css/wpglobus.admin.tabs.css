@@ -207,6 +207,10 @@
 #wpglobus-wpseo-tabs {
 	margin-top: -45px;
 }
+.wpglobus-wpseosnippet {
+	font-family: Arial,Helvetica,sans-serif;
+    font-style: normal;
+}
 .wpglobus-wpseosnippet .title {
     color: #1e0fbe;
     display: block;
@@ -223,6 +227,12 @@
     font-size: 13px;
     line-height: 16px;
 }
+.wpglobus-wpseosnippet .desc {
+    font-size: small;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
 .wpglobus-focuskwresults ul {
 	margin:0;
 }
