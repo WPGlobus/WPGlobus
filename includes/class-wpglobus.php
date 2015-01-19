@@ -273,7 +273,10 @@ class WPGlobus {
 	function on_wpseo_tab_content() {
 
 		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;	?>
+		global $WPGlobus_Config;
+		
+		global $post;
+		$permalink = get_permalink($post->ID); ?>
 		
 		<div id="wpglobus-wpseo-tabs"> 	<?php
 			/**
@@ -289,8 +292,10 @@ class WPGlobus {
 				} ?>
 			</ul> 	<?php
 			
-			foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>		
-				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" data-language="<?php echo $language; ?>">
+			foreach ( $WPGlobus_Config->enabled_languages as $language ) { 
+				$url = WPGlobus_Utils::get_convert_url($permalink, $language); ?>		
+				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" 
+					data-language="<?php echo $language; ?>" data-url-<?php echo $language; ?>="<?php echo $url; ?>">
 				</div> <?php
 			}	?>
 		</div>	
