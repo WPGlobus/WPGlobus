@@ -39,21 +39,11 @@ class WPGlobus_Core {
 			return $text;
 		}
 
-		global $WPGlobus_Config;
+//		global $WPGlobus_Config;
 		if ( empty( $language ) ) {
 			/** @todo This is a changed behavior. Watch out when eliminate the deprecated __wpg function */
 			//			$language = $WPGlobus_Config->language;
-			
-			/**
-			 * Don't work correct with
-			 * $language = $default_language;
-			 * get back to
-			 * $language = $WPGlobus_Config->language;
-			 */
-			//$language = $default_language;
-			
-			$language = $WPGlobus_Config->language;
-
+			$language = $default_language;
 		}
 
 		$possible_delimiters =
