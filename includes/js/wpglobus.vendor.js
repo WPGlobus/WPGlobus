@@ -203,6 +203,9 @@ var wpglobus_wpseo = function () {
 			}
 		);
 	};
+	
+	// start 
+	
 	// tabs on
     jQuery('#wpglobus-wpseo-tabs').tabs();
 	
@@ -218,8 +221,9 @@ var wpglobus_wpseo = function () {
 	jQuery('#wpglobus-wpseo-tabs').insertBefore(t);
 
 	jQuery('.wpglobus-wpseo-general').each(function(i,e){
-		var l = jQuery(e).data('language');
-		jQuery(e).html('<table class="form-table wpglobus-table-'+l+'" data-language="'+l+'">' + t.html() + '</table>');
+		var $e = jQuery(e);
+		var l = $e.data('language');
+		$e.html('<table class="form-table wpglobus-table-'+l+'" data-language="'+l+'">' + t.html() + '</table>');
 		jQuery.each(names,function(i,name){
 			jQuery('#'+name).attr('name',name+'_'+l);
 		});
@@ -232,6 +236,7 @@ var wpglobus_wpseo = function () {
 			}
 			jQuery('#'+id).attr('id',id+'_'+l);
 		});
+		jQuery('#wpseosnippet_'+l+' .url').text($e.data('url-'+l));
 		wpglobus_updateSnippet(l);
 	});
 	//t.addClass('hidden');
