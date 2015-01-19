@@ -1,14 +1,15 @@
 <?php
 
 /**
- *
+ * Various function calls done by @see WPGlobus_QA are shown on the /api-demo/ page.
+ * Here, we parse that page and verify that all functions work correctly.
  */
 class APICest {
 
 	/**
-	 * @param AcceptanceTester $I
-	 *
 	 * @see WPGlobus_QA::_common_for_all_languages()
+	 *
+	 * @param AcceptanceTester $I
 	 */
 	protected function _common_for_all_languages( AcceptanceTester $I ) {
 		$I->see( '{:en}ENG{:}{:ru}РУС{:}', '#tag_text' );
@@ -18,10 +19,10 @@ class APICest {
 	}
 
 	/**
+	 * @see WPGlobus_QA::_test_home_url()
+	 *
 	 * @param AcceptanceTester $I
 	 * @param string           $home_url
-	 *
-	 * @see WPGlobus_QA::_test_home_url()
 	 */
 	protected function _test_home_url( AcceptanceTester $I, $home_url = '' ) {
 		$I->see( $home_url, '#_test_home_url code' );
@@ -67,13 +68,8 @@ class APICest {
 	 */
 
 	/**
-	 * @param AcceptanceTester $I
-	 */
-	//	public function _before( AcceptanceTester $I ) {
-	//	}
-
-
-	/**
+	 * Check the EN version of the api-demo page
+	 *
 	 * @param AcceptanceTester $I
 	 */
 	public function en( AcceptanceTester $I ) {
@@ -91,10 +87,17 @@ class APICest {
 
 		$I->assertEquals( "ENG1", $I->grabTextFrom( '#filter__the_title__' . 'multipart' . ' .filter__the_title__output' ) );
 
+		/**
+		 * @see WPGlobus_QA::_test_get_pages()
+		 */
+		$I->assertEquals( "Contact Us", $I->grabTextFrom( '#test__get_pages__' . '72' ), 'test__get_pages' );
+
 		$this->_common_for_all_languages( $I );
 	}
 
 	/**
+	 * Check the RU version of the api-demo page
+	 *
 	 * @param AcceptanceTester $I
 	 */
 	public function ru( AcceptanceTester $I ) {
@@ -115,6 +118,11 @@ class APICest {
 		$I->assertEquals( "РУС1\nРУС2", $I->grabTextFrom( '#filter__the_title__' . 'multiline_qt_comments' . ' .filter__the_title__output' ) );
 
 		$I->assertEquals( "РУС1", $I->grabTextFrom( '#filter__the_title__' . 'multipart' . ' .filter__the_title__output' ) );
+
+		/**
+		 * @see WPGlobus_QA::_test_get_pages()
+		 */
+		$I->assertEquals( "Обратная связь", $I->grabTextFrom( '#test__get_pages__' . '72' ), 'test__get_pages' );
 
 		$this->_common_for_all_languages( $I );
 	}

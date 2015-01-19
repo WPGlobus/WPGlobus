@@ -15,6 +15,7 @@ class WPGlobus_QA {
 		<?php
 		self::_test_home_url();
 		self::_test_string_parsing();
+		self::_test_get_pages();
 		self::_common_for_all_languages();
 	}
 
@@ -87,6 +88,31 @@ class WPGlobus_QA {
 			<?php endforeach; ?>
 			</tbody>
 		</table>
+	<?php
+
+	}
+
+	/**
+	 * To check the @see get_pages() function
+	 * It is used, for example, to show a list of available pages in the "Parent Page" metabox
+	 * when editing a page.
+	 * Here, we display a list of first 3 pages
+	 * and expect to see their titles correctly translated.
+	 */
+	private static function _test_get_pages() {
+
+		/** @var WP_Post[] $all_pages */
+		$all_pages = get_pages( [ 'number' => 3, 'sort_column' => 'ID' ] );
+
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>get_pages()</h2>
+			<?php foreach ( $all_pages as $page ) : ?>
+				<div id="test__get_pages__<?php echo $page->ID; ?>">
+					<?php echo $page->post_title; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	<?php
 
 	}
