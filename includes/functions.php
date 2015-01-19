@@ -274,7 +274,7 @@ function wpg_text_filter( $object = '' ) {
 	/**
 	 * @todo Make a separate method for WP_Post filter
 	 * Check $object is array of WP_Post objects
-	 * for example see get_pages() function in \wp-includes\post.php
+	 * for example @see get_pages() function in \wp-includes\post.php
 	 */
 	if ( is_array( $object ) ) {
 

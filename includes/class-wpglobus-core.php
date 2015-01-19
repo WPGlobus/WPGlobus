@@ -6,6 +6,9 @@
 class WPGlobus_Core {
 
 	/**
+	 * The main filter function.
+	 * Default behavior: extracts text in one language from multi-lingual strings.
+	 *
 	 * @param string $text
 	 * @param string $language
 	 * @param string $return
@@ -39,7 +42,7 @@ class WPGlobus_Core {
 			return $text;
 		}
 
-//		global $WPGlobus_Config;
+		//		global $WPGlobus_Config;
 		if ( empty( $language ) ) {
 			/** @todo This is a changed behavior. Watch out when eliminate the deprecated __wpg function */
 			//			$language = $WPGlobus_Config->language;
@@ -188,6 +191,8 @@ class WPGlobus_Core {
 	}
 
 	/**
+	 * @todo Write description
+	 *
 	 * @param WP_Post $post
 	 * @param string  $language
 	 * @param string  $return
@@ -203,9 +208,9 @@ class WPGlobus_Core {
 		$fields = [
 			'post_title',
 			'post_content',
-		    'post_excerpt',
-		    'title',
-		    'attr_title',
+			'post_excerpt',
+			'title',
+			'attr_title',
 		];
 
 		foreach ( $fields as $_ ) {
