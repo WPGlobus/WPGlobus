@@ -271,25 +271,19 @@ function wpg_text_filter( $object = '' ) {
 		return $object;
 	}
 
+	global $WPGlobus_Config;
+
 	/**
-	 * @todo Make a separate method for WP_Post filter
 	 * Check $object is array of WP_Post objects
 	 * for example @see get_pages() function in \wp-includes\post.php
+	 * @qa See a list of available pages in the "Parent Page" metabox when editing a page.
 	 */
 	if ( is_array( $object ) ) {
 
 		foreach ( $object as &$post ) {
-
 			if ( is_object( $post ) && 'WP_Post' == get_class( $post ) ) {
-
-				$post->post_title = __wpg_text_filter( $post->post_title );
-
-				$post->post_content = __wpg_text_filter( $post->post_content );
-
-				$post->post_excerpt = __wpg_text_filter( $post->post_excerpt );
-
+				WPGlobus_Core::translate_wp_post( $post, $WPGlobus_Config->language );
 			}
-
 		}
 
 		reset( $object );
