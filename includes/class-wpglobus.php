@@ -323,7 +323,7 @@ class WPGlobus {
 			foreach( $order['title'] as $id=>$title ) {
 				$result[$id]['source'] = $title['source']; 
 				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-					$result[$id][$language] = __wpg_text_filter($title['source'], $language, WPGlobus::RETURN_EMPTY);
+					$result[$id][$language] = WPGlobus_Core::text_filter($title['source'], $language, WPGlobus::RETURN_EMPTY);
 				}
 			}
 			break;
@@ -501,12 +501,12 @@ class WPGlobus {
 				 * next we send $post_content to js with localize script 
 				 * @see post_edit() in admin.globus.js 
 				 */
-				$post_content = __wpg_text_filter($post->post_content, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY); 
+				$post_content = WPGlobus_Core::text_filter($post->post_content, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY); 
 
 				/**
 				 * Set $post_title for default language
 				 */	
-				$post_title = __wpg_text_filter($post->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY);
+				$post_title = WPGlobus_Core::text_filter($post->post_title, $WPGlobus_Config->default_language, WPGlobus::RETURN_EMPTY);
 				
 			}
 			
@@ -564,7 +564,7 @@ class WPGlobus {
 				$data['template'] = '';
 				foreach( $WPGlobus_Config->enabled_languages as $language ) {
 					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
-					$data['template'] .= __wpg_text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY);
+					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY);
 					$data['template'] .= '</textarea>';
 				}
 				
@@ -603,12 +603,12 @@ class WPGlobus {
 
 					endif;				
 				
-					$menu_items[$item->ID]['item-title'] = __wpg_text_filter( $item->post_title, $WPGlobus_Config->default_language );
+					$menu_items[$item->ID]['item-title'] = WPGlobus_Core::text_filter( $item->post_title, $WPGlobus_Config->default_language );
 					
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
 						
-						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption']   = __wpg_text_filter( $item->post_title, $language, WPGlobus::RETURN_EMPTY );
-						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['caption'] = __wpg_text_filter( $item->post_excerpt, $language, WPGlobus::RETURN_EMPTY ); 
+						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['caption']   = WPGlobus_Core::text_filter( $item->post_title, $language, WPGlobus::RETURN_EMPTY );
+						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['caption'] = WPGlobus_Core::text_filter( $item->post_excerpt, $language, WPGlobus::RETURN_EMPTY ); 
 
 						$menu_items[$item->ID][$language]['input.edit-menu-item-title']['class']   = 'widefat wpglobus-menu-item wpglobus-item-title';
 						$menu_items[$item->ID][$language]['input.edit-menu-item-attr-title']['class'] = 'widefat wpglobus-menu-item wpglobus-item-attr'; 
@@ -648,8 +648,8 @@ class WPGlobus {
 				if ( $data['tag_id'] ) {
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
 						$lang = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
-						$data['i18n'][$lang]['name'] = __wpg_text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
-						$data['i18n'][$lang]['description'] = __wpg_text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
+						$data['i18n'][$lang]['name'] = WPGlobus_Core::text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
+						$data['i18n'][$lang]['description'] = WPGlobus_Core::text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
 					}
 				} else {
 					$data['template'] = $this->_get_quickedit_template(); 
@@ -1121,7 +1121,7 @@ class WPGlobus {
 			} else {	?>
 
 				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
-					wp_editor( __wpg_text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content-' . $language, array(
+					wp_editor( WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content-' . $language, array(
 						'_content_editor_dfw' => true,
 						#'dfw' => true,
 						'drag_drop_upload' => true,
@@ -1343,7 +1343,7 @@ class WPGlobus {
 				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
 					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
 						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-						<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( __wpg_text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
 					</div> <!-- #titlewrap -->
 					<div class="inside">
 						<div id="edit-slug-box-<?php echo $language; ?>" class="wpglobus-edit-slug-box hide-if-no-js">
