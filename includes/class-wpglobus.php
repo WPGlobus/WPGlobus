@@ -271,14 +271,17 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_wpseo_tab_content() {
-	
-		//global $post;
-		//error_log(print_r($post, true));
+
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;	?>
-		<div id="wpglobus-wpseo-tabs"> 	
-			<span id="wpglobus-wpseo-input" data-ids="wpseosnippet,wpseosnippet_title,yoast_wpseo_focuskw,focuskwresults,yoast_wpseo_title,yoast_wpseo_metadesc"
-				data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc">
+		
+		<div id="wpglobus-wpseo-tabs"> 	<?php
+			/**
+			 * Use span with attributes 'data' for send to js script ids, names elements for which needs to be set new ids, names with language code.
+			 */ ?>
+			<span id="wpglobus-wpseo-attr" data-ids="wpseosnippet,wpseosnippet_title,yoast_wpseo_focuskw,focuskwresults,yoast_wpseo_title,yoast_wpseo_metadesc"
+				data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc"
+				data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
 			<ul>	<?php
 				foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>
