@@ -175,7 +175,6 @@ var wpglobus_wpseo = function () {
 		if (desc == '' && wpseoMetaboxL10n.wpseo_metadesc_template != '') {
 			desc = wpseoMetaboxL10n.wpseo_metadesc_template;
 		}
-
 		if (desc != '') {
 			desc = yst_replaceVariables(desc, function (desc) {
 				desc = divHtml.text(desc).html();
@@ -234,6 +233,7 @@ var wpglobus_wpseo = function () {
 	}	
 	
 	var wpglobus_updateSnippet = function(language) {
+		//console.log('uS');
 		//yst_updateURL();
 		wpglobus_updateTitle(false,language);
 		wpglobus_updateDesc(language);
@@ -294,18 +294,37 @@ var wpglobus_wpseo = function () {
 			jQuery('#'+name).attr('name',name+'_'+l);
 		});
 		jQuery.each(ids,function(i,id){
+			var $id = jQuery('#'+id);
 			if ( 'wpseosnippet' == id ) {
-				jQuery('#'+id).addClass('wpglobus-wpseosnippet');
+				$id.addClass('wpglobus-wpseosnippet');
 			}
 			if ( 'focuskwresults' == id ) {
-				jQuery('#'+id).addClass('wpglobus-focuskwresults');
+				$id.addClass('wpglobus-focuskwresults');
 			}
-			jQuery('#'+id).attr('id',id+'_'+l);
+			if ( 'yoast_wpseo_metadesc' == id ) {
+				$id.addClass('wpglobus-wpseo_metadesc').text($e.data('metadesc'));
+			}
+			$id.attr('id',id+'_'+l);
+			jQuery('#'+id+'_'+l).attr('data-language',l);
 		});
 		jQuery('#wpseosnippet_'+l+' .url').text($e.data('url-'+l));
 		wpglobus_updateSnippet(l);
 	});
 	//t.addClass('hidden');
+	
+	jQuery('body').on('blur', '.wpglobus-wpseo_metadesc', function(event){
+		var save_to = '#' + wpseoMetaboxL10n.field_prefix + 'metadesc',
+			s = '';
+
+		jQuery('.wpglobus-wpseo_metadesc').each(function (i, e) {
+			var $e = jQuery(e);
+			if ($e.val() !== '') {
+				s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+			}
+		});
+		jQuery(save_to).val(s);		
+	});
+	
 	wpglobus_qtip();
 	yst_updateSnippet();
 };
