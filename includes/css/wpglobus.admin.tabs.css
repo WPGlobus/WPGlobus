@@ -207,3 +207,30 @@
 #wpglobus-wpseo-tabs {
 	margin-top: -45px;
 }
+.wpglobus-wpseosnippet .title {
+    color: #1e0fbe;
+    display: block;
+    font-size: 18px !important;
+    line-height: 1.2;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 512px;
+}	
+.wpglobus-wpseosnippet .url {
+    color: #006621;
+    font-size: 13px;
+    line-height: 16px;
+}
+.wpglobus-focuskwresults ul {
+	margin:0;
+}
+.wpglobus-focuskwresults li {
+	float:none !important;
+	list-style-type: disc;
+    margin: 0 0 0 20px !important;
+}
+.wpglobus-focuskwresults li, .wpglobus-focuskwresults p {
+    font-size: 13px !important;
+}
