@@ -244,6 +244,11 @@ class WPGlobus {
 				'on_wp_head'
 			), 11 );
 
+			add_action( 'wp_head', array(
+				$this,
+				'on_add_hreflang'
+			), 11 );
+			
 			add_action( 'wp_print_styles', array(
 				$this,
 				'on_wp_styles'
@@ -871,6 +876,35 @@ class WPGlobus {
 		);		
 	}	
 
+	/**
+	 * Add rel="alternate" links to head section
+	 *
+	 * @return void
+	 */
+	function on_add_hreflang() {
+		
+		global $WPGlobus_Config;
+
+		$scheme = 'http';
+		if ( is_ssl() ) {
+			$scheme = 'https';
+		}
+
+		$ref_source = $scheme . '://' . $WPGlobus_Config->url_info['host'] . '/%%lang%%' . $WPGlobus_Config->url_info['url'];
+		
+		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+			$reflang = str_replace('_', '-', $WPGlobus_Config->locale[$language]);
+			if ( $language == $WPGlobus_Config->default_language ) {
+				$ref = str_replace('%%lang%%/', '', $ref_source);	
+			} else {
+				$ref = str_replace('%%lang%%', $language, $ref_source);	
+			}
+			?><link rel="alternate" hreflang="<?php echo $reflang; ?>" href="<?php echo $ref; ?>" />
+		<?php
+		}
+		
+	}
+	
 	/**
 	 * Add css styles to head section
 	 * @return string
