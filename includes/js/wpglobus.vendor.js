@@ -166,19 +166,52 @@ var wpglobus_wpseo = function () {
 			yst_testFocusKw();
 		});
 	}
+	
 	var wpglobus_updateSnippet = function(language) {
 		//yst_updateURL();
 		wpglobus_updateTitle(false,language);
 		//yst_updateDesc();
 	}
 	
+	var wpglobus_qtip = function() {
+		jQuery(".yoast_help").qtip(
+			{
+				content: {
+					attr: 'alt'
+				},
+				position: {
+					my: 'bottom left',
+					at: 'top center'
+				},
+				style   : {
+					tip: {
+						corner: true
+					},
+					classes : 'yoast-qtip qtip-rounded qtip-blue'
+				},
+				show    : {
+					when: {
+						event: 'mouseover'
+					}
+				},
+				hide    : {
+					fixed: true,
+					when : {
+						event: 'mouseout'
+					}
+				}
+			}
+		);
+	};
 	// tabs on
     jQuery('#wpglobus-wpseo-tabs').tabs();
-
+	
+	var attrs = jQuery('#wpglobus-wpseo-attr');
 	var t = jQuery('.wpseotab.general .form-table');
-			//console.dir(t);
-	var ids = jQuery('#wpglobus-wpseo-input').data('ids');
-	var names = jQuery('#wpglobus-wpseo-input').data('names');
+	var ids = attrs.data('ids');
+	var names = attrs.data('names');
+	
+	ids = ids+',' + attrs.data('qtip');
 	ids = ids.split(',');
 	names = names.split(',');
 	
@@ -202,5 +235,6 @@ var wpglobus_wpseo = function () {
 		wpglobus_updateSnippet(l);
 	});
 	//t.addClass('hidden');
+	wpglobus_qtip();
 	yst_updateSnippet();
 };
