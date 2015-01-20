@@ -299,10 +299,12 @@ class WPGlobus {
 			
 			foreach ( $WPGlobus_Config->enabled_languages as $language ) { 
 				$url = WPGlobus_Utils::get_convert_url($permalink, $language); 
-				$metadesc = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true); ?>		
+				$metadesc = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);	
+				$wpseotitle = get_post_meta($post->ID, '_yoast_wpseo_title', true); ?>		
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" 
 					data-language="<?php echo $language; ?>" data-url-<?php echo $language; ?>="<?php echo $url; ?>"
-					data-metadesc="<?php echo WPGlobus_Core::text_filter($metadesc, $language, WPGlobus::RETURN_EMPTY); ?>">
+					data-metadesc="<?php echo WPGlobus_Core::text_filter($metadesc, $language, WPGlobus::RETURN_EMPTY); ?>"
+					data-wpseotitle="<?php echo WPGlobus_Core::text_filter($wpseotitle, $language, WPGlobus::RETURN_EMPTY); ?>">
 				</div> <?php
 			}	?>
 		</div>	
