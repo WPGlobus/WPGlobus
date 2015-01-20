@@ -92,6 +92,20 @@ class APICest {
 		 */
 		$I->assertEquals( "Contact Us", $I->grabTextFrom( '#test__get_pages__' . '72' ), 'test__get_pages' );
 
+		/**
+		 * @see WPGlobus_QA::_test_get_the_terms()
+		 * '6' is the term_id (category ID=6)
+		 */
+		$I->assertEquals( "Progress", $I->grabTextFrom(
+			'#test__get_the_terms__' . '6' .
+			' .test__get_the_terms__name' ),
+			'test__get_the_terms__' );
+
+		$I->assertEquals( "Development Progress", $I->grabTextFrom(
+			'#test__get_the_terms__' . '6' .
+			' .test__get_the_terms__description' ),
+			'test__get_the_terms__' );
+
 		$this->_common_for_all_languages( $I );
 	}
 
@@ -123,6 +137,20 @@ class APICest {
 		 * @see WPGlobus_QA::_test_get_pages()
 		 */
 		$I->assertEquals( "Обратная связь", $I->grabTextFrom( '#test__get_pages__' . '72' ), 'test__get_pages' );
+
+		/**
+		 * @see WPGlobus_QA::_test_get_the_terms()
+		 * '6' is the term_id (category ID=6)
+		 */
+		$I->assertEquals( "Прогресс", $I->grabTextFrom(
+			'#test__get_the_terms__' . '6' .
+			' .test__get_the_terms__name' ),
+			'test__get_the_terms__' );
+
+		$I->assertEquals( "Прогресс разработки", $I->grabTextFrom(
+			'#test__get_the_terms__' . '6' .
+			' .test__get_the_terms__description' ),
+			'test__get_the_terms__' );
 
 		$this->_common_for_all_languages( $I );
 	}

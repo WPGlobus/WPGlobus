@@ -16,6 +16,7 @@ class WPGlobus_QA {
 		self::_test_home_url();
 		self::_test_string_parsing();
 		self::_test_get_pages();
+		self::_test_get_the_terms();
 		self::_common_for_all_languages();
 	}
 
@@ -115,6 +116,32 @@ class WPGlobus_QA {
 		</div>
 	<?php
 
+	}
+
+	/**
+	 * @see get_the_terms();
+	 */
+	private static function _test_get_the_terms() {
+
+		$terms = get_the_terms( 97, 'category' );
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>get_the_terms()</h2>
+
+			<p>Name and description of the category that the post ID=97 belongs to:</p>
+
+			<p><code>get_the_terms( 97, 'category' );</code></p>
+			<?php foreach ( $terms as $term ) : ?>
+				<p id="test__get_the_terms__<?php echo $term->term_id; ?>">
+					<code>$term->name</code> :
+					<span class="test__get_the_terms__name"><?php echo $term->name; ?></span>
+					<br/>
+					<code>$term->description</code> :
+					<span class="test__get_the_terms__description"><?php echo $term->description; ?></span>
+				</p>
+			<?php endforeach; ?>
+		</div>
+	<?php
 	}
 
 }
