@@ -16,6 +16,14 @@ class APICest {
 		$I->assertEquals( 'ENG РУС', $I->grabTextFrom( '#filter__the_title__' . 'no_tags' . ' .filter__the_title__output' ) );
 		$I->assertEquals( 'ENG', $I->grabTextFrom( '#filter__the_title__' . 'one_tag' . ' .filter__the_title__output' ) );
 		$I->assertEquals( 'ENG', $I->grabTextFrom( '#filter__the_title__' . 'one_tag_qt_tags' . ' .filter__the_title__output' ) );
+
+		/**
+		 * @see WPGlobus_QA::_test_get_the_terms()
+		 */
+		$I->assertEquals( 'boolean', $I->grabTextFrom( '#_test_get_the_terms' .
+		                                               ' .non-existing-post-id' ) );
+		$I->assertEquals( 'WP_Error', $I->grabTextFrom( '#_test_get_the_terms' .
+		                                                ' .no-such-term' ) );
 	}
 
 	/**

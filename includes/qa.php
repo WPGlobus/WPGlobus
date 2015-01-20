@@ -140,8 +140,23 @@ class WPGlobus_QA {
 					<span class="test__get_the_terms__description"><?php echo $term->description; ?></span>
 				</p>
 			<?php endforeach; ?>
+
+			<p>Non-existing post ID:</p>
+
+			<p>
+				<code>get_the_terms( -15, 'category' )</code>
+				=&gt;  <span class="non-existing-post-id"><?php echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
+			</p>
+
+			<p>Non-existing term name:</p>
+
+			<p>
+				<code>get_the_terms( 97, 'no-such-term' )</code>
+				=&gt; <span class="no-such-term"><?php echo get_class( get_the_terms( 97, 'no-such-term' ) ); ?></span>
+			</p>
 		</div>
-	<?php
+		<?php
+
 	}
 
 }
