@@ -82,9 +82,10 @@ jQuery(document).ready(function () {
                         if (PlainObject.data.indexOf('action=inline-save') >= 0) {
                             $(WPGlobusAdmin.data.enabled_languages).each(function (i, l) {
                                 if ( id != 0 && 'undefined' !== WPGlobusAdmin.qedit_titles[id][l]) {
-                                    WPGlobusAdmin.qedit_titles[id][l] = $('#' + l + id).val();
+                                    WPGlobusAdmin.qedit_titles[id][l] = typeof $('#' + l + id) === 'undefined' ? '' : $('#' + l + id).val();
                                 }
                             });
+							
                         }
                     }
                 });
@@ -126,7 +127,7 @@ jQuery(document).ready(function () {
                     $('.wpglobus-quick-edit-title').each(function (index, e) {
                         var $e = $(e);
                         if ($e.val() !== '') {
-                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('lang')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
                         }
                     });
                     $('input.ptitle').eq(0).val(s);
@@ -134,21 +135,37 @@ jQuery(document).ready(function () {
 
                 $('#the-list').on('click', 'a.editinline', function (event) {
                     var t = $(this);
-                    var id;
+                    var fid, id;
+                    
+					fid = t.parents('tr').attr('id');
                     if ('post' === type) {
-                        id = t.parents('tr').attr('id').replace('post-', '');
+                        id = fid.replace('post-', '');
                     } else if ('taxonomy' === type) {
-                        id = t.parents('tr').attr('id').replace('tag-', '');
-                    }
+                        id = fid.replace('tag-', '');
+                    } else {
+						return;
+					}
                     var e = $('#edit-' + id + ' input.ptitle').eq(0);
                     var p = e.parents('label');
                     e.addClass('hidden');
                     $(WPGlobusAdmin.data.template).insertAfter(p);
 
+					if ( typeof WPGlobusAdmin.qedit_titles[id] === 'undefined' ) {
+						WPGlobusAdmin.qedit_titles[id] = {};
+						WPGlobusAdmin.qedit_titles[id]['source'] = $('#'+fid+' .name a.row-title').text();
+						$(WPGlobusAdmin.data.enabled_languages).each(function(i,l){
+							if ( l == WPGlobusAdmin.data.default_language ) {
+								WPGlobusAdmin.qedit_titles[id][l] = WPGlobusAdmin.qedit_titles[id]['source'];
+							} else {
+								WPGlobusAdmin.qedit_titles[id][l] = '';
+							}	
+						});
+					}
+					
                     $('.wpglobus-quick-edit-title').each(function (i, e) {
-                        var l = $(e).data('lang');
+                        var l = $(e).data('language');
                         $(e).attr('id', l + id);
-                        if ('undefined' !== WPGlobusAdmin.qedit_titles[id][l]) {
+                        if (typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined') {
                             $(e).attr('value', WPGlobusAdmin.qedit_titles[id][l].replace(/\\\'/g, '\''));
                         }
                     });
@@ -186,7 +203,7 @@ jQuery(document).ready(function () {
                         save_to = $this.data('save-to'),
                         s = '';
 
-                    if ('parent' === save_to) {
+                    if ('parent' === save_to || 'slug' === save_to) {
                         s = $this.val();
                     } else {
                         $('.wpglobus-taxonomy').each(function (index, element) {
