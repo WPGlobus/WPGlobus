@@ -166,7 +166,7 @@ add_filter( 'get_pages', 'wpg_text_filter', 0 );
  * Set priority to 11 for case ajax-tag-search action from post.php screen
  * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
  */
-//add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
+add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
 
 global $pagenow;
 if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
