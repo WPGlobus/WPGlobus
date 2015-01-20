@@ -189,7 +189,7 @@ var wpglobus_wpseo = function () {
 				else
 					len = '<span class="good">' + len + '</span>';
 
-				jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc-length').html(len);
+				jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc-length' + '_' + language).html(len);
 
 				desc = yst_trimDesc(desc);
 				desc = wpglobus_boldKeywords(desc, false);
@@ -201,6 +201,7 @@ var wpglobus_wpseo = function () {
 				yst_testFocusKw();
 			});
 		} else {
+			jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc-length' + '_' + language).html(wpseoMetaboxL10n.wpseo_meta_desc_length);
 			// Clear the generated description
 			snippet.find('.desc span.content').html('');
 			yst_testFocusKw();
@@ -309,6 +310,11 @@ var wpglobus_wpseo = function () {
 		});
 		jQuery('#wpseosnippet_'+l+' .url').text($e.data('url-'+l));
 		wpglobus_updateSnippet(l);
+		
+		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc' + '_' + l).keyup(function () {
+			wpglobus_updateDesc(jQuery(this).data('language'));
+		});		
+		
 	});
 	//t.addClass('hidden');
 	
