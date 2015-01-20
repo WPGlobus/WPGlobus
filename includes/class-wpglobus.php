@@ -287,7 +287,7 @@ class WPGlobus {
 			/**
 			 * Use span with attributes 'data' for send to js script ids, names elements for which needs to be set new ids, names with language code.
 			 */ ?>
-			<span id="wpglobus-wpseo-attr" data-ids="wpseosnippet,wpseosnippet_title,yoast_wpseo_focuskw,focuskwresults,yoast_wpseo_title,yoast_wpseo_metadesc,yoast_wpseo_metadesc-length,yoast_wpseo_metadesc_notice"
+			<span id="wpglobus-wpseo-attr" data-ids="wpseosnippet,wpseosnippet_title,yoast_wpseo_focuskw,focuskwresults,yoast_wpseo_title,yoast_wpseo_title-length-warning,yoast_wpseo_metadesc,yoast_wpseo_metadesc-length,yoast_wpseo_metadesc_notice"
 				data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc"
 				data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
