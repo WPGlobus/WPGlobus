@@ -305,12 +305,18 @@ var wpglobus_wpseo = function () {
 			if ( wpseoMetaboxL10n.field_prefix + 'metadesc' == id ) {
 				$id.addClass('wpglobus-wpseo_metadesc').text($e.data('metadesc'));
 			}
+			if ( wpseoMetaboxL10n.field_prefix + 'title' == id ) {
+				$id.addClass('wpglobus-wpseo_title').val($e.data('wpseotitle'));
+			}
 			$id.attr('id',id+'_'+l);
 			jQuery('#'+id+'_'+l).attr('data-language',l);
 		});
 		jQuery('#wpseosnippet_'+l+' .url').text($e.data('url-'+l));
 		wpglobus_updateSnippet(l);
 		
+		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'title' + '_' + l).keyup(function () {
+			wpglobus_updateTitle(false, jQuery(this).data('language'));
+		});
 		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc' + '_' + l).keyup(function () {
 			wpglobus_updateDesc(jQuery(this).data('language'));
 		});		
@@ -330,6 +336,19 @@ var wpglobus_wpseo = function () {
 		});
 		jQuery(save_to).val(s);		
 	});
+
+	jQuery('body').on('blur', '.wpglobus-wpseo_title', function(event){
+		var save_to = '#' + wpseoMetaboxL10n.field_prefix + 'title',
+			s = '';
+
+		jQuery('.wpglobus-wpseo_title').each(function (i, e) {
+			var $e = jQuery(e);
+			if ($e.val() !== '') {
+				s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+			}
+		});
+		jQuery(save_to).val(s);		
+	});	
 	
 	wpglobus_qtip();
 	yst_updateSnippet();
