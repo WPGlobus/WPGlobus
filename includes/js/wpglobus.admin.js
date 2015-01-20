@@ -249,10 +249,6 @@ jQuery(document).ready(function () {
                     var id = $(li).attr('id'),
                         item_id = id.replace('menu-item-', '');
 
-                    if ('' !== WPGlobusAdmin.data.items[item_id]['item-title']) {
-                        $('#' + id + ' .menu-item-title').text(WPGlobusAdmin.data.items[item_id]['item-title']);
-                    }
-
                     $.each(['input.edit-menu-item-title', 'input.edit-menu-item-attr-title'], function (input_index, input) {
                         var i = $('#' + id + ' ' + input);
                         var p = $('#' + id + ' ' + input).parents('p');
@@ -286,6 +282,10 @@ jQuery(document).ready(function () {
                     $(li).addClass('wpglobus-menu-item');
                 });
 
+				// Run the item handle title when the navigation label was loaded.
+				// @see wp-admin\js\nav-menu.js:537
+				$('.edit-menu-item-title').trigger('change');
+				
                 $('.wpglobus-menu-item').on('blur', function (event) {
                     var $this = $(this),
                         li,
