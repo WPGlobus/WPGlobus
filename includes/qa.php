@@ -17,6 +17,7 @@ class WPGlobus_QA {
 		self::_test_string_parsing();
 		self::_test_get_pages();
 		self::_test_get_the_terms();
+		self::_test_wp_get_object_terms();
 		self::_common_for_all_languages();
 	}
 
@@ -145,7 +146,8 @@ class WPGlobus_QA {
 
 			<p>
 				<code>get_the_terms( -15, 'category' )</code>
-				=&gt;  <span class="non-existing-post-id"><?php echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
+				=&gt; <span
+					class="non-existing-post-id"><?php echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
 			</p>
 
 			<p>Non-existing term name:</p>
@@ -155,7 +157,34 @@ class WPGlobus_QA {
 				=&gt; <span class="no-such-term"><?php echo get_class( get_the_terms( 97, 'no-such-term' ) ); ?></span>
 			</p>
 		</div>
-		<?php
+	<?php
+
+	}
+
+	/**
+	 * @see wp_get_object_terms();
+	 */
+	private static function _test_wp_get_object_terms() {
+
+		$terms = wp_get_object_terms( [ 95, 97 ], 'category' );
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>wp_get_object_terms()</h2>
+
+			<p>Name and description of the categories that the posts ID=95 and ID=97 belong to:</p>
+
+			<p><code>wp_get_object_terms( [ 95, 97 ], 'category' );</code></p>
+			<?php foreach ( $terms as $term ) : ?>
+				<p id="_test_wp_get_object_terms_<?php echo $term->term_id; ?>">
+					<code>$term->name</code> :
+					<span class="name"><?php echo $term->name; ?></span>
+					<br/>
+					<code>$term->description</code> :
+					<span class="description"><?php echo $term->description; ?></span>
+				</p>
+			<?php endforeach; ?>
+		</div>
+	<?php
 
 	}
 

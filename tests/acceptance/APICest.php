@@ -102,17 +102,36 @@ class APICest {
 
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
-		 * '6' is the term_id (category ID=6)
 		 */
 		$I->assertEquals( "Progress", $I->grabTextFrom(
-			'#test__get_the_terms__' . '6' .
+			'#_test_get_the_terms' .
 			' .test__get_the_terms__name' ),
 			'test__get_the_terms__' );
 
 		$I->assertEquals( "Development Progress", $I->grabTextFrom(
-			'#test__get_the_terms__' . '6' .
+			'#_test_get_the_terms' .
 			' .test__get_the_terms__description' ),
 			'test__get_the_terms__' );
+
+		/**
+		 * @see WPGlobus_QA::_test_wp_get_object_terms()
+		 */
+		$I->assertEquals( "Progress", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '6' . ' .name' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Test Category", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '8' . ' .name' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Development Progress", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '6' . ' .description' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Category for tests", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '8' . ' .description' ),
+			'test_wp_get_object_terms' );
+
 
 		$this->_common_for_all_languages( $I );
 	}
@@ -148,17 +167,35 @@ class APICest {
 
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
-		 * '6' is the term_id (category ID=6)
 		 */
 		$I->assertEquals( "Прогресс", $I->grabTextFrom(
-			'#test__get_the_terms__' . '6' .
+			'#_test_get_the_terms' .
 			' .test__get_the_terms__name' ),
 			'test__get_the_terms__' );
 
 		$I->assertEquals( "Прогресс разработки", $I->grabTextFrom(
-			'#test__get_the_terms__' . '6' .
+			'#_test_get_the_terms' .
 			' .test__get_the_terms__description' ),
 			'test__get_the_terms__' );
+
+		/**
+		 * @see WPGlobus_QA::_test_wp_get_object_terms()
+		 */
+		$I->assertEquals( "Прогресс", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '6' . ' .name' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Тестовая категория", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '8' . ' .name' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Прогресс разработки", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '6' . ' .description' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Категория для тестов", $I->grabTextFrom(
+			'#_test_wp_get_object_terms_' . '8' . ' .description' ),
+			'test_wp_get_object_terms' );
 
 		$this->_common_for_all_languages( $I );
 	}
