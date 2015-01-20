@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * @deprecated 15.01.20 Calls wp_get_object_terms, which is already filtered
+ */
+//add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
+
+/**
+ * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
+ * Frontend: WC breadcrumb
+ */
+add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
+
+/**
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
  * @todo move to admin controller
  */
@@ -150,13 +161,12 @@ add_filter( 'single_term_title', 'wpg_text_filter', 0 );
 
 add_filter( 'get_pages', 'wpg_text_filter', 0 );
 
-add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 
 /**
  * Set priority to 11 for case ajax-tag-search action from post.php screen
  * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
  */
-add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
+//add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
 
 global $pagenow;
 if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
@@ -174,12 +184,6 @@ if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'na
 if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ! is_admin() ) {
 	add_filter( 'option_blogdescription', 'wpg_text_filter', 0 );
 }
-
-/**
- * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
- * Frontend: WC breadcrumb
- */
-add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
 
 
 /**
