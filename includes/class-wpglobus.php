@@ -132,7 +132,7 @@ class WPGlobus {
 				}
 			}
 
-			if ( ! isset($_GET['devmode']) || 'off' == $_GET['devmode'] ) {
+			if ( ! isset($_GET['wpglobus']) || 'on' == $_GET['wpglobus'] ) {
 
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
@@ -388,8 +388,8 @@ class WPGlobus {
 	 */
 	function on_wp_redirect($location) {
 		if ( is_admin() ) { 
-			if ( isset($_POST['_wp_http_referer']) && false !== strpos($_POST['_wp_http_referer'], 'devmode=on') ) {
-				$location .= '&devmode=on';
+			if ( isset($_POST['_wp_http_referer']) && false !== strpos($_POST['_wp_http_referer'], 'wpglobus=off') ) {
+				$location .= '&wpglobus=off';
 			}
 		} else {
 			/**
@@ -414,14 +414,14 @@ class WPGlobus {
 			return;	
 		}			
 		
-		$mode = 'on';
-		if ( isset($_GET['devmode']) && 'on' == $_GET['devmode'] ) {
-			$mode = 'off';
+		$mode = 'off';
+		if ( isset($_GET['wpglobus']) && 'off' == $_GET['wpglobus'] ) {
+			$mode = 'on';
 		}
 		?>
 		<div class="misc-pub-section wpglobus-switch">
-			<span id="wpglobus-raw">&nbsp;&nbsp;WPGlobus: <strong><?php echo strtoupper( $mode ); ?></strong></span>
-			<a href="post.php?post=<?php echo $post->ID; ?>&action=edit&devmode=<?php echo $mode; ?>">Toggle</a>
+			<span id="wpglobus-raw">&nbsp;&nbsp;WPGlobus: <strong><?php echo strtoupper( $mode=='on'?'off':'on' ); ?></strong></span>
+			<a href="post.php?post=<?php echo $post->ID; ?>&action=edit&wpglobus=<?php echo $mode; ?>">Toggle</a>
 		</div>	
 		<?php	
 	}
