@@ -1152,6 +1152,7 @@ class WPGlobus {
 						'drag_drop_upload' => true,
 						'tabfocus_elements' => 'insert-media-button,save-post',
 						'editor_height' => 300,
+						'editor_class' => 'wpglobus-editor',
 						'tinymce' => array(
 							'resize' => true,
 							'wp_autoresize_on' => true,
