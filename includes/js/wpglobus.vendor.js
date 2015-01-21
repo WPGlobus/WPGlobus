@@ -399,10 +399,14 @@ var wpglobus_wpseo = function () {
 				wpglobus_updateDesc(WPGlobusAdmin.data.default_language);
 			});		
 		}
-		jQuery('#parent_id').change(function () {
-			//yst_updateTitle();
-			//yst_updateDesc();
-		});		
+		if ( i == 0 ) {
+			jQuery('body').on('change', '#parent_id', function () {
+				jQuery.each(WPGlobusAdmin.data.enabled_languages, function(i,l){
+					wpglobus_updateTitle(false, l);
+					wpglobus_updateDesc(l);
+				});
+			});		
+		}
 		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc' + '_' + l).keyup(function () {
 			wpglobus_updateDesc(jQuery(this).data('language'));
 		});
