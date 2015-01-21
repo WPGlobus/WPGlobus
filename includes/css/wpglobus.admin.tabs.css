@@ -100,10 +100,16 @@
     font-weight: normal;
 }
 
+
+/**
+ * don't use this rule because of the conflict with autocomplete Focus Keyword in wpseo metabox
+ * @todo remove after testing
+ */ 
+/* 
 .ui-widget-content {
     border: 0;
     background: transparent;
-}
+} */
 
 .ui-widget-content .ui-state-hover {
     border: 0;
