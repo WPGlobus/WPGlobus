@@ -76,13 +76,11 @@ jQuery(document).ready(function () {
                 }
 
 				$(document).ajaxComplete(function(ev, jqxhr, settings){
-				
 					if (typeof settings.data === 'undefined') return;
 					if ( full_id == 0 ) return;
 					if (settings.data.indexOf('action=inline-save-tax&') >= 0) {
 						$('#'+full_id+' a.row-title').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['name']);
 						$('#'+full_id+' .description').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['description']);
-						//console.log(settings);
 					}			
 				});
 				
