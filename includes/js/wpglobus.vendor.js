@@ -398,10 +398,23 @@ var wpglobus_wpseo = function () {
 				wpglobus_updateDesc(WPGlobusAdmin.data.default_language);
 			});		
 		}
+		jQuery('#parent_id').change(function () {
+			//yst_updateTitle();
+			//yst_updateDesc();
+		});		
 		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc' + '_' + l).keyup(function () {
 			wpglobus_updateDesc(jQuery(this).data('language'));
 		});
-		
+		jQuery('#excerpt'+'-'+l).keyup(function () {
+			//var l = jQuery(this).data('language') ? jQuery(this).data('language') : WPGlobusAdmin.data.default_language;
+			//wpglobus_updateDesc(l);
+		});
+		// #content,#content-{lang_code}
+		if ( i == 0 ) {
+			jQuery('.wpglobus-editor').focusout(function () {
+				wpglobus_updateDesc(jQuery(this).data('language'));
+			});		
+		}
 		var focuskwhelptriggered = false;
 		jQuery(document).on('change', '#' + wpseoMetaboxL10n.field_prefix + 'focuskw' + '_' + l, function () {
 			var l = jQuery(this).data('language');
