@@ -317,17 +317,34 @@ class WPGlobus {
 	 * Handle ajax process
  	 */
 	public function on_process_ajax() {
+
 		$order = $_POST['order'];
-		
+
 		$result = '';
 		switch( $order['action'] ) :
 		case 'get_titles':
+			
+			if ( $order['type'] == 'taxonomy' ) {
+				/**
+				 * Remove filter to get raw term description
+				 */
+				remove_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+			}
+			
 			global $WPGlobus_Config;
 			$result = array();
 			foreach( $order['title'] as $id=>$title ) {
-				$result[$id]['source'] = $title['source']; 
+				$result[$id]['source'] = $title['source'];
+				
+				if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
+					$term = get_term( $id, $order['taxonomy'] );
+				}	
+
 				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-					$result[$id][$language] = WPGlobus_Core::text_filter($title['source'], $language, WPGlobus::RETURN_EMPTY);
+					$result[$id][$language]['name'] = WPGlobus_Core::text_filter($title['source'], $language, WPGlobus::RETURN_EMPTY);
+					if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
+						$result[$id][$language]['description'] = WPGlobus_Core::text_filter($term->description, $language, WPGlobus::RETURN_EMPTY);
+					}	
 				}
 			}
 			break;
@@ -627,6 +644,7 @@ class WPGlobus {
 				
 				global $tag;
 				
+				$data['taxonomy']  = empty($_GET['taxonomy']) ? false : $_GET['taxonomy'];
 				$data['tag_id']    = empty($_GET['tag_ID']) ? false : $_GET['tag_ID'];
 				$data['has_items'] = true;
 				
