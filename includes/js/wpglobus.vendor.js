@@ -162,7 +162,7 @@ var wpglobus_wpseo = function () {
 				}
 			}
 
-			yst_testFocusKw();
+			wpglobus_testFocusKw(language);
 		});
 	}
 	
@@ -197,13 +197,13 @@ var wpglobus_wpseo = function () {
 				// Set our new one.
 				snippet.find('.desc span.content').html(desc);
 
-				yst_testFocusKw();
+				wpglobus_testFocusKw(language);
 			});
 		} else {
 			jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc-length' + '_' + language).html(wpseoMetaboxL10n.wpseo_meta_desc_length);
 			// Clear the generated description
 			snippet.find('.desc span.content').html('');
-			yst_testFocusKw();
+			wpglobus_testFocusKw(language);
 			
 			var post_content = '#content';
 			if ( language != WPGlobusAdmin.data.default_language ) {
@@ -232,8 +232,50 @@ var wpglobus_wpseo = function () {
 		}
 	}	
 	
+	function wpglobus_testFocusKw(language) {
+		// Retrieve focus keyword and trim
+		var focuskw = jQuery.trim(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'focuskw' + '_' + language).val());
+		focuskw = yst_escapeFocusKw(focuskw).toLowerCase();
+
+		var post_title = '#title';
+		var post_content = '#content';
+		if ( language != WPGlobusAdmin.data.default_language ) {
+			post_title = '#title_' + language;
+			post_content = '#content-' + language;
+		}
+		
+		if (jQuery('#editable-post-name-full').length) {
+			var postname = jQuery('#editable-post-name-full').text();
+			var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', postname).replace('http://', '');
+		}
+		var p = new RegExp("(^|[ \s\n\r\t\.,'\(\"\+;!?:\-])" + focuskw + "($|[ \s\n\r\t.,'\)\"\+!?:;\-])", 'gim');
+		//remove diacritics of a lower cased focuskw for url matching in foreign lang
+		var focuskwNoDiacritics = removeLowerCaseDiacritics(focuskw);
+		var p2 = new RegExp(focuskwNoDiacritics.replace(/\s+/g, "[-_\\\//]"), 'gim');
+
+		var focuskwresults = jQuery('#focuskwresults'+'_'+language);
+		var metadesc = jQuery('#wpseosnippet'+'_'+language).find('.desc span.content').text();
+
+		if (focuskw != '') {
+			var html = '<p>' + wpseoMetaboxL10n.keyword_header + '</p>';
+			html += '<ul>';
+			if (jQuery(post_title).length) {
+				html += '<li>' + wpseoMetaboxL10n.article_header_text + ptest(jQuery(post_title).val(), p) + '</li>';
+			}
+			html += '<li>' + wpseoMetaboxL10n.page_title_text + ptest(jQuery('#wpseosnippet_title'+'_'+language).text(), p) + '</li>';
+			html += '<li>' + wpseoMetaboxL10n.page_url_text + ptest(url, p2) + '</li>';
+			if (jQuery(post_content).length) {
+				html += '<li>' + wpseoMetaboxL10n.content_text + ptest(jQuery(post_content).val(), p) + '</li>';
+			}
+			html += '<li>' + wpseoMetaboxL10n.meta_description_text + ptest(metadesc, p) + '</li>';
+			html += '</ul>';
+			focuskwresults.html(html);
+		} else {
+			focuskwresults.html('');
+		}
+	}
+	
 	var wpglobus_updateSnippet = function(language) {
-		//console.log('uS');
 		//yst_updateURL();
 		wpglobus_updateTitle(false,language);
 		wpglobus_updateDesc(language);
