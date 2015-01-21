@@ -1,5 +1,6 @@
 /*jslint browser: true*/
 /*global jQuery, console, WPGlobusVendor, wpseoMetaboxL10n, yst_updateSnippet */
+// don't use strict mode like original wordpress-seo\js\wp-seo-metabox.js
 // "use strict";
 var wpglobus_wpseo = function () {
 	if (typeof wpseoMetaboxL10n === "undefined") {
