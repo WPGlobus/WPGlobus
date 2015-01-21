@@ -387,6 +387,17 @@ var wpglobus_wpseo = function () {
 		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'title' + '_' + l).keyup(function () {
 			wpglobus_updateTitle(false, jQuery(this).data('language'));
 		});
+		jQuery('#title'+'_'+l).keyup(function () {
+			var l = jQuery(this).data('language') ? jQuery(this).data('language') : WPGlobusAdmin.data.default_language;
+			wpglobus_updateTitle(false, l);
+			wpglobus_updateDesc(l);
+		});
+		if ( i == 0 ) {
+			jQuery('#title').keyup(function () {
+				wpglobus_updateTitle(false, WPGlobusAdmin.data.default_language);
+				wpglobus_updateDesc(WPGlobusAdmin.data.default_language);
+			});		
+		}
 		jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc' + '_' + l).keyup(function () {
 			wpglobus_updateDesc(jQuery(this).data('language'));
 		});
@@ -402,11 +413,10 @@ var wpglobus_wpseo = function () {
 				focuskwhelpElm.qtip("hide");
 				focuskwhelptriggered = false;
 			}
-
 			wpglobus_updateSnippet();
 		});		
 		
-	});
+	}); // end each .wpglobus-wpseo-general
 	//t.addClass('hidden');
 	
 	jQuery('body').on('blur', '.wpglobus-wpseo_metadesc', function(event){
