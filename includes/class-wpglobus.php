@@ -338,6 +338,9 @@ class WPGlobus {
 				
 				if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
 					$term = get_term( $id, $order['taxonomy'] );
+					if ( is_wp_error($term) ) {
+						$order['taxonomy'] = false;
+					}
 				}	
 
 				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
