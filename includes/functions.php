@@ -43,7 +43,7 @@ function wpglobus_filter_get_terms( $terms ) {
 		 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
 		 * @see quick_edit() in wpglobus\includes\js\wpglobus.admin.js for working with taxonomy name and description
 		 */	
-		return;
+		return $terms;
 	}	
 
 	if ( is_array( $terms ) ) {
