@@ -140,6 +140,14 @@ function on_home_url( $url ) {
 if ( defined( 'WPSEO_VERSION' ) ) {
 	add_filter( 'wpseo_title', 'wpg_text_filter', 0 );
 	add_filter( 'wpseo_metadesc', 'wpg_text_filter', 0 );
+
+	/**
+	 * For translate wpseo meta 'Focus KW' at edit.php page
+	 *
+	 * @todo need to discuss this filter
+	 */
+	add_filter( 'esc_html', 'wpg_text_filter', 0 );
+	
 }
 
 /**
