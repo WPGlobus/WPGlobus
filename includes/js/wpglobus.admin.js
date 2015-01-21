@@ -103,12 +103,7 @@ jQuery(document).ready(function () {
                 order['type'] 		 = type;
                 order['taxonomy'] 	 = typeof WPGlobusAdmin.data.taxonomy === 'undefined' ? false : WPGlobusAdmin.data.taxonomy;
                 order['title'] 		 = title;
-                $.ajax({
-                    type: 'POST',
-                    url: WPGlobusAdmin.ajaxurl,
-                    data: {action: WPGlobusAdmin.process_ajax, order: order},
-                    dataType: 'json'
-                })
+                $.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json'})
                     .done(function (result) {
                         WPGlobusAdmin.qedit_titles = result;
                     })
