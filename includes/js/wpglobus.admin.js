@@ -116,8 +116,10 @@ jQuery(document).ready(function () {
                     var s = '';
                     $('.wpglobus-quick-edit-title').each(function (index, e) {
                         var $e = $(e);
+						var l = $e.data('language');
                         if ($e.val() !== '') {
-                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+							WPGlobusAdmin.qedit_titles[id][l]['name'] = $e.val();
                         }
                     });
                     $('input.ptitle').eq(0).val(s);
