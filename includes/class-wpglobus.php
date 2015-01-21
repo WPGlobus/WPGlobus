@@ -1368,7 +1368,12 @@ class WPGlobus {
 				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
 					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
 						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-						<input type="text" name="post_title_<?php echo $language; ?>" size="30" value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>" id="title_<?php echo $language;?>" class="title_wpglobus" autocomplete="off" />
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30" 
+							value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>"
+							id="title_<?php echo $language;?>" 
+							class="title_wpglobus"
+							data-language="<?php echo $language; ?>"	
+							autocomplete="off" />
 					</div> <!-- #titlewrap -->
 					<div class="inside">
 						<div id="edit-slug-box-<?php echo $language; ?>" class="wpglobus-edit-slug-box hide-if-no-js">
