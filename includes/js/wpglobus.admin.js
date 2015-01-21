@@ -67,29 +67,25 @@ jQuery(document).ready(function () {
                 }
             },
             quick_edit: function (type) {
-                var id = 0;
+                var full_id = 0, id = 0;
                 if (typeof WPGlobusAdmin.data.has_items === 'undefined') {
                     return;
                 }
                 if (!WPGlobusAdmin.data.has_items) {
                     return;
                 }
-                $.ajaxSetup({
-                    beforeSend: function (jqXHR, PlainObject) {
-                        if (typeof PlainObject.data === 'undefined') {
-                            return;
-                        }
-                        if (PlainObject.data.indexOf('action=inline-save') >= 0) {
-                            $(WPGlobusAdmin.data.enabled_languages).each(function (i, l) {
-                                if ( id != 0 && 'undefined' !== WPGlobusAdmin.qedit_titles[id][l]) {
-                                    WPGlobusAdmin.qedit_titles[id][l] = typeof $('#' + l + id) === 'undefined' ? '' : $('#' + l + id).val();
-                                }
-                            });
-							
-                        }
-                    }
-                });
 
+				$(document).ajaxComplete(function(ev, jqxhr, settings){
+				
+					if (typeof settings.data === 'undefined') return;
+					if ( full_id == 0 ) return;
+					if (settings.data.indexOf('action=inline-save-tax&') >= 0) {
+						$('#'+full_id+' a.row-title').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['name']);
+						$('#'+full_id+' .description').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['description']);
+						//console.log(settings);
+					}			
+				});
+				
                 var title = {};
                 $('#the-list tr').each(function (i, e) {
                     var $e = $(e);
@@ -105,9 +101,10 @@ jQuery(document).ready(function () {
                 });
 
                 var order = {};
-                order['action'] = 'get_titles';
-                order['type'] = type;
-                order['title'] = title;
+                order['action'] 	 = 'get_titles';
+                order['type'] 		 = type;
+                order['taxonomy'] 	 = typeof WPGlobusAdmin.data.taxonomy === 'undefined' ? false : WPGlobusAdmin.data.taxonomy;
+                order['title'] 		 = title;
                 $.ajax({
                     type: 'POST',
                     url: WPGlobusAdmin.ajaxurl,
@@ -135,13 +132,11 @@ jQuery(document).ready(function () {
 
                 $('#the-list').on('click', 'a.editinline', function (event) {
                     var t = $(this);
-                    var fid, id;
-                    
-					fid = t.parents('tr').attr('id');
+					full_id = t.parents('tr').attr('id');
                     if ('post' === type) {
-                        id = fid.replace('post-', '');
+                        id = full_id.replace('post-', '');
                     } else if ('taxonomy' === type) {
-                        id = fid.replace('tag-', '');
+                        id = full_id.replace('tag-', '');
                     } else {
 						return;
 					}
@@ -152,13 +147,15 @@ jQuery(document).ready(function () {
 
 					if ( typeof WPGlobusAdmin.qedit_titles[id] === 'undefined' ) {
 						WPGlobusAdmin.qedit_titles[id] = {};
-						WPGlobusAdmin.qedit_titles[id]['source'] = $('#'+fid+' .name a.row-title').text();
+						WPGlobusAdmin.qedit_titles[id]['source'] = $('#'+full_id+' .name a.row-title').text();
 						$(WPGlobusAdmin.data.enabled_languages).each(function(i,l){
+							WPGlobusAdmin.qedit_titles[id][l] = {};
 							if ( l == WPGlobusAdmin.data.default_language ) {
-								WPGlobusAdmin.qedit_titles[id][l] = WPGlobusAdmin.qedit_titles[id]['source'];
+								WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id]['source'];
 							} else {
-								WPGlobusAdmin.qedit_titles[id][l] = '';
-							}	
+								WPGlobusAdmin.qedit_titles[id][l]['name'] = '';
+							}
+							WPGlobusAdmin.qedit_titles[id][l]['description'] = '';							
 						});
 					}
 					
@@ -166,7 +163,7 @@ jQuery(document).ready(function () {
                         var l = $(e).data('language');
                         $(e).attr('id', l + id);
                         if (typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined') {
-                            $(e).attr('value', WPGlobusAdmin.qedit_titles[id][l].replace(/\\\'/g, '\''));
+                            $(e).attr('value', WPGlobusAdmin.qedit_titles[id][l]['name'].replace(/\\\'/g, '\''));
                         }
                     });
                 });
