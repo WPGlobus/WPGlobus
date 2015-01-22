@@ -38,13 +38,21 @@ function wpg_text_title_filter( $title ) {
  */
 function wpglobus_filter_get_terms( $terms ) {
 
-	if ( isset($_POST) && isset($_POST['action']) && 'inline-save-tax' == $_POST['action'] ) {
+	/**
+	 * @todo This condition applies to get_term filter only
+	 */
+	if ( isset( $_POST ) && isset( $_POST['action'] ) && 'inline-save-tax' == $_POST['action'] ) {
 		/**
 		 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
 		 * @see quick_edit() in wpglobus\includes\js\wpglobus.admin.js for working with taxonomy name and description
-		 */	
+		 *                   wp_current_filter contains
+		 *                   0=wp_ajax_inline-save-tax
+		 *                   1=get_term
+		 * @see wp_ajax_inline_save_tax()
+		 * calling @see get_term()
+		 */
 		return $terms;
-	}	
+	}
 
 	if ( is_array( $terms ) ) {
 
@@ -143,11 +151,10 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 
 	/**
 	 * For translate wpseo meta 'Focus KW' at edit.php page
-	 *
 	 * @todo need to discuss this filter
 	 */
 	add_filter( 'esc_html', 'wpg_text_filter', 0 );
-	
+
 }
 
 /**
@@ -188,7 +195,6 @@ global $pagenow;
 if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
 	add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
 }
-
 
 
 /**
