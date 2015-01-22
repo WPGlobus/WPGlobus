@@ -221,6 +221,30 @@ class WPGlobus_Core {
 
 	}
 
+	/**
+	 * Translate a term (category, post_tag, etc.)
+	 * Term can be an object (default for the @see wp_get_object_terms() filter)
+	 * or a string (for example, when wp_get_object_terms is called with the 'fields'=>'names' argument)
+	 *
+	 * @param string|object $term
+	 * @param string        $language
+	 */
+	public static function translate_term( &$term, $language = '' ) {
+		if ( is_object( $term ) ) {
+			if ( ! empty( $term->name ) ) {
+				$term->name = self::text_filter( $term->name, $language );
+			}
+			if ( ! empty( $term->description ) ) {
+				$term->description = self::text_filter( $term->description, $language );
+			}
+		} else {
+			if ( ! empty( $term ) ) {
+				$term = self::text_filter( $term, $language );
+			}
+		}
+
+	}
+
 
 } // class
 

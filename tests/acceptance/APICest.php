@@ -132,6 +132,13 @@ class APICest {
 			'#_test_wp_get_object_terms_' . '8' . ' .description' ),
 			'test_wp_get_object_terms' );
 
+		$I->assertEquals( "Progress, Test Category", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .fields_names' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Invalid taxonomy", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .no_such_term' ),
+			'test_wp_get_object_terms' );
 
 		$this->_common_for_all_languages( $I );
 	}
@@ -195,6 +202,14 @@ class APICest {
 
 		$I->assertEquals( "Категория для тестов", $I->grabTextFrom(
 			'#_test_wp_get_object_terms_' . '8' . ' .description' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Прогресс, Тестовая категория", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .fields_names' ),
+			'test_wp_get_object_terms' );
+
+		$I->assertEquals( "Неверная таксономия", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .no_such_term' ),
 			'test_wp_get_object_terms' );
 
 		$this->_common_for_all_languages( $I );

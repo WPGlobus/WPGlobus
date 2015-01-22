@@ -8,6 +8,9 @@ require_once __DIR__ . '/../includes/class-wpglobus-core.php';
  */
 class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 
+	/**
+	 * @covers WPGlobus_Core::text_filter
+	 */
 	public function test_text_filter() {
 
 		$this->assertEquals( WPGlobus::RETURN_EMPTY, 'empty', 'WPGlobus::RETURN_EMPTY' );
@@ -38,6 +41,9 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 
 	}
 
+	/**
+	 * @covers WPGlobus_Core::has_translations
+	 */
 	public function test_has_translations() {
 
 		/** @var string[] $positives */
@@ -72,6 +78,9 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 
 	}
 
+	/**
+	 * @covers WPGlobus_Core::translate_wp_post
+	 */
 	public function test_translate_wp_post() {
 
 		/**
@@ -110,11 +119,10 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		unset( $post );
 
 
-
 		/**
 		 * Translate to a language other than the current one
 		 */
-		$post = $this->getMock( 'WP_Post' );
+		$post             = $this->getMock( 'WP_Post' );
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'ru' );
 		$this->assertEquals( 'post_title RU', $post->post_title, 'post_title' );
@@ -123,8 +131,8 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		/**
 		 * Translate to a non-existing language - return in default language
 		 */
-		$post = $this->getMock( 'WP_Post' );
-		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
+		$post               = $this->getMock( 'WP_Post' );
+		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		$post->post_content = '{:en}post_content EN{:}{:xx}post_content XX{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'xx' );
 		$this->assertEquals( 'post_title EN', $post->post_title, 'post_title' );
@@ -135,7 +143,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		 * Repeated attempt to translate has no effect, when called with no parameters,
 		 * because we pass the post object by reference
 		 */
-		$post = $this->getMock( 'WP_Post' );
+		$post             = $this->getMock( 'WP_Post' );
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'en' );
 		$this->assertEquals( 'post_title EN', $post->post_title, 'post_title' );
@@ -145,6 +153,40 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 
 	}
 
+	/**
+	 * @covers WPGlobus_Core::translate_term
+	 */
+	public function test_translate_term() {
+
+		/**
+		 * Term as a string
+		 */
+		$term = '{:en}term EN{:}{:ru}term RU{:}';
+		WPGlobus_Core::translate_term( $term, 'en' );
+		$this->assertEquals( 'term EN', $term, 'term' );
+
+		$term = '{:en}term EN{:}{:ru}term RU{:}';
+		WPGlobus_Core::translate_term( $term, 'ru' );
+		$this->assertEquals( 'term RU', $term, 'term' );
+
+		/**
+		 * Term as an object
+		 */
+		$term_object = new StdClass;
+
+		$term_object->name        = '{:en}term name EN{:}{:ru}term name RU{:}';
+		$term_object->description = '{:en}term description EN{:}{:ru}term description RU{:}';
+		WPGlobus_Core::translate_term( $term_object, 'en' );
+		$this->assertEquals( 'term name EN', $term_object->name, '$term_object->name' );
+		$this->assertEquals( 'term description EN', $term_object->description, '$term_object->description' );
+
+		$term_object->name        = '{:en}term name EN{:}{:ru}term name RU{:}';
+		$term_object->description = '{:en}term description EN{:}{:ru}term description RU{:}';
+		WPGlobus_Core::translate_term( $term_object, 'ru' );
+		$this->assertEquals( 'term name RU', $term_object->name, '$term_object->name' );
+		$this->assertEquals( 'term description RU', $term_object->description, '$term_object->description' );
+
+	}
 
 } // class
 

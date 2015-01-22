@@ -183,6 +183,24 @@ class WPGlobus_QA {
 					<span class="description"><?php echo $term->description; ?></span>
 				</p>
 			<?php endforeach; ?>
+
+			<p>
+				<code>wp_get_object_terms( [ 95, 97 ], 'category', ['fields'=>'names'] );</code>
+				<br>=&gt;
+				<span class="fields_names"><?php
+				echo esc_html( join( ', ', wp_get_object_terms( [ 95, 97 ], 'category',
+					[ 'fields' => 'names' ] ) ) );
+					?></span>
+			</p>
+
+			<p>
+				<code>wp_get_object_terms( [ 97 ], 'no-such-term' );</code>
+				<br>=&gt;
+				<span class="no_such_term"><?php
+					echo wp_get_object_terms( [ 97 ], 'no-such-term' )->get_error_message();
+					?></span>
+			</p>
+
 		</div>
 	<?php
 

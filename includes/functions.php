@@ -7,20 +7,50 @@
 
 /**
  * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
- * Frontend: WC breadcrumb
+ * @scope admin Edit post: see "Tags" metabox
+ *        Does NOT affect the "Categories" metabox
+ * @scope front WC breadcrumb
  */
-add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
+add_filter( 'wp_get_object_terms', 'wpglobus_filter__wp_get_object_terms', 0 );
+
+/**
+ * Filter @see wp_get_object_terms()
+ * @scope admin
+ * @scope front
+ *
+ * @param string[]|object[] $terms
+ *
+ * @return array
+ */
+function wpglobus_filter__wp_get_object_terms( Array $terms ) {
+	/**
+	 * @internal
+	 * Do not need to check for is_wp_error($terms),
+	 * because the WP_Error is returned by wp_get_object_terms() before applying filter.
+	 * Do not need to check for empty($terms) because foreach won't loop.
+	 */
+
+	/** @global WPGlobus_Config $WPGlobus_Config */
+	global $WPGlobus_Config;
+
+	foreach ( $terms as &$term ) {
+		WPGlobus_Core::translate_term( $term, $WPGlobus_Config->language );
+	}
+
+	reset( $terms );
+
+	return $terms;
+}
 
 /**
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
  * @todo move to admin controller
  */
-add_filter( 'editable_slug', 'wpg_text_title_filter', 0);
+add_filter( 'editable_slug', 'wpg_text_title_filter', 0 );
 
 /**
  * Set editable piece of permalink in default language
- * @see get_sample_permalink()
- *
+ * @see  get_sample_permalink()
  * @todo Examine option when user has 2 languages at front-end (ru, kz) but use 'en' for permalink
  *
  * @param $uri
@@ -29,6 +59,7 @@ add_filter( 'editable_slug', 'wpg_text_title_filter', 0);
  */
 function wpg_text_title_filter( $uri ) {
 	global $WPGlobus_Config;
+
 	return __wpg_text_filter( $uri, $WPGlobus_Config->default_language );
 }
 
