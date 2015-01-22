@@ -15,17 +15,21 @@ add_filter( 'wp_get_object_terms', 'wpglobus_filter_get_terms', 0 );
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
  * @todo move to admin controller
  */
-add_filter( 'sanitize_title', 'wpg_text_title_filter', 0 );
+add_filter( 'editable_slug', 'wpg_text_title_filter', 0);
 
 /**
- * @param $title
+ * Set editable piece of permalink in default language
+ * @see get_sample_permalink()
+ *
+ * @todo Examine option when user has 2 languages at front-end (ru, kz) but use 'en' for permalink
+ *
+ * @param $uri
  *
  * @return string
  */
-function wpg_text_title_filter( $title ) {
+function wpg_text_title_filter( $uri ) {
 	global $WPGlobus_Config;
-
-	return __wpg_text_filter( $title, $WPGlobus_Config->default_language );
+	return __wpg_text_filter( $uri, $WPGlobus_Config->default_language );
 }
 
 /**
