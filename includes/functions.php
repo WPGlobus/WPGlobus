@@ -237,7 +237,9 @@ add_filter( 'get_pages', 'wpg_text_filter', 0 );
 
 /**
  * Set priority to 11 for case ajax-tag-search action from post.php screen
- * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
+ * @see wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
+ * Note: this filter is temporarily switched off in @see WPGlobus::_get_terms
+ * @todo Replace magic number 11 with a constant
  */
 add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
 

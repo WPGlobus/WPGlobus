@@ -327,6 +327,7 @@ class WPGlobus {
 			if ( $order['type'] == 'taxonomy' ) {
 				/**
 				 * Remove filter to get raw term description
+				 * @todo Need to restore?
 				 */
 				remove_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
 			}
@@ -601,8 +602,9 @@ class WPGlobus {
 				foreach( $taxonomies as $taxonomy ) {
 					$taxonomy_data = get_taxonomy($taxonomy);
 					if ( ! $taxonomy_data->hierarchical ) {
-						/*
+						/**
 						 * This is tag
+						 * @todo Theorerically, it's not "tag". Can be any custom taxonomy. Need to check.
 						 */	
 						$tags[] = $taxonomy_data->name; 
 					}	
@@ -1430,6 +1432,7 @@ class WPGlobus {
 
 	/**
 	 * Get raw term names for $taxonomy
+	 * @todo This method should be somewhere else
 	 * 
 	 * @param string $taxonomy
 	 * @return array
