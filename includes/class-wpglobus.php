@@ -597,6 +597,22 @@ class WPGlobus {
 					$data['modify_excerpt'] = false;
 				}
 				
+				$taxonomies = get_object_taxonomies($post->post_type);
+				foreach( $taxonomies as $taxonomy ) {
+					$taxonomy_data = get_taxonomy($taxonomy);
+					if ( ! $taxonomy_data->hierarchical ) {
+						/*
+						 * This is tag
+						 */	
+						$tags[] = $taxonomy_data->name; 
+					}	
+				}
+				$data['tag'] = array();
+				if ( !empty($tags) ) {
+					foreach( $tags as $tag ) {
+						$data['tag'][$tag] = $this->_get_terms($tag);
+					}
+				}	
 			} else if ( 'nav-menus.php' == $page ) {
 				
 				$page_action = 'menu-edit';
@@ -1411,6 +1427,36 @@ class WPGlobus {
 		}
 		return false;	
 	}
+
+	/**
+	 * Get raw term names for $taxonomy
+	 * 
+	 * @param string $taxonomy
+	 * @return array
+	 */
+	function _get_terms( $taxonomy = '' ) {
+		
+		if ( empty($taxonomy) ) {
+			return array();
+		}	
+		global $WPGlobus_Config;
+		
+		remove_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
+
+		$terms = get_terms( $taxonomy, array('hide_empty'=>false) );
+
+		add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
+		
+		$term_names = array();
+		
+		if ( !empty($terms) ) {
+			foreach( $terms as $term ) {
+				$term_names[WPGlobus_Core::text_filter($term->name, $WPGlobus_Config->default_language)] = $term->name;
+			}
+		}	
+		return $term_names;
+
+	}	
 }
 
 # --- EOF
