@@ -30,13 +30,18 @@ function wpglobus_filter__wp_get_object_terms( Array $terms ) {
 	 * Do not need to check for empty($terms) because foreach won't loop.
 	 */
 
+	/**
+	 * Don't filter tag names for save or publish post
+	 * @todo Check this before add_filter and not here
+	 * @todo Describe exactly how to check this visually, and is possible - write the acceptance test
+	 * @todo Combine if()s
+	 * @todo replace isset with !empty
+	 * @todo pagenow can be mixed (?) - we need a function instead of using '===', to avoid notices
+	 */
 	global $pagenow;
-	if ( is_admin() && 'post.php' == $pagenow ) {
-		if ( isset($_POST['save']) || isset($_POST['publish']) )  {
-			/**
-			 * Don't filter tag names for save or publish post
-			 */
-			return $terms;	
+	if ( is_admin() && 'post.php' === $pagenow ) {
+		if ( isset( $_POST['save'] ) || isset( $_POST['publish'] ) ) {
+			return $terms;
 		}
 	}
 	
