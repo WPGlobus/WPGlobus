@@ -607,10 +607,12 @@ class WPGlobus {
 						$tags[] = $taxonomy_data->name; 
 					}	
 				}
+				$data['tags'] = array();
 				$data['tag'] = array();
 				if ( !empty($tags) ) {
 					foreach( $tags as $tag ) {
-						$data['tag'][$tag] = $this->_get_terms($tag);
+						$data['tagsdiv'][] 	= 'tagsdiv-' . $tag;
+						$data['tag'][$tag]  = $this->_get_terms($tag);
 					}
 				}	
 			} else if ( 'nav-menus.php' == $page ) {
