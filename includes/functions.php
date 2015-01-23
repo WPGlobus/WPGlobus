@@ -30,6 +30,16 @@ function wpglobus_filter__wp_get_object_terms( Array $terms ) {
 	 * Do not need to check for empty($terms) because foreach won't loop.
 	 */
 
+	global $pagenow;
+	if ( is_admin() && 'post.php' == $pagenow ) {
+		if ( isset($_POST['save']) || isset($_POST['publish']) )  {
+			/**
+			 * Don't filter tag names for save or publish post
+			 */
+			return $terms;	
+		}
+	}
+	
 	/** @global WPGlobus_Config $WPGlobus_Config */
 	global $WPGlobus_Config;
 
