@@ -78,7 +78,7 @@ function wpglobus_filter__wp_get_object_terms( Array $terms ) {
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
  * @todo move to admin controller
  */
-add_filter( 'editable_slug', 'wpg_text_title_filter', 0 );
+//add_filter( 'editable_slug', 'wpg_text_title_filter', 0 );
 
 /**
  * Set editable piece of permalink in default language
@@ -89,11 +89,29 @@ add_filter( 'editable_slug', 'wpg_text_title_filter', 0 );
  *
  * @return string
  */
-function wpg_text_title_filter( $uri ) {
-	global $WPGlobus_Config;
+//function wpg_text_title_filter( $uri ) {
+//	global $WPGlobus_Config;
+//
+//	return __wpg_text_filter( $uri, $WPGlobus_Config->default_language );
+//}
 
-	return __wpg_text_filter( $uri, $WPGlobus_Config->default_language );
-}
+/**
+ * @todo Add this filter only on is_admin(), post.php action=edit (not sure, need to check AJAX, too)
+ * @todo If post_name is already bad in the database, it will be used in the permalink generation (when draft converted to publish)
+ * @todo Check what's going on in
+ * @see  WPSEO_Metabox::localize_script
+ * @todo QA in general - need to test all ways to create / edit / change status / add new language
+ * @todo (alex wrote) Examine option when user has 2 languages at front-end (ru, kz) but use 'en' for permalink
+ */
+add_filter( 'sanitize_title', function ( $title ) {
+	$callers = debug_backtrace();
+	if ( isset( $callers[4]['function'] ) && $callers[4]['function'] === 'get_sample_permalink' ) {
+		global $WPGlobus_Config;
+		$title = WPGlobus_Core::text_filter( $title, $WPGlobus_Config->default_language );
+	}
+
+	return $title;
+}, 0 );
 
 /**
  * This translates all taxonomy names, including categories
