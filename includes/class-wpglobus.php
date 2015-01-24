@@ -597,25 +597,11 @@ class WPGlobus {
 				if ( isset($this->vendors_scripts['WOOCOMMERCE']) && $this->vendors_scripts['WOOCOMMERCE'] && 'product' == $post->post_type ) {
 					$data['modify_excerpt'] = false;
 				}
-				
-				$taxonomies = get_object_taxonomies($post->post_type);
-				foreach( $taxonomies as $taxonomy ) {
-					$taxonomy_data = get_taxonomy($taxonomy);
-					if ( ! $taxonomy_data->hierarchical ) {
-						/**
-						 * This is tag
-						 * @todo Theorerically, it's not "tag". Can be any custom taxonomy. Need to check.
-						 *
-						 * @todo 
-						 * Practically in WP: all non-hierarchical taxonomy is tags. 
-						 * In this context I use term $tags for saving non-hierarchical taxonomies only
-						 * for further work with them when editing posts
-						 */	
-						$tags[] = $taxonomy_data->name; 
-					}	
-				}
+
 				$data['tagsdiv'] = array();
 				$data['tag'] = array();
+				$tags = $this->_get_taxonomies($post->post_type, 'non-hierarchical');
+
 				if ( !empty($tags) ) {
 					foreach( $tags as $tag ) {
 						$data['tagsdiv'][] 	= 'tagsdiv-' . $tag;
@@ -773,7 +759,44 @@ class WPGlobus {
 			
 		}
 	}
-
+	
+	/**
+	 * Get taxonomies for post type
+	 * 
+	 * @param string $post_type
+	 * @param string $type hierarchical, non-hierarchical or all taxonomies
+	 * @return array
+	 */
+	function _get_taxonomies($post_type, $type = 'all') {
+		if ( empty($post_type) ) {
+			return array();
+		}	
+		$taxs = array();
+		$taxonomies = get_object_taxonomies($post_type);
+		foreach( $taxonomies as $taxonomy ) {
+			$taxonomy_data = get_taxonomy($taxonomy);
+			if ( 'all' == $type ) {
+				$taxs[] = $taxonomy_data->name; 
+				continue;	
+			}	
+			if ( 'non-hierarchical' == $type && ! $taxonomy_data->hierarchical ) {
+				/**
+				 * This is tag
+				 * @todo Theorerically, it's not "tag". Can be any custom taxonomy. Need to check.
+				 *
+				 * @todo 
+				 * Practically in WP: all non-hierarchical taxonomy is tags. 
+				 * In this context I use term $tags for saving non-hierarchical taxonomies only
+				 * for further work with them when editing posts
+				 */	
+				$taxs[] = $taxonomy_data->name; 
+			} elseif ( 'hierarchical' == $type && $taxonomy_data->hierarchical ) {
+				$taxs[] = $taxonomy_data->name; 
+			}
+		}
+		return $taxs;
+	}	
+				
 	/**
 	 * Get template for quick edit at edit-tags.php, edit.php screens
 	 *
@@ -1426,7 +1449,7 @@ class WPGlobus {
 	/**
 	 * Check for disabled post_types, taxonomies
 	 *
-	 * @param string @entity
+	 * @param string $entity
 	 * @return boolean
 	 */
 	function disabled_entity( $entity = '' ) {
