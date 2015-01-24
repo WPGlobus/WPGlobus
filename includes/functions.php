@@ -55,6 +55,12 @@ function wpglobus_filter__wp_get_object_terms( Array $terms ) {
 			return $terms;
 		}
 	}
+	/**
+	 * Don't filter tag names for inline-save ajax action from edit.php page
+	 */	
+	if ( 'admin-ajax.php' == $pagenow && !empty($_POST['action']) && 'inline-save' == $_POST['action'] ) {
+		return $terms;
+	}	
 	
 	/** @global WPGlobus_Config $WPGlobus_Config */
 	global $WPGlobus_Config;
