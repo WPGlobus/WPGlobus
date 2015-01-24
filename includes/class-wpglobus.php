@@ -697,6 +697,9 @@ class WPGlobus {
 						$data['i18n'][$lang]['description'] = WPGlobus_Core::text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
 					}
 				} else {
+					/**
+					 * Get template for quick edit taxonomy name at edit-tags.php page
+					 */
 					$data['template'] = $this->_get_quickedit_template(); 
 				}				
 				
@@ -706,6 +709,9 @@ class WPGlobus {
 				
 				global $posts;
 				$data['has_items'] = empty($posts) ? false : true;
+				/**
+				 * Get template for quick edit post title at edit.php page
+				 */
 				$data['template'] = $this->_get_quickedit_template();
 
 			}	
