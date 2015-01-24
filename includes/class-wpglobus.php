@@ -691,7 +691,8 @@ class WPGlobus {
 					/**
 					 * Get template for quick edit taxonomy name at edit-tags.php page
 					 */
-					$data['template'] = $this->_get_quickedit_template(); 
+					$data['template'] = $this->_get_quickedit_template();
+					
 				}				
 				
 			} else if ( 'edit.php' == $page ) {
@@ -708,6 +709,19 @@ class WPGlobus {
 				 * Get template for quick edit post title at edit.php page
 				 */
 				$data['template'] = $this->_get_quickedit_template();
+				
+				$tags = $this->_get_taxonomies($post_type, 'non-hierarchical');
+				if ( !empty($tags) ) {
+					foreach( $tags as $tag ) {
+						$terms = $this->_get_terms($tag);
+						if ( !empty($terms) ) {
+							$data['tags'][] 		= $tag;
+							$data['names'][$tag] 	= 'tax_input[' . $tag . ']';
+							$data['tag'][$tag]  	= $terms;
+							$data['value'][$tag]	= ''; // just init
+						}	
+					}
+				}				
 
 			}	
 			
