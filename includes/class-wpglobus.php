@@ -609,7 +609,7 @@ class WPGlobus {
 						$tags[] = $taxonomy_data->name; 
 					}	
 				}
-				$data['tags'] = array();
+				$data['tagsdiv'] = array();
 				$data['tag'] = array();
 				if ( !empty($tags) ) {
 					foreach( $tags as $tag ) {
