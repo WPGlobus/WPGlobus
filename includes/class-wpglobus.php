@@ -605,6 +605,11 @@ class WPGlobus {
 						/**
 						 * This is tag
 						 * @todo Theorerically, it's not "tag". Can be any custom taxonomy. Need to check.
+						 *
+						 * @todo 
+						 * Practically in WP: all non-hierarchical taxonomy is tags. 
+						 * In this context I use term $tags for saving non-hierarchical taxonomies only
+						 * for further work with them when editing posts
 						 */	
 						$tags[] = $taxonomy_data->name; 
 					}	
@@ -706,6 +711,10 @@ class WPGlobus {
 			} else if ( 'edit.php' == $page ) {
 			
 				$page_action = 'edit.php';
+				$post_type = 'post';
+				if ( !empty($_GET['post_type']) ) {
+					$post_type = $_GET['post_type'];
+				}
 				
 				global $posts;
 				$data['has_items'] = empty($posts) ? false : true;
