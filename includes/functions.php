@@ -11,7 +11,18 @@
  *        Does NOT affect the "Categories" metabox
  * @scope front WC breadcrumb
  */
-add_filter( 'wp_get_object_terms', 'wpglobus_filter__wp_get_object_terms', 0 );
+if ( is_admin() && !empty($_GET['wpglobus']) && 'off' == $_GET['wpglobus'] ) {
+		/** 
+		 * nothing to do 
+		 * 
+		 * @todo в том файле где этот фильтр будет размещён, нужно предусмотреть его отключение
+		 * для $_GET['wpglobus'] == 'off'
+		 * see class-wpglobus.php:135,
+		 * возможно ещё какие-то фильтры попадают под этот случай
+		 */
+} else { 
+	add_filter( 'wp_get_object_terms', 'wpglobus_filter__wp_get_object_terms', 0 );
+}
 
 /**
  * Filter @see wp_get_object_terms()
