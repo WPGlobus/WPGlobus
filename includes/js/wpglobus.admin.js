@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global jQuery, console, WPGlobusAdmin */
+/*global jQuery, console, WPGlobusAdmin, inlineEditPost */
 jQuery(document).ready(function () {
     "use strict";
     window.globusAdminApp = (function (globusAdminApp, $) {
@@ -115,7 +115,7 @@ jQuery(document).ready(function () {
                     })
                     .always(function (jqXHR, status) {
                     });
-
+				
                 $('body').on('blur', '.wpglobus-quick-edit-title', function (event) {
                     var s = '';
                     $('.wpglobus-quick-edit-title').each(function (index, e) {
@@ -129,8 +129,42 @@ jQuery(document).ready(function () {
                     $('input.ptitle').eq(0).val(s);
                 });
 
+                $('a.save').hover(function (event) {
+					$('a.save').unbind('click');
+					
+					$('a.save').click(function (event) {
+						$.ajaxSetup({async:false});
+
+						var p = $(this).parents('tr');
+						var id = p.attr('id').replace('edit-','');
+						var t,v,new_tags;
+						
+						$.each( WPGlobusAdmin.data.tags, function(i,tag){
+							t = p.find("textarea[name='" + WPGlobusAdmin.data.names[tag] + "']");
+							WPGlobusAdmin.data.value[tag] = t.val();
+							v = WPGlobusAdmin.data.value[tag].split(',');
+							new_tags = [];
+							for(var i=0; i<v.length; i++) {
+								v[i] = v[i].trim(' ');
+								if ( v[i] != '' ) {
+									if ( typeof WPGlobusAdmin.data.tag[tag][v[i]] === 'undefined' ) {									
+										new_tags[i] = v[i];
+									} else {
+										new_tags[i] = WPGlobusAdmin.data.tag[tag][v[i]];
+									}
+								}	
+							}
+							t.val(new_tags.join(', '));
+						});
+						
+						inlineEditPost.save(id);
+						$.ajaxSetup({async:true});
+						
+					});					
+				});				
+				
                 $('#the-list').on('click', 'a.editinline', function (event) {
-                    var t = $(this);
+					var t = $(this);
 					full_id = t.parents('tr').attr('id');
                     if ('post' === type) {
                         id = full_id.replace('post-', '');
@@ -139,6 +173,15 @@ jQuery(document).ready(function () {
                     } else {
 						return;
 					}
+					
+					if ('post' === type) {
+						$.each( WPGlobusAdmin.data.tags, function(i,tag){
+							if ( WPGlobusAdmin.data.value[tag] != '' ) {
+								$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(WPGlobusAdmin.data.value[tag]);
+							}	
+						});	
+					}
+					
                     var e = $('#edit-' + id + ' input.ptitle').eq(0);
                     var p = e.parents('label');
                     e.addClass('hidden');
