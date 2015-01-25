@@ -5,74 +5,7 @@
  */
 //add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
 
-/**
- * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
- * @scope admin Edit post: see "Tags" metabox
- *        Does NOT affect the "Categories" metabox
- * @scope front WC breadcrumb
- */
-if ( is_admin() && !empty($_GET['wpglobus']) && 'off' == $_GET['wpglobus'] ) {
-		/** 
-		 * nothing to do 
-		 * 
-		 * @todo в том файле где этот фильтр будет размещён, нужно предусмотреть его отключение
-		 * для $_GET['wpglobus'] == 'off'
-		 * see class-wpglobus.php:135,
-		 * возможно ещё какие-то фильтры попадают под этот случай
-		 */
-} else { 
-	add_filter( 'wp_get_object_terms', 'wpglobus_filter__wp_get_object_terms', 0 );
-}
 
-/**
- * Filter @see wp_get_object_terms()
- * @scope admin
- * @scope front
- *
- * @param string[]|object[] $terms
- *
- * @return array
- */
-function wpglobus_filter__wp_get_object_terms( Array $terms ) {
-	/**
-	 * @internal
-	 * Do not need to check for is_wp_error($terms),
-	 * because the WP_Error is returned by wp_get_object_terms() before applying filter.
-	 * Do not need to check for empty($terms) because foreach won't loop.
-	 */
-
-	/**
-	 * Don't filter tag names for save or publish post
-	 * @todo Check this before add_filter and not here
-	 * @todo Describe exactly how to check this visually, and is possible - write the acceptance test
-	 * @todo Combine if()s
-	 * @todo replace isset with !empty
-	 * @todo pagenow can be mixed (?) - we need a function instead of using '===', to avoid notices
-	 */
-	global $pagenow;
-	if ( is_admin() && 'post.php' === $pagenow ) {
-		if ( isset( $_POST['save'] ) || isset( $_POST['publish'] ) ) {
-			return $terms;
-		}
-	}
-	/**
-	 * Don't filter tag names for inline-save ajax action from edit.php page
-	 */	
-	if ( 'admin-ajax.php' == $pagenow && !empty($_POST['action']) && 'inline-save' == $_POST['action'] ) {
-		return $terms;
-	}	
-	
-	/** @global WPGlobus_Config $WPGlobus_Config */
-	global $WPGlobus_Config;
-
-	foreach ( $terms as &$term ) {
-		WPGlobus_Core::translate_term( $term, $WPGlobus_Config->language );
-	}
-
-	reset( $terms );
-
-	return $terms;
-}
 
 /**
  * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen

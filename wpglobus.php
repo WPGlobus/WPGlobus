@@ -49,6 +49,8 @@ require_once 'includes/class-wpglobus-utils.php';
 require_once 'includes/class-wpglobus.php';
 
 require_once 'includes/class-wpglobus-core.php';
+require_once 'includes/class-wpglobus-filters.php';
+require_once 'includes/wpglobus-controller.php';
 require_once 'includes/functions.php';
 
 require_once 'includes/qa.php';
