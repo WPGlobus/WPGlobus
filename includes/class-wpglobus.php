@@ -609,20 +609,20 @@ class WPGlobus {
 					}
 				}	
 			} else if ( 'nav-menus.php' == $page ) {
-				
+
 				$page_action = 'menu-edit';
 				$menu_items  = array();
  			
 				global $wpdb;
 				$items = $wpdb->get_results( "SELECT ID, post_title, post_excerpt, post_name FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
-			
-				foreach( $items as $item ) {
 
-					if ( ! WPGlobus_Core::has_translations($item->post_title) ) :
+				foreach( $items as $item ) {
+					$item->post_title = trim($item->post_title);
+					if ( empty($item->post_title) ) :
 
 						$item_object 	= get_post_meta($item->ID, '_menu_item_object', true);
 						$item_object_id = get_post_meta($item->ID, '_menu_item_object_id', true);
-						
+
 						if ( 'page' == $item_object ) {
 							/**
 							 * Check for menu item has post type page
@@ -637,7 +637,23 @@ class WPGlobus {
 								 */
 								$wpdb->query( $wpdb->prepare("UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID) );		
 							}							
-						}
+						} elseif ( 'category' == $item_object ) {
+							
+							remove_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+
+							$term = get_term_by('id', $item_object_id, $item_object);
+							$new_title  = trim($term->name);
+							
+							if ( !empty($new_title) ) {
+								$item->post_title = $new_title;
+								/**
+								 * Update translation of title for menu item
+								 */
+								$wpdb->query( $wpdb->prepare("UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID) );		
+							}									
+							add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+						
+						}	
 
 					endif;				
 				
