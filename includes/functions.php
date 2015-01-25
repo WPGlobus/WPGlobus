@@ -1,52 +1,6 @@
 <?php
 
 /**
- * @deprecated 15.01.20 Calls wp_get_object_terms, which is already filtered
- */
-//add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
-
-
-
-/**
- * Filter set title in default_language for correct generate permalink in edit-slug-box at post.php screen
- * @todo move to admin controller
- */
-//add_filter( 'editable_slug', 'wpg_text_title_filter', 0 );
-
-/**
- * Set editable piece of permalink in default language
- * @see  get_sample_permalink()
- * @todo Examine option when user has 2 languages at front-end (ru, kz) but use 'en' for permalink
- *
- * @param $uri
- *
- * @return string
- */
-//function wpg_text_title_filter( $uri ) {
-//	global $WPGlobus_Config;
-//
-//	return __wpg_text_filter( $uri, $WPGlobus_Config->default_language );
-//}
-
-/**
- * @todo Add this filter only on is_admin(), post.php action=edit (not sure, need to check AJAX, too)
- * @todo If post_name is already bad in the database, it will be used in the permalink generation (when draft converted to publish)
- * @todo Check what's going on in
- * @see  WPSEO_Metabox::localize_script
- * @todo QA in general - need to test all ways to create / edit / change status / add new language
- * @todo (alex wrote) Examine option when user has 2 languages at front-end (ru, kz) but use 'en' for permalink
- */
-add_filter( 'sanitize_title', function ( $title ) {
-	$callers = debug_backtrace();
-	if ( isset( $callers[4]['function'] ) && $callers[4]['function'] === 'get_sample_permalink' ) {
-		global $WPGlobus_Config;
-		$title = WPGlobus_Core::text_filter( $title, $WPGlobus_Config->default_language );
-	}
-
-	return $title;
-}, 0 );
-
-/**
  * This translates all taxonomy names, including categories
  * @todo Should cache this and not parse on every page
  *
@@ -205,7 +159,7 @@ add_filter( 'get_pages', 'wpg_text_filter', 0 );
 
 /**
  * Set priority to 11 for case ajax-tag-search action from post.php screen
- * @see wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
+ * @see  wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
  * Note: this filter is temporarily switched off in @see WPGlobus::_get_terms
  * @todo Replace magic number 11 with a constant
  */
@@ -231,10 +185,10 @@ if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ! is_admin() ) {
  * Own filters
  */
 add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
-function wpglobus_get_terms($terms, $taxonomy) {
-	return WPGlobus::_get_terms($taxonomy);
+function wpglobus_get_terms( $terms, $taxonomy ) {
+	return WPGlobus::_get_terms( $taxonomy );
 }
-	
+
 /**
  * Filters for admin
  */

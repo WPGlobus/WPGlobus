@@ -60,6 +60,68 @@ class WPGlobus_Filters {
 		return $terms;
 	}
 
+	/**
+	 * This filter is needed to build correct permalink (slug, post_name)
+	 * using only the main part of the post title (in the default language).
+	 * -
+	 * Because 'sanitize_title' is a commonly used function, we have to apply our filter
+	 * only on very specific calls. Therefore, there are (ugly) debug_backtrace checks.
+	 * -
+	 * Case 1
+	 * When a draft post is created,
+	 * the post title is converted to the slug in the @see get_sample_permalink function,
+	 * using the 'sanitize_title' filter.
+	 * -
+	 * Case 2
+	 * When the draft is published, @see wp_insert_post calls
+	 * @see               sanitize_title to set the slug
+	 * -
+	 * @see               WPGLobus_QA::_test_post_name
+	 * -
+	 * @see               WPSEO_Metabox::localize_script
+	 * @todo              Check what's going on in localize_script of WPSEO?
+	 * @todo              What if there is no EN language? Only ru and kz but - we cannot use 'en' for permalink
+	 * @todo              check guid
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public static function filter__sanitize_title( $title ) {
+
+		$ok_to_filter = false;
+
+		$callers = debug_backtrace();
+		if ( isset( $callers[4]['function'] ) ) {
+			if ( $callers[4]['function'] === 'get_sample_permalink' ) {
+				/**
+				 * Case 1
+				 */
+				$ok_to_filter = true;
+			} elseif (
+				/**
+				 * Case 2
+				 */
+				$callers[4]['function'] === 'wp_insert_post'
+				/** @todo This is probably not required. Keeping it until stable version */
+				// and ( isset( $callers[5]['function'] ) and $callers[5]['function'] === 'wp_update_post' )
+			) {
+				$ok_to_filter = true;
+			}
+
+		}
+
+		if ( $ok_to_filter ) {
+			/**
+			 * @internal Note: the DEFAULT language, not the current one
+			 */
+			global $WPGlobus_Config;
+			$title = WPGlobus_Core::text_filter( $title, $WPGlobus_Config->default_language );
+		}
+
+		return $title;
+	}
+
 } // class
 
 # --- EOF
