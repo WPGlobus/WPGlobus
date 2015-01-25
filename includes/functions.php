@@ -294,7 +294,14 @@ if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ! is_admin() ) {
 	add_filter( 'option_blogdescription', 'wpg_text_filter', 0 );
 }
 
-
+/**
+ * Own filters
+ */
+add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
+function wpglobus_get_terms($terms, $taxonomy) {
+	return WPGlobus::_get_terms($taxonomy);
+}
+	
 /**
  * Filters for admin
  */
