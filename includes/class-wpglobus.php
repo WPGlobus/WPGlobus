@@ -586,6 +586,9 @@ class WPGlobus {
 
 			if ( 'post.php' == $page ) {
 			
+				/**
+				 * Add template for standard excerpt meta box
+				 */
 				$data['template'] = '';
 				foreach( $WPGlobus_Config->enabled_languages as $language ) {
 					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
