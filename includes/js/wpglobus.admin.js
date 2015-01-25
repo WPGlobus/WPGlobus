@@ -174,7 +174,7 @@ jQuery(document).ready(function () {
 						return;
 					}
 					
-					if ('post' === type) {
+					if ('post' === type && typeof WPGlobusAdmin.data.tags !== 'undefined') {
 						$.each( WPGlobusAdmin.data.tags, function(i,tag){
 							if ( WPGlobusAdmin.data.value[tag] != '' ) {
 								$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(WPGlobusAdmin.data.value[tag]);
