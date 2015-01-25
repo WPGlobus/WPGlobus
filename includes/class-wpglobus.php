@@ -608,7 +608,7 @@ class WPGlobus {
 				if ( !empty($tags) ) {
 					foreach( $tags as $tag ) {
 						$data['tagsdiv'][] 	= 'tagsdiv-' . $tag;
-						$data['tag'][$tag]  = $this->_get_terms($tag);
+						$data['tag'][$tag]  = self::_get_terms($tag);
 					}
 				}	
 			} else if ( 'nav-menus.php' == $page ) {
@@ -735,7 +735,7 @@ class WPGlobus {
 				$tags = $this->_get_taxonomies($post_type, 'non-hierarchical');
 				if ( !empty($tags) ) {
 					foreach( $tags as $tag ) {
-						$terms = $this->_get_terms($tag);
+						$terms = self::_get_terms($tag);
 						if ( !empty($terms) ) {
 							$data['tags'][] 		= $tag;
 							$data['names'][$tag] 	= 'tax_input[' . $tag . ']';
@@ -1513,11 +1513,17 @@ class WPGlobus {
 	 * @param string $taxonomy
 	 * @return array
 	 */
-	function _get_terms( $taxonomy = '' ) {
+	public static function _get_terms( $taxonomy = '' ) {
 		
 		if ( empty($taxonomy) ) {
 			return array();
-		}	
+		}
+		
+		if ( ! taxonomy_exists($taxonomy) ) {
+			$error = new WP_Error('invalid_taxonomy', __('Invalid taxonomy'));
+			return $error;
+		}
+		
 		global $WPGlobus_Config;
 		
 		remove_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
@@ -1533,6 +1539,7 @@ class WPGlobus {
 				$term_names[WPGlobus_Core::text_filter($term->name, $WPGlobus_Config->default_language)] = $term->name;
 			}
 		}	
+
 		return $term_names;
 
 	}	
