@@ -18,7 +18,7 @@ class WPGlobus_QA {
 		self::_test_get_pages();
 		self::_test_get_the_terms();
 		self::_test_wp_get_object_terms();
-		self::_test_get_sample_permalink();
+		self::_test_post_name();
 		self::_common_for_all_languages();
 	}
 
@@ -208,31 +208,64 @@ class WPGlobus_QA {
 	}
 
 	/**
-	 * @see get_sample_permalink();
+	 * @param WP_Post $post
 	 */
-	private static function _test_get_sample_permalink() {
-		require_once ABSPATH . '/wp-admin/includes/post.php';
+	//	private static function _dump_post( WP_Post $post ) {
+	//		var_dump( [
+	//			'ID'               => $post->ID,
+	//			'post_title'       => $post->post_title,
+	//			'post_content'     => $post->post_content,
+	//			'post_name'        => $post->post_name,
+	//			'post_status'      => $post->post_status,
+	//			'guid'             => $post->guid,
+	//			'sample_permalink' => get_sample_permalink( $post->ID )[1],
+	//		] );
+	//	}
 
-		$post = get_post( wp_insert_post(
-			[
-				'post_author' => 1,
-				'post_title'  => '{:en}Post EN{:}{:ru}Post RU{:}',
-			]
-		) );
+	/**
+	 * @see get_sample_permalink
+	 * @see wp_update_post calling...
+	 * ... @see wp_insert_post
+	 */
+	private static function _test_post_name() {
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>Test post_name (permalinks)</h2>
+			<?php
 
-		var_dump( $post );
+			require_once ABSPATH . '/wp-admin/includes/post.php';
 
-		$sp = get_sample_permalink( $post->ID );
-		var_dump( $sp );
+			$post = get_post( wp_insert_post(
+				[
+					'post_author' => 1,
+					'post_title'  => '{:en}Post EN{:}{:ru}Post RU{:}',
+				]
+			) );
+			?>
+			<p>post_title = <code><?php echo $post->post_title; ?></code></p>
 
-		$post->post_status = 'publish';
-
-		$post = get_post( wp_update_post( $post ) );
-		var_dump( $post );
-
-		$sp = get_sample_permalink( $post->ID );
-		var_dump( $sp );
-
+			<p class="wpg_qa_draft">
+				Draft:
+				<br/>
+				post_name = <code class="wpg_qa_post_name"><?php echo $post->post_name; ?></code>
+				<br/>
+				sample_permalink = <code class="wpg_qa_sample_permalink"><?php
+					echo get_sample_permalink( $post->ID )[1]; ?></code>
+			</p>
+			<?php
+			$post->post_status = 'publish';
+			$post              = get_post( wp_update_post( $post ) );
+			?>
+			<p class="wpg_qa_publish">
+				After publishing:
+				<br/>
+				post_name = <code class="wpg_qa_post_name"><?php echo $post->post_name; ?></code>
+				<br/>
+				sample_permalink = <code class="wpg_qa_sample_permalink"><?php
+					echo get_sample_permalink( $post->ID )[1]; ?></code>
+			</p>
+		</div>
+		<?php
 		$force_delete = true;
 		wp_delete_post( $post->ID, $force_delete );
 	}

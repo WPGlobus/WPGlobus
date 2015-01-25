@@ -24,6 +24,18 @@ class APICest {
 		                                               ' .non-existing-post-id' ) );
 		$I->assertEquals( 'WP_Error', $I->grabTextFrom( '#_test_get_the_terms' .
 		                                                ' .no-such-term' ) );
+
+		/**
+		 * @see WPGlobus_QA::_test_post_name
+		 */
+		$I->assertEquals( '', $I->grabTextFrom( '#_test_post_name' .
+		                                        ' .wpg_qa_draft .wpg_qa_post_name' ) );
+		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
+		                                        ' .wpg_qa_draft .wpg_qa_sample_permalink' ) );
+		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
+		                                        ' .wpg_qa_publish .wpg_qa_post_name' ) );
+		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
+		                                        ' .wpg_qa_publish .wpg_qa_sample_permalink' ) );
 	}
 
 	/**
