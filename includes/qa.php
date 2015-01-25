@@ -18,6 +18,7 @@ class WPGlobus_QA {
 		self::_test_get_pages();
 		self::_test_get_the_terms();
 		self::_test_wp_get_object_terms();
+		self::_test_get_sample_permalink();
 		self::_common_for_all_languages();
 	}
 
@@ -188,8 +189,8 @@ class WPGlobus_QA {
 				<code>wp_get_object_terms( [ 95, 97 ], 'category', ['fields'=>'names'] );</code>
 				<br>=&gt;
 				<span class="fields_names"><?php
-				echo esc_html( join( ', ', wp_get_object_terms( [ 95, 97 ], 'category',
-					[ 'fields' => 'names' ] ) ) );
+					echo esc_html( join( ', ', wp_get_object_terms( [ 95, 97 ], 'category',
+						[ 'fields' => 'names' ] ) ) );
 					?></span>
 			</p>
 
@@ -204,6 +205,36 @@ class WPGlobus_QA {
 		</div>
 	<?php
 
+	}
+
+	/**
+	 * @see get_sample_permalink();
+	 */
+	private static function _test_get_sample_permalink() {
+		require_once ABSPATH . '/wp-admin/includes/post.php';
+
+		$post = get_post( wp_insert_post(
+			[
+				'post_author' => 1,
+				'post_title'  => '{:en}Post EN{:}{:ru}Post RU{:}',
+			]
+		) );
+
+		var_dump( $post );
+
+		$sp = get_sample_permalink( $post->ID );
+		var_dump( $sp );
+
+		$post->post_status = 'publish';
+
+		$post = get_post( wp_update_post( $post ) );
+		var_dump( $post );
+
+		$sp = get_sample_permalink( $post->ID );
+		var_dump( $sp );
+
+		$force_delete = true;
+		wp_delete_post( $post->ID, $force_delete );
 	}
 
 }
