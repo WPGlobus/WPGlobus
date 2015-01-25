@@ -130,9 +130,11 @@ jQuery(document).ready(function () {
                 });
 
                 $('a.save').hover(function (event) {
+					if ( typeof WPGlobusAdmin.data.tags === 'undefined' ) return;
 					$('a.save').unbind('click');
 					
 					$('a.save').click(function (event) {
+						
 						$.ajaxSetup({async:false});
 
 						var p = $(this).parents('tr');
