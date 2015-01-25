@@ -420,7 +420,7 @@ jQuery(document).ready(function () {
                         $('#excerpt').eq(0).val(s);
                     });
                 }
-				
+
 				$('#publish').click(function(ev) {
 					if ( typeof WPGlobusAdmin.data.tagsdiv === 'undefined' || WPGlobusAdmin.data.tagsdiv.length < 1 ) {
 						return;
@@ -429,9 +429,8 @@ jQuery(document).ready(function () {
 						if ($('#'+tagsdiv).size() == 0) { return true /* next iteration */ };
 					
 						var	id = tagsdiv.replace('tagsdiv-', '');
-						if ( 'undefined' === id ) {
-							return true;	
-						}
+						if ( 'undefined' === id ) return true;
+						if ( $('#tax-input-'+id).size() == 0 ) return true;
 						
 						var name, tags = [];
 						
