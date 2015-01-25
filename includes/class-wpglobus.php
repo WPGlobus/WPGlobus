@@ -618,15 +618,18 @@ class WPGlobus {
 			
 				foreach( $items as $item ) {
 
-					if ( ! WPGlobus_Utils::has_translations($item->post_title) ) :
-						/**
-						 * Check for menu item has post type page
-						 * autocomplete Navigation Label input field
-						 */
-						$page = $wpdb->get_row( "SELECT ID, post_title, post_name, post_type FROM {$wpdb->prefix}posts WHERE post_type = 'page' AND post_name='{$item->post_name}'" );
+					if ( ! WPGlobus_Core::has_translations($item->post_title) ) :
 
-						if ( !empty($page)) {
-							$new_title = trim($page->post_title);
+						$item_object 	= get_post_meta($item->ID, '_menu_item_object', true);
+						$item_object_id = get_post_meta($item->ID, '_menu_item_object_id', true);
+						
+						if ( 'page' == $item_object ) {
+							/**
+							 * Check for menu item has post type page
+							 * for autocomplete Navigation Label input field
+							 */
+							$post_title = get_post_field('post_title', $item_object_id);
+							$new_title  = trim($post_title);
 							if ( !empty($new_title) ) {
 								$item->post_title = $new_title;
 								/**
