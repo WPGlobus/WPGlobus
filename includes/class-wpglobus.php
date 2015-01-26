@@ -30,6 +30,11 @@ class WPGlobus {
 	const LANGUAGE_EDIT_PAGE = 'wpglobus_language_edit';
 
 	/**
+	 * Language edit page
+	 */
+	const PAGE_WPGLOBUS_ABOUT = 'wpglobus-about';
+	
+	/**
 	 * List navigation menus
 	 * @var array
 	 */
@@ -916,8 +921,29 @@ class WPGlobus {
 				'on_language_edit'
 			)
 		);
+		
+		add_submenu_page(
+			null,
+			'',
+			'',
+			'administrator',
+			self::PAGE_WPGLOBUS_ABOUT,
+			array(
+				$this,
+				'wpglobus_about'
+			)
+		);		
 	}
 
+	/**
+	 * Include file for WPGlobus about page
+	 * @return void
+	 */
+	function wpglobus_about(){
+		require_once 'admin/class-wpglobus-about.php';
+		new WPGlobus_About();		
+	}
+	
 	/**
 	 * Include file for language edit page
 	 * @return void
