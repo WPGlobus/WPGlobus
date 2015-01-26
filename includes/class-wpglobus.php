@@ -1416,7 +1416,8 @@ class WPGlobus {
 	}
 	
 	/**
-	 *
+	 * Add wrapper for every table in enabled languagesat edit-tags.php page
+	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
 		
@@ -1425,7 +1426,7 @@ class WPGlobus {
 		
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
 			$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-			<div id="tab-<?php echo $tab_suffix; ?>">
+			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>">
 			</div>	
 			<?php
 		}
