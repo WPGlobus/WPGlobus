@@ -81,7 +81,13 @@ class WPGlobus {
 		global $pagenow;
 		
 		$this->disabled_entities[] = 'attachment';
-		
+	
+		/**
+		 * Init array of supported plugins
+		 */
+		$this->vendors_scripts['WPSEO'] = false;
+		$this->vendors_scripts['WOOCOMMERCE'] = false;
+	
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$this->vendors_scripts['WPSEO'] = true;
 		}
@@ -531,7 +537,7 @@ class WPGlobus {
 			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 
 				$page_action = 'post-edit';			
-				
+				error_log(print_r($WPGlobus_Config, true));
 				/**
 				 * We use $post_content, $post_title at edit post page 
 				 */			
