@@ -1433,7 +1433,8 @@ class WPGlobus {
 	}
 	
 	/**
-	 *
+	 * Add language tabs for edit taxonomy name at edit-tags.php page
+	 * @return void
 	 */
 	function on_add_language_tabs_edit_taxonomy() {
 	
