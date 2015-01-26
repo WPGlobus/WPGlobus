@@ -727,9 +727,14 @@ class WPGlobus {
 				
 				if ( $data['tag_id'] ) {
 					foreach( $WPGlobus_Config->enabled_languages as $language ) {
-						$lang = $language == $WPGlobus_Config->default_language ? 'default' : $language;		
-						$data['i18n'][$lang]['name'] = WPGlobus_Core::text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
-						$data['i18n'][$lang]['description'] = WPGlobus_Core::text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
+						$lang = $language == $WPGlobus_Config->default_language ? 'default' : $language;
+						if ( 'default' == $lang ) {	
+							$data['i18n'][$lang]['name'] 		= WPGlobus_Core::text_filter($tag->name, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ); 
+							$data['i18n'][$lang]['description'] = WPGlobus_Core::text_filter($tag->description, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+						} else {	
+							$data['i18n'][$lang]['name'] 		= WPGlobus_Core::text_filter($tag->name, $language, WPGlobus::RETURN_EMPTY ); 
+							$data['i18n'][$lang]['description'] = WPGlobus_Core::text_filter($tag->description, $language, WPGlobus::RETURN_EMPTY );
+						}	
 					}
 				} else {
 					/**
