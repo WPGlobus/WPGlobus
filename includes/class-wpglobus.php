@@ -356,9 +356,11 @@ class WPGlobus {
 				}	
 
 				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-					$result[$id][$language]['name'] = WPGlobus_Core::text_filter($title['source'], $language, WPGlobus::RETURN_EMPTY);
+					$return = $language == $WPGlobus_Config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+
+					$result[$id][$language]['name'] = WPGlobus_Core::text_filter($title['source'], $language, $return);
 					if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
-						$result[$id][$language]['description'] = WPGlobus_Core::text_filter($term->description, $language, WPGlobus::RETURN_EMPTY);
+						$result[$id][$language]['description'] = WPGlobus_Core::text_filter($term->description, $language, $return);
 					}	
 				}
 			}
