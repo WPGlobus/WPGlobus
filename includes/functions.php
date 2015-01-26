@@ -185,6 +185,14 @@ if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ! is_admin() ) {
  * Own filters
  */
 add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
+/**
+ * The first parameter is ignored. We have it here only because WP requires the 1st parameter in filter
+ *
+ * @param mixed $terms Ignored
+ * @param string $taxonomy
+ *
+ * @return array
+ */
 function wpglobus_get_terms( $terms, $taxonomy ) {
 	return WPGlobus::_get_terms( $taxonomy );
 }
