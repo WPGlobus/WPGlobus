@@ -384,7 +384,18 @@ class WPGlobus {
 		global $WPGlobus;
 		$WPGlobus = new self;
 	}
-
+	
+	/**
+	 * Redirect to about page after activated plugin
+	 * @todo use $WPGlobus_Config to determine running this function?
+	 */
+	public static function activated($plugin) {
+		if ( 'wpglobus/wpglobus.php' == $plugin ) {	
+			wp_redirect(admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ));
+			die();
+		}	
+	}
+	
 	/**
 	 * WP redirect hook
 	 *
@@ -921,7 +932,7 @@ class WPGlobus {
 				'on_language_edit'
 			)
 		);
-		
+
 		add_submenu_page(
 			null,
 			'',
