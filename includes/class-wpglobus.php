@@ -615,8 +615,10 @@ class WPGlobus {
 				 */
 				$data['template'] = '';
 				foreach( $WPGlobus_Config->enabled_languages as $language ) {
+					$return = $language == $WPGlobus_Config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+					
 					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
-					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY);
+					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, $return);
 					$data['template'] .= '</textarea>';
 				}
 				
