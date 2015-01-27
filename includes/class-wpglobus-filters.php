@@ -138,6 +138,34 @@ class WPGlobus_Filters {
 		return $title;
 	}
 
+	/**
+	 * Filter @see get_term()
+	 *
+	 * @param string|object $term
+	 *
+	 * @return string|object
+	 */
+	public static function filter__get_term( $term ) {
+
+		if ( WPGlobus_WP::is_http_post_action( 'inline-save-tax' ) ) {
+			/**
+			 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
+			 * See quick_edit() in includes/js/wpglobus.admin.js
+			 * for and example of working with taxonomy name and description
+			 * wp_current_filter contains
+			 * 0=wp_ajax_inline-save-tax
+			 * 1=get_term
+			 * @see wp_ajax_inline_save_tax()
+			 */
+			// do nothing
+		} else {
+			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
+		}
+
+		return $term;
+
+	}
+
 } // class
 
 # --- EOF

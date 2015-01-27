@@ -1,73 +1,7 @@
 <?php
 
-global $pagenow;
-if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
-	add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
-}
 
-/**
- * This translates all taxonomy names, including categories
- * @todo Should cache this and not parse on every page
- *
- * @param array|object $terms
- *
- * @return array|object
- */
-function wpglobus_filter_get_terms( $terms ) {
 
-	/**
-	 * @todo This condition applies to get_term filter only
-	 */
-	if ( isset( $_POST ) && isset( $_POST['action'] ) && 'inline-save-tax' == $_POST['action'] ) {
-		/**
-		 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
-		 * @see quick_edit() in wpglobus\includes\js\wpglobus.admin.js for working with taxonomy name and description
-		 *                   wp_current_filter contains
-		 *                   0=wp_ajax_inline-save-tax
-		 *                   1=get_term
-		 * @see wp_ajax_inline_save_tax()
-		 * calling @see get_term()
-		 */
-		return $terms;
-	}
-
-	if ( is_array( $terms ) ) {
-
-		foreach ( $terms as &$term ) {
-			if ( is_object( $term ) ) {
-				if ( ! empty( $term->name ) ) {
-					$term->name = __wpg_text_filter( $term->name );
-				}
-				if ( ! empty( $term->description ) ) {
-					$term->description = __wpg_text_filter( $term->description );
-				}
-			} else {
-				/**
-				 * Case ajax-tag-search action from post.php screen
-				 * @see function wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
-				 */
-				if ( isset( $term ) ) {
-					$term = __wpg_text_filter( $term );
-				}
-			}
-		} // end foreach
-
-	} else {
-		/**
-		 *  Filter 'get_term' use $terms as object
-		 */
-		if ( ! empty( $terms->name ) ) {
-			$terms->name = __wpg_text_filter( $terms->name );
-		}
-		if ( ! empty( $terms->description ) ) {
-			$terms->description = __wpg_text_filter( $terms->description );
-		}
-	}
-
-	reset( $terms );
-
-	return $terms;
-}
 
 add_filter( 'home_url', 'on_home_url' );
 

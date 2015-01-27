@@ -214,7 +214,7 @@ class WPGlobus {
 
 			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
-			$this->menus = $this->_get_nav_menus();
+			$this->menus = self::_get_nav_menus();
 
 			/** @todo */
 			0 && add_filter( 'wp_list_pages', array(
@@ -335,7 +335,7 @@ class WPGlobus {
 				 * Remove filter to get raw term description
 				 * @todo Need to restore?
 				 */
-				remove_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+				remove_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
 			}
 			
 			global $WPGlobus_Config;
@@ -387,10 +387,12 @@ class WPGlobus {
 		global $WPGlobus;
 		$WPGlobus = new self;
 	}
-	
+
 	/**
 	 * Redirect to about page after activated plugin
 	 * @todo use $WPGlobus_Config to determine running this function?
+	 *
+	 * @param string $plugin
 	 */
 	public static function activated($plugin) {
 		
@@ -665,10 +667,14 @@ class WPGlobus {
 								$wpdb->query( $wpdb->prepare("UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID) );		
 							}							
 						} elseif ( 'category' == $item_object ) {
-							
-							remove_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
 
+							/**
+							 * @todo Write comment why do we disable the filter here
+							 */
+							remove_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
 							$term = get_term_by('id', $item_object_id, $item_object);
+							add_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
+
 							$new_title  = trim($term->name);
 							
 							if ( !empty($new_title) ) {
@@ -678,8 +684,7 @@ class WPGlobus {
 								 */
 								$wpdb->query( $wpdb->prepare("UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID) );		
 							}									
-							add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
-						
+
 						}	
 
 					endif;				
@@ -847,7 +852,7 @@ class WPGlobus {
 			if ( 'non-hierarchical' == $type && ! $taxonomy_data->hierarchical ) {
 				/**
 				 * This is tag
-				 * @todo Theorerically, it's not "tag". Can be any custom taxonomy. Need to check.
+				 * @todo Theoretically, it's not "tag". Can be any custom taxonomy. Need to check.
 				 *
 				 * @todo 
 				 * Practically in WP: all non-hierarchical taxonomy is tags. 
@@ -1423,7 +1428,7 @@ class WPGlobus {
 	}
 	
 	/**
-	 * Add wrapper for every table in enabled languagesat edit-tags.php page
+	 * Add wrapper for every table in enabled languages at edit-tags.php page
 	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
