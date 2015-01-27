@@ -100,6 +100,12 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		public $locale = array();
 
 		/**
+		 * Stores version and update from WPGlobus Mini info
+		 * @var array
+		 */
+		public $version = array();
+		
+		/**
 		 * Use flag name for navigation menu : 'name' || 'code' || ''
 		 * @var string
 		 */
@@ -478,6 +484,16 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			if ( ! empty( $option ) ) {
 				$this->flag = $option;
 			}
+			
+			/**
+			 * Get versioning info
+			 */
+			$option = get_option( self::$option_versioning );
+			if ( empty( $option ) ) {
+				$this->version = array();
+			} else {	
+				$this->version = $option;
+			}			
 
 		}
 
