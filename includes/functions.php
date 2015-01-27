@@ -1,58 +1,5 @@
 <?php
 
-
-
-
-add_filter( 'home_url', 'on_home_url' );
-
-/**
- * Localize home_url
- *
- * @param string $url
- *
- * @return string
- */
-function on_home_url( $url ) {
-	global $pagenow;
-
-	$ajaxify = false;
-
-	if ( 'post.php' == $pagenow ) {
-		/**
-		 * Don't convert url for permalink below post title field
-		 * For example, we had Постоянная ссылка: http://www.wpg.dev/ru/wordpress-4-1-is-out/
-		 * @todo Need will check for other cases using url in post.php, post-new.php screens
-		 */
-		return $url;
-	}
-
-	if ( 'admin-ajax.php' == $pagenow ) {
-		/**
-		 * Don't convert url for ajax action with $_POST[action] == heartbeat, sample-permalink, add-menu-item
-		 * For more info see $_POST array
-
-		 */
-		if ( array_key_exists( 'action', $_POST ) && in_array( $_POST['action'], array(
-				'heartbeat',
-				'sample-permalink',
-				'add-menu-item'
-			) )
-		) {
-			return $url;
-		}
-		$ajaxify = true;
-	}
-
-	/**
-	 * @todo Need test this code!
-	 */
-	if ( is_admin() && ! $ajaxify ) {
-		return $url;
-	}
-
-	return WPGlobus_Utils::get_convert_url( $url );
-}
-
 /**
  * Yoast filters
  */

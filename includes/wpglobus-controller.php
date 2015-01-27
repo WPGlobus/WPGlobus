@@ -58,5 +58,10 @@ if ( WPGlobus_WP::is_doing_ajax() || !is_admin() || WPGlobus_WP::is_pagenow( 'na
 	add_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
 }
 
+/**
+ * Filter for @see home_url
+ */
+add_filter( 'home_url', [ 'WPGlobus_Filters', 'filter__home_url' ] );
+
 
 # --- EOF

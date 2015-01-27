@@ -166,6 +166,61 @@ class WPGlobus_Filters {
 
 	}
 
+	/**
+	 * Localize home_url
+	 * Should be processed on:
+	 * - front
+	 * - AJAX, except for several specific actions
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	public static function filter__home_url( $url ) {
+
+		/**
+		 * @internal note
+		 * Example of URL in admin:
+		 * When admin interface is not in default language, we still should not see
+		 * any permalinks with language prefixes.
+		 * For that, we could check if we are at the 'post.php' screen:
+		 * if ( 'post.php' == $pagenow ) ....
+		 * However, we do not need it, because we disallowed almost any processing in admin.
+		 */
+
+		/**
+		 * 1. Do not work in admin
+		 */
+		$need_to_process = ( ! is_admin() );
+
+		if ( WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
+			/**
+			 * 2. But work in AJAX, which is also admin
+			 */
+			$need_to_process = true;
+
+			/**
+			 * 3. However, don't convert url for these AJAX actions:
+			 */
+			if ( WPGlobus_WP::is_http_post_action(
+				[
+					'heartbeat',
+					'sample-permalink',
+					'add-menu-item',
+				]
+			)
+			) {
+				$need_to_process = false;
+			}
+		}
+
+		if ( $need_to_process ) {
+			$url = WPGlobus_Utils::get_convert_url( $url );
+		}
+
+		return $url;
+	}
+
 } // class
 
 # --- EOF
