@@ -20,3 +20,10 @@
 .wpglobus-excerpt {
 	width:98%;
 }
+/* page=wpglobus-about */
+.about-wrap .icon {
+	background: url(images/apple-touch-icon-180x180.png) no-repeat;
+	height:180px;
+	width:180px;
+	margin-left:50px;
+}
