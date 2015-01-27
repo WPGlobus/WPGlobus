@@ -21,11 +21,8 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__get_terms( Array $terms ) {
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
 		foreach ( $terms as &$term ) {
-			WPGlobus_Core::translate_term( $term, $WPGlobus_Config->language );
+			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
 
 		reset( $terms );
@@ -71,11 +68,8 @@ class WPGlobus_Filters {
 			return $terms;
 		}
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
 		foreach ( $terms as &$term ) {
-			WPGlobus_Core::translate_term( $term, $WPGlobus_Config->language );
+			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
 
 		reset( $terms );
@@ -138,8 +132,7 @@ class WPGlobus_Filters {
 			/**
 			 * @internal Note: the DEFAULT language, not the current one
 			 */
-			global $WPGlobus_Config;
-			$title = WPGlobus_Core::text_filter( $title, $WPGlobus_Config->default_language );
+			$title = WPGlobus_Core::text_filter( $title, WPGlobus::Config()->default_language );
 		}
 
 		return $title;

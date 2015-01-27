@@ -1599,7 +1599,19 @@ class WPGlobus {
 
 		return $term_names;
 
-	}	
+	}
+
+	/**
+	 * Shortcut to avoid globals
+	 * @return WPGlobus_Config
+	 */
+	public static function Config() {
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;
+
+		return $WPGlobus_Config;
+	}
+
 }
 
 # --- EOF
