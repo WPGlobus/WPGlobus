@@ -39,13 +39,15 @@ class WPGlobus_About {
 			
 			<div class="changelog">
 				<div class="feature-rest feature-section col three-col">
+					<h2><?php _e( 'Main features', 'wpglobus' ); ?></h2>
 					<div>
 						<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
 						<p><?php _e( 'Mea dicat facer nonumes ex. Nam id prompta epicurei, te cibo accusata pro. At ornatus docendi pro, quis delenit in mel, in aperiri impedit pri. Et nobis singulis cum, no mundi solet causae mei, duo stet vituperata!', 'wpglobus' ); ?></p>
 					</div>
 					
-					<div class="icon">May be icon here</div>
-					
+					<div>
+						<div class="icon"></div>
+					</div>
 					<div class="last-feature">
 						<h4><?php _e( 'Vim tation apeirian eu', 'wpglobus' ); ?></h4>
 						<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos, in postea eloquentiam nec, per homero ancillae ne. Altera fierent nam no, graeci fierent interesset vel ad. Et paulo moderatius mei.', 'wpglobus' ); ?></p>
@@ -53,7 +55,7 @@ class WPGlobus_About {
 				</div>
 			</div>
 			<div class="changelog about-integrations">
-				<h3><?php _e( 'WPGlobus API version 999', 'wpglobus' ); ?></h3>
+				<h2><?php _e( 'WPGlobus API version 999', 'wpglobus' ); ?></h2>
 				<div class="feature-section col three-col">
 					<div>
 						<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
@@ -87,9 +89,9 @@ class WPGlobus_About {
 			</div>
 			<p><a name="wpglobus-mini"></a></p>
 			<div class="changelog">
+				<h2>WPGlobus Mini is obsolete!</h2>
 				<div class="feature-section col one-col">
 					<div>
-						<h4>WPGlobus Mini is obsolete!</h4>
 						<p>Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
 							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
 							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
