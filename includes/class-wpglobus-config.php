@@ -471,8 +471,8 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			}
 
 
-			/*
-			 *
+			/**
+			 * Get flag files without path
 			 */
 			$option = get_option( $this->option_flags );
 			if ( ! empty( $option ) ) {
