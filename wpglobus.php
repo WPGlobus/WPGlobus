@@ -5,7 +5,7 @@
  * Description: WordPress internationalization helper
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 0.2.0
+ * Version: 1.0.0
  * Author: WPGlobus
  * Author URI: http://www.wpglobus.com/
  * Network: false
@@ -38,6 +38,8 @@ if ( ! defined( 'WP_DEBUG' ) ) {
 if ( ! defined( 'SCRIPT_DEBUG' ) ) {
 	define( 'SCRIPT_DEBUG', false );
 }
+
+define('WPGLOBUS_VERSION', '1.0.0');
 
 global $WPGlobus;
 global $WPGlobus_Config;
