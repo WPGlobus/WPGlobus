@@ -163,6 +163,8 @@ class APICest {
 			'#_test_get_terms_' . 'post_tag' . ' .name' ) );
 		$I->assertEquals( "QA Tag Description EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
+		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
+			'#_test_get_terms_' . 'name_only' ) );
 
 		$this->_common_for_all_languages( $I );
 	}
@@ -247,6 +249,8 @@ class APICest {
 			'#_test_get_terms_' . 'post_tag' . ' .name' ) );
 		$I->assertEquals( "QA Tag Description RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
+		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
+			'#_test_get_terms_' . 'name_only' ) );
 
 		$this->_common_for_all_languages( $I );
 	}

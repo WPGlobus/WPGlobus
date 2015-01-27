@@ -236,6 +236,19 @@ class WPGlobus_QA {
 				<span class="description"><?php echo $term->description; ?></span>
 			</p>
 
+			<?php
+			$term = get_terms( 'category', [
+				'name__like' => 'QA Category',
+				'fields'     => 'names',
+				'hide_empty' => false
+			] )[0];
+			?>
+			<p>
+				<code>get_terms( 'category', ['fields' => 'names'] )</code>
+				<br/>
+				=&gt;<span id="_test_get_terms_name_only"><?php echo $term; ?></span>
+			</p>
+
 		</div>
 	<?php
 	}
