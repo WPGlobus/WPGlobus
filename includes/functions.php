@@ -310,6 +310,24 @@ function wpg_locale(
 
 }
 
+
+/**
+ * Фильтр для вывода варнинга о том, что обновились с версии WPGlobus Mini
+ */
+$version = get_option(WPGlobus_Config::$option_versioning);
+if ( isset($version['wpglobus_mini_warning']) && $version['wpglobus_mini_warning'] ) {
+	add_action( 'admin_notices', 'wpglobus_mini_notice' );
+}
+function wpglobus_mini_notice() {
+	$message = sprintf( __( 'Updated from WPGlobus Mini. Please, let\'s read good instruction at %s', 'wpglobus' ), '<a href="' . admin_url() . 'admin.php?page=wpglobus-about#wpglobus-mini">WPGlobus About</a>');
+    ?>
+    <div class="error dismiss">
+        <p><?php echo $message; ?></p>
+    </div>
+    <?php
+}
+
+
 add_action( 'init', 'wpg_init', 2 );
 function wpg_init() {
 
