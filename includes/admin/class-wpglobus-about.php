@@ -85,6 +85,26 @@ class WPGlobus_About {
 					</div>
 				</div>
 			</div>
+			<p><a name="wpglobus-mini"></a></p>
+			<div class="changelog">
+				<div class="feature-section col one-col">
+					<div>
+						<h4>WPGlobus Mini is obsolete!</h4>
+						<p>Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+							Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
+						</p>
+					</div>
+				</div>
+			</div>
 			<div class="return-to-dashboard">
 				<a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'wpglobus_options&tab=0' ), 'admin.php' ) ) ); ?>"><?php _e( 'Go to WPGlobus Settings', 'wpglobus' ); ?></a>
 			</div>
