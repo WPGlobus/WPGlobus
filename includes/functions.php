@@ -314,18 +314,43 @@ function wpg_locale(
 /**
  * Фильтр для вывода варнинга о том, что обновились с версии WPGlobus Mini
  */
+global $WPGlobus_Config; 
 $version = get_option(WPGlobus_Config::$option_versioning);
+
 if ( isset($version['wpglobus_mini_warning']) && $version['wpglobus_mini_warning'] ) {
-	add_action( 'admin_notices', 'wpglobus_mini_notice' );
+	add_action( 'admin_notices', 'wpglobus_mini_warning' );
 }
-function wpglobus_mini_notice() {
-	$message = sprintf( __( 'Updated from WPGlobus Mini. Please, let\'s read good instruction at %s', 'wpglobus' ), '<a href="' . admin_url() . 'admin.php?page=wpglobus-about#wpglobus-mini">WPGlobus About</a>');
+function wpglobus_mini_warning() {
+	$message = sprintf( __( 'Updated from WPGlobus Mini. Please, let\'s read good instruction at %s', 'wpglobus' ), 
+		'<a href="' . admin_url() . 'admin.php?page=wpglobus-about#wpglobus-mini">WPGlobus About</a>' );
+	$hide    = sprintf( __( '<a href="%s">Hide Notice</a>', 'wpglobus' ), '?wpglobus_mini_warning=hide');
     ?>
-    <div class="error dismiss">
-        <p><?php echo $message; ?></p>
+    <div class="error">
+        <p><?php echo $message; ?><span style="float:right;"><?php echo $hide; ?></a></p>
     </div>
     <?php
 }
+
+/**
+ *  скрыть варнинг о WPGlobus Mini
+ */
+add_action('admin_init', 'wpglobus_mini_hide_warning');
+function wpglobus_mini_hide_warning() {
+
+	global $WPGlobus_Config;
+
+    if ( isset($_GET['wpglobus_mini_warning']) && 'hide' == $_GET['wpglobus_mini_warning'] ) {
+		delete_option(WPGlobus_Config::$option_versioning); 
+		$version = array();
+		$version['current_version'] = WPGLOBUS_VERSION;
+		update_option(WPGlobus_Config::$option_versioning, $version);
+
+		wp_redirect($_SERVER['HTTP_REFERER']);
+		die();
+	}
+}
+
+
 
 
 add_action( 'init', 'wpg_init', 2 );
