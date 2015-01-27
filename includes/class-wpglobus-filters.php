@@ -11,6 +11,29 @@
 class WPGlobus_Filters {
 
 	/**
+	 * Filter @see get_terms
+	 * @scope admin
+	 * @scope front
+	 *
+	 * @param string[]|object[] $terms
+	 *
+	 * @return array
+	 */
+	public static function filter__get_terms( Array $terms ) {
+
+		/** @global WPGlobus_Config $WPGlobus_Config */
+		global $WPGlobus_Config;
+
+		foreach ( $terms as &$term ) {
+			WPGlobus_Core::translate_term( $term, $WPGlobus_Config->language );
+		}
+
+		reset( $terms );
+
+		return $terms;
+	}
+
+	/**
 	 * Filter @see wp_get_object_terms()
 	 * @scope admin
 	 * @scope front

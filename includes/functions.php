@@ -1,5 +1,10 @@
 <?php
 
+global $pagenow;
+if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
+	add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
+}
+
 /**
  * This translates all taxonomy names, including categories
  * @todo Should cache this and not parse on every page
@@ -157,18 +162,6 @@ add_filter( 'single_term_title', 'wpg_text_filter', 0 );
 add_filter( 'get_pages', 'wpg_text_filter', 0 );
 
 
-/**
- * Set priority to 11 for case ajax-tag-search action from post.php screen
- * @see  wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
- * Note: this filter is temporarily switched off in @see WPGlobus::_get_terms
- * @todo Replace magic number 11 with a constant
- */
-add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
-
-global $pagenow;
-if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || in_array( $pagenow, array( 'nav-menus.php' ) ) || ! is_admin() ) {
-	add_filter( 'get_term', 'wpglobus_filter_get_terms', 0 );
-}
 
 
 /**

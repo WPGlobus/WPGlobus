@@ -1583,12 +1583,12 @@ class WPGlobus {
 		
 		global $WPGlobus_Config;
 		
-		remove_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
+		remove_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
 
 		$terms = get_terms( $taxonomy, array('hide_empty'=>false) );
 
-		add_filter( 'get_terms', 'wpglobus_filter_get_terms', 11 );
-		
+		add_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
+
 		$term_names = array();
 		
 		if ( !empty($terms) ) {

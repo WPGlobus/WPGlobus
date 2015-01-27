@@ -36,4 +36,17 @@ if ( is_admin() && ! empty( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) 
  */
 add_filter( 'sanitize_title', [ 'WPGlobus_Filters', 'filter__sanitize_title' ], 0 );
 
+/**
+ * Used by @see get_terms (3 places in the function)
+ * @scope both
+ * -
+ * Example of WP core using this filter: @see _post_format_get_terms
+ * -
+ * Set priority to 11 for case ajax-tag-search action from post.php screen
+ * @see  wp_ajax_ajax_tag_search() in wp-admin\includes\ajax-actions.php
+ * Note: this filter is temporarily switched off in @see WPGlobus::_get_terms
+ * @todo Replace magic number 11 with a constant
+ */
+add_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
+
 # --- EOF
