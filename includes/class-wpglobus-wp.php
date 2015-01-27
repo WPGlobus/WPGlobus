@@ -32,12 +32,16 @@ class WPGlobus_WP {
 	}
 
 	/**
-	 * @param string $action
+	 * @param string|string[] $action
 	 *
 	 * @return bool
 	 */
-	public static function is_http_post_action( $action ){
-		return ( ! empty( $_POST['action'] ) && $action === $_POST['action'] );
+	public static function is_http_post_action( $action ) {
+		if ( ! is_array( $action ) ) {
+			$action = [ $action ];
+		}
+
+		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action ) );
 	}
 
 
