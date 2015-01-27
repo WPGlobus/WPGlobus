@@ -36,6 +36,14 @@ class APICest {
 		                                        ' .wpg_qa_publish .wpg_qa_post_name' ) );
 		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
 		                                        ' .wpg_qa_publish .wpg_qa_sample_permalink' ) );
+
+		/**
+		 * @see WPGlobus_QA::_test_get_term()
+		 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
+		 */
+		$I->assertEquals( "{:en}QA Category EN{:}{:ru}QA Category RU{:}", $I->grabTextFrom(
+			'#_test_get_term_' . 'inline-save-tax' . ' .name' ) );
+
 	}
 
 	/**

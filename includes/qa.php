@@ -282,7 +282,20 @@ class WPGlobus_QA {
 				<code>$term->description</code> :
 				<span class="description"><?php echo $term->description; ?></span>
 			</p>
+			<?php
+			/**
+			 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
+			 */
+			$_POST['action'] = 'inline-save-tax';
+			$term            = get_term( $term->term_id, 'category' );
+			?>
+			<p><code>$_POST['action'] = 'inline-save-tax';</code></p>
 
+			<p id="_test_get_term_inline-save-tax">
+				<code>$term->name</code> :
+				<span class="name"><?php echo $term->name; ?></span>
+			</p>
+			<?php unset( $_POST['action'] ); ?>
 
 		</div>
 	<?php
