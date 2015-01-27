@@ -152,6 +152,18 @@ class APICest {
 			'#_test_wp_get_object_terms' . ' .no_such_term' ),
 			'test_wp_get_object_terms' );
 
+		/**
+		 * @see WPGlobus_QA::_test_wp_get_terms()
+		 */
+		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
+			'#_test_get_terms_' . 'category' . ' .name' ) );
+		$I->assertEquals( "QA Category Description EN", $I->grabTextFrom(
+			'#_test_get_terms_' . 'category' . ' .description' ) );
+		$I->assertEquals( "QA Tag EN", $I->grabTextFrom(
+			'#_test_get_terms_' . 'post_tag' . ' .name' ) );
+		$I->assertEquals( "QA Tag Description EN", $I->grabTextFrom(
+			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
+
 		$this->_common_for_all_languages( $I );
 	}
 
@@ -223,6 +235,18 @@ class APICest {
 		$I->assertEquals( "Неверная таксономия", $I->grabTextFrom(
 			'#_test_wp_get_object_terms' . ' .no_such_term' ),
 			'test_wp_get_object_terms' );
+
+		/**
+		 * @see WPGlobus_QA::_test_wp_get_terms()
+		 */
+		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
+			'#_test_get_terms_' . 'category' . ' .name' ) );
+		$I->assertEquals( "QA Category Description RU", $I->grabTextFrom(
+			'#_test_get_terms_' . 'category' . ' .description' ) );
+		$I->assertEquals( "QA Tag RU", $I->grabTextFrom(
+			'#_test_get_terms_' . 'post_tag' . ' .name' ) );
+		$I->assertEquals( "QA Tag Description RU", $I->grabTextFrom(
+			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
 
 		$this->_common_for_all_languages( $I );
 	}

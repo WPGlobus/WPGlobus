@@ -18,6 +18,7 @@ class WPGlobus_QA {
 		self::_test_get_pages();
 		self::_test_get_the_terms();
 		self::_test_wp_get_object_terms();
+		self::_test_get_terms();
 		self::_test_post_name();
 		self::_common_for_all_languages();
 	}
@@ -205,6 +206,38 @@ class WPGlobus_QA {
 		</div>
 	<?php
 
+	}
+
+	/**
+	 * @see get_terms();
+	 */
+	private static function _test_get_terms() {
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>get_terms()</h2>
+
+			<p><code>$terms = get_terms( 'category' )</code></p>
+			<?php $term = get_terms( 'category', [ 'name__like' => 'QA Category', 'hide_empty' => false ] )[0]; ?>
+			<p id="_test_get_terms_category">
+				<code>$term->name</code> :
+				<span class="name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="description"><?php echo $term->description; ?></span>
+			</p>
+
+			<p><code>$terms = get_terms( 'post_tag' )</code></p>
+			<?php $term = get_terms( 'post_tag', [ 'name__like' => 'QA Tag', 'hide_empty' => false ] )[0]; ?>
+			<p id="_test_get_terms_post_tag">
+				<code>$term->name</code> :
+				<span class="name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="description"><?php echo $term->description; ?></span>
+			</p>
+
+		</div>
+	<?php
 	}
 
 	/**
