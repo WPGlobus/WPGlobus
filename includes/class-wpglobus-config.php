@@ -126,6 +126,13 @@ class WPGlobus_Config {
 	public $option = 'wpglobus_option';
 
 	/**
+	 * WPGlobus option versioning key
+	 * @var string
+	 */
+	public static $option_versioning = 'wpglobus_option_versioning';
+	
+	
+	/**
 	 * WPGlobus option key for $language_name
 	 * @var string
 	 */
@@ -164,10 +171,49 @@ class WPGlobus_Config {
 			$this,
 			'on_load_textdomain'
 		) );
-
+	
 		$this->_get_options();
 	}
 
+	/**
+	 * Check plugin version and update option
+	 * @return void	
+	 */
+	public static function on_activate() {
+		
+		$version = get_option(self::$option_versioning);
+		
+		if ( empty($version) ) {
+			$version = array();	
+			/**
+			 * Now check 'wpglobus_option'
+			 */
+			$option = get_option('wpglobus_option');
+			
+			if ( empty($option) ) {
+				/**
+				 * This is first start WPGlobus plugin with version >= 1.0.0
+				 */
+				$version['current_version'] = WPGLOBUS_VERSION;
+			} else {
+				/**
+				 * This is start WPGlobus plugin after update from version 0.1.0 or 0.1.1
+				 */
+				$version['current_version'] = WPGLOBUS_VERSION;
+				$version['wpglobus_mini_warning'] = true;
+			}	
+		} else {
+			/**
+			 * Recreate $option_versioning
+			 */
+			delete_option(self::$option_versioning); 
+			$version = array();
+			$version['current_version'] = WPGLOBUS_VERSION;
+		}
+		
+		update_option(self::$option_versioning, $version);
+	}
+	
 	/**
 	 * Set current language
 	 *

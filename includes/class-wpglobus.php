@@ -398,6 +398,9 @@ class WPGlobus {
 	 * @todo use $WPGlobus_Config to determine running this function?
 	 */
 	public static function activated($plugin) {
+		
+		WPGlobus_Config::on_activate();
+		
 		if ( 'wpglobus/wpglobus.php' == $plugin ) {	
 			wp_redirect(admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ));
 			die();
