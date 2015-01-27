@@ -329,7 +329,7 @@ class WPGlobus_Options {
 			// This is where your data is stored in the database and also becomes your global variable name.
 			'display_name'       => 'WPGlobus',
 			// Name that appears at the top of your panel
-			'display_version'    => WPGlobus::$_version,
+			'display_version'    => WPGLOBUS_VERSION,
 			// Version that appears at the top of your panel
 			'menu_type'          => 'menu',
 			//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)

@@ -12,7 +12,7 @@ class WPGlobus {
 	/**
 	 * @var string
 	 */
-	public static $_version = '0.1.0';
+	#public static $_version = '0.1.0';
 
 	/**
 	 * @var string
@@ -576,7 +576,7 @@ class WPGlobus {
 				'select2-js',
 				self::$PLUGIN_DIR_URL . "vendor/ReduxCore/assets/js/vendor/select2/select2$suffix.js",
 				array( 'jquery' ),
-				self::$_version,
+				WPGLOBUS_VERSION,
 				true
 			);
 			wp_enqueue_script( 'select2-js' );
@@ -786,7 +786,7 @@ class WPGlobus {
 					'wpglobus.vendor',
 					self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.vendor.js',
 					array( 'jquery' ),
-					self::$_version,
+					WPGLOBUS_VERSION,
 					true
 				);
 				wp_enqueue_script( 'wpglobus.vendor' );
@@ -794,7 +794,7 @@ class WPGlobus {
 					'wpglobus.vendor',
 					'WPGlobusVendor',
 					array(
-						'version' => self::$_version,
+						'version' => WPGLOBUS_VERSION,
 						'vendor' => $this->vendors_scripts
 					)
 				);
@@ -804,7 +804,7 @@ class WPGlobus {
 				'wpglobus.admin',
 				self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.admin.js',
 				array( 'jquery' ),
-				self::$_version,
+				WPGLOBUS_VERSION,
 				true
 			);
 			wp_enqueue_script( 'wpglobus.admin' );
@@ -812,7 +812,7 @@ class WPGlobus {
 				'wpglobus.admin',
 				'WPGlobusAdmin',
 				array(
-					'version'      => self::$_version,
+					'version'      => WPGLOBUS_VERSION,
 					'page'		   => $page_action,
 					'content'	   => $post_content,
 					'title'	   	   => $post_title,
@@ -900,7 +900,7 @@ class WPGlobus {
 			'wpglobus.admin',
 			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.css',
 			array(),
-			self::$_version,
+			WPGLOBUS_VERSION,
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus.admin' );
@@ -910,7 +910,7 @@ class WPGlobus {
 				'select2-css',
 				self::$PLUGIN_DIR_URL . 'vendor/ReduxCore/assets/js/vendor/select2/select2.css',
 				array(),
-				self::$_version,
+				WPGLOBUS_VERSION,
 				'all'
 			);
 			wp_enqueue_style( 'select2-css' );
@@ -925,7 +925,7 @@ class WPGlobus {
 					'wpglobus.admin.tabs',
 					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.tabs.css',
 					array(),
-					self::$_version,
+					WPGLOBUS_VERSION,
 					'all'
 				);
 				wp_enqueue_style( 'wpglobus.admin.tabs' );
@@ -1019,7 +1019,7 @@ class WPGlobus {
 			'flags',
 			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.flags.css',
 			array(),
-			self::$_version,
+			WPGLOBUS_VERSION,
 			'all'
 		);
 		wp_enqueue_style( 'flags' );
@@ -1036,7 +1036,7 @@ class WPGlobus {
 			'wpglobus',
 			self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.js',
 			array( 'jquery', 'utils' ),
-			self::$_version,
+			WPGLOBUS_VERSION,
 			true
 		);
 		wp_enqueue_script( 'wpglobus' );
@@ -1044,7 +1044,7 @@ class WPGlobus {
 			'wpglobus',
 			'WPGlobus',
 			array(
-				'version' => self::$_version,
+				'version' => WPGLOBUS_VERSION,
 				'language' => $WPGlobus_Config->language
 			)
 		);		
