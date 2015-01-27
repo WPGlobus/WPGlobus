@@ -166,6 +166,14 @@ class APICest {
 		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'name_only' ) );
 
+		/**
+		 * @see WPGlobus_QA::_test_wp_get_term()
+		 */
+		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
+			'#_test_get_term_' . 'category' . ' .name' ) );
+		$I->assertEquals( "QA Category Description EN", $I->grabTextFrom(
+			'#_test_get_term_' . 'category' . ' .description' ) );
+
 		$this->_common_for_all_languages( $I );
 	}
 
@@ -251,6 +259,14 @@ class APICest {
 			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
 		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'name_only' ) );
+
+		/**
+		 * @see WPGlobus_QA::_test_wp_get_term()
+		 */
+		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
+			'#_test_get_term_' . 'category' . ' .name' ) );
+		$I->assertEquals( "QA Category Description RU", $I->grabTextFrom(
+			'#_test_get_term_' . 'category' . ' .description' ) );
 
 		$this->_common_for_all_languages( $I );
 	}

@@ -16,9 +16,12 @@ class WPGlobus_QA {
 		self::_test_home_url();
 		self::_test_string_parsing();
 		self::_test_get_pages();
+
 		self::_test_get_the_terms();
 		self::_test_wp_get_object_terms();
 		self::_test_get_terms();
+		self::_test_get_term();
+
 		self::_test_post_name();
 		self::_common_for_all_languages();
 	}
@@ -248,6 +251,38 @@ class WPGlobus_QA {
 				<br/>
 				=&gt;<span id="_test_get_terms_name_only"><?php echo $term; ?></span>
 			</p>
+
+		</div>
+	<?php
+	}
+
+	/**
+	 * @see get_term();
+	 */
+	private static function _test_get_term() {
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>get_term()</h2>
+			<?php
+			/**
+			 * Find term, to get its ID
+			 */
+			$term = get_terms( 'category', [ 'name__like' => 'QA Category', 'hide_empty' => false ] )[0];
+			/**
+			 * Get the term data by the ID we got above
+			 */
+			$term = get_term( $term->term_id, 'category' );
+			?>
+			<p><code>get_term( $term_id, 'category' )</code></p>
+
+			<p id="_test_get_term_category">
+				<code>$term->name</code> :
+				<span class="name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="description"><?php echo $term->description; ?></span>
+			</p>
+
 
 		</div>
 	<?php
