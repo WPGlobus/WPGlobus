@@ -105,6 +105,24 @@ class APICest {
 
 		$I->see( 'api demo', 'h1' );
 
+		/**
+		 * @see WPGlobus_QA::_create_qa_items()
+		 */
+		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_title' ) );
+		$I->assertEquals( '{:en}QA post_content EN{:}{:ru}QA post_content RU{:}',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_content' ) );
+		$I->assertEquals( '{:en}QA post_excerpt EN{:}{:ru}QA post_excerpt RU{:}',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( 'QA post_title EN',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_title' ) );
+		$I->assertEquals( 'QA post_content EN',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+		$I->assertEquals( 'QA post_excerpt EN',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
+
+
 		$this->_test_home_url( $I, 'http://www.wpglobus.com' );
 
 		$this->_test_string_parsing_ok( $I, 'ENG' );
@@ -198,6 +216,23 @@ class APICest {
 		 * Codeception does not apply UTF lowercase.
 		 */
 		$I->see( 'ДЕМОНСТРАЦИЯ API', 'h1' );
+
+		/**
+		 * @see WPGlobus_QA::_create_qa_items()
+		 */
+		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_title' ) );
+		$I->assertEquals( '{:en}QA post_content EN{:}{:ru}QA post_content RU{:}',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_content' ) );
+		$I->assertEquals( '{:en}QA post_excerpt EN{:}{:ru}QA post_excerpt RU{:}',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( 'QA post_title RU',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_title' ) );
+		$I->assertEquals( 'QA post_content RU',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+		$I->assertEquals( 'QA post_excerpt RU',
+			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
 		$this->_test_home_url( $I, 'http://www.wpglobus.com/ru' );
 

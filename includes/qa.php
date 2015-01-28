@@ -5,6 +5,8 @@
  */
 class WPGlobus_QA {
 
+	const QA_USER_ID = 1;
+
 	public static function api_demo() {
 		?>
 		<style>
@@ -13,6 +15,8 @@ class WPGlobus_QA {
 			}
 		</style>
 		<?php
+		self::_create_qa_items();
+
 		self::_test_home_url();
 		self::_test_string_parsing();
 		self::_test_get_pages();
@@ -24,6 +28,69 @@ class WPGlobus_QA {
 
 		self::_test_post_name();
 		self::_common_for_all_languages();
+	}
+
+	private static function _create_qa_items() {
+
+		/**
+		 * Create QA post if not exists
+		 */
+		$post_title = join( '', [
+			WPGlobus::tag_text( 'QA post_title EN', 'en' ),
+			WPGlobus::tag_text( 'QA post_title RU', 'ru' ),
+		] );
+
+		$post = get_page_by_title( $post_title, null, 'post' );
+
+		if ( ! $post ) {
+
+			$post_content = join( '', [
+				WPGlobus::tag_text( 'QA post_content EN', 'en' ),
+				WPGlobus::tag_text( 'QA post_content RU', 'ru' ),
+			] );
+
+			$post_excerpt = join( '', [
+				WPGlobus::tag_text( 'QA post_excerpt EN', 'en' ),
+				WPGlobus::tag_text( 'QA post_excerpt RU', 'ru' ),
+			] );
+
+			$post = get_post( wp_insert_post(
+				[
+					'post_status'  => 'publish',
+					'post_author'  => self::QA_USER_ID,
+					'post_title'   => $post_title,
+					'post_content' => $post_content,
+					'post_excerpt' => $post_excerpt,
+				]
+			) );
+		}
+		?>
+		<div id="<?php echo __FUNCTION__; ?>">
+			<h2>QA Post</h2>
+
+			<h3>Raw</h3>
+
+			<div class="qa_post_raw">
+				<div class="qa_post_title"><?php echo $post->post_title; ?></div>
+
+				<div class="qa_post_content"><?php echo $post->post_content; ?></div>
+
+				<div class="qa_post_excerpt"><?php echo $post->post_excerpt; ?></div>
+			</div>
+			<h3>Cooked</h3>
+
+			<div class="qa_post_cooked">
+				<div class="qa_post_title"><?php echo
+					apply_filters( 'the_title', $post->post_title ); ?></div>
+
+				<div class="qa_post_content"><?php
+					echo apply_filters( 'the_title', $post->post_content ); ?></div>
+
+				<div class="qa_post_excerpt"><?php
+					echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
+			</div>
+		</div>
+	<?php
 	}
 
 	protected static function _common_for_all_languages() {
