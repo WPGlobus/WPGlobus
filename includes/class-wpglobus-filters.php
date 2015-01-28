@@ -11,6 +11,26 @@
 class WPGlobus_Filters {
 
 	/**
+	 * This is the basic filter used to extract the text portion in the current language from a string.
+	 * Applied to the main WP texts, such as post title, content and excerpt.
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public static function filter__text( $text ) {
+
+		return WPGlobus_Core::text_filter(
+			$text,
+			WPGlobus::Config()->language,
+			null,
+			WPGlobus::Config()->default_language
+		);
+
+	}
+
+
+	/**
 	 * Filter @see get_terms
 	 * @scope admin
 	 * @scope front
@@ -236,6 +256,7 @@ class WPGlobus_Filters {
 		}
 
 		reset( $pages );
+
 		return $pages;
 	}
 

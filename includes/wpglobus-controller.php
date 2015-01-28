@@ -68,4 +68,16 @@ add_filter( 'home_url', [ 'WPGlobus_Filters', 'filter__home_url' ] );
  */
 add_filter( 'get_pages', [ 'WPGlobus_Filters', 'filter__get_pages' ], 0 );
 
+/**
+ * Basic post/page filters
+ * -
+ * Note: We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
+ * @see  the_excerpt()
+ * @see  get_the_excerpt()
+ * @todo look at 'the_excerpt_export' filter where the post excerpt used for WXR exports.
+ */
+add_filter( 'the_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+add_filter( 'the_content', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+add_filter( 'get_the_excerpt', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+
 # --- EOF
