@@ -115,5 +115,31 @@ add_filter( 'single_term_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
  */
 add_filter( 'widget_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
+/**
+ * Yoast filters
+ * @todo Move to a separate controller
+ */
+if ( defined( 'WPSEO_VERSION' ) ) {
+
+	if ( is_admin() ) {
+
+		if ( WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
+			/**
+			 * To translate Yoast columns on edit.php page
+			 */
+			add_filter( 'esc_html', [ 'WPGlobus_Filters', 'filter__wpseo_columns' ], 0 );
+		}
+
+	} else {
+		/**
+		 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
+		 * AJAX is probably not required (waiting for a case).
+		 */
+		add_filter( 'wpseo_title', 'wpg_text_filter', 0 );
+		add_filter( 'wpseo_metadesc', 'wpg_text_filter', 0 );
+	}
+
+
+}
 
 # --- EOF
