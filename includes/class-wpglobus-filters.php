@@ -221,6 +221,24 @@ class WPGlobus_Filters {
 		return $url;
 	}
 
+	/**
+	 * Filter @see get_pages
+	 * @qa See a list of available pages in the "Parent Page" metabox when editing a page.
+	 *
+	 * @param WP_Post[] $pages
+	 *
+	 * @return WP_Post[]
+	 */
+	function filter__get_pages( $pages ) {
+
+		foreach ( $pages as &$page ) {
+			WPGlobus_Core::translate_wp_post( $page, WPGlobus::Config()->language );
+		}
+
+		reset( $pages );
+		return $pages;
+	}
+
 } // class
 
 # --- EOF

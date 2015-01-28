@@ -54,7 +54,7 @@ add_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
  * We need it only on front/AJAX and at the "Menus" admin screen.
  * There is an additional restriction in the filter itself.
  */
-if ( WPGlobus_WP::is_doing_ajax() || !is_admin() || WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
+if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() || WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
 	add_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
 }
 
@@ -63,5 +63,9 @@ if ( WPGlobus_WP::is_doing_ajax() || !is_admin() || WPGlobus_WP::is_pagenow( 'na
  */
 add_filter( 'home_url', [ 'WPGlobus_Filters', 'filter__home_url' ] );
 
+/**
+ * Filter @see get_pages
+ */
+add_filter( 'get_pages', [ 'WPGlobus_Filters', 'filter__get_pages' ], 0 );
 
 # --- EOF

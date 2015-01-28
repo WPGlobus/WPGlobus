@@ -40,7 +40,6 @@ add_filter( 'single_cat_title', 'wpg_text_filter', 0 );
 add_filter( 'single_tag_title', 'wpg_text_filter', 0 );
 add_filter( 'single_term_title', 'wpg_text_filter', 0 );
 
-add_filter( 'get_pages', 'wpg_text_filter', 0 );
 
 
 
