@@ -91,5 +91,29 @@ add_filter( 'get_the_excerpt', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
  */
 //add_filter( 'wp_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
+/**
+ * The @see single_post_title has its own filter on $_post->post_title
+ */
+add_filter( 'single_post_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+
+/**
+ * @see post_type_archive_title has its own filter on $post_type_obj->labels->name
+ *                              and is used by @see wp_title
+ */
+add_filter( 'post_type_archive_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+
+/**
+ * @see single_term_title() uses several filters depending on the term type
+ */
+add_filter( 'single_cat_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+add_filter( 'single_tag_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+add_filter( 'single_term_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+
+/**
+ * This is usually used in 'widget' methods of the @see WP_Widget - derived classes,
+ * for example in @see WP_Widget_Pages::widget
+ */
+add_filter( 'widget_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+
 
 # --- EOF

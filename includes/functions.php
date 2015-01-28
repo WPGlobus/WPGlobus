@@ -15,22 +15,6 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 
 }
 
-add_filter( 'widget_title', 'wpg_text_filter', 0 );
-
-add_filter( 'single_post_title', 'wpg_text_filter', 0 );
-
-add_filter( 'post_type_archive_title', 'wpg_text_filter', 0 );
-
-/**
- * @see single_term_title()
- */
-add_filter( 'single_cat_title', 'wpg_text_filter', 0 );
-add_filter( 'single_tag_title', 'wpg_text_filter', 0 );
-add_filter( 'single_term_title', 'wpg_text_filter', 0 );
-
-
-
-
 
 /**
  * Option filters
