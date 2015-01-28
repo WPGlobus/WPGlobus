@@ -139,7 +139,30 @@ class WPGlobus {
 			}
 
 			if ( ! isset($_GET['wpglobus']) || 'on' == $_GET['wpglobus'] ) {
-
+				
+				/**
+				 * Four filters for adding language column to edit.php page
+				 */
+				add_filter( 'manage_posts_columns' , array(
+					$this,
+					'on_add_language_column'
+				), 10);
+				
+				add_filter( 'manage_pages_columns' , array(
+					$this,
+					'on_add_language_column'
+				), 10);				
+				
+				add_filter( 'manage_posts_custom_column' , array(
+					$this,
+					'on_manage_language_column'
+				), 10);
+				
+				add_filter( 'manage_pages_custom_column' , array(
+					$this,
+					'on_manage_language_column'
+				), 10);					
+			
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
 				 *
@@ -274,6 +297,49 @@ class WPGlobus {
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
 		$this->disabled_entities = apply_filters('wpg_disabled_entities', $this->disabled_entities);
+	}
+
+	/**
+	 * Insert language title to edit.php page
+	 *
+	 * @return void
+	 */
+	function on_add_language_column($posts_columns) {
+		
+		/**
+		 * What column we insert after?
+		 */
+		$insert_after = 'title';
+		
+		$i = 0;
+		foreach( $posts_columns as $key=>$value) {
+			if ( $key == $insert_after ) {
+				break;	
+			}		
+			$i++;
+		}	
+		$posts_columns = array_slice($posts_columns, 0, $i+1) + array('wpglobus_languages'=>'Language') + array_slice($posts_columns, $i+1);
+		
+		return $posts_columns;
+		
+	}
+	
+	/**
+	 * Insert flags to every item at edit.php page
+	 *
+	 * @return void
+	 */
+	function on_manage_language_column($column_name) {
+
+		if ( 'wpglobus_languages' == $column_name ) {
+			global $post;
+			foreach( WPGlobus::Config()->enabled_languages as $l ) {
+				if ( 1 == preg_match( "/(\{:|\[:|<!--:)[$l]{2}/", $post->post_title . $post->post_content ) ) {
+					echo '<img title="' . WPGlobus::Config()->en_language_name[$l] . '" src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[$l] . '" /><br />';
+				}	
+			}	
+		}
+		
 	}
 	
 	/**
