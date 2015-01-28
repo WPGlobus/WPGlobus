@@ -462,6 +462,9 @@ class WPGlobus {
 	 */
 	public static function activated($plugin) {
 		
+		/**
+		 * Run on_activate after plugin activated
+		 */
 		WPGlobus_Config::on_activate();
 		
 		if ( 'wpglobus/wpglobus.php' == $plugin ) {	
