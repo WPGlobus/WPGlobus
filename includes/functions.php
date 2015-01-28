@@ -10,6 +10,7 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	/**
 	 * For translate wpseo meta 'Focus KW' at edit.php page
 	 * @todo need to discuss this filter
+	 * @todo Check caller in the filter to restrict it to Yoast only
 	 */
 	add_filter( 'esc_html', 'wpg_text_filter', 0 );
 
