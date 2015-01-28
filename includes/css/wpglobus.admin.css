@@ -20,8 +20,27 @@
 .wpglobus-excerpt {
 	width:98%;
 }
+.widefat thead tr th.column-wpglobus_languages {
+	width:7%;
+}
 /* page=wpglobus-about */
-.about-wrap .icon {
+.wpglobus-about-wrap .three-col > div {
+    float: left;
+    margin-right: 5%;
+    position: relative;
+    width: 29.95%;
+}
+
+.wpglobus-about-wrap .alternate {
+	background-color:#fff;
+	margin: 20px 0;
+	padding:1px 20px 10px;
+}
+
+.wpglobus-about-wrap .col .last-feature {
+    margin-right: 0;
+}
+.wpglobus-about-wrap .wpglobus-icon {
 	background: url(images/apple-touch-icon-180x180.png) no-repeat;
 	height:180px;
 	width:180px;
