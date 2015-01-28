@@ -229,7 +229,7 @@ class WPGlobus_Filters {
 	 *
 	 * @return WP_Post[]
 	 */
-	function filter__get_pages( $pages ) {
+	public static function filter__get_pages( $pages ) {
 
 		foreach ( $pages as &$page ) {
 			WPGlobus_Core::translate_wp_post( $page, WPGlobus::Config()->language );
