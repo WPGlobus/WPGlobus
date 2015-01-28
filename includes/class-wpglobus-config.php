@@ -182,10 +182,23 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 
 		/**
 		 * Check plugin version and update option
+		 *
+		 * @param Plugin_Upgrader Object  $object
+		 * @param array $options
 		 * @return void
 		 */
-		public static function on_activate() {
+		public static function on_activate($object = null, $options = '') {
 
+			if ( empty($options) ) {
+				/**
+				 * Do nothing. This is after plugin was activated 
+				 */	
+			} else {
+				if ( 'wpglobus/wpglobus.php' != $options['plugin'] || 'update' != $options['action'] ) {
+					return;
+				}
+			}
+			
 			$version = get_option( self::$option_versioning );
 
 			if ( empty( $version ) ) {

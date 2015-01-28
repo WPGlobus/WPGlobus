@@ -70,4 +70,6 @@ add_action( 'plugins_loaded', 'WPGlobus::init', 0 );
 
 add_action( 'activated_plugin', 'WPGlobus::activated' );
 
+add_action( 'upgrader_process_complete', 'WPGlobus_Config::on_activate', 10, 2 );
+	
 # --- EOF
