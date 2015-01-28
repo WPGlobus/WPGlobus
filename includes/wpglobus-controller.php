@@ -80,4 +80,16 @@ add_filter( 'the_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 add_filter( 'the_content', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 add_filter( 'get_the_excerpt', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
+/**
+ * @internal
+ * Do not need to apply the wp_title filter
+ * but need to make sure all possible components of @see wp_title are filtered:
+ * post_type_archive_title
+ * single_term_title
+ * blog_info
+ * @todo Check date localization in date archives
+ */
+add_filter( 'wp_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+
+
 # --- EOF
