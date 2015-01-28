@@ -36,9 +36,9 @@ class WPGlobus_About {
 			<?php $welcome_page_title = __( 'Welcome to WPGlobus', 'wpglobus' ); ?>
 			
 			<h2><?php echo $welcome_page_title; ?></h2>
-			<div class="about-wrap">
+			<div class="wpglobus-about-wrap about-wrap">
 				<div class="changelog">
-					<div class="feature-rest feature-section col three-col">
+					<div class="feature-main feature-section col three-col">
 						<h3><?php _e( 'Main features', 'wpglobus' ); ?></h3>
 						<div>
 							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
@@ -46,7 +46,7 @@ class WPGlobus_About {
 						</div>
 						
 						<div>
-							<div class="icon"></div>
+							<div class="wpglobus-icon"></div>
 						</div>
 						<div class="last-feature">
 							<h4><?php _e( 'Vim tation apeirian eu', 'wpglobus' ); ?></h4>
@@ -54,7 +54,7 @@ class WPGlobus_About {
 						</div>
 					</div>
 				</div>
-				<div class="changelog about-integrations">
+				<div class="changelog alternate">
 					<h3><?php _e( 'WPGlobus API version 999', 'wpglobus' ); ?></h3>
 					<div class="feature-section col three-col">
 						<div>
@@ -88,7 +88,7 @@ class WPGlobus_About {
 					</div>
 				</div>
 				<p><a name="wpglobus-mini"></a></p>
-				<div class="changelog">
+				<div class="changelog alternate">
 					<h3>WPGlobus Mini is obsolete!</h3>
 					<div class="feature-section col one-col">
 						<div>
