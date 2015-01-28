@@ -89,7 +89,7 @@ add_filter( 'get_the_excerpt', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
  * blog_info
  * @todo Check date localization in date archives
  */
-add_filter( 'wp_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+//add_filter( 'wp_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
 
 # --- EOF
