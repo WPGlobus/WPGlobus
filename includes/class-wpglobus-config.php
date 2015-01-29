@@ -181,7 +181,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		}
 
 		/**
-		 * Check plugin version and update option
+		 * Check plugin version and update versioning option
 		 *
 		 * @param Plugin_Upgrader Object  $object
 		 * @param array $options
@@ -190,11 +190,9 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		public static function on_activate($object = null, $options = '') {
 
 			if ( empty($options) ) {
-				/**
-				 * Do nothing. This is after plugin was activated 
-				 */	
+				return;	
 			} else {
-				if ( 'wpglobus/wpglobus.php' != $options['plugin'] || 'update' != $options['action'] ) {
+				if ( WPGLOBUS_PLUGIN_BASENAME != $options['plugin'] || 'update' != $options['action'] ) {
 					return;
 				}
 			}
@@ -222,11 +220,11 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 				}
 			} else {
 				/**
-				 * Recreate $option_versioning
+				 * Update option after silent plugin activate
 				 */
-				delete_option( self::$option_versioning );
-				$version                    = array();
 				$version['current_version'] = WPGLOBUS_VERSION;
+
+				delete_option( self::$option_versioning );
 			}
 
 			update_option( self::$option_versioning, $version );

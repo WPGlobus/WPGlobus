@@ -461,15 +461,20 @@ class WPGlobus {
 	 * @param string $plugin
 	 */
 	public static function activated($plugin) {
+		//global $WPGlobus_Config;
+		//if ( 'wpglobus/wpglobus.php' == $plugin ) {	
+		if ( WPGLOBUS_PLUGIN_BASENAME == $plugin ) {	
+
+			/**
+			 * Run on_activate after plugin activated
+			 */
+			$options['plugin'] = $plugin;
+			$options['action'] = 'update';
+			WPGlobus_Config::on_activate(null, $options);
 		
-		/**
-		 * Run on_activate after plugin activated
-		 */
-		WPGlobus_Config::on_activate();
-		
-		if ( 'wpglobus/wpglobus.php' == $plugin ) {	
 			wp_redirect(admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ));
 			die();
+			
 		}	
 	}
 	
