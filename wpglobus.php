@@ -40,6 +40,7 @@ if ( ! defined( 'SCRIPT_DEBUG' ) ) {
 }
 
 define('WPGLOBUS_VERSION', '1.0.0');
+define('WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ));
 
 global $WPGlobus;
 global $WPGlobus_Config;
