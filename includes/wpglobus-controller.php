@@ -6,10 +6,11 @@
  */
 
 /**
- * @deprecated 15.01.20 Calls wp_get_object_terms, which is already filtered
- * @see        wpglobus_filter_get_terms
+ * @see get_the_terms
+ * Calls wp_get_object_terms, which is already filtered, only if terms were not cached
+ * @todo Check what's going on with cache
  */
-//add_filter( 'get_the_terms', 'wpglobus_filter_get_terms', 0 );
+//add_filter( 'get_the_terms', [ 'WPGlobus_Filters', 'filter__get_the_terms' ], 0 );
 
 /**
  * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
@@ -26,7 +27,8 @@ if ( is_admin() && ! empty( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) 
 	 * возможно ещё какие-то фильтры попадают под этот случай
 	 */
 } else {
-	add_filter( 'wp_get_object_terms', [ 'WPGlobus_Filters', 'filter__wp_get_object_terms' ], 0 );
+	add_filter( 'wp_get_object_terms', [ 'WPGlobus_Filters', 'filter__wp_get_object_terms' ], 0, 4 );
+//	return apply_filters( 'wp_get_object_terms', $terms, $object_ids, $taxonomies, $args );
 }
 
 

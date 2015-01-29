@@ -51,15 +51,45 @@ class WPGlobus_Filters {
 	}
 
 	/**
+	 * Filter @see get_the_terms
+	 *
+	 * @param object[]|WP_Error $terms List of attached terms, or WP_Error on failure.
+	 *
+	 * @return array
+	 */
+	public static function filter__get_the_terms( $terms ) {
+
+		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) && WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
+			return $terms;
+		}
+
+			if ( ! is_wp_error( $terms ) ) {
+
+			foreach ( $terms as &$term ) {
+				WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
+			}
+
+			reset( $terms );
+		}
+
+		return $terms;
+	}
+
+	/**
 	 * Filter @see wp_get_object_terms()
 	 * @scope admin
 	 * @scope front
 	 *
-	 * @param string[]|object[] $terms
+	 * @param string[]|object[] $terms An array of terms for the given object or objects.
+	 * @param int[]|int    $object_ids Object ID or array of IDs.
+	 * @param string[]|string $taxonomies A taxonomy or array of taxonomies.
+	 * @param array        $args       An array of arguments for retrieving terms for
+	 *                                 the given object(s).
 	 *
 	 * @return array
 	 */
-	public static function filter__wp_get_object_terms( Array $terms ) {
+	public static function filter__wp_get_object_terms( Array $terms, $object_ids, $taxonomies, $args ) {
+//		return apply_filters( 'wp_get_object_terms', $terms, $object_ids, $taxonomies, $args );
 		/**
 		 * @internal
 		 * Do not need to check for is_wp_error($terms),
@@ -68,38 +98,57 @@ class WPGlobus_Filters {
 		 */
 
 		/**
-		 * Don't filter tag names for save or publish post
+		 * Don't filter term names when saving or publishing posts
 		 * @todo Check this before add_filter and not here
 		 * @todo Describe exactly how to check this visually, and is possible - write the acceptance test
-		 * @todo Combine if()s
-		 * @todo replace isset with !empty
-		 * @todo pagenow can be mixed (?) - we need a function instead of using '===', to avoid notices
 		 */
-		global $pagenow;
-		if ( is_admin() && 'post.php' === $pagenow ) {
-			if ( isset( $_POST['save'] ) || isset( $_POST['publish'] ) ) {
-				return $terms;
-			}
-		}
-
-		/**
-		 * Don't filter tag names for inline-save ajax action from edit.php page
-		 * when called @see edit_post to save
-		 * but OK to filter when the same AJAX refreshes the table row
-		 */
-		$callers = debug_backtrace();
 		if (
-			! empty( $callers[10] ) && $callers[10] === 'wp_ajax_inline_save'
-			and
-			! empty( $callers[9] ) && $callers[10] === 'edit_post'
+			is_admin() &&
+			WPGlobus_WP::is_pagenow( 'post.php' ) &&
+			( ! empty( $_POST['save'] ) || ! empty( $_POST['publish'] ) )
 		) {
 			return $terms;
 		}
 
-		// Do not use this
-		//		if ( 'admin-ajax.php' == $pagenow && ! empty( $_POST['action'] ) && 'inline-save' == $_POST['action'] ) {
-		//			return $terms;
-		//		}
+		/**
+		 * Don't filter tag names for inline-save ajax action from edit.php page
+		 * @see wp_ajax_inline_save
+		 * when called @see edit_post to save
+		 * but OK to filter when the same AJAX refreshes the table row
+		 */
+		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) && WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
+			$callers = debug_backtrace();
+			$_c = [];
+			$_cs = '';
+			foreach($callers as $_){
+				$_c[] = $_['function'];
+				$_cs .= $_['function'] . "\n";
+			}
+			unset($_);
+			if(in_array('single_row', $_c)){
+				$a='a';
+			} else {
+				return $terms;
+			}
+//			if(in_array('edit_post', $_c)){
+//				$a='a';
+////				return $terms;
+//			}
+//			if(in_array('get_post', $_c)){
+//				$a='a';
+////				return $terms;
+//			}
+////			if (
+////				( ! empty( $callers[10] ) && $callers[10]['function'] === 'wp_ajax_inline_save' )
+////				and
+////				( ! empty( $callers[9] ) && $callers[9]['function'] === 'edit_post' )
+////			) {
+//			$a='a';
+//				return $terms;
+////			}
+
+
+		}
 
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
