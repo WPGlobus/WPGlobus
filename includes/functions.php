@@ -10,6 +10,9 @@
  */
 if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ! is_admin() ) {
 	/**
+	 * @see get_bloginfo in general-template.php
+	 *                   Specific call is get_option('blogdescription');
+	 * @see get_option in option.php
 	 * Для примера этот фильтр использется в Theme Name: Twenty Fifteen
 	 * $description = get_bloginfo( 'description', 'display' );
 	 * в файле header.php
