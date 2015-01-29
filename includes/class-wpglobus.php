@@ -352,8 +352,15 @@ class WPGlobus {
 		/** @global WPGlobus_Config $WPGlobus_Config */
 		global $WPGlobus_Config;
 		
+		/** @global $post */
 		global $post;
-		$permalink = get_permalink($post->ID); ?>
+			
+		$type = empty($post) ? '' : $post->post_type;
+		if ( $this->disabled_entity($type) ) {
+			return;	
+		}			
+		
+		$permalink = get_permalink($post->ID); 		?>
 		
 		<div id="wpglobus-wpseo-tabs"> 	<?php
 			/**
