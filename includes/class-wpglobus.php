@@ -163,6 +163,11 @@ class WPGlobus {
 					'on_manage_language_column'
 				), 10);					
 			
+				add_action( 'admin_footer' , array(
+					$this,
+					'on_add_options_general'
+				) );
+				
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
 				 *
@@ -574,6 +579,7 @@ class WPGlobus {
 		$enabled_pages[] = 'nav-menus.php';
 		$enabled_pages[] = 'edit-tags.php';
 		$enabled_pages[] = 'edit.php';
+		$enabled_pages[] = 'options-general.php';
 		
 		/**
 		 * Init $post_content 
@@ -855,7 +861,11 @@ class WPGlobus {
 					}
 				}				
 
-			}	
+			} else if ( 'options-general.php' == $page ) {
+			
+				$page_action = 'options-general.php';
+			
+			}
 			
 			if ( ! empty($this->vendors_scripts) ) {
 				wp_register_script(
@@ -1676,7 +1686,33 @@ class WPGlobus {
 		return $term_names;
 
 	}
-
+	
+	/**
+	 * Make template for Tagline at options-general.php page
+	 *
+	 * @return void
+	 */
+	function on_add_options_general() {
+		if ( ! WPGlobus_WP::is_pagenow('options-general.php') ) {
+			return;
+		}
+		$blogdesc = get_option('blogdescription');
+		?>
+		<div id="wpglobus-blogdescription">		<?php
+			foreach(self::Config()->enabled_languages as $language) : 	
+				$return = $language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
+				
+				<input type="text" class="regular-text wpglobus-blogdesc" value="<?php echo WPGlobus_Core::text_filter($blogdesc, $language, $return); ?>" 
+				id="blogdescription-<?php echo $language; ?>" name="blogdescription-<?php echo $language; ?>"
+				data-language="<?php echo $language; ?>" placeholder="<?php echo self::Config()->en_language_name[$language]; ?>"><br />
+			
+			<?php
+			endforeach; ?>
+		</div>
+		
+		<?php
+	}
+	
 	/**
 	 * Shortcut to avoid globals
 	 * @return WPGlobus_Config
