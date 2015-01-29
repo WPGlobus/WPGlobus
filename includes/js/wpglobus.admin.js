@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
                 $('#the-list tr').each(function (i, e) {
                     var $e = $(e);
                     var k = ( type === 'post' ? 'post-' : 'tag-' );
-					/* don't need var with id, see line 70 */
+					/* don't need var with id, see line 92 */
                     id = $e.attr('id').replace(k, '');
                     title[id] = {};
                     if ('post' === type) {
@@ -161,8 +161,9 @@ jQuery(document).ready(function () {
 						
 						$.each( WPGlobusAdmin.data.tags, function(i,tag){
 							t = p.find("textarea[name='" + WPGlobusAdmin.data.names[tag] + "']");
-							WPGlobusAdmin.data.value[tag] = t.val();
-							v = WPGlobusAdmin.data.value[tag].split(',');
+							WPGlobusAdmin.data.value[tag] = {};
+							WPGlobusAdmin.data.value[tag][id] = t.val();
+							v = WPGlobusAdmin.data.value[tag][id].split(',');
 							new_tags = [];
 							for(var i=0; i<v.length; i++) {
 								v[i] = v[i].trim(' ');
@@ -197,7 +198,9 @@ jQuery(document).ready(function () {
 					if ('post' === type && typeof WPGlobusAdmin.data.tags !== 'undefined') {
 						$.each( WPGlobusAdmin.data.tags, function(i,tag){
 							if ( WPGlobusAdmin.data.value[tag] != '' ) {
-								$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(WPGlobusAdmin.data.value[tag]);
+								if (typeof WPGlobusAdmin.data.value[tag][id] !== 'undefined') {
+									$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(WPGlobusAdmin.data.value[tag][id]);
+								}
 							}	
 						});	
 					}
