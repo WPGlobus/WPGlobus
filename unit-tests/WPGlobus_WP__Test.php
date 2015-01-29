@@ -31,7 +31,12 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		global $pagenow;
 		$pagenow = 'unit-test-page';
 		$this->assertTrue( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
+		$this->assertTrue( WPGlobus_WP::is_pagenow( [ 'unit-test-page', 'another-page' ] ) );
+		$this->assertTrue( WPGlobus_WP::is_pagenow( [ new StdClass, 'unit-test-page' ] ) );
 		$this->assertFalse( WPGlobus_WP::is_pagenow( 'not-unit-test-page' ) );
+		$this->assertFalse( WPGlobus_WP::is_pagenow( [ 'not-unit-test-page', 'another-page' ] ) );
+		$this->assertFalse( WPGlobus_WP::is_pagenow( 3.14 ) );
+		$this->assertFalse( WPGlobus_WP::is_pagenow( new StdClass ) );
 	}
 
 	/**

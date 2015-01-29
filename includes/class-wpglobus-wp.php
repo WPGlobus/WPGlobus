@@ -17,7 +17,7 @@ class WPGlobus_WP {
 	}
 
 	/**
-	 * @param string|array $page
+	 * @param string|string[] $page
 	 *
 	 * @return bool
 	 */
@@ -27,15 +27,8 @@ class WPGlobus_WP {
 		 * @global string $pagenow
 		 */
 		global $pagenow;
-		
-		if ( is_array($page) ) {
-			if ( in_array($pagenow, $page) ) {
-				return true;
-			}
-			return false;
-		}	
 
-		return $pagenow === $page;
+		return in_array( $pagenow, (array) $page );
 	}
 
 	/**
