@@ -461,8 +461,6 @@ class WPGlobus {
 	 * @param string $plugin
 	 */
 	public static function activated($plugin) {
-		//global $WPGlobus_Config;
-		//if ( 'wpglobus/wpglobus.php' == $plugin ) {	
 		if ( WPGLOBUS_PLUGIN_BASENAME == $plugin ) {	
 
 			/**
