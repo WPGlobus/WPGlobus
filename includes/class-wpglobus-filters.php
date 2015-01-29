@@ -81,12 +81,25 @@ class WPGlobus_Filters {
 				return $terms;
 			}
 		}
+
 		/**
 		 * Don't filter tag names for inline-save ajax action from edit.php page
+		 * when called @see edit_post to save
+		 * but OK to filter when the same AJAX refreshes the table row
 		 */
-		if ( 'admin-ajax.php' == $pagenow && ! empty( $_POST['action'] ) && 'inline-save' == $_POST['action'] ) {
+		$callers = debug_backtrace();
+		if (
+			! empty( $callers[10] ) && $callers[10] === 'wp_ajax_inline_save'
+			and
+			! empty( $callers[9] ) && $callers[10] === 'edit_post'
+		) {
 			return $terms;
 		}
+
+		// Do not use this
+		//		if ( 'admin-ajax.php' == $pagenow && ! empty( $_POST['action'] ) && 'inline-save' == $_POST['action'] ) {
+		//			return $terms;
+		//		}
 
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
