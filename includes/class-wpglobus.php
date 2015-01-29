@@ -1563,15 +1563,12 @@ class WPGlobus {
 
 		if ( $this->disabled_entity($post->post_type) ) {
 			return;	
-		}
-		
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;	?>
+		}			?>
 
 		<ul class="wpglobus-post-tabs-ul">	<?php
-			foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-				$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+			foreach ( self::Config()->enabled_languages as $language ) {
+				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
+				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a></li> <?php
 			} ?>
 		</ul>	<?php
 
