@@ -434,7 +434,7 @@ var wpglobus_wpseo = function () {
 		});		
 		
 	}); // end each .wpglobus-wpseo-general
-	//t.addClass('hidden');
+	t.addClass('hidden');
 	
 	jQuery('body').on('blur', '.wpglobus-wpseo_metadesc', function(event){
 		var save_to = '#' + wpseoMetaboxL10n.field_prefix + 'metadesc',
