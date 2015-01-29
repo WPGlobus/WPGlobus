@@ -348,9 +348,6 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_wpseo_tab_content() {
-
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
 		
 		/** @global $post */
 		global $post;
@@ -371,12 +368,12 @@ class WPGlobus {
 				data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
 			<ul>	<?php
-				foreach ( $WPGlobus_Config->enabled_languages as $language ) { ?>
-					<li id="wpseo-link-tab-<?php echo $language; ?>"><a href="#wpseo-tab-<?php echo $language; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+				foreach ( self::Config()->enabled_languages as $language ) { ?>
+					<li id="wpseo-link-tab-<?php echo $language; ?>"><a href="#wpseo-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a></li> <?php
 				} ?>
 			</ul> 	<?php
 			
-			foreach ( $WPGlobus_Config->enabled_languages as $language ) { 
+			foreach ( self::Config()->enabled_languages as $language ) { 
 				$url = WPGlobus_Utils::get_convert_url($permalink, $language); 
 				$metadesc = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);	
 				$wpseotitle = get_post_meta($post->ID, '_yoast_wpseo_title', true);	
