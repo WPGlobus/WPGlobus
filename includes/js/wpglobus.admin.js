@@ -66,10 +66,28 @@ jQuery(document).ready(function () {
                     this.quick_edit('taxonomy');
                 } else if ('edit.php' === WPGlobusAdmin.page) {
                     this.quick_edit('post');
+                } else if ('options-general.php' == WPGlobusAdmin.page) {
+					this.options_general();	
                 } else {
                     this.start();
                 }
             },
+            options_general: function () {
+				var $b = $('#blogdescription');
+				$b.addClass('hidden');
+				$('#wpglobus-blogdescription').insertAfter($b);
+                $('body').on('blur', '.wpglobus-blogdesc', function (event) {
+                    var s = '';
+                    $('.wpglobus-blogdesc').each(function (index, e) {
+                        var $e = $(e);
+						var l = $e.data('language');
+                        if ($e.val() !== '') {
+                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+                        }
+                    });
+					$b.val(s);
+                });
+			},	
             quick_edit: function (type) {
                 var full_id = 0, id = 0;
                 if (typeof WPGlobusAdmin.data.has_items === 'undefined') {
