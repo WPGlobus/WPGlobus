@@ -857,6 +857,7 @@ class WPGlobus {
 							$data['names'][$tag] 	= 'tax_input[' . $tag . ']';
 							$data['tag'][$tag]  	= $terms;
 							$data['value'][$tag]	= ''; // just init
+							$data['value'][$tag]['post_id']  	= ''; // just init
 						}	
 					}
 				}				
