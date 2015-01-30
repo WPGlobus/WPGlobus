@@ -12,7 +12,8 @@ add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
  *
  * @return array
  */
-function wpglobus_get_terms( $terms, $taxonomy ) {
+function wpglobus_get_terms( /** @noinspection PhpUnusedParameterInspection */
+	$terms, $taxonomy ) {
 	return WPGlobus::_get_terms( $taxonomy );
 }
 
@@ -77,7 +78,7 @@ function wpglobus_mini_warning() {
 		$hide    = sprintf( __( '<a href="%s">Hide Notice</a>', 'wpglobus' ), '?wpglobus_mini_warning=hide');
 		?>
 		<div class="error">
-			<p><?php echo $message; ?><span style="float:right;"><?php echo $hide; ?></a></p>
+			<p><?php echo $message; ?><span style="float:right;"><?php echo $hide; ?></a></span></p>
 		</div>
     <?php
 	}
@@ -90,7 +91,6 @@ function wpglobus_mini_warning() {
 add_action('admin_init', 'wpglobus_mini_hide_warning');
 function wpglobus_mini_hide_warning() {
 
-	global $WPGlobus_Config;
 
     if ( isset($_GET['wpglobus_mini_warning']) && 'hide' == $_GET['wpglobus_mini_warning'] ) {
 		delete_option(WPGlobus_Config::$option_versioning); 
