@@ -118,6 +118,19 @@ add_filter( 'single_term_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 add_filter( 'widget_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
 /**
+ * @see get_bloginfo in general-template.php
+ *                   Specific call is get_option('blogdescription');
+ * @see get_option in option.php
+ * For example this is used in the Twenty Fifteen theme's header.php:
+ * $description = get_bloginfo( 'description', 'display' );
+ * @scope Front. In admin we need to get the "raw" string.
+ */
+if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
+	add_filter( 'option_blogdescription', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+}
+
+
+/**
  * Yoast filters
  * @todo Move to a separate controller
  */

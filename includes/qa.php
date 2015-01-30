@@ -27,6 +27,7 @@ class WPGlobus_QA {
 		self::_test_get_term();
 
 		self::_test_post_name();
+
 		self::_common_for_all_languages();
 	}
 
@@ -89,6 +90,16 @@ class WPGlobus_QA {
 				<div class="qa_post_excerpt"><?php
 					echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
 			</div>
+
+			<h2>QA Blog Description</h2>
+			<?php
+			$blogdescription = join( '', [
+				WPGlobus::tag_text( 'QA blogdescription EN', 'en' ),
+				WPGlobus::tag_text( 'QA blogdescription RU', 'ru' ),
+			] );
+			update_option( 'blogdescription', $blogdescription );
+			?>
+			<div id="qa_blogdescription"><?php echo get_bloginfo( 'description' ); ?></div>
 		</div>
 	<?php
 	}

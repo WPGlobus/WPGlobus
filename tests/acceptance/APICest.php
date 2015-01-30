@@ -31,11 +31,11 @@ class APICest {
 		$I->assertEquals( '', $I->grabTextFrom( '#_test_post_name' .
 		                                        ' .wpg_qa_draft .wpg_qa_post_name' ) );
 		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
-		                                        ' .wpg_qa_draft .wpg_qa_sample_permalink' ) );
+		                                               ' .wpg_qa_draft .wpg_qa_sample_permalink' ) );
 		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
-		                                        ' .wpg_qa_publish .wpg_qa_post_name' ) );
+		                                               ' .wpg_qa_publish .wpg_qa_post_name' ) );
 		$I->assertEquals( 'post-en', $I->grabTextFrom( '#_test_post_name' .
-		                                        ' .wpg_qa_publish .wpg_qa_sample_permalink' ) );
+		                                               ' .wpg_qa_publish .wpg_qa_sample_permalink' ) );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_term()
@@ -122,6 +122,7 @@ class APICest {
 		$I->assertEquals( 'QA post_excerpt EN',
 			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
+		$I->assertEquals( 'QA blogdescription EN', $I->grabTextFrom( '#qa_blogdescription' ) );
 
 		$this->_test_home_url( $I, 'http://www.wpglobus.com' );
 
@@ -233,6 +234,8 @@ class APICest {
 			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_content' ) );
 		$I->assertEquals( 'QA post_excerpt RU',
 			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( 'QA blogdescription RU', $I->grabTextFrom( '#qa_blogdescription' ) );
 
 		$this->_test_home_url( $I, 'http://www.wpglobus.com/ru' );
 
