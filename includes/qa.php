@@ -17,6 +17,7 @@ class WPGlobus_QA {
 		<?php
 		self::_create_qa_items();
 
+		self::_test_get_locale();
 		self::_test_home_url();
 		self::_test_string_parsing();
 		self::_test_get_pages();
@@ -440,6 +441,11 @@ class WPGlobus_QA {
 		<?php
 		$force_delete = true;
 		wp_delete_post( $post->ID, $force_delete );
+	}
+
+	private static function _test_get_locale() {
+		?><h2>get_locale()</h2><?php
+		?><div id="<?php echo __FUNCTION__; ?>"><?php echo get_locale(); ?></div><?php
 	}
 
 }

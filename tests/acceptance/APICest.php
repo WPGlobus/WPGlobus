@@ -106,6 +106,11 @@ class APICest {
 		$I->see( 'api demo', 'h1' );
 
 		/**
+		 * @see WPGlobus_QA::_test_get_locale()
+		 */
+		$I->assertEquals( 'en_US', $I->grabTextFrom( '#_test_get_locale' ) );
+
+		/**
 		 * @see WPGlobus_QA::_create_qa_items()
 		 */
 		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
@@ -217,6 +222,11 @@ class APICest {
 		 * Codeception does not apply UTF lowercase.
 		 */
 		$I->see( 'ДЕМОНСТРАЦИЯ API', 'h1' );
+
+		/**
+		 * @see WPGlobus_QA::_test_get_locale()
+		 */
+		$I->assertEquals( 'ru_RU', $I->grabTextFrom( '#_test_get_locale' ) );
 
 		/**
 		 * @see WPGlobus_QA::_create_qa_items()
