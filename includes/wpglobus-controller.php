@@ -27,8 +27,7 @@ if ( is_admin() && ! empty( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) 
 	 * возможно ещё какие-то фильтры попадают под этот случай
 	 */
 } else {
-	add_filter( 'wp_get_object_terms', [ 'WPGlobus_Filters', 'filter__wp_get_object_terms' ], 0, 4 );
-//	return apply_filters( 'wp_get_object_terms', $terms, $object_ids, $taxonomies, $args );
+	add_filter( 'wp_get_object_terms', [ 'WPGlobus_Filters', 'filter__wp_get_object_terms' ], 0 );
 }
 
 

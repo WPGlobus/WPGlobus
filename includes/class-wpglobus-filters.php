@@ -81,15 +81,11 @@ class WPGlobus_Filters {
 	 * @scope front
 	 *
 	 * @param string[]|object[] $terms      An array of terms for the given object or objects.
-	 * @param int[]|int         $object_ids Object ID or array of IDs.
-	 * @param string[]|string   $taxonomies A taxonomy or array of taxonomies.
-	 * @param array             $args       An array of arguments for retrieving terms for
-	 *                                      the given object(s).
 	 *
 	 * @return array
 	 */
-	public static function filter__wp_get_object_terms( Array $terms, $object_ids, $taxonomies, $args ) {
-		//		return apply_filters( 'wp_get_object_terms', $terms, $object_ids, $taxonomies, $args );
+	public static function filter__wp_get_object_terms( Array $terms ) {
+
 		/**
 		 * @internal
 		 * Do not need to check for is_wp_error($terms),
@@ -111,42 +107,21 @@ class WPGlobus_Filters {
 		}
 
 		/**
-		 * Don't filter tag names for inline-save ajax action from edit.php page
+		 * Don't filter term names for inline-save ajax action from edit.php page
 		 * @see wp_ajax_inline_save
-		 * when called @see edit_post to save
-		 * but OK to filter when the same AJAX refreshes the table row
+		 * ...except when the same AJAX refreshes the table row @see WP_Posts_List_Table::single_row
+		 * -
+		 * @qa At the "All posts" admin page, do Quick Edit on any post. After update, categories and tags
+		 *     must not show multilingual strings with delimiters.
+		 * @qa At Quick Edit, enter an existing tag. After save, check if there is no additional tag
+		 *     on the "Tags" page. If a new tag is created then the "is tag exists" check was checking
+		 *     only a single language representation of the tag, while there is a multilingual tag in the DB.
 		 */
-		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) && WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
-			$callers = debug_backtrace();
-			$_c      = [ ];
-			$_cs     = '';
-			foreach ( $callers as $_ ) {
-				$_c[] = $_['function'];
-				$_cs .= $_['function'] . "\n";
-			}
-			unset( $_ );
-			if ( in_array( 'single_row', $_c ) ) {
-				$a = 'a';
-			} else {
+		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) &&
+		     WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
+			if ( ! WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
 				return $terms;
 			}
-			//			if(in_array('edit_post', $_c)){
-			//				$a='a';
-			////				return $terms;
-			//			}
-			//			if(in_array('get_post', $_c)){
-			//				$a='a';
-			////				return $terms;
-			//			}
-			////			if (
-			////				( ! empty( $callers[10] ) && $callers[10]['function'] === 'wp_ajax_inline_save' )
-			////				and
-			////				( ! empty( $callers[9] ) && $callers[9]['function'] === 'edit_post' )
-			////			) {
-			//			$a='a';
-			//				return $terms;
-			////			}
-
 
 		}
 
@@ -405,7 +380,6 @@ class WPGlobus_Filters {
 		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
 
 	}
-
 
 
 } // class
