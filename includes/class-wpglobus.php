@@ -1509,7 +1509,9 @@ class WPGlobus {
 
 			}
 		endforeach;
-
+		
+		$data = apply_filters('wpglobus_save_post_data', $data, $postarr, $devmode);
+		
 		return $data;
 
 	}
