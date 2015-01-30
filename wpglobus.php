@@ -53,8 +53,15 @@ require_once 'includes/class-wpglobus-wp.php';
 require_once 'includes/class-wpglobus.php';
 
 require_once 'includes/class-wpglobus-core.php';
+
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
+
+if( is_admin() && !WPGlobus_WP::is_doing_ajax()) {
+	require_once 'includes/class-wpglobus-upgrade.php';
+	require_once 'includes/wpglobus-upgrade-controller.php';
+}
+
 require_once 'includes/functions.php';
 
 require_once 'includes/qa.php';
