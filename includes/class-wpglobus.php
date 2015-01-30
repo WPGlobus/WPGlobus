@@ -1665,8 +1665,6 @@ class WPGlobus {
 			return $error;
 		}
 		
-		global $WPGlobus_Config;
-		
 		remove_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
 
 		$terms = get_terms( $taxonomy, array('hide_empty'=>false) );
@@ -1677,7 +1675,11 @@ class WPGlobus {
 		
 		if ( !empty($terms) ) {
 			foreach( $terms as $term ) {
-				$term_names[WPGlobus_Core::text_filter($term->name, $WPGlobus_Config->default_language)] = $term->name;
+				$term_names[WPGlobus_Core::text_filter($term->name, self::Config()->default_language)] = $term->name;
+				/**
+				 * In admin self::Config()->language is the same as result get_locale()
+				 */
+				$term_names[WPGlobus_Core::text_filter($term->name, self::Config()->language)] = $term->name;
 			}
 		}	
 
