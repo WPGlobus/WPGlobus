@@ -62,8 +62,6 @@ if( is_admin() && !WPGlobus_WP::is_doing_ajax()) {
 	require_once 'includes/wpglobus-upgrade-controller.php';
 }
 
-require_once 'includes/functions.php';
-
 require_once 'includes/qa.php';
 
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
