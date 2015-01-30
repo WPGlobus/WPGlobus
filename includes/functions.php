@@ -1,23 +1,5 @@
 <?php
 
-/**
- * Own filters
- */
-add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
-/**
- * The first parameter is ignored. We have it here only because WP requires the 1st parameter in filter
- *
- * @param mixed  $terms Ignored
- * @param string $taxonomy
- *
- * @return array
- */
-function wpglobus_get_terms(
-	/** @noinspection PhpUnusedParameterInspection */
-	$terms, $taxonomy
-) {
-	return WPGlobus::_get_terms( $taxonomy );
-}
 
 add_action( 'init', 'wpg_init', 2 );
 function wpg_init() {

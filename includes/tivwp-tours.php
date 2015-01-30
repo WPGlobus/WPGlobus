@@ -1,4 +1,9 @@
 <?php
+/**
+ * Own filter
+ * @todo This is a non-standard approach. Should discuss it later.
+ */
+add_filter( 'wpglobus_get_terms', [ '_WPGlobus_Internal_Example', 'own_filter__get_terms' ], 10, 2 );
 
 /**
  * Class _WPGlobus_Internal_Example
@@ -8,6 +13,21 @@ class _WPGlobus_Internal_Example {
 	 * Пример функции, которая создаёт свой tag для CPT и корректно работает с WPGlobus
 	 * взята из Plugin Name: TIVWP-Tours
 	 */
+	/**
+	 * The first parameter is ignored. We have it here only because WP requires the 1st parameter in filter
+	 *
+	 * @param mixed  $terms Ignored
+	 * @param string $taxonomy
+	 *
+	 * @return array
+	 */
+	public static function own_filter__get_terms(
+		/** @noinspection PhpUnusedParameterInspection */
+		$terms, $taxonomy
+	) {
+		return WPGlobus::_get_terms( $taxonomy );
+	}
+
 
 	/**
 	 * Meta box to select only one taxonomy value
