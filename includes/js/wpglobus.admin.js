@@ -89,29 +89,24 @@ jQuery(document).ready(function () {
                 });
 			},	
             quick_edit: function (type) {
+                if (typeof WPGlobusAdmin.data.has_items === 'undefined') return;
+                if (!WPGlobusAdmin.data.has_items) return;	
                 var full_id = 0, id = 0;
-                if (typeof WPGlobusAdmin.data.has_items === 'undefined') {
-                    return;
-                }
-                if (!WPGlobusAdmin.data.has_items) {
-                    return;
-                }
-
+				
 				$(document).ajaxComplete(function(ev, jqxhr, settings){
 					if (typeof settings.data === 'undefined') return;
 					if ( full_id == 0 ) return;
 					if (settings.data.indexOf('action=inline-save-tax&') >= 0) {
 						$('#'+full_id+' a.row-title').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['name']);
 						$('#'+full_id+' .description').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['description']);
-					}			
+					}
 				});
 				
                 var title = {};
                 $('#the-list tr').each(function (i, e) {
                     var $e = $(e);
                     var k = ( type === 'post' ? 'post-' : 'tag-' );
-					/* don't need var with id, see line 92 */
-                    id = $e.attr('id').replace(k, '');
+                    id = $e.attr('id').replace(k, ''); /* don't need var with id, see line 94 */
                     title[id] = {};
                     if ('post' === type) {
                         title[id]['source'] = $e.find('.post_title').text();
