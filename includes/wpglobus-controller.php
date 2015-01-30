@@ -134,6 +134,10 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
  */
 add_filter( 'locale', [ 'WPGlobus_Filters', 'filter__get_locale' ], PHP_INT_MAX );
 
+/**
+ * @todo To discuss
+ */
+add_action( 'init', [ 'WPGlobus_Filters', 'action__init_url_info' ], 2 );
 
 /**
  * Yoast filters
