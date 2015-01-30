@@ -7,63 +7,18 @@ add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
 /**
  * The first parameter is ignored. We have it here only because WP requires the 1st parameter in filter
  *
- * @param mixed $terms Ignored
+ * @param mixed  $terms Ignored
  * @param string $taxonomy
  *
  * @return array
  */
-function wpglobus_get_terms( /** @noinspection PhpUnusedParameterInspection */
-	$terms, $taxonomy ) {
+function wpglobus_get_terms(
+	/** @noinspection PhpUnusedParameterInspection */
+	$terms, $taxonomy
+) {
 	return WPGlobus::_get_terms( $taxonomy );
 }
 
-
-add_filter( 'locale', 'wpg_locale', 99 );
-/**
- * @param Array $locale
- *
- * @return mixed
- */
-function wpg_locale(
-	/** @noinspection PhpUnusedParameterInspection */
-	$locale
-) {
-
-	global $WPGlobus_Config;
-
-	// try to figure out the correct locale
-	/*
-	$locale = array();
-	$locale[] = $q_config['locale'][$q_config['language']].".utf8";
-	$locale[] = $q_config['locale'][$q_config['language']]."@euro";
-	$locale[] = $q_config['locale'][$q_config['language']];
-	$locale[] = $q_config['windows_locale'][$q_config['language']];
-	$locale[] = $q_config['language'];
-	
-	// return the correct locale and most importantly set it (wordpress doesn't, which is bad)
-	// only set LC_TIME as everything else doesn't seem to work with windows
-	setlocale(LC_TIME, $locale);
-	// */
-
-	$locale = $WPGlobus_Config->locale[ $WPGlobus_Config->language ];
-
-	/** @todo What about AJAX? */
-	if ( is_admin() ) {
-		/**
-		 * Need to check WPLANG option for WP4.1
-		 * @todo There is a WP method
-		 * @see  get_locale()
-		 */
-		$db_locale = get_option( 'WPLANG' );
-		if ( ! empty( $db_locale ) ) {
-			$locale = $db_locale;
-			$WPGlobus_Config->set_language( $locale );
-		}
-	}
-
-	return $locale;
-
-}
 
 
 /**
@@ -72,38 +27,36 @@ function wpg_locale(
 add_action( 'admin_notices', 'wpglobus_mini_warning' );
 function wpglobus_mini_warning() {
 
-	if ( isset(WPGlobus::Config()->version['wpglobus_mini_warning']) && WPGlobus::Config()->version['wpglobus_mini_warning'] ) {
-		$message = sprintf( __( 'Updated from WPGlobus Mini. Please, let\'s read good instruction at %s', 'wpglobus' ), 
+	if ( isset( WPGlobus::Config()->version['wpglobus_mini_warning'] ) && WPGlobus::Config()->version['wpglobus_mini_warning'] ) {
+		$message = sprintf( __( 'Updated from WPGlobus Mini. Please, let\'s read good instruction at %s', 'wpglobus' ),
 			'<a href="' . admin_url() . 'admin.php?page=wpglobus-about#wpglobus-mini">WPGlobus About</a>' );
-		$hide    = sprintf( __( '<a href="%s">Hide Notice</a>', 'wpglobus' ), '?wpglobus_mini_warning=hide');
+		$hide    = sprintf( __( '<a href="%s">Hide Notice</a>', 'wpglobus' ), '?wpglobus_mini_warning=hide' );
 		?>
 		<div class="error">
 			<p><?php echo $message; ?><span style="float:right;"><?php echo $hide; ?></a></span></p>
 		</div>
-    <?php
+	<?php
 	}
-	
+
 }
 
 /**
  *  скрыть варнинг о WPGlobus Mini
  */
-add_action('admin_init', 'wpglobus_mini_hide_warning');
+add_action( 'admin_init', 'wpglobus_mini_hide_warning' );
 function wpglobus_mini_hide_warning() {
 
 
-    if ( isset($_GET['wpglobus_mini_warning']) && 'hide' == $_GET['wpglobus_mini_warning'] ) {
-		delete_option(WPGlobus_Config::$option_versioning); 
-		$version = array();
+	if ( isset( $_GET['wpglobus_mini_warning'] ) && 'hide' == $_GET['wpglobus_mini_warning'] ) {
+		delete_option( WPGlobus_Config::$option_versioning );
+		$version                    = array();
 		$version['current_version'] = WPGLOBUS_VERSION;
-		update_option(WPGlobus_Config::$option_versioning, $version);
+		update_option( WPGlobus_Config::$option_versioning, $version );
 
-		wp_redirect($_SERVER['HTTP_REFERER']);
+		wp_redirect( $_SERVER['HTTP_REFERER'] );
 		die();
 	}
 }
-
-
 
 
 add_action( 'init', 'wpg_init', 2 );

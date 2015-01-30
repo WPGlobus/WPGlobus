@@ -129,6 +129,11 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'option_blogdescription', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 }
 
+/**
+ * @see get_locale()
+ */
+add_filter( 'locale', [ 'WPGlobus_Filters', 'filter__get_locale' ], PHP_INT_MAX );
+
 
 /**
  * Yoast filters

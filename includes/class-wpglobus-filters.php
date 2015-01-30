@@ -63,7 +63,7 @@ class WPGlobus_Filters {
 			return $terms;
 		}
 
-			if ( ! is_wp_error( $terms ) ) {
+		if ( ! is_wp_error( $terms ) ) {
 
 			foreach ( $terms as &$term ) {
 				WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
@@ -80,16 +80,16 @@ class WPGlobus_Filters {
 	 * @scope admin
 	 * @scope front
 	 *
-	 * @param string[]|object[] $terms An array of terms for the given object or objects.
-	 * @param int[]|int    $object_ids Object ID or array of IDs.
-	 * @param string[]|string $taxonomies A taxonomy or array of taxonomies.
-	 * @param array        $args       An array of arguments for retrieving terms for
-	 *                                 the given object(s).
+	 * @param string[]|object[] $terms      An array of terms for the given object or objects.
+	 * @param int[]|int         $object_ids Object ID or array of IDs.
+	 * @param string[]|string   $taxonomies A taxonomy or array of taxonomies.
+	 * @param array             $args       An array of arguments for retrieving terms for
+	 *                                      the given object(s).
 	 *
 	 * @return array
 	 */
 	public static function filter__wp_get_object_terms( Array $terms, $object_ids, $taxonomies, $args ) {
-//		return apply_filters( 'wp_get_object_terms', $terms, $object_ids, $taxonomies, $args );
+		//		return apply_filters( 'wp_get_object_terms', $terms, $object_ids, $taxonomies, $args );
 		/**
 		 * @internal
 		 * Do not need to check for is_wp_error($terms),
@@ -118,34 +118,34 @@ class WPGlobus_Filters {
 		 */
 		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) && WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
 			$callers = debug_backtrace();
-			$_c = [];
-			$_cs = '';
-			foreach($callers as $_){
+			$_c      = [ ];
+			$_cs     = '';
+			foreach ( $callers as $_ ) {
 				$_c[] = $_['function'];
 				$_cs .= $_['function'] . "\n";
 			}
-			unset($_);
-			if(in_array('single_row', $_c)){
-				$a='a';
+			unset( $_ );
+			if ( in_array( 'single_row', $_c ) ) {
+				$a = 'a';
 			} else {
 				return $terms;
 			}
-//			if(in_array('edit_post', $_c)){
-//				$a='a';
-////				return $terms;
-//			}
-//			if(in_array('get_post', $_c)){
-//				$a='a';
-////				return $terms;
-//			}
-////			if (
-////				( ! empty( $callers[10] ) && $callers[10]['function'] === 'wp_ajax_inline_save' )
-////				and
-////				( ! empty( $callers[9] ) && $callers[9]['function'] === 'edit_post' )
-////			) {
-//			$a='a';
-//				return $terms;
-////			}
+			//			if(in_array('edit_post', $_c)){
+			//				$a='a';
+			////				return $terms;
+			//			}
+			//			if(in_array('get_post', $_c)){
+			//				$a='a';
+			////				return $terms;
+			//			}
+			////			if (
+			////				( ! empty( $callers[10] ) && $callers[10]['function'] === 'wp_ajax_inline_save' )
+			////				and
+			////				( ! empty( $callers[9] ) && $callers[9]['function'] === 'edit_post' )
+			////			) {
+			//			$a='a';
+			//				return $terms;
+			////			}
 
 
 		}
@@ -320,6 +320,42 @@ class WPGlobus_Filters {
 		reset( $pages );
 
 		return $pages;
+	}
+
+	/**
+	 * Filter for @see get_locale
+	 *
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @todo    Do we need to do setlocale(LC_???, $locale)? (*** NOT HERE )
+	 * @see     setlocale
+	 * @link    http://php.net/manual/en/function.setlocale.php
+	 * @example echo setlocale(LC_ALL, 'Russian'); => Russian_Russia.1251
+	 */
+	public static function filter__get_locale(
+		/** @noinspection PhpUnusedParameterInspection */
+		$locale
+	) {
+
+		if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
+			/**
+			 * If in admin, set the language according to the WPLANG option.
+			 * @todo is_multisite
+			 * @todo Pre-WP4, WPLANG constant from wp-config
+			 */
+			$WPLANG = get_option( 'WPLANG' );
+			if ( empty( $WPLANG ) ) {
+				$WPLANG = 'en_US';
+			}
+			WPGlobus::Config()->set_language( $WPLANG );
+
+		}
+
+		$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
+
+		return $locale;
+
 	}
 
 	/**
