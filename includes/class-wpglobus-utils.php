@@ -13,23 +13,23 @@ class WPGlobus_Utils {
 	 * @return string
 	 */
 	public static function get_convert_url( $url = '', $language = '' ) {
-		
+
 		global $WPGlobus_Config;
 
 		if ( empty($url) ) {
 			return $url;
 		}
-		
+
 		$converted_url = '';
-		
+
 		$language = empty($language) ? $WPGlobus_Config->language : $language;
-		
-		$parsed_url = self::parse_url($url);	
-		
+
+		$parsed_url = self::parse_url($url);
+
 		if ( ! $parsed_url ) {
 			return $url;
 		}
-		
+
 		if ( empty($parsed_url['host']) ) {
 			return $url;
 		}
@@ -40,7 +40,7 @@ class WPGlobus_Utils {
 			 */
 			return $url;
 		}
-		
+
 		switch ( $WPGlobus_Config->get_url_mode() ) :
 			case WPGlobus_Config::GLOBUS_URL_PATH:
 				// pre url
@@ -48,11 +48,11 @@ class WPGlobus_Utils {
 				if ( $language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
 					$language = '';
 				} else {
-					$language = '/' . $language; 
+					$language = '/' . $language;
 				}
 
 				$fragment = empty($parsed_url['fragment']) ? '' : '#' . $parsed_url['fragment'];
-				
+
 				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
 				break;
 			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
@@ -63,12 +63,12 @@ class WPGlobus_Utils {
 				// query (question mark)
 
 				break;
-		endswitch;	
-		
+		endswitch;
+
 		return $converted_url;
-	
+
 	}
-	
+
 	/**
 	 * Returns cleaned string and language information
 	 * Improved version, also understands $url without scheme:
@@ -166,7 +166,7 @@ class WPGlobus_Utils {
 	 * @see  parse_url()
 	 */
 	public static function parse_url( $url ) {
-	
+
 		if ( empty($url) ) {
 			return false;
 		}
@@ -203,9 +203,9 @@ class WPGlobus_Utils {
 
 			if ( preg_match( $r2, $url, $out2 ) ) {
 				$result['host'] = $out2[1] . $out2[2];
-				/** 
+				/**
 				 * http://www.wpg.dev/wp-admin/edit.php?post_type=product
-				 * with WPGlobus WC 
+				 * with WPGlobus WC
 				 * has  PHP Notice:  Undefined offset: 3 in C:\cygwin\home\www.wpg.dev\wp-content\plugins\wpglobus\includes\class-wpglobus-utils.php
 				 */
 				$result['path'] = isset($out2[3]) ? $out2[3] : '';
@@ -305,5 +305,27 @@ class WPGlobus_Utils {
 		return $result;
 	}
 
-}
+	/**
+	 * Check if was called by a specific function (could be any levels deep).
+	 * Note: does not check if the function is in a class method.
+	 *
+	 * @param string $function_name
+	 *
+	 * @return bool
+	 */
+	public static function is_function_in_backtrace( $function_name ) {
+		$function_in_backtrace = false;
+
+		foreach ( debug_backtrace() as $_ ) {
+			if ( ! empty( $_['function'] ) && $_['function'] === $function_name ) {
+				$function_in_backtrace = true;
+				break;
+			}
+		}
+
+		return $function_in_backtrace;
+	}
+
+} // class
+
 # --- EOF
