@@ -305,16 +305,5 @@ class WPGlobus_Utils {
 		return $result;
 	}
 
-	/**
-	 * @deprecated 15.01.17
-	 * Check if string has language shortcodes
-	 *
-	 * @param string $string
-	 *
-	 * @return bool
-	 */
-	public static function has_translations( $string ) {
-		return WPGlobus_Core::has_translations( $string );
-	}
 }
 # --- EOF
