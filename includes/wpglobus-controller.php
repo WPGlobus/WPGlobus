@@ -150,8 +150,8 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 		 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
 		 * AJAX is probably not required (waiting for a case).
 		 */
-		add_filter( 'wpseo_title', 'wpg_text_filter', 0 );
-		add_filter( 'wpseo_metadesc', 'wpg_text_filter', 0 );
+		add_filter( 'wpseo_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+		add_filter( 'wpseo_metadesc', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 	}
 
 

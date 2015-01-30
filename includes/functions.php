@@ -1,11 +1,5 @@
 <?php
 
-
-
-/**
- * Option filters
- */
-
 /**
  * Own filters
  */
@@ -20,71 +14,6 @@ add_filter( 'wpglobus_get_terms', 'wpglobus_get_terms', 10, 2 );
  */
 function wpglobus_get_terms( $terms, $taxonomy ) {
 	return WPGlobus::_get_terms( $taxonomy );
-}
-
-/**
- * Filters for admin
- */
-
-
-/**
- * @param mixed $object
- *
- * @return mixed
- */
-function wpg_text_filter( $object = '' ) {
-
-	/**
-	 * @see function qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage
-	 */
-	if ( empty( $object ) ) {
-		// Nothing to do
-		return $object;
-	}
-
-	global $WPGlobus_Config;
-
-	/**
-	 * Check $object is array of WP_Post objects
-	 * for example @see get_pages() function in \wp-includes\post.php
-	 * @qa See a list of available pages in the "Parent Page" metabox when editing a page.
-	 */
-	if ( is_array( $object ) ) {
-
-		foreach ( $object as &$post ) {
-			if ( is_object( $post ) && 'WP_Post' == get_class( $post ) ) {
-				WPGlobus_Core::translate_wp_post( $post, $WPGlobus_Config->language );
-			}
-		}
-
-		reset( $object );
-
-		return $object;
-
-	}
-
-	$object = __wpg_text_filter( $object );
-
-	return $object;
-
-}
-
-/**
- * @deprecated 15.01.17
- *
- * @param string $text
- * @param string $language
- * @param string $return
- *
- * @return string
- */
-function __wpg_text_filter( $text = '', $language = '', $return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) {
-	global $WPGlobus_Config;
-	if ( empty( $language ) ) {
-		$language = $WPGlobus_Config->language;
-	}
-
-	return WPGlobus_Core::text_filter( $text, $language, $return, $WPGlobus_Config->default_language );
 }
 
 
