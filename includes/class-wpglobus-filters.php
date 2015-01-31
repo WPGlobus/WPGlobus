@@ -80,7 +80,7 @@ class WPGlobus_Filters {
 	 * @scope admin
 	 * @scope front
 	 *
-	 * @param string[]|object[] $terms      An array of terms for the given object or objects.
+	 * @param string[]|object[] $terms An array of terms for the given object or objects.
 	 *
 	 * @return array
 	 */
@@ -111,14 +111,15 @@ class WPGlobus_Filters {
 		 * @see wp_ajax_inline_save
 		 * ...except when the same AJAX refreshes the table row @see WP_Posts_List_Table::single_row
 		 * -
-		 * @qa At the "All posts" admin page, do Quick Edit on any post. After update, categories and tags
+		 * @qa  At the "All posts" admin page, do Quick Edit on any post. After update, categories and tags
 		 *     must not show multilingual strings with delimiters.
-		 * @qa At Quick Edit, enter an existing tag. After save, check if there is no additional tag
+		 * @qa  At Quick Edit, enter an existing tag. After save, check if there is no additional tag
 		 *     on the "Tags" page. If a new tag is created then the "is tag exists" check was checking
 		 *     only a single language representation of the tag, while there is a multilingual tag in the DB.
 		 */
 		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) &&
-		     WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
+		     WPGlobus_WP::is_pagenow( 'admin-ajax.php' )
+		) {
 			if ( ! WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
 				return $terms;
 			}
@@ -313,9 +314,20 @@ class WPGlobus_Filters {
 		$locale
 	) {
 
-		if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
+		/**
+		 * Special case: in admin area, show everything in the language of admin interface.
+		 * (set in the General Settings in WP 4.1)
+		 */
+		/**
+		 * @internal
+		 * We need to exclude is_admin when it's a front-originated AJAX,
+		 * so we are doing a "hack" checking @see WPGlobus_WP::is_admin_doing_ajax.
+		 */
+		if (
+			is_admin() &&
+			( ! WPGlobus_WP::is_doing_ajax() || WPGlobus_WP::is_admin_doing_ajax() )
+		) {
 			/**
-			 * If in admin, set the language according to the WPLANG option.
 			 * @todo is_multisite
 			 * @todo Pre-WP4, WPLANG constant from wp-config
 			 */
