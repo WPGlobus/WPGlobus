@@ -6,7 +6,7 @@
  */
 
 /**
- * @see get_the_terms
+ * @see  get_the_terms
  * Calls wp_get_object_terms, which is already filtered, only if terms were not cached
  * @todo Check what's going on with cache
  */
@@ -117,23 +117,20 @@ add_filter( 'single_term_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 add_filter( 'widget_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
 /**
- * @see get_bloginfo in general-template.php
- *                   Specific call is get_option('blogdescription');
- * @see get_option in option.php
+ * @see   get_bloginfo in general-template.php
+ *                   Specific call example is get_option('blogdescription');
+ * @see   get_option in option.php
  * For example this is used in the Twenty Fifteen theme's header.php:
  * $description = get_bloginfo( 'description', 'display' );
  * @scope Front. In admin we need to get the "raw" string.
+ * @todo  We must not translate blogname in admin because it's used in many important non-visual places
+ *       but we should JS the blogname at the admin bar
+ * <li id="wp-admin-bar-site-name" class="menupop"><a ...>{:en}WPGlobus{:}{:ru}ВПГлобус{:}</a>
  */
 if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'option_blogdescription', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+	add_filter( 'option_blogname', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 }
-/**
- * @todo Need JS same as blog description
- * @todo  опять место где на странице options-general.php фильтр нужен для вывода Blogname в adminbar
- * 			и не нужен для вывода в списке опций
- * 		    поэтому закоментировал его
- */
-//add_filter( 'option_blogname', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
 /**
  * @see get_locale()
