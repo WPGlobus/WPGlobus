@@ -982,19 +982,21 @@ class WPGlobus {
 	 */
 	function on_admin_styles() {
 		
-		/** @global $pagenow */
+		/** @global string $pagenow */
 		global $pagenow;
 		
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
+		$suffix = SCRIPT_DEBUG ? '' : '.min';
+
 		wp_register_style(
-			'wpglobus.admin',
-			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.css',
+			'wpglobus-admin',
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-admin$suffix.css",
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
 		);
-		wp_enqueue_style( 'wpglobus.admin' );
+		wp_enqueue_style( 'wpglobus-admin' );
 		
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
@@ -1007,19 +1009,20 @@ class WPGlobus {
 			wp_enqueue_style( 'select2-css' );
 		}
 		
+		/** @global WP_Post $post */
 		global $post;
 		$type = empty($post) ? '' : $post->post_type;
 		if ( ! $this->disabled_entity($type) ) {
 			if ( in_array($pagenow, array('post.php', 'post-new.php', 'edit-tags.php')) ) {
 				
 				wp_register_style(
-					'wpglobus.admin.tabs',
-					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.admin.tabs.css',
+					'wpglobus-admin-tabs',
+					self::$PLUGIN_DIR_URL . "includes/css/wpglobus-admin-tabs$suffix.css",
 					array(),
 					WPGLOBUS_VERSION,
 					'all'
 				);
-				wp_enqueue_style( 'wpglobus.admin.tabs' );
+				wp_enqueue_style( 'wpglobus-admin-tabs' );
 			}
 		}
 		
@@ -1106,9 +1109,10 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_wp_styles() {
+		$suffix = SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style(
 			'flags',
-			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus.flags.css',
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-flags$suffix.css",
 			array(),
 			WPGLOBUS_VERSION,
 			'all'

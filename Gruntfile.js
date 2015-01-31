@@ -59,14 +59,16 @@ module.exports = function (grunt) {
          * @link https://www.npmjs.org/package/grunt-contrib-cssmin
          */
         cssmin: {
-            options: {
-                keepSpecialComments: 0
-            },
-            expand: true,
-            cwd: pathCSS + '/',
-            src: ['*.css', '!*.min.css'],
-            dest: pathCSS + '/',
-            ext: '.min.css'
+            all: {
+                options: {
+                    keepSpecialComments: 0
+                },
+                expand: true,
+                cwd: pathCSS + '/',
+                src: ['*.css', '!*.min.css'],
+                dest: pathCSS + '/',
+                ext: '.min.css'
+            }
         },
 
         /**
