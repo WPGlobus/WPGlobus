@@ -73,9 +73,25 @@ jQuery(document).ready(function () {
                 }
             },
             options_general: function () {
-				var $b = $('#blogdescription');
-				$b.addClass('hidden');
-				$('#wpglobus-blogdescription').insertAfter($b);
+				
+				var $bn = $('#blogname');
+				$bn.addClass('hidden');
+				$('#wpglobus-blogname').insertAfter($bn);
+                $('body').on('blur', '.wpglobus-blogname', function (event) {
+                    var s = '';
+                    $('.wpglobus-blogname').each(function (index, e) {
+                        var $e = $(e);
+						var l = $e.data('language');
+                        if ($e.val() !== '') {
+                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+                        }
+                    });
+					$bn.val(s);
+                });
+				
+				var $bd = $('#blogdescription');
+				$bd.addClass('hidden');
+				$('#wpglobus-blogdescription').insertAfter($bd);
                 $('body').on('blur', '.wpglobus-blogdesc', function (event) {
                     var s = '';
                     $('.wpglobus-blogdesc').each(function (index, e) {
@@ -85,7 +101,7 @@ jQuery(document).ready(function () {
                             s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
                         }
                     });
-					$b.val(s);
+					$bd.val(s);
                 });
 			},	
             quick_edit: function (type) {
