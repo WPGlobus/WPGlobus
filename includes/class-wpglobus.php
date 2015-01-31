@@ -301,7 +301,7 @@ class WPGlobus {
 		 *
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
-		$this->disabled_entities = apply_filters('wpg_disabled_entities', $this->disabled_entities);
+		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
 	}
 
 	/**
