@@ -133,12 +133,14 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * @param string $lang
+	 * Return true if language is in array of enabled languages, otherwise false 
+	 *
+	 * @param string $language
 	 * @return bool
 	 */
-	public static function is_enabled( $lang ) {
+	public static function is_enabled( $language ) {
 		global $WPGlobus_Config;
-		return in_array( $lang, $WPGlobus_Config->enabled_languages );
+		return in_array( $language, $WPGlobus_Config->enabled_languages );
 	}
 
 	/**
