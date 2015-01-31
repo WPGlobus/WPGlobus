@@ -129,8 +129,11 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 }
 /**
  * @todo Need JS same as blog description
+ * @todo  опять место где на странице options-general.php фильтр нужен для вывода Blogname в adminbar
+ * 			и не нужен для вывода в списке опций
+ * 		    поэтому закоментировал его
  */
-add_filter( 'option_blogname', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
+//add_filter( 'option_blogname', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
 /**
  * @see get_locale()
