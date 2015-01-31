@@ -50,14 +50,14 @@ class WPGlobus_Core {
 		}
 
 		$possible_delimiters =
-			[
+			array(
 				/**
 				 * Our delimiters
 				 */
-				[
+				array(
 					'start' => sprintf( WPGlobus::LOCALE_TAG_START, $language ),
 					'end'   => WPGlobus::LOCALE_TAG_END,
-				],
+				),
 				/**
 				 * qTranslate compatibility
 				 * qTranslate uses these two types of delimiters
@@ -67,15 +67,15 @@ class WPGlobus_Core {
 				 * The [] delimiter does not have the closing tag, so we will look for the next opening [: or
 				 * take the rest until end of end of the string
 				 */
-				[
+				array(
 					'start' => "<!--:{$language}-->",
 					'end'   => '<!--:-->',
-				],
-				[
+				),
+				array(
 					'start' => "[:{$language}]",
 					'end'   => '[:',
-				],
-			];
+				),
+			);
 
 		/**
 		 * We'll use this flag after the loop to see if the loop was successful. See the `break` clause in the loop.
@@ -205,13 +205,13 @@ class WPGlobus_Core {
 		$default_language = 'en' // TODO
 	) {
 
-		$fields = [
+		$fields = array(
 			'post_title',
 			'post_content',
 			'post_excerpt',
 			'title',
 			'attr_title',
-		];
+		);
 
 		foreach ( $fields as $_ ) {
 			if ( ! empty( $post->$_ ) ) {

@@ -3,7 +3,7 @@
  * Own filter
  * @todo This is a non-standard approach. Should discuss it later.
  */
-add_filter( 'wpglobus_get_terms', [ '_WPGlobus_Internal_Example', 'own_filter__get_terms' ], 10, 2 );
+add_filter( 'wpglobus_get_terms', array( '_WPGlobus_Internal_Example', 'own_filter__get_terms' ), 10, 2 );
 
 /**
  * Class _WPGlobus_Internal_Example
@@ -40,15 +40,15 @@ class _WPGlobus_Internal_Example {
 		$taxonomy = $box['args']['taxonomy'];
 
 		$term_name_of_the_current_post = '';
-		$term_of_the_current_post      = wp_get_object_terms( $post->ID, $taxonomy, [ 'fields' => 'names' ] );
+		$term_of_the_current_post      = wp_get_object_terms( $post->ID, $taxonomy, array( 'fields' => 'names' ) );
 		if ( isset( $term_of_the_current_post[0] ) ) {
 			$term_name_of_the_current_post = $term_of_the_current_post[0];
 		}
 
-		$all_term_names = apply_filters( 'wpglobus_get_terms', get_terms( $taxonomy, [
+		$all_term_names = apply_filters( 'wpglobus_get_terms', get_terms( $taxonomy, array(
 			'fields'     => 'names',
 			'hide_empty' => false
-		] ), $taxonomy );
+		) ), $taxonomy );
 
 		?>
 		<label>

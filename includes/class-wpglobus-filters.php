@@ -260,11 +260,11 @@ class WPGlobus_Filters {
 			 * 3. However, don't convert url for these AJAX actions:
 			 */
 			if ( WPGlobus_WP::is_http_post_action(
-				[
+				array(
 					'heartbeat',
 					'sample-permalink',
 					'add-menu-item',
-				]
+				)
 			)
 			) {
 				$need_to_process = false;

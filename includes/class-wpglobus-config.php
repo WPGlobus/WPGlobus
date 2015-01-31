@@ -183,11 +183,16 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		/**
 		 * Check plugin version and update versioning option
 		 *
-		 * @param Plugin_Upgrader Object  $object
-		 * @param array $options
+		 * @param object $object Plugin_Upgrader
+		 * @param array  $options
+		 *
 		 * @return void
 		 */
-		public static function on_activate($object = null, $options = '') {
+		public static function on_activate(
+			/** @noinspection PhpUnusedParameterInspection */
+			$object = null,
+			$options = array()
+		) {
 
 			if ( empty($options) ) {
 				return;	

@@ -307,7 +307,9 @@ class WPGlobus {
 	/**
 	 * Insert language title to edit.php page
 	 *
-	 * @return void
+	 * @param array $posts_columns
+	 *
+	 * @return array
 	 */
 	function on_add_language_column($posts_columns) {
 		
@@ -328,11 +330,11 @@ class WPGlobus {
 		return $posts_columns;
 		
 	}
-	
+
 	/**
 	 * Insert flags to every item at edit.php page
 	 *
-	 * @return void
+	 * @param $column_name
 	 */
 	function on_manage_language_column($column_name) {
 
@@ -410,7 +412,7 @@ class WPGlobus {
 				 * Remove filter to get raw term description
 				 * @todo Need to restore?
 				 */
-				remove_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
+				remove_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
 			}
 			
 			global $WPGlobus_Config;
@@ -418,6 +420,8 @@ class WPGlobus {
 			foreach( $order['title'] as $id=>$title ) {
 				$result[$id]['source'] = $title['source'];
 				
+				$term = null; // should initialize before if because used in the next foreach
+
 				if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
 					$term = get_term( $id, $order['taxonomy'] );
 					if ( is_wp_error($term) ) {
@@ -429,7 +433,7 @@ class WPGlobus {
 					$return = $language == $WPGlobus_Config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
 
 					$result[$id][$language]['name'] = WPGlobus_Core::text_filter($title['source'], $language, $return);
-					if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
+					if ($term && $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
 						$result[$id][$language]['description'] = WPGlobus_Core::text_filter($term->description, $language, $return);
 					}	
 				}
@@ -753,9 +757,9 @@ class WPGlobus {
 							/**
 							 * @todo Write comment why do we disable the filter here
 							 */
-							remove_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
+							remove_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
 							$term = get_term_by('id', $item_object_id, $item_object);
-							add_filter( 'get_term', [ 'WPGlobus_Filters', 'filter__get_term' ], 0 );
+							add_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
 
 							$new_title  = trim($term->name);
 							
@@ -1667,11 +1671,11 @@ class WPGlobus {
 			return $error;
 		}
 		
-		remove_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
+		remove_filter( 'get_terms', array( 'WPGlobus_Filters', 'filter__get_terms' ), 11 );
 
 		$terms = get_terms( $taxonomy, array('hide_empty'=>false) );
 
-		add_filter( 'get_terms', [ 'WPGlobus_Filters', 'filter__get_terms' ], 11 );
+		add_filter( 'get_terms', array( 'WPGlobus_Filters', 'filter__get_terms' ), 11 );
 
 		$term_names = array();
 		

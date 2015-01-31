@@ -37,9 +37,8 @@ class WPGlobus_WP {
 	 * @return bool
 	 */
 	public static function is_http_post_action( $action ) {
-		if ( ! is_array( $action ) ) {
-			$action = [ $action ];
-		}
+
+		$action = (array) $action;
 
 		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action ) );
 	}

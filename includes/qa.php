@@ -37,33 +37,33 @@ class WPGlobus_QA {
 		/**
 		 * Create QA post if not exists
 		 */
-		$post_title = join( '', [
+		$post_title = join( '', array(
 			WPGlobus::tag_text( 'QA post_title EN', 'en' ),
 			WPGlobus::tag_text( 'QA post_title RU', 'ru' ),
-		] );
+		) );
 
 		$post = get_page_by_title( $post_title, null, 'post' );
 
 		if ( ! $post ) {
 
-			$post_content = join( '', [
+			$post_content = join( '', array(
 				WPGlobus::tag_text( 'QA post_content EN', 'en' ),
 				WPGlobus::tag_text( 'QA post_content RU', 'ru' ),
-			] );
+			) );
 
-			$post_excerpt = join( '', [
+			$post_excerpt = join( '', array(
 				WPGlobus::tag_text( 'QA post_excerpt EN', 'en' ),
 				WPGlobus::tag_text( 'QA post_excerpt RU', 'ru' ),
-			] );
+			) );
 
 			$post = get_post( wp_insert_post(
-				[
+				array(
 					'post_status'  => 'publish',
 					'post_author'  => self::QA_USER_ID,
 					'post_title'   => $post_title,
 					'post_content' => $post_content,
 					'post_excerpt' => $post_excerpt,
-				]
+				)
 			) );
 		}
 		?>
@@ -94,10 +94,10 @@ class WPGlobus_QA {
 
 			<h2>QA Blog Description</h2>
 			<?php
-			$blogdescription = join( '', [
+			$blogdescription = join( '', array(
 				WPGlobus::tag_text( 'QA blogdescription EN', 'en' ),
 				WPGlobus::tag_text( 'QA blogdescription RU', 'ru' ),
-			] );
+			) );
 			update_option( 'blogdescription', $blogdescription );
 			?>
 			<div id="qa_blogdescription"><?php echo get_bloginfo( 'description' ); ?></div>
@@ -135,7 +135,7 @@ class WPGlobus_QA {
 
 		<?php
 
-		$test_strings = [
+		$test_strings = array(
 			'proper'                  => '{:en}ENG{:}{:ru}РУС{:}',
 			'proper_swap'             => '{:ru}РУС{:}{:en}ENG{:}',
 			'extra_lead'              => 'Lead {:en}ENG{:}{:ru}РУС{:}',
@@ -151,7 +151,7 @@ class WPGlobus_QA {
 			'one_tag'                 => '{:en}ENG{:}',
 			'one_tag_qt_tags'         => '[:en]ENG',
 			'multipart'               => '{:en}ENG1{:}{:ru}РУС1{:}{:en}ENG2{:}{:ru}РУС2{:}',
-		];
+		);
 
 		?>
 		<table>
@@ -188,7 +188,7 @@ class WPGlobus_QA {
 	private static function _test_get_pages() {
 
 		/** @var WP_Post[] $all_pages */
-		$all_pages = get_pages( [ 'number' => 3, 'sort_column' => 'ID' ] );
+		$all_pages = get_pages( array( 'number' => 3, 'sort_column' => 'ID' ) );
 
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
@@ -250,14 +250,14 @@ class WPGlobus_QA {
 	 */
 	private static function _test_wp_get_object_terms() {
 
-		$terms = wp_get_object_terms( [ 95, 97 ], 'category' );
+		$terms = wp_get_object_terms( array( 95, 97 ), 'category' );
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>wp_get_object_terms()</h2>
 
 			<p>Name and description of the categories that the posts ID=95 and ID=97 belong to:</p>
 
-			<p><code>wp_get_object_terms( [ 95, 97 ], 'category' );</code></p>
+			<p><code>wp_get_object_terms( array( 95, 97 ), 'category' );</code></p>
 			<?php foreach ( $terms as $term ) : ?>
 				<p id="_test_wp_get_object_terms_<?php echo $term->term_id; ?>">
 					<code>$term->name</code> :
@@ -269,19 +269,19 @@ class WPGlobus_QA {
 			<?php endforeach; ?>
 
 			<p>
-				<code>wp_get_object_terms( [ 95, 97 ], 'category', ['fields'=>'names'] );</code>
+				<code>wp_get_object_terms( array( 95, 97 ), 'category', array( 'fields' => 'names' ) );</code>
 				<br>=&gt;
 				<span class="fields_names"><?php
-					echo esc_html( join( ', ', wp_get_object_terms( [ 95, 97 ], 'category',
-						[ 'fields' => 'names' ] ) ) );
+					echo esc_html( join( ', ', wp_get_object_terms( array( 95, 97 ), 'category',
+						array( 'fields' => 'names' ) ) ) );
 					?></span>
 			</p>
 
 			<p>
-				<code>wp_get_object_terms( [ 97 ], 'no-such-term' );</code>
+				<code>wp_get_object_terms( array( 97 ), 'no-such-term' );</code>
 				<br>=&gt;
 				<span class="no_such_term"><?php
-					echo wp_get_object_terms( [ 97 ], 'no-such-term' )->get_error_message();
+					echo wp_get_object_terms( array( 97 ), 'no-such-term' )->get_error_message();
 					?></span>
 			</p>
 
@@ -299,7 +299,10 @@ class WPGlobus_QA {
 			<h2>get_terms()</h2>
 
 			<p><code>$terms = get_terms( 'category' )</code></p>
-			<?php $term = get_terms( 'category', [ 'name__like' => 'QA Category', 'hide_empty' => false ] )[0]; ?>
+			<?php
+			$terms = get_terms( 'category', array( 'name__like' => 'QA Category', 'hide_empty' => false ) );
+			$term  = $terms[0];
+			?>
 			<p id="_test_get_terms_category">
 				<code>$term->name</code> :
 				<span class="name"><?php echo $term->name; ?></span>
@@ -309,7 +312,10 @@ class WPGlobus_QA {
 			</p>
 
 			<p><code>$terms = get_terms( 'post_tag' )</code></p>
-			<?php $term = get_terms( 'post_tag', [ 'name__like' => 'QA Tag', 'hide_empty' => false ] )[0]; ?>
+			<?php
+			$terms = get_terms( 'post_tag', array( 'name__like' => 'QA Tag', 'hide_empty' => false ) );
+			$term  = $terms[0];
+			?>
 			<p id="_test_get_terms_post_tag">
 				<code>$term->name</code> :
 				<span class="name"><?php echo $term->name; ?></span>
@@ -319,11 +325,12 @@ class WPGlobus_QA {
 			</p>
 
 			<?php
-			$term = get_terms( 'category', [
+			$terms = get_terms( 'category', array(
 				'name__like' => 'QA Category',
 				'fields'     => 'names',
 				'hide_empty' => false
-			] )[0];
+			) );
+			$term  = $terms[0];
 			?>
 			<p>
 				<code>get_terms( 'category', ['fields' => 'names'] )</code>
@@ -346,7 +353,8 @@ class WPGlobus_QA {
 			/**
 			 * Find term, to get its ID
 			 */
-			$term = get_terms( 'category', [ 'name__like' => 'QA Category', 'hide_empty' => false ] )[0];
+			$terms = get_terms( 'category', array( 'name__like' => 'QA Category', 'hide_empty' => false ) );
+			$term  = $terms[0];
 			/**
 			 * Get the term data by the ID we got above
 			 */
@@ -409,10 +417,10 @@ class WPGlobus_QA {
 			require_once ABSPATH . '/wp-admin/includes/post.php';
 
 			$post = get_post( wp_insert_post(
-				[
+				array(
 					'post_author' => 1,
 					'post_title'  => '{:en}Post EN{:}{:ru}Post RU{:}',
-				]
+				)
 			) );
 			?>
 			<p>post_title = <code><?php echo $post->post_title; ?></code></p>
@@ -423,7 +431,9 @@ class WPGlobus_QA {
 				post_name = <code class="wpg_qa_post_name"><?php echo $post->post_name; ?></code>
 				<br/>
 				sample_permalink = <code class="wpg_qa_sample_permalink"><?php
-					echo get_sample_permalink( $post->ID )[1]; ?></code>
+					$_ = get_sample_permalink( $post->ID );
+					echo $_[1];
+					?></code>
 			</p>
 			<?php
 			$post->post_status = 'publish';
@@ -435,7 +445,9 @@ class WPGlobus_QA {
 				post_name = <code class="wpg_qa_post_name"><?php echo $post->post_name; ?></code>
 				<br/>
 				sample_permalink = <code class="wpg_qa_sample_permalink"><?php
-					echo get_sample_permalink( $post->ID )[1]; ?></code>
+					$_ = get_sample_permalink( $post->ID );
+					echo $_[1];
+					?></code>
 			</p>
 		</div>
 		<?php
