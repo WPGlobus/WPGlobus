@@ -1690,7 +1690,8 @@ class WPGlobus {
 	}
 	
 	/**
-	 * Make template for Tagline at options-general.php page
+	 * Make template for Site Title (option blogname)
+	 * an Tagline (option blogdescription) at options-general.php page
 	 *
 	 * @return void
 	 */
@@ -1698,8 +1699,21 @@ class WPGlobus {
 		if ( ! WPGlobus_WP::is_pagenow('options-general.php') ) {
 			return;
 		}
+		$blogname = get_option('blogname');
 		$blogdesc = get_option('blogdescription');
 		?>
+		<div id="wpglobus-blogname">		<?php
+			foreach(self::Config()->enabled_languages as $language) : 	
+				$return = $language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
+				
+				<input type="text" class="regular-text wpglobus-blogname" value="<?php echo WPGlobus_Core::text_filter($blogname, $language, $return); ?>" 
+				id="blogname-<?php echo $language; ?>" name="blogname-<?php echo $language; ?>"
+				data-language="<?php echo $language; ?>" placeholder="<?php echo self::Config()->en_language_name[$language]; ?>"><br />
+			
+			<?php
+			endforeach; ?>
+		</div>
+		
 		<div id="wpglobus-blogdescription">		<?php
 			foreach(self::Config()->enabled_languages as $language) : 	
 				$return = $language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
@@ -1710,8 +1724,7 @@ class WPGlobus {
 			
 			<?php
 			endforeach; ?>
-		</div>
-		
+		</div>		
 		<?php
 	}
 	
