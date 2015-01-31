@@ -71,7 +71,7 @@ class WPGlobus_Filters {
 		 * @todo     Keep watching this
 		 */
 
-		if ( ! is_wp_error( $terms ) && ! WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
+		if ( ! is_wp_error( $terms ) && WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
 
 			foreach ( $terms as &$term ) {
 				WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
