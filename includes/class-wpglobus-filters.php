@@ -52,6 +52,7 @@ class WPGlobus_Filters {
 
 	/**
 	 * Filter @see get_the_terms
+	 * @scope admin
 	 *
 	 * @param object[]|WP_Error $terms List of attached terms, or WP_Error on failure.
 	 *
@@ -59,11 +60,18 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__get_the_terms( $terms ) {
 
-		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) && WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) ) {
-			return $terms;
-		}
+		/**
+		 * @internal 15.01.31
+		 * Theoretically, we should not have this filter because @see get_the_terms
+		 * calls @see wp_get_object_terms, which is already filtered.
+		 * However, there is a case when the terms are retrieved from @see get_object_term_cache,
+		 * and when we do a Quick Edit / inline-save, we ourselves write raw terms to the cache.
+		 * As of now, we know only one such case, so we activate this filter only in admin,
+		 * and only on the 'single_row' call
+		 * @todo     Keep watching this
+		 */
 
-		if ( ! is_wp_error( $terms ) ) {
+		if ( ! is_wp_error( $terms ) && ! WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
 
 			foreach ( $terms as &$term ) {
 				WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );

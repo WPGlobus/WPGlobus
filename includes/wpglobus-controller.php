@@ -6,11 +6,11 @@
  */
 
 /**
- * @see  get_the_terms
- * Calls wp_get_object_terms, which is already filtered, only if terms were not cached
- * @todo Check what's going on with cache
+ * Description in @see WPGlobus_Filters::filter__get_the_terms
  */
-//add_filter( 'get_the_terms', [ 'WPGlobus_Filters', 'filter__get_the_terms' ], 0 );
+if ( is_admin() ) {
+	add_filter( 'get_the_terms', array( 'WPGlobus_Filters', 'filter__get_the_terms' ), 0 );
+}
 
 /**
  * Admin: now use filter for get_terms_to_edit function. See meta-boxes.php file.
