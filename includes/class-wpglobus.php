@@ -874,15 +874,15 @@ class WPGlobus {
 			
 			if ( ! empty($this->vendors_scripts) ) {
 				wp_register_script(
-					'wpglobus.vendor',
-					self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.vendor.js',
+					'wpglobus-vendor',
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor$suffix.js",
 					array( 'jquery' ),
 					WPGLOBUS_VERSION,
 					true
 				);
-				wp_enqueue_script( 'wpglobus.vendor' );
+				wp_enqueue_script( 'wpglobus-vendor' );
 				wp_localize_script(
-					'wpglobus.vendor',
+					'wpglobus-vendor',
 					'WPGlobusVendor',
 					array(
 						'version' => WPGLOBUS_VERSION,
@@ -892,15 +892,15 @@ class WPGlobus {
 			}			
 			
 			wp_register_script(
-				'wpglobus.admin',
-				self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.admin.js',
+				'wpglobus-admin',
+				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$suffix.js",
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
 			);
-			wp_enqueue_script( 'wpglobus.admin' );
+			wp_enqueue_script( 'wpglobus-admin' );
 			wp_localize_script(
-				'wpglobus.admin',
+				'wpglobus-admin',
 				'WPGlobusAdmin',
 				array(
 					'version'      => WPGLOBUS_VERSION,
@@ -1122,10 +1122,12 @@ class WPGlobus {
 	 */
 	function on_wp_scripts() {
 		global $WPGlobus_Config;
-		
+
+		$suffix = SCRIPT_DEBUG ? '' : '.min';
+
 		wp_register_script(
 			'wpglobus',
-			self::$PLUGIN_DIR_URL . 'includes/js/wpglobus.js',
+			self::$PLUGIN_DIR_URL . "includes/js/wpglobus$suffix.js",
 			array( 'jquery', 'utils' ),
 			WPGLOBUS_VERSION,
 			true
