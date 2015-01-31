@@ -127,6 +127,10 @@ add_filter( 'widget_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'option_blogdescription', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 }
+/**
+ * @todo Need JS same as blog description
+ */
+add_filter( 'option_blogname', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
 /**
  * @see get_locale()
