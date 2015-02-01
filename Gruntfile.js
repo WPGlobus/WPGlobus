@@ -37,21 +37,41 @@ module.exports = function (grunt) {
          * @link https://github.com/gruntjs/grunt-contrib-less
          */
         less: {
-            all: {
+            admin: {
                 options: {
                     banner: bannerTemplate,
                     paths: [pathCSS],
-                    sourceMap: true
-                    //sourceMapURL: pathCSS + '/style.css.map',
-                    //sourceMapFilename: pathCSS + '/style.css.map'
+                    sourceMap: true,
+                    sourceMapBasepath: pathCSS,
+                    sourceMapURL: 'wpglobus-admin.css.map'
                 },
-                files: [{
-                    expand: true,
-                    cwd: pathCSS + '/',
-                    src: ['*.less'],
-                    dest: pathCSS + '/',
-                    ext: '.css'
-                }]
+                files: {
+                    "includes/css/wpglobus-admin.css": pathCSS + '/' + "wpglobus-admin.less"
+                }
+            },
+            tabs: {
+                options: {
+                    banner: bannerTemplate,
+                    paths: [pathCSS],
+                    sourceMap: true,
+                    sourceMapBasepath: pathCSS,
+                    sourceMapURL: 'wpglobus-admin-tabs.css.map'
+                },
+                files: {
+                    "includes/css/wpglobus-admin-tabs.css": pathCSS + '/' + "wpglobus-admin-tabs.less"
+                }
+            },
+            flags: {
+                options: {
+                    banner: bannerTemplate,
+                    paths: [pathCSS],
+                    sourceMap: true,
+                    sourceMapBasepath: pathCSS,
+                    sourceMapURL: 'wpglobus-flags.css.map'
+                },
+                files: {
+                    "includes/css/wpglobus-flags.css": pathCSS + '/' + "wpglobus-flags.less"
+                }
             }
         },
 
