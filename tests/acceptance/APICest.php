@@ -73,7 +73,7 @@ class APICest {
 	 */
 	protected function _test_string_parsing_ok( AcceptanceTester $I, $test_output = '' ) {
 		foreach (
-			[
+			array(
 				'proper',
 				'proper_swap',
 				'extra_lead',
@@ -82,7 +82,7 @@ class APICest {
 				'qt_tags_proper_swap',
 				'qt_comments_proper',
 				'qt_comments_proper_swap',
-			]
+			)
 			as $test_id
 		) {
 			$this->_test_string_parsing( $I, $test_id, $test_output );
@@ -101,9 +101,9 @@ class APICest {
 	 * @param AcceptanceTester $I
 	 */
 	public function en( AcceptanceTester $I ) {
-		$I->amOnPage( '/api-demo/' );
+		$I->amOnPage( '/?wpglobus=qa' );
 
-		$I->see( 'api demo', 'h1' );
+		$I->see( 'WPGlobus QA EN', 'h1' );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_locale()
@@ -211,17 +211,17 @@ class APICest {
 
 	/**
 	 * Check the RU version of the api-demo page
+	 * Note: non-English texts should be entered here with the proper capitalization, as visible on the screen.
+	 * Codeception does not apply UTF lowercase.
 	 *
 	 * @param AcceptanceTester $I
 	 */
 	public function ru( AcceptanceTester $I ) {
-		$I->amOnPage( '/ru/api-demo/' );
+		$I->amOnPage( '/ru/?wpglobus=qa' );
 
 		/**
-		 * Note: non-English texts should be entered here with the proper capitalization, as visible on the screen.
-		 * Codeception does not apply UTF lowercase.
 		 */
-		$I->see( 'ДЕМОНСТРАЦИЯ API', 'h1' );
+		$I->see( 'WPGlobus QA RU', 'h1' );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_locale()

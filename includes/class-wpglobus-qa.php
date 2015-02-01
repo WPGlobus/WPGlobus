@@ -19,27 +19,50 @@ class WPGlobus_QA {
 
 	public static function api_demo() {
 		?>
-		<style>
-			xmp {
-				margin: 0;
-			}
-		</style>
-		<?php
-		self::_create_qa_items();
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>WPGlobus QA</title>
+			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+			<style>
+				xmp {
+					margin: 0;
+				}
+			</style>
+		</head>
+		<body>
+		<div class="container">
+			<div class="page-header">
+				<h1>
+					<?php echo apply_filters( 'the_title',
+						join( '', array(
+							WPGlobus::tag_text( 'WPGlobus QA EN', 'en' ),
+							WPGlobus::tag_text( 'WPGlobus QA RU', 'ru' ),
+						) )
+					); ?>
+				</h1>
+			</div>
+			<?php
+			self::_create_qa_items();
 
-		self::_test_get_locale();
-		self::_test_home_url();
-		self::_test_string_parsing();
-		self::_test_get_pages();
+			self::_test_get_locale();
+			self::_test_home_url();
+			self::_test_string_parsing();
+			self::_test_get_pages();
 
-		self::_test_get_the_terms();
-		self::_test_wp_get_object_terms();
-		self::_test_get_terms();
-		self::_test_get_term();
+			self::_test_get_the_terms();
+			self::_test_wp_get_object_terms();
+			self::_test_get_terms();
+			self::_test_get_term();
 
-		self::_test_post_name();
+			self::_test_post_name();
 
-		self::_common_for_all_languages();
+			self::_common_for_all_languages();
+			?>
+		</div>
+		</body>
+		</html>
+	<?php
 	}
 
 	private static function _create_qa_items() {
@@ -82,7 +105,7 @@ class WPGlobus_QA {
 
 			<h3>Raw</h3>
 
-			<div class="qa_post_raw">
+			<div class="qa_post_raw well">
 				<div class="qa_post_title"><?php echo $post->post_title; ?></div>
 
 				<div class="qa_post_content"><?php echo $post->post_content; ?></div>
@@ -91,7 +114,7 @@ class WPGlobus_QA {
 			</div>
 			<h3>Cooked</h3>
 
-			<div class="qa_post_cooked">
+			<div class="qa_post_cooked well">
 				<div class="qa_post_title"><?php echo
 					apply_filters( 'the_title', $post->post_title ); ?></div>
 
@@ -110,7 +133,7 @@ class WPGlobus_QA {
 			) );
 			update_option( 'blogdescription', $blogdescription );
 			?>
-			<div id="qa_blogdescription"><?php echo get_bloginfo( 'description' ); ?></div>
+			<div id="qa_blogdescription" class="well"><?php echo get_bloginfo( 'description' ); ?></div>
 		</div>
 	<?php
 	}
@@ -164,7 +187,7 @@ class WPGlobus_QA {
 		);
 
 		?>
-		<table>
+		<table class="table">
 			<thead>
 			<tr>
 				<th>Input</th>
@@ -203,11 +226,14 @@ class WPGlobus_QA {
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>get_pages()</h2>
-			<?php foreach ( $all_pages as $page ) : ?>
-				<div id="test__get_pages__<?php echo $page->ID; ?>">
-					<?php echo $page->post_title; ?>
-				</div>
-			<?php endforeach; ?>
+
+			<div class="well">
+				<?php foreach ( $all_pages as $page ) : ?>
+					<div id="test__get_pages__<?php echo $page->ID; ?>">
+						<?php echo $page->post_title; ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	<?php
 
@@ -467,7 +493,7 @@ class WPGlobus_QA {
 
 	private static function _test_get_locale() {
 		?><h2>get_locale()</h2><?php
-		?><div id="<?php echo __FUNCTION__; ?>"><?php echo get_locale(); ?></div><?php
+		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo get_locale(); ?></div><?php
 	}
 
 }
