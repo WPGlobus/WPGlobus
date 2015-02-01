@@ -39,8 +39,8 @@ if ( ! defined( 'SCRIPT_DEBUG' ) ) {
 	define( 'SCRIPT_DEBUG', false );
 }
 
-define('WPGLOBUS_VERSION', '1.0.0');
-define('WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ));
+define( 'WPGLOBUS_VERSION', '1.0.0' );
+define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 global $WPGlobus;
 global $WPGlobus_Config;
@@ -57,12 +57,10 @@ require_once 'includes/class-wpglobus-core.php';
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
-if( is_admin() && !WPGlobus_WP::is_doing_ajax()) {
+if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
 	require_once 'includes/class-wpglobus-upgrade.php';
 	require_once 'includes/wpglobus-upgrade-controller.php';
 }
-
-require_once 'includes/qa.php';
 
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
@@ -77,5 +75,13 @@ add_action( 'plugins_loaded', 'WPGlobus::init', 0 );
 add_action( 'activated_plugin', 'WPGlobus::activated' );
 
 add_action( 'upgrader_process_complete', 'WPGlobus_Config::on_activate', 10, 2 );
-	
+
+/**
+ * Handle special URLs for QA
+ */
+if ( ! empty( $_GET['wpglobus'] ) && $_GET['wpglobus'] === 'qa' ) {
+	require_once 'includes/class-wpglobus-qa.php';
+	add_filter( 'template_include', array( 'WPGlobus_QA', 'filter__template_include' ) );
+}
+
 # --- EOF

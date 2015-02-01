@@ -7,6 +7,16 @@ class WPGlobus_QA {
 
 	const QA_USER_ID = 1;
 
+	/**
+	 * Handle special URLs for QA
+	 * @url http://www.wpglobus.com/?wpglobus=qa
+	 * @url http://www.wpglobus.com/ru/?wpglobus=qa
+	 * @return string
+	 */
+	public static function filter__template_include() {
+		return dirname( __FILE__ ) . '/template-wpglobus-qa.php';
+	}
+
 	public static function api_demo() {
 		?>
 		<style>
