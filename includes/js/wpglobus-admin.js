@@ -122,7 +122,7 @@ jQuery(document).ready(function () {
                 $('#the-list tr').each(function (i, e) {
                     var $e = $(e);
                     var k = ( type === 'post' ? 'post-' : 'tag-' );
-                    id = $e.attr('id').replace(k, ''); /* don't need var with id, see line 94 */
+                    id = $e.attr('id').replace(k, ''); /* don't need var with id, see line 110 */
                     title[id] = {};
                     if ('post' === type) {
                         title[id]['source'] = $e.find('.post_title').text();
@@ -164,12 +164,15 @@ jQuery(document).ready(function () {
 					});	
 				}
 				
-                $('a.save').hover(function (event) {
+                $('a.save, input#bulk_edit').hover(function (event) {
 					if ( typeof WPGlobusAdmin.data.tags === 'undefined' ) return;
-					$('a.save').unbind('click');
+					if (event.currentTarget.id=='bulk_edit') {
+						$('input#bulk_edit').unbind('click');
+					} else {
+						$('a.save').unbind('click');
+					}	
 					
-					$('a.save').click(function (event) {
-						
+					$('a.save, input#bulk_edit').click(function (event) {
 						$.ajaxSetup({async:false});
 
 						var p = $(this).parents('tr');
