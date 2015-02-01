@@ -220,7 +220,8 @@ class WPGlobus_Options {
 					'desc'        => __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ),
 					'placeholder' => __( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
-				),
+				)
+				/*
 				array(
 					'id'          => 'url_mode',
 					'type'        => 'select',
@@ -238,7 +239,8 @@ class WPGlobus_Options {
 					'placeholder' => __( 'Select URL Mode', 'wpglobus' ),
 					'options'     => $WPGlobus_Config->_getEnabledUrlMode(),
 					'default'     => $WPGlobus_Config::GLOBUS_URL_PATH
-				),
+				) // */ 
+				,
 				array(
 					'id'       => 'show_flag_name',
 					'type'     => 'select',

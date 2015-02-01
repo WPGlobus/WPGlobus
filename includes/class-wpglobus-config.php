@@ -427,7 +427,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			 */
 			$this->_set_flags_url();
 
-			/*
+			/**
 			 * Get URL mode
 			 */
 			if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
@@ -435,7 +435,6 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			} else {
 				$this->url_mode = self::GLOBUS_URL_PATH;
 			}
-			/** @todo make loading url_mode from wp-config.php */
 
 			/*
 			 * Get languages name
@@ -519,7 +518,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		 */
 		function _getEnabledUrlMode() {
 			$enabled_url_mode = array(
-				self::GLOBUS_URL_QUERY => 'URL query',
+				#self::GLOBUS_URL_QUERY => 'URL query',
 				self::GLOBUS_URL_PATH  => 'URL path'
 			);
 
