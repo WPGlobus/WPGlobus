@@ -114,18 +114,32 @@ class APICest {
 		 * @see WPGlobus_QA::_create_qa_items()
 		 */
 		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_title' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_title' ) );
 		$I->assertEquals( '{:en}QA post_content EN{:}{:ru}QA post_content RU{:}',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_content' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_content' ) );
 		$I->assertEquals( '{:en}QA post_excerpt EN{:}{:ru}QA post_excerpt RU{:}',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( 'QA post_title EN',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_title' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_title' ) );
 		$I->assertEquals( 'QA post_content EN',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_content' ) );
 		$I->assertEquals( 'QA post_excerpt EN',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( '{:en}QA page_title EN{:}{:ru}QA page_title RU{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_title' ) );
+		$I->assertEquals( '{:en}QA page_content EN{:}{:ru}QA page_content RU{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ) );
+		$I->assertEquals( '{:en}QA page_excerpt EN{:}{:ru}QA page_excerpt RU{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( 'QA page_title EN',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_title' ) );
+		$I->assertEquals( 'QA page_content EN',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+		$I->assertEquals( 'QA page_excerpt EN',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( 'QA blogdescription EN', $I->grabTextFrom( '#qa_blogdescription' ) );
 
@@ -232,18 +246,32 @@ class APICest {
 		 * @see WPGlobus_QA::_create_qa_items()
 		 */
 		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_title' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_title' ) );
 		$I->assertEquals( '{:en}QA post_content EN{:}{:ru}QA post_content RU{:}',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_content' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_content' ) );
 		$I->assertEquals( '{:en}QA post_excerpt EN{:}{:ru}QA post_excerpt RU{:}',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( 'QA post_title RU',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_title' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_title' ) );
 		$I->assertEquals( 'QA post_content RU',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_content' ) );
 		$I->assertEquals( 'QA post_excerpt RU',
-			$I->grabTextFrom( '#_create_qa_items' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
+			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( '{:en}QA page_title EN{:}{:ru}QA page_title RU{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_title' ) );
+		$I->assertEquals( '{:en}QA page_content EN{:}{:ru}QA page_content RU{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ) );
+		$I->assertEquals( '{:en}QA page_excerpt EN{:}{:ru}QA page_excerpt RU{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
+
+		$I->assertEquals( 'QA page_title RU',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_title' ) );
+		$I->assertEquals( 'QA page_content RU',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+		$I->assertEquals( 'QA page_excerpt RU',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( 'QA blogdescription RU', $I->grabTextFrom( '#qa_blogdescription' ) );
 

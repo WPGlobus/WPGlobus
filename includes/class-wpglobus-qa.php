@@ -65,32 +65,34 @@ class WPGlobus_QA {
 	<?php
 	}
 
-	private static function _create_qa_items() {
-
-		/**
-		 * Create QA post if not exists
-		 */
+	/**
+	 * @param string $type 'post' or 'page' or CPT
+	 *
+	 * @return WP_Post
+	 */
+	private static function _create_qa_post( $type ) {
 		$post_title = join( '', array(
-			WPGlobus::tag_text( 'QA post_title EN', 'en' ),
-			WPGlobus::tag_text( 'QA post_title RU', 'ru' ),
+			WPGlobus::tag_text( "QA {$type}_title EN", 'en' ),
+			WPGlobus::tag_text( "QA {$type}_title RU", 'ru' ),
 		) );
 
-		$post = get_page_by_title( $post_title, null, 'post' );
+		$post = get_page_by_title( $post_title, null, $type );
 
 		if ( ! $post ) {
 
 			$post_content = join( '', array(
-				WPGlobus::tag_text( 'QA post_content EN', 'en' ),
-				WPGlobus::tag_text( 'QA post_content RU', 'ru' ),
+				WPGlobus::tag_text( "QA {$type}_content EN", 'en' ),
+				WPGlobus::tag_text( "QA {$type}_content RU", 'ru' ),
 			) );
 
 			$post_excerpt = join( '', array(
-				WPGlobus::tag_text( 'QA post_excerpt EN', 'en' ),
-				WPGlobus::tag_text( 'QA post_excerpt RU', 'ru' ),
+				WPGlobus::tag_text( "QA {$type}_excerpt EN", 'en' ),
+				WPGlobus::tag_text( "QA {$type}_excerpt RU", 'ru' ),
 			) );
 
 			$post = get_post( wp_insert_post(
 				array(
+					'post_type'    => $type,
 					'post_status'  => 'publish',
 					'post_author'  => self::QA_USER_ID,
 					'post_title'   => $post_title,
@@ -99,9 +101,52 @@ class WPGlobus_QA {
 				)
 			) );
 		}
+
+		return $post;
+
+	}
+
+	private static function _create_qa_items() {
+
+		/**
+		 * Create QA post if not exists
+		 */
+		$post = self::_create_qa_post( 'post' );
 		?>
-		<div id="<?php echo __FUNCTION__; ?>">
-			<h2>QA Post</h2>
+		<div id="<?php echo __FUNCTION__; ?>_post">
+		<h2>QA Post</h2>
+
+		<h3>Raw</h3>
+
+		<div class="qa_post_raw well">
+			<div class="qa_post_title"><?php echo $post->post_title; ?></div>
+
+			<div class="qa_post_content"><?php echo $post->post_content; ?></div>
+
+			<div class="qa_post_excerpt"><?php echo $post->post_excerpt; ?></div>
+		</div>
+		<h3>Cooked</h3>
+
+		<div class="qa_post_cooked well">
+			<div class="qa_post_title"><?php echo
+				apply_filters( 'the_title', $post->post_title ); ?></div>
+
+			<div class="qa_post_content"><?php
+				echo apply_filters( 'the_title', $post->post_content ); ?></div>
+
+			<div class="qa_post_excerpt"><?php
+				echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
+		</div>
+
+		<?php
+		/**
+		 * Create QA page if not exists
+		 */
+		$post = self::_create_qa_post( 'page' );
+
+		?>
+		<div id="<?php echo __FUNCTION__; ?>_page">
+			<h2>QA Page</h2>
 
 			<h3>Raw</h3>
 
