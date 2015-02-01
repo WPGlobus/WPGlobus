@@ -173,8 +173,9 @@ jQuery(document).ready(function () {
 					}	
 					
 					$('a.save, input#bulk_edit').click(function (event) {
-						$.ajaxSetup({async:false});
-
+						if (event.currentTarget.id != 'bulk_edit') {	
+							$.ajaxSetup({async:false});
+						}	
 						var p = $(this).parents('tr');
 						var id = p.attr('id').replace('edit-','');
 						var t,v,new_tags;
@@ -197,9 +198,10 @@ jQuery(document).ready(function () {
 							}
 							t.val(new_tags.join(', '));
 						});
-						
-						inlineEditPost.save(id);
-						$.ajaxSetup({async:true});
+						if (event.currentTarget.id != 'bulk_edit') {						
+							inlineEditPost.save(id);
+							$.ajaxSetup({async:true});
+						}						
 						
 					});					
 				});				
