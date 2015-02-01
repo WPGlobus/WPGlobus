@@ -18,7 +18,7 @@ class WPGlobus_WP {
 
 	/**
 	 * Attempt to check if an AJAX call was originated from admin screen.
-	 * @todo There should be other actions, not only 'inline-save'
+	 * @todo There should be other actions. See $core_actions_get in admin-ajax.php
 	 *       Can also check $GLOBALS['_SERVER']['HTTP_REFERER']
 	 *       and $GLOBALS['current_screen']->in_admin()
 	 * @return bool
@@ -26,7 +26,10 @@ class WPGlobus_WP {
 	public static function is_admin_doing_ajax() {
 		return (
 			self::is_doing_ajax() &&
-			self::is_http_post_action( 'inline-save' )
+			(
+				self::is_http_post_action( 'inline-save' ) ||
+				self::is_http_get_action( 'ajax-tag-search' )
+			)
 		);
 	}
 
@@ -56,6 +59,18 @@ class WPGlobus_WP {
 		$action = (array) $action;
 
 		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action ) );
+	}
+
+	/**
+	 * @param string|string[] $action
+	 *
+	 * @return bool
+	 */
+	public static function is_http_get_action( $action ) {
+
+		$action = (array) $action;
+
+		return ( ! empty( $_GET['action'] ) && in_array( $_GET['action'], $action ) );
 	}
 
 	/**
