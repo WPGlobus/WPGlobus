@@ -24,8 +24,10 @@ var wpglobus_wpseo = function () {
 		}
 
 		// These are added in the head for performance reasons.
-		str = str.replace(/%%sitedesc%%/g, wpseoMetaboxL10n.sitedesc);
-		str = str.replace(/%%sitename%%/g, wpseoMetaboxL10n.sitename);
+		//str = str.replace(/%%sitedesc%%/g, wpseoMetaboxL10n.sitedesc);
+		str = str.replace(/%%sitedesc%%/g, WPGlobusAdmin.data.blogdescription[language]);
+		//str = str.replace(/%%sitename%%/g, wpseoMetaboxL10n.sitename);
+		str = str.replace(/%%sitename%%/g, WPGlobusAdmin.data.blogname[language]);
 		str = str.replace(/%%sep%%/g, wpseoMetaboxL10n.sep);
 		str = str.replace(/%%date%%/g, wpseoMetaboxL10n.date);
 		str = str.replace(/%%id%%/g, wpseoMetaboxL10n.id);

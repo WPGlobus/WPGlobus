@@ -711,6 +711,15 @@ class WPGlobus {
 					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
 					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, $return);
 					$data['template'] .= '</textarea>';
+					
+					if ( $this->vendors_scripts['WPSEO'] ) { 
+						/** WPSEO */
+						$blogname = get_option('blogname');
+						$blogdesc = get_option('blogdescription');
+						$data['blogname'][$language] = WPGlobus_Core::text_filter($blogname, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);	
+						$data['blogdescription'][$language] = WPGlobus_Core::text_filter($blogdesc, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);	
+					}	
+
 				}
 				
 				$data['modify_excerpt'] = true;
@@ -727,7 +736,8 @@ class WPGlobus {
 						$data['tagsdiv'][] 	= 'tagsdiv-' . $tag;
 						$data['tag'][$tag]  = self::_get_terms($tag);
 					}
-				}	
+				}
+				
 			} else if ( 'nav-menus.php' == $page ) {
 
 				$page_action = 'menu-edit';
