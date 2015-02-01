@@ -163,11 +163,6 @@ class WPGlobus {
 					'on_manage_language_column'
 				), 10);					
 			
-				add_action( 'admin_footer' , array(
-					$this,
-					'on_add_options_general'
-				) );
-				
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
 				 *
@@ -201,8 +196,13 @@ class WPGlobus {
 				add_action( 'admin_print_scripts', array(
 					$this,
 					'on_admin_enqueue_scripts'
-				), 99 );	
-
+				), 99 );
+				
+				add_action( 'admin_footer' , array(
+					$this,
+					'on_admin_footer'
+				) );
+				
 				if ( $this->vendors_scripts['WPSEO'] ) {
 					add_action( 'wpseo_tab_content', array(
 						$this,
@@ -1700,16 +1700,29 @@ class WPGlobus {
 	}
 	
 	/**
+	 * Make correct Site Title in adminbar.
 	 * Make template for Site Title (option blogname)
-	 * an Tagline (option blogdescription) at options-general.php page
+	 * an Tagline (option blogdescription) at options-general.php page.
 	 *
 	 * @return void
 	 */
-	function on_add_options_general() {
+	function on_admin_footer() {
+
+		$blogname = get_option('blogname');
+		$bn = WPGlobus_Core::text_filter($blogname, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);
+
+		?>
+<script type='text/javascript'>
+/* <![CDATA[ */
+jQuery('#wp-admin-bar-site-name a').text("<?php echo $bn; ?>");
+/* ]]> */
+</script>
+		<?php
+		
 		if ( ! WPGlobus_WP::is_pagenow('options-general.php') ) {
 			return;
 		}
-		$blogname = get_option('blogname');
+
 		$blogdesc = get_option('blogdescription');
 		?>
 		<div id="wpglobus-blogname">		<?php
