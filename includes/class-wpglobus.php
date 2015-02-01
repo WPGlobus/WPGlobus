@@ -202,6 +202,11 @@ class WPGlobus {
 					$this,
 					'on_admin_footer'
 				) );
+
+				add_filter( 'admin_title' , array(
+					$this,
+					'on_admin_title'
+				), 10, 2 );				
 				
 				if ( $this->vendors_scripts['WPSEO'] ) {
 					add_action( 'wpseo_tab_content', array(
@@ -1697,6 +1702,18 @@ class WPGlobus {
 
 		return $term_names;
 
+	}
+	
+	/**
+	 * Make correct title for admin pages
+	 *
+	 * @param string $admin_title
+	 * @param string $title
+	 * @return string
+	 */
+	function on_admin_title($admin_title, $title) {
+		$blogname = get_option('blogname');
+		return $title . ' &lsaquo; ' . WPGlobus_Core::text_filter($blogname, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE) . ' &#8212; WordPress';
 	}
 	
 	/**
