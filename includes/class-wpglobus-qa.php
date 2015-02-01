@@ -8,6 +8,15 @@ class WPGlobus_QA {
 	const QA_USER_ID = 1;
 
 	/**
+	 * Must match APICest::COMMON_PREFIX @see APICest
+	 */
+	const COMMON_PREFIX = 'WPGlobusQA';
+
+	protected static $_qa_post_ids = array();
+
+	protected static $_qa_taxonomies = array();
+
+	/**
 	 * Handle special URLs for QA
 	 * @url http://www.wpglobus.com/?wpglobus=qa
 	 * @url http://www.wpglobus.com/ru/?wpglobus=qa
@@ -22,7 +31,7 @@ class WPGlobus_QA {
 		<!DOCTYPE html>
 		<html>
 		<head>
-			<title>WPGlobus QA</title>
+			<title><?php echo self::COMMON_PREFIX; ?></title>
 			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
 			<style>
 				xmp {
@@ -36,8 +45,8 @@ class WPGlobus_QA {
 				<h1>
 					<?php echo apply_filters( 'the_title',
 						join( '', array(
-							WPGlobus::tag_text( 'WPGlobus QA EN', 'en' ),
-							WPGlobus::tag_text( 'WPGlobus QA RU', 'ru' ),
+							WPGlobus::tag_text( self::COMMON_PREFIX . ' EN', 'en' ),
+							WPGlobus::tag_text( self::COMMON_PREFIX . ' RU', 'ru' ),
 						) )
 					); ?>
 				</h1>
@@ -72,8 +81,8 @@ class WPGlobus_QA {
 	 */
 	private static function _create_qa_post( $type ) {
 		$post_title = join( '', array(
-			WPGlobus::tag_text( "QA {$type}_title EN", 'en' ),
-			WPGlobus::tag_text( "QA {$type}_title RU", 'ru' ),
+			WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_title EN", 'en' ),
+			WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_title RU", 'ru' ),
 		) );
 
 		$post = get_page_by_title( $post_title, null, $type );
@@ -81,13 +90,13 @@ class WPGlobus_QA {
 		if ( ! $post ) {
 
 			$post_content = join( '', array(
-				WPGlobus::tag_text( "QA {$type}_content EN", 'en' ),
-				WPGlobus::tag_text( "QA {$type}_content RU", 'ru' ),
+				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_content EN", 'en' ),
+				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_content RU", 'ru' ),
 			) );
 
 			$post_excerpt = join( '', array(
-				WPGlobus::tag_text( "QA {$type}_excerpt EN", 'en' ),
-				WPGlobus::tag_text( "QA {$type}_excerpt RU", 'ru' ),
+				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_excerpt EN", 'en' ),
+				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_excerpt RU", 'ru' ),
 			) );
 
 			$post = get_post( wp_insert_post(
@@ -102,16 +111,41 @@ class WPGlobus_QA {
 			) );
 		}
 
+		/**
+		 * Preserve QA post ID for future reference
+		 */
+		self::$_qa_post_ids[ $type ] = $post->ID;
+
 		return $post;
 
 	}
 
 	private static function _create_qa_items() {
 
+		$category_name = join( '', array(
+			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name EN", 'en' ),
+			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name RU", 'ru' ),
+		) );
+
+		$category_description = join( '', array(
+			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description EN", 'en' ),
+			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description RU", 'ru' ),
+		) );
+
+		self::$_qa_taxonomies['category'] = wp_insert_term( $category_name, 'category', array(
+			'description' => $category_description,
+			/** @todo We must do it by default */
+			'slug'        => WPGlobus_Core::text_filter( $category_name, WPGlobus::Config()->default_language )
+		) );
+
+//		var_dump( self::$_qa_taxonomies );
+
 		/**
-		 * Create QA post if not exists
+		 * Create QA post if not exists, assign it to the QA category and set QA tag.
 		 */
 		$post = self::_create_qa_post( 'post' );
+		/** @todo BUG here: creates taxonomy again and again */
+		wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category');
 		?>
 		<div id="<?php echo __FUNCTION__; ?>_post">
 		<h2>QA Post</h2>
@@ -173,8 +207,8 @@ class WPGlobus_QA {
 			<h2>QA Blog Description</h2>
 			<?php
 			$blogdescription = join( '', array(
-				WPGlobus::tag_text( 'QA blogdescription EN', 'en' ),
-				WPGlobus::tag_text( 'QA blogdescription RU', 'ru' ),
+				WPGlobus::tag_text( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
+				WPGlobus::tag_text( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
 			) );
 			update_option( 'blogdescription', $blogdescription );
 			?>
@@ -260,25 +294,26 @@ class WPGlobus_QA {
 	 * To check the @see get_pages() function
 	 * It is used, for example, to show a list of available pages in the "Parent Page" metabox
 	 * when editing a page.
-	 * Here, we display a list of first 3 pages
-	 * and expect to see their titles correctly translated.
+	 * Here, we retrieve the QA page we created earlier
+	 * and expect to see its elements translated correctly.
 	 */
 	private static function _test_get_pages() {
 
 		/** @var WP_Post[] $all_pages */
-		$all_pages = get_pages( array( 'number' => 3, 'sort_column' => 'ID' ) );
-
+		$all_pages = get_pages( array( 'include' => self::$_qa_post_ids['page'] ) );
+		$post      = $all_pages[0];
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>get_pages()</h2>
 
 			<div class="well">
-				<?php foreach ( $all_pages as $page ) : ?>
-					<div id="test__get_pages__<?php echo $page->ID; ?>">
-						<?php echo $page->post_title; ?>
-					</div>
-				<?php endforeach; ?>
+				<div class="qa_post_title"><?php echo $post->post_title; ?></div>
+
+				<div class="qa_post_content"><?php echo $post->post_content; ?></div>
+
+				<div class="qa_post_excerpt"><?php echo $post->post_excerpt; ?></div>
 			</div>
+		</div>
 		</div>
 	<?php
 

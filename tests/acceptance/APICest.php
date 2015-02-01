@@ -7,6 +7,11 @@
 class APICest {
 
 	/**
+	 * Must match WPGlobus_QA::COMMON_PREFIX @see WPGlobus_QA
+	 */
+	const COMMON_PREFIX = 'WPGlobusQA';
+
+	/**
 	 * @see WPGlobus_QA::_common_for_all_languages()
 	 *
 	 * @param AcceptanceTester $I
@@ -103,7 +108,7 @@ class APICest {
 	public function en( AcceptanceTester $I ) {
 		$I->amOnPage( '/?wpglobus=qa' );
 
-		$I->see( 'WPGlobus QA EN', 'h1' );
+		$I->see( self::COMMON_PREFIX . ' EN', 'h1' );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_locale()
@@ -113,35 +118,35 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_create_qa_items()
 		 */
-		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
+		$I->assertEquals( '{:en}' . self::COMMON_PREFIX . ' post_title EN{:}{:ru}' . self::COMMON_PREFIX . ' post_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}QA post_content EN{:}{:ru}QA post_content RU{:}',
+		$I->assertEquals( '{:en}' . self::COMMON_PREFIX . ' post_content EN{:}{:ru}' . self::COMMON_PREFIX . ' post_content RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_content' ) );
-		$I->assertEquals( '{:en}QA post_excerpt EN{:}{:ru}QA post_excerpt RU{:}',
+		$I->assertEquals( '{:en}' . self::COMMON_PREFIX . ' post_excerpt EN{:}{:ru}' . self::COMMON_PREFIX . ' post_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( 'QA post_title EN',
+		$I->assertEquals( self::COMMON_PREFIX . ' post_title EN',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( 'QA post_content EN',
+		$I->assertEquals( self::COMMON_PREFIX . ' post_content EN',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_content' ) );
-		$I->assertEquals( 'QA post_excerpt EN',
+		$I->assertEquals( self::COMMON_PREFIX . ' post_excerpt EN',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( '{:en}QA page_title EN{:}{:ru}QA page_title RU{:}',
+		$I->assertEquals( '{:en}' . self::COMMON_PREFIX . ' page_title EN{:}{:ru}' . self::COMMON_PREFIX . ' page_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}QA page_content EN{:}{:ru}QA page_content RU{:}',
+		$I->assertEquals( '{:en}' . self::COMMON_PREFIX . ' page_content EN{:}{:ru}' . self::COMMON_PREFIX . ' page_content RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ) );
-		$I->assertEquals( '{:en}QA page_excerpt EN{:}{:ru}QA page_excerpt RU{:}',
+		$I->assertEquals( '{:en}' . self::COMMON_PREFIX . ' page_excerpt EN{:}{:ru}' . self::COMMON_PREFIX . ' page_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( 'QA page_title EN',
+		$I->assertEquals( '' . self::COMMON_PREFIX . ' page_title EN',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( 'QA page_content EN',
+		$I->assertEquals( '' . self::COMMON_PREFIX . ' page_content EN',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ) );
-		$I->assertEquals( 'QA page_excerpt EN',
+		$I->assertEquals( '' . self::COMMON_PREFIX . ' page_excerpt EN',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( 'QA blogdescription EN', $I->grabTextFrom( '#qa_blogdescription' ) );
+		$I->assertEquals( '' . self::COMMON_PREFIX . ' blogdescription EN', $I->grabTextFrom( '#qa_blogdescription' ) );
 
 		$this->_test_home_url( $I, 'http://www.wpglobus.com' );
 
@@ -156,7 +161,12 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_get_pages()
 		 */
-		$I->assertEquals( "Contact Us", $I->grabTextFrom( '#test__get_pages__' . '72' ), 'test__get_pages' );
+		$I->assertEquals( self::COMMON_PREFIX . ' page_title EN',
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_title' ) );
+		$I->assertEquals( self::COMMON_PREFIX . ' page_content EN',
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_content' ) );
+		$I->assertEquals( self::COMMON_PREFIX . ' page_excerpt EN',
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_excerpt' ) );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
@@ -233,9 +243,7 @@ class APICest {
 	public function ru( AcceptanceTester $I ) {
 		$I->amOnPage( '/ru/?wpglobus=qa' );
 
-		/**
-		 */
-		$I->see( 'WPGlobus QA RU', 'h1' );
+		$I->see( self::COMMON_PREFIX . ' RU', 'h1' );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_locale()
@@ -288,7 +296,13 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_get_pages()
 		 */
-		$I->assertEquals( "Обратная связь", $I->grabTextFrom( '#test__get_pages__' . '72' ), 'test__get_pages' );
+		$I->assertEquals( self::COMMON_PREFIX . ' page_title RU',
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_title' ) );
+		$I->assertEquals( self::COMMON_PREFIX . ' page_content RU',
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_content' ) );
+		$I->assertEquals( self::COMMON_PREFIX . ' page_excerpt RU',
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_excerpt' ) );
+
 
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
