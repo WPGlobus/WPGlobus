@@ -422,6 +422,7 @@ class WPGlobus {
 			
 			global $WPGlobus_Config;
 			$result = array();
+			$bulkedit_post_titles = array();
 			foreach( $order['title'] as $id=>$title ) {
 				$result[$id]['source'] = $title['source'];
 				
@@ -440,13 +441,17 @@ class WPGlobus {
 					$result[$id][$language]['name'] = WPGlobus_Core::text_filter($title['source'], $language, $return);
 					if ($term && $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
 						$result[$id][$language]['description'] = WPGlobus_Core::text_filter($term->description, $language, $return);
-					}	
+					}
+					
+					$bulkedit_post_titles[$id][$language]['name'] = WPGlobus_Core::text_filter($title['source'], $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);
 				}
 			}
+			$ajax_return['qedit_titles'] 		= $result;
+			$ajax_return['bulkedit_post_titles'] = $bulkedit_post_titles;
 			break;
 		endswitch;
 
-		echo json_encode($result);
+		echo json_encode($ajax_return);
 		die();	
 	}
 	

@@ -138,8 +138,8 @@ jQuery(document).ready(function () {
                 order['title'] 		 = title;
                 $.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json'})
                     .done(function (result) {
-                        WPGlobusAdmin.qedit_titles = result;
-						$.each(WPGlobusAdmin.qedit_titles, function(id, obj){
+                        WPGlobusAdmin.qedit_titles = result.qedit_titles;
+						$.each(result.bulkedit_post_titles, function(id, obj){
 							$('#inline_'+id+' .post_title').text(obj[WPGlobusAdmin.data.language]['name']);
 						});
                     })
