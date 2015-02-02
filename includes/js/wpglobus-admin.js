@@ -139,6 +139,9 @@ jQuery(document).ready(function () {
                 $.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json'})
                     .done(function (result) {
                         WPGlobusAdmin.qedit_titles = result;
+						$.each(WPGlobusAdmin.qedit_titles, function(id, obj){
+							$('#inline_'+id+' .post_title').text(obj[WPGlobusAdmin.data.language]['name']);
+						});
                     })
                     .fail(function (error) {
                     })
