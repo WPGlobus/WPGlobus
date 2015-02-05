@@ -377,6 +377,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 
 		/**
 		 * Get options from DB and wp-config.php
+		 *
 		 * @return void
 		 */
 		function _get_options() {
@@ -509,6 +510,15 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			} else {	
 				$this->version = $option;
 			}			
+
+			/**
+			 * WPGlobus devmode. 
+			 */
+			if ( isset($_GET['wpglobus']) && 'off' == $_GET['wpglobus'] ) {
+				$this->toggle = 'off';
+			} else {	
+				$this->toggle = 'on';
+			}	
 
 		}
 
