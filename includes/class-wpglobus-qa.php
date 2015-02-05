@@ -366,37 +366,40 @@ class WPGlobus_QA {
 	 */
 	private static function _test_get_the_terms() {
 
-		$terms = get_the_terms( 97, 'category' );
+		$type    = 'post';
+		$post_id = self::$_qa_post_ids[ $type ];
+		$terms   = get_the_terms( $post_id, 'category' );
+		$term    = $terms[0];
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>get_the_terms()</h2>
 
-			<p>Name and description of the category that the post ID=97 belongs to:</p>
+			<p>Name and description of the category that the QA <?php echo $type; ?> belongs to:</p>
 
-			<p><code>get_the_terms( 97, 'category' );</code></p>
-			<?php foreach ( $terms as $term ) : ?>
-				<p id="test__get_the_terms__<?php echo $term->term_id; ?>">
-					<code>$term->name</code> :
-					<span class="test__get_the_terms__name"><?php echo $term->name; ?></span>
-					<br/>
-					<code>$term->description</code> :
-					<span class="test__get_the_terms__description"><?php echo $term->description; ?></span>
-				</p>
-			<?php endforeach; ?>
+			<p><code>get_the_terms( $<?php echo $type; ?>_id, 'category' );</code></p>
+
+			<p>
+				<code>$term->name</code> :
+				<span class="test__get_the_terms__name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="test__get_the_terms__description"><?php echo $term->description; ?></span>
+			</p>
 
 			<p>Non-existing post ID:</p>
 
 			<p>
 				<code>get_the_terms( -15, 'category' )</code>
-				=&gt; <span
-					class="non-existing-post-id"><?php echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
+				=&gt; <span class="non-existing-post-id"><?php
+					echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
 			</p>
 
 			<p>Non-existing term name:</p>
 
 			<p>
-				<code>get_the_terms( 97, 'no-such-term' )</code>
-				=&gt; <span class="no-such-term"><?php echo get_class( get_the_terms( 97, 'no-such-term' ) ); ?></span>
+				<code>get_the_terms( $<?php echo $type; ?>_id, 'no-such-term' )</code>
+				=&gt; <span class="no-such-term"><?php
+					echo get_class( get_the_terms( $post_id, 'no-such-term' ) ); ?></span>
 			</p>
 		</div>
 	<?php
@@ -408,38 +411,41 @@ class WPGlobus_QA {
 	 */
 	private static function _test_wp_get_object_terms() {
 
-		$terms = wp_get_object_terms( array( 95, 97 ), 'category' );
+		$type    = 'post';
+		$post_id = self::$_qa_post_ids[ $type ];
+		$terms   = wp_get_object_terms( array( $post_id ), 'category' );
+		$term    = $terms[0];
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>wp_get_object_terms()</h2>
 
-			<p>Name and description of the categories that the posts ID=95 and ID=97 belong to:</p>
+			<p>Name and description of the category that the QA <?php echo $type; ?> belongs to:</p>
 
-			<p><code>wp_get_object_terms( array( 95, 97 ), 'category' );</code></p>
-			<?php foreach ( $terms as $term ) : ?>
-				<p id="_test_wp_get_object_terms_<?php echo $term->term_id; ?>">
-					<code>$term->name</code> :
-					<span class="name"><?php echo $term->name; ?></span>
-					<br/>
-					<code>$term->description</code> :
-					<span class="description"><?php echo $term->description; ?></span>
-				</p>
-			<?php endforeach; ?>
+			<p><code>wp_get_object_terms( array( $<?php echo $type; ?>_id ), 'category' );</code></p>
+
+			<p id="_test_wp_get_object_terms_<?php echo $term->term_id; ?>">
+				<code>$term->name</code> :
+				<span class="name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="description"><?php echo $term->description; ?></span>
+			</p>
 
 			<p>
-				<code>wp_get_object_terms( array( 95, 97 ), 'category', array( 'fields' => 'names' ) );</code>
+				<code>wp_get_object_terms( array( $<?php echo $type; ?>_id ),
+					'category', array( 'fields' => 'names' ) );</code>
 				<br>=&gt;
 				<span class="fields_names"><?php
-					echo esc_html( join( ', ', wp_get_object_terms( array( 95, 97 ), 'category',
+					echo esc_html( join( ', ', wp_get_object_terms( array( $post_id ), 'category',
 						array( 'fields' => 'names' ) ) ) );
 					?></span>
 			</p>
 
 			<p>
-				<code>wp_get_object_terms( array( 97 ), 'no-such-term' );</code>
+				<code>wp_get_object_terms( array( $<?php echo $type; ?>_id ), 'no-such-term' );</code>
 				<br>=&gt;
 				<span class="no_such_term"><?php
-					echo wp_get_object_terms( array( 97 ), 'no-such-term' )->get_error_message();
+					echo wp_get_object_terms( array( $post_id ), 'no-such-term' )->get_error_message();
 					?></span>
 			</p>
 
@@ -458,7 +464,10 @@ class WPGlobus_QA {
 
 			<p><code>$terms = get_terms( 'category' )</code></p>
 			<?php
-			$terms = get_terms( 'category', array( 'name__like' => 'QA Category', 'hide_empty' => false ) );
+			$terms = get_terms( 'category', array(
+				'name__like' => 'QA Category',
+				'hide_empty' => false
+			) );
 			$term  = $terms[0];
 			?>
 			<p id="_test_get_terms_category">
@@ -471,7 +480,10 @@ class WPGlobus_QA {
 
 			<p><code>$terms = get_terms( 'post_tag' )</code></p>
 			<?php
-			$terms = get_terms( 'post_tag', array( 'name__like' => 'QA Tag', 'hide_empty' => false ) );
+			$terms = get_terms( 'post_tag', array(
+				'name__like' => self::COMMON_PREFIX . ' post_tag',
+				'hide_empty' => false
+			) );
 			$term  = $terms[0];
 			?>
 			<p id="_test_get_terms_post_tag">
