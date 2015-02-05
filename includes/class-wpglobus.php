@@ -1541,7 +1541,7 @@ class WPGlobus {
 		global $WPGlobus_Config;		
 		
 		$devmode = true;	
-		foreach( $WPGlobus_Config->enabled_languages as $language ) {
+		foreach( $WPGlobus_Config->open_languages as $language ) {
 			if ( $language != $WPGlobus_Config->default_language ) {
 				if ( isset($postarr['content-' . $language]) ) {
 					$devmode = false;	
@@ -1564,7 +1564,7 @@ class WPGlobus {
 			}	
 		}
 
-		foreach( $WPGlobus_Config->enabled_languages as $language ) :
+		foreach( $WPGlobus_Config->open_languages as $language ) :
 			if ( $language == $WPGlobus_Config->default_language ) {
 
 				continue;
