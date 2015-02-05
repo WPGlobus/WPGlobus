@@ -9,6 +9,12 @@
  */
 class WPGlobus {
 
+	const LOCALE_TAG = '{:%s}%s{:}';
+	const LOCALE_TAG_START = '{:%s}';
+	const LOCALE_TAG_END = '{:}';
+	const LOCALE_TAG_OPEN = '{:';
+	const LOCALE_TAG_CLOSE = '}';
+	
 	/**
 	 * @var string
 	 */
@@ -104,6 +110,14 @@ class WPGlobus {
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
 		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
+
+		/**
+		 * @todo add doc
+		 */	
+		self::Config()->open_languages = apply_filters('wpglobus_open_languages', self::Config()->open_languages);
+		
+		/** @todo add to config */
+		self::Config()->closed_languages = array_diff(self::Config()->enabled_languages, self::Config()->open_languages); 
 		
 		add_filter( 'wp_redirect', array(
 			$this,
@@ -664,6 +678,7 @@ class WPGlobus {
 			'default_language' => $WPGlobus_Config->default_language,
 			'language' => $WPGlobus_Config->language,
 			'enabled_languages' => $WPGlobus_Config->enabled_languages,
+			'open_languages' 	=> $WPGlobus_Config->open_languages,
 			'en_language_name' => $WPGlobus_Config->en_language_name,
 			'locale_tag_start' => self::LOCALE_TAG_START,
 			'locale_tag_end' => self::LOCALE_TAG_END	
@@ -1029,12 +1044,11 @@ class WPGlobus {
 	 * @return string
 	 */
 	function _get_quickedit_template() {
-		global $WPGlobus_Config;
 		$t = '';
-		foreach( $WPGlobus_Config->enabled_languages as $language ) {
+		foreach( self::Config()->open_languages as $language ) {
 			$t .= '<label>';
 			$t .= '<span class="input-text-wrap">';
-			$t .= '<input id="" data-language="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'">';
+			$t .= '<input id="" data-language="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . self::Config()->en_language_name[$language] .'">';
 			$t .= '</span>';
 			$t .= '</label>';
 		}
@@ -1445,12 +1459,9 @@ class WPGlobus {
 		if ( $this->disabled_entity($post->post_type) ) {
 			return;	
 		}			
-		
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
 
-		foreach( $WPGlobus_Config->enabled_languages as $language ) :
-			if ( $language == $WPGlobus_Config->default_language ) {
+		foreach( self::Config()->open_languages as $language ) :
+			if ( $language == self::Config()->default_language ) {
 
 				continue;
 
@@ -1475,12 +1486,6 @@ class WPGlobus {
 			}
 		endforeach;
 	}
-
-	const LOCALE_TAG = '{:%s}%s{:}';
-	const LOCALE_TAG_START = '{:%s}';
-	const LOCALE_TAG_END = '{:}';
-	const LOCALE_TAG_OPEN = '{:';
-	const LOCALE_TAG_CLOSE = '}';
 
 	/**
 	 * Surround text with language tags
@@ -1617,21 +1622,19 @@ class WPGlobus {
 	
 		if ( $this->disabled_entity() ) {
 			return;	
-		}
-	
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;	?>
-
+		}	?>
+		
 		<ul class="wpglobus-post-tabs-ul">	<?php
-			foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-				$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[$language]; ?></a></li> <?php
+			foreach ( self::Config()->open_languages as $language ) {
+				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
+				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a></li> <?php
 			} ?>
 		</ul>	<?php		
 	}
 	
 	/**
 	 * Add language tabs for jQueryUI
+	 *
 	 * @return void
 	 */
 	function on_add_language_tabs() {
@@ -1643,7 +1646,7 @@ class WPGlobus {
 		}			?>
 
 		<ul class="wpglobus-post-tabs-ul">	<?php
-			foreach ( self::Config()->enabled_languages as $language ) {
+			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
 				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a></li> <?php
 			} ?>
@@ -1667,12 +1670,9 @@ class WPGlobus {
 			return;
 		}
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
-		foreach( $WPGlobus_Config->enabled_languages as $language ) :
+		foreach( self::Config()->open_languages as $language ) :
 		
-			if ( $language == $WPGlobus_Config->default_language ) { 
+			if ( $language == self::Config()->default_language ) { 
 				
 				continue; 
 			
