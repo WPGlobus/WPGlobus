@@ -28,7 +28,7 @@ class WPGlobus_Upgrade {
 				'?wpglobus_mini_warning=hide' );
 			?>
 			<div class="error">
-				<p><?php echo $message; ?><span style="float:right;"><?php echo $hide; ?></a></span></p>
+				<p><span style="color:#f00" class="dashicons dashicons-admin-site"></span>&nbsp;<?php echo $message; ?><span style="float:right;"><?php echo $hide; ?></a></span></p>
 			</div>
 		<?php
 		}
