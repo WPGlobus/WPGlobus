@@ -1489,8 +1489,23 @@ class WPGlobus {
 	 *
 	 * @return string
 	 */
-	public static function tag_text( $text, $language ) {
+	public static function add_locale_marks( $text, $language ) {
 		return sprintf( WPGlobus::LOCALE_TAG, $language, $text );
+	}
+
+	/**
+	 * @deprecated 1.0.0 Use WPGlobus::add_locale_marks
+	 * @see        WPGlobus::add_locale_marks
+	 *
+	 * @param string $text
+	 * @param string $language
+	 *
+	 * @return string
+	 */
+	public static function tag_text( $text, $language ) {
+		_deprecated_function( __METHOD__, 'WPGlobus 1.0.0', 'WPGlobus::add_locale_marks()' );
+
+		return self::add_locale_marks( $text, $language );
 	}
 
 	/**
