@@ -92,6 +92,7 @@ class WPGlobus {
 			$this->disabled_entities[] = 'product';
 			$this->disabled_entities[] = 'product_tag';
 			$this->disabled_entities[] = 'product_cat';
+			$this->disabled_entities[] = 'shop_order';
 		}
 
 		/**
