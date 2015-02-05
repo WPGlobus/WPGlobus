@@ -120,8 +120,10 @@ class WPGlobus_QA {
 
 	}
 
-	private static function _create_qa_items() {
-
+	/**
+	 * Create a QA category if not exists
+	 */
+	private static function _create_qa_category() {
 		$category_name = join( '', array(
 			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name EN", 'en' ),
 			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name RU", 'ru' ),
@@ -132,20 +134,33 @@ class WPGlobus_QA {
 			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description RU", 'ru' ),
 		) );
 
-		self::$_qa_taxonomies['category'] = wp_insert_term( $category_name, 'category', array(
-			'description' => $category_description,
-			/** @todo We must do it by default */
-			'slug'        => WPGlobus_Core::text_filter( $category_name, WPGlobus::Config()->default_language )
-		) );
+		self::$_qa_taxonomies['category'] = term_exists( $category_name, 'category' );
+		if ( self::$_qa_taxonomies['category'] ) {
+			?><p>QA Category already exists, ID=<?php
+			echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
+		} else {
+			self::$_qa_taxonomies['category'] = wp_insert_term( $category_name, 'category', array(
+				'description' => $category_description,
+				/** @todo We must do it by default */
+				'slug'        => WPGlobus_Core::text_filter( $category_name, WPGlobus::Config()->default_language )
+			) );
+			if ( self::$_qa_taxonomies['category'] ) {
+				?><p>Created QA Category, ID=<?php
+				echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
+			}
+		}
+	}
 
-//		var_dump( self::$_qa_taxonomies );
+	private static function _create_qa_items() {
+
+		self::_create_qa_category();
 
 		/**
 		 * Create QA post if not exists, assign it to the QA category and set QA tag.
 		 */
 		$post = self::_create_qa_post( 'post' );
 		/** @todo BUG here: creates taxonomy again and again */
-		wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category');
+		#		wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category');
 		?>
 		<div id="<?php echo __FUNCTION__; ?>_post">
 		<h2>QA Post</h2>
