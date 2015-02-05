@@ -384,7 +384,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 
 			$wpglobus_option = get_option( $this->option );
 
-			/*
+			/**
 			 * FIX: after "Reset All" Redux options we must reset all WPGlobus options
 			 * first of all look at $wpglobus_option['more_languages']
 			 */
@@ -399,7 +399,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 
 			}
 
-			/*
+			/**
 			 * Get enabled languages and default language ( just one main language )
 			 */
 			if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty( $wpglobus_option['enabled_languages'] ) ) {
@@ -421,9 +421,14 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 					array_unshift( $this->enabled_languages, $this->default_language );
 				}
 			}
-
-			/*
-			 *
+			
+			/**
+			 * Set available languages for translators
+			 */
+			$this->open_languages = $this->enabled_languages;
+			
+			/**
+			 * 
 			 *
 			 */
 			$this->_set_flags_url();
