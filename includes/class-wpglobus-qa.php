@@ -75,6 +75,8 @@ class WPGlobus_QA {
 	}
 
 	/**
+	 * Create QA post if not exists, assign it to the QA category and set QA tag.
+	 *
 	 * @param string $type 'post' or 'page' or CPT
 	 *
 	 * @return WP_Post
@@ -109,6 +111,20 @@ class WPGlobus_QA {
 					'post_excerpt' => $post_excerpt,
 				)
 			) );
+
+			?><p>Created QA Post, ID=<?php echo $post->ID; ?></p><?php
+
+			/**
+			 * Set the category
+			 */
+			wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category' );
+
+			/**
+			 * @todo create and set QA tag
+			 */
+
+		} else {
+			?><p>QA Post already exists, ID=<?php echo $post->ID; ?></p><?php
 		}
 
 		/**
@@ -141,8 +157,9 @@ class WPGlobus_QA {
 			 * term_exists returns strings while wp_insert_term returns integers.
 			 * We need integers later in wp_set_object_terms, so we have to cast them now.
 			 */
-			self::$_qa_taxonomies['category']['term_id'] = (int)self::$_qa_taxonomies['category']['term_id'];
-			self::$_qa_taxonomies['category']['term_taxonomy_id'] = (int)self::$_qa_taxonomies['category']['term_taxonomy_id'];
+			self::$_qa_taxonomies['category']['term_id']          = (int) self::$_qa_taxonomies['category']['term_id'];
+			self::$_qa_taxonomies['category']['term_taxonomy_id'] =
+				(int) self::$_qa_taxonomies['category']['term_taxonomy_id'];
 
 			?><p>QA Category already exists, ID=<?php
 			echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
@@ -163,12 +180,8 @@ class WPGlobus_QA {
 
 		self::_create_qa_category();
 
-		/**
-		 * Create QA post if not exists, assign it to the QA category and set QA tag.
-		 */
 		$post = self::_create_qa_post( 'post' );
-		/** @todo BUG here: creates taxonomy again and again */
-		wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category' );
+
 		?>
 		<div id="<?php echo __FUNCTION__; ?>_post">
 		<h2>QA Post</h2>
