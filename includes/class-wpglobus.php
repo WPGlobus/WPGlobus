@@ -149,7 +149,7 @@ class WPGlobus {
 				}
 			}
 
-			if ( ! isset($_GET['wpglobus']) || 'on' == $_GET['wpglobus'] ) {
+			if ( self::Config()->toggle == 'on' || ! $this->user_can('wpglobus_toggle') ) {
 				
 				/**
 				 * Four filters for adding language column to edit.php page
@@ -527,11 +527,52 @@ class WPGlobus {
 		}
 		return $location;
 	}	
-		
+	
+	/**
+	 * Check current user has capability $cap
+	 *
+	 * @param string $role
+	 * @return boolean
+	 */
+	function user_can( $cap = '' ) {
+		global $current_user;
+		if ( empty($current_user) ) {
+			wp_get_current_user();
+		}			
+		if ( 'wpglobus_toggle' == $cap ) {
+			if ( $this->user_has_role('administrator') ||  current_user_can($cap) ) {
+				return true;
+			}
+			return false;	
+		}
+		return true;
+	}	
+	 
+	/**
+	 * Check current user has $role
+	 *
+	 * @param string $role
+	 * @return boolean
+	 */
+	function user_has_role( $role = '' ) {
+		global $current_user;
+		if ( empty($current_user) ) {
+			wp_get_current_user();
+		}	
+		return in_array($role, $current_user->roles);
+	}
+	 
 	/**
 	 * Add switcher to publish metabox
+	 *
+	 * @return void
 	 */
 	function on_add_devmode_switcher() {
+		
+		if ( ! $this->user_can('wpglobus_toggle') ) {
+			return;
+		}	
+		
 		global $post;
 		
 		if ( $this->disabled_entity($post->post_type) ) {
