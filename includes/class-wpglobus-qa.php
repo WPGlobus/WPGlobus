@@ -45,8 +45,8 @@ class WPGlobus_QA {
 				<h1>
 					<?php echo apply_filters( 'the_title',
 						join( '', array(
-							WPGlobus::tag_text( self::COMMON_PREFIX . ' EN', 'en' ),
-							WPGlobus::tag_text( self::COMMON_PREFIX . ' RU', 'ru' ),
+							WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' EN', 'en' ),
+							WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' RU', 'ru' ),
 						) )
 					); ?>
 				</h1>
@@ -83,8 +83,8 @@ class WPGlobus_QA {
 	 */
 	private static function _create_qa_post( $type ) {
 		$post_title = join( '', array(
-			WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_title EN", 'en' ),
-			WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_title RU", 'ru' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_title EN", 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_title RU", 'ru' ),
 		) );
 
 		$post = get_page_by_title( $post_title, null, $type );
@@ -92,13 +92,13 @@ class WPGlobus_QA {
 		if ( ! $post ) {
 
 			$post_content = join( '', array(
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_content EN", 'en' ),
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_content RU", 'ru' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_content EN", 'en' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_content RU", 'ru' ),
 			) );
 
 			$post_excerpt = join( '', array(
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_excerpt EN", 'en' ),
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_excerpt RU", 'ru' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_excerpt EN", 'en' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_excerpt RU", 'ru' ),
 			) );
 
 			$post = get_post( wp_insert_post(
@@ -112,19 +112,17 @@ class WPGlobus_QA {
 				)
 			) );
 
-			?><p>Created QA Post, ID=<?php echo $post->ID; ?></p><?php
-
 			/**
 			 * Set the category
 			 */
 			wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category' );
 
 			/**
-			 * @todo create and set QA tag
+			 * Set the tag
 			 */
+			wp_set_object_terms( $post->ID, self::$_qa_taxonomies['post_tag']['term_id'], 'post_tag' );
 
 		} else {
-			?><p>QA Post already exists, ID=<?php echo $post->ID; ?></p><?php
 		}
 
 		/**
@@ -132,53 +130,61 @@ class WPGlobus_QA {
 		 */
 		self::$_qa_post_ids[ $type ] = $post->ID;
 
+		printf( '<p>QA %s ID=%d', $type, self::$_qa_post_ids[ $type ] );
+
 		return $post;
 
 	}
 
 	/**
-	 * Create a QA category if not exists
+	 * Create a QA term if does not exist yet
+	 *
+	 * @param string $taxonomy 'category', 'post_tag', etc
 	 */
-	private static function _create_qa_category() {
-		$category_name = join( '', array(
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name EN", 'en' ),
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name RU", 'ru' ),
+	protected static function _create_qa_term( $taxonomy ) {
+
+		$term_name = join( '', array(
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy name EN", 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy name RU", 'ru' ),
 		) );
 
-		$category_description = join( '', array(
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description EN", 'en' ),
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description RU", 'ru' ),
+		$term_description = join( '', array(
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy description EN", 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy description RU", 'ru' ),
 		) );
 
-		self::$_qa_taxonomies['category'] = term_exists( $category_name, 'category' );
-		if ( self::$_qa_taxonomies['category'] ) {
+		/** @todo We must do it by default */
+		$term_slug = WPGlobus_Core::text_filter( $term_name, WPGlobus::Config()->default_language );
+
+		self::$_qa_taxonomies[ $taxonomy ] = term_exists( $term_name, $taxonomy );
+
+		if ( self::$_qa_taxonomies[ $taxonomy ] ) {
 
 			/**
 			 * term_exists returns strings while wp_insert_term returns integers.
 			 * We need integers later in wp_set_object_terms, so we have to cast them now.
 			 */
-			self::$_qa_taxonomies['category']['term_id']          = (int) self::$_qa_taxonomies['category']['term_id'];
-			self::$_qa_taxonomies['category']['term_taxonomy_id'] =
-				(int) self::$_qa_taxonomies['category']['term_taxonomy_id'];
+			self::$_qa_taxonomies[ $taxonomy ]['term_id']          =
+				(int) self::$_qa_taxonomies[ $taxonomy ]['term_id'];
+			self::$_qa_taxonomies[ $taxonomy ]['term_taxonomy_id'] =
+				(int) self::$_qa_taxonomies[ $taxonomy ]['term_taxonomy_id'];
 
-			?><p>QA Category already exists, ID=<?php
-			echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
 		} else {
-			self::$_qa_taxonomies['category'] = wp_insert_term( $category_name, 'category', array(
-				'description' => $category_description,
-				/** @todo We must do it by default */
-				'slug'        => WPGlobus_Core::text_filter( $category_name, WPGlobus::Config()->default_language )
+			self::$_qa_taxonomies[ $taxonomy ] = wp_insert_term( $term_name, $taxonomy, array(
+				'description' => $term_description,
+				'slug'        => $term_slug
 			) );
-			if ( self::$_qa_taxonomies['category'] ) {
-				?><p>Created QA Category, ID=<?php
-				echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
-			}
+		}
+
+		if ( self::$_qa_taxonomies[ $taxonomy ] ) {
+			printf( '<p>QA %s, ID=%d</p>', $taxonomy, self::$_qa_taxonomies[ $taxonomy ]['term_id'] );
 		}
 	}
 
 	private static function _create_qa_items() {
 
-		self::_create_qa_category();
+		self::_create_qa_term( 'category' );
+		self::_create_qa_term( 'post_tag' );
 
 		$post = self::_create_qa_post( 'post' );
 
@@ -243,8 +249,8 @@ class WPGlobus_QA {
 			<h2>QA Blog Description</h2>
 			<?php
 			$blogdescription = join( '', array(
-				WPGlobus::tag_text( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
-				WPGlobus::tag_text( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
 			) );
 			update_option( 'blogdescription', $blogdescription );
 			?>
@@ -259,8 +265,8 @@ class WPGlobus_QA {
 		<p>Need to encode: <code>ENG, РУС</code></p>
 		<p>Encoded string: <code id="tag_text"><?php
 				echo ''
-				     . WPGlobus::tag_text( 'ENG', 'en' )
-				     . WPGlobus::tag_text( 'РУС', 'ru' );
+				     . WPGlobus::add_locale_marks( 'ENG', 'en' )
+				     . WPGlobus::add_locale_marks( 'РУС', 'ru' );
 				?></code>
 		</p>
 	<?php
