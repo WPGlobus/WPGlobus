@@ -423,7 +423,7 @@ class WPGlobus_QA {
 
 			<p><code>wp_get_object_terms( array( $<?php echo $type; ?>_id ), 'category' );</code></p>
 
-			<p id="_test_wp_get_object_terms_<?php echo $term->term_id; ?>">
+			<p>
 				<code>$term->name</code> :
 				<span class="name"><?php echo $term->name; ?></span>
 				<br/>
