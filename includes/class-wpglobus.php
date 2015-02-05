@@ -115,9 +115,7 @@ class WPGlobus {
 		 * @todo add doc
 		 */	
 		self::Config()->open_languages = apply_filters('wpglobus_open_languages', self::Config()->open_languages);
-		
-		/** @todo add to config */
-		self::Config()->closed_languages = array_diff(self::Config()->enabled_languages, self::Config()->open_languages); 
+
 		
 		add_filter( 'wp_redirect', array(
 			$this,

@@ -428,11 +428,6 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			 */
 			$this->open_languages = $this->enabled_languages;
 			
-			/*
-			 * @todo add specification
-			 */
-			$this->closed_languages = array();
-			
 			/**
 			 * 
 			 *
