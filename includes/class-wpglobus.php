@@ -93,6 +93,15 @@ class WPGlobus {
 			$this->disabled_entities[] = 'product_tag';
 			$this->disabled_entities[] = 'product_cat';
 		}
+
+		/**
+		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $disabled_entities Array of disabled entities.
+		 */
+		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
 		
 		add_filter( 'wp_redirect', array(
 			$this,
@@ -143,26 +152,27 @@ class WPGlobus {
 				/**
 				 * Four filters for adding language column to edit.php page
 				 */
-				add_filter( 'manage_posts_columns' , array(
-					$this,
-					'on_add_language_column'
-				), 10);
-				
-				add_filter( 'manage_pages_columns' , array(
-					$this,
-					'on_add_language_column'
-				), 10);				
-				
-				add_filter( 'manage_posts_custom_column' , array(
-					$this,
-					'on_manage_language_column'
-				), 10);
-				
-				add_filter( 'manage_pages_custom_column' , array(
-					$this,
-					'on_manage_language_column'
-				), 10);					
-			
+				if ( ! $this->disabled_entity() ) {				 
+					add_filter( 'manage_posts_columns' , array(
+						$this,
+						'on_add_language_column'
+					), 10);
+					
+					add_filter( 'manage_pages_columns' , array(
+						$this,
+						'on_add_language_column'
+					), 10);				
+					
+					add_filter( 'manage_posts_custom_column' , array(
+						$this,
+						'on_manage_language_column'
+					), 10);
+					
+					add_filter( 'manage_pages_custom_column' , array(
+						$this,
+						'on_manage_language_column'
+					), 10);					
+				}
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
 				 *
@@ -299,14 +309,6 @@ class WPGlobus {
 			) );			
 		}
 
-		/**
-		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array $disabled_entities Array of disabled entities.
-		 */
-		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
 	}
 
 	/**
