@@ -51,6 +51,15 @@ class WPGlobus_QA {
 					); ?>
 				</h1>
 			</div>
+			<form>
+				<input type="hidden" name="wpglobus" value="qa"/>
+				<label>Remove QA items after? <input type="checkbox"
+				                                     name="clean"
+				                                     value="1"<?php
+					checked( (int) @$_GET['clean'] ); ?>/></label>
+				<button class="btn btn-xs btn-primary">Run again</button>
+			</form>
+			<hr/>
 			<?php
 			self::_create_qa_items();
 
@@ -67,6 +76,10 @@ class WPGlobus_QA {
 			self::_test_post_name();
 
 			self::_common_for_all_languages();
+
+			if ( @$_GET['clean'] ) {
+				self::_remove_qa_items();
+			}
 			?>
 		</div>
 		</body>
@@ -122,7 +135,6 @@ class WPGlobus_QA {
 			 */
 			wp_set_object_terms( $post->ID, self::$_qa_taxonomies['post_tag']['term_id'], 'post_tag' );
 
-		} else {
 		}
 
 		/**
@@ -130,7 +142,7 @@ class WPGlobus_QA {
 		 */
 		self::$_qa_post_ids[ $type ] = $post->ID;
 
-		printf( '<p>QA %s ID=%d', $type, self::$_qa_post_ids[ $type ] );
+		printf( '<p>QA %s ID=%d</p>', $type, self::$_qa_post_ids[ $type ] );
 
 		return $post;
 
@@ -182,47 +194,24 @@ class WPGlobus_QA {
 	}
 
 	private static function _create_qa_items() {
+		?><h2>Create QA items</h2><?php
 
+		?><div class="well"><?php
 		self::_create_qa_term( 'category' );
 		self::_create_qa_term( 'post_tag' );
+		foreach ( array( 'post', 'page' ) as $type ) {
+			self::_create_qa_post( $type );
+		}
+		?></div><?php
 
-		$post = self::_create_qa_post( 'post' );
-
-		?>
-		<div id="<?php echo __FUNCTION__; ?>_post">
-		<h2>QA Post</h2>
-
-		<h3>Raw</h3>
-
-		<div class="qa_post_raw well">
-			<div class="qa_post_title"><?php echo $post->post_title; ?></div>
-
-			<div class="qa_post_content"><?php echo $post->post_content; ?></div>
-
-			<div class="qa_post_excerpt"><?php echo $post->post_excerpt; ?></div>
-		</div>
-		<h3>Cooked</h3>
-
-		<div class="qa_post_cooked well">
-			<div class="qa_post_title"><?php echo
-				apply_filters( 'the_title', $post->post_title ); ?></div>
-
-			<div class="qa_post_content"><?php
-				echo apply_filters( 'the_title', $post->post_content ); ?></div>
-
-			<div class="qa_post_excerpt"><?php
-				echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
-		</div>
-
-		<?php
-		/**
-		 * Create QA page if not exists
-		 */
-		$post = self::_create_qa_post( 'page' );
-
-		?>
-		<div id="<?php echo __FUNCTION__; ?>_page">
-			<h2>QA Page</h2>
+		foreach ( array( 'post', 'page' ) as $type ) {
+			if ( ! self::$_qa_post_ids[ $type ] ) {
+				continue;
+			}
+			$post = get_post( self::$_qa_post_ids[ $type ] );
+			?>
+			<div id="<?php echo __FUNCTION__ . '_' . $post->post_type; ?>">
+			<h2>QA <?php echo $post->post_type; ?></h2>
 
 			<h3>Raw</h3>
 
@@ -246,15 +235,19 @@ class WPGlobus_QA {
 					echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
 			</div>
 
-			<h2>QA Blog Description</h2>
-			<?php
-			$blogdescription = join( '', array(
-				WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
-				WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
-			) );
-			update_option( 'blogdescription', $blogdescription );
-			?>
-			<div id="qa_blogdescription" class="well"><?php echo get_bloginfo( 'description' ); ?></div>
+		<?php
+		}
+		?>
+
+		<h2>QA Blog Description</h2>
+		<?php
+		$blogdescription = join( '', array(
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
+		) );
+		update_option( 'blogdescription', $blogdescription );
+		?>
+		<div id="qa_blogdescription" class="well"><?php echo get_bloginfo( 'description' ); ?></div>
 		</div>
 	<?php
 	}
@@ -628,6 +621,29 @@ class WPGlobus_QA {
 	private static function _test_get_locale() {
 		?><h2>get_locale()</h2><?php
 		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo get_locale(); ?></div><?php
+	}
+
+	private static function _remove_qa_items() {
+		?><h2>Remove QA items</h2><?php
+		$force_delete = true;
+
+		foreach ( array( 'post', 'page' ) as $type ) {
+			if ( ! empty( self::$_qa_post_ids[ $type ] ) ) {
+				$_ = wp_delete_post( self::$_qa_post_ids[ $type ], $force_delete );
+				if ( $_ ) {
+					printf( '<p>QA %s ID=%d</p>', $type, self::$_qa_post_ids[ $type ] );
+				}
+			}
+		}
+
+		foreach ( array( 'post_tag', 'category' ) as $taxonomy ) {
+			if ( ! empty( self::$_qa_taxonomies[ $taxonomy ]['term_id'] ) ) {
+				$_ = wp_delete_term( self::$_qa_taxonomies[ $taxonomy ]['term_id'], $taxonomy );
+				if ( ! is_wp_error( $_ ) && $_ ) {
+					printf( '<p>QA %s ID=%d</p>', $taxonomy, self::$_qa_taxonomies[ $taxonomy ]['term_id'] );
+				}
+			}
+		}
 	}
 
 }
