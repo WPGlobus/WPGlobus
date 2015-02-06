@@ -1549,45 +1549,45 @@ class WPGlobus {
 			}	
 		}
 
-		$data['post_content'] = trim($data['post_content']);
-		if ( !empty($data['post_content']) ) {
-			if ( ! $devmode ) {
-				$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
-			}	
-		}
-
-		$data['post_title'] = trim($data['post_title']);
-		if ( !empty($data['post_title']) ) {
-			if ( ! $devmode ) {
+		if ( ! $devmode ) :
+		
+			$data['post_title'] = trim($data['post_title']);
+			if ( !empty($data['post_title']) ) {
 				$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
-			}	
-		}
-
-		foreach( $WPGlobus_Config->open_languages as $language ) :
-			if ( $language == $WPGlobus_Config->default_language ) {
-
-				continue;
-
-			} else {
-
-				/**
-				 * Join post content for enabled languages
-				 */
-				$content = isset($postarr['content_' . $language]) ? trim($postarr['content_' . $language]) : '';
-				if ( !empty($content) ) {
-					$data['post_content'] .= WPGlobus::tag_text( $postarr['content_' . $language], $language );
-				}
-
-				/**
-				 * Join post title for enabled languages
-				 */
-				$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
-				if ( !empty($title) ) {
-					$data['post_title'] .= WPGlobus::tag_text( $postarr['post_title_' . $language], $language );
-				}
-
 			}
-		endforeach;
+			
+			$data['post_content'] = trim($data['post_content']);
+			if ( !empty($data['post_content']) ) {
+				$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
+			}
+
+			foreach( $WPGlobus_Config->open_languages as $language ) :
+				if ( $language == $WPGlobus_Config->default_language ) {
+
+					continue;
+
+				} else {
+
+					/**
+					 * Join post title for enabled languages
+					 */
+					$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
+					if ( !empty($title) ) {
+						$data['post_title'] .= WPGlobus::tag_text( $postarr['post_title_' . $language], $language );
+					}
+					
+					/**
+					 * Join post content for enabled languages
+					 */
+					$content = isset($postarr['content_' . $language]) ? trim($postarr['content_' . $language]) : '';
+					if ( !empty($content) ) {
+						$data['post_content'] .= WPGlobus::tag_text( $postarr['content_' . $language], $language );
+					}
+
+				}
+			endforeach;
+		
+		endif;  //  $devmode
 		
 		$data = apply_filters('wpglobus_save_post_data', $data, $postarr, $devmode);
 		
