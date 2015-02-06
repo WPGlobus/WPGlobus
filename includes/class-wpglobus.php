@@ -1466,7 +1466,7 @@ class WPGlobus {
 			} else {	?>
 
 				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
-					wp_editor( WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content-' . $language, array(
+					wp_editor( WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content_' . $language, array(
 						'_content_editor_dfw' => true,
 						#'dfw' => true,
 						'drag_drop_upload' => true,
@@ -1477,6 +1477,7 @@ class WPGlobus {
 							'resize' => true,
 							'wp_autoresize_on' => true,
 							'add_unload_trigger' => false,
+							#'readonly' => true /* @todo for WPGlobus Authors */
 						),
 					) ); ?>
 				</div> <?php
@@ -1541,7 +1542,7 @@ class WPGlobus {
 		$devmode = true;	
 		foreach( $WPGlobus_Config->open_languages as $language ) {
 			if ( $language != $WPGlobus_Config->default_language ) {
-				if ( isset($postarr['content-' . $language]) ) {
+				if ( isset($postarr['content_' . $language]) ) {
 					$devmode = false;	
 					break;
 				}
@@ -1572,9 +1573,9 @@ class WPGlobus {
 				/**
 				 * Join post content for enabled languages
 				 */
-				$content = isset($postarr['content-' . $language]) ? trim($postarr['content-' . $language]) : '';
+				$content = isset($postarr['content_' . $language]) ? trim($postarr['content_' . $language]) : '';
 				if ( !empty($content) ) {
-					$data['post_content'] .= WPGlobus::tag_text( $postarr['content-' . $language], $language );
+					$data['post_content'] .= WPGlobus::tag_text( $postarr['content_' . $language], $language );
 				}
 
 				/**

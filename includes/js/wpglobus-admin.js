@@ -50,8 +50,8 @@ jQuery(document).ready(function () {
         globusAdminApp.App.prototype = {
             init: function () {
 				$('#content').addClass('wpglobus-editor').attr('data-language',WPGlobusAdmin.data.default_language);
-				$('textarea[id^=content-]').each(function(i,e){
-					var l=$(e).attr('id').replace('content-','');
+				$('textarea[id^=content_]').each(function(i,e){
+					var l=$(e).attr('id').replace('content_','');
 					$(e).attr('data-language',l);
 				});
                 if ('post-edit' === WPGlobusAdmin.page) {
