@@ -28,14 +28,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Force defining debug constants to simplify further code
- * @todo Make own class constants
- */
-if ( ! defined( 'WP_DEBUG' ) ) {
-	define( 'WP_DEBUG', false );
-}
-
 define( 'WPGLOBUS_VERSION', '1.0.0' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
