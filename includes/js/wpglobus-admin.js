@@ -161,10 +161,11 @@ jQuery(document).ready(function () {
                     });
 
 					var so = $(document).triggerHandler('wpglobus_get_translations', {ptitle:s, lang:lang, id:id});
-					if ( so !== 'undefined' ) {
-						s = s + so;		
+					if ( typeof so !== 'undefined' ) {
+						s = so;		
 					}
                     $('input.ptitle').eq(0).val(s);
+					WPGlobusAdmin.qedit_titles[id]['source'] = s; 
                 });
 				
 				if ( typeof WPGlobusAdmin.data.tags !== 'undefined' ) {
