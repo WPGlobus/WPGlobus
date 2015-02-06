@@ -3,7 +3,7 @@
  * Unit test for Class WPGlobus_WP
  * @package WPGlobus
  */
-require_once __DIR__ . '/../includes/class-wpglobus-wp.php';
+require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-wp.php';
 
 /**
  * Class WPGlobus_WP__Test
