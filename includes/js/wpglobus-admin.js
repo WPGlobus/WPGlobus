@@ -73,7 +73,6 @@ jQuery(document).ready(function () {
                 }
             },
             options_general: function () {
-				
 				var $bn = $('#blogname');
 				$bn.addClass('hidden');
 				$('#wpglobus-blogname').insertAfter($bn);
@@ -122,7 +121,7 @@ jQuery(document).ready(function () {
                 $('#the-list tr').each(function (i, e) {
                     var $e = $(e);
                     var k = ( type === 'post' ? 'post-' : 'tag-' );
-                    id = $e.attr('id').replace(k, ''); /* don't need var with id, see line 110 */
+                    id = $e.attr('id').replace(k, ''); /* don't need var with id, see line 109 */
                     title[id] = {};
                     if ('post' === type) {
                         title[id]['source'] = $e.find('.post_title').text();
@@ -147,17 +146,24 @@ jQuery(document).ready(function () {
                     })
                     .always(function (jqXHR, status) {
                     });
-				
-                $('body').on('blur', '.wpglobus-quick-edit-title', function (event) {
+                
+				$('body').on('change', '.wpglobus-quick-edit-title', function (event) {
                     var s = '';
+					var lang = [];
                     $('.wpglobus-quick-edit-title').each(function (index, e) {
                         var $e = $(e);
 						var l = $e.data('language');
                         if ($e.val() !== '') {
                             s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
 							WPGlobusAdmin.qedit_titles[id][l]['name'] = $e.val();
+							lang[index] = l;
                         }
                     });
+
+					var so = $(document).triggerHandler('wpglobus_get_translations', {ptitle:s, lang:lang, id:id});
+					if ( so !== 'undefined' ) {
+						s = s + so;		
+					}
                     $('input.ptitle').eq(0).val(s);
                 });
 				
@@ -232,7 +238,8 @@ jQuery(document).ready(function () {
 					
                     var e = $('#edit-' + id + ' input.ptitle').eq(0);
                     var p = e.parents('label');
-                    e.addClass('hidden');
+					e.val(WPGlobusAdmin.qedit_titles[id].source);
+					e.addClass('hidden');
                     $(WPGlobusAdmin.data.template).insertAfter(p);
 
 					if ( typeof WPGlobusAdmin.qedit_titles[id] === 'undefined' ) {
