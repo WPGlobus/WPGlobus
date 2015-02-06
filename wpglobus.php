@@ -30,13 +30,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Force defining debug constants to simplify further code
+ * @todo Make own class constants
  */
 if ( ! defined( 'WP_DEBUG' ) ) {
 	define( 'WP_DEBUG', false );
-}
-
-if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-	define( 'SCRIPT_DEBUG', false );
 }
 
 define( 'WPGLOBUS_VERSION', '1.0.0' );

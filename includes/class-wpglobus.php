@@ -48,6 +48,16 @@ class WPGlobus {
 	public static $PLUGIN_DIR_URL = '';
 
 	/**
+	 * @var bool $_SCRIPT_DEBUG Internal representation of the define('SCRIPT_DEBUG')
+	 */
+	protected static $_SCRIPT_DEBUG = false;
+
+	/**
+	 * @var string $_SCRIPT_SUFFIX Whether to use minimized or full versions of JS and CSS.
+	 */
+	protected static $_SCRIPT_SUFFIX = '.min';
+
+	/**
 	 * Are we using our version of Redux or someone else's?
 	 * @var string
 	 */
@@ -70,6 +80,11 @@ class WPGlobus {
 	 * Constructor
 	 */
 	function __construct() {
+
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			self::$_SCRIPT_DEBUG  = true;
+			self::$_SCRIPT_SUFFIX = '';
+		}
 		
 		global $WPGlobus_Config, $WPGlobus_Options;
 
@@ -702,8 +717,6 @@ class WPGlobus {
 			
 		}
 		
-		$suffix = SCRIPT_DEBUG ? '' : '.min';
-
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 
 			/**
@@ -712,7 +725,8 @@ class WPGlobus {
 			 */
 			wp_register_script(
 				'select2-js',
-				self::$PLUGIN_DIR_URL . "vendor/ReduxCore/assets/js/vendor/select2/select2$suffix.js",
+				self::$PLUGIN_DIR_URL . "vendor/ReduxCore/assets/js/vendor/select2/select2" .
+				self::$_SCRIPT_SUFFIX . ".js",
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
@@ -940,7 +954,7 @@ class WPGlobus {
 			if ( ! empty($this->vendors_scripts) ) {
 				wp_register_script(
 					'wpglobus-vendor',
-					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor$suffix.js",
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor" . self::$_SCRIPT_SUFFIX . ".js",
 					array( 'jquery' ),
 					WPGLOBUS_VERSION,
 					true
@@ -958,7 +972,7 @@ class WPGlobus {
 			
 			wp_register_script(
 				'wpglobus-admin',
-				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$suffix.js",
+				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
@@ -1174,10 +1188,9 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_wp_styles() {
-		$suffix = SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style(
 			'flags',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-flags$suffix.css",
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-flags" . self::$_SCRIPT_SUFFIX . ".css",
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
@@ -1192,11 +1205,9 @@ class WPGlobus {
 	function on_wp_scripts() {
 		global $WPGlobus_Config;
 
-		$suffix = SCRIPT_DEBUG ? '' : '.min';
-
 		wp_register_script(
 			'wpglobus',
-			self::$PLUGIN_DIR_URL . "includes/js/wpglobus$suffix.js",
+			self::$PLUGIN_DIR_URL . "includes/js/wpglobus" . self::$_SCRIPT_SUFFIX . ".js",
 			array( 'jquery', 'utils' ),
 			WPGLOBUS_VERSION,
 			true
