@@ -425,9 +425,10 @@ class WPGlobus {
  	 */
 	public function on_process_ajax() {
 
+		$ajax_return = array();
+
 		$order = $_POST['order'];
 
-		$result = '';
 		switch( $order['action'] ) :
 		case 'get_titles':
 			
@@ -541,13 +542,14 @@ class WPGlobus {
 			}	
 		}
 		return $location;
-	}	
-	
+	}
+
 	/**
-	 * Check current user has capability $cap
+	 * Check if the current user has the $cap capability
 	 *
-	 * @param string $role
-	 * @return boolean
+	 * @param string $cap
+	 *
+	 * @return bool
 	 */
 	function user_can( $cap = '' ) {
 		global $current_user;
@@ -1240,13 +1242,13 @@ class WPGlobus {
 		$ref_source = $scheme . '://' . $WPGlobus_Config->url_info['host'] . '/%%lang%%' . $WPGlobus_Config->url_info['url'];
 		
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-			$reflang = str_replace('_', '-', $WPGlobus_Config->locale[$language]);
+			$hreflang = str_replace('_', '-', $WPGlobus_Config->locale[$language]);
 			if ( $language == $WPGlobus_Config->default_language ) {
 				$ref = str_replace('%%lang%%/', '', $ref_source);	
 			} else {
 				$ref = str_replace('%%lang%%', $language, $ref_source);	
 			}
-			?><link rel="alternate" hreflang="<?php echo $reflang; ?>" href="<?php echo $ref; ?>" />
+			?><link rel="alternate" hreflang="<?php echo $hreflang; ?>" href="<?php echo $ref; ?>" />
 		<?php
 		}
 		
@@ -1574,14 +1576,14 @@ class WPGlobus {
 		$data['post_content'] = trim($data['post_content']);
 		if ( !empty($data['post_content']) ) {
 			if ( ! $devmode ) {
-				$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
+				$data['post_content'] = self::add_locale_marks( $data['post_content'], $WPGlobus_Config->default_language );
 			}	
 		}
 
 		$data['post_title'] = trim($data['post_title']);
 		if ( !empty($data['post_title']) ) {
 			if ( ! $devmode ) {
-				$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
+				$data['post_title'] = self::add_locale_marks( $data['post_title'], $WPGlobus_Config->default_language );
 			}	
 		}
 
@@ -1597,7 +1599,7 @@ class WPGlobus {
 				 */
 				$content = isset($postarr['content-' . $language]) ? trim($postarr['content-' . $language]) : '';
 				if ( !empty($content) ) {
-					$data['post_content'] .= WPGlobus::tag_text( $postarr['content-' . $language], $language );
+					$data['post_content'] .= self::add_locale_marks( $postarr['content-' . $language], $language );
 				}
 
 				/**
@@ -1605,7 +1607,7 @@ class WPGlobus {
 				 */
 				$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
 				if ( !empty($title) ) {
-					$data['post_title'] .= WPGlobus::tag_text( $postarr['post_title_' . $language], $language );
+					$data['post_title'] .= self::add_locale_marks( $postarr['post_title_' . $language], $language );
 				}
 
 			}
@@ -1707,7 +1709,8 @@ class WPGlobus {
 				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
 					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
 						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-						<input type="text" name="post_title_<?php echo $language; ?>" size="30" 
+						<!--suppress HtmlFormInputWithoutLabel -->
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30"
 							value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>"
 							id="title_<?php echo $language;?>" 
 							class="title_wpglobus"
@@ -1793,19 +1796,24 @@ class WPGlobus {
 	/**
 	 * Make correct title for admin pages
 	 *
-	 * @param string $admin_title
+	 * @param string $admin_title Ignored
 	 * @param string $title
 	 * @return string
 	 */
-	function on_admin_title($admin_title, $title) {
-		$blogname = get_option('blogname');
-		return $title . ' &lsaquo; ' . WPGlobus_Core::text_filter($blogname, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE) . ' &#8212; WordPress';
+	function on_admin_title(
+		/** @noinspection PhpUnusedParameterInspection */
+		$admin_title,
+		$title
+	) {
+		$blogname = get_option( 'blogname' );
+
+		return $title . ' &lsaquo; ' . WPGlobus_Core::text_filter( $blogname, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) . ' &#8212; WordPress';
 	}
 	
 	/**
-	 * Make correct Site Title in adminbar.
+	 * Make correct Site Title in admin bar.
 	 * Make template for Site Title (option blogname)
-	 * an Tagline (option blogdescription) at options-general.php page.
+	 * a Tagline (option blogdescription) at options-general.php page.
 	 *
 	 * @return void
 	 */

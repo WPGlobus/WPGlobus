@@ -168,6 +168,12 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		public $css_editor = '';
 
 		/**
+		 * WPGlobus devmode.
+		 * @var string
+		 */
+		public $toggle = 'on';
+
+		/**
 		 * Constructor
 		 */
 		function __construct() {
