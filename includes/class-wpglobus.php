@@ -768,10 +768,13 @@ class WPGlobus {
 				 * Add template for standard excerpt meta box
 				 */
 				$data['template'] = '';
-				foreach( $WPGlobus_Config->enabled_languages as $language ) {
-					$return = $language == $WPGlobus_Config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+				foreach( WPGlobus::Config()->enabled_languages as $language ) {
 					
-					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[$language] .'" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
+					$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+					
+					$classes = in_array($language, WPGlobus::Config()->open_languages) ? 'wpglobus-excerpt' : 'wpglobus-excerpt hidden';
+					
+					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . WPGlobus::Config()->en_language_name[$language] .'" class="' . $classes . '" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
 					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, $return);
 					$data['template'] .= '</textarea>';
 					
