@@ -179,7 +179,7 @@ class WPGlobus_Config {
 		add_action( 'plugins_loaded', array(
 			$this,
 			'on_load_textdomain'
-		) );
+		), 0 );
 
 		$this->_get_options();
 	}
