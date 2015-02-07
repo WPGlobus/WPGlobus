@@ -86,6 +86,12 @@ class WPGlobus {
 			self::$_SCRIPT_SUFFIX = '';
 		}
 
+		/** @todo maybe move this action to Class WPGlobus_Upgrade ? */
+		add_action( 'admin_init', array(
+			$this,
+			'on_admin_init' 
+		) );
+		
 		global $WPGlobus_Config, $WPGlobus_Options;
 
 		global $pagenow;
@@ -505,25 +511,23 @@ class WPGlobus {
 	}
 
 	/**
-	 * Redirect to about page after activated plugin
+	 * Set transient wpglobus_activated after activated plugin @see on_admin_init()
 	 * @todo use $WPGlobus_Config to determine running this function?
 	 *
 	 * @param string $plugin
+	 * @return void
 	 */
 	public static function activated( $plugin ) {
 		if ( WPGLOBUS_PLUGIN_BASENAME == $plugin ) {
-
 			/**
 			 * Run on_activate after plugin activated
 			 */
 			$options['plugin'] = $plugin;
 			$options['action'] = 'update';
-			WPGlobus_Config::on_activate( null, $options );
-
-			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
-			die();
-
-		}
+			WPGlobus_Config::on_activate(null, $options);
+		
+			set_transient( 'wpglobus_activated', '', 60 * 60 * 24 );
+		}	
 	}
 
 	/**
@@ -1927,6 +1931,23 @@ class WPGlobus {
 
 		return $WPGlobus_Config;
 	}
+	
+	/**
+	 * Check for transient wpglobus_activated
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void 
+	 */
+	function on_admin_init() {
+
+		if ( false !== get_transient('wpglobus_activated') ) {
+			delete_transient('wpglobus_activated');	
+			wp_redirect(admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ));
+			die();	
+		}			
+	
+	}	
 
 }
 
