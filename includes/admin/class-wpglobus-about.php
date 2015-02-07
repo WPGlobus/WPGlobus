@@ -4,14 +4,6 @@
  * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-if ( class_exists( 'WPGlobus_About' ) ) {
-	return;
-}
-
 /**
  * Class WPGlobus_About
  */
@@ -155,4 +147,6 @@ class WPGlobus_About {
 	<?php
 	}
 
-} // end class
+} //class
+
+# --- EOF

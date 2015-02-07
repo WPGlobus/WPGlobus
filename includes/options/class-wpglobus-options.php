@@ -4,14 +4,6 @@
  * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-if ( class_exists( 'WPGlobus_Options' ) ) {
-	return;
-}
-
 /**
  * Class WPGlobus_Options
  * Based on ReduxFramework Sample Config File
@@ -429,6 +421,6 @@ class WPGlobus_Options {
 		$this->args['footer_text'] = '&copy; Copyright 2014, WPGlobus.';
 	}
 
-} // end class Redux_Framework_globus_option
+} // class
 
 # --- EOF

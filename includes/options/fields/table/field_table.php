@@ -1,8 +1,4 @@
 <?php
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 if ( ! class_exists( 'ReduxFramework_table' ) ) {
 
@@ -72,7 +68,8 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 			);
 
 		}
-	}
+
+	} // class
 }
 
 # --- EOF

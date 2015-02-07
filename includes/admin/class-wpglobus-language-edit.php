@@ -4,14 +4,6 @@
  * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-if ( class_exists( 'WPGlobus_Language_Edit' ) ) {
-	return;
-}
-
 /**
  * Class WPGlobus_Language_Edit
  */
@@ -441,6 +433,6 @@ class WPGlobus_Language_Edit {
 
 	}
 
-}
+} // class
 
 # --- EOF
