@@ -1604,16 +1604,15 @@ class WPGlobus {
 	
 	/**
 	 * Add wrapper for every table in enabled languages at edit-tags.php page
+	 *
 	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
 		
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;		
-		
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-			$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>">
+		foreach ( self::Config()->enabled_languages as $language ) {
+			$tab_suffix = $language == self::Config()->default_language ? 'default' : $language;
+			$classes = in_array($language, self::Config()->open_languages) ? '' : 'hidden'; ?>
+			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>" class="<?php echo $classes; ?>">
 			</div>	
 			<?php
 		}
@@ -1622,6 +1621,7 @@ class WPGlobus {
 	
 	/**
 	 * Add language tabs for edit taxonomy name at edit-tags.php page
+	 *
 	 * @return void
 	 */
 	function on_add_language_tabs_edit_taxonomy() {
