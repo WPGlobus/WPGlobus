@@ -168,7 +168,7 @@ var wpglobus_wpseo = function () {
 
 			wpglobus_testFocusKw(language);
 		});
-	}
+	};
 	
 	function wpglobus_updateDesc(language) {
 		var desc = jQuery.trim(yst_clean(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc' + '_' + language).val()));
@@ -285,7 +285,7 @@ var wpglobus_wpseo = function () {
 		//yst_updateURL();
 		wpglobus_updateTitle(false,language);
 		wpglobus_updateDesc(language);
-	}
+	};
 	
 	var wpglobus_qtip = function() {
 		jQuery(".yoast_help").qtip(

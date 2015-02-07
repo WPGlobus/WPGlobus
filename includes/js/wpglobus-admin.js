@@ -484,8 +484,11 @@ jQuery(document).ready(function () {
 						return;
 					}
 					$(WPGlobusAdmin.data.tagsdiv).each(function(i,tagsdiv){
-						if ($('#'+tagsdiv).size() == 0) { return true /* next iteration */ };
-					
+                        if ($('#' + tagsdiv).size() == 0) {
+                            /* next iteration */
+                            return true;
+                        }
+
 						var	id = tagsdiv.replace('tagsdiv-', '');
 						if ( 'undefined' === id ) {
                             return true;
