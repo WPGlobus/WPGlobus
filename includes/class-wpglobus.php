@@ -112,7 +112,11 @@ class WPGlobus {
 		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
 
 		/**
-		 * @todo add doc
+		 * Filter the array of opened languages.
+		 * 
+		 * @since 1.0.0
+		 *
+		 * @param array $open_languages Array of opened languages.
 		 */	
 		self::Config()->open_languages = apply_filters('wpglobus_open_languages', self::Config()->open_languages);
 

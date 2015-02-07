@@ -47,7 +47,13 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			'ru',
 			'de'
 		);
-
+		
+		/**
+		 * Opened languages
+		 * @var string[]
+		 */		
+		public $open_languages = array();
+		
 		/**
 		 * Hide from URL language by default
 		 * @var bool
@@ -423,8 +429,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			}
 			
 			/**
-			 * Set available languages for translators
-			 * @todo add specification
+			 * Set available languages for editors
 			 */
 			$this->open_languages = $this->enabled_languages;
 			
