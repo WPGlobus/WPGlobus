@@ -184,7 +184,7 @@ var wpglobus_wpseo = function () {
 				desc = yst_clean(desc);
 
 
-				var len = -1;
+				var len;
 				len = wpseoMetaboxL10n.wpseo_meta_desc_length - desc.length;
 
 				if (len < 0) {
