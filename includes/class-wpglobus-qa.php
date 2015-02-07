@@ -27,6 +27,9 @@ class WPGlobus_QA {
 	}
 
 	public static function api_demo() {
+
+		$is_need_to_remove_qa_items = ( ! empty( $_GET['clean'] ) );
+
 		?>
 		<!DOCTYPE html>
 		<html>
@@ -56,7 +59,7 @@ class WPGlobus_QA {
 				<label>Remove QA items after? <input type="checkbox"
 				                                     name="clean"
 				                                     value="1"<?php
-					checked( (int) @$_GET['clean'] ); ?>/></label>
+					checked( $is_need_to_remove_qa_items ); ?>/></label>
 				<button class="btn btn-xs btn-primary">Run again</button>
 			</form>
 			<hr/>
@@ -77,7 +80,7 @@ class WPGlobus_QA {
 
 			self::_common_for_all_languages();
 
-			if ( @$_GET['clean'] ) {
+			if ( @$is_need_to_remove_qa_items ) {
 				self::_remove_qa_items();
 			}
 			?>
