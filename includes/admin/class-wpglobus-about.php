@@ -23,26 +23,36 @@ class WPGlobus_About {
 		?>
 		<div class="wrap">
 
-			<?php //$this->intro(); ?>
-
-			<?php $welcome_page_title = __( 'Welcome to WPGlobus', 'wpglobus' ); ?>
-
-			<h2><?php echo $welcome_page_title; ?></h2>
+			<h2><?php
+				/**
+				 * @quirk
+				 * This should be H2, so that it goes above the WP admin notices
+				 */
+				echo __( 'About WPGlobus', 'wpglobus' );
+				?></h2>
 
 			<div class="wpglobus-about-wrap about-wrap">
 				<div class="changelog">
 					<div class="feature-main feature-section col three-col">
-						<h3><?php _e( 'Main features', 'wpglobus' ); ?></h3>
 
 						<div>
-							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
-
-							<p><?php _e( 'Mea dicat facer nonumes ex. Nam id prompta epicurei, te cibo accusata pro. At ornatus docendi pro, quis delenit in mel, in aperiri impedit pri. Et nobis singulis cum, no mundi solet causae mei, duo stet vituperata!', 'wpglobus' ); ?></p>
+							<h4><?php printf( __( 'Version %s', 'wpglobus' ), WPGLOBUS_VERSION ); ?></h4>
+							<img
+								src="<?php echo WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-logo-180x180.png'; ?>"
+								alt="WPGlobus logo"/>
 						</div>
 
 						<div>
-							<div class="wpglobus-icon"></div>
+							<h4><?php _e( 'What is WPGlobus', 'wpglobus' ); ?></h4>
+
+							<p><?php _e( 'WPGlobus is a globalization (multi-lingual, internationalization, localization, ...) WordPress plugin.', 'wpglobus' ); ?></p>
+
+							<p><?php _e( 'Our goal is to let WordPress support multiple languages, countries and currencies (for e-commerce).', 'wpglobus' ); ?></p>
+
+							<p><?php printf( __( 'For more information, please visit %s.', 'wpglobus' ), '<a href="http://www.wpglobus.com">WPGlobus.com</a>' ); ?></p>
 						</div>
+
+
 						<div class="last-feature">
 							<h4><?php _e( 'Vim tation apeirian eu', 'wpglobus' ); ?></h4>
 
