@@ -134,6 +134,7 @@
                 wp_enqueue_style(
                     'redux-field-info-css',
                     ReduxFramework::$_url . 'inc/fields/info/field_info.css',
+                    array(),
                     time(),
                     true
                 );

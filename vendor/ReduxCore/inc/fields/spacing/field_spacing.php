@@ -288,6 +288,7 @@
                 wp_enqueue_style(
                     'redux-field-spacing-css',
                     ReduxFramework::$_url . 'inc/fields/spacing/field_spacing.css',
+                    array(),
                     time(),
                     true
                 );

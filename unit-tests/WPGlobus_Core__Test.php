@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../includes/class-wpglobus.php';
-require_once __DIR__ . '/../includes/class-wpglobus-core.php';
+require_once dirname( __FILE__ ) . '/../includes/class-wpglobus.php';
+require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-core.php';
 
 /**
  *

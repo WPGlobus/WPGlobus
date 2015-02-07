@@ -207,6 +207,7 @@
                 wp_enqueue_style(
                     'redux-field-border-css',
                     ReduxFramework::$_url . 'inc/fields/border/field_border.css',
+                    array(),
                     time(),
                     true
                 );

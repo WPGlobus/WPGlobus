@@ -229,6 +229,7 @@
                 wp_enqueue_style(
                     'redux-field-dimensions-css',
                     ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
+                    array(),
                     time(),
                     true
                 );

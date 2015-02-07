@@ -28,22 +28,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Force defining debug constants to simplify further code
- */
-if ( ! defined( 'WP_DEBUG' ) ) {
-	define( 'WP_DEBUG', false );
-}
-
-if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-	define( 'SCRIPT_DEBUG', false );
-}
-
 define( 'WPGLOBUS_VERSION', '1.0.0' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 global $WPGlobus;
-global $WPGlobus_Config;
 global $WPGlobus_Options;
 
 
@@ -54,6 +42,13 @@ require_once 'includes/class-wpglobus.php';
 
 require_once 'includes/class-wpglobus-core.php';
 
+WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
+WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
+
+/** @todo Get rid of it */
+global $WPGlobus_Config;
+$WPGlobus_Config = new WPGlobus_Config();
+
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
@@ -62,22 +57,9 @@ if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
 	require_once 'includes/wpglobus-upgrade-controller.php';
 }
 
-WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
-WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
-
-$WPGlobus_Config = new WPGlobus_Config();
-
-/**
- * @see WPGlobus::init()
- */
-add_action( 'plugins_loaded', 'WPGlobus::init', 0 );
-
-add_action( 'activated_plugin', 'WPGlobus::activated' );
-
-add_action( 'upgrader_process_complete', 'WPGlobus_Config::on_activate', 10, 2 );
-
 /**
  * Handle special URLs for QA
+ * @note CREATES POST, PAGE, CATEGORY and TAG!!! CLEAN AFTER RUNNING!!!
  */
 if ( ! empty( $_GET['wpglobus'] ) && $_GET['wpglobus'] === 'qa' ) {
 	require_once 'includes/class-wpglobus-qa.php';

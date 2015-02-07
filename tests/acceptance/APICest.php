@@ -46,7 +46,7 @@ class APICest {
 		 * @see WPGlobus_QA::_test_get_term()
 		 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
 		 */
-		$I->assertEquals( "{:en}QA Category EN{:}{:ru}QA Category RU{:}", $I->grabTextFrom(
+		$I->assertEquals( "{:en}WPGlobusQA category name EN{:}{:ru}WPGlobusQA category name RU{:}", $I->grabTextFrom(
 			'#_test_get_term_' . 'inline-save-tax' . ' .name' ) );
 
 	}
@@ -171,12 +171,12 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
 		 */
-		$I->assertEquals( "Progress", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name EN", $I->grabTextFrom(
 			'#_test_get_the_terms' .
 			' .test__get_the_terms__name' ),
 			'test__get_the_terms__' );
 
-		$I->assertEquals( "Development Progress", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category description EN", $I->grabTextFrom(
 			'#_test_get_the_terms' .
 			' .test__get_the_terms__description' ),
 			'test__get_the_terms__' );
@@ -184,23 +184,15 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_wp_get_object_terms()
 		 */
-		$I->assertEquals( "Progress", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '6' . ' .name' ),
+		$I->assertEquals( "WPGlobusQA category name EN", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .name' ),
 			'test_wp_get_object_terms' );
 
-		$I->assertEquals( "Test Category", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '8' . ' .name' ),
+		$I->assertEquals( "WPGlobusQA category description EN", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .description' ),
 			'test_wp_get_object_terms' );
 
-		$I->assertEquals( "Development Progress", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '6' . ' .description' ),
-			'test_wp_get_object_terms' );
-
-		$I->assertEquals( "Category for tests", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '8' . ' .description' ),
-			'test_wp_get_object_terms' );
-
-		$I->assertEquals( "Progress, Test Category", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name EN", $I->grabTextFrom(
 			'#_test_wp_get_object_terms' . ' .fields_names' ),
 			'test_wp_get_object_terms' );
 
@@ -211,23 +203,23 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_wp_get_terms()
 		 */
-		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'category' . ' .name' ) );
-		$I->assertEquals( "QA Category Description EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category description EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'category' . ' .description' ) );
-		$I->assertEquals( "QA Tag EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA post_tag name EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'post_tag' . ' .name' ) );
-		$I->assertEquals( "QA Tag Description EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA post_tag description EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
-		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name EN", $I->grabTextFrom(
 			'#_test_get_terms_' . 'name_only' ) );
 
 		/**
 		 * @see WPGlobus_QA::_test_wp_get_term()
 		 */
-		$I->assertEquals( "QA Category EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name EN", $I->grabTextFrom(
 			'#_test_get_term_' . 'category' . ' .name' ) );
-		$I->assertEquals( "QA Category Description EN", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category description EN", $I->grabTextFrom(
 			'#_test_get_term_' . 'category' . ' .description' ) );
 
 		$this->_common_for_all_languages( $I );
@@ -253,35 +245,35 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_create_qa_items()
 		 */
-		$I->assertEquals( '{:en}QA post_title EN{:}{:ru}QA post_title RU{:}',
+		$I->assertEquals( '{:en}WPGlobusQA post_title EN{:}{:ru}WPGlobusQA post_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}QA post_content EN{:}{:ru}QA post_content RU{:}',
+		$I->assertEquals( '{:en}WPGlobusQA post_content EN{:}{:ru}WPGlobusQA post_content RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_content' ) );
-		$I->assertEquals( '{:en}QA post_excerpt EN{:}{:ru}QA post_excerpt RU{:}',
+		$I->assertEquals( '{:en}WPGlobusQA post_excerpt EN{:}{:ru}WPGlobusQA post_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( 'QA post_title RU',
+		$I->assertEquals( 'WPGlobusQA post_title RU',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( 'QA post_content RU',
+		$I->assertEquals( 'WPGlobusQA post_content RU',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_content' ) );
-		$I->assertEquals( 'QA post_excerpt RU',
+		$I->assertEquals( 'WPGlobusQA post_excerpt RU',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( '{:en}QA page_title EN{:}{:ru}QA page_title RU{:}',
+		$I->assertEquals( '{:en}WPGlobusQA page_title EN{:}{:ru}WPGlobusQA page_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}QA page_content EN{:}{:ru}QA page_content RU{:}',
+		$I->assertEquals( '{:en}WPGlobusQA page_content EN{:}{:ru}WPGlobusQA page_content RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ) );
-		$I->assertEquals( '{:en}QA page_excerpt EN{:}{:ru}QA page_excerpt RU{:}',
+		$I->assertEquals( '{:en}WPGlobusQA page_excerpt EN{:}{:ru}WPGlobusQA page_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( 'QA page_title RU',
+		$I->assertEquals( 'WPGlobusQA page_title RU',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( 'QA page_content RU',
+		$I->assertEquals( 'WPGlobusQA page_content RU',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ) );
-		$I->assertEquals( 'QA page_excerpt RU',
+		$I->assertEquals( 'WPGlobusQA page_excerpt RU',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( 'QA blogdescription RU', $I->grabTextFrom( '#qa_blogdescription' ) );
+		$I->assertEquals( 'WPGlobusQA blogdescription RU', $I->grabTextFrom( '#qa_blogdescription' ) );
 
 		$this->_test_home_url( $I, 'http://www.wpglobus.com/ru' );
 
@@ -307,12 +299,12 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
 		 */
-		$I->assertEquals( "Прогресс", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name RU", $I->grabTextFrom(
 			'#_test_get_the_terms' .
 			' .test__get_the_terms__name' ),
 			'test__get_the_terms__' );
 
-		$I->assertEquals( "Прогресс разработки", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category description RU", $I->grabTextFrom(
 			'#_test_get_the_terms' .
 			' .test__get_the_terms__description' ),
 			'test__get_the_terms__' );
@@ -320,23 +312,15 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_wp_get_object_terms()
 		 */
-		$I->assertEquals( "Прогресс", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '6' . ' .name' ),
+		$I->assertEquals( "WPGlobusQA category name RU", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .name' ),
 			'test_wp_get_object_terms' );
 
-		$I->assertEquals( "Тестовая категория", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '8' . ' .name' ),
+		$I->assertEquals( "WPGlobusQA category description RU", $I->grabTextFrom(
+			'#_test_wp_get_object_terms' . ' .description' ),
 			'test_wp_get_object_terms' );
 
-		$I->assertEquals( "Прогресс разработки", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '6' . ' .description' ),
-			'test_wp_get_object_terms' );
-
-		$I->assertEquals( "Категория для тестов", $I->grabTextFrom(
-			'#_test_wp_get_object_terms_' . '8' . ' .description' ),
-			'test_wp_get_object_terms' );
-
-		$I->assertEquals( "Прогресс, Тестовая категория", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name RU", $I->grabTextFrom(
 			'#_test_wp_get_object_terms' . ' .fields_names' ),
 			'test_wp_get_object_terms' );
 
@@ -347,23 +331,23 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_test_wp_get_terms()
 		 */
-		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'category' . ' .name' ) );
-		$I->assertEquals( "QA Category Description RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category description RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'category' . ' .description' ) );
-		$I->assertEquals( "QA Tag RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA post_tag name RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'post_tag' . ' .name' ) );
-		$I->assertEquals( "QA Tag Description RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA post_tag description RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'post_tag' . ' .description' ) );
-		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name RU", $I->grabTextFrom(
 			'#_test_get_terms_' . 'name_only' ) );
 
 		/**
 		 * @see WPGlobus_QA::_test_wp_get_term()
 		 */
-		$I->assertEquals( "QA Category RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category name RU", $I->grabTextFrom(
 			'#_test_get_term_' . 'category' . ' .name' ) );
-		$I->assertEquals( "QA Category Description RU", $I->grabTextFrom(
+		$I->assertEquals( "WPGlobusQA category description RU", $I->grabTextFrom(
 			'#_test_get_term_' . 'category' . ' .description' ) );
 
 		$this->_common_for_all_languages( $I );

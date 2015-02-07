@@ -10,31 +10,32 @@ class WPGlobus_Utils {
 	 *
 	 * @param string $url
 	 * @param string $language
+	 *
 	 * @return string
 	 */
 	public static function get_convert_url( $url = '', $language = '' ) {
 
 		global $WPGlobus_Config;
 
-		if ( empty($url) ) {
+		if ( empty( $url ) ) {
 			return $url;
 		}
 
 		$converted_url = '';
 
-		$language = empty($language) ? $WPGlobus_Config->language : $language;
+		$language = empty( $language ) ? $WPGlobus_Config->language : $language;
 
-		$parsed_url = self::parse_url($url);
+		$parsed_url = self::parse_url( $url );
 
 		if ( ! $parsed_url ) {
 			return $url;
 		}
 
-		if ( empty($parsed_url['host']) ) {
+		if ( empty( $parsed_url['host'] ) ) {
 			return $url;
 		}
 
-		if ( false === strpos(get_option('home'), $parsed_url['host']) ) {
+		if ( false === strpos( get_option( 'home' ), $parsed_url['host'] ) ) {
 			/**
 			 * Don't convert external url
 			 */
@@ -51,9 +52,10 @@ class WPGlobus_Utils {
 					$language = '/' . $language;
 				}
 
-				$fragment = empty($parsed_url['fragment']) ? '' : '#' . $parsed_url['fragment'];
+				$fragment = empty( $parsed_url['fragment'] ) ? '' : '#' . $parsed_url['fragment'];
 
-				$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
+				$converted_url =
+					$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
 				break;
 			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
 				// pre domain
@@ -73,7 +75,9 @@ class WPGlobus_Utils {
 	 * Returns cleaned string and language information
 	 * Improved version, also understands $url without scheme:
 	 * //example.com, example.com/, and so on
+	 *
 	 * @param string $current_language
+	 *
 	 * @return string
 	 */
 	public static function get_url( $current_language = '' ) {
@@ -89,24 +93,21 @@ class WPGlobus_Utils {
 				$language = '';
 			}
 
-			$url =	self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
+			$url = self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
 
-		}
-		elseif ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_QUERY ) {
+		} elseif ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_QUERY ) {
 
 			if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
 
 				$url = '';
 
-			}
-			else {
+			} else {
 
 				$arr = self::extract_url( $WPGlobus_Config->url_info['url'] );
 
 				if ( false === strpos( $arr['url'], '?' ) ) {
 					$url = '?';
-				}
-				else {
+				} else {
 					$url = '&';
 				}
 				$url .= 'lang=' . $current_language;
@@ -122,30 +123,33 @@ class WPGlobus_Utils {
 
 	/**
 	 * Get Request Scheme
-	 *
 	 * @return string
 	 */
 	public static function get_scheme() {
 		if ( is_ssl() ) {
 			return 'https';
 		}
+
 		return 'http';
 	}
 
 	/**
-	 * Return true if language is in array of enabled languages, otherwise false 
+	 * Return true if language is in array of enabled languages, otherwise false
 	 *
 	 * @param string $language
+	 *
 	 * @return bool
 	 */
 	public static function is_enabled( $language ) {
 		global $WPGlobus_Config;
+
 		return in_array( $language, $WPGlobus_Config->enabled_languages );
 	}
 
 	/**
 	 * @param string $s
 	 * @param string $n
+	 *
 	 * @return bool
 	 */
 	public static function starts_with( $s, $n ) {
@@ -155,21 +159,22 @@ class WPGlobus_Utils {
 		if ( $n == substr( $s, 0, strlen( $n ) ) ) {
 			return true;
 		}
+
 		return false;
 	}
 
 
 	/**
 	 * @param string $url
+	 *
 	 * @return false
 	 * @return array
-	 *
 	 * @todo Why not use native PHP method?
 	 * @see  parse_url()
 	 */
 	public static function parse_url( $url ) {
 
-		if ( empty($url) ) {
+		if ( empty( $url ) ) {
 			return false;
 		}
 
@@ -210,7 +215,7 @@ class WPGlobus_Utils {
 				 * with WPGlobus WC
 				 * has  PHP Notice:  Undefined offset: 3 in C:\cygwin\home\www.wpg.dev\wp-content\plugins\wpglobus\includes\class-wpglobus-utils.php
 				 */
-				$result['path'] = isset($out2[3]) ? $out2[3] : '';
+				$result['path'] = isset( $out2[3] ) ? $out2[3] : '';
 			}
 		}
 
@@ -221,6 +226,7 @@ class WPGlobus_Utils {
 	 * @param string $url
 	 * @param string $host
 	 * @param string $referer
+	 *
 	 * @return array
 	 */
 	public static function extract_url( $url, $host = '', $referer = '' ) {
@@ -281,15 +287,13 @@ class WPGlobus_Utils {
 			$result['url']      = preg_replace( "#(&|\?)lang=" . $result['language'] . "&?#i", "$1", $result['url'] );
 			$result['url']      = preg_replace( "#[\?\&]+$#i", "", $result['url'] );
 
-		}
-		elseif ( $home['host'] == $result['host'] && $home['path'] == $result['url'] ) {
+		} elseif ( $home['host'] == $result['host'] && $home['path'] == $result['url'] ) {
 
 			if ( empty( $referer['host'] ) || ! $WPGlobus_Config->hide_default_language ) {
 
 				$result['redirect'] = true;
 
-			}
-			else {
+			} else {
 				// check if activating language detection is possible
 				if ( preg_match( "#^([a-z]{2}).#i", $referer['host'], $match ) ) {
 					if ( self::is_enabled( $match[1] ) ) {

@@ -27,6 +27,9 @@ class WPGlobus_QA {
 	}
 
 	public static function api_demo() {
+
+		$is_need_to_remove_qa_items = ( ! empty( $_GET['clean'] ) );
+
 		?>
 		<!DOCTYPE html>
 		<html>
@@ -45,12 +48,21 @@ class WPGlobus_QA {
 				<h1>
 					<?php echo apply_filters( 'the_title',
 						join( '', array(
-							WPGlobus::tag_text( self::COMMON_PREFIX . ' EN', 'en' ),
-							WPGlobus::tag_text( self::COMMON_PREFIX . ' RU', 'ru' ),
+							WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' EN', 'en' ),
+							WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' RU', 'ru' ),
 						) )
 					); ?>
 				</h1>
 			</div>
+			<form>
+				<input type="hidden" name="wpglobus" value="qa"/>
+				<label>Remove QA items after? <input type="checkbox"
+				                                     name="clean"
+				                                     value="1"<?php
+					checked( $is_need_to_remove_qa_items ); ?>/></label>
+				<button class="btn btn-xs btn-primary">Run again</button>
+			</form>
+			<hr/>
 			<?php
 			self::_create_qa_items();
 
@@ -67,6 +79,10 @@ class WPGlobus_QA {
 			self::_test_post_name();
 
 			self::_common_for_all_languages();
+
+			if ( $is_need_to_remove_qa_items ) {
+				self::_remove_qa_items();
+			}
 			?>
 		</div>
 		</body>
@@ -83,8 +99,8 @@ class WPGlobus_QA {
 	 */
 	private static function _create_qa_post( $type ) {
 		$post_title = join( '', array(
-			WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_title EN", 'en' ),
-			WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_title RU", 'ru' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_title EN", 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_title RU", 'ru' ),
 		) );
 
 		$post = get_page_by_title( $post_title, null, $type );
@@ -92,13 +108,13 @@ class WPGlobus_QA {
 		if ( ! $post ) {
 
 			$post_content = join( '', array(
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_content EN", 'en' ),
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_content RU", 'ru' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_content EN", 'en' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_content RU", 'ru' ),
 			) );
 
 			$post_excerpt = join( '', array(
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_excerpt EN", 'en' ),
-				WPGlobus::tag_text( self::COMMON_PREFIX . " {$type}_excerpt RU", 'ru' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_excerpt EN", 'en' ),
+				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_excerpt RU", 'ru' ),
 			) );
 
 			$post = get_post( wp_insert_post(
@@ -112,19 +128,16 @@ class WPGlobus_QA {
 				)
 			) );
 
-			?><p>Created QA Post, ID=<?php echo $post->ID; ?></p><?php
-
 			/**
 			 * Set the category
 			 */
 			wp_set_object_terms( $post->ID, self::$_qa_taxonomies['category']['term_id'], 'category' );
 
 			/**
-			 * @todo create and set QA tag
+			 * Set the tag
 			 */
+			wp_set_object_terms( $post->ID, self::$_qa_taxonomies['post_tag']['term_id'], 'post_tag' );
 
-		} else {
-			?><p>QA Post already exists, ID=<?php echo $post->ID; ?></p><?php
 		}
 
 		/**
@@ -132,91 +145,76 @@ class WPGlobus_QA {
 		 */
 		self::$_qa_post_ids[ $type ] = $post->ID;
 
+		printf( '<p>QA %s ID=%d</p>', $type, self::$_qa_post_ids[ $type ] );
+
 		return $post;
 
 	}
 
 	/**
-	 * Create a QA category if not exists
+	 * Create a QA term if does not exist yet
+	 *
+	 * @param string $taxonomy 'category', 'post_tag', etc
 	 */
-	private static function _create_qa_category() {
-		$category_name = join( '', array(
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name EN", 'en' ),
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_name RU", 'ru' ),
+	protected static function _create_qa_term( $taxonomy ) {
+
+		$term_name = join( '', array(
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy name EN", 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy name RU", 'ru' ),
 		) );
 
-		$category_description = join( '', array(
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description EN", 'en' ),
-			WPGlobus::tag_text( self::COMMON_PREFIX . " category_description RU", 'ru' ),
+		$term_description = join( '', array(
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy description EN", 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . " $taxonomy description RU", 'ru' ),
 		) );
 
-		self::$_qa_taxonomies['category'] = term_exists( $category_name, 'category' );
-		if ( self::$_qa_taxonomies['category'] ) {
+		/** @todo We must do it by default */
+		$term_slug = WPGlobus_Core::text_filter( $term_name, WPGlobus::Config()->default_language );
+
+		self::$_qa_taxonomies[ $taxonomy ] = term_exists( $term_name, $taxonomy );
+
+		if ( self::$_qa_taxonomies[ $taxonomy ] ) {
 
 			/**
 			 * term_exists returns strings while wp_insert_term returns integers.
 			 * We need integers later in wp_set_object_terms, so we have to cast them now.
 			 */
-			self::$_qa_taxonomies['category']['term_id']          = (int) self::$_qa_taxonomies['category']['term_id'];
-			self::$_qa_taxonomies['category']['term_taxonomy_id'] =
-				(int) self::$_qa_taxonomies['category']['term_taxonomy_id'];
+			self::$_qa_taxonomies[ $taxonomy ]['term_id']          =
+				(int) self::$_qa_taxonomies[ $taxonomy ]['term_id'];
+			self::$_qa_taxonomies[ $taxonomy ]['term_taxonomy_id'] =
+				(int) self::$_qa_taxonomies[ $taxonomy ]['term_taxonomy_id'];
 
-			?><p>QA Category already exists, ID=<?php
-			echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
 		} else {
-			self::$_qa_taxonomies['category'] = wp_insert_term( $category_name, 'category', array(
-				'description' => $category_description,
-				/** @todo We must do it by default */
-				'slug'        => WPGlobus_Core::text_filter( $category_name, WPGlobus::Config()->default_language )
+			self::$_qa_taxonomies[ $taxonomy ] = wp_insert_term( $term_name, $taxonomy, array(
+				'description' => $term_description,
+				'slug'        => $term_slug
 			) );
-			if ( self::$_qa_taxonomies['category'] ) {
-				?><p>Created QA Category, ID=<?php
-				echo self::$_qa_taxonomies['category']['term_id']; ?></p><?php
-			}
+		}
+
+		if ( self::$_qa_taxonomies[ $taxonomy ] ) {
+			printf( '<p>QA %s, ID=%d</p>', $taxonomy, self::$_qa_taxonomies[ $taxonomy ]['term_id'] );
 		}
 	}
 
 	private static function _create_qa_items() {
+		?><h2>Create QA items</h2><?php
 
-		self::_create_qa_category();
+		?><div class="well"><?php
+		self::_create_qa_term( 'category' );
+		self::_create_qa_term( 'post_tag' );
+		foreach ( array( 'post', 'page' ) as $type ) {
+			self::_create_qa_post( $type );
+		}
+		?></div><?php
 
-		$post = self::_create_qa_post( 'post' );
-
-		?>
-		<div id="<?php echo __FUNCTION__; ?>_post">
-		<h2>QA Post</h2>
-
-		<h3>Raw</h3>
-
-		<div class="qa_post_raw well">
-			<div class="qa_post_title"><?php echo $post->post_title; ?></div>
-
-			<div class="qa_post_content"><?php echo $post->post_content; ?></div>
-
-			<div class="qa_post_excerpt"><?php echo $post->post_excerpt; ?></div>
-		</div>
-		<h3>Cooked</h3>
-
-		<div class="qa_post_cooked well">
-			<div class="qa_post_title"><?php echo
-				apply_filters( 'the_title', $post->post_title ); ?></div>
-
-			<div class="qa_post_content"><?php
-				echo apply_filters( 'the_title', $post->post_content ); ?></div>
-
-			<div class="qa_post_excerpt"><?php
-				echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
-		</div>
-
-		<?php
-		/**
-		 * Create QA page if not exists
-		 */
-		$post = self::_create_qa_post( 'page' );
-
-		?>
-		<div id="<?php echo __FUNCTION__; ?>_page">
-			<h2>QA Page</h2>
+		foreach ( array( 'post', 'page' ) as $type ) {
+			if ( ! self::$_qa_post_ids[ $type ] ) {
+				continue;
+			}
+			$post = get_post( self::$_qa_post_ids[ $type ] );
+			?>
+			<div id="<?php echo __FUNCTION__ . '_' . $post->post_type; ?>">
+			<h2>QA <?php echo $post->post_type; ?></h2>
 
 			<h3>Raw</h3>
 
@@ -240,15 +238,19 @@ class WPGlobus_QA {
 					echo apply_filters( 'get_the_excerpt', $post->post_excerpt ); ?></div>
 			</div>
 
-			<h2>QA Blog Description</h2>
-			<?php
-			$blogdescription = join( '', array(
-				WPGlobus::tag_text( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
-				WPGlobus::tag_text( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
-			) );
-			update_option( 'blogdescription', $blogdescription );
-			?>
-			<div id="qa_blogdescription" class="well"><?php echo get_bloginfo( 'description' ); ?></div>
+		<?php
+		}
+		?>
+
+		<h2>QA Blog Description</h2>
+		<?php
+		$blogdescription = join( '', array(
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription EN', 'en' ),
+			WPGlobus::add_locale_marks( self::COMMON_PREFIX . ' blogdescription RU', 'ru' ),
+		) );
+		update_option( 'blogdescription', $blogdescription );
+		?>
+		<div id="qa_blogdescription" class="well"><?php echo get_bloginfo( 'description' ); ?></div>
 		</div>
 	<?php
 	}
@@ -259,8 +261,8 @@ class WPGlobus_QA {
 		<p>Need to encode: <code>ENG, РУС</code></p>
 		<p>Encoded string: <code id="tag_text"><?php
 				echo ''
-				     . WPGlobus::tag_text( 'ENG', 'en' )
-				     . WPGlobus::tag_text( 'РУС', 'ru' );
+				     . WPGlobus::add_locale_marks( 'ENG', 'en' )
+				     . WPGlobus::add_locale_marks( 'РУС', 'ru' );
 				?></code>
 		</p>
 	<?php
@@ -360,37 +362,40 @@ class WPGlobus_QA {
 	 */
 	private static function _test_get_the_terms() {
 
-		$terms = get_the_terms( 97, 'category' );
+		$type    = 'post';
+		$post_id = self::$_qa_post_ids[ $type ];
+		$terms   = get_the_terms( $post_id, 'category' );
+		$term    = $terms[0];
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>get_the_terms()</h2>
 
-			<p>Name and description of the category that the post ID=97 belongs to:</p>
+			<p>Name and description of the category that the QA <?php echo $type; ?> belongs to:</p>
 
-			<p><code>get_the_terms( 97, 'category' );</code></p>
-			<?php foreach ( $terms as $term ) : ?>
-				<p id="test__get_the_terms__<?php echo $term->term_id; ?>">
-					<code>$term->name</code> :
-					<span class="test__get_the_terms__name"><?php echo $term->name; ?></span>
-					<br/>
-					<code>$term->description</code> :
-					<span class="test__get_the_terms__description"><?php echo $term->description; ?></span>
-				</p>
-			<?php endforeach; ?>
+			<p><code>get_the_terms( $<?php echo $type; ?>_id, 'category' );</code></p>
+
+			<p>
+				<code>$term->name</code> :
+				<span class="test__get_the_terms__name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="test__get_the_terms__description"><?php echo $term->description; ?></span>
+			</p>
 
 			<p>Non-existing post ID:</p>
 
 			<p>
 				<code>get_the_terms( -15, 'category' )</code>
-				=&gt; <span
-					class="non-existing-post-id"><?php echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
+				=&gt; <span class="non-existing-post-id"><?php
+					echo gettype( get_the_terms( - 15, 'category' ) ); ?></span>
 			</p>
 
 			<p>Non-existing term name:</p>
 
 			<p>
-				<code>get_the_terms( 97, 'no-such-term' )</code>
-				=&gt; <span class="no-such-term"><?php echo get_class( get_the_terms( 97, 'no-such-term' ) ); ?></span>
+				<code>get_the_terms( $<?php echo $type; ?>_id, 'no-such-term' )</code>
+				=&gt; <span class="no-such-term"><?php
+					echo get_class( get_the_terms( $post_id, 'no-such-term' ) ); ?></span>
 			</p>
 		</div>
 	<?php
@@ -402,38 +407,41 @@ class WPGlobus_QA {
 	 */
 	private static function _test_wp_get_object_terms() {
 
-		$terms = wp_get_object_terms( array( 95, 97 ), 'category' );
+		$type    = 'post';
+		$post_id = self::$_qa_post_ids[ $type ];
+		$terms   = wp_get_object_terms( array( $post_id ), 'category' );
+		$term    = $terms[0];
 		?>
 		<div id="<?php echo __FUNCTION__; ?>">
 			<h2>wp_get_object_terms()</h2>
 
-			<p>Name and description of the categories that the posts ID=95 and ID=97 belong to:</p>
+			<p>Name and description of the category that the QA <?php echo $type; ?> belongs to:</p>
 
-			<p><code>wp_get_object_terms( array( 95, 97 ), 'category' );</code></p>
-			<?php foreach ( $terms as $term ) : ?>
-				<p id="_test_wp_get_object_terms_<?php echo $term->term_id; ?>">
-					<code>$term->name</code> :
-					<span class="name"><?php echo $term->name; ?></span>
-					<br/>
-					<code>$term->description</code> :
-					<span class="description"><?php echo $term->description; ?></span>
-				</p>
-			<?php endforeach; ?>
+			<p><code>wp_get_object_terms( array( $<?php echo $type; ?>_id ), 'category' );</code></p>
 
 			<p>
-				<code>wp_get_object_terms( array( 95, 97 ), 'category', array( 'fields' => 'names' ) );</code>
+				<code>$term->name</code> :
+				<span class="name"><?php echo $term->name; ?></span>
+				<br/>
+				<code>$term->description</code> :
+				<span class="description"><?php echo $term->description; ?></span>
+			</p>
+
+			<p>
+				<code>wp_get_object_terms( array( $<?php echo $type; ?>_id ),
+					'category', array( 'fields' => 'names' ) );</code>
 				<br>=&gt;
 				<span class="fields_names"><?php
-					echo esc_html( join( ', ', wp_get_object_terms( array( 95, 97 ), 'category',
+					echo esc_html( join( ', ', wp_get_object_terms( array( $post_id ), 'category',
 						array( 'fields' => 'names' ) ) ) );
 					?></span>
 			</p>
 
 			<p>
-				<code>wp_get_object_terms( array( 97 ), 'no-such-term' );</code>
+				<code>wp_get_object_terms( array( $<?php echo $type; ?>_id ), 'no-such-term' );</code>
 				<br>=&gt;
 				<span class="no_such_term"><?php
-					echo wp_get_object_terms( array( 97 ), 'no-such-term' )->get_error_message();
+					echo wp_get_object_terms( array( $post_id ), 'no-such-term' )->get_error_message();
 					?></span>
 			</p>
 
@@ -452,7 +460,10 @@ class WPGlobus_QA {
 
 			<p><code>$terms = get_terms( 'category' )</code></p>
 			<?php
-			$terms = get_terms( 'category', array( 'name__like' => 'QA Category', 'hide_empty' => false ) );
+			$terms = get_terms( 'category', array(
+				'name__like' => 'QA Category',
+				'hide_empty' => false
+			) );
 			$term  = $terms[0];
 			?>
 			<p id="_test_get_terms_category">
@@ -465,7 +476,10 @@ class WPGlobus_QA {
 
 			<p><code>$terms = get_terms( 'post_tag' )</code></p>
 			<?php
-			$terms = get_terms( 'post_tag', array( 'name__like' => 'QA Tag', 'hide_empty' => false ) );
+			$terms = get_terms( 'post_tag', array(
+				'name__like' => self::COMMON_PREFIX . ' post_tag',
+				'hide_empty' => false
+			) );
 			$term  = $terms[0];
 			?>
 			<p id="_test_get_terms_post_tag">
@@ -610,6 +624,29 @@ class WPGlobus_QA {
 	private static function _test_get_locale() {
 		?><h2>get_locale()</h2><?php
 		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo get_locale(); ?></div><?php
+	}
+
+	private static function _remove_qa_items() {
+		?><h2>Remove QA items</h2><?php
+		$force_delete = true;
+
+		foreach ( array( 'post', 'page' ) as $type ) {
+			if ( ! empty( self::$_qa_post_ids[ $type ] ) ) {
+				$_ = wp_delete_post( self::$_qa_post_ids[ $type ], $force_delete );
+				if ( $_ ) {
+					printf( '<p>QA %s ID=%d</p>', $type, self::$_qa_post_ids[ $type ] );
+				}
+			}
+		}
+
+		foreach ( array( 'post_tag', 'category' ) as $taxonomy ) {
+			if ( ! empty( self::$_qa_taxonomies[ $taxonomy ]['term_id'] ) ) {
+				$_ = wp_delete_term( self::$_qa_taxonomies[ $taxonomy ]['term_id'], $taxonomy );
+				if ( ! is_wp_error( $_ ) && $_ ) {
+					printf( '<p>QA %s ID=%d</p>', $taxonomy, self::$_qa_taxonomies[ $taxonomy ]['term_id'] );
+				}
+			}
+		}
 	}
 
 }

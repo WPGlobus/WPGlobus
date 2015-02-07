@@ -104,6 +104,7 @@
                 wp_enqueue_style(
                     'redux-field-section-css',
                     ReduxFramework::$_url . 'inc/fields/section/field_section.css',
+                    array(),
                     time(),
                     true
                 );

@@ -70,6 +70,7 @@
                 wp_enqueue_style(
                     'redux-field-switch-css',
                     ReduxFramework::$_url . 'inc/fields/switch/field_switch.css',
+                    array(),
                     time(),
                     true
                 );
