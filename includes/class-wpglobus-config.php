@@ -181,7 +181,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			add_action( 'plugins_loaded', array(
 				$this,
 				'on_load_textdomain'
-			) );
+			), 0 );
 
 			$this->_get_options();
 		}
@@ -260,10 +260,12 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 
 		/**
 		 * Load textdomain
+		 * 
+		 * @since 1.0.0
 		 * @return void
 		 */
 		function on_load_textdomain() {
-			load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages/' );
+			load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 		}
 
 		/**
