@@ -104,7 +104,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		 * @var array
 		 */
 		public $version = array();
-		
+
 		/**
 		 * Use flag name for navigation menu : 'name' || 'code' || ''
 		 * @var string
@@ -200,14 +200,14 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			$options = array()
 		) {
 
-			if ( empty($options) ) {
-				return;	
+			if ( empty( $options ) ) {
+				return;
 			} else {
 				if ( WPGLOBUS_PLUGIN_BASENAME != $options['plugin'] || 'update' != $options['action'] ) {
 					return;
 				}
 			}
-			
+
 			$version = get_option( self::$option_versioning );
 
 			if ( empty( $version ) ) {
@@ -383,7 +383,6 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 
 		/**
 		 * Get options from DB and wp-config.php
-		 *
 		 * @return void
 		 */
 		function _get_options() {
@@ -506,25 +505,25 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 			if ( ! empty( $option ) ) {
 				$this->flag = $option;
 			}
-			
+
 			/**
 			 * Get versioning info
 			 */
 			$option = get_option( self::$option_versioning );
 			if ( empty( $option ) ) {
 				$this->version = array();
-			} else {	
+			} else {
 				$this->version = $option;
-			}			
+			}
 
 			/**
-			 * WPGlobus devmode. 
+			 * WPGlobus devmode.
 			 */
-			if ( isset($_GET['wpglobus']) && 'off' == $_GET['wpglobus'] ) {
+			if ( isset( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) {
 				$this->toggle = 'off';
-			} else {	
+			} else {
 				$this->toggle = 'on';
-			}	
+			}
 
 		}
 
@@ -535,7 +534,7 @@ if ( ! class_exists( 'WPGlobus_Config' ) ) {
 		function _getEnabledUrlMode() {
 			$enabled_url_mode = array(
 				#self::GLOBUS_URL_QUERY => 'URL query',
-				self::GLOBUS_URL_PATH  => 'URL path'
+				self::GLOBUS_URL_PATH => 'URL path'
 			);
 
 			return $enabled_url_mode;
