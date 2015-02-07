@@ -9,6 +9,12 @@
  */
 class WPGlobus {
 
+	const LOCALE_TAG = '{:%s}%s{:}';
+	const LOCALE_TAG_START = '{:%s}';
+	const LOCALE_TAG_END = '{:}';
+	const LOCALE_TAG_OPEN = '{:';
+	const LOCALE_TAG_CLOSE = '}';
+	
 	/**
 	 * @var string
 	 */
@@ -123,8 +129,18 @@ class WPGlobus {
 		 *
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
-		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
+		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
 
+		/**
+		 * Filter the array of opened languages.
+		 * 
+		 * @since 1.0.0
+		 *
+		 * @param array $open_languages Array of opened languages.
+		 */	
+		self::Config()->open_languages = apply_filters('wpglobus_open_languages', self::Config()->open_languages);
+
+		
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -403,23 +419,23 @@ class WPGlobus {
 			      data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
 			<ul>    <?php
-				foreach ( self::Config()->enabled_languages as $language ) { ?>
+				foreach ( self::Config()->open_languages as $language ) { ?>
 					<li id="wpseo-link-tab-<?php echo $language; ?>"><a
 							href="#wpseo-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 					</li> <?php
 				} ?>
-			</ul>    <?php
-
-			foreach ( self::Config()->enabled_languages as $language ) {
-				$url        = WPGlobus_Utils::get_convert_url( $permalink, $language );
-				$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
-				$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
-				$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); ?>
-				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
-				     data-language="<?php echo $language; ?>" data-url-<?php echo $language; ?>="<?php echo $url; ?>"
-				     data-metadesc="<?php echo WPGlobus_Core::text_filter( $metadesc, $language, WPGlobus::RETURN_EMPTY ); ?>"
-				     data-wpseotitle="<?php echo WPGlobus_Core::text_filter( $wpseotitle, $language, WPGlobus::RETURN_EMPTY ); ?>"
-				     data-focuskw="<?php echo WPGlobus_Core::text_filter( $focuskw, $language, WPGlobus::RETURN_EMPTY ); ?>">
+			</ul> 	<?php
+			
+			foreach ( self::Config()->open_languages as $language ) { 
+				$url = WPGlobus_Utils::get_convert_url($permalink, $language); 
+				$metadesc = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);	
+				$wpseotitle = get_post_meta($post->ID, '_yoast_wpseo_title', true);	
+				$focuskw = get_post_meta($post->ID, '_yoast_wpseo_focuskw', true); ?>		
+				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" 
+					data-language="<?php echo $language; ?>" data-url-<?php echo $language; ?>="<?php echo $url; ?>"
+					data-metadesc="<?php echo WPGlobus_Core::text_filter($metadesc, $language, WPGlobus::RETURN_EMPTY); ?>"
+					data-wpseotitle="<?php echo WPGlobus_Core::text_filter($wpseotitle, $language, WPGlobus::RETURN_EMPTY); ?>"
+					data-focuskw="<?php echo WPGlobus_Core::text_filter($focuskw, $language, WPGlobus::RETURN_EMPTY); ?>">
 				</div> <?php
 			} ?>
 		</div>
@@ -696,9 +712,10 @@ class WPGlobus {
 			'default_language'  => $WPGlobus_Config->default_language,
 			'language'          => $WPGlobus_Config->language,
 			'enabled_languages' => $WPGlobus_Config->enabled_languages,
-			'en_language_name'  => $WPGlobus_Config->en_language_name,
-			'locale_tag_start'  => self::LOCALE_TAG_START,
-			'locale_tag_end'    => self::LOCALE_TAG_END
+			'open_languages' 	=> $WPGlobus_Config->open_languages,
+			'en_language_name' => $WPGlobus_Config->en_language_name,
+			'locale_tag_start' => self::LOCALE_TAG_START,
+			'locale_tag_end' => self::LOCALE_TAG_END	
 		);
 
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
@@ -786,12 +803,14 @@ class WPGlobus {
 				 * Add template for standard excerpt meta box
 				 */
 				$data['template'] = '';
-				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-					$return =
-						$language == $WPGlobus_Config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
-
-					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[ $language ] . '" class="wpglobus-excerpt" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
-					$data['template'] .= WPGlobus_Core::text_filter( $post->post_excerpt, $language, $return );
+				foreach( WPGlobus::Config()->enabled_languages as $language ) {
+					
+					$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+					
+					$classes = in_array($language, WPGlobus::Config()->open_languages) ? 'wpglobus-excerpt' : 'wpglobus-excerpt hidden';
+					
+					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . WPGlobus::Config()->en_language_name[$language] .'" class="' . $classes . '" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
+					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, $return);
 					$data['template'] .= '</textarea>';
 
 					if ( $this->vendors_scripts['WPSEO'] ) {
@@ -1073,12 +1092,11 @@ class WPGlobus {
 	 * @return string
 	 */
 	function _get_quickedit_template() {
-		global $WPGlobus_Config;
 		$t = '';
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+		foreach( self::Config()->open_languages as $language ) {
 			$t .= '<label>';
 			$t .= '<span class="input-text-wrap">';
-			$t .= '<input id="" data-language="' . $language . '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . $WPGlobus_Config->en_language_name[ $language ] . '">';
+			$t .= '<input id="" data-language="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . self::Config()->en_language_name[$language] .'">';
 			$t .= '</span>';
 			$t .= '</label>';
 		}
@@ -1493,22 +1511,19 @@ class WPGlobus {
 			return;
 		}
 
-		if ( $this->disabled_entity( $post->post_type ) ) {
-			return;
-		}
+		if ( $this->disabled_entity($post->post_type) ) {
+			return;	
+		}			
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) :
-			if ( $language == $WPGlobus_Config->default_language ) {
+		foreach( self::Config()->open_languages as $language ) :
+			if ( $language == self::Config()->default_language ) {
 
 				continue;
 
 			} else { ?>
 
-				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">    <?php
-					wp_editor( WPGlobus_Core::text_filter( $post->post_content, $language, WPGlobus::RETURN_EMPTY ), 'content-' . $language, array(
+				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
+					wp_editor( WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content_' . $language, array(
 						'_content_editor_dfw' => true,
 						#'dfw' => true,
 						'drag_drop_upload'    => true,
@@ -1519,6 +1534,7 @@ class WPGlobus {
 							'resize'             => true,
 							'wp_autoresize_on'   => true,
 							'add_unload_trigger' => false,
+							#'readonly' => true /* @todo for WPGlobus Authors */
 						),
 					) ); ?>
 				</div> <?php
@@ -1526,12 +1542,6 @@ class WPGlobus {
 			}
 		endforeach;
 	}
-
-	const LOCALE_TAG = '{:%s}%s{:}';
-	const LOCALE_TAG_START = '{:%s}';
-	const LOCALE_TAG_END = '{:}';
-	const LOCALE_TAG_OPEN = '{:';
-	const LOCALE_TAG_CLOSE = '}';
 
 	/**
 	 * Surround text with language tags
@@ -1598,79 +1608,75 @@ class WPGlobus {
 		}
 
 		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
-		$devmode = true;
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+		global $WPGlobus_Config;		
+		
+		$devmode = true;	
+		foreach( $WPGlobus_Config->open_languages as $language ) {
 			if ( $language != $WPGlobus_Config->default_language ) {
-				if ( isset( $postarr[ 'content-' . $language ] ) ) {
-					$devmode = false;
+				if ( isset($postarr['content_' . $language]) ) {
+					$devmode = false;	
 					break;
 				}
 			}
 		}
 
-		$data['post_content'] = trim( $data['post_content'] );
-		if ( ! empty( $data['post_content'] ) ) {
-			if ( ! $devmode ) {
-				$data['post_content'] =
-					self::add_locale_marks( $data['post_content'], $WPGlobus_Config->default_language );
+		if ( ! $devmode ) :
+		
+			$data['post_title'] = trim($data['post_title']);
+			if ( !empty($data['post_title']) ) {
+				$data['post_title'] = WPGlobus::tag_text( $data['post_title'], $WPGlobus_Config->default_language );
 			}
-		}
-
-		$data['post_title'] = trim( $data['post_title'] );
-		if ( ! empty( $data['post_title'] ) ) {
-			if ( ! $devmode ) {
-				$data['post_title'] = self::add_locale_marks( $data['post_title'], $WPGlobus_Config->default_language );
+			
+			$data['post_content'] = trim($data['post_content']);
+			if ( !empty($data['post_content']) ) {
+				$data['post_content'] = WPGlobus::tag_text( $data['post_content'], $WPGlobus_Config->default_language );
 			}
-		}
 
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) :
-			if ( $language == $WPGlobus_Config->default_language ) {
+			foreach( $WPGlobus_Config->open_languages as $language ) :
+				if ( $language == $WPGlobus_Config->default_language ) {
 
-				continue;
+					continue;
 
-			} else {
+				} else {
 
-				/**
-				 * Join post content for enabled languages
-				 */
-				$content =
-					isset( $postarr[ 'content-' . $language ] ) ? trim( $postarr[ 'content-' . $language ] ) : '';
-				if ( ! empty( $content ) ) {
-					$data['post_content'] .= self::add_locale_marks( $postarr[ 'content-' . $language ], $language );
+					/**
+					 * Join post title for enabled languages
+					 */
+					$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
+					if ( !empty($title) ) {
+						$data['post_title'] .= WPGlobus::tag_text( $postarr['post_title_' . $language], $language );
+					}
+					
+					/**
+					 * Join post content for enabled languages
+					 */
+					$content = isset($postarr['content_' . $language]) ? trim($postarr['content_' . $language]) : '';
+					if ( !empty($content) ) {
+						$data['post_content'] .= WPGlobus::tag_text( $postarr['content_' . $language], $language );
+					}
+
 				}
-
-				/**
-				 * Join post title for enabled languages
-				 */
-				$title =
-					isset( $postarr[ 'post_title_' . $language ] ) ? trim( $postarr[ 'post_title_' . $language ] ) : '';
-				if ( ! empty( $title ) ) {
-					$data['post_title'] .= self::add_locale_marks( $postarr[ 'post_title_' . $language ], $language );
-				}
-
-			}
-		endforeach;
-
-		$data = apply_filters( 'wpglobus_save_post_data', $data, $postarr, $devmode );
-
+			endforeach;
+		
+		endif;  //  $devmode
+		
+		$data = apply_filters('wpglobus_save_post_data', $data, $postarr, $devmode);
+		
 		return $data;
 
 	}
 
 	/**
 	 * Add wrapper for every table in enabled languages at edit-tags.php page
+	 *
 	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-			$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>">
+		foreach ( self::Config()->enabled_languages as $language ) {
+			$tab_suffix = $language == self::Config()->default_language ? 'default' : $language;
+			$classes = in_array($language, self::Config()->open_languages) ? '' : 'hidden'; ?>
+			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>" class="<?php echo $classes; ?>">
 			</div>
 		<?php
 		}
@@ -1679,29 +1685,26 @@ class WPGlobus {
 
 	/**
 	 * Add language tabs for edit taxonomy name at edit-tags.php page
+	 *
 	 * @return void
 	 */
 	function on_add_language_tabs_edit_taxonomy() {
 
 		if ( $this->disabled_entity() ) {
 			return;
-		}
-
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config; ?>
-
+		}	?>
+		
 		<ul class="wpglobus-post-tabs-ul">    <?php
-			foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-				$tab_suffix = $language == $WPGlobus_Config->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>"><a
-						href="#tab-<?php echo $tab_suffix; ?>"><?php echo $WPGlobus_Config->en_language_name[ $language ]; ?></a>
-				</li> <?php
+			foreach ( self::Config()->open_languages as $language ) {
+				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
+				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a></li> <?php
 			} ?>
 		</ul>    <?php
 	}
 
 	/**
 	 * Add language tabs for jQueryUI
+	 *
 	 * @return void
 	 */
 	function on_add_language_tabs() {
@@ -1713,7 +1716,7 @@ class WPGlobus {
 		} ?>
 
 		<ul class="wpglobus-post-tabs-ul">    <?php
-			foreach ( self::Config()->enabled_languages as $language ) {
+			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
 				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"><a
 						href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
@@ -1736,32 +1739,23 @@ class WPGlobus {
 			return;
 		}
 
-		if ( ! post_type_supports( $post->post_type, 'title' ) ) {
-			return;
-		}
-
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
-		foreach ( $WPGlobus_Config->enabled_languages as $language ) :
-
-			if ( $language == $WPGlobus_Config->default_language ) {
-
-				continue;
-
-			} else { ?>
-
-				<div id="titlediv-<?php echo $language; ?>" class="titlediv-wpglobus">
-					<div id="titlewrap-<?php echo $language; ?>" class="titlewrap-wpglobus">
-						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>"
-						       for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-						<!--suppress HtmlFormInputWithoutLabel -->
-						<input type="text" name="post_title_<?php echo $language; ?>" size="30"
-						       value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter( $post->post_title, $language, WPGlobus::RETURN_EMPTY ) ) ); ?>"
-						       id="title_<?php echo $language; ?>"
-						       class="title_wpglobus"
-						       data-language="<?php echo $language; ?>"
-						       autocomplete="off"/>
+		foreach( self::Config()->open_languages as $language ) :
+		
+			if ( $language == self::Config()->default_language ) { 
+				
+				continue; 
+			
+			} else {	?>	
+			
+				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
+					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
+						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30" 
+							value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>"
+							id="title_<?php echo $language;?>" 
+							class="title_wpglobus"
+							data-language="<?php echo $language; ?>"	
+							autocomplete="off" />
 					</div> <!-- #titlewrap -->
 					<div class="inside">
 						<div id="edit-slug-box-<?php echo $language; ?>" class="wpglobus-edit-slug-box hide-if-no-js">

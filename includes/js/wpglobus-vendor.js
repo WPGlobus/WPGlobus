@@ -16,7 +16,7 @@ var wpglobus_wpseo = function () {
 			post_content = '#content';
 		if ( language != WPGlobusAdmin.data.default_language ) {
 			post_title = '#title_' + language;
-			post_content = '#content-' + language;
+			post_content = '#content_' + language;
 		}
 		// title
 		if (jQuery(post_title).length) {
@@ -213,7 +213,7 @@ var wpglobus_wpseo = function () {
 			
 			var post_content = '#content';
 			if ( language != WPGlobusAdmin.data.default_language ) {
-				post_content = '#content-' + language;
+				post_content = '#content_' + language;
 			}
 			if (jQuery(post_content).length) {
 				desc = jQuery(post_content).val();
@@ -247,7 +247,7 @@ var wpglobus_wpseo = function () {
 		var post_content = '#content';
 		if ( language != WPGlobusAdmin.data.default_language ) {
 			post_title = '#title_' + language;
-			post_content = '#content-' + language;
+			post_content = '#content_' + language;
 		}
 		
 		if (jQuery('#editable-post-name-full').length) {
@@ -418,7 +418,7 @@ var wpglobus_wpseo = function () {
 			wpglobus_updateDesc(jQuery(this).data('language') ? jQuery(this).data('language') : WPGlobusAdmin.data.default_language);
 		});
 		if ( i == 0 ) {
-			// #content,#content-{lang_code}
+			// #content,#content_{lang_code}
 			jQuery('.wpglobus-editor').focusout(function () {
 				wpglobus_updateDesc(jQuery(this).data('language'));
 			});		

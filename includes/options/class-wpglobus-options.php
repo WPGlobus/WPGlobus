@@ -424,7 +424,7 @@ class WPGlobus_Options {
 		$this->args['intro_text'] = '';
 
 		// Add content after the form.
-		$this->args['footer_text'] = '&copy; Copyright 2014, WPGlobus.';
+		$this->args['footer_text'] = '&copy; Copyright 2014-2015, WPGlobus.';
 	}
 
 } // class
