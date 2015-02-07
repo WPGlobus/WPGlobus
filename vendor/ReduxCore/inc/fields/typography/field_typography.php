@@ -565,6 +565,7 @@ if (!class_exists('ReduxFramework_typography')) {
             wp_enqueue_style(
                 'redux-field-typography-css',
                 ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
+                array(),
                 time(),
                 true
             );

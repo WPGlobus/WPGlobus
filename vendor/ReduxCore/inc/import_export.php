@@ -166,6 +166,7 @@
                 wp_enqueue_style(
                     'redux-field-import-export-css',
                     ReduxFramework::$_url . 'assets/css/import_export/import_export.css',
+                    array(),
                     time(),
                     true
                 );

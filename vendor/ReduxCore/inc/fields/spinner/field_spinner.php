@@ -116,6 +116,7 @@
                 wp_enqueue_style(
                     'redux-field-spinner-css',
                     ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.css',
+                    array(),
                     time(),
                     true
                 );

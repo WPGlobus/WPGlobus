@@ -359,6 +359,7 @@
                 wp_enqueue_style(
                     'redux-field-background-css',
                     ReduxFramework::$_url . 'inc/fields/background/field_background.css',
+                    array(),
                     time(),
                     true
                 );

@@ -128,6 +128,7 @@
                 wp_enqueue_style(
                     'redux-field-checkbox-css',
                     ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css',
+                    array(),
                     time(),
                     true
                 );

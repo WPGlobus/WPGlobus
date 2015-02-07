@@ -82,6 +82,7 @@
                 wp_enqueue_style(
                     'redux-field-text-css',
                     ReduxFramework::$_url . 'inc/fields/text/field_text.css',
+                    array(),
                     time(),
                     true
                 );

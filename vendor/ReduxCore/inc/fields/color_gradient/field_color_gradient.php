@@ -113,6 +113,7 @@
                 wp_enqueue_style(
                     'redux-field-color_gradient-css',
                     ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient.css',
+                    array(),
                     time(),
                     true
                 );

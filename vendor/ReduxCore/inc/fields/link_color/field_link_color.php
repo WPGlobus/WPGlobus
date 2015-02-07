@@ -121,6 +121,7 @@
                 wp_enqueue_style(
                     'redux-field-link_color-js',
                     ReduxFramework::$_url . 'inc/fields/link_color/field_link_color.css',
+                    array(),
                     time(),
                     true
                 );

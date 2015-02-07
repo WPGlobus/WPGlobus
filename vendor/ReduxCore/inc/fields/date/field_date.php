@@ -74,6 +74,7 @@
                 wp_enqueue_style(
                     'redux-field-date-css',
                     ReduxFramework::$_url . 'inc/fields/date/field_date.css',
+                    array(),
                     time(),
                     true
                 );
