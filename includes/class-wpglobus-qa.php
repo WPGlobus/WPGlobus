@@ -80,7 +80,7 @@ class WPGlobus_QA {
 
 			self::_common_for_all_languages();
 
-			if ( @$is_need_to_remove_qa_items ) {
+			if ( $is_need_to_remove_qa_items ) {
 				self::_remove_qa_items();
 			}
 			?>
