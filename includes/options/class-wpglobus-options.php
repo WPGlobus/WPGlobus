@@ -105,18 +105,24 @@ class WPGlobus_Options {
 				'title'  => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
 				'desc'   => '' .
 				            '<br/>' .
-				            '&bull; ' . __( 'Please click on the <strong>[Languages]</strong> tab at the left to setup the various options.', 'wpglobus' ) .
+				            '&bull; ' .
+				            '<a href="' . admin_url() . 'admin.php?page=wpglobus-about">' .
+				            __( 'Read About WPGlobus', 'wpglobus' ) .
+				            '</a>' .
+				            '<br/>' .
+				            '&bull; ' . __( 'Click the <strong>[Languages]</strong> tab at the left to setup the various options.', 'wpglobus' ) .
 				            '<br/>' .
 				            '&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
 				            '<br/>' .
 				            '<br/>' .
 				            __( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
 				            '<br/>' .
+				            '<br/>' .
 				            '<em>' .
 				            __( 'Sincerely Yours,', 'wpglobus' ) .
 				            '<br/>' .
 				            __( 'The WPGlobus Team', 'wpglobus' ) .
-				            '<em>' .
+				            '</em>' .
 				            '',
 				'style'  => 'info',
 				'notice' => false,
