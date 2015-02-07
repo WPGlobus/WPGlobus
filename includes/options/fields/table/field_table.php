@@ -48,18 +48,26 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 		 */
 		public function enqueue() {
 
+			$suffix = '.min';
+			$ver    = date( 'ymd' );
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$suffix = '';
+				$ver    = sprintf( 'debug-%d', time() );
+			}
+
 			wp_enqueue_style(
-				'field_table.css',
-				plugins_url( '/field_table.css', __FILE__ ),
-				time(),
+				'wpglobus-redux-field-table',
+				plugins_url( '/field_table' . $suffix . '.css', __FILE__ ),
+				array(),
+				$ver,
 				true
 			);
 
 			wp_enqueue_script(
-				'field_table.js',
-				plugins_url( '/field_table.js', __FILE__ ),
+				'wpglobus-redux-field-table',
+				plugins_url( '/field_table' . $suffix . '.js', __FILE__ ),
 				array( 'jquery' ),
-				time(),
+				$ver,
 				true
 			);
 
