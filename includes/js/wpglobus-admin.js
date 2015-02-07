@@ -105,13 +105,21 @@ jQuery(document).ready(function () {
                 });
 			},	
             quick_edit: function (type) {
-                if (typeof WPGlobusAdmin.data.has_items === 'undefined') return;
-                if (!WPGlobusAdmin.data.has_items) return;	
+                if (typeof WPGlobusAdmin.data.has_items === 'undefined') {
+                    return;
+                }
+                if (!WPGlobusAdmin.data.has_items) {
+                    return;
+                }
                 var full_id = 0, id = 0;
 				
 				$(document).ajaxComplete(function(ev, jqxhr, settings){
-					if (typeof settings.data === 'undefined') return;
-					if ( full_id == 0 ) return;
+					if (typeof settings.data === 'undefined') {
+                        return;
+                    }
+					if ( full_id == 0 ) {
+                        return;
+                    }
 					if (settings.data.indexOf('action=inline-save-tax&') >= 0) {
 						$('#'+full_id+' a.row-title').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['name']);
 						$('#'+full_id+' .description').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['description']);
@@ -168,7 +176,9 @@ jQuery(document).ready(function () {
 				}
 				
                 $('a.save, input#bulk_edit').hover(function (event) {
-					if ( typeof WPGlobusAdmin.data.tags === 'undefined' ) return;
+					if ( typeof WPGlobusAdmin.data.tags === 'undefined' ) {
+                        return;
+                    }
 					if (event.currentTarget.id=='bulk_edit') {
 						$('input#bulk_edit').unbind('click');
 					} else {
@@ -185,7 +195,9 @@ jQuery(document).ready(function () {
 						
 						$.each( WPGlobusAdmin.data.tags, function(i,tag){
 							t = p.find("textarea[name='" + WPGlobusAdmin.data.names[tag] + "']");
-							if ( t.size() == 0 ) return true;
+							if ( t.size() == 0 ) {
+                                return true;
+                            }
 							WPGlobusAdmin.data.value[tag]['post_id'][id] = t.val();
 							v = WPGlobusAdmin.data.value[tag]['post_id'][id].split(',');
 							new_tags = [];
@@ -475,8 +487,12 @@ jQuery(document).ready(function () {
 						if ($('#'+tagsdiv).size() == 0) { return true /* next iteration */ };
 					
 						var	id = tagsdiv.replace('tagsdiv-', '');
-						if ( 'undefined' === id ) return true;
-						if ( $('#tax-input-'+id).size() == 0 ) return true;
+						if ( 'undefined' === id ) {
+                            return true;
+                        }
+						if ( $('#tax-input-'+id).size() == 0 ) {
+                            return true;
+                        }
 						
 						var name, tags = [];
 						

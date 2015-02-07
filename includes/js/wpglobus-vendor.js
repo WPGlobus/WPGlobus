@@ -93,8 +93,9 @@ var wpglobus_wpseo = function () {
 		var focuskw = yst_escapeFocusKw(jQuery.trim(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'focuskw' + '_' + language).val()));
 		var keywords;
 
-		if (focuskw == '')
+		if (focuskw == '') {
 			return str;
+		}
 
 		if (focuskw.search(' ') != -1) {
 			keywords = focuskw.split(' ');
@@ -186,10 +187,12 @@ var wpglobus_wpseo = function () {
 				var len = -1;
 				len = wpseoMetaboxL10n.wpseo_meta_desc_length - desc.length;
 
-				if (len < 0)
+				if (len < 0) {
 					len = '<span class="wrong">' + len + '</span>';
-				else
+				}
+				else {
 					len = '<span class="good">' + len + '</span>';
+				}
 
 				jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc-length' + '_' + language).html(len);
 
