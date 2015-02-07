@@ -385,7 +385,6 @@ var wpglobus_wpseo = function () {
 					if (xhr === lastXhr) {
 						response(data);
 					}
-					return;
 				});
 			}
 		});
