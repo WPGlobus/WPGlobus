@@ -7,10 +7,18 @@ module.exports = function (grunt) {
     //bannerTemplate = '/* <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */',
         pathIncludes = 'includes',
         pathCSS,
-        pathJS
+        pathCSS_field_table,
+        pathJS,
+        pathJS_field_table
         ;
     pathCSS = pathIncludes + '/css';
     pathJS = pathIncludes + '/js';
+
+    /**
+     * "Table" field for Redux
+     */
+    pathCSS_field_table = pathIncludes + '/options/fields/table';
+    pathJS_field_table = pathCSS_field_table;
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -19,15 +27,21 @@ module.exports = function (grunt) {
          * @link https://github.com/gruntjs/grunt-contrib-uglify
          */
         uglify: {
-            all: {
-                //options: {
-                //    sourceMap: true
-                //},
+            main: {
                 files: [{
                     expand: true,
                     cwd: pathJS + '/',
                     src: ['*.js', '!*.min.js'],
                     dest: pathJS + '/',
+                    ext: '.min.js'
+                }]
+            },
+            field_table: {
+                files: [{
+                    expand: true,
+                    cwd: pathJS_field_table + '/',
+                    src: ['*.js', '!*.min.js'],
+                    dest: pathJS_field_table + '/',
                     ext: '.min.js'
                 }]
             }
@@ -72,6 +86,17 @@ module.exports = function (grunt) {
                 files: {
                     "includes/css/wpglobus-flags.css": pathCSS + '/' + "wpglobus-flags.less"
                 }
+            },
+            field_table: {
+                options: {
+                    paths: [pathCSS_field_table],
+                    sourceMap: true,
+                    sourceMapBasepath: pathCSS_field_table,
+                    sourceMapURL: 'field_table.css.map'
+                },
+                files: {
+                    "includes/options/fields/table/field_table.css": pathCSS_field_table + '/' + "field_table.less"
+                }
             }
         },
 
@@ -79,7 +104,7 @@ module.exports = function (grunt) {
          * @link https://www.npmjs.org/package/grunt-contrib-cssmin
          */
         cssmin: {
-            all: {
+            main: {
                 options: {
                     keepSpecialComments: 0
                 },
@@ -88,6 +113,16 @@ module.exports = function (grunt) {
                 src: ['*.css', '!*.min.css'],
                 dest: pathCSS + '/',
                 ext: '.min.css'
+            },
+            field_table: {
+                options: {
+                    keepSpecialComments: 0
+                },
+                expand: true,
+                cwd: pathCSS_field_table + '/',
+                src: ['*.css', '!*.min.css'],
+                dest: pathCSS_field_table + '/',
+                ext: '.min.css'
             }
         },
 
@@ -95,7 +130,12 @@ module.exports = function (grunt) {
          * @link https://github.com/gruntjs/grunt-contrib-watch
          */
         watch: {
-            files: [pathCSS + '/*.less', pathJS + '/*.js'],
+            files: [
+                pathCSS + '/*.less',
+                pathCSS_field_table + '/*.less',
+                pathJS + '/*.js',
+                pathJS_field_table + '/*.js'
+            ],
             tasks: ['less', 'cssmin', 'uglify'],
             options: {
                 spawn: false
