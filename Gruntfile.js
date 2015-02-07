@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     'use strict';
 
     var
-        bannerTemplate = '/* <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */',
+    //bannerTemplate = '/* <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */',
         pathIncludes = 'includes',
         pathCSS,
         pathJS
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
         less: {
             admin: {
                 options: {
-                    banner: bannerTemplate,
+                    //banner: bannerTemplate,
                     paths: [pathCSS],
                     sourceMap: true,
                     sourceMapBasepath: pathCSS,
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
             },
             tabs: {
                 options: {
-                    banner: bannerTemplate,
+                    //banner: bannerTemplate,
                     paths: [pathCSS],
                     sourceMap: true,
                     sourceMapBasepath: pathCSS,
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
             },
             flags: {
                 options: {
-                    banner: bannerTemplate,
+                    //banner: bannerTemplate,
                     paths: [pathCSS],
                     sourceMap: true,
                     sourceMapBasepath: pathCSS,
