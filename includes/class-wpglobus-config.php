@@ -52,17 +52,11 @@ class WPGlobus_Config {
 	 */
 	public $hide_default_language = true;
 		
-		/**
-		 * Opened languages
-		 * @var string[]
-		 */		
-		public $open_languages = array();
-		
-		/**
-		 * Hide from URL language by default
-		 * @var bool
-		 */
-		public $hide_default_language = true;
+	/**
+	 * Opened languages
+	 * @var string[]
+	 */		
+	public $open_languages = array();
 
 	/**
 	 *    URL information
@@ -138,7 +132,6 @@ class WPGlobus_Config {
 	 */
 	public static $option_versioning = 'wpglobus_option_versioning';
 
-
 	/**
 	 * WPGlobus option key for $language_name
 	 * @var string
@@ -157,7 +150,6 @@ class WPGlobus_Config {
 	 */
 	public $option_locale = 'wpglobus_option_locale';
 
-
 	/**
 	 * WPGlobus option key for $flag
 	 * @var string
@@ -174,11 +166,11 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	public $toggle = 'on';
-
-			add_action( 'plugins_loaded', array(
-				$this,
-				'on_load_textdomain'
-			), 0 );
+	
+	/**
+	 * Constructor
+	 */
+	function __construct() {	
 
 		add_action( 'plugins_loaded', array(
 			$this,
@@ -260,15 +252,15 @@ class WPGlobus_Config {
 		}
 	}
 
-		/**
-		 * Load textdomain
-		 * 
-		 * @since 1.0.0
-		 * @return void
-		 */
-		function on_load_textdomain() {
-			load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
-		}
+	/**
+	 * Load textdomain
+	 * 
+	 * @since 1.0.0
+	 * @return void
+	 */
+	function on_load_textdomain() {
+		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
+	}
 
 	/**
 	 * Return URL mode
@@ -393,11 +385,11 @@ class WPGlobus_Config {
 
 		$wpglobus_option = get_option( $this->option );
 
-			/**
-			 * FIX: after "Reset All" Redux options we must reset all WPGlobus options
-			 * first of all look at $wpglobus_option['more_languages']
-			 */
-			if ( isset( $wpglobus_option['more_languages'] ) && is_array( $wpglobus_option['more_languages'] ) ) {
+		/**
+		 * FIX: after "Reset All" Redux options we must reset all WPGlobus options
+		 * first of all look at $wpglobus_option['more_languages']
+		 */
+		if ( isset( $wpglobus_option['more_languages'] ) && is_array( $wpglobus_option['more_languages'] ) ) {
 
 			$wpglobus_option = array();
 			delete_option( $this->option );
@@ -408,38 +400,38 @@ class WPGlobus_Config {
 
 		}
 
-			/**
-			 * Get enabled languages and default language ( just one main language )
-			 */
-			if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty( $wpglobus_option['enabled_languages'] ) ) {
-				$this->enabled_languages = array();
-				foreach ( $wpglobus_option['enabled_languages'] as $lang => $value ) {
-					if ( ! empty( $value ) ) {
-						$this->enabled_languages[] = $lang;
-					}
+		/**
+		 * Get enabled languages and default language ( just one main language )
+		 */
+		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty( $wpglobus_option['enabled_languages'] ) ) {
+			$this->enabled_languages = array();
+			foreach ( $wpglobus_option['enabled_languages'] as $lang => $value ) {
+				if ( ! empty( $value ) ) {
+					$this->enabled_languages[] = $lang;
 				}
 			}
-			
-			/**
-			 * Set available languages for editors
-			 */
-			$this->open_languages = $this->enabled_languages;
-			
-			/**
-			 * 
-			 *
-			 */
-			$this->_set_flags_url();
-
-			/**
-			 * Get URL mode
-			 */
-			if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-				$this->url_mode = $wpglobus_option['url_mode'];
-			} else {
-				$this->url_mode = self::GLOBUS_URL_PATH;
-			}
 		}
+			
+		/**
+		 * Set available languages for editors
+		 */
+		$this->open_languages = $this->enabled_languages;
+		
+		/**
+		 * 
+		 *
+		 */
+		$this->_set_flags_url();
+
+		/**
+		 * Get URL mode
+		 */
+		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
+			$this->url_mode = $wpglobus_option['url_mode'];
+		} else {
+			$this->url_mode = self::GLOBUS_URL_PATH;
+		}
+		//}
 
 		/*
 		 *
@@ -510,7 +502,6 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['css_editor'] ) ) {
 			$this->css_editor = $wpglobus_option['css_editor'];
 		}
-
 
 		/**
 		 * Get flag files without path
