@@ -134,6 +134,17 @@ class WPGlobus_Utils {
 	}
 
 	/**
+	 * Return true if language is in array of opened languages, otherwise false
+	 *
+	 * @param string $language
+	 *
+	 * @return bool
+	 */
+	public static function is_open( $language ) {
+		return in_array( $language, WPGlobus::Config()->open_languages );
+	}
+	
+	/**
 	 * Return true if language is in array of enabled languages, otherwise false
 	 *
 	 * @param string $language
