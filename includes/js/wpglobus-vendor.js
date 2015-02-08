@@ -479,6 +479,15 @@ var wpglobus_wpseo = function () {
 		jQuery(save_to).val(s);		
 	});		
 	
+	jQuery('body').on('click', '.wpglobus-post-tabs-ul li, .wpglobus-wpseo-tabs-ul li', function(event){
+		$this = jQuery(this);
+		if ( $this.hasClass('wpglobus-post-tab') ) {
+			jQuery('#wpglobus-wpseo-tabs').tabs('option','active',jQuery(this).data('order'));
+		} else if ( $this.hasClass('wpglobus-wpseo-tab') ) {
+			//jQuery('#post-body-content').tabs('option','active',jQuery(this).data('order'));
+		}	
+	});	
+	
 	wpglobus_qtip();
 	yst_updateSnippet();
 		/*

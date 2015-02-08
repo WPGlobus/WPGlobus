@@ -418,11 +418,16 @@ class WPGlobus {
 			      data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc"
 			      data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
-			<ul>    <?php
+			<ul class="wpglobus-wpseo-tabs-ul">    <?php
+				$order = 0;
 				foreach ( self::Config()->open_languages as $language ) { ?>
-					<li id="wpseo-link-tab-<?php echo $language; ?>"><a
+					<li id="wpseo-link-tab-<?php echo $language; ?>"
+							data-language="<?php echo $language; ?>"
+							data-order="<?php echo $order; ?>"
+							class="wpglobus-wpseo-tab"><a
 							href="#wpseo-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 					</li> <?php
+					$order++;
 				} ?>
 			</ul> 	<?php
 			
@@ -1692,12 +1697,15 @@ class WPGlobus {
 
 		if ( $this->disabled_entity() ) {
 			return;
-		}	?>
+		}	
 		
+		/** @todo change class wpglobus-post-tabs-ul */	?>
 		<ul class="wpglobus-post-tabs-ul">    <?php
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>"><a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a></li> <?php
+				<li id="link-tab-<?php echo $tab_suffix; ?>" class="">
+					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a>
+				</li> <?php
 			} ?>
 		</ul>    <?php
 	}
@@ -1716,11 +1724,15 @@ class WPGlobus {
 		} ?>
 
 		<ul class="wpglobus-post-tabs-ul">    <?php
+			$order = 0;
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"><a
-						href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
+						data-order="<?php echo $order; ?>"
+						class="wpglobus-post-tab">
+						<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 				</li> <?php
+				$order++;
 			} ?>
 		</ul>    <?php
 
