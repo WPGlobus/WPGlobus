@@ -298,7 +298,7 @@ jQuery(document).ready(function () {
                     $('#tab-' + suffix).append($e[0].outerHTML);
                 });
 
-                $('.wpglobus-post-tabs-ul').insertAfter('#ajax-response');
+                $('.wpglobus-taxonomy-tabs-ul').insertAfter('#ajax-response');
                 t.css('display', 'none');
 
                 // Make class wrap as tabs container

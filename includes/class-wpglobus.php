@@ -1697,10 +1697,9 @@ class WPGlobus {
 
 		if ( $this->disabled_entity() ) {
 			return;
-		}	
+		}	?>
 		
-		/** @todo change class wpglobus-post-tabs-ul */	?>
-		<ul class="wpglobus-post-tabs-ul">    <?php
+		<ul class="wpglobus-taxonomy-tabs-ul">    <?php
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
 				<li id="link-tab-<?php echo $tab_suffix; ?>" class="">
