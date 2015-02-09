@@ -12,7 +12,7 @@ class WPGlobus_Config {
 	/**
 	 *    Url mode: query (question mark)
 	 */
-	const GLOBUS_URL_QUERY = 1;
+//	const GLOBUS_URL_QUERY = 1;
 
 	/**
 	 *    Url mode: pre-path
@@ -22,7 +22,7 @@ class WPGlobus_Config {
 	/**
 	 *    Url mode: pre-domain
 	 */
-	const GLOBUS_URL_DOMAIN = 3;
+//	const GLOBUS_URL_DOMAIN = 3;
 
 	/**
 	 * Current language
@@ -37,6 +37,7 @@ class WPGlobus_Config {
 	public $default_language = 'en';
 
 	/**
+	 * @todo This is just an example.
 	 * Enabled languages
 	 * @var string[]
 	 */
@@ -51,11 +52,11 @@ class WPGlobus_Config {
 	 * @var bool
 	 */
 	public $hide_default_language = true;
-		
+
 	/**
 	 * Opened languages
 	 * @var string[]
-	 */		
+	 */
 	public $open_languages = array();
 
 	/**
@@ -166,11 +167,13 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	public $toggle = 'on';
-	
+
+//	protected $url_mode;
+
 	/**
 	 * Constructor
 	 */
-	function __construct() {	
+	function __construct() {
 
 		add_action( 'plugins_loaded', array(
 			$this,
@@ -254,7 +257,6 @@ class WPGlobus_Config {
 
 	/**
 	 * Load textdomain
-	 * 
 	 * @since 1.0.0
 	 * @return void
 	 */
@@ -266,9 +268,9 @@ class WPGlobus_Config {
 	 * Return URL mode
 	 * @int
 	 */
-	function get_url_mode() {
-		return $this->url_mode;
-	}
+//	function get_url_mode() {
+//		return $this->url_mode;
+//	}
 
 	/**
 	 * Set flags URL
@@ -411,14 +413,13 @@ class WPGlobus_Config {
 				}
 			}
 		}
-			
+
 		/**
 		 * Set available languages for editors
 		 */
 		$this->open_languages = $this->enabled_languages;
-		
+
 		/**
-		 * 
 		 *
 		 */
 		$this->_set_flags_url();
@@ -426,11 +427,11 @@ class WPGlobus_Config {
 		/**
 		 * Get URL mode
 		 */
-		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-			$this->url_mode = $wpglobus_option['url_mode'];
-		} else {
-			$this->url_mode = self::GLOBUS_URL_PATH;
-		}
+//		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
+//			$this->url_mode = $wpglobus_option['url_mode'];
+//		} else {
+//			$this->url_mode = self::GLOBUS_URL_PATH;
+//		}
 		//}
 
 		/*
@@ -442,11 +443,11 @@ class WPGlobus_Config {
 		/**
 		 * Get URL mode
 		 */
-		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-			$this->url_mode = $wpglobus_option['url_mode'];
-		} else {
-			$this->url_mode = self::GLOBUS_URL_PATH;
-		}
+//		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
+//			$this->url_mode = $wpglobus_option['url_mode'];
+//		} else {
+//			$this->url_mode = self::GLOBUS_URL_PATH;
+//		}
 
 		/*
 		 * Get languages name
@@ -533,6 +534,7 @@ class WPGlobus_Config {
 	}
 
 	/**
+	 * @deprecated 1.0.0
 	 * Hard-coded enabled url modes
 	 * @return array
 	 */

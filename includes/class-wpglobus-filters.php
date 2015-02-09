@@ -391,20 +391,16 @@ class WPGlobus_Filters {
 	 */
 	public static function action__init_url_info() {
 
-		// check if it isn't already initialized
-		if ( defined( 'WPGLOBUS_INIT' ) ) {
-			return;
-		}
-
-		define( 'WPGLOBUS_INIT', true );
-
-		/** @todo check at class-wpglobus.php:103 for set url_info */
 		WPGlobus::Config()->url_info =
 			WPGlobus_Utils::extract_url( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '' );
 
 
-		$_SERVER['REQUEST_URI'] = WPGlobus::Config()->url_info['url'];
-		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
+		/**
+		 * @quirks
+		 * This might be needed if we'd support subdomains or language queries
+		 */
+		//		$_SERVER['REQUEST_URI'] = WPGlobus::Config()->url_info['url'];
+		//		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
 
 	}
 

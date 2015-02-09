@@ -137,7 +137,7 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 add_filter( 'locale', array( 'WPGlobus_Filters', 'filter__get_locale' ), PHP_INT_MAX );
 
 /**
- * @todo To discuss
+ * @todo Refactor url_info after beta-testing
  */
 add_action( 'init', array( 'WPGlobus_Filters', 'action__init_url_info' ), 2 );
 

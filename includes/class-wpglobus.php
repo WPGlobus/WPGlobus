@@ -298,13 +298,12 @@ class WPGlobus {
 			$this->menus = self::_get_nav_menus();
 
 			/** @todo */
-			0 && add_filter( 'wp_list_pages', array(
-				$this,
-				'on_wp_list_pages'
-			), 99, 2 );
+//			add_filter( 'wp_list_pages', array(
+//				$this,
+//				'on_wp_list_pages'
+//			), 99, 2 );
 
-			/** @todo */
-			1 && add_filter( 'wp_page_menu', array(
+			add_filter( 'wp_page_menu', array(
 				$this,
 				'on_wp_page_menu'
 			), 99, 2 );
@@ -313,7 +312,7 @@ class WPGlobus {
 			 * Add language switcher to navigation menu
 			 * @see on_add_item
 			 */
-			1 && add_filter( 'wp_nav_menu_objects', array(
+			add_filter( 'wp_nav_menu_objects', array(
 				$this,
 				'on_add_item'
 			), 99, 2 );
@@ -321,7 +320,7 @@ class WPGlobus {
 			/**
 			 * Convert url for menu items
 			 */
-			1 && add_filter( 'wp_nav_menu_objects', array(
+			add_filter( 'wp_nav_menu_objects', array(
 				$this,
 				'on_get_convert_url_menu_items'
 			), 10, 2 );

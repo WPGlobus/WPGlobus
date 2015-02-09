@@ -21,7 +21,7 @@ class WPGlobus_Utils {
 			return $url;
 		}
 
-		$converted_url = '';
+		//		$converted_url = '';
 
 		$language = empty( $language ) ? $WPGlobus_Config->language : $language;
 
@@ -42,30 +42,30 @@ class WPGlobus_Utils {
 			return $url;
 		}
 
-		switch ( $WPGlobus_Config->get_url_mode() ) :
-			case WPGlobus_Config::GLOBUS_URL_PATH:
-				// pre url
+		//		switch ( $WPGlobus_Config->get_url_mode() ) :
+		//			case WPGlobus_Config::GLOBUS_URL_PATH:
+		// pre url
 
-				if ( $language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
-					$language = '';
-				} else {
-					$language = '/' . $language;
-				}
+		if ( $language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
+			$language = '';
+		} else {
+			$language = '/' . $language;
+		}
 
-				$fragment = empty( $parsed_url['fragment'] ) ? '' : '#' . $parsed_url['fragment'];
+		$fragment = empty( $parsed_url['fragment'] ) ? '' : '#' . $parsed_url['fragment'];
 
-				$converted_url =
-					$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
-				break;
-			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
-				// pre domain
-
-				break;
-			case WPGlobus_Config::GLOBUS_URL_QUERY:
-				// query (question mark)
-
-				break;
-		endswitch;
+		$converted_url =
+			$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
+		//				break;
+		//			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
+		//				// pre domain
+		//
+		//				break;
+		//			case WPGlobus_Config::GLOBUS_URL_QUERY:
+		//				// query (question mark)
+		//
+		//				break;
+		//		endswitch;
 
 		return $converted_url;
 
@@ -84,39 +84,41 @@ class WPGlobus_Utils {
 		global $WPGlobus_Config;
 
 		$current_language = ( '' == $current_language ) ? $WPGlobus_Config->language : $current_language;
-		$url              = '';
+		//		$url              = '';
 
-		if ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_PATH ) {
+		//		if ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_PATH ) {
 
-			$language = '/' . $current_language;
-			if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
-				$language = '';
-			}
-
-			$url = self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
-
-		} elseif ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_QUERY ) {
-
-			if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
-
-				$url = '';
-
-			} else {
-
-				$arr = self::extract_url( $WPGlobus_Config->url_info['url'] );
-
-				if ( false === strpos( $arr['url'], '?' ) ) {
-					$url = '?';
-				} else {
-					$url = '&';
-				}
-				$url .= 'lang=' . $current_language;
-
-			}
-
-			$url =
-				self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $WPGlobus_Config->url_info['url'] . $url;
+		$language = '/' . $current_language;
+		if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
+			$language = '';
 		}
+
+		$url = self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
+
+		//		}
+
+		//		elseif ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_QUERY ) {
+		//
+		//			if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
+		//
+		//				$url = '';
+		//
+		//			} else {
+		//
+		//				$arr = self::extract_url( $WPGlobus_Config->url_info['url'] );
+		//
+		//				if ( false === strpos( $arr['url'], '?' ) ) {
+		//					$url = '?';
+		//				} else {
+		//					$url = '&';
+		//				}
+		//				$url .= 'lang=' . $current_language;
+		//
+		//			}
+		//
+		//			$url =
+		//				self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $WPGlobus_Config->url_info['url'] . $url;
+		//		}
 
 		return $url;
 	}
@@ -143,7 +145,7 @@ class WPGlobus_Utils {
 	public static function is_open( $language ) {
 		return in_array( $language, WPGlobus::Config()->open_languages );
 	}
-	
+
 	/**
 	 * Return true if language is in array of enabled languages, otherwise false
 	 *
@@ -222,9 +224,8 @@ class WPGlobus_Utils {
 			if ( preg_match( $r2, $url, $out2 ) ) {
 				$result['host'] = $out2[1] . $out2[2];
 				/**
-				 * http://www.wpg.dev/wp-admin/edit.php?post_type=product
-				 * with WPGlobus WC
-				 * has  PHP Notice:  Undefined offset: 3 in C:\cygwin\home\www.wpg.dev\wp-content\plugins\wpglobus\includes\class-wpglobus-utils.php
+				 * @todo check /wp-admin/edit.php?post_type=product with WPGlobus WC
+				 * PHP Notice:  Undefined offset: 3 in class-wpglobus-utils.php
 				 */
 				$result['path'] = isset( $out2[3] ) ? $out2[3] : '';
 			}
@@ -257,34 +258,34 @@ class WPGlobus_Utils {
 		$result['internal_referer'] = false;
 		$result['home']             = $home['path'];
 
-		switch ( $WPGlobus_Config->get_url_mode() ) {
-			case WPGlobus_Config::GLOBUS_URL_PATH:
-				// pre url
-				$url = substr( $url, strlen( $home['path'] ) );
-				if ( $url ) {
-					// might have language information
-					if ( preg_match( "#^([a-z]{2})(/.*)?$#i", $url, $match ) ) {
-						if ( self::is_enabled( $match[1] ) ) {
-							// found language information
-							$result['language'] = $match[1];
-							$result['url']      = $home['path'] . substr( $url, 3 );
-						}
-					}
+		//		switch ( $WPGlobus_Config->get_url_mode() ) {
+		//			case WPGlobus_Config::GLOBUS_URL_PATH:
+		// pre url
+		$url = substr( $url, strlen( $home['path'] ) );
+		if ( $url ) {
+			// might have language information
+			if ( preg_match( "#^([a-z]{2})(/.*)?$#i", $url, $match ) ) {
+				if ( self::is_enabled( $match[1] ) ) {
+					// found language information
+					$result['language'] = $match[1];
+					$result['url']      = $home['path'] . substr( $url, 3 );
 				}
-				break;
-			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
-				// pre domain
-				if ( $host ) {
-					if ( preg_match( "#^([a-z]{2}).#i", $host, $match ) ) {
-						if ( self::is_enabled( $match[1] ) ) {
-							// found language information
-							$result['language'] = $match[1];
-							$result['host']     = substr( $host, 3 );
-						}
-					}
-				}
-				break;
+			}
 		}
+		//				break;
+		//			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
+		//				// pre domain
+		//				if ( $host ) {
+		//					if ( preg_match( "#^([a-z]{2}).#i", $host, $match ) ) {
+		//						if ( self::is_enabled( $match[1] ) ) {
+		//							// found language information
+		//							$result['language'] = $match[1];
+		//							$result['host']     = substr( $host, 3 );
+		//						}
+		//					}
+		//				}
+		//				break;
+		//		}
 
 		// check if referer is internal
 		if ( $referer['host'] == $result['host'] && self::starts_with( $referer['path'], $home['path'] ) ) {
