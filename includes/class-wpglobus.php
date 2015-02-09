@@ -802,7 +802,7 @@ class WPGlobus {
 
 			}
 			$i18n                            = array();
-			$i18n['cannot_disable_language'] = __( 'You cannot disable first enabled language.', 'wpglobus' );
+			$i18n['cannot_disable_language'] = __( 'You cannot disable the first enabled language.', 'wpglobus' );
 
 			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 

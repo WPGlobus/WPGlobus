@@ -33,7 +33,7 @@ class WPGlobus_About {
 			<div class="wrap about-wrap">
 
 				<div class="about-text">
-					<?php printf( __( 'Thank you for installing WPGlobus %s!' ), WPGLOBUS_VERSION ); ?>
+					<?php printf( __( 'Thank you for installing WPGlobus!', 'wpglobus' ), WPGLOBUS_VERSION ); ?>
 				</div>
 
 				<h2 class="nav-tab-wrapper">
@@ -106,9 +106,11 @@ class WPGlobus_About {
 				<p><?php _e( "The versions 0.x.x provided the existing users of other language plugins with a language-switcher menu dropdown. We are going to keep the language switcher, but we have dropped the support of subdomains and language queries in our plugin. If your site is using subdomains or <code>?lang=xx</code>, and you'd like to keep that behavior, please do not use WPGlobus starting from the version 1.0.0.", 'wpglobus' ); ?>
 				</p>
 
-				<p><?php printf( __( 'To downgrage, please download the version 0.1.1 using %s.',
-						'<a href="https://downloads.wordpress.org/plugin/wpglobus.0.1.1.zip">this link</a>' ),
-						'wpglobus' ); ?></p>
+				<p><?php
+					printf(
+						__( 'To downgrage, please download the version 0.1.1 using %s.', 'wpglobus' ),
+						'<a href="https://downloads.wordpress.org/plugin/wpglobus.0.1.1.zip">this link</a>' );
+					?></p>
 
 				<hr/>
 
