@@ -1197,7 +1197,7 @@ class WPGlobus {
 	 */
 	function wpglobus_about() {
 		require_once 'admin/class-wpglobus-about.php';
-		new WPGlobus_About();
+		WPGlobus_About::about_screen();
 	}
 
 	/**

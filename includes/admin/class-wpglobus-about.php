@@ -10,16 +10,14 @@
 class WPGlobus_About {
 
 	/**
-	 * Constructor
-	 */
-	function __construct() {
-		$this->about_screen();
-	}
-
-	/**
 	 * Output the about screen.
 	 */
-	public function about_screen() {
+	public static function about_screen() {
+
+		/**
+		 * @quirk
+		 * Keeping this "wrap" only to display admin notice(s)
+		 */
 		?>
 		<div class="wrap">
 
@@ -31,129 +29,105 @@ class WPGlobus_About {
 				echo __( 'About WPGlobus', 'wpglobus' );
 				?></h2>
 
-			<div class="wpglobus-about-wrap about-wrap">
-				<div class="changelog">
-					<div class="feature-main feature-section col three-col">
 
-						<div>
-							<h4><?php printf( __( 'Version %s', 'wpglobus' ), WPGLOBUS_VERSION ); ?></h4>
-							<img
-								src="<?php echo WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-logo-180x180.png'; ?>"
-								alt="WPGlobus logo"/>
-						</div>
+			<div class="wrap about-wrap">
 
-						<div>
-							<h4><?php _e( 'What is WPGlobus', 'wpglobus' ); ?></h4>
+				<div class="about-text">
+					<?php printf( __( 'Thank you for installing WPGlobus %s!' ), WPGLOBUS_VERSION ); ?>
+				</div>
 
-							<p><?php _e( 'WPGlobus is a globalization (multi-lingual, internationalization, localization, ...) WordPress plugin.', 'wpglobus' ); ?></p>
+				<h2 class="nav-tab-wrapper">
+					<a href="admin.php?page=wpglobus-about" class="nav-tab nav-tab-active">
+						<?php _e( 'What&#8217;s New' ); ?>
+					</a><a href="admin.php?page=wpglobus_options" class="nav-tab">
+						<?php _e( 'Settings' ); ?>
+					</a><a href="http://www.wpglobus.com/contact-us/" class="nav-tab">
+						<?php _e( 'Feedback' ); ?>
+					</a><a href="admin.php?page=wpglobus-about#wpglobus-mini" class="nav-tab">
+						<?php _e( 'Breaking changes!', 'wpglobus' ); ?>
+					</a>
+				</h2>
 
-							<p><?php _e( 'Our goal is to let WordPress support multiple languages, countries and currencies (for e-commerce).', 'wpglobus' ); ?></p>
+				<div class="feature-main feature-section col three-col">
 
-							<p><?php printf( __( 'For more information, please visit %s.', 'wpglobus' ), '<a href="http://www.wpglobus.com">WPGlobus.com</a>' ); ?></p>
-						</div>
+					<div style="text-align: center;">
+						<h4><?php printf( __( 'Version %s', 'wpglobus' ), WPGLOBUS_VERSION ); ?></h4>
+						<img
+							src="<?php echo WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-logo-180x180.png'; ?>"
+							alt="WPGlobus logo"/>
+					</div>
+
+					<div>
+						<h4><?php _e( 'What is WPGlobus', 'wpglobus' ); ?></h4>
+
+						<p><?php _e( 'WPGlobus is a globalization (multi-lingual, internationalization, localization, ...) WordPress plugin.', 'wpglobus' ); ?></p>
+
+						<p><?php _e( 'Our goal is to let WordPress support multiple languages, countries and currencies (for e-commerce).', 'wpglobus' ); ?></p>
+
+						<p><?php printf( __( 'For more information, please visit %s.', 'wpglobus' ), '<a href="http://www.wpglobus.com">WPGlobus.com</a>' ); ?></p>
+					</div>
 
 
-						<div class="last-feature">
-							<h4><?php _e( 'Vim tation apeirian eu', 'wpglobus' ); ?></h4>
+					<div class="last-feature">
+						<h4><?php _e( 'Feature Highlights', 'wpglobus' ); ?></h4>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos, in postea eloquentiam nec, per homero ancillae ne. Altera fierent nam no, graeci fierent interesset vel ad. Et paulo moderatius mei.', 'wpglobus' ); ?></p>
-						</div>
+						<ul class="wpglobus-checkmarks">
+							<li><?php _e( 'Add multiple languages and countries to your site.', 'wpglobus' ); ?></li>
+							<li><?php _e( 'Translate posts, pages, categories, tags and menus using a clean and simple interface.', 'wpglobus' ); ?></li>
+							<li><?php _e( 'Switch languages at the front-end using a drop-down menu with language names and country flags.', 'wpglobus' ); ?></li>
+							<li><?php printf( __( 'Continue using the %s - yes, WPGlobus supports the WP-SEO titles and descriptions in multiple languages!', 'wpglobus' ), '<a href="https://yoast.com/wordpress/plugins/seo/">WordPress SEO Plugin by Yoast</a>' ); ?></li>
+						</ul>
 					</div>
 				</div>
-				<div class="changelog alternate">
-					<h3><?php _e( 'WPGlobus API version 999', 'wpglobus' ); ?></h3>
 
-					<div class="feature-section col three-col">
-						<div>
-							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
+				<hr/>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos, in postea eloquentiam nec, per homero ancillae ne. Altera fierent nam no, graeci fierent interesset vel ad. Et paulo moderatius mei..', 'wpglobus' ); ?></p>
-						</div>
-						<div>
-							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
+				<h3><?php _e( 'Important', 'wpglobus' ); ?></h3>
+				<ul class="wpglobus-important">
+					<li>
+						<?php _e( "The plugin is currently in <strong>BETA</strong> stage! We will do our best to fix all problems you'll discover. Please be patient. Your contributions (on GitHub) are highly appreciated!", 'wpglobus' ); ?>
+					</li>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos.', 'wpglobus' ); ?></p>
-						</div>
-						<div class="last-feature">
-							<h4><?php _e( 'Circus', 'wpglobus' ); ?></h4>
+					<li>
+						<?php _e( "WPGlobus only supports the localization URLs in the form of <code>example.com/xx/page/</code>. We do not plan to support subdomains <code>xx.example.com</code> and language queries <code>example.com?lang=xx</code>.", 'wpglobus' ); ?>
+					</li>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos.', 'wpglobus' ); ?></p>
-						</div>
-					</div>
-				</div>
-				<div class="changelog">
-					<div class="feature-section col three-col">
-						<div>
-							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
+					<li>
+						<?php _e( 'The ALPHA version (0.1.x, called internally <em>"WPGlobus Mini"</em>) is no longer supported. See the note below for more details.', 'wpglobus' ); ?>
+					</li>
+				</ul>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos.', 'wpglobus' ); ?></p>
-						</div>
-						<div>
-							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
+				<hr/>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea ex, cu eam aeterno accusata partiendo. Utinam semper volumus id eos.', 'wpglobus' ); ?></p>
-						</div>
-						<div class="last-feature">
-							<h4><?php _e( 'Fabulas omittantur ut sit', 'wpglobus' ); ?></h4>
+				<p id="wpglobus-mini">&nbsp;</p>
 
-							<p><?php _e( 'Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.', 'wpglobus' ); ?></p>
-						</div>
-					</div>
-				</div>
-				<p><a name="wpglobus-mini"></a></p>
+				<h3><?php _e( 'Warning! WPGlobus Mini (0.x.x) is no longer supported!', 'wpglobus' ); ?></h3>
 
-				<div class="changelog alternate">
-					<h3>WPGlobus Mini is obsolete!</h3>
+				<p><?php _e( "The versions 0.x.x provided the existing users of other language plugins with a language-switcher menu dropdown. We are going to keep the language switcher, but we have dropped the support of subdomains and language queries in our plugin. If your site is using subdomains or <code>?lang=xx</code>, and you'd like to keep that behavior, please do not use WPGlobus starting from the version 1.0.0.", 'wpglobus' ); ?>
+				</p>
 
-					<div class="feature-section col one-col">
-						<div>
-							<p>Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide
-								doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas.
-								His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea. Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea atqui tritani definiebas.
-								His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.Pro ea
-								atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut. Vide
-								doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea.
-								Pro ea atqui tritani definiebas. His quas utinam iisque ex, falli efficiendi ius ut.
-								Vide doctus reformidans sea.Pro ea atqui tritani definiebas. His quas utinam iisque ex,
-								falli efficiendi ius ut. Vide doctus reformidans sea. Pro ea atqui tritani definiebas.
-								His quas utinam iisque ex, falli efficiendi ius ut. Vide doctus reformidans sea.
-							</p>
-						</div>
-					</div>
-				</div>
+				<p><?php printf( __( 'To downgrage, please download the version 0.1.1 using %s.',
+						'<a href="https://downloads.wordpress.org/plugin/wpglobus.0.1.1.zip">this link</a>' ),
+						'wpglobus' ); ?></p>
+
+				<hr/>
+
 				<div class="return-to-dashboard">
-					<a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'wpglobus_options&tab=0' ), 'admin.php' ) ) ); ?>"><?php _e( 'Go to WPGlobus Settings', 'wpglobus' ); ?></a>
+					<a href="admin.php?page=wpglobus_options">
+						<?php _e( 'Go to WPGlobus Settings', 'wpglobus' ); ?>
+					</a>
 				</div>
 			</div>
-			<!-- .about-wrap -->
+
 		</div>
+
+		<?php
+		/**
+		 * @quirk
+		 * Make the page longer to display the '#wpglobus-mini nicely'
+		 */
+		?>
+		<div style="height: 20em">&nbsp;</div>
 	<?php
 	}
 
