@@ -12,6 +12,12 @@ class APICest {
 	const COMMON_PREFIX = 'WPGlobusQA';
 
 	/**
+	 * Must match WPGlobus::URL_WPGLOBUS_SITE @see WPGlobus
+	 */
+	const URL_WPGLOBUS_SITE = 'http://www.wpglobus.com/';
+
+
+	/**
 	 * @see WPGlobus_QA::_common_for_all_languages()
 	 *
 	 * @param AcceptanceTester $I

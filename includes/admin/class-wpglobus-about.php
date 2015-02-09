@@ -41,7 +41,7 @@ class WPGlobus_About {
 						<?php _e( 'What&#8217;s New' ); ?>
 					</a><a href="admin.php?page=wpglobus_options" class="nav-tab">
 						<?php _e( 'Settings' ); ?>
-					</a><a href="http://www.wpglobus.com/contact-us/" class="nav-tab">
+					</a><a href="<?php echo WPGlobus::URL_WPGLOBUS_SITE; ?>/contact-us/" class="nav-tab">
 						<?php _e( 'Feedback' ); ?>
 					</a><a href="admin.php?page=wpglobus-about#wpglobus-mini" class="nav-tab">
 						<?php _e( 'Breaking changes!', 'wpglobus' ); ?>
