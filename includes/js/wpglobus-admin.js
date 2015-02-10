@@ -181,8 +181,8 @@ jQuery(document).ready(function () {
 						WPGlobusAdmin.data.value[tag]['post_id'] = {};
 					});	
 				}
-				
-                $('a.save, input#bulk_edit').hover(function (event) {
+
+				$('a.save, input#bulk_edit').on('mouseenter', function (event) {
 					if ( typeof WPGlobusAdmin.data.tags === 'undefined' ) {
                         return;
                     }
