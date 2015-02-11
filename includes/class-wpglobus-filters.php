@@ -394,7 +394,11 @@ class WPGlobus_Filters {
 		WPGlobus::Config()->url_info =
 			WPGlobus_Utils::extract_url( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '' );
 
-
+		/**
+		 * Set language of current page
+		 */
+		WPGlobus::Config()->language = WPGlobus::Config()->url_info['language'];
+		
 		/**
 		 * @quirks
 		 * This might be needed if we'd support subdomains or language queries
