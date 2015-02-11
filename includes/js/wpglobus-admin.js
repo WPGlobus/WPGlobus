@@ -168,7 +168,7 @@ jQuery(document).ready(function () {
 						lang[index] = l;
                     });
 
-					var so = $(document).triggerHandler('wpglobus_get_translations', {ptitle:s, lang:lang, id:id});
+					var so = $(document).triggerHandler('wpglobus_get_translations', {string:s, lang:lang, id:id});
 					if ( typeof so !== 'undefined' ) {
 						s = so;		
 					}
@@ -378,7 +378,7 @@ jQuery(document).ready(function () {
                         var p = $('#' + id + ' ' + input).parents('p');
                         var height = 0;
 
-                        $.each(WPGlobusAdmin.data.enabled_languages, function (index, language) {
+                        $.each(WPGlobusAdmin.data.open_languages, function (index, language) {
                             var new_element = $(i[0].outerHTML);
                             new_element.attr('id', $(i).attr('id') + '-' + language);
                             new_element.attr('name', $(i).attr('id') + '-' + language);
@@ -410,7 +410,7 @@ jQuery(document).ready(function () {
 				// @see wp-admin\js\nav-menu.js:537
 				$('.edit-menu-item-title').trigger('change');
 				
-                $('.wpglobus-menu-item').on('blur', function (event) {
+                $('.wpglobus-menu-item').on('change', function (event) {
                     var $this = $(this),
                         li,
                         id,
@@ -419,26 +419,40 @@ jQuery(document).ready(function () {
                     if ($this.hasClass('wpglobus-item-title')) {
                         li = $this.parents('li');
                         id = li.attr('id');
+						var lang = [];
                         $.each($('#' + id + ' .wpglobus-item-title'), function (index, element) {
                             $e = $(element);
+							var l = $e.data('language');
                             if ($e.val() !== '') {
-                                s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+                                s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
                             }
+							lang[index] = l;
                             item_id = $e.data('item-id');
                         });
+						var so = $(document).triggerHandler('wpglobus_get_menu_translations', {string:s, lang:lang, id:item_id, type:'input.edit-menu-item-title'});
+						if ( typeof so !== 'undefined' ) {
+							s = so;		
+						}					
                         $('input#edit-menu-item-title-' + item_id).val(s);
                     }
 
                     if ($this.hasClass('wpglobus-item-attr')) {
                         li = $this.parents('li');
                         id = li.attr('id');
+						var lang = [];
                         $.each($('#' + id + ' .wpglobus-item-attr'), function (index, element) {
                             $e = $(element);
+							var l = $e.data('language');
                             if ($e.val() !== '') {
-                                s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
+                                s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
                             }
+							lang[index] = l;
                             item_id = $e.data('item-id');
                         });
+						var so = $(document).triggerHandler('wpglobus_get_menu_translations', {string:s, lang:lang, id:item_id, type:'input.edit-menu-item-attr-title'});
+						if ( typeof so !== 'undefined' ) {
+							s = so;		
+						}					
                         $('input#edit-menu-item-attr-title-' + item_id).val(s);
                     }
 
