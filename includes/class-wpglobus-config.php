@@ -412,6 +412,11 @@ class WPGlobus_Config {
 					$this->enabled_languages[] = $lang;
 				}
 			}
+			
+			/**
+			 * Set default language
+			 */	
+			$this->default_language = $this->enabled_languages[0];
 		}
 
 		/**
