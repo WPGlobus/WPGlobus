@@ -257,6 +257,7 @@ class WPGlobus_Utils {
 		$result['redirect']         = false;
 		$result['internal_referer'] = false;
 		$result['home']             = $home['path'];
+		$result['schema']           = is_ssl() ? 'https://' : 'http://';
 
 		//		switch ( $WPGlobus_Config->get_url_mode() ) {
 		//			case WPGlobus_Config::GLOBUS_URL_PATH:
