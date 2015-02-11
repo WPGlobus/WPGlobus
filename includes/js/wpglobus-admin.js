@@ -163,9 +163,9 @@ jQuery(document).ready(function () {
 						var l = $e.data('language');
                         if ($e.val() !== '') {
                             s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-							WPGlobusAdmin.qedit_titles[id][l]['name'] = $e.val();
-							lang[index] = l;
                         }
+						WPGlobusAdmin.qedit_titles[id][l]['name'] = $e.val();
+						lang[index] = l;
                     });
 
 					var so = $(document).triggerHandler('wpglobus_get_translations', {ptitle:s, lang:lang, id:id});
