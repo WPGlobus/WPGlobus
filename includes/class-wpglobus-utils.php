@@ -243,14 +243,12 @@ class WPGlobus_Utils {
 	 */
 	public static function extract_url( $url, $host = '', $referer = '' ) {
 
-		global $WPGlobus_Config;
-
 		$home         = self::parse_url( get_option( 'home' ) );
 		$home['path'] = trailingslashit( $home['path'] );
 		$referer      = self::parse_url( $referer );
 
 		$result                     = array();
-		$result['language']         = $WPGlobus_Config->default_language;
+		$result['language']         = WPGlobus::Config()->default_language;
 		$result['url']              = $url;
 		$result['original_url']     = $url;
 		$result['host']             = $host;
@@ -259,7 +257,7 @@ class WPGlobus_Utils {
 		$result['home']             = $home['path'];
 		$result['schema']           = is_ssl() ? 'https://' : 'http://';
 
-		//		switch ( $WPGlobus_Config->get_url_mode() ) {
+		//		switch ( WPGlobus::Config()->get_url_mode() ) {
 		//			case WPGlobus_Config::GLOBUS_URL_PATH:
 		// pre url
 		$url = substr( $url, strlen( $home['path'] ) );
@@ -302,7 +300,7 @@ class WPGlobus_Utils {
 
 		} elseif ( $home['host'] == $result['host'] && $home['path'] == $result['url'] ) {
 
-			if ( empty( $referer['host'] ) || ! $WPGlobus_Config->hide_default_language ) {
+			if ( empty( $referer['host'] ) || ! WPGlobus::Config()->hide_default_language ) {
 
 				$result['redirect'] = true;
 
