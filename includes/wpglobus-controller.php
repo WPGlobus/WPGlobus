@@ -62,7 +62,11 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() || WPGlobus_WP::is_pagenow( 'n
  * Filter for @see wp_setup_nav_menu_item
  */
 if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
-	add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
+	/** 
+	 * @todo temporarily disable the filter 
+	 * need to test js in work
+	 */
+	//add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
 }
 
 /**
