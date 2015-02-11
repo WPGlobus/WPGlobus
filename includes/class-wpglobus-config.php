@@ -420,7 +420,7 @@ class WPGlobus_Config {
 		$this->open_languages = $this->enabled_languages;
 
 		/**
-		 *
+		 * Set flags URL
 		 */
 		$this->_set_flags_url();
 
@@ -447,17 +447,17 @@ class WPGlobus_Config {
 
 		}
 
-		/*
+		/**
 		 * Get locales
 		 */
 		$this->locale = get_option( $this->option_locale );
 
-		/*
+		/**
 		 * Get en_language_name
 		 */
 		$this->en_language_name = get_option( $this->option_en_language_names );
 
-		/*
+		/**
 		 * Get option 'show_flag_name'
 		 */
 		if ( isset( $wpglobus_option['show_flag_name'] ) ) {
@@ -471,7 +471,7 @@ class WPGlobus_Config {
 			}
 		}
 
-		/*
+		/**
 		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'
 		 */
 		$this->nav_menu = '';
@@ -482,7 +482,7 @@ class WPGlobus_Config {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
 		}
 
-		/*
+		/**
 		 * Get custom CSS
 		 */
 		if ( isset( $wpglobus_option['css_editor'] ) ) {
