@@ -407,6 +407,30 @@ class WPGlobus_Filters {
 		//		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
 
 	}
+	
+	/**
+	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info 
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post[] $object
+	 * @return WP_Post[]
+	 */
+	public static function filter__nav_menu_item($object) {
+		if ( is_object( $object ) && 'WP_Post' == get_class( $object ) ) {
+
+			if ( ! empty( $object->title ) ) {
+				$object->title = WPGlobus_Core::text_filter( $object->title, WPGlobus::Config()->language );
+			}
+			if ( ! empty( $object->description ) ) {
+				$object->description = WPGlobus_Core::text_filter( $object->description, WPGlobus::Config()->language );
+			}
+
+		}		
+		return $object;
+	}	
+	
+	
 
 
 } // class
