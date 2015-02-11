@@ -66,7 +66,7 @@ if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
 }
 
 /**
- * Filter for @see wp_setup_nav_menu_item
+ * Filter for @see nav_menu_description
  */
 add_filter( 'nav_menu_description', array( 'WPGlobus_Filters', 'filter__nav_menu_description' ), 0 );
 
