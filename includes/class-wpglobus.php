@@ -851,6 +851,7 @@ class WPGlobus {
 
 				$page_action = 'menu-edit';
 				$menu_items  = array();
+				$post_titles  = array();
 
 				global $wpdb;
 				$items =
@@ -899,10 +900,12 @@ class WPGlobus {
 						}
 
 					endif;
-
+					
 					$menu_items[ $item->ID ]['item-title'] =
 						WPGlobus_Core::text_filter( $item->post_title, $WPGlobus_Config->default_language );
 						
+					$post_titles[$item->post_title] = $menu_items[ $item->ID ]['item-title'];
+					
 					foreach ( self::Config()->enabled_languages as $language ) {
 
 						$return =
@@ -921,6 +924,7 @@ class WPGlobus {
 				}
 
 				$data['items'] = $menu_items;
+				$data['post_titles'] = $post_titles;
 
 				$i18n['save_nav_menu'] = __( '*) Available after the menu is saved.', 'wpglobus' );
 
