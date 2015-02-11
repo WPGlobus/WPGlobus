@@ -2,14 +2,14 @@
 /*global jQuery, console, WPGlobusAdmin, inlineEditPost */
 jQuery(document).ready(function () {
     "use strict";
-    window.globusAdminApp = (function (globusAdminApp, $) {
+    window.WPGlobusAdminApp = (function (WPGlobusAdminApp, $) {
 
         // var params = JSON.parse(JSON.stringify(parameters));
         /* Object Constructor
          ========================*/
-        globusAdminApp.App = function (config) {
+        WPGlobusAdminApp.App = function (config) {
 
-            if (window.globusAdminApp !== undefined) {
+            if (window.WPGlobusAdminApp !== undefined) {
                 return;
             }
 
@@ -47,7 +47,7 @@ jQuery(document).ready(function () {
             }
         };
 
-        globusAdminApp.App.prototype = {
+        WPGlobusAdminApp.App.prototype = {
             init: function () {
 				$('#content').addClass('wpglobus-editor').attr('data-language',WPGlobusAdmin.data.default_language);
 				$('textarea[id^=content_]').each(function(i,e){
@@ -569,10 +569,10 @@ jQuery(document).ready(function () {
             }
         };
 
-        new globusAdminApp.App();
+        new WPGlobusAdminApp.App();
 
-        return globusAdminApp;
+        return WPGlobusAdminApp;
 
-    }(window.globusAdminApp || {}, jQuery));
+    }(window.WPGlobusAdminApp || {}, jQuery));
 
 });
