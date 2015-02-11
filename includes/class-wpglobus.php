@@ -116,7 +116,7 @@ class WPGlobus {
 			$this->vendors_scripts['WPSEO'] = true;
 		}
 
-		if ( function_exists( 'WC' ) ) {
+		if ( defined( 'WC_VERSION' ) || defined( 'WOOCOMMERCE_VERSION' ) ) {
 			$this->vendors_scripts['WOOCOMMERCE'] = true;
 			$this->disabled_entities[]            = 'product';
 			$this->disabled_entities[]            = 'product_tag';
