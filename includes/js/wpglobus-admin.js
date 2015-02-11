@@ -406,6 +406,21 @@ jQuery(document).ready(function () {
                     $(li).addClass('wpglobus-menu-item');
                 });
 
+				$('.menus-move-left, .menus-move-right').each(function(index,e) {
+					var $e = $(e), new_title;
+					var item_id = $e.parents('li').attr('id').replace('menu-item-', '');
+					var title = $e.attr('title');
+					if ( typeof title !== 'undefined' ) {
+						$.each(WPGlobusAdmin.data.post_titles, function(post_title, item_title) {
+							if ( title.indexOf(post_title) >= 0 ) {
+								new_title = title.replace(post_title, item_title);
+								$e.attr('title', new_title);
+								$e.text(new_title);
+							}	
+						});	
+					}	
+				});
+				
 				// Run the item handle title when the navigation label was loaded.
 				// @see wp-admin\js\nav-menu.js:537
 				$('.edit-menu-item-title').trigger('change');
