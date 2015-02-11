@@ -433,8 +433,23 @@ class WPGlobus_Filters {
 		return $object;
 	}	
 	
-	
-
+	/**
+	 * Filter @see nav_menu_description
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $description
+	 * @return string
+	 */
+	public static function filter__nav_menu_description($description) {
+		/**
+		 * This filter for translate menu item description
+		 */
+		if ( ! empty( $description ) ) {
+			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
+		}
+		return $description;
+	}			
 
 } // class
 
