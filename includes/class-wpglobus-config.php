@@ -434,22 +434,7 @@ class WPGlobus_Config {
 //		}
 		//}
 
-		/*
-		 *
-		 *
-		 */
-		$this->_set_flags_url();
-
 		/**
-		 * Get URL mode
-		 */
-//		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-//			$this->url_mode = $wpglobus_option['url_mode'];
-//		} else {
-//			$this->url_mode = self::GLOBUS_URL_PATH;
-//		}
-
-		/*
 		 * Get languages name
 		 * big array of used languages
 		 */
