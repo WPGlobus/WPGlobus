@@ -902,13 +902,16 @@ class WPGlobus {
 
 					$menu_items[ $item->ID ]['item-title'] =
 						WPGlobus_Core::text_filter( $item->post_title, $WPGlobus_Config->default_language );
+						
+					foreach ( self::Config()->enabled_languages as $language ) {
 
-					foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+						$return =
+							$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
 
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-title']['caption']      =
-							WPGlobus_Core::text_filter( $item->post_title, $language, WPGlobus::RETURN_EMPTY );
+							WPGlobus_Core::text_filter( $item->post_title, $language, $return );
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-attr-title']['caption'] =
-							WPGlobus_Core::text_filter( $item->post_excerpt, $language, WPGlobus::RETURN_EMPTY );
+							WPGlobus_Core::text_filter( $item->post_excerpt, $language, $return );
 
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-title']['class']      =
 							'widefat wpglobus-menu-item wpglobus-item-title';
