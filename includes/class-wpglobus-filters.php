@@ -417,6 +417,9 @@ class WPGlobus_Filters {
 	 * @return WP_Post[]
 	 */
 	public static function filter__nav_menu_item($object) {
+		/**
+		 * This filter is used at nav-menus.php page for .field-move elements
+		 */
 		if ( is_object( $object ) && 'WP_Post' == get_class( $object ) ) {
 
 			if ( ! empty( $object->title ) ) {
