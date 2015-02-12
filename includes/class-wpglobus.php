@@ -1,7 +1,6 @@
 <?php
 /**
  * @package   WPGlobus
- * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
 /**
