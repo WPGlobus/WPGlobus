@@ -63,3 +63,7 @@ ul.wpglobus-important li {
   margin-left: 24px;
 }
 /*# sourceMappingURL=wpglobus-admin.css.map */
+
+.wpglobus-state-error {
+	border:1px solid #f00 !important;
+}
