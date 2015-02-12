@@ -7,7 +7,7 @@ Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
 
-Adds a language switcher drop-down to navigation menus.
+A WordPress Globalization Plugin
 
 == Description ==
 
