@@ -129,6 +129,7 @@
                 wp_enqueue_style(
                     'redux-field-sortable-css',
                     ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.css',
+                    array(),
                     time(),
                     true
                 );

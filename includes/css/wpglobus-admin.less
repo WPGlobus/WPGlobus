@@ -1,0 +1,85 @@
+/**
+ * Admin styles
+ * @package WPGlobus
+ */
+
+.dashicon-checkmark() {
+	content: "\f147";
+}
+
+.dashicon-triangle-right() {
+	content: "\f522";
+}
+
+.dashicon-globus() {
+	content: "\f319";
+}
+
+
+#adminmenu li.toplevel_page_wpglobus_options div.wp-menu-image:before {
+	.dashicon-globus();
+}
+
+.wpglobus-menu-item-box {
+	background-color: #e0e0e0;
+	padding-bottom: 20px;
+	input {
+		border: 1px #0f0 solid;
+	}
+}
+
+.wpglobus-excerpt {
+	width: 98%;
+}
+
+.widefat thead tr th.column-wpglobus_languages {
+	width: 7%;
+}
+
+//noinspection CssNoGenericFontName
+.dashicon() {
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font-family: 'dashicons';
+	font-weight: 400;
+	font-style: normal;
+	text-decoration: inherit;
+}
+
+.wpglobus-switch #wpglobus-raw:before {
+	.dashicon();
+	.dashicon-globus();
+	font-size: 20px;
+	vertical-align: text-bottom;
+	opacity: 0.6;
+}
+
+ul.wpglobus-checkmarks {
+	li:before {
+		.dashicon();
+		.dashicon-checkmark();
+		font-size: 2em;
+		vertical-align: top;
+		color: forestgreen;
+	}
+	li {
+		text-indent: -1em;
+		margin-left: 1.5em;
+	}
+}
+
+ul.wpglobus-important {
+	li:before {
+		.dashicon();
+		.dashicon-triangle-right();
+		font-size: 23px;
+		vertical-align: top;
+		color: darkred;
+	}
+	li {
+		text-indent: -14px;
+		margin-left: 24px;
+	}
+}
+
+// --- EOF

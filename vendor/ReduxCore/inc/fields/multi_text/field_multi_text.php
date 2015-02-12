@@ -100,6 +100,7 @@
                 wp_enqueue_style(
                     'redux-field-multi-text-css',
                     ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text.css',
+                    array(),
                     time(),
                     true
                 );

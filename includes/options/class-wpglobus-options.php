@@ -1,16 +1,7 @@
 <?php
 /**
  * @package   WPGlobus
- * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-if ( class_exists( 'WPGlobus_Options' ) ) {
-	return;
-}
 
 /**
  * Class WPGlobus_Options
@@ -38,7 +29,7 @@ class WPGlobus_Options {
 		$nav_menus = WPGlobus::_get_nav_menus();
 
 		foreach ( $nav_menus as $menu ) {
-			$this->menus[$menu->slug] = $menu->name;
+			$this->menus[ $menu->slug ] = $menu->name;
 		}
 		if ( ! empty( $nav_menus ) && count( $nav_menus ) > 1 ) {
 			$this->menus['all'] = 'All';
@@ -112,20 +103,26 @@ class WPGlobus_Options {
 				'type'   => 'info',
 				'title'  => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
 				'desc'   => '' .
-					'<br/>' .
-					'&bull; ' . __( 'Please click on the <strong>[Languages]</strong> tab at the left to setup the various options.', 'wpglobus' ) .
-					'<br/>' .
-					'&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
-					'<br/>' .
-					'<br/>' .
-					__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
-					'<br/>' .
-					'<em>' .
-					__( 'Sincerely Yours,', 'wpglobus' ) .
-					'<br/>' .
-					__( 'The WPGlobus Team', 'wpglobus' ) .
-					'<em>' .
-					'',
+				            '<br/>' .
+				            '&bull; ' .
+				            '<a href="' . admin_url() . 'admin.php?page=wpglobus-about">' .
+				            __( 'Read About WPGlobus', 'wpglobus' ) .
+				            '</a>' .
+				            '<br/>' .
+				            '&bull; ' . __( 'Click the <strong>[Languages]</strong> tab at the left to setup the various options.', 'wpglobus' ) .
+				            '<br/>' .
+				            '&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
+				            '<br/>' .
+				            '<br/>' .
+				            __( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
+				            '<br/>' .
+				            '<br/>' .
+				            '<em>' .
+				            __( 'Sincerely Yours,', 'wpglobus' ) .
+				            '<br/>' .
+				            __( 'The WPGlobus Team', 'wpglobus' ) .
+				            '</em>' .
+				            '',
 				'style'  => 'info',
 				'notice' => false,
 			);
@@ -148,11 +145,11 @@ class WPGlobus_Options {
 
 		foreach ( $WPGlobus_Config->enabled_languages as $code ) {
 			$lang_in_en = '';
-			if ( isset( $WPGlobus_Config->en_language_name[$code] ) && ! empty( $WPGlobus_Config->en_language_name[$code] ) ) {
-				$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$code] . ')';
+			if ( isset( $WPGlobus_Config->en_language_name[ $code ] ) && ! empty( $WPGlobus_Config->en_language_name[ $code ] ) ) {
+				$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[ $code ] . ')';
 			}
 
-			$enabled_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
+			$enabled_languages[ $code ] = $WPGlobus_Config->language_name[ $code ] . $lang_in_en;
 		}
 
 		/** Add language from 'more_language' option to array $enabled_languages */
@@ -160,14 +157,14 @@ class WPGlobus_Options {
 
 			$lang       = $wpglobus_option['more_languages'];
 			$lang_in_en = '';
-			if ( isset( $WPGlobus_Config->en_language_name[$lang] ) && ! empty( $WPGlobus_Config->en_language_name[$lang] ) ) {
-				$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$lang] . ')';
+			if ( isset( $WPGlobus_Config->en_language_name[ $lang ] ) && ! empty( $WPGlobus_Config->en_language_name[ $lang ] ) ) {
+				$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[ $lang ] . ')';
 			}
 
-			$enabled_languages[$lang] = $WPGlobus_Config->language_name[$lang] . $lang_in_en;
+			$enabled_languages[ $lang ] = $WPGlobus_Config->language_name[ $lang ] . $lang_in_en;
 
-			$wpglobus_option['enabled_languages'][$wpglobus_option['more_languages']] =
-				$WPGlobus_Config->language_name[$wpglobus_option['more_languages']];
+			$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
+				$WPGlobus_Config->language_name[ $wpglobus_option['more_languages'] ];
 			update_option( $WPGlobus_Config->option, $wpglobus_option );
 
 		}
@@ -176,10 +173,10 @@ class WPGlobus_Options {
 		foreach ( $WPGlobus_Config->flag as $code => $file ) {
 			if ( ! array_key_exists( $code, $enabled_languages ) ) {
 				$lang_in_en = '';
-				if ( isset( $WPGlobus_Config->en_language_name[$code] ) && ! empty( $WPGlobus_Config->en_language_name[$code] ) ) {
-					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[$code] . ')';
+				if ( isset( $WPGlobus_Config->en_language_name[ $code ] ) && ! empty( $WPGlobus_Config->en_language_name[ $code ] ) ) {
+					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[ $code ] . ')';
 				}
-				$more_languages[$code] = $WPGlobus_Config->language_name[$code] . $lang_in_en;
+				$more_languages[ $code ] = $WPGlobus_Config->language_name[ $code ] . $lang_in_en;
 			}
 		}
 
@@ -189,8 +186,7 @@ class WPGlobus_Options {
 		 */
 		if ( empty( $this->menus ) ) {
 			$navigation_menu_placeholder = __( 'No navigation menu', 'wpglobus' );
-		}
-		else {
+		} else {
 			$navigation_menu_placeholder = __( 'Select navigation menu', 'wpglobus' );
 		}
 
@@ -220,7 +216,8 @@ class WPGlobus_Options {
 					'desc'        => __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ),
 					'placeholder' => __( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
-				),
+				)
+				/*
 				array(
 					'id'          => 'url_mode',
 					'type'        => 'select',
@@ -238,7 +235,8 @@ class WPGlobus_Options {
 					'placeholder' => __( 'Select URL Mode', 'wpglobus' ),
 					'options'     => $WPGlobus_Config->_getEnabledUrlMode(),
 					'default'     => $WPGlobus_Config::GLOBUS_URL_PATH
-				),
+				) // */
+				,
 				array(
 					'id'       => 'show_flag_name',
 					'type'     => 'select',
@@ -329,7 +327,7 @@ class WPGlobus_Options {
 			// This is where your data is stored in the database and also becomes your global variable name.
 			'display_name'       => 'WPGlobus',
 			// Name that appears at the top of your panel
-			'display_version'    => WPGlobus::$_version,
+			'display_version'    => WPGLOBUS_VERSION,
 			// Version that appears at the top of your panel
 			'menu_type'          => 'menu',
 			//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
@@ -337,7 +335,6 @@ class WPGlobus_Options {
 			// Show the sections below the admin menu item or not
 			'menu_title'         => __( 'WPGlobus', 'wpglobus' ),
 			'page_title'         => __( 'WPGlobus', 'wpglobus' ),
-
 			// You will need to generate a Google API key to use this feature.
 			// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
 			'google_api_key'     => '',
@@ -426,9 +423,10 @@ class WPGlobus_Options {
 		$this->args['intro_text'] = '';
 
 		// Add content after the form.
-		$this->args['footer_text'] = '&copy; Copyright 2014, WPGlobus.';
+		$this->args['footer_text'] =
+			'&copy; Copyright 2014-' . date( 'Y' ) . ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.';
 	}
 
-} // end class Redux_Framework_globus_option
+} // class
 
 # --- EOF

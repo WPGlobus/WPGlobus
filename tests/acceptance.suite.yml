@@ -1,0 +1,19 @@
+# Codeception Test Suite Configuration
+
+# suite for acceptance tests.
+# perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver
+        - ApiHelper
+        - Asserts
+    config:
+        WebDriver:
+            url: 'http://www.wpglobus.com/'
+            browser: phantomjs
+            restart: true
+            window_size: 1024x768
+            clear_cookies: true

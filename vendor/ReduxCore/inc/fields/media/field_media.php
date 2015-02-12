@@ -208,6 +208,7 @@
                 wp_enqueue_style(
                     'redux-field-media-css',
                     ReduxFramework::$_url . 'inc/fields/media/field_media.css',
+                    array(),
                     time(),
                     true
                 );

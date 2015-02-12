@@ -1,26 +1,17 @@
 <?php
 /**
  * @package   WPGlobus
- * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-if ( class_exists( 'WPGlobus_Config' ) ) {
-	return;
-}
-
 /**
- * WPGlobus_Config class
+ * Class WPGlobus_Config
  */
 class WPGlobus_Config {
 
 	/**
 	 *    Url mode: query (question mark)
 	 */
-	const GLOBUS_URL_QUERY = 1;
+//	const GLOBUS_URL_QUERY = 1;
 
 	/**
 	 *    Url mode: pre-path
@@ -30,7 +21,7 @@ class WPGlobus_Config {
 	/**
 	 *    Url mode: pre-domain
 	 */
-	const GLOBUS_URL_DOMAIN = 3;
+//	const GLOBUS_URL_DOMAIN = 3;
 
 	/**
 	 * Current language
@@ -45,8 +36,9 @@ class WPGlobus_Config {
 	public $default_language = 'en';
 
 	/**
+	 * @todo This is just an example.
 	 * Enabled languages
-	 * @var array
+	 * @var string[]
 	 */
 	public $enabled_languages = array(
 		'en',
@@ -61,11 +53,10 @@ class WPGlobus_Config {
 	public $hide_default_language = true;
 
 	/**
-	 * URL mode
-	 * query || pre-path || pre-domain
-	 * @var int
+	 * Opened languages
+	 * @var string[]
 	 */
-	public $url_mode;
+	public $open_languages = array();
 
 	/**
 	 *    URL information
@@ -74,8 +65,8 @@ class WPGlobus_Config {
 	public $url_info = array();
 
 	/**
-	 *    Flag images configuration
-	 *    Look in /flags/ directory for a huge list of flags for usage
+	 * Flag images configuration
+	 * Look in /flags/ directory for a huge list of flags for usage
 	 * @var array
 	 */
 	public $flag = array();
@@ -87,7 +78,7 @@ class WPGlobus_Config {
 	public $flags_url = '';
 
 	/**
-	 * Stores languages in  pairs code=>name
+	 * Stores languages in pairs code=>name
 	 * @var array
 	 */
 	public $language_name = array();
@@ -103,6 +94,12 @@ class WPGlobus_Config {
 	 * @var array
 	 */
 	public $locale = array();
+
+	/**
+	 * Stores version and update from WPGlobus Mini info
+	 * @var array
+	 */
+	public $version = array();
 
 	/**
 	 * Use flag name for navigation menu : 'name' || 'code' || ''
@@ -130,6 +127,12 @@ class WPGlobus_Config {
 	public $option = 'wpglobus_option';
 
 	/**
+	 * WPGlobus option versioning key
+	 * @var string
+	 */
+	public static $option_versioning = 'wpglobus_option_versioning';
+
+	/**
 	 * WPGlobus option key for $language_name
 	 * @var string
 	 */
@@ -147,7 +150,6 @@ class WPGlobus_Config {
 	 */
 	public $option_locale = 'wpglobus_option_locale';
 
-
 	/**
 	 * WPGlobus option key for $flag
 	 * @var string
@@ -160,6 +162,14 @@ class WPGlobus_Config {
 	public $css_editor = '';
 
 	/**
+	 * WPGlobus devmode.
+	 * @var string
+	 */
+	public $toggle = 'on';
+
+//	protected $url_mode;
+
+	/**
 	 * Constructor
 	 */
 	function __construct() {
@@ -167,26 +177,99 @@ class WPGlobus_Config {
 		add_action( 'plugins_loaded', array(
 			$this,
 			'on_load_textdomain'
-		) );
+		), 0 );
 
 		$this->_get_options();
 	}
 
 	/**
+	 * Check plugin version and update versioning option
+	 *
+	 * @param object $object Plugin_Upgrader
+	 * @param array  $options
+	 *
+	 * @return void
+	 */
+	public static function on_activate(
+		/** @noinspection PhpUnusedParameterInspection */
+		$object = null,
+		$options = array()
+	) {
+
+		if ( empty( $options ) ) {
+			return;
+		} else {
+			if ( WPGLOBUS_PLUGIN_BASENAME != $options['plugin'] || 'update' != $options['action'] ) {
+				return;
+			}
+		}
+
+		$version = get_option( self::$option_versioning );
+
+		if ( empty( $version ) ) {
+			$version = array();
+			/**
+			 * Now check 'wpglobus_option'
+			 */
+			$option = get_option( 'wpglobus_option' );
+
+			if ( empty( $option ) ) {
+				/**
+				 * This is first start WPGlobus plugin with version >= 1.0.0
+				 */
+				$version['current_version'] = WPGLOBUS_VERSION;
+			} else {
+				/**
+				 * This is start WPGlobus plugin after update from version 0.1.0 or 0.1.1
+				 */
+				$version['current_version']       = WPGLOBUS_VERSION;
+				$version['wpglobus_mini_warning'] = true;
+			}
+		} else {
+			/**
+			 * Update option after silent plugin activate
+			 */
+			$version['current_version'] = WPGLOBUS_VERSION;
+
+			delete_option( self::$option_versioning );
+		}
+
+		update_option( self::$option_versioning, $version );
+	}
+
+	/**
+	 * Set current language
+	 *
+	 * @param string $locale
+	 */
+	function set_language( $locale ) {
+		/**
+		 * @todo Maybe use option for disable/enable setting current language corresponding with $locale ?
+		 */
+		foreach ( $this->locale as $language => $value ) {
+			if ( $locale == $value ) {
+				$this->language = $language;
+				break;
+			}
+		}
+	}
+
+	/**
 	 * Load textdomain
+	 * @since 1.0.0
 	 * @return void
 	 */
 	function on_load_textdomain() {
-		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages/' );
+		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 	}
 
 	/**
 	 * Return URL mode
 	 * @int
 	 */
-	function get_url_mode() {
-		return $this->url_mode;
-	}
+//	function get_url_mode() {
+//		return $this->url_mode;
+//	}
 
 	/**
 	 * Set flags URL
@@ -303,7 +386,7 @@ class WPGlobus_Config {
 
 		$wpglobus_option = get_option( $this->option );
 
-		/*
+		/**
 		 * FIX: after "Reset All" Redux options we must reset all WPGlobus options
 		 * first of all look at $wpglobus_option['more_languages']
 		 */
@@ -318,7 +401,7 @@ class WPGlobus_Config {
 
 		}
 
-		/*
+		/**
 		 * Get enabled languages and default language ( just one main language )
 		 */
 		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty( $wpglobus_option['enabled_languages'] ) ) {
@@ -328,37 +411,34 @@ class WPGlobus_Config {
 					$this->enabled_languages[] = $lang;
 				}
 			}
-
-			/** get first language in $this->enabled_languages for default language */
-			reset( $wpglobus_option['enabled_languages'] );
-			$this->default_language = key( $wpglobus_option['enabled_languages'] );
-		}
-		/** check WPGLOBUS_DEFAULT_LANGUAGE defined in wp-config.php */
-		if ( defined( 'WPGLOBUS_DEFAULT_LANGUAGE' ) ) {
-			$this->default_language = WPGLOBUS_DEFAULT_LANGUAGE;
-			if ( ! in_array( $this->default_language, $this->enabled_languages ) ) {
-				array_unshift( $this->enabled_languages, $this->default_language );
-			}
+			
+			/**
+			 * Set default language
+			 */	
+			$this->default_language = $this->enabled_languages[0];
 		}
 
-		/*
-		 *
-		 *
+		/**
+		 * Set available languages for editors
+		 */
+		$this->open_languages = $this->enabled_languages;
+
+		/**
+		 * Set flags URL
 		 */
 		$this->_set_flags_url();
 
-		/*
+		/**
 		 * Get URL mode
 		 */
-		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-			$this->url_mode = $wpglobus_option['url_mode'];
-		}
-		else {
-			$this->url_mode = self::GLOBUS_URL_PATH;
-		}
-		/** @todo make loading url_mode from wp-config.php */
+//		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
+//			$this->url_mode = $wpglobus_option['url_mode'];
+//		} else {
+//			$this->url_mode = self::GLOBUS_URL_PATH;
+//		}
+		//}
 
-		/*
+		/**
 		 * Get languages name
 		 * big array of used languages
 		 */
@@ -371,17 +451,17 @@ class WPGlobus_Config {
 
 		}
 
-		/*
+		/**
 		 * Get locales
 		 */
 		$this->locale = get_option( $this->option_locale );
 
-		/*
+		/**
 		 * Get en_language_name
 		 */
 		$this->en_language_name = get_option( $this->option_en_language_names );
 
-		/*
+		/**
 		 * Get option 'show_flag_name'
 		 */
 		if ( isset( $wpglobus_option['show_flag_name'] ) ) {
@@ -390,13 +470,12 @@ class WPGlobus_Config {
 		if ( defined( 'WPGLOBUS_SHOW_FLAG_NAME' ) ) {
 			if ( 'name' === WPGLOBUS_SHOW_FLAG_NAME ) {
 				$this->show_flag_name = 'name';
-			}
-			elseif ( false === WPGLOBUS_SHOW_FLAG_NAME || '' === WPGLOBUS_SHOW_FLAG_NAME ) {
+			} elseif ( false === WPGLOBUS_SHOW_FLAG_NAME || '' === WPGLOBUS_SHOW_FLAG_NAME ) {
 				$this->show_flag_name = '';
 			}
 		}
 
-		/*
+		/**
 		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'
 		 */
 		$this->nav_menu = '';
@@ -407,36 +486,55 @@ class WPGlobus_Config {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
 		}
 
-		/*
+		/**
 		 * Get custom CSS
 		 */
 		if ( isset( $wpglobus_option['css_editor'] ) ) {
 			$this->css_editor = $wpglobus_option['css_editor'];
 		}
 
-
-		/*
-		 *
+		/**
+		 * Get flag files without path
 		 */
 		$option = get_option( $this->option_flags );
 		if ( ! empty( $option ) ) {
 			$this->flag = $option;
 		}
 
+		/**
+		 * Get versioning info
+		 */
+		$option = get_option( self::$option_versioning );
+		if ( empty( $option ) ) {
+			$this->version = array();
+		} else {
+			$this->version = $option;
+		}
+
+		/**
+		 * WPGlobus devmode.
+		 */
+		if ( isset( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) {
+			$this->toggle = 'off';
+		} else {
+			$this->toggle = 'on';
+		}
+
 	}
 
 	/**
+	 * @deprecated 1.0.0
 	 * Hard-coded enabled url modes
 	 * @return array
 	 */
 	function _getEnabledUrlMode() {
 		$enabled_url_mode = array(
-			self::GLOBUS_URL_QUERY => 'URL query',
-			self::GLOBUS_URL_PATH  => 'URL path'
+			self::GLOBUS_URL_PATH => 'URL path'
 		);
+
 		return $enabled_url_mode;
 	}
 
-} // end of class WPGlobus_Config
+} //class
 
 # --- EOF

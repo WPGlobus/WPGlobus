@@ -148,6 +148,7 @@
                 wp_enqueue_style(
                     'redux-field-sorder-css',
                     ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.css',
+                    array(),
                     time(),
                     true
                 );

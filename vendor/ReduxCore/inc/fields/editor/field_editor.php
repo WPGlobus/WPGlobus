@@ -97,6 +97,7 @@
                 wp_enqueue_style(
                     'redux-field-editor-css',
                     ReduxFramework::$_url . 'inc/fields/editor/field_editor.css',
+                    array(),
                     time(),
                     true
                 );

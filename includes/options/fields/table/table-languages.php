@@ -91,13 +91,13 @@ class LanguagesTable extends WP_List_table {
 		foreach ( $WPGlobus_Config->language_name as $code => $name ) {
 
 			$row['wpglobus_ID']               = $code;
-			$row['wpglobus_file']             = $WPGlobus_Config->flag[$code];
+			$row['wpglobus_file']             = $WPGlobus_Config->flag[ $code ];
 			$row['wpglobus_flag']             =
-				'<img src="' . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[$code] . '" />';
-			$row['wpglobus_locale']           = $WPGlobus_Config->locale[$code];
+				'<img src="' . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[ $code ] . '" />';
+			$row['wpglobus_locale']           = $WPGlobus_Config->locale[ $code ];
 			$row['wpglobus_code']             = $code;
 			$row['wpglobus_language_name']    = $name;
-			$row['wpglobus_en_language_name'] = $WPGlobus_Config->en_language_name[$code];
+			$row['wpglobus_en_language_name'] = $WPGlobus_Config->en_language_name[ $code ];
 
 			$this->data[] = $row;
 
@@ -195,8 +195,9 @@ class LanguagesTable extends WP_List_table {
 		$columns = array();
 
 		foreach ( $this->table_fields as $field => $attrs ) {
-			$columns[$field] = $attrs['caption'];
+			$columns[ $field ] = $attrs['caption'];
 		}
+
 		return $columns;
 
 	}
@@ -215,12 +216,13 @@ class LanguagesTable extends WP_List_table {
 		$sortable_columns = array();
 		foreach ( $this->table_fields as $field => $attrs ) {
 			if ( $attrs['sortable'] ) {
-				$sortable_columns[$field] = array(
+				$sortable_columns[ $field ] = array(
 					$field,
 					false
 				);
 			}
 		}
+
 		return $sortable_columns;
 	}
 
@@ -233,8 +235,10 @@ class LanguagesTable extends WP_List_table {
 	/**
 	 * User's defined function
 	 * @since    0.1
+	 *
 	 * @param $a
 	 * @param $b
+	 *
 	 * @internal param $
 	 * @return int
 	 */
@@ -256,13 +260,13 @@ class LanguagesTable extends WP_List_table {
 		// If no order, default to asc
 		if ( ! empty( $_GET['order'] ) ) {
 			$order = $_GET['order'];
-		}
-		else {
+		} else {
 			$order = ( isset( $attrs['order'] ) ) ? $attrs['order'] : 'asc';
 		}
 
 		// Determine sort order
-		$result = strcmp( $a[$orderby], $b[$orderby] );
+		$result = strcmp( $a[ $orderby ], $b[ $orderby ] );
+
 		// Send final sort direction to usort
 		return ( $order === 'asc' ) ? $result : - $result;
 	}
@@ -270,7 +274,9 @@ class LanguagesTable extends WP_List_table {
 	/**
 	 * Define function for add item actions by name 'column_flag'
 	 * @since 1.0.0
+	 *
 	 * @param  $item array
+	 *
 	 * @return string
 	 */
 	function column_wpglobus_flag( $item ) {
@@ -280,7 +286,9 @@ class LanguagesTable extends WP_List_table {
 	/**
 	 * Define function for add item actions by name 'column_flag'
 	 * @since 1.0.0
+	 *
 	 * @param  $item array
+	 *
 	 * @return string
 	 */
 	function column_wpglobus_locale( $item ) {
@@ -290,7 +298,9 @@ class LanguagesTable extends WP_List_table {
 	/**
 	 * Define function for add item actions by name 'column_code'
 	 * @since 1.0.0
+	 *
 	 * @param  $item array
+	 *
 	 * @return string
 	 */
 	function column_wpglobus_code( $item ) {
@@ -313,8 +323,7 @@ class LanguagesTable extends WP_List_table {
 						if ( $item['wpglobus_code'] == $WPGlobus_Config->default_language ) {
 							$actions['delete'] =
 								sprintf( '<a %1s href="#">%2s</a>', $class, __( 'Default language', 'wpglobus' ) );
-						}
-						else {
+						} else {
 							$actions['delete'] =
 								sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['wpglobus_code'] . '&action=delete', $data['caption'] );
 						}
@@ -325,8 +334,7 @@ class LanguagesTable extends WP_List_table {
 
 			return sprintf( '%1s %2s', $item['wpglobus_code'], $this->row_actions( $actions ) );
 
-		}
-		else {
+		} else {
 
 			return $item['wpglobus_code'];
 
@@ -338,16 +346,17 @@ class LanguagesTable extends WP_List_table {
 	/**
 	 * Define function for add item actions by name 'column_default'
 	 * @since 1.0.0
+	 *
 	 * @param  $item        array
 	 * @param  $column_name string
+	 *
 	 * @return string
 	 */
 	function column_default( $item, $column_name ) {
 
-		if ( isset( $this->table_fields[$column_name] ) ) {
-			return $item[$column_name];
-		}
-		else {
+		if ( isset( $this->table_fields[ $column_name ] ) ) {
+			return $item[ $column_name ];
+		} else {
 			return print_r( $item, true ); //Show the whole array for troubleshooting purposes
 		}
 
@@ -356,7 +365,9 @@ class LanguagesTable extends WP_List_table {
 	/**
 	 * Define function for add item actions by name 'column_cb'
 	 * @since 1.0.0
+	 *
 	 * @param  $item array
+	 *
 	 * @return string
 	 */
 	function column_cb( $item ) {
@@ -369,20 +380,17 @@ class LanguagesTable extends WP_List_table {
 	 * Generate the table navigation above or below the table
 	 * @since  3.1.0
 	 * @access protected
+	 *
+	 * @param string $which
 	 */
 	function display_tablenav( $which ) {
 		?>
 
 		<div class="tablenav <?php echo esc_attr( $which ); ?>">
 
-			<?php /** @todo The $which parameter is added in WP 4.0 -- waiting until
-			 * the ticket solved
-			 * @url https://core.trac.wordpress.org/ticket/28867#comment:8
 			<div class="alignleft actions bulkactions">
-			< ?php $this->bulk_actions('top'); ? >
+				<?php $this->bulk_actions(); ?>
 			</div>
-			 */
-			?>
 			<?php
 			$this->extra_tablenav( $which );
 			$this->pagination( $which );

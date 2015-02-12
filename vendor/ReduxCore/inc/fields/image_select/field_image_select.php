@@ -201,6 +201,7 @@
                 wp_enqueue_style(
                     'redux-field-image-select-css',
                     ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.css',
+                    array(),
                     time(),
                     true
                 );

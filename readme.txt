@@ -13,12 +13,12 @@ Adds a language switcher drop-down to navigation menus.
 
 **WPGlobus** is a plugin for bilingual / multilingual WordPress sites.
 
-The current version of the plugin adds a drop-down menu to a navigation menu, thus allowing to switch between languages, by changing the URL.
+The current version of the plugin:
 
-Two versions of URL modification are currently supported:
+* Provides admin interface to translate posts, pages, menus, categories and tags to multiple languages.
+* Adds a drop-down menu to a navigation menu, thus allowing to switch between languages, by changing the URL (`/{language}/page/`)
 
-* `/{language}/page/`
-* `/page/?lang={language}`
+**Note:** the `/page/?lang={language}` URLs or subdomains are not supported.
 
 The administrator interface allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
@@ -48,10 +48,21 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 1. Admin interface: languages setup.
 2. Front: language switcher in the twentyfourteen theme menu.
 
+== Upgrade Notice ==
+
+= 1.0.0 =
+The plugin is currently in BETA stage! WPGlobus only supports the localization URLs in the form of example.com/xx/page/. We do not plan to support subdomains (xx.example.com) and language queries (example.com?lang=xx).
+
 == Changelog ==
 
-= 14.07.28 =
-* Initial release (language switcher)
+= 1.0.0 =
+* Beta-version of the plugin.
+* Can translate all basic elements of WordPress
+* WP-SEO by Yoast is supported
+* ?lang= URLs dropped
 
-= 14.12.19 =
+= 0.1.1 =
 * FIX: Notice 'walker_nav_menu_start_el' filter in functions.php twentyfifteen theme
+
+= 0.1.0 =
+* Initial release (language switcher)

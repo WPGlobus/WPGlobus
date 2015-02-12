@@ -1,16 +1,7 @@
 <?php
 /**
- * @package   WPGlobus
- * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
+ * @package   WPGlobus/Admin
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-if ( class_exists( 'WPGlobus_Language_Edit' ) ) {
-	return;
-}
 
 /**
  * Class WPGlobus_Language_Edit
@@ -78,11 +69,9 @@ class WPGlobus_Language_Edit {
 
 		if ( isset( $_GET['action'] ) && 'delete' == $_GET['action'] ) {
 			$this->action = 'delete';
-		}
-		elseif ( isset( $_GET['action'] ) && 'edit' == $_GET['action'] ) {
+		} elseif ( isset( $_GET['action'] ) && 'edit' == $_GET['action'] ) {
 			$this->action = 'edit';
-		}
-		else {
+		} else {
 			$this->action = 'add';
 		}
 
@@ -93,12 +82,10 @@ class WPGlobus_Language_Edit {
 		if ( isset( $_POST['submit'] ) ) {
 			$this->submit = true;
 			$this->process_submit();
-		}
-		elseif ( isset( $_POST['delete'] ) ) {
+		} elseif ( isset( $_POST['delete'] ) ) {
 			$this->process_delete();
 			$this->action = 'done';
-		}
-		else {
+		} else {
 			$this->get_data();
 		}
 
@@ -116,13 +103,13 @@ class WPGlobus_Language_Edit {
 	 */
 	function on_print_scripts() {
 		if ( 'done' == $this->action ) {
-			$location = '?page=' . WPGlobus::OPTIONS_PAGE_SLUG;		?>
+			$location = '?page=' . WPGlobus::OPTIONS_PAGE_SLUG; ?>
 
 			<script type='text/javascript'>
 				jQuery(document).ready(function () {
-					window.location=window.location.protocol+'//'+window.location.host+window.location.pathname+'<?php echo $location; ?>'
+					window.location = window.location.protocol + '//' + window.location.host + window.location.pathname + '<?php echo $location; ?>'
 				})
-			</script>		<?php
+			</script>        <?php
 		}
 	}
 
@@ -136,9 +123,9 @@ class WPGlobus_Language_Edit {
 
 		$opts = get_option( $WPGlobus_Config->option );
 
-		if ( isset( $opts['enabled_languages'][$this->language_code] ) ) {
+		if ( isset( $opts['enabled_languages'][ $this->language_code ] ) ) {
 
-			unset( $opts['enabled_languages'][$this->language_code] );
+			unset( $opts['enabled_languages'][ $this->language_code ] );
 
 			/** FIX: reset $opts['more_languages'] */
 			if ( array_key_exists( 'more_languages', $opts ) ) {
@@ -148,16 +135,16 @@ class WPGlobus_Language_Edit {
 
 		}
 
-		unset( $WPGlobus_Config->language_name[$this->language_code] );
+		unset( $WPGlobus_Config->language_name[ $this->language_code ] );
 		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
 
-		unset( $WPGlobus_Config->flag[$this->language_code] );
+		unset( $WPGlobus_Config->flag[ $this->language_code ] );
 		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
 
-		unset( $WPGlobus_Config->en_language_name[$this->language_code] );
+		unset( $WPGlobus_Config->en_language_name[ $this->language_code ] );
 		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
 
-		unset( $WPGlobus_Config->locale[$this->language_code] );
+		unset( $WPGlobus_Config->locale[ $this->language_code ] );
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
 	}
@@ -174,8 +161,7 @@ class WPGlobus_Language_Edit {
 				$this->save();
 				$this->submit_messages['success'][] = __( 'Options updated', 'wpglobus' );
 			}
-		}
-		else {
+		} else {
 			if ( $this->check_fields( $code ) ) {
 				$this->save( true );
 				$this->submit_messages['success'][] = __( 'Options updated', 'wpglobus' );
@@ -187,7 +173,9 @@ class WPGlobus_Language_Edit {
 
 	/**
 	 * Save data language to DB
+	 *
 	 * @param bool $update_code If need to change language code
+	 *
 	 * @return void
 	 */
 	function save( $update_code = false ) {
@@ -196,13 +184,13 @@ class WPGlobus_Language_Edit {
 		$old_code = '';
 		if ( $update_code && 'edit' == $this->action ) {
 			$old_code = isset( $_GET['lang'] ) ? $_GET['lang'] : $old_code;
-			if ( isset( $WPGlobus_Config->language_name[$old_code] ) ) {
-				unset( $WPGlobus_Config->language_name[$old_code] );
+			if ( isset( $WPGlobus_Config->language_name[ $old_code ] ) ) {
+				unset( $WPGlobus_Config->language_name[ $old_code ] );
 			}
 
 			$opts = get_option( $WPGlobus_Config->option );
-			if ( isset( $opts['enabled_languages'][$old_code] ) ) {
-				unset( $opts['enabled_languages'][$old_code] );
+			if ( isset( $opts['enabled_languages'][ $old_code ] ) ) {
+				unset( $opts['enabled_languages'][ $old_code ] );
 				update_option( $WPGlobus_Config->option, $opts );
 			}
 			if ( isset( $opts['more_languages'] ) && $old_code == $opts['more_languages'] ) {
@@ -210,25 +198,25 @@ class WPGlobus_Language_Edit {
 				update_option( $WPGlobus_Config->option, $opts );
 			}
 		}
-		$WPGlobus_Config->language_name[$this->language_code] = $this->language_name;
+		$WPGlobus_Config->language_name[ $this->language_code ] = $this->language_name;
 		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
 
-		if ( $update_code && isset( $WPGlobus_Config->flag[$old_code] ) ) {
-			unset( $WPGlobus_Config->flag[$old_code] );
+		if ( $update_code && isset( $WPGlobus_Config->flag[ $old_code ] ) ) {
+			unset( $WPGlobus_Config->flag[ $old_code ] );
 		}
-		$WPGlobus_Config->flag[$this->language_code] = $this->flag;
+		$WPGlobus_Config->flag[ $this->language_code ] = $this->flag;
 		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
 
-		if ( $update_code && isset( $WPGlobus_Config->en_language_name[$old_code] ) ) {
-			unset( $WPGlobus_Config->en_language_name[$old_code] );
+		if ( $update_code && isset( $WPGlobus_Config->en_language_name[ $old_code ] ) ) {
+			unset( $WPGlobus_Config->en_language_name[ $old_code ] );
 		}
-		$WPGlobus_Config->en_language_name[$this->language_code] = $this->en_language_name;
+		$WPGlobus_Config->en_language_name[ $this->language_code ] = $this->en_language_name;
 		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
 
-		if ( $update_code && isset( $WPGlobus_Config->locale[$old_code] ) ) {
-			unset( $WPGlobus_Config->locale[$old_code] );
+		if ( $update_code && isset( $WPGlobus_Config->locale[ $old_code ] ) ) {
+			unset( $WPGlobus_Config->locale[ $old_code ] );
 		}
-		$WPGlobus_Config->locale[$this->language_code] = $this->locale;
+		$WPGlobus_Config->locale[ $this->language_code ] = $this->locale;
 		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
 
 		if ( $update_code ) {
@@ -238,8 +226,10 @@ class WPGlobus_Language_Edit {
 
 	/**
 	 * Check form fields
+	 *
 	 * @param string $lang_code
 	 * @param bool   $check_code Use for existence check language code
+	 *
 	 * @return bool True if no errors, false otherwise.
 	 */
 	function check_fields( $lang_code, $check_code = true ) {
@@ -271,18 +261,22 @@ class WPGlobus_Language_Edit {
 		$this->language_code    = $lang_code;
 		$this->flag             = isset( $_POST['wpglobus_flags'] ) ? $_POST['wpglobus_flags'] : '';
 		$this->language_name    = isset( $_POST['wpglobus_language_name'] ) ? $_POST['wpglobus_language_name'] : '';
-		$this->en_language_name = isset( $_POST['wpglobus_en_language_name'] ) ? $_POST['wpglobus_en_language_name'] : '';
+		$this->en_language_name =
+			isset( $_POST['wpglobus_en_language_name'] ) ? $_POST['wpglobus_en_language_name'] : '';
 		$this->locale           = isset( $_POST['wpglobus_locale'] ) ? $_POST['wpglobus_locale'] : '';
 
 		if ( empty( $this->submit_messages['errors'] ) ) {
 			return true;
 		}
+
 		return false;
 	}
 
 	/**
 	 * Check existing language code in global $WPGlobus_Config
+	 *
 	 * @param string $code
+	 *
 	 * @return bool true if language code exists
 	 */
 	function language_exists( $code ) {
@@ -290,6 +284,7 @@ class WPGlobus_Language_Edit {
 		if ( array_key_exists( $code, $WPGlobus_Config->language_name ) ) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -301,10 +296,10 @@ class WPGlobus_Language_Edit {
 
 		if ( 'edit' == $this->action || 'delete' == $this->action ) {
 			global $WPGlobus_Config;
-			$this->language_name    = $WPGlobus_Config->language_name[$this->language_code];
-			$this->en_language_name = $WPGlobus_Config->en_language_name[$this->language_code];
-			$this->locale           = $WPGlobus_Config->locale[$this->language_code];
-			$this->flag             = $WPGlobus_Config->flag[$this->language_code];
+			$this->language_name    = $WPGlobus_Config->language_name[ $this->language_code ];
+			$this->en_language_name = $WPGlobus_Config->en_language_name[ $this->language_code ];
+			$this->locale           = $WPGlobus_Config->locale[ $this->language_code ];
+			$this->flag             = $WPGlobus_Config->flag[ $this->language_code ];
 		}
 		$this->_get_flags();
 	}
@@ -318,12 +313,10 @@ class WPGlobus_Language_Edit {
 		$disabled = '';
 		if ( 'edit' == $this->action ) {
 			$header = __( 'Edit Language', 'wpglobus' );
-		}
-		elseif ( 'delete' == $this->action ) {
+		} elseif ( 'delete' == $this->action ) {
 			$header   = __( 'Are you sure you want to delete?', 'wpglobus' );
 			$disabled = 'disabled';
-		}
-		else {
+		} else {
 			$header = __( 'Add Language', 'wpglobus' );
 		}
 		?>
@@ -334,67 +327,73 @@ class WPGlobus_Language_Edit {
 					$mess = '';
 					foreach ( $this->submit_messages['errors'] as $message ) {
 						$mess .= $message . '<br />';
-					}    ?>
+					} ?>
 					<div class="error"><?php echo $mess; ?></div> <?php
-				}
-				elseif ( ! empty( $this->submit_messages['success'] ) ) {
+				} elseif ( ! empty( $this->submit_messages['success'] ) ) {
 					$mess = '';
 					foreach ( $this->submit_messages['success'] as $message ) {
 						$mess .= $message . '<br />';
-					}    ?>
+					} ?>
 					<div class="updated"><?php echo $mess; ?></div> <?php
 				}
-			}                ?>
+			} ?>
 			<form method="post" action="">
 				<table class="form-table">
 					<tr>
-						<th scope="row"><label for="wpglobus_language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label>
+						<th scope="row"><label
+								for="wpglobus_language_code"><?php _e( 'Language Code', 'wpglobus' ); ?></label>
 						</th>
 						<td>
-							<input name="wpglobus_language_code" <?php echo $disabled; ?> type="text" id="wpglobus_language_code"
-								   value="<?php echo $this->language_code; ?>" class="regular-text"/>
+							<input name="wpglobus_language_code" <?php echo $disabled; ?> type="text"
+							       id="wpglobus_language_code"
+							       value="<?php echo $this->language_code; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( '2-Letter ISO Language Code for the Language you want to insert. (Example: en)', 'wpglobus' ); ?></p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="wpglobus_flags"><?php _e( 'Language flag', 'wpglobus' ); ?></label></th>
+						<th scope="row"><label for="wpglobus_flags"><?php _e( 'Language flag', 'wpglobus' ); ?></label>
+						</th>
 						<td>
-							<select id="wpglobus_flags" name="wpglobus_flags" style="width:300px;" class="populate">    <?php
+							<select id="wpglobus_flags" name="wpglobus_flags" style="width:300px;"
+							        class="populate">    <?php
 								foreach ( $this->all_flags as $file_name ) :
 									if ( $this->flag == $file_name ) {
 										$selected = 'selected';
-									}
-									else {
+									} else {
 										$selected = '';
 									}
 									?>
 									<option <?php echo $selected; ?>
 										value="<?php echo $file_name; ?>"><?php echo $file_name; ?></option>    <?php
-								endforeach;    ?>
+								endforeach; ?>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><label for="wpglobus_language_name"><?php _e( 'Name', 'wpglobus' ); ?></label></th>
+						<th scope="row"><label for="wpglobus_language_name"><?php _e( 'Name', 'wpglobus' ); ?></label>
+						</th>
 						<td><input name="wpglobus_language_name" type="text" id="wpglobus_language_name"
-								   value="<?php echo $this->language_name; ?>" class="regular-text"/>
+						           value="<?php echo $this->language_name; ?>" class="regular-text"/>
 
-							<p class="description"><?php _e( 'The name of the language in its native alphabet. (Examples: English, Русский)', 'wpglobus' ); ?></p></td>
+							<p class="description"><?php _e( 'The name of the language in its native alphabet. (Examples: English, Русский)', 'wpglobus' ); ?></p>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row"><label
-								for="wpglobus_en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label></th>
+								for="wpglobus_en_language_name"><?php _e( 'Name in English', 'wpglobus' ); ?></label>
+						</th>
 						<td><input name="wpglobus_en_language_name" type="text" id="wpglobus_en_language_name"
-								   value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
+						           value="<?php echo $this->en_language_name; ?>" class="regular-text"/>
 
 							<p class="description"><?php _e( 'The name of the language in English', 'wpglobus' ); ?></p>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="wpglobus_locale"><?php _e( 'Locale', 'wpglobus' ); ?></label></th>
-						<td><input name="wpglobus_locale" type="text" id="wpglobus_locale" value="<?php echo $this->locale; ?>"
-								   class="regular-text"/>
+						<td><input name="wpglobus_locale" type="text" id="wpglobus_locale"
+						           value="<?php echo $this->locale; ?>"
+						           class="regular-text"/>
 
 							<p class="description"><?php _e( 'PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)', 'wpglobus' ); ?></p>
 						</td>
@@ -404,13 +403,12 @@ class WPGlobus_Language_Edit {
 				if ( 'edit' == $this->action || 'add' == $this->action ) {
 					?>
 					<p class="submit"><input class="button button-primary" type="submit" name="submit"
-											 value="<?php esc_attr_e( 'Save Changes', 'wpglobus' ); ?>"></p>    <?php
-				}
-				elseif ( 'delete' == $this->action ) {
+					                         value="<?php esc_attr_e( 'Save Changes', 'wpglobus' ); ?>"></p>    <?php
+				} elseif ( 'delete' == $this->action ) {
 					?>
 					<p class="submit"><input class="button button-primary" type="submit" name="delete"
-											 value="<?php esc_attr_e( 'Delete Language', 'wpglobus' ); ?>"></p>    <?php
-				}    ?>
+					                         value="<?php esc_attr_e( 'Delete Language', 'wpglobus' ); ?>"></p>    <?php
+				} ?>
 
 			</form>
 		</div>
@@ -434,6 +432,6 @@ class WPGlobus_Language_Edit {
 
 	}
 
-}
+} // class
 
 # --- EOF
