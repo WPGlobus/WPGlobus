@@ -424,6 +424,7 @@ jQuery(document).ready(function () {
 				// Run the item handle title when the navigation label was loaded.
 				// @see wp-admin\js\nav-menu.js:537
 				$('.edit-menu-item-title').trigger('change');
+				wpNavMenu.menusChanged = false;
 				
                 $('.wpglobus-menu-item').on('change', function (event) {
                     var $this = $(this),
