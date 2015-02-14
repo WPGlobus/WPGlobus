@@ -327,6 +327,7 @@ var wpglobus_wpseo = function () {
 	var t = jQuery('.wpseotab.general .form-table');
 	var ids = attrs.data('ids');
 	var names = attrs.data('names');
+	var wpseosnippet_url = '';
 	
 	ids = ids+',' + attrs.data('qtip');
 	ids = ids.split(',');
@@ -361,7 +362,12 @@ var wpglobus_wpseo = function () {
 			$id.attr('id',id+'_'+l);
 			jQuery('#'+id+'_'+l).attr('data-language',l);
 		});
-		jQuery('#wpseosnippet_'+l+' .url').text($e.data('url-'+l));
+		if ( 'complete' == $e.data('permalink') ) {
+			wpseosnippet_url = $e.data('url-'+l);
+		} else {
+			wpseosnippet_url = $e.data('url-'+l)+jQuery('#editable-post-name-full').text()+'/';
+		}	
+		jQuery('#wpseosnippet_'+l+' .url').text(wpseosnippet_url);
 		wpglobus_updateSnippet(l);
 		
 		//

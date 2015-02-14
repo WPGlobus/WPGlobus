@@ -62,4 +62,7 @@ ul.wpglobus-important li {
   text-indent: -14px;
   margin-left: 24px;
 }
+.wpglobus-state-error {
+  border: 1px solid #f00 !important;
+}
 /*# sourceMappingURL=wpglobus-admin.css.map */

@@ -96,12 +96,13 @@ class WPGlobus_Language_Edit {
 		add_action( 'admin_footer', array( $this, 'on_print_scripts' ), 99 );
 
 	}
-
+	
 	/**
 	 * Add script in admin footer
 	 * @return void
 	 */
 	function on_print_scripts() {
+		
 		if ( 'done' == $this->action ) {
 			$location = '?page=' . WPGlobus::OPTIONS_PAGE_SLUG; ?>
 
@@ -111,6 +112,16 @@ class WPGlobus_Language_Edit {
 				})
 			</script>        <?php
 		}
+
+		wp_register_script(
+			'wpglobus-form',
+			WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-form" . WPGlobus::SCRIPT_SUFFIX() . ".js",
+			array( 'jquery' ),
+			WPGLOBUS_VERSION,
+			true
+		);
+		wp_enqueue_script( 'wpglobus-form' );		
+		
 	}
 
 	/**
@@ -337,7 +348,7 @@ class WPGlobus_Language_Edit {
 					<div class="updated"><?php echo $mess; ?></div> <?php
 				}
 			} ?>
-			<form method="post" action="">
+			<form id="wpglobus_edit_form" method="post" action="">
 				<table class="form-table">
 					<tr>
 						<th scope="row"><label

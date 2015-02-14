@@ -55,6 +55,10 @@ The plugin is currently in BETA stage! WPGlobus only supports the localization U
 
 == Changelog ==
 
+= 1.0.1 =
+* FIX: Line breaks disappear in visual mode during autosave
+* FIX: Correct display of slug in WP-SEO panel
+
 = 1.0.0 =
 * Beta-version of the plugin.
 * Can translate all basic elements of WordPress

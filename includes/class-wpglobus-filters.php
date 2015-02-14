@@ -449,7 +449,68 @@ class WPGlobus_Filters {
 			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
 		}
 		return $description;
-	}			
+	}		
+
+	/**
+	 * Filter @see heartbeat_received
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param array $response
+	 * @param array $data
+	 * @param string $screen_id
+	 * @return array
+	 */
+	public static function filter__heartbeat_received($response, $data, $screen_id) {
+		if ( ! empty( $data['wp_autosave'] ) ) {
+
+			$title_wrap = false;
+			$content_wrap = false;
+			$post_title_ext = '';
+			$content_ext = '';
+			
+			foreach( WPGlobus::Config()->enabled_languages as $language ) {
+				
+				if ( $language == WPGlobus::Config()->default_language ) {
+					$post_title_ext = str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['post_title'] . WPGlobus::LOCALE_TAG_END;
+					$content_ext 	= str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['content'] . WPGlobus::LOCALE_TAG_END;
+				}
+				
+				if ( !empty($data['wp_autosave']['post_title_' . $language]) ) {
+					$title_wrap = true;
+					$post_title_ext .= str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['post_title_' . $language] . WPGlobus::LOCALE_TAG_END;
+				}	
+				
+				if ( !empty($data['wp_autosave']['content_' . $language]) ) {
+					$content_wrap = true;
+					$content_ext .= str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['content_' . $language] . WPGlobus::LOCALE_TAG_END;
+				}				
+			
+			}
+			
+			if ( $title_wrap ) {
+				$data['wp_autosave']['post_title'] = $post_title_ext; 
+			}
+			
+			if ( $content_wrap ) {
+				$data['wp_autosave']['content'] = $content_ext; 
+			}		
+		
+			$saved = wp_autosave( $data['wp_autosave'] );
+
+			if ( is_wp_error( $saved ) ) {
+				$response['wp_autosave'] = array( 'success' => false, 'message' => $saved->get_error_message() );
+			} elseif ( empty( $saved ) ) {
+				$response['wp_autosave'] = array( 'success' => false, 'message' => __( 'Error while saving.' ) );
+			} else {
+				/* translators: draft saved date format, see http://php.net/date */
+				$draft_saved_date_format = __( 'g:i:s a' );
+				/* translators: %s: date and time */
+				$response['wp_autosave'] = array( 'success' => true, 'message' => sprintf( __( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) ) );
+			}
+		}
+		return $response;
+	}
 
 } // class
 

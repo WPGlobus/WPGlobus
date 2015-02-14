@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPGlobus
  * Plugin URI: https://github.com/WPGlobus/WPGlobus
- * Description: WordPress internationalization helper
+ * Description: A WordPress Globalization Plugin
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: WPGlobus
  * Author URI: http://www.wpglobus.com/
  * Network: false
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.0.0' );
+define( 'WPGLOBUS_VERSION', '1.0.1' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 global $WPGlobus;

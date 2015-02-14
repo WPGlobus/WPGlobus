@@ -75,6 +75,11 @@ if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
 add_filter( 'nav_menu_description', array( 'WPGlobus_Filters', 'filter__nav_menu_description' ), 0 );
 
 /**
+ * Filter @see heartbeat_received
+ */
+add_filter( 'heartbeat_received',   array( 'WPGlobus_Filters', 'filter__heartbeat_received'    ), 501, 3 );
+
+/**
  * Filter for @see home_url
  */
 add_filter( 'home_url', array( 'WPGlobus_Filters', 'filter__home_url' ) );

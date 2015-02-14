@@ -15,7 +15,7 @@ class WPGlobus {
 	const LOCALE_TAG_CLOSE = '}';
 
 	const URL_WPGLOBUS_SITE = 'http://www.wpglobus.com/';
-	
+
 	/**
 	 * @var string
 	 */
@@ -65,6 +65,13 @@ class WPGlobus {
 	protected static $_SCRIPT_SUFFIX = '.min';
 
 	/**
+	 * @return string
+	 */
+	public static function SCRIPT_SUFFIX(){
+		return self::$_SCRIPT_SUFFIX;
+	}
+
+	/**
 	 * Are we using our version of Redux or someone else's?
 	 * @var string
 	 */
@@ -96,9 +103,9 @@ class WPGlobus {
 		/** @todo maybe move this action to Class WPGlobus_Upgrade ? */
 		add_action( 'admin_init', array(
 			$this,
-			'on_admin_init' 
+			'on_admin_init'
 		) );
-		
+
 		global $WPGlobus_Config, $WPGlobus_Options;
 
 		global $pagenow;
@@ -130,18 +137,17 @@ class WPGlobus {
 		 *
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
-		$this->disabled_entities = apply_filters('wpglobus_disabled_entities', $this->disabled_entities);
+		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
 
 		/**
 		 * Filter the array of opened languages.
-		 * 
 		 * @since 1.0.0
 		 *
 		 * @param array $open_languages Array of opened languages.
-		 */	
-		self::Config()->open_languages = apply_filters('wpglobus_open_languages', self::Config()->open_languages);
+		 */
+		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
 
-		
+
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -297,10 +303,10 @@ class WPGlobus {
 			$this->menus = self::_get_nav_menus();
 
 			/** @todo */
-//			add_filter( 'wp_list_pages', array(
-//				$this,
-//				'on_wp_list_pages'
-//			), 99, 2 );
+			//			add_filter( 'wp_list_pages', array(
+			//				$this,
+			//				'on_wp_list_pages'
+			//			), 99, 2 );
 
 			add_filter( 'wp_page_menu', array(
 				$this,
@@ -407,7 +413,15 @@ class WPGlobus {
 			return;
 		}
 
-		$permalink = get_permalink( $post->ID ); ?>
+		$permalink = array();
+		if ( 'publish' == $post->post_status ) {
+			$permalink['url']    = get_permalink( $post->ID );
+			$permalink['action'] = 'complete';
+		} else {
+			$permalink['url']    = trailingslashit( home_url() );
+			$permalink['action'] = '';
+		}
+		?>
 
 		<div id="wpglobus-wpseo-tabs">    <?php
 			/**
@@ -422,25 +436,27 @@ class WPGlobus {
 				$order = 0;
 				foreach ( self::Config()->open_languages as $language ) { ?>
 					<li id="wpseo-link-tab-<?php echo $language; ?>"
-							data-language="<?php echo $language; ?>"
-							data-order="<?php echo $order; ?>"
-							class="wpglobus-wpseo-tab"><a
+					    data-language="<?php echo $language; ?>"
+					    data-order="<?php echo $order; ?>"
+					    class="wpglobus-wpseo-tab"><a
 							href="#wpseo-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 					</li> <?php
-					$order++;
+					$order ++;
 				} ?>
-			</ul> 	<?php
-			
-			foreach ( self::Config()->open_languages as $language ) { 
-				$url = WPGlobus_Utils::get_convert_url($permalink, $language); 
-				$metadesc = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);	
-				$wpseotitle = get_post_meta($post->ID, '_yoast_wpseo_title', true);	
-				$focuskw = get_post_meta($post->ID, '_yoast_wpseo_focuskw', true); ?>		
-				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" 
-					data-language="<?php echo $language; ?>" data-url-<?php echo $language; ?>="<?php echo $url; ?>"
-					data-metadesc="<?php echo WPGlobus_Core::text_filter($metadesc, $language, WPGlobus::RETURN_EMPTY); ?>"
-					data-wpseotitle="<?php echo WPGlobus_Core::text_filter($wpseotitle, $language, WPGlobus::RETURN_EMPTY); ?>"
-					data-focuskw="<?php echo WPGlobus_Core::text_filter($focuskw, $language, WPGlobus::RETURN_EMPTY); ?>">
+			</ul>    <?php
+
+			foreach ( self::Config()->open_languages as $language ) {
+				$url        = WPGlobus_Utils::get_convert_url( $permalink['url'], $language );
+				$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
+				$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
+				$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); ?>
+				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
+				     data-language="<?php echo $language; ?>"
+				     data-url-<?php echo $language; ?>="<?php echo $url; ?>"
+				     data-permalink="<?php echo $permalink['action']; ?>"
+				     data-metadesc="<?php echo WPGlobus_Core::text_filter( $metadesc, $language, WPGlobus::RETURN_EMPTY ); ?>"
+				     data-wpseotitle="<?php echo WPGlobus_Core::text_filter( $wpseotitle, $language, WPGlobus::RETURN_EMPTY ); ?>"
+				     data-focuskw="<?php echo WPGlobus_Core::text_filter( $focuskw, $language, WPGlobus::RETURN_EMPTY ); ?>">
 				</div> <?php
 			} ?>
 		</div>
@@ -536,6 +552,7 @@ class WPGlobus {
 	 * @todo use $WPGlobus_Config to determine running this function?
 	 *
 	 * @param string $plugin
+	 *
 	 * @return void
 	 */
 	public static function activated( $plugin ) {
@@ -545,10 +562,10 @@ class WPGlobus {
 			 */
 			$options['plugin'] = $plugin;
 			$options['action'] = 'update';
-			WPGlobus_Config::on_activate(null, $options);
-		
+			WPGlobus_Config::on_activate( null, $options );
+
 			set_transient( 'wpglobus_activated', '', 60 * 60 * 24 );
-		}	
+		}
 	}
 
 	/**
@@ -717,10 +734,10 @@ class WPGlobus {
 			'default_language'  => $WPGlobus_Config->default_language,
 			'language'          => $WPGlobus_Config->language,
 			'enabled_languages' => $WPGlobus_Config->enabled_languages,
-			'open_languages' 	=> $WPGlobus_Config->open_languages,
-			'en_language_name' => $WPGlobus_Config->en_language_name,
-			'locale_tag_start' => self::LOCALE_TAG_START,
-			'locale_tag_end' => self::LOCALE_TAG_END	
+			'open_languages'    => $WPGlobus_Config->open_languages,
+			'en_language_name'  => $WPGlobus_Config->en_language_name,
+			'locale_tag_start'  => self::LOCALE_TAG_START,
+			'locale_tag_end'    => self::LOCALE_TAG_END
 		);
 
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
@@ -808,14 +825,16 @@ class WPGlobus {
 				 * Add template for standard excerpt meta box
 				 */
 				$data['template'] = '';
-				foreach( WPGlobus::Config()->enabled_languages as $language ) {
-					
-					$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
-					
-					$classes = in_array($language, WPGlobus::Config()->open_languages) ? 'wpglobus-excerpt' : 'wpglobus-excerpt hidden';
-					
-					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . WPGlobus::Config()->en_language_name[$language] .'" class="' . $classes . '" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
-					$data['template'] .= WPGlobus_Core::text_filter($post->post_excerpt, $language, $return);
+				foreach ( WPGlobus::Config()->enabled_languages as $language ) {
+
+					$return =
+						$language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+
+					$classes =
+						in_array( $language, WPGlobus::Config()->open_languages ) ? 'wpglobus-excerpt' : 'wpglobus-excerpt hidden';
+
+					$data['template'] .= '<textarea data-language="' . $language . '" placeholder="' . WPGlobus::Config()->en_language_name[ $language ] . '" class="' . $classes . '" rows="1" cols="40" name="excerpt-' . $language . '" id="excerpt-' . $language . '">';
+					$data['template'] .= WPGlobus_Core::text_filter( $post->post_excerpt, $language, $return );
 					$data['template'] .= '</textarea>';
 
 					if ( $this->vendors_scripts['WPSEO'] ) {
@@ -850,7 +869,7 @@ class WPGlobus {
 
 				$page_action = 'menu-edit';
 				$menu_items  = array();
-				$post_titles  = array();
+				$post_titles = array();
 
 				global $wpdb;
 				$items =
@@ -899,12 +918,12 @@ class WPGlobus {
 						}
 
 					endif;
-					
+
 					$menu_items[ $item->ID ]['item-title'] =
 						WPGlobus_Core::text_filter( $item->post_title, $WPGlobus_Config->default_language );
-						
-					$post_titles[$item->post_title] = $menu_items[ $item->ID ]['item-title'];
-					
+
+					$post_titles[ $item->post_title ] = $menu_items[ $item->ID ]['item-title'];
+
 					foreach ( self::Config()->enabled_languages as $language ) {
 
 						$return =
@@ -922,7 +941,7 @@ class WPGlobus {
 					}
 				}
 
-				$data['items'] = $menu_items;
+				$data['items']       = $menu_items;
 				$data['post_titles'] = $post_titles;
 
 				$i18n['save_nav_menu'] = __( '*) Available after the menu is saved.', 'wpglobus' );
@@ -1039,13 +1058,22 @@ class WPGlobus {
 				true
 			);
 			wp_enqueue_script( 'wpglobus-admin' );
+
+			/**
+			 * We need to send the HTML breaks and not \r\n to the JS,
+			 * because we do element.text(...), and \r\n are being removed by TinyMCE
+			 * See other places with the same bookmark.
+			 * @bookmark EDITOR_LINE_BREAKS
+			 */
+			$post_content_autop = wpautop( $post_content );
+
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusAdmin',
 				array(
 					'version'      => WPGLOBUS_VERSION,
 					'page'         => $page_action,
-					'content'      => $post_content,
+					'content'      => $post_content_autop,
 					'title'        => $post_title,
 					'excerpt'      => $post_excerpt,
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
@@ -1105,10 +1133,10 @@ class WPGlobus {
 	 */
 	function _get_quickedit_template() {
 		$t = '';
-		foreach( self::Config()->open_languages as $language ) {
+		foreach ( self::Config()->open_languages as $language ) {
 			$t .= '<label>';
 			$t .= '<span class="input-text-wrap">';
-			$t .= '<input id="" data-language="' . $language. '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . self::Config()->en_language_name[$language] .'">';
+			$t .= '<input id="filled-in-js" data-language="' . $language . '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . self::Config()->en_language_name[ $language ] . '">';
 			$t .= '</span>';
 			$t .= '</label>';
 		}
@@ -1309,7 +1337,7 @@ class WPGlobus {
 				$ref = str_replace( '%%lang%%', $language, $ref_source );
 			}
 			?>
-			<link rel="alternate" hreflang="<?php echo $hreflang; ?>" href="<?php echo $ref; ?>" />
+			<link rel="alternate" hreflang="<?php echo $hreflang; ?>" href="<?php echo $ref; ?>"/>
 		<?php
 		}
 
@@ -1523,19 +1551,19 @@ class WPGlobus {
 			return;
 		}
 
-		if ( $this->disabled_entity($post->post_type) ) {
-			return;	
-		}			
+		if ( $this->disabled_entity( $post->post_type ) ) {
+			return;
+		}
 
-		foreach( self::Config()->open_languages as $language ) :
+		foreach ( self::Config()->open_languages as $language ) :
 			if ( $language == self::Config()->default_language ) {
 
 				continue;
 
 			} else { ?>
 
-				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">	<?php
-					wp_editor( WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_EMPTY), 'content_' . $language, array(
+				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">    <?php
+					wp_editor( WPGlobus_Core::text_filter( $post->post_content, $language, WPGlobus::RETURN_EMPTY ), 'content_' . $language, array(
 						'_content_editor_dfw' => true,
 						#'dfw' => true,
 						'drag_drop_upload'    => true,
@@ -1610,41 +1638,49 @@ class WPGlobus {
 
 		/**
 		 * Now we save post content and post title for all enabled languages for post.php, post-new.php
-		 * @todo Let's don't forget about other pages, like 'admin-ajax.php', 'nav-menus.php' and more
+		 * @todo Check also 'admin-ajax.php', 'nav-menus.php', etc.
 		 */
 		$enabled_pages[] = 'post.php';
 		$enabled_pages[] = 'post-new.php';
 
 		if ( ! in_array( $pagenow, $enabled_pages ) ) {
+			/**
+			 * See other places with the same bookmark.
+			 * @bookmark EDITOR_LINE_BREAKS
+			 */
+			//			$data['post_content'] = trim( $data['post_content'], '</p><p>' );
+
 			return $data;
 		}
 
 		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;		
-		
-		$devmode = true;	
-		foreach( $WPGlobus_Config->open_languages as $language ) {
+		global $WPGlobus_Config;
+
+		$devmode = true;
+		foreach ( $WPGlobus_Config->open_languages as $language ) {
 			if ( $language != $WPGlobus_Config->default_language ) {
-				if ( isset($postarr['content_' . $language]) ) {
-					$devmode = false;	
+				if ( isset( $postarr[ 'content_' . $language ] ) ) {
+					$devmode = false;
 					break;
 				}
 			}
 		}
 
 		if ( ! $devmode ) :
-		
-			$data['post_title'] = trim($data['post_title']);
-			if ( !empty($data['post_title']) ) {
-				$data['post_title'] = WPGlobus::add_locale_marks( $data['post_title'], $WPGlobus_Config->default_language );
-			}
-			
-			$data['post_content'] = trim($data['post_content']);
-			if ( !empty($data['post_content']) ) {
-				$data['post_content'] = WPGlobus::add_locale_marks( $data['post_content'], $WPGlobus_Config->default_language );
+
+			$data['post_title'] = trim( $data['post_title'] );
+			if ( ! empty( $data['post_title'] ) ) {
+				$data['post_title'] =
+					WPGlobus::add_locale_marks( $data['post_title'], $WPGlobus_Config->default_language );
 			}
 
-			foreach( $WPGlobus_Config->open_languages as $language ) :
+			$data['post_content'] = trim( $data['post_content'] );
+			if ( ! empty( $data['post_content'] ) ) {
+				$data['post_content'] =
+					WPGlobus::add_locale_marks( $data['post_content'], $WPGlobus_Config->default_language );
+			}
+
+			foreach ( $WPGlobus_Config->open_languages as $language ) :
 				if ( $language == $WPGlobus_Config->default_language ) {
 
 					continue;
@@ -1654,41 +1690,43 @@ class WPGlobus {
 					/**
 					 * Join post title for enabled languages
 					 */
-					$title = isset($postarr['post_title_' . $language]) ? trim($postarr['post_title_' . $language]) : '';
-					if ( !empty($title) ) {
-						$data['post_title'] .= WPGlobus::add_locale_marks( $postarr['post_title_' . $language], $language );
+					$title =
+						isset( $postarr[ 'post_title_' . $language ] ) ? trim( $postarr[ 'post_title_' . $language ] ) : '';
+					if ( ! empty( $title ) ) {
+						$data['post_title'] .= WPGlobus::add_locale_marks( $postarr[ 'post_title_' . $language ], $language );
 					}
-					
+
 					/**
 					 * Join post content for enabled languages
 					 */
-					$content = isset($postarr['content_' . $language]) ? trim($postarr['content_' . $language]) : '';
-					if ( !empty($content) ) {
-						$data['post_content'] .= WPGlobus::add_locale_marks( $postarr['content_' . $language], $language );
+					$content =
+						isset( $postarr[ 'content_' . $language ] ) ? trim( $postarr[ 'content_' . $language ] ) : '';
+					if ( ! empty( $content ) ) {
+						$data['post_content'] .= WPGlobus::add_locale_marks( $postarr[ 'content_' . $language ], $language );
 					}
 
 				}
 			endforeach;
-		
+
 		endif;  //  $devmode
-		
-		$data = apply_filters('wpglobus_save_post_data', $data, $postarr, $devmode);
-		
+
+		$data = apply_filters( 'wpglobus_save_post_data', $data, $postarr, $devmode );
+
 		return $data;
 
 	}
 
 	/**
 	 * Add wrapper for every table in enabled languages at edit-tags.php page
-	 *
 	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
 
 		foreach ( self::Config()->enabled_languages as $language ) {
 			$tab_suffix = $language == self::Config()->default_language ? 'default' : $language;
-			$classes = in_array($language, self::Config()->open_languages) ? '' : 'hidden'; ?>
-			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>" class="<?php echo $classes; ?>">
+			$classes    = in_array( $language, self::Config()->open_languages ) ? '' : 'hidden'; ?>
+			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
+			     class="<?php echo $classes; ?>">
 			</div>
 		<?php
 		}
@@ -1697,20 +1735,19 @@ class WPGlobus {
 
 	/**
 	 * Add language tabs for edit taxonomy name at edit-tags.php page
-	 *
 	 * @return void
 	 */
 	function on_add_language_tabs_edit_taxonomy() {
 
 		if ( $this->disabled_entity() ) {
 			return;
-		}	?>
-		
+		} ?>
+
 		<ul class="wpglobus-taxonomy-tabs-ul">    <?php
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
 				<li id="link-tab-<?php echo $tab_suffix; ?>" class="">
-					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[$language]; ?></a>
+					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 				</li> <?php
 			} ?>
 		</ul>    <?php
@@ -1718,7 +1755,6 @@ class WPGlobus {
 
 	/**
 	 * Add language tabs for jQueryUI
-	 *
 	 * @return void
 	 */
 	function on_add_language_tabs() {
@@ -1734,11 +1770,11 @@ class WPGlobus {
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
 				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
-						data-order="<?php echo $order; ?>"
-						class="wpglobus-post-tab">
-						<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+				    data-order="<?php echo $order; ?>"
+				    class="wpglobus-post-tab">
+					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 				</li> <?php
-				$order++;
+				$order ++;
 			} ?>
 		</ul>    <?php
 
@@ -1757,23 +1793,24 @@ class WPGlobus {
 			return;
 		}
 
-		foreach( self::Config()->open_languages as $language ) :
-		
-			if ( $language == self::Config()->default_language ) { 
-				
-				continue; 
-			
-			} else {	?>	
-			
-				<div id="titlediv-<?php echo $language;?>" class="titlediv-wpglobus">
-					<div id="titlewrap-<?php echo $language;?>" class="titlewrap-wpglobus">
-						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>" for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-						<input type="text" name="post_title_<?php echo $language; ?>" size="30" 
-							value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter($post->post_title, $language, WPGlobus::RETURN_EMPTY) ) ); ?>"
-							id="title_<?php echo $language;?>" 
-							class="title_wpglobus"
-							data-language="<?php echo $language; ?>"	
-							autocomplete="off" />
+		foreach ( self::Config()->open_languages as $language ) :
+
+			if ( $language == self::Config()->default_language ) {
+
+				continue;
+
+			} else { ?>
+
+				<div id="titlediv-<?php echo $language; ?>" class="titlediv-wpglobus">
+					<div id="titlewrap-<?php echo $language; ?>" class="titlewrap-wpglobus">
+						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>"
+						       for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
+						<input type="text" name="post_title_<?php echo $language; ?>" size="30"
+						       value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter( $post->post_title, $language, WPGlobus::RETURN_EMPTY ) ) ); ?>"
+						       id="title_<?php echo $language; ?>"
+						       class="title_wpglobus"
+						       data-language="<?php echo $language; ?>"
+						       autocomplete="off"/>
 					</div> <!-- #titlewrap -->
 					<div class="inside">
 						<div id="edit-slug-box-<?php echo $language; ?>" class="wpglobus-edit-slug-box hide-if-no-js">
@@ -1943,23 +1980,21 @@ class WPGlobus {
 
 		return $WPGlobus_Config;
 	}
-	
+
 	/**
 	 * Check for transient wpglobus_activated
-	 *
 	 * @since 1.0.0
-	 *
-	 * @return void 
+	 * @return void
 	 */
 	function on_admin_init() {
 
-		if ( false !== get_transient('wpglobus_activated') ) {
-			delete_transient('wpglobus_activated');	
-			wp_redirect(admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ));
-			die();	
-		}			
-	
-	}	
+		if ( false !== get_transient( 'wpglobus_activated' ) ) {
+			delete_transient( 'wpglobus_activated' );
+			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
+			die();
+		}
+
+	}
 
 }
 
