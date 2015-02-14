@@ -365,7 +365,7 @@ var wpglobus_wpseo = function () {
 		if ( 'complete' == $e.data('permalink') ) {
 			wpseosnippet_url = $e.data('url-'+l);
 		} else {
-			wpseosnippet_url = $e.data('url-'+l)+jQuery('#editable-post-name-full').text();
+			wpseosnippet_url = $e.data('url-'+l)+jQuery('#editable-post-name-full').text()+'/';
 		}	
 		jQuery('#wpseosnippet_'+l+' .url').text(wpseosnippet_url);
 		wpglobus_updateSnippet(l);
