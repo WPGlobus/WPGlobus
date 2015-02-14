@@ -3,7 +3,6 @@
  * WPGlobus Uninstall
  * Deletes options
  * @package   WPGlobus
- * @copyright Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
