@@ -510,10 +510,14 @@ jQuery(document).ready(function () {
 
                 // setup for default language
                 $('#title').val(WPGlobusAdmin.title);
+
                 /**
-                 * @todo This is a quick patch to fix disappearing line breaks after post save - need to test!
+                 * See other places with the same bookmark.
+                 * @bookmark EDITOR_LINE_BREAKS
                  */
-                $('#content').text(WPGlobusAdmin.content.replace(/\n/g, "<p>"));
+                //$('#content').text(WPGlobusAdmin.content.replace(/\n/g, "<p>"));
+
+                $('#content').text(WPGlobusAdmin.content);
                 $('#excerpt').addClass('hidden');
 				
                 if (typeof WPGlobusVendor !== "undefined") {
