@@ -3,6 +3,8 @@
  * WPGlobus Uninstall
  * Deletes options
  * @package   WPGlobus
+ * @todo Should we clean all languages?
+ * @todo Should we ask whether to delete options or not?
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
