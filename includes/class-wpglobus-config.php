@@ -215,12 +215,12 @@ class WPGlobus_Config {
 
 			if ( empty( $option ) ) {
 				/**
-				 * This is first start WPGlobus plugin with version >= 1.0.0
+				 * This is the first activation with version >= 1.0.0
 				 */
 				$version['current_version'] = WPGLOBUS_VERSION;
 			} else {
 				/**
-				 * This is start WPGlobus plugin after update from version 0.1.0 or 0.1.1
+				 * This is an upgrade from version 0.1.x
 				 */
 				$version['current_version']       = WPGLOBUS_VERSION;
 				$version['wpglobus_mini_warning'] = true;
