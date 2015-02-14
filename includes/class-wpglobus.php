@@ -188,7 +188,9 @@ class WPGlobus {
 			}
 
 			if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
-
+				
+				remove_filter( 'the_content', 'wpautop' );
+				
 				/**
 				 * Four filters for adding language column to edit.php page
 				 */
