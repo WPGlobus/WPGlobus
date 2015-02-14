@@ -188,8 +188,6 @@ class WPGlobus {
 
 			if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
 				
-				remove_filter( 'the_content', 'wpautop' );
-				
 				/**
 				 * Four filters for adding language column to edit.php page
 				 */
@@ -1618,6 +1616,7 @@ class WPGlobus {
 		$enabled_pages[] = 'post-new.php';
 
 		if ( ! in_array( $pagenow, $enabled_pages ) ) {
+			$data['post_content'] = trim($data['post_content'], '</p><p>');
 			return $data;
 		}
 
