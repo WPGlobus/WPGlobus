@@ -112,10 +112,10 @@ class WPGlobus_Language_Edit {
 				})
 			</script>        <?php
 		}
-		
+
 		wp_register_script(
 			'wpglobus-form',
-			WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-form.js",
+			WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-form" . WPGlobus::SCRIPT_SUFFIX() . ".js",
 			array( 'jquery' ),
 			WPGLOBUS_VERSION,
 			true

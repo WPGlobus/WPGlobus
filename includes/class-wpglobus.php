@@ -65,6 +65,13 @@ class WPGlobus {
 	protected static $_SCRIPT_SUFFIX = '.min';
 
 	/**
+	 * @return string
+	 */
+	public static function SCRIPT_SUFFIX(){
+		return self::$_SCRIPT_SUFFIX;
+	}
+
+	/**
 	 * Are we using our version of Redux or someone else's?
 	 * @var string
 	 */
