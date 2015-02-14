@@ -406,8 +406,16 @@ class WPGlobus {
 		if ( $this->disabled_entity( $type ) ) {
 			return;
 		}
-
-		$permalink = get_permalink( $post->ID ); ?>
+		
+		$permalink = array();
+		if ( 'publish' == $post->post_status ) {
+			$permalink['url'] = get_permalink( $post->ID );
+			$permalink['action'] = 'complete';
+		} else {
+			$permalink['url'] = trailingslashit(home_url());
+			$permalink['action'] = '';
+		}	
+		?>
 
 		<div id="wpglobus-wpseo-tabs">    <?php
 			/**
@@ -432,12 +440,14 @@ class WPGlobus {
 			</ul> 	<?php
 			
 			foreach ( self::Config()->open_languages as $language ) { 
-				$url = WPGlobus_Utils::get_convert_url($permalink, $language); 
+				$url = WPGlobus_Utils::get_convert_url($permalink['url'], $language);
 				$metadesc = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);	
 				$wpseotitle = get_post_meta($post->ID, '_yoast_wpseo_title', true);	
 				$focuskw = get_post_meta($post->ID, '_yoast_wpseo_focuskw', true); ?>		
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general" 
-					data-language="<?php echo $language; ?>" data-url-<?php echo $language; ?>="<?php echo $url; ?>"
+					data-language="<?php echo $language; ?>" 
+					data-url-<?php echo $language; ?>="<?php echo $url; ?>"
+					data-permalink="<?php echo $permalink['action']; ?>"
 					data-metadesc="<?php echo WPGlobus_Core::text_filter($metadesc, $language, WPGlobus::RETURN_EMPTY); ?>"
 					data-wpseotitle="<?php echo WPGlobus_Core::text_filter($wpseotitle, $language, WPGlobus::RETURN_EMPTY); ?>"
 					data-focuskw="<?php echo WPGlobus_Core::text_filter($focuskw, $language, WPGlobus::RETURN_EMPTY); ?>">
