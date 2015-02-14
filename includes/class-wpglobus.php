@@ -1129,7 +1129,7 @@ class WPGlobus {
 		foreach ( self::Config()->open_languages as $language ) {
 			$t .= '<label>';
 			$t .= '<span class="input-text-wrap">';
-			$t .= '<input id="" data-language="' . $language . '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . self::Config()->en_language_name[ $language ] . '">';
+			$t .= '<input id="filled-in-js" data-language="' . $language . '" style="width:100%;" class="ptitle wpglobus-quick-edit-title" type="text" value="" name="post_title-' . $language . '" placeholder="' . self::Config()->en_language_name[ $language ] . '">';
 			$t .= '</span>';
 			$t .= '</label>';
 		}
