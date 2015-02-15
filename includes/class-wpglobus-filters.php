@@ -512,6 +512,27 @@ class WPGlobus_Filters {
 		return $response;
 	}
 
+	/**
+	 * Filter @see wp_nav_menu_objects
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $object
+	 * @return array
+	 */
+	public static function filter__nav_menu_objects($object) {
+
+		if ( is_array( $object ) ) {
+			foreach ( $object as &$post ) {
+				if ( ! empty( $post->attr_title ) ) {
+						$post->attr_title = WPGlobus_Core::text_filter( $post->attr_title, WPGlobus::Config()->language );
+				}	
+			}
+		}			
+		return $object;
+	
+	}	
+
 } // class
 
 # --- EOF
