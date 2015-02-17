@@ -476,22 +476,24 @@ jQuery(document).ready(function () {
                 });
             },
             post_edit: function () {
-				$.ajaxPrefilter(function( options ) {
-					if ( options.data.indexOf('wp_autosave') >= 0 ) {
+				// Hook into the heartbeat-send
+				$(document).on('heartbeat-send', function(e, data) {
+					if ( typeof data['wp_autosave'] !== 'undefined' ) {
+						data['wpglobus_heartbeat'] = 'wpglobus';
 						$.each(WPGlobusAdmin.data.open_languages, function(i,l){
 							var v = $('#title_'+l).val() || '';
 							v = $.trim(v);
 							if ( v != '' ) {
-								options.data = options.data + '&data%5Bwp_autosave%5D%5Bpost_title_'+l+'%5D='+v;
+								data['wp_autosave']['post_title_'+l] = v;
 							}	
 							v = $('#content_'+l).val() || '';
 							v = $.trim(v);
 							if ( v != '' ) {
-								options.data = options.data + '&data%5Bwp_autosave%5D%5Bcontent_'+l+'%5D='+v;
+								data['wp_autosave']['content_'+l] = v;
 							}	
-						});
-					}
-				});					
+						});						
+					}	
+				});				
 			
                 // Make post-body-content as tabs container
                 $('#post-body-content').prepend($('.wpglobus-post-tabs-ul'));
