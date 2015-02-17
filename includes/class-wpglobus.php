@@ -1660,6 +1660,20 @@ class WPGlobus {
 			return $data;
 		}
 
+		if ( 'trash' == $postarr['post_status'] ) {
+			/**
+			 * Don't working with move to trash
+			 */
+			return $data;			
+		}		
+		
+		if ( isset($_GET['action']) &&  'untrash' == $_GET['action'] ) {
+			/**
+			 * Don't working with untrash
+			 */
+			return $data;			
+		}			
+		
 		$devmode = false;
 		if ( 'off' == WPGlobus::Config()->toggle ) {
 			$devmode = true;
