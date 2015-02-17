@@ -556,6 +556,7 @@ jQuery(document).ready(function () {
 								delimiter = i == 0 ? '' : '-';
 								t = $('#title_'+l).val();
 								if ( t.length > 0 ) {
+									if ( title.length == 0 ) { delimiter = '';}
 									title = title + delimiter + t;
 								}
 							});
