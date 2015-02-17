@@ -55,6 +55,12 @@ The plugin is currently in BETA stage! WPGlobus only supports the localization U
 
 == Changelog ==
 
+= 1.0.2 =
+* FIX: Save posts correctly if no default language title entered
+* FIX: Preserve languages for trashed, and later restored posts
+* FIX: Save languages correctly at heartbeat for pending and drafts
+* Added filter to translate title attributes in nav menus
+
 = 1.0.1 =
 * FIX: Line breaks disappear in visual mode during autosave
 * FIX: Correct display of slug in WP-SEO panel
