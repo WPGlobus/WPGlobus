@@ -1629,6 +1629,13 @@ class WPGlobus {
 			 */
 			return $data;
 		}
+		
+		if ( 'auto-draft' == $postarr['post_status'] ) {
+			/**
+			 * Auto draft was automatically created with no data
+			 */
+			return $data;	
+		}	
 
 		if ( $this->disabled_entity( $data['post_type'] ) ) {
 			return $data;
@@ -1653,35 +1660,41 @@ class WPGlobus {
 			return $data;
 		}
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
-
-		$devmode = true;
-		foreach ( $WPGlobus_Config->open_languages as $language ) {
-			if ( $language != $WPGlobus_Config->default_language ) {
-				if ( isset( $postarr[ 'content_' . $language ] ) ) {
-					$devmode = false;
-					break;
-				}
-			}
-		}
-
+		if ( 'trash' == $postarr['post_status'] ) {
+			/**
+			 * Don't working with move to trash
+			 */
+			return $data;			
+		}		
+		
+		if ( isset($_GET['action']) &&  'untrash' == $_GET['action'] ) {
+			/**
+			 * Don't working with untrash
+			 */
+			return $data;			
+		}			
+		
+		$devmode = false;
+		if ( 'off' == WPGlobus::Config()->toggle ) {
+			$devmode = true;
+		}	
+		
 		if ( ! $devmode ) :
 
 			$data['post_title'] = trim( $data['post_title'] );
 			if ( ! empty( $data['post_title'] ) ) {
 				$data['post_title'] =
-					WPGlobus::add_locale_marks( $data['post_title'], $WPGlobus_Config->default_language );
+					WPGlobus::add_locale_marks( $data['post_title'], WPGlobus::Config()->default_language );
 			}
 
 			$data['post_content'] = trim( $data['post_content'] );
 			if ( ! empty( $data['post_content'] ) ) {
 				$data['post_content'] =
-					WPGlobus::add_locale_marks( $data['post_content'], $WPGlobus_Config->default_language );
+					WPGlobus::add_locale_marks( $data['post_content'], WPGlobus::Config()->default_language );
 			}
 
-			foreach ( $WPGlobus_Config->open_languages as $language ) :
-				if ( $language == $WPGlobus_Config->default_language ) {
+			foreach ( WPGlobus::Config()->open_languages as $language ) :
+				if ( $language == WPGlobus::Config()->default_language ) {
 
 					continue;
 

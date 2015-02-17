@@ -69,6 +69,14 @@ if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
 	//add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
 }
 
+if ( ! is_admin() ) {
+	/**
+	 * Filter for @see wp_nav_menu_objects
+	 * We need it only on front for translate attribute title in nav menus
+	 */
+	add_filter( 'wp_nav_menu_objects', array( 'WPGlobus_Filters', 'filter__nav_menu_objects' ), 0 );	
+}
+	
 /**
  * Filter for @see nav_menu_description
  */
