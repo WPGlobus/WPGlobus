@@ -115,6 +115,23 @@ class WPGlobus_Filters {
 		}
 
 		/**
+		 * Don't filter term names for trash and untrash single post
+		 * @see we check post.php page instead of edit.php because redirect 
+		 */	
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset($_GET['action']) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
+		) {
+			return $terms;
+		}	
+		
+		/**
+		 * Don't filter term names bulk trash and untrash posts
+		 */
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset($_GET['action']) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
+		) {
+			return $terms;
+		}
+		
+		/**
 		 * Don't filter term names for bulk edit post from edit.php page
 		 */
 		if ( is_admin() && WPGlobus_Utils::is_function_in_backtrace( 'bulk_edit_posts' ) ) {
