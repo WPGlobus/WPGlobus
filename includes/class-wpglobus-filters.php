@@ -462,7 +462,29 @@ class WPGlobus_Filters {
 	 * @return array
 	 */
 	public static function filter__heartbeat_received($response, $data, $screen_id) {
+		
+		if ( false !== strpos($_SERVER['HTTP_REFERER'], 'wpglobus=off') ) {
+			/**
+			 * Check $_SERVER['HTTP_REFERER'] for wpglobus toggle is off because wpglobus-admin.js doesn't loaded in this mode 
+			 */
+			return $response;
+		}	
+			
 		if ( ! empty( $data['wp_autosave'] ) ) {
+
+			if ( empty($data['wp_autosave']['post_id']) || (int) $data['wp_autosave']['post_id'] == 0 ) {
+				/**
+				 * wp_autosave may come from edit.php page
+				 */
+				return $response;
+			}	
+			
+			if ( empty($data['wpglobus_heartbeat']) ) {
+				/**
+				 * Check for wpglobus key 
+				 */
+				return $response;
+			}
 
 			$title_wrap = false;
 			$content_wrap = false;
@@ -470,22 +492,24 @@ class WPGlobus_Filters {
 			$content_ext = '';
 			
 			foreach( WPGlobus::Config()->enabled_languages as $language ) {
-				
 				if ( $language == WPGlobus::Config()->default_language ) {
-					$post_title_ext = str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['post_title'] . WPGlobus::LOCALE_TAG_END;
-					$content_ext 	= str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['content'] . WPGlobus::LOCALE_TAG_END;
+					 
+					$post_title_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['post_title'], $language );
+					$content_ext 	.= WPGlobus::add_locale_marks( $data['wp_autosave']['content'], $language );
+				
+				} else {
+				
+					if ( !empty($data['wp_autosave']['post_title_' . $language]) ) {
+						$title_wrap = true;
+						$post_title_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['post_title_' . $language], $language );
+					}	
+					
+					if ( !empty($data['wp_autosave']['content_' . $language]) ) {
+						$content_wrap = true;
+						$content_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['content_' . $language], $language );
+					}				
+		
 				}
-				
-				if ( !empty($data['wp_autosave']['post_title_' . $language]) ) {
-					$title_wrap = true;
-					$post_title_ext .= str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['post_title_' . $language] . WPGlobus::LOCALE_TAG_END;
-				}	
-				
-				if ( !empty($data['wp_autosave']['content_' . $language]) ) {
-					$content_wrap = true;
-					$content_ext .= str_replace('%s', $language, WPGlobus::LOCALE_TAG_START) . $data['wp_autosave']['content_' . $language] . WPGlobus::LOCALE_TAG_END;
-				}				
-			
 			}
 			
 			if ( $title_wrap ) {
@@ -495,7 +519,16 @@ class WPGlobus_Filters {
 			if ( $content_wrap ) {
 				$data['wp_autosave']['content'] = $content_ext; 
 			}		
-		
+			
+			/**
+			 * Filter before autosave
+			 * 
+			 * @since 1.0.2
+			 *
+			 * @param array $data['wp_autosave'] Array of post data.
+			 */			
+			$data['wp_autosave'] = apply_filters( 'wpglobus_autosave_post_data', $data['wp_autosave'] );
+
 			$saved = wp_autosave( $data['wp_autosave'] );
 
 			if ( is_wp_error( $saved ) ) {
@@ -508,6 +541,7 @@ class WPGlobus_Filters {
 				/* translators: %s: date and time */
 				$response['wp_autosave'] = array( 'success' => true, 'message' => sprintf( __( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) ) );
 			}
+			
 		}
 		return $response;
 	}
