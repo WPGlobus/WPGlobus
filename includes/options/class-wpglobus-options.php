@@ -277,7 +277,7 @@ class WPGlobus_Options {
 					'mode'     => 'css',
 					'theme'    => 'chrome',
 					'compiler' => 'false',
-					'desc'     => __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `readme.txt` file.', 'wpglobus' ),
+					'desc'     => __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `style-samples.css` file.', 'wpglobus' ),
 					'subtitle' => __( '(Optional)', 'wpglobus' ),
 					'default'  => '',
 					'rows'     => 15
