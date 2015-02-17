@@ -141,6 +141,16 @@ class WPGlobus_Filters {
 
 		}
 
+		/**
+		 * Don't filter term names for heartbeat autosave
+		 */		
+		if ( WPGlobus_WP::is_http_post_action( 'heartbeat' ) &&
+			WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) &&
+			! empty( $_POST['data']['wp_autosave'] )
+		) {
+			return $terms;
+		}
+		
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
