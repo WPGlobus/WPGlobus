@@ -542,7 +542,28 @@ jQuery(document).ready(function () {
                     });
                 }
 
-				$('#publish').click(function(ev) {
+				$('body').on('click', '#publish, #save-post', function(ev) {
+					if ( WPGlobusAdmin.data.open_languages.length > 1 ) {
+						// if empty title in default language make it from another titles
+						var t = $('#title').val(),
+							index, title = '',
+							delimiter = '';
+
+						if ( t.length == 0 ) {
+							index = WPGlobusAdmin.data.open_languages.indexOf(WPGlobusAdmin.data.default_language);
+							WPGlobusAdmin.data.open_languages.splice(index, 1);
+							$(WPGlobusAdmin.data.open_languages).each(function(i,l){
+								delimiter = i == 0 ? '' : '-';
+								t = $('#title_'+l).val();
+								if ( t.length > 0 ) {
+									title = title + delimiter + t;
+								}
+							});
+						}	
+						if ( title.length > 0 ) {
+							$('#title').val(title);
+						}
+					}	
 					if ( typeof WPGlobusAdmin.data.tagsdiv === 'undefined' || WPGlobusAdmin.data.tagsdiv.length < 1 ) {
 						return;
 					}
@@ -573,6 +594,7 @@ jQuery(document).ready(function () {
 						});
 						$('#tax-input-'+id).val(tags.join(', '));
 					});	
+			
 				});	
 				
                 $('.ui-state-default').on('click', function (event) {
