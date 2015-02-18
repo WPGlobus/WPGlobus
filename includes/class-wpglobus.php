@@ -1431,15 +1431,15 @@ class WPGlobus {
 			$items = array();
 			foreach( $sorted_menu_items as $item ) {
 				$items[] = $item->ID;
-			}	
+			}
 
 			$return = true;
-			foreach( $this->menus as $key=>$menu ) {
-				$diff = array_diff($items, $menu->menu_items );	
-				if ( empty($diff) && WPGlobus::Config()->nav_menu == $menu->slug ) {
+			foreach ( $this->menus as $key => $menu ) {
+				$diff = array_diff( $items, $menu->menu_items );
+				if ( empty( $diff ) && WPGlobus::Config()->nav_menu === $menu->slug ) {
 					$return = false;
-					break;	
-				}	
+					break;
+				}
 			}
 			
 			if ( $return ) {
