@@ -196,7 +196,7 @@ class WPGlobus_Config {
 		$options = array()
 	) {
 
-		if ( empty( $options ) ) {
+		if ( empty( $options ) || empty( $options['plugin'] ) ) {
 			return;
 		} else {
 			if ( WPGLOBUS_PLUGIN_BASENAME != $options['plugin'] || 'update' != $options['action'] ) {
