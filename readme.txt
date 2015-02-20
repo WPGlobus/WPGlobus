@@ -70,6 +70,7 @@ The plugin is currently in BETA stage! WPGlobus only supports the localization U
 * FIXED:
 	* PHP notice on plugin activation hook when a theme is upgraded.
 	* Language selector drop-down applied to all menus instead of the selected one.
+	* Correct display the category name by default at edit-tags.php page
 
 = 1.0.2 =
 * FIXED:
