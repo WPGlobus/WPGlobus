@@ -99,6 +99,9 @@ add_filter( 'get_pages', array( 'WPGlobus_Filters', 'filter__get_pages' ), 0 );
 
 /**
  * Filter @see the_category
+ * @scope admin
+ * -
+ * Correct display the category name by default at edit-tags.php page below categories table
  */
 if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) { 
 	add_filter( 'the_category', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
