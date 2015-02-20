@@ -98,6 +98,13 @@ add_filter( 'home_url', array( 'WPGlobus_Filters', 'filter__home_url' ) );
 add_filter( 'get_pages', array( 'WPGlobus_Filters', 'filter__get_pages' ), 0 );
 
 /**
+ * Filter @see the_category
+ */
+if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) { 
+	add_filter( 'the_category', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+}
+
+/**
  * Basic post/page filters
  * -
  * Note: We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
