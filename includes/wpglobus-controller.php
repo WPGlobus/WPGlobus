@@ -100,6 +100,7 @@ add_filter( 'get_pages', array( 'WPGlobus_Filters', 'filter__get_pages' ), 0 );
 /**
  * Filter @see the_category
  * @scope admin
+ * @since 1.0.3
  * Show default category name in the current language - on the
  * wp-admin/edit-tags.php?taxonomy=category page, below the categories table
  */
