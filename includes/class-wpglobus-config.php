@@ -196,12 +196,14 @@ class WPGlobus_Config {
 		$options = array()
 	) {
 
-		if ( empty( $options ) ) {
+		if (
+			empty( $options['plugin'] ) or $options['plugin'] !== WPGLOBUS_PLUGIN_BASENAME or
+			empty( $options['action'] ) or $options['action'] !== 'update'
+		) {
+			/**
+			 * Not our business
+			 */
 			return;
-		} else {
-			if ( WPGLOBUS_PLUGIN_BASENAME != $options['plugin'] || 'update' != $options['action'] ) {
-				return;
-			}
 		}
 
 		$version = get_option( self::$option_versioning );

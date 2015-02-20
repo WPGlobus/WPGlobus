@@ -1421,22 +1421,36 @@ class WPGlobus {
 	 * @see wp_nav_menu()
 	 */
 	function on_add_item( $sorted_menu_items, $args ) {
+	
+		if ( empty( WPGlobus::Config()->nav_menu ) ) {
+			/**
+			 * Add language switcher to all nav menus
+			 */
+		} else {
 
-		global $WPGlobus_Config;
+			$items = array();
+			foreach( $sorted_menu_items as $item ) {
+				$items[] = $item->ID;
+			}
 
-		if ( ! empty( $WPGlobus_Config->nav_menu ) ) {
-			if ( ! isset( $args->menu->slug ) ) {
-				if ( $this->menus[0]->slug != $WPGlobus_Config->nav_menu ) {
-					return $sorted_menu_items;
+			$return = true;
+			foreach ( $this->menus as $key => $menu ) {
+				$diff = array_diff( $items, $menu->menu_items );
+				if ( empty( $diff ) && WPGlobus::Config()->nav_menu === $menu->slug ) {
+					$return = false;
+					break;
 				}
-			} elseif ( $args->menu->slug != $WPGlobus_Config->nav_menu ) {
+			}
+			
+			if ( $return ) {
 				return $sorted_menu_items;
 			}
-		}
 
+		}
+		
 		$extra_languages = array();
-		foreach ( $WPGlobus_Config->enabled_languages as $languages ) {
-			if ( $languages != $WPGlobus_Config->language ) {
+		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
+			if ( $languages != WPGlobus::Config()->language ) {
 				$extra_languages[] = $languages;
 			}
 		}
@@ -1459,15 +1473,15 @@ class WPGlobus {
 		);
 
 		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'wpglobus_flag_' . $WPGlobus_Config->language;
+		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
 
 		$item                   = new stdClass();
 		$item->ID               = 9999999999; # 9 999 999 999
 		$item->db_id            = 9999999999;
 		$item->menu_item_parent = 0;
 		$item->title            =
-			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span>';
-		$item->url              = WPGlobus_Utils::get_url( $WPGlobus_Config->language );
+			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span>';
+		$item->url              = WPGlobus_Utils::get_url( WPGlobus::Config()->language );
 		$item->classes          = $menu_item_classes;
 		$item->description      = '';
 
@@ -1532,7 +1546,17 @@ class WPGlobus {
 					  WHERE tt.taxonomy = 'nav_menu'";
 
 		$menus = $wpdb->get_results( $query );
+		
+		foreach( $menus as $key=>$menu ) {
+			
+			$result = $wpdb->get_results( $wpdb->prepare("SELECT object_id FROM {$wpdb->prefix}term_relationships WHERE term_taxonomy_id = %d ORDER BY object_id ASC", $menu->term_id ), OBJECT_K);
 
+			$result = array_keys($result);
+			
+			$menus[$key]->menu_items = $result;
+
+		}
+		
 		return $menus;
 
 	}
