@@ -113,6 +113,14 @@ class WPGlobus {
 		$this->disabled_entities[] = 'attachment';
 
 		/**
+		 * @todo  Work on the ACF compatibility is in progress
+		 * Temporarily add CPT acf ( Advanced Custom Fields ) to the array of disabled_entities
+		 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
+		 * @since 1.0.4
+		 */
+		$this->disabled_entities[] = 'acf';		
+
+		/**
 		 * Init array of supported plugins
 		 */
 		$this->vendors_scripts['WPSEO']       = false;
