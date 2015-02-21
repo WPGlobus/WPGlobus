@@ -67,9 +67,10 @@ The plugin is currently in BETA stage! WPGlobus only supports the localization U
 == Changelog ==
 
 = 1.0.4 =
-	Temporarily add CPT acf ( Advanced Custom Fields ) to array disabled_entities
-	Work on the compatibility with the ACF in progress
-	@see 'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
+* FIXED:
+	* Disabled WPGlobus admin interface on ACF screens - until we support them properly.
+* ADDED:
+	* Frontend filter acf/load_value/type=text(area): works if the fields were manually formatted {:en}...{:}
 
 = 1.0.3 =
 * FIXED:

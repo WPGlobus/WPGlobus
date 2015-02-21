@@ -185,6 +185,15 @@ add_action( 'init', array( 'WPGlobus_Filters', 'action__init_url_info' ), 2 );
 add_action( 'activated_plugin', array( 'WPGlobus', 'activated' ) );
 
 /**
+ * ACF filters
+ * @todo Move to a separate controller
+ */
+if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
+	add_filter( 'acf/load_value/type=text', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	add_filter( 'acf/load_value/type=textarea', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+}
+
+/**
  * Yoast filters
  * @todo Move to a separate controller
  */

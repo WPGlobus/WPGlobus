@@ -111,13 +111,12 @@ class WPGlobus {
 		global $pagenow;
 
 		$this->disabled_entities[] = 'attachment';
-		
+
 		/**
+		 * @todo  Work on the ACF compatibility is in progress
+		 * Temporarily add CPT acf ( Advanced Custom Fields ) to the array of disabled_entities
+		 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
 		 * @since 1.0.4
-		 * Temporarily add CPT acf ( Advanced Custom Fields ) to array disabled_entities
-		 * Work on the compatibility with the ACF in progress
-		 * 
-		 * @see 'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
 		 */
 		$this->disabled_entities[] = 'acf';		
 
