@@ -66,6 +66,11 @@ The plugin is currently in BETA stage! WPGlobus only supports the localization U
 
 == Changelog ==
 
+= 1.0.4 =
+	Temporarily add CPT acf ( Advanced Custom Fields ) to array disabled_entities
+	Work on the compatibility with the ACF in progress
+	@see 'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
+
 = 1.0.3 =
 * FIXED:
 	* PHP notice on plugin activation hook when a theme is upgraded.
