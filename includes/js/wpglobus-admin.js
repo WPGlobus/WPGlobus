@@ -138,9 +138,7 @@ window.WPGlobusDialogApp;
 			$(api.option.listenClass).on('click', function() {
 				api.element = $(this);
 				api.id = api.element.data('source-id');
-				if ( '' == api.wpglobus_id ) {
-					api.wpglobus_id = '#wpglobus-'+api.id;	
-				}	
+				api.wpglobus_id = '#wpglobus-'+api.id;	
 				api.id = '#'+api.id;
 				api.source = api.element.data('source-value');
 				
@@ -184,7 +182,6 @@ window.WPGlobusDialogApp;
 				s = s.length == sd.length + 8 ? sd : s;
 				$(api.id).val(s);
 				$(api.wpglobus_id).val(scl);
-				api.wpglobus_id = '';
 			});
 		},
 		ajax : function(order) {
@@ -202,8 +199,6 @@ window.WPGlobusDialogApp;
 jQuery(document).ready(function () {
     "use strict";
     window.WPGlobusAdminApp = (function (WPGlobusAdminApp, $) {
-
-        // var params = JSON.parse(JSON.stringify(parameters));
         /* Object Constructor
          ========================*/
         WPGlobusAdminApp.App = function (config) {
