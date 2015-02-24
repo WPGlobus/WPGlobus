@@ -82,9 +82,11 @@ window.WPGlobusCore;
 			return WPGlobusCoreData.locale_tag_start.replace('%s', language) + text + WPGlobusCoreData.locale_tag_end;
 		},
 		getTranslations: function(text) {
-			var t = {};
+			var t = {},
+				return_in;
 			$.each(WPGlobusCoreData.enabled_languages, function(i,l){
-				t[l] = api.TextFilter(text, l);
+				return_in  = l == WPGlobusCoreData.language  ? 'RETURN_IN_DEFAULT_LANGUAGE' : 'RETURN_EMPTY';
+				t[l] = api.TextFilter(text, l, return_in);
 			});
 			return t;
 		}
