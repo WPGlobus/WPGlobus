@@ -848,37 +848,35 @@ jQuery(document).ready(function () {
 					
 					$(clone).insertAfter(element);
 					$t.append('<td style="width:20px;"><input data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></td>');
-
-					$('body').on('change', '.wpglobus-dialog-field', function(){
-						var $t = $(this),
-							source_id = '#'+$t.data('source-id'),
-							source = '', s = '', new_value;
-							
-						if ( typeof source_id == 'undefined' ) {
-							return;	
-						}	
-						source = $(source_id).val();
-						
-						if ( ! /(\{:|\[:|<!--:)[a-z]{2}/.test(source) ) {
-							$(source_id).val($t.val());
-						} else {
-							$.each(WPGlobusAdmin.data.enabled_languages, function(i,l){
-								if ( l == WPGlobusAdmin.data.language ) {
-									new_value = $t.val();
-								} else {	
-									new_value = WPGlobusCore.TextFilter(source,l,'RETURN_EMPTY');
-								}	
-								if ( '' != new_value ) {
-									s = s + WPGlobusCore.addLocaleMarks(new_value,l);	
-								}	
-							});
-							$(source_id).val(s);
-						}	
-
-					});		
-					
 				});
 
+				$('body').on('change', '.wpglobus-dialog-field', function(){
+					var $t = $(this),
+						source_id = '#'+$t.data('source-id'),
+						source = '', s = '', new_value;
+						
+					if ( typeof source_id == 'undefined' ) {
+						return;	
+					}	
+					source = $(source_id).val();
+					
+					if ( ! /(\{:|\[:|<!--:)[a-z]{2}/.test(source) ) {
+						$(source_id).val($t.val());
+					} else {
+						$.each(WPGlobusAdmin.data.enabled_languages, function(i,l){
+							if ( l == WPGlobusAdmin.data.language ) {
+								new_value = $t.val();
+							} else {	
+								new_value = WPGlobusCore.TextFilter(source,l,'RETURN_EMPTY');
+							}	
+							if ( '' != new_value ) {
+								s = s + WPGlobusCore.addLocaleMarks(new_value,l);	
+							}	
+						});
+						$(source_id).val(s);
+					}	
+
+				});						
 				$('#wpglobus-dialog-tabs').tabs();
 
 				WPGlobusDialogApp.init(); 				
