@@ -1061,7 +1061,7 @@ class WPGlobus {
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery' ),
+				array( 'jquery', 'jquery-ui-dialog' ),
 				WPGLOBUS_VERSION,
 				true
 			);
@@ -1091,6 +1091,20 @@ class WPGlobus {
 					'tabs'         => $tabs_suffix,
 					'i18n'         => $i18n,
 					'data'         => $data
+				)
+			);
+			wp_localize_script(
+				'wpglobus-admin',
+				'WPGlobusCoreData',
+				array(
+					'version'      => WPGLOBUS_VERSION,
+					'default_language'  => $WPGlobus_Config->default_language,
+					'language'          => $WPGlobus_Config->language,
+					'enabled_languages' => $WPGlobus_Config->enabled_languages,
+					'open_languages'    => $WPGlobus_Config->open_languages,
+					'en_language_name'  => $WPGlobus_Config->en_language_name,
+					'locale_tag_start'  => self::LOCALE_TAG_START,
+					'locale_tag_end'    => self::LOCALE_TAG_END					
 				)
 			);
 
@@ -1173,6 +1187,15 @@ class WPGlobus {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-admin' );
+		
+		wp_register_style(
+			'dialog-ui',
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",				
+			array(),
+			WPGLOBUS_VERSION,
+			'all'
+		);		
+		wp_enqueue_style( 'dialog-ui' );		
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
