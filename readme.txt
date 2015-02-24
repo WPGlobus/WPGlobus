@@ -66,6 +66,11 @@ The plugin is currently in BETA stage! WPGlobus only supports the localization U
 
 == Changelog ==
 
+= 1.0.5 =
+* ADDED:
+	* Support translation for standard Custom Fields
+	* Support translation in input and textarea fields at Edit Post page for ACF plugin 
+	
 = 1.0.4 =
 * FIXED:
 	* Disabled WPGlobus admin interface on ACF screens - until we support them properly.
