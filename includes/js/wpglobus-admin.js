@@ -135,7 +135,7 @@ window.WPGlobusDialogApp;
 			}
 		}),
 		attachListener : function() {
-			$(api.option.listenClass).on('click', function() {
+			$(document).on('click', api.option.listenClass, function() {
 				api.element = $(this);
 				api.id = api.element.data('source-id');
 				api.wpglobus_id = '#wpglobus-'+api.id;	
