@@ -2000,6 +2000,40 @@ class WPGlobus {
 		</script>
 		<?php
 
+		if ( WPGlobus_WP::is_pagenow(array('post.php')) ) {
+			/**
+			 * Output dialog form
+			 */ 
+			?>
+			<div id="wpglobus-dialog-wrapper" title="Edit: " class="hidden">
+				<form id="wpglobus-dialog-form" style="">	
+					<div id="wpglobus-dialog-tabs">   
+						<ul class="wpglobus-dialog-tabs-list">    <?php
+							$order = 0;
+							foreach ( WPGlobus::Config()->open_languages as $language ) { ?>
+								<li id="dialog-link-tab-<?php echo $language; ?>"
+									data-language="<?php echo $language; ?>"
+									data-order="<?php echo $order; ?>"
+									class="wpglobus-dialog-tab"><a
+										href="#dialog-tab-<?php echo $language; ?>"><?php echo WPGlobus::Config()->en_language_name[ $language ]; ?></a>
+								</li> <?php
+								$order ++;
+							} ?>
+						</ul>    <?php
+
+						foreach ( WPGlobus::Config()->open_languages as $language ) { 	?>
+							<div id="dialog-tab-<?php echo $language; ?>" class="wpglobus-dialog-general">
+								<textarea placeholder="" style="height:50%;" name="wpglobus-dialog-<?php echo $language; ?>" 
+									id="wpglobus-dialog-<?php echo $language; ?>" class="wpglobus_dialog_textarea textarea"
+									data-language="<?php echo $language; ?>"
+									data-order="save_dialog"></textarea>
+							</div> <?php
+						} ?>
+					</div>	
+				</form>
+			</div>		<?php
+		}			
+		
 		if ( ! WPGlobus_WP::is_pagenow( 'options-general.php' ) ) {
 			return;
 		}
