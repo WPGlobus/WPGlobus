@@ -1,5 +1,202 @@
 /*jslint browser: true*/
-/*global jQuery, console, WPGlobusAdmin, inlineEditPost */
+/*global jQuery, console, WPGlobusCore, WPGlobusDialogApp, WPGlobusAdmin, inlineEditPost */
+
+window.WPGlobusCore;
+(function($) {
+	var api;
+	api = WPGlobusCore = {	
+		strpos: function( haystack, needle, offset){
+			var i = haystack.indexOf( needle, offset );
+			return i >= 0 ? i : false;
+		},
+
+		TextFilter: function(text, language, return_in){
+			if ( '' == text ) { return text; }
+			
+			var pos_start, pos_end;
+			
+			language = '' == language ? 'en' : language;
+			return_in  = '' == return_in  ? 'RETURN_IN_DEFAULT_LANGUAGE' : return_in;
+			
+			possible_delimiters = [];
+			
+			possible_delimiters[0] = [];
+			possible_delimiters[0]['start'] = WPGlobusCoreData.locale_tag_start.replace('%s', language);
+			possible_delimiters[0]['end'] 	 = WPGlobusCoreData.locale_tag_end;
+			
+			possible_delimiters[1] = [];
+			possible_delimiters[1]['start'] = '<!--:'+language+'-->';
+			possible_delimiters[1]['end'] = '<!--:-->';
+			
+			possible_delimiters[2] = [];
+			possible_delimiters[2]['start'] = '[:'+language+']';
+			possible_delimiters[2]['end'] = '[:';
+			
+			is_local_text_found = false;
+
+			for (var i = 0; i < 3; i++) {
+				
+				pos_start = api.strpos( text, possible_delimiters[i]['start'] );
+				if ( pos_start === false ) {
+					continue;
+				}
+	  
+				pos_start = pos_start + possible_delimiters[i]['start'].length;
+
+				pos_end = api.strpos( text, possible_delimiters[i]['end'], pos_start );
+
+				if ( pos_end === false ) {
+					// - Until end of string
+					length = null;
+				} else {
+					length = pos_end - pos_start;
+				}
+
+				text = text.substr( pos_start, length );
+				is_local_text_found = true;
+				break;
+	  
+			}
+			
+			if ( ! is_local_text_found ) {
+				if ( return_in == 'RETURN_EMPTY' ) {
+					if ( language == WPGlobusCoreData.default_language && ! /(\{:|\[:|<!--:)[a-z]{2}/.test(text) ) {
+						//
+					} else {
+						text = '';	
+					}	
+				} else {
+					// Try RETURN_IN_DEFAULT_LANGUAGE
+					if ( language == WPGlobusCoreData.default_language ) {
+						if ( /(\{:|\[:|<!--:)[a-z]{2}/.test(text) ) {
+							text = '';
+						}
+					} else {
+						text = api.TextFilter( text, WPGlobusCoreData.default_language );		
+					}	
+				}	
+			}	
+			return text;
+		},
+		addLocaleMarks: function(text, language) {
+			return WPGlobusCoreData.locale_tag_start.replace('%s', language) + text + WPGlobusCoreData.locale_tag_end;
+		},
+		getTranslations: function(text) {
+			var t = {};
+			$.each(WPGlobusCoreData.enabled_languages, function(i,l){
+				t[l] = api.TextFilter(text, l);
+			});
+			return t;
+		}
+	};
+})(jQuery);
+
+window.WPGlobusDialogApp;
+
+(function($) {
+
+	var api;
+	api = WPGlobusDialogApp = {
+		option : {
+			listenClass : '.wpglobus_dialog_start'
+		},
+		form : undefined,
+		element : undefined,
+		id : '',
+		wpglobus_id : '',
+		type : 'textarea',
+		source : '',
+		order : {},
+		value : {},
+		request : 'core',
+		
+		init : function(args) {
+			api.option = $.extend(api.option, args);
+			this.attachListener();
+		},
+		dialog : $('#wpglobus-dialog-wrapper').dialog({
+			autoOpen: false,
+			height: 250,
+			width: 650,
+			modal: true,
+			buttons: {
+				//'Save': saveDescription,
+				Close: function() {
+					api.dialog.dialog('close');
+				}
+			},
+			open: function() {
+			},	
+			close: function() {
+				api.form[0].reset();
+				//allFields.removeClass( "ui-state-error" );
+			}
+		}),
+		attachListener : function() {
+			$(api.option.listenClass).on('click', function() {
+				api.element = $(this);
+				api.id = api.element.data('source-id');
+				if ( '' == api.wpglobus_id ) {
+					api.wpglobus_id = '#wpglobus-'+api.id;	
+				}	
+				api.id = '#'+api.id;
+				api.source = api.element.data('source-value');
+				
+				if ( typeof api.source === 'undefined' ) {
+					api.source = $(api.id).val();	
+					if (api.request == 'ajax') {
+						api.order['action'] = 'get_translate';
+						api.order['source'] = api.source;
+						api.ajax(api.order);
+					} else {
+						api.value = WPGlobusCore.getTranslations(api.source);
+					}	
+				}					
+				$.each(api.value, function(l,e){
+					$('#wpglobus-dialog-'+l).val(e);
+				});
+				api.dialog.dialog('open');				
+			});	
+			
+			api.form = api.dialog.find('form#wpglobus-dialog-form').on('submit', function( event ) {
+				event.preventDefault();
+				//saveDescription();
+			});					
+			
+			$('body').on('change', '.wpglobus_dialog_textarea', function(){
+				var s = '', sd = '', scl = '', $e, val, l;
+				$('.wpglobus_dialog_textarea').each(function(indx,e){
+					$e = $(e);
+					val = $e.val();
+					l = $e.data('language');
+					if ( l == WPGlobusAdmin.data.language ) {
+						scl = val;
+					}	
+					if ( val != '' ) {
+						s = s + WPGlobusCore.addLocaleMarks(val,l);	
+						if ( l == WPGlobusAdmin.data.default_language ) {
+							sd = val;
+						}						
+					}	
+				});					
+				s = s.length == sd.length + 8 ? sd : s;
+				$(api.id).val(s);
+				$(api.wpglobus_id).val(scl);
+				api.wpglobus_id = '';
+			});
+		},
+		ajax : function(order) {
+			$.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json', async:false})
+				.done(function (result) {
+					api.value = result;
+				})
+				.fail(function (error) {})
+				.always(function (jqXHR, status){});
+		}	
+	};
+
+})(jQuery);
+
 jQuery(document).ready(function () {
     "use strict";
     window.WPGlobusAdminApp = (function (WPGlobusAdminApp, $) {
@@ -56,6 +253,7 @@ jQuery(document).ready(function () {
 				});
                 if ('post-edit' === WPGlobusAdmin.page) {
                     this.post_edit();
+					this.set_dialog();
                 } else if ('menu-edit' === WPGlobusAdmin.page) {
                     this.nav_menus();
                 } else if ('taxonomy-edit' === WPGlobusAdmin.page) {
@@ -541,7 +739,7 @@ jQuery(document).ready(function () {
                         $('#excerpt').eq(0).val(s);
                     });
                 }
-
+				
 				$('body').on('click', '#publish, #save-post', function(ev) {
 					if ( WPGlobusAdmin.data.open_languages.length > 1 ) {
 						// if empty title in default language make it from another titles
@@ -630,7 +828,65 @@ jQuery(document).ready(function () {
             },
             format: function (language) {
                 return '<img class="wpglobus_flag" src="' + WPGlobusAdmin.flag_url + language.text + '"/>&nbsp;&nbsp;' + language.text;
-            }
+            },
+			set_dialog: function() {
+				var id;
+				$('#list-table thead tr').append('<th></th>');
+				$('#the-list tr').each(function(i,e){
+					var $t = $(this),
+						element = $t.find('textarea'),
+						clone, name;
+						
+					id = element.attr('id');
+					
+					clone = $('#'+id).clone();
+					//$(element).addClass('hidden');
+					//$(element).attr('disabled', 'disabled');
+					name = element.attr('name');
+					$(clone).attr('id', 'wpglobus-'+id);
+					$(clone).attr('name', 'wpglobus-'+name);
+					$(clone).attr('data-source-id', id);
+					$(clone).attr('class', 'wpglobus-dialog-field');
+					$(clone).val( WPGlobusCore.TextFilter($(element).val(), WPGlobusAdmin.data.language) );
+					
+					$(clone).insertAfter(element);
+					$t.append('<td style="width:20px;"><input data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></td>');
+
+					$('body').on('change', '.wpglobus-dialog-field', function(){
+						var $t = $(this),
+							source_id = '#'+$t.data('source-id'),
+							source = '', s = '', new_value;
+							
+						if ( typeof source_id == 'undefined' ) {
+							return;	
+						}	
+						source = $(source_id).val();
+						
+						if ( ! /(\{:|\[:|<!--:)[a-z]{2}/.test(source) ) {
+							$(source_id).val($t.val());
+						} else {
+							$.each(WPGlobusAdmin.data.enabled_languages, function(i,l){
+								if ( l == WPGlobusAdmin.data.language ) {
+									new_value = $t.val();
+								} else {	
+									new_value = WPGlobusCore.TextFilter(source,l,'RETURN_EMPTY');
+								}	
+								if ( '' != new_value ) {
+									s = s + WPGlobusCore.addLocaleMarks(new_value,l);	
+								}	
+							});
+							$(source_id).val(s);
+						}	
+
+					});		
+					
+				});
+
+				$('#wpglobus-dialog-tabs').tabs();
+
+				WPGlobusDialogApp.init(); 				
+				
+			}	
         };
 
         new WPGlobusAdminApp.App();
@@ -638,5 +894,5 @@ jQuery(document).ready(function () {
         return WPGlobusAdminApp;
 
     }(window.WPGlobusAdminApp || {}, jQuery));
-
+	
 });
