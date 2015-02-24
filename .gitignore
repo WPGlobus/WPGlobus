@@ -1,9 +1,0 @@
-internal/
-node_modules/
-#tests/
-tests/_data
-tests/_output
-#unit-tests/
-#codeception.yml
-#Gruntfile.js
-#package.json
