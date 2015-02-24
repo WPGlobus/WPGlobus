@@ -837,8 +837,7 @@ jQuery(document).ready(function () {
 					id = element.attr('id');
 					
 					clone = $('#'+id).clone();
-					//$(element).addClass('hidden');
-					//$(element).attr('disabled', 'disabled');
+					$(element).addClass('hidden');
 					name = element.attr('name');
 					$(clone).attr('id', 'wpglobus-'+id);
 					$(clone).attr('name', 'wpglobus-'+name);
