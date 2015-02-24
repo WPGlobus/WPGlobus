@@ -113,19 +113,24 @@ class WPGlobus {
 		$this->disabled_entities[] = 'attachment';
 
 		/**
-		 * @todo  Work on the ACF compatibility is in progress
-		 * Temporarily add CPT acf ( Advanced Custom Fields ) to the array of disabled_entities
-		 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
-		 * @since 1.0.4
-		 */
-		$this->disabled_entities[] = 'acf';		
-
-		/**
 		 * Init array of supported plugins
 		 */
+		$this->vendors_scripts['ACF'] 		  = false;
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
 
+		if ( function_exists('acf') ) {
+			$this->vendors_scripts['ACF'] = true;
+			
+			/**
+			 * @todo  Work on the ACF compatibility is in progress
+			 * Temporarily add CPT acf ( Advanced Custom Fields ) to the array of disabled_entities
+			 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
+			 * @since 1.0.4
+			 */
+			$this->disabled_entities[] = 'acf';					
+		}	
+		
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$this->vendors_scripts['WPSEO'] = true;
 		}
@@ -1107,7 +1112,20 @@ class WPGlobus {
 					'locale_tag_end'    => self::LOCALE_TAG_END					
 				)
 			);
-
+			
+			/**
+			 * Enqueue js for ACF support
+			 */
+			if ( $this->vendors_scripts['ACF'] ) {
+				wp_register_script(
+					'wpglobus-acf',
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-acf" . self::$_SCRIPT_SUFFIX . ".js",
+					array( 'jquery', 'wpglobus-admin' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				wp_enqueue_script( 'wpglobus-acf' );				
+			}	
 		}
 	}
 
