@@ -11,12 +11,12 @@ window.WPGlobusCore;
 		},
 
 		TextFilter: function(text, language, return_in){
-			if ( '' == text ) { return text; }
+			if ( typeof text == 'undefined' || '' === text ) { return text; }
 			
 			var pos_start, pos_end;
 			
 			language = '' == language ? 'en' : language;
-			return_in  = '' == return_in  ? 'RETURN_IN_DEFAULT_LANGUAGE' : return_in;
+			return_in  = typeof return_in == 'undefined' || '' == return_in  ? 'RETURN_IN_DEFAULT_LANGUAGE' : return_in;
 			
 			possible_delimiters = [];
 			
