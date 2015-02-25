@@ -853,7 +853,7 @@ jQuery(document).ready(function () {
 						$(clone).attr('class', 'wpglobus-dialog-field');
 						$(clone).val( WPGlobusCore.TextFilter($(element).val(), WPGlobusAdmin.data.language) );
 						$(clone).insertAfter(element);
-						$t.append('<td style="width:20px;"><input data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></td>');
+						$t.append('<td style="width:20px;"><div data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start wpglobus_dialog_icon"></div></td>');
 					});				
 				}				
 				

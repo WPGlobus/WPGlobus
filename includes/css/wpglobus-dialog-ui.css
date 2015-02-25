@@ -1,3 +1,14 @@
+.wpglobus_dialog_icon {
+	margin-top:10px;
+	color:#00f;
+	cursor:pointer;
+}
+.wpglobus_dialog_icon:before {
+	display: inline-block;
+	font-family: 'dashicons';
+	content: "\f319";
+	font-size: 20px;
+}
 .ui-front {
 	z-index: 100;
 }

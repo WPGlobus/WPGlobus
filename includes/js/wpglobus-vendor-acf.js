@@ -33,7 +33,7 @@ jQuery(document).ready(function($){
 			$(clone).attr('style', style);
 			$(clone).val( WPGlobusCore.TextFilter($(element).val(), WPGlobusCoreData.language) );
 			$(clone).insertAfter(element);
-			$('<div style="width:20px;float:right;"><input data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></div>').insertAfter(clone);
+			$('<div style="width:20px;float:right;"><div style="margin:2px;" data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start wpglobus_dialog_icon"></div></div>').insertAfter(clone);
 		} else if ( $t.hasClass('field_type-text') ) {
 			var element = $t.find('input'),
 				clone, name;
@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
 			$(clone).attr('style', style);
 			$(clone).val( WPGlobusCore.TextFilter($(element).val(), WPGlobusCoreData.language) );
 			$(clone).insertAfter(element);
-			$('<div style="width:20px;float:right;"><input data-type="control" data-source-type="text" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></div>').insertAfter(clone);
+			$('<div style="width:20px;float:right;"><div style="margin:2px;" data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start wpglobus_dialog_icon"></div></div>').insertAfter(clone);
 
 
 		}	
