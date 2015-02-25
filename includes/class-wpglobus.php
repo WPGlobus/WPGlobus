@@ -2023,7 +2023,7 @@ class WPGlobus {
 			 * Output dialog form
 			 */ 
 			?>
-			<div id="wpglobus-dialog-wrapper" title="Edit: " class="hidden">
+			<div id="wpglobus-dialog-wrapper" title="Edit meta " class="hidden">
 				<form id="wpglobus-dialog-form" style="">	
 					<div id="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php

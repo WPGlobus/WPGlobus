@@ -121,6 +121,7 @@ window.WPGlobusDialogApp;
 			height: 250,
 			width: 650,
 			modal: true,
+			dialogClass: 'wpglobus-dialog',
 			buttons: {
 				//'Save': saveDescription,
 				Close: function() {

@@ -1,14 +1,27 @@
 .wpglobus_dialog_icon {
 	margin-top:10px;
-	color:#00f;
 	cursor:pointer;
 }
 .wpglobus_dialog_icon:before {
+	color:#00f;
 	display: inline-block;
 	font-family: 'dashicons';
 	content: "\f319";
 	font-size: 20px;
 }
+.wpglobus-dialog .ui-dialog-title:before {
+	color:#00f;
+	display: inline-block;
+	font-family: 'dashicons';
+	content: "\f319";
+	font-size: 20px;
+	margin-right:0.5em;
+	vertical-align: bottom;
+}
+.wpglobus-dialog  .ui-dialog-title {
+	font-size:20px;
+}
+
 .ui-front {
 	z-index: 100;
 }
@@ -50,14 +63,7 @@
     margin-bottom: 0 !important;
 	background-color: #e1e1e1 !important;
 }
-.ui-dialog .ui-dialog-title {
-	float: left;
-	margin: .1em 0;
-	white-space: nowrap;
-	width: 90%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
+
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
 	right: .3em;
