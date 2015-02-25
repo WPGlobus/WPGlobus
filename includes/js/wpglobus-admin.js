@@ -831,7 +831,6 @@ jQuery(document).ready(function () {
 				var ajaxify_row_id;
 				var add_elements = function(post_id) {
 					var id, rows;
-					
 					if (typeof post_id == 'undefined') {
 						$('#list-table thead tr').append('<th class="wpglobus-control-head"></th>');
 						rows = '#the-list tr';
@@ -895,7 +894,11 @@ jQuery(document).ready(function () {
 				});				
 				$(document).ajaxComplete(function(ev, jqxhr, settings){
 					if ( 'add-meta' == settings.action ) {
-						add_elements(ajaxify_row_id);	
+						if ( 'newmeta' == ajaxify_row_id ) {
+							add_elements('meta-'+$(jqxhr.responseXML.documentElement.outerHTML).find('meta').attr('id'));
+						} else {
+							add_elements(ajaxify_row_id);	
+						}	
 					}	
 				});
 
