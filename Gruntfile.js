@@ -149,6 +149,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
+    // To run all tasks - same list as for `watch`
+    grunt.registerTask('dist', ['less', 'cssmin', 'uglify']);
+
     // Default task(s).
     grunt.registerTask('default', ['watch']);
 
