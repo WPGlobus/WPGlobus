@@ -827,27 +827,37 @@ jQuery(document).ready(function () {
                 return '<img class="wpglobus_flag" src="' + WPGlobusAdmin.flag_url + language.text + '"/>&nbsp;&nbsp;' + language.text;
             },
 			set_dialog: function() {
-				var id;
-				$('#list-table thead tr').append('<th></th>');
-				$('#the-list tr').each(function(i,e){
-					var $t = $(this),
-						element = $t.find('textarea'),
-						clone, name;
+				var ajaxify_row_id;
+				var add_elements = function(post_id) {
+					var id, rows;
+					
+					if (typeof post_id == 'undefined') {
+						$('#list-table thead tr').append('<th></th>');
+						rows = '#the-list tr';
+					} else {
+						rows = '#the-list tr#'+post_id;
+					}	
+					$(rows).each(function(i,e){
+						var $t = $(this),
+							element = $t.find('textarea'),
+							clone, name;
+							
+						id = element.attr('id');
 						
-					id = element.attr('id');
-					
-					clone = $('#'+id).clone();
-					$(element).addClass('hidden');
-					name = element.attr('name');
-					$(clone).attr('id', 'wpglobus-'+id);
-					$(clone).attr('name', 'wpglobus-'+name);
-					$(clone).attr('data-source-id', id);
-					$(clone).attr('class', 'wpglobus-dialog-field');
-					$(clone).val( WPGlobusCore.TextFilter($(element).val(), WPGlobusAdmin.data.language) );
-					
-					$(clone).insertAfter(element);
-					$t.append('<td style="width:20px;"><input data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></td>');
-				});
+						clone = $('#'+id).clone();
+						$(element).addClass('hidden');
+						name = element.attr('name');
+						$(clone).attr('id', 'wpglobus-'+id);
+						$(clone).attr('name', 'wpglobus-'+name);
+						$(clone).attr('data-source-id', id);
+						$(clone).attr('class', 'wpglobus-dialog-field');
+						$(clone).val( WPGlobusCore.TextFilter($(element).val(), WPGlobusAdmin.data.language) );
+						$(clone).insertAfter(element);
+						$t.append('<td style="width:20px;"><input data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="wpglobus_dialog_start" onclick="javascript:void(0);" type="button" style="cursor:pointer;width:20px;" value="..."/></td>');
+					});				
+				}				
+				
+				add_elements();				
 
 				$('body').on('change', '.wpglobus-dialog-field', function(){
 					var $t = $(this),
@@ -875,7 +885,20 @@ jQuery(document).ready(function () {
 						$(source_id).val(s);
 					}	
 
-				});						
+				});				
+
+				$(document).ajaxSend(function(ev, jqxhr, settings){
+					if ( 'add-meta' == settings.action ) {
+						ajaxify_row_id = settings.element;
+					}	
+				});				
+				$(document).ajaxComplete(function(ev, jqxhr, settings){
+					if ( 'add-meta' == settings.action ) {
+						add_elements(ajaxify_row_id);	
+					}	
+				});
+
+				
 				$('#wpglobus-dialog-tabs').tabs();
 
 				WPGlobusDialogApp.init(); 				
