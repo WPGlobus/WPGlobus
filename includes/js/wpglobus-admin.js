@@ -116,20 +116,38 @@ window.WPGlobusDialogApp;
 			api.option = $.extend(api.option, args);
 			this.attachListener();
 		},
+		saveDialog: function() {
+			var s = '', sd = '', scl = '', $e, val, l;
+			$('.wpglobus_dialog_textarea').each(function(indx,e){
+				$e = $(e);
+				val = $e.val();
+				l = $e.data('language');
+				if ( l == WPGlobusAdmin.data.language ) {
+					scl = val;
+				}	
+				if ( val != '' ) {
+					s = s + WPGlobusCore.addLocaleMarks(val,l);	
+					if ( l == WPGlobusAdmin.data.default_language ) {
+						sd = val;
+					}						
+				}	
+			});					
+			s = s.length == sd.length + 8 ? sd : s;
+			$(api.id).val(s);
+			$(api.wpglobus_id).val(scl);
+		},	
 		dialog : $('#wpglobus-dialog-wrapper').dialog({
 			autoOpen: false,
 			height: 250,
 			width: 650,
 			modal: true,
 			dialogClass: 'wpglobus-dialog',
-			buttons: {
-				//'Save': saveDescription,
-				Close: function() {
-					api.dialog.dialog('close');
-				}
-			},
+			buttons: [
+				{ text:'Save', click:function(){api.saveDialog(); api.dialog.dialog('close');} },
+				{ text:'Cancel', click: function(){api.dialog.dialog('close');} }
+			],
 			open: function() {
-			},	
+			},
 			close: function() {
 				api.form[0].reset();
 				//allFields.removeClass( "ui-state-error" );
@@ -161,29 +179,8 @@ window.WPGlobusDialogApp;
 			
 			api.form = api.dialog.find('form#wpglobus-dialog-form').on('submit', function( event ) {
 				event.preventDefault();
-				//saveDescription();
+				api.saveDialog();
 			});					
-			
-			$('body').on('change', '.wpglobus_dialog_textarea', function(){
-				var s = '', sd = '', scl = '', $e, val, l;
-				$('.wpglobus_dialog_textarea').each(function(indx,e){
-					$e = $(e);
-					val = $e.val();
-					l = $e.data('language');
-					if ( l == WPGlobusAdmin.data.language ) {
-						scl = val;
-					}	
-					if ( val != '' ) {
-						s = s + WPGlobusCore.addLocaleMarks(val,l);	
-						if ( l == WPGlobusAdmin.data.default_language ) {
-							sd = val;
-						}						
-					}	
-				});					
-				s = s.length == sd.length + 8 ? sd : s;
-				$(api.id).val(s);
-				$(api.wpglobus_id).val(scl);
-			});
 		},
 		ajax : function(order) {
 			$.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json', async:false})
