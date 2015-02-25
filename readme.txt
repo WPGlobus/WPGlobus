@@ -1,14 +1,14 @@
 === WPGlobus ===
-Contributors: tivnet, alexgff
+Contributors: tivnetinc, tivnet, alexgff
 Donate link: http://www.wpglobus.com/
-Tags: bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, SEO, switcher, translate, translation, WPGlobus, TIVWP
+Tags: ACF, bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, SEO, switcher, translate, translation, WPGlobus, TIVWP
 Requires at least: 4.0
 Tested up to: 4.1.1
 Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
 
-Multilingual / Globalization: URL-based multilanguage; easy translation interface with WordPress SEO by Yoast supported!
+Multilingual / Globalization: URL-based multilanguage; easy translation with WordPress SEO by Yoast and ACF support!
 
 == Description ==
 
@@ -32,7 +32,11 @@ The administrator interface allows for selecting active languages as well as def
 	* [Facebook](https://www.facebook.com/WPGlobus),
 	* [Twitter](https://twitter.com/WPGlobus) and
 	* [Google Plus](https://plus.google.com/111657854098133499126).
-* The [WordPress SEO Plugin](https://yoast.com/wordpress/plugins/seo/).
+
+= WPGlobus partially supports these plugins: =
+
+* [WordPress SEO](https://yoast.com/wordpress/plugins/seo/).
+* [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/).
 
 = 3rd Party Software and Files Used =
 
@@ -59,12 +63,12 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 1. Admin interface: languages setup.
 2. Front: language switcher in the twentyfourteen theme menu.
 
-== Upgrade Notice ==
-
-= 1.0.0 =
-The plugin is currently in BETA stage! WPGlobus only supports the localization URLs in the form of example.com/xx/page/. We do not plan to support subdomains (xx.example.com) and language queries (example.com?lang=xx).
-
 == Changelog ==
+
+= 1.0.5 =
+* ADDED:
+	* Localization interface for ACF text and textarea fields; no need to format languages manually.
+	* Localization interface for the standard Custom Fields.
 
 = 1.0.4 =
 * FIXED:

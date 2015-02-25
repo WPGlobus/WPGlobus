@@ -113,19 +113,24 @@ class WPGlobus {
 		$this->disabled_entities[] = 'attachment';
 
 		/**
-		 * @todo  Work on the ACF compatibility is in progress
-		 * Temporarily add CPT acf ( Advanced Custom Fields ) to the array of disabled_entities
-		 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
-		 * @since 1.0.4
-		 */
-		$this->disabled_entities[] = 'acf';		
-
-		/**
 		 * Init array of supported plugins
 		 */
+		$this->vendors_scripts['ACF'] 		  = false;
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
 
+		if ( function_exists('acf') ) {
+			$this->vendors_scripts['ACF'] = true;
+			
+			/**
+			 * @todo  Work on the ACF compatibility is in progress
+			 * Temporarily add CPT acf ( Advanced Custom Fields ) to the array of disabled_entities
+			 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
+			 * @since 1.0.4
+			 */
+			$this->disabled_entities[] = 'acf';					
+		}	
+		
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$this->vendors_scripts['WPSEO'] = true;
 		}
@@ -1061,7 +1066,7 @@ class WPGlobus {
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery' ),
+				array( 'jquery', 'jquery-ui-dialog' ),
 				WPGLOBUS_VERSION,
 				true
 			);
@@ -1093,7 +1098,34 @@ class WPGlobus {
 					'data'         => $data
 				)
 			);
-
+			wp_localize_script(
+				'wpglobus-admin',
+				'WPGlobusCoreData',
+				array(
+					'version'      => WPGLOBUS_VERSION,
+					'default_language'  => $WPGlobus_Config->default_language,
+					'language'          => $WPGlobus_Config->language,
+					'enabled_languages' => $WPGlobus_Config->enabled_languages,
+					'open_languages'    => $WPGlobus_Config->open_languages,
+					'en_language_name'  => $WPGlobus_Config->en_language_name,
+					'locale_tag_start'  => self::LOCALE_TAG_START,
+					'locale_tag_end'    => self::LOCALE_TAG_END					
+				)
+			);
+			
+			/**
+			 * Enqueue js for ACF support
+			 */
+			if ( $this->vendors_scripts['ACF'] ) {
+				wp_register_script(
+					'wpglobus-acf',
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-acf" . self::$_SCRIPT_SUFFIX . ".js",
+					array( 'jquery', 'wpglobus-admin' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				wp_enqueue_script( 'wpglobus-acf' );				
+			}	
 		}
 	}
 
@@ -1173,6 +1205,15 @@ class WPGlobus {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-admin' );
+		
+		wp_register_style(
+			'dialog-ui',
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",				
+			array(),
+			WPGLOBUS_VERSION,
+			'all'
+		);		
+		wp_enqueue_style( 'dialog-ui' );		
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
@@ -1977,6 +2018,40 @@ class WPGlobus {
 		</script>
 		<?php
 
+		if ( WPGlobus_WP::is_pagenow(array('post.php')) ) {
+			/**
+			 * Output dialog form
+			 */ 
+			?>
+			<div id="wpglobus-dialog-wrapper" title="Edit meta " class="hidden">
+				<form id="wpglobus-dialog-form" style="">	
+					<div id="wpglobus-dialog-tabs">   
+						<ul class="wpglobus-dialog-tabs-list">    <?php
+							$order = 0;
+							foreach ( WPGlobus::Config()->open_languages as $language ) { ?>
+								<li id="dialog-link-tab-<?php echo $language; ?>"
+									data-language="<?php echo $language; ?>"
+									data-order="<?php echo $order; ?>"
+									class="wpglobus-dialog-tab"><a
+										href="#dialog-tab-<?php echo $language; ?>"><?php echo WPGlobus::Config()->en_language_name[ $language ]; ?></a>
+								</li> <?php
+								$order ++;
+							} ?>
+						</ul>    <?php
+
+						foreach ( WPGlobus::Config()->open_languages as $language ) { 	?>
+							<div id="dialog-tab-<?php echo $language; ?>" class="wpglobus-dialog-general">
+								<textarea placeholder="" style="height:50%;" name="wpglobus-dialog-<?php echo $language; ?>" 
+									id="wpglobus-dialog-<?php echo $language; ?>" class="wpglobus_dialog_textarea textarea"
+									data-language="<?php echo $language; ?>"
+									data-order="save_dialog"></textarea>
+							</div> <?php
+						} ?>
+					</div>	
+				</form>
+			</div>		<?php
+		}			
+		
 		if ( ! WPGlobus_WP::is_pagenow( 'options-general.php' ) ) {
 			return;
 		}
