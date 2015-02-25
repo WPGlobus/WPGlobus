@@ -85,7 +85,7 @@ window.WPGlobusCore;
 			var t = {},
 				return_in;
 			$.each(WPGlobusCoreData.enabled_languages, function(i,l){
-				return_in  = l == WPGlobusCoreData.language  ? 'RETURN_IN_DEFAULT_LANGUAGE' : 'RETURN_EMPTY';
+				return_in  = l == WPGlobusCoreData.default_language  ? 'RETURN_IN_DEFAULT_LANGUAGE' : 'RETURN_EMPTY';
 				t[l] = api.TextFilter(text, l, return_in);
 			});
 			return t;
