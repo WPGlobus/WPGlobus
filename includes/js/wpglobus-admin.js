@@ -99,7 +99,8 @@ window.WPGlobusDialogApp;
 	api = WPGlobusDialogApp = {
 		option : {
 			listenClass : '.wpglobus_dialog_start',
-			dialogTabs: '#wpglobus-dialog-tabs'
+			dialogTabs: '#wpglobus-dialog-tabs',
+			title: ''
 		},
 		form : undefined,
 		element : undefined,
@@ -148,6 +149,7 @@ window.WPGlobusDialogApp;
 				{ text:'Cancel', click: function(){api.dialog.dialog('close');} }
 			],
 			open: function() {
+				$('.wpglobus-dialog .ui-dialog-title').text(api.option.title);
 			},
 			close: function() {
 				api.form[0].reset();
@@ -266,7 +268,7 @@ jQuery(document).ready(function () {
 					this.options_general();	
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
 					WPGlobusWidgets.init();
-					WPGlobusDialogApp.init();
+					WPGlobusDialogApp.init({title:'Edit text'});
                 } else {
                     this.start();
                 }
@@ -905,7 +907,7 @@ jQuery(document).ready(function () {
 					}	
 				});
 
-				WPGlobusDialogApp.init(); 				
+				WPGlobusDialogApp.init({title:'Edit meta'}); 				
 				
 			}	
         };
