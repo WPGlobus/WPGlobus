@@ -722,6 +722,7 @@ class WPGlobus {
 		$enabled_pages[] = 'edit-tags.php';
 		$enabled_pages[] = 'edit.php';
 		$enabled_pages[] = 'options-general.php';
+		$enabled_pages[] = 'widgets.php';
 
 		/**
 		 * Init $post_content
@@ -1042,6 +1043,10 @@ class WPGlobus {
 
 				$page_action = 'options-general.php';
 
+			} else if ( 'widgets.php' == $page ) {
+				
+				$page_action = 'widgets.php';
+			
 			}
 
 			if ( ! empty( $this->vendors_scripts ) ) {
@@ -1125,8 +1130,20 @@ class WPGlobus {
 					true
 				);
 				wp_enqueue_script( 'wpglobus-acf' );				
-			}	
-		}
+			}
+			
+			if ( 'widgets.php' == $page ) {
+				wp_register_script(
+					'wpglobus-widgets',
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-widgets" . self::$_SCRIPT_SUFFIX . ".js",
+					array( 'jquery', 'wpglobus-admin' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				wp_enqueue_script( 'wpglobus-widgets' );				
+			}			
+			
+		} 	// endif $enabled_pages
 	}
 
 	/**
@@ -1230,7 +1247,7 @@ class WPGlobus {
 		global $post;
 		$type = empty( $post ) ? '' : $post->post_type;
 		if ( ! $this->disabled_entity( $type ) ) {
-			if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
+			if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit-tags.php', 'widgets.php' ) ) ) {
 
 				wp_register_style(
 					'wpglobus-admin-tabs',
@@ -2017,10 +2034,10 @@ class WPGlobus {
 			/* ]]> */
 		</script>
 		<?php
-
-		if ( WPGlobus_WP::is_pagenow(array('post.php')) ) {
+	
+		if ( WPGlobus_WP::is_pagenow(array('post.php', 'widgets.php')) ) {
 			/**
-			 * Output dialog form
+			 * Output dialog form for window.WPGlobusDialogApp
 			 */ 
 			?>
 			<div id="wpglobus-dialog-wrapper" title="Edit meta " class="hidden">
