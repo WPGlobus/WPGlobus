@@ -266,6 +266,9 @@ jQuery(document).ready(function () {
                     this.quick_edit('post');
                 } else if ('options-general.php' == WPGlobusAdmin.page) {
 					this.options_general();	
+                } else if ('widgets.php' == WPGlobusAdmin.page) {
+					WPGlobusWidgets.init();
+					WPGlobusDialogApp.init();
                 } else {
                     this.start();
                 }
