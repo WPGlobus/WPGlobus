@@ -815,8 +815,9 @@ class WPGlobus {
 			if ( in_array( $page, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
 				/**
 				 * Enqueue jQueryUI tabs
+				 *  @todo remove after checking workability, from now it is enough dependency @see line 1075
 				 */
-				wp_enqueue_script( 'jquery-ui-tabs' );
+				//wp_enqueue_script( 'jquery-ui-tabs' );
 
 				/**
 				 * Make suffixes for tabs
@@ -1071,7 +1072,7 @@ class WPGlobus {
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery', 'jquery-ui-dialog' ),
+				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ),
 				WPGLOBUS_VERSION,
 				true
 			);
