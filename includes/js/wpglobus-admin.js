@@ -100,7 +100,8 @@ window.WPGlobusDialogApp;
 	var api;
 	api = WPGlobusDialogApp = {
 		option : {
-			listenClass : '.wpglobus_dialog_start'
+			listenClass : '.wpglobus_dialog_start',
+			dialogTabs: '#wpglobus-dialog-tabs'
 		},
 		form : undefined,
 		element : undefined,
@@ -114,6 +115,7 @@ window.WPGlobusDialogApp;
 		
 		init : function(args) {
 			api.option = $.extend(api.option, args);
+			$(api.option.dialogTabs).tabs();
 			this.attachListener();
 		},
 		saveDialog: function() {
@@ -901,9 +903,6 @@ jQuery(document).ready(function () {
 						}	
 					}	
 				});
-
-				
-				$('#wpglobus-dialog-tabs').tabs();
 
 				WPGlobusDialogApp.init(); 				
 				
