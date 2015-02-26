@@ -65,6 +65,10 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 
 == Changelog ==
 
+= 1.0.6 =
+* ADDED:
+	* Filter to translate widget body.
+
 = 1.0.5 =
 * ADDED:
 	* Localization interface for ACF text and textarea fields; no need to format languages manually.
