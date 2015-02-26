@@ -16,10 +16,8 @@ Multilingual / Globalization: URL-based multilanguage; easy translation with Wor
 
 The current version of the plugin:
 
-* Provides admin interface to translate posts, pages, menus, categories and tags to multiple languages.
+* Provides admin interface to translate posts, pages, menus, widgets, categories and tags to multiple languages.
 * Adds a drop-down menu to a navigation menu, thus allowing to switch between languages, by changing the URL (`/{language}/page/`)
-
-> **Note:** the `/page/?lang={language}` URLs or subdomains are not supported.
 
 The administrator interface allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
@@ -56,6 +54,19 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 == Frequently Asked Questions ==
 
+= Do you plan to support subdomains and URL query parameters? =
+
+* The `/page/?lang={language}` URLs or subdomains are currently not supported. We do not have plans for that at the moment. If there will be a huge demand, we may release the support in a separate add-on. Having the support in the core would affect the overall performace.
+
+= How do I contribute to WPGlobus? =
+
+We appreciate all contributions, ideas, critique, and help.
+
+* To speed up our development, please report bugs, with reproduction steps, or post patches on [WPGlobus GitHub](https://github.com/WPGlobus/WPGlobus).
+* Contact us directly on [WPGlobus.com](http://www.wpglobus.com/contact-us/).
+
+= More info? =
+
 Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional information.
 
 == Screenshots ==
@@ -67,7 +78,7 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 
 = 1.0.6 =
 * ADDED:
-	* Filter to translate widget body.
+	* Admin interface and front filter to translate widgets.
 
 = 1.0.5 =
 * ADDED:
