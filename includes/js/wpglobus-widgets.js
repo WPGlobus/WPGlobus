@@ -63,7 +63,7 @@ window.WPGlobusWidgets;
 		attachListeners: function() {
 			$(document).ajaxComplete(function(ev, jqxhr, settings){
 				if ( -1 != settings.data.indexOf( 'action=save-widget') ) {
-					var response = $.trim(jqxhr.responseText);
+					//var response = $.trim(jqxhr.responseText);
 					if ( -1 != settings.data.indexOf( 'delete_widget=1' ) ) {
 						// deleted widget
 					} else {
