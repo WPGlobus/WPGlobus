@@ -46,13 +46,11 @@ window.WPGlobusCore;
 				pos_end = api.strpos( text, possible_delimiters[i]['end'], pos_start );
 
 				if ( pos_end === false ) {
-					// - Until end of string
-					length = null;
+					text = text.substr( pos_start );
 				} else {
-					length = pos_end - pos_start;
+					text = text.substr( pos_start, pos_end - pos_start );
 				}
 
-				text = text.substr( pos_start, length );
 				is_local_text_found = true;
 				break;
 	  
