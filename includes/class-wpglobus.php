@@ -1121,7 +1121,7 @@ class WPGlobus {
 			/**
 			 * Enqueue js for ACF support
 			 */
-			if ( $this->vendors_scripts['ACF'] ) {
+			if ( $this->vendors_scripts['ACF'] && in_array( $page, array( 'post.php', 'post-new.php') ) ) {
 				wp_register_script(
 					'wpglobus-acf',
 					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-acf" . self::$_SCRIPT_SUFFIX . ".js",
