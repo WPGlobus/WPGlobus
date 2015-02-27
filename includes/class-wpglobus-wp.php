@@ -28,6 +28,7 @@ class WPGlobus_WP {
 			self::is_doing_ajax() &&
 			(
 				self::is_http_post_action( 'inline-save' ) ||
+				self::is_http_post_action( 'save-widget' ) ||
 				self::is_http_get_action( 'ajax-tag-search' )
 			)
 		);
