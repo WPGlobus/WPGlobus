@@ -71,6 +71,10 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 * If this is a free theme/plugin, available on WordPress.org, written using the WordPress 4.x standards, we'll do our best to find a solution;
 * Unfortunately, we cannot help you with any commercial theme of plugin that demonstrates incompatibility with WPGlobus. However, if the theme/plugin's author wishes to contact us and work on the solution together - we'll be very happy to collaborate.
 
+= Do you plan to support WooCommerce, EDD, other e-Commerce plugins? =
+
+* Yes, we do. Currently working on WC. Other plugins will follow.
+
 = How do I contribute to WPGlobus? =
 
 We appreciate all contributions, ideas, critique, and help.
@@ -97,8 +101,9 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 = 1.0.6 =
 * ADDED:
 	* Admin interface and front filter to translate widgets.
-	* Filters for notifies the moderator email about a new comment
-	* German admin interface
+	* Deutsch (de_DE) PO / MO-Dateien für WPGlobus Administration.
+* FIXED:
+	* Clean subjects of the comment notification emails.
 
 = 1.0.5 =
 * ADDED:

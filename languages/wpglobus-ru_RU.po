@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
-"POT-Creation-Date: 2015-02-17 16:58-0500\n"
-"PO-Revision-Date: 2015-02-17 17:08-0500\n"
+"POT-Creation-Date: 2015-02-27 13:20-0500\n"
+"PO-Revision-Date: 2015-02-27 13:20-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -260,15 +260,15 @@ msgstr "Сохранить изменения"
 msgid "Delete Language"
 msgstr "Удалить язык"
 
-#: includes/class-wpglobus-filters.php:564
+#: includes/class-wpglobus-filters.php:565
 msgid "Error while saving."
 msgstr "Ошибка при сохранении."
 
-#: includes/class-wpglobus-filters.php:567
+#: includes/class-wpglobus-filters.php:568
 msgid "g:i:s a"
 msgstr "g:i:s a"
 
-#: includes/class-wpglobus-filters.php:569
+#: includes/class-wpglobus-filters.php:572
 #, php-format
 msgid "Draft saved at %s."
 msgstr "Черновик сохранен в %s."
@@ -285,19 +285,19 @@ msgstr ""
 msgid "<a href=\"%s\">Hide Notice</a>"
 msgstr "<a href=\"%s\">Скрыть это сообщение</a>"
 
-#: includes/class-wpglobus.php:820
+#: includes/class-wpglobus.php:835
 msgid "You cannot disable the first enabled language."
 msgstr "Нельзя отключить первый в списке язык."
 
-#: includes/class-wpglobus.php:947
+#: includes/class-wpglobus.php:962
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:1820
+#: includes/class-wpglobus.php:1911
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:1882
+#: includes/class-wpglobus.php:1973
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 
