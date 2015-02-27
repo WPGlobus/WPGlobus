@@ -1,0 +1,1149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPGlobus\n"
+"POT-Creation-Date: 2015-02-27 11:52+0700\n"
+"PO-Revision-Date: 2015-02-27 14:40+0700\n"
+"Last-Translator: Alex <a@a.ru>\n"
+"Language-Team: Alex <a@a.ru>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin/class-wpglobus-about.php:28
+msgid "About WPGlobus"
+msgstr "Über WPGlobus"
+
+#: includes/admin/class-wpglobus-about.php:35
+#: includes/options/class-wpglobus-options.php:104
+msgid "Thank you for installing WPGlobus!"
+msgstr "Danke, dass Sie für die Installation von WPGlobus!"
+
+#: includes/admin/class-wpglobus-about.php:48
+msgid "What&#8217;s New"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:50
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:52
+msgid "Feedback"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:54
+msgid "Breaking changes!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:61
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:68
+msgid "What is WPGlobus"
+msgstr "Was ist WPGlobus"
+
+#: includes/admin/class-wpglobus-about.php:70
+msgid ""
+"WPGlobus is a globalization (multi-lingual, internationalization, "
+"localization, ...) WordPress plugin."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:72
+msgid ""
+"Our goal is to let WordPress support multiple languages, countries and "
+"currencies (for e-commerce)."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:74
+#, php-format
+msgid "For more information, please visit %s."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:79
+msgid "Feature Highlights"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:82
+msgid "Add multiple languages and countries to your site."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:83
+msgid ""
+"Translate posts, pages, categories, tags and menus using a clean and simple "
+"interface."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:84
+msgid ""
+"Switch languages at the front-end using a drop-down menu with language names "
+"and country flags."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:85
+#, php-format
+msgid ""
+"Continue using the %s - yes, WPGlobus supports the WP-SEO titles and "
+"descriptions in multiple languages!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:92
+msgid "Important"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:95
+msgid ""
+"The plugin is currently in <strong>BETA</strong> stage! We will do our best "
+"to fix all problems you'll discover. Please be patient. Your contributions "
+"(on GitHub) are highly appreciated!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:99
+msgid ""
+"WPGlobus only supports the localization URLs in the form of <code>example."
+"com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
+"com</code> and language queries <code>example.com?lang=xx</code>."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:103
+msgid ""
+"The ALPHA version (0.1.x, called internally <em>\"WPGlobus Mini\"</em>) is "
+"no longer supported. See the note below for more details."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:111
+msgid "Warning! WPGlobus Mini (0.x.x) is no longer supported!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:113
+msgid ""
+"The versions 0.x.x provided the existing users of other language plugins "
+"with a language-switcher menu dropdown. We are going to keep the language "
+"switcher, but we have dropped the support of subdomains and language queries "
+"in our plugin. If your site is using subdomains or <code>?lang=xx</code>, "
+"and you'd like to keep that behavior, please do not use WPGlobus starting "
+"from the version 1.0.0."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:118
+#, php-format
+msgid "To downgrage, please download the version 0.1.1 using %s."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:126
+msgid "Go to WPGlobus Settings"
+msgstr "Zum WPGlobus Einstellungen"
+
+#: includes/admin/class-wpglobus-language-edit.php:173
+#: includes/admin/class-wpglobus-language-edit.php:178
+msgid "Options updated"
+msgstr "Optionen aktualisiert"
+
+#: includes/admin/class-wpglobus-language-edit.php:249
+msgid "Please enter a language code!"
+msgstr "Bitte geben Sie den Sprachcode!"
+
+#: includes/admin/class-wpglobus-language-edit.php:253
+msgid "Language code already exists!"
+msgstr "Sprachcode bereits vorhanden ist!"
+
+#: includes/admin/class-wpglobus-language-edit.php:257
+msgid "Please specify the language flag!"
+msgstr "Bitte geben Sie die Sprache Flagge!"
+
+#: includes/admin/class-wpglobus-language-edit.php:261
+msgid "Please enter the language name!"
+msgstr "Bitte geben Sie den Namen der Sprache!"
+
+#: includes/admin/class-wpglobus-language-edit.php:265
+msgid "Please enter the language name in English!"
+msgstr "Bitte geben Sie die Sprache englische Bezeichnung!"
+
+#: includes/admin/class-wpglobus-language-edit.php:269
+msgid "Please enter the locale!"
+msgstr "Bitte geben Sie die locale!"
+
+#: includes/admin/class-wpglobus-language-edit.php:326
+msgid "Edit Language"
+msgstr "ändern Sprache"
+
+#: includes/admin/class-wpglobus-language-edit.php:328
+msgid "Are you sure you want to delete?"
+msgstr "Sind Sie sicher, dass Sie löschen wollen?"
+
+#: includes/admin/class-wpglobus-language-edit.php:331
+msgid "Add Language"
+msgstr "Sprache hinzufügen"
+
+#: includes/admin/class-wpglobus-language-edit.php:355
+msgid "Language Code"
+msgstr "Sprachcode"
+
+#: includes/admin/class-wpglobus-language-edit.php:362
+msgid ""
+"2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
+msgstr ""
+"2-Buchstaben ISO-Sprachencode für die Sprache, die Sie einfügen möchten. "
+"(Beispiel: en)"
+
+#: includes/admin/class-wpglobus-language-edit.php:366
+msgid "Language flag"
+msgstr "Sprache Flagge"
+
+#: includes/admin/class-wpglobus-language-edit.php:385
+msgid "Name"
+msgstr "Name"
+
+#: includes/admin/class-wpglobus-language-edit.php:390
+msgid ""
+"The name of the language in its native alphabet. (Examples: English, Русский)"
+msgstr ""
+"Der Name der Sprache in seiner nativen Alphabet. (Beispiele: English, "
+"Deutsch)"
+
+#: includes/admin/class-wpglobus-language-edit.php:395
+msgid "Name in English"
+msgstr "Name Sie in englischer Sprache"
+
+#: includes/admin/class-wpglobus-language-edit.php:400
+msgid "The name of the language in English"
+msgstr "Der Name der Sprache auf Englisch"
+
+#: includes/admin/class-wpglobus-language-edit.php:404
+#: includes/options/fields/table/table-languages.php:76
+msgid "Locale"
+msgstr ""
+
+#: includes/admin/class-wpglobus-language-edit.php:409
+msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
+msgstr "PHP/Wordpress Gebietsschema der Sprache. (Beispiele: en_US, de_DE)"
+
+#: includes/admin/class-wpglobus-language-edit.php:417
+#: vendor/ReduxCore/framework.php:3191 vendor/ReduxCore/framework.php:3499
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: includes/admin/class-wpglobus-language-edit.php:421
+msgid "Delete Language"
+msgstr "Sprache löschen"
+
+#: includes/class-wpglobus-filters.php:565
+msgid "Error while saving."
+msgstr ""
+
+#: includes/class-wpglobus-filters.php:568
+msgid "g:i:s a"
+msgstr ""
+
+#: includes/class-wpglobus-filters.php:572
+#, php-format
+msgid "Draft saved at %s."
+msgstr ""
+
+#: includes/class-wpglobus-upgrade.php:23
+#, php-format
+msgid "Updated from WPGlobus Mini. Please, read instructions at %s"
+msgstr ""
+
+#: includes/class-wpglobus-upgrade.php:27
+#, php-format
+msgid "<a href=\"%s\">Hide Notice</a>"
+msgstr ""
+
+#: includes/class-wpglobus.php:835
+msgid "You cannot disable the first enabled language."
+msgstr "Sie können die erste aktivierte Sprache nicht deaktiviert werden."
+
+#: includes/class-wpglobus.php:962
+msgid "*) Available after the menu is saved."
+msgstr ""
+
+#: includes/class-wpglobus.php:1911
+msgid "Enter title here"
+msgstr ""
+
+#: includes/class-wpglobus.php:1973
+msgid "Invalid taxonomy"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:85
+msgid "WARNING: Redux Framework upgrade is highly recommended!"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:87
+#, php-format
+msgid ""
+"WPGlobus administration panel requires Redux Framework %2$s or later. The "
+"version you have installed is %1$s."
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:109
+msgid "Read About WPGlobus"
+msgstr "Lesen Über WPGlobus"
+
+#: includes/options/class-wpglobus-options.php:112
+msgid ""
+"Click the <strong>[Languages]</strong> tab at the left to setup the various "
+"options."
+msgstr ""
+"Klicken Sie auf die Registerkarte <strong>[Sprachen]</strong> auf der linken "
+"Seite, um das Setup der verschiedenen Optionen."
+
+#: includes/options/class-wpglobus-options.php:114
+msgid ""
+"Use the <strong>[Languages Table]</strong> section to add a new language or "
+"to edit the language attributes: name, code, flag icon, etc."
+msgstr ""
+"Verwenden Sie den Abschnitt <strong>[Sprachen-Tabelle]</strong>, um eine "
+"neue Sprache hinzuzufügen oder um die Sprache zu bearbeiten Attribute: Name, "
+"Code, Flaggen-Symbol usw."
+
+#: includes/options/class-wpglobus-options.php:117
+msgid ""
+"Should you have any questions or comments, please do not hesitate to contact "
+"us."
+msgstr ""
+"Sollten Sie Fragen oder Anmerkungen haben, zögern Sie bitte nicht, uns zu "
+"kontaktieren."
+
+#: includes/options/class-wpglobus-options.php:121
+msgid "Sincerely Yours,"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:123
+msgid "The WPGlobus Team"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:131
+msgid "Welcome!"
+msgstr "Willkommen!"
+
+#: includes/options/class-wpglobus-options.php:188
+msgid "No navigation menu"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:190
+msgid "Select navigation menu"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:194
+msgid "Languages"
+msgstr "Sprachen"
+
+#: includes/options/class-wpglobus-options.php:201
+msgid "Enabled Languages"
+msgstr "Aktivierte Sprachen"
+
+#: includes/options/class-wpglobus-options.php:203
+msgid ""
+"The first language in the list is the default one. <br>To reorder, drag and "
+"drop with the icons at the right."
+msgstr ""
+"Die erste Sprache in der Liste ist der Standard ein.<br>Um neu anzuordnen, "
+"ziehen Sie mit den Symbolen auf der rechten Seite."
+
+#: includes/options/class-wpglobus-options.php:205
+msgid "Uncheck to remove from the list"
+msgstr "Deaktivieren Sie die Option, um aus der Liste entfernen"
+
+#: includes/options/class-wpglobus-options.php:213
+msgid "Add Languages"
+msgstr "Sprachen hinzufügen"
+
+#: includes/options/class-wpglobus-options.php:216
+msgid ""
+"Choose a language you would like to enable. <br>Press the [Save Changes] "
+"button to confirm."
+msgstr ""
+"Wählen Sie eine Sprache, die Sie möchten, zu ermöglichen. <br> Drücken Sie "
+"die [Änderungen Speichern], um zu bestätigen."
+
+#: includes/options/class-wpglobus-options.php:217
+msgid "Select a language"
+msgstr "Wählen Sie eine Sprache"
+
+#: includes/options/class-wpglobus-options.php:243
+msgid "Language Selector Mode"
+msgstr "Language Selector-Modus"
+
+#: includes/options/class-wpglobus-options.php:246
+msgid ""
+"Choose the way language name and country flag are shown in the drop-down menu"
+msgstr ""
+"Wählen Sie die Art der Display-Sprache Namen und die Flagge des Landes, in "
+"dem Dropdown-Menü"
+
+#: includes/options/class-wpglobus-options.php:252
+msgid "Two-letter Code (en, ru, it, etc.)"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:253
+msgid "Full Name (English, Russian, Italian, etc.)"
+msgstr "Vollständiger Name  (English, Russian, Italian, etc.)"
+
+#: includes/options/class-wpglobus-options.php:254
+msgid "Flags only"
+msgstr "nur Flaggen"
+
+#: includes/options/class-wpglobus-options.php:262
+msgid "Language Selector Menu"
+msgstr "Language Selector Menu"
+
+#: includes/options/class-wpglobus-options.php:265
+msgid "Choose the navigation menu where the language selector will be shown"
+msgstr "Wählen Sie das Navigationsmenü, wo die Sprachwahl wird angezeigt"
+
+#: includes/options/class-wpglobus-options.php:276
+msgid "Custom CSS"
+msgstr "Benutzerdefinierte CSS"
+
+#: includes/options/class-wpglobus-options.php:280
+msgid ""
+"Here you can enter the CSS rules to adjust the language selector menu for "
+"your theme. Look at the examples in the `style-samples.css` file."
+msgstr ""
+"Hier können Sie die CSS-Regeln geben, um die Sprachwahl-Menü für Ihr Thema "
+"ein. Schauen Sie sich die Beispiele in der `style-samples.css` Datei"
+
+#: includes/options/class-wpglobus-options.php:281
+msgid "(Optional)"
+msgstr "(Fakultativ)"
+
+#: includes/options/class-wpglobus-options.php:292
+msgid "Languages table"
+msgstr "Sprachen-Tabelle"
+
+#: includes/options/class-wpglobus-options.php:298
+msgid "Use this table to add, edit or delete languages."
+msgstr ""
+"Verwenden Sie diese Tabelle, um Sprachen hinzuzufügen, bearbeiten oder "
+"löschen."
+
+#: includes/options/class-wpglobus-options.php:299
+msgid "NOTE: you cannot delete the default language."
+msgstr "HINWEIS: Sie können die Standardsprache kann nicht gelöscht werden."
+
+#: includes/options/class-wpglobus-options.php:336
+#: includes/options/class-wpglobus-options.php:337
+msgid "WPGlobus"
+msgstr ""
+
+#: includes/options/fields/table/table-languages.php:25
+msgid "item"
+msgstr ""
+
+#: includes/options/fields/table/table-languages.php:27
+msgid "items"
+msgstr ""
+
+#: includes/options/fields/table/table-languages.php:49
+msgid "Code"
+msgstr "Code"
+
+#: includes/options/fields/table/table-languages.php:55
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: includes/options/fields/table/table-languages.php:60
+msgid "Delete"
+msgstr "Löschen"
+
+#: includes/options/fields/table/table-languages.php:66
+msgid "File"
+msgstr "Datei"
+
+#: includes/options/fields/table/table-languages.php:71
+msgid "Flag"
+msgstr "Flagge"
+
+#: includes/options/fields/table/table-languages.php:81
+msgid "Language name"
+msgstr "Sprache Name"
+
+#: includes/options/fields/table/table-languages.php:86
+msgid "English language name"
+msgstr "Englisch Sprachnamen"
+
+#: includes/options/fields/table/table-languages.php:109
+msgid "No items found"
+msgstr ""
+
+#: includes/options/fields/table/table-languages.php:119
+msgid "Add new Language"
+msgstr "Fügen Sie neue Sprache"
+
+#: includes/options/fields/table/table-languages.php:325
+msgid "Default language"
+msgstr ""
+
+#: internal/archive/tivwp-tours.php:55
+msgid "Please choose:"
+msgstr ""
+
+#: vendor/ReduxCore/extensions/customizer/extension_customizer.php:467
+#: vendor/ReduxCore/framework.php:1761
+msgid "You have changes that are not saved. Would you like to save them now?"
+msgstr ""
+
+#: vendor/ReduxCore/extensions/customizer/extension_customizer.php:468
+#: vendor/ReduxCore/framework.php:1769
+msgid "Are you sure? Resetting will lose all custom values."
+msgstr ""
+
+#: vendor/ReduxCore/extensions/customizer/extension_customizer.php:469
+#: vendor/ReduxCore/framework.php:1785
+msgid ""
+"Your current options will be replaced with the values of this preset. Would "
+"you like to proceed?"
+msgstr ""
+
+#: vendor/ReduxCore/extensions/customizer/extension_customizer.php:502
+msgid "You have changes that are not saved.  Would you like to save them now?"
+msgstr ""
+
+#: vendor/ReduxCore/extensions/customizer/extension_customizer.php:503
+msgid "Are you sure?  Resetting will lose all custom values."
+msgstr ""
+
+#: vendor/ReduxCore/extensions/customizer/extension_customizer.php:504
+msgid ""
+"Your current options will be replaced with the values of this preset.  Would "
+"you like to proceed?"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:172
+#, php-format
+msgid "Options panel created using %1$s"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:172
+msgid "Redux Framework"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:176 vendor/ReduxCore/framework.php:180
+msgid "Options"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:1218 vendor/ReduxCore/framework.php:1219
+#: vendor/ReduxCore/framework.php:3363 vendor/ReduxCore/framework.php:3442
+msgid "System Info"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:1777
+msgid "Are you sure? Resetting will lose all custom values in this section."
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:1792
+msgid "Please Wait"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:1938
+msgid "Hints"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:1939
+msgid "<p>"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:2063
+msgid "Default"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3115
+msgid "Warning- This options panel will not work properly without javascript!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3189
+msgid "Expand"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3195 vendor/ReduxCore/framework.php:3503
+msgid "Reset Section"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3197 vendor/ReduxCore/framework.php:3505
+msgid "Reset All"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3202 vendor/ReduxCore/framework.php:3510
+msgid "Working..."
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3222
+msgid "Settings Imported!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3237
+msgid "All Defaults Restored!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3251
+msgid "Section Defaults Restored!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3265
+msgid "Settings Saved!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3283
+msgid "Settings have changed, you should save them!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3291
+msgid "error(s) were found!"
+msgstr ""
+
+#: vendor/ReduxCore/framework.php:3299
+msgid "warning(s) were found!"
+msgstr ""
+
+#: vendor/ReduxCore/inc/class.redux_filesystem.php:22
+msgid "Unable to create a required directory. Please ensure that"
+msgstr ""
+
+#: vendor/ReduxCore/inc/class.redux_filesystem.php:24
+msgid ""
+"has the proper read/write permissions or enter your FTP information below."
+msgstr ""
+
+#: vendor/ReduxCore/inc/class.redux_functions.php:252
+msgid "Dismiss"
+msgstr ""
+
+#: vendor/ReduxCore/inc/debug.php:41 vendor/ReduxCore/inc/debug.php:69
+#: vendor/ReduxCore/inc/debug.php:76 vendor/ReduxCore/inc/debug.php:77
+msgid "Options Object"
+msgstr ""
+
+#: vendor/ReduxCore/inc/debug.php:54
+msgid "Show Object in Javascript Console Object"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:124
+#: vendor/ReduxCore/inc/fields/color/field_color.php:72
+#: vendor/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:79
+#: vendor/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:91
+#: vendor/ReduxCore/inc/fields/color_rgba/field_color_rgba.php:77
+msgid "Transparent"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:141
+msgid "Background Repeat"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:157
+msgid "Background Clip"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:173
+msgid "Background Origin"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:188
+msgid "Background Size"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:203
+msgid "Background Attachment"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:223
+msgid "Background Position"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:277
+#: vendor/ReduxCore/inc/fields/media/field_media.php:112
+msgid "No media selected"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:314
+#: vendor/ReduxCore/inc/fields/media/field_media.php:154
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:126
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:188
+msgid "Upload"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/background/field_background.php:321
+#: vendor/ReduxCore/inc/fields/media/field_media.php:161
+#: vendor/ReduxCore/inc/fields/multi_text/field_multi_text.php:68
+#: vendor/ReduxCore/inc/fields/multi_text/field_multi_text.php:72
+#: vendor/ReduxCore/inc/fields/multi_text/field_multi_text.php:75
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:133
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:190
+msgid "Remove"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/border/field_border.php:114
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:191
+msgid "All"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/border/field_border.php:127
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:215
+msgid "Top"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/border/field_border.php:134
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:222
+msgid "Right"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/border/field_border.php:141
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:229
+msgid "Bottom"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/border/field_border.php:148
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:236
+msgid "Left"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/border/field_border.php:162
+msgid "Border style"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:68
+msgid "From "
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:82
+msgid "To "
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/dimensions/field_dimensions.php:161
+msgid "Width"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/dimensions/field_dimensions.php:177
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:455
+msgid "Height"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/dimensions/field_dimensions.php:188
+#: vendor/ReduxCore/inc/fields/dimensions/field_dimensions.php:189
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:245
+#: vendor/ReduxCore/inc/fields/spacing/field_spacing.php:246
+msgid "Units"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/gallery/field_gallery.php:73
+msgid "Add/Edit Gallery"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/gallery/field_gallery.php:74
+msgid "Clear Gallery"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/link_color/field_link_color.php:87
+msgid "Regular"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/link_color/field_link_color.php:91
+msgid "Hover"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/link_color/field_link_color.php:95
+msgid "Visited"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/link_color/field_link_color.php:99
+msgid "Active"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/multi_text/field_multi_text.php:60
+msgid "Add More"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/password/field_password.php:62
+msgid "Password"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/password/field_password.php:63
+msgid "Username"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/select/field_select.php:82
+#: vendor/ReduxCore/inc/fields/select_image/field_select_image.php:62
+msgid "Select an item"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/select/field_select.php:126
+#: vendor/ReduxCore/inc/fields/select_image/field_select_image.php:143
+msgid "No items of this type were found."
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:68
+msgid "Slide"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:73
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:145
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:200
+msgid "Title"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:149
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:204
+msgid "Description"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:153
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:207
+msgid "URL"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:167
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:220
+#, php-format
+msgid "Delete %s"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/slides/field_slides.php:223
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/switch/field_switch.php:41
+msgid "On"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/switch/field_switch.php:44
+msgid "Off"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:256
+msgid "Font Family"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:257
+msgid "Font family"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:283
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:284
+msgid "Backup Font Family"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:298
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:305
+msgid "Font style"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:299
+msgid "Font Weight &amp; Style"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:305
+msgid "Style"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:335
+msgid "Font subsets"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:337
+msgid "Font Subsets"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:338
+msgid "Subsets"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:338
+msgid "Font script"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:355
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:356
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:357
+msgid "Text Align"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:378
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:379
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:380
+msgid "Text Transform"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:401
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:402
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:403
+msgid "Font Variant"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:421
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:422
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:423
+msgid "Text Decoration"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:445
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:446
+msgid "Font Size"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:446
+msgid "Size"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:454
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:455
+msgid "Line Height"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:463
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:464
+msgid "Word Spacing"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:472
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:473
+msgid "Letter Spacing"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:491
+msgid "Font Color"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:493
+msgid "Font color"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:823
+msgid "Standard Fonts"
+msgstr ""
+
+#: vendor/ReduxCore/inc/fields/typography/field_typography.php:930
+msgid "Google Webfonts"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:78
+msgid "Import / Export Options"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:81
+msgid "Import Options"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:82
+msgid "Import from file"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:82
+msgid "Import from URL"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:85
+msgid ""
+"Input your backup file below and hit Import to restore your sites options "
+"from a backup."
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:90
+msgid ""
+"Input the URL to another sites options set and hit Import to load the "
+"options from that site."
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:94
+msgid "Import"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:94
+msgid ""
+"WARNING! This will overwrite all existing option values, please proceed with "
+"caution!"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:97
+msgid "Export Options"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:100
+msgid ""
+"Here you can copy/download your current option settings. Keep this safe as "
+"you can use it as a backup should anything go wrong, or you can use it to "
+"restore your settings on this site (or any other site)."
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:104
+msgid "Copy"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:104
+msgid "Download"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:104
+msgid "Copy Link"
+msgstr ""
+
+#: vendor/ReduxCore/inc/import_export.php:140
+#: vendor/ReduxCore/inc/import_export.php:149
+#: vendor/ReduxCore/inc/import_export.php:150
+msgid "Import / Export"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:130
+msgid "Help improve Our Panel"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:131
+msgid ""
+"Please helps us improve our panel by allowing us to gather anonymous usage "
+"stats so we know which configurations, plugins and themes to test to ensure "
+"compatibility."
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:136
+msgid "Allow tracking"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:141
+msgid "Do not allow tracking"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:152
+msgid "Welcome to the Redux Demo Panel"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:153
+msgid "Getting Started"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:153
+#, php-format
+msgid ""
+"This panel demonstrates the many features of Redux.  Before digging in, we "
+"suggest you get up to speed by reviewing %1$s."
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:153
+msgid "our documentation"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:154
+msgid "Redux Generator"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:154
+#, php-format
+msgid ""
+"Want to get a head start? Use the %1$s. It will create a customized "
+"boilerplate theme or a standalone admin folder complete with all things "
+"Redux (with the help of Underscores and TGM). Save yourself a headache and "
+"try it today."
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:155
+msgid "Redux Extensions"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:155
+#, php-format
+msgid ""
+"Did you know we have extensions, which greatly enhance the features of "
+"Redux?  Visit our %1$s to learn more!"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:155
+msgid "extensions directory"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:156
+msgid "Like Redux?"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:156
+#, php-format
+msgid ""
+"If so, please %1$s and consider making a %2$s to keep development of Redux "
+"moving forward."
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:156
+msgid "leave us a favorable review on WordPress.org"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:156
+msgid "donation"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:157
+msgid "Newsletter"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:157
+msgid ""
+"If you'd like to keep up to with all things Redux, please subscribe to our "
+"newsletter"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:158
+msgid "Email address"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:158
+msgid "Subscribe"
+msgstr ""
+
+#: vendor/ReduxCore/inc/tracking.php:167
+msgid "Close"
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/color/validation_color.php:15
+#: vendor/ReduxCore/inc/validation/color_rgba/validation_color_rgba.php:14
+#: vendor/ReduxCore/inc/validation/colorrgba/validation_colorrgba.php:16
+msgid "This field must be a valid color value."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/comma_numeric/validation_comma_numeric.php:16
+msgid ""
+"You must provide a comma separated list of numerical values for this option."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/date/validation_date.php:16
+msgid "This field must be a valid date."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/email/validation_email.php:16
+#: vendor/ReduxCore/inc/validation/email_not_empty/validation_email_not_empty.php:16
+msgid "You must provide a valid email for this option."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/no_html/validation_no_html.php:15
+msgid ""
+"You must not enter any HTML in this field, all HTML tags have been removed."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:16
+msgid ""
+"You must not enter any special characters in this field, all special "
+"characters have been removed."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/not_empty/validation_not_empty.php:16
+msgid "This field cannot be empty. Please provide a value."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/numeric/validation_numeric.php:16
+#: vendor/ReduxCore/inc/validation/numeric_not_empty/validation_numeric_not_empty.php:16
+msgid "You must provide a numerical value for this option."
+msgstr ""
+
+#: vendor/ReduxCore/inc/validation/url/validation_url.php:16
+msgid "You must provide a valid URL for this option."
+msgstr ""
