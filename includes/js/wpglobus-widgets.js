@@ -1,11 +1,11 @@
 /**
- * WPGlobus Administration
+ * WPGlobus Administration Widgets
  * Interface JS functions
  *
  * @since 1.0.6
  *
  * @package WPGlobus
- * @subpackage Core administration
+ * @subpackage Administration
  */
 window.WPGlobusWidgets;
 

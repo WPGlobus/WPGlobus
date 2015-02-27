@@ -1,3 +1,12 @@
+/**
+ * WPGlobus Administration Core, Dialog, Admin
+ * Interface JS functions
+ *
+ * @since 1.0.0
+ *
+ * @package WPGlobus
+ * @subpackage Administration
+ */
 /*jslint browser: true*/
 /*global jQuery, console, WPGlobusCore, WPGlobusDialogApp, WPGlobusAdmin, inlineEditPost */
 

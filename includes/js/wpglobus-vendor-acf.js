@@ -1,11 +1,11 @@
 /**
- * WPGlobus Administration
+ * WPGlobus Administration ACF plugin fields
  * Interface JS functions
  *
  * @since 1.0.5
  *
  * @package WPGlobus
- * @subpackage Vendor Administration
+ * @subpackage Administration
  */
 
 jQuery(document).ready(function($){
