@@ -16,7 +16,7 @@ window.WPGlobusWidgets;
 			api.add_elements();
 			api.attachListeners();
 		},	
-		add_elements : function(get_by, coid, action) {
+		add_elements : function(get_by, coid) {
 			var id, elem = [];
 			elem[0] = 'input[type="text"]';
 			elem[1] = 'textarea';
