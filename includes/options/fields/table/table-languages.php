@@ -284,7 +284,7 @@ class LanguagesTable extends WP_List_table {
 	}
 
 	/**
-	 * Define function for add item actions by name 'column_flag'
+	 * Define function for add item actions by name 'column_locale'
 	 * @since 1.0.0
 	 *
 	 * @param  $item array
