@@ -116,21 +116,21 @@ class WPGlobus_Filters {
 
 		/**
 		 * Don't filter term names for trash and untrash single post
-		 * @see we check post.php page instead of edit.php because redirect 
-		 */	
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset($_GET['action']) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
-		) {
-			return $terms;
-		}	
-		
-		/**
-		 * Don't filter term names bulk trash and untrash posts
+		 * @see we check post.php page instead of edit.php because redirect
 		 */
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset($_GET['action']) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset( $_GET['action'] ) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
 		) {
 			return $terms;
 		}
-		
+
+		/**
+		 * Don't filter term names bulk trash and untrash posts
+		 */
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset( $_GET['action'] ) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
+		) {
+			return $terms;
+		}
+
 		/**
 		 * Don't filter term names for bulk edit post from edit.php page
 		 */
@@ -160,14 +160,14 @@ class WPGlobus_Filters {
 
 		/**
 		 * Don't filter term names for heartbeat autosave
-		 */		
+		 */
 		if ( WPGlobus_WP::is_http_post_action( 'heartbeat' ) &&
-			WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) &&
-			! empty( $_POST['data']['wp_autosave'] )
+		     WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) &&
+		     ! empty( $_POST['data']['wp_autosave'] )
 		) {
 			return $terms;
 		}
-		
+
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
@@ -425,7 +425,7 @@ class WPGlobus_Filters {
 		 * Set language of current page
 		 */
 		WPGlobus::Config()->language = WPGlobus::Config()->url_info['language'];
-		
+
 		/**
 		 * @quirks
 		 * This might be needed if we'd support subdomains or language queries
@@ -434,16 +434,16 @@ class WPGlobus_Filters {
 		//		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
 
 	}
-	
+
 	/**
-	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info 
-	 *
+	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info
 	 * @since 1.0.0
 	 *
 	 * @param WP_Post[] $object
+	 *
 	 * @return WP_Post[]
 	 */
-	public static function filter__nav_menu_item($object) {
+	public static function filter__nav_menu_item( $object ) {
 		/**
 		 * This filter is used at nav-menus.php page for .field-move elements
 		 */
@@ -456,104 +456,105 @@ class WPGlobus_Filters {
 				$object->description = WPGlobus_Core::text_filter( $object->description, WPGlobus::Config()->language );
 			}
 
-		}		
+		}
+
 		return $object;
-	}	
-	
+	}
+
 	/**
 	 * Filter @see nav_menu_description
-	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $description
+	 *
 	 * @return string
 	 */
-	public static function filter__nav_menu_description($description) {
+	public static function filter__nav_menu_description( $description ) {
 		/**
 		 * This filter for translate menu item description
 		 */
 		if ( ! empty( $description ) ) {
 			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
 		}
+
 		return $description;
-	}		
+	}
 
 	/**
 	 * Filter @see heartbeat_received
-	 *
 	 * @since 1.0.1
 	 *
-	 * @param array $response
-	 * @param array $data
+	 * @param array  $response
+	 * @param array  $data
 	 * @param string $screen_id
+	 *
 	 * @return array
 	 */
-	public static function filter__heartbeat_received($response, $data, $screen_id) {
-		
-		if ( false !== strpos($_SERVER['HTTP_REFERER'], 'wpglobus=off') ) {
+	public static function filter__heartbeat_received( $response, $data, $screen_id ) {
+
+		if ( false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
 			/**
-			 * Check $_SERVER['HTTP_REFERER'] for wpglobus toggle is off because wpglobus-admin.js doesn't loaded in this mode 
+			 * Check $_SERVER['HTTP_REFERER'] for wpglobus toggle is off because wpglobus-admin.js doesn't loaded in this mode
 			 */
 			return $response;
-		}	
-			
+		}
+
 		if ( ! empty( $data['wp_autosave'] ) ) {
 
-			if ( empty($data['wp_autosave']['post_id']) || (int) $data['wp_autosave']['post_id'] == 0 ) {
+			if ( empty( $data['wp_autosave']['post_id'] ) || (int) $data['wp_autosave']['post_id'] == 0 ) {
 				/**
 				 * wp_autosave may come from edit.php page
 				 */
 				return $response;
-			}	
-			
-			if ( empty($data['wpglobus_heartbeat']) ) {
+			}
+
+			if ( empty( $data['wpglobus_heartbeat'] ) ) {
 				/**
-				 * Check for wpglobus key 
+				 * Check for wpglobus key
 				 */
 				return $response;
 			}
 
-			$title_wrap = false;
-			$content_wrap = false;
+			$title_wrap     = false;
+			$content_wrap   = false;
 			$post_title_ext = '';
-			$content_ext = '';
-			
-			foreach( WPGlobus::Config()->enabled_languages as $language ) {
+			$content_ext    = '';
+
+			foreach ( WPGlobus::Config()->enabled_languages as $language ) {
 				if ( $language == WPGlobus::Config()->default_language ) {
-					 
+
 					$post_title_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['post_title'], $language );
-					$content_ext 	.= WPGlobus::add_locale_marks( $data['wp_autosave']['content'], $language );
-				
+					$content_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['content'], $language );
+
 				} else {
-				
-					if ( !empty($data['wp_autosave']['post_title_' . $language]) ) {
+
+					if ( ! empty( $data['wp_autosave'][ 'post_title_' . $language ] ) ) {
 						$title_wrap = true;
-						$post_title_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['post_title_' . $language], $language );
-					}	
-					
-					if ( !empty($data['wp_autosave']['content_' . $language]) ) {
+						$post_title_ext .= WPGlobus::add_locale_marks( $data['wp_autosave'][ 'post_title_' . $language ], $language );
+					}
+
+					if ( ! empty( $data['wp_autosave'][ 'content_' . $language ] ) ) {
 						$content_wrap = true;
-						$content_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['content_' . $language], $language );
-					}				
-		
+						$content_ext .= WPGlobus::add_locale_marks( $data['wp_autosave'][ 'content_' . $language ], $language );
+					}
+
 				}
 			}
-			
+
 			if ( $title_wrap ) {
-				$data['wp_autosave']['post_title'] = $post_title_ext; 
+				$data['wp_autosave']['post_title'] = $post_title_ext;
 			}
-			
+
 			if ( $content_wrap ) {
-				$data['wp_autosave']['content'] = $content_ext; 
-			}		
-			
+				$data['wp_autosave']['content'] = $content_ext;
+			}
+
 			/**
 			 * Filter before autosave
-			 * 
 			 * @since 1.0.2
 			 *
-			 * @param array $data['wp_autosave'] Array of post data.
-			 */			
+			 * @param array $data ['wp_autosave'] Array of post data.
+			 */
 			$data['wp_autosave'] = apply_filters( 'wpglobus_autosave_post_data', $data['wp_autosave'] );
 
 			$saved = wp_autosave( $data['wp_autosave'] );
@@ -566,32 +567,81 @@ class WPGlobus_Filters {
 				/* translators: draft saved date format, see http://php.net/date */
 				$draft_saved_date_format = __( 'g:i:s a' );
 				/* translators: %s: date and time */
-				$response['wp_autosave'] = array( 'success' => true, 'message' => sprintf( __( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) ) );
+				$response['wp_autosave'] = array(
+					'success' => true,
+					'message' => sprintf( __( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) )
+				);
 			}
-			
+
 		}
+
 		return $response;
 	}
 
 	/**
 	 * Filter @see wp_nav_menu_objects
-	 *
 	 * @since 1.0.2
 	 *
 	 * @param array $object
+	 *
 	 * @return array
 	 */
-	public static function filter__nav_menu_objects($object) {
+	public static function filter__nav_menu_objects( $object ) {
 
 		if ( is_array( $object ) ) {
 			foreach ( $object as &$post ) {
 				if ( ! empty( $post->attr_title ) ) {
-						$post->attr_title = WPGlobus_Core::text_filter( $post->attr_title, WPGlobus::Config()->language );
-				}	
+					$post->attr_title = WPGlobus_Core::text_filter( $post->attr_title, WPGlobus::Config()->language );
+				}
 			}
-		}			
+		}
+
 		return $object;
+
+	}
+
+	/**
+	 * Translate widget strings (besides the title handled by the `widget_title` filter)
+	 * @see WP_Widget::display_callback
+	 * @scope front
+	 *
+	 * @param string[] $instance
+	 *
+	 * @return string[]
+	 * @since 1.0.6
+	 */
+	public static function filter__widget_display_callback( $instance ) {
+
+		foreach ( $instance as &$widget_setting ) {
+
+			if ( ! empty( $widget_setting ) && is_string( $widget_setting ) ) {
+				$widget_setting =
+					WPGlobus_Core::text_filter( $widget_setting, WPGlobus::Config()->language );
+			}
+		}
+
+		return $instance;
+	}
 	
+	/**
+	 * Filter @see comment_moderation_text,
+	 *		  @see comment_moderation_subject
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param string $text
+	 * @param int $comment_id 
+	 *
+	 * @return string
+	 */
+	public static function filter__comment_moderation( $text, $comment_id ) {
+
+		$comment = get_comment($comment_id);
+		$post 	 = get_post($comment->comment_post_ID);
+		$title 	 = WPGlobus_Core::text_filter( $post->post_title, WPGlobus::Config()->language );
+		
+		return str_replace( $post->post_title, $title, $text );
+		
 	}	
 
 } // class

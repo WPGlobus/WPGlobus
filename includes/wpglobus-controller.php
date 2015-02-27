@@ -62,8 +62,8 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() || WPGlobus_WP::is_pagenow( 'n
  * Filter for @see wp_setup_nav_menu_item
  */
 if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
-	/** 
-	 * @todo temporarily disable the filter 
+	/**
+	 * @todo temporarily disable the filter
 	 * need to test js in work
 	 */
 	//add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
@@ -74,9 +74,9 @@ if ( ! is_admin() ) {
 	 * Filter for @see wp_nav_menu_objects
 	 * We need it only on front for translate attribute title in nav menus
 	 */
-	add_filter( 'wp_nav_menu_objects', array( 'WPGlobus_Filters', 'filter__nav_menu_objects' ), 0 );	
+	add_filter( 'wp_nav_menu_objects', array( 'WPGlobus_Filters', 'filter__nav_menu_objects' ), 0 );
 }
-	
+
 /**
  * Filter for @see nav_menu_description
  */
@@ -85,7 +85,7 @@ add_filter( 'nav_menu_description', array( 'WPGlobus_Filters', 'filter__nav_menu
 /**
  * Filter @see heartbeat_received
  */
-add_filter( 'heartbeat_received',   array( 'WPGlobus_Filters', 'filter__heartbeat_received'    ), 501, 3 );
+add_filter( 'heartbeat_received', array( 'WPGlobus_Filters', 'filter__heartbeat_received' ), 501, 3 );
 
 /**
  * Filter for @see home_url
@@ -96,6 +96,16 @@ add_filter( 'home_url', array( 'WPGlobus_Filters', 'filter__home_url' ) );
  * Filter @see get_pages
  */
 add_filter( 'get_pages', array( 'WPGlobus_Filters', 'filter__get_pages' ), 0 );
+
+/**
+ * Filter @see comment_moderation_subject
+ */
+add_filter( 'comment_moderation_subject', array( 'WPGlobus_Filters', 'filter__comment_moderation' ), 10, 2 );
+
+/**
+ * Filter @see comment_moderation_text
+ */
+add_filter( 'comment_moderation_text', array( 'WPGlobus_Filters', 'filter__comment_moderation' ), 10, 2 );
 
 /**
  * Filter @see the_category
@@ -149,11 +159,19 @@ add_filter( 'single_cat_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 )
 add_filter( 'single_tag_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 add_filter( 'single_term_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 
-/**
- * This is usually used in 'widget' methods of the @see WP_Widget - derived classes,
- * for example in @see WP_Widget_Pages::widget
- */
-add_filter( 'widget_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+if ( ! is_admin() ) {
+	/**
+	 * This is usually used in 'widget' methods of the @see WP_Widget - derived classes,
+	 * for example in @see WP_Widget_Pages::widget
+	 */
+	add_filter( 'widget_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+
+	/**
+	 * This is for the widget parameters other than the title.
+	 * For example, in the standard `Text` widget, this translates the widget body.
+	 */
+	add_filter( 'widget_display_callback', array( 'WPGlobus_Filters', 'filter__widget_display_callback' ), 0 );
+}
 
 /**
  * @see   get_bloginfo in general-template.php

@@ -1,4 +1,4 @@
-=== WPGlobus ===
+=== WPGlobus - Multilingual Everything! ===
 Contributors: tivnetinc, tivnet, alexgff
 Donate link: http://www.wpglobus.com/
 Tags: ACF, bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, SEO, switcher, translate, translation, WPGlobus, TIVWP
@@ -8,18 +8,18 @@ Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
 
-Multilingual / Globalization: URL-based multilanguage; easy translation with WordPress SEO by Yoast and ACF support!
+Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with WordPress SEO by Yoast and ACF!
 
 == Description ==
 
-**WPGlobus** is a plugin for bilingual / multilingual WordPress sites.
+**WPGlobus** is a plugin for making bilingual / multilingual WordPress blogs and sites.
+
+> **Versions 1.0.x are released to the general public as Beta Software. During the Beta stage, the software is tested for bugs, crashes, errors and inconsistencies. If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
 The current version of the plugin:
 
-* Provides admin interface to translate posts, pages, menus, categories and tags to multiple languages.
+* Provides admin interface to translate posts, pages, menus, widgets, categories and tags to multiple languages.
 * Adds a drop-down menu to a navigation menu, thus allowing to switch between languages, by changing the URL (`/{language}/page/`)
-
-> **Note:** the `/page/?lang={language}` URLs or subdomains are not supported.
 
 The administrator interface allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
@@ -33,10 +33,11 @@ The administrator interface allows for selecting active languages as well as def
 	* [Twitter](https://twitter.com/WPGlobus) and
 	* [Google Plus](https://plus.google.com/111657854098133499126).
 
-= WPGlobus partially supports these plugins: =
+= WPGlobus is compatible with these popular plugins: =
 
-* [WordPress SEO](https://yoast.com/wordpress/plugins/seo/).
-* [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/).
+* [WordPress SEO](https://yoast.com/wordpress/plugins/seo/) by [Joost de Valk](https://profiles.wordpress.org/joostdevalk/);
+* [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) by [Elliot Condon](https://profiles.wordpress.org/elliotcondon/);
+* [Sidebar Login](https://wordpress.org/plugins/sidebar-login/) by [Mike Jolley](https://profiles.wordpress.org/mikejolley/).
 
 = 3rd Party Software and Files Used =
 
@@ -56,6 +57,34 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 == Frequently Asked Questions ==
 
+= Do you plan to support subdomains and URL query parameters? =
+
+* WPGlobus does not support switching languages using the `/page/?lang={language}` URLs or subdomains `en.example.com; fr.example.com`. If we see a demand, we may release this functionality in a separate extension. Having it in the core would affect the overall performance.
+
+= I am using WPML (qTranslate, Polylang, Multilingual Press, etc.). Can I switch to WPGlobus? =
+
+* Switching from (m)qTranslate(-X) should be straightforward and smooth if you are using the URLs in the form `/en/page/`, `/fr/page`, etc.
+* Switching from other plugins is also possible, but will require some manual work. In the future, we plan to release the transition routines.
+
+= The theme/plugin 'X' I am using does not display the multiple languages correctly. Can you help? =
+
+* If this is a free theme/plugin, available on WordPress.org, written using the WordPress 4.x standards, we'll do our best to find a solution;
+* Unfortunately, we cannot help you with any commercial theme of plugin that demonstrates incompatibility with WPGlobus. However, if the theme/plugin's author wishes to contact us and work on the solution together - we'll be very happy to collaborate.
+
+= Do you plan to support WooCommerce, EDD, other e-Commerce plugins? =
+
+* Yes, we do. Currently working on WC. Other plugins will follow.
+
+= How do I contribute to WPGlobus? =
+
+We appreciate all contributions, ideas, critique, and help.
+
+* To speed up our development, please report bugs, with reproduction steps, or post patches on [WPGlobus GitHub](https://github.com/WPGlobus/WPGlobus).
+* Plugin and theme authors: please try WPGlobus and let us know if you find any compatibility problems.
+* Contact us directly on [WPGlobus.com](http://www.wpglobus.com/contact-us/).
+
+= More info? =
+
 Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional information.
 
 == Screenshots ==
@@ -63,7 +92,18 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 1. Admin interface: languages setup.
 2. Front: language switcher in the twentyfourteen theme menu.
 
+== Upgrade Notice ==
+
+No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer supported. If you have WPGlobus 0.1.x, please upgrade now.
+
 == Changelog ==
+
+= 1.0.6 =
+* ADDED:
+	* Admin interface and front filter to translate widgets.
+	* Deutsch (de_DE) PO / MO-Dateien für WPGlobus Administration.
+* FIXED:
+	* Clean subjects of the comment notification emails.
 
 = 1.0.5 =
 * ADDED:

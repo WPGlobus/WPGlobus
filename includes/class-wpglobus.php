@@ -722,6 +722,7 @@ class WPGlobus {
 		$enabled_pages[] = 'edit-tags.php';
 		$enabled_pages[] = 'edit.php';
 		$enabled_pages[] = 'options-general.php';
+		$enabled_pages[] = 'widgets.php';
 
 		/**
 		 * Init $post_content
@@ -814,8 +815,9 @@ class WPGlobus {
 			if ( in_array( $page, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
 				/**
 				 * Enqueue jQueryUI tabs
+				 *  @todo remove after checking workability, from now it is enough dependency @see line 1075
 				 */
-				wp_enqueue_script( 'jquery-ui-tabs' );
+				//wp_enqueue_script( 'jquery-ui-tabs' );
 
 				/**
 				 * Make suffixes for tabs
@@ -1042,6 +1044,10 @@ class WPGlobus {
 
 				$page_action = 'options-general.php';
 
+			} else if ( 'widgets.php' == $page ) {
+				
+				$page_action = 'widgets.php';
+			
 			}
 
 			if ( ! empty( $this->vendors_scripts ) ) {
@@ -1066,7 +1072,7 @@ class WPGlobus {
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery', 'jquery-ui-dialog' ),
+				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ),
 				WPGLOBUS_VERSION,
 				true
 			);
@@ -1116,7 +1122,7 @@ class WPGlobus {
 			/**
 			 * Enqueue js for ACF support
 			 */
-			if ( $this->vendors_scripts['ACF'] ) {
+			if ( $this->vendors_scripts['ACF'] && in_array( $page, array( 'post.php', 'post-new.php') ) ) {
 				wp_register_script(
 					'wpglobus-acf',
 					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-acf" . self::$_SCRIPT_SUFFIX . ".js",
@@ -1125,8 +1131,20 @@ class WPGlobus {
 					true
 				);
 				wp_enqueue_script( 'wpglobus-acf' );				
-			}	
-		}
+			}
+			
+			if ( 'widgets.php' == $page ) {
+				wp_register_script(
+					'wpglobus-widgets',
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-widgets" . self::$_SCRIPT_SUFFIX . ".js",
+					array( 'jquery', 'wpglobus-admin' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				wp_enqueue_script( 'wpglobus-widgets' );				
+			}			
+			
+		} 	// endif $enabled_pages
 	}
 
 	/**
@@ -1230,7 +1248,7 @@ class WPGlobus {
 		global $post;
 		$type = empty( $post ) ? '' : $post->post_type;
 		if ( ! $this->disabled_entity( $type ) ) {
-			if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
+			if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit-tags.php', 'widgets.php' ) ) ) {
 
 				wp_register_style(
 					'wpglobus-admin-tabs',
@@ -2017,13 +2035,13 @@ class WPGlobus {
 			/* ]]> */
 		</script>
 		<?php
-
-		if ( WPGlobus_WP::is_pagenow(array('post.php')) ) {
+	
+		if ( WPGlobus_WP::is_pagenow(array('post.php', 'widgets.php')) ) {
 			/**
-			 * Output dialog form
+			 * Output dialog form for window.WPGlobusDialogApp
 			 */ 
 			?>
-			<div id="wpglobus-dialog-wrapper" title="Edit meta " class="hidden">
+			<div id="wpglobus-dialog-wrapper" title="" class="hidden">
 				<form id="wpglobus-dialog-form" style="">	
 					<div id="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php
