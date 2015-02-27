@@ -98,6 +98,16 @@ add_filter( 'home_url', array( 'WPGlobus_Filters', 'filter__home_url' ) );
 add_filter( 'get_pages', array( 'WPGlobus_Filters', 'filter__get_pages' ), 0 );
 
 /**
+ * Filter @see comment_moderation_subject
+ */
+add_filter( 'comment_moderation_subject', array( 'WPGlobus_Filters', 'filter__comment_moderation' ), 10, 2 );
+
+/**
+ * Filter @see comment_moderation_text
+ */
+add_filter( 'comment_moderation_text', array( 'WPGlobus_Filters', 'filter__comment_moderation' ), 10, 2 );
+
+/**
  * Filter @see the_category
  * @scope admin
  * @since 1.0.3

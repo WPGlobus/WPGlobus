@@ -622,6 +622,27 @@ class WPGlobus_Filters {
 
 		return $instance;
 	}
+	
+	/**
+	 * Filter @see comment_moderation_text,
+	 *		  @see comment_moderation_subject
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param string $text
+	 * @param int $comment_id 
+	 *
+	 * @return string
+	 */
+	public static function filter__comment_moderation( $text, $comment_id ) {
+
+		$comment = get_comment($comment_id);
+		$post 	 = get_post($comment->comment_post_ID);
+		$title 	 = WPGlobus_Core::text_filter( $post->post_title, WPGlobus::Config()->language );
+		
+		return str_replace( $post->post_title, $title, $text );
+		
+	}	
 
 } // class
 
