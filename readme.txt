@@ -97,6 +97,8 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 = 1.0.6 =
 * ADDED:
 	* Admin interface and front filter to translate widgets.
+	* Filters for notifies the moderator email about a new comment
+	* German admin interface
 
 = 1.0.5 =
 * ADDED:
