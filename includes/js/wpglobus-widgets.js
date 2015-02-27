@@ -7,9 +7,13 @@
  * @package WPGlobus
  * @subpackage Administration
  */
-window.WPGlobusWidgets;
+/* jslint browser: true */
+/* global jQuery, console, WPGlobusCore, WPGlobusCoreData */
+
+var WPGlobusWidgets;
 
 (function($) {
+    "use strict";
 	var api;
 	api = WPGlobusWidgets = {
 		init: function() {
@@ -17,7 +21,7 @@ window.WPGlobusWidgets;
 			api.attachListeners();
 		},	
 		add_elements : function(get_by, coid) {
-			var id, elem = [];
+			var id, elem = [], get_by_coid;
 			elem[0] = 'input[type="text"]';
 			elem[1] = 'textarea';
 			if ( typeof get_by == 'undefined' || get_by == 'class' ) {
@@ -35,7 +39,7 @@ window.WPGlobusWidgets;
 		make_clone: function(get_by_coid, type) {
 			$(get_by_coid+' '+type).each(function(i,e){
 				var element = $(e),
-					clone, name, text;
+					clone, name, text, id;
 
 				id = element.attr('id');
 				if ( typeof id == 'undefined' || -1 != id.indexOf( '-number') ) {
@@ -61,7 +65,7 @@ window.WPGlobusWidgets;
 			});				
 		},	
 		attachListeners: function() {
-			$(document).ajaxComplete(function(ev, jqxhr, settings){
+			$(document).ajaxComplete(function(event, jqxhr, settings){
 				if ( -1 != settings.data.indexOf( 'action=save-widget') ) {
 					if ( -1 != settings.data.indexOf( 'delete_widget=1' ) ) {
 						// deleted widget
