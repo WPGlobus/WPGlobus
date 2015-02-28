@@ -1474,12 +1474,14 @@ class WPGlobus {
 	 * @return string
 	 */
 	function on_wp_list_pages( $output ) {
-
-		global $WPGlobus_Config;
+	
+		if ( ! WPGlobus::Config()->selector_wp_list_pages ) {
+			return $output;
+		}	
 
 		$extra_languages = array();
-		foreach ( $WPGlobus_Config->enabled_languages as $languages ) {
-			if ( $languages != $WPGlobus_Config->language ) {
+		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
+			if ( $languages != WPGlobus::Config()->language ) {
 				$extra_languages[] = $languages;
 			}
 		}
@@ -1490,10 +1492,10 @@ class WPGlobus {
 		);
 
 		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'wpglobus_flag_' . $WPGlobus_Config->language;
+		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
 
 		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">
-						<a href="' . WPGlobus_Utils::get_url( $WPGlobus_Config->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span></a>
+						<a href="' . WPGlobus_Utils::get_url( WPGlobus::Config()->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span></a>
 						<ul class="children">';
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   = $span_classes;
