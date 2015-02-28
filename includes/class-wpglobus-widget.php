@@ -114,7 +114,7 @@ class WPGlobusWidget extends WP_Widget {
 		}
 
 		?>
-		<p><?php _e( 'Select switcher type', 'wpglobus' ); ?></p>
+		<p><?php _e( 'Selector type', 'wpglobus' ); ?></p>
 		<p><?php
 			foreach ( $this->types as $type=>$caption ) :		
 				$checked = 	'';
