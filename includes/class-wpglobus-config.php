@@ -109,10 +109,17 @@ class WPGlobus_Config {
 
 	/**
 	 * Use navigation menu by slug
-	 * for use in all nav menu set value to ''
+	 * for use in all nav menu set value to 'all'
 	 * @var string
 	 */
 	public $nav_menu = '';
+
+	/**
+	 * Add language selector to navigation menu which was created with wp_list_pages
+	 * @since 1.0.7
+	 * @var bool
+	 */
+	public $selector_wp_list_pages = true;
 
 	/**
 	 * Custom CSS
@@ -486,8 +493,17 @@ class WPGlobus_Config {
 		}
 		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
-		}
+		} 
+		
 
+		/**
+		 * Get selector_wp_list_pages option
+		 * @since 1.0.7
+		 */
+		if ( empty( $wpglobus_option['selector_wp_list_pages'] ) || $wpglobus_option['selector_wp_list_pages'] == 0 ) {
+			$this->selector_wp_list_pages = false;
+		}
+		
 		/**
 		 * Get custom CSS
 		 */
