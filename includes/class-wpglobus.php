@@ -161,6 +161,15 @@ class WPGlobus {
 		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
 
 
+		/**
+		 * Register the widget
+		 */
+		add_action( 'widgets_init',
+			function () {
+				register_widget( 'WPGlobusWidget' );
+			}
+		);
+		
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -1426,11 +1435,32 @@ class WPGlobus {
 		}
 		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
+		$css .= "\n" . 
+'.wpglobus-widget .flags-styled {
+	text-align: center;
+}	
+.wpglobus-widget .select-styled {
+	width: 130px;
+	height: 34px;
+	border: 1px solid #111;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.wpglobus-widget .select-styled select {
+	margin-top: 0;
+	background: #eee;
+	width: 150px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	height: 34px;
+}' . "\n";
+		
 		if ( ! empty( $css ) ) {
 			?>
-			<style type="text/css" media="screen">
-				<?php echo $css; ?>
-			</style>
+<style type="text/css" media="screen">
+	<?php echo $css; ?>
+</style>
 		<?php
 		}
 
