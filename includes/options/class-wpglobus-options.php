@@ -271,6 +271,14 @@ class WPGlobus_Options {
 					'placeholder' => $navigation_menu_placeholder,
 				),
 				array(
+					'id'          => 'selector_wp_list_pages',
+					'type'        => 'checkbox',
+					'title'       => __( 'Language selector', 'wpglobus' ),
+					'compiler'    => 'false',
+					'desc'        => __( 'Add language selector to navigation menu which was created with wp_list_pages', 'wpglobus' ),
+					'default'  	  => 1
+				),				
+				array(
 					'id'       => 'css_editor',
 					'type'     => 'ace_editor',
 					'title'    => __( 'Custom CSS', 'wpglobus' ),
