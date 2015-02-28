@@ -1518,12 +1518,20 @@ class WPGlobus {
 	 * @see wp_nav_menu()
 	 */
 	function on_add_item( $sorted_menu_items, $args ) {
-	
+
 		if ( empty( WPGlobus::Config()->nav_menu ) ) {
 			/**
-			 * Add language switcher to all nav menus
+			 * User can use WPGlobus widget
+			 * @since 1.0.7
 			 */
-		} else {
+			return $sorted_menu_items;
+			
+		} elseif ( 'all' == WPGlobus::Config()->nav_menu ) {
+			/**
+			 * Attach to every nav menu
+			 * @since 1.0.7
+			 */
+		} else {	
 
 			$items = array();
 			foreach( $sorted_menu_items as $item ) {

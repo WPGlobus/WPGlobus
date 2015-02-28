@@ -482,7 +482,7 @@ class WPGlobus_Config {
 		 */
 		$this->nav_menu = '';
 		if ( isset( $wpglobus_option['use_nav_menu'] ) ) {
-			$this->nav_menu = ( $wpglobus_option['use_nav_menu'] == 'all' ) ? '' : $wpglobus_option['use_nav_menu'];
+			$this->nav_menu = ( $wpglobus_option['use_nav_menu'] == 'all' ) ? 'all' : $wpglobus_option['use_nav_menu'];
 		}
 		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
