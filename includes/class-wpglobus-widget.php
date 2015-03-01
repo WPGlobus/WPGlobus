@@ -54,7 +54,6 @@ class WPGlobusWidget extends WP_Widget {
 		}
 		
 		$inside = '';
-		$extra  = '';
 		
 		$enabled_languages = WPGlobus::Config()->enabled_languages;
 		
