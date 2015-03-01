@@ -32,10 +32,11 @@ class WPGlobusWidget extends WP_Widget {
 				'description' => __( 'Add language switcher', 'wpglobus' ) 
 			) 
 		);
-		$this->types['flags'] 			 = __('Flags', 'wpglobus');
-		$this->types['select'] 			 = __('Select', 'wpglobus');
-		$this->types['select_with_code'] = __('Select with language code', 'wpglobus');
-		$this->types['dropdown'] 		 = __('Dropdown', 'wpglobus');
+		$this->types['flags'] 			 	= __('Flags', 'wpglobus');
+		$this->types['select'] 			 	= __('Select', 'wpglobus');
+		$this->types['select_with_code'] 	= __('Select with language code', 'wpglobus');
+		$this->types['dropdown'] 		 	= __('Dropdown', 'wpglobus');
+		$this->types['dropdown_with_flags'] = __('Dropdown with flags', 'wpglobus');
 	}
 
 	/** 
@@ -66,6 +67,7 @@ class WPGlobusWidget extends WP_Widget {
 			$code = '<div class="select-styled"><select onchange="document.location.href = this.value;">{{inside}}</select></div>';
 			break;
 		case 'dropdown' :
+		case 'dropdown_with_flags' :		
 			$sorted[] = WPGlobus::Config()->language;
 			foreach ( $enabled_languages as $language ) {
 				if ( $language != WPGlobus::Config()->language ) {
@@ -113,9 +115,16 @@ class WPGlobusWidget extends WP_Widget {
 					break;
 				case 'dropdown' :
 					if ( '' != $selected ) {
-						$code = str_replace( '{{language}}', '<a href="' . $url .'"><img src="' . $flag . '"/>&nbsp;' . WPGlobus::Config()->language_name[$language] . '</a>', $code );
+						$code = str_replace( '{{language}}', '<a href="' . $url .'">' . WPGlobus::Config()->language_name[$language] . '&nbsp;(' . strtoupper($language) . ')</a>', $code );
 					} else {
-						$inside .= '<li><a href="' . $url .'"><img src="' . $flag . '"/>&nbsp;' . WPGlobus::Config()->language_name[$language] . '</a></li>';
+						$inside .= '<li><a href="' . $url .'">' . WPGlobus::Config()->language_name[$language] . '&nbsp;(' . strtoupper($language) . ')</a></li>';
+					}				
+					break;
+				case 'dropdown_with_flags' :
+					if ( '' != $selected ) {
+						$code = str_replace( '{{language}}', '<a href="' . $url .'"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[$language] . '</a>', $code );
+					} else {
+						$inside .= '<li><a href="' . $url .'"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[$language] . '</a></li>';
 					}
 					break;
 				endswitch;
