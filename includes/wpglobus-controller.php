@@ -193,8 +193,8 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
  * For customizer
  */
 if ( is_admin() && WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
-	add_filter( 'option_blogdescription', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-	add_filter( 'option_blogname', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	//add_filter( 'option_blogdescription', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	//add_filter( 'option_blogname', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
 /**
