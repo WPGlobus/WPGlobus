@@ -35,6 +35,7 @@ class WPGlobusWidget extends WP_Widget {
 		$this->types['flags'] 			 = __('Flags', 'wpglobus');
 		$this->types['select'] 			 = __('Select', 'wpglobus');
 		$this->types['select_with_code'] = __('Select with language code', 'wpglobus');
+		$this->types['dropdown'] 		 = __('Dropdown', 'wpglobus');
 	}
 
 	/** 
@@ -52,6 +53,9 @@ class WPGlobusWidget extends WP_Widget {
 		}
 		
 		$inside = '';
+		$extra  = '';
+		
+		$enabled_languages = WPGlobus::Config()->enabled_languages;
 		
 		switch ($type) :
 		case 'flags' :
@@ -61,10 +65,27 @@ class WPGlobusWidget extends WP_Widget {
 		case 'select_with_code' :
 			$code = '<div class="select-styled"><select onchange="document.location.href = this.value;">{{inside}}</select></div>';
 			break;
+		case 'dropdown' :
+			$sorted[] = WPGlobus::Config()->language;
+			foreach ( $enabled_languages as $language ) {
+				if ( $language != WPGlobus::Config()->language ) {
+					$sorted[] = $language;
+				}	
+			}
+			$enabled_languages = $sorted;
+			$code = '<ul class="selector-styled">
+					  <li>
+						{{language}}
+						<ul>
+							{{inside}}
+						</ul>
+					  </li>
+					</ul>';			
+			break;
 		endswitch;		?>
 		
 		<aside class="widget wpglobus-widget">			<?php 
-			foreach ( WPGlobus::Config()->enabled_languages as $language ) :
+			foreach ( $enabled_languages as $language ) :
 				
 				if ( $language == WPGlobus::Config()->default_language && WPGlobus::Config()->hide_default_language ) {
 					$l = '';	
@@ -90,10 +111,19 @@ class WPGlobusWidget extends WP_Widget {
 				case 'select_with_code' :
 					$inside .= '<option ' . $selected . ' value="' . $url .'">' . WPGlobus::Config()->language_name[$language] . '&nbsp;(' . strtoupper($language) . ')</option>';
 					break;
+				case 'dropdown' :
+					if ( '' != $selected ) {
+						$code = str_replace( '{{language}}', '<a href="' . $url .'"><img src="' . $flag . '"/>&nbsp;' . WPGlobus::Config()->language_name[$language] . '</a>', $code );
+					} else {
+						$inside .= '<li><a href="' . $url .'"><img src="' . $flag . '"/>&nbsp;' . WPGlobus::Config()->language_name[$language] . '</a></li>';
+					}
+					break;
 				endswitch;
 				
 			endforeach; 	
-			echo str_replace( '{{inside}}', $inside, $code ); 	?>
+
+			echo str_replace( '{{inside}}', $inside, $code );	
+					?>
 		</aside>
 		<?php
 	}
