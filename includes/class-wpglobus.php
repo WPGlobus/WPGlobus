@@ -1454,6 +1454,47 @@ class WPGlobus {
 	font-size: 16px;
 	border: 1px solid #ccc;
 	height: 34px;
+}
+ul.selector-styled {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  list-style: none;
+}
+ul.selector-styled li {
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 5px 10px;
+  background: #fff;
+  cursor: pointer;
+}
+ul.selector-styled li:hover {
+  background: #eee;
+  color: #fff;
+}
+ul.selector-styled li ul {
+  padding: 0;
+  position: absolute;
+  top: 30px;
+  left: -21px;
+  width: 150px;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+ul.selector-styled li ul li { 
+  background: #eee; 
+  display: block; 
+  color: #fff;
+}
+ul.selector-styled li ul li:hover { 
+	background: #ddd;
+}
+ul.selector-styled li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
 }' . "\n";
 		
 		if ( ! empty( $css ) ) {
