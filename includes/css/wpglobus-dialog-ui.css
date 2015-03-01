@@ -30,9 +30,6 @@
 	margin-top:0;
 }
 
-.ui-front {
-	/* z-index: 100; */
-}
 /* Overlays */
 .ui-widget-overlay {
 	position: fixed;
