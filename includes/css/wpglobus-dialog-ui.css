@@ -1,3 +1,6 @@
+.wpglobus-dialog {
+	z-index:1000000;
+}
 .wpglobus_dialog_icon {
 	margin-top:10px;
 	cursor:pointer;
@@ -28,7 +31,7 @@
 }
 
 .ui-front {
-	z-index: 100;
+	/* z-index: 100; */
 }
 /* Overlays */
 .ui-widget-overlay {
@@ -131,7 +134,7 @@
 	cursor: move;
 }
 
-.ui-dialog #wpglobus-dialog-form  {
+.wpglobus-dialog  #wpglobus-dialog-form  {
     height: auto;
     margin-top: -50px;
 }
