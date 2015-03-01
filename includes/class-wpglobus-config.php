@@ -500,7 +500,7 @@ class WPGlobus_Config {
 		 * Get selector_wp_list_pages option
 		 * @since 1.0.7
 		 */
-		if ( empty( $wpglobus_option['selector_wp_list_pages'] ) || $wpglobus_option['selector_wp_list_pages'] == 0 ) {
+		if ( empty( $wpglobus_option['selector_wp_list_pages']['show_selector'] ) || $wpglobus_option['selector_wp_list_pages']['show_selector'] == 0 ) {
 			$this->selector_wp_list_pages = false;
 		}
 		
