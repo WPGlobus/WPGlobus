@@ -1433,11 +1433,13 @@ class WPGlobus {
 			        ' { background:url(' .
 			        $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[ $language ] . ') no-repeat }' . "\n";
 		}
-		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
 		$css .= "\n" . 
 '.wpglobus-widget .flags-styled {
 	text-align: center;
+}
+.wpglobus-widget .flags-styled .flag {
+	margin-right: 0.4em;
 }	
 .wpglobus-widget .select-styled {
 	width: 130px;
@@ -1455,13 +1457,14 @@ class WPGlobus {
 	border: 1px solid #ccc;
 	height: 34px;
 }
-ul.selector-styled {
-  text-align: left;
+.dropdown-styled {
+  text-align: center;
   display: inline;
   margin: 0;
   list-style: none;
 }
-ul.selector-styled li {
+.dropdown-styled li {
+  text-align: left;
   display: inline-block;
   margin-right: -4px;
   position: relative;
@@ -1469,34 +1472,36 @@ ul.selector-styled li {
   background: #fff;
   cursor: pointer;
 }
-ul.selector-styled li:hover {
+.dropdown-styled li:hover {
   background: #eee;
   color: #fff;
 }
-ul.selector-styled li ul {
+.dropdown-styled li ul {
   padding: 0;
   position: absolute;
-  top: 30px;
+  top: 28px;
   left: -21px;
   width: 150px;
   display: none;
   opacity: 0;
   visibility: hidden;
 }
-ul.selector-styled li ul li { 
+.dropdown-styled li ul li { 
   background: #eee; 
   display: block; 
   color: #fff;
 }
-ul.selector-styled li ul li:hover { 
+.dropdown-styled li ul li:hover { 
 	background: #ddd;
 }
-ul.selector-styled li:hover ul {
+.dropdown-styled li:hover ul {
   display: block;
   opacity: 1;
   visibility: visible;
 }' . "\n";
 		
+		$css .= strip_tags( $WPGlobus_Config->css_editor );
+
 		if ( ! empty( $css ) ) {
 			?>
 <style type="text/css" media="screen">

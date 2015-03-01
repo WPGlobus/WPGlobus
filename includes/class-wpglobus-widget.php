@@ -73,14 +73,14 @@ class WPGlobusWidget extends WP_Widget {
 				}	
 			}
 			$enabled_languages = $sorted;
-			$code = '<ul class="selector-styled">
+			$code = '<div class="dropdown-styled"> <ul>
 					  <li>
 						{{language}}
 						<ul>
 							{{inside}}
 						</ul>
 					  </li>
-					</ul>';			
+					</ul></div>';			
 			break;
 		endswitch;		?>
 		
@@ -103,7 +103,7 @@ class WPGlobusWidget extends WP_Widget {
 				
 				switch ($type) :
 				case 'flags' :
-					$inside .= '<a href="' . $url .'"><img src="' . $flag . '"/></a>&nbsp;';
+					$inside .= '<span class="flag"><a href="' . $url .'"><img src="' . $flag . '"/></a></span>';
 					break;
 				case 'select' :
 					$inside .= '<option ' . $selected . ' value="' . $url .'">' . WPGlobus::Config()->language_name[$language] . '</option>';
