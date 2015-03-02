@@ -1460,7 +1460,6 @@ class WPGlobus {
 .dropdown-styled {
   text-align: center;
   display: inline;
-  margin: 0;
   list-style: none;
 }
 .dropdown-styled li {
