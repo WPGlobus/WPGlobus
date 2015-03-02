@@ -118,6 +118,7 @@ class WPGlobus {
 		$this->vendors_scripts['ACF'] 		  = false;
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
+		$this->vendors_scripts['AIOSEOP'] 	  = false; // All In One SEO Pack
 
 		if ( function_exists('acf') ) {
 			$this->vendors_scripts['ACF'] = true;
@@ -143,7 +144,11 @@ class WPGlobus {
 			$this->disabled_entities[]            = 'shop_order';
 			$this->disabled_entities[]            = 'shop_coupon';
 		}
-
+		
+		if ( defined( 'AIOSEOP_VERSION' ) ) {
+			$this->vendors_scripts['AIOSEOP'] = true;
+		}	
+			
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.0.0

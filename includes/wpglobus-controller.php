@@ -246,4 +246,13 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 
 }
 
+/**
+ * All In One SEO Pack filters
+ */
+if ( defined( 'AIOSEOP_VERSION' ) ) {
+	if ( ! is_admin() ) {
+		add_filter( 'aioseop_description', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	}	
+}
+
 # --- EOF
