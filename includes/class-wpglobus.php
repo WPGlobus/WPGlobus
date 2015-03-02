@@ -1435,13 +1435,13 @@ class WPGlobus {
 		}
 
 		$css .= "\n" . 
-'.wpglobus-widget .flags-styled {
+'.widget_wpglobus .flags-styled {
 	text-align: center;
 }
-.wpglobus-widget .flags-styled .flag {
+.widget_wpglobus .flags-styled .flag {
 	margin-right: 0.4em;
 }	
-.wpglobus-widget .select-styled {
+.widget_wpglobus .select-styled {
 	width: 130px;
 	height: 34px;
 	border: 1px solid #111;
@@ -1449,7 +1449,7 @@ class WPGlobus {
 	overflow: hidden;
 	margin: 0 auto;
 }
-.wpglobus-widget .select-styled select {
+.widget_wpglobus .select-styled select {
 	margin-top: 0;
 	background: #eee;
 	width: 150px;
