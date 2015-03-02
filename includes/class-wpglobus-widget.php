@@ -26,7 +26,7 @@ class WPGlobusWidget extends WP_Widget {
 	 */
 	function __construct() {
 		parent::__construct( 
-			'wpglobus_widget',
+			'wpglobus',
 			__( 'WPGlobus widget', 'wpglobus' ),
 			array( 
 				'description' => __( 'Add language switcher', 'wpglobus' ) 
@@ -46,7 +46,7 @@ class WPGlobusWidget extends WP_Widget {
 	 * @param array $instance The settings for the particular instance of the widget
 	 */
 	public function widget( $args, $instance ) {
-		
+
 		if ( !empty( $instance['type'] ) ) {
 			$type = $instance['type'];
 		} else {
@@ -83,9 +83,11 @@ class WPGlobusWidget extends WP_Widget {
 					  </li>
 					</ul></div>';			
 			break;
-		endswitch;		?>
-		
-		<aside class="widget wpglobus-widget">			<?php 
+		endswitch;
+		echo $args['before_widget'];		
+			if ( !empty($instance['title']) ) {
+				echo $args['before_title'] . $instance['title'] . $args['after_title'];
+			}	
 			foreach ( $enabled_languages as $language ) :
 				
 				if ( $language == WPGlobus::Config()->default_language && WPGlobus::Config()->hide_default_language ) {
@@ -131,9 +133,9 @@ class WPGlobusWidget extends WP_Widget {
 			endforeach; 	
 
 			echo str_replace( '{{inside}}', $inside, $code );	
-					?>
-		</aside>
-		<?php
+					
+		echo $args['after_widget'];		
+		
 	}
 
 	/**
@@ -144,14 +146,21 @@ class WPGlobusWidget extends WP_Widget {
 	 * @return string
 	 */
 	public function form( $instance ) {
-		
+
 		if ( isset( $instance['type'] ) ) {
 			$selected_type = $instance['type'];
 		} else {
-			$selected_type = '';
+			$selected_type = 'flags';
 		}
-
+		if ( empty( $instance['title'] ) ) {
+			$instance['title'] = '';
+		}
 		?>
+		<p>
+			<label for="<?php echo $this->get_field_name('type'); ?>"><?php echo __('Title'); ?></label>
+			<input type="text" id="<?php echo $this->get_field_id('title'); ?>"
+					name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $instance['title']; ?>" />
+		</p>			
 		<p><?php _e( 'Selector type', 'wpglobus' ); ?></p>
 		<p><?php
 			foreach ( $this->types as $type=>$caption ) :		
@@ -184,6 +193,7 @@ class WPGlobusWidget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance         = array();
 		$instance['type'] = ( ! empty( $new_instance['type'] ) ) ? $new_instance['type'] : '';
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? $new_instance['title'] : '';
 		return $instance;
 	}
 }
