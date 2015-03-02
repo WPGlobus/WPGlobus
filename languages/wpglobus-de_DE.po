@@ -1,8 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
-"POT-Creation-Date: 2015-02-27 13:15-0500\n"
-"PO-Revision-Date: 2015-02-27 13:20-0500\n"
+"Report-Msgid-Bugs-To: translation@wpglobus.com\n"
+"POT-Creation-Date: 2015-03-02 09:11-0500\n"
+"PO-Revision-Date: 2015-03-02 09:12-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: de_DE\n"
@@ -134,19 +135,59 @@ msgstr ""
 msgid "<a href=\"%s\">Hide Notice</a>"
 msgstr ""
 
-#: includes/class-wpglobus.php:835
+#: includes/class-wpglobus-widget.php:30
+#, fuzzy
+msgid "WPGlobus widget"
+msgstr "WPGlobus"
+
+#: includes/class-wpglobus-widget.php:32
+#, fuzzy
+msgid "Add language switcher"
+msgstr "Sprachen hinzufügen"
+
+#: includes/class-wpglobus-widget.php:35
+#, fuzzy
+msgid "Flags"
+msgstr "nur Flaggen"
+
+#: includes/class-wpglobus-widget.php:36
+msgid "Select"
+msgstr ""
+
+#: includes/class-wpglobus-widget.php:37
+#, fuzzy
+msgid "Select with language code"
+msgstr "Wählen Sie eine Sprache"
+
+#: includes/class-wpglobus-widget.php:38
+msgid "Dropdown"
+msgstr ""
+
+#: includes/class-wpglobus-widget.php:39
+msgid "Dropdown with flags"
+msgstr ""
+
+#: includes/class-wpglobus-widget.php:160
+msgid "Title"
+msgstr ""
+
+#: includes/class-wpglobus-widget.php:164
+msgid "Selector type"
+msgstr ""
+
+#: includes/class-wpglobus.php:849
 msgid "You cannot disable the first enabled language."
 msgstr "Sie können die erste aktivierte Sprache nicht deaktiviert werden."
 
-#: includes/class-wpglobus.php:962
+#: includes/class-wpglobus.php:976
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:1911
+#: includes/class-wpglobus.php:2001
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:1973
+#: includes/class-wpglobus.php:2063
 msgid "Invalid taxonomy"
 msgstr ""
 
@@ -282,10 +323,20 @@ msgid "Choose the navigation menu where the language selector will be shown"
 msgstr "Wählen Sie das Navigationsmenü, wo die Sprachwahl wird angezeigt"
 
 #: includes/options/class-wpglobus-options.php:276
+#, fuzzy
+msgid "Language selector"
+msgstr "Language Selector-Modus"
+
+#: includes/options/class-wpglobus-options.php:280
+msgid ""
+"Add language selector to navigation menu which was created with wp_list_pages"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:286
 msgid "Custom CSS"
 msgstr "Benutzerdefinierte CSS"
 
-#: includes/options/class-wpglobus-options.php:280
+#: includes/options/class-wpglobus-options.php:290
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
@@ -293,26 +344,26 @@ msgstr ""
 "Hier können Sie die CSS-Regeln geben, um die Sprachwahl-Menü für Ihr Thema "
 "ein. Schauen Sie sich die Beispiele in der `style-samples.css` Datei"
 
-#: includes/options/class-wpglobus-options.php:281
+#: includes/options/class-wpglobus-options.php:291
 msgid "(Optional)"
 msgstr "(Fakultativ)"
 
-#: includes/options/class-wpglobus-options.php:292
+#: includes/options/class-wpglobus-options.php:302
 msgid "Languages table"
 msgstr "Sprachen-Tabelle"
 
-#: includes/options/class-wpglobus-options.php:298
+#: includes/options/class-wpglobus-options.php:308
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 "Verwenden Sie diese Tabelle, um Sprachen hinzuzufügen, bearbeiten oder "
 "löschen."
 
-#: includes/options/class-wpglobus-options.php:299
+#: includes/options/class-wpglobus-options.php:309
 msgid "NOTE: you cannot delete the default language."
 msgstr "HINWEIS: Sie können die Standardsprache kann nicht gelöscht werden."
 
-#: includes/options/class-wpglobus-options.php:336
-#: includes/options/class-wpglobus-options.php:337
+#: includes/options/class-wpglobus-options.php:346
+#: includes/options/class-wpglobus-options.php:347
 msgid "WPGlobus"
 msgstr "WPGlobus"
 

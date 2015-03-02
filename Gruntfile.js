@@ -126,6 +126,36 @@ module.exports = function (grunt) {
             }
         },
 
+        pot: {
+            options: {
+                encoding: 'UTF-8',
+                msgid_bugs_address: 'translation@wpglobus.com',
+                msgmerge: false,
+                text_domain: 'wpglobus', //Your text domain. Produces my-text-domain.pot
+                dest: 'languages/', //directory to place the pot file
+                keywords: [ //WordPress localisation functions
+                    '__:1',
+                    '_e:1',
+                    '_x:1,2c',
+                    'esc_html__:1',
+                    'esc_html_e:1',
+                    'esc_html_x:1,2c',
+                    'esc_attr__:1',
+                    'esc_attr_e:1',
+                    'esc_attr_x:1,2c',
+                    '_ex:1,2c',
+                    '_n:1,2',
+                    '_nx:1,2,4c',
+                    '_n_noop:1,2',
+                    '_nx_noop:1,2,3c'
+                ]
+            },
+            files: {
+                src: ['includes/**/*.php'], //Parse all php files
+                expand: true
+            }
+        },
+
         /**
          * @link https://github.com/gruntjs/grunt-contrib-watch
          */
@@ -148,9 +178,26 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-pot');
+
+    /**
+     * Had to write this because "pot" does not do msgmerge correctly
+     * @link https://github.com/stephenharris/grunt-pot/issues/11
+     */
+    grunt.registerTask('after-pot', 'To run after the "pot" task', function () {
+        var execSync = require('child_process').execSync;
+        var potFile = 'languages/wpglobus.pot';
+        var poFilePaths = grunt.file.expand('languages/*.po');
+        poFilePaths.forEach(function (poFile) {
+            grunt.log.writeln("msgmerge-ing " + poFile);
+            execSync('msgmerge -vU ' + poFile + ' ' + potFile);
+        });
+    });
+
+    grunt.registerTask('pomo', ['pot', 'after-pot']);
 
     // To run all tasks - same list as for `watch`
-    grunt.registerTask('dist', ['less', 'cssmin', 'uglify']);
+    grunt.registerTask('dist', ['less', 'cssmin', 'uglify', 'pomo']);
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);

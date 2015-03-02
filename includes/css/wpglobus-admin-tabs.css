@@ -98,18 +98,12 @@
     border: 0;
     background: transparent;
 } */
-
-/**
- * don't use this rule because of the conflict with wpglobus dialog buttons Save&Cancel
- * @todo remove after testing
- */
-/*
 .ui-widget-content .ui-state-hover {
   border: 0;
   background: transparent;
   margin: 0 0 -1px;
   font-weight: normal;
-} */
+}
 .ui-widget-content .ui-widget-header {
   border: 0;
   background: transparent;
