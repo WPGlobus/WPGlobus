@@ -1,0 +1,48 @@
+/**
+ * CSS Rules for widget with the language switcher
+ */
+
+/**
+ * Twenty Fourteen
+ */
+.dropdown-styled {
+  display: inline;
+  text-align: left;
+  list-style: none;
+}
+.dropdown-styled li {
+  text-align: left;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 5px 10px;
+  background: #000;
+  cursor: pointer;
+}
+.dropdown-styled a:hover {
+	color:#fff;
+}
+.dropdown-styled li:hover {
+  background: #24890d;
+  color: #fff;
+}
+.dropdown-styled li ul {
+  padding: 0;
+  position: absolute;
+  top: 28px;
+  left: -10px;
+  width: 150px;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.dropdown-styled li ul li { 
+  background: #24890d;
+  display: block; 
+  color: #fff;
+}
+.dropdown-styled li ul li:hover { 
+	background: #41a62a;
+}
+
+ 
