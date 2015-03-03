@@ -1360,13 +1360,13 @@ class WPGlobus {
 	 */
 	function on_wp_styles() {
 		wp_register_style(
-			'flags',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-flags" . self::$_SCRIPT_SUFFIX . ".css",
+			'wpglobus',
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus" . self::$_SCRIPT_SUFFIX . ".css",
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
 		);
-		wp_enqueue_style( 'flags' );
+		wp_enqueue_style( 'wpglobus' );
 	}
 
 	/**
@@ -1439,71 +1439,6 @@ class WPGlobus {
 			        $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[ $language ] . ') no-repeat }' . "\n";
 		}
 
-		$css .= "\n" . 
-'.widget_wpglobus .flags-styled {
-	text-align: center;
-}
-.widget_wpglobus .flags-styled .flag {
-	margin-right: 0.4em;
-}	
-.widget_wpglobus .select-styled {
-	width: 130px;
-	height: 34px;
-	border: 1px solid #111;
-	border-radius: 5px;
-	overflow: hidden;
-	margin: 0 auto;
-}
-.widget_wpglobus .select-styled select {
-	margin-top: 0;
-	background: #eee;
-	width: 150px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	height: 34px;
-}
-.dropdown-styled {
-  text-align: center;
-  display: inline;
-  list-style: none;
-}
-.dropdown-styled li {
-  text-align: left;
-  display: inline-block;
-  margin-right: -4px;
-  position: relative;
-  padding: 5px 10px;
-  background: #fff;
-  cursor: pointer;
-}
-.dropdown-styled li:hover {
-  background: #eee;
-  color: #fff;
-}
-.dropdown-styled li ul {
-  padding: 0;
-  position: absolute;
-  top: 28px;
-  left: -21px;
-  width: 150px;
-  display: none;
-  opacity: 0;
-  visibility: hidden;
-}
-.dropdown-styled li ul li { 
-  background: #eee; 
-  display: block; 
-  color: #fff;
-}
-.dropdown-styled li ul li:hover { 
-	background: #ddd;
-}
-.dropdown-styled li:hover ul {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}' . "\n";
-		
 		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
 		if ( ! empty( $css ) ) {
