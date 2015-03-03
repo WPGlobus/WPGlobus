@@ -28,20 +28,7 @@
   margin-right: 0.4em;
 }
 .widget_wpglobus .select-styled {
-  width: 130px;
-  height: 34px;
-  border: 1px solid #111;
-  border-radius: 5px;
   overflow: hidden;
-  margin: 0 auto;
-}
-.widget_wpglobus .select-styled select {
-  margin-top: 0;
-  background: #eee;
-  width: 150px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  height: 34px;
 }
 .dropdown-styled {
   text-align: center;
