@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-02 09:10-0500\n"
-"PO-Revision-Date: 2015-03-02 09:10-0500\n"
+"POT-Creation-Date: 2015-03-03 00:11-0500\n"
+"PO-Revision-Date: 2015-03-03 00:12-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -265,6 +265,7 @@ msgstr "Удалить язык"
 msgid "Error while saving."
 msgstr "Ошибка при сохранении."
 
+#. //php.net/date
 #: includes/class-wpglobus-filters.php:568
 msgid "g:i:s a"
 msgstr "g:i:s a"
@@ -286,39 +287,47 @@ msgstr ""
 msgid "<a href=\"%s\">Hide Notice</a>"
 msgstr "<a href=\"%s\">Скрыть это сообщение</a>"
 
-#: includes/class-wpglobus-widget.php:30
+#: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
 msgstr "WPGlobus виджет"
 
-#: includes/class-wpglobus-widget.php:32
+#: includes/class-wpglobus-widget.php:29
 msgid "Add language switcher"
 msgstr "Добавить переключатель языка"
 
-#: includes/class-wpglobus-widget.php:35
+#: includes/class-wpglobus-widget.php:32
 msgid "Flags"
 msgstr "Флаги"
 
-#: includes/class-wpglobus-widget.php:36
+#: includes/class-wpglobus-widget.php:33
+msgid "List"
+msgstr "Список"
+
+#: includes/class-wpglobus-widget.php:34
+msgid "List with flags"
+msgstr "Список с флажками"
+
+#: includes/class-wpglobus-widget.php:35
 msgid "Select"
 msgstr "Select"
 
-#: includes/class-wpglobus-widget.php:37
+#: includes/class-wpglobus-widget.php:36
 msgid "Select with language code"
 msgstr "Select с кодом языка"
 
-#: includes/class-wpglobus-widget.php:38
+#: includes/class-wpglobus-widget.php:37
 msgid "Dropdown"
 msgstr "Выпадающее меню"
 
-#: includes/class-wpglobus-widget.php:39
+#: includes/class-wpglobus-widget.php:38
 msgid "Dropdown with flags"
 msgstr "Выпадающее меню с флагами"
 
-#: includes/class-wpglobus-widget.php:160
+#: includes/class-wpglobus-widget.php:179
 msgid "Title"
 msgstr "Заголовок"
 
-#: includes/class-wpglobus-widget.php:164
+#: includes/class-wpglobus-widget.php:183
 msgid "Selector type"
 msgstr "Способ выбора языка"
 
@@ -330,11 +339,11 @@ msgstr "Нельзя отключить первый в списке язык."
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:2001
+#: includes/class-wpglobus.php:1936
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:2063
+#: includes/class-wpglobus.php:1998
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpglobus 1.0.6\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-02 09:02-0500\n"
+"POT-Creation-Date: 2015-03-03 00:11-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,39 +254,47 @@ msgstr ""
 msgid "<a href=\"%s\">Hide Notice</a>"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:30
+#: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:32
+#: includes/class-wpglobus-widget.php:29
 msgid "Add language switcher"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:35
+#: includes/class-wpglobus-widget.php:32
 msgid "Flags"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:36
+#: includes/class-wpglobus-widget.php:33
+msgid "List"
+msgstr ""
+
+#: includes/class-wpglobus-widget.php:34
+msgid "List with flags"
+msgstr ""
+
+#: includes/class-wpglobus-widget.php:35
 msgid "Select"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:37
+#: includes/class-wpglobus-widget.php:36
 msgid "Select with language code"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:38
+#: includes/class-wpglobus-widget.php:37
 msgid "Dropdown"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:39
+#: includes/class-wpglobus-widget.php:38
 msgid "Dropdown with flags"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:160
+#: includes/class-wpglobus-widget.php:179
 msgid "Title"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:164
+#: includes/class-wpglobus-widget.php:183
 msgid "Selector type"
 msgstr ""
 
@@ -298,11 +306,11 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2001
+#: includes/class-wpglobus.php:1936
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2063
+#: includes/class-wpglobus.php:1998
 msgid "Invalid taxonomy"
 msgstr ""
 
