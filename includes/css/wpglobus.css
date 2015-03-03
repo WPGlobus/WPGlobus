@@ -45,6 +45,11 @@
   background: #eee;
   color: #fff;
 }
+.dropdown-styled li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
 .dropdown-styled li ul {
   padding: 0;
   position: absolute;
@@ -62,10 +67,5 @@
 }
 .dropdown-styled li ul li:hover {
   background: #ddd;
-}
-.dropdown-styled li:hover ul {
-  display: block;
-  opacity: 1;
-  visibility: visible;
 }
 /*# sourceMappingURL=wpglobus.css.map */
