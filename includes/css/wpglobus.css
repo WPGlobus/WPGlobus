@@ -21,9 +21,6 @@
 .menu_item_wpglobus_menu_switch:hover .sub-menu {
   display: block;
 }
-.widget_wpglobus .flags-styled {
-  text-align: center;
-}
 .widget_wpglobus .flags-styled .flag {
   margin-right: 0.4em;
 }
