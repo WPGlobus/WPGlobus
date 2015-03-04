@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: wpglobus 1.0.6\n"
+"Project-Id-Version: wpglobus 1.0.7\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
 "POT-Creation-Date: 2015-03-03 21:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
