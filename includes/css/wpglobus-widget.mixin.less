@@ -1,0 +1,124 @@
+///
+// @see WPGlobusWidget::widget
+//
+
+//
+// case 'flags' :
+//
+.widget_wpglobus {
+	.flags-styled {
+		//	text-align: center;
+
+		.flag {
+			margin-right: 0.4em;
+		}
+	}
+
+	//
+	// class = "list"
+	//
+	.list {
+		a {
+			display: block;
+			img {
+				display: none;
+			}
+			span.name {
+				display: inline-block;
+			}
+			span.code {
+				display: inline-block;
+				margin: 0 0 0 4px;
+				&:before {
+					content: "(";
+				}
+				&:after {
+					content: ")";
+				}
+			}
+		}
+		//
+		// class = "list flags"
+		//
+		&.flags {
+			img {
+				margin: 0 4px 0 0;
+				display: inline-block;
+			}
+		}
+	}
+
+	//
+	// case 'select' :
+	// case 'select_with_code' :
+	//
+	.select-styled {
+		//	width: 100%;
+		//	width: 130px;
+		//	height: 34px;
+		//	border: 1px solid #111;
+		//	border-radius: 5px;
+		overflow: hidden;
+		//	margin: 0 auto;
+
+		//	select {
+		//	width: 100%;
+		//	margin-top: 0;
+		//	background: #eee;
+		//	width: 150px;
+		//	font-size: 16px;
+		//	border: 1px solid #ccc;
+		//	height: 34px;
+		//	}
+	}
+
+	.dropdown-styled {
+		text-align: center;
+		display: inline;
+		list-style: none;
+
+		li {
+			text-align: left;
+			display: inline-block;
+			margin-right: -4px;
+			position: relative;
+			padding: 5px 10px;
+			background: #fff;
+			cursor: pointer;
+
+			&:hover {
+				background: #eee;
+				color: #fff;
+
+				ul {
+					display: block;
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+
+			ul {
+				padding: 0;
+				position: absolute;
+				top: 28px;
+				left: -21px;
+				width: 150px;
+				display: none;
+				opacity: 0;
+				visibility: hidden;
+
+				li {
+					background: #eee;
+					display: block;
+					color: #fff;
+
+					&:hover {
+						background: #ddd;
+
+					}
+				}
+			}
+		}
+	}
+}
+

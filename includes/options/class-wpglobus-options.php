@@ -271,6 +271,18 @@ class WPGlobus_Options {
 					'placeholder' => $navigation_menu_placeholder,
 				),
 				array(
+					'id'       => 'selector_wp_list_pages',
+					'type'     => 'checkbox',
+					'title'    => __( '"All Pages" menus Language selector', 'wpglobus' ),
+					'subtitle' => __( '(Found in some themes)', 'wpglobus' ),
+					'desc'     => __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
+					'compiler' => 'false',
+					'default'  => 1,
+					'options'  => array(
+						'show_selector' => __( 'Enable', 'wpglobus' )
+					),
+				),				
+				array(
 					'id'       => 'css_editor',
 					'type'     => 'ace_editor',
 					'title'    => __( 'Custom CSS', 'wpglobus' ),

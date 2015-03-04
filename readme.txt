@@ -98,6 +98,14 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.7 =
+* ADDED:
+	* WPGlobus Language Selector widget.
+	* Enable language selector in navigation menus created using `wp_list_pages`.
+	* Frontend filter meta description for All In One SEO Pack plugin.
+* FIXED:
+	* CSS for WPGlobus Universal Editor buttons.
+
 = 1.0.6 =
 * ADDED:
 	* Admin interface and front filter to translate widgets.

@@ -118,6 +118,7 @@ class WPGlobus {
 		$this->vendors_scripts['ACF'] 		  = false;
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
+		$this->vendors_scripts['AIOSEOP'] 	  = false; // All In One SEO Pack
 
 		if ( function_exists('acf') ) {
 			$this->vendors_scripts['ACF'] = true;
@@ -143,7 +144,11 @@ class WPGlobus {
 			$this->disabled_entities[]            = 'shop_order';
 			$this->disabled_entities[]            = 'shop_coupon';
 		}
-
+		
+		if ( defined( 'AIOSEOP_VERSION' ) ) {
+			$this->vendors_scripts['AIOSEOP'] = true;
+		}	
+			
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.0.0
@@ -161,6 +166,15 @@ class WPGlobus {
 		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
 
 
+		/**
+		 * Register the widget
+		 */
+		add_action( 'widgets_init',
+			function () {
+				register_widget( 'WPGlobusWidget' );
+			}
+		);
+		
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -1346,13 +1360,13 @@ class WPGlobus {
 	 */
 	function on_wp_styles() {
 		wp_register_style(
-			'flags',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-flags" . self::$_SCRIPT_SUFFIX . ".css",
+			'wpglobus',
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus" . self::$_SCRIPT_SUFFIX . ".css",
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
 		);
-		wp_enqueue_style( 'flags' );
+		wp_enqueue_style( 'wpglobus' );
 	}
 
 	/**
@@ -1424,13 +1438,14 @@ class WPGlobus {
 			        ' { background:url(' .
 			        $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[ $language ] . ') no-repeat }' . "\n";
 		}
+
 		$css .= strip_tags( $WPGlobus_Config->css_editor );
 
 		if ( ! empty( $css ) ) {
 			?>
-			<style type="text/css" media="screen">
-				<?php echo $css; ?>
-			</style>
+<style type="text/css" media="screen">
+	<?php echo $css; ?>
+</style>
 		<?php
 		}
 
@@ -1444,12 +1459,14 @@ class WPGlobus {
 	 * @return string
 	 */
 	function on_wp_list_pages( $output ) {
-
-		global $WPGlobus_Config;
+	
+		if ( ! WPGlobus::Config()->selector_wp_list_pages ) {
+			return $output;
+		}	
 
 		$extra_languages = array();
-		foreach ( $WPGlobus_Config->enabled_languages as $languages ) {
-			if ( $languages != $WPGlobus_Config->language ) {
+		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
+			if ( $languages != WPGlobus::Config()->language ) {
 				$extra_languages[] = $languages;
 			}
 		}
@@ -1460,10 +1477,10 @@ class WPGlobus {
 		);
 
 		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'wpglobus_flag_' . $WPGlobus_Config->language;
+		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
 
 		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">
-						<a href="' . WPGlobus_Utils::get_url( $WPGlobus_Config->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $WPGlobus_Config->language ) . '</span></a>
+						<a href="' . WPGlobus_Utils::get_url( WPGlobus::Config()->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span></a>
 						<ul class="children">';
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   = $span_classes;
@@ -1488,12 +1505,20 @@ class WPGlobus {
 	 * @see wp_nav_menu()
 	 */
 	function on_add_item( $sorted_menu_items, $args ) {
-	
+
 		if ( empty( WPGlobus::Config()->nav_menu ) ) {
 			/**
-			 * Add language switcher to all nav menus
+			 * User can use WPGlobus widget
+			 * @since 1.0.7
 			 */
-		} else {
+			return $sorted_menu_items;
+			
+		} elseif ( 'all' == WPGlobus::Config()->nav_menu ) {
+			/**
+			 * Attach to every nav menu
+			 * @since 1.0.7
+			 */
+		} else {	
 
 			$items = array();
 			foreach( $sorted_menu_items as $item ) {

@@ -190,6 +190,14 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 }
 
 /**
+ * For customizer
+ */
+if ( is_admin() && WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
+	//add_filter( 'option_blogdescription', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	//add_filter( 'option_blogname', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+}
+
+/**
  * @see get_locale()
  */
 add_filter( 'locale', array( 'WPGlobus_Filters', 'filter__get_locale' ), PHP_INT_MAX );
@@ -236,6 +244,15 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	}
 
 
+}
+
+/**
+ * All In One SEO Pack filters
+ */
+if ( defined( 'AIOSEOP_VERSION' ) ) {
+	if ( ! is_admin() ) {
+		add_filter( 'aioseop_description', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	}	
 }
 
 # --- EOF
