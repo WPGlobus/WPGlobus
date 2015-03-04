@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-03 00:11-0500\n"
-"PO-Revision-Date: 2015-03-03 00:13-0500\n"
+"POT-Creation-Date: 2015-03-03 21:57-0500\n"
+"PO-Revision-Date: 2015-03-03 22:05-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: de_DE\n"
@@ -262,9 +262,8 @@ msgid "<a href=\"%s\">Hide Notice</a>"
 msgstr ""
 
 #: includes/class-wpglobus-widget.php:27
-#, fuzzy
 msgid "WPGlobus widget"
-msgstr "WPGlobus"
+msgstr "WPGlobus widget"
 
 #: includes/class-wpglobus-widget.php:29
 #, fuzzy
@@ -303,7 +302,7 @@ msgstr ""
 
 #: includes/class-wpglobus-widget.php:179
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: includes/class-wpglobus-widget.php:183
 msgid "Selector type"
@@ -454,19 +453,28 @@ msgstr "Wählen Sie das Navigationsmenü, wo die Sprachwahl wird angezeigt"
 
 #: includes/options/class-wpglobus-options.php:276
 #, fuzzy
-msgid "Language selector"
+msgid "\"All Pages\" menus Language selector"
 msgstr "Language Selector-Modus"
 
-#: includes/options/class-wpglobus-options.php:280
+#: includes/options/class-wpglobus-options.php:277
+msgid "(Found in some themes)"
+msgstr "(Gefunden Sie in einigen Themen)"
+
+#: includes/options/class-wpglobus-options.php:278
 msgid ""
-"Add language selector to navigation menu which was created with wp_list_pages"
+"Adds language selector to the menus that automatically list all existing "
+"pages (using `wp_list_pages`)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:286
+#: includes/options/class-wpglobus-options.php:282
+msgid "Enable"
+msgstr "Aktivieren"
+
+#: includes/options/class-wpglobus-options.php:288
 msgid "Custom CSS"
 msgstr "Benutzerdefinierte CSS"
 
-#: includes/options/class-wpglobus-options.php:290
+#: includes/options/class-wpglobus-options.php:292
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
@@ -474,26 +482,26 @@ msgstr ""
 "Hier können Sie die CSS-Regeln geben, um die Sprachwahl-Menü für Ihr Thema "
 "ein. Schauen Sie sich die Beispiele in der `style-samples.css` Datei"
 
-#: includes/options/class-wpglobus-options.php:291
+#: includes/options/class-wpglobus-options.php:293
 msgid "(Optional)"
 msgstr "(Fakultativ)"
 
-#: includes/options/class-wpglobus-options.php:302
+#: includes/options/class-wpglobus-options.php:304
 msgid "Languages table"
 msgstr "Sprachen-Tabelle"
 
-#: includes/options/class-wpglobus-options.php:308
+#: includes/options/class-wpglobus-options.php:310
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 "Verwenden Sie diese Tabelle, um Sprachen hinzuzufügen, bearbeiten oder "
 "löschen."
 
-#: includes/options/class-wpglobus-options.php:309
+#: includes/options/class-wpglobus-options.php:311
 msgid "NOTE: you cannot delete the default language."
 msgstr "HINWEIS: Sie können die Standardsprache kann nicht gelöscht werden."
 
-#: includes/options/class-wpglobus-options.php:346
-#: includes/options/class-wpglobus-options.php:347
+#: includes/options/class-wpglobus-options.php:348
+#: includes/options/class-wpglobus-options.php:349
 msgid "WPGlobus"
 msgstr "WPGlobus"
 

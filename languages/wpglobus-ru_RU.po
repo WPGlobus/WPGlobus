@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-03 00:11-0500\n"
-"PO-Revision-Date: 2015-03-03 00:12-0500\n"
+"POT-Creation-Date: 2015-03-03 21:57-0500\n"
+"PO-Revision-Date: 2015-03-03 22:01-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -473,20 +473,30 @@ msgstr ""
 "Выберите навигационное меню, в котором будет показан переключатель языков"
 
 #: includes/options/class-wpglobus-options.php:276
-msgid "Language selector"
-msgstr "Способ выбора языка "
+msgid "\"All Pages\" menus Language selector"
+msgstr "Переключатель языка в меню «Все страницы»"
 
-#: includes/options/class-wpglobus-options.php:280
+#: includes/options/class-wpglobus-options.php:277
+msgid "(Found in some themes)"
+msgstr "(Используется в некоторых темах)"
+
+#: includes/options/class-wpglobus-options.php:278
 msgid ""
-"Add language selector to navigation menu which was created with wp_list_pages"
+"Adds language selector to the menus that automatically list all existing "
+"pages (using `wp_list_pages`)"
 msgstr ""
-"Добавить селектор языка в меню, созданное с помощью метода wp_list_pages"
+"Добавить переключатель языка в меню, которые автоматически показывают список "
+"всех страниц (с использованием `wp_list_pages`)"
 
-#: includes/options/class-wpglobus-options.php:286
+#: includes/options/class-wpglobus-options.php:282
+msgid "Enable"
+msgstr "Включить"
+
+#: includes/options/class-wpglobus-options.php:288
 msgid "Custom CSS"
 msgstr "Пользовательский CSS"
 
-#: includes/options/class-wpglobus-options.php:290
+#: includes/options/class-wpglobus-options.php:292
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
@@ -494,25 +504,25 @@ msgstr ""
 "Сюда Вы можете поместить набор правил CSS для тонкой настройки меню выбора "
 "языков. Примеры для стандартных тем можно найти в файле `style-samples.css`."
 
-#: includes/options/class-wpglobus-options.php:291
+#: includes/options/class-wpglobus-options.php:293
 msgid "(Optional)"
 msgstr "(Не обязательно)"
 
-#: includes/options/class-wpglobus-options.php:302
+#: includes/options/class-wpglobus-options.php:304
 msgid "Languages table"
 msgstr "Таблица языков"
 
-#: includes/options/class-wpglobus-options.php:308
+#: includes/options/class-wpglobus-options.php:310
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 "Используйте эту таблицу, чтобы добавлять, удалять или редактировать языки."
 
-#: includes/options/class-wpglobus-options.php:309
+#: includes/options/class-wpglobus-options.php:311
 msgid "NOTE: you cannot delete the default language."
 msgstr "ВНИМАНИЕ: язык по умолчанию не может быть удален."
 
-#: includes/options/class-wpglobus-options.php:346
-#: includes/options/class-wpglobus-options.php:347
+#: includes/options/class-wpglobus-options.php:348
+#: includes/options/class-wpglobus-options.php:349
 msgid "WPGlobus"
 msgstr "WPGlobus"
 

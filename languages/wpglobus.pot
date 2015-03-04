@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpglobus 1.0.6\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-03 00:11-0500\n"
+"POT-Creation-Date: 2015-03-03 21:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -429,42 +429,51 @@ msgid "Choose the navigation menu where the language selector will be shown"
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:276
-msgid "Language selector"
+msgid "\"All Pages\" menus Language selector"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:280
+#: includes/options/class-wpglobus-options.php:277
+msgid "(Found in some themes)"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:278
 msgid ""
-"Add language selector to navigation menu which was created with wp_list_pages"
+"Adds language selector to the menus that automatically list all existing "
+"pages (using `wp_list_pages`)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:286
+#: includes/options/class-wpglobus-options.php:282
+msgid "Enable"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:288
 msgid "Custom CSS"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:290
+#: includes/options/class-wpglobus-options.php:292
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:291
+#: includes/options/class-wpglobus-options.php:293
 msgid "(Optional)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:302
+#: includes/options/class-wpglobus-options.php:304
 msgid "Languages table"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:308
+#: includes/options/class-wpglobus-options.php:310
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:309
+#: includes/options/class-wpglobus-options.php:311
 msgid "NOTE: you cannot delete the default language."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:346
-#: includes/options/class-wpglobus-options.php:347
+#: includes/options/class-wpglobus-options.php:348
+#: includes/options/class-wpglobus-options.php:349
 msgid "WPGlobus"
 msgstr ""
 

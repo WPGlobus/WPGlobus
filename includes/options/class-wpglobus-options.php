@@ -271,13 +271,15 @@ class WPGlobus_Options {
 					'placeholder' => $navigation_menu_placeholder,
 				),
 				array(
-					'id'          => 'selector_wp_list_pages',
-					'type'        => 'checkbox',
-					'title'       => __( 'Language selector', 'wpglobus' ),
-					'compiler'    => 'false',
-					'default'  	  => 1,
+					'id'       => 'selector_wp_list_pages',
+					'type'     => 'checkbox',
+					'title'    => __( '"All Pages" menus Language selector', 'wpglobus' ),
+					'subtitle' => __( '(Found in some themes)', 'wpglobus' ),
+					'desc'     => __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
+					'compiler' => 'false',
+					'default'  => 1,
 					'options'  => array(
-						'show_selector' => __( 'Add language selector to navigation menu which was created with wp_list_pages', 'wpglobus' )
+						'show_selector' => __( 'Enable', 'wpglobus' )
 					),
 				),				
 				array(
