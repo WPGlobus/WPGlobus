@@ -115,7 +115,7 @@ class WPGlobus_Filters {
 		}
 
 		/**
-		 * Don't filter term names for trash and untrash single post
+		 * Don't filter term names for trash and un-trash single post
 		 * @see we check post.php page instead of edit.php because redirect
 		 */
 		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset( $_GET['action'] ) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
@@ -490,7 +490,9 @@ class WPGlobus_Filters {
 	 *
 	 * @return array
 	 */
-	public static function filter__heartbeat_received( $response, $data, $screen_id ) {
+	public static function filter__heartbeat_received( $response, $data,
+		/** @noinspection PhpUnusedParameterInspection */
+		$screen_id ) {
 
 		if ( false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
 			/**
@@ -642,7 +644,16 @@ class WPGlobus_Filters {
 		
 		return str_replace( $post->post_title, $title, $text );
 		
-	}	
+	}
+
+	/**
+	 * Register the WPGlobus widgets
+	 * @wp-hook widgets_init
+	 * @since 1.0.7
+	 */
+	public static function register_widgets() {
+		register_widget( 'WPGlobusWidget' );
+	}
 
 } // class
 

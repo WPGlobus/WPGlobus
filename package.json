@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "1.0.7",
+  "version": "1.0.7.1",
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",
