@@ -166,15 +166,6 @@ class WPGlobus {
 		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
 
 
-		/**
-		 * Register the widget
-		 */
-		add_action( 'widgets_init',
-			function () {
-				register_widget( 'WPGlobusWidget' );
-			}
-		);
-		
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'

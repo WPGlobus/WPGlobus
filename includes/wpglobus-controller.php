@@ -159,6 +159,17 @@ add_filter( 'single_cat_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 )
 add_filter( 'single_tag_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 add_filter( 'single_term_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 
+/**
+ * Register the WPGlobus widgets
+ * @see WPGlobusWidget
+ * @since 1.0.7
+ */
+add_action( 'widgets_init', array( 'WPGlobus_Filters', 'register_widgets' ) );
+
+
+/**
+ * Filters for widgets
+ */
 if ( ! is_admin() ) {
 	/**
 	 * This is usually used in 'widget' methods of the @see WP_Widget - derived classes,

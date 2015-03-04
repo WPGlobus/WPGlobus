@@ -57,6 +57,17 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 == Frequently Asked Questions ==
 
+= Do you support PHP 5.x? =
+
+* We develop using PHP 5.5, and would like everyone to use at least that version.
+* PHP 5.2 is highly discouraged. At this stage, we try to follow the WordPress guidelines and do not use any of the 5.3+ features (namespaces, anonymous functions, etc.) - but we do not guarantee that it will be the case in the future releases.
+* So, please use PHP 5.5+. Everyone will feel better. Thank you!
+
+= Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x? =
+
+* We believe that our CSS and JS run properly on the most recent versions of those browsers.
+* We do our best to fix any problems you discover on Chrome, FF and MSIE 11+. Opera and Safari are excluded from our top list, but they should work fine. MSIE 10,9,8,7,etc. - completely ignored (thanks for understanding).
+
 = Do you plan to support subdomains and URL query parameters? =
 
 * WPGlobus does not support switching languages using the `/page/?lang={language}` URLs or subdomains `en.example.com; fr.example.com`. If we see a demand, we may release this functionality in a separate extension. Having it in the core would affect the overall performance.
@@ -97,6 +108,10 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer supported. If you have WPGlobus 0.1.x, please upgrade now.
 
 == Changelog ==
+
+= 1.0.7.1 =
+* FIXED:
+	* Anonymous function call prevented installing on PHP 5.2. Related to the reports by [barques](https://wordpress.org/support/profile/barques) and [Jeff Brock](https://wordpress.org/support/profile/jeffbrockstudio) - THANKS!
 
 = 1.0.7 =
 * ADDED:
