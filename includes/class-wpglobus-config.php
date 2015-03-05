@@ -539,14 +539,14 @@ class WPGlobus_Config {
 		}
 		/**
 		 * Need additional check for devmode
-		 * in case 'wpglobus' didn't set in $SERVER[REQUEST_URI] ( $SERVER[REQUEST_URI] => /wp-admin/post.php )
-		 * and $SERVER[QUERY_STRING] is empty in time firing up wp_insert_post_data action 
+		 * in case 'wpglobus' didn't set to 'off' in $_SERVER[REQUEST_URI] ( $_SERVER[REQUEST_URI] => /wp-admin/post.php )
+		 * and $_SERVER[QUERY_STRING] is empty in time firing up wp_insert_post_data action 
 		 * @see class-wpglobus.php:243
 		 */
-		if ( $this->toggle == 'on' && isset( $_SERVER['HTTP_REFERER'] ) && false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
+		if ( $_SERVER['REQUEST_URI'] == '/wp-admin/post.php' && isset( $_SERVER['HTTP_REFERER'] ) && false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
 			$this->toggle = 'off';
-		}	
-		
+		}
+
 	}
 
 	/**
