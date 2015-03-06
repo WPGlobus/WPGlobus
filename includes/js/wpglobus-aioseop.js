@@ -73,11 +73,11 @@ var WPGlobusAioseop;
 				api.countChars($t, $t.data('field-count'));
 			});
 
+			// title
 			$('.wpglobus-aioseop_title').on('keyup', function(event){
 				var $t = $(this);
 				$('#'+'aioseop_snippet_title_'+$t.data('language')).text($t.val());
 			});
-			
 			$('body').on('change', '.wpglobus-aioseop_title', function(event){
 				var save_to = 'input[name=aiosp_title]',
 					s = '';
@@ -89,7 +89,43 @@ var WPGlobusAioseop;
 					}
 				});
 				$(save_to).val(s);		
-			});			
+			});		
+			
+			// description
+			$('.wpglobus-aioseop_description').on('keyup', function(event){
+				var $t = $(this);
+				$('#'+'aioseop_snippet_description_'+$t.data('language')).text($t.val());
+			});
+			
+			$('body').on('change', '.wpglobus-aioseop_description', function(event){
+				var save_to = 'textarea[name=aiosp_description]',
+					s = '';
+
+				$('.wpglobus-aioseop_description').each(function (i, e) {
+					var $e = $(e);
+					if ($e.val() !== '') {
+						s = s + WPGlobusCore.addLocaleMarks( $e.val(), $e.data('language') );
+					}
+				});
+				$(save_to).val(s);		
+			});					
+			
+			// keywords
+			$('body').on('change', '.wpglobus-aioseop_keywords', function(event){
+				var save_to = 'input[name=aiosp_keywords]',
+					s = '';
+
+				$('.wpglobus-aioseop_keywords').each(function (i, e) {
+					var $e = $(e);
+					if ($e.val() !== '') {
+						s = s + WPGlobusCore.addLocaleMarks( $e.val(), $e.data('language') );
+					}
+				});
+				console.log(s);
+				$(save_to).val(s);		
+			});				
+			
+			
 		}	
 	};
 })(jQuery);
