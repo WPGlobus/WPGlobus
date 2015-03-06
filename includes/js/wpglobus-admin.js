@@ -262,6 +262,9 @@ jQuery(document).ready(function () {
                 if ('post-edit' === WPGlobusAdmin.page) {
                     this.post_edit();
 					this.set_dialog();
+					if ( typeof WPGlobusAioseop != 'undefined' ) {
+						WPGlobusAioseop.init();
+					}	
                 } else if ('menu-edit' === WPGlobusAdmin.page) {
                     this.nav_menus();
                 } else if ('taxonomy-edit' === WPGlobusAdmin.page) {
