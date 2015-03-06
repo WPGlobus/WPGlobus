@@ -346,11 +346,11 @@ class WPGlobus_aioseop {
 
 		//$title_format = '%post_title%';
 	
-		//$aiosp_meta_title = get_post_meta( $post->ID, '_aioseop_title', true );
-		$aiosp_meta_title = $aio->get_aioseop_title($post);
-		//error_log($aiosp_meta_title);
+		$aiosp_meta_title 		= $aio->get_aioseop_title($post);
+		$aiosp_meta_description = $aio->get_aioseop_description($post);
+
+		//error_log($aiosp_meta_description);
 		
-		//error_log($aiosp_meta_title);		
 		?>
 		
 		<div id="wpglobus-aioseop-tabs">    <?php
@@ -381,10 +381,12 @@ class WPGlobus_aioseop {
 				$url        = WPGlobus_Utils::get_convert_url( $permalink['url'], $language );  
 				
 				$aiosp_title 		= trim( WPGlobus_Core::text_filter($aiosp_meta_title, $language, $return) );
-				$aiosp_description 	= '';			
+				$aiosp_description 	= trim( WPGlobus_Core::text_filter($aiosp_meta_description, $language, $return) );			
 				
 				$aiosp_placeholder_title = WPGlobus_Core::text_filter($post->post_title, $language, $return);
 				$aiosp_snippet_title 	 = empty( $aiosp_title ) ? $aiosp_placeholder_title : $aiosp_title;
+				
+				$aiosp_snippet_description 	 = $aiosp_description;
 				?>
 
 				<div id="aioseop-tab-<?php echo $language; ?>" class="wpglobus-aioseop-general" data-language="<?php echo $language; ?>"
@@ -403,7 +405,7 @@ class WPGlobus_aioseop {
 								
 								$data['args']['value'] 	= str_replace( '{{language}}', $language, $data['args']['value'] );
 								
-								$data['args']['value'] 	= sprintf( $data['args']['value'], $aiosp_snippet_title, $snippet_title_2, WPGlobus_Utils::get_convert_url($permalink['url'], $language), $aiosp_description );
+								$data['args']['value'] 	= sprintf( $data['args']['value'], $aiosp_snippet_title, $snippet_title_2, WPGlobus_Utils::get_convert_url($permalink['url'], $language), $aiosp_snippet_description );
 								
 								$data['args']['value'] 	= str_replace( '{{extra_length}}',  mb_strlen($snippet_title_2), $data['args']['value'] );
 								//$data['args']['data']	= ' data-extra-length="' . strlen($snippet_title_2) . '" ';
@@ -417,20 +419,9 @@ class WPGlobus_aioseop {
 								$data['args']['suffix']   	= '_' . $language;
 								$data['args']['data']   	= ' data-field-count="wpglobus_title_length_' . $language . '" data-extra-element="aioseop_snippet_' . $language . '" data-language="' . $language . '"';
 								$data['args']['value']   	= $aiosp_title;
-								
-								
 							
 							} else if ( 'aiosp_description' == $name ) {
-								
-								$excerpt = WPGlobus_Core::text_filter($post->post_excerpt, $language, $return);
-								$excerpt = trim( $excerpt );
-								
-								if ( '' != $excerpt ) {  
-									$aiosp_description = $excerpt;
-								} else {
-									$aiosp_description = WPGlobus_Core::text_filter($post->post_content, $language, $return);
-									$aiosp_description = $aio->trim_excerpt_without_filters( $placeholder );
-								}
+						
 								$data['args']['attr']  		= str_replace( '{{placeholder}}', $aiosp_description, $data['args']['attr'] );
 								$data['args']['prefix']   	= 'wpglobus_description_';
 								$data['args']['suffix']   	= '_' . $language;
