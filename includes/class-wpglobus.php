@@ -287,6 +287,21 @@ class WPGlobus {
 					), 11 );
 				}
 
+				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow('post.php') ) {
+					
+					/** @global $post */
+					global $post;
+
+					$type = empty( $post ) ? '' : $post->post_type;
+					if ( ! $this->disabled_entity( $type ) ) {
+					
+						require_once 'vendor/class-wpglobus-aioseop.php';
+						$WPGlobus_aioseop = new WPGlobus_aioseop();	
+						
+					}		
+					
+				}	
+
 			}    // endif $devmode
 
 			add_action( 'admin_print_styles', array(
