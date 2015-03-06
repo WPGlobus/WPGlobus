@@ -9,15 +9,7 @@ require_once( WP_PLUGIN_DIR . '/all-in-one-seo-pack/aioseop_class.php' );
  * Class WPGlobus_All_in_One_SEO
  */
 class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
-	
-	
-	// const DISPLAY_HELP_START	= '<a class="aioseop_help_text_link" style="cursor:pointer;" title="%s" onclick="toggleVisibility(\'%s_tip\');"><label class="aioseop_label textinput">%s</label></a>';
-	// const DISPLAY_HELP_END		= '<div class="aioseop_help_text_div" style="display:none" id="%s_tip"><label class="aioseop_help_text">%s</label></div>';
-	// const DISPLAY_LABEL_FORMAT  = '<span class="aioseop_option_label" style="text-align:%s;vertical-align:top;">%s</span>';
-	// const DISPLAY_TOP_LABEL		= "</div>\n<div class='aioseop_input aioseop_top_label'>\n";
-	// const DISPLAY_ROW_TEMPLATE	= '<div class="aioseop_wrapper%s" id="%s_wrapper"><div class="aioseop_input">%s<span class="aioseop_option_input"><div class="aioseop_option_div" %s>%s</div>%s</span><p style="clear:left"></p></div></div>';
-				
-	
+		
 	private $wpg_language = '';
 	
 	function __construct() {
@@ -65,10 +57,6 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		} else $input_attr .= ' aioseop_no_label ';
 		if ( $opts['label'] == 'top' ) $label_text .= All_in_One_SEO_Pack_Module::DISPLAY_TOP_LABEL;
 		$input_attr .= " aioseop_{$opts['type']}_type";
-		if ( $name == 'aiosp_title' && $language == '_en' ) {
-			//error_log( sprintf( All_in_One_SEO_Pack_Module::DISPLAY_ROW_TEMPLATE, $input_attr, $name.$language, $label_text, $id_attr, $this->get_option_html( $args ), $help_text_2 ) );
-			//error_log( $this->get_option_html( $args ) );
-		}	
 		return sprintf( All_in_One_SEO_Pack_Module::DISPLAY_ROW_TEMPLATE, $input_attr, $name.$language, $label_text, $id_attr, $this->get_option_html( $args ), $help_text_2 );
 	}
 	
@@ -170,8 +158,8 @@ class WPGlobus_aioseop {
 	}	
 	
 	function on_admin_footer() {
+
 		global $post;
-		//error_log( print_r($post, true) );
 
 		$permalink = array();
 		$permalink['url']    = get_permalink( $post->ID );
@@ -292,8 +280,8 @@ class WPGlobus_aioseop {
 		$aio = new WPGlobus_All_in_One_SEO();
 		
 		/**
-		* @todo check url
-		*/
+		 * @todo check url
+		 */
 		$permalink = array();
 		if ( 'publish' == $post->post_status ) {
 			$permalink['url']    = get_permalink( $post->ID );
@@ -302,7 +290,6 @@ class WPGlobus_aioseop {
 			$permalink['url']    = trailingslashit( home_url() );
 			$permalink['action'] = '';
 		} 
-		// */
 		
 		/**
 		 * get keywords for current post
@@ -446,7 +433,7 @@ class WPGlobus_aioseop {
 								$data['args']['value']   	= $aiosp_description;
 								
 							} else if ( 'aiosp_keywords' == $name ) {
-								
+								continue;
 								$placeholders = array();
 								foreach( $keywords as $keyword ) {
 									/**
@@ -471,7 +458,7 @@ class WPGlobus_aioseop {
 				</div> <!-- .wpglobus-aioseop-general -->	<?php
 				
 			} ?>
-			<hr />
+			<!-- <hr /> -->
 		</div> <!-- #wpglobus-aioseop-tabs -->
 
 		<?php		

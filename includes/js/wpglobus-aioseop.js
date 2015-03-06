@@ -20,7 +20,7 @@ var WPGlobusAioseop;
 			// tabs on
 			$('#wpglobus-aioseop-tabs').tabs();
 			$('#wpglobus-aioseop-tabs').insertBefore($('#aiosp_snippet_wrapper'));
-
+			$('#aiosp_snippet_wrapper, #aiosp_title_wrapper, #aiosp_description_wrapper').addClass('hidden');
 			api.setCounters();
 			api.attachListeners();
 
