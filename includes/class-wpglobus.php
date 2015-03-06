@@ -287,7 +287,7 @@ class WPGlobus {
 					), 11 );
 				}
 
-				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow('post.php') ) {
+				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow(array('post.php','edit.php')) ) {
 					
 					/** @global $post */
 					global $post;
@@ -296,8 +296,9 @@ class WPGlobus {
 					if ( ! $this->disabled_entity( $type ) ) {
 					
 						require_once 'vendor/class-wpglobus-aioseop.php';
-						$WPGlobus_aioseop = new WPGlobus_aioseop();	
-						
+						if ( WPGlobus_WP::is_pagenow('post.php') ) {
+							$WPGlobus_aioseop = new WPGlobus_aioseop();	
+						}
 					}		
 					
 				}	

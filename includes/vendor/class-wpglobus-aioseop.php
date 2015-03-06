@@ -3,6 +3,40 @@
  * @package   WPGlobus
  */
 
+/**
+ * @see aioseop_mrt_pccolumn() in original plugin
+ */
+function aioseop_mrt_pccolumn($aioseopcn, $aioseoppi) {
+	$id = $aioseoppi;
+	$target = null;
+	if( $aioseopcn == 'seotitle' ) $target = 'title';
+	if( $aioseopcn == 'seokeywords' ) $target = 'keywords';
+	if( $aioseopcn == 'seodesc' ) $target = 'description';
+	if ( !$target ) return;
+	if( current_user_can( 'edit_post', $id ) ) { ?>
+		<div class="aioseop_mpc_admin_meta_container">
+			<div 	class="aioseop_mpc_admin_meta_options" 
+					id="aioseop_<?php print $target; ?>_<?php echo $id; ?>" 
+					style="float:left;">
+				<?php $content = strip_tags( stripslashes( get_post_meta( $id, "_aioseop_" . $target,	TRUE ) ) ); 
+			if( !empty($content) ):
+				$content = WPGlobus_Core::text_filter( $content, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+				$label = "<label id='aioseop_label_{$target}_{$id}'>" . $content . '</label>';  
+			else: 
+				$label = "<label id='aioseop_label_{$target}_{$id}'></label><strong><i>No " . $target . '</i></strong>';
+			endif;
+				$nonce = wp_create_nonce( "aioseop_meta_{$target}_{$id}" );
+				print $label . '<a id="' . $target . 'editlink' . $id . '" href="javascript:void(0);" onclick=\'aioseop_ajax_edit_meta_form(' .
+				$id . ', "' . $target . '", "' . $nonce . '");return false;\' title="' . __('Edit') . '">';
+					print "<img class='aioseop_edit_button' 
+										id='aioseop_edit_id' 
+										src='" . AIOSEOP_PLUGIN_IMAGES_URL . "cog_edit.png' /></a>";
+				 ?>
+			</div>
+		</div>
+	<?php }
+}	 
+ 
 require_once( WP_PLUGIN_DIR . '/all-in-one-seo-pack/aioseop_class.php' );
 
 /**
