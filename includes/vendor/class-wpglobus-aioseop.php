@@ -193,7 +193,7 @@ class WPGlobus_aioseop {
 			'name' => 'aiosp_keywords',
 			'attr' =>  'placeholder="{{placeholder}}"',
 			'data'	=> '',
-			'classes' => '',
+			'classes' => 'class="wpglobus-aioseop_keywords"',
 			'value' => '',
 			'prefix' => '',
 			'options' => $fields['aiosp_keywords']['opts']
@@ -276,10 +276,10 @@ class WPGlobus_aioseop {
 			'data'	=> '',			
 			'value' => '<div class="preview_snippet">
 							<div id="aioseop_snippet_{{language}}" data-extra-length="{{extra_length}}">
-								<h3><a><span id="aioseop_snippet_title_{{language}}">%s</span>%s</a></h3>
+								<h3{{header_style}}><a{{link_style}}><span id="aioseop_snippet_title_{{language}}">%s</span>%s</a></h3>
 								<div>
 									<div>
-										<cite id="aioseop_snippet_link_{{language}}">%s</cite>
+										<cite{{cite_style}} id="aioseop_snippet_link_{{language}}">%s</cite>
 									</div>
 									<span id="aioseop_snippet_description_{{language}}">%s</span>
 								</div>
@@ -322,12 +322,8 @@ class WPGlobus_aioseop {
 				$keywords_source[$keyword] = $wpdb->get_var( "SELECT name FROM $wpdb->terms WHERE name LIKE '%$keyword%'" );
 			}
 		}
-		//error_log(print_r($keywords_source, true));
-		
-		//error_log('here');
+
 		$aioseop_options =  aioseop_get_options(); 
-		//error_log(print_r($aioseop_options, true));			
-		//error_log( $post->post_type );
 		
 		switch ( $post->post_type ) :
 			case 'post' :	
@@ -337,32 +333,23 @@ class WPGlobus_aioseop {
 			default:
 				$title_format = '';
 		endswitch;
-		
-		//error_log(print_r($title_format, true));
-		//foreach( $title_format as $d ) {
-			//error_log(strlen($d));	
-		//}	
-		// %post_title% | %blog_title%
-
-		//$title_format = '%post_title%';
 	
+		/** @todo may be use get_post_title_format() ? */
 		$aiosp_meta_title 		= $aio->get_aioseop_title($post);
-		$aiosp_meta_description = $aio->get_aioseop_description($post);
-
-		//error_log($aiosp_meta_description);
 		
+		$aiosp_post_description = $aio->get_post_description($post);
+		$aiosp_meta_description_source = get_post_meta( $post->ID, "_aioseop_description", true );
+		$aiosp_meta_description_source = trim( $aiosp_meta_description_source );
+
+		$header_style = ' style="padding:8px 0;"';
+		$link_style = ' style="color:#12c;cursor: pointer;text-decoration: -moz-use-text-color none solid;font-size:16px;"';
+		$cite_style = ' style="color:#093;font-style:normal;"';
 		?>
 		
-		<div id="wpglobus-aioseop-tabs">    <?php
-			/**
-			 * Use span with attributes 'data' for send to js script ids, names elements for which needs to be set new ids, names with language code.
-			 */ ?>
-			<span id="wpglobus-aioseop-attr"
-			      data-elements="aiosp_snippet_wrapper,aiosp_title_wrapper,aiosp_description_wrapper,aiosp_keywords_wrapper">
-			</span>
+		<div id="wpglobus-aioseop-tabs">
 			<ul class="wpglobus-aioseop-tabs-ul">    <?php
 				$order = 0;
-				foreach ( WPGlobus::Config()->open_languages as $language ) { ?>
+				foreach ( WPGlobus::Config()->enabled_languages as $language ) { ?>
 					<li id="aioseop-link-tab-<?php echo $language; ?>"
 					    data-language="<?php echo $language; ?>"
 					    data-order="<?php echo $order; ?>"
@@ -374,19 +361,45 @@ class WPGlobus_aioseop {
 			</ul>    		<div style="clear:both;margin-bottom:20px;"></div><?php
 
 
-			foreach ( WPGlobus::Config()->open_languages as $language ) {
+			foreach ( WPGlobus::Config()->enabled_languages as $language ) {
 				
 				$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
 				
 				$url        = WPGlobus_Utils::get_convert_url( $permalink['url'], $language );  
 				
-				$aiosp_title 		= trim( WPGlobus_Core::text_filter($aiosp_meta_title, $language, $return) );
-				$aiosp_description 	= trim( WPGlobus_Core::text_filter($aiosp_meta_description, $language, $return) );			
-				
+				$aiosp_title 			 = trim( WPGlobus_Core::text_filter($aiosp_meta_title, $language, $return) );
 				$aiosp_placeholder_title = WPGlobus_Core::text_filter($post->post_title, $language, $return);
 				$aiosp_snippet_title 	 = empty( $aiosp_title ) ? $aiosp_placeholder_title : $aiosp_title;
 				
-				$aiosp_snippet_description 	 = $aiosp_description;
+				$aiosp_meta_description  = WPGlobus_Core::text_filter($aiosp_meta_description_source, $language, $return);
+
+				if ( empty($aiosp_meta_description) ) {
+					
+					$description = '';
+					
+					if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) )
+						$description = $aio->trim_excerpt_without_filters_full_length( WPGlobus_Core::text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY) );
+					
+					if ( !$description && $aioseop_options["aiosp_generate_descriptions"] ) {
+						$content = $post->post_content;
+						if ( !empty( $aioseop_options["aiosp_run_shortcodes"] ) ) {
+							$content = do_shortcode( WPGlobus_Core::text_filter($content, $language, WPGlobus::RETURN_EMPTY) );
+						}	
+						$content = wp_strip_all_tags( $content );
+						$description = $aio->trim_excerpt_without_filters( $content );
+					}				
+					
+					$aiosp_description 				= '';			
+					$aiosp_placeholder_description  = $description;
+					$aiosp_snippet_description 	 	= $aiosp_placeholder_description;
+				
+				} else {
+					
+					$aiosp_description 				= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
+					$aiosp_placeholder_description  = WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);
+					$aiosp_snippet_description 		= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
+				
+				}	
 				?>
 
 				<div id="aioseop-tab-<?php echo $language; ?>" class="wpglobus-aioseop-general" data-language="<?php echo $language; ?>"
@@ -405,10 +418,13 @@ class WPGlobus_aioseop {
 								
 								$data['args']['value'] 	= str_replace( '{{language}}', $language, $data['args']['value'] );
 								
+								$data['args']['value'] 	= str_replace( '{{header_style}}',  $header_style, $data['args']['value'] );
+								$data['args']['value'] 	= str_replace( '{{link_style}}', 	$link_style,   $data['args']['value'] );
+								$data['args']['value'] 	= str_replace( '{{cite_style}}', 	$cite_style,   $data['args']['value'] );
+								
 								$data['args']['value'] 	= sprintf( $data['args']['value'], $aiosp_snippet_title, $snippet_title_2, WPGlobus_Utils::get_convert_url($permalink['url'], $language), $aiosp_snippet_description );
 								
 								$data['args']['value'] 	= str_replace( '{{extra_length}}',  mb_strlen($snippet_title_2), $data['args']['value'] );
-								//$data['args']['data']	= ' data-extra-length="' . strlen($snippet_title_2) . '" ';
 							
 							} else if ( 'aiosp_title' == $name ) {
 								
@@ -422,11 +438,12 @@ class WPGlobus_aioseop {
 							
 							} else if ( 'aiosp_description' == $name ) {
 						
-								$data['args']['attr']  		= str_replace( '{{placeholder}}', $aiosp_description, $data['args']['attr'] );
+								$data['args']['attr']  		= str_replace( '{{placeholder}}', $aiosp_placeholder_description, $data['args']['attr'] );
 								$data['args']['prefix']   	= 'wpglobus_description_';
 								$data['args']['suffix']   	= '_' . $language;
 								$data['args']['name']   	= $data['args']['name'] . '_' . $language;
 								$data['args']['data']   	= ' data-field-count="wpglobus_description_length_' . $language . '" data-language="' . $language . '"';
+								$data['args']['value']   	= $aiosp_description;
 								
 							} else if ( 'aiosp_keywords' == $name ) {
 								
@@ -441,6 +458,9 @@ class WPGlobus_aioseop {
 
 								$data['args']['attr']  = str_replace( '{{placeholder}}', $placeholder, $data['args']['attr'] );
 								$data['args']['data']  = ' data-language="' . $language . '" ';
+								$data['args']['name']  = $data['args']['name'] . '_' . $language;
+								$data['args']['data']  = ' data-language="' . $language . '" ';
+
 							}
 							
 							$r = $aio->wpg_get_option_row( $name, $data['opts'], $data['args'], $language ) . $r; 
