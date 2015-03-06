@@ -49,14 +49,31 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	function __construct() {
 	}
 	
-	public static function filter__text( $text ) {
+	/**
+	 * Filter for post title
+	 * 
+	 * @since 1.0.8
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public static function filter__title( $text ) {
 
-		$title_arr = explode('|', $text);
-		$title  = WPGlobus_Core::text_filter( $title_arr[0], WPGlobus::Config()->language, null);
-		$title .= ' |';
-		$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
+		if ( false === strpos( $text, '|' ) ) {
+			
+			$title = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
+			
+		} else {
+			
+			$title_arr = explode('|', $text);
+			$title  = WPGlobus_Core::text_filter( $title_arr[0], WPGlobus::Config()->language, null);
+			$title .= ' |';
+			$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
+				
+		}
 		
 		return $title;
+	
 	}
 	
 	function wpg_get_option_row( $name, $opts, $args, $language ) {

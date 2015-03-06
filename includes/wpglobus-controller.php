@@ -264,7 +264,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 	if ( ! is_admin() ) {
 		require_once 'vendor/class-wpglobus-aioseop.php';
 		add_filter( 'aioseop_description', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__text' ), 0 );
+		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__title' ), 0 );
 	}	
 }
 
