@@ -266,4 +266,19 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 	}	
 }
 
+/**
+ * Public filters
+ * (shortcuts)
+ * @since 1.0.8
+ */
+
+/**
+ * @param string $text
+ *
+ * @return string
+ */
+function wpglobus_filter__text( $text ){
+	return WPGlobus_Filters::filter__text( $text );
+}
+
 # --- EOF
