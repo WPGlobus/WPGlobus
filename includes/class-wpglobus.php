@@ -1861,11 +1861,9 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
-
 		foreach ( self::Config()->enabled_languages as $language ) {
-			$tab_suffix = $language == self::Config()->default_language ? 'default' : $language;
-			$classes    = in_array( $language, self::Config()->open_languages ) ? '' : 'hidden'; ?>
-			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
+			$classes = 'hidden'; 		?>
+			<div id="taxonomy-tab-<?php echo $language; ?>" data-language="<?php echo $language; ?>"
 			     class="<?php echo $classes; ?>">
 			</div>
 		<?php
@@ -1877,17 +1875,21 @@ class WPGlobus {
 	 * Add language tabs for edit taxonomy name at edit-tags.php page
 	 * @return void
 	 */
-	function on_add_language_tabs_edit_taxonomy() {
+	function on_add_language_tabs_edit_taxonomy($object, $taxonomy) {
 
 		if ( $this->disabled_entity() ) {
 			return;
-		} ?>
+		} 		?>
 
 		<ul class="wpglobus-taxonomy-tabs-ul">    <?php
 			foreach ( self::Config()->open_languages as $language ) {
-				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>" class="">
-					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+				$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+						?>
+				<li id="wpglobus-link-tab-<?php echo $language; ?>" class="" 
+						data-language="<?php echo $language; ?>"
+						data-name="<?php echo WPGlobus_Core::text_filter($object->name, $language, $return); ?>"
+						data-description="<?php echo WPGlobus_Core::text_filter($object->description, $language, $return); ?>">
+					<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 				</li> <?php
 			} ?>
 		</ul>    <?php
