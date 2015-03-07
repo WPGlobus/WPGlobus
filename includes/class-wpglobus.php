@@ -1071,10 +1071,14 @@ class WPGlobus {
 			
 			}
 
-			if ( ! empty( $this->vendors_scripts ) ) {
+			/**
+			 * Enqueue js for WPSEO support
+			 * @since 1.0.8 
+			 */			
+			if ( $this->vendors_scripts['WPSEO'] && in_array( $page, array( 'post.php', 'post-new.php') ) ) {				
 				wp_register_script(
 					'wpglobus-vendor',
-					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor" . self::$_SCRIPT_SUFFIX . ".js",
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-wpseo" . self::$_SCRIPT_SUFFIX . ".js",
 					array( 'jquery' ),
 					WPGLOBUS_VERSION,
 					true
