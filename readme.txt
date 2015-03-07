@@ -109,6 +109,12 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.8 =
+* ADDED:
+	* All in one seo plugin support
+* FIXED:
+	* Revised algorithm for edit-tags.php page for correct update fields
+
 = 1.0.7.1 =
 * FIXED:
 	* Anonymous function call prevented installing on PHP 5.2. Related to the reports by [barques](https://wordpress.org/support/profile/barques) and [Jeff Brock](https://wordpress.org/support/profile/jeffbrockstudio) - THANKS!
