@@ -73,6 +73,13 @@ var WPGlobusAioseop;
 				api.countChars($t, $t.data('field-count'));
 			});
 
+			$('body').on('click', '.wpglobus-post-tabs-ul li', function(event){
+				var $t = $(this);
+				if ( $t.hasClass('wpglobus-post-tab') ) {
+					$('#wpglobus-aioseop-tabs').tabs('option','active', $t.data('order'));
+				}	
+			});				
+			
 			// title
 			$('.wpglobus-aioseop_title').on('keyup', function(event){
 				var $t = $(this);
@@ -121,7 +128,6 @@ var WPGlobusAioseop;
 						s = s + WPGlobusCore.addLocaleMarks( $e.val(), $e.data('language') );
 					}
 				});
-				console.log(s);
 				$(save_to).val(s);		
 			});				
 			
