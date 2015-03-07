@@ -114,6 +114,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 	* All in one seo plugin support
 * FIXED:
 	* Revised algorithm for edit-tags.php page for correct update fields
+	* Correct saving post in devmode
 
 = 1.0.7.1 =
 * FIXED:
