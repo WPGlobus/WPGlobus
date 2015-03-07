@@ -76,6 +76,50 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	
 	}
 	
+	/**
+	 * Filter for post description
+	 * 
+	 * @since 1.0.8
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public static function filter__description( $text ) {
+		
+		$description = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+
+		if ( empty($description) ) {
+			
+			global $post; 
+			
+			/**
+			 * Because we have not translation for current language need to autogenerate it 
+			 * @see get_post_description() in original plugin
+			 */
+			$aio = new All_in_One_SEO_Pack(); 
+			 
+			$aioseop_options = get_option('aioseop_options'); 
+			
+			if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) )
+				$description = $aio->trim_excerpt_without_filters_full_length( $post->post_excerpt );
+			if ( !$description && $aioseop_options["aiosp_generate_descriptions"] ) {
+				$content = $post->post_content;
+				if ( !empty( $aioseop_options["aiosp_run_shortcodes"] ) ) $content = do_shortcode( $content );
+				$content = wp_strip_all_tags( $content );
+				$description = $aio->trim_excerpt_without_filters( $content );
+			}
+			
+			// "internal whitespace trim"
+			$description = preg_replace( "/\s\s+/u", " ", $description );
+			 
+			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
+			 
+		}
+
+		return $description;	
+	
+	}	
+	
 	function wpg_get_option_row( $name, $opts, $args, $language ) {
 
 		$this->wpg_language = $language;
