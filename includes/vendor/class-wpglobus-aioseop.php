@@ -300,7 +300,7 @@ class WPGlobus_aioseop {
 		$fields['aiosp_description']['args'] = array(
 			'name' => 'aiosp_description',
 			'attr' =>  'placeholder="{{placeholder}}"',
-			'data' => '',
+			'data' => ' data-max-size="160" ',
 			'classes' => 'class="wpglobus_countable wpglobus-aioseop_description"',
 			'value' => '',
 			'prefix' => 'wpglobus_',
@@ -329,7 +329,7 @@ class WPGlobus_aioseop {
 		$fields['aiosp_title']['args'] = array(
 			'name' => 'aiosp_title_{{language}}',
 			'attr' =>  'size="60"  placeholder="{{placeholder}}"',
-			'data'	=> '',
+			'data'	=> ' data-max-size="60" ',
 			'classes' => 'class="wpglobus_countable wpglobus-aioseop_title"',
 			'value' => '',
 			'prefix' => 'wpglobus_',
@@ -515,7 +515,7 @@ class WPGlobus_aioseop {
 								$data['args']['attr']   	= str_replace( '{{placeholder}}', $aiosp_placeholder_title, $data['args']['attr'] );
 								$data['args']['prefix']   	= 'wpglobus_title_';
 								$data['args']['suffix']   	= '_' . $language;
-								$data['args']['data']   	= ' data-field-count="wpglobus_title_length_' . $language . '" data-extra-element="aioseop_snippet_' . $language . '" data-language="' . $language . '"';
+								$data['args']['data']   	= $data['args']['data'] . ' data-field-count="wpglobus_title_length_' . $language . '" data-extra-element="aioseop_snippet_' . $language . '" data-language="' . $language . '"';
 								$data['args']['value']   	= $aiosp_title;
 							
 							} else if ( 'aiosp_description' == $name ) {
@@ -524,7 +524,7 @@ class WPGlobus_aioseop {
 								$data['args']['prefix']   	= 'wpglobus_description_';
 								$data['args']['suffix']   	= '_' . $language;
 								$data['args']['name']   	= $data['args']['name'] . '_' . $language;
-								$data['args']['data']   	= ' data-field-count="wpglobus_description_length_' . $language . '" data-language="' . $language . '"';
+								$data['args']['data']   	= $data['args']['data'] . ' data-field-count="wpglobus_description_length_' . $language . '" data-language="' . $language . '"';
 								$data['args']['value']   	= $aiosp_description;
 								
 							} else if ( 'aiosp_keywords' == $name ) {

@@ -36,36 +36,25 @@ var WPGlobusAioseop;
 			});				
 		},	
 		countChars: function($field,cntfield) {
-			var extra = 0, field_size;
-			
+			var extra = 0, field_size,
+				cntfield = 'input[name='+cntfield+']',
+				max_size = $field.data('max-size');
+
 			if ( typeof $field.data('extra-element') !== 'undefined' ) {
 				extra = $('#'+$field.data('extra-element')).data('extra-length');
 			}
 			
 			field_size = $field.val().length + extra;
-			$('input[name='+cntfield+']').val( field_size );
-			
-			return;
-			
-			cntfield.value = field.value.length + extra;
-			if ( typeof field.size != 'undefined' ) {
-				field_size = field.size;
+			$(cntfield).val( field_size );
+			if ( field_size > max_size ) {
+				$(cntfield).css({'color':'#fff','background-color':'#f00'});
 			} else {
-				field_size = field.rows * field.cols;
-			}
-			if ( field_size < 10 ) return;
-			if ( cntfield.value > field_size ) {
-				cntfield.style.color = "#fff";
-				cntfield.style.backgroundColor = "#f00";
-			} else {
-				if ( cntfield.value > ( field_size - 6 ) ) {
-					cntfield.style.color = "#515151";
-					cntfield.style.backgroundColor = "#ff0";			
+				if ( field_size > max_size - 6 ) {
+					$(cntfield).css({'color':'#515151','background-color':'#ff0'});
 				} else {
-					cntfield.style.color = "#515151";
-					cntfield.style.backgroundColor = "#eee";			
+					$(cntfield).css({'color':'#515151','background-color':'#eee'});
 				}
-			}			
+			}	
 		},	
 		attachListeners: function() {
 			$('.wpglobus_countable').on('keyup', function(event) {
