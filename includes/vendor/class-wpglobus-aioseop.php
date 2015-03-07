@@ -236,7 +236,7 @@ class WPGlobus_aioseop {
 			//global $WPGlobus;
 			wp_register_script(
 				'wpglobus-aioseop',
-				WPGLobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-aioseop" . WPGLobus::SCRIPT_SUFFIX() . ".js",
+				WPGLobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-aioseop" . WPGLobus::SCRIPT_SUFFIX() . ".js",
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
