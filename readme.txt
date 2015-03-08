@@ -112,6 +112,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 = 1.0.8 =
 * ADDED:
 	* All in one seo plugin support
+	* Admin interface improvements
 * FIXED:
 	* Revised algorithm for edit-tags.php page for correct update fields
 	* Correct saving post in devmode
