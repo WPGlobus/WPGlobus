@@ -115,6 +115,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 * FIXED:
 	* Revised algorithm for edit-tags.php page for correct update fields
 	* Correct saving post in devmode
+	* Changed flag file to us.png for en_US locale
 
 = 1.0.7.1 =
 * FIXED:
