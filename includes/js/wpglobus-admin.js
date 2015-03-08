@@ -288,7 +288,7 @@ jQuery(document).ready(function () {
 				var $bn = $('#blogname'),
                     $body = $('body');
 				$bn.addClass('hidden');
-				$('#wpglobus-blogname').insertAfter($bn);
+				$('#wpglobus-blogname').insertAfter($bn).removeClass('hidden');
                 $body.on('blur', '.wpglobus-blogname', function () {
                     var s = '';
                     $('.wpglobus-blogname').each(function (index, e) {
@@ -303,7 +303,7 @@ jQuery(document).ready(function () {
 				
 				var $bd = $('#blogdescription');
 				$bd.addClass('hidden');
-				$('#wpglobus-blogdescription').insertAfter($bd);
+				$('#wpglobus-blogdescription').insertAfter($bd).removeClass('hidden');
                 $body.on('blur', '.wpglobus-blogdesc', function () {
                     var s = '';
                     $('.wpglobus-blogdesc').each(function (index, e) {

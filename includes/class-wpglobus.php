@@ -2114,7 +2114,7 @@ class WPGlobus {
 
 		$blogdesc = get_option( 'blogdescription' );
 		?>
-		<div id="wpglobus-blogname">        <?php
+		<div id="wpglobus-blogname" class="hidden">        <?php
 			foreach ( self::Config()->enabled_languages as $language ) :
 				$return =
 					$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
@@ -2129,7 +2129,7 @@ class WPGlobus {
 			endforeach; ?>
 		</div>
 
-		<div id="wpglobus-blogdescription">        <?php
+		<div id="wpglobus-blogdescription" class="hidden">        <?php
 			foreach ( self::Config()->enabled_languages as $language ) :
 				$return =
 					$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
