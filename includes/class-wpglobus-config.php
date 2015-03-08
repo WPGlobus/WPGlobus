@@ -352,7 +352,7 @@ class WPGlobus_Config {
 		$this->locale['gl'] = "gl_ES";
 
 		#flags
-		$this->flag['en'] = 'gb.png';
+		$this->flag['en'] = 'us.png';
 		$this->flag['ru'] = 'ru.png';
 		$this->flag['de'] = 'de.png';
 		$this->flag['zh'] = 'cn.png';
