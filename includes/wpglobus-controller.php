@@ -161,7 +161,7 @@ add_filter( 'single_term_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 
 
 /**
  * Register the WPGlobus widgets
- * @see WPGlobusWidget
+ * @see   WPGlobusWidget
  * @since 1.0.7
  */
 add_action( 'widgets_init', array( 'WPGlobus_Filters', 'register_widgets' ) );
@@ -265,22 +265,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 		require_once 'vendor/class-wpglobus-aioseop.php';
 		add_filter( 'aioseop_description', array( 'WPGlobus_All_in_One_SEO', 'filter__description' ), 0 );
 		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__title' ), 0 );
-	}	
-}
-
-/**
- * Public filters
- * (shortcuts)
- * @since 1.0.8
- */
-
-/**
- * @param string $text
- *
- * @return string
- */
-function wpglobus_filter__text( $text ){
-	return WPGlobus_Filters::filter__text( $text );
+	}
 }
 
 # --- EOF
