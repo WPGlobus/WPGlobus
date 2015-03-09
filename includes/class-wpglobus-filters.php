@@ -29,6 +29,26 @@ class WPGlobus_Filters {
 
 	}
 
+	/**
+	 * This is similar to the @see filter__text filter,
+	 * but it returns text in the DEFAULT language.
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 * @since 1.0.8
+	 */
+	public static function filter__text_default_language( $text ) {
+
+		return WPGlobus_Core::text_filter(
+			$text,
+			WPGlobus::Config()->default_language,
+			null,
+			WPGlobus::Config()->default_language
+		);
+
+	}
+
 
 	/**
 	 * Filter @see get_terms
