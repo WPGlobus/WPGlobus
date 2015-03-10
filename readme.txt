@@ -121,7 +121,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 = 1.0.7.2 =
 * FIXED:
-	* URL switching when WordPress serves only part of the site, like `www.example.com/blog`. Reported by [IAmVincentLiu] (https://wordpress.org/support/profile/iamvincentliu) - THANKS!
+	* URL switching when WordPress serves only part of the site, like `www.example.com/blog`. Reported by [IAmVincentLiu](https://wordpress.org/support/profile/iamvincentliu) - THANKS!
 
 = 1.0.7.1 =
 * FIXED:
