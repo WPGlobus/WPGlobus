@@ -325,6 +325,11 @@ class WPGlobus {
 				'on_add_devmode_switcher'
 			) );
 
+			add_action( 'admin_bar_menu', array(
+				$this,
+				'on_admin_bar_menu'
+			) );
+			
 		} else {
 			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
 				$_SERVER['REQUEST_URI'],
@@ -507,6 +512,13 @@ class WPGlobus {
 		$order = $_POST['order'];
 
 		switch ( $order['action'] ) :
+			case 'wpglobus_select_lang':
+				if ( $order['locale'] == 'en_US' ) {
+					update_option( 'WPLANG', '' );
+				} else {	
+					update_option( 'WPLANG', $order['locale'] );
+				}
+				break;
 			case 'get_titles':
 
 				if ( $order['type'] == 'taxonomy' ) {
@@ -2171,6 +2183,94 @@ class WPGlobus {
 		}
 
 	}
+	
+	/**
+	 * Add language selector to adminbar
+	 * 
+	 * @since 1.0.8
+	 * 
+	 * @return void
+	 */	
+	function on_admin_bar_menu($wp_admin_bar) {
+		
+		$available_languages = get_available_languages();
+		
+		$user_id      = get_current_user_id();
+
+		if ( ! $user_id ) {
+			return;
+		}
+
+		$wp_admin_bar->add_menu( array(
+			'id'        => 'wpglobus-language-select',
+			'parent'    => 'top-secondary',
+			'title'     => WPGlobus::Config()->language_name[WPGlobus::Config()->language] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[WPGlobus::Config()->language]  . '" /></span>',
+			'href'      => '',
+			'meta'      => array(
+				'class'     => '',
+				'title'     => __('My Account'),
+			),
+		) );	
+		
+		$add_more_languages = array();
+		foreach( WPGlobus::Config()->enabled_languages as $language ) :
+			
+			if ( WPGlobus::Config()->language == $language ) { 
+				continue;
+			}
+			
+			$locale = WPGlobus::Config()->locale[$language];
+			
+			if ( $locale != 'en_US' ) { 
+				if ( ! in_array( $locale, $available_languages ) ) {
+					$add_more_languages[] = WPGlobus::Config()->language_name[$language];
+					continue;
+				}	
+			}	
+			
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'wpglobus-language-select',
+				'id'     => 'wpglobus-' . $language,
+				'title'  => '<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[$language]  . '" /></span>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[$language],
+				'href'   => '/wp-admin/options-general.php',
+				'meta'   => array(
+					'tabindex' => -1,
+					'onclick' => 'wpglobus_select_lang("' . $locale . '");return false;'
+				),
+			) );
+			
+		endforeach;
+		
+		if ( !empty($add_more_languages) ) {
+			$title = __( 'Add', 'wpglobus' ) . ' (' . implode(', ', $add_more_languages ) . ')';
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'wpglobus-language-select',
+				'id'     => 'wpglobus-add-languages',
+				'title'  => $title,
+				'href'   => '/wp-admin/options-general.php',
+				'meta'   => array(
+					'tabindex' => -1,
+				),
+			) );		
+		}	
+	?>
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function($){	
+		wpglobus_select_lang = function(locale) {
+			$.post(ajaxurl, {
+					action: 'WPGlobus_process_ajax',
+					order: {action:'wpglobus_select_lang',locale:locale},
+				}, function(d) {} )
+				.done(function(){
+					window.location.reload();
+				})	;			
+		}	
+	});
+//]]>
+</script>	
+		<?php
+	}		
 
 }
 
