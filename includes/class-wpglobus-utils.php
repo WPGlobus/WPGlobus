@@ -6,6 +6,42 @@
 class WPGlobus_Utils {
 
 	/**
+	 * Localize URL by inserting language prefix
+	 *
+	 * @param string $url URL to localize
+	 * @param string $language Language code
+	 *
+	 * @return mixed
+	 */
+	public static function get_convert_url( $url = '', $language = '' ) {
+
+		/**
+		 * In Admin-Settings-General:
+		 * WordPress Address (URL) is site_url()
+		 * Site Address (URL) is home_url
+		 * We need home_url, and we cannot use the @home_url function,
+		 * because it will filter back here causing endless loop.
+		 * @todo Multisite?
+		 */
+		$home_url = get_option( 'home' );
+
+		$language = empty( $language ) ? WPGlobus::Config()->language : $language;
+		if ( $language === WPGlobus::Config()->default_language && WPGlobus::Config()->hide_default_language ) {
+			$language = '';
+		}
+
+		$language_url_prefix = trailingslashit( '/' . $language );
+
+		$re = '!' .
+		      str_replace( '.', '\.', $home_url ) .
+		      '/?(' . join( '|', WPGlobus::Config()->enabled_languages ) . ')?/?' . '!';
+
+		$localized_url = preg_replace( $re, $home_url . $language_url_prefix, $url );
+
+		return $localized_url;
+	}
+
+	/**
 	 * Get converted url
 	 *
 	 * @param string $url
@@ -13,7 +49,7 @@ class WPGlobus_Utils {
 	 *
 	 * @return string
 	 */
-	public static function get_convert_url( $url = '', $language = '' ) {
+	public static function OLD_get_convert_url( $url = '', $language = '' ) {
 
 		global $WPGlobus_Config;
 
@@ -58,14 +94,14 @@ class WPGlobus_Utils {
 		if ( '/' == $home ) {
 			$converted_url =
 				$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
-				
+
 		} else {
 			/**
 			 * Case when WordPress Address (URL) and Site Address (URL) ==  http://example.com/blog or
 			 * WordPress Address (URL) == http://example.com/blog and Site Address (URL) ==  http://example.com
 			 */
-			$path = $home . $language . '/' . str_replace( $home, '', $parsed_url['path'] . '/' );
-			$path = str_replace( array('///', '//'), '/', $path);
+			$path          = $home . $language . '/' . str_replace( $home, '', $parsed_url['path'] . '/' );
+			$path          = str_replace( array( '///', '//' ), '/', $path );
 			$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $path . $fragment;
 		}	
 		
