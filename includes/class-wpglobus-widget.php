@@ -95,20 +95,28 @@ class WPGlobusWidget extends WP_Widget {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		}
 		foreach ( $enabled_languages as $language ) :
-
+			
+			/**
+			 @todo remove after testing 
 			if ( $language == WPGlobus::Config()->default_language && WPGlobus::Config()->hide_default_language ) {
 				$l = '';
 			} else {
 				$l = '/' . $language;
-			}
+			} */
 
 			$selected = '';
 			if ( $language == WPGlobus::Config()->language ) {
 				$selected = ' selected';
 			}
 
+			//$url  =
+				//WPGlobus::Config()->url_info['schema'] . WPGlobus::Config()->url_info['host'] . $l . WPGlobus::Config()->url_info['url'];
+				
 			$url  =
-				WPGlobus::Config()->url_info['schema'] . WPGlobus::Config()->url_info['host'] . $l . WPGlobus::Config()->url_info['url'];
+				WPGlobus::Config()->url_info['schema'] . WPGlobus::Config()->url_info['host'] . WPGlobus::Config()->url_info['url'];
+			
+			$url = WPGlobus_Utils::localize_url( $url, $language );
+				
 			$flag = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
 
 			switch ( $type ) :

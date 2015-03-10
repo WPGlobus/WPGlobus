@@ -464,7 +464,7 @@ class WPGlobus {
 			</ul>    <?php
 
 			foreach ( self::Config()->open_languages as $language ) {
-				$url        = WPGlobus_Utils::get_convert_url( $permalink['url'], $language );
+				$url        = WPGlobus_Utils::localize_url( $permalink['url'], $language );
 				$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
 				$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
 				$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); ?>
@@ -604,7 +604,7 @@ class WPGlobus {
 			 */
 			if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp-comments-post.php' ) ) {
 				if ( ! empty( $_COOKIE['wpglobus-language'] ) ) {
-					$location = WPGlobus_Utils::get_convert_url( $location, $_COOKIE['wpglobus-language'] );
+					$location = WPGlobus_Utils::localize_url( $location, $_COOKIE['wpglobus-language'] );
 				}
 			}
 		}
@@ -1329,7 +1329,7 @@ class WPGlobus {
 
 		foreach ( $sorted_menu_items as $key => $item ) {
 			if ( 'custom' == $item->type ) {
-				$sorted_menu_items[ $key ]->url = WPGlobus_Utils::get_convert_url( $sorted_menu_items[ $key ]->url );
+				$sorted_menu_items[ $key ]->url = WPGlobus_Utils::localize_url( $sorted_menu_items[ $key ]->url );
 			}
 		}
 

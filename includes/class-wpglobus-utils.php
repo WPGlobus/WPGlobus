@@ -6,6 +6,69 @@
 class WPGlobus_Utils {
 
 	/**
+	 * Localize URL by inserting language prefix
+	 *
+	 * @param string          $url      URL to localize
+	 * @param string          $language Language code
+	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
+	 *
+	 * @return string
+	 */
+	public static function localize_url( $url = '', $language = '', WPGlobus_Config $config = null ) {
+
+		/**
+		 * Use the global configuration is alternative not passed
+		 */
+		if ( is_null( $config ) ) {
+			$config = WPGlobus::Config();
+		}
+
+		/**
+		 * In Admin-Settings-General:
+		 * WordPress Address (URL) is site_url()
+		 * Site Address (URL) is home_url
+		 * We need home_url, and we cannot use the @home_url function,
+		 * because it will filter back here causing endless loop.
+		 * @todo Multisite?
+		 */
+		$home_url = get_option( 'home' );
+
+		/**
+		 * Use the current language if not passed
+		 */
+		$language = empty( $language ) ? $config->language : $language;
+
+		/**
+		 * This says "Do not use language code in the default URL"
+		 * So, no /en/page/, just /page/
+		 */
+		if ( $language === $config->default_language && $config->hide_default_language ) {
+			$language = '';
+		}
+
+		/**
+		 * Language prefix looks like '/ru/'
+		 */
+		$language_url_prefix = trailingslashit( '/' . $language );
+
+		/**
+		 * Regex to replace current language prefix with the requested one.
+		 * @example !http://www\.example\.com/?(en|ru|pt)?/?!
+		 */
+		$re = '!' .
+		      str_replace( '.', '\.', $home_url ) .
+		      '/?(' . join( '|', $config->enabled_languages ) . ')?/?' . '!';
+
+		/**
+		 * Replace the existing (or empty) language prefix with the requested one
+		 */
+		$localized_url = preg_replace( $re, $home_url . $language_url_prefix, $url );
+
+		return $localized_url;
+	}
+
+	/**
+	 * @deprecated 1.0.7.2
 	 * Get converted url
 	 *
 	 * @param string $url
@@ -54,8 +117,21 @@ class WPGlobus_Utils {
 
 		$fragment = empty( $parsed_url['fragment'] ) ? '' : '#' . $parsed_url['fragment'];
 
-		$converted_url =
-			$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
+		$home = WPGlobus::Config()->url_info['home'];
+		if ( '/' == $home ) {
+			$converted_url =
+				$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
+
+		} else {
+			/**
+			 * Case when WordPress Address (URL) and Site Address (URL) ==  http://example.com/blog or
+			 * WordPress Address (URL) == http://example.com/blog and Site Address (URL) ==  http://example.com
+			 */
+			$path          = $home . $language . '/' . str_replace( $home, '', $parsed_url['path'] . '/' );
+			$path          = str_replace( array( '///', '//' ), '/', $path );
+			$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $path . $fragment;
+		}	
+		
 		//				break;
 		//			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
 		//				// pre domain

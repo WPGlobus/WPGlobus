@@ -315,7 +315,7 @@ class WPGlobus_Filters {
 		}
 
 		if ( $need_to_process ) {
-			$url = WPGlobus_Utils::get_convert_url( $url );
+			$url = WPGlobus_Utils::localize_url( $url );
 		}
 
 		return $url;
