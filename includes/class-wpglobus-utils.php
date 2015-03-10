@@ -8,12 +8,20 @@ class WPGlobus_Utils {
 	/**
 	 * Localize URL by inserting language prefix
 	 *
-	 * @param string $url URL to localize
-	 * @param string $language Language code
+	 * @param string          $url      URL to localize
+	 * @param string          $language Language code
+	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
 	 *
-	 * @return mixed
+	 * @return string
 	 */
-	public static function get_convert_url( $url = '', $language = '' ) {
+	public static function localize_url( $url = '', $language = '', WPGlobus_Config $config = null ) {
+
+		/**
+		 * Use the global configuration is alternative not passed
+		 */
+		if ( is_null( $config ) ) {
+			$config = WPGlobus::Config();
+		}
 
 		/**
 		 * In Admin-Settings-General:
@@ -25,23 +33,42 @@ class WPGlobus_Utils {
 		 */
 		$home_url = get_option( 'home' );
 
-		$language = empty( $language ) ? WPGlobus::Config()->language : $language;
-		if ( $language === WPGlobus::Config()->default_language && WPGlobus::Config()->hide_default_language ) {
+		/**
+		 * Use the current language if not passed
+		 */
+		$language = empty( $language ) ? $config->language : $language;
+
+		/**
+		 * This says "Do not use language code in the default URL"
+		 * So, no /en/page/, just /page/
+		 */
+		if ( $language === $config->default_language && $config->hide_default_language ) {
 			$language = '';
 		}
 
+		/**
+		 * Language prefix looks like '/ru/'
+		 */
 		$language_url_prefix = trailingslashit( '/' . $language );
 
+		/**
+		 * Regex to replace current language prefix with the requested one.
+		 * @example !http://www\.example\.com/?(en|ru|pt)?/?!
+		 */
 		$re = '!' .
 		      str_replace( '.', '\.', $home_url ) .
-		      '/?(' . join( '|', WPGlobus::Config()->enabled_languages ) . ')?/?' . '!';
+		      '/?(' . join( '|', $config->enabled_languages ) . ')?/?' . '!';
 
+		/**
+		 * Replace the existing (or empty) language prefix with the requested one
+		 */
 		$localized_url = preg_replace( $re, $home_url . $language_url_prefix, $url );
 
 		return $localized_url;
 	}
 
 	/**
+	 * @deprecated 1.0.7.2
 	 * Get converted url
 	 *
 	 * @param string $url
@@ -49,7 +76,7 @@ class WPGlobus_Utils {
 	 *
 	 * @return string
 	 */
-	public static function OLD_get_convert_url( $url = '', $language = '' ) {
+	public static function get_convert_url( $url = '', $language = '' ) {
 
 		global $WPGlobus_Config;
 
