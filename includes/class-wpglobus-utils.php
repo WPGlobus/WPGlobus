@@ -54,8 +54,21 @@ class WPGlobus_Utils {
 
 		$fragment = empty( $parsed_url['fragment'] ) ? '' : '#' . $parsed_url['fragment'];
 
-		$converted_url =
-			$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
+		$home = WPGlobus::Config()->url_info['home'];
+		if ( '/' == $home ) {
+			$converted_url =
+				$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
+				
+		} else {
+			/**
+			 * Case when WordPress Address (URL) and Site Address (URL) ==  http://example.com/blog or
+			 * WordPress Address (URL) == http://example.com/blog and Site Address (URL) ==  http://example.com
+			 */
+			$path = $home . $language . '/' . str_replace( $home, '', $parsed_url['path'] . '/' );
+			$path = str_replace( array('///', '//'), '/', $path);
+			$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $path . $fragment;
+		}	
+		
 		//				break;
 		//			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
 		//				// pre domain
