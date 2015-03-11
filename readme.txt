@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
 
-Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with WordPress SEO by Yoast and ACF!
+Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with WP SEO by Yoast, All in One SEO Pack and ACF!
 
 == Description ==
 
@@ -31,11 +31,12 @@ The administrator interface allows for selecting active languages as well as def
 	* [LinkedIn](https://www.linkedin.com/company/wpglobus),
 	* [Facebook](https://www.facebook.com/WPGlobus),
 	* [Twitter](https://twitter.com/WPGlobus) and
-	* [Google Plus](https://plus.google.com/111657854098133499126).
+	* [Google Plus](https://plus.google.com/+Wpglobus).
 
 = WPGlobus is compatible with these popular plugins: =
 
 * [WordPress SEO](https://yoast.com/wordpress/plugins/seo/) by [Joost de Valk](https://profiles.wordpress.org/joostdevalk/);
+* [All in One SEO Pack](https://wordpress.org/plugins/all-in-one-seo-pack/) by [Michael Torbert](https://profiles.wordpress.org/hallsofmontezuma/);
 * [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) by [Elliot Condon](https://profiles.wordpress.org/elliotcondon/);
 * [Sidebar Login](https://wordpress.org/plugins/sidebar-login/) by [Mike Jolley](https://profiles.wordpress.org/mikejolley/).
 
@@ -111,13 +112,13 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 = 1.0.8 =
 * ADDED:
-	* All in one seo plugin support
-	* Language selector to adminbar
-	* Admin interface improvements
+	* Partial support of the All in One SEO Pack plugin.
+	* Language selector in the Admin bar.
 * FIXED:
-	* Revised algorithm for edit-tags.php page for correct update fields
-	* Correct saving post in devmode
-	* Changed flag file to us.png for en_US locale
+	* Changed flag to `us.png` for the `en_US` locale.
+	* Some Admin interface improvements.
+	* Corrected field updates at the `edit-tags.php` page.
+	* Corrected post saving in WPGlobus developer's mode (toggle off).
 
 = 1.0.7.2 =
 * FIXED:
