@@ -16,12 +16,24 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 > **Versions 1.0.x are released to the general public as Beta Software. During the Beta stage, the software is tested for bugs, crashes, errors and inconsistencies. If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
-The current version of the plugin:
+With the WPGlobus Free Core plugin, you can:
 
-* Provides admin interface to translate posts, pages, menus, widgets, categories and tags to multiple languages.
-* Adds a drop-down menu to a navigation menu, thus allowing to switch between languages, by changing the URL (`/{language}/page/`)
+* Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
+	* translate Posts and Pages to multiple languages using an easy tabbed interface;
+	* translate major taxonomies: categories and tags;
+	* translate menus and widgets;
+* Enable multilingual SEO features of:
+    * WP SEO by Yoast;
+    * All in One SEO Pack by Michael Torbert.
+* Translate Custom Fields:
+	* standard;
+	* created with the Advanced Custom Fields plugin.
+* Switch the languages at the Front using:
+	* a drop-down menu extension;
+	* a customizable widget with various display options;
+* Switch the Administrator interface language using a top bar selector.
 
-The administrator interface allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
+The WPGlobus option panel allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
 = More info =
 
@@ -113,7 +125,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 = 1.0.8 =
 * ADDED:
 	* Partial support of the All in One SEO Pack plugin.
-	* Language selector in the Admin bar.
+	* Change WP Admin language using an Admin bar selector.
 * FIXED:
 	* Changed flag to `us.png` for the `en_US` locale.
 	* Some Admin interface improvements.
