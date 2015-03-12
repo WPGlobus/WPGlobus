@@ -2232,7 +2232,7 @@ class WPGlobus {
 				'parent' => 'wpglobus-language-select',
 				'id'     => 'wpglobus-' . $language,
 				'title'  => '<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[$language]  . '" /></span>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[$language],
-				'href'   => '/wp-admin/options-general.php',
+				'href'   => admin_url( 'options-general.php' ),
 				'meta'   => array(
 					'tabindex' => -1,
 					'onclick' => 'wpglobus_select_lang("' . $locale . '");return false;'
@@ -2247,7 +2247,7 @@ class WPGlobus {
 				'parent' => 'wpglobus-language-select',
 				'id'     => 'wpglobus-add-languages',
 				'title'  => $title,
-				'href'   => '/wp-admin/options-general.php',
+				'href'   => admin_url( 'options-general.php' ),
 				'meta'   => array(
 					'tabindex' => -1,
 				),
