@@ -61,6 +61,12 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__get_terms( Array $terms ) {
 
+		/**
+		 * @todo Example of a "stopper" filter
+		 *       if ( apply_filters( 'wpglobus_do_filter__get_terms', true ) ) {}
+		 *       Because it might affect the performance, this is a to-do for now.
+		 */
+
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
