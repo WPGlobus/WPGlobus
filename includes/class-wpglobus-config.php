@@ -537,13 +537,18 @@ class WPGlobus_Config {
 		} else {
 			$this->toggle = 'on';
 		}
+
 		/**
-		 * Need additional check for devmode
-		 * in case 'wpglobus' didn't set to 'off' in $_SERVER[REQUEST_URI] ( $_SERVER[REQUEST_URI] => /wp-admin/post.php )
-		 * and $_SERVER[QUERY_STRING] is empty in time firing up wp_insert_post_data action 
-		 * @see class-wpglobus.php:243
+		 * Need additional check for devmode (toggle=OFF)
+		 * in case 'wpglobus' didn't set to 'off' at /wp-admin/post.php
+		 * and $_SERVER[QUERY_STRING] is empty at the time of `wp_insert_post_data` action
+		 * @see WPGlobus::on_save_post_data
 		 */
-		if ( $_SERVER['REQUEST_URI'] == '/wp-admin/post.php' && isset( $_SERVER['HTTP_REFERER'] ) && false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
+		if (
+			WPGlobus_WP::is_pagenow( 'post.php' )
+			&& isset( $_SERVER['HTTP_REFERER'] )
+			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' )
+		) {
 			$this->toggle = 'off';
 		}
 
