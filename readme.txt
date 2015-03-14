@@ -131,6 +131,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 	* Some Admin interface improvements.
 	* Corrected field updates at the `edit-tags.php` page.
 	* Corrected post saving in WPGlobus developer's mode (toggle off).
+	* Support of post types with no `editor` (content).
 
 = 1.0.7.2 =
 * FIXED:
