@@ -2175,12 +2175,39 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_admin_init() {
-
+		
 		if ( false !== get_transient( 'wpglobus_activated' ) ) {
 			delete_transient( 'wpglobus_activated' );
 			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
 			die();
 		}
+		
+		/**
+		 * Add CPT without 'editor' feature to disabled_entities array
+		 * @todo maybe permit to wpglobus edit titles only?
+		 */
+		if ( is_admin() && WPGlobus_WP::is_pagenow(array('post.php','post-new.php'))  ) {
+			/**
+			 * Checks a post type's support for a 'editor' feature.
+			 */
+			$post_type = '';
+			
+			if ( ! empty($_GET['post']) ) {
+				$post_type = get_post_field( 'post_type', $_GET['post'] );
+			}	
+			
+			if ( empty($post_type) && ! empty($_GET['post_type']) )  {
+				/**
+				 * For post-new.php page
+				 */
+				$post_type = $_GET['post_type'];
+			}	
+			
+			if ( ! empty($post_type) && ! post_type_supports($post_type, 'editor') ) {
+				$this->disabled_entities[] = $post_type;				
+			}
+			
+		}			
 
 	}
 	
