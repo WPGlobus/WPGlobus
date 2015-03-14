@@ -1686,13 +1686,27 @@ class WPGlobus {
 	 */
 	function on_add_wp_editors( $post ) {
 
-		if ( ! post_type_supports( $post->post_type, 'editor' ) ) {
-			return;
-		}
-
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
+
+		/**
+		 * @todo Temporary workaround. Need to revise the related wpglobus-admin.js part
+		 * If CPT does not support `editor` (no $post->content),
+		 * we'll put the "dummy" editor DIVs, so our tabs won't break.
+		 */
+		// <editor-fold desc="No-editor CPTs: Dummy WYSIWYGs">
+		if ( ! post_type_supports( $post->post_type, 'editor' ) ) {
+
+			foreach ( self::Config()->open_languages as $language ) :
+				$div_id = 'postdivrich' .
+				          ( $language === self::Config()->default_language ? '' : '-' . $language );
+				?><div id="<?php echo $div_id; ?>" class="postarea postdivrich-wpglobus"></div><?php
+			endforeach;
+
+			return;
+		}
+		// </editor-fold>
 
 		foreach ( self::Config()->open_languages as $language ) :
 			if ( $language == self::Config()->default_language ) {
@@ -2181,33 +2195,50 @@ class WPGlobus {
 			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
 			die();
 		}
-		
+
 		/**
-		 * Add CPT without 'editor' feature to disabled_entities array
-		 * @todo maybe permit to wpglobus edit titles only?
+		 * @todo Proposed solution for the broken WPGlobus interface on CPTs without content editor.
+		 *       DISABLED as of 15.03.14
 		 */
-		if ( is_admin() && WPGlobus_WP::is_pagenow(array('post.php','post-new.php'))  ) {
+		// <editor-fold desc="No-editor CPTs: Add to disabled_entities">
+		if ( 0 ):
 			/**
-			 * Checks a post type's support for a 'editor' feature.
+			 * Add CPT without 'editor' feature to disabled_entities array
 			 */
-			$post_type = '';
-			
-			if ( ! empty($_GET['post']) ) {
-				$post_type = get_post_field( 'post_type', $_GET['post'] );
-			}	
-			
-			if ( empty($post_type) && ! empty($_GET['post_type']) )  {
+			if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
 				/**
-				 * For post-new.php page
+				 * Checks if this post type supports 'editor' feature.
 				 */
-				$post_type = $_GET['post_type'];
-			}	
-			
-			if ( ! empty($post_type) && ! post_type_supports($post_type, 'editor') ) {
-				$this->disabled_entities[] = $post_type;				
+				$post_type = '';
+
+				if ( ! empty( $_GET['post'] ) ) {
+					$post_type = get_post_field( 'post_type', $_GET['post'] );
+				}
+
+				if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) {
+					/**
+					 * For post-new.php page
+					 */
+					$post_type = $_GET['post_type'];
+				}
+
+				if ( ! empty( $post_type ) && ! post_type_supports( $post_type, 'editor' ) ) {
+
+					/**
+					 * "Solution": we do not support such CPTs
+					 */
+					$this->disabled_entities[] = $post_type;
+
+					/**
+					 * "Hack": we add the editor and hide it
+					 */
+					// add_post_type_support( $post_type, 'editor' );
+					// echo '<style>.wp-editor-wrap{display:none;}</style>';
+				}
+
 			}
-			
-		}			
+		endif;
+		// </editor-fold>
 
 	}
 	
