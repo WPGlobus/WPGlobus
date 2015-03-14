@@ -149,23 +149,6 @@ class WPGlobus {
 			$this->vendors_scripts['AIOSEOP'] = true;
 		}	
 			
-		/**
-		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
-		 * @since 1.0.0
-		 *
-		 * @param array $disabled_entities Array of disabled entities.
-		 */
-		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
-
-		/**
-		 * Filter the array of opened languages.
-		 * @since 1.0.0
-		 *
-		 * @param array $open_languages Array of opened languages.
-		 */
-		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
-
-
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -1899,7 +1882,9 @@ class WPGlobus {
 
 	/**
 	 * Add language tabs for edit taxonomy name at edit-tags.php page
-	 * @return void
+	 *
+	 * @param $object
+	 * @param $taxonomy
 	 */
 	function on_add_language_tabs_edit_taxonomy($object, $taxonomy) {
 
@@ -2197,6 +2182,22 @@ class WPGlobus {
 		}
 
 		/**
+		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
+		 * @since 1.0.0
+		 *
+		 * @param array $disabled_entities Array of disabled entities.
+		 */
+		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
+
+		/**
+		 * Filter the array of opened languages.
+		 * @since 1.0.0
+		 *
+		 * @param array $open_languages Array of opened languages.
+		 */
+		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
+
+		/**
 		 * @todo Proposed solution for the broken WPGlobus interface on CPTs without content editor.
 		 *       DISABLED as of 15.03.14
 		 */
@@ -2241,15 +2242,14 @@ class WPGlobus {
 		// </editor-fold>
 
 	}
-	
+
 	/**
 	 * Add language selector to adminbar
-	 * 
 	 * @since 1.0.8
-	 * 
-	 * @return void
-	 */	
-	function on_admin_bar_menu($wp_admin_bar) {
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar
+	 */
+	function on_admin_bar_menu(WP_Admin_Bar $wp_admin_bar) {
 		
 		$available_languages = get_available_languages();
 		
@@ -2312,13 +2312,14 @@ class WPGlobus {
 			) );		
 		}	
 	?>
-<script type="text/javascript">
+<!--suppress AnonymousFunctionJS -->
+		<script type="text/javascript">
 //<![CDATA[
 	jQuery(document).ready(function($){	
 		wpglobus_select_lang = function(locale) {
 			$.post(ajaxurl, {
 					action: 'WPGlobus_process_ajax',
-					order: {action:'wpglobus_select_lang',locale:locale},
+					order: {action:'wpglobus_select_lang',locale:locale}
 				}, function(d) {} )
 				.done(function(){
 					window.location.reload();
@@ -2328,7 +2329,7 @@ class WPGlobus {
 //]]>
 </script>	
 		<?php
-	}		
+	}
 
 }
 
