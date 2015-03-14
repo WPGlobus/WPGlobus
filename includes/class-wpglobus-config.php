@@ -546,6 +546,7 @@ class WPGlobus_Config {
 		 */
 		if (
 			WPGlobus_WP::is_pagenow( 'post.php' )
+			&& empty( $_SERVER['QUERY_STRING'] ) 
 			&& isset( $_SERVER['HTTP_REFERER'] )
 			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' )
 		) {
