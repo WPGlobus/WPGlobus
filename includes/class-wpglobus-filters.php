@@ -29,6 +29,26 @@ class WPGlobus_Filters {
 
 	}
 
+	/**
+	 * This is similar to the @see filter__text filter,
+	 * but it returns text in the DEFAULT language.
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 * @since 1.0.8
+	 */
+	public static function filter__text_default_language( $text ) {
+
+		return WPGlobus_Core::text_filter(
+			$text,
+			WPGlobus::Config()->default_language,
+			null,
+			WPGlobus::Config()->default_language
+		);
+
+	}
+
 
 	/**
 	 * Filter @see get_terms
@@ -40,6 +60,12 @@ class WPGlobus_Filters {
 	 * @return array
 	 */
 	public static function filter__get_terms( Array $terms ) {
+
+		/**
+		 * @todo Example of a "stopper" filter
+		 *       if ( apply_filters( 'wpglobus_do_filter__get_terms', true ) ) {}
+		 *       Because it might affect the performance, this is a to-do for now.
+		 */
 
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );

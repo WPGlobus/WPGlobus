@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
 
-Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with WordPress SEO by Yoast and ACF!
+Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with WP SEO by Yoast, All in One SEO Pack and ACF!
 
 == Description ==
 
@@ -16,12 +16,24 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 > **Versions 1.0.x are released to the general public as Beta Software. During the Beta stage, the software is tested for bugs, crashes, errors and inconsistencies. If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
-The current version of the plugin:
+With the WPGlobus Free Core plugin, you can:
 
-* Provides admin interface to translate posts, pages, menus, widgets, categories and tags to multiple languages.
-* Adds a drop-down menu to a navigation menu, thus allowing to switch between languages, by changing the URL (`/{language}/page/`)
+* Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
+	* translate Posts and Pages to multiple languages using an easy tabbed interface;
+	* translate major taxonomies: categories and tags;
+	* translate menus and widgets;
+* Enable multilingual SEO features of:
+    * WP SEO by Yoast;
+    * All in One SEO Pack by Michael Torbert.
+* Translate Custom Fields:
+	* standard;
+	* created with the Advanced Custom Fields plugin.
+* Switch the languages at the Front using:
+	* a drop-down menu extension;
+	* a customizable widget with various display options;
+* Switch the Administrator interface language using a top bar selector.
 
-The administrator interface allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
+The WPGlobus option panel allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
 = More info =
 
@@ -31,11 +43,12 @@ The administrator interface allows for selecting active languages as well as def
 	* [LinkedIn](https://www.linkedin.com/company/wpglobus),
 	* [Facebook](https://www.facebook.com/WPGlobus),
 	* [Twitter](https://twitter.com/WPGlobus) and
-	* [Google Plus](https://plus.google.com/111657854098133499126).
+	* [Google Plus](https://plus.google.com/+Wpglobus).
 
 = WPGlobus is compatible with these popular plugins: =
 
 * [WordPress SEO](https://yoast.com/wordpress/plugins/seo/) by [Joost de Valk](https://profiles.wordpress.org/joostdevalk/);
+* [All in One SEO Pack](https://wordpress.org/plugins/all-in-one-seo-pack/) by [Michael Torbert](https://profiles.wordpress.org/hallsofmontezuma/);
 * [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) by [Elliot Condon](https://profiles.wordpress.org/elliotcondon/);
 * [Sidebar Login](https://wordpress.org/plugins/sidebar-login/) by [Mike Jolley](https://profiles.wordpress.org/mikejolley/).
 
@@ -109,9 +122,20 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.8 =
+* ADDED:
+	* Partial support of the All in One SEO Pack plugin.
+	* Change WP Admin language using an Admin bar selector.
+* FIXED:
+	* Changed flag to `us.png` for the `en_US` locale.
+	* Some Admin interface improvements.
+	* Corrected field updates at the `edit-tags.php` page.
+	* Corrected post saving in WPGlobus developer's mode (toggle off).
+	* Support of post types with no `editor` (content).
+
 = 1.0.7.2 =
 * FIXED:
-	* URL switching when WordPress serves only part of the site, like `www.example.com/blog`. Reported by [IAmVincentLiu] (https://wordpress.org/support/profile/iamvincentliu) - THANKS!
+	* URL switching when WordPress serves only part of the site, like `www.example.com/blog`. Reported by [IAmVincentLiu](https://wordpress.org/support/profile/iamvincentliu) - THANKS!
 
 = 1.0.7.1 =
 * FIXED:

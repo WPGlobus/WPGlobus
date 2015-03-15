@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: wpglobus 1.0.7\n"
+"Project-Id-Version: wpglobus 1.0.8\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-03 21:57-0500\n"
+"POT-Creation-Date: 2015-03-14 19:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -230,16 +230,16 @@ msgstr ""
 msgid "Delete Language"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:565
+#: includes/class-wpglobus-filters.php:593
 msgid "Error while saving."
 msgstr ""
 
 #. //php.net/date
-#: includes/class-wpglobus-filters.php:568
+#: includes/class-wpglobus-filters.php:596
 msgid "g:i:s a"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:572
+#: includes/class-wpglobus-filters.php:600
 #, php-format
 msgid "Draft saved at %s."
 msgstr ""
@@ -290,28 +290,37 @@ msgstr ""
 msgid "Dropdown with flags"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:179
+#: includes/class-wpglobus-widget.php:187
+#: includes/vendor/class-wpglobus-aioseop.php:315
 msgid "Title"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:183
+#: includes/class-wpglobus-widget.php:191
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:849
+#: includes/class-wpglobus.php:851
 msgid "You cannot disable the first enabled language."
 msgstr ""
 
-#: includes/class-wpglobus.php:976
+#: includes/class-wpglobus.php:978
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:1936
+#: includes/class-wpglobus.php:1960
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:1998
+#: includes/class-wpglobus.php:2022
 msgid "Invalid taxonomy"
+msgstr ""
+
+#: includes/class-wpglobus.php:2269
+msgid "My Account"
+msgstr ""
+
+#: includes/class-wpglobus.php:2303
+msgid "Add"
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:85
@@ -367,113 +376,118 @@ msgstr ""
 msgid "Select navigation menu"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:194
-msgid "Languages"
-msgstr ""
-
-#: includes/options/class-wpglobus-options.php:201
-msgid "Enabled Languages"
-msgstr ""
-
-#: includes/options/class-wpglobus-options.php:203
-msgid ""
-"The first language in the list is the default one. <br>To reorder, drag and "
-"drop with the icons at the right."
-msgstr ""
-
-#: includes/options/class-wpglobus-options.php:205
-msgid "Uncheck to remove from the list"
-msgstr ""
-
-#: includes/options/class-wpglobus-options.php:213
-msgid "Add Languages"
-msgstr ""
-
-#: includes/options/class-wpglobus-options.php:216
+#: includes/options/class-wpglobus-options.php:193
 msgid ""
 "Choose a language you would like to enable. <br>Press the [Save Changes] "
 "button to confirm."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:217
+#: includes/options/class-wpglobus-options.php:194
+#, php-format
+msgid "or Add new Language %1s here %2s"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:197
+msgid "Languages"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:203
+msgid "Enabled Languages"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:205
+msgid ""
+"The first language in the list is the default one. <br>To reorder, drag and "
+"drop with the icons at the right."
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:207
+msgid "Uncheck to remove from the list"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:215
+msgid "Add Languages"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:219
 msgid "Select a language"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:243
+#: includes/options/class-wpglobus-options.php:245
 msgid "Language Selector Mode"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:246
+#: includes/options/class-wpglobus-options.php:248
 msgid ""
 "Choose the way language name and country flag are shown in the drop-down menu"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:252
+#: includes/options/class-wpglobus-options.php:254
 msgid "Two-letter Code (en, ru, it, etc.)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:253
+#: includes/options/class-wpglobus-options.php:255
 msgid "Full Name (English, Russian, Italian, etc.)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:254
+#: includes/options/class-wpglobus-options.php:256
 msgid "Flags only"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:262
+#: includes/options/class-wpglobus-options.php:264
 msgid "Language Selector Menu"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:265
+#: includes/options/class-wpglobus-options.php:267
 msgid "Choose the navigation menu where the language selector will be shown"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:276
+#: includes/options/class-wpglobus-options.php:278
 msgid "\"All Pages\" menus Language selector"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:277
+#: includes/options/class-wpglobus-options.php:279
 msgid "(Found in some themes)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:278
+#: includes/options/class-wpglobus-options.php:280
 msgid ""
 "Adds language selector to the menus that automatically list all existing "
 "pages (using `wp_list_pages`)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:282
+#: includes/options/class-wpglobus-options.php:284
 msgid "Enable"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:288
+#: includes/options/class-wpglobus-options.php:290
 msgid "Custom CSS"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:292
+#: includes/options/class-wpglobus-options.php:294
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:293
+#: includes/options/class-wpglobus-options.php:295
 msgid "(Optional)"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:304
+#: includes/options/class-wpglobus-options.php:306
 msgid "Languages table"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:310
+#: includes/options/class-wpglobus-options.php:312
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:311
+#: includes/options/class-wpglobus-options.php:313
 msgid "NOTE: you cannot delete the default language."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:348
-#: includes/options/class-wpglobus-options.php:349
+#: includes/options/class-wpglobus-options.php:350
+#: includes/options/class-wpglobus-options.php:351
 msgid "WPGlobus"
 msgstr ""
 
@@ -490,6 +504,7 @@ msgid "Code"
 msgstr ""
 
 #: includes/options/fields/table/table-languages.php:55
+#: includes/vendor/class-wpglobus-aioseop.php:30
 msgid "Edit"
 msgstr ""
 
@@ -523,4 +538,46 @@ msgstr ""
 
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:148
+msgid "Click for Help!"
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:200
+#, php-format
+msgid " characters. Most search engines use a maximum of %s chars for the %s."
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:269
+msgid "Keywords (comma separated)"
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:272
+msgid ""
+"A comma separated list of your most important keywords for this page that "
+"will be written as META keywords."
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:290
+msgid "Description"
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:296
+msgid ""
+"The META description for this page. This will override any autogenerated "
+"descriptions."
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:319
+msgid "A custom title that shows up in the title tag for this page."
+msgstr ""
+
+#: includes/vendor/class-wpglobus-aioseop.php:344
+msgid "Preview Snippet"
+msgstr ""
+
+#. /a></h3><div><div><cite id="aioseop_snippet_link">%s</cite></div><span id="aioseop_snippet_description">%s</span></div></div></div>',
+#: includes/vendor/class-wpglobus-aioseop.php:348
+msgid "A preview of what this page might look like in search engine results."
 msgstr ""

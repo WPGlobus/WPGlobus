@@ -262,6 +262,9 @@ jQuery(document).ready(function () {
                 if ('post-edit' === WPGlobusAdmin.page) {
                     this.post_edit();
 					this.set_dialog();
+					if ( typeof WPGlobusAioseop != 'undefined' ) {
+						WPGlobusAioseop.init();
+					}	
                 } else if ('menu-edit' === WPGlobusAdmin.page) {
                     this.nav_menus();
                 } else if ('taxonomy-edit' === WPGlobusAdmin.page) {
@@ -285,7 +288,7 @@ jQuery(document).ready(function () {
 				var $bn = $('#blogname'),
                     $body = $('body');
 				$bn.addClass('hidden');
-				$('#wpglobus-blogname').insertAfter($bn);
+				$('#wpglobus-blogname').insertAfter($bn).removeClass('hidden');
                 $body.on('blur', '.wpglobus-blogname', function () {
                     var s = '';
                     $('.wpglobus-blogname').each(function (index, e) {
@@ -300,7 +303,7 @@ jQuery(document).ready(function () {
 				
 				var $bd = $('#blogdescription');
 				$bd.addClass('hidden');
-				$('#wpglobus-blogdescription').insertAfter($bd);
+				$('#wpglobus-blogdescription').insertAfter($bd).removeClass('hidden');
                 $body.on('blur', '.wpglobus-blogdesc', function () {
                     var s = '';
                     $('.wpglobus-blogdesc').each(function (index, e) {
@@ -490,51 +493,74 @@ jQuery(document).ready(function () {
 
             },
             taxonomy_edit: function () {
-                var t = $('.form-table').eq(0);
-                $.each(WPGlobusAdmin.tabs, function (index, suffix) {
-                    var new_element = $(t[0].outerHTML);
-                    var language = suffix === 'default' ? WPGlobusAdmin.data.default_language : suffix;
-                    new_element.attr('id', 'table-' + suffix);
-                    var $e = $(new_element);
-                    $e.find('#name').attr('value', WPGlobusAdmin.data.i18n[suffix]['name']).attr('id', 'name-' + suffix).attr('name', 'name-' + suffix).addClass('wpglobus-taxonomy').attr('data-save-to', 'name').attr('data-language', language);
-                    $e.find('#slug').attr('id', 'slug-' + suffix).attr('name', 'slug-' + suffix).addClass('wpglobus-taxonomy').attr('data-save-to', 'slug').attr('data-language', language);
-                    $e.find('#parent').attr('id', 'parent-' + suffix).attr('name', 'parent-' + suffix).addClass('wpglobus-taxonomy').attr('data-save-to', 'parent').attr('data-language', language);
-                    $e.find('#description').text(WPGlobusAdmin.data.i18n[suffix]['description']).attr('id', 'description-' + suffix).attr('name', 'description-' + suffix).addClass('wpglobus-taxonomy').attr('data-save-to', 'description').attr('data-language', language);
-
-                    if ('default' !== suffix) {
-                        $e.find('#slug-' + suffix).addClass('wpglobus-nosave').parents('tr').css('display', 'none');
-                        $e.find('#parent-' + suffix).addClass('wpglobus-nosave').parents('tr').css('display', 'none');
-                    }
-                    $('#tab-' + suffix).append($e[0].outerHTML);
-                });
-
+				
+				var elements = [];
+				elements[0] = 'name';
+				elements[1] = 'description';
+				
+				var make_clone = function(id,language){
+					var $element = $('#'+id),
+						clone = $element.clone(),
+						name = $element.attr('name'),
+						classes = 'wpglobus-element wpglobus-element_'+id+' wpglobus-element_'+language,
+						node;
+				
+					node = document.getElementById(id);
+					node = node.nodeName;
+					$(clone).attr('id', id+'_'+language);
+					$(clone).attr('name', name+'_'+language);
+					if ( language !== WPGlobusCoreData.default_language ) {
+						classes += ' hidden';
+					}
+					$(clone).attr('class', classes);
+					$(clone).attr('data-save-to', id);
+					$(clone).attr('data-language', language);
+					if ( node == 'INPUT' ) {
+						$(clone).attr('value', $('#wpglobus-link-tab-'+language).data(id));
+					} else if ( node == 'TEXTAREA' ) {
+						$(clone).text($('#wpglobus-link-tab-'+language).data(id));
+					}	
+					$element.addClass('hidden');
+					if ( $('.wpglobus-element_'+id).size() == 0 ) {
+						$(clone).insertAfter($element);
+					} else {
+						$(clone).insertAfter($('.wpglobus-element_'+id).last());
+					}	
+				};	
+				
+				$.each(WPGlobusCoreData.enabled_languages, function(i,l){
+					$.each(elements, function(i,e){
+						make_clone(e,l);
+					});						
+				});
+			
                 $('.wpglobus-taxonomy-tabs-ul').insertAfter('#ajax-response');
-                t.css('display', 'none');
 
                 // Make class wrap as tabs container
                 // tabs on
-                $('.wrap').tabs();
-
-                $('.wpglobus-taxonomy').on('blur', function () {
+                $('.wrap').tabs();			
+				
+				$('body').on('click', '.wpglobus-taxonomy-tabs-ul li', function(event){
+					var $t = $(this);
+					var language = $t.data('language');
+					$('.wpglobus-element').addClass('hidden');
+					$('.wpglobus-element_'+language).removeClass('hidden');
+				});					
+				
+                $('.wpglobus-element').on('change', function () {
                     var $this = $(this),
                         save_to = $this.data('save-to'),
                         s = '';
 
-                    if ('parent' === save_to || 'slug' === save_to) {
-                        s = $this.val();
-                    } else {
-                        $('.wpglobus-taxonomy').each(function (index, element) {
-                            var $e = $(element);
-                            if (!$e.hasClass('wpglobus-nosave')) {
-                                if (save_to === $e.data('save-to') && $e.val() !== '') {
-                                    s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-                                }
-                            }
-
-                        });
-                    }
+					$('.wpglobus-element').each(function (index, element) {
+						var $e = $(element),
+							value = $e.val();
+						if ( $e.data('save-to') == save_to && value !== '' ) {
+							s = s + WPGlobusCore.addLocaleMarks(value, $e.data('language') )
+						}
+					});
                     $('#' + save_to).val(s);
-                });
+                });				
             },
             nav_menus: function () {
                 var iID, menu_size,

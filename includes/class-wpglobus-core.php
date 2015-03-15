@@ -23,6 +23,10 @@ class WPGlobus_Core {
 		$default_language = 'en' // TODO
 	) {
 
+		if ( ! is_string( $text ) ) {
+			return '';
+		}
+
 		/**
 		 * Fix for case
 		 * &lt;!--:en--&gt;ENG&lt;!--:--&gt;&lt;!--:ru--&gt;RUS&lt;!--:--&gt;

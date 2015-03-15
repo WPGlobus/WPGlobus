@@ -149,23 +149,6 @@ class WPGlobus {
 			$this->vendors_scripts['AIOSEOP'] = true;
 		}	
 			
-		/**
-		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
-		 * @since 1.0.0
-		 *
-		 * @param array $disabled_entities Array of disabled entities.
-		 */
-		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
-
-		/**
-		 * Filter the array of opened languages.
-		 * @since 1.0.0
-		 *
-		 * @param array $open_languages Array of opened languages.
-		 */
-		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
-
-
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
@@ -287,6 +270,22 @@ class WPGlobus {
 					), 11 );
 				}
 
+				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow(array('post.php','edit.php')) ) {
+					
+					/** @global $post */
+					global $post;
+
+					$type = empty( $post ) ? '' : $post->post_type;
+					if ( ! $this->disabled_entity( $type ) ) {
+					
+						require_once 'vendor/class-wpglobus-aioseop.php';
+						if ( WPGlobus_WP::is_pagenow('post.php') ) {
+							$WPGlobus_aioseop = new WPGlobus_aioseop();	
+						}
+					}		
+					
+				}	
+
 			}    // endif $devmode
 
 			add_action( 'admin_print_styles', array(
@@ -309,6 +308,11 @@ class WPGlobus {
 				'on_add_devmode_switcher'
 			) );
 
+			add_action( 'admin_bar_menu', array(
+				$this,
+				'on_admin_bar_menu'
+			) );
+			
 		} else {
 			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
 				$_SERVER['REQUEST_URI'],
@@ -491,6 +495,13 @@ class WPGlobus {
 		$order = $_POST['order'];
 
 		switch ( $order['action'] ) :
+			case 'wpglobus_select_lang':
+				if ( $order['locale'] == 'en_US' ) {
+					update_option( 'WPLANG', '' );
+				} else {	
+					update_option( 'WPLANG', $order['locale'] );
+				}
+				break;
 			case 'get_titles':
 
 				if ( $order['type'] == 'taxonomy' ) {
@@ -1055,10 +1066,14 @@ class WPGlobus {
 			
 			}
 
-			if ( ! empty( $this->vendors_scripts ) ) {
+			/**
+			 * Enqueue js for WPSEO support
+			 * @since 1.0.8 
+			 */			
+			if ( $this->vendors_scripts['WPSEO'] && in_array( $page, array( 'post.php', 'post-new.php') ) ) {				
 				wp_register_script(
 					'wpglobus-vendor',
-					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor" . self::$_SCRIPT_SUFFIX . ".js",
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-wpseo" . self::$_SCRIPT_SUFFIX . ".js",
 					array( 'jquery' ),
 					WPGLOBUS_VERSION,
 					true
@@ -1654,13 +1669,27 @@ class WPGlobus {
 	 */
 	function on_add_wp_editors( $post ) {
 
-		if ( ! post_type_supports( $post->post_type, 'editor' ) ) {
-			return;
-		}
-
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
+
+		/**
+		 * @todo Temporary workaround. Need to revise the related wpglobus-admin.js part
+		 * If CPT does not support `editor` (no $post->content),
+		 * we'll put the "dummy" editor DIVs, so our tabs won't break.
+		 */
+		// <editor-fold desc="No-editor CPTs: Dummy WYSIWYGs">
+		if ( ! post_type_supports( $post->post_type, 'editor' ) ) {
+
+			foreach ( self::Config()->open_languages as $language ) :
+				$div_id = 'postdivrich' .
+				          ( $language === self::Config()->default_language ? '' : '-' . $language );
+				?><div id="<?php echo $div_id; ?>" class="postarea postdivrich-wpglobus"></div><?php
+			endforeach;
+
+			return;
+		}
+		// </editor-fold>
 
 		foreach ( self::Config()->open_languages as $language ) :
 			if ( $language == self::Config()->default_language ) {
@@ -1841,11 +1870,9 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_add_taxonomy_form_wrapper() {
-
 		foreach ( self::Config()->enabled_languages as $language ) {
-			$tab_suffix = $language == self::Config()->default_language ? 'default' : $language;
-			$classes    = in_array( $language, self::Config()->open_languages ) ? '' : 'hidden'; ?>
-			<div id="tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
+			$classes = 'hidden'; 		?>
+			<div id="taxonomy-tab-<?php echo $language; ?>" data-language="<?php echo $language; ?>"
 			     class="<?php echo $classes; ?>">
 			</div>
 		<?php
@@ -1855,19 +1882,25 @@ class WPGlobus {
 
 	/**
 	 * Add language tabs for edit taxonomy name at edit-tags.php page
-	 * @return void
+	 *
+	 * @param $object
+	 * @param $taxonomy
 	 */
-	function on_add_language_tabs_edit_taxonomy() {
+	function on_add_language_tabs_edit_taxonomy($object, $taxonomy) {
 
 		if ( $this->disabled_entity() ) {
 			return;
-		} ?>
+		} 		?>
 
 		<ul class="wpglobus-taxonomy-tabs-ul">    <?php
 			foreach ( self::Config()->open_languages as $language ) {
-				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>" class="">
-					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+				$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+						?>
+				<li id="wpglobus-link-tab-<?php echo $language; ?>" class="" 
+						data-language="<?php echo $language; ?>"
+						data-name="<?php echo WPGlobus_Core::text_filter($object->name, $language, $return); ?>"
+						data-description="<?php echo WPGlobus_Core::text_filter($object->description, $language, $return); ?>">
+					<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 				</li> <?php
 			} ?>
 		</ul>    <?php
@@ -2092,7 +2125,7 @@ class WPGlobus {
 
 		$blogdesc = get_option( 'blogdescription' );
 		?>
-		<div id="wpglobus-blogname">        <?php
+		<div id="wpglobus-blogname" class="hidden">        <?php
 			foreach ( self::Config()->enabled_languages as $language ) :
 				$return =
 					$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
@@ -2107,7 +2140,7 @@ class WPGlobus {
 			endforeach; ?>
 		</div>
 
-		<div id="wpglobus-blogdescription">        <?php
+		<div id="wpglobus-blogdescription" class="hidden">        <?php
 			foreach ( self::Config()->enabled_languages as $language ) :
 				$return =
 					$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
@@ -2141,13 +2174,161 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_admin_init() {
-
+		
 		if ( false !== get_transient( 'wpglobus_activated' ) ) {
 			delete_transient( 'wpglobus_activated' );
 			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
 			die();
 		}
 
+		/**
+		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
+		 * @since 1.0.0
+		 *
+		 * @param array $disabled_entities Array of disabled entities.
+		 */
+		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
+
+		/**
+		 * Filter the array of opened languages.
+		 * @since 1.0.0
+		 *
+		 * @param array $open_languages Array of opened languages.
+		 */
+		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
+
+		/**
+		 * @todo Proposed solution for the broken WPGlobus interface on CPTs without content editor.
+		 *       DISABLED as of 15.03.14
+		 */
+		// <editor-fold desc="No-editor CPTs: Add to disabled_entities">
+		if ( 0 ):
+			/**
+			 * Add CPT without 'editor' feature to disabled_entities array
+			 */
+			if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
+				/**
+				 * Checks if this post type supports 'editor' feature.
+				 */
+				$post_type = '';
+
+				if ( ! empty( $_GET['post'] ) ) {
+					$post_type = get_post_field( 'post_type', $_GET['post'] );
+				}
+
+				if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) {
+					/**
+					 * For post-new.php page
+					 */
+					$post_type = $_GET['post_type'];
+				}
+
+				if ( ! empty( $post_type ) && ! post_type_supports( $post_type, 'editor' ) ) {
+
+					/**
+					 * "Solution": we do not support such CPTs
+					 */
+					$this->disabled_entities[] = $post_type;
+
+					/**
+					 * "Hack": we add the editor and hide it
+					 */
+					// add_post_type_support( $post_type, 'editor' );
+					// echo '<style>.wp-editor-wrap{display:none;}</style>';
+				}
+
+			}
+		endif;
+		// </editor-fold>
+
+	}
+
+	/**
+	 * Add language selector to adminbar
+	 * @since 1.0.8
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar
+	 */
+	function on_admin_bar_menu(WP_Admin_Bar $wp_admin_bar) {
+		
+		$available_languages = get_available_languages();
+		
+		$user_id      = get_current_user_id();
+
+		if ( ! $user_id ) {
+			return;
+		}
+
+		$wp_admin_bar->add_menu( array(
+			'id'        => 'wpglobus-language-select',
+			'parent'    => 'top-secondary',
+			'title'     => WPGlobus::Config()->language_name[WPGlobus::Config()->language] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[WPGlobus::Config()->language]  . '" /></span>',
+			'href'      => '',
+			'meta'      => array(
+				'class'     => '',
+				'title'     => __('My Account'),
+			),
+		) );	
+		
+		$add_more_languages = array();
+		foreach( WPGlobus::Config()->enabled_languages as $language ) :
+			
+			if ( WPGlobus::Config()->language == $language ) { 
+				continue;
+			}
+			
+			$locale = WPGlobus::Config()->locale[$language];
+			
+			if ( $locale != 'en_US' ) { 
+				if ( ! in_array( $locale, $available_languages ) ) {
+					$add_more_languages[] = WPGlobus::Config()->language_name[$language];
+					continue;
+				}	
+			}	
+			
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'wpglobus-language-select',
+				'id'     => 'wpglobus-' . $language,
+				'title'  => '<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[$language]  . '" /></span>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[$language],
+				'href'   => admin_url( 'options-general.php' ),
+				'meta'   => array(
+					'tabindex' => -1,
+					'onclick' => 'wpglobus_select_lang("' . $locale . '");return false;'
+				),
+			) );
+			
+		endforeach;
+		
+		if ( !empty($add_more_languages) ) {
+			$title = __( 'Add', 'wpglobus' ) . ' (' . implode(', ', $add_more_languages ) . ')';
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'wpglobus-language-select',
+				'id'     => 'wpglobus-add-languages',
+				'title'  => $title,
+				'href'   => admin_url( 'options-general.php' ),
+				'meta'   => array(
+					'tabindex' => -1,
+				),
+			) );		
+		}	
+	?>
+<!--suppress AnonymousFunctionJS -->
+		<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function($){	
+		wpglobus_select_lang = function(locale) {
+			$.post(ajaxurl, {
+					action: 'WPGlobus_process_ajax',
+					order: {action:'wpglobus_select_lang',locale:locale}
+				}, function(d) {} )
+				.done(function(){
+					window.location.reload();
+				})	;			
+		}	
+	});
+//]]>
+</script>	
+		<?php
 	}
 
 }

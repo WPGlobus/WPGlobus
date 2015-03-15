@@ -352,7 +352,7 @@ class WPGlobus_Config {
 		$this->locale['gl'] = "gl_ES";
 
 		#flags
-		$this->flag['en'] = 'gb.png';
+		$this->flag['en'] = 'us.png';
 		$this->flag['ru'] = 'ru.png';
 		$this->flag['de'] = 'de.png';
 		$this->flag['zh'] = 'cn.png';
@@ -536,6 +536,21 @@ class WPGlobus_Config {
 			$this->toggle = 'off';
 		} else {
 			$this->toggle = 'on';
+		}
+
+		/**
+		 * Need additional check for devmode (toggle=OFF)
+		 * in case 'wpglobus' didn't set to 'off' at /wp-admin/post.php
+		 * and $_SERVER[QUERY_STRING] is empty at the time of `wp_insert_post_data` action
+		 * @see WPGlobus::on_save_post_data
+		 */
+		if (
+			WPGlobus_WP::is_pagenow( 'post.php' )
+			&& empty( $_SERVER['QUERY_STRING'] ) 
+			&& isset( $_SERVER['HTTP_REFERER'] )
+			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' )
+		) {
+			$this->toggle = 'off';
 		}
 
 	}

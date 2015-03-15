@@ -190,9 +190,11 @@ class WPGlobus_Options {
 			$navigation_menu_placeholder = __( 'Select navigation menu', 'wpglobus' );
 		}
 
+		$desc  = __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ) . '<br /><br />';	
+		$desc .= sprintf( __( 'or Add new Language %1s here %2s', 'wpglobus' ), '<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
+		
 		$this->sections[] = array(
 			'title'  => __( 'Languages', 'wpglobus' ),
-			//				'desc'      => __( '' ),
 			'icon'   => 'el-icon-wrench-alt',
 			'fields' => array(
 				array(
@@ -213,7 +215,7 @@ class WPGlobus_Options {
 					'title'       => __( 'Add Languages', 'wpglobus' ),
 					'compiler'    => 'false',
 					'mode'        => false,
-					'desc'        => __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ),
+					'desc'        => $desc,
 					'placeholder' => __( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
 				)
