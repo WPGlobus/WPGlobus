@@ -122,6 +122,10 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.8.1 =
+* FIXED:
+	* reset checkbox marks from hierarchical taxonomies after save post or update post's page
+
 = 1.0.8 =
 * ADDED:
 	* Partial support of the All in One SEO Pack plugin.
