@@ -194,6 +194,17 @@ class WPGlobus_Filters {
 			return $terms;
 		}
 
+		/**
+		 * Don't filter term name at time generate checklist categories in metabox
+		 */
+		if ( is_admin() &&	
+				WPGlobus_WP::is_pagenow( 'post.php' ) && 
+					empty( $_POST ) && 
+						WPGlobus_Utils::is_function_in_backtrace( 'wp_terms_checklist' ) 
+		) {
+			return $terms;
+		}		
+		
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
