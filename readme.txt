@@ -122,6 +122,11 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.8.1 =
+* FIXED:
+	* Reset hierarchical taxonomies checkmarks after save post or update post's page.
+	* Incorrect empty string returning when a non-string argument passed to the text filter.
+
 = 1.0.8 =
 * ADDED:
 	* Partial support of the All in One SEO Pack plugin.
