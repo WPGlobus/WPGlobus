@@ -23,6 +23,10 @@ class WPGlobus_Core {
 		$default_language = 'en' // TODO
 	) {
 
+		/**
+		 * There are cases when numeric terms are passed here. We should not tamper with them.
+		 * @since 1.0.8.1 Before, was returning empty string, which was incorrect.
+		 */
 		if ( ! is_string( $text ) ) {
 			return $text;
 		}
