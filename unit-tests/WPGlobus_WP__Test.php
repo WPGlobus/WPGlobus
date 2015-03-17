@@ -25,6 +25,51 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @covers WPGlobus_WP::is_admin_doing_ajax
+	 */
+	public function test_is_is_admin_doing_ajax() {
+		if ( ! defined( 'DOING_AJAX' ) ) {
+			define( 'DOING_AJAX', true );
+		}
+
+		/**
+		 * POST
+		 */
+		unset( $_GET['action'] );
+		unset( $_POST['action'] );
+		foreach (
+			array(
+				'inline-save',
+				'save-widget',
+			)
+			as $action
+		) {
+			$_POST['action'] = $action;
+			$this->assertTrue( WPGlobus_WP::is_admin_doing_ajax(), $action );
+		}
+
+		/**
+		 * GET
+		 */
+		unset( $_GET['action'] );
+		unset( $_POST['action'] );
+		foreach (
+			array(
+				'ajax-tag-search',
+			)
+			as $action
+		) {
+			$_GET['action'] = $action;
+			$this->assertTrue( WPGlobus_WP::is_admin_doing_ajax(), $action );
+		}
+
+		/** Cleanup */
+		unset( $_GET['action'] );
+		unset( $_POST['action'] );
+
+	}
+
+	/**
 	 * @covers WPGlobus_WP::is_pagenow
 	 */
 	public function test_is_pagenow() {
@@ -60,6 +105,30 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 
 		$_POST['action'] = array( 'this-should-not-be-an-array' );
 		$this->assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
+
+	}
+
+	/**
+	 * @covers WPGlobus_WP::is_http_get_action
+	 */
+	public function test_is_http_get_action() {
+		$_GET['action'] = 'unit-test-action';
+		$this->assertTrue( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( '' ) );
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( null ) );
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( 3.14 ) );
+		$bad_boy = new StdClass;
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( $bad_boy ) );
+
+		$_GET['action'] = 'not-unit-test-action';
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		unset( $_GET['action'] );
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		$_GET['action'] = 'unit-test-action';
+		$this->assertTrue( WPGlobus_WP::is_http_get_action( array( 'unit-test-action', 'not-unit-test-action' ) ) );
+
+		$_GET['action'] = array( 'this-should-not-be-an-array' );
+		$this->assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
 
 	}
 

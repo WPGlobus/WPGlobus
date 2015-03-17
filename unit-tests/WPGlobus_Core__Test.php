@@ -39,6 +39,9 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$no_default = '{:xx}XX{:}{:ru}RU{:}';
 		$this->assertEmpty( WPGlobus_Core::text_filter( $no_default ) );
 
+		$not_a_string = 3.14;
+		$this->assertEquals( 3.14, WPGlobus_Core::text_filter( $not_a_string ), 'Not a string' );
+
 	}
 
 	/**
@@ -47,7 +50,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 	public function test_has_translations() {
 
 		/** @var string[] $positives */
-		$positives = [
+		$positives = array(
 			'{:en}EN{:}{:ru}RU{:}',
 			'[:en]EN[:ru]RU',
 			'<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->',
@@ -55,14 +58,14 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 			'{:xx',
 			'Lead {:xx',
 			'Lead {:xx trail',
-		];
+		);
 
 		foreach ( $positives as $_ ) {
 			$this->assertTrue( WPGlobus_Core::has_translations( $_ ), 'Has translation: ' . $_ );
 		}
 
 		/** @var string[] $negatives */
-		$negatives = [
+		$negatives = array(
 			'',
 			'No delimiters',
 			'Wrong delimiter {xx:}',
@@ -70,7 +73,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 			'Non-alpha locale {:e1}EN{:}{:r2}RU{:}',
 			'Non-latin locale {:ан}EN{:}{:ру}RU{:}',
 			'Uppercase locale {:EN}EN{:}{:RU}RU{:}',
-		];
+		);
 
 		foreach ( $negatives as $_ ) {
 			$this->assertFalse( WPGlobus_Core::has_translations( $_ ), 'Has no translation: ' . $_ );
