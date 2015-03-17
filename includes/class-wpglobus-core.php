@@ -24,7 +24,7 @@ class WPGlobus_Core {
 	) {
 
 		if ( ! is_string( $text ) ) {
-			return '';
+			return $text;
 		}
 
 		/**
