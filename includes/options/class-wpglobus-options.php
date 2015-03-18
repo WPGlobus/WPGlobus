@@ -319,7 +319,49 @@ class WPGlobus_Options {
 				)
 			)
 		);
+		
+		/**
+		 *	SECTION: Post types
+		 */
+		$post_types = get_post_types( array('_builtin'=>true) );
+		
+		$fields = array(
+			array(
+				'id'       => 'description',
+				'type'     => 'info',
+				'title'    => __( '(@todo make title)', 'wpglobus' ),
+				'style'    => 'info',
+			),		
+		);
+			
+		$open_post_types = array();	
+		foreach( $post_types as $post_type ) {
+			if ( ! in_array( $post_type, array('attachment', 'revision', 'nav_menu_item') ) ) {
+				$open_post_types[$post_type] = $post_type;
+				$default[$post_type] = true;
+			}	
+		}
 
+		$fields[] = array(
+			'id'       => 'post_type',
+			'type'        => 'checkbox',
+			'compiler' => false,
+			'default'  => $default,
+			'options'     => $open_post_types
+		);
+			
+		$fields[] =	array(
+			'id'   => 'custom_post_types',
+			'type' => 'post_types'
+		);
+		
+		$this->sections[] = array(
+			'title'  => __( 'Post types', 'wpglobus' ),
+			'icon'   => 'el-icon-th-list',
+			'fields' => $fields
+		);		
+		
+		
 	}
 
 	public function setHelpTabs() {

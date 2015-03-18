@@ -110,8 +110,6 @@ class WPGlobus {
 
 		global $pagenow;
 
-		$this->disabled_entities[] = 'attachment';
-
 		/**
 		 * Init array of supported plugins
 		 */
@@ -297,6 +295,11 @@ class WPGlobus {
 				$this,
 				'on_field_table'
 			) );
+			
+			add_filter( "redux/{$WPGlobus_Config->option}/field/class/post_types", array(
+				$this,
+				'on_add_field_post_types'
+			) );			
 
 			add_action( 'admin_menu', array(
 				$this,
@@ -1361,6 +1364,14 @@ class WPGlobus {
 	}
 
 	/**
+	 * Include file for new field 'post_types'
+	 * @return string
+	 */
+	function on_add_field_post_types() {
+		return dirname( __FILE__ ) . '/options/fields/post_types/field_post_types.php';
+	}
+	
+	/**
 	 * Enqueue styles
 	 * @return void
 	 */
@@ -2181,6 +2192,8 @@ class WPGlobus {
 			die();
 		}
 
+		$this->set_disabled_entities();
+		
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.0.0
@@ -2329,6 +2342,45 @@ class WPGlobus {
 //]]>
 </script>	
 		<?php
+	}
+	
+	/**
+	 * Set disabled entities
+	 *
+	 * @since 1.0.9
+	 *
+	 * @return void
+	 */
+	function set_disabled_entities() {
+		
+		/**
+		 * Add builtin post type
+		 */
+		$this->disabled_entities[] = 'attachment';	
+
+		$option = get_option( 'wpglobus_option' );
+		$options_post_types = empty($option['post_type']) ? array() : $option['post_type'];
+		
+		/**
+		 * Get array all Post Types
+		 */
+		$post_types = get_post_types();
+		
+		foreach( $post_types as $post_type ) {
+			if ( in_array( $post_type, $this->disabled_entities ) ) {
+				continue;	
+			}	
+			
+			if ( ! isset($options_post_types[$post_type]) ) {
+				continue;	
+			}
+			
+			if ( $options_post_types[$post_type] != '1' ) {
+				$this->disabled_entities[] = $post_type; 	
+			}
+			
+		}			
+
 	}
 
 }
