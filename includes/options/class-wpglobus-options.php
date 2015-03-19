@@ -329,7 +329,7 @@ class WPGlobus_Options {
 			array(
 				'id'       => 'description',
 				'type'     => 'info',
-				'title'    => __( '(@todo make title)', 'wpglobus' ),
+				'title'    => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
 				'style'    => 'info',
 			),		
 		);
