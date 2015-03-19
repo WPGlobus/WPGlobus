@@ -478,8 +478,8 @@ class WPGlobus_aioseop {
 				} else {
 					
 					$aiosp_description 				= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
-					$aiosp_placeholder_description  = WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);
-					$aiosp_snippet_description 		= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
+					$aiosp_placeholder_description  = $aiosp_description;
+					$aiosp_snippet_description 		= $aiosp_description;			
 				
 				}	
 				?>
