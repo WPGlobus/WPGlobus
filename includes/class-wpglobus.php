@@ -146,6 +146,22 @@ class WPGlobus {
 		if ( defined( 'AIOSEOP_VERSION' ) ) {
 			$this->vendors_scripts['AIOSEOP'] = true;
 		}	
+		
+		/**
+		 * Add builtin post type
+		 */
+		$this->disabled_entities[] = 'attachment';		
+		
+		/**
+		 * Add disabled post types from option 
+		 */
+		$option = get_option( 'wpglobus_option' );
+		$options_post_types = empty($option['post_type']) ? array() : $option['post_type'];
+		foreach( $options_post_types as $post_type=>$value ) {
+			if ( $value != '1' ) {
+				$this->disabled_entities[] = $post_type; 	
+			}	
+		}
 			
 		add_filter( 'wp_redirect', array(
 			$this,
@@ -194,29 +210,24 @@ class WPGlobus {
 			if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
 
 				/**
-				 * Four filters for adding language column to edit.php page
+				 * Filters for adding language column to edit.php page
 				 */
-				if ( ! $this->disabled_entity() ) {
-					add_filter( 'manage_posts_columns', array(
+				if ( WPGlobus_WP::is_pagenow('edit.php') && ! $this->disabled_entity() ) {
+						
+					$post_type_filter = isset($_GET['post_type']) ? '_' . $_GET['post_type'] : '';
+					
+					add_filter( "manage{$post_type_filter}_posts_columns", array(
 						$this,
 						'on_add_language_column'
 					), 10 );
 
-					add_filter( 'manage_pages_columns', array(
-						$this,
-						'on_add_language_column'
-					), 10 );
-
-					add_filter( 'manage_posts_custom_column', array(
+					add_filter( "manage{$post_type_filter}_posts_custom_column", array(
 						$this,
 						'on_manage_language_column'
 					), 10 );
-
-					add_filter( 'manage_pages_custom_column', array(
-						$this,
-						'on_manage_language_column'
-					), 10 );
+					
 				}
+
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
 				 * @see action in wp-includes\post.php:3326
@@ -386,7 +397,6 @@ class WPGlobus {
 	 * @return array
 	 */
 	function on_add_language_column( $posts_columns ) {
-
 		/**
 		 * What column we insert after?
 		 */
@@ -1997,6 +2007,7 @@ class WPGlobus {
 	 * @return boolean
 	 */
 	function disabled_entity( $entity = '' ) {
+		
 		if ( empty( $entity ) ) {
 			/**
 			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
@@ -2007,12 +2018,17 @@ class WPGlobus {
 			if ( empty( $entity ) && isset( $_GET['taxonomy'] ) ) {
 				$entity = $_GET['taxonomy'];
 			}
+			if ( empty( $entity ) && WPGlobus_WP::is_pagenow('edit.php') ) {
+				$entity = 'post';
+			}	
 		}
+		
 		if ( in_array( $entity, $this->disabled_entities ) ) {
 			return true;
 		}
 
 		return false;
+	
 	}
 
 	/**
@@ -2191,8 +2207,6 @@ class WPGlobus {
 			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
 			die();
 		}
-
-		$this->set_disabled_entities();
 		
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
@@ -2342,45 +2356,6 @@ class WPGlobus {
 //]]>
 </script>	
 		<?php
-	}
-	
-	/**
-	 * Set disabled entities
-	 *
-	 * @since 1.0.9
-	 *
-	 * @return void
-	 */
-	function set_disabled_entities() {
-		
-		/**
-		 * Add builtin post type
-		 */
-		$this->disabled_entities[] = 'attachment';	
-
-		$option = get_option( 'wpglobus_option' );
-		$options_post_types = empty($option['post_type']) ? array() : $option['post_type'];
-		
-		/**
-		 * Get array all Post Types
-		 */
-		$post_types = get_post_types();
-		
-		foreach( $post_types as $post_type ) {
-			if ( in_array( $post_type, $this->disabled_entities ) ) {
-				continue;	
-			}	
-			
-			if ( ! isset($options_post_types[$post_type]) ) {
-				continue;	
-			}
-			
-			if ( $options_post_types[$post_type] != '1' ) {
-				$this->disabled_entities[] = $post_type; 	
-			}
-			
-		}			
-
 	}
 
 }
