@@ -463,10 +463,10 @@ class WPGlobus_aioseop {
 						$description = $aio->trim_excerpt_without_filters_full_length( WPGlobus_Core::text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY) );
 					
 					if ( !$description && $aioseop_options["aiosp_generate_descriptions"] ) {
-						$content = $post->post_content;
+						$content = WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);
 						if ( !empty( $aioseop_options["aiosp_run_shortcodes"] ) ) {
-							$content = do_shortcode( WPGlobus_Core::text_filter($content, $language, WPGlobus::RETURN_EMPTY) );
-						}	
+							$content = do_shortcode( $content );
+						}
 						$content = wp_strip_all_tags( $content );
 						$description = $aio->trim_excerpt_without_filters( $content );
 					}				
