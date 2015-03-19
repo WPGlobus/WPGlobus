@@ -32,6 +32,17 @@ class WPGlobus_Utils {
 		 * @todo Multisite?
 		 */
 		$home_url = get_option( 'home' );
+		
+		/**
+		 * Adduction $home_url and $url to equal with/without www
+		 */
+		if ( false === strpos($url, 'www.') ) {
+			$home_url = str_replace('www.', '', $home_url);	
+		} else {
+			if ( false === strpos($home_url, 'www.') ) {
+				$url = str_replace('www.', '', $url);	
+			}	
+		}	
 
 		/**
 		 * Use the current language if not passed
@@ -54,6 +65,7 @@ class WPGlobus_Utils {
 		/**
 		 * Regex to replace current language prefix with the requested one.
 		 * @example !http://www\.example\.com/?(en|ru|pt)?/?!
+         * @example !http://example\.com/?(en|ru|pt)?/?!
 		 */
 		$re = '!' .
 		      str_replace( '.', '\.', $home_url ) .
