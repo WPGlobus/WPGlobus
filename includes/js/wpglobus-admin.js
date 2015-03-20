@@ -725,20 +725,32 @@ jQuery(document).ready(function () {
 							if ( v != '' ) {
 								data['wp_autosave']['content_'+l] = v;
 							}	
-						});						
+						});
 					}	
 				});				
 			
+				var wrap_at = '#postdivrich',
+					set_title = true;	
+				if ( WPGlobusAdmin.data.support['editor'] === false ) {
+					wrap_at = '#titlediv';	
+					set_title = false;	
+				}	
+				if ( WPGlobusAdmin.data.support['title'] === false ) {
+					set_title = false;	
+				}	
                 // Make post-body-content as tabs container
                 $('#post-body-content').prepend($('.wpglobus-post-tabs-ul'));
                 $.each(WPGlobusAdmin.tabs, function (index, suffix) {
                     if ('default' === suffix) {
-                        $('#postdivrich').wrap('<div id="tab-default"></div>');
-                        $($('#titlediv')).insertBefore('#postdivrich');
+                        $(wrap_at).wrap('<div id="tab-default"></div>');
+						if ( set_title ) {
+							$($('#titlediv')).insertBefore(wrap_at);
+						}	
                     } else {
-                        $('#postdivrich-' + suffix).wrap('<div id="tab-' + suffix + '"></div>');
-                        $($('#titlediv-' + suffix)).insertBefore('#postdivrich-' + suffix);
-
+                        $(wrap_at+'-' + suffix).wrap('<div id="tab-' + suffix + '"></div>');
+						if ( set_title ) {
+							$($('#titlediv-' + suffix)).insertBefore(wrap_at+'-' + suffix);
+						}
                     }
                 });
 

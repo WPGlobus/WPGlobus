@@ -908,6 +908,22 @@ class WPGlobus {
 						$data['tag'][ $tag ] = self::_get_terms( $tag );
 					}
 				}
+	
+				/**
+				 * Check for support 'title'
+				 */
+				$data['support']['title'] = true;
+				if ( ! post_type_supports($post->post_type, 'title') ) {
+					$data['support']['title'] = false;
+				}
+			
+				/**
+				 * Check for support 'editor'
+				 */
+				$data['support']['editor'] = true;
+				if ( ! post_type_supports($post->post_type, 'editor') ) {
+					$data['support']['editor'] = false;
+				}	
 
 			} else if ( 'nav-menus.php' == $page ) {
 
@@ -1693,24 +1709,10 @@ class WPGlobus {
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
-
-		/**
-		 * @todo Temporary workaround. Need to revise the related wpglobus-admin.js part
-		 * If CPT does not support `editor` (no $post->content),
-		 * we'll put the "dummy" editor DIVs, so our tabs won't break.
-		 */
-		// <editor-fold desc="No-editor CPTs: Dummy WYSIWYGs">
-		if ( ! post_type_supports( $post->post_type, 'editor' ) ) {
-
-			foreach ( self::Config()->open_languages as $language ) :
-				$div_id = 'postdivrich' .
-				          ( $language === self::Config()->default_language ? '' : '-' . $language );
-				?><div id="<?php echo $div_id; ?>" class="postarea postdivrich-wpglobus"></div><?php
-			endforeach;
-
+		
+		if ( ! post_type_supports($post->post_type, 'editor') ) {
 			return;
-		}
-		// </editor-fold>
+		}	
 
 		foreach ( self::Config()->open_languages as $language ) :
 			if ( $language == self::Config()->default_language ) {
@@ -1837,15 +1839,25 @@ class WPGlobus {
 		}	
 		
 		if ( ! $devmode ) :
-
+		
+			$support_title = true;
+			if ( ! post_type_supports($data['post_type'], 'title') ) {
+				$support_title = false;
+			}			
+			
+			$support_editor = true;
+			if ( ! post_type_supports($data['post_type'], 'editor') ) {
+				$support_editor = false;
+			}
+			
 			$data['post_title'] = trim( $data['post_title'] );
-			if ( ! empty( $data['post_title'] ) ) {
+			if ( ! empty( $data['post_title'] ) && $support_title ) {
 				$data['post_title'] =
 					WPGlobus::add_locale_marks( $data['post_title'], WPGlobus::Config()->default_language );
 			}
 
 			$data['post_content'] = trim( $data['post_content'] );
-			if ( ! empty( $data['post_content'] ) ) {
+			if ( ! empty( $data['post_content'] ) && $support_editor ) {
 				$data['post_content'] =
 					WPGlobus::add_locale_marks( $data['post_content'], WPGlobus::Config()->default_language );
 			}
@@ -1966,6 +1978,13 @@ class WPGlobus {
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
+	
+		/**
+		 * Check for support 'title'
+		 */		
+		if ( ! post_type_supports($post->post_type, 'title') ) {
+			return;
+		}	
 
 		foreach ( self::Config()->open_languages as $language ) :
 
