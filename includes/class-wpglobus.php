@@ -2243,50 +2243,6 @@ class WPGlobus {
 		 */
 		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
 
-		/**
-		 * @todo Proposed solution for the broken WPGlobus interface on CPTs without content editor.
-		 *       DISABLED as of 15.03.14
-		 */
-		// <editor-fold desc="No-editor CPTs: Add to disabled_entities">
-		if ( 0 ):
-			/**
-			 * Add CPT without 'editor' feature to disabled_entities array
-			 */
-			if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
-				/**
-				 * Checks if this post type supports 'editor' feature.
-				 */
-				$post_type = '';
-
-				if ( ! empty( $_GET['post'] ) ) {
-					$post_type = get_post_field( 'post_type', $_GET['post'] );
-				}
-
-				if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) {
-					/**
-					 * For post-new.php page
-					 */
-					$post_type = $_GET['post_type'];
-				}
-
-				if ( ! empty( $post_type ) && ! post_type_supports( $post_type, 'editor' ) ) {
-
-					/**
-					 * "Solution": we do not support such CPTs
-					 */
-					$this->disabled_entities[] = $post_type;
-
-					/**
-					 * "Hack": we add the editor and hide it
-					 */
-					// add_post_type_support( $post_type, 'editor' );
-					// echo '<style>.wp-editor-wrap{display:none;}</style>';
-				}
-
-			}
-		endif;
-		// </editor-fold>
-
 	}
 
 	/**
