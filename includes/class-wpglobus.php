@@ -2027,6 +2027,8 @@ class WPGlobus {
 	 */
 	function disabled_entity( $entity = '' ) {
 		
+		$entity_type = 'post';
+		
 		if ( empty( $entity ) ) {
 			/**
 			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
@@ -2036,11 +2038,22 @@ class WPGlobus {
 			}
 			if ( empty( $entity ) && isset( $_GET['taxonomy'] ) ) {
 				$entity = $_GET['taxonomy'];
+				$entity_type = 'taxonomy';
 			}
 			if ( empty( $entity ) && WPGlobus_WP::is_pagenow('edit.php') ) {
 				$entity = 'post';
 			}	
 		}
+		
+		if ( 'post' == $entity_type ) {
+			/**
+			 * Check for support 'title' and 'editor'
+			 */	
+			global $post;
+			if ( ! empty($post) && ! post_type_supports($post->post_type, 'title') && ! post_type_supports($post->post_type, 'editor') ) {
+				return true;
+			}
+		}	
 		
 		if ( in_array( $entity, $this->disabled_entities ) ) {
 			return true;
