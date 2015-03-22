@@ -164,6 +164,12 @@ class WPGlobus_Config {
 	public $option_flags = 'wpglobus_option_flags';
 
 	/**
+	 * WPGlobus option key for meta settings
+	 * @var string
+	 */
+	public $option_post_meta_settings = 'wpglobus_option_post_meta_settings';
+	
+	/**
 	 * @var string
 	 */
 	public $css_editor = '';

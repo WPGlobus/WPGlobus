@@ -508,6 +508,20 @@ class WPGlobus {
 		$order = $_POST['order'];
 
 		switch ( $order['action'] ) :
+			case 'save_post_meta_settings':
+				$settings = (array) get_option( WPGlobus::Config()->option_post_meta_settings );
+				
+				if ( empty($settings[$order['post_type']]) ) {
+					$settings[$order['post_type']] = array(); 
+				}	
+				$settings[$order['post_type']][$order['id']] = $order['checked']; 
+				if ( update_option( WPGlobus::Config()->option_post_meta_settings, $settings ) ) {
+					$ajax_return['result'] = 'ok';
+					$ajax_return['checked'] = $order['checked'];
+				} else {
+					$ajax_return['result'] = 'error';
+				}	
+				break;
 			case 'wpglobus_select_lang':
 				if ( $order['locale'] == 'en_US' ) {
 					update_option( 'WPLANG', '' );
@@ -925,6 +939,16 @@ class WPGlobus {
 					$data['support']['editor'] = false;
 				}	
 
+				if ( !empty($post) ) {
+					$data['post_type'] = $post->post_type;
+					$opts = (array) get_option(WPGlobus::Config()->option_post_meta_settings);
+					if ( empty( $opts ) ) {
+						$data['post_meta_settings'] = '';
+					} else {
+						$data['post_meta_settings'] = $opts;
+					}
+				}	
+				
 			} else if ( 'nav-menus.php' == $page ) {
 
 				$page_action = 'menu-edit';
