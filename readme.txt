@@ -122,6 +122,14 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.9 =
+* ADDED:
+	* Interface meta settings
+	* Interface on/off post types
+* FIXED:
+	* Fix localize_url() for URL  without www
+	* Broken tabs for post types which don't support 'title' or 'editor'
+	
 = 1.0.8.1 =
 * FIXED:
 	* Reset hierarchical taxonomies checkmarks after save post or update post's page.
