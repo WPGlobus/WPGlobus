@@ -514,13 +514,14 @@ class WPGlobus {
 				if ( empty($settings[$order['post_type']]) ) {
 					$settings[$order['post_type']] = array(); 
 				}	
-				$settings[$order['post_type']][$order['id']] = $order['checked']; 
+				$settings[$order['post_type']][$order['id']] = $order['checked'];
 				if ( update_option( WPGlobus::Config()->option_post_meta_settings, $settings ) ) {
 					$ajax_return['result'] = 'ok';
-					$ajax_return['checked'] = $order['checked'];
 				} else {
 					$ajax_return['result'] = 'error';
 				}	
+				$ajax_return['checked'] = $order['checked'];
+				$ajax_return['id'] = $order['id'];
 				break;
 			case 'wpglobus_select_lang':
 				if ( $order['locale'] == 'en_US' ) {
