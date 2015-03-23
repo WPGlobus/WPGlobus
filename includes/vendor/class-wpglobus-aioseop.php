@@ -492,7 +492,7 @@ class WPGlobus_aioseop {
 							if ( 'aiosp_snippet' == $name ) {
 
 								$snippet_title_2 = '';
-								if ( false !== strpos($title_format[2], '%blog_title%') ) {
+								if ( isset($title_format[2]) && false !== strpos($title_format[2], '%blog_title%') ) {
 								
 									$snippet_title_2 = ' ' . $title_format[1] . ' ' . WPGlobus_Core::text_filter(get_option('blogname'),  $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE) ;	
 									
