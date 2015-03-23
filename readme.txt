@@ -129,6 +129,7 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 * FIXED:
 	* Fix localize_url() for URL  without www
 	* Broken tabs for post types which don't support 'title' or 'editor'
+	* Support All in One SEO pack plugin at post-new.php page
 	
 = 1.0.8.1 =
 * FIXED:
