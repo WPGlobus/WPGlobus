@@ -331,7 +331,11 @@ class WPGlobus_Utils {
 	 */
 	public static function extract_url( $url, $host = '', $referer = '' ) {
 
-		$home         = self::parse_url( get_option( 'home' ) );
+		$referer_save = $referer;
+
+		$home_url = get_option( 'home' );
+
+		$home         = self::parse_url( $home_url );
 		$home['path'] = trailingslashit( $home['path'] );
 		$referer      = self::parse_url( $referer );
 
@@ -406,6 +410,29 @@ class WPGlobus_Utils {
 				}
 			}
 		}
+
+		/**
+		 * If DOING_AJAX, we cannot retrieve the language information from the URL,
+		 * because it's always `admin-ajax`. Therefore, we'll rely on the HTTP_REFERER.
+		 * @since 1.0.9
+		 */
+		if ( ! empty( $referer_save ) && WPGlobus_WP::is_doing_ajax() ) {
+
+			/**
+			 * Regex to find the language prefix.
+			 * @example !http://www\.example\.com/(en|ru|pt)/!
+			 */
+			$re = '!' .
+			      str_replace( '.', '\.', $home_url ) .
+			      '/(' . join( '|', WPGlobus::Config()->enabled_languages ) . ')/' . '!';
+
+			if ( preg_match( $re, $referer_save, $match ) ) {
+				// Found language information
+				$result['language'] = $match[1];
+			}
+
+		}
+
 
 		return $result;
 	}
