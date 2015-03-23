@@ -214,9 +214,12 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
 add_filter( 'locale', array( 'WPGlobus_Filters', 'filter__get_locale' ), PHP_INT_MAX );
 
 /**
+ * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
+ *        plugins already loaded their translations.
  * @todo Refactor url_info after beta-testing
  */
-add_action( 'init', array( 'WPGlobus_Filters', 'action__init_url_info' ), 2 );
+add_action( 'plugins_loaded', array( 'WPGlobus_Filters', 'action__init_url_info' ), 0 );
+//add_action( 'init', array( 'WPGlobus_Filters', 'action__init_url_info' ), 2 );
 
 /** @todo Move the filter to Filters class */
 add_action( 'activated_plugin', array( 'WPGlobus', 'activated' ) );
