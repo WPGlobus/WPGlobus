@@ -48,22 +48,22 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 * Mock object sent as a parameter, because we do now have access to the actual config.
 		 * @var WPGlobus_Config $config
 		 */
-		$config                        = $this->getMock( 'WPGlobus_Config' );
+		$config = $this->getMock( 'WPGlobus_Config' );
 
 		/**
 		 * These languages are enabled
 		 */
-		$config->enabled_languages     = array( 'en', 'ru', 'pt' );
+		$config->enabled_languages = array( 'en', 'ru', 'pt' );
 
 		/**
 		 * This is the current language
 		 */
-		$config->language              = 'pt';
+		$config->language = 'pt';
 
 		/**
 		 * This is the default language
 		 */
-		$config->default_language      = 'en';
+		$config->default_language = 'en';
 
 		/**
 		 * This says "Do not use language code in the default URL"
@@ -157,6 +157,78 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			WPGlobus_Utils::localize_url( 'http://www.example.com/page/', 'ru', $config ) );
 		$this->assertEquals( 'http://example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://example.com/page/', 'ru', $config ) );
+	}
+
+	/**
+	 * @covers WPGlobus_Utils::extract_language_from_url
+	 */
+	function test_extract_language_from_url() {
+
+		/**
+		 * Mock object sent as a parameter, because we do now have access to the actual config.
+		 * @var WPGlobus_Config $config
+		 */
+		$config = $this->getMock( 'WPGlobus_Config' );
+
+		/**
+		 * These languages are enabled
+		 */
+		$config->enabled_languages = array( 'en', 'ru', 'pt' );
+
+		/**
+		 * This is the current language
+		 */
+		$config->language = 'pt';
+
+		/**
+		 * This is the default language
+		 */
+		$config->default_language = 'en';
+
+		/**
+		 * This says "Do not use language code in the default URL"
+		 * So, no /en/page/, just /page/
+		 */
+		$config->hide_default_language = true;
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( 'http://example.com/ru/page/', $config ) );
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( 'https://example.com/ru/page/', $config ) );
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( 'https://develop.example.com/ru/page/', $config ) );
+
+		$this->assertEquals( 'pt',
+			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/pt/page/', $config ) );
+
+		// Unknown language
+		$this->assertEquals( '',
+			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/ar/page/', $config ) );
+
+		// Default language or no language
+		$this->assertEquals( '',
+			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/page/', $config ) );
+
+		// Default language, but specified in the URL for some reason - returns it
+		$this->assertEquals( 'en',
+			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/en/page/', $config ) );
+
+		// Wrong position
+		$this->assertEquals( '',
+			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/page/ru/something', $config ) );
+
+		// TODO Not sure about this. PHP manual says it should not work.
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( '/ru/something', $config ) );
+
+		$this->assertEquals( '',
+			WPGlobus_Utils::extract_language_from_url( 3.14, $config ) );
+
+		$this->assertEquals( '',
+			WPGlobus_Utils::extract_language_from_url( array( 1, 'pi' ), $config ) );
+
 	}
 
 } // class
