@@ -34,47 +34,45 @@ class WPGlobus_Utils {
 		$home_url = get_option( 'home' );
 		
 		/**
-		 * Adduction $home_url and $url to equal with/without www
-		 */
-		if ( false === strpos($url, 'www.') ) {
-			$home_url = str_replace('www.', '', $home_url);	
-		} else {
-			if ( false === strpos($home_url, 'www.') ) {
-				$url = str_replace('www.', '', $url);	
-			}	
-		}	
-
-		/**
 		 * Use the current language if not passed
 		 */
 		$language = empty( $language ) ? $config->language : $language;
 
 		/**
-		 * This says "Do not use language code in the default URL"
+		 * `hide_default_language` means "Do not use language code in the default URL"
 		 * So, no /en/page/, just /page/
 		 */
 		if ( $language === $config->default_language && $config->hide_default_language ) {
-			$language = '';
+			$language_url_prefix = '';
+		} else {
+			/**
+			 * Language prefix looks like '/ru'
+			 */
+			$language_url_prefix = '/' . $language;
 		}
 
 		/**
-		 * Language prefix looks like '/ru/'
+		 * For the following regex, we need home_url without prefix
+		 * http://www.example.com becomes example.com
 		 */
-		$language_url_prefix = trailingslashit( '/' . $language );
+		$home_domain_tld = preg_replace( '!^https?:\/\/(?:[^\.]+\.)?([^\.\/]+\.[^\/]+.*)!', '\1', $home_url );
 
 		/**
 		 * Regex to replace current language prefix with the requested one.
-		 * @example !http://www\.example\.com/?(en|ru|pt)?/?!
-         * @example !http://example\.com/?(en|ru|pt)?/?!
+		 * We ignore http(s) and domain prefix, but we must match the domain-tld, so any external URLs
+		 * are not localized.
+		 * @example ^(https?:\/\/(?:.+\.)?example\.com)(?:\/?(?:en|ru|pt))?(\/?.*)$
 		 */
 		$re = '!' .
-		      str_replace( '.', '\.', $home_url ) .
-		      '/?(' . join( '|', $config->enabled_languages ) . ')?/?' . '!';
+		      '^(https?:\/\/(?:.+\.)?' .
+		      str_replace( '.', '\.', $home_domain_tld ) .
+		      ')(?:\/(?:' . join( '|', $config->enabled_languages ) . '))?(\/?.*)$' .
+		      '!';
 
 		/**
 		 * Replace the existing (or empty) language prefix with the requested one
 		 */
-		$localized_url = preg_replace( $re, $home_url . $language_url_prefix, $url );
+		$localized_url = preg_replace( $re, '\1' . $language_url_prefix . '\2', $url );
 
 		return $localized_url;
 	}
