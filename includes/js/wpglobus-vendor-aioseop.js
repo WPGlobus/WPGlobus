@@ -62,7 +62,7 @@ var WPGlobusAioseop;
 				api.countChars($t, $t.data('field-count'));
 			});
 
-			$('body').on('click', '.wpglobus-post-tabs-ul li', function(event){
+			$('body').on('click', '.wpglobus-post-body-tabs-list li', function(event){
 				var $t = $(this);
 				if ( $t.hasClass('wpglobus-post-tab') ) {
 					$('#wpglobus-aioseop-tabs').tabs('option','active', $t.data('order'));
