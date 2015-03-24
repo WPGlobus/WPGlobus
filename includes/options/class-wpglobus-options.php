@@ -334,7 +334,8 @@ class WPGlobus_Options {
 			),		
 		);
 			
-		$open_post_types = array();	
+		$default = array();
+		$open_post_types = array();
 		foreach( $post_types as $post_type ) {
 			if ( ! in_array( $post_type, array('attachment', 'revision', 'nav_menu_item') ) ) {
 				$open_post_types[$post_type] = $post_type;
