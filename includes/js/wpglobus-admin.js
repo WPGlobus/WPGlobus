@@ -766,7 +766,7 @@ jQuery(document).ready(function () {
 					set_title = false;	
 				}	
                 // Make post-body-content as tabs container
-                $('#post-body-content').prepend($('.wpglobus-post-tabs-ul'));
+                $('#post-body-content').prepend($('.wpglobus-post-body-tabs-list'));
                 $.each(WPGlobusAdmin.tabs, function (index, suffix) {
                     if ('default' === suffix) {
                         $(wrap_at).wrap('<div id="tab-default"></div>');
@@ -782,7 +782,7 @@ jQuery(document).ready(function () {
                 });
 
                 // tabs on
-                $('#post-body-content').tabs(); // #post-body-content
+                $('#post-body-content').addClass('wpglobus-post-body-tabs').tabs(); // #post-body-content
 
                 // setup for default language
                 $('#title').val(WPGlobusAdmin.title);

@@ -94,7 +94,7 @@
 	height: 20px;
 	display:none;
 }
-.ui-dialog .ui-dialog-content {
+.wpglobus-dialog-wrapper.ui-dialog-content.ui-widget-content {
 	position: relative;
 	border: 0;
 	padding: .5em 1em;

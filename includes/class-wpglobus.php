@@ -1977,7 +1977,7 @@ class WPGlobus {
 			return;
 		} ?>
 
-		<ul class="wpglobus-post-tabs-ul">    <?php
+		<ul class="wpglobus-post-body-tabs-list">    <?php
 			$order = 0;
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
@@ -2177,7 +2177,7 @@ class WPGlobus {
 			?>
 			<div id="wpglobus-dialog-wrapper" title="" class="hidden wpglobus-dialog-wrapper">
 				<form id="wpglobus-dialog-form" style="">	
-					<div id="wpglobus-dialog-tabs">   
+					<div id="wpglobus-dialog-tabs" class="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php
 							$order = 0;
 							foreach ( WPGlobus::Config()->open_languages as $language ) { ?>
