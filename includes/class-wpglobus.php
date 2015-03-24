@@ -514,7 +514,7 @@ class WPGlobus {
 				if ( empty($settings[$order['post_type']]) ) {
 					$settings[$order['post_type']] = array(); 
 				}	
-				$settings[$order['post_type']][$order['id']] = $order['checked'];
+				$settings[$order['post_type']][$order['meta_key']] = $order['checked'];
 				if ( update_option( WPGlobus::Config()->option_post_meta_settings, $settings ) ) {
 					$ajax_return['result'] = 'ok';
 				} else {
@@ -522,6 +522,7 @@ class WPGlobus {
 				}	
 				$ajax_return['checked'] = $order['checked'];
 				$ajax_return['id'] = $order['id'];
+				$ajax_return['meta_key'] = $order['meta_key'];
 				break;
 			case 'wpglobus_select_lang':
 				if ( $order['locale'] == 'en_US' ) {
@@ -2174,7 +2175,7 @@ class WPGlobus {
 			 * Output dialog form for window.WPGlobusDialogApp
 			 */ 
 			?>
-			<div id="wpglobus-dialog-wrapper" title="" class="hidden">
+			<div id="wpglobus-dialog-wrapper" title="" class="hidden wpglobus-dialog-wrapper">
 				<form id="wpglobus-dialog-form" style="">	
 					<div id="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php
