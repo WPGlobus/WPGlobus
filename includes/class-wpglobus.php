@@ -110,8 +110,6 @@ class WPGlobus {
 
 		global $pagenow;
 
-		$this->disabled_entities[] = 'attachment';
-
 		/**
 		 * Init array of supported plugins
 		 */
@@ -148,6 +146,22 @@ class WPGlobus {
 		if ( defined( 'AIOSEOP_VERSION' ) ) {
 			$this->vendors_scripts['AIOSEOP'] = true;
 		}	
+		
+		/**
+		 * Add builtin post type
+		 */
+		$this->disabled_entities[] = 'attachment';		
+		
+		/**
+		 * Add disabled post types from option 
+		 */
+		$option = get_option( 'wpglobus_option' );
+		$options_post_types = empty($option['post_type']) ? array() : $option['post_type'];
+		foreach( $options_post_types as $post_type=>$value ) {
+			if ( $value != '1' ) {
+				$this->disabled_entities[] = $post_type; 	
+			}	
+		}
 			
 		add_filter( 'wp_redirect', array(
 			$this,
@@ -196,29 +210,24 @@ class WPGlobus {
 			if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
 
 				/**
-				 * Four filters for adding language column to edit.php page
+				 * Filters for adding language column to edit.php page
 				 */
-				if ( ! $this->disabled_entity() ) {
-					add_filter( 'manage_posts_columns', array(
+				if ( WPGlobus_WP::is_pagenow('edit.php') && ! $this->disabled_entity() ) {
+						
+					$post_type_filter = isset($_GET['post_type']) ? '_' . $_GET['post_type'] : '';
+					
+					add_filter( "manage{$post_type_filter}_posts_columns", array(
 						$this,
 						'on_add_language_column'
 					), 10 );
 
-					add_filter( 'manage_pages_columns', array(
-						$this,
-						'on_add_language_column'
-					), 10 );
-
-					add_filter( 'manage_posts_custom_column', array(
+					add_filter( "manage{$post_type_filter}_posts_custom_column", array(
 						$this,
 						'on_manage_language_column'
 					), 10 );
-
-					add_filter( 'manage_pages_custom_column', array(
-						$this,
-						'on_manage_language_column'
-					), 10 );
+					
 				}
+
 				/**
 				 * Join post content and post title for enabled languages in func wp_insert_post
 				 * @see action in wp-includes\post.php:3326
@@ -270,7 +279,7 @@ class WPGlobus {
 					), 11 );
 				}
 
-				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow(array('post.php','edit.php')) ) {
+				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow(array('post.php', 'post-new.php', 'edit.php')) ) {
 					
 					/** @global $post */
 					global $post;
@@ -279,7 +288,7 @@ class WPGlobus {
 					if ( ! $this->disabled_entity( $type ) ) {
 					
 						require_once 'vendor/class-wpglobus-aioseop.php';
-						if ( WPGlobus_WP::is_pagenow('post.php') ) {
+						if ( WPGlobus_WP::is_pagenow( array('post.php', 'post-new.php') ) ) {
 							$WPGlobus_aioseop = new WPGlobus_aioseop();	
 						}
 					}		
@@ -297,6 +306,11 @@ class WPGlobus {
 				$this,
 				'on_field_table'
 			) );
+			
+			add_filter( "redux/{$WPGlobus_Config->option}/field/class/post_types", array(
+				$this,
+				'on_add_field_post_types'
+			) );			
 
 			add_action( 'admin_menu', array(
 				$this,
@@ -383,7 +397,6 @@ class WPGlobus {
 	 * @return array
 	 */
 	function on_add_language_column( $posts_columns ) {
-
 		/**
 		 * What column we insert after?
 		 */
@@ -495,6 +508,22 @@ class WPGlobus {
 		$order = $_POST['order'];
 
 		switch ( $order['action'] ) :
+			case 'save_post_meta_settings':
+				$settings = (array) get_option( WPGlobus::Config()->option_post_meta_settings );
+				
+				if ( empty($settings[$order['post_type']]) ) {
+					$settings[$order['post_type']] = array(); 
+				}	
+				$settings[$order['post_type']][$order['meta_key']] = $order['checked'];
+				if ( update_option( WPGlobus::Config()->option_post_meta_settings, $settings ) ) {
+					$ajax_return['result'] = 'ok';
+				} else {
+					$ajax_return['result'] = 'error';
+				}	
+				$ajax_return['checked'] = $order['checked'];
+				$ajax_return['id'] = $order['id'];
+				$ajax_return['meta_key'] = $order['meta_key'];
+				break;
 			case 'wpglobus_select_lang':
 				if ( $order['locale'] == 'en_US' ) {
 					update_option( 'WPLANG', '' );
@@ -895,7 +924,33 @@ class WPGlobus {
 						$data['tag'][ $tag ] = self::_get_terms( $tag );
 					}
 				}
+	
+				/**
+				 * Check for support 'title'
+				 */
+				$data['support']['title'] = true;
+				if ( ! post_type_supports($post->post_type, 'title') ) {
+					$data['support']['title'] = false;
+				}
+			
+				/**
+				 * Check for support 'editor'
+				 */
+				$data['support']['editor'] = true;
+				if ( ! post_type_supports($post->post_type, 'editor') ) {
+					$data['support']['editor'] = false;
+				}	
 
+				if ( !empty($post) ) {
+					$data['post_type'] = $post->post_type;
+					$opts = (array) get_option(WPGlobus::Config()->option_post_meta_settings);
+					if ( empty( $opts ) ) {
+						$data['post_meta_settings'] = '';
+					} else {
+						$data['post_meta_settings'] = $opts;
+					}
+				}	
+				
 			} else if ( 'nav-menus.php' == $page ) {
 
 				$page_action = 'menu-edit';
@@ -1361,6 +1416,14 @@ class WPGlobus {
 	}
 
 	/**
+	 * Include file for new field 'post_types'
+	 * @return string
+	 */
+	function on_add_field_post_types() {
+		return dirname( __FILE__ ) . '/options/fields/post_types/field_post_types.php';
+	}
+	
+	/**
 	 * Enqueue styles
 	 * @return void
 	 */
@@ -1672,24 +1735,10 @@ class WPGlobus {
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
-
-		/**
-		 * @todo Temporary workaround. Need to revise the related wpglobus-admin.js part
-		 * If CPT does not support `editor` (no $post->content),
-		 * we'll put the "dummy" editor DIVs, so our tabs won't break.
-		 */
-		// <editor-fold desc="No-editor CPTs: Dummy WYSIWYGs">
-		if ( ! post_type_supports( $post->post_type, 'editor' ) ) {
-
-			foreach ( self::Config()->open_languages as $language ) :
-				$div_id = 'postdivrich' .
-				          ( $language === self::Config()->default_language ? '' : '-' . $language );
-				?><div id="<?php echo $div_id; ?>" class="postarea postdivrich-wpglobus"></div><?php
-			endforeach;
-
+		
+		if ( ! post_type_supports($post->post_type, 'editor') ) {
 			return;
-		}
-		// </editor-fold>
+		}	
 
 		foreach ( self::Config()->open_languages as $language ) :
 			if ( $language == self::Config()->default_language ) {
@@ -1816,15 +1865,25 @@ class WPGlobus {
 		}	
 		
 		if ( ! $devmode ) :
-
+		
+			$support_title = true;
+			if ( ! post_type_supports($data['post_type'], 'title') ) {
+				$support_title = false;
+			}			
+			
+			$support_editor = true;
+			if ( ! post_type_supports($data['post_type'], 'editor') ) {
+				$support_editor = false;
+			}
+			
 			$data['post_title'] = trim( $data['post_title'] );
-			if ( ! empty( $data['post_title'] ) ) {
+			if ( ! empty( $data['post_title'] ) && $support_title ) {
 				$data['post_title'] =
 					WPGlobus::add_locale_marks( $data['post_title'], WPGlobus::Config()->default_language );
 			}
 
 			$data['post_content'] = trim( $data['post_content'] );
-			if ( ! empty( $data['post_content'] ) ) {
+			if ( ! empty( $data['post_content'] ) && $support_editor ) {
 				$data['post_content'] =
 					WPGlobus::add_locale_marks( $data['post_content'], WPGlobus::Config()->default_language );
 			}
@@ -1918,7 +1977,7 @@ class WPGlobus {
 			return;
 		} ?>
 
-		<ul class="wpglobus-post-tabs-ul">    <?php
+		<ul class="wpglobus-post-body-tabs-list">    <?php
 			$order = 0;
 			foreach ( self::Config()->open_languages as $language ) {
 				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
@@ -1945,6 +2004,13 @@ class WPGlobus {
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
+	
+		/**
+		 * Check for support 'title'
+		 */		
+		if ( ! post_type_supports($post->post_type, 'title') ) {
+			return;
+		}	
 
 		foreach ( self::Config()->open_languages as $language ) :
 
@@ -1986,6 +2052,9 @@ class WPGlobus {
 	 * @return boolean
 	 */
 	function disabled_entity( $entity = '' ) {
+		
+		$entity_type = 'post';
+		
 		if ( empty( $entity ) ) {
 			/**
 			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
@@ -1995,13 +2064,29 @@ class WPGlobus {
 			}
 			if ( empty( $entity ) && isset( $_GET['taxonomy'] ) ) {
 				$entity = $_GET['taxonomy'];
+				$entity_type = 'taxonomy';
 			}
+			if ( empty( $entity ) && WPGlobus_WP::is_pagenow('edit.php') ) {
+				$entity = 'post';
+			}	
 		}
+		
+		if ( 'post' == $entity_type ) {
+			/**
+			 * Check for support 'title' and 'editor'
+			 */	
+			global $post;
+			if ( ! empty($post) && ! post_type_supports($post->post_type, 'title') && ! post_type_supports($post->post_type, 'editor') ) {
+				return true;
+			}
+		}	
+		
 		if ( in_array( $entity, $this->disabled_entities ) ) {
 			return true;
 		}
 
 		return false;
+	
 	}
 
 	/**
@@ -2090,9 +2175,9 @@ class WPGlobus {
 			 * Output dialog form for window.WPGlobusDialogApp
 			 */ 
 			?>
-			<div id="wpglobus-dialog-wrapper" title="" class="hidden">
+			<div id="wpglobus-dialog-wrapper" title="" class="hidden wpglobus-dialog-wrapper">
 				<form id="wpglobus-dialog-form" style="">	
-					<div id="wpglobus-dialog-tabs">   
+					<div id="wpglobus-dialog-tabs" class="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php
 							$order = 0;
 							foreach ( WPGlobus::Config()->open_languages as $language ) { ?>
@@ -2180,7 +2265,7 @@ class WPGlobus {
 			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
 			die();
 		}
-
+		
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.0.0
@@ -2196,50 +2281,6 @@ class WPGlobus {
 		 * @param array $open_languages Array of opened languages.
 		 */
 		self::Config()->open_languages = apply_filters( 'wpglobus_open_languages', self::Config()->open_languages );
-
-		/**
-		 * @todo Proposed solution for the broken WPGlobus interface on CPTs without content editor.
-		 *       DISABLED as of 15.03.14
-		 */
-		// <editor-fold desc="No-editor CPTs: Add to disabled_entities">
-		if ( 0 ):
-			/**
-			 * Add CPT without 'editor' feature to disabled_entities array
-			 */
-			if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
-				/**
-				 * Checks if this post type supports 'editor' feature.
-				 */
-				$post_type = '';
-
-				if ( ! empty( $_GET['post'] ) ) {
-					$post_type = get_post_field( 'post_type', $_GET['post'] );
-				}
-
-				if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) {
-					/**
-					 * For post-new.php page
-					 */
-					$post_type = $_GET['post_type'];
-				}
-
-				if ( ! empty( $post_type ) && ! post_type_supports( $post_type, 'editor' ) ) {
-
-					/**
-					 * "Solution": we do not support such CPTs
-					 */
-					$this->disabled_entities[] = $post_type;
-
-					/**
-					 * "Hack": we add the editor and hide it
-					 */
-					// add_post_type_support( $post_type, 'editor' );
-					// echo '<style>.wp-editor-wrap{display:none;}</style>';
-				}
-
-			}
-		endif;
-		// </editor-fold>
 
 	}
 

@@ -463,10 +463,10 @@ class WPGlobus_aioseop {
 						$description = $aio->trim_excerpt_without_filters_full_length( WPGlobus_Core::text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY) );
 					
 					if ( !$description && $aioseop_options["aiosp_generate_descriptions"] ) {
-						$content = $post->post_content;
+						$content = WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);
 						if ( !empty( $aioseop_options["aiosp_run_shortcodes"] ) ) {
-							$content = do_shortcode( WPGlobus_Core::text_filter($content, $language, WPGlobus::RETURN_EMPTY) );
-						}	
+							$content = do_shortcode( $content );
+						}
 						$content = wp_strip_all_tags( $content );
 						$description = $aio->trim_excerpt_without_filters( $content );
 					}				
@@ -478,8 +478,8 @@ class WPGlobus_aioseop {
 				} else {
 					
 					$aiosp_description 				= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
-					$aiosp_placeholder_description  = WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);
-					$aiosp_snippet_description 		= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
+					$aiosp_placeholder_description  = $aiosp_description;
+					$aiosp_snippet_description 		= $aiosp_description;			
 				
 				}	
 				?>
@@ -492,7 +492,7 @@ class WPGlobus_aioseop {
 							if ( 'aiosp_snippet' == $name ) {
 
 								$snippet_title_2 = '';
-								if ( false !== strpos($title_format[2], '%blog_title%') ) {
+								if ( isset($title_format[2]) && false !== strpos($title_format[2], '%blog_title%') ) {
 								
 									$snippet_title_2 = ' ' . $title_format[1] . ' ' . WPGlobus_Core::text_filter(get_option('blogname'),  $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE) ;	
 									

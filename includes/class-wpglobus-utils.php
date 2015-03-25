@@ -10,7 +10,7 @@ class WPGlobus_Utils {
 	 *
 	 * @param string          $url      URL to localize
 	 * @param string          $language Language code
-	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
+	 * @param WPGlobus_Config $config   Alternative configuration (i.e. Unit Test mock object)
 	 *
 	 * @return string
 	 */
@@ -39,30 +39,40 @@ class WPGlobus_Utils {
 		$language = empty( $language ) ? $config->language : $language;
 
 		/**
-		 * This says "Do not use language code in the default URL"
+		 * `hide_default_language` means "Do not use language code in the default URL"
 		 * So, no /en/page/, just /page/
 		 */
 		if ( $language === $config->default_language && $config->hide_default_language ) {
-			$language = '';
+			$language_url_prefix = '';
+		} else {
+			/**
+			 * Language prefix looks like '/ru'
+			 */
+			$language_url_prefix = '/' . $language;
 		}
 
 		/**
-		 * Language prefix looks like '/ru/'
+		 * For the following regex, we need home_url without prefix
+		 * http://www.example.com becomes example.com
 		 */
-		$language_url_prefix = trailingslashit( '/' . $language );
+		$home_domain_tld = preg_replace( '!^https?:\/\/(?:[^\.]+\.)?([^\.\/]+\.[^\/]+.*)!', '\1', $home_url );
 
 		/**
 		 * Regex to replace current language prefix with the requested one.
-		 * @example !http://www\.example\.com/?(en|ru|pt)?/?!
+		 * We ignore http(s) and domain prefix, but we must match the domain-tld, so any external URLs
+		 * are not localized.
+		 * @example ^(https?:\/\/(?:.+\.)?example\.com)(?:\/?(?:en|ru|pt))?(\/?.*)$
 		 */
 		$re = '!' .
-		      str_replace( '.', '\.', $home_url ) .
-		      '/?(' . join( '|', $config->enabled_languages ) . ')?/?' . '!';
+		      '^(https?:\/\/(?:.+\.)?' .
+		      str_replace( '.', '\.', $home_domain_tld ) .
+		      ')(?:\/(?:' . join( '|', $config->enabled_languages ) . '))?(\/?.*)$' .
+		      '!';
 
 		/**
 		 * Replace the existing (or empty) language prefix with the requested one
 		 */
-		$localized_url = preg_replace( $re, $home_url . $language_url_prefix, $url );
+		$localized_url = preg_replace( $re, '\1' . $language_url_prefix . '\2', $url );
 
 		return $localized_url;
 	}
@@ -130,8 +140,8 @@ class WPGlobus_Utils {
 			$path          = $home . $language . '/' . str_replace( $home, '', $parsed_url['path'] . '/' );
 			$path          = str_replace( array( '///', '//' ), '/', $path );
 			$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $path . $fragment;
-		}	
-		
+		}
+
 		//				break;
 		//			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
 		//				// pre domain
@@ -319,7 +329,11 @@ class WPGlobus_Utils {
 	 */
 	public static function extract_url( $url, $host = '', $referer = '' ) {
 
-		$home         = self::parse_url( get_option( 'home' ) );
+		$referer_save = $referer;
+
+		$home_url = get_option( 'home' );
+
+		$home         = self::parse_url( $home_url );
 		$home['path'] = trailingslashit( $home['path'] );
 		$referer      = self::parse_url( $referer );
 
@@ -395,7 +409,65 @@ class WPGlobus_Utils {
 			}
 		}
 
+		/**
+		 * If DOING_AJAX, we cannot retrieve the language information from the URL,
+		 * because it's always `admin-ajax`. Therefore, we'll rely on the HTTP_REFERER.
+		 * @since 1.0.9
+		 */
+		if ( ! empty( $referer_save ) && WPGlobus_WP::is_doing_ajax() ) {
+
+			$language_in_referer = self::extract_language_from_url( $referer_save );
+
+			if ( ! empty( $language_in_referer ) ) {
+				// Found language information
+				$result['language'] = $language_in_referer;
+			}
+
+		}
+
+
 		return $result;
+	}
+
+	/**
+	 * Extract language from URL
+	 * http://example.com/ru/page/ returns 'ru'
+	 *
+	 * @param string          $url
+	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
+	 *
+	 * @return string
+	 */
+	public static function extract_language_from_url( $url = '', WPGlobus_Config $config = null ) {
+
+		$language = '';
+
+		if ( ! is_string( $url ) ) {
+			return $language;
+		}
+
+		/**
+		 * Use the global configuration is alternative not passed
+		 */
+		if ( is_null( $config ) ) {
+			$config = WPGlobus::Config();
+		}
+
+		$path = parse_url( $url, PHP_URL_PATH );
+		/**
+		 * Regex to find the language prefix.
+		 * @example !^/(en|ru|pt)/!
+		 */
+		$re = '!^' .
+		      '/(' . join( '|', $config->enabled_languages ) . ')/' . '!';
+
+		if ( preg_match( $re, $path, $match ) ) {
+			// Found language information
+			$language = $match[1];
+		}
+
+		return $language;
+
 	}
 
 	/**
