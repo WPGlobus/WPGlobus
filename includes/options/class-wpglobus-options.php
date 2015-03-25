@@ -190,9 +190,12 @@ class WPGlobus_Options {
 			$navigation_menu_placeholder = __( 'Select navigation menu', 'wpglobus' );
 		}
 
-		$desc  = __( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.', 'wpglobus' ) . '<br /><br />';	
-		$desc .= sprintf( __( 'or Add new Language %1s here %2s', 'wpglobus' ), '<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
-		
+		$desc =
+			__( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.',
+				'wpglobus' ) . '<br /><br />';
+		$desc .= sprintf( __( 'or Add new Language %1s here %2s', 'wpglobus' ),
+			'<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
+
 		$this->sections[] = array(
 			'title'  => __( 'Languages', 'wpglobus' ),
 			'icon'   => 'el-icon-wrench-alt',
@@ -203,7 +206,6 @@ class WPGlobus_Options {
 					'title'       => __( 'Enabled Languages', 'wpglobus' ),
 					'compiler'    => 'false',
 					'desc'        => __( 'The first language in the list is the default one. <br>To reorder, drag and drop with the icons at the right.', 'wpglobus' ),
-					//						'desc'        => __( 'Список доступных для вывода в меню языков, первый в списке это язык по умолчанию. Используйте иконки справа для изменения порядка.', 'wpglobus' ),
 					'subtitle'    => __( 'Uncheck to remove from the list', 'wpglobus' ),
 					'placeholder' => 'navigation_menu_placeholder',
 					'options'     => $enabled_languages,
@@ -283,7 +285,7 @@ class WPGlobus_Options {
 					'options'  => array(
 						'show_selector' => __( 'Enable', 'wpglobus' )
 					),
-				),				
+				),
 				array(
 					'id'       => 'css_editor',
 					'type'     => 'ace_editor',
@@ -319,6 +321,49 @@ class WPGlobus_Options {
 				)
 			)
 		);
+
+		/**
+		 *    SECTION: Post types
+		 */
+		$post_types = get_post_types( array( '_builtin' => true ) );
+
+		$fields = array(
+			array(
+				'id'    => 'description',
+				'type'  => 'info',
+				'title' => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
+				'style' => 'info',
+			),
+		);
+
+		$default         = array();
+		$open_post_types = array();
+		foreach ( $post_types as $post_type ) {
+			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ) ) ) {
+				$open_post_types[ $post_type ] = $post_type;
+				$default[ $post_type ]         = true;
+			}
+		}
+
+		$fields[] = array(
+			'id'       => 'post_type',
+			'type'     => 'checkbox',
+			'compiler' => false,
+			'default'  => $default,
+			'options'  => $open_post_types
+		);
+
+		$fields[] = array(
+			'id'   => 'custom_post_types',
+			'type' => 'post_types'
+		);
+
+		$this->sections[] = array(
+			'title'  => __( 'Post types', 'wpglobus' ),
+			'icon'   => 'el-icon-th-list',
+			'fields' => $fields
+		);
+
 
 	}
 

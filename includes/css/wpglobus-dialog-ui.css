@@ -5,12 +5,27 @@
 	margin-top:10px;
 	cursor:pointer;
 }
-.wpglobus_dialog_icon:before {
+.wpglobus_dialog_settings {
+	margin-top:0;	
+}
+.wpglobus_dialog_settings:before {
+	/* margin-top:5px; */
+	color:#00f;
+	display: inline-block;
+	font-family: 'dashicons';
+	content: "\f107";
+	font-size: 20px;
+}
+.wpglobus_dialog_start:before {
 	color:#00f;
 	display: inline-block;
 	font-family: 'dashicons';
 	content: "\f319";
 	font-size: 20px;
+}
+.wpglobus_dialog_start_hidden {
+	visibility:hidden;
+	width:0;
 }
 .wpglobus-dialog .ui-dialog-title:before {
 	color:#00f;
@@ -79,7 +94,7 @@
 	height: 20px;
 	display:none;
 }
-.ui-dialog .ui-dialog-content {
+.wpglobus-dialog-wrapper.ui-dialog-content.ui-widget-content {
 	position: relative;
 	border: 0;
 	padding: .5em 1em;

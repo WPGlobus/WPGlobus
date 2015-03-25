@@ -122,6 +122,17 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.9 =
+* ADDED:
+	* Admin interface to enable/disable WPGlobus for selected metaboxes.
+	* Admin interface to enable/disable WPGlobus for selected Custom Post Types.
+* FIXED:
+	* URL localization with or without `www`, regardless of its presence in `home_url`.
+	* Admin language tabs work correctly with custom post types that don't have 'title' or 'editor'.
+	* All in One SEO pack plugin works correctly on the `post-new.php` admin page.
+	* Language is set correctly during AJAX calls, using `HTTP_REFERER` info.
+	* Language is retrieved from the current URL before other plugins load their translations.
+	
 = 1.0.8.1 =
 * FIXED:
 	* Reset hierarchical taxonomies checkmarks after save post or update post's page.
