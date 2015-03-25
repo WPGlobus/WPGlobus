@@ -561,13 +561,13 @@ jQuery(document).ready(function () {
 					});						
 				});
 			
-                $('.wpglobus-taxonomy-tabs-ul').insertAfter('#ajax-response');
+                $('.wpglobus-taxonomy-tabs').insertAfter('#ajax-response');
 
                 // Make class wrap as tabs container
                 // tabs on
                 $('.wrap').tabs();			
 				
-				$('body').on('click', '.wpglobus-taxonomy-tabs-ul li', function(event){
+				$('body').on('click', '.wpglobus-taxonomy-tabs li', function(event){
 					var $t = $(this);
 					var language = $t.data('language');
 					$('.wpglobus-element').addClass('hidden');
