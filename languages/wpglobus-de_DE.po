@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-24 21:52-0500\n"
-"PO-Revision-Date: 2015-03-24 21:53-0500\n"
+"POT-Creation-Date: 2015-03-24 21:55-0500\n"
+"PO-Revision-Date: 2015-03-24 21:55-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: de_DE\n"
@@ -456,6 +456,10 @@ msgid "Default language"
 msgstr ""
 
 #~ msgid "About WPGlobus"
+#~ msgstr "Über WPGlobus"
+
+#, fuzzy
+#~ msgid "What is WPGlobus"
 #~ msgstr "Über WPGlobus"
 
 #~ msgid "Go to WPGlobus Settings"
