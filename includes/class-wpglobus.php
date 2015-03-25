@@ -175,6 +175,8 @@ class WPGlobus {
 		 */
 		if ( is_admin() ) {
 
+			add_action( 'admin_body_class', array( $this, 'on_add_admin_body_class' ) );
+			
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
@@ -467,7 +469,7 @@ class WPGlobus {
 			      data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc"
 			      data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
-			<ul class="wpglobus-wpseo-tabs-ul">    <?php
+			<ul class="wpglobus-wpseo-tabs-list">    <?php
 				$order = 0;
 				foreach ( self::Config()->open_languages as $language ) { ?>
 					<li id="wpseo-link-tab-<?php echo $language; ?>"
@@ -1950,19 +1952,20 @@ class WPGlobus {
 		if ( $this->disabled_entity() ) {
 			return;
 		} 		?>
-
-		<ul class="wpglobus-taxonomy-tabs-ul">    <?php
-			foreach ( self::Config()->open_languages as $language ) {
-				$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
-						?>
-				<li id="wpglobus-link-tab-<?php echo $language; ?>" class="" 
-						data-language="<?php echo $language; ?>"
-						data-name="<?php echo WPGlobus_Core::text_filter($object->name, $language, $return); ?>"
-						data-description="<?php echo WPGlobus_Core::text_filter($object->description, $language, $return); ?>">
-					<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
-				</li> <?php
-			} ?>
-		</ul>    <?php
+		<div class="wpglobus-taxonomy-tabs">
+			<ul class="wpglobus-taxonomy-tabs-list">    <?php
+				foreach ( self::Config()->open_languages as $language ) {
+					$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+							?>
+					<li id="wpglobus-link-tab-<?php echo $language; ?>" class="" 
+							data-language="<?php echo $language; ?>"
+							data-name="<?php echo WPGlobus_Core::text_filter($object->name, $language, $return); ?>"
+							data-description="<?php echo WPGlobus_Core::text_filter($object->description, $language, $return); ?>">
+						<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+					</li> <?php
+				} ?>
+			</ul>    
+		</div><?php
 	}
 
 	/**
@@ -2284,6 +2287,19 @@ class WPGlobus {
 
 	}
 
+	/**
+	 * Add class to body in admin
+	 * 
+	 * @since 1.0.10
+	 * @see admin_body_class filter
+	 *
+	 * @param string $classes
+	 * @return string
+	 */
+	function on_add_admin_body_class($classes) {
+		return $classes . ' wpglobus-wp-admin';
+	}	
+	
 	/**
 	 * Add language selector to adminbar
 	 * @since 1.0.8
