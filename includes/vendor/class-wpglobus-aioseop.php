@@ -429,7 +429,7 @@ class WPGlobus_aioseop {
 		?>
 		
 		<div id="wpglobus-aioseop-tabs">
-			<ul class="wpglobus-aioseop-tabs-ul">    <?php
+			<ul class="wpglobus-aioseop-tabs-list">    <?php
 				$order = 0;
 				foreach ( WPGlobus::Config()->enabled_languages as $language ) { ?>
 					<li id="aioseop-link-tab-<?php echo $language; ?>"
