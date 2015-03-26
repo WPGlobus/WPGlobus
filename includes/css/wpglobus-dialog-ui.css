@@ -2,11 +2,6 @@
  * Admin dialog styles
  * @package WPGlobus
  */
-.wpglobus-wp-admin {
-  /* Dialog Tabs */
-  /* Overlays */
-  /* ui-dialog  wpglobus-dialog */
-}
 .wpglobus-wp-admin .wpglobus_dialog_icon {
   margin-top: 10px;
   cursor: pointer;
@@ -32,8 +27,8 @@
   visibility: hidden;
   width: 0;
 }
-.wpglobus-wp-admin .wpglobus-dialog-tabs {
-  margin-top: 50px;
+.wpglobus-wp-admin .wpglobus-dialog-tabs-list {
+  min-height: 3em;
 }
 .wpglobus-wp-admin .wpglobus-dialog-tabs li a,
 .wpglobus-wp-admin .wpglobus-dialog-tabs ul li {
@@ -75,11 +70,9 @@
   background: linear-gradient(to right, #f9f9f9 0%, #ececec 100%);
   border: 1px solid #ddd;
   border-bottom: 0;
-  font-size: 15px;
-  font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
   font-weight: normal;
-  height: 29px;
-  line-height: 29px;
+  height: 2em;
+  line-height: 2em;
   margin-right: 5px;
   padding: 0 10px;
   text-decoration: none;
@@ -111,12 +104,7 @@
   margin-bottom: 10px;
 }
 .wpglobus-wp-admin .wpglobus-dialog .ui-dialog-buttonpane button {
-  margin: 0 .4em 0 0;
   cursor: pointer;
-}
-.wpglobus-wp-admin .wpglobus-dialog #wpglobus-dialog-form {
-  height: auto;
-  margin-top: -50px;
 }
 .wpglobus-wp-admin .wpglobus-dialog .ui-dialog-titlebar {
   cursor: move;
@@ -128,6 +116,58 @@
   background: none;
   overflow: auto;
 }
+.wpglobus-wp-admin .wpglobus-dialog .ui-tabs .ui-tabs-panel {
+  border-width: 0;
+  padding: 0;
+  background: transparent;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-tabs .ui-tabs-nav {
+  margin: 0;
+  padding: 0;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-corner-all {
+  border-radius: 0;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-widget-header {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-weight: normal;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-widget-content {
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-widget {
+  font-family: inherit;
+  font-size: inherit;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-widget textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-tabs {
+  padding: 0;
+}
+.wpglobus-wp-admin .wpglobus-dialog .wpglobus-button-cancel,
+.wpglobus-wp-admin .wpglobus-dialog .wpglobus-button-save {
+  border-radius: 3px;
+  padding: .5em 1em;
+  border: none;
+  margin-right: 1em;
+}
+.wpglobus-wp-admin .wpglobus-dialog .wpglobus-button-save {
+  color: #ffffff;
+  background: #2ea2cc;
+}
+.wpglobus-wp-admin .wpglobus-dialog .wpglobus-button-cancel {
+  color: #000;
+  background: #eee;
+}
+.wpglobus-wp-admin .wpglobus-dialog .ui-button-text-only .ui-button-text {
+  padding: 0;
+}
 .wpglobus-wp-admin .ui-widget-overlay {
   position: fixed;
   top: 0;
@@ -138,15 +178,11 @@
 .wpglobus-wp-admin .ui-widget-overlay {
   background: #aaaaaa url("images/ui-bg_flat40x100.png") 50% 50% repeat-x;
   opacity: .3;
-  filter: alpha(opacity=30);
-  /* support: IE8 */
 }
 .wpglobus-wp-admin .ui-widget-shadow {
   margin: -8px 0 0 -8px;
   padding: 8px;
   opacity: .3;
-  filter: alpha(opacity=30);
-  /* support: IE8 */
   border-radius: 8px;
 }
 .wpglobus-wp-admin .ui-dialog.wpglobus-dialog {
@@ -177,7 +213,8 @@
 }
 .wpglobus-wp-admin .ui-dialog.wpglobus-dialog .ui-dialog-content textarea {
   width: 100%;
-  height: 8em !important;
+  min-height: 8em !important;
+  margin-bottom: 1em;
 }
 .wpglobus-wp-admin .ui-dialog.wpglobus-dialog .ui-resizable-se {
   width: 12px;
@@ -186,4 +223,4 @@
   bottom: -5px;
   background-position: 16px 16px;
 }
-/* .wpglobus-wp-admin */
+/*# sourceMappingURL=wpglobus-dialog-ui.css.map */

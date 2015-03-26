@@ -24,12 +24,6 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs .titlediv-wpglobus {
   position: relative;
 }
-.wpglobus-wp-admin .wpglobus-post-body-tabs,
-.wpglobus-wp-admin #wpglobus-aioseop-tabs,
-.wpglobus-wp-admin #wpglobus-wpseo-tabs,
-.wpglobus-wp-admin .wpglobus-taxonomy-tabs {
-  /* .ui-widget-content .ui-widget-header { */
-}
 .wpglobus-wp-admin .wpglobus-post-body-tabs .tabs-nav ul,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .tabs-nav ul,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .tabs-nav ul,
@@ -71,11 +65,9 @@
   background: linear-gradient(to right, #f9f9f9 0%, #ececec 100%);
   border: 1px solid #ddd;
   border-bottom: 0;
-  font-size: 15px;
-  font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
   font-weight: normal;
-  height: 29px;
-  line-height: 29px;
+  height: 2em;
+  line-height: 2em;
   margin-right: 5px;
   padding: 0 10px;
   text-decoration: none;
@@ -127,9 +119,55 @@
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-aioseop-tabs-list,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-aioseop-tabs-list,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-aioseop-tabs-list {
-  border: 0;
+  border: none;
+  border-bottom: 1px solid #dddddd;
   background: transparent;
-  margin-bottom: 50px;
+  min-height: 3em;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs .ui-corner-all,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs .ui-corner-all,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .ui-corner-all,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs .ui-corner-all {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-widget-content,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-widget-content,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-widget-content,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-widget-content {
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-widget,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-widget,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-widget,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-widget {
+  font-family: inherit;
+  font-size: inherit;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs {
+  padding: inherit;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs .ui-tabs-nav {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs .ui-tabs-panel {
+  border-width: 0;
+  padding: inherit;
+  background: inherit;
 }
 .wpglobus-wp-admin #edittag #cat-tabs .form-field {
   margin: 0 0 10px;
@@ -166,9 +204,6 @@
 }
 .wpglobus-wp-admin .wpglobus-edit-slug-box {
   height: 24px;
-}
-.wpglobus-wp-admin #wpglobus-wpseo-tabs {
-  margin-top: -45px;
 }
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseosnippet {
   font-family: Arial, Helvetica, sans-serif;
@@ -207,4 +242,4 @@
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults p {
   font-size: 13px !important;
 }
-/* .wpglobus-wp-admin */
+/*# sourceMappingURL=wpglobus-admin-tabs.css.map */

@@ -1292,7 +1292,7 @@ class WPGlobus {
 
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
 
-		do_action('wpglobus_before_admin_print_styles');
+//		do_action('wpglobus_before_admin_print_styles');
 
 		wp_register_style(
 			'wpglobus-admin',
@@ -1302,15 +1302,7 @@ class WPGlobus {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-admin' );
-		
-		wp_register_style(
-			'dialog-ui',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",				
-			array(),
-			WPGLOBUS_VERSION,
-			'all'
-		);		
-		wp_enqueue_style( 'dialog-ui' );		
+
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
@@ -1337,8 +1329,25 @@ class WPGlobus {
 					'all'
 				);
 				wp_enqueue_style( 'wpglobus-admin-tabs' );
+
+				wp_enqueue_style(
+					'dialog-ui',
+					self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",
+					array(),
+					WPGLOBUS_VERSION,
+					'all'
+				);
+
 			}
 		}
+
+//		wp_enqueue_style(
+//			'bad-ui',
+//			self::$PLUGIN_DIR_URL . "includes/css/bad-jquery-ui.min.css",
+//			array(),
+//			(string)time(),
+//			'all'
+//		);
 
 	}
 
@@ -2180,8 +2189,8 @@ class WPGlobus {
 			 * Output dialog form for window.WPGlobusDialogApp
 			 */ 
 			?>
-			<div id="wpglobus-dialog-wrapper" title="" class="hidden wpglobus-dialog-wrapper">
-				<form id="wpglobus-dialog-form" style="">	
+			<div id="wpglobus-dialog-wrapper" class="hidden wpglobus-dialog-wrapper">
+				<form id="wpglobus-dialog-form">
 					<div id="wpglobus-dialog-tabs" class="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php
 							$order = 0;
@@ -2198,7 +2207,7 @@ class WPGlobus {
 
 						foreach ( WPGlobus::Config()->open_languages as $language ) { 	?>
 							<div id="dialog-tab-<?php echo $language; ?>" class="wpglobus-dialog-general">
-								<textarea placeholder="" style="height:50%;" name="wpglobus-dialog-<?php echo $language; ?>" 
+								<textarea name="wpglobus-dialog-<?php echo $language; ?>"
 									id="wpglobus-dialog-<?php echo $language; ?>" class="wpglobus_dialog_textarea textarea"
 									data-language="<?php echo $language; ?>"
 									data-order="save_dialog"></textarea>

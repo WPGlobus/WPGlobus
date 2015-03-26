@@ -150,13 +150,21 @@ var WPGlobusDialogApp;
 		},	
 		dialog : $('#wpglobus-dialog-wrapper').dialog({
 			autoOpen: false,
-			height: 250,
+			//height: 250,
 			width: 650,
 			modal: true,
 			dialogClass: 'wpglobus-dialog',
 			buttons: [
-				{ text:'Save', click:function(){api.saveDialog(); api.dialog.dialog('close');} },
-				{ text:'Cancel', click: function(){api.dialog.dialog('close');} }
+				{
+                    text:'Save',
+                    class: 'wpglobus-button-save',
+                    click:function(){api.saveDialog(); api.dialog.dialog('close');}
+                },
+				{
+                    text:'Cancel',
+                    class: 'wpglobus-button-cancel',
+                    click: function(){api.dialog.dialog('close');}
+                }
 			],
 			open: function() {
 				$('.wpglobus-dialog .ui-dialog-title').text(api.option.title);
