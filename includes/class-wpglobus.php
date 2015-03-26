@@ -1292,6 +1292,8 @@ class WPGlobus {
 
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
 
+		do_action('wpglobus_before_admin_print_styles');
+
 		wp_register_style(
 			'wpglobus-admin',
 			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-admin$suffix.css",
