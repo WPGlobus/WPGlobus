@@ -96,6 +96,14 @@ class WPGlobus_Config {
 	public $locale = array();
 
 	/**
+	 * Stores enabled locales
+     * @since 1.0.10
+	 *
+	 * @var array
+	 */
+	public $enabled_locale = array();
+	 
+	/**
 	 * Stores version and update from WPGlobus Mini info
 	 * @var array
 	 */
@@ -269,6 +277,28 @@ class WPGlobus_Config {
 		}
 	}
 
+	/**
+	 * Check for enabled locale
+	 *
+	 * @since 1.0.10
+	 *
+	 * @param string $locale
+	 * @return boolean
+	 */
+	function is_enabled_locale( $locale ) {
+		
+		if ( in_array( $locale, $this->enabled_locale ) ) {
+			return true;	
+		}	
+		/*
+		foreach ( $this->enabled_locale as $language => $value ) {
+			if ( $locale == $value ) {
+				return true;
+			}
+		}*/
+		return false;
+	}
+	
 	/**
 	 * Load textdomain
 	 * @since 1.0.0
@@ -470,7 +500,14 @@ class WPGlobus_Config {
 		 * Get locales
 		 */
 		$this->locale = get_option( $this->option_locale );
-
+		
+		/**
+		 * Get enabled locales
+		 */
+		foreach( $this->enabled_languages as $language ) {
+			$this->enabled_locale[] = $this->locale[$language];
+		}
+		
 		/**
 		 * Get en_language_name
 		 */
