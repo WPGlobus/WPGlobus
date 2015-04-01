@@ -2330,11 +2330,11 @@ class WPGlobus {
 		$wp_admin_bar->add_menu( array(
 			'id'        => 'wpglobus-language-select',
 			'parent'    => 'top-secondary',
-			'title'     => WPGlobus::Config()->language_name[WPGlobus::Config()->language] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[WPGlobus::Config()->language]  . '" /></span>',
+			'title'     => '<a id="wpglobus-default-locale" style="color:#fff;" href="#" >' . WPGlobus::Config()->language_name[WPGlobus::Config()->language] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[WPGlobus::Config()->language]  . '" /></span></a>',
 			'href'      => '',
 			'meta'      => array(
 				'class'     => '',
-				'title'     => __('My Account'),
+				'title'     => __('My Account')
 			),
 		) );	
 		
@@ -2383,7 +2383,10 @@ class WPGlobus {
 <!--suppress AnonymousFunctionJS -->
 		<script type="text/javascript">
 //<![CDATA[
-	jQuery(document).ready(function($){	
+	jQuery(document).ready(function($){
+		$('#wpglobus-default-locale').on('click',function(e){
+			wpglobus_select_lang('<?php echo WPGlobus::Config()->locale[WPGlobus::Config()->language]; ?>');
+		});
 		wpglobus_select_lang = function(locale) {
 			$.post(ajaxurl, {
 					action: 'WPGlobus_process_ajax',
