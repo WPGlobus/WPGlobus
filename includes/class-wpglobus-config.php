@@ -329,6 +329,11 @@ class WPGlobus_Config {
 	 */
 	function _set_languages() {
 		// Names for languages in the corresponding language, add more if needed
+		/**
+		 * Usefull links
+		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+		 */
 		$this->language_name['en'] = "English";
 		$this->language_name['ru'] = "Русский";
 		$this->language_name['de'] = "Deutsch";
