@@ -328,9 +328,11 @@ class WPGlobus_Config {
 	 *    Set languages by default
 	 */
 	function _set_languages() {
-		// Names for languages in the corresponding language, add more if needed
+
 		/**
-		 * Usefull links
+		 * Names, flags and locales
+		 *
+		 * Useful links
 		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 		 */

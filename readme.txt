@@ -130,9 +130,11 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 = 1.0.10 =
 * FIXED:
 	* Admin CSS corrected so it's not easily broken by themes who use their own jQueryUI styling.
-	* Checking case in admin for set locale which does not set in WPGlobus
-* EXTRA
-	* Checked for WPSeo 2.0 compatibility
+	* Modified the Admin language switcher's incorrect behavior occurred in some cases.
+	* Corrected pt_PT and pt_BR names, locales and flags.
+* COMPATIBILITY:
+	* WordPress 4.2-beta3
+	* WordPress SEO 2.0.1
 	
 = 1.0.9 =
 * ADDED:
