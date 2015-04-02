@@ -345,6 +345,7 @@ class WPGlobus_Config {
 		$this->language_name['vi'] = "Tiếng Việt";
 		$this->language_name['ar'] = "العربية";
 		$this->language_name['pt'] = "Português";
+		$this->language_name['br'] = "Português do Brazil";
 		$this->language_name['pl'] = "Polski";
 		$this->language_name['gl'] = "Galego";
 
@@ -364,6 +365,7 @@ class WPGlobus_Config {
 		$this->en_language_name['vi'] = "Vietnamese";
 		$this->en_language_name['ar'] = "Arabic";
 		$this->en_language_name['pt'] = "Portuguese";
+		$this->en_language_name['br'] = "Portuguese Brazil";
 		$this->en_language_name['pl'] = "Polish";
 		$this->en_language_name['gl'] = "Galician";
 
@@ -383,7 +385,8 @@ class WPGlobus_Config {
 		$this->locale['es'] = "es_ES";
 		$this->locale['vi'] = "vi";
 		$this->locale['ar'] = "ar";
-		$this->locale['pt'] = "pt_BR";
+		$this->locale['pt'] = "pt_PT";
+		$this->locale['br'] = "pt_BR";
 		$this->locale['pl'] = "pl_PL";
 		$this->locale['gl'] = "gl_ES";
 
@@ -403,8 +406,8 @@ class WPGlobus_Config {
 		$this->flag['es'] = 'es.png';
 		$this->flag['vi'] = 'vn.png';
 		$this->flag['ar'] = 'arle.png';
-		#$this->flag['ar'] = 'argm.jpg';
-		$this->flag['pt'] = 'br.png';
+		$this->flag['pt'] = 'pt.png';
+		$this->flag['br'] = 'br.png';
 		$this->flag['pl'] = 'pl.png';
 		$this->flag['gl'] = 'galego.png';
 
