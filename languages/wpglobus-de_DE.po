@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-27 08:05-0500\n"
-"PO-Revision-Date: 2015-03-27 08:05-0500\n"
+"POT-Creation-Date: 2015-04-01 21:30-0500\n"
+"PO-Revision-Date: 2015-04-01 21:30-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: de_DE\n"
@@ -113,15 +113,15 @@ msgstr "Änderungen speichern"
 msgid "Delete Language"
 msgstr "Sprache löschen"
 
-#: includes/class-wpglobus-filters.php:604
+#: includes/class-wpglobus-filters.php:613
 msgid "Error while saving."
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:607
+#: includes/class-wpglobus-filters.php:616
 msgid "g:i:s a"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:611
+#: includes/class-wpglobus-filters.php:620
 #, php-format
 msgid "Draft saved at %s."
 msgstr ""
