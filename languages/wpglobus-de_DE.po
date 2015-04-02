@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-03-24 21:55-0500\n"
-"PO-Revision-Date: 2015-03-24 21:55-0500\n"
+"POT-Creation-Date: 2015-04-01 21:30-0500\n"
+"PO-Revision-Date: 2015-04-01 21:30-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: de_DE\n"
@@ -113,15 +113,15 @@ msgstr "Änderungen speichern"
 msgid "Delete Language"
 msgstr "Sprache löschen"
 
-#: includes/class-wpglobus-filters.php:604
+#: includes/class-wpglobus-filters.php:613
 msgid "Error while saving."
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:607
+#: includes/class-wpglobus-filters.php:616
 msgid "g:i:s a"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:611
+#: includes/class-wpglobus-filters.php:620
 #, php-format
 msgid "Draft saved at %s."
 msgstr ""
@@ -183,27 +183,27 @@ msgstr "Titel"
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:880
+#: includes/class-wpglobus.php:882
 msgid "You cannot disable the first enabled language."
 msgstr "Sie können die erste aktivierte Sprache nicht deaktiviert werden."
 
-#: includes/class-wpglobus.php:1033
+#: includes/class-wpglobus.php:1035
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2026
+#: includes/class-wpglobus.php:2040
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2107
+#: includes/class-wpglobus.php:2121
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:2310
+#: includes/class-wpglobus.php:2337
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2344
+#: includes/class-wpglobus.php:2371
 #, fuzzy
 msgid "Add"
 msgstr "Fügen Sie neue Sprache"
@@ -396,7 +396,7 @@ msgstr "HINWEIS: Sie können die Standardsprache kann nicht gelöscht werden."
 #: includes/options/class-wpglobus-options.php:334
 #, fuzzy
 msgid "Uncheck to disable WPGlobus"
-msgstr "Deaktivieren Sie die Option, um aus der Liste entfernen"
+msgstr "WPGlobus"
 
 #: includes/options/class-wpglobus-options.php:362
 msgid "Post types"

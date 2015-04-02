@@ -3,260 +3,240 @@
  * @package WPGlobus
  */
 
-// TinyMCE
-#post-body .ui-widget-content input.like-default-title {
-	padding: 3px 8px;
-	font-size: 1.7em;
-	line-height: 100%;
-	width: 100%;
-	outline: none;
-}
+.wpglobus-wp-admin {
 
-.wp-editor-container {
-	border: 1px solid #ccc;
-}
+	// TinyMCE
+	#post-body .wpglobus-post-body-tabs .ui-widget-content input.like-default-title {
+		padding: 3px 8px;
+		font-size: 1.7em;
+		line-height: 100%;
+		width: 100%;
+		outline: none;
+	}
 
-.titlediv {
-	margin-bottom: 20px;
-}
+	.wpglobus-post-body-tabs {
 
-.mceIframeContainer iframe {
-	min-height: 150px !important;
-}
+		.titlediv {
+			margin-bottom: 20px;
+		}
 
-// Tabs
-.tabs-nav {
-	border-bottom: 1px solid #ccc;
-	margin: 10px 0 20px 0;
-	width: 100%;
-	height: 30px;
-}
+		.mceIframeContainer iframe {
+			min-height: 150px !important;
+		}
 
-.tabs-separator {
-	border-bottom: 1px solid #ccc;
-	margin: 10px 0 20px 0;
-	width: 100%;
-	height: 15px;
-}
+		.wp-editor-container {
+			border: 1px solid #ccc;
+		}
 
-.ui-tabs .tabs-nav ul {
-	list-style-type: none;
-	margin: 0 10px;
-	padding: 0;
-}
+		.titlediv-wpglobus {
+			position: relative;
+		}
 
-.ui-tabs li a,
-.ui-tabs ul li {
-	float: left;
-	margin: 0;
-}
+	}
 
-.ui-tabs li.ui-state-default {
-	border: 0;
-	background: transparent;
-}
+	// Post body Tabs, All in one SEO pack Tabs, WPSeo Tabs, Taxonomy Tabs
+	.wpglobus-post-body-tabs, #wpglobus-aioseop-tabs, #wpglobus-wpseo-tabs, .wpglobus-taxonomy-tabs {
+		.tabs-nav ul {
+			list-style-type: none;
+			margin: 0 10px;
+			padding: 0;
+		}
 
-.ui-tabs ul li.ui-state-default a {
-	display: block;
-	color: #999;
+		li a, ul li {
+			float: left;
+			margin: 0;
+		}
 
-	background: #f9f9f9;
-	background: -moz-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #f9f9f9), color-stop(100%, #ececec));
-	background: -webkit-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
-	background: -o-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
-	background: -ms-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
-	background: linear-gradient(to right, #f9f9f9 0%, #ececec 100%);
+		li.ui-state-default {
+			border: 0;
+			background: transparent;
+		}
 
-	border: 1px solid #ddd;
-	border-bottom: 0;
-	font-size: 15px;
-	font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
-	font-weight: normal;
-	height: 29px;
-	line-height: 29px;
-	margin-right: 5px;
-	padding: 0 10px;
-	text-decoration: none;
-	text-shadow: #fff 0 1px 1px;
-	-moz-border-radius-topleft: 3px;
-	-webkit-border-top-left-radius: 3px;
-	border-top-left-radius: 3px;
-	-moz-border-radius-topright: 3px;
-	-webkit-border-top-right-radius: 3px;
-	border-top-right-radius: 3px;
-}
+		ul li.ui-state-default a {
+			display: block;
+			color: #999;
 
-.default-label {
-	font-size: 13px;
-	font-family: Trebuchet, Georgia, sans-serif;
-}
+			background: #f9f9f9;
+			background: -moz-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%, #f9f9f9), color-stop(100%, #ececec));
+			background: -webkit-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+			background: -o-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+			background: -ms-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+			background: linear-gradient(to right, #f9f9f9 0%, #ececec 100%);
 
-.ui-tabs ul li a:hover {
-	color: #666;
-}
+			border: 1px solid #ddd;
+			border-bottom: 0;
+			font-weight: normal;
+			height: 2em;
+			line-height: 2em;
+			margin-right: 5px;
+			padding: 0 10px;
+			text-decoration: none;
+			text-shadow: #fff 0 1px 1px;
+			-moz-border-radius-topleft: 3px;
+			-webkit-border-top-left-radius: 3px;
+			border-top-left-radius: 3px;
+			-moz-border-radius-topright: 3px;
+			-webkit-border-top-right-radius: 3px;
+			border-top-right-radius: 3px;
+		}
 
-.ui-tabs ul li.ui-state-active a {
-	background: none;
-	border: 1px solid #ccc;
-	border-bottom-color: #fff;
-	color: #464646;
-	margin-bottom: -1px;
-	font-weight: normal;
-}
+		ul li a:hover {
+			color: #666;
+		}
 
-// Don't use this rule because of the conflict with autocomplete Focus Keyword in wpseo metabox
-//.ui-widget-content {
-//    border: 0;
-//    background: transparent;
-//}
+		ul li.ui-state-active a {
+			background: none;
+			border: 1px solid #ccc;
+			border-bottom-color: #fff;
+			color: #464646;
+			margin-bottom: -1px;
+			font-weight: normal;
+		}
 
-// Don't use this rule because of the conflict with wpglobus dialog buttons Save&Cancel
-//.ui-widget-content .ui-state-hover {
-//	border: 0;
-//	background: transparent;
-//	margin: 0 0 -1px;
-//	font-weight: normal;
-//}
+		ul li.ui-state-active a {
+			background: none;
+			border: 1px solid #ccc;
+			border-bottom-color: #fff;
+			color: #464646;
+			margin-bottom: -1px;
+			font-weight: normal;
+		}
 
-.ui-widget-content .ui-widget-header {
-	border: 0;
-	background: transparent;
-	margin-bottom: 50px;
-}
+		.wpglobus-post-body-tabs-list, .wpglobus-wpseo-tabs-list, .wpglobus-aioseop-tabs-list {
+			border: none;
+			border-bottom: 1px solid #dddddd;
+			background: transparent;
 
-// form-field description
-#edittag #cat-tabs .form-field {
-	margin: 0 0 10px;
-	padding: 8px;
-}
+			// To guarantee some space at the bottom
+			min-height: 3em;
+		}
 
-#edittag #cat-tabs .form-field p {
-	font-size: 12px;
-	font-style: italic;
-	font-family: sans-serif;
-	color: #666;
-	margin: 4px 0 5px;
-}
+		.ui-corner-all {
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+			border-top-right-radius: 0;
+			border-top-left-radius: 0;
+		}
 
-#edittag #cat-tabs label {
-	display: block;
-}
+		&.ui-widget-content {
+			border: none;
+			background: transparent;
+			color: inherit;
+		}
 
-.post-excerpt {
-	margin: 0;
-	height: 4em;
-	width: 98%;
-}
+		&.ui-widget {
+			font-family: inherit;
+			font-size: inherit;
+		}
 
-.titlediv-wpglobus {
-	position: relative;
-}
+		&.ui-tabs {
+			padding: inherit;
+			.ui-tabs-nav {
+				margin: 0 0 1em 0;
+				padding: 0;
+			}
+			.ui-tabs-panel {
+				border-width: 0;
+				padding: inherit;
+				background: inherit;
+			}
+		}
 
-#poststuff .titlewrap-wpglobus {
-	-moz-border-bottom-colors: none;
-	-moz-border-left-colors: none;
-	-moz-border-right-colors: none;
-	-moz-border-top-colors: none;
-	border-image-outset: 0 0 0 0;
-	border-image-repeat: stretch stretch;
-	border-image-slice: 100% 100% 100% 100%;
-	border-image-source: none;
-	border-image-width: 1 1 1 1;
-	border-left-color-ltr-source: physical;
-	border-left-color-rtl-source: physical;
-	border-left-color-value: -moz-use-text-color;
-	border-left-style-ltr-source: physical;
-	border-left-style-rtl-source: physical;
-	border-left-style-value: none;
-	border-left-width-ltr-source: physical;
-	border-left-width-rtl-source: physical;
-	border-left-width-value: 0;
-	border-right-color-ltr-source: physical;
-	border-right-color-rtl-source: physical;
-	border-right-color-value: -moz-use-text-color;
-	border-right-style-ltr-source: physical;
-	border-right-style-rtl-source: physical;
-	border-right-style-value: none;
-	border-right-width-ltr-source: physical;
-	border-right-width-rtl-source: physical;
-	border-right-width-value: 0;
-	border-top: 0 none -moz-use-text-color;
-	border-bottom: 0 none -moz-use-text-color;
-	padding: 0;
-}
+	}
 
-.titlediv-wpglobus .title_wpglobus {
-	background-color: #fff;
-	font-size: 1.7em;
-	height: 1.7em;
-	line-height: 100%;
-	margin: 0;
-	outline: -moz-use-text-color none 0;
-	padding: 3px 8px;
-	width: 100%;
-}
+	// form-field description
+	#edittag #cat-tabs .form-field {
+		margin: 0 0 10px;
+		padding: 8px;
+	}
 
-.postdivrich-wpglobus .wp-editor-tools {
-	background-color: #f1f1f1;
-	padding-top: 20px;
-}
+	#edittag #cat-tabs .form-field p {
+		font-size: 12px;
+		font-style: italic;
+		font-family: sans-serif;
+		color: #666;
+		margin: 4px 0 5px;
+	}
 
-.wpglobus-edit-slug-box {
-	height: 24px;
-}
+	#edittag #cat-tabs label {
+		display: block;
+	}
 
-// Tabs at edit-tags.php screen
-.edit-tags-php .wpglobus-post-tabs-ul {
-	padding-bottom: 1px;
-}
+	.post-excerpt {
+		margin: 0;
+		height: 4em;
+		width: 98%;
+	}
 
-// metabox
-#wpglobus-wpseo-tabs {
-	margin-top: -45px;
-}
+	.titlediv-wpglobus .title_wpglobus {
+		background-color: #fff;
+		font-size: 1.7em;
+		height: 1.7em;
+		line-height: 100%;
+		margin: 0;
+		outline: -moz-use-text-color none 0;
+		padding: 3px 8px;
+		width: 100%;
+	}
 
-.wpglobus-wpseosnippet {
-	font-family: Arial, Helvetica, sans-serif;
-	font-style: normal;
-}
+	.postdivrich-wpglobus .wp-editor-tools {
+		background-color: #f1f1f1;
+		padding-top: 20px;
+	}
 
-.wpglobus-wpseosnippet .title {
-	color: #1e0fbe;
-	display: block;
-	font-size: 18px !important;
-	line-height: 1.2;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 512px;
-}
+	.wpglobus-edit-slug-box {
+		height: 24px;
+	}
 
-.wpglobus-wpseosnippet .url {
-	color: #006621;
-	font-size: 13px;
-	line-height: 16px;
-}
+	/* WPSEO metabox */
+	#wpglobus-wpseo-tabs {
+		//    margin-top: -45px;
 
-.wpglobus-wpseosnippet .desc {
-	font-size: small;
-	line-height: 1.4;
-	word-wrap: break-word;
-}
+		.wpglobus-wpseosnippet {
+			font-family: Arial, Helvetica, sans-serif;
+			font-style: normal;
+		}
 
-.wpglobus-focuskwresults ul {
-	margin: 0;
-}
+		.wpglobus-wpseosnippet .title {
+			color: #1e0fbe;
+			display: block;
+			font-size: 18px !important;
+			line-height: 1.2;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 512px;
+		}
 
-.wpglobus-focuskwresults li {
-	float: none !important;
-	list-style-type: disc;
-	margin: 0 0 0 20px !important;
-}
+		.wpglobus-wpseosnippet .url {
+			color: #006621;
+			font-size: 13px;
+			line-height: 16px;
+		}
 
-.wpglobus-focuskwresults li, .wpglobus-focuskwresults p {
-	font-size: 13px !important;
+		.wpglobus-wpseosnippet .desc {
+			font-size: small;
+			line-height: 1.4;
+			word-wrap: break-word;
+		}
+
+		.wpglobus-focuskwresults ul {
+			margin: 0;
+		}
+
+		.wpglobus-focuskwresults li {
+			float: none !important;
+			list-style-type: disc;
+			margin: 0 0 0 20px !important;
+		}
+
+		.wpglobus-focuskwresults li, .wpglobus-focuskwresults p {
+			font-size: 13px !important;
+		}
+	}
+
 }
 
 // --- EOF

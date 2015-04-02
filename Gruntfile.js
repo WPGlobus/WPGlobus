@@ -64,7 +64,6 @@ module.exports = function (grunt) {
             },
             admin: {
                 options: {
-                    //banner: bannerTemplate,
                     paths: [pathCSS],
                     sourceMap: true,
                     sourceMapBasepath: pathCSS,
@@ -76,7 +75,6 @@ module.exports = function (grunt) {
             },
             tabs: {
                 options: {
-                    //banner: bannerTemplate,
                     paths: [pathCSS],
                     sourceMap: true,
                     sourceMapBasepath: pathCSS,
@@ -84,6 +82,17 @@ module.exports = function (grunt) {
                 },
                 files: {
                     "includes/css/wpglobus-admin-tabs.css": pathCSS + '/' + "wpglobus-admin-tabs.less"
+                }
+            },
+            dialogui: {
+                options: {
+                    paths: [pathCSS],
+                    sourceMap: true,
+                    sourceMapBasepath: pathCSS,
+                    sourceMapURL: 'wpglobus-dialog-ui.css.map'
+                },
+                files: {
+                    "includes/css/wpglobus-dialog-ui.css": pathCSS + '/' + "wpglobus-dialog-ui.less"
                 }
             },
             field_table: {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   WPGlobus
+ * @package WPGlobus
  */
 
 /**
@@ -175,6 +175,8 @@ class WPGlobus {
 		 */
 		if ( is_admin() ) {
 
+			add_action( 'admin_body_class', array( $this, 'on_add_admin_body_class' ) );
+			
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
@@ -467,7 +469,7 @@ class WPGlobus {
 			      data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc"
 			      data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
 			</span>
-			<ul class="wpglobus-wpseo-tabs-ul">    <?php
+			<ul class="wpglobus-wpseo-tabs-list">    <?php
 				$order = 0;
 				foreach ( self::Config()->open_languages as $language ) { ?>
 					<li id="wpseo-link-tab-<?php echo $language; ?>"
@@ -1290,6 +1292,8 @@ class WPGlobus {
 
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
 
+//		do_action('wpglobus_before_admin_print_styles');
+
 		wp_register_style(
 			'wpglobus-admin',
 			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-admin$suffix.css",
@@ -1298,15 +1302,7 @@ class WPGlobus {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-admin' );
-		
-		wp_register_style(
-			'dialog-ui',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",				
-			array(),
-			WPGLOBUS_VERSION,
-			'all'
-		);		
-		wp_enqueue_style( 'dialog-ui' );		
+
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
@@ -1333,8 +1329,25 @@ class WPGlobus {
 					'all'
 				);
 				wp_enqueue_style( 'wpglobus-admin-tabs' );
+
+				wp_enqueue_style(
+					'dialog-ui',
+					self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",
+					array(),
+					WPGLOBUS_VERSION,
+					'all'
+				);
+
 			}
 		}
+
+//		wp_enqueue_style(
+//			'bad-ui',
+//			self::$PLUGIN_DIR_URL . "includes/css/bad-jquery-ui.min.css",
+//			array(),
+//			(string)time(),
+//			'all'
+//		);
 
 	}
 
@@ -1950,19 +1963,20 @@ class WPGlobus {
 		if ( $this->disabled_entity() ) {
 			return;
 		} 		?>
-
-		<ul class="wpglobus-taxonomy-tabs-ul">    <?php
-			foreach ( self::Config()->open_languages as $language ) {
-				$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
-						?>
-				<li id="wpglobus-link-tab-<?php echo $language; ?>" class="" 
-						data-language="<?php echo $language; ?>"
-						data-name="<?php echo WPGlobus_Core::text_filter($object->name, $language, $return); ?>"
-						data-description="<?php echo WPGlobus_Core::text_filter($object->description, $language, $return); ?>">
-					<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
-				</li> <?php
-			} ?>
-		</ul>    <?php
+		<div class="wpglobus-taxonomy-tabs">
+			<ul class="wpglobus-taxonomy-tabs-list">    <?php
+				foreach ( self::Config()->open_languages as $language ) {
+					$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+							?>
+					<li id="wpglobus-link-tab-<?php echo $language; ?>" class="" 
+							data-language="<?php echo $language; ?>"
+							data-name="<?php echo WPGlobus_Core::text_filter($object->name, $language, $return); ?>"
+							data-description="<?php echo WPGlobus_Core::text_filter($object->description, $language, $return); ?>">
+						<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+					</li> <?php
+				} ?>
+			</ul>    
+		</div><?php
 	}
 
 	/**
@@ -2175,8 +2189,8 @@ class WPGlobus {
 			 * Output dialog form for window.WPGlobusDialogApp
 			 */ 
 			?>
-			<div id="wpglobus-dialog-wrapper" title="" class="hidden wpglobus-dialog-wrapper">
-				<form id="wpglobus-dialog-form" style="">	
+			<div id="wpglobus-dialog-wrapper" class="hidden wpglobus-dialog-wrapper">
+				<form id="wpglobus-dialog-form">
 					<div id="wpglobus-dialog-tabs" class="wpglobus-dialog-tabs">   
 						<ul class="wpglobus-dialog-tabs-list">    <?php
 							$order = 0;
@@ -2193,7 +2207,7 @@ class WPGlobus {
 
 						foreach ( WPGlobus::Config()->open_languages as $language ) { 	?>
 							<div id="dialog-tab-<?php echo $language; ?>" class="wpglobus-dialog-general">
-								<textarea placeholder="" style="height:50%;" name="wpglobus-dialog-<?php echo $language; ?>" 
+								<textarea name="wpglobus-dialog-<?php echo $language; ?>"
 									id="wpglobus-dialog-<?php echo $language; ?>" class="wpglobus_dialog_textarea textarea"
 									data-language="<?php echo $language; ?>"
 									data-order="save_dialog"></textarea>
@@ -2285,6 +2299,19 @@ class WPGlobus {
 	}
 
 	/**
+	 * Add class to body in admin
+	 * 
+	 * @since 1.0.10
+	 * @see admin_body_class filter
+	 *
+	 * @param string $classes
+	 * @return string
+	 */
+	function on_add_admin_body_class($classes) {
+		return $classes . ' wpglobus-wp-admin';
+	}	
+	
+	/**
 	 * Add language selector to adminbar
 	 * @since 1.0.8
 	 *
@@ -2303,11 +2330,11 @@ class WPGlobus {
 		$wp_admin_bar->add_menu( array(
 			'id'        => 'wpglobus-language-select',
 			'parent'    => 'top-secondary',
-			'title'     => WPGlobus::Config()->language_name[WPGlobus::Config()->language] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[WPGlobus::Config()->language]  . '" /></span>',
+			'title'     => '<a id="wpglobus-default-locale" style="color:#fff;" href="#" >' . WPGlobus::Config()->language_name[WPGlobus::Config()->language] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[WPGlobus::Config()->language]  . '" /></span></a>',
 			'href'      => '',
 			'meta'      => array(
 				'class'     => '',
-				'title'     => __('My Account'),
+				'title'     => __('My Account')
 			),
 		) );	
 		
@@ -2356,7 +2383,10 @@ class WPGlobus {
 <!--suppress AnonymousFunctionJS -->
 		<script type="text/javascript">
 //<![CDATA[
-	jQuery(document).ready(function($){	
+	jQuery(document).ready(function($){
+		$('#wpglobus-default-locale').on('click',function(e){
+			wpglobus_select_lang('<?php echo WPGlobus::Config()->locale[WPGlobus::Config()->language]; ?>');
+		});
 		wpglobus_select_lang = function(locale) {
 			$.post(ajaxurl, {
 					action: 'WPGlobus_process_ajax',

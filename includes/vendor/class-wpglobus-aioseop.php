@@ -429,7 +429,7 @@ class WPGlobus_aioseop {
 		?>
 		
 		<div id="wpglobus-aioseop-tabs">
-			<ul class="wpglobus-aioseop-tabs-ul">    <?php
+			<ul class="wpglobus-aioseop-tabs-list">    <?php
 				$order = 0;
 				foreach ( WPGlobus::Config()->enabled_languages as $language ) { ?>
 					<li id="aioseop-link-tab-<?php echo $language; ?>"
@@ -447,7 +447,7 @@ class WPGlobus_aioseop {
 				
 				$return = $language == WPGlobus::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
 				
-				$url        = WPGlobus_Utils::get_convert_url( $permalink['url'], $language );  
+				$url        = WPGlobus_Utils::localize_url( $permalink['url'], $language );  
 				
 				$aiosp_title 			 = trim( WPGlobus_Core::text_filter($aiosp_meta_title, $language, $return) );
 				$aiosp_placeholder_title = WPGlobus_Core::text_filter($post->post_title, $language, $return);
@@ -504,7 +504,7 @@ class WPGlobus_aioseop {
 								$data['args']['value'] 	= str_replace( '{{link_style}}', 	$link_style,   $data['args']['value'] );
 								$data['args']['value'] 	= str_replace( '{{cite_style}}', 	$cite_style,   $data['args']['value'] );
 								
-								$data['args']['value'] 	= sprintf( $data['args']['value'], $aiosp_snippet_title, $snippet_title_2, WPGlobus_Utils::get_convert_url($permalink['url'], $language), $aiosp_snippet_description );
+								$data['args']['value'] 	= sprintf( $data['args']['value'], $aiosp_snippet_title, $snippet_title_2, WPGlobus_Utils::localize_url($permalink['url'], $language), $aiosp_snippet_description );
 								
 								$data['args']['value'] 	= str_replace( '{{extra_length}}',  mb_strlen($snippet_title_2), $data['args']['value'] );
 							

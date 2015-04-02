@@ -96,6 +96,14 @@ class WPGlobus_Config {
 	public $locale = array();
 
 	/**
+	 * Stores enabled locales
+     * @since 1.0.10
+	 *
+	 * @var array
+	 */
+	public $enabled_locale = array();
+	 
+	/**
 	 * Stores version and update from WPGlobus Mini info
 	 * @var array
 	 */
@@ -270,6 +278,28 @@ class WPGlobus_Config {
 	}
 
 	/**
+	 * Check for enabled locale
+	 *
+	 * @since 1.0.10
+	 *
+	 * @param string $locale
+	 * @return boolean
+	 */
+	function is_enabled_locale( $locale ) {
+		
+		if ( in_array( $locale, $this->enabled_locale ) ) {
+			return true;	
+		}	
+		/*
+		foreach ( $this->enabled_locale as $language => $value ) {
+			if ( $locale == $value ) {
+				return true;
+			}
+		}*/
+		return false;
+	}
+	
+	/**
 	 * Load textdomain
 	 * @since 1.0.0
 	 * @return void
@@ -298,7 +328,14 @@ class WPGlobus_Config {
 	 *    Set languages by default
 	 */
 	function _set_languages() {
-		// Names for languages in the corresponding language, add more if needed
+
+		/**
+		 * Names, flags and locales
+		 *
+		 * Useful links
+		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+		 */
 		$this->language_name['en'] = "English";
 		$this->language_name['ru'] = "Русский";
 		$this->language_name['de'] = "Deutsch";
@@ -315,6 +352,7 @@ class WPGlobus_Config {
 		$this->language_name['vi'] = "Tiếng Việt";
 		$this->language_name['ar'] = "العربية";
 		$this->language_name['pt'] = "Português";
+		$this->language_name['br'] = "Português do Brazil";
 		$this->language_name['pl'] = "Polski";
 		$this->language_name['gl'] = "Galego";
 
@@ -334,6 +372,7 @@ class WPGlobus_Config {
 		$this->en_language_name['vi'] = "Vietnamese";
 		$this->en_language_name['ar'] = "Arabic";
 		$this->en_language_name['pt'] = "Portuguese";
+		$this->en_language_name['br'] = "Portuguese Brazil";
 		$this->en_language_name['pl'] = "Polish";
 		$this->en_language_name['gl'] = "Galician";
 
@@ -353,7 +392,8 @@ class WPGlobus_Config {
 		$this->locale['es'] = "es_ES";
 		$this->locale['vi'] = "vi";
 		$this->locale['ar'] = "ar";
-		$this->locale['pt'] = "pt_BR";
+		$this->locale['pt'] = "pt_PT";
+		$this->locale['br'] = "pt_BR";
 		$this->locale['pl'] = "pl_PL";
 		$this->locale['gl'] = "gl_ES";
 
@@ -373,8 +413,8 @@ class WPGlobus_Config {
 		$this->flag['es'] = 'es.png';
 		$this->flag['vi'] = 'vn.png';
 		$this->flag['ar'] = 'arle.png';
-		#$this->flag['ar'] = 'argm.jpg';
-		$this->flag['pt'] = 'br.png';
+		$this->flag['pt'] = 'pt.png';
+		$this->flag['br'] = 'br.png';
 		$this->flag['pl'] = 'pl.png';
 		$this->flag['gl'] = 'galego.png';
 
@@ -470,7 +510,14 @@ class WPGlobus_Config {
 		 * Get locales
 		 */
 		$this->locale = get_option( $this->option_locale );
-
+		
+		/**
+		 * Get enabled locales
+		 */
+		foreach( $this->enabled_languages as $language ) {
+			$this->enabled_locale[] = $this->locale[$language];
+		}
+		
 		/**
 		 * Get en_language_name
 		 */

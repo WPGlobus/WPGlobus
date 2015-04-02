@@ -3,7 +3,7 @@ Contributors: tivnetinc, tivnet, alexgff
 Donate link: http://www.wpglobus.com/
 Tags: ACF, bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, SEO, switcher, translate, translation, WPGlobus, TIVWP
 Requires at least: 4.0
-Tested up to: 4.1.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
@@ -87,7 +87,7 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 = I am using WPML (qTranslate, Polylang, Multilingual Press, etc.). Can I switch to WPGlobus? =
 
-* Switching from (m)qTranslate(-X) should be straightforward and smooth if you are using the URLs in the form `/en/page/`, `/fr/page`, etc.
+* Switching from (m)qTranslate should be straightforward and smooth if you are using the URLs in the form `/en/page/`, `/fr/page`, etc.
 * Switching from other plugins is also possible, but will require some manual work. In the future, we plan to release the transition routines.
 
 = The theme/plugin 'X' I am using does not display the multiple languages correctly. Can you help? =
@@ -98,6 +98,11 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 = Do you plan to support WooCommerce, EDD, other e-Commerce plugins? =
 
 * Yes, we do. Currently working on WC. Other plugins will follow.
+
+= Is it possible to set the user's language automatically based on IP and/or browser language?
+
+* In one of the future versions, we plan to detect the browser language. It's already in our backlog.
+* As for the IP, while we know the technology and have used it in several projects, we believe it should not be a part of WPGlobus Core. There are plugins that can detect country by IP. Besides, country or residence and language is not the same, so using GeoIP might not always be the best idea...
 
 = How do I contribute to WPGlobus? =
 
@@ -122,6 +127,15 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.10 =
+* FIXED:
+	* Admin CSS corrected so it's not easily broken by themes who use their own jQueryUI styling.
+	* Modified the Admin language switcher's incorrect behavior occurred in some cases.
+	* Corrected pt_PT and pt_BR names, locales and flags.
+* COMPATIBILITY:
+	* WordPress 4.2-beta3
+	* WordPress SEO 2.0.1
+	
 = 1.0.9 =
 * ADDED:
 	* Admin interface to enable/disable WPGlobus for selected metaboxes.

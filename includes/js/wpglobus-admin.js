@@ -150,13 +150,21 @@ var WPGlobusDialogApp;
 		},	
 		dialog : $('#wpglobus-dialog-wrapper').dialog({
 			autoOpen: false,
-			height: 250,
+			//height: 250,
 			width: 650,
 			modal: true,
 			dialogClass: 'wpglobus-dialog',
 			buttons: [
-				{ text:'Save', click:function(){api.saveDialog(); api.dialog.dialog('close');} },
-				{ text:'Cancel', click: function(){api.dialog.dialog('close');} }
+				{
+                    text:'Save',
+                    class: 'wpglobus-button-save',
+                    click:function(){api.saveDialog(); api.dialog.dialog('close');}
+                },
+				{
+                    text:'Cancel',
+                    class: 'wpglobus-button-cancel',
+                    click: function(){api.dialog.dialog('close');}
+                }
 			],
 			open: function() {
 				$('.wpglobus-dialog .ui-dialog-title').text(api.option.title);
@@ -561,13 +569,13 @@ jQuery(document).ready(function () {
 					});						
 				});
 			
-                $('.wpglobus-taxonomy-tabs-ul').insertAfter('#ajax-response');
+                $('.wpglobus-taxonomy-tabs').insertAfter('#ajax-response');
 
                 // Make class wrap as tabs container
                 // tabs on
                 $('.wrap').tabs();			
 				
-				$('body').on('click', '.wpglobus-taxonomy-tabs-ul li', function(event){
+				$('body').on('click', '.wpglobus-taxonomy-tabs li', function(event){
 					var $t = $(this);
 					var language = $t.data('language');
 					$('.wpglobus-element').addClass('hidden');

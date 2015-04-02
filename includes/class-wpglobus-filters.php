@@ -418,8 +418,17 @@ class WPGlobus_Filters {
 
 		}
 
-		$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
-
+		if ( is_admin() ) {
+			/**
+			 * Checking case for set locale which does not set in WPGlobus
+			 */
+			if ( WPGlobus::Config()->is_enabled_locale( $locale ) ) {
+				$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
+			}
+		} else {	
+			$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
+		}
+		
 		return $locale;
 
 	}

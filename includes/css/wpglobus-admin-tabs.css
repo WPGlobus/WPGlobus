@@ -2,49 +2,58 @@
  * Admin tabs styles
  * @package WPGlobus
  */
-#post-body .ui-widget-content input.like-default-title {
+.wpglobus-wp-admin {
+  /* WPSEO metabox */
+}
+.wpglobus-wp-admin #post-body .wpglobus-post-body-tabs .ui-widget-content input.like-default-title {
   padding: 3px 8px;
   font-size: 1.7em;
   line-height: 100%;
   width: 100%;
   outline: none;
 }
-.wp-editor-container {
-  border: 1px solid #ccc;
-}
-.titlediv {
+.wpglobus-wp-admin .wpglobus-post-body-tabs .titlediv {
   margin-bottom: 20px;
 }
-.mceIframeContainer iframe {
+.wpglobus-wp-admin .wpglobus-post-body-tabs .mceIframeContainer iframe {
   min-height: 150px !important;
 }
-.tabs-nav {
-  border-bottom: 1px solid #ccc;
-  margin: 10px 0 20px 0;
-  width: 100%;
-  height: 30px;
+.wpglobus-wp-admin .wpglobus-post-body-tabs .wp-editor-container {
+  border: 1px solid #ccc;
 }
-.tabs-separator {
-  border-bottom: 1px solid #ccc;
-  margin: 10px 0 20px 0;
-  width: 100%;
-  height: 15px;
+.wpglobus-wp-admin .wpglobus-post-body-tabs .titlediv-wpglobus {
+  position: relative;
 }
-.ui-tabs .tabs-nav ul {
+.wpglobus-wp-admin .wpglobus-post-body-tabs .tabs-nav ul,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs .tabs-nav ul,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .tabs-nav ul,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs .tabs-nav ul {
   list-style-type: none;
   margin: 0 10px;
   padding: 0;
 }
-.ui-tabs li a,
-.ui-tabs ul li {
+.wpglobus-wp-admin .wpglobus-post-body-tabs li a,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs li a,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs li a,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs li a,
+.wpglobus-wp-admin .wpglobus-post-body-tabs ul li,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs ul li,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs ul li,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li {
   float: left;
   margin: 0;
 }
-.ui-tabs li.ui-state-default {
+.wpglobus-wp-admin .wpglobus-post-body-tabs li.ui-state-default,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs li.ui-state-default,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs li.ui-state-default,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs li.ui-state-default {
   border: 0;
   background: transparent;
 }
-.ui-tabs ul li.ui-state-default a {
+.wpglobus-wp-admin .wpglobus-post-body-tabs ul li.ui-state-default a,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs ul li.ui-state-default a,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs ul li.ui-state-default a,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li.ui-state-default a {
   display: block;
   color: #999;
   background: #f9f9f9;
@@ -56,11 +65,9 @@
   background: linear-gradient(to right, #f9f9f9 0%, #ececec 100%);
   border: 1px solid #ddd;
   border-bottom: 0;
-  font-size: 15px;
-  font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
   font-weight: normal;
-  height: 29px;
-  line-height: 29px;
+  height: 2em;
+  line-height: 2em;
   margin-right: 5px;
   padding: 0 10px;
   text-decoration: none;
@@ -72,14 +79,16 @@
   -webkit-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
 }
-.default-label {
-  font-size: 13px;
-  font-family: Trebuchet, Georgia, sans-serif;
-}
-.ui-tabs ul li a:hover {
+.wpglobus-wp-admin .wpglobus-post-body-tabs ul li a:hover,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs ul li a:hover,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs ul li a:hover,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li a:hover {
   color: #666;
 }
-.ui-tabs ul li.ui-state-active a {
+.wpglobus-wp-admin .wpglobus-post-body-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li.ui-state-active a {
   background: none;
   border: 1px solid #ccc;
   border-bottom-color: #fff;
@@ -87,66 +96,99 @@
   margin-bottom: -1px;
   font-weight: normal;
 }
-.ui-widget-content .ui-widget-header {
-  border: 0;
-  background: transparent;
-  margin-bottom: 50px;
+.wpglobus-wp-admin .wpglobus-post-body-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li.ui-state-active a {
+  background: none;
+  border: 1px solid #ccc;
+  border-bottom-color: #fff;
+  color: #464646;
+  margin-bottom: -1px;
+  font-weight: normal;
 }
-#edittag #cat-tabs .form-field {
+.wpglobus-wp-admin .wpglobus-post-body-tabs .wpglobus-post-body-tabs-list,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-post-body-tabs-list,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-post-body-tabs-list,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-post-body-tabs-list,
+.wpglobus-wp-admin .wpglobus-post-body-tabs .wpglobus-wpseo-tabs-list,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-wpseo-tabs-list,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseo-tabs-list,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-wpseo-tabs-list,
+.wpglobus-wp-admin .wpglobus-post-body-tabs .wpglobus-aioseop-tabs-list,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-aioseop-tabs-list,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-aioseop-tabs-list,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-aioseop-tabs-list {
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  background: transparent;
+  min-height: 3em;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs .ui-corner-all,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs .ui-corner-all,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .ui-corner-all,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs .ui-corner-all {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-widget-content,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-widget-content,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-widget-content,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-widget-content {
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-widget,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-widget,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-widget,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-widget {
+  font-family: inherit;
+  font-size: inherit;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs {
+  padding: inherit;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs .ui-tabs-nav {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+.wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs .ui-tabs-panel {
+  border-width: 0;
+  padding: inherit;
+  background: inherit;
+}
+.wpglobus-wp-admin #edittag #cat-tabs .form-field {
   margin: 0 0 10px;
   padding: 8px;
 }
-#edittag #cat-tabs .form-field p {
+.wpglobus-wp-admin #edittag #cat-tabs .form-field p {
   font-size: 12px;
   font-style: italic;
   font-family: sans-serif;
   color: #666;
   margin: 4px 0 5px;
 }
-#edittag #cat-tabs label {
+.wpglobus-wp-admin #edittag #cat-tabs label {
   display: block;
 }
-.post-excerpt {
+.wpglobus-wp-admin .post-excerpt {
   margin: 0;
   height: 4em;
   width: 98%;
 }
-.titlediv-wpglobus {
-  position: relative;
-}
-#poststuff .titlewrap-wpglobus {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  border-image-outset: 0 0 0 0;
-  border-image-repeat: stretch stretch;
-  border-image-slice: 100% 100% 100% 100%;
-  border-image-source: none;
-  border-image-width: 1 1 1 1;
-  border-left-color-ltr-source: physical;
-  border-left-color-rtl-source: physical;
-  border-left-color-value: -moz-use-text-color;
-  border-left-style-ltr-source: physical;
-  border-left-style-rtl-source: physical;
-  border-left-style-value: none;
-  border-left-width-ltr-source: physical;
-  border-left-width-rtl-source: physical;
-  border-left-width-value: 0;
-  border-right-color-ltr-source: physical;
-  border-right-color-rtl-source: physical;
-  border-right-color-value: -moz-use-text-color;
-  border-right-style-ltr-source: physical;
-  border-right-style-rtl-source: physical;
-  border-right-style-value: none;
-  border-right-width-ltr-source: physical;
-  border-right-width-rtl-source: physical;
-  border-right-width-value: 0;
-  border-top: 0 none -moz-use-text-color;
-  border-bottom: 0 none -moz-use-text-color;
-  padding: 0;
-}
-.titlediv-wpglobus .title_wpglobus {
+.wpglobus-wp-admin .titlediv-wpglobus .title_wpglobus {
   background-color: #fff;
   font-size: 1.7em;
   height: 1.7em;
@@ -156,24 +198,18 @@
   padding: 3px 8px;
   width: 100%;
 }
-.postdivrich-wpglobus .wp-editor-tools {
+.wpglobus-wp-admin .postdivrich-wpglobus .wp-editor-tools {
   background-color: #f1f1f1;
   padding-top: 20px;
 }
-.wpglobus-edit-slug-box {
+.wpglobus-wp-admin .wpglobus-edit-slug-box {
   height: 24px;
 }
-.edit-tags-php .wpglobus-post-tabs-ul {
-  padding-bottom: 1px;
-}
-#wpglobus-wpseo-tabs {
-  margin-top: -45px;
-}
-.wpglobus-wpseosnippet {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseosnippet {
   font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
 }
-.wpglobus-wpseosnippet .title {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseosnippet .title {
   color: #1e0fbe;
   display: block;
   font-size: 18px !important;
@@ -184,26 +220,26 @@
   white-space: nowrap;
   width: 512px;
 }
-.wpglobus-wpseosnippet .url {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseosnippet .url {
   color: #006621;
   font-size: 13px;
   line-height: 16px;
 }
-.wpglobus-wpseosnippet .desc {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseosnippet .desc {
   font-size: small;
   line-height: 1.4;
   word-wrap: break-word;
 }
-.wpglobus-focuskwresults ul {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults ul {
   margin: 0;
 }
-.wpglobus-focuskwresults li {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults li {
   float: none !important;
   list-style-type: disc;
   margin: 0 0 0 20px !important;
 }
-.wpglobus-focuskwresults li,
-.wpglobus-focuskwresults p {
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults li,
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults p {
   font-size: 13px !important;
 }
 /*# sourceMappingURL=wpglobus-admin-tabs.css.map */

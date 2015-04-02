@@ -78,86 +78,6 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * @deprecated 1.0.7.2
-	 * Get converted url
-	 *
-	 * @param string $url
-	 * @param string $language
-	 *
-	 * @return string
-	 */
-	public static function get_convert_url( $url = '', $language = '' ) {
-
-		global $WPGlobus_Config;
-
-		if ( empty( $url ) ) {
-			return $url;
-		}
-
-		//		$converted_url = '';
-
-		$language = empty( $language ) ? $WPGlobus_Config->language : $language;
-
-		$parsed_url = self::parse_url( $url );
-
-		if ( ! $parsed_url ) {
-			return $url;
-		}
-
-		if ( empty( $parsed_url['host'] ) ) {
-			return $url;
-		}
-
-		if ( false === strpos( get_option( 'home' ), $parsed_url['host'] ) ) {
-			/**
-			 * Don't convert external url
-			 */
-			return $url;
-		}
-
-		//		switch ( $WPGlobus_Config->get_url_mode() ) :
-		//			case WPGlobus_Config::GLOBUS_URL_PATH:
-		// pre url
-
-		if ( $language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
-			$language = '';
-		} else {
-			$language = '/' . $language;
-		}
-
-		$fragment = empty( $parsed_url['fragment'] ) ? '' : '#' . $parsed_url['fragment'];
-
-		$home = WPGlobus::Config()->url_info['home'];
-		if ( '/' == $home ) {
-			$converted_url =
-				$parsed_url['scheme'] . '://' . $parsed_url['host'] . $language . $parsed_url['path'] . $fragment;
-
-		} else {
-			/**
-			 * Case when WordPress Address (URL) and Site Address (URL) ==  http://example.com/blog or
-			 * WordPress Address (URL) == http://example.com/blog and Site Address (URL) ==  http://example.com
-			 */
-			$path          = $home . $language . '/' . str_replace( $home, '', $parsed_url['path'] . '/' );
-			$path          = str_replace( array( '///', '//' ), '/', $path );
-			$converted_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . $path . $fragment;
-		}
-
-		//				break;
-		//			case WPGlobus_Config::GLOBUS_URL_DOMAIN:
-		//				// pre domain
-		//
-		//				break;
-		//			case WPGlobus_Config::GLOBUS_URL_QUERY:
-		//				// query (question mark)
-		//
-		//				break;
-		//		endswitch;
-
-		return $converted_url;
-
-	}
-
-	/**
 	 * Returns cleaned string and language information
 	 * Improved version, also understands $url without scheme:
 	 * //example.com, example.com/, and so on
@@ -490,6 +410,25 @@ class WPGlobus_Utils {
 
 		return $function_in_backtrace;
 	}
+
+
+
+	//<editor-fold desc="DEPRECATED METHODS">
+
+	/**
+	 * @deprecated 1.0.7.2
+	 * Get converted url
+	 *
+	 * @param string $url
+	 * @param string $language
+	 *
+	 * @return string
+	 */
+	public static function get_convert_url( $url = '', $language = '' ) {
+		return self::localize_url( $url, $language );
+	}
+
+	//</editor-fold>
 
 } // class
 
