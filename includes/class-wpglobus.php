@@ -162,7 +162,13 @@ class WPGlobus {
 				$this->disabled_entities[] = $post_type; 	
 			}	
 		}
-			
+		
+		/**
+		 * Set disabled entities into config
+		 * @todo maybe move code to Class WPGlobus_Config
+		 */
+		WPGlobus::Config()->disabled_entities = $this->disabled_entities;
+		
 		add_filter( 'wp_redirect', array(
 			$this,
 			'on_wp_redirect'
