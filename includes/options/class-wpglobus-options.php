@@ -364,7 +364,16 @@ class WPGlobus_Options {
 			'fields' => $fields
 		);
 
-
+		/**
+		 * SECTION: Add-ons
+		 * We need add it for menu item only
+		 */		
+		$this->sections[] = array(
+			'title'  => __( 'Add-ons', 'wpglobus' ),
+			'icon'   => 'el-icon-th-list',
+			'class'	 => 'wpglobus-addons-group hidden'
+		);
+		
 	}
 
 	public function setHelpTabs() {
