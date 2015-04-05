@@ -76,7 +76,7 @@ class WPGlobus_Addons {
 	}
 
 	/**
-	 * Retreive addon data
+	 * Retrieve addon data
 	 * return array|bool $data
 	 *
 	 * @param string $addon_slug
