@@ -32,10 +32,15 @@ class WPGlobus {
 	const LANGUAGE_EDIT_PAGE = 'wpglobus_language_edit';
 
 	/**
-	 * Language edit page
+	 * WPGlobus about page
 	 */
 	const PAGE_WPGLOBUS_ABOUT = 'wpglobus-about';
 
+	/**
+	 * WPGlobus addons page
+	 */
+	const PAGE_WPGLOBUS_ADDONS = 'wpglobus-addons';
+	
 	/**
 	 * List navigation menus
 	 * @var array
@@ -318,7 +323,7 @@ class WPGlobus {
 			add_filter( "redux/{$WPGlobus_Config->option}/field/class/post_types", array(
 				$this,
 				'on_add_field_post_types'
-			) );			
+			) );
 
 			add_action( 'admin_menu', array(
 				$this,
@@ -1347,6 +1352,17 @@ class WPGlobus {
 			}
 		}
 
+		if ( in_array( $page, array(self::PAGE_WPGLOBUS_ADDONS, self::PAGE_WPGLOBUS_ABOUT ) ) ) {
+			wp_register_style(
+				'wpglobus-special-pages',
+				self::$PLUGIN_DIR_URL . "includes/css/wpglobus-special-pages$suffix.css",
+				array(),
+				WPGLOBUS_VERSION,
+				'all'
+			);
+			wp_enqueue_style( 'wpglobus-special-pages' );
+		}
+
 //		wp_enqueue_style(
 //			'bad-ui',
 //			self::$PLUGIN_DIR_URL . "includes/css/bad-jquery-ui.min.css",
@@ -1385,6 +1401,18 @@ class WPGlobus {
 				'wpglobus_about'
 			)
 		);
+		
+		add_submenu_page(
+			null,
+			'',
+			'',
+			'administrator',
+			self::PAGE_WPGLOBUS_ADDONS,
+			array(
+				$this,
+				'wpglobus_addons'
+			)
+		);		
 	}
 
 	/**
@@ -1395,6 +1423,15 @@ class WPGlobus {
 		require_once 'admin/class-wpglobus-about.php';
 		WPGlobus_About::about_screen();
 	}
+
+	/**
+	 * Include file for WPGlobus addons page
+	 * @return void
+	 */	
+	function wpglobus_addons() {
+		require_once 'admin/class-wpglobus-addons.php';
+		WPGlobus_Addons::addons_screen();
+	}	
 
 	/**
 	 * Include file for language edit page
