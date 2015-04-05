@@ -74,11 +74,15 @@ class WPGlobus_Addons {
 		<div style="height: 20em">&nbsp;</div>
 	<?php
 	}
-	
+
 	/**
 	 * Retreive addon data
-	 *
 	 * return array|bool $data
+	 *
+	 * @param string $addon_slug
+	 * @param string $source
+	 *
+	 * @return array|bool|mixed|stdClass
 	 */
 	public static function get_addon($addon_slug = '', $source = '') {
 		
@@ -103,7 +107,7 @@ class WPGlobus_Addons {
 					
 					$addon = new stdClass();
 					$addon->name = $addon_slug;
-					$addon->short_description = 'Cannot retreive data';
+					$addon->short_description = 'Cannot retrieve data';
 					return $addon;
 				
 				} else {	
