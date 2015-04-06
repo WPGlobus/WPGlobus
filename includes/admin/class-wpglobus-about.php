@@ -52,6 +52,8 @@ class WPGlobus_About {
 						<?php _e( 'Feedback' ); ?>
 					</a><a href="admin.php?page=wpglobus-about#wpglobus-mini" class="nav-tab">
 						<?php _e( 'Breaking changes!', 'wpglobus' ); ?>
+					</a><a href="admin.php?page=wpglobus-addons" class="nav-tab">
+						<?php _e( 'Add-ons', 'wpglobus' ); ?>
 					</a>
 				</h2>
 
