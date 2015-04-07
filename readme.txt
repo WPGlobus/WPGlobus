@@ -127,6 +127,13 @@ No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer
 
 == Changelog ==
 
+= 1.0.11 =
+* ADDED:
+	* New page for add-ons.
+	* Disabled entities array added to WPGlobus config.
+* FIXED:
+	* Admin CSS corrected for active tab in WPGLobus dialog.
+
 = 1.0.10 =
 * FIXED:
 	* Admin CSS corrected so it's not easily broken by themes who use their own jQueryUI styling.
