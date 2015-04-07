@@ -59,15 +59,32 @@ class WPGlobus_Utils {
 
 		/**
 		 * Regex to replace current language prefix with the requested one.
+		 * @example ^(https?:\/\/(?:.+\.)?example\.com)(?:\/?(?:en|ru|pt))?($|\/$|[\/#\?].*$)
+		 */
+
+		/**
+		 * The "host" part of the URL (captured)
 		 * We ignore http(s) and domain prefix, but we must match the domain-tld, so any external URLs
 		 * are not localized.
-		 * @example ^(https?:\/\/(?:.+\.)?example\.com)(?:\/?(?:en|ru|pt))?(\/?.*)$
 		 */
-		$re = '!' .
-		      '^(https?:\/\/(?:.+\.)?' .
-		      str_replace( '.', '\.', $home_domain_tld ) .
-		      ')(?:\/(?:' . join( '|', $config->enabled_languages ) . '))?(\/?.*)$' .
-		      '!';
+		$re_host_part     = '(https?:\/\/(?:.+\.)?' . str_replace( '.', '\.', $home_domain_tld ) . ')';
+
+		/**
+		 * The "language" part (optional, not captured, will be thrown away)
+		 */
+		$re_language_part = '(?:\/?(?:' . join( '|', $config->enabled_languages ) . '))?';
+
+		/**
+		 * The rest of the URL. Can be:
+		 * - Nothing or trailing slash, or
+		 * - Slash, hash or question and optionally anything after
+		 * *
+		 * Using 'or' regex to capture things like '/rush' or '/designer/' correctly,
+		 * and not extract '/ru' or '/de' from them,
+		 */
+		$re_trailer       = '(\/?|[\/#\?].*)';
+
+		$re = '!^' . $re_host_part . $re_language_part . $re_trailer . '$!';
 
 		/**
 		 * Replace the existing (or empty) language prefix with the requested one
