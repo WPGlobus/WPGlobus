@@ -123,16 +123,19 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 
 == Upgrade Notice ==
 
-No backward incompatibility issues in the 1.0.x releases. The 0.1.x is no longer supported. If you have WPGlobus 0.1.x, please upgrade now.
+No known backward incompatibility issues.
 
 == Changelog ==
 
 = 1.0.11 =
-* ADDED:
-	* New page for add-ons.
-	* Disabled entities array added to WPGlobus config.
 * FIXED:
-	* Admin CSS corrected for active tab in WPGLobus dialog.
+	* Method of URL localization correctly parses URLs like `/rush` and `/designer`, not extracting `/ru` and `/de` from them.
+	* Admin CSS corrected for the active tab in the WPGlobus dialog.
+* ADDED:
+	* New page for the future extensions and add-ons.
+	* The "Disabled entities" array added to the WPGlobus config.
+* COMPATIBILITY:
+	* WordPress 4.2-beta4
 
 = 1.0.10 =
 * FIXED:
