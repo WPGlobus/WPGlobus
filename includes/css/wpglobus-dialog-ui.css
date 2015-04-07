@@ -42,22 +42,6 @@
 .wpglobus-wp-admin .wpglobus-dialog-tabs ul li a:hover {
   color: #666;
 }
-.wpglobus-wp-admin .wpglobus-dialog-tabs ul li.ui-state-active a {
-  background: none;
-  border: 1px solid #ccc;
-  border-bottom-color: #fff;
-  color: #464646;
-  margin-bottom: -1px;
-  font-weight: normal;
-}
-.wpglobus-wp-admin .wpglobus-dialog-tabs ul li.ui-state-active a {
-  background: none;
-  border: 1px solid #ccc;
-  border-bottom-color: #fff;
-  color: #464646;
-  margin-bottom: -1px;
-  font-weight: normal;
-}
 .wpglobus-wp-admin .wpglobus-dialog-tabs ul li.ui-state-default a {
   display: block;
   color: #999;
@@ -83,6 +67,14 @@
   -moz-border-radius-topright: 3px;
   -webkit-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
+}
+.wpglobus-wp-admin .wpglobus-dialog-tabs ul li.ui-state-active a {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-bottom-color: #fff;
+  color: #464646;
+  margin-bottom: -1px;
+  font-weight: normal;
 }
 .wpglobus-wp-admin .wpglobus-dialog {
   z-index: 1000000;
@@ -223,4 +215,3 @@
   bottom: -5px;
   background-position: 16px 16px;
 }
-/*# sourceMappingURL=wpglobus-dialog-ui.css.map */
