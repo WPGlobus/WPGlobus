@@ -14,7 +14,7 @@ class WPGlobus_Addons {
 	public static function addons_screen() {
 
 		$addons                    = array();
-		$addons['wordpress.org'][] = 'wpglobus';
+		//$addons['wordpress.org'][] = 'wpglobus';
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
 
 		/**
@@ -44,7 +44,7 @@ class WPGlobus_Addons {
 							$addon_data = self::get_addon( $addon_slug, $source );
 							if ( $addon_data ) { ?>
 								<li class="product">
-									<a href="#">
+									<a target="_blank" href="<?php echo $addon_data->addon_url; ?>">
 										<h3><?php echo $addon_data->name; ?></h3>
 
 										<p><?php echo $addon_data->short_description; ?></p>
@@ -72,7 +72,6 @@ class WPGlobus_Addons {
 
 	/**
 	 * Retrieve addon data
-	 * return array|bool $data
 	 *
 	 * @param string $addon_slug
 	 * @param string $source
@@ -104,12 +103,16 @@ class WPGlobus_Addons {
 					$addon                    = new stdClass();
 					$addon->name              = $addon_slug;
 					$addon->short_description = 'Cannot retrieve data';
+					$addon->addon_url		  = '#';
 
 					return $addon;
 
 				} else {
-					set_transient( 'wpglobus_addon_' . $addon_slug, $addon_json['body'], 24 * HOUR_IN_SECONDS );
+
 					$data = json_decode( $addon_json['body'] );
+					$data->addon_url = "https://wordpress.org/plugins/{$addon_slug}/"; 
+					set_transient( 'wpglobus_addon_' . $addon_slug, json_encode($data), 24 * HOUR_IN_SECONDS );
+					
 				}
 			}
 
