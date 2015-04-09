@@ -188,6 +188,13 @@ class WPGlobus_Config {
 	 */
 	public $toggle = 'on';
 
+	/**
+	 * @todo Refactor this
+	 * Duplicate var @see WPGlobus
+	 * @var array
+	 */
+	public $disabled_entities = array();
+
 //	protected $url_mode;
 
 	/**
