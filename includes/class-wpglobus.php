@@ -1330,7 +1330,13 @@ class WPGlobus {
 		global $post;
 		$type = empty( $post ) ? '' : $post->post_type;
 		if ( ! $this->disabled_entity( $type ) ) {
-			if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit-tags.php', 'widgets.php' ) ) ) {
+			if ( WPGlobus_WP::is_pagenow( array(
+					'post.php',
+					'post-new.php',
+					'edit-tags.php',
+					'widgets.php'
+				) )
+			) {
 
 				wp_register_style(
 					'wpglobus-admin-tabs',
