@@ -138,6 +138,13 @@ class WPGlobus_WP {
 		return $maybe;
 	}
 
+	/**
+	 * True if I am in the Admin Panel, not doing AJAX
+	 * @return bool
+	 */
+	public static function in_wp_admin() {
+		return ( is_admin() && ! self::is_doing_ajax() );
+	}
 
 } // class
 
