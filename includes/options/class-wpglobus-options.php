@@ -373,6 +373,14 @@ class WPGlobus_Options {
 			'icon'   => 'el-icon-th-list',
 			'class'	 => 'wpglobus-addons-group hidden'
 		);
+	
+		/**
+		 * Filter the array of sections.
+		 * @since 1.0.11
+		 *
+		 * @param array $sections Array of Redux sections.
+		 */	
+		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
 		
 	}
 
