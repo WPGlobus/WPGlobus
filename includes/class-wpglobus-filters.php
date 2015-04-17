@@ -197,14 +197,14 @@ class WPGlobus_Filters {
 		/**
 		 * Don't filter term name at time generate checklist categories in metabox
 		 */
-		if ( is_admin() &&	
-				WPGlobus_WP::is_pagenow( 'post.php' ) && 
-					empty( $_POST ) && 
-						WPGlobus_Utils::is_function_in_backtrace( 'wp_terms_checklist' ) 
+		if ( is_admin() &&
+		     WPGlobus_WP::is_pagenow( 'post.php' ) &&
+		     empty( $_POST ) &&
+		     WPGlobus_Utils::is_function_in_backtrace( 'wp_terms_checklist' )
 		) {
 			return $terms;
-		}		
-		
+		}
+
 		foreach ( $terms as &$term ) {
 			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
 		}
@@ -425,10 +425,10 @@ class WPGlobus_Filters {
 			if ( WPGlobus::Config()->is_enabled_locale( $locale ) ) {
 				$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
 			}
-		} else {	
+		} else {
 			$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
 		}
-		
+
 		return $locale;
 
 	}
@@ -536,9 +536,11 @@ class WPGlobus_Filters {
 	 *
 	 * @return array
 	 */
-	public static function filter__heartbeat_received( $response, $data,
+	public static function filter__heartbeat_received(
+		$response, $data,
 		/** @noinspection PhpUnusedParameterInspection */
-		$screen_id ) {
+		$screen_id
+	) {
 
 		if ( false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
 			/**
@@ -650,7 +652,7 @@ class WPGlobus_Filters {
 
 	/**
 	 * Translate widget strings (besides the title handled by the `widget_title` filter)
-	 * @see WP_Widget::display_callback
+	 * @see   WP_Widget::display_callback
 	 * @scope front
 	 *
 	 * @param string[] $instance
@@ -670,35 +672,48 @@ class WPGlobus_Filters {
 
 		return $instance;
 	}
-	
+
 	/**
 	 * Filter @see comment_moderation_text,
-	 *		  @see comment_moderation_subject
-	 *
+	 * @see   comment_moderation_subject
 	 * @since 1.0.6
 	 *
 	 * @param string $text
-	 * @param int $comment_id 
+	 * @param int    $comment_id
 	 *
 	 * @return string
 	 */
 	public static function filter__comment_moderation( $text, $comment_id ) {
 
-		$comment = get_comment($comment_id);
-		$post 	 = get_post($comment->comment_post_ID);
-		$title 	 = WPGlobus_Core::text_filter( $post->post_title, WPGlobus::Config()->language );
-		
+		$comment = get_comment( $comment_id );
+		$post    = get_post( $comment->comment_post_ID );
+		$title   = WPGlobus_Core::text_filter( $post->post_title, WPGlobus::Config()->language );
+
 		return str_replace( $post->post_title, $title, $text );
-		
+
 	}
 
 	/**
 	 * Register the WPGlobus widgets
 	 * @wp-hook widgets_init
-	 * @since 1.0.7
+	 * @since   1.0.7
 	 */
 	public static function register_widgets() {
 		register_widget( 'WPGlobusWidget' );
+	}
+
+	/**
+	 * Do something on admin_init hook.
+	 * @todo Note: runs on admin-ajax and admin-post, too
+	 */
+	public static function action__admin_init() {
+		/**
+		 * Display blog name correctly on the WooThemes Helper page
+		 * wp-admin/index.php?page=woothemes-helper
+		 */
+		if ( WPGlobus_WP::is_plugin_page( 'woothemes-helper' ) ) {
+			add_filter( 'option_blogname', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+		}
 	}
 
 } // class

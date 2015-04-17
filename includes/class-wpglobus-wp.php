@@ -51,6 +51,24 @@ class WPGlobus_WP {
 	}
 
 	/**
+	 * To get the plugin page ID
+	 * @example    On wp-admin/index.php?page=woothemes-helper, will return `woothemes-helper`.
+	 *
+	 * @param string|string[] $page
+	 *
+	 * @return bool
+	 */
+	public static function is_plugin_page( $page ) {
+		/**
+		 * Set in wp-admin/admin.php
+		 * @global string $plugin_page
+		 */
+		global $plugin_page;
+
+		return isset( $plugin_page ) && in_array( $plugin_page, (array) $page );
+	}
+
+	/**
 	 * @param string|string[] $action
 	 *
 	 * @return bool
@@ -120,6 +138,13 @@ class WPGlobus_WP {
 		return $maybe;
 	}
 
+	/**
+	 * True if I am in the Admin Panel, not doing AJAX
+	 * @return bool
+	 */
+	public static function in_wp_admin() {
+		return ( is_admin() && ! self::is_doing_ajax() );
+	}
 
 } // class
 

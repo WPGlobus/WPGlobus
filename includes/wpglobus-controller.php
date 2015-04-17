@@ -194,6 +194,7 @@ if ( ! is_admin() ) {
  * @todo  We must not translate blogname in admin because it's used in many important non-visual places
  *       but we should JS the blogname at the admin bar
  * <li id="wp-admin-bar-site-name" class="menupop"><a ...>{:en}WPGlobus{:}{:ru}ВПГлобус{:}</a>
+ * @todo See also action__admin_init where we do exceptions for the 'not on admin' rule.
  */
 if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'option_blogdescription', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
@@ -223,6 +224,8 @@ add_action( 'plugins_loaded', array( 'WPGlobus_Filters', 'action__init_url_info'
 
 /** @todo Move the filter to Filters class */
 add_action( 'activated_plugin', array( 'WPGlobus', 'activated' ) );
+
+add_action( 'admin_init', array( 'WPGlobus_Filters', 'action__admin_init' ), 0 );
 
 /**
  * ACF filters
