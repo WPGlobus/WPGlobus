@@ -5,15 +5,20 @@
 
 .wpglobus-wp-admin {
 
-	.wpglobus_dialog_icon {
+	.wpglobus_dialog_icon{
 		margin-top: 10px;
-		cursor: pointer;
-	}
-	.wpglobus_dialog_settings {
-		margin-top: 0;
-	}
-	.wpglobus_dialog_settings:before {
-		color: #00f;
+        cursor: pointer;
+    }
+    &.widgets-php .wpglobus_dialog_icon {
+        margin-top:0;
+        float: right;
+        cursor: pointer;
+    }
+    .wpglobus_dialog_settings {
+        margin-top: 0;
+      }
+    .wpglobus_dialog_settings:before {
+        color: #00f;
 		display: inline-block;
 		font-family: 'dashicons';
 		content: "\f107";
