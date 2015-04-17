@@ -131,6 +131,7 @@ No known backward incompatibility issues.
 * FIXED:
 	* Method of URL localization correctly parses URLs like `/rush` and `/designer`, not extracting `/ru` and `/de` from them.
 	* Admin CSS corrected for the active tab in the WPGlobus dialog.
+	* Admin CSS corrected for icon at widgets.php page.
 * ADDED:
 	* New page for the future extensions and add-ons.
 	* The "Disabled entities" array added to the WPGlobus config.
