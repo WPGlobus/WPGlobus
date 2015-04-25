@@ -5,15 +5,20 @@
 
 .wpglobus-wp-admin {
 
-	.wpglobus_dialog_icon {
+	.wpglobus_dialog_icon{
 		margin-top: 10px;
-		cursor: pointer;
-	}
-	.wpglobus_dialog_settings {
-		margin-top: 0;
-	}
-	.wpglobus_dialog_settings:before {
-		color: #00f;
+        cursor: pointer;
+    }
+    &.widgets-php .wpglobus_dialog_icon {
+        margin-top:0;
+        float: right;
+        cursor: pointer;
+    }
+    .wpglobus_dialog_settings {
+        margin-top: 0;
+      }
+    .wpglobus_dialog_settings:before {
+        color: #00f;
 		display: inline-block;
 		font-family: 'dashicons';
 		content: "\f107";
@@ -51,24 +56,6 @@
 			color: #666;
 		}
 
-		ul li.ui-state-active a {
-			background: none;
-			border: 1px solid #ccc;
-			border-bottom-color: #fff;
-			color: #464646;
-			margin-bottom: -1px;
-			font-weight: normal;
-		}
-
-		ul li.ui-state-active a {
-			background: none;
-			border: 1px solid #ccc;
-			border-bottom-color: #fff;
-			color: #464646;
-			margin-bottom: -1px;
-			font-weight: normal;
-		}
-
 		ul li.ui-state-default a {
 			display: block;
 			color: #999;
@@ -97,6 +84,15 @@
 			-webkit-border-top-right-radius: 3px;
 			border-top-right-radius: 3px;
 		}
+
+        ul li.ui-state-active a {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-bottom-color: #fff;
+            color: #464646;
+            margin-bottom: -1px;
+            font-weight: normal;
+        }
 
 	}
 

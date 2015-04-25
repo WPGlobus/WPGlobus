@@ -364,7 +364,24 @@ class WPGlobus_Options {
 			'fields' => $fields
 		);
 
-
+		/**
+		 * SECTION: Add-ons
+		 * We need add it for menu item only
+		 */		
+		$this->sections[] = array(
+			'title'  => __( 'Add-ons', 'wpglobus' ),
+			'icon'   => 'el-icon-th-list',
+			'class'	 => 'wpglobus-addons-group hidden'
+		);
+	
+		/**
+		 * Filter the array of sections.
+		 * @since 1.0.11
+		 *
+		 * @param array $sections Array of Redux sections.
+		 */	
+		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
+		
 	}
 
 	public function setHelpTabs() {

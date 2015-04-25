@@ -289,6 +289,7 @@ jQuery(document).ready(function () {
 
         WPGlobusAdminApp.App.prototype = {
             init: function () {
+				this.admin_init();
 				$('#content').addClass('wpglobus-editor').attr('data-language',WPGlobusAdmin.data.default_language);
 				$('textarea[id^=content_]').each(function(i,e){
 					var l=$(e).attr('id').replace('content_','');
@@ -319,6 +320,17 @@ jQuery(document).ready(function () {
                     this.start();
                 }
             },
+            admin_init: function () {
+				var order = $('.wpglobus-addons-group a').data('key');
+				if ( 'indefined' != typeof order ) {
+					if ( window.location.search.indexOf('page=wpglobus_options&tab='+order) >= 0 ) {
+						window.location = 'admin.php?page=wpglobus-addons';
+					} else {	
+						var addon = $('#toplevel_page_wpglobus_options li').eq(order+1);
+						$(addon).find('a').attr('href','admin.php?page=wpglobus-addons').attr('onclick',"window.location=jQuery(this).attr('href');return false;");
+					}	
+				}
+			},	
             options_general: function () {
 				var $bn = $('#blogname'),
                     $body = $('body');
@@ -907,6 +919,7 @@ jQuery(document).ready(function () {
                     }
                     return false;
                 });
+
             },
             format: function (language) {
                 return '<img class="wpglobus_flag" src="' + WPGlobusAdmin.flag_url + language.text + '"/>&nbsp;&nbsp;' + language.text;

@@ -77,18 +77,53 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 * list($url, $localized_url, $language)
 		 */
 		$good = array(
+			//
+			// Default language - no prefix
+			//
+			array( '/something/', '/something/', 'en' ),
+			array( '?', '?', 'en' ),
+			//
 			array( '', '/pt', '' ),
-			array( '/something/', '/something/', 'en' ), // Default language - no prefix
 			array( '/cat/page/', '/pt/cat/page/' ),
 			array( '', '/ru', 'ru' ),
 			array( '/', '/ru/', 'ru' ),
 			array( '/pt/', '/ru/', 'ru' ),
-			array( '?a=b', '/ru?a=b', 'ru' ),
-			array( '/?a=b', '/ru/?a=b', 'ru' ),
+			array( '/ru/', '/ru/', 'ru' ),
+			array( '/de/', '/ru/de/', 'ru' ),
 			array( '/page/', '/ru/page/', 'ru' ),
 			array( '/cat/page/', '/ru/cat/page/', 'ru' ),
 			array( '/cat/page/pt/aaa/', '/ru/cat/page/pt/aaa/', 'ru' ),
+			//
+			// Queries
+			//
+			array( '?', '/ru?', 'ru' ),
+			array( '/?', '/ru/?', 'ru' ),
+			array( '/pt?', '/ru?', 'ru' ),
+			array( '/ru/?', '/pt/?', 'pt' ),
+			array( '?a=b', '/ru?a=b', 'ru' ),
+			array( '/?a=b', '/ru/?a=b', 'ru' ),
+			array( '/ru/?a=b', '/ru/?a=b', 'ru' ),
+			array( '/ru/?a=b', '/pt/?a=b', 'pt' ),
+			array( '/de/?a=b', '/pt/de/?a=b', 'pt' ),
+			//
+			// Hashes
+			//
 			array( '/#hash', '/ru/#hash', 'ru' ),
+			array( '/ru/#hash', '/pt/#hash', 'pt' ),
+			array( '#hash', '/ru#hash', 'ru' ),
+			array( '/#', '/ru/#', 'ru' ),
+			array( '#', '/ru#', 'ru' ),
+			array( '/pt#', '/ru#', 'ru' ),
+			array( '/de#', '/ru/de#', 'ru' ),
+			//
+			// All in
+			//
+			array( '/cat/page/pt/aaa/?a=b&c=d#hash', '/ru/cat/page/pt/aaa/?a=b&c=d#hash', 'ru' ),
+			//
+			// Must not see `/rush` as `/ru` (language) and `sh`
+			//
+			array( '/rush/', '/pt/rush/', 'pt' ),
+			array( '/rush', '/pt/rush', 'pt' ),
 		);
 
 		/**
@@ -126,13 +161,17 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			foreach ( $good as $_ ) {
 				list( $url, $localized_url, $language ) = $_;
 				$this->assertEquals( $home_url . $localized_url,
-					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ) );
+					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ),
+					"In language={$language}, $url becomes $localized_url"
+				);
 			}
 
 			foreach ( $bad as $_ ) {
 				list( $url, $localized_url, $language ) = $_;
 				$this->assertNotEquals( $home_url . $localized_url,
-					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ) );
+					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ),
+					"In language={$language}, $url MUST NOT become $localized_url"
+				);
 			}
 		}
 
