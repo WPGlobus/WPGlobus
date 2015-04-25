@@ -136,7 +136,7 @@ No known backward incompatibility issues.
 	* New page for the future extensions and add-ons.
 	* The "Disabled entities" array added to the WPGlobus config.
 * COMPATIBILITY:
-	* WordPress 4.2-beta4
+	* WordPress 4.2
 
 = 1.0.10 =
 * FIXED:

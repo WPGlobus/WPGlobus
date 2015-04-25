@@ -1,7 +1,7 @@
 /*jslint node: true */
-module.exports = function (grunt) {
+'use strict';
 
-    'use strict';
+module.exports = function (grunt) {
 
     var
     //bannerTemplate = '/* <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */',
@@ -20,8 +20,22 @@ module.exports = function (grunt) {
     pathCSS_field_table = pathIncludes + '/options/fields/table';
     pathJS_field_table = pathCSS_field_table;
 
+    /**
+     * Auto-load grunt tasks
+     * @link https://www.npmjs.com/package/load-grunt-tasks
+     */
+    require( 'load-grunt-tasks' )( grunt );
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        wp_readme_to_markdown: {
+            main: {
+                files: {
+                    'readme.md': 'readme.txt'
+                },
+            },
+        },
 
         /**
          * @link https://github.com/gruntjs/grunt-contrib-uglify
@@ -182,13 +196,6 @@ module.exports = function (grunt) {
         }
     });
 
-    // Load the Grunt plugins
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-pot');
-
     /**
      * Had to write this because "pot" does not do msgmerge correctly
      * @link https://github.com/stephenharris/grunt-pot/issues/11
@@ -206,7 +213,7 @@ module.exports = function (grunt) {
     grunt.registerTask('pomo', ['pot', 'after-pot']);
 
     // To run all tasks - same list as for `watch`
-    grunt.registerTask('dist', ['less', 'cssmin', 'uglify', 'pomo']);
+    grunt.registerTask('dist', ['wp_readme_to_markdown', 'less', 'cssmin', 'uglify', 'pomo']);
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);

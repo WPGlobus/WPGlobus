@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: wpglobus 1.0.10\n"
+"Project-Id-Version: wpglobus 1.0.11\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-04-01 21:10-0400\n"
+"POT-Creation-Date: 2015-04-25 09:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,88 +42,93 @@ msgstr ""
 msgid "Breaking changes!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:61
+#: includes/admin/class-wpglobus-about.php:56
+#: includes/options/class-wpglobus-options.php:372
+msgid "Add-ons"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:63
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:68
+#: includes/admin/class-wpglobus-about.php:70
 msgid "What is WPGlobus"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:70
+#: includes/admin/class-wpglobus-about.php:72
 msgid ""
 "WPGlobus is a globalization (multi-lingual, internationalization, "
 "localization, ...) WordPress plugin."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:72
+#: includes/admin/class-wpglobus-about.php:74
 msgid ""
 "Our goal is to let WordPress support multiple languages, countries and "
 "currencies (for e-commerce)."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:74
+#: includes/admin/class-wpglobus-about.php:76
 #, php-format
 msgid "For more information, please visit %s."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:79
+#: includes/admin/class-wpglobus-about.php:81
 msgid "Feature Highlights"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:82
+#: includes/admin/class-wpglobus-about.php:84
 msgid "Add multiple languages and countries to your site."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:83
+#: includes/admin/class-wpglobus-about.php:85
 msgid ""
 "Translate posts, pages, categories, tags and menus using a clean and simple "
 "interface."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:84
+#: includes/admin/class-wpglobus-about.php:86
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:85
+#: includes/admin/class-wpglobus-about.php:87
 #, php-format
 msgid ""
 "Continue using the %s - yes, WPGlobus supports the WP-SEO titles and "
 "descriptions in multiple languages!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:92
+#: includes/admin/class-wpglobus-about.php:94
 msgid "Important"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:95
+#: includes/admin/class-wpglobus-about.php:97
 msgid ""
 "The plugin is currently in <strong>BETA</strong> stage! We will do our best "
 "to fix all problems you'll discover. Please be patient. Your contributions "
 "(on GitHub) are highly appreciated!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:99
+#: includes/admin/class-wpglobus-about.php:101
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
 "com</code> and language queries <code>example.com?lang=xx</code>."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:103
+#: includes/admin/class-wpglobus-about.php:105
 msgid ""
 "The ALPHA version (0.1.x, called internally <em>\"WPGlobus Mini\"</em>) is "
 "no longer supported. See the note below for more details."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:111
+#: includes/admin/class-wpglobus-about.php:113
 msgid "Warning! WPGlobus Mini (0.x.x) is no longer supported!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:113
+#: includes/admin/class-wpglobus-about.php:115
 msgid ""
 "The versions 0.x.x provided the existing users of other language plugins "
 "with a language-switcher menu dropdown. We are going to keep the language "
@@ -133,13 +138,18 @@ msgid ""
 "from the version 1.0.0."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:118
+#: includes/admin/class-wpglobus-about.php:120
 #, php-format
 msgid "To downgrage, please download the version 0.1.1 using %s."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:126
+#: includes/admin/class-wpglobus-about.php:128
+#: includes/admin/class-wpglobus-addons.php:63
 msgid "Go to WPGlobus Settings"
+msgstr ""
+
+#: includes/admin/class-wpglobus-addons.php:32
+msgid "WPGlobus Add-ons / Extensions"
 msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:173
@@ -230,16 +240,16 @@ msgstr ""
 msgid "Delete Language"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:613
+#: includes/class-wpglobus-filters.php:615
 msgid "Error while saving."
 msgstr ""
 
 #. //php.net/date
-#: includes/class-wpglobus-filters.php:616
+#: includes/class-wpglobus-filters.php:618
 msgid "g:i:s a"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:620
+#: includes/class-wpglobus-filters.php:622
 #, php-format
 msgid "Draft saved at %s."
 msgstr ""
@@ -299,27 +309,27 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:882
+#: includes/class-wpglobus.php:893
 msgid "You cannot disable the first enabled language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1035
+#: includes/class-wpglobus.php:1046
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2040
+#: includes/class-wpglobus.php:2089
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2121
+#: includes/class-wpglobus.php:2170
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:2337
+#: includes/class-wpglobus.php:2386
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2371
+#: includes/class-wpglobus.php:2420
 msgid "Add"
 msgstr ""
 
@@ -494,8 +504,8 @@ msgstr ""
 msgid "Post types"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:395
-#: includes/options/class-wpglobus-options.php:396
+#: includes/options/class-wpglobus-options.php:412
+#: includes/options/class-wpglobus-options.php:413
 msgid "WPGlobus"
 msgstr ""
 
