@@ -127,6 +127,10 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.0.12 =
+* ADDED:
+	* Added WPGlobus Translate Options to add-ons page.
+
 = 1.0.11 =
 * FIXED:
 	* Method of URL localization correctly parses URLs like `/rush` and `/designer`, not extracting `/ru` and `/de` from them.
