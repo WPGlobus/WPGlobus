@@ -128,8 +128,10 @@ No known backward incompatibility issues.
 == Changelog ==
 
 = 1.0.12 =
+
 * ADDED:
-	* Added WPGlobus Translate Options to add-ons page.
+	* New extension, [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) is referenced on the add-ons page.
+	* Support for http://localhost and http://127.0.0.1 development URLs.
 
 = 1.0.11 =
 * FIXED:

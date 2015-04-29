@@ -55,7 +55,7 @@ class WPGlobus_Utils {
 		 * For the following regex, we need home_url without prefix
 		 * http://www.example.com becomes example.com
 		 */
-		$home_domain_tld = preg_replace( '!^https?:\/\/(?:[^\.]+\.)?([^\.\/]+\.[^\/]+.*)!', '\1', $home_url );
+		$home_domain_tld = self::domain_tld( $home_url );
 
 		/**
 		 * Regex to replace current language prefix with the requested one.
@@ -63,11 +63,14 @@ class WPGlobus_Utils {
 		 */
 
 		/**
-		 * The "host" part of the URL (captured)
+		 * The "host+path" part of the URL (captured)
 		 * We ignore http(s) and domain prefix, but we must match the domain-tld, so any external URLs
 		 * are not localized.
 		 */
-		$re_host_part     = '(https?:\/\/(?:.+\.)?' . str_replace( '.', '\.', $home_domain_tld ) . ')';
+		$re_host_part = '(https?:\/\/(?:.+\.)?' .
+		                str_replace( '.', '\.', $home_domain_tld ) .
+		                str_replace( '/', '\/', parse_url( $home_url, PHP_URL_PATH ) )
+		                . ')';
 
 		/**
 		 * The "language" part (optional, not captured, will be thrown away)
@@ -82,7 +85,7 @@ class WPGlobus_Utils {
 		 * Using 'or' regex to capture things like '/rush' or '/designer/' correctly,
 		 * and not extract '/ru' or '/de' from them,
 		 */
-		$re_trailer       = '(\/?|[\/#\?].*)';
+		$re_trailer = '(\/?|[\/#\?].*)';
 
 		$re = '!^' . $re_host_part . $re_language_part . $re_trailer . '$!';
 
@@ -428,7 +431,50 @@ class WPGlobus_Utils {
 		return $function_in_backtrace;
 	}
 
+	/**
+	 * Strip the prefix from the host name
+	 * http://www.example.com becomes example.com
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 * @since 1.0.12
+	 */
+	public static function domain_tld( $url ) {
+		$domain_tld = parse_url( $url, PHP_URL_HOST );
 
+		if ( ! $domain_tld ) {
+			/**
+			 * parse_url failed
+			 * Let's return the original url.
+			 * Works if URL passed without scheme (just 'www.example.com' and not 'http://www.example.com' )
+			 */
+			return $url;
+		}
+
+		$host_components = explode( '.', $domain_tld );
+
+		if ( is_numeric( $host_components[0] ) ) {
+			/**
+			 * It's an IP address. Do nothing.
+			 */
+		} else {
+			/**
+			 * Strip all prefixes
+			 * @todo example.co.uk becomes just co.uk
+			 *       This does not break the algorithm of @see localize_url, but still needs to be fixed.
+			 */
+
+			$num_components = count( $host_components );
+			if ( $num_components > 2 ) {
+				$domain_tld = $host_components[ $num_components - 2 ]
+				              . '.'
+				              . $host_components[ $num_components - 1 ];
+			}
+		}
+
+		return $domain_tld;
+	}
 
 	//<editor-fold desc="DEPRECATED METHODS">
 
