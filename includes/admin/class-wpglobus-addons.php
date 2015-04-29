@@ -14,8 +14,8 @@ class WPGlobus_Addons {
 	public static function addons_screen() {
 
 		$addons                    = array();
-		//$addons['wordpress.org'][] = 'wpglobus';
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
+		$addons['wordpress.org'][] = 'wpglobus-translate-options';
 
 		/**
 		 * @quirk
