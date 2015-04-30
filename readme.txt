@@ -1,7 +1,7 @@
 === WPGlobus - Multilingual Everything! ===
 Contributors: tivnetinc, tivnet, alexgff
 Donate link: http://www.wpglobus.com/
-Tags: ACF, bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, SEO, switcher, translate, translation, WPGlobus, TIVWP
+Tags: WPGlobus, bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, switcher, translate, translation, TIVWP
 Requires at least: 4.0
 Tested up to: 4.2
 Stable tag: trunk
