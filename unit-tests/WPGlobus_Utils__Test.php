@@ -146,11 +146,19 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 * @var string[];
 		 */
 		$homes = array(
+			'http://www.example.com/blog',
+			'http://localhost',
+			'http://localhost/my-site',
+			'http://just-name',
+			'http://just-name/my-site',
+			'http://127.0.0.1',
+			'http://127.0.0.1/my-site',
 			'http://www.example.com',
 			'http://develop.example.com',
+			'http://many.dots.in.domain.example.com',
 			'http://example.com',
 			'https://www.example.com',
-			'http://www.example.com/blog',
+			'http://www.example.com/my-site/blog',
 		);
 
 		foreach ( $homes as $home ) {
@@ -267,6 +275,28 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( array( 1, 'pi' ), $config ) );
+
+	}
+
+	/**
+	 * @covers WPGlobus_Utils::domain_tld
+	 */
+	function test_domain_tld() {
+
+		$data = array(
+			'http://www.example.com'               => 'example.com',
+			'http://example.com'                   => 'example.com',
+			'http://www.example.co.uk'             => 'co.uk',
+			'http://localhost'                     => 'localhost',
+			'http://something.example.com'         => 'example.com',
+			'http://multiple.prefixes.example.com' => 'example.com',
+			'example.com'                          => 'example.com',
+			'http://127.0.0.1'                     => '127.0.0.1',
+		);
+
+		foreach ( $data as $url => $domain_tld ) {
+			$this->assertEquals( $domain_tld, WPGlobus_Utils::domain_tld( $url ) );
+		}
 
 	}
 

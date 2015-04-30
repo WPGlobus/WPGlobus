@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-04-25 09:33-0500\n"
-"PO-Revision-Date: 2015-04-25 09:33-0500\n"
+"POT-Creation-Date: 2015-04-30 15:48-0500\n"
+"PO-Revision-Date: 2015-04-30 15:49-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -49,7 +49,7 @@ msgstr "Критические изменения!"
 #: includes/admin/class-wpglobus-about.php:56
 #: includes/options/class-wpglobus-options.php:372
 msgid "Add-ons"
-msgstr ""
+msgstr "Расширения"
 
 #: includes/admin/class-wpglobus-about.php:63
 #, php-format
@@ -181,7 +181,7 @@ msgstr "Перейдите в настройки WPGlobus"
 
 #: includes/admin/class-wpglobus-addons.php:32
 msgid "WPGlobus Add-ons / Extensions"
-msgstr ""
+msgstr "Расширения WPGlobus"
 
 #: includes/admin/class-wpglobus-language-edit.php:173
 #: includes/admin/class-wpglobus-language-edit.php:178
@@ -349,19 +349,19 @@ msgstr "Нельзя отключить первый в списке язык."
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:2089
+#: includes/class-wpglobus.php:2107
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:2170
+#: includes/class-wpglobus.php:2188
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 
-#: includes/class-wpglobus.php:2386
+#: includes/class-wpglobus.php:2404
 msgid "My Account"
 msgstr "Мой аккаунт"
 
-#: includes/class-wpglobus.php:2420
+#: includes/class-wpglobus.php:2438
 msgid "Add"
 msgstr "Добавить"
 

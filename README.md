@@ -1,9 +1,9 @@
 # WPGlobus - Multilingual Everything! #
-**Contributors:** tivnetinc, tivnet, alexgff  
+**Contributors:** tivnetinc, alexgff, tivnet  
 **Donate link:** http://www.wpglobus.com/  
-**Tags:** ACF, bilingual, globalization, i18n, international, l10n, language, localization, multilanguage, multilingual, multilingual SEO, SEO, switcher, translate, translation, WPGlobus, TIVWP  
+**Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus  
 **Requires at least:** 4.0  
-**Tested up to:** 4.2  
+**Tested up to:** 4.2.1  
 **Stable tag:** trunk  
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
@@ -35,15 +35,16 @@ With the WPGlobus Free Core plugin, you can:
 
 The WPGlobus option panel allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
-### More info ###
+### Free Add-ons ###
 
-* [WPGlobus.com website](http://www.wpglobus.com/).
-* [WPGlobus code on GitHub](https://github.com/WPGlobus).
-* WPGlobus on:
-	* [LinkedIn](https://www.linkedin.com/company/wpglobus),
-	* [Facebook](https://www.facebook.com/WPGlobus),
-	* [Twitter](https://twitter.com/WPGlobus) and
-	* [Google Plus](https://plus.google.com/+Wpglobus).
+* [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/):
+	* Set featured image separately for each language.
+
+* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/):
+	* Enable translate of the option values stored in the `wp_options` table.
+
+* More extensions are planned:
+	* Stay tuned, search the repository for [WPGlobus](https://wordpress.org/plugins/search.php?q=WPGlobus).
 
 ### WPGlobus is compatible with these popular plugins: ###
 
@@ -56,6 +57,16 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 
 * [ReduxFramework](http://reduxframework.com/) core is embedded in the plugin to provide a nice admin interface. If the [ReduxFramework Plugin](https://wordpress.org/plugins/redux-framework/) is already installed, it will be used instead of the embedded version.
 * Most of the flag images are downloaded from the [Flags of the World](http://www.crwflags.com/FOTW/FLAGS/index.html) website.
+
+### More info and ways to contact the WPGlobus Development Team ###
+
+* [WPGlobus.com website](http://www.wpglobus.com/).
+* [Open source code on GitHub](https://github.com/WPGlobus).
+* WPGlobus on social networks:
+	* [Facebook](https://www.facebook.com/WPGlobus)
+	* [Twitter](https://twitter.com/WPGlobus)
+	* [Google Plus](https://plus.google.com/+Wpglobus)
+	* [LinkedIn](https://www.linkedin.com/company/wpglobus)
 
 ## Installation ##
 
@@ -126,6 +137,14 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.0.12 ###
+
+* FIXED:
+	* Language switcher in navigation menus works correctly if WordPress is installed in a subfolder.
+* ADDED:
+	* New extension, [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) is referenced on the add-ons page.
+	* Support for http://localhost and http://127.0.0.1 development URLs.
 
 ### 1.0.11 ###
 * FIXED:
