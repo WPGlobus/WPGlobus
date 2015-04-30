@@ -129,6 +129,8 @@ No known backward incompatibility issues.
 
 = 1.0.12 =
 
+* FIXED:
+	* Language switcher in navigation menus works correctly if WordPress is installed in a subfolder.
 * ADDED:
 	* New extension, [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) is referenced on the add-ons page.
 	* Support for http://localhost and http://127.0.0.1 development URLs.

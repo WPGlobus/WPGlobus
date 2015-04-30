@@ -1643,13 +1643,13 @@ class WPGlobus {
 			 * @since 1.0.7
 			 */
 			return $sorted_menu_items;
-			
+
 		} elseif ( 'all' == WPGlobus::Config()->nav_menu ) {
 			/**
 			 * Attach to every nav menu
 			 * @since 1.0.7
 			 */
-		} else {	
+		} else {
 
 			$items = array();
 			foreach( $sorted_menu_items as $item ) {
@@ -1664,13 +1664,13 @@ class WPGlobus {
 					break;
 				}
 			}
-			
+
 			if ( $return ) {
 				return $sorted_menu_items;
 			}
 
 		}
-		
+
 		$extra_languages = array();
 		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
 			if ( $languages != WPGlobus::Config()->language ) {
@@ -1698,17 +1698,34 @@ class WPGlobus {
 		$span_classes_lang   = $span_classes;
 		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
 
+		/**
+		 * @since 1.0.12
+		 * There is no method of getting the current URL in WordPress.
+		 * Various snippets published on the Web use a combination of home_url and add_query_arg.
+		 * However, none of them work when WordPress is installed in a subfolder.
+		 * The method below looks valid. There is a theoretical chance of HTTP_HOST tampered, etc.
+		 * However, the same line of code is used by the WordPress core, for example in
+		 * @see wp_admin_canonical_url
+		 * so we are going to use it, too
+		 * *
+		 * Note that #hash is always lost because it's a client-side parameter.
+		 * We might add it using a JavaScript call.
+		 */
+		$current_url  = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+
 		$item                   = new stdClass();
 		$item->ID               = 9999999999; # 9 999 999 999
 		$item->db_id            = 9999999999;
 		$item->menu_item_parent = 0;
 		$item->title            =
 			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span>';
-		$item->url              = WPGlobus_Utils::get_url( WPGlobus::Config()->language );
+		// The top menu level points to the current URL. Useless? Maybe good for refresh.
+		$item->url              = $current_url;
 		$item->classes          = $menu_item_classes;
 		$item->description      = '';
 
 		$sorted_menu_items[] = $item;
+
 
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   = $span_classes;
@@ -1720,9 +1737,10 @@ class WPGlobus {
 			$item->menu_item_parent = 9999999999;
 			$item->title            =
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
-			$item->url              = WPGlobus_Utils::get_url( $language );
-			$item->classes          = $submenu_item_classes;
-			$item->description      = '';
+			// This points to the URL localized for the selected language
+			$item->url         = WPGlobus_Utils::localize_url( $current_url, $language );
+			$item->classes     = $submenu_item_classes;
+			$item->description = '';
 
 			$sorted_menu_items[] = $item;
 		}
