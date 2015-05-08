@@ -341,13 +341,16 @@ class WPGlobus {
 			) );
 			
 		} else {
-			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
-				$_SERVER['REQUEST_URI'],
-				$_SERVER['HTTP_HOST'],
-				isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
-			);
-
-			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
+			/**
+			 * Moved to @see WPGlobus_Filters::action__init_url_info()
+			 */
+			//			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
+			//				$_SERVER['REQUEST_URI'],
+			//				$_SERVER['HTTP_HOST'],
+			//				isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+			//			);
+			//
+			//			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 			$this->menus = self::_get_nav_menus();
 

@@ -293,7 +293,7 @@ class WPGlobus_Utils {
 		$url = substr( $url, strlen( $home['path'] ) );
 		if ( $url ) {
 			// might have language information
-			if ( preg_match( "#^([a-z]{2})(/.*)?$#i", $url, $match ) ) {
+			if ( preg_match( "#^([a-z]{2})(\/|\?|$)#", $url, $match ) ) {
 				if ( self::is_enabled( $match[1] ) ) {
 					// found language information
 					$result['language'] = $match[1];

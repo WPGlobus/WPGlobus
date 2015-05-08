@@ -138,6 +138,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.0.13 =
+
+* FIXED:
+	* Correct language setting for URLs like `/fr?s=aaa` with no trailing slash before `?`
+
 = 1.0.12 =
 
 * FIXED:
