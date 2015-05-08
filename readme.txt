@@ -140,6 +140,8 @@ No known backward incompatibility issues.
 
 = 1.0.13 =
 
+* ADDED:
+	* Word count in wp_editor for each language
 * FIXED:
 	* Correct language setting for URLs like `/fr?s=aaa` with no trailing slash before `?`
 

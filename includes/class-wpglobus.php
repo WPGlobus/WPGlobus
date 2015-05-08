@@ -1814,7 +1814,7 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_add_wp_editors( $post ) {
-
+		
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
@@ -1828,7 +1828,11 @@ class WPGlobus {
 
 				continue;
 
-			} else { ?>
+			} else { 
+			
+				$last_user = get_userdata( get_post_meta( $post->ID, '_edit_last', true ) );
+			
+				?>
 
 				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">    <?php
 					wp_editor( WPGlobus_Core::text_filter( $post->post_content, $language, WPGlobus::RETURN_EMPTY ), 'content_' . $language, array(
@@ -1844,8 +1848,35 @@ class WPGlobus {
 							'add_unload_trigger' => false,
 							#'readonly' => true /* @todo for WPGlobus Authors */
 						),
-					) ); ?>
-				</div> <?php
+					) ); 
+					
+					/**
+					 * Add post status info table
+					 *
+					 * @since 1.0.13
+					 */
+					?>
+					<table id="post-status-info-<?php echo $language; ?>" class="wpglobus-post-status-info"><tbody><tr>
+						<td id="wp-word-count-<?php echo $language; ?>" class="wpglobus-wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count-'.$language.'">0</span>' ); ?></td>
+						<td class="autosave-info">
+						
+							<span class="autosave-message">&nbsp;</span>
+						<?php
+							if ( 'auto-draft' != $post->post_status ) {
+								echo '<span id="last-edit">';
+								if ( $last_user ) {
+									printf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+								} else {
+									printf(__('Last edited on %1$s at %2$s'), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+								}
+								echo '</span>';
+							} ?>						
+						
+						</td>
+						<td id="content-resize-handle-<?php echo $language; ?>" class="wpglobus-content-resize-handle hide-if-no-js"><br /></td>
+					</tr></tbody></table>					
+					
+				</div> <?php // .postarea .postdivrich-wpglobus
 
 			}
 		endforeach;
