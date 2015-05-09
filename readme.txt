@@ -142,6 +142,7 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* Word count in wp_editor for each language
+	* Admin notice for change permalink from default value
 * FIXED:
 	* Correct language setting for URLs like `/fr?s=aaa` with no trailing slash before `?`
 

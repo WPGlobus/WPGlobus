@@ -2367,7 +2367,19 @@ class WPGlobus {
 
 		return $WPGlobus_Config;
 	}
-
+	
+	/**
+	 * Show off admin notice
+	 *
+	 * @since 1.0.13
+	 * @return void
+	 */	
+	function admin_notice(){
+		$class = "update-nag notice notice-warning";
+		$message = __( 'Add text for change permalink from default value for correct working WPGlobus', 'wpglobus' );
+        echo "<div style=\"width:97%;\" class=\"$class\"><p>$message</p></div>"; 	
+	}	
+	
 	/**
 	 * Check for transient wpglobus_activated
 	 * @since 1.0.0
@@ -2375,10 +2387,22 @@ class WPGlobus {
 	 */
 	function on_admin_init() {
 		
-		if ( false !== get_transient( 'wpglobus_activated' ) ) {
-			delete_transient( 'wpglobus_activated' );
-			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
-			die();
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			// do nothing
+		} else {	
+
+			if ( false !== get_transient( 'wpglobus_activated' ) ) {
+				delete_transient( 'wpglobus_activated' );
+				wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
+				die();
+			}
+			
+			$permalink_structure = get_option('permalink_structure');
+			
+			if ( empty($permalink_structure) ) {
+				add_action( 'admin_notices', array($this, 'admin_notice') ); 
+			}	
+			
 		}
 		
 		/**
