@@ -1604,7 +1604,19 @@ class WPGlobus {
 				$extra_languages[] = $languages;
 			}
 		}
-
+		
+		/**
+		 * Filter extra languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.13
+		 *
+		 * @param array     $extra_languages 			 An array with languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */
+		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );	
+		
 		$span_classes = array(
 			'wpglobus_flag',
 			'wpglobus_language_name'
@@ -1681,6 +1693,18 @@ class WPGlobus {
 			}
 		}
 
+		/**
+		 * Filter extra languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.13
+		 *
+		 * @param array     $extra_languages 			 An array with languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */
+		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );			
+		
 		/** main menu item classes */
 		$menu_item_classes = array(
 			'',
