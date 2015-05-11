@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-04-30 15:48-0500\n"
-"PO-Revision-Date: 2015-04-30 15:49-0500\n"
+"POT-Creation-Date: 2015-05-11 17:52-0500\n"
+"PO-Revision-Date: 2015-05-11 18:00-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -333,35 +333,64 @@ msgstr "Выпадающее меню"
 msgid "Dropdown with flags"
 msgstr "Выпадающее меню с флагами"
 
-#: includes/class-wpglobus-widget.php:187
+#: includes/class-wpglobus-widget.php:189
 msgid "Title"
 msgstr "Заголовок"
 
-#: includes/class-wpglobus-widget.php:191
+#: includes/class-wpglobus-widget.php:193
 msgid "Selector type"
 msgstr "Способ выбора языка"
 
-#: includes/class-wpglobus.php:893
+#: includes/class-wpglobus.php:896
 msgid "You cannot disable the first enabled language."
 msgstr "Нельзя отключить первый в списке язык."
 
-#: includes/class-wpglobus.php:1046
+#: includes/class-wpglobus.php:1049
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:2107
+#: includes/class-wpglobus.php:1884
+#, php-format
+msgid "Word count: %s"
+msgstr "Количество слов: %s"
+
+#: includes/class-wpglobus.php:1892
+#, php-format
+msgid "Last edited by %1$s on %2$s at %3$s"
+msgstr "Последний раз редактировалось пользователем %1$s %2$s в %3$s"
+
+#: includes/class-wpglobus.php:1894
+#, php-format
+msgid "Last edited on %1$s at %2$s"
+msgstr "Последний раз редактировалось %1$s в %2$s"
+
+#: includes/class-wpglobus.php:2165
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:2188
+#: includes/class-wpglobus.php:2246
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 
-#: includes/class-wpglobus.php:2404
+#: includes/class-wpglobus.php:2403
+msgid "You must enable Pretty Permalinks to use WPGlobus."
+msgstr ""
+"Чтобы использовать плагин WPGLobus, необходимо включить ЧПУ - постоянные "
+"ссылки."
+
+#: includes/class-wpglobus.php:2405
+msgid ""
+"Please go to Settings > Permalinks > Common Settings and choose a non-"
+"default option."
+msgstr ""
+"Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
+"структуру ссылок в разделе \"Общие настройки\"."
+
+#: includes/class-wpglobus.php:2489
 msgid "My Account"
 msgstr "Мой аккаунт"
 
-#: includes/class-wpglobus.php:2438
+#: includes/class-wpglobus.php:2523
 msgid "Add"
 msgstr "Добавить"
 
