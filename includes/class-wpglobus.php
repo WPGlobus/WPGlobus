@@ -2391,40 +2391,43 @@ class WPGlobus {
 
 		return $WPGlobus_Config;
 	}
-	
+
 	/**
-	 * Show off admin notice
-	 *
+	 * Show notice to admin about permalinks settings
 	 * @since 1.0.13
-	 * @return void
-	 */	
-	function admin_notice(){
-		$class = "update-nag notice notice-warning";
-		$message = __( 'Add text for change permalink from default value for correct working WPGlobus', 'wpglobus' );
-        echo "<div style=\"width:97%;\" class=\"$class\"><p>$message</p></div>"; 	
+	 */
+	function admin_notice_permalink_structure() {
+		?>
+		<div class="notice notice-error error">
+		<p>
+			<?php esc_html_e( 'You must enable Pretty Permalinks to use WPGlobus.', 'wpglobus' ); ?>
+			<strong>
+				<?php esc_html_e( 'Please go to Settings > Permalinks > Common Settings and choose a non-default option.', 'wpglobus' ); ?>
+			</strong>
+		</p>
+		</div><?php
 	}	
 	
 	/**
-	 * Check for transient wpglobus_activated
-	 * @since 1.0.0
-	 * @return void
+	 * Various actions on admin_init hook
 	 */
 	function on_admin_init() {
-		
-		if ( defined('DOING_AJAX') && DOING_AJAX ) {
-			// do nothing
-		} else {	
 
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			// do nothing
+		} else {
+
+			/**
+			 * Check for transient wpglobus_activated
+			 */
 			if ( false !== get_transient( 'wpglobus_activated' ) ) {
 				delete_transient( 'wpglobus_activated' );
 				wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
-				die();
+				exit;
 			}
-			
-			$permalink_structure = get_option('permalink_structure');
-			
-			if ( empty($permalink_structure) ) {
-				add_action( 'admin_notices', array($this, 'admin_notice') ); 
+
+			if ( ! get_option( 'permalink_structure' ) ) {
+				add_action( 'admin_notices', array( $this, 'admin_notice_permalink_structure' ) );
 			}	
 			
 		}
