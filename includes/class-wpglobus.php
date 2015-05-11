@@ -341,13 +341,16 @@ class WPGlobus {
 			) );
 			
 		} else {
-			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
-				$_SERVER['REQUEST_URI'],
-				$_SERVER['HTTP_HOST'],
-				isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
-			);
-
-			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
+			/**
+			 * Moved to @see WPGlobus_Filters::action__init_url_info()
+			 */
+			//			$WPGlobus_Config->url_info = WPGlobus_Utils::extract_url(
+			//				$_SERVER['REQUEST_URI'],
+			//				$_SERVER['HTTP_HOST'],
+			//				isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+			//			);
+			//
+			//			$WPGlobus_Config->language = $WPGlobus_Config->url_info['language'];
 
 			$this->menus = self::_get_nav_menus();
 
@@ -1601,7 +1604,19 @@ class WPGlobus {
 				$extra_languages[] = $languages;
 			}
 		}
-
+		
+		/**
+		 * Filter extra languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.13
+		 *
+		 * @param array     $extra_languages 			 An array with languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */
+		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );	
+		
 		$span_classes = array(
 			'wpglobus_flag',
 			'wpglobus_language_name'
@@ -1678,6 +1693,18 @@ class WPGlobus {
 			}
 		}
 
+		/**
+		 * Filter extra languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.13
+		 *
+		 * @param array     $extra_languages 			 An array with languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */
+		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );			
+		
 		/** main menu item classes */
 		$menu_item_classes = array(
 			'',
@@ -1811,7 +1838,7 @@ class WPGlobus {
 	 * @return void
 	 */
 	function on_add_wp_editors( $post ) {
-
+		
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
@@ -1825,7 +1852,11 @@ class WPGlobus {
 
 				continue;
 
-			} else { ?>
+			} else { 
+			
+				$last_user = get_userdata( get_post_meta( $post->ID, '_edit_last', true ) );
+			
+				?>
 
 				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">    <?php
 					wp_editor( WPGlobus_Core::text_filter( $post->post_content, $language, WPGlobus::RETURN_EMPTY ), 'content_' . $language, array(
@@ -1841,8 +1872,35 @@ class WPGlobus {
 							'add_unload_trigger' => false,
 							#'readonly' => true /* @todo for WPGlobus Authors */
 						),
-					) ); ?>
-				</div> <?php
+					) ); 
+					
+					/**
+					 * Add post status info table
+					 *
+					 * @since 1.0.13
+					 */
+					?>
+					<table id="post-status-info-<?php echo $language; ?>" class="wpglobus-post-status-info"><tbody><tr>
+						<td id="wp-word-count-<?php echo $language; ?>" class="wpglobus-wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count-'.$language.'">0</span>' ); ?></td>
+						<td class="autosave-info">
+						
+							<span class="autosave-message">&nbsp;</span>
+						<?php
+							if ( 'auto-draft' != $post->post_status ) {
+								echo '<span id="last-edit">';
+								if ( $last_user ) {
+									printf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+								} else {
+									printf(__('Last edited on %1$s at %2$s'), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
+								}
+								echo '</span>';
+							} ?>						
+						
+						</td>
+						<td id="content-resize-handle-<?php echo $language; ?>" class="wpglobus-content-resize-handle hide-if-no-js"><br /></td>
+					</tr></tbody></table>					
+					
+				</div> <?php // .postarea .postdivrich-wpglobus
 
 			}
 		endforeach;
@@ -2335,16 +2393,43 @@ class WPGlobus {
 	}
 
 	/**
-	 * Check for transient wpglobus_activated
-	 * @since 1.0.0
-	 * @return void
+	 * Show notice to admin about permalinks settings
+	 * @since 1.0.13
+	 */
+	function admin_notice_permalink_structure() {
+		?>
+		<div class="notice notice-error error">
+		<p>
+			<?php esc_html_e( 'You must enable Pretty Permalinks to use WPGlobus.', 'wpglobus' ); ?>
+			<strong>
+				<?php esc_html_e( 'Please go to Settings > Permalinks > Common Settings and choose a non-default option.', 'wpglobus' ); ?>
+			</strong>
+		</p>
+		</div><?php
+	}	
+	
+	/**
+	 * Various actions on admin_init hook
 	 */
 	function on_admin_init() {
-		
-		if ( false !== get_transient( 'wpglobus_activated' ) ) {
-			delete_transient( 'wpglobus_activated' );
-			wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
-			die();
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			// do nothing
+		} else {
+
+			/**
+			 * Check for transient wpglobus_activated
+			 */
+			if ( false !== get_transient( 'wpglobus_activated' ) ) {
+				delete_transient( 'wpglobus_activated' );
+				wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
+				exit;
+			}
+
+			if ( ! get_option( 'permalink_structure' ) ) {
+				add_action( 'admin_notices', array( $this, 'admin_notice_permalink_structure' ) );
+			}	
+			
 		}
 		
 		/**

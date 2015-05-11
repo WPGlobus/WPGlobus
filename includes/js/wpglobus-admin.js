@@ -288,6 +288,7 @@ jQuery(document).ready(function () {
         };
 
         WPGlobusAdminApp.App.prototype = {
+			$document : $(document),
             init: function () {
 				this.admin_init();
 				$('#content').addClass('wpglobus-editor').attr('data-language',WPGlobusAdmin.data.default_language);
@@ -834,6 +835,84 @@ jQuery(document).ready(function () {
                         $('#excerpt').eq(0).val(s);
                     });
                 }
+
+				// wp_editor word count
+				if ( typeof(wpWordCount) != 'undefined' ) {
+
+					var last = 0,
+						ls = WPGlobusCoreData.open_languages,
+						$d = this.$document,
+						lsb = {};
+
+					ls.shift();
+
+					$.each(WPGlobusCoreData.open_languages, function(i,e){
+						lsb[e] = 0;
+					});
+
+					var wpglobusWordCount = {
+						settings : {
+							strip : /<[a-zA-Z\/][^<>]*>/g, // strip HTML tags
+							clean : /[0-9.(),;:!?%#$¿'"_+=\\/-]+/g, // regexp to remove punctuation, etc.
+							w : /\S\s+/g, // word-counting regexp
+							c : /\S/g // char-counting regexp for asian languages
+						},
+						block : lsb,
+						wc : function(tx, l, type) {
+							var t = this, w, tc = 0;
+
+							if ( l == WPGlobusCoreData.default_language ) {
+								w = $('.word-count');
+							} else {
+								w = $('.word-count-'+l);
+							}
+
+							if ( type === undefined )
+								type = wordCountL10n.type;
+							if ( type !== 'w' && type !== 'c' )
+								type = 'w';
+
+							if ( t.block[l] )
+								return;
+
+							t.block[l] = 1;
+
+							setTimeout( function() {
+								if ( tx ) {
+									tx = tx.replace( t.settings.strip, ' ' ).replace( /&nbsp;|&#160;/gi, ' ' );
+									tx = tx.replace( t.settings.clean, '' );
+									tx.replace( t.settings[type], function(){tc++;} );
+								}
+								w.html(tc.toString());
+								setTimeout( function() { t.block[l] = 0; }, 2000 );
+							}, 1 );
+						}
+					};
+
+					$d.bind( 'wpglobuscountwords', function(e, txt, l) {
+						wpglobusWordCount.wc(txt, l);
+					});
+
+					$.each(ls, function(i,l){
+						var co = $('#content_'+l);
+						$d.triggerHandler('wpglobuscountwords', [ co.val(), l ]);
+						co.keyup( function(e) {
+							var k = e.keyCode || e.charCode;
+
+							if ( k == last ) {
+                                return true;
+                            }
+							if ( 13 == k || 8 == last || 46 == last )
+								$d.triggerHandler('wpglobuscountwords', [ co.val(), l ]);
+
+							last = k;
+							return true;
+						});
+					});
+					// word recount for default language
+					$(document).triggerHandler('wpglobuscountwords', [ $('#content').val(), WPGlobusCoreData.default_language ]);
+				}
+				// end word count
 				
 				$('body').on('click', '#publish, #save-post', function() {
 					if ( WPGlobusAdmin.data.open_languages.length > 1 ) {
