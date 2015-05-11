@@ -141,8 +141,8 @@ No known backward incompatibility issues.
 = 1.0.13 =
 
 * ADDED:
-	* Word count in wp_editor for each language
-	* Admin notice for change permalink from default value
+	* Word count in wp_editor for each language.
+	* Admin notice about WPGlobus requiring "nice permalinks".
 * FIXED:
 	* Correct language setting for URLs like `/fr?s=aaa` with no trailing slash before `?`
 
