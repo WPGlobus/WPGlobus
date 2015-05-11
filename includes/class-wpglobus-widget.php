@@ -90,6 +90,19 @@ class WPGlobusWidget extends WP_Widget {
 					</ul></div>';
 				break;
 		endswitch;
+		
+		/**
+		 * Filter enabled languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.13
+		 *
+		 * @param array     $enabled_languages 			 An array with languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */
+		$enabled_languages = apply_filters( 'wpglobus_extra_languages', $enabled_languages, WPGlobus::Config()->language );			
+		
 		echo $args['before_widget'];
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
