@@ -119,6 +119,17 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) {
 }
 
 /**
+ * Filter @see wp_trim_words
+ * @scope admin
+ * @since 1.0.14
+ *
+ * Trims text to a certain number of words in the current language
+ */
+if ( is_admin() && WPGlobus_WP::is_pagenow( 'index.php' ) ) {
+	add_filter( 'wp_trim_words', array( 'WPGlobus_Filters', 'filter__trim_words'), 0, 4 );
+}
+
+/**
  * Basic post/page filters
  * -
  * Note: We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
