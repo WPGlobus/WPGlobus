@@ -696,6 +696,9 @@ class WPGlobus_Filters {
 	/**
 	 * Filter @see wp_trim_words
 	 *
+	 * @qa  At the /wp-admin/index.php page is a Quick Draft metabox
+	 *      which shows 3 last post drafts. This filter lets post content in default language.
+	 *	
 	 * @since 1.0.14
 	 *
 	 * @param string $text          The trimmed text.
