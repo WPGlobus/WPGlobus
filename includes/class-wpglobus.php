@@ -1565,19 +1565,35 @@ class WPGlobus {
 
 		$ref_source =
 			$scheme . '://' . $WPGlobus_Config->url_info['host'] . '/%%lang%%' . $WPGlobus_Config->url_info['url'];
-
+	
+		$hreflangs = array();
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+
 			$hreflang = str_replace( '_', '-', $WPGlobus_Config->locale[ $language ] );
 			if ( $language == $WPGlobus_Config->default_language ) {
 				$ref = str_replace( '%%lang%%/', '', $ref_source );
 			} else {
 				$ref = str_replace( '%%lang%%', $language, $ref_source );
 			}
-			?>
-			<link rel="alternate" hreflang="<?php echo $hreflang; ?>" href="<?php echo $ref; ?>"/>
-		<?php
+			
+			$hreflangs[$language] = '<link rel="alternate" hreflang="' . $hreflang . '" href="' . $ref . '"/>';
 		}
+		
+		/**
+		 * Filter hreflang.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.14
+		 *
+		 * @param string    $hreflangs An array.
+		 */					
+		$hreflangs = apply_filters( 'wpglobus_hreflang_tag', $hreflangs );		
 
+		if ( ! empty($hreflangs) ) {
+			echo implode( "\n", $hreflangs ) . "\n";
+		}			
+		
 	}
 
 	/**
