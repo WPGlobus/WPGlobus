@@ -1968,8 +1968,9 @@ class WPGlobus {
 			 * Don't working with revision
 			 * note: revision there are 2 types, its have some differences
 			 *        - [post_name] => {post_id}-autosave-v1    and [post_name] => {post_id}-revision-v1
-			 *        - when [post_name] == {post_id}-autosave-v1  $postarr has [post_content] and [post_title] in default_language
-			 *        - [post_name] == {post_id}-revision-v1 $postarr has [post_content] and [post_title] in all enabled languages with delimiters
+			 *        autosave         : when [post_name] == {post_id}-autosave-v1  $postarr has [post_content] and [post_title] in default_language
+			 *        regular revision : [post_name] == {post_id}-revision-v1 $postarr has [post_content] and [post_title] in all enabled languages with delimiters
+			 * @see https://codex.wordpress.org/Revision_Management
 			 * see $postarr for more info
 			 */
 			return $data;
