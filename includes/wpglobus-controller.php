@@ -148,8 +148,10 @@ add_filter( 'get_the_excerpt', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
  *
  * @see the_posts filter
  */
-add_filter( 'the_posts', array( 'WPGlobus_Filters', 'filter__the_posts' ), 0, 2 );
-
+if ( ! is_admin() ) { 
+	add_filter( 'the_posts', array( 'WPGlobus_Filters', 'filter__the_posts' ), 0, 2 );
+}
+	
 /**
  * @internal
  * Do not need to apply the wp_title filter
