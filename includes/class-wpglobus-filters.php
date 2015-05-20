@@ -28,7 +28,27 @@ class WPGlobus_Filters {
 		);
 
 	}
+	
+	/**
+	 * @todo description
+	 *
+	 * @since 1.0.14
+	 *
+	 * @param array $posts
+	 * @param WP_Query Object $query
+	 *
+	 * @return array
+	 */	
+	public static function filter__the_posts( $posts, &$query ) {
 
+		foreach( $posts as $post ) {
+			WPGlobus_Core::translate_wp_post( $post, WPGLobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+		}	
+
+		return $posts;
+
+	}		
+	
 	/**
 	 * This is similar to the @see filter__text filter,
 	 * but it returns text in the DEFAULT language.
