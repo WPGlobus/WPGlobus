@@ -1196,6 +1196,9 @@ class WPGlobus {
 			 * because we do element.text(...), and \r\n are being removed by TinyMCE
 			 * See other places with the same bookmark.
 			 * @bookmark EDITOR_LINE_BREAKS
+			 * 
+			 * added 24.05.2015
+			 * @todo what's next with wpautop?  @see 'wpautop()' in https://make.wordpress.org/core/2015/05/14/dev-chat-summary-may-13/
 			 */
 			$post_content_autop = wpautop( $post_content );
 
