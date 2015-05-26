@@ -948,7 +948,6 @@ jQuery(document).ready(function () {
 						if ( title.length > 0 ) {
 							$('#title').val(title);
 						}
-						//return false;
 					}	
 					if ( typeof WPGlobusAdmin.data.tagsdiv === 'undefined' || WPGlobusAdmin.data.tagsdiv.length < 1 ) {
 						return;
