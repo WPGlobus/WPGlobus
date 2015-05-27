@@ -110,7 +110,7 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 * Yes, we do. Currently working on WC. Other plugins will follow.
 
-= Is it possible to set the user's language automatically based on IP and/or browser language?
+= Is it possible to set the user's language automatically based on IP and/or browser language? =
 
 * In one of the future versions, we plan to detect the browser language. It's already in our backlog.
 * As for the IP, while we know the technology and have used it in several projects, we believe it should not be a part of WPGlobus Core. There are plugins that can detect country by IP. Besides, country or residence and language is not the same, so using GeoIP might not always be the best idea...
