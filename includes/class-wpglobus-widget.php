@@ -126,6 +126,12 @@ class WPGlobusWidget extends WP_Widget {
 					$inside .= '<span class="flag"><a href="' . $url . '"><img src="' . $flag . '"/></a></span>';
 					break;
 				case 'list' :
+					$inside .= '<a href="' . $url . '">' .
+						         '<span class="name">' .
+					           WPGlobus::Config()->language_name[ $language ] .
+                     '</span>' . 
+                     '</a>';
+        	break;
 				case 'list_with_flags' :
 					$inside .= '<a href="' . $url . '">' .
 					           '<img src="' . $flag . '" alt=""/>' .
