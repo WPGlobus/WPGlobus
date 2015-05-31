@@ -126,7 +126,7 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) {
  * Trims text to a certain number of words in the current language
  */
 if ( is_admin() && WPGlobus_WP::is_pagenow( 'index.php' ) ) {
-	add_filter( 'wp_trim_words', array( 'WPGlobus_Filters', 'filter__trim_words'), 0, 4 );
+	add_filter( 'wp_trim_words', array( 'WPGlobus_Filters', 'filter__wp_trim_words'), 0, 4 );
 }
 
 /**

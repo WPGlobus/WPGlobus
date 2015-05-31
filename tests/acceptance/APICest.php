@@ -219,6 +219,11 @@ class APICest {
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . " category description EN", $I->grabTextFrom(
 			'#_test_get_term_' . 'category' . ' .description' ) );
 
+		/**
+		 * @see WPGlobus_QA::_test_wp_trim_words()
+		 */
+		$I->assertEquals( "EN01 EN02 EN03 EN04 EN05…", $I->grabTextFrom( '#_test_wp_trim_words' ) );
+
 		$this->_common_for_all_languages( $I );
 	}
 
@@ -346,6 +351,11 @@ class APICest {
 			'#_test_get_term_' . 'category' . ' .name' ) );
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . " category description RU", $I->grabTextFrom(
 			'#_test_get_term_' . 'category' . ' .description' ) );
+
+		/**
+		 * @see WPGlobus_QA::_test_wp_trim_words()
+		 */
+		$I->assertEquals( "RU01 RU02 RU03 RU04 RU05…", $I->grabTextFrom( '#_test_wp_trim_words' ) );
 
 		$this->_common_for_all_languages( $I );
 	}

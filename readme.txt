@@ -138,6 +138,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.0.14 =
+
+* FIXED:
+	* Correct display of trimmed words in admin (filter on `wp_trim_words`).
+
 = 1.0.13 =
 
 * ADDED:

@@ -8,7 +8,7 @@ class WPGlobus_QA {
 	const QA_USER_ID = 1;
 
 	/**
-	 * Must match APICest::COMMON_PREFIX @see APICest
+	 * Must match WPGlobus_Acceptance::COMMON_PREFIX @see WPGlobus_Acceptance
 	 */
 	const COMMON_PREFIX = 'WPGlobusQA';
 
@@ -77,6 +77,8 @@ class WPGlobus_QA {
 			self::_test_get_term();
 
 			self::_test_post_name();
+
+			self::_test_wp_trim_words();
 
 			self::_common_for_all_languages();
 
@@ -624,6 +626,21 @@ class WPGlobus_QA {
 	private static function _test_get_locale() {
 		?><h2>get_locale()</h2><?php
 		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo get_locale(); ?></div><?php
+	}
+
+	private static function _test_wp_trim_words() {
+
+		/**
+		 * Need to add filter here because in the controller it's added only for the admin home page.
+		 */
+		add_filter( 'wp_trim_words', array( 'WPGlobus_Filters', 'filter__wp_trim_words' ), 0, 4 );
+
+		$text = WPGlobus_Utils::build_multilingual_string(array(
+			'en' => 'EN01 EN02 EN03 EN04 EN05 EN06 EN07 EN08 EN09 EN10',
+			'ru' => 'RU01 RU02 RU03 RU04 RU05 RU06 RU07 RU08 RU09 RU10',
+		));
+		?><h2>wp_trim_words()</h2><?php
+		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo wp_trim_words($text, 5); ?></div><?php
 	}
 
 	private static function _remove_qa_items() {
