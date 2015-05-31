@@ -225,10 +225,10 @@ class WPGlobus {
 				/**
 				 * Filters for adding language column to edit.php page
 				 */
-				if ( WPGlobus_WP::is_pagenow('edit.php') && ! $this->disabled_entity() ) {
-						
-					$post_type_filter = isset($_GET['post_type']) ? '_' . $_GET['post_type'] : '';
-					
+				if ( WPGlobus_WP::is_pagenow( 'edit.php' ) && ! $this->disabled_entity() ) {
+
+					$post_type_filter = isset( $_GET['post_type'] ) ? '_' . $_GET['post_type'] : '';
+
 					add_filter( "manage{$post_type_filter}_posts_columns", array(
 						$this,
 						'on_add_language_column'
@@ -238,7 +238,7 @@ class WPGlobus {
 						$this,
 						'on_manage_language_column'
 					), 10 );
-					
+
 				}
 
 				/**
@@ -435,39 +435,41 @@ class WPGlobus {
 	/**
 	 * Insert flags to every item at edit.php page
 	 *
-	 * @param $column_name
+	 * @param string $column_name
 	 */
 	function on_manage_language_column( $column_name ) {
 
 		if ( 'wpglobus_languages' == $column_name ) {
-			
+
+			/** @global WP_Post $post */
 			global $post;
+
 			$output = array();
-			$i = 0;
+			$i      = 0;
 			foreach ( WPGlobus::Config()->enabled_languages as $l ) {
 				if ( 1 == preg_match( "/(\{:|\[:|<!--:)[$l]{2}/", $post->post_title . $post->post_content ) ) {
-					$output[$i] = '<img title="' . WPGlobus::Config()->en_language_name[ $l ] . '" src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $l ] . '" />';
-					
+					$output[ $i ] =
+						'<img title="' . WPGlobus::Config()->en_language_name[ $l ] .
+						'" src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $l ] . '" />';
+
 					/**
 					 * Filter language item.
-					 *
 					 * Returning string.
-					 *
 					 * @since 1.0.14
 					 *
-					 * @param string    $output						 Language item.
-					 * @param array     $post 			 			 An object WP_Post.
-					 * @param string    $l 							 The language.
-					 */					
-					$output[$i] = apply_filters( 'wpglobus_manage_language_item', $output[$i], $post, $l );
-					$i++;
+					 * @param string $output Language item.
+					 * @param array  $post   An object WP_Post.
+					 * @param string $l      The language.
+					 */
+					$output[ $i ] = apply_filters( 'wpglobus_manage_language_item', $output[ $i ], $post, $l );
+					$i ++;
 				}
 			}
 
-			if ( ! empty($output) ) {
-				echo implode('<br />', $output);
-			}	
-		
+			if ( ! empty( $output ) ) {
+				echo implode( '<br />', $output );
+			}
+
 		}
 
 	}
