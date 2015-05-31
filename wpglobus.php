@@ -63,7 +63,7 @@ if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
  * Handle special URLs for QA
  * @note CREATES POST, PAGE, CATEGORY and TAG!!! CLEAN AFTER RUNNING!!!
  */
-if ( ! empty( $_GET['wpglobus'] ) && $_GET['wpglobus'] === 'qa' ) {
+if ( defined( 'WPGLOBUS_QA_ENABLED' ) && ! empty( $_GET['wpglobus'] ) && $_GET['wpglobus'] === 'qa' ) {
 	require_once 'includes/class-wpglobus-qa.php';
 	add_filter( 'template_include', array( 'WPGlobus_QA', 'filter__template_include' ) );
 }
