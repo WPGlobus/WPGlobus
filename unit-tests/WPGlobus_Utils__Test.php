@@ -300,6 +300,23 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 	}
 
+	/**
+	 * @covers WPGlobus_Utils::build_multilingual_string
+	 */
+	function test_build_multilingual_string() {
+		$translations = array(
+			'en' => 'EN',
+			'ru' => 'RU',
+			'de' => 'DE',
+			'fr' => 'FR',
+		);
+
+		$this->assertEquals(
+			'{:en}EN{:}{:ru}RU{:}{:de}DE{:}{:fr}FR{:}',
+			WPGlobus_Utils::build_multilingual_string( $translations )
+		);
+	}
+
 } // class
 
 /**
