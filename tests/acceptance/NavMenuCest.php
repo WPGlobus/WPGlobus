@@ -10,9 +10,9 @@ class NavMenuCest {
 	 */
 	public function testMenuTextTranslation( AcceptanceTester $I ) {
 		$I->amOnPage( '/' );
-		$I->seeLink( 'CONTACT US' );
+		$I->seeLink( WPGlobus_Acceptance::COMMON_PREFIX . ' page_title ' . 'EN' );
 		$I->amOnPage( '/ru/' );
-		$I->seeLink( 'КОНТАКТЫ' );
+		$I->seeLink( WPGlobus_Acceptance::COMMON_PREFIX . ' page_title ' . 'RU' );
 	}
 } // class
 
