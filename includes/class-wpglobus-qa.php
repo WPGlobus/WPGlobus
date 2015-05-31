@@ -18,8 +18,8 @@ class WPGlobus_QA {
 
 	/**
 	 * Handle special URLs for QA
-	 * @url http://www.wpglobus.com/?wpglobus=qa
-	 * @url http://www.wpglobus.com/ru/?wpglobus=qa
+	 * @url http://qa.wpglobus.com/?wpglobus=qa
+	 * @url http://qa.wpglobus.com/ru/?wpglobus=qa
 	 * @return string
 	 */
 	public static function filter__template_include() {
