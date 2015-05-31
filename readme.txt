@@ -121,7 +121,7 @@ We appreciate all contributions, ideas, critique, and help.
 
 * To speed up our development, please report bugs, with reproduction steps, or post patches on [WPGlobus GitHub](https://github.com/WPGlobus/WPGlobus).
 * Plugin and theme authors: please try WPGlobus and let us know if you find any compatibility problems.
-* Contact us directly on [WPGlobus.com](http://www.wpglobus.com/contact-us/).
+* Contact us directly on [WPGlobus.com](http://www.wpglobus.com/pg/contact-us/).
 
 = More info? =
 
