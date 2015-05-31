@@ -105,7 +105,7 @@ class WPGlobus_Options {
 				'desc'   => '' .
 				            '<br/>' .
 				            '&bull; ' .
-				            '<a href="' . admin_url() . 'admin.php?page=wpglobus-about">' .
+				            '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ABOUT . '">' .
 				            __( 'Read About WPGlobus', 'wpglobus' ) .
 				            '</a>' .
 				            '<br/>' .

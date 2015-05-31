@@ -2464,7 +2464,7 @@ class WPGlobus {
 			 */
 			if ( false !== get_transient( 'wpglobus_activated' ) ) {
 				delete_transient( 'wpglobus_activated' );
-				wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
+				wp_redirect( admin_url( add_query_arg( array( 'page' => WPGlobus::PAGE_WPGLOBUS_ABOUT ), 'admin.php' ) ) );
 				exit;
 			}
 
