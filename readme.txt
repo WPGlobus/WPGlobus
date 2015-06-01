@@ -35,6 +35,13 @@ With the WPGlobus Free Core plugin, you can:
 
 The WPGlobus option panel allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
 
+= Demos =
+
+* [Site in subfolder](http://demo-subfolder.wpglobus.com/):
+	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
+* [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
+	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin (work in progress, will be released soon).
+
 = Free Add-ons =
 
 * [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/):
@@ -106,7 +113,7 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Correct display of trimmed words in admin (filter on `wp_trim_words`).
-	* Correct display of the posts with `---MORE---` in archives.
+	* Correct translation of the posts with `---MORE---`.
 
 = 1.0.13 =
 
