@@ -651,8 +651,9 @@ class WPGlobus_QA {
 
 	private static function _test_get_posts() {
 		$posts = get_posts( array(
-			'include'          => self::$_qa_post_ids['post'],
-			'suppress_filters' => false
+			'include'                          => self::$_qa_post_ids['post'],
+			'suppress_filters'                 => false,
+			'wpglobus_force_filter__the_posts' => true
 		) );
 		/** @var WP_Post $post */
 		$post = $posts[0];
@@ -660,7 +661,9 @@ class WPGlobus_QA {
 		?>
 		<div id="<?php echo __FUNCTION__; ?>" class="well">
 			<div class="post_title"><?php echo $post->post_title; ?></div>
+
 			<div class="post_content"><?php echo $post->post_content; ?></div>
+
 			<div class="post_excerpt"><?php echo $post->post_excerpt; ?></div>
 		</div>
 	<?php

@@ -28,27 +28,38 @@ class WPGlobus_Filters {
 		);
 
 	}
-	
+
 	/**
-	 * @todo description
+	 * This filter is needed to display correctly the posts with the '--- MORE ---' separator
+	 * in archives.
+	 * Without it, the post content is truncated at the beginning of <!--more-->, thus keeping
+	 * only the first language.
+	 * *
+	 * 'the_posts' filter is used by @see get_posts(), which is commonly used in all sorts of places,
+	 * including, for instance, @see wp_get_associated_nav_menu_items while deleting a post.
+	 * So, to minimize potential side effects, we limit the scope to main queries, or
+	 * when the 'wpglobus_force_filter__the_posts' is set
+	 * (@see WPGlobus_QA::_test_get_posts for example).
 	 *
-	 * @since 1.0.14
-	 *
-	 * @param array $posts
-	 * @param WP_Query Object $query
+	 * @param array    $posts
+	 * @param WP_Query $query
 	 *
 	 * @return array
-	 */	
+	 * @since 1.0.14
+	 */
 	public static function filter__the_posts( $posts, &$query ) {
 
-		foreach( $posts as $post ) {
-			WPGlobus_Core::translate_wp_post( $post, WPGLobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
-		}	
+		if ( $query->is_main_query() || $query->get( 'wpglobus_force_filter__the_posts' ) ) {
+			foreach ( $posts as $post ) {
+				WPGlobus_Core::translate_wp_post( $post, WPGLobus::Config()->language,
+					WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+			}
+		}
 
 		return $posts;
 
-	}		
-	
+	}
+
 	/**
 	 * This is similar to the @see filter__text filter,
 	 * but it returns text in the DEFAULT language.
@@ -712,13 +723,11 @@ class WPGlobus_Filters {
 		return str_replace( $post->post_title, $title, $text );
 
 	}
-	
+
 	/**
 	 * Filter @see wp_trim_words
-	 *
-	 * @qa  At the /wp-admin/index.php page is a Quick Draft metabox
+	 * @qa    At the /wp-admin/index.php page is a Quick Draft metabox
 	 *      which shows 3 last post drafts. This filter lets post content in default language.
-	 *	
 	 * @since 1.0.14
 	 *
 	 * @param string $text          The trimmed text.
@@ -727,13 +736,14 @@ class WPGlobus_Filters {
 	 * @param string $original_text The text before it was trimmed.
 	 *
 	 * @return string
-	 */	
+	 */
 	public static function filter__wp_trim_words( $text, $num_words, $more, $original_text ) {
-		
+
 		$text = WPGlobus_Core::text_filter( $original_text, WPGlobus::Config()->language );
-		
-		if ( null === $more )
+
+		if ( null === $more ) {
 			$more = __( '&hellip;' );
+		}
 
 		$text = wp_strip_all_tags( $text );
 		/* translators: If your word count is based on single characters (East Asian characters),
@@ -742,10 +752,10 @@ class WPGlobus_Filters {
 			$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
 			preg_match_all( '/./u', $text, $words_array );
 			$words_array = array_slice( $words_array[0], 0, $num_words + 1 );
-			$sep = '';
+			$sep         = '';
 		} else {
 			$words_array = preg_split( "/[\n\r\t ]+/", $text, $num_words + 1, PREG_SPLIT_NO_EMPTY );
-			$sep = ' ';
+			$sep         = ' ';
 		}
 		if ( count( $words_array ) > $num_words ) {
 			array_pop( $words_array );
@@ -753,11 +763,11 @@ class WPGlobus_Filters {
 			$text = $text . $more;
 		} else {
 			$text = implode( $sep, $words_array );
-		}		
-		
+		}
+
 		return $text;
 
-	}	
+	}
 
 	/**
 	 * Register the WPGlobus widgets
