@@ -80,6 +80,8 @@ class WPGlobus_QA {
 
 			self::_test_wp_trim_words();
 
+			self::_test_get_posts();
+
 			self::_common_for_all_languages();
 
 			if ( $is_need_to_remove_qa_items ) {
@@ -109,10 +111,14 @@ class WPGlobus_QA {
 
 		if ( ! $post ) {
 
-			$post_content = join( '', array(
-				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_content EN", 'en' ),
-				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_content RU", 'ru' ),
-			) );
+			$post_content = WPGlobus_Utils::build_multilingual_string(
+				array(
+					'en' => self::COMMON_PREFIX . " {$type}_content EN" . '<!--more-->' . "\n\n" .
+					        self::COMMON_PREFIX . " {$type}_content_after_more EN",
+					'ru' => self::COMMON_PREFIX . " {$type}_content RU" . '<!--more-->' . "\n\n" .
+					        self::COMMON_PREFIX . " {$type}_content_after_more RU",
+				)
+			);
 
 			$post_excerpt = join( '', array(
 				WPGlobus::add_locale_marks( self::COMMON_PREFIX . " {$type}_excerpt EN", 'en' ),
@@ -635,12 +641,29 @@ class WPGlobus_QA {
 		 */
 		add_filter( 'wp_trim_words', array( 'WPGlobus_Filters', 'filter__wp_trim_words' ), 0, 4 );
 
-		$text = WPGlobus_Utils::build_multilingual_string(array(
+		$text = WPGlobus_Utils::build_multilingual_string( array(
 			'en' => 'EN01 EN02 EN03 EN04 EN05 EN06 EN07 EN08 EN09 EN10',
 			'ru' => 'RU01 RU02 RU03 RU04 RU05 RU06 RU07 RU08 RU09 RU10',
-		));
+		) );
 		?><h2>wp_trim_words()</h2><?php
-		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo wp_trim_words($text, 5); ?></div><?php
+		?><div id="<?php echo __FUNCTION__; ?>" class="well"><?php echo wp_trim_words( $text, 5 ); ?></div><?php
+	}
+
+	private static function _test_get_posts() {
+		$posts = get_posts( array(
+			'include'          => self::$_qa_post_ids['post'],
+			'suppress_filters' => false
+		) );
+		/** @var WP_Post $post */
+		$post = $posts[0];
+		?><h2>get_posts( array( 'suppress_filters' => false ) )</h2><?php
+		?>
+		<div id="<?php echo __FUNCTION__; ?>" class="well">
+			<div class="post_title"><?php echo $post->post_title; ?></div>
+			<div class="post_content"><?php echo $post->post_content; ?></div>
+			<div class="post_excerpt"><?php echo $post->post_excerpt; ?></div>
+		</div>
+	<?php
 	}
 
 	private static function _remove_qa_items() {

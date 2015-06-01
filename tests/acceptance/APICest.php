@@ -115,31 +115,75 @@ class APICest {
 		/**
 		 * @see WPGlobus_QA::_create_qa_items()
 		 */
-		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' post_title EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' post_title RU{:}',
+		$I->assertEquals(
+			'{:en}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_title EN' .
+			'{:}' .
+			'{:ru}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_title RU' .
+			'{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' post_content EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' post_content RU{:}',
+
+		$I->assertEquals(
+			'{:en}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content_after_more EN' .
+			'{:}' .
+			'{:ru}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content_after_more RU' .
+			'{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_content' ) );
+
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' post_excerpt EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' post_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
-		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' post_title EN',
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_title EN'
+			,
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' post_content EN',
+
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content_after_more EN'
+			,
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' post_excerpt EN',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_title EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_content RU{:}',
-			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ) );
+
+		$I->assertEquals(
+			'{:en}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more EN' .
+			'{:}' .
+			'{:ru}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more RU' .
+			'{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ), __LINE__ );
+
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_excerpt EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( '' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_title EN',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( '' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN',
+
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more EN'
+			,
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+
 		$I->assertEquals( '' . WPGlobus_Acceptance::COMMON_PREFIX . ' page_excerpt EN',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
@@ -159,11 +203,15 @@ class APICest {
 		 * @see WPGlobus_QA::_test_get_pages()
 		 */
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' page_title EN',
-			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_title' ) );
-		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN',
-			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_content' ) );
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_title' ), __LINE__ );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more EN'
+			,
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_content' ), __LINE__ );
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' page_excerpt EN',
-			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_excerpt' ) );
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_excerpt' ), __LINE__ );
 
 		/**
 		 * @see WPGlobus_QA::_test_get_the_terms()
@@ -249,29 +297,65 @@ class APICest {
 		 */
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_title EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_content EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_content RU{:}',
+
+		$I->assertEquals(
+			'{:en}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content_after_more EN' .
+			'{:}' .
+			'{:ru}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content_after_more RU' .
+			'{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_content' ) );
+
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_excerpt EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_title RU',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_content RU',
+
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' post_content_after_more RU'
+			,
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'post_excerpt RU',
 			$I->grabTextFrom( '#_create_qa_items_post' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_title EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_title RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_title' ) );
-		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_content EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_content RU{:}',
-			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ) );
+
+		$I->assertEquals(
+			'{:en}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content EN' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more EN' .
+			'{:}' .
+			'{:ru}' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more RU' .
+			'{:}',
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_content' ), __LINE__ );
+
 		$I->assertEquals( '{:en}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_excerpt EN{:}{:ru}' . WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_excerpt RU{:}',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_raw' . ' .qa_post_excerpt' ) );
 
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_title RU',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_title' ) );
-		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_content RU',
-			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ) );
+
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_content_after_more RU'
+			,
+			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_content' ), __LINE__ );
+
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' ' . 'page_excerpt RU',
 			$I->grabTextFrom( '#_create_qa_items_page' . ' .qa_post_cooked' . ' .qa_post_excerpt' ) );
 
@@ -291,11 +375,17 @@ class APICest {
 		 * @see WPGlobus_QA::_test_get_pages()
 		 */
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' page_title RU',
-			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_title' ) );
-		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' page_content RU',
-			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_content' ) );
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_title' ), __LINE__ );
+
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content RU' .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . ' page_content_after_more RU'
+			,
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_content' ), __LINE__ );
+
 		$I->assertEquals( WPGlobus_Acceptance::COMMON_PREFIX . ' page_excerpt RU',
-			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_excerpt' ) );
+			$I->grabTextFrom( '#_test_get_pages' . ' .qa_post_excerpt' ), __LINE__ );
 
 
 		/**
