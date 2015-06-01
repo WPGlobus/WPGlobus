@@ -105,6 +105,9 @@ class APICest {
 	public function en( AcceptanceTester $I ) {
 		$I->amOnPage( '/?wpglobus=qa' );
 
+		$language        = 'en';
+		$language_suffix = strtoupper( $language );
+
 		$I->see( WPGlobus_Acceptance::COMMON_PREFIX . ' EN', 'h1' );
 
 		/**
@@ -272,6 +275,24 @@ class APICest {
 		 */
 		$I->assertEquals( "EN01 EN02 EN03 EN04 EN05…", $I->grabTextFrom( '#_test_wp_trim_words' ) );
 
+		/**
+		 * @covers WPGlobus_QA::_test_get_posts()
+		 */
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_title " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_get_posts .post_title' ), __LINE__ );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_content " . $language_suffix .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_content_after_more " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_get_posts .post_content' ), __LINE__ );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_excerpt " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_get_posts .post_excerpt' ), __LINE__ );
+
 		$this->_common_for_all_languages( $I );
 	}
 
@@ -284,6 +305,9 @@ class APICest {
 	 */
 	public function ru( AcceptanceTester $I ) {
 		$I->amOnPage( '/ru/?wpglobus=qa' );
+
+		$language        = 'ru';
+		$language_suffix = strtoupper( $language );
 
 		$I->see( WPGlobus_Acceptance::COMMON_PREFIX . ' RU', 'h1' );
 
@@ -446,6 +470,25 @@ class APICest {
 		 * @see WPGlobus_QA::_test_wp_trim_words()
 		 */
 		$I->assertEquals( "RU01 RU02 RU03 RU04 RU05…", $I->grabTextFrom( '#_test_wp_trim_words' ) );
+
+
+		/**
+		 * @covers WPGlobus_QA::_test_get_posts()
+		 */
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_title " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_get_posts .post_title' ), __LINE__ );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_content " . $language_suffix .
+			' ' .
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_content_after_more " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_get_posts .post_content' ), __LINE__ );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " post_excerpt " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_get_posts .post_excerpt' ), __LINE__ );
 
 		$this->_common_for_all_languages( $I );
 	}
