@@ -146,7 +146,7 @@ add_filter( 'get_the_excerpt', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
  * 
  * @since 1.0.14
  *
- * @see the_posts filter
+ * @see get_posts() for `the_posts` filter
  */
 if ( ! is_admin() ) { 
 	add_filter( 'the_posts', array( 'WPGlobus_Filters', 'filter__the_posts' ), 0, 2 );
