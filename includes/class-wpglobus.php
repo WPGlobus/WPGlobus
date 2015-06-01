@@ -225,10 +225,10 @@ class WPGlobus {
 				/**
 				 * Filters for adding language column to edit.php page
 				 */
-				if ( WPGlobus_WP::is_pagenow('edit.php') && ! $this->disabled_entity() ) {
-						
-					$post_type_filter = isset($_GET['post_type']) ? '_' . $_GET['post_type'] : '';
-					
+				if ( WPGlobus_WP::is_pagenow( 'edit.php' ) && ! $this->disabled_entity() ) {
+
+					$post_type_filter = isset( $_GET['post_type'] ) ? '_' . $_GET['post_type'] : '';
+
 					add_filter( "manage{$post_type_filter}_posts_columns", array(
 						$this,
 						'on_add_language_column'
@@ -238,7 +238,7 @@ class WPGlobus {
 						$this,
 						'on_manage_language_column'
 					), 10 );
-					
+
 				}
 
 				/**
@@ -435,17 +435,41 @@ class WPGlobus {
 	/**
 	 * Insert flags to every item at edit.php page
 	 *
-	 * @param $column_name
+	 * @param string $column_name
 	 */
 	function on_manage_language_column( $column_name ) {
 
 		if ( 'wpglobus_languages' == $column_name ) {
+
+			/** @global WP_Post $post */
 			global $post;
+
+			$output = array();
+			$i      = 0;
 			foreach ( WPGlobus::Config()->enabled_languages as $l ) {
 				if ( 1 == preg_match( "/(\{:|\[:|<!--:)[$l]{2}/", $post->post_title . $post->post_content ) ) {
-					echo '<img title="' . WPGlobus::Config()->en_language_name[ $l ] . '" src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $l ] . '" /><br />';
+					$output[ $i ] =
+						'<img title="' . WPGlobus::Config()->en_language_name[ $l ] .
+						'" src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $l ] . '" />';
+
+					/**
+					 * Filter language item.
+					 * Returning string.
+					 * @since 1.0.14
+					 *
+					 * @param string $output Language item.
+					 * @param array  $post   An object WP_Post.
+					 * @param string $l      The language.
+					 */
+					$output[ $i ] = apply_filters( 'wpglobus_manage_language_item', $output[ $i ], $post, $l );
+					$i ++;
 				}
 			}
+
+			if ( ! empty( $output ) ) {
+				echo implode( '<br />', $output );
+			}
+
 		}
 
 	}
@@ -1174,6 +1198,9 @@ class WPGlobus {
 			 * because we do element.text(...), and \r\n are being removed by TinyMCE
 			 * See other places with the same bookmark.
 			 * @bookmark EDITOR_LINE_BREAKS
+			 * 
+			 * added 24.05.2015
+			 * @todo what's next with wpautop?  @see 'wpautop()' in https://make.wordpress.org/core/2015/05/14/dev-chat-summary-may-13/
 			 */
 			$post_content_autop = wpautop( $post_content );
 
@@ -1543,19 +1570,35 @@ class WPGlobus {
 
 		$ref_source =
 			$scheme . '://' . $WPGlobus_Config->url_info['host'] . '/%%lang%%' . $WPGlobus_Config->url_info['url'];
-
+	
+		$hreflangs = array();
 		foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+
 			$hreflang = str_replace( '_', '-', $WPGlobus_Config->locale[ $language ] );
 			if ( $language == $WPGlobus_Config->default_language ) {
 				$ref = str_replace( '%%lang%%/', '', $ref_source );
 			} else {
 				$ref = str_replace( '%%lang%%', $language, $ref_source );
 			}
-			?>
-			<link rel="alternate" hreflang="<?php echo $hreflang; ?>" href="<?php echo $ref; ?>"/>
-		<?php
+			
+			$hreflangs[$language] = '<link rel="alternate" hreflang="' . $hreflang . '" href="' . $ref . '"/>';
 		}
+		
+		/**
+		 * Filter hreflang.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.0.14
+		 *
+		 * @param string    $hreflangs An array.
+		 */					
+		$hreflangs = apply_filters( 'wpglobus_hreflang_tag', $hreflangs );		
 
+		if ( ! empty($hreflangs) ) {
+			echo implode( "\n", $hreflangs ) . "\n";
+		}			
+		
 	}
 
 	/**
@@ -1946,8 +1989,9 @@ class WPGlobus {
 			 * Don't working with revision
 			 * note: revision there are 2 types, its have some differences
 			 *        - [post_name] => {post_id}-autosave-v1    and [post_name] => {post_id}-revision-v1
-			 *        - when [post_name] == {post_id}-autosave-v1  $postarr has [post_content] and [post_title] in default_language
-			 *        - [post_name] == {post_id}-revision-v1 $postarr has [post_content] and [post_title] in all enabled languages with delimiters
+			 *        autosave         : when [post_name] == {post_id}-autosave-v1  $postarr has [post_content] and [post_title] in default_language
+			 *        regular revision : [post_name] == {post_id}-revision-v1 $postarr has [post_content] and [post_title] in all enabled languages with delimiters
+			 * @see https://codex.wordpress.org/Revision_Management
 			 * see $postarr for more info
 			 */
 			return $data;
@@ -2422,7 +2466,7 @@ class WPGlobus {
 			 */
 			if ( false !== get_transient( 'wpglobus_activated' ) ) {
 				delete_transient( 'wpglobus_activated' );
-				wp_redirect( admin_url( add_query_arg( array( 'page' => 'wpglobus-about' ), 'admin.php' ) ) );
+				wp_redirect( admin_url( add_query_arg( array( 'page' => WPGlobus::PAGE_WPGLOBUS_ABOUT ), 'admin.php' ) ) );
 				exit;
 			}
 

@@ -3,7 +3,7 @@
 **Donate link:** http://www.wpglobus.com/  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus  
 **Requires at least:** 4.0  
-**Tested up to:** 4.2.1  
+**Tested up to:** 4.2.2  
 **Stable tag:** trunk  
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
@@ -34,6 +34,13 @@ With the WPGlobus Free Core plugin, you can:
 * Switch the Administrator interface language using a top bar selector.
 
 The WPGlobus option panel allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
+
+### Demos ###
+
+* [Site in subfolder](http://demo-subfolder.wpglobus.com/):
+	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
+* [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
+	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin (work in progress, will be released soon).
 
 ### Free Add-ons ###
 
@@ -81,51 +88,15 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 ## Frequently Asked Questions ##
 
-### Do you support PHP 5.x? ###
+From the [FAQ Archives on the WPGlobus Website](http://www.wpglobus.com/faq/):
 
-* We develop using PHP 5.5, and would like everyone to use at least that version.
-* PHP 5.2 is highly discouraged. At this stage, we try to follow the WordPress guidelines and do not use any of the 5.3+ features (namespaces, anonymous functions, etc.) - but we do not guarantee that it will be the case in the future releases.
-* So, please use PHP 5.5+. Everyone will feel better. Thank you!
-
-### Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x? ###
-
-* We believe that our CSS and JS run properly on the most recent versions of those browsers.
-* We do our best to fix any problems you discover on Chrome, FF and MSIE 11+. Opera and Safari are excluded from our top list, but they should work fine. MSIE 10,9,8,7,etc. - completely ignored (thanks for understanding).
-
-### Do you plan to support subdomains and URL query parameters? ###
-
-* WPGlobus does not support switching languages using the `/page/?lang={language}` URLs or subdomains `en.example.com; fr.example.com`. If we see a demand, we may release this functionality in a separate extension. Having it in the core would affect the overall performance.
-
-### I am using WPML (qTranslate, Polylang, Multilingual Press, etc.). Can I switch to WPGlobus? ###
-
-* Switching from (m)qTranslate should be straightforward and smooth if you are using the URLs in the form `/en/page/`, `/fr/page`, etc.
-* Switching from other plugins is also possible, but will require some manual work. In the future, we plan to release the transition routines.
-
-### The theme/plugin 'X' I am using does not display the multiple languages correctly. Can you help? ###
-
-* If this is a free theme/plugin, available on WordPress.org, written using the WordPress 4.x standards, we'll do our best to find a solution;
-* Unfortunately, we cannot help you with any commercial theme of plugin that demonstrates incompatibility with WPGlobus. However, if the theme/plugin's author wishes to contact us and work on the solution together - we'll be very happy to collaborate.
-
-### Do you plan to support WooCommerce, EDD, other e-Commerce plugins? ###
-
-* Yes, we do. Currently working on WC. Other plugins will follow.
-
-### Is it possible to set the user's language automatically based on IP and/or browser language?
-
-* In one of the future versions, we plan to detect the browser language. It's already in our backlog.
-* As for the IP, while we know the technology and have used it in several projects, we believe it should not be a part of WPGlobus Core. There are plugins that can detect country by IP. Besides, country or residence and language is not the same, so using GeoIP might not always be the best idea...
-###
-### How do I contribute to WPGlobus? ###
-
-We appreciate all contributions, ideas, critique, and help.
-
-* To speed up our development, please report bugs, with reproduction steps, or post patches on [WPGlobus GitHub](https://github.com/WPGlobus/WPGlobus).
-* Plugin and theme authors: please try WPGlobus and let us know if you find any compatibility problems.
-* Contact us directly on [WPGlobus.com](http://www.wpglobus.com/contact-us/).
-
-### More info? ###
-
-Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional information.
+* [Do you support PHP 5.x?](http://www.wpglobus.com/faq/support-php-5-2/)
+* [Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x?](http://www.wpglobus.com/faq/support-msie-opera-safari-chrome-firefox/)
+* [Do you plan to support subdomains and URL query parameters?](http://www.wpglobus.com/faq/subdomains-and-url-query-parameters/)
+* [I am using WPML (qTranslate, Polylang, Multilingual Press, etc.). Can I switch to WPGlobus?](http://www.wpglobus.com/faq/i-am-using-wpml-qtranslate-polylang-multilingual-press-etc-can-i-switch-to-wpglobus/)
+* [Do you plan to support WooCommerce, EDD, other e-Commerce plugins?](http://www.wpglobus.com/faq/support-woocommerce-edd/)
+* [Is it possible to set the user's language automatically based on IP and/or browser language?](http://www.wpglobus.com/faq/set-language-by-ip/)
+* [How do I contribute to WPGlobus?](http://www.wpglobus.com/faq/how-do-i-contribute-to-wpglobus/)
 
 ## Screenshots ##
 
@@ -137,6 +108,12 @@ Please check out the [WPGlobus Website](http://www.wpglobus.com/) for additional
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.0.14 ###
+
+* FIXED:
+	* Correct display of trimmed words in admin (filter on `wp_trim_words`).
+	* Correct translation of the posts with `---MORE---`.
 
 ### 1.0.13 ###
 

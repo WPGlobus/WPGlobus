@@ -476,6 +476,22 @@ class WPGlobus_Utils {
 		return $domain_tld;
 	}
 
+	/**
+	 * Convert array of local texts to multilingual string (with WPGlobus delimiters)
+	 *
+	 * @param string[] $translations
+	 *
+	 * @return string
+	 */
+	public static function build_multilingual_string( $translations ) {
+		$sz = '';
+		foreach ( $translations as $language => $text ) {
+			$sz .= WPGlobus::add_locale_marks( $text, $language );
+		}
+
+		return $sz;
+	}
+
 	//<editor-fold desc="DEPRECATED METHODS">
 
 	/**

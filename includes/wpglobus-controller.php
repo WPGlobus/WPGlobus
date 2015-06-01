@@ -119,6 +119,16 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) {
 }
 
 /**
+ * Filter @see wp_trim_words
+ * @scope admin
+ * @since 1.0.14
+ * Trims text to a certain number of words in the current language
+ */
+if ( is_admin() && WPGlobus_WP::is_pagenow( 'index.php' ) ) {
+	add_filter( 'wp_trim_words', array( 'WPGlobus_Filters', 'filter__wp_trim_words' ), 0, 4 );
+}
+
+/**
  * Basic post/page filters
  * -
  * Note: We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
@@ -129,6 +139,15 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) {
 add_filter( 'the_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 add_filter( 'the_content', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 add_filter( 'get_the_excerpt', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+
+/**
+ * @see   WPGlobus_Filters::filter__the_posts for the description
+ * @scope front
+ * @since 1.0.14
+ */
+if ( ! is_admin() ) {
+	add_filter( 'the_posts', array( 'WPGlobus_Filters', 'filter__the_posts' ), 0, 2 );
+}
 
 /**
  * @internal
@@ -194,7 +213,7 @@ if ( ! is_admin() ) {
  * @todo  We must not translate blogname in admin because it's used in many important non-visual places
  *       but we should JS the blogname at the admin bar
  * <li id="wp-admin-bar-site-name" class="menupop"><a ...>{:en}WPGlobus{:}{:ru}ВПГлобус{:}</a>
- * @todo See also action__admin_init where we do exceptions for the 'not on admin' rule.
+ * @todo  See also action__admin_init where we do exceptions for the 'not on admin' rule.
  */
 if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'option_blogdescription', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
@@ -217,7 +236,7 @@ add_filter( 'locale', array( 'WPGlobus_Filters', 'filter__get_locale' ), PHP_INT
 /**
  * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
  *        plugins already loaded their translations.
- * @todo Refactor url_info after beta-testing
+ * @todo  Refactor url_info after beta-testing
  */
 add_action( 'plugins_loaded', array( 'WPGlobus_Filters', 'action__init_url_info' ), 0 );
 //add_action( 'init', array( 'WPGlobus_Filters', 'action__init_url_info' ), 2 );

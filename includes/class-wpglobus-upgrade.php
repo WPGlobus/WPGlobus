@@ -12,7 +12,7 @@ class WPGlobus_Upgrade {
 
 	/**
 	 * Display warning about new release with no backward compatibility with the "WPGlobus Mini"
-	 * @todo Write good texts
+	 * @todo Remove this completely in the stable version.
 	 */
 	public static function action__mini_warning() {
 

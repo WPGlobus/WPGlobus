@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-05-11 17:52-0500\n"
-"PO-Revision-Date: 2015-05-11 17:52-0500\n"
+"POT-Creation-Date: 2015-06-01 16:19-0500\n"
+"PO-Revision-Date: 2015-06-01 16:20-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -121,17 +121,26 @@ msgstr "Änderungen speichern"
 msgid "Delete Language"
 msgstr "Sprache löschen"
 
-#: includes/class-wpglobus-filters.php:615
+#: includes/class-wpglobus-filters.php:646
 msgid "Error while saving."
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:618
+#: includes/class-wpglobus-filters.php:649
 msgid "g:i:s a"
 msgstr ""
 
-#: includes/class-wpglobus-filters.php:622
+#: includes/class-wpglobus-filters.php:653
 #, php-format
 msgid "Draft saved at %s."
+msgstr ""
+
+#: includes/class-wpglobus-filters.php:745
+msgid "&hellip;"
+msgstr "&hellip;"
+
+#: includes/class-wpglobus-filters.php:751
+msgctxt "word count: words or characters?"
+msgid "words"
 msgstr ""
 
 #: includes/class-wpglobus-upgrade.php:23
@@ -190,52 +199,52 @@ msgstr "Titel"
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:896
+#: includes/class-wpglobus.php:920
 msgid "You cannot disable the first enabled language."
 msgstr "Sie können die erste aktivierte Sprache nicht deaktiviert werden."
 
-#: includes/class-wpglobus.php:1049
+#: includes/class-wpglobus.php:1073
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:1884
+#: includes/class-wpglobus.php:1927
 #, php-format
 msgid "Word count: %s"
 msgstr ""
 
-#: includes/class-wpglobus.php:1892
+#: includes/class-wpglobus.php:1935
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:1894
+#: includes/class-wpglobus.php:1937
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:2165
+#: includes/class-wpglobus.php:2209
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2246
+#: includes/class-wpglobus.php:2290
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:2403
+#: includes/class-wpglobus.php:2447
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2405
+#: includes/class-wpglobus.php:2449
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2489
+#: includes/class-wpglobus.php:2533
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2523
+#: includes/class-wpglobus.php:2567
 #, fuzzy
 msgid "Add"
 msgstr "Fügen Sie neue Sprache"

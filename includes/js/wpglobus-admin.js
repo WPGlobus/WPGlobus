@@ -803,7 +803,19 @@ jQuery(document).ready(function () {
                 });
 
                 // tabs on
-                $('#post-body-content').addClass('wpglobus-post-body-tabs').tabs(); // #post-body-content
+                $('#post-body-content').addClass('wpglobus-post-body-tabs').tabs({
+					beforeActivate: function( event, ui ){
+						var otab = ui.oldTab[0].id.replace('link-tab-','');
+						var ntab = ui.newTab[0].id.replace('link-tab-','');
+						if ( 'default' == otab ) {
+							otab = WPGlobusCoreData.default_language;	
+						}	
+						if ( 'default' == ntab ) {
+							ntab = WPGlobusCoreData.default_language;	
+						}	
+						$(document).triggerHandler('wpglobus_post_body_tabs', [ otab, ntab ]);
+					}
+				}); // #post-body-content
 
                 // setup for default language
                 $('#title').val(WPGlobusAdmin.title);
@@ -916,6 +928,7 @@ jQuery(document).ready(function () {
 				
 				$('body').on('click', '#publish, #save-post', function() {
 					if ( WPGlobusAdmin.data.open_languages.length > 1 ) {
+						$(document).triggerHandler('wpglobus_before_save_post');
 						// if empty title in default language make it from another titles
 						var t = $('#title').val(),
 							index, title = '', delimiter = '';

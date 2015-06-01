@@ -12,7 +12,7 @@ modules:
         - Asserts
     config:
         WebDriver:
-            url: 'http://www.wpglobus.com/'
+            url: 'http://qa.wpglobus.com/'
             browser: phantomjs
             restart: true
             window_size: 1024x768
