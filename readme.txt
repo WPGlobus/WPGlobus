@@ -142,6 +142,7 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Correct display of trimmed words in admin (filter on `wp_trim_words`).
+	* Correct display of the posts with `---MORE---` in archives.
 
 = 1.0.13 =
 
