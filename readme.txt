@@ -109,6 +109,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.0.15 =
+
+* FIXED:
+	* Language tabs in admin editor styled according to the WP standards.
+
 = 1.0.14 =
 
 * FIXED:
