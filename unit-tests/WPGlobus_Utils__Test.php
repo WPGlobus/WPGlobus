@@ -317,6 +317,16 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * "Stub" test for coverage.
+	 * @covers WPGlobus_Utils::current_url
+	 */
+	function test_current_url() {
+		$_SERVER['HTTP_HOST']   = 'www.example.com';
+		$_SERVER['REQUEST_URI'] = '/folder/file?var=value';
+		$this->assertEquals( 'http://www.example.com/folder/file?var=value', WPGlobus_Utils::current_url() );
+	}
+
 } // class
 
 /**
@@ -356,4 +366,16 @@ function untrailingslashit( $string ) {
 	return rtrim( $string, '/\\' );
 }
 
+/**
+ * Set the scheme for a URL
+ * @since 3.4.0
+ *
+ * @param string $url    Absolute url that includes a scheme
+ * @param string $scheme Optional. Scheme to give $url. Currently 'http', 'https', 'login', 'login_post', 'admin', or 'relative'.
+ *
+ * @return string $url URL with chosen scheme.
+ */
+function set_url_scheme( $url, $scheme = null ) {
+	return $url;
+}
 # --- EOF

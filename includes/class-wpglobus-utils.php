@@ -98,70 +98,6 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * Returns cleaned string and language information
-	 * Improved version, also understands $url without scheme:
-	 * //example.com, example.com/, and so on
-	 *
-	 * @param string $current_language
-	 *
-	 * @return string
-	 */
-	public static function get_url( $current_language = '' ) {
-		global $WPGlobus_Config;
-
-		$current_language = ( '' == $current_language ) ? $WPGlobus_Config->language : $current_language;
-		//		$url              = '';
-
-		//		if ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_PATH ) {
-
-		$language = '/' . $current_language;
-		if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
-			$language = '';
-		}
-
-		$url = self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $language . $WPGlobus_Config->url_info['url'];
-
-		//		}
-
-		//		elseif ( $WPGlobus_Config->get_url_mode() == $WPGlobus_Config::GLOBUS_URL_QUERY ) {
-		//
-		//			if ( $current_language == $WPGlobus_Config->default_language && $WPGlobus_Config->hide_default_language ) {
-		//
-		//				$url = '';
-		//
-		//			} else {
-		//
-		//				$arr = self::extract_url( $WPGlobus_Config->url_info['url'] );
-		//
-		//				if ( false === strpos( $arr['url'], '?' ) ) {
-		//					$url = '?';
-		//				} else {
-		//					$url = '&';
-		//				}
-		//				$url .= 'lang=' . $current_language;
-		//
-		//			}
-		//
-		//			$url =
-		//				self::get_scheme() . '://' . $_SERVER["HTTP_HOST"] . $WPGlobus_Config->url_info['url'] . $url;
-		//		}
-
-		return $url;
-	}
-
-	/**
-	 * Get Request Scheme
-	 * @return string
-	 */
-	public static function get_scheme() {
-		if ( is_ssl() ) {
-			return 'https';
-		}
-
-		return 'http';
-	}
-
-	/**
 	 * Return true if language is in array of opened languages, otherwise false
 	 *
 	 * @param string $language
@@ -491,6 +427,25 @@ class WPGlobus_Utils {
 
 		return $sz;
 	}
+
+	/**
+	 * Returns the current URL.
+	 * @since 1.1.1
+	 * There is no method of getting the current URL in WordPress.
+	 * Various snippets published on the Web use a combination of home_url and add_query_arg.
+	 * However, none of them work when WordPress is installed in a subfolder.
+	 * The method below looks valid. There is a theoretical chance of HTTP_HOST tampered, etc.
+	 * However, the same line of code is used by the WordPress core, for example in
+	 * @see   wp_admin_canonical_url
+	 * so we are going to use it, too
+	 * *
+	 * Note that #hash is always lost because it's a client-side parameter.
+	 * We might add it using a JavaScript call.
+	 */
+	public static function current_url() {
+		return set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+	}
+
 
 	//<editor-fold desc="DEPRECATED METHODS">
 

@@ -1629,57 +1629,87 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add item to navigation menu which was created with wp_list_pages
+	 * Append language switcher dropdown to a navigation menu, which was created with
+	 * @see wp_list_pages
 	 *
-	 * @param string $output
+	 * @param string $output The menu HTML string
 	 *
-	 * @return string
+	 * @return string HTML with appended switcher
 	 */
 	function on_wp_list_pages( $output ) {
-	
+
+		/**
+		 * WPGlobus Configuration setting in admin. Must be "ON" to process.
+		 */
 		if ( ! WPGlobus::Config()->selector_wp_list_pages ) {
 			return $output;
-		}	
-
-		$extra_languages = array();
-		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
-			if ( $languages != WPGlobus::Config()->language ) {
-				$extra_languages[] = $languages;
-			}
 		}
-		
+
+		$current_url      = WPGlobus_Utils::current_url();
+		$current_language = WPGlobus::Config()->language;
+
+		/**
+		 * List of the languages to show in the drop-down.
+		 * These are all enabled languages, except for the current one.
+		 * The current one will be shown at the top.
+		 */
+		$extra_languages = array_diff(
+			WPGlobus::Config()->enabled_languages, (array) $current_language );
+
 		/**
 		 * Filter extra languages.
-		 *
 		 * Returning array.
-		 *
 		 * @since 1.0.13
 		 *
-		 * @param array     $extra_languages 			 An array with languages to show off in menu.
-		 * @param string    WPGlobus::Config()->language The current language.
+		 * @param array  $extra_languages  An array with languages to show in the dropdown.
+		 * @param string $current_language The current language.
 		 */
-		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );	
-		
+		$extra_languages = apply_filters(
+			'wpglobus_extra_languages', $extra_languages, $current_language );
+
+		/**
+		 * CSS classes common for all languages
+		 */
 		$span_classes = array(
 			'wpglobus_flag',
 			'wpglobus_language_name'
 		);
 
+		/**
+		 * Build the top-level menu link
+		 */
+		$language            = $current_language;
+		$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+		$flag_name           = $this->_get_flag_name( $language );
 		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
+		$span_classes_lang[] = 'wpglobus_flag_' . $language;
+		$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
+		                       esc_html( $flag_name ) . '</span>';
+		$a_tag               = '<a href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
-		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">
-						<a href="' . WPGlobus_Utils::get_url( WPGlobus::Config()->language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span></a>
-						<ul class="children">';
-		foreach ( $extra_languages as $language ) {
+		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">' .
+		           $a_tag .
+		           '<ul class="children">';
+
+		foreach ( $extra_languages as $language ) :
+			/**
+			 * Build the drop-down menu links for each language
+			 */
+			$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+			$flag_name           = $this->_get_flag_name( $language );
 			$span_classes_lang   = $span_classes;
 			$span_classes_lang[] = 'wpglobus_flag_' . $language;
-			$output .= '<li class="page_item">
-								<a href="' . WPGlobus_Utils::get_url( $language ) . '"><span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span></a>
-							</li>';
-		} // end foreach
-		$output .= '	</ul>
-					</li>';
+			$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
+			                       esc_html( $flag_name ) . '</span>';
+			$a_tag               = '<a href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+
+			$output .= '<li class="page_item">' .
+			           $a_tag .
+			           '</li>';
+		endforeach;
+
+		$output .= '</ul>' .
+		           '</li>';
 
 		return $output;
 	}
@@ -1768,20 +1798,7 @@ class WPGlobus {
 		$span_classes_lang   = $span_classes;
 		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
 
-		/**
-		 * @since 1.0.12
-		 * There is no method of getting the current URL in WordPress.
-		 * Various snippets published on the Web use a combination of home_url and add_query_arg.
-		 * However, none of them work when WordPress is installed in a subfolder.
-		 * The method below looks valid. There is a theoretical chance of HTTP_HOST tampered, etc.
-		 * However, the same line of code is used by the WordPress core, for example in
-		 * @see wp_admin_canonical_url
-		 * so we are going to use it, too
-		 * *
-		 * Note that #hash is always lost because it's a client-side parameter.
-		 * We might add it using a JavaScript call.
-		 */
-		$current_url  = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+		$current_url      = WPGlobus_Utils::current_url();
 
 		$item                   = new stdClass();
 		$item->ID               = 9999999999; # 9 999 999 999
