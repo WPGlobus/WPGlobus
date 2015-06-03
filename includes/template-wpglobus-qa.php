@@ -15,7 +15,8 @@ if ( defined( 'WPGLOBUS_PHP_COVERAGE_ENABLED' ) ) {
 	//$writer = new PHP_CodeCoverage_Report_Clover;
 	//$writer->process($coverage, '/tmp/php-coverage/clover.xml');
 	$writer = new PHP_CodeCoverage_Report_HTML;
-	$writer->process( $coverage, $_SERVER['DOCUMENT_ROOT'] . '/internal/php-coverage/wpglobus/code-coverage-report' );
+	$writer->process( $coverage, $_SERVER['DOCUMENT_ROOT'] .
+	                             '/../internal/php-coverage/wpglobus/code-coverage-report' );
 } else {
 	WPGlobus_QA::api_demo();
 }
