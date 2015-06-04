@@ -57,9 +57,6 @@ class WPGlobusWidget extends WP_Widget {
 		$enabled_languages = WPGlobus::Config()->enabled_languages;
 
 		switch ( $type ) :
-			case 'flags' :
-				$code = '<div class="flags-styled">{{inside}}</div>';
-				break;
 			case 'list' :
 				$code = '<div class="list">{{inside}}</div>';
 				break;
@@ -88,6 +85,10 @@ class WPGlobusWidget extends WP_Widget {
 						</ul>
 					  </li>
 					</ul></div>';
+				break;
+			default:
+				//	This is case 'flags'. Having is as default makes $code always set.
+				$code = '<div class="flags-styled">{{inside}}</div>';
 				break;
 		endswitch;
 		
