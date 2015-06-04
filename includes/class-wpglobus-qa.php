@@ -86,6 +86,8 @@ class WPGlobus_QA {
 
 			self::_test_on_add_hreflang();
 
+			self::_test_widget();
+
 			self::_common_for_all_languages();
 
 			if ( $is_need_to_remove_qa_items ) {
@@ -754,6 +756,7 @@ class WPGlobus_QA {
 	 * @todo   Write acceptance test. This is display only.
 	 */
 	private static function _test_on_add_hreflang() {
+		$save_config                              = clone WPGlobus::Config();
 		WPGlobus::Config()->hide_default_language = false;
 		?>
 		<h2><?php echo substr( __FUNCTION__, 6 ); ?></h2>
@@ -761,8 +764,35 @@ class WPGlobus_QA {
 		<div id="<?php echo __FUNCTION__; ?>" class="well">
 			<xmp><?php WPGlobus::O()->on_add_hreflang(); ?></xmp>
 		</div>
-	<?php
+		<?php
+		WPGlobus::Config()->hide_default_language = $save_config->hide_default_language;
 
+	}
+
+	/**
+	 * @covers \WPGlobusWidget::widget
+	 * @todo   Write acceptance test. This is display only.
+	 */
+	private static function _test_widget() {
+		?>
+		<h2><?php echo substr( __FUNCTION__, 6 ); ?></h2>
+
+		<div id="<?php echo __FUNCTION__; ?>" class="well">
+			<?php
+			/** @var array $instance The settings for the particular instance of the widget */
+			$instance = array(
+				'type' => 'list_with_flags',
+			);
+
+			ob_start();
+			the_widget( 'WPGlobusWidget', $instance );
+			$widget_html = ob_get_clean();
+
+			echo esc_html( $widget_html );
+			echo $widget_html;
+			?>
+		</div>
+	<?php
 	}
 
 	private static function _remove_qa_items() {

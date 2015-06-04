@@ -115,10 +115,7 @@ class WPGlobusWidget extends WP_Widget {
 				$selected = ' selected';
 			}
 
-			$url  =
-				WPGlobus::Config()->url_info['schema'] . WPGlobus::Config()->url_info['host'] . WPGlobus::Config()->url_info['url'];
-			
-			$url = WPGlobus_Utils::localize_url( $url, $language );
+			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language );
 				
 			$flag = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
 
