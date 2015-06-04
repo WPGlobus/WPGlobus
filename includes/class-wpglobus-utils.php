@@ -446,6 +446,40 @@ class WPGlobus_Utils {
 		return set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
 	}
 
+	/**
+	 * Build hreflang metas
+	 * @since 1.1.1
+	 *
+	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
+	 *
+	 * @return string[] Array of rel-alternate link tags
+	 */
+	public static function hreflangs( WPGlobus_Config $config = null ) {
+
+		/**
+		 * Use the global configuration is alternative not passed
+		 */
+		if ( is_null( $config ) ) {
+			$config = WPGlobus::Config();
+		}
+
+		$hreflangs = array();
+
+		$ref_source = self::localize_url( self::current_url(), '%%lang%%', $config );
+
+		foreach ( $config->enabled_languages as $language ) {
+			$hreflang = str_replace( '_', '-', $config->locale[ $language ] );
+			if ( $config->hide_default_language && $language == $config->default_language ) {
+				$ref = str_replace( '%%lang%%/', '', $ref_source );
+			} else {
+				$ref = str_replace( '%%lang%%', $language, $ref_source );
+			}
+			$hreflangs[ $language ] = '<link rel="alternate" hreflang="' . $hreflang . '" href="' . $ref . '"/>';
+
+		}
+
+		return $hreflangs;
+	}
 
 	//<editor-fold desc="DEPRECATED METHODS">
 

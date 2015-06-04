@@ -84,6 +84,8 @@ class WPGlobus_QA {
 
 			self::_test_wp_page_menu();
 
+			self::_test_on_add_hreflang();
+
 			self::_common_for_all_languages();
 
 			if ( $is_need_to_remove_qa_items ) {
@@ -745,6 +747,22 @@ class WPGlobus_QA {
 		$languages = array_diff( $languages, array( 'zh', 'fr' ) );
 
 		return $languages;
+	}
+
+	/**
+	 * @covers \WPGlobus::on_add_hreflang
+	 * @todo   Write acceptance test. This is display only.
+	 */
+	private static function _test_on_add_hreflang() {
+		WPGlobus::Config()->hide_default_language = false;
+		?>
+		<h2><?php echo substr( __FUNCTION__, 6 ); ?></h2>
+
+		<div id="<?php echo __FUNCTION__; ?>" class="well">
+			<xmp><?php WPGlobus::O()->on_add_hreflang(); ?></xmp>
+		</div>
+	<?php
+
 	}
 
 	private static function _remove_qa_items() {
