@@ -1,6 +1,6 @@
 === WPGlobus - Multilingual Everything! ===
 Contributors: tivnetinc, alexgff, tivnet
-Donate link: http://www.wpglobus.com/
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus
 Requires at least: 4.0
 Tested up to: 4.2.2
