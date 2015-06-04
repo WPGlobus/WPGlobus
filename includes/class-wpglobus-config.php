@@ -59,12 +59,6 @@ class WPGlobus_Config {
 	public $open_languages = array();
 
 	/**
-	 *    URL information
-	 * @var array
-	 */
-	public $url_info = array();
-
-	/**
 	 * Flag images configuration
 	 * Look in /flags/ directory for a huge list of flags for usage
 	 * @var array
@@ -202,13 +196,37 @@ class WPGlobus_Config {
 	 */
 	function __construct() {
 
+		/**
+		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
+		 *        plugins already loaded their translations.
+		 */
+		add_action( 'plugins_loaded', array(
+			$this,
+			'init_current_language'
+		), 0 );
+
 		add_action( 'plugins_loaded', array(
 			$this,
 			'on_load_textdomain'
-		), 0 );
+		), 1 );
 
 		$this->_get_options();
 	}
+
+	/**
+	 * Set the current language: if not found in the URL, then default
+	 */
+	public function init_current_language() {
+
+		$language_in_the_current_url = WPGlobus_Utils::extract_language_from_url(
+			WPGlobus_Utils::current_url()
+		);
+
+		$this->language = ( $language_in_the_current_url ?
+			$language_in_the_current_url : $this->default_language );
+
+	}
+
 
 	/**
 	 * Check plugin version and update versioning option

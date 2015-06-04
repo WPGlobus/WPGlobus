@@ -491,39 +491,6 @@ class WPGlobus_Filters {
 	}
 
 	/**
-	 * @todo To discuss
-	 */
-	public static function action__init_url_info() {
-
-		/**
-		 * Set the current language: if not found in the URL, then default
-		 */
-
-		$language_in_the_current_url = WPGlobus_Utils::extract_language_from_url(
-			WPGlobus_Utils::current_url()
-		);
-
-		WPGlobus::Config()->language = ( $language_in_the_current_url ?
-			$language_in_the_current_url : WPGlobus::Config()->default_language );
-
-//		WPGlobus::Config()->url_info =
-//			WPGlobus_Utils::extract_url( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '' );
-
-		/**
-		 * Set language of current page
-		 */
-//		WPGlobus::Config()->language = WPGlobus::Config()->url_info['language'];
-
-		/**
-		 * @quirks
-		 * This might be needed if we'd support subdomains or language queries
-		 */
-		//		$_SERVER['REQUEST_URI'] = WPGlobus::Config()->url_info['url'];
-		//		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
-
-	}
-
-	/**
 	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info
 	 * @since 1.0.0
 	 *
