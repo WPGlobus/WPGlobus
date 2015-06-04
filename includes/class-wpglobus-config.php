@@ -24,16 +24,16 @@ class WPGlobus_Config {
 //	const GLOBUS_URL_DOMAIN = 3;
 
 	/**
-	 * Current language
-	 * @var string
-	 */
-	public $language = 'en';
-
-	/**
 	 * Language by default
 	 * @var string
 	 */
 	public $default_language = 'en';
+
+	/**
+	 * Current language. Should be set to default initially.
+	 * @var string
+	 */
+	public $language = 'en';
 
 	/**
 	 * @todo This is just an example.
@@ -214,16 +214,49 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * Set the current language: if not found in the URL, then default
+	 * The current language initially set to default. See the class vars.
+	 * Set the current language: if not found in the URL or REFERER, then keep the default
+	 * @since 1.1.1
 	 */
 	public function init_current_language() {
 
-		$language_in_the_current_url = WPGlobus_Utils::extract_language_from_url(
-			WPGlobus_Utils::current_url()
-		);
+		/**
+		 * Theoretically, we might not have any URL to get the language info from.
+		 */
+		$url_to_check = '';
 
-		$this->language = ( $language_in_the_current_url ?
-			$language_in_the_current_url : $this->default_language );
+		if ( WPGlobus_WP::is_doing_ajax() ) {
+			/**
+			 * If DOING_AJAX, we cannot retrieve the language information from the URL,
+			 * because it's always `admin-ajax`.
+			 * Therefore, we'll rely on the HTTP_REFERER (if it exists).
+			 */
+			if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+				$url_to_check = $_SERVER['HTTP_REFERER'];
+			}
+		} else {
+			/**
+			 * If not AJAX and not ADMIN then we are at the front. Will use the current URL.
+			 */
+			if ( ! is_admin() ) {
+				$url_to_check = WPGlobus_Utils::current_url();
+			}
+		}
+
+		/**
+		 * If we have an URL, extract language from it.
+		 * If extracted, set it as a current.
+		 */
+		if ( $url_to_check ) {
+			$language_from_url = WPGlobus_Utils::extract_language_from_url( $url_to_check );
+			if ( $language_from_url ) {
+				$this->language = $language_from_url;
+			}
+		}
+
+		/**
+		 * Else - do nothing. Keep the default language.
+		 */
 
 	}
 
