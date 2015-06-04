@@ -111,6 +111,8 @@ No known backward incompatibility issues.
 
 = 1.1.1 =
 
+* ADDED:
+	* handling attribute "maxlength" in custom fields for every language.
 * FIXED:
 	* Language tabs in admin editor styled according to the WP standards.
 
