@@ -119,6 +119,7 @@ class WPGlobus {
 		 * Init array of supported plugins
 		 */
 		$this->vendors_scripts['ACF']         = false;
+		/** Set to true in @see WPGlobus_WPSEO::controller */
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
 		$this->vendors_scripts['AIOSEOP']     = false; // All In One SEO Pack
@@ -133,10 +134,6 @@ class WPGlobus {
 			 * @since 1.0.4
 			 */
 			$this->disabled_entities[] = 'acf';
-		}
-
-		if ( defined( 'WPSEO_VERSION' ) ) {
-			$this->vendors_scripts['WPSEO'] = true;
 		}
 
 		if ( defined( 'WC_VERSION' ) || defined( 'WOOCOMMERCE_VERSION' ) ) {
@@ -284,13 +281,6 @@ class WPGlobus {
 					$this,
 					'on_admin_title'
 				), 10, 2 );
-
-				if ( $this->vendors_scripts['WPSEO'] ) {
-					add_action( 'wpseo_tab_content', array(
-						$this,
-						'on_wpseo_tab_content'
-					), 11 );
-				}
 
 				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow( array(
 						'post.php',
@@ -473,69 +463,6 @@ class WPGlobus {
 
 	}
 
-	/**
-	 * Add language tabs to wpseo metabox ( .wpseo-metabox-tabs-div )
-	 * @return void
-	 */
-	function on_wpseo_tab_content() {
-
-		/** @global WP_Post $post */
-		global $post;
-
-		$type = empty( $post ) ? '' : $post->post_type;
-		if ( $this->disabled_entity( $type ) ) {
-			return;
-		}
-
-		$permalink = array();
-		if ( 'publish' == $post->post_status ) {
-			$permalink['url']    = get_permalink( $post->ID );
-			$permalink['action'] = 'complete';
-		} else {
-			$permalink['url']    = trailingslashit( home_url() );
-			$permalink['action'] = '';
-		}
-		?>
-
-		<div id="wpglobus-wpseo-tabs">    <?php
-			/**
-			 * Use span with attributes 'data' for send to js script ids, names elements for which needs to be set new ids, names with language code.
-			 */ ?>
-			<span id="wpglobus-wpseo-attr"
-			      data-ids="wpseosnippet,wpseosnippet_title,yoast_wpseo_focuskw,focuskwresults,yoast_wpseo_title,yoast_wpseo_title-length-warning,yoast_wpseo_metadesc,yoast_wpseo_metadesc-length,yoast_wpseo_metadesc_notice"
-			      data-names="yoast_wpseo_focuskw,yoast_wpseo_title,yoast_wpseo_metadesc"
-			      data-qtip="snippetpreviewhelp,focuskwhelp,titlehelp,metadeschelp">
-			</span>
-			<ul class="wpglobus-wpseo-tabs-list">    <?php
-				$order = 0;
-				foreach ( self::Config()->open_languages as $language ) { ?>
-					<li id="wpseo-link-tab-<?php echo $language; ?>"
-					    data-language="<?php echo $language; ?>"
-					    data-order="<?php echo $order; ?>"
-					    class="wpglobus-wpseo-tab"><a
-							href="#wpseo-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
-					</li> <?php
-					$order ++;
-				} ?>
-			</ul>    <?php
-
-			foreach ( self::Config()->open_languages as $language ) {
-				$url        = WPGlobus_Utils::localize_url( $permalink['url'], $language );
-				$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
-				$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
-				$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); ?>
-				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
-				     data-language="<?php echo $language; ?>"
-				     data-url-<?php echo $language; ?>="<?php echo $url; ?>"
-				     data-permalink="<?php echo $permalink['action']; ?>"
-				     data-metadesc="<?php echo WPGlobus_Core::text_filter( $metadesc, $language, WPGlobus::RETURN_EMPTY ); ?>"
-				     data-wpseotitle="<?php echo WPGlobus_Core::text_filter( $wpseotitle, $language, WPGlobus::RETURN_EMPTY ); ?>"
-				     data-focuskw="<?php echo WPGlobus_Core::text_filter( $focuskw, $language, WPGlobus::RETURN_EMPTY ); ?>">
-				</div> <?php
-			} ?>
-		</div>
-	<?php
-	}
 
 	/**
 	 * Handle ajax process
@@ -931,8 +858,10 @@ class WPGlobus {
 					$data['template'] .= WPGlobus_Core::text_filter( $post->post_excerpt, $language, $return );
 					$data['template'] .= '</textarea>';
 
-					if ( $this->vendors_scripts['WPSEO'] ) {
-						/** WPSEO */
+					if ( defined( 'WPSEO_VERSION' ) ) {
+						/**
+						 * @todo This is the only place with WPSEO not in its own class.
+						 */
 						$blogname                             = get_option( 'blogname' );
 						$blogdesc                             = get_option( 'blogdescription' );
 						$data['blogname'][ $language ]        =
@@ -1153,29 +1082,6 @@ class WPGlobus {
 
 				$page_action = 'widgets.php';
 
-			}
-
-			/**
-			 * Enqueue js for WPSEO support
-			 * @since 1.0.8
-			 */
-			if ( $this->vendors_scripts['WPSEO'] && in_array( $page, array( 'post.php', 'post-new.php' ) ) ) {
-				wp_register_script(
-					'wpglobus-vendor',
-					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-wpseo" . self::$_SCRIPT_SUFFIX . ".js",
-					array( 'jquery' ),
-					WPGLOBUS_VERSION,
-					true
-				);
-				wp_enqueue_script( 'wpglobus-vendor' );
-				wp_localize_script(
-					'wpglobus-vendor',
-					'WPGlobusVendor',
-					array(
-						'version' => WPGLOBUS_VERSION,
-						'vendor'  => $this->vendors_scripts
-					)
-				);
 			}
 
 			wp_register_script(

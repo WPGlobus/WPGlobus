@@ -465,32 +465,6 @@ class WPGlobus_Filters {
 	}
 
 	/**
-	 * To translate Yoast columns
-	 * @see   WPSEO_Metabox::column_content
-	 * @scope admin
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 * @todo  Check pull request
-	 * https://github.com/Yoast/wordpress-seo/pull/1946
-	 */
-	public static function filter__wpseo_columns( $text ) {
-
-		if ( WPGlobus_WP::is_filter_called_by( 'column_content', 'WPSEO_Metabox' ) ) {
-
-			$text = WPGlobus_Core::text_filter(
-				$text,
-				WPGlobus::Config()->language,
-				null,
-				WPGlobus::Config()->default_language
-			);
-		}
-
-		return $text;
-	}
-
-	/**
 	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info
 	 * @since 1.0.0
 	 *

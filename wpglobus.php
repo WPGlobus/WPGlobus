@@ -54,6 +54,11 @@ $WPGlobus_Config = new WPGlobus_Config();
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
+if ( defined( 'WPSEO_VERSION' ) ) {
+	require_once 'includes/class-wpglobus-wpseo.php';
+	WPGlobus_WPSEO::controller();
+}
+
 /**
  * Handle special URLs for QA
  * @note CREATES POST, PAGE, CATEGORY and TAG!!! CLEAN AFTER RUNNING!!!
