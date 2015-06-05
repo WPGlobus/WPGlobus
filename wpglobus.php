@@ -54,11 +54,6 @@ $WPGlobus_Config = new WPGlobus_Config();
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
-if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
-	require_once 'includes/class-wpglobus-upgrade.php';
-	require_once 'includes/wpglobus-upgrade-controller.php';
-}
-
 /**
  * Handle special URLs for QA
  * @note CREATES POST, PAGE, CATEGORY and TAG!!! CLEAN AFTER RUNNING!!!

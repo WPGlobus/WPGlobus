@@ -210,6 +210,9 @@ class WPGlobus_Config {
 			'on_load_textdomain'
 		), 1 );
 
+		add_action( 'upgrader_process_complete', array( $this, 'on_activate' ), 10, 2 );
+
+
 		$this->_get_options();
 	}
 
@@ -269,7 +272,7 @@ class WPGlobus_Config {
 	 *
 	 * @return void
 	 */
-	public static function on_activate(
+	public function on_activate(
 		/** @noinspection PhpUnusedParameterInspection */
 		$object = null,
 		$options = array()
@@ -285,37 +288,20 @@ class WPGlobus_Config {
 			return;
 		}
 
-		$version = get_option( self::$option_versioning );
+		/**
+		 * Here we can read the previous version value and do some actions if necessary.
+		 * For example, warn the users about breaking changes.
+		 * $version = get_option( self::$option_versioning );
+		 * ...
+		 */
 
-		if ( empty( $version ) ) {
-			$version = array();
-			/**
-			 * Now check 'wpglobus_option'
-			 */
-			$option = get_option( 'wpglobus_option' );
+		/**
+		 * Store the current version
+		 */
+		update_option( self::$option_versioning, array(
+			'current_version' => WPGLOBUS_VERSION
+		) );
 
-			if ( empty( $option ) ) {
-				/**
-				 * This is the first activation with version >= 1.0.0
-				 */
-				$version['current_version'] = WPGLOBUS_VERSION;
-			} else {
-				/**
-				 * This is an upgrade from version 0.1.x
-				 */
-				$version['current_version']       = WPGLOBUS_VERSION;
-				$version['wpglobus_mini_warning'] = true;
-			}
-		} else {
-			/**
-			 * Update option after silent plugin activate
-			 */
-			$version['current_version'] = WPGLOBUS_VERSION;
-
-			delete_option( self::$option_versioning );
-		}
-
-		update_option( self::$option_versioning, $version );
 	}
 
 	/**
