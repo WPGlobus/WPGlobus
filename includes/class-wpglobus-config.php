@@ -9,21 +9,6 @@
 class WPGlobus_Config {
 
 	/**
-	 *    Url mode: query (question mark)
-	 */
-//	const GLOBUS_URL_QUERY = 1;
-
-	/**
-	 *    Url mode: pre-path
-	 */
-	const GLOBUS_URL_PATH = 2;
-
-	/**
-	 *    Url mode: pre-domain
-	 */
-//	const GLOBUS_URL_DOMAIN = 3;
-
-	/**
 	 * Language by default
 	 * @var string
 	 */
@@ -36,7 +21,6 @@ class WPGlobus_Config {
 	public $language = 'en';
 
 	/**
-	 * @todo This is just an example.
 	 * Enabled languages
 	 * @var string[]
 	 */
@@ -189,7 +173,6 @@ class WPGlobus_Config {
 	 */
 	public $disabled_entities = array();
 
-//	protected $url_mode;
 
 	/**
 	 * Constructor
@@ -351,14 +334,6 @@ class WPGlobus_Config {
 	function on_load_textdomain() {
 		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 	}
-
-	/**
-	 * Return URL mode
-	 * @int
-	 */
-//	function get_url_mode() {
-//		return $this->url_mode;
-//	}
 
 	/**
 	 * Set flags URL
@@ -528,16 +503,6 @@ class WPGlobus_Config {
 		$this->_set_flags_url();
 
 		/**
-		 * Get URL mode
-		 */
-//		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-//			$this->url_mode = $wpglobus_option['url_mode'];
-//		} else {
-//			$this->url_mode = self::GLOBUS_URL_PATH;
-//		}
-		//}
-
-		/**
 		 * Get languages name
 		 * big array of used languages
 		 */
@@ -637,7 +602,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Need additional check for devmode (toggle=OFF)
-		 * in case 'wpglobus' didn't set to 'off' at /wp-admin/post.php
+		 * in case 'wpglobus' was not set to 'off' at /wp-admin/post.php
 		 * and $_SERVER[QUERY_STRING] is empty at the time of `wp_insert_post_data` action
 		 * @see WPGlobus::on_save_post_data
 		 */
@@ -650,19 +615,6 @@ class WPGlobus_Config {
 			$this->toggle = 'off';
 		}
 
-	}
-
-	/**
-	 * @deprecated 1.0.0
-	 * Hard-coded enabled url modes
-	 * @return array
-	 */
-	function _getEnabledUrlMode() {
-		$enabled_url_mode = array(
-			self::GLOBUS_URL_PATH => 'URL path'
-		);
-
-		return $enabled_url_mode;
 	}
 
 } //class

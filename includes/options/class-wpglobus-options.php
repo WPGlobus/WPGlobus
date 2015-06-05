@@ -220,27 +220,7 @@ class WPGlobus_Options {
 					'desc'        => $desc,
 					'placeholder' => __( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
-				)
-				/*
-				array(
-					'id'          => 'url_mode',
-					'type'        => 'select',
-					'title'       => __( 'URL Mode', 'wpglobus' ),
-					'compiler'    => 'false',
-					'mode'        => false,
-					'desc'        => '' .
-						__( 'Path Mode:', 'wpglobus' ) .
-						' ' . trailingslashit( home_url() ) . '<strong>en</strong>/page/' .
-						' <br> ' .
-						__( 'Query Mode:', 'wpglobus' ) .
-						' ' . trailingslashit( home_url() ) . 'page/?lang=<strong>en</strong>' .
-						'',
-					'subtitle'    => __( 'Choose the method of URL modification', 'wpglobus' ),
-					'placeholder' => __( 'Select URL Mode', 'wpglobus' ),
-					'options'     => $WPGlobus_Config->_getEnabledUrlMode(),
-					'default'     => $WPGlobus_Config::GLOBUS_URL_PATH
-				) // */
-				,
+				),
 				array(
 					'id'       => 'show_flag_name',
 					'type'     => 'select',
