@@ -6,16 +6,9 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.ace_editor = redux.field_objects.ace_editor || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.ace_editor.init();
-        }
-    );
-
-
     redux.field_objects.ace_editor.init = function( selector ) {
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-ace_editor' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-ace_editor:visible' );
         }
 
         $( selector ).each(
@@ -25,6 +18,9 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
@@ -33,6 +29,7 @@
                 el.find( '.ace-editor' ).each(
                     function( index, element ) {
                         var area = element;
+                        var params = JSON.parse( $( this ).parent().find( '.localize_data' ).val() );
                         var editor = $( element ).attr( 'data-editor' );
 
                         var aceeditor = ace.edit( editor );
@@ -45,7 +42,7 @@
                             parent = el.parents( '.redux-field-container:first' ).attr( 'data-id' );
                         }
 
-                        aceeditor.setOptions( redux.ace_editor[parent] );
+                        aceeditor.setOptions( params );
                         aceeditor.on(
                             'change', function( e ) {
                                 $( '#' + area.id ).val( aceeditor.getSession().getValue() );

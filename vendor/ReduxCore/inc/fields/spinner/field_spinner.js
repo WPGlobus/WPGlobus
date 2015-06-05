@@ -15,7 +15,7 @@
     redux.field_objects.spinner.init = function( selector ) {
 
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-spinner' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-spinner:visible' );
         }
 
         $( selector ).each(
@@ -25,6 +25,9 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
@@ -33,14 +36,15 @@
                 el.find( '.redux_spinner' ).each(
                     function() {
                         //slider init
-                        var spinner = redux.spinner[$( this ).attr( 'rel' )];
+                        var spinner = $( this ).find( '.spinner-input' ).data();
+                        spinner.id = $( this ).find( '.spinner-input' ).attr( 'id' );
 
                         el.find( "#" + spinner.id ).spinner(
                             {
-                                value: parseInt( spinner.val, null ),
-                                min: parseInt( spinner.min, null ),
-                                max: parseInt( spinner.max, null ),
-                                step: parseInt( spinner.step, null ),
+                                value: parseFloat( spinner.val, null ),
+                                min: parseFloat( spinner.min, null ),
+                                max: parseFloat( spinner.max, null ),
+                                step: parseFloat( spinner.step, null ),
                                 range: "min",
 
                                 slide: function( event, ui ) {
@@ -57,13 +61,13 @@
                             neg = true;
                         }
 
-                        el.find( "#" + spinner.id ).numeric(
-                            {
-                                allowMinus: neg,
-                                min: spinner.min,
-                                max: spinner.max
-                            }
-                        );
+                        //el.find( "#" + spinner.id ).numeric(
+                        //    {
+                        //        allowMinus: neg,
+                        //        min: spinner.min,
+                        //        max: spinner.max
+                        //    }
+                        //);
 
                     }
                 );
@@ -78,7 +82,7 @@
                 el.find( ".spinner-input" ).focus(
                     function() {
                         redux.field_objects.spinner.clean(
-                            $( this ).val(), $( this ), redux.spinner[$( this ).attr( 'id' )]
+                            $( this ).val(), $( this )
                         );
                     }
                 );
@@ -87,7 +91,7 @@
                     {
                         callback: function( value ) {
                             redux.field_objects.spinner.clean(
-                                value, $( this ), redux.spinner[$( this ).attr( 'id' )]
+                                value, $( this )
                             );
                         },
 
@@ -100,11 +104,15 @@
         );
     };
 
-    redux.field_objects.spinner.clean = function( value, selector, spinner ) {
+    redux.field_objects.spinner.clean = function( value, selector ) {
+
         if ( !selector.hasClass( 'spinnerInputChange' ) ) {
             return;
         }
         selector.removeClass( 'spinnerInputChange' );
+
+        var spinner = selector.data();
+        value = parseFloat( value );
 
         if ( value === "" || value === null ) {
             value = spinner.min;
@@ -115,8 +123,7 @@
         } else {
             value = Math.round( value / spinner.step ) * spinner.step;
         }
-
-        $( "#" + spinner.id ).val( value );
+        selector.val( value );
     };
 
 })( jQuery );

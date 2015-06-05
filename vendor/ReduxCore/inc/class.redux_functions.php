@@ -94,28 +94,6 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
         }
 
         /**
-         * modRewriteCheck - Check for the installation of apache mod_rewrite
-         *
-         * @since       3.2.3
-         * @access      public
-         * @return      void
-         */
-        public static function modRewriteCheck() {
-            if ( function_exists( 'apache_get_modules' ) ) {
-                if ( ! in_array( 'mod_rewrite', apache_get_modules() ) ) {
-                    self::$_parent->admin_notices[] = array(
-                        'type'    => 'error',
-                        'msg'     => '<strong><center>The Apache mod_rewrite module is not enabled on your server.</center></strong>
-                              <br/>
-                              Both Wordpress and Redux require the enabling of the Apache mod_rewrite module to function properly.  Please contact whomever provides support for your server and ask them to enable the mod_rewrite module',
-                        'id'      => 'mod_rewrite_notice_',
-                        'dismiss' => false
-                    );
-                }
-            }
-        }
-
-        /**
          * verFromGit - Retrives latest Redux version from GIT
          *
          * @since       3.2.0
@@ -198,10 +176,11 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
             }
 
             // Set up admin notice on new version
-            if ( 1 == strcmp( $ver, $curVer ) ) {
+            //if ( 1 == strcmp( $ver, $curVer ) ) {
+            if ( version_compare( $ver, $curVer, '>' ) ) {
                 self::$_parent->admin_notices[] = array(
                     'type'    => 'updated',
-                    'msg'     => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . $curVer . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
+                    'msg'     => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . $curVer . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><em>If you are not a developer, your theme/plugin author shipped with <code>dev_mode</code> on. Contact them to fix it, but in the meantime you can use our <a href="' . 'https://' . 'wordpress.org/plugins/redux-developer-mode-disabler/" target="_blank">dev_mode disabler</a>.</em><br /><br /><a href="' . 'https://' . 'github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
                     'id'      => 'dev_notice_' . $ver,
                     'dismiss' => true,
                 );
@@ -215,14 +194,20 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
          * @access      public
          * @return      void
          */
-        public static function adminNotices() {
+        public static function adminNotices($notices = array()) {
             global $current_user, $pagenow;
 
             // Check for an active admin notice array
-            if ( ! empty( self::$_parent->admin_notices ) ) {
+            if ( ! empty( $notices ) ) {
 
                 // Enum admin notices
-                foreach ( self::$_parent->admin_notices as $notice ) {
+                foreach ( $notices as $notice ) {
+                    
+                    $add_style = '';
+                    if (strpos($notice['type'], 'redux-message') != false) {
+                        $add_style = 'style="border-left: 4px solid ' . $notice['color'] . '!important;"';
+                    }
+                    
                     if ( true == $notice['dismiss'] ) {
 
                         // Get user ID
@@ -249,12 +234,12 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
                             }
 
                             // Print the notice with the dismiss link
-                            echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
+                            echo '<div ' . $add_style . ' class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
                         }
                     } else {
 
                         // Standard notice
-                        echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
+                        echo '<div ' . $add_style . ' class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
                     }
                 }
 
