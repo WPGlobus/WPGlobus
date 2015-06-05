@@ -14,8 +14,6 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 **WPGlobus** is a plugin for making bilingual / multilingual WordPress blogs and sites.
 
-> **Versions 1.0.x are released to the general public as Beta Software. During the Beta stage, the software is tested for bugs, crashes, errors and inconsistencies. If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
-
 With the WPGlobus Free Core plugin, you can:
 
 * Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
@@ -74,6 +72,8 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 	* [Twitter](https://twitter.com/WPGlobus)
 	* [Google Plus](https://plus.google.com/+Wpglobus)
 	* [LinkedIn](https://www.linkedin.com/company/wpglobus)
+
+> **If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
 == Installation ==
 

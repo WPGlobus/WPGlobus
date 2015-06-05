@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-06-01 16:18-0500\n"
-"PO-Revision-Date: 2015-06-01 16:19-0500\n"
+"POT-Creation-Date: 2015-06-04 22:54-0500\n"
+"PO-Revision-Date: 2015-06-04 22:54-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
@@ -110,18 +110,7 @@ msgstr ""
 msgid "Important"
 msgstr "﻿﻿Важно"
 
-#: includes/admin/class-wpglobus-about.php:108
-msgid ""
-"The plugin is currently in <strong>BETA</strong> stage! We will do our best "
-"to fix all problems you'll discover. Please be patient. Your contributions "
-"(on GitHub) are highly appreciated!"
-msgstr ""
-"Плагин в настоящее время находится в стадии <strong>бета-тестирования</"
-"strong> ! Мы сделаем все возможное, чтобы исправить проблемы, которые вы "
-"обнаружите. Пожалуйста, будьте терпеливы. Будем признательны за ваши "
-"предложения (на GitHub)!"
-
-#: includes/admin/class-wpglobus-about.php:112
+#: includes/admin/class-wpglobus-about.php:109
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
@@ -131,7 +120,7 @@ msgstr ""
 "xx/page/</code>. Мы не планируем поддержать дочерние домены <code>xx.example."
 "com</code> и языковые параметры в УРЛах <code>example.com?lang=xx</code>."
 
-#: includes/admin/class-wpglobus-about.php:121
+#: includes/admin/class-wpglobus-about.php:118
 #: includes/admin/class-wpglobus-addons.php:63
 msgid "Go to WPGlobus Settings"
 msgstr "Перейдите в настройки WPGlobus"
@@ -229,39 +218,27 @@ msgstr "Сохранить изменения"
 msgid "Delete Language"
 msgstr "Удалить язык"
 
-#: includes/class-wpglobus-filters.php:646
+#: includes/class-wpglobus-filters.php:624
 msgid "Error while saving."
 msgstr "Ошибка при сохранении."
 
-#: includes/class-wpglobus-filters.php:649
+#: includes/class-wpglobus-filters.php:627
 msgid "g:i:s a"
 msgstr "g:i:s a"
 
-#: includes/class-wpglobus-filters.php:653
+#: includes/class-wpglobus-filters.php:631
 #, php-format
 msgid "Draft saved at %s."
 msgstr "Черновик сохранен в %s."
 
-#: includes/class-wpglobus-filters.php:745
+#: includes/class-wpglobus-filters.php:724
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: includes/class-wpglobus-filters.php:751
+#: includes/class-wpglobus-filters.php:730
 msgctxt "word count: words or characters?"
 msgid "words"
 msgstr "слов"
-
-#: includes/class-wpglobus-upgrade.php:23
-#, php-format
-msgid "Updated from WPGlobus Mini. Please, read instructions at %s"
-msgstr ""
-"У Вас была установлена версия WPGlobus Mini, которая больше не "
-"поддерживается. Пожалуйста прочитайте инструкции: %s"
-
-#: includes/class-wpglobus-upgrade.php:27
-#, php-format
-msgid "<a href=\"%s\">Hide Notice</a>"
-msgstr "<a href=\"%s\">Скрыть это сообщение</a>"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -307,44 +284,44 @@ msgstr "Заголовок"
 msgid "Selector type"
 msgstr "Способ выбора языка"
 
-#: includes/class-wpglobus.php:920
+#: includes/class-wpglobus.php:910
 msgid "You cannot disable the first enabled language."
 msgstr "Нельзя отключить первый в списке язык."
 
-#: includes/class-wpglobus.php:1073
+#: includes/class-wpglobus.php:1063
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:1927
+#: includes/class-wpglobus.php:1911
 #, php-format
 msgid "Word count: %s"
 msgstr "Количество слов: %s"
 
-#: includes/class-wpglobus.php:1935
+#: includes/class-wpglobus.php:1919
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr "Последний раз редактировалось пользователем %1$s %2$s в %3$s"
 
-#: includes/class-wpglobus.php:1937
+#: includes/class-wpglobus.php:1921
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr "Последний раз редактировалось %1$s в %2$s"
 
-#: includes/class-wpglobus.php:2209
+#: includes/class-wpglobus.php:2193
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:2290
+#: includes/class-wpglobus.php:2274
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 
-#: includes/class-wpglobus.php:2447
+#: includes/class-wpglobus.php:2443
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGLobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:2449
+#: includes/class-wpglobus.php:2445
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -352,11 +329,11 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:2533
+#: includes/class-wpglobus.php:2529
 msgid "My Account"
 msgstr "Мой аккаунт"
 
-#: includes/class-wpglobus.php:2567
+#: includes/class-wpglobus.php:2563
 msgid "Add"
 msgstr "Добавить"
 
@@ -603,6 +580,24 @@ msgstr "Язык по умолчанию"
 #, fuzzy
 #~ msgid "Description"
 #~ msgstr "Описание"
+
+#~ msgid ""
+#~ "The plugin is currently in <strong>BETA</strong> stage! We will do our "
+#~ "best to fix all problems you'll discover. Please be patient. Your "
+#~ "contributions (on GitHub) are highly appreciated!"
+#~ msgstr ""
+#~ "Плагин в настоящее время находится в стадии <strong>бета-тестирования</"
+#~ "strong> ! Мы сделаем все возможное, чтобы исправить проблемы, которые вы "
+#~ "обнаружите. Пожалуйста, будьте терпеливы. Будем признательны за ваши "
+#~ "предложения (на GitHub)!"
+
+#~ msgid "Updated from WPGlobus Mini. Please, read instructions at %s"
+#~ msgstr ""
+#~ "У Вас была установлена версия WPGlobus Mini, которая больше не "
+#~ "поддерживается. Пожалуйста прочитайте инструкции: %s"
+
+#~ msgid "<a href=\"%s\">Hide Notice</a>"
+#~ msgstr "<a href=\"%s\">Скрыть это сообщение</a>"
 
 #~ msgid "What&#8217;s New"
 #~ msgstr "Что нового"

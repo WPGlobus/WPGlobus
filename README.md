@@ -1,6 +1,6 @@
 # WPGlobus - Multilingual Everything! #
 **Contributors:** tivnetinc, alexgff, tivnet  
-**Donate link:** http://www.wpglobus.com/  
+**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus  
 **Requires at least:** 4.0  
 **Tested up to:** 4.2.2  
@@ -13,8 +13,6 @@
 ## Description ##
 
 **WPGlobus** is a plugin for making bilingual / multilingual WordPress blogs and sites.
-
-> **Versions 1.0.x are released to the general public as Beta Software. During the Beta stage, the software is tested for bugs, crashes, errors and inconsistencies. If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
 With the WPGlobus Free Core plugin, you can:
 
@@ -75,6 +73,8 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 	* [Google Plus](https://plus.google.com/+Wpglobus)
 	* [LinkedIn](https://www.linkedin.com/company/wpglobus)
 
+> **If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
+
 ## Installation ##
 
 You can install this plugin directly from your WordPress dashboard:
@@ -108,6 +108,13 @@ From the [FAQ Archives on the WPGlobus Website](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.1.1 ###
+
+* ADDED:
+	* Handling attribute "maxlength" in custom fields for all languages.
+* FIXED:
+	* Language tabs in admin editor styled according to the WP standards.
 
 ### 1.0.14 ###
 

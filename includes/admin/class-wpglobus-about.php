@@ -104,9 +104,6 @@ class WPGlobus_About {
 
 				<h3><?php _e( 'Important', 'wpglobus' ); ?></h3>
 				<ul class="wpglobus-important">
-					<li>
-						<?php _e( "The plugin is currently in <strong>BETA</strong> stage! We will do our best to fix all problems you'll discover. Please be patient. Your contributions (on GitHub) are highly appreciated!", 'wpglobus' ); ?>
-					</li>
 
 					<li>
 						<?php _e( "WPGlobus only supports the localization URLs in the form of <code>example.com/xx/page/</code>. We do not plan to support subdomains <code>xx.example.com</code> and language queries <code>example.com?lang=xx</code>.", 'wpglobus' ); ?>
