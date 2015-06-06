@@ -253,7 +253,26 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 if ( defined( 'AIOSEOP_VERSION' ) ) {
 	if ( ! is_admin() ) {
 		require_once 'vendor/class-wpglobus-aioseop.php';
+		
+		/**
+		 * Filter for @see localization
+		 * @scope front
+		 * @since 1.1.1
+		 */
+		add_filter( 'localization', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+		
+		/**
+		 * Filter for @see aioseop_description
+		 * @scope front
+		 * @since 1.0.8
+		 */		
 		add_filter( 'aioseop_description', array( 'WPGlobus_All_in_One_SEO', 'filter__description' ), 0 );
+		
+		/**
+		 * Filter for @see aioseop_title
+		 * @scope front
+		 * @since 1.0.8		 
+		 */			
 		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__title' ), 0 );
 	}
 }

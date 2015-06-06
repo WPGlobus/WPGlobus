@@ -59,18 +59,35 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	 */
 	public static function filter__title( $text ) {
 
-		if ( false === strpos( $text, '|' ) ) {
-			
-			$title = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
+		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+			return $text;	
+		}	
+		
+		global $post; 
+
+		$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
+		$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );		
+	
+		if ( false !== strpos($text, $default_title) ) {
+			/**
+			 * Because we have not translation of SEO title for current language need to autogenerate it 
+			 */					
+			if ( false === strpos( $text, '|' ) ) {
+	
+				$title = $post->post_title;
+				
+			} else {
+				
+				$title_arr = explode('|', $text);
+				$title = $post->post_title;
+				$title .= ' |';
+				$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
+					
+			}
 			
 		} else {
-			
-			$title_arr = explode('|', $text);
-			$title  = WPGlobus_Core::text_filter( $title_arr[0], WPGlobus::Config()->language, null);
-			$title .= ' |';
-			$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
-				
-		}
+			$title = $text;
+		}	
 		
 		return $title;
 	
@@ -85,15 +102,20 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	 * @return string
 	 */
 	public static function filter__description( $text ) {
-		
-		$description = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 
-		if ( empty($description) ) {
-			
-			global $post; 
+		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+			return $text;	
+		}
+		
+		global $post; 
+
+		$description_source = get_post_meta( $post->ID, "_aioseop_description", true );
+		$default_description = WPGlobus_Core::text_filter( $description_source, WPGlobus::Config()->default_language );
+
+		if ( $default_description == $text ) {
 			
 			/**
-			 * Because we have not translation for current language need to autogenerate it 
+			 * Because we have not translation of SEO description for current language need to autogenerate it 
 			 * @see get_post_description() in original plugin
 			 */
 			$aio = new All_in_One_SEO_Pack(); 
@@ -114,7 +136,9 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 			 
 			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
 			 
-		}
+		} else {
+			$description = $text;	
+		}	
 
 		return $description;	
 	
