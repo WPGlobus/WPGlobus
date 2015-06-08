@@ -43,12 +43,78 @@ class WPGlobus_WPSEO {
 			 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
 			 * AJAX is probably not required (waiting for a case).
 			 */
-			add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-			add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+			//add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+			//add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+			
+			/**
+			 * Filter for @see wpseo_title
+			 * @scope front
+			 * @since 1.1.1		 
+			 */			
+			add_filter( 'wpseo_title', array( 'WPGlobus_WPSEO', 'filter__title' ), 0 );
+			
+			/**
+			 * Filter for @see wpseo_description
+			 * @scope front
+			 * @since 1.1.1		 
+			 */			
+			add_filter( 'wpseo_metadesc', array( 'WPGlobus_WPSEO', 'wpseo_metadesc' ), 0 );					
+		
 		}
 
 	}
+	
+	/**
+	 * Filter SEO meta description
+	 *
+	 * @scope front
+	 * @since 1.1.1		 
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */		
+	public static function wpseo_metadesc( $text ) {
+		
+		if ( empty( $text ) ) {
+			return $text;
+		}	
+		
+		return WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
+	
+	}
+	
+	/**
+	 * Generate title
+	 *
+	 * @see get_title_from_options()
+	 * @scope front
+	 * @since 1.1.1		 
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */	
+	public static function filter__title( $text ) {
 
+		$text = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
+
+		$wpseo_f = WPSEO_Frontend::get_instance();
+		
+		if ( empty($text) ) {
+			global $post;
+			$text = $post->post_title . ' ' . $wpseo_f->get_title_from_options( 'wpseo_titles' );
+		} else {
+			$extra = $wpseo_f->get_title_from_options( 'wpseo_titles' );
+			if ( false === strpos( $text, $extra ) ) {
+				$text .= ' ' . $extra;
+			}	
+		}
+		
+		return $text;
+		
+	}
+	
 	/**
 	 * To translate Yoast columns
 	 * @see   WPSEO_Metabox::column_content
