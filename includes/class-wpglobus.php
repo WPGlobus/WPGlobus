@@ -189,7 +189,7 @@ class WPGlobus {
 
 			if ( ! class_exists( 'ReduxFramework' ) ) {
 				/** @noinspection PhpIncludeInspection */
-				require_once self::$PLUGIN_DIR_PATH . 'vendor/ReduxCore/framework.php';
+				require_once self::$PLUGIN_DIR_PATH . 'vendor/ReduxCore-3.3.4.9/framework.php';
 
 				/** Set a flag to know that we are using the embedded Redux */
 				$this->redux_framework_origin = 'embedded';
@@ -838,7 +838,7 @@ class WPGlobus {
 
 			}
 			$i18n                            = array();
-			$i18n['cannot_disable_language'] = __( 'You cannot disable the first enabled language.', 'wpglobus' );
+			$i18n['cannot_disable_language'] = __( 'You cannot disable the main language.', 'wpglobus' );
 
 			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 
