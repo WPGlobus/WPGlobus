@@ -5,8 +5,11 @@
  * @package WPGlobus
  */
 
-/** @todo Move the filter to Filters class */
-add_action( 'plugins_loaded', array( 'WPGlobus', 'init' ), 0 );
+/**
+ * Note the priority '2', and not '0'.
+ * @see \WPGlobus_Config::__construct for the actions that must be performed before this one.
+ */
+add_action( 'plugins_loaded', array( 'WPGlobus', 'init' ), 2 );
 
 /**
  * Description in @see WPGlobus_Filters::filter__get_the_terms

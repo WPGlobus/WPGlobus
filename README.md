@@ -115,7 +115,9 @@ No known backward incompatibility issues.
 	* Handling attribute "maxlength" in custom fields for all languages.
 * FIXED:
 	* Language tabs in admin editor styled according to the WP standards.
-
+	* Correct creation of the post title and description for extra languages in AIOSEOP.
+	* Enabled translation of the WPGlobus option panel.
+	
 ### 1.0.14 ###
 
 * FIXED:
