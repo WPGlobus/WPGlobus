@@ -208,9 +208,9 @@ class WPGlobus_Options {
 			'<li>' . __( '<strong>Uncheck</strong> the languages you do not plan to use.', 'wpglobus' ) . '</li>',
 			'<li>' . __( '<strong>Add</strong> more languages using the section below.', 'wpglobus' ) . '</li>',
 			'<li>' . __( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
-			'<li>' . __( 'Click', 'wpglobus' ) . ' <a href="#" onclick="location.reload(true); return false;">' .
+			'<li>' . '<a href="#" onclick="location.reload(true); return false;">' .
 			__( 'Reload', 'wpglobus' ) . '</a> ' .
-			__( 'to refresh the screen and see the updated settings.', 'wpglobus' ) . '</li>',
+			__( 'the screen to see the updated settings.', 'wpglobus' ) . '</li>',
 			'</ul>'
 		) );
 
