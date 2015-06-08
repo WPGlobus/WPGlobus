@@ -106,7 +106,7 @@ class WPGlobus_WPSEO {
 			$text = $post->post_title . ' ' . $wpseo_f->get_title_from_options( 'wpseo_titles' );
 		} else {
 			$extra = $wpseo_f->get_title_from_options( 'wpseo_titles' );
-			if ( false === strpos( $text, $extra ) ) {
+			if ( ! empty( $extra ) && false === strpos( $text, $extra ) ) {
 				$text .= ' ' . $extra;
 			}	
 		}
