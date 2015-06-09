@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpglobus 1.1.1\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-06-08 14:39-0400\n"
+"POT-Creation-Date: 2015-06-09 09:40-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,86 +117,86 @@ msgstr ""
 msgid "Options updated"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:249
+#: includes/admin/class-wpglobus-language-edit.php:250
 msgid "Please enter a language code!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:253
+#: includes/admin/class-wpglobus-language-edit.php:254
 msgid "Language code already exists!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:257
+#: includes/admin/class-wpglobus-language-edit.php:258
 msgid "Please specify the language flag!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:261
+#: includes/admin/class-wpglobus-language-edit.php:262
 msgid "Please enter the language name!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:265
+#: includes/admin/class-wpglobus-language-edit.php:266
 msgid "Please enter the language name in English!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:269
+#: includes/admin/class-wpglobus-language-edit.php:270
 msgid "Please enter the locale!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:326
+#: includes/admin/class-wpglobus-language-edit.php:327
 msgid "Edit Language"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:328
+#: includes/admin/class-wpglobus-language-edit.php:329
 msgid "Are you sure you want to delete?"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:331
+#: includes/admin/class-wpglobus-language-edit.php:332
 msgid "Add Language"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:355
+#: includes/admin/class-wpglobus-language-edit.php:356
 msgid "Language Code"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:362
+#: includes/admin/class-wpglobus-language-edit.php:363
 msgid ""
 "2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:366
+#: includes/admin/class-wpglobus-language-edit.php:367
 msgid "Language flag"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:385
+#: includes/admin/class-wpglobus-language-edit.php:386
 msgid "Name"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:390
+#: includes/admin/class-wpglobus-language-edit.php:391
 msgid ""
 "The name of the language in its native alphabet. (Examples: English, Русский)"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:395
+#: includes/admin/class-wpglobus-language-edit.php:396
 msgid "Name in English"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:400
+#: includes/admin/class-wpglobus-language-edit.php:401
 msgid "The name of the language in English"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:404
+#: includes/admin/class-wpglobus-language-edit.php:405
 #: includes/options/fields/table/table-languages.php:76
 msgid "Locale"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:409
+#: includes/admin/class-wpglobus-language-edit.php:410
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:417
+#: includes/admin/class-wpglobus-language-edit.php:418
 msgid "Save Changes"
 msgstr ""
 
-#: includes/admin/class-wpglobus-language-edit.php:421
+#: includes/admin/class-wpglobus-language-edit.php:422
 msgid "Delete Language"
 msgstr ""
 
@@ -268,52 +268,52 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:841
+#: includes/class-wpglobus.php:843
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:996
+#: includes/class-wpglobus.php:998
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:1808
+#: includes/class-wpglobus.php:1810
 #, php-format
 msgid "Word count: %s"
 msgstr ""
 
-#: includes/class-wpglobus.php:1816
+#: includes/class-wpglobus.php:1818
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:1818
+#: includes/class-wpglobus.php:1820
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:2084
+#: includes/class-wpglobus.php:2086
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2166
+#: includes/class-wpglobus.php:2168
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:2336
+#: includes/class-wpglobus.php:2343
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2338
+#: includes/class-wpglobus.php:2345
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2422
+#: includes/class-wpglobus.php:2429
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2456
+#: includes/class-wpglobus.php:2463
 msgid "Add"
 msgstr ""
 
@@ -513,9 +513,9 @@ msgstr ""
 msgid "Post types"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:416
-#: includes/options/class-wpglobus-options.php:417
-#: includes/options/class-wpglobus-options.php:508
+#: includes/options/class-wpglobus-options.php:414
+#: includes/options/class-wpglobus-options.php:415
+#: includes/options/class-wpglobus-options.php:506
 msgid "WPGlobus"
 msgstr ""
 
