@@ -75,12 +75,11 @@ class WPGlobus_Config {
 
 	/**
 	 * Stores enabled locales
-     * @since 1.0.10
-	 *
+	 * @since 1.0.10
 	 * @var array
 	 */
 	public $enabled_locale = array();
-	 
+
 	/**
 	 * Stores version and update from WPGlobus Mini info
 	 * @var array
@@ -154,7 +153,7 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	public $option_post_meta_settings = 'wpglobus_option_post_meta_settings';
-	
+
 	/**
 	 * @var string
 	 */
@@ -200,11 +199,15 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * The current language initially set to default. See the class vars.
 	 * Set the current language: if not found in the URL or REFERER, then keep the default
 	 * @since 1.1.1
 	 */
 	public function init_current_language() {
+
+		/**
+		 * Keep the default language if any of the code before does not detect another one.
+		 */
+		$this->language = $this->default_language;
 
 		/**
 		 * Theoretically, we might not have any URL to get the language info from.
@@ -239,10 +242,6 @@ class WPGlobus_Config {
 				$this->language = $language_from_url;
 			}
 		}
-
-		/**
-		 * Else - do nothing. Keep the default language.
-		 */
 
 	}
 
@@ -306,26 +305,28 @@ class WPGlobus_Config {
 
 	/**
 	 * Check for enabled locale
-	 *
 	 * @since 1.0.10
 	 *
 	 * @param string $locale
+	 *
 	 * @return boolean
 	 */
 	function is_enabled_locale( $locale ) {
-		
+
 		if ( in_array( $locale, $this->enabled_locale ) ) {
-			return true;	
-		}	
+			return true;
+		}
+
 		/*
 		foreach ( $this->enabled_locale as $language => $value ) {
 			if ( $locale == $value ) {
 				return true;
 			}
 		}*/
+
 		return false;
 	}
-	
+
 	/**
 	 * Load textdomain
 	 * @since 1.0.0
@@ -350,7 +351,6 @@ class WPGlobus_Config {
 
 		/**
 		 * Names, flags and locales
-		 *
 		 * Useful links
 		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -485,10 +485,10 @@ class WPGlobus_Config {
 					$this->enabled_languages[] = $lang;
 				}
 			}
-			
+
 			/**
 			 * Set default language
-			 */	
+			 */
 			$this->default_language = $this->enabled_languages[0];
 		}
 
@@ -519,14 +519,20 @@ class WPGlobus_Config {
 		 * Get locales
 		 */
 		$this->locale = get_option( $this->option_locale );
-		
+		if ( empty( $this->locale ) ) {
+
+			$this->_set_languages();
+			$this->_set_default_options();
+
+		}
+
 		/**
 		 * Get enabled locales
 		 */
-		foreach( $this->enabled_languages as $language ) {
-			$this->enabled_locale[] = $this->locale[$language];
+		foreach ( $this->enabled_languages as $language ) {
+			$this->enabled_locale[] = $this->locale[ $language ];
 		}
-		
+
 		/**
 		 * Get en_language_name
 		 */
@@ -555,8 +561,8 @@ class WPGlobus_Config {
 		}
 		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
-		} 
-		
+		}
+
 
 		/**
 		 * Get selector_wp_list_pages option
@@ -565,7 +571,7 @@ class WPGlobus_Config {
 		if ( empty( $wpglobus_option['selector_wp_list_pages']['show_selector'] ) || $wpglobus_option['selector_wp_list_pages']['show_selector'] == 0 ) {
 			$this->selector_wp_list_pages = false;
 		}
-		
+
 		/**
 		 * Get custom CSS
 		 */
@@ -608,7 +614,7 @@ class WPGlobus_Config {
 		 */
 		if (
 			WPGlobus_WP::is_pagenow( 'post.php' )
-			&& empty( $_SERVER['QUERY_STRING'] ) 
+			&& empty( $_SERVER['QUERY_STRING'] )
 			&& isset( $_SERVER['HTTP_REFERER'] )
 			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' )
 		) {
