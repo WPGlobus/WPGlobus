@@ -294,9 +294,7 @@ class WPGlobus_Utils {
 	 * @return bool
 	 */
 	public static function is_enabled( $language ) {
-		global $WPGlobus_Config;
-
-		return in_array( $language, $WPGlobus_Config->enabled_languages );
+		return in_array( $language, WPGlobus::Config()->enabled_languages );
 	}
 
 	/**
