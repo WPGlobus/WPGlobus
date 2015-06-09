@@ -72,9 +72,9 @@ class WPGlobus_Options {
 
 	public function setSections() {
 
-		global $WPGlobus_Config;
+		$config = WPGlobus::Config();
 
-		$wpglobus_option = get_option( $WPGlobus_Config->option );
+		$wpglobus_option = get_option( $config->option );
 
 
 		$fields_home = array();
@@ -153,13 +153,13 @@ class WPGlobus_Options {
 		/** @var array $more_languages */
 		$more_languages = array();
 
-		foreach ( $WPGlobus_Config->enabled_languages as $code ) {
+		foreach ( $config->enabled_languages as $code ) {
 			$lang_in_en = '';
-			if ( isset( $WPGlobus_Config->en_language_name[ $code ] ) && ! empty( $WPGlobus_Config->en_language_name[ $code ] ) ) {
-				$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[ $code ] . ')';
+			if ( isset( $config->en_language_name[ $code ] ) && ! empty( $config->en_language_name[ $code ] ) ) {
+				$lang_in_en = ' (' . $config->en_language_name[ $code ] . ')';
 			}
 
-			$enabled_languages[ $code ] = $WPGlobus_Config->language_name[ $code ] . $lang_in_en;
+			$enabled_languages[ $code ] = $config->language_name[ $code ] . $lang_in_en;
 			$defaults_for_enabled_languages[ $code ] = true;
 		}
 
@@ -168,26 +168,26 @@ class WPGlobus_Options {
 
 			$lang       = $wpglobus_option['more_languages'];
 			$lang_in_en = '';
-			if ( isset( $WPGlobus_Config->en_language_name[ $lang ] ) && ! empty( $WPGlobus_Config->en_language_name[ $lang ] ) ) {
-				$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[ $lang ] . ')';
+			if ( isset( $config->en_language_name[ $lang ] ) && ! empty( $config->en_language_name[ $lang ] ) ) {
+				$lang_in_en = ' (' . $config->en_language_name[ $lang ] . ')';
 			}
 
-			$enabled_languages[ $lang ] = $WPGlobus_Config->language_name[ $lang ] . $lang_in_en;
+			$enabled_languages[ $lang ] = $config->language_name[ $lang ] . $lang_in_en;
 
 			$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
-				$WPGlobus_Config->language_name[ $wpglobus_option['more_languages'] ];
-			update_option( $WPGlobus_Config->option, $wpglobus_option );
+				$config->language_name[ $wpglobus_option['more_languages'] ];
+			update_option( $config->option, $wpglobus_option );
 
 		}
 
 		/** Generate array $more_languages */
-		foreach ( $WPGlobus_Config->flag as $code => $file ) {
+		foreach ( $config->flag as $code => $file ) {
 			if ( ! array_key_exists( $code, $enabled_languages ) ) {
 				$lang_in_en = '';
-				if ( isset( $WPGlobus_Config->en_language_name[ $code ] ) && ! empty( $WPGlobus_Config->en_language_name[ $code ] ) ) {
-					$lang_in_en = ' (' . $WPGlobus_Config->en_language_name[ $code ] . ')';
+				if ( isset( $config->en_language_name[ $code ] ) && ! empty( $config->en_language_name[ $code ] ) ) {
+					$lang_in_en = ' (' . $config->en_language_name[ $code ] . ')';
 				}
-				$more_languages[ $code ] = $WPGlobus_Config->language_name[ $code ] . $lang_in_en;
+				$more_languages[ $code ] = $config->language_name[ $code ] . $lang_in_en;
 			}
 		}
 
@@ -399,11 +399,9 @@ class WPGlobus_Options {
 	 **/
 	public function setArguments() {
 
-		global $WPGlobus_Config;
-
 		$this->args = array(
 			// TYPICAL -> Change these values as you need/desire
-			'opt_name'           => $WPGlobus_Config->option,
+			'opt_name'           => WPGlobus::Config()->option,
 			// This is where your data is stored in the database and also becomes your global variable name.
 			'display_name'       => 'WPGlobus',
 			// Name that appears at the top of your panel

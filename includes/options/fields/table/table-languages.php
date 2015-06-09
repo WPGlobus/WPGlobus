@@ -42,7 +42,7 @@ class LanguagesTable extends WP_List_table {
 	 */
 	function get_data() {
 
-		global $WPGlobus_Config;
+		$config = WPGlobus::Config();
 
 		$this->table_fields = array(
 			'wpglobus_code'             => array(
@@ -88,16 +88,16 @@ class LanguagesTable extends WP_List_table {
 			)
 		);
 
-		foreach ( $WPGlobus_Config->language_name as $code => $name ) {
+		foreach ( $config->language_name as $code => $name ) {
 
 			$row['wpglobus_ID']               = $code;
-			$row['wpglobus_file']             = $WPGlobus_Config->flag[ $code ];
+			$row['wpglobus_file']             = $config->flag[ $code ];
 			$row['wpglobus_flag']             =
-				'<img src="' . $WPGlobus_Config->flags_url . $WPGlobus_Config->flag[ $code ] . '" />';
-			$row['wpglobus_locale']           = $WPGlobus_Config->locale[ $code ];
+				'<img src="' . $config->flags_url . $config->flag[ $code ] . '" />';
+			$row['wpglobus_locale']           = $config->locale[ $code ];
 			$row['wpglobus_code']             = $code;
 			$row['wpglobus_language_name']    = $name;
-			$row['wpglobus_en_language_name'] = $WPGlobus_Config->en_language_name[ $code ];
+			$row['wpglobus_en_language_name'] = $config->en_language_name[ $code ];
 
 			$this->data[] = $row;
 
@@ -307,7 +307,7 @@ class LanguagesTable extends WP_List_table {
 
 		if ( ! empty( $this->table_fields['wpglobus_code']['actions'] ) ) {
 
-			global $WPGlobus_Config;
+			$config = WPGlobus::Config();
 			$actions = array();
 
 			foreach ( $this->table_fields['wpglobus_code']['actions'] as $action => $data ) {
@@ -320,7 +320,7 @@ class LanguagesTable extends WP_List_table {
 							sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['wpglobus_code'] . '&action=edit', $data['caption'] );
 						break;
 					case 'delete' :
-						if ( $item['wpglobus_code'] == $WPGlobus_Config->default_language ) {
+						if ( $item['wpglobus_code'] == $config->default_language ) {
 							$actions['delete'] =
 								sprintf( '<a %1s href="#">%2s</a>', $class, __( 'Default language', 'wpglobus' ) );
 						} else {

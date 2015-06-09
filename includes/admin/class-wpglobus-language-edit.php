@@ -130,9 +130,9 @@ class WPGlobus_Language_Edit {
 	 */
 	function process_delete() {
 
-		global $WPGlobus_Config;
+		$config = WPGlobus::Config();
 
-		$opts = get_option( $WPGlobus_Config->option );
+		$opts = get_option( $config->option );
 
 		if ( isset( $opts['enabled_languages'][ $this->language_code ] ) ) {
 
@@ -142,21 +142,21 @@ class WPGlobus_Language_Edit {
 			if ( array_key_exists( 'more_languages', $opts ) ) {
 				$opts['more_languages'] = '';
 			}
-			update_option( $WPGlobus_Config->option, $opts );
+			update_option( $config->option, $opts );
 
 		}
 
-		unset( $WPGlobus_Config->language_name[ $this->language_code ] );
-		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
+		unset( $config->language_name[ $this->language_code ] );
+		update_option( $config->option_language_names, $config->language_name );
 
-		unset( $WPGlobus_Config->flag[ $this->language_code ] );
-		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
+		unset( $config->flag[ $this->language_code ] );
+		update_option( $config->option_flags, $config->flag );
 
-		unset( $WPGlobus_Config->en_language_name[ $this->language_code ] );
-		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
+		unset( $config->en_language_name[ $this->language_code ] );
+		update_option( $config->option_en_language_names, $config->en_language_name );
 
-		unset( $WPGlobus_Config->locale[ $this->language_code ] );
-		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
+		unset( $config->locale[ $this->language_code ] );
+		update_option( $config->option_locale, $config->locale );
 
 	}
 
@@ -191,44 +191,45 @@ class WPGlobus_Language_Edit {
 	 */
 	function save( $update_code = false ) {
 
-		global $WPGlobus_Config;
+		$config = WPGlobus::Config();
+
 		$old_code = '';
 		if ( $update_code && 'edit' == $this->action ) {
 			$old_code = isset( $_GET['lang'] ) ? $_GET['lang'] : $old_code;
-			if ( isset( $WPGlobus_Config->language_name[ $old_code ] ) ) {
-				unset( $WPGlobus_Config->language_name[ $old_code ] );
+			if ( isset( $config->language_name[ $old_code ] ) ) {
+				unset( $config->language_name[ $old_code ] );
 			}
 
-			$opts = get_option( $WPGlobus_Config->option );
+			$opts = get_option( $config->option );
 			if ( isset( $opts['enabled_languages'][ $old_code ] ) ) {
 				unset( $opts['enabled_languages'][ $old_code ] );
-				update_option( $WPGlobus_Config->option, $opts );
+				update_option( $config->option, $opts );
 			}
 			if ( isset( $opts['more_languages'] ) && $old_code == $opts['more_languages'] ) {
 				unset( $opts['more_languages'] );
-				update_option( $WPGlobus_Config->option, $opts );
+				update_option( $config->option, $opts );
 			}
 		}
-		$WPGlobus_Config->language_name[ $this->language_code ] = $this->language_name;
-		update_option( $WPGlobus_Config->option_language_names, $WPGlobus_Config->language_name );
+		$config->language_name[ $this->language_code ] = $this->language_name;
+		update_option( $config->option_language_names, $config->language_name );
 
-		if ( $update_code && isset( $WPGlobus_Config->flag[ $old_code ] ) ) {
-			unset( $WPGlobus_Config->flag[ $old_code ] );
+		if ( $update_code && isset( $config->flag[ $old_code ] ) ) {
+			unset( $config->flag[ $old_code ] );
 		}
-		$WPGlobus_Config->flag[ $this->language_code ] = $this->flag;
-		update_option( $WPGlobus_Config->option_flags, $WPGlobus_Config->flag );
+		$config->flag[ $this->language_code ] = $this->flag;
+		update_option( $config->option_flags, $config->flag );
 
-		if ( $update_code && isset( $WPGlobus_Config->en_language_name[ $old_code ] ) ) {
-			unset( $WPGlobus_Config->en_language_name[ $old_code ] );
+		if ( $update_code && isset( $config->en_language_name[ $old_code ] ) ) {
+			unset( $config->en_language_name[ $old_code ] );
 		}
-		$WPGlobus_Config->en_language_name[ $this->language_code ] = $this->en_language_name;
-		update_option( $WPGlobus_Config->option_en_language_names, $WPGlobus_Config->en_language_name );
+		$config->en_language_name[ $this->language_code ] = $this->en_language_name;
+		update_option( $config->option_en_language_names, $config->en_language_name );
 
-		if ( $update_code && isset( $WPGlobus_Config->locale[ $old_code ] ) ) {
-			unset( $WPGlobus_Config->locale[ $old_code ] );
+		if ( $update_code && isset( $config->locale[ $old_code ] ) ) {
+			unset( $config->locale[ $old_code ] );
 		}
-		$WPGlobus_Config->locale[ $this->language_code ] = $this->locale;
-		update_option( $WPGlobus_Config->option_locale, $WPGlobus_Config->locale );
+		$config->locale[ $this->language_code ] = $this->locale;
+		update_option( $config->option_locale, $config->locale );
 
 		if ( $update_code ) {
 			$this->action = 'done';
@@ -291,8 +292,8 @@ class WPGlobus_Language_Edit {
 	 * @return bool true if language code exists
 	 */
 	function language_exists( $code ) {
-		global $WPGlobus_Config;
-		if ( array_key_exists( $code, $WPGlobus_Config->language_name ) ) {
+
+		if ( array_key_exists( $code, WPGlobus::Config()->language_name ) ) {
 			return true;
 		}
 
@@ -306,11 +307,11 @@ class WPGlobus_Language_Edit {
 	function get_data() {
 
 		if ( 'edit' == $this->action || 'delete' == $this->action ) {
-			global $WPGlobus_Config;
-			$this->language_name    = $WPGlobus_Config->language_name[ $this->language_code ];
-			$this->en_language_name = $WPGlobus_Config->en_language_name[ $this->language_code ];
-			$this->locale           = $WPGlobus_Config->locale[ $this->language_code ];
-			$this->flag             = $WPGlobus_Config->flag[ $this->language_code ];
+			$config = WPGlobus::Config();
+			$this->language_name    = $config->language_name[ $this->language_code ];
+			$this->en_language_name = $config->en_language_name[ $this->language_code ];
+			$this->locale           = $config->locale[ $this->language_code ];
+			$this->flag             = $config->flag[ $this->language_code ];
 		}
 		$this->_get_flags();
 	}

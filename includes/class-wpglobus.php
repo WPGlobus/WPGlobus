@@ -111,9 +111,11 @@ class WPGlobus {
 			'on_admin_init'
 		) );
 
-		global $WPGlobus_Config, $WPGlobus_Options;
+		global $WPGlobus_Options;
 
 		global $pagenow;
+
+		$config = WPGlobus::Config();
 
 		/**
 		 * Init array of supported plugins
@@ -311,12 +313,12 @@ class WPGlobus {
 				'on_admin_styles'
 			) );
 
-			add_filter( "redux/{$WPGlobus_Config->option}/field/class/table", array(
+			add_filter( "redux/{$config->option}/field/class/table", array(
 				$this,
 				'on_field_table'
 			) );
 
-			add_filter( "redux/{$WPGlobus_Config->option}/field/class/post_types", array(
+			add_filter( "redux/{$config->option}/field/class/post_types", array(
 				$this,
 				'on_add_field_post_types'
 			) );
@@ -507,7 +509,8 @@ class WPGlobus {
 					remove_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
 				}
 
-				global $WPGlobus_Config;
+				$config = WPGlobus::Config();
+
 				$result               = array();
 				$bulkedit_post_titles = array();
 				foreach ( $order['title'] as $id => $title ) {
@@ -522,9 +525,9 @@ class WPGlobus {
 						}
 					}
 
-					foreach ( $WPGlobus_Config->enabled_languages as $language ) {
+					foreach ( $config->enabled_languages as $language ) {
 						$return =
-							$language == $WPGlobus_Config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+							$language == $config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
 
 						$result[ $id ][ $language ]['name'] =
 							WPGlobus_Core::text_filter( $title['source'], $language, $return );
@@ -718,8 +721,7 @@ class WPGlobus {
 		/** @global string $pagenow */
 		global $pagenow;
 
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
+		$config = WPGlobus::Config();
 
 		/**
 		 * Set array of enabled pages for loading js
@@ -756,11 +758,11 @@ class WPGlobus {
 		 * Init array data depending on the context for localize script
 		 */
 		$data = array(
-			'default_language'  => $WPGlobus_Config->default_language,
-			'language'          => $WPGlobus_Config->language,
-			'enabled_languages' => $WPGlobus_Config->enabled_languages,
-			'open_languages'    => $WPGlobus_Config->open_languages,
-			'en_language_name'  => $WPGlobus_Config->en_language_name,
+			'default_language'  => $config->default_language,
+			'language'          => $config->language,
+			'enabled_languages' => $config->enabled_languages,
+			'open_languages'    => $config->open_languages,
+			'en_language_name'  => $config->en_language_name,
 			'locale_tag_start'  => self::LOCALE_TAG_START,
 			'locale_tag_end'    => self::LOCALE_TAG_END
 		);
@@ -787,12 +789,12 @@ class WPGlobus {
 				 * next we send $post_content to js with localize script
 				 * @see post_edit() in admin.globus.js
 				 */
-				$post_content = WPGlobus_Core::text_filter( $post->post_content, $WPGlobus_Config->default_language );
+				$post_content = WPGlobus_Core::text_filter( $post->post_content, $config->default_language );
 
 				/**
 				 * Set $post_title for default language
 				 */
-				$post_title = WPGlobus_Core::text_filter( $post->post_title, $WPGlobus_Config->default_language );
+				$post_title = WPGlobus_Core::text_filter( $post->post_title, $config->default_language );
 
 			}
 
@@ -828,8 +830,8 @@ class WPGlobus {
 				/**
 				 * Make suffixes for tabs
 				 */
-				foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-					if ( $language == $WPGlobus_Config->default_language ) {
+				foreach ( $config->enabled_languages as $language ) {
+					if ( $language == $config->default_language ) {
 						$tabs_suffix[] = 'default';
 					} else {
 						$tabs_suffix[] = $language;
@@ -969,7 +971,7 @@ class WPGlobus {
 					endif;
 
 					$menu_items[ $item->ID ]['item-title'] =
-						WPGlobus_Core::text_filter( $item->post_title, $WPGlobus_Config->default_language );
+						WPGlobus_Core::text_filter( $item->post_title, $config->default_language );
 
 					$post_titles[ $item->post_title ] = $menu_items[ $item->ID ]['item-title'];
 
@@ -1023,8 +1025,8 @@ class WPGlobus {
 				}
 
 				if ( $data['tag_id'] ) {
-					foreach ( $WPGlobus_Config->enabled_languages as $language ) {
-						$lang = $language == $WPGlobus_Config->default_language ? 'default' : $language;
+					foreach ( $config->enabled_languages as $language ) {
+						$lang = $language == $config->default_language ? 'default' : $language;
 						if ( 'default' == $lang ) {
 							$data['i18n'][ $lang ]['name']        =
 								WPGlobus_Core::text_filter( $tag->name, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
@@ -1115,7 +1117,7 @@ class WPGlobus {
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'parentClass'  => __CLASS__,
 					'process_ajax' => __CLASS__ . '_process_ajax',
-					'flag_url'     => $WPGlobus_Config->flags_url,
+					'flag_url'     => $config->flags_url,
 					'tabs'         => $tabs_suffix,
 					'i18n'         => $i18n,
 					'data'         => $data
@@ -1126,11 +1128,11 @@ class WPGlobus {
 				'WPGlobusCoreData',
 				array(
 					'version'           => WPGLOBUS_VERSION,
-					'default_language'  => $WPGlobus_Config->default_language,
-					'language'          => $WPGlobus_Config->language,
-					'enabled_languages' => $WPGlobus_Config->enabled_languages,
-					'open_languages'    => $WPGlobus_Config->open_languages,
-					'en_language_name'  => $WPGlobus_Config->en_language_name,
+					'default_language'  => $config->default_language,
+					'language'          => $config->language,
+					'enabled_languages' => $config->enabled_languages,
+					'open_languages'    => $config->open_languages,
+					'en_language_name'  => $config->en_language_name,
 					'locale_tag_start'  => self::LOCALE_TAG_START,
 					'locale_tag_end'    => self::LOCALE_TAG_END
 				)
