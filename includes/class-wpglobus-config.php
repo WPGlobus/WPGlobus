@@ -519,7 +519,13 @@ class WPGlobus_Config {
 		 * Get locales
 		 */
 		$this->locale = get_option( $this->option_locale );
-		
+		if ( empty( $this->locale ) ) {
+
+			$this->_set_languages();
+			$this->_set_default_options();
+
+		}
+
 		/**
 		 * Get enabled locales
 		 */
