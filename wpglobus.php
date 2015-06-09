@@ -32,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'WPGLOBUS_VERSION', '1.1.1' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+/** @todo Get rid of these */
 global $WPGlobus;
 global $WPGlobus_Options;
 
@@ -44,12 +45,12 @@ require_once 'includes/class-wpglobus.php';
 
 require_once 'includes/class-wpglobus-core.php';
 
+/**
+ * Initialize
+ */
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
-
-/** @todo Get rid of it */
-global $WPGlobus_Config;
-$WPGlobus_Config = new WPGlobus_Config();
+WPGlobus::Config();
 
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';

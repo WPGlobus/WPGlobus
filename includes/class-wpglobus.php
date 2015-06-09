@@ -2309,10 +2309,15 @@ class WPGlobus {
 	 * @return WPGlobus_Config
 	 */
 	public static function Config() {
-		/** @global WPGlobus_Config $WPGlobus_Config */
-		global $WPGlobus_Config;
 
-		return $WPGlobus_Config;
+		static $config = null;
+
+		if( is_null($config)){
+			$config = new WPGlobus_Config();
+		}
+
+		return $config;
+
 	}
 
 	/**
