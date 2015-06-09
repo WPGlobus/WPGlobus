@@ -293,6 +293,30 @@ class APICest {
 			,
 			$I->grabTextFrom( '#_test_get_posts .post_excerpt' ), __LINE__ );
 
+		/**
+		 * @covers \WPGlobus_QA::_test_wp_page_menu
+		 */
+
+		// - Link to the page
+		$_post_id = $I->grabTextFrom( '#_test_wp_page_menu .post_id' );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " page_title " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_wp_page_menu .page-item-' . $_post_id ), __LINE__ );
+
+		// - Switcher: parent level
+		$I->assertEquals(
+			$language,
+			$I->grabTextFrom( '#_test_wp_page_menu .page_item_wpglobus_menu_switch .wpglobus_flag_' . $language ),
+			__LINE__ );
+
+		// - Switcher: child level
+		$I->assertEquals(
+			'ru',
+			$I->grabTextFrom( '#_test_wp_page_menu .children .wpglobus_flag_' . 'ru' ),
+			__LINE__ );
+
+
 		$this->_common_for_all_languages( $I );
 	}
 
@@ -489,6 +513,29 @@ class APICest {
 			WPGlobus_Acceptance::COMMON_PREFIX . " post_excerpt " . $language_suffix
 			,
 			$I->grabTextFrom( '#_test_get_posts .post_excerpt' ), __LINE__ );
+
+		/**
+		 * @covers \WPGlobus_QA::_test_wp_page_menu
+		 */
+
+		// - Link to the page
+		$_post_id = $I->grabTextFrom( '#_test_wp_page_menu .post_id' );
+		$I->assertEquals(
+			WPGlobus_Acceptance::COMMON_PREFIX . " page_title " . $language_suffix
+			,
+			$I->grabTextFrom( '#_test_wp_page_menu .page-item-' . $_post_id ), __LINE__ );
+
+		// - Switcher: parent level
+		$I->assertEquals(
+			$language,
+			$I->grabTextFrom( '#_test_wp_page_menu .page_item_wpglobus_menu_switch .wpglobus_flag_' . $language ),
+			__LINE__ );
+
+		// - Switcher: child level
+		$I->assertEquals(
+			'en',
+			$I->grabTextFrom( '#_test_wp_page_menu .children .wpglobus_flag_' . 'en' ),
+			__LINE__ );
 
 		$this->_common_for_all_languages( $I );
 	}

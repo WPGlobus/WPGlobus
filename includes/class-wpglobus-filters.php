@@ -465,54 +465,6 @@ class WPGlobus_Filters {
 	}
 
 	/**
-	 * To translate Yoast columns
-	 * @see   WPSEO_Metabox::column_content
-	 * @scope admin
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 * @todo  Check pull request
-	 * https://github.com/Yoast/wordpress-seo/pull/1946
-	 */
-	public static function filter__wpseo_columns( $text ) {
-
-		if ( WPGlobus_WP::is_filter_called_by( 'column_content', 'WPSEO_Metabox' ) ) {
-
-			$text = WPGlobus_Core::text_filter(
-				$text,
-				WPGlobus::Config()->language,
-				null,
-				WPGlobus::Config()->default_language
-			);
-		}
-
-		return $text;
-	}
-
-	/**
-	 * @todo To discuss
-	 */
-	public static function action__init_url_info() {
-
-		WPGlobus::Config()->url_info =
-			WPGlobus_Utils::extract_url( $_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '' );
-
-		/**
-		 * Set language of current page
-		 */
-		WPGlobus::Config()->language = WPGlobus::Config()->url_info['language'];
-
-		/**
-		 * @quirks
-		 * This might be needed if we'd support subdomains or language queries
-		 */
-		//		$_SERVER['REQUEST_URI'] = WPGlobus::Config()->url_info['url'];
-		//		$_SERVER['HTTP_HOST']   = WPGlobus::Config()->url_info['host'];
-
-	}
-
-	/**
 	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info
 	 * @since 1.0.0
 	 *
@@ -737,7 +689,8 @@ class WPGlobus_Filters {
 	 *
 	 * @return string
 	 */
-	public static function filter__wp_trim_words( $text, $num_words, $more, $original_text ) {
+	public static function filter__wp_trim_words( /** @noinspection PhpUnusedParameterInspection */
+		$text, $num_words, $more, $original_text ) {
 
 		$text = WPGlobus_Core::text_filter( $original_text, WPGlobus::Config()->language );
 

@@ -9,34 +9,18 @@
 class WPGlobus_Config {
 
 	/**
-	 *    Url mode: query (question mark)
-	 */
-//	const GLOBUS_URL_QUERY = 1;
-
-	/**
-	 *    Url mode: pre-path
-	 */
-	const GLOBUS_URL_PATH = 2;
-
-	/**
-	 *    Url mode: pre-domain
-	 */
-//	const GLOBUS_URL_DOMAIN = 3;
-
-	/**
-	 * Current language
-	 * @var string
-	 */
-	public $language = 'en';
-
-	/**
 	 * Language by default
 	 * @var string
 	 */
 	public $default_language = 'en';
 
 	/**
-	 * @todo This is just an example.
+	 * Current language. Should be set to default initially.
+	 * @var string
+	 */
+	public $language = 'en';
+
+	/**
 	 * Enabled languages
 	 * @var string[]
 	 */
@@ -57,12 +41,6 @@ class WPGlobus_Config {
 	 * @var string[]
 	 */
 	public $open_languages = array();
-
-	/**
-	 *    URL information
-	 * @var array
-	 */
-	public $url_info = array();
 
 	/**
 	 * Flag images configuration
@@ -195,20 +173,79 @@ class WPGlobus_Config {
 	 */
 	public $disabled_entities = array();
 
-//	protected $url_mode;
 
 	/**
 	 * Constructor
 	 */
 	function __construct() {
 
+		/**
+		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
+		 *        plugins already loaded their translations.
+		 */
+		add_action( 'plugins_loaded', array(
+			$this,
+			'init_current_language'
+		), 0 );
+
 		add_action( 'plugins_loaded', array(
 			$this,
 			'on_load_textdomain'
-		), 0 );
+		), 1 );
+
+		add_action( 'upgrader_process_complete', array( $this, 'on_activate' ), 10, 2 );
+
 
 		$this->_get_options();
 	}
+
+	/**
+	 * The current language initially set to default. See the class vars.
+	 * Set the current language: if not found in the URL or REFERER, then keep the default
+	 * @since 1.1.1
+	 */
+	public function init_current_language() {
+
+		/**
+		 * Theoretically, we might not have any URL to get the language info from.
+		 */
+		$url_to_check = '';
+
+		if ( WPGlobus_WP::is_doing_ajax() ) {
+			/**
+			 * If DOING_AJAX, we cannot retrieve the language information from the URL,
+			 * because it's always `admin-ajax`.
+			 * Therefore, we'll rely on the HTTP_REFERER (if it exists).
+			 */
+			if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+				$url_to_check = $_SERVER['HTTP_REFERER'];
+			}
+		} else {
+			/**
+			 * If not AJAX and not ADMIN then we are at the front. Will use the current URL.
+			 */
+			if ( ! is_admin() ) {
+				$url_to_check = WPGlobus_Utils::current_url();
+			}
+		}
+
+		/**
+		 * If we have an URL, extract language from it.
+		 * If extracted, set it as a current.
+		 */
+		if ( $url_to_check ) {
+			$language_from_url = WPGlobus_Utils::extract_language_from_url( $url_to_check );
+			if ( $language_from_url ) {
+				$this->language = $language_from_url;
+			}
+		}
+
+		/**
+		 * Else - do nothing. Keep the default language.
+		 */
+
+	}
+
 
 	/**
 	 * Check plugin version and update versioning option
@@ -218,7 +255,7 @@ class WPGlobus_Config {
 	 *
 	 * @return void
 	 */
-	public static function on_activate(
+	public function on_activate(
 		/** @noinspection PhpUnusedParameterInspection */
 		$object = null,
 		$options = array()
@@ -234,37 +271,20 @@ class WPGlobus_Config {
 			return;
 		}
 
-		$version = get_option( self::$option_versioning );
+		/**
+		 * Here we can read the previous version value and do some actions if necessary.
+		 * For example, warn the users about breaking changes.
+		 * $version = get_option( self::$option_versioning );
+		 * ...
+		 */
 
-		if ( empty( $version ) ) {
-			$version = array();
-			/**
-			 * Now check 'wpglobus_option'
-			 */
-			$option = get_option( 'wpglobus_option' );
+		/**
+		 * Store the current version
+		 */
+		update_option( self::$option_versioning, array(
+			'current_version' => WPGLOBUS_VERSION
+		) );
 
-			if ( empty( $option ) ) {
-				/**
-				 * This is the first activation with version >= 1.0.0
-				 */
-				$version['current_version'] = WPGLOBUS_VERSION;
-			} else {
-				/**
-				 * This is an upgrade from version 0.1.x
-				 */
-				$version['current_version']       = WPGLOBUS_VERSION;
-				$version['wpglobus_mini_warning'] = true;
-			}
-		} else {
-			/**
-			 * Update option after silent plugin activate
-			 */
-			$version['current_version'] = WPGLOBUS_VERSION;
-
-			delete_option( self::$option_versioning );
-		}
-
-		update_option( self::$option_versioning, $version );
 	}
 
 	/**
@@ -314,14 +334,6 @@ class WPGlobus_Config {
 	function on_load_textdomain() {
 		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 	}
-
-	/**
-	 * Return URL mode
-	 * @int
-	 */
-//	function get_url_mode() {
-//		return $this->url_mode;
-//	}
 
 	/**
 	 * Set flags URL
@@ -491,16 +503,6 @@ class WPGlobus_Config {
 		$this->_set_flags_url();
 
 		/**
-		 * Get URL mode
-		 */
-//		if ( isset( $wpglobus_option['url_mode'] ) && ! empty( $wpglobus_option['url_mode'] ) ) {
-//			$this->url_mode = $wpglobus_option['url_mode'];
-//		} else {
-//			$this->url_mode = self::GLOBUS_URL_PATH;
-//		}
-		//}
-
-		/**
 		 * Get languages name
 		 * big array of used languages
 		 */
@@ -600,7 +602,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Need additional check for devmode (toggle=OFF)
-		 * in case 'wpglobus' didn't set to 'off' at /wp-admin/post.php
+		 * in case 'wpglobus' was not set to 'off' at /wp-admin/post.php
 		 * and $_SERVER[QUERY_STRING] is empty at the time of `wp_insert_post_data` action
 		 * @see WPGlobus::on_save_post_data
 		 */
@@ -613,19 +615,6 @@ class WPGlobus_Config {
 			$this->toggle = 'off';
 		}
 
-	}
-
-	/**
-	 * @deprecated 1.0.0
-	 * Hard-coded enabled url modes
-	 * @return array
-	 */
-	function _getEnabledUrlMode() {
-		$enabled_url_mode = array(
-			self::GLOBUS_URL_PATH => 'URL path'
-		);
-
-		return $enabled_url_mode;
 	}
 
 } //class

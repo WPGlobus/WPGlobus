@@ -317,6 +317,68 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * "Stub" test for coverage.
+	 * @covers WPGlobus_Utils::current_url
+	 */
+	function test_current_url() {
+		$_SERVER['HTTP_HOST']   = 'www.example.com';
+		$_SERVER['REQUEST_URI'] = '/folder/file?var=value';
+		$this->assertEquals( 'http://www.example.com/folder/file?var=value', WPGlobus_Utils::current_url() );
+	}
+
+	/**
+	 * @covers \WPGlobus_Utils::hreflangs
+	 */
+	function test_hreflangs() {
+
+		/**
+		 * Mock object sent as a parameter, because we do now have access to the actual config.
+		 * @var WPGlobus_Config $config
+		 */
+		$config = $this->getMock( 'WPGlobus_Config' );
+
+		/**
+		 * These languages are enabled
+		 */
+		$config->enabled_languages = array( 'en', 'ru', 'pt' );
+
+		/**
+		 * This is the current language
+		 */
+		$config->language = 'pt';
+
+		/**
+		 * This is the default language
+		 */
+		$config->default_language = 'ru';
+
+		/**
+		 * This says "Do not use language code in the default URL"
+		 * So, no /en/page/, just /page/
+		 */
+		$config->hide_default_language = true;
+
+		$config->locale['en'] = "en_US";
+		$config->locale['ru'] = "ru_RU";
+		$config->locale['pt'] = "pt_PT";
+
+
+		/**
+		 * Mock web request
+		 */
+		$_SERVER['HTTP_HOST']   = 'www.example.com';
+		$_SERVER['REQUEST_URI'] = '/folder/file?var=value';
+
+
+		$hreflangs = WPGlobus_Utils::hreflangs( $config );
+
+		$this->assertEquals( '<link rel="alternate" hreflang="ru-RU" href="http://www.example.com/folder/file?var=value"/>', $hreflangs['ru'] );
+
+		$this->assertEquals( '<link rel="alternate" hreflang="pt-PT" href="http://www.example.com/pt/folder/file?var=value"/>', $hreflangs['pt'] );
+
+	}
+
 } // class
 
 /**
@@ -356,4 +418,16 @@ function untrailingslashit( $string ) {
 	return rtrim( $string, '/\\' );
 }
 
+/**
+ * Set the scheme for a URL
+ * @since 3.4.0
+ *
+ * @param string $url    Absolute url that includes a scheme
+ * @param string $scheme Optional. Scheme to give $url. Currently 'http', 'https', 'login', 'login_post', 'admin', or 'relative'.
+ *
+ * @return string $url URL with chosen scheme.
+ */
+function set_url_scheme( $url, $scheme = null ) {
+	return $url;
+}
 # --- EOF

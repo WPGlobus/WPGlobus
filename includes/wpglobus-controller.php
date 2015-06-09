@@ -5,8 +5,11 @@
  * @package WPGlobus
  */
 
-/** @todo Move the filter to Filters class */
-add_action( 'plugins_loaded', array( 'WPGlobus', 'init' ), 0 );
+/**
+ * Note the priority '2', and not '0'.
+ * @see \WPGlobus_Config::__construct for the actions that must be performed before this one.
+ */
+add_action( 'plugins_loaded', array( 'WPGlobus', 'init' ), 2 );
 
 /**
  * Description in @see WPGlobus_Filters::filter__get_the_terms
@@ -233,14 +236,6 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
  */
 add_filter( 'locale', array( 'WPGlobus_Filters', 'filter__get_locale' ), PHP_INT_MAX );
 
-/**
- * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
- *        plugins already loaded their translations.
- * @todo  Refactor url_info after beta-testing
- */
-add_action( 'plugins_loaded', array( 'WPGlobus_Filters', 'action__init_url_info' ), 0 );
-//add_action( 'init', array( 'WPGlobus_Filters', 'action__init_url_info' ), 2 );
-
 /** @todo Move the filter to Filters class */
 add_action( 'activated_plugin', array( 'WPGlobus', 'activated' ) );
 
@@ -256,39 +251,31 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 }
 
 /**
- * Yoast filters
- * @todo Move to a separate controller
- */
-if ( defined( 'WPSEO_VERSION' ) ) {
-
-	if ( is_admin() ) {
-
-		if ( WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
-			/**
-			 * To translate Yoast columns on edit.php page
-			 */
-			add_filter( 'esc_html', array( 'WPGlobus_Filters', 'filter__wpseo_columns' ), 0 );
-		}
-
-	} else {
-		/**
-		 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
-		 * AJAX is probably not required (waiting for a case).
-		 */
-		add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-		add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-	}
-
-
-}
-
-/**
  * All In One SEO Pack filters
  */
 if ( defined( 'AIOSEOP_VERSION' ) ) {
 	if ( ! is_admin() ) {
 		require_once 'vendor/class-wpglobus-aioseop.php';
+		
+		/**
+		 * Filter for @see localization
+		 * @scope front
+		 * @since 1.1.1
+		 */
+		add_filter( 'localization', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+		
+		/**
+		 * Filter for @see aioseop_description
+		 * @scope front
+		 * @since 1.0.8
+		 */		
 		add_filter( 'aioseop_description', array( 'WPGlobus_All_in_One_SEO', 'filter__description' ), 0 );
+		
+		/**
+		 * Filter for @see aioseop_title
+		 * @scope front
+		 * @since 1.0.8		 
+		 */			
 		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__title' ), 0 );
 	}
 }

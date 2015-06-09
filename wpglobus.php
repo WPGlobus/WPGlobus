@@ -5,7 +5,7 @@
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.0.14
+ * Version: 1.1.1
  * Author: WPGlobus
  * Author URI: http://www.wpglobus.com/
  * Network: false
@@ -29,9 +29,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.0.14' );
+define( 'WPGLOBUS_VERSION', '1.1.1' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+/** @todo Get rid of these */
 global $WPGlobus;
 global $WPGlobus_Options;
 
@@ -44,19 +45,19 @@ require_once 'includes/class-wpglobus.php';
 
 require_once 'includes/class-wpglobus-core.php';
 
+/**
+ * Initialize
+ */
 WPGlobus::$PLUGIN_DIR_PATH = plugin_dir_path( __FILE__ );
 WPGlobus::$PLUGIN_DIR_URL  = plugin_dir_url( __FILE__ );
-
-/** @todo Get rid of it */
-global $WPGlobus_Config;
-$WPGlobus_Config = new WPGlobus_Config();
+WPGlobus::Config();
 
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
-if ( is_admin() && ! WPGlobus_WP::is_doing_ajax() ) {
-	require_once 'includes/class-wpglobus-upgrade.php';
-	require_once 'includes/wpglobus-upgrade-controller.php';
+if ( defined( 'WPSEO_VERSION' ) ) {
+	require_once 'includes/class-wpglobus-wpseo.php';
+	WPGlobus_WPSEO::controller();
 }
 
 /**

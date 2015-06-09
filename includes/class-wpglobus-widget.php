@@ -57,9 +57,6 @@ class WPGlobusWidget extends WP_Widget {
 		$enabled_languages = WPGlobus::Config()->enabled_languages;
 
 		switch ( $type ) :
-			case 'flags' :
-				$code = '<div class="flags-styled">{{inside}}</div>';
-				break;
 			case 'list' :
 				$code = '<div class="list">{{inside}}</div>';
 				break;
@@ -89,6 +86,10 @@ class WPGlobusWidget extends WP_Widget {
 					  </li>
 					</ul></div>';
 				break;
+			default:
+				//	This is case 'flags'. Having is as default makes $code always set.
+				$code = '<div class="flags-styled">{{inside}}</div>';
+				break;
 		endswitch;
 		
 		/**
@@ -114,10 +115,7 @@ class WPGlobusWidget extends WP_Widget {
 				$selected = ' selected';
 			}
 
-			$url  =
-				WPGlobus::Config()->url_info['schema'] . WPGlobus::Config()->url_info['host'] . WPGlobus::Config()->url_info['url'];
-			
-			$url = WPGlobus_Utils::localize_url( $url, $language );
+			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language );
 				
 			$flag = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
 
@@ -129,9 +127,11 @@ class WPGlobusWidget extends WP_Widget {
 				case 'list_with_flags' :
 					$inside .= '<a href="' . $url . '">' .
 					           '<img src="' . $flag . '" alt=""/>' .
+					           ' ' .
 					           '<span class="name">' .
 					           WPGlobus::Config()->language_name[ $language ] .
 					           '</span>' .
+					           ' ' .
 					           '<span class="code">' . strtoupper( $language ) . '</span>' .
 					           '</a>';
 					break;

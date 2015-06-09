@@ -1,6 +1,6 @@
 # WPGlobus - Multilingual Everything! #
 **Contributors:** tivnetinc, alexgff, tivnet  
-**Donate link:** http://www.wpglobus.com/  
+**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus  
 **Requires at least:** 4.0  
 **Tested up to:** 4.2.2  
@@ -13,8 +13,6 @@
 ## Description ##
 
 **WPGlobus** is a plugin for making bilingual / multilingual WordPress blogs and sites.
-
-> **Versions 1.0.x are released to the general public as Beta Software. During the Beta stage, the software is tested for bugs, crashes, errors and inconsistencies. If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
 With the WPGlobus Free Core plugin, you can:
 
@@ -53,7 +51,7 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 * More extensions are planned:
 	* Stay tuned, search the repository for [WPGlobus](https://wordpress.org/plugins/search.php?q=WPGlobus).
 
-### WPGlobus is compatible with these popular plugins: ###
+### WPGlobus is compatible with many popular plugins, including: ###
 
 * [WordPress SEO](https://yoast.com/wordpress/plugins/seo/) by [Joost de Valk](https://profiles.wordpress.org/joostdevalk/);
 * [All in One SEO Pack](https://wordpress.org/plugins/all-in-one-seo-pack/) by [Michael Torbert](https://profiles.wordpress.org/hallsofmontezuma/);
@@ -74,6 +72,8 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 	* [Twitter](https://twitter.com/WPGlobus)
 	* [Google Plus](https://plus.google.com/+Wpglobus)
 	* [LinkedIn](https://www.linkedin.com/company/wpglobus)
+
+> **If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
 ## Installation ##
 
@@ -109,136 +109,23 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.1.1 ###
+
+* ADDED:
+	* Handling attribute "maxlength" in custom fields for all languages.
+	* Support of the WP-SEO 2.2.
+	* Compatibility with Redux Framework 3.5.
+* FIXED:
+	* Language tabs in admin editor styled according to the WP standards.
+	* Correct creation of the post title and description for extra languages in AIOSEOP.
+	* Enabled translation of the WPGlobus option panel.
+	
 ### 1.0.14 ###
 
 * FIXED:
 	* Correct display of trimmed words in admin (filter on `wp_trim_words`).
 	* Correct translation of the posts with `---MORE---`.
 
-### 1.0.13 ###
+### Earlier versions ###
 
-* ADDED:
-	* Word count in wp_editor for each language.
-	* Admin notice about WPGlobus requiring "nice permalinks".
-* FIXED:
-	* Correct language setting for URLs like `/fr?s=aaa` with no trailing slash before `?`
-
-### 1.0.12 ###
-
-* FIXED:
-	* Language switcher in navigation menus works correctly if WordPress is installed in a subfolder.
-* ADDED:
-	* New extension, [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) is referenced on the add-ons page.
-	* Support for http://localhost and http://127.0.0.1 development URLs.
-
-### 1.0.11 ###
-* FIXED:
-	* Method of URL localization correctly parses URLs like `/rush` and `/designer`, not extracting `/ru` and `/de` from them.
-	* Admin CSS corrected for the active tab in the WPGlobus dialog.
-	* Admin CSS corrected for icon at widgets.php page.
-* ADDED:
-	* New page for the future extensions and add-ons.
-	* The "Disabled entities" array added to the WPGlobus config.
-* COMPATIBILITY:
-	* WordPress 4.2
-
-### 1.0.10 ###
-* FIXED:
-	* Admin CSS corrected so it's not easily broken by themes who use their own jQueryUI styling.
-	* Modified the Admin language switcher's incorrect behavior occurred in some cases.
-	* Corrected pt_PT and pt_BR names, locales and flags.
-* COMPATIBILITY:
-	* WordPress 4.2-beta3
-	* WordPress SEO 2.0.1
-	
-### 1.0.9 ###
-* ADDED:
-	* Admin interface to enable/disable WPGlobus for selected metaboxes.
-	* Admin interface to enable/disable WPGlobus for selected Custom Post Types.
-* FIXED:
-	* URL localization with or without `www`, regardless of its presence in `home_url`.
-	* Admin language tabs work correctly with custom post types that don't have 'title' or 'editor'.
-	* All in One SEO pack plugin works correctly on the `post-new.php` admin page.
-	* Language is set correctly during AJAX calls, using `HTTP_REFERER` info.
-	* Language is retrieved from the current URL before other plugins load their translations.
-	
-### 1.0.8.1 ###
-* FIXED:
-	* Reset hierarchical taxonomies checkmarks after save post or update post's page.
-	* Incorrect empty string returning when a non-string argument passed to the text filter.
-
-### 1.0.8 ###
-* ADDED:
-	* Partial support of the All in One SEO Pack plugin.
-	* Change WP Admin language using an Admin bar selector.
-* FIXED:
-	* Changed flag to `us.png` for the `en_US` locale.
-	* Some Admin interface improvements.
-	* Corrected field updates at the `edit-tags.php` page.
-	* Corrected post saving in WPGlobus developer's mode (toggle off).
-	* Support of post types with no `editor` (content).
-
-### 1.0.7.2 ###
-* FIXED:
-	* URL switching when WordPress serves only part of the site, like `www.example.com/blog`. Reported by [IAmVincentLiu](https://wordpress.org/support/profile/iamvincentliu) - THANKS!
-
-### 1.0.7.1 ###
-* FIXED:
-	* Anonymous function call prevented installing on PHP 5.2. Related to the reports by [barques](https://wordpress.org/support/profile/barques) and [Jeff Brock](https://wordpress.org/support/profile/jeffbrockstudio) - THANKS!
-
-### 1.0.7 ###
-* ADDED:
-	* WPGlobus Language Selector widget.
-	* Enable language selector in navigation menus created using `wp_list_pages`.
-	* Frontend filter meta description for All In One SEO Pack plugin.
-* FIXED:
-	* CSS for WPGlobus Universal Editor buttons.
-
-### 1.0.6 ###
-* ADDED:
-	* Admin interface and front filter to translate widgets.
-	* Deutsch (de_DE) PO / MO-Dateien für WPGlobus Administration.
-* FIXED:
-	* Clean subjects of the comment notification emails.
-
-### 1.0.5 ###
-* ADDED:
-	* Localization interface for ACF text and textarea fields; no need to format languages manually.
-	* Localization interface for the standard Custom Fields.
-
-### 1.0.4 ###
-* FIXED:
-	* Disabled WPGlobus admin interface on ACF screens - until we support them properly.
-* ADDED:
-**	* Frontend filter acf/load_value/type=text(area):** works if the fields were manually formatted {:en}...{:}  
-
-### 1.0.3 ###
-* FIXED:
-	* PHP notice on plugin activation hook when a theme is upgraded.
-	* Language selector drop-down applied to all menus instead of the selected one.
-	* Correct display of the default category name on the edit-tags.php?taxonomy=category page.
-
-### 1.0.2 ###
-* FIXED:
-	* Save posts correctly if no default language title entered
-	* Preserve languages for trashed, and later restored posts
-	* Save languages correctly at heartbeat for pending and drafts
-* ADDED:
-	* Filter to translate title attributes in nav menus
-
-### 1.0.1 ###
-* FIXED:
-	* Line breaks disappear in visual mode during autosave
-	* Correct display of slug in WP-SEO panel
-
-### 1.0.0 ###
-* Beta-version of the plugin.
-* Can translate all basic elements of WordPress
-* WP-SEO by Yoast is supported
-* ?lang= URLs dropped
-
-### 0.1.1 ###
-* FIX: Notice 'walker_nav_menu_start_el' filter in functions.php twentyfifteen theme
-
-### 0.1.0 ###
-* Initial release (language switcher)
+* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
