@@ -113,7 +113,7 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Wrong behavior when the main language is not English. Thanks to [Klaus Feurich](https://wordpress.org/support/profile/lunymarmusic) for reporting the bug.
-	* Restored default path to ReduxCode because of silly site effects.
+	* Restored default path to ReduxCode because of silly side effects.
 
 = 1.1.1 =
 
