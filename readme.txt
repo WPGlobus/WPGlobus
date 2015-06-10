@@ -109,6 +109,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.1.1.3 =
+
+* FIXED:
+	* Bug with switching languages when WordPress is in a subfolder of the main site.
+
 = 1.1.1.2 =
 
 * FIXED:

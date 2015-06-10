@@ -11,6 +11,21 @@ require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-utils.php';
 class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @var string $option_home
+	 * Used by mock @see get_option()
+	 * Initialized by @see setUP()
+	 */
+	public static $option_home;
+
+	/**
+	 * Run before each test.
+	 * To run after each test, @see tearDown
+	 */
+	protected function setUp() {
+		self::$option_home = 'http://www.example.com';
+	}
+
+	/**
 	 * @see test_is_function_in_backtrace
 	 */
 	private function _unit_test_for_backtrace() {
@@ -36,8 +51,6 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 */
 		$this->_unit_test_for_backtrace();
 	}
-
-	public static $option_home = 'http://www.example.com';
 
 	/**
 	 * @covers WPGlobus_Utils::localize_url
@@ -276,6 +289,11 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( array( 1, 'pi' ), $config ) );
 
+		// Site in subfolder
+		self::$option_home = 'http://www.example.com/subfolder';
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/subfolder/ru/something', $config ) );
+
 	}
 
 	/**
@@ -427,7 +445,8 @@ function untrailingslashit( $string ) {
  *
  * @return string $url URL with chosen scheme.
  */
-function set_url_scheme( $url, $scheme = null ) {
+function set_url_scheme( $url, /** @noinspection PhpUnusedParameterInspection */
+	$scheme = null ) {
 	return $url;
 }
 # --- EOF
