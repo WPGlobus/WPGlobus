@@ -40,7 +40,7 @@ var wpglobus_wpseo = function () {
 		str = str.replace( /%%currentmonth%%/g, wpseoMetaboxL10n.currentmonth );
 		str = str.replace( /%%currentyear%%/g, wpseoMetaboxL10n.currentyear );
 
-		str = str.replace( /%%focuskw%%/g, jQuery( '#yoast_wpseo_focuskw' + '_' + language ).val.replace( /(<([^>]+)>)/ig, '' ) );
+		str = str.replace( /%%focuskw%%/g, jQuery( '#yoast_wpseo_focuskw' + '_' + language ).val().replace( /(<([^>]+)>)/ig, '' ) );
 		// excerpt
 		var excerpt = '';
 		if ( jQuery( post_excerpt ).length ) {
@@ -515,7 +515,7 @@ var wpglobus_wpseo = function () {
 	});		
 	
 	jQuery('body').on('click', '.wpglobus-post-body-tabs-list li', function(event){
-		$this = jQuery(this);
+		var $this = jQuery(this);
 		if ( $this.hasClass('wpglobus-post-tab') ) {
 			jQuery('#wpglobus-wpseo-tabs').tabs('option','active',jQuery(this).data('order'));
 		}	
