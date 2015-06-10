@@ -109,6 +109,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.1.1.2 =
+
+* FIXED:
+	* js script for WPSEO 2.2
+
 = 1.1.1.1 =
 
 * FIXED:
