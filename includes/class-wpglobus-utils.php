@@ -126,11 +126,14 @@ class WPGlobus_Utils {
 		// @codeCoverageIgnoreEnd
 
 		$path = parse_url( $url, PHP_URL_PATH );
+
+		$path_home = untrailingslashit( parse_url( get_option( 'home' ), PHP_URL_PATH ) );
+
 		/**
 		 * Regex to find the language prefix.
 		 * @example !^/(en|ru|pt)/!
 		 */
-		$re = '!^' .
+		$re = '!^' . $path_home .
 		      '/(' . join( '|', $config->enabled_languages ) . ')/' . '!';
 
 		if ( preg_match( $re, $path, $match ) ) {
