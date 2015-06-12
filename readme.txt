@@ -109,6 +109,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.1.2 =
+
+* ADDED:
+	* Handling hash in URLs.
+
 = 1.1.1.3 =
 
 * FIXED:
