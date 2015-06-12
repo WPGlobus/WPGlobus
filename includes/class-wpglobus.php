@@ -1549,7 +1549,7 @@ class WPGlobus {
 		$span_classes_lang[] = 'wpglobus_flag_' . $language;
 		$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 		                       esc_html( $flag_name ) . '</span>';
-		$a_tag               = '<a href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+		$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
 		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">' .
 		           $a_tag .
@@ -1565,7 +1565,7 @@ class WPGlobus {
 			$span_classes_lang[] = 'wpglobus_flag_' . $language;
 			$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 			                       esc_html( $flag_name ) . '</span>';
-			$a_tag               = '<a href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+			$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
 			$output .= '<li class="page_item">' .
 			           $a_tag .
@@ -1646,13 +1646,15 @@ class WPGlobus {
 		/** main menu item classes */
 		$menu_item_classes = array(
 			'',
-			'menu_item_wpglobus_menu_switch'
+			'menu_item_wpglobus_menu_switch',
+			'wpglobus-selector-link'
 		);
 
 		/** submenu item classes */
 		$submenu_item_classes = array(
 			'',
-			'sub_menu_item_wpglobus_menu_switch'
+			'sub_menu_item_wpglobus_menu_switch',
+			'wpglobus-selector-link'
 		);
 
 		$span_classes = array(
