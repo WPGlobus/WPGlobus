@@ -517,8 +517,18 @@ class WPGlobus_Options {
 					</div>
 					<div style="clear:both;"></div>';			
 					
+		$donate_2 = '<div style="float:left;width:50%;">
+						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
+						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) . 
+						'</p>' . 
+						'<div style="float:left;">
+							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=SLF8M4YNZHNQN"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" /></a>
+						</div>
+					</div>
+					<div style="clear:both;"></div>';						
+					
 		$this->args['intro_text'] =
-			'<h1 style="width:30%;float:left;">' . __( 'WPGlobus', 'wpglobus' ) . ' ' . WPGLOBUS_VERSION . '</h1>' .  $donate_1;
+			'<h1 style="width:30%;float:left;">' . __( 'WPGlobus', 'wpglobus' ) . ' ' . WPGLOBUS_VERSION . '</h1>' .  $donate_2;
 
 		// Add content after the form.
 //		$this->args['footer_text'] =
