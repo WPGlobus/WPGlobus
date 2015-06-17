@@ -107,7 +107,7 @@ class WPGlobusWidget extends WP_Widget {
 		/**
 		 * Class for link in a and option tags. Used for adding hash.
 		 * @see class wpglobus-selector-link 
-		 * @since 1.1.2
+		 * @since 1.2
 	     */ 
 		$link_classes = 'wpglobus-selector-link';
 		
