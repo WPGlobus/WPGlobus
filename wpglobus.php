@@ -60,6 +60,8 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	WPGlobus_WPSEO::controller();
 }
 
+require_once 'updater/class-wpglobus-updater.php';
+
 /**
  * Handle special URLs for QA
  * @note CREATES POST, PAGE, CATEGORY and TAG!!! CLEAN AFTER RUNNING!!!
