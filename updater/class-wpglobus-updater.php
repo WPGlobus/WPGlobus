@@ -96,24 +96,32 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * @param array $args
+		 *
+		 * @example
+		 *            new WPGlobus_Updater(
+		 *            array(
+		 *            'product_id'     => 'My Extension',
+		 *            'url_product'    => 'http://www.wpglobus.com/shop/extensions/my-extension/',
+		 *            'url_my_account' => 'http://www.wpglobus.com/my-account/',
+		 *            'plugin_file'    => __FILE__,
+		 *            )
+		 *            );
 		 */
 		function __construct( Array $args = array() ) {
 
-			if ( ! empty( $args['upgrade_url'] ) ) {
-				$this->upgrade_url = $args['upgrade_url'];
+			if ( ! empty( $args['product_id'] ) ) {
+				$this->ame_software_product_id = $args['product_id'];
 			}
-			if ( ! empty( $args['ame_software_product_id'] ) ) {
-				$this->ame_software_product_id = $args['ame_software_product_id'];
+			if ( ! empty( $args['url_product'] ) ) {
+				$this->upgrade_url = $args['url_product'];
 			}
-			if ( ! empty( $args['ame_renew_license_url'] ) ) {
-				$this->ame_renew_license_url = $args['ame_renew_license_url'];
+			if ( ! empty( $args['url_my_account'] ) ) {
+				$this->ame_renew_license_url = $args['url_my_account'];
 			}
 			if ( ! empty( $args['plugin_file'] ) ) {
 				$this->_plugin_file = $args['plugin_file'];
 				$this->plugin_slug  = plugin_basename( $this->_plugin_file );
 			}
-
-			//			register_activation_hook( $this->_plugin_file, array( $this, 'on_plugin_activation' ) );
 
 			/**
 			 * @todo Call it on plugin uninstall or make a special button
@@ -151,7 +159,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			$this->ame_deactivate_checkbox_key = $prefix . '_dea_cb_key';
 			$this->ame_activated_key           = $prefix . '_act';
 			$this->ame_deactivate_checkbox     = $prefix . '_dea_cb';
-			$this->ame_activation_email = $prefix . '_activation_email';
+			$this->ame_activation_email        = $prefix . '_activation_email';
 			$this->store_options();
 
 			/**
