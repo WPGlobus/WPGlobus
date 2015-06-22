@@ -482,17 +482,17 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 
 		/**
 		 * Display missing key error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function no_key_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
+		public function no_key_error_notice() {
 
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'A license key for %s could not be found. Maybe you forgot to enter a license key when setting up %s, or the key was deactivated in your account. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->product_id, $this->renew_license_url );
+			echo '<div id="message" class="error"><p>';
+			echo '<strong>' . $this->product_id . ':</strong> ';
+			_e( 'License key not found or deactivated.', 'wpglobus' );
+			echo ' ';
+			printf( __( 'Please check the status on your %s account dashboard%s.', 'wpglobus' ),
+				'<a href="' . $this->renew_license_url . '" target="_blank">', '</a>' );
+
+			echo '</p></div>';
 
 		}
 
