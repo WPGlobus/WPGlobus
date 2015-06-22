@@ -511,7 +511,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				 * After deactivation, reset all options
 				 */
 				$this->WPGlobus_Updater->clean_options();
-				$this->WPGlobus_Updater->on_plugin_activation();
+				$this->WPGlobus_Updater->store_options();
 
 			} else {
 				update_option( $this->WPGlobus_Updater->ame_activated_key, 'Deactivated' );

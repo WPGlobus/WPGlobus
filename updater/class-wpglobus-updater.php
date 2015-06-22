@@ -113,7 +113,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				$this->plugin_slug  = plugin_basename( $this->_plugin_file );
 			}
 
-			register_activation_hook( $this->_plugin_file, array( $this, 'on_plugin_activation' ) );
+			//			register_activation_hook( $this->_plugin_file, array( $this, 'on_plugin_activation' ) );
 
 			/**
 			 * @todo Call it on plugin uninstall or make a special button
@@ -151,7 +151,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			$this->ame_deactivate_checkbox_key = $prefix . '_dea_cb_key';
 			$this->ame_activated_key           = $prefix . '_act';
 			$this->ame_deactivate_checkbox     = $prefix . '_dea_cb';
-
+			$this->store_options();
 
 			$this->ame_activation_email = $prefix . '_activation_email';
 
@@ -190,7 +190,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			/**
 			 * Displays an inactive message if the API License Key has not yet been activated
 			 */
-			if ( get_option( $this->ame_activated_key ) != 'Activated' ) {
+			if ( get_option( $this->ame_activated_key ) !== 'Activated' ) {
 				add_action( 'admin_notices', array( $this, 'am_example_inactive_notice' ) );
 			}
 
@@ -223,6 +223,9 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 					null
 				);
 
+				// To debug messages:
+				// add_action( 'admin_notices', array( $_updater_check, 'no_key_error_notice' ) );
+
 			}
 
 		}
@@ -253,9 +256,9 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 		}
 
 		/**
-		 * Generate the default data arrays
+		 * Store configuration in the options table
 		 */
-		public function on_plugin_activation() {
+		public function store_options() {
 
 			/**
 			 * Check if options exist and do nothing
