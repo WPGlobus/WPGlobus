@@ -151,9 +151,8 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			$this->ame_deactivate_checkbox_key = $prefix . '_dea_cb_key';
 			$this->ame_activated_key           = $prefix . '_act';
 			$this->ame_deactivate_checkbox     = $prefix . '_dea_cb';
-			$this->store_options();
-
 			$this->ame_activation_email = $prefix . '_activation_email';
+			$this->store_options();
 
 			/**
 			 * Set all admin menu data

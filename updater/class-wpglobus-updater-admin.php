@@ -208,8 +208,6 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 			$icon     = $value ? 'complete' : 'warn';
 			$url_icon = $this->WPGlobus_Updater->my_url() . 'assets/images/' . $icon . '.png';
 
-//			$value || ( defined( 'WPGUPD_LIC' ) && $value = WPGUPD_LIC );
-
 			echo '<input id="api_key" name="' . $this->WPGlobus_Updater->ame_data_key .
 			     '[' . $this->WPGlobus_Updater->ame_api_key . ']"' .
 			     ' type="text" value="' . esc_attr( $value ) . '" />';
@@ -225,8 +223,6 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 			$value    = $this->WPGlobus_Updater->ame_options[ $this->WPGlobus_Updater->ame_activation_email ];
 			$icon     = $value ? 'complete' : 'warn';
 			$url_icon = $this->WPGlobus_Updater->my_url() . 'assets/images/' . $icon . '.png';
-
-//			$value || ( defined( 'WPGUPD_EMA' ) && $value = WPGUPD_EMA );
 
 			echo '<input id="activation_email" name="' . $this->WPGlobus_Updater->ame_data_key .
 			     '[' . $this->WPGlobus_Updater->ame_activation_email . ']"' .
@@ -284,54 +280,72 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 					$activate_results = json_decode( $this->WPGlobus_Updater->key()->activate( $args ), true );
 
 					if ( $activate_results['activated'] === true ) {
-						add_settings_error( 'activate_text', 'activate_msg', __( 'Plugin activated. ', 'wpglobus' ) . "{$activate_results['message']}.", 'updated' );
+						add_settings_error(
+							'activate_text',
+							'activate_msg',
+							$this->WPGlobus_Updater->ame_product_id . ': ' .
+							__( 'License activated. ', 'wpglobus' ) . "{$activate_results['message']}.",
+							'updated'
+						);
 						/**
-						 * Do some actions after activation
+						 * Additional actions after activation success
 						 */
 						add_action( 'update_option_' . $this->WPGlobus_Updater->ame_data_key,
-							array( $this, 'after_activation' ), 0, 2 );
+							array( $this, 'after_activation_success' ), 0, 2 );
 
 					} else {
+						$this->_print_activation_error_message( $activate_results );
+						/**
+						 * Additional actions after activation failure
+						 */
 						add_action( 'update_option_' . $this->WPGlobus_Updater->ame_data_key,
 							array( $this, 'after_activation_failure' ) );
 
-						if ( $activate_results == false ) {
-							add_settings_error( 'api_key_check_text', 'api_key_check_error', __( 'Connection failed to the License Key API server. Try again later.', 'wpglobus' ), 'error' );
-						}
-
-						if ( isset( $activate_results['code'] ) ) {
-
-							switch ( $activate_results['code'] ) {
-								case '100':
-									add_settings_error( 'api_email_text', 'api_email_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-								case '101':
-									add_settings_error( 'api_key_text', 'api_key_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-								case '102':
-									add_settings_error( 'api_key_purchase_incomplete_text', 'api_key_purchase_incomplete_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-								case '103':
-									add_settings_error( 'api_key_exceeded_text', 'api_key_exceeded_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-								case '104':
-									add_settings_error( 'api_key_not_activated_text', 'api_key_not_activated_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-								case '105':
-									add_settings_error( 'api_key_invalid_text', 'api_key_invalid_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-								case '106':
-									add_settings_error( 'sub_not_active_text', 'sub_not_active_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
-									break;
-							}
-
-						}
 					}
 				}
 
 			}
 
 			return $options;
+		}
+
+		/**
+		 * @param array $activate_results
+		 */
+		protected function _print_activation_error_message( Array $activate_results ) {
+
+			if ( $activate_results == false ) {
+				add_settings_error( 'api_key_check_text', 'api_key_check_error', __( 'Connection failed to the License Key API server. Try again later.', 'wpglobus' ), 'error' );
+			}
+
+			if ( isset( $activate_results['code'] ) ) {
+
+				switch ( $activate_results['code'] ) {
+					case '100':
+						add_settings_error( 'api_email_text', 'api_email_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+					case '101':
+						add_settings_error( 'api_key_text', 'api_key_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+					case '102':
+						add_settings_error( 'api_key_purchase_incomplete_text', 'api_key_purchase_incomplete_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+					case '103':
+						add_settings_error( 'api_key_exceeded_text', 'api_key_exceeded_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+					case '104':
+						add_settings_error( 'api_key_not_activated_text', 'api_key_not_activated_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+					case '105':
+						add_settings_error( 'api_key_invalid_text', 'api_key_invalid_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+					case '106':
+						add_settings_error( 'sub_not_active_text', 'sub_not_active_error', "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
+						break;
+				}
+
+			}
+
 		}
 
 		/**
@@ -478,7 +492,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 		 * @param string $ignore
 		 * @param string $value
 		 */
-		public function after_activation(
+		public function after_activation_success(
 			/** @noinspection PhpUnusedParameterInspection */
 			$ignore, $value
 		) {
