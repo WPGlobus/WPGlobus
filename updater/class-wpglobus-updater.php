@@ -191,7 +191,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			 * Displays an inactive message if the API License Key has not yet been activated
 			 */
 			if ( get_option( $this->ame_activated_key ) !== 'Activated' ) {
-				add_action( 'admin_notices', array( $this, 'am_example_inactive_notice' ) );
+				add_action( 'admin_notices', array( $this, 'notice_license_inactive' ) );
 			}
 
 
@@ -355,7 +355,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 		/**
 		 * Displays an inactive notice when the software is inactive.
 		 */
-		public function am_example_inactive_notice() { ?>
+		public function notice_license_inactive() { ?>
 			<?php if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			} ?>
@@ -363,8 +363,13 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				return;
 			} ?>
 			<div id="message" class="error">
-				<p><?php printf( __( 'The %s License Key has not been activated, so the plugin is inactive! %sClick here%s to activate the license key and the plugin.', 'wpglobus' ),
-						$this->ame_software_product_id, '<a href="' . esc_url( admin_url( 'index.php?page=' . $this->ame_activation_tab_key ) ) . '">', '</a>' ); ?></p>
+				<p>
+					<strong><?php echo esc_html( $this->ame_software_product_id ); ?>: </strong>
+					<?php printf( __( 'License has not been activated. %sClick here%s to enter the license key and get the updates.', 'wpglobus' ),
+						'<a href="' .
+						esc_url( admin_url( 'index.php?page=' . $this->ame_activation_tab_key ) ) . '">',
+						'</a>' ); ?>
+				</p>
 			</div>
 		<?php
 		}
