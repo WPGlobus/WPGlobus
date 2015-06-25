@@ -1474,10 +1474,22 @@ class WPGlobus {
 		$config = WPGlobus::Config();
 
 		$css = '';
+
+		/**
+		 * CSS rules for flags in the menu
+		 */
 		foreach ( $config->enabled_languages as $language ) {
 			$css .= '.wpglobus_flag_' . $language .
-			        ' {background:url(' .
-			        $config->flags_url . $config->flag[ $language ] . ') no-repeat;background-position-y:center;}' . "\n";
+			        '{background-image:url(' .$config->flags_url . $config->flag[ $language ] . ')}';
+		}
+
+		/**
+		 * Swap flag and text for RTL
+		 * (See the LTR default rules in the wpglobus-flags.mixin.less)
+		 */
+		if ( is_rtl() ) {
+			$css .= '.wpglobus_flag{background-position:center right;}' .
+			        '.wpglobus_language_name{padding-right:22px;}';
 		}
 
 		$css .= strip_tags( $config->css_editor );
