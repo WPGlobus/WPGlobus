@@ -112,7 +112,9 @@ No known backward incompatibility issues.
 = 1.2.0 =
 
 * ADDED:
-	* Handling hash in URLs.
+	* Handling hash part of the URLs.
+* FIXED:
+	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
 
 = 1.1.1.3 =
 

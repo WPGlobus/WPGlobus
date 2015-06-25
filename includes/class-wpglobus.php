@@ -1476,8 +1476,8 @@ class WPGlobus {
 		$css = '';
 		foreach ( $config->enabled_languages as $language ) {
 			$css .= '.wpglobus_flag_' . $language .
-			        ' { background:url(' .
-			        $config->flags_url . $config->flag[ $language ] . ') no-repeat }' . "\n";
+			        ' {background:url(' .
+			        $config->flags_url . $config->flag[ $language ] . ') no-repeat;background-position-y:center;}' . "\n";
 		}
 
 		$css .= strip_tags( $config->css_editor );
