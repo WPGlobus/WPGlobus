@@ -38,7 +38,8 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 * [Site in subfolder](http://demo-subfolder.wpglobus.com/):
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
-	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin (work in progress, will be released soon).
+	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin
+	* The WooCommerce WPGlobus is a [paid extension](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).
 
 = Free Add-ons =
 
