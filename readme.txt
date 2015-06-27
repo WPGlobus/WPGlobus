@@ -114,6 +114,7 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* Handling hash part of the URLs.
+	* New extension, [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
 * FIXED:
 	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
 
