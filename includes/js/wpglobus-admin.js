@@ -109,7 +109,7 @@ var WPGlobusDialogApp;
 			listenClass : '.wpglobus_dialog_start',
 			settingsClass : '.wpglobus_dialog_settings',
 			dialogTabs: '#wpglobus-dialog-tabs',
-			title: '',
+			dialogTitle: '',
 			callback: function(){}
 		},
 		form : undefined,
@@ -168,7 +168,7 @@ var WPGlobusDialogApp;
                 }
 			],
 			open: function() {
-				var title = api.option.title;
+				var title = api.option.dialogTitle;
 				if ( typeof api.attrs.maxlength !== 'undefined' ) {
 					$('.wpglobus_dialog_textarea').attr('maxlength', api.attrs.maxlength);
 					title += ' | maxlength='+api.attrs.maxlength;
@@ -324,7 +324,7 @@ jQuery(document).ready(function () {
 					this.options_general();	
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
 					WPGlobusWidgets.init();
-					WPGlobusDialogApp.init({title:'Edit text'});
+					WPGlobusDialogApp.init({dialogTitle:'Edit text'});
                 } else {
                     this.start();
                 }
@@ -1129,7 +1129,7 @@ jQuery(document).ready(function () {
 					}	
 				});
 
-				WPGlobusDialogApp.init({title:'Edit meta'}); 				
+				WPGlobusDialogApp.init({dialogTitle:'Edit meta'}); 				
 				
 			}	
         };
