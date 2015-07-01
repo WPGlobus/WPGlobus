@@ -711,7 +711,7 @@ class WPGlobus {
 
 	function on_admin_enqueue_scripts() {
 		/**
-		 * See function on_admin_scripts()
+		 * @see on_admin_scripts()
 		 */
 		if ( ! wp_script_is( 'autosave', 'enqueued' ) ) {
 			wp_enqueue_script( 'autosave' );
@@ -722,12 +722,11 @@ class WPGlobus {
 	 * Enqueue admin scripts
 	 * @return void
 	 */
-	function on_admin_scripts() {
+	public function on_admin_scripts() {
 
-		/** @global WP_Post $post */
-		global $post;
+		$post = get_post();
+		$type = empty( $post->post_type ) ? '' : $post->post_type;
 
-		$type = empty( $post ) ? '' : $post->post_type;
 		if ( $this->disabled_entity( $type ) ) {
 			return;
 		}
@@ -738,8 +737,7 @@ class WPGlobus {
 		 */
 		wp_dequeue_script( 'autosave' );
 
-		/** @global string $pagenow */
-		global $pagenow;
+		$pagenow = WPGlobus_WP::pagenow();
 
 		$config = WPGlobus::Config();
 
@@ -781,7 +779,7 @@ class WPGlobus {
 			'locale_tag_end'    => self::LOCALE_TAG_END
 		);
 
-		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
+		$page = WPGlobus_WP::plugin_page();
 
 		if ( '' == $page ) {
 			/**
