@@ -36,36 +36,52 @@ class WPGlobus_WP {
 
 
 	/**
+	 * To get the current admin page
+	 * (Set in wp-includes/vars.php)
+	 * @return string $page
+	 * @since 1.2.0
+	 */
+	public static function pagenow() {
+		/**
+		 * @global string $pagenow
+		 */
+		global $pagenow;
+
+		return ( isset( $pagenow ) ? $pagenow : '' );
+	}
+
+	/**
 	 * @param string|string[] $page
 	 *
 	 * @return bool
 	 */
 	public static function is_pagenow( $page ) {
-		/**
-		 * Set in wp-includes/vars.php
-		 * @global string $pagenow
-		 */
-		global $pagenow;
-
-		return in_array( $pagenow, (array) $page );
+		return in_array( self::pagenow(), (array) $page );
 	}
 
 	/**
 	 * To get the plugin page ID
 	 * @example    On wp-admin/index.php?page=woothemes-helper, will return `woothemes-helper`.
-	 *
-	 * @param string|string[] $page
-	 *
-	 * @return bool
+	 * @return string
+	 * @since      1.2.0
 	 */
-	public static function is_plugin_page( $page ) {
+	public static function plugin_page() {
 		/**
 		 * Set in wp-admin/admin.php
 		 * @global string $plugin_page
 		 */
 		global $plugin_page;
 
-		return isset( $plugin_page ) && in_array( $plugin_page, (array) $page );
+		return ( isset( $plugin_page ) ? $plugin_page : '' );
+	}
+
+	/**
+	 * @param string|string[] $page
+	 *
+	 * @return bool
+	 */
+	public static function is_plugin_page( $page ) {
+		return in_array( self::plugin_page(), (array) $page );
 	}
 
 	/**
