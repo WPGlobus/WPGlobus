@@ -2286,7 +2286,7 @@ class WPGlobus {
 			 */
 			?>
 			<div id="wpglobus-dialog-wrapper" class="hidden wpglobus-dialog-wrapper">
-				<form id="wpglobus-dialog-form">
+				<form id="wpglobus-dialog-form" title="Dialog Form">
 					<div id="wpglobus-dialog-tabs" class="wpglobus-dialog-tabs">
 						<ul class="wpglobus-dialog-tabs-list">    <?php
 							$order = 0;
