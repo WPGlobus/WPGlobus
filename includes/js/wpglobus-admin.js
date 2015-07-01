@@ -162,6 +162,7 @@ var WPGlobusDialogApp;
 			'class="{{classes}}"></span>'
         ].join(''),
 		startButtonClass : 'wpglobus_dialog_start wpglobus_dialog_icon',
+		clicks: 0,
 		
 		init : function(args) {
 			api.option = $.extend(api.option, args);
@@ -316,40 +317,26 @@ var WPGlobusDialogApp;
 				.fail(function (error) {})
 				.always(function (jqXHR, status){});
 			});	
-			$(document).on('click', api.option.listenClass, function() {
+			$(document).on('click', api.option.listenClass, function(e) {
 				api.element = $(this);
 				api.id = api.element.data('source-id');
-				if ( typeof(api.element.data('dialog-title')) == 'undefined' || '' == api.element.data('dialog-title') ) {
-					api.dialogTitle = api.option.dialogTitle;
-				} else {
-					api.dialogTitle = api.element.data('dialog-title');
-				}	
-				if ( typeof api.id !== 'undefined' ) {
-					api.attrs['maxlength'] = $('#'+api.id).attr('maxlength');
-					api.wpglobus_id = '#wpglobus-'+api.id;	
+				api.clicks++;
+				if ( api.clicks == 1 ) {
+					setTimeout(function () {
+						if (api.clicks == 1) {
+							api.onClick(e);
+						} else {
+							var s = $('#'+api.id);
+							if ( s.hasClass('hidden') ) {
+								s.removeClass('hidden').attr('style', 'display:block;');	
+							} else {	
+								s.addClass('hidden').attr('style', 'display:none;');
+							}	
+						}	
+						api.clicks = 0;
+					}, 200);
 				}
-				
-				api.source = api.element.data('source-value');
-				if ( typeof api.source === 'undefined' ) {
-					api.source = $('#'+api.id).val();	
-					if (api.request == 'ajax') {
-						// @todo revise ajax action
-						//api.order['action'] = 'get_translate';
-						//api.order['source'] = api.source;
-						//api.ajax(api.order);
-					} else {
-						api.value = WPGlobusCore.getTranslations(api.source);
-					}	
-				}					
-				$.each(api.value, function(l,e){
-					$('#wpglobus-dialog-'+l).val(e);
-				});
-				api.dialog.dialog('open');				
-			});
-			/*
-			$(document).on('click', '.wpglobus-control-head', function() {
-				$('.wpglobus-dialog-field-source').toggleClass('hidden');
-			}); */
+			});	
 			api.form = api.dialog.find('form#wpglobus-dialog-form').on('submit', function( event ) {
 				event.preventDefault();
 				api.saveDialog();
@@ -357,6 +344,34 @@ var WPGlobusDialogApp;
 		},
 		ajax : function(order) {
 			return $.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json', async:false});
+		},
+		onClick: function(ev) {	
+			if ( typeof(api.element.data('dialog-title')) == 'undefined' || '' == api.element.data('dialog-title') ) {
+				api.dialogTitle = api.option.dialogTitle;
+			} else {
+				api.dialogTitle = api.element.data('dialog-title');
+			}	
+			if ( typeof api.id !== 'undefined' ) {
+				api.attrs['maxlength'] = $('#'+api.id).attr('maxlength');
+				api.wpglobus_id = '#wpglobus-'+api.id;	
+			}
+			
+			api.source = api.element.data('source-value');
+			if ( typeof api.source === 'undefined' ) {
+				api.source = $('#'+api.id).val();	
+				if (api.request == 'ajax') {
+					// @todo revise ajax action
+					//api.order['action'] = 'get_translate';
+					//api.order['source'] = api.source;
+					//api.ajax(api.order);
+				} else {
+					api.value = WPGlobusCore.getTranslations(api.source);
+				}	
+			}					
+			$.each(api.value, function(l,e){
+				$('#wpglobus-dialog-'+l).val(e);
+			});
+			api.dialog.dialog('open');				
 		}	
 	};
 
