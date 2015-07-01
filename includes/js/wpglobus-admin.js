@@ -156,6 +156,7 @@ var WPGlobusDialogApp;
 		dialogTitle: '',
 		startButton: [
 			'<span id="wpglobus-dialog-start-{{id}}" ',
+			'style="{{style}}"',
 			'data-type="control" data-dialog-title="{{title}}" ',
 			'data-source-type="" data-source-id="{{id}}" ',
 			'class="{{classes}}"></span>'
@@ -208,6 +209,7 @@ var WPGlobusDialogApp;
 				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
 				clone.text( v );
 				clone.data( 'nodename', 'TEXTAREA' );
+				clone.attr( 'style', 'width:95%;float:left;');
 			} else {
 				v = WPGlobusCore.getTranslations( $element.val() )[WPGlobusCoreData['language']];
 				clone.attr( 'value', v );
@@ -215,12 +217,17 @@ var WPGlobusDialogApp;
 			}	
 			
 			sb = sb.replace(/{{id}}/g, id);
+			sb 					 = 'TEXTAREA' == node.nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
+			api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea' : api.startButtonClass;
 			sb = sb.replace('{{classes}}', api.startButtonClass);
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
 
 			$(sb).insertAfter('#'+id);
 			$(clone).insertAfter('#'+id);
-			
+			if ( 'TEXTAREA' == node.nodeName ) {
+				$('#wpglobus-'+id).addClass( 'wpglobus-textarea' );
+				$('.wpglobus-textarea').wrapAll( '<div class="wpglobus-textarea-wrapper"></div>' );
+			}
 			$(document).on('change', '#wpglobus-'+id, function(){
 				var $t = $(this), 
 					sid = $t.data('source-id');
