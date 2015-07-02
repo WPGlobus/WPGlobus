@@ -219,15 +219,15 @@ var WPGlobusDialogApp;
 			
 			sb = sb.replace(/{{id}}/g, id);
 			sb 					 = 'TEXTAREA' == node.nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
-			api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea' : api.startButtonClass;
+			api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+id : api.startButtonClass;
 			sb = sb.replace('{{classes}}', api.startButtonClass);
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
 
 			$(sb).insertAfter('#'+id);
 			$(clone).insertAfter('#'+id);
 			if ( 'TEXTAREA' == node.nodeName ) {
-				$('#wpglobus-'+id).addClass( 'wpglobus-textarea' );
-				$('.wpglobus-textarea').wrapAll( '<div class="wpglobus-textarea-wrapper"></div>' );
+				$('#wpglobus-'+id).addClass( 'wpglobus-textarea-'+id );
+				$('.wpglobus-textarea-'+id).wrapAll( '<div class="wpglobus-textarea-wrapper"></div>' );
 			}
 			$(document).on('change', '#wpglobus-'+id, function(){
 				var $t = $(this), 
