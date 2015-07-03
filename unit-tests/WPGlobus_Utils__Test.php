@@ -289,6 +289,22 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( array( 1, 'pi' ), $config ) );
 
+		// No trailing slash
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( '/ru', $config ) );
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( '/ru?a=b', $config ) );
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( '/ru/?a=b', $config ) );
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( '/ru/#hash', $config ) );
+
+		$this->assertEquals( 'ru',
+			WPGlobus_Utils::extract_language_from_url( '/ru#hash', $config ) );
+
 		// Site in subfolder
 		self::$option_home = 'http://www.example.com/subfolder';
 		$this->assertEquals( 'ru',

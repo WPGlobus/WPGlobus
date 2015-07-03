@@ -118,6 +118,7 @@ No known backward incompatibility issues.
 	* Filter 'wpglobus_enabled_pages'
 * FIXED:
 	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
+	* Correct language detection with no trailing slash on home url, i.e. `example.com/fr` works the same as `example.com/fr/`
 
 = 1.1.1.3 =
 

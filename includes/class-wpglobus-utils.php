@@ -134,7 +134,7 @@ class WPGlobus_Utils {
 		 * @example !^/(en|ru|pt)/!
 		 */
 		$re = '!^' . $path_home .
-		      '/(' . join( '|', $config->enabled_languages ) . ')/' . '!';
+		      '/(' . join( '|', $config->enabled_languages ) . ')(?:/|$)' . '!';
 
 		if ( preg_match( $re, $path, $match ) ) {
 			// Found language information
