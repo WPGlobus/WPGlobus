@@ -96,7 +96,7 @@ var WPGlobusCore;
 			});
 			return t;
 		},
-		getString(s, newVal, l) {
+		getString: function(s, newVal, l) {
 			if ( 'undefined' === typeof(s) ) {
 				return s;
 			}
