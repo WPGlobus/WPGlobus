@@ -38,7 +38,8 @@ The WPGlobus option panel allows for selecting active languages as well as defin
 * [Site in subfolder](http://demo-subfolder.wpglobus.com/):
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
-	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin (work in progress, will be released soon).
+	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin
+	* The WooCommerce WPGlobus is a [paid extension](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).
 
 ### Free Add-ons ###
 
@@ -108,6 +109,16 @@ From the [FAQ Archives on the WPGlobus Website](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.2.0 ###
+
+* ADDED:
+	* Handling the hash part of the URLs.
+	* New extension, [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
+	* Filter 'wpglobus_enabled_pages'
+* FIXED:
+	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
+	* Correct language detection with no trailing slash on home url, i.e. `example.com/fr` works the same as `example.com/fr/`
 
 ### 1.1.1.3 ###
 
