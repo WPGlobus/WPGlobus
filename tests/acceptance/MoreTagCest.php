@@ -21,10 +21,14 @@ class MoreTagCest {
 				WPGlobus_Acceptance::COMMON_PREFIX . " post_content " . $language_suffix
 				,
 				$I->grabTextFrom( '.entry-content p' ), __LINE__ );
+
+			/**
+			 * The _s theme surrounds the text with "fancy quotes". Need to trim them.
+			 */
 			$I->assertEquals(
 				WPGlobus_Acceptance::COMMON_PREFIX . " post_title " . $language_suffix
 				,
-				$I->grabTextFrom( '.entry-content .screen-reader-text' ), __LINE__ );
+				trim( $I->grabTextFrom( '.entry-content .screen-reader-text' ), '“”«»' ), __LINE__ );
 		}
 	}
 
