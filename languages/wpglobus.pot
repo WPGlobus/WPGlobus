@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpglobus 1.2.0\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-07-03 10:21-0400\n"
+"POT-Creation-Date: 2015-07-07 08:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -309,11 +309,11 @@ msgid ""
 "default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2486
+#: includes/class-wpglobus.php:2487
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2520
+#: includes/class-wpglobus.php:2521
 msgid "Add"
 msgstr ""
 
