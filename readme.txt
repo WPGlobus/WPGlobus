@@ -110,7 +110,7 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
-= 1.2.0 (soon) =
+= 1.2.0 =
 
 * ADDED:
 	* Handling the hash part of the URLs.
