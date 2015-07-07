@@ -95,7 +95,38 @@ var WPGlobusCore;
 				t[l] = api.TextFilter(text, l, return_in);
 			});
 			return t;
-		}
+		},
+		getString: function(s, newVal, l) {
+			if ( 'undefined' === typeof(s) ) {
+				return s;
+			}
+			if ( 'undefined' === typeof(newVal) ) {
+				newVal = '';
+			}			
+			if ( 'undefined' === typeof(l) ) {
+				l = WPGlobusCoreData.language;	
+			}	
+
+			s = api.getTranslations(s);
+			s[l] = newVal;
+			
+			var cS = '';
+			
+			$.each(s, function(ln,val){
+				if ( '' != val && ln != WPGlobusCoreData.default_language) {
+					cS += api.addLocaleMarks(val, ln);
+				}
+			});
+
+			if ( '' != s[WPGlobusCoreData.default_language] ) {
+				if ( '' == cS ) {
+					cS = s[WPGlobusCoreData.default_language];
+				} else {
+					cS = api.addLocaleMarks(s[WPGlobusCoreData.default_language], WPGlobusCoreData.default_language) + cS;
+				}	
+			}	
+			return cS;	
+		}	
 	};
 })(jQuery);
 
@@ -109,7 +140,7 @@ var WPGlobusDialogApp;
 			listenClass : '.wpglobus_dialog_start',
 			settingsClass : '.wpglobus_dialog_settings',
 			dialogTabs: '#wpglobus-dialog-tabs',
-			title: '',
+			dialogTitle: '',
 			callback: function(){}
 		},
 		form : undefined,
@@ -122,12 +153,89 @@ var WPGlobusDialogApp;
 		value : {},
 		request : 'core',
 		attrs: {},
+		dialogTitle: '',
+		startButton: [
+			'<span id="wpglobus-dialog-start-{{id}}" ',
+			'style="{{style}}"',
+			'data-type="control" data-dialog-title="{{title}}" ',
+			'data-source-type="" data-source-id="{{id}}" ',
+			'class="{{classes}}"></span>'
+        ].join(''),
+		startButtonClass : 'wpglobus_dialog_start wpglobus_dialog_icon',
+		clicks: 0,
 		
 		init : function(args) {
 			api.option = $.extend(api.option, args);
 			$(api.option.dialogTabs).tabs();
+			api.dialogTitle = api.option.dialogTitle;
 			this.attachListener();
 		},
+		addElement: function(elem) {
+			var option = {
+				id: null,
+				dialogTitle: ''
+			}
+			if ( 'string' == typeof(elem) ) {
+				option.id = elem;	
+			} else if ( 'object' == typeof(elem) ) {
+				option = $.extend(option, elem);
+			} else {
+				return;
+			}	
+		
+			var $element = null, id = null, name = null, node = null,
+				sb = api.startButton,
+				clone, v;
+
+			node = document.getElementById(option.id);	
+			if ( null ===  node ) {
+				return;	
+			} else {
+				id = option.id;
+				$element = $('#'+id);
+			}
+
+			if ( 'undefined' === $element.attr('name') ) {
+				name = id;
+			} else {
+				name = $element.attr('name');
+			}	
+			clone = $( $element.clone() );
+			//$element.addClass('hidden');	
+			$element.attr('style','display:none;');
+			clone.attr('id', 'wpglobus-'+id).attr('name', 'wpglobus-'+name);
+			clone.data('source-id', id);
+			
+			if ( 'TEXTAREA' == node.nodeName ) {
+				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
+				clone.text( v );
+				clone.data( 'nodename', 'TEXTAREA' );
+				clone.attr( 'style', 'width:95%;float:left;');
+			} else {
+				v = WPGlobusCore.getTranslations( $element.val() )[WPGlobusCoreData['language']];
+				clone.attr( 'value', v );
+				clone.data( 'nodename', 'INPUT' );
+			}	
+			
+			sb = sb.replace(/{{id}}/g, id);
+			sb 					 = 'TEXTAREA' == node.nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
+			api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+id : api.startButtonClass;
+			sb = sb.replace('{{classes}}', api.startButtonClass);
+			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
+
+			$(sb).insertAfter('#'+id);
+			$(clone).insertAfter('#'+id);
+			if ( 'TEXTAREA' == node.nodeName ) {
+				$('#wpglobus-'+id).addClass( 'wpglobus-textarea-'+id );
+				$('.wpglobus-textarea-'+id).wrapAll( '<div class="wpglobus-textarea-wrapper"></div>' );
+			}
+			$(document).on('change', '#wpglobus-'+id, function(){
+				var $t = $(this), 
+					sid = $t.data('source-id');
+				
+				$('#'+sid).val( WPGlobusCore.getString( $('#'+sid).val(), $t.val() ) );
+			});
+		},	
 		saveDialog: function() {
 			var s = '', sdl = '', scl = '', $e, val, l;
 			$('.wpglobus_dialog_textarea').each(function(indx,e){
@@ -168,7 +276,7 @@ var WPGlobusDialogApp;
                 }
 			],
 			open: function() {
-				var title = api.option.title;
+				var title = api.dialogTitle;
 				if ( typeof api.attrs.maxlength !== 'undefined' ) {
 					$('.wpglobus_dialog_textarea').attr('maxlength', api.attrs.maxlength);
 					title += ' | maxlength='+api.attrs.maxlength;
@@ -209,35 +317,26 @@ var WPGlobusDialogApp;
 				.fail(function (error) {})
 				.always(function (jqXHR, status){});
 			});	
-			$(document).on('click', api.option.listenClass, function() {
+			$(document).on('click', api.option.listenClass, function(e) {
 				api.element = $(this);
 				api.id = api.element.data('source-id');
-				if ( typeof api.id !== 'undefined' ) {
-					api.attrs['maxlength'] = $('#'+api.id).attr('maxlength');
-					api.wpglobus_id = '#wpglobus-'+api.id;	
+				api.clicks++;
+				if ( api.clicks == 1 ) {
+					setTimeout(function () {
+						if (api.clicks == 1) {
+							api.onClick(e);
+						} else {
+							var s = $('#'+api.id);
+							if ( s.hasClass('hidden') ) {
+								s.removeClass('hidden').attr('style', 'display:block;');	
+							} else {	
+								s.addClass('hidden').attr('style', 'display:none;');
+							}	
+						}	
+						api.clicks = 0;
+					}, 200);
 				}
-				
-				api.source = api.element.data('source-value');
-				if ( typeof api.source === 'undefined' ) {
-					api.source = $('#'+api.id).val();	
-					if (api.request == 'ajax') {
-						// @todo revise ajax action
-						//api.order['action'] = 'get_translate';
-						//api.order['source'] = api.source;
-						//api.ajax(api.order);
-					} else {
-						api.value = WPGlobusCore.getTranslations(api.source);
-					}	
-				}					
-				$.each(api.value, function(l,e){
-					$('#wpglobus-dialog-'+l).val(e);
-				});
-				api.dialog.dialog('open');				
-			});
-			/*
-			$(document).on('click', '.wpglobus-control-head', function() {
-				$('.wpglobus-dialog-field-source').toggleClass('hidden');
-			}); */
+			});	
 			api.form = api.dialog.find('form#wpglobus-dialog-form').on('submit', function( event ) {
 				event.preventDefault();
 				api.saveDialog();
@@ -245,6 +344,34 @@ var WPGlobusDialogApp;
 		},
 		ajax : function(order) {
 			return $.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json', async:false});
+		},
+		onClick: function(ev) {	
+			if ( typeof(api.element.data('dialog-title')) == 'undefined' || '' == api.element.data('dialog-title') ) {
+				api.dialogTitle = api.option.dialogTitle;
+			} else {
+				api.dialogTitle = api.element.data('dialog-title');
+			}	
+			if ( typeof api.id !== 'undefined' ) {
+				api.attrs['maxlength'] = $('#'+api.id).attr('maxlength');
+				api.wpglobus_id = '#wpglobus-'+api.id;	
+			}
+			
+			api.source = api.element.data('source-value');
+			if ( typeof api.source === 'undefined' ) {
+				api.source = $('#'+api.id).val();	
+				if (api.request == 'ajax') {
+					// @todo revise ajax action
+					//api.order['action'] = 'get_translate';
+					//api.order['source'] = api.source;
+					//api.ajax(api.order);
+				} else {
+					api.value = WPGlobusCore.getTranslations(api.source);
+				}	
+			}					
+			$.each(api.value, function(l,e){
+				$('#wpglobus-dialog-'+l).val(e);
+			});
+			api.dialog.dialog('open');				
 		}	
 	};
 
@@ -324,10 +451,13 @@ jQuery(document).ready(function () {
 					this.options_general();	
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
 					WPGlobusWidgets.init();
-					WPGlobusDialogApp.init({title:'Edit text'});
-                } else {
+					WPGlobusDialogApp.init({dialogTitle:'Edit text'});
+                } else if ('wpglobus_options' == WPGlobusAdmin.page) {
                     this.start();
-                }
+                } else {
+					// init WPGlobusDialogApp for using in a 3-party plugins
+					WPGlobusDialogApp.init();
+				}	
             },
             admin_init: function () {
 				var order = $('.wpglobus-addons-group a').data('key');
@@ -1129,7 +1259,7 @@ jQuery(document).ready(function () {
 					}	
 				});
 
-				WPGlobusDialogApp.init({title:'Edit meta'}); 				
+				WPGlobusDialogApp.init({dialogTitle:'Edit meta'}); 				
 				
 			}	
         };

@@ -1,0 +1,49 @@
+/*.main h3, .sidebar h3 {*/
+    /*color: black;*/
+    /*background-color: #e5f3ff;*/
+    /*padding: 4px 8px;*/
+/*}*/
+
+/*.sidebar {*/
+    /*border: 2px solid #e5f3ff;*/
+    /*width: 20%;*/
+    /*float: right;*/
+    /*padding: 0px 10px 0px 10px;*/
+    /*margin: 15px 10px 0px 0px;*/
+/*}*/
+
+.wpglobus-updater-license .main {
+    float: left;
+    width: 70%;
+}
+
+/*ul.ce-list{ list-style-type: square; list-style-position:inside; }*/
+/*.hidden {*/
+    /*visibility: hidden;*/
+/*}*/
+
+.alert {
+    background-color: #fffedf;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.wpglobus-updater-license .icon-pos {
+    padding-right: 10px;
+    padding-left: 10px;
+    position: relative;
+    top: 3px;
+}
+
+.wpglobus-updater-license .icon-pos img {
+    padding-bottom: 4px;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.wpglobus-updater-license input[type='text'],
+.wpglobus-updater-license input[type='email'],
+.wpglobus-updater-license textarea {
+    width: 30em;
+}

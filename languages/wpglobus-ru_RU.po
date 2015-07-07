@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-06-09 09:42-0500\n"
-"PO-Revision-Date: 2015-06-09 09:42-0500\n"
+"POT-Creation-Date: 2015-07-07 08:39-0400\n"
+"PO-Revision-Date: 2015-07-07 08:39-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -121,11 +121,11 @@ msgstr ""
 "com</code> и языковые параметры в УРЛах <code>example.com?lang=xx</code>."
 
 #: includes/admin/class-wpglobus-about.php:118
-#: includes/admin/class-wpglobus-addons.php:63
+#: includes/admin/class-wpglobus-addons.php:81
 msgid "Go to WPGlobus Settings"
 msgstr "Перейдите в настройки WPGlobus"
 
-#: includes/admin/class-wpglobus-addons.php:32
+#: includes/admin/class-wpglobus-addons.php:38
 msgid "WPGlobus Add-ons / Extensions"
 msgstr "Расширения WPGlobus"
 
@@ -276,52 +276,52 @@ msgstr "Выпадающее меню"
 msgid "Dropdown with flags"
 msgstr "Выпадающее меню с флагами"
 
-#: includes/class-wpglobus-widget.php:189
+#: includes/class-wpglobus-widget.php:196
 msgid "Title"
 msgstr "Заголовок"
 
-#: includes/class-wpglobus-widget.php:193
+#: includes/class-wpglobus-widget.php:200
 msgid "Selector type"
 msgstr "Способ выбора языка"
 
-#: includes/class-wpglobus.php:843
+#: includes/class-wpglobus.php:855
 msgid "You cannot disable the main language."
 msgstr "Нельзя отключить основной язык."
 
-#: includes/class-wpglobus.php:998
+#: includes/class-wpglobus.php:1010
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:1810
+#: includes/class-wpglobus.php:1846
 #, php-format
 msgid "Word count: %s"
 msgstr "Количество слов: %s"
 
-#: includes/class-wpglobus.php:1818
+#: includes/class-wpglobus.php:1854
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr "Последний раз редактировалось пользователем %1$s %2$s в %3$s"
 
-#: includes/class-wpglobus.php:1820
+#: includes/class-wpglobus.php:1856
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr "Последний раз редактировалось %1$s в %2$s"
 
-#: includes/class-wpglobus.php:2086
+#: includes/class-wpglobus.php:2122
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:2168
+#: includes/class-wpglobus.php:2204
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 
-#: includes/class-wpglobus.php:2343
+#: includes/class-wpglobus.php:2392
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGLobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:2345
+#: includes/class-wpglobus.php:2394
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -329,11 +329,11 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:2429
+#: includes/class-wpglobus.php:2487
 msgid "My Account"
 msgstr "Мой аккаунт"
 
-#: includes/class-wpglobus.php:2463
+#: includes/class-wpglobus.php:2521
 msgid "Add"
 msgstr "Добавить"
 
@@ -553,9 +553,19 @@ msgstr "Типы записей"
 
 #: includes/options/class-wpglobus-options.php:414
 #: includes/options/class-wpglobus-options.php:415
-#: includes/options/class-wpglobus-options.php:506
+#: includes/options/class-wpglobus-options.php:531
 msgid "WPGlobus"
 msgstr "WPGlobus"
+
+#: includes/options/class-wpglobus-options.php:507
+#: includes/options/class-wpglobus-options.php:522
+msgid ""
+"If you like WPGlobus, please consider a small donation to support the future "
+"development."
+msgstr ""
+"Если Вы находите WPGlobus полезным, пожалуйста, рассмотрите возможность "
+"сделать небольшой благотворительный взнос, чтобы поддержать дальнейшую "
+"разработку. Спасибо за Вашу поддержку!"
 
 #: includes/options/fields/table/table-languages.php:25
 msgid "item"

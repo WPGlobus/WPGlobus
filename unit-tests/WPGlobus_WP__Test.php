@@ -70,9 +70,13 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @covers WPGlobus_WP::pagenow
 	 * @covers WPGlobus_WP::is_pagenow
 	 */
 	public function test_is_pagenow() {
+		// False because global is not initialized
+		$this->assertFalse( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
+
 		global $pagenow;
 		$pagenow = 'unit-test-page';
 		$this->assertTrue( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
@@ -82,6 +86,25 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		$this->assertFalse( WPGlobus_WP::is_pagenow( array( 'not-unit-test-page', 'another-page' ) ) );
 		$this->assertFalse( WPGlobus_WP::is_pagenow( 3.14 ) );
 		$this->assertFalse( WPGlobus_WP::is_pagenow( new StdClass ) );
+	}
+
+	/**
+	 * @covers WPGlobus_WP::plugin_page
+	 * @covers WPGlobus_WP::is_plugin_page
+	 */
+	public function test_is_plugin_page() {
+		// False because global is not initialized
+		$this->assertFalse( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
+
+		global $plugin_page;
+		$plugin_page = 'unit-test-page';
+		$this->assertTrue( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
+		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( 'unit-test-page', 'another-page' ) ) );
+		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( new StdClass, 'unit-test-page' ) ) );
+		$this->assertFalse( WPGlobus_WP::is_plugin_page( 'not-unit-test-page' ) );
+		$this->assertFalse( WPGlobus_WP::is_plugin_page( array( 'not-unit-test-page', 'another-page' ) ) );
+		$this->assertFalse( WPGlobus_WP::is_plugin_page( 3.14 ) );
+		$this->assertFalse( WPGlobus_WP::is_plugin_page( new StdClass ) );
 	}
 
 	/**

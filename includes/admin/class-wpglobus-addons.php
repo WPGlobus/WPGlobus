@@ -13,6 +13,12 @@ class WPGlobus_Addons {
 	 */
 	public static function addons_screen() {
 
+		$payed_addons              		 = array();
+		$payed_addons['woocommerce-wpglobus']['slug']    = 'woocommerce-wpglobus'; 
+		$payed_addons['woocommerce-wpglobus']['header']  = 'WooCommerce WPGlobus'; 
+		$payed_addons['woocommerce-wpglobus']['url']     = 'http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/'; 
+		$payed_addons['woocommerce-wpglobus']['img_src'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png'; 
+		
 		$addons                    = array();
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
 		$addons['wordpress.org'][] = 'wpglobus-translate-options';
@@ -38,6 +44,18 @@ class WPGlobus_Addons {
 				<div class="addons-text">
 					<?php //printf( __( 'Thank you for installing WPGlobus!', 'wpglobus' ), WPGLOBUS_VERSION ); ?>
 				</div>
+				<ul class="products">    <?php
+					foreach ( $payed_addons as $source => $addon ) { ?>
+						<li class="product">
+							<a target="_blank" href="<?php echo $addon['url'] ?>">
+								<h3><?php echo $addon['header'] ?></h3>
+								<div style="">
+									<img class="own-thumb" src="<?php echo $addon['img_src']; ?>" />	
+								</div>
+							</a>
+						</li>			<?php	
+					} ?>
+				</ul>
 				<ul class="products">    <?php
 					foreach ( $addons as $source => $addon ) {
 						foreach ( $addon as $addon_slug ) {

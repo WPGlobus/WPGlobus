@@ -5,6 +5,8 @@
 .wpglobus_flag {
   height: 12px;
   width: 18px;
+  background-repeat: no-repeat;
+  background-position: center left;
 }
 .wpglobus_language_name {
   padding-left: 22px;

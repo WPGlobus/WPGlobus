@@ -94,6 +94,12 @@ class WPGlobus {
 	 * Don't make some updates at post screen and don't load scripts for this entities
 	 */
 	public $disabled_entities = array();
+	
+	/**
+	 * Array of enabled pages for loading scripts, styles to achieve WPGlobusCore, WPGlobusDialogApp
+	 * @since 1.2.0
+	 */	
+	public $enabled_pages = array();
 
 	/**
 	 * Constructor
@@ -184,7 +190,21 @@ class WPGlobus {
 		 * So, we need to load Redux on AJAX requests, too
 		 */
 		if ( is_admin() ) {
-
+			
+			/**
+			 * Set values
+			 * @since 1.2.0
+			 */
+			$this->enabled_pages[] = self::LANGUAGE_EDIT_PAGE;
+			$this->enabled_pages[] = self::OPTIONS_PAGE_SLUG;
+			$this->enabled_pages[] = 'post.php';
+			$this->enabled_pages[] = 'post-new.php';
+			$this->enabled_pages[] = 'nav-menus.php';
+			$this->enabled_pages[] = 'edit-tags.php';
+			$this->enabled_pages[] = 'edit.php';
+			$this->enabled_pages[] = 'options-general.php';
+			$this->enabled_pages[] = 'widgets.php';
+		
 			add_action( 'admin_body_class', array( $this, 'on_add_admin_body_class' ) );
 
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
@@ -691,7 +711,7 @@ class WPGlobus {
 
 	function on_admin_enqueue_scripts() {
 		/**
-		 * See function on_admin_scripts()
+		 * @see on_admin_scripts()
 		 */
 		if ( ! wp_script_is( 'autosave', 'enqueued' ) ) {
 			wp_enqueue_script( 'autosave' );
@@ -702,12 +722,11 @@ class WPGlobus {
 	 * Enqueue admin scripts
 	 * @return void
 	 */
-	function on_admin_scripts() {
+	public function on_admin_scripts() {
 
-		/** @global WP_Post $post */
-		global $post;
+		$post = get_post();
+		$type = empty( $post->post_type ) ? '' : $post->post_type;
 
-		$type = empty( $post ) ? '' : $post->post_type;
 		if ( $this->disabled_entity( $type ) ) {
 			return;
 		}
@@ -718,24 +737,14 @@ class WPGlobus {
 		 */
 		wp_dequeue_script( 'autosave' );
 
-		/** @global string $pagenow */
-		global $pagenow;
+		$pagenow = WPGlobus_WP::pagenow();
 
 		$config = WPGlobus::Config();
 
 		/**
-		 * Set array of enabled pages for loading js
+		 * Get array of enabled pages for loading js
 		 */
-		$enabled_pages   = array();
-		$enabled_pages[] = self::LANGUAGE_EDIT_PAGE;
-		$enabled_pages[] = self::OPTIONS_PAGE_SLUG;
-		$enabled_pages[] = 'post.php';
-		$enabled_pages[] = 'post-new.php';
-		$enabled_pages[] = 'nav-menus.php';
-		$enabled_pages[] = 'edit-tags.php';
-		$enabled_pages[] = 'edit.php';
-		$enabled_pages[] = 'options-general.php';
-		$enabled_pages[] = 'widgets.php';
+		$enabled_pages = $this->enabled_pages;
 
 		/**
 		 * Init $post_content
@@ -748,10 +757,13 @@ class WPGlobus {
 		$post_title = '';
 
 		/**
-		 * Init $post_title
+		 * Init $post_excerpt
 		 */
 		$post_excerpt = '';
-
+		
+		/**
+		 * Init $page_action
+		 */
 		$page_action = '';
 
 		/**
@@ -767,7 +779,7 @@ class WPGlobus {
 			'locale_tag_end'    => self::LOCALE_TAG_END
 		);
 
-		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
+		$page = WPGlobus_WP::plugin_page();
 
 		if ( '' == $page ) {
 			/**
@@ -1084,8 +1096,12 @@ class WPGlobus {
 
 				$page_action = 'widgets.php';
 
+			} else if ( in_array( $page, array( 'wpglobus_options', self::LANGUAGE_EDIT_PAGE ) ) ) {
+				
+				$page_action = 'wpglobus_options';
+		
 			}
-
+	
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
@@ -1255,14 +1271,19 @@ class WPGlobus {
 		/** @global WP_Post $post */
 		global $post;
 		$type = empty( $post ) ? '' : $post->post_type;
+		
 		if ( ! $this->disabled_entity( $type ) ) {
-			if ( WPGlobus_WP::is_pagenow( array(
-				'post.php',
-				'post-new.php',
-				'edit-tags.php',
-				'widgets.php'
-			) )
-			) {
+			
+			/**
+			 * Loading CSS for enabled pages as for js
+			 * @since 1.2.0
+			 */
+			/** @global string $pagenow */ 
+			global $pagenow;
+
+			$page = empty($_GET['page']) ? '' : $_GET['page'];
+			
+			if ( in_array($pagenow, $this->enabled_pages) || in_array($page, $this->enabled_pages) ) {
 
 				wp_register_style(
 					'wpglobus-admin-tabs',
@@ -1282,6 +1303,7 @@ class WPGlobus {
 				);
 
 			}
+		
 		}
 
 		if ( in_array( $page, array( self::PAGE_WPGLOBUS_ADDONS, self::PAGE_WPGLOBUS_ABOUT ) ) ) {
@@ -1474,10 +1496,22 @@ class WPGlobus {
 		$config = WPGlobus::Config();
 
 		$css = '';
+
+		/**
+		 * CSS rules for flags in the menu
+		 */
 		foreach ( $config->enabled_languages as $language ) {
 			$css .= '.wpglobus_flag_' . $language .
-			        ' { background:url(' .
-			        $config->flags_url . $config->flag[ $language ] . ') no-repeat }' . "\n";
+			        '{background-image:url(' .$config->flags_url . $config->flag[ $language ] . ')}';
+		}
+
+		/**
+		 * Swap flag and text for RTL
+		 * (See the LTR default rules in the wpglobus-flags.mixin.less)
+		 */
+		if ( is_rtl() ) {
+			$css .= '.wpglobus_flag{background-position:center right;}' .
+			        '.wpglobus_language_name{padding-right:22px;}';
 		}
 
 		$css .= strip_tags( $config->css_editor );
@@ -1549,7 +1583,7 @@ class WPGlobus {
 		$span_classes_lang[] = 'wpglobus_flag_' . $language;
 		$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 		                       esc_html( $flag_name ) . '</span>';
-		$a_tag               = '<a href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+		$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
 		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">' .
 		           $a_tag .
@@ -1565,7 +1599,7 @@ class WPGlobus {
 			$span_classes_lang[] = 'wpglobus_flag_' . $language;
 			$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 			                       esc_html( $flag_name ) . '</span>';
-			$a_tag               = '<a href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+			$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
 			$output .= '<li class="page_item">' .
 			           $a_tag .
@@ -1646,13 +1680,15 @@ class WPGlobus {
 		/** main menu item classes */
 		$menu_item_classes = array(
 			'',
-			'menu_item_wpglobus_menu_switch'
+			'menu_item_wpglobus_menu_switch',
+			'wpglobus-selector-link'
 		);
 
 		/** submenu item classes */
 		$submenu_item_classes = array(
 			'',
-			'sub_menu_item_wpglobus_menu_switch'
+			'sub_menu_item_wpglobus_menu_switch',
+			'wpglobus-selector-link'
 		);
 
 		$span_classes = array(
@@ -2231,7 +2267,20 @@ class WPGlobus {
 		</script>
 		<?php
 
-		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'widgets.php' ) ) ) {
+			
+		/**
+		 * For dialog form 
+		 * @since 1.2.0
+		 */
+		/** @global string $pagenow */ 
+		global $pagenow;
+
+		$page = empty($_GET['page']) ? '' : $_GET['page'];
+
+		// @todo remove after testing	
+		//if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'widgets.php' ) ) ) {
+		
+		if ( in_array($pagenow, $this->enabled_pages) || in_array($page, $this->enabled_pages) ) {			
 			/**
 			 * Output dialog form for window.WPGlobusDialogApp
 			 */
@@ -2388,6 +2437,15 @@ class WPGlobus {
 		 */
 		WPGlobus::Config()->open_languages = apply_filters( 'wpglobus_open_languages', WPGlobus::Config()->open_languages );
 
+		/**
+		 * Filter the array of WPGlobus-enabled pages.
+		 * Used to load scripts and styles for WPGlobusCore, WPGlobusDialogApp (JS).
+		 * @since 1.2.0
+		 *
+		 * @param array $enabled_pages Array of enabled pages.
+		 */
+		$this->enabled_pages = apply_filters( 'wpglobus_enabled_pages', $this->enabled_pages );		
+		
 	}
 
 	/**

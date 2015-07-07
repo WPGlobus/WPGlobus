@@ -501,9 +501,34 @@ class WPGlobus_Options {
 				),
 			)
 		);
-
+				
+		$donate_1 = '<div style="float:left;width:50%;">
+						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
+						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) . 
+						'</p>' . 
+						'<div style="float:left;">
+							<form id="wpglobus-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="hosted_button_id" value="SLF8M4YNZHNQN">
+								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+							</form>
+						</div>
+					</div>
+					<div style="clear:both;"></div>';			
+					
+		$donate_2 = '<div style="float:left;width:50%;">
+						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
+						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) . 
+						'</p>' . 
+						'<div style="float:left;">
+							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=SLF8M4YNZHNQN"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" /></a>
+						</div>
+					</div>
+					<div style="clear:both;"></div>';						
+					
 		$this->args['intro_text'] =
-			'<h1>' . __( 'WPGlobus', 'wpglobus' ) . ' ' . WPGLOBUS_VERSION . '</h1>';
+			'<h1 style="width:30%;float:left;">' . __( 'WPGlobus', 'wpglobus' ) . ' ' . WPGLOBUS_VERSION . '</h1>' .  $donate_2;
 
 		// Add content after the form.
 //		$this->args['footer_text'] =
