@@ -110,6 +110,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.2.1 ###
+
+* FIXED:
+	* Correct handling of WP SEO entries containing special HTML characters.
+
 ### 1.2.0 ###
 
 * ADDED:
