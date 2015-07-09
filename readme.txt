@@ -12,45 +12,45 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 == Description ==
 
-**WPGlobus** is a plugin for making bilingual / multilingual WordPress blogs and sites.
+**WPGlobus** is a family of WordPress plugins assisting you in making bilingual / multilingual WordPress blogs and sites.
 
-With the WPGlobus Free Core plugin, you can:
+The **WPGlobus Free Core plugin** provides you with the main multilingual tools. After you install it, you will be able to:
 
 * Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
 	* translate Posts and Pages to multiple languages using an easy tabbed interface;
 	* translate major taxonomies: categories and tags;
 	* translate menus and widgets;
 * Enable multilingual SEO features of:
-    * WP SEO by Yoast;
-    * All in One SEO Pack by Michael Torbert.
+	* WP SEO by Yoast;
+	* All in One SEO Pack by Michael Torbert.
 * Translate Custom Fields:
 	* standard;
 	* created with the Advanced Custom Fields plugin.
 * Switch the languages at the Front using:
 	* a drop-down menu extension;
 	* a customizable widget with various display options;
-* Switch the Administrator interface language using a top bar selector.
+* Switch the Administrator interface language using a top bar selector;
+* Use the WPGlobus option panel to select active languages and define custom combinations of country flag and language abbreviation.
 
-The WPGlobus option panel allows for selecting active languages as well as defining custom combinations of country flag and language abbreviation.
+The WPGlobus plugin serves as the **foundation** to other plugins in the family:
+
+* [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/):
+	* This is a paid WPGlobus extension, which adds multilingual capabilities to WooCommerce-based online stores.
+
+* [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/):
+	* This plugin allows setting featured images separately for each language.
+
+* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/):
+	* This plugin enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) has its own option panel, where you enter texts.
 
 = Demos =
 
+* [WPGlobus.com](http://www.wpglobus.com/):
+	* Bilingual site using a variety of posts, pages, custom post types, forms, a slider and a WooCommerce store with Subscription and API extensions.
 * [Site in subfolder](http://demo-subfolder.wpglobus.com/):
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
-	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin
-	* The WooCommerce WPGlobus is a [paid extension](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).
-
-= Free Add-ons =
-
-* [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/):
-	* Set featured image separately for each language.
-
-* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/):
-	* Enable translate of the option values stored in the `wp_options` table.
-
-* More extensions are planned:
-	* Stay tuned, search the repository for [WPGlobus](https://wordpress.org/plugins/search.php?q=WPGlobus).
+	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin.
 
 = WPGlobus is compatible with many popular plugins, including: =
 
@@ -146,13 +146,11 @@ No known backward incompatibility issues.
 	* Language tabs in admin editor styled according to the WP standards.
 	* Correct creation of the post title and description for extra languages in AIOSEOP.
 	* Enabled translation of the WPGlobus option panel.
-	
-= 1.0.14 =
-
-* FIXED:
-	* Correct display of trimmed words in admin (filter on `wp_trim_words`).
-	* Correct translation of the posts with `---MORE---`.
 
 = Earlier versions =
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
+
+= WooCommerce-WPGlobus ==
+
+* [See the changelog here](http://www.wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)

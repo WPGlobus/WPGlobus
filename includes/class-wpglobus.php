@@ -2438,7 +2438,8 @@ class WPGlobus {
 		WPGlobus::Config()->open_languages = apply_filters( 'wpglobus_open_languages', WPGlobus::Config()->open_languages );
 
 		/**
-		 * Filter the array of enabled pages for loading scripts, styles to achieve WPGlobusCore, WPGlobusDialogApp.
+		 * Filter the array of WPGlobus-enabled pages.
+		 * Used to load scripts and styles for WPGlobusCore, WPGlobusDialogApp (JS).
 		 * @since 1.2.0
 		 *
 		 * @param array $enabled_pages Array of enabled pages.

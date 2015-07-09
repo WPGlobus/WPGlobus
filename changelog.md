@@ -2,6 +2,16 @@
 
 ## Changelog ##
 
+### 1.2.0 ###
+
+* ADDED:
+	* Handling the hash part of the URLs.
+	* New extension, [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
+	* Filter 'wpglobus_enabled_pages'
+* FIXED:
+	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
+	* Correct language detection with no trailing slash on home url, i.e. `example.com/fr` works the same as `example.com/fr/`
+
 ### 1.1.1 ###
 
 * ADDED:
