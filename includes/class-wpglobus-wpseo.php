@@ -237,8 +237,8 @@ class WPGlobus_WPSEO {
 				     data-language="<?php echo $language; ?>"
 				     data-url-<?php echo $language; ?>="<?php echo $url; ?>"
 				     data-permalink="<?php echo $permalink['action']; ?>"
-				     data-metadesc="<?php echo htmlentities( WPGlobus_Core::text_filter( $metadesc, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
-				     data-wpseotitle="<?php echo htmlentities( WPGlobus_Core::text_filter( $wpseotitle, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
+				     data-metadesc="<?php echo esc_html( WPGlobus_Core::text_filter( $metadesc, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
+				     data-wpseotitle="<?php echo esc_html( WPGlobus_Core::text_filter( $wpseotitle, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
 				     data-focuskw="<?php echo WPGlobus_Core::text_filter( $focuskw, $language, WPGlobus::RETURN_EMPTY ); ?>">
 				</div> <?php
 			} ?>
