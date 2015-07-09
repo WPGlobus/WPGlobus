@@ -151,6 +151,6 @@ No known backward incompatibility issues.
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
 
-= WooCommerce-WPGlobus ==
+= WooCommerce-WPGlobus =
 
 * [See the changelog here](http://www.wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
