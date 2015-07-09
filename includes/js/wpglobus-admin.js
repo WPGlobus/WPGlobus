@@ -173,7 +173,8 @@ var WPGlobusDialogApp;
 		addElement: function(elem) {
 			var option = {
 				id: null,
-				dialogTitle: ''
+				dialogTitle: '',
+				style: ''
 			}
 			if ( 'string' == typeof(elem) ) {
 				option.id = elem;	
@@ -185,7 +186,7 @@ var WPGlobusDialogApp;
 		
 			var $element = null, id = null, name = null, node = null,
 				sb = api.startButton,
-				clone, v;
+				clone, v, style;
 
 			node = document.getElementById(option.id);	
 			if ( null ===  node ) {
@@ -202,6 +203,7 @@ var WPGlobusDialogApp;
 			}	
 			clone = $( $element.clone() );
 			//$element.addClass('hidden');	
+			style = $element.attr('style') || '';
 			$element.attr('style','display:none;');
 			clone.attr('id', 'wpglobus-'+id).attr('name', 'wpglobus-'+name);
 			clone.data('source-id', id);
@@ -210,11 +212,18 @@ var WPGlobusDialogApp;
 				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
 				clone.text( v );
 				clone.data( 'nodename', 'TEXTAREA' );
-				clone.attr( 'style', 'width:95%;float:left;');
+				if ( '' == option.style ) {
+					clone.attr( 'style', style + ';width:95%;float:left;' );
+				} else {
+					clone.attr( 'style', style + ';' + option.style );
+				}	
 			} else {
 				v = WPGlobusCore.getTranslations( $element.val() )[WPGlobusCoreData['language']];
 				clone.attr( 'value', v );
 				clone.data( 'nodename', 'INPUT' );
+				if ( '' != option.style ) {
+					clone.attr( 'style', style + ';' + option.style );
+				}	
 			}	
 			
 			sb = sb.replace(/{{id}}/g, id);
