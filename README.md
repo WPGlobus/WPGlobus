@@ -87,9 +87,16 @@ You can install this plugin directly from your WordPress dashboard:
 
 Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
+Then please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/).
+
 ## Frequently Asked Questions ##
 
-From the [FAQ Archives on the WPGlobus Website](http://www.wpglobus.com/faq/):
+### Please read these first: ###
+
+* [The Quick Start Guide](http://www.wpglobus.com/quick-start/)
+* [Before contacting Support...](http://www.wpglobus.com/before-contacting-wpglobus-support/)
+
+From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 * [Do you support PHP 5.x?](http://www.wpglobus.com/faq/support-php-5-2/)
 * [Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x?](http://www.wpglobus.com/faq/support-msie-opera-safari-chrome-firefox/)
@@ -110,10 +117,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
-### 1.2.1 ###
+### 1.2.1 (soon) ###
 
 * FIXED:
 	* Correct handling of WP SEO entries containing special HTML characters.
+	* Incorrect behavior of the menus created from custom type posts.
 
 ### 1.2.0 ###
 
