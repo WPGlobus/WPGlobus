@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-07-10 09:06-0400\n"
+"POT-Creation-Date: 2015-07-10 09:41-0400\n"
 "PO-Revision-Date: 2015-07-07 08:39-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
@@ -20,93 +20,97 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: includes/vendor\n"
 "X-Poedit-SearchPath-0: includes\n"
 
-#: includes/admin/class-wpglobus-about.php:45
+#: includes/admin/class-wpglobus-about.php:44
 msgid "About WPGlobus"
 msgstr "Über WPGlobus"
 
-#: includes/admin/class-wpglobus-about.php:52
+#: includes/admin/class-wpglobus-about.php:51
 #: includes/options/class-wpglobus-options.php:111
 msgid "Thank you for installing WPGlobus!"
 msgstr "Danke, dass Sie für die Installation von WPGlobus!"
 
-#: includes/admin/class-wpglobus-about.php:57
+#: includes/admin/class-wpglobus-about.php:56
 #, php-format
 msgid "Version %s"
 msgstr "Version %s"
 
 #: includes/admin/class-wpglobus-about.php:60
+msgid "Quick Start"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:63
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/admin/class-wpglobus-about.php:63
+#: includes/admin/class-wpglobus-about.php:66
 #: includes/options/class-wpglobus-options.php:376
 msgid "Add-ons"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:67
+#: includes/admin/class-wpglobus-about.php:70
 msgid "Feedback"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:80
+#: includes/admin/class-wpglobus-about.php:83
 msgid "What is WPGlobus"
 msgstr "Was ist WPGlobus"
 
-#: includes/admin/class-wpglobus-about.php:82
+#: includes/admin/class-wpglobus-about.php:85
 msgid ""
 "WPGlobus is a globalization (multi-lingual, internationalization, "
 "localization, ...) WordPress plugin."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:84
+#: includes/admin/class-wpglobus-about.php:87
 msgid ""
 "Our goal is to let WordPress support multiple languages, countries and "
 "currencies (for e-commerce)."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:86
+#: includes/admin/class-wpglobus-about.php:89
 #, php-format
 msgid "For more information, please visit %s."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:92
+#: includes/admin/class-wpglobus-about.php:95
 msgid "Feature Highlights"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:95
+#: includes/admin/class-wpglobus-about.php:98
 msgid "Add multiple languages and countries to your site."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:96
+#: includes/admin/class-wpglobus-about.php:99
 msgid ""
 "Translate posts, pages, categories, tags and menus using a clean and simple "
 "interface."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:97
+#: includes/admin/class-wpglobus-about.php:100
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:98
+#: includes/admin/class-wpglobus-about.php:101
 #, php-format
 msgid ""
 "Continue using the %s - yes, WPGlobus supports the WP-SEO titles and "
 "descriptions in multiple languages!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:105
+#: includes/admin/class-wpglobus-about.php:108
 msgid "Important"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:109
+#: includes/admin/class-wpglobus-about.php:112
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
 "com</code> and language queries <code>example.com?lang=xx</code>."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:118
+#: includes/admin/class-wpglobus-about.php:121
 #: includes/admin/class-wpglobus-addons.php:81
 msgid "Go to WPGlobus Settings"
 msgstr "Zum WPGlobus Einstellungen"
@@ -340,11 +344,8 @@ msgstr "Lesen Über WPGlobus"
 
 #: includes/options/class-wpglobus-options.php:119
 msgid ""
-"Click the <strong>[Languages]</strong> tab at the left to setup the various "
-"options."
+"Click the <strong>[Languages]</strong> tab at the left to setup the options."
 msgstr ""
-"Klicken Sie auf die Registerkarte <strong>[Sprachen]</strong> auf der linken "
-"Seite, um das Setup der verschiedenen Optionen."
 
 #: includes/options/class-wpglobus-options.php:121
 msgid ""
