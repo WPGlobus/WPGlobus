@@ -116,7 +116,7 @@ class WPGlobus_Options {
 				            __( 'Read About WPGlobus', 'wpglobus' ) .
 				            '</a>' .
 				            '<br/>' .
-				            '&bull; ' . __( 'Click the <strong>[Languages]</strong> tab at the left to setup the various options.', 'wpglobus' ) .
+				            '&bull; ' . __( 'Click the <strong>[Languages]</strong> tab at the left to setup the options.', 'wpglobus' ) .
 				            '<br/>' .
 				            '&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
 				            '<br/>' .
