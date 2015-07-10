@@ -19,16 +19,15 @@ class WPGlobus_About {
 			$language = WPGlobus::Config()->language . '/';
 		}
 
-		$url_wpglobus_site = WPGlobus::URL_WPGLOBUS_SITE . $language;
+		/**
+		 * For Google Analytics
+		 */
+		$ga_campaign = '?utm_source=wpglobus-admin-about&utm_medium=link&utm_campaign=activate-plugin';
 
-		$url_wpglobus_site_home =
-			$url_wpglobus_site .
-			'?utm_source=wpglobus-admin-about&utm_medium=link&utm_campaign=active-plugins';
-
-		$url_wpglobus_site_contact =
-			$url_wpglobus_site .
-			'pg/contact-us' .
-			'?utm_source=wpglobus-admin-about&utm_medium=link&utm_campaign=active-plugins';
+		$url_wpglobus_site             = WPGlobus::URL_WPGLOBUS_SITE . $language;
+		$url_wpglobus_site_home        = $url_wpglobus_site . $ga_campaign;
+		$url_wpglobus_site_contact     = $url_wpglobus_site . 'pg/contact-us/' . $ga_campaign;
+		$url_wpglobus_site_quick_start = $url_wpglobus_site . 'quick-start/' . $ga_campaign;
 
 		/**
 		 * @quirk
@@ -55,6 +54,10 @@ class WPGlobus_About {
 				<h2 class="nav-tab-wrapper">
 					<a href="#" class="nav-tab nav-tab-active">
 						<?php printf( __( 'Version %s' ), WPGLOBUS_VERSION ); ?>
+					</a>
+					<a href="<?php echo esc_url( $url_wpglobus_site_quick_start ); ?>"
+					   class="nav-tab">
+						<?php _e( 'Quick Start', 'wpglobus' ); ?>
 					</a>
 					<a href="admin.php?page=wpglobus_options" class="nav-tab">
 						<?php _e( 'Settings' ); ?>
