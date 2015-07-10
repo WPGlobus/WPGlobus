@@ -938,7 +938,7 @@ class WPGlobus {
 				$items =
 					$wpdb->get_results( "SELECT ID, post_title, post_excerpt, post_name FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
 
-				foreach ( $items as $item ) {
+				foreach ( $items as $item ) :
 					$item->post_title = trim( $item->post_title );
 					if ( empty( $item->post_title ) ) :
 
@@ -978,7 +978,16 @@ class WPGlobus {
 								$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID ) );
 							}
 
-						}
+						} else {
+							
+							/**
+							 * Because item of the post title is empty after saving
+							 * if it is equal to parent post title (@see _menu_item_object_id meta) before saving
+							 * @since 1.2.1 
+							 */
+							$item->post_title = get_post_field( 'post_title', $item_object_id );
+							
+						}	
 
 					endif;
 
@@ -1002,7 +1011,8 @@ class WPGlobus {
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-attr-title']['class'] =
 							'widefat wpglobus-menu-item wpglobus-item-attr';
 					}
-				}
+					
+				endforeach;
 
 				$data['items']       = $menu_items;
 				$data['post_titles'] = $post_titles;
