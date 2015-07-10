@@ -151,7 +151,7 @@ module.exports = function (grunt) {
         pot: {
             options: {
                 encoding: 'UTF-8',
-                msgid_bugs_address: 'translation@wpglobus.com',
+                msgid_bugs_address: 'support@wpglobus.com',
                 msgmerge: false,
                 text_domain: 'wpglobus', //Your text domain. Produces my-text-domain.pot
                 dest: 'languages/', //directory to place the pot file
@@ -173,7 +173,7 @@ module.exports = function (grunt) {
                 ]
             },
             files: {
-                src: ['includes/**/*.php'], //Parse all php files
+                src: ['includes/**/*.php', '!includes/vendor/*'], //Parse all php files except for vendor folder
                 expand: true
             }
         },
@@ -205,8 +205,11 @@ module.exports = function (grunt) {
         var potFile = 'languages/wpglobus.pot';
         var poFilePaths = grunt.file.expand('languages/*.po');
         poFilePaths.forEach(function (poFile) {
-            grunt.log.writeln("msgmerge-ing " + poFile);
-            execSync('msgmerge -vU ' + poFile + ' ' + potFile);
+            var moFile = poFile.replace(/\.po$/, '.mo');
+            grunt.log.writeln("Making PO: " + poFile);
+            execSync('msgmerge -v --backup=none --no-fuzzy-matching --update ' + poFile + ' ' + potFile);
+            grunt.log.writeln("Making MO: " + moFile);
+            execSync('msgfmt -v -o ' + moFile + ' ' + poFile);
         });
     });
 

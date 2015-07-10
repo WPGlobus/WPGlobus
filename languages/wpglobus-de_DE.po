@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
-"Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-07-07 08:39-0400\n"
+"Report-Msgid-Bugs-To: support@wpglobus.com\n"
+"POT-Creation-Date: 2015-07-10 09:06-0400\n"
 "PO-Revision-Date: 2015-07-07 08:39-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
@@ -211,6 +211,7 @@ msgstr "Sprache löschen"
 msgid "Error while saving."
 msgstr ""
 
+#. //php.net/date
 #: includes/class-wpglobus-filters.php:601
 msgid "g:i:s a"
 msgstr ""
@@ -234,9 +235,8 @@ msgid "WPGlobus widget"
 msgstr "WPGlobus widget"
 
 #: includes/class-wpglobus-widget.php:29
-#, fuzzy
 msgid "Add language switcher"
-msgstr "Sprachen hinzufügen"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:32
 msgid "Flags"
@@ -251,9 +251,8 @@ msgid "List with flags"
 msgstr "Liste der Flaggen"
 
 #: includes/class-wpglobus-widget.php:35
-#, fuzzy
 msgid "Select"
-msgstr "Wählen Sie mit den Sprachcode"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:36
 msgid "Select with language code"
@@ -268,7 +267,6 @@ msgid "Dropdown with flags"
 msgstr ""
 
 #: includes/class-wpglobus-widget.php:196
-#: includes/vendor/class-wpglobus-aioseop.php:339
 msgid "Title"
 msgstr "Titel"
 
@@ -277,55 +275,53 @@ msgid "Selector type"
 msgstr ""
 
 #: includes/class-wpglobus.php:855
-#, fuzzy
 msgid "You cannot disable the main language."
-msgstr "Sie können die erste aktivierte Sprache nicht deaktiviert werden."
+msgstr ""
 
-#: includes/class-wpglobus.php:1010
+#: includes/class-wpglobus.php:1020
 msgid "*) Available after the menu is saved."
-msgstr ""
-
-#: includes/class-wpglobus.php:1846
-#, php-format
-msgid "Word count: %s"
-msgstr ""
-
-#: includes/class-wpglobus.php:1854
-#, php-format
-msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr ""
 
 #: includes/class-wpglobus.php:1856
 #, php-format
+msgid "Word count: %s"
+msgstr ""
+
+#: includes/class-wpglobus.php:1864
+#, php-format
+msgid "Last edited by %1$s on %2$s at %3$s"
+msgstr ""
+
+#: includes/class-wpglobus.php:1866
+#, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:2122
+#: includes/class-wpglobus.php:2132
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2204
+#: includes/class-wpglobus.php:2214
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:2392
+#: includes/class-wpglobus.php:2402
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2394
+#: includes/class-wpglobus.php:2404
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2487
+#: includes/class-wpglobus.php:2497
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2521
-#, fuzzy
+#: includes/class-wpglobus.php:2531
 msgid "Add"
-msgstr "Fügen Sie neue Sprache"
+msgstr ""
 
 #: includes/options/class-wpglobus-options.php:92
 msgid "WARNING: Redux Framework upgrade is highly recommended!"
@@ -392,13 +388,11 @@ msgid "Instructions:"
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:207
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Place the <strong>main language</strong> of your site at the top of the list "
 "by dragging the %s icons."
 msgstr ""
-"Klicken Sie auf die Registerkarte <strong>[Sprachen]</strong> auf der linken "
-"Seite, um das Setup der verschiedenen Optionen."
 
 #: includes/options/class-wpglobus-options.php:208
 msgid "<strong>Uncheck</strong> the languages you do not plan to use."
@@ -485,9 +479,8 @@ msgid "Choose the navigation menu where the language selector will be shown"
 msgstr "Wählen Sie das Navigationsmenü, wo die Sprachwahl wird angezeigt"
 
 #: includes/options/class-wpglobus-options.php:284
-#, fuzzy
 msgid "\"All Pages\" menus Language selector"
-msgstr "Language Selector-Modus"
+msgstr ""
 
 #: includes/options/class-wpglobus-options.php:285
 msgid "(Found in some themes)"
@@ -530,9 +523,8 @@ msgstr ""
 "löschen."
 
 #: includes/options/class-wpglobus-options.php:319
-#, fuzzy
 msgid "NOTE: you cannot remove the main language."
-msgstr "HINWEIS: Sie können die Standardsprache kann nicht gelöscht werden."
+msgstr ""
 
 #: includes/options/class-wpglobus-options.php:338
 msgid "Uncheck to disable WPGlobus"
@@ -568,7 +560,6 @@ msgid "Code"
 msgstr "Code"
 
 #: includes/options/fields/table/table-languages.php:55
-#: includes/vendor/class-wpglobus-aioseop.php:30
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -603,54 +594,3 @@ msgstr "Fügen Sie neue Sprache"
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
 msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:172
-msgid "Click for Help!"
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:224
-#, php-format
-msgid " characters. Most search engines use a maximum of %s chars for the %s."
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:293
-msgid "Keywords (comma separated)"
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:296
-msgid ""
-"A comma separated list of your most important keywords for this page that "
-"will be written as META keywords."
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:314
-msgid "Description"
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:320
-msgid ""
-"The META description for this page. This will override any autogenerated "
-"descriptions."
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:343
-msgid "A custom title that shows up in the title tag for this page."
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:368
-msgid "Preview Snippet"
-msgstr ""
-
-#: includes/vendor/class-wpglobus-aioseop.php:372
-msgid "A preview of what this page might look like in search engine results."
-msgstr ""
-
-#~ msgid ""
-#~ "The first language in the list is the default one. <br>To reorder, drag "
-#~ "and drop with the icons at the right."
-#~ msgstr ""
-#~ "Die erste Sprache in der Liste ist der Standard ein.<br>Um neu "
-#~ "anzuordnen, ziehen Sie mit den Symbolen auf der rechten Seite."
-
-#~ msgid "Uncheck to remove from the list"
-#~ msgstr "Deaktivieren Sie die Option, um aus der Liste entfernen"

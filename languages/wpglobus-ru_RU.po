@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
-"Report-Msgid-Bugs-To: translation@wpglobus.com\n"
-"POT-Creation-Date: 2015-07-07 08:39-0400\n"
+"Report-Msgid-Bugs-To: support@wpglobus.com\n"
+"POT-Creation-Date: 2015-07-10 09:05-0400\n"
 "PO-Revision-Date: 2015-07-07 08:39-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: WPGlobus <translation@wpglobus.com>\n"
@@ -222,6 +222,7 @@ msgstr "Удалить язык"
 msgid "Error while saving."
 msgstr "Ошибка при сохранении."
 
+#. //php.net/date
 #: includes/class-wpglobus-filters.php:601
 msgid "g:i:s a"
 msgstr "g:i:s a"
@@ -288,40 +289,40 @@ msgstr "Способ выбора языка"
 msgid "You cannot disable the main language."
 msgstr "Нельзя отключить основной язык."
 
-#: includes/class-wpglobus.php:1010
+#: includes/class-wpglobus.php:1020
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:1846
+#: includes/class-wpglobus.php:1856
 #, php-format
 msgid "Word count: %s"
 msgstr "Количество слов: %s"
 
-#: includes/class-wpglobus.php:1854
+#: includes/class-wpglobus.php:1864
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr "Последний раз редактировалось пользователем %1$s %2$s в %3$s"
 
-#: includes/class-wpglobus.php:1856
+#: includes/class-wpglobus.php:1866
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr "Последний раз редактировалось %1$s в %2$s"
 
-#: includes/class-wpglobus.php:2122
+#: includes/class-wpglobus.php:2132
 msgid "Enter title here"
 msgstr "Ввести заголовок"
 
-#: includes/class-wpglobus.php:2204
+#: includes/class-wpglobus.php:2214
 msgid "Invalid taxonomy"
 msgstr "Несуществующая таксономия"
 
-#: includes/class-wpglobus.php:2392
+#: includes/class-wpglobus.php:2402
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGLobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:2394
+#: includes/class-wpglobus.php:2404
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -329,11 +330,11 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:2487
+#: includes/class-wpglobus.php:2497
 msgid "My Account"
 msgstr "Мой аккаунт"
 
-#: includes/class-wpglobus.php:2521
+#: includes/class-wpglobus.php:2531
 msgid "Add"
 msgstr "Добавить"
 
@@ -614,100 +615,3 @@ msgstr "Добавить новый язык"
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
 msgstr "Язык по умолчанию"
-
-#, fuzzy
-#~ msgid "Description"
-#~ msgstr "Описание"
-
-#, fuzzy
-#~ msgid "Click"
-#~ msgstr "Пожалуйста, оцените качество дизайна от 1 до 5 звездочек"
-
-#~ msgid ""
-#~ "The first language in the list is the default one. <br>To reorder, drag "
-#~ "and drop with the icons at the right."
-#~ msgstr ""
-#~ "Первый в списке - язык по умолчанию. <br>Для сортировки используйте "
-#~ "\"drag and drop\" иконки справа."
-
-#~ msgid "Uncheck to remove from the list"
-#~ msgstr "Снимите чекбокс для удаления из списка"
-
-#~ msgid ""
-#~ "The plugin is currently in <strong>BETA</strong> stage! We will do our "
-#~ "best to fix all problems you'll discover. Please be patient. Your "
-#~ "contributions (on GitHub) are highly appreciated!"
-#~ msgstr ""
-#~ "Плагин в настоящее время находится в стадии <strong>бета-тестирования</"
-#~ "strong> ! Мы сделаем все возможное, чтобы исправить проблемы, которые вы "
-#~ "обнаружите. Пожалуйста, будьте терпеливы. Будем признательны за ваши "
-#~ "предложения (на GitHub)!"
-
-#~ msgid "Updated from WPGlobus Mini. Please, read instructions at %s"
-#~ msgstr ""
-#~ "У Вас была установлена версия WPGlobus Mini, которая больше не "
-#~ "поддерживается. Пожалуйста прочитайте инструкции: %s"
-
-#~ msgid "<a href=\"%s\">Hide Notice</a>"
-#~ msgstr "<a href=\"%s\">Скрыть это сообщение</a>"
-
-#~ msgid "What&#8217;s New"
-#~ msgstr "Что нового"
-
-#~ msgid "Breaking changes!"
-#~ msgstr "Критические изменения!"
-
-#~ msgid ""
-#~ "The ALPHA version (0.1.x, called internally <em>\"WPGlobus Mini\"</em>) "
-#~ "is no longer supported. See the note below for more details."
-#~ msgstr ""
-#~ "Альфа-версия (0.1.x, кодовое название <em>«WPGlobus Mini»</em>) больше не "
-#~ "поддерживается. Смотрите примечание ниже для более подробной информации."
-
-#~ msgid "Warning! WPGlobus Mini (0.x.x) is no longer supported!"
-#~ msgstr "Внимание! WPGlobus Mini (0.x.x) больше не поддерживается!"
-
-#~ msgid ""
-#~ "The versions 0.x.x provided the existing users of other language plugins "
-#~ "with a language-switcher menu dropdown. We are going to keep the language "
-#~ "switcher, but we have dropped the support of subdomains and language "
-#~ "queries in our plugin. If your site is using subdomains or <code>?"
-#~ "lang=xx</code>, and you'd like to keep that behavior, please do not use "
-#~ "WPGlobus starting from the version 1.0.0."
-#~ msgstr ""
-#~ "Версии 0.x.x позволили пользователям других языковых плагинов переключать "
-#~ "языки с помощью раскрывающегося меню. Мы будем поддерживать переключатель "
-#~ "языков, но мы не планируем поддержку дочерних доменов и ?lang-параметров "
-#~ "в нашем плагине. Если ваш сайт использует дочерние домены или <code>?"
-#~ "lang=xx</code>, и вы хотели бы сохранить эту функциональность, "
-#~ "пожалуйста, не используйте WPGlobus, начиная с версии 1.0.0."
-
-#~ msgid "To downgrage, please download the version 0.1.1 using %s."
-#~ msgstr ""
-#~ "Для возврата к прежней (Мини) версии, пожалуйста, скачайте версию 0.1.1, "
-#~ "используя %s."
-
-#, fuzzy
-#~ msgid "Thank you for installing WPGlobus %s!"
-#~ msgstr "Спасибо за то, что Вы установили плагин WPGlobus!"
-
-#~ msgid "URL Mode"
-#~ msgstr "Спецификация УРЛ"
-
-#, fuzzy
-#~ msgid "Path Mode:"
-#~ msgstr "Модификация URL"
-
-#, fuzzy
-#~ msgid "Query Mode:"
-#~ msgstr "Тип запроса"
-
-#~ msgid "Choose the method of URL modification"
-#~ msgstr "Выберите метод спецификации языка в УРЛах"
-
-#~ msgid "Select URL Mode"
-#~ msgstr "Выберите режим"
-
-#, fuzzy
-#~ msgid "Custom table"
-#~ msgstr "Пользовательский CSS"
