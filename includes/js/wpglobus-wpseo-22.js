@@ -13,6 +13,10 @@ var wpglobus_wpseo = function () {
 		if (typeof str === 'undefined') {
 			return;
 		}
+		if ( typeof replacedVars === 'undefined' ) {
+			// wpseo didn't works with disabled post title
+			return str;	
+		}	
 		var post_title = '#title',
 			post_excerpt = '#excerpt-' + language,
 			post_content = '#content';
