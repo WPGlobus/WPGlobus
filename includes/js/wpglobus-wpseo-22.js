@@ -14,7 +14,7 @@ var wpglobus_wpseo = function () {
 			return;
 		}
 		if ( typeof replacedVars === 'undefined' ) {
-			// wpseo didn't works with disabled post title
+            // WP SEO doesn't work properly when post title is disabled
 			return str;	
 		}	
 		var post_title = '#title',
