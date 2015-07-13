@@ -204,6 +204,7 @@ class WPGlobus {
 			$this->enabled_pages[] = 'edit.php';
 			$this->enabled_pages[] = 'options-general.php';
 			$this->enabled_pages[] = 'widgets.php';
+			$this->enabled_pages[] = 'customize.php';
 		
 			add_action( 'admin_body_class', array( $this, 'on_add_admin_body_class' ) );
 
@@ -1106,12 +1107,37 @@ class WPGlobus {
 
 				$page_action = 'widgets.php';
 
+			} else if ( 'customize.php' == $page ) {
+				
+				$page_action = 'customize.php';
+				$page_data_key = 'customize';
+				$page_data_values = array(
+					'info' => array(
+						'element' => '#customize-info .preview-notice',
+						'html' => sprintf( __( 'You are customizing %s' ), '<strong class="theme-name site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' )
+					),
+					'elements' => array(
+						'wpglobus_blogname' => array(
+							'origin' => 'blogname',
+							'id' => '#customize-control-wpglobus_blogname input',
+							'origin_element' => '#customize-control-blogname input',
+							'value'  => WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY )
+						),	
+						'wpglobus_blogdescription' => array(
+							'origin' => 'blogdescription',
+							'id' => '#customize-control-wpglobus_blogdescription input',
+							'origin_element' => '#customize-control-blogdescription input',
+							'value'  => WPGlobus_Core::text_filter( get_option( 'blogdescription' ), WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY )
+						)
+					)
+				);
+				
 			} else if ( in_array( $page, array( 'wpglobus_options', self::LANGUAGE_EDIT_PAGE ) ) ) {
 				
 				$page_action = 'wpglobus_options';
 		
 			}
-	
+
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin" . self::$_SCRIPT_SUFFIX . ".js",
@@ -1149,19 +1175,30 @@ class WPGlobus {
 					'data'         => $data
 				)
 			);
+
+			if ( empty($page_data_key) ) {
+				$page_data_key = 'page_custom_data'; 
+			}	
+			if ( empty($page_data_values) ) {
+				$page_data_values = null;
+			}	
+			
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusCoreData',
-				array(
-					'version'           => WPGLOBUS_VERSION,
-					'default_language'  => $config->default_language,
-					'language'          => $config->language,
-					'enabled_languages' => $config->enabled_languages,
-					'open_languages'    => $config->open_languages,
-					'en_language_name'  => $config->en_language_name,
-					'locale_tag_start'  => self::LOCALE_TAG_START,
-					'locale_tag_end'    => self::LOCALE_TAG_END
-				)
+				array_merge( array(
+						'version'           => WPGLOBUS_VERSION,
+						'default_language'  => $config->default_language,
+						'language'          => $config->language,
+						'enabled_languages' => $config->enabled_languages,
+						'open_languages'    => $config->open_languages,
+						'en_language_name'  => $config->en_language_name,
+						'locale_tag_start'  => self::LOCALE_TAG_START,
+						'locale_tag_end'    => self::LOCALE_TAG_END
+					), array(
+						$page_data_key => $page_data_values
+					)
+				)	
 			);
 
 			/**

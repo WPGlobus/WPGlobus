@@ -55,6 +55,12 @@ WPGlobus::Config();
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
+require_once 'includes/class-wpglobus-customize.php';
+//global $pagenow;
+//if ( 'customize.php' == $pagenow ) {
+	WPGlobus_Customize::init();
+//}	
+
 if ( defined( 'WPSEO_VERSION' ) ) {
 	require_once 'includes/class-wpglobus-wpseo.php';
 	WPGlobus_WPSEO::controller();
