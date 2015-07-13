@@ -18,7 +18,7 @@ The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 
 * Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
 	* translate Posts and Pages to multiple languages using an easy tabbed interface;
-**	* translate major taxonomies:** categories and tags;  
+	* translate major taxonomies: categories and tags;  
 	* translate menus and widgets;
 * Enable multilingual SEO features of:
 	* WP SEO by Yoast;
