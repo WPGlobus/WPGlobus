@@ -55,11 +55,12 @@ WPGlobus::Config();
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
+/**
+ * Fix multilingual strings in `Customize`
+ * @since 1.2.1
+ */
 require_once 'includes/class-wpglobus-customize.php';
-//global $pagenow;
-//if ( 'customize.php' == $pagenow ) {
-	WPGlobus_Customize::init();
-//}	
+WPGlobus_Customize::controller();
 
 if ( defined( 'WPSEO_VERSION' ) ) {
 	require_once 'includes/class-wpglobus-wpseo.php';
