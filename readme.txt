@@ -122,6 +122,7 @@ No known backward incompatibility issues.
 * FIXED:
 	* Correct handling of WP SEO entries containing special HTML characters.
 	* Incorrect behavior of the menus created from custom type posts.
+	* Multilingual strings in Customizer (site name and description).
 
 = 1.2.0 =
 
