@@ -26,7 +26,7 @@ function wpglobus_customize_preview_init() {
 }	 
  
 /**
- * Class WPGlobus_Cuztomize
+ * Class WPGlobus_Customize
  */
 class WPGlobus_Customize {
 	
@@ -37,7 +37,10 @@ class WPGlobus_Customize {
 		add_action( 'customize_controls_enqueue_scripts', array( 'WPGlobus_Customize', 'controls_enqueue_scripts' ), 1000 ); 
 	}
 
-	public static function register_customize_sections( $wp_customize ) {
+	/**
+	 * @param WP_Customize_Manager $wp_customize
+	 */
+	public static function register_customize_sections( WP_Customize_Manager $wp_customize ) {
 		$wp_customize->add_setting( 'wpglobus_blogname', array(
 			'default' => WPGlobus_Core::text_filter( get_bloginfo('name'), WPGlobus::Config()->language )
 		) );		
