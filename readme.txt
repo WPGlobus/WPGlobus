@@ -103,6 +103,8 @@ No known backward incompatibility issues.
 	* Correct handling of WP SEO entries containing special HTML characters.
 	* Incorrect behavior of the menus created from custom type posts.
 	* Multilingual strings in Customizer (site name and description).
+* ADDED:
+	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
 
 = 1.2.0 =
 
