@@ -105,6 +105,7 @@ No known backward incompatibility issues.
 	* Multilingual strings in Customizer (site name and description).
 * ADDED:
 	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
+	* Partial support of the All-in-on SEO Pack-PRO.
 
 = 1.2.0 =
 
