@@ -17,6 +17,10 @@ var WPGlobusAioseop;
 	var api;
 	api = WPGlobusAioseop = {
 		init: function() {
+			if ( 0 == $('#aiosp_snippet_wrapper').size() ) {
+				/* maybe All in One SEO Pack Pro license key is not set yet or invalid */
+				return;	
+			}
 			// tabs on
 			$('#wpglobus-aioseop-tabs').tabs();
 			$('#wpglobus-aioseop-tabs').insertBefore($('#aiosp_snippet_wrapper'));
