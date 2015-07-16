@@ -13,7 +13,7 @@ class WPGlobus_About {
 	 */
 	public static function about_screen() {
 
-		if ( WPGlobus::Config()->language == 'en' ) {
+		if ( WPGlobus::Config()->language === 'en' ) {
 			$language = '';
 		} else {
 			$language = WPGlobus::Config()->language . '/';
@@ -56,6 +56,7 @@ class WPGlobus_About {
 						<?php printf( __( 'Version %s' ), WPGLOBUS_VERSION ); ?>
 					</a>
 					<a href="<?php echo esc_url( $url_wpglobus_site_quick_start ); ?>"
+					   target="_blank"
 					   class="nav-tab">
 						<?php _e( 'Quick Start', 'wpglobus' ); ?>
 					</a>
