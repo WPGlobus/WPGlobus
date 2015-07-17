@@ -17,12 +17,13 @@
 The **WPGlobus Free Core plugin** provides you with the main multilingual tools. After you install it, you will be able to:
 
 * Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
-	* translate Posts and Pages to multiple languages using an easy tabbed interface;
-	* translate major taxonomies: categories and tags;  
+	* manually translate Posts and Pages to multiple languages using an easy tabbed interface;
+**	* translate major taxonomies:** categories and tags;  
 	* translate menus and widgets;
 * Enable multilingual SEO features of:
 	* WP SEO by Yoast;
-	* All in One SEO Pack by Michael Torbert.
+	* All in One SEO Pack by Michael Torbert;
+	* WooCommerce (paid add-on).
 * Translate Custom Fields:
 	* standard;
 	* created with the Advanced Custom Fields plugin.
@@ -31,6 +32,8 @@ The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 	* a customizable widget with various display options;
 * Switch the Administrator interface language using a top bar selector;
 * Use the WPGlobus option panel to select active languages and define custom combinations of country flag and language abbreviation.
+
+**> **NOTE:** WPGlobus does NOT translate texts automatically! To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/).**  
 
 The WPGlobus plugin serves as the **foundation** to other plugins in the family:
 
@@ -43,27 +46,6 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family:
 * [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/):
 	* This plugin enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) has its own option panel, where you enter texts.
 
-### Demos ###
-
-* [WPGlobus.com](http://www.wpglobus.com/):
-	* Bilingual site using a variety of posts, pages, custom post types, forms, a slider and a WooCommerce store with Subscription and API extensions.
-* [Site in subfolder](http://demo-subfolder.wpglobus.com/):
-	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
-* [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
-	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin.
-
-### WPGlobus is compatible with many popular plugins, including: ###
-
-* [WordPress SEO](https://yoast.com/wordpress/plugins/seo/) by [Joost de Valk](https://profiles.wordpress.org/joostdevalk/);
-* [All in One SEO Pack](https://wordpress.org/plugins/all-in-one-seo-pack/) by [Michael Torbert](https://profiles.wordpress.org/hallsofmontezuma/);
-* [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) by [Elliot Condon](https://profiles.wordpress.org/elliotcondon/);
-* [Sidebar Login](https://wordpress.org/plugins/sidebar-login/) by [Mike Jolley](https://profiles.wordpress.org/mikejolley/).
-
-### 3rd Party Software and Files Used ###
-
-* [ReduxFramework](http://reduxframework.com/) core is embedded in the plugin to provide a nice admin interface. If the [ReduxFramework Plugin](https://wordpress.org/plugins/redux-framework/) is already installed, it will be used instead of the embedded version.
-* Most of the flag images are downloaded from the [Flags of the World](http://www.crwflags.com/FOTW/FLAGS/index.html) website.
-
 ### More info and ways to contact the WPGlobus Development Team ###
 
 * [WPGlobus.com website](http://www.wpglobus.com/).
@@ -73,8 +55,6 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family:
 	* [Twitter](https://twitter.com/WPGlobus)
 	* [Google Plus](https://plus.google.com/+Wpglobus)
 	* [LinkedIn](https://www.linkedin.com/company/wpglobus)
-
-> **If you see some obscure errors that the development team might not yet discovered, please let us know! Your reports are appreciated!**
 
 ## Installation ##
 
@@ -122,6 +102,10 @@ No known backward incompatibility issues.
 * FIXED:
 	* Correct handling of WP SEO entries containing special HTML characters.
 	* Incorrect behavior of the menus created from custom type posts.
+	* Multilingual strings in Customizer (site name and description).
+* ADDED:
+	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
+	* Partial support of the All-in-one SEO Pack-PRO.
 
 ### 1.2.0 ###
 
@@ -167,3 +151,13 @@ No known backward incompatibility issues.
 ### WooCommerce-WPGlobus ###
 
 * [See the changelog here](http://www.wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
+
+## Demo Sites ##
+
+* [WPGlobus.com](http://www.wpglobus.com/):
+	* Bilingual site using a variety of posts, pages, custom post types, forms, a slider and a WooCommerce store with Subscription and API extensions.
+* [Site in subfolder](http://demo-subfolder.wpglobus.com/):
+	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
+* [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
+	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin.
+

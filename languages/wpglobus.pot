@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpglobus 1.2.1\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-07-10 09:45-0400\n"
+"POT-Creation-Date: 2015-07-17 01:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,97 +17,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: includes/admin/class-wpglobus-about.php:44
-msgid "About WPGlobus"
+#: includes/admin/class-wpglobus-about.php:48
+msgid "Multilingual Everything!"
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:51
-#: includes/options/class-wpglobus-options.php:111
-msgid "Thank you for installing WPGlobus!"
+msgid ""
+"WPGlobus is a family of WordPress plugins assisting you in making "
+"multilingual WordPress blogs and sites."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:56
-#, php-format
-msgid "Version %s"
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:60
+#: includes/admin/class-wpglobus-about.php:58
 msgid "Quick Start"
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:63
-msgid "Settings"
+#: includes/admin/class-wpglobus-about.php:92
+msgid "Guide"
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:66
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:69
 #: includes/options/class-wpglobus-options.php:376
 msgid "Add-ons"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:70
-msgid "Feedback"
+#: includes/admin/class-wpglobus-about.php:73
+msgid "Support"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:79
+msgid "Easy as 1-2-3:"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:81
+msgid "Go to WPGlobus admin menu and choose the countries / languages;"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:82
+msgid ""
+"Enter the translations to the posts, pages, categories, tags and menus using "
+"a clean and simple interface."
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:83
-msgid "What is WPGlobus"
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:85
-msgid ""
-"WPGlobus is a globalization (multi-lingual, internationalization, "
-"localization, ...) WordPress plugin."
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:87
-msgid ""
-"Our goal is to let WordPress support multiple languages, countries and "
-"currencies (for e-commerce)."
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:89
-#, php-format
-msgid "For more information, please visit %s."
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:95
-msgid "Feature Highlights"
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:98
-msgid "Add multiple languages and countries to your site."
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:99
-msgid ""
-"Translate posts, pages, categories, tags and menus using a clean and simple "
-"interface."
-msgstr ""
-
-#: includes/admin/class-wpglobus-about.php:100
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:101
-#, php-format
-msgid ""
-"Continue using the %s - yes, WPGlobus supports the WP-SEO titles and "
-"descriptions in multiple languages!"
+#: includes/admin/class-wpglobus-about.php:87
+msgid "Links:"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:108
-msgid "Important"
+#: includes/admin/class-wpglobus-about.php:94
+msgid "FAQs"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:112
+#: includes/admin/class-wpglobus-about.php:96
+msgid "Contact Us"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:98
+msgid "Please give us 5 stars!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:110
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
 "com</code> and language queries <code>example.com?lang=xx</code>."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:121
+#: includes/admin/class-wpglobus-about.php:113
+msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:115
+msgid ""
+"They might display some texts with no translation, or with all languages "
+"mixed together."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:117
+#, php-format
+msgid ""
+"Please contact the theme / plugin author. If they are unable to assist, "
+"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:127
 #: includes/admin/class-wpglobus-addons.php:81
 msgid "Go to WPGlobus Settings"
 msgstr ""
@@ -204,6 +206,14 @@ msgstr ""
 msgid "Delete Language"
 msgstr ""
 
+#: includes/class-wpglobus-customize.php:54
+msgid "Site Title"
+msgstr ""
+
+#: includes/class-wpglobus-customize.php:71
+msgid "Tagline"
+msgstr ""
+
 #: includes/class-wpglobus-filters.php:598
 msgid "Error while saving."
 msgstr ""
@@ -271,52 +281,57 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:855
+#: includes/class-wpglobus.php:856
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1020
+#: includes/class-wpglobus.php:1021
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:1856
+#: includes/class-wpglobus.php:1117
+#, php-format
+msgid "You are customizing %s"
+msgstr ""
+
+#: includes/class-wpglobus.php:1893
 #, php-format
 msgid "Word count: %s"
 msgstr ""
 
-#: includes/class-wpglobus.php:1864
+#: includes/class-wpglobus.php:1901
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:1866
+#: includes/class-wpglobus.php:1903
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr ""
 
-#: includes/class-wpglobus.php:2132
+#: includes/class-wpglobus.php:2169
 msgid "Enter title here"
 msgstr ""
 
-#: includes/class-wpglobus.php:2214
+#: includes/class-wpglobus.php:2251
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:2402
+#: includes/class-wpglobus.php:2439
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2404
+#: includes/class-wpglobus.php:2441
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2497
+#: includes/class-wpglobus.php:2534
 msgid "My Account"
 msgstr ""
 
-#: includes/class-wpglobus.php:2531
+#: includes/class-wpglobus.php:2568
 msgid "Add"
 msgstr ""
 
@@ -329,6 +344,10 @@ msgstr ""
 msgid ""
 "WPGlobus administration panel requires Redux Framework %2$s or later. The "
 "version you have installed is %1$s."
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:111
+msgid "Thank you for installing WPGlobus!"
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:116
