@@ -106,6 +106,7 @@ No known backward incompatibility issues.
 * ADDED:
 	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
 	* Partial support of the All-in-one SEO Pack-PRO.
+	* Added full name language without flag for Language Selector Mode option.
 
 = 1.2.0 =
 
