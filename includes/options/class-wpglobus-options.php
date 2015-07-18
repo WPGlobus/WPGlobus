@@ -257,8 +257,9 @@ class WPGlobus_Options {
 						'minimumResultsForSearch' => - 1
 					),
 					'options'  => array(
-						'code'  => __( 'Two-letter Code (en, ru, it, etc.)', 'wpglobus' ),
-						'name'  => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
+						'code'  => __( 'Two-letter Code with flag(en, ru, it, etc.)', 'wpglobus' ),
+						'full_name'  => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ), /* @since 1.2.1 */
+						'name'  => __( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
 						'empty' => __( 'Flags only', 'wpglobus' )
 					),
 					'default'  => 'code'

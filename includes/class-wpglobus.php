@@ -1613,21 +1613,13 @@ class WPGlobus {
 			'wpglobus_extra_languages', $extra_languages, $current_language );
 
 		/**
-		 * CSS classes common for all languages
-		 */
-		$span_classes = array(
-			'wpglobus_flag',
-			'wpglobus_language_name'
-		);
-
-		/**
 		 * Build the top-level menu link
 		 */
 		$language            = $current_language;
 		$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
 		$flag_name           = $this->_get_flag_name( $language );
-		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'wpglobus_flag_' . $language;
+		$span_classes_lang   = $this->_get_language_classes( $language );
+		
 		$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 		                       esc_html( $flag_name ) . '</span>';
 		$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
@@ -1642,8 +1634,8 @@ class WPGlobus {
 			 */
 			$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
 			$flag_name           = $this->_get_flag_name( $language );
-			$span_classes_lang   = $span_classes;
-			$span_classes_lang[] = 'wpglobus_flag_' . $language;
+			$span_classes_lang   = $this->_get_language_classes( $language );
+			
 			$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 			                       esc_html( $flag_name ) . '</span>';
 			$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
@@ -1738,14 +1730,8 @@ class WPGlobus {
 			'wpglobus-selector-link'
 		);
 
-		$span_classes = array(
-			'wpglobus_flag',
-			'wpglobus_language_name'
-		);
-
-		$span_classes_lang   = $span_classes;
-		$span_classes_lang[] = 'wpglobus_flag_' . WPGlobus::Config()->language;
-
+		$span_classes_lang   = $this->_get_language_classes( WPGlobus::Config()->language );
+		
 		$current_url = WPGlobus_Utils::current_url();
 
 		$item                   = new stdClass();
@@ -1763,9 +1749,7 @@ class WPGlobus {
 
 
 		foreach ( $extra_languages as $language ) {
-			$span_classes_lang   = $span_classes;
-			$span_classes_lang[] = 'wpglobus_flag_' . $language;
-
+			$span_classes_lang   	= $this->_get_language_classes( $language );	
 			$item                   = new stdClass();
 			$item->ID               = 'wpglobus_menu_switch_' . $language;
 			$item->db_id            = 'wpglobus_menu_switch_' . $language;
@@ -1793,6 +1777,9 @@ class WPGlobus {
 	function _get_flag_name( $language ) {
 
 		switch ( WPGlobus::Config()->show_flag_name ) {
+			case 'full_name' :
+				$flag_name = WPGlobus::Config()->language_name[ $language ];
+				break;
 			case 'name' :
 				$flag_name = WPGlobus::Config()->language_name[ $language ];
 				break;
@@ -1806,6 +1793,36 @@ class WPGlobus {
 		return $flag_name;
 
 	}
+
+	/**
+	 * Get language's classes
+	 * @since 1.2.1
+	 * @param string $language
+	 *
+	 * @return array
+	 */
+	function _get_language_classes( $language = '' ) {
+
+		$class = array(
+			'wpglobus_flag',
+			'wpglobus_language_name'
+		);
+		
+		if ( ! empty( $language ) ) {
+			$class[] = 'wpglobus_flag_' . $language;	
+		}	
+
+		switch ( WPGlobus::Config()->show_flag_name ) {
+			case 'full_name' :
+				/* without flag */
+				$class = array(
+					'wpglobus_language_full_name'
+				);
+			break;
+		}
+		
+		return $class;
+	}	
 
 	/**
 	 * Get navigation menus
