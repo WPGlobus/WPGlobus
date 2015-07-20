@@ -692,8 +692,10 @@ class WPGlobus_Filters {
 	 *
 	 * @return string
 	 */
-	public static function filter__wp_trim_words( /** @noinspection PhpUnusedParameterInspection */
-		$text, $num_words, $more, $original_text ) {
+	public static function filter__wp_trim_words(
+		/** @noinspection PhpUnusedParameterInspection */
+		$text, $num_words, $more, $original_text
+	) {
 
 		$text = WPGlobus_Core::text_filter( $original_text, WPGlobus::Config()->language );
 
