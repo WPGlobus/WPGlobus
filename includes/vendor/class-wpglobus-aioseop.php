@@ -37,19 +37,7 @@ function aioseop_mrt_pccolumn($aioseopcn, $aioseoppi) {
 	<?php }
 }	 
 
-if ( ! function_exists( 'is_plugin_active' ) ) {
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' ); 
-}
-
-if ( is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ) {
-
-	require_once( WP_PLUGIN_DIR . '/all-in-one-seo-pack/aioseop_class.php' );
-
-} elseif ( is_plugin_active( 'all-in-one-seo-pack-pro/all_in_one_seo_pack.php' ) ) { 
-
-	require_once( WP_PLUGIN_DIR . '/all-in-one-seo-pack-pro/aioseop_class.php' );
-
-}
+require_once( AIOSEOP_PLUGIN_DIR . 'aioseop_class.php' );
 
 /**
  * Class WPGlobus_All_in_One_SEO
