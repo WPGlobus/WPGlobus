@@ -234,6 +234,14 @@ add_action( 'activated_plugin', array( 'WPGlobus', 'activated' ) );
 add_action( 'admin_init', array( 'WPGlobus_Filters', 'action__admin_init' ), 0 );
 
 /**
+ * Translate metadata
+ * @since 1.2.1
+ */
+add_action( 'wp', array( 'WPGlobus_Filters', 'set_multilingual_meta_keys' ) );
+add_filter( 'get_post_metadata', array( 'WPGlobus_Filters', 'filter__postmeta' ), 0, 4 );
+
+
+/**
  * ACF filters
  * @todo Move to a separate controller
  */

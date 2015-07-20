@@ -10,6 +10,9 @@
  */
 class WPGlobus_Filters {
 
+	/** @var string[] Meta keys where data can be multilingual  */
+	protected static $multilingual_meta_keys = array();
+
 	/**
 	 * This is the basic filter used to extract the text portion in the current language from a string.
 	 * Applied to the main WP texts, such as post title, content and excerpt.
@@ -743,6 +746,116 @@ class WPGlobus_Filters {
 		if ( WPGlobus_WP::is_plugin_page( 'woothemes-helper' ) ) {
 			add_filter( 'option_blogname', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 		}
+	}
+
+	/**
+	 * Specify meta keys where the meta data can be multilingual
+	 * @example
+	 * <code>
+	 *  add_filter( 'wpglobus_multilingual_meta_keys',
+	 *      function ( $multilingual_meta_keys ) {
+	 *          $multilingual_meta_keys['slides'] = true;
+	 *          return $multilingual_meta_keys;
+	 *      }
+	 *  );
+	 * </code>
+	 * @since 1.2.1
+	 */
+	public static function set_multilingual_meta_keys() {
+		self::$multilingual_meta_keys = apply_filters(
+			'wpglobus_multilingual_meta_keys', self::$multilingual_meta_keys
+		);
+	}
+
+	/**
+	 * Translate meta data
+	 * @see \WPGlobus_Filters::set_multilingual_meta_keys
+	 *
+	 * @param string|array $value     Null is passed. We set the value.
+	 * @param int          $object_id Post ID
+	 * @param string       $meta_key  Passed by the filter. We need only one key.
+	 * @param string|array $single    Meta value, or an array of values.
+	 *
+	 * @return string|array
+	 */
+	public static function filter__postmeta( $value, $object_id, $meta_key, $single ) {
+
+		/**
+		 * @todo Currently, only single values are supported
+		 */
+		if ( ! $single ) {
+			return $value;
+		}
+
+		/**
+		 * Will process only if the `meta_key` is one of the explicitly set.
+		 */
+		if ( ! isset( self::$multilingual_meta_keys[ $meta_key ] ) ) {
+			return $value;
+		}
+
+		/**
+		 * May be called many times on one page. Let's cache.
+		 */
+		static $_cache;
+		if ( isset( $_cache[ $meta_key ][ $object_id ] ) ) {
+			return $_cache[ $meta_key ][ $object_id ];
+		}
+
+		/** @global wpdb $wpdb */
+		global $wpdb;
+		$meta_value = $wpdb->get_var( $wpdb->prepare(
+			"SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = %s AND post_id = %d LIMIT 1;",
+			$meta_key, $object_id ) );
+
+		if ( $meta_value ) {
+
+			if ( is_serialized( $meta_value ) ) {
+				/**
+				 * @todo Refactor this. Write a `filter__array` method.
+				 */
+				$_meta_array = unserialize( $meta_value );
+				foreach ( $_meta_array as &$_value ) {
+					if ( is_array( $_value ) ) {
+						foreach ( $_value as &$_deep_value ) {
+							/**
+							 * @todo Assuming that the array had max. two levels, which is wrong.
+							 */
+							$_deep_value = WPGlobus_Filters::filter__text( $_deep_value );
+						}
+						unset( $_deep_value );
+					} else {
+						$_value = WPGlobus_Filters::filter__text( $_value );
+					}
+				}
+				unset( $_value );
+				$value = $_meta_array;
+
+				/**
+				 * If single is requested, the following code is executed by
+				 * @see get_metadata
+				 * <code>
+				 * if ( $single && is_array( $check ) )
+				 *      return $check[0];
+				 * </code>
+				 * Therefore, we need to return the entire `$value` as the first element of
+				 * an array.
+				 */
+				if ( $single ) {
+					$value = array( $value );
+				}
+
+			} else {
+				$value = WPGlobus_Filters::filter__text( $meta_value );
+			}
+		}
+
+		/**
+		 * Save to cache, even if we did not do anything
+		 */
+		$_cache[ $meta_key ][ $object_id ] = $value;
+
+		return $value;
 	}
 
 } // class
