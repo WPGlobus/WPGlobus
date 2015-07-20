@@ -22,7 +22,7 @@ var WPGlobusAioseop;
 				return;	
 			}
 			// tabs on
-			$('#wpglobus-aioseop-tabs').tabs();
+			$('#wpglobus-aioseop-tabs').removeClass('hidden wpglobus-hidden').tabs();
 			$('#wpglobus-aioseop-tabs').insertBefore($('#aiosp_snippet_wrapper'));
 			$('#aiosp_snippet_wrapper, #aiosp_title_wrapper, #aiosp_description_wrapper').addClass('hidden');
 			api.setCounters();

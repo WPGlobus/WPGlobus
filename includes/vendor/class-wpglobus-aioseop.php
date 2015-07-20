@@ -464,7 +464,7 @@ class WPGlobus_aioseop {
 		$cite_style = ' style="color:#093;font-style:normal;"';
 		?>
 		
-		<div id="wpglobus-aioseop-tabs">
+		<div id="wpglobus-aioseop-tabs" class="hidden wpglobus-hidden">
 			<ul class="wpglobus-aioseop-tabs-list">    <?php
 				$order = 0;
 				foreach ( WPGlobus::Config()->enabled_languages as $language ) { ?>
