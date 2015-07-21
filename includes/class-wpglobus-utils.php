@@ -77,7 +77,7 @@ class WPGlobus_Utils {
 		/**
 		 * The "language" part (optional, not captured, will be thrown away)
 		 */
-		$re_language_part = '(?:\/?(?:' . join( '|', $config->enabled_languages ) . '))?';
+		$re_language_part = '(?:\/?(?:' . implode( '|', $config->enabled_languages ) . '))?';
 
 		/**
 		 * The rest of the URL. Can be:
@@ -134,7 +134,7 @@ class WPGlobus_Utils {
 		 * @example !^/(en|ru|pt)/!
 		 */
 		$re = '!^' . $path_home .
-		      '/(' . join( '|', $config->enabled_languages ) . ')(?:/|$)' . '!';
+		      '/(' . implode( '|', $config->enabled_languages ) . ')(?:/|$)' . '!';
 
 		if ( preg_match( $re, $path, $match ) ) {
 			// Found language information

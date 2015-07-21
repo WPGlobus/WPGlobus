@@ -35,13 +35,16 @@ function aioseop_mrt_pccolumn($aioseopcn, $aioseoppi) {
 			</div>
 		</div>
 	<?php }
-}	 
+}
 
+/** @noinspection PhpIncludeInspection */
 require_once( AIOSEOP_PLUGIN_DIR . 'aioseop_class.php' );
 
 /**
  * Class WPGlobus_All_in_One_SEO
  */
+
+/** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		
 	private $wpg_language = '';
@@ -244,6 +247,8 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 /**
  * Class WPGlobus_aioseop
  */
+
+/** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 class WPGlobus_aioseop {
 	
 	/**
@@ -271,7 +276,7 @@ class WPGlobus_aioseop {
 			//global $WPGlobus;
 			wp_register_script(
 				'wpglobus-aioseop',
-				WPGLobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-aioseop" . WPGLobus::SCRIPT_SUFFIX() . ".js",
+				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-aioseop" . WPGlobus::SCRIPT_SUFFIX() . ".js",
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
@@ -468,7 +473,7 @@ class WPGlobus_aioseop {
 		
 		$aiosp_meta_title_source = get_post_meta( $post->ID, "_aioseop_title", true );
 		$aiosp_meta_title_source = trim( $aiosp_meta_title_source );
-		if ( empty( WPGlobus_Core::text_filter( $aiosp_meta_title_source, WPGlobus::Config()->default_language ) ) ) {
+		if ( ! WPGlobus_Core::text_filter( $aiosp_meta_title_source, WPGlobus::Config()->default_language ) ) {
 			/**
 			 * Reset meta title for default language
 			 */

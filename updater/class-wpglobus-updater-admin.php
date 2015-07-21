@@ -399,7 +399,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				add_settings_error(
 					'',
 					'wpglobus-updater-dea-need-cb',
-					esc_html( 'Please select the checkbox to confirm your intention.', 'wpglobus' )
+					esc_html__( 'Please select the checkbox to confirm your intention.', 'wpglobus' )
 				);
 
 				$input = 'off';
@@ -423,7 +423,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				add_settings_error(
 					'',
 					'wpglobus-updater-dea-inactive',
-					esc_html( 'License / email not set or already deactivated.', 'wpglobus' )
+					esc_html__( 'License / email not set or already deactivated.', 'wpglobus' )
 				);
 				$input = 'off';
 

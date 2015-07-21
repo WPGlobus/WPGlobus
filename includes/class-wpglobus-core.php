@@ -93,6 +93,7 @@ class WPGlobus_Core {
 		/**
 		 * We do not know which delimiter was used, so we'll try both, in a loop
 		 */
+		/** @noinspection LoopWhichDoesNotLoopInspection */
 		foreach ( $possible_delimiters as $delimiters ) {
 
 			/**

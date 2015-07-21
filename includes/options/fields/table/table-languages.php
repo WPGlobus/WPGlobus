@@ -6,7 +6,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /**
  * Class LanguagesTable
  */
-class LanguagesTable extends WP_List_table {
+class LanguagesTable extends WP_List_Table {
 
 	var $data = array();
 

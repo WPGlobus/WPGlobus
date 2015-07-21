@@ -54,7 +54,7 @@ class WPGlobus_Filters {
 
 		if ( $query->is_main_query() || $query->get( 'wpglobus_force_filter__the_posts' ) ) {
 			foreach ( $posts as $post ) {
-				WPGlobus_Core::translate_wp_post( $post, WPGLobus::Config()->language,
+				WPGlobus_Core::translate_wp_post( $post, WPGlobus::Config()->language,
 					WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
 			}
 		}
@@ -101,9 +101,10 @@ class WPGlobus_Filters {
 		 *       Because it might affect the performance, this is a to-do for now.
 		 */
 
-		foreach ( $terms as &$term ) {
-			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
+		foreach ( $terms as &$_term ) {
+			WPGlobus_Core::translate_term( $_term, WPGlobus::Config()->language );
 		}
+		unset( $_term );
 
 		reset( $terms );
 
@@ -133,9 +134,10 @@ class WPGlobus_Filters {
 
 		if ( ! is_wp_error( $terms ) && WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
 
-			foreach ( $terms as &$term ) {
-				WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
+			foreach ( $terms as &$_term ) {
+				WPGlobus_Core::translate_term( $_term, WPGlobus::Config()->language );
 			}
+			unset( $_term );
 
 			reset( $terms );
 		}
@@ -239,9 +241,10 @@ class WPGlobus_Filters {
 			return $terms;
 		}
 
-		foreach ( $terms as &$term ) {
-			WPGlobus_Core::translate_term( $term, WPGlobus::Config()->language );
+		foreach ( $terms as &$_term ) {
+			WPGlobus_Core::translate_term( $_term, WPGlobus::Config()->language );
 		}
+		unset( $_term );
 
 		reset( $terms );
 
@@ -402,9 +405,10 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__get_pages( $pages ) {
 
-		foreach ( $pages as &$page ) {
-			WPGlobus_Core::translate_wp_post( $page, WPGlobus::Config()->language );
+		foreach ( $pages as &$_page ) {
+			WPGlobus_Core::translate_wp_post( $_page, WPGlobus::Config()->language );
 		}
+		unset( $_page );
 
 		reset( $pages );
 

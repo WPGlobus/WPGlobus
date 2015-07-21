@@ -33,8 +33,8 @@ module.exports = function (grunt) {
             main: {
                 files: {
                     'readme.md': 'readme.txt'
-                },
-            },
+                }
+            }
         },
 
         /**

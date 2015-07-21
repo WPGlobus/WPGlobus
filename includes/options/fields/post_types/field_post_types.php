@@ -6,7 +6,7 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 	 * Main ReduxFramework_table class
 	 */
 	class ReduxFramework_post_types {
-		
+
 		/**
 		 * Field Constructor.
 		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
@@ -14,8 +14,6 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 		 * @param array  $field
 		 * @param string $value
 		 * @param        $parent
-		 *
-		 * @return \ReduxFramework_table
 		 */
 		function __construct( $field = array(), $value = '', $parent ) {
 

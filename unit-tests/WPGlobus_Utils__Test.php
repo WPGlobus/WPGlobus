@@ -43,8 +43,8 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( 'no-such-function' ) );
 		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( null ) );
 		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( 3.14 ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( new StdClass ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( array( 'a', 278, new StdClass ) ) );
+		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( new stdClass ) );
+		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( array( 'a', 278, new stdClass ) ) );
 
 		/**
 		 * One level deeper

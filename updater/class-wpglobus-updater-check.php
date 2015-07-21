@@ -231,7 +231,7 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 		 *
 		 * @param  bool   $result
 		 * @param  string $action Unused
-		 * @param  stdClass  $args
+		 * @param  stdClass|array  $args
 		 *
 		 * @return object|bool $response or boolean false
 		 */

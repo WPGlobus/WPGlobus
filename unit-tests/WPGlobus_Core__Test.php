@@ -175,7 +175,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		/**
 		 * Term as an object
 		 */
-		$term_object = new StdClass;
+		$term_object = new stdClass;
 
 		$term_object->name        = '{:en}term name EN{:}{:ru}term name RU{:}';
 		$term_object->description = '{:en}term description EN{:}{:ru}term description RU{:}';

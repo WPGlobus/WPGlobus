@@ -81,11 +81,11 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		$pagenow = 'unit-test-page';
 		$this->assertTrue( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
 		$this->assertTrue( WPGlobus_WP::is_pagenow( array( 'unit-test-page', 'another-page' ) ) );
-		$this->assertTrue( WPGlobus_WP::is_pagenow( array( new StdClass, 'unit-test-page' ) ) );
+		$this->assertTrue( WPGlobus_WP::is_pagenow( array( new stdClass, 'unit-test-page' ) ) );
 		$this->assertFalse( WPGlobus_WP::is_pagenow( 'not-unit-test-page' ) );
 		$this->assertFalse( WPGlobus_WP::is_pagenow( array( 'not-unit-test-page', 'another-page' ) ) );
 		$this->assertFalse( WPGlobus_WP::is_pagenow( 3.14 ) );
-		$this->assertFalse( WPGlobus_WP::is_pagenow( new StdClass ) );
+		$this->assertFalse( WPGlobus_WP::is_pagenow( new stdClass ) );
 	}
 
 	/**
@@ -100,11 +100,11 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		$plugin_page = 'unit-test-page';
 		$this->assertTrue( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
 		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( 'unit-test-page', 'another-page' ) ) );
-		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( new StdClass, 'unit-test-page' ) ) );
+		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( new stdClass, 'unit-test-page' ) ) );
 		$this->assertFalse( WPGlobus_WP::is_plugin_page( 'not-unit-test-page' ) );
 		$this->assertFalse( WPGlobus_WP::is_plugin_page( array( 'not-unit-test-page', 'another-page' ) ) );
 		$this->assertFalse( WPGlobus_WP::is_plugin_page( 3.14 ) );
-		$this->assertFalse( WPGlobus_WP::is_plugin_page( new StdClass ) );
+		$this->assertFalse( WPGlobus_WP::is_plugin_page( new stdClass ) );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		$this->assertFalse( WPGlobus_WP::is_http_post_action( '' ) );
 		$this->assertFalse( WPGlobus_WP::is_http_post_action( null ) );
 		$this->assertFalse( WPGlobus_WP::is_http_post_action( 3.14 ) );
-		$bad_boy = new StdClass;
+		$bad_boy = new stdClass;
 		$this->assertFalse( WPGlobus_WP::is_http_post_action( $bad_boy ) );
 
 		$_POST['action'] = 'not-unit-test-action';
@@ -140,7 +140,7 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		$this->assertFalse( WPGlobus_WP::is_http_get_action( '' ) );
 		$this->assertFalse( WPGlobus_WP::is_http_get_action( null ) );
 		$this->assertFalse( WPGlobus_WP::is_http_get_action( 3.14 ) );
-		$bad_boy = new StdClass;
+		$bad_boy = new stdClass;
 		$this->assertFalse( WPGlobus_WP::is_http_get_action( $bad_boy ) );
 
 		$_GET['action'] = 'not-unit-test-action';

@@ -201,7 +201,7 @@ class WPGlobus_Options {
 			$navigation_menu_placeholder = __( 'Select navigation menu', 'wpglobus' );
 		}
 
-		$desc_enabled_languages = join( '', array(
+		$desc_enabled_languages = implode( '', array(
 			'<strong>' . __( 'Instructions:', 'wpglobus' ) . '</strong>',
 			'<ul style="list-style: disc; list-style-position: inside;">',
 			'<li>' . sprintf( __( 'Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons.', 'wpglobus' ), '<i class="el el-move icon-large"></i>' ) . '</li>',
