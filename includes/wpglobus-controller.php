@@ -254,7 +254,17 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
  * All In One SEO Pack filters
  */
 if ( defined( 'AIOSEOP_VERSION' ) ) {
-	if ( ! is_admin() ) {
+	if ( is_admin() ) {
+		
+		/**
+		 * Filter for @see localization
+		 * @scope admin
+		 * @since 1.2.1
+		 */		
+		add_filter( 'localization', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+		
+	} else {
+		
 		require_once 'vendor/class-wpglobus-aioseop.php';
 
 		/**
@@ -277,6 +287,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 		 * @since 1.0.8
 		 */
 		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__title' ), 0 );
+	
 	}
 }
 
