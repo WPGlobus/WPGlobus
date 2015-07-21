@@ -172,6 +172,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			'http://example.com',
 			'https://www.example.com',
 			'http://www.example.com/my-site/blog',
+			'http://dots.here.ac.uk/and.here/wordpress',
 		);
 
 		foreach ( $homes as $home ) {
