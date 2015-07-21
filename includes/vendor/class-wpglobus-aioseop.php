@@ -64,30 +64,41 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		}	
 		
 		global $post; 
+		
+		$title = $text;
 
-		$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
-		$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );		
-	
-		if ( false !== strpos($text, $default_title) ) {
-			/**
-			 * Because we have not translation of SEO title for current language need to autogenerate it 
-			 */					
-			if ( false === strpos( $text, '|' ) ) {
-	
-				$title = $post->post_title;
+		if ( is_singular() ) {
+		
+			$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
+			if ( empty( $title_source ) ) { 
+				$default_title = null;
+			} else {
+				$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );	
+			}	
+		
+			if ( $default_title != null && false !== strpos($text, $default_title) ) {
+
+				/**
+				 * Because we have not translation of SEO title for current language need to autogenerate it 
+				 */					
+				if ( false === strpos( $text, '|' ) ) {
+		
+					$title = $post->post_title;
+					
+				} else {
+					
+					$title_arr = explode('|', $text);
+					$title = $post->post_title;
+					$title .= ' |';
+					$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
+						
+				}
 				
 			} else {
-				
-				$title_arr = explode('|', $text);
-				$title = $post->post_title;
-				$title .= ' |';
-				$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
-					
-			}
-			
-		} else {
-			$title = $text;
-		}	
+				$title = $text;
+			}	
+		
+		}
 		
 		return $title;
 	
