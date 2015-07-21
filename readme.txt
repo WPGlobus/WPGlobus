@@ -88,8 +88,14 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 == Screenshots ==
 
-1. Admin interface: languages setup.
-2. Front: language switcher in the twentyfourteen theme menu.
+1. Welcome screen.
+2. Settings panel.
+3. Languages setup.
+4. Attaching language switcher to a menu.
+5. Editing post in multiple languages.
+6. Multilingual WP SEO and Featured Images.
+7. Language Switcher widget and Multilingual Editor dialog.
+8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).
 
 == Upgrade Notice ==
 
