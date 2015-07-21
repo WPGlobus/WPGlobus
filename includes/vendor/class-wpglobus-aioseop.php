@@ -476,6 +476,12 @@ class WPGlobus_aioseop {
 		$aiosp_meta_description_source  = $aiosp_post_description = get_post_meta( $post->ID, "_aioseop_description", true );
 		$aiosp_meta_description_source  = trim( $aiosp_meta_description_source );
 	
+		/** 
+		 * Get keywords /// title in current language ( WPGlobus::Config()->language )
+		 */
+		$aiosp_keywords_source = get_post_meta( $post->ID, "_aioseop_keywords", true );
+		
+	
 		$header_style = ' style="padding:8px 0;"';
 		$link_style = ' style="color:#12c;cursor: pointer;text-decoration: -moz-use-text-color none solid;font-size:16px;"';
 		$cite_style = ' style="color:#093;font-style:normal;"';
@@ -611,7 +617,7 @@ class WPGlobus_aioseop {
 								$data['args']['value']   	= $aiosp_description;
 								
 							} else if ( 'aiosp_keywords' == $name ) {
-								continue;
+
 								$placeholders = array();
 								foreach( $keywords as $keyword ) {
 									/**
@@ -625,6 +631,7 @@ class WPGlobus_aioseop {
 								$data['args']['data']  = ' data-language="' . $language . '" ';
 								$data['args']['name']  = $data['args']['name'] . '_' . $language;
 								$data['args']['data']  = ' data-language="' . $language . '" ';
+								$data['args']['value'] = WPGlobus_Core::text_filter( $aiosp_keywords_source, $language, WPGlobus::RETURN_EMPTY );
 
 							}
 							
