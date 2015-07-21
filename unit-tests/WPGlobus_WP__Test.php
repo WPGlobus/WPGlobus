@@ -18,9 +18,9 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 			define( 'DOING_AJAX', true );
 		}
 		if ( DOING_AJAX ) {
-			$this->assertTrue( WPGlobus_WP::is_doing_ajax() );
+			self::assertTrue( WPGlobus_WP::is_doing_ajax() );
 		} else {
-			$this->assertFalse( WPGlobus_WP::is_doing_ajax() );
+			self::assertFalse( WPGlobus_WP::is_doing_ajax() );
 		}
 	}
 
@@ -35,8 +35,7 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		/**
 		 * POST
 		 */
-		unset( $_GET['action'] );
-		unset( $_POST['action'] );
+		unset( $_GET['action'], $_POST['action'] );
 		foreach (
 			array(
 				'inline-save',
@@ -45,14 +44,13 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 			as $action
 		) {
 			$_POST['action'] = $action;
-			$this->assertTrue( WPGlobus_WP::is_admin_doing_ajax(), $action );
+			self::assertTrue( WPGlobus_WP::is_admin_doing_ajax(), $action );
 		}
 
 		/**
 		 * GET
 		 */
-		unset( $_GET['action'] );
-		unset( $_POST['action'] );
+		unset( $_GET['action'], $_POST['action'] );
 		foreach (
 			array(
 				'ajax-tag-search',
@@ -60,12 +58,11 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 			as $action
 		) {
 			$_GET['action'] = $action;
-			$this->assertTrue( WPGlobus_WP::is_admin_doing_ajax(), $action );
+			self::assertTrue( WPGlobus_WP::is_admin_doing_ajax(), $action );
 		}
 
 		/** Cleanup */
-		unset( $_GET['action'] );
-		unset( $_POST['action'] );
+		unset( $_GET['action'], $_POST['action'] );
 
 	}
 
@@ -75,17 +72,18 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_is_pagenow() {
 		// False because global is not initialized
-		$this->assertFalse( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
+		self::assertFalse( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
 
 		global $pagenow;
+		/** @noinspection OnlyWritesOnParameterInspection */
 		$pagenow = 'unit-test-page';
-		$this->assertTrue( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
-		$this->assertTrue( WPGlobus_WP::is_pagenow( array( 'unit-test-page', 'another-page' ) ) );
-		$this->assertTrue( WPGlobus_WP::is_pagenow( array( new stdClass, 'unit-test-page' ) ) );
-		$this->assertFalse( WPGlobus_WP::is_pagenow( 'not-unit-test-page' ) );
-		$this->assertFalse( WPGlobus_WP::is_pagenow( array( 'not-unit-test-page', 'another-page' ) ) );
-		$this->assertFalse( WPGlobus_WP::is_pagenow( 3.14 ) );
-		$this->assertFalse( WPGlobus_WP::is_pagenow( new stdClass ) );
+		self::assertTrue( WPGlobus_WP::is_pagenow( 'unit-test-page' ) );
+		self::assertTrue( WPGlobus_WP::is_pagenow( array( 'unit-test-page', 'another-page' ) ) );
+		self::assertTrue( WPGlobus_WP::is_pagenow( array( new stdClass, 'unit-test-page' ) ) );
+		self::assertFalse( WPGlobus_WP::is_pagenow( 'not-unit-test-page' ) );
+		self::assertFalse( WPGlobus_WP::is_pagenow( array( 'not-unit-test-page', 'another-page' ) ) );
+		self::assertFalse( WPGlobus_WP::is_pagenow( 3.14 ) );
+		self::assertFalse( WPGlobus_WP::is_pagenow( new stdClass ) );
 	}
 
 	/**
@@ -94,17 +92,18 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_is_plugin_page() {
 		// False because global is not initialized
-		$this->assertFalse( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
+		self::assertFalse( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
 
 		global $plugin_page;
+		/** @noinspection OnlyWritesOnParameterInspection */
 		$plugin_page = 'unit-test-page';
-		$this->assertTrue( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
-		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( 'unit-test-page', 'another-page' ) ) );
-		$this->assertTrue( WPGlobus_WP::is_plugin_page( array( new stdClass, 'unit-test-page' ) ) );
-		$this->assertFalse( WPGlobus_WP::is_plugin_page( 'not-unit-test-page' ) );
-		$this->assertFalse( WPGlobus_WP::is_plugin_page( array( 'not-unit-test-page', 'another-page' ) ) );
-		$this->assertFalse( WPGlobus_WP::is_plugin_page( 3.14 ) );
-		$this->assertFalse( WPGlobus_WP::is_plugin_page( new stdClass ) );
+		self::assertTrue( WPGlobus_WP::is_plugin_page( 'unit-test-page' ) );
+		self::assertTrue( WPGlobus_WP::is_plugin_page( array( 'unit-test-page', 'another-page' ) ) );
+		self::assertTrue( WPGlobus_WP::is_plugin_page( array( new stdClass, 'unit-test-page' ) ) );
+		self::assertFalse( WPGlobus_WP::is_plugin_page( 'not-unit-test-page' ) );
+		self::assertFalse( WPGlobus_WP::is_plugin_page( array( 'not-unit-test-page', 'another-page' ) ) );
+		self::assertFalse( WPGlobus_WP::is_plugin_page( 3.14 ) );
+		self::assertFalse( WPGlobus_WP::is_plugin_page( new stdClass ) );
 	}
 
 	/**
@@ -112,22 +111,22 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_is_http_post_action() {
 		$_POST['action'] = 'unit-test-action';
-		$this->assertTrue( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( '' ) );
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( null ) );
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( 3.14 ) );
+		self::assertTrue( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( '' ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( null ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( 3.14 ) );
 		$bad_boy = new stdClass;
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( $bad_boy ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( $bad_boy ) );
 
 		$_POST['action'] = 'not-unit-test-action';
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
 		unset( $_POST['action'] );
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
 		$_POST['action'] = 'unit-test-action';
-		$this->assertTrue( WPGlobus_WP::is_http_post_action( array( 'unit-test-action', 'not-unit-test-action' ) ) );
+		self::assertTrue( WPGlobus_WP::is_http_post_action( array( 'unit-test-action', 'not-unit-test-action' ) ) );
 
 		$_POST['action'] = array( 'this-should-not-be-an-array' );
-		$this->assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_post_action( 'unit-test-action' ) );
 
 	}
 
@@ -136,22 +135,22 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_is_http_get_action() {
 		$_GET['action'] = 'unit-test-action';
-		$this->assertTrue( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( '' ) );
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( null ) );
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( 3.14 ) );
+		self::assertTrue( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( '' ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( null ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( 3.14 ) );
 		$bad_boy = new stdClass;
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( $bad_boy ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( $bad_boy ) );
 
 		$_GET['action'] = 'not-unit-test-action';
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
 		unset( $_GET['action'] );
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
 		$_GET['action'] = 'unit-test-action';
-		$this->assertTrue( WPGlobus_WP::is_http_get_action( array( 'unit-test-action', 'not-unit-test-action' ) ) );
+		self::assertTrue( WPGlobus_WP::is_http_get_action( array( 'unit-test-action', 'not-unit-test-action' ) ) );
 
 		$_GET['action'] = array( 'this-should-not-be-an-array' );
-		$this->assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
+		self::assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
 
 	}
 

@@ -13,34 +13,34 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_text_filter() {
 
-		$this->assertEquals( WPGlobus::RETURN_EMPTY, 'empty', 'WPGlobus::RETURN_EMPTY' );
+		self::assertEquals( WPGlobus::RETURN_EMPTY, 'empty', 'WPGlobus::RETURN_EMPTY' );
 
-		$this->assertEmpty( WPGlobus_Core::text_filter( '' ), 'Empty string' );
+		self::assertEmpty( WPGlobus_Core::text_filter( '' ), 'Empty string' );
 
 		$proper = '{:en}EN{:}{:ru}RU{:}';
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $proper ) );
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $proper, 'en' ) );
-		$this->assertEquals( 'RU', WPGlobus_Core::text_filter( $proper, 'ru' ) );
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $proper, 'xx' ), 'Non-existing language' );
-		$this->assertEmpty( WPGlobus_Core::text_filter( $proper, 'xx', WPGlobus::RETURN_EMPTY ), 'Non-existing language, return empty' );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $proper ) );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $proper, 'en' ) );
+		self::assertEquals( 'RU', WPGlobus_Core::text_filter( $proper, 'ru' ) );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $proper, 'xx' ), 'Non-existing language' );
+		self::assertEmpty( WPGlobus_Core::text_filter( $proper, 'xx', WPGlobus::RETURN_EMPTY ), 'Non-existing language, return empty' );
 
 		$qt_tags = '[:en]EN[:ru]RU';
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_tags ), 'QT tags' );
-		$this->assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_tags, 'ru' ), 'QT tags' );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_tags ), 'QT tags' );
+		self::assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_tags, 'ru' ), 'QT tags' );
 
 		$qt_comments = '<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->';
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_comments ), 'QT comments' );
-		$this->assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_comments, 'ru' ), 'QT comments' );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_comments ), 'QT comments' );
+		self::assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_comments, 'ru' ), 'QT comments' );
 
 		$no_tags = 'EN';
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags ), 'No tags' );
-		$this->assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags, null, WPGlobus::RETURN_EMPTY ), 'No tags, return empty' );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags ), 'No tags' );
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags, null, WPGlobus::RETURN_EMPTY ), 'No tags, return empty' );
 
 		$no_default = '{:xx}XX{:}{:ru}RU{:}';
-		$this->assertEmpty( WPGlobus_Core::text_filter( $no_default ) );
+		self::assertEmpty( WPGlobus_Core::text_filter( $no_default ) );
 
 		$not_a_string = 3.14;
-		$this->assertEquals( 3.14, WPGlobus_Core::text_filter( $not_a_string ), 'Not a string' );
+		self::assertEquals( 3.14, WPGlobus_Core::text_filter( $not_a_string ), 'Not a string' );
 
 	}
 
@@ -61,7 +61,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		);
 
 		foreach ( $positives as $_ ) {
-			$this->assertTrue( WPGlobus_Core::has_translations( $_ ), 'Has translation: ' . $_ );
+			self::assertTrue( WPGlobus_Core::has_translations( $_ ), 'Has translation: ' . $_ );
 		}
 
 		/** @var string[] $negatives */
@@ -76,7 +76,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		);
 
 		foreach ( $negatives as $_ ) {
-			$this->assertFalse( WPGlobus_Core::has_translations( $_ ), 'Has no translation: ' . $_ );
+			self::assertFalse( WPGlobus_Core::has_translations( $_ ), 'Has no translation: ' . $_ );
 		}
 
 	}
@@ -111,13 +111,13 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 
 		WPGlobus_Core::translate_wp_post( $post );
 
-		$this->assertEquals( 'post_title EN', $post->post_title, 'post_title' );
-		$this->assertEquals( 'post_content EN', $post->post_content, 'post_content' );
-		$this->assertEquals( 'post_excerpt EN', $post->post_excerpt, 'post_excerpt' );
+		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );
+		self::assertEquals( 'post_content EN', $post->post_content, 'post_content' );
+		self::assertEquals( 'post_excerpt EN', $post->post_excerpt, 'post_excerpt' );
 		/** @noinspection PhpUndefinedFieldInspection */
-		$this->assertEquals( 'title EN', $post->title, 'title' );
+		self::assertEquals( 'title EN', $post->title, 'title' );
 		/** @noinspection PhpUndefinedFieldInspection */
-		$this->assertEquals( 'attr_title EN', $post->attr_title, 'attr_title' );
+		self::assertEquals( 'attr_title EN', $post->attr_title, 'attr_title' );
 
 		unset( $post );
 
@@ -128,7 +128,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$post             = $this->getMock( 'WP_Post' );
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'ru' );
-		$this->assertEquals( 'post_title RU', $post->post_title, 'post_title' );
+		self::assertEquals( 'post_title RU', $post->post_title, 'post_title' );
 		unset( $post );
 
 		/**
@@ -138,8 +138,8 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		$post->post_content = '{:en}post_content EN{:}{:xx}post_content XX{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'xx' );
-		$this->assertEquals( 'post_title EN', $post->post_title, 'post_title' );
-		$this->assertEquals( 'post_content XX', $post->post_content, 'post_content' );
+		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );
+		self::assertEquals( 'post_content XX', $post->post_content, 'post_content' );
 		unset( $post );
 
 		/**
@@ -149,9 +149,9 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$post             = $this->getMock( 'WP_Post' );
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'en' );
-		$this->assertEquals( 'post_title EN', $post->post_title, 'post_title' );
+		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );
 		WPGlobus_Core::translate_wp_post( $post, 'ru' );
-		$this->assertEquals( 'post_title EN', $post->post_title, 'post_title' );
+		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );
 		unset( $post );
 
 	}
@@ -166,11 +166,11 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		 */
 		$term = '{:en}term EN{:}{:ru}term RU{:}';
 		WPGlobus_Core::translate_term( $term, 'en' );
-		$this->assertEquals( 'term EN', $term, 'term' );
+		self::assertEquals( 'term EN', $term, 'term' );
 
 		$term = '{:en}term EN{:}{:ru}term RU{:}';
 		WPGlobus_Core::translate_term( $term, 'ru' );
-		$this->assertEquals( 'term RU', $term, 'term' );
+		self::assertEquals( 'term RU', $term, 'term' );
 
 		/**
 		 * Term as an object
@@ -180,14 +180,14 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$term_object->name        = '{:en}term name EN{:}{:ru}term name RU{:}';
 		$term_object->description = '{:en}term description EN{:}{:ru}term description RU{:}';
 		WPGlobus_Core::translate_term( $term_object, 'en' );
-		$this->assertEquals( 'term name EN', $term_object->name, '$term_object->name' );
-		$this->assertEquals( 'term description EN', $term_object->description, '$term_object->description' );
+		self::assertEquals( 'term name EN', $term_object->name, '$term_object->name' );
+		self::assertEquals( 'term description EN', $term_object->description, '$term_object->description' );
 
 		$term_object->name        = '{:en}term name EN{:}{:ru}term name RU{:}';
 		$term_object->description = '{:en}term description EN{:}{:ru}term description RU{:}';
 		WPGlobus_Core::translate_term( $term_object, 'ru' );
-		$this->assertEquals( 'term name RU', $term_object->name, '$term_object->name' );
-		$this->assertEquals( 'term description RU', $term_object->description, '$term_object->description' );
+		self::assertEquals( 'term name RU', $term_object->name, '$term_object->name' );
+		self::assertEquals( 'term description RU', $term_object->description, '$term_object->description' );
 
 	}
 

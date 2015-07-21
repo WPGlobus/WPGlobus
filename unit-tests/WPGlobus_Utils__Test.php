@@ -28,28 +28,28 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 	/**
 	 * @see test_is_function_in_backtrace
 	 */
-	private function _unit_test_for_backtrace() {
-		$this->assertTrue( WPGlobus_Utils::is_function_in_backtrace( __FUNCTION__ ) );
+	private static function _unit_test_for_backtrace() {
+		self::assertTrue( WPGlobus_Utils::is_function_in_backtrace( __FUNCTION__ ) );
 	}
 
 	/**
 	 * @covers WPGlobus_Utils::is_function_in_backtrace
 	 */
-	public function test_is_function_in_backtrace() {
+	public static function test_is_function_in_backtrace() {
 
-		$this->assertTrue( WPGlobus_Utils::is_function_in_backtrace( __FUNCTION__ ) );
+		self::assertTrue( WPGlobus_Utils::is_function_in_backtrace( __FUNCTION__ ) );
 
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( __FUNCTION__ . 'trailer' ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( 'no-such-function' ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( null ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( 3.14 ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( new stdClass ) );
-		$this->assertFalse( WPGlobus_Utils::is_function_in_backtrace( array( 'a', 278, new stdClass ) ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( __FUNCTION__ . 'trailer' ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( 'no-such-function' ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( null ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( 3.14 ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( new stdClass ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( array( 'a', 278, new stdClass ) ) );
 
 		/**
 		 * One level deeper
 		 */
-		$this->_unit_test_for_backtrace();
+		self::_unit_test_for_backtrace();
 	}
 
 	/**
@@ -182,7 +182,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 			foreach ( $good as $_ ) {
 				list( $url, $localized_url, $language ) = $_;
-				$this->assertEquals( $home_url . $localized_url,
+				self::assertEquals( $home_url . $localized_url,
 					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ),
 					"In language={$language}, $url becomes $localized_url"
 				);
@@ -190,7 +190,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 			foreach ( $bad as $_ ) {
 				list( $url, $localized_url, $language ) = $_;
-				$this->assertNotEquals( $home_url . $localized_url,
+				self::assertNotEquals( $home_url . $localized_url,
 					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ),
 					"In language={$language}, $url MUST NOT become $localized_url"
 				);
@@ -202,28 +202,28 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 */
 
 		self::$option_home = 'http://www.example.com';
-		$this->assertEquals( 'http://www.example.com/ru/page/',
+		self::assertEquals( 'http://www.example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://www.example.com/page/', 'ru', $config ) );
-		$this->assertEquals( 'http://example.com/ru/page/',
+		self::assertEquals( 'http://example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://example.com/page/', 'ru', $config ) );
 
 		self::$option_home = 'http://example.com';
-		$this->assertEquals( 'http://www.example.com/ru/page/',
+		self::assertEquals( 'http://www.example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://www.example.com/page/', 'ru', $config ) );
-		$this->assertEquals( 'http://example.com/ru/page/',
+		self::assertEquals( 'http://example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://example.com/page/', 'ru', $config ) );
 
 		self::$option_home = 'https://example.com';
-		$this->assertEquals( 'http://www.example.com/ru/page/',
+		self::assertEquals( 'http://www.example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://www.example.com/page/', 'ru', $config ) );
-		$this->assertEquals( 'http://example.com/ru/page/',
+		self::assertEquals( 'http://example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://example.com/page/', 'ru', $config ) );
 	}
 
 	/**
 	 * @covers WPGlobus_Utils::extract_language_from_url
 	 */
-	function test_extract_language_from_url() {
+	public function test_extract_language_from_url() {
 
 		/**
 		 * Mock object sent as a parameter, because we do now have access to the actual config.
@@ -252,63 +252,63 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 */
 		$config->hide_default_language = true;
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( 'http://example.com/ru/page/', $config ) );
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( 'https://example.com/ru/page/', $config ) );
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( 'https://develop.example.com/ru/page/', $config ) );
 
-		$this->assertEquals( 'pt',
+		self::assertEquals( 'pt',
 			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/pt/page/', $config ) );
 
 		// Unknown language
-		$this->assertEquals( '',
+		self::assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/ar/page/', $config ) );
 
 		// Default language or no language
-		$this->assertEquals( '',
+		self::assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/page/', $config ) );
 
 		// Default language, but specified in the URL for some reason - returns it
-		$this->assertEquals( 'en',
+		self::assertEquals( 'en',
 			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/en/page/', $config ) );
 
 		// Wrong position
-		$this->assertEquals( '',
+		self::assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/page/ru/something', $config ) );
 
 		// TODO Not sure about this. PHP manual says it should not work.
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( '/ru/something', $config ) );
 
-		$this->assertEquals( '',
+		self::assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( 3.14, $config ) );
 
-		$this->assertEquals( '',
+		self::assertEquals( '',
 			WPGlobus_Utils::extract_language_from_url( array( 1, 'pi' ), $config ) );
 
 		// No trailing slash
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( '/ru', $config ) );
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( '/ru?a=b', $config ) );
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( '/ru/?a=b', $config ) );
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( '/ru/#hash', $config ) );
 
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( '/ru#hash', $config ) );
 
 		// Site in subfolder
 		self::$option_home = 'http://www.example.com/subfolder';
-		$this->assertEquals( 'ru',
+		self::assertEquals( 'ru',
 			WPGlobus_Utils::extract_language_from_url( 'http://www.example.com/subfolder/ru/something', $config ) );
 
 	}
@@ -316,7 +316,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 	/**
 	 * @covers WPGlobus_Utils::domain_tld
 	 */
-	function test_domain_tld() {
+	public static function test_domain_tld() {
 
 		$data = array(
 			'http://www.example.com'               => 'example.com',
@@ -330,7 +330,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		);
 
 		foreach ( $data as $url => $domain_tld ) {
-			$this->assertEquals( $domain_tld, WPGlobus_Utils::domain_tld( $url ) );
+			self::assertEquals( $domain_tld, WPGlobus_Utils::domain_tld( $url ) );
 		}
 
 	}
@@ -338,7 +338,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 	/**
 	 * @covers WPGlobus_Utils::build_multilingual_string
 	 */
-	function test_build_multilingual_string() {
+	public static function test_build_multilingual_string() {
 		$translations = array(
 			'en' => 'EN',
 			'ru' => 'RU',
@@ -346,7 +346,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			'fr' => 'FR',
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'{:en}EN{:}{:ru}RU{:}{:de}DE{:}{:fr}FR{:}',
 			WPGlobus_Utils::build_multilingual_string( $translations )
 		);
@@ -356,16 +356,16 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 	 * "Stub" test for coverage.
 	 * @covers WPGlobus_Utils::current_url
 	 */
-	function test_current_url() {
+	public static function test_current_url() {
 		$_SERVER['HTTP_HOST']   = 'www.example.com';
 		$_SERVER['REQUEST_URI'] = '/folder/file?var=value';
-		$this->assertEquals( 'http://www.example.com/folder/file?var=value', WPGlobus_Utils::current_url() );
+		self::assertEquals( 'http://www.example.com/folder/file?var=value', WPGlobus_Utils::current_url() );
 	}
 
 	/**
 	 * @covers \WPGlobus_Utils::hreflangs
 	 */
-	function test_hreflangs() {
+	public function test_hreflangs() {
 
 		/**
 		 * Mock object sent as a parameter, because we do now have access to the actual config.
@@ -408,9 +408,9 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		$hreflangs = WPGlobus_Utils::hreflangs( $config );
 
-		$this->assertEquals( '<link rel="alternate" hreflang="ru-RU" href="http://www.example.com/folder/file?var=value"/>', $hreflangs['ru'] );
+		self::assertEquals( '<link rel="alternate" hreflang="ru-RU" href="http://www.example.com/folder/file?var=value"/>', $hreflangs['ru'] );
 
-		$this->assertEquals( '<link rel="alternate" hreflang="pt-PT" href="http://www.example.com/pt/folder/file?var=value"/>', $hreflangs['pt'] );
+		self::assertEquals( '<link rel="alternate" hreflang="pt-PT" href="http://www.example.com/pt/folder/file?var=value"/>', $hreflangs['pt'] );
 
 	}
 
