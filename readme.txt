@@ -101,6 +101,7 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Correct handling of WP SEO entries containing special HTML characters.
+	* Correct handling of title,description and keywords for All In One SEO Pack 2.2.7
 	* Incorrect behavior of the menus created from custom type posts.
 	* Multilingual strings in Customizer (site name and description).
 * ADDED:
