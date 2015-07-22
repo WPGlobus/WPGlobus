@@ -13,7 +13,7 @@ var wpglobus_wpseo = function () {
 		if (typeof str === 'undefined') {
 			return;
 		}
-		if ( typeof replacedVars === 'undefined' ) {
+		if ( typeof replacedVars === 'undefined' && jQuery('#title').size() == 0 ) {
             // WP SEO doesn't work properly when post title is disabled
 			return str;	
 		}	
