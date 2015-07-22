@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
 
-Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with WP SEO by Yoast, All in One SEO Pack and ACF!
+Multilingual / Globalization: URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!
 
 == Description ==
 
@@ -18,10 +18,10 @@ The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 
 * Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
 	* manually translate Posts and Pages to multiple languages using an easy tabbed interface;
-	* translate major taxonomies: categories and tags;
+	* translate major taxonomies (categories and tags);
 	* translate menus and widgets;
 * Enable multilingual SEO features of:
-	* WP SEO by Yoast;
+	* Yoast SEO;
 	* All in One SEO Pack by Michael Torbert;
 	* WooCommerce (paid add-on).
 * Translate Custom Fields:
@@ -93,7 +93,7 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 3. Languages setup.
 4. Attaching language switcher to a menu.
 5. Editing post in multiple languages.
-6. Multilingual WP SEO and Featured Images.
+6. Multilingual Yoast SEO and Featured Images.
 7. Language Switcher widget and Multilingual Editor dialog.
 8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).
 
@@ -103,11 +103,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
-= 1.2.1 (soon) =
+= 1.2.1 =
 
 * FIXED:
-	* Correct handling of WP SEO entries containing special HTML characters.
-	* Correct handling of title,description and keywords for All In One SEO Pack 2.2.7
+	* Correct handling of Yoast SEO entries containing special HTML characters.
+	* Correct handling of title, description and keywords for All In One SEO Pack 2.2.7
 	* Incorrect behavior of the menus created from custom type posts.
 	* Multilingual strings in Customizer (site name and description).
 * ADDED:
@@ -115,7 +115,7 @@ No known backward incompatibility issues.
 	* Partial support of the All-in-one SEO Pack-PRO.
 	* Added full name language without flag for Language Selector Mode option.
 * COMPATIBILITY:
-	* Yoast SEO 2.3 ( former Wordpress SEO )
+	* Yoast SEO 2.3 ( former WordPress SEO )
 	
 = 1.2.0 =
 
@@ -142,17 +142,6 @@ No known backward incompatibility issues.
 * FIXED:
 	* Wrong behavior when the main language is not English. Thanks to [Klaus Feurich](https://wordpress.org/support/profile/lunymarmusic) for reporting the bug.
 	* Restored default path to ReduxCore because of silly side effects.
-
-= 1.1.1 =
-
-* ADDED:
-	* Handling attribute "maxlength" in custom fields for all languages.
-	* Support of the WP-SEO 2.2.
-	* Compatibility with Redux Framework 3.5.
-* FIXED:
-	* Language tabs in admin editor styled according to the WP standards.
-	* Correct creation of the post title and description for extra languages in AIOSEOP.
-	* Enabled translation of the WPGlobus option panel.
 
 = Earlier versions =
 

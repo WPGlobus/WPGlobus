@@ -8,7 +8,7 @@
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
 
-**Multilingual / Globalization:** URL-based multilanguage; easy translation interface, compatible with WP SEO by Yoast, All in One SEO Pack and ACF!  
+**Multilingual / Globalization:** URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!  
 
 ## Description ##
 
@@ -18,10 +18,10 @@ The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 
 * Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
 	* manually translate Posts and Pages to multiple languages using an easy tabbed interface;
-**	* translate major taxonomies:** categories and tags;  
+	* translate major taxonomies (categories and tags);
 	* translate menus and widgets;
 * Enable multilingual SEO features of:
-	* WP SEO by Yoast;
+	* Yoast SEO;
 	* All in One SEO Pack by Michael Torbert;
 	* WooCommerce (paid add-on).
 * Translate Custom Fields:
@@ -88,8 +88,30 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 ## Screenshots ##
 
-**1. Admin interface:** languages setup.  
-**2. Front:** language switcher in the twentyfourteen theme menu.  
+### 1. Welcome screen. ###
+![Welcome screen.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-1.png)
+
+### 2. Settings panel. ###
+![Settings panel.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-2.png)
+
+### 3. Languages setup. ###
+![Languages setup.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-3.png)
+
+### 4. Attaching language switcher to a menu. ###
+![Attaching language switcher to a menu.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-4.png)
+
+### 5. Editing post in multiple languages. ###
+![Editing post in multiple languages.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-5.png)
+
+### 6. Multilingual Yoast SEO and Featured Images. ###
+![Multilingual Yoast SEO and Featured Images.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-6.png)
+
+### 7. Language Switcher widget and Multilingual Editor dialog. ###
+![Language Switcher widget and Multilingual Editor dialog.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-7.png)
+
+### 8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/). ###
+![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-8.png)
+
 
 ## Upgrade Notice ##
 
@@ -97,16 +119,20 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
-### 1.2.1 (soon) ###
+### 1.2.1 ###
 
 * FIXED:
-	* Correct handling of WP SEO entries containing special HTML characters.
+	* Correct handling of Yoast SEO entries containing special HTML characters.
+	* Correct handling of title, description and keywords for All In One SEO Pack 2.2.7
 	* Incorrect behavior of the menus created from custom type posts.
 	* Multilingual strings in Customizer (site name and description).
 * ADDED:
 	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
 	* Partial support of the All-in-one SEO Pack-PRO.
-
+	* Added full name language without flag for Language Selector Mode option.
+* COMPATIBILITY:
+	* Yoast SEO 2.3 ( former WordPress SEO )
+	
 ### 1.2.0 ###
 
 * ADDED:
@@ -132,17 +158,6 @@ No known backward incompatibility issues.
 * FIXED:
 	* Wrong behavior when the main language is not English. Thanks to [Klaus Feurich](https://wordpress.org/support/profile/lunymarmusic) for reporting the bug.
 	* Restored default path to ReduxCore because of silly side effects.
-
-### 1.1.1 ###
-
-* ADDED:
-	* Handling attribute "maxlength" in custom fields for all languages.
-	* Support of the WP-SEO 2.2.
-	* Compatibility with Redux Framework 3.5.
-* FIXED:
-	* Language tabs in admin editor styled according to the WP standards.
-	* Correct creation of the post title and description for extra languages in AIOSEOP.
-	* Enabled translation of the WPGlobus option panel.
 
 ### Earlier versions ###
 

@@ -2,6 +2,20 @@
 
 ## Changelog ##
 
+### 1.2.1 ###
+
+* FIXED:
+	* Correct handling of WP SEO entries containing special HTML characters.
+	* Correct handling of title,description and keywords for All In One SEO Pack 2.2.7
+	* Incorrect behavior of the menus created from custom type posts.
+	* Multilingual strings in Customizer (site name and description).
+* ADDED:
+	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
+	* Partial support of the All-in-one SEO Pack-PRO.
+	* Added full name language without flag for Language Selector Mode option.
+* COMPATIBILITY:
+	* Yoast SEO 2.3 ( former WordPress SEO )
+	
 ### 1.2.0 ###
 
 * ADDED:
