@@ -114,7 +114,9 @@ No known backward incompatibility issues.
 	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
 	* Partial support of the All-in-one SEO Pack-PRO.
 	* Added full name language without flag for Language Selector Mode option.
-
+* COMPATIBILITY:
+	* Yoast SEO 2.3 ( former Wordpress SEO )
+	
 = 1.2.0 =
 
 * ADDED:
