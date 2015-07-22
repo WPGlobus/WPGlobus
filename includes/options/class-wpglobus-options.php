@@ -256,11 +256,12 @@ class WPGlobus_Options {
 						'allowClear'              => false,
 						'minimumResultsForSearch' => - 1
 					),
-					'options'  => array(
-						'code'  => __( 'Two-letter Code with flag(en, ru, it, etc.)', 'wpglobus' ),
-						'full_name'  => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ), /* @since 1.2.1 */
-						'name'  => __( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
-						'empty' => __( 'Flags only', 'wpglobus' )
+					'options' => array(
+						'code'      => __( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
+						'full_name' => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
+						/* @since 1.2.1 */
+						'name'      => __( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
+						'empty'     => __( 'Flags only', 'wpglobus' )
 					),
 					'default'  => 'code'
 				),
