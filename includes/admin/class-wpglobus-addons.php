@@ -22,6 +22,7 @@ class WPGlobus_Addons {
 		$addons                    = array();
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
 		$addons['wordpress.org'][] = 'wpglobus-translate-options';
+		$addons['wordpress.org'][] = 'wpglobus-for-wpbakery-visual-composer';
 
 		/**
 		 * @quirk
