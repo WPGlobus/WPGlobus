@@ -479,43 +479,29 @@ var wpglobus_wpseo = function () {
 	}); // end each .wpglobus-wpseo-general
 	t.addClass( 'hidden' );
 	
-	jQuery( 'body' ).on('blur', '.wpglobus-wpseo_metadesc', function(event){
+	// description
+	jQuery( 'body' ).on('change', '.wpglobus-wpseo_metadesc', function(event){
 		var save_to = '#' + wpseoMetaboxL10n.field_prefix + 'metadesc',
-			s = '';
+			$t = jQuery(this);
 
-		jQuery('.wpglobus-wpseo_metadesc').each(function (i, e) {
-			var $e = jQuery(e);
-			if ($e.val() !== '') {
-				s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-			}
-		});
-		jQuery(save_to).val(s);		
+		jQuery(save_to).val( WPGlobusCore.getString( jQuery(save_to).val(), $t.val(), $t.data('language')) );		
 	});
-
-	jQuery('body').on('blur', '.wpglobus-wpseo_title', function(event){
+	
+	// title
+	jQuery('body').on('change', '.wpglobus-wpseo_title', function(event){
 		var save_to = '#' + wpseoMetaboxL10n.field_prefix + 'title',
-			s = '';
+			$t = jQuery(this);
 
-		jQuery('.wpglobus-wpseo_title').each(function (i, e) {
-			var $e = jQuery(e);
-			if ($e.val() !== '') {
-				s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-			}
-		});
-		jQuery(save_to).val(s);		
+		jQuery(save_to).val( WPGlobusCore.getString( jQuery(save_to).val(), $t.val(), $t.data('language')) );		
+		
 	});	
 	
-	jQuery('body').on('blur', '.wpglobus-wpseo_focuskw', function(event){
+	// keywords
+	jQuery('body').on('change', '.wpglobus-wpseo_focuskw', function(event){
 		var save_to = '#' + wpseoMetaboxL10n.field_prefix + 'focuskw',
-			s = '';
+			$t = jQuery(this);
 
-		jQuery('.wpglobus-wpseo_focuskw').each(function (i, e) {
-			var $e = jQuery(e);
-			if ($e.val() !== '') {
-				s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-			}
-		});
-		jQuery(save_to).val(s);		
+		jQuery(save_to).val( WPGlobusCore.getString( jQuery(save_to).val(), $t.val(), $t.data('language')) ); 
 	});		
 	
 	jQuery('body').on('click', '.wpglobus-post-body-tabs-list li', function(event){
