@@ -46,6 +46,9 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family:
 * [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/):
 	* This plugin enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) has its own option panel, where you enter texts.
 
+* [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/):
+	* This extension enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
+
 = More info and ways to contact the WPGlobus Development Team =
 
 * [WPGlobus.com website](http://www.wpglobus.com/).
@@ -108,7 +111,7 @@ No known backward incompatibility issues.
 * ADDED:
 	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
 * FIXED:
-	* Correct Page Analysis for default language.
+	* Correct Yoast SEO Page Analysis for the default language.
 
 = 1.2.1 =
 
