@@ -9,6 +9,7 @@
 class WPGlobus_WPSEO {
 
 	public static function controller() {
+		
 		if ( is_admin() ) {
 
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
@@ -35,6 +36,16 @@ class WPGlobus_WPSEO {
 					'WPGlobus_WPSEO',
 					'action__wpseo_tab_content'
 				), 11 );
+
+				/**
+				 * Filter for @see wpseo_linkdex_results
+				 * @scope admin
+				 * @since 1.2.2		 
+				 */				
+				add_filter( 'wpseo_linkdex_results', array(
+					'WPGlobus_WPSEO',
+					'filter__wpseo_linkdex_results'
+				), 10, 3 );	
 			}
 
 
@@ -64,6 +75,155 @@ class WPGlobus_WPSEO {
 
 	}
 	
+	/**
+	 * Filter results for Page Analysis tab in default language
+     *
+	 * @see wpseo_linkdex_results filter
+	 *
+	 * @scope admin
+	 * @since 1.2.2
+	 *
+	 *
+	 * @param array $results
+	 * @param array $job
+	 * @param WP_Post object $post
+	 *
+	 * @return array
+	 */
+	public static function filter__wpseo_linkdex_results( $results, $job, $post ) {
+
+		$job['keyword'] 		= WPGlobus_Core::text_filter( $job['keyword'], WPGlobus::Config()->default_language );
+		$job['keyword_folded'] 	= WPGlobus_Core::text_filter( $job['keyword_folded'], WPGlobus::Config()->default_language );
+
+		$results = WPGlobus_WPSEO::calculate_results( 
+			$results, 
+			WPGlobus_Core::text_filter( $post->post_content, WPGlobus::Config()->default_language ), 
+			$job, 
+			$post 
+		);
+
+		return $results;
+	}	
+
+	/**
+	 * Calculate the page analysis results for post.
+	 *
+	 * @internal Unfortunately there isn't a filter available to hook into before returning the results
+	 * for get_post_meta(), get_post_custom() and the likes. That would have been the preferred solution.
+	 *
+	 * @see function calculate_results() in wordpress-seo\admin\class-metabox.php
+	 * @scope admin
+	 * @since 1.2.2
+	 *
+	 * @param array $results
+	 * @param string $post_content
+	 * @param array $job, 
+	 * @param WP_Post object $post Post to calculate the results for.
+	 *
+	 * @return  array
+	 */
+	public static function calculate_results( $results, $post_content, $job, $post ) {
+	
+		$WPSEO_Metabox = new WPSEO_Metabox;
+
+		$dom                      = new domDocument;
+		$dom->strictErrorChecking = false;
+		$dom->preserveWhiteSpace  = false;		
+
+		// Check if the post content is not empty.
+		if ( ! empty( $post_content ) ) {
+			@$dom->loadHTML( $post_content );
+		}
+
+		unset( $post_content );
+
+		$xpath = new DOMXPath( $dom );
+
+		// Check if this focus keyword has been used already.
+		$WPSEO_Metabox->check_double_focus_keyword( $job, $results );
+
+		// Keyword.
+		$WPSEO_Metabox->score_keyword( $job['keyword'], $results );
+
+		// Title.
+		$title = WPSEO_Meta::get_value( 'title', $post->ID );
+		if ( $title !== '' ) {
+			$job['title'] = $title;
+		}
+		else {
+			if ( isset( $options[ 'title-' . $post->post_type ] ) && $options[ 'title-' . $post->post_type ] !== '' ) {
+				$title_template = $options[ 'title-' . $post->post_type ];
+			}
+			else {
+				$title_template = '%%title%% - %%sitename%%';
+			}
+			$job['title'] = wpseo_replace_vars( $title_template, $post );
+		}
+		unset( $title );
+		$WPSEO_Metabox->score_title( $job, $results );
+		// Meta description.
+		$description = '';
+		// $desc_meta   = WPSEO_Meta::get_value( 'metadesc', $post->ID );
+		$desc_meta   = WPGlobus_Core::text_filter( WPSEO_Meta::get_value( 'metadesc', $post->ID ), WPGlobus::Config()->default_language );
+		if ( $desc_meta !== '' ) {
+			$description = $desc_meta;
+		}
+		elseif ( isset( $options[ 'metadesc-' . $post->post_type ] ) && $options[ 'metadesc-' . $post->post_type ] !== '' ) {
+			$description = wpseo_replace_vars( $options[ 'metadesc-' . $post->post_type ], $post );
+		}
+		unset( $desc_meta );
+
+		WPSEO_Meta::$meta_length = apply_filters( 'wpseo_metadesc_length', WPSEO_Meta::$meta_length, $post );
+
+		$WPSEO_Metabox->score_description( $job, $results, $description, WPSEO_Meta::$meta_length );
+		unset( $description );
+
+		// Body.
+		// $body   = $WPSEO_Metabox->get_body( $post );
+		$body   = WPGlobus_Core::text_filter( $WPSEO_Metabox->get_body( $post ), WPGlobus::Config()->default_language );
+		$firstp = $WPSEO_Metabox->get_first_paragraph( $body );
+		$WPSEO_Metabox->score_body( $job, $results, $body, $firstp );
+		unset( $firstp );
+
+		// URL.
+		$WPSEO_Metabox->score_url( $job, $results );
+
+		// Headings.
+		$headings = $WPSEO_Metabox->get_headings( $body );
+		$WPSEO_Metabox->score_headings( $job, $results, $headings );
+		unset( $headings );
+
+		// Images.
+		$imgs          = array();
+		$imgs['count'] = substr_count( $body, '<img' );
+		$imgs          = $WPSEO_Metabox->get_images_alt_text( $post->ID, $body, $imgs );
+
+		// Check featured image.
+		if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+			$imgs['count'] += 1;
+
+			if ( empty( $imgs['alts'] ) ) {
+				$imgs['alts'] = array();
+			}
+
+			$imgs['alts'][] = $WPSEO_Metabox->strtolower_utf8( get_post_meta( get_post_thumbnail_id( $post->ID ), '_wp_attachment_image_alt', true ) );
+		}
+
+		$WPSEO_Metabox->score_images_alt_text( $job, $results, $imgs );
+		unset( $imgs );
+		unset( $body );
+
+		// Anchors.
+		$anchors = $WPSEO_Metabox->get_anchor_texts( $xpath );
+		$count   = $WPSEO_Metabox->get_anchor_count( $xpath );
+
+		$WPSEO_Metabox->score_anchor_texts( $job, $results, $anchors, $count );
+		unset( $anchors, $count, $dom );	
+
+		return $results;	
+		
+	}	
+	 
 	/**
 	 * Filter SEO meta description
 	 *
