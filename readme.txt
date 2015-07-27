@@ -103,6 +103,13 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.2.2 =
+
+* ADDED:
+	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
+* FIXED:
+	* Correct Page Analysis for default language.
+
 = 1.2.1 =
 
 * FIXED:
