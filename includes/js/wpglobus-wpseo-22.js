@@ -473,7 +473,7 @@ var wpglobus_wpseo = function () {
 				focuskwhelpElm.qtip( "hide" );
 				focuskwhelptriggered = false;
 			}
-			wpglobus_updateSnippet();
+			wpglobus_updateSnippet( l );
 		});		
 		
 	}); // end each .wpglobus-wpseo-general
