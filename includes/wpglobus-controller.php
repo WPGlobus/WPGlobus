@@ -299,4 +299,16 @@ if ( class_exists( 'Whistles_Load' ) ) {
 	add_filter( 'whistle_content', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
+if ( class_exists( 'Tribe__Events__Main' ) ) {
+	
+	/**
+	 * Translate "The Events Calendar"
+	 * https://wordpress.org/plugins/the-events-calendar/
+	 */
+	 
+	require_once 'vendor/class-wpglobus-the-events-calendar.php';
+
+	add_filter( 'tribe_events_template_data_array', array( 'WPGlobus_The_Events_Calendar', 'filter__events_data' ), 0, 3 );
+
+}
 # --- EOF
