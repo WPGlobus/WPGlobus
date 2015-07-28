@@ -208,9 +208,6 @@ class WPGlobus_Options {
 			'<li>' . __( '<strong>Uncheck</strong> the languages you do not plan to use.', 'wpglobus' ) . '</li>',
 			'<li>' . __( '<strong>Add</strong> more languages using the section below.', 'wpglobus' ) . '</li>',
 			'<li>' . __( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
-			'<li>' . '<a href="#" onclick="location.reload(true); return false;">' .
-			__( 'Reload', 'wpglobus' ) . '</a> ' .
-			__( 'the screen to see the updated settings.', 'wpglobus' ) . '</li>',
 			'</ul>'
 		) );
 
@@ -471,6 +468,13 @@ class WPGlobus_Options {
 
 			'hide_reset' => TRUE,
 			'disable_tracking' => true,
+			/**
+			 * With newer ReduxFramework, need to disable AJAX save,
+			 * so that list of languages is always fresh, after save.
+			 *
+			 * @since 1.2.2
+			 */
+			'ajax_save' => false,
 
 
 			// HINTS
