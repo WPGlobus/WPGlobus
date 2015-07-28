@@ -959,16 +959,9 @@ jQuery(document).ready(function () {
 
                 if (WPGlobusAdmin.data.modify_excerpt) {
                     $(WPGlobusAdmin.data.template).insertAfter('#excerpt');
-
-                    $('body').on('blur', '.wpglobus-excerpt', function () {
-                        var s = '';
-                        $('.wpglobus-excerpt').each(function (index, e) {
-                            var $e = $(e);
-                            if ($e.val() !== '') {
-                                s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', $e.data('language')) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-                            }
-                        });
-                        $('#excerpt').eq(0).val(s);
+                    $('body').on('change', '.wpglobus-excerpt', function () {
+						var $t = $( this );
+						$('#excerpt').val( WPGlobusCore.getString( $('#excerpt').val(), $t.val(), $t.data('language') ) );
                     });
                 }
 
