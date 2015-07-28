@@ -77,12 +77,6 @@ class WPGlobus {
 	}
 
 	/**
-	 * Are we using our version of Redux or someone else's?
-	 * @var string
-	 */
-	public $redux_framework_origin = 'external';
-
-	/**
 	 * Support third party plugin vendors
 	 */
 	public $vendors_scripts = array();
@@ -210,16 +204,8 @@ class WPGlobus {
 
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
 
-			if ( ! class_exists( 'ReduxFramework' ) ) {
-				/** @noinspection PhpIncludeInspection */
-				require_once self::$PLUGIN_DIR_PATH . 'vendor/ReduxCore/framework.php';
-
-				/** Set a flag to know that we are using the embedded Redux */
-				$this->redux_framework_origin = 'embedded';
-			}
-
 			require_once 'options/class-wpglobus-options.php';
-			$WPGlobus_Options = new WPGlobus_Options();
+			new WPGlobus_Options();
 
 			if ( 'edit-tags.php' == $pagenow ) {
 				/**

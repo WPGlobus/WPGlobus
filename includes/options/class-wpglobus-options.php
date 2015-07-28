@@ -22,9 +22,9 @@ class WPGlobus_Options {
 	 */
 	public function __construct() {
 
-		if ( ! class_exists( 'ReduxFramework' ) ) {
-			return;
-		}
+//		if ( ! class_exists( 'ReduxFramework' ) ) {
+//			return;
+//		}
 
 		$nav_menus = WPGlobus::_get_nav_menus();
 
@@ -39,8 +39,8 @@ class WPGlobus_Options {
 		//            if (  true == Redux_Helpers::isTheme(__FILE__) ) {
 		//                $this->initSettings();
 		//            } else {
-		$this->initSettings();
-		//                add_action('plugins_loaded', array($this, 'initSettings'), 10);
+//		$this->initSettings();
+		add_action( 'init', array( $this, 'initSettings' ) );
 		//            }
 
 		/** remove redux menu under the tools **/
@@ -53,6 +53,26 @@ class WPGlobus_Options {
 	}
 
 	public function initSettings() {
+
+		if ( ! class_exists( 'ReduxFramework' ) ) {
+			/** @noinspection PhpIncludeInspection */
+			require_once WPGlobus::$PLUGIN_DIR_PATH . 'vendor/ReduxCore/framework.php';
+		}
+
+		$config = WPGlobus::Config();
+
+		foreach ( array( 'info', 'sortable', 'select', 'checkbox', 'ace_editor' ) as $field_type ) {
+
+			add_filter( "redux/{$config->option}/field/class/{$field_type}", function ( $file, $field ) {
+				if ( ! file_exists( $file ) ) {
+					$file =
+						WPGlobus::$PLUGIN_DIR_PATH . "vendor/ReduxCore/inc/fields/{$field['type']}/field_{$field['type']}.php";
+				}
+
+				return $file;
+			}
+				, 1, 2 );
+		}
 
 		// Set the default arguments
 		$this->setArguments();
