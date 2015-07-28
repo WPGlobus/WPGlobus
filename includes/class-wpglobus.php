@@ -2030,18 +2030,25 @@ class WPGlobus {
 				$support_editor = false;
 			}
 
-			$data['post_title'] = trim( $data['post_title'] );
+			$data['post_title'] = $post_title = trim( $data['post_title'] );
 			if ( ! empty( $data['post_title'] ) && $support_title ) {
 				$data['post_title'] =
 					WPGlobus::add_locale_marks( $data['post_title'], WPGlobus::Config()->default_language );
 			}
 
-			$data['post_content'] = trim( $data['post_content'] );
+			$data['post_content'] = $post_content = trim( $data['post_content'] );
 			if ( ! empty( $data['post_content'] ) && $support_editor ) {
 				$data['post_content'] =
 					WPGlobus::add_locale_marks( $data['post_content'], WPGlobus::Config()->default_language );
 			}
-
+			
+			/**
+			 * Add variables for check extra data
+			 * @since 1.2.2
+			 */
+			$has_extra_post_title   = false;
+			$has_extra_post_content = false;
+			
 			foreach ( WPGlobus::Config()->open_languages as $language ) :
 				if ( $language == WPGlobus::Config()->default_language ) {
 
@@ -2050,21 +2057,23 @@ class WPGlobus {
 				} else {
 
 					/**
-					 * Join post title for enabled languages
+					 * Join post title for opened languages
 					 */
 					$title =
 						isset( $postarr[ 'post_title_' . $language ] ) ? trim( $postarr[ 'post_title_' . $language ] ) : '';
 					if ( ! empty( $title ) ) {
 						$data['post_title'] .= WPGlobus::add_locale_marks( $postarr[ 'post_title_' . $language ], $language );
+						$has_extra_post_title = true;
 					}
 
 					/**
-					 * Join post content for enabled languages
+					 * Join post content for opened languages
 					 */
 					$content =
 						isset( $postarr[ 'content_' . $language ] ) ? trim( $postarr[ 'content_' . $language ] ) : '';
 					if ( ! empty( $content ) ) {
 						$data['post_content'] .= WPGlobus::add_locale_marks( $postarr[ 'content_' . $language ], $language );
+						$has_extra_post_content = true;
 					}
 
 				}
@@ -2072,6 +2081,14 @@ class WPGlobus {
 
 		endif;  //  $devmode
 
+		if ( ! $has_extra_post_title ) {
+			$data['post_title'] = $post_title;
+		}
+		
+		if ( ! $has_extra_post_content ) {
+			$data['post_content'] = $post_content;
+		}
+		
 		$data = apply_filters( 'wpglobus_save_post_data', $data, $postarr, $devmode );
 
 		return $data;
