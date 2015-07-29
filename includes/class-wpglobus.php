@@ -2208,12 +2208,14 @@ class WPGlobus {
 						       data-language="<?php echo $language; ?>"
 						       autocomplete="off"/>
 					</div> <!-- #titlewrap -->
-					<div class="inside">
-						<div id="edit-slug-box-<?php echo $language; ?>" class="wpglobus-edit-slug-box hide-if-no-js">
+					<?php
+					$slug_box = '<div class="inside">
+						<div id="edit-slug-box-' . $language . '" class="wpglobus-edit-slug-box hide-if-no-js">
 							<b></b>
 						</div>
-					</div>
-					<!-- .inside -->
+					</div><!-- .inside -->';
+					echo apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language );
+					?>
 				</div>    <!-- #titlediv -->    <?php
 
 			}
