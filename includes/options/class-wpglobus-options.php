@@ -430,8 +430,8 @@ class WPGlobus_Options {
 			//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
 			'allow_sub_menu'     => true,
 			// Show the sections below the admin menu item or not
-			'menu_title'         => __( 'WPGlobus', 'wpglobus' ),
-			'page_title'         => __( 'WPGlobus', 'wpglobus' ),
+			'menu_title'         => 'WPGlobus',
+			'page_title'         => 'WPGlobus',
 			// You will need to generate a Google API key to use this feature.
 			// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
 			'google_api_key'     => '',
@@ -554,7 +554,7 @@ class WPGlobus_Options {
 					<div style="clear:both;"></div>';						
 					
 		$this->args['intro_text'] =
-			'<h1 style="width:30%;float:left;">' . __( 'WPGlobus', 'wpglobus' ) . ' ' . WPGLOBUS_VERSION . '</h1>' .  $donate_2;
+			'<h1 style="width:30%;float:left;">WPGlobus ' . WPGLOBUS_VERSION . '</h1>' .  $donate_2;
 
 		// Add content after the form.
 //		$this->args['footer_text'] =
