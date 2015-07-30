@@ -807,10 +807,9 @@ class WPGlobus {
 			 */
 			wp_register_script(
 				'select2-js',
-				self::$PLUGIN_DIR_URL . "vendor/ReduxCore/assets/js/vendor/select2/select2" .
-				self::$_SCRIPT_SUFFIX . ".js",
+				'//cdn.jsdelivr.net/select2/3.5.2/select2' . WPGlobus::$_SCRIPT_SUFFIX . '.js',
 				array( 'jquery' ),
-				WPGLOBUS_VERSION,
+				'3.5.2',
 				true
 			);
 			wp_enqueue_script( 'select2-js' );
@@ -1274,15 +1273,13 @@ class WPGlobus {
 	 * Enqueue admin styles
 	 * @return void
 	 */
-	function on_admin_styles() {
+	public function on_admin_styles() {
 
 		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
 
-		$suffix = SCRIPT_DEBUG ? '' : '.min';
-
 		wp_register_style(
 			'wpglobus-admin',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus-admin$suffix.css",
+			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
@@ -1293,16 +1290,14 @@ class WPGlobus {
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			wp_register_style(
 				'select2-css',
-				self::$PLUGIN_DIR_URL . 'vendor/ReduxCore/assets/js/vendor/select2/select2.css',
+				'//cdn.jsdelivr.net/select2/3.5.2/select2' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
 				array(),
-				WPGLOBUS_VERSION,
-				'all'
+				WPGLOBUS_VERSION
 			);
 			wp_enqueue_style( 'select2-css' );
 		}
 
-		/** @global WP_Post $post */
-		global $post;
+		$post = get_post();
 		$type = empty( $post ) ? '' : $post->post_type;
 		
 		if ( ! $this->disabled_entity( $type ) ) {
@@ -1314,13 +1309,11 @@ class WPGlobus {
 			/** @global string $pagenow */ 
 			global $pagenow;
 
-			$page = empty($_GET['page']) ? '' : $_GET['page'];
-			
 			if ( in_array($pagenow, $this->enabled_pages) || in_array($page, $this->enabled_pages) ) {
 
 				wp_register_style(
 					'wpglobus-admin-tabs',
-					self::$PLUGIN_DIR_URL . "includes/css/wpglobus-admin-tabs$suffix.css",
+					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-tabs' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
 					array(),
 					WPGLOBUS_VERSION,
 					'all'
@@ -1329,7 +1322,7 @@ class WPGlobus {
 
 				wp_enqueue_style(
 					'dialog-ui',
-					self::$PLUGIN_DIR_URL . "includes/css/wpglobus-dialog-ui$suffix.css",
+					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-dialog-ui' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
 					array(),
 					WPGLOBUS_VERSION,
 					'all'
@@ -1342,7 +1335,7 @@ class WPGlobus {
 		if ( in_array( $page, array( self::PAGE_WPGLOBUS_ADDONS, self::PAGE_WPGLOBUS_ABOUT ) ) ) {
 			wp_register_style(
 				'wpglobus-special-pages',
-				self::$PLUGIN_DIR_URL . "includes/css/wpglobus-special-pages$suffix.css",
+				self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-special-pages' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
 				array(),
 				WPGLOBUS_VERSION,
 				'all'

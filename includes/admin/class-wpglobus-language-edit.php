@@ -305,7 +305,7 @@ class WPGlobus_Language_Edit {
 		}
 		?>
 		<div class="wrap">
-			<h2><?php echo $header; ?></h2>
+			<h1>WPGlobus: <?php echo $header; ?></h1>
 			<?php if ( $this->submit ) {
 				if ( ! empty( $this->submit_messages['errors'] ) ) {
 					$mess = '';
@@ -390,6 +390,12 @@ class WPGlobus_Language_Edit {
 				} ?>
 
 			</form>
+
+			<hr/>
+			<a href="<?php echo admin_url('admin.php?page=wpglobus_options'); ?>">
+				&larr;
+				<?php esc_html__( 'Back to the WPGlobus Settings', 'wpglobus' ); ?>
+			</a>
 		</div>
 	<?php
 	}
