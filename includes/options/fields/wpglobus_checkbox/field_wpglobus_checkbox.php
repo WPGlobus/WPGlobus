@@ -41,7 +41,7 @@ if ( !class_exists ( 'ReduxFramework_wpglobus_checkbox' ) ) {
          * @access      public
          * @param array  $field
          * @param string $value
-         * @param        $parent
+         * @param ReduxFramework       $parent
          */
         public function __construct ( Array $field = array(), $value = '', $parent ) {
 

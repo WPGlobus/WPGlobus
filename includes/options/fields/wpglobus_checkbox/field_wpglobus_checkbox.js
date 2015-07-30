@@ -11,17 +11,17 @@
     "use strict";
 
     redux.field_objects = redux.field_objects || {};
-    redux.field_objects.checkbox = redux.field_objects.checkbox || {};
+    redux.field_objects.wpglobus_checkbox = redux.field_objects.wpglobus_checkbox || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.checkbox.init();
-        }
-    );
+    //$( document ).ready(
+    //    function() {
+            //redux.field_objects.wpglobus_checkbox.init();
+        //}
+    //);
 
-    redux.field_objects.checkbox.init = function( selector ) {
+    redux.field_objects.wpglobus_checkbox.init = function( selector ) {
         if ( !selector ) {
-            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-checkbox:visible' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-wpglobus_checkbox:visible' );
         }
 
         $( selector ).each(
