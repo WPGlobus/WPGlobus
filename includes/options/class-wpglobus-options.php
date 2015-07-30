@@ -61,12 +61,12 @@ class WPGlobus_Options {
 
 		$config = WPGlobus::Config();
 
-		foreach ( array( 'info', 'sortable', 'select', 'checkbox', 'ace_editor' ) as $field_type ) {
+		foreach ( array( 'wpglobus_info', 'wpglobus_sortable', 'wpglobus_select', 'wpglobus_checkbox', 'wpglobus_ace_editor' ) as $field_type ) {
 
 			add_filter( "redux/{$config->option}/field/class/{$field_type}", function ( $file, $field ) {
 				if ( ! file_exists( $file ) ) {
 					$file =
-						WPGlobus::$PLUGIN_DIR_PATH . "vendor/ReduxCore/inc/fields/{$field['type']}/field_{$field['type']}.php";
+						WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
 				}
 
 				return $file;
@@ -108,7 +108,7 @@ class WPGlobus_Options {
 			$fields_home[] =
 				array(
 					'id'     => 'version_warning',
-					'type'   => 'info',
+					'type'   => 'wpglobus_info',
 					'title'  => __( 'WARNING: Redux Framework upgrade is highly recommended!', 'wpglobus' ),
 					'desc'   => sprintf(
 						__( 'WPGlobus administration panel requires Redux Framework %2$s or later. The version you have installed is %1$s.' ),
@@ -127,7 +127,7 @@ class WPGlobus_Options {
 		$fields_home[] =
 			array(
 				'id'     => 'welcome_intro',
-				'type'   => 'info',
+				'type'   => 'wpglobus_info',
 				'title'  => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
 				'desc'   => '' .
 				            '<br/>' .
@@ -243,7 +243,7 @@ class WPGlobus_Options {
 			'fields' => array(
 				array(
 					'id'          => 'enabled_languages',
-					'type'        => 'sortable',
+					'type'        => 'wpglobus_sortable',
 					'title'       => __( 'Enabled Languages', 'wpglobus' ),
 					'compiler'    => 'false',
 					'desc'        => $desc_enabled_languages,
@@ -254,7 +254,7 @@ class WPGlobus_Options {
 				),
 				array(
 					'id'          => 'more_languages',
-					'type'        => 'select',
+					'type'        => 'wpglobus_select',
 					'title'       => __( 'Add Languages', 'wpglobus' ),
 					'compiler'    => 'false',
 					'mode'        => false,
@@ -264,7 +264,7 @@ class WPGlobus_Options {
 				),
 				array(
 					'id'       => 'show_flag_name',
-					'type'     => 'select',
+					'type'     => 'wpglobus_select',
 					'title'    => __( 'Language Selector Mode', 'wpglobus' ),
 					'compiler' => 'false',
 					'mode'     => false,
@@ -285,7 +285,7 @@ class WPGlobus_Options {
 				array(
 					'id'          => 'use_nav_menu',
 					# $WPGlobus_Config->nav_menu
-					'type'        => 'select',
+					'type'        => 'wpglobus_select',
 					'title'       => __( 'Language Selector Menu', 'wpglobus' ),
 					'compiler'    => 'false',
 					'mode'        => false,
@@ -299,7 +299,7 @@ class WPGlobus_Options {
 				),
 				array(
 					'id'       => 'selector_wp_list_pages',
-					'type'     => 'checkbox',
+					'type'     => 'wpglobus_checkbox',
 					'title'    => __( '"All Pages" menus Language selector', 'wpglobus' ),
 					'subtitle' => __( '(Found in some themes)', 'wpglobus' ),
 					'desc'     => __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
@@ -311,7 +311,7 @@ class WPGlobus_Options {
 				),
 				array(
 					'id'       => 'css_editor',
-					'type'     => 'ace_editor',
+					'type'     => 'wpglobus_ace_editor',
 					'title'    => __( 'Custom CSS', 'wpglobus' ),
 					'mode'     => 'css',
 					'theme'    => 'chrome',
@@ -333,7 +333,7 @@ class WPGlobus_Options {
 			'fields' => array(
 				array(
 					'id'       => 'description',
-					'type'     => 'info',
+					'type'     => 'wpglobus_info',
 					'title'    => __( 'Use this table to add, edit or delete languages.', 'wpglobus' ),
 					'subtitle' => __( 'NOTE: you cannot remove the main language.', 'wpglobus' ),
 					'style'    => 'info',
@@ -353,7 +353,7 @@ class WPGlobus_Options {
 		$fields = array(
 			array(
 				'id'    => 'description',
-				'type'  => 'info',
+				'type'  => 'wpglobus_info',
 				'title' => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
 				'style' => 'info',
 			),
@@ -370,7 +370,7 @@ class WPGlobus_Options {
 
 		$fields[] = array(
 			'id'       => 'post_type',
-			'type'     => 'checkbox',
+			'type'     => 'wpglobus_checkbox',
 			'compiler' => false,
 			'default'  => $default,
 			'options'  => $open_post_types
