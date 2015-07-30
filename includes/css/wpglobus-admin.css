@@ -82,6 +82,30 @@ ul.wpglobus-important li {
   display: block;
   padding: 2px 10px;
 }
+/* @see #edit-slug-box  */
+.wpglobus-edit-slug-box {
+  line-height: 24px;
+  min-height: 25px;
+  margin-top: 5px;
+  padding: 0 10px;
+  color: #666;
+  /* @see #editable-post-name input */
+}
+.wpglobus-edit-slug-box .wpglobus-editable-post-name {
+  background-color: #fffbcc;
+}
+.wpglobus-edit-slug-box .wpglobus-editable-post-name-full {
+  display: none;
+}
+.wpglobus-edit-slug-box .wpglobus-editable-post-name input {
+  font-size: 13px;
+  height: 22px;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  width: 20em;
+}
 .about-wrap .wpglobus-version {
   color: #e38869;
   font-size: 95%;
@@ -104,4 +128,3 @@ ul.wpglobus-important li {
 .toplevel_page_wpglobus_options .redux-timer {
   display: none;
 }
-/*# sourceMappingURL=wpglobus-admin.css.map */
