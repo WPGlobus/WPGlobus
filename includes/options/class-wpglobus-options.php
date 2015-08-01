@@ -87,6 +87,7 @@ class WPGlobus_Options {
 			return;
 		}
 
+		/** @noinspection PhpUndefinedClassInspection */
 		$this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
 	}
 
@@ -94,6 +95,7 @@ class WPGlobus_Options {
 
 		$config = WPGlobus::Config();
 
+		/** @var array $wpglobus_option */
 		$wpglobus_option = get_option( $config->option );
 
 
@@ -104,7 +106,9 @@ class WPGlobus_Options {
 		 * @todo Add link to FAQ explaining what to do.
 		 * @todo Tell the admin what did we load (plugin or someone else's Redux)
 		 */
+		/** @noinspection PhpUndefinedClassInspection */
 		if ( version_compare( ReduxFramework::$_version, WPGlobus::$minimalReduxFramework_version ) < 0 ) {
+			/** @noinspection PhpUndefinedClassInspection */
 			$fields_home[] =
 				array(
 					'id'     => 'version_warning',
@@ -362,7 +366,7 @@ class WPGlobus_Options {
 		$default         = array();
 		$open_post_types = array();
 		foreach ( $post_types as $post_type ) {
-			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ) ) ) {
+			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ), true ) ) {
 				$open_post_types[ $post_type ] = $post_type;
 				$default[ $post_type ]         = true;
 			}
@@ -528,20 +532,20 @@ class WPGlobus_Options {
 			)
 		);
 				
-		$donate_1 = '<div style="float:left;width:50%;">
-						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
-						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) . 
-						'</p>' . 
-						'<div style="float:left;">
-							<form id="wpglobus-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-								<input type="hidden" name="cmd" value="_s-xclick">
-								<input type="hidden" name="hosted_button_id" value="SLF8M4YNZHNQN">
-								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal">
-								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-							</form>
-						</div>
-					</div>
-					<div style="clear:both;"></div>';			
+//		$donate_1 = '<div style="float:left;width:50%;">
+//						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
+//						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) .
+//						'</p>' .
+//						'<div style="float:left;">
+//							<form id="wpglobus-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+//								<input type="hidden" name="cmd" value="_s-xclick">
+//								<input type="hidden" name="hosted_button_id" value="SLF8M4YNZHNQN">
+//								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal">
+//								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+//							</form>
+//						</div>
+//					</div>
+//					<div style="clear:both;"></div>';
 					
 		$donate_2 = '<div style="float:left;width:50%;">
 						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
