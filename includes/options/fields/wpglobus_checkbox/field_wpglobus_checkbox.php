@@ -19,142 +19,153 @@
  * @version     3.0.0
  */
 // Exit if accessed directly
-if ( !defined ( 'ABSPATH' ) ) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 // Don't duplicate me!
-if ( !class_exists ( 'ReduxFramework_wpglobus_checkbox' ) ) {
+if ( ! class_exists( 'ReduxFramework_wpglobus_checkbox' ) ) {
 
-    /**
-     * Main ReduxFramework_wpglobus_checkbox class
-     *
-     * @since       1.0.0
-     */
-    class ReduxFramework_wpglobus_checkbox {
+	/**
+	 * Main ReduxFramework_wpglobus_checkbox class
+	 *
+	 * @since       1.0.0
+	 */
+	class ReduxFramework_wpglobus_checkbox {
+		/** @noinspection PhpUndefinedClassInspection */
 
-        /**
-         * Field Constructor.
-         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-         *
-         * @since       1.0.0
-         * @access      public
-         * @param array  $field
-         * @param string $value
-         * @param ReduxFramework       $parent
-         */
-        public function __construct ( Array $field = array(), $value = '', $parent ) {
+		/**
+		 * Field Constructor.
+		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+		 *
+		 * @since       1.0.0
+		 * @access      public
+		 * @param array          $field
+		 * @param string         $value
+		 * @param ReduxFramework $parent
+		 */
+		public function __construct( Array $field = array(), $value = '', $parent ) {
 
-            $this->parent = $parent;
-            $this->field = $field;
-            $this->value = $value;
-        }
+			$this->parent = $parent;
+			$this->field  = $field;
+			$this->value  = $value;
+		}
 
-        /**
-         * Field Render Function.
-         * Takes the vars and outputs the HTML for the field in the settings
-         *
-         * @since       1.0.0
-         * @access      public
-         * @return      void
-         */
-        public function render () {
-            if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
-                if (empty($this->field['args'])) {
-                    $this->field['args'] = array();
-                }
+		/**
+		 * Field Render Function.
+		 * Takes the vars and outputs the HTML for the field in the settings
+		 *
+		 * @since       1.0.0
+		 * @access      public
+		 * @return      void
+		 */
+		public function render() {
 
-                $this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
-                if (empty($this->field['options'])) {
-                    return;
-                }
-            }
+			/** @var array $parent_args */
+			$parent_args = $this->parent->args;
 
-            $this->field[ 'data_class' ] = ( isset ( $this->field[ 'multi_layout' ] ) ) ? 'data-' . $this->field[ 'multi_layout' ] : 'data-full';
+			if ( ! empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
+				if ( empty( $this->field['args'] ) ) {
+					$this->field['args'] = array();
+				}
 
-            if ( !empty ( $this->field[ 'options' ] ) && ( is_array ( $this->field[ 'options' ] ) || is_array ( $this->field[ 'default' ] ) ) ) {
+				$this->field['options'] =
+					$this->parent->get_wordpress_data( $this->field['data'], $this->field['args'] );
+				/** @noinspection NotOptimalIfConditionsInspection */
+				if ( empty( $this->field['options'] ) ) {
+					return;
+				}
+			}
 
-                echo '<ul class="' . $this->field[ 'data_class' ] . '">';
+			$this->field['data_class'] =
+				( isset ( $this->field['multi_layout'] ) ) ? 'data-' . $this->field['multi_layout'] : 'data-full';
 
-                if ( !isset ( $this->value ) ) {
-                    $this->value = array();
-                }
+			if ( ! empty ( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['default'] ) ) ) {
 
-                if ( !is_array ( $this->value ) ) {
-                    $this->value = array();
-                }
+				echo '<ul class="' . $this->field['data_class'] . '">';
 
-                if ( empty ( $this->field[ 'options' ] ) && isset ( $this->field[ 'default' ] ) && is_array ( $this->field[ 'default' ] ) ) {
-                    $this->field[ 'options' ] = $this->field[ 'default' ];
-                }
+				if ( ! isset ( $this->value ) ) {
+					$this->value = array();
+				}
 
-                foreach ( $this->field[ 'options' ] as $k => $v ) {
+				if ( ! is_array( $this->value ) ) {
+					$this->value = array();
+				}
 
-                    if ( empty ( $this->value[ $k ] ) ) {
-                        $this->value[ $k ] = "";
-                    }
+				if ( empty ( $this->field['options'] ) && isset ( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
+					$this->field['options'] = $this->field['default'];
+				}
 
-                    echo '<li>';
-                    echo '<label for="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . '][' . $k . ']', array(
-                        '[' => '_',
-                        ']' => ''
-                    ) ) . '_' . array_search ( $k, array_keys ( $this->field[ 'options' ] ) ) . '">';
-                    echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field[ 'name' ] . '[' . $k . ']' . $this->field[ 'name_suffix' ] . '" value="' . $this->value[ $k ] . '" ' . '/>';
-                    echo '<input type="checkbox" class="checkbox ' . $this->field[ 'class' ] . '" id="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . '][' . $k . ']', array(
-                        '[' => '_',
-                        ']' => ''
-                    ) ) . '_' . array_search ( $k, array_keys ( $this->field[ 'options' ] ) ) . '" value="1" ' . checked ( $this->value[ $k ], '1', false ) . '/>';
-                    echo ' ' . $v . '</label>';
-                    echo '</li>';
-                }
+				foreach ( $this->field['options'] as $k => $v ) {
 
-                echo '</ul>';
-            } else if ( empty ( $this->field[ 'data' ] ) ) {
+					if ( empty ( $this->value[ $k ] ) ) {
+						$this->value[ $k ] = "";
+					}
 
-                echo (!empty ( $this->field[ 'desc' ] ) ) ? ' <ul class="data-full"><li><label for="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . ']', array(
-                            '[' => '_',
-                            ']' => ''
-                        ) ) . '">' : '';
+					echo '<li>';
+					echo '<label for="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
+							'[' => '_',
+							']' => ''
+						) ) . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) . '">';
+					echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" value="' . $this->value[ $k ] . '" ' . '/>';
+					echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
+							'[' => '_',
+							']' => ''
+						) ) . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) . '" value="1" ' . checked( $this->value[ $k ], '1', false ) . '/>';
+					echo ' ' . $v . '</label>';
+					echo '</li>';
+				}
 
-                // Got the "Checked" status as "0" or "1" then insert it as the "value" option
-                //$ch_value = 1; // checked($this->value, '1', false) == "" ? "0" : "1";
-                echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field[ 'name' ] . $this->field[ 'name_suffix' ] . '" value="' . $this->value . '" ' . '/>';
-                echo '<input type="checkbox" id="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . ']', array(
-                    '[' => '_',
-                    ']' => ''
-                ) ) . '" value="1" class="checkbox ' . $this->field[ 'class' ] . '" ' . checked ( $this->value, '1', false ) . '/>';
-                echo isset( $this->field[ 'label' ] ) ? ' ' . $this->field[ 'label' ] : '';
-                echo '</label></li></ul>';
-            }
-        }
+				echo '</ul>';
+			} else if ( empty ( $this->field['data'] ) ) {
 
-        /**
-         * Enqueue Function.
-         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
-         *
-         * @since       1.0.0
-         * @access      public
-         * @return      void
-         */
-        public function enqueue () {
+				echo ( ! empty ( $this->field['desc'] ) ) ? ' <ul class="data-full"><li><label for="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . ']', array(
+						'[' => '_',
+						']' => ''
+					) ) . '">' : '';
 
-//            if ($this->parent->args['dev_mode']) {
-//                wp_enqueue_style (
-//                    'redux-field-wpglobus_checkbox',
-//                    plugins_url( '/field_wpglobus_checkbox' . '.css', __FILE__ ),
-//                    array(),
-//                    WPGLOBUS_VERSION
-//                );
-//            }
+				// Got the "Checked" status as "0" or "1" then insert it as the "value" option
+				//$ch_value = 1; // checked($this->value, '1', false) == "" ? "0" : "1";
+				echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $this->value . '" ' . '/>';
+				echo '<input type="checkbox" id="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . ']', array(
+						'[' => '_',
+						']' => ''
+					) ) . '" value="1" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
+				echo isset( $this->field['label'] ) ? ' ' . $this->field['label'] : '';
+				echo '</label></li></ul>';
+			}
+		}
 
-            wp_enqueue_script (
-                'redux-field-wpglobus_checkbox',
-                plugins_url( '/field_wpglobus_checkbox' . '.js', __FILE__ ),
-                array( 'jquery', 'redux-js' ),
-                WPGLOBUS_VERSION,
-                true
-            );
-        }
-    }
+		/**
+		 * Enqueue Function.
+		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 *
+		 * @since       1.0.0
+		 * @access      public
+		 * @return      void
+		 */
+		public function enqueue() {
+
+			/** @var array $parent_args */
+			$parent_args = $this->parent->args;
+
+			if ( $parent_args['dev_mode'] ) {
+				wp_enqueue_style(
+					'redux-field-wpglobus_checkbox',
+					plugins_url( '/field_wpglobus_checkbox' . WPGlobus::SCRIPT_SUFFIX() . '.css', __FILE__ ),
+					array(),
+					WPGlobus::SCRIPT_VER()
+				);
+			}
+
+			wp_enqueue_script(
+				'redux-field-wpglobus_checkbox',
+				plugins_url( '/field_wpglobus_checkbox' . WPGlobus::SCRIPT_SUFFIX() . '.js', __FILE__ ),
+				array( 'jquery', 'redux-js' ),
+				WPGlobus::SCRIPT_VER(),
+				true
+			);
+		}
+	}
 
 }

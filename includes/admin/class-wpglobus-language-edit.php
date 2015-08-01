@@ -104,6 +104,7 @@ class WPGlobus_Language_Edit {
 
 		$config = WPGlobus::Config();
 
+		/** @var array $opts */
 		$opts = get_option( $config->option );
 
 		if ( isset( $opts['enabled_languages'][ $this->language_code ] ) ) {
@@ -172,6 +173,7 @@ class WPGlobus_Language_Edit {
 				unset( $config->language_name[ $old_code ] );
 			}
 
+			/** @var array $opts */
 			$opts = get_option( $config->option );
 			if ( isset( $opts['enabled_languages'][ $old_code ] ) ) {
 				unset( $opts['enabled_languages'][ $old_code ] );
@@ -394,7 +396,7 @@ class WPGlobus_Language_Edit {
 			<hr/>
 			<a href="<?php echo admin_url('admin.php?page=wpglobus_options'); ?>">
 				&larr;
-				<?php esc_html__( 'Back to the WPGlobus Settings', 'wpglobus' ); ?>
+				<?php esc_html_e( 'Back to the WPGlobus Settings', 'wpglobus' ); ?>
 			</a>
 		</div>
 	<?php

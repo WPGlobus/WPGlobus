@@ -803,16 +803,16 @@ class WPGlobus {
 
 			/**
 			 * Using the same 'select2-js' ID as Redux Plugin does, to avoid duplicate enqueueing
-			 * @todo Check if we should do it only if redux origin is 'embedded'
 			 */
-			wp_register_script(
-				'select2-js',
-				'//cdn.jsdelivr.net/select2/3.5.2/select2' . WPGlobus::$_SCRIPT_SUFFIX . '.js',
-				array( 'jquery' ),
-				'3.5.2',
-				true
-			);
-			wp_enqueue_script( 'select2-js' );
+			if ( ! wp_script_is( 'select2-js' ) ) {
+				wp_enqueue_script(
+					'select2-js',
+					'//cdn.jsdelivr.net/select2/3.5.2/select2.min.js',
+					array( 'jquery' ),
+					null,
+					true
+				);
+			}
 
 		}
 
@@ -1288,13 +1288,12 @@ class WPGlobus {
 
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
-			wp_register_style(
+			wp_enqueue_style(
 				'select2-css',
-				'//cdn.jsdelivr.net/select2/3.5.2/select2' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
+				'//cdn.jsdelivr.net/select2/3.5.2/select2.css',
 				array(),
-				WPGLOBUS_VERSION
+				null
 			);
-			wp_enqueue_style( 'select2-css' );
 		}
 
 		$post = get_post();
