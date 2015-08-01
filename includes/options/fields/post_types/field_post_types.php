@@ -15,7 +15,7 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 		 * @param string $value
 		 * @param        $parent
 		 */
-		function __construct( $field = array(), $value = '', $parent ) {
+		public function __construct( $field = array(), $value = '', $parent ) {
 
 			$this->parent = $parent;
 			$this->field  = $field;
@@ -40,8 +40,9 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 
 			$post_types = get_post_types( array('_builtin'=>false) );
 
-			$options = get_option('wpglobus_option');
-			$options_post_types = empty($options['post_type']) ? array() : $options['post_type'];
+			/** @var array $options */
+			$options = get_option( 'wpglobus_option' );
+			$options_post_types = empty( $options['post_type'] ) ? array() : $options['post_type'];
 			
 			$disabled_post_types = array();
 			/**
@@ -56,23 +57,16 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 			
 			$enabled_post_types = array();
 			foreach( $post_types as $post_type ) {
-				if ( ! in_array( $post_type, $disabled_post_types ) ) {
+				if ( ! in_array( $post_type, $disabled_post_types,true ) ) {
 					$enabled_post_types[] = $post_type;
 				}	
 			}	
 			
-			$suffix = '.min';
-			$ver    = date( 'ymd' );
-			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				$suffix = '';
-				$ver    = sprintf( 'debug-%d', time() );
-			}
-
 			wp_enqueue_script(
 				'wpglobus-redux-field-post_types',
-				plugins_url( '/field_post_types' . $suffix . '.js', __FILE__ ),
+				plugins_url( '/field_post_types' . WPGlobus::SCRIPT_SUFFIX() . '.js', __FILE__ ),
 				array( 'jquery' ),
-				$ver,
+				WPGlobus::SCRIPT_VER(),
 				true
 			);
 			wp_localize_script(
