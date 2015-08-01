@@ -320,16 +320,6 @@ class WPGlobus {
 				'on_admin_styles'
 			) );
 
-			add_filter( "redux/{$config->option}/field/class/table", array(
-				$this,
-				'on_field_table'
-			) );
-
-			add_filter( "redux/{$config->option}/field/class/post_types", array(
-				$this,
-				'on_add_field_post_types'
-			) );
-
 			add_action( 'admin_menu', array(
 				$this,
 				'on_admin_menu'
@@ -1433,22 +1423,6 @@ class WPGlobus {
 
 		return $sorted_menu_items;
 
-	}
-
-	/**
-	 * Include file for new field 'table'
-	 * @return string
-	 */
-	function on_field_table() {
-		return dirname( __FILE__ ) . '/options/fields/table/field_table.php';
-	}
-
-	/**
-	 * Include file for new field 'post_types'
-	 * @return string
-	 */
-	function on_add_field_post_types() {
-		return dirname( __FILE__ ) . '/options/fields/post_types/field_post_types.php';
 	}
 
 	/**

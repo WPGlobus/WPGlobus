@@ -22,10 +22,6 @@ class WPGlobus_Options {
 	 */
 	public function __construct() {
 
-//		if ( ! class_exists( 'ReduxFramework' ) ) {
-//			return;
-//		}
-
 		$nav_menus = WPGlobus::_get_nav_menus();
 
 		foreach ( $nav_menus as $menu ) {
@@ -35,13 +31,7 @@ class WPGlobus_Options {
 			$this->menus['all'] = 'All';
 		}
 
-		// This is needed. Bah WordPress bugs.  ;)
-		//            if (  true == Redux_Helpers::isTheme(__FILE__) ) {
-		//                $this->initSettings();
-		//            } else {
-//		$this->initSettings();
 		add_action( 'init', array( $this, 'initSettings' ) );
-		//            }
 
 		/** remove redux menu under the tools **/
 		add_action( 'admin_menu', array( $this, 'remove_redux_menu' ), 12 );
@@ -61,17 +51,27 @@ class WPGlobus_Options {
 
 		$config = WPGlobus::Config();
 
-		foreach ( array( 'wpglobus_info', 'wpglobus_sortable', 'wpglobus_select', 'wpglobus_checkbox', 'wpglobus_ace_editor' ) as $field_type ) {
+		/**
+		 * To avoid any conflict with ReduxFramework embedded in theme, always use our own field classes.
+		 * Even the standard fields we use are forked and prefixed with 'wpglobus_'.
+		 */
+		foreach (
+			array(
+				'wpglobus_info',
+				'wpglobus_sortable',
+				'wpglobus_select',
+				'wpglobus_checkbox',
+				'wpglobus_ace_editor',
+				'table',
+				'post_types'
+			) as $field_type
+		) {
 
-			add_filter( "redux/{$config->option}/field/class/{$field_type}", function ( $file, $field ) {
-				if ( ! file_exists( $file ) ) {
-					$file =
-						WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
-				}
-
-				return $file;
-			}
-				, 1, 2 );
+			add_filter( "redux/{$config->option}/field/class/{$field_type}", array(
+					$this,
+					'add_custom_redux_fields'
+				)
+				, 0, 2 );
 		}
 
 		// Set the default arguments
@@ -89,6 +89,23 @@ class WPGlobus_Options {
 
 		/** @noinspection PhpUndefinedClassInspection */
 		$this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
+	}
+
+	/**
+	 * Tell Redux where to find our custom fields
+	 *
+	 * @since 1.2.2
+	 * @param string $file  Path of the field class where Redux is looking for it
+	 * @param array  $field Field parameters
+	 * @return string Path of the field class where we want Redux to find it
+	 */
+	public function add_custom_redux_fields( $file, $field ) {
+		if ( ! file_exists( $file ) ) {
+			$file = WPGlobus::$PLUGIN_DIR_PATH .
+			        "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
+		}
+
+		return $file;
 	}
 
 	public function setSections() {
