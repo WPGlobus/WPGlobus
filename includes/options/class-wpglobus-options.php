@@ -589,6 +589,53 @@ class WPGlobus_Options {
 		// Add content after the form.
 //		$this->args['footer_text'] =
 //			'&copy; Copyright 2014-' . date( 'Y' ) . ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.';
+
+
+		// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
+		$ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
+
+		$this->args['share_icons'][] = array(
+			'url'   => 'http://www.wpglobus.com/quick-start/' . $ga_campaign,
+			'title' => esc_html__( 'Read the Quick Start Guide', 'wpglobus' ),
+			'icon'  => 'el el-question-sign'
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'http://www.wpglobus.com/' . $ga_campaign,
+			'title' => esc_html__( 'Visit our website', 'wpglobus' ),
+			'icon'  => 'el el-globe'
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/' . $ga_campaign,
+			'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
+			'icon'  => 'el el-icon-shopping-cart'
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'https://github.com/WPGlobus',
+			'title' => esc_html__( 'Collaborate on GitHub', 'wpglobus' ),
+			'icon'  => 'el el-github'
+			//'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'https://www.facebook.com/WPGlobus',
+			'title' => esc_html__( 'Like us on Facebook', 'wpglobus' ),
+			'icon'  => 'el el-facebook'
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'https://twitter.com/WPGlobus',
+			'title' => esc_html__( 'Follow us on Twitter', 'wpglobus' ),
+			'icon'  => 'el el-twitter'
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'https://www.linkedin.com/company/wpglobus',
+			'title' => esc_html__( 'Find us on LinkedIn', 'wpglobus' ),
+			'icon'  => 'el el-linkedin'
+		);
+		$this->args['share_icons'][] = array(
+			'url'   => 'https://plus.google.com/+Wpglobus',
+			'title' => esc_html__( 'Circle us on Google+', 'wpglobus' ),
+			'icon'  => 'el el-googleplus'
+		);
+
 	}
 
 } // class
