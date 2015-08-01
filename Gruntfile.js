@@ -8,23 +8,25 @@ module.exports = function (grunt) {
         pathIncludes = 'includes',
         pathCSS,
         pathCSS_field_table,
+        pathCSS_options_fields,
         pathJS,
-        pathJS_field_table
+        pathJS_options_fields
         ;
     pathCSS = pathIncludes + '/css';
     pathJS = pathIncludes + '/js';
 
     /**
-     * "Table" field for Redux
+     * Custom Redux fields
      */
     pathCSS_field_table = pathIncludes + '/options/fields/table';
-    pathJS_field_table = pathCSS_field_table;
+    pathCSS_options_fields = pathIncludes + '/options/fields';
+    pathJS_options_fields = pathCSS_options_fields;
 
     /**
      * Auto-load grunt tasks
      * @link https://www.npmjs.com/package/load-grunt-tasks
      */
-    require( 'load-grunt-tasks' )( grunt );
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -50,13 +52,15 @@ module.exports = function (grunt) {
                     ext: '.min.js'
                 }]
             },
-            field_table: {
+            options_fields: {
                 files: [{
+                    src: [
+                        pathJS_options_fields + '/**/*.js',
+                        '!' + pathJS_options_fields + '/options/fields/**/*.min.js'
+                    ],
+                    ext: '.min.js',
                     expand: true,
-                    cwd: pathJS_field_table + '/',
-                    src: ['*.js', '!*.min.js'],
-                    dest: pathJS_field_table + '/',
-                    ext: '.min.js'
+                    flatten: false,
                 }]
             }
         },
@@ -187,7 +191,7 @@ module.exports = function (grunt) {
                 pathCSS + '/*.less',
                 pathCSS_field_table + '/*.less',
                 pathJS + '/*.js',
-                pathJS_field_table + '/*.js'
+                pathJS_options_fields + '/**/*.js'
             ],
             tasks: ['less', 'cssmin', 'uglify'],
             options: {
