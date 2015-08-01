@@ -77,6 +77,16 @@ class WPGlobus {
 	}
 
 	/**
+	 * To use as the 'version' argument for JS/CSS enqueue.
+	 *
+	 * @since 1.2.2
+	 * @return string
+	 */
+	public static function SCRIPT_VER() {
+		return ( self::$_SCRIPT_DEBUG ? sprintf( 'debug-%d', time() ) : WPGLOBUS_VERSION );
+	}
+
+	/**
 	 * Support third party plugin vendors
 	 */
 	public $vendors_scripts = array();
