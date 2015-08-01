@@ -7,7 +7,6 @@ module.exports = function (grunt) {
     //bannerTemplate = '/* <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */',
         pathIncludes = 'includes',
         pathCSS,
-        pathCSS_field_table,
         pathCSS_options_fields,
         pathJS,
         pathJS_options_fields
@@ -18,7 +17,6 @@ module.exports = function (grunt) {
     /**
      * Custom Redux fields
      */
-    pathCSS_field_table = pathIncludes + '/options/fields/table';
     pathCSS_options_fields = pathIncludes + '/options/fields';
     pathJS_options_fields = pathCSS_options_fields;
 
@@ -56,7 +54,7 @@ module.exports = function (grunt) {
                 files: [{
                     src: [
                         pathJS_options_fields + '/**/*.js',
-                        '!' + pathJS_options_fields + '/options/fields/**/*.min.js'
+                        '!' + pathJS_options_fields + '/**/*.min.js'
                     ],
                     ext: '.min.js',
                     expand: true,
@@ -140,15 +138,16 @@ module.exports = function (grunt) {
                 dest: pathCSS + '/',
                 ext: '.min.css'
             },
-            field_table: {
+            options_fields: {
                 options: {
                     keepSpecialComments: 0
                 },
-                expand: true,
-                cwd: pathCSS_field_table + '/',
-                src: ['*.css', '!*.min.css'],
-                dest: pathCSS_field_table + '/',
-                ext: '.min.css'
+                files: [{
+                    src: [pathCSS_options_fields + '/**/*.css'],
+                    ext: '.min.css',
+                    expand: true,
+                    flatten: false,
+                }]
             }
         },
 
@@ -189,7 +188,7 @@ module.exports = function (grunt) {
             files: [
                 'Gruntfile.js',
                 pathCSS + '/*.less',
-                pathCSS_field_table + '/*.less',
+                pathCSS_options_fields + '/**/*.less',
                 pathJS + '/*.js',
                 pathJS_options_fields + '/**/*.js'
             ],
