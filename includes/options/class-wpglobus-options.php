@@ -242,8 +242,7 @@ class WPGlobus_Options {
 			$navigation_menu_placeholder = __( 'Select navigation menu', 'wpglobus' );
 		}
 
-		$desc_enabled_languages = implode( '', array(
-			'<strong>' . __( 'Instructions:', 'wpglobus' ) . '</strong>',
+		$desc_languages_intro = implode( '', array(
 			'<ul style="list-style: disc; list-style-position: inside;">',
 			'<li>' . sprintf( __( 'Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons.', 'wpglobus' ), '<i class="el el-move icon-large"></i>' ) . '</li>',
 			'<li>' . __( '<strong>Uncheck</strong> the languages you do not plan to use.', 'wpglobus' ) . '</li>',
@@ -259,15 +258,23 @@ class WPGlobus_Options {
 			'<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
 
 		$this->sections[] = array(
-			'title'  => __( 'Languages', 'wpglobus' ),
+			'title'  => esc_html__( 'Languages', 'wpglobus' ),
 			'icon'   => 'el-icon-wrench-alt',
 			'fields' => array(
+				array(
+					'id'       => 'languages_intro',
+					'type'     => 'wpglobus_info',
+					'title'    => esc_html__( 'Instructions:', 'wpglobus' ),
+					'subtitle' => esc_html__( 'NOTE: you cannot remove the main language.', 'wpglobus' ),
+					'desc'     => $desc_languages_intro,
+					'style'    => 'info',
+					'notice'   => false
+				),
 				array(
 					'id'          => 'enabled_languages',
 					'type'        => 'wpglobus_sortable',
 					'title'       => __( 'Enabled Languages', 'wpglobus' ),
 					'compiler'    => 'false',
-					'desc'        => $desc_enabled_languages,
 					'subtitle'    => __( 'These languages are currently enabled on your site.', 'wpglobus' ),
 					'options'     => $enabled_languages,
 					'default'     => $defaults_for_enabled_languages,
@@ -358,6 +365,7 @@ class WPGlobus_Options {
 					'title'    => __( 'Use this table to add, edit or delete languages.', 'wpglobus' ),
 					'subtitle' => __( 'NOTE: you cannot remove the main language.', 'wpglobus' ),
 					'style'    => 'info',
+					'notice'   => false
 				),
 				array(
 					'id'   => 'lang_new',
@@ -377,6 +385,7 @@ class WPGlobus_Options {
 				'type'  => 'wpglobus_info',
 				'title' => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
 				'style' => 'info',
+				'notice'   => false
 			),
 		);
 
