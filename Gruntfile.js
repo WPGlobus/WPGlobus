@@ -113,16 +113,16 @@ module.exports = function (grunt) {
                     "includes/css/wpglobus-dialog-ui.css": pathCSS + '/' + "wpglobus-dialog-ui.less"
                 }
             },
-            field_table: {
+            options_fields: {
                 options: {
-                    paths: [pathCSS_field_table],
-                    sourceMap: true,
-                    sourceMapBasepath: pathCSS_field_table,
-                    sourceMapURL: 'field_table.css.map'
+                    sourceMap: false, // Does not work properly with globs
                 },
-                files: {
-                    "includes/options/fields/table/field_table.css": pathCSS_field_table + '/' + "field_table.less"
-                }
+                files: [{
+                    src: [pathCSS_options_fields + '/**/*.less'],
+                    ext: '.css',
+                    expand: true,
+                    flatten: false,
+                }]
             }
         },
 
