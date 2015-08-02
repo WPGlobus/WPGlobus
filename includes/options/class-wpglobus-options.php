@@ -120,8 +120,8 @@ class WPGlobus_Options {
 
 		/**
 		 * Display warning if an old Redux is loaded
-		 * @todo Add link to FAQ explaining what to do.
-		 * @todo Tell the admin what did we load (plugin or someone else's Redux)
+		 *
+		 * @see  ReduxFrameworkInstances::get_all_instances()
 		 */
 		/** @noinspection PhpUndefinedClassInspection */
 		if ( version_compare( ReduxFramework::$_version, WPGlobus::$minimalReduxFramework_version ) < 0 ) {
@@ -130,20 +130,31 @@ class WPGlobus_Options {
 				array(
 					'id'     => 'version_warning',
 					'type'   => 'wpglobus_info',
-					'title'  => __( 'WARNING: Redux Framework upgrade is highly recommended!', 'wpglobus' ),
-					'desc'   => sprintf(
-						__( 'WPGlobus administration panel requires Redux Framework %2$s or later. The version you have installed is %1$s.' ),
-						ReduxFramework::$_version,
-						WPGlobus::$minimalReduxFramework_version
-					),
+					'title'  => esc_html__( 'WARNING: old version of the ReduxFramework is active!', 'wpglobus' ),
+					'desc'   => '</br>' .
+					            sprintf(
+						            esc_html__( 'WPGlobus settings panel requires ReduxFramework %1$s or later.' ),
+						            WPGlobus::$minimalReduxFramework_version
+					            ) .
+					            '</br>' .
+					            '</br>' .
+					            sprintf( esc_html__( 'The currently active ReduxFramework (version %1$s) was loaded from the %2$s folder.', 'wpglobus' ),
+						            ReduxFramework::$_version,
+						            '<code>' . ReduxFramework::$_dir . '</code>'
+					            ) .
+					            '</br>' .
+					            '</br>' .
+					            '<strong>' .
+					            sprintf( esc_html__( 'We recommend you to install the most recent version of the ReduxFramework plugin: %1$s.', 'wpglobus' ), '<a href="https://wordpress.org/plugins/redux-framework/">https://wordpress.org/plugins/redux-framework/</a>' ) .
+				                '</strong>'
+					,
 					'style'  => 'critical',
-					'notice' => true,
+					'notice' => false,
 				);
 		}
 
 		/**
 		 * The Welcome message
-		 * @todo Link to Contact Us (site, Github)
 		 */
 		$fields_home[] =
 			array(
@@ -200,7 +211,7 @@ class WPGlobus_Options {
 				$lang_in_en = ' (' . $config->en_language_name[ $code ] . ')';
 			}
 
-			$enabled_languages[ $code ] = $config->language_name[ $code ] . $lang_in_en;
+			$enabled_languages[ $code ]              = $config->language_name[ $code ] . $lang_in_en;
 			$defaults_for_enabled_languages[ $code ] = true;
 		}
 
@@ -271,14 +282,14 @@ class WPGlobus_Options {
 					'notice'   => false
 				),
 				array(
-					'id'          => 'enabled_languages',
-					'type'        => 'wpglobus_sortable',
-					'title'       => __( 'Enabled Languages', 'wpglobus' ),
-					'compiler'    => 'false',
-					'subtitle'    => __( 'These languages are currently enabled on your site.', 'wpglobus' ),
-					'options'     => $enabled_languages,
-					'default'     => $defaults_for_enabled_languages,
-					'mode'        => 'checkbox',
+					'id'       => 'enabled_languages',
+					'type'     => 'wpglobus_sortable',
+					'title'    => __( 'Enabled Languages', 'wpglobus' ),
+					'compiler' => 'false',
+					'subtitle' => __( 'These languages are currently enabled on your site.', 'wpglobus' ),
+					'options'  => $enabled_languages,
+					'default'  => $defaults_for_enabled_languages,
+					'mode'     => 'checkbox',
 				),
 				array(
 					'id'          => 'more_languages',
@@ -301,7 +312,7 @@ class WPGlobus_Options {
 						'allowClear'              => false,
 						'minimumResultsForSearch' => - 1
 					),
-					'options' => array(
+					'options'  => array(
 						'code'      => __( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
 						'full_name' => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
 						/* @since 1.2.1 */
@@ -381,11 +392,11 @@ class WPGlobus_Options {
 
 		$fields = array(
 			array(
-				'id'    => 'description',
-				'type'  => 'wpglobus_info',
-				'title' => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
-				'style' => 'info',
-				'notice'   => false
+				'id'     => 'description',
+				'type'   => 'wpglobus_info',
+				'title'  => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
+				'style'  => 'info',
+				'notice' => false
 			),
 		);
 
@@ -420,21 +431,21 @@ class WPGlobus_Options {
 		/**
 		 * SECTION: Add-ons
 		 * We need add it for menu item only
-		 */		
+		 */
 		$this->sections[] = array(
-			'title'  => __( 'Add-ons', 'wpglobus' ),
-			'icon'   => 'el-icon-th-list',
-			'class'	 => 'wpglobus-addons-group hidden'
+			'title' => __( 'Add-ons', 'wpglobus' ),
+			'icon'  => 'el-icon-th-list',
+			'class' => 'wpglobus-addons-group hidden'
 		);
-	
+
 		/**
 		 * Filter the array of sections.
-		 * @since 1.0.11
 		 *
+		 * @since 1.0.11
 		 * @param array $sections Array of Redux sections.
-		 */	
+		 */
 		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
-		
+
 	}
 
 	public function setHelpTabs() {
@@ -444,7 +455,8 @@ class WPGlobus_Options {
 
 	/**
 	 * All the possible arguments for Redux.
-	 * For full documentation on arguments, please refer to: https://github.com/ReduxFramework/ReduxFramework/wiki/Arguments
+	 * For full documentation on arguments, please refer to:
+	 * https://github.com/ReduxFramework/ReduxFramework/wiki/Arguments
 	 **/
 	public function setArguments() {
 
@@ -508,25 +520,22 @@ class WPGlobus_Options {
 			// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
 			'output_tag'         => true,
 			// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
-			'footer_credit'     => '&copy; Copyright 2014-' . date( 'Y' ) .
-			                       ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.',
-
+			'footer_credit'      => '&copy; Copyright 2014-' . date( 'Y' ) .
+			                        ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.',
 			'database'           => 'options',
 			// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 			'system_info'        => false,
 			// REMOVE
 
-			'hide_reset' => TRUE,
-			'disable_tracking' => true,
+			'hide_reset'         => true,
+			'disable_tracking'   => true,
 			/**
 			 * With newer ReduxFramework, need to disable AJAX save,
 			 * so that list of languages is always fresh, after save.
 			 *
 			 * @since 1.2.2
 			 */
-			'ajax_save' => false,
-
-
+			'ajax_save'          => false,
 			// HINTS
 			'hints'              => array(
 				'icon'          => 'icon-question-sign',
@@ -557,38 +566,38 @@ class WPGlobus_Options {
 				),
 			)
 		);
-				
-//		$donate_1 = '<div style="float:left;width:50%;">
-//						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
-//						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) .
-//						'</p>' .
-//						'<div style="float:left;">
-//							<form id="wpglobus-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-//								<input type="hidden" name="cmd" value="_s-xclick">
-//								<input type="hidden" name="hosted_button_id" value="SLF8M4YNZHNQN">
-//								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal">
-//								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-//							</form>
-//						</div>
-//					</div>
-//					<div style="clear:both;"></div>';
-					
+
+		//		$donate_1 = '<div style="float:left;width:50%;">
+		//						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
+		//						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) .
+		//						'</p>' .
+		//						'<div style="float:left;">
+		//							<form id="wpglobus-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		//								<input type="hidden" name="cmd" value="_s-xclick">
+		//								<input type="hidden" name="hosted_button_id" value="SLF8M4YNZHNQN">
+		//								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal">
+		//								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		//							</form>
+		//						</div>
+		//					</div>
+		//					<div style="clear:both;"></div>';
+
 		$donate_2 = '<div style="float:left;width:50%;">
 						<p style="float:left;width:50%;position:relative;top:50%;transform:translateY(25%);">' .
-						   __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) . 
-						'</p>' . 
-						'<div style="float:left;">
+		            __( 'If you like WPGlobus, please consider a small donation to support the future development.', 'wpglobus' ) .
+		            '</p>' .
+		            '<div style="float:left;">
 							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=SLF8M4YNZHNQN"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" /></a>
 						</div>
 					</div>
-					<div style="clear:both;"></div>';						
-					
+					<div style="clear:both;"></div>';
+
 		$this->args['intro_text'] =
-			'<h1 style="width:30%;float:left;">WPGlobus ' . WPGLOBUS_VERSION . '</h1>' .  $donate_2;
+			'<h1 style="width:30%;float:left;">WPGlobus ' . WPGLOBUS_VERSION . '</h1>' . $donate_2;
 
 		// Add content after the form.
-//		$this->args['footer_text'] =
-//			'&copy; Copyright 2014-' . date( 'Y' ) . ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.';
+		//		$this->args['footer_text'] =
+		//			'&copy; Copyright 2014-' . date( 'Y' ) . ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.';
 
 
 		// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
