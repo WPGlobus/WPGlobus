@@ -253,9 +253,10 @@ var wpglobus_wpseo = function () {
 			post_title = '#title_' + language;
 			post_content = '#content_' + language;
 		}
-		
-		if (jQuery('#editable-post-name-full').length) {
-			var postname = jQuery('#editable-post-name-full').text();
+
+		var postnamefull = jQuery(document).triggerHandler('wpglobus_post_name_full', {postnamefull:'#editable-post-name-full',language:language}) || '#editable-post-name-full'; 
+		if (jQuery(postnamefull).length) {
+			var postname = jQuery(postnamefull).text();
 			var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', postname).replace('http://', '');
 		}
 		var p = new RegExp("(^|[ \s\n\r\t\.,'\(\"\+;!?:\-])" + focuskw + "($|[ \s\n\r\t.,'\)\"\+!?:;\-])", 'gim');

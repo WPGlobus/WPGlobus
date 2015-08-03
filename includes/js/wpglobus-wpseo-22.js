@@ -283,9 +283,10 @@ var wpglobus_wpseo = function () {
 		}
 
 		var postname;
-		var url;		
-		if ( jQuery( '#editable-post-name-full' ).length ) {
-			postname = jQuery( '#editable-post-name-full' ).text();
+		var url;	
+		var postnamefull = jQuery(document).triggerHandler('wpglobus_post_name_full', {postnamefull:'#editable-post-name-full',language:language}) || '#editable-post-name-full'; 
+		if ( jQuery( postnamefull ).length ) {
+			postname = jQuery( postnamefull ).text();
 			url = wpseoMetaboxL10n.wpseo_permalink_template.replace( '%postname%', postname ).replace( 'http://', '' );
 		}
 		var p = new RegExp( '(^|[ \\s\n\r\t\\.,\'\\("\\+;!?:\\-])' + ystRemoveLowerCaseDiacritics( focuskw ) + '($|[\\s\n\r\t.,\'\\)"\\+!?:;\\-])', 'gim' );
