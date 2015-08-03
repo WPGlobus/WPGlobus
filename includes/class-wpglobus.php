@@ -1575,6 +1575,16 @@ class WPGlobus {
 			'wpglobus_extra_languages', $extra_languages, $current_language );
 
 		/**
+		 * Filter to show off dropdown menu or not.
+		 * Returning boolean.
+		 * @since 1.2.2
+		 *
+		 * @param boolean
+		 * @param null ( no navigation menu	)
+		 */		
+		$dropdown_menu = apply_filters( 'wpglobus_dropdown_menu', true, null );
+
+		/**
 		 * Build the top-level menu link
 		 */
 		$language            = $current_language;
@@ -1583,33 +1593,61 @@ class WPGlobus {
 		$span_classes_lang   = $this->_get_language_classes( $language );
 		
 		$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
-		                       esc_html( $flag_name ) . '</span>';
+							   esc_html( $flag_name ) . '</span>';
 		$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
-		$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children">' .
-		           $a_tag .
-		           '<ul class="children">';
+	
+		if ( $dropdown_menu ) {
 
-		foreach ( $extra_languages as $language ) :
-			/**
-			 * Build the drop-down menu links for each language
-			 */
-			$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
-			$flag_name           = $this->_get_flag_name( $language );
-			$span_classes_lang   = $this->_get_language_classes( $language );
+			$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children page_item_wpglobus_menu_switch_'.$language.'">' .
+					   $a_tag .
+					   '<ul class="children">';
+
+			foreach ( $extra_languages as $language ) :
+				/**
+				 * Build the drop-down menu links for extra language
+				 */
+				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+				$flag_name           = $this->_get_flag_name( $language );
+				$span_classes_lang   = $this->_get_language_classes( $language );
+				
+				$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
+									   esc_html( $flag_name ) . '</span>';
+				$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+
+				$output .= '<li class="page_item page_item_wpglobus_menu_switch_'.$language.'">' .
+						   $a_tag .
+						   '</li>';
+			endforeach;
+
+			$output .= '</ul>' .
+					   '</li>';
+
+		} else {
 			
-			$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
-			                       esc_html( $flag_name ) . '</span>';
-			$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
+			$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_wpglobus_menu_switch_'.$language.'">' .
+					   $a_tag .
+					   '</li>';
+					   
+			foreach ( $extra_languages as $language ) :
+				/**
+				 * Build the top-level menu link for extra language
+				 */
+				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+				$flag_name           = $this->_get_flag_name( $language );
+				$span_classes_lang   = $this->_get_language_classes( $language );
+				
+				$link_text           = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
+									   esc_html( $flag_name ) . '</span>';
+				$a_tag               = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
-			$output .= '<li class="page_item">' .
-			           $a_tag .
-			           '</li>';
-		endforeach;
-
-		$output .= '</ul>' .
-		           '</li>';
-
+				$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_wpglobus_menu_switch_'.$language.'">' .
+						   $a_tag .
+						   '</li>';
+			endforeach;
+					   
+		}	// $dropdown_menu
+		
 		return $output;
 	}
 
@@ -1681,6 +1719,7 @@ class WPGlobus {
 		/** main menu item classes */
 		$menu_item_classes = array(
 			'',
+			'menu-item',
 			'menu_item_wpglobus_menu_switch',
 			'wpglobus-selector-link'
 		);
@@ -1692,13 +1731,29 @@ class WPGlobus {
 			'wpglobus-selector-link'
 		);
 
+		if ( 
+			/**
+			 * Filter to show off dropdown menu or not.
+			 * Returning boolean.
+			 * @since 1.2.2
+			 *
+			 * @param boolean
+			 * @param navigation menu
+			 */		
+			apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config()->nav_menu ) 
+		) {
+			$parent_item_ID = 9999999999; # 9 999 999 999
+		} else {
+			$parent_item_ID = 0;
+		}
+		
 		$span_classes_lang   = $this->_get_language_classes( WPGlobus::Config()->language );
 		
 		$current_url = WPGlobus_Utils::current_url();
 
 		$item                   = new stdClass();
-		$item->ID               = 9999999999; # 9 999 999 999
-		$item->db_id            = 9999999999;
+		$item->ID               = $parent_item_ID == 0 ? 'wpglobus_menu_switch_' . WPGlobus::Config()->language : $parent_item_ID;
+		$item->db_id            = $parent_item_ID == 0 ? 'wpglobus_menu_switch_' . WPGlobus::Config()->language : $parent_item_ID;
 		$item->menu_item_parent = 0;
 		$item->title            =
 			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span>';
@@ -1706,27 +1761,43 @@ class WPGlobus {
 		$item->url         = $current_url;
 		$item->classes     = $menu_item_classes;
 		$item->description = '';
-
-		$sorted_menu_items[] = $item;
-
+		$item->language    = WPGlobus::Config()->language;
+		
+		$wpglobus_menu_items[] = $item;
 
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang   	= $this->_get_language_classes( $language );	
 			$item                   = new stdClass();
 			$item->ID               = 'wpglobus_menu_switch_' . $language;
 			$item->db_id            = 'wpglobus_menu_switch_' . $language;
-			$item->menu_item_parent = 9999999999;
+			$item->menu_item_parent = $parent_item_ID;
 			$item->title            =
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
 			// This points to the URL localized for the selected language
 			$item->url         = WPGlobus_Utils::localize_url( $current_url, $language );
-			$item->classes     = $submenu_item_classes;
+			$item->classes     = $parent_item_ID == 0 ? $menu_item_classes : $submenu_item_classes;
 			$item->description = '';
-
-			$sorted_menu_items[] = $item;
+			$item->language	   = $language;
+			
+			$wpglobus_menu_items[] = $item;
 		}
 
-		return $sorted_menu_items;
+		$languages = $extra_languages;
+		array_unshift( $languages, WPGlobus::Config()->language );
+
+		return array_merge( 
+			$sorted_menu_items,
+			
+			/**
+			 * Filter wpglobus menu items. May use for change order of languages.
+			 * Returning array.
+			 * @since 1.2.2
+			 *
+			 * @param array $wpglobus_menu_items An array menu items.
+			 * @param array $languages 			 An array languages.
+			 */
+			apply_filters( 'wpglobus_menu_items', $wpglobus_menu_items, $languages )
+		);
 	}
 
 	/**
