@@ -155,6 +155,7 @@ module.exports = function (grunt) {
             options: {
                 encoding: 'UTF-8',
                 msgid_bugs_address: 'support@wpglobus.com',
+                copyright_holder: '<%= grunt.template.today("yyyy") %>, WPGlobus',
                 msgmerge: false,
                 text_domain: 'wpglobus', //Your text domain. Produces my-text-domain.pot
                 dest: 'languages/', //directory to place the pot file
@@ -180,6 +181,32 @@ module.exports = function (grunt) {
                 expand: true
             }
         },
+
+        replace: {
+            example: {
+                overwrite: true,
+                src: ['languages/wpglobus.pot'],             // source files array (supports minimatch)
+                replacements: [
+                    {
+                        from: 'SOME DESCRIPTIVE TITLE',                   // string replacement
+                        to: 'Translations for WPGlobus plugin'
+                    },
+                    {
+                        from: '# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.',
+                        to: ''
+                    },
+                    {
+                        from: '# This file is distributed under the same license as the PACKAGE package.',
+                        to: ''
+                    },
+                    {
+                        from: '# Copyright (C) YEAR',
+                        to: '# Copyright (c)'
+                    }
+                ]
+            }
+        },
+
 
         /**
          * @link https://github.com/gruntjs/grunt-contrib-watch
@@ -216,7 +243,7 @@ module.exports = function (grunt) {
         });
     });
 
-    grunt.registerTask('pomo', ['pot', 'after-pot']);
+    grunt.registerTask('pomo', ['pot', 'replace', 'after-pot']);
 
     // To run all tasks - same list as for `watch`
     grunt.registerTask('dist', ['wp_readme_to_markdown', 'less', 'cssmin', 'uglify', 'pomo']);
