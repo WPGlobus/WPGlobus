@@ -1731,16 +1731,16 @@ class WPGlobus {
 			'wpglobus-selector-link'
 		);
 
-		if ( 
+		if (
 			/**
-			 * Filter to show off dropdown menu or not.
-			 * Returning boolean.
-			 * @since 1.2.2
+			 * Filter to show the language switcher as a dropdown (default) or plain menu.
 			 *
-			 * @param boolean
-			 * @param navigation menu
-			 */		
-			apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config()->nav_menu ) 
+			 * @since 1.2.2
+			 * @param bool   true If false then no dropdown
+			 * @param string WPGlobus::Config()->nav_menu Menu slug
+			 * @return bool Value of the first parameter, possibly updated by the filter
+			 */
+		apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config()->nav_menu )
 		) {
 			$parent_item_ID = 9999999999; # 9 999 999 999
 		} else {
