@@ -184,7 +184,7 @@ module.exports = function (grunt) {
         },
 
         replace: {
-            example: {
+            pot: {
                 overwrite: true,
                 src: ['languages/wpglobus.pot'],             // source files array (supports minimatch)
                 replacements: [
@@ -244,7 +244,7 @@ module.exports = function (grunt) {
         });
     });
 
-    grunt.registerTask('pomo', ['pot', 'replace', 'after-pot']);
+    grunt.registerTask('pomo', ['pot', 'replace:pot', 'after-pot']);
 
     // To run all tasks - same list as for `watch`
     grunt.registerTask('dist', ['wp_readme_to_markdown', 'less', 'cssmin', 'uglify', 'pomo']);
