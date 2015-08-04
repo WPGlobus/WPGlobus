@@ -156,6 +156,7 @@ module.exports = function (grunt) {
                 encoding: 'UTF-8',
                 msgid_bugs_address: 'support@wpglobus.com',
                 copyright_holder: '<%= grunt.template.today("yyyy") %>, WPGlobus',
+                comment_tag: 'TRANSLATORS:',
                 msgmerge: false,
                 text_domain: 'wpglobus', //Your text domain. Produces my-text-domain.pot
                 dest: 'languages/', //directory to place the pot file
