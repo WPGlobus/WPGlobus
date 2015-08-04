@@ -387,12 +387,11 @@ class WPGlobus_WPSEO {
 					$order ++;
 				} ?>
 			</ul>    <?php
-
+			$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
+			$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
+			$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); 			
 			foreach ( WPGlobus::Config()->open_languages as $language ) {
-				$url        = WPGlobus_Utils::localize_url( $permalink['url'], $language );
-				$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
-				$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
-				$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); ?>
+				$url = WPGlobus_Utils::localize_url( $permalink['url'], $language ); 	?>
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
 				     data-language="<?php echo $language; ?>"
 				     data-url-<?php echo $language; ?>="<?php echo $url; ?>"
