@@ -17,6 +17,18 @@ class WPGlobus {
 	const URL_WPGLOBUS_SITE = 'http://www.wpglobus.com/';
 
 	/**
+	 * A never-called method for "make-pot" to extract strings to the .pot file.
+	 * Used to translate strings from the plugin header.
+	 *
+	 * @since 1.2.2
+	 */
+	protected static function _strings_for_pomo() {
+
+		/* translators: plugin description in the list of plugins in WP admin */
+		__( 'A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!' );
+	}
+
+	/**
 	 * @var string
 	 */
 	public static $minimalReduxFramework_version = '3.2.9.4';
