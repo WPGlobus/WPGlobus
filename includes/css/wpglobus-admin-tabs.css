@@ -27,6 +27,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs .tabs-nav ul,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .tabs-nav ul,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .tabs-nav ul,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs .tabs-nav ul,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs .tabs-nav ul {
   list-style-type: none;
   margin: 0 10px;
@@ -35,10 +36,12 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs li a,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs li a,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs li a,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs li a,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs li a,
 .wpglobus-wp-admin .wpglobus-post-body-tabs ul li,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs ul li,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs ul li,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs ul li,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li {
   float: left;
   margin: 0;
@@ -46,6 +49,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs li.ui-state-default,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs li.ui-state-default,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs li.ui-state-default,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs li.ui-state-default,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs li.ui-state-default {
   border: 0;
   background: transparent;
@@ -53,6 +57,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs ul li.ui-state-default a,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs ul li.ui-state-default a,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs ul li.ui-state-default a,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs ul li.ui-state-default a,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li.ui-state-default a {
   display: block;
   color: #777;
@@ -69,6 +74,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs ul li.ui-state-active a,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs ul li.ui-state-active a,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs ul li.ui-state-active a,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs ul li.ui-state-active a,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li.ui-state-active a {
   background: #fff;
   border: 1px solid #e5e5e5;
@@ -80,26 +86,31 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs ul li a:hover,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs ul li a:hover,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs ul li a:hover,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs ul li a:hover,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li a:hover {
   color: #000;
 }
 .wpglobus-wp-admin .wpglobus-post-body-tabs ul li a:focus,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs ul li a:focus,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs ul li a:focus,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs ul li a:focus,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs ul li a:focus {
   box-shadow: none;
 }
 .wpglobus-wp-admin .wpglobus-post-body-tabs .wpglobus-post-body-tabs-list,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-post-body-tabs-list,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-post-body-tabs-list,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs .wpglobus-post-body-tabs-list,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-post-body-tabs-list,
 .wpglobus-wp-admin .wpglobus-post-body-tabs .wpglobus-wpseo-tabs-list,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-wpseo-tabs-list,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseo-tabs-list,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs .wpglobus-wpseo-tabs-list,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-wpseo-tabs-list,
 .wpglobus-wp-admin .wpglobus-post-body-tabs .wpglobus-aioseop-tabs-list,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .wpglobus-aioseop-tabs-list,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-aioseop-tabs-list,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs .wpglobus-aioseop-tabs-list,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs .wpglobus-aioseop-tabs-list {
   border: none;
   border-bottom: 1px solid #dddddd;
@@ -109,6 +120,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs .ui-corner-all,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs .ui-corner-all,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .ui-corner-all,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs .ui-corner-all,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs .ui-corner-all {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -118,6 +130,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs.ui-widget-content,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-widget-content,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-widget-content,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs.ui-widget-content,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-widget-content {
   border: none;
   background: transparent;
@@ -126,6 +139,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs.ui-widget,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-widget,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-widget,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs.ui-widget,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-widget {
   font-family: inherit;
   font-size: inherit;
@@ -133,12 +147,14 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs.ui-tabs,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs {
   padding: inherit;
 }
 .wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs .ui-tabs-nav,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs .ui-tabs-nav,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs .ui-tabs-nav,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs.ui-tabs .ui-tabs-nav,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs .ui-tabs-nav {
   margin: 0 0 1em 0;
   padding: 0;
@@ -146,6 +162,7 @@
 .wpglobus-wp-admin .wpglobus-post-body-tabs.ui-tabs .ui-tabs-panel,
 .wpglobus-wp-admin #wpglobus-aioseop-tabs.ui-tabs .ui-tabs-panel,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs.ui-tabs .ui-tabs-panel,
+.wpglobus-wp-admin .wpglobus-wpseo-tabs.ui-tabs .ui-tabs-panel,
 .wpglobus-wp-admin .wpglobus-taxonomy-tabs.ui-tabs .ui-tabs-panel {
   border-width: 0;
   padding: inherit;
@@ -224,4 +241,3 @@
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults p {
   font-size: 13px !important;
 }
-/*# sourceMappingURL=wpglobus-admin-tabs.css.map */
