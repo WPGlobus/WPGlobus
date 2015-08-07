@@ -337,6 +337,15 @@ class WPGlobus {
 
 			}    // endif $devmode
 
+			if ( $this->vendors_scripts['ACF'] && WPGlobus_WP::is_pagenow( array(
+					'post.php',
+					'post-new.php'
+				) )
+			) {
+				require_once 'vendor/class-wpglobus-acf.php';
+				$WPGlobus_acf = new WPGlobus_Acf(); 				
+			}
+			
 			add_action( 'admin_print_styles', array(
 				$this,
 				'on_admin_styles'
@@ -1924,10 +1933,11 @@ class WPGlobus {
 			} else {
 
 				$last_user = get_userdata( get_post_meta( $post->ID, '_edit_last', true ) );
-
 				?>
 
-				<div id="postdivrich-<?php echo $language; ?>" class="postarea postdivrich-wpglobus">    <?php
+				<div id="postdivrich-<?php echo $language; ?>" 
+					class="postarea <?php echo apply_filters( 'wpglobus_postdivrich_class', 'postdivrich-wpglobus', $language ); ?>"
+					style="<?php echo apply_filters( 'wpglobus_postdivrich_style', '', $language ); ?>">    <?php
 					wp_editor( WPGlobus_Core::text_filter( $post->post_content, $language, WPGlobus::RETURN_EMPTY ), 'content_' . $language, array(
 						'_content_editor_dfw' => true,
 						#'dfw' => true,
