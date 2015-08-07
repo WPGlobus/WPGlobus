@@ -111,6 +111,7 @@ No known backward incompatibility issues.
 * ADDED:
 	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
 	* Support for the [The Events Calendar](https://wordpress.org/plugins/the-events-calendar/).
+	* Support options for ACF
 * FIXED:
 	* Correct Yoast SEO Page Analysis for the default language.
 
