@@ -403,31 +403,33 @@ var wpglobus_wpseo = function () {
 		jQuery( '#wpseosnippet_'+l+' .url' ).text( wpseosnippet_url );
 		wpglobus_updateSnippet(l);
 		
-		//
-		var cache = {}, lastXhr, focuskwHelpTriggered = false;
-		
-		jQuery( '#' + wpseoMetaboxL10n.field_prefix + 'focuskw' + '_' + l ).autocomplete({
-			minLength   : 3,
-			formatResult: function (row) {
-				return jQuery('<div/>').html(row).html();
-			},
-			source      : function (request, response) {
-				var term = request.term;
-				if (term in cache) {
-					response(cache[term]);
-					return;
-				}
-				request._ajax_nonce = wpseoMetaboxL10n.wpseo_keyword_suggest_nonce;
-				request.action = 'wpseo_get_suggest';
-
-				lastXhr = jQuery.getJSON(ajaxurl, request, function (data, status, xhr) {
-					cache[term] = data;
-					if (xhr === lastXhr) {
-						response(data);
+		if ( typeof jQuery().autocomplete != 'undefined' ) {
+			//
+			var cache = {}, lastXhr, focuskwHelpTriggered = false;
+			
+			jQuery( '#' + wpseoMetaboxL10n.field_prefix + 'focuskw' + '_' + l ).autocomplete({
+				minLength   : 3,
+				formatResult: function (row) {
+					return jQuery('<div/>').html(row).html();
+				},
+				source      : function (request, response) {
+					var term = request.term;
+					if (term in cache) {
+						response(cache[term]);
+						return;
 					}
-				});
-			}
-		});
+					request._ajax_nonce = wpseoMetaboxL10n.wpseo_keyword_suggest_nonce;
+					request.action = 'wpseo_get_suggest';
+
+					lastXhr = jQuery.getJSON(ajaxurl, request, function (data, status, xhr) {
+						cache[term] = data;
+						if (xhr === lastXhr) {
+							response(data);
+						}
+					});
+				}
+			});
+		}
 		
 		jQuery( '#' + wpseoMetaboxL10n.field_prefix + 'title' + '_' + l ).keyup(function () {
 			wpglobus_updateTitle( false, jQuery(this).data('language') );
