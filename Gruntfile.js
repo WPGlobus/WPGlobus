@@ -205,6 +205,20 @@ module.exports = function (grunt) {
                         to: '# Copyright (c)'
                     }
                 ]
+            },
+            readme_md: {
+                overwrite: true,
+                src: ['README.md'],
+                replacements: [
+                    {
+                        from: 'http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/',
+                        to: 'https://ps.w.org/wpglobus/assets/'
+                    },
+                    {
+                        from: '![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).](https://ps.w.org/wpglobus/assets/screenshot-8.png)',
+                        to: '![Multilingual WooCommerce store powered by WooCommerce WPGlobus.](https://ps.w.org/wpglobus/assets/screenshot-8.png)'
+                    }
+                ]
             }
         },
 
@@ -246,8 +260,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('pomo', ['pot', 'replace:pot', 'after-pot']);
 
+    grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
+
     // To run all tasks - same list as for `watch`
-    grunt.registerTask('dist', ['wp_readme_to_markdown', 'less', 'cssmin', 'uglify', 'pomo']);
+    grunt.registerTask('dist', ['readme_md', 'less', 'cssmin', 'uglify', 'pomo']);
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
