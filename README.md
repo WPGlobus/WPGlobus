@@ -3,7 +3,7 @@
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus  
 **Requires at least:** 4.0  
-**Tested up to:** 4.2.4  
+**Tested up to:** 4.3  
 **Stable tag:** trunk  
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
@@ -92,28 +92,28 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 ## Screenshots ##
 
 ### 1. Welcome screen. ###
-![Welcome screen.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-1.png)
+![Welcome screen.](https://ps.w.org/wpglobus/assets/screenshot-1.png)
 
 ### 2. Settings panel. ###
-![Settings panel.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-2.png)
+![Settings panel.](https://ps.w.org/wpglobus/assets/screenshot-2.png)
 
 ### 3. Languages setup. ###
-![Languages setup.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-3.png)
+![Languages setup.](https://ps.w.org/wpglobus/assets/screenshot-3.png)
 
 ### 4. Attaching language switcher to a menu. ###
-![Attaching language switcher to a menu.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-4.png)
+![Attaching language switcher to a menu.](https://ps.w.org/wpglobus/assets/screenshot-4.png)
 
 ### 5. Editing post in multiple languages. ###
-![Editing post in multiple languages.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-5.png)
+![Editing post in multiple languages.](https://ps.w.org/wpglobus/assets/screenshot-5.png)
 
 ### 6. Multilingual Yoast SEO and Featured Images. ###
-![Multilingual Yoast SEO and Featured Images.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-6.png)
+![Multilingual Yoast SEO and Featured Images.](https://ps.w.org/wpglobus/assets/screenshot-6.png)
 
 ### 7. Language Switcher widget and Multilingual Editor dialog. ###
-![Language Switcher widget and Multilingual Editor dialog.](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-7.png)
+![Language Switcher widget and Multilingual Editor dialog.](https://ps.w.org/wpglobus/assets/screenshot-7.png)
 
 ### 8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/). ###
-![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).](http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/screenshot-8.png)
+![Multilingual WooCommerce store powered by WooCommerce WPGlobus.](https://ps.w.org/wpglobus/assets/screenshot-8.png)
 
 
 ## Upgrade Notice ##
@@ -126,9 +126,11 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
-	* Support for the [The Events Calendar](https://wordpress.org/plugins/the-events-calendar/).
+	* Support for the [The Events Calendar plugin](https://wordpress.org/plugins/the-events-calendar/).
+	* Support hidden ACF groups.
 * FIXED:
 	* Correct Yoast SEO Page Analysis for the default language.
+	* Compatibility with ReduxFramework-based theme options.
 
 ### 1.2.1 ###
 
@@ -163,12 +165,6 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* js script for WPSEO 2.2
-
-### 1.1.1.1 ###
-
-* FIXED:
-	* Wrong behavior when the main language is not English. Thanks to [Klaus Feurich](https://wordpress.org/support/profile/lunymarmusic) for reporting the bug.
-	* Restored default path to ReduxCore because of silly side effects.
 
 ### Earlier versions ###
 

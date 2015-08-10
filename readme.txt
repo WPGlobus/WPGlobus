@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus
 Requires at least: 4.0
-Tested up to: 4.2.4
+Tested up to: 4.3
 Stable tag: trunk
 License: GPLv2
 License URI: https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE
@@ -110,10 +110,11 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
-	* Support for the [The Events Calendar](https://wordpress.org/plugins/the-events-calendar/).
-	* Support options for ACF
+	* Support for the [The Events Calendar plugin](https://wordpress.org/plugins/the-events-calendar/).
+	* Support hidden ACF groups.
 * FIXED:
 	* Correct Yoast SEO Page Analysis for the default language.
+	* Compatibility with ReduxFramework-based theme options.
 
 = 1.2.1 =
 
@@ -148,12 +149,6 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* js script for WPSEO 2.2
-
-= 1.1.1.1 =
-
-* FIXED:
-	* Wrong behavior when the main language is not English. Thanks to [Klaus Feurich](https://wordpress.org/support/profile/lunymarmusic) for reporting the bug.
-	* Restored default path to ReduxCore because of silly side effects.
 
 = Earlier versions =
 
