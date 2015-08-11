@@ -106,6 +106,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.2.3 =
+
+* FIXED:
+	* Return empty hreflangs for 404 page.
+
 = 1.2.2 =
 
 * ADDED:
