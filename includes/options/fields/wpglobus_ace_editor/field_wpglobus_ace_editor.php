@@ -122,12 +122,11 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_ace_editor' ) ) {
 			}
 
 			if ( ! wp_script_is( 'ace-editor-js' ) ) {
-				/** @noinspection PhpUndefinedClassInspection */
-				Redux_CDN::enqueue_script(
+				wp_enqueue_script(
 					'ace-editor-js',
-					'//cdn.jsdelivr.net/ace/1.1.9/min/ace.js',
+					'//cdn.jsdelivr.net/ace/1.2.0/min/ace.js',
 					array( 'jquery' ),
-					'1.1.9',
+					null,
 					true
 				);
 			}

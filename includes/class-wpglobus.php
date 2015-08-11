@@ -828,9 +828,9 @@ class WPGlobus {
 			if ( ! wp_script_is( 'select2-js' ) ) {
 				wp_enqueue_script(
 					'select2-js',
-					'//cdn.jsdelivr.net/select2/3.5.2/select2.min.js',
+					WPGlobus::$PLUGIN_DIR_URL . 'vendor/select2.min.js',
 					array( 'jquery' ),
-					null,
+					'3.5.2',
 					true
 				);
 			}
@@ -1309,12 +1309,17 @@ class WPGlobus {
 
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
-			wp_enqueue_style(
-				'select2-css',
-				'//cdn.jsdelivr.net/select2/3.5.2/select2.css',
-				array(),
-				null
-			);
+			/**
+			 * Using the same 'select2-css' ID as Redux Plugin does, to avoid duplicate enqueueing
+			 */
+			if ( ! wp_style_is( 'select2-js' ) ) {
+				wp_enqueue_style(
+					'select2-css',
+					WPGlobus::$PLUGIN_DIR_URL . 'vendor/select2.min.css',
+					array(),
+					'3.5.2'
+				);
+			}
 		}
 
 		$post = get_post();
