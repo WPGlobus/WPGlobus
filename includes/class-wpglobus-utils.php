@@ -265,7 +265,11 @@ class WPGlobus_Utils {
 		// @codeCoverageIgnoreEnd
 
 		$hreflangs = array();
-
+		
+		if ( is_404() ) {
+			return $hreflangs;
+		}
+		
 		$ref_source = self::localize_url( self::current_url(), '%%lang%%', $config );
 
 		foreach ( $config->enabled_languages as $language ) {
