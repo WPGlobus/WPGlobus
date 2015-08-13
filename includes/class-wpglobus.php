@@ -1633,7 +1633,8 @@ class WPGlobus {
 				/**
 				 * Build the drop-down menu links for extra language
 				 */
-				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+//				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+				$url                 = WPGlobus_Utils::localize_current_url( $language );
 				$flag_name           = $this->_get_flag_name( $language );
 				$span_classes_lang   = $this->_get_language_classes( $language );
 				
@@ -1659,7 +1660,8 @@ class WPGlobus {
 				/**
 				 * Build the top-level menu link for extra language
 				 */
-				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+//				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
+				$url                 = WPGlobus_Utils::localize_current_url( $language );
 				$flag_name           = $this->_get_flag_name( $language );
 				$span_classes_lang   = $this->_get_language_classes( $language );
 				
@@ -1800,7 +1802,8 @@ class WPGlobus {
 			$item->title            =
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
 			// This points to the URL localized for the selected language
-			$item->url         = WPGlobus_Utils::localize_url( $current_url, $language );
+//			$item->url         = WPGlobus_Utils::localize_url( $current_url, $language );
+			$item->url                 = WPGlobus_Utils::localize_current_url( $language );
 			$item->classes     = $parent_item_ID == 0 ? $menu_item_classes : $submenu_item_classes;
 			$item->description = '';
 			$item->language	   = $language;
