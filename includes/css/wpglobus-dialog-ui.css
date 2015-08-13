@@ -32,6 +32,9 @@
   visibility: hidden;
   width: 0;
 }
+.wpglobus-wp-admin .wpglobus_dialog_error:before {
+  color: #f00;
+}
 .wpglobus-wp-admin .wpglobus-dialog-tabs-list {
   min-height: 3em;
 }
@@ -220,4 +223,3 @@
   bottom: -5px;
   background-position: 16px 16px;
 }
-/*# sourceMappingURL=wpglobus-dialog-ui.css.map */
