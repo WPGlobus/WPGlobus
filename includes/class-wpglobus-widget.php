@@ -122,8 +122,8 @@ class WPGlobusWidget extends WP_Widget {
 				$selected = ' selected';
 			}
 
-			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language );
-				
+			$url = WPGlobus_Utils::localize_current_url( $language );
+
 			$flag = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
 
 			switch ( $type ) :

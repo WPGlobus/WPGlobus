@@ -11,7 +11,6 @@ class WPGlobus_Utils {
 	 * @param string          $url      URL to localize
 	 * @param string          $language Language code
 	 * @param WPGlobus_Config $config   Alternative configuration (i.e. Unit Test mock object)
-	 *
 	 * @return string
 	 */
 	public static function localize_url( $url = '', $language = '', WPGlobus_Config $config = null ) {
@@ -31,6 +30,7 @@ class WPGlobus_Utils {
 		 * Site Address (URL) is home_url
 		 * We need home_url, and we cannot use the @home_url function,
 		 * because it will filter back here causing endless loop.
+		 *
 		 * @todo Multisite?
 		 */
 		$home_url = get_option( 'home' );
@@ -61,6 +61,7 @@ class WPGlobus_Utils {
 
 		/**
 		 * Regex to replace current language prefix with the requested one.
+		 *
 		 * @example ^(https?:\/\/(?:.+\.)?example\.com)(?:\/?(?:en|ru|pt))?($|\/$|[\/#\?].*$)
 		 */
 
@@ -105,7 +106,6 @@ class WPGlobus_Utils {
 	 *
 	 * @param string          $url
 	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
-	 *
 	 * @return string
 	 */
 	public static function extract_language_from_url( $url = '', WPGlobus_Config $config = null ) {
@@ -131,6 +131,7 @@ class WPGlobus_Utils {
 
 		/**
 		 * Regex to find the language prefix.
+		 *
 		 * @example !^/(en|ru|pt)/!
 		 */
 		$re = '!^' . $path_home .
@@ -150,7 +151,6 @@ class WPGlobus_Utils {
 	 * Note: does not check if the function is in a class method.
 	 *
 	 * @param string $function_name
-	 *
 	 * @return bool
 	 */
 	public static function is_function_in_backtrace( $function_name ) {
@@ -171,7 +171,6 @@ class WPGlobus_Utils {
 	 * http://www.example.com becomes example.com
 	 *
 	 * @param string $url
-	 *
 	 * @return string
 	 * @since 1.0.12
 	 */
@@ -196,6 +195,7 @@ class WPGlobus_Utils {
 		} else {
 			/**
 			 * Strip all prefixes
+			 *
 			 * @todo example.co.uk becomes just co.uk
 			 *       This does not break the algorithm of @see localize_url, but still needs to be fixed.
 			 */
@@ -215,7 +215,6 @@ class WPGlobus_Utils {
 	 * Convert array of local texts to multilingual string (with WPGlobus delimiters)
 	 *
 	 * @param string[] $translations
-	 *
 	 * @return string
 	 */
 	public static function build_multilingual_string( $translations ) {
@@ -229,17 +228,17 @@ class WPGlobus_Utils {
 
 	/**
 	 * Returns the current URL.
-	 * @since 1.1.1
 	 * There is no method of getting the current URL in WordPress.
 	 * Various snippets published on the Web use a combination of home_url and add_query_arg.
 	 * However, none of them work when WordPress is installed in a subfolder.
 	 * The method below looks valid. There is a theoretical chance of HTTP_HOST tampered, etc.
-	 * However, the same line of code is used by the WordPress core, for example in
-	 * @see   wp_admin_canonical_url
-	 * so we are going to use it, too
+	 * However, the same line of code is used by the WordPress core,
+	 * for example in @see wp_admin_canonical_url, so we are going to use it, too
 	 * *
 	 * Note that #hash is always lost because it's a client-side parameter.
 	 * We might add it using a JavaScript call.
+	 *
+	 * @since 1.1.1
 	 */
 	public static function current_url() {
 		return set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
@@ -247,10 +246,9 @@ class WPGlobus_Utils {
 
 	/**
 	 * Build hreflang metas
+	 *
 	 * @since 1.1.1
-	 *
 	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
-	 *
 	 * @return string[] Array of rel-alternate link tags
 	 */
 	public static function hreflangs( WPGlobus_Config $config = null ) {
@@ -265,11 +263,11 @@ class WPGlobus_Utils {
 		// @codeCoverageIgnoreEnd
 
 		$hreflangs = array();
-		
+
 		if ( is_404() ) {
 			return $hreflangs;
 		}
-		
+
 		$ref_source = self::localize_url( self::current_url(), '%%lang%%', $config );
 
 		foreach ( $config->enabled_languages as $language ) {
@@ -287,17 +285,48 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * @todo The methods below are not used by the WPGlobus plugin. Need to check if they are used by any add-on.
-	 *       Marking them as deprecated so they will pop-up on code inspection.
+	 * @since 1.2.3
+	 * @global WP_Query $wp_query
+	 * @param string    $language
+	 * @return string
+	 */
+	public static function localize_current_url( $language = '' ) {
+		global $wp_query;
+
+		$url = '';
+		if ( $wp_query->is_singular && $wp_query->is_main_query() ) {
+			if ( $language === WPGlobus::Config()->default_language ) {
+				$url = WPGlobus_Utils::localize_url( get_permalink(), WPGlobus::Config()->default_language );
+			} else {
+				$wpglobus_slug = get_post_meta( $wp_query->post->ID, 'wpglobus_slug_' . $language, true );
+				if ( $wpglobus_slug ) {
+					$url = WPGlobus_Utils::localize_url( trailingslashit( home_url( $wpglobus_slug ) ), $language );
+				}
+			}
+
+			if ( $url && ! empty( $_SERVER['QUERY_STRING'] ) ) {
+				$url .= '?' . $_SERVER['QUERY_STRING'];
+			}
+
+		}
+		if ( ! $url ) {
+			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * @todo The methods below are not used by the WPGlobus plugin.
+	 * Need to check if they are used by any add-on.
+	 * Marking them as deprecated so they will pop-up on code inspection.
 	 */
 
 	/**
 	 * @deprecated
 	 * @codeCoverageIgnore
 	 * Return true if language is in array of enabled languages, otherwise false
-	 *
 	 * @param string $language
-	 *
 	 * @return bool
 	 */
 	public static function is_enabled( $language ) {
@@ -308,33 +337,26 @@ class WPGlobus_Utils {
 	 * @deprecated
 	 * @codeCoverageIgnore
 	 * Return true if language is in array of opened languages, otherwise false
-	 *
 	 * @param string $language
-	 *
 	 * @return bool
 	 */
 	public static function is_open( $language ) {
-		return in_array( $language, WPGlobus::Config()->open_languages );
+		return in_array( $language, WPGlobus::Config()->open_languages, true );
 	}
 
 	/**
 	 * @deprecated
 	 * @codeCoverageIgnore
-	 *
 	 * @param string $s
 	 * @param string $n
-	 *
 	 * @return bool
 	 */
 	public static function starts_with( $s, $n ) {
 		if ( strlen( $n ) > strlen( $s ) ) {
 			return false;
 		}
-		if ( $n == substr( $s, 0, strlen( $n ) ) ) {
-			return true;
-		}
 
-		return false;
+		return ( $n === substr( $s, 0, strlen( $n ) ) );
 	}
 
 
