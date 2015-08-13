@@ -1,9 +1,11 @@
 <?php
 /**
  * Unit test for Class WPGlobus_Utils
+ *
  * @package WPGlobus
  */
 require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-utils.php';
+require_once dirname( __FILE__ ) . '/mocks-wp.php';
 
 /**
  * Class WPGlobus_Utils__Test
@@ -16,6 +18,13 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 	 * Initialized by @see setUP()
 	 */
 	public static $option_home;
+
+	/**
+	 * @var bool $is_404_response
+	 * Used by mock @see is_404()
+	 * If necessary, can change to true
+	 */
+	public static $is_404_response = false;
 
 	/**
 	 * Run before each test.
@@ -59,6 +68,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		/**
 		 * Mock object sent as a parameter, because we do now have access to the actual config.
+		 *
 		 * @var WPGlobus_Config $config
 		 */
 		$config = $this->getMock( 'WPGlobus_Config' );
@@ -86,6 +96,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		/**
 		 * Good test cases
+		 *
 		 * @var string[][]
 		 * list($url, $localized_url, $language)
 		 */
@@ -141,6 +152,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		/**
 		 * Bad test cases
+		 *
 		 * @var string[][]
 		 */
 		$bad = array(
@@ -156,6 +168,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		/**
 		 * Various examples of home_url
+		 *
 		 * @var string[];
 		 */
 		$homes = array(
@@ -173,6 +186,8 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			'https://www.example.com',
 			'http://www.example.com/my-site/blog',
 			'http://dots.here.ac.uk/and.here/wordpress',
+			'http://www.example.de',
+			'http://www.example.pt',
 		);
 
 		foreach ( $homes as $home ) {
@@ -218,6 +233,14 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			WPGlobus_Utils::localize_url( 'http://www.example.com/page/', 'ru', $config ) );
 		self::assertEquals( 'http://example.com/ru/page/',
 			WPGlobus_Utils::localize_url( 'http://example.com/page/', 'ru', $config ) );
+
+		// A specific case from support forum
+		self::$option_home = 'http://www.fiskfelagid.is';
+		$config->default_language = 'en';
+		$config->enabled_languages = array( 'en', 'is' );
+		self::assertEquals( 'http://www.fiskfelagid.is/is',
+			WPGlobus_Utils::localize_url( 'http://www.fiskfelagid.is/is', 'is', $config ) );
+
 	}
 
 	/**
@@ -227,6 +250,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		/**
 		 * Mock object sent as a parameter, because we do now have access to the actual config.
+		 *
 		 * @var WPGlobus_Config $config
 		 */
 		$config = $this->getMock( 'WPGlobus_Config' );
@@ -354,6 +378,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * "Stub" test for coverage.
+	 *
 	 * @covers WPGlobus_Utils::current_url
 	 */
 	public static function test_current_url() {
@@ -369,6 +394,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 		/**
 		 * Mock object sent as a parameter, because we do now have access to the actual config.
+		 *
 		 * @var WPGlobus_Config $config
 		 */
 		$config = $this->getMock( 'WPGlobus_Config' );
@@ -416,54 +442,4 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 } // class
 
-/**
- * WordPress utilities mocks
- */
-
-
-/**
- * @param string $option_name
- *
- * @return string
- */
-function get_option( $option_name ) {
-	$option = '';
-	if ( 'home' === $option_name ) {
-		$option = WPGlobus_Utils__Test::$option_home;
-	}
-
-	return $option;
-}
-
-/**
- * @param string $string
- *
- * @return string
- */
-function trailingslashit( $string ) {
-	return untrailingslashit( $string ) . '/';
-}
-
-/**
- * @param string $string
- *
- * @return string
- */
-function untrailingslashit( $string ) {
-	return rtrim( $string, '/\\' );
-}
-
-/**
- * Set the scheme for a URL
- * @since 3.4.0
- *
- * @param string $url    Absolute url that includes a scheme
- * @param string $scheme Optional. Scheme to give $url. Currently 'http', 'https', 'login', 'login_post', 'admin', or 'relative'.
- *
- * @return string $url URL with chosen scheme.
- */
-function set_url_scheme( $url, /** @noinspection PhpUnusedParameterInspection */
-	$scheme = null ) {
-	return $url;
-}
 # --- EOF
