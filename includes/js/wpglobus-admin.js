@@ -174,7 +174,8 @@ var WPGlobusDialogApp;
 			var option = {
 				id: null,
 				dialogTitle: '',
-				style: ''
+				style: '',
+				styleTextareaWrapper: '',
 			}
 			if ( 'string' == typeof(elem) ) {
 				option.id = elem;	
@@ -236,7 +237,7 @@ var WPGlobusDialogApp;
 			$(clone).insertAfter('#'+id);
 			if ( 'TEXTAREA' == node.nodeName ) {
 				$('#wpglobus-'+id).addClass( 'wpglobus-textarea-'+id );
-				$('.wpglobus-textarea-'+id).wrapAll( '<div class="wpglobus-textarea-wrapper"></div>' );
+				$('.wpglobus-textarea-'+id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
 			}
 			$(document).on('change', '#wpglobus-'+id, function(){
 				var $t = $(this), 
