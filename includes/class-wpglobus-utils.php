@@ -256,7 +256,7 @@ class WPGlobus_Utils {
 		/**
 		 * Use the global configuration is alternative not passed
 		 */
-		if ( is_null( $config ) ) {
+		if ( null === $config ) {
 			// @codeCoverageIgnoreStart
 			$config = WPGlobus::Config();
 		}
@@ -268,16 +268,12 @@ class WPGlobus_Utils {
 			return $hreflangs;
 		}
 
-		$ref_source = self::localize_url( self::current_url(), '%%lang%%', $config );
-
 		foreach ( $config->enabled_languages as $language ) {
-			$hreflang = str_replace( '_', '-', $config->locale[ $language ] );
-			if ( $config->hide_default_language && $language == $config->default_language ) {
-				$ref = str_replace( '%%lang%%/', '', $ref_source );
-			} else {
-				$ref = str_replace( '%%lang%%', $language, $ref_source );
-			}
-			$hreflangs[ $language ] = '<link rel="alternate" hreflang="' . $hreflang . '" href="' . $ref . '"/>';
+
+			$hreflangs[ $language ] = sprintf( '<link rel="alternate" hreflang="%s" href="%s"/>',
+				str_replace( '_', '-', $config->locale[ $language ] ),
+				WPGlobus_Utils::localize_current_url( $language, $config )
+			);
 
 		}
 
