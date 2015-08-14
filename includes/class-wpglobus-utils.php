@@ -16,7 +16,7 @@ class WPGlobus_Utils {
 	public static function localize_url( $url = '', $language = '', WPGlobus_Config $config = null ) {
 
 		/**
-		 * Use the global configuration is alternative not passed
+		 * Use the global configuration if alternative not passed
 		 */
 		if ( is_null( $config ) ) {
 			// @codeCoverageIgnoreStart
@@ -286,29 +286,12 @@ class WPGlobus_Utils {
 
 	/**
 	 * @since 1.2.3
-	 * @global WP_Query $wp_query
 	 * @param string    $language
 	 * @return string
 	 */
 	public static function localize_current_url( $language = '' ) {
-		global $wp_query;
+		$url = apply_filters( 'wpglobus_pre_localize_current_url', '', $language );
 
-		$url = '';
-		if ( $wp_query->is_singular && $wp_query->is_main_query() ) {
-			if ( $language === WPGlobus::Config()->default_language ) {
-				$url = WPGlobus_Utils::localize_url( get_permalink(), WPGlobus::Config()->default_language );
-			} else {
-				$wpglobus_slug = get_post_meta( $wp_query->post->ID, 'wpglobus_slug_' . $language, true );
-				if ( $wpglobus_slug ) {
-					$url = WPGlobus_Utils::localize_url( trailingslashit( home_url( $wpglobus_slug ) ), $language );
-				}
-			}
-
-			if ( $url && ! empty( $_SERVER['QUERY_STRING'] ) ) {
-				$url .= '?' . $_SERVER['QUERY_STRING'];
-			}
-
-		}
 		if ( ! $url ) {
 			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language );
 		}
