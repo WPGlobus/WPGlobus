@@ -287,13 +287,22 @@ class WPGlobus_Utils {
 	/**
 	 * @since 1.2.3
 	 * @param string    $language
+	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
 	 * @return string
 	 */
-	public static function localize_current_url( $language = '' ) {
+	public static function localize_current_url( $language = '',  WPGlobus_Config $config = null ) {
 		$url = apply_filters( 'wpglobus_pre_localize_current_url', '', $language );
 
 		if ( ! $url ) {
-			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language );
+			/**
+			 * Use the global configuration is alternative not passed
+			 */
+			if ( null === $config ) {
+				// @codeCoverageIgnoreStart
+				$config = WPGlobus::Config();
+			}
+			// @codeCoverageIgnoreEnd
+			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language, $config );
 		}
 
 		return $url;
