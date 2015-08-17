@@ -187,6 +187,7 @@ class WPGlobus_Options {
 			);
 
 		$this->sections[] = array(
+			'wpglobus_id' => 'welcome',
 			'title'  => __( 'Welcome!', 'wpglobus' ),
 			'icon'   => 'el-icon-globe',
 			'fields' => $fields_home
@@ -269,6 +270,7 @@ class WPGlobus_Options {
 			'<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
 
 		$this->sections[] = array(
+			'wpglobus_id' => 'languages',
 			'title'  => esc_html__( 'Languages', 'wpglobus' ),
 			'icon'   => 'el-icon-wrench-alt',
 			'fields' => array(
@@ -367,6 +369,7 @@ class WPGlobus_Options {
 		*	SECTION: Language table
 		*/
 		$this->sections[] = array(
+			'wpglobus_id' => 'language_table',
 			'title'  => __( 'Languages table', 'wpglobus' ),
 			'icon'   => 'el-icon-th-list',
 			'fields' => array(
@@ -423,6 +426,7 @@ class WPGlobus_Options {
 		);
 
 		$this->sections[] = array(
+			'wpglobus_id' => 'post_types',
 			'title'  => __( 'Post types', 'wpglobus' ),
 			'icon'   => 'el-icon-th-list',
 			'fields' => $fields
@@ -433,6 +437,7 @@ class WPGlobus_Options {
 		 * We need add it for menu item only
 		 */
 		$this->sections[] = array(
+			'wpglobus_id' => 'add_ons',
 			'title' => __( 'Add-ons', 'wpglobus' ),
 			'icon'  => 'el-icon-th-list',
 			'class' => 'wpglobus-addons-group hidden'
