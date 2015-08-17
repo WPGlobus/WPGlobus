@@ -2409,7 +2409,7 @@ class WPGlobus {
 		?>
 		<script type='text/javascript'>
 			/* <![CDATA[ */
-			jQuery('#wp-admin-bar-site-name a').text("<?php echo $bn; ?>");
+			jQuery('#wp-admin-bar-site-name a').eq(0).text("<?php echo $bn; ?>");
 			/* ]]> */
 		</script>
 		<?php
