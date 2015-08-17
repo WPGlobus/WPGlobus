@@ -1606,9 +1606,10 @@ class WPGlobus {
 		 * @since 1.2.2
 		 *
 		 * @param boolean
-		 * @param null ( no navigation menu	)
+		 * @param object WPGlobus::Config()
 		 */		
-		$dropdown_menu = apply_filters( 'wpglobus_dropdown_menu', true, null );
+		$dropdown_menu = apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config() );
+		
 
 		/**
 		 * Build the top-level menu link
@@ -1765,10 +1766,10 @@ class WPGlobus {
 			 *
 			 * @since 1.2.2
 			 * @param bool   true If false then no dropdown
-			 * @param string WPGlobus::Config()->nav_menu Menu slug
+			 * @param object WPGlobus::Config()
 			 * @return bool Value of the first parameter, possibly updated by the filter
 			 */
-		apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config()->nav_menu )
+			apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config() )
 		) {
 			$parent_item_ID = 9999999999; # 9 999 999 999
 		} else {
