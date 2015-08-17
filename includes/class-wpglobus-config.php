@@ -172,6 +172,13 @@ class WPGlobus_Config {
 	 */
 	public $disabled_entities = array();
 
+	/**
+	 * WPGlobus extended options can be added via filter 'wpglobus_option_sections'
+	 * 
+	 * @since 1.2.3
+	 * @var array
+	 */	
+	public $extended_options = array();
 
 	/**
 	 * Constructor
@@ -475,6 +482,10 @@ class WPGlobus_Config {
 
 		}
 
+		if ( isset( $wpglobus_option['more_languages'] ) ) {
+			unset( $wpglobus_option['more_languages'] );
+		}
+		
 		/**
 		 * Get enabled languages and default language ( just one main language )
 		 */
@@ -490,13 +501,15 @@ class WPGlobus_Config {
 			 * Set default language
 			 */
 			$this->default_language = $this->enabled_languages[0];
+
+			unset( $wpglobus_option['enabled_languages'] );
 		}
 
 		/**
 		 * Set available languages for editors
 		 */
 		$this->open_languages = $this->enabled_languages;
-
+		
 		/**
 		 * Set flags URL
 		 */
@@ -543,6 +556,7 @@ class WPGlobus_Config {
 		 */
 		if ( isset( $wpglobus_option['show_flag_name'] ) ) {
 			$this->show_flag_name = $wpglobus_option['show_flag_name'];
+			unset( $wpglobus_option['show_flag_name'] );
 		}
 		if ( defined( 'WPGLOBUS_SHOW_FLAG_NAME' ) ) {
 			if ( 'name' === WPGLOBUS_SHOW_FLAG_NAME ) {
@@ -558,6 +572,7 @@ class WPGlobus_Config {
 		$this->nav_menu = '';
 		if ( isset( $wpglobus_option['use_nav_menu'] ) ) {
 			$this->nav_menu = ( $wpglobus_option['use_nav_menu'] == 'all' ) ? 'all' : $wpglobus_option['use_nav_menu'];
+			unset( $wpglobus_option['use_nav_menu'] );
 		}
 		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
@@ -571,12 +586,16 @@ class WPGlobus_Config {
 		if ( empty( $wpglobus_option['selector_wp_list_pages']['show_selector'] ) || $wpglobus_option['selector_wp_list_pages']['show_selector'] == 0 ) {
 			$this->selector_wp_list_pages = false;
 		}
-
+		if ( isset( $wpglobus_option['selector_wp_list_pages'] ) ) {
+			unset( $wpglobus_option['selector_wp_list_pages'] );
+		}
+		
 		/**
 		 * Get custom CSS
 		 */
 		if ( isset( $wpglobus_option['css_editor'] ) ) {
 			$this->css_editor = $wpglobus_option['css_editor'];
+			unset( $wpglobus_option['css_editor'] );
 		}
 
 		/**
@@ -621,6 +640,16 @@ class WPGlobus_Config {
 			$this->toggle = 'off';
 		}
 
+		if ( isset( $wpglobus_option['last_tab'] ) ) {
+			unset( $wpglobus_option['last_tab'] );
+		}
+		
+		/**
+		 * Remaining wpglobus options after unset() is extended options
+		 * @since 1.2.3
+		 */
+		$this->extended_options = $wpglobus_option;
+		
 	}
 
 } //class
