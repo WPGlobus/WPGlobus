@@ -128,4 +128,21 @@ ul.wpglobus-important li {
 .toplevel_page_wpglobus_options .redux-timer {
   display: none;
 }
+.toplevel_page_wpglobus_options .el-move::before {
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'dashicons';
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: inherit;
+  content: "\f168";
+  border: 1px solid #23769c;
+  color: #23769c;
+  background-color: white;
+  margin: 0 3px 0 3px;
+  line-height: 1.2;
+  width: 1.5em;
+  text-align: center;
+  cursor: move;
+}
 /*# sourceMappingURL=wpglobus-admin.css.map */

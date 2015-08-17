@@ -15,6 +15,11 @@
 	content: "\f319";
 }
 
+// To use in the Redux Sortable instead of elusive
+.dashicons-image-flip-vertical() {
+	content: "\f168";
+}
+
 #adminmenu li.toplevel_page_wpglobus_options div.wp-menu-image:before {
 	.dashicon-globus();
 }
@@ -105,16 +110,16 @@ ul.wpglobus-important {
 
 /* @see #edit-slug-box  */
 .wpglobus-edit-slug-box {
-    line-height: 24px;
-    min-height: 25px;
-    margin-top: 5px;
-    padding: 0 10px;
-    color: #666;
+	line-height: 24px;
+	min-height: 25px;
+	margin-top: 5px;
+	padding: 0 10px;
+	color: #666;
 	.wpglobus-editable-post-name {
 		background-color: #fffbcc;
 	}
 	.wpglobus-editable-post-name-full {
-		display:none;
+		display: none;
 	}
 	/* @see #editable-post-name input */
 	.wpglobus-editable-post-name input {
@@ -125,8 +130,8 @@ ul.wpglobus-important {
 		margin-right: 0;
 		margin-top: 0;
 		width: 20em;
-	}	
-	
+	}
+
 }
 
 @color-wpglobus-logo-globe: #E38869;
@@ -161,6 +166,22 @@ ul.wpglobus-important {
 .toplevel_page_wpglobus_options {
 	#redux-header, .redux-timer {
 		display: none;
+	}
+}
+
+// Use Dashicon instead of Elusive, because Elusive can be broken by a theme (ex. "Virtue")
+.toplevel_page_wpglobus_options {
+	.el-move::before {
+		.dashicon();
+		.dashicons-image-flip-vertical();
+		border: 1px solid @color-wpglobus-logo-wp;
+		color: @color-wpglobus-logo-wp;
+		background-color: white;
+		margin: 0 3px 0 3px;
+		line-height: 1.2;
+		width: 1.5em;
+		text-align: center;
+		cursor: move;
 	}
 }
 
