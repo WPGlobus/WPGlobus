@@ -110,7 +110,11 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Return empty hreflangs for 404 page.
-
+	* Double title in admin bar menu
+* ADDED:
+	* extended options to WPGlobus_Config class
+	* 'wpglobus_id' for every option section
+	
 = 1.2.2 =
 
 * ADDED:
