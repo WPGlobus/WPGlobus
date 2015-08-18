@@ -49,6 +49,34 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family:
 * [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/):
 	* This extension enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
 
+= Compatibility with Themes =
+
+> WPGlobus will not be able to help with translation when your site's theme does not use proper filtering before outputting content, and prints texts directly from the database on the screen. Please talk to the theme authors and let them know. The fix is usually very simple, and if necessary, we are ready to cooperate.
+
+This will not be translated:
+
+`
+echo $post->post_title;
+`
+
+The correct way:
+
+`
+echo apply_filters( 'the_title', $post->post_title );
+`
+
+= Permalinks =
+
+> **IMPORTANT:** WPGlobus will not work if your URLs look like `example.com?p=123` or `example.com/index.php/category/post/`.
+
+Please go to `Settings->Permalinks` and change the permalink structure to non-default and with no `index.php` in it. If you are unable to do that for some reason, please talk to your hosting provider / systems administrator.
+
+= Commercial Licensing and Paid Support =
+
+For commercial services, please contact us at [http://www.wpglobus.com/professional-support/](http://www.wpglobus.com/professional-support/).
+
+Thank you!
+
 = More info and ways to contact the WPGlobus Development Team =
 
 * [WPGlobus.com website](http://www.wpglobus.com/).
@@ -112,6 +140,7 @@ No known backward incompatibility issues.
 	* Return empty hreflangs for 404 page.
 	* Duplicate title in admin bar menu.
 	* Language ordering icons disappearing with some themes.
+	* WordPress 4.3 compatibility.
 * ADDED:
 	* Extended options to WPGlobus_Config class
 	* 'wpglobus_id' for every option section
