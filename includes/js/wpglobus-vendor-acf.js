@@ -19,14 +19,15 @@ jQuery(document).ready(function($){
 		style = 'width:97%';	
 	}	
 	$('.acf_postbox .field').each(function(){
-		var $t = $(this), id;
+		var $t = $(this), id, h;
 		if ( $t.hasClass('field_type-textarea') ) {
 			id = $t.find('textarea').attr('id');
+			h = $('#'+id).height() + 20;
 			WPGlobusDialogApp.addElement({
 				id: id,
 				dialogTitle: 'Edit ACF field',
 				style: 'width:97%;float:left;',
-				styleTextareaWrapper: 'height:' + $('#acf-ecf_field').height() + 'px;'
+				styleTextareaWrapper: 'height:' + h + 'px;'
 			});
 		} else if ( $t.hasClass('field_type-text') ) {
 			id = $t.find('input').attr('id');
