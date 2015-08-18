@@ -57,4 +57,14 @@ function is_404() {
 	return WPGlobus_Utils__Test::$is_404_response;
 }
 
+/**
+ * @param string $tag   The name of the filter hook.
+ * @param mixed  $value The value on which the filters hooked to `$tag` are applied on.
+ * @param mixed  $arg1   Additional variables passed to the functions hooked to `$tag`.
+ * @param mixed  $arg2   Additional variables passed to the functions hooked to `$tag`.
+ */
+function apply_filters( $tag, $value, $arg1 = null, $arg2 = null ) {
+	return $value;
+}
+
 # --- EOF
