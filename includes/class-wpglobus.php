@@ -1601,12 +1601,12 @@ class WPGlobus {
 			'wpglobus_extra_languages', $extra_languages, $current_language );
 
 		/**
-		 * Filter to show off dropdown menu or not.
+		 * Filter to show dropdown menu or not.
 		 * Returning boolean.
 		 * @since 1.2.2
 		 *
-		 * @param boolean
-		 * @param object WPGlobus::Config()
+		 * @param bool
+		 * @param WPGlobus_Config
 		 */		
 		$dropdown_menu = apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config() );
 		
@@ -1766,7 +1766,7 @@ class WPGlobus {
 			 *
 			 * @since 1.2.2
 			 * @param bool   true If false then no dropdown
-			 * @param object WPGlobus::Config()
+			 * @param WPGlobus_Config
 			 * @return bool Value of the first parameter, possibly updated by the filter
 			 */
 			apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config() )
