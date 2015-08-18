@@ -110,9 +110,10 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Return empty hreflangs for 404 page.
-	* Double title in admin bar menu
+	* Duplicate title in admin bar menu.
+	* Language ordering icons disappearing with some themes.
 * ADDED:
-	* extended options to WPGlobus_Config class
+	* Extended options to WPGlobus_Config class
 	* 'wpglobus_id' for every option section
 	
 = 1.2.2 =
@@ -153,11 +154,6 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Bug with switching languages when WordPress is in a subfolder of the main site.
-
-= 1.1.1.2 =
-
-* FIXED:
-	* js script for WPSEO 2.2
 
 = Earlier versions =
 

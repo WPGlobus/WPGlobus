@@ -2,6 +2,16 @@
 
 ## Changelog ##
 
+### 1.2.3 ###
+
+* FIXED:
+	* Return empty hreflangs for 404 page.
+	* Duplicate title in admin bar menu.
+	* Language ordering icons disappearing with some themes.
+* ADDED:
+	* Extended options to WPGlobus_Config class
+	* 'wpglobus_id' for every option section
+	
 ### 1.2.2 ###
 
 * ADDED:
