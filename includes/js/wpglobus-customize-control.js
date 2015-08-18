@@ -20,6 +20,7 @@ jQuery(document).ready(function ($) {
 	$.each(WPGlobusCoreData.customize.elements, function(i,e){
 		$(e.id).attr('id',i).val(e.value).trigger('change');
 		$('#customize-control-'+e.origin).css({'display':'none'});
+		$('#customize-control-'+e.origin+' label' ).css({'display':'none'}); // from WP4.3
 		$(e.id).on('change',function (ev){
 			var $e = $( WPGlobusCoreData.customize.elements[$(this).data('customize-setting-link')].origin_element );
 			$e.val( WPGlobusCore.getString( $e.val(), $(this).val() ) );
