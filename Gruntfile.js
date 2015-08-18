@@ -219,6 +219,20 @@ module.exports = function (grunt) {
                         to: '![Multilingual WooCommerce store powered by WooCommerce WPGlobus.](https://ps.w.org/wpglobus/assets/screenshot-8.png)'
                     }
                 ]
+            },
+            version: {
+                overwrite: true,
+                src: ['wpglobus.php'],
+                replacements: [
+                    {
+                        from: / \* Version: [0-9\.]+/,
+                        to: ' * Version: <%= pkg.version %>'
+                    },
+                    {
+                        from: /define\( 'WPGLOBUS_VERSION', '[0-9\.]+' \);/,
+                        to: "define( 'WPGLOBUS_VERSION', '<%= pkg.version %>' );"
+                    }
+                ]
             }
         },
 
@@ -263,7 +277,7 @@ module.exports = function (grunt) {
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
     // To run all tasks - same list as for `watch`
-    grunt.registerTask('dist', ['readme_md', 'less', 'cssmin', 'uglify', 'pomo']);
+    grunt.registerTask('dist', ['readme_md', 'less', 'cssmin', 'uglify', 'pomo', 'replace:version']);
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
