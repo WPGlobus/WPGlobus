@@ -967,8 +967,61 @@ jQuery(document).ready(function () {
                 }
 
 				// wp_editor word count
-				if ( typeof(wpWordCount) != 'undefined' ) {
+				if ( typeof wp.utils.WordCounter != 'undefined' ) {
+					// from WordPress 4.3 @see wp-admin\js\post.js
+					$.each(WPGlobusCoreData.enabled_languages, function(i,l){
+						( function( $, counter, l ) {
+							$( function() {
+								if ( l == WPGlobusCoreData.default_language ) {
+									var $content = $( '#content' ),
+										$count = $( '#wp-word-count' ).find( '.word-count' );							
+								} else {
+									var $content = $( '#content_'+l ),
+										$count = $( '#wp-word-count-'+l ).find( '.word-count-'+l );
+								}	
+									
+								var	prevCount = 0,
+									contentEditor;
 
+								function update() {
+									var text, count;
+
+									if ( ! contentEditor || contentEditor.isHidden() ) {
+										text = $content.val();
+									} else {
+										text = contentEditor.getContent( { format: 'raw' } );
+									}
+
+									count = counter.count( text );
+
+									if ( count !== prevCount ) {
+										$count.text( count );
+									}
+
+									prevCount = count;
+								}
+
+								$( document ).on( 'tinymce-editor-init', function( event, editor ) {
+									if ( editor.id !== 'content' ) {
+										return;
+									}
+
+									contentEditor = editor;
+
+									editor.on( 'nodechange keyup', _.debounce( update, 1000 ) );
+								} );
+
+								$content.on( 'input keyup', _.debounce( update, 1000 ) );
+
+								update();
+							} );
+						} )( jQuery, new wp.utils.WordCounter(), l );
+					});
+					
+				}
+				
+				if ( typeof(wpWordCount) != 'undefined' ) {
+					// wordpress 4.2.4 and earlier
 					var last = 0,
 						ls = WPGlobusCoreData.open_languages,
 						$d = this.$document,
