@@ -80,7 +80,7 @@ Thank you!
 = Admin interface translations: =
 
 * `de_DE` : automatic translation (Microsoft)
-* `es_ES` : Patricia Casado, [mascositas.com](mascositas.com)
+* `es_ES` : Patricia Casado, [mascositas.com](http://mascositas.com/)
 * `ru_RU` : The WPGlobus Team
 
 **Please help us translate WPGlobus into your language!**
