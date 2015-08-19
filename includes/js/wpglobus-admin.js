@@ -967,8 +967,8 @@ jQuery(document).ready(function () {
                 }
 
 				// wp_editor word count
-				if ( typeof wp.utils.WordCounter != 'undefined' ) {
-					// from WordPress 4.3 @see wp-admin\js\post.js
+				if ( typeof wp.utils != 'undefined' && typeof wp.utils.WordCounter != 'undefined' ) {							
+					// from WordPress 4.3 @see c:\cygwin\home\www.wpg.dev\wp-admin\js\post.js
 					$.each(WPGlobusCoreData.enabled_languages, function(i,l){
 						( function( $, counter, l ) {
 							$( function() {
