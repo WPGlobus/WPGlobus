@@ -77,6 +77,14 @@ For commercial services, please contact us at [http://www.wpglobus.com/professio
 
 Thank you!
 
+= Admin interface translations: =
+
+* `de_DE` : automatic translation (Microsoft)
+* `es_ES` : Patricia Casado, [mascositas.com](mascositas.com)
+* `ru_RU` : The WPGlobus Team
+
+**Please help us translate WPGlobus into your language!**
+
 = More info and ways to contact the WPGlobus Development Team =
 
 * [WPGlobus.com website](http://www.wpglobus.com/).
