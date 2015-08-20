@@ -158,6 +158,12 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.2.4 (dev-develop) ###
+
+* ADDED:
+	* Filter for ACF WYSIWYG fields.
+	* `es_ES` admin interface translation files.
+
 ### 1.2.3 ###
 
 * FIXED:
