@@ -248,6 +248,7 @@ add_filter( 'get_post_metadata', array( 'WPGlobus_Filters', 'filter__postmeta' )
 if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'acf/load_value/type=text', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 	add_filter( 'acf/load_value/type=textarea', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	add_filter( 'acf/load_value/type=wysiwyg', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
 /**
