@@ -142,7 +142,7 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
-= 1.2.4 (dev-develop) =
+= 1.2.4 =
 
 * ADDED:
 	* Filter for ACF WYSIWYG fields.

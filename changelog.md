@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.2.4 ###
+
+* ADDED:
+	* Filter for ACF WYSIWYG fields.
+	* `es_ES` admin interface translation files.
+
 ### 1.2.3 ###
 
 * FIXED:
