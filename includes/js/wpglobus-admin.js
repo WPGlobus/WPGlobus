@@ -159,6 +159,7 @@ var WPGlobusDialogApp;
 			'style="{{style}}"',
 			'data-type="control" data-dialog-title="{{title}}" ',
 			'data-source-type="" data-source-id="{{id}}" ',
+			'{{sbTitle}} ',
 			'class="{{classes}}"></span>'
         ].join(''),
 		startButtonClass : 'wpglobus_dialog_start wpglobus_dialog_icon',
@@ -176,6 +177,7 @@ var WPGlobusDialogApp;
 				dialogTitle: '',
 				style: '',
 				styleTextareaWrapper: '',
+				sbTitle: ''
 			}
 			if ( 'string' == typeof(elem) ) {
 				option.id = elem;	
@@ -232,7 +234,8 @@ var WPGlobusDialogApp;
 			api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+id : api.startButtonClass;
 			sb = sb.replace('{{classes}}', api.startButtonClass);
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
-
+			sb = option.sbTitle == '' ? sb.replace('{{sbTitle}}', option.sbTitle) : sb.replace('{{sbTitle}}', 'title="'+option.sbTitle+'"');
+			
 			$(sb).insertAfter('#'+id);
 			$(clone).insertAfter('#'+id);
 			if ( 'TEXTAREA' == node.nodeName ) {

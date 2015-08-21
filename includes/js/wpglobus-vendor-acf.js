@@ -27,14 +27,16 @@ jQuery(document).ready(function($){
 				id: id,
 				dialogTitle: 'Edit ACF field',
 				style: 'width:97%;float:left;',
-				styleTextareaWrapper: 'height:' + h + 'px;'
+				styleTextareaWrapper: 'height:' + h + 'px;',
+				sbTitle: 'Click for edit'
 			});
 		} else if ( $t.hasClass('field_type-text') ) {
 			id = $t.find('input').attr('id');
 			WPGlobusDialogApp.addElement({
 				id: id,
 				dialogTitle: 'Edit ACF field',
-				style: 'width:97%;float:left;'
+				style: 'width:97%;float:left;',
+				sbTitle: 'Click for edit'
 			});			
 		}
 
