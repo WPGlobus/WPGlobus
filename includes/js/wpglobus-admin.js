@@ -906,7 +906,8 @@ jQuery(document).ready(function () {
 				});				
 			
 				var wrap_at = '#postdivrich',
-					set_title = true;	
+					set_title = true,
+					content_tabs_id = '#post-body-content';	
 				if ( WPGlobusAdmin.data.support['editor'] === false ) {
 					wrap_at = '#titlediv';	
 					set_title = false;	
@@ -915,7 +916,7 @@ jQuery(document).ready(function () {
 					set_title = false;	
 				}	
                 // Make post-body-content as tabs container
-                $('#post-body-content').prepend($('.wpglobus-post-body-tabs-list'));
+                $(content_tabs_id).prepend($('.wpglobus-post-body-tabs-list'));
                 $.each(WPGlobusAdmin.tabs, function (index, suffix) {
                     if ('default' === suffix) {
                         $(wrap_at).wrap('<div id="tab-default"></div>');
@@ -931,7 +932,7 @@ jQuery(document).ready(function () {
                 });
 
                 // tabs on
-                $('#post-body-content').addClass('wpglobus-post-body-tabs').tabs({
+                $(content_tabs_id).addClass('wpglobus-post-body-tabs').tabs({
 					beforeActivate: function( event, ui ){
 						var otab = ui.oldTab[0].id.replace('link-tab-','');
 						var ntab = ui.newTab[0].id.replace('link-tab-','');
@@ -1102,7 +1103,7 @@ jQuery(document).ready(function () {
 				
 				$('body').on('click', '#publish, #save-post', function() {
 					if ( WPGlobusAdmin.data.open_languages.length > 1 ) {
-						$(document).triggerHandler('wpglobus_before_save_post');
+						$(document).triggerHandler('wpglobus_before_save_post', {content_tabs_id:content_tabs_id});
 						// if empty title in default language make it from another titles
 						var t = $('#title').val(),
 							index, title = '', delimiter = '';
