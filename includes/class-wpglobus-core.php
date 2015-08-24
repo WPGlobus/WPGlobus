@@ -22,7 +22,12 @@ class WPGlobus_Core {
 		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
 		$default_language = 'en' // TODO
 	) {
-
+		
+		/**
+		 * When WPGlobus::Config()->default_language is not equal 'en' 
+		 */
+		$default_language = WPGlobus::Config()->default_language;
+		
 		/**
 		 * There are cases when numeric terms are passed here. We should not tamper with them.
 		 * @since 1.0.8.1 Before, was returning empty string, which was incorrect.
