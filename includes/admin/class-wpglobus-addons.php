@@ -19,10 +19,16 @@ class WPGlobus_Addons {
 		$payed_addons['woocommerce-wpglobus']['url']     = 'http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/'; 
 		$payed_addons['woocommerce-wpglobus']['img_src'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png'; 
 		
+		$payed_addons['wpglobus-plus']['slug']    = 'wpglobus-plus'; 
+		$payed_addons['wpglobus-plus']['header']  = 'WPGlobus Plus'; 
+		$payed_addons['wpglobus-plus']['url']     = 'http://www.wpglobus.com/shop/extensions/wpglobus-plus/'; 
+		$payed_addons['wpglobus-plus']['img_src'] = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png'; 
+		
 		$addons                    = array();
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
 		$addons['wordpress.org'][] = 'wpglobus-translate-options';
 		$addons['wordpress.org'][] = 'wpglobus-for-wpbakery-visual-composer';
+		$addons['wordpress.org'][] = 'wpglobus-for-black-studio-tinymce-widget';
 
 		/**
 		 * @quirk
