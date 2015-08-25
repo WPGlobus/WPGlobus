@@ -1,7 +1,7 @@
 <?php
 
 /**
- *
+ * Class WPGlobus_Core
  */
 class WPGlobus_Core {
 
@@ -9,10 +9,10 @@ class WPGlobus_Core {
 	 * The main filter function.
 	 * Default behavior: extracts text in one language from multi-lingual strings.
 	 *
-	 * @param string $text
-	 * @param string $language
-	 * @param string $return
-	 * @param string $default_language
+	 * @param string $text Multilingual text, with special delimiters between languages
+	 * @param string $language The code of the language to be extracted from the `$text`
+	 * @param string $return What to do if the text in the `$language` was not found
+	 * @param string $default_language Pass this if you want to return a non-default language content, when the content in `$language` is not available
 	 *
 	 * @return string
 	 */
@@ -20,14 +20,14 @@ class WPGlobus_Core {
 		$text = '',
 		$language = '',
 		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
-		$default_language = 'en' // TODO
+		$default_language = ''
 	) {
-		
-		/**
-		 * When WPGlobus::Config()->default_language is not equal 'en' 
-		 */
-		$default_language = WPGlobus::Config()->default_language;
-		
+
+		if ( empty( $text ) ) {
+			// Nothing to do
+			return $text;
+		}
+
 		/**
 		 * There are cases when numeric terms are passed here. We should not tamper with them.
 		 * @since 1.0.8.1 Before, was returning empty string, which was incorrect.
@@ -37,30 +37,31 @@ class WPGlobus_Core {
 		}
 
 		/**
-		 * Fix for case
+		 * `$default_language` not passed
+		 */
+		if ( ! $default_language ) {
+			if ( class_exists( 'WPGlobus_Config' ) ) {
+				$default_language = WPGlobus::Config()->default_language;
+			} else {
+				// When in unit tests
+				$default_language = 'en';
+			}
+		}
+
+		/**
+		 * `$language` not passed
+		 */
+		if ( empty( $language ) ) {
+			$language = $default_language;
+		}
+
+		/**
+		 * Fix for the case
 		 * &lt;!--:en--&gt;ENG&lt;!--:--&gt;&lt;!--:ru--&gt;RUS&lt;!--:--&gt;
 		 * @todo need careful investigation
 		 */
 		$text = htmlspecialchars_decode( $text );
 
-		/** @global string $wpg_default_language */
-		//global $wpg_default_language;
-
-		/** @global string $wpg_current_language */
-		//global $wpg_current_language;
-
-
-		if ( empty( $text ) ) {
-			// Nothing to do
-			return $text;
-		}
-
-		//		global $WPGlobus_Config;
-		if ( empty( $language ) ) {
-			/** @todo This is a changed behavior. Watch out when eliminate the deprecated __wpg function */
-			//			$language = $WPGlobus_Config->language;
-			$language = $default_language;
-		}
 
 		$possible_delimiters =
 			array(
@@ -113,7 +114,7 @@ class WPGlobus_Core {
 			 * The starting position found..adjust the pointer to the text start
 			 * (Do not need mb_strlen here, because we expect delimiters to be Latin only)
 			 */
-			$pos_start = $pos_start + strlen( $delimiters['start'] );
+			$pos_start += strlen( $delimiters['start'] );
 
 			/**
 			 * Try to find the ending position.
@@ -205,19 +206,39 @@ class WPGlobus_Core {
 	}
 
 	/**
-	 * @todo Write description
+	 * Keeps only one language in all textual fields of the `$post` object.
 	 *
-	 * @param WP_Post $post
+	 * @see \WPGlobus_Core::text_filter for the parameters description
+	 * @param WP_Post $post The Post object. Object always passed by reference.
 	 * @param string  $language
 	 * @param string  $return
 	 * @param string  $default_language
 	 */
 	public static function translate_wp_post(
-		WP_Post &$post,
+		WP_Post $post,
 		$language = '',
 		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
-		$default_language = 'en' // TODO
+		$default_language = ''
 	) {
+
+		/**
+		 * `$default_language` not passed
+		 */
+		if ( ! $default_language ) {
+			if ( class_exists( 'WPGlobus_Config' ) ) {
+				$default_language = WPGlobus::Config()->default_language;
+			} else {
+				// When in unit tests
+				$default_language = 'en';
+			}
+		}
+
+		/**
+		 * `$language` not passed
+		 */
+		if ( empty( $language ) ) {
+			$language = $default_language;
+		}
 
 		$fields = array(
 			'post_title',
