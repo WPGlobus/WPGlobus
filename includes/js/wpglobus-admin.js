@@ -956,7 +956,7 @@ jQuery(document).ready(function () {
                 //$('#content').text(WPGlobusAdmin.content.replace(/\n/g, "<p>"));
 
                 $('#content').text(WPGlobusAdmin.content);
-                $('#excerpt').addClass('hidden');
+                $('#excerpt').addClass('hidden').css({'display':'none'});
 				
                 if (typeof WPGlobusVendor !== "undefined") {
                     wpglobus_wpseo();
