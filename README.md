@@ -2,7 +2,7 @@
 **Contributors:** tivnetinc, alexgff, tivnet  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus  
-**Requires at least:** 4.0  
+**Requires at least:** 4.2  
 **Tested up to:** 4.3  
 **Stable tag:** trunk  
 **License:** GPLv2  
@@ -14,31 +14,21 @@
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual / multilingual WordPress blogs and sites.
 
-The **WPGlobus Free Core plugin** provides you with the main multilingual tools. After you install it, you will be able to:
+> **WPGlobus**
 
-* Add one or several languages to your WP blog/site, so that the users with the required capabilities can:
-	* manually translate Posts and Pages to multiple languages using an easy tabbed interface;
-	* translate major taxonomies (categories and tags);
-	* translate menus and widgets;
-* Enable multilingual SEO features of:
-	* Yoast SEO;
-	* All in One SEO Pack by Michael Torbert;
-	* WooCommerce (paid add-on).
-* Translate Custom Fields:
-	* standard;
-	* created with the Advanced Custom Fields plugin.
-* Switch the languages at the Front using:
-	* a drop-down menu extension;
-	* a customizable widget with various display options;
+The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
+
+* Add one or several languages to your WP blog/site. Use the WPGlobus option panel to select active languages and define custom combinations of country flag and language abbreviation.
+* Using an easy tabbed interface, **manually translate** posts, pages, categories, tags menus and widgets;
+* Enable multilingual SEO features of Yoast SEO, All in One SEO, Advanced Custom Fields and many other plugins;
+* Switch the languages at the Front using: a drop-down menu extension and/or a customizable widget with various display options;
 * Switch the Administrator interface language using a top bar selector;
-* Use the WPGlobus option panel to select active languages and define custom combinations of country flag and language abbreviation.
 
-**> **NOTE:** WPGlobus does NOT translate texts automatically! To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/).**  
+**NOTE: WPGlobus does NOT translate texts automatically! To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/).**
 
-The WPGlobus plugin serves as the **foundation** to other plugins in the family:
+The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
-* [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/):
-	* This is a paid WPGlobus extension, which adds multilingual capabilities to WooCommerce-based online stores.
+> **Free Add-ons**
 
 * [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/):
 	* This plugin allows setting featured images separately for each language.
@@ -49,9 +39,20 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family:
 * [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/):
 	* This extension enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
 
+* [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/):
+	* Adds multilingual editing capabilities to the visual editor widget.
+
+> **Paid Extensions**
+
+* [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/):
+	* Adds multilingual capabilities to WooCommerce-based online stores.
+
+* [WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/):
+	* Adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
+
 ### Compatibility with Themes ###
 
-> WPGlobus will not be able to help with translation when your site's theme does not use proper filtering before outputting content, and prints texts directly from the database on the screen. Please talk to the theme authors and let them know. The fix is usually very simple, and if necessary, we are ready to cooperate.
+> WPGlobus works correctly with all themes that apply proper filtering before outputting content. If a theme or a plugin prints texts directly from the database, WPGlobus has no opportunity to help with the translation. Please talk to the theme authors and let them know. The fix is usually very simple, and if necessary, we are ready to cooperate.
 
 This will not be translated:
 
@@ -158,6 +159,15 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.2.5 ###
+
+* FIXED:
+	* Core filters refactored to better support sites with no English.
+	* Multilingual Excerpt metaboxes styled to 4-lines height.
+	* Several code changes related to WordPress and 3rd party plugin upgrades.
+* ADDED:
+	* Core support for the Black Studio TinyMCE widget.
+
 ### 1.2.4 ###
 
 * ADDED:
@@ -208,11 +218,6 @@ No known backward incompatibility issues.
 * FIXED:
 	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
 	* Correct language detection with no trailing slash on home url, i.e. `example.com/fr` works the same as `example.com/fr/`
-
-### 1.1.1.3 ###
-
-* FIXED:
-	* Bug with switching languages when WordPress is in a subfolder of the main site.
 
 ### Earlier versions ###
 

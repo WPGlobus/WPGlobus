@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-08-18 00:35-0400\n"
+"POT-Creation-Date: 2015-08-25 11:22-0400\n"
 "PO-Revision-Date: 2015-08-04 20:12+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/tivnet/wpglobus/"
@@ -129,11 +129,11 @@ msgstr ""
 "написание кода специально для Вас."
 
 #: includes/admin/class-wpglobus-about.php:127
-#: includes/admin/class-wpglobus-addons.php:82
+#: includes/admin/class-wpglobus-addons.php:88
 msgid "Go to WPGlobus Settings"
 msgstr "Перейдите в настройки WPGlobus"
 
-#: includes/admin/class-wpglobus-addons.php:39
+#: includes/admin/class-wpglobus-addons.php:45
 msgid "WPGlobus Add-ons / Extensions"
 msgstr "Расширения WPGlobus"
 

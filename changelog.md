@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+### 1.2.5 ###
+
+* FIXED:
+	* Core filters refactored to better support sites with no English.
+	* Multilingual Excerpt metaboxes styled to 4-lines height.
+	* Several code changes related to WordPress and 3rd party plugin upgrades.
+* ADDED:
+	* Core support for the Black Studio TinyMCE widget.
+
 ### 1.2.4 ###
 
 * ADDED:

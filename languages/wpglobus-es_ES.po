@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-08-19 12:02-0400\n"
+"POT-Creation-Date: 2015-08-25 11:22-0400\n"
 "PO-Revision-Date: 2015-08-19 11:18-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: \n"
@@ -126,11 +126,11 @@ msgstr ""
 "código personalizado para tí."
 
 #: includes/admin/class-wpglobus-about.php:127
-#: includes/admin/class-wpglobus-addons.php:82
+#: includes/admin/class-wpglobus-addons.php:88
 msgid "Go to WPGlobus Settings"
 msgstr "Ir a Ajustes WPGlobus"
 
-#: includes/admin/class-wpglobus-addons.php:39
+#: includes/admin/class-wpglobus-addons.php:45
 msgid "WPGlobus Add-ons / Extensions"
 msgstr "WPGlobus complementos/extensiones"
 
