@@ -19,7 +19,18 @@ var WPGlobusWidgets;
 		init: function() {
 			api.add_elements();
 			api.attachListeners();
-		},	
+		},
+		wysiwygClean: function(){
+			// remove wpglobus textarea and dialog start button from wysiwyg
+			$('.wpglobus-dialog-field').each(function(i,e){
+				var source = $(e).data('source-id');
+				if (  $('#'+source+'-tmce').size() == 1 ) {
+					var ds = $(e).next('.wpglobus_dialog_start');
+					$(e).remove();
+					$(ds).remove();
+				}	
+			});
+		},
 		add_elements : function(get_by, coid) {
 			var id, elem = [], get_by_coid;
 			elem[0] = 'input[type="text"]';
@@ -77,6 +88,7 @@ var WPGlobusWidgets;
 							var id = $(e).attr('id');
 							if ( -1 !== id.indexOf(s[0]) ) {
 								api.add_elements('id', id);
+								api.wysiwygClean();
 							}	
 						});	
 					}	
@@ -108,7 +120,11 @@ var WPGlobusWidgets;
 					$(source_id).val(s);
 				}	
 
-			});					
+			});
+			$(document).on('click','.widget-title, .widget-title-action',function(ev){
+				ev.preventDefault();
+				api.wysiwygClean();
+			});				
 		}	
 	};
 })(jQuery);
