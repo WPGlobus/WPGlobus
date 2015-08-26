@@ -391,7 +391,15 @@ class WPGlobus_WPSEO {
 			$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
 			$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); 			
 			foreach ( WPGlobus::Config()->open_languages as $language ) {
-				$url = apply_filters( 'wpglobus_wpseo_permalink', WPGlobus_Utils::localize_url( $permalink['url'], $language ), $language ); ?>
+				$permalink['url'] = WPGlobus_Utils::localize_url( $permalink['url'], $language );
+				$url = apply_filters( 'wpglobus_wpseo_permalink', $permalink['url'], $language ); 
+				if ( $url != $permalink['url'] ) {
+					/* We accept that user's filter make complete permalink for draft */
+					/* @todo maybe need more investigation */
+					$permalink['action'] = 'complete';
+				} else {
+					$permalink['action'] = '';
+				}			?>
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
 				     data-language="<?php echo $language; ?>"
 				     data-url-<?php echo $language; ?>="<?php echo $url; ?>"
