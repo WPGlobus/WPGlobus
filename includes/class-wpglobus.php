@@ -1149,7 +1149,11 @@ class WPGlobus {
 				
 				$page_action = 'wpglobus_options';
 		
-			}
+			} else {
+
+				$page_action = $page;
+
+			}	
 
 			wp_register_script(
 				'wpglobus-admin',
