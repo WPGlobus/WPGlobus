@@ -775,6 +775,11 @@ class WPGlobus {
 		$page_action = '';
 
 		/**
+		 * Init $page
+		 */
+		$page = '';
+		
+		/**
 		 * Init array data depending on the context for localize script
 		 */
 		$data = array(
@@ -787,8 +792,10 @@ class WPGlobus {
 			'locale_tag_end'    => self::LOCALE_TAG_END
 		);
 
-		$page = WPGlobus_WP::plugin_page();
-
+		if ( ! in_array( $pagenow, $enabled_pages ) ) {		
+			$page = WPGlobus_WP::plugin_page();
+		}
+		
 		if ( '' == $page ) {
 			/**
 			 * Now get $pagenow
