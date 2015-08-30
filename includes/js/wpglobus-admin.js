@@ -174,6 +174,11 @@ var WPGlobusDialogApp;
 			api.dialogTitle = api.option.dialogTitle;
 			this.attachListener();
 		},
+		convertToId: function(s){
+			s = s.replace(/\]/g,'');
+			s = s.replace(/\[/g,'-');
+			return s;	
+		},	
 		addElement: function(elem) {
 			var option = {
 				id: null,
@@ -199,7 +204,8 @@ var WPGlobusDialogApp;
 				api.element_by = 'name';
 				node = document.getElementsByName(option.id);
 			} else {
-				nodeName = node.nodeName;	
+				nodeName = node.nodeName;
+				nodeName = nodeName.toLowerCase();
 			}	
 			if ( 0 == node.length ) {
 				return;	
@@ -209,6 +215,7 @@ var WPGlobusDialogApp;
 					$element = $('#'+id);
 				} else {
 					nodeName = node[0].nodeName;	
+					nodeName = nodeName.toLowerCase();
 					$element = $(nodeName+'[name="'+id+'"]');	
 				}
 			}
@@ -218,14 +225,12 @@ var WPGlobusDialogApp;
 			} else {
 				name = $element.attr('name');
 			}	
-			api.clone_id = id;
-			api.clone_id = api.clone_id.replace(/\]/g,'');
-			api.clone_id = api.clone_id.replace(/\[/g,'-');
+			api.clone_id = api.convertToId(id);
 			
 			clone = $( $element.clone() );
-			$element.addClass('hidden');	
+			//$element.addClass('hidden');	
 			style = $element.attr('style') || '';
-			//$element.attr('style','display:none;'); // !!!!!!!!!!!!!!!
+			$element.attr('style','display:none;');
 			clone.attr('id', 'wpglobus-'+api.clone_id).attr('name', 'wpglobus-'+name);
 			
 			if ( 'id' == api.element_by ) {
@@ -234,8 +239,7 @@ var WPGlobusDialogApp;
 				clone.attr('data-source-id', '').attr('data-source-name', name).attr('data-source-get-by',api.element_by);
 			}	
 			
-			//if ( 'TEXTAREA' == node.nodeName ) {
-			if ( 'TEXTAREA' == nodeName ) {
+			if ( 'textarea' == nodeName ) {
 				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
 				clone.text( v );
 				clone.attr( 'data-nodename', 'textarea' );
@@ -253,7 +257,6 @@ var WPGlobusDialogApp;
 				}	
 			}	
 			
-			//sb = sb.replace(/{{id}}/g, id);
 			sb = sb.replace(/{{clone_id}}/g, api.clone_id);
 			if ( 'id' == api.element_by ) {
 				sb = sb.replace(/{{id}}/g, api.clone_id);
@@ -264,20 +267,16 @@ var WPGlobusDialogApp;
 				sb = sb.replace(/{{name}}/g, name);
 				sb = sb.replace(/{{nodename}}/g, nodeName);
 			}	
-			//sb 					 = 'TEXTAREA' == node.nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
-			sb 					 = 'TEXTAREA' == nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
-			//api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+id : api.startButtonClass;
-			api.startButtonClass = 'TEXTAREA' == nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+api.clone_id : api.startButtonClass;
+			sb 					 = 'textarea' == nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
+			api.startButtonClass = 'textarea' == nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+api.clone_id : api.startButtonClass;
 			sb = sb.replace('{{classes}}', api.startButtonClass);
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
 			sb = option.sbTitle == '' ? sb.replace('{{sbTitle}}', option.sbTitle) : sb.replace('{{sbTitle}}', 'title="'+option.sbTitle+'"');
 			
-			//$(sb).insertAfter('#'+id);
 			$(sb).insertAfter($element);
-			//$(clone).insertAfter('#'+id);
 			$(clone).insertAfter($element);
-			//if ( 'TEXTAREA' == node.nodeName ) {
-			if ( 'TEXTAREA' == nodeName ) {
+			
+			if ( 'textarea' == nodeName ) {
 				$('#wpglobus-'+api.clone_id).addClass( 'wpglobus-textarea-'+api.clone_id );
 				$('.wpglobus-textarea-'+api.clone_id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
 			}
@@ -379,7 +378,9 @@ var WPGlobusDialogApp;
 				api.id = api.element.data('source-id');
 				if ( '' == api.id ) {		
 					api.id = api.element.data('nodename') + '[name="'+api.element.data('source-name')+'"]';
+					api.wpglobus_id = '#wpglobus-'+api.convertToId( api.element.data('source-name') );
 				} else {
+					api.wpglobus_id = '#wpglobus-'+api.id;
 					api.id = '#'+api.id;	
 				}				
 				
@@ -416,11 +417,6 @@ var WPGlobusDialogApp;
 			}	
 			if ( typeof api.id !== 'undefined' ) {
 				api.attrs['maxlength'] = $(api.id).attr('maxlength');
-				if ( 'id' == api.element_by ) {
-					api.wpglobus_id = '#wpglobus-'+api.id.replace('#','');	
-				} else {
-					api.wpglobus_id = '#wpglobus-'+api.clone_id;
-				}		
 			}
 			
 			api.source = api.element.data('source-value');
