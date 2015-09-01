@@ -282,11 +282,11 @@ class WPGlobus_Utils {
 
 	/**
 	 * @since 1.2.3
-	 * @param string    $language
+	 * @param string          $language
 	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
 	 * @return string
 	 */
-	public static function localize_current_url( $language = '',  WPGlobus_Config $config = null ) {
+	public static function localize_current_url( $language = '', WPGlobus_Config $config = null ) {
 		$url = apply_filters( 'wpglobus_pre_localize_current_url', '', $language );
 
 		if ( ! $url ) {
@@ -299,6 +299,28 @@ class WPGlobus_Utils {
 			}
 			// @codeCoverageIgnoreEnd
 			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language, $config );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Localize www.wpglobus.com for use in outgoing links
+	 *
+	 * @param WPGlobus_Config $config
+	 * @return string
+	 * @since 1.2.6
+	 */
+	public static function url_wpglobus_site( WPGlobus_Config $config = null ) {
+		if ( null === $config ) {
+			// @codeCoverageIgnoreStart
+			$config = WPGlobus::Config();
+		}
+		// @codeCoverageIgnoreEnd
+
+		$url = WPGlobus::URL_WPGLOBUS_SITE;
+		if ( 'ru' === $config->language ) {
+			$url .= 'ru' . '/';
 		}
 
 		return $url;

@@ -13,18 +13,12 @@ class WPGlobus_About {
 	 */
 	public static function about_screen() {
 
-		if ( WPGlobus::Config()->language === 'en' ) {
-			$language = '';
-		} else {
-			$language = WPGlobus::Config()->language . '/';
-		}
-
 		/**
 		 * For Google Analytics
 		 */
 		$ga_campaign = '?utm_source=wpglobus-admin-about&utm_medium=link&utm_campaign=activate-plugin';
 
-		$url_wpglobus_site             = WPGlobus::URL_WPGLOBUS_SITE . $language;
+		$url_wpglobus_site             = WPGlobus_Utils::url_wpglobus_site();
 		$url_wpglobus_site_home        = $url_wpglobus_site . $ga_campaign;
 		$url_wpglobus_site_contact     = $url_wpglobus_site . 'pg/contact-us/' . $ga_campaign;
 		$url_wpglobus_site_quick_start = $url_wpglobus_site . 'quick-start/' . $ga_campaign;
