@@ -26,8 +26,10 @@ class WPGlobus_Config {
 	 */
 	public $enabled_languages = array(
 		'en',
+		'es',
+		'de',
+		'fr',
 		'ru',
-		'de'
 	);
 
 	/**
