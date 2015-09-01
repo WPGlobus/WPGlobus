@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-09-01 10:42-0400\n"
+"POT-Creation-Date: 2015-09-01 11:32-0400\n"
 "PO-Revision-Date: 2015-08-19 11:18-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: \n"
@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: includes/admin/class-wpglobus-about.php:48
+#: includes/admin/class-wpglobus-about.php:42
 msgid "Multilingual Everything!"
 msgstr "Multilenguaje Total!"
 
-#: includes/admin/class-wpglobus-about.php:51
+#: includes/admin/class-wpglobus-about.php:45
 msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
 "multilingual WordPress blogs and sites."
@@ -29,37 +29,37 @@ msgstr ""
 "WPGlobus es una familia de plugins de WordPress que ayudan en la traducción "
 "de blogs de WordPress."
 
-#: includes/admin/class-wpglobus-about.php:58
+#: includes/admin/class-wpglobus-about.php:52
 msgid "Quick Start"
 msgstr "Inicio Rápido"
 
-#: includes/admin/class-wpglobus-about.php:63
-#: includes/admin/class-wpglobus-about.php:92
+#: includes/admin/class-wpglobus-about.php:57
+#: includes/admin/class-wpglobus-about.php:86
 msgid "Guide"
 msgstr "Guía"
 
-#: includes/admin/class-wpglobus-about.php:66
+#: includes/admin/class-wpglobus-about.php:60
 msgid "Settings"
 msgstr "Ajustes"
 
-#: includes/admin/class-wpglobus-about.php:69
+#: includes/admin/class-wpglobus-about.php:63
 #: includes/options/class-wpglobus-options.php:441
 msgid "Add-ons"
 msgstr "Complementos"
 
-#: includes/admin/class-wpglobus-about.php:73
+#: includes/admin/class-wpglobus-about.php:67
 msgid "Support"
 msgstr "Soporte"
 
-#: includes/admin/class-wpglobus-about.php:79
+#: includes/admin/class-wpglobus-about.php:73
 msgid "Easy as 1-2-3:"
 msgstr "Fácil en 1-2-3:"
 
-#: includes/admin/class-wpglobus-about.php:81
+#: includes/admin/class-wpglobus-about.php:75
 msgid "Go to WPGlobus admin menu and choose the countries / languages;"
 msgstr "Ve al menú de administración WPGlobus y elege los países/idiomas;"
 
-#: includes/admin/class-wpglobus-about.php:82
+#: includes/admin/class-wpglobus-about.php:76
 msgid ""
 "Enter the translations to the posts, pages, categories, tags and menus using "
 "a clean and simple interface."
@@ -67,7 +67,7 @@ msgstr ""
 "Introduce las traducciones a los mensajes, páginas, categorías,etiquetas y "
 "menús usando una interfaz limpia y simple."
 
-#: includes/admin/class-wpglobus-about.php:83
+#: includes/admin/class-wpglobus-about.php:77
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
@@ -75,23 +75,23 @@ msgstr ""
 "Cambia de idioma en el front-end utilizando un menú desplegable con los "
 "nombres de las lenguas y banderas de los países ."
 
-#: includes/admin/class-wpglobus-about.php:87
+#: includes/admin/class-wpglobus-about.php:81
 msgid "Links:"
 msgstr "Enlaces:"
 
-#: includes/admin/class-wpglobus-about.php:94
+#: includes/admin/class-wpglobus-about.php:88
 msgid "FAQs"
 msgstr "Preguntas Frecuentes"
 
-#: includes/admin/class-wpglobus-about.php:96
+#: includes/admin/class-wpglobus-about.php:90
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: includes/admin/class-wpglobus-about.php:98
+#: includes/admin/class-wpglobus-about.php:92
 msgid "Please give us 5 stars!"
 msgstr "Por favor danos 5 estrellas!"
 
-#: includes/admin/class-wpglobus-about.php:110
+#: includes/admin/class-wpglobus-about.php:104
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
@@ -102,12 +102,12 @@ msgstr ""
 "subdominios <code>example.com</code> ni consultas lingüísticas <code>example."
 "com?lang=xx</code>."
 
-#: includes/admin/class-wpglobus-about.php:113
+#: includes/admin/class-wpglobus-about.php:107
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr ""
 "En algunos temas y plugins <strong>No está listo el multilenguaje</strong>."
 
-#: includes/admin/class-wpglobus-about.php:115
+#: includes/admin/class-wpglobus-about.php:109
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
@@ -115,7 +115,7 @@ msgstr ""
 "Pueden mostrar algunos textos sin traducción, o con todos los idiomas "
 "mezclados entre sí."
 
-#: includes/admin/class-wpglobus-about.php:117
+#: includes/admin/class-wpglobus-about.php:111
 #, php-format
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
@@ -125,7 +125,7 @@ msgstr ""
 "ayudarte, considera % s la contratación del WPGlobus % s para escribir un "
 "código personalizado para tí."
 
-#: includes/admin/class-wpglobus-about.php:127
+#: includes/admin/class-wpglobus-about.php:121
 #: includes/admin/class-wpglobus-addons.php:88
 msgid "Go to WPGlobus Settings"
 msgstr "Ir a Ajustes WPGlobus"
@@ -436,7 +436,7 @@ msgid "Sincerely Yours,"
 msgstr "Sinceramente tuyo,"
 
 #: includes/options/class-wpglobus-options.php:182
-#: includes/options/wpglobus-options-header.php:26
+#: includes/options/wpglobus-options-header.php:27
 msgid "The WPGlobus Team"
 msgstr "El Equipo WPGlobus"
 
@@ -692,29 +692,29 @@ msgstr "Selecciona un artículo"
 msgid "No items of this type were found."
 msgstr "No se encontraron artículos de este tipo."
 
-#: includes/options/wpglobus-options-header.php:17
+#: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"
 msgstr ""
 
-#: includes/options/wpglobus-options-header.php:20
+#: includes/options/wpglobus-options-header.php:21
 msgid "Please consider a small donation to support the future development."
 msgstr ""
 
-#: includes/options/wpglobus-options-header.php:24
+#: includes/options/wpglobus-options-header.php:25
 msgid "Thank you!"
 msgstr ""
 
-#: includes/options/wpglobus-options-header.php:39
+#: includes/options/wpglobus-options-header.php:46
 msgid "WPGlobus Plus!"
 msgstr ""
 
-#: includes/options/wpglobus-options-header.php:42
+#: includes/options/wpglobus-options-header.php:49
 msgid ""
 "Advanced features and tweaks: URL translation, multilingual SEO analysis, "
 "separate publishing and more! "
 msgstr ""
 
-#: includes/options/wpglobus-options-header.php:48
+#: includes/options/wpglobus-options-header.php:55
 msgid "Get WPGlobus Plus now!"
 msgstr ""
 
