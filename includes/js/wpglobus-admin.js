@@ -198,6 +198,8 @@ var WPGlobusDialogApp;
 			var $element = null, id = null, name = null, node = null,
 				sb = api.startButton,
 				clone, v, style, nodeName = '';
+
+			api.element_by = 'id';
 				
 			node = document.getElementById(option.id);
 			if ( null ===  node ) {
