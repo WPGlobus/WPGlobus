@@ -185,7 +185,7 @@ class WPGlobus_Config {
 	/**
 	 * Constructor
 	 */
-	function __construct() {
+	public function __construct() {
 
 		/**
 		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
@@ -258,7 +258,7 @@ class WPGlobus_Config {
 	/**
 	 * Check plugin version and update versioning option
 	 *
-	 * @param object $object Plugin_Upgrader
+	 * @param stdClass $object Plugin_Upgrader
 	 * @param array  $options
 	 *
 	 * @return void
@@ -300,12 +300,12 @@ class WPGlobus_Config {
 	 *
 	 * @param string $locale
 	 */
-	function set_language( $locale ) {
+	public function set_language( $locale ) {
 		/**
 		 * @todo Maybe use option for disable/enable setting current language corresponding with $locale ?
 		 */
 		foreach ( $this->locale as $language => $value ) {
-			if ( $locale == $value ) {
+			if ( $locale === $value ) {
 				$this->language = $language;
 				break;
 			}
@@ -320,20 +320,8 @@ class WPGlobus_Config {
 	 *
 	 * @return boolean
 	 */
-	function is_enabled_locale( $locale ) {
-
-		if ( in_array( $locale, $this->enabled_locale ) ) {
-			return true;
-		}
-
-		/*
-		foreach ( $this->enabled_locale as $language => $value ) {
-			if ( $locale == $value ) {
-				return true;
-			}
-		}*/
-
-		return false;
+	public function is_enabled_locale( $locale ) {
+		return in_array( $locale, $this->enabled_locale, true );
 	}
 
 	/**
@@ -341,7 +329,7 @@ class WPGlobus_Config {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	function on_load_textdomain() {
+	public function on_load_textdomain() {
 		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 	}
 
@@ -349,14 +337,14 @@ class WPGlobus_Config {
 	 * Set flags URL
 	 * @return void
 	 */
-	function _set_flags_url() {
+	public function _set_flags_url() {
 		$this->flags_url = WPGlobus::$PLUGIN_DIR_URL . 'flags/';
 	}
 
 	/**
 	 *    Set languages by default
 	 */
-	function _set_languages() {
+	public function _set_languages() {
 
 		/**
 		 * Names, flags and locales
@@ -452,7 +440,7 @@ class WPGlobus_Config {
 	 * Set default options
 	 * @return void
 	 */
-	function _set_default_options() {
+	protected function _set_default_options() {
 
 		update_option( $this->option_language_names, $this->language_name );
 		update_option( $this->option_en_language_names, $this->en_language_name );
@@ -465,7 +453,7 @@ class WPGlobus_Config {
 	 * Get options from DB and wp-config.php
 	 * @return void
 	 */
-	function _get_options() {
+	protected function _get_options() {
 
 		$wpglobus_option = get_option( $this->option );
 
@@ -621,7 +609,7 @@ class WPGlobus_Config {
 		/**
 		 * WPGlobus devmode.
 		 */
-		if ( isset( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) {
+		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) {
 			$this->toggle = 'off';
 		} else {
 			$this->toggle = 'on';
@@ -634,9 +622,9 @@ class WPGlobus_Config {
 		 * @see WPGlobus::on_save_post_data
 		 */
 		if (
-			WPGlobus_WP::is_pagenow( 'post.php' )
-			&& empty( $_SERVER['QUERY_STRING'] )
+			empty( $_SERVER['QUERY_STRING'] )
 			&& isset( $_SERVER['HTTP_REFERER'] )
+			&& WPGlobus_WP::is_pagenow( 'post.php' )
 			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' )
 		) {
 			$this->toggle = 'off';
