@@ -145,7 +145,9 @@ var WPGlobusDialogApp;
 		},
 		form : undefined,
 		element : undefined,
+		element_by : 'id',
 		id : '',
+		clone_id: '',
 		wpglobus_id : '',
 		type : 'textarea',
 		source : '',
@@ -155,10 +157,11 @@ var WPGlobusDialogApp;
 		attrs: {},
 		dialogTitle: '',
 		startButton: [
-			'<span id="wpglobus-dialog-start-{{id}}" ',
-			'style="{{style}}"',
+			'<span id="wpglobus-dialog-start-{{clone_id}}" ',
+			'style="{{style}}" ',
 			'data-type="control" data-dialog-title="{{title}}" ',
-			'data-source-type="" data-source-id="{{id}}" ',
+			'data-source-type="" data-source-id="{{id}}" data-source-name="{{name}}" ',
+			'data-nodename="{{nodename}}"',
 			'{{sbTitle}} ',
 			'class="{{classes}}"></span>'
         ].join(''),
@@ -171,6 +174,11 @@ var WPGlobusDialogApp;
 			api.dialogTitle = api.option.dialogTitle;
 			this.attachListener();
 		},
+		convertToId: function(s){
+			s = s.replace(/\]/g,'');
+			s = s.replace(/\[/g,'-');
+			return s;	
+		},	
 		addElement: function(elem) {
 			var option = {
 				id: null,
@@ -189,14 +197,29 @@ var WPGlobusDialogApp;
 		
 			var $element = null, id = null, name = null, node = null,
 				sb = api.startButton,
-				clone, v, style;
+				clone, v, style, nodeName = '';
 
-			node = document.getElementById(option.id);	
+			api.element_by = 'id';
+				
+			node = document.getElementById(option.id);
 			if ( null ===  node ) {
+				api.element_by = 'name';
+				node = document.getElementsByName(option.id);
+			} else {
+				nodeName = node.nodeName;
+				nodeName = nodeName.toLowerCase();
+			}	
+			if ( 0 == node.length ) {
 				return;	
 			} else {
 				id = option.id;
-				$element = $('#'+id);
+				if ( 'id' == api.element_by ) {
+					$element = $('#'+id);
+				} else {
+					nodeName = node[0].nodeName;	
+					nodeName = nodeName.toLowerCase();
+					$element = $(nodeName+'[name="'+id+'"]');	
+				}
 			}
 
 			if ( 'undefined' === $element.attr('name') ) {
@@ -204,17 +227,24 @@ var WPGlobusDialogApp;
 			} else {
 				name = $element.attr('name');
 			}	
+			api.clone_id = api.convertToId(id);
+			
 			clone = $( $element.clone() );
 			//$element.addClass('hidden');	
 			style = $element.attr('style') || '';
 			$element.attr('style','display:none;');
-			clone.attr('id', 'wpglobus-'+id).attr('name', 'wpglobus-'+name);
-			clone.data('source-id', id);
+			clone.attr('id', 'wpglobus-'+api.clone_id).attr('name', 'wpglobus-'+name);
 			
-			if ( 'TEXTAREA' == node.nodeName ) {
+			if ( 'id' == api.element_by ) {
+				clone.attr('data-source-id', id).attr('data-source-name', '').attr('data-source-get-by',api.element_by);
+			} else {
+				clone.attr('data-source-id', '').attr('data-source-name', name).attr('data-source-get-by',api.element_by);
+			}	
+			
+			if ( 'textarea' == nodeName ) {
 				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
 				clone.text( v );
-				clone.data( 'nodename', 'TEXTAREA' );
+				clone.attr( 'data-nodename', 'textarea' );
 				if ( '' == option.style ) {
 					clone.attr( 'style', style + ';width:95%;float:left;' );
 				} else {
@@ -223,30 +253,45 @@ var WPGlobusDialogApp;
 			} else {
 				v = WPGlobusCore.getTranslations( $element.val() )[WPGlobusCoreData['language']];
 				clone.attr( 'value', v );
-				clone.data( 'nodename', 'INPUT' );
+				clone.attr( 'data-nodename', 'input' );
 				if ( '' != option.style ) {
 					clone.attr( 'style', style + ';' + option.style );
 				}	
 			}	
 			
-			sb = sb.replace(/{{id}}/g, id);
-			sb 					 = 'TEXTAREA' == node.nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
-			api.startButtonClass = 'TEXTAREA' == node.nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+id : api.startButtonClass;
+			sb = sb.replace(/{{clone_id}}/g, api.clone_id);
+			if ( 'id' == api.element_by ) {
+				sb = sb.replace(/{{id}}/g, api.clone_id);
+				sb = sb.replace(/{{name}}/g, '');
+				sb = sb.replace(/{{nodename}}/g, '');
+			} else {
+				sb = sb.replace(/{{id}}/g, '');
+				sb = sb.replace(/{{name}}/g, name);
+				sb = sb.replace(/{{nodename}}/g, nodeName);
+			}	
+			sb 					 = 'textarea' == nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
+			api.startButtonClass = 'textarea' == nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+api.clone_id : api.startButtonClass;
 			sb = sb.replace('{{classes}}', api.startButtonClass);
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
 			sb = option.sbTitle == '' ? sb.replace('{{sbTitle}}', option.sbTitle) : sb.replace('{{sbTitle}}', 'title="'+option.sbTitle+'"');
 			
-			$(sb).insertAfter('#'+id);
-			$(clone).insertAfter('#'+id);
-			if ( 'TEXTAREA' == node.nodeName ) {
-				$('#wpglobus-'+id).addClass( 'wpglobus-textarea-'+id );
-				$('.wpglobus-textarea-'+id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
+			$(sb).insertAfter($element);
+			$(clone).insertAfter($element);
+			
+			if ( 'textarea' == nodeName ) {
+				$('#wpglobus-'+api.clone_id).addClass( 'wpglobus-textarea-'+api.clone_id );
+				$('.wpglobus-textarea-'+api.clone_id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
 			}
-			$(document).on('change', '#wpglobus-'+id, function(){
+			$(document).on('change', '#wpglobus-'+api.clone_id, function(){
 				var $t = $(this), 
 					sid = $t.data('source-id');
-				
-				$('#'+sid).val( WPGlobusCore.getString( $('#'+sid).val(), $t.val() ) );
+
+				if ( '' == sid ) {		
+					sid = $t.data('nodename') + '[name="'+$t.data('source-name')+'"]';
+				} else {
+					sid = '#'+sid;	
+				}	
+				$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
 			});
 		},	
 		saveDialog: function() {
@@ -266,7 +311,7 @@ var WPGlobusDialogApp;
 				}	
 			});					
 			s = s.length == sdl.length + 8 ? sdl : s;
-			$('#'+api.id).val(s);
+			$(api.id).val(s);
 			s = scl == '' ? sdl : scl;
 			$(api.wpglobus_id).val(s);
 		},	
@@ -333,13 +378,21 @@ var WPGlobusDialogApp;
 			$(document).on('click', api.option.listenClass, function(e) {
 				api.element = $(this);
 				api.id = api.element.data('source-id');
+				if ( '' == api.id ) {		
+					api.id = api.element.data('nodename') + '[name="'+api.element.data('source-name')+'"]';
+					api.wpglobus_id = '#wpglobus-'+api.convertToId( api.element.data('source-name') );
+				} else {
+					api.wpglobus_id = '#wpglobus-'+api.id;
+					api.id = '#'+api.id;	
+				}				
+				
 				api.clicks++;
 				if ( api.clicks == 1 ) {
 					setTimeout(function () {
 						if (api.clicks == 1) {
 							api.onClick(e);
 						} else {
-							var s = $('#'+api.id);
+							var s = $(api.id);
 							if ( s.hasClass('hidden') ) {
 								s.removeClass('hidden').attr('style', 'display:block;');	
 							} else {	
@@ -365,13 +418,12 @@ var WPGlobusDialogApp;
 				api.dialogTitle = api.element.data('dialog-title');
 			}	
 			if ( typeof api.id !== 'undefined' ) {
-				api.attrs['maxlength'] = $('#'+api.id).attr('maxlength');
-				api.wpglobus_id = '#wpglobus-'+api.id;	
+				api.attrs['maxlength'] = $(api.id).attr('maxlength');
 			}
 			
 			api.source = api.element.data('source-value');
 			if ( typeof api.source === 'undefined' ) {
-				api.source = $('#'+api.id).val();	
+				api.source = $(api.id).val();	
 				if (api.request == 'ajax') {
 					// @todo revise ajax action
 					//api.order['action'] = 'get_translate';
