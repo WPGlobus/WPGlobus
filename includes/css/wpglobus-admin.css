@@ -115,7 +115,7 @@ ul.wpglobus-important li {
   font-style: italic;
 }
 .about-wrap .wpglobus-wp {
-  color: #23769c;
+  color: rgba(40, 133, 184, 0.25);
 }
 .about-wrap h1.wpglobus {
   font-family: Georgia, serif;
@@ -137,13 +137,56 @@ ul.wpglobus-important li {
   font-style: normal;
   text-decoration: inherit;
   content: "\f168";
-  border: 1px solid #23769c;
-  color: #23769c;
+  border: 1px solid rgba(40, 133, 184, 0.25);
+  color: rgba(40, 133, 184, 0.25);
   background-color: white;
   margin: 0 3px 0 3px;
   line-height: 1.2;
   width: 1.5em;
   text-align: center;
   cursor: move;
+}
+.redux-container #redux-intro-text {
+  background-color: #d3e4f4;
+  color: black;
+}
+.redux-container #redux-intro-text h1 {
+  color: #2866a0;
+  float: left;
+  width: 204px;
+  margin: 0;
+  padding: 0;
+}
+.redux-container #redux-intro-text .wpg-bnr {
+  width: 400px;
+}
+.redux-container #redux-intro-text .wpg-bnr.wpg-bnr-left {
+  float: left;
+}
+.redux-container #redux-intro-text .wpg-bnr.wpg-bnr-right {
+  float: right;
+}
+.redux-container #redux-intro-text .wpg-a-img {
+  float: left;
+  display: block;
+  height: 100px;
+  border: 1px solid #5999d5;
+  background-color: white;
+  margin-right: 1em;
+}
+.redux-container #redux-intro-text .wpg-a-img img {
+  width: 100px;
+}
+.redux-container #redux-intro-text .wpg-text-block {
+  padding-top: 0.3em;
+}
+.redux-container #redux-intro-text .wpg-text-block .wpg-title {
+  font-weight: 700;
+}
+.redux-container #redux-intro-text .wpg-text-block .wpg-body {
+  margin: 0.3em 0;
+}
+.redux-container #redux-intro-text .wpg-text-block .wpg-footer {
+  font-style: italic;
 }
 /*# sourceMappingURL=wpglobus-admin.css.map */

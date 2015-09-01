@@ -34,7 +34,7 @@
 
 .wpglobus-excerpt {
 	width: 98%;
-    height: 4em;
+	height: 4em;
 }
 
 .widefat thead tr th.column-wpglobus_languages {
@@ -136,7 +136,7 @@ ul.wpglobus-important {
 }
 
 @color-wpglobus-logo-globe: #E38869;
-@color-wpglobus-logo-wp: #23769C;
+@color-wpglobus-logo-wp: rgba(40, 133, 184, 0.25);
 
 .about-wrap {
 	.wpglobus-version {
@@ -184,6 +184,54 @@ ul.wpglobus-important {
 		text-align: center;
 		cursor: move;
 	}
+}
+
+// Options panel header
+// @see includes/options/wpglobus-options-header.php
+@bg-redux-info: #d3e4f4;
+.redux-container #redux-intro-text {
+	background-color: @bg-redux-info;
+	color: black;
+	h1 {
+		color: darken(@bg-redux-info, 50%);
+		float: left;
+		width: 204px;
+		margin: 0;
+		padding: 0;
+	}
+	.wpg-bnr {
+		width: 400px;
+		&.wpg-bnr-left {
+			float: left;
+		}
+		&.wpg-bnr-right {
+			float: right;
+		}
+	}
+	.wpg-a-img {
+		float: left;
+		display: block;
+		height: 100px;
+		border: 1px solid darken(@bg-redux-info, 30%);
+		background-color: white;
+		margin-right: 1em;
+		img {
+			width: 100px;
+		}
+	}
+	.wpg-text-block {
+		padding-top: 0.3em;
+		.wpg-title {
+			font-weight: 700;
+		}
+		.wpg-body {
+			margin: 0.3em 0;
+		}
+		.wpg-footer {
+			font-style: italic;
+		}
+	}
+
 }
 
 // --- EOF
