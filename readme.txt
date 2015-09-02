@@ -1,7 +1,7 @@
 === WPGlobus - Multilingual Everything! ===
 Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
-Tags: bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, multilingual SEO, language switcher, translate, translation, TIVWP, WPGlobus
+Tags: bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus
 Requires at least: 4.2
 Tested up to: 4.3
 Stable tag: trunk
@@ -80,7 +80,7 @@ Thank you!
 
 = Admin interface translations: =
 
-* `de_DE` : automatic translation (Microsoft)
+* `de_DE` : Tobias Hopp, [http://www.tobiashopp.info/](http://www.tobiashopp.info/)
 * `es_ES` : Patricia Casado, [mascositas.com](http://mascositas.com/)
 * `ru_RU` : The WPGlobus Team
 
