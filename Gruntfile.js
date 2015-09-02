@@ -259,7 +259,7 @@ module.exports = function (grunt) {
      * Had to write this because "pot" does not do msgmerge correctly
      * @link https://github.com/stephenharris/grunt-pot/issues/11
      */
-    grunt.registerTask('after-pot', 'To run after the "pot" task', function () {
+    grunt.registerTask('po', 'Making PO files', function () {
         var execSync = require('child_process').execSync;
         var potFile = 'languages/wpglobus.pot';
         var poFilePaths = grunt.file.expand('languages/*.po');
@@ -267,12 +267,21 @@ module.exports = function (grunt) {
             var moFile = poFile.replace(/\.po$/, '.mo');
             grunt.log.writeln("Making PO: " + poFile);
             execSync('msgmerge -v --backup=none --no-fuzzy-matching --update ' + poFile + ' ' + potFile);
+        });
+    });
+
+    grunt.registerTask('mo', 'Compile PO to MO files', function () {
+        var execSync = require('child_process').execSync;
+        var potFile = 'languages/wpglobus.pot';
+        var poFilePaths = grunt.file.expand('languages/*.po');
+        poFilePaths.forEach(function (poFile) {
+            var moFile = poFile.replace(/\.po$/, '.mo');
             grunt.log.writeln("Making MO: " + moFile);
             execSync('msgfmt -v -o ' + moFile + ' ' + poFile);
         });
     });
 
-    grunt.registerTask('pomo', ['pot', 'replace:pot', 'after-pot']);
+    grunt.registerTask('pomo', ['pot', 'replace:pot', 'po', 'mo']);
 
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
