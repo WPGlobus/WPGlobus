@@ -83,8 +83,9 @@ Thank you!
 * `de_DE` : Tobias Hopp, [http://www.tobiashopp.info/](http://www.tobiashopp.info/)
 * `es_ES` : Patricia Casado, [mascositas.com](http://mascositas.com/)
 * `ru_RU` : The WPGlobus Team
+* `tr_TR` : Borahan Conkeroglu, [@boracon68](https://twitter.com/boracon68)
 
-**Please help us translate WPGlobus into your language!**
+**Please help us translate WPGlobus into your language!** Join the translation team on [Transifex](https://www.transifex.com/tivnet/wpglobus/).
 
 = More info and ways to contact the WPGlobus Development Team =
 
@@ -146,7 +147,11 @@ No known backward incompatibility issues.
 = 1.2.6-RC =
 
 * FIXED:
-	* `de_DE` admin interface properly translated
+	* `de_DE` admin interface properly translated.
+	* Broken links to WPGlobus.com from admin pages.
+* ADDED:
+	* `tr_TR` admin interface translation.
+	* `es` and `fr` enabled by default.
 
 = 1.2.5 =
 
