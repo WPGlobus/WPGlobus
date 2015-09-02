@@ -159,6 +159,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.2.6-RC ###
+
+* FIXED:
+	* `de_DE` admin interface properly translated
+
 ### 1.2.5 ###
 
 * FIXED:
