@@ -5,87 +5,87 @@
 # BORAHAN CONKEROGLU <boracon@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus\n"
+"Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-09-01 10:42-0400\n"
-"PO-Revision-Date: 2015-09-02 22:02+0000\n"
-"Last-Translator: BORAHAN CONKEROGLU <boracon@gmail.com>\n"
-"Language-Team: Turkish (Turkey) (http://www.transifex.com/tivnet/wpglobus/language/tr_TR/)\n"
+"POT-Creation-Date: 2015-09-01 11:32-0400\n"
+"PO-Revision-Date: 2015-09-03 21:35+0000\n"
+"Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr_TR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: includes/admin/class-wpglobus-about.php:48
+#: includes/admin/class-wpglobus-about.php:42
 msgid "Multilingual Everything!"
 msgstr "Herşeyi çokdilli yapın!"
 
-#: includes/admin/class-wpglobus-about.php:51
+#: includes/admin/class-wpglobus-about.php:45
 msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
 "multilingual WordPress blogs and sites."
 msgstr "WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir."
 
-#: includes/admin/class-wpglobus-about.php:58
+#: includes/admin/class-wpglobus-about.php:52
 msgid "Quick Start"
 msgstr "Hızlı Başlangıç"
 
-#: includes/admin/class-wpglobus-about.php:63
-#: includes/admin/class-wpglobus-about.php:92
+#: includes/admin/class-wpglobus-about.php:57
+#: includes/admin/class-wpglobus-about.php:86
 msgid "Guide"
 msgstr "Rehber"
 
-#: includes/admin/class-wpglobus-about.php:66
+#: includes/admin/class-wpglobus-about.php:60
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: includes/admin/class-wpglobus-about.php:69
+#: includes/admin/class-wpglobus-about.php:63
 #: includes/options/class-wpglobus-options.php:441
 msgid "Add-ons"
 msgstr "Eklentiler"
 
-#: includes/admin/class-wpglobus-about.php:73
+#: includes/admin/class-wpglobus-about.php:67
 msgid "Support"
 msgstr "Destek"
 
-#: includes/admin/class-wpglobus-about.php:79
+#: includes/admin/class-wpglobus-about.php:73
 msgid "Easy as 1-2-3:"
 msgstr "1-2-3 demek kadar kolay:"
 
-#: includes/admin/class-wpglobus-about.php:81
+#: includes/admin/class-wpglobus-about.php:75
 msgid "Go to WPGlobus admin menu and choose the countries / languages;"
 msgstr "Ülkeler / Diller seçimini yapmak için WPGlobus yönetim menüsüne gidin;"
 
-#: includes/admin/class-wpglobus-about.php:82
+#: includes/admin/class-wpglobus-about.php:76
 msgid ""
 "Enter the translations to the posts, pages, categories, tags and menus using"
 " a clean and simple interface."
 msgstr "Tercümeleri yazılara, sayfalara, kategorilere, etiketlere ve menülere temiz ve basit bir arayüz kullanarak girin."
 
-#: includes/admin/class-wpglobus-about.php:83
+#: includes/admin/class-wpglobus-about.php:77
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names"
 " and country flags."
 msgstr "Dilleri ön yüzde, dil isimleri ve bayrakların olduğu bir açılan menü ile değiştirin."
 
-#: includes/admin/class-wpglobus-about.php:87
+#: includes/admin/class-wpglobus-about.php:81
 msgid "Links:"
 msgstr "Bağlantılar:"
 
-#: includes/admin/class-wpglobus-about.php:94
+#: includes/admin/class-wpglobus-about.php:88
 msgid "FAQs"
 msgstr "SSS"
 
-#: includes/admin/class-wpglobus-about.php:96
+#: includes/admin/class-wpglobus-about.php:90
 msgid "Contact Us"
 msgstr "İletişim"
 
-#: includes/admin/class-wpglobus-about.php:98
+#: includes/admin/class-wpglobus-about.php:92
 msgid "Please give us 5 stars!"
 msgstr "Lütfen bize 5 yıldız verin!"
 
-#: includes/admin/class-wpglobus-about.php:110
+#: includes/admin/class-wpglobus-about.php:104
 msgid ""
 "WPGlobus only supports the localization URLs in the form of "
 "<code>example.com/xx/page/</code>. We do not plan to support subdomains "
@@ -93,24 +93,24 @@ msgid ""
 "<code>example.com?lang=xx</code>."
 msgstr "WPGlobus sadece <code>example.com/xx/page/</code> biçimindeki URL yerelleştirmesini destekler. Alt alan adlarını  <code>xx.example.com</code> ve dil sorgulamalarını <code>example.com?lang=xx</code> desteklemeyi planlamıyoruz."
 
-#: includes/admin/class-wpglobus-about.php:113
+#: includes/admin/class-wpglobus-about.php:107
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr "Bazı temalar ve eklentiler <strong>multilingual' e için hazır değiller</strong>."
 
-#: includes/admin/class-wpglobus-about.php:115
+#: includes/admin/class-wpglobus-about.php:109
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
 msgstr "Bazı metinleri tercüme edilmeden veya bütün diller birbirine karışmış halde gösterebilirler."
 
-#: includes/admin/class-wpglobus-about.php:117
+#: includes/admin/class-wpglobus-about.php:111
 #, php-format
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 msgstr "Lütfen tema / eklenti yazarı ile iletişim kurun. Eğer yardım edemeyecek durumdalarsa, size özel kod yazmaları için %s WPGlobus Takımı' nı kiralamayı %s düşünebilirsiniz.  "
 
-#: includes/admin/class-wpglobus-about.php:127
+#: includes/admin/class-wpglobus-about.php:121
 #: includes/admin/class-wpglobus-addons.php:88
 msgid "Go to WPGlobus Settings"
 msgstr "WPGlobus Ayarlarına gidin"
@@ -400,7 +400,7 @@ msgid "Sincerely Yours,"
 msgstr "Saygılarımızla,"
 
 #: includes/options/class-wpglobus-options.php:182
-#: includes/options/wpglobus-options-header.php:26
+#: includes/options/wpglobus-options-header.php:27
 msgid "The WPGlobus Team"
 msgstr "WPGlobus Takımı"
 
@@ -645,28 +645,28 @@ msgstr "Bir öğe seçin"
 msgid "No items of this type were found."
 msgstr "Bu tipte bir öğe bulunamadı."
 
-#: includes/options/wpglobus-options-header.php:17
+#: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"
 msgstr "Desteğinize güveniyoruz!"
 
-#: includes/options/wpglobus-options-header.php:20
+#: includes/options/wpglobus-options-header.php:21
 msgid "Please consider a small donation to support the future development."
 msgstr "Gelecekteki ilerlememize destek olmak için lütfen küçük bir bağış yapın."
 
-#: includes/options/wpglobus-options-header.php:24
+#: includes/options/wpglobus-options-header.php:25
 msgid "Thank you!"
 msgstr "Teşekkür ederiz!"
 
-#: includes/options/wpglobus-options-header.php:39
+#: includes/options/wpglobus-options-header.php:46
 msgid "WPGlobus Plus!"
 msgstr "WPGlobus Plus!"
 
-#: includes/options/wpglobus-options-header.php:42
+#: includes/options/wpglobus-options-header.php:49
 msgid ""
 "Advanced features and tweaks: URL translation, multilingual SEO analysis, "
 "separate publishing and more! "
 msgstr "Gelişmiş özellikler ve ince ayarlar: URL tercümesi, çokludil SEO analizi, bireysel yayımcılık ve daha fazlası!"
 
-#: includes/options/wpglobus-options-header.php:48
+#: includes/options/wpglobus-options-header.php:55
 msgid "Get WPGlobus Plus now!"
 msgstr "WPGlobus Plus' ı şimdi edinin!"
