@@ -1,6 +1,7 @@
 <?php
 /**
  * Check Update Status
+ *
  * @package WPGlobus/Updater
  */
 
@@ -15,6 +16,8 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 	 * Class WPGlobus_Updater_API_Check
 	 */
 	class WPGlobus_Updater_API_Check {
+
+		protected $_messages;
 
 		private $upgrade_url; // URL to access the Update API Manager.
 		private $plugin_name; // same as plugin slug. if a theme use a theme name like 'twentyeleven'
@@ -41,12 +44,15 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 		 * @param string $domain
 		 * @param string $software_version Unused
 		 * @param string $plugin_or_theme
-		 * @param string $text_domain Unused
+		 * @param string $text_domain      Unused
 		 * @param string $extra
 		 */
-		public function init( $upgrade_url, $plugin_name, $product_id, $api_key, $activation_email, $renew_license_url, $instance, $domain, /** @noinspection PhpUnusedParameterInspection */
+		public function init(
+			$upgrade_url, $plugin_name, $product_id, $api_key, $activation_email, $renew_license_url, $instance, $domain, /** @noinspection PhpUnusedParameterInspection */
 			$software_version, $plugin_or_theme, /** @noinspection PhpUnusedParameterInspection */
-			$text_domain, $extra ='') {
+			$text_domain, $extra = ''
+		) {
+
 			// API data
 			$this->upgrade_url       = $upgrade_url;
 			$this->plugin_name       =
@@ -88,7 +94,7 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 			 */
 
 			// uses the flag above to determine if this is a plugin or a theme update request
-			if ( $this->plugin_or_theme == 'plugin' ) {
+			if ( $this->plugin_or_theme === 'plugin' ) {
 				/**
 				 * Plugin Updates
 				 */
@@ -98,7 +104,7 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 				// Check For Plugin Information to display on the update details page
 				add_filter( 'plugins_api', array( $this, 'request' ), 10, 3 );
 
-			} else if ( $this->plugin_or_theme == 'theme' ) {
+			} else if ( $this->plugin_or_theme === 'theme' ) {
 				/**
 				 * Theme Updates
 				 */
@@ -110,13 +116,14 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 
 			}
 
+			$this->_init_messages();
+
 		}
 
 		/**
 		 * Upgrade API URL
 		 *
 		 * @param array $args
-		 *
 		 * @return string
 		 */
 		private function create_upgrade_api_url( $args ) {
@@ -127,9 +134,10 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 
 		/**
 		 * Check for updates against the remote server.
-		 * @param  object $transient
 		 *
-		 * @return object $transient
+		 * @see set_site_transient
+		 * @param  mixed $transient
+		 * @return mixed $transient
 		 */
 		public function update_check( $transient ) {
 
@@ -138,13 +146,13 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 				return $transient;
 			}
 
-			$curr_ver = (string)$transient->checked[$this->plugin_name];
+			$curr_ver = (string) $transient->checked[ $this->plugin_name ];
 
 			$args = array(
 				'request'          => 'pluginupdatecheck',
 				'slug'             => $this->slug,
 				'plugin_name'      => $this->plugin_name,
-				'version'			=>	$curr_ver,
+				'version'          => $curr_ver,
 				'product_id'       => $this->product_id,
 				'api_key'          => $this->api_key,
 				'activation_email' => $this->activation_email,
@@ -167,13 +175,14 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 			// If there is a new version, modify the transient to reflect an update is available
 			if ( isset( $new_ver ) ) {
 
+				/** @noinspection NestedPositiveIfStatementsInspection */
 				if ( $response !== false && version_compare( $new_ver, $curr_ver, '>' ) ) {
 
-					if ( $this->plugin_or_theme == 'plugin' ) {
+					if ( $this->plugin_or_theme === 'plugin' ) {
 
 						$transient->response[ $this->plugin_name ] = $response;
 
-					} elseif ( $this->plugin_or_theme == 'theme' ) {
+					} elseif ( $this->plugin_or_theme === 'theme' ) {
 
 						$transient->response[ $this->plugin_name ]['new_version'] = $response->new_version;
 						$transient->response[ $this->plugin_name ]['url']         = $response->url;
@@ -192,8 +201,7 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 		 * Sends and receives data to and from the server API
 		 *
 		 * @param array $args
-		 *
-		 * @return object $response
+		 * @return stdClass|bool $response
 		 */
 		public function plugin_information( $args ) {
 
@@ -201,7 +209,7 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 
 			$request = wp_remote_get( $target_url );
 
-			if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
+			if ( is_wp_error( $request ) || (int) wp_remote_retrieve_response_code( $request ) !== 200 ) {
 				return false;
 			}
 
@@ -215,11 +223,13 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 			$response = unserialize( $response );
 
 			if ( is_object( $response ) ) {
-				if(!empty($response->sections)){
-					foreach($response->sections as $section_name => $section_content) {
-						$response->sections[$section_name] = apply_filters('the_content', $section_content);
+				if ( ! empty( $response->sections ) ) {
+					foreach ( $response->sections as $section_name => $section_content ) {
+						/** @noinspection AlterInForeachInspection */
+						$response->sections[ $section_name ] = apply_filters( 'the_content', $section_content );
 					}
 				}
+
 				return $response;
 			} else {
 				return false;
@@ -229,19 +239,18 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 		/**
 		 * Generic request helper.
 		 *
-		 * @param  bool   $result
-		 * @param  string $action Unused
-		 * @param  stdClass|array  $args
-		 *
-		 * @return object|bool $response or boolean false
+		 * @param  bool           $result
+		 * @param  string         $action Unused
+		 * @param  stdClass|array $args
+		 * @return stdClass|bool $response or boolean false
 		 */
 		public function request( $result, $action, $args ) {
 
-			if( empty($action) or $action !== 'plugin_information' ) {
+			if ( empty( $action ) or $action !== 'plugin_information' ) {
 				return $result;
 			}
 
-			if ( empty($args->slug) or $args->slug !== $this->slug ) {
+			if ( empty( $args->slug ) or $args->slug !== $this->slug ) {
 				// Not our business
 				return $result;
 			}
@@ -256,19 +265,19 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 				return $result;
 			}
 
-			$curr_ver = (string)$transient->checked[$this->plugin_name];
+			$curr_ver = (string) $transient->checked[ $this->plugin_name ];
 
 			$args = array(
 				'request'          => 'plugininformation',
 				'plugin_name'      => $this->plugin_name,
-				'version'			=>	$curr_ver,
+				'version'          => $curr_ver,
 				'product_id'       => $this->product_id,
 				'api_key'          => $this->api_key,
 				'activation_email' => $this->activation_email,
 				'instance'         => $this->instance,
 				'domain'           => $this->domain,
 				'software_version' => $curr_ver,
-//				'extra'            => $this->extra,
+				//				'extra'            => $this->extra,
 			);
 
 			$response = $this->plugin_information( $args );
@@ -283,69 +292,35 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 		}
 
 		/**
-		 * Displays an admin error message in the WordPress dashboard
+		 * Displays admin error messages if response has errors.
 		 *
-		 * @param  object $response
-		 *
-		 * @return string
+		 * @param  stdClass $response
 		 */
 		public function check_response_for_errors( $response ) {
 
 			if ( ! empty( $response ) ) {
 
-				if ( isset( $response->errors['no_key'] ) && $response->errors['no_key'] == 'no_key' && isset( $response->errors['no_subscription'] ) && $response->errors['no_subscription'] == 'no_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'no_key_error_notice' ) );
-					add_action( 'admin_notices', array( $this, 'no_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['exp_license'] ) && $response->errors['exp_license'] == 'exp_license' ) {
-
-					add_action( 'admin_notices', array( $this, 'expired_license_error_notice' ) );
-
-				} else if ( isset( $response->errors['hold_subscription'] ) && $response->errors['hold_subscription'] == 'hold_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'on_hold_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['cancelled_subscription'] ) && $response->errors['cancelled_subscription'] == 'cancelled_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'cancelled_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['exp_subscription'] ) && $response->errors['exp_subscription'] == 'exp_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'expired_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['suspended_subscription'] ) && $response->errors['suspended_subscription'] == 'suspended_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'suspended_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['pending_subscription'] ) && $response->errors['pending_subscription'] == 'pending_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'pending_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['trash_subscription'] ) && $response->errors['trash_subscription'] == 'trash_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'trash_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['no_subscription'] ) && $response->errors['no_subscription'] == 'no_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'no_subscription_error_notice' ) );
-
-				} else if ( isset( $response->errors['no_activation'] ) && $response->errors['no_activation'] == 'no_activation' ) {
-
-					add_action( 'admin_notices', array( $this, 'no_activation_error_notice' ) );
-
-				} else if ( isset( $response->errors['no_key'] ) && $response->errors['no_key'] == 'no_key' ) {
-
-					add_action( 'admin_notices', array( $this, 'no_key_error_notice' ) );
-
-				} else if ( isset( $response->errors['download_revoked'] ) && $response->errors['download_revoked'] == 'download_revoked' ) {
-
-					add_action( 'admin_notices', array( $this, 'download_revoked_error_notice' ) );
-
-				} else if ( isset( $response->errors['switched_subscription'] ) && $response->errors['switched_subscription'] == 'switched_subscription' ) {
-
-					add_action( 'admin_notices', array( $this, 'switched_subscription_error_notice' ) );
-
+				foreach (
+					array(
+						'exp_license',
+						'hold_subscription',
+						'cancelled_subscription',
+						'exp_subscription',
+						'suspended_subscription',
+						'pending_subscription',
+						'trash_subscription',
+						'no_subscription',
+						'no_activation',
+						'no_key',
+						'download_revoked',
+						'switched_subscription',
+					) as $error_code
+				) {
+					if ( isset( $response->errors[ $error_code ] ) &&
+					     $response->errors[ $error_code ] === $error_code
+					) {
+						add_action( 'admin_notices', array( $this, $error_code . '_error_notice' ) );
+					}
 				}
 
 			}
@@ -353,195 +328,140 @@ if ( ! class_exists( 'WPGlobus_Updater_API_Check' ) ) :
 		}
 
 		/**
-		 * Display license expired error notice
+		 * Initialize error message texts.
 		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
+		 * @since 1.2.6
 		 */
-		public function expired_license_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
+		protected function _init_messages() {
+			$this->_messages = array(
+				'go_to_account'          => '<a href="' . $this->renew_license_url . '" target="_blank">' .
+				                            esc_html__( 'To check status, purchase or reactivate license, please go to your account.', 'wpglobus' ) .
+				                            '</a>',
+				'exp_license'            => esc_html__( 'License expired.', 'wpglobus' ),
+				'hold_subscription'      => esc_html__( 'Subscription on-hold.', 'wpglobus' ),
+				'cancelled_subscription' => esc_html__( 'Subscription cancelled.', 'wpglobus' ),
+				'suspended_subscription' => esc_html__( 'Subscription suspended.', 'wpglobus' ),
+				'expired_subscription'   => esc_html__( 'Subscription expired.', 'wpglobus' ),
+				'pending_subscription'   => esc_html__( 'Subscription pending.', 'wpglobus' ),
+				'trash_subscription'     => esc_html__( 'Subscription pending deletion.', 'wpglobus' ),
+				'no_subscription'        => esc_html__( 'Subscription not found.', 'wpglobus' ),
+				'no_key'                 => esc_html__( 'License key not found or deactivated.', 'wpglobus' ),
+				'download_revoked'       => esc_html__( 'No download permission. License / subscription probably expiring.', 'wpglobus' ),
+				'no_activation'          => esc_html__( 'License not activated. Go to the settings page and enter the license key and email to activate.', 'wpglobus' ),
+				'switched_subscription'  => esc_html__( 'Subscription changed. Please enter new license key in the settings page.', 'wpglobus' ),
 
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The license key for %s has expired. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
+			);
 
+			// To debug:
+			//			foreach ( $this->_messages as $_ => $__ ) {
+			//				if ( method_exists( $this, $_ . '_error_notice' ) ) {
+			//					add_action( 'admin_notices', array( $this, $_ . '_error_notice' ) );
+			//				}
+			//			}
+
+		}
+
+		/**
+		 * Print error notice
+		 *
+		 * @param string $status_msg_id
+		 * @param string $info_msg_id
+		 * @since 1.2.6
+		 */
+		protected function _print_error_notice( $status_msg_id, $info_msg_id = '' ) {
+			echo '<div class="error"><p>';
+			echo '<strong>' . $this->product_id . ':</strong> ';
+			echo $this->_messages[ $status_msg_id ];
+
+			if ( $info_msg_id ) {
+				echo ' ' . $this->_messages[ $info_msg_id ];
+			}
+
+			echo '</p></div>';
+		}
+
+		/**
+		 * Display license expired error notice
+		 */
+		public function exp_license_error_notice() {
+			$this->_print_error_notice( 'exp_license', 'go_to_account' );
 		}
 
 		/**
 		 * Display subscription on-hold error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function on_hold_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The subscription for %s is on-hold. You can reactivate the subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
+		public function hold_subscription_error_notice() {
+			$this->_print_error_notice( 'hold_subscription', 'go_to_account' );
 		}
 
 		/**
 		 * Display subscription cancelled error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function cancelled_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The subscription for %s has been cancelled. You can renew the subscription from your account <a href="%s" target="_blank">dashboard</a>. A new license key will be emailed to you after your order has been completed.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
+		public function cancelled_subscription_error_notice() {
+			$this->_print_error_notice( 'cancelled_subscription', 'go_to_account' );
 		}
 
 		/**
 		 * Display subscription expired error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function expired_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
+		public function expired_subscription_error_notice() {
+			$this->_print_error_notice( 'expired_subscription', 'go_to_account' );
+		}
 
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The subscription for %s has expired. You can reactivate the subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
+		/**
+		 * Display subscription suspended error notice
+		 */
+		public function suspended_subscription_error_notice() {
+			$this->_print_error_notice( 'suspended_subscription', 'go_to_account' );
+		}
 
+		/**
+		 * Display subscription pending error notice
+		 */
+		public function pending_subscription_error_notice() {
+			$this->_print_error_notice( 'pending_subscription', 'go_to_account' );
 		}
 
 		/**
 		 * Display subscription expired error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function suspended_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The subscription for %s has been suspended. You can reactivate the subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
+		public function trash_subscription_error_notice() {
+			$this->_print_error_notice( 'trash_subscription', 'go_to_account' );
 		}
 
 		/**
 		 * Display subscription expired error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function pending_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The subscription for %s is still pending. You can check on the status of the subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
-		}
-
-		/**
-		 * Display subscription expired error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
-		 */
-		public function trash_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'The subscription for %s has been placed in the trash and will be deleted soon. You can purchase a new subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
-		}
-
-		/**
-		 * Display subscription expired error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
-		 */
-		public function no_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'A subscription for %s could not be found. You can purchase a subscription from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
+		public function no_subscription_error_notice() {
+			$this->_print_error_notice( 'no_subscription', 'go_to_account' );
 		}
 
 		/**
 		 * Display missing key error notice
 		 */
 		public function no_key_error_notice() {
-
-			echo '<div id="message" class="error"><p>';
-			echo '<strong>' . $this->product_id . ':</strong> ';
-			_e( 'License key not found or deactivated.', 'wpglobus' );
-			echo ' ';
-			printf( __( 'Please check the status on your %s account dashboard%s.', 'wpglobus' ),
-				'<a href="' . $this->renew_license_url . '" target="_blank">', '</a>' );
-
-			echo '</p></div>';
-
+			$this->_print_error_notice( 'no_key', 'go_to_account' );
 		}
 
 		/**
 		 * Display missing download permission revoked error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function download_revoked_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'Download permission for %s has been revoked possibly due to a license key or subscription expiring. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
+		public function download_revoked_error_notice() {
+			$this->_print_error_notice( 'download_revoked', 'go_to_account' );
 		}
 
 		/**
 		 * Display no activation error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function no_activation_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( '%s has not been activated. Go to the settings page and enter the license key and license email to activate %s.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->product_id );
-
+		public function no_activation_error_notice() {
+			$this->_print_error_notice( 'no_activation' );
 		}
 
 		/**
 		 * Display switched activation error notice
-		 *
-		 * @param  string $message Unused
-		 *
-		 * @return void
 		 */
-		public function switched_subscription_error_notice(
-			/** @noinspection PhpUnusedParameterInspection */
-			$message
-		) {
-
-			echo sprintf( '<div id="message" class="error"><p>' . __( 'You changed the subscription for %s, so you will need to enter your new API License Key in the settings page. The License Key should have arrived in your email inbox, if not you can get it by logging into your account <a href="%s" target="_blank">dashboard</a>.', 'wpglobus' ) . '</p></div>', $this->product_id, $this->renew_license_url );
-
+		public function switched_subscription_error_notice() {
+			$this->_print_error_notice( 'switched_subscription' );
 		}
 
 	} // class
