@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
 "POT-Creation-Date: 2015-09-01 11:32-0400\n"
-"PO-Revision-Date: 2015-09-03 22:29+0000\n"
+"PO-Revision-Date: 2015-09-04 09:49+0000\n"
 "Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:107
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
-msgstr ""
+msgstr "Certains thèmes ou extensions ne sont pas <strong>multilingual-ready</strong>."
 
 #: includes/admin/class-wpglobus-about.php:109
 msgid ""
@@ -118,7 +118,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-addons.php:45
 msgid "WPGlobus Add-ons / Extensions"
-msgstr ""
+msgstr "Add-ons / Extensions de WPGlobus"
 
 #: includes/admin/class-wpglobus-language-edit.php:146
 #: includes/admin/class-wpglobus-language-edit.php:151
@@ -369,7 +369,7 @@ msgstr ""
 msgid ""
 "We recommend you to install the most recent version of the ReduxFramework "
 "plugin: %1$s."
-msgstr ""
+msgstr "Nous vous recommandons d'installer la version la plus récente de l'extension ReduxFramework&nbsp;: %1$s."
 
 #: includes/options/class-wpglobus-options.php:163
 msgid "Thank you for installing WPGlobus!"
@@ -394,7 +394,7 @@ msgstr ""
 msgid ""
 "Should you have any questions or comments, please do not hesitate to contact"
 " us."
-msgstr ""
+msgstr "Si vous avez des questions ou des commentaires, n'hésitez pas à nous contacter."
 
 #: includes/options/class-wpglobus-options.php:180
 msgid "Sincerely Yours,"
@@ -411,11 +411,11 @@ msgstr "Bienvenue&nbsp;!"
 
 #: includes/options/class-wpglobus-options.php:252
 msgid "No navigation menu"
-msgstr ""
+msgstr "Pas de menu de navigation"
 
 #: includes/options/class-wpglobus-options.php:254
 msgid "Select navigation menu"
-msgstr ""
+msgstr "Sélectionnez le menu de navigation"
 
 #: includes/options/class-wpglobus-options.php:259
 #, php-format
@@ -426,11 +426,11 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:260
 msgid "<strong>Uncheck</strong> the languages you do not plan to use."
-msgstr ""
+msgstr "<strong>Décochez</strong> les langues que vous ne comptez pas utiliser."
 
 #: includes/options/class-wpglobus-options.php:261
 msgid "<strong>Add</strong> more languages using the section below."
-msgstr ""
+msgstr "<strong>Ajoutez</strong> plus de langues en utilisant la section ci-dessous."
 
 #: includes/options/class-wpglobus-options.php:262
 msgid "When done, click the [Save Changes] button."
@@ -620,19 +620,19 @@ msgstr "Drapeau"
 
 #: includes/options/fields/table/table-languages.php:81
 msgid "Language name"
-msgstr ""
+msgstr "Nom de la langue"
 
 #: includes/options/fields/table/table-languages.php:86
 msgid "English language name"
-msgstr ""
+msgstr "Nom en anglais de la langue"
 
 #: includes/options/fields/table/table-languages.php:109
 msgid "No items found"
-msgstr ""
+msgstr "Aucun élément trouvé."
 
 #: includes/options/fields/table/table-languages.php:119
 msgid "Add new Language"
-msgstr ""
+msgstr "Ajouter une nouvelle langue"
 
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
