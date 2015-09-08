@@ -152,7 +152,9 @@ No known backward incompatibility issues.
 * ADDED:
 	* `tr_TR` admin interface translation.
 	* `es` and `fr` enabled by default.
-
+* COMPATIBILITY:
+	* All In One SEO Pack 2.2.7.2
+	
 = 1.2.5 =
 
 * FIXED:
