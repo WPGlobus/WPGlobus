@@ -281,7 +281,9 @@ module.exports = function (grunt) {
         });
     });
 
-    grunt.registerTask('pomo', ['pot', 'replace:pot', 'po', 'mo']);
+    grunt.registerTask('makepot', ['pot', 'replace:pot']);
+
+    grunt.registerTask('pomo', ['makepot', 'po', 'mo']);
 
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
