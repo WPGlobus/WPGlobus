@@ -82,10 +82,11 @@ Thank you!
 
 * `de_DE` : Tobias Hopp, [http://www.tobiashopp.info/](http://www.tobiashopp.info/)
 * `es_ES` : Patricia Casado, [mascositas.com](http://mascositas.com/)
-* `ru_RU` : The WPGlobus Team
 * `tr_TR` : Borahan Conkeroglu, [@boracon68](https://twitter.com/boracon68)
+* `fr_FR`, 'sv_SE' and future language updates: [WP-Translations](http://wp-translations.org/)
+* `ru_RU` : The WPGlobus Team (мы говорим по-русски!)
 
-**Please help us translate WPGlobus into your language!** Join the translation team on [Transifex](https://www.transifex.com/tivnet/wpglobus/).
+**Please help us translate WPGlobus into your language!** Join the WP-Translations Team on [Transifex](https://www.transifex.com/wp-translations/wpglobus-multilingual/).
 
 = More info and ways to contact the WPGlobus Development Team =
 
