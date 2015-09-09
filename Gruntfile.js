@@ -151,6 +151,28 @@ module.exports = function (grunt) {
             }
         },
 
+        makepot: {
+            target: {
+                options: {
+                    mainFile: 'wpglobus.php',                     // Main project file.
+                    potHeaders: {
+                        poedit: true,                 // Includes common Poedit headers.
+                        'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
+                    },                                // Headers to add to the generated POT file.
+                    processPot: function( pot, options ) {
+                        pot.headers['report-msgid-bugs-to'] = 'http://www.wpglobus.com/pg/contact-us/';
+                        pot.headers['language-team'] = 'The WPGlobus Team <support@wpglobus.com>';
+                        pot.headers['last-translator'] = pot.headers['language-team'];
+                        delete pot.headers['x-generator'];
+                        return pot;
+                    },
+                    type: 'wp-plugin',                // Type of project (wp-plugin or wp-theme).
+                    updateTimestamp: true,             // Whether the POT-Creation-Date should be updated without other changes.
+                    updatePoFiles: false              // Whether to update PO files in the same directory as the POT file.
+                }
+            }
+        },
+
         pot: {
             options: {
                 encoding: 'UTF-8',
@@ -281,9 +303,9 @@ module.exports = function (grunt) {
         });
     });
 
-    grunt.registerTask('makepot', ['pot', 'replace:pot']);
+    //grunt.registerTask('makepot', ['pot', 'replace:pot']);
 
-    grunt.registerTask('pomo', ['makepot', 'po', 'mo']);
+    //grunt.registerTask('pomo', ['makepot', 'po', 'mo']);
 
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
