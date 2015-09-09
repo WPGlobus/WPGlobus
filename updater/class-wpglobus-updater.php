@@ -404,7 +404,15 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
 					?>
 					<div class="error">
-						<p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', 'wpglobus' ), $this->ame_software_product_id, '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
+						<p>
+							<?php
+							echo '<strong>' . $this->ame_software_product_id . '</strong>: ';
+							printf(
+								// translators: %s - URL placeholder. Do not translate WP_... constants.
+								esc_html__( 'WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to WP_ACCESSIBLE_HOSTS.', 'wpglobus' ),
+								'<strong>' . $host . '</strong>' );
+							?>
+						</p>
 					</div>
 					<?php
 				}
