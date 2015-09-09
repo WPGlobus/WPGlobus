@@ -108,7 +108,9 @@ class WPGlobus_About {
 						'wpglobus' ); ?>
 					<?php _e( 'They might display some texts with no translation, or with all languages mixed together.',
 						'wpglobus' ); ?>
-					<?php printf( __( 'Please contact the theme / plugin author. If they are unable to assist, consider %s hiring the WPGlobus Team %s to write a custom code for you.',
+					<?php
+					/* translators: %s are used to insert HTML link. Keep them in place. */
+					printf( __( 'Please contact the theme / plugin author. If they are unable to assist, consider %s hiring the WPGlobus Team %s to write a custom code for you.',
 						'wpglobus' ), '<a href="' . $url_wpglobus_site_pro_support . '">', '</a>' ); ?>
 				</li>
 
