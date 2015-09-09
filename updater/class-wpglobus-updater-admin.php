@@ -192,6 +192,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 
 		// Returns the API License Key status from the WooCommerce API Manager on the server
 		public function wc_am_api_key_status() {
+			/** @var array $license_status */
 			$license_status       = $this->license_key_status();
 			$license_status_check =
 				( ! empty( $license_status['status_check'] ) &&
@@ -265,9 +266,9 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 			$current_api_key = $this->WPGlobus_Updater->ame_options[ $this->WPGlobus_Updater->ame_api_key ];
 
 			// Should match the settings_fields() value
-			if ( $_REQUEST['option_page'] != $this->WPGlobus_Updater->ame_deactivate_checkbox ) {
+			if ( $_REQUEST['option_page'] !== $this->WPGlobus_Updater->ame_deactivate_checkbox ) {
 
-				if ( $activation_status == 'Deactivated' || $activation_status == '' || $api_key == '' || $api_email == '' || $checkbox_status == 'on' || $current_api_key != $api_key ) {
+				if ( $activation_status === 'Deactivated' || $activation_status == '' || $api_key == '' || $api_email == '' || $checkbox_status === 'on' || $current_api_key != $api_key ) {
 
 					/**
 					 * If this is a new key, and an existing key already exists in the database,
@@ -282,6 +283,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 						'licence_key' => $api_key,
 					);
 
+					/** @var array $activate_results */
 					$activate_results = json_decode( $this->WPGlobus_Updater->key()->activate( $args ), true );
 
 					if ( $activate_results['activated'] === true ) {
@@ -438,6 +440,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 
 			/**
 			 * Call the server to deactivate license
+			 * @var array $activate_results
 			 */
 			$activate_results = json_decode( $this->WPGlobus_Updater->key()->deactivate( $args ), true );
 

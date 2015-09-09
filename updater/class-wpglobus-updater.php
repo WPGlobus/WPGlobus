@@ -1,19 +1,20 @@
 <?php
 /**
  * WPGlobus Updater
+ *
  * @version   0.1.0
  * @package   WPGlobus-WC
  * @author    WPGlobus http://www.wpglobus.com/
  * @copyright Copyright 2014-2015 The WPGlobus Team: Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  * @license   GNU General Public License v3.0 http://www.gnu.org/licenses/gpl-3.0.html
- * --------------------------
+ *            --------------------------
  * @origins   WPGlobus Updater is based on the AME Example Plugin by Todd Lahman
- * ORIGINAL COPYRIGHT NOTICE:
- *    Intellectual Property rights, and copyright, reserved by Todd Lahman, LLC as allowed by law include,
- *    but are not limited to, the working concept, function, and behavior of this plugin,
- *    the logical code structure and expression as written.
- * author      Todd Lahman LLC
- * copyright   Copyright (c) Todd Lahman LLC
+ *            ORIGINAL COPYRIGHT NOTICE:
+ *            Intellectual Property rights, and copyright, reserved by Todd Lahman, LLC as allowed by law include,
+ *            but are not limited to, the working concept, function, and behavior of this plugin,
+ *            the logical code structure and expression as written.
+ *            author      Todd Lahman LLC
+ *            copyright   Copyright (c) Todd Lahman LLC
  */
 
 
@@ -96,7 +97,6 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * @param array $args
-		 *
 		 * @example
 		 *            new WPGlobus_Updater(
 		 *            array(
@@ -107,7 +107,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 		 *            )
 		 *            );
 		 */
-		function __construct( Array $args = array() ) {
+		public function __construct( Array $args = array() ) {
 
 			if ( ! empty( $args['product_id'] ) ) {
 				$this->ame_software_product_id = $args['product_id'];
@@ -239,6 +239,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * API Key Class.
+		 *
 		 * @return WPGlobus_Updater_Key
 		 */
 		public function key() {
@@ -246,7 +247,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			/** @var WPGlobus_Updater_Key $WPGlobus_Updater_Key */
 			static $WPGlobus_Updater_Key = null;
 
-			if ( is_null( $WPGlobus_Updater_Key ) ) {
+			if ( null === $WPGlobus_Updater_Key ) {
 				require_once( 'class-wpglobus-updater-requests.php' );
 				$WPGlobus_Updater_Key = new WPGlobus_Updater_Key( $this );
 			}
@@ -256,6 +257,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * URL pointing to this folder.
+		 *
 		 * @return string
 		 */
 		public function my_url() {
@@ -299,6 +301,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * Deletes all data if plugin deactivated
+		 *
 		 * @return void
 		 */
 		public function uninstall() {
@@ -340,6 +343,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * Deactivates the license on the API server
+		 *
 		 * @return void
 		 */
 		public function license_key_deactivation() {
@@ -354,7 +358,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				'licence_key' => $api_key,
 			);
 
-			if ( $activation_status == 'Activated' && $api_key != '' && $api_email != '' ) {
+			if ( $activation_status === 'Activated' && $api_key !== '' && $api_email !== '' ) {
 				$this->key()->deactivate( $args ); // reset license key activation
 			}
 		}
@@ -369,20 +373,25 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			<?php if ( isset( $_GET['page'] ) && $this->ame_activation_tab_key === $_GET['page'] ) {
 				return;
 			} ?>
-			<div id="message" class="error">
+			<div class="updated">
 				<p>
 					<strong><?php echo esc_html( $this->ame_software_product_id ); ?>: </strong>
-					<?php printf( __( 'License has not been activated. %sClick here%s to enter the license key and get the updates.', 'wpglobus' ),
-						'<a href="' .
-						esc_url( admin_url( 'index.php?page=' . $this->ame_activation_tab_key ) ) . '">',
-						'</a>' ); ?>
+					<?php
+					esc_html_e( 'License has not been activated.', 'wpglobus' );
+					echo ' ';
+					echo '<a href="' . esc_url(
+							admin_url( 'index.php?page=' . $this->ame_activation_tab_key ) ) . '">';
+					esc_html_e( 'Click here to enter the license key and get the updates.', 'wpglobus' );
+					echo '</a>';
+					?>
 				</p>
 			</div>
-		<?php
+			<?php
 		}
 
 		/**
 		 * Check for external blocking constant
+		 *
 		 * @return string
 		 */
 		public function check_external_blocking() {
@@ -397,7 +406,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 					<div class="error">
 						<p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', 'wpglobus' ), $this->ame_software_product_id, '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
 					</div>
-				<?php
+					<?php
 				}
 
 			}
