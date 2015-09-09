@@ -1,15 +1,14 @@
-# Translations for WPGlobus plugin.
-# Copyright (c) 2015, WPGlobus
-# 
+# Copyright (C) 2015 WPGlobus
+# This file is distributed under the GPL2.
 # Translators:
 # Elger Lindgren <elger@bilddigital.se>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2015-09-01 11:32-0400\n"
-"PO-Revision-Date: 2015-09-04 23:29+0000\n"
+"Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
+"POT-Creation-Date: 2015-09-09 02:03:04+00:00\n"
+"PO-Revision-Date: 2015-09-09 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Textdomain-Support: yes\n"
 
 #: includes/admin/class-wpglobus-about.php:42
 msgid "Multilingual Everything!"
@@ -37,12 +43,8 @@ msgstr "Snabbstart"
 msgid "Guide"
 msgstr "Guide"
 
-#: includes/admin/class-wpglobus-about.php:60
-msgid "Settings"
-msgstr "Inställningar"
-
 #: includes/admin/class-wpglobus-about.php:63
-#: includes/options/class-wpglobus-options.php:441
+#: includes/options/class-wpglobus-options.php:445
 msgid "Add-ons"
 msgstr "Tillägg"
 
@@ -104,14 +106,14 @@ msgid ""
 "mixed together."
 msgstr "De kan visa en del text utan översättning, eller också blandas alla språk ihop."
 
-#: includes/admin/class-wpglobus-about.php:111
-#, php-format
+#. translators: %s are used to insert HTML link. Keep them in place.
+#: includes/admin/class-wpglobus-about.php:113
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 msgstr "Kontakta temats / tilläggets författare. Om de inte kan hjälpa, överväg %s anställa WPGlobus Team %s för att skriva egen kod åt dig."
 
-#: includes/admin/class-wpglobus-about.php:121
+#: includes/admin/class-wpglobus-about.php:123
 #: includes/admin/class-wpglobus-addons.php:88
 msgid "Go to WPGlobus Settings"
 msgstr "Gå till WPGlobus inställningar"
@@ -203,6 +205,7 @@ msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 msgstr "PHP/WordPress språkets plats. (Exempel: en_US, ru_RU)"
 
 #: includes/admin/class-wpglobus-language-edit.php:387
+#: updater/class-wpglobus-updater-admin.php:87
 msgid "Save Changes"
 msgstr "Spara ändringarna"
 
@@ -213,36 +216,6 @@ msgstr "Radera språk"
 #: includes/admin/class-wpglobus-language-edit.php:399
 msgid "Back to the WPGlobus Settings"
 msgstr "Tillbaka till WPGlobus Inställningar"
-
-#: includes/class-wpglobus-customize.php:54
-msgid "Site Title"
-msgstr "Webbsidans titel"
-
-#: includes/class-wpglobus-customize.php:71
-msgid "Tagline"
-msgstr "Tagline"
-
-#: includes/class-wpglobus-filters.php:605
-msgid "Error while saving."
-msgstr "Fel vid sparandet."
-
-#: includes/class-wpglobus-filters.php:608
-msgid "g:i:s a"
-msgstr "g:i:s a"
-
-#: includes/class-wpglobus-filters.php:612
-#, php-format
-msgid "Draft saved at %s."
-msgstr "Utkast sparat på %s."
-
-#: includes/class-wpglobus-filters.php:707
-msgid "&hellip;"
-msgstr "&hellip;"
-
-#: includes/class-wpglobus-filters.php:713
-msgctxt "word count: words or characters?"
-msgid "words"
-msgstr "antal ord"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -280,19 +253,9 @@ msgstr "Rullist-Meny"
 msgid "Dropdown with flags"
 msgstr "Rulllistmeny med flaggor"
 
-#: includes/class-wpglobus-widget.php:196
-msgid "Title"
-msgstr "Titel"
-
 #: includes/class-wpglobus-widget.php:200
 msgid "Selector type"
 msgstr "Väljartyp"
-
-#: includes/class-wpglobus.php:28
-msgid ""
-"A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
-"widgets and even custom fields - in multiple languages!"
-msgstr "En WordPress Globaliserings / Flerspråks tillägg. Inlägg, sidor, menyer, widgets och även anpassade fält - på flera språk!"
 
 #: includes/class-wpglobus.php:869
 msgid "You cannot disable the main language."
@@ -301,34 +264,6 @@ msgstr "Du kan inte stänga av huvudspråk."
 #: includes/class-wpglobus.php:1034
 msgid "*) Available after the menu is saved."
 msgstr "*) Tillgängligt när menyn sparats."
-
-#: includes/class-wpglobus.php:1130
-#, php-format
-msgid "You are customizing %s"
-msgstr "Du anpassar %s"
-
-#: includes/class-wpglobus.php:1985
-#, php-format
-msgid "Word count: %s"
-msgstr "Ordräkning: %s"
-
-#: includes/class-wpglobus.php:1993
-#, php-format
-msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr "Senast redigerad av %1$s on %2$s at %3$s"
-
-#: includes/class-wpglobus.php:1995
-#, php-format
-msgid "Last edited on %1$s at %2$s"
-msgstr "Senast redigerad den %1$s på %2$s"
-
-#: includes/class-wpglobus.php:2278
-msgid "Enter title here"
-msgstr "Ange rubrik här"
-
-#: includes/class-wpglobus.php:2362
-msgid "Invalid taxonomy"
-msgstr "Ogiltigt taxonomi"
 
 #: includes/class-wpglobus.php:2550
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -340,10 +275,6 @@ msgid ""
 "default option."
 msgstr "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-standardalternativet."
 
-#: includes/class-wpglobus.php:2645
-msgid "My Account"
-msgstr "Mitt Konto"
-
 #: includes/class-wpglobus.php:2679
 msgid "Add"
 msgstr "Lägg till"
@@ -352,241 +283,236 @@ msgstr "Lägg till"
 msgid "WARNING: old version of the ReduxFramework is active!"
 msgstr "VARNING: gamla versionen av ReduxFramework är aktiv!"
 
-#: includes/options/class-wpglobus-options.php:136
-#, php-format
-msgid "WPGlobus settings panel requires ReduxFramework %1$s or later."
-msgstr "WPGlobus inställningspanelen kräver ReduxFramework %1$s eller senare."
-
-#: includes/options/class-wpglobus-options.php:141
-#, php-format
+#. translators: ReduxFramework - %1$s version, %2$s folder where installed
+#: includes/options/class-wpglobus-options.php:142
 msgid ""
 "The currently active ReduxFramework (version %1$s) was loaded from the %2$s "
 "folder."
 msgstr "Den aktiva ReduxFramework (version %1$s) laddades från %2$s mappen."
 
-#: includes/options/class-wpglobus-options.php:148
-#, php-format
+#. translators: %1$s placeholder for the link to ReduxFramework plugin
+#: includes/options/class-wpglobus-options.php:150
 msgid ""
 "We recommend you to install the most recent version of the ReduxFramework "
 "plugin: %1$s."
 msgstr "Vi rekommenderar att du installerar den senaste versionen av ReduxFramework tillägget: %1$s."
 
-#: includes/options/class-wpglobus-options.php:163
+#: includes/options/class-wpglobus-options.php:165
 msgid "Thank you for installing WPGlobus!"
 msgstr "Tack för att du installerar WPGlobus!"
 
-#: includes/options/class-wpglobus-options.php:168
+#: includes/options/class-wpglobus-options.php:170
 msgid "Read About WPGlobus"
 msgstr "Läs om WPGlobus"
 
-#: includes/options/class-wpglobus-options.php:171
+#: includes/options/class-wpglobus-options.php:173
 msgid ""
 "Click the <strong>[Languages]</strong> tab at the left to setup the options."
 msgstr "Klick på fliken <strong>[Språk]</strong> till vänster för att ställa in alternativen."
 
-#: includes/options/class-wpglobus-options.php:173
+#: includes/options/class-wpglobus-options.php:175
 msgid ""
 "Use the <strong>[Languages Table]</strong> section to add a new language or "
 "to edit the language attributes: name, code, flag icon, etc."
 msgstr "Använd <strong>[Språktabell]</strong> avsnittet för att lägga till ett nytt språk eller ändra språkattribut: namn, kod, flagga ikon, etc."
 
-#: includes/options/class-wpglobus-options.php:176
+#: includes/options/class-wpglobus-options.php:178
 msgid ""
 "Should you have any questions or comments, please do not hesitate to contact"
 " us."
 msgstr "Om du har några frågor eller kommentarer, tveka inte att kontakta oss."
 
-#: includes/options/class-wpglobus-options.php:180
+#: includes/options/class-wpglobus-options.php:182
 msgid "Sincerely Yours,"
 msgstr "Med vänlig hälsning,"
 
-#: includes/options/class-wpglobus-options.php:182
+#: includes/options/class-wpglobus-options.php:184
 #: includes/options/wpglobus-options-header.php:27
 msgid "The WPGlobus Team"
 msgstr "WPGlobus Teamet"
 
-#: includes/options/class-wpglobus-options.php:191
+#: includes/options/class-wpglobus-options.php:193
 msgid "Welcome!"
 msgstr "Välkommen!"
 
-#: includes/options/class-wpglobus-options.php:252
+#: includes/options/class-wpglobus-options.php:254
 msgid "No navigation menu"
 msgstr "Ingen navigeringsmeny"
 
-#: includes/options/class-wpglobus-options.php:254
+#: includes/options/class-wpglobus-options.php:256
 msgid "Select navigation menu"
 msgstr "Välj navigeringsmeny"
 
-#: includes/options/class-wpglobus-options.php:259
-#, php-format
+#. translators: %s placeholder for the icon (actual picture)
+#: includes/options/class-wpglobus-options.php:262
 msgid ""
 "Place the <strong>main language</strong> of your site at the top of the list"
 " by dragging the %s icons."
 msgstr "Placera <strong>huvudspråk</strong> på din webbplats högst upp på listan genom att dra %s ikonerna."
 
-#: includes/options/class-wpglobus-options.php:260
+#: includes/options/class-wpglobus-options.php:263
 msgid "<strong>Uncheck</strong> the languages you do not plan to use."
 msgstr "<strong>Avmarkera</strong> de språk som du inte tänker använda."
 
-#: includes/options/class-wpglobus-options.php:261
+#: includes/options/class-wpglobus-options.php:264
 msgid "<strong>Add</strong> more languages using the section below."
 msgstr "<strong>Lägg till fler</strong> språk i sektionen nedan."
 
-#: includes/options/class-wpglobus-options.php:262
+#: includes/options/class-wpglobus-options.php:265
 msgid "When done, click the [Save Changes] button."
 msgstr "När du är klar klickar du på knappen [Spara ändringar]."
 
-#: includes/options/class-wpglobus-options.php:267
+#: includes/options/class-wpglobus-options.php:270
 msgid ""
 "Choose a language you would like to enable. <br>Press the [Save Changes] "
 "button to confirm."
 msgstr "Välj ett språk som du vill aktivera. <br> Tryck på [Spara ändringar] för att bekräfta."
 
-#: includes/options/class-wpglobus-options.php:269
-#, php-format
-msgid "or Add new Language %1s here %2s"
-msgstr "eller lägg till en ny språk %1s här %2s"
+#. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+#: includes/options/class-wpglobus-options.php:273
+msgid "or Add new Language %1$s here %2$s"
+msgstr ""
 
-#: includes/options/class-wpglobus-options.php:274
+#: includes/options/class-wpglobus-options.php:278
 msgid "Languages"
 msgstr "Språk"
 
-#: includes/options/class-wpglobus-options.php:280
+#: includes/options/class-wpglobus-options.php:284
 msgid "Instructions:"
 msgstr "Instruktioner:"
 
-#: includes/options/class-wpglobus-options.php:281
-#: includes/options/class-wpglobus-options.php:380
+#: includes/options/class-wpglobus-options.php:285
+#: includes/options/class-wpglobus-options.php:384
 msgid "NOTE: you cannot remove the main language."
 msgstr "OBS: du kan inte ta bort huvudspråket."
 
-#: includes/options/class-wpglobus-options.php:289
+#: includes/options/class-wpglobus-options.php:293
 msgid "Enabled Languages"
 msgstr "Aktiverade språk"
 
-#: includes/options/class-wpglobus-options.php:291
+#: includes/options/class-wpglobus-options.php:295
 msgid "These languages are currently enabled on your site."
 msgstr "Dessa språk är aktiverade på din webbplats."
 
-#: includes/options/class-wpglobus-options.php:299
+#: includes/options/class-wpglobus-options.php:303
 msgid "Add Languages"
 msgstr "Lägg till språk"
 
-#: includes/options/class-wpglobus-options.php:303
+#: includes/options/class-wpglobus-options.php:307
 msgid "Select a language"
 msgstr "Välj språk"
 
-#: includes/options/class-wpglobus-options.php:309
+#: includes/options/class-wpglobus-options.php:313
 msgid "Language Selector Mode"
 msgstr "Språkväljar-läge"
 
-#: includes/options/class-wpglobus-options.php:312
+#: includes/options/class-wpglobus-options.php:316
 msgid ""
 "Choose the way language name and country flag are shown in the drop-down "
 "menu"
 msgstr "Välj hur språknamn och landsflagga visas i rullgardinsmenyn"
 
-#: includes/options/class-wpglobus-options.php:318
+#: includes/options/class-wpglobus-options.php:322
 msgid "Two-letter Code with flag (en, ru, it, etc.)"
 msgstr "Två bokstavskod med flagga (en, ru, it, etc.)"
 
-#: includes/options/class-wpglobus-options.php:319
+#: includes/options/class-wpglobus-options.php:323
 msgid "Full Name (English, Russian, Italian, etc.)"
 msgstr "Fullständigt namn (engelska, ryska, italienska, etc.)"
 
-#: includes/options/class-wpglobus-options.php:321
+#: includes/options/class-wpglobus-options.php:325
 msgid "Full Name with flag (English, Russian, Italian, etc.)"
 msgstr "Fullständigt namn med flagga (engelska, ryska, italienska, etc.)"
 
-#: includes/options/class-wpglobus-options.php:322
+#: includes/options/class-wpglobus-options.php:326
 msgid "Flags only"
 msgstr "Endast Flaggor"
 
-#: includes/options/class-wpglobus-options.php:330
+#: includes/options/class-wpglobus-options.php:334
 msgid "Language Selector Menu"
 msgstr "Språkväljar-meny"
 
-#: includes/options/class-wpglobus-options.php:333
+#: includes/options/class-wpglobus-options.php:337
 msgid "Choose the navigation menu where the language selector will be shown"
 msgstr "Välj navigeringsmenyn där språkväljaren visas"
 
-#: includes/options/class-wpglobus-options.php:344
+#: includes/options/class-wpglobus-options.php:348
 msgid "\"All Pages\" menus Language selector"
 msgstr "Språkväljarmeny på ”Alla sidor”"
 
-#: includes/options/class-wpglobus-options.php:345
+#: includes/options/class-wpglobus-options.php:349
 msgid "(Found in some themes)"
 msgstr "(Hittade i vissa teman)"
 
-#: includes/options/class-wpglobus-options.php:346
+#: includes/options/class-wpglobus-options.php:350
 msgid ""
 "Adds language selector to the menus that automatically list all existing "
 "pages (using `wp_list_pages`)"
 msgstr "Lägger språkväljare till de menyer som automatiskt listar alla befintliga sidor (med `wp_list_pages`)"
 
-#: includes/options/class-wpglobus-options.php:350
+#: includes/options/class-wpglobus-options.php:354
 msgid "Enable"
 msgstr "Aktivera"
 
-#: includes/options/class-wpglobus-options.php:356
+#: includes/options/class-wpglobus-options.php:360
 msgid "Custom CSS"
 msgstr "Anpassad CSS"
 
-#: includes/options/class-wpglobus-options.php:360
+#: includes/options/class-wpglobus-options.php:364
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
 msgstr "Här kan du ange CSS-regler för att justera språkväljarmeny för ditt tema. Titta på exemplen i `style-samples.css` filen."
 
-#: includes/options/class-wpglobus-options.php:361
+#: includes/options/class-wpglobus-options.php:365
 msgid "(Optional)"
 msgstr "(Valfritt)"
 
-#: includes/options/class-wpglobus-options.php:373
+#: includes/options/class-wpglobus-options.php:377
 msgid "Languages table"
 msgstr "Språktabell"
 
-#: includes/options/class-wpglobus-options.php:379
+#: includes/options/class-wpglobus-options.php:383
 msgid "Use this table to add, edit or delete languages."
 msgstr "Använd denna tabell för att lägga till, redigera eller ta bort språk."
 
-#: includes/options/class-wpglobus-options.php:400
+#: includes/options/class-wpglobus-options.php:404
 msgid "Uncheck to disable WPGlobus"
 msgstr "Avmarkera för att inaktivera WPGlobus"
 
-#: includes/options/class-wpglobus-options.php:430
+#: includes/options/class-wpglobus-options.php:434
 msgid "Post types"
 msgstr "Inläggstyper"
 
-#: includes/options/class-wpglobus-options.php:587
+#: includes/options/class-wpglobus-options.php:591
 msgid "Read the Quick Start Guide"
 msgstr "Läs Snabbstartsguiden"
 
-#: includes/options/class-wpglobus-options.php:592
+#: includes/options/class-wpglobus-options.php:596
 msgid "Visit our website"
 msgstr "Besök vår hemsida"
 
-#: includes/options/class-wpglobus-options.php:597
+#: includes/options/class-wpglobus-options.php:601
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr "Köp WPGlobus eget WooCommerce-tillägg"
 
-#: includes/options/class-wpglobus-options.php:602
+#: includes/options/class-wpglobus-options.php:606
 msgid "Collaborate on GitHub"
 msgstr "Samarbeta på GitHub"
 
-#: includes/options/class-wpglobus-options.php:608
+#: includes/options/class-wpglobus-options.php:612
 msgid "Like us on Facebook"
 msgstr "Gilla oss på Facebook."
 
-#: includes/options/class-wpglobus-options.php:613
+#: includes/options/class-wpglobus-options.php:617
 msgid "Follow us on Twitter"
 msgstr "Följ oss på Twitter"
 
-#: includes/options/class-wpglobus-options.php:618
+#: includes/options/class-wpglobus-options.php:622
 msgid "Find us on LinkedIn"
 msgstr "Hitta oss på LinkedIn"
 
-#: includes/options/class-wpglobus-options.php:623
+#: includes/options/class-wpglobus-options.php:627
 msgid "Circle us on Google+"
 msgstr "Ringa in oss på Google+"
 
@@ -638,14 +564,6 @@ msgstr "Lägg till språk"
 msgid "Default language"
 msgstr "Standardspråk"
 
-#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:96
-msgid "Select an item"
-msgstr "Välj ett objekt"
-
-#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:149
-msgid "No items of this type were found."
-msgstr "Inga objekt av den här typen hittade."
-
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"
 msgstr "Vi är beroende av ditt stöd!"
@@ -671,3 +589,169 @@ msgstr "Avancerade funktioner och tweaks: URL översättning, flerspråkig SEO a
 #: includes/options/wpglobus-options-header.php:55
 msgid "Get WPGlobus Plus now!"
 msgstr "Hämta WPGlobus Plus nu!"
+
+#: updater/class-wpglobus-updater-admin.php:92
+msgid "Deactivate!"
+msgstr ""
+
+#. translators: %s is an URL placeholder
+#: updater/class-wpglobus-updater-admin.php:107
+msgid "Do not have a license? Please purchase one on %s"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:127
+msgid "Deactivates License so it can be used on another site."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:141
+#: updater/class-wpglobus-updater.php:173
+msgid "License Activation"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:145
+msgid "License Key Status"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:149
+msgid "License Key"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:153
+msgid "License email"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:177
+#: updater/class-wpglobus-updater.php:174
+msgid "License Deactivation"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:184
+msgid "Deactivate License Key"
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:200
+msgid "Active"
+msgstr "Aktiva"
+
+#: updater/class-wpglobus-updater-admin.php:201
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: updater/class-wpglobus-updater-admin.php:294
+msgid "License activated. "
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:325
+msgid "Connection failed to the License Key API server. Try again later."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:391
+msgid ""
+"The license could not be deactivated. Use the License Deactivation tab to "
+"manually deactivate the license before activating a new license."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:409
+msgid "Please select the checkbox to confirm your intention."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:433
+msgid "License / email not set or already deactivated."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:452
+msgid "License deactivated. "
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:338
+msgid ""
+"To check status, purchase or reactivate license, please go to your account."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:340
+msgid "License expired."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:341
+msgid "Subscription on-hold."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:342
+msgid "Subscription cancelled."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:343
+msgid "Subscription suspended."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:344
+msgid "Subscription expired."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:345
+msgid "Subscription pending."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:346
+msgid "Subscription pending deletion."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:347
+msgid "Subscription not found."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:348
+msgid "License key not found or deactivated."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:349
+msgid "No download permission. License / subscription probably expiring."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:350
+msgid ""
+"License not activated. Go to the settings page and enter the license key and"
+" email to activate."
+msgstr ""
+
+#: updater/class-wpglobus-updater-check.php:351
+msgid ""
+"Subscription changed. Please enter new license key in the settings page."
+msgstr ""
+
+#: updater/class-wpglobus-updater.php:171
+msgid "License"
+msgstr "Licens"
+
+#: updater/class-wpglobus-updater.php:380
+msgid "License has not been activated."
+msgstr ""
+
+#: updater/class-wpglobus-updater.php:384
+msgid "Click here to enter the license key and get the updates."
+msgstr ""
+
+#. translators: %s - URL placeholder. Do not translate WP_... constants.
+#: updater/class-wpglobus-updater.php:412
+msgid ""
+"WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
+"WP_ACCESSIBLE_HOSTS."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPGlobus"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/WPGlobus/WPGlobus"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
+"widgets and even custom fields - in multiple languages!"
+msgstr "En WordPress Globaliserings / Flerspråks tillägg. Inlägg, sidor, menyer, widgets och även anpassade fält - på flera språk!"
+
+#. Author URI of the plugin/theme
+msgid "http://www.wpglobus.com/"
+msgstr ""
