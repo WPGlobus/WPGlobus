@@ -340,7 +340,7 @@ class WPGlobus {
 
 			}    // endif $devmode
 
-			if ( $this->vendors_scripts['ACF'] && WPGlobus_WP::is_pagenow( array(
+			if ( ( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] ) && WPGlobus_WP::is_pagenow( array(
 					'post.php',
 					'post-new.php'
 				) )
@@ -1224,7 +1224,11 @@ class WPGlobus {
 			/**
 			 * Enqueue js for ACF support
 			 */
-			if ( $this->vendors_scripts['ACF'] && in_array( $page, array( 'post.php', 'post-new.php' ) ) ) {
+			if ( 
+				( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] )
+				&& in_array( $page, array( 'post.php', 'post-new.php' ) 
+				) 
+			) {
 				wp_register_script(
 					'wpglobus-acf',
 					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-acf" . self::$_SCRIPT_SUFFIX . ".js",
@@ -1233,6 +1237,15 @@ class WPGlobus {
 					true
 				);
 				wp_enqueue_script( 'wpglobus-acf' );
+				wp_localize_script(
+					'wpglobus-acf',
+					'WPGlobusAcf',
+					array(
+						'wpglobus_version'  => WPGLOBUS_VERSION,
+						'pro' => $this->vendors_scripts['ACFPRO'] ? true : false
+					)
+				);	
+
 			}
 
 			if ( 'widgets.php' == $page ) {
