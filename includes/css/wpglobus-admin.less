@@ -171,12 +171,13 @@ ul.wpglobus-important {
 }
 
 // Use Dashicon instead of Elusive, because Elusive can be broken by a theme (ex. "Virtue")
+@color-wpglobus-icon-sortable: #2866a0;
 .toplevel_page_wpglobus_options {
 	.el-move::before {
 		.dashicon();
 		.dashicons-image-flip-vertical();
-		border: 1px solid @color-wpglobus-logo-wp;
-		color: @color-wpglobus-logo-wp;
+		border: 1px solid @color-wpglobus-icon-sortable;
+		color: @color-wpglobus-icon-sortable;
 		background-color: white;
 		margin: 0 3px 0 3px;
 		line-height: 1.2;
