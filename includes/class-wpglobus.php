@@ -131,13 +131,13 @@ class WPGlobus {
 		 * Init array of supported plugins
 		 */
 		$this->vendors_scripts['ACF']         = false;
+		$this->vendors_scripts['ACFPRO']      = false;
 		/** Set to true in @see WPGlobus_WPSEO::controller */
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
 		$this->vendors_scripts['AIOSEOP']     = false; // All In One SEO Pack
 
 		if ( function_exists( 'acf' ) ) {
-			$this->vendors_scripts['ACF'] = true;
 
 			/**
 			 * @todo  Work on the ACF compatibility is in progress
@@ -145,7 +145,22 @@ class WPGlobus {
 			 * @see   'wpglobus_disabled_entities' filter for add/remove custom post types to array disabled_entities
 			 * @since 1.0.4
 			 */
-			$this->disabled_entities[] = 'acf';
+			global $acf;
+			if ( ! empty($acf->settings['pro']) && $acf->settings['pro'] ) {
+				/**
+				 * @since 1.2.6
+				 */
+				$this->vendors_scripts['ACFPRO'] = true;
+				$this->disabled_entities[] = 'acf-field-group';
+				$this->disabled_entities[] = 'acf-field';
+				
+			} else {
+
+				$this->vendors_scripts['ACF'] = true;
+				$this->disabled_entities[] = 'acf';
+
+			}	
+			
 		}
 
 		if ( defined( 'WC_VERSION' ) || defined( 'WOOCOMMERCE_VERSION' ) ) {
