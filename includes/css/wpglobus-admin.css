@@ -137,8 +137,8 @@ ul.wpglobus-important li {
   font-style: normal;
   text-decoration: inherit;
   content: "\f168";
-  border: 1px solid rgba(40, 133, 184, 0.25);
-  color: rgba(40, 133, 184, 0.25);
+  border: 1px solid #2866a0;
+  color: #2866a0;
   background-color: white;
   margin: 0 3px 0 3px;
   line-height: 1.2;
