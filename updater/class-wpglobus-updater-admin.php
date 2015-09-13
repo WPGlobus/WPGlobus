@@ -72,8 +72,10 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				<h2 class="nav-tab-wrapper">
 					<?php
 					foreach ( $settings_tabs as $tab_page => $tab_name ) {
-						$active_tab = $current_tab == $tab_page ? 'nav-tab-active' : '';
-						echo '<a class="nav-tab ' . $active_tab . '" href="?page=' . $this->WPGlobus_Updater->ame_activation_tab_key . '&amp;tab=' . $tab_page . '">' . $tab_name . '</a>';
+						$active_tab = ( $current_tab === $tab_page ? ' nav-tab-active' : '' );
+						echo '<a class="nav-tab' . $active_tab . '" href="?page=' .
+						     $this->WPGlobus_Updater->ame_activation_tab_key .
+						     '&amp;tab=' . $tab_page . '">' . $tab_name . '</a>';
 					}
 					?>
 				</h2>
@@ -81,7 +83,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				<form class="wpglobus-updater-license" action="options.php" method="post">
 					<div class="main">
 						<?php
-						if ( $tab == $this->WPGlobus_Updater->ame_activation_tab_key ) {
+						if ( $tab === $this->WPGlobus_Updater->ame_activation_tab_key ) {
 							settings_fields( $this->WPGlobus_Updater->ame_data_key );
 							do_settings_sections( $this->WPGlobus_Updater->ame_activation_tab_key );
 							submit_button( __( 'Save Changes', 'wpglobus' ) );
