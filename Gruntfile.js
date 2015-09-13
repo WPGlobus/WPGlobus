@@ -159,7 +159,7 @@ module.exports = function (grunt) {
                         poedit: true,                 // Includes common Poedit headers.
                         'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
                     },                                // Headers to add to the generated POT file.
-                    processPot: function( pot, options ) {
+                    processPot: function (pot, options) {
                         pot.headers['report-msgid-bugs-to'] = 'http://www.wpglobus.com/pg/contact-us/';
                         pot.headers['language-team'] = 'The WPGlobus Team <support@wpglobus.com>';
                         pot.headers['last-translator'] = pot.headers['language-team'];
@@ -173,61 +173,16 @@ module.exports = function (grunt) {
             }
         },
 
-        pot: {
-            options: {
-                encoding: 'UTF-8',
-                msgid_bugs_address: 'support@wpglobus.com',
-                copyright_holder: '<%= grunt.template.today("yyyy") %>, WPGlobus',
-                comment_tag: 'TRANSLATORS:',
-                msgmerge: false,
-                text_domain: 'wpglobus', //Your text domain. Produces my-text-domain.pot
-                dest: 'languages/', //directory to place the pot file
-                keywords: [ //WordPress localisation functions
-                    '__:1',
-                    '_e:1',
-                    '_x:1,2c',
-                    'esc_html__:1',
-                    'esc_html_e:1',
-                    'esc_html_x:1,2c',
-                    'esc_attr__:1',
-                    'esc_attr_e:1',
-                    'esc_attr_x:1,2c',
-                    '_ex:1,2c',
-                    '_n:1,2',
-                    '_nx:1,2,4c',
-                    '_n_noop:1,2',
-                    '_nx_noop:1,2,3c'
-                ]
+        exec: {
+            tx_push_s: {
+                cmd: 'tx push -s'
             },
-            files: {
-                src: ['includes/**/*.php', '!includes/vendor/*'], //Parse all php files except for vendor folder
-                expand: true
+            tx_pull: { // Pull Transifex translation - grunt exec:tx_pull
+                cmd: 'tx pull -a' // Change the percentage with --minimum-perc=value
             }
         },
 
         replace: {
-            pot: {
-                overwrite: true,
-                src: ['languages/wpglobus.pot'],             // source files array (supports minimatch)
-                replacements: [
-                    {
-                        from: 'SOME DESCRIPTIVE TITLE',                   // string replacement
-                        to: 'Translations for WPGlobus plugin'
-                    },
-                    {
-                        from: '# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.',
-                        to: ''
-                    },
-                    {
-                        from: '# This file is distributed under the same license as the PACKAGE package.',
-                        to: ''
-                    },
-                    {
-                        from: '# Copyright (C) YEAR',
-                        to: '# Copyright (c)'
-                    }
-                ]
-            },
             readme_md: {
                 overwrite: true,
                 src: ['README.md'],
@@ -277,11 +232,7 @@ module.exports = function (grunt) {
         }
     });
 
-    /**
-     * Had to write this because "pot" does not do msgmerge correctly
-     * @link https://github.com/stephenharris/grunt-pot/issues/11
-     */
-    grunt.registerTask('po', 'Making PO files', function () {
+    grunt.registerTask('po', 'Merge POT into individual PO files', function () {
         var execSync = require('child_process').execSync;
         var potFile = 'languages/wpglobus.pot';
         var poFilePaths = grunt.file.expand('languages/*.po');
@@ -303,9 +254,13 @@ module.exports = function (grunt) {
         });
     });
 
-    //grunt.registerTask('makepot', ['pot', 'replace:pot']);
-
-    //grunt.registerTask('pomo', ['makepot', 'po', 'mo']);
+    grunt.registerTask('pomo', [
+        'makepot',
+        'exec:tx_push_s',
+        'exec:tx_pull',
+        'po',
+        'mo'
+    ]);
 
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
