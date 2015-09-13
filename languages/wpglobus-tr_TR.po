@@ -6,19 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-09-09 02:03:04+00:00\n"
+"POT-Creation-Date: 2015-09-13 00:29:12+00:00\n"
 "PO-Revision-Date: 2015-09-09 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
-"Language-Team: Turkish (Turkey) (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/tr_TR/)\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/wp-translations/"
+"wpglobus-multilingual/language/tr_TR/)\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr_TR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
@@ -31,7 +34,9 @@ msgstr "Herşeyi çokdilli yapın!"
 msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
 "multilingual WordPress blogs and sites."
-msgstr "WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir."
+msgstr ""
+"WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım "
+"eden bir WordPress eklentileri ailesidir."
 
 #: includes/admin/class-wpglobus-about.php:52
 msgid "Quick Start"
@@ -61,15 +66,19 @@ msgstr "Ülkeler / Diller seçimini yapmak için WPGlobus yönetim menüsüne gi
 
 #: includes/admin/class-wpglobus-about.php:76
 msgid ""
-"Enter the translations to the posts, pages, categories, tags and menus using"
-" a clean and simple interface."
-msgstr "Tercümeleri yazılara, sayfalara, kategorilere, etiketlere ve menülere temiz ve basit bir arayüz kullanarak girin."
+"Enter the translations to the posts, pages, categories, tags and menus using "
+"a clean and simple interface."
+msgstr ""
+"Tercümeleri yazılara, sayfalara, kategorilere, etiketlere ve menülere temiz "
+"ve basit bir arayüz kullanarak girin."
 
 #: includes/admin/class-wpglobus-about.php:77
 msgid ""
-"Switch languages at the front-end using a drop-down menu with language names"
-" and country flags."
-msgstr "Dilleri ön yüzde, dil isimleri ve bayrakların olduğu bir açılan menü ile değiştirin."
+"Switch languages at the front-end using a drop-down menu with language names "
+"and country flags."
+msgstr ""
+"Dilleri ön yüzde, dil isimleri ve bayrakların olduğu bir açılan menü ile "
+"değiştirin."
 
 #: includes/admin/class-wpglobus-about.php:81
 msgid "Links:"
@@ -89,28 +98,38 @@ msgstr "Lütfen bize 5 yıldız verin!"
 
 #: includes/admin/class-wpglobus-about.php:104
 msgid ""
-"WPGlobus only supports the localization URLs in the form of "
-"<code>example.com/xx/page/</code>. We do not plan to support subdomains "
-"<code>xx.example.com</code> and language queries "
-"<code>example.com?lang=xx</code>."
-msgstr "WPGlobus sadece <code>example.com/xx/page/</code> biçimindeki URL yerelleştirmesini destekler. Alt alan adlarını  <code>xx.example.com</code> ve dil sorgulamalarını <code>example.com?lang=xx</code> desteklemeyi planlamıyoruz."
+"WPGlobus only supports the localization URLs in the form of <code>example."
+"com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
+"com</code> and language queries <code>example.com?lang=xx</code>."
+msgstr ""
+"WPGlobus sadece <code>example.com/xx/page/</code> biçimindeki URL "
+"yerelleştirmesini destekler. Alt alan adlarını  <code>xx.example.com</code> "
+"ve dil sorgulamalarını <code>example.com?lang=xx</code> desteklemeyi "
+"planlamıyoruz."
 
 #: includes/admin/class-wpglobus-about.php:107
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
-msgstr "Bazı temalar ve eklentiler <strong>multilingual' e için hazır değiller</strong>."
+msgstr ""
+"Bazı temalar ve eklentiler <strong>multilingual' e için hazır değiller</"
+"strong>."
 
 #: includes/admin/class-wpglobus-about.php:109
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
-msgstr "Bazı metinleri tercüme edilmeden veya bütün diller birbirine karışmış halde gösterebilirler."
+msgstr ""
+"Bazı metinleri tercüme edilmeden veya bütün diller birbirine karışmış halde "
+"gösterebilirler."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
 #: includes/admin/class-wpglobus-about.php:113
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
-msgstr "Lütfen tema / eklenti yazarı ile iletişim kurun. Eğer yardım edemeyecek durumdalarsa, size özel kod yazmaları için %s WPGlobus Takımı' nı kiralamayı %s düşünebilirsiniz.  "
+msgstr ""
+"Lütfen tema / eklenti yazarı ile iletişim kurun. Eğer yardım edemeyecek "
+"durumdalarsa, size özel kod yazmaları için %s WPGlobus Takımı' nı kiralamayı "
+"%s düşünebilirsiniz.  "
 
 #: includes/admin/class-wpglobus-about.php:123
 #: includes/admin/class-wpglobus-addons.php:88
@@ -168,8 +187,7 @@ msgstr "Dili Kodu"
 
 #: includes/admin/class-wpglobus-language-edit.php:337
 msgid ""
-"2-Letter ISO Language Code for the Language you want to insert. (Example: "
-"en)"
+"2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
 msgstr "Eklemek istediğiniz dil için 2-Harfli ISO Dil Kodu (Örnek: tr, en)"
 
 #: includes/admin/class-wpglobus-language-edit.php:341
@@ -182,8 +200,7 @@ msgstr "İsim"
 
 #: includes/admin/class-wpglobus-language-edit.php:360
 msgid ""
-"The name of the language in its native alphabet. (Examples: English, "
-"Русский)"
+"The name of the language in its native alphabet. (Examples: English, Русский)"
 msgstr "Dilin anadilindeki yazılışı. (Örneğin: Türkçe, English, Русский)"
 
 #: includes/admin/class-wpglobus-language-edit.php:365
@@ -201,7 +218,8 @@ msgstr "Yerel Dil Parametresi"
 
 #: includes/admin/class-wpglobus-language-edit.php:379
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
-msgstr "Dilin PHP / WordPress Yerel Dil Parametresi (Örnek: tr_TR, en_US, ru_RU)"
+msgstr ""
+"Dilin PHP / WordPress Yerel Dil Parametresi (Örnek: tr_TR, en_US, ru_RU)"
 
 #: includes/admin/class-wpglobus-language-edit.php:387
 #: updater/class-wpglobus-updater-admin.php:87
@@ -256,25 +274,28 @@ msgstr "Açılan menü, bayraklı"
 msgid "Selector type"
 msgstr "Değiştirici tipi"
 
-#: includes/class-wpglobus.php:869
+#: includes/class-wpglobus.php:872
 msgid "You cannot disable the main language."
 msgstr "Asıl dili etkisizleştiremezsiniz."
 
-#: includes/class-wpglobus.php:1034
+#: includes/class-wpglobus.php:1037
 msgid "*) Available after the menu is saved."
 msgstr "*) Menü kaydedildikten sonra kullanılabilir."
 
-#: includes/class-wpglobus.php:2550
+#: includes/class-wpglobus.php:2566
 msgid "You must enable Pretty Permalinks to use WPGlobus."
-msgstr "WPGlobus' u kullanabilmek için Pretty Permalinks' i etkinleştirmelisiniz."
+msgstr ""
+"WPGlobus' u kullanabilmek için Pretty Permalinks' i etkinleştirmelisiniz."
 
-#: includes/class-wpglobus.php:2552
+#: includes/class-wpglobus.php:2568
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
-msgstr "Varsayılan olmayan bir seçeneği seçmek için lütfen Ayarlar>Kalıcı Bağlantılar>Genel Ayarlar' a gidin."
+msgstr ""
+"Varsayılan olmayan bir seçeneği seçmek için lütfen Ayarlar>Kalıcı "
+"Bağlantılar>Genel Ayarlar' a gidin."
 
-#: includes/class-wpglobus.php:2679
+#: includes/class-wpglobus.php:2695
 msgid "Add"
 msgstr "Ekle"
 
@@ -307,19 +328,25 @@ msgstr "WPGlobus Hakkında'yı Okuyun"
 #: includes/options/class-wpglobus-options.php:173
 msgid ""
 "Click the <strong>[Languages]</strong> tab at the left to setup the options."
-msgstr "Seçenekleri ayarlamak için sol tarafta bulunan <strong>[Diller]</strong> sekmesine tıklayın."
+msgstr ""
+"Seçenekleri ayarlamak için sol tarafta bulunan <strong>[Diller]</strong> "
+"sekmesine tıklayın."
 
 #: includes/options/class-wpglobus-options.php:175
 msgid ""
 "Use the <strong>[Languages Table]</strong> section to add a new language or "
 "to edit the language attributes: name, code, flag icon, etc."
-msgstr "Yeni bir dil eklemek veya dilin isim, kod, bayrak simgesi gibi özniteliklerini düzenlemek için <strong>[Diller Tablosu]</strong> bölümünü kullanın."
+msgstr ""
+"Yeni bir dil eklemek veya dilin isim, kod, bayrak simgesi gibi "
+"özniteliklerini düzenlemek için <strong>[Diller Tablosu]</strong> bölümünü "
+"kullanın."
 
 #: includes/options/class-wpglobus-options.php:178
 msgid ""
-"Should you have any questions or comments, please do not hesitate to contact"
-" us."
-msgstr "Sorularınız veya yorumlarınız olursa, lütfen bizi aramakta tereddüt etmeyin."
+"Should you have any questions or comments, please do not hesitate to contact "
+"us."
+msgstr ""
+"Sorularınız veya yorumlarınız olursa, lütfen bizi aramakta tereddüt etmeyin."
 
 #: includes/options/class-wpglobus-options.php:182
 msgid "Sincerely Yours,"
@@ -345,13 +372,17 @@ msgstr "Gezinti menüsü seçin"
 #. translators: %s placeholder for the icon (actual picture)
 #: includes/options/class-wpglobus-options.php:262
 msgid ""
-"Place the <strong>main language</strong> of your site at the top of the list"
-" by dragging the %s icons."
-msgstr "Sitenizin <strong>asıl dil</strong>ini %s simgelerini sürükleyerek listenin en üstüne yerleştirin. "
+"Place the <strong>main language</strong> of your site at the top of the list "
+"by dragging the %s icons."
+msgstr ""
+"Sitenizin <strong>asıl dil</strong>ini %s simgelerini sürükleyerek listenin "
+"en üstüne yerleştirin. "
 
 #: includes/options/class-wpglobus-options.php:263
 msgid "<strong>Uncheck</strong> the languages you do not plan to use."
-msgstr "Kullanmayı planlamadığınız dillerin <strong>onay işaretleini kaldırın</strong>. "
+msgstr ""
+"Kullanmayı planlamadığınız dillerin <strong>onay işaretleini kaldırın</"
+"strong>. "
 
 #: includes/options/class-wpglobus-options.php:264
 msgid "<strong>Add</strong> more languages using the section below."
@@ -365,7 +396,9 @@ msgstr "Tamamladığınızda [Değişiklikleri Kaydet] düğmesine basın."
 msgid ""
 "Choose a language you would like to enable. <br>Press the [Save Changes] "
 "button to confirm."
-msgstr "Etkinleştirmek istediğiniz bir dili seçin.  <br>Onaylamak için [Değişiklikleri Kaydet] düğmesine basın."
+msgstr ""
+"Etkinleştirmek istediğiniz bir dili seçin.  <br>Onaylamak için "
+"[Değişiklikleri Kaydet] düğmesine basın."
 
 #. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 #: includes/options/class-wpglobus-options.php:273
@@ -407,8 +440,7 @@ msgstr "Dil Değiştirici Biçimi"
 
 #: includes/options/class-wpglobus-options.php:316
 msgid ""
-"Choose the way language name and country flag are shown in the drop-down "
-"menu"
+"Choose the way language name and country flag are shown in the drop-down menu"
 msgstr "Açılan menüden dil adı ve bayrağın gösterilme şeklini seçin."
 
 #: includes/options/class-wpglobus-options.php:322
@@ -447,7 +479,9 @@ msgstr "(Bazı temalarda bulunur)"
 msgid ""
 "Adds language selector to the menus that automatically list all existing "
 "pages (using `wp_list_pages`)"
-msgstr "Dil seçiciyi otomatik olarak bütün mevcut sayfaları listeleyen menülere ekler (`wp_list_pages`i kullanarak)."
+msgstr ""
+"Dil seçiciyi otomatik olarak bütün mevcut sayfaları listeleyen menülere "
+"ekler (`wp_list_pages`i kullanarak)."
 
 #: includes/options/class-wpglobus-options.php:354
 msgid "Enable"
@@ -461,7 +495,9 @@ msgstr "Özel CSS"
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
-msgstr "Burada temanızın dil seçimi menüsünü ayarlamak için CSS kuralları girebilirsiniz. `style-samples.css` dosyasındaki örneklere bakın."
+msgstr ""
+"Burada temanızın dil seçimi menüsünü ayarlamak için CSS kuralları "
+"girebilirsiniz. `style-samples.css` dosyasındaki örneklere bakın."
 
 #: includes/options/class-wpglobus-options.php:365
 msgid "(Optional)"
@@ -569,7 +605,8 @@ msgstr "Desteğinize güveniyoruz!"
 
 #: includes/options/wpglobus-options-header.php:21
 msgid "Please consider a small donation to support the future development."
-msgstr "Gelecekteki ilerlememize destek olmak için lütfen küçük bir bağış yapın."
+msgstr ""
+"Gelecekteki ilerlememize destek olmak için lütfen küçük bir bağış yapın."
 
 #: includes/options/wpglobus-options-header.php:25
 msgid "Thank you!"
@@ -583,7 +620,9 @@ msgstr "WPGlobus Plus!"
 msgid ""
 "Advanced features and tweaks: URL translation, multilingual SEO analysis, "
 "separate publishing and more! "
-msgstr "Gelişmiş özellikler ve ince ayarlar: URL tercümesi, çokludil SEO analizi, bireysel yayımcılık ve daha fazlası!"
+msgstr ""
+"Gelişmiş özellikler ve ince ayarlar: URL tercümesi, çokludil SEO analizi, "
+"bireysel yayımcılık ve daha fazlası!"
 
 #: includes/options/wpglobus-options-header.php:55
 msgid "Get WPGlobus Plus now!"
@@ -709,8 +748,8 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-check.php:350
 msgid ""
-"License not activated. Go to the settings page and enter the license key and"
-" email to activate."
+"License not activated. Go to the settings page and enter the license key and "
+"email to activate."
 msgstr ""
 
 #: updater/class-wpglobus-updater-check.php:351
@@ -749,7 +788,9 @@ msgstr ""
 msgid ""
 "A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
 "widgets and even custom fields - in multiple languages!"
-msgstr "Bir WordPress Küreselleşmesi / Çokludil Eklentisi. Yazılar, Sayfalar, Menüler, parçacıklar ve hatta özel alanlar - birçok dilde!"
+msgstr ""
+"Bir WordPress Küreselleşmesi / Çokludil Eklentisi. Yazılar, Sayfalar, "
+"Menüler, parçacıklar ve hatta özel alanlar - birçok dilde!"
 
 #. Author URI of the plugin/theme
 msgid "http://www.wpglobus.com/"
