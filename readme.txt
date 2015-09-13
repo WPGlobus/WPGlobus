@@ -155,7 +155,8 @@ No known backward incompatibility issues.
 	* `es` and `fr` enabled by default.
 * COMPATIBILITY:
 	* All In One SEO Pack 2.2.7.2
-	
+	* ACF Pro 5.3.0
+
 = 1.2.5 =
 
 * FIXED:
