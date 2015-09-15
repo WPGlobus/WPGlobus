@@ -546,11 +546,11 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 		 * Loads admin style sheets
 		 */
 		public function css_scripts() {
-
-			wp_enqueue_style( 'wpglobus-updater',
-				$this->WPGlobus_Updater->my_url() . 'assets/css/admin.css' );
+			if ( ! wp_style_is( 'wpglobus-updater' ) ) {
+				wp_enqueue_style( 'wpglobus-updater',
+					$this->WPGlobus_Updater->my_url() . 'assets/css/admin.css' );
+			}
 		}
-
 	} // class
 
 endif;
