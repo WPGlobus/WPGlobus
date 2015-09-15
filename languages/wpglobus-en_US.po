@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-09-13 00:29:12+00:00\n"
+"POT-Creation-Date: 2015-09-15 05:08:21+00:00\n"
 "PO-Revision-Date: 2015-09-09 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
@@ -218,7 +218,7 @@ msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 msgstr "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 
 #: includes/admin/class-wpglobus-language-edit.php:387
-#: updater/class-wpglobus-updater-admin.php:87
+#: updater/class-wpglobus-updater-admin.php:89
 msgid "Save Changes"
 msgstr "Save Changes"
 
@@ -624,62 +624,62 @@ msgstr ""
 msgid "Get WPGlobus Plus now!"
 msgstr "Get WPGlobus Plus now!"
 
-#: updater/class-wpglobus-updater-admin.php:92
+#: updater/class-wpglobus-updater-admin.php:94
 msgid "Deactivate!"
 msgstr "Deactivate!"
 
 #. translators: %s is an URL placeholder
-#: updater/class-wpglobus-updater-admin.php:107
+#: updater/class-wpglobus-updater-admin.php:109
 msgid "Do not have a license? Please purchase one on %s"
 msgstr "Do not have a license? Please purchase one on %s"
 
-#: updater/class-wpglobus-updater-admin.php:127
+#: updater/class-wpglobus-updater-admin.php:129
 msgid "Deactivates License so it can be used on another site."
 msgstr "Deactivates License so it can be used on another site."
 
-#: updater/class-wpglobus-updater-admin.php:141
+#: updater/class-wpglobus-updater-admin.php:143
 #: updater/class-wpglobus-updater.php:173
 msgid "License Activation"
 msgstr "License Activation"
 
-#: updater/class-wpglobus-updater-admin.php:145
+#: updater/class-wpglobus-updater-admin.php:147
 msgid "License Key Status"
 msgstr "License Key Status"
 
-#: updater/class-wpglobus-updater-admin.php:149
+#: updater/class-wpglobus-updater-admin.php:151
 msgid "License Key"
 msgstr "License Key"
 
-#: updater/class-wpglobus-updater-admin.php:153
+#: updater/class-wpglobus-updater-admin.php:155
 msgid "License email"
 msgstr "License email"
 
-#: updater/class-wpglobus-updater-admin.php:177
+#: updater/class-wpglobus-updater-admin.php:179
 #: updater/class-wpglobus-updater.php:174
 msgid "License Deactivation"
 msgstr "License Deactivation"
 
-#: updater/class-wpglobus-updater-admin.php:184
+#: updater/class-wpglobus-updater-admin.php:186
 msgid "Deactivate License Key"
 msgstr "Deactivate License Key"
 
-#: updater/class-wpglobus-updater-admin.php:200
+#: updater/class-wpglobus-updater-admin.php:202
 msgid "Active"
 msgstr "Active"
 
-#: updater/class-wpglobus-updater-admin.php:201
+#: updater/class-wpglobus-updater-admin.php:203
 msgid "Inactive"
 msgstr "Inactive"
 
-#: updater/class-wpglobus-updater-admin.php:294
+#: updater/class-wpglobus-updater-admin.php:296
 msgid "License activated. "
 msgstr "License activated. "
 
-#: updater/class-wpglobus-updater-admin.php:325
+#: updater/class-wpglobus-updater-admin.php:327
 msgid "Connection failed to the License Key API server. Try again later."
 msgstr "Connection failed to the License Key API server. Try again later."
 
-#: updater/class-wpglobus-updater-admin.php:391
+#: updater/class-wpglobus-updater-admin.php:393
 msgid ""
 "The license could not be deactivated. Use the License Deactivation tab to "
 "manually deactivate the license before activating a new license."
@@ -687,15 +687,15 @@ msgstr ""
 "The license could not be deactivated. Use the License Deactivation tab to "
 "manually deactivate the license before activating a new license."
 
-#: updater/class-wpglobus-updater-admin.php:409
+#: updater/class-wpglobus-updater-admin.php:411
 msgid "Please select the checkbox to confirm your intention."
 msgstr "Please select the checkbox to confirm your intention."
 
-#: updater/class-wpglobus-updater-admin.php:433
+#: updater/class-wpglobus-updater-admin.php:435
 msgid "License / email not set or already deactivated."
 msgstr "License / email not set or already deactivated."
 
-#: updater/class-wpglobus-updater-admin.php:452
+#: updater/class-wpglobus-updater-admin.php:454
 msgid "License deactivated. "
 msgstr "License deactivated. "
 
@@ -763,16 +763,16 @@ msgstr ""
 msgid "License"
 msgstr "License"
 
-#: updater/class-wpglobus-updater.php:380
+#: updater/class-wpglobus-updater.php:424
 msgid "License has not been activated."
 msgstr "License has not been activated."
 
-#: updater/class-wpglobus-updater.php:384
+#: updater/class-wpglobus-updater.php:428
 msgid "Click here to enter the license key and get the updates."
 msgstr "Click here to enter the license key and get the updates."
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
-#: updater/class-wpglobus-updater.php:412
+#: updater/class-wpglobus-updater.php:456
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
 "WP_ACCESSIBLE_HOSTS."

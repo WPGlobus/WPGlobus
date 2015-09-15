@@ -178,7 +178,7 @@ module.exports = function (grunt) {
                 cmd: 'tx push -s'
             },
             tx_pull: { // Pull Transifex translation - grunt exec:tx_pull
-                cmd: 'tx pull -a' // Change the percentage with --minimum-perc=value
+                cmd: 'tx pull -a -f --mode=translator' // Change the percentage with --minimum-perc=value
             }
         },
 
