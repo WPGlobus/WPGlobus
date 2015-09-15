@@ -145,6 +145,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.2.7 =
+
+* FIXED:
+	* Updater bug "cannot delete old plugin files"
+
 = 1.2.6 =
 
 * FIXED:
@@ -192,30 +197,6 @@ No known backward incompatibility issues.
 * FIXED:
 	* Correct Yoast SEO Page Analysis for the default language.
 	* Compatibility with ReduxFramework-based theme options.
-
-= 1.2.1 =
-
-* FIXED:
-	* Correct handling of Yoast SEO entries containing special HTML characters.
-	* Correct handling of title, description and keywords for All In One SEO Pack 2.2.7
-	* Incorrect behavior of the menus created from custom type posts.
-	* Multilingual strings in Customizer (site name and description).
-* ADDED:
-	* Support for the [Whistles plugin](https://wordpress.org/plugins/whistles/).
-	* Partial support of the All-in-one SEO Pack-PRO.
-	* Added full name language without flag for Language Selector Mode option.
-* COMPATIBILITY:
-	* Yoast SEO 2.3 ( former WordPress SEO )
-	
-= 1.2.0 =
-
-* ADDED:
-	* Handling the hash part of the URLs.
-	* New extension, [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
-	* Filter 'wpglobus_enabled_pages'
-* FIXED:
-	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.
-	* Correct language detection with no trailing slash on home url, i.e. `example.com/fr` works the same as `example.com/fr/`
 
 = Earlier versions =
 
