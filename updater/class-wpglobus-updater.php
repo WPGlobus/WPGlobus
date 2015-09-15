@@ -235,6 +235,50 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 			}
 
+			add_filter( 'upgrader_pre_download', array( $this, 'filter__upgrader_pre_download' ), 10, 3 );
+
+		}
+
+		/**
+		 * When @see download_url is called, the temporary file is created with a wrong name.
+		 * This filter renames it to the valid name, {plugin-slug}.zip
+		 *
+		 * @param bool|string $reply       Whether to bail without returning the package.
+		 *                                 Default false.
+		 * @param string      $package     The package file name.
+		 * @param WP_Upgrader $wp_upgrader The WP_Upgrader instance.
+		 * @return mixed|WP_Error|bool
+		 * @since 1.2.7
+		 */
+		public function filter__upgrader_pre_download( $reply, $package, $wp_upgrader ) {
+
+			/**
+			 * There could be several instances of the Updater, one for each paid extension.
+			 * So, we need to check if we are called for the correct extension.
+			 */
+			/** @noinspection PhpUndefinedFieldInspection */
+			if ( $wp_upgrader->skin->plugin_info['Name'] === $this->ame_plugin_name ) {
+
+				// This is the regular WP download. Creates a file in the temp folder,
+				// with an ugly file name, in our case, because of the ugly download URL.
+				$path_to_downloaded_plugin_zip = download_url( $package );
+
+				// `is_string` means, no error
+				if ( is_string( $path_to_downloaded_plugin_zip ) ) {
+
+					// Rename to {plugin_slug}.zip, still in the temp folder
+					$valid_path_to_plugin_zip = get_temp_dir() . dirname( $this->plugin_slug ) . '.zip';
+					if ( file_exists( $valid_path_to_plugin_zip ) ) {
+						unlink( $valid_path_to_plugin_zip );
+					}
+					if ( rename( $path_to_downloaded_plugin_zip, $valid_path_to_plugin_zip ) ) {
+						// If renamed successfully, return the new file path
+						$reply = $valid_path_to_plugin_zip;
+					}
+				}
+			}
+
+			return $reply;
 		}
 
 		/**
@@ -408,7 +452,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 							<?php
 							echo '<strong>' . $this->ame_software_product_id . '</strong>: ';
 							printf(
-								// translators: %s - URL placeholder. Do not translate WP_... constants.
+							// translators: %s - URL placeholder. Do not translate WP_... constants.
 								esc_html__( 'WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to WP_ACCESSIBLE_HOSTS.', 'wpglobus' ),
 								'<strong>' . $host . '</strong>' );
 							?>
