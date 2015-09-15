@@ -148,7 +148,8 @@ No known backward incompatibility issues.
 = 1.2.7 =
 
 * FIXED:
-	* Updater bug "cannot delete old plugin files"
+	* Updater bug "cannot delete old plugin files".
+	* Broken Welsh flag cy.png (Thanks to Tudor Thomas)
 
 = 1.2.6 =
 
