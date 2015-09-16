@@ -257,7 +257,9 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			 * So, we need to check if we are called for the correct extension.
 			 */
 			/** @noinspection PhpUndefinedFieldInspection */
-			if ( $wp_upgrader->skin->plugin_info['Name'] === $this->ame_plugin_name ) {
+			if ( isset( $wp_upgrader->skin->plugin_info['Name'] ) &&
+			     $wp_upgrader->skin->plugin_info['Name'] === $this->ame_plugin_name
+			) {
 
 				// This is the regular WP download. Creates a file in the temp folder,
 				// with an ugly file name, in our case, because of the ugly download URL.
