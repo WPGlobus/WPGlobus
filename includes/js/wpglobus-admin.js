@@ -16,6 +16,7 @@ var WPGlobusCore;
 	var api;
 	api = WPGlobusCore = {
 		strpos: function( haystack, needle, offset){
+			haystack = "" + haystack;
 			var i = haystack.indexOf( needle, offset );
 			return i >= 0 ? i : false;
 		},
