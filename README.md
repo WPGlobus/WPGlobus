@@ -161,11 +161,16 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.2.8 ###
+
+* FIXED:
+	* Minor admin JS bug.
+
 ### 1.2.7 ###
 
 * FIXED:
 	* Updater bug "cannot delete old plugin files".
-	* Broken Welsh flag cy.png (Thanks to Tudor Thomas)
+	* Broken Welsh flag cy.png (Thanks to Tudor Thomas).
 
 ### 1.2.6 ###
 
@@ -205,16 +210,6 @@ No known backward incompatibility issues.
 	* Extended options to WPGlobus_Config class
 	* 'wpglobus_id' for every option section
 	
-### 1.2.2 ###
-
-* ADDED:
-	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
-	* Support for the [The Events Calendar plugin](https://wordpress.org/plugins/the-events-calendar/).
-	* Support hidden ACF groups.
-* FIXED:
-	* Correct Yoast SEO Page Analysis for the default language.
-	* Compatibility with ReduxFramework-based theme options.
-
 ### Earlier versions ###
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)

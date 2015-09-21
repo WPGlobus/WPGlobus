@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "main": "Gruntfile.js",
