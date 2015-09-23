@@ -10,6 +10,8 @@ require_once dirname( __FILE__ ) . '/mocks-wp.php';
 /**
  * Class WPGlobus_Utils__Test
  */
+
+/** @noinspection PhpUndefinedClassInspection */
 class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 
 	/**
@@ -235,9 +237,11 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 			WPGlobus_Utils::localize_url( 'http://example.com/page/', 'ru', $config ) );
 
 		// A specific case from support forum
-		self::$option_home = 'http://www.fiskfelagid.is';
-		$config->default_language = 'en';
+		/** @noinspection SpellCheckingInspection */
+		self::$option_home         = 'http://www.fiskfelagid.is';
+		$config->default_language  = 'en';
 		$config->enabled_languages = array( 'en', 'is' );
+		/** @noinspection SpellCheckingInspection */
 		self::assertEquals( 'http://www.fiskfelagid.is/is',
 			WPGlobus_Utils::localize_url( 'http://www.fiskfelagid.is/is', 'is', $config ) );
 
@@ -341,21 +345,58 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 	 * @covers WPGlobus_Utils::domain_tld
 	 */
 	public static function test_domain_tld() {
-
-		$data = array(
-			'http://www.example.com'               => 'example.com',
-			'http://example.com'                   => 'example.com',
-			'http://www.example.co.uk'             => 'co.uk',
-			'http://localhost'                     => 'localhost',
-			'http://something.example.com'         => 'example.com',
-			'http://multiple.prefixes.example.com' => 'example.com',
-			'example.com'                          => 'example.com',
-			'http://127.0.0.1'                     => '127.0.0.1',
+		$schemes = array(
+			'http://',
+			'https://',
+			'//',
+			'',
 		);
 
-		foreach ( $data as $url => $domain_tld ) {
-			self::assertEquals( $domain_tld, WPGlobus_Utils::domain_tld( $url ) );
+		$domains = array(
+			'example',
+			'with-dashes',
+			'localhost',
+		);
+
+		$prefixes = array(
+			'',
+			'www.',
+			'develop.',
+			'127.',
+			'multiple.prefixes.',
+		);
+
+		$tlds = array(
+			'.com',
+			'.co.uk',
+			'.com.au',
+			'.a.bg',
+			'.edu.hk',
+			'.bg.it',
+		);
+
+		foreach ( $schemes as $scheme ) {
+
+			foreach ( $prefixes as $prefix ) {
+				foreach ( $domains as $domain ) {
+					foreach ( $tlds as $tld ) {
+						self::assertEquals( $domain . $tld,
+							WPGlobus_Utils::domain_tld( $scheme . $prefix . $domain . $tld ) );
+
+					}
+				}
+			}
+
 		}
+
+		// Example of parse_url failure (we return the input as-is)
+		self::assertEquals( 'http://', WPGlobus_Utils::domain_tld( 'http://' ) );
+
+		// Special cases
+		self::assertEquals( 'localhost', WPGlobus_Utils::domain_tld( 'http://localhost' ) );
+		self::assertEquals( '127.0.0.1', WPGlobus_Utils::domain_tld( 'http://127.0.0.1' ) );
+		self::assertEquals( 'example.special-public-suffix.it',
+			WPGlobus_Utils::domain_tld( 'http://www.example.special-public-suffix.it' ) );
 
 	}
 

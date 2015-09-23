@@ -145,6 +145,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.2.9 =
+
+* FIXED:
+	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
+
 = 1.2.8 =
 
 * FIXED:

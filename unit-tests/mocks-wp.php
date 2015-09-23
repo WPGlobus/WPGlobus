@@ -62,8 +62,14 @@ function is_404() {
  * @param mixed  $value The value on which the filters hooked to `$tag` are applied on.
  * @param mixed  $arg1   Additional variables passed to the functions hooked to `$tag`.
  * @param mixed  $arg2   Additional variables passed to the functions hooked to `$tag`.
+ * @return mixed Modified `$value`
  */
 function apply_filters( $tag, $value, $arg1 = null, $arg2 = null ) {
+
+	if ( 'wpglobus_pre_domain_tld' === $tag && 'http://www.example.special-public-suffix.it' === $arg1 ) {
+		$value = 'example.special-public-suffix.it';
+	}
+
 	return $value;
 }
 

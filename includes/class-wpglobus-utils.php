@@ -175,37 +175,45 @@ class WPGlobus_Utils {
 	 * @since 1.0.12
 	 */
 	public static function domain_tld( $url ) {
-		$domain_tld = parse_url( $url, PHP_URL_HOST );
 
-		if ( ! $domain_tld ) {
-			/**
-			 * parse_url failed
-			 * Let's return the original url.
-			 * Works if URL passed without scheme (just 'www.example.com' and not 'http://www.example.com' )
-			 */
+		$pre = '';
+		/**
+		 * Short-circuit processing to provide own return for the cases not covered by the algorithm.
+		 * Ex. www.example.carrara-massa.it (carrara-massa.it is a TLD)
+		 *
+		 * @param string $pre Empty string. Return your domain_tld instead.
+		 * @param string $url The URL to extract domain_tld from.
+		 */
+		$pre = apply_filters( 'wpglobus_pre_domain_tld', $pre, $url );
+		if ( $pre ) {
+			return $pre;
+		}
+
+		// URL passed with no scheme. parse_url will think it's a path only. Let's add a scheme.
+		if ( ! preg_match( '!^(?:https?:)?//!', $url ) ) {
+			$url = '//' . $url;
+		}
+
+		$host = parse_url( $url, PHP_URL_HOST );
+
+		if ( ! $host ) {
+			// parse_url failed. We cannot do much. Let's return the original url.
 			return $url;
 		}
 
-		$host_components = explode( '.', $domain_tld );
-
-		if ( is_numeric( $host_components[0] ) ) {
-			/**
-			 * It's an IP address. Do nothing.
-			 */
+		/**
+		 * Extract domain-tld from the host.
+		 * Note: this does not cover all possible public suffixes.
+		 * Using the proper algorithm based PublicList might be resource-consuming.
+		 * We'll provide a filter for special cases instead.
+		 *
+		 * @link https://publicsuffix.org/list/
+		 */
+		$re = '/([a-z0-9][a-z0-9\-]+\.[a-z\.]{2,6})$/';
+		if ( preg_match( $re, $host, $matches ) ) {
+			$domain_tld = $matches[1];
 		} else {
-			/**
-			 * Strip all prefixes
-			 *
-			 * @todo example.co.uk becomes just co.uk
-			 *       This does not break the algorithm of @see localize_url, but still needs to be fixed.
-			 */
-
-			$num_components = count( $host_components );
-			if ( $num_components > 2 ) {
-				$domain_tld = $host_components[ $num_components - 2 ]
-				              . '.'
-				              . $host_components[ $num_components - 1 ];
-			}
+			$domain_tld = $host;
 		}
 
 		return $domain_tld;
@@ -340,7 +348,7 @@ class WPGlobus_Utils {
 	 * @return bool
 	 */
 	public static function is_enabled( $language ) {
-		return in_array( $language, WPGlobus::Config()->enabled_languages );
+		return in_array( $language, WPGlobus::Config()->enabled_languages, true );
 	}
 
 	/**
