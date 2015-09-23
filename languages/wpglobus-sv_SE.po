@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-09-15 05:08:21+00:00\n"
+"POT-Creation-Date: 2015-09-23 18:11:26+00:00\n"
 "PO-Revision-Date: 2015-09-09 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
@@ -755,16 +755,16 @@ msgstr ""
 msgid "License"
 msgstr "Licens"
 
-#: updater/class-wpglobus-updater.php:424
+#: updater/class-wpglobus-updater.php:426
 msgid "License has not been activated."
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:428
+#: updater/class-wpglobus-updater.php:430
 msgid "Click here to enter the license key and get the updates."
 msgstr ""
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
-#: updater/class-wpglobus-updater.php:456
+#: updater/class-wpglobus-updater.php:458
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
 "WP_ACCESSIBLE_HOSTS."

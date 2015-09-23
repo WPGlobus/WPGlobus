@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.2.7\n"
+"Project-Id-Version: WPGlobus 1.2.8\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-09-15 05:08:21+00:00\n"
+"POT-Creation-Date: 2015-09-23 18:11:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -719,15 +719,15 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:424
+#: updater/class-wpglobus-updater.php:426
 msgid "License has not been activated."
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:428
+#: updater/class-wpglobus-updater.php:430
 msgid "Click here to enter the license key and get the updates."
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:456
+#: updater/class-wpglobus-updater.php:458
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "

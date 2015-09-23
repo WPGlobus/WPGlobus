@@ -80,10 +80,14 @@ Thank you!
 
 ### Admin interface translations: ###
 
+[WP-Translations](http://wp-translations.org/)
+
 * `de_DE` : Tobias Hopp, [http://www.tobiashopp.info/](http://www.tobiashopp.info/)
 * `es_ES` : Patricia Casado, [mascositas.com](http://mascositas.com/)
 * `tr_TR` : Borahan Conkeroglu, [@boracon68](https://twitter.com/boracon68)
-* `fr_FR`, 'sv_SE' and future language updates: [WP-Translations](http://wp-translations.org/)
+* `fr_FR` : FX Bénard, [WP-Translations](http://wp-translations.org/)
+* `sv_SE` : Elger Lindgren, [Bilddigital](http://bilddigital.se/)
+* `pl_PL` : [Maciej Gryniuk](http://maciej-gryniuk.tk/)
 * `ru_RU` : The WPGlobus Team (мы говорим по-русски!)
 
 **Please help us translate WPGlobus into your language!** Join the WP-Translations Team on [Transifex](https://www.transifex.com/wp-translations/wpglobus-multilingual/).
@@ -160,6 +164,13 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.2.9 ###
+
+* FIXED:
+	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
+* ADDED:
+	* `pl_PL` admin interface translation.
 
 ### 1.2.8 ###
 
