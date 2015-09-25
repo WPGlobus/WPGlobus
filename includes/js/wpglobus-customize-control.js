@@ -44,18 +44,23 @@ jQuery(document).ready(function ($) {
 				}	
 			});
 			
+			var q = decodeURIComponent(source);
 			// ({'%7B','%22','%7D','%3A'},{'{','"','}',':'})
+			/*
 			var q = source.replace(/%22/g, '"');
 			q = q.replace(/%7B/g, '{');
 			q = q.replace(/%7D/g, '}');
 			q = q.replace(/%3A/g, ':');
 			q = q.replace(/%2C/g, ',');
 			q = q.replace(/\+/g, ' ');
-			
+			// */
+					
 			q = JSON.parse(q);
 			$.each(WPGlobusCoreData.customize.elements, function(elem,value){			
 				if ( typeof q[elem] !== 'undefined' ) {
 					q[value.origin] = $(WPGlobusCoreData.customize.elements[elem].origin_element).val();
+					
+					
 				}	
 			});
 			settings.data = settings.data.replace( source, JSON.stringify(q) );
