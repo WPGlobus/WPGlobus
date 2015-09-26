@@ -46,7 +46,7 @@ class WPGlobus_Options {
 
 		if ( ! class_exists( 'ReduxFramework' ) ) {
 			/** @noinspection PhpIncludeInspection */
-			require_once WPGlobus::$PLUGIN_DIR_PATH . 'vendor/ReduxCore/framework.php';
+			require_once WPGlobus::$PLUGIN_DIR_PATH . 'lib/ReduxCore/framework.php';
 		}
 
 		$config = WPGlobus::Config();

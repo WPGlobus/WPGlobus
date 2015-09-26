@@ -838,7 +838,7 @@ class WPGlobus {
 			if ( ! wp_script_is( 'select2-js' ) ) {
 				wp_enqueue_script(
 					'select2-js',
-					WPGlobus::$PLUGIN_DIR_URL . 'vendor/select2.min.js',
+					WPGlobus::$PLUGIN_DIR_URL . 'lib/select2.min.js',
 					array( 'jquery' ),
 					'3.5.2',
 					true
@@ -1342,7 +1342,7 @@ class WPGlobus {
 			if ( ! wp_style_is( 'select2-js' ) ) {
 				wp_enqueue_style(
 					'select2-css',
-					WPGlobus::$PLUGIN_DIR_URL . 'vendor/select2.min.css',
+					WPGlobus::$PLUGIN_DIR_URL . 'lib/select2.min.css',
 					array(),
 					'3.5.2'
 				);
