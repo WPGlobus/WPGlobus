@@ -1,11 +1,12 @@
 <?php
+//@formatter:off
 /**
  * Plugin Name: WPGlobus
  * Plugin URI: https://github.com/WPGlobus/WPGlobus
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.2.8
+ * Version: 1.2.9
  * Author: WPGlobus
  * Author URI: http://www.wpglobus.com/
  * Network: false
@@ -23,13 +24,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
+//@formatter:on
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.2.8' );
+define( 'WPGLOBUS_VERSION', '1.2.9' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /** @todo Get rid of these */
@@ -57,6 +58,7 @@ require_once 'includes/wpglobus-controller.php';
 
 /**
  * Fix multilingual strings in `Customize`
+ *
  * @since 1.2.1
  */
 require_once 'includes/class-wpglobus-customize.php';

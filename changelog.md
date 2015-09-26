@@ -2,6 +2,25 @@
 
 ## Changelog ##
 
+### 1.2.9 ###
+
+* FIXED:
+	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
+	* Fix customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
+* ADDED:
+	* `pl_PL` admin interface translation.
+
+### 1.2.8 ###
+
+* FIXED:
+	* Minor admin JS bug.
+
+### 1.2.7 ###
+
+* FIXED:
+	* Updater bug "cannot delete old plugin files".
+	* Broken Welsh flag cy.png (Thanks to Tudor Thomas).
+
 ### 1.2.6 ###
 
 * FIXED:

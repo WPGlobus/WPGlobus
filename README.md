@@ -3,7 +3,7 @@
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus  
 **Requires at least:** 4.2  
-**Tested up to:** 4.3.1  
+**Tested up to:** 4.3.2  
 **Stable tag:** trunk  
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
@@ -169,6 +169,7 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
+	* Fix customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
 * ADDED:
 	* `pl_PL` admin interface translation.
 
@@ -210,17 +211,6 @@ No known backward incompatibility issues.
 	* Filter for ACF WYSIWYG fields.
 	* `es_ES` admin interface translation files.
 
-### 1.2.3 ###
-
-* FIXED:
-	* Return empty hreflangs for 404 page.
-	* Duplicate title in admin bar menu.
-	* Language ordering icons disappearing with some themes.
-	* WordPress 4.3 compatibility.
-* ADDED:
-	* Extended options to WPGlobus_Config class
-	* 'wpglobus_id' for every option section
-	
 ### Earlier versions ###
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
