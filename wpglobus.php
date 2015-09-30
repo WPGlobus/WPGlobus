@@ -69,6 +69,11 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	WPGlobus_WPSEO::controller();
 }
 
+if ( is_admin() ) {
+	require_once 'includes/admin/class-wpglobus-wp-theme.php';
+	$wt = new WPGlobus_WP_Theme();
+}
+
 require_once 'updater/class-wpglobus-updater.php';
 
 # --- EOF
