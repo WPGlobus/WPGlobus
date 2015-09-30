@@ -230,6 +230,11 @@ var WPGlobusDialogApp;
 			}	
 			api.clone_id = api.convertToId(id);
 			
+			if ( $('#wpglobus-'+api.clone_id).length > 0 ) {
+				// WPGlobus element exists already
+				return;	
+			}	
+			
 			clone = $( $element.clone() );
 			//$element.addClass('hidden');	
 			style = $element.attr('style') || '';
