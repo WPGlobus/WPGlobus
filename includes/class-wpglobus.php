@@ -1198,10 +1198,19 @@ class WPGlobus {
 
 			if ( empty($page_data_key) ) {
 				$page_data_key = 'page_custom_data'; 
-			}	
+			}
 			if ( empty($page_data_values) ) {
 				$page_data_values = null;
 			}	
+			
+			/**
+			 * Filter for custom data to send to JS.
+			 * Returning array or null.
+			 * @since 1.2.9
+			 *
+			 * @param array $page_data_values An array with custom data or null.
+			 */			
+			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values );			
 			
 			wp_localize_script(
 				'wpglobus-admin',
