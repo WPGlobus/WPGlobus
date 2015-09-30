@@ -234,6 +234,10 @@ var WPGlobusDialogApp;
 				// WPGlobus element exists already
 				return;	
 			}	
+			if ( $(nodeName+'[name="wpglobus-'+name+'"]').length > 0 ) {
+				// WPGlobus element exists already
+				return;	
+			}	
 			
 			clone = $( $element.clone() );
 			//$element.addClass('hidden');	
