@@ -47,7 +47,14 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 		function custom_data( $data ) {
 			$elements = array();
 			foreach( $this->config['wpml-config']['admin-texts']['key']['key'] as $elem ) {
-				$elements[] = $elem['attr']['name'];	
+				if ( empty( $elem['attr'] ) ) {
+					/**
+					 * single element in wpml-config.xml file
+					 */
+					$elements[] = $elem['name'];
+				} else {	
+					$elements[] = $elem['attr']['name'];
+				}	
 			}	
 			if ( empty( $data['addElements'] ) ) {
 				$data['addElements'] = $elements;
