@@ -4,18 +4,35 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 
 	class WPGlobus_WP_Theme {
 	
-		var $wpglobus_config_file = '';
+		/**
+		 * WPGlobus config file
+		 */
+		var $wpglobus_config_file = 'wpglobus-config.json';
 		
+		/**
+		 * Config file from wpml
+		 */		
 		var $wpml_config_file = 'wpml-config.xml';
 		
+		/**
+		 * Full path to config file
+		 */		
 		var $config_dir_file = '';
 
 		/**
-		 *
+		 * Array of paths to themes
 		 */
 		var $theme_dir = array();
 		
+		/**
+		 * Config
+		 */		
 		var $config = array();
+		
+		/**
+		 * Source of config
+		 */
+		var $config_from = '';
 		
 		function __construct() {
 			
@@ -41,70 +58,123 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 			
 		}
 
-		/**
-		 * Add custom fields for WPGlobusDialog
-		 */		
-		function custom_data( $data ) {
+        /**
+         * Add custom fields for WPGlobusDialog
+         * @param $data
+         * @return array
+         */
+		public function custom_data( $data ) {
+			
 			$elements = array();
-			foreach( $this->config['wpml-config']['admin-texts']['key']['key'] as $elem ) {
-				if ( empty( $elem['attr'] ) ) {
-					/**
-					 * single element in wpml-config.xml file
-					 */
-					$elements[] = $elem['name'];
-				} else {	
-					$elements[] = $elem['attr']['name'];
+			
+			if ( $this->config_from == $this->wpml_config_file ) {
+				
+				foreach( $this->config['wpml-config']['admin-texts']['key']['key'] as $elem ) {
+					if ( empty( $elem['attr'] ) ) {
+						/**
+						 * single element in wpml-config.xml file
+						 */
+						$elements[] = $elem['name'];
+					} else {	
+						$elements[] = $elem['attr']['name'];
+					}	
 				}	
-			}	
-			if ( empty( $data['addElements'] ) ) {
-				$data['addElements'] = $elements;
-			} else {
-				$data['addElements'] = array_merge(
-					$data['addElements'],
-					$elements
-				);	
-			}	
+				
+			} elseif ( $this->config_from == $this->wpglobus_config_file )  {
+				
+				foreach ( $this->config['admin_texts'] as $field ) {
+					$elements[] = $field;
+				}	
+			
+			}
+
+			if ( ! empty( $elements ) ) {	
+				if ( empty( $data['addElements'] ) ) {
+					$data['addElements'] = $elements;
+				} else {
+					$data['addElements'] = array_merge(
+						$data['addElements'],
+						$elements
+					);	
+				}
+			}		
+			
 			return $data;
+		
 		}	
 
 		/**
 		 * Get config from file
 		 */
-		function get_config() {
+		public function get_config() {
 
-			if ( $this->theme_dir['parent'] == $this->theme_dir['child'] ) {
-				$file = $this->theme_dir['parent'] . '/' . $this->wpml_config_file;
-				if ( file_exists( $file ) ) {
-					$this->config_dir_file = $file;
-				}	
-			} else {
-				foreach( $this->theme_dir as $relation=>$dir ) {
-					
-					$file = $dir . '/' . $this->wpml_config_file;
-					if ( file_exists( $file ) && 'child' == $relation ) {
-						/**
-						 * Now 'wpml-config.xml' in child theme has highest priority
-						 */
-						$this->config_dir_file = $file;
-						break;
-					}		
-					if ( file_exists( $file ) && 'parent' == $relation ) {
+			$config_files = array();
+			
+			/**
+			 * First look for wpglobus config
+			 */			
+			$config_files[] = $this->wpglobus_config_file;
+			
+			/**
+			 * and then look wpml config
+			 */
+			$config_files[] = $this->wpml_config_file;
+
+            $config_file = '';
+
+			foreach ( $config_files as $config_file ) :
+				
+				$this->config_dir_file = '';
+				
+				if ( $this->theme_dir['parent'] == $this->theme_dir['child'] ) {
+					$file = $this->theme_dir['parent'] . '/' . $config_file;
+					if ( file_exists( $file ) ) {
 						$this->config_dir_file = $file;
 					}	
+				} else {
+					foreach( $this->theme_dir as $relation=>$dir ) {
+						
+						$file = $dir . '/' . $config_file;
+						if ( file_exists( $file ) && 'child' == $relation ) {
+							/**
+							 * Now config in child theme has highest priority
+							 */
+							$this->config_dir_file = $file;
+							break;
+						}		
+						if ( file_exists( $file ) && 'parent' == $relation ) {
+							$this->config_dir_file = $file;
+						}	
+					
+					}	
+				}
 				
+				if ( ! empty( $this->config_dir_file ) ) {
+					break;	
 				}	
-			}
-			
-			if ( ! empty( $this->config_dir_file ) ) {
-				$this->config = $this->xml2array( file_get_contents( $this->config_dir_file ) );
-			}
-			
-		}
+				
+			endforeach;
 		
-		/**
-		 * Enable page to load scripts and styles
-		 */
-		function enable_page( $pages ) {
+			switch ( $config_file ) {
+			case $this->wpglobus_config_file :
+				$this->config = $this->json2array( file_get_contents( $this->config_dir_file ) );
+				$this->config_from = $this->wpglobus_config_file;
+				break;
+			case $this->wpml_config_file :
+				$this->config = $this->xml2array( file_get_contents( $this->config_dir_file ) );
+				$this->config_from = $this->wpml_config_file;
+				break;
+			};
+			
+		
+		}
+
+        /**
+         * Enable page to load scripts and styles
+         * @param $pages
+         * @return array
+         */
+		public function enable_page( $pages ) {
 
 			if ( empty( $this->config_dir_file ) ) {
 				return $pages;	
@@ -117,8 +187,24 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 			return $pages;
 			
 		}
-		
-		function xml2array($contents, $get_attributes=1) {
+
+        /**
+         * Conversion json to array
+         * @param $content
+         * @return array
+         */
+		public function json2array( $content ) {
+			$content = json_decode( $content, true );
+			return $content;
+		}
+
+        /**
+         * Conversion xml to array
+         * @param $contents
+         * @param int $get_attributes
+         * @return array
+         */
+		public function xml2array($contents, $get_attributes=1) {
 			if(!$contents) return array();
 
 			if(!function_exists('xml_parser_create')) {
