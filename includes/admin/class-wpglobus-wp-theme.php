@@ -7,32 +7,32 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 		/**
 		 * WPGlobus config file
 		 */
-		var $wpglobus_config_file = 'wpglobus-config.json';
+		public $wpglobus_config_file = 'wpglobus-config.json';
 		
 		/**
 		 * Config file from wpml
 		 */		
-		var $wpml_config_file = 'wpml-config.xml';
+		public $wpml_config_file = 'wpml-config.xml';
 		
 		/**
 		 * Full path to config file
 		 */		
-		var $config_dir_file = '';
+		public $config_dir_file = '';
 
 		/**
 		 * Array of paths to themes
 		 */
-		var $theme_dir = array();
+		public $theme_dir = array();
 		
 		/**
 		 * Config
 		 */		
-		var $config = array();
+		public $config = array();
 		
 		/**
 		 * Source of config
 		 */
-		var $config_from = '';
+		public $config_from = '';
 		
 		function __construct() {
 			
