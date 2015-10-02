@@ -127,6 +127,27 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 			foreach ( $config_files as $config_file ) :
 				
 				$this->config_dir_file = '';
+
+				/**
+				 * First priority: look for a config file in WP_LANG_DIR folder.
+				 * For example, for the theme slug `my-theme`, the file path is:
+				 * wp-content/languages/themes/my-theme-wpglobus-config.json
+				 * *
+				 * We'll check for both child and parent theme slugs
+				 */
+				foreach ( array( get_stylesheet(), get_template() ) as $theme_slug ) {
+					$config_in_wp_lang_dir = WP_LANG_DIR . '/themes/' . $theme_slug . '-' . $config_file;
+
+					if ( is_file( $config_in_wp_lang_dir ) && is_readable( $config_in_wp_lang_dir ) ) {
+						$this->config_dir_file = $config_in_wp_lang_dir;
+						break 2;
+					}
+				}
+
+				/**
+				 * Then, check for the config file provided by the theme author:
+				 * @example wp-content/themes/my-theme/wpglobus-config.json
+				 */
 				
 				if ( $this->theme_dir['parent'] == $this->theme_dir['child'] ) {
 					$file = $this->theme_dir['parent'] . '/' . $config_file;
