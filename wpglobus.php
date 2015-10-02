@@ -71,7 +71,7 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 
 if ( is_admin() ) {
 	require_once 'includes/admin/class-wpglobus-wp-theme.php';
-	$wt = new WPGlobus_WP_Theme();
+	new WPGlobus_WP_Theme();
 }
 
 require_once 'updater/class-wpglobus-updater.php';
