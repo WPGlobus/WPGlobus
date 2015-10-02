@@ -156,6 +156,7 @@ No known backward incompatibility issues.
 	* Fix customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
 * ADDED:
 	* `pl_PL` admin interface translation.
+	* `wpglobus-config.json` configuration file for theme options, with WPML compatibility.
 
 = 1.2.8 =
 
