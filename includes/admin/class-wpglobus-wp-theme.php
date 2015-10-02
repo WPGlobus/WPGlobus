@@ -1,109 +1,118 @@
 <?php
+/**
+ * Theme compatibility
+ * @package   WPGlobus/Admin
+ */
 
-if ( ! class_exists('WPGlobus_WP_Theme') ) :
+if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 
+	/**
+	 * Class WPGlobus_WP_Theme
+	 */
 	class WPGlobus_WP_Theme {
-	
+
 		/**
 		 * WPGlobus config file
 		 */
 		public $wpglobus_config_file = 'wpglobus-config.json';
-		
+
 		/**
-		 * Config file from wpml
-		 */		
+		 * Config file from WPML
+		 */
 		public $wpml_config_file = 'wpml-config.xml';
-		
+
 		/**
 		 * Full path to config file
-		 */		
+		 */
 		public $config_dir_file = '';
 
 		/**
 		 * Array of paths to themes
 		 */
 		public $theme_dir = array();
-		
+
 		/**
 		 * Config
-		 */		
+		 */
 		public $config = array();
-		
+
 		/**
 		 * Source of config
 		 */
 		public $config_from = '';
-		
-		function __construct() {
-			
+
+		/** */
+		public function __construct() {
+
 			/**
 			 * get the absolute path to the child theme directory
 			 */
-			$this->theme_dir['child']  =  get_stylesheet_directory();
-			
+			$this->theme_dir['child'] = get_stylesheet_directory();
+
 			/**
 			 * in the case a child theme is being used, the absolute path to the parent theme directory will be returned
 			 */
-			$this->theme_dir['parent'] =  get_template_directory();  
-			
+			$this->theme_dir['parent'] = get_template_directory();
+
 			$this->get_config();
 
 			if ( ! empty( $this->config ) ) {
-				
+
 				add_filter( 'wpglobus_localize_custom_data', array( $this, 'custom_data' ) );
-			
+
 				add_filter( 'wpglobus_enabled_pages', array( $this, 'enable_page' ) );
-				
-			}	
-			
+
+			}
+
 		}
 
-        /**
-         * Add custom fields for WPGlobusDialog
-         * @param $data
-         * @return array
-         */
+		/**
+		 * Add custom fields to WPGlobusDialog
+		 *
+		 * @param array $data
+		 * @return array
+		 */
 		public function custom_data( $data ) {
-			
+
 			$elements = array();
-			
-			if ( $this->config_from == $this->wpml_config_file ) {
-				
-				foreach( $this->config['wpml-config']['admin-texts']['key']['key'] as $elem ) {
+
+			if ( $this->config_from === $this->wpml_config_file ) {
+
+				foreach ( $this->config['wpml-config']['admin-texts']['key']['key'] as $elem ) {
 					if ( empty( $elem['attr'] ) ) {
 						/**
 						 * single element in wpml-config.xml file
 						 */
 						$elements[] = $elem['name'];
-					} else {	
+					} else {
 						$elements[] = $elem['attr']['name'];
-					}	
-				}	
-				
-			} elseif ( $this->config_from == $this->wpglobus_config_file )  {
-				
+					}
+				}
+
+			} elseif ( $this->config_from === $this->wpglobus_config_file ) {
+
 				if ( ! empty( $this->config['admin_texts'] ) ) {
 					foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
 						$elements[] = $field_name;
 					}
 				}
-			
+
 			}
 
-			if ( ! empty( $elements ) ) {	
+			if ( ! empty( $elements ) ) {
 				if ( empty( $data['addElements'] ) ) {
 					$data['addElements'] = $elements;
 				} else {
 					$data['addElements'] = array_merge(
 						$data['addElements'],
 						$elements
-					);	
+					);
 				}
-			}		
-			
+			}
+
 			return $data;
-		
-		}	
+
+		}
 
 		/**
 		 * Get config from file
@@ -111,21 +120,21 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 		public function get_config() {
 
 			$config_files = array();
-			
+
 			/**
-			 * First look for wpglobus config
-			 */			
+			 * First look for WPGlobus config
+			 */
 			$config_files[] = $this->wpglobus_config_file;
-			
+
 			/**
-			 * and then look wpml config
+			 * and then look for a WPML config
 			 */
 			$config_files[] = $this->wpml_config_file;
 
-            $config_file = '';
+			$config_file = '';
 
 			foreach ( $config_files as $config_file ) :
-				
+
 				$this->config_dir_file = '';
 
 				/**
@@ -146,92 +155,99 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 
 				/**
 				 * Then, check for the config file provided by the theme author:
+				 *
 				 * @example wp-content/themes/my-theme/wpglobus-config.json
 				 */
-				
-				if ( $this->theme_dir['parent'] == $this->theme_dir['child'] ) {
+
+				if ( $this->theme_dir['parent'] === $this->theme_dir['child'] ) {
 					$file = $this->theme_dir['parent'] . '/' . $config_file;
 					if ( file_exists( $file ) ) {
 						$this->config_dir_file = $file;
-					}	
+					}
 				} else {
-					foreach( $this->theme_dir as $relation=>$dir ) {
-						
+					foreach ( $this->theme_dir as $relation => $dir ) {
+
 						$file = $dir . '/' . $config_file;
-						if ( file_exists( $file ) && 'child' == $relation ) {
+						if ( 'child' === $relation && file_exists( $file ) ) {
 							/**
 							 * Now config in child theme has highest priority
 							 */
 							$this->config_dir_file = $file;
 							break;
-						}		
-						if ( file_exists( $file ) && 'parent' == $relation ) {
+						}
+						if ( 'parent' === $relation && file_exists( $file ) ) {
 							$this->config_dir_file = $file;
-						}	
-					
-					}	
+						}
+
+					}
 				}
-				
+
 				if ( ! empty( $this->config_dir_file ) ) {
-					break;	
-				}	
-				
+					break;
+				}
+
 			endforeach;
-		
+
 			switch ( $config_file ) {
-			case $this->wpglobus_config_file :
-				$this->config = $this->json2array( file_get_contents( $this->config_dir_file ) );
-				$this->config_from = $this->wpglobus_config_file;
-				break;
-			case $this->wpml_config_file :
+				case $this->wpglobus_config_file :
+					$this->config      = $this->json2array( file_get_contents( $this->config_dir_file ) );
+					$this->config_from = $this->wpglobus_config_file;
+					break;
+				case $this->wpml_config_file :
 
-				/**
-				 * Compatibility with WPML configuration file:
-				 * their XML is parced using their function, `icl_xml2array`,
-				 * which we copied as-is to the `lib` folder.
-				 * @link https://wpml.org/documentation/support/language-configuration-files/
-				 */
+					/**
+					 * Compatibility with WPML configuration file:
+					 * their XML is parsed using their function, `icl_xml2array`,
+					 * which we copied as-is to the `lib` folder.
+					 *
+					 * @link https://wpml.org/documentation/support/language-configuration-files/
+					 */
 
-				/** @noinspection PhpIncludeInspection */
-				require_once WPGlobus::$PLUGIN_DIR_PATH . 'lib/xml2array.php';
-				/** @noinspection PhpUndefinedFunctionInspection */
-				$this->config = icl_xml2array( file_get_contents( $this->config_dir_file ) );
-				$this->config_from = $this->wpml_config_file;
-				break;
+					/** @noinspection PhpIncludeInspection */
+					require_once WPGlobus::$PLUGIN_DIR_PATH . 'lib/xml2array.php';
+					/** @noinspection PhpUndefinedFunctionInspection */
+					$this->config      = icl_xml2array( file_get_contents( $this->config_dir_file ) );
+					$this->config_from = $this->wpml_config_file;
+					break;
 			};
-			
-		
+
+
 		}
 
-        /**
-         * Enable page to load scripts and styles
-         * @param $pages
-         * @return array
-         */
+		/**
+		 * Enable `themes.php` page to load our scripts and styles
+		 *
+		 * @param array $pages List of pages already enabled
+		 * @return array Modified list of pages
+		 */
 		public function enable_page( $pages ) {
 
 			if ( empty( $this->config_dir_file ) ) {
-				return $pages;	
+				return $pages;
 			}
-			
-			if ( 'themes.php' == WPGlobus_WP::pagenow() && ! empty( $_GET['page'] ) ) {
+
+			if ( ! empty( $_GET['page'] ) && WPGlobus_WP::is_pagenow( 'themes.php' ) ) {
 				$pages[] = 'themes.php';
 			}
-			
+
 			return $pages;
-			
+
 		}
 
-        /**
-         * Conversion json to array
-         * @param $content
-         * @return array
-         */
+		/**
+		 * Convert JSON to array
+		 *
+		 * @param string $content JSON
+		 * @return array Array
+		 */
 		public function json2array( $content ) {
-			$content = json_decode( $content, true );
-			return $content;
+			$converted = json_decode( $content, true );
+
+			return $converted;
 		}
 
-	}		
+	} // class
 
 endif;
+
+# --- EOF
