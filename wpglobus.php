@@ -69,7 +69,7 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	WPGlobus_WPSEO::controller();
 }
 
-if ( is_admin() ) {
+if ( WPGlobus_WP::in_wp_admin() ) {
 	require_once 'includes/admin/class-wpglobus-wp-theme.php';
 	new WPGlobus_WP_Theme();
 }
