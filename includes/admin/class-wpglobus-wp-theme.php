@@ -83,8 +83,8 @@ if ( ! class_exists('WPGlobus_WP_Theme') ) :
 			} elseif ( $this->config_from == $this->wpglobus_config_file )  {
 				
 				if ( ! empty( $this->config['admin_texts'] ) ) {
-					foreach ( $this->config['admin_texts'] as $field ) {
-						$elements[] = $field;
+					foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
+						$elements[] = $field_name;
 					}
 				}
 			

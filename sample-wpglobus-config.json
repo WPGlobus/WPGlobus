@@ -1,0 +1,8 @@
+{
+  "version": "1",
+  "theme": "ample",
+  "admin_texts": {
+    "ample_slider_title1": "text",
+    "ample_slider_button_text1": "text"
+  }
+}
