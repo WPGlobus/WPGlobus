@@ -188,6 +188,10 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 
 			endforeach;
 
+			if ( empty( $this->config_dir_file ) ) {
+				$config_file = '';
+			}
+			
 			switch ( $config_file ) {
 				case $this->wpglobus_config_file :
 					$this->config      = $this->json2array( file_get_contents( $this->config_dir_file ) );
