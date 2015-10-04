@@ -1662,7 +1662,7 @@ class WPGlobus {
 	
 		if ( $dropdown_menu ) {
 
-			$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children page_item_wpglobus_menu_switch_'.$language.'">' .
+			$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_has_children wpglobus-current-language page_item_wpglobus_menu_switch_'.$language.'">' .
 					   $a_tag .
 					   '<ul class="children">';
 
@@ -1689,7 +1689,7 @@ class WPGlobus {
 
 		} else {
 			
-			$output .= '<li class="page_item page_item_wpglobus_menu_switch page_item_wpglobus_menu_switch_'.$language.'">' .
+			$output .= '<li class="page_item page_item_wpglobus_menu_switch wpglobus-current-language page_item_wpglobus_menu_switch_'.$language.'">' .
 					   $a_tag .
 					   '</li>';
 					   
@@ -1825,6 +1825,7 @@ class WPGlobus {
 		// The top menu level points to the current URL. Useless? Maybe good for refresh.
 		$item->url         = $current_url;
 		$item->classes     = $menu_item_classes;
+		$item->classes     = 'wpglobus-current-language';
 		$item->description = '';
 		$item->language    = WPGlobus::Config()->language;
 		
