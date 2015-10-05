@@ -191,7 +191,12 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 			if ( empty( $this->config_dir_file ) ) {
 				$config_file = '';
 			}
-			
+
+			/**
+			 * If a configuration file has been found in the previous loop,
+			 * we have `$this->config_dir_file` containing the file path,
+			 * and the loop iterator, `$config_file`, pointing to the file type.
+			 */
 			switch ( $config_file ) {
 				case $this->wpglobus_config_file :
 					$this->config      = $this->json2array( file_get_contents( $this->config_dir_file ) );
