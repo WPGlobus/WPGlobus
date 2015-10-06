@@ -1009,7 +1009,11 @@ jQuery(document).ready(function () {
 						if ( 'default' == ntab ) {
 							ntab = WPGlobusCoreData.default_language;	
 						}	
-						$(document).triggerHandler('wpglobus_post_body_tabs', [ otab, ntab ]);
+						var a = $(document).triggerHandler('wpglobus_post_body_tabs', [ otab, ntab ]);
+						if ( a || typeof a === 'undefined' ) {
+							return true;
+						}	
+						return false;
 					}
 				}); // #post-body-content
 
