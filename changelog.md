@@ -6,9 +6,11 @@
 
 * FIXED:
 	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
-	* Fix customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
+	* Customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
 * ADDED:
 	* `pl_PL` admin interface translation.
+	* `wpglobus-config.json` configuration file for theme options, with WPML compatibility.
+	* `wpglobus-current-language` CSS class to the menu.
 
 ### 1.2.8 ###
 
