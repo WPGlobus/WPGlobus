@@ -18,65 +18,45 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 
-* Add one or several languages to your WP blog/site. Use the WPGlobus option panel to select active languages and define custom combinations of country flag and language abbreviation.
-* Using an easy tabbed interface, **manually translate** posts, pages, categories, tags menus and widgets;
-* Enable multilingual SEO features of Yoast SEO, All in One SEO, Advanced Custom Fields and many other plugins;
-* Switch the languages at the Front using: a drop-down menu extension and/or a customizable widget with various display options;
-* Switch the Administrator interface language using a top bar selector;
-
-**NOTE: WPGlobus does NOT translate texts automatically! To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/).**
+* **Manually translate** posts, pages, categories, tags menus and widgets; **NOTE: WPGlobus does NOT translate texts automatically!** To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/);
+* **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
+* **Enable multilingual SEO features** of Yoast SEO and All in One SEO plugins;
+* **Switch the languages at the front-end** using: a drop-down menu extension and/or a customizable widget with various display options;
+* **Switch the Administrator interface language** using a top bar selector;
 
 The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 > **Free Add-ons**
 
-* [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/):
-	* This plugin allows setting featured images separately for each language.
+* [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/): allows setting featured images separately for each language.
+* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/): enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) has its own option panel, where you enter texts.
+* [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
+* [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/): adds multilingual editing capabilities to the visual editor widget.
 
-* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/):
-	* This plugin enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) has its own option panel, where you enter texts.
+> **Premium Extensions**
 
-* [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/):
-	* This extension enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
-
-* [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/):
-	* Adds multilingual editing capabilities to the visual editor widget.
-
-> **Paid Extensions**
-
-* [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/):
-	* Adds multilingual capabilities to WooCommerce-based online stores.
-
-* [WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/):
-	* Adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
+* [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
+* [WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
 
 = Compatibility with Themes =
 
-> WPGlobus works correctly with all themes that apply proper filtering before outputting content. If a theme or a plugin prints texts directly from the database, WPGlobus has no opportunity to help with the translation. Please talk to the theme authors and let them know. The fix is usually very simple, and if necessary, we are ready to cooperate.
+WPGlobus works correctly with all themes that apply proper filtering before outputting content.
+Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please let the theme / plugin authors know. We are ready to help them.
 
-This will not be translated:
+More information:
 
-`
-echo $post->post_title;
-`
-
-The correct way:
-
-`
-echo apply_filters( 'the_title', $post->post_title );
-`
+* [WPGlobus Compatibility with Themes and Plugins](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/)
+* [WPGlobus Configuration File and a Theme Configuration Case Study](http://www.wpglobus.com/documentation/wpglobus-configuration-file/)
 
 = Permalinks =
 
-> **IMPORTANT:** WPGlobus will not work if your URLs look like `example.com?p=123` or `example.com/index.php/category/post/`.
+**IMPORTANT:** WPGlobus will not work if your URLs look like `example.com?p=123` or `example.com/index.php/category/post/`.
 
 Please go to `Settings->Permalinks` and change the permalink structure to non-default and with no `index.php` in it. If you are unable to do that for some reason, please talk to your hosting provider / systems administrator.
 
-= Commercial Licensing and Paid Support =
+= Developing on `localhost` or custom ports =
 
-For commercial services, please contact us at [http://www.wpglobus.com/professional-support/](http://www.wpglobus.com/professional-support/).
-
-Thank you!
+WPGlobus may not work correctly on development servers having URLs like `//localhost/mysite` or on custom ports like `//myserver.dev:3000`. Please use a proper domain name (a fake one from `/etc/hosts` is OK) and port 80.
 
 = Admin interface translations: =
 
@@ -153,10 +133,11 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
-	* Fix customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
+	* Customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
 * ADDED:
 	* `pl_PL` admin interface translation.
 	* `wpglobus-config.json` configuration file for theme options, with WPML compatibility.
+	* `wpglobus-current-language` CSS class to the menu.
 
 = 1.2.8 =
 
@@ -189,12 +170,6 @@ No known backward incompatibility issues.
 	* Several code changes related to WordPress and 3rd party plugin upgrades.
 * ADDED:
 	* Core support for the Black Studio TinyMCE widget.
-
-= 1.2.4 =
-
-* ADDED:
-	* Filter for ACF WYSIWYG fields.
-	* `es_ES` admin interface translation files.
 
 = Earlier versions =
 
