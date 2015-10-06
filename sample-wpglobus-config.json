@@ -1,8 +1,14 @@
 {
   "version": "1",
-  "theme": "ample",
   "admin_texts": {
-    "ample_slider_title1": "text",
-    "ample_slider_button_text1": "text"
+    "input_field_name_or_id": "html5_field_type",
+    "slider_title1": "text",
+    "slider_img1": "url",
+    "slider_text1": "textarea",
+    "read_more_button": "text",
+    "footer_copyright": "text",
+    "my_theme_options[some_text]": "textarea",
+    "my_theme_options[some_button_text]": "text",
+    "my_theme_options[some_button_link]": "url"
   }
 }
