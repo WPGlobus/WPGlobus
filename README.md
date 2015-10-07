@@ -1,4 +1,4 @@
-[![Latest Stable Version](https://poser.pugx.org/wpglobus/wpglobus/version)](https://packagist.org/packages/wpglobus/wpglobus) [![Total Downloads](https://poser.pugx.org/wpglobus/wpglobus/d/total)](https://packagist.org/packages/wpglobus/wpglobus)
+[![Latest Stable Version](https://poser.pugx.org/wpglobus/wpglobus/v/stable)](https://packagist.org/packages/wpglobus/wpglobus) [![Total Downloads](https://poser.pugx.org/wpglobus/wpglobus/downloads)](https://packagist.org/packages/wpglobus/wpglobus) [![Latest Unstable Version](https://poser.pugx.org/wpglobus/wpglobus/v/unstable)](https://packagist.org/packages/wpglobus/wpglobus) [![License](https://poser.pugx.org/wpglobus/wpglobus/license)](https://packagist.org/packages/wpglobus/wpglobus)
 
 # WPGlobus - Multilingual Everything! #
 **Contributors:** tivnetinc, alexgff, tivnet  
