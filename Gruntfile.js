@@ -29,10 +29,16 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        /**
+         * @link https://www.npmjs.com/package/grunt-wp-readme-to-markdown
+         */
         wp_readme_to_markdown: {
+            options: {
+                screenshot_url: 'https://ps.w.org/wpglobus/assets/{screenshot}.png'
+            },
             main: {
                 files: {
-                    'readme.md': 'readme.txt'
+                    'README.md': 'readme.txt'
                 }
             }
         },
@@ -187,10 +193,6 @@ module.exports = function (grunt) {
                 overwrite: true,
                 src: ['README.md'],
                 replacements: [
-                    {
-                        from: 'http://s.wordpress.org/extend/plugins/wpglobus---multilingual-everything!/',
-                        to: 'https://ps.w.org/wpglobus/assets/'
-                    },
                     {
                         from: '![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/).](https://ps.w.org/wpglobus/assets/screenshot-8.png)',
                         to: '![Multilingual WooCommerce store powered by WooCommerce WPGlobus.](https://ps.w.org/wpglobus/assets/screenshot-8.png)'
