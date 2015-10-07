@@ -4,15 +4,25 @@
 module.exports = function (grunt) {
 
     var
-    //bannerTemplate = '/* <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */',
+        pkgJson,
+        pkgName,
         pathIncludes = 'includes',
+        pathLanguages = 'languages',
         pathCSS,
-        pathCSS_options_fields,
         pathJS,
+        potFile,
+        pathCSS_options_fields,
         pathJS_options_fields
         ;
+
+    pkgJson = require('./package.json');
+    pkgName = pkgJson.name;
+
+
     pathCSS = pathIncludes + '/css';
     pathJS = pathIncludes + '/js';
+
+    potFile = pathLanguages + '/' + pkgName + '.pot';
 
     /**
      * Custom Redux fields
@@ -160,7 +170,7 @@ module.exports = function (grunt) {
         makepot: {
             target: {
                 options: {
-                    mainFile: 'wpglobus.php',                     // Main project file.
+                    mainFile: pkgName + '.php',                     // Main project file.
                     potHeaders: {
                         poedit: true,                 // Includes common Poedit headers.
                         'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
@@ -205,7 +215,7 @@ module.exports = function (grunt) {
             },
             version: {
                 overwrite: true,
-                src: ['wpglobus.php'],
+                src: [pkgName + '.php'],
                 replacements: [
                     {
                         from: / \* Version: [0-9\.]+/,
@@ -227,8 +237,8 @@ module.exports = function (grunt) {
             files: [
                 'Gruntfile.js',
                 pathCSS + '/*.less',
-                pathCSS_options_fields + '/**/*.less',
                 pathJS + '/*.js',
+                pathCSS_options_fields + '/**/*.less',
                 pathJS_options_fields + '/**/*.js'
             ],
             tasks: ['less', 'cssmin', 'uglify'],
@@ -240,7 +250,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('po', 'Merge POT into individual PO files', function () {
         var execSync = require('child_process').execSync;
-        var potFile = 'languages/wpglobus.pot';
         var poFilePaths = grunt.file.expand('languages/*.po');
         poFilePaths.forEach(function (poFile) {
             var moFile = poFile.replace(/\.po$/, '.mo');
@@ -251,7 +260,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('mo', 'Compile PO to MO files', function () {
         var execSync = require('child_process').execSync;
-        var potFile = 'languages/wpglobus.pot';
         var poFilePaths = grunt.file.expand('languages/*.po');
         poFilePaths.forEach(function (poFile) {
             var moFile = poFile.replace(/\.po$/, '.mo');
@@ -270,8 +278,13 @@ module.exports = function (grunt) {
 
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
-    // To run all tasks - same list as for `watch`
-    grunt.registerTask('dist', ['readme_md', 'less', 'cssmin', 'uglify', 'replace:version']);
+    grunt.registerTask('dist', [
+        'readme_md',
+        'less',
+        'cssmin',
+        'uglify',
+        'replace:version'
+    ]);
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
