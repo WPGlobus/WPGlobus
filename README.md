@@ -1,3 +1,5 @@
+[![Latest Stable Version](https://poser.pugx.org/wpglobus/wpglobus/version)](https://packagist.org/packages/wpglobus/wpglobus) [![Total Downloads](https://poser.pugx.org/wpglobus/wpglobus/d/total)](https://packagist.org/packages/wpglobus/wpglobus)
+
 # WPGlobus - Multilingual Everything! #
 **Contributors:** tivnetinc, alexgff, tivnet  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
