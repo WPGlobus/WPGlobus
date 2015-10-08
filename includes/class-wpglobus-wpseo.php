@@ -54,7 +54,7 @@ class WPGlobus_WPSEO {
 			 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
 			 * AJAX is probably not required (waiting for a case).
 			 */
-			//add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+			add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 			//add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 			
 			/**
@@ -62,7 +62,7 @@ class WPGlobus_WPSEO {
 			 * @scope front
 			 * @since 1.1.1		 
 			 */			
-			add_filter( 'wpseo_title', array( 'WPGlobus_WPSEO', 'filter__title' ), 0 );
+//			add_filter( 'wpseo_title', array( 'WPGlobus_WPSEO', 'filter__title' ), 0 );
 			
 			/**
 			 * Filter for @see wpseo_description
@@ -264,11 +264,6 @@ class WPGlobus_WPSEO {
 		if ( empty($text) ) {
 			global $post;
 			$text = $post->post_title . ' ' . $wpseo_f->get_title_from_options( 'wpseo_titles' );
-		} else {
-			$extra = $wpseo_f->get_title_from_options( 'wpseo_titles' );
-			if ( ! empty( $extra ) && false === strpos( $text, $extra ) ) {
-				$text .= ' ' . $extra;
-			}	
 		}
 		
 		return $text;
