@@ -74,6 +74,30 @@ class WPGlobus_Customize {
 				'settings' => 'wpglobus_blogdescription'
 			)
 		) );
+		
+		/**
+		 * Add elements from wpglobus-config.json
+		 */
+		if ( empty( WPGlobus::Config()->WPGlobus_WP_Theme ) ) {
+			return;
+		}
+
+		foreach( WPGlobus::Config()->WPGlobus_WP_Theme->elements as $key=>$value ) {
+
+			$wp_customize->add_setting( $key, array(
+				'default' => ''
+			) );			
+			$wp_customize->get_setting( $key )->transport = 'postMessage';
+			$wp_customize->add_control( new WP_Customize_Control( $wp_customize,
+				$key, array(
+					'label'    => '{{title}}',
+					'type'     => 'text',	// @todo check for type 'textarea'
+					'section'  => $value['section'],
+					'settings' => $key
+				)
+			) );
+			
+		}	
 
 	}
 
