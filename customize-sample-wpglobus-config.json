@@ -1,0 +1,18 @@
+{
+    "version": "1",
+    "admin_texts": {
+        "ample_slider_title1": "text",
+        "ample_slider_button_text1": "textarea"
+    },
+	"customize_texts": {
+        "ample[ample_slider_title1]": {
+			"type": "text",
+			"section": "ample_slider_image_setting1"
+		},
+        "ample[ample_slider_button_text1]": {
+			"type": "text",
+			"section": "ample_slider_image_setting1"
+		}		
+	}	
+	
+}
