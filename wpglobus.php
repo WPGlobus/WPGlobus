@@ -69,9 +69,9 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 	WPGlobus_WPSEO::controller();
 }
 
-if ( WPGlobus_WP::in_wp_admin() ) {
+if ( WPGlobus_WP::in_wp_admin() && ! WPGlobus_WP::is_admin_doing_ajax() ) {
 	require_once 'includes/admin/class-wpglobus-wp-theme.php';
-	new WPGlobus_WP_Theme();
+	WPGlobus::Config()->WPGlobus_WP_Theme = new WPGlobus_WP_Theme();
 }
 
 require_once 'updater/class-wpglobus-updater.php';
