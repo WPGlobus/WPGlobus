@@ -1209,8 +1209,9 @@ class WPGlobus {
 			 * @since 1.2.9
 			 *
 			 * @param array $page_data_values An array with custom data or null.
+			 * @param string $page_data_key Data key. @since 1.3.0
 			 */			
-			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values );			
+			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values, $page_data_key );			
 			
 			wp_localize_script(
 				'wpglobus-admin',
