@@ -23,6 +23,7 @@ jQuery(document).ready(function ($) {
 		index: 0,
 		length: 0,
 		positionSet: false,
+		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span style="font-weight:bold;">{{language}}</span>',
 		init: function(args) {
 			$.each( WPGlobusCoreData.enabled_languages, function(i,e){
 				api.languages[i] = e;
@@ -56,8 +57,8 @@ jQuery(document).ready(function ($) {
 			});		
 		},	
 		addLanguageSelector: function() {
-			$('<a style="margin-left:50px;" class="customize-controls-close wpglobus-customize-selector"></a>').insertAfter('#customize-header-actions .spinner');	
-			$('.wpglobus-customize-selector').text( WPGlobusCoreData.language );
+			$('<a style="margin-left:50px;" class="customize-controls-close wpglobus-customize-selector"><span class="wpglobus-globe"></span></a>').insertAfter('#customize-header-actions .spinner');	
+			$('.wpglobus-customize-selector').html( api.selectorHtml.replace('{{language}}', WPGlobusCoreData.language) );
 		},
 		setPosition: function(e) {
 			if ( typeof e.options.setPosition !== 'undefined' && e.options.setPosition ) {
@@ -92,7 +93,7 @@ jQuery(document).ready(function ($) {
 
 				WPGlobusCoreData.language = api.languages[api.index];
 				
-				$(this).text( WPGlobusCoreData.language );
+				$(this).html( api.selectorHtml.replace('{{language}}', WPGlobusCoreData.language) );
 				
 				$('.wpglobus-customize-control').each(function(i,e){
 					var s = $( WPGlobusCoreData.customize.addElements[$(e).data('customize-setting-link')].origin_element );
