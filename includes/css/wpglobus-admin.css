@@ -190,6 +190,12 @@ ul.wpglobus-important li {
   font-style: italic;
 }
 .customize-controls-close.wpglobus-customize-selector:before {
-  content: '';
+  content: "";
 }
-/*# sourceMappingURL=wpglobus-admin.css.map */
+.customize-controls-close.wpglobus-customize-selector .wpglobus-icon-globe:before {
+  color: #00f;
+  display: inline-block;
+  font-family: 'dashicons';
+  content: "\f319";
+  font-size: 20px;
+}
