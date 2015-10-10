@@ -189,4 +189,7 @@ ul.wpglobus-important li {
 .redux-container #redux-intro-text .wpg-text-block .wpg-footer {
   font-style: italic;
 }
+.customize-controls-close.wpglobus-customize-selector:before {
+  content: '';
+}
 /*# sourceMappingURL=wpglobus-admin.css.map */
