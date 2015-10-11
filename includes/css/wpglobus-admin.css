@@ -202,4 +202,9 @@ ul.wpglobus-important li {
 input.wpglobus-customize-control {
   border-left: 3px solid blue;
 }
+@media screen and (max-width: 640px) {
+  .customize-controls-preview-toggle {
+    left: 88px;
+  }
+}
 /*# sourceMappingURL=wpglobus-admin.css.map */

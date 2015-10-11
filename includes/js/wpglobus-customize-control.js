@@ -57,7 +57,8 @@ jQuery(document).ready(function ($) {
 			});		
 		},	
 		addLanguageSelector: function() {
-			$('<a style="margin-left:50px;" class="customize-controls-close wpglobus-customize-selector"><span class="wpglobus-globe"></span></a>').insertAfter('#customize-header-actions .spinner');	
+			//$('<a style="margin-left:48px;" class="customize-controls-close wpglobus-customize-selector"><span class="wpglobus-globe"></span></a>').insertAfter('#customize-header-actions .spinner');	
+			$('<a style="margin-left:48px;" class="customize-controls-close wpglobus-customize-selector"><span class="wpglobus-globe"></span></a>').insertAfter('.customize-controls-preview-toggle');	
 			$('.wpglobus-customize-selector').html( api.selectorHtml.replace('{{language}}', WPGlobusCoreData.language) );
 		},
 		setPosition: function(e) {
