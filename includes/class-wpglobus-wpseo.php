@@ -393,7 +393,13 @@ class WPGlobus_WPSEO {
 					/* @todo maybe need more investigation */
 					$permalink['action'] = 'complete';
 				} else {
-					$permalink['action'] = '';
+					if ( 'publish' != $post->post_status ) {
+						/**
+						 * We cannot get post-name-full to make correct url here ( for draft & auto-draft ). We do it in JS
+						 * @see var wpseosnippet_url in wpglobus-wpseo-**.js
+						 */
+						$permalink['action'] = '';
+					}	
 				}			?>
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
 				     data-language="<?php echo $language; ?>"
