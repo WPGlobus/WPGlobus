@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
 	wp.customize( 'wpglobus_blogname', function( value ) {
 		value.bind( function( newval ) {
 			$( '.site-title a, #site-title a' ).html( newval );
+			$( 'a.site-title' ).html( newval ); // https://wordpress.org/themes/customizr/
 		} );
 	} );
 	
@@ -26,5 +27,6 @@ jQuery(document).ready(function ($) {
 	setTimeout(function(){
 		$( '.site-title a, #site-title a' ).html( WPGlobusCustomize.blogname );
 		$( '.site-description, #site-description' ).html( WPGlobusCustomize.blogdescription );
+		$( 'a.site-title' ).html( WPGlobusCustomize.blogname ); // https://wordpress.org/themes/customizr/
 	}, 500);
 });	
