@@ -59,10 +59,21 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 			$this->get_config();
 			
 			if ( ! empty( $this->config['customize_texts'] ) ) {
+				$section = '';
 				foreach ( $this->config['customize_texts'] as $field_name => $field_value ) {
-					$element = $this->get_element( $field_name, $field_value );
-					$keys = array_keys( $element );
-					$elements[ $keys[0] ] = $element[ $keys[0] ];
+					$is_element = true;
+					if ( 'control_section' == $field_name ) {
+						$section = $field_value;
+						$is_element = false;
+					}	
+					
+					if ( ! empty( $section ) && $is_element ) {
+						$field_value['section'] = $section;
+						$element = $this->get_element( $field_name, $field_value );
+						$keys = array_keys( $element );
+						$elements[ $keys[0] ] = $element[ $keys[0] ];
+					}
+					
 				}
 				if ( ! empty( $elements ) ) {
 					$this->elements = $elements;	

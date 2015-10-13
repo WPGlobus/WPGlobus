@@ -1,0 +1,29 @@
+{
+    "version": "1",
+    "admin_texts": {
+        "ample_slider_title1": "text",
+        "ample_slider_button_text1": "textarea"
+    },
+	"customize_texts": {
+		"control_section": "zerif_aboutus_main_section",
+        "zerif_aboutus_title": {
+			"type": "text"
+		},
+        "zerif_aboutus_subtitle": {
+			"type": "text"
+		},
+        "zerif_aboutus_text": {
+			"type": "text"
+		},
+		"zerif_aboutus_biglefttitle": {
+			"type": "text"
+		},
+		"control_section": "zerif_aboutus_feat1_section",
+		"zerif_aboutus_feature1_title": {
+			"type": "text"
+		},
+		"zerif_aboutus_feature1_text": {
+			"type": "text"
+		}
+	}
+}
