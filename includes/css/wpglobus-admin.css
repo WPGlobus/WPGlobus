@@ -199,8 +199,8 @@ ul.wpglobus-important li {
   content: "\f319";
   font-size: 20px;
 }
-input.wpglobus-customize-control {
-  border-left: 3px solid blue;
+.wpglobus-customize-control {
+  border-left: 3px solid blue !important;
 }
 @media screen and (max-width: 640px) {
   .customize-controls-preview-toggle {
