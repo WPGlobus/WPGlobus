@@ -165,16 +165,25 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 
 			$field_name_origin  = str_replace( array('[', ']'), array('-', ''), $fdname );
 			$field_name 		= 'wpglobus_' . str_replace( array('[', ']'), array('_', ''), $fdname );
-			
+
 			if ( empty( $value['type'] ) ) {
-				$element = 'input';
-			} else {
-				if ( 'text' == $value['type'] || 'input' == $value['type'] ) {
-					$element = 'input';
-				} else {
-					$element = $value['type'];
-				}
-			}		
+				$value['type'] = 'text';
+			}
+
+			$element = 'input';
+			if ( 'textarea' === $value['type'] ) {
+				$element = $value['type'];
+			}
+
+//			if ( empty( $value['type'] ) ) {
+//				$element = 'input';
+//			} else {
+//				if ( 'text' == $value['type'] || 'input' == $value['type'] ) {
+//					$element = 'input';
+//				} else {
+//					$element = $value['type'];
+//				}
+//			}
 			
 			$e[ $field_name ] = array(
 				'section' 	=> empty( $value['section'] ) ? '' : $value['section'],
