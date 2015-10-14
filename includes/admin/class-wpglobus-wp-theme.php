@@ -166,20 +166,26 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 			$field_name_origin  = str_replace( array('[', ']'), array('-', ''), $fdname );
 			$field_name 		= 'wpglobus_' . str_replace( array('[', ']'), array('_', ''), $fdname );
 			
-			$type = '';
-			if ( ! empty( $value['type'] ) && 'text' == $value['type'] ) {
-				$type = 'input';
-			}
+			if ( empty( $value['type'] ) ) {
+				$element = 'input';
+			} else {
+				if ( 'text' == $value['type'] || 'input' == $value['type'] ) {
+					$element = 'input';
+				} else {
+					$element = $value['type'];
+				}
+			}		
 			
 			$e[ $field_name ] = array(
 				'section' 	=> empty( $value['section'] ) ? '' : $value['section'],
 				'origin' 	=> $fdname,
-				'origin_element' 	=> '#customize-control-' . $field_name_origin . ' ' . $type,
+				'origin_element' 	=> '#customize-control-' . $field_name_origin . ' ' . $element,
 				'origin_title' 		=> '#customize-control-' . $field_name_origin . ' .customize-control-title',
 				'origin_parent' 	=> '#customize-control-' . $field_name_origin,
 				'parent' 			=> '#customize-control-' . $field_name,
-				'element' 			=> '#customize-control-' . $field_name . ' ' . $type,
+				'element' 			=> '#customize-control-' . $field_name . ' ' . $element,
 				'value'  			=> '',
+				'type'  			=> empty( $value['type'] ) ? '' : $value['type'],
 				'title'				=> '#customize-control-' . $field_name . ' .customize-control-title',
 				'options' => array(
 					'setValue'		=> true,
