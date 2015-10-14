@@ -59,25 +59,23 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 			$this->get_config();
 			
 			if ( ! empty( $this->config['customize_texts'] ) ) {
-				$section = '';
-				foreach ( $this->config['customize_texts'] as $field_name => $field_value ) {
-					$is_element = true;
-					if ( 'control_section' == $field_name ) {
-						$section = $field_value;
-						$is_element = false;
-					}	
-					
-					if ( ! empty( $section ) && $is_element ) {
+
+				/**
+				 * Work with customizer texts
+				 */			
+				foreach ( $this->config['customize_texts'] as $section => $fields ) {
+					foreach ( $fields as $field_name => $field_value ) {
 						$field_value['section'] = $section;
 						$element = $this->get_element( $field_name, $field_value );
 						$keys = array_keys( $element );
 						$elements[ $keys[0] ] = $element[ $keys[0] ];
 					}
-					
 				}
+			
 				if ( ! empty( $elements ) ) {
 					$this->elements = $elements;	
 				}	
+			
 			}
 			
 			if ( ! empty( $this->config ) ) {
@@ -119,11 +117,22 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 					foreach( $this->elements as $key=>$value ) {
 						$elements[$key] = $value;
 					}		
-				} else {	
+				} else {
 					if ( ! empty( $this->config['admin_texts'] ) ) {
-						foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
-							$elements[] = $field_name;
+
+						if ( '1' == $this->config['version'] ) {
+							foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
+								$elements[] = $field_name;
+							}
+						} else {
+							foreach ( $this->config['admin_texts'] as $field_name => $field_value ) {
+								/**
+								 * reserve $field_value for future capabilities
+								 */
+								$elements[] = $field_name;
+							}
 						}
+						
 					}
 				}
 
@@ -288,7 +297,10 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 					$this->config_from = $this->wpml_config_file;
 					break;
 			};
-
+			
+			if ( empty( $this->config['version'] ) ) {
+				$this->config['version'] = '1';	
+			}	
 
 		}
 
