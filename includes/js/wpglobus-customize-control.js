@@ -40,7 +40,7 @@ jQuery(document).ready(function ($) {
 			api.setTitle();
 			$.each(WPGlobusCoreData.customize.addElements, function(i,e){
 				$(e.element).attr('id',i).val(e.value).trigger('change');
-				$(e.element).addClass('wpglobus-customize-control');
+				//$(e.element).addClass('wpglobus-customize-control');
 				if ( typeof e.options !== 'undefined' ) {
 					if ( typeof e.options.setValue !== 'undefined' && e.options.setValue ) {
 						$(e.element).val( WPGlobusCore.TextFilter( $(e.origin_element).val(), WPGlobusCoreData.language, 'RETURN_EMPTY' ) );	

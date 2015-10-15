@@ -55,7 +55,10 @@ class WPGlobus_Customize {
 				'type'     => 'text',
 				'section'  => 'title_tagline',
 				'settings' => 'wpglobus_blogname',
-				'values'   => WPGlobus_Core::text_filter( get_bloginfo( 'name' ), WPGlobus::Config()->language )
+				'values'   => WPGlobus_Core::text_filter( get_bloginfo( 'name' ), WPGlobus::Config()->language ),
+				'input_attrs' => array(
+					'class' => 'wpglobus-customize-control'
+				)
 			)
 		) );
 
@@ -71,7 +74,10 @@ class WPGlobus_Customize {
 				'label'    => __( 'Tagline' ),
 				'type'     => 'text',
 				'section'  => 'title_tagline',
-				'settings' => 'wpglobus_blogdescription'
+				'settings' => 'wpglobus_blogdescription',
+				'input_attrs' => array(
+					'class' => 'wpglobus-customize-control'
+				)
 			)
 		) );
 		
@@ -98,7 +104,10 @@ class WPGlobus_Customize {
 					'label'    => '{{title}}',
 					'type'     => $value['type'],
 					'section'  => $value['section'],
-					'settings' => $key
+					'settings' => $key,
+					'input_attrs' => array(
+						'class' => 'wpglobus-customize-control'
+					)
 				)
 			) );
 			
