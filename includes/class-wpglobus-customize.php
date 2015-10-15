@@ -84,6 +84,11 @@ class WPGlobus_Customize {
 
 		foreach( WPGlobus::Config()->WPGlobus_WP_Theme->elements as $key=>$value ) {
 
+			/**
+			 * $value['type']
+			 * @see https://codex.wordpress.org/Class_Reference/WP_Customize_Control  for Input Types 
+			 */ 
+		
 			$wp_customize->add_setting( $key, array(
 				'default' => ''
 			) );			

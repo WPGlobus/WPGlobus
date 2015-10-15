@@ -170,6 +170,9 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 				$value['type'] = 'text';
 			}
 
+			/**
+			 * @see https://codex.wordpress.org/Class_Reference/WP_Customize_Control for Input Types 
+			 */			
 			$element = 'input';
 			if ( 'textarea' === $value['type'] ) {
 				$element = $value['type'];
@@ -194,7 +197,7 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 				'parent' 			=> '#customize-control-' . $field_name,
 				'element' 			=> '#customize-control-' . $field_name . ' ' . $element,
 				'value'  			=> '',
-				'type'  			=> empty( $value['type'] ) ? '' : $value['type'],
+				'type'  			=> $value['type'],
 				'title'				=> '#customize-control-' . $field_name . ' .customize-control-title',
 				'options' => array(
 					'setValue'		=> true,
