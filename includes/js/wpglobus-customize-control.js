@@ -18,7 +18,6 @@ jQuery(document).ready(function ($) {
 	}
 	
 	var api = {
-		e: '',
 		languages: {},
 		index: 0,
 		length: 0,
@@ -40,9 +39,9 @@ jQuery(document).ready(function ($) {
 			api.setTitle();
 			$.each(WPGlobusCoreData.customize.addElements, function(i,e){
 				$(e.element).attr('id',i).val(e.value).trigger('change');
-				//$(e.element).addClass('wpglobus-customize-control');
 				if ( typeof e.options !== 'undefined' ) {
 					if ( typeof e.options.setValue !== 'undefined' && e.options.setValue ) {
+						$(e.element).data( 'source', $(e.origin_element).val() );
 						$(e.element).val( WPGlobusCore.TextFilter( $(e.origin_element).val(), WPGlobusCoreData.language, 'RETURN_EMPTY' ) );	
 					}
 					if ( typeof e.options.setLabel !== 'undefined' && e.options.setLabel ) {
@@ -50,9 +49,16 @@ jQuery(document).ready(function ($) {
 					}
 				}	
 				$(e.element).on('change',function (ev){
-					var $e = $( WPGlobusCoreData.customize.addElements[$(this).data('customize-setting-link')].origin_element );
-					$e.val( WPGlobusCore.getString( $e.val(), $(this).val() ) );
-					//$e.trigger('change');
+					var $t = $(this),
+						$e = $( WPGlobusCoreData.customize.addElements[$(this).data('customize-setting-link')].origin_element );
+					
+					$t.data( 'source', WPGlobusCore.getString( $t.data('source'), $t.val() ) );
+					if ( $t.hasClass('wpglobus-control-url') ) {
+						$e.val( encodeURIComponent( WPGlobusCore.getString( $e.val(), $t.val() ) ) );
+					} else {
+						$e.val( WPGlobusCore.getString( $e.val(), $t.val() ) );
+					}	
+					$e.trigger('change');
 				});		
 			});		
 		},	
@@ -98,6 +104,9 @@ jQuery(document).ready(function ($) {
 				
 				$('.wpglobus-customize-control').each(function(i,e){
 					var s = $( WPGlobusCoreData.customize.addElements[$(e).data('customize-setting-link')].origin_element );
+					if ( $(e).hasClass('wpglobus-control-url') ) {
+						s.val( $(e).data('source') );
+					}	
 					$(e).val( WPGlobusCore.TextFilter( s.val(), WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
 				});
 				
