@@ -33,8 +33,42 @@ class WPGlobus_Customize {
 			'WPGlobus_Customize',
 			'action__customize_controls_enqueue_scripts'
 		), 1000 );
+		
+		if ( is_admin() || WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
+			
+			add_filter( 'clean_url', array(
+				'WPGlobus_Customize',
+				'filter__clean_url'
+			), 10, 3 );
+		
+		}	
 	}
 
+	/**
+	 * Filter a string to check translations for URL.
+	 * Now check ':::' mark as delemiter. 
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $url 				The cleaned URL.
+	 * @param string $original_url      The URL prior to cleaning.
+	 * @param string $_context
+	 */	
+	public static function filter__clean_url( $url, $original_url, $_context ) {
+
+		if ( false !== strpos($original_url, ':::') ) {
+			$arr = explode( ':::', $original_url );
+			foreach( $arr as $k=>$val ) {
+				if ( 'null' != $val ) {
+					$arr1[WPGlobus::Config()->enabled_languages[$k]] = $val;
+				}	
+			}	
+			return WPGlobus_Utils::build_multilingual_string( $arr1 );	
+		}
+		
+		return $url;
+	}
+	
 	/**
 	 * Add multilingual controls.
 	 * The original controls will be hidden.
@@ -94,7 +128,6 @@ class WPGlobus_Customize {
 			 * $value['type']
 			 * @see https://codex.wordpress.org/Class_Reference/WP_Customize_Control  for Input Types 
 			 */ 
-		
 			$wp_customize->add_setting( $key, array(
 				'default' => ''
 			) );			
@@ -106,7 +139,9 @@ class WPGlobus_Customize {
 					'section'  => $value['section'],
 					'settings' => $key,
 					'input_attrs' => array(
-						'class' => 'wpglobus-customize-control'
+						'class' => 'wpglobus-customize-control wpglobus-control-' . $value['type'],
+						'data-type' => $value['type'],
+						'data-source' => ''
 					)
 				)
 			) );
@@ -114,7 +149,7 @@ class WPGlobus_Customize {
 		}	
 
 	}
-
+	
 	/**
 	 * Load Customize Preview JS
 	 * Used by hook: 'customize_preview_init'
