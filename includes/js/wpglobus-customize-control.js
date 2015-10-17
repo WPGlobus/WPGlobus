@@ -73,8 +73,10 @@ jQuery(document).ready(function ($) {
 						$e.val( api.getString( $t.data('source') ) );
 					} else {
 						$e.val( WPGlobusCore.getString( $e.val(), $t.val() ) );
+					}
+					if ( ! $t.hasClass('wpglobus-not-trigger-change') ) {
+						$e.trigger('change');
 					}	
-					$e.trigger('change');
 				});		
 			});		
 		},	
@@ -96,8 +98,10 @@ jQuery(document).ready(function ($) {
 				}	
 				api.positionSet = true;
 				$.each(WPGlobusCoreData.customize.addElements, function(i,e){
-					$(e.origin_parent).css({'display':'none'});
-					$(e.origin_parent+' label' ).css({'display':'none'}); // from WP4.3				
+					if ( e.origin != "zerif_bigtitle_redbutton_url" ) {
+						$(e.origin_parent).css({'display':'none'});
+						$(e.origin_parent+' label' ).css({'display':'none'}); // from WP4.3				
+					}			
 					if ( typeof e.options !== 'undefined' ) {
 						api.setPosition(e);
 					}	

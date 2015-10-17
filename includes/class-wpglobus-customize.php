@@ -91,7 +91,7 @@ class WPGlobus_Customize {
 				'settings' => 'wpglobus_blogname',
 				'values'   => WPGlobus_Core::text_filter( get_bloginfo( 'name' ), WPGlobus::Config()->language ),
 				'input_attrs' => array(
-					'class' => 'wpglobus-customize-control'
+					'class' => 'wpglobus-customize-control wpglobus-not-trigger-change'
 				)
 			)
 		) );
@@ -110,7 +110,7 @@ class WPGlobus_Customize {
 				'section'  => 'title_tagline',
 				'settings' => 'wpglobus_blogdescription',
 				'input_attrs' => array(
-					'class' => 'wpglobus-customize-control'
+					'class' => 'wpglobus-customize-control wpglobus-not-trigger-change'
 				)
 			)
 		) );
