@@ -29,6 +29,7 @@ class WPGlobus_WP {
 			(
 				self::is_http_post_action( 'inline-save' ) ||
 				self::is_http_post_action( 'save-widget' ) ||
+				self::is_http_post_action( 'customize_save' ) ||
 				self::is_http_get_action( 'ajax-tag-search' )
 			)
 		);
