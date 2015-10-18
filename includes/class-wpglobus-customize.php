@@ -38,35 +38,40 @@ class WPGlobus_Customize {
 			add_filter( 'clean_url', array(
 				'WPGlobus_Customize',
 				'filter__clean_url'
-			), 10, 3 );
+			), 10, 2 );
 		
 		}	
 	}
 
 	/**
 	 * Filter a string to check translations for URL.
-	 * Now check ':::' mark as delemiter. 
-	 * For correct work value of $url should begin with URL for default language.
-	 * @see 'clean_url' filter
+	 * We build multilingual URLs in customizer using the ':::' delimiter.
+	 * See wpglobus-customize-control.js
 	 *
+	 * @note  To work correctly, value of $url should begin with URL for default language.
+	 * @see   esc_url() - the 'clean_url' filter
 	 * @since 1.3.0
 	 *
-	 * @param string $url 				The cleaned URL.
-	 * @param string $original_url      The URL prior to cleaning.
-	 * @param string $_context
-	 */	
-	public static function filter__clean_url( $url, $original_url, $_context ) {
+	 * @param string $url          The cleaned URL.
+	 * @param string $original_url The URL prior to cleaning.
+	 *
+	 * @return string
+	 */
+	public static function filter__clean_url( $url, $original_url ) {
 
-		if ( false !== strpos($original_url, ':::') ) {
-			$arr = explode( ':::', $original_url );
-			foreach( $arr as $k=>$val ) {
-				if ( 'null' != $val ) {
-					$arr1[WPGlobus::Config()->enabled_languages[$k]] = $val;
-				}	
-			}	
-			return WPGlobus_Utils::build_multilingual_string( $arr1 );	
+		if ( false !== strpos( $original_url, ':::' ) ) {
+			$arr1 = array();
+			$arr  = explode( ':::', $original_url );
+			foreach ( $arr as $k => $val ) {
+				// Note: 'null' is a string, not real `null`.
+				if ( 'null' !== $val ) {
+					$arr1[ WPGlobus::Config()->enabled_languages[ $k ] ] = $val;
+				}
+			}
+
+			return WPGlobus_Utils::build_multilingual_string( $arr1 );
 		}
-		
+
 		return $url;
 	}
 	

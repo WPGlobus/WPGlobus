@@ -92,6 +92,8 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 		 * Add custom fields to WPGlobusDialog
 		 *
 		 * @param array $data
+		 * @param string $key
+		 *
 		 * @return array
 		 */
 		public function custom_data( $data, $key ) {
@@ -113,14 +115,14 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 
 			} elseif ( $this->config_from === $this->wpglobus_config_file ) {
 
-				if ( 'customize' == $key ) {
+				if ( 'customize' === $key ) {
 					foreach( $this->elements as $key=>$value ) {
 						$elements[$key] = $value;
 					}		
 				} else {
 					if ( ! empty( $this->config['admin_texts'] ) ) {
 
-						if ( '1' == $this->config['version'] ) {
+						if ( '1' === $this->config['version'] ) {
 							foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
 								$elements[] = $field_name;
 							}

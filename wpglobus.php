@@ -56,19 +56,27 @@ WPGlobus::Config();
 require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
+if ( defined( 'WPSEO_VERSION' ) ) {
+	require_once 'includes/class-wpglobus-wpseo.php';
+	WPGlobus_WPSEO::controller();
+}
+
 /**
- * Fix multilingual strings in `Customize`
+ * Theme compatibility
+ */
+
+/**
+ * Fix multilingual strings in basic `Customize`
  *
  * @since 1.2.1
  */
 require_once 'includes/class-wpglobus-customize.php';
 WPGlobus_Customize::controller();
 
-if ( defined( 'WPSEO_VERSION' ) ) {
-	require_once 'includes/class-wpglobus-wpseo.php';
-	WPGlobus_WPSEO::controller();
-}
-
+/**
+ * Support of theme option panels and customizer
+ * @since 1.3.0
+ */
 if ( WPGlobus_WP::in_wp_admin() && ! WPGlobus_WP::is_admin_doing_ajax() ) {
 	require_once 'includes/admin/class-wpglobus-wp-theme.php';
 	WPGlobus::Config()->WPGlobus_WP_Theme = new WPGlobus_WP_Theme();
