@@ -34,8 +34,8 @@ class WPGlobus_Customize {
 			'action__customize_controls_enqueue_scripts'
 		), 1000 );
 		
-		if ( is_admin() || WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
-			
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
+
 			add_filter( 'clean_url', array(
 				'WPGlobus_Customize',
 				'filter__clean_url'
