@@ -34,8 +34,7 @@ class WPGlobus_Customize {
 			'action__customize_controls_enqueue_scripts'
 		), 1000 );
 		
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
-
+		if ( WPGlobus_WP::is_admin_doing_ajax() ) {
 			add_filter( 'clean_url', array(
 				'WPGlobus_Customize',
 				'filter__clean_url'
@@ -47,6 +46,8 @@ class WPGlobus_Customize {
 	/**
 	 * Filter a string to check translations for URL.
 	 * Now check ':::' mark as delemiter. 
+	 * For correct work value of $url should begin with URL for default language.
+	 * @see 'clean_url' filter
 	 *
 	 * @since 1.3.0
 	 *
