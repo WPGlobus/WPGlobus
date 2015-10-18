@@ -136,6 +136,7 @@ class WPGlobus_Customize {
 			$wp_customize->add_control( new WP_Customize_Control( $wp_customize,
 				$key, array(
 					'label'    => '{{title}}',
+					'description'    => '{{description}}',
 					'type'     => $value['type'],
 					'section'  => $value['section'],
 					'settings' => $key,

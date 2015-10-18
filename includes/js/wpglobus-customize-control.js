@@ -68,6 +68,7 @@ jQuery(document).ready(function ($) {
 					}
 					if ( typeof e.options.setLabel !== 'undefined' && e.options.setLabel ) {
 						$(e.title).text( $(e.origin_title).text() );
+						$(e.description).text( $(e.origin_description).text() );
 					}
 				}	
 				$e.on('change',function (ev){
