@@ -50,13 +50,19 @@ jQuery(document).ready(function ($) {
 			api.setTitle();
 			var value;
 			$.each(WPGlobusCoreData.customize.addElements, function(i,e){
-				$(e.element).attr('id',i).val(e.value).trigger('change');
+				var $e = $(e.element);
+				$e.attr('id',i).val(e.value).trigger('change');
+				if ( e.type == 'textarea' ) {
+					if ( typeof e.textarea_attrs !== 'undefined' ) {
+						$e.addClass( e.textarea_attrs.class );
+					}
+				}	
 				if ( typeof e.options !== 'undefined' ) {
 					if ( typeof e.options.setValue !== 'undefined' && e.options.setValue ) {
 						value = $(e.origin_element).val();
-						$(e.element).data( 'source', value );
-						$(e.element).val( WPGlobusCore.TextFilter( value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
-						if ( $(e.element).hasClass('wpglobus-control-url') ) {
+						$e.data( 'source', value );
+						$e.val( WPGlobusCore.TextFilter( value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+						if ( $e.hasClass('wpglobus-control-url') ) {
 							$(e.origin_element).val( api.getString( value ) );	
 						}	
 					}
@@ -64,18 +70,18 @@ jQuery(document).ready(function ($) {
 						$(e.title).text( $(e.origin_title).text() );
 					}
 				}	
-				$(e.element).on('change',function (ev){
+				$e.on('change',function (ev){
 					var $t = $(this),
-						$e = $( WPGlobusCoreData.customize.addElements[$(this).data('customize-setting-link')].origin_element );
+						$el = $( WPGlobusCoreData.customize.addElements[$(this).data('customize-setting-link')].origin_element );
 					
 					$t.data( 'source', WPGlobusCore.getString( $t.data('source'), $t.val() ) );
 					if ( $t.hasClass('wpglobus-control-url') ) {
-						$e.val( api.getString( $t.data('source') ) );
+						$el.val( api.getString( $t.data('source') ) );
 					} else {
-						$e.val( WPGlobusCore.getString( $e.val(), $t.val() ) );
+						$el.val( WPGlobusCore.getString( $el.val(), $t.val() ) );
 					}
 					if ( ! $t.hasClass('wpglobus-not-trigger-change') ) {
-						$e.trigger('change');
+						$el.trigger('change');
 					}	
 				});		
 			});		
@@ -98,10 +104,8 @@ jQuery(document).ready(function ($) {
 				}	
 				api.positionSet = true;
 				$.each(WPGlobusCoreData.customize.addElements, function(i,e){
-					if ( e.origin != "zerif_bigtitle_redbutton_url" ) {
-						$(e.origin_parent).css({'display':'none'});
-						$(e.origin_parent+' label' ).css({'display':'none'}); // from WP4.3				
-					}			
+					$(e.origin_parent).css({'display':'none'});
+					$(e.origin_parent+' label' ).css({'display':'none'}); // from WP4.3				
 					if ( typeof e.options !== 'undefined' ) {
 						api.setPosition(e);
 					}	

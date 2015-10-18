@@ -174,8 +174,15 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 			 * @see https://codex.wordpress.org/Class_Reference/WP_Customize_Control for Input Types 
 			 */			
 			$element = 'input';
+			$textarea_attrs = array();
 			if ( 'textarea' === $value['type'] ) {
 				$element = $value['type'];
+				/**
+				 * Make textarea_attrs is like input_attrs @see class-wpglobus-customize.php
+				 */
+				$textarea_attrs = array(
+					'class' => 'wpglobus-customize-control wpglobus-control-textarea'
+				);
 			}
 
 //			if ( empty( $value['type'] ) ) {
@@ -203,8 +210,15 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 					'setValue'		=> true,
 					'setLabel'		=> true,
 					'setPosition'	=> true
-				)
+				),
+				'textarea_attrs' => array()
 			);
+			
+			if ( empty( $textarea_attrs ) ) {
+				unset( $e[ $field_name ][ 'textarea_attrs' ] );	
+			} else {	
+				$e[ $field_name ][ 'textarea_attrs' ] = $textarea_attrs;
+			}
 			
 			return $e;
 			
