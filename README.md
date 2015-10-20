@@ -147,6 +147,14 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.3.0 ###
+
+* ADDED:
+	* `wpglobus-config.json` now supports Customizer.
+	* [Repository of theme configuration files](https://github.com/WPGlobus/wpglobus-config-samples) (W.I.P.)
+* FIXED:
+	* Bug in WordPress SEO support module (was appending the site name to the SEO Title).
+
 ### 1.2.9 ###
 
 * FIXED:
@@ -179,15 +187,6 @@ No known backward incompatibility issues.
 * COMPATIBILITY:
 	* All In One SEO Pack 2.2.7.2
 	* ACF Pro 5.3.0
-
-### 1.2.5 ###
-
-* FIXED:
-	* Core filters refactored to better support sites with no English.
-	* Multilingual Excerpt metaboxes styled to 4-lines height.
-	* Several code changes related to WordPress and 3rd party plugin upgrades.
-* ADDED:
-	* Core support for the Black Studio TinyMCE widget.
 
 ### Earlier versions ###
 

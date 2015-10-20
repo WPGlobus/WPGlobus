@@ -21,6 +21,8 @@ class WPGlobus_WP {
 	 * @todo There should be other actions. See $core_actions_get in admin-ajax.php
 	 *       Can also check $GLOBALS['_SERVER']['HTTP_REFERER']
 	 *       and $GLOBALS['current_screen']->in_admin()
+	 *
+	 * @todo add $action parameter for case to check for it only
 	 * @return bool
 	 */
 	public static function is_admin_doing_ajax() {
@@ -29,6 +31,7 @@ class WPGlobus_WP {
 			(
 				self::is_http_post_action( 'inline-save' ) ||
 				self::is_http_post_action( 'save-widget' ) ||
+				self::is_http_post_action( 'customize_save' ) ||
 				self::is_http_get_action( 'ajax-tag-search' )
 			)
 		);

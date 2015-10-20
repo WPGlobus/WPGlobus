@@ -183,6 +183,12 @@ class WPGlobus_Config {
 	public $extended_options = array();
 
 	/**
+	 * @since 1.3.0
+	 * @var WPGlobus_WP_Theme $WPGlobus_WP_Theme
+	 */
+	public $WPGlobus_WP_Theme;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {

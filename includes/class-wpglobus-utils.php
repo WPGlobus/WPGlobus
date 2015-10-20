@@ -227,8 +227,13 @@ class WPGlobus_Utils {
 	 */
 	public static function build_multilingual_string( $translations ) {
 		$sz = '';
+		$single = 1 == count( $translations ) ? true : false;	
 		foreach ( $translations as $language => $text ) {
-			$sz .= WPGlobus::add_locale_marks( $text, $language );
+			if ( $single && $language == WPGlobus::Config()->default_language ) {
+				$sz = $text;
+			} else {	
+				$sz .= WPGlobus::add_locale_marks( $text, $language );
+			}	
 		}
 
 		return $sz;

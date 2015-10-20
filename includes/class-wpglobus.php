@@ -1132,17 +1132,19 @@ class WPGlobus {
 						'element' => '#customize-info .preview-notice',
 						'html' => sprintf( __( 'You are customizing %s' ), '<strong class="theme-name site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' )
 					),
-					'elements' => array(
+					'addElements' => array(
 						'wpglobus_blogname' => array(
-							'origin' => 'blogname',
-							'id' => '#customize-control-wpglobus_blogname input',
+							'origin'		 => 'blogname',
 							'origin_element' => '#customize-control-blogname input',
+							'origin_parent'	 => '#customize-control-blogname',
+							'element' => '#customize-control-wpglobus_blogname input',
 							'value'  => WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY )
 						),	
 						'wpglobus_blogdescription' => array(
-							'origin' => 'blogdescription',
-							'id' => '#customize-control-wpglobus_blogdescription input',
+							'origin' 		 => 'blogdescription',
 							'origin_element' => '#customize-control-blogdescription input',
+							'origin_parent'  => '#customize-control-blogdescription',
+							'element' => '#customize-control-wpglobus_blogdescription input',
 							'value'  => WPGlobus_Core::text_filter( get_option( 'blogdescription' ), WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY )
 						)
 					)
@@ -1209,8 +1211,9 @@ class WPGlobus {
 			 * @since 1.2.9
 			 *
 			 * @param array $page_data_values An array with custom data or null.
+			 * @param string $page_data_key Data key. @since 1.3.0
 			 */			
-			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values );			
+			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values, $page_data_key );			
 			
 			wp_localize_script(
 				'wpglobus-admin',

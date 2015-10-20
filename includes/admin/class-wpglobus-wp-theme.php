@@ -40,6 +40,8 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 		 * Source of config
 		 */
 		public $config_from = '';
+		
+		public $elements  = array();
 
 		/** */
 		public function __construct() {
@@ -55,10 +57,30 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 			$this->theme_dir['parent'] = get_template_directory();
 
 			$this->get_config();
+			
+			if ( ! empty( $this->config['customize_texts'] ) ) {
 
+				/**
+				 * Work with customizer texts
+				 */			
+				foreach ( $this->config['customize_texts'] as $section => $fields ) {
+					foreach ( $fields as $field_name => $field_value ) {
+						$field_value['section'] = $section;
+						$element = $this->get_element( $field_name, $field_value );
+						$keys = array_keys( $element );
+						$elements[ $keys[0] ] = $element[ $keys[0] ];
+					}
+				}
+			
+				if ( ! empty( $elements ) ) {
+					$this->elements = $elements;	
+				}	
+			
+			}
+			
 			if ( ! empty( $this->config ) ) {
 
-				add_filter( 'wpglobus_localize_custom_data', array( $this, 'custom_data' ) );
+				add_filter( 'wpglobus_localize_custom_data', array( $this, 'custom_data' ), 10, 2 );
 
 				add_filter( 'wpglobus_enabled_pages', array( $this, 'enable_page' ) );
 
@@ -70,10 +92,12 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 		 * Add custom fields to WPGlobusDialog
 		 *
 		 * @param array $data
+		 * @param string $key
+		 *
 		 * @return array
 		 */
-		public function custom_data( $data ) {
-
+		public function custom_data( $data, $key ) {
+		
 			$elements = array();
 
 			if ( $this->config_from === $this->wpml_config_file ) {
@@ -91,9 +115,26 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 
 			} elseif ( $this->config_from === $this->wpglobus_config_file ) {
 
-				if ( ! empty( $this->config['admin_texts'] ) ) {
-					foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
-						$elements[] = $field_name;
+				if ( 'customize' === $key ) {
+					foreach( $this->elements as $key=>$value ) {
+						$elements[$key] = $value;
+					}		
+				} else {
+					if ( ! empty( $this->config['admin_texts'] ) ) {
+
+						if ( '1' === $this->config['version'] ) {
+							foreach ( $this->config['admin_texts'] as $field_name => $field_type ) {
+								$elements[] = $field_name;
+							}
+						} else {
+							foreach ( $this->config['admin_texts'] as $field_name => $field_value ) {
+								/**
+								 * reserve $field_value for future capabilities
+								 */
+								$elements[] = $field_name;
+							}
+						}
+						
 					}
 				}
 
@@ -114,6 +155,79 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 
 		}
 
+		/**
+		 * Get array of element's data
+		 *
+		 * @since 1.3.0
+		 * @param string $fdname Name of element from config
+		 * @param array $value Array of element's data from config
+		 * @return array
+		 */
+		public function get_element( $fdname, $value ) {
+
+			$field_name_origin  = str_replace( array('[', ']'), array('-', ''), $fdname );
+			$field_name 		= 'wpglobus_' . str_replace( array('[', ']'), array('_', ''), $fdname );
+
+			if ( empty( $value['type'] ) ) {
+				$value['type'] = 'text';
+			}
+
+			/**
+			 * @see https://codex.wordpress.org/Class_Reference/WP_Customize_Control for Input Types 
+			 */			
+			$element = 'input';
+			$textarea_attrs = array();
+			if ( 'textarea' === $value['type'] ) {
+				$element = $value['type'];
+				/**
+				 * Make textarea_attrs is like input_attrs @see class-wpglobus-customize.php
+				 */
+				$textarea_attrs = array(
+					'class' => 'wpglobus-customize-control wpglobus-control-textarea'
+				);
+			}
+
+//			if ( empty( $value['type'] ) ) {
+//				$element = 'input';
+//			} else {
+//				if ( 'text' == $value['type'] || 'input' == $value['type'] ) {
+//					$element = 'input';
+//				} else {
+//					$element = $value['type'];
+//				}
+//			}
+			
+			$e[ $field_name ] = array(
+				'section' 	=> empty( $value['section'] ) ? '' : $value['section'],
+				'origin' 	=> $fdname,
+				'origin_element' 		=> '#customize-control-' . $field_name_origin . ' ' . $element,
+				'origin_title' 			=> '#customize-control-' . $field_name_origin . ' .customize-control-title',
+				'origin_description'	=> '#customize-control-' . $field_name_origin . ' .description.customize-control-description',
+				'origin_parent' 		=> '#customize-control-' . $field_name_origin,
+				'parent' 				=> '#customize-control-' . $field_name,
+				'element' 				=> '#customize-control-' . $field_name . ' ' . $element,
+				'value'  				=> '',
+				'type'  				=> $value['type'],
+				'title'					=> '#customize-control-' . $field_name . ' .customize-control-title',
+				'description'			=> '#customize-control-' . $field_name . ' .description.customize-control-description',
+				'options' => array(
+					'setValue'		=> true,
+					'setLabel'		=> true,
+					'setPosition'	=> true
+				),
+				'textarea_attrs' => array()
+			);
+			
+			if ( empty( $textarea_attrs ) ) {
+				unset( $e[ $field_name ][ 'textarea_attrs' ] );	
+			} else {	
+				$e[ $field_name ][ 'textarea_attrs' ] = $textarea_attrs;
+			}
+			
+			return $e;
+			
+		}
+		
 		/**
 		 * Get config from file
 		 */
@@ -219,7 +333,10 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 					$this->config_from = $this->wpml_config_file;
 					break;
 			};
-
+			
+			if ( empty( $this->config['version'] ) ) {
+				$this->config['version'] = '1';	
+			}	
 
 		}
 

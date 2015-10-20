@@ -2,6 +2,14 @@
 
 ## Changelog ##
 
+### 1.3.0 ###
+
+* ADDED:
+	* `wpglobus-config.json` now supports Customizer.
+	* [Repository of theme configuration files](https://github.com/WPGlobus/wpglobus-config-samples) (W.I.P.)
+* FIXED:
+	* Bug in WordPress SEO support module (was appending the site name to the SEO Title).
+
 ### 1.2.9 ###
 
 * FIXED:
