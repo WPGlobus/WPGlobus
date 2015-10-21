@@ -48,7 +48,7 @@ Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - no
 More information:
 
 * [WPGlobus Compatibility with Themes and Plugins](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/)
-* [WPGlobus Configuration File and a Theme Configuration Case Study](http://www.wpglobus.com/documentation/wpglobus-configuration-file/)
+* [WPGlobus Configuration File and a Theme Configuration Case Studies](http://www.wpglobus.com/documentation/wpglobus-configuration-file/)
 
 ### Permalinks ###
 
@@ -60,29 +60,29 @@ Please go to `Settings->Permalinks` and change the permalink structure to non-de
 
 WPGlobus may not work correctly on development servers having URLs like `//localhost/mysite` or on custom ports like `//myserver.dev:3000`. Please use a proper domain name (a fake one from `/etc/hosts` is OK) and port 80.
 
-### Admin interface translations: ###
-
-[WP-Translations](http://wp-translations.org/)
-
-* `de_DE` : Tobias Hopp, [http://www.tobiashopp.info/](http://www.tobiashopp.info/)
-* `es_ES` : Patricia Casado, [mascositas.com](http://mascositas.com/)
-* `tr_TR` : Borahan Conkeroglu, [@boracon68](https://twitter.com/boracon68)
-* `fr_FR` : FX Bénard, [WP-Translations](http://wp-translations.org/)
-* `sv_SE` : Elger Lindgren, [Bilddigital](http://bilddigital.se/)
-* `pl_PL` : [Maciej Gryniuk](http://maciej-gryniuk.tk/)
-* `ru_RU` : The WPGlobus Team (мы говорим по-русски!)
-
-**Please help us translate WPGlobus into your language!** Join the WP-Translations Team on [Transifex](https://www.transifex.com/wp-translations/wpglobus-multilingual/).
-
 ### More info and ways to contact the WPGlobus Development Team ###
 
 * [WPGlobus.com website](http://www.wpglobus.com/).
 * [Open source code on GitHub](https://github.com/WPGlobus).
-* WPGlobus on social networks:
-	* [Facebook](https://www.facebook.com/WPGlobus)
-	* [Twitter](https://twitter.com/WPGlobus)
-	* [Google Plus](https://plus.google.com/+Wpglobus)
-	* [LinkedIn](https://www.linkedin.com/company/wpglobus)
+* WPGlobus on social networks: [Facebook](https://www.facebook.com/WPGlobus), [Twitter](https://twitter.com/WPGlobus), [Google Plus](https://plus.google.com/+Wpglobus), [LinkedIn](https://www.linkedin.com/company/wpglobus).
+
+### Admin interface translations: ###
+
+`de_DE` by [Tobias Hopp](http://www.tobiashopp.info/) ~ WPGlobus ist ein Paket von mehreren WordPress-Plugins, die Möglichkeiten zur Übersetzung von Wordpress-Installationen bieten.
+
+`es_ES` by [Patricia Casado](http://mascositas.com/) ~ WPGlobus es una familia de plugins de WordPress que ayudan en la traducción de blogs de WordPress.
+
+`fr_FR` by [FX Bénard](http://wp-translations.org/) ~ WPGlobus fait partie des extensions WordPress qui vous aident à rendre les blogs et les sites WordPress multilingues.
+
+`pl_PL` by [Maciej Gryniuk](http://maciej-gryniuk.tk/) ~ WPGlobus jest rodziną wtyczek do WordPress'a pomocnych w tworzeniu wielojęzycznych blogów i stron na WordPress'ie.
+
+`ru_RU` by [The WPGlobus Team](http://www.wpglobus.com/ru/) ~ WPGlobus - это коллекция плагинов ВордПресс для создания мультиязычных сайтов.
+
+`sv_SE` by [Elger Lindgren](http://bilddigital.se/) ~ WPGlobus är en familj av WordPress-tillägg som hjälper dig att göra flerspråkiga Wordpressbloggar och webbplatser.
+
+`tr_TR` by [Borahan Conkeroglu](https://twitter.com/boracon68) ~ WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir.
+
+**Please help us translate WPGlobus into your language!**
 
 ## Installation ##
 
