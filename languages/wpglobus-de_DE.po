@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-10-06 19:52:45+00:00\n"
-"PO-Revision-Date: 2015-09-09 02:25+0000\n"
+"POT-Creation-Date: 2015-10-21 14:43:09+00:00\n"
+"PO-Revision-Date: 2015-10-17 23:36+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/de_DE/)\n"
@@ -286,12 +286,12 @@ msgstr "Die Hauptsprache kann nicht deaktiviert werden."
 msgid "*) Available after the menu is saved."
 msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
 
-#: includes/class-wpglobus.php:2576
+#: includes/class-wpglobus.php:2579
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Sie müssen schöne Permalinks aktivieren um WPGlobus verwenden zu können."
 
-#: includes/class-wpglobus.php:2578
+#: includes/class-wpglobus.php:2581
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -299,7 +299,7 @@ msgstr ""
 "Bitte gehen Sie zu Einstellungen > Permalinks > allgemeine Einstellungen, "
 "und wählen Sie die \"Beitragsname\" für schöne Permalinks."
 
-#: includes/class-wpglobus.php:2705
+#: includes/class-wpglobus.php:2708
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -668,7 +668,7 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:151
 msgid "License Key"
-msgstr ""
+msgstr "Lizenzschlüssel"
 
 #: updater/class-wpglobus-updater-admin.php:155
 msgid "License email"

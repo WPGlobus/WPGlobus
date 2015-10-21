@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-10-06 19:52:45+00:00\n"
+"POT-Creation-Date: 2015-10-21 14:43:09+00:00\n"
 "PO-Revision-Date: 2015-09-14 07:19+0000\n"
 "Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
@@ -289,13 +289,13 @@ msgstr "Vous ne pouvez pas désactiver la langue principale."
 msgid "*) Available after the menu is saved."
 msgstr "*) Disponible après que le menu ait été enregistré."
 
-#: includes/class-wpglobus.php:2576
+#: includes/class-wpglobus.php:2579
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Vous devez activer les jolis permaliens pour pouvoir utiliser WPGlobus "
 "correctement."
 
-#: includes/class-wpglobus.php:2578
+#: includes/class-wpglobus.php:2581
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -303,7 +303,7 @@ msgstr ""
 "Veuillez vous rendre dans Réglages > Permaliens et choisissez autre chose "
 "que la valeur par défaut."
 
-#: includes/class-wpglobus.php:2705
+#: includes/class-wpglobus.php:2708
 msgid "Add"
 msgstr "Ajouter"
 

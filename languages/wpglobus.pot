@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.2.9\n"
+"Project-Id-Version: WPGlobus 1.3.0\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-10-06 19:52:45+00:00\n"
+"POT-Creation-Date: 2015-10-21 14:43:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -264,17 +264,17 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2576
+#: includes/class-wpglobus.php:2579
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2578
+#: includes/class-wpglobus.php:2581
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a "
 "non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2705
+#: includes/class-wpglobus.php:2708
 msgid "Add"
 msgstr ""
 
