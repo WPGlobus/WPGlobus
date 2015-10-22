@@ -125,8 +125,12 @@ jQuery(document).ready(function ($) {
 				$(this).html( api.selectorHtml.replace('{{language}}', WPGlobusCoreData.language) );
 				
 				$('.wpglobus-customize-control').each(function(i,e){
+					if ( 'undefined' === typeof WPGlobusCoreData.customize.addElements[$(e).data('customize-setting-link')] ) {
+						return;		
+					}	
 					var or = $( WPGlobusCoreData.customize.addElements[$(e).data('customize-setting-link')].origin_element ),
 						$e = $(e);
+					
 					if ( $e.hasClass('wpglobus-control-url') ) {
 						$e.val( WPGlobusCore.TextFilter( $e.data('source'), WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
 					} else {	
