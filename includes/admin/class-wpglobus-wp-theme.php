@@ -334,7 +334,7 @@ if ( ! class_exists( 'WPGlobus_WP_Theme' ) ) :
 					break;
 			};
 			
-			if ( empty( $this->config['version'] ) ) {
+			if ( ! empty( $this->config ) && empty( $this->config['version'] ) ) {
 				$this->config['version'] = '1';	
 			}	
 
