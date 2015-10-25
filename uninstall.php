@@ -3,8 +3,6 @@
  * WPGlobus Uninstall
  * Deletes options
  * @package   WPGlobus
- * @todo Should we clean all languages?
- * @todo Should we ask whether to delete options or not?
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
@@ -12,12 +10,13 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 /** @global wpdb $wpdb */
-global $wpdb;
+//global $wpdb;
 
 /**
  * Delete options
- * @todo Make wpglobus_option a class constant instead of var
+ * Disabled as of 1.3.1:
+ * @todo Do it only when User sets a special flag in settings. Write code that works on multisite. Think about cleaning all multilingual strings.
  */
-$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );
+//$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );
 
 # --- EOF

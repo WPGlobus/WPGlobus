@@ -147,6 +147,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.3.1 ###
+
+* FIXED:
+	* Disabled Uninstall procedure. Will be refactored in the future.
+
 ### 1.3.0 ###
 
 * ADDED:
