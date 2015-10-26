@@ -165,7 +165,7 @@ class WPGlobus_Customize {
 	public static function action__customize_preview_init() {
 		wp_enqueue_script(
 			'wpglobus-customize-preview',
-			WPGlobus::$PLUGIN_DIR_URL . '/includes/js/wpglobus-customize-preview.js',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-preview.js',
 			array( 'jquery', 'customize-preview' ),
 			WPGLOBUS_VERSION,
 			true
@@ -187,7 +187,7 @@ class WPGlobus_Customize {
 	public static function action__customize_controls_enqueue_scripts() {
 		wp_enqueue_script(
 			'wpglobus-customize-control',
-			WPGlobus::$PLUGIN_DIR_URL . '/includes/js/wpglobus-customize-control.js',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control.js',
 			array( 'jquery' ),
 			WPGLOBUS_VERSION,
 			true
