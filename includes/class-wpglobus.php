@@ -2256,20 +2256,33 @@ class WPGlobus {
 
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
-		} ?>
-
-		<ul class="wpglobus-post-body-tabs-list">    <?php
-			$order = 0;
-			foreach ( self::Config()->open_languages as $language ) {
-				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
-				    data-order="<?php echo $order; ?>"
-				    class="wpglobus-post-tab">
-					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
-				</li> <?php
-				$order ++;
-			} ?>
-		</ul>    <?php
+		} 
+		
+		if ( 
+			/**
+			 * Filter to show post body tabs.
+			 * Returning boolean.
+			 * @since 1.4.0
+			 *
+			 * @param bool
+			 */					 
+			apply_filters( 'wpglobus_language_tabs', true ) 
+		) : 	?>
+		
+			<ul class="wpglobus-post-body-tabs-list">    <?php
+				$order = 0;
+				foreach ( self::Config()->open_languages as $language ) {
+					$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
+					<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
+						data-order="<?php echo $order; ?>"
+						class="wpglobus-post-tab">
+						<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+					</li> <?php
+					$order ++;
+				} ?>
+			</ul>    <?php
+		
+		endif;
 
 	}
 
