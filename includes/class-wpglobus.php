@@ -1828,7 +1828,7 @@ class WPGlobus {
 		// The top menu level points to the current URL. Useless? Maybe good for refresh.
 		$item->url         = $current_url;
 		$item->classes     = $menu_item_classes;
-		$item->classes     = 'wpglobus-current-language';
+		$item->classes[]   = 'wpglobus-current-language';
 		$item->description = '';
 		$item->language    = WPGlobus::Config()->language;
 		
