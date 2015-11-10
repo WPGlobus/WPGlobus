@@ -147,6 +147,15 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.3.2 ###
+
+* FIXED:
+	* Removed double slashes in URLs.
+	* Load minimized JS in customizer.
+	* Using class for globe icon instead of id.
+	* Rewriting the array of classes.
+	* Minor css improvements.
+
 ### 1.3.1 ###
 
 * FIXED:
