@@ -469,24 +469,34 @@ class WPGlobus {
 			$output = array();
 			$i      = 0;
 			foreach ( WPGlobus::Config()->enabled_languages as $l ) {
+				
+				$output[ $i ] = '';
 				if ( 1 == preg_match( "/(\{:|\[:|<!--:)[$l]{2}/", $post->post_title . $post->post_content ) ) {
 					$output[ $i ] =
 						'<img title="' . WPGlobus::Config()->en_language_name[ $l ] .
 						'" src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $l ] . '" />';
-
-					/**
-					 * Filter language item.
-					 * Returning string.
-					 * @since 1.0.14
-					 *
-					 * @param string $output Language item.
-					 * @param array  $post   An object WP_Post.
-					 * @param string $l      The language.
-					 */
-					$output[ $i ] = apply_filters( 'wpglobus_manage_language_item', $output[ $i ], $post, $l );
-					$i ++;
 				}
+
+				/**
+				 * Filter language item.
+				 * Returning string.
+				 * @since 1.0.14
+				 *
+				 * @param string $output Language item.
+				 * @param array  $post   An object WP_Post.
+				 * @param string $l      The language.
+				 */
+				$output[ $i ] = apply_filters( 'wpglobus_manage_language_item', $output[ $i ], $post, $l );
+				
+				if ( ! empty( $output[ $i ] ) ) {
+					$i++;			
+				}	
+				
 			}
+			
+			if ( empty( $output[ $i ] ) ) {
+				unset( $output[ $i ] );
+			}	
 
 			if ( ! empty( $output ) ) {
 				echo implode( '<br />', $output );
