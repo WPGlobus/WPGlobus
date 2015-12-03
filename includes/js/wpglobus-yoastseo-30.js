@@ -24,6 +24,53 @@ jQuery(document).ready(function ($) {
 		init: function() {
 			api.start();
 		},	
+		qtip: function() {
+			// @see jQuery( '.yoast_help' ).qtip()
+			$( '.yoast_help' ).qtip(
+				{
+					content: {
+						attr: 'alt'
+					},
+					position: {
+						my: 'bottom left',
+						at: 'top center'
+					},
+					style   : {
+						tip: {
+							corner: true
+						},
+						classes : 'yoast-qtip qtip-rounded qtip-blue'
+					},
+					show    : 'click',
+					hide    : {
+						fixed: true,
+						delay: 500
+					}
+				}
+			);
+			$( '.wpglobus_help' ).qtip(
+				{
+					content: {
+						attr: 'alt'
+					},
+					position: {
+						my: 'bottom left',
+						at: 'top center'
+					},
+					style   : {
+						tip: {
+							corner: true
+						},
+						classes : 'yoast-qtip qtip-rounded qtip-blue'
+					},
+					show    : 'click',
+					hide    : {
+						fixed: true,
+						delay: 1500
+					}
+				}
+			);			
+		},		
 		start: function() {
 
 			// tabs on
@@ -96,6 +143,15 @@ jQuery(document).ready(function ($) {
 				if ( l !== WPGlobusCoreData.default_language ) {
 					$('#'+sectionID+' #yoast_wpseo_focuskw_text_input_'+l).addClass('hidden');
 					$('#'+sectionID+' #wpseo-pageanalysis_'+l).addClass('hidden');
+					
+					$('#focuskw_text_inputhelp_'+l).removeClass('yoast_help')
+						.addClass('wpglobus_help')
+						.attr('alt','Please, see <a href="http://www.wpglobus.com/product/wpglobus-plus#yoastseo" target="_blank">WPGlobus Plus</a> to get YoastSEO Plus')
+						.attr('style','cursor: pointer;');
+					$('#pageanalysishelp_'+l).removeClass('yoast_help')
+						.addClass('wpglobus_help')
+						.attr('alt','Please, see <a href="http://www.wpglobus.com/product/wpglobus-plus#yoastseo" target="_blank">WPGlobus Plus</a> to get YoastSEO Plus')
+						.attr('style','cursor: pointer;');
 				}
 				
 			}); // end each .wpglobus-wpseo-general	
@@ -134,7 +190,7 @@ jQuery(document).ready(function ($) {
 				}
 			});
 			
-			//wpglobus_qtip();		
+			api.qtip();		
 			
 		}	
 	}
