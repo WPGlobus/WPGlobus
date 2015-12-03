@@ -1029,9 +1029,14 @@ jQuery(document).ready(function () {
                 $('#content').text(WPGlobusAdmin.content);
                 $('#excerpt').addClass('hidden').css({'display':'none'});
 				
-                if (typeof WPGlobusVendor !== "undefined") {
-                    wpglobus_wpseo();
-                }
+				if (typeof WPGlobusVendor !== "undefined" && WPGlobusVendor.vendor.WPSEO ) {
+					if ( typeof wpglobus_wpseo !== "undefined" ) {
+						wpglobus_wpseo();
+					} else if ( typeof WPGlobusYoastSeo !== "undefined" ) {
+						// since Yoast SEO 3.0
+						WPGlobusYoastSeo.init();
+					}	
+                }			   
 
                 if (WPGlobusAdmin.data.modify_excerpt) {
                     $(WPGlobusAdmin.data.template).insertAfter('#excerpt');

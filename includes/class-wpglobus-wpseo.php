@@ -304,6 +304,8 @@ class WPGlobus_WPSEO {
 
 		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
 
+			WPGlobus::O()->vendors_scripts['WPSEO'] = true;
+			
 			$handle = 'wpglobus-wpseo';
 
 			/**
