@@ -57,8 +57,13 @@ require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
 if ( defined( 'WPSEO_VERSION' ) ) {
-	require_once 'includes/class-wpglobus-wpseo.php';
-	WPGlobus_WPSEO::controller();
+	if ( version_compare( WPSEO_VERSION, '3.0.0', '<' ) ) {
+		require_once 'includes/class-wpglobus-wpseo.php';
+		WPGlobus_WPSEO::controller();
+	} else {
+		require_once 'includes/class-wpglobus-yoastseo30.php';
+		WPGlobus_YoastSEO::controller();
+	}	
 }
 
 /**
