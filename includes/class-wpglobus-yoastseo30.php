@@ -385,6 +385,10 @@ class WPGlobus_YoastSEO {
 	 */
 	public static function action__admin_print_scripts() {
 
+		if ( 'off' == WPGLobus::Config()->toggle ) {
+			return;		
+		}
+		
 		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
 
 			WPGlobus::O()->vendors_scripts['WPSEO'] = true;
