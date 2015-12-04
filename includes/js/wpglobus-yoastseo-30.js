@@ -119,18 +119,22 @@ jQuery(document).ready(function ($) {
 					if ( 'snippet_meta' == id ) {
 						$id.addClass('wpglobus-snippet_meta');
 					}
-					/** url **/ 
+					// url
 					if ( 'snippet_cite' == id ) {
 						$id.addClass('wpglobus-snippet_cite');
 					}
 					if ( 'snippet_citeBase' == id ) {
 						$id.addClass('wpglobus-snippet_citeBase');
 					}
-					/** focuskw **/	
+					// focuskw
 					if ( 'yoast_wpseo_focuskw_text_input' == id ) {
 						$id.addClass('wpglobus-yoast_wpseo_focuskw_text_input');
 					}
-	
+					// wpseo-pageanalysis
+					if ( 'wpseo-pageanalysis' == id ) {
+						$id.addClass('wpglobus-wpseo-pageanalysis');
+					}
+
 					$id.attr('id',id+'_'+l);
 					$('#'+id+'_'+l).attr('data-language',l);
 				});
