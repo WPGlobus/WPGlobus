@@ -14,6 +14,10 @@ class WPGlobus_WPSEO {
 
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
 
+				if ( 'off' == WPGLobus::Config()->toggle ) {
+					return;		
+				}						
+			
 				/** @see \WPGlobus::__construct */
 				WPGlobus::O()->vendors_scripts['WPSEO'] = true;
 
