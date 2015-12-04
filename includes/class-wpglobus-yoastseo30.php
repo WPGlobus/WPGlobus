@@ -380,7 +380,7 @@ class WPGlobus_YoastSEO {
 	}
 
 	/**
-	 * Enqueue js for WPSEO support
+	 * Enqueue js for YoastSEO support
 	 * @since 1.4.0
 	 */
 	public static function action__admin_print_scripts() {
