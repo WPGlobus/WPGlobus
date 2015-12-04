@@ -1,14 +1,13 @@
-/*global wpseoReplaceVarsL10n, YoastSEO*/
-
-// @see YoastSEO.app.analyzerData for 'content', 'title', 'data_page_title', 'data_meta_desc'
-// @see YoastSEO.app.rawData for 'data_page_title', 'data_meta_desc'
-
-// @see YoastSEO.SnippetPreview func to generate preview
-
-// @todo
-// 1. excerpt
-// 2. jQuery('.wpglobus-editor').focusout(function () { 
-// 3. YoastSEO.app.rawData.usedKeywords
+/**
+ * WPGlobus for YoastSeo 3.0.0
+ * Interface JS functions
+ *
+ * @since 1.4.0
+ *
+ * @package WPGlobus
+ */
+/*jslint browser: true*/
+/*global jQuery, console, wpseoReplaceVarsL10n, YoastSEO*/
 
 var WPGlobusYoastSeo;
 jQuery(document).ready(function ($) {
