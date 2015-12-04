@@ -393,6 +393,15 @@ class WPGlobus_YoastSEO {
 
 			WPGlobus::O()->vendors_scripts['WPSEO'] = true;
 			
+			$yoastseo_plus_access = sprintf( 
+				__( 'Please see %s to get access to page analysis with YoastSEO.', '' ), 
+				'<a href="http://www.wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>' 
+			);
+			
+			$i18n = array(
+				'yoastseo_plus_access' => $yoastseo_plus_access
+			);
+			
 			$handle = 'wpglobus-yoastseo';
 
 			/** @noinspection PhpInternalEntityUsedInspection */
@@ -416,7 +425,8 @@ class WPGlobus_YoastSEO {
 				'WPGlobusVendor',
 				array(
 					'version' => WPGLOBUS_VERSION,
-					'vendor'  => WPGlobus::O()->vendors_scripts
+					'vendor'  => WPGlobus::O()->vendors_scripts,
+					'i18n'    => $i18n
 				)
 			);
 
