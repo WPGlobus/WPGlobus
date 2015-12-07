@@ -15,6 +15,7 @@ jQuery(document).ready(function ($) {
 
 	var api;
 	api = WPGlobusYoastSeo = {
+		wpseoTabSelector: '#wpglobus-wpseo-tabs',
 		attrs: 	$('#wpglobus-wpseo-attr'),
 		iB: 	$('#wpseo-meta-section-content'), // insert before element
 		t:		$('#wpseo-meta-section-content'), // source
@@ -51,7 +52,7 @@ jQuery(document).ready(function ($) {
 		start: function() {
 
 			// tabs on
-			$('#wpglobus-wpseo-tabs').tabs();
+			$( api.wpseoTabSelector ).tabs();
 			
 			api.ids 	= api.attrs.data('ids');
 			api.names 	= api.attrs.data('names');
