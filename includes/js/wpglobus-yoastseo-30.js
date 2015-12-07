@@ -280,17 +280,16 @@ jQuery(document).ready(function ($) {
 	}
 	
 	WPGlobusYoastSeoPlugin.prototype.citeModification = function(l) {
-		var citeBase = '#snippet_citeBase_'+l;
-		var cite = '#snippet_cite_'+l;
-		var cb = $('#wpseo-tab-'+l).data('yoast-cite-base');
-		var e  = $('#wpseo-tab-'+l).data('cite-contenteditable');
-		//var permalink = $('#wpseo-tab-'+l).data('permalink');
+		var citeBase = '#snippet_citeBase_' + l,
+			cite 	 = '#snippet_cite_' + l,
+			cb 		 = $( '#wpseo-tab-' + l ).data( 'yoast-cite-base' ),
+			e  		 = $( '#wpseo-tab-' + l ).data( 'cite-contenteditable' );
+
 		if ( e === false ) {
-			$(cite).attr('contenteditable','false');
+			$(cite).attr( 'contenteditable', 'false' );
 		}
+
 		$(citeBase).text( cb );
-		// ???????????????//
-		// console.log( $('#wpseo-meta-section-content_'+l+' .wpseo_keyword').length );
 		
 	}
 	
@@ -340,15 +339,13 @@ jQuery(document).ready(function ($) {
 		
 		//console.log( '2. metaDescModification: ' + _this.getWPseoTab() );
 		
-		var id = '#snippet_meta_',
-			text = '';
+		var id = '#snippet_meta_';
 
 		$.each(WPGlobusCoreData.enabled_languages, function(i,l) {
 			$(id+l).text( WPGlobusCore.TextFilter( data, l, 'RETURN_EMPTY' ) );
 			_this.citeModification( l );
 		});			
 
-		//console.log( WPGlobusCore.TextFilter( data, _this.getWPseoTab(), 'RETURN_EMPTY' ) );
 		return WPGlobusCore.TextFilter( data, _this.getWPseoTab(), 'RETURN_EMPTY' );
 
 	}	
