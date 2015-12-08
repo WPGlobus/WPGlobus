@@ -66,7 +66,7 @@ class WPGlobus_YoastSEO {
 			 * @scope front
 			 * @since 1.3.3		 
 			 */			
-			//add_filter( 'wpseo_title', array( 'WPGlobus_YoastSEO', 'filter__title' ), 0 );
+			add_filter( 'wpseo_title', array( 'WPGlobus_YoastSEO', 'filter__title' ), 0 );
 			
 			/**
 			 * Filter for @see wpseo_description
@@ -326,27 +326,18 @@ class WPGlobus_YoastSEO {
 	 * @return string
 	 */	
 	public static function filter__title( $text ) {
-		//error_log(  $text );
-		//return $text;
 		
 		$text = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
 
 		$wpseo_f = WPSEO_Frontend::get_instance();
-		//error_log(  WPGlobus::Config()->language . ':' .$text );
+
 		if ( empty($text) ) {
 			/**
 			 * generate title from 
 			 */
 			global $post;
-			//$text = $post->post_title . ' ' . $wpseo_f->get_title_from_options( 'wpseo_titles' );
-			
-			//error_log(  $post->post_title );
-			//error_log( $wpseo_f->get_title_from_options( 'wpseo_titles' ) );
-		
 			remove_filter( 'wpseo_title', array( 'WPGlobus_YoastSEO', 'filter__title' ), 0 );
-		//'wpseo_title', array( 'WPGlobus_YoastSEO', 'filter__title' ), 0 );
 			$text = $wpseo_f->title('');
-			//error_log( $text );
 		}
 		
 		return $text;
@@ -429,15 +420,6 @@ class WPGlobus_YoastSEO {
 					'i18n'    => $i18n
 				)
 			);
-
-			/*
-			wp_enqueue_script(
-				'wpglobus-yoast',
-				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-yoast-seo-30' . WPGlobus::SCRIPT_SUFFIX() . '.js',
-				array( 'jquery', 'yoast-seo' ),
-				WPGLOBUS_VERSION,
-				true
-			); // */				
 				
 		}
 
@@ -466,7 +448,6 @@ class WPGlobus_YoastSEO {
 		}
 		
 		// #wpseo-metabox-tabs
-		// 
 		
 		$ids = array(
 			'wpseo-add-keyword-popup',
