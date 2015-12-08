@@ -12,15 +12,16 @@
 var WPGlobusYoastSeo;
 jQuery(document).ready(function ($) {
 	'use strict';
-
+	
 	var api;
 	api = WPGlobusYoastSeo = {
 		wpseoTabSelector: '#wpglobus-wpseo-tabs',
-		attrs: 	$('#wpglobus-wpseo-attr'),
-		iB: 	$('#wpseo-meta-section-content'), // insert before element
-		t:		$('#wpseo-meta-section-content'), // source
-		ids: 	'',
-		names:  '',
+		url		:   '',	
+		attrs	: 	$('#wpglobus-wpseo-attr'),
+		iB		: 	$('#wpseo-meta-section-content'), // insert before element
+		t		:	$('#wpseo-meta-section-content'), // source
+		ids		: 	'',
+		names	:  '',
 		init: function() {
 			api.start();
 		},	
@@ -151,7 +152,7 @@ jQuery(document).ready(function ($) {
 			});
 			
 			// make synchronization click on "Post tab" with seo tab 
-			$('body').on('click', '.wpglobus-post-body-tabs-list li', function(event){
+			$('body').on( 'click', '.wpglobus-post-body-tabs-list li', function(event){
 				var $this = $(this);
 				if ( $this.hasClass('wpglobus-post-tab') ) {
 					$('#wpglobus-wpseo-tabs').tabs('option','active',$this.data('order'));
@@ -186,6 +187,8 @@ jQuery(document).ready(function ($) {
 		this.focuskw_hidden	= $('input[name="yoast_wpseo_focuskw"]');
 		this.focuskwKeep	= false;
 		
+		this.post_slug 		= '#editable-post-name-full';
+		
 		YoastSEO.app.registerPlugin( 'wpglobusYoastSeoPlugin', {status: 'ready'} );
 
 		/**
@@ -207,7 +210,7 @@ jQuery(document).ready(function ($) {
 		
 		
 		
-		$(document).on('blur', '.wpglobus-snippet_title', function(ev){
+		$(document).on( 'blur', '.wpglobus-snippet_title', function(ev){
 			var $t = $(this);
 			var s = WPGlobusCore.getString( $('#yoast_wpseo_title').val(), $t.text(), $t.data('language') );
 
@@ -228,14 +231,12 @@ jQuery(document).ready(function ($) {
 		
 		$(document).on( 'keyup', '.wpglobus-yoast_wpseo_focuskw_text_input', function(ev){		
 			var $t = $(this);
-				
-			//var s = WPGlobusCore.getString( t.val(), $t.val(), $t.data('language') );
 			var s = $t.val();
 			_this.focuskw.val( s );
 			_this.focuskw_hidden.val( s );
 
 			_this.updateWpseoKeyword( s, $t.data('language') );
-			
+		
 			YoastSEO.app.analyzeTimer(YoastSEO.app);
 		});		
 		
@@ -251,7 +252,6 @@ jQuery(document).ready(function ($) {
 			if ( ! _this.focuskwKeep ) {
 				_this.wpseoTab = $('.wpglobus-wpseo-tabs-list .ui-tabs-active').data('language');
 				var $t = $(this);
-				//console.log( _this.wpseoTab );	
 				_this.focuskw.val( $('#yoast_wpseo_focuskw_text_input_'+_this.wpseoTab ).val() );
 				_this.focuskw_hidden.val( $('#yoast_wpseo_focuskw_text_input_'+_this.wpseoTab ).val() );				
 			}	
@@ -259,11 +259,15 @@ jQuery(document).ready(function ($) {
 			_this.focuskwKeep = true;
 		});			
 		
-		$( 'body' ).on( 'click', '.wpglobus-wpseo-tabs-list li', function(event){
+		$( WPGlobusYoastSeo.wpseoTabSelector ).on( 'tabsactivate', function(event, ui){
 			// set keyword
-			if ( $(this).data( 'language' ) !== WPGlobusCoreData.default_language ) {
+			if ( ui.newPanel.attr( 'data-language' ) !== WPGlobusCoreData.default_language ) {
 				return;	
 			}	
+			
+			// set url @see YoastSEO.Analyzer.prototype.urlKeyword
+			WPGlobusYoastSeo.url = $( _this.post_slug ).text();
+				
 			var k = $( '#yoast_wpseo_focuskw_text_input_' + WPGlobusCoreData.default_language ).val();
 			YoastSEO.app.rawData.keyword = k ;
 			_this.focuskw.val( k );
@@ -297,10 +301,6 @@ jQuery(document).ready(function ($) {
 	WPGlobusYoastSeoPlugin.prototype.pageTitleModification = function(data) {
 		
 		//console.log( '1. pageTitleModification: ' + _this.getWPseoTab() );
-
-		
-		//_this.tab = $('.wpglobus-post-body-tabs-list .ui-tabs-active').data('language');
-		//_this.wpseoTab = $('.wpglobus-wpseo-tabs-list .ui-tabs-active').data('language');
 		
 		var id = '#snippet_title_',
 			text = '', tr, return_text = '';
@@ -332,7 +332,7 @@ jQuery(document).ready(function ($) {
 				}	
 			});
 		}
-		//console.log( return_text );
+
 		return return_text;		
 	}		
 	
@@ -363,30 +363,25 @@ jQuery(document).ready(function ($) {
 	 */
 	WPGlobusYoastSeoPlugin.prototype.contentModification = function(data) {
 		//console.log( '4. contentModification: ' + _this.getWPseoTab() );
-		//console.log( data );
 		
 		if ( _this.getWPseoTab() == WPGlobusCoreData.default_language ) {
 			return data;
 		}
 		return $( '#content_' + _this.getWPseoTab() ).val();
-		//return WPGlobusCore.TextFilter( data, _this.getWPseoTab(), 'RETURN_EMPTY' );
 	};	
 	
 	WPGlobusYoastSeoPlugin.prototype.titleModification = function(data) {
 		//console.log( '5. titleModification: ' + _this.getWPseoTab() );
-
+		
 		setTimeout( _this.updatePageAnalysis, 1000 );
 		
 		if ( _this.getWPseoTab() == WPGlobusCoreData.default_language ) {
-			//console.log( data );
 			return data;
 		}
-		//console.log( $( '#title_' + _this.getWPseoTab() ).val() );	
+		
 		return $( '#title_' + _this.getWPseoTab() ).val();
 
 	};
-	
-
 	
 	/**
 	 * replaces default variables with the values stored in the wpseoMetaboxL10n object.
@@ -444,7 +439,6 @@ jQuery(document).ready(function ($) {
 	 * @returns {string}
 	 */
 	WPGlobusYoastSeoPlugin.prototype.titleReplace = function( data ) {
-		//var title = YoastSEO.app.rawData.title;
 		var title = '', t = '';
 		if ( this.language == WPGlobusCoreData.default_language ) {
 			title = $('#title').val();
@@ -490,5 +484,18 @@ jQuery(document).ready(function ($) {
 	};
 
 	window.WPGlobusYoastSeoPlugin = new WPGlobusYoastSeoPlugin();	
+	
+	YoastSEO.Analyzer.prototype.urlKeyword = function() {
+		var result = [ { test: "urlKeyword", result: 0 } ];
+		if ( typeof WPGlobusYoastSeo !== 'undefined' && WPGlobusYoastSeo.url !== '' ) {
+			this.config.url = WPGlobusYoastSeo.url;
+		}	
+		if ( typeof this.config.url !== "undefined" ) {
+			result[ 0 ].result = this.stringHelper.countMatches(
+				this.config.url, this.keywordRegexInverse
+			);
+		}
+		return result;
+	};		
 	
 });
