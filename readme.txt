@@ -129,6 +129,12 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.4.0 =
+
+* ADDED:
+	* Support YoastSEO 3
+	* The national flag of Kurdistan.
+	
 = 1.3.2 =
 
 * FIXED:
