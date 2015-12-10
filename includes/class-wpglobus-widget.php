@@ -108,8 +108,14 @@ class WPGlobusWidget extends WP_Widget {
 		 * Class for link in a and option tags. Used for adding hash.
 		 * @see class wpglobus-selector-link 
 		 * @since 1.2.0
-	     */ 
-		$link_classes = 'wpglobus-selector-link';
+	     */
+		$link_classes['selector_link'] = 'wpglobus-selector-link';
+		
+		/**
+		 * Class for flag box
+		 * @since 1.4.0
+		 */
+		$flag_classes = array();
 		
 		echo $args['before_widget'];
 		if ( ! empty( $instance['title'] ) ) {
@@ -118,8 +124,30 @@ class WPGlobusWidget extends WP_Widget {
 		foreach ( $enabled_languages as $language ) :
 
 			$selected = '';
+			
+			/**
+			 * Init current language class
+			 */
+			$link_classes['current_language'] = '';
+			
+			/**
+			 * Init current language class for flag box
+			 */
+			$flag_classes['current_language'] = '';			
+			
 			if ( $language == WPGlobus::Config()->language ) {
 				$selected = ' selected';
+				switch ( $type ) :
+					case 'flags' :
+						$flag_classes['current_language'] = 'wpglobus-current-language';
+					break;
+					case 'list' :
+					case 'list_with_flags' :
+					case 'dropdown' :	
+					case 'dropdown_with_flags' :	
+						$link_classes['current_language'] = 'wpglobus-current-language';
+					break;
+				endswitch;				
 			}
 
 			$url = WPGlobus_Utils::localize_current_url( $language );
@@ -128,11 +156,13 @@ class WPGlobusWidget extends WP_Widget {
 
 			switch ( $type ) :
 				case 'flags' :
-					$inside .= '<span class="flag"><a href="' . $url . '" class="' . $link_classes . '"><img src="' . $flag . '"/></a></span>';
+					$inside .= '<span class="flag ' . implode( ' ', $flag_classes ) . '">';
+					$inside .= 		'<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '"><img src="' . $flag . '"/></a>';
+					$inside .= '</span>';
 					break;
 				case 'list' :
 				case 'list_with_flags' :
-					$inside .= '<a href="' . $url . '" class="' . $link_classes . '">' .
+					$inside .= '<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '">' .
 					           '<img src="' . $flag . '" alt=""/>' .
 					           ' ' .
 					           '<span class="name">' .
@@ -143,25 +173,25 @@ class WPGlobusWidget extends WP_Widget {
 					           '</a>';
 					break;
 				case 'select' :
-					$inside .= '<option class="' . $link_classes . '" ' . $selected . ' value="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '</option>';
+					$inside .= '<option class="' . implode( ' ', $link_classes ) . '" ' . $selected . ' value="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '</option>';
 					break;
 				case 'select_with_code' :
-					$inside .= '<option class="' . $link_classes . '" ' . $selected . ' value="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</option>';
+					$inside .= '<option class="' . implode( ' ', $link_classes ) . '" ' . $selected . ' value="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</option>';
 					break;
 				case 'dropdown' :
 					if ( '' != $selected ) {
 						$code =
-							str_replace( '{{language}}', '<a class="' . $link_classes . '" href="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</a>', $code );
+							str_replace( '{{language}}', '<a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</a>', $code );
 					} else {
-						$inside .= '<li><a class="' . $link_classes . '" href="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</a></li>';
+						$inside .= '<li><a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</a></li>';
 					}
 					break;
 				case 'dropdown_with_flags' :
 					if ( '' != $selected ) {
 						$code =
-							str_replace( '{{language}}', '<a class="' . $link_classes . '" href="' . $url . '"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a>', $code );
+							str_replace( '{{language}}', '<a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a>', $code );
 					} else {
-						$inside .= '<li><a class="' . $link_classes . '" href="' . $url . '"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a></li>';
+						$inside .= '<li><a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a></li>';
 					}
 					break;
 			endswitch;
