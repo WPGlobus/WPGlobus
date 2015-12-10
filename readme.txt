@@ -134,6 +134,7 @@ No known backward incompatibility issues.
 * ADDED:
 	* Support YoastSEO 3
 	* The national flag of Kurdistan.
+	* 'wpglobus-current-language' class for widget
 	
 = 1.3.2 =
 
