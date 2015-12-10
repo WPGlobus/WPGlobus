@@ -1,0 +1,811 @@
+# Copyright (C) 2015 WPGlobus
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPGlobus 1.3.0\n"
+"Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
+"POT-Creation-Date: 2015-11-11 15:44+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-12-09 18:36+0200\n"
+"Last-Translator: The WPGlobus Team <support@wpglobus.com>\n"
+"Language-Team: The WPGlobus Team <support@wpglobus.com>\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 1.8.2\n"
+"Language: ro\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin/class-wpglobus-about.php:42
+msgid "Multilingual Everything!"
+msgstr "Totul multilingv!"
+
+#: includes/admin/class-wpglobus-about.php:45
+msgid ""
+"WPGlobus is a family of WordPress plugins assisting you in making "
+"multilingual WordPress blogs and sites."
+msgstr ""
+"WPGlobus este o familie de plugin-uri WordPress ce te asistă în realizarea "
+"de bloguri și site-uri WordPress multilingve ."
+
+#: includes/admin/class-wpglobus-about.php:52
+msgid "Quick Start"
+msgstr "Început rapid"
+
+#: includes/admin/class-wpglobus-about.php:57
+#: includes/admin/class-wpglobus-about.php:86
+msgid "Guide"
+msgstr "Ghid"
+
+#: includes/admin/class-wpglobus-about.php:63
+#: includes/options/class-wpglobus-options.php:445
+msgid "Add-ons"
+msgstr "Add-ons"
+
+#: includes/admin/class-wpglobus-about.php:67
+msgid "Support"
+msgstr "Suport"
+
+#: includes/admin/class-wpglobus-about.php:73
+msgid "Easy as 1-2-3:"
+msgstr "Ușor ca 1-2-3:"
+
+#: includes/admin/class-wpglobus-about.php:75
+msgid "Go to WPGlobus admin menu and choose the countries / languages;"
+msgstr "Accesează meniul de admin WPGlobus și alege țări / limbile;"
+
+#: includes/admin/class-wpglobus-about.php:76
+msgid ""
+"Enter the translations to the posts, pages, categories, tags and menus using "
+"a clean and simple interface."
+msgstr ""
+"Introduceți traducerile în posturile, paginile, categoriile, tag-uri și "
+"meniuri folosind o interfață curată și simplă."
+
+#: includes/admin/class-wpglobus-about.php:77
+msgid ""
+"Switch languages at the front-end using a drop-down menu with language names "
+"and country flags."
+msgstr ""
+"Comutarea de limbi la front-end, folosind un meniu drop-down cu nume de "
+"limbă și steaguri de țară."
+
+#: includes/admin/class-wpglobus-about.php:81
+msgid "Links:"
+msgstr "Adrese:"
+
+#: includes/admin/class-wpglobus-about.php:88
+msgid "FAQs"
+msgstr "Întrebări frecvente"
+
+#: includes/admin/class-wpglobus-about.php:90
+msgid "Contact Us"
+msgstr "Contactează-ne"
+
+#: includes/admin/class-wpglobus-about.php:92
+msgid "Please give us 5 stars!"
+msgstr "Vă rugăm să ne dați 5 stele!"
+
+#: includes/admin/class-wpglobus-about.php:104
+msgid ""
+"WPGlobus only supports the localization URLs in the form of <code>example."
+"com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
+"com</code> and language queries <code>example.com?lang=xx</code>."
+msgstr ""
+"WPGlobus acceptă numai adresele URL de localizare sub forma de <code> "
+"example.com/xx/page / </ code>. Noi nu intenționăm să sprijim subdomenii "
+"<code> xx.example.com </ code> și interogări de limbă <code> example.com?"
+"lang=xx </ code>."
+
+#: includes/admin/class-wpglobus-about.php:107
+msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
+msgstr ""
+"Unele teme și plugin-uri sunt <strong> nu suportă traducere </ strong>."
+
+#: includes/admin/class-wpglobus-about.php:109
+msgid ""
+"They might display some texts with no translation, or with all languages "
+"mixed together."
+msgstr ""
+"S-ar putea afișa unele texte fără traducere, sau cu toate limbile amestecate "
+"împreună."
+
+#. translators: %s are used to insert HTML link. Keep them in place.
+#: includes/admin/class-wpglobus-about.php:113
+msgid ""
+"Please contact the theme / plugin author. If they are unable to assist, "
+"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+msgstr ""
+"Vă rugăm să contactați autorul temei / plugin-ului. În cazul în care nu sunt "
+"în măsură să ajute, ia în considerare %s angajarea echipei WPGlobus %s "
+"pentru a scrie un cod personalizat pentru tine."
+
+#: includes/admin/class-wpglobus-about.php:123
+#: includes/admin/class-wpglobus-addons.php:88
+msgid "Go to WPGlobus Settings"
+msgstr "Du-te la setări WPGlobus"
+
+#: includes/admin/class-wpglobus-addons.php:45
+msgid "WPGlobus Add-ons / Extensions"
+msgstr "WPGlobus Add-ons / Extensii"
+
+#: includes/admin/class-wpglobus-language-edit.php:146
+#: includes/admin/class-wpglobus-language-edit.php:151
+msgid "Options updated"
+msgstr "Opțiuni actualizate"
+
+#: includes/admin/class-wpglobus-language-edit.php:224
+msgid "Please enter a language code!"
+msgstr "Vă rugăm să introduceți un cod de limbă!"
+
+#: includes/admin/class-wpglobus-language-edit.php:228
+msgid "Language code already exists!"
+msgstr "Codul de limbă există deja!"
+
+#: includes/admin/class-wpglobus-language-edit.php:232
+msgid "Please specify the language flag!"
+msgstr "Vă rugăm să specificați steagul limbii alese!"
+
+#: includes/admin/class-wpglobus-language-edit.php:236
+msgid "Please enter the language name!"
+msgstr "Vă rugăm să introduceți numele limbii!"
+
+#: includes/admin/class-wpglobus-language-edit.php:240
+msgid "Please enter the language name in English!"
+msgstr "Vă rugăm să introduceți numele limbii in engleza!"
+
+#: includes/admin/class-wpglobus-language-edit.php:244
+msgid "Please enter the locale!"
+msgstr "Vă rugăm să introduceți localizare!"
+
+#: includes/admin/class-wpglobus-language-edit.php:301
+msgid "Edit Language"
+msgstr "Editează limba"
+
+#: includes/admin/class-wpglobus-language-edit.php:303
+msgid "Are you sure you want to delete?"
+msgstr "Ești sigur că vrei să ștergi?"
+
+#: includes/admin/class-wpglobus-language-edit.php:306
+msgid "Add Language"
+msgstr "Adăugați limbă"
+
+#: includes/admin/class-wpglobus-language-edit.php:330
+msgid "Language Code"
+msgstr "Codul de limbă"
+
+#: includes/admin/class-wpglobus-language-edit.php:337
+msgid ""
+"2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
+msgstr ""
+"Codul ISO din 2 litere pentru limba pe care doriți să o introduceți. "
+"(Exemplu: EN)"
+
+#: includes/admin/class-wpglobus-language-edit.php:341
+msgid "Language flag"
+msgstr "Steagul limbii"
+
+#: includes/admin/class-wpglobus-language-edit.php:355
+msgid "Name"
+msgstr "Nume"
+
+#: includes/admin/class-wpglobus-language-edit.php:360
+msgid ""
+"The name of the language in its native alphabet. (Examples: English, Русский)"
+msgstr "Numele limbii în alfabetul său nativ. (Exemple: engleză, Русский)"
+
+#: includes/admin/class-wpglobus-language-edit.php:365
+msgid "Name in English"
+msgstr "Nume în engleză"
+
+#: includes/admin/class-wpglobus-language-edit.php:370
+msgid "The name of the language in English"
+msgstr "Numele limbii în engleză"
+
+#: includes/admin/class-wpglobus-language-edit.php:374
+#: includes/options/fields/table/table-languages.php:76
+msgid "Locale"
+msgstr "Localizare"
+
+#: includes/admin/class-wpglobus-language-edit.php:379
+msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
+msgstr "PHP / WordPress Localizare a limbii. (Exemple: en_US, ru_RU)"
+
+#: includes/admin/class-wpglobus-language-edit.php:387
+#: updater/class-wpglobus-updater-admin.php:89
+msgid "Save Changes"
+msgstr "Salvează schimbările"
+
+#: includes/admin/class-wpglobus-language-edit.php:391
+msgid "Delete Language"
+msgstr "Ștergeți limba"
+
+#: includes/admin/class-wpglobus-language-edit.php:399
+msgid "Back to the WPGlobus Settings"
+msgstr "Înapoi la setările WPGlobus"
+
+#: includes/class-wpglobus-widget.php:27
+msgid "WPGlobus widget"
+msgstr "WPGlobus widget"
+
+#: includes/class-wpglobus-widget.php:29
+msgid "Add language switcher"
+msgstr "Adaugă schimbător limbă"
+
+#: includes/class-wpglobus-widget.php:32
+msgid "Flags"
+msgstr "Steaguri"
+
+#: includes/class-wpglobus-widget.php:33
+msgid "List"
+msgstr "Listă"
+
+#: includes/class-wpglobus-widget.php:34
+msgid "List with flags"
+msgstr "Lista cu steaguri"
+
+#: includes/class-wpglobus-widget.php:35
+msgid "Select"
+msgstr "Selectează"
+
+#: includes/class-wpglobus-widget.php:36
+msgid "Select with language code"
+msgstr "Selectați codul de limbă"
+
+#: includes/class-wpglobus-widget.php:37
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: includes/class-wpglobus-widget.php:38
+msgid "Dropdown with flags"
+msgstr "Dropdown cu steaguri"
+
+#: includes/class-wpglobus-widget.php:200
+msgid "Selector type"
+msgstr "Tipul de selector"
+
+#: includes/class-wpglobus.php:872
+msgid "You cannot disable the main language."
+msgstr "Nu puteți dezactiva limba principală."
+
+#: includes/class-wpglobus.php:1037
+msgid "*) Available after the menu is saved."
+msgstr "*) Disponibil după ce meniul este salvat."
+
+#: includes/class-wpglobus.php:2579
+msgid "You must enable Pretty Permalinks to use WPGlobus."
+msgstr "Trebuie să activezi Pretty Permalinks pentru a folosi WPGlobus."
+
+#: includes/class-wpglobus.php:2581
+msgid ""
+"Please go to Settings > Permalinks > Common Settings and choose a non-"
+"default option."
+msgstr ""
+"Vă rugăm să mergeți la Setări> Permalinks> Setări comune și alegeți o "
+"opțiune non-default."
+
+#: includes/class-wpglobus.php:2708
+msgid "Add"
+msgstr "Adaugă"
+
+#: includes/options/class-wpglobus-options.php:133
+msgid "WARNING: old version of the ReduxFramework is active!"
+msgstr "AVERTISMENT: versiune veche a ReduxFramework este activă!"
+
+#. translators: ReduxFramework - %1$s version, %2$s folder where installed
+#: includes/options/class-wpglobus-options.php:142
+msgid ""
+"The currently active ReduxFramework (version %1$s) was loaded from the %2$s "
+"folder."
+msgstr "ReduxFramework activ (versiunea%1$s) a fost încărcat în fișierul %2$s."
+
+#. translators: %1$s placeholder for the link to ReduxFramework plugin
+#: includes/options/class-wpglobus-options.php:150
+msgid ""
+"We recommend you to install the most recent version of the ReduxFramework "
+"plugin: %1$s."
+msgstr ""
+"Vă recomandăm să instalați cea mai recentă versiune a plugin ReduxFramework:"
+"%1$s."
+
+#: includes/options/class-wpglobus-options.php:165
+msgid "Thank you for installing WPGlobus!"
+msgstr "Vă mulțumim pentru instalarea WPGlobus!"
+
+#: includes/options/class-wpglobus-options.php:170
+msgid "Read About WPGlobus"
+msgstr "Citește despre WPGlobus"
+
+#: includes/options/class-wpglobus-options.php:173
+msgid ""
+"Click the <strong>[Languages]</strong> tab at the left to setup the options."
+msgstr ""
+"Faceți click pe <strong> [Limbă] </ strong> fila din partea stângă pentru a "
+"seta opțiunile."
+
+#: includes/options/class-wpglobus-options.php:175
+msgid ""
+"Use the <strong>[Languages Table]</strong> section to add a new language or "
+"to edit the language attributes: name, code, flag icon, etc."
+msgstr ""
+"Folosiți <strong> [Limbă Tabel] </ strong> pentru a adăuga o nouă limbă sau "
+"pentru a edita atributele limbii: nume, cod, pictograma steag, etc."
+
+#: includes/options/class-wpglobus-options.php:178
+msgid ""
+"Should you have any questions or comments, please do not hesitate to contact "
+"us."
+msgstr ""
+"În cazul în care aveți orice întrebări sau comentarii, vă rugăm să nu "
+"ezitați să ne contactați."
+
+#: includes/options/class-wpglobus-options.php:182
+msgid "Sincerely Yours,"
+msgstr "Al dumneavoastră,"
+
+#: includes/options/class-wpglobus-options.php:184
+#: includes/options/wpglobus-options-header.php:27
+msgid "The WPGlobus Team"
+msgstr "Echipa WPGlobus"
+
+#: includes/options/class-wpglobus-options.php:193
+msgid "Welcome!"
+msgstr "Bine ai venit!"
+
+#: includes/options/class-wpglobus-options.php:254
+msgid "No navigation menu"
+msgstr "Nici un meniu de navigare"
+
+#: includes/options/class-wpglobus-options.php:256
+msgid "Select navigation menu"
+msgstr "Selectează meniul de navigare"
+
+#. translators: %s placeholder for the icon (actual picture)
+#: includes/options/class-wpglobus-options.php:262
+msgid ""
+"Place the <strong>main language</strong> of your site at the top of the list "
+"by dragging the %s icons."
+msgstr ""
+"Așezați <strong> limba principală </ strong> a site-ului dvs. în partea de "
+"sus a listei prin glisarea %s icoanei."
+
+#: includes/options/class-wpglobus-options.php:263
+msgid "<strong>Uncheck</strong> the languages you do not plan to use."
+msgstr ""
+"<strong> Debifați </ strong> limbile pe care nu intenționați să le utilizați."
+
+#: includes/options/class-wpglobus-options.php:264
+msgid "<strong>Add</strong> more languages using the section below."
+msgstr ""
+"<strong> Adăugați </ strong> mai multe limbi utilizând secțiunea de mai jos."
+
+#: includes/options/class-wpglobus-options.php:265
+msgid "When done, click the [Save Changes] button."
+msgstr "Când ați terminat, faceți click pe butonul [Salvează]."
+
+#: includes/options/class-wpglobus-options.php:270
+msgid ""
+"Choose a language you would like to enable. <br>Press the [Save Changes] "
+"button to confirm."
+msgstr ""
+"Alege o limba pe care doriți să o activați. <br> Apăsati butonul [Salvează] "
+"pentru a confirma."
+
+#. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+#: includes/options/class-wpglobus-options.php:273
+msgid "or Add new Language %1$s here %2$s"
+msgstr "sau Adaugă o noua Limbă %1$s aici %2$s"
+
+#: includes/options/class-wpglobus-options.php:278
+msgid "Languages"
+msgstr "Limbi"
+
+#: includes/options/class-wpglobus-options.php:284
+msgid "Instructions:"
+msgstr "Instrucțiuni:"
+
+#: includes/options/class-wpglobus-options.php:285
+#: includes/options/class-wpglobus-options.php:384
+msgid "NOTE: you cannot remove the main language."
+msgstr "Notă: nu se poate elimina limba principală."
+
+#: includes/options/class-wpglobus-options.php:293
+msgid "Enabled Languages"
+msgstr "Limbi activate"
+
+#: includes/options/class-wpglobus-options.php:295
+msgid "These languages are currently enabled on your site."
+msgstr "Aceste limbi sunt în prezent activate pe site-ul tau."
+
+#: includes/options/class-wpglobus-options.php:303
+msgid "Add Languages"
+msgstr "Adaugă limbi"
+
+#: includes/options/class-wpglobus-options.php:307
+msgid "Select a language"
+msgstr "Selectează o limbă"
+
+#: includes/options/class-wpglobus-options.php:313
+msgid "Language Selector Mode"
+msgstr "Modul de selectare al limbii"
+
+#: includes/options/class-wpglobus-options.php:316
+msgid ""
+"Choose the way language name and country flag are shown in the drop-down menu"
+msgstr ""
+"Alegeți modul în care numele limbii de desfășurare și steagul țării sunt "
+"afișate în meniul drop-down"
+
+#: includes/options/class-wpglobus-options.php:322
+msgid "Two-letter Code with flag (en, ru, it, etc.)"
+msgstr "Codul din două litere cu steag (en, ru, it, etc.)"
+
+#: includes/options/class-wpglobus-options.php:323
+msgid "Full Name (English, Russian, Italian, etc.)"
+msgstr "Nume Complet (Engleză, Rusă, Italiană, etc.)"
+
+#: includes/options/class-wpglobus-options.php:325
+msgid "Full Name with flag (English, Russian, Italian, etc.)"
+msgstr "Numele Complet cu steag (Engleza, Rusă, Italiană, etc.)"
+
+#: includes/options/class-wpglobus-options.php:326
+msgid "Flags only"
+msgstr "Doar steaguri"
+
+#: includes/options/class-wpglobus-options.php:334
+msgid "Language Selector Menu"
+msgstr "Meniul de selecție al limbii"
+
+#: includes/options/class-wpglobus-options.php:337
+msgid "Choose the navigation menu where the language selector will be shown"
+msgstr ""
+"Alege meniul de navigare în cazul în care va fi afișat selectorul de limbi"
+
+#: includes/options/class-wpglobus-options.php:348
+msgid "\"All Pages\" menus Language selector"
+msgstr "\"Toate paginile\" Selector meniuri Limbă"
+
+#: includes/options/class-wpglobus-options.php:349
+msgid "(Found in some themes)"
+msgstr "(S-au găsit în unele teme)"
+
+#: includes/options/class-wpglobus-options.php:350
+msgid ""
+"Adds language selector to the menus that automatically list all existing "
+"pages (using `wp_list_pages`)"
+msgstr ""
+"Adaugă selectorul de limbi la meniurile care listează automat toate paginile "
+"existente (folosind `wp_list_pages`)"
+
+#: includes/options/class-wpglobus-options.php:354
+msgid "Enable"
+msgstr "Activează"
+
+#: includes/options/class-wpglobus-options.php:360
+msgid "Custom CSS"
+msgstr "Customizări CSS"
+
+#: includes/options/class-wpglobus-options.php:364
+msgid ""
+"Here you can enter the CSS rules to adjust the language selector menu for "
+"your theme. Look at the examples in the `style-samples.css` file."
+msgstr ""
+"Aici puteți introduce regulile CSS pentru a regla meniul selectorul de limbi "
+"pentru tema. Uită-te la exemplele din `style-samples.css`."
+
+#: includes/options/class-wpglobus-options.php:365
+msgid "(Optional)"
+msgstr "(Opțional)"
+
+#: includes/options/class-wpglobus-options.php:377
+msgid "Languages table"
+msgstr "Tabel cu limbi"
+
+#: includes/options/class-wpglobus-options.php:383
+msgid "Use this table to add, edit or delete languages."
+msgstr ""
+"Folosește acest tabel pentru a adăuga, edita sau șterge limbile străine."
+
+#: includes/options/class-wpglobus-options.php:404
+msgid "Uncheck to disable WPGlobus"
+msgstr "Debifați pentru a dezactiva WPGlobus"
+
+#: includes/options/class-wpglobus-options.php:434
+msgid "Post types"
+msgstr "Tipuri de posturi"
+
+#: includes/options/class-wpglobus-options.php:591
+msgid "Read the Quick Start Guide"
+msgstr "Citiți ghidul de pornire rapidă"
+
+#: includes/options/class-wpglobus-options.php:596
+msgid "Visit our website"
+msgstr "Vizitează website-ul nostru"
+
+#: includes/options/class-wpglobus-options.php:601
+msgid "Buy WooCommerce WPGlobus extension"
+msgstr "Cumpără extensia WooCommerce WPGlobus"
+
+#: includes/options/class-wpglobus-options.php:606
+msgid "Collaborate on GitHub"
+msgstr "Colaborează pe GitHub"
+
+#: includes/options/class-wpglobus-options.php:612
+msgid "Like us on Facebook"
+msgstr "Apreciază-ne pe Facebook"
+
+#: includes/options/class-wpglobus-options.php:617
+msgid "Follow us on Twitter"
+msgstr "Urmărește-ne pe Twitter"
+
+#: includes/options/class-wpglobus-options.php:622
+msgid "Find us on LinkedIn"
+msgstr "Găsește-ne pe LinkedIn"
+
+#: includes/options/class-wpglobus-options.php:627
+msgid "Circle us on Google+"
+msgstr "Adaugă-ne în cercul tău pe Google+"
+
+#: includes/options/fields/table/table-languages.php:25
+msgid "item"
+msgstr "articol"
+
+#: includes/options/fields/table/table-languages.php:27
+msgid "items"
+msgstr "articole"
+
+#: includes/options/fields/table/table-languages.php:49
+msgid "Code"
+msgstr "Cod"
+
+#: includes/options/fields/table/table-languages.php:55
+msgid "Edit"
+msgstr "Editează"
+
+#: includes/options/fields/table/table-languages.php:60
+msgid "Delete"
+msgstr "Șterge"
+
+#: includes/options/fields/table/table-languages.php:66
+msgid "File"
+msgstr "Fișier"
+
+#: includes/options/fields/table/table-languages.php:71
+msgid "Flag"
+msgstr "Steag"
+
+#: includes/options/fields/table/table-languages.php:81
+msgid "Language name"
+msgstr "Numele limbii"
+
+#: includes/options/fields/table/table-languages.php:86
+msgid "English language name"
+msgstr "Numele limbii în engleză"
+
+#: includes/options/fields/table/table-languages.php:109
+msgid "No items found"
+msgstr "Fără articole găsite"
+
+#: includes/options/fields/table/table-languages.php:119
+msgid "Add new Language"
+msgstr "Adaugă limbă nouă"
+
+#: includes/options/fields/table/table-languages.php:325
+msgid "Default language"
+msgstr "Limbă maternă"
+
+#: includes/options/wpglobus-options-header.php:18
+msgid "We rely on your support!"
+msgstr "Ne bazăm pe sprijinul dumneavoastră!"
+
+#: includes/options/wpglobus-options-header.php:21
+msgid "Please consider a small donation to support the future development."
+msgstr ""
+"Vă rugăm să luață în considerare o mică donație pentru a sprijini "
+"dezvoltarea viitoare."
+
+#: includes/options/wpglobus-options-header.php:25
+msgid "Thank you!"
+msgstr "Mulțumesc!"
+
+#: includes/options/wpglobus-options-header.php:46
+msgid "WPGlobus Plus!"
+msgstr "WPGlobus Plus!"
+
+#: includes/options/wpglobus-options-header.php:49
+msgid ""
+"Advanced features and tweaks: URL translation, multilingual SEO analysis, "
+"separate publishing and more! "
+msgstr ""
+"Caracteristici avansate și trucuri: traducere URL, analiza multilingv SEO, "
+"publicarea separată și mai mult!"
+
+#: includes/options/wpglobus-options-header.php:55
+msgid "Get WPGlobus Plus now!"
+msgstr "Obține WPGlobus Plus acum!"
+
+#: updater/class-wpglobus-updater-admin.php:94
+msgid "Deactivate!"
+msgstr "Dezactivează!"
+
+#. translators: %s is an URL placeholder
+#: updater/class-wpglobus-updater-admin.php:109
+msgid "Do not have a license? Please purchase one on %s"
+msgstr "Nu aveți licență? Vă rugăm să o achiziționați pe% s"
+
+#: updater/class-wpglobus-updater-admin.php:129
+msgid "Deactivates License so it can be used on another site."
+msgstr "Dezactivează licența astfel încât să poată fi folosită pe un alt site."
+
+#: updater/class-wpglobus-updater-admin.php:143
+#: updater/class-wpglobus-updater.php:173
+msgid "License Activation"
+msgstr "Activare licență"
+
+#: updater/class-wpglobus-updater-admin.php:147
+msgid "License Key Status"
+msgstr "Stare cod de licență"
+
+#: updater/class-wpglobus-updater-admin.php:151
+msgid "License Key"
+msgstr "Cod licență"
+
+#: updater/class-wpglobus-updater-admin.php:155
+msgid "License email"
+msgstr "Email licență"
+
+#: updater/class-wpglobus-updater-admin.php:179
+#: updater/class-wpglobus-updater.php:174
+msgid "License Deactivation"
+msgstr "Dezactivare licență"
+
+#: updater/class-wpglobus-updater-admin.php:186
+msgid "Deactivate License Key"
+msgstr "Dezactivează codul de licență"
+
+#: updater/class-wpglobus-updater-admin.php:202
+msgid "Active"
+msgstr "Activ"
+
+#: updater/class-wpglobus-updater-admin.php:203
+msgid "Inactive"
+msgstr "Inactiv"
+
+#: updater/class-wpglobus-updater-admin.php:296
+msgid "License activated. "
+msgstr "Licență activă"
+
+#: updater/class-wpglobus-updater-admin.php:327
+msgid "Connection failed to the License Key API server. Try again later."
+msgstr ""
+"Conexiunea nu a reușit datorită licenței de server API. Încercați mai târziu."
+
+#: updater/class-wpglobus-updater-admin.php:393
+msgid ""
+"The license could not be deactivated. Use the License Deactivation tab to "
+"manually deactivate the license before activating a new license."
+msgstr ""
+"Licența nu poate fi dezactivată. Utilizați fila de dezactivare licență "
+"pentru a dezactiva manual licența înainte de a activa o nouă licență."
+
+#: updater/class-wpglobus-updater-admin.php:411
+msgid "Please select the checkbox to confirm your intention."
+msgstr "Vă rugăm să bifați caseta de selectare pentru a confirma intenția ta."
+
+#: updater/class-wpglobus-updater-admin.php:435
+msgid "License / email not set or already deactivated."
+msgstr "Licență / e-mail nu sunt setate sau sunt deja dezactivate."
+
+#: updater/class-wpglobus-updater-admin.php:454
+msgid "License deactivated. "
+msgstr "Licență dezactivată."
+
+#: updater/class-wpglobus-updater-check.php:338
+msgid ""
+"To check status, purchase or reactivate license, please go to your account."
+msgstr ""
+"Pentru a verifica starea, pentru a cumpăra sau reactiva licența, vă rugăm să "
+"mergeți la contul dvs.."
+
+#: updater/class-wpglobus-updater-check.php:340
+msgid "License expired."
+msgstr "Licență expirată"
+
+#: updater/class-wpglobus-updater-check.php:341
+msgid "Subscription on-hold."
+msgstr "Abonament în așteptare."
+
+#: updater/class-wpglobus-updater-check.php:342
+msgid "Subscription cancelled."
+msgstr "Abonament anulat."
+
+#: updater/class-wpglobus-updater-check.php:343
+msgid "Subscription suspended."
+msgstr "Abonament suspendat."
+
+#: updater/class-wpglobus-updater-check.php:344
+msgid "Subscription expired."
+msgstr "Abonament expirat."
+
+#: updater/class-wpglobus-updater-check.php:345
+msgid "Subscription pending."
+msgstr "Abonament în așteptare."
+
+#: updater/class-wpglobus-updater-check.php:346
+msgid "Subscription pending deletion."
+msgstr "Abonament în așteptare de ștergere."
+
+#: updater/class-wpglobus-updater-check.php:347
+msgid "Subscription not found."
+msgstr "Abonamentul nu a fost găsit."
+
+#: updater/class-wpglobus-updater-check.php:348
+msgid "License key not found or deactivated."
+msgstr "Codul de licență nu a fost găsit sau dezactivat."
+
+#: updater/class-wpglobus-updater-check.php:349
+msgid "No download permission. License / subscription probably expiring."
+msgstr "Fără permisiune de descărcare. Licență / abonament, probabil expirat."
+
+#: updater/class-wpglobus-updater-check.php:350
+msgid ""
+"License not activated. Go to the settings page and enter the license key and "
+"email to activate."
+msgstr ""
+"Licența nu este activată. Du-te la pagina de setări și introduceți codul de "
+"licență și e-mail pentru a activa."
+
+#: updater/class-wpglobus-updater-check.php:351
+msgid ""
+"Subscription changed. Please enter new license key in the settings page."
+msgstr ""
+"Abonament schimbat. Vă rugăm să introduceți noul cod de licență în pagina de "
+"setări."
+
+#: updater/class-wpglobus-updater.php:171
+msgid "License"
+msgstr "Licență"
+
+#: updater/class-wpglobus-updater.php:426
+msgid "License has not been activated."
+msgstr "Licența nu a fost activată"
+
+#: updater/class-wpglobus-updater.php:430
+msgid "Click here to enter the license key and get the updates."
+msgstr "Click aici pentru a introduce licența și pentru a obține actualizări."
+
+#. translators: %s - URL placeholder. Do not translate WP_... constants.
+#: updater/class-wpglobus-updater.php:458
+msgid ""
+"WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
+"WP_ACCESSIBLE_HOSTS."
+msgstr ""
+"WP_HTTP_BLOCK_EXTERNAL este setat la adevărat. Pentru a primi actualizări, "
+"vă rugăm să adăugați% s la WP_ACCESSIBLE_HOSTS."
+
+#. Author of the plugin/theme
+msgid "WPGlobus"
+msgstr "WPGlobus"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/WPGlobus/WPGlobus"
+msgstr "https://github.com/WPGlobus/WPGlobus"
+
+#. Description of the plugin/theme
+msgid ""
+"A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
+"widgets and even custom fields - in multiple languages!"
+msgstr ""
+"A WordPress Globalization / Multilingual Plugin, Mesaje, pagini, meniuri, "
+"widget-uri și domenii de evenimente personalizate - în mai multe limbi!"
+
+#. Author URI of the plugin/theme
+msgid "http://www.wpglobus.com/"
+msgstr "http://www.wpglobus.com/"
