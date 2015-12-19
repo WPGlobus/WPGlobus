@@ -138,6 +138,18 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 */			
 			$disabled_setting_mask = apply_filters( 'wpglobus_customize_disabled_setting_mask', $disabled_setting_mask );
 			
+			$element_selector = array( 'input[type=text]', 'textarea' );
+			
+			/**
+			 * Filter for element selectors. 
+			 * Returning array.
+			 * @since 1.4.0
+			 *
+			 * @param array $disabled_setting_mask An array of disabled masks.
+			 */			
+			$element_selector = apply_filters( 'wpglobus_customize_element_selector', $element_selector );
+			
+			
 			wp_enqueue_script(
 				'wpglobus-customize-control140',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control140' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -151,7 +163,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				array(
 					'version' => WPGLOBUS_VERSION,
 					'disabledSettingMask' 	=> $disabled_setting_mask,
-					'elementSelector'		=> array( 'input[type=text]', 'textarea' ),
+					'elementSelector'		=> $element_selector,
 					'findLinkBy'			=> array( 'link', 'url' )
 				)
 			);
