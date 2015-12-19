@@ -61,9 +61,9 @@ jQuery(document).ready(function ($) {
 					api.controlInstances[obj]['selector'] = e; 
 					api.controlInstances[obj]['type'] 	  = ''; 
 
-					$.each( WPGlobusCustomize.findLinkBy, function(i,piece) {
+					$.each( WPGlobusCustomize.setLinkBy, function( i, piece ) {
 						
-						if ( obj.indexOf(piece) >= 0 ) {
+						if ( obj.indexOf( piece ) >= 0 ) {
 							api.controlInstances[obj]['type'] = 'link';
 							if ( '' == api.controlInstances[obj]['setting'] ) {
 								// link perhaps was set to empty value 
@@ -71,7 +71,9 @@ jQuery(document).ready(function ($) {
 							}	
 							element.addClass( 'wpglobus-control-link' );
 						}
+						
 					});
+					
 					if ( api.controlInstances[obj]['type'] === '' ) {
 						if ( e == 'textarea' ) { 
 							api.controlInstances[obj]['type'] = 'textarea';
@@ -80,6 +82,7 @@ jQuery(document).ready(function ($) {
 							api.controlInstances[obj]['type'] = 'text';
 						}	
 					}
+					
 					element.val( WPGlobusCore.TextFilter( api.controlInstances[obj]['setting'], WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
 					element.addClass( 'wpglobus-customize-control' );
 					if ( api.controlInstances[obj]['type'] == 'link' ) {

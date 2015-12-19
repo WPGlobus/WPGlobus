@@ -145,9 +145,22 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * Returning array.
 			 * @since 1.4.0
 			 *
-			 * @param array $disabled_setting_mask An array of disabled masks.
+			 * @param array $element_selector An array of selectors.
 			 */			
 			$element_selector = apply_filters( 'wpglobus_customize_element_selector', $element_selector );
+			
+			
+			$set_link_by = array( 'link', 'url' );
+			
+			/**
+			 * Filter of masks to determine links.
+			 * @see value data-customize-setting-link of element			 
+			 * Returning array.
+			 * @since 1.4.0
+			 *
+			 * @param array $set_link_by An array of masks.
+			 */				
+			$set_link_by = apply_filters( 'wpglobus_customize_setlinkby', $set_link_by );
 			
 			
 			wp_enqueue_script(
@@ -164,7 +177,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					'version' => WPGLOBUS_VERSION,
 					'disabledSettingMask' 	=> $disabled_setting_mask,
 					'elementSelector'		=> $element_selector,
-					'findLinkBy'			=> array( 'link', 'url' )
+					'setLinkBy'				=> $set_link_by
 				)
 			);
 			
