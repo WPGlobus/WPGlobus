@@ -115,18 +115,28 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 */
 		public static function action__customize_controls_enqueue_scripts() {
 			
-			$disabled_instance_mask = array();
-			$disabled_instance_mask[] = 'nav_menu';
-			$disabled_instance_mask[] = 'new_menu_name';
-			$disabled_instance_mask[] = 'widget';
-			$disabled_instance_mask[] = 'color';
-			$disabled_instance_mask[] = 'wpseo';
-			$disabled_instance_mask[] = 'css';
-			$disabled_instance_mask[] = 'facebook';
-			$disabled_instance_mask[] = 'twitter';
-			$disabled_instance_mask[] = 'linkedin';
-			$disabled_instance_mask[] = 'behance';
-			$disabled_instance_mask[] = 'dribbble';
+			$disabled_setting_mask = array();
+			$disabled_setting_mask[] = 'nav_menu';
+			$disabled_setting_mask[] = 'new_menu_name';
+			$disabled_setting_mask[] = 'widget';
+			$disabled_setting_mask[] = 'color';
+			$disabled_setting_mask[] = 'wpseo';
+			$disabled_setting_mask[] = 'css';
+			$disabled_setting_mask[] = 'facebook';
+			$disabled_setting_mask[] = 'twitter';
+			$disabled_setting_mask[] = 'linkedin';
+			$disabled_setting_mask[] = 'behance';
+			$disabled_setting_mask[] = 'dribbble';
+			
+			/**
+			 * Filter to disable fields in customizer. 
+			 * @see value data-customize-setting-link of element
+			 * Returning array.
+			 * @since 1.4.0
+			 *
+			 * @param array $disabled_setting_mask An array of disabled masks.
+			 */			
+			$disabled_setting_mask = apply_filters( 'wpglobus_customize_disabled_setting_mask', $disabled_setting_mask );
 			
 			wp_enqueue_script(
 				'wpglobus-customize-control140',
@@ -140,8 +150,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				'WPGlobusCustomize',
 				array(
 					'version' => WPGLOBUS_VERSION,
-					'disabledInstanceMask' 	=> $disabled_instance_mask,
-					'elementSelector'		=> array( 'input[type=text]', 'textarea'),
+					'disabledSettingMask' 	=> $disabled_setting_mask,
+					'elementSelector'		=> array( 'input[type=text]', 'textarea' ),
 					'findLinkBy'			=> array( 'link', 'url' )
 				)
 			);

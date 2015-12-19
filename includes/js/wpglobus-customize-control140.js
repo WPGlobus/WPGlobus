@@ -38,7 +38,8 @@ jQuery(document).ready(function ($) {
 		ctrlCallback: function( context, obj, key ) {
 			
 			var dis = false;
-			$.each( WPGlobusCustomize.disabledInstanceMask, function(i,e) {
+			$.each( WPGlobusCustomize.disabledSettingMask, function(i,e) {
+				// we must check data-customize-setting-link
 				if ( obj.indexOf(e) >= 0 ){
 					dis = true;
 					return false;
