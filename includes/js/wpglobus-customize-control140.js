@@ -21,6 +21,7 @@ jQuery(document).ready(function ($) {
 		controlWidgets: {},
 		instancesKeep: false,
 		widgetKeep: false,
+		action: false,
 		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span style="font-weight:bold;">{{language}}</span>',
 		init: function(args) {
 			$.each( WPGlobusCoreData.enabled_languages, function(i,e){
@@ -33,6 +34,8 @@ jQuery(document).ready(function ($) {
 			api.attachListeners();
 		},
 		ctrlWidgetCallback: function( obj ) {
+			
+			api.action = false;
 			
 			if ( typeof api.controlWidgets[obj]['element'] !== 'undefined' ) {
 				return;	
@@ -53,7 +56,12 @@ jQuery(document).ready(function ($) {
 			}
 			
 			control.liveUpdateMode = false;
-			api.controlWidgets[ obj ]['inWidgetTitle'].text( ': ' + WPGlobusCore.TextFilter( control.setting().title, WPGlobusCustomize.languageAdmin ) );
+
+			if ( typeof control.setting().title === 'undefined' ) {
+				api.controlWidgets[ obj ]['inWidgetTitle'].text( '' );
+			} else {	
+				api.controlWidgets[ obj ]['inWidgetTitle'].text( ': ' + WPGlobusCore.TextFilter( control.setting().title, WPGlobusCustomize.languageAdmin ) );
+			}
 			
 			$.each( WPGlobusCustomize.elementSelector, function(i,e){
 				var element = control.container.find(e);
@@ -81,7 +89,7 @@ jQuery(document).ready(function ($) {
 			});
 		},	
 		ctrlCallback: function( context, obj, key ) {
-			
+
 			var dis = false;
 			$.each( WPGlobusCustomize.disabledSettingMask, function(i,e) {
 				/* we must check data-customize-setting-link for simple control */
@@ -98,17 +106,24 @@ jQuery(document).ready(function ($) {
 			if ( obj.indexOf( 'widget' ) >= 0 ) {
 				if ( typeof api.controlWidgets[obj] === 'undefined' ) {
 					api.controlWidgets[obj] = {}; 
+					if ( api.action ) {
+						api.ctrlWidgetCallback( obj );	
+					}	
 				}					
 				api.controlWidgets[ obj ]['parent'] = control.selector; 
 				return false;
 			}	
+			
+			
+			if ( typeof api.controlInstances[ obj ] !== 'undefined' ) {
+				return;	
+			}			
 
 			$.each( WPGlobusCustomize.elementSelector, function(i,e){
 				var element = control.container.find( e );
 				if ( element.length != 0 ) {
-					if ( typeof api.controlInstances[obj] === 'undefined' ) {
-						api.controlInstances[obj] = {}; 
-					}	
+
+					api.controlInstances[obj] = {}; 
 					api.controlInstances[obj]['element']  = element; 
 					api.controlInstances[obj]['setting']  = control.setting(); 
 					api.controlInstances[obj]['selector'] = e; 
@@ -366,7 +381,6 @@ jQuery(document).ready(function ($) {
 			 */
 			$(document).on( 'ajaxComplete', function( ev, response ) {
 				
-				
 				if ( typeof response.responseText === 'undefined' ) {
 					return;	
 				}
@@ -378,12 +392,18 @@ jQuery(document).ready(function ($) {
 
 				} else {
 					
+					if ( response.responseText.indexOf( 'WP_CUSTOMIZER_SIGNATURE' ) >= 0 ) {
+						api.action = 'customizerAjaxComplete';
+						api.setControlInstances();
+					}
+					
 					$.each( WPGlobusCustomize.controlWidgets, function( obj, data ) {
 						/* Apply widget ajax complete */
+						
 						var w = obj.replace( '_', '-' );
 						
 						if ( response.responseText.indexOf( w ) >= 0 ) {
-
+						
 							data.submit.css({'display':'block'});
 							data.control.liveUpdateMode = false;
 
