@@ -17,10 +17,10 @@ jQuery(document).ready(function ($) {
 		languages: {},
 		index: 0,
 		length: 0,
-		positionSet: false,
 		controlInstances: {},
-		//widgetElement: {},
+		controlWidgets: {},
 		instancesKeep: false,
+		widgetKeep: false,
 		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span style="font-weight:bold;">{{language}}</span>',
 		init: function(args) {
 			$.each( WPGlobusCoreData.enabled_languages, function(i,e){
@@ -31,16 +31,61 @@ jQuery(document).ready(function ($) {
 			api.setTitle();
 			api.setControlInstances();
 			api.attachListeners();
-			
-			//api.setElements();
-			//api.addListeners();
 		},
+		ctrlWidgetCallback: function( obj ) {
+			
+			if ( typeof api.controlWidgets[obj]['element'] !== 'undefined' ) {
+				return;	
+			}
+			
+			var control = wp.customize.control.instance( obj );
+			api.controlWidgets[ obj ]['element'] 		= {};
+			api.controlWidgets[ obj ]['control'] 		= control;
+			api.controlWidgets[ obj ]['inWidgetTitle'] 	= control.container.find( '.in-widget-title' );
+			
+			var submit  = control.container.find( 'input[type=submit]' );
+			
+			if ( submit.length != 0 ) {
+				submit.css({'display':'block'});
+				submit.attr( 'data-widget', obj );
+				api.controlWidgets[obj]['submit'] = submit;
+				api.attachWidgetListeners( api.controlWidgets[obj] );
+			}
+			
+			control.liveUpdateMode = false;
+			api.controlWidgets[ obj ]['inWidgetTitle'].text( ': ' + WPGlobusCore.TextFilter( control.setting().title, WPGlobusCustomize.languageAdmin ) );
+			
+			$.each( WPGlobusCustomize.elementSelector, function(i,e){
+				var element = control.container.find(e);
+				if ( element.length != 0 ) {
+					if ( typeof api.controlWidgets[obj]['element'][ element[0].id ] === 'undefined' ) {
+						api.controlWidgets[obj]['element'][ element[0].id ] = {}; 
+					}	
+					api.controlWidgets[obj]['element'][ element[0].id ]['element']  = element; 
+					api.controlWidgets[obj]['element'][ element[0].id ]['setting']  = control.setting(); 
+					api.controlWidgets[obj]['element'][ element[0].id ]['selector'] = e; 
+					api.controlWidgets[obj]['element'][ element[0].id ]['value']    = element[0].defaultValue; 
+					
+					element.addClass( 'wpglobus-customize-widget-control' );
+					element.attr( 'data-widget', obj );
+					
+					element.val( 
+						WPGlobusCore.TextFilter( 
+							element[0].defaultValue,
+							WPGlobusCoreData.language,
+							'RETURN_EMPTY' 
+						) 
+					);
+					
+				}	
+			});
+		},	
 		ctrlCallback: function( context, obj, key ) {
 			
 			var dis = false;
 			$.each( WPGlobusCustomize.disabledSettingMask, function(i,e) {
-				// we must check data-customize-setting-link
-				if ( obj.indexOf(e) >= 0 ){
+				/* we must check data-customize-setting-link for simple control */
+				if ( obj.indexOf( e ) >= 0 ){
 					dis = true;
 					return false;
 				}	
@@ -49,6 +94,14 @@ jQuery(document).ready(function ($) {
 			if (dis) return;
 			
 			var control = wp.customize.control.instance( obj );
+			
+			if ( obj.indexOf( 'widget' ) >= 0 ) {
+				if ( typeof api.controlWidgets[obj] === 'undefined' ) {
+					api.controlWidgets[obj] = {}; 
+				}					
+				api.controlWidgets[ obj ]['parent'] = control.selector; 
+				return false;
+			}	
 
 			$.each( WPGlobusCustomize.elementSelector, function(i,e){
 				var element = control.container.find( e );
@@ -66,7 +119,7 @@ jQuery(document).ready(function ($) {
 						if ( obj.indexOf( piece ) >= 0 ) {
 							api.controlInstances[obj]['type'] = 'link';
 							if ( '' == api.controlInstances[obj]['setting'] ) {
-								// link perhaps was set to empty value 
+								/* link perhaps was set to empty value */
 								api.controlInstances[obj]['setting'] = element[0].defaultValue;
 							}	
 							element.addClass( 'wpglobus-control-link' );
@@ -78,7 +131,6 @@ jQuery(document).ready(function ($) {
 						if ( e == 'textarea' ) { 
 							api.controlInstances[obj]['type'] = 'textarea';
 						} else {
-							// @todo check for link	
 							api.controlInstances[obj]['type'] = 'text';
 						}	
 					}
@@ -94,79 +146,6 @@ jQuery(document).ready(function ($) {
 		},
 		setControlInstances: function() {
 			wp.customize.control.each( api.ctrlCallback );
-		},	
-		settingSet: function( cname, newValue ) {
-			var control = wp.customize.control.instance( cname ),
-				element = control.container.find('#widget-wpglobus-5-title');
-				 
-			//console.log( newValue );	 
-			//control.setting.set( newValue );
-			//element.val( control.setting() );
-			element.val( newValue );
-			//console.log( element.val() );	 
-			return;
-		},
-		setWidgets: function() {
-			
-			$(document).on( 'click', '.widget-title, .widget-title-action', function(ev){
-				$('.customize-control-widget_form .widget-content textarea, .customize-control-widget_form .widget-content input[type=text]').each(function(i,e){
-					var $t = $(this),
-						id = $t.attr('id');
-						
-					if ( ! $t.hasClass('wpglobus-customize-widget-control') ) {
-						//WPGlobusDialogApp.addElement( $t.attr('id') );
-						//$( '#wpglobus-dialog-start-' + $t.attr('id') ).css({'display':'none'});
-						//$( '#wpglobus-' + $t.attr('id') ).addClass( 'wpglobus-customize-widget-control' );
-						
-						$( $t ).addClass( 'wpglobus-customize-widget-control' );
-						
-						api.widgetElement[id] = $t.val(); 
-						
-						$t.val( WPGlobusCore.TextFilter( $t.val(), WPGlobusCoreData.language, 'RETURN_EMPTY' ) ); 
-						
-					
-					}	
-				});				
-			});
-			
-			$(document).on( 'keyup', '.wpglobus-customize-widget-control', function(e) {
-				var $t = $( this );
-				api.widgetElement[$t.attr('id')] = WPGlobusCore.getString( api.widgetElement[$t.attr('id')], $t.val(), WPGlobusCoreData.language );
-			});
-			
-			$('#save').on( 'mouseenter', function(event){
-				$( 'input.wpglobus-customize-widget-control' ).each( function(i,e){
-					var $e = $(e);
-					$e.val( api.widgetElement[$e.attr('id')] );
-					$e.trigger( 'change' );	
-				});
-			}).on( 'mouseleave', function(event) {
-				if ( ! api.widgetElementsKeep ) {
-					$( '.wpglobus-customize-widget-control' ).each( function(i,e){
-						var $e = $(e);
-						$e.val( WPGlobusCore.TextFilter( api.widgetElement[$e.attr('id')], WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
-						//$e.trigger( 'change' );	
-					});
-				}	
-			}).on( 'click', function(event){
-				api.widgetElementsKeep = true;
-				//$( '.wpglobus-customize-widget-control' ).each( function(i,e){
-					//$( this ).trigger('change');	
-				//});	
-			});
-			
-			/*
-			$(document).on( 'change', '.wpglobus-customize-widget-control', function(e) {
-				var $t = $(this),
-					sid = $t.data('source-id');
-
-				if ( '' == sid ) {		
-					sid = $t.data('nodename') + '[name="' + $t.data('source-name') + '"]';
-				} else {
-					sid = '#'+sid;	
-				}
-				$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
-			}); // */
 		},	
 		setTitle: function() {
 			$( WPGlobusCoreData.customize.info.element ).html( WPGlobusCoreData.customize.info.html );
@@ -200,7 +179,7 @@ jQuery(document).ready(function ($) {
 			return t;			
 		},	
 		getString: function(s, newVal, lang) {
-			// using '|||' mark for correct work with url
+			/* using '|||' mark for correct work with url */
 			if ( 'undefined' === typeof( s ) ) {
 				return s;
 			}
@@ -224,47 +203,6 @@ jQuery(document).ready(function ($) {
 			sR = sR.join('|||');
 			return sR;
 		},		
-		setElements: function() {
-			//api.setTitle();
-			var value;
-			$.each(WPGlobusCoreData.customize.addElements, function(i,e){
-				var $e = $(e.element);
-				$e.attr('id',i).val(e.value).trigger('change');
-				if ( e.type == 'textarea' ) {
-					if ( typeof e.textarea_attrs !== 'undefined' ) {
-						$e.addClass( e.textarea_attrs.class );
-					}
-				}	
-				if ( typeof e.options !== 'undefined' ) {
-					if ( typeof e.options.setValue !== 'undefined' && e.options.setValue ) {
-						value = $(e.origin_element).val();
-						$e.data( 'source', value );
-						$e.val( WPGlobusCore.TextFilter( value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
-						if ( $e.hasClass('wpglobus-control-url') ) {
-							$(e.origin_element).val( api.getString( value ) );	
-						}	
-					}
-					if ( typeof e.options.setLabel !== 'undefined' && e.options.setLabel ) {
-						$(e.title).text( $(e.origin_title).text() );
-						$(e.description).text( $(e.origin_description).text() );
-					}
-				}	
-				$e.on('change',function (ev){
-					var $t = $(this),
-						$el = $( WPGlobusCoreData.customize.addElements[$(this).data('customize-setting-link')].origin_element );
-					
-					$t.data( 'source', WPGlobusCore.getString( $t.data('source'), $t.val() ) );
-					if ( $t.hasClass('wpglobus-control-url') ) {
-						$el.val( api.getString( $t.data('source') ) );
-					} else {
-						$el.val( WPGlobusCore.getString( $el.val(), $t.val() ) );
-					}
-					if ( ! $t.hasClass('wpglobus-not-trigger-change') ) {
-						$el.trigger('change');
-					}	
-				});		
-			});		
-		},	
 		addLanguageSelector: function() {
 			
 			$('<a style="margin-left:48px;" class="customize-controls-close wpglobus-customize-selector"><span class="wpglobus-globe"></span></a>').insertAfter('.customize-controls-preview-toggle');	
@@ -277,30 +215,35 @@ jQuery(document).ready(function ($) {
 					api.index++;
 				}	
 
-				WPGlobusCoreData.language = api.languages[api.index];
+				WPGlobusCoreData.language = api.languages[ api.index ];
 				
-				$(this).html( api.selectorHtml.replace('{{language}}', WPGlobusCoreData.language) );
+				$(this).html( api.selectorHtml.replace( '{{language}}', WPGlobusCoreData.language ) );
 				
 				$( '.wpglobus-customize-control' ).each( function(i,e){
 					var $e = $(e), inst = $e.data( 'customize-setting-link' );
 					if ( 'undefined' === typeof WPGlobusCustomize.controlInstances[inst] ) {
 						return;		
 					}
-					if ( $e.hasClass('wpglobus-control-link') ) {
+					if ( $e.hasClass( 'wpglobus-control-link' ) ) {
 						var t = api.getTranslations( WPGlobusCustomize.controlInstances[inst].setting );
-						//console.log( t[ WPGlobusCoreData.language ]  );
-						$e.val( t[ WPGlobusCoreData.language ]  );			
+						$e.val( t[ WPGlobusCoreData.language ] );			
 					} else {
 						$e.val( WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
 					}	
 				});
 				
-				// widgets
-				$( '.wpglobus-customize-widget-control' ).each( function(i,e){
-					var $e = $(e);
-					//console.log( WPGlobusCore.TextFilter( $( '#' + $e.data( 'source-id') ).val(), WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
-					//$e.val( WPGlobusCore.TextFilter( $( '#' + $e.data( 'source-id') ).val(), WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
-					//$e.val( WPGlobusCore.TextFilter( api.widgetElement[$e.attr('id')], WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+				/* widgets */
+				$( '.wpglobus-customize-widget-control' ).each( function(i, e){
+					var $e = $(e), obj = $e.data('widget');
+				
+					$e.val( 
+						WPGlobusCore.TextFilter( 
+							WPGlobusCustomize.controlWidgets[ obj ][ 'element' ][ $e.attr('id') ][ 'value' ],
+							WPGlobusCoreData.language,
+							'RETURN_EMPTY' 
+						) 
+					);
+
 				});
 				
 			});			
@@ -310,6 +253,7 @@ jQuery(document).ready(function ($) {
 			if ( typeof force === 'undefined' ) {
 				force = true;
 			}
+			/* simple controls */
 			$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 				var control = wp.customize.control.instance( inst );
 				if ( data.type == 'link' ) {
@@ -328,12 +272,40 @@ jQuery(document).ready(function ($) {
 						data.element.val( WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
 					}
 				}
-			});			
+			});	
+
+		},	
+		attachWidgetListeners: function( obj ) {
+			
+			if ( typeof obj['submit'][0]['id'] !== 'undefined' ) {
+				
+				$( document ).on( 'mouseenter', '#' + obj['submit'][0]['id'], function(ev){
+
+					$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
+						$( '#' + id ).val( e.value );
+					});
+
+				}).on( 'mouseleave', '#' + obj['submit'][0]['id'], function(ev) {
+					
+					if ( ! api.widgetKeep ) {
+						$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
+							$( '#' + id ).val( WPGlobusCore.TextFilter( e.value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+						});					
+					}
+					
+				}).on( 'click', '#' + obj['submit'][0]['id'], function(ev){
+					api.widgetKeep = true;
+				});						
+				
+			}
+			
 		},	
 		attachListeners: function() {
+			/* simple controls */
 			$( '.wpglobus-customize-control' ).on( 'keyup', function(ev) {
 				var $t = $(this),
 					inst = $t.data( 'customize-setting-link' );
+					
 				if ( 'undefined' === typeof WPGlobusCustomize.controlInstances[inst] ) {
 					return;		
 				}
@@ -357,7 +329,25 @@ jQuery(document).ready(function ($) {
 				}		
 			});
 			
-			$('#save').on( 'mouseenter', function(event){
+			/* widgets */
+			$( document ).on( 'keyup', '.wpglobus-customize-widget-control', function(ev) {
+				var $t = $(this),
+					obj = $t.data( 'widget' );
+					
+				if ( 'undefined' === typeof WPGlobusCustomize.controlWidgets[ obj ] ) {
+					return;		
+				}
+		
+				WPGlobusCustomize.controlWidgets[ obj ]['element'][ $t.attr('id') ]['value'] = WPGlobusCore.getString( 
+					WPGlobusCustomize.controlWidgets[ obj ]['element'][ $t.attr('id') ]['value'],
+					$t.val(),
+					WPGlobusCoreData.language 
+				);
+				
+			});			
+			
+			/* Save&Publish button */
+			$( '#save' ).on( 'mouseenter', function(event){
 				$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 					var control = wp.customize.control.instance( inst );
 					control.setting.set( data.setting );
@@ -371,66 +361,63 @@ jQuery(document).ready(function ($) {
 				api.instancesKeep = true;
 			});			
 		
+			/**
+			 * ajaxComplete event handler
+			 */
 			$(document).on( 'ajaxComplete', function( ev, response ) {
-				if ( typeof response.responseText !== 'undefined' ) {
-					if ( '{"success":true,"data":[]}' == response.responseText ) {
-						api.updateElements( false );
-					}	
+				
+				
+				if ( typeof response.responseText === 'undefined' ) {
+					return;	
 				}
+				
+				if ( '{"success":true,"data":[]}' == response.responseText ) {
+
+					/* Save&Publish ajax complete */
+					api.updateElements( false );
+
+				} else {
+					
+					$.each( WPGlobusCustomize.controlWidgets, function( obj, data ) {
+						/* Apply widget ajax complete */
+						var w = obj.replace( '_', '-' );
+						
+						if ( response.responseText.indexOf( w ) >= 0 ) {
+
+							data.submit.css({'display':'block'});
+							data.control.liveUpdateMode = false;
+
+							$.each( data['element'], function( id, e ) {
+								$( '#' + id ).val( WPGlobusCore.TextFilter( e.value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+							});
+							
+							data.inWidgetTitle.text( ': ' + WPGlobusCore.TextFilter( data.control.setting().title, WPGlobusCustomize.languageAdmin ) );
+							api.widgetKeep = false;
+							
+							return false;
+						}
+						
+					});	
+
+				}
+				
 			});
 			
-		},	
-		setPosition: function(e) {
-			if ( typeof e.options.setPosition !== 'undefined' && e.options.setPosition ) {
-				var el = $(e.parent).detach();
-				el.insertBefore( e.origin_parent );
-				$(e.parent).css({'display':'block'});
-			}
-		},	
-		addListeners: function() {
-			$(document).on('click','.control-section', function(ev){
-				if ( api.positionSet ) {
-					return;
-				}	
-				api.positionSet = true;
-				$.each(WPGlobusCoreData.customize.addElements, function(i,e){
-					$(e.origin_parent).css({'display':'none'});
-					$(e.origin_parent+' label' ).css({'display':'none'}); // from WP4.3				
-					if ( typeof e.options !== 'undefined' ) {
-						api.setPosition(e);
+			/**
+			 * Event handler for tracking clicks by widgets title
+			 */
+			$(document).on( 'click', '.widget-title, .widget-title-action', function(ev){
+				var $t = $(this);
+				var id = $t.parents('.customize-control-widget_form').attr('id');
+				$.each( api.controlWidgets, function( obj, d ) {
+					if ( '#'+id == d.parent ) {
+						api.ctrlWidgetCallback( obj );
+						return false;
 					}	
 				});
 			});			
-
-			$(document).ajaxSend(function(event, jqxhr, settings){
-				if ( 'undefined' == typeof settings.data ) {
-					return;	
-				}	
-				if ( settings.data.indexOf('action=customize_save') >= 0 ) {
-					var s=settings.data.split('&'),
-						ss, source;
-
-					$.each(s, function(i,e){
-						ss = e.split('=');
-						if ( 'customized' == ss[0] ) {
-							source = ss[1];
-							return;	
-						}	
-					});
-					
-					var q = decodeURIComponent(source);
-					q = JSON.parse(q);
-					$.each(WPGlobusCoreData.customize.addElements, function(elem,value){			
-						if ( typeof q[elem] !== 'undefined' ) {
-							q[value.origin] = $(WPGlobusCoreData.customize.addElements[elem].origin_element).val();
-						}	
-					});
-					settings.data = settings.data.replace( source, JSON.stringify(q) );
-				}
-			});	
-
-			api.setWidgets();	
-		}	
+			
+		}
 	};
 	
 	WPGlobusCustomize =  $.extend( {}, WPGlobusCustomize, api );	

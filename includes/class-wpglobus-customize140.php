@@ -24,6 +24,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				'WPGlobus_Customize',
 				'action__customize_register'
 			) ); */
+			
 			add_action( 'customize_preview_init', array(
 				'WPGlobus_Customize',
 				'action__customize_preview_init'
@@ -118,7 +119,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_setting_mask = array();
 			$disabled_setting_mask[] = 'nav_menu';
 			$disabled_setting_mask[] = 'new_menu_name';
-			$disabled_setting_mask[] = 'widget';
+			$disabled_setting_mask[] = 'widgets';
 			$disabled_setting_mask[] = 'color';
 			$disabled_setting_mask[] = 'wpseo';
 			$disabled_setting_mask[] = 'css';
@@ -162,7 +163,6 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 */				
 			$set_link_by = apply_filters( 'wpglobus_customize_setlinkby', $set_link_by );
 			
-			
 			wp_enqueue_script(
 				'wpglobus-customize-control140',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control140' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -175,6 +175,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				'WPGlobusCustomize',
 				array(
 					'version' => WPGLOBUS_VERSION,
+					'languageAdmin'			=> WPGlobus::Config()->language,
 					'disabledSettingMask' 	=> $disabled_setting_mask,
 					'elementSelector'		=> $element_selector,
 					'setLinkBy'				=> $set_link_by
