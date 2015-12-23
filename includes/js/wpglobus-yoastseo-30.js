@@ -25,8 +25,31 @@ jQuery(document).ready(function ($) {
 		init: function() {
 			api.start();
 		},	
+		initAddKeywordPopup: function() {
+			/** @see wp-seo-metabox-302.js */
+			/**
+			 * Adds keyword popup if the template for it is found
+			 */
+			// If add keyword popup exists bind it to the add keyword button
+			if ( 1 === $( '#wpseo-add-keyword-popup' ).length ) {
+				$( '.wpseo-add-keyword' ).on( 'click', api.addKeywordPopup );
+			}
+		},	
+		addKeywordPopup: function() {
+			/** @see wp-seo-metabox-302.js */
+			/**
+			 * Shows a informational popup if someone click the add keyword button
+			 */
+			var title = $( '#wpseo-add-keyword-popup' ).find( 'h3' ).html();
+
+			tb_show( title, '#TB_inline?width=650&height=350&inlineId=wpseo-add-keyword-popup', 'group' );
+
+			// The container window isn't the correct size, rectify this.
+			jQuery( '#TB_window' ).css( 'height', 235 );
+			jQuery( '#TB_window' ).css( 'width', 680 );
+		},	
 		qtip: function() {
-			// @see jQuery( '.yoast_help' ).qtip()
+			/** @see jQuery( '.yoast_help' ).qtip() */
 			$( '.yoast_help' ).qtip(
 				{
 					content: {
@@ -52,7 +75,7 @@ jQuery(document).ready(function ($) {
 		},		
 		start: function() {
 
-			// tabs on
+			/** tabs on */
 			$( api.wpseoTabSelector ).tabs();
 			
 			api.ids 	= api.attrs.data('ids');
@@ -79,7 +102,7 @@ jQuery(document).ready(function ($) {
 				$('#'+sectionID+' .snippet_container').addClass('wpglobus-snippet_container');
 				
 				if ( l !== WPGlobusCoreData.default_language ) {
-					// hide plus sign
+					/** hide plus sign */
 					$('#'+sectionID+' .wpseo-add-keyword').addClass('hidden');
 				}
 				
@@ -98,18 +121,18 @@ jQuery(document).ready(function ($) {
 					if ( 'snippet_meta' == id ) {
 						$id.addClass('wpglobus-snippet_meta');
 					}
-					// url
+					/** url */
 					if ( 'snippet_cite' == id ) {
 						$id.addClass('wpglobus-snippet_cite');
 					}
 					if ( 'snippet_citeBase' == id ) {
 						$id.addClass('wpglobus-snippet_citeBase');
 					}
-					// focuskw
+					/** focuskw */
 					if ( 'yoast_wpseo_focuskw_text_input' == id ) {
 						$id.addClass('wpglobus-yoast_wpseo_focuskw_text_input');
 					}
-					// wpseo-pageanalysis
+					/** wpseo-pageanalysis */
 					if ( 'wpseo-pageanalysis' == id ) {
 						$id.addClass('wpglobus-wpseo-pageanalysis');
 					}
@@ -133,7 +156,7 @@ jQuery(document).ready(function ($) {
 				
 			}); // end each .wpglobus-wpseo-general	
 	
-			// hide original section content
+			/** hide original section content */
 			api.iB.addClass( 'hidden' );
 			api.iB.css({'height':0,'overflow':'hidden'});
 			
@@ -167,12 +190,13 @@ jQuery(document).ready(function ($) {
 				}
 			});
 			
-			api.qtip();		
+			api.qtip();	
+			api.initAddKeywordPopup();	
 			
 		}	
 	}
 	
-	// ***** //
+	/********/
 	var _this;
 	var WPGlobusYoastSeoPlugin = function() {
 		
@@ -260,7 +284,7 @@ jQuery(document).ready(function ($) {
 		});			
 		
 		$( WPGlobusYoastSeo.wpseoTabSelector ).on( 'tabsactivate', function(event, ui){
-			// set keyword
+			/** set keyword */
 			if ( ui.newPanel.attr( 'data-language' ) !== WPGlobusCoreData.default_language ) {
 				return;	
 			}	
