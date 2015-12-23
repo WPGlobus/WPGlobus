@@ -117,7 +117,9 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		public static function action__customize_controls_enqueue_scripts() {
 			
 			$disabled_setting_mask = array();
-			$disabled_setting_mask[] = 'nav_menu';
+			$disabled_setting_mask[] = 'nav_menu_item';
+			$disabled_setting_mask[] = 'nav_menu[';
+			$disabled_setting_mask[] = 'nav_menu_locations';
 			$disabled_setting_mask[] = 'new_menu_name';
 			$disabled_setting_mask[] = 'widgets';
 			$disabled_setting_mask[] = 'color';
