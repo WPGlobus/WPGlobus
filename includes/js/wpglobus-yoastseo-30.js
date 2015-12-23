@@ -136,9 +136,13 @@ jQuery(document).ready(function ($) {
 					if ( 'wpseo-pageanalysis' == id ) {
 						$id.addClass('wpglobus-wpseo-pageanalysis');
 					}
-
-					$id.attr('id',id+'_'+l);
-					$('#'+id+'_'+l).attr('data-language',l);
+					/** #snippet_preview */
+					if ( 'snippet_preview' == id ) {
+						$id.addClass('wpglobus-snippet_preview');
+					}
+					
+					$id.attr( 'id', id+'_'+l );
+					$( '#'+id+'_'+l ).attr( 'data-language', l );
 				});
 				
 				// set focus keywords for every language
