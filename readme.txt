@@ -136,6 +136,7 @@ No known backward incompatibility issues.
 	* The national flag of Kurdistan.
 	* 'wpglobus-current-language' class for widget
 	* supports Customizer for any theme
+	* supports Customizer for widgets
 	
 = 1.3.2 =
 
