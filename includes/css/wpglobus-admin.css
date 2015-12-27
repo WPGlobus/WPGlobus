@@ -229,6 +229,7 @@ ul.wpglobus-important li {
   content: "\f319";
   font-size: 20px;
 }
+.wpglobus-customize-translatable-element,
 .wpglobus-customize-control,
 .wpglobus-customize-widget-control {
   border-left: 3px solid blue !important;
