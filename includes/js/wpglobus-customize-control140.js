@@ -167,6 +167,7 @@ jQuery(document).ready(function ($) {
 					
 				}	
 			});
+			
 		},	
 		ctrlCallback: function( context, obj, key ) {
 
@@ -320,8 +321,13 @@ jQuery(document).ready(function ($) {
 				}	
 
 				WPGlobusCoreData.language = api.languages[ api.index ];
-				
+
 				$(this).html( api.selectorHtml.replace( '{{language}}', WPGlobusCoreData.language ) );
+				
+				/**
+				 * Event after language was changed
+				 */				
+				$( document ).triggerHandler( 'wpglobus_cusomize_control_language', [ WPGlobusCoreData.language ] );
 				
 				$( '.wpglobus-customize-control' ).each( function(i,e){
 					var $e = $(e), inst = $e.data( 'customize-setting-link' );
@@ -339,7 +345,6 @@ jQuery(document).ready(function ($) {
 				/* widgets */
 				$( '.wpglobus-customize-widget-control' ).each( function(i, e){
 					var $e = $(e), obj = $e.data('widget');
-				
 					$e.val( 
 						WPGlobusCore.TextFilter( 
 							WPGlobusCustomize.controlWidgets[ obj ][ 'element' ][ $e.attr('id') ][ 'value' ],
@@ -555,7 +560,7 @@ jQuery(document).ready(function ($) {
 						var w = obj.replace( '_', '-' );
 						
 						if ( response.responseText.indexOf( w ) >= 0 ) {
-						
+	
 							data.submit.css({'display':'block'});
 							data.control.liveUpdateMode = false;
 
