@@ -131,8 +131,8 @@ jQuery(document).ready(function ($) {
 			if ( submit.length != 0 ) {
 				submit.css({'display':'block'});
 				submit.attr( 'data-widget', obj );
-				api.controlWidgets[obj]['submit'] = submit;
-				api.attachWidgetListeners( api.controlWidgets[obj] );
+				api.controlWidgets[ obj ][ 'submit' ] = submit;
+				api.attachWidgetListeners( api.controlWidgets[ obj ] );
 			}
 			
 			control.liveUpdateMode = false;
@@ -167,6 +167,11 @@ jQuery(document).ready(function ($) {
 					
 				}	
 			});
+			
+			/**
+			 * Event handler after widget was added
+			 */
+			$( document ).triggerHandler( 'wpglobus_cusomize_control_added_widget', [ obj ] );
 			
 		},	
 		ctrlCallback: function( context, obj, key ) {
@@ -411,27 +416,34 @@ jQuery(document).ready(function ($) {
 				});
 			}); // */	
 		},	
+		onSubmitEvents: function( ev ) {
+			console.log( ev.type );
+			if ( ev.type == 'mouseenter' ) {
+				
+				$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
+					$( '#' + id ).val( e.value );
+				});				
+				
+			} else if ( ev.type == 'mouseleave' ) {	
+
+				if ( ! api.widgetKeep ) {
+					$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
+						$( '#' + id ).val( WPGlobusCore.TextFilter( e.value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+					});					
+				}			
+			
+			} else if ( ev.type == 'click' ) {
+				api.widgetKeep = true;	
+			}	
+			
+		},	
 		attachWidgetListeners: function( obj ) {
 			
 			if ( typeof obj['submit'][0]['id'] !== 'undefined' ) {
 				
-				$( document ).on( 'mouseenter', '#' + obj['submit'][0]['id'], function(ev){
-
-					$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
-						$( '#' + id ).val( e.value );
-					});
-
-				}).on( 'mouseleave', '#' + obj['submit'][0]['id'], function(ev) {
-					
-					if ( ! api.widgetKeep ) {
-						$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
-							$( '#' + id ).val( WPGlobusCore.TextFilter( e.value, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
-						});					
-					}
-					
-				}).on( 'click', '#' + obj['submit'][0]['id'], function(ev){
-					api.widgetKeep = true;
-				});						
+				$( document ).on( 'mouseenter', '#' + obj['submit'][0]['id'], api.onSubmitEvents )
+				.on( 'mouseleave', '#' + obj['submit'][0]['id'], api.onSubmitEvents )
+				.on( 'click', '#' + obj['submit'][0]['id'], api.onSubmitEvents );						
 				
 			}
 			
