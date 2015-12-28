@@ -129,6 +129,15 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.4.0-beta1 =
+
+* ADDED:
+	* Support YoastSEO 3
+	* The national flag of Kurdistan.
+	* 'wpglobus-current-language' class for widget
+	* supports Customizer for any theme
+	* supports Customizer for widgets
+	
 = 1.3.2 =
 
 * FIXED:

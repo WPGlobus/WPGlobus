@@ -1125,12 +1125,19 @@ class WPGlobus {
 
 			} else if ( 'customize.php' == $page ) {
 				
+				if ( version_compare( WPGLOBUS_VERSION, '1.4.0-beta1', '<' ) ) {
+					$html = sprintf( __( 'You are customizing %s' ), '<strong class="theme-name site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' );
+				} else {
+					// @since 1.4.0 class panel-title site-title
+					$html = sprintf( __( 'You are customizing %s' ), '<strong class="panel-title site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' );
+				}
+				
 				$page_action = 'customize.php';
 				$page_data_key = 'customize';
 				$page_data_values = array(
 					'info' => array(
 						'element' => '#customize-info .preview-notice',
-						'html' => sprintf( __( 'You are customizing %s' ), '<strong class="theme-name site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' )
+						'html' => $html
 					),
 					'addElements' => array(
 						'wpglobus_blogname' => array(

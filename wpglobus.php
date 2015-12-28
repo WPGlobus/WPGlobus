@@ -6,7 +6,7 @@
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.3.2
+ * Version: 1.4.0-beta1
  * Author: WPGlobus
  * Author URI: http://www.wpglobus.com/
  * Network: false
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.3.2' );
+define( 'WPGLOBUS_VERSION', '1.4.0-beta1' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /** @todo Get rid of these */
@@ -57,31 +57,47 @@ require_once 'includes/class-wpglobus-filters.php';
 require_once 'includes/wpglobus-controller.php';
 
 if ( defined( 'WPSEO_VERSION' ) ) {
-	require_once 'includes/class-wpglobus-wpseo.php';
-	WPGlobus_WPSEO::controller();
+	if ( version_compare( WPSEO_VERSION, '3.0.0', '<' ) ) {
+		require_once 'includes/class-wpglobus-wpseo.php';
+		WPGlobus_WPSEO::controller();
+	} else {
+		require_once 'includes/class-wpglobus-yoastseo30.php';
+		WPGlobus_YoastSEO::controller();
+	}	
 }
 
 /**
  * Theme compatibility
  */
+if ( version_compare( WPGLOBUS_VERSION, '1.4.0-beta1', '<' ) ) {
 
-/**
- * Fix multilingual strings in basic `Customize`
- *
- * @since 1.2.1
- */
-require_once 'includes/class-wpglobus-customize.php';
-WPGlobus_Customize::controller();
+	/**
+	 * Fix multilingual strings in basic `Customize`
+	 *
+	 * @since 1.2.1
+	 */
+	require_once 'includes/class-wpglobus-customize.php';
+	WPGlobus_Customize::controller();
 
-/**
- * Support of theme option panels and customizer
- * @since 1.3.0
- */
-if ( WPGlobus_WP::in_wp_admin() && ! WPGlobus_WP::is_admin_doing_ajax() ) {
-	require_once 'includes/admin/class-wpglobus-wp-theme.php';
-	WPGlobus::Config()->WPGlobus_WP_Theme = new WPGlobus_WP_Theme();
+	/**
+	 * Support of theme option panels and customizer
+	 * @since 1.3.0
+	 */
+	if ( WPGlobus_WP::in_wp_admin() && ! WPGlobus_WP::is_admin_doing_ajax() ) {
+		require_once 'includes/admin/class-wpglobus-wp-theme.php';
+		WPGlobus::Config()->WPGlobus_WP_Theme = new WPGlobus_WP_Theme();
+	}
+	
+} else {	
+
+	/**
+	 * Support of theme option panels and customizer
+	 * @since 1.4.0
+	 */
+	require_once 'includes/class-wpglobus-customize140.php';
+	WPGlobus_Customize::controller();
+	
 }
-
 require_once 'updater/class-wpglobus-updater.php';
 
 # --- EOF

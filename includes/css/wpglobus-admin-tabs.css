@@ -204,6 +204,21 @@
 .wpglobus-wp-admin .wpglobus-edit-slug-box {
   height: 24px;
 }
+.wpglobus-wp-admin #wpglobus-wpseo-tabs {
+  /** @todo start from yoast seo 3.0.7
+        .wpglobus-snippet_preview .edit-icon {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 60px;
+          border-radius: 20px 0 0 20px;
+          border-right: 1px solid #eee;
+          text-align: center;
+          background: url(images/edit.svg) center no-repeat;
+          background-size: 40px;
+        } */
+}
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-wpseosnippet {
   font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -240,5 +255,9 @@
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults li,
 .wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-focuskwresults p {
   font-size: 13px !important;
+}
+.wpglobus-wp-admin #wpglobus-wpseo-tabs .wpglobus-snippet_container [contenteditable=true]:hover {
+  background: url(images/edit.svg) right top no-repeat #bbdefb;
+  cursor: pointer;
 }
 /*# sourceMappingURL=wpglobus-admin-tabs.css.map */
