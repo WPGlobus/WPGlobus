@@ -1046,10 +1046,11 @@ jQuery(document).ready(function () {
                     });
                 }
 
-				// wp_editor word count
-				if ( typeof wp.utils != 'undefined' && typeof wp.utils.WordCounter != 'undefined' ) {							
-					// from WordPress 4.3 @see c:\cygwin\home\www.wpg.dev\wp-admin\js\post.js
-					$.each(WPGlobusCoreData.enabled_languages, function(i,l){
+				/** wp_editor word count */
+				if ( typeof wp.utils !== 'undefined' && typeof wp.utils.WordCounter !== 'undefined' ) {							
+					/** from WordPress 4.3 @see \wp-admin\js\post.js */
+					WPGlobusCoreData.tinymceEditorInit = {};	
+					$.each( WPGlobusCoreData.enabled_languages, function( i, l ){
 						( function( $, counter, l ) {
 							$( function() {
 								if ( l == WPGlobusCoreData.default_language ) {
@@ -1082,10 +1083,15 @@ jQuery(document).ready(function () {
 								}
 
 								$( document ).on( 'tinymce-editor-init', function( event, editor ) {
-									if ( editor.id !== 'content' ) {
+									/** @todo investigate tinymce-editor-init event */
+									if ( -1 == editor.id.indexOf('content') ) {
 										return;
 									}
-
+									if ( typeof WPGlobusCoreData.tinymceEditorInit[ editor.id ] !== 'undefined' ) {
+										return;	
+									}	
+									WPGlobusCoreData.tinymceEditorInit[ editor.id ] = true;
+									
 									contentEditor = editor;
 
 									editor.on( 'nodechange keyup', _.debounce( update, 1000 ) );
