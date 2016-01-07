@@ -116,15 +116,31 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 */
 		public static function action__customize_controls_enqueue_scripts() {
 			
+			/** 
+			 * @see wp.customize.control elements
+			 * for example wp.customize.control('blogname');
+			 */
 			$disabled_setting_mask = array();
+			
+			/** navigation menu elements */
 			$disabled_setting_mask[] = 'nav_menu_item';
 			$disabled_setting_mask[] = 'nav_menu[';
 			$disabled_setting_mask[] = 'nav_menu_locations';
 			$disabled_setting_mask[] = 'new_menu_name';
+			
+			/** widgets */
 			$disabled_setting_mask[] = 'widgets';
+
+			/** color elements */
 			$disabled_setting_mask[] = 'color';
+
+			/** yoast seo */
 			$disabled_setting_mask[] = 'wpseo';
+
+			/** css elements */
 			$disabled_setting_mask[] = 'css';
+
+			/** social networks elements */
 			$disabled_setting_mask[] = 'facebook';
 			$disabled_setting_mask[] = 'twitter';
 			$disabled_setting_mask[] = 'linkedin';
@@ -133,7 +149,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			
 			/**
 			 * Filter to disable fields in customizer. 
-			 * @see value data-customize-setting-link of element
+			 * @see wp.customize.control elements
 			 * Returning array.
 			 * @since 1.4.0
 			 *
@@ -151,7 +167,6 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * @param array $element_selector An array of selectors.
 			 */			
 			$element_selector = apply_filters( 'wpglobus_customize_element_selector', $element_selector );
-			
 			
 			$set_link_by = array( 'link', 'url' );
 			

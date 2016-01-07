@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
 								api.controlMenuItems[ obj ]['element'][ $e.attr('id') ]['value']   = control.elements.title();
 								api.controlMenuItems[ obj ]['element'][ $e.attr('id') ]['element']   = 'title';
 
-								/* set menu item title */
+								/** set menu item title */
 								control.elements.title( 
 									WPGlobusCore.TextFilter( 
 										control.elements.title(),
@@ -144,26 +144,34 @@ jQuery(document).ready(function ($) {
 			}
 			
 			$.each( WPGlobusCustomize.elementSelector, function(i,e){
-				var element = control.container.find(e);
-				if ( element.length != 0 ) {
-					if ( typeof api.controlWidgets[obj]['element'][ element[0].id ] === 'undefined' ) {
-						api.controlWidgets[obj]['element'][ element[0].id ] = {}; 
-					}	
-					api.controlWidgets[obj]['element'][ element[0].id ]['element']  = element; 
-					api.controlWidgets[obj]['element'][ element[0].id ]['setting']  = control.setting(); 
-					api.controlWidgets[obj]['element'][ element[0].id ]['selector'] = e; 
-					api.controlWidgets[obj]['element'][ element[0].id ]['value']    = element[0].defaultValue; 
+				var elements = control.container.find(e);
+				if ( elements.length != 0 ) {
+					/** widget can contain set of elements  */	
+					$.each( elements, function( indx, elem ) {
+						
+						var $element = $( elements[indx] );
 					
-					element.addClass( 'wpglobus-customize-widget-control' );
-					element.attr( 'data-widget', obj );
+						if ( typeof api.controlWidgets[obj]['element'][ elem.id ] === 'undefined' ) {
+							api.controlWidgets[obj]['element'][ elem.id ] = {}; 
+						}	
+						
+						$element.addClass( 'wpglobus-customize-widget-control' );
+						$element.attr( 'data-widget', obj );
+						
+						api.controlWidgets[obj]['element'][ elem.id ]['element']  = $element; 
+						api.controlWidgets[obj]['element'][ elem.id ]['setting']  = control.setting(); 
+						api.controlWidgets[obj]['element'][ elem.id ]['selector'] = e; 
+						api.controlWidgets[obj]['element'][ elem.id ]['value']    = elem.defaultValue; 
+						
+						$element.val( 
+							WPGlobusCore.TextFilter( 
+								elem.defaultValue,
+								WPGlobusCoreData.language,
+								'RETURN_EMPTY' 
+							) 
+						);
 					
-					element.val( 
-						WPGlobusCore.TextFilter( 
-							element[0].defaultValue,
-							WPGlobusCoreData.language,
-							'RETURN_EMPTY' 
-						) 
-					);
+					});
 					
 				}	
 			});
@@ -178,7 +186,7 @@ jQuery(document).ready(function ($) {
 
 			var dis = false;
 			$.each( WPGlobusCustomize.disabledSettingMask, function(i,e) {
-				/* we must check data-customize-setting-link for simple control */
+				/** @see wp.customize.control elements */
 				if ( obj.indexOf( e ) >= 0 ){
 					dis = true;
 					return false;
@@ -189,6 +197,7 @@ jQuery(document).ready(function ($) {
 			
 			var control = wp.customize.control.instance( obj );
 			
+			/** check for obj is widget */
 			if ( obj.indexOf( 'widget' ) >= 0 ) {
 				if ( typeof api.controlWidgets[obj] === 'undefined' ) {
 					api.controlWidgets[obj] = {}; 
@@ -200,7 +209,7 @@ jQuery(document).ready(function ($) {
 				return false;
 			}	
 
-			/*	
+			/**	
 			if ( obj.indexOf( 'nav_menu_item' ) >= 0 ) {
 				if ( typeof api.controlMenuItems[obj] === 'undefined' ) {
 					api.controlMenuItems[obj] = {}; 
@@ -229,7 +238,7 @@ jQuery(document).ready(function ($) {
 						if ( obj.indexOf( piece ) >= 0 ) {
 							api.controlInstances[obj]['type'] = 'link';
 							if ( '' == api.controlInstances[obj]['setting'] ) {
-								/* link perhaps was set to empty value */
+								/** link perhaps was set to empty value */
 								api.controlInstances[obj]['setting'] = element[0].defaultValue;
 							}	
 							element.addClass( 'wpglobus-control-link' );
@@ -289,7 +298,7 @@ jQuery(document).ready(function ($) {
 			return t;			
 		},	
 		getString: function(s, newVal, lang) {
-			/* using '|||' mark for correct work with url */
+			/** using '|||' mark for correct work with url */
 			if ( 'undefined' === typeof( s ) ) {
 				return s;
 			}
@@ -347,9 +356,10 @@ jQuery(document).ready(function ($) {
 					}	
 				});
 				
-				/* widgets */
+				/** widgets */
 				$( '.wpglobus-customize-widget-control' ).each( function(i, e){
-					var $e = $(e), obj = $e.data('widget');
+
+					var $e = $(e), obj = $e.data( 'widget' );
 					$e.val( 
 						WPGlobusCore.TextFilter( 
 							WPGlobusCustomize.controlWidgets[ obj ][ 'element' ][ $e.attr('id') ][ 'value' ],
@@ -360,8 +370,8 @@ jQuery(document).ready(function ($) {
 
 				});
 				
-				/* menu items */
-				/*
+				/** menu items */
+				/**
 				$( '.wpglobus-customize-menu-item-control' ).each( function(i, e){
 					var $e = $(e);
 				
@@ -382,7 +392,7 @@ jQuery(document).ready(function ($) {
 			if ( typeof force === 'undefined' ) {
 				force = true;
 			}
-			/* updateElements simple controls */
+			/** updateElements simple controls */
 			$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 				var control = wp.customize.control.instance( inst );
 				if ( data.type == 'link' ) {
@@ -403,8 +413,8 @@ jQuery(document).ready(function ($) {
 				}
 			});	
 			
-			/* updateElements menu items */
-			/*
+			/** updateElements menu items */
+			/**
 			$.each( WPGlobusCustomize.controlMenuItems, function( menuItem, object ) {
 				if ( typeof object.element === 'undefined' ) {
 					return;
@@ -417,7 +427,7 @@ jQuery(document).ready(function ($) {
 			}); // */	
 		},	
 		onSubmitEvents: function( ev ) {
-			console.log( ev.type );
+
 			if ( ev.type == 'mouseenter' ) {
 				
 				$.each( api.controlWidgets[ $(this).data('widget') ]['element'], function(id,e) {
@@ -449,7 +459,7 @@ jQuery(document).ready(function ($) {
 			
 		},	
 		attachListeners: function() {
-			/* attachListeners simple controls */
+			/** attachListeners simple controls */
 			$( '.wpglobus-customize-control' ).on( 'keyup', function(ev) {
 				var $t = $(this),
 					inst = $t.data( 'customize-setting-link' );
@@ -477,7 +487,7 @@ jQuery(document).ready(function ($) {
 				}		
 			});
 			
-			/* attachListeners widgets */
+			/** attachListeners widgets */
 			$( document ).on( 'keyup', '.wpglobus-customize-widget-control', function(ev) {
 				var $t = $(this),
 					obj = $t.data( 'widget' );
@@ -494,8 +504,8 @@ jQuery(document).ready(function ($) {
 				
 			});			
 			
-			/* attachListeners menu items */
-			/*
+			/** attachListeners menu items */
+			/**
 			$( document ).on( 'keyup', '.wpglobus-customize-menu-item-control', function(ev) {
 				var $t = $(this),
 					obj = $t.data( 'menu-item' );
@@ -512,18 +522,18 @@ jQuery(document).ready(function ($) {
 				
 			});	// */					
 			
-			/* Save&Publish button */
+			/** Save&Publish button */
 			$( '#save' ).on( 'mouseenter', function( event ) {
 				
-				/* Save&Publish simple controls */
+				/** Save&Publish simple controls */
 				$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 					var control = wp.customize.control.instance( inst );
 					control.setting.set( data.setting );
 					data.element.val( control.setting() );
 				});
 				
-				/* Save&Publish menu items */
-				/*
+				/** Save&Publish menu items */
+				/**
 				$.each( WPGlobusCustomize.controlMenuItems, function( menuItem, object ) {
 					if ( typeof object.element === 'undefined' ) {
 						return;
@@ -556,7 +566,7 @@ jQuery(document).ready(function ($) {
 				
 				if ( '{"success":true,"data":[]}' == response.responseText ) {
 
-					/* Save&Publish ajax complete */
+					/** Save&Publish ajax complete */
 					api.updateElements( false );
 
 				} else {
@@ -567,7 +577,7 @@ jQuery(document).ready(function ($) {
 					}
 					
 					$.each( WPGlobusCustomize.controlWidgets, function( obj, data ) {
-						/* Apply widget ajax complete */
+						/** Apply widget ajax complete */
 						
 						var w = obj.replace( '_', '-' );
 						
@@ -608,7 +618,7 @@ jQuery(document).ready(function ($) {
 			/**
 			 * Event handler for tracking clicks by menu item title
 			 */
-			/* 
+			/** 
 			$(document).on( 'click', '.control-section-nav_menu .accordion-section-title', function(ev){
 				$.each( api.controlMenuItems, function( obj, d ) {
 					api.ctrlMenuItemsCallback( obj );
