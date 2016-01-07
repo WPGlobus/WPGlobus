@@ -539,6 +539,9 @@ jQuery(document).ready(function () {
 					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
 				}	
             },
+			getCurrentTab: function() {
+				return $( '.wpglobus-post-body-tabs-list .ui-tabs-active' ).data( 'language' );
+			},		
             admin_init: function () {
 				var order = $('.wpglobus-addons-group a').data('key');
 				if ( 'indefined' != typeof order ) {
@@ -1033,7 +1036,7 @@ jQuery(document).ready(function () {
 					if ( typeof wpglobus_wpseo !== "undefined" ) {
 						wpglobus_wpseo();
 					} else if ( typeof WPGlobusYoastSeo !== "undefined" ) {
-						// since Yoast SEO 3.0
+						/** since Yoast SEO 3.0 */
 						WPGlobusYoastSeo.init();
 					}	
                 }			   
@@ -1049,64 +1052,92 @@ jQuery(document).ready(function () {
 				/** wp_editor word count */
 				if ( typeof wp.utils !== 'undefined' && typeof wp.utils.WordCounter !== 'undefined' ) {							
 					/** from WordPress 4.3 @see \wp-admin\js\post.js */
-					WPGlobusCoreData.tinymceEditorInit = {};	
+					WPGlobusCoreData.wordCounter = {};	
+					
+					var self = this;
+					
 					$.each( WPGlobusCoreData.enabled_languages, function( i, l ){
+						if ( l == WPGlobusCoreData.default_language ) {
+							return true;
+						}
+						
 						( function( $, counter, l ) {
+							WPGlobusCoreData.wordCounter[ l ] = {};
+							WPGlobusCoreData.wordCounter[ l ][ 'counter' ] = counter;
+							
 							$( function() {
-								if ( l == WPGlobusCoreData.default_language ) {
-									var $content = $( '#content' ),
-										$count = $( '#wp-word-count' ).find( '.word-count' );							
-								} else {
-									var $content = $( '#content_'+l ),
-										$count = $( '#wp-word-count-'+l ).find( '.word-count-'+l );
-								}	
 									
-								var	prevCount = 0,
-									contentEditor;
+								WPGlobusCoreData.wordCounter[ l ][ 'content' ] = $( '#content_'+l );
+								WPGlobusCoreData.wordCounter[ l ][ 'count' ]   = $( '#wp-word-count-'+l ).find( '.word-count-'+l );
 
-								function update() {
+								WPGlobusCoreData.wordCounter[ l ][ 'prevCount' ] = 0;
+
+								function update( l ) {
 									var text, count;
 
-									if ( ! contentEditor || contentEditor.isHidden() ) {
-										text = $content.val();
+									if ( typeof l === 'object' ) {
+										
+										if ( l == 'tinymce' ) {
+											/** wysiwyg editor */
+											l = self.getCurrentTab();
+										} else {	
+											/** textarea */
+											l = l.target.id.replace( 'content_', '' );
+										}
+										
+									}	
+								
+									if ( typeof WPGlobusCoreData.wordCounter[ l ] === 'undefined' ) {
+										return;	
+									}	
+									
+									//if ( ! contentEditor || contentEditor.isHidden() ) {
+									if ( ! WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ] ||
+											WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ].isHidden() ) {
+												
+										text = WPGlobusCoreData.wordCounter[ l ][ 'content' ].val();
+									
 									} else {
-										text = contentEditor.getContent( { format: 'raw' } );
+										//text = contentEditor.getContent( { format: 'raw' } );
+										text = WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ].getContent( { format: 'raw' } );
 									}
 
-									count = counter.count( text );
-
-									if ( count !== prevCount ) {
-										$count.text( count );
+									//count = counter.count( text );
+									count = WPGlobusCoreData.wordCounter[ l ][ 'counter' ].count( text );
+								
+									//if ( count !== prevCount ) {
+									if ( count !== WPGlobusCoreData.wordCounter[ l ][ 'prevCount' ] ) {
+										//$count.text( count );
+										WPGlobusCoreData.wordCounter[ l ][ 'count' ].text( count );
 									}
 
-									prevCount = count;
+									//prevCount = count;
+									WPGlobusCoreData.wordCounter[ l ][ 'prevCount' ] = count;
 								}
 
 								$( document ).on( 'tinymce-editor-init', function( event, editor ) {
-									/** @todo investigate tinymce-editor-init event */
-									if ( -1 == editor.id.indexOf('content') ) {
+
+									if ( -1 == editor.id.indexOf( 'content_' ) ) {
 										return;
 									}
-									if ( typeof WPGlobusCoreData.tinymceEditorInit[ editor.id ] !== 'undefined' ) {
-										return;	
-									}	
-									WPGlobusCoreData.tinymceEditorInit[ editor.id ] = true;
-									
-									contentEditor = editor;
+									var l = editor.id.replace( 'content_', '' );
 
+									WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ] = editor;
+									
 									editor.on( 'nodechange keyup', _.debounce( update, 1000 ) );
 								} );
 
-								$content.on( 'input keyup', _.debounce( update, 1000 ) );
+								WPGlobusCoreData.wordCounter[l]['content'].on( 'input keyup', _.debounce( update, 1000 ) );
 
-								update();
+								update( l );
+								
 							} );
 						} )( jQuery, new wp.utils.WordCounter(), l );
 					});
 					
 				}
 				
-				if ( typeof(wpWordCount) != 'undefined' ) {
+				if ( typeof(wpWordCount) !== 'undefined' ) {
 					// wordpress 4.2.4 and earlier
 					var last = 0,
 						ls = WPGlobusCoreData.open_languages,
