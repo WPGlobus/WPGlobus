@@ -771,7 +771,7 @@ jQuery(document).ready(function () {
 					var $element = $('#'+id),
 						clone = $element.clone(),
 						name = $element.attr('name'),
-						classes = 'wpglobus-element wpglobus-element_'+id+' wpglobus-element_'+language,
+						classes = 'wpglobus-element wpglobus-element_'+id+' wpglobus-element_'+language+' wpglobus-translatable',
 						node;
 				
 					node = document.getElementById(id);
