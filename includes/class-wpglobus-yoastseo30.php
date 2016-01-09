@@ -445,7 +445,15 @@ class WPGlobus_YoastSEO {
 			return;		
 		}
 		
-		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
+		global $pagenow;
+		
+		$enabled_pages = array(
+			'post.php', 
+			'post-new.php', 
+			'edit-tags.php'
+		);
+		
+		if ( WPGlobus_WP::is_pagenow( $enabled_pages ) ) {
 
 			WPGlobus::O()->vendors_scripts['WPSEO'] = true;
 			
@@ -471,7 +479,7 @@ class WPGlobus_YoastSEO {
 			wp_enqueue_script(
 				$handle,
 				$src,
-				array( 'jquery' ),
+				array( 'jquery', 'underscore' ),
 				WPGLOBUS_VERSION,
 				true
 			);
@@ -482,6 +490,7 @@ class WPGlobus_YoastSEO {
 				array(
 					'version' => WPGLOBUS_VERSION,
 					'vendor'  => WPGlobus::O()->vendors_scripts,
+					'pagenow' => $pagenow,
 					'i18n'    => $i18n
 				)
 			);
