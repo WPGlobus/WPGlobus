@@ -26,6 +26,7 @@ jQuery(document).ready( function ($) {
 			editor: {},
 			submitId: '#submit',
 			preventChangeEditor: false,
+			observer: null,
 			init: function() {
 				
 				api.attachListeners();
@@ -188,11 +189,76 @@ jQuery(document).ready( function ($) {
 		}
 		
 		WPGlobusYoastSeo.init();
+		
+		var WPGlobusYoastSeoPlugin = function() {
+		
+			/** switch language */
+			$( '.wrap' ).on( 'tabsactivate', function( event, ui ) {
+				
+				if ( ui.newTab[0].dataset.language == WPGlobusCoreData.default_language ) {
+					$( '#poststuff .inside' ).css({ 'display':'block' });
+				} else {
+					$( '#poststuff .inside' ).css({ 'display':'none' });
+				}	
+				
+			} );		
+		
+			/** translate strings */
+			$.each( 
+				[ 
+					'category_description',
+					'sitedesc',
+					'sitename',
+					'tag_description',
+					'term_description',
+					'term_title' 
+				],
+				function( i, e ) {
+					wpseoReplaceVarsL10n.replace_vars[ e ] = WPGlobusCore.TextFilter( 
+						wpseoReplaceVarsL10n.replace_vars[ e ],  
+						WPGlobusCoreData.default_language
+					);				
+				} 
+			);
+			
+			/** observer */
+			WPGlobusYoastSeo.observer = new MutationObserver( function( mutations ) {
+				mutations.forEach( function( mutation ) {
+					if ( 'placeholder' == mutation.attributeName ) {
+						WPGlobusYoastSeo.observer.disconnect(); 
+						/** update focus keyword */
+						var kw = $( '#wpseo_focuskw' );
+						if ( '' == kw.val() ) { 
+							kw.attr( 
+								'placeholder', 
+								WPGlobusCore.TextFilter( 
+									kw.attr( 'placeholder' ),
+									WPGlobusCoreData.default_language
+								)
+							);
+						}
+						WPGlobusYoastSeo.observer.observe( 
+							document.querySelector('#wpseo_focuskw'),
+							{ attributes: true, childList: true, characterData: true }
+						);
+						
+					}	
+				} );    
+			} );
+
+			WPGlobusYoastSeo.observer.observe( 
+				document.querySelector('#wpseo_focuskw'),
+				{ attributes: true, childList: true, characterData: true } 
+			);
+			
+		}
+
+		window.WPGlobusYoastSeoPlugin = new WPGlobusYoastSeoPlugin();
 	
 	} else {
 		/**
 		 * pagenow is in [ 'post.php', 'post-new.php' ] 
-		 */	
+		 */
 		api = WPGlobusYoastSeo = {
 			wpseoTabSelector: '#wpglobus-wpseo-tabs',
 			url		:   '',	
