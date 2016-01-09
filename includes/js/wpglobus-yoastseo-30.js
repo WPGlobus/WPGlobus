@@ -186,7 +186,9 @@ jQuery(document).ready( function ($) {
 		WPGlobusYoastSeo.init();
 	
 	} else {
-	
+		/**
+		 * pagenow is in [ 'post.php', 'post-new.php' ] 
+		 */	
 		api = WPGlobusYoastSeo = {
 			wpseoTabSelector: '#wpglobus-wpseo-tabs',
 			url		:   '',	
