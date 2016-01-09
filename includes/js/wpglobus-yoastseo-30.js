@@ -17,6 +17,10 @@ jQuery(document).ready( function ($) {
 	
 	if ( 'edit-tags.php' == WPGlobusVendor.pagenow ) {
 		
+		if ( typeof wpseoReplaceVarsL10n === 'undefined' ) {
+			return;	
+		}	
+		
 		api = WPGlobusYoastSeo = {
 			editorIDs: [ 'description' ],
 			editor: {},
