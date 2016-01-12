@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-10-21 14:43:09+00:00\n"
+"POT-Creation-Date: 2016-01-12 22:25:15+00:00\n"
 "PO-Revision-Date: 2015-10-17 23:36+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
@@ -274,7 +274,7 @@ msgstr "Dropdown"
 msgid "Dropdown with flags"
 msgstr "Dropdown mit Flaggen"
 
-#: includes/class-wpglobus-widget.php:200
+#: includes/class-wpglobus-widget.php:230
 msgid "Selector type"
 msgstr "Selektor-Typ"
 
@@ -286,12 +286,12 @@ msgstr "Die Hauptsprache kann nicht deaktiviert werden."
 msgid "*) Available after the menu is saved."
 msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
 
-#: includes/class-wpglobus.php:2579
+#: includes/class-wpglobus.php:2586
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Sie müssen schöne Permalinks aktivieren um WPGlobus verwenden zu können."
 
-#: includes/class-wpglobus.php:2581
+#: includes/class-wpglobus.php:2588
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -299,7 +299,7 @@ msgstr ""
 "Bitte gehen Sie zu Einstellungen > Permalinks > allgemeine Einstellungen, "
 "und wählen Sie die \"Beitragsname\" für schöne Permalinks."
 
-#: includes/class-wpglobus.php:2708
+#: includes/class-wpglobus.php:2715
 msgid "Add"
 msgstr "Hinzufügen"
 

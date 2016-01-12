@@ -1,14 +1,14 @@
-# Copyright (C) 2015 WPGlobus
+# Copyright (C) 2016 WPGlobus
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.3.0\n"
+"Project-Id-Version: WPGlobus 1.4.0\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2015-10-21 14:43:09+00:00\n"
+"POT-Creation-Date: 2016-01-12 22:25:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: The WPGlobus Team <support@wpglobus.com>\n"
 "Language-Team: The WPGlobus Team <support@wpglobus.com>\n"
 "X-Poedit-KeywordsList: "
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Dropdown with flags"
 msgstr ""
 
-#: includes/class-wpglobus-widget.php:200
+#: includes/class-wpglobus-widget.php:230
 msgid "Selector type"
 msgstr ""
 
@@ -264,17 +264,17 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2579
+#: includes/class-wpglobus.php:2586
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2581
+#: includes/class-wpglobus.php:2588
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a "
 "non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2708
+#: includes/class-wpglobus.php:2715
 msgid "Add"
 msgstr ""
 
