@@ -270,8 +270,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('pomo', [
         'makepot',
-        'exec:tx_push_s',
-        'exec:tx_pull',
+        //'exec:tx_push_s',
+        //'exec:tx_pull',
         'po',
         'mo'
     ]);
