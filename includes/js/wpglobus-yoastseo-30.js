@@ -13,13 +13,13 @@ var WPGlobusYoastSeo;
 jQuery(document).ready( function ($) {
 	'use strict';
 	
+	if ( typeof wpseoReplaceVarsL10n === 'undefined' ) {
+		return;	
+	}		
+	
 	var api;
 	
 	if ( 'edit-tags.php' == WPGlobusVendor.pagenow ) {
-		
-		if ( typeof wpseoReplaceVarsL10n === 'undefined' ) {
-			return;	
-		}	
 		
 		api = WPGlobusYoastSeo = {
 			editorIDs: [ 'description' ],
