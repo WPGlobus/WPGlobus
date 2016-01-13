@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+### 1.4.0 ###
+
+* ADDED:
+	* Support for Yoast SEO Version 3.
+	* Additional flag(s).
+	* 'wpglobus-current-language' CSS class for the WPGlobus Widget.
+	* Any theme Customizer support.
+	* Multilingual Customizer for widgets.
+
 ### 1.3.2 ###
 
 * FIXED:

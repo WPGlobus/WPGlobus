@@ -5,7 +5,7 @@
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus  
 **Requires at least:** 4.2  
-**Tested up to:** 4.3.2  
+**Tested up to:** 4.4.1  
 **Stable tag:** trunk  
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
@@ -45,11 +45,6 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 WPGlobus works correctly with all themes that apply proper filtering before outputting content.
 Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please let the theme / plugin authors know. We are ready to help them.
 
-More information:
-
-* [WPGlobus Compatibility with Themes and Plugins](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/)
-* [WPGlobus Configuration File and a Theme Configuration Case Studies](http://www.wpglobus.com/documentation/wpglobus-configuration-file/)
-
 ### Permalinks ###
 
 **IMPORTANT:** WPGlobus will not work if your URLs look like `example.com?p=123` or `example.com/index.php/category/post/`.
@@ -76,7 +71,9 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 
 `pl_PL` by [Maciej Gryniuk](http://maciej-gryniuk.tk/) ~ WPGlobus jest rodziną wtyczek do WordPress'a pomocnych w tworzeniu wielojęzycznych blogów i stron na WordPress'ie.
 
-`ru_RU` by [The WPGlobus Team](http://www.wpglobus.com/ru/) ~ WPGlobus - это коллекция плагинов ВордПресс для создания мультиязычных сайтов.
+`ro_RO` by [Rodica-Elena Andronache](http://themeisle.com/) ~ WPGlobus este o familie de plugin-uri WordPress ce te asistă în realizarea de bloguri și site-uri WordPress multilingve.
+
+`ru_RU` by [The WPGlobus Team](http://www.wpglobus.com/ru/) ~ [WPGlobus - это коллекция плагинов ВордПресс для создания мультиязычных сайтов](https://ru.wordpress.org/plugins/wpglobus/).
 
 `sv_SE` by [Elger Lindgren](http://bilddigital.se/) ~ WPGlobus är en familj av WordPress-tillägg som hjälper dig att göra flerspråkiga Wordpressbloggar och webbplatser.
 
@@ -147,14 +144,14 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
-### 1.4.0-beta1 ###
+### 1.4.0 ###
 
 * ADDED:
-	* Support YoastSEO 3
-	* The national flag of Kurdistan.
-	* 'wpglobus-current-language' class for widget
-	* supports Customizer for any theme
-	* supports Customizer for widgets
+	* Support for Yoast SEO Version 3.
+	* Additional flag(s).
+	* 'wpglobus-current-language' CSS class for the WPGlobus Widget.
+	* Any theme Customizer support.
+	* Multilingual Customizer for widgets.
 	
 ### 1.3.2 ###
 
@@ -199,18 +196,6 @@ No known backward incompatibility issues.
 * FIXED:
 	* Updater bug "cannot delete old plugin files".
 	* Broken Welsh flag cy.png (Thanks to Tudor Thomas).
-
-### 1.2.6 ###
-
-* FIXED:
-	* `de_DE` admin interface properly translated.
-	* Broken links to WPGlobus.com from admin pages.
-* ADDED:
-	* `tr_TR` admin interface translation.
-	* `es` and `fr` enabled by default.
-* COMPATIBILITY:
-	* All In One SEO Pack 2.2.7.2
-	* ACF Pro 5.3.0
 
 ### Earlier versions ###
 
