@@ -67,37 +67,12 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 }
 
 /**
- * Theme compatibility
+ * Support of theme option panels and customizer
+ * @since 1.4.0
  */
-if ( version_compare( WPGLOBUS_VERSION, '1.4.0', '<' ) ) {
-
-	/**
-	 * Fix multilingual strings in basic `Customize`
-	 *
-	 * @since 1.2.1
-	 */
-	require_once 'includes/class-wpglobus-customize.php';
-	WPGlobus_Customize::controller();
-
-	/**
-	 * Support of theme option panels and customizer
-	 * @since 1.3.0
-	 */
-	if ( WPGlobus_WP::in_wp_admin() && ! WPGlobus_WP::is_admin_doing_ajax() ) {
-		require_once 'includes/admin/class-wpglobus-wp-theme.php';
-		WPGlobus::Config()->WPGlobus_WP_Theme = new WPGlobus_WP_Theme();
-	}
+require_once 'includes/class-wpglobus-customize140.php';
+WPGlobus_Customize::controller();
 	
-} else {	
-
-	/**
-	 * Support of theme option panels and customizer
-	 * @since 1.4.0
-	 */
-	require_once 'includes/class-wpglobus-customize140.php';
-	WPGlobus_Customize::controller();
-	
-}
 require_once 'updater/class-wpglobus-updater.php';
 
 # --- EOF
