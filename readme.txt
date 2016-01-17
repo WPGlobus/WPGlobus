@@ -129,9 +129,9 @@ No known backward incompatibility issues.
 = 1.4.1 =
 
 * FIXED:
-	* Untranslated page title with yoast seo
-	* Uncaught ReferenceError: WPGlobusCoreData for Woocommerce product without Woocommerce WPGlobus
-	* Adding item menu title for custom taxonomies
+	* Untranslated page title with Yoast SEO.
+	* Uncaught ReferenceError: WPGlobusCoreData for WooCommerce product without WooCommerce WPGlobus.
+	* Adding item menu title for custom taxonomies.
 
 = 1.4.0 =
 

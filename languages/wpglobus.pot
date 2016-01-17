@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.4.0\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-01-12 22:25:15+00:00\n"
+"POT-Creation-Date: 2016-01-17 14:30:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -260,21 +260,21 @@ msgstr ""
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1037
+#: includes/class-wpglobus.php:1068
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2586
+#: includes/class-wpglobus.php:2617
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2588
+#: includes/class-wpglobus.php:2619
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a "
 "non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2715
+#: includes/class-wpglobus.php:2746
 msgid "Add"
 msgstr ""
 
