@@ -1002,7 +1002,38 @@ class WPGlobus {
 							 * if it is equal to parent post title (@see _menu_item_object_id meta) before saving
 							 * @since 1.2.1 
 							 */
-							$item->post_title = get_post_field( 'post_title', $item_object_id );
+							$post_title = get_post_field( 'post_title', $item_object_id );
+
+							$post_title = trim( $post_title );
+
+							if ( empty( $post_title ) ) {
+								
+								/**
+								 * Try to get post title from term data @see get_term_by()
+								 * it's applicable to custom taxonomy, ex: Woocommerce product_type, product_tag
+								 * @since 1.4.1
+								 */ 
+								
+								remove_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
+								$term = get_term_by( 'id', $item_object_id, $item_object );
+								add_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
+
+								if ( ! empty( $term ) ) {
+									
+									$post_title = trim( $term->name );
+									
+									if ( ! empty( $post_title ) ) {
+										/**
+										 * Update translation of title for menu item
+										 */
+										$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $post_title, $item->ID ) );
+									}
+
+								}	
+								
+							}	
+							
+							$item->post_title = $post_title;
 							
 						}	
 
