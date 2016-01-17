@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.4.1 ###
+
+* FIXED:
+	* Fixed untranslated page title with yoast seo
+	
 ### 1.4.0 ###
 
 * ADDED:
