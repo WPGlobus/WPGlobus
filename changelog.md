@@ -5,7 +5,8 @@
 ### 1.4.1 ###
 
 * FIXED:
-	* Fixed untranslated page title with yoast seo
+	* Untranslated page title with yoast seo
+	* Uncaught ReferenceError: WPGlobusCoreData for Woocommerce product without Woocommerce WPGlobus
 	
 ### 1.4.0 ###
 
