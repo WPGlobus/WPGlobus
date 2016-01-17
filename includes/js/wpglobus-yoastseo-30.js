@@ -17,6 +17,10 @@ jQuery(document).ready( function ($) {
 		return;	
 	}		
 	
+	if ( typeof WPGlobusCoreData === 'undefined' ) {
+		return;
+	}
+	
 	var api;
 	
 	if ( 'edit-tags.php' == WPGlobusVendor.pagenow ) {
