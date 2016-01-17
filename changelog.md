@@ -7,6 +7,7 @@
 * FIXED:
 	* Untranslated page title with yoast seo
 	* Uncaught ReferenceError: WPGlobusCoreData for Woocommerce product without Woocommerce WPGlobus
+	* Adding item menu title for custom taxonomies
 	
 ### 1.4.0 ###
 
