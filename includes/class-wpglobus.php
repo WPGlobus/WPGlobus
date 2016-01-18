@@ -2551,7 +2551,7 @@ class WPGlobus {
 				$return =
 					$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
 
-				<input type="text" class="regular-text wpglobus-blogname"
+				<input type="text" class="regular-text wpglobus-blogname wpglobus-translatable"
 				       value="<?php echo WPGlobus_Core::text_filter( $blogname, $language, $return ); ?>"
 				       id="blogname-<?php echo $language; ?>" name="blogname-<?php echo $language; ?>"
 				       data-language="<?php echo $language; ?>"
@@ -2566,7 +2566,7 @@ class WPGlobus {
 				$return =
 					$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY; ?>
 
-				<input type="text" class="regular-text wpglobus-blogdesc"
+				<input type="text" class="regular-text wpglobus-blogdesc wpglobus-translatable"
 				       value="<?php echo WPGlobus_Core::text_filter( $blogdesc, $language, $return ); ?>"
 				       id="blogdescription-<?php echo $language; ?>" name="blogdescription-<?php echo $language; ?>"
 				       data-language="<?php echo $language; ?>"
