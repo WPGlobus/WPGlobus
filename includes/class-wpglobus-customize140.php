@@ -146,6 +146,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_setting_mask[] = 'linkedin';
 			$disabled_setting_mask[] = 'behance';
 			$disabled_setting_mask[] = 'dribbble';
+			$disabled_setting_mask[] = 'instagram';
 			
 			/**
 			 * Filter to disable fields in customizer. 
