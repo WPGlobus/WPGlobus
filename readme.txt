@@ -126,6 +126,13 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.4.2 =
+
+* ADDED:
+	* Some CSS improvements.
+* FIXED:
+	* Case data-customize-setting-link doesn't equal to element's name in wp.customize.control.instance.
+	
 = 1.4.1 =
 
 * FIXED:
