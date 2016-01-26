@@ -63,21 +63,21 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 
 ### Admin interface translations: ###
 
-`de_DE` by [Tobias Hopp](http://www.tobiashopp.info/) ~ WPGlobus ist ein Paket von mehreren WordPress-Plugins, die Möglichkeiten zur Übersetzung von Wordpress-Installationen bieten.
+`de_DE` by [Tobias Hopp](http://www.tobiashopp.info/) ~ [WPGlobus ist ein Paket von mehreren WordPress-Plugins, die Möglichkeiten zur Übersetzung von Wordpress-Installationen bieten.](https://de.wordpress.org/plugins/wpglobus/).
 
-`es_ES` by [Patricia Casado](http://mascositas.com/) ~ WPGlobus es una familia de plugins de WordPress que ayudan en la traducción de blogs de WordPress.
+`es_ES` by [Patricia Casado](http://mascositas.com/) ~ [WPGlobus es una familia de plugins de WordPress que ayudan en la traducción de blogs de WordPress.](https://es.wordpress.org/plugins/wpglobus/).
 
-`fr_FR` by [FX Bénard](http://wp-translations.org/) ~ WPGlobus fait partie des extensions WordPress qui vous aident à rendre les blogs et les sites WordPress multilingues.
+`fr_FR` by [FX Bénard](http://wp-translations.org/) ~ [WPGlobus fait partie des extensions WordPress qui vous aident à rendre les blogs et les sites WordPress multilingues.](https://fr.wordpress.org/plugins/wpglobus/).
 
-`pl_PL` by [Maciej Gryniuk](http://maciej-gryniuk.tk/) ~ WPGlobus jest rodziną wtyczek do WordPress'a pomocnych w tworzeniu wielojęzycznych blogów i stron na WordPress'ie.
+`pl_PL` by [Maciej Gryniuk](http://maciej-gryniuk.tk/) ~ [WPGlobus jest rodziną wtyczek do WordPress'a pomocnych w tworzeniu wielojęzycznych blogów i stron na WordPress'ie.](https://pl.wordpress.org/plugins/wpglobus/).
 
-`ro_RO` by [Rodica-Elena Andronache](http://themeisle.com/) ~ WPGlobus este o familie de plugin-uri WordPress ce te asistă în realizarea de bloguri și site-uri WordPress multilingve.
+`ro_RO` by [Rodica-Elena Andronache](http://themeisle.com/) ~ [WPGlobus este o familie de plugin-uri WordPress ce te asistă în realizarea de bloguri și site-uri WordPress multilingve.](https://ro.wordpress.org/plugins/wpglobus/).
 
 `ru_RU` by [The WPGlobus Team](http://www.wpglobus.com/ru/) ~ [WPGlobus - это коллекция плагинов ВордПресс для создания мультиязычных сайтов](https://ru.wordpress.org/plugins/wpglobus/).
 
-`sv_SE` by [Elger Lindgren](http://bilddigital.se/) ~ WPGlobus är en familj av WordPress-tillägg som hjälper dig att göra flerspråkiga Wordpressbloggar och webbplatser.
+`sv_SE` by [Elger Lindgren](http://bilddigital.se/) ~ [WPGlobus är en familj av WordPress-tillägg som hjälper dig att göra flerspråkiga Wordpressbloggar och webbplatser.](https://sv.wordpress.org/plugins/wpglobus/).
 
-`tr_TR` by [Borahan Conkeroglu](https://twitter.com/boracon68) ~ WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir.
+`tr_TR` by [Borahan Conkeroglu](https://twitter.com/boracon68) ~ [WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir.](https://tr.wordpress.org/plugins/wpglobus/).
 
 **Please help us translate WPGlobus into your language!**
 
@@ -146,11 +146,10 @@ No known backward incompatibility issues.
 
 ### 1.4.2 ###
 
-* ADDED:
-	* Some CSS improvements.
 * FIXED:
-	* Case data-customize-setting-link doesn't equal to element's name in wp.customize.control.instance.
-	
+	* Case `data-customize-setting-link` not matching the element name in `wp.customize.control.instance`.
+	* Some CSS improvements.
+
 ### 1.4.1 ###
 
 * FIXED:
@@ -166,50 +165,6 @@ No known backward incompatibility issues.
 	* 'wpglobus-current-language' CSS class for the WPGlobus Widget.
 	* Any theme Customizer support.
 	* Multilingual Customizer for widgets.
-	
-### 1.3.2 ###
-
-* FIXED:
-	* Removed double slashes in URLs.
-	* Load minimized JS in customizer.
-	* Using class for globe icon instead of id.
-	* Rewriting the array of classes.
-	* Minor css improvements.
-
-### 1.3.1 ###
-
-* FIXED:
-	* Disabled Uninstall procedure. Will be refactored in the future.
-	* Disable notice on non-existent [key][key] in WPML config.
-
-### 1.3.0 ###
-
-* ADDED:
-	* `wpglobus-config.json` now supports Customizer.
-	* [Repository of theme configuration files](https://github.com/WPGlobus/wpglobus-config-samples) (W.I.P.)
-* FIXED:
-	* Bug in WordPress SEO support module (was appending the site name to the SEO Title).
-
-### 1.2.9 ###
-
-* FIXED:
-	* Correct extracting domain_tld for two-part TLDs like `.co.uk`.
-	* Customizer error. Thanks to [shark0der](https://wordpress.org/support/profile/shark0der).
-* ADDED:
-	* `pl_PL` admin interface translation.
-	* `wpglobus-config.json` configuration file for theme options, with WPML compatibility.
-	* `wpglobus-current-language` CSS class to the menu.
-
-### 1.2.8 ###
-
-* FIXED:
-	* Minor admin JS bug.
-
-### 1.2.7 ###
-
-* FIXED:
-	* Updater bug "cannot delete old plugin files".
-	* Broken Welsh flag cy.png (Thanks to Tudor Thomas).
 
 ### Earlier versions ###
 
@@ -226,5 +181,5 @@ No known backward incompatibility issues.
 * [Site in subfolder](http://demo-subfolder.wpglobus.com/):
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
-	* A **multilingual WooCommerce** site powered by the `woocommerce-wpglobus` plugin.
+	* A multilingual WooCommerce site powered by the `woocommerce-wpglobus` plugin.
 

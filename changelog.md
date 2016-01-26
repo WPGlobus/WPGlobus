@@ -4,10 +4,9 @@
 
 ### 1.4.2 ###
 
-* ADDED:
-	* Some CSS improvements.
 * FIXED:
-	* Case data-customize-setting-link doesn't equal to element's name in wp.customize.control.instance.
+	* Case `data-customize-setting-link` not matching the element name in `wp.customize.control.instance`.
+	* Some CSS improvements.
 	
 ### 1.4.1 ###
 
