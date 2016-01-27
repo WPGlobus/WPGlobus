@@ -187,7 +187,24 @@ class WPGlobus_Options {
 				'style'  => 'info',
 				'notice' => false,
 			);
-
+		
+		$fields_home[] = 
+			array(
+				'id'     => 'wpglobus_clean',
+				'type'   => 'wpglobus_info',
+				'title'  => __( 'Remove WPGlobus', 'wpglobus' ),
+				'desc'   => '' .
+				            '<br/>' .	
+				            '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">' .
+				            __( 'WPGlobus clean page', 'wpglobus' ) .
+				            '</a>' .							
+				            '<br/>' .				
+				            '',
+				'style'  => 'info',
+				'notice' => false,
+			);
+			
+			
 		$this->sections[] = array(
 			'wpglobus_id' => 'welcome',
 			'title'  => __( 'Welcome!', 'wpglobus' ),
