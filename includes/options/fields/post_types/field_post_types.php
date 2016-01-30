@@ -43,23 +43,40 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 			/** @var array $options */
 			$options = get_option( 'wpglobus_option' );
 			$options_post_types = empty( $options['post_type'] ) ? array() : $options['post_type'];
-			
-			$disabled_post_types = array();
+	
 			/**
 			 * Add CPT from woocommerce
+			 * moved to class-wpglobus.php:175
+			 * @todo remove after test
 			 */
+			/* 
+			$disabled_post_types = array();
 			$disabled_post_types[] = 'product';
 			$disabled_post_types[] = 'product_variation';
 			$disabled_post_types[] = 'shop_order';
 			$disabled_post_types[] = 'shop_order_refund';
 			$disabled_post_types[] = 'shop_coupon';
 			$disabled_post_types[] = 'shop_webhook';
-			
+			// */
+
 			$enabled_post_types = array();
+			
 			foreach( $post_types as $post_type ) {
-				if ( ! in_array( $post_type, $disabled_post_types,true ) ) {
+					
+				if ( in_array( $post_type, WPGlobus::Config()->disabled_entities, true ) ) {
+					
+					if ( array_key_exists( $post_type, $options_post_types ) ) {
+						/**
+						 * Add to enabled_post_types array for WPGlobus Post types setting page
+						 */							
+						$enabled_post_types[] = $post_type;
+						
+					}	
+					
+				} else {	
 					$enabled_post_types[] = $post_type;
-				}	
+				}
+
 			}	
 			
 			wp_enqueue_script(
