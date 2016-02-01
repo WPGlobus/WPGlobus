@@ -340,13 +340,6 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * @todo The methods below are not used by the WPGlobus plugin.
-	 * Need to check if they are used by any add-on.
-	 * Marking them as deprecated so they will pop-up on code inspection.
-	 */
-
-	/**
-	 * @deprecated
 	 * @codeCoverageIgnore
 	 * Return true if language is in array of enabled languages, otherwise false
 	 * @param string $language
@@ -355,6 +348,12 @@ class WPGlobus_Utils {
 	public static function is_enabled( $language ) {
 		return in_array( $language, WPGlobus::Config()->enabled_languages, true );
 	}
+
+	/**
+	 * @todo The methods below are not used by the WPGlobus plugin.
+	 * Need to check if they are used by any add-on.
+	 * Marking them as deprecated so they will pop-up on code inspection.
+	 */
 
 	/**
 	 * @deprecated
