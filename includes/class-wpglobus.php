@@ -169,12 +169,22 @@ class WPGlobus {
 		}
 
 		if ( defined( 'WC_VERSION' ) || defined( 'WOOCOMMERCE_VERSION' ) ) {
+
 			$this->vendors_scripts['WOOCOMMERCE'] = true;
 			$this->disabled_entities[]            = 'product';
 			$this->disabled_entities[]            = 'product_tag';
 			$this->disabled_entities[]            = 'product_cat';
 			$this->disabled_entities[]            = 'shop_order';
 			$this->disabled_entities[]            = 'shop_coupon';
+			
+			/**
+			 * Gathering Woocommerce's post types in one place
+			 * @since 1.4.3
+			 */ 
+			$this->disabled_entities[] 			  = 'product_variation';
+			$this->disabled_entities[] 			  = 'shop_order_refund';
+			$this->disabled_entities[] 			  = 'shop_webhook';	
+
 		}
 
 		if ( defined( 'AIOSEOP_VERSION' ) ) {
