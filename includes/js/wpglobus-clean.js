@@ -50,9 +50,10 @@ jQuery(document).ready(function($) {
 				promise = promise.then( function() {
 
 					var order = {};
+					order['log']  = $( '#wpglobus-clean-log' ).prop( 'checked' );
 					
 					if ( 'wpglobus_options' == what ) {
-						if ( $('#cb-wpglobus_options').prop('checked') ) {
+						if ( $( '#cb-wpglobus_options' ).prop( 'checked' ) ) {
 							order['action'] = 'wpglobus-reset';
 							order['table']  = what;
 						} else {

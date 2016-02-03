@@ -14,11 +14,15 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 		protected static $tables = array();
 		
+		protected static $log_file = '';
+		
 		/**
 		 * Controller
 		 */
 		public static function controller() {
 				
+			self::$log_file = ABSPATH . 'wp-content/wpglobus-clean.log';
+			
 			self::get_table();
 	
 			self::screen();
@@ -216,12 +220,20 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 */		
 		public static function process_ajax( $order ) {
 
+			$_log = false;
+
+			if ( 'true' === $order['log'] ) {
+				$_log = true;	
+			}	
+			
 			if ( $order['action'] == 'die' ) {
 				wp_send_json_success( $order );
 			}	
 			
 			if ( $order['action'] == 'wpglobus-reset' ) {
-					
+				
+				self::$log_file = ABSPATH . 'wp-content/wpglobus-clean.log';
+				
 				/**
 				 * SELECT * FROM `wp_options` WHERE `option_name` REGEXP 'wpglobus'
 				 */ 
@@ -233,20 +245,30 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				 */
 				$table = $wpdb->prefix . 'options'; 				
 				
-				$query = "SELECT `option_id` FROM `$table` WHERE `option_name` REGEXP 'wpglobus'";
+				$query = "SELECT `option_id`, `option_name` FROM `$table` WHERE `option_name` REGEXP 'wpglobus'";
 				
 				$ids = $wpdb->get_results( $query, ARRAY_A );
-				
+
 				$records = array();
+				$fields  = array();
 				
 				foreach( $ids as $data ) {
-					foreach ( $data as $field_id=>$record_id ) {
-						$records[] = $record_id;	
+					foreach ( $data as $field_id => $record_id ) {
+						if ( 'option_id' == $field_id ) {
+							$records[] = $record_id;	
+						} else if ( 'option_name' == $field_id  ) {	
+							$fields[] = $record_id;
+						}		
 					}
 				}
 				
 				$result = true;
 				if ( ! empty( $records ) ) {	
+					
+					if ( $_log ) {
+						self::_log( $table, '', $fields, '' );
+					}
+					
 					$set = implode(	',', $records );
 					$query  = "DELETE FROM $table WHERE `option_id` IN ($set)";
 					$result = $wpdb->query( $query );
@@ -278,7 +300,6 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				`post_title` REGEXP '{:[a-z]{2}|[[.[.]]:[a-z]{2}|<!--:[a-z]{2}' OR 
 				`post_excerpt` REGEXP '{:[a-z]{2}|[[.[.]]:[a-z]{2}|<!--:[a-z]{2}' OR
 				`post_content_filtered` REGEXP '{:[a-z]{2}|[[.[.]]:[a-z]{2}|<!--:[a-z]{2}' )
-			
 			*/
 			
 			/**
@@ -409,6 +430,11 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						}
 						
 						$converted = self::convert( $value );
+						
+						if ( $_log ) {
+							self::_log( $table, $record_id, $value, $converted );	
+						}	
+						
 						if 	( $serialized ) {
 							$converted = maybe_serialize( $converted );
 						}									
@@ -443,6 +469,18 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			wp_send_json_success( $order );
 
 		}	
+
+		/**
+		 * Logger
+		 */
+		public static function _log( $table = '', $id = '' , $initial = '', $converted = '' ) {
+			error_log( date( 'D, d M Y H:i:s' ) . "\n", 3 , self::$log_file );
+			error_log( 'TABLE: ' . $table . "\n", 3 , self::$log_file );
+			error_log( 'ID: ' . $id . "\n", 3 , self::$log_file );
+			error_log( "SOURCE: \n" . print_r( $initial, true ) . "\n", 3 , self::$log_file );
+			error_log( "CONVERTED: \n" . print_r( $converted, true ) . "\n", 3 , self::$log_file );
+			error_log( '=================' . "\n", 3 , self::$log_file );
+		}
 		
 		/**
 		 * Enqueue js
@@ -524,6 +562,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					<div style="margin-bottom:10px;">
 						<b><?php _e( 'Before start of cleaning procedure, make sure you have backup of DB.', 'wpglobus' ); ?></b>
 					</div>				
+					<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log"/> make log for cleaning procedure 
+					[ <?php echo  self::$log_file; ?> ]
+					<br />
+					<hr />
 					<input type="checkbox" name="wpglobus-clean-activate" id="wpglobus-clean-activate"/> activate
 					<div class="return-to-dashboard">
 						<a id="wpglobus-clean-button" class="button button-primary hidden" href="#">
