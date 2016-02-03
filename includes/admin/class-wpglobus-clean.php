@@ -191,6 +191,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				$list .= '<li id="' . $table . '">';
 				$list .= 	'<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
 				$list .= 	'<span class="wpglobus-result" style="float:left;width:20px;height:20px;"></span>';
+				$list .= 	'<span class=""><input type="checkbox" id="cb-' . $table . '" checked disabled /></span>';
 				$list .= 	$table;
 				$list .= '</li>';
 				
@@ -198,7 +199,11 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			$list .= '<li id="wpglobus_options">';
 			$list .= 	'<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
 			$list .= 	'<span class="wpglobus-result" style="float:left;width:20px;height:20px;"></span>';
+			$list .= 	'<span class=""><input type="checkbox" id="cb-wpglobus_options" name="cb-wpglobus_options" /></span>';
 			$list .= 	'WPGlobus options';
+			$list .= 	'&nbsp;&nbsp;&nbsp;[<span style="color:#f00;">' 
+							. __( 'be attentive to delete WPGlobus options from options table', 'wpglobus' ) 
+						. '</span>]';
 			$list .= '</li>';
 			$list .= '</ul>';
 			
@@ -210,6 +215,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 * Ajax action handler
 		 */		
 		public static function process_ajax( $order ) {
+
+			if ( $order['action'] == 'die' ) {
+				wp_send_json_success( $order );
+			}	
 			
 			if ( $order['action'] == 'wpglobus-reset' ) {
 					
