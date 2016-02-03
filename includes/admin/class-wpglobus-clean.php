@@ -492,6 +492,16 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				<h2 class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></h2>
 
 				<div class="clean-text">
+					<span style="color:#f00;">
+						<?php printf(
+							__( 'After the cleaning procedure will be left text for the language: %s ( %s ) ', 'wpglobus' ),
+							WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
+							WPGlobus::Config()->default_language ); 
+						?>
+					</span>
+				</div>
+				<br />
+				<div class="clean-text">
 					<?php esc_html_e( 'Clean data.', 'wpglobus' ); ?>
 				</div>
 
