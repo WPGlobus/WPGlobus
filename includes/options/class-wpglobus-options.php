@@ -187,20 +187,29 @@ class WPGlobus_Options {
 				'style'  => 'info',
 				'notice' => false,
 			);
-		
-		$fields_home[] = 
+
+		$fields_home[] =
 			array(
 				'id'     => 'wpglobus_clean',
 				'type'   => 'wpglobus_info',
-				'title'  => __( 'Remove WPGlobus', 'wpglobus' ),
+				'title'  => __( 'Deactivating / Uninstalling', 'wpglobus' ),
 				'desc'   => '' .
-				            '<br/>' .	
-				            '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">' .
-				            __( 'WPGlobus clean page', 'wpglobus' ) .
-				            '</a>' .							
-				            '<br/>' .				
-				            '',
-				'style'  => 'info',
+				            '<p>' .
+				            esc_html(__( 'Please note that if you deactivate WPGlobus, your site will show all the translations you have entered, mixed up.', 'wpglobus' )) .
+				            '</p>' .
+				            '<blockquote>' .
+				            /* translators: %s: link to the Clean-up Tool */
+				            sprintf( __( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
+					            /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
+					            sprintf( __( '%1$sClean-up Tool%2$s', 'wpglobus' ),
+						            '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
+						            '</a>'
+					            ) ) .
+				            '</blockquote>' .
+				            '<p><em>' .
+				            __( 'We would hate to see you go. Please talk to us and let us help!', 'wpglobus' ) .
+				            '<em></p>' ,
+				'style'  => 'normal',
 				'notice' => false,
 			);
 			

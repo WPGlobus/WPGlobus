@@ -229,10 +229,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			$list .= '<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
 			$list .= '<span class="wpglobus-result" style="float:left;width:20px;height:20px;"></span>';
 			$list .= '<span class=""><input type="checkbox" id="cb-wpglobus_options" name="cb-wpglobus_options" /></span>';
-			$list .= 'WPGlobus options';
-			$list .= '&nbsp;&nbsp;&nbsp;[<span style="color:#f00;">'
-			         . __( 'be attentive to delete WPGlobus options from options table', 'wpglobus' )
-			         . '</span>]';
+			$list .= esc_html( __( 'Remove the WPGlobus settings (not recommended)', 'wpglobus' ) );
 			$list .= '</li>';
 			$list .= '</ul>';
 
@@ -555,6 +552,18 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 */
 		public static function screen() {
 
+			/**
+			 * For Google Analytics
+			 */
+			$ga_campaign = '?utm_source=wpglobus-admin-clean&utm_medium=link&utm_campaign=clean-up-tool';
+
+			$url_wpglobus_site             = WPGlobus_Utils::url_wpglobus_site();
+			$url_wpglobus_site_home        = $url_wpglobus_site . $ga_campaign;
+			$url_wpglobus_site_contact     = $url_wpglobus_site . 'pg/contact-us/' . $ga_campaign;
+			$url_wpglobus_site_quick_start = $url_wpglobus_site . 'quick-start/' . $ga_campaign;
+			$url_wpglobus_site_faq         = $url_wpglobus_site . 'faq/' . $ga_campaign;
+			$url_wpglobus_site_pro_support = $url_wpglobus_site . 'professional-support/' . $ga_campaign;
+
 			$url_wpglobus_logo = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-logo-180x180.png';
 
 			?>
@@ -571,42 +580,95 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 				<h2 class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></h2>
 
-				<div class="clean-text">
-					<span style="color:#f00;">
-						<?php printf(
-							__( 'After the cleaning procedure will be left text for the language: %s ( %s ) ', 'wpglobus' ),
-							WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
-							WPGlobus::Config()->default_language );
-						?>
-					</span>
-				</div>
-				<br />
-				<div class="clean-text">
-					<?php esc_html_e( 'Clean data.', 'wpglobus' ); ?>
+				<div class="about-text">
+					<?php esc_html_e( 'WPGlobus is a family of WordPress plugins assisting you in making multilingual WordPress blogs and sites.', 'wpglobus' ); ?>
 				</div>
 
 				<div class="wp-badge wpglobus-badge"></div>
+
+				<h2 class="nav-tab-wrapper">
+					<a href="#" class="nav-tab nav-tab-active">
+						<?php _e( 'Clean-up Tool', 'wpglobus' ); ?>
+					</a>
+					<a href="<?php echo esc_url( $url_wpglobus_site_quick_start ); ?>"
+					   target="_blank"
+					   class="nav-tab">
+						<?php _e( 'Guide', 'wpglobus' ); ?>
+					</a>
+					<a href="admin.php?page=wpglobus_options" class="nav-tab">
+						<?php _e( 'Settings' ); ?>
+					</a>
+					<a href="admin.php?page=wpglobus-addons" class="nav-tab">
+						<?php _e( 'Add-ons', 'wpglobus' ); ?>
+					</a>
+					<a href="<?php echo esc_url( $url_wpglobus_site_contact ); ?>"
+					   class="nav-tab">
+						<?php _e( 'Support', 'wpglobus' ); ?>
+					</a>
+				</h2>
+
+				<p style="color: white; background-color: red; padding: .5em">
+					<?php esc_html_e( 'WARNING: this operation is non-reversible. It is strongly recommended that you backup your database before proceeding.', 'wpglobus' ); ?>
+					</p>
+
+				<p><strong>
+			<?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
+					</strong></p>
+
+					<p style="color:red; background-color: white; padding: .5em">
+						<?php
+						echo esc_html( sprintf(
+						/* translators: %1$s - language name, %1$s - language code. Do not remove. */
+							__( 'The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to Settings.', 'wpglobus' ),
+							WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
+							WPGlobus::Config()->default_language ));
+
+						?>
+					</p>
+
+				<hr />
+				<h3 id="about-to-clean">
+					<?php esc_html_e( 'You are about to clean the content of the following database tables:', 'wpglobus' ); ?>
+				</h3>
 
 				<?php echo self::get_table_list(); ?>
 
 				<hr />
 
-				<div class="wpglobus-clean-box" style="margin:10px 0 10px 30px;">
-					<div style="margin-bottom:10px;">
-						<b><?php _e( 'Before start of cleaning procedure, make sure you have backup of DB.', 'wpglobus' ); ?></b>
-					</div>
-					<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log" /> make log for cleaning procedure
-					[ <?php echo self::$log_file; ?> ]
-					<br />
-					<hr />
-					<input type="checkbox" name="wpglobus-clean-activate" id="wpglobus-clean-activate" /> activate
-					<div class="return-to-dashboard">
-						<a id="wpglobus-clean-button" class="button button-primary hidden" href="#">
-							<?php _e( 'Clean start', 'wpglobus' ); ?>
+				<h3>
+					<?php esc_html_e( 'The operations log', 'wpglobus' ); ?>
+				</h3>
+				<p>
+			<?php esc_html_e( 'We are going to write a detailed log of all the database changes performed. It should help in the case you need to restore something important. The log will be written to the file:', 'wpglobus' ); ?>
+				</p>
+				<p><code>
+				<?php echo self::$log_file; ?>
+					</code></p>
+				<p>
+				<label>
+				<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log" checked="checked" />
+					<?php esc_html_e( 'Uncheck if you do not want to write the operations log (we recommend to keep it checked)', 'wpglobus' ); ?>
+
+				</label>
+				</p>
+<hr/>
+				<h3>
+					<?php esc_html_e( 'You have been warned...', 'wpglobus' ); ?>
+				</h3>
+				<p>
+					<?php esc_html_e( 'Please confirm by checking the box below:', 'wpglobus' ); ?>
+				</p>
+				<p style="color:red; background-color: white; padding: .5em">
+					<?php esc_html_e( 'I have read and understood everything written on this page. I am aware that by using this tool I may loose some content of my website. I have made a database backup and know how to restore it if necessary. I am fully responsible for the results.' , 'wpglobus' ); ?>
+				</p>
+
+					<label><input type="checkbox" name="wpglobus-clean-activate" id="wpglobus-clean-activate" /><?php esc_html_e( 'YES, I CONFIRM', 'wpglobus' ); ?>
+					</label>
+				<div class="return-to-dashboard">
+						<a id="wpglobus-clean-button" class="button button-primary hidden" href="#about-to-clean">
+							<?php _e( 'Process with the Clean-up', 'wpglobus' ); ?>
 						</a>
 					</div>
-
-				</div>
 
 			</div>
 
