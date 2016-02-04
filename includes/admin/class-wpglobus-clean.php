@@ -12,6 +12,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 	class WPGlobus_Clean {
 
+		const LOG_BASENAME = 'wpglobus-clean';
+
 		protected static $tables = array();
 		
 		protected static $log_file = '';
@@ -20,9 +22,9 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 * Controller
 		 */
 		public static function controller() {
-				
-			self::$log_file = ABSPATH . 'wp-content/wpglobus-clean.log';
-			
+
+			self::_set_log_file();
+
 			self::get_table();
 	
 			self::screen();
@@ -33,6 +35,27 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				99 
 			);
 			
+		}
+
+		/**
+		 * Initialize the class variable `log_file`.
+		 * Note: 'wp-content' can be set to a different path, so we are using the standard WP method.
+		 * @todo Check if the folder exists and file is writeable.
+		 */
+		protected static function _set_log_file() {
+			$upload_dir        = wp_upload_dir();
+			$wpglobus_logs_dir = $upload_dir['basedir'] . '/' . 'wpglobus-logs';
+
+			wp_mkdir_p( $wpglobus_logs_dir );
+			// Protect the folder from reading via URL
+			if ( ! file_exists( $wpglobus_logs_dir . '/.htaccess' ) ) {
+				file_put_contents( $wpglobus_logs_dir . '/.htaccess', 'deny from all' );
+			}
+			if ( ! file_exists( $wpglobus_logs_dir . '/index.php' ) ) {
+				file_put_contents( $wpglobus_logs_dir . '/index.php', '' );
+			}
+
+			self::$log_file = $wpglobus_logs_dir . '/' . self::LOG_BASENAME  . '.log';
 		}
 		
 		/**
@@ -220,6 +243,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 */		
 		public static function process_ajax( $order ) {
 
+			self::_set_log_file();
+
 			$_log = false;
 
 			if ( 'true' === $order['log'] ) {
@@ -231,9 +256,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			}	
 			
 			if ( $order['action'] == 'wpglobus-reset' ) {
-				
-				self::$log_file = ABSPATH . 'wp-content/wpglobus-clean.log';
-				
+
 				/**
 				 * SELECT * FROM `wp_options` WHERE `option_name` REGEXP 'wpglobus'
 				 */ 
@@ -474,7 +497,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 * Logger
 		 */
 		public static function _log( $table = '', $id = '' , $initial = '', $converted = '' ) {
-			error_log( date( 'D, d M Y H:i:s' ) . "\n", 3 , self::$log_file );
+			error_log( date( DATE_ATOM ) . "\n", 3 , self::$log_file );
 			error_log( 'TABLE: ' . $table . "\n", 3 , self::$log_file );
 			error_log( 'ID: ' . $id . "\n", 3 , self::$log_file );
 			error_log( "SOURCE: \n" . print_r( $initial, true ) . "\n", 3 , self::$log_file );
@@ -563,7 +586,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						<b><?php _e( 'Before start of cleaning procedure, make sure you have backup of DB.', 'wpglobus' ); ?></b>
 					</div>				
 					<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log"/> make log for cleaning procedure 
-					[ <?php echo  self::$log_file; ?> ]
+					[ <?php echo self::$log_file; ?> ]
 					<br />
 					<hr />
 					<input type="checkbox" name="wpglobus-clean-activate" id="wpglobus-clean-activate"/> activate
