@@ -4,12 +4,11 @@
  * @since 1.4.3
  */
 
-/**
- * Class WPGlobus_Clean
- */
- 
 if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
+	/**
+	 * Class WPGlobus_Clean
+	 */
 	class WPGlobus_Clean {
 
 		const LOG_BASENAME = 'wpglobus-clean';
@@ -67,11 +66,11 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		public static function get_table( $table = '' ) {
 			
 			$get_all = false;
-			if ( '' == $table ) {
+			if ( '' === $table ) {
 				$get_all = true;
 			}	
 					
-			if ( 'posts' == $table || $get_all ) {
+			if ( 'posts' === $table || $get_all ) {
 			
 				/**
 				 * table posts
@@ -93,7 +92,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				
 			}
 			
-			if ( 'postmeta' == $table || $get_all ) {
+			if ( 'postmeta' === $table || $get_all ) {
 				
 				/**
 				 * table postmeta
@@ -108,7 +107,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				
 			}
 
-			if ( 'options' == $table || $get_all ) {		
+			if ( 'options' === $table || $get_all ) {
 			
 				/**
 				 * table options
@@ -123,7 +122,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				
 			}
 			
-			if ( 'terms' == $table || $get_all ) {		
+			if ( 'terms' === $table || $get_all ) {
 			
 				/**
 				 * table terms
@@ -138,7 +137,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		
 			}
 			
-			if ( 'term_taxonomy' == $table || $get_all ) {	
+			if ( 'term_taxonomy' === $table || $get_all ) {
 			
 				/**
 				 * table term_taxonomy
@@ -153,7 +152,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		
 			}
 			
-			if ( 'usermeta' == $table || $get_all ) {
+			if ( 'usermeta' === $table || $get_all ) {
 				
 				/**
 				 * table usermeta
@@ -175,7 +174,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				/**
 				 * WooCommerce tables
 				 */
-				if ( 'woocommerce_attribute_taxonomies' == $table || $get_all ) { 
+				if ( 'woocommerce_attribute_taxonomies' === $table || $get_all ) {
 					/**
 					 * table woocommerce_attribute_taxonomies
 					 */
@@ -188,7 +187,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					self::$tables['woocommerce_attribute_taxonomies'] = $woocommerce_attribute_taxonomies;
 				}
 				
-				if ( 'woocommerce_order_items' == $table || $get_all ) { 
+				if ( 'woocommerce_order_items' === $table || $get_all ) {
 					/**
 					 * table woocommerce_order_items
 					 */
@@ -216,7 +215,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			foreach( self::$tables as $table=>$data ) {
 
 				$list .= '<li id="' . $table . '">';
-				$list .= 	'<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
+				/** @noinspection DisconnectedForeachInstructionInspection */
+				$list .= '<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
 				$list .= 	'<span class="wpglobus-result" style="float:left;width:20px;height:20px;"></span>';
 				$list .= 	'<span class=""><input type="checkbox" id="cb-' . $table . '" checked disabled /></span>';
 				$list .= 	$table;
@@ -237,10 +237,12 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			return $list;
 			
 		}
-		
+
 		/**
 		 * Ajax action handler
-		 */		
+		 *
+		 * @param string[] $order
+		 */
 		public static function process_ajax( $order ) {
 
 			self::_set_log_file();
@@ -251,11 +253,11 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				$_log = true;	
 			}	
 			
-			if ( $order['action'] == 'die' ) {
+			if ( $order['action'] === 'die' ) {
 				wp_send_json_success( $order );
 			}	
 			
-			if ( $order['action'] == 'wpglobus-reset' ) {
+			if ( $order['action'] === 'wpglobus-reset' ) {
 
 				/**
 				 * SELECT * FROM `wp_options` WHERE `option_name` REGEXP 'wpglobus'
@@ -277,9 +279,9 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				
 				foreach( $ids as $data ) {
 					foreach ( $data as $field_id => $record_id ) {
-						if ( 'option_id' == $field_id ) {
+						if ( 'option_id' === $field_id ) {
 							$records[] = $record_id;	
-						} else if ( 'option_name' == $field_id  ) {	
+						} else if ( 'option_name' === $field_id  ) {
 							$fields[] = $record_id;
 						}		
 					}
@@ -305,7 +307,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				
 			}	
 			
-			if ( $order['action'] != 'clean' ) {
+			if ( $order['action'] !== 'clean' ) {
 				wp_send_json_error( $order );	
 			}	
 			
@@ -380,9 +382,9 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			 * Set condition
 			 */
 			$condition = false;
-			if ( count( self::$tables[ $order['table'] ]->include_fields ) == 0 ) {
+			if ( count( self::$tables[ $order['table'] ]->include_fields ) === 0 ) {
 				/** do nothing */
-			} else if ( count( self::$tables[ $order['table'] ]->include_fields ) == 1 ) {
+			} else if ( count( self::$tables[ $order['table'] ]->include_fields ) === 1 ) {
 				/**
 				 * one field
 				 */				
@@ -398,7 +400,6 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					$temp[] = "$field REGEXP '$wpg_regexp'";
 				}
 				
-				$condition .= '';
 				$condition = 'AND ( ' . implode( ' OR ', $temp ) . ' )';
 				
 			}	
@@ -428,11 +429,13 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			foreach( $ids as $data ) {
 				
 				foreach ( $data as $field_id=>$record_id ) {
-					
-					$ifields 		= implode( ', ', self::$tables[ $order['table'] ]->include_fields ); 
+
+					/** @noinspection DisconnectedForeachInstructionInspection */
+					$ifields = implode( ', ', self::$tables[ $order['table'] ]->include_fields );
 					
 					$query1 		= "SELECT $ifields FROM $table WHERE $field_id = '$record_id'";
 
+					/** @var array $record */
 					$record 		= $wpdb->get_results( $query1 );
 				
 					$update_fields 	= array();
@@ -491,18 +494,23 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 	
 			wp_send_json_success( $order );
 
-		}	
+		}
 
 		/**
 		 * Logger
+		 *
+		 * @param string $table
+		 * @param string $id
+		 * @param string $initial
+		 * @param string $converted
 		 */
 		public static function _log( $table = '', $id = '' , $initial = '', $converted = '' ) {
 			error_log( date( DATE_ATOM ) . "\n", 3 , self::$log_file );
 			error_log( 'TABLE: ' . $table . "\n", 3 , self::$log_file );
 			error_log( 'ID: ' . $id . "\n", 3 , self::$log_file );
-			error_log( "SOURCE: \n" . print_r( $initial, true ) . "\n", 3 , self::$log_file );
-			error_log( "CONVERTED: \n" . print_r( $converted, true ) . "\n", 3 , self::$log_file );
-			error_log( '=================' . "\n", 3 , self::$log_file );
+			error_log( "BEFORE: \n" . print_r( $initial, true ) . "\n", 3 , self::$log_file );
+			error_log( "AFTER: \n" . print_r( $converted, true ) . "\n", 3 , self::$log_file );
+			error_log( '=================' . "\n\n", 3 , self::$log_file );
 		}
 		
 		/**
@@ -641,7 +649,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			foreach( $data as $key=>$value ) {
 				if ( is_array( $data ) ) {
-					$data[ $key ] = self::convert( $value );	
+					/** @noinspection AlterInForeachInspection */
+					$data[ $key ] = self::convert( $value );
 				} else if ( is_object( $data ) ) {
 					$data->$key = self::convert( $value );
 				}	
