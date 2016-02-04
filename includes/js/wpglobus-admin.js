@@ -284,9 +284,9 @@ var WPGlobusDialogApp;
 				sb = sb.replace(/{{name}}/g, name);
 				sb = sb.replace(/{{nodename}}/g, nodeName);
 			}	
-			sb 					 = 'textarea' == nodeName ? sb.replace('{{style}}', 'float:left;margin-top:0;') : sb.replace('{{style}}', '');
-			api.startButtonClass = 'textarea' == nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+api.clone_id : api.startButtonClass;
-			sb = sb.replace('{{classes}}', api.startButtonClass);
+			sb 					   = 'textarea' == nodeName ? sb.replace( '{{style}}', 'float:left;margin-top:0;' ) : sb.replace( '{{style}}', '' );
+			var startButtonClasses = 'textarea' == nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+api.clone_id : api.startButtonClass;
+			sb = sb.replace( '{{classes}}', startButtonClasses );
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
 			sb = option.sbTitle == '' ? sb.replace('{{sbTitle}}', option.sbTitle) : sb.replace('{{sbTitle}}', 'title="'+option.sbTitle+'"');
 			
