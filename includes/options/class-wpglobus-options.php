@@ -95,8 +95,10 @@ class WPGlobus_Options {
 	 * Tell Redux where to find our custom fields
 	 *
 	 * @since 1.2.2
+	 *
 	 * @param string $file  Path of the field class where Redux is looking for it
 	 * @param array  $field Field parameters
+	 *
 	 * @return string Path of the field class where we want Redux to find it
 	 */
 	public function add_custom_redux_fields( $file, $field ) {
@@ -148,8 +150,8 @@ class WPGlobus_Options {
 					            '<strong>' .
 					            // translators: %1$s placeholder for the link to ReduxFramework plugin
 					            sprintf( esc_html__( 'We recommend you to install the most recent version of the ReduxFramework plugin: %1$s.', 'wpglobus' ), '<a href="https://wordpress.org/plugins/redux-framework/">https://wordpress.org/plugins/redux-framework/</a>' ) .
-				                '</strong>'
-					,
+					            '</strong>'
+				,
 					'style'  => 'critical',
 					'notice' => false,
 				);
@@ -188,18 +190,34 @@ class WPGlobus_Options {
 				'notice' => false,
 			);
 
-		$helphelp = __( 'We would hate to see you go. Please <a href="%s" target="_blank">talk to us and let us help</a>!', 'wpglobus' );
-		
+		/**
+		 * For Google Analytics
+		 */
+		$ga_campaign = '?utm_source=wpglobus-admin-clean&utm_medium=link&utm_campaign=talk-to-us';
+
+		$url_wpglobus_site               = WPGlobus_Utils::url_wpglobus_site();
+		$url_wpglobus_site_submit_ticket = $url_wpglobus_site . 'support/submit-ticket/' . $ga_campaign;
+
 		$fields_home[] =
 			array(
 				'id'     => 'wpglobus_clean',
 				'type'   => 'wpglobus_info',
 				'title'  => __( 'Deactivating / Uninstalling', 'wpglobus' ),
 				'desc'   => '' .
+				            '<p><em>' .
+				            sprintf(
+					            esc_html(
+					            /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
+						            __( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ) ),
+					            '<a href="' . $url_wpglobus_site_submit_ticket . '" target="_blank">',
+					            '</a>'
+				            ) .
+				            '</em></p>' .
+				            '<hr/>' .
+				            '<p><i class="el el-exclamation-sign" style="color:red"></i> <strong>' .
+				            esc_html( __( 'Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language.', 'wpglobus' ) ) .
+				            '</strong></p>' .
 				            '<p>' .
-				            esc_html(__( 'Please note that if you deactivate WPGlobus, your site will show all the translations you have entered, mixed up.', 'wpglobus' )) .
-				            '</p>' .
-				            '<blockquote>' .
 				            /* translators: %s: link to the Clean-up Tool */
 				            sprintf( __( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
 					            /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
@@ -207,20 +225,18 @@ class WPGlobus_Options {
 						            '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
 						            '</a>'
 					            ) ) .
-				            '</blockquote>' .
-				            '<p><em>' .
-				            sprintf( $helphelp, 'http://www.wpglobus.com/support/submit-ticket/' ) .
-				            '<em></p>' ,
+				            '</p>' .
+				            '',
 				'style'  => 'normal',
 				'notice' => false,
 			);
-			
-			
+
+
 		$this->sections[] = array(
 			'wpglobus_id' => 'welcome',
-			'title'  => __( 'Welcome!', 'wpglobus' ),
-			'icon'   => 'el-icon-globe',
-			'fields' => $fields_home
+			'title'       => __( 'Welcome!', 'wpglobus' ),
+			'icon'        => 'el-icon-globe',
+			'fields'      => $fields_home
 		);
 
 		/*
@@ -303,9 +319,9 @@ class WPGlobus_Options {
 
 		$this->sections[] = array(
 			'wpglobus_id' => 'languages',
-			'title'  => esc_html__( 'Languages', 'wpglobus' ),
-			'icon'   => 'el-icon-wrench-alt',
-			'fields' => array(
+			'title'       => esc_html__( 'Languages', 'wpglobus' ),
+			'icon'        => 'el-icon-wrench-alt',
+			'fields'      => array(
 				array(
 					'id'       => 'languages_intro',
 					'type'     => 'wpglobus_info',
@@ -402,9 +418,9 @@ class WPGlobus_Options {
 		*/
 		$this->sections[] = array(
 			'wpglobus_id' => 'language_table',
-			'title'  => __( 'Languages table', 'wpglobus' ),
-			'icon'   => 'el-icon-th-list',
-			'fields' => array(
+			'title'       => __( 'Languages table', 'wpglobus' ),
+			'icon'        => 'el-icon-th-list',
+			'fields'      => array(
 				array(
 					'id'       => 'description',
 					'type'     => 'wpglobus_info',
@@ -459,9 +475,9 @@ class WPGlobus_Options {
 
 		$this->sections[] = array(
 			'wpglobus_id' => 'post_types',
-			'title'  => __( 'Post types', 'wpglobus' ),
-			'icon'   => 'el-icon-th-list',
-			'fields' => $fields
+			'title'       => __( 'Post types', 'wpglobus' ),
+			'icon'        => 'el-icon-th-list',
+			'fields'      => $fields
 		);
 
 		/**
@@ -470,15 +486,16 @@ class WPGlobus_Options {
 		 */
 		$this->sections[] = array(
 			'wpglobus_id' => 'add_ons',
-			'title' => __( 'Add-ons', 'wpglobus' ),
-			'icon'  => 'el-icon-th-list',
-			'class' => 'wpglobus-addons-group hidden'
+			'title'       => __( 'Add-ons', 'wpglobus' ),
+			'icon'        => 'el-icon-th-list',
+			'class'       => 'wpglobus-addons-group hidden'
 		);
 
 		/**
 		 * Filter the array of sections.
 		 *
 		 * @since 1.0.11
+		 *
 		 * @param array $sections Array of Redux sections.
 		 */
 		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
@@ -499,21 +516,21 @@ class WPGlobus_Options {
 
 		$this->args = array(
 			// TYPICAL -> Change these values as you need/desire
-			'opt_name'           => WPGlobus::Config()->option,
+			'opt_name'        => WPGlobus::Config()->option,
 			// This is where your data is stored in the database and also becomes your global variable name.
-			'display_name'       => 'WPGlobus',
+			'display_name'    => 'WPGlobus',
 			// Name that appears at the top of your panel
-			'display_version'    => WPGLOBUS_VERSION,
+			'display_version' => WPGLOBUS_VERSION,
 			// Version that appears at the top of your panel
-			'menu_type'          => 'menu',
+			'menu_type'       => 'menu',
 			//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
-			'allow_sub_menu'     => true,
+			'allow_sub_menu'  => true,
 			// Show the sections below the admin menu item or not
-			'menu_title'         => 'WPGlobus',
-			'page_title'         => 'WPGlobus',
+			'menu_title'      => 'WPGlobus',
+			'page_title'      => 'WPGlobus',
 			// You will need to generate a Google API key to use this feature.
 			// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
-			'google_api_key'     => '',
+			'google_api_key'  => '',
 			// Must be defined to add google fonts to the typography module
 
 			'async_typography'   => false,
@@ -558,23 +575,23 @@ class WPGlobus_Options {
 			'output_tag'         => true,
 			// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
 			'footer_credit'      => '&copy; Copyright 2014-' . date( 'Y' ) .
-			                        ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.',
+			                        ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">TIV.NET INC. / WPGlobus</a>.',
 			'database'           => 'options',
 			// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 			'system_info'        => false,
 			// REMOVE
 
-			'hide_reset'         => true,
-			'disable_tracking'   => true,
+			'hide_reset'       => true,
+			'disable_tracking' => true,
 			/**
 			 * With newer ReduxFramework, need to disable AJAX save,
 			 * so that list of languages is always fresh, after save.
 			 *
 			 * @since 1.2.2
 			 */
-			'ajax_save'          => false,
+			'ajax_save'        => false,
 			// HINTS
-			'hints'              => array(
+			'hints'            => array(
 				'icon'          => 'icon-question-sign',
 				'icon_position' => 'right',
 				'icon_color'    => 'lightgray',
