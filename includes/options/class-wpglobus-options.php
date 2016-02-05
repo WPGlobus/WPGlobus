@@ -188,6 +188,8 @@ class WPGlobus_Options {
 				'notice' => false,
 			);
 
+		$helphelp = __( 'We would hate to see you go. Please <a href="%s" target="_blank">talk to us and let us help</a>!', 'wpglobus' );
+		
 		$fields_home[] =
 			array(
 				'id'     => 'wpglobus_clean',
@@ -207,7 +209,7 @@ class WPGlobus_Options {
 					            ) ) .
 				            '</blockquote>' .
 				            '<p><em>' .
-				            __( 'We would hate to see you go. Please talk to us and let us help!', 'wpglobus' ) .
+				            sprintf( $helphelp, 'http://www.wpglobus.com/support/submit-ticket/' ) .
 				            '<em></p>' ,
 				'style'  => 'normal',
 				'notice' => false,
