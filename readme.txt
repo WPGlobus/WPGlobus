@@ -126,6 +126,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.4.3 =
+
+* ADDED:
+	* Clean-up Tool to remove all languages except for the main one.
+
 = 1.4.2 =
 
 * FIXED:

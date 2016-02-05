@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-01-17 14:29:58+00:00\n"
+"POT-Creation-Date: 2016-02-05 04:16:30+00:00\n"
 "PO-Revision-Date: 2015-09-20 07:26+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/wp-translations/"
@@ -27,10 +27,12 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 #: includes/admin/class-wpglobus-about.php:42
+#: includes/admin/class-wpglobus-clean.php:581
 msgid "Multilingual Everything!"
 msgstr "Multilenguaje Total!"
 
 #: includes/admin/class-wpglobus-about.php:45
+#: includes/admin/class-wpglobus-clean.php:584
 msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
 "multilingual WordPress blogs and sites."
@@ -44,15 +46,18 @@ msgstr "Inicio Rápido"
 
 #: includes/admin/class-wpglobus-about.php:57
 #: includes/admin/class-wpglobus-about.php:86
+#: includes/admin/class-wpglobus-clean.php:596
 msgid "Guide"
 msgstr "Guía"
 
 #: includes/admin/class-wpglobus-about.php:63
-#: includes/options/class-wpglobus-options.php:445
+#: includes/admin/class-wpglobus-clean.php:602
+#: includes/options/class-wpglobus-options.php:489
 msgid "Add-ons"
 msgstr "Complementos"
 
 #: includes/admin/class-wpglobus-about.php:67
+#: includes/admin/class-wpglobus-clean.php:606
 msgid "Support"
 msgstr "Soporte"
 
@@ -138,6 +143,82 @@ msgstr "Ir a Ajustes WPGlobus"
 #: includes/admin/class-wpglobus-addons.php:45
 msgid "WPGlobus Add-ons / Extensions"
 msgstr "WPGlobus complementos/extensiones"
+
+#: includes/admin/class-wpglobus-clean.php:232
+msgid "Remove the WPGlobus settings (not recommended)"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:591
+msgid "Clean-up Tool"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:611
+msgid ""
+"WARNING: this operation is non-reversible. It is strongly recommended that "
+"you backup your database before proceeding."
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:615
+msgid ""
+"This tool should be used only if you plan to completely uninstall WPGlobus. "
+"By running it, you will remove ALL translations you have entered to your "
+"post, pages, etc., keeping only the MAIN language texts. Please make sure "
+"that all entries have some content in the main language. Otherwise, you "
+"might end up with empty titles, no content, no excerpts, blank comments and "
+"so on."
+msgstr ""
+
+#. translators: %1$s - language name, %1$s - language code. Do not remove.
+#: includes/admin/class-wpglobus-clean.php:622
+msgid ""
+"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
+"%1$s WILL BE DELETED! To change the main language, please go to Settings."
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:631
+msgid "You are about to clean the content of the following database tables:"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:639
+msgid "The operations log"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:642
+msgid ""
+"We are going to write a detailed log of all the database changes performed. "
+"It should help in the case you need to restore something important. The log "
+"will be written to the file:"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:650
+msgid ""
+"Uncheck if you do not want to write the operations log (we recommend to keep "
+"it checked)"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:656
+msgid "You have been warned..."
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:659
+msgid "Please confirm by checking the box below:"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:662
+msgid ""
+"I have read and understood everything written on this page. I am aware that "
+"by using this tool I may loose some content of my website. I have made a "
+"database backup and know how to restore it if necessary. I am fully "
+"responsible for the results."
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:665
+msgid "YES, I CONFIRM"
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:669
+msgid "Process with the Clean-up"
+msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:146
 #: includes/admin/class-wpglobus-language-edit.php:151
@@ -278,20 +359,20 @@ msgstr "Desplegable con banderas"
 msgid "Selector type"
 msgstr "Tipo de selector"
 
-#: includes/class-wpglobus.php:872
+#: includes/class-wpglobus.php:899
 msgid "You cannot disable the main language."
 msgstr "No se puede desactivar el idioma principal."
 
-#: includes/class-wpglobus.php:1068
+#: includes/class-wpglobus.php:1095
 msgid "*) Available after the menu is saved."
 msgstr "No Se Puede Desactivar el director idioma."
 
-#: includes/class-wpglobus.php:2617
+#: includes/class-wpglobus.php:2670
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Debes habilitar los Enlaces permanentes Pretty para utilizar WPGlobus ."
 
-#: includes/class-wpglobus.php:2619
+#: includes/class-wpglobus.php:2672
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -299,16 +380,16 @@ msgstr ""
 "Por favor, ve a Configuración > Enlaces permanentes > Ajustes comunes y "
 "selecciona una opción no predeterminada ."
 
-#: includes/class-wpglobus.php:2746
+#: includes/class-wpglobus.php:2799
 msgid "Add"
 msgstr "Añadir"
 
-#: includes/options/class-wpglobus-options.php:133
+#: includes/options/class-wpglobus-options.php:135
 msgid "WARNING: old version of the ReduxFramework is active!"
 msgstr "ADVERTENCIA : la versión antigua del ReduxFramework está activada!"
 
 #. translators: ReduxFramework - %1$s version, %2$s folder where installed
-#: includes/options/class-wpglobus-options.php:142
+#: includes/options/class-wpglobus-options.php:144
 msgid ""
 "The currently active ReduxFramework (version %1$s) was loaded from the %2$s "
 "folder."
@@ -317,7 +398,7 @@ msgstr ""
 "carpeta %2$s ."
 
 #. translators: %1$s placeholder for the link to ReduxFramework plugin
-#: includes/options/class-wpglobus-options.php:150
+#: includes/options/class-wpglobus-options.php:152
 msgid ""
 "We recommend you to install the most recent version of the ReduxFramework "
 "plugin: %1$s."
@@ -325,22 +406,22 @@ msgstr ""
 "Te recomendamos instalar la versión más reciente del plug-in "
 "ReduxFramework : %1$s."
 
-#: includes/options/class-wpglobus-options.php:165
+#: includes/options/class-wpglobus-options.php:167
 msgid "Thank you for installing WPGlobus!"
 msgstr "Gracias por instalar WPGlobus!"
 
-#: includes/options/class-wpglobus-options.php:170
+#: includes/options/class-wpglobus-options.php:172
 msgid "Read About WPGlobus"
 msgstr "Leer sobre WPGlobus!"
 
-#: includes/options/class-wpglobus-options.php:173
+#: includes/options/class-wpglobus-options.php:175
 msgid ""
 "Click the <strong>[Languages]</strong> tab at the left to setup the options."
 msgstr ""
 "Click en la <strong>[Idiomas]</strong> pestaña en la parte izquierda de "
 "configuración de las opciones."
 
-#: includes/options/class-wpglobus-options.php:175
+#: includes/options/class-wpglobus-options.php:177
 msgid ""
 "Use the <strong>[Languages Table]</strong> section to add a new language or "
 "to edit the language attributes: name, code, flag icon, etc."
@@ -349,7 +430,7 @@ msgstr ""
 "de modificar los atributos del idioma: nombre, código, icono de la bandera, "
 "etc."
 
-#: includes/options/class-wpglobus-options.php:178
+#: includes/options/class-wpglobus-options.php:180
 msgid ""
 "Should you have any questions or comments, please do not hesitate to contact "
 "us."
@@ -357,29 +438,61 @@ msgstr ""
 "Si tienes alguna pregunta o comentario, por favor no dudes en contactar con "
 "nosotros."
 
-#: includes/options/class-wpglobus-options.php:182
+#: includes/options/class-wpglobus-options.php:184
 msgid "Sincerely Yours,"
 msgstr "Sinceramente tuyo,"
 
-#: includes/options/class-wpglobus-options.php:184
+#: includes/options/class-wpglobus-options.php:186
 #: includes/options/wpglobus-options-header.php:27
 msgid "The WPGlobus Team"
 msgstr "El Equipo WPGlobus"
 
-#: includes/options/class-wpglobus-options.php:193
+#: includes/options/class-wpglobus-options.php:205
+msgid "Deactivating / Uninstalling"
+msgstr ""
+
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+#: includes/options/class-wpglobus-options.php:211
+msgid ""
+"We would hate to see you go. If something goes wrong, do not uninstall "
+"WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:218
+msgid ""
+"Please note that if you deactivate WPGlobus, your site will show all the "
+"languages together, mixed up. You will need to remove all translations, "
+"keeping only one language."
+msgstr ""
+
+#. translators: %s: link to the Clean-up Tool
+#: includes/options/class-wpglobus-options.php:222
+msgid ""
+"If there are just a few places, you should edit them manually. To "
+"automatically remove all translations at once, you can use the %s. WARNING: "
+"The clean-up operation is irreversible, so use it only if you need to "
+"completely uninstall WPGlobus."
+msgstr ""
+
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+#: includes/options/class-wpglobus-options.php:224
+msgid "%1$sClean-up Tool%2$s"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:237
 msgid "Welcome!"
 msgstr "Bienvenido!"
 
-#: includes/options/class-wpglobus-options.php:254
+#: includes/options/class-wpglobus-options.php:298
 msgid "No navigation menu"
 msgstr "No hay menú de navegación"
 
-#: includes/options/class-wpglobus-options.php:256
+#: includes/options/class-wpglobus-options.php:300
 msgid "Select navigation menu"
 msgstr "Selecciona el menú de navegación"
 
 #. translators: %s placeholder for the icon (actual picture)
-#: includes/options/class-wpglobus-options.php:262
+#: includes/options/class-wpglobus-options.php:306
 msgid ""
 "Place the <strong>main language</strong> of your site at the top of the list "
 "by dragging the %s icons."
@@ -387,19 +500,19 @@ msgstr ""
 "Coloca el <strong>idioma principal</strong> de tu sitio en la parte superior "
 "de la lista arrastrando iconos del %s."
 
-#: includes/options/class-wpglobus-options.php:263
+#: includes/options/class-wpglobus-options.php:307
 msgid "<strong>Uncheck</strong> the languages you do not plan to use."
 msgstr "<strong>Desmarca</strong> los idiomas que no piensas utilizar."
 
-#: includes/options/class-wpglobus-options.php:264
+#: includes/options/class-wpglobus-options.php:308
 msgid "<strong>Add</strong> more languages using the section below."
 msgstr "<strong>Añadir</strong> más idiomas utilizando la sección de abajo."
 
-#: includes/options/class-wpglobus-options.php:265
+#: includes/options/class-wpglobus-options.php:309
 msgid "When done, click the [Save Changes] button."
 msgstr "Cuando hayas terminado, haz clic en el botón [Guardar Cambios] ."
 
-#: includes/options/class-wpglobus-options.php:270
+#: includes/options/class-wpglobus-options.php:314
 msgid ""
 "Choose a language you would like to enable. <br>Press the [Save Changes] "
 "button to confirm."
@@ -408,84 +521,84 @@ msgstr ""
 "para confirmar."
 
 #. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-#: includes/options/class-wpglobus-options.php:273
+#: includes/options/class-wpglobus-options.php:317
 msgid "or Add new Language %1$s here %2$s"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:278
+#: includes/options/class-wpglobus-options.php:322
 msgid "Languages"
 msgstr "Idiomas"
 
-#: includes/options/class-wpglobus-options.php:284
+#: includes/options/class-wpglobus-options.php:328
 msgid "Instructions:"
 msgstr "Instrucciones:"
 
-#: includes/options/class-wpglobus-options.php:285
-#: includes/options/class-wpglobus-options.php:384
+#: includes/options/class-wpglobus-options.php:329
+#: includes/options/class-wpglobus-options.php:428
 msgid "NOTE: you cannot remove the main language."
 msgstr "Nota: No se puede eliminar el idioma principal."
 
-#: includes/options/class-wpglobus-options.php:293
+#: includes/options/class-wpglobus-options.php:337
 msgid "Enabled Languages"
 msgstr "Idiomas Habilitados"
 
-#: includes/options/class-wpglobus-options.php:295
+#: includes/options/class-wpglobus-options.php:339
 msgid "These languages are currently enabled on your site."
 msgstr "Estos idiomas están habilitados actualmente en su sitio."
 
-#: includes/options/class-wpglobus-options.php:303
+#: includes/options/class-wpglobus-options.php:347
 msgid "Add Languages"
 msgstr "Añadir idioma"
 
-#: includes/options/class-wpglobus-options.php:307
+#: includes/options/class-wpglobus-options.php:351
 msgid "Select a language"
 msgstr "Seleccionar un idioma"
 
-#: includes/options/class-wpglobus-options.php:313
+#: includes/options/class-wpglobus-options.php:357
 msgid "Language Selector Mode"
 msgstr "Modo Selector de Idioma"
 
-#: includes/options/class-wpglobus-options.php:316
+#: includes/options/class-wpglobus-options.php:360
 msgid ""
 "Choose the way language name and country flag are shown in the drop-down menu"
 msgstr ""
 "Elige el nombre del idioma y bandera del país se muestran en el menú "
 "desplegable"
 
-#: includes/options/class-wpglobus-options.php:322
+#: includes/options/class-wpglobus-options.php:366
 msgid "Two-letter Code with flag (en, ru, it, etc.)"
 msgstr "Código de la bandera en dos letras (es, en, ru, it, etc.)"
 
-#: includes/options/class-wpglobus-options.php:323
+#: includes/options/class-wpglobus-options.php:367
 msgid "Full Name (English, Russian, Italian, etc.)"
 msgstr "Nombre completo (Español, English, Russian, Italian, etc.)"
 
-#: includes/options/class-wpglobus-options.php:325
+#: includes/options/class-wpglobus-options.php:369
 msgid "Full Name with flag (English, Russian, Italian, etc.)"
 msgstr "Nombre completo con bandera (Español, English, Russian, Italian, etc.)"
 
-#: includes/options/class-wpglobus-options.php:326
+#: includes/options/class-wpglobus-options.php:370
 msgid "Flags only"
 msgstr "Sólo banderas"
 
-#: includes/options/class-wpglobus-options.php:334
+#: includes/options/class-wpglobus-options.php:378
 msgid "Language Selector Menu"
 msgstr "Menú selector de idioma"
 
-#: includes/options/class-wpglobus-options.php:337
+#: includes/options/class-wpglobus-options.php:381
 msgid "Choose the navigation menu where the language selector will be shown"
 msgstr ""
 "Selecciona el menú de navegación  donde se mostrará el selector de idioma"
 
-#: includes/options/class-wpglobus-options.php:348
+#: includes/options/class-wpglobus-options.php:392
 msgid "\"All Pages\" menus Language selector"
 msgstr "\"Todas las páginas\" Selector de menús Idioma"
 
-#: includes/options/class-wpglobus-options.php:349
+#: includes/options/class-wpglobus-options.php:393
 msgid "(Found in some themes)"
 msgstr "(Encontrado en algunos temas)"
 
-#: includes/options/class-wpglobus-options.php:350
+#: includes/options/class-wpglobus-options.php:394
 msgid ""
 "Adds language selector to the menus that automatically list all existing "
 "pages (using `wp_list_pages`)"
@@ -494,15 +607,15 @@ msgstr ""
 "automáticamente en todas las páginas existentes (utilizando ` "
 "wp_list_pages` )"
 
-#: includes/options/class-wpglobus-options.php:354
+#: includes/options/class-wpglobus-options.php:398
 msgid "Enable"
 msgstr "Habilitar"
 
-#: includes/options/class-wpglobus-options.php:360
+#: includes/options/class-wpglobus-options.php:404
 msgid "Custom CSS"
 msgstr "Customizar CSS"
 
-#: includes/options/class-wpglobus-options.php:364
+#: includes/options/class-wpglobus-options.php:408
 msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
@@ -510,55 +623,55 @@ msgstr ""
 "Aquí puedes introducir las reglas CSS para ajustar el menú de selección de "
 "idiomas para tu tema. Mira los ejemplos en el `style-samples.css` file."
 
-#: includes/options/class-wpglobus-options.php:365
+#: includes/options/class-wpglobus-options.php:409
 msgid "(Optional)"
 msgstr "(Opcional)"
 
-#: includes/options/class-wpglobus-options.php:377
+#: includes/options/class-wpglobus-options.php:421
 msgid "Languages table"
 msgstr "Tabla de idiomas"
 
-#: includes/options/class-wpglobus-options.php:383
+#: includes/options/class-wpglobus-options.php:427
 msgid "Use this table to add, edit or delete languages."
 msgstr "Utiliza esta tabla para agregar, editar o eliminar idiomas."
 
-#: includes/options/class-wpglobus-options.php:404
+#: includes/options/class-wpglobus-options.php:448
 msgid "Uncheck to disable WPGlobus"
 msgstr "Desactiva la opción para desactivar WPGlobus"
 
-#: includes/options/class-wpglobus-options.php:434
+#: includes/options/class-wpglobus-options.php:478
 msgid "Post types"
 msgstr "Tipos de Post"
 
-#: includes/options/class-wpglobus-options.php:591
+#: includes/options/class-wpglobus-options.php:636
 msgid "Read the Quick Start Guide"
 msgstr "Lee la Guía de inicio rápido"
 
-#: includes/options/class-wpglobus-options.php:596
+#: includes/options/class-wpglobus-options.php:641
 msgid "Visit our website"
 msgstr "Visita nuestra web"
 
-#: includes/options/class-wpglobus-options.php:601
+#: includes/options/class-wpglobus-options.php:646
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr "Comprar extensión WooCommerce WPGlobus"
 
-#: includes/options/class-wpglobus-options.php:606
+#: includes/options/class-wpglobus-options.php:651
 msgid "Collaborate on GitHub"
 msgstr "Colaborar en GitHub"
 
-#: includes/options/class-wpglobus-options.php:612
+#: includes/options/class-wpglobus-options.php:657
 msgid "Like us on Facebook"
 msgstr "Me gusta en Facebook"
 
-#: includes/options/class-wpglobus-options.php:617
+#: includes/options/class-wpglobus-options.php:662
 msgid "Follow us on Twitter"
 msgstr "Síguenos en Twitter"
 
-#: includes/options/class-wpglobus-options.php:622
+#: includes/options/class-wpglobus-options.php:667
 msgid "Find us on LinkedIn"
 msgstr "Encuéntranos en LinkedIn"
 
-#: includes/options/class-wpglobus-options.php:627
+#: includes/options/class-wpglobus-options.php:672
 msgid "Circle us on Google+"
 msgstr "Únete a nosotros en Google+"
 
