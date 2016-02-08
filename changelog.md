@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.4.4 ###
+
+* FIXED:
+	* use control.selector to get parent element id  correctly.
+	* more items to social networks elements disabled in customizer by default.
+	
 ### 1.4.3 ###
 
 * ADDED:
