@@ -5,8 +5,8 @@
 ### 1.4.4 ###
 
 * FIXED:
-	* use control.selector to get parent element id  correctly.
-	* more items to social networks elements disabled in customizer by default.
+	* In Customizer JS: use `control.selector` to get the ID of parent element correctly.
+	* Additional social network names elements disabled by default in Customizer.
 	
 ### 1.4.3 ###
 
