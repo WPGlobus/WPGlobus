@@ -147,6 +147,16 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_setting_mask[] = 'behance';
 			$disabled_setting_mask[] = 'dribbble';
 			$disabled_setting_mask[] = 'instagram';
+			/** since 1.4.4 */
+			$disabled_setting_mask[] = 'tumblr';
+			$disabled_setting_mask[] = 'flickr';
+			$disabled_setting_mask[] = 'wordpress';
+			$disabled_setting_mask[] = 'youtube';
+			$disabled_setting_mask[] = 'pinterest';
+			$disabled_setting_mask[] = 'github';
+			$disabled_setting_mask[] = 'rss';
+			$disabled_setting_mask[] = 'google';
+			$disabled_setting_mask[] = 'email';
 			
 			/**
 			 * Filter to disable fields in customizer. 
