@@ -579,15 +579,75 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					$enabled_post_types = array();
 					foreach ( $post_types as $post_type ) {
 						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ), true ) ) {	
-							if ( ! in_array( $post_type, WPGlobus::Config()->disabled_entities, true ) ) {	
+			
+							if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
 								$enabled_post_types[ $post_type ] = $post_type;
-							}
+								continue;	
+							}				
+						
+							foreach( WPGlobus::O()->vendors_scripts as $script=>$status ) {
+								
+								if ( empty( $status ) ) {
+									continue;
+								}
+								
+								if ( $script == 'ACF' || $script == 'ACFPRO'  ) {
+									/**
+									 * get list @see class-wpglobus.php:145
+									 * 
+									 */
+									if ( in_array( $post_type, array( 'acf-field-group', 'acf-field', 'acf' ) ) ) {
+										continue 2;
+									}		
+								}	
+								
+								if ( $script == 'WOOCOMMERCE'  ) {
+									/**
+									 * get list  @see class-wpglobus.php:171
+									 */
+									if ( in_array( 
+											$post_type, 
+											array( 
+												'product', 
+												'product_tag', 
+												'product_cat', 
+												'shop_order', 
+												'shop_coupon', 
+												'product_variation', 
+												'shop_order_refund', 
+												'shop_webhook' ) 
+										 ) ) {
+										continue 2;
+									}										
+								}	
+							}	
+
+							$enabled_post_types[ $post_type ] = $post_type;
+
 						}
 					}
 					
 					set_transient( 'wpglobus_customize_enabled_post_types', $enabled_post_types, 60 );
 					
 				}	
+
+				foreach( $enabled_post_types as $post_type ) :
+					
+					$status = '';
+					
+					if ( isset( WPGlobus::Config()->extended_options[ 'post_type' ][ $post_type ] ) ) {	
+					
+						if ( WPGlobus::Config()->extended_options[ 'post_type' ][ $post_type ] == 1 ) {
+							$status = '1';
+						}	
+					
+					} else {
+						$status = '1';
+					}	
+					
+					update_option( 'wpglobus_customize_post_type_' . $post_type, $status );
+				
+				endforeach;
 				
 				$i = 0; 
 				foreach( $enabled_post_types as $post_type ) :
@@ -611,7 +671,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 							'title'   		=> $title,
 							'label'   		=> $post_type,
 							'section' 		=> 'wpglobus_post_types_section',
-							'default'		=> '1',
+							#'default'		=> '1',
 							'priority'  	=> 10,
 						)	
 					) );	
