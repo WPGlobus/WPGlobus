@@ -242,9 +242,15 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	 * Class WPGlobus_Customize_Options
 	 */
 	class WPGlobus_Customize_Options {
-
+		
+		/**
+		 * Array of sections
+		 */
 		public static $sections = array();
 		
+		/**
+		 * Array of settings
+		 */
 		public static $settings = array();
 	
 		public static function controller() {
@@ -274,12 +280,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * This is called by wp-admin/customize.php
 			 */
 			 
-			//* 
 			add_action( 'customize_controls_enqueue_scripts', array(
 				'WPGlobus_Customize_Options',
 				'action__customize_controls_enqueue_scripts'
 			), 1010 );
-			// */
  		
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array(
 				'WPGlobus_Customize_Options',
@@ -289,8 +293,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * @todo
-		 * 
+		 * Ajax handler
 		 */
 		public static function action__process_ajax() {
 			
@@ -321,6 +324,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	
 		}	
 
+		/**
+		 * Section for message about unsupported theme
+		 */	
 		public static function sorry_section( $wp_customize, $theme ) {
 			
 			/**
@@ -350,7 +356,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 		
 		/**
-		 * @todo
+		 * Callback for customize_register
 		 * 
 		 * @param WP_Customize_Manager $wp_customize
 		 */
@@ -397,341 +403,257 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			update_option( 'wpglobus_customize_css_editor', WPGlobus::Config()->css_editor );
 			
 			/**
-			 * Welcome section
-			 */
-			/* 
-			$wp_customize->add_section( 'wpglobus_welcome_section' , array(
-				'title'      => __( 'WPGlobus Welcome', 'wpglobus' ),
-				'priority'   => 0,
-				'panel'		 => 'wpglobus_settings_panel'
-			) );			
-			
-			$wp_customize->add_setting( 'welcome_message' );
-			//$wp_customize->get_setting( 'welcome_message' )->transport = 'postMessage'; 
-			$wp_customize->add_control( new WPGlobusTextBox( $wp_customize, 
-				'welcome_message', array(
-					'section'   => 'wpglobus_welcome_section',
-					'settings'  => 'welcome_message',
-					'priority'  => 0,
-					'content'	=> self::get_content( 'welcome_message' )
-					
-				) 
-			) );				
-			// */
-			/** end section */
-			
-			/**
 			 * SECTION: Language
-			 */		
-			$wp_customize->add_section( 'wpglobus_languages_section' , array(
-				'title'      => __( 'Languages', 'wpglobus' ),
-				'priority'   => 10,
-				'panel'		 => 'wpglobus_settings_panel'
-			) );
+			 */
+			if ( 1 ) {
 				
-			/** Enabled languages */
-			$wp_customize->add_setting( 'wpglobus_customize_enabled_languages', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );			
-			$wp_customize->add_control( new WPGlobusCheckBoxSet( $wp_customize, 
-				'wpglobus_customize_enabled_languages', array(
-					'section'   => 'wpglobus_languages_section',
-					'settings'  => 'wpglobus_customize_enabled_languages',
-					'priority'  => 0,
-					'items'		=> WPGlobus::Config()->enabled_languages,
-					'label'		=> __( 'Enabled Languages', 'wpglobus' ),
-					'checkbox_class' => 'wpglobus-listen-change wpglobus-language-item',
-					'description'    => __( 'These languages are currently enabled on your site.', 'wpglobus' )
+				$wp_customize->add_section( 'wpglobus_languages_section' , array(
+					'title'      => __( 'Languages', 'wpglobus' ),
+					'priority'   => 10,
+					'panel'		 => 'wpglobus_settings_panel'
+				) );
 					
-				) 
-			) );					
-
-			/** Add languages */
-			
-			/** Generate array $more_languages */
-			/** @var array $more_languages */
-			$more_languages = array();
-			$more_languages[ 'select' ] = '---- select ----';
-			
-			foreach ( WPGlobus::Config()->flag as $code => $file ) {
-				if ( ! in_array( $code, WPGlobus::Config()->enabled_languages ) ) {
-					$lang_in_en = '';
-					if ( ! empty( WPGlobus::Config()->en_language_name[ $code ] ) ) {
-						$lang_in_en = ' (' . WPGlobus::Config()->en_language_name[ $code ] . ')';
-					}
-					// '<img src="' . WPGlobus::Config()->flags_url . $file . '" />'  
-					$more_languages[ $code ] = WPGlobus::Config()->language_name[ $code ] . $lang_in_en;
-				}
-			}
-		
-			$desc_add_languages =
-				__( 'Choose a language you would like to enable. <br>Press the [Save & Publish] button to confirm.',
-				'wpglobus' ) . '<br />';
-			// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-			$desc_add_languages .= sprintf( 
-				__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
-				'<a style="text-decoration:underline;" href="' . admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=add" target="_blank">',
-				'</a>' 
-			);			
-			
-			$wp_customize->add_setting( 'wpglobus_customize_add_language', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );			
-			$wp_customize->add_control( 'wpglobus_add_languages_select_box', array(
-				'settings' 		=> 'wpglobus_customize_add_language',
-				'label'   		=> __( 'Add Languages', 'wpglobus' ),
-				'section' 		=> 'wpglobus_languages_section',
-				'type'    		=> 'select',
-				'priority'  	=> 10,
-				'choices'    	=> $more_languages,
-				'description' 	=> $desc_add_languages
-			));			
-
-
-			/** Language Selector Mode */
-			$wp_customize->add_setting( 'wpglobus_customize_language_selector_mode', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				#'transport' => 'postMessage'
-				'transport' => 'refresh'
-			) );			
-			$wp_customize->add_control( 'wpglobus_customize_language_selector_mode', array(
-				'settings' 		=> 'wpglobus_customize_language_selector_mode',
-				'label'   		=> __( 'Language Selector Mode', 'wpglobus' ),
-				'section' 		=> 'wpglobus_languages_section',
-				'type'    		=> 'select',
-				'priority'  	=> 20,
-				'choices'    	=> array(
-					'code'      => __( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
-					'full_name' => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
-					/* @since 1.2.1 */
-					'name'      => __( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
-					'empty'     => __( 'Flags only', 'wpglobus' )
-				),
-				'description' 	=> __( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' )
-			));				
-			
-			/** Language Selector Menu */
-			
-			/** @var array $nav_menus */
-			$nav_menus = WPGlobus::_get_nav_menus();
-
-			foreach ( $nav_menus as $menu ) {
-				$menus[ $menu->slug ] = $menu->name;
-			}
-			if ( ! empty( $nav_menus ) && count( $nav_menus ) > 1 ) {
-				$menus[ 'all' ] = 'All';
-			}			
-			
-			$wp_customize->add_setting( 'wpglobus_customize_language_selector_menu', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );			
-			$wp_customize->add_control( 'wpglobus_customize_language_selector_menu', array(
-				'settings' 		=> 'wpglobus_customize_language_selector_menu',
-				'label'   		=> __( 'Language Selector Menu', 'wpglobus' ),
-				'section' 		=> 'wpglobus_languages_section',
-				'type'    		=> 'select',
-				'priority'  	=> 30,
-				'choices'    	=> $menus,
-				'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-			));	
-			
-			/** "All Pages" menus Language selector */
-			$wp_customize->add_setting( 'wpglobus_customize_selector_wp_list_pages', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );
-			
-			$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
-				'wpglobus_customize_selector_wp_list_pages', array(
-					'settings' 		=> 'wpglobus_customize_selector_wp_list_pages',
-					'title'   		=> __( '"All Pages" menus Language selector', 'wpglobus' ),
-					#'label'   		=> __( '', 'wpglobus' ),
-					'section' 		=> 'wpglobus_languages_section',
-					#'type'    		=> 'checkbox',
-					'priority'  	=> 40,
-					'label'		 	=> __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
-					#'description' 	=> __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
-				)	
-			) );	
-						
-			/*
-			$wp_customize->add_control( 'wpglobus_customize_selector_wp_list_pages', array(
-				'settings' 		=> 'wpglobus_customize_selector_wp_list_pages',
-				'label'   		=> __( '"All Pages" menus Language selector', 'wpglobus' ),
-				'section' 		=> 'wpglobus_languages_section',
-				'type'    		=> 'checkbox',
-				'priority'  	=> 40,
-				'default'    	=> 1,
-				'description' 	=> __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
-			));			// */	
-			
-			/** Custom CSS */
-			$wp_customize->add_setting( 'wpglobus_customize_css_editor', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );			
-			$wp_customize->add_control( 'wpglobus_customize_css_editor', array(
-				'settings' 		=> 'wpglobus_customize_css_editor',
-				'label'   		=> __( 'Custom CSS', 'wpglobus' ),
-				'section' 		=> 'wpglobus_languages_section',
-				'type'    		=> 'textarea',
-				'priority'  	=> 50,
-				'description' 	=> __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `style-samples.css` file.', 'wpglobus' ),
-			));	
-			/** end section */
-
-			/**
-			 * Languages table section
-			 */
-			/* 
-			$wp_customize->add_section( 'wpglobus_languages_table_section' , array(
-				'title'      => __( 'Languages table', 'wpglobus' ),
-				'priority'   => 30,
-				'panel'		 => 'wpglobus_settings_panel'
-			) );
-			// */
-			/**
-			 *
-			 */
-			/* 
-			$wp_customize->add_setting( 'wpglobus_customize_post_type1', array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );	
-			$wp_customize->add_control( 'wpglobus_customize_post_type1', array(
-				'settings' 		=> 'wpglobus_customize_post_type1',
-				'label'   		=> __( 'Language Selector Menu 111', 'wpglobus' ),
-				'section' 		=> 'wpglobus_languages_table_section',
-				'type'    		=> 'select',
-				'priority'  	=> 10,
-				'choices'    	=> array( '1111'=>'11111', '22222'=>'22222' ),
-				'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-			));	
-			// */
-			/** end SECTION: Language */
-			
-			/**
-			 * SECTION: Post types
-			 */	
-			$wp_customize->add_section( 'wpglobus_post_types_section' , array(
-				'title'      => __( 'Post types', 'wpglobus' ),
-				'priority'   => 40,
-				'panel'		 => 'wpglobus_settings_panel'
-			) );
-			
-			if ( false === ( $enabled_post_types = get_transient( 'wpglobus_customize_enabled_post_types' ) ) ) {
-				
-				$post_types = get_post_types();
-				
-				$enabled_post_types = array();
-				foreach ( $post_types as $post_type ) {
-					if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ), true ) ) {	
-						if ( ! in_array( $post_type, WPGlobus::Config()->disabled_entities, true ) ) {	
-							$enabled_post_types[ $post_type ] = $post_type;
-						}
-					}
-				}
-				
-				set_transient( 'wpglobus_customize_enabled_post_types', $enabled_post_types, 30 );
-				
-			}	
-			
-			/**
-			 *
-			 */
-			$i = 0; 
-			foreach( $enabled_post_types as $post_type ) :
-			
-				$pst = 'wpglobus_customize_post_type_' . $post_type; 
-			
-				$wp_customize->add_setting( $pst, array( 
+				/** Enabled languages */
+				$wp_customize->add_setting( 'wpglobus_customize_enabled_languages', array( 
 					'type' => 'option',
 					'capability' => 'manage_options',
 					'transport' => 'postMessage'
 				) );			
+				$wp_customize->add_control( new WPGlobusCheckBoxSet( $wp_customize, 
+					'wpglobus_customize_enabled_languages', array(
+						'section'   => 'wpglobus_languages_section',
+						'settings'  => 'wpglobus_customize_enabled_languages',
+						'priority'  => 0,
+						'items'		=> WPGlobus::Config()->enabled_languages,
+						'label'		=> __( 'Enabled Languages', 'wpglobus' ),
+						'checkbox_class' => 'wpglobus-listen-change wpglobus-language-item',
+						'description'    => __( 'These languages are currently enabled on your site.', 'wpglobus' )
+						
+					) 
+				) );					
 
-				$title = '';	
-				if ( $i == 0 ) {
-					$title = __( 'Uncheck to disable WPGlobus', 'wpglobus' );
+				/** Add languages */
+				
+				/** Generate array $more_languages */
+				/** @var array $more_languages */
+				$more_languages = array();
+				$more_languages[ 'select' ] = '---- select ----';
+				
+				foreach ( WPGlobus::Config()->flag as $code => $file ) {
+					if ( ! in_array( $code, WPGlobus::Config()->enabled_languages ) ) {
+						$lang_in_en = '';
+						if ( ! empty( WPGlobus::Config()->en_language_name[ $code ] ) ) {
+							$lang_in_en = ' (' . WPGlobus::Config()->en_language_name[ $code ] . ')';
+						}
+						// '<img src="' . WPGlobus::Config()->flags_url . $file . '" />'  
+						$more_languages[ $code ] = WPGlobus::Config()->language_name[ $code ] . $lang_in_en;
+					}
 				}
+			
+				$desc_add_languages =
+					__( 'Choose a language you would like to enable. <br>Press the [Save & Publish] button to confirm.',
+					'wpglobus' ) . '<br />';
+				// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+				$desc_add_languages .= sprintf( 
+					__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
+					'<a style="text-decoration:underline;" href="' . admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=add" target="_blank">',
+					'</a>' 
+				);			
+				
+				$wp_customize->add_setting( 'wpglobus_customize_add_language', array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					'transport' => 'postMessage'
+				) );			
+				$wp_customize->add_control( 'wpglobus_add_languages_select_box', array(
+					'settings' 		=> 'wpglobus_customize_add_language',
+					'label'   		=> __( 'Add Languages', 'wpglobus' ),
+					'section' 		=> 'wpglobus_languages_section',
+					'type'    		=> 'select',
+					'priority'  	=> 10,
+					'choices'    	=> $more_languages,
+					'description' 	=> $desc_add_languages
+				));			
+
+
+				/** Language Selector Mode */
+				$wp_customize->add_setting( 'wpglobus_customize_language_selector_mode', array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					#'transport' => 'postMessage'
+					'transport' => 'refresh'
+				) );			
+				$wp_customize->add_control( 'wpglobus_customize_language_selector_mode', array(
+					'settings' 		=> 'wpglobus_customize_language_selector_mode',
+					'label'   		=> __( 'Language Selector Mode', 'wpglobus' ),
+					'section' 		=> 'wpglobus_languages_section',
+					'type'    		=> 'select',
+					'priority'  	=> 20,
+					'choices'    	=> array(
+						'code'      => __( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
+						'full_name' => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
+						/* @since 1.2.1 */
+						'name'      => __( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
+						'empty'     => __( 'Flags only', 'wpglobus' )
+					),
+					'description' 	=> __( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' )
+				));				
+				
+				/** Language Selector Menu */
+				
+				/** @var array $nav_menus */
+				$nav_menus = WPGlobus::_get_nav_menus();
+
+				foreach ( $nav_menus as $menu ) {
+					$menus[ $menu->slug ] = $menu->name;
+				}
+				if ( ! empty( $nav_menus ) && count( $nav_menus ) > 1 ) {
+					$menus[ 'all' ] = 'All';
+				}			
+				
+				$wp_customize->add_setting( 'wpglobus_customize_language_selector_menu', array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					'transport' => 'postMessage'
+				) );			
+				$wp_customize->add_control( 'wpglobus_customize_language_selector_menu', array(
+					'settings' 		=> 'wpglobus_customize_language_selector_menu',
+					'label'   		=> __( 'Language Selector Menu', 'wpglobus' ),
+					'section' 		=> 'wpglobus_languages_section',
+					'type'    		=> 'select',
+					'priority'  	=> 30,
+					'choices'    	=> $menus,
+					'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+				));	
+				
+				/** "All Pages" menus Language selector */
+				$wp_customize->add_setting( 'wpglobus_customize_selector_wp_list_pages', array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					'transport' => 'postMessage'
+				) );
 				
 				$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
-					$pst, array(
-						'settings' 		=> $pst,
-						'title'   		=> $title,
-						'label'   		=> $post_type,
-						'section' 		=> 'wpglobus_post_types_section',
-						'default'		=> '1',
-						'priority'  	=> 10,
+					'wpglobus_customize_selector_wp_list_pages', array(
+						'settings' 		=> 'wpglobus_customize_selector_wp_list_pages',
+						'title'   		=> __( '"All Pages" menus Language selector', 'wpglobus' ),
+						'section' 		=> 'wpglobus_languages_section',
+						'priority'  	=> 40,
+						'label'		 	=> __( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
 					)	
 				) );	
-
-				$i++;
+			
+				/** Custom CSS */
+				$wp_customize->add_setting( 'wpglobus_customize_css_editor', array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					'transport' => 'postMessage'
+				) );			
+				$wp_customize->add_control( 'wpglobus_customize_css_editor', array(
+					'settings' 		=> 'wpglobus_customize_css_editor',
+					'label'   		=> __( 'Custom CSS', 'wpglobus' ),
+					'section' 		=> 'wpglobus_languages_section',
+					'type'    		=> 'textarea',
+					'priority'  	=> 50,
+					'description' 	=> __( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `style-samples.css` file.', 'wpglobus' ),
+				));
+			
+			}	/** end SECTION: Language */
+			
+			
+			/**
+			 * SECTION: Post types
+			 */
+			if ( 1 ) {
+			
+				$wp_customize->add_section( 'wpglobus_post_types_section' , array(
+					'title'      => __( 'Post types', 'wpglobus' ),
+					'priority'   => 40,
+					'panel'		 => 'wpglobus_settings_panel'
+				) );
 				
-			endforeach;
-			/** end SECTION: Post types */
+				if ( false === ( $enabled_post_types = get_transient( 'wpglobus_customize_enabled_post_types' ) ) ) {
+					
+					$post_types = get_post_types();
+					
+					$enabled_post_types = array();
+					foreach ( $post_types as $post_type ) {
+						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ), true ) ) {	
+							if ( ! in_array( $post_type, WPGlobus::Config()->disabled_entities, true ) ) {	
+								$enabled_post_types[ $post_type ] = $post_type;
+							}
+						}
+					}
+					
+					set_transient( 'wpglobus_customize_enabled_post_types', $enabled_post_types, 60 );
+					
+				}	
+				
+				$i = 0; 
+				foreach( $enabled_post_types as $post_type ) :
+				
+					$pst = 'wpglobus_customize_post_type_' . $post_type; 
+				
+					$wp_customize->add_setting( $pst, array( 
+						'type' => 'option',
+						'capability' => 'manage_options',
+						'transport' => 'postMessage'
+					) );			
+
+					$title = '';	
+					if ( $i == 0 ) {
+						$title = __( 'Uncheck to disable WPGlobus', 'wpglobus' );
+					}
+					
+					$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
+						$pst, array(
+							'settings' 		=> $pst,
+							'title'   		=> $title,
+							'label'   		=> $post_type,
+							'section' 		=> 'wpglobus_post_types_section',
+							'default'		=> '1',
+							'priority'  	=> 10,
+						)	
+					) );	
+
+					$i++;
+					
+				endforeach;
+			
+			}; /** end SECTION: Post types */
 			
 			/**
 			 * SECTION: Add ons
-			 */		
-			$wp_customize->add_section( 'wpglobus_addons_section' , array(
-				'title'      => __( 'Add-ons', 'wpglobus' ),
-				'priority'   => 40,
-				'panel'		 => 'wpglobus_settings_panel'
-			) );			
-		
-			/** Add ons setting  */
-			$wp_customize->add_setting( self::$settings[ 'addons' ], array( 
-				'type' => 'option',
-				'capability' => 'manage_options',
-				'transport' => 'postMessage'
-			) );			
-			
-			$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
-				self::$settings[ 'addons' ], array(
-					'settings' 		=> self::$settings[ 'addons' ],
-					'title'   		=> __( 'Title', 'wpglobus' ),
-					'label'   		=> __( 'Label', 'wpglobus' ),
-					'section' 		=> 'wpglobus_addons_section',
-					'type'    		=> 'checkbox',
-					'priority'  	=> 10,
-					'description' 	=> __( 'Description', 'wpglobus' ),
-				)	
-			) );	
-			/** end SECTION: Add ons */
-			
-			/**
-			 * Deactivating section
 			 */
-			/* 
-			$wp_customize->add_section( 'wpglobus_deactivate_section' , array(
-				'title'      => __( 'WPGlobus deactivating', 'wpglobus' ),
-				'priority'   => 1000,
-				'panel'		 => 'wpglobus_settings_panel'
-			) );					
-			$wp_customize->add_setting( 'deactivate_message' );
-			//$wp_customize->get_setting( 'deactivate_message' )->transport = 'postMessage'; 
-			$wp_customize->add_control( new WPGlobusTextBox( $wp_customize, 
-				'deactivate_message', array(
-					'section'   => 'wpglobus_deactivate_section',
-					'settings'  => 'deactivate_message',
-					'priority'  => 0,
-					'content'	=> self::get_content( 'deactivate_message' )
-				) 
-			) );
-			/** end section */
-			// */
+			if ( 1 ) {
 			
+				$wp_customize->add_section( 'wpglobus_addons_section' , array(
+					'title'      => __( 'Add-ons', 'wpglobus' ),
+					'priority'   => 40,
+					'panel'		 => 'wpglobus_settings_panel'
+				) );			
+			
+				/** Add ons setting  */
+				$wp_customize->add_setting( self::$settings[ 'addons' ], array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					'transport' => 'postMessage'
+				) );			
+				
+				$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
+					self::$settings[ 'addons' ], array(
+						'settings' 		=> self::$settings[ 'addons' ],
+						'title'   		=> __( 'Title', 'wpglobus' ),
+						'label'   		=> __( 'Label', 'wpglobus' ),
+						'section' 		=> 'wpglobus_addons_section',
+						'type'    		=> 'checkbox',
+						'priority'  	=> 10,
+						'description' 	=> __( 'Description', 'wpglobus' ),
+					)	
+				) );	
+			
+			}; 		/** end SECTION: Add ons */
+		
 			/**
 			 * Fires to add customize settings.
 			 *
@@ -745,7 +667,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		
 		/**
 		 * Get content for WPGlobusTextBox element
-		 * @param 
+		 *
+		 * @param string $control
+		 * @param mixed  $attrs
 		 *
 		 * @return string
 		 */
@@ -841,6 +765,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		
 		/**
 		 * Load Customize Preview JS
+		 *
 		 * Used by hook: 'customize_preview_init'
 		 * @see 'customize_preview_init'
 		 */
