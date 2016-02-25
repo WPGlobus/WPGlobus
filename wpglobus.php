@@ -73,6 +73,10 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 require_once 'includes/class-wpglobus-customize140.php';
 WPGlobus_Customize::controller();
 
+/**
+ * WPGlobus customize options
+ * @since 1.4.5
+ */
 require_once 'includes/admin/class-wpglobus-customize-options.php';
 WPGlobus_Customize_Options::controller();
 	
