@@ -15,10 +15,17 @@ jQuery(document).ready(function ($) {
 	var api = {
 		listID: '#wpglobus-sortable',
 		customizeSave: false,
+		customizeSaveData: '',
 		init: function() {
 			$( '#wpglobus-sortable' ).sortable({
 				update: api.sortUpdate
 			});
+			
+			api.addListeners();
+			api.ajaxListener();
+			
+		},
+		addListeners: function() {
 			
 			$( 'body' ).on( 'change', '.wpglobus-listen-change', function(ev){
 				api.setState( false );
@@ -37,18 +44,12 @@ jQuery(document).ready(function ($) {
 					api.addLanguage( event, this );
 				}
 			);
-			
-			api.addListeners();
-			api.ajaxListener();
-			
-		},
-		addListeners: function() {
-			
+		
 			/** open Addons page in new tab */
-			$( '#accordion-section-' + WPGlobusCustomizeOptions.sections.addons + ' .accordion-section-title' ).off( 'click keydown' );
+			$( '#accordion-section-' + WPGlobusCustomizeOptions.sections.wpglobus_addons_section + ' .accordion-section-title' ).off( 'click keydown' );
 			$( 'body' ).on( 
 				'click',
-				'#accordion-section-' + WPGlobusCustomizeOptions.sections.addons + ' .accordion-section-title',
+				'#accordion-section-' + WPGlobusCustomizeOptions.sections.wpglobus_addons_section + ' .accordion-section-title',
 				function(ev) {
 					window.open( WPGlobusCustomizeOptions.addonsPage, '_blank' );
 				}
@@ -117,12 +118,65 @@ jQuery(document).ready(function ($) {
 		ajax: function() {
 			
 			var order = {};
-			order['action'] = '';
+			order[ 'action' ]  = 'wpglobus_customize_save';
+			order[ 'options' ] = {};
+			
+			$.each( WPGlobusCustomizeOptions.settings, function( section, el ) {
+
+				$.each( el, function( id, obj ) {
+					
+					if ( id == 'wpglobus_customize_enabled_languages' ) {
+						
+						order[ 'options' ][ obj.option ] = {};
+						$( '#wpglobus-sortable input.wpglobus-language-item' ).each( function( i, e ) {
+							order[ 'options' ][ obj.option ][ $(this).data('language') ] = '1';
+						});
+						
+						return true;
+					}
+
+					if ( -1 != api.customizeSaveData.indexOf( 'wpglobus_customize_post_type_' ) &&
+							-1 != id.indexOf( 'wpglobus_customize_post_type_' ) ) {
+
+						if ( typeof order[ 'options' ][ obj.option ] === 'undefined' ) {
+							order[ 'options' ][ obj.option ] = {};
+						}	
+						order[ 'options' ][ obj.option ][ id.replace( 'wpglobus_customize_post_type_', '' ) ] = 
+							$( '#customize-control-' + id + ' input' ).prop( 'checked' ) ? 1 : 0;
+						
+					} else {	
+					
+						if ( -1 != api.customizeSaveData.indexOf( id ) ) {
+						
+							var s = $( '#customize-control-' + id + ' ' + obj.type ),
+								val = '';
+							
+							if ( 'textarea' == obj.type ) {
+								val = s.val();
+							} else if ( 'wpglobus_checkbox' == obj.type ) {
+								s = $( '#customize-control-' + id + ' input' );
+								if ( id == 'wpglobus_customize_selector_wp_list_pages' ) {
+									val = s.prop( 'checked' ) ? 1 : 0;
+								} else {	
+									val = s.prop( 'checked' ) ? 1 : '';
+								}	
+							} else if ( 'checkbox' == obj.type ) {
+								val = s.prop( 'checked' ) ? 1 : '';
+							} else if ( 'select' == obj.type ) {
+								val = s.val();
+							}		
+							order[ 'options' ][ obj.option ] = val;
+							
+						}
+					}			
+
+				});
+				
+
+			});
 			
 			$.ajax({
-				beforeSend:function(){
-					//if ( typeof api.beforeSend !== 'undefined' ) api.beforeSend(order);
-				},
+				beforeSend:function(){},
 				type: 'POST',
 				url: WPGlobusCustomizeOptions.ajaxurl,
 				data: { action:WPGlobusCustomizeOptions.process_ajax, order:order },
@@ -138,8 +192,9 @@ jQuery(document).ready(function ($) {
 					return;	
 				}
 				
-				if ( -1 != ajaxOptions.data.indexOf('wp_customize=on') && -1 != ajaxOptions.data.indexOf('action=customize_save') ) {
+				if ( -1 != ajaxOptions.data.indexOf( 'wp_customize=on' ) && -1 != ajaxOptions.data.indexOf( 'action=customize_save' ) ) {
 					api.customizeSave = true;
+					api.customizeSaveData = ajaxOptions.data;
 				}	
 		
 			});			
@@ -149,14 +204,8 @@ jQuery(document).ready(function ($) {
 					return;	
 				}
 				if ( api.customizeSave ) {
-					//console.log( ' customizeSave done ' );
 					api.customizeSave = false;
-					
 					api.ajax();				
-					
-				} else {
-					//console.log( ' ajax done ' );
-
 				}
 			});
 		}	
