@@ -751,11 +751,12 @@ jQuery(document).ready(function () {
 						});
 					}
 					
-                    $('.wpglobus-quick-edit-title').each(function (i, e) {
-                        var l = $(e).data('language');
-                        $(e).attr('id', l + id);
-                        if (typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined') {
-                            $(e).attr('value', WPGlobusAdmin.qedit_titles[id][l]['name'].replace(/\\\'/g, '\''));
+                    $( '.wpglobus-quick-edit-title' ).each(function ( i, e ) {
+						var $e = $(e); 
+                        var l = $e.data( 'language' );
+                        $e.attr( 'id', l + id );
+                        if ( typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined' ) {
+                            $e.attr( 'value', WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\'/g, "'" ) );
                         }
                     });
                 });
