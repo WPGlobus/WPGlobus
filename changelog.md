@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.4.5 ###
+
+* FIXED:
+	* Backslash in Quick Edit.
+
 ### 1.4.4 ###
 
 * FIXED:

@@ -5,7 +5,7 @@
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus  
 **Requires at least:** 4.2  
-**Tested up to:** 4.4.1  
+**Tested up to:** 4.4.2  
 **Stable tag:** trunk  
 **License:** GPLv2  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
@@ -143,6 +143,11 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.4.5 ###
+
+* FIXED:
+	* Backslash in Quick Edit.
 
 ### 1.4.4 ###
 
