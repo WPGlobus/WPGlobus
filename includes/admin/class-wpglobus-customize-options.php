@@ -249,6 +249,11 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		 * Array of settings
 		 */
 		public static $settings = array();
+		
+		/**
+		 * Set transient key
+		 */
+		public static $enabled_post_types_key = 'wpglobus_customize_enabled_post_types';
 	
 		public static function controller() {
 
@@ -583,7 +588,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				) );
 				self::$sections[ $section ] =  $section ;	
 				
-				if ( false === ( $enabled_post_types = get_transient( 'wpglobus_customize_enabled_post_types' ) ) ) {
+				if ( false === ( $enabled_post_types = get_transient( self::$enabled_post_types_key ) ) ) {
 					
 					$post_types = get_post_types();
 					
@@ -602,10 +607,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 									continue;
 								}
 								
-								if ( $script == 'ACF' || $script == 'ACFPRO'  ) {
+								if ( $script == 'ACF' || $script == 'ACFPRO' ) {
 									/**
 									 * get list @see class-wpglobus.php:145
-									 * 
 									 */
 									if ( in_array( $post_type, array( 'acf-field-group', 'acf-field', 'acf' ) ) ) {
 										continue 2;
@@ -630,7 +634,17 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 										 ) ) {
 										continue 2;
 									}										
-								}	
+								}
+						
+								if ( $script == 'WPCF7' ) {
+									/**
+									 * get list @see class-wpglobus.php:195
+									 */
+									if ( in_array( $post_type, array( 'wpcf7_contact_form' ) ) ) {
+										continue 2;
+									}		
+								}							
+								
 							}	
 
 							$enabled_post_types[ $post_type ] = $post_type;
@@ -638,7 +652,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 						}
 					}
 					
-					set_transient( 'wpglobus_customize_enabled_post_types', $enabled_post_types, 60 );
+					set_transient( self::$enabled_post_types_key, $enabled_post_types, 60 );
 					
 				}	
 
