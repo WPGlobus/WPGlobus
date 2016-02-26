@@ -770,13 +770,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 									__( 'Thank you for installing WPGlobus!', 'wpglobus' ) .
 									'<br/>' .
 										'&bull; ' .
-										'<a target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ABOUT . '">' .
+										'<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ABOUT . '">' .
 										__( 'Read About WPGlobus', 'wpglobus' ) .
 										'</a>' .
 										'<br/>' .
 										'&bull; ' . __( 'Click the <strong>[Languages]</strong> tab at the left to setup the options.', 'wpglobus' ) .
-										'<br/>' .
-										'&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
+										#'<br/>' .
+										#'&bull; ' . __( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
 										'<br/>' .
 										'<br/>' .
 										__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
