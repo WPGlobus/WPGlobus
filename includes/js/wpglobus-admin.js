@@ -756,7 +756,8 @@ jQuery(document).ready(function () {
                         var l = $e.data( 'language' );
                         $e.attr( 'id', l + id );
                         if ( typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined' ) {
-							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\'/g, "'" )
+							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\'/g, "'" );
+							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\"/g, '"' );
                             $e.attr( 'value', WPGlobusAdmin.qedit_titles[id][l]['name'] );
 							WPGlobusAdmin.qedit_titles[id]['source'] = 
 								WPGlobusCore.getString( 
