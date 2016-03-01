@@ -3,7 +3,7 @@
  * WPGlobus_Customize_Options
  * @package    WPGlobus
  * @subpackage WPGlobus/Admin
- * @since      1.4.5
+ * @since      1.4.6
  *
  * @see http://www.narga.net/comprehensive-guide-wordpress-theme-options-with-customization-api/
  * @see https://developer.wordpress.org/themes/advanced-topics/customizer-api/#top
@@ -59,7 +59,14 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		public $type = 'textbox';
 		
 		public $content = '';
-		
+
+		/**
+		 * Constructor.
+		 *
+		 * @param WP_Customize_Manager $manager Customizer bootstrap instance.
+		 * @param string               $id      Control ID.
+		 * @param array                $args    Optional. Arguments to override class property defaults.
+		 */
 		public function __construct( $manager, $id, $args = array() ) {
 			$this->content = empty( $args['content'] ) ? '' : $args['content'];
 			$this->statuses = array( '' => __( 'Default', 'wpglobus' ) );
@@ -300,10 +307,11 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 			switch ( $order[ 'action' ] ) :
 				case 'wpglobus_customize_save':
+					/** @var array $options */
 					$options = get_option( WPGlobus::Config()->option );
 					foreach( $order[ 'options' ] as $key=>$value ) {
 						
-						if ( 'show_selector' == $key ) {
+						if ( 'show_selector' === $key ) {
 							$options[ 'selector_wp_list_pages' ][ $key ] = $value; 
 						} else {
 							$options[ $key ] = $value;
@@ -321,11 +329,14 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 			wp_send_json_success( $ajax_return );			
 	
-		}	
+		}
 
 		/**
 		 * Section for message about unsupported theme
-		 */	
+		 *
+		 * @param WP_Customize_Manager $wp_customize
+		 * @param WP_Theme $theme
+		 */
 		public static function sorry_section( $wp_customize, $theme ) {
 			
 			/**
@@ -749,12 +760,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/**
 			 * Fires to add customize settings.
 			 *
-			 * @since 1.4.5
+			 * @since 1.4.6
 			 *
 			 * @param WP_Customize_Manager $wp_customize.
 			 */
 			do_action( 'wpglobus_customize_register', $wp_customize );
 			
+			/** @var array $res */
 			$res = apply_filters( 'wpglobus_customize_data', array( 'sections' => self::$sections, 'settings' => self::$settings ) );
 			
 			self::$sections = $res[ 'sections' ];
