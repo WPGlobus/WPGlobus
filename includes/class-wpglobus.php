@@ -141,6 +141,7 @@ class WPGlobus {
 		$this->vendors_scripts['WPSEO']       = false;
 		$this->vendors_scripts['WOOCOMMERCE'] = false;
 		$this->vendors_scripts['AIOSEOP']     = false; // All In One SEO Pack
+		$this->vendors_scripts['WPCF7']       = false; // Contact Form 7
 
 		if ( function_exists( 'acf' ) ) {
 
@@ -191,6 +192,22 @@ class WPGlobus {
 			$this->vendors_scripts['AIOSEOP'] = true;
 		}
 
+		if ( defined( 'WPCF7_VERSION' ) ) {
+			$this->vendors_scripts['WPCF7'] = true;
+			/**
+			 * Disable cpt of plugin Contact Form 7 by default
+			 * 
+			 * @since 1.4.6
+			 */
+			$this->disabled_entities[] = 'wpcf7_contact_form';	
+		}	
+		
+		/**
+		 * If you need add new vendors script and disable cpt 
+		 * you must add it to cusomizer also
+		 * @see class-wpglobus-customize-options.php:596
+		 */
+		 
 		/**
 		 * Add builtin post type
 		 */
