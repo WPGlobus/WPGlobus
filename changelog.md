@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.4.6 ###
+
+* FIXED:
+	* Backslash in Quick Edit (additional fixes).
+* ADDED:
+	* Setting WPGlobus options in Customizer (BETA).
+
 ### 1.4.5 ###
 
 * FIXED:
