@@ -2,7 +2,7 @@
  * WPGlobus Customize Options
  * Interface JS functions
  *
- * @since 1.4.5
+ * @since 1.4.6
  *
  * @package WPGlobus
  * @subpackage Customize Options
