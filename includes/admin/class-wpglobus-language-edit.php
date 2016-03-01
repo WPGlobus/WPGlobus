@@ -381,10 +381,25 @@ class WPGlobus_Language_Edit {
 					</tr>
 				</table>    <?php
 
-				if ( 'edit' === $this->action || 'add' === $this->action ) {
-					?>
-					<p class="submit"><input class="button button-primary" type="submit" name="submit"
-					                         value="<?php esc_attr_e( 'Save Changes', 'wpglobus' ); ?>"></p>    <?php
+				if ( 'edit' === $this->action || 'add' === $this->action ) {	?>
+					
+					<p class="submit">	<?php
+					
+						if ( 'edit' === $this->action ) {
+							echo '&nbsp;&nbsp;&nbsp';
+							echo '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=delete&lang=' . $this->language_code .
+									'" target="_blank">' . 
+									__( 'Delete Language', 'wpglobus' ) . 
+								 '</a>';
+							echo '&nbsp;&nbsp;&nbsp';			
+						}				?>
+						 
+						<input class="button button-primary" type="submit" name="submit"
+							value="<?php esc_attr_e( 'Save Changes', 'wpglobus' ); ?>">
+											 
+				
+					</p>    <?php
+					
 				} elseif ( 'delete' === $this->action ) {
 					?>
 					<p class="submit"><input class="button button-primary" type="submit" name="delete"
