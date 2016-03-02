@@ -147,7 +147,8 @@ No known backward incompatibility issues.
 ### 1.4.6 ###
 
 * FIXED:
-	* Backslash in Quick Edit (additional fixes).
+	* Backslash in Quick Edit (additional fixes);
+	* Do not add language marks in Quick Edit, if there is only the default language text.
 * ADDED:
 	* Setting WPGlobus options in Customizer (BETA).
 

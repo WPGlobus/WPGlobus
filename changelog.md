@@ -6,6 +6,7 @@
 
 * FIXED:
 	* Backslash in Quick Edit (additional fixes).
+	* Do not add language marks in Quick Edit, if there is only the default language text.
 * ADDED:
 	* Setting WPGlobus options in Customizer (BETA).
 
