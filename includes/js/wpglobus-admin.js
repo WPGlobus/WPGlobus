@@ -654,7 +654,8 @@ jQuery(document).ready(function () {
 					if ( typeof so !== 'undefined' ) {
 						s = so;		
 					}
-                    $( 'input.ptitle' ).eq( 0 ).val( s );
+                    // $( 'input.ptitle' ).eq( 0 ).val( s ); // @todo remove after test
+                    $( 'input.ptitle' ).eq( 0 ).attr( 'value',  s ) ;
 					WPGlobusAdmin.qedit_titles[ id ][ 'source' ] = s; 
                 });
 				
@@ -710,7 +711,7 @@ jQuery(document).ready(function () {
 					});					
 				});				
 				
-                $('#the-list').on('click', 'a.editinline', function () {
+                $( '#the-list' ).on( 'click', 'a.editinline', function () {
 					var t = $(this);
 					full_id = t.parents('tr').attr('id');
                     if ('post' === type) {
@@ -767,7 +768,8 @@ jQuery(document).ready(function () {
 								);
                         }
                     });
-					$( 'input.ptitle' ).eq(0).val( WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );	
+					// $( 'input.ptitle' ).eq( 0 ).val( WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );	 // @todo remove after test
+					$( 'input.ptitle' ).eq( 0 ).attr( 'value', WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );	
                 });
 
             },
