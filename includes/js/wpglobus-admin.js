@@ -644,18 +644,18 @@ jQuery(document).ready(function () {
                         var $e = $(e);
 						var l = $e.data('language');
                         if ($e.val() !== '') {
-                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-                        }
-						WPGlobusAdmin.qedit_titles[id][l]['name'] = $e.val();
-						lang[index] = l;
+							s = WPGlobusCore.getString( s, $e.val(), l );
+						}
+						WPGlobusAdmin.qedit_titles[ id ][ l ][ 'name' ] = $e.val();
+						lang[ index ] = l;
                     });
 
-					var so = $(document).triggerHandler('wpglobus_get_translations', {string:s, lang:lang, id:id});
+					var so = $(document).triggerHandler( 'wpglobus_get_translations', {string:s, lang:lang, id:id} );
 					if ( typeof so !== 'undefined' ) {
 						s = so;		
 					}
-                    $('input.ptitle').eq(0).val(s);
-					WPGlobusAdmin.qedit_titles[id]['source'] = s; 
+                    $( 'input.ptitle' ).eq( 0 ).val( s );
+					WPGlobusAdmin.qedit_titles[ id ][ 'source' ] = s; 
                 });
 				
 				if ( typeof WPGlobusAdmin.data.tags !== 'undefined' ) {
