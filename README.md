@@ -144,6 +144,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.4.7 ###
+
+* ADDED:
+	* Support for Yoast SEO Version 3.1
+
 ### 1.4.6 ###
 
 * FIXED:
@@ -184,7 +189,7 @@ No known backward incompatibility issues.
 ### 1.4.0 ###
 
 * ADDED:
-	* Support for Yoast SEO Version 3.
+	* Support for Yoast SEO Version 3.0
 	* Additional flag(s).
 	* 'wpglobus-current-language' CSS class for the WPGlobus Widget.
 	* Any theme Customizer support.
