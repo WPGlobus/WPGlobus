@@ -464,8 +464,8 @@ class WPGlobus_YoastSEO {
 			$handle = 'wpglobus-yoastseo';
 
 			/** @noinspection PhpInternalEntityUsedInspection */
-			// $src_version = version_compare( WPSEO_VERSION, '3.1', '>=' ) ? '31' : '30';
-			$src_version = '30';
+			$src_version = version_compare( WPSEO_VERSION, '3.1', '>=' ) ? '31' : '30';
+			//$src_version = '30';
 
 			$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/' .
 			       $handle . '-' . $src_version .
@@ -517,7 +517,9 @@ class WPGlobus_YoastSEO {
 		}
 		
 		// #wpseo-metabox-tabs
-		
+		/**
+		 * Array of id to make multilingual
+		 */
 		$ids = array(
 			'wpseo-add-keyword-popup',
 			'wpseosnippet',
@@ -541,7 +543,11 @@ class WPGlobus_YoastSEO {
 			#'yoast_wpseo_metadesc_notice',
 			'yoast_wpseo_linkdex',
 			'wpseo-pageanalysis',
-			'YoastSEO-plugin-loading'
+			'YoastSEO-plugin-loading',
+			#from Yoast 3.1
+			'snippet-editor-title',
+			'snippet-editor-slug',
+			'snippet-editor-meta-description'
 		);
 		
 		$names = array(
