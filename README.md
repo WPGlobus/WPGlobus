@@ -148,7 +148,7 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* Support for Yoast SEO Version 3.1
-
+	
 ### 1.4.6 ###
 
 * FIXED:
