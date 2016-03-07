@@ -275,6 +275,8 @@ jQuery(document).ready( function ($) {
 			editSnippetFormClass 	: 'wpglobus-snippet-editor__form',
 			editSnippetSubmitClass 	: 'wpglobus-snippet-editor__submit',
 			editSnippetHeadingClass : 'wpglobus-snippet-editor__heading-editor',
+			yoastTitleProgress		: 'wpglobus-yoast-title-progress',
+			yoastMetadescProgress	: 'wpglobus-yoast-metadesc-progress',
 			init: function() {
 				api.start();
 			},	
@@ -326,6 +328,81 @@ jQuery(document).ready( function ($) {
 					}
 				);
 			},		
+			removeClasses: function( element, classes ) {
+				_.each( classes, function( cl ){
+					element.removeClass( cl );	
+				} );
+			},	
+			updateProgressBar: function( element, lang ) {
+				
+				if ( typeof element === 'undefined' ) {
+					return;	
+				}
+				if ( typeof lang === 'undefined' ) {
+					
+					if ( element.data( 'language' ) !== 'undefined' ) {
+						lang = element.data( 'language' );
+					}	
+					
+					if ( typeof lang === 'undefined' ) {
+						return;	
+					}	
+				}					
+				
+				var allClasses = [
+					"snippet-editor__progress--bad",
+					"snippet-editor__progress--ok",
+					"snippet-editor__progress--good"
+				];
+				var text, progress, score = 0, cl = '', max = 0, warningText = false;
+				
+				text = element.val();
+				score = text.length;
+
+				if ( element.hasClass( 'wpglobus-snippet-editor-title' ) ) {
+					/**	
+					 * "snippet-editor__progress--ok" - score 0-34
+					 * "snippet-editor__progress--good" - score 35-65
+					 * "snippet-editor__progress--ok" score >=66, red text 
+					 */
+					progress = $( 'progress.'+api.yoastTitleProgress + '_' + lang );
+					max = progress.attr( 'max' );
+					cl = allClasses[2];
+					if ( score == 0 ) {
+						cl = allClasses[1];
+					} else if ( score > max ) {
+						cl = allClasses[1];
+						warningText = true;
+					} else if ( score > 0 && score < 35 ) {
+						cl = allClasses[1];
+					}
+				} else if ( element.hasClass( 'wpglobus-snippet-editor-meta-description' ) ) {
+					/**
+					 * "snippet-editor__progress--ok" - score 0-120
+					 * "snippet-editor__progress--good" - score 121-156
+					 * "snippet-editor__progress--ok" score >=157, red text 
+					 */	
+					progress = $( 'progress.'+api.yoastMetadescProgress + '_' + lang );
+					max = progress.attr( 'max' );
+					cl = allClasses[2];
+					if ( score == 0 ) {
+						cl = allClasses[1];
+					} else if ( score > max ) {
+						cl = allClasses[1];
+						warningText = true;
+					} else if ( score > 0 && score < 121 ) {
+						cl = allClasses[1];
+					}					
+				}
+				api.removeClasses( progress, allClasses );
+				progress.attr( 'value', score ).addClass( cl );
+				if ( warningText ) {
+					element.css( 'color', '#f00' );	
+				} else {
+					element.css( 'color', '#000' );	
+				}	
+			
+			},
 			start: function() {
 
 				/** tabs on */
@@ -395,11 +472,12 @@ jQuery(document).ready( function ($) {
 						}
 						/** #snippet-editor-title */
 						if ( 'snippet-editor-title' == id ) {
-							$id.addClass('wpglobus-snippet-editor-title');
+							$id.addClass( 'wpglobus-snippet-editor-title' );
 							$id.parent( 'label' ).attr( 'for', $id.parent( 'label' ).attr( 'for' ) + '_' + l );
 							$id.val( $( '#wpseo-tab-' + l ).data( 'wpseotitle' ) );
-							// @todo
-							$id.parent( 'label' ).find( 'progress' ).css( 'display', 'none' );
+
+							$id.parent( 'label' ).find( 'progress' ).addClass( api.yoastTitleProgress ).addClass( api.yoastTitleProgress + '_' + l );
+							_.debounce( api.updateProgressBar( $id,	l ), 500 );
 						}
 						/** #snippet-editor-slug */
 						if ( 'snippet-editor-slug' == id ) {
@@ -412,11 +490,12 @@ jQuery(document).ready( function ($) {
 						}
 						/** #snippet-editor-meta-description */
 						if ( 'snippet-editor-meta-description' == id ) {
-							$id.addClass('wpglobus-snippet-editor-meta-description');
+							$id.addClass( 'wpglobus-snippet-editor-meta-description' );
 							$id.parent( 'label' ).attr( 'for', $id.parent( 'label' ).attr( 'for' ) + '_' + l );	
 							$id.val( $( '#wpseo-tab-' + l ).data( 'metadesc' ) );
-							// @todo
-							$id.parent( 'label' ).find( 'progress' ).css( 'display', 'none' );
+
+							$id.parent( 'label' ).find( 'progress' ).addClass( api.yoastMetadescProgress ).addClass( api.yoastMetadescProgress + '_' + l );
+							_.debounce( api.updateProgressBar( $id,	l ), 500 );
 						}
 						
 						$id.attr( 'id', id+'_'+l );
@@ -468,7 +547,9 @@ jQuery(document).ready( function ($) {
 					}	
 				});
 				
-				/** @todo doc */
+				/**
+				 * Open form to edit snippet
+				 */
 				$( 'body' ).on( 'click', '.'+api.editSnippetButtonClass, function(event){
 					var $t = $(this);
 					var l  = $t.data( 'language' ); 
@@ -487,7 +568,9 @@ jQuery(document).ready( function ($) {
 					$t.addClass( 'snippet-editor--hidden' );
 				});
 				
-				/** @todo doc */
+				/**
+				 * Close snippet editor
+				 */
 				$( 'body' ).on( 'click', '.'+api.editSnippetSubmitClass, function(event){
 					var $t = $(this);
 					var l  = $t.data( 'language' ); 
@@ -502,7 +585,9 @@ jQuery(document).ready( function ($) {
 					heading.addClass( 'snippet-editor--hidden' );	
 				});
 				
-				/** @todo doc */
+				/** 
+				 * Make title
+				 */
 				$( document ).on( 'keyup', 'input.wpglobus-snippet-editor-title', function(event){
 					var $t = $(this),
 						l = $t.data( 'language' ),
@@ -514,10 +599,13 @@ jQuery(document).ready( function ($) {
 
 					//$('#yoast_wpseo_title').val( s );  // @todo don't work with id
 					$( 'input[name="yoast_wpseo_title"]' ).val( s );
-					$( '#snippet_title' ).text( s );					
+					$( '#snippet_title' ).text( s );
+					_.debounce( api.updateProgressBar( $t,	l ), 500 );	
 				});
 				
-				/** @todo doc */
+				/** 
+				 * Make slug
+				 */
 				$( document ).on( 'keyup', 'input.wpglobus-snippet-editor-slug', function(event){
 					var $t = $(this), l = $t.data( 'language' );
 
@@ -539,7 +627,9 @@ jQuery(document).ready( function ($) {
 					
 				});				
 			
-				/** @todo doc */
+				/** 
+				 * Make meta description
+				 */
 				$( document ).on( 'keyup', 'textarea.wpglobus-snippet-editor-meta-description', function(event){
 					var $t = $(this),
 						l = $t.data( 'language' );
@@ -548,6 +638,7 @@ jQuery(document).ready( function ($) {
 					var s = WPGlobusCore.getString( $('#yoast_wpseo_metadesc').val(), $t.val(), $t.data('language') );
 					$( '#yoast_wpseo_metadesc' ).val( s );
 					$( '#snippet_meta' ).text( s );
+					_.debounce( api.updateProgressBar( $t,	l ), 500 );	
 				});			
 				
 				// make synchronization click on "Post tab" with seo tab 
