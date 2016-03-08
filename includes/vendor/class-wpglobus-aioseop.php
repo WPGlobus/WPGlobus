@@ -73,27 +73,27 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		if ( is_singular() ) {
 		
 			$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
+			
 			if ( empty( $title_source ) ) { 
 				$default_title = null;
 			} else {
 				$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );	
 			}	
-		
-			if ( $default_title != null && false !== strpos($text, $default_title) ) {
+			
+			if ( $default_title != null && false !== strpos( strtolower($text), strtolower($default_title) ) ) {
 
 				/**
 				 * Because we have not translation of SEO title for current language need to autogenerate it 
 				 */					
 				if ( false === strpos( $text, '|' ) ) {
-		
 					$title = $post->post_title;
 					
 				} else {
 					
-					$title_arr = explode('|', $text);
+					$title_arr = explode( '|', $text );
 					$title = $post->post_title;
 					$title .= ' |';
-					$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null);
+					$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null );
 						
 				}
 				
@@ -102,7 +102,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 			}	
 		
 		}
-		
+
 		return $title;
 	
 	}
