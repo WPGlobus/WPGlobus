@@ -57,8 +57,31 @@ jQuery(document).ready(function($){
 						sbTitle: 'Click for edit'
 					});			
 				}
-			});		
-		}	
+			});
+
+			// Attach on change listener to fields create on the fly in ACF
+			var t = this;
+			if(acf.add_action) { // ACF v5
+				acf.add_action('append', function( $el ){
+					t.attachChangeListener($el);
+				});
+			} else { // ACF v4
+				$(document).on('acf/setup_fields', function(e, el){
+					var $el = $(el);
+					if($el.attr('id') === 'poststuff'){
+						return;
+					}
+					t.attachChangeListener($el);
+				});	
+			}
+		},
+		attachChangeListener: function($el) {			
+			var clonedFields = $el.find('[data-nodename]');
+			$.each(clonedFields, function(){
+				var $t = $(this);
+				$t.on('change',WPGlobusDialogApp.onChangeCloneField);
+			});
+		}
 	}
 	
 	WPGlobusAcf = $.extend({}, WPGlobusAcf, api);
