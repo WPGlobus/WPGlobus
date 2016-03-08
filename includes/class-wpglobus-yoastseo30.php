@@ -50,8 +50,19 @@ class WPGlobus_YoastSEO {
 					'filter__wpseo_linkdex_results'
 				), 10, 3 );	
 				// */
+				
+				if ( WPGlobus_WP::is_pagenow( array( 'edit-tags.php', 'term.php' ) ) ) {
+					/**
+					 * @todo test 'term.php' page with WP 4.5 
+					 */
+					add_filter( 'wp_default_editor', array(
+						'WPGlobus_YoastSEO',
+						'set_default_editor' 
+					) );
+					
+				}
+				
 			}
-
 
 		} else {
 			/**
@@ -83,6 +94,19 @@ class WPGlobus_YoastSEO {
 			//add_filter( 'get_post_metadata', array( 'WPGlobus_YoastSEO', 'filter__metadata' ), 0, 4 );
 
 		}
+
+	}
+	
+	/**
+	 * Filter which editor should be displayed by default.
+	 *
+	 * @since 1.4.8
+	 *
+	 * @param array $editors An array of editors. Accepts 'tinymce', 'html', 'test'.
+	 */	
+	public static function set_default_editor( $editors ) {
+	
+		return 'tinymce';
 
 	}
 	
