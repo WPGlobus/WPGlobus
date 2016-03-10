@@ -126,11 +126,17 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.4.8 =
+
+* FIXED:
+	* Post title handling in All in One SEO Pack
+	* Yoast SEO tweaks
+	
 = 1.4.7 =
 
 * ADDED:
 	* Support for Yoast SEO Version 3.1
-	
+
 = 1.4.6 =
 
 * FIXED:
