@@ -80,7 +80,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 				$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );	
 			}	
 			
-			if ( $default_title != null && false !== strpos( strtolower($text), strtolower($default_title) ) ) {
+			if ( $default_title != null && false !== strpos( mb_strtolower($text), mb_strtolower($default_title) ) ) {
 
 				/**
 				 * Because we have not translation of SEO title for current language need to autogenerate it 
