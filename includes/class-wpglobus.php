@@ -1099,9 +1099,9 @@ class WPGlobus {
 							WPGlobus_Core::text_filter( $item->post_excerpt, $language, $return );
 
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-title']['class']      =
-							'widefat wpglobus-menu-item wpglobus-item-title';
+							'widefat wpglobus-menu-item wpglobus-item-title wpglobus-translatable';
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-attr-title']['class'] =
-							'widefat wpglobus-menu-item wpglobus-item-attr';
+							'widefat wpglobus-menu-item wpglobus-item-attr wpglobus-translatable';
 					}
 					
 				endforeach;
