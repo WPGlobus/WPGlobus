@@ -144,6 +144,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.4.9 ###
+
+* ADDED:
+	* Support for Megamenu plugin
+
 ### 1.4.8 ###
 
 * FIXED:
