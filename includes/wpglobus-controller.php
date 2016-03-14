@@ -312,4 +312,16 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	add_filter( 'tribe_events_template_data_array', array( 'WPGlobus_The_Events_Calendar', 'filter__events_data' ), 0, 3 );
 
 }
+
+if ( class_exists( 'Mega_Menu' ) ) {
+	
+	/**
+	 * Translate "Max Mega Menu"
+	 * https://wordpress.org/plugins/megamenu/
+	 *
+	 * @since 1.4.9
+	 */	
+	add_filter( 'megamenu_the_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+}
+
 # --- EOF
