@@ -208,6 +208,18 @@ jQuery(document).ready(function ($) {
 					api.ajax();				
 				}
 			});
+			
+			$( document ).on( 'ajaxStop', function() {
+				/**
+				 * We need to use ajaxStop (together with ajaxComplete) event to make save options in Customizer
+				 * cause is Redux Framework makes unbind ajaxComplete event
+				 * @see https://github.com/reduxframework/redux-framework/issues/2896
+				 */
+				if ( api.customizeSave ) {
+					api.customizeSave = false;
+					api.ajax();				
+				}
+			});			
 		}	
 	};
 	
