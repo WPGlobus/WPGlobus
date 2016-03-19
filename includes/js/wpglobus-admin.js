@@ -192,7 +192,8 @@ var WPGlobusDialogApp;
 				dialogTitle: '',
 				style: '',
 				styleTextareaWrapper: '',
-				sbTitle: ''
+				sbTitle: '',
+				onChangeClass: ''
 			}
 			if ( 'string' == typeof(elem) ) {
 				option.id = elem;	
@@ -256,6 +257,13 @@ var WPGlobusDialogApp;
 			 */
 			clone.addClass( api.trClass );
 
+			if ( option.onChangeClass != '' ) {
+				/**
+				 * add class to bind 'change' event
+				 */
+				clone.addClass( option.onChangeClass );
+			}			
+			
 			if ( 'id' == api.element_by ) {
 				clone.attr('data-source-id', id).attr('data-source-name', '').attr('data-source-get-by',api.element_by);
 			} else {
@@ -303,14 +311,45 @@ var WPGlobusDialogApp;
 				$('#wpglobus-'+api.clone_id).addClass( 'wpglobus-textarea-'+api.clone_id );
 				$('.wpglobus-textarea-'+api.clone_id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
 			}
-			$(document).on('change', '#wpglobus-'+api.clone_id, function(){
+		
+			/**
+			 * Bind change event
+			 */
+			var selector, ret = false;
+			if 	( option.onChangeClass == '' ) {
+				selector = '#wpglobus-' + api.clone_id;
+			} else {
+				selector = '.' + option.onChangeClass;
+				var $events = $._data( $( document )[0], 'events' );
+				if( typeof $events === 'undefined' ){
+					ret = true;
+				} else {
+					if ( typeof $events.change !== 'undefined' ) {
+						$.each( $events.change, function(i, ev){
+							if ( ev.selector == selector ) {
+								ret = true;
+								return false;
+							}
+						});		
+					}	
+				}	
+			}
+			
+			if ( ret ) {
+				/** 
+				 * Return because we had bound 'change' event already
+				 */
+				return;
+			}		
+			
+			$( document ).on( 'change', selector, function() {
 				var $t = $(this), 
-					sid = $t.data('source-id');
+					sid = $t.data( 'source-id' );
 
 				if ( '' == sid ) {		
-					sid = $t.data('nodename') + '[name="'+$t.data('source-name')+'"]';
+					sid = $t.data( 'nodename' ) + '[name="' + $t.data( 'source-name' ) + '"]';
 				} else {
-					sid = '#'+sid;	
+					sid = '#' + sid;	
 				}	
 				$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
 			});
