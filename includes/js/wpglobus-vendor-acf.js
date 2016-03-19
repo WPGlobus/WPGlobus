@@ -46,7 +46,8 @@ jQuery(document).ready(function($){
 						dialogTitle: 'Edit ACF field',
 						style: 'width:97%;float:left;',
 						styleTextareaWrapper: 'height:' + h + 'px;',
-						sbTitle: 'Click for edit'
+						sbTitle: 'Click for edit',
+						onChangeClass: 'wpglobus-on-change-acf-field'
 					});
 				} else if ( $t.hasClass('field_type-text') || $t.hasClass('acf-field-text') ) {
 					id = $t.find('input').attr('id');
@@ -54,7 +55,8 @@ jQuery(document).ready(function($){
 						id: id,
 						dialogTitle: 'Edit ACF field',
 						style: 'width:97%;float:left;',
-						sbTitle: 'Click for edit'
+						sbTitle: 'Click for edit',
+						onChangeClass: 'wpglobus-on-change-acf-field'
 					});			
 				}
 			});		
