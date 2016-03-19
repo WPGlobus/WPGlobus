@@ -297,18 +297,19 @@ var WPGlobusDialogApp;
 				$('#wpglobus-'+api.clone_id).addClass( 'wpglobus-textarea-'+api.clone_id );
 				$('.wpglobus-textarea-'+api.clone_id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
 			}
-			$(document).on('change', '#wpglobus-'+api.clone_id, function(){
-				var $t = $(this), 
-					sid = $t.data('source-id');
+			$(document).on('change', '#wpglobus-'+api.clone_id, this.onChangeCloneField);
+		},
+		onChangeCloneField: function(){
+			var $t = $(this), 
+				sid = $t.data('source-id');
 
-				if ( '' == sid ) {		
-					sid = $t.data('nodename') + '[name="'+$t.data('source-name')+'"]';
-				} else {
-					sid = '#'+sid;	
-				}	
-				$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
-			});
-		},	
+			if ( '' == sid ) {		
+				sid = $t.data('nodename') + '[name="'+$t.data('source-name')+'"]';
+			} else {
+				sid = '#'+sid;
+			}
+			$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
+		},
 		saveDialog: function() {
 			var s = '', sdl = '', scl = '', $e, val, l;
 			$('.wpglobus_dialog_textarea').each(function(indx,e){
