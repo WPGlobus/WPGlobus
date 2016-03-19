@@ -158,6 +158,7 @@ var WPGlobusDialogApp;
 		request : 'core',
 		attrs: {},
 		dialogTitle: '',
+		trClass: 'wpglobus-translatable',
 		startButton: [
 			'<span id="wpglobus-dialog-start-{{clone_id}}" ',
 			'style="{{style}}" ',
@@ -247,9 +248,14 @@ var WPGlobusDialogApp;
 			clone = $( $element.clone() );
 			//$element.addClass('hidden');	
 			style = $element.attr('style') || '';
-			$element.attr('style','display:none;');
-			clone.attr('id', 'wpglobus-'+api.clone_id).attr('name', 'wpglobus-'+name);
+			$element.attr( 'style', 'display:none;' );
+			clone.attr( 'id', 'wpglobus-'+api.clone_id ).attr( 'name', 'wpglobus-'+name );
 			
+			/**
+			 * add WPGlobus translatable class
+			 */
+			clone.addClass( api.trClass );
+
 			if ( 'id' == api.element_by ) {
 				clone.attr('data-source-id', id).attr('data-source-name', '').attr('data-source-get-by',api.element_by);
 			} else {
