@@ -130,6 +130,8 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* Support for Megamenu plugin
+* FIXED:
+	* ReduxFramework incompatibilities (in Customizer, some themes)
 
 = 1.4.8 =
 

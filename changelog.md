@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.4.9 ###
+
+* ADDED:
+	* Support for Megamenu plugin
+* FIXED:
+	* ReduxFramework incompatibilities (in Customizer, some themes)
+
 ### 1.4.8 ###
 
 * FIXED:
