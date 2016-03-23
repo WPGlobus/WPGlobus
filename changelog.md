@@ -5,6 +5,7 @@
 ### 1.4.9 ###
 
 * ADDED:
+	* Support for repeater&flexible content fields for Advanced Custom Fields Pro
 	* Support for Megamenu plugin
 * FIXED:
 	* ReduxFramework incompatibilities (in Customizer, some themes)
