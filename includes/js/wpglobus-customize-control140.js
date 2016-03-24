@@ -185,6 +185,15 @@ jQuery(document).ready(function ($) {
 		ctrlCallback: function( context, obj, key ) {
 
 			var dis = false;
+			$.each( WPGlobusCustomize.disabledSections, function(i,e) {
+				if ( context.section() == e ) {
+					dis = true;
+					return false;	
+				}	
+			});
+
+			if (dis) return;
+			
 			$.each( WPGlobusCustomize.disabledSettingMask, function(i,e) {
 				/** @see wp.customize.control elements */
 				if ( obj.indexOf( e ) >= 0 ){
