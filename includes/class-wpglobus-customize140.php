@@ -25,6 +25,13 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				'action__customize_register'
 			) ); */
 			
+			/**
+			 * @since 1.4.10
+			 */
+			if ( WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
+				require_once 'admin/wpglobus-customize-filters.php';
+			}
+			
 			add_action( 'customize_preview_init', array(
 				'WPGlobus_Customize',
 				'action__customize_preview_init'
@@ -190,6 +197,18 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * @param array $set_link_by An array of masks.
 			 */				
 			$set_link_by = apply_filters( 'wpglobus_customize_setlinkby', $set_link_by );
+
+			/**
+			 * Filter of disabled sections.
+			 *
+			 * Returning array.
+			 * @since 1.4.10
+			 *
+			 * @param array $disabled_sections An array of sections.
+			 */					
+			$disabled_sections = array();
+			
+			$disabled_sections = apply_filters( 'wpglobus_customize_disabled_sections', $disabled_sections );
 			
 			wp_enqueue_script(
 				'wpglobus-customize-control140',
@@ -206,7 +225,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					'languageAdmin'			=> WPGlobus::Config()->language,
 					'disabledSettingMask' 	=> $disabled_setting_mask,
 					'elementSelector'		=> $element_selector,
-					'setLinkBy'				=> $set_link_by
+					'setLinkBy'				=> $set_link_by,
+					'disabledSections'		=> $disabled_sections
 				)
 			);
 			
