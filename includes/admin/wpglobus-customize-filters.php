@@ -15,7 +15,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) :
 	class WPGlobus_Customize_Filters {
 		
 		/**
-		 * This is the basic filter used to extract the text portion in the current language from a string.
+		 * Disable sections in customizer.
 		 *
 		 * @param array $disabled_sections
 		 *
