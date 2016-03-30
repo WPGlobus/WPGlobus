@@ -324,4 +324,16 @@ if ( class_exists( 'Mega_Menu' ) ) {
 	add_filter( 'megamenu_the_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
+if ( class_exists( 'RevSliderFront' ) ) {
+	
+	/**
+	 * Translate layers
+	 * @see http://www.revolution.themepunch.com/
+	 *
+	 * @since 1.4.10
+	 */	
+	require_once 'vendor/class-wpglobus-revslider.php';
+	
+}
+
 # --- EOF
