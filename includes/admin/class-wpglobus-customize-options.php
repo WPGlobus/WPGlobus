@@ -494,8 +494,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				$wp_customize->add_setting( 'wpglobus_customize_language_selector_mode', array( 
 					'type' => 'option',
 					'capability' => 'manage_options',
-					#'transport' => 'postMessage'
 					'transport' => 'refresh'
+					#'transport' => 'postMessage'
 				) );			
 				$wp_customize->add_control( 'wpglobus_customize_language_selector_mode', array(
 					'settings' 		=> 'wpglobus_customize_language_selector_mode',
@@ -515,7 +515,19 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_mode' ][ 'type' ]  = 'select';
 				/** @see option wpglobus_option['show_flag_name'] */
 				self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_mode' ][ 'option'] = 'show_flag_name';
-				
+ 
+				/**
+				 * @see https://make.wordpress.org/core/2016/03/22/implementing-selective-refresh-support-for-widgets/
+				 * @see https://make.wordpress.org/core/2016/03/10/customizer-improvements-in-4-5/
+				 *
+				$wp_customize->selective_refresh->add_partial( 'wpglobus_customize_language_selector_mode', array(
+					'selector' => '#site-navigation',
+					'render_callback' => function() {
+						wp_nav_menu();
+					},
+				) ); 
+				// */
+			
 				/** Language Selector Menu */
 				
 				/** @var array $nav_menus */
@@ -545,7 +557,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'type' ] 	= 'select';
 				/** @see option wpglobus_option['use_nav_menu'] */
 				self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= 'use_nav_menu';
-				
+		
 				/** "All Pages" menus Language selector */
 				$wp_customize->add_setting( 'wpglobus_customize_selector_wp_list_pages', array( 
 					'type' => 'option',
@@ -725,35 +737,57 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * SECTION: Add ons
 			 */
 			if ( 1 ) {
-			
-				$wp_customize->add_section( 'wpglobus_addons_section' , array(
-					'title'      => __( 'Add-ons', 'wpglobus' ),
-					'priority'   => 40,
-					'panel'		 => 'wpglobus_settings_panel'
-				) );			
-			
+
+				global $wp_version; 
+
 				self::$sections[ 'wpglobus_addons_section' ] = 'wpglobus_addons_section';
-			
-				//self::$settings[ 'addons' ] = 'wpglobus_customize_add_ons';		
-		
-				/** Add ons setting  */
-				$wp_customize->add_setting( 'wpglobus_customize_add_ons', array( 
-					'type' => 'option',
-					'capability' => 'manage_options',
-					'transport' => 'postMessage'
-				) );			
 				
-				$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
-					'wpglobus_customize_add_ons', array(
-						'settings' 		=> 'wpglobus_customize_add_ons',
-						'title'   		=> __( 'Title', 'wpglobus' ),
-						'label'   		=> __( 'Label', 'wpglobus' ),
-						'section' 		=> 'wpglobus_addons_section',
-						'type'    		=> 'checkbox',
-						'priority'  	=> 10,
-						'description' 	=> __( 'Description', 'wpglobus' ),
-					)	
-				) );	
+				if ( version_compare( $wp_version, '4.5-RC1', '<' ) ) :
+					
+					$wp_customize->add_section( self::$sections[ 'wpglobus_addons_section' ] , array(
+						'title'      => __( 'Add-ons', 'wpglobus' ),
+						'priority'   => 40,
+						'panel'		 => 'wpglobus_settings_panel'
+					) );			
+			
+					/** Add ons setting  */
+					$wp_customize->add_setting( 'wpglobus_customize_add_ons', array( 
+						'type' => 'option',
+						'capability' => 'manage_options',
+						'transport' => 'postMessage'
+					) );			
+					
+					$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize, 			
+						'wpglobus_customize_add_ons', array(
+							'settings' 		=> 'wpglobus_customize_add_ons',
+							'title'   		=> __( 'Title', 'wpglobus' ),
+							'label'   		=> __( 'Label', 'wpglobus' ),
+							'section' 		=> self::$sections[ 'wpglobus_addons_section' ],
+							'type'    		=> 'checkbox',
+							'priority'  	=> 10,
+							'description' 	=> __( 'Description', 'wpglobus' ),
+						)	
+					) );
+					
+				else:
+					/**
+					 * @since WP 4.5
+					 * @see https://make.wordpress.org/core/2016/03/10/customizer-improvements-in-4-5/
+					 */
+					$wp_customize->add_section( self::$sections[ 'wpglobus_addons_section' ] , array(
+						'title'      => __( 'Add-ons', 'wpglobus' ),
+						'priority'   => 40,
+						'panel'		 => 'wpglobus_settings_panel'
+					) );			
+				
+					$wp_customize->add_control(	'wpglobus_customize_add_ons', array(
+							'section' 		=> self::$sections[ 'wpglobus_addons_section' ],
+							'settings' 		=> array(),
+							'type'    		=> 'button'
+						)	
+					);
+				
+				endif;	
 			
 			}; 		/** end SECTION: Add ons */
 		
