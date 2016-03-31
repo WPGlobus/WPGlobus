@@ -237,11 +237,16 @@ var WPGlobusDialogApp;
 			}	
 			api.clone_id = api.convertToId(id);
 			
-			if ( $('#wpglobus-'+api.clone_id).length > 0 ) {
+			if ( -1 != name.indexOf( 'wpglobus' ) || -1 != api.clone_id.indexOf( 'wpglobus' ) ) {
+				/* prevent add element to itself  */
+				return;
+			}
+			
+			if ( $( '#wpglobus-'+api.clone_id ).length > 0 ) {
 				// WPGlobus element exists already
 				return;	
 			}	
-			if ( $(nodeName+'[name="wpglobus-'+name+'"]').length > 0 ) {
+			if ( $( nodeName+'[name="wpglobus-'+name+'"]' ).length > 0 ) {
 				// WPGlobus element exists already
 				return;	
 			}	
