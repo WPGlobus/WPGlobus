@@ -1327,6 +1327,17 @@ class WPGlobus {
 				&& in_array( $page, array( 'post.php', 'post-new.php' ) 
 				) 
 			) {
+				
+				/**
+				 * Filter to disable translatable ACF and ACF Pro fields.
+				 * Returning array.
+				 * @since 1.4.10
+				 *
+				 * @param array	 	An empty array.
+				 * @param boolean 	Type of ACF plugin.
+				 */
+				$disabled_fields = apply_filters( 'wpglobus_disabled_acf_fields', array(), $this->vendors_scripts['ACFPRO'] );
+				
 				wp_register_script(
 					'wpglobus-acf',
 					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-acf" . self::$_SCRIPT_SUFFIX . ".js",
@@ -1340,7 +1351,8 @@ class WPGlobus {
 					'WPGlobusAcf',
 					array(
 						'wpglobus_version'  => WPGLOBUS_VERSION,
-						'pro' => $this->vendors_scripts['ACFPRO'] ? true : false
+						'pro' 				=> $this->vendors_scripts['ACFPRO'] ? true : false,
+						'disabledFields' 	=> $disabled_fields
 					)
 				);	
 
