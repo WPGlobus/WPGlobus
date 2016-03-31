@@ -8,7 +8,7 @@
  * @subpackage Administration
  */
 /* jslint browser: true */
-/* global jQuery, console, WPGlobusCore, WPGlobusCoreData */
+/* global jQuery, console, WPGlobusAcf, WPGlobusDialogApp */
 
 jQuery(document).ready(function($){
     "use strict";
@@ -28,6 +28,25 @@ jQuery(document).ready(function($){
 				api.startAcf('.acf_postbox .field');
 			}	
 		},
+		disabledField: function( id ) {
+			var res = false;
+			if ( api.option.pro ) {
+				var pId = $( '#' + id ).parents( '.acf-field' ).attr( 'id' );
+				$.each( WPGlobusAcf.disabledFields, function( i, e ) {
+					if ( e == pId ) {
+						res = true;
+					}	
+				});					
+			} else {
+				var id = id.replace( 'acf-field-', '' );
+				$.each( WPGlobusAcf.disabledFields, function( i, e ) {
+					if ( e == id ) {
+						res = true;
+					}	
+				});					
+			}	
+			return res;
+		},	
 		startAcf: function(acf_class) {
 			var id;
 			var style = 'width:90%;';
@@ -40,6 +59,9 @@ jQuery(document).ready(function($){
 				var $t = $(this), id, h;
 				if ( $t.hasClass('field_type-textarea') || $t.hasClass('acf-field-textarea') ) {
 					id = $t.find('textarea').attr('id');
+					if ( api.disabledField( id ) ) {
+						return true;	
+					}	
 					h = $('#'+id).height() + 20;
 					WPGlobusDialogApp.addElement({
 						id: id,
@@ -51,6 +73,9 @@ jQuery(document).ready(function($){
 					});
 				} else if ( $t.hasClass('field_type-text') || $t.hasClass('acf-field-text') ) {
 					id = $t.find('input').attr('id');
+					if ( api.disabledField( id ) ) {
+						return true;	
+					}
 					WPGlobusDialogApp.addElement({
 						id: id,
 						dialogTitle: 'Edit ACF field',
