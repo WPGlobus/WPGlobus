@@ -1312,7 +1312,8 @@ class WPGlobus {
 						'open_languages'    => $config->open_languages,
 						'en_language_name'  => $config->en_language_name,
 						'locale_tag_start'  => self::LOCALE_TAG_START,
-						'locale_tag_end'    => self::LOCALE_TAG_END
+						'locale_tag_end'    => self::LOCALE_TAG_END,
+						'page'         		=> $page_action					
 					), array(
 						$page_data_key => $page_data_values
 					)
