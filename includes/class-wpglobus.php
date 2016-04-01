@@ -251,7 +251,17 @@ class WPGlobus {
 			$this->enabled_pages[] = 'post.php';
 			$this->enabled_pages[] = 'post-new.php';
 			$this->enabled_pages[] = 'nav-menus.php';
+			
+			/**
+			 *  @since WP 4.5 is obsolete page
+			 */
 			$this->enabled_pages[] = 'edit-tags.php';
+
+			/**
+			 * @since WP 4.5 is new page term.php
+			 */
+			$this->enabled_pages[] = 'term.php';
+			
 			$this->enabled_pages[] = 'edit.php';
 			$this->enabled_pages[] = 'options-general.php';
 			$this->enabled_pages[] = 'widgets.php';
@@ -269,8 +279,8 @@ class WPGlobus {
 
 			require_once 'options/class-wpglobus-options.php';
 			new WPGlobus_Options();
-
-			if ( 'edit-tags.php' == $pagenow ) {
+			
+			if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ) ) ) {
 				/**
 				 * Need to get taxonomy for using correct filter
 				 */
@@ -898,7 +908,7 @@ class WPGlobus {
 			 */
 			$tabs_suffix = array();
 
-			if ( in_array( $page, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
+			if ( in_array( $page, array( 'post.php', 'post-new.php', 'edit-tags.php', 'term.php' ) ) ) {
 
 				/**
 				 * Make suffixes for tabs
@@ -1111,7 +1121,7 @@ class WPGlobus {
 
 				$i18n['save_nav_menu'] = __( '*) Available after the menu is saved.', 'wpglobus' );
 
-			} else if ( 'edit-tags.php' == $page ) {
+			} else if ( 'edit-tags.php' == $page || 'term.php' == $page ) {
 
 				global $tag;
 
