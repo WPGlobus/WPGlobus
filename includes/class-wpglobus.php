@@ -1333,6 +1333,9 @@ class WPGlobus {
 				 * Returning array.
 				 * @since 1.4.10
 				 *
+				 * To exclude field in ACF plugin you need to use field name.
+				 * To exclude field in ACF Pro plugin you need to use id, see Wrapper Attributes section on field's edit page.
+				 *
 				 * @param array	 	An empty array.
 				 * @param boolean 	Type of ACF plugin.
 				 */
