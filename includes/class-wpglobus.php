@@ -1296,15 +1296,17 @@ class WPGlobus {
 			 * Returning array or null.
 			 * @since 1.2.9
 			 *
-			 * @param array $page_data_values An array with custom data or null.
-			 * @param string $page_data_key Data key. @since 1.3.0
+			 * @param array $page_data_values 	An array with custom data or null.
+			 * @param string $page_data_key 	Data key. @since 1.3.0
+			 * @param string $page_action 		Page. @since 1.4.10
 			 */
-			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values, $page_data_key );			
+			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values, $page_data_key, $page_action );			
 			
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusCoreData',
-				array_merge( array(
+				array_merge( 
+					array(
 						'version'           => WPGLOBUS_VERSION,
 						'default_language'  => $config->default_language,
 						'language'          => $config->language,
