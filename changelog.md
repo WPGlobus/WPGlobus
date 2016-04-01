@@ -15,6 +15,7 @@
 	
 * FIXED:
 	* prevent add element to itself in WPGlobusDialogApp
+	* section in customizer for Easy Google Fonts plugin (https://wordpress.org/plugins/easy-google-fonts/) 
 
 ### 1.4.9 ###
 
