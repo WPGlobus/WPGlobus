@@ -26,7 +26,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			) ); */
 			
 			/**
-			 * @since 1.4.10
+			 * @since 1.5.0
 			 */
 			if ( WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
 				require_once 'admin/wpglobus-customize-filters.php';
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * Filter of disabled sections.
 			 *
 			 * Returning array.
-			 * @since 1.4.10
+			 * @since 1.5.0
 			 *
 			 * @param array $disabled_sections An array of sections.
 			 */					

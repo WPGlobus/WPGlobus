@@ -330,7 +330,7 @@ if ( class_exists( 'RevSliderFront' ) ) {
 	 * Translate layers
 	 * @see http://www.revolution.themepunch.com/
 	 *
-	 * @since 1.4.10
+	 * @since 1.5.0
 	 */	
 	require_once 'vendor/class-wpglobus-revslider.php';
 	

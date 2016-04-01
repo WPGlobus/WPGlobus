@@ -1308,7 +1308,7 @@ class WPGlobus {
 			 *
 			 * @param array $page_data_values 	An array with custom data or null.
 			 * @param string $page_data_key 	Data key. @since 1.3.0
-			 * @param string $page_action 		Page. @since 1.4.10
+			 * @param string $page_action 		Page. @since 1.5.0
 			 */
 			$page_data_values = apply_filters( 'wpglobus_localize_custom_data', $page_data_values, $page_data_key, $page_action );			
 			
@@ -1344,7 +1344,7 @@ class WPGlobus {
 				/**
 				 * Filter to disable translatable ACF and ACF Pro fields.
 				 * Returning array.
-				 * @since 1.4.10
+				 * @since 1.5.0
 				 *
 				 * To exclude field in ACF plugin you need to use field name.
 				 * To exclude field in ACF Pro plugin you need to use id, see Wrapper Attributes section on field's edit page.

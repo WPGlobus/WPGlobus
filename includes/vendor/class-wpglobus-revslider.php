@@ -1,7 +1,7 @@
 <?php
 /**
  * @package WPGlobus
- * @since 1.4.10
+ * @since 1.5.0
  */
 if ( ! function_exists( 'qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage' ) ) {
 
