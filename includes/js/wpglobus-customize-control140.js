@@ -179,7 +179,7 @@ jQuery(document).ready(function ($) {
 			/**
 			 * Event handler after widget was added
 			 */
-			$( document ).triggerHandler( 'wpglobus_cusomize_control_added_widget', [ obj ] );
+			$( document ).triggerHandler( 'wpglobus_customize_control_added_widget', [ obj ] );
 			
 		},	
 		ctrlCallback: function( context, obj, key ) {
@@ -356,7 +356,7 @@ jQuery(document).ready(function ($) {
 				/**
 				 * Event after language was changed
 				 */				
-				$( document ).triggerHandler( 'wpglobus_cusomize_control_language', [ WPGlobusCoreData.language ] );
+				$( document ).triggerHandler( 'wpglobus_customize_control_language', [ WPGlobusCoreData.language ] );
 				
 				$( '.wpglobus-customize-control' ).each( function(i,e){
 					var $e = $(e), 
