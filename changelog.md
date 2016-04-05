@@ -5,17 +5,16 @@
 ### 1.5.0 ###
 
 * ADDED:
-	* WordPress 4.5 compatibility
-	* filter 'wpglobus_customize_disabled_sections' for customizer
-	* filter 'wpglobus_disabled_acf_fields' to disable ACF and ACF Pro field translation
-	* 'page' as 3th parameter to 'wpglobus_localize_custom_data' filter
-	* support for Slider Revolution Plugin layers
-	* customizer improvements for WP 4.5
-	* 'wpglobus-translatable' class to post excerpt
-	
+	* WordPress 4.5 compatibility;
+	* Customizer improvements related to WordPress 4.5;
+	* Customizer filter `wpglobus_customize_disabled_sections`;
+	* Filter `wpglobus_disabled_acf_fields` to disable ACF and ACF Pro field translation;
+	* `page` as the 3rd parameter to `wpglobus_localize_custom_data` filter;
+	* Support for layers in Slider Revolution plugin;
+	* `wpglobus-translatable` CSS class to post excerpt.
 * FIXED:
-	* prevent add element to itself in WPGlobusDialogApp
-	* section in customizer for Easy Google Fonts plugin (https://wordpress.org/plugins/easy-google-fonts/) 
+	* Prevent adding element to itself in `WPGlobusDialogApp`;
+	* Customizer section for [Easy Google Fonts plugin](https://wordpress.org/plugins/easy-google-fonts/).
 
 ### 1.4.9 ###
 

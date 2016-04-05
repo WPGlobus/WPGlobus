@@ -218,11 +218,11 @@ module.exports = function (grunt) {
                 src: [pkgName + '.php'],
                 replacements: [
                     {
-                        from: / \* Version: [0-9\.]+/,
+                        from: / \* Version: .+/,
                         to: ' * Version: <%= pkg.version %>'
                     },
                     {
-                        from: /define\( 'WPGLOBUS_VERSION', '[0-9\.]+' \);/,
+                        from: /define\( 'WPGLOBUS_VERSION', '[^']+' \);/,
                         to: "define( 'WPGLOBUS_VERSION', '<%= pkg.version %>' );"
                     }
                 ]

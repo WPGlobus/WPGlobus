@@ -144,6 +144,20 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.5.0 ###
+
+* ADDED:
+	* WordPress 4.5 compatibility;
+	* Customizer improvements related to WordPress 4.5;
+	* Customizer filter `wpglobus_customize_disabled_sections`;
+	* Filter `wpglobus_disabled_acf_fields` to disable ACF and ACF Pro field translation;
+	* `page` as the 3rd parameter to `wpglobus_localize_custom_data` filter;
+	* Support for layers in Slider Revolution plugin;
+	* `wpglobus-translatable` CSS class to post excerpt.
+* FIXED:
+	* Prevent adding element to itself in `WPGlobusDialogApp`;
+	* Customizer section for [Easy Google Fonts plugin](https://wordpress.org/plugins/easy-google-fonts/).
+
 ### 1.4.9 ###
 
 * ADDED:
@@ -170,44 +184,6 @@ No known backward incompatibility issues.
 * ADDED:
 	* Setting WPGlobus options in Customizer (BETA).
 
-### 1.4.5 ###
-
-* FIXED:
-	* Backslash in Quick Edit.
-
-### 1.4.4 ###
-
-* FIXED:
-	* In Customizer JS: use `control.selector` to get the ID of parent element correctly.
-	* Additional social network names elements disabled by default in Customizer.
-	
-### 1.4.3 ###
-
-* ADDED:
-	* Clean-up Tool to remove all languages except for the main one.
-
-### 1.4.2 ###
-
-* FIXED:
-	* Case `data-customize-setting-link` not matching the element name in `wp.customize.control.instance`.
-	* Some CSS improvements.
-
-### 1.4.1 ###
-
-* FIXED:
-	* Untranslated page title with Yoast SEO.
-	* Uncaught ReferenceError: WPGlobusCoreData for WooCommerce product without WooCommerce WPGlobus.
-	* Adding item menu title for custom taxonomies.
-
-### 1.4.0 ###
-
-* ADDED:
-	* Support for Yoast SEO Version 3.0
-	* Additional flag(s).
-	* 'wpglobus-current-language' CSS class for the WPGlobus Widget.
-	* Any theme Customizer support.
-	* Multilingual Customizer for widgets.
-
 ### Earlier versions ###
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
@@ -224,4 +200,3 @@ No known backward incompatibility issues.
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
 	* A multilingual WooCommerce site powered by the `woocommerce-wpglobus` plugin.
-
