@@ -20,10 +20,14 @@ jQuery(document).ready( function ($) {
 	if ( typeof WPGlobusCoreData === 'undefined' ) {
 		return;
 	}
+
+	if ( typeof WPGlobusVendor === 'undefined' ) {
+		return;
+	}
 	
 	var api;
 	
-	if ( 'edit-tags.php' == WPGlobusVendor.pagenow ) {
+	if ( 'edit-tags.php' == WPGlobusVendor.pagenow || 'term.php' == WPGlobusVendor.pagenow ) {
 		
 		api = WPGlobusYoastSeo = {
 			editorIDs: [ 'description' ],

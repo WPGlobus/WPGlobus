@@ -469,7 +469,8 @@ class WPGlobus_YoastSEO {
 		$enabled_pages = array(
 			'post.php', 
 			'post-new.php', 
-			'edit-tags.php'
+			'edit-tags.php',
+			'term.php'
 		);
 		
 		if ( WPGlobus_WP::is_pagenow( $enabled_pages ) ) {
