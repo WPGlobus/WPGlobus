@@ -154,6 +154,31 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );
 		unset( $post );
 
+		/**
+		 * Not a WP_Post must not get fatal
+		 */
+		$not_a_post = 'a string';
+		WPGlobus_Core::translate_wp_post( $not_a_post, 'en' );
+		self::assertEquals( 'a string', $not_a_post, __LINE__ );
+		$not_a_post = 3.14;
+		WPGlobus_Core::translate_wp_post( $not_a_post, 'en' );
+		self::assertEquals( 3.14, $not_a_post, __LINE__ );
+		unset( $not_a_post );
+
+		/**
+		 * Any object with "post-like" properties should work fine
+		 */
+		$post             = new stdClass;
+		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
+		WPGlobus_Core::translate_wp_post( $post, 'en' );
+		self::assertEquals( 'post_title EN', $post->post_title, __LINE__ );
+		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
+		$post->post_content = '{:ru}post_content RU{:}{:en}post_content EN{:}';
+		WPGlobus_Core::translate_wp_post( $post, 'ru' );
+		self::assertEquals( 'post_title RU', $post->post_title, __LINE__ );
+		self::assertEquals( 'post_content RU', $post->post_content, __LINE__ );
+		unset( $post );
+
 	}
 
 	/**

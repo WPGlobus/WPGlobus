@@ -209,13 +209,13 @@ class WPGlobus_Core {
 	 * Keeps only one language in all textual fields of the `$post` object.
 	 *
 	 * @see \WPGlobus_Core::text_filter for the parameters description
-	 * @param WP_Post $post The Post object. Object always passed by reference.
+	 * @param WP_Post|mixed $post The Post object. Object always passed by reference.
 	 * @param string  $language
 	 * @param string  $return
 	 * @param string  $default_language
 	 */
 	public static function translate_wp_post(
-		WP_Post $post,
+		$post,
 		$language = '',
 		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
 		$default_language = ''

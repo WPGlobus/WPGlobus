@@ -138,7 +138,8 @@ No known backward incompatibility issues.
 	* `wpglobus-translatable` CSS class to post excerpt.
 * FIXED:
 	* Prevent adding element to itself in `WPGlobusDialogApp`;
-	* Customizer section for [Easy Google Fonts plugin](https://wordpress.org/plugins/easy-google-fonts/).
+	* Customizer section for [Easy Google Fonts plugin](https://wordpress.org/plugins/easy-google-fonts/);
+	* No fatal error in `WPGlobus_Core::translate_wp_post` when not a `WP_Post` passed (Ticket 6390)
 
 = 1.4.9 =
 
