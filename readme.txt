@@ -77,6 +77,8 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 
 `tr_TR` by [Borahan Conkeroglu](https://twitter.com/boracon68) ~ [WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir.](https://tr.wordpress.org/plugins/wpglobus/).
 
+`uk` by [Pavlo Novak](https://plus.google.com/u/0/114797816817149043222) ~ ["WPGlobus - це колекція ВордПресс плагінів для створення багатомовних сайтів."](https://uk.wordpress.org/plugins/wpglobus/).
+
 **Please help us translate WPGlobus into your language!**
 
 == Installation ==
@@ -125,6 +127,11 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 == Changelog ==
+
+= 1.5.1 =
+
+* ADDED:
+	* `uk` (Ukrainian) admin interface translation;
 
 = 1.5.0 =
 

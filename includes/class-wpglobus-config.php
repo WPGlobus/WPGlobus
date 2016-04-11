@@ -377,6 +377,7 @@ class WPGlobus_Config {
 		$this->language_name['br'] = "Português do Brazil";
 		$this->language_name['pl'] = "Polski";
 		$this->language_name['gl'] = "Galego";
+		$this->language_name['uk'] = "Українська";
 
 		$this->en_language_name['en'] = "English";
 		$this->en_language_name['ru'] = "Russian";
@@ -397,6 +398,7 @@ class WPGlobus_Config {
 		$this->en_language_name['br'] = "Portuguese Brazil";
 		$this->en_language_name['pl'] = "Polish";
 		$this->en_language_name['gl'] = "Galician";
+		$this->en_language_name['uk'] = "Ukrainian";
 
 		#Locales
 		$this->locale['en'] = "en_US";
@@ -418,6 +420,7 @@ class WPGlobus_Config {
 		$this->locale['br'] = "pt_BR";
 		$this->locale['pl'] = "pl_PL";
 		$this->locale['gl'] = "gl_ES";
+		$this->locale['uk'] = "uk";
 
 		#flags
 		$this->flag['en'] = 'us.png';
@@ -439,6 +442,7 @@ class WPGlobus_Config {
 		$this->flag['br'] = 'br.png';
 		$this->flag['pl'] = 'pl.png';
 		$this->flag['gl'] = 'galego.png';
+		$this->flag['uk'] = 'uk.png';
 
 	}
 

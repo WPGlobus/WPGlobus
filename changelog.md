@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.1 ###
+
+* ADDED:
+	* `uk` (Ukrainian) admin interface translation;
+
 ### 1.5.0 ###
 
 * ADDED:

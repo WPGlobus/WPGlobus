@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-04-06 13:39:48+00:00\n"
+"POT-Creation-Date: 2016-04-11 19:29:10+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
@@ -627,7 +627,7 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:2843
+#: includes/class-wpglobus.php:2855
 msgid "Add"
 msgstr "Добавить"
 

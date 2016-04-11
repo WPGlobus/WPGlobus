@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-04-06 13:39:48+00:00\n"
+"POT-Creation-Date: 2016-04-11 19:29:10+00:00\n"
 "PO-Revision-Date: 2015-09-20 07:26+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/wp-translations/"
@@ -605,7 +605,7 @@ msgstr ""
 "Por favor, ve a Configuración > Enlaces permanentes > Ajustes comunes y "
 "selecciona una opción no predeterminada ."
 
-#: includes/class-wpglobus.php:2843
+#: includes/class-wpglobus.php:2855
 msgid "Add"
 msgstr "Añadir"
 

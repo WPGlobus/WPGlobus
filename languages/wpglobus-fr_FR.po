@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-04-06 13:39:48+00:00\n"
+"POT-Creation-Date: 2016-04-11 19:29:10+00:00\n"
 "PO-Revision-Date: 2015-09-14 07:19+0000\n"
 "Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
@@ -609,7 +609,7 @@ msgstr ""
 "Veuillez vous rendre dans Réglages > Permaliens et choisissez autre chose "
 "que la valeur par défaut."
 
-#: includes/class-wpglobus.php:2843
+#: includes/class-wpglobus.php:2855
 msgid "Add"
 msgstr "Ajouter"
 
