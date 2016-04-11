@@ -2729,6 +2729,18 @@ class WPGlobus {
 		} else {
 
 			/**
+			 * For developers use only. Deletes settings with no warning! Irreversible!
+			 * @link wp-admin/admin.php?wpglobus-reset-all-options=1
+			 */
+			if ( ! empty( $_GET['wpglobus-reset-all-options'] ) ) {
+				/** @global wpdb $wpdb */
+				global $wpdb;
+				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );
+				wp_safe_redirect( admin_url() );
+				exit();
+			}
+
+			/**
 			 * Check for transient wpglobus_activated
 			 */
 			if ( false !== get_transient( 'wpglobus_activated' ) ) {
