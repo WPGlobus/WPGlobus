@@ -328,7 +328,7 @@ if ( class_exists( 'RevSliderFront' ) ) {
 	
 	/**
 	 * Translate layers
-	 * @see http://www.revolution.themepunch.com/
+	 * @see https://revolution.themepunch.com/
 	 *
 	 * @since 1.5.0
 	 */	
