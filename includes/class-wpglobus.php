@@ -1630,7 +1630,14 @@ class WPGlobus {
 			}
 		}
 
-		return $sorted_menu_items;
+		/**
+		 * Filter for menu objects
+		 * @since 1.5.1
+		 *
+		 * @param array $sorted_menu_items An array of sorted menu items.
+		 * @return array
+		 */		
+		return apply_filters( 'wpglobus_nav_menu_objects', $sorted_menu_items );
 
 	}
 
