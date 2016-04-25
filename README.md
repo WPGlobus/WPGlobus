@@ -149,7 +149,9 @@ No known backward incompatibility issues.
 ### 1.5.1 ###
 
 * ADDED:
-	* `uk` (Ukrainian) admin interface translation;
+	* Support for Yoast SEO Version 3.2;
+	* Filter 'wpglobus_nav_menu_objects' - allows to modify the localized URLs in menu, if any tweaking is required;
+	* `uk` (Ukrainian) admin interface translation.
 
 ### 1.5.0 ###
 
@@ -165,32 +167,6 @@ No known backward incompatibility issues.
 	* Prevent adding element to itself in `WPGlobusDialogApp`;
 	* Customizer section for [Easy Google Fonts plugin](https://wordpress.org/plugins/easy-google-fonts/);
 	* No fatal error in `WPGlobus_Core::translate_wp_post` when not a `WP_Post` passed (Ticket 6390)
-
-### 1.4.9 ###
-
-* ADDED:
-	* Support for Megamenu plugin
-* FIXED:
-	* ReduxFramework incompatibilities (in Customizer, some themes)
-
-### 1.4.8 ###
-
-* FIXED:
-	* Post title handling in All in One SEO Pack
-	* Yoast SEO tweaks
-	
-### 1.4.7 ###
-
-* ADDED:
-	* Support for Yoast SEO Version 3.1
-
-### 1.4.6 ###
-
-* FIXED:
-	* Backslash in Quick Edit (additional fixes);
-	* Do not add language marks in Quick Edit, if there is only the default language text.
-* ADDED:
-	* Setting WPGlobus options in Customizer (BETA).
 
 ### Earlier versions ###
 

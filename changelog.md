@@ -5,7 +5,9 @@
 ### 1.5.1 ###
 
 * ADDED:
-	* `uk` (Ukrainian) admin interface translation;
+	* Support for Yoast SEO Version 3.2;
+	* Filter 'wpglobus_nav_menu_objects' - allows to modify the localized URLs in menu, if any tweaking is required;
+	* `uk` (Ukrainian) admin interface translation.
 
 ### 1.5.0 ###
 
