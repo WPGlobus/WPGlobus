@@ -96,7 +96,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Key' ) ) :
 
 			$target_url = esc_url_raw( self::create_software_api_url( $args ) );
 
-			$request = wp_remote_get( $target_url );
+			$request = wp_safe_remote_get( $target_url );
 
 			if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
 				// Request failed
@@ -128,7 +128,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Key' ) ) :
 
 			$target_url = esc_url_raw( self::create_software_api_url( $args ) );
 
-			$request = wp_remote_get( $target_url );
+			$request = wp_safe_remote_get( $target_url );
 
 			if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
 				// Request failed
