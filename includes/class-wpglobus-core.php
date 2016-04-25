@@ -215,7 +215,7 @@ class WPGlobus_Core {
 	 * @param string  $default_language
 	 */
 	public static function translate_wp_post(
-		$post,
+		&$post,
 		$language = '',
 		$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE,
 		$default_language = ''

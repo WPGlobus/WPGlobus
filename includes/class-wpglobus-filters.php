@@ -654,6 +654,7 @@ class WPGlobus_Filters {
 
 		foreach ( $instance as &$widget_setting ) {
 
+			/** @noinspection ReferenceMismatchInspection */
 			if ( ! empty( $widget_setting ) && is_string( $widget_setting ) ) {
 				$widget_setting =
 					WPGlobus_Core::text_filter( $widget_setting, WPGlobus::Config()->language );
