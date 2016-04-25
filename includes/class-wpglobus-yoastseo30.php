@@ -490,6 +490,7 @@ class WPGlobus_YoastSEO {
 
 			/** @noinspection PhpInternalEntityUsedInspection */
 			$src_version = version_compare( WPSEO_VERSION, '3.1', '>=' ) ? '31' : '30';
+			$src_version = version_compare( WPSEO_VERSION, '3.2', '>=' ) ? '32' : $src_version;
 			//$src_version = '30';
 
 			$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/' .
@@ -589,7 +590,14 @@ class WPGlobus_YoastSEO {
 			'pageanalysishelp',
 			#'focuskwhelp',
 			#'titlehelp',
-			#'metadeschelp'
+			#'metadeschelp',
+			#since yoast seo 3.2
+			'snippetpreview-help',
+			'focuskw_text_input-help',
+			'pageanalysis-help',
+			'snippetpreview-help-toggle',
+			'focuskw_text_input-help-toggle',
+			'pageanalysis-help-toggle'
 		);
 		
 		?>
