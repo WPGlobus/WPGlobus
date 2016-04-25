@@ -133,6 +133,8 @@ No known backward incompatibility issues.
 * ADDED:
 	* `uk` (Ukrainian) admin interface translation;
 	* Filter 'wpglobus_nav_menu_objects' for menu objects
+	* Support for Yoast SEO Version 3.2
+	
 = 1.5.0 =
 
 * ADDED:
