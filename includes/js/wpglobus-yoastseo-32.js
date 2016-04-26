@@ -823,14 +823,21 @@ jQuery(document).ready( function ($) {
 		}
 		
 		WPGlobusYoastSeoPlugin.prototype.analyze = function() {
+			
 			var tab = $('.wpglobus-wpseo-tabs-list .ui-tabs-active').data('language');
 			if (  tab == WPGlobusCoreData.default_language ) {
 				YoastSEO.app.snippetPreview.data.urlPath = $( '#editable-post-name-full' ).text();
 			} else {	
-				YoastSEO.app.snippetPreview.data.urlPath = $( '#editable-post-name-full-' + tab ).text();
-			} 			
-			YoastSEO.app.analyzeTimer(YoastSEO.app);
+				if ( $( '#editable-post-name-full-' + tab ).length != 0 ) {
+					YoastSEO.app.snippetPreview.data.urlPath = $( '#editable-post-name-full-' + tab ).text();
+				} else {
+					YoastSEO.app.snippetPreview.data.urlPath = $( '#editable-post-name-full' ).text();
+				}	
+			}	
+			
+			YoastSEO.app.analyzeTimer( YoastSEO.app );
 			WPGlobusYoastSeoPlugin.prototype.setScoreIcon();
+
 		}
 		
 		WPGlobusYoastSeoPlugin.prototype.setScoreIcon = function() {
@@ -866,72 +873,120 @@ jQuery(document).ready( function ($) {
 			
 		}
 		
+		/**
+		 * Page title modification for backend
+		 */
 		WPGlobusYoastSeoPlugin.prototype.pageTitleModification = function(data) {
-			//console.log( '1. pageTitleModification: ' + _this.getWPseoTab() );
+			//console.log( '1. pageTitleModification: ' + _this.getWPseoTab() + ' ->' + data);
 
 			var id = '#snippet_title_',
-				text = '', tr, return_text = '';
+				text = '', tr, return_text = '', set, temp;
 
 			if ( _this.title_template == data ) {
+				
+				//console.log('[1]');
+				
 				/**
 				 * meta key _yoast_wpseo_title is empty or doesn't exists 
 				 */
 				$.each(WPGlobusCoreData.enabled_languages, function(i,l) {
+					set = $( '#snippet-editor-title_' + l ).val();
+					if ( set.length == 0 ) {
+						temp = _this.title_template;
+					} else {	
+						temp = set;
+					}	
 					_this.language = l;
-					text = _this.replaceVariablesPlugin( data );
-					$(id+l).text( text );
+					text = _this.replaceVariablesPlugin( temp );
+					$( id+l ).text( text );
 					if ( l == _this.getWPseoTab() ) {
 						return_text = text;	
 					}	
 				});
+				
 			} else {
-
+		
 				tr = WPGlobusCore.getTranslations( data );
+				//console.log('[2]');
 				
 				if ( _this.getWPseoTab() !== WPGlobusCoreData.default_language ) {
 					/**
 					 * Case when we get data with extra language only ( without language marks )
 					 */
 					if ( tr[ WPGlobusCoreData.default_language ] == data ) {
+						
+						//console.log('[3]');
+						
 						var l = _this.getWPseoTab();
-						$( id+l ).text( data );
-						return data;	
+						
+						set = $( '#snippet-editor-title_' + l ).val();
+						if ( set.length > 0 ) {
+							temp = set;
+						} else {
+							temp = _this.title_template;
+						}	
+						temp = _this.replaceVariablesPlugin( temp );
+
+						$( id+l ).text( temp );
+
+						return temp;	
 					}	
 					
 				}
-				
-				$.each(WPGlobusCoreData.enabled_languages, function(i,l) {
+				//console.log('[4]');
+				$.each( WPGlobusCoreData.enabled_languages, function(i,l) {
 					_this.language = l;
 					if ( '' === tr[l] ) {
 						text = _this.replaceVariablesPlugin( _this.title_template );
 					} else {
-						text = tr[l];
+						text = _this.replaceVariablesPlugin( tr[l] );
 					}	
-					$( id+l ).text( text );
 					if ( l == _this.getWPseoTab() ) {
 						return_text = text;	
+						set = $( '#snippet-editor-title_' + l ).val();
+						if ( set.length != 0 ) {						
+							if ( set != return_text ) {
+								return_text	= _this.replaceVariablesPlugin( set );
+							}
+						} else {
+							return_text	= _this.replaceVariablesPlugin( _this.title_template );
+						}	
 					}	
+					$( id+l ).text( return_text );
 				});
 			}
-			
 			return return_text;		
 		}		
-		
-		WPGlobusYoastSeoPlugin.prototype.metaDescModification = function(data) {
-			//console.log( '2. metaDescModification: ' + _this.getWPseoTab() );
 
-			var id = '#snippet_meta_';
+		/**
+		 * Page description modification for backend
+		 */		
+		WPGlobusYoastSeoPlugin.prototype.metaDescModification = function(data) {
+			//console.log( '2. metaDescModification: ' + _this.getWPseoTab() + ': ' + data );
+
+			var id = '#snippet_meta_'; // span element
+			var metaDesc = '#snippet-editor-meta-description_';
+			var metaDescText = '';
+			var tr = WPGlobusCore.getTranslations( data );
+			var return_text = '';
+		
+			metaDescText = $( metaDesc + _this.getWPseoTab() ).val();
 			
 			if ( _this.getWPseoTab() !== WPGlobusCoreData.default_language ) {
 				/**
 				 * Case when we get data with extra language only ( without language marks )
 				 */
-				var tr = WPGlobusCore.getTranslations( data );
 				
 				if ( tr[ WPGlobusCoreData.default_language ] == data ) {
 					var l = _this.getWPseoTab();
-					$( id+l ).text( data );
 					_this.citeModification( l );
+					
+					if ( metaDescText.length == 0 ) {
+						$( id+l ).text( data );
+					} else if ( metaDescText != data ) {
+						$( id+l ).text( metaDescText );
+					}	
+					//console.log('[1]');
 					
 					return data;	
 				}	
@@ -942,8 +997,39 @@ jQuery(document).ready( function ($) {
 				$( id+l ).text( WPGlobusCore.TextFilter( data, l, 'RETURN_EMPTY' ) );
 				_this.citeModification( l );
 			});			
+
 			
-			return WPGlobusCore.TextFilter( data, _this.getWPseoTab(), 'RETURN_EMPTY' );
+			if ( metaDescText == tr[ _this.getWPseoTab() ]  ) {
+				//console.log('[2]');
+				return_text = tr[ _this.getWPseoTab() ];
+				if ( return_text.length == 0 ) {
+					$( id + _this.getWPseoTab() ).text( 
+						WPGlobusCore.TextFilter( 
+							YoastSEO.app.snippetPreview.data.metaDesc, 
+							WPGlobusCoreData.default_language, 
+							'RETURN_EMPTY' 
+						) 
+					);
+				}				
+			} else {
+				//console.log('[3]');
+				return_text = metaDescText;
+				if ( return_text.length == 0 ) {
+					$( id + _this.getWPseoTab() ).text( 
+						WPGlobusCore.TextFilter( 
+							YoastSEO.app.snippetPreview.data.metaDesc, 
+							WPGlobusCoreData.default_language, 
+							'RETURN_EMPTY' 
+						) 
+					);
+				} else {	
+					$( id + _this.getWPseoTab() ).text( return_text );
+				}	
+			}
+			
+			//console.log('[4]');
+		
+			return return_text;
 
 		}	
 		
