@@ -131,7 +131,7 @@ No known backward incompatibility issues.
 = 1.5.2 =
 
 * FIXED:
-	* some issues for Yoast SEO 3.2
+	* Several issues related to Yoast SEO 3.2.
 	
 = 1.5.1 =
 

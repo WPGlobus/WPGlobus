@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.2 ###
+
+* FIXED:
+	* Several issues related to Yoast SEO 3.2.
+	
 ### 1.5.1 ###
 
 * ADDED:
