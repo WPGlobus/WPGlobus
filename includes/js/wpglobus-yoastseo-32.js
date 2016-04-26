@@ -889,7 +889,7 @@ jQuery(document).ready( function ($) {
 				/**
 				 * meta key _yoast_wpseo_title is empty or doesn't exists 
 				 */
-				$.each(WPGlobusCoreData.enabled_languages, function(i,l) {
+				$.each( WPGlobusCoreData.enabled_languages, function(i,l) {
 					set = $( '#snippet-editor-title_' + l ).val();
 					if ( set.length == 0 ) {
 						temp = _this.title_template;
@@ -955,6 +955,7 @@ jQuery(document).ready( function ($) {
 					$( id+l ).text( return_text );
 				});
 			}
+			//console.log('[5]');
 			return return_text;		
 		}		
 
@@ -1078,7 +1079,7 @@ jQuery(document).ready( function ($) {
 			var focusKeyword = YoastSEO.app.rawData.keyword;
 
 			return textString.replace( /%%sitedesc%%/g, this.replaceVars.sitedesc )
-				.replace( /%%sitename%%/g, this.replaceVars.sitename )
+				.replace( /%%sitename%%/g, WPGlobusCore.TextFilter( this.replaceVars.sitename, _this.getWPseoTab() ) )
 				.replace( /%%term_title%%/g, this.replaceVars.term_title )
 				.replace( /%%term_description%%/g, this.replaceVars.term_description )
 				.replace( /%%category_description%%/g, this.replaceVars.category_description )
@@ -1168,7 +1169,9 @@ jQuery(document).ready( function ($) {
 			if ( typeof title === 'undefined' ) {
 				title = YoastSEO.app.rawData.pageTitle;
 			}
-
+			if ( this.language != WPGlobusCoreData.default_language && title.length == 0 ) {
+				title = $('#title').val();
+			}	
 			data = data.replace( /%%title%%/g, title );
 
 			return data;
