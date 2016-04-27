@@ -1272,7 +1272,11 @@ class WPGlobus {
 			 * added 24.05.2015
 			 * @todo     what's next with wpautop?  @see 'wpautop()' in https://make.wordpress.org/core/2015/05/14/dev-chat-summary-may-13/
 			 */
-			$post_content_autop = wpautop( $post_content );
+			if ( has_filter( 'the_content', 'wpautop' ) ) {
+				$post_content_autop = wpautop( $post_content );
+			} else {
+				$post_content_autop = $post_content;
+			}
 
 			wp_localize_script(
 				'wpglobus-admin',
