@@ -182,6 +182,12 @@ add_filter( 'single_tag_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 )
 add_filter( 'single_term_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 
 /**
+ * Feed options.
+ * @see 'wp_feed_options' action in wp-includes\feed.php
+ */
+add_action( 'wp_feed_options', array( 'WPGlobus_Filters', 'fetch_feed_options' ) );
+
+/**
  * Register the WPGlobus widgets
  * @see   WPGlobusWidget
  * @since 1.0.7

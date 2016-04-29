@@ -7,17 +7,21 @@
  * @package WPGlobus
  * @subpackage Administration
  */
-/* jslint browser: true */
-/* global jQuery, console, WPGlobusCore, WPGlobusCoreData */
+/*jslint browser: true*/
+/*global jQuery, console, WPGlobusCore, WPGlobusCoreData, WPGlobusWidgets*/
 
-var WPGlobusWidgets;
+//var WPGlobusWidgets;
 
 (function($) {
     "use strict";
-	var api;
-	api = WPGlobusWidgets = {
+	
+	if ( typeof WPGlobusWidgets === 'undefined' ) {
+		return;	
+	}
+	
+	var api = {
 		init: function() {
-			api.add_elements();
+			api.addElements();
 			api.attachListeners();
 		},
 		wysiwygClean: function(){
@@ -31,11 +35,11 @@ var WPGlobusWidgets;
 				}	
 			});
 		},
-		add_elements : function(get_by, coid) {
+		addElements : function(get_by, coid) {
 			var id, elem = [], get_by_coid;
 			elem[0] = 'input[type="text"]';
 			elem[1] = 'textarea';
-			if ( typeof get_by == 'undefined' || get_by == 'class' ) {
+			if ( typeof get_by === 'undefined' || get_by == 'class' ) {
 				get_by_coid = '.widget-liquid-right .widget .widget-content';
 				$.each(elem, function(i,e){
 					api.make_clone(get_by_coid, e);
@@ -50,12 +54,25 @@ var WPGlobusWidgets;
 		make_clone: function(get_by_coid, type) {
 			$(get_by_coid+' '+type).each(function(i,e){
 				var element = $(e),
-					clone, name, text, id;
+					clone, name, text, id, dis = false;
 
 				id = element.attr('id');
-				if ( typeof id == 'undefined' || -1 != id.indexOf( '-number') ) {
+				
+				if ( typeof id === 'undefined' || -1 != id.indexOf( '-number') ) {
 					return true;
 				}	
+				
+				/**
+				 * check for disabled mask
+				 */
+				_.each( WPGlobusWidgets.disabledMask, function(mask){ 
+					if ( -1 != id.indexOf( mask ) ) {
+						dis = true;
+						return false;
+					}	
+				});
+				 
+				if ( dis )  return true;
 
 				clone = $('#'+id).clone();
 				$(element).addClass('wpglobus-dialog-field-source hidden');
@@ -87,7 +104,7 @@ var WPGlobusWidgets;
 						$('.widget-liquid-right .widget').each(function(i,e){
 							var id = $(e).attr('id');
 							if ( -1 !== id.indexOf(s[0]) ) {
-								api.add_elements('id', id);
+								api.addElements('id', id);
 								api.wysiwygClean();
 							}	
 						});	
@@ -127,4 +144,7 @@ var WPGlobusWidgets;
 			});				
 		}	
 	};
+	
+	WPGlobusWidgets = $.extend({}, WPGlobusWidgets, api);
+
 })(jQuery);

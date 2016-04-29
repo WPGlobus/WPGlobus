@@ -864,6 +864,31 @@ class WPGlobus_Filters {
 
 		return $value;
 	}
+	
+	/**
+	 * Localize feed url
+	 * @since 1.5.3
+	 *	
+	 * @scope front
+	 */
+	public static function fetch_feed_options( $obj ) {
+
+		/**
+		 * Filter to disable localize feed url.
+		 * @since 1.5.3
+		 *
+		 * @param boolean			True is value by default.
+		 * @param SimplePie object  $obj.
+		 * @return boolean
+		 */
+		if ( apply_filters( 'wpglobus_localize_feed_url', true, $obj ) ) {
+			if ( ! empty( $obj->feed_url ) ) {
+				$obj->feed_url = WPGlobus_Utils::localize_url( $obj->feed_url );
+			}	
+		
+		}
+	}	
+	
 
 } // class
 

@@ -1374,14 +1374,35 @@ class WPGlobus {
 			}
 
 			if ( 'widgets.php' == $page ) {
+				
+				$disabled_widgets_mask = array( 'rss-url' );
+				
+				/**
+				 * Filter to disable making multilingual element on widgets.php page.
+				 * @since 1.5.3
+				 *
+				 * @param array	 	$disabled_widgets_mask Array of disabled masks.
+				 * @return array
+				 */
+				$disabled_widgets_mask = apply_filters( 'wpglobus_disabled_widgets_mask', $disabled_widgets_mask );				
+				
 				wp_register_script(
 					'wpglobus-widgets',
 					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-widgets" . self::$_SCRIPT_SUFFIX . ".js",
-					array( 'jquery', 'wpglobus-admin' ),
+					array( 'jquery', 'underscore', 'wpglobus-admin' ),
 					WPGLOBUS_VERSION,
 					true
 				);
 				wp_enqueue_script( 'wpglobus-widgets' );
+				wp_localize_script(
+					'wpglobus-widgets',
+					'WPGlobusWidgets',
+					array(
+						'wpglobus_version'  => WPGLOBUS_VERSION,
+						'disabledMask' 		=> $disabled_widgets_mask
+					)
+				);	
+				
 			}
 
 		}    // endif $enabled_pages
