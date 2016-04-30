@@ -7,17 +7,25 @@
 
 /**  */
 class WPGlobus_YoastSEO {
-
+	
+	static $yoastseo_separator = '';
+	
 	public static function controller() {
-
+	
 		if ( is_admin() ) {
-
+			
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
 
 				/** @see \WPGlobus::__construct */
 				WPGlobus::O()->vendors_scripts['WPSEO'] = true;
 
 				if ( WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
+					
+					/**
+					 * @since 1.5.3
+					 */
+					add_filter( 'wpseo_replacements_filter_sep', array( __CLASS__, 'filter__get_separator' ), 999 );
+					
 					/**
 					 * To translate Yoast columns on edit.php page
 					 */
@@ -25,6 +33,7 @@ class WPGlobus_YoastSEO {
 						'WPGlobus_YoastSEO',
 						'filter__wpseo_columns'
 					), 0 );
+
 				}
 
 				add_action( 'admin_print_scripts', array(
@@ -96,6 +105,19 @@ class WPGlobus_YoastSEO {
 		}
 
 	}
+	
+	/**
+	 * Filter to get yoast seo separator.
+	 *
+	 * @since 1.5.3
+	 *
+	 * @param array $sep Contains separator.
+	 * @return string
+	 */	
+	public static function filter__get_separator( $sep ) {
+		self::$yoastseo_separator = $sep;
+		return $sep;
+	}	
 	
 	/**
 	 * Filter which editor should be displayed by default.
@@ -440,7 +462,7 @@ class WPGlobus_YoastSEO {
 	
 	/**
 	 * To translate Yoast columns
-	 * @see   WPSEO_Metabox::column_content
+	 * @see   WPSEO_Meta_Columns::column_content
 	 * @scope admin
 	 *
 	 * @param string $text
@@ -450,15 +472,33 @@ class WPGlobus_YoastSEO {
 	 * @link  https://github.com/Yoast/wordpress-seo/pull/1946
 	 */
 	public static function filter__wpseo_columns( $text ) {
+		
+		if ( WPGlobus_WP::is_filter_called_by( 'column_content', 'WPSEO_Meta_Columns' ) ) {
+			
+			if ( false !== strpos( $text, self::$yoastseo_separator ) ) {
 
-		if ( WPGlobus_WP::is_filter_called_by( 'column_content', 'WPSEO_Metabox' ) ) {
+				$title_arr = explode( self::$yoastseo_separator, $text );
+				
+				foreach( $title_arr as $key=>$piece ) {
+					if ( $key == 0 ) {
+						$title_arr[ $key ] = WPGlobus_Core::text_filter( $piece, WPGlobus::Config()->language ) . ' ';
+					} else {
+						$title_arr[ $key ] = ' ' . WPGlobus_Core::text_filter( $piece, WPGlobus::Config()->language );
+					}	
+				}
+				
+				$text = implode( self::$yoastseo_separator, $title_arr );
+				
+			} else {
 
-			$text = WPGlobus_Core::text_filter(
-				$text,
-				WPGlobus::Config()->language,
-				null,
-				WPGlobus::Config()->default_language
-			);
+				$text = WPGlobus_Core::text_filter(
+					$text,
+					WPGlobus::Config()->language,
+					null,
+					WPGlobus::Config()->default_language
+				);
+				
+			}	
 		}
 
 		return $text;
