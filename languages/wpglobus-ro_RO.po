@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.3.0\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-04-25 16:55:06+00:00\n"
+"POT-Creation-Date: 2016-04-30 14:49:48+00:00\n"
 "PO-Revision-Date: 2015-12-09 18:36+0200\n"
 "Last-Translator: The WPGlobus Team <support@wpglobus.com>\n"
 "Language-Team: The WPGlobus Team <support@wpglobus.com>\n"
@@ -584,11 +584,11 @@ msgstr "Nu puteți dezactiva limba principală."
 msgid "*) Available after the menu is saved."
 msgstr "*) Disponibil după ce meniul este salvat."
 
-#: includes/class-wpglobus.php:2721
+#: includes/class-wpglobus.php:2742
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Trebuie să activezi Pretty Permalinks pentru a folosi WPGlobus."
 
-#: includes/class-wpglobus.php:2723
+#: includes/class-wpglobus.php:2744
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -596,7 +596,7 @@ msgstr ""
 "Vă rugăm să mergeți la Setări> Permalinks> Setări comune și alegeți o "
 "opțiune non-default."
 
-#: includes/class-wpglobus.php:2862
+#: includes/class-wpglobus.php:2883
 msgid "Add"
 msgstr "Adaugă"
 

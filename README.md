@@ -146,11 +146,18 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.5.3 ###
+
+* ADDED:
+	* Localize RSS feed URL.
+* FIXED:
+	* Disappearing translated headline and other Yoast 3.2 - related issues.
+
 ### 1.5.2 ###
 
 * FIXED:
 	* Several issues related to Yoast SEO 3.2.
-	
+
 ### 1.5.1 ###
 
 * ADDED:
