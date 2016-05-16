@@ -146,6 +146,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.5.4 ###
+
+* ADDED:
+	* Basic multilingual functionality for the `MailChimp for WP` plugin.
+
 ### 1.5.3 ###
 
 * ADDED:
