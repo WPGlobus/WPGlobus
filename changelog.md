@@ -6,6 +6,8 @@
 
 * ADDED:
 	* Basic multilingual functionality for the `MailChimp for WP` plugin.
+* FIXED:
+	* Do not do "auto-paragraphing" if the `wpautop` filter has been disabled (props @emechkov).
 
 ### 1.5.3 ###
 
