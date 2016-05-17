@@ -6,6 +6,7 @@
 
 * ADDED:
 	* Basic multilingual functionality for the `MailChimp for WP` plugin.
+	* Support for multilingual links in Slider Revolution plugin.
 * FIXED:
 	* Do not do "auto-paragraphing" if the `wpautop` filter has been disabled (props @emechkov).
 

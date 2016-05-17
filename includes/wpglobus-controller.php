@@ -339,6 +339,7 @@ if ( class_exists( 'RevSliderFront' ) ) {
 	 * @since 1.5.0
 	 */	
 	require_once 'vendor/class-wpglobus-revslider.php';
+	WPGlobus_RevSlider::controller();
 	
 }
 
