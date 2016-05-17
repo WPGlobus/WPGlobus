@@ -1091,7 +1091,17 @@ class WPGlobus {
 						}	
 
 					endif;
+					
+					/**
+					 * Add raw data for Navigation Label
+					 */
+					$menu_items[ $item->ID ][ 'input.edit-menu-item-title' ][ 'source' ] = $item->post_title;
 
+					/**
+					 * Add raw data for Title Attribute
+					 */					
+					$menu_items[ $item->ID ][ 'input.edit-menu-item-attr-title' ][ 'source' ] = $item->post_excerpt;
+					
 					$menu_items[ $item->ID ]['item-title'] =
 						WPGlobus_Core::text_filter( $item->post_title, $config->default_language );
 
@@ -1101,16 +1111,31 @@ class WPGlobus {
 
 						$return =
 							$language == self::Config()->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
-
+							
+						/**
+						 * Navigation Label
+						 */
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-title']['caption']      =
 							WPGlobus_Core::text_filter( $item->post_title, $language, $return );
+							
+						/**
+						 * Title Attribute
+						 */								
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-attr-title']['caption'] =
 							WPGlobus_Core::text_filter( $item->post_excerpt, $language, $return );
 
+						/**
+						 * Navigation Label classes
+						 */
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-title']['class']      =
 							'widefat wpglobus-menu-item wpglobus-item-title wpglobus-translatable';
+							
+						/**
+						 * Title Attribute classes
+						 */								
 						$menu_items[ $item->ID ][ $language ]['input.edit-menu-item-attr-title']['class'] =
 							'widefat wpglobus-menu-item wpglobus-item-attr wpglobus-translatable';
+							
 					}
 					
 				endforeach;

@@ -941,14 +941,21 @@ jQuery(document).ready(function () {
                         item_id = id.replace('menu-item-', '');
 
                     $.each(['input.edit-menu-item-title', 'input.edit-menu-item-attr-title'], function (input_index, input) {
-                        var i = $('#' + id + ' ' + input);
-                        var p = $('#' + id + ' ' + input).parents('p');
+                        var $i = $('#' + id + ' ' + input);
+						if ( $i.val() != WPGlobusAdmin.data.items[ item_id ][ input ][ 'source' ] ) {
+							/**
+							 * fix for case when value resets by WP core
+							 */
+							$i.val( WPGlobusAdmin.data.items[ item_id ][ input ][ 'source' ] );	
+						}	
+						
+                        var p = $( '#' + id + ' ' + input ).parents('p');
                         var height = 0;
-
+						
                         $.each(WPGlobusAdmin.data.open_languages, function (index, language) {
-                            var new_element = $(i[0].outerHTML);
-                            new_element.attr('id', $(i).attr('id') + '-' + language);
-                            new_element.attr('name', $(i).attr('id') + '-' + language);
+                            var new_element = $i.clone();
+                            new_element.attr('id', $i.attr('id') + '-' + language);
+                            new_element.attr('name', $i.attr('id') + '-' + language);
                             new_element.attr('data-language', language);
                             new_element.attr('data-item-id', item_id);
                             new_element.attr('placeholder', WPGlobusAdmin.data.en_language_name[language]);
@@ -960,13 +967,17 @@ jQuery(document).ready(function () {
                                 new_element.attr('class', classes);
                             }
 
-                            new_element.attr('value', WPGlobusAdmin.data.items[item_id][language][input]['caption']);
-                            new_element.css('margin-bottom', '0.6em');
-                            $(p).append(new_element[0].outerHTML);
-                            height = index;
+							if ( WPGlobusAdmin.data.items[ item_id ][ language ][ input ][ 'caption' ] != '' ) {
+								new_element.attr('value', WPGlobusAdmin.data.items[item_id][language][input]['caption']);
+							} else {
+								new_element.attr('value', '');
+							} 	
+							new_element.css('margin-bottom', '0.6em');
+							$(p).append( new_element );
+							height = index;							
                         });
                         height = (height + 1) * 40;
-                        $(i).css('display', 'none').attr('class', '').addClass('widefat wpglobus-hidden');
+                        $i.css('display', 'none').attr('class', '').addClass('widefat wpglobus-hidden');
                         $(p).css('height', height + 'px').addClass('wpglobus-menu-item-box');
 
                     });
