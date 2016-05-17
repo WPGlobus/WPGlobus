@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-05-16 18:48:03+00:00\n"
+"POT-Creation-Date: 2016-05-17 16:36:13+00:00\n"
 "PO-Revision-Date: 2015-09-20 10:30+0000\n"
 "Last-Translator: Maciej Gryniuk <maciejka45@gmail.com>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/wp-translations/"
@@ -579,16 +579,16 @@ msgstr "Sposób wyboru"
 msgid "You cannot disable the main language."
 msgstr "Nie możesz wyłączyć głównego języka."
 
-#: includes/class-wpglobus.php:1121
+#: includes/class-wpglobus.php:1146
 msgid "*) Available after the menu is saved."
 msgstr "*) Dostępne po zapisaniu menu."
 
-#: includes/class-wpglobus.php:2746
+#: includes/class-wpglobus.php:2771
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Aby korzystać z WPGlobus'a, musisz ustawić przyjazne bezpośrednie odnośniki."
 
-#: includes/class-wpglobus.php:2748
+#: includes/class-wpglobus.php:2773
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -596,7 +596,7 @@ msgstr ""
 "Proszę przejść do Ustawienia > Bezpośrednie odnośniki > Popularne ustawienia "
 "i wybrać opcję Nazwa wpisu."
 
-#: includes/class-wpglobus.php:2887
+#: includes/class-wpglobus.php:2912
 msgid "Add"
 msgstr "Dodaj"
 
