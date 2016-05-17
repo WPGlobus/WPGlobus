@@ -130,14 +130,22 @@ if ( ! class_exists( 'WPGlobus_Updater_Key' ) ) :
 
 			$request = wp_safe_remote_get( $target_url );
 
-			if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
+			if ( is_wp_error( $request ) || (int) wp_remote_retrieve_response_code( $request ) !== 200 ) {
 				// Request failed
+				$error_messages = $request->get_error_messages();
+				if ( count( $error_messages ) ) {
+					add_settings_error(
+						'activate_text',
+						'activate_msg',
+						implode( '; ', $error_messages ),
+						'error'
+					);
+				}
+
 				return false;
 			}
 
-			$response = wp_remote_retrieve_body( $request );
-
-			return $response;
+			return wp_remote_retrieve_body( $request );
 		}
 
 	} //class

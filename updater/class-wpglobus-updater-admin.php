@@ -319,11 +319,11 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 		}
 
 		/**
-		 * @param array $activate_results
+		 * @param array|null $activate_results
 		 */
-		protected function _print_activation_error_message( Array $activate_results ) {
+		protected function _print_activation_error_message( $activate_results ) {
 
-			if ( $activate_results == false ) {
+			if ( ! is_array( $activate_results ) || $activate_results == false ) {
 				add_settings_error( 'api_key_check_text', 'api_key_check_error', __( 'Connection failed to the License Key API server. Try again later.', 'wpglobus' ), 'error' );
 			}
 

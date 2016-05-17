@@ -4,12 +4,15 @@
 
 ### 1.5.4 ###
 
+### 1.5.4 ###
+
 * ADDED:
 	* Basic multilingual functionality for the `MailChimp for WP` plugin.
 	* Support for multilingual links in the `Slider Revolution` plugin.
 * FIXED:
 	* Do not do "auto-paragraphing" if the `wpautop` filter has been disabled (props @emechkov).
 	* Menu translations lost in some rare situations.
+	* Better error handling in the Updater module.
 
 ### 1.5.3 ###
 

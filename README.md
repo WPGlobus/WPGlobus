@@ -154,6 +154,7 @@ No known backward incompatibility issues.
 * FIXED:
 	* Do not do "auto-paragraphing" if the `wpautop` filter has been disabled (props @emechkov).
 	* Menu translations lost in some rare situations.
+	* Better error handling in the Updater module.
 
 ### 1.5.3 ###
 
