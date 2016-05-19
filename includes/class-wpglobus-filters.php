@@ -280,33 +280,15 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__sanitize_title( $title ) {
 
-		$ok_to_filter = false;
-
-		$callers = debug_backtrace();
-		if ( isset( $callers[4]['function'] ) ) {
-			if ( $callers[4]['function'] === 'get_sample_permalink' ) {
-				/**
-				 * Case 1
-				 */
-				$ok_to_filter = true;
-			} elseif (
-				/**
-				 * Case 2
-				 */
-				$callers[4]['function'] === 'wp_insert_post'
-				/** @todo This is probably not required. Keeping it until stable version */
-				// and ( isset( $callers[5]['function'] ) and $callers[5]['function'] === 'wp_update_post' )
-			) {
-				$ok_to_filter = true;
-			}
-
-		}
-
-		if ( $ok_to_filter ) {
+		if (
+			WPGlobus_WP::is_filter_called_by( 'get_sample_permalink' ) ||
+			WPGlobus_WP::is_filter_called_by( 'wp_insert_post' )
+		) {
 			/**
-			 * @internal Note: the DEFAULT language, not the current one
+			 * @internal_note: the DEFAULT language, not the current one
 			 */
-			$title = WPGlobus_Core::text_filter( $title, WPGlobus::Config()->default_language );
+			$title = WPGlobus_Core::text_filter(
+				$title, WPGlobus::Config()->default_language );
 		}
 
 		return $title;
@@ -864,11 +846,11 @@ class WPGlobus_Filters {
 
 		return $value;
 	}
-	
+
 	/**
 	 * Localize feed url
 	 * @since 1.5.3
-	 *	
+	 *
 	 * @scope front
 	 */
 	public static function fetch_feed_options( $obj ) {
@@ -884,11 +866,11 @@ class WPGlobus_Filters {
 		if ( apply_filters( 'wpglobus_localize_feed_url', true, $obj ) ) {
 			if ( ! empty( $obj->feed_url ) ) {
 				$obj->feed_url = WPGlobus_Utils::localize_url( $obj->feed_url );
-			}	
-		
+			}
+
 		}
-	}	
-	
+	}
+
 
 } // class
 

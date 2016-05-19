@@ -121,6 +121,7 @@ class WPGlobus_WP {
 	 * @todo Unit test
 	 * @todo What if we check class only?
 	 * @todo Use the form class::method ?
+	 * @todo Check multiple functions and classes (array)
 	 */
 	public static function is_filter_called_by( $function, $class = '' ) {
 		if ( empty( $function ) ) {
@@ -131,6 +132,14 @@ class WPGlobus_WP {
 		 * WP calls filters at level 4. This function adds one more level.
 		 */
 		$trace_level = 5;
+		if ( version_compare( PHP_VERSION, '7.0.0', '>=' ) ) {
+			/**
+			 * In PHP 7, `call_user_func_array` no longer appears in the trace
+			 * as a separate call.
+			 * @since 1.5.4
+			 */
+			$trace_level --;
+		}
 
 		$callers = debug_backtrace();
 		if ( empty( $callers[ $trace_level ] ) ) {
