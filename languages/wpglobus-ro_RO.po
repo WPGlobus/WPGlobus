@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.3.0\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-05-17 16:36:13+00:00\n"
+"POT-Creation-Date: 2016-05-19 20:41:33+00:00\n"
 "PO-Revision-Date: 2015-12-09 18:36+0200\n"
 "Last-Translator: The WPGlobus Team <support@wpglobus.com>\n"
 "Language-Team: The WPGlobus Team <support@wpglobus.com>\n"
@@ -833,7 +833,7 @@ msgid "Deactivates License so it can be used on another site."
 msgstr "Dezactivează licența astfel încât să poată fi folosită pe un alt site."
 
 #: updater/class-wpglobus-updater-admin.php:143
-#: updater/class-wpglobus-updater.php:173
+#: updater/class-wpglobus-updater.php:175
 msgid "License Activation"
 msgstr "Activare licență"
 
@@ -850,7 +850,7 @@ msgid "License email"
 msgstr "Email licență"
 
 #: updater/class-wpglobus-updater-admin.php:179
-#: updater/class-wpglobus-updater.php:174
+#: updater/class-wpglobus-updater.php:176
 msgid "License Deactivation"
 msgstr "Dezactivare licență"
 
@@ -858,24 +858,28 @@ msgstr "Dezactivare licență"
 msgid "Deactivate License Key"
 msgstr "Dezactivează codul de licență"
 
-#: updater/class-wpglobus-updater-admin.php:202
+#: updater/class-wpglobus-updater-admin.php:205
+msgid "Please contact support@wpglobus.com for assistance."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:211
 msgid "Active"
 msgstr "Activ"
 
-#: updater/class-wpglobus-updater-admin.php:203
+#: updater/class-wpglobus-updater-admin.php:212
 msgid "Inactive"
 msgstr "Inactiv"
 
-#: updater/class-wpglobus-updater-admin.php:296
+#: updater/class-wpglobus-updater-admin.php:306
 msgid "License activated. "
 msgstr "Licență activă"
 
-#: updater/class-wpglobus-updater-admin.php:327
+#: updater/class-wpglobus-updater-admin.php:337
 msgid "Connection failed to the License Key API server. Try again later."
 msgstr ""
 "Conexiunea nu a reușit datorită licenței de server API. Încercați mai târziu."
 
-#: updater/class-wpglobus-updater-admin.php:393
+#: updater/class-wpglobus-updater-admin.php:404
 msgid ""
 "The license could not be deactivated. Use the License Deactivation tab to "
 "manually deactivate the license before activating a new license."
@@ -883,15 +887,15 @@ msgstr ""
 "Licența nu poate fi dezactivată. Utilizați fila de dezactivare licență "
 "pentru a dezactiva manual licența înainte de a activa o nouă licență."
 
-#: updater/class-wpglobus-updater-admin.php:411
+#: updater/class-wpglobus-updater-admin.php:422
 msgid "Please select the checkbox to confirm your intention."
 msgstr "Vă rugăm să bifați caseta de selectare pentru a confirma intenția ta."
 
-#: updater/class-wpglobus-updater-admin.php:435
+#: updater/class-wpglobus-updater-admin.php:446
 msgid "License / email not set or already deactivated."
 msgstr "Licență / e-mail nu sunt setate sau sunt deja dezactivate."
 
-#: updater/class-wpglobus-updater-admin.php:454
+#: updater/class-wpglobus-updater-admin.php:465
 msgid "License deactivated. "
 msgstr "Licență dezactivată."
 
@@ -957,20 +961,28 @@ msgstr ""
 "Abonament schimbat. Vă rugăm să introduceți noul cod de licență în pagina de "
 "setări."
 
-#: updater/class-wpglobus-updater.php:171
+#: updater/class-wpglobus-updater-requests.php:145
+msgid "Licensing server connection error."
+msgstr ""
+
+#: updater/class-wpglobus-updater-requests.php:156
+msgid "Licensing server connection error (%d)."
+msgstr ""
+
+#: updater/class-wpglobus-updater.php:173
 msgid "License"
 msgstr "Licență"
 
-#: updater/class-wpglobus-updater.php:426
+#: updater/class-wpglobus-updater.php:428
 msgid "License has not been activated."
 msgstr "Licența nu a fost activată"
 
-#: updater/class-wpglobus-updater.php:430
+#: updater/class-wpglobus-updater.php:432
 msgid "Click here to enter the license key and get the updates."
 msgstr "Click aici pentru a introduce licența și pentru a obține actualizări."
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
-#: updater/class-wpglobus-updater.php:458
+#: updater/class-wpglobus-updater.php:460
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
 "WP_ACCESSIBLE_HOSTS."

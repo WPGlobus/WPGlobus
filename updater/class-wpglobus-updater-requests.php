@@ -130,19 +130,31 @@ if ( ! class_exists( 'WPGlobus_Updater_Key' ) ) :
 
 			$request = wp_safe_remote_get( $target_url );
 
-			if ( is_wp_error( $request ) || (int) wp_remote_retrieve_response_code( $request ) !== 200 ) {
+			if ( is_wp_error( $request ) ) {
 				// Request failed
+
+				$error_message = '';
+
 				$error_messages = $request->get_error_messages();
 				if ( count( $error_messages ) ) {
-					add_settings_error(
-						'activate_text',
-						'activate_msg',
-						implode( '; ', $error_messages ),
-						'error'
-					);
+					$error_message = implode( '; ', $error_messages );
 				}
 
-				return false;
+				return json_encode( array(
+					WPGlobus_Updater::KEY_INTERNAL_ERROR => implode( ' ', array(
+						__( 'Licensing server connection error.', 'wpglobus' ),
+						$error_message
+					) ),
+				) );
+
+			}
+
+			$response_code = (int) wp_remote_retrieve_response_code( $request );
+
+			if ( 200 !== $response_code ) {
+				return json_encode( array(
+					WPGlobus_Updater::KEY_INTERNAL_ERROR => sprintf( __( 'Licensing server connection error (%d).', 'wpglobus' ), $response_code )
+				) );
 			}
 
 			return wp_remote_retrieve_body( $request );

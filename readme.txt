@@ -128,6 +128,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.5.4.1 =
+
+* FIXED:
+	* Better error handling in the Updater module (continued).
+
 = 1.5.4 =
 
 * ADDED:

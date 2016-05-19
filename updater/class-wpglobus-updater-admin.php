@@ -196,16 +196,26 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 		public function wc_am_api_key_status() {
 			/** @var array $license_status */
 			$license_status       = $this->license_key_status();
-			$license_status_check =
-				( ! empty( $license_status['status_check'] ) &&
-				  $license_status['status_check'] === 'active' ) ?
-					__( 'Active', 'wpglobus' ) :
-					__( 'Inactive', 'wpglobus' );
-			if ( ! empty( $license_status_check ) ) {
-				echo $license_status_check;
+
+			if ( isset( $license_status[ WPGlobus_Updater::KEY_INTERNAL_ERROR ] ) ) {
+				// Something was wrong with the connection to the API server.
+				echo '<strong style="background: yellow; color: black">' .
+				     esc_html( $license_status[ WPGlobus_Updater::KEY_INTERNAL_ERROR ] ) .
+				     '</strong><br/> ' .
+				     esc_html__( 'Please contact support@wpglobus.com for assistance.', 'wpglobus' );
 			}
-			if ( ! empty( $license_status['activations_remaining'] ) ) {
-				echo ' (' . $license_status['activations_remaining'] . ')';
+			else {
+				$license_status_check =
+					( ! empty( $license_status['status_check'] ) &&
+					  'active' === strtolower( $license_status['status_check'] ) ) ?
+						__( 'Active', 'wpglobus' ) :
+						__( 'Inactive', 'wpglobus' );
+				if ( ! empty( $license_status_check ) ) {
+					echo $license_status_check;
+				}
+				if ( ! empty( $license_status['activations_remaining'] ) ) {
+					echo ' (' . $license_status['activations_remaining'] . ')';
+				}
 			}
 		}
 
@@ -367,7 +377,8 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				'licence_key' => $this->WPGlobus_Updater->ame_options[ $this->WPGlobus_Updater->ame_api_key ],
 			);
 
-			return json_decode( $this->WPGlobus_Updater->key()->status( $args ), true );
+			$status = $this->WPGlobus_Updater->key()->status( $args );
+			return json_decode( $status, true );
 		}
 
 		/**

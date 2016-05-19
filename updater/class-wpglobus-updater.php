@@ -29,6 +29,8 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 	 * Class WPGlobus_Updater
 	 */
 	class WPGlobus_Updater {
+		
+		const KEY_INTERNAL_ERROR = 'internal_error';
 
 		/**
 		 * @var string

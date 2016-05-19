@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-05-17 16:36:13+00:00\n"
+"POT-Creation-Date: 2016-05-19 20:41:33+00:00\n"
 "PO-Revision-Date: 2015-09-20 10:30+0000\n"
 "Last-Translator: Maciej Gryniuk <maciejka45@gmail.com>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/wp-translations/"
@@ -832,7 +832,7 @@ msgstr ""
 "Deaktywacja licencji oznacza, że będzie mogła być użyta na innej stronie."
 
 #: updater/class-wpglobus-updater-admin.php:143
-#: updater/class-wpglobus-updater.php:173
+#: updater/class-wpglobus-updater.php:175
 msgid "License Activation"
 msgstr "Aktywacja licencji"
 
@@ -849,7 +849,7 @@ msgid "License email"
 msgstr "Adres e-mail licencji"
 
 #: updater/class-wpglobus-updater-admin.php:179
-#: updater/class-wpglobus-updater.php:174
+#: updater/class-wpglobus-updater.php:176
 msgid "License Deactivation"
 msgstr "Deaktywacja licencji"
 
@@ -857,24 +857,28 @@ msgstr "Deaktywacja licencji"
 msgid "Deactivate License Key"
 msgstr "Zdezaktywuj klucz licencji"
 
-#: updater/class-wpglobus-updater-admin.php:202
+#: updater/class-wpglobus-updater-admin.php:205
+msgid "Please contact support@wpglobus.com for assistance."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:211
 msgid "Active"
 msgstr "Aktywny"
 
-#: updater/class-wpglobus-updater-admin.php:203
+#: updater/class-wpglobus-updater-admin.php:212
 msgid "Inactive"
 msgstr "Nieaktywny"
 
-#: updater/class-wpglobus-updater-admin.php:296
+#: updater/class-wpglobus-updater-admin.php:306
 msgid "License activated. "
 msgstr "Licencja aktywowana. "
 
-#: updater/class-wpglobus-updater-admin.php:327
+#: updater/class-wpglobus-updater-admin.php:337
 msgid "Connection failed to the License Key API server. Try again later."
 msgstr ""
 "Łączenie z serwerem API klucza licencji nie powiodło się. Spróbuj później."
 
-#: updater/class-wpglobus-updater-admin.php:393
+#: updater/class-wpglobus-updater-admin.php:404
 msgid ""
 "The license could not be deactivated. Use the License Deactivation tab to "
 "manually deactivate the license before activating a new license."
@@ -882,15 +886,15 @@ msgstr ""
 "Licencja nie mogła zostać zdezaktywowana. Skorzystaj z zakładki Dezaktywacja "
 "licencji lub ręcznie zdezaktywuj licencję zanim aktywujesz nową."
 
-#: updater/class-wpglobus-updater-admin.php:411
+#: updater/class-wpglobus-updater-admin.php:422
 msgid "Please select the checkbox to confirm your intention."
 msgstr "Proszę zaznaczyć pole wyboru, aby potwierdzić swój zamiar."
 
-#: updater/class-wpglobus-updater-admin.php:435
+#: updater/class-wpglobus-updater-admin.php:446
 msgid "License / email not set or already deactivated."
 msgstr "Licencja/e-mail nie ustawiona lub już zdezaktywowana."
 
-#: updater/class-wpglobus-updater-admin.php:454
+#: updater/class-wpglobus-updater-admin.php:465
 msgid "License deactivated. "
 msgstr "Licencja zdezaktywowana. "
 
@@ -957,20 +961,28 @@ msgid ""
 msgstr ""
 "Subskrypcja zmieniona. Proszę podać nowy klucz licencji na stronie ustawień."
 
-#: updater/class-wpglobus-updater.php:171
+#: updater/class-wpglobus-updater-requests.php:145
+msgid "Licensing server connection error."
+msgstr ""
+
+#: updater/class-wpglobus-updater-requests.php:156
+msgid "Licensing server connection error (%d)."
+msgstr ""
+
+#: updater/class-wpglobus-updater.php:173
 msgid "License"
 msgstr "Licencja"
 
-#: updater/class-wpglobus-updater.php:426
+#: updater/class-wpglobus-updater.php:428
 msgid "License has not been activated."
 msgstr "Licencja nie została aktywowana."
 
-#: updater/class-wpglobus-updater.php:430
+#: updater/class-wpglobus-updater.php:432
 msgid "Click here to enter the license key and get the updates."
 msgstr "Naciśnij tutaj, aby podać klucz licencji i otrzymywać aktualizacje."
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
-#: updater/class-wpglobus-updater.php:458
+#: updater/class-wpglobus-updater.php:460
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
 "WP_ACCESSIBLE_HOSTS."
