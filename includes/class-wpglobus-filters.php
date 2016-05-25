@@ -282,7 +282,8 @@ class WPGlobus_Filters {
 
 		if (
 			WPGlobus_WP::is_filter_called_by( 'get_sample_permalink' ) ||
-			WPGlobus_WP::is_filter_called_by( 'wp_insert_post' )
+			WPGlobus_WP::is_filter_called_by( 'wp_insert_post' ) ||
+			WPGlobus_WP::is_filter_called_by( 'wp_update_term' )
 		) {
 			/**
 			 * @internal_note: the DEFAULT language, not the current one

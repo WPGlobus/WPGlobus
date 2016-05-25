@@ -130,6 +130,8 @@ No known backward incompatibility issues.
 
 = 1.5.5 =
 
+* FIXED:
+	* Taxonomy slug re-generation when the title is already multilingual.
 * ADDED:
 	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
 
