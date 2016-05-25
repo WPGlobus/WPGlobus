@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.5 ###
+
+* ADDED:
+	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
+
 ### 1.5.4.1 ###
 
 * FIXED:
