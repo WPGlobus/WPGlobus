@@ -597,6 +597,15 @@ class WPGlobus {
 				$result               = array();
 				$bulkedit_post_titles = array();
 				foreach ( $order['title'] as $id => $title ) {
+					
+					if ( ! WPGlobus_Core::has_translations( $title['source'] ) ) {
+						/**
+						 * In some cases we have lost raw data for post title on edit.php page
+						 * for example product post type from woo
+						 */
+						$title['source'] = get_post_field( 'post_title', $id );
+					}	
+					
 					$result[ $id ]['source'] = $title['source'];
 
 					$term = null; // should initialize before if because used in the next foreach
