@@ -152,7 +152,6 @@ No known backward incompatibility issues.
 	* Taxonomy slug re-generation when the title is already multilingual.
 * ADDED:
 	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
-	* Enable multilingual strings in the ALT image attributes in Media Library (`_wp_attachment_image_alt` meta is now filtered).
 
 ### 1.5.4.1 ###
 

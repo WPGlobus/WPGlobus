@@ -10,19 +10,8 @@
  */
 class WPGlobus_Filters {
 
-	/**
-	 * Meta keys where data can be multilingual.
-	 *
-	 * @var array
-	 */
-	protected static $multilingual_meta_keys = array(
-		/**
-		 * Enable multilingual in the ALT image attributes in Media.
-		 *
-		 * @since 1.5.5
-		 */
-		'_wp_attachment_image_alt' => true
-	);
+	/** @var string[] Meta keys where data can be multilingual  */
+	protected static $multilingual_meta_keys = array();
 
 	/**
 	 * This is the basic filter used to extract the text portion in the current language from a string.
