@@ -115,9 +115,6 @@ class WPGlobus_YoastSEO {
 	 * @return string
 	 */
 	public static function filter__get_separator( $sep ) {
-		if ( empty( $sep ) ) {
-			$sep = '-';	
-		}	
 		self::$yoastseo_separator = $sep;
 		return $sep;
 	}
