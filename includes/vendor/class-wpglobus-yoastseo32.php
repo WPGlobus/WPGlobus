@@ -475,7 +475,7 @@ class WPGlobus_YoastSEO {
 
 		if ( WPGlobus_WP::is_filter_called_by( 'column_content', 'WPSEO_Meta_Columns' ) ) {
 
-			if ( false !== strpos( $text, self::$yoastseo_separator ) ) {
+			if ( self::$yoastseo_separator && false !== strpos( $text, self::$yoastseo_separator ) ) {
 
 				$title_arr = explode( self::$yoastseo_separator, $text );
 
