@@ -1382,7 +1382,7 @@ class WPGlobus {
 				 * Filter to disable translation of selected ACF and ACF Pro fields.
 				 * @since 1.5.0
 				 *
-				 * To exclude field in ACF plugin you need to use the field name.
+				 * To exclude field in ACF plugin you need to use the field name from Field Group ( usually wp-admin/edit.php?post_type=acf ).
 				 * To exclude field in ACF Pro plugin you need to use id, see Wrapper Attributes section on field's edit page.
 				 *
 				 * @param array	 	$disabled_fields Default is empty array.
