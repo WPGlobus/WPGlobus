@@ -1312,6 +1312,16 @@ class WPGlobus {
 				$post_content_autop = $post_content;
 			}
 
+			/**
+			 * Filter for data to send to JS.
+			 * Returning array.
+			 * @since 1.5.5
+			 *
+			 * @param array $data 			 	An array with data.
+			 * @param string $page_action 		Page.
+			 */
+			$data = apply_filters( 'wpglobus_localize_data', $data, $page_action );					
+			
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusAdmin',
