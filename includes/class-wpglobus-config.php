@@ -188,8 +188,7 @@ class WPGlobus_Config {
 	public function __construct() {
 
 		/**
-		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all
-		 *        plugins already loaded their translations.
+		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all plugins already loaded their translations.
 		 */
 		add_action( 'plugins_loaded', array(
 			$this,

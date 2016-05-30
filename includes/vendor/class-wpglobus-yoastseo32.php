@@ -5,10 +5,11 @@
  * @since   1.5.1
  */
 
-/**  */
+// PHPStorm exclusion actually means "There are other files with the same class".
+/** @noinspection PhpUndefinedClassInspection */
 class WPGlobus_YoastSEO {
 
-	static $yoastseo_separator = '';
+	public static $yoastseo_separator = '';
 
 	public static function controller() {
 
@@ -16,7 +17,7 @@ class WPGlobus_YoastSEO {
 
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
 
-				/** @see \WPGlobus::__construct */
+				/** @see WPGlobus::__construct */
 				WPGlobus::O()->vendors_scripts['WPSEO'] = true;
 
 				if ( WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
@@ -112,10 +113,12 @@ class WPGlobus_YoastSEO {
 	 * @since 1.5.3
 	 *
 	 * @param array $sep Contains separator.
+	 *
 	 * @return string
 	 */
 	public static function filter__get_separator( $sep ) {
 		self::$yoastseo_separator = $sep;
+
 		return $sep;
 	}
 
@@ -125,33 +128,34 @@ class WPGlobus_YoastSEO {
 	 * @since 1.4.8
 	 *
 	 * @param array $editors An array of editors. Accepts 'tinymce', 'html', 'test'.
+	 *
+	 * @return string
 	 */
-	public static function set_default_editor( $editors ) {
-
+	public static function set_default_editor(
+		/** @noinspection PhpUnusedParameterInspection */
+		$editors
+	) {
 		return 'tinymce';
-
 	}
 
 	/**
 	 * Filter meta data
-     *
-	 * @see
 	 *
-	 * @scope
-	 * @since 1.4.0
+	 * @since         1.4.0
 	 *
 	 * @param null   $res
 	 * @param int    $object_id
 	 * @param string $meta_key
 	 * @param bool   $single
 	 *
-	 * @return array || null
+	 * @return array|null
 	 */
-	public static function filter__metadata( $res, $object_id, $meta_key, $single ) {
+	public static function filter__metadata( /** @noinspection PhpUnusedParameterInspection */
+		$res, $object_id, $meta_key, $single ) {
 
 		/**
 		 * @todo make cache
-		 * @see get_metadata()
+		 * @see  get_metadata()
 		 */
 
 		if ( $single ) {
@@ -164,7 +168,7 @@ class WPGlobus_YoastSEO {
 			return null;
 		}
 
-		if ( $object_id != $post->ID ) {
+		if ( $object_id !== $post->ID ) {
 			return null;
 		}
 
@@ -179,14 +183,14 @@ class WPGlobus_YoastSEO {
 
 			$custom = array();
 
-			foreach( $post_meta as $obj ) {
+			foreach ( $post_meta as $obj ) {
 
-				if ( '_yoast_wpseo_title' == $obj->meta_key || '_yoast_wpseo_metadesc' == $obj->meta_key ) {
+				if ( '_yoast_wpseo_title' === $obj->meta_key || '_yoast_wpseo_metadesc' === $obj->meta_key ) {
 					$obj->meta_value = WPGlobus_Core::text_filter( $obj->meta_value, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 				}
 
 				$custom[ $obj->meta_key ][] = $obj->meta_value;
- 			}
+			}
 
 			return $custom;
 
@@ -197,8 +201,8 @@ class WPGlobus_YoastSEO {
 
 	/**
 	 * Filter results for Page Analysis tab in default language
-     *
-	 * @see wpseo_linkdex_results filter
+	 *
+	 * @see   wpseo_linkdex_results filter
 	 *
 	 * @scope admin
 	 * @since 1.2.2
@@ -206,14 +210,14 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @param array $results
 	 * @param array $job
-	 * @param WP_Post object $post
+	 * @param       WP_Post $post
 	 *
 	 * @return array
 	 */
 	public static function filter__wpseo_linkdex_results( $results, $job, $post ) {
 
-		$job['keyword'] 		= WPGlobus_Core::text_filter( $job['keyword'], WPGlobus::Config()->default_language );
-		$job['keyword_folded'] 	= WPGlobus_Core::text_filter( $job['keyword_folded'], WPGlobus::Config()->default_language );
+		$job['keyword']        = WPGlobus_Core::text_filter( $job['keyword'], WPGlobus::Config()->default_language );
+		$job['keyword_folded'] = WPGlobus_Core::text_filter( $job['keyword_folded'], WPGlobus::Config()->default_language );
 
 		$results = WPGlobus_YoastSEO::calculate_results(
 			$results,
@@ -231,14 +235,14 @@ class WPGlobus_YoastSEO {
 	 * @internal Unfortunately there isn't a filter available to hook into before returning the results
 	 * for get_post_meta(), get_post_custom() and the likes. That would have been the preferred solution.
 	 *
-	 * @see function calculate_results() in wordpress-seo\admin\class-metabox.php
-	 * @scope admin
-	 * @since 1.2.2
+	 * @see      function calculate_results() in wordpress-seo\admin\class-metabox.php
+	 * @scope    admin
+	 * @since    1.2.2
 	 *
-	 * @param array $results
+	 * @param array  $results
 	 * @param string $post_content
-	 * @param array $job,
-	 * @param WP_Post object $post Post to calculate the results for.
+	 * @param array  $job
+	 * @param        WP_Post $post Post to calculate the results for.
 	 *
 	 * @return  array
 	 */
@@ -252,6 +256,7 @@ class WPGlobus_YoastSEO {
 
 		// Check if the post content is not empty.
 		if ( ! empty( $post_content ) ) {
+			/** @noinspection PhpUsageOfSilenceOperatorInspection */
 			@$dom->loadHTML( $post_content );
 		}
 
@@ -269,12 +274,10 @@ class WPGlobus_YoastSEO {
 		$title = WPSEO_Meta::get_value( 'title', $post->ID );
 		if ( $title !== '' ) {
 			$job['title'] = $title;
-		}
-		else {
+		} else {
 			if ( isset( $options[ 'title-' . $post->post_type ] ) && $options[ 'title-' . $post->post_type ] !== '' ) {
 				$title_template = $options[ 'title-' . $post->post_type ];
-			}
-			else {
+			} else {
 				$title_template = '%%title%% - %%sitename%%';
 			}
 			$job['title'] = wpseo_replace_vars( $title_template, $post );
@@ -284,11 +287,10 @@ class WPGlobus_YoastSEO {
 		// Meta description.
 		$description = '';
 		// $desc_meta   = WPSEO_Meta::get_value( 'metadesc', $post->ID );
-		$desc_meta   = WPGlobus_Core::text_filter( WPSEO_Meta::get_value( 'metadesc', $post->ID ), WPGlobus::Config()->default_language );
+		$desc_meta = WPGlobus_Core::text_filter( WPSEO_Meta::get_value( 'metadesc', $post->ID ), WPGlobus::Config()->default_language );
 		if ( $desc_meta !== '' ) {
 			$description = $desc_meta;
-		}
-		elseif ( isset( $options[ 'metadesc-' . $post->post_type ] ) && $options[ 'metadesc-' . $post->post_type ] !== '' ) {
+		} elseif ( isset( $options[ 'metadesc-' . $post->post_type ] ) && $options[ 'metadesc-' . $post->post_type ] !== '' ) {
 			$description = wpseo_replace_vars( $options[ 'metadesc-' . $post->post_type ], $post );
 		}
 		unset( $desc_meta );
@@ -367,7 +369,7 @@ class WPGlobus_YoastSEO {
 	/**
 	 * Generate title
 	 *
-	 * @see get_title_from_options()
+	 * @see   get_title_from_options()
 	 * @scope front
 	 * @since 1.1.1
 	 *
@@ -479,7 +481,7 @@ class WPGlobus_YoastSEO {
 
 				$title_arr = explode( self::$yoastseo_separator, $text );
 
-				foreach( $title_arr as $key=>$piece ) {
+				foreach ( $title_arr as $key => $piece ) {
 					if ( $key == 0 ) {
 						$title_arr[ $key ] = WPGlobus_Core::text_filter( $piece, WPGlobus::Config()->language ) . ' ';
 					} else {
@@ -671,12 +673,12 @@ class WPGlobus_YoastSEO {
 					</li> <?php
 					$order ++;
 				} ?>
-			</ul>    <?php
+			</ul> <?php
 
 			/**
 			 * Get meta description
 			 */
-			$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
+			$metadesc = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
 
 			/**
 			 * Get title
@@ -687,7 +689,7 @@ class WPGlobus_YoastSEO {
 			 * From Yoast3 focus keyword key is '_yoast_wpseo_focuskw_text_input'
 			 */
 			// $focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true );
-			$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw_text_input', true );
+			$focuskw = get_post_meta( $post->ID, '_yoast_wpseo_focuskw_text_input', true );
 
 			/**
 			 * make yoast cite base
@@ -704,11 +706,11 @@ class WPGlobus_YoastSEO {
 			foreach ( WPGlobus::Config()->open_languages as $language ) {
 
 				$yoast_cite_base = WPGlobus_Utils::localize_url( $yoast_permalink, $language );
-				$yoast_cite_base = str_replace( array('http://','https://'), '', $yoast_cite_base );
+				$yoast_cite_base = str_replace( array( 'http://', 'https://' ), '', $yoast_cite_base );
 				$yoast_cite_base = str_replace( '//', '/', $yoast_cite_base );
 
 				$permalink['url'] = WPGlobus_Utils::localize_url( $permalink['url'], $language );
-				$url = apply_filters( 'wpglobus_wpseo_permalink', $permalink['url'], $language );
+				$url              = apply_filters( 'wpglobus_wpseo_permalink', $permalink['url'], $language );
 
 				if ( $url != $permalink['url'] ) {
 					/* We accept that user's filter make complete permalink for draft */
@@ -722,7 +724,7 @@ class WPGlobus_YoastSEO {
 						 */
 						$permalink['action'] = '';
 					}
-				}			?>
+				} ?>
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
 				     data-language="<?php echo $language; ?>"
 				     data-url-<?php echo $language; ?>="<?php echo $url; ?>"
@@ -735,7 +737,7 @@ class WPGlobus_YoastSEO {
 				</div> <?php
 			} ?>
 		</div>
-	<?php
+		<?php
 	}
 
 	/**
@@ -750,16 +752,16 @@ class WPGlobus_YoastSEO {
 	 */
 	public static function extract_title( $text ) {
 
-		$tr = '';
+		$tr    = '';
 		$title = '';
 
-		foreach( WPGlobus::Config()->enabled_languages as $l ) {
+		foreach ( WPGlobus::Config()->enabled_languages as $l ) {
 			$trans = WPGlobus_Core::text_filter( $text, $l, WPGlobus::RETURN_EMPTY );
 			if ( $l == WPGlobus::Config()->language ) {
 				$title = $trans;
 			}
 			if ( ! empty( $trans ) ) {
-				$tr = sprintf( WPGlobus::LOCALE_TAG_START, $l ) . $trans . WPGlobus::LOCALE_TAG_END;
+				$tr   = sprintf( WPGlobus::LOCALE_TAG_START, $l ) . $trans . WPGlobus::LOCALE_TAG_END;
 				$text = str_replace( $tr, '', $text );
 			}
 		}
