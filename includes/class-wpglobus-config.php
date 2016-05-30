@@ -574,6 +574,7 @@ class WPGlobus_Config {
 			$this->nav_menu = $wpglobus_option['use_nav_menu'];
 			unset( $wpglobus_option['use_nav_menu'] );
 		}
+		// This can be used in `wp-config` to override the options settings.
 		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
 		}
