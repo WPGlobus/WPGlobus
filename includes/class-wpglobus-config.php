@@ -265,7 +265,7 @@ class WPGlobus_Config {
 	 * Check plugin version and update versioning option
 	 *
 	 * @param stdClass $object Plugin_Upgrader
-	 * @param array  $options
+	 * @param array    $options
 	 *
 	 * @return void
 	 */
@@ -583,7 +583,9 @@ class WPGlobus_Config {
 		 * Get selector_wp_list_pages option
 		 * @since 1.0.7
 		 */
-		if ( empty( $wpglobus_option['selector_wp_list_pages']['show_selector'] ) || $wpglobus_option['selector_wp_list_pages']['show_selector'] == 0 ) {
+		if ( empty( $wpglobus_option['selector_wp_list_pages']['show_selector'] ) ||
+		     (int) $wpglobus_option['selector_wp_list_pages']['show_selector'] === 0
+		) {
 			$this->selector_wp_list_pages = false;
 		}
 		if ( isset( $wpglobus_option['selector_wp_list_pages'] ) ) {
