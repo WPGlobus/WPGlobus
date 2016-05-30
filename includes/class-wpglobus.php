@@ -465,10 +465,17 @@ class WPGlobus {
 				'on_wp_styles'
 			) );
 
-			add_action( 'wp_print_styles', array(
+			add_action( 'wp_enqueue_scripts', array(
 				$this,
-				'on_wp_scripts'
-			) );
+				'enqueue_wpglobus_js'
+			),
+				/**
+				 * Load this script as late as possible,
+				 * because it triggers the `wpglobus_current_language_changed` event.
+				 * @since 1.5.5
+				 */
+				PHP_INT_MAX
+			);
 		}
 
 	}
@@ -1726,19 +1733,18 @@ class WPGlobus {
 	}
 
 	/**
-	 * Enqueue scripts
-	 * @return void
+	 * Enqueue the `wpglobus.js` script.
 	 */
-	public function on_wp_scripts() {
+	public function enqueue_wpglobus_js() {
 
-		wp_register_script(
+		wp_enqueue_script(
 			'wpglobus',
 			self::$PLUGIN_DIR_URL . "includes/js/wpglobus" . self::$_SCRIPT_SUFFIX . ".js",
 			array( 'jquery', 'utils' ),
 			WPGLOBUS_VERSION,
 			true
 		);
-		wp_enqueue_script( 'wpglobus' );
+
 		wp_localize_script(
 			'wpglobus',
 			'WPGlobus',
