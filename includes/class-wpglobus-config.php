@@ -176,10 +176,10 @@ class WPGlobus_Config {
 
 	/**
 	 * WPGlobus extended options can be added via filter 'wpglobus_option_sections'
-	 * 
+	 *
 	 * @since 1.2.3
 	 * @var array
-	 */	
+	 */
 	public $extended_options = array();
 
 	/**
@@ -442,7 +442,7 @@ class WPGlobus_Config {
 		$this->flag['br'] = 'br.png';
 		$this->flag['pl'] = 'pl.png';
 		$this->flag['gl'] = 'galego.png';
-		$this->flag['uk'] = 'uk.png';
+		$this->flag['uk'] = 'ua.png';
 
 	}
 
@@ -485,7 +485,7 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['more_languages'] ) ) {
 			unset( $wpglobus_option['more_languages'] );
 		}
-		
+
 		/**
 		 * Get enabled languages and default language ( just one main language )
 		 */
@@ -509,7 +509,7 @@ class WPGlobus_Config {
 		 * Set available languages for editors
 		 */
 		$this->open_languages = $this->enabled_languages;
-		
+
 		/**
 		 * Set flags URL
 		 */
@@ -589,7 +589,7 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['selector_wp_list_pages'] ) ) {
 			unset( $wpglobus_option['selector_wp_list_pages'] );
 		}
-		
+
 		/**
 		 * Get custom CSS
 		 */
@@ -643,13 +643,13 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['last_tab'] ) ) {
 			unset( $wpglobus_option['last_tab'] );
 		}
-		
+
 		/**
 		 * Remaining wpglobus options after unset() is extended options
 		 * @since 1.2.3
 		 */
 		$this->extended_options = $wpglobus_option;
-		
+
 	}
 
 } //class
