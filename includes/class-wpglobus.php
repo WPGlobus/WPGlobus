@@ -1312,6 +1312,16 @@ class WPGlobus {
 				$post_content_autop = $post_content;
 			}
 
+			/**
+			 * Filter for data to send to JS.
+			 * Returning array.
+			 * @since 1.5.5
+			 *
+			 * @param array $data 			 	An array with data.
+			 * @param string $page_action 		Page.
+			 */
+			$data = apply_filters( 'wpglobus_localize_data', $data, $page_action );					
+			
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusAdmin',
@@ -2457,21 +2467,34 @@ class WPGlobus {
 
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
-		} ?>
+		} 
+		
+		if ( 
+			/**
+             * Filter to show language tabs in post page.
+             * @since 1.5.5
+             *
+             * @param bool
+             * Returning boolean.
+             */                     
+		    apply_filters( 'wpglobus_show_language_tabs', true ) 
+		) :		?>
 
-		<ul class="wpglobus-post-body-tabs-list">    <?php
-			$order = 0;
-			foreach ( self::Config()->open_languages as $language ) {
-				$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
-				<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
-				    data-order="<?php echo $order; ?>"
-				    class="wpglobus-post-tab">
-					<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
-				</li> <?php
-				$order ++;
-			} ?>
-		</ul>    <?php
-
+			<ul class="wpglobus-post-body-tabs-list">    <?php
+				$order = 0;
+				foreach ( self::Config()->open_languages as $language ) {
+					$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
+					<li id="link-tab-<?php echo $tab_suffix; ?>" data-language="<?php echo $language; ?>"
+						data-order="<?php echo $order; ?>"
+						class="wpglobus-post-tab">
+						<a href="#tab-<?php echo $tab_suffix; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
+					</li> <?php
+					$order ++;
+				} ?>
+			</ul>    <?php
+		
+		endif;
+		
 	}
 
 	/**

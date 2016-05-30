@@ -1103,7 +1103,6 @@ jQuery(document).ready(function () {
                 //$('#content').text(WPGlobusAdmin.content.replace(/\n/g, "<p>"));
 
                 $('#content').text(WPGlobusAdmin.content);
-                $('#excerpt').addClass('hidden').css({'display':'none'});
 				
 				if (typeof WPGlobusVendor !== "undefined" && WPGlobusVendor.vendor.WPSEO ) {
 					if ( typeof wpglobus_wpseo !== "undefined" ) {
@@ -1114,11 +1113,16 @@ jQuery(document).ready(function () {
 					}	
                 }			   
 
-                if (WPGlobusAdmin.data.modify_excerpt) {
-                    $(WPGlobusAdmin.data.template).insertAfter('#excerpt');
-                    $('body').on('change', '.wpglobus-excerpt', function () {
+                if ( WPGlobusAdmin.data.modify_excerpt ) {
+					/**
+					 * Add excerpt fields from template.
+					 */
+					var $excerpt = $( '#excerpt' );
+					$excerpt.addClass( 'hidden' ).css( {'display':'none'} );					 
+                    $( WPGlobusAdmin.data.template ).insertAfter( $excerpt );
+                    $( 'body' ).on( 'change', '.wpglobus-excerpt', function () {
 						var $t = $( this );
-						$('#excerpt').val( WPGlobusCore.getString( $('#excerpt').val(), $t.val(), $t.data('language') ) );
+						$excerpt.val( WPGlobusCore.getString( $excerpt.val(), $t.val(), $t.data('language') ) );
                     });
                 }
 
