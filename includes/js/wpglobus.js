@@ -34,18 +34,23 @@ jQuery(document).ready(function ($) {
 
         wpCookies.set('wpglobus-language', WPGlobus.language, 31536000, '/');
 
+        /**
+         * Add hash (`#`) to the menu items when the current URL has it.
+         * There is no way to detect it in PHP, because it's not a SERVER variable
+         * and is known to the browser only.
+         */
         if (window.location.hash) {
+            //noinspection JSDeclarationsAtScopeStart,JSLint
             var hash = window.location.hash;
             $('.wpglobus-selector-link, .wpglobus-selector-link a').each(function () {
-                if (typeof this.value !== 'undefined') {
-                    this.value = this.value + hash;
+                if (typeof this.value === 'string') {
+                    this.value += hash;
                 }
-                if (typeof this.href !== 'undefined') {
-                    this.href = this.href + hash;
+                if (typeof this.href === 'string') {
+                    this.href += hash;
                 }
             });
         }
-
 
     }
 
