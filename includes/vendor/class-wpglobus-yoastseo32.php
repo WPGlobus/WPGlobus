@@ -1,8 +1,8 @@
 <?php
 /**
- * Support of Yoast SEO 3.0
+ * Support of Yoast SEO 3.2
  * @package WPGlobus
- * @since   1.4.0
+ * @since   1.5.1
  */
 
 /**  */
