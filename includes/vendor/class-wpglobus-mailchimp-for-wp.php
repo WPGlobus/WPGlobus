@@ -30,7 +30,8 @@ class WPGlobus_MailChimp_For_WP {
 		$matches = $matches[0];
 
 		/**
-		 * @see tab Forms from Edit Form page of MailChimp for WP 
+		 * @see tab Forms from 'Edit Form' page of MailChimp for WP 
+		 * for example: wp-admin/admin.php?page=mailchimp-for-wp-forms&view=edit-form&form_id=%POST_ID%
 		 */
 		foreach( $matches as $match ) {
 			
