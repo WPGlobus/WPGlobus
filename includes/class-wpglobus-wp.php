@@ -167,6 +167,50 @@ class WPGlobus_WP {
 	}
 
 	/**
+	 * Check if was called by a specific function (could be any levels deep).
+	 *
+	 * @param string $function_name Function name.
+	 * @param string $class_name    Class name [default=''].
+	 *
+	 * @return bool True if Function is in backtrace.
+	 */
+	public static function is_function_in_backtrace( $function_name, $class_name = '' ) {
+		$function_in_backtrace = false;
+
+		foreach ( debug_backtrace() as $_ ) {
+			if ( isset( $_['function'] ) && $_['function'] === $function_name ) {
+				$function_in_backtrace = true;
+				if ( $class_name && isset( $_['class'] ) && $_['class'] !== $class_name ) {
+					$function_in_backtrace = false;
+				}
+				if ( $function_in_backtrace ) {
+					break;
+				}
+			}
+		}
+
+		return $function_in_backtrace;
+	}
+
+	/**
+	 * To call @see is_function_in_backtrace with the array of parameters.
+	 *
+	 * @param array $function_and_class_names Array of [$function_name, $class_name] pairs.
+	 *
+	 * @return bool True if any of the pair is found in the backtrace.
+	 */
+	public static function is_functions_in_backtrace( Array $function_and_class_names ) {
+		foreach ( $function_and_class_names as $pair ) {
+			list( $function_name, $class_name ) = $pair;
+			if ( self::is_function_in_backtrace( $function_name, $class_name ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * True if I am in the Admin Panel, not doing AJAX
 	 * @return bool
 	 */
