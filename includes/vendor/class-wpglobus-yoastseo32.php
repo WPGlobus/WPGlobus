@@ -267,6 +267,7 @@ class WPGlobus_YoastSEO {
 
 			/** @noinspection PhpInternalEntityUsedInspection */
 			$src_version = version_compare( WPSEO_VERSION, '3.1', '>=' ) ? '31' : '30';
+			/** @noinspection PhpInternalEntityUsedInspection */
 			$src_version = version_compare( WPSEO_VERSION, '3.2', '>=' ) ? '32' : $src_version;
 
 			$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/' .
