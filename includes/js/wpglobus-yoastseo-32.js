@@ -986,7 +986,8 @@ jQuery(document).ready( function ($) {
 					_this.citeModification( l );
 					
 					if ( metaDescText.length == 0 ) {
-						$( id+l ).text( data );
+						//$( id+l ).text( data );
+						$( id+l ).text( '' );
 					} else if ( metaDescText != data ) {
 						$( id+l ).text( metaDescText );
 					}	
