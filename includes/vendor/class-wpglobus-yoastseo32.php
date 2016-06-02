@@ -80,7 +80,7 @@ class WPGlobus_YoastSEO {
 
 	/**
 	 * Filter Yoast post metadata.
-	 * 
+	 *
 	 * When Yoast builds HTML title and meta description, it looks in tree places:
 	 * - Actual post_title,
 	 * - Title and Description from Yoast Snippet (fancy metabox for each post),
@@ -91,7 +91,7 @@ class WPGlobus_YoastSEO {
 	 * We are trying to hook into the `get_post_metadata` and return filtered values
 	 * to Yoast, so when it should be empty - it's empty and not
 	 * {:xx}Something from another language{:}
-	 * 
+	 *
 	 * @scope         front
 	 * @since         1.4.0 (original)
 	 *                1.5.5 (restored and rewritten)
@@ -123,7 +123,7 @@ class WPGlobus_YoastSEO {
 			 * @see get_metadata
 			 * (except for doing serialize - we believe it's not necessary for Yoast).
 			 */
-			
+
 			/** @var array $post_meta */
 			$post_meta = wp_cache_get( $post_id, 'post_meta' );
 
@@ -132,10 +132,20 @@ class WPGlobus_YoastSEO {
 				$post_meta  = $meta_cache[ $post_id ];
 			}
 
-			// Filter both title and meta description to the current language.
+			/**
+			 * Filter both title and meta description to the current language.
+			 *
+			 * @important Return empty if no current language text exists,
+			 * do not use the default. Yoast must receive empty string to realize
+			 * that meta is not set for that language.
+			 */
 			foreach ( array( '_yoast_wpseo_title', '_yoast_wpseo_metadesc' ) as $_ ) {
 				if ( ! empty( $post_meta[ $_ ][0] ) ) {
-					$post_meta[ $_ ][0] = WPGlobus_Filters::filter__text( $post_meta[ $_ ][0] );
+					$post_meta[ $_ ][0] = WPGlobus_Core::text_filter(
+						$post_meta[ $_ ][0],
+						WPGlobus::Config()->language,
+						WPGlobus::RETURN_EMPTY
+					);
 				}
 			}
 			// ... and return it.
