@@ -803,6 +803,9 @@ jQuery(document).ready( function ($) {
 			});			
 			
 			$( WPGlobusYoastSeo.wpseoTabSelector ).on( 'tabsactivate', function(event, ui){
+				
+				_this.language = ui.newPanel.attr( 'data-language' );
+				
 				if ( ui.newPanel.attr( 'data-language' ) === WPGlobusCoreData.default_language ) {
 					/** set keyword */
 					// set url @see YoastSEO.Analyzer.prototype.urlKeyword
@@ -896,7 +899,7 @@ jQuery(document).ready( function ($) {
 					} else {	
 						temp = set;
 					}	
-					_this.language = l;
+					//_this.language = l;
 					text = _this.replaceVariablesPlugin( temp );
 					$( id+l ).text( text );
 					if ( l == _this.getWPseoTab() ) {
@@ -935,7 +938,7 @@ jQuery(document).ready( function ($) {
 				}
 				//console.log('[4]');
 				$.each( WPGlobusCoreData.enabled_languages, function(i,l) {
-					_this.language = l;
+					//_this.language = l;
 					if ( '' === tr[l] ) {
 						text = _this.replaceVariablesPlugin( _this.title_template );
 					} else {
