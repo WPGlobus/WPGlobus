@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                     ],
                     ext: '.min.js',
                     expand: true,
-                    flatten: false,
+                    flatten: false
                 }]
             }
         },
@@ -129,13 +129,13 @@ module.exports = function (grunt) {
             },
             options_fields: {
                 options: {
-                    sourceMap: false, // Does not work properly with globs
+                    sourceMap: false // Does not work properly with globs
                 },
                 files: [{
                     src: [pathCSS_options_fields + '/**/*.less'],
                     ext: '.css',
                     expand: true,
-                    flatten: false,
+                    flatten: false
                 }]
             }
         },
@@ -162,7 +162,7 @@ module.exports = function (grunt) {
                     src: [pathCSS_options_fields + '/**/*.css'],
                     ext: '.min.css',
                     expand: true,
-                    flatten: false,
+                    flatten: false
                 }]
             }
         },

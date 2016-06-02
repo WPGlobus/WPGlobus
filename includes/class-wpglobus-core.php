@@ -190,6 +190,7 @@ class WPGlobus_Core {
 
 		/**
 		 * This should detect majority of the strings with our delimiters without calling preg_match
+		 * @var int $pos_start
 		 */
 		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN );
 		if ( $pos_start !== false ) {
