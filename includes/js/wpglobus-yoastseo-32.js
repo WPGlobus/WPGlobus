@@ -1032,7 +1032,7 @@ jQuery(document).ready( function ($) {
 			}
 			
 			//console.log('[4]');
-		
+			$( id + _this.getWPseoTab() ).text( return_text );		
 			return return_text;
 
 		}	
