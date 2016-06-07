@@ -332,7 +332,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				update_option( $this->ame_data_key, $global_options );
 			}
 
-			$instance = substr( sha1( rand( 10000, 20000 ) . rand( 20000, 30000 ) . rand( 30000, 40000 ) ), 6, 12 );
+			$instance = substr( sha1( mt_rand( 10000, 20000 ) . mt_rand( 20000, 30000 ) . mt_rand( 30000, 40000 ) ), 6, 12 );
 
 			$single_options = array(
 				$this->ame_product_id_key          => $this->ame_software_product_id,
@@ -452,7 +452,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				// check if our API endpoint is in the allowed hosts
 				$host = parse_url( $this->upgrade_url, PHP_URL_HOST );
 
-				if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
+				if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || stripos( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
 					?>
 					<div class="error">
 						<p>
