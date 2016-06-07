@@ -239,4 +239,8 @@ ul.wpglobus-important li {
     left: 88px;
   }
 }
+.yoast_help.yoast-help-button.dashicons {
+  font-family: 'dashicons' !important;
+  font-size: 20px !important;
+}
 /*# sourceMappingURL=wpglobus-admin.css.map */

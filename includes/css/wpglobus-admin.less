@@ -116,7 +116,7 @@ ul.wpglobus-important {
 	  font-style: normal;
 	  text-decoration: inherit;
 	  content: "\f160";
-	  font-size: 11px;	
+	  font-size: 11px;
 	}
 	.wpglobus-link-open-icon:before {
 	  font-family: 'dashicons';
@@ -124,8 +124,8 @@ ul.wpglobus-important {
 	  font-style: normal;
 	  text-decoration: inherit;
 	  content: "\f504";
-	  font-size: 11px;	
-	}	
+	  font-size: 11px;
+	}
 
 	.wpglobus-spinner {
 		background: url(images/spinner.gif) no-repeat;
@@ -288,4 +288,12 @@ ul.wpglobus-important {
     left: 88px;
   }
 }
+
+// Fix Yoast help buttons. Because we wrap Yoast in jQ-UI tabs,
+// the style might be broken. Specifically, the "Types" plugin breaks it.
+.yoast_help.yoast-help-button.dashicons {
+	font-family: 'dashicons' !important;
+	font-size:   20px !important;
+}
+
 // --- EOF
