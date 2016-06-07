@@ -641,7 +641,7 @@ jQuery(document).ready( function ($) {
 						l = $t.data( 'language' ),
 						s = WPGlobusCore.getString( $( 'input[name="yoast_wpseo_title"]' ).val(), $t.val(), l );
 
-					$( '#snippet_title_'+l ).text( $t.val() );
+					$( '#snippet_title_'+l ).html( _this.replaceVariablesPlugin( $t.val() ) );
 
 					YoastSEO.app.rawData.pageTitle = s;  // @todo maybe set at start js ?
 
@@ -955,7 +955,7 @@ jQuery(document).ready( function ($) {
 							return_text	= _this.replaceVariablesPlugin( _this.title_template );
 						}	
 					}	
-					$( id+l ).text( return_text );
+					$( id+l ).html( return_text );
 				});
 			}
 			//console.log('[5]');
