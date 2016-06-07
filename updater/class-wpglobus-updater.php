@@ -165,6 +165,9 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			$this->ame_activation_email        = $prefix . '_activation_email';
 			$this->store_options();
 
+			// DEBUG:
+//			$this->clean_options();
+
 			/**
 			 * Set all admin menu data
 			 */
@@ -209,14 +212,13 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			require_once( 'class-wpglobus-updater-admin.php' );
 			new WPGlobus_Updater_Menu( $this );
 
-			$options = get_option( $this->ame_data_key );
-
 			/**
-			 * Check for software updates
+			 * If License and Email entered, check for software updates.
 			 */
-			if ( ! empty( $options ) && $options !== false ) {
-
-				// Checks for software updates
+			if (
+				! empty( $this->ame_options[ $this->ame_api_key ] ) &&
+				! empty( $this->ame_options[ $this->ame_activation_email ] )
+			) {
 				require_once( 'class-wpglobus-updater-check.php' );
 				$_updater_check = new WPGlobus_Updater_API_Check();
 				$_updater_check->init(
@@ -236,9 +238,9 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 				// To debug messages:
 				// add_action( 'admin_notices', array( $_updater_check, 'no_key_error_notice' ) );
 
-			}
+				add_filter( 'upgrader_pre_download', array( $this, 'filter__upgrader_pre_download' ), 10, 3 );
 
-			add_filter( 'upgrader_pre_download', array( $this, 'filter__upgrader_pre_download' ), 10, 3 );
+			}
 
 		}
 
