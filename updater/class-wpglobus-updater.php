@@ -29,7 +29,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 	 * Class WPGlobus_Updater
 	 */
 	class WPGlobus_Updater {
-		
+
 		const KEY_INTERNAL_ERROR = 'internal_error';
 
 		/**
@@ -99,6 +99,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 
 		/**
 		 * @param array $args
+		 *
 		 * @example
 		 *            new WPGlobus_Updater(
 		 *            array(
@@ -249,6 +250,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 		 *                                 Default false.
 		 * @param string      $package     The package file name.
 		 * @param WP_Upgrader $wp_upgrader The WP_Upgrader instance.
+		 *
 		 * @return mixed|WP_Error|bool
 		 * @since 1.2.7
 		 */
@@ -414,13 +416,14 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 		/**
 		 * Displays an inactive notice when the software is inactive.
 		 */
-		public function notice_license_inactive() { ?>
-			<?php if ( ! current_user_can( 'manage_options' ) ) {
+		public function notice_license_inactive() {
+			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
-			} ?>
-			<?php if ( isset( $_GET['page'] ) && $this->ame_activation_tab_key === $_GET['page'] ) {
+			}
+			if ( isset( $_GET['page'] ) && $this->ame_activation_tab_key === $_GET['page'] ) {
 				return;
-			} ?>
+			}
+			?>
 			<div class="updated">
 				<p>
 					<strong><?php echo esc_html( $this->ame_software_product_id ); ?>: </strong>
