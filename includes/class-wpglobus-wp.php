@@ -169,14 +169,24 @@ class WPGlobus_WP {
 	/**
 	 * Check if was called by a specific function (could be any levels deep).
 	 *
-	 * @param string $function_name Function name.
-	 * @param string $class_name    Class name [default=''].
+	 * @param callable $method Function name or array(class,function).
 	 *
 	 * @return bool True if Function is in backtrace.
 	 */
-	public static function is_function_in_backtrace( $function_name, $class_name = '' ) {
+	public static function is_function_in_backtrace( $method ) {
 		$function_in_backtrace = false;
+		
+		// Parse callable into class and function.
+		if ( is_string( $method ) ) {
+			$function_name = $method;
+			$class_name    = '';
+		} elseif ( is_array( $method ) && isset( $method[0], $method[1] ) ) {
+			list( $class_name, $function_name ) = $method;
+		} else {
+			return false;
+		}
 
+		// Traverse backtrace and stop if the callable is found there.
 		foreach ( debug_backtrace() as $_ ) {
 			if ( isset( $_['function'] ) && $_['function'] === $function_name ) {
 				$function_in_backtrace = true;
@@ -195,14 +205,13 @@ class WPGlobus_WP {
 	/**
 	 * To call @see is_function_in_backtrace with the array of parameters.
 	 *
-	 * @param array $function_and_class_names Array of [$function_name, $class_name] pairs.
+	 * @param callable[] $callables Array of callables.
 	 *
 	 * @return bool True if any of the pair is found in the backtrace.
 	 */
-	public static function is_functions_in_backtrace( Array $function_and_class_names ) {
-		foreach ( $function_and_class_names as $pair ) {
-			list( $function_name, $class_name ) = $pair;
-			if ( self::is_function_in_backtrace( $function_name, $class_name ) ) {
+	public static function is_functions_in_backtrace( Array $callables ) {
+		foreach ( $callables as $callable ) {
+			if ( self::is_function_in_backtrace( $callable ) ) {
 				return true;
 			}
 		}

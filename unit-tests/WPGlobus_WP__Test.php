@@ -8,6 +8,8 @@ require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-wp.php';
 /**
  * Class WPGlobus_WP__Test
  */
+
+/** @noinspection PhpUndefinedClassInspection */
 class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 
 	/**
@@ -152,6 +154,67 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		$_GET['action'] = array( 'this-should-not-be-an-array' );
 		self::assertFalse( WPGlobus_WP::is_http_get_action( 'unit-test-action' ) );
 
+	}
+
+	/**
+	 * @covers WPGlobus_WP::is_function_in_backtrace
+	 */
+	public static function test_is_function_in_backtrace() {
+		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( __FUNCTION__ ) );
+		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( __CLASS__, __FUNCTION__ ) ) );
+		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( 'PHPUnit_Framework_TestCase', 'runTest' ) ) );
+
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( 'no-such-function' ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( null ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( 3.14 ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( new stdClass ) );
+		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( array( 'a', 278, new stdClass ) ) );
+	}
+
+	/**
+	 * @covers WPGlobus_WP::is_functions_in_backtrace
+	 */
+	public static function test_is_functions_in_backtrace() {
+		self::assertTrue( WPGlobus_WP::is_functions_in_backtrace(
+			array(
+				__FUNCTION__,
+			)
+		) );
+		self::assertTrue( WPGlobus_WP::is_functions_in_backtrace(
+			array(
+				array( __CLASS__, __FUNCTION__ ),
+			)
+		) );
+		self::assertTrue( WPGlobus_WP::is_functions_in_backtrace(
+			array(
+				__FUNCTION__,
+				array( __CLASS__, __FUNCTION__ ),
+			)
+		) );
+		self::assertTrue( WPGlobus_WP::is_functions_in_backtrace(
+			array(
+				__FUNCTION__,
+				array( __CLASS__, __FUNCTION__ ),
+				'no-such-function',
+				array( __CLASS__, 'no-such-function' ),
+			)
+		) );
+
+		self::assertFalse( WPGlobus_WP::is_functions_in_backtrace(
+			array(
+				'no-such-function',
+				array( __CLASS__, 'no-such-function' ),
+			)
+		) );
+		self::assertFalse( WPGlobus_WP::is_functions_in_backtrace(
+			array()
+		) );
+		self::assertFalse( WPGlobus_WP::is_functions_in_backtrace(
+			array( 1 )
+		) );
+		self::assertFalse( WPGlobus_WP::is_functions_in_backtrace(
+			array( new stdClass(), 'abc' )
+		) );
 	}
 
 } // class

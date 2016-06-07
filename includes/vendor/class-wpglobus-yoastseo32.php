@@ -114,8 +114,8 @@ class WPGlobus_YoastSEO {
 
 		// We only need to deal with these two callers:
 		if ( WPGlobus_WP::is_functions_in_backtrace( array(
-			array( 'get_content_title', 'WPSEO_Frontend' ),
-			array( 'generate_metadesc', 'WPSEO_Frontend' ),
+			array( 'WPSEO_Frontend', 'get_content_title' ),
+			array( 'WPSEO_Frontend', 'generate_metadesc' ),
 		) )
 		) {
 			/**
