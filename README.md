@@ -45,6 +45,24 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 WPGlobus works correctly with all themes that apply proper filtering before outputting content.
 Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please let the theme / plugin authors know. We are ready to help them.
 
+### Plugin Compatibility ###
+
+WPGlobus is compatible with many plugins, including but not limited to:
+
+* Advanced Custom Fields (ACF)
+* All in One SEO Pack
+* Black Studio TinyMCE Widget (with our free add-on)
+* MailChimp for WordPress
+* Max Mega Menu
+* Popups - WordPress Popup
+* Sidebar Login
+* Slider Revolution
+* The Events Calendar
+* WPBakery Visual Composer (with our free add-on)
+* Whistles
+* WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) premium add-on is required)
+* Yoast SEO ([WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/) premium add-on is not required but highly recommended)
+
 ### Permalinks ###
 
 **IMPORTANT:** WPGlobus will not work if your URLs look like `example.com?p=123` or `example.com/index.php/category/post/`.
@@ -150,6 +168,8 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Taxonomy slug re-generation when the title is already multilingual.
+	* Invalid Yoast SEO titles in some specific cases.
+	* Flag for `uk_UA`.
 * ADDED:
 	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
 
@@ -167,40 +187,6 @@ No known backward incompatibility issues.
 	* Do not do "auto-paragraphing" if the `wpautop` filter has been disabled (props @emechkov).
 	* Menu translations lost in some rare situations.
 	* Better error handling in the Updater module.
-
-### 1.5.3 ###
-
-* ADDED:
-	* Localize RSS feed URL.
-* FIXED:
-	* Disappearing translated headline and other Yoast 3.2 - related issues.
-
-### 1.5.2 ###
-
-* FIXED:
-	* Several issues related to Yoast SEO 3.2.
-
-### 1.5.1 ###
-
-* ADDED:
-	* Support for Yoast SEO Version 3.2;
-	* Filter 'wpglobus_nav_menu_objects' - allows to modify the localized URLs in menu, if any tweaking is required;
-	* `uk` (Ukrainian) admin interface translation.
-
-### 1.5.0 ###
-
-* ADDED:
-	* WordPress 4.5 compatibility;
-	* Customizer improvements related to WordPress 4.5;
-	* Customizer filter `wpglobus_customize_disabled_sections`;
-	* Filter `wpglobus_disabled_acf_fields` to disable ACF and ACF Pro field translation;
-	* `page` as the 3rd parameter to `wpglobus_localize_custom_data` filter;
-	* Support for layers in Slider Revolution plugin;
-	* `wpglobus-translatable` CSS class to post excerpt.
-* FIXED:
-	* Prevent adding element to itself in `WPGlobusDialogApp`;
-	* Customizer section for [Easy Google Fonts plugin](https://wordpress.org/plugins/easy-google-fonts/);
-	* No fatal error in `WPGlobus_Core::translate_wp_post` when not a `WP_Post` passed (Ticket 6390)
 
 ### Earlier versions ###
 

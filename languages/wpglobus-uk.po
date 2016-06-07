@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-05-19 20:41:33+00:00\n"
+"POT-Creation-Date: 2016-06-07 18:08:22+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Pavlo Novak <novak1305@gmail.com>\n"
 "Language: uk\n"
@@ -599,21 +599,21 @@ msgstr "Випадаюче  меню з прапорами"
 msgid "Selector type"
 msgstr "Спосіб выбору мови"
 
-#: includes/class-wpglobus.php:925
+#: includes/class-wpglobus.php:941
 msgid "You cannot disable the main language."
 msgstr "Неможна відключити головну мову."
 
-#: includes/class-wpglobus.php:1146
+#: includes/class-wpglobus.php:1162
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно після збереження меню."
 
-#: includes/class-wpglobus.php:2771
+#: includes/class-wpglobus.php:2815
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Щоб використовувати плагін WPGlobus, необхідно увімкнути SEF URLs - постійні "
 "посилання."
 
-#: includes/class-wpglobus.php:2773
+#: includes/class-wpglobus.php:2817
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -621,7 +621,7 @@ msgstr ""
 "Будь-ласка, перейдіть в меню налаштування > Постійні посилання і змініть "
 "структуру посилань в розділі \"Загальні налаштування\"."
 
-#: includes/class-wpglobus.php:2912
+#: includes/class-wpglobus.php:2956
 msgid "Add"
 msgstr "Додати"
 
@@ -856,7 +856,7 @@ msgid "Deactivates License so it can be used on another site."
 msgstr "Деактивує ліцензію для того, щоб використати її на іншому сайті."
 
 #: updater/class-wpglobus-updater-admin.php:143
-#: updater/class-wpglobus-updater.php:175
+#: updater/class-wpglobus-updater.php:179
 msgid "License Activation"
 msgstr "Активація ліцензії"
 
@@ -873,7 +873,7 @@ msgid "License email"
 msgstr "Адреса email, до якої прив'язана ліцензія"
 
 #: updater/class-wpglobus-updater-admin.php:179
-#: updater/class-wpglobus-updater.php:176
+#: updater/class-wpglobus-updater.php:180
 msgid "License Deactivation"
 msgstr "Деактивація ліцензії"
 
@@ -893,15 +893,20 @@ msgstr "Активовано"
 msgid "Inactive"
 msgstr "Не активно"
 
-#: updater/class-wpglobus-updater-admin.php:306
+#: updater/class-wpglobus-updater-admin.php:309
 msgid "License activated. "
 msgstr "Ліцензія активована."
 
-#: updater/class-wpglobus-updater-admin.php:337
+#: updater/class-wpglobus-updater-admin.php:340
 msgid "Connection failed to the License Key API server. Try again later."
 msgstr "Не вдалося з'єднатися з сервером. Спробуйте пізніше."
 
-#: updater/class-wpglobus-updater-admin.php:404
+#: updater/class-wpglobus-updater-admin.php:391
+#: updater/class-wpglobus-updater-requests.php:72
+msgid "The License Key / Email pair is empty or invalid."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:421
 msgid ""
 "The license could not be deactivated. Use the License Deactivation tab to "
 "manually deactivate the license before activating a new license."
@@ -909,15 +914,15 @@ msgstr ""
 "Ліцензія не може бути деактивована. Використовуйте закладку деактивації "
 "перед спробою активації нового ключа ліцензії."
 
-#: updater/class-wpglobus-updater-admin.php:422
+#: updater/class-wpglobus-updater-admin.php:439
 msgid "Please select the checkbox to confirm your intention."
 msgstr "Будь-ласка, відміться чекбокс для підтвердження."
 
-#: updater/class-wpglobus-updater-admin.php:446
+#: updater/class-wpglobus-updater-admin.php:463
 msgid "License / email not set or already deactivated."
 msgstr "Ліцензійний ключ / email не підходить, або уже деактивований."
 
-#: updater/class-wpglobus-updater-admin.php:465
+#: updater/class-wpglobus-updater-admin.php:482
 msgid "License deactivated. "
 msgstr "Ліцензія деактивована."
 
@@ -985,29 +990,29 @@ msgstr ""
 "Підписка була змінена. Будь-ласка, введіть новий ліцензійний ключ на "
 "сторінці налаштувань."
 
-#: updater/class-wpglobus-updater-requests.php:145
+#: updater/class-wpglobus-updater-requests.php:159
 msgid "Licensing server connection error."
 msgstr ""
 
-#: updater/class-wpglobus-updater-requests.php:156
+#: updater/class-wpglobus-updater-requests.php:170
 msgid "Licensing server connection error (%d)."
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:173
+#: updater/class-wpglobus-updater.php:177
 msgid "License"
 msgstr "Ліцензія"
 
-#: updater/class-wpglobus-updater.php:428
+#: updater/class-wpglobus-updater.php:437
 msgid "License has not been activated."
 msgstr "Ліцензія не активована."
 
-#: updater/class-wpglobus-updater.php:432
+#: updater/class-wpglobus-updater.php:441
 msgid "Click here to enter the license key and get the updates."
 msgstr ""
 "Натисніть тут, щоб ввести ліцензійний ключі і почати отримувати оновлення."
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
-#: updater/class-wpglobus-updater.php:460
+#: updater/class-wpglobus-updater.php:469
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
 "WP_ACCESSIBLE_HOSTS."

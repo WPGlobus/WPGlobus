@@ -6,6 +6,8 @@
 
 * FIXED:
 	* Taxonomy slug re-generation when the title is already multilingual.
+	* Invalid Yoast SEO titles in some specific cases.
+	* Flag for `uk_UA`.
 * ADDED:
 	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
 
