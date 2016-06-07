@@ -382,9 +382,9 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 
 // Example of the server response when empty values are passed:
 //			{"error":"Invalid Request","code":"100","additional info":"The email provided is invalid. Status error","activated":"inactive","timestamp":1465313704}
-			
+
 			// Do not call the server with empty arguments. Simulate the error response.
-			if ( ! ( $args['email'] && $args['license_key'] ) ) {
+			if ( ! ( $args['email'] && $args['licence_key'] ) ) {
 				$status = array(
 					'error'           => 'Invalid Request',
 					'code'            => '100',
