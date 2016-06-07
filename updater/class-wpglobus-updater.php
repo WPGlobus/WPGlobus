@@ -417,14 +417,18 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 		 * Displays an inactive notice when the software is inactive.
 		 */
 		public function notice_license_inactive() {
-			if ( ! current_user_can( 'manage_options' ) ) {
+
+			// Show notice to admins only and only on the "Plugins" page.
+			if ( ! (
+				current_user_can( 'manage_options' ) &&
+				WPGlobus_WP::is_pagenow( 'plugins.php' )
+			)
+			) {
 				return;
 			}
-			if ( isset( $_GET['page'] ) && $this->ame_activation_tab_key === $_GET['page'] ) {
-				return;
-			}
+
 			?>
-			<div class="updated">
+			<div class="notice <?php echo WPGlobus_WP::ADMIN_NOTICE_WARNING; ?>">
 				<p>
 					<strong><?php echo esc_html( $this->ame_software_product_id ); ?>: </strong>
 					<?php
