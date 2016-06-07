@@ -199,9 +199,9 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 
 			if ( isset( $license_status[ WPGlobus_Updater::KEY_INTERNAL_ERROR ] ) ) {
 				// Something was wrong with the connection to the API server.
-				echo '<strong style="background: yellow; color: black">' .
+				echo '<span class="wpglobus-mark wpglobus-warning">' .
 				     esc_html( $license_status[ WPGlobus_Updater::KEY_INTERNAL_ERROR ] ) .
-				     '</strong><br/> ' .
+				     '</span><br/> ' .
 				     esc_html__( 'Please contact support@wpglobus.com for assistance.', 'wpglobus' );
 			}
 			else {
@@ -217,7 +217,7 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 					echo ' (' . $license_status['activations_remaining'] . ')';
 				}
 				if ( ! empty( $license_status['additional info'] ) ) {
-					echo '<br/>' . $license_status['additional info'];
+					echo '<br/><span class="wpglobus-mark wpglobus-warning">' . $license_status['additional info'] . '</span>';
 				}
 			}
 		}
