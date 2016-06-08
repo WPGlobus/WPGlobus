@@ -199,9 +199,9 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 
 			if ( isset( $license_status[ WPGlobus_Updater::KEY_INTERNAL_ERROR ] ) ) {
 				// Something was wrong with the connection to the API server.
-				echo '<strong style="background: yellow; color: black">' .
+				echo '<span class="wpglobus-mark wpglobus-warning">' .
 				     esc_html( $license_status[ WPGlobus_Updater::KEY_INTERNAL_ERROR ] ) .
-				     '</strong><br/> ' .
+				     '</span><br/> ' .
 				     esc_html__( 'Please contact support@wpglobus.com for assistance.', 'wpglobus' );
 			}
 			else {
@@ -215,6 +215,9 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				}
 				if ( ! empty( $license_status['activations_remaining'] ) ) {
 					echo ' (' . $license_status['activations_remaining'] . ')';
+				}
+				if ( ! empty( $license_status['additional info'] ) ) {
+					echo '<br/><span class="wpglobus-mark wpglobus-warning">' . $license_status['additional info'] . '</span>';
 				}
 			}
 		}
@@ -377,8 +380,22 @@ if ( ! class_exists( 'WPGlobus_Updater_Menu' ) ) :
 				'licence_key' => $this->WPGlobus_Updater->ame_options[ $this->WPGlobus_Updater->ame_api_key ],
 			);
 
-			$status = $this->WPGlobus_Updater->key()->status( $args );
-			return json_decode( $status, true );
+// Example of the server response when empty values are passed:
+//			{"error":"Invalid Request","code":"100","additional info":"The email provided is invalid. Status error","activated":"inactive","timestamp":1465313704}
+
+			// Do not call the server with empty arguments. Simulate the error response.
+			if ( ! ( $args['email'] && $args['licence_key'] ) ) {
+				$status = array(
+					'error'           => 'Invalid Request',
+					'code'            => '100',
+					'additional info' => esc_html__( 'The License Key / Email pair is empty or invalid.', 'wpglobus' ),
+					'activated'       => 'inactive',
+					'timestamp'       => time(),
+				);
+			} else {
+				$status = json_decode( $this->WPGlobus_Updater->key()->status( $args ), true );
+			}
+			return $status;
 		}
 
 		/**

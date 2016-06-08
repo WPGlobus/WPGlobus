@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-05-19 20:41:33+00:00\n"
+"POT-Creation-Date: 2016-06-07 18:08:22+00:00\n"
 "PO-Revision-Date: 2015-09-09 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
@@ -572,19 +572,19 @@ msgstr "Rulllistmeny med flaggor"
 msgid "Selector type"
 msgstr "Väljartyp"
 
-#: includes/class-wpglobus.php:925
+#: includes/class-wpglobus.php:941
 msgid "You cannot disable the main language."
 msgstr "Du kan inte stänga av huvudspråk."
 
-#: includes/class-wpglobus.php:1146
+#: includes/class-wpglobus.php:1162
 msgid "*) Available after the menu is saved."
 msgstr "*) Tillgängligt när menyn sparats."
 
-#: includes/class-wpglobus.php:2771
+#: includes/class-wpglobus.php:2815
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Du måste aktivera Vackra Permalänkar för att använda WPGlobus."
 
-#: includes/class-wpglobus.php:2773
+#: includes/class-wpglobus.php:2817
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -592,7 +592,7 @@ msgstr ""
 "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-"
 "standardalternativet."
 
-#: includes/class-wpglobus.php:2912
+#: includes/class-wpglobus.php:2956
 msgid "Add"
 msgstr "Lägg till"
 
@@ -824,7 +824,7 @@ msgid "Deactivates License so it can be used on another site."
 msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:143
-#: updater/class-wpglobus-updater.php:175
+#: updater/class-wpglobus-updater.php:179
 msgid "License Activation"
 msgstr ""
 
@@ -841,7 +841,7 @@ msgid "License email"
 msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:179
-#: updater/class-wpglobus-updater.php:176
+#: updater/class-wpglobus-updater.php:180
 msgid "License Deactivation"
 msgstr ""
 
@@ -861,29 +861,34 @@ msgstr "Aktiva"
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: updater/class-wpglobus-updater-admin.php:306
+#: updater/class-wpglobus-updater-admin.php:309
 msgid "License activated. "
 msgstr ""
 
-#: updater/class-wpglobus-updater-admin.php:337
+#: updater/class-wpglobus-updater-admin.php:340
 msgid "Connection failed to the License Key API server. Try again later."
 msgstr ""
 
-#: updater/class-wpglobus-updater-admin.php:404
+#: updater/class-wpglobus-updater-admin.php:391
+#: updater/class-wpglobus-updater-requests.php:72
+msgid "The License Key / Email pair is empty or invalid."
+msgstr ""
+
+#: updater/class-wpglobus-updater-admin.php:421
 msgid ""
 "The license could not be deactivated. Use the License Deactivation tab to "
 "manually deactivate the license before activating a new license."
 msgstr ""
 
-#: updater/class-wpglobus-updater-admin.php:422
+#: updater/class-wpglobus-updater-admin.php:439
 msgid "Please select the checkbox to confirm your intention."
 msgstr ""
 
-#: updater/class-wpglobus-updater-admin.php:446
+#: updater/class-wpglobus-updater-admin.php:463
 msgid "License / email not set or already deactivated."
 msgstr ""
 
-#: updater/class-wpglobus-updater-admin.php:465
+#: updater/class-wpglobus-updater-admin.php:482
 msgid "License deactivated. "
 msgstr ""
 
@@ -943,28 +948,28 @@ msgid ""
 "Subscription changed. Please enter new license key in the settings page."
 msgstr ""
 
-#: updater/class-wpglobus-updater-requests.php:145
+#: updater/class-wpglobus-updater-requests.php:159
 msgid "Licensing server connection error."
 msgstr ""
 
-#: updater/class-wpglobus-updater-requests.php:156
+#: updater/class-wpglobus-updater-requests.php:170
 msgid "Licensing server connection error (%d)."
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:173
+#: updater/class-wpglobus-updater.php:177
 msgid "License"
 msgstr "Licens"
 
-#: updater/class-wpglobus-updater.php:428
+#: updater/class-wpglobus-updater.php:437
 msgid "License has not been activated."
 msgstr ""
 
-#: updater/class-wpglobus-updater.php:432
+#: updater/class-wpglobus-updater.php:441
 msgid "Click here to enter the license key and get the updates."
 msgstr ""
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
-#: updater/class-wpglobus-updater.php:460
+#: updater/class-wpglobus-updater.php:469
 msgid ""
 "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
 "WP_ACCESSIBLE_HOSTS."

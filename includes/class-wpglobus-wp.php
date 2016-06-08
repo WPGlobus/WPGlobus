@@ -10,6 +10,19 @@
 class WPGlobus_WP {
 
 	/**
+	 * CSS classes for admin notices
+	 * @example
+	 * <code>
+	 *  echo '<div class="notice ' . WPGlobus_WP::ADMIN_NOTICE_WARNING . '">';
+	 * </code>
+	 */
+	
+	const ADMIN_NOTICE_SUCCESS = 'notice-success';
+	const ADMIN_NOTICE_ERROR = 'notice-error';
+	const ADMIN_NOTICE_INFO = 'notice-info';
+	const ADMIN_NOTICE_WARNING = 'notice-warning';
+
+	/**
 	 * @return bool
 	 */
 	public static function is_doing_ajax() {
@@ -175,7 +188,7 @@ class WPGlobus_WP {
 	 */
 	public static function is_function_in_backtrace( $method ) {
 		$function_in_backtrace = false;
-		
+
 		// Parse callable into class and function.
 		if ( is_string( $method ) ) {
 			$function_name = $method;

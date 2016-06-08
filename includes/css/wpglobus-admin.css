@@ -243,4 +243,11 @@ ul.wpglobus-important li {
   font-family: 'dashicons' !important;
   font-size: 20px !important;
 }
+.wpglobus-mark {
+  font-weight: 700;
+}
+.wpglobus-mark.wpglobus-warning {
+  background-color: yellow;
+  color: black;
+}
 /*# sourceMappingURL=wpglobus-admin.css.map */
