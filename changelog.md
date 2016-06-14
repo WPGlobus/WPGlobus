@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.6 ###
+
+* ADDED:
+	* Compatibility with Yoast SEO version 3.3.0.
+
 ### 1.5.5 ###
 
 * FIXED:

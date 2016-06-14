@@ -83,6 +83,9 @@ ul.wpglobus-important li {
 .wpglobus-wp-admin .wpglobus-translatable {
   border-left: 3px solid blue !important;
 }
+.wpglobus-wp-admin .wpglobus-link-lock-icon {
+  cursor: not-allowed;
+}
 .wpglobus-wp-admin .wpglobus-link-lock-icon:before {
   font-family: 'dashicons';
   font-weight: 400;

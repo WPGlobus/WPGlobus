@@ -279,12 +279,12 @@ module.exports = function (grunt) {
     grunt.registerTask('readme_md', ['wp_readme_to_markdown', 'replace:readme_md']);
 
     grunt.registerTask('dist', [
+        'replace:version',
         'pomo',
         'readme_md',
         'less',
         'cssmin',
-        'uglify',
-        'replace:version'
+        'uglify'
     ]);
 
     // Default task(s).
