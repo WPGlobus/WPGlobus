@@ -8,8 +8,13 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 			require_once 'vendor/class-wpglobus-yoastseo30.php';
 			WPGlobus_YoastSEO::controller();
 		} else {
-			require_once 'vendor/class-wpglobus-yoastseo32.php';
-			WPGlobus_YoastSEO::controller();
+			if ( version_compare( WPSEO_VERSION, '3.3.0', '>=' ) ) {
+				require_once 'vendor/class-wpglobus-yoastseo33.php';
+				WPGlobus_YoastSEO::controller();
+			} else {	
+				require_once 'vendor/class-wpglobus-yoastseo32.php';
+				WPGlobus_YoastSEO::controller();
+			}	
 		}	
 	}	
 }
