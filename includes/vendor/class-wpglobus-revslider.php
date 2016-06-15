@@ -52,13 +52,18 @@ if ( ! class_exists( 'WPGlobus_RevSlider' ) ) :
 			 * @see db.class.php:130
 			 */		
 			$link = $slide->getParam( 'link', '' );
-			self::$links[ $link ] = WPGlobus_Core::text_filter( $link, WPGlobus::Config()->language );	
+			if ( ! empty( $link ) ) {
+				self::$links[ $link ] = WPGlobus_Core::text_filter( $link, WPGlobus::Config()->language );	
+			}	
 		}
 
 		/**
 		 * @since 1.5.4
 		 */	
 		public static function action__wp_footer() {
+			if ( empty( self::$links ) ) {
+				return;
+			}	
 		?>	 
 <script type="text/javascript">
 //<![CDATA[
