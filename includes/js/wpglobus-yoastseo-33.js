@@ -370,7 +370,7 @@ jQuery(document).ready( function ($) {
 					 * "snippet-editor__progress--good" - score 35-65
 					 * "snippet-editor__progress--ok" score >=66, red text 
 					 */
-					progress = $( 'progress.'+api.yoastTitleProgress + '_' + lang );
+					progress = $( 'progress.' + api.yoastTitleProgress + '_' + lang );
 					max = progress.attr( 'max' );
 					cl = allClasses[2];
 					if ( score == 0 ) {
@@ -381,13 +381,14 @@ jQuery(document).ready( function ($) {
 					} else if ( score > 0 && score < 35 ) {
 						cl = allClasses[1];
 					}
+
 				} else if ( element.hasClass( 'wpglobus-snippet-editor-meta-description' ) ) {
 					/**
 					 * "snippet-editor__progress--ok" - score 0-120
 					 * "snippet-editor__progress--good" - score 121-156
 					 * "snippet-editor__progress--ok" score >=157, red text 
 					 */	
-					progress = $( 'progress.'+api.yoastMetadescProgress + '_' + lang );
+					progress = $( 'progress.' + api.yoastMetadescProgress + '_' + lang );
 					max = progress.attr( 'max' );
 					cl = allClasses[2];
 					if ( score == 0 ) {
@@ -491,7 +492,9 @@ jQuery(document).ready( function ($) {
 							$id.parent( 'label' ).attr( 'for', $id.parent( 'label' ).attr( 'for' ) + '_' + l );
 							$id.val( $( '#wpseo-tab-' + l ).data( 'wpseotitle' ) );
 
-							$id.parent( 'label' ).find( 'progress' ).addClass( api.yoastTitleProgress ).addClass( api.yoastTitleProgress + '_' + l );
+							//$id.parent( 'label' ).find( 'progress' ).addClass( api.yoastTitleProgress ).addClass( api.yoastTitleProgress + '_' + l );
+							// @since yoastseo 3.3.1
+							$id.parent( 'label' ).next( 'progress' ).addClass( api.yoastTitleProgress ).addClass( api.yoastTitleProgress + '_' + l );
 							_.debounce( api.updateProgressBar( $id,	l ), 500 );
 						}
 						/** #snippet-editor-slug */
@@ -509,7 +512,9 @@ jQuery(document).ready( function ($) {
 							$id.parent( 'label' ).attr( 'for', $id.parent( 'label' ).attr( 'for' ) + '_' + l );	
 							$id.val( $( '#wpseo-tab-' + l ).data( 'metadesc' ) );
 
-							$id.parent( 'label' ).find( 'progress' ).addClass( api.yoastMetadescProgress ).addClass( api.yoastMetadescProgress + '_' + l );
+							//$id.parent( 'label' ).find( 'progress' ).addClass( api.yoastMetadescProgress ).addClass( api.yoastMetadescProgress + '_' + l );
+							// @since yoastseo 3.3.1
+							$id.parent( 'label' ).next( 'progress' ).addClass( api.yoastMetadescProgress ).addClass( api.yoastMetadescProgress + '_' + l );
 							_.debounce( api.updateProgressBar( $id,	l ), 500 );
 						}
 						/** #snippetpreview-help-toggle */
@@ -693,7 +698,9 @@ jQuery(document).ready( function ($) {
 					_.debounce( api.updateProgressBar( $t,	l ), 500 );	
 				});			
 				
-				// make synchronization click on "Post tab" with seo tab 
+				/**
+				 * Make synchronization click on "Post tab" with seo tab 
+				 */
 				$('body').on( 'click', '.wpglobus-post-body-tabs-list li', function(event){
 					var $this = $(this);
 					if ( $this.hasClass('wpglobus-post-tab') ) {
@@ -709,9 +716,7 @@ jQuery(document).ready( function ($) {
 						WPGlobusYoastSeoPlugin.prototype.analyze();
 					}
 				});
-				
-				/** @todo remove after test, obsolete since yoastseo 3.2 */
-				//api.qtip();	
+		
 				api.initAddKeywordPopup();	
 			}	
 		}
