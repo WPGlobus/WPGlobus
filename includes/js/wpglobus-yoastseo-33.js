@@ -564,7 +564,7 @@ jQuery(document).ready( function ($) {
 							.addClass('hidden')
 							.after('<div class="wpglobus-suggest" style="font-weight:bold;">'+WPGlobusVendor.i18n.yoastseo_plus_access+'</div>');
 
-						$('#'+sectionID+' #wpseo-pageanalysis_'+l).addClass('hidden');
+						$('#'+sectionID+' #wpseo-pageanalysis_'+l).addClass('hidden').css({'display':'none'});
 					}
 					
 				}); // end each .wpglobus-wpseo-general	
