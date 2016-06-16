@@ -96,6 +96,18 @@ class WPGlobus_Core {
 		 */
 		$is_local_text_found = false;
 
+
+		/**
+		 * Compatibility: if `mbstring` PHP extension is not loaded.
+		 */
+		if ( function_exists( 'mb_strpos' ) ) {
+			$utf8_strpos = 'mb_strpos';
+		} elseif ( function_exists( 'iconv_strpos' ) ) {
+			$utf8_strpos = 'iconv_strpos';
+		} else {
+			$utf8_strpos = 'strpos';
+		}
+
 		/**
 		 * We do not know which delimiter was used, so we'll try both, in a loop
 		 */
@@ -105,7 +117,7 @@ class WPGlobus_Core {
 			/**
 			 * Try the starting position. If not found, continue the loop to the next set of delimiters
 			 */
-			$pos_start = mb_strpos( $text, $delimiters['start'] );
+			$pos_start = $utf8_strpos( $text, $delimiters['start'] );
 			if ( $pos_start === false ) {
 				continue;
 			}
@@ -120,7 +132,7 @@ class WPGlobus_Core {
 			 * Try to find the ending position.
 			 * If could not find, will extract the text until end of string by passing null to the `substr`
 			 */
-			$pos_end = mb_strpos( $text, $delimiters['end'], $pos_start );
+			$pos_end = $utf8_strpos( $text, $delimiters['end'], $pos_start );
 			if ( $pos_end === false ) {
 				// - Until end of string
 				$length = null;

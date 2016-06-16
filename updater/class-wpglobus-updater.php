@@ -144,7 +144,7 @@ if ( ! class_exists( 'WPGlobus_Updater' ) ) :
 			 * Set all data defaults here
 			 */
 			$prefix = $this->ame_software_product_id;
-			$prefix = mb_strtolower( $prefix );
+			$prefix = strtolower( $prefix );
 			$prefix = preg_replace( '/[^%a-z0-9 _-]/', '', $prefix );
 			$prefix = preg_replace( '/[\s-_]+/', '_', $prefix );
 			$prefix = trim( $prefix, '_' );
