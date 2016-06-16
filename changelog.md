@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.5.7 ###
+* FIXED:
+	* [Yoast] correct handling analysis section for extra language.
+	* [Yoast] fixed progress bar for snippet editor.
+	* [Revslider] don't load js if links for slides are empty.
+
 ### 1.5.6 ###
 
 * ADDED:
