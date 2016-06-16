@@ -146,6 +146,15 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.5.7 =
+
+* FIXED:
+	* Yoast: Compatibility with 3.3.1.
+	* Yoast: Correctly handle the analysis section for extra languages.
+	* Yoast: Fixed progress bar in the Snippet Editor.
+	* Revslider: Don't load JS when the links in slides are empty.
+	* Core: No fatal error if the `mbstring` PHP extension is not loaded.
+
 = 1.5.6 =
 
 * ADDED:

@@ -3,10 +3,13 @@
 ## Changelog ##
 
 ### 1.5.7 ###
+
 * FIXED:
-	* [Yoast] correct handling analysis section for extra language.
-	* [Yoast] fixed progress bar for snippet editor.
-	* [Revslider] don't load js if links for slides are empty.
+	* Yoast: Compatibility with 3.3.1.
+	* Yoast: Correctly handle the analysis section for extra languages.
+	* Yoast: Fixed progress bar in the Snippet Editor.
+	* Revslider: Don't load JS when the links in slides are empty.
+	* Core: No fatal error if the `mbstring` PHP extension is not loaded.
 
 ### 1.5.6 ###
 
