@@ -1952,19 +1952,23 @@ class WPGlobus {
 		$sorted_menu_items, /** @noinspection PhpUnusedParameterInspection */
 		$args
 	) {
-
+		
+		$disable_add_selector = true;
+		
 		if ( empty( WPGlobus::Config()->nav_menu ) ) {
 			/**
 			 * User can use WPGlobus widget
 			 * @since 1.0.7
 			 */
-			return $sorted_menu_items;
+			$disable_add_selector = true;
 
 		} elseif ( 'all' == WPGlobus::Config()->nav_menu ) {
 			/**
 			 * Attach to every nav menu
 			 * @since 1.0.7
 			 */
+			$disable_add_selector = false; 
+			
 		} else {
 
 			$items = array();
@@ -1980,13 +1984,23 @@ class WPGlobus {
 					break;
 				}
 			}
-		
-			if ( $disable_add_selector ) {
-				return $sorted_menu_items;
-			}
 
 		}
-
+		
+		/**
+		 * Filter to add or not language selector to the menu.
+		 * Returning boolean.
+		 * @since 1.5.8
+		 *
+		 * @param boolean 	$disable_add_selector 	Disable or not to add language selector to the menu.
+		 * @param object 	$args 					An object containing wp_nav_menu() arguments.
+		 */		
+		$disable_add_selector = apply_filters( 'wpglobus_menu_add_selector', $disable_add_selector, $args );
+			
+		if ( $disable_add_selector ) {
+			return $sorted_menu_items;
+		}		
+		
 		$extra_languages = array();
 		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
 			if ( $languages != WPGlobus::Config()->language ) {
