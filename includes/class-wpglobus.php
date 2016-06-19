@@ -1972,16 +1972,16 @@ class WPGlobus {
 				$items[] = $item->ID;
 			}
 
-			$return = true;
+			$disable_add_selector = true;
 			foreach ( $this->menus as $key => $menu ) {
 				$diff = array_diff( $items, $menu->menu_items );
 				if ( empty( $diff ) && WPGlobus::Config()->nav_menu === $menu->slug ) {
-					$return = false;
+					$disable_add_selector = false;
 					break;
 				}
 			}
-
-			if ( $return ) {
+		
+			if ( $disable_add_selector ) {
 				return $sorted_menu_items;
 			}
 
