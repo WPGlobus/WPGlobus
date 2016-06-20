@@ -61,6 +61,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * WPBakery Visual Composer (with our free add-on)
 * Whistles
 * WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) premium add-on is required)
+* WordPress WooCommerce Nets Netaxept Payment Plugin by sellxed/customweb - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
 * Yoast SEO ([WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/) premium add-on is not required but highly recommended)
 
 ### Permalinks ###
@@ -163,6 +164,11 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.5.8 ###
+
+* ADDED:
+	* API: new filter `wpglobus_menu_add_selector`.
 
 ### 1.5.7 ###
 

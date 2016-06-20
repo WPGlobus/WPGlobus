@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.8 ###
+
+* ADDED:
+	* API: new filter `wpglobus_menu_add_selector`.
+
 ### 1.5.7 ###
 
 * FIXED:
