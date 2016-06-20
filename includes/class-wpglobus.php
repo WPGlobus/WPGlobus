@@ -1992,8 +1992,8 @@ class WPGlobus {
 		 * Returning boolean.
 		 * @since 1.5.8
 		 *
-		 * @param boolean 	$disable_add_selector 	Disable or not to add language selector to the menu.
-		 * @param object 	$args 					An object containing wp_nav_menu() arguments.
+		 * @param bool 	$disable_add_selector 	Disable or not to add language selector to the menu.
+		 * @param stdClass 	$args 					An object containing wp_nav_menu() arguments.
 		 */		
 		$disable_add_selector = apply_filters( 'wpglobus_menu_add_selector', $disable_add_selector, $args );
 			
