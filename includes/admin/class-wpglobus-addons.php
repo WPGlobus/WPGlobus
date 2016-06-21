@@ -24,6 +24,11 @@ class WPGlobus_Addons {
 		$payed_addons['wpglobus-plus']['url']     = 'http://www.wpglobus.com/shop/extensions/wpglobus-plus/'; 
 		$payed_addons['wpglobus-plus']['img_src'] = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png'; 
 		
+		$payed_addons['nets-netaxept']['slug']    = 'nets-netaxept'; 
+		$payed_addons['nets-netaxept']['header']  = 'WooCommerce Nets Netaxept'; 
+		$payed_addons['nets-netaxept']['url']     = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/'; 
+		$payed_addons['nets-netaxept']['img_src'] = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg'; 		
+		
 		$addons                    = array();
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
 		$addons['wordpress.org'][] = 'wpglobus-translate-options';
