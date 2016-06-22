@@ -151,7 +151,8 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* API: new filter `wpglobus_menu_add_selector`.
-
+	* API: new filter to modify language selector items generated from pages.
+	
 = 1.5.7 =
 
 * FIXED:
