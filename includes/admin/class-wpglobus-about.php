@@ -34,7 +34,7 @@ class WPGlobus_About {
 				background-size: contain;
 			}
 		</style>
-		<div class="wrap about-wrap">
+		<div class="wrap about-wrap wpglobus-about-wrap">
 			<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
 				<span class="wpglobus-version"><?php echo WPGLOBUS_VERSION; ?></span>
 			</h1>

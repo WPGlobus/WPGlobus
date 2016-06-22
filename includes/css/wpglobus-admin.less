@@ -176,7 +176,8 @@ ul.wpglobus-important {
 @color-wpglobus-logo-globe: #E38869;
 @color-wpglobus-logo-wp: #23769C;
 
-.about-wrap {
+// @since 1.5.8 Use our styles only with our `wrap` class.
+.about-wrap.wpglobus-about-wrap {
 	.wpglobus-version {
 		color: @color-wpglobus-logo-globe;
 		font-size: 95%;
@@ -198,6 +199,14 @@ ul.wpglobus-important {
 
 	.wpglobus-stars {
 		color: @color-wpglobus-logo-globe;
+	}
+
+	// The `Customizr` theme breaks this by setting to "center".
+	// @since 1.5.8
+	.feature-section {
+		div {
+			text-align: left;
+		}
 	}
 }
 

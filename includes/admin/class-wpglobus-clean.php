@@ -485,7 +485,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 				} // endforeach
 
-			} // endforeach	
+			} // endforeach
 
 			if ( false === $result ) {
 				wp_send_json_error( $order );
@@ -573,7 +573,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					background-size: contain;
 				}
 			</style>
-			<div class="wrap about-wrap clean-wrap wpglobus-clean">
+			<div class="wrap about-wrap wpglobus-about-wrap clean-wrap wpglobus-clean">
 				<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
 					<span class="wpglobus-version"><?php echo WPGLOBUS_VERSION; ?></span>
 				</h1>
