@@ -75,6 +75,9 @@ WPGlobus_Customize::controller();
 require_once 'includes/admin/class-wpglobus-customize-options.php';
 WPGlobus_Customize_Options::controller();
 
-require_once 'updater/class-wpglobus-updater.php';
+//require_once 'updater/class-wpglobus-updater.php';
+is_admin() && !defined('DOING_AJAX') && add_action('admin_head', function () {
+	require_once 'lib/TIVWP/Updater/test.php';
+});
 
 # --- EOF

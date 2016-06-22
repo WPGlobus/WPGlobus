@@ -56,7 +56,7 @@ class WPGlobus {
 	 * Initialized at plugin loader
 	 * @var string
 	 */
-	public static $PLUGIN_DIR_PATH = '';
+	public static $PLUGIN_DIR_PATH = './';
 
 	/**
 	 * Initialized at plugin loader
