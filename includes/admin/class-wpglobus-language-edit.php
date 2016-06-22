@@ -314,13 +314,13 @@ class WPGlobus_Language_Edit {
 					foreach ( $this->submit_messages['errors'] as $message ) {
 						$mess .= $message . '<br />';
 					} ?>
-					<div class="error"><?php echo $mess; ?></div> <?php
+					<div class="error"><p><?php echo $mess; ?></p></div> <?php
 				} elseif ( ! empty( $this->submit_messages['success'] ) ) {
 					$mess = '';
 					foreach ( $this->submit_messages['success'] as $message ) {
 						$mess .= $message . '<br />';
 					} ?>
-					<div class="updated"><?php echo $mess; ?></div> <?php
+					<div class="updated"><p><?php echo $mess; ?></p></div> <?php
 				}
 			} ?>
 			<form id="wpglobus_edit_form" method="post" action="">
