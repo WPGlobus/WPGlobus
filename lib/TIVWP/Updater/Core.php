@@ -7,6 +7,9 @@
  */
 class TIVWP_Updater_Core {
 
+	/**
+	 * @var string
+	 */
 	const KEY_INTERNAL_ERROR = 'internal_error';
 
 	/**
@@ -104,24 +107,71 @@ class TIVWP_Updater_Core {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function get_status() {
+		return $this->get_server_response( $this->url_status() );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function activate() {
+		return $this->get_server_response( $this->url_activation() );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function deactivate() {
+		return $this->get_server_response( $this->url_deactivation() );
+	}
+	
+	/**
+	 * @param array $args
+	 *
 	 * @return string
 	 */
-	public function url_status() {
-
-		$args = array(
-			'request'     => 'status',
+	protected function build_url( Array $args ) {
+		$args = array_merge( array(
 			'product_id'  => $this->product_id,
 			'instance'    => $this->instance,
 			'email'       => $this->email,
 			'licence_key' => $this->licence_key,
-			'platform'    => $this->platform
-		);
+			'platform'    => $this->platform,
+		), $args );
 
 		return esc_url_raw(
 			add_query_arg( 'wc-api', 'am-software-api', $this->url_product ) . '&' .
 			http_build_query( $args )
 		);
+	}
 
+	/**
+	 * @return string
+	 */
+	protected function url_status() {
+		return $this->build_url( array(
+			'request'     => 'status',
+		) );
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function url_activation() {
+		return $this->build_url( array(
+			'request'     => 'activation',
+		) );
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function url_deactivation() {
+		return $this->build_url( array(
+			'request'     => 'deactivation',
+		) );
 	}
 
 	/**
@@ -129,7 +179,7 @@ class TIVWP_Updater_Core {
 	 *
 	 * @return array Response from the server.
 	 */
-	public function get_server_response( $url ) {
+	protected function get_server_response( $url ) {
 
 		$result = wp_safe_remote_get( $url );
 		if ( is_wp_error( $result ) ) {
@@ -163,8 +213,6 @@ class TIVWP_Updater_Core {
 
 		return json_decode( $response_body, JSON_OBJECT_AS_ARRAY );
 	}
-
-
 }
 
 /* EOF */
