@@ -40,7 +40,23 @@ class TIVWP_Updater_Core {
 	/**
 	 * @var string
 	 */
+	protected $plugin_name = '';
+
+	/**
+	 * @var string
+	 */
 	private $platform = '';
+
+	/**
+	 * @param string $plugin_name
+	 *
+	 * @return TIVWP_Updater_Core
+	 */
+	public function setPluginName( $plugin_name ) {
+		$this->plugin_name = $plugin_name;
+
+		return $this;
+	}
 
 	/**
 	 * TIVWP_Updater_Core constructor.
@@ -126,7 +142,64 @@ class TIVWP_Updater_Core {
 	public function deactivate() {
 		return $this->get_server_response( $this->url_deactivation() );
 	}
-	
+
+	/**
+	 * Check for updates against the remote server.
+	 *
+	 * @see set_site_transient
+	 *
+	 * @param  mixed $transient
+	 *
+	 * @return mixed $transient
+	 */
+	public function filter__pre_set_site_transient_update_plugins( $transient ) {
+		// TODO Plugin must send __FILE__
+		$this->plugin_name = 'wpglobus-plus/wpglobus-plus.php';
+
+		if ( empty( $transient->checked[ $this->plugin_name ] ) ) {
+			return $transient;
+		}
+
+		$curr_version = (string) $transient->checked[ $this->plugin_name ];
+
+		$args = array(
+			'request'          => 'pluginupdatecheck',
+			'slug'             => 'wpglobus-plus', //TODO $this->slug,
+			'plugin_name'      => $this->plugin_name,
+			'version'          => $curr_version,
+			'product_id'       => $this->product_id,
+			'api_key'          => $this->licence_key,
+			'activation_email' => $this->email,
+			'instance'         => $this->instance,
+			'domain'           => $this->platform,
+		);
+
+		// Check for a plugin update
+
+		$upgrade_url = add_query_arg( 'wc-api', 'upgrade-api', $this->url_product )
+		               . '&' . http_build_query( $args );
+
+		$target_url = esc_url_raw( $upgrade_url );
+		$response   = wp_safe_remote_get( $target_url );
+
+		// TODO check for errors
+
+
+		$response_body = wp_remote_retrieve_body( $response );
+		// TODO check for errors. Is serialized?
+		$response_body = unserialize( $response_body );
+		TIVWP_Debug::print_var_html( $response_body );
+
+		$new_version = (string) $response_body->new_version;
+
+		if ( version_compare( $new_version, $curr_version, '>' ) ) {
+			$transient->response[ $this->plugin_name ] = $response_body;
+		}
+
+		return $transient;
+
+	}
+
 	/**
 	 * @param array $args
 	 *
@@ -152,7 +225,7 @@ class TIVWP_Updater_Core {
 	 */
 	protected function url_status() {
 		return $this->build_url( array(
-			'request'     => 'status',
+			'request' => 'status',
 		) );
 	}
 
@@ -161,7 +234,7 @@ class TIVWP_Updater_Core {
 	 */
 	protected function url_activation() {
 		return $this->build_url( array(
-			'request'     => 'activation',
+			'request' => 'activation',
 		) );
 	}
 
@@ -170,7 +243,7 @@ class TIVWP_Updater_Core {
 	 */
 	protected function url_deactivation() {
 		return $this->build_url( array(
-			'request'     => 'deactivation',
+			'request' => 'deactivation',
 		) );
 	}
 
