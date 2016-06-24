@@ -1,9 +1,12 @@
 <?php
-
 /**
  * File: Core.php
  *
  * @package TIVWP\Updater
+ */
+
+/**
+ * Class TIVWP_Updater_Core
  */
 class TIVWP_Updater_Core {
 
@@ -45,6 +48,13 @@ class TIVWP_Updater_Core {
 	/**
 	 * @var string
 	 */
+	protected $slug = '';
+
+	/**
+	 * This is the current domain name. Set in the constructor.
+	 *
+	 * @var string
+	 */
 	private $platform = '';
 
 	/**
@@ -65,6 +75,17 @@ class TIVWP_Updater_Core {
 
 		// Domain name where the plugin instance is installed. No scheme.
 		$this->platform = str_ireplace( array( 'http://', 'https://' ), '', home_url() );
+
+		// Check For Plugin Updates
+		$transient = 'update_plugins';
+		add_filter( 'pre_set_site_transient_' . $transient, array(
+			$this,
+			'filter__pre_set_site_transient_update_plugins'
+		) );
+
+		// Check For Plugin Information to display on the update details page
+		add_filter( 'plugins_api', array( $this, 'filter__plugins_api' ), 10, 3 );
+
 	}
 
 	/**
@@ -123,6 +144,17 @@ class TIVWP_Updater_Core {
 	}
 
 	/**
+	 * @param string $slug
+	 *
+	 * @return TIVWP_Updater_Core
+	 */
+	public function setSlug( $slug ) {
+		$this->slug = $slug;
+
+		return $this;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function get_status() {
@@ -153,50 +185,123 @@ class TIVWP_Updater_Core {
 	 * @return mixed $transient
 	 */
 	public function filter__pre_set_site_transient_update_plugins( $transient ) {
-		// TODO Plugin must send __FILE__
-		$this->plugin_name = 'wpglobus-plus/wpglobus-plus.php';
 
 		if ( empty( $transient->checked[ $this->plugin_name ] ) ) {
 			return $transient;
 		}
 
-		$curr_version = (string) $transient->checked[ $this->plugin_name ];
+		$current_version = (string) $transient->checked[ $this->plugin_name ];
 
-		$args = array(
-			'request'          => 'pluginupdatecheck',
-			'slug'             => 'wpglobus-plus', //TODO $this->slug,
-			'plugin_name'      => $this->plugin_name,
-			'version'          => $curr_version,
-			'product_id'       => $this->product_id,
-			'api_key'          => $this->licence_key,
-			'activation_email' => $this->email,
-			'instance'         => $this->instance,
-			'domain'           => $this->platform,
+		$request_parameters = array(
+			'request' => 'pluginupdatecheck',
+			'slug'    => $this->slug,
+			'version' => $current_version,
 		);
 
-		// Check for a plugin update
+		$response = $this->get_upgrade_api_response( $request_parameters );
 
-		$upgrade_url = add_query_arg( 'wc-api', 'upgrade-api', $this->url_product )
-		               . '&' . http_build_query( $args );
+		if ( isset( $response->new_version )
+		     && version_compare( (string) $response->new_version, $current_version, '>' )
+		) {
+			$transient->response[ $this->plugin_name ] = $response;
+		}
 
-		$target_url = esc_url_raw( $upgrade_url );
-		$response   = wp_safe_remote_get( $target_url );
+		return $transient;
+
+	}
+
+	/**
+	 * @param bool|stdClass|array $result The result object or array. Default false.
+	 * @param string              $action The type of information being requested from the Plugin Install API.
+	 * @param stdClass            $args   Plugin API arguments.
+	 *
+	 * @return stdClass|bool $response or boolean false
+	 */
+	public function filter__plugins_api( $result, $action, $args ) {
+
+		if ( empty( $action ) or $action !== 'plugin_information' ) {
+			return $result;
+		}
+
+		if ( empty( $args->slug ) or $args->slug !== $this->slug ) {
+			// Not our business
+			return $result;
+		}
+
+
+		$transient = get_site_transient( 'update_plugins' );
+
+		if ( empty( $transient->checked[ $this->plugin_name ] ) ) {
+			return $result;
+		}
+
+		$current_version = (string) $transient->checked[ $this->plugin_name ];
+
+		$request_parameters = array(
+			'request'          => 'plugininformation',
+			'version'          => $current_version,
+			'software_version' => $current_version,
+		);
+
+		$response = $this->get_upgrade_api_response( $request_parameters );
+
+
+		// If everything is okay return the $response
+		if ( isset( $response->sections ) ) {
+
+			// Filter each section. Each section is a WP page, so their content should
+			// go through `the_content` filter.
+			// Use case: multilingual pages made with WPGlobus.
+			foreach ( $response->sections as $section_name => $section_content ) {
+				$response->sections[ $section_name ] =
+					apply_filters( 'the_content', $section_content );
+			}
+//			if ( ! isset( $response->banners ) ) {
+//				$response->banners['low'] = '//woothemess3.s3.amazonaws.com/wp-updater-api/official-wc-extension-1544.png';
+//				$response->banners['high'] = '//woothemess3.s3.amazonaws.com/wp-updater-api/official-wc-extension-1544.png';
+//			}
+
+			$result = $response;
+		}
+
+		return $result;
+
+	}
+
+	/**
+	 * @param array $request_parameters
+	 *
+	 * @return stdClass
+	 */
+	protected function get_upgrade_api_response( Array $request_parameters ) {
+		$request_parameters = array_merge( array(
+			'activation_email' => $this->email,
+			'api_key'          => $this->licence_key,
+			'domain'           => $this->platform,
+			'instance'         => $this->instance,
+			'plugin_name'      => $this->plugin_name,
+			'product_id'       => $this->product_id,
+		), $request_parameters );
+
+		$url = add_query_arg( 'wc-api', 'upgrade-api', $this->url_product )
+		       . '&' . http_build_query( $request_parameters );
+
+		$response = wp_safe_remote_get( esc_url_raw( $url ) );
 
 		// TODO check for errors
 
 
 		$response_body = wp_remote_retrieve_body( $response );
-		// TODO check for errors. Is serialized?
-		$response_body = unserialize( $response_body );
-		TIVWP_Debug::print_var_html( $response_body );
+		if ( is_serialized( $response_body ) ):
 
-		$new_version = (string) $response_body->new_version;
+			$response_object = unserialize( $response_body );
 
-		if ( version_compare( $new_version, $curr_version, '>' ) ) {
-			$transient->response[ $this->plugin_name ] = $response_body;
-		}
+			if ( is_object( $response_object ) ) {
+				return $response_object;
+			}
+		endif;
 
-		return $transient;
+		return new stdClass();
 
 	}
 
