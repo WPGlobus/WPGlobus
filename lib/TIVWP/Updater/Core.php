@@ -58,17 +58,6 @@ class TIVWP_Updater_Core {
 	private $platform = '';
 
 	/**
-	 * @param string $plugin_name
-	 *
-	 * @return TIVWP_Updater_Core
-	 */
-	public function setPluginName( $plugin_name ) {
-		$this->plugin_name = $plugin_name;
-
-		return $this;
-	}
-
-	/**
 	 * TIVWP_Updater_Core constructor.
 	 */
 	public function __construct() {
@@ -86,6 +75,19 @@ class TIVWP_Updater_Core {
 		// Check For Plugin Information to display on the update details page
 		add_filter( 'plugins_api', array( $this, 'filter__plugins_api' ), 10, 3 );
 
+		add_filter( 'upgrader_pre_download', array( $this, 'filter__upgrader_pre_download' ), 10, 3 );
+
+	}
+
+	/**
+	 * @param string $plugin_name
+	 *
+	 * @return TIVWP_Updater_Core
+	 */
+	public function setPluginName( $plugin_name ) {
+		$this->plugin_name = $plugin_name;
+
+		return $this;
 	}
 
 	/**
@@ -257,7 +259,7 @@ class TIVWP_Updater_Core {
 					apply_filters( 'the_content', $section_content );
 			}
 //			if ( ! isset( $response->banners ) ) {
-//				$response->banners['low'] = '//woothemess3.s3.amazonaws.com/wp-updater-api/official-wc-extension-1544.png';
+//				$response->banners['low'] =
 //				$response->banners['high'] = '//woothemess3.s3.amazonaws.com/wp-updater-api/official-wc-extension-1544.png';
 //			}
 
@@ -266,6 +268,50 @@ class TIVWP_Updater_Core {
 
 		return $result;
 
+	}
+
+	/**
+	 * When @see download_url is called, the temporary file is created with a wrong name.
+	 * This filter renames it to the valid name, {plugin-slug}.zip
+	 *
+	 * @param bool|string $reply       Whether to bail without returning the package.
+	 *                                 Default false.
+	 * @param string      $package     The package file name.
+	 * @param WP_Upgrader $wp_upgrader The WP_Upgrader instance.
+	 *
+	 * @return mixed|WP_Error|bool
+	 */
+	public function filter__upgrader_pre_download( $reply, $package, $wp_upgrader ) {
+
+		/**
+		 * There could be several instances of the Updater, one for each paid extension.
+		 * So, we need to check if we are called for the correct extension.
+		 */
+		/** @noinspection PhpUndefinedFieldInspection */
+		if ( isset( $wp_upgrader->skin->plugin_info['Name'] ) &&
+		     $wp_upgrader->skin->plugin_info['Name'] === $this->product_id
+		) {
+
+			// This is the regular WP download. Creates a file in the temp folder,
+			// with an ugly file name, in our case, because of the ugly download URL.
+			$path_to_downloaded_plugin_zip = download_url( $package );
+
+			// `is_string` means, no error
+			if ( is_string( $path_to_downloaded_plugin_zip ) ) {
+
+				// Rename to {plugin_slug}.zip, still in the temp folder
+				$valid_path_to_plugin_zip = get_temp_dir() . $this->slug . '.zip';
+				if ( file_exists( $valid_path_to_plugin_zip ) ) {
+					unlink( $valid_path_to_plugin_zip );
+				}
+				if ( rename( $path_to_downloaded_plugin_zip, $valid_path_to_plugin_zip ) ) {
+					// If renamed successfully, return the new file path
+					$reply = $valid_path_to_plugin_zip;
+				}
+			}
+		}
+
+		return $reply;
 	}
 
 	/**
