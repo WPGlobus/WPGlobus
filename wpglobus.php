@@ -81,7 +81,7 @@ WPGlobus_Customize_Options::controller();
  * This must be run on 'init' because update plugins depends on set_site_transients,
  * which is run early.
  */
-is_admin() && ! defined( 'DOING_AJAX' ) && add_action( 'init', function () {
+is_admin() && add_action( 'init', function () {
 	require_once 'lib/TIVWP/Updater/test.php';
 } );
 
