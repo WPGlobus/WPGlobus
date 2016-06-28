@@ -16,6 +16,13 @@ class TIVWP_Updater_Core {
 	const KEY_INTERNAL_ERROR = 'internal_error';
 
 	/**
+	 * The loader's __FILE__ must be passed.
+	 *
+	 * @var string
+	 */
+	protected $plugin_file = '';
+
+	/**
 	 * @var string
 	 */
 	protected $product_id = '';
@@ -77,6 +84,20 @@ class TIVWP_Updater_Core {
 
 		add_filter( 'upgrader_pre_download', array( $this, 'filter__upgrader_pre_download' ), 10, 3 );
 
+	}
+
+	/**
+	 * @param string $plugin_file
+	 *
+	 * @return TIVWP_Updater_Core
+	 */
+	public function setPluginFile( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
+
+		$this->setSlug( str_replace( '.php', '', basename( $this->plugin_file ) ) );
+		$this->setPluginName( basename( dirname( $this->plugin_file ) ) . '/' . $this->slug . '.php' );
+
+		return $this;
 	}
 
 	/**
