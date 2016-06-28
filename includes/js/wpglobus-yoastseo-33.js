@@ -1259,6 +1259,7 @@ jQuery(document).ready( function ($) {
 		WPGlobusYoastSeoPlugin.prototype.updatePageAnalysis = function() {
 			$( '#wpseo-pageanalysis_' + _this.getWPseoTab() ).html( $('#wpseo-pageanalysis').html() );
 			$( '#yoast-seo-content-analysis_' + _this.getWPseoTab() ).html( $( '#yoast-seo-content-analysis' ).html() );
+			$( '#yoast-seo-content-analysis_' + _this.getWPseoTab() + ' li a' ).css({'float':'none'});
 		};
 		
 		window.WPGlobusYoastSeoPlugin = new WPGlobusYoastSeoPlugin();
