@@ -7,7 +7,8 @@
 
 $oUpdater = WPGlobus_Core::get_new_updater();
 
-$oUpdater
+$oUpdater && $oUpdater
+//	->setPluginFile( __FILE__ )
 	->setProductId( 'WPGlobus Plus' )
 	->setPluginName( 'wpglobus-plus/wpglobus-plus.php' )
 	->setSlug( 'wpglobus-plus' )

@@ -295,9 +295,13 @@ class WPGlobus_Core {
 
 	/**
 	 * The Updater "Factory".
-	 * @return TIVWP_Updater_Core The Updater Core object.
+	 * @return TIVWP_Updater_Core|null The Updater Core object or null if not supported.
 	 */
 	public static function get_new_updater() {
+		if ( is_multisite() ) {
+			return null;
+		}
+
 		require_once WPGlobus::$PLUGIN_DIR_PATH . 'lib/TIVWP/Updater/Core.php';
 
 		return new TIVWP_Updater_Core();
