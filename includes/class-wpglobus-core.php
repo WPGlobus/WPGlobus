@@ -298,7 +298,17 @@ class WPGlobus_Core {
 	 * @return TIVWP_Updater_Core|null The Updater Core object or null if not supported.
 	 */
 	public static function get_new_updater() {
-		if ( is_multisite() ) {
+		/**
+		 * Prerequisites:
+		 * - Not tested on old WP.
+		 * - Multisite is not supported.
+		 * - Only for those who can update plugins.
+		 */
+		if (
+			version_compare( $GLOBALS['wp_version'], '4.5', '<' )
+			or is_multisite()
+			or ! current_user_can( 'update_plugins' )
+		) {
 			return null;
 		}
 
