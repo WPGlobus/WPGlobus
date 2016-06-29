@@ -4,6 +4,16 @@
   "type": "wordpress-plugin",
   "license": "GPL-2.0",
   "minimum-stability": "dev",
+  "config": {
+    "preferred-install": {
+      "tivwp/updater": "source",
+      "*": "dist"
+    },
+    "github-protocols": [
+      "https"
+    ],
+    "notify-on-install": false
+  },
   "require": {
     "tivwp/updater": "dev-master"
   },
