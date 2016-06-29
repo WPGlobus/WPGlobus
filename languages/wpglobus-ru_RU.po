@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-06-20 15:41:36+00:00\n"
+"POT-Creation-Date: 2016-06-29 22:35:27+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
@@ -139,11 +139,11 @@ msgstr ""
 "написание кода специально для Вас."
 
 #: includes/admin/class-wpglobus-about.php:123
-#: includes/admin/class-wpglobus-addons.php:88
+#: includes/admin/class-wpglobus-addons.php:93
 msgid "Go to WPGlobus Settings"
 msgstr "Перейдите в настройки WPGlobus"
 
-#: includes/admin/class-wpglobus-addons.php:45
+#: includes/admin/class-wpglobus-addons.php:50
 msgid "WPGlobus Add-ons / Extensions"
 msgstr "Расширения WPGlobus"
 
@@ -613,13 +613,13 @@ msgstr "Нельзя отключить основной язык."
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:2829
+#: includes/class-wpglobus.php:3056
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:2831
+#: includes/class-wpglobus.php:3058
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -627,7 +627,7 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:2970
+#: includes/class-wpglobus.php:3197
 msgid "Add"
 msgstr "Добавить"
 

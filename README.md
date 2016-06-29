@@ -167,7 +167,10 @@ No known backward incompatibility issues.
 
 ### 1.5.8 ###
 
+* FIXED:
+	* Yoast: switching to "Readability" tab (WPSEO issue #5013, Ticket #8628).
 * ADDED:
+	* Core: flag for American Sign Language (ASL) (Ticket #8497).
 	* API: new filter `wpglobus_menu_add_selector`.
 	* API: new filter to modify language selector items generated from pages.
 
