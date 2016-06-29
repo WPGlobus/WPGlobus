@@ -16,6 +16,11 @@ class TIVWP_Updater_Core {
 	const KEY_INTERNAL_ERROR = 'internal_error';
 
 	/**
+	 * @var string[]
+	 */
+	protected static $PERSISTENT_VARS = array( 'instance', 'licence_key', 'email' );
+
+	/**
 	 * The loader's __FILE__ must be passed.
 	 *
 	 * @var string
@@ -84,6 +89,73 @@ class TIVWP_Updater_Core {
 
 		add_filter( 'upgrader_pre_download', array( $this, 'filter__upgrader_pre_download' ), 10, 3 );
 
+		add_action( 'after_plugin_row', array( $this, 'action__after_plugin_row' ), 10, 3 );
+
+		add_action( 'init', array( $this, 'action__init' ) );
+
+		add_action( 'shutdown', array( $this, 'action__shutdown' ) );
+
+	}
+
+	/**
+	 *
+	 */
+	public function action__init() {
+		foreach ( self::$PERSISTENT_VARS as $key ) {
+			$this->var_load( $key );
+		}
+
+		$this->maybe_generate_instance();
+
+		$this->process_admin_requests();
+	}
+
+	/**
+	 *
+	 */
+	public function action__shutdown() {
+		foreach ( self::$PERSISTENT_VARS as $key ) {
+			$this->var_save( $key );
+		}
+	}
+
+	/**
+	 * @param string $key
+	 */
+	protected function var_save( $key ) {
+		if ( ! isset( $this->$key ) ) {
+			return;
+		}
+		if ( $this->$key ) {
+			update_option( $this->slug . '_' . $key, $this->$key, false );
+		} else {
+			delete_option( $this->slug . '_' . $key );
+		}
+	}
+
+	/**
+	 * @param string $key
+	 */
+	protected function var_load( $key ) {
+		if ( ! isset( $this->$key ) ) {
+			return;
+		}
+		$this->$key = get_option( $this->slug . '_' . $key );
+	}
+
+	/**
+	 * Show the input for the licence key
+	 *
+	 * @param string $plugin_file Path to the plugin file, relative to the plugins directory.
+	 * @param array  $plugin_data An array of plugin data.
+	 * @param string $status      Status of the plugin. Defaults are 'All', 'Active',
+	 *                            'Inactive', 'Recently Activated', 'Upgrade', 'Must-Use',
+	 *                            'Drop-ins', 'Search'.
+	 */
+	public function action__after_plugin_row( $plugin_file, $plugin_data, $status ) {
+		if ( strtolower( basename( dirname( $plugin_file ) ) ) === strtolower( $this->slug ) ) {
+			include( dirname( __FILE__ ) . '/View/html-key-input.php' );
+		}
 	}
 
 	/**
@@ -457,6 +529,45 @@ class TIVWP_Updater_Core {
 		}
 
 		return json_decode( $response_body, JSON_OBJECT_AS_ARRAY );
+	}
+
+	/**
+	 *
+	 */
+	protected function maybe_generate_instance() {
+		if ( ! $this->instance ) {
+			$this->instance = substr( sha1( site_url() . $_SERVER['HTTP_HOST'] . (string) mt_rand( 100, 999 ) ), 0, 12 );
+		}
+	}
+
+	/**
+	 *
+	 */
+	protected function process_admin_requests() {
+
+		$key = 'licence_key';
+		$_   = $this->slug . '_' . $key;
+		if ( isset( $_POST[ $_ ] ) && is_string( $_POST[ $_ ] ) ) {
+			$this->$key = $_POST[ $_ ];
+		}
+
+		$key = 'email';
+		$_   = $this->slug . '_' . $key;
+		if ( isset( $_POST[ $_ ] ) && is_email( $_POST[ $_ ] ) ) {
+			$this->$key = $_POST[ $_ ];
+		}
+
+		$key = 'action';
+		$_   = $this->slug . '_' . $key;
+		if ( 1
+		     && $this->licence_key
+		     && $this->email
+		     && isset( $_POST[ $_ ] )
+		     && 'activate' === $_POST[ $_ ]
+		) {
+			$this->activate();
+		}
+
 	}
 }
 
