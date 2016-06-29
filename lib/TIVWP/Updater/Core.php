@@ -18,7 +18,17 @@ class TIVWP_Updater_Core {
 	/**
 	 * @var string[]
 	 */
-	protected static $PERSISTENT_VARS = array( 'instance', 'licence_key', 'email' );
+	protected static $PERSISTENT_VARS = array( 'status', 'notifications', 'instance', 'licence_key', 'email' );
+
+	/**
+	 * @var string
+	 */
+	protected $status = 'Inactive';
+
+	/**
+	 * @var string[]
+	 */
+	protected $notifications = array();
 
 	/**
 	 * The loader's __FILE__ must be passed.
@@ -140,7 +150,10 @@ class TIVWP_Updater_Core {
 		if ( ! isset( $this->$key ) ) {
 			return;
 		}
-		$this->$key = get_option( $this->slug . '_' . $key );
+		$stored_value = get_option( $this->slug . '_' . $key, null );
+		if ( null !== $stored_value ) {
+			$this->$key = $stored_value;
+		}
 	}
 
 	/**
@@ -565,9 +578,32 @@ class TIVWP_Updater_Core {
 		     && isset( $_POST[ $_ ] )
 		     && 'activate' === $_POST[ $_ ]
 		) {
-			$this->activate();
+			$this->notification_clear_all();
+			$activation_result = $this->activate();
+			if ( ! empty( $activation_result['error'] ) ) {
+				$this->notification_add( $activation_result['error'] );
+			} elseif ( isset( $activation_result['activated'] )
+			           && $activation_result['activated']
+			) {
+				$this->status = 'Active';
+				$this->notification_add( $activation_result['message'] );
+			}
 		}
 
+	}
+
+	/**
+	 * @param string $message
+	 */
+	protected function notification_add( $message ) {
+		$this->notifications[] = $message;
+	}
+
+	/**
+	 * Clear all notification messages.
+	 */
+	protected function notification_clear_all() {
+		$this->notifications = array();
 	}
 }
 

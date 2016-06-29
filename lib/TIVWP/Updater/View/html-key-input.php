@@ -15,15 +15,25 @@
 			       value="<?php echo esc_attr( $this->licence_key ); ?>" />
 			<input type="email" id="<?php echo sanitize_title( $this->slug ); ?>_email" name="<?php echo esc_attr( $this->slug ); ?>_email" placeholder="Email address" value="<?php echo esc_attr( $this->email ); ?>" />
 			<span class="description"><?php _e( 'Enter your licence key and email and hit return. A valid key is required for automatic updates.' ); ?></span>
-			<button type="submit" class="button-primary"
+			<button type="submit"
 			        name="<?php echo esc_attr( $this->slug ); ?>_action"
 			        value="activate">Activate
 			</button>
 		</div>
+		<div>
+			<?php if ( $this->status ) {
+				echo esc_html( $this->status );
+			} ?>
+		</div>
+		<div>
+			<?php if ( $this->notifications ) {
+				echo implode( '<br>', $this->notifications );
+			} ?>
+		</div>
 	</td>
 	<script>
-		jQuery(function () {
-			jQuery('tr#<?php echo esc_attr( $this->slug ); ?>_licence_key_row').prev().addClass('wpjm-updater-licenced');
-		});
+		//		jQuery(function () {
+		//			jQuery('tr#<?php //echo esc_attr( $this->slug ); ?>//_licence_key_row').prev().addClass('wpjm-updater-licenced');
+		//		});
 	</script>
 </tr>
