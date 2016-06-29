@@ -295,7 +295,7 @@ class WPGlobus_Core {
 
 	/**
 	 * The Updater "Factory".
-	 * @return TIVWP_Updater_Core|null The Updater Core object or null if not supported.
+	 * @return TIVWP_Updater|null The Updater object or null if not supported.
 	 */
 	public static function get_new_updater() {
 		/**
