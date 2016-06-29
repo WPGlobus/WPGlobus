@@ -75,14 +75,4 @@ WPGlobus_Customize::controller();
 require_once 'includes/admin/class-wpglobus-customize-options.php';
 WPGlobus_Customize_Options::controller();
 
-//require_once 'updater/class-wpglobus-updater.php';
-
-/**
- * This must be run on 'init' because update plugins depends on set_site_transients,
- * which is run early.
- */
-is_admin() && add_action( 'init', function () {
-	require_once 'lib/TIVWP/Updater/test.php';
-} );
-
 # --- EOF

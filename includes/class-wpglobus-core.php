@@ -312,9 +312,9 @@ class WPGlobus_Core {
 			return null;
 		}
 
-		require_once WPGlobus::$PLUGIN_DIR_PATH . 'lib/TIVWP/Updater/Core.php';
-
-		return new TIVWP_Updater_Core();
+		/** @noinspection PhpIncludeInspection */
+		require_once WPGlobus::$PLUGIN_DIR_PATH . 'vendor/tivwp/updater/class-tivwp-updater.php';
+		return new TIVWP_Updater();
 	}
 
 
