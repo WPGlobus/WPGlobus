@@ -434,7 +434,7 @@ jQuery(document).ready( function ($) {
 					var sectionID = 'wpseo-meta-section-content_'+l;
 					
 					$e.html('<div id="'+sectionID+'" class="wpseo-meta-section wpglobus-wpseo-meta-section" style="width:100%" data-language="'+l+'">' + api.t.html() + '</div>');
-					$('#'+sectionID+' .wpseo-metabox-tabs').attr( 'id', 'wpseo-metabox-tabs_'+l );
+					$('#'+sectionID+' .wpseo-metabox-tabs').attr( 'id', 'wpseo-metabox-tabs_'+l ).attr( 'data-language', l );
 					$('#'+sectionID+' .wpseotab').attr( 'id', 'wpseo_content_'+l );
 					/** added since yoastseo 3.2 */
 					$('#wpseo_content_'+l).css({'float':'left'});
@@ -480,7 +480,14 @@ jQuery(document).ready( function ($) {
 						}
 						/** wpseo-pageanalysis */
 						if ( 'wpseo-pageanalysis' == id ) {
-							$id.addClass('wpglobus-wpseo-pageanalysis');
+							$id.addClass( 'wpglobus-wpseo-pageanalysis' );
+						}
+						/** 
+						 * yoast-seo-content-analysis  
+						 * @since 1.5.8 
+						 */
+						if ( 'yoast-seo-content-analysis' == id ) {
+							$id.addClass( 'wpglobus-yoast-seo-content-analysis' );
 						}
 						/** #snippet_preview */
 						if ( 'snippet_preview' == id ) {
@@ -573,7 +580,7 @@ jQuery(document).ready( function ($) {
 					}
 					
 				}); // end each .wpglobus-wpseo-general	
-
+			
 				/** add wpglobus classes to 'Edit snippet' button and hidden form */
 				$( '.wpglobus-wpseosnippet' ).each( function(i,e) {
 					var $e = $(e);
@@ -594,6 +601,40 @@ jQuery(document).ready( function ($) {
 				var focuskw_d = WPGlobusCore.TextFilter( $('#yoast_wpseo_focuskw_text_input').val(), WPGlobusCoreData.default_language, 'RETURN_EMPTY' );
 				$( '#yoast_wpseo_focuskw_text_input' ).val( focuskw_d );
 				$( '#yoast_wpseo_focuskw' ).val( focuskw_d );
+				
+				/** 
+				 * make switchable wpseo_content_tab & wpseo_keyword_tab
+				 * @see element #yoast-seo-content-analysis
+				 * @since 1.5.8
+				 */
+				$( '.wpglobus-wpseo-general .wpseo_tablink' ).on( 'click', function(ev) {
+					ev.preventDefault();
+					var $t = $(this),
+						l = $t.parents( 'ul' ).data( 'language' ),
+						tab = $t.parent( 'li' );
+						
+					if ( l != WPGlobusCoreData.default_language ) {
+						/**
+						 * Event handler
+						 */						
+						if ( typeof $(document).triggerHandler( 'wpglobus_yoast_analysis', {language:l} ) === 'undefined' ) {
+							return;	
+						}	
+					}	
+					
+					if ( tab.hasClass( 'wpseo_content_tab' ) ) {
+						$( '#wpseo-pageanalysis_' + l ).css({'display':'none'});
+						$( '#yoast-seo-content-analysis_' + l ).css({'display':'block'});
+						$( '#wpseo_content_' + l + ' table tr' ).eq(0).css({'display':'none'});
+						$( '#wpseo_content_' + l + ' table tr' ).eq(1).css({'display':'none'});
+						$( '#yoast-seo-content-analysis_' + l + ' li a' ).css({'float':'none'});
+					} else if ( tab.hasClass( 'wpseo_keyword_tab' ) ) {
+						$( '#wpseo-pageanalysis_' + l ).css({'display':'block'});
+						$( '#yoast-seo-content-analysis_' + l ).css({'display':'none'});
+						$( '#wpseo_content_' + l + ' table tr' ).eq(0).css('display','');
+						$( '#wpseo_content_' + l + ' table tr' ).eq(1).css('display','');
+					}	
+				});
 				
 				// wpseo-metabox-sidebar 
 				$('.wpseo-metabox-sidebar .wpseo-meta-section-link').on('click',function(ev){
@@ -1217,6 +1258,8 @@ jQuery(document).ready( function ($) {
 		
 		WPGlobusYoastSeoPlugin.prototype.updatePageAnalysis = function() {
 			$( '#wpseo-pageanalysis_' + _this.getWPseoTab() ).html( $('#wpseo-pageanalysis').html() );
+			$( '#yoast-seo-content-analysis_' + _this.getWPseoTab() ).html( $( '#yoast-seo-content-analysis' ).html() );
+			$( '#yoast-seo-content-analysis_' + _this.getWPseoTab() + ' li a' ).css({'float':'none'});
 		};
 		
 		window.WPGlobusYoastSeoPlugin = new WPGlobusYoastSeoPlugin();

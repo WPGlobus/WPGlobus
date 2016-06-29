@@ -348,6 +348,7 @@ class WPGlobus_YoastSEO {
 			#'yoast_wpseo_metadesc_notice',
 			'yoast_wpseo_linkdex',
 			'wpseo-pageanalysis',
+			'yoast-seo-content-analysis',
 			'YoastSEO-plugin-loading',
 			#from Yoast 3.1
 			'snippet-editor-title',

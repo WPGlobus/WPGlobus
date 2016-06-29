@@ -7,6 +7,7 @@
 * ADDED:
 	* API: new filter `wpglobus_menu_add_selector`.
 	* API: new filter to modify language selector items generated from pages.
+	* Yoast: make switchable content tab & keyword tab in SEO Analysis.
 
 ### 1.5.7 ###
 
