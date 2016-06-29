@@ -540,6 +540,10 @@ class TIVWP_Updater_Core {
 		} else {
 			$response_body = wp_remote_retrieve_body( $result );
 		}
+		if ( WP_DEBUG ) {
+			error_log( $url );
+			error_log( $response_body );
+		}
 
 		return json_decode( $response_body, JSON_OBJECT_AS_ARRAY );
 	}
@@ -576,17 +580,43 @@ class TIVWP_Updater_Core {
 		     && $this->licence_key
 		     && $this->email
 		     && isset( $_POST[ $_ ] )
-		     && 'activate' === $_POST[ $_ ]
+
 		) {
-			$this->notification_clear_all();
-			$activation_result = $this->activate();
-			if ( ! empty( $activation_result['error'] ) ) {
-				$this->notification_add( $activation_result['error'] );
-			} elseif ( isset( $activation_result['activated'] )
-			           && $activation_result['activated']
-			) {
-				$this->status = 'Active';
-				$this->notification_add( $activation_result['message'] );
+			if ( 'activate' === $_POST[ $_ ] ) {
+				$this->notification_clear_all();
+				$result = $this->activate();
+				if ( ! empty( $result['error'] ) ) {
+					$this->notification_add( $result['error'] );
+				} elseif ( isset( $result['activated'] )
+				           && $result['activated']
+				) {
+					$this->status = 'active';
+					$this->notification_add( $result['message'] );
+				}
+			} elseif ( 'deactivate' === $_POST[ $_ ] ) {
+				$this->notification_clear_all();
+				$result = $this->deactivate();
+				if ( ! empty( $result['error'] ) ) {
+					$this->notification_add( $result['error'] );
+				} elseif ( isset( $result['deactivated'] )
+				           && $result['deactivated']
+				) {
+					$this->status = 'inactive';
+					if ( ! empty( $result['activations_remaining'] ) ) {
+						$this->notification_add( $result['activations_remaining'] );
+					}
+				}
+			} elseif ( 'status' === $_POST[ $_ ] ) {
+				$this->notification_clear_all();
+				$result = $this->get_status();
+				if ( ! empty( $result['error'] ) ) {
+					$this->notification_add( $result['error'] );
+				} elseif ( ! empty( $result['status_check'] ) ) {
+					$this->status = $result['status_check'];
+					if ( ! empty( $result['activations_remaining'] ) ) {
+						$this->notification_add( $result['activations_remaining'] );
+					}
+				}
 			}
 		}
 
