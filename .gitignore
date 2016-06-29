@@ -1,4 +1,3 @@
-vendor/
-tests/_output/
-node_modules/
-
+/node_modules/
+/vendor/
+/composer.lock
