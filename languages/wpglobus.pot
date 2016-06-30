@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.5.8\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-06-20 22:30:01+00:00\n"
+"POT-Creation-Date: 2016-06-30 18:22:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -120,11 +120,11 @@ msgid ""
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:123
-#: includes/admin/class-wpglobus-addons.php:88
+#: includes/admin/class-wpglobus-addons.php:93
 msgid "Go to WPGlobus Settings"
 msgstr ""
 
-#: includes/admin/class-wpglobus-addons.php:45
+#: includes/admin/class-wpglobus-addons.php:50
 msgid "WPGlobus Add-ons / Extensions"
 msgstr ""
 
@@ -558,17 +558,17 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:2829
+#: includes/class-wpglobus.php:3056
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:2831
+#: includes/class-wpglobus.php:3058
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a "
 "non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:2970
+#: includes/class-wpglobus.php:3197
 msgid "Add"
 msgstr ""
 

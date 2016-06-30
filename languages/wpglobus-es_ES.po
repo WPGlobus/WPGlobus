@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-06-20 15:41:36+00:00\n"
+"POT-Creation-Date: 2016-06-29 22:35:27+00:00\n"
 "PO-Revision-Date: 2015-09-20 07:26+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/wp-translations/"
@@ -138,11 +138,11 @@ msgstr ""
 "código personalizado para tí."
 
 #: includes/admin/class-wpglobus-about.php:123
-#: includes/admin/class-wpglobus-addons.php:88
+#: includes/admin/class-wpglobus-addons.php:93
 msgid "Go to WPGlobus Settings"
 msgstr "Ir a Ajustes WPGlobus"
 
-#: includes/admin/class-wpglobus-addons.php:45
+#: includes/admin/class-wpglobus-addons.php:50
 msgid "WPGlobus Add-ons / Extensions"
 msgstr "WPGlobus complementos/extensiones"
 
@@ -592,12 +592,12 @@ msgstr "No se puede desactivar el idioma principal."
 msgid "*) Available after the menu is saved."
 msgstr "No Se Puede Desactivar el director idioma."
 
-#: includes/class-wpglobus.php:2829
+#: includes/class-wpglobus.php:3056
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Debes habilitar los Enlaces permanentes Pretty para utilizar WPGlobus ."
 
-#: includes/class-wpglobus.php:2831
+#: includes/class-wpglobus.php:3058
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -605,7 +605,7 @@ msgstr ""
 "Por favor, ve a Configuración > Enlaces permanentes > Ajustes comunes y "
 "selecciona una opción no predeterminada ."
 
-#: includes/class-wpglobus.php:2970
+#: includes/class-wpglobus.php:3197
 msgid "Add"
 msgstr "Añadir"
 
