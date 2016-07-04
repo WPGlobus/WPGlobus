@@ -415,7 +415,17 @@ class WPGlobus {
 				'on_admin_bar_menu'
 			) );
 
+			
+			if ( WPGlobus_WP::is_pagenow( 'plugin-install.php' ) ) {
+				require_once 'admin/class-wpglobus-plugin-install.php';
+				WPGlobus_Plugin_Install::controller();
+			}	
+			
 		} else {
+			
+			/**
+			 * @scope front
+			 */
 
 			$this->menus = self::_get_nav_menus();
 
@@ -1678,8 +1688,12 @@ class WPGlobus {
 	 * @return void
 	 */
 	public function wpglobus_addons() {
-		require_once 'admin/class-wpglobus-addons.php';
-		WPGlobus_Addons::addons_screen();
+		/**
+		 * obsolete from 1.5.9
+		 * @todo remove after testing @see class WPGlobus_Plugin_Install
+		 */
+		//require_once 'admin/class-wpglobus-addons.php';
+		//WPGlobus_Addons::addons_screen();
 	}
 
 	/**
