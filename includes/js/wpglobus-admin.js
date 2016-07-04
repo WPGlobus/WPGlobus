@@ -596,10 +596,20 @@ jQuery(document).ready(function () {
 				var order = $('.wpglobus-addons-group a').data('key');
 				if ( 'indefined' != typeof order ) {
 					if ( window.location.search.indexOf('page=wpglobus_options&tab='+order) >= 0 ) {
-						window.location = 'admin.php?page=wpglobus-addons';
+						window.location = 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus';
+						/**
+						 * obsolete from 1.5.9
+						 * @todo remove after testing @see class WPGlobus_Plugin_Install
+						 */
+						//window.location = 'admin.php?page=wpglobus-addons';
 					} else {	
 						var addon = $('#toplevel_page_wpglobus_options li').eq(order+1);
-						$(addon).find('a').attr('href','admin.php?page=wpglobus-addons').attr('onclick',"window.location=jQuery(this).attr('href');return false;");
+						$(addon).find('a').attr('href','plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus').attr('onclick',"window.location=jQuery(this).attr('href');return false;");
+						/**
+						 * obsolete from 1.5.9
+						 * @todo remove after testing @see class WPGlobus_Plugin_Install
+						 */
+						//$(addon).find('a').attr('href','admin.php?page=wpglobus-addons').attr('onclick',"window.location=jQuery(this).attr('href');return false;");
 					}	
 				}
 			},	
