@@ -75,4 +75,8 @@ WPGlobus_Customize::controller();
 require_once 'includes/admin/class-wpglobus-customize-options.php';
 WPGlobus_Customize_Options::controller();
 
+if ( version_compare( PHP_VERSION, '5.3.0', '>=' ) ) {
+	require_once 'vendor/tivwp/updater/updater.php';
+}
+
 # --- EOF

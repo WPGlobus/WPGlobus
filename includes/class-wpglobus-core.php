@@ -293,35 +293,6 @@ class WPGlobus_Core {
 
 	}
 
-	/**
-	 * The Updater "Factory".
-	 *
-	 * @param array $args To pass to the Updater's constructor.
-	 *
-	 * @return null|TIVWP_Updater The Updater object or null if not supported.
-	 */
-	public static function get_new_updater( Array $args = array() ) {
-		/**
-		 * Prerequisites:
-		 * - Not tested on old WP.
-		 * - Multisite is not supported.
-		 * - Only for those who can update plugins.
-		 */
-		if (
-			version_compare( $GLOBALS['wp_version'], '4.5', '<' )
-			or is_multisite()
-			or ! current_user_can( 'update_plugins' )
-		) {
-			return null;
-		}
-
-		/** @noinspection PhpIncludeInspection */
-		require_once WPGlobus::$PLUGIN_DIR_PATH . 'vendor/tivwp/updater/class-tivwp-updater.php';
-
-		return new TIVWP_Updater( $args );
-	}
-
-
 } // class
 
 # --- EOF
