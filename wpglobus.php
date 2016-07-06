@@ -77,4 +77,16 @@ WPGlobus_Customize_Options::controller();
 
 require_once 'updater/class-wpglobus-updater.php';
 
+/**
+ * TIVWP Updater.
+ *
+ * @since 1.5.9
+ */
+if (
+	version_compare( PHP_VERSION, '5.3.0', '>=' )
+	&& file_exists( dirname( __FILE__ ) . '/vendor/tivwp/updater/updater.php' )
+) {
+	require_once dirname( __FILE__ ) . '/vendor/tivwp/updater/updater.php';
+}
+
 # --- EOF
