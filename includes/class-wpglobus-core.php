@@ -293,6 +293,7 @@ class WPGlobus_Core {
 
 	}
 
+
 } // class
 
 # --- EOF

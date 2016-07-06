@@ -75,6 +75,8 @@ WPGlobus_Customize::controller();
 require_once 'includes/admin/class-wpglobus-customize-options.php';
 WPGlobus_Customize_Options::controller();
 
+require_once 'updater/class-wpglobus-updater.php';
+
 /**
  * TIVWP Updater.
  *
