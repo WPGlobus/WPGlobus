@@ -14,7 +14,7 @@
     ],
     "notify-on-install": false
   },
-  "suggest": {
+  "require": {
     "tivwp/updater": "^1."
   },
   "repositories": [
