@@ -3,10 +3,10 @@
   "description": "WPGlobus - Multilingual Everything!",
   "type": "wordpress-plugin",
   "license": "GPL-2.0",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "config": {
     "preferred-install": {
-      "tivwp/updater": "source",
+      "tivwp/updater": "dist",
       "*": "dist"
     },
     "github-protocols": [
@@ -14,8 +14,8 @@
     ],
     "notify-on-install": false
   },
-  "require": {
-    "tivwp/updater": "dev-master"
+  "suggest": {
+    "tivwp/updater": "^1."
   },
   "repositories": [
     {
