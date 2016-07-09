@@ -6,7 +6,7 @@
   "minimum-stability": "stable",
   "config": {
     "preferred-install": {
-      "tivwp/updater": "dist",
+      "tivwp/updater": "source",
       "*": "dist"
     },
     "github-protocols": [
