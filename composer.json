@@ -15,7 +15,7 @@
     "notify-on-install": false
   },
   "require": {
-    "tivwp/updater": "^1."
+    "tivwp/updater": "dev-master"
   },
   "repositories": [
     {
