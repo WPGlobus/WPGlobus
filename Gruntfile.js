@@ -12,16 +12,15 @@ module.exports = function (grunt) {
         pathCSS,
         pathJS,
         potFile,
+        poFilePaths,
+        text_domain,
         pathCSS_options_fields,
         pathJS_options_fields,
         pathComposer = '/cygwin64/usr/local/bin/composer',
-        execSync,
-        poFilePaths;
-
+        execSync;
 
     pkgJson = require('./package.json');
     pkgName = pkgJson.name;
-
 
     pathCSS = pathIncludes + '/css';
     pathJS = pathIncludes + '/js';
@@ -29,7 +28,10 @@ module.exports = function (grunt) {
     potFile = pathLanguages + '/' + pkgName + '.pot';
     poFilePaths = grunt.file.expand(pathLanguages + '/*.po');
 
-    //noinspection JSUnresolvedVariable
+    //noinspection JSUnresolvedVariable tivwp
+    text_domain = pkgJson.tivwp.text_domain;
+
+    //noinspection JSUnresolvedVariable execSync
     execSync = require('child_process').execSync;
 
     /**
@@ -237,6 +239,16 @@ module.exports = function (grunt) {
                         to  : "define( 'WPGLOBUS_VERSION', '<%= pkg.version %>' );"
                     }
                 ]
+            },
+            wpi18n   : {
+                overwrite   : true,
+                src         : ['node_modules/grunt-wp-i18n/vendor/wp-i18n-tools/extract.php'],
+                replacements: [
+                    {
+                        from: /public function entry_from_call\( \$call, \$file_name \) \{.*/,
+                        to  : 'public function entry_from_call( $call, $file_name ) {' + " if ( $call['args'][ count( $call['args'] ) - 1 ] !== '" + text_domain + "' ) { return null; }"
+                    }
+                ]
             }
         },
 
@@ -275,6 +287,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('pomo', [
+        'replace:wpi18n',
         'makepot',
         //'exec:tx_push_s',
         //'exec:tx_pull',

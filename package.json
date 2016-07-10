@@ -2,7 +2,11 @@
   "name": "wpglobus",
   "version": "1.5.9",
   "title": "WPGlobus",
+  "tivwp": {
+    "text_domain": "wpglobus"
+  },
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
+  "private": true,
   "homepage": "http://www.wpglobus.com",
   "repository": {
     "type": "git",
