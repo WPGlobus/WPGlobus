@@ -1,0 +1,24 @@
+{
+  "default": [
+    "dist"
+  ],
+  "pomo": [
+    "replace:wpi18n",
+    "makepot",
+    "tivwp_po"
+  ],
+  "readme_md": [
+    "wp_readme_to_markdown",
+    "replace:readme_md"
+  ],
+  "dist": [
+    "exec:cpzu",
+    "replace:version",
+    "pomo",
+    "readme_md",
+    "less",
+    "cssmin",
+    "uglify",
+    "compress:dist"
+  ]
+}
