@@ -149,7 +149,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$slug                                                     = 'wpglobus-plus';
 			$paid_plugin->name                                        = 'WPGlobus Plus';
 			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = 'With WPGlobus Plus, you will be able to hold incomplete translations as “drafts”, translate URLs (post/page “slugs”), customize the menu language switcher layout and more.';
+			$paid_plugin->short_description                           = 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.';
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-plus/';
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
@@ -163,7 +163,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			$paid_plugin                                              = clone $res->plugins[0];
 			$slug                                                     = 'woocommerce-wpglobus';
-			$paid_plugin->name                                        = 'Woocommerce WPGlobus';
+			$paid_plugin->name                                        = 'WooCommerce WPGlobus';
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.';
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/woocommerce-wpglobus/';
