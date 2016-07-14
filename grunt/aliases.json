@@ -19,6 +19,7 @@
     "less",
     "cssmin",
     "uglify",
-    "compress:dist"
+    "compress:dist",
+    "writefile:latest_zip"
   ]
 }
