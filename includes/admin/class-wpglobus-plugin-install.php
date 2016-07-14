@@ -119,8 +119,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
-			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/wpglobus-logo-400x400.png';
-			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/wpglobus-logo-400x400.png';
+			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
+			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'wpglobus-mobile-menu';
@@ -135,8 +135,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
-			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
-			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
+			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
+			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'woocommerce-nets-netaxept';
@@ -151,8 +151,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-plus/';
-			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
-			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
+			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
+			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'wpglobus-plus';
