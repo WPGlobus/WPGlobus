@@ -125,8 +125,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->version                                     = 0;
 			self::$plugin_card[]                                      = 'wpglobus-mobile-menu';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/?post_type=product&p=8523&preview=true';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = 'http://www.wpglobus.com/?post_type=product&p=8523&preview=true';
+			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
+			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
 			array_unshift( $res->plugins, $paid_plugin );
 
 			$paid_plugin                                              = clone $res->plugins[0];
