@@ -122,7 +122,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/wpglobus-logo-400x400.png';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/wpglobus-logo-400x400.png';
 			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 0;
+			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'wpglobus-mobile-menu';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
@@ -138,7 +138,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 0;
+			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'woocommerce-nets-netaxept';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
@@ -154,7 +154,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 0;
+			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'wpglobus-plus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/wpglobus-plus/';
@@ -170,7 +170,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 0;
+			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'woocommerce-wpglobus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/woocommerce-wpglobus/';
