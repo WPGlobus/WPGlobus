@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
 	var api =  {
 		pluginInstalled: '<li><span class="button button-disabled">Installed</span></li>',
 		columnName: '<a href="{{href}}" class=""  target="_blank">{{name}}<img src="{{img}}" class="plugin-icon"></a>',
-		currentVersion: '<strong>Current Version: </strong>{{version}}',
+		currentVersion: '<strong>' + WPGlobusPluginInstall.i18n.current_version + ': </strong>{{version}}',
 		init: function() {
 			
 			$.each( WPGlobusPluginInstall.pluginCard, function(i, card) {
@@ -56,7 +56,7 @@ jQuery(document).ready(function($) {
 				
 			});
 			
-			$( '.plugin-action-buttons .install-now' ).css({'background-color':'#0f0'}).text( 'Get it now!' );
+			$( '.plugin-action-buttons .install-now' ).css({'background-color':'#0f0'}).text( WPGlobusPluginInstall.i18n.get_it );
 		
 		},
 	};

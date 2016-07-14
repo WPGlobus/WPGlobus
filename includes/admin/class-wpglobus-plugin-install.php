@@ -193,6 +193,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		static public function enqueue_scripts( $hook_page ) {
 
 			if ( 'plugin-install.php' === $hook_page ) {
+				
+				$i18n = array();
+				$i18n[ 'current_version' ] 	= __( 'Current Version', 'wpglobus' );
+				$i18n[ 'get_it' ] 			= __( 'Get it now !', 'wpglobus' );
 
 				wp_register_script(
 					'wpglobus-plugin-install',
@@ -209,7 +213,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 						'version'    => WPGLOBUS_VERSION,
 						'hookPage'   => $hook_page,
 						'pluginCard' => self::$plugin_card,
-						'pluginData' => self::$paid_plugins
+						'pluginData' => self::$paid_plugins,
+						'i18n'		 => $i18n
 					)
 				);
 			}
