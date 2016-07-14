@@ -35,13 +35,17 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 > **Premium Extensions**
 
-* [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
-* [WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
+* [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
+* [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
+* [Multilingual WooCommerce Nets Netaxept](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
+* [WPGlobus Mobile Menu](http://www.wpglobus.com/product/wpglobus-mobile-menu/): makes the WPGlobus language switcher menu compatible with mobile devices and narrow screens.
 
 = Compatibility with Themes =
 
 WPGlobus works correctly with all themes that apply proper filtering before outputting content.
 Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please let the theme / plugin authors know. We are ready to help them.
+
+> Special note about "Page Builders / Composers": Currently, WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - are **not supported at this time**.
 
 = Plugin Compatibility =
 
@@ -58,9 +62,9 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * The Events Calendar
 * WPBakery Visual Composer (with our free add-on)
 * Whistles
-* WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) premium add-on is required)
+* WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/) premium add-on is required)
 * WordPress WooCommerce Nets Netaxept Payment Plugin by sellxed/customweb - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
-* Yoast SEO ([WPGlobus Plus](http://www.wpglobus.com/shop/extensions/wpglobus-plus/) premium add-on is not required but highly recommended)
+* Yoast SEO ([WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is not required but highly recommended)
 
 = Permalinks =
 
@@ -147,6 +151,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.5.9 =
+
+* ADDED:
+	* Add-ons: Show a combined list of free and premium WPGlobus extensions.
+
 = 1.5.8 =
 
 * FIXED:
@@ -178,21 +187,6 @@ No known backward incompatibility issues.
 	* Flag for `uk_UA`.
 * ADDED:
 	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
-
-= 1.5.4.1 =
-
-* FIXED:
-	* Better error handling in the Updater module (continued).
-
-= 1.5.4 =
-
-* ADDED:
-	* Basic multilingual functionality for the `MailChimp for WP` plugin.
-	* Support for multilingual links in the `Slider Revolution` plugin.
-* FIXED:
-	* Do not do "auto-paragraphing" if the `wpautop` filter has been disabled (props @emechkov).
-	* Menu translations lost in some rare situations.
-	* Better error handling in the Updater module.
 
 = Earlier versions =
 

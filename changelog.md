@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.9 ###
+
+* ADDED:
+	* Add-ons: Show a combined list of free and premium WPGlobus extensions.
+
 ### 1.5.8 ###
 
 * FIXED:
