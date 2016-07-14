@@ -117,7 +117,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$slug                                                     = 'wpglobus-mobile-menu';
 			$paid_plugin->name                                        = 'WPGlobus Mobile Menu';
 			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.';
+			$paid_plugin->short_description                           = __( 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/wpglobus-logo-400x400.png';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/wpglobus-logo-400x400.png';
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$slug                                                     = 'woocommerce-nets-netaxept';
 			$paid_plugin->name                                        = 'WooCommerce Nets Netaxept';
 			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.';
+			$paid_plugin->short_description                           = __( 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
@@ -149,7 +149,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$slug                                                     = 'wpglobus-plus';
 			$paid_plugin->name                                        = 'WPGlobus Plus';
 			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.';
+			$paid_plugin->short_description                           = __( 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-plus/';
 			$paid_plugin->icons['2x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
@@ -165,7 +165,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$slug                                                     = 'woocommerce-wpglobus';
 			$paid_plugin->name                                        = 'WooCommerce WPGlobus';
 			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.';
+			$paid_plugin->short_description                           = __( 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.', 'wpglobus' );
 			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/woocommerce-wpglobus/';
 			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
