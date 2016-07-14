@@ -112,21 +112,23 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				}
 
 			}
-
+			
+			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
+			
 			$paid_plugin                                              = clone $res->plugins[0];
 			$slug                                                     = 'wpglobus-mobile-menu';
 			$paid_plugin->name                                        = 'WPGlobus Mobile Menu';
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.', 'wpglobus' );
-			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
+			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
 			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'wpglobus-mobile-menu';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = 'http://www.wpglobus.com/product/wpglobus-mobile-menu/';
+			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
+			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
 			array_unshift( $res->plugins, $paid_plugin );
 
 			$paid_plugin                                              = clone $res->plugins[0];
@@ -134,15 +136,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->name                                        = 'WooCommerce Nets Netaxept';
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.', 'wpglobus' );
-			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
+			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
 			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'woocommerce-nets-netaxept';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
+			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
+			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
 			array_unshift( $res->plugins, $paid_plugin );
 
 			$paid_plugin                                              = clone $res->plugins[0];
@@ -150,15 +152,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->name                                        = 'WPGlobus Plus';
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.', 'wpglobus' );
-			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/wpglobus-plus/';
+			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/wpglobus-plus/';
 			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'wpglobus-plus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/wpglobus-plus/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = 'http://www.wpglobus.com/extensions/wpglobus-plus/';
+			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-plus/';
+			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions/wpglobus-plus/';
 			array_unshift( $res->plugins, $paid_plugin );
 
 			$paid_plugin                                              = clone $res->plugins[0];
@@ -166,15 +168,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->name                                        = 'WooCommerce WPGlobus';
 			$paid_plugin->slug                                        = $slug;
 			$paid_plugin->short_description                           = __( 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.', 'wpglobus' );
-			$paid_plugin->homepage                                    = 'http://www.wpglobus.com/product/woocommerce-wpglobus/';
+			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
 			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			self::$plugin_card[]                                      = 'woocommerce-wpglobus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = 'http://www.wpglobus.com/product/woocommerce-wpglobus/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = 'http://www.wpglobus.com/extensions-archive/woocommerce/';
+			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
+			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions-archive/woocommerce/';
 			array_unshift( $res->plugins, $paid_plugin );
 
 			$res->info['results'] = count( $res->plugins );
