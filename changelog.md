@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.5.10 ###
+
+* ADDED:
+	* Open plugin install page from customizer.
+	* Improvements to find out what installed languages in languages table.
+
 ### 1.5.9 ###
 
 * ADDED:
