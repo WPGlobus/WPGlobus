@@ -961,7 +961,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					'editLink'		=> admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=edit&lang={{language}}"',
 					'settings'		=> self::$settings,
 					'sections'		=> self::$sections,
-					'addonsPage'	=> admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ADDONS
+					'addonsPage'	=> admin_url() . 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus'
 				)
 			);
 			
