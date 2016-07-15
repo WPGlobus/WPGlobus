@@ -151,6 +151,12 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.5.10 =
+
+* ADDED:
+	* Customizer: Link to open the `Plugin Install` page.
+	* Options: Show which languages are installed in the `Languages Table`.
+
 = 1.5.9 =
 
 * ADDED:

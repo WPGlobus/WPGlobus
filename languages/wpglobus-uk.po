@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-07-14 17:48:17+00:00\n"
+"POT-Creation-Date: 2016-07-15 14:21:39+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Pavlo Novak <novak1305@gmail.com>\n"
 "Language: uk\n"
@@ -844,6 +844,10 @@ msgstr "Додати нову мову"
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
 msgstr "Мова за замовчуванням"
+
+#: includes/options/fields/table/table-languages.php:389
+msgid "Installed"
+msgstr ""
 
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"

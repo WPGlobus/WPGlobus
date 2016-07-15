@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.5.10\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-07-15 14:11:02+00:00\n"
+"POT-Creation-Date: 2016-07-15 14:27:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -781,6 +781,10 @@ msgstr ""
 
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
+msgstr ""
+
+#: includes/options/fields/table/table-languages.php:389
+msgid "Installed"
 msgstr ""
 
 #: includes/options/wpglobus-options-header.php:18

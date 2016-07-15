@@ -377,6 +377,21 @@ class LanguagesTable extends WP_List_Table {
 	}
 
 	/**
+	 * Define function for add item actions by name 'wpglobus_en_language_name'
+	 * @since 1.5.10
+	 *
+	 * @param  $item array
+	 *
+	 * @return string
+	 */
+	function column_wpglobus_en_language_name( $item ) {
+		if ( in_array( $item[ 'wpglobus_code' ], WPGlobus::Config()->enabled_languages ) ) {
+			return $item[ 'wpglobus_en_language_name' ] . ' (<strong>' . __( 'Installed', 'wpglobus' ) . '</strong>)';
+		}
+		return $item[ 'wpglobus_en_language_name' ];
+	}
+
+	/**
 	 * Generate the table navigation above or below the table
 	 * @since  3.1.0
 	 * @access protected
@@ -400,6 +415,25 @@ class LanguagesTable extends WP_List_Table {
 		</div>
 	<?php
 
+	}
+
+	/**
+	 * Generates content for a single row of the table
+	 *
+	 * @since 1.5.10
+	 * @access public
+	 *
+	 * @param object $item The current item
+	 */
+	public function single_row( $item ) {
+		$style = '';
+		if ( in_array( $item[ 'wpglobus_code' ], WPGlobus::Config()->enabled_languages ) ) {
+			$style = ' style="background-color:#0ff;" ';
+		}
+
+		echo '<tr' . $style . '>';
+		$this->single_row_columns( $item );
+		echo '</tr>';
 	}
 
 }

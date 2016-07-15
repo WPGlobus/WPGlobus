@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-07-14 17:48:17+00:00\n"
+"POT-Creation-Date: 2016-07-15 14:21:39+00:00\n"
 "PO-Revision-Date: 2015-10-17 23:36+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
@@ -834,6 +834,10 @@ msgstr "Fügen Sie neue Sprache hinzu"
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
 msgstr "Standardsprache"
+
+#: includes/options/fields/table/table-languages.php:389
+msgid "Installed"
+msgstr ""
 
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-07-14 17:48:17+00:00\n"
+"POT-Creation-Date: 2016-07-15 14:21:39+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
@@ -852,6 +852,10 @@ msgstr "Добавить новый язык"
 msgid "Default language"
 msgstr "Язык по умолчанию"
 
+#: includes/options/fields/table/table-languages.php:389
+msgid "Installed"
+msgstr "Установлен"
+
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"
 msgstr "Спасибо за поддержку!"
@@ -923,11 +927,11 @@ msgstr "Деактивировать лицензионный ключ"
 
 #: updater/class-wpglobus-updater-admin.php:205
 msgid "Please contact support@wpglobus.com for assistance."
-msgstr ""
+msgstr "Пожалуйста свяжитесь с нами: support@wpglobus.com."
 
 #: updater/class-wpglobus-updater-admin.php:211
 msgid "Active"
-msgstr "Активный"
+msgstr "Активировано"
 
 #: updater/class-wpglobus-updater-admin.php:212
 msgid "Inactive"
@@ -944,7 +948,7 @@ msgstr "Не удалось соединиться с сервером. Попр
 #: updater/class-wpglobus-updater-admin.php:391
 #: updater/class-wpglobus-updater-requests.php:72
 msgid "The License Key / Email pair is empty or invalid."
-msgstr ""
+msgstr "Пара License Key / Email не заполнена или неверна."
 
 #: updater/class-wpglobus-updater-admin.php:421
 msgid ""
@@ -1032,11 +1036,11 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-requests.php:159
 msgid "Licensing server connection error."
-msgstr ""
+msgstr "Ошибка соединения с сервером."
 
 #: updater/class-wpglobus-updater-requests.php:170
 msgid "Licensing server connection error (%d)."
-msgstr ""
+msgstr "Ошибка соединения с сервером (%d)."
 
 #: updater/class-wpglobus-updater.php:177
 msgid "License"
