@@ -4,6 +4,8 @@
 
 ### 1.5.10 ###
 
+* FIXED:
+	* Yoast: Compatibility with 3.4.
 * ADDED:
 	* Customizer: Link to open the `Plugin Install` page.
 	* Options: Show which languages are installed in the `Languages Table`.
