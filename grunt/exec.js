@@ -7,6 +7,6 @@ module.exports = {
         cmd: 'tx pull -a -f --mode=translator' // Change the percentage with --minimum-perc=value
     },
     cpzu     : { // Install dependencies with Composer
-        cmd: 'php <%= package.tivwp_config.path.composer %> update --no-ansi --no-autoloader'
+        cmd: 'php <%= package.tivwp_config.path.composer %> update --no-autoloader'
     }
 };
