@@ -32,9 +32,9 @@ ob_start();
 <?php if ( ! defined( 'WPGLOBUS_PLUS_VERSION' ) ): ?>
 	<?php
 	$_url_wpglobus_plus_store = WPGlobus_Utils::url_wpglobus_site() .
-	                            'shop/extensions/wpglobus-plus/';
-	$_url_wpglobus_plus_logo  = WPGlobus::URL_WPGLOBUS_SITE .
-	                            'app/uploads/2015/08/wpglobus-plus-logo-150x150.png';
+	                            'product/wpglobus-plus/';
+	$_url_wpglobus_plus_logo  = WPGlobus::$PLUGIN_DIR_URL .
+	                            'includes/css/images/wpglobus-plus-logo-150x150.png';
 	?>
 	<div class="wpg-bnr wpg-bnr-right">
 		<a class="wpg-a-img" href="<?php echo $_url_wpglobus_plus_store; ?>">

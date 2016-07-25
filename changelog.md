@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.5.11 ###
+
+* FIXED:
+	* Non-SSL link to image warning in admin (props `technima`).
+
 ### 1.5.10 ###
 
 * FIXED:
