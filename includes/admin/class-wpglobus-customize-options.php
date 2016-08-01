@@ -243,6 +243,49 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}	
 	
 	/**
+	 * Adds Fields Settings Control support to the theme customizer
+	 *
+	 * @see wp-includes\class-wp-customize-control.php
+	 */	
+	class WPGlobusFieldsSettingsControl extends WP_Customize_Control {
+		
+		public $type = 'wpglobus_fields_settings_control';
+		
+		public $args = array();
+		
+		public $section_template = ''; 
+		
+		public function __construct( $manager, $id, $args = array() ) {
+
+			$this->args = $args;
+			
+			$this->section_template  = "<div id='wpglobus-settings-{{section}}' style='border-bottom:1px solid black;margin-bottom:5px;padding:5px;' class='items-box' data-section='{{section}}'>";
+			$this->section_template .= 		"Section: <a href='#' onclick='wp.customize.section({{section_id}}).expand();'><b>{{section_title}}</b></a>";
+			$this->section_template .= 		"<div class='items' style='padding-top:10px;'>{{items}}</div>";
+			$this->section_template .= "</div>";
+			
+			parent::__construct( $manager, $id, $args );
+			
+		}
+ 
+		public function render_content() {  
+		?>
+			<div class="wpglobus-fields_settings_control_box" data-section-template="<?php echo $this->section_template; ?>">
+				<?php if ( $this->args[ 'start_section' ] ) : ?>
+					<div style="border-bottom:1px solid black;margin: 0 0 5px;padding-left:5px;">
+						<a href="#" onclick="jQuery('.wpglobus-fields_settings_control_box .items-box' ).css('display','block');"><b><?php _e( 'Show all sections', 'wpglobus' ); ?></b></a>
+					</div>
+					<input type="submit" style="float:right;" name="<?php echo WPGlobus_Customize_Options::$controls_save_button; ?>" id="<?php echo WPGlobus_Customize_Options::$controls_save_button; ?>" class="button button-primary save" value="<?php _e( 'Save &amp; Reload', 'wpglobus' ); ?>">
+				<?php else:	?>
+					<div>
+						<?php if ( ! empty( $this->args[ 'message' ] ) ) { echo $this->args[ 'message' ]; } ?>
+					</div>
+				<?php endif; ?>	
+			</div>	<!-- .wpglobus-fields_settings_control_box -->	<?php
+		}		
+	}
+	
+	/**
 	 * Class WPGlobus_Customize_Options
 	 */
 	class WPGlobus_Customize_Options {
@@ -262,8 +305,31 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		 */
 		public static $enabled_post_types_key = 'wpglobus_customize_enabled_post_types';
 	
+		/**
+		 * Set option key for customizer
+		 */
+		public static $options_key = 'wpglobus_customize_options';
+		
+		/**
+		 * Save button ID 
+		 */
+		public static $controls_save_button = 'wpglobus-user-controls-save';
+	
+		/**
+		 * Current theme
+		 */		
+		public static $theme = '';
+		
+		/**
+		 * Current theme name
+		 */		
+		public static $theme_name = '';
+		
 		public static function controller() {
 
+			self::$theme 		= wp_get_theme();
+			self::$theme_name 	= strtolower( self::$theme->__get( 'name' ) );
+		
 			/**
 			 * @see \WP_Customize_Manager::wp_loaded
 			 * It calls the `customize_register` action first,
@@ -274,10 +340,18 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				'action__customize_register'
 			) );
 			
+			/**
+			 * @since 1.5.11
+			 */
+			add_action( 'customize_register', array(
+				'WPGlobus_Customize_Options',
+				'action__customize_fields_settings'
+			) );			
+			
 			add_action( 'customize_preview_init', array(
 				'WPGlobus_Customize_Options',
 				'action__customize_preview_init'
-			) );
+			), 11 );
 		
 			/**
 			 * This is called by wp-admin/customize.php
@@ -320,6 +394,39 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					}	
 					//error_log( print_r( $options, true ) );
 					update_option( WPGlobus::Config()->option, $options );
+				break;
+				case 'cb-controls-save':
+					
+					$options = get_option( self::$options_key );
+					
+					if ( empty( $order[ 'controls' ] ) ) {
+						if ( ! empty( $options[ 'customize_user_control' ][ self::$theme_name ] ) ) {
+							unset( $options[ 'customize_user_control' ][ self::$theme_name ] );
+						}	
+					} else {
+					
+						$cntrls = array();
+						foreach( $order[ 'controls' ] as $cntr=>$status ) {
+							$cntr = str_replace( '{{', '[', $cntr );
+							$cntr = str_replace( '}}', ']', $cntr );
+								
+							$cntrls[ $cntr ] = $status;
+						}						
+
+						$options[ 'customize_user_control' ][ self::$theme_name ] = $cntrls;
+					}
+					
+					if ( empty( $options[ 'customize_user_control' ] ) ) {
+						unset( $options[ 'customize_user_control' ] );
+					}
+					
+					if ( empty( $options ) ) {
+						delete_option( self::$options_key );	
+					} else {	
+						$result = update_option( self::$options_key, $options, false );
+						
+					}
+					
 				break;
 			endswitch;
 			
@@ -366,14 +473,69 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 		
 		/**
+		 * Callback for register fields settings section
+		 * 
+		 * @since 1.5.11
+		 * @param WP_Customize_Manager $wp_customize
+		 */
+		public static function action__customize_fields_settings( WP_Customize_Manager $wp_customize ) {
+			
+			/**
+			 * SECTION: fields settings
+			 */
+			if ( 1 ) {
+				
+				/**
+				 * @since WP 4.5
+				 * @see https://make.wordpress.org/core/2016/03/10/customizer-improvements-in-4-5/
+				 */
+				 
+				global $wp_version; 
+				
+				$start_section 	= true;
+				$message 		= '';
+				if ( version_compare( $wp_version, '4.5-RC1', '<' ) ) :
+					$start_section  = false;	
+					$message 		= __( 'You need to update WordPress to 4.5 or later to get Fields Setings section', 'wpglobus' );
+				endif;
+				 
+				self::$sections[ 'wpglobus_fields_settings_section' ] = 'wpglobus_fields_settings_section'; 
+				 
+				$wp_customize->add_section( self::$sections[ 'wpglobus_fields_settings_section' ] , array(
+					'title'      => __( 'Fields Settings', 'wpglobus' ),
+					'priority'   => 500,
+					'panel'		 => 'wpglobus_settings_panel'
+				) );			
+			
+				/** setting  */
+				$wp_customize->add_setting( 'wpglobus_fields_settings_setting', array( 
+					'type' => 'option',
+					'capability' => 'manage_options',
+					'transport' => 'postMessage'
+				) );
+				
+				/** control */
+				$wp_customize->add_control( new WPGlobusFieldsSettingsControl( $wp_customize, 
+					self::$sections[ 'wpglobus_fields_settings_section' ], array(
+						'section'   	=> self::$sections[ 'wpglobus_fields_settings_section' ],
+						'settings'  	=> 'wpglobus_fields_settings_setting',
+						'priority'  	=> 0,
+						'start_section' => $start_section,
+						'message'		=> $message
+						
+					) 
+				) );				
+
+			}
+			
+		}	
+		
+		/**
 		 * Callback for customize_register
 		 * 
 		 * @param WP_Customize_Manager $wp_customize
 		 */
 		public static function action__customize_register( WP_Customize_Manager $wp_customize ) {
-			
-			$theme 		= wp_get_theme();
-			$theme_name = strtolower( $theme->__get( 'name' ) );
 			
 			$disabled_themes = array(
 				'customizr'
@@ -392,9 +554,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 									'</div>' . self::get_content( 'deactivate_message' ),
 			) );
 		
-			if ( in_array( $theme_name, $disabled_themes ) ) {
+			if ( in_array( self::$theme_name, $disabled_themes ) ) {
 				
-				self::sorry_section( $wp_customize, $theme );
+				self::sorry_section( $wp_customize, self::$theme );
 				
 				return;
 				
@@ -942,6 +1104,20 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		 */
 		public static function action__customize_controls_enqueue_scripts() {
 
+			/**
+			 * Get customize_user_control options which there are specifically for every theme.
+			 */
+			$options = get_option( self::$options_key );
+			if ( $options == '' ) {
+				$options = null;
+			} else {
+				if ( empty( $options[ 'customize_user_control' ] ) ) {
+					$options = null;
+				} else {
+					$options = $options[ 'customize_user_control' ];
+				}	
+			}			
+		
 			wp_register_script(
 				'wpglobus-customize-options',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -961,7 +1137,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					'editLink'		=> admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=edit&lang={{language}}"',
 					'settings'		=> self::$settings,
 					'sections'		=> self::$sections,
-					'addonsPage'	=> admin_url() . 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus'
+					'addonsPage'	=> admin_url() . 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus',
+					'themeName'		=> self::$theme_name,
+					'userControl' 	=> $options,
+					'userControlSaveButton'  => self::$controls_save_button,
+					'userControlIcon'	 	 => WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/checkbox-icon.png',
+					'userControlIconClass'	 => 'wpglobus-customize-user-control-icon',
+					'userControlBoxSelector' => '.wpglobus-fields_settings_control_box .items-box' # @see WPGlobusFieldsSettingsControl class
 				)
 			);
 			

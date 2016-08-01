@@ -8,7 +8,7 @@
  * @subpackage Customize Control
  */
 /*jslint browser: true*/
-/*global jQuery, console, WPGlobusCore, WPGlobusCoreData*/
+/*global jQuery, console, WPGlobusCore, WPGlobusCoreData, WPGlobusCustomize, WPGlobusCustomizeOptions*/
 
 jQuery(document).ready(function ($) {	
     "use strict";
@@ -32,8 +32,83 @@ jQuery(document).ready(function ($) {
 			api.addLanguageSelector();
 			api.setTitle();
 			api.setControlInstances();
+			api.setFieldsSection(); /* @since 1.5.11 */
 			api.attachListeners();
-		},
+		},	
+		setFieldsSection: function() {
+	
+			var sections = {},
+				$sectionTmpl = $( '.wpglobus-fields_settings_control_box' ).data( 'section-template' ),
+				sectionHtml = '',
+				itemsHtml = '',
+				checked   = '';
+		
+			$.each( WPGlobusCustomize.controlInstances, function(id, obj) {
+				if ( typeof sections[ obj.section ] === 'undefined' ) {
+					sections[ obj.section ] = {};	
+				}	
+				sections[ obj.section ][ id ] = obj; 
+			});
+			
+			$.each( sections, function( section, controls ) {
+				itemsHtml = '<ul>';
+				$.each( controls, function( id, control ) {
+					
+					if ( control.userControl.enabled ) {
+						checked = ' checked ';
+					} else {
+						checked = ''
+					}	
+					itemsHtml += '<li><input id="wpglobus-cb-control-'+id+'" data-control="'+id+'" class="wpglobus-customize-cb-control" type="checkbox"'+checked+' /> ' + control.title + '</li>'; 
+		
+				});
+				itemsHtml += '</ul>';
+				
+				sectionHtml = $sectionTmpl.replace( '{{section_title}}', wp.customize.section( section ).params.title );
+				sectionHtml = sectionHtml.replace( /{{section}}/g, section );
+				sectionHtml = sectionHtml.replace( '{{section_id}}', '"'+section+'"' );
+				sectionHtml = sectionHtml.replace( '{{items}}', itemsHtml );
+
+				$( sectionHtml ).insertBefore( $( '#' + WPGlobusCustomizeOptions.userControlSaveButton ) );
+			});
+			
+			$( '#accordion-section-wpglobus_fields_settings_section' ).css({'margin-top':'15px'});
+
+			$( '.'+WPGlobusCustomizeOptions.userControlIconClass ).on( 'click', function(ev) {
+				var section = $(this).data( 'section' );
+				$( WPGlobusCustomizeOptions.userControlBoxSelector ).each( function( i, e ) {
+					if ( section == $(e).data( 'section' ) ) {
+						$(this).css({'display':'block'});
+					} else {
+						$(this).css({'display':'none'});
+					}	
+				});
+				wp.customize.control( 'wpglobus_fields_settings_section' ).expand();
+			});			
+			
+		},	
+		setUserControls: function( control_id, obj ) {
+			var elem = obj.controlSelector + ' ' + obj.selector;
+			var cbIcon = '<img class="'+WPGlobusCustomizeOptions.userControlIconClass+'" data-section="'+obj.section+'" style="position:absolute;right:-10px;" src="'+WPGlobusCustomizeOptions.userControlIcon+'" />';
+			$( cbIcon ).insertBefore( elem );
+			
+			if ( ! obj.userControl.enabled ) {
+	
+				if ( $( elem ).length > 1 ) {
+					/**
+					 * in some cases
+					 * for example @see Kirki https://wordpress.org/plugins/kirki/
+					 */
+					$( elem ).each( function(i,e) {
+						$(e).removeClass( WPGlobusCustomize.controlClass );
+					});
+				} else {	
+					$( elem ).removeClass( WPGlobusCustomize.controlClass ).val( obj.setting );
+				}
+				
+			}
+		
+		},	
 		ctrlMenuItemsCallback: function( obj, control ) {
 			return;
 			// @todo remove from $disabled_setting_mask[]
@@ -183,7 +258,7 @@ jQuery(document).ready(function ($) {
 			
 		},	
 		ctrlCallback: function( context, obj, key ) {
-
+		
 			var dis = false;
 			$.each( WPGlobusCustomize.disabledSections, function(i,e) {
 				if ( context.section() == e ) {
@@ -203,7 +278,7 @@ jQuery(document).ready(function ($) {
 			});
 			
 			if (dis) return;
-
+			
 			var control = wp.customize.control.instance( obj );
 			
 			/** check for obj is widget */
@@ -232,6 +307,8 @@ jQuery(document).ready(function ($) {
 				return;	
 			}			
 
+			var controlEnabled = true;
+			
 			$.each( WPGlobusCustomize.elementSelector, function(i,e){
 				var element = control.container.find( e );
 				if ( element.length != 0 ) {
@@ -242,6 +319,9 @@ jQuery(document).ready(function ($) {
 					api.controlInstances[obj]['selector'] = e; 
 					api.controlInstances[obj]['controlSelector'] = control.selector; 
 					api.controlInstances[obj]['type'] 	  = ''; 
+					api.controlInstances[obj]['section']  = control.section(); 
+					api.controlInstances[obj]['title']    = null; 
+					api.controlInstances[obj]['userControl']  = null; 
 
 					$.each( WPGlobusCustomize.setLinkBy, function( i, piece ) {
 						
@@ -274,6 +354,25 @@ jQuery(document).ready(function ($) {
 					if ( api.controlInstances[obj]['type'] == 'link' ) {
 						api.controlInstances[obj]['setting'] = api.convertString( element[0].defaultValue );	
 					};
+					
+					/* Get control title */
+					api.controlInstances[obj]['title'] = $( control.selector + ' .customize-control-title' ).text();
+					
+					/* Enable/disable user control */
+					if ( WPGlobusCustomizeOptions.userControl !== null && 
+							typeof WPGlobusCustomizeOptions.userControl[ WPGlobusCustomizeOptions.themeName ] !== 'undefined' ) {
+						
+						if ( typeof WPGlobusCustomizeOptions.userControl[ WPGlobusCustomizeOptions.themeName ][ obj ] !== 'undefined' &&
+							WPGlobusCustomizeOptions.userControl[ WPGlobusCustomizeOptions.themeName ][ obj ] == 'disable' ) {
+							
+							controlEnabled = false;
+						}
+						
+					}						
+					api.controlInstances[obj]['userControl'] = {};
+					api.controlInstances[obj]['userControl']['enabled'] = controlEnabled;
+					
+					api.setUserControls( obj, api.controlInstances[obj] );
 				}	
 			});
 			
@@ -418,6 +517,10 @@ jQuery(document).ready(function ($) {
 			}
 			/** updateElements simple controls */
 			$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
+				if ( ! data.userControl.enabled ) {
+					/* next iteration */
+					return true;	
+				}	
 				var control = wp.customize.control.instance( inst );
 				if ( data.type == 'link' ) {
 					var t = api.getTranslations( WPGlobusCustomize.controlInstances[inst].setting );
@@ -558,9 +661,11 @@ jQuery(document).ready(function ($) {
 				
 				/** Save&Publish simple controls */
 				$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
-					var control = wp.customize.control.instance( inst );
-					control.setting.set( data.setting );
-					data.element.val( control.setting() );
+					if ( data.userControl.enabled ) {
+						var control = wp.customize.control.instance( inst );
+						control.setting.set( data.setting );
+						data.element.val( control.setting() );
+					}
 				});
 				
 				/** Save&Publish menu items */
@@ -577,11 +682,9 @@ jQuery(document).ready(function ($) {
 				});	// */			
 				
 			}).on( 'mouseleave', function( event ) {
-				
 				if ( ! api.instancesKeep ) {
 					api.updateElements();
 				}
-				
 			}).on( 'click', function(event){
 				api.instancesKeep = true;
 			});			

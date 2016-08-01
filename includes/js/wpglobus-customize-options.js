@@ -55,6 +55,9 @@ jQuery(document).ready(function ($) {
 				}
 			);
 			
+			/** Save Fields Control settings & Reload customize page */
+			$( document ).on( 'click', '#' + WPGlobusCustomizeOptions.userControlSaveButton, function(){ api.userControlAjax( this ) } );
+			
 		},	
 		removeLanguage: function( t ) {
 			var l = t.data( 'language' ),
@@ -115,6 +118,37 @@ jQuery(document).ready(function ($) {
 		setState: function( state ) {
 			wp.customize.state( 'saved' ).set( state );	
 		},
+		userControlAjax: function( btn ) {
+			
+			$( btn ).prop( 'disabled', true );
+			
+			var order = {};
+			order[ 'action' ]   = 'cb-controls-save';
+			order[ 'controls' ] = {};
+			$( '.wpglobus-customize-cb-control' ).each( function(i, cb){
+				var $t = $( cb );
+				if ( $t.prop( 'checked' ) ) {
+					// do nothing
+				} else {
+					var ctrl = $t.data( 'control' );
+					ctrl = ctrl.replace( '[', '{{');
+					ctrl = ctrl.replace( ']', '}}');
+					order[ 'controls' ][ ctrl ] = 'disable';
+				}	
+			});
+
+			$.ajax({
+				beforeSend:function(){},
+				type: 'POST',
+				url: WPGlobusCustomizeOptions.ajaxurl,
+				data: { action:WPGlobusCustomizeOptions.process_ajax, order:order },
+				dataType: 'json' 
+			})
+			.always(function() {
+				location.reload(true);
+			});
+			
+		},	
 		ajax: function() {
 			
 			var order = {};

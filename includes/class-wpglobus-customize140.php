@@ -233,7 +233,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					'disabledSettingMask' 	=> $disabled_setting_mask,
 					'elementSelector'		=> $element_selector,
 					'setLinkBy'				=> $set_link_by,
-					'disabledSections'		=> $disabled_sections
+					'disabledSections'		=> $disabled_sections,
+					'controlClass'			=> 'wpglobus-customize-control',
 				)
 			);
 			
