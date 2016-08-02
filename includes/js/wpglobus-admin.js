@@ -594,7 +594,7 @@ jQuery(document).ready(function () {
 			},		
             admin_init: function () {
 				var order = $('.wpglobus-addons-group a').data('key');
-				if ( 'indefined' != typeof order ) {
+				if ( 'undefined' !== typeof order ) {
 					if ( window.location.search.indexOf('page=wpglobus_options&tab='+order) >= 0 ) {
 						window.location = 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus';
 						/**
