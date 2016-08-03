@@ -1366,6 +1366,15 @@ class WPGlobus {
 			}
 
 			/**
+			 * Add multisite property 
+			 * @since 1.5.11
+			 */
+			$is_multisite = 'false';
+			if ( is_multisite() ) {
+				$is_multisite = 'true';
+			}
+			
+			/**
 			 * Filter for custom data to send to JS.
 			 * Returning array or null.
 			 * @since 1.2.9
@@ -1389,7 +1398,12 @@ class WPGlobus {
 						'en_language_name'  => $config->en_language_name,
 						'locale_tag_start'  => self::LOCALE_TAG_START,
 						'locale_tag_end'    => self::LOCALE_TAG_END,
-						'page'              => $page_action
+						'page'              => $page_action,
+						'multisite'			=> $is_multisite,
+						'pluginInstallLocation'	=> array(
+							'single'	=> 	'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus',
+							'multisite'	=>	'network/plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus'
+						)	
 					), array(
 						$page_data_key => $page_data_values
 					)

@@ -555,6 +555,7 @@ jQuery(document).ready(function () {
         WPGlobusAdminApp.App.prototype = {
 			$document : $(document),
             init: function () {
+				WPGlobusCoreData.multisite = this.parseBool(WPGlobusCoreData.multisite);
 				this.admin_init();
 				$('#content').addClass('wpglobus-editor').attr('data-language',WPGlobusAdmin.data.default_language);
 				$('textarea[id^=content_]').each(function(i,e){
@@ -589,6 +590,9 @@ jQuery(document).ready(function () {
 					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
 				}	
             },
+			parseBool: function(b)  {
+				return !(/^(false|0)$/i).test(b) && !!b;
+			},	
 			getCurrentTab: function() {
 				return $( '.wpglobus-post-body-tabs-list .ui-tabs-active' ).data( 'language' );
 			},		
@@ -596,7 +600,11 @@ jQuery(document).ready(function () {
 				var order = $('.wpglobus-addons-group a').data('key');
 				if ( 'undefined' !== typeof order ) {
 					if ( window.location.search.indexOf('page=wpglobus_options&tab='+order) >= 0 ) {
-						window.location = 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus';
+						if ( WPGlobusCoreData.multisite ) {
+							window.location = WPGlobusCoreData.pluginInstallLocation.multisite;
+						} else {	
+							window.location = WPGlobusCoreData.pluginInstallLocation.single;
+						}
 						/**
 						 * obsolete from 1.5.9
 						 * @todo remove after testing @see class WPGlobus_Plugin_Install
@@ -604,7 +612,11 @@ jQuery(document).ready(function () {
 						//window.location = 'admin.php?page=wpglobus-addons';
 					} else {	
 						var addon = $('#toplevel_page_wpglobus_options li').eq(order+1);
-						$(addon).find('a').attr('href','plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus').attr('onclick',"window.location=jQuery(this).attr('href');return false;");
+						if ( WPGlobusCoreData.multisite ) {
+							$(addon).find('a').attr('href',WPGlobusCoreData.pluginInstallLocation.multisite).attr('onclick',"window.location=jQuery(this).attr('href');return false;");
+						} else {	
+							$(addon).find('a').attr('href',WPGlobusCoreData.pluginInstallLocation.single).attr('onclick',"window.location=jQuery(this).attr('href');return false;");
+						}
 						/**
 						 * obsolete from 1.5.9
 						 * @todo remove after testing @see class WPGlobus_Plugin_Install
