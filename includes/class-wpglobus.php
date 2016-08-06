@@ -1367,7 +1367,7 @@ class WPGlobus {
 
 			/**
 			 * Add multisite property 
-			 * @since 1.5.11
+			 * @since 1.6.0
 			 */
 			$is_multisite = 'false';
 			if ( is_multisite() ) {

@@ -341,7 +341,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			) );
 			
 			/**
-			 * @since 1.5.11
+			 * @since 1.6.0
 			 */
 			add_action( 'customize_register', array(
 				'WPGlobus_Customize_Options',
@@ -475,7 +475,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		/**
 		 * Callback for register fields settings section
 		 * 
-		 * @since 1.5.11
+		 * @since 1.6.0
 		 * @param WP_Customize_Manager $wp_customize
 		 */
 		public static function action__customize_fields_settings( WP_Customize_Manager $wp_customize ) {

@@ -169,7 +169,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_setting_mask[] = 'foursquare';
 			$disabled_setting_mask[] = 'vine';
 			$disabled_setting_mask[] = 'vimeo';
-			/** since 1.5.11 */
+			/** since 1.6.0 */
 			$disabled_setting_mask[] = 'yelp';
 			
 			/**

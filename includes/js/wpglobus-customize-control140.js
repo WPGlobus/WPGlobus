@@ -32,7 +32,7 @@ jQuery(document).ready(function ($) {
 			api.addLanguageSelector();
 			api.setTitle();
 			api.setControlInstances();
-			api.setFieldsSection(); /* @since 1.5.11 */
+			api.setFieldsSection(); /* @since 1.6.0 */
 			api.attachListeners();
 		},	
 		setFieldsSection: function() {
