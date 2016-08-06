@@ -6,6 +6,11 @@
 
 * FIXED:
 	* Non-SSL link to image warning in admin (props `technima`).
+	* Correct loading plugin install page in multisite mode.
+	* Small bugfixes.
+* ADDED:
+	* [Customizer] User Control for controls (fields)  in customizer.
+	* [Customizer] Added yelp to disabled setting mask by deafault.
 
 ### 1.5.10 ###
 
