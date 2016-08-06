@@ -73,6 +73,10 @@ jQuery(document).ready(function ($) {
 			});
 			
 			$( '#accordion-section-wpglobus_fields_settings_section' ).css({'margin-top':'15px'});
+			/** add Help button */
+			$( WPGlobusCustomizeOptions.helpButton ).insertAfter( $( '#accordion-section-wpglobus_fields_settings_section .customize-action' ) );
+			/** hide help by default */
+			$( '#accordion-section-wpglobus_fields_settings_section .customize-section-description' ).addClass( 'hidden' );
 
 			$( '.'+WPGlobusCustomizeOptions.userControlIconClass ).on( 'click', function(ev) {
 				var section = $(this).data( 'section' );
@@ -85,11 +89,15 @@ jQuery(document).ready(function ($) {
 				});
 				wp.customize.control( 'wpglobus_fields_settings_section' ).expand();
 			});			
+			/** toggle help */
+			$( '.wpglobus-customize-icon-help.customize-help-toggle' ).on( 'click', function(ev) {
+				$( '#accordion-section-wpglobus_fields_settings_section .customize-section-description' ).toggleClass( 'hidden' );
+			});
 			
 		},	
 		setUserControls: function( control_id, obj ) {
 			var elem = obj.controlSelector + ' ' + obj.selector;
-			var cbIcon = '<img class="'+WPGlobusCustomizeOptions.userControlIconClass+'" data-section="'+obj.section+'" style="position:absolute;right:-10px;" src="'+WPGlobusCustomizeOptions.userControlIcon+'" />';
+			var cbIcon = '<img class="'+WPGlobusCustomizeOptions.userControlIconClass+'" data-section="'+obj.section+'" style="position:absolute;right:0px;" src="'+WPGlobusCustomizeOptions.userControlIcon+'" />';
 			$( cbIcon ).insertBefore( elem );
 			
 			if ( ! obj.userControl.enabled ) {

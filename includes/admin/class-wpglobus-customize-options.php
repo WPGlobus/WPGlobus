@@ -504,7 +504,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				$wp_customize->add_section( self::$sections[ 'wpglobus_fields_settings_section' ] , array(
 					'title'      => __( 'Fields Settings', 'wpglobus' ),
 					'priority'   => 500,
-					'panel'		 => 'wpglobus_settings_panel'
+					'panel'		 => 'wpglobus_settings_panel',
+					'description'    => '<div class="inner" style="background-color:#fff;padding:0 5px;">' . 
+										self::get_content( 'settings_section_help' )  .  
+									'</div>'					
 				) );			
 			
 				/** setting  */
@@ -986,6 +989,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			
 			$content = '';
 			switch ( $control ) :
+				case 'settings_section_help' :
+					$content = '<p>' . 
+								__( 'NEED HELP TEXT HERE', 'wpglobus' ) .
+								'</p>'; 
+				
+					break;
 				case 'welcome_message' :
 				
 					$content = '<div class="" style="width:100%;">' . 
@@ -1139,6 +1148,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					'sections'		=> self::$sections,
 					'addonsPage'	=> admin_url() . 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus',
 					'themeName'		=> self::$theme_name,
+					'helpButton'	=> '<span style="float:right;cursor:pointer;" class="wpglobus-customize-icon-help customize-help-toggle dashicons dashicons-editor-help" tabindex="0" aria-expanded="false"></span>',
 					'userControl' 	=> $options,
 					'userControlSaveButton'  => self::$controls_save_button,
 					'userControlIcon'	 	 => WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/checkbox-icon.png',
