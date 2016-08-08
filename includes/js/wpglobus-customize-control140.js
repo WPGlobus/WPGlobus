@@ -25,12 +25,18 @@ jQuery(document).ready(function ($) {
 		action: false,
 		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span style="font-weight:bold;">{{language}}</span>',
 		init: function(args) {
+			
+			api.setTitle();
+			
+			if ( WPGlobusCustomizeOptions.themeEnabled == 'false' ) {
+				return;
+			}
+			
 			$.each( WPGlobusCoreData.enabled_languages, function(i,e){
 				api.languages[i] = e;
 				api.length = i;
 			});
 			api.addLanguageSelector();
-			api.setTitle();
 			api.setControlInstances();
 			api.setFieldsSection(); /* @since 1.6.0 */
 			api.attachListeners();
@@ -594,7 +600,7 @@ jQuery(document).ready(function ($) {
 			
 		},	
 		attachListeners: function() {
-			/** attachListeners simple controls */
+			/** attachListeners: simple controls */
 			$( '.wpglobus-customize-control' ).on( 'keyup', function(ev) {
 				var $t = $(this),
 					inst = $t.data( 'customize-setting-link' );
@@ -629,7 +635,7 @@ jQuery(document).ready(function ($) {
 				}		
 			});
 			
-			/** attachListeners widgets */
+			/** attachListeners: widgets */
 			$( document ).on( 'keyup', '.wpglobus-customize-widget-control', function(ev) {
 				var $t = $(this),
 					obj = $t.data( 'widget' );
@@ -646,7 +652,7 @@ jQuery(document).ready(function ($) {
 				
 			});			
 			
-			/** attachListeners menu items */
+			/** attachListeners: menu items */
 			/**
 			$( document ).on( 'keyup', '.wpglobus-customize-menu-item-control', function(ev) {
 				var $t = $(this),
@@ -664,7 +670,7 @@ jQuery(document).ready(function ($) {
 				
 			});	// */					
 			
-			/** Save&Publish button */
+			/** attachListeners: Save&Publish button */
 			$( '#save' ).on( 'mouseenter', function( event ) {
 				
 				/** Save&Publish simple controls */
@@ -698,7 +704,7 @@ jQuery(document).ready(function ($) {
 			});			
 		
 			/**
-			 * ajaxComplete event handler
+			 * attachListeners: ajaxComplete event handler
 			 */
 			$(document).on( 'ajaxComplete', function( ev, response ) {
 				
@@ -745,7 +751,7 @@ jQuery(document).ready(function ($) {
 			});
 			
 			/**
-			 * Event handler for tracking clicks by widgets title
+			 * attachListeners: Event handler for tracking clicks by widgets title
 			 */
 			$(document).on( 'click', '.widget-title, .widget-title-action', function(ev){
 				var id = $(this).parents( '.customize-control-widget_form' ).attr( 'id' );
@@ -758,7 +764,7 @@ jQuery(document).ready(function ($) {
 			});			
 			
 			/**
-			 * Event handler for tracking clicks by menu item title
+			 * attachListeners: Event handler for tracking clicks by menu item title
 			 */
 			/** 
 			$(document).on( 'click', '.control-section-nav_menu .accordion-section-title', function(ev){

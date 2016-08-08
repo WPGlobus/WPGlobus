@@ -325,10 +325,19 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		 */		
 		public static $theme_name = '';
 		
+		/**
+		 * Array of disabled themes
+		 */				
+		public static $disabled_themes = array();
+		
 		public static function controller() {
 
 			self::$theme 		= wp_get_theme();
 			self::$theme_name 	= strtolower( self::$theme->__get( 'name' ) );
+		
+			self::$disabled_themes = array(
+				'customizr'
+			);
 		
 			/**
 			 * @see \WP_Customize_Manager::wp_loaded
@@ -392,7 +401,6 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 						}	
 						
 					}	
-					//error_log( print_r( $options, true ) );
 					update_option( WPGlobus::Config()->option, $options );
 				break;
 				case 'cb-controls-save':
@@ -480,6 +488,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		 */
 		public static function action__customize_fields_settings( WP_Customize_Manager $wp_customize ) {
 			
+			if ( ! self::is_theme_enabled() ) {
+				return;
+			}
+			
 			/**
 			 * SECTION: fields settings
 			 */
@@ -539,10 +551,6 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		 * @param WP_Customize_Manager $wp_customize
 		 */
 		public static function action__customize_register( WP_Customize_Manager $wp_customize ) {
-			
-			$disabled_themes = array(
-				'customizr'
-			);
 		
 			/**
 			 * WPGlobus panel
@@ -557,7 +565,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 									'</div>' . self::get_content( 'deactivate_message' ),
 			) );
 		
-			if ( in_array( self::$theme_name, $disabled_themes ) ) {
+			if ( ! self::is_theme_enabled() ) {
 				
 				self::sorry_section( $wp_customize, self::$theme );
 				
@@ -1148,6 +1156,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					'sections'		=> self::$sections,
 					'addonsPage'	=> admin_url() . 'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus',
 					'themeName'		=> self::$theme_name,
+					'themeEnabled'	=> self::is_theme_enabled() ? 'true' : 'false',					
 					'helpButton'	=> '<span style="float:right;cursor:pointer;" class="wpglobus-customize-icon-help customize-help-toggle dashicons dashicons-editor-help" tabindex="0" aria-expanded="false"></span>',
 					'userControl' 	=> $options,
 					'userControlSaveButton'  => self::$controls_save_button,
@@ -1158,6 +1167,39 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			);
 			
 		}
+		
+		/**
+		 * Get current theme
+		 * 
+		 * @since 1.6.0
+		 *
+		 * @param string $param
+		 * @return string || object
+		 */		
+		public static function get_theme( $param = '' ) {
+			
+			if ( 'name' == $param ) {
+				return strtolower( self::$theme->__get( 'name' ) );
+			}	
+			
+			return self::$theme;
+			
+		}
+		
+		/**
+		 * Check for enabled theme
+		 * 
+		 * @since 1.6.0
+		 * @return boolean
+		 */
+		public static function is_theme_enabled() {
+			
+			if ( in_array( self::$theme_name, self::$disabled_themes ) ) {
+				return false;
+			}				
+			
+			return true;
+		}	
 
 	} // class
 
