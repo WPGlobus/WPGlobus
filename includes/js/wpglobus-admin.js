@@ -628,33 +628,25 @@ jQuery(document).ready(function () {
             options_general: function () {
 				var $bn = $('#blogname'),
                     $body = $('body');
+				
 				$bn.addClass('hidden');
 				$('#wpglobus-blogname').insertAfter($bn).removeClass('hidden');
-                $body.on('blur', '.wpglobus-blogname', function () {
-                    var s = '';
-                    $('.wpglobus-blogname').each(function (index, e) {
+                
+				$body.on('blur', '.wpglobus-blogname', function () {
+                    $('.wpglobus-blogname').each( function (i, e) {
                         var $e = $(e);
-						var l = $e.data('language');
-                        if ($e.val() !== '') {
-                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-                        }
+						$bn.val( WPGlobusCore.getString( $bn.val(), $e.val(), $e.data('language') ) );
                     });
-					$bn.val(s);
                 });
 				
 				var $bd = $('#blogdescription');
 				$bd.addClass('hidden');
 				$('#wpglobus-blogdescription').insertAfter($bd).removeClass('hidden');
                 $body.on('blur', '.wpglobus-blogdesc', function () {
-                    var s = '';
-                    $('.wpglobus-blogdesc').each(function (index, e) {
+                    $('.wpglobus-blogdesc').each( function (i, e) {
                         var $e = $(e);
-						var l = $e.data('language');
-                        if ($e.val() !== '') {
-                            s = s + WPGlobusAdmin.data.locale_tag_start.replace('%s', l) + $e.val() + WPGlobusAdmin.data.locale_tag_end;
-                        }
+						$bd.val( WPGlobusCore.getString( $bd.val(), $e.val(), $e.data('language') ) );
                     });
-					$bd.val(s);
                 });
 			},	
             quick_edit: function (type) {
