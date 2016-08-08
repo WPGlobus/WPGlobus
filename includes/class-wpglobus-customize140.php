@@ -216,6 +216,40 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_sections = array();
 			
 			$disabled_sections = apply_filters( 'wpglobus_customize_disabled_sections', $disabled_sections );
+
+			/**
+			 * Generate language select button for customizer
+			 * @since 1.6.0
+			 */	
+			$attributes['href'] 	= '#';			
+			$attributes['style'] 	= 'margin-left:48px;';			
+			$attributes['class'] 	= 'customize-controls-close wpglobus-customize-selector';			
+			
+			/**
+			 * Filter of attributes to generate language selector button.
+			 * For example @see Divi theme http://www.elegantthemes.com/gallery/divi/ .
+			 *
+			 * Returning array.
+			 * @since 1.6.0
+			 *
+			 * @param array $attributes An array of attributes.
+			 * @param string Name of current theme.
+			 */	
+			$attributes = apply_filters( 'wpglobus_customize_language_selector_attrs', $attributes, WPGlobus_Customize_Options::get_theme( 'name' ) );
+			
+			$string = '';
+
+			foreach ( $attributes as $attribute => $value ) {
+				if ( null !== $value ){
+					$string .= esc_attr( $attribute ) . '="' . esc_attr( $value ) . '" ';
+				}
+			}
+			
+			$selector_button = sprintf(
+									'<a %1$s>%2$s</a>',
+									trim( $string ),
+									'<span class="wpglobus-globe"></span>'
+								);	
 			
 			wp_enqueue_script(
 				'wpglobus-customize-control140',
@@ -229,6 +263,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				'WPGlobusCustomize',
 				array(
 					'version' => WPGLOBUS_VERSION,
+					'selectorButton'		=> $selector_button,
 					'languageAdmin'			=> WPGlobus::Config()->language,
 					'disabledSettingMask' 	=> $disabled_setting_mask,
 					'elementSelector'		=> $element_selector,
