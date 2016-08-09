@@ -169,10 +169,16 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
-### 1.5.11 ###
+### 1.6.0 ###
 
+* COMPATIBILITY:
+	* WordPress 4.6.
 * FIXED:
-	* Non-SSL link to image warning in admin (props `technima`).
+	* Empty Quick Edit titles in taxonomy views.
+	* Warning: Non-SSL link to image in admin (props `technima`).
+* ADDED:
+	* Customizer: User control on which fields can have multilingual values.
+	* Customizer: Filter to disable WPGlobus customizer for specific themes.
 
 ### 1.5.10 ###
 
