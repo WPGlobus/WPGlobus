@@ -23,33 +23,33 @@ var WPGlobusCore;
 
 		TextFilter: function(text, language, return_in){
 			if ( typeof text == 'undefined' || '' === text ) { return text; }
-			
+
 			var pos_start, pos_end, possible_delimiters = [], is_local_text_found = false;;
-			
+
 			language = '' == language ? 'en' : language;
 			return_in  = typeof return_in == 'undefined' || '' == return_in  ? 'RETURN_IN_DEFAULT_LANGUAGE' : return_in;
 
 			possible_delimiters[0] = [];
 			possible_delimiters[0]['start'] = WPGlobusCoreData.locale_tag_start.replace('%s', language);
 			possible_delimiters[0]['end'] 	 = WPGlobusCoreData.locale_tag_end;
-			
+
 			possible_delimiters[1] = [];
 			possible_delimiters[1]['start'] = '<!--:'+language+'-->';
 			possible_delimiters[1]['end'] = '<!--:-->';
-			
+
 			possible_delimiters[2] = [];
 			possible_delimiters[2]['start'] = '[:'+language+']';
 			possible_delimiters[2]['end'] = '[:';
-			
+
 
 
 			for (var i = 0; i < 3; i++) {
-				
+
 				pos_start = api.strpos( text, possible_delimiters[i]['start'] );
 				if ( pos_start === false ) {
 					continue;
 				}
-	  
+
 				pos_start = pos_start + possible_delimiters[i]['start'].length;
 
 				pos_end = api.strpos( text, possible_delimiters[i]['end'], pos_start );
@@ -62,16 +62,16 @@ var WPGlobusCore;
 
 				is_local_text_found = true;
 				break;
-	  
+
 			}
-			
+
 			if ( ! is_local_text_found ) {
 				if ( return_in == 'RETURN_EMPTY' ) {
 					if ( language == WPGlobusCoreData.default_language && ! /(\{:|\[:|<!--:)[a-z]{2}/.test(text) ) {
 						//
 					} else {
-						text = '';	
-					}	
+						text = '';
+					}
 				} else {
 					// Try RETURN_IN_DEFAULT_LANGUAGE
 					if ( language == WPGlobusCoreData.default_language ) {
@@ -79,10 +79,10 @@ var WPGlobusCore;
 							text = '';
 						}
 					} else {
-						text = api.TextFilter( text, WPGlobusCoreData.default_language );		
-					}	
-				}	
-			}	
+						text = api.TextFilter( text, WPGlobusCoreData.default_language );
+					}
+				}
+			}
 			return text;
 		},
 		addLocaleMarks: function(text, language) {
@@ -103,16 +103,16 @@ var WPGlobusCore;
 			}
 			if ( 'undefined' === typeof(newVal) ) {
 				newVal = '';
-			}			
+			}
 			if ( 'undefined' === typeof(l) ) {
-				l = WPGlobusCoreData.language;	
-			}	
+				l = WPGlobusCoreData.language;
+			}
 
 			s = api.getTranslations(s);
 			s[l] = newVal;
-			
+
 			var cS = '';
-			
+
 			$.each(s, function(ln,val){
 				if ( '' != val && ln != WPGlobusCoreData.default_language) {
 					cS += api.addLocaleMarks(val, ln);
@@ -124,10 +124,10 @@ var WPGlobusCore;
 					cS = s[WPGlobusCoreData.default_language];
 				} else {
 					cS = api.addLocaleMarks(s[WPGlobusCoreData.default_language], WPGlobusCoreData.default_language) + cS;
-				}	
-			}	
-			return cS;	
-		}	
+				}
+			}
+			return cS;
+		}
 	};
 })(jQuery);
 
@@ -179,13 +179,13 @@ var WPGlobusDialogApp;
 				$.each(api.option.customData.addElements, function(i,e) {
 					api.addElement(e);
 				});
-			}	
+			}
 		},
 		convertToId: function(s){
 			s = s.replace(/\]/g,'');
 			s = s.replace(/\[/g,'-');
-			return s;	
-		},	
+			return s;
+		},
 		addElement: function(elem) {
 			var option = {
 				id: null,
@@ -196,19 +196,19 @@ var WPGlobusDialogApp;
 				onChangeClass: ''
 			}
 			if ( 'string' == typeof(elem) ) {
-				option.id = elem;	
+				option.id = elem;
 			} else if ( 'object' == typeof(elem) ) {
 				option = $.extend(option, elem);
 			} else {
 				return;
-			}	
-		
+			}
+
 			var $element = null, id = null, name = null, node = null,
 				sb = api.startButton,
 				clone, v, style, nodeName = '';
 
 			api.element_by = 'id';
-				
+
 			node = document.getElementById(option.id);
 			if ( null ===  node ) {
 				api.element_by = 'name';
@@ -216,17 +216,17 @@ var WPGlobusDialogApp;
 			} else {
 				nodeName = node.nodeName;
 				nodeName = nodeName.toLowerCase();
-			}	
+			}
 			if ( 0 == node.length ) {
-				return;	
+				return;
 			} else {
 				id = option.id;
 				if ( 'id' == api.element_by ) {
 					$element = $('#'+id);
 				} else {
-					nodeName = node[0].nodeName;	
+					nodeName = node[0].nodeName;
 					nodeName = nodeName.toLowerCase();
-					$element = $(nodeName+'[name="'+id+'"]');	
+					$element = $(nodeName+'[name="'+id+'"]');
 				}
 			}
 
@@ -234,29 +234,29 @@ var WPGlobusDialogApp;
 				name = id;
 			} else {
 				name = $element.attr('name');
-			}	
+			}
 			api.clone_id = api.convertToId(id);
-			
+
 			if ( -1 != name.indexOf( 'wpglobus' ) || -1 != api.clone_id.indexOf( 'wpglobus' ) ) {
 				/* prevent add element to itself  */
 				return;
 			}
-			
+
 			if ( $( '#wpglobus-'+api.clone_id ).length > 0 ) {
 				// WPGlobus element exists already
-				return;	
-			}	
+				return;
+			}
 			if ( $( nodeName+'[name="wpglobus-'+name+'"]' ).length > 0 ) {
 				// WPGlobus element exists already
-				return;	
-			}	
-			
+				return;
+			}
+
 			clone = $( $element.clone() );
-			//$element.addClass('hidden');	
+			//$element.addClass('hidden');
 			style = $element.attr('style') || '';
 			$element.attr( 'style', 'display:none;' );
 			clone.attr( 'id', 'wpglobus-'+api.clone_id ).attr( 'name', 'wpglobus-'+name );
-			
+
 			/**
 			 * add WPGlobus translatable class
 			 */
@@ -267,14 +267,14 @@ var WPGlobusDialogApp;
 				 * add class to bind 'change' event
 				 */
 				clone.addClass( option.onChangeClass );
-			}			
-			
+			}
+
 			if ( 'id' == api.element_by ) {
 				clone.attr('data-source-id', id).attr('data-source-name', '').attr('data-source-get-by',api.element_by);
 			} else {
 				clone.attr('data-source-id', '').attr('data-source-name', name).attr('data-source-get-by',api.element_by);
-			}	
-			
+			}
+
 			if ( 'textarea' == nodeName ) {
 				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
 				clone.text( v );
@@ -283,16 +283,16 @@ var WPGlobusDialogApp;
 					clone.attr( 'style', style + ';width:95%;float:left;' );
 				} else {
 					clone.attr( 'style', style + ';' + option.style );
-				}	
+				}
 			} else {
 				v = WPGlobusCore.getTranslations( $element.val() )[WPGlobusCoreData['language']];
 				clone.attr( 'value', v );
 				clone.attr( 'data-nodename', 'input' );
 				if ( '' != option.style ) {
 					clone.attr( 'style', style + ';' + option.style );
-				}	
-			}	
-			
+				}
+			}
+
 			sb = sb.replace(/{{clone_id}}/g, api.clone_id);
 			if ( 'id' == api.element_by ) {
 				sb = sb.replace(/{{id}}/g, api.clone_id);
@@ -302,21 +302,21 @@ var WPGlobusDialogApp;
 				sb = sb.replace(/{{id}}/g, '');
 				sb = sb.replace(/{{name}}/g, name);
 				sb = sb.replace(/{{nodename}}/g, nodeName);
-			}	
+			}
 			sb 					   = 'textarea' == nodeName ? sb.replace( '{{style}}', 'float:left;margin-top:0;' ) : sb.replace( '{{style}}', '' );
 			var startButtonClasses = 'textarea' == nodeName ? api.startButtonClass + ' wpglobus-textarea wpglobus-textarea-'+api.clone_id : api.startButtonClass;
 			sb = sb.replace( '{{classes}}', startButtonClasses );
 			sb = option.dialogTitle == '' ? sb.replace('{{title}}', api.dialogTitle) : sb.replace('{{title}}', option.dialogTitle);
 			sb = option.sbTitle == '' ? sb.replace('{{sbTitle}}', option.sbTitle) : sb.replace('{{sbTitle}}', 'title="'+option.sbTitle+'"');
-			
+
 			$(sb).insertAfter($element);
 			$(clone).insertAfter($element);
-			
+
 			if ( 'textarea' == nodeName ) {
 				$('#wpglobus-'+api.clone_id).addClass( 'wpglobus-textarea-'+api.clone_id );
 				$('.wpglobus-textarea-'+api.clone_id).wrapAll( '<div class="wpglobus-textarea-wrapper" style="'+option.styleTextareaWrapper+'"></div>' );
 			}
-		
+
 			/**
 			 * Bind change event
 			 */
@@ -335,30 +335,30 @@ var WPGlobusDialogApp;
 								ret = true;
 								return false;
 							}
-						});		
-					}	
-				}	
+						});
+					}
+				}
 			}
-			
+
 			if ( ret ) {
-				/** 
+				/**
 				 * Return because we had bound 'change' event already
 				 */
 				return;
-			}		
-			
+			}
+
 			$( document ).on( 'change', selector, function() {
-				var $t = $(this), 
+				var $t = $(this),
 					sid = $t.data( 'source-id' );
 
-				if ( '' == sid ) {		
+				if ( '' == sid ) {
 					sid = $t.data( 'nodename' ) + '[name="' + $t.data( 'source-name' ) + '"]';
 				} else {
-					sid = '#' + sid;	
-				}	
+					sid = '#' + sid;
+				}
 				$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
 			});
-		},	
+		},
 		saveDialog: function() {
 			var s = '', sdl = '', scl = '', $e, val, l;
 			$('.wpglobus_dialog_textarea').each(function(indx,e){
@@ -367,19 +367,19 @@ var WPGlobusDialogApp;
 				l = $e.data('language');
 				if ( l == WPGlobusAdmin.data.language ) {
 					scl = val;
-				}	
+				}
 				if ( val != '' ) {
-					s = s + WPGlobusCore.addLocaleMarks(val,l);	
+					s = s + WPGlobusCore.addLocaleMarks(val,l);
 					if ( l == WPGlobusCoreData.default_language ) {
 						sdl = val;
-					}					
-				}	
-			});					
+					}
+				}
+			});
 			s = s.length == sdl.length + 8 ? sdl : s;
 			$(api.id).val(s);
 			s = scl == '' ? sdl : scl;
 			$(api.wpglobus_id).val(s);
-		},	
+		},
 		dialog : $('#wpglobus-dialog-wrapper').dialog({
 			autoOpen: false,
 			//height: 250,
@@ -417,8 +417,8 @@ var WPGlobusDialogApp;
 					$('.wpglobus_dialog_options_wrapper').removeClass('hidden');
 				} else {
 					$('.wpglobus_dialog_options_wrapper').addClass('hidden');
-				}	
-			});	
+				}
+			});
 			$(document).on('click', '.wpglobus_dialog_option', function(event) {
 				var $t = $(this), r;
 				var ob = $t.data('object');
@@ -432,25 +432,25 @@ var WPGlobusDialogApp;
 					if ( result.result == 'ok' ) {
 						if ( result.checked == 'true' ) {
 							$(ob).removeClass('wpglobus_dialog_start_hidden');
-						} else {	
+						} else {
 							$(ob).addClass('wpglobus_dialog_start_hidden');
-						}	
-					}	
+						}
+					}
 				})
 				.fail(function (error) {})
 				.always(function (jqXHR, status){});
-			});	
+			});
 			$(document).on('click', api.option.listenClass, function(e) {
 				api.element = $(this);
 				api.id = api.element.data('source-id');
-				if ( '' == api.id ) {		
+				if ( '' == api.id ) {
 					api.id = api.element.data('nodename') + '[name="'+api.element.data('source-name')+'"]';
 					api.wpglobus_id = '#wpglobus-'+api.convertToId( api.element.data('source-name') );
 				} else {
 					api.wpglobus_id = '#wpglobus-'+api.id;
-					api.id = '#'+api.id;	
-				}				
-				
+					api.id = '#'+api.id;
+				}
+
 				api.clicks++;
 				if ( api.clicks == 1 ) {
 					setTimeout(function () {
@@ -459,36 +459,36 @@ var WPGlobusDialogApp;
 						} else {
 							var s = $(api.id);
 							if ( s.hasClass('hidden') ) {
-								s.removeClass('hidden').attr('style', 'display:block;');	
-							} else {	
+								s.removeClass('hidden').attr('style', 'display:block;');
+							} else {
 								s.addClass('hidden').attr('style', 'display:none;');
-							}	
-						}	
+							}
+						}
 						api.clicks = 0;
 					}, 200);
 				}
-			});	
+			});
 			api.form = api.dialog.find('form#wpglobus-dialog-form').on('submit', function( event ) {
 				event.preventDefault();
 				api.saveDialog();
-			});					
+			});
 		},
 		ajax : function(order) {
 			return $.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json', async:false});
 		},
-		onClick: function(ev) {	
+		onClick: function(ev) {
 			if ( typeof(api.element.data('dialog-title')) == 'undefined' || '' == api.element.data('dialog-title') ) {
 				api.dialogTitle = api.option.dialogTitle;
 			} else {
 				api.dialogTitle = api.element.data('dialog-title');
-			}	
+			}
 			if ( typeof api.id !== 'undefined' ) {
 				api.attrs['maxlength'] = $(api.id).attr('maxlength');
 			}
-			
+
 			api.source = api.element.data('source-value');
 			if ( typeof api.source === 'undefined' ) {
-				api.source = $(api.id).val();	
+				api.source = $(api.id).val();
 				if (api.request == 'ajax') {
 					// @todo revise ajax action
 					//api.order['action'] = 'get_translate';
@@ -496,13 +496,13 @@ var WPGlobusDialogApp;
 					//api.ajax(api.order);
 				} else {
 					api.value = WPGlobusCore.getTranslations(api.source);
-				}	
-			}					
+				}
+			}
 			$.each(api.value, function(l,e){
 				$('#wpglobus-dialog-'+l).val(e);
 			});
-			api.dialog.dialog('open');				
-		}	
+			api.dialog.dialog('open');
+		}
 	};
 
 })(jQuery);
@@ -567,7 +567,7 @@ jQuery(document).ready(function () {
 					this.set_dialog();
 					if ( typeof WPGlobusAioseop != 'undefined' ) {
 						WPGlobusAioseop.init();
-					}	
+					}
                 } else if ('menu-edit' === WPGlobusAdmin.page) {
                     this.nav_menus();
                 } else if ('taxonomy-edit' === WPGlobusAdmin.page) {
@@ -579,7 +579,7 @@ jQuery(document).ready(function () {
                 } else if ('edit.php' === WPGlobusAdmin.page) {
                     this.quick_edit('post');
                 } else if ('options-general.php' == WPGlobusAdmin.page) {
-					this.options_general();	
+					this.options_general();
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
 					WPGlobusWidgets.init();
 					WPGlobusDialogApp.init({dialogTitle:'Edit text'});
@@ -588,21 +588,21 @@ jQuery(document).ready(function () {
                 } else {
 					// init WPGlobusDialogApp for using in a 3-party plugins
 					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
-				}	
+				}
             },
 			parseBool: function(b)  {
 				return !(/^(false|0)$/i).test(b) && !!b;
-			},	
+			},
 			getCurrentTab: function() {
 				return $( '.wpglobus-post-body-tabs-list .ui-tabs-active' ).data( 'language' );
-			},		
+			},
             admin_init: function () {
 				var order = $('.wpglobus-addons-group a').data('key');
 				if ( 'undefined' !== typeof order ) {
 					if ( window.location.search.indexOf('page=wpglobus_options&tab='+order) >= 0 ) {
 						if ( WPGlobusCoreData.multisite ) {
 							window.location = WPGlobusCoreData.pluginInstallLocation.multisite;
-						} else {	
+						} else {
 							window.location = WPGlobusCoreData.pluginInstallLocation.single;
 						}
 						/**
@@ -610,11 +610,11 @@ jQuery(document).ready(function () {
 						 * @todo remove after testing @see class WPGlobus_Plugin_Install
 						 */
 						//window.location = 'admin.php?page=wpglobus-addons';
-					} else {	
+					} else {
 						var addon = $('#toplevel_page_wpglobus_options li').eq(order+1);
 						if ( WPGlobusCoreData.multisite ) {
 							$(addon).find('a').attr('href',WPGlobusCoreData.pluginInstallLocation.multisite).attr('onclick',"window.location=jQuery(this).attr('href');return false;");
-						} else {	
+						} else {
 							$(addon).find('a').attr('href',WPGlobusCoreData.pluginInstallLocation.single).attr('onclick',"window.location=jQuery(this).attr('href');return false;");
 						}
 						/**
@@ -622,23 +622,23 @@ jQuery(document).ready(function () {
 						 * @todo remove after testing @see class WPGlobus_Plugin_Install
 						 */
 						//$(addon).find('a').attr('href','admin.php?page=wpglobus-addons').attr('onclick',"window.location=jQuery(this).attr('href');return false;");
-					}	
+					}
 				}
-			},	
+			},
             options_general: function () {
 				var $bn = $('#blogname'),
                     $body = $('body');
-				
+
 				$bn.addClass('hidden');
 				$('#wpglobus-blogname').insertAfter($bn).removeClass('hidden');
-                
+
 				$body.on('blur', '.wpglobus-blogname', function () {
                     $('.wpglobus-blogname').each( function (i, e) {
                         var $e = $(e);
 						$bn.val( WPGlobusCore.getString( $bn.val(), $e.val(), $e.data('language') ) );
                     });
                 });
-				
+
 				var $bd = $('#blogdescription');
 				$bd.addClass('hidden');
 				$('#wpglobus-blogdescription').insertAfter($bd).removeClass('hidden');
@@ -648,7 +648,7 @@ jQuery(document).ready(function () {
 						$bd.val( WPGlobusCore.getString( $bd.val(), $e.val(), $e.data('language') ) );
                     });
                 });
-			},	
+			},
             quick_edit: function (type) {
                 if (typeof WPGlobusAdmin.data.has_items === 'undefined') {
                     return;
@@ -657,7 +657,7 @@ jQuery(document).ready(function () {
                     return;
                 }
                 var full_id = '', id = 0;
-				
+
 				$(document).ajaxComplete(function(event, jqxhr, settings){
 					if (typeof settings.data === 'undefined') {
                         return;
@@ -670,7 +670,7 @@ jQuery(document).ready(function () {
 						$('#'+full_id+' .description').text(WPGlobusAdmin.qedit_titles[id][WPGlobusAdmin.data.language]['description']);
 					}
 				});
-				
+
                 var title = {};
                 $('#the-list tr').each(function (i, e) {
                     var $e = $(e);
@@ -700,7 +700,7 @@ jQuery(document).ready(function () {
                     })
                     .always(function (jqXHR, status) {
                     });
-                
+
 				$('body').on('change', '.wpglobus-quick-edit-title', function () {
                     var s = '';
 					var lang = [];
@@ -716,17 +716,17 @@ jQuery(document).ready(function () {
 
 					var so = $(document).triggerHandler( 'wpglobus_get_translations', {string:s, lang:lang, id:id} );
 					if ( typeof so !== 'undefined' ) {
-						s = so;		
+						s = so;
 					}
                     // $( 'input.ptitle' ).eq( 0 ).val( s ); // @todo remove after test
                     $( 'input.ptitle' ).eq( 0 ).attr( 'value',  s ) ;
-					WPGlobusAdmin.qedit_titles[ id ][ 'source' ] = s; 
+					WPGlobusAdmin.qedit_titles[ id ][ 'source' ] = s;
                 });
-				
+
 				if ( typeof WPGlobusAdmin.data.tags !== 'undefined' ) {
 					$.each( WPGlobusAdmin.data.tags, function(i,tag){
 						WPGlobusAdmin.data.value[tag]['post_id'] = {};
-					});	
+					});
 				}
 
 				$('a.save, input#bulk_edit').on('mouseenter', function (event) {
@@ -737,16 +737,16 @@ jQuery(document).ready(function () {
 						$('input#bulk_edit').unbind('click');
 					} else {
 						$('a.save').unbind('click');
-					}	
-					
+					}
+
 					$('a.save, input#bulk_edit').click(function (event) {
-						if (event.currentTarget.id != 'bulk_edit') {	
+						if (event.currentTarget.id != 'bulk_edit') {
 							$.ajaxSetup({async:false});
-						}	
+						}
 						var p = $(this).parents('tr');
 						var id = p.attr('id').replace('edit-','');
 						var t,v,new_tags;
-						
+
 						$.each( WPGlobusAdmin.data.tags, function(index,tag){
 							t = p.find("textarea[name='" + WPGlobusAdmin.data.names[tag] + "']");
 							if ( t.size() == 0 ) {
@@ -758,23 +758,23 @@ jQuery(document).ready(function () {
 							for(var i=0; i<v.length; i++) {
 								v[i] = v[i].trim(' ');
 								if ( v[i] != '' ) {
-									if ( typeof WPGlobusAdmin.data.tag[tag][v[i]] === 'undefined' ) {									
+									if ( typeof WPGlobusAdmin.data.tag[tag][v[i]] === 'undefined' ) {
 										new_tags[i] = v[i];
 									} else {
 										new_tags[i] = WPGlobusAdmin.data.tag[tag][v[i]];
 									}
-								}	
+								}
 							}
 							t.val(new_tags.join(', '));
 						});
-						if (event.currentTarget.id != 'bulk_edit') {						
+						if (event.currentTarget.id != 'bulk_edit') {
 							inlineEditPost.save(id);
 							$.ajaxSetup({async:true});
-						}						
-						
-					});					
-				});				
-				
+						}
+
+					});
+				});
+
                 $( '#the-list' ).on( 'click', 'a.editinline', function () {
 					var t = $(this);
 					full_id = t.parents('tr').attr('id');
@@ -785,17 +785,17 @@ jQuery(document).ready(function () {
                     } else {
 						return;
 					}
-					
+
 					if ('post' === type && typeof WPGlobusAdmin.data.tags !== 'undefined') {
 						$.each( WPGlobusAdmin.data.tags, function(i,tag){
 							if ( WPGlobusAdmin.data.value[tag] != '' ) {
 								if (typeof WPGlobusAdmin.data.value[tag]['post_id'][id] !== 'undefined') {
 									$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(WPGlobusAdmin.data.value[tag]['post_id'][id]);
 								}
-							}	
-						});	
+							}
+						});
 					}
-					
+
                     var e = $('#edit-' + id + ' input.ptitle').eq(0);
                     var p = e.parents('label');
 					e.val(WPGlobusAdmin.qedit_titles[id].source);
@@ -812,44 +812,44 @@ jQuery(document).ready(function () {
 							} else {
 								WPGlobusAdmin.qedit_titles[id][l]['name'] = '';
 							}
-							WPGlobusAdmin.qedit_titles[id][l]['description'] = '';							
+							WPGlobusAdmin.qedit_titles[id][l]['description'] = '';
 						});
 					}
-					
+
                     $( '.wpglobus-quick-edit-title' ).each(function ( i, e ) {
-						var $e = $(e); 
+						var $e = $(e);
                         var l = $e.data( 'language' );
                         $e.attr( 'id', l + id );
                         if ( typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined' ) {
 							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\'/g, "'" );
 							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\"/g, '"' );
                             $e.attr( 'value', WPGlobusAdmin.qedit_titles[id][l]['name'] );
-							WPGlobusAdmin.qedit_titles[id]['source'] = 
-								WPGlobusCore.getString( 
-									WPGlobusAdmin.qedit_titles[id]['source'], 
+							WPGlobusAdmin.qedit_titles[id]['source'] =
+								WPGlobusCore.getString(
+									WPGlobusAdmin.qedit_titles[id]['source'],
 									WPGlobusAdmin.qedit_titles[id][l]['name'],
 									l
 								);
                         }
                     });
 					// $( 'input.ptitle' ).eq( 0 ).val( WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );	 // @todo remove after test
-					$( 'input.ptitle' ).eq( 0 ).attr( 'value', WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );	
+					$( 'input.ptitle' ).eq( 0 ).attr( 'value', WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );
                 });
 
             },
             taxonomy_edit: function () {
-				
+
 				var elements = [];
 				elements[0] = 'name';
 				elements[1] = 'description';
-				
+
 				var make_clone = function(id,language){
 					var $element = $('#'+id),
 						clone = $element.clone(),
 						name = $element.attr('name'),
 						classes = 'wpglobus-element wpglobus-element_'+id+' wpglobus-element_'+language+' wpglobus-translatable',
 						node;
-				
+
 					node = document.getElementById(id);
 					node = node.nodeName;
 					$(clone).attr('id', id+'_'+language);
@@ -864,34 +864,34 @@ jQuery(document).ready(function () {
 						$(clone).attr('value', $('#wpglobus-link-tab-'+language).data(id));
 					} else if ( node == 'TEXTAREA' ) {
 						$(clone).text($('#wpglobus-link-tab-'+language).data(id));
-					}	
+					}
 					$element.addClass('hidden');
 					if ( $('.wpglobus-element_'+id).size() == 0 ) {
 						$(clone).insertAfter($element);
 					} else {
 						$(clone).insertAfter($('.wpglobus-element_'+id).last());
-					}	
-				};	
-				
+					}
+				};
+
 				$.each(WPGlobusCoreData.enabled_languages, function(i,l){
 					$.each(elements, function(i,e){
 						make_clone(e,l);
-					});						
+					});
 				});
-			
+
                 $('.wpglobus-taxonomy-tabs').insertAfter('#ajax-response');
 
                 // Make class wrap as tabs container
                 // tabs on
-                $('.wrap').tabs();			
-				
+                $('.wrap').tabs();
+
 				$('body').on('click', '.wpglobus-taxonomy-tabs li', function(event){
 					var $t = $(this);
 					var language = $t.data('language');
 					$('.wpglobus-element').addClass('hidden');
 					$('.wpglobus-element_'+language).removeClass('hidden');
-				});					
-				
+				});
+
                 $('.wpglobus-element').on('change', function () {
                     var $this = $(this),
                         save_to = $this.data('save-to'),
@@ -905,7 +905,7 @@ jQuery(document).ready(function () {
 						}
 					});
                     $('#' + save_to).val(s);
-                });				
+                });
             },
             nav_menus: function () {
                 var iID, menu_size,
@@ -960,12 +960,12 @@ jQuery(document).ready(function () {
 							/**
 							 * fix for case when value resets by WP core
 							 */
-							$i.val( WPGlobusAdmin.data.items[ item_id ][ input ][ 'source' ] );	
-						}	
-						
+							$i.val( WPGlobusAdmin.data.items[ item_id ][ input ][ 'source' ] );
+						}
+
                         var p = $( '#' + id + ' ' + input ).parents('p');
                         var height = 0;
-						
+
                         $.each(WPGlobusAdmin.data.open_languages, function (index, language) {
                             var new_element = $i.clone();
                             new_element.attr('id', $i.attr('id') + '-' + language);
@@ -985,10 +985,10 @@ jQuery(document).ready(function () {
 								new_element.attr('value', WPGlobusAdmin.data.items[item_id][language][input]['caption']);
 							} else {
 								new_element.attr('value', '');
-							} 	
+							}
 							new_element.css('margin-bottom', '0.6em');
 							$(p).append( new_element );
-							height = index;							
+							height = index;
                         });
                         height = (height + 1) * 40;
                         $i.css('display', 'none').attr('class', '').addClass('widefat wpglobus-hidden');
@@ -1008,35 +1008,35 @@ jQuery(document).ready(function () {
 								new_title = title.replace(post_title, item_title);
 								$e.attr('title', new_title);
 								$e.text(new_title);
-							}	
-						});	
-					}	
+							}
+						});
+					}
 				});
-				
+
 				// Run the item handle title when the navigation label was loaded.
 				// @see wp-admin\js\nav-menu.js:537
 				$('.edit-menu-item-title').trigger('change');
 				wpNavMenu.refreshAdvancedAccessibility();
 				wpNavMenu.menusChanged = false;
-				
+
                 $('.wpglobus-menu-item').on('change', function () {
                     var $this = $(this),
 						item_id = $this.data('item-id'),
-						s, so; 
+						s, so;
                     if ($this.hasClass('wpglobus-item-title')) {
 						s = WPGlobusCore.getString( $('input#edit-menu-item-title-' + item_id).val(), $this.val(), $this.data('language') );
 						so = $(document).triggerHandler('wpglobus_get_menu_translations', {string:s, lang:WPGlobusCoreData.open_languages, id:item_id, type:'input.edit-menu-item-title'});
 						if ( typeof so !== 'undefined' ) {
-							s = so;		
-						}					
+							s = so;
+						}
                         $('input#edit-menu-item-title-' + item_id).val(s);
                     }
                     if ($this.hasClass('wpglobus-item-attr')) {
-						s = WPGlobusCore.getString( $('input#edit-menu-item-attr-title-' + item_id).val(), $this.val(), $this.data('language') );						
+						s = WPGlobusCore.getString( $('input#edit-menu-item-attr-title-' + item_id).val(), $this.val(), $this.data('language') );
 						so = $(document).triggerHandler('wpglobus_get_menu_translations', {string:s, lang:WPGlobusCoreData.open_languages, id:item_id, type:'input.edit-menu-item-attr-title'});
 						if ( typeof so !== 'undefined' ) {
-							s = so;		
-						}					
+							s = so;
+						}
                         $('input#edit-menu-item-attr-title-' + item_id).val(s);
                     }
 
@@ -1052,26 +1052,26 @@ jQuery(document).ready(function () {
 							v = $.trim(v);
 							if ( v != '' ) {
 								data['wp_autosave']['post_title_'+l] = v;
-							}	
+							}
 							v = $('#content_'+l).val() || '';
 							v = $.trim(v);
 							if ( v != '' ) {
 								data['wp_autosave']['content_'+l] = v;
-							}	
+							}
 						});
-					}	
-				});				
-			
+					}
+				});
+
 				var wrap_at = '#postdivrich',
 					set_title = true,
-					content_tabs_id = '#post-body-content';	
+					content_tabs_id = '#post-body-content';
 				if ( WPGlobusAdmin.data.support['editor'] === false ) {
-					wrap_at = '#titlediv';	
-					set_title = false;	
-				}	
+					wrap_at = '#titlediv';
+					set_title = false;
+				}
 				if ( WPGlobusAdmin.data.support['title'] === false ) {
-					set_title = false;	
-				}	
+					set_title = false;
+				}
                 // Make post-body-content as tabs container
                 $(content_tabs_id).prepend($('.wpglobus-post-body-tabs-list'));
                 $.each(WPGlobusAdmin.tabs, function (index, suffix) {
@@ -1079,7 +1079,7 @@ jQuery(document).ready(function () {
                         $(wrap_at).wrap('<div id="tab-default"></div>');
 						if ( set_title ) {
 							$($('#titlediv')).insertBefore(wrap_at);
-						}	
+						}
                     } else {
                         $(wrap_at+'-' + suffix).wrap('<div id="tab-' + suffix + '"></div>');
 						if ( set_title ) {
@@ -1094,15 +1094,15 @@ jQuery(document).ready(function () {
 						var otab = ui.oldTab[0].id.replace('link-tab-','');
 						var ntab = ui.newTab[0].id.replace('link-tab-','');
 						if ( 'default' == otab ) {
-							otab = WPGlobusCoreData.default_language;	
-						}	
+							otab = WPGlobusCoreData.default_language;
+						}
 						if ( 'default' == ntab ) {
-							ntab = WPGlobusCoreData.default_language;	
-						}	
+							ntab = WPGlobusCoreData.default_language;
+						}
 						var a = $(document).triggerHandler('wpglobus_post_body_tabs', [ otab, ntab ]);
 						if ( a || typeof a === 'undefined' ) {
 							return true;
-						}	
+						}
 						return false;
 					}
 				}); // #post-body-content
@@ -1117,22 +1117,22 @@ jQuery(document).ready(function () {
                 //$('#content').text(WPGlobusAdmin.content.replace(/\n/g, "<p>"));
 
                 $('#content').text(WPGlobusAdmin.content);
-				
+
 				if (typeof WPGlobusVendor !== "undefined" && WPGlobusVendor.vendor.WPSEO ) {
 					if ( typeof wpglobus_wpseo !== "undefined" ) {
 						wpglobus_wpseo();
 					} else if ( typeof WPGlobusYoastSeo !== "undefined" ) {
 						/** since Yoast SEO 3.0 */
 						WPGlobusYoastSeo.init();
-					}	
-                }			   
+					}
+                }
 
                 if ( WPGlobusAdmin.data.modify_excerpt ) {
 					/**
 					 * Add excerpt fields from template.
 					 */
 					var $excerpt = $( '#excerpt' );
-					$excerpt.addClass( 'hidden' ).css( {'display':'none'} );					 
+					$excerpt.addClass( 'hidden' ).css( {'display':'none'} );
                     $( WPGlobusAdmin.data.template ).insertAfter( $excerpt );
                     $( 'body' ).on( 'change', '.wpglobus-excerpt', function () {
 						var $t = $( this );
@@ -1141,23 +1141,23 @@ jQuery(document).ready(function () {
                 }
 
 				/** wp_editor word count */
-				if ( typeof wp.utils !== 'undefined' && typeof wp.utils.WordCounter !== 'undefined' ) {							
+				if ( typeof wp.utils !== 'undefined' && typeof wp.utils.WordCounter !== 'undefined' ) {
 					/** from WordPress 4.3 @see \wp-admin\js\post.js */
-					WPGlobusCoreData.wordCounter = {};	
-					
+					WPGlobusCoreData.wordCounter = {};
+
 					var self = this;
-					
+
 					$.each( WPGlobusCoreData.enabled_languages, function( i, l ){
 						if ( l == WPGlobusCoreData.default_language ) {
 							return true;
 						}
-						
+
 						( function( $, counter, l ) {
 							WPGlobusCoreData.wordCounter[ l ] = {};
 							WPGlobusCoreData.wordCounter[ l ][ 'counter' ] = counter;
-							
+
 							$( function() {
-									
+
 								WPGlobusCoreData.wordCounter[ l ][ 'content' ] = $( '#content_'+l );
 								WPGlobusCoreData.wordCounter[ l ][ 'count' ]   = $( '#wp-word-count-'+l ).find( '.word-count-'+l );
 
@@ -1167,27 +1167,27 @@ jQuery(document).ready(function () {
 									var text, count;
 
 									if ( typeof l === 'object' ) {
-										
+
 										if ( l == 'tinymce' ) {
 											/** wysiwyg editor */
 											l = self.getCurrentTab();
-										} else {	
+										} else {
 											/** textarea */
 											l = l.target.id.replace( 'content_', '' );
 										}
-										
-									}	
-								
+
+									}
+
 									if ( typeof WPGlobusCoreData.wordCounter[ l ] === 'undefined' ) {
-										return;	
-									}	
-									
+										return;
+									}
+
 									//if ( ! contentEditor || contentEditor.isHidden() ) {
 									if ( ! WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ] ||
 											WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ].isHidden() ) {
-												
+
 										text = WPGlobusCoreData.wordCounter[ l ][ 'content' ].val();
-									
+
 									} else {
 										//text = contentEditor.getContent( { format: 'raw' } );
 										text = WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ].getContent( { format: 'raw' } );
@@ -1195,7 +1195,7 @@ jQuery(document).ready(function () {
 
 									//count = counter.count( text );
 									count = WPGlobusCoreData.wordCounter[ l ][ 'counter' ].count( text );
-								
+
 									//if ( count !== prevCount ) {
 									if ( count !== WPGlobusCoreData.wordCounter[ l ][ 'prevCount' ] ) {
 										//$count.text( count );
@@ -1214,20 +1214,20 @@ jQuery(document).ready(function () {
 									var l = editor.id.replace( 'content_', '' );
 
 									WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ] = editor;
-									
+
 									editor.on( 'nodechange keyup', _.debounce( update, 1000 ) );
 								} );
 
 								WPGlobusCoreData.wordCounter[l]['content'].on( 'input keyup', _.debounce( update, 1000 ) );
 
 								update( l );
-								
+
 							} );
 						} )( jQuery, new wp.utils.WordCounter(), l );
 					});
-					
+
 				}
-				
+
 				if ( typeof(wpWordCount) !== 'undefined' ) {
 					// wordpress 4.2.4 and earlier
 					var last = 0,
@@ -1304,7 +1304,7 @@ jQuery(document).ready(function () {
 					$(document).triggerHandler('wpglobuscountwords', [ $('#content').val(), WPGlobusCoreData.default_language ]);
 				}
 				// end word count
-				
+
 				$('body').on('click', '#publish, #save-post', function() {
 					if ( WPGlobusAdmin.data.open_languages.length > 1 ) {
 						$(document).triggerHandler('wpglobus_before_save_post', {content_tabs_id:content_tabs_id});
@@ -1323,11 +1323,11 @@ jQuery(document).ready(function () {
 									title = title + delimiter + t;
 								}
 							});
-						}	
+						}
 						if ( title.length > 0 ) {
 							$('#title').val(title);
 						}
-					}	
+					}
 					if ( typeof WPGlobusAdmin.data.tagsdiv === 'undefined' || WPGlobusAdmin.data.tagsdiv.length < 1 ) {
 						return;
 					}
@@ -1344,23 +1344,23 @@ jQuery(document).ready(function () {
 						if ( $('#tax-input-'+id).size() == 0 ) {
                             return true;
                         }
-						
+
 						var name, tags = [];
-						
+
 						$('#tagsdiv-'+id+' .tagchecklist span').each(function(i,e){
 							name = $(e).text();
 							name = name.replace('X', '').trim(' ');
 							if ( typeof WPGlobusAdmin.data.tag[id][name] === 'undefined' ) {
-								tags[i] = name;	
-							} else {	
+								tags[i] = name;
+							} else {
 								tags[i] = WPGlobusAdmin.data.tag[id][name];
-							}	
+							}
 						});
 						$('#tax-input-'+id).val(tags.join(', '));
-					});	
-			
-				});	
-				
+					});
+
+				});
+
                 $('.ui-state-default').on('click', function () {
                     if ('link-tab-default' === $(this).attr('id')) {
                         $(window).scrollTop($(window).scrollTop() + 1);
@@ -1398,32 +1398,32 @@ jQuery(document).ready(function () {
 			set_dialog: function() {
 				var ajaxify_row_id, added_control = false;
 				var add_elements = function(post_id) {
-					
+
 					var id, rows, cb, _cb,
 						_classes = 'wpglobus_dialog_start wpglobus_dialog_icon';
-					
+
 					_cb = [
 						'<div class="wpglobus_dialog_options_wrapper hidden">',
 						'<input style="width:initial;" id="wpglobus-cb-{{id}}" data-object="#wpglobus-dialog-start-{{id}}" data-meta-key="{{meta-key}}" class="wpglobus_dialog_option wpglobus_dialog_cb" type="checkbox" {{checked}} />',
 						'</div>'
 					].join('');
-					
+
 					if (typeof post_id == 'undefined') {
 						rows = '#the-list tr';
 					} else {
 						rows = '#the-list tr#'+post_id;
-					}	
+					}
 					$(rows).each(function(){
-						var $t = $(this), 
+						var $t = $(this),
 							tid = $t.attr('id'),
 							element = $t.find('textarea'),
 							clone, name, meta_key,
 							classes = _classes;
-							
+
 						id = element.attr('id');
 						if ( undefined === id ) {
 							return true;
-						}	
+						}
 						meta_key = $('#'+tid+'-key').val();
 						clone = $('#'+id).clone();
 						$(element).addClass('wpglobus-dialog-field-source hidden');
@@ -1441,68 +1441,68 @@ jQuery(document).ready(function () {
 						} else {
 							if ( undefined !== WPGlobusAdmin.data.post_meta_settings[WPGlobusAdmin.data.post_type][meta_key] && WPGlobusAdmin.data.post_meta_settings[WPGlobusAdmin.data.post_type][meta_key] == 'false' ) {
 								cb = cb.replace(/{{checked}}/, '');
-								classes = _classes+' wpglobus_dialog_start_hidden'; 
-							} else {	
+								classes = _classes+' wpglobus_dialog_start_hidden';
+							} else {
 								cb = cb.replace(/{{checked}}/, 'checked');
 								classes = _classes;
-							}	
-						}		
+							}
+						}
 						$t.append('<td style="width:20px;"><div id="wpglobus-dialog-start-'+id+'" data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="'+classes+'"></div>'+cb+'</td>');
 					});
 					if ( ! added_control && $('#list-table .wpglobus_dialog_start').size() > 0 ) {
 						$('#list-table thead tr').append('<th class="wpglobus-control-head"><div class="wpglobus_dialog_settings wpglobus_dialog_icon"></div></th>');
 						added_control = true;
-					}					
-				}				
-				
-				add_elements();				
+					}
+				}
+
+				add_elements();
 
 				$('body').on('change', '.wpglobus-dialog-field', function(){
 					var $t = $(this),
 						source_id = '#'+$t.data('source-id'),
 						source = '', s = '', new_value;
-						
+
 					if ( typeof source_id == 'undefined' ) {
-						return;	
-					}	
+						return;
+					}
 					source = $(source_id).val();
-					
+
 					if ( ! /(\{:|\[:|<!--:)[a-z]{2}/.test(source) ) {
 						$(source_id).val($t.val());
 					} else {
 						$.each(WPGlobusCoreData.enabled_languages, function(i,l){
 							if ( l == WPGlobusCoreData.language ) {
 								new_value = $t.val();
-							} else {	
+							} else {
 								new_value = WPGlobusCore.TextFilter(source,l,'RETURN_EMPTY');
-							}	
+							}
 							if ( '' != new_value ) {
-								s = s + WPGlobusCore.addLocaleMarks(new_value,l);	
-							}	
+								s = s + WPGlobusCore.addLocaleMarks(new_value,l);
+							}
 						});
 						$(source_id).val(s);
-					}	
+					}
 
-				});				
+				});
 
 				$(document).ajaxSend(function(event, jqxhr, settings){
 					if ( 'add-meta' == settings.action ) {
 						ajaxify_row_id = settings.element;
-					}	
-				});				
+					}
+				});
 				$(document).ajaxComplete(function(event, jqxhr, settings){
 					if ( 'add-meta' == settings.action && undefined !== jqxhr.responseXML ) {
 						if ( 'newmeta' == ajaxify_row_id ) {
 							add_elements('meta-'+$(jqxhr.responseXML.documentElement.outerHTML).find('meta').attr('id'));
 						} else {
-							add_elements(ajaxify_row_id);	
-						}	
-					}	
+							add_elements(ajaxify_row_id);
+						}
+					}
 				});
 
-				WPGlobusDialogApp.init({dialogTitle:'Edit meta'}); 				
-				
-			}	
+				WPGlobusDialogApp.init({dialogTitle:'Edit meta'});
+
+			}
         };
 
         new WPGlobusAdminApp.App();
@@ -1510,5 +1510,5 @@ jQuery(document).ready(function () {
         return WPGlobusAdminApp;
 
     }(window.WPGlobusAdminApp || {}, jQuery));
-	
+
 });
