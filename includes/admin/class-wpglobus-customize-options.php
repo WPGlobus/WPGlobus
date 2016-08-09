@@ -316,28 +316,35 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		public static $controls_save_button = 'wpglobus-user-controls-save';
 
 		/**
-		 * Current theme
+		 * Current theme.
+		 *
+		 * @var WP_Theme
 		 */
-		public static $theme = '';
+		public static $theme;
 
 		/**
-		 * Current theme name
+		 * Current theme name.
+		 *
+		 * @var string
 		 */
 		public static $theme_name = '';
 
 		/**
-		 * Array of disabled themes
+		 * Array of disabled themes.
+		 * @var string[]
 		 */
 		public static $disabled_themes = array();
 
 		public static function controller() {
 
-			self::$theme 		= wp_get_theme();
-			self::$theme_name 	= strtolower( self::$theme->__get( 'name' ) );
+			self::$theme      = wp_get_theme();
+			self::$theme_name = self::get_theme( 'name' );
 
 			self::$disabled_themes = array(
-				'customizr'
+				'customizr',
 			);
+
+			add_action( 'wp_loaded', array( __CLASS__, 'init' ) );
 
 			/**
 			 * @see \WP_Customize_Manager::wp_loaded
@@ -376,6 +383,23 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				'action__process_ajax'
 			) );
 
+		}
+
+		/**
+		 * Delayed processes.
+		 * @since 1.6.0
+		 */
+		public static function init() {
+
+			/**
+			 * Hook to modify the `$disabled_themes` array.
+			 *
+			 * @param string[] self ::$disabled_themes
+			 *                      Enter the lowercase theme name (not slug, no dashes).
+			 *                      For example, to disable the "Parallax One" theme,
+			 *                      enter 'parallax one'.
+			 */
+			self::$disabled_themes = apply_filters( 'wpglobus_customizer_disabled_themes', self::$disabled_themes );
 		}
 
 		/**
@@ -1167,17 +1191,17 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Get current theme
+		 * Get current theme or its property.
 		 *
 		 * @since 1.6.0
 		 *
 		 * @param string $param
-		 * @return string || object
+		 * @return string|WP_Theme
 		 */
 		public static function get_theme( $param = '' ) {
 
-			if ( 'name' == $param ) {
-				return strtolower( self::$theme->__get( 'name' ) );
+			if ( 'name' === $param ) {
+				return strtolower( self::$theme->name );
 			}
 
 			return self::$theme;
