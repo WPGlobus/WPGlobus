@@ -604,10 +604,9 @@ class WPGlobus {
 				break;
 			case 'get_titles':
 
-				if ( $order['type'] == 'taxonomy' ) {
+				if ( 'taxonomy' === $order['type'] ) {
 					/**
 					 * Remove filter to get raw term description
-					 * @todo Need to restore?
 					 */
 					remove_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
 				}
@@ -616,14 +615,34 @@ class WPGlobus {
 
 				$result               = array();
 				$bulkedit_post_titles = array();
-				foreach ( $order['title'] as $id => $title ) {
+
+				/**
+				 * Iterate through the Titles array.
+				 *
+				 * @var  int $id Post or Term ID.
+				 * @var  string $title Post or Term Name.
+				 */
+				foreach ( (array) $order['title'] as $id => $title ) {
 
 					if ( ! WPGlobus_Core::has_translations( $title['source'] ) ) {
 						/**
-						 * In some cases we have lost raw data for post title on edit.php page
-						 * for example product post type from woo
+						 * In some cases, we've lost the raw data for post title on edit.php page
+						 * for example product post type from Woo.
 						 */
-						$title['source'] = get_post_field( 'post_title', $id );
+						$_title_from_db = '';
+						if ( 'post' === $order['type'] ) {
+							$_title_from_db = get_post_field( 'post_title', $id );
+						} elseif ( 'taxonomy' === $order['type'] ) {
+							if ( $_term_by_id = get_term_by( 'id', $id, $order['taxonomy'] ) ) {
+								$_title_from_db = $_term_by_id->name;
+							}
+						}
+
+						if ( $_title_from_db ) {
+							$title['source'] = $_title_from_db;
+						}
+
+						unset( $_term_by_id, $_title_from_db );
 					}
 
 					$result[ $id ]['source'] = $title['source'];
