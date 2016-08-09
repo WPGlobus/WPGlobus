@@ -260,7 +260,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$this->args = $args;
 
 			$this->section_template  = "<div id='wpglobus-settings-{{section}}' style='border-bottom:1px solid black;margin-bottom:5px;padding:5px;' class='items-box' data-section='{{section}}'>";
-			$this->section_template .= 		"Section: <a href='#' onclick='wp.customize.section({{section_id}}).expand();'><b>{{section_title}}</b></a>";
+			$this->section_template .= esc_html__( 'Section', 'wpglobus' ) . ": <a href='#' onclick='wp.customize.section({{section_id}}).expand();'><b>{{section_title}}</b></a>";
 			$this->section_template .= 		"<div class='items' style='padding-top:10px;'>{{items}}</div>";
 			$this->section_template .= "</div>";
 
@@ -998,14 +998,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$content = '';
 			switch ( $control ) :
 				case 'settings_section_help' :
-					$content = '<p>' .
-								__( 'NEED HELP TEXT HERE', 'wpglobus' ) .
-								'</p>';
+					$content = __( 'Here you can specify which fields should be considered multilingual by WPGlobus. To exclude a field, uncheck it and then press the button below.', 'wpglobus' );
 
 					break;
 				case 'welcome_message' :
 
-					$content = '<div class="" style="width:100%;">' .
+					$content = '<div style="width:100%;">' .
 									__( 'Thank you for installing WPGlobus!', 'wpglobus' ) .
 									'<br/>' .
 										'&bull; ' .

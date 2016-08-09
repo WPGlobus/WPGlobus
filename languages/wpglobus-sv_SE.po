@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-08 13:01:55+00:00\n"
+"POT-Creation-Date: 2016-08-09 11:45:53+00:00\n"
 "PO-Revision-Date: 2015-09-09 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
@@ -228,6 +228,10 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
+#: includes/admin/class-wpglobus-customize-options.php:263
+msgid "Section"
+msgstr ""
+
 #: includes/admin/class-wpglobus-customize-options.php:276
 msgid "Show all sections"
 msgstr ""
@@ -242,7 +246,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:511
 msgid ""
-"You need to update WordPress to 4.5 or later to get Fields Setings section"
+"You need to update WordPress to 4.5 or later to get Fields Settings section"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:517
@@ -376,21 +380,23 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:1002
-msgid "NEED HELP TEXT HERE"
+#: includes/admin/class-wpglobus-customize-options.php:1001
+msgid ""
+"Here you can specify which fields should be considered multilingual by "
+"WPGlobus. To exclude a field, uncheck it and then press the button below."
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:1009
+#: includes/admin/class-wpglobus-customize-options.php:1007
 #: includes/options/class-wpglobus-options.php:167
 msgid "Thank you for installing WPGlobus!"
 msgstr "Tack för att du installerar WPGlobus!"
 
-#: includes/admin/class-wpglobus-customize-options.php:1013
+#: includes/admin/class-wpglobus-customize-options.php:1011
 #: includes/options/class-wpglobus-options.php:172
 msgid "Read About WPGlobus"
 msgstr "Läs om WPGlobus"
 
-#: includes/admin/class-wpglobus-customize-options.php:1016
+#: includes/admin/class-wpglobus-customize-options.php:1014
 #: includes/options/class-wpglobus-options.php:175
 msgid ""
 "Click the <strong>[Languages]</strong> tab at the left to setup the options."
@@ -398,33 +404,33 @@ msgstr ""
 "Klick på fliken <strong>[Språk]</strong> till vänster för att ställa in "
 "alternativen."
 
-#: includes/admin/class-wpglobus-customize-options.php:1021
+#: includes/admin/class-wpglobus-customize-options.php:1019
 #: includes/options/class-wpglobus-options.php:180
 msgid ""
 "Should you have any questions or comments, please do not hesitate to contact "
 "us."
 msgstr "Om du har några frågor eller kommentarer, tveka inte att kontakta oss."
 
-#: includes/admin/class-wpglobus-customize-options.php:1025
+#: includes/admin/class-wpglobus-customize-options.php:1023
 #: includes/options/class-wpglobus-options.php:184
 msgid "Sincerely Yours,"
 msgstr "Med vänlig hälsning,"
 
-#: includes/admin/class-wpglobus-customize-options.php:1027
+#: includes/admin/class-wpglobus-customize-options.php:1025
 #: includes/options/class-wpglobus-options.php:186
 #: includes/options/wpglobus-options-header.php:27
 msgid "The WPGlobus Team"
 msgstr "WPGlobus Teamet"
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1046
+#: includes/admin/class-wpglobus-customize-options.php:1044
 #: includes/options/class-wpglobus-options.php:211
 msgid ""
 "We would hate to see you go. If something goes wrong, do not uninstall "
 "WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:1053
+#: includes/admin/class-wpglobus-customize-options.php:1051
 #: includes/options/class-wpglobus-options.php:218
 msgid ""
 "Please note that if you deactivate WPGlobus, your site will show all the "
@@ -433,7 +439,7 @@ msgid ""
 msgstr ""
 
 #. translators: %s: link to the Clean-up Tool
-#: includes/admin/class-wpglobus-customize-options.php:1057
+#: includes/admin/class-wpglobus-customize-options.php:1055
 #: includes/options/class-wpglobus-options.php:222
 msgid ""
 "If there are just a few places, you should edit them manually. To "
@@ -443,18 +449,18 @@ msgid ""
 msgstr ""
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1059
+#: includes/admin/class-wpglobus-customize-options.php:1057
 #: includes/options/class-wpglobus-options.php:224
 msgid "%1$sClean-up Tool%2$s"
 msgstr ""
 
 #. translators: %s: name of current theme
-#: includes/admin/class-wpglobus-customize-options.php:1070
+#: includes/admin/class-wpglobus-customize-options.php:1068
 msgid "Sorry, WPGlobus customizer doesn't support current theme %s."
 msgstr ""
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1075
+#: includes/admin/class-wpglobus-customize-options.php:1073
 msgid "Please use %1$sWPGlobus options page%2$s instead."
 msgstr ""
 
@@ -626,19 +632,19 @@ msgstr "Rulllistmeny med flaggor"
 msgid "Selector type"
 msgstr "Väljartyp"
 
-#: includes/class-wpglobus.php:951
+#: includes/class-wpglobus.php:954
 msgid "You cannot disable the main language."
 msgstr "Du kan inte stänga av huvudspråk."
 
-#: includes/class-wpglobus.php:1172
+#: includes/class-wpglobus.php:1175
 msgid "*) Available after the menu is saved."
 msgstr "*) Tillgängligt när menyn sparats."
 
-#: includes/class-wpglobus.php:3084
+#: includes/class-wpglobus.php:3087
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Du måste aktivera Vackra Permalänkar för att använda WPGlobus."
 
-#: includes/class-wpglobus.php:3086
+#: includes/class-wpglobus.php:3089
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -646,7 +652,7 @@ msgstr ""
 "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-"
 "standardalternativet."
 
-#: includes/class-wpglobus.php:3225
+#: includes/class-wpglobus.php:3228
 msgid "Add"
 msgstr "Lägg till"
 
