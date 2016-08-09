@@ -280,20 +280,19 @@ class WPGlobus {
 
 			if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
 				/**
-				 * Need to get taxonomy for using correct filter
+				 * Need to get taxonomy to use the correct filter.
 				 */
-				if ( ! empty( $_GET['taxonomy'] ) ) {
+				$taxonomy_slug = WPGlobus_Utils::safe_get( 'taxonomy' );
+				if ( $taxonomy_slug ) {
+					add_action( "{$taxonomy_slug}_pre_edit_form",
+						array( $this, 'on_add_language_tabs_edit_taxonomy' ),
+						10, 2
+					);
 
-					add_action( "{$_GET['taxonomy']}_pre_edit_form", array(
-						$this,
-						'on_add_language_tabs_edit_taxonomy'
-					), 10, 2 );
-
-					add_action( "{$_GET['taxonomy']}_edit_form", array(
-						$this,
-						'on_add_taxonomy_form_wrapper'
-					), 10, 2 );
-
+					add_action( "{$taxonomy_slug}_edit_form",
+						array( $this, 'on_add_taxonomy_form_wrapper' ),
+						10, 2
+					);
 				}
 			}
 
@@ -304,17 +303,21 @@ class WPGlobus {
 				 */
 				if ( WPGlobus_WP::is_pagenow( 'edit.php' ) && ! $this->disabled_entity() ) {
 
-					$post_type_filter = isset( $_GET['post_type'] ) ? '_' . $_GET['post_type'] : '';
+					$post_type_filter = WPGlobus_Utils::safe_get( 'post_type' );
+					if ( $post_type_filter ) {
+						// This is a CPT.
+						// Add underscore to form the
+						// "manage_{$post->post_type}_posts_custom_column" filter.
+						$post_type_filter = '_' . $post_type_filter;
+					}
 
-					add_filter( "manage{$post_type_filter}_posts_columns", array(
-						$this,
-						'on_add_language_column'
-					), 10 );
+					add_filter( "manage{$post_type_filter}_posts_columns",
+						array( $this, 'on_add_language_column' )
+					);
 
-					add_filter( "manage{$post_type_filter}_posts_custom_column", array(
-						$this,
-						'on_manage_language_column'
-					), 10 );
+					add_filter( "manage{$post_type_filter}_posts_custom_column",
+						array( $this, 'on_manage_language_column' )
+					);
 
 				}
 
@@ -415,14 +418,14 @@ class WPGlobus {
 				'on_admin_bar_menu'
 			) );
 
-			
+
 			if ( WPGlobus_WP::is_pagenow( 'plugin-install.php' ) ) {
 				require_once 'admin/class-wpglobus-plugin-install.php';
 				WPGlobus_Plugin_Install::controller();
-			}	
-			
+			}
+
 		} else {
-			
+
 			/**
 			 * @scope front
 			 */
@@ -1366,14 +1369,14 @@ class WPGlobus {
 			}
 
 			/**
-			 * Add multisite property 
+			 * Add multisite property
 			 * @since 1.6.0
 			 */
 			$is_multisite = 'false';
 			if ( is_multisite() ) {
 				$is_multisite = 'true';
 			}
-			
+
 			/**
 			 * Filter for custom data to send to JS.
 			 * Returning array or null.
@@ -1403,7 +1406,7 @@ class WPGlobus {
 						'pluginInstallLocation'	=> array(
 							'single'	=> 	'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus',
 							'multisite'	=>	'network/plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus'
-						)	
+						)
 					), array(
 						$page_data_key => $page_data_values
 					)
@@ -1855,9 +1858,9 @@ class WPGlobus {
 	 * @since 1.5.8
 	 * @param string $output The menu HTML string
 	 * @return string HTML with appended switcher
-	 */	
+	 */
 	public function filter__wp_list_pages( $output ) {
-		
+
 		/**
 		 * WPGlobus Configuration setting in admin. Must be "ON" to process.
 		 */
@@ -1896,7 +1899,7 @@ class WPGlobus {
 		 * @param WPGlobus_Config
 		 */
 		$dropdown_menu = apply_filters( 'wpglobus_dropdown_menu', true, WPGlobus::Config() );
-	
+
 		/**
 		 * Array of menu items
 		 */
@@ -1913,9 +1916,9 @@ class WPGlobus {
 		$link_text = '<span class="' . implode( ' ', $span_classes_lang ) . '">' .
 		             esc_html( $flag_name ) . '</span>';
 		$a_tag     = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
-		 
-		/** 
-		 * Current language menu item classes 
+
+		/**
+		 * Current language menu item classes
 		 */
 		$menu_item_classes = array(
 			'page_item' 						=> 'page_item',
@@ -1924,30 +1927,30 @@ class WPGlobus {
 			'wpglobus-current-language' 		=> 'wpglobus-current-language'
 		);
 
-		/** 
-		 * Submenu item classes for extra languages 
+		/**
+		 * Submenu item classes for extra languages
 		 */
 		$submenu_item_classes = array(
 			'page_item' 						 => 'page_item',
 			'page_item_wpglobus_menu_switch'	 => 'page_item_wpglobus_menu_switch',
 			'sub_menu_item_wpglobus_menu_switch' => 'sub_menu_item_wpglobus_menu_switch'
 		);
-		
+
 		$item                   = new stdClass();
 		$item->item_has_parent  = false;
 		$item->title            = $a_tag;
 		$item->url         		= $url;
-		$item->language    		= $current_language;		
-		
+		$item->language    		= $current_language;
+
 		if ( $dropdown_menu ) {
-			
+
 			/**
 			 * Dropdown menu
-			 */			
+			 */
 			$item->classes     		= $menu_item_classes;
 			$item->classes[ 'page_item_wpglobus_menu_switch_' . $current_language ] = 'page_item_wpglobus_menu_switch_' . $current_language;
 			$wpglobus_menu_items[]  = $item;
-			
+
 			$template = '<li {{parent}}<ul class="children">{{children}}</ul></li>';
 
 			foreach ( $extra_languages as $language ) :
@@ -1969,26 +1972,26 @@ class WPGlobus {
 				$item->classes     		= $submenu_item_classes;
 				$item->language    		= $language;
 				$item->classes[ 'page_item_wpglobus_menu_switch_' . $language ]  = 'page_item_wpglobus_menu_switch_' . $language;
-		
+
 				$wpglobus_menu_items[] = $item;
 
 			endforeach;
 
 		} else {
-			
+
 			/**
 			 * Flat menu
 			 */
 			unset( $submenu_item_classes[ 'sub_menu_item_wpglobus_menu_switch' ] );
-			
+
 			$item->classes     							  = $submenu_item_classes;
 			$item->classes[ 'wpglobus-current-language' ] = 'wpglobus-current-language';
 			$item->classes[ 'page_item_wpglobus_menu_switch_' . $item->language ] = 'page_item_wpglobus_menu_switch_' . $item->language;
-			
+
 			$wpglobus_menu_items[]  = $item;
-			
+
 			$template = '{{parent}}{{children}}';
-			
+
 			foreach ( $extra_languages as $language ) :
 				/**
 				 * Build the top-level menu link for extra language
@@ -2001,15 +2004,15 @@ class WPGlobus {
 				             esc_html( $flag_name ) . '</span>';
 				$a_tag     = '<a class="wpglobus-selector-link" href="' . esc_url( $url ) . '">' . $link_text . '</a>';
 
-				
+
 				$item                   = new stdClass();
 				$item->item_has_parent	= false;
 				$item->title            = $a_tag;
 				$item->url         		= $url;
 				$item->classes     		= $submenu_item_classes;
 				$item->classes[]   		= 'page_item_wpglobus_menu_switch_' . $language;
-				$item->language    		= $language;				
-				
+				$item->language    		= $language;
+
 				$wpglobus_menu_items[]  = $item;
 
 			endforeach;
@@ -2025,29 +2028,29 @@ class WPGlobus {
 		 * @param array $extra_languages          	An array of extra languages.
 		 */
 		$wpglobus_menu_items = apply_filters( 'wpglobus_page_menu_items', $wpglobus_menu_items, $extra_languages );
-		
+
 		$parent		= '';
 		$children 	= '';
-		
+
 		foreach( $wpglobus_menu_items as $item ) :
-			
+
 			if ( $dropdown_menu ) {
-				
+
 				if ( ! $item->item_has_parent ) {
 					$parent = 'class="' . implode( ' ', $item->classes ) . '">' . $item->title;
 					continue;
 				}
-				
-				$children .= '<li class="' . implode( ' ', $item->classes ) . '">' . $item->title . '</li>'; 
-			
-			} else {
-				
-				$children .= '<li class="' . implode( ' ', $item->classes ) . '">' . $item->title . '</li>'; 
 
-			}	
-			
+				$children .= '<li class="' . implode( ' ', $item->classes ) . '">' . $item->title . '</li>';
+
+			} else {
+
+				$children .= '<li class="' . implode( ' ', $item->classes ) . '">' . $item->title . '</li>';
+
+			}
+
 		endforeach;
-		
+
 		$selector_html = str_replace( '{{parent}}', $parent , $template );
 		$selector_html = str_replace( '{{children}}', $children, $selector_html );
 
@@ -2056,11 +2059,11 @@ class WPGlobus {
 		 *
 		 * @param string $selector_html 		  The HTML content for the navigation menu.
 		 * @param array $wpglobus_menu_items      An array containing selector element.
-		 */		
+		 */
 		return $output . apply_filters( 'wpglobus_page_menu_items_html', $selector_html, $wpglobus_menu_items );
-		
+
 	}
-	
+
 	/**
 	 * Append language switcher dropdown to a navigation menu, which was created with
 	 * @see wp_list_pages
@@ -2079,12 +2082,12 @@ class WPGlobus {
 			 * @since 1.5.8
 			 * @param bool   true  If to use filter
 			 * @return bool
-			 */		
+			 */
 			apply_filters( 'wpglobus_filter_wp_list_pages', true )
 		) {
 			return $this->filter__wp_list_pages( $output );
 		}
-		
+
 		/**
 		 * WPGlobus Configuration setting in admin. Must be "ON" to process.
 		 */
@@ -2207,9 +2210,9 @@ class WPGlobus {
 		$sorted_menu_items, /** @noinspection PhpUnusedParameterInspection */
 		$args
 	) {
-		
+
 		$disable_add_selector = true;
-		
+
 		if ( empty( WPGlobus::Config()->nav_menu ) ) {
 			/**
 			 * User can use WPGlobus widget
@@ -2222,8 +2225,8 @@ class WPGlobus {
 			 * Attach to every nav menu
 			 * @since 1.0.7
 			 */
-			$disable_add_selector = false; 
-			
+			$disable_add_selector = false;
+
 		} else {
 
 			$items = array();
@@ -2241,7 +2244,7 @@ class WPGlobus {
 			}
 
 		}
-		
+
 		/**
 		 * Filter to add or not language selector to the menu.
 		 * Returning boolean.
@@ -2249,13 +2252,13 @@ class WPGlobus {
 		 *
 		 * @param bool 	$disable_add_selector 	Disable or not to add language selector to the menu.
 		 * @param stdClass 	$args 					An object containing wp_nav_menu() arguments.
-		 */		
+		 */
 		$disable_add_selector = apply_filters( 'wpglobus_menu_add_selector', $disable_add_selector, $args );
-			
+
 		if ( $disable_add_selector ) {
 			return $sorted_menu_items;
-		}		
-		
+		}
+
 		$extra_languages = array();
 		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
 			if ( $languages != WPGlobus::Config()->language ) {
