@@ -227,13 +227,13 @@ class WPGlobus_Utils {
 	 */
 	public static function build_multilingual_string( $translations ) {
 		$sz = '';
-		$single = 1 == count( $translations ) ? true : false;	
+		$single = 1 == count( $translations ) ? true : false;
 		foreach ( $translations as $language => $text ) {
 			if ( $single && $language == WPGlobus::Config()->default_language ) {
 				$sz = $text;
-			} else {	
+			} else {
 				$sz .= WPGlobus::add_locale_marks( $text, $language );
-			}	
+			}
 		}
 
 		return $sz;
@@ -347,6 +347,27 @@ class WPGlobus_Utils {
 	 */
 	public static function is_enabled( $language ) {
 		return in_array( $language, WPGlobus::Config()->enabled_languages, true );
+	}
+
+	/**
+	 * Secure access to scalars in $_GET.
+	 *
+	 * @param string $key Index ($_GET[ $key ]).
+	 *
+	 * @return string The value or empty string if not exists or not scalar.
+	 */
+	public static function safe_get( $key ) {
+		$value = '';
+
+		if ( isset( $_GET[ $key ] ) ) { // Input var okay.
+			$get_key = $_GET[ $key ]; // Input var okay; sanitization okay.
+
+			if ( is_scalar( $get_key ) ) {
+				$value = sanitize_text_field( $get_key );
+			}
+		}
+
+		return $value;
 	}
 
 	/**
