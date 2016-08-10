@@ -598,7 +598,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					<a href="admin.php?page=wpglobus_options" class="nav-tab">
 						<?php _e( 'Settings' ); ?>
 					</a>
-					<a href="admin.php?page=wpglobus-addons" class="nav-tab">
+					<a href="admin.php?page=wpglobus_options&amp;tab=4" class="nav-tab">
 						<?php _e( 'Add-ons', 'wpglobus' ); ?>
 					</a>
 					<a href="<?php echo esc_url( $url_wpglobus_site_contact ); ?>"
