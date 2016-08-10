@@ -237,6 +237,14 @@ jQuery(document).ready(function ($) {
 				if ( elements.length != 0 ) {
 					/** widget can contain set of elements  */	
 					$.each( elements, function( indx, elem ) {
+
+						if ( 'undefined' === typeof elem.id || '' == elem.id ) {
+							/**
+							 * In widget some elements may don't have id 
+							 * e.g. https://wordpress.org/plugins/widget-context/
+							 */
+							return true;	
+						}
 						
 						var $element = $( elements[indx] );
 					
@@ -497,6 +505,11 @@ jQuery(document).ready(function ($) {
 				$( '.wpglobus-customize-widget-control' ).each( function(i, e){
 
 					var $e = $(e), obj = $e.data( 'widget' );
+					
+					if ( 'undefined' === typeof $e.attr('id') ) {
+						return true;	
+					}	
+					
 					$e.val( 
 						WPGlobusCore.TextFilter( 
 							WPGlobusCustomize.controlWidgets[ obj ][ 'element' ][ $e.attr('id') ][ 'value' ],
