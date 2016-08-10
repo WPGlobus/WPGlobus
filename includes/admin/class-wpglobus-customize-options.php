@@ -397,7 +397,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * @param string[] self ::$disabled_themes
 			 *                      Enter the lowercase theme name (not slug, no dashes).
 			 *                      For example, to disable the "Parallax One" theme,
-			 *                      enter 'parallax one'.
+			 *                      enter 'parallax one'. 
+			 *						@see second param.
 			 * @param string 			self::$theme_name Name of current theme.
 			 * @param WP_Theme Object 	self::$theme 	  Current theme.
 			 */	
