@@ -578,7 +578,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					<span class="wpglobus-version"><?php echo WPGLOBUS_VERSION; ?></span>
 				</h1>
 
-				<h2 class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></h2>
+				<div class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></div>
 
 				<div class="about-text">
 					<?php esc_html_e( 'WPGlobus is a family of WordPress plugins assisting you in making multilingual WordPress blogs and sites.', 'wpglobus' ); ?>
@@ -607,15 +607,15 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					</a>
 				</h2>
 
-				<p style="color: white; background-color: red; padding: .5em">
+				<div style="color: white; background-color: red; padding: .5em; margin-top: 1em;">
 					<?php esc_html_e( 'WARNING: this operation is non-reversible. It is strongly recommended that you backup your database before proceeding.', 'wpglobus' ); ?>
-				</p>
+				</div>
 
-				<p><strong>
+				<div style="padding: .5em"><strong>
 						<?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
-					</strong></p>
+					</strong></div>
 
-				<p style="color:red; background-color: white; padding: .5em">
+				<div style="color:red; background-color: white; padding: .5em">
 					<?php
 					echo esc_html( sprintf(
 					/* translators: %1$s - language name, %1$s - language code. Do not remove. */
@@ -624,7 +624,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						WPGlobus::Config()->default_language ) );
 
 					?>
-				</p>
+				</div>
 
 				<hr />
 				<h3 id="about-to-clean">
@@ -638,29 +638,28 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				<h3>
 					<?php esc_html_e( 'The operations log', 'wpglobus' ); ?>
 				</h3>
-				<p>
+				<div>
 					<?php esc_html_e( 'We are going to write a detailed log of all the database changes performed. It should help in the case you need to restore something important. The log will be written to the file:', 'wpglobus' ); ?>
-				</p>
-				<p><code>
-						<?php echo self::$log_file; ?>
-					</code></p>
-				<p>
-					<label>
-						<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log" checked="checked" />
-						<?php esc_html_e( 'Uncheck if you do not want to write the operations log (we recommend to keep it checked)', 'wpglobus' ); ?>
+				</div>
+				<br />
+				<code>
+					<?php echo self::$log_file; ?>
+				</code>
+				<br />
+				<br />
+				<label>
+					<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log" checked="checked" />
+					<?php esc_html_e( 'Uncheck if you do not want to write the operations log (we recommend to keep it checked)', 'wpglobus' ); ?>
 
-					</label>
-				</p>
+				</label>
 				<hr />
 				<h3>
 					<?php esc_html_e( 'You have been warned...', 'wpglobus' ); ?>
 				</h3>
-				<p>
 					<?php esc_html_e( 'Please confirm by checking the box below:', 'wpglobus' ); ?>
-				</p>
-				<p style="color:red; background-color: white; padding: .5em">
+				<div style="color:red; background-color: white; padding: .5em; margin: 1em 0;">
 					<?php esc_html_e( 'I have read and understood everything written on this page. I am aware that by using this tool I may loose some content of my website. I have made a database backup and know how to restore it if necessary. I am fully responsible for the results.', 'wpglobus' ); ?>
-				</p>
+				</div>
 
 				<label><input type="checkbox" name="wpglobus-clean-activate" id="wpglobus-clean-activate" /><?php esc_html_e( 'YES, I CONFIRM', 'wpglobus' ); ?>
 				</label>

@@ -39,7 +39,7 @@ class WPGlobus_About {
 				<span class="wpglobus-version"><?php echo WPGLOBUS_VERSION; ?></span>
 			</h1>
 
-			<h2 class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></h2>
+			<div class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></div>
 
 			<div class="about-text">
 				<?php esc_html_e( 'WPGlobus is a family of WordPress plugins assisting you in making multilingual WordPress blogs and sites.', 'wpglobus' ); ?>
