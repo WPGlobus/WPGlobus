@@ -354,4 +354,19 @@ if ( function_exists( '__mc4wp_flush' ) ) {
 	require_once 'vendor/class-wpglobus-mailchimp-for-wp.php';
 	WPGlobus_MailChimp_For_WP::controller();
 }
+
+if ( function_exists( 'widget_logic_sidebars_widgets_filter_add' ) ) {
+
+	/**
+	 * Widget Logic
+	 * @see https://wordpress.org/plugins/widget-logic/
+	 *
+	 * @since 1.6.0
+	 */		
+	global $wl_options;
+	if ( ! empty( $wl_options ) ) {
+		require_once 'vendor/class-wpglobus-widget-logic.php';
+		WPGlobus_Widget_Logic::controller();		
+	}	
+}	
 # --- EOF
