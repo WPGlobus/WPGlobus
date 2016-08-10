@@ -210,6 +210,24 @@ if ( ! is_admin() ) {
 	 * For example, in the standard `Text` widget, this translates the widget body.
 	 */
 	add_filter( 'widget_display_callback', array( 'WPGlobus_Filters', 'filter__widget_display_callback' ), 0 );
+
+	/**
+	 * Language-dependent conditions in the `Widget Logic` plugin.
+	 *
+	 * If the global var `$wl_options` is not empty then there are some logic conditions set,
+	 * and we should filter them.
+	 * If that variable came from somewhere else then the filter simply won't fire.
+	 *
+	 * The condition set in the default language works for all languages if not overwritten
+	 * in the corresponding tab.
+	 *
+	 * @link https://wordpress.org/plugins/widget-logic/
+	 *
+	 * @since 1.6.0
+	 */
+	if ( ! empty( $GLOBALS['wl_options'] ) ) {
+		add_filter( 'widget_logic_eval_override', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	}
 }
 
 /**
@@ -262,16 +280,16 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
  */
 if ( defined( 'AIOSEOP_VERSION' ) ) {
 	if ( is_admin() ) {
-		
+
 		/**
 		 * Filter for @see localization
 		 * @scope admin
 		 * @since 1.2.1
-		 */		
+		 */
 		add_filter( 'localization', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-		
+
 	} else {
-		
+
 		require_once 'vendor/class-wpglobus-aioseop.php';
 
 		/**
@@ -294,7 +312,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 		 * @since 1.0.8
 		 */
 		add_filter( 'aioseop_title', array( 'WPGlobus_All_in_One_SEO', 'filter__title' ), 0 );
-	
+
 	}
 }
 
@@ -307,12 +325,12 @@ if ( class_exists( 'Whistles_Load' ) ) {
 }
 
 if ( class_exists( 'Tribe__Events__Main' ) ) {
-	
+
 	/**
 	 * Translate "The Events Calendar"
 	 * https://wordpress.org/plugins/the-events-calendar/
 	 */
-	 
+
 	require_once 'vendor/class-wpglobus-the-events-calendar.php';
 
 	add_filter( 'tribe_events_template_data_array', array( 'WPGlobus_The_Events_Calendar', 'filter__events_data' ), 0, 3 );
@@ -320,53 +338,39 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 }
 
 if ( class_exists( 'Mega_Menu' ) ) {
-	
+
 	/**
 	 * Translate "Max Mega Menu"
 	 * https://wordpress.org/plugins/megamenu/
 	 *
 	 * @since 1.4.9
-	 */	
+	 */
 	add_filter( 'megamenu_the_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
 if ( class_exists( 'RevSliderFront' ) ) {
-	
+
 	/**
 	 * Translate layers
 	 * @see https://revolution.themepunch.com/
 	 *
 	 * @since 1.5.0
-	 */	
+	 */
 	require_once 'vendor/class-wpglobus-revslider.php';
 	WPGlobus_RevSlider::controller();
-	
+
 }
 
 if ( function_exists( '__mc4wp_flush' ) ) {
-	
+
 	/**
 	 * MailChimp for WordPress
 	 * @see https://wordpress.org/plugins/mailchimp-for-wp/
 	 *
 	 * @since 1.5.4
-	 */	
+	 */
 	require_once 'vendor/class-wpglobus-mailchimp-for-wp.php';
 	WPGlobus_MailChimp_For_WP::controller();
 }
 
-if ( function_exists( 'widget_logic_sidebars_widgets_filter_add' ) ) {
-
-	/**
-	 * Widget Logic
-	 * @see https://wordpress.org/plugins/widget-logic/
-	 *
-	 * @since 1.6.0
-	 */		
-	global $wl_options;
-	if ( ! empty( $wl_options ) ) {
-		require_once 'vendor/class-wpglobus-widget-logic.php';
-		WPGlobus_Widget_Logic::controller();		
-	}	
-}	
-# --- EOF
+/*EOF*/

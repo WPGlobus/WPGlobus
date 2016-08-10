@@ -12,7 +12,7 @@
 * ADDED:
 	* Customizer: User control on which fields can have multilingual values.
 	* Customizer: Filter to disable WPGlobus customizer for specific themes.
-	* Support for Widget Logic plugin
+	* Widgets: Language-dependent conditions if the `Widget Logic` plugin is active.
 	
 ### 1.5.10 ###
 

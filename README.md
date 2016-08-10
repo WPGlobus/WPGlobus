@@ -64,6 +64,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * The Events Calendar
 * WPBakery Visual Composer (with our free add-on)
 * Whistles
+* Widget Logic
 * WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/) premium add-on is required)
 * WordPress WooCommerce Nets Netaxept Payment Plugin by sellxed/customweb - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
 * Yoast SEO ([WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is not required but highly recommended)
@@ -179,6 +180,7 @@ No known backward incompatibility issues.
 * ADDED:
 	* Customizer: User control on which fields can have multilingual values.
 	* Customizer: Filter to disable WPGlobus customizer for specific themes.
+	* Widgets: Language-dependent conditions if the `Widget Logic` plugin is active.
 
 ### 1.5.10 ###
 
