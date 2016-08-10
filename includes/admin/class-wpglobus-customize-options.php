@@ -398,8 +398,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 *                      Enter the lowercase theme name (not slug, no dashes).
 			 *                      For example, to disable the "Parallax One" theme,
 			 *                      enter 'parallax one'.
-			 */
-			self::$disabled_themes = apply_filters( 'wpglobus_customizer_disabled_themes', self::$disabled_themes );
+			 * @param string 			self::$theme_name Name of current theme.
+			 * @param WP_Theme Object 	self::$theme 	  Current theme.
+			 */	
+			self::$disabled_themes = apply_filters( 'wpglobus_customizer_disabled_themes', self::$disabled_themes, self::$theme_name, self::$theme );
 		}
 
 		/**
