@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-10 13:27:53+00:00\n"
+"POT-Creation-Date: 2016-08-11 15:48:11+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
@@ -207,7 +207,7 @@ msgstr ""
 "в случае, если Вам потребуется восстановить что-то важное. Журнал будет "
 "записываться в файл:"
 
-#: includes/admin/class-wpglobus-clean.php:650
+#: includes/admin/class-wpglobus-clean.php:652
 msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
@@ -215,7 +215,7 @@ msgstr ""
 "Снимите флажок, если Вы не хотите записывать операции в журнал (мы "
 "рекомендуем оставить запись включённой)"
 
-#: includes/admin/class-wpglobus-clean.php:656
+#: includes/admin/class-wpglobus-clean.php:657
 msgid "You have been warned..."
 msgstr "Вы уверены, что готовы продолжить?"
 
@@ -223,7 +223,7 @@ msgstr "Вы уверены, что готовы продолжить?"
 msgid "Please confirm by checking the box below:"
 msgstr "Пожалуйста, подтвердите, установив флажок ниже:"
 
-#: includes/admin/class-wpglobus-clean.php:662
+#: includes/admin/class-wpglobus-clean.php:661
 msgid ""
 "I have read and understood everything written on this page. I am aware that "
 "by using this tool I may loose some content of my website. I have made a "
@@ -236,11 +236,11 @@ msgstr ""
 "восстановить её в случае необходимости. Я полностью несу ответственность за "
 "результат."
 
-#: includes/admin/class-wpglobus-clean.php:665
+#: includes/admin/class-wpglobus-clean.php:664
 msgid "YES, I CONFIRM"
 msgstr "ДА, Я ПОДТВЕРЖДАЮ"
 
-#: includes/admin/class-wpglobus-clean.php:669
+#: includes/admin/class-wpglobus-clean.php:668
 msgid "Process with the Clean-up"
 msgstr "Запустить программу очистки"
 

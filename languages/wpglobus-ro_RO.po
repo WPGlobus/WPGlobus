@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.3.0\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-10 13:27:53+00:00\n"
+"POT-Creation-Date: 2016-08-11 15:48:11+00:00\n"
 "PO-Revision-Date: 2015-12-09 18:36+0200\n"
 "Last-Translator: The WPGlobus Team <support@wpglobus.com>\n"
 "Language-Team: The WPGlobus Team <support@wpglobus.com>\n"
@@ -189,13 +189,13 @@ msgid ""
 "will be written to the file:"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:650
+#: includes/admin/class-wpglobus-clean.php:652
 msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:656
+#: includes/admin/class-wpglobus-clean.php:657
 msgid "You have been warned..."
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Please confirm by checking the box below:"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:662
+#: includes/admin/class-wpglobus-clean.php:661
 msgid ""
 "I have read and understood everything written on this page. I am aware that "
 "by using this tool I may loose some content of my website. I have made a "
@@ -211,11 +211,11 @@ msgid ""
 "responsible for the results."
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:665
+#: includes/admin/class-wpglobus-clean.php:664
 msgid "YES, I CONFIRM"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:669
+#: includes/admin/class-wpglobus-clean.php:668
 msgid "Process with the Clean-up"
 msgstr ""
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-10 13:27:53+00:00\n"
+"POT-Creation-Date: 2016-08-11 15:48:11+00:00\n"
 "PO-Revision-Date: 2016-02-05 00:00-0500\n"
 "Last-Translator: Pavlo Novak <novak1305@gmail.com>\n"
 "Language: uk\n"
@@ -200,7 +200,7 @@ msgstr ""
 "випадку, якщо Вам треба буде відновити щось важливе. Журнал буде "
 "записуватися в файл:"
 
-#: includes/admin/class-wpglobus-clean.php:650
+#: includes/admin/class-wpglobus-clean.php:652
 msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
@@ -208,7 +208,7 @@ msgstr ""
 "Сніміть прапорець, якщо Вы не хочете записувати операції в журнал (ми "
 "рекомендуємо залишити запис увімкненим)"
 
-#: includes/admin/class-wpglobus-clean.php:656
+#: includes/admin/class-wpglobus-clean.php:657
 msgid "You have been warned..."
 msgstr "Ви впевнені, що готові продовжити?"
 
@@ -216,7 +216,7 @@ msgstr "Ви впевнені, що готові продовжити?"
 msgid "Please confirm by checking the box below:"
 msgstr "Будь-ласка, підтвердіть, встановивши прапорець нижче:"
 
-#: includes/admin/class-wpglobus-clean.php:662
+#: includes/admin/class-wpglobus-clean.php:661
 msgid ""
 "I have read and understood everything written on this page. I am aware that "
 "by using this tool I may loose some content of my website. I have made a "
@@ -228,11 +228,11 @@ msgstr ""
 "сайту. Мною створена резервна копія бази даних, і я знаю, як відновити її у "
 "випадку необхідності. Я повністю несу відповідальність за результат."
 
-#: includes/admin/class-wpglobus-clean.php:665
+#: includes/admin/class-wpglobus-clean.php:664
 msgid "YES, I CONFIRM"
 msgstr "ТАК, Я ПІДТВЕРДЖУЮ"
 
-#: includes/admin/class-wpglobus-clean.php:669
+#: includes/admin/class-wpglobus-clean.php:668
 msgid "Process with the Clean-up"
 msgstr "Запустити програму очищення"
 
