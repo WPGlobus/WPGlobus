@@ -179,6 +179,7 @@ No known backward incompatibility issues.
 	* Warning: Non-SSL link to image in admin (props `technima`).
 * ADDED:
 	* Customizer: User control on which fields can have multilingual values.
+	* Customizer: In the `Language Selector Menu`, if no menus created yet, show a link to create menus.
 	* Customizer: Filter to disable WPGlobus customizer for specific themes.
 	* Widgets: Language-dependent conditions if the `Widget Logic` plugin is active.
 

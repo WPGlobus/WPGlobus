@@ -11,7 +11,7 @@
 	* Warning: Non-SSL link to image in admin (props `technima`).
 * ADDED:
 	* Customizer: User control on which fields can have multilingual values.
-	* Customizer: Link to 'Language Selector Menu' control when user doesn't have any menu with clean install WordPress.
+	* Customizer: In the `Language Selector Menu`, if no menus created yet, show a link to create menus.
 	* Customizer: Filter to disable WPGlobus customizer for specific themes.
 	* Widgets: Language-dependent conditions if the `Widget Logic` plugin is active.
 	

@@ -397,11 +397,11 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * @param string[] self ::$disabled_themes
 			 *                      Enter the lowercase theme name (not slug, no dashes).
 			 *                      For example, to disable the "Parallax One" theme,
-			 *                      enter 'parallax one'. 
+			 *                      enter 'parallax one'.
 			 *						@see second param.
 			 * @param string 			self::$theme_name Name of current theme.
 			 * @param WP_Theme Object 	self::$theme 	  Current theme.
-			 */	
+			 */
 			self::$disabled_themes = apply_filters( 'wpglobus_customizer_disabled_themes', self::$disabled_themes, self::$theme_name, self::$theme );
 		}
 
@@ -606,10 +606,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/**  */
 			if ( empty( WPGlobus::Config()->nav_menu ) ) {
 				delete_option( 'wpglobus_customize_language_selector_menu' );
-			} else {	
+			} else {
 				update_option( 'wpglobus_customize_language_selector_menu', WPGlobus::Config()->nav_menu );
 			}
-	
+
 			/** wpglobus_customize_selector_wp_list_pages <=> wpglobus_option[selector_wp_list_pages][show_selector]  */
 			update_option( 'wpglobus_customize_selector_wp_list_pages', WPGlobus::Config()->selector_wp_list_pages );
 
@@ -736,7 +736,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 				/** @var array $nav_menus */
 				$nav_menus = WPGlobus::_get_nav_menus();
-				
+
 				$menus = array();
 
 				foreach ( $nav_menus as $menu ) {
@@ -748,43 +748,48 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 				if ( empty( $menus ) ) {
 
-					$wp_customize->add_control( new WPGlobusLink( $wp_customize, 
+					$wp_customize->add_control( new WPGlobusLink( $wp_customize,
 						'wpglobus_customize_language_selector_menu', array(
 							'section' 		=> 'wpglobus_languages_section',
-							'title'   		=> __( 'Language Selector Menu', 'wpglobus' ),
+							'title'   		=> esc_html__( 'Language Selector Menu', 'wpglobus' ),
 							'settings' 		=> array(),
 							'priority'  	=> 30,
 							'type'    		=> 'wpglobus_link',
-							'href'			=> admin_url() . 'nav-menus.php?action=edit',
-							'text'			=> __( 'You don\'t have any menu. You can create it just now.', 'wpglobus' ),
-							'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-						)	
+							/**
+							 * We are in Customizer, so we can "focus" to the menus and not go to menus in admin.
+							 * The JS code and the message below are copied from
+							 * @see WP_Nav_Menu_Widget::form
+							 */
+							'href'			=> esc_attr('javascript: wp.customize.panel( "nav_menus" ).focus();'),
+							'text'			=> esc_html__( 'No menus have been created yet. Create some.', 'wpglobus' ),
+							'description' 	=> esc_html__( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+						)
 					) );
-					
+
 					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'type' ] 	= 'wpglobus_link';
-					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= array();					
-				
+					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= array();
+
 				} else {
-					
-					$wp_customize->add_setting( 'wpglobus_customize_language_selector_menu', array( 
+
+					$wp_customize->add_setting( 'wpglobus_customize_language_selector_menu', array(
 						'type' => 'option',
 						'capability' => 'manage_options',
 						'transport' => 'postMessage'
-					) );			
+					) );
 					$wp_customize->add_control( 'wpglobus_customize_language_selector_menu', array(
 						'settings' 		=> 'wpglobus_customize_language_selector_menu',
-						'label'   		=> __( 'Language Selector Menu', 'wpglobus' ),
+						'label'   		=> esc_html__( 'Language Selector Menu', 'wpglobus' ),
 						'section' 		=> 'wpglobus_languages_section',
 						'type'    		=> 'select',
 						'priority'  	=> 30,
 						'choices'    	=> $menus,
-						'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-					));	
-					
+						'description' 	=> esc_html__( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+					));
+
 					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'type' ] 	= 'select';
 					/** @see option wpglobus_option['use_nav_menu'] */
 					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= 'use_nav_menu';
-				
+
 				}
 
 				/** "All Pages" menus Language selector */
