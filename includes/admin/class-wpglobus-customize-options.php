@@ -604,8 +604,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			update_option( 'wpglobus_customize_language_selector_mode', WPGlobus::Config()->show_flag_name );
 
 			/**  */
-			update_option( 'wpglobus_customize_language_selector_menu', WPGlobus::Config()->nav_menu );
-
+			if ( empty( WPGlobus::Config()->nav_menu ) ) {
+				delete_option( 'wpglobus_customize_language_selector_menu' );
+			} else {	
+				update_option( 'wpglobus_customize_language_selector_menu', WPGlobus::Config()->nav_menu );
+			}
+	
 			/** wpglobus_customize_selector_wp_list_pages <=> wpglobus_option[selector_wp_list_pages][show_selector]  */
 			update_option( 'wpglobus_customize_selector_wp_list_pages', WPGlobus::Config()->selector_wp_list_pages );
 
@@ -732,6 +736,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 				/** @var array $nav_menus */
 				$nav_menus = WPGlobus::_get_nav_menus();
+				
+				$menus = array();
 
 				foreach ( $nav_menus as $menu ) {
 					$menus[ $menu->slug ] = $menu->name;
@@ -740,23 +746,46 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					$menus[ 'all' ] = 'All';
 				}
 
-				$wp_customize->add_setting( 'wpglobus_customize_language_selector_menu', array(
-					'type' => 'option',
-					'capability' => 'manage_options',
-					'transport' => 'postMessage'
-				) );
-				$wp_customize->add_control( 'wpglobus_customize_language_selector_menu', array(
-					'settings' 		=> 'wpglobus_customize_language_selector_menu',
-					'label'   		=> __( 'Language Selector Menu', 'wpglobus' ),
-					'section' 		=> 'wpglobus_languages_section',
-					'type'    		=> 'select',
-					'priority'  	=> 30,
-					'choices'    	=> $menus,
-					'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-				));
-				self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'type' ] 	= 'select';
-				/** @see option wpglobus_option['use_nav_menu'] */
-				self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= 'use_nav_menu';
+				if ( empty( $menus ) ) {
+
+					$wp_customize->add_control( new WPGlobusLink( $wp_customize, 
+						'wpglobus_customize_language_selector_menu', array(
+							'section' 		=> 'wpglobus_languages_section',
+							'title'   		=> __( 'Language Selector Menu', 'wpglobus' ),
+							'settings' 		=> array(),
+							'priority'  	=> 30,
+							'type'    		=> 'wpglobus_link',
+							'href'			=> admin_url() . 'nav-menus.php?action=edit',
+							'text'			=> __( 'You don\'t have any menu. You can create it just now.', 'wpglobus' ),
+							'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+						)	
+					) );
+					
+					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'type' ] 	= 'wpglobus_link';
+					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= array();					
+				
+				} else {
+					
+					$wp_customize->add_setting( 'wpglobus_customize_language_selector_menu', array( 
+						'type' => 'option',
+						'capability' => 'manage_options',
+						'transport' => 'postMessage'
+					) );			
+					$wp_customize->add_control( 'wpglobus_customize_language_selector_menu', array(
+						'settings' 		=> 'wpglobus_customize_language_selector_menu',
+						'label'   		=> __( 'Language Selector Menu', 'wpglobus' ),
+						'section' 		=> 'wpglobus_languages_section',
+						'type'    		=> 'select',
+						'priority'  	=> 30,
+						'choices'    	=> $menus,
+						'description' 	=> __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+					));	
+					
+					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'type' ] 	= 'select';
+					/** @see option wpglobus_option['use_nav_menu'] */
+					self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_language_selector_menu' ][ 'option' ] 	= 'use_nav_menu';
+				
+				}
 
 				/** "All Pages" menus Language selector */
 				$wp_customize->add_setting( 'wpglobus_customize_selector_wp_list_pages', array(
