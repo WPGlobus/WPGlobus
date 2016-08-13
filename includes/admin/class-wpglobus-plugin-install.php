@@ -65,6 +65,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$paid_plugins['wpglobus-plus']['dir']             = WP_PLUGIN_DIR . '/wpglobus-plus/wpglobus-plus.php';
 			self::$paid_plugins['woocommerce-nets-netaxept']['dir'] = WP_PLUGIN_DIR . '/woocommerce-nets-netaxept/woocommerce-nets-netaxept.php';
 			self::$paid_plugins['wpglobus-mobile-menu']['dir']      = WP_PLUGIN_DIR . '/wpglobus-mobile-menu/wpglobus-mobile-menu.php';
+			self::$paid_plugins['wpglobus-language-widgets']['dir'] = WP_PLUGIN_DIR . '/wpglobus-language-widgets/wpglobus-language-widgets.php';
 
 			// Enqueue the CSS & JS scripts.
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
@@ -113,7 +114,26 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			}
 			
+			global $wp_version;
+			
 			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
+
+			$paid_plugin                                              = clone $res->plugins[0];
+			$slug                                                     = 'wpglobus-language-widgets';
+			$paid_plugin->name                                        = 'WPGlobus Language Widgets';
+			$paid_plugin->slug                                        = $slug;
+			$paid_plugin->short_description                           = __( 'Description.', 'wpglobus' );
+			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
+			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-lw-logo-400x400.png';
+			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-lw-logo-400x400.png';
+			$paid_plugin->active_installs                             = 0;
+			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
+			$paid_plugin->tested									  = $wp_version;	// trick to output message "Compatible with your version of WordPress"
+			self::$plugin_card[]                                      = 'wpglobus-language-widgets';
+			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
+			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
+			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
+			array_unshift( $res->plugins, $paid_plugin );			
 			
 			$paid_plugin                                              = clone $res->plugins[0];
 			$slug                                                     = 'wpglobus-mobile-menu';
