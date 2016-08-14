@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-12 21:07:58+00:00\n"
+"POT-Creation-Date: 2016-08-14 04:23:25+00:00\n"
 "PO-Revision-Date: 2015-09-14 07:19+0000\n"
 "Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
@@ -580,36 +580,42 @@ msgstr "Enregistrer les modifications"
 msgid "Back to the WPGlobus Settings"
 msgstr "Retour aux réglages de WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:122
+#: includes/admin/class-wpglobus-plugin-install.php:125
+msgid ""
+"Display different widgets per language. Show or hide widgets depending on "
+"the current language set by WPGlobus"
+msgstr ""
+
+#: includes/admin/class-wpglobus-plugin-install.php:142
 msgid ""
 "Makes WPGlobus language switcher compatible with mobile devices and narrow "
 "screens."
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:138
+#: includes/admin/class-wpglobus-plugin-install.php:158
 msgid ""
 "With this add-on, you will be able to translate the Nets payment methods "
 "titles and descriptions to multiple languages."
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:154
+#: includes/admin/class-wpglobus-plugin-install.php:174
 msgid ""
 "With WPGlobus Plus, you will be able to hold incomplete translations as "
 "\"drafts\", translate URLs (post/page \"slugs\"), customize the menu "
 "language switcher layout and more."
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:170
+#: includes/admin/class-wpglobus-plugin-install.php:190
 msgid ""
 "Makes WooCommerce-based online stores truly multilingual by allowing "
 "translating products, categories, tags and attributes to multiple languages."
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:198
+#: includes/admin/class-wpglobus-plugin-install.php:218
 msgid "Current Version"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:199
+#: includes/admin/class-wpglobus-plugin-install.php:219
 msgid "Get it now !"
 msgstr ""
 

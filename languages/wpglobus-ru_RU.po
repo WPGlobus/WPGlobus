@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-12 21:07:58+00:00\n"
-"PO-Revision-Date: 2016-02-05 00:00-0500\n"
+"POT-Creation-Date: 2016-08-14 04:23:25+00:00\n"
+"PO-Revision-Date: 2016-08-14 00:27-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -603,7 +603,15 @@ msgstr "Сохранить изменения"
 msgid "Back to the WPGlobus Settings"
 msgstr "Вернуться к настройкам WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:122
+#: includes/admin/class-wpglobus-plugin-install.php:125
+msgid ""
+"Display different widgets per language. Show or hide widgets depending on "
+"the current language set by WPGlobus"
+msgstr ""
+"Показать или скрыть виджет в зависимости от текущего языка, установленного "
+"WPGlobus"
+
+#: includes/admin/class-wpglobus-plugin-install.php:142
 msgid ""
 "Makes WPGlobus language switcher compatible with mobile devices and narrow "
 "screens."
@@ -611,13 +619,13 @@ msgstr ""
 "Обеспечивает совместимость переключателя языков в меню с мобильными "
 "устройствами на узких экранах."
 
-#: includes/admin/class-wpglobus-plugin-install.php:138
+#: includes/admin/class-wpglobus-plugin-install.php:158
 msgid ""
 "With this add-on, you will be able to translate the Nets payment methods "
 "titles and descriptions to multiple languages."
 msgstr "Необходим для перевода названий методов оплаты системы Nets."
 
-#: includes/admin/class-wpglobus-plugin-install.php:154
+#: includes/admin/class-wpglobus-plugin-install.php:174
 msgid ""
 "With WPGlobus Plus, you will be able to hold incomplete translations as "
 "\"drafts\", translate URLs (post/page \"slugs\"), customize the menu "
@@ -626,17 +634,17 @@ msgstr ""
 "WPGlobus Плюс позволяет помечать незаконченные переводы как Черновики, "
 "переводить УРЛы и многое другое."
 
-#: includes/admin/class-wpglobus-plugin-install.php:170
+#: includes/admin/class-wpglobus-plugin-install.php:190
 msgid ""
 "Makes WooCommerce-based online stores truly multilingual by allowing "
 "translating products, categories, tags and attributes to multiple languages."
 msgstr "Поддержка многоязычности в WooCommerce."
 
-#: includes/admin/class-wpglobus-plugin-install.php:198
+#: includes/admin/class-wpglobus-plugin-install.php:218
 msgid "Current Version"
 msgstr "Текущая версия"
 
-#: includes/admin/class-wpglobus-plugin-install.php:199
+#: includes/admin/class-wpglobus-plugin-install.php:219
 msgid "Get it now !"
 msgstr "Установи прямо сейчас!"
 
