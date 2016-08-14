@@ -1,4 +1,4 @@
-# Copyright (C) 2015 WPGlobus
+# Copyright (C) 2016 WPGlobus
 # This file is distributed under the GPL2.
 # Translators:
 # Franck, 2015
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-14 04:23:25+00:00\n"
-"PO-Revision-Date: 2015-09-14 07:19+0000\n"
-"Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
+"POT-Creation-Date: 2016-08-14 11:09:45+00:00\n"
+"PO-Revision-Date: 2016-08-14 11:05+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_FR/)\n"
 "Language: fr_FR\n"
@@ -232,7 +232,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:144
 #: includes/admin/class-wpglobus-customize-options.php:182
 msgid "Default"
-msgstr ""
+msgstr "Par défaut"
 
 #: includes/admin/class-wpglobus-customize-options.php:263
 msgid "Section"
@@ -386,15 +386,15 @@ msgstr "Décochez pour désactiver WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:997
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: includes/admin/class-wpglobus-customize-options.php:998
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: includes/admin/class-wpglobus-customize-options.php:1002
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: includes/admin/class-wpglobus-customize-options.php:1062
 msgid ""
@@ -613,7 +613,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-plugin-install.php:218
 msgid "Current Version"
-msgstr ""
+msgstr "Version actuelle"
 
 #: includes/admin/class-wpglobus-plugin-install.php:219
 msgid "Get it now !"
@@ -880,7 +880,7 @@ msgstr "Langue par défaut"
 
 #: includes/options/fields/table/table-languages.php:389
 msgid "Installed"
-msgstr ""
+msgstr "Installée"
 
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"

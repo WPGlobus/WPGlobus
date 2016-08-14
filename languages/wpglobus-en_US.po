@@ -1,12 +1,12 @@
-# Copyright (C) 2015 WPGlobus
+# Copyright (C) 2016 WPGlobus
 # This file is distributed under the GPL2.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-14 04:23:25+00:00\n"
-"PO-Revision-Date: 2015-09-09 02:25+0000\n"
+"POT-Creation-Date: 2016-08-14 11:09:45+00:00\n"
+"PO-Revision-Date: 2016-08-14 10:49+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_US/)\n"
@@ -144,17 +144,19 @@ msgstr "WPGlobus Add-ons / Extensions"
 
 #: includes/admin/class-wpglobus-clean.php:232
 msgid "Remove the WPGlobus settings (not recommended)"
-msgstr ""
+msgstr "Remove the WPGlobus settings (not recommended)"
 
 #: includes/admin/class-wpglobus-clean.php:591
 msgid "Clean-up Tool"
-msgstr ""
+msgstr "Clean-up Tool"
 
 #: includes/admin/class-wpglobus-clean.php:611
 msgid ""
 "WARNING: this operation is non-reversible. It is strongly recommended that "
 "you backup your database before proceeding."
 msgstr ""
+"WARNING: this operation is non-reversible. It is strongly recommended that "
+"you backup your database before proceeding."
 
 #: includes/admin/class-wpglobus-clean.php:615
 msgid ""
@@ -165,6 +167,12 @@ msgid ""
 "might end up with empty titles, no content, no excerpts, blank comments and "
 "so on."
 msgstr ""
+"This tool should be used only if you plan to completely uninstall WPGlobus. "
+"By running it, you will remove ALL translations you have entered to your "
+"post, pages, etc., keeping only the MAIN language texts. Please make sure "
+"that all entries have some content in the main language. Otherwise, you "
+"might end up with empty titles, no content, no excerpts, blank comments and "
+"so on."
 
 #. translators: %1$s - language name, %1$s - language code. Do not remove.
 #: includes/admin/class-wpglobus-clean.php:622
@@ -172,14 +180,16 @@ msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
 "%1$s WILL BE DELETED! To change the main language, please go to Settings."
 msgstr ""
+"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
+"%1$s WILL BE DELETED! To change the main language, please go to Settings."
 
 #: includes/admin/class-wpglobus-clean.php:631
 msgid "You are about to clean the content of the following database tables:"
-msgstr ""
+msgstr "You are about to clean the content of the following database tables:"
 
 #: includes/admin/class-wpglobus-clean.php:639
 msgid "The operations log"
-msgstr ""
+msgstr "The operations log"
 
 #: includes/admin/class-wpglobus-clean.php:642
 msgid ""
@@ -187,20 +197,25 @@ msgid ""
 "It should help in the case you need to restore something important. The log "
 "will be written to the file:"
 msgstr ""
+"We are going to write a detailed log of all the database changes performed. "
+"It should help in the case you need to restore something important. The log "
+"will be written to the file:"
 
 #: includes/admin/class-wpglobus-clean.php:652
 msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
 msgstr ""
+"Uncheck if you do not want to write the operations log (we recommend to keep "
+"it checked)"
 
 #: includes/admin/class-wpglobus-clean.php:657
 msgid "You have been warned..."
-msgstr ""
+msgstr "You have been warned..."
 
 #: includes/admin/class-wpglobus-clean.php:659
 msgid "Please confirm by checking the box below:"
-msgstr ""
+msgstr "Please confirm by checking the box below:"
 
 #: includes/admin/class-wpglobus-clean.php:661
 msgid ""
@@ -209,33 +224,37 @@ msgid ""
 "database backup and know how to restore it if necessary. I am fully "
 "responsible for the results."
 msgstr ""
+"I have read and understood everything written on this page. I am aware that "
+"by using this tool I may loose some content of my website. I have made a "
+"database backup and know how to restore it if necessary. I am fully "
+"responsible for the results."
 
 #: includes/admin/class-wpglobus-clean.php:664
 msgid "YES, I CONFIRM"
-msgstr ""
+msgstr "YES, I CONFIRM"
 
 #: includes/admin/class-wpglobus-clean.php:668
 msgid "Process with the Clean-up"
-msgstr ""
+msgstr "Process with the Clean-up"
 
 #: includes/admin/class-wpglobus-customize-options.php:72
 #: includes/admin/class-wpglobus-customize-options.php:99
 #: includes/admin/class-wpglobus-customize-options.php:144
 #: includes/admin/class-wpglobus-customize-options.php:182
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #: includes/admin/class-wpglobus-customize-options.php:263
 msgid "Section"
-msgstr ""
+msgstr "Section"
 
 #: includes/admin/class-wpglobus-customize-options.php:276
 msgid "Show all sections"
-msgstr ""
+msgstr "Show all sections"
 
 #: includes/admin/class-wpglobus-customize-options.php:278
 msgid "Save &amp; Reload"
-msgstr ""
+msgstr "Save &amp; Reload"
 
 #. Author of the plugin/theme
 msgid "WPGlobus"
@@ -245,14 +264,15 @@ msgstr "WPGlobus"
 msgid ""
 "You need to update WordPress to 4.5 or later to get Fields Settings section"
 msgstr ""
+"You need to update WordPress to 4.5 or later to get Fields Settings section"
 
 #: includes/admin/class-wpglobus-customize-options.php:544
 msgid "Fields Settings"
-msgstr ""
+msgstr "Fields Settings"
 
 #: includes/admin/class-wpglobus-customize-options.php:589
 msgid "WPGlobus Settings"
-msgstr ""
+msgstr "WPGlobus Settings"
 
 #: includes/admin/class-wpglobus-customize-options.php:625
 #: includes/options/class-wpglobus-options.php:322
@@ -274,6 +294,8 @@ msgid ""
 "Choose a language you would like to enable. <br>Press the [Save & Publish] "
 "button to confirm."
 msgstr ""
+"Choose a language you would like to enable. <br>Press the [Save & Publish] "
+"button to confirm."
 
 #. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 #: includes/admin/class-wpglobus-customize-options.php:676
@@ -326,7 +348,7 @@ msgstr "Language Selector Menu"
 
 #: includes/admin/class-wpglobus-customize-options.php:764
 msgid "No menus have been created yet. Create some."
-msgstr ""
+msgstr "No menus have been created yet. Create some."
 
 #: includes/admin/class-wpglobus-customize-options.php:765
 #: includes/admin/class-wpglobus-customize-options.php:786
@@ -374,21 +396,23 @@ msgstr "Uncheck to disable WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:997
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 #: includes/admin/class-wpglobus-customize-options.php:998
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: includes/admin/class-wpglobus-customize-options.php:1002
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: includes/admin/class-wpglobus-customize-options.php:1062
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button below."
 msgstr ""
+"Here you can specify which fields should be considered multilingual by "
+"WPGlobus. To exclude a field, uncheck it and then press the button below."
 
 #: includes/admin/class-wpglobus-customize-options.php:1068
 #: includes/options/class-wpglobus-options.php:167
@@ -434,6 +458,8 @@ msgid ""
 "We would hate to see you go. If something goes wrong, do not uninstall "
 "WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
 msgstr ""
+"We would hate to see you go. If something goes wrong, do not uninstall "
+"WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
 
 #: includes/admin/class-wpglobus-customize-options.php:1112
 #: includes/options/class-wpglobus-options.php:218
@@ -442,6 +468,9 @@ msgid ""
 "languages together, mixed up. You will need to remove all translations, "
 "keeping only one language."
 msgstr ""
+"Please note that if you deactivate WPGlobus, your site will show all the "
+"languages together, mixed up. You will need to remove all translations, "
+"keeping only one language."
 
 #. translators: %s: link to the Clean-up Tool
 #: includes/admin/class-wpglobus-customize-options.php:1116
@@ -452,22 +481,26 @@ msgid ""
 "The clean-up operation is irreversible, so use it only if you need to "
 "completely uninstall WPGlobus."
 msgstr ""
+"If there are just a few places, you should edit them manually. To "
+"automatically remove all translations at once, you can use the %s. WARNING: "
+"The clean-up operation is irreversible, so use it only if you need to "
+"completely uninstall WPGlobus."
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
 #: includes/admin/class-wpglobus-customize-options.php:1118
 #: includes/options/class-wpglobus-options.php:224
 msgid "%1$sClean-up Tool%2$s"
-msgstr ""
+msgstr "%1$sClean-up Tool%2$s"
 
 #. translators: %s: name of current theme
 #: includes/admin/class-wpglobus-customize-options.php:1129
 msgid "Sorry, WPGlobus customizer doesn't support current theme %s."
-msgstr ""
+msgstr "Sorry, WPGlobus customizer doesn't support current theme %s."
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
 #: includes/admin/class-wpglobus-customize-options.php:1134
 msgid "Please use %1$sWPGlobus options page%2$s instead."
-msgstr ""
+msgstr "Please use %1$sWPGlobus options page%2$s instead."
 
 #: includes/admin/class-wpglobus-language-edit.php:146
 #: includes/admin/class-wpglobus-language-edit.php:151
@@ -570,18 +603,24 @@ msgid ""
 "Display different widgets per language. Show or hide widgets depending on "
 "the current language set by WPGlobus"
 msgstr ""
+"Display different widgets per language. Show or hide widgets depending on "
+"the current language set by WPGlobus"
 
 #: includes/admin/class-wpglobus-plugin-install.php:142
 msgid ""
 "Makes WPGlobus language switcher compatible with mobile devices and narrow "
 "screens."
 msgstr ""
+"Makes WPGlobus language switcher compatible with mobile devices and narrow "
+"screens."
 
 #: includes/admin/class-wpglobus-plugin-install.php:158
 msgid ""
 "With this add-on, you will be able to translate the Nets payment methods "
 "titles and descriptions to multiple languages."
 msgstr ""
+"With this add-on, you will be able to translate the Nets payment methods "
+"titles and descriptions to multiple languages."
 
 #: includes/admin/class-wpglobus-plugin-install.php:174
 msgid ""
@@ -589,20 +628,25 @@ msgid ""
 "\"drafts\", translate URLs (post/page \"slugs\"), customize the menu "
 "language switcher layout and more."
 msgstr ""
+"With WPGlobus Plus, you will be able to hold incomplete translations as "
+"\"drafts\", translate URLs (post/page \"slugs\"), customize the menu "
+"language switcher layout and more."
 
 #: includes/admin/class-wpglobus-plugin-install.php:190
 msgid ""
 "Makes WooCommerce-based online stores truly multilingual by allowing "
 "translating products, categories, tags and attributes to multiple languages."
 msgstr ""
+"Makes WooCommerce-based online stores truly multilingual by allowing "
+"translating products, categories, tags and attributes to multiple languages."
 
 #: includes/admin/class-wpglobus-plugin-install.php:218
 msgid "Current Version"
-msgstr ""
+msgstr "Current Version"
 
 #: includes/admin/class-wpglobus-plugin-install.php:219
 msgid "Get it now !"
-msgstr ""
+msgstr "Get it now !"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -700,7 +744,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:205
 msgid "Deactivating / Uninstalling"
-msgstr ""
+msgstr "Deactivating / Uninstalling"
 
 #: includes/options/class-wpglobus-options.php:237
 msgid "Welcome!"
@@ -858,7 +902,7 @@ msgstr "Default language"
 
 #: includes/options/fields/table/table-languages.php:389
 msgid "Installed"
-msgstr ""
+msgstr "Installed"
 
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"
@@ -929,7 +973,7 @@ msgstr "Deactivate License Key"
 
 #: updater/class-wpglobus-updater-admin.php:205
 msgid "Please contact support@wpglobus.com for assistance."
-msgstr ""
+msgstr "Please contact support@wpglobus.com for assistance."
 
 #: updater/class-wpglobus-updater-admin.php:211
 msgid "Active"
@@ -950,7 +994,7 @@ msgstr "Connection failed to the License Key API server. Try again later."
 #: updater/class-wpglobus-updater-admin.php:391
 #: updater/class-wpglobus-updater-requests.php:72
 msgid "The License Key / Email pair is empty or invalid."
-msgstr ""
+msgstr "The License Key / Email pair is empty or invalid."
 
 #: updater/class-wpglobus-updater-admin.php:421
 msgid ""
@@ -1034,11 +1078,11 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-requests.php:159
 msgid "Licensing server connection error."
-msgstr ""
+msgstr "Licensing server connection error."
 
 #: updater/class-wpglobus-updater-requests.php:170
 msgid "Licensing server connection error (%d)."
-msgstr ""
+msgstr "Licensing server connection error (%d)."
 
 #: updater/class-wpglobus-updater.php:177
 msgid "License"
