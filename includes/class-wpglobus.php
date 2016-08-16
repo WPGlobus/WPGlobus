@@ -1046,38 +1046,43 @@ class WPGlobus {
 					}
 				}
 
-			} else if ( 'nav-menus.php' == $page ) {
+			} else if ( 'nav-menus.php' === $page ) {
 
 				$page_action = 'menu-edit';
 				$menu_items  = array();
 				$post_titles = array();
 
+				/** @global wpdb $wpdb */
 				global $wpdb;
-				$items =
-					$wpdb->get_results( "SELECT ID, post_title, post_excerpt, post_name FROM {$wpdb->prefix}posts WHERE post_type = 'nav_menu_item'", OBJECT );
+
+				$_query = new WP_Query( array(
+					'post_type' => 'nav_menu_item',
+					'nopaging'  => true,
+				) );
+
+				/**
+				 * Array of menu items.
+				 *
+				 * @var WP_Post[] $items
+				 */
+				$items = $_query->posts;
+				unset( $_query );
 
 				foreach ( $items as $item ) :
+
 					$item->post_title = trim( $item->post_title );
+
 					if ( empty( $item->post_title ) ) :
 
+						$item_type      = get_post_meta( $item->ID, '_menu_item_type', true );
 						$item_object    = get_post_meta( $item->ID, '_menu_item_object', true );
 						$item_object_id = get_post_meta( $item->ID, '_menu_item_object_id', true );
 
-						if ( 'page' == $item_object ) {
-							/**
-							 * Check for menu item has post type page
-							 * for autocomplete Navigation Label input field
-							 */
-							$post_title = get_post_field( 'post_title', $item_object_id );
-							$new_title  = trim( $post_title );
-							if ( ! empty( $new_title ) ) {
-								$item->post_title = $new_title;
-								/**
-								 * Update translation of title for menu item
-								 */
-								$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID ) );
-							}
-						} elseif ( 'category' == $item_object ) {
+						$_raw_title = '';
+
+						if ( 'post_type' === $item_type ) {
+							$_raw_title = get_post_field( 'post_title', $item_object_id );
+						} elseif ( 'taxonomy' === $item_type ) {
 
 							/**
 							 * Here we need the raw term. Temporary need to disable our filter.
@@ -1086,59 +1091,17 @@ class WPGlobus {
 							$term = get_term_by( 'id', $item_object_id, $item_object );
 							add_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
 
-							$new_title = trim( $term->name );
-
-							if ( ! empty( $new_title ) ) {
-								$item->post_title = $new_title;
-								/**
-								 * Update translation of title for menu item
-								 */
-								$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $new_title, $item->ID ) );
-							}
-
-						} else {
-
-							/**
-							 * Because item of the post title is empty after saving
-							 * if it is equal to parent post title (@see _menu_item_object_id meta) before saving
-							 * @since 1.2.1
-							 */
-							$post_title = get_post_field( 'post_title', $item_object_id );
-
-							$post_title = trim( $post_title );
-
-							if ( empty( $post_title ) ) {
-
-								/**
-								 * Try to get post title from term data @see get_term_by()
-								 * it's applicable to custom taxonomy, ex: Woocommerce product_type, product_tag
-								 * @since 1.4.1
-								 */
-
-								remove_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
-								$term = get_term_by( 'id', $item_object_id, $item_object );
-								add_filter( 'get_term', array( 'WPGlobus_Filters', 'filter__get_term' ), 0 );
-
-								if ( ! empty( $term ) ) {
-
-									$post_title = trim( $term->name );
-
-									if ( ! empty( $post_title ) ) {
-										/**
-										 * Update translation of title for menu item
-										 */
-										$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $post_title, $item->ID ) );
-									}
-
-								}
-
-							}
-
-							$item->post_title = $post_title;
-
+							$_raw_title = $term->name;
 						}
 
-					endif;
+						$_raw_title  = trim( $_raw_title );
+						if ( ! empty( $_raw_title ) ) {
+							$item->post_title = $_raw_title;
+							// Save the raw title in the menu.
+							$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_title = '%s' WHERE ID = %d", $_raw_title, $item->ID ) );
+						}
+
+					endif; // Empty post_title.
 
 					/**
 					 * Add raw data for Navigation Label
