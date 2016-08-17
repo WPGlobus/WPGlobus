@@ -37,6 +37,13 @@ define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 global $WPGlobus;
 global $WPGlobus_Options;
 
+/**
+ * Abstract class for plugins.
+ *
+ * @since   1.6.1
+ */
+require_once dirname( __FILE__ ) . '/includes/class-wpglobus-plugin.php';
+
 
 require_once 'includes/class-wpglobus-config.php';
 require_once 'includes/class-wpglobus-utils.php';
