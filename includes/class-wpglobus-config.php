@@ -187,6 +187,8 @@ class WPGlobus_Config {
 	 */
 	public function __construct() {
 
+//		$this->_set_default_options();
+
 		/**
 		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all plugins already loaded their translations.
 		 */
@@ -350,92 +352,45 @@ class WPGlobus_Config {
 		 * Useful links
 		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+		 * - WordPress locales https://make.wordpress.org/polyglots/teams/
 		 */
-		$this->language_name['en'] = "English";
-		$this->language_name['ru'] = "Русский";
-		$this->language_name['de'] = "Deutsch";
-		$this->language_name['zh'] = "中文";
-		$this->language_name['fi'] = "Suomi";
-		$this->language_name['fr'] = "Français";
-		$this->language_name['nl'] = "Nederlands";
-		$this->language_name['sv'] = "Svenska";
-		$this->language_name['it'] = "Italiano";
-		$this->language_name['ro'] = "Română";
-		$this->language_name['hu'] = "Magyar";
-		$this->language_name['ja'] = "日本語";
-		$this->language_name['es'] = "Español";
-		$this->language_name['vi'] = "Tiếng Việt";
-		$this->language_name['ar'] = "العربية";
-		$this->language_name['pt'] = "Português";
-		$this->language_name['br'] = "Português do Brazil";
-		$this->language_name['pl'] = "Polski";
-		$this->language_name['gl'] = "Galego";
-		$this->language_name['uk'] = "Українська";
 
-		$this->en_language_name['en'] = "English";
-		$this->en_language_name['ru'] = "Russian";
-		$this->en_language_name['de'] = "German";
-		$this->en_language_name['zh'] = "Chinese";
-		$this->en_language_name['fi'] = "Finnish";
-		$this->en_language_name['fr'] = "French";
-		$this->en_language_name['nl'] = "Dutch";
-		$this->en_language_name['sv'] = "Swedish";
-		$this->en_language_name['it'] = "Italian";
-		$this->en_language_name['ro'] = "Romanian";
-		$this->en_language_name['hu'] = "Hungarian";
-		$this->en_language_name['ja'] = "Japanese";
-		$this->en_language_name['es'] = "Spanish";
-		$this->en_language_name['vi'] = "Vietnamese";
-		$this->en_language_name['ar'] = "Arabic";
-		$this->en_language_name['pt'] = "Portuguese";
-		$this->en_language_name['br'] = "Portuguese Brazil";
-		$this->en_language_name['pl'] = "Polish";
-		$this->en_language_name['gl'] = "Galician";
-		$this->en_language_name['uk'] = "Ukrainian";
+		$language_table = array(
+			// Prefix => Name, Native name, locale, flag.
+			'ar' => array( 'Arabic', 'العربية', 'ar', 'arle.png' ),
+			'en' => array( 'English', 'English', 'en_US', 'us.png' ),
+			'au' => array( 'English (AU)', 'English (AU)', 'en_AU', 'au.png' ),
+			'ca' => array( 'English (CA)', 'English (CA)', 'en_CA', 'ca.png' ),
+			'gb' => array( 'English (UK)', 'English (UK)', 'en_GB', 'uk.png' ),
+			'zh' => array( 'Chinese', '中文', 'zh_CN', 'cn.png' ),
+			'da' => array( 'Danish', 'Dansk', 'da_DK', 'dk.png' ),
+			'nl' => array( 'Dutch', 'Nederlands', 'nl_NL', 'nl.png' ),
+			'gl' => array( 'Galician', 'Galego', 'gl_ES', 'galego.png' ),
+			'de' => array( 'German', 'Deutsch', 'de_DE', 'de.png' ),
+			'fi' => array( 'Finnish', 'Suomi', 'fi', 'fi.png' ),
+			'fr' => array( 'French', 'Français', 'fr_FR', 'fr.png' ),
+			'hu' => array( 'Hungarian', 'Magyar', 'hu_HU', 'hu.png' ),
+			'it' => array( 'Italian', 'Italiano', 'it_IT', 'it.png' ),
+			'ja' => array( 'Japanese', '日本語', 'ja', 'jp.png' ),
+			'pl' => array( 'Polish', 'Polski', 'pl_PL', 'pl.png' ),
+			'pt' => array( 'Portuguese', 'Português', 'pt_PT', 'pt.png' ),
+			'br' => array( 'Portuguese (BR)', 'Português (BR)', 'pt_BR', 'br.png' ),
+			'ro' => array( 'Romanian', 'Română', 'ro_RO', 'ro.png' ),
+			'ru' => array( 'Russian', 'Русский', 'ru_RU', 'ru.png' ),
+			'es' => array( 'Spanish', 'Español', 'es_ES', 'es.png' ),
+			'sv' => array( 'Swedish', 'Svenska', 'sv_SE', 'se.png' ),
+			'uk' => array( 'Ukrainian', 'Українська', 'uk', 'ua.png' ),
+			'vi' => array( 'Vietnamese', 'Tiếng Việt', 'vi', 'vn.png' ),
+			);
 
-		#Locales
-		$this->locale['en'] = "en_US";
-		$this->locale['ru'] = "ru_RU";
-		$this->locale['de'] = "de_DE";
-		$this->locale['zh'] = "zh_CN";
-		$this->locale['fi'] = "fi";
-		$this->locale['fr'] = "fr_FR";
-		$this->locale['nl'] = "nl_NL";
-		$this->locale['sv'] = "sv_SE";
-		$this->locale['it'] = "it_IT";
-		$this->locale['ro'] = "ro_RO";
-		$this->locale['hu'] = "hu_HU";
-		$this->locale['ja'] = "ja";
-		$this->locale['es'] = "es_ES";
-		$this->locale['vi'] = "vi";
-		$this->locale['ar'] = "ar";
-		$this->locale['pt'] = "pt_PT";
-		$this->locale['br'] = "pt_BR";
-		$this->locale['pl'] = "pl_PL";
-		$this->locale['gl'] = "gl_ES";
-		$this->locale['uk'] = "uk";
-
-		#flags
-		$this->flag['en'] = 'us.png';
-		$this->flag['ru'] = 'ru.png';
-		$this->flag['de'] = 'de.png';
-		$this->flag['zh'] = 'cn.png';
-		$this->flag['fi'] = 'fi.png';
-		$this->flag['fr'] = 'fr.png';
-		$this->flag['nl'] = 'nl.png';
-		$this->flag['sv'] = 'se.png';
-		$this->flag['it'] = 'it.png';
-		$this->flag['ro'] = 'ro.png';
-		$this->flag['hu'] = 'hu.png';
-		$this->flag['ja'] = 'jp.png';
-		$this->flag['es'] = 'es.png';
-		$this->flag['vi'] = 'vn.png';
-		$this->flag['ar'] = 'arle.png';
-		$this->flag['pt'] = 'pt.png';
-		$this->flag['br'] = 'br.png';
-		$this->flag['pl'] = 'pl.png';
-		$this->flag['gl'] = 'galego.png';
-		$this->flag['uk'] = 'ua.png';
+		foreach ( $language_table as $language => $data ) {
+			list(
+				$this->en_language_name[ $language ],
+				$this->language_name[ $language ],
+				$this->locale[ $language ],
+				$this->flag[ $language ]
+				) = $data;
+		}
 
 	}
 
