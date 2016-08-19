@@ -376,7 +376,7 @@ class WPGlobus_Config {
 			'hu' => array( 'Hungarian', 'Magyar', 'hu_HU', 'hu.png' ),
 			'it' => array( 'Italian', 'Italiano', 'it_IT', 'it.png' ),
 			'ja' => array( 'Japanese', '&#26085;&#26412;&#35486;', 'ja', 'jp.png' ),
-			'ko' => array( 'Korean', '&#54620;&#44397;&#50612;', 'ko', 'kr.png' ),
+			'ko' => array( 'Korean', '&#54620;&#44397;&#50612;', 'ko_KR', 'kr.png' ),
 			'no' => array( 'Norwegian', 'Norsk', 'nb_NO', 'no.png' ),
 			'fa' => array( 'Persian', '&#1601;&#1575;&#1585;&#1587;&#1740;', 'fa_IR', 'ir.png' ),
 			'pl' => array( 'Polish', 'Polski', 'pl_PL', 'pl.png' ),
