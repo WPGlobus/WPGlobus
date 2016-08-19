@@ -187,8 +187,6 @@ class WPGlobus_Config {
 	 */
 	public function __construct() {
 
-//		$this->_set_default_options();
-
 		/**
 		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all plugins already loaded their translations.
 		 */
@@ -353,34 +351,46 @@ class WPGlobus_Config {
 		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 		 * - WordPress locales https://make.wordpress.org/polyglots/teams/
+		 * - converter https://www.unicodetools.com/unicode/convert-to-html.php
 		 */
 
+		/* @noinspection SpellCheckingInspection */
 		$language_table = array(
 			// Prefix => Name, Native name, locale, flag.
-			'ar' => array( 'Arabic', 'العربية', 'ar', 'arle.png' ),
+			'ar' => array( 'Arabic', '&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;', 'ar', 'arle.png' ),
 			'en' => array( 'English', 'English', 'en_US', 'us.png' ),
 			'au' => array( 'English (AU)', 'English (AU)', 'en_AU', 'au.png' ),
 			'ca' => array( 'English (CA)', 'English (CA)', 'en_CA', 'ca.png' ),
 			'gb' => array( 'English (UK)', 'English (UK)', 'en_GB', 'uk.png' ),
-			'zh' => array( 'Chinese', '中文', 'zh_CN', 'cn.png' ),
+			'zh' => array( 'Chinese', '&#31616;&#20307;&#20013;&#25991;', 'zh_CN', 'cn.png' ),
+			'tw' => array( 'Chinese (TW)', '&#32321;&#39636;&#20013;&#25991;', 'zh_CN', 'cn.png' ),
 			'da' => array( 'Danish', 'Dansk', 'da_DK', 'dk.png' ),
 			'nl' => array( 'Dutch', 'Nederlands', 'nl_NL', 'nl.png' ),
 			'gl' => array( 'Galician', 'Galego', 'gl_ES', 'galego.png' ),
 			'de' => array( 'German', 'Deutsch', 'de_DE', 'de.png' ),
 			'fi' => array( 'Finnish', 'Suomi', 'fi', 'fi.png' ),
 			'fr' => array( 'French', 'Français', 'fr_FR', 'fr.png' ),
+			'qc' => array( 'French (CA)', 'Français (CA)', 'fr_CA', 'fr_CA.png' ),
+			'he' => array( 'Hebrew', '&#1506;&#1489;&#1512;&#1497;&#1514;', 'he_IL', 'il.png' ),
+			'hi' => array( 'Hindi', '&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;', 'hi_IN', 'in.png' ),
 			'hu' => array( 'Hungarian', 'Magyar', 'hu_HU', 'hu.png' ),
 			'it' => array( 'Italian', 'Italiano', 'it_IT', 'it.png' ),
-			'ja' => array( 'Japanese', '日本語', 'ja', 'jp.png' ),
+			'ja' => array( 'Japanese', '&#26085;&#26412;&#35486;', 'ja', 'jp.png' ),
+			'ko' => array( 'Korean', '&#54620;&#44397;&#50612;', 'ko', 'kr.png' ),
+			'no' => array( 'Norwegian', 'Norsk', 'nb_NO', 'no.png' ),
+			'fa' => array( 'Persian', '&#1601;&#1575;&#1585;&#1587;&#1740;', 'fa_IR', 'ir.png' ),
 			'pl' => array( 'Polish', 'Polski', 'pl_PL', 'pl.png' ),
 			'pt' => array( 'Portuguese', 'Português', 'pt_PT', 'pt.png' ),
 			'br' => array( 'Portuguese (BR)', 'Português (BR)', 'pt_BR', 'br.png' ),
 			'ro' => array( 'Romanian', 'Română', 'ro_RO', 'ro.png' ),
 			'ru' => array( 'Russian', 'Русский', 'ru_RU', 'ru.png' ),
 			'es' => array( 'Spanish', 'Español', 'es_ES', 'es.png' ),
+			'mx' => array( 'Spanish (MX)', 'Español (MX)', 'es_MX', 'mx.png' ),
 			'sv' => array( 'Swedish', 'Svenska', 'sv_SE', 'se.png' ),
+			'tr' => array( 'Turkish', 'Türkçe', 'tr_TR', 'tr.png' ),
 			'uk' => array( 'Ukrainian', 'Українська', 'uk', 'ua.png' ),
 			'vi' => array( 'Vietnamese', 'Tiếng Việt', 'vi', 'vn.png' ),
+			'cy' => array( 'Welsh', 'Cymraeg', 'cy', 'cy.png' ),
 			);
 
 		foreach ( $language_table as $language => $data ) {
@@ -395,10 +405,11 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * Set default options
-	 * @return void
+	 * Initialize the language table with the hard-coded names, locales and flags.
+	 *
+	 * @see _set_languages For the hard-coded table.
 	 */
-	protected function _set_default_options() {
+	protected function _init_language_table() {
 
 		update_option( $this->option_language_names, $this->language_name );
 		update_option( $this->option_en_language_names, $this->en_language_name );
@@ -412,6 +423,16 @@ class WPGlobus_Config {
 	 * @return void
 	 */
 	protected function _get_options() {
+
+		/**
+		 * For developers use only. Re-creates language table with no warning! Irreversible!
+		 *
+		 * @link wp-admin/?wpglobus-reset-language-table=1
+		 */
+		if ( ! defined( 'DOING_AJAX' ) && ! empty( $_GET['wpglobus-reset-language-table'] ) && is_admin() ) {
+			delete_option( $this->option_language_names );
+		}
+
 
 		$wpglobus_option = get_option( $this->option );
 
@@ -472,7 +493,7 @@ class WPGlobus_Config {
 		if ( empty( $this->language_name ) ) {
 
 			$this->_set_languages();
-			$this->_set_default_options();
+			$this->_init_language_table();
 
 		}
 
@@ -483,7 +504,7 @@ class WPGlobus_Config {
 		if ( empty( $this->locale ) ) {
 
 			$this->_set_languages();
-			$this->_set_default_options();
+			$this->_init_language_table();
 
 		}
 
