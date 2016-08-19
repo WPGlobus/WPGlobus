@@ -171,6 +171,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.6.1 ###
+
+* FIXED:
+	* Wrong default menu title cases when taxonomy ID matches some post ID (props `mktatwp`).
+
 ### 1.6.0 ###
 
 * COMPATIBILITY:
