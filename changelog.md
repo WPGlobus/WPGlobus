@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+### 1.6.1 ###
+* FIXED:
+	* Attempt to assign property of non-object issue #35.
+
 ### 1.6.0 ###
 
 * COMPATIBILITY:
