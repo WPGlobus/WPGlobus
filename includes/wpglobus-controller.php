@@ -350,14 +350,28 @@ if ( class_exists( 'Mega_Menu' ) ) {
 
 if ( class_exists( 'RevSliderFront' ) ) {
 
-	/**
-	 * Translate layers
-	 * @see https://revolution.themepunch.com/
-	 *
-	 * @since 1.5.0
-	 */
-	require_once 'vendor/class-wpglobus-revslider.php';
-	WPGlobus_RevSlider::controller();
+	if ( 
+		/**
+		 * Filter to start the support Slider Revolution.
+		 *
+		 * @since 1.6.1
+		 *
+		 * @param boolean true.
+		 * @return boolean.
+		*/	
+		apply_filters( 'wpglobus_revslider_start', true ) 
+	) :
+	
+		/**
+		 * Translate layers
+		 * @see https://revolution.themepunch.com/
+		 *
+		 * @since 1.5.0
+		 */
+		require_once 'vendor/class-wpglobus-revslider.php';
+		WPGlobus_RevSlider::controller();
+	
+	endif;
 
 }
 
