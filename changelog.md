@@ -3,8 +3,12 @@
 ## Changelog ##
 
 ### 1.6.1 ###
+
 * FIXED:
-	* Attempt to assign property of non-object issue #35.
+	* Wrong default menu title cases when taxonomy ID matches some post ID (props `mktatwp`).
+	* MailChimp: `Attempt to assign property of non-object` warning [#35](https://github.com/WPGlobus/WPGlobus/issues/35) (props `nmohanan`).
+* ADDED:
+	* More languages, locales and flags are configured by default (applies to "fresh" plugin activations; does not change the existing settings of a previously installed WPGlobus).
 
 ### 1.6.0 ###
 

@@ -40,13 +40,16 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 * [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
 * [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
 * [WPGlobus Language Widgets](http://www.wpglobus.com/product/wpglobus-language-widget/): Multilingual widget logic: show and hide widget depending on the current language.
+* [WPGlobus Header Images](http://www.wpglobus.com/product/wpglobus-header-images/): Display different header images per language. Show images depending on the settings in customizer.
 * [WPGlobus Mobile Menu](http://www.wpglobus.com/product/wpglobus-mobile-menu/): makes the WPGlobus language switcher menu compatible with mobile devices and narrow screens.
 * [Multilingual WooCommerce Nets Netaxept](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
 
 ### Compatibility with Themes ###
 
-WPGlobus works correctly with all themes that apply proper filtering before outputting content.
-Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please let the theme / plugin authors know. We are ready to help them.
+* WPGlobus works correctly with all themes that apply proper filtering before outputting content.
+* As most of themes save their settings in the `options` table, you can use the [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to process those settings correctly.
+* Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please **tell the theme / plugin authors**. We are ready to help them.
+* Read more on the topic [here](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/).
 
 > Special note about "Page Builders / Composers": Currently, WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - are **not supported at this time**.
 
@@ -68,7 +71,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * Widget Logic
 * WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/) premium add-on is required)
 * WordPress WooCommerce Nets Netaxept Payment Plugin by sellxed/customweb - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
-* Yoast SEO ([WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is not required but highly recommended)
+* Yoast SEO. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is not required but highly recommended.
 
 ### Permalinks ###
 
@@ -175,6 +178,9 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Wrong default menu title cases when taxonomy ID matches some post ID (props `mktatwp`).
+	* MailChimp: `Attempt to assign property of non-object` warning [#35](https://github.com/WPGlobus/WPGlobus/issues/35) (props `nmohanan`).
+* ADDED:
+	* More languages, locales and flags are configured by default (applies to "fresh" plugin activations; does not change the existing settings of a previously installed WPGlobus).
 
 ### 1.6.0 ###
 
