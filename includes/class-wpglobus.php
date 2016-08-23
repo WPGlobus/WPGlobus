@@ -1955,7 +1955,10 @@ class WPGlobus {
 				$item->language    		= $language;
 				$item->classes[ 'page_item_wpglobus_menu_switch_' . $language ]  = 'page_item_wpglobus_menu_switch_' . $language;
 
-				$wpglobus_menu_items[] = $item;
+//				$item->object_id = $item->ID;
+				$item->object = 'custom';
+
+				$wpglobus_menu_items[] = new WP_Post( $item );
 
 			endforeach;
 
@@ -1995,7 +1998,9 @@ class WPGlobus {
 				$item->classes[]   		= 'page_item_wpglobus_menu_switch_' . $language;
 				$item->language    		= $language;
 
-				$wpglobus_menu_items[]  = $item;
+				$item->object = 'custom';
+
+				$wpglobus_menu_items[] = new WP_Post( $item );
 
 			endforeach;
 
@@ -2133,7 +2138,6 @@ class WPGlobus {
 				/**
 				 * Build the drop-down menu links for extra language
 				 */
-//				$url                 = WPGlobus_Utils::localize_url( $current_url, $language );
 				$url               = WPGlobus_Utils::localize_current_url( $language );
 				$flag_name         = $this->_get_flag_name( $language );
 				$span_classes_lang = $this->_get_language_classes( $language );
@@ -2183,7 +2187,7 @@ class WPGlobus {
 	 * Add language switcher to navigation menu
 	 *
 	 * @param array  $sorted_menu_items
-	 * @param object $args An object containing wp_nav_menu() arguments.
+	 * @param stdClass $args An object containing wp_nav_menu() arguments.
 	 *
 	 * @return array
 	 * @see wp_nav_menu()
@@ -2193,8 +2197,6 @@ class WPGlobus {
 		$args
 	) {
 
-		$disable_add_selector = true;
-
 		if ( empty( WPGlobus::Config()->nav_menu ) ) {
 			/**
 			 * User can use WPGlobus widget
@@ -2202,7 +2204,7 @@ class WPGlobus {
 			 */
 			$disable_add_selector = true;
 
-		} elseif ( 'all' == WPGlobus::Config()->nav_menu ) {
+		} elseif ( 'all' === WPGlobus::Config()->nav_menu ) {
 			/**
 			 * Attach to every nav menu
 			 * @since 1.0.7
@@ -2241,9 +2243,14 @@ class WPGlobus {
 			return $sorted_menu_items;
 		}
 
+		/**
+		 * List of all languages, except the main one.
+		 *
+		 * @var string[] $extra_languages
+		 */
 		$extra_languages = array();
 		foreach ( WPGlobus::Config()->enabled_languages as $languages ) {
-			if ( $languages != WPGlobus::Config()->language ) {
+			if ( $languages !== WPGlobus::Config()->language ) {
 				$extra_languages[] = $languages;
 			}
 		}
@@ -2253,22 +2260,27 @@ class WPGlobus {
 		 * Returning array.
 		 * @since 1.0.13
 		 *
-		 * @param array $extra_languages An array with languages to show off in menu.
+		 * @param array $extra_languages An array of languages to show in the menu.
 		 * @param       string           WPGlobus::Config()->language The current language.
 		 */
 		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );
 
-		/** main menu item classes */
+		// Main menu item classes.
 		$menu_item_classes = array(
 			'',
 			'menu-item',
+			'menu-item-type-custom',
+			'menu-item-object-custom',
 			'menu_item_wpglobus_menu_switch',
 			'wpglobus-selector-link'
 		);
 
-		/** submenu item classes */
+		// Submenu item classes.
 		$submenu_item_classes = array(
 			'',
+			'menu-item',
+			'menu-item-type-custom',
+			'menu-item-object-custom',
 			'sub_menu_item_wpglobus_menu_switch',
 			'wpglobus-selector-link'
 		);
@@ -2296,8 +2308,10 @@ class WPGlobus {
 		$current_url = WPGlobus_Utils::current_url();
 
 		$item                   = new stdClass();
-		$item->ID               = $parent_item_ID == 0 ? 'wpglobus_menu_switch_' . WPGlobus::Config()->language : $parent_item_ID;
-		$item->db_id            = $parent_item_ID == 0 ? 'wpglobus_menu_switch_' . WPGlobus::Config()->language : $parent_item_ID;
+		$item->ID               = 0 === $parent_item_ID ? 'wpglobus_menu_switch_' . WPGlobus::Config()->language : $parent_item_ID;
+		$item->db_id            = $item->ID;
+		$item->object_id        = $item->ID;
+		$item->object           = 'custom';
 		$item->menu_item_parent = 0;
 		$item->title            =
 			'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( WPGlobus::Config()->language ) . '</span>';
@@ -2308,24 +2322,25 @@ class WPGlobus {
 		$item->description = '';
 		$item->language    = WPGlobus::Config()->language;
 
-		$wpglobus_menu_items[] = $item;
+		$wpglobus_menu_items[] = new WP_Post($item);
 
 		foreach ( $extra_languages as $language ) {
 			$span_classes_lang      = $this->_get_language_classes( $language );
 			$item                   = new stdClass();
 			$item->ID               = 'wpglobus_menu_switch_' . $language;
-			$item->db_id            = 'wpglobus_menu_switch_' . $language;
+			$item->db_id            = $item->ID;
+			$item->object_id        = $item->ID;
+			$item->object           = 'custom';
 			$item->menu_item_parent = $parent_item_ID;
 			$item->title            =
 				'<span class="' . implode( ' ', $span_classes_lang ) . '">' . $this->_get_flag_name( $language ) . '</span>';
-			// This points to the URL localized for the selected language
-//			$item->url         = WPGlobus_Utils::localize_url( $current_url, $language );
+			// This points to the URL localized for the selected language.
 			$item->url         = WPGlobus_Utils::localize_current_url( $language );
-			$item->classes     = $parent_item_ID == 0 ? $menu_item_classes : $submenu_item_classes;
+			$item->classes     = 0 === $parent_item_ID ? $menu_item_classes : $submenu_item_classes;
 			$item->description = '';
 			$item->language    = $language;
 
-			$wpglobus_menu_items[] = $item;
+			$wpglobus_menu_items[] = new WP_Post( $item );
 		}
 
 		$languages = $extra_languages;
@@ -2335,12 +2350,13 @@ class WPGlobus {
 			$sorted_menu_items,
 
 			/**
-			 * Filter wpglobus menu items. May use for change order of languages.
-			 * Returning array.
+			 * This filter can be used to change the order of languages.
+			 *
 			 * @since 1.2.2
 			 *
-			 * @param array $wpglobus_menu_items An array menu items.
-			 * @param array $languages           An array languages.
+			 * @param array $wpglobus_menu_items All WPGlobus menu items.
+			 * @param array $languages           All languages, including current.
+			 * @return array The filtered list.
 			 */
 			apply_filters( 'wpglobus_menu_items', $wpglobus_menu_items, $languages )
 		);

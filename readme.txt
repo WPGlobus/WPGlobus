@@ -157,6 +157,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.6.2 =
+
+* FIXED:
+	* Refactored the language switch generation code for better compatibility with `BuddyPress`.
+
 = 1.6.1 =
 
 * FIXED:
