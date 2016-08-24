@@ -161,6 +161,8 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Refactored the language switch generation code for better compatibility with `BuddyPress`.
+* ADDED:
+	* Filter 'wpglobus_user_defined_post_type' to redefine post type while check for disabled post types.
 
 = 1.6.1 =
 
