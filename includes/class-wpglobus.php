@@ -2849,9 +2849,33 @@ class WPGlobus {
 			 * Check for support 'title' and 'editor'
 			 */
 			/** @global WP_Post $post */
-			global $post;
-			if ( ! empty( $post ) && ! post_type_supports( $post->post_type, 'title' ) && ! post_type_supports( $post->post_type, 'editor' ) ) {
-				return true;
+			global $post; 
+			
+			$post_type = '';
+			
+			if ( ! empty( $post ) && is_object( $post ) ) {
+				$post_type = $post->post_type;
+			}
+			
+			/**
+			 * Filter to define post type.
+			 * 
+			 * Some plugins may rewrite global $post, e.g. @see https://wordpress.org/plugins/geodirectory/
+			 * so user need to try define and return correct post type using filter to avoid PHP Notice: Trying to get property of non-object.
+			 *
+			 * @since 1.6.2
+			 *
+			 * @param string $post_type Post type.
+			 * @param array  $post   	An object WP_Post.
+			 *
+			 * @return string.
+			 */
+			$post_type = apply_filters( 'wpglobus_user_defined_post_type', $post_type, $post );			
+
+			if ( ! empty( $post_type ) ) {
+				if ( ! empty( $post ) && ! post_type_supports( $post_type, 'title' ) && ! post_type_supports( $post_type, 'editor' ) ) {
+					return true;
+				}
 			}
 		}
 
