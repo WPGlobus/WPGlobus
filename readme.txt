@@ -161,15 +161,15 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Refactored the language switch generation code for better compatibility with `BuddyPress`.
-	* MailChimp: `Regarding WPglobus plugin conflict with Mailchimp` (https://github.com/WPGlobus/WPGlobus/issues/37) (props `tbenny`).	
+	* MailChimp: incompatibility issue [#35](https://github.com/WPGlobus/WPGlobus/issues/35) [#37](https://github.com/WPGlobus/WPGlobus/issues/37) - props [nmohanan](https://github.com/nmohan) and [tbenny](https://github.com/tbenny).
 * ADDED:
-	* Filter 'wpglobus_user_defined_post_type' to redefine post type while check for disabled post types.
+	* Filter `wpglobus_user_defined_post_type` to redefine post type while check for disabled post types.
 
 = 1.6.1 =
 
 * FIXED:
 	* Wrong default menu title cases when taxonomy ID matches some post ID (props `mktatwp`).
-	* MailChimp: `Attempt to assign property of non-object` warning [#35](https://github.com/WPGlobus/WPGlobus/issues/35) (props `nmohanan`).
+	* MailChimp: `Attempt to assign property of non-object` warning [#35](https://github.com/WPGlobus/WPGlobus/issues/35)  - props [nmohanan](https://github.com/nmohan).
 * ADDED:
 	* More languages, locales and flags are configured by default (applies to "fresh" plugin activations; does not change the existing settings of a previously installed WPGlobus).
 

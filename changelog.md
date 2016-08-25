@@ -2,6 +2,14 @@
 
 ## Changelog ##
 
+### 1.6.2 ###
+
+* FIXED:
+	* Refactored the language switch generation code for better compatibility with `BuddyPress`.
+	* MailChimp: incompatibility issue [#35](https://github.com/WPGlobus/WPGlobus/issues/35) [#37](https://github.com/WPGlobus/WPGlobus/issues/37) - props [nmohanan](https://github.com/nmohan) and [tbenny](https://github.com/tbenny).
+* ADDED:
+	* Filter `wpglobus_user_defined_post_type` to redefine post type while check for disabled post types.
+
 ### 1.6.1 ###
 
 * FIXED:
