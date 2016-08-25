@@ -29,8 +29,10 @@ class WPGlobus_MailChimp_For_WP {
 	
 	/**
 	 * Filter meta data for MailChimp for WordPress.
-	 * 
+	 * @see get_post_meta() in constructor of MC4WP_Form class ( \mailchimp-for-wp\includes\forms\class-form.php )
+	 *
 	 * @since 1.6.1
+	 * @since 1.6.2
 	 *
 	 * @param string|array $value     Null is passed. We set the value.
 	 * @param int          $object_id Post ID
@@ -42,7 +44,7 @@ class WPGlobus_MailChimp_For_WP {
 	public static function filter__get_post_metadata( $value, $object_id, $meta_key, $single ) {
 		
 		$post = get_post( $object_id );
-
+		
 		if( ! is_object( $post ) || ! isset( $post->post_type ) || $post->post_type !== 'mc4wp-form' ) {
 			return $value;
 		}
@@ -50,14 +52,18 @@ class WPGlobus_MailChimp_For_WP {
 		/** @global wpdb $wpdb */
 		global $wpdb;
 		$meta_data = $wpdb->get_results( $wpdb->prepare(
-			"SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE meta_key LIKE '%%text_%%' AND post_id = %d",
+			"SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d",
 			$object_id ) );
 
-		if ( $meta_data ) {
+		if ( $meta_data ) :
 			foreach( $meta_data as $data ) {
-				$value[ $data->meta_key ][0] = WPGlobus_Core::text_filter( $data->meta_value, WPGlobus::Config()->language );
+				if ( false === strpos( $data->meta_key, 'text_' ) ) {
+					$value[ $data->meta_key ][0] = $data->meta_value;
+				} else {	
+					$value[ $data->meta_key ][0] = WPGlobus_Core::text_filter( $data->meta_value, WPGlobus::Config()->language );
+				}	
 			}
-		}
+		endif;
 
 		return $value;
 
