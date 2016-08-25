@@ -161,6 +161,7 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Refactored the language switch generation code for better compatibility with `BuddyPress`.
+	* MailChimp: `Regarding WPglobus plugin conflict with Mailchimp` (https://github.com/WPGlobus/WPGlobus/issues/37) (props `tbenny`).	
 * ADDED:
 	* Filter 'wpglobus_user_defined_post_type' to redefine post type while check for disabled post types.
 
