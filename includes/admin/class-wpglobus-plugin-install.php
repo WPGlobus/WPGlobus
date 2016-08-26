@@ -28,6 +28,13 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 * @var array
 		 */
 		static protected $paid_plugins = array();
+		
+		/**
+		 * Array of free plugins data.
+		 *
+		 * @var array
+		 */		
+		static protected $free_plugins = array();
 
 		/**
 		 * @var bool $_SCRIPT_DEBUG Internal representation of the define('SCRIPT_DEBUG')
@@ -61,6 +68,9 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				self::$_SCRIPT_SUFFIX = '';
 			}
 
+			self::$plugin_card[ 'free' ] = array();
+			self::$plugin_card[ 'paid' ] = array();
+			
 			self::$paid_plugins['woocommerce-wpglobus']['dir']      = WP_PLUGIN_DIR . '/woocommerce-wpglobus/woocommerce-wpglobus.php';
 			self::$paid_plugins['wpglobus-plus']['dir']             = WP_PLUGIN_DIR . '/wpglobus-plus/wpglobus-plus.php';
 			self::$paid_plugins['woocommerce-nets-netaxept']['dir'] = WP_PLUGIN_DIR . '/woocommerce-nets-netaxept/woocommerce-nets-netaxept.php';
@@ -101,7 +111,23 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			foreach ( $res->plugins as $key => $plugin ) {
 				if ( false === strpos( $plugin->slug, 'wpglobus' ) ) {
 					unset( $res->plugins[ $key ] );
-				}
+				} else {
+	
+					if ( 'wpglobus-for-black-studio-tinymce-widget' == $plugin->slug )  {
+						
+						/**
+						 * Set correct slug for WPGlobus for Black Studio TinyMCE Widget plugin 
+						 * @since 1.6.3
+						 */
+						$plugin->slug = 'wpglobus-for-black-studio-widget';
+						self::$plugin_card[ 'free' ][] = $plugin->slug;
+						self::$free_plugins[ $plugin->slug ][ 'extra_data' ][ 'correctLink' ] = 'wpglobus-for-black-studio-tinymce-widget'; 
+						
+					} else {
+						self::$plugin_card[ 'free' ][] = $plugin->slug;
+					}	
+					
+				}	
 			}
 
 			foreach ( self::$paid_plugins as $plugin => $plugin_data ) {
@@ -129,7 +155,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
 			$paid_plugin->tested									  = $wp_version;	// trick to output message "Compatible with your version of WordPress"
-			self::$plugin_card[]                                      = 'wpglobus-language-widgets';
+			self::$plugin_card[ 'paid' ][]                            = 'wpglobus-language-widgets';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
@@ -145,7 +171,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
-			self::$plugin_card[]                                      = 'wpglobus-mobile-menu';
+			self::$plugin_card[ 'paid' ][]                            = 'wpglobus-mobile-menu';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
@@ -161,7 +187,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
-			self::$plugin_card[]                                      = 'woocommerce-nets-netaxept';
+			self::$plugin_card[ 'paid' ][]                            = 'woocommerce-nets-netaxept';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
@@ -177,7 +203,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
-			self::$plugin_card[]                                      = 'wpglobus-plus';
+			self::$plugin_card[ 'paid' ][]                            = 'wpglobus-plus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-plus/';
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions/wpglobus-plus/';
@@ -193,7 +219,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;  // fake version to avoid appearing button "Update Now"
-			self::$plugin_card[]                                      = 'woocommerce-wpglobus';
+			self::$plugin_card[ 'paid' ][]                            = 'woocommerce-wpglobus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions-archive/woocommerce/';
@@ -233,7 +259,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 						'version'    => WPGLOBUS_VERSION,
 						'hookPage'   => $hook_page,
 						'pluginCard' => self::$plugin_card,
-						'pluginData' => self::$paid_plugins,
+						'pluginData' => array_merge( self::$paid_plugins, self::$free_plugins ),
 						'i18n'		 => $i18n
 					)
 				);

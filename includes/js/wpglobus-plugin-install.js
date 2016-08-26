@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 		currentVersion: '<strong>' + WPGlobusPluginInstall.i18n.current_version + ': </strong>{{version}}',
 		init: function() {
 			
-			$.each( WPGlobusPluginInstall.pluginCard, function(i, card) {
+			$.each( WPGlobusPluginInstall.pluginCard.paid, function(i, card) {
 				var ccard = '.plugin-card-' + card; 
 				$( ccard + ' .column-rating' ).css({'visibility':'hidden'});
 				$( ccard + ' .column-downloaded' ).css({'visibility':'hidden'});
@@ -57,6 +57,17 @@ jQuery(document).ready(function($) {
 			});
 			
 			$( '.plugin-action-buttons .install-now' ).css({'background-color':'#0f0'}).text( WPGlobusPluginInstall.i18n.get_it );
+			
+			/**
+			 * Fix links for WPGlobus for Black Studio TinyMCE Widget plugin 
+			 */
+			$( '.plugin-card.plugin-card-wpglobus-for-black-studio-widget a' ).each( function( i, link ){
+				var $l = $( link ), href = $l.attr( 'href' ), nHref;
+				if ( -1 !== href.indexOf( 'wpglobus-for-black-studio-widget' ) && ! $l.hasClass( 'button' ) ) {
+					nHref = href.replace( 'wpglobus-for-black-studio-widget', WPGlobusPluginInstall.pluginData['wpglobus-for-black-studio-widget'].extra_data.correctLink );
+					$l.attr( 'href', nHref );
+				}
+			});				
 		
 		},
 	};
