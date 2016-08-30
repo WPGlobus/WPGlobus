@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-25 16:43:41+00:00\n"
+"POT-Creation-Date: 2016-08-30 23:45:12+00:00\n"
 "PO-Revision-Date: 2016-08-14 11:05+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/wp-translations/"
@@ -568,44 +568,22 @@ msgstr "Zapisz zmiany"
 msgid "Back to the WPGlobus Settings"
 msgstr "Wróć do ustawień WPGlobus'a"
 
-#: includes/admin/class-wpglobus-plugin-install.php:125
-msgid ""
-"Display different widgets per language. Show or hide widgets depending on "
-"the current language set by WPGlobus"
-msgstr ""
-
-#: includes/admin/class-wpglobus-plugin-install.php:142
-msgid ""
-"Makes WPGlobus language switcher compatible with mobile devices and narrow "
-"screens."
-msgstr ""
-
-#: includes/admin/class-wpglobus-plugin-install.php:158
-msgid ""
-"With this add-on, you will be able to translate the Nets payment methods "
-"titles and descriptions to multiple languages."
-msgstr ""
-
-#: includes/admin/class-wpglobus-plugin-install.php:174
-msgid ""
-"With WPGlobus Plus, you will be able to hold incomplete translations as "
-"\"drafts\", translate URLs (post/page \"slugs\"), customize the menu "
-"language switcher layout and more."
-msgstr ""
-
-#: includes/admin/class-wpglobus-plugin-install.php:190
-msgid ""
-"Makes WooCommerce-based online stores truly multilingual by allowing "
-"translating products, categories, tags and attributes to multiple languages."
-msgstr ""
-
-#: includes/admin/class-wpglobus-plugin-install.php:218
+#: includes/admin/class-wpglobus-plugin-install.php:309
 msgid "Current Version"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:219
+#: includes/admin/class-wpglobus-plugin-install.php:310
 msgid "Get it now!"
 msgstr ""
+
+#: includes/admin/class-wpglobus-plugin-install.php:311
+msgid "Premium add-on"
+msgstr ""
+
+#: includes/admin/class-wpglobus-plugin-install.php:312
+#: includes/options/fields/table/table-languages.php:389
+msgid "Installed"
+msgstr "Zainstalowano"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -647,20 +625,20 @@ msgstr "Rozwijana lista z flagami"
 msgid "Selector type"
 msgstr "Sposób wyboru"
 
-#: includes/class-wpglobus.php:973
+#: includes/class-wpglobus.php:982
 msgid "You cannot disable the main language."
 msgstr "Nie możesz wyłączyć głównego języka."
 
-#: includes/class-wpglobus.php:1157
+#: includes/class-wpglobus.php:1166
 msgid "*) Available after the menu is saved."
 msgstr "*) Dostępne po zapisaniu menu."
 
-#: includes/class-wpglobus.php:3109
+#: includes/class-wpglobus.php:3118
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Aby korzystać z WPGlobus'a, musisz ustawić przyjazne bezpośrednie odnośniki."
 
-#: includes/class-wpglobus.php:3111
+#: includes/class-wpglobus.php:3120
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -668,7 +646,7 @@ msgstr ""
 "Proszę przejść do Ustawienia > Bezpośrednie odnośniki > Popularne ustawienia "
 "i wybrać opcję Nazwa wpisu."
 
-#: includes/class-wpglobus.php:3250
+#: includes/class-wpglobus.php:3259
 msgid "Add"
 msgstr "Dodaj"
 
@@ -858,10 +836,6 @@ msgstr "Dodaj nowy język"
 #: includes/options/fields/table/table-languages.php:325
 msgid "Default language"
 msgstr "Język domyślny"
-
-#: includes/options/fields/table/table-languages.php:389
-msgid "Installed"
-msgstr "Zainstalowano"
 
 #: includes/options/wpglobus-options-header.php:18
 msgid "We rely on your support!"

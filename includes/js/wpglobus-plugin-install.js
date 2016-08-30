@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
 	}
 
 	var api =  {
-		pluginInstalled: '<li><span class="button button-disabled">Installed</span></li>',
+		pluginInstalled: '<li><span class="button button-disabled">' + WPGlobusPluginInstall.i18n.installed + '</span></li>',
 		columnName: '<a href="{{href}}" class=""  target="_blank">{{name}}<img src="{{img}}" class="plugin-icon"></a>',
 		currentVersion: '<strong>' + WPGlobusPluginInstall.i18n.current_version + ': </strong>{{version}}',
 		init: function() {

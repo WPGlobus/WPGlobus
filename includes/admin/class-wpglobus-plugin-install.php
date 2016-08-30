@@ -309,6 +309,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				$i18n['current_version'] = esc_html__( 'Current Version', 'wpglobus' );
 				$i18n['get_it']          = esc_html__( 'Get it now!', 'wpglobus' );
 				$i18n['card_header']     = esc_html__( 'Premium add-on', 'wpglobus' );
+				$i18n['installed']       = esc_html__( 'Installed', 'wpglobus' );
 
 				wp_register_script(
 					'wpglobus-plugin-install',
