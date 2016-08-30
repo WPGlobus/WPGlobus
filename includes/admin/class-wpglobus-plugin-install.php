@@ -14,6 +14,27 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 	class WPGlobus_Plugin_Install {
 
 		/**
+		 * Fake version for paid plugins to prevent the "Update Now" button from appearing.
+		 *
+		 * @var string
+		 */
+		const FAKE_VERSION = '999';
+
+		/**
+		 * Fake active installs for paid plugins.
+		 *
+		 * @var int
+		 */
+		const FAKE_ACTIVE_INSTALLS = 0;
+
+		/**
+		 * Fake "Compatible with your version of WordPress" for paid plugins.
+		 *
+		 * @var string
+		 */
+		protected static $fake_compatible_with = '';
+
+		/**
 		 * Array of plugin cards.
 		 *
 		 * @var array
@@ -50,6 +71,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			if ( 'WPGlobus' !== $_GET['source'] || 'WPGlobus' !== $_GET['s'] ) {
 				return;
 			}
+
+			self::$fake_compatible_with = $GLOBALS['wp_version'];
 
 			self::$plugin_card['free'] = array();
 			self::$plugin_card['paid'] = array();
@@ -126,8 +149,6 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				}
 			}
 
-			global $wp_version;
-
 			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
 
 			$paid_plugin       = clone $res->plugins[0];
@@ -143,10 +164,9 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			                            '/wpglobus-hi-logo-400x400.png';
 			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
-			$paid_plugin->active_installs = 0;
-			$paid_plugin->version         = 999;  // Fake version to prevent the "Update Now" button from appearing.
-
-			$paid_plugin->tested = $wp_version; // Trick to output message "Compatible with your version of WordPress".
+			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
+			$paid_plugin->version         = self::FAKE_VERSION;
+			$paid_plugin->tested          = self::$fake_compatible_with;
 
 			self::$plugin_card['paid'][]                              = 'wpglobus-header-images';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
@@ -168,9 +188,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			                            '/wpglobus-lw-logo-400x400.png';
 			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
-			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 999;
-			$paid_plugin->tested                                      = $wp_version;
+			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
+			$paid_plugin->version         = self::FAKE_VERSION;
+			$paid_plugin->tested          = self::$fake_compatible_with;
+
 			self::$plugin_card['paid'][]                              = 'wpglobus-language-widgets';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
@@ -188,8 +209,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			                            '/wpglobus-mobile-menu-logo-400x400.png';
 			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
-			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 999;
+			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
+			$paid_plugin->version         = self::FAKE_VERSION;
+			$paid_plugin->tested          = self::$fake_compatible_with;
+
 			self::$plugin_card['paid'][]                              = 'wpglobus-mobile-menu';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
@@ -207,8 +230,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			                            '/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
 			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
-			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 999;
+			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
+			$paid_plugin->version         = self::FAKE_VERSION;
+			$paid_plugin->tested          = self::$fake_compatible_with;
+
 			self::$plugin_card['paid'][]                              = 'woocommerce-nets-netaxept';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
@@ -226,8 +251,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			                            '/wpglobus-plus-logo-300x300.png';
 			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
-			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 999;
+			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
+			$paid_plugin->version         = self::FAKE_VERSION;
+			$paid_plugin->tested          = self::$fake_compatible_with;
+
 			self::$plugin_card['paid'][]                              = 'wpglobus-plus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-plus/';
@@ -245,8 +272,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			                            '/woocommerce-wpglobus-logo-300x300.png';
 			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
-			$paid_plugin->active_installs                             = 0;
-			$paid_plugin->version                                     = 999;
+			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
+			$paid_plugin->version         = self::FAKE_VERSION;
+			$paid_plugin->tested          = self::$fake_compatible_with;
+
 			self::$plugin_card['paid'][]                              = 'woocommerce-wpglobus';
 			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
 			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
