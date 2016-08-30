@@ -269,7 +269,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 				$i18n                    = array();
 				$i18n['current_version'] = __( 'Current Version', 'wpglobus' );
-				$i18n['get_it']          = __( 'Get it now !', 'wpglobus' );
+				$i18n['get_it']          = __( 'Get it now!', 'wpglobus' );
 
 				wp_register_script(
 					'wpglobus-plugin-install',

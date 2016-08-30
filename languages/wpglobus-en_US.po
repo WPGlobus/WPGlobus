@@ -645,8 +645,8 @@ msgid "Current Version"
 msgstr "Current Version"
 
 #: includes/admin/class-wpglobus-plugin-install.php:219
-msgid "Get it now !"
-msgstr "Get it now !"
+msgid "Get it now!"
+msgstr "Get it now!"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
