@@ -77,17 +77,79 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$plugin_card['free'] = array();
 			self::$plugin_card['paid'] = array();
 
-			self::$paid_plugins['woocommerce-wpglobus']['dir']      = WP_PLUGIN_DIR . '/woocommerce-wpglobus/woocommerce-wpglobus.php';
-			self::$paid_plugins['wpglobus-plus']['dir']             = WP_PLUGIN_DIR . '/wpglobus-plus/wpglobus-plus.php';
-			self::$paid_plugins['woocommerce-nets-netaxept']['dir'] = WP_PLUGIN_DIR . '/woocommerce-nets-netaxept/woocommerce-nets-netaxept.php';
-			self::$paid_plugins['wpglobus-mobile-menu']['dir']      = WP_PLUGIN_DIR . '/wpglobus-mobile-menu/wpglobus-mobile-menu.php';
-			self::$paid_plugins['wpglobus-language-widgets']['dir'] = WP_PLUGIN_DIR . '/wpglobus-language-widgets/wpglobus-language-widgets.php';
-			self::$paid_plugins['wpglobus-header-images']['dir']    = WP_PLUGIN_DIR . '/wpglobus-header-images/wpglobus-header-images.php';
+			self::_setup_premium_add_ons();
 
 			// Enqueue the CSS & JS scripts.
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 
 			add_filter( 'plugins_api_result', array( __CLASS__, 'filter__plugins_api_result' ), 10, 3 );
+		}
+
+		/**
+		 * List of the premium WPGlobus extensions.
+		 */
+		protected static function _setup_premium_add_ons() {
+
+			self::$paid_plugins = array(
+				'woocommerce-wpglobus'      => array(
+					'dir'        => WP_PLUGIN_DIR .
+					                '/woocommerce-wpglobus/woocommerce-wpglobus.php',
+					'image_file' => 'woocommerce-wpglobus-logo-300x300.png',
+					'order'      => 9,
+				),
+				'wpglobus-plus'             => array(
+					'dir'        => WP_PLUGIN_DIR .
+					                '/wpglobus-plus/wpglobus-plus.php',
+					'image_file' => 'wpglobus-plus-logo-300x300.png',
+					'order'      => 8,
+				),
+				'wpglobus-mobile-menu'      => array(
+					'dir'        => WP_PLUGIN_DIR .
+					                '/wpglobus-mobile-menu/wpglobus-mobile-menu.php',
+					'image_file' => 'wpglobus-mobile-menu-logo-400x400.png',
+					'order'      => 2,
+				),
+				'wpglobus-language-widgets' => array(
+					'dir'        => WP_PLUGIN_DIR .
+					                '/wpglobus-language-widgets/wpglobus-language-widgets.php',
+					'image_file' => 'wpglobus-lw-logo-400x400.png',
+					'order'      => 4,
+				),
+				'wpglobus-menu-visibility'  => array(
+					'dir'        => WP_PLUGIN_DIR .
+					                '/wpglobus-menu-visibility/wpglobus-menu-visibility.php',
+					'image_file' => 'wpglobus-menu-visibility-logo.png',
+					'order'      => 4,
+				),
+				'wpglobus-header-images'    => array(
+					'dir'        => WP_PLUGIN_DIR .
+					                '/wpglobus-header-images/wpglobus-header-images.php',
+					'image_file' => 'wpglobus-hi-logo-400x400.png',
+					'order'      => 4,
+				),
+				'woocommerce-nets-netaxept' => array(
+					'dir'          => WP_PLUGIN_DIR .
+					                  '/woocommerce-nets-netaxept/woocommerce-nets-netaxept.php',
+					'product_slug' => 'multilingual-woocommerce-nets-netaxept',
+					'image_file'   => 'woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg',
+
+					'order' => 5,
+				),
+			);
+
+			uasort( self::$paid_plugins, array( __CLASS__, 'sort_callback' ) );
+		}
+
+		/**
+		 * Callback for sorting premium add-ons.
+		 *
+		 * @param array $a First.
+		 * @param array $b Second.
+		 *
+		 * @return int
+		 */
+		public static function sort_callback( $a, $b ) {
+			return $a['order'] > $b['order'];
 		}
 
 		/**
@@ -140,152 +202,98 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				}
 			}
 
+			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
+
 			foreach ( self::$paid_plugins as $plugin => $plugin_data ) {
 
 				if ( file_exists( $plugin_data['dir'] ) ) {
-					self::$paid_plugins[ $plugin ]['plugin_data'] = get_plugin_data( $plugin_data['dir'] );
+					self::$paid_plugins[ $plugin ]['plugin_data'] = get_plugin_data( $plugin_data['dir'], false );
 				} else {
 					self::$paid_plugins[ $plugin ]['plugin_data'] = null;
+
+					$product_slug = ( isset( $plugin_data['product_slug'] ) ? $plugin_data['product_slug'] : $plugin );
+
+					$api_response = wp_safe_remote_get( $url_wpglobus_site . 'wc-api/wpglobus-product-info?slug=' . $product_slug );
+					if ( ! empty( $api_response['body'] ) ) {
+						$plugin_info = json_decode( $api_response['body'] );
+
+						self::$paid_plugins[ $plugin ]['plugin_data'] = array(
+							'Description' => '',
+							'Name'        => $plugin_info->title,
+							'Title'       => $plugin_info->title,
+							'Version'     => $plugin_info->_product_version,
+							'PluginURI'   => $url_wpglobus_site . 'product/' .
+							                 $product_slug . '/',
+						);
+					}
 				}
 			}
 
-			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
+			/**
+			 * Prepend the premium add-ons to the list of plugins.
+			 */
+			foreach ( self::$paid_plugins as $slug => $paid_plugin ) :
 
-			$paid_plugin       = clone $res->plugins[0];
-			$slug              = 'wpglobus-header-images';
-			$paid_plugin->name = 'WPGlobus Header Images';
-			$paid_plugin->slug = $slug;
+				$_info = self::_plugin_info_template();
 
-			$paid_plugin->short_description = __( 'Display different images in the theme header depending on the current language.', 'wpglobus' );
+				$_info->slug = $slug;
 
-			$paid_plugin->homepage = $url_wpglobus_site . 'product/wpglobus-header-images/';
+				$_info->icons['default'] =
+				$_info->icons['1x'] =
+				$_info->icons['2x'] = WPGlobus::internal_images_url() . '/' .
+				                      $paid_plugin['image_file'];
 
-			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
-			                            '/wpglobus-hi-logo-400x400.png';
-			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
+				if ( ! empty( $paid_plugin['plugin_data'] ) ) {
+					$_info->name              = $paid_plugin['plugin_data']['Name'];
+					$_info->short_description = $paid_plugin['plugin_data']['Description'];
+					$_info->homepage          = $paid_plugin['plugin_data']['PluginURI'];
+				} else {
+					$_info->name = $slug;
+				}
 
-			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
-			$paid_plugin->version         = self::FAKE_VERSION;
-			$paid_plugin->tested          = self::$fake_compatible_with;
+				self::$plugin_card['paid'][] = $slug;
 
-			self::$plugin_card['paid'][]                              = 'wpglobus-header-images';
-			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-header-images/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-header-images/';
-			array_unshift( $res->plugins, $paid_plugin );
+				self::$paid_plugins[ $slug ]['card'] = $_info;
 
-			$paid_plugin       = clone $res->plugins[0];
-			$slug              = 'wpglobus-language-widgets';
-			$paid_plugin->name = 'WPGlobus Language Widgets';
-			$paid_plugin->slug = $slug;
+				self::$paid_plugins[ $slug ]['extra_data']['product_url'] =
+				self::$paid_plugins[ $slug ]['extra_data']['details_url'] =
+					$_info->homepage;
 
-			$paid_plugin->short_description =
-				__( 'Display different widgets per language. Show or hide widgets depending on the current language set by WPGlobus', 'wpglobus' );
-			$paid_plugin->homepage          = $url_wpglobus_site .
-			                                  'product/wpglobus-language-widgets/';
+				array_unshift( $res->plugins, $_info );
 
-			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
-			                            '/wpglobus-lw-logo-400x400.png';
-			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
-
-			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
-			$paid_plugin->version         = self::FAKE_VERSION;
-			$paid_plugin->tested          = self::$fake_compatible_with;
-
-			self::$plugin_card['paid'][]                              = 'wpglobus-language-widgets';
-			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
-			array_unshift( $res->plugins, $paid_plugin );
-
-			$paid_plugin                    = clone $res->plugins[0];
-			$slug                           = 'wpglobus-mobile-menu';
-			$paid_plugin->name              = 'WPGlobus Mobile Menu';
-			$paid_plugin->slug              = $slug;
-			$paid_plugin->short_description = __( 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.', 'wpglobus' );
-			$paid_plugin->homepage          = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
-
-			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
-			                            '/wpglobus-mobile-menu-logo-400x400.png';
-			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
-
-			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
-			$paid_plugin->version         = self::FAKE_VERSION;
-			$paid_plugin->tested          = self::$fake_compatible_with;
-
-			self::$plugin_card['paid'][]                              = 'wpglobus-mobile-menu';
-			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
-			array_unshift( $res->plugins, $paid_plugin );
-
-			$paid_plugin                    = clone $res->plugins[0];
-			$slug                           = 'woocommerce-nets-netaxept';
-			$paid_plugin->name              = 'WooCommerce Nets Netaxept';
-			$paid_plugin->slug              = $slug;
-			$paid_plugin->short_description = __( 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.', 'wpglobus' );
-			$paid_plugin->homepage          = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
-
-			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
-			                            '/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
-			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
-
-			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
-			$paid_plugin->version         = self::FAKE_VERSION;
-			$paid_plugin->tested          = self::$fake_compatible_with;
-
-			self::$plugin_card['paid'][]                              = 'woocommerce-nets-netaxept';
-			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
-			array_unshift( $res->plugins, $paid_plugin );
-
-			$paid_plugin                    = clone $res->plugins[0];
-			$slug                           = 'wpglobus-plus';
-			$paid_plugin->name              = 'WPGlobus Plus';
-			$paid_plugin->slug              = $slug;
-			$paid_plugin->short_description = __( 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.', 'wpglobus' );
-			$paid_plugin->homepage          = $url_wpglobus_site . 'product/wpglobus-plus/';
-
-			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
-			                            '/wpglobus-plus-logo-300x300.png';
-			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
-
-			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
-			$paid_plugin->version         = self::FAKE_VERSION;
-			$paid_plugin->tested          = self::$fake_compatible_with;
-
-			self::$plugin_card['paid'][]                              = 'wpglobus-plus';
-			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/wpglobus-plus/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions/wpglobus-plus/';
-			array_unshift( $res->plugins, $paid_plugin );
-
-			$paid_plugin                    = clone $res->plugins[0];
-			$slug                           = 'woocommerce-wpglobus';
-			$paid_plugin->name              = 'WooCommerce WPGlobus';
-			$paid_plugin->slug              = $slug;
-			$paid_plugin->short_description = __( 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.', 'wpglobus' );
-			$paid_plugin->homepage          = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
-
-			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
-			                            '/woocommerce-wpglobus-logo-300x300.png';
-			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
-
-			$paid_plugin->active_installs = self::FAKE_ACTIVE_INSTALLS;
-			$paid_plugin->version         = self::FAKE_VERSION;
-			$paid_plugin->tested          = self::$fake_compatible_with;
-
-			self::$plugin_card['paid'][]                              = 'woocommerce-wpglobus';
-			self::$paid_plugins[ $slug ]['card']                      = $paid_plugin;
-			self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
-			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions-archive/woocommerce/';
-			array_unshift( $res->plugins, $paid_plugin );
+			endforeach;
 
 			$res->info['results'] = count( $res->plugins );
 
 			return $res;
+		}
 
+		/**
+		 * Template for plugin info.
+		 *
+		 * @return stdClass
+		 */
+		protected static function _plugin_info_template() {
+			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
+
+			$template                    = new stdClass();
+			$template->name              = '';
+			$template->short_description = '';
+			$template->author            = '<a href="' . $url_wpglobus_site . '">WPGlobus</a>';
+			$template->author_profile    = $url_wpglobus_site;
+			$template->homepage          = $url_wpglobus_site;
+			$template->slug              = '';
+			$template->rating            = 100;
+			$template->num_ratings       = 0;
+			$template->active_installs   = self::FAKE_ACTIVE_INSTALLS;
+			$template->version           = self::FAKE_VERSION;
+			$template->tested            = self::$fake_compatible_with;
+			$template->icons['default']  = '';
+			$template->icons['2x']       = '';
+			$template->icons['1x']       = '';
+			$template->last_updated      = date( 'c' );
+
+			return $template;
 		}
 
 		/**
@@ -298,8 +306,9 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			if ( 'plugin-install.php' === $hook_page ) {
 
 				$i18n                    = array();
-				$i18n['current_version'] = __( 'Current Version', 'wpglobus' );
-				$i18n['get_it']          = __( 'Get it now!', 'wpglobus' );
+				$i18n['current_version'] = esc_html__( 'Current Version', 'wpglobus' );
+				$i18n['get_it']          = esc_html__( 'Get it now!', 'wpglobus' );
+				$i18n['card_header']     = esc_html__( 'Premium add-on', 'wpglobus' );
 
 				wp_register_script(
 					'wpglobus-plugin-install',
