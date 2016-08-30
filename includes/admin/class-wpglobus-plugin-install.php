@@ -139,9 +139,9 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			$paid_plugin->homepage = $url_wpglobus_site . 'product/wpglobus-header-images/';
 
-			$paid_plugin->icons['2x'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-hi-logo-400x400.png';
-
-			$paid_plugin->icons['1x'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-hi-logo-400x400.png';
+			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
+			                            '/wpglobus-hi-logo-400x400.png';
+			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
 			$paid_plugin->active_installs = 0;
 			$paid_plugin->version         = 999;  // Fake version to prevent the "Update Now" button from appearing.
@@ -163,10 +163,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				__( 'Display different widgets per language. Show or hide widgets depending on the current language set by WPGlobus', 'wpglobus' );
 			$paid_plugin->homepage          = $url_wpglobus_site .
 			                                  'product/wpglobus-language-widgets/';
-			$paid_plugin->icons['2x']       = WPGlobus::$PLUGIN_DIR_URL .
-			                                  'includes/css/images/wpglobus-lw-logo-400x400.png';
-			$paid_plugin->icons['1x']       = WPGlobus::$PLUGIN_DIR_URL .
-			                                  'includes/css/images/wpglobus-lw-logo-400x400.png';
+
+			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
+			                            '/wpglobus-lw-logo-400x400.png';
+			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
 
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;
@@ -177,14 +177,17 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-language-widgets/';
 			array_unshift( $res->plugins, $paid_plugin );
 
-			$paid_plugin                                              = clone $res->plugins[0];
-			$slug                                                     = 'wpglobus-mobile-menu';
-			$paid_plugin->name                                        = 'WPGlobus Mobile Menu';
-			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = __( 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.', 'wpglobus' );
-			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
-			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
-			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-mobile-menu-logo-400x400.png';
+			$paid_plugin                    = clone $res->plugins[0];
+			$slug                           = 'wpglobus-mobile-menu';
+			$paid_plugin->name              = 'WPGlobus Mobile Menu';
+			$paid_plugin->slug              = $slug;
+			$paid_plugin->short_description = __( 'Makes WPGlobus language switcher compatible with mobile devices and narrow screens.', 'wpglobus' );
+			$paid_plugin->homepage          = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
+
+			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
+			                            '/wpglobus-mobile-menu-logo-400x400.png';
+			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
+
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;
 			self::$plugin_card['paid'][]                              = 'wpglobus-mobile-menu';
@@ -193,14 +196,17 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/wpglobus-mobile-menu/';
 			array_unshift( $res->plugins, $paid_plugin );
 
-			$paid_plugin                                              = clone $res->plugins[0];
-			$slug                                                     = 'woocommerce-nets-netaxept';
-			$paid_plugin->name                                        = 'WooCommerce Nets Netaxept';
-			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = __( 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.', 'wpglobus' );
-			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
-			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
-			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
+			$paid_plugin                    = clone $res->plugins[0];
+			$slug                           = 'woocommerce-nets-netaxept';
+			$paid_plugin->name              = 'WooCommerce Nets Netaxept';
+			$paid_plugin->slug              = $slug;
+			$paid_plugin->short_description = __( 'With this add-on, you will be able to translate the Nets payment methods titles and descriptions to multiple languages.', 'wpglobus' );
+			$paid_plugin->homepage          = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
+
+			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
+			                            '/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
+			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
+
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;
 			self::$plugin_card['paid'][]                              = 'woocommerce-nets-netaxept';
@@ -209,14 +215,17 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'product/multilingual-woocommerce-nets-netaxept/';
 			array_unshift( $res->plugins, $paid_plugin );
 
-			$paid_plugin                                              = clone $res->plugins[0];
-			$slug                                                     = 'wpglobus-plus';
-			$paid_plugin->name                                        = 'WPGlobus Plus';
-			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = __( 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.', 'wpglobus' );
-			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/wpglobus-plus/';
-			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
-			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-plus-logo-300x300.png';
+			$paid_plugin                    = clone $res->plugins[0];
+			$slug                           = 'wpglobus-plus';
+			$paid_plugin->name              = 'WPGlobus Plus';
+			$paid_plugin->slug              = $slug;
+			$paid_plugin->short_description = __( 'With WPGlobus Plus, you will be able to hold incomplete translations as "drafts", translate URLs (post/page "slugs"), customize the menu language switcher layout and more.', 'wpglobus' );
+			$paid_plugin->homepage          = $url_wpglobus_site . 'product/wpglobus-plus/';
+
+			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
+			                            '/wpglobus-plus-logo-300x300.png';
+			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
+
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;
 			self::$plugin_card['paid'][]                              = 'wpglobus-plus';
@@ -225,14 +234,17 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $url_wpglobus_site . 'extensions/wpglobus-plus/';
 			array_unshift( $res->plugins, $paid_plugin );
 
-			$paid_plugin                                              = clone $res->plugins[0];
-			$slug                                                     = 'woocommerce-wpglobus';
-			$paid_plugin->name                                        = 'WooCommerce WPGlobus';
-			$paid_plugin->slug                                        = $slug;
-			$paid_plugin->short_description                           = __( 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.', 'wpglobus' );
-			$paid_plugin->homepage                                    = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
-			$paid_plugin->icons['2x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
-			$paid_plugin->icons['1x']                                 = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
+			$paid_plugin                    = clone $res->plugins[0];
+			$slug                           = 'woocommerce-wpglobus';
+			$paid_plugin->name              = 'WooCommerce WPGlobus';
+			$paid_plugin->slug              = $slug;
+			$paid_plugin->short_description = __( 'Makes WooCommerce-based online stores truly multilingual by allowing translating products, categories, tags and attributes to multiple languages.', 'wpglobus' );
+			$paid_plugin->homepage          = $url_wpglobus_site . 'product/woocommerce-wpglobus/';
+
+			$paid_plugin->icons['2x'] = WPGlobus::internal_images_url() .
+			                            '/woocommerce-wpglobus-logo-300x300.png';
+			$paid_plugin->icons['1x'] = $paid_plugin->icons['2x'];
+
 			$paid_plugin->active_installs                             = 0;
 			$paid_plugin->version                                     = 999;
 			self::$plugin_card['paid'][]                              = 'woocommerce-wpglobus';

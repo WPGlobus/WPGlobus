@@ -65,6 +65,15 @@ class WPGlobus {
 	public static $PLUGIN_DIR_URL = '';
 
 	/**
+	 * URL for internal images.
+	 *
+	 * @return string
+	 */
+	public static function internal_images_url() {
+		return self::$PLUGIN_DIR_URL . 'includes/css/images';
+	}
+
+	/**
 	 * @var bool $_SCRIPT_DEBUG Internal representation of the define('SCRIPT_DEBUG')
 	 */
 	protected static $_SCRIPT_DEBUG = false;
@@ -2865,17 +2874,17 @@ class WPGlobus {
 			 * Check for support 'title' and 'editor'
 			 */
 			/** @global WP_Post $post */
-			global $post; 
-			
+			global $post;
+
 			$post_type = '';
-			
+
 			if ( ! empty( $post ) && is_object( $post ) ) {
 				$post_type = $post->post_type;
 			}
-			
+
 			/**
 			 * Filter to define post type.
-			 * 
+			 *
 			 * Some plugins may rewrite global $post, e.g. @see https://wordpress.org/plugins/geodirectory/
 			 * so user need to try define and return correct post type using filter to avoid PHP Notice: Trying to get property of non-object.
 			 *
@@ -2886,7 +2895,7 @@ class WPGlobus {
 			 *
 			 * @return string.
 			 */
-			$post_type = apply_filters( 'wpglobus_user_defined_post_type', $post_type, $post );			
+			$post_type = apply_filters( 'wpglobus_user_defined_post_type', $post_type, $post );
 
 			if ( ! empty( $post_type ) ) {
 				if ( ! empty( $post ) && ! post_type_supports( $post_type, 'title' ) && ! post_type_supports( $post_type, 'editor' ) ) {
