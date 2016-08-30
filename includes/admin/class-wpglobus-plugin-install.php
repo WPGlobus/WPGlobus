@@ -35,13 +35,6 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		static protected $free_plugins = array();
 
 		/**
-		 * Internal representation of the define('SCRIPT_DEBUG').
-		 *
-		 * @var bool
-		 */
-		static protected $_SCRIPT_DEBUG = false;
-
-		/**
 		 * Whether to use minimized or full versions of JS and CSS.
 		 *
 		 * @var string
@@ -66,7 +59,6 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			}
 
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				self::$_SCRIPT_DEBUG  = true;
 				self::$_SCRIPT_SUFFIX = '';
 			}
 
