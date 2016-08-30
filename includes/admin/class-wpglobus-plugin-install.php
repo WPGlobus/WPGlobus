@@ -35,13 +35,6 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		static protected $free_plugins = array();
 
 		/**
-		 * Whether to use minimized or full versions of JS and CSS.
-		 *
-		 * @var string
-		 */
-		static protected $_SCRIPT_SUFFIX = '.min';
-
-		/**
 		 * Controller.
 		 */
 		public static function controller() {
@@ -56,10 +49,6 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			if ( 'WPGlobus' !== $_GET['source'] || 'WPGlobus' !== $_GET['s'] ) {
 				return;
-			}
-
-			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				self::$_SCRIPT_SUFFIX = '';
 			}
 
 			self::$plugin_card['free'] = array();
@@ -273,7 +262,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 				wp_register_script(
 					'wpglobus-plugin-install',
-					dirname( plugin_dir_url( __FILE__ ) ) . '/js/wpglobus-plugin-install' . self::$_SCRIPT_SUFFIX . '.js',
+					dirname( plugin_dir_url( __FILE__ ) ) . '/js/wpglobus-plugin-install' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 					array( 'jquery' ),
 					WPGLOBUS_VERSION,
 					true
