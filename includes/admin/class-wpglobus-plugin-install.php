@@ -221,7 +221,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 							'Description' => '',
 							'Name'        => $plugin_info->title,
 							'Title'       => $plugin_info->title,
-							'Version'     => $plugin_info->_product_version,
+							'Version'     => $plugin_info->_api_new_version,
 							'PluginURI'   => $url_wpglobus_site . 'product/' .
 							                 $product_slug . '/',
 						);
