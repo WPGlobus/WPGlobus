@@ -204,6 +204,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
 
+			$all_products = self::_get_all_product_info_from_server();
+
 			foreach ( self::$paid_plugins as $plugin => $plugin_data ) {
 
 				if ( file_exists( $plugin_data['dir'] ) ) {
@@ -213,15 +215,17 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 					$product_slug = ( isset( $plugin_data['product_slug'] ) ? $plugin_data['product_slug'] : $plugin );
 
-					$api_response = wp_safe_remote_get( $url_wpglobus_site . 'wc-api/wpglobus-product-info?slug=' . $product_slug );
-					if ( ! empty( $api_response['body'] ) ) {
-						$plugin_info = json_decode( $api_response['body'] );
+					if ( isset( $all_products[ $product_slug ] ) ) {
+						$plugin_info = $all_products[ $product_slug ];
+
+						// Titles come as multilingual strings.
+						$_plugin_title = WPGlobus_Filters::filter__text( $plugin_info['title'] );
 
 						self::$paid_plugins[ $plugin ]['plugin_data'] = array(
-							'Description' => '',
-							'Name'        => $plugin_info->title,
-							'Title'       => $plugin_info->title,
-							'Version'     => $plugin_info->_api_new_version,
+							'Description' => '', // TODO.
+							'Name'        => $_plugin_title,
+							'Title'       => $_plugin_title,
+							'Version'     => $plugin_info['_api_new_version'],
 							'PluginURI'   => $url_wpglobus_site . 'product/' .
 							                 $product_slug . '/',
 						);
@@ -266,6 +270,34 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$res->info['results'] = count( $res->plugins );
 
 			return $res;
+		}
+
+		/**
+		 * Call the WPGlobus server to get information about all premium plugins.
+		 *
+		 * @return array[]
+		 */
+		protected static function _get_all_product_info_from_server() {
+			$all_product_info = get_transient( 'wpglobus_all_product_info' );
+			if ( false === $all_product_info ) {
+
+				$all_product_info = array();
+
+				$http_response = wp_safe_remote_get(
+					WPGlobus_Utils::url_wpglobus_site() . 'wc-api/wpglobus-product-info'
+				);
+				if ( ! empty( $http_response['body'] ) ) {
+					$_decoded_json = json_decode( $http_response['body'], true );
+					if ( is_array( $_decoded_json ) ) {
+						$all_product_info = $_decoded_json;
+						set_transient( 'wpglobus_all_product_info',
+							$all_product_info, DAY_IN_SECONDS
+						);
+					}
+				}
+			}
+
+			return $all_product_info;
 		}
 
 		/**
