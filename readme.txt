@@ -157,6 +157,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.6.3 =
+
+* FIXED:
+	* Yoast: empty focus keyword when saving post with active extra language tab.
+
 = 1.6.2 =
 
 * FIXED:
@@ -185,51 +190,6 @@ No known backward incompatibility issues.
 	* Customizer: In the `Language Selector Menu`, if no menus created yet, show a link to create menus.
 	* Customizer: Filter to disable WPGlobus customizer for specific themes.
 	* Widgets: Language-dependent conditions if the `Widget Logic` plugin is active.
-
-= 1.5.10 =
-
-* FIXED:
-	* Yoast: Compatibility with version 3.4.
-* ADDED:
-	* Customizer: Link to open the `Plugin Install` page.
-	* Options: Show which languages are installed in the `Languages Table`.
-
-= 1.5.9 =
-
-* ADDED:
-	* Add-ons: Show a combined list of free and premium WPGlobus extensions.
-
-= 1.5.8 =
-
-* FIXED:
-	* Yoast: switching to "Readability" tab (WPSEO issue #5013, Ticket #8628).
-* ADDED:
-	* Core: flag for American Sign Language (ASL) (Ticket #8497).
-	* API: new filter `wpglobus_menu_add_selector`.
-	* API: new filter to modify language selector items generated from pages.
-
-= 1.5.7 =
-
-* FIXED:
-	* Yoast: Compatibility with 3.3.1.
-	* Yoast: Correctly handle the analysis section for extra languages.
-	* Yoast: Fixed progress bar in the Snippet Editor.
-	* Revslider: Don't load JS when the links in slides are empty.
-	* Core: No fatal error if the `mbstring` PHP extension is not loaded.
-
-= 1.5.6 =
-
-* ADDED:
-	* Compatibility with Yoast SEO version 3.3.0.
-
-= 1.5.5 =
-
-* FIXED:
-	* Taxonomy slug re-generation when the title is already multilingual.
-	* Invalid Yoast SEO titles in some specific cases.
-	* Flag for `uk_UA`.
-* ADDED:
-	* Trigger the `wpglobus_current_language_changed` jQuery event when the current language changes.
 
 = Earlier versions =
 
