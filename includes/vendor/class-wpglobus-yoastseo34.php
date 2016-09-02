@@ -40,25 +40,33 @@ class WPGlobus_YoastSEO {
 					 * To translate Yoast columns on edit.php page
 					 */
 					add_filter( 'esc_html', array(
-						'WPGlobus_YoastSEO',
+						__CLASS__,
 						'filter__wpseo_columns'
 					), 0 );
 
 				}
-
+				
+				/**
+				 * @since 1.6.3
+				 */
+				add_action( 'wpseo_save_compare_data', array(
+					__CLASS__,
+					'action__save_compare_data'
+				) );
+				
 				add_action( 'admin_print_scripts', array(
-					'WPGlobus_YoastSEO',
+					__CLASS__,
 					'action__admin_print_scripts'
 				) );
 
 				add_action( 'wpseo_tab_content', array(
-					'WPGlobus_YoastSEO',
+					__CLASS__,
 					'action__wpseo_tab_content'
 				), 11 );
 
 				if ( WPGlobus_WP::is_pagenow( array( 'edit-tags.php', 'term.php' ) ) ) {
 					add_filter( 'wp_default_editor', array(
-						'WPGlobus_YoastSEO',
+						__CLASS__,
 						'set_default_editor'
 					) );
 				}
@@ -76,6 +84,20 @@ class WPGlobus_YoastSEO {
 
 		}
 
+	}
+	
+	/**
+	 * Fix empty yoast_wpseo_focuskw while saving/updating post with active extra language.
+	 *
+	 * @since 1.6.3
+	 * @see wordpress-seo\admin\metabox\class-metabox.php
+	 */
+	public static function action__save_compare_data() {
+		if ( empty( $_POST[ 'yoast_wpseo_focuskw' ] ) ) {
+			if ( ! empty( $_POST[ 'yoast_wpseo_focuskw_text_input' ] ) ) {
+				$_POST[ 'yoast_wpseo_focuskw' ] = $_POST[ 'yoast_wpseo_focuskw_text_input' ];
+			}
+		}		
 	}
 
 	/**
