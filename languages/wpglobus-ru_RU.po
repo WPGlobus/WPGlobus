@@ -1,13 +1,13 @@
 # Copyright (C) 2016 WPGlobus
-# This file is distributed under the GPL2.
+# This file is distributed under the GPL-3.0.
 # Translators:
-# Gregory Karpinsky <gregory@tiv.net>, 2015
+# Gregory Karpinsky <gregory@tiv.net>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-30 23:45:12+00:00\n"
-"PO-Revision-Date: 2016-08-14 00:27-0400\n"
+"POT-Creation-Date: 2016-09-11 17:14:35+00:00\n"
+"PO-Revision-Date: 2016-09-11 16:58+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -18,14 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-Country: United States\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c\n"
+"esc_html_x:1,2c;\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: includes/admin/class-wpglobus-about.php:42
 #: includes/admin/class-wpglobus-clean.php:581
@@ -603,19 +604,19 @@ msgstr "Сохранить изменения"
 msgid "Back to the WPGlobus Settings"
 msgstr "Вернуться к настройкам WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:309
+#: includes/admin/class-wpglobus-plugin-install.php:341
 msgid "Current Version"
 msgstr "Текущая версия"
 
-#: includes/admin/class-wpglobus-plugin-install.php:310
+#: includes/admin/class-wpglobus-plugin-install.php:342
 msgid "Get it now!"
 msgstr "Установить!"
 
-#: includes/admin/class-wpglobus-plugin-install.php:311
+#: includes/admin/class-wpglobus-plugin-install.php:343
 msgid "Premium add-on"
 msgstr "Платное расширение"
 
-#: includes/admin/class-wpglobus-plugin-install.php:312
+#: includes/admin/class-wpglobus-plugin-install.php:344
 #: includes/options/fields/table/table-languages.php:389
 msgid "Installed"
 msgstr "Установлен"

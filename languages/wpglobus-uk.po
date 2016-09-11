@@ -1,12 +1,13 @@
 # Copyright (C) 2016 WPGlobus
-# This file is distributed under the GPL2.
+# This file is distributed under the GPL-3.0.
 # Translators:
+# Gregory Karpinsky <gregory@tiv.net>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-30 23:45:12+00:00\n"
-"PO-Revision-Date: 2016-08-14 10:59+0000\n"
+"POT-Creation-Date: 2016-09-11 17:14:35+00:00\n"
+"PO-Revision-Date: 2016-09-11 17:13+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/uk/)\n"
@@ -248,15 +249,15 @@ msgstr "За умовчанням"
 
 #: includes/admin/class-wpglobus-customize-options.php:263
 msgid "Section"
-msgstr ""
+msgstr "Розділ"
 
 #: includes/admin/class-wpglobus-customize-options.php:276
 msgid "Show all sections"
-msgstr ""
+msgstr "Показати всі розділи"
 
 #: includes/admin/class-wpglobus-customize-options.php:278
 msgid "Save &amp; Reload"
-msgstr ""
+msgstr "Зберегти та перезавантажити"
 
 #. Author of the plugin/theme
 msgid "WPGlobus"
@@ -266,6 +267,8 @@ msgstr "WPGlobus"
 msgid ""
 "You need to update WordPress to 4.5 or later to get Fields Settings section"
 msgstr ""
+"Вам потрібно оновити WordPress 4.5 або пізнішої версії щоб отримати розділ "
+"Параметри поля"
 
 #: includes/admin/class-wpglobus-customize-options.php:544
 msgid "Fields Settings"
@@ -412,6 +415,8 @@ msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button below."
 msgstr ""
+"Тут ви можете вказати, які поля слід вважати багатомовний за WPGlobus. Щоб "
+"виключити поля, зніміть його та натисніть кнопку нижче."
 
 #: includes/admin/class-wpglobus-customize-options.php:1068
 #: includes/options/class-wpglobus-options.php:167
@@ -595,22 +600,22 @@ msgstr "Зберегти зміни"
 msgid "Back to the WPGlobus Settings"
 msgstr "Повернутися до налаштувань WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:309
+#: includes/admin/class-wpglobus-plugin-install.php:341
 msgid "Current Version"
-msgstr ""
+msgstr "Поточна версія"
 
-#: includes/admin/class-wpglobus-plugin-install.php:310
+#: includes/admin/class-wpglobus-plugin-install.php:342
 msgid "Get it now!"
-msgstr ""
+msgstr "Завантажити зараз!"
 
-#: includes/admin/class-wpglobus-plugin-install.php:311
+#: includes/admin/class-wpglobus-plugin-install.php:343
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:312
+#: includes/admin/class-wpglobus-plugin-install.php:344
 #: includes/options/fields/table/table-languages.php:389
 msgid "Installed"
-msgstr ""
+msgstr "Встановлено"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -936,7 +941,7 @@ msgstr "Деактивувати ліцензійний ключ"
 
 #: updater/class-wpglobus-updater-admin.php:205
 msgid "Please contact support@wpglobus.com for assistance."
-msgstr ""
+msgstr "Зверніться за допомогою support@wpglobus.com."
 
 #: updater/class-wpglobus-updater-admin.php:211
 msgid "Active"
@@ -957,7 +962,7 @@ msgstr "Не вдалося з'єднатися з сервером. Спроб�
 #: updater/class-wpglobus-updater-admin.php:391
 #: updater/class-wpglobus-updater-requests.php:72
 msgid "The License Key / Email pair is empty or invalid."
-msgstr ""
+msgstr "Ліцензійний ключ / електронна пошта пара є пустий або неприпустимий."
 
 #: updater/class-wpglobus-updater-admin.php:421
 msgid ""
@@ -1045,11 +1050,11 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-requests.php:159
 msgid "Licensing server connection error."
-msgstr ""
+msgstr "Помилка сервера."
 
 #: updater/class-wpglobus-updater-requests.php:170
 msgid "Licensing server connection error (%d)."
-msgstr ""
+msgstr "Помилка сервера (%d)."
 
 #: updater/class-wpglobus-updater.php:177
 msgid "License"

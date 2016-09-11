@@ -1,5 +1,5 @@
 # Copyright (C) 2016 WPGlobus
-# This file is distributed under the GPL2.
+# This file is distributed under the GPL-3.0.
 # Translators:
 # Franck, 2015
 # FX Bénard <fxb@wp-translations.org>, 2015
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-08-30 23:45:12+00:00\n"
-"PO-Revision-Date: 2016-08-14 11:05+0000\n"
+"POT-Creation-Date: 2016-09-11 17:14:35+00:00\n"
+"PO-Revision-Date: 2016-09-11 16:52+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_CA/)\n"
@@ -580,19 +580,19 @@ msgstr "Enregistrer les modifications"
 msgid "Back to the WPGlobus Settings"
 msgstr "Retour aux réglages de WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:309
+#: includes/admin/class-wpglobus-plugin-install.php:341
 msgid "Current Version"
 msgstr "Version actuelle"
 
-#: includes/admin/class-wpglobus-plugin-install.php:310
+#: includes/admin/class-wpglobus-plugin-install.php:342
 msgid "Get it now!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:311
+#: includes/admin/class-wpglobus-plugin-install.php:343
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:312
+#: includes/admin/class-wpglobus-plugin-install.php:344
 #: includes/options/fields/table/table-languages.php:389
 msgid "Installed"
 msgstr "Installée"
