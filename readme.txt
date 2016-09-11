@@ -14,7 +14,13 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual / multilingual WordPress blogs and sites.
 
-> **WPGlobus**
+**IMPORTANT NOTES!**
+---------------
+* Some themes and 3rd party plugins are **not 100% WPGlobus-ready**. Read the "Compatibility" section below for details.
+* The **multisite** mode is not officially supported. Some things might not work.
+* We do not test our code with **old PHP** and **old WordPress** versions. Please upgrade.
+
+> **What is WPGlobus?**
 
 The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 
@@ -41,6 +47,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 * [WPGlobus Header Images](http://www.wpglobus.com/product/wpglobus-header-images/): Display different header images per language. Show images depending on the settings in customizer.
 * [WPGlobus Menu Visibility](http://www.wpglobus.com/product/wpglobus-menu-visibility/): Show of hide menu items depending on the current language.
 * [WPGlobus Mobile Menu](http://www.wpglobus.com/product/wpglobus-mobile-menu/): makes the WPGlobus language switcher menu compatible with mobile devices and narrow screens.
+* [WPGlobus for Slider Revolution](http://www.wpglobus.com/product/wpglobus-for-slider-revolution/): Adds multilingual capabilities to the Slider Revolution plugin.
 * [Multilingual WooCommerce Nets Netaxept](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
 
 = Compatibility with Themes =
@@ -56,21 +63,21 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 WPGlobus is compatible with many plugins, including but not limited to:
 
-* Advanced Custom Fields (ACF)
-* All in One SEO Pack
-* Black Studio TinyMCE Widget (with our free add-on)
-* MailChimp for WordPress
-* Max Mega Menu
-* Popups - WordPress Popup
-* Sidebar Login
-* Slider Revolution
-* The Events Calendar
-* WPBakery Visual Composer (with our free add-on)
-* Whistles
-* Widget Logic
-* WooCommerce and some of its extensions ([WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/) premium add-on is required)
-* WordPress WooCommerce Nets Netaxept Payment Plugin by sellxed/customweb - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
-* Yoast SEO. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is not required but highly recommended.
+* Advanced Custom Fields (ACF),
+* All in One SEO Pack,
+* Black Studio TinyMCE Widget (with our free add-on),
+* MailChimp for WordPress,
+* Max Mega Menu,
+* Popups - WordPress Popup,
+* Sidebar Login,
+* Slider Revolution - with our [premium add-on](http://www.wpglobus.com/product/wpglobus-for-slider-revolution/),
+* The Events Calendar,
+* WPBakery Visual Composer (with our free add-on),
+* Whistles,
+* Widget Logic,
+* WooCommerce and some of its extensions - [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/) premium add-on is required,
+* WordPress WooCommerce Nets Netaxept Payment Plugin by `sellxed/customweb` - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/),
+* Yoast SEO. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis.
 
 = Permalinks =
 
@@ -132,11 +139,11 @@ Then please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/).
 
 From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
-* [Do you support PHP 5.x?](http://www.wpglobus.com/faq/support-php-5-2/)
+* [Do you support PHP 5.x? PHP 7?](http://www.wpglobus.com/faq/support-php-5-2/)
 * [Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x?](http://www.wpglobus.com/faq/support-msie-opera-safari-chrome-firefox/)
 * [Do you plan to support subdomains and URL query parameters?](http://www.wpglobus.com/faq/subdomains-and-url-query-parameters/)
 * [I am using WPML (qTranslate, Polylang, Multilingual Press, etc.). Can I switch to WPGlobus?](http://www.wpglobus.com/faq/i-am-using-wpml-qtranslate-polylang-multilingual-press-etc-can-i-switch-to-wpglobus/)
-* [Do you plan to support WooCommerce, EDD, other e-Commerce plugins?](http://www.wpglobus.com/faq/support-woocommerce-edd/)
+* [Do you support WooCommerce, EDD, other e-Commerce plugins?](http://www.wpglobus.com/faq/support-woocommerce-edd/)
 * [Is it possible to set the user's language automatically based on IP and/or browser language?](http://www.wpglobus.com/faq/set-language-by-ip/)
 * [How do I contribute to WPGlobus?](http://www.wpglobus.com/faq/how-do-i-contribute-to-wpglobus/)
 
