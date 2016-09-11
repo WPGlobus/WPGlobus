@@ -161,6 +161,9 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Yoast: empty focus keyword when saving post with active extra language tab.
+	* Add-ons: better interface; get information from the server.
+	* Updater: do not offer upgrades if `.git` folder exists.
+	* Internal: some code/comments cleanup to avoid `PHPStorm`, `WPCS`, and `php7cc` notices.
 
 = 1.6.2 =
 
