@@ -15,7 +15,7 @@
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.6.3
+ * Version: 1.6.4
  * Author: WPGlobus
  * Author URI: http://www.wpglobus.com/
  * Network: false
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.6.3' );
+define( 'WPGLOBUS_VERSION', '1.6.4' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /** @todo Get rid of these */
