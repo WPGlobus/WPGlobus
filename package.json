@@ -27,7 +27,7 @@
     "url": "https://github.com/WPGlobus/wpglobus/issues"
   },
   "author": "The WPGlobus Team",
-  "license": "GPLv2+",
+  "license": "GPL-3.0",
   "main": "Gruntfile.js",
   "devDependencies": {
     "grunt": "^1.0.1",
