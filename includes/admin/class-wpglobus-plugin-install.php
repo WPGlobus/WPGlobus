@@ -135,6 +135,13 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 					'order' => 5,
 				),
+				'wpglobus-revslider' => array(
+					'dir'          => WP_PLUGIN_DIR .
+					                  '/wpglobus-revslider/wpglobus-revslider.php',
+					'product_slug' => 'wpglobus-for-slider-revolution',
+					'image_file'   => 'wpglobus-revslider-logo-400x400.png',
+					'order' => 4,
+				)
 			);
 
 			uasort( self::$paid_plugins, array( __CLASS__, 'sort_callback' ) );
