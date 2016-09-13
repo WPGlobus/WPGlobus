@@ -1,4 +1,11 @@
 <?php
+/**
+ * File: table-languages.php
+ *
+ * @package     WPGlobus\Admin\Options\Field
+ * @author      WPGlobus
+ */
+
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }

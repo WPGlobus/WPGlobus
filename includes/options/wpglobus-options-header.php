@@ -1,16 +1,18 @@
 <?php
 /**
- * Options panel heading
+ * File: wpglobus-options-header.php
  *
- * @package WPGlobus/Admin
+ * @package     WPGlobus\Admin\Options
+ * @author      WPGlobus
  */
+
 ob_start();
 ?>
-	<h1>WPGlobus <?php echo WPGLOBUS_VERSION; ?></h1>
+	<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 	<div class="wpg-bnr wpg-bnr-left">
 		<a class="wpg-a-img"
 		   href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=SLF8M4YNZHNQN">
-			<img src="<?php echo WPGlobus::$PLUGIN_DIR_URL; ?>includes/css/images/btn_donateCC_LG_global.gif"
+			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/btn_donateCC_LG_global.gif"
 			     style="margin-top: 27px;"/>
 		</a>
 
@@ -29,7 +31,7 @@ ob_start();
 		</div>
 	</div>
 
-<?php if ( ! defined( 'WPGLOBUS_PLUS_VERSION' ) ): ?>
+<?php if ( ! defined( 'WPGLOBUS_PLUS_VERSION' ) ) : ?>
 	<?php
 	$_url_wpglobus_plus_store = WPGlobus_Utils::url_wpglobus_site() .
 	                            'product/wpglobus-plus/';
@@ -37,8 +39,8 @@ ob_start();
 	                            'includes/css/images/wpglobus-plus-logo-150x150.png';
 	?>
 	<div class="wpg-bnr wpg-bnr-right">
-		<a class="wpg-a-img" href="<?php echo $_url_wpglobus_plus_store; ?>">
-			<img src="<?php echo $_url_wpglobus_plus_logo; ?>"
+		<a class="wpg-a-img" href="<?php echo esc_url( $_url_wpglobus_plus_store ); ?>">
+			<img src="<?php echo esc_url( $_url_wpglobus_plus_logo ); ?>"
 			     alt="WPGlobus Plus"/>
 		</a>
 
@@ -50,7 +52,7 @@ ob_start();
 			</div>
 
 			<div class="wpg-footer">
-				<a href="<?php echo $_url_wpglobus_plus_store; ?>"
+				<a href="<?php echo esc_url( $_url_wpglobus_plus_store ); ?>"
 				   style="color: #990000; font-weight: 700;">
 					<?php esc_html_e( 'Get WPGlobus Plus now!', 'wpglobus' ); ?>
 				</a>
@@ -64,4 +66,4 @@ ob_start();
 <?php
 return ob_get_clean();
 
-# --- EOF
+/*EOF*/

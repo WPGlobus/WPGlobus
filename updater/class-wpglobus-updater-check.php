@@ -2,7 +2,7 @@
 /**
  * Check Update Status
  *
- * @package WPGlobus/Updater
+ * @package   WPGlobus\Updater
  */
 
 // Exit if accessed directly

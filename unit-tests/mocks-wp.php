@@ -2,7 +2,7 @@
 /**
  * WordPress utilities mocks
  *
- * @package WPGlobus
+ * @package WPGlobus\Unit-Tests
  */
 
 /**

@@ -1,4 +1,9 @@
 <?php
+/**
+ * File: class-wpglobus-utils.php
+ *
+ * @package WPGlobus
+ */
 
 /**
  * Class WPGlobus_Utils

@@ -1,7 +1,8 @@
 <?php
 /**
  * Unit test for Class WPGlobus_WP
- * @package WPGlobus
+ *
+ * @package WPGlobus\Unit-Tests
  */
 require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-wp.php';
 
@@ -216,7 +217,6 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 			array( new stdClass(), 'abc' )
 		) );
 	}
-
 } // class
 
 # --- EOF

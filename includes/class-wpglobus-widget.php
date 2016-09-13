@@ -6,7 +6,7 @@
  */
 
 /**
- * class WPGlobusWidget
+ * Class WPGlobusWidget
  */
 class WPGlobusWidget extends WP_Widget {
 
@@ -21,7 +21,7 @@ class WPGlobusWidget extends WP_Widget {
 	/**
 	 * Constructor
 	 */
-	function __construct() {
+	public function __construct() {
 		parent::__construct(
 			'wpglobus',
 			__( 'WPGlobus widget', 'wpglobus' ),
@@ -91,7 +91,7 @@ class WPGlobusWidget extends WP_Widget {
 				$code = '<div class="flags-styled">{{inside}}</div>';
 				break;
 		endswitch;
-		
+
 		/**
 		 * Filter enabled languages.
 		 *
@@ -102,21 +102,21 @@ class WPGlobusWidget extends WP_Widget {
 		 * @param array     $enabled_languages 			 An array with languages to show off in menu.
 		 * @param string    WPGlobus::Config()->language The current language.
 		 */
-		$enabled_languages = apply_filters( 'wpglobus_extra_languages', $enabled_languages, WPGlobus::Config()->language );			
-		
+		$enabled_languages = apply_filters( 'wpglobus_extra_languages', $enabled_languages, WPGlobus::Config()->language );
+
 		/**
 		 * Class for link in a and option tags. Used for adding hash.
-		 * @see class wpglobus-selector-link 
+		 * @see class wpglobus-selector-link
 		 * @since 1.2.0
 	     */
 		$link_classes['selector_link'] = 'wpglobus-selector-link';
-		
+
 		/**
 		 * Class for flag box
 		 * @since 1.4.0
 		 */
 		$flag_classes = array();
-		
+
 		echo $args['before_widget'];
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
@@ -124,17 +124,17 @@ class WPGlobusWidget extends WP_Widget {
 		foreach ( $enabled_languages as $language ) :
 
 			$selected = '';
-			
+
 			/**
 			 * Init current language class
 			 */
 			$link_classes['current_language'] = '';
-			
+
 			/**
 			 * Init current language class for flag box
 			 */
-			$flag_classes['current_language'] = '';			
-			
+			$flag_classes['current_language'] = '';
+
 			if ( $language == WPGlobus::Config()->language ) {
 				$selected = ' selected';
 				switch ( $type ) :
@@ -143,11 +143,11 @@ class WPGlobusWidget extends WP_Widget {
 					break;
 					case 'list' :
 					case 'list_with_flags' :
-					case 'dropdown' :	
-					case 'dropdown_with_flags' :	
+					case 'dropdown' :
+					case 'dropdown_with_flags' :
 						$link_classes['current_language'] = 'wpglobus-current-language';
 					break;
-				endswitch;				
+				endswitch;
 			}
 
 			$url = WPGlobus_Utils::localize_current_url( $language );

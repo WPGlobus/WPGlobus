@@ -1,4 +1,10 @@
 <?php
+/**
+ * File: field_post_types.php
+ *
+ * @package     WPGlobus\Admin\Options\Field
+ * @author      WPGlobus
+ */
 
 if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 
@@ -43,13 +49,13 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 			/** @var array $options */
 			$options = get_option( 'wpglobus_option' );
 			$options_post_types = empty( $options['post_type'] ) ? array() : $options['post_type'];
-	
+
 			/**
 			 * Add CPT from woocommerce
 			 * moved to class-wpglobus.php:175
 			 * @todo remove after test
 			 */
-			/* 
+			/*
 			$disabled_post_types = array();
 			$disabled_post_types[] = 'product';
 			$disabled_post_types[] = 'product_variation';
@@ -60,25 +66,25 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 			// */
 
 			$enabled_post_types = array();
-			
+
 			foreach( $post_types as $post_type ) {
-					
+
 				if ( in_array( $post_type, WPGlobus::Config()->disabled_entities, true ) ) {
-					
+
 					if ( array_key_exists( $post_type, $options_post_types ) ) {
 						/**
 						 * Add to enabled_post_types array for WPGlobus Post types setting page
-						 */							
+						 */
 						$enabled_post_types[] = $post_type;
-						
-					}	
-					
-				} else {	
+
+					}
+
+				} else {
 					$enabled_post_types[] = $post_type;
 				}
 
-			}	
-			
+			}
+
 			wp_enqueue_script(
 				'wpglobus-redux-field-post_types',
 				plugins_url( '/field_post_types' . WPGlobus::SCRIPT_SUFFIX() . '.js', __FILE__ ),
@@ -93,7 +99,7 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 					'post_type' => $enabled_post_types,
 					'options' 	=> $options_post_types
 				)
-			);			
+			);
 
 		}
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   WPGlobus
+ * @package   WPGlobus\All-in-One-SEO
  */
 
 /**
@@ -15,14 +15,14 @@ function aioseop_mrt_pccolumn($aioseopcn, $aioseoppi) {
 	if ( !$target ) return;
 	if( current_user_can( 'edit_post', $id ) ) { ?>
 		<div class="aioseop_mpc_admin_meta_container">
-			<div 	class="aioseop_mpc_admin_meta_options" 
-					id="aioseop_<?php print $target; ?>_<?php echo $id; ?>" 
+			<div 	class="aioseop_mpc_admin_meta_options"
+					id="aioseop_<?php print $target; ?>_<?php echo $id; ?>"
 					style="float:left;">
-				<?php $content = strip_tags( stripslashes( get_post_meta( $id, "_aioseop_" . $target,	TRUE ) ) ); 
+				<?php $content = strip_tags( stripslashes( get_post_meta( $id, "_aioseop_" . $target,	TRUE ) ) );
 			if( !empty($content) ):
 				$content = WPGlobus_Core::text_filter( $content, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
-				$label = "<label id='aioseop_label_{$target}_{$id}'>" . $content . '</label>';  
-			else: 
+				$label = "<label id='aioseop_label_{$target}_{$id}'>" . $content . '</label>';
+			else:
 				$label = "<label id='aioseop_label_{$target}_{$id}'></label><strong><i>No " . $target . '</i></strong>';
 			endif;
 				$nonce = wp_create_nonce( "aioseop_meta_{$target}_{$id}" );
@@ -37,24 +37,22 @@ function aioseop_mrt_pccolumn($aioseopcn, $aioseoppi) {
 	<?php }
 }
 
-/** @noinspection PhpIncludeInspection */
+/* @noinspection PhpIncludeInspection */
 require_once( AIOSEOP_PLUGIN_DIR . 'aioseop_class.php' );
 
 /**
  * Class WPGlobus_All_in_One_SEO
  */
-
-/** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
-		
+
 	private $wpg_language = '';
-	
-	function __construct() {
+
+	public function __construct() {
 	}
 
 	/**
 	 * Filter for post title
-	 * 
+	 *
 	 * @since 1.0.8
 	 * @param string $text
 	 *
@@ -63,53 +61,53 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	public static function filter__title( $text ) {
 
 		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			return $text;	
-		}	
-		
-		global $post; 
-		
+			return $text;
+		}
+
+		global $post;
+
 		$title = $text;
 
 		if ( is_singular() ) {
-		
+
 			$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
-			
-			if ( empty( $title_source ) ) { 
+
+			if ( empty( $title_source ) ) {
 				$default_title = null;
 			} else {
-				$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );	
-			}	
-			
+				$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );
+			}
+
 			if ( $default_title != null && false !== strpos( mb_strtolower($text), mb_strtolower($default_title) ) ) {
 
 				/**
-				 * Because we have not translation of SEO title for current language need to autogenerate it 
-				 */					
+				 * Because we have not translation of SEO title for current language need to autogenerate it
+				 */
 				if ( false === strpos( $text, '|' ) ) {
 					$title = $post->post_title;
-					
+
 				} else {
-					
+
 					$title_arr = explode( '|', $text );
 					$title = $post->post_title;
 					$title .= ' |';
 					$title .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null );
-						
+
 				}
-				
+
 			} else {
 				$title = $text;
-			}	
-		
+			}
+
 		}
 
 		return $title;
-	
+
 	}
-	
+
 	/**
 	 * Filter for post description
-	 * 
+	 *
 	 * @since 1.0.8
 	 * @param string $text
 	 *
@@ -118,24 +116,24 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	public static function filter__description( $text ) {
 
 		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			return $text;	
+			return $text;
 		}
-		
-		global $post; 
+
+		global $post;
 
 		$description_source = get_post_meta( $post->ID, "_aioseop_description", true );
 		$default_description = WPGlobus_Core::text_filter( $description_source, WPGlobus::Config()->default_language );
 
 		if ( $default_description == $text ) {
-			
+
 			/**
-			 * Because we have not translation of SEO description for current language need to autogenerate it 
+			 * Because we have not translation of SEO description for current language need to autogenerate it
 			 * @see get_post_description() in original plugin
 			 */
-			$aio = new All_in_One_SEO_Pack(); 
-			 
-			$aioseop_options = get_option('aioseop_options'); 
-			
+			$aio = new All_in_One_SEO_Pack();
+
+			$aioseop_options = get_option('aioseop_options');
+
 			if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) )
 				$description = $aio->trim_excerpt_without_filters_full_length( $post->post_excerpt );
 			if ( !$description && $aioseop_options["aiosp_generate_descriptions"] ) {
@@ -144,34 +142,34 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 				$content = wp_strip_all_tags( $content );
 				$description = $aio->trim_excerpt_without_filters( $content );
 			}
-			
+
 			// "internal whitespace trim"
 			$description = preg_replace( "/\s\s+/u", " ", $description );
-			 
-			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
-			 
-		} else {
-			$description = $text;	
-		}	
 
-		return $description;	
-	
-	}	
-	
+			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
+
+		} else {
+			$description = $text;
+		}
+
+		return $description;
+
+	}
+
 	function wpg_get_option_row( $name, $opts, $args, $language ) {
 
 		$this->wpg_language = $language;
-		
+
 		$r =  $this->get_option_row( $name, $opts, $args );
 
 		return $r;
-	
+
 	}
-	
+
 	/**
 	 * Format a row for an option on a settings page.
 	 */
-	function get_option_row( $name, $opts, $args ) { 
+	function get_option_row( $name, $opts, $args ) {
 
 		$language = '_'.$this->wpg_language;
 
@@ -181,7 +179,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		else
 			$align = 'right';
 		if ( isset( $opts['id'] ) ) $id_attr .= " id=\"{$opts['id']}_div\" ";
-		if ( $opts['label'] != 'none' ) { 
+		if ( $opts['label'] != 'none' ) {
 			if ( isset( $opts['help_text'] ) ) {
 				$help_text = sprintf(	All_in_One_SEO_Pack_Module::DISPLAY_HELP_START, __( 'Click for Help!', 'all_in_one_seo_pack' ), $name.$language, $opts['name'] );
 				$help_text_2 = sprintf(	All_in_One_SEO_Pack_Module::DISPLAY_HELP_END, $name.$language, $opts['help_text'] );
@@ -192,7 +190,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		$input_attr .= " aioseop_{$opts['type']}_type";
 		return sprintf( All_in_One_SEO_Pack_Module::DISPLAY_ROW_TEMPLATE, $input_attr, $name.$language, $label_text, $id_attr, $this->get_option_html( $args ), $help_text_2 );
 	}
-	
+
 	/**
 	 * Outputs a setting item for settings pages and metaboxes.
 	 */
@@ -200,7 +198,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 		static $n = 0;
 		extract( $args );
 		if ( $options['type'] == 'custom' )
-			return apply_filters( "{$prefix}output_option", '', $args );				
+			return apply_filters( "{$prefix}output_option", '', $args );
 		if ( in_array( $options['type'], Array( 'multiselect', 'select', 'multicheckbox', 'radio', 'checkbox', 'textarea', 'text', 'submit', 'hidden' ) ) && ( is_string( $value ) ) )
 			$value = esc_attr( $value );
 		$buf = '';
@@ -241,33 +239,31 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 			if ( !empty( $onload ) ) $buf .= "<script>jQuery( document ).ready(function() { {$onload} });</script>";
 		}
 		return $buf;
-	}	
-}	 
- 
+	}
+}
+
 /**
  * Class WPGlobus_aioseop
  */
-
-/** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 class WPGlobus_aioseop {
-	
+
 	/**
 	 * Constructor
 	 */
-	function __construct() {
-		
+	public function __construct() {
+
 		add_action( 'admin_print_scripts', array(
 			$this,
 			'on_admin_scripts'
-		) );		
-		
+		) );
+
 		add_action( 'admin_footer', array(
 			$this,
 			'on_admin_footer'
 		) );
-		
+
 	}
-	
+
 	/**
 	 * Enqueue admin scripts
 	 * @return void
@@ -288,10 +284,10 @@ class WPGlobus_aioseop {
 				array(
 					'version' => WPGLOBUS_VERSION
 				)
-			);		
-	
-	}	
-	
+			);
+
+	}
+
 	function on_admin_footer() {
 
 		global $post;
@@ -299,9 +295,9 @@ class WPGlobus_aioseop {
 		$permalink = array();
 		$permalink['url']    = get_permalink( $post->ID );
 		$permalink['action'] = 'complete';
-		
+
 		$fields = array();
-	
+
 		/**
 		 * Keywords
 		 */
@@ -320,12 +316,12 @@ class WPGlobus_aioseop {
 			'value' => '',
 			'prefix' => '',
 			'options' => $fields['aiosp_keywords']['opts']
-		);		
+		);
 
-	
+
 		/**
 		 * Description
-		 */		
+		 */
 		$fields['aiosp_description']['opts'] = array(
 			'name' => __( 'Description', 'all_in_one_seo_pack' ),
 			'type' => 'textarea',
@@ -347,10 +343,10 @@ class WPGlobus_aioseop {
 			'suffix' => '',
 			'options' => $fields['aiosp_description']['opts']
 		);
-		
+
 		/**
 		 * Title
-		 */	
+		 */
 		$fields['aiosp_title']['opts'] = array(
 			'name' => __( 'Title', 'all_in_one_seo_pack' ),
 			'type' => 'text',
@@ -358,7 +354,7 @@ class WPGlobus_aioseop {
 			'size' => 60,
 			'help_text' => __( 'A custom title that shows up in the title tag for this page.', 'all_in_one_seo_pack' ),
 			'default' => '',
-			'initial_options' => '', 
+			'initial_options' => '',
 			'nowrap' => '',
 			'label' => '',
 			'save' => true,
@@ -375,8 +371,8 @@ class WPGlobus_aioseop {
 			'prefix' => 'wpglobus_',
 			'suffix' => '',
 			'options' => $fields['aiosp_title']['opts']
-		);		
-		
+		);
+
 		/**
 		 * Snippet must be last in array
 		 */
@@ -396,7 +392,7 @@ class WPGlobus_aioseop {
 			'name' => 'aiosp_snippet',
 			'attr' => '',
 			'classes' => 'wpglobus-aioseop_snippet',
-			'data'	=> '',			
+			'data'	=> '',
 			'value' => '<div class="preview_snippet">
 							<div id="aioseop_snippet_{{language}}" data-extra-length="{{extra_length}}">
 								<h3{{header_style}}><a{{link_style}}><span id="aioseop_snippet_title_{{language}}">%s</span>%s</a></h3>
@@ -410,10 +406,10 @@ class WPGlobus_aioseop {
 						</div>	',
 			'prefix' => '',
 			'options' => $fields['aiosp_snippet']['opts']
-		);		
-		
+		);
+
 		$aio = new WPGlobus_All_in_One_SEO();
-		
+
 		/**
 		 * @todo check url
 		 */
@@ -424,17 +420,17 @@ class WPGlobus_aioseop {
 		} else {
 			$permalink['url']    = trailingslashit( home_url() );
 			$permalink['action'] = '';
-		} 
-		
+		}
+
 		/**
 		 * get keywords for current post
 		 * use original function for compatibility
 		 */
 		$keywords = $aio->get_all_keywords();
 		$keywords = explode( ',', $keywords );
-		
+
 		global $wpdb;
-		
+
 		//$keywords_source = array();
 		foreach( $keywords as $keyword ) {
 			$keyword = trim( $keyword );
@@ -445,32 +441,32 @@ class WPGlobus_aioseop {
 			}
 		}
 
-		$aioseop_options =  aioseop_get_options(); 
-		
+		$aioseop_options =  aioseop_get_options();
+
 		switch ( $post->post_type ) :
-			case 'post' :	
+			case 'post' :
 				$title_format = $aioseop_options['aiosp_post_title_format'];
 				$title_format = explode( ' ', preg_replace('/\s+/', ' ', $title_format) );
 			break;
 			default:
 				$title_format = '';
 		endswitch;
-		
-		/** 
+
+		/**
 		 * Get meta title in current language ( WPGlobus::Config()->language )
 		 * in $aioseop_options['aiosp_post_title_format'] format, usual as %post_title% | %blog_title%
 		 * Title will be like to "New Post for All in one Seo Pack | WPGlobus" without language marks
 		 */
 		$aiosp_meta_title = $aio->get_aioseop_title( $post );
-		
-		if ( isset( 
-				/** separator **/ 
-				$title_format[1] 
+
+		if ( isset(
+				/** separator **/
+				$title_format[1]
 			) ) {
 			$aiosp_meta_title = explode( $title_format[1], $aiosp_meta_title );
 			$aiosp_meta_title = $aiosp_meta_title[0] ;
 		}
-		
+
 		$aiosp_meta_title_source = get_post_meta( $post->ID, "_aioseop_title", true );
 		$aiosp_meta_title_source = trim( $aiosp_meta_title_source );
 		if ( ! WPGlobus_Core::text_filter( $aiosp_meta_title_source, WPGlobus::Config()->default_language ) ) {
@@ -478,31 +474,31 @@ class WPGlobus_aioseop {
 			 * Reset meta title for default language
 			 */
 			$aiosp_meta_title = '';
-		}	
-		
-		/** 
+		}
+
+		/**
 		 * Get meta description in current language ( WPGlobus::Config()->language ) with $aio->get_post_description($post)
 		 * @see 'localization' filter in wpglobus-controller.php
 		 */
 		// $aiosp_post_description 		= $aio->get_post_description($post);
-		 
+
 		/**
 		 * but we need description with language marks
-		 */		
+		 */
 		$aiosp_meta_description_source  = $aiosp_post_description = get_post_meta( $post->ID, "_aioseop_description", true );
 		$aiosp_meta_description_source  = trim( $aiosp_meta_description_source );
-	
-		/** 
+
+		/**
 		 * Get keywords /// title in current language ( WPGlobus::Config()->language )
 		 */
 		$aiosp_keywords_source = get_post_meta( $post->ID, "_aioseop_keywords", true );
-		
-	
+
+
 		$header_style = ' style="padding:8px 0;"';
 		$link_style = ' style="color:#12c;cursor: pointer;text-decoration: -moz-use-text-color none solid;font-size:16px;"';
 		$cite_style = ' style="color:#093;font-style:normal;"';
 		?>
-		
+
 		<div id="wpglobus-aioseop-tabs" class="hidden wpglobus-hidden">
 			<ul class="wpglobus-aioseop-tabs-list">    <?php
 				$order = 0;
@@ -519,9 +515,9 @@ class WPGlobus_aioseop {
 
 
 			foreach ( WPGlobus::Config()->enabled_languages as $language ) {
-				
+
 				if ( $language == WPGlobus::Config()->default_language ) {
-					
+
 					$return = WPGlobus::RETURN_IN_DEFAULT_LANGUAGE;
 					if ( $language == WPGlobus::Config()->language ) {
 						$aiosp_title = trim( WPGlobus_Core::text_filter( $aiosp_meta_title, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) );
@@ -531,9 +527,9 @@ class WPGlobus_aioseop {
 						 */
 						$aiosp_title = trim( WPGlobus_Core::text_filter( $aiosp_meta_title_source, $language, WPGlobus::RETURN_EMPTY ) );
 					}
-					
+
 				} else {
-					
+
 					$return = WPGlobus::RETURN_EMPTY;
 					$aiosp_title = trim( WPGlobus_Core::text_filter( $aiosp_meta_title, $language, WPGlobus::RETURN_EMPTY ) );
 					if ( empty( $aiosp_title ) ) {
@@ -542,29 +538,29 @@ class WPGlobus_aioseop {
 						 */
 						$aiosp_title = trim( WPGlobus_Core::text_filter( $aiosp_meta_title_source, $language, WPGlobus::RETURN_EMPTY ) );
 					}
-					
-				}	
-				
-				$url = WPGlobus_Utils::localize_url( $permalink['url'], $language );  
+
+				}
+
+				$url = WPGlobus_Utils::localize_url( $permalink['url'], $language );
 
 				/**
 				 * Set snippet title
 				 */
 				$aiosp_placeholder_title = WPGlobus_Core::text_filter( $post->post_title, $language, $return );
 				$aiosp_snippet_title 	 = empty( $aiosp_title ) ? $aiosp_placeholder_title : $aiosp_title;
-				
+
 				/**
 				 * Set meta description
 				 */
 				$aiosp_meta_description  = WPGlobus_Core::text_filter($aiosp_meta_description_source, $language, $return);
 
 				if ( empty($aiosp_meta_description) ) {
-					
+
 					$description = '';
-					
+
 					if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) )
 						$description = $aio->trim_excerpt_without_filters_full_length( WPGlobus_Core::text_filter($post->post_excerpt, $language, WPGlobus::RETURN_EMPTY) );
-					
+
 					if ( !$description && $aioseop_options["aiosp_generate_descriptions"] ) {
 						$content = WPGlobus_Core::text_filter($post->post_content, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE);
 						if ( !empty( $aioseop_options["aiosp_run_shortcodes"] ) ) {
@@ -572,49 +568,49 @@ class WPGlobus_aioseop {
 						}
 						$content = wp_strip_all_tags( $content );
 						$description = $aio->trim_excerpt_without_filters( $content );
-					}				
-					
-					$aiosp_description 				= '';			
+					}
+
+					$aiosp_description 				= '';
 					$aiosp_placeholder_description  = $description;
 					$aiosp_snippet_description 	 	= $aiosp_placeholder_description;
-				
+
 				} else {
-					
-					$aiosp_description 				= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);			
+
+					$aiosp_description 				= WPGlobus_Core::text_filter($aiosp_post_description, $language, $return);
 					$aiosp_placeholder_description  = $aiosp_description;
-					$aiosp_snippet_description 		= $aiosp_description;			
-				
-				}	
+					$aiosp_snippet_description 		= $aiosp_description;
+
+				}
 				/**
 				 * Make All in one Seo Pack tabs
 				 */
 				?>
 				<div id="aioseop-tab-<?php echo $language; ?>" class="wpglobus-aioseop-general" data-language="<?php echo $language; ?>"
-				     data-url-<?php echo $language; ?>="<?php echo $url; ?>">			<?php 
+				     data-url-<?php echo $language; ?>="<?php echo $url; ?>">			<?php
 						$r = '';
 						foreach( $fields as $name=>$data ) :
-							
+
 							if ( 'aiosp_snippet' == $name ) {
 
 								$snippet_title_2 = '';
 								if ( isset($title_format[2]) && false !== strpos($title_format[2], '%blog_title%') ) {
-								
-									$snippet_title_2 = ' ' . $title_format[1] . ' ' . WPGlobus_Core::text_filter(get_option('blogname'),  $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE) ;	
-									
+
+									$snippet_title_2 = ' ' . $title_format[1] . ' ' . WPGlobus_Core::text_filter(get_option('blogname'),  $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE) ;
+
 								}
-								
+
 								$data['args']['value'] 	= str_replace( '{{language}}', $language, $data['args']['value'] );
-								
+
 								$data['args']['value'] 	= str_replace( '{{header_style}}',  $header_style, $data['args']['value'] );
 								$data['args']['value'] 	= str_replace( '{{link_style}}', 	$link_style,   $data['args']['value'] );
 								$data['args']['value'] 	= str_replace( '{{cite_style}}', 	$cite_style,   $data['args']['value'] );
-								
+
 								$data['args']['value'] 	= sprintf( $data['args']['value'], $aiosp_snippet_title, $snippet_title_2, WPGlobus_Utils::localize_url($permalink['url'], $language), $aiosp_snippet_description );
-								
+
 								$data['args']['value'] 	= str_replace( '{{extra_length}}',  mb_strlen($snippet_title_2), $data['args']['value'] );
-							
+
 							} else if ( 'aiosp_title' == $name ) {
-								
+
 
 								$data['args']['name']  	 	= str_replace( '{{language}}', $language, $data['args']['name'] );
 								$data['args']['attr']   	= str_replace( '{{placeholder}}', $aiosp_placeholder_title, $data['args']['attr'] );
@@ -622,16 +618,16 @@ class WPGlobus_aioseop {
 								$data['args']['suffix']   	= '_' . $language;
 								$data['args']['data']   	= $data['args']['data'] . ' data-field-count="wpglobus_title_length_' . $language . '" data-extra-element="aioseop_snippet_' . $language . '" data-language="' . $language . '"';
 								$data['args']['value']   	= $aiosp_title;
-							
+
 							} else if ( 'aiosp_description' == $name ) {
-						
+
 								$data['args']['attr']  		= str_replace( '{{placeholder}}', $aiosp_placeholder_description, $data['args']['attr'] );
 								$data['args']['prefix']   	= 'wpglobus_description_';
 								$data['args']['suffix']   	= '_' . $language;
 								$data['args']['name']   	= $data['args']['name'] . '_' . $language;
 								$data['args']['data']   	= $data['args']['data'] . ' data-field-count="wpglobus_description_length_' . $language . '" data-language="' . $language . '"';
 								$data['args']['value']   	= $aiosp_description;
-								
+
 							} else if ( 'aiosp_keywords' == $name ) {
 
 								$placeholders = array();
@@ -650,19 +646,19 @@ class WPGlobus_aioseop {
 								$data['args']['value'] = WPGlobus_Core::text_filter( $aiosp_keywords_source, $language, WPGlobus::RETURN_EMPTY );
 
 							}
-							
-							$r = $aio->wpg_get_option_row( $name, $data['opts'], $data['args'], $language ) . $r; 
-							
+
+							$r = $aio->wpg_get_option_row( $name, $data['opts'], $data['args'], $language ) . $r;
+
 						endforeach;
-						echo $r;	
-					?> 
+						echo $r;
+					?>
 				</div> <!-- .wpglobus-aioseop-general -->	<?php
-				
+
 			} 	// end foreach ?>
 			<!-- <hr /> -->
 		</div> <!-- #wpglobus-aioseop-tabs -->
 
-		<?php		
-		
-	}	
+		<?php
+
+	}
 }

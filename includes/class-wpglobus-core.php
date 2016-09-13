@@ -1,4 +1,9 @@
 <?php
+/**
+ * File: class-wpglobus-core.php
+ *
+ * @package WPGlobus
+ */
 
 /**
  * Class WPGlobus_Core

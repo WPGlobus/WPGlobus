@@ -1,7 +1,7 @@
 <?php
 /**
  * Admin interface
- * @package WPGlobus/Updater
+ * @package   WPGlobus\Updater
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

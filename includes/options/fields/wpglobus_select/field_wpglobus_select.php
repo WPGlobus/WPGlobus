@@ -1,4 +1,10 @@
 <?php
+/**
+ * File: field_wpglobus_select.php
+ *
+ * @package     WPGlobus\Admin\Options\Field
+ * @author      WPGlobus
+ */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {

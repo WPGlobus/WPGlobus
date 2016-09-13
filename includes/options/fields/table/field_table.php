@@ -1,4 +1,10 @@
 <?php
+/**
+ * File: field_table.php
+ *
+ * @package     WPGlobus\Admin\Options\Field
+ * @author      WPGlobus
+ */
 
 if ( ! class_exists( 'ReduxFramework_table' ) ) {
 

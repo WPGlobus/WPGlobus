@@ -1,8 +1,7 @@
 <?php
 /**
  * Multilingual Customizer
- * @package    WPGlobus
- * @subpackage WPGlobus/Admin
+ * @package    WPGlobus\Admin\Customizer
  * @since      1.4.0
  */
 
@@ -19,19 +18,19 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * It calls the `customize_register` action first,
 			 * and then - the `customize_preview_init` action
 			 */
-			/* 
+			/*
 			add_action( 'customize_register', array(
 				'WPGlobus_Customize',
 				'action__customize_register'
 			) ); */
-			
+
 			/**
 			 * @since 1.5.0
 			 */
 			if ( WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
 				require_once 'admin/wpglobus-customize-filters.php';
 			}
-			
+
 			add_action( 'customize_preview_init', array(
 				'WPGlobus_Customize',
 				'action__customize_preview_init'
@@ -44,14 +43,14 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				'WPGlobus_Customize',
 				'action__customize_controls_enqueue_scripts'
 			), 1000 );
-			
+
 			if ( WPGlobus_WP::is_admin_doing_ajax() ) {
 				add_filter( 'clean_url', array(
 					'WPGlobus_Customize',
 					'filter__clean_url'
 				), 10, 2 );
 			}
-			
+
 		}
 
 		/**
@@ -85,14 +84,14 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 
 			return $url;
 		}
-		
+
 		/**
 		 * Add multilingual controls.
 		 * The original controls will be hidden.
 		 * @param WP_Customize_Manager $wp_customize
 		 */
 		public static function action__customize_register( WP_Customize_Manager $wp_customize ) {}
-		
+
 		/**
 		 * Load Customize Preview JS
 		 * Used by hook: 'customize_preview_init'
@@ -122,19 +121,19 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 * Load Customize Control JS
 		 */
 		public static function action__customize_controls_enqueue_scripts() {
-			
-			/** 
+
+			/**
 			 * @see wp.customize.control elements
 			 * for example wp.customize.control('blogname');
 			 */
 			$disabled_setting_mask = array();
-			
+
 			/** navigation menu elements */
 			$disabled_setting_mask[] = 'nav_menu_item';
 			$disabled_setting_mask[] = 'nav_menu[';
 			$disabled_setting_mask[] = 'nav_menu_locations';
 			$disabled_setting_mask[] = 'new_menu_name';
-			
+
 			/** widgets */
 			$disabled_setting_mask[] = 'widgets';
 
@@ -171,38 +170,38 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_setting_mask[] = 'vimeo';
 			/** since 1.6.0 */
 			$disabled_setting_mask[] = 'yelp';
-			
+
 			/**
-			 * Filter to disable fields in customizer. 
+			 * Filter to disable fields in customizer.
 			 * @see wp.customize.control elements
 			 * Returning array.
 			 * @since 1.4.0
 			 *
 			 * @param array $disabled_setting_mask An array of disabled masks.
-			 */			
+			 */
 			$disabled_setting_mask = apply_filters( 'wpglobus_customize_disabled_setting_mask', $disabled_setting_mask );
-			
+
 			$element_selector = array( 'input[type=text]', 'textarea' );
-			
+
 			/**
-			 * Filter for element selectors. 
+			 * Filter for element selectors.
 			 * Returning array.
 			 * @since 1.4.0
 			 *
 			 * @param array $element_selector An array of selectors.
-			 */			
+			 */
 			$element_selector = apply_filters( 'wpglobus_customize_element_selector', $element_selector );
-			
+
 			$set_link_by = array( 'link', 'url' );
-			
+
 			/**
 			 * Filter of masks to determine links.
-			 * @see value data-customize-setting-link of element			 
+			 * @see value data-customize-setting-link of element
 			 * Returning array.
 			 * @since 1.4.0
 			 *
 			 * @param array $set_link_by An array of masks.
-			 */				
+			 */
 			$set_link_by = apply_filters( 'wpglobus_customize_setlinkby', $set_link_by );
 
 			/**
@@ -212,19 +211,19 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * @since 1.5.0
 			 *
 			 * @param array $disabled_sections An array of sections.
-			 */					
+			 */
 			$disabled_sections = array();
-			
+
 			$disabled_sections = apply_filters( 'wpglobus_customize_disabled_sections', $disabled_sections );
 
 			/**
 			 * Generate language select button for customizer
 			 * @since 1.6.0
-			 */	
-			$attributes['href'] 	= '#';			
-			$attributes['style'] 	= 'margin-left:48px;';			
-			$attributes['class'] 	= 'customize-controls-close wpglobus-customize-selector';			
-			
+			 */
+			$attributes['href'] 	= '#';
+			$attributes['style'] 	= 'margin-left:48px;';
+			$attributes['class'] 	= 'customize-controls-close wpglobus-customize-selector';
+
 			/**
 			 * Filter of attributes to generate language selector button.
 			 * For example @see Divi theme http://www.elegantthemes.com/gallery/divi/ .
@@ -234,9 +233,9 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 *
 			 * @param array $attributes An array of attributes.
 			 * @param string Name of current theme.
-			 */	
+			 */
 			$attributes = apply_filters( 'wpglobus_customize_language_selector_attrs', $attributes, WPGlobus_Customize_Options::get_theme( 'name' ) );
-			
+
 			$string = '';
 
 			foreach ( $attributes as $attribute => $value ) {
@@ -244,13 +243,13 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					$string .= esc_attr( $attribute ) . '="' . esc_attr( $value ) . '" ';
 				}
 			}
-			
+
 			$selector_button = sprintf(
 									'<a %1$s>%2$s</a>',
 									trim( $string ),
 									'<span class="wpglobus-globe"></span>'
-								);	
-			
+								);
+
 			wp_enqueue_script(
 				'wpglobus-customize-control140',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control140' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -272,7 +271,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					'controlClass'			=> 'wpglobus-customize-control',
 				)
 			);
-			
+
 		}
 
 	} // class

@@ -1,7 +1,7 @@
 <?php
 /**
  * Support of WP-SEO by Yoast
- * @package WPGlobus
+ * @package WPGlobus\Yoast
  * @since   1.1.1
  */
 
@@ -9,15 +9,15 @@
 class WPGlobus_WPSEO {
 
 	public static function controller() {
-		
+
 		if ( is_admin() ) {
 
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
 
 				if ( 'off' == WPGLobus::Config()->toggle ) {
-					return;		
-				}						
-			
+					return;
+				}
+
 				/** @see \WPGlobus::__construct */
 				WPGlobus::O()->vendors_scripts['WPSEO'] = true;
 
@@ -44,12 +44,12 @@ class WPGlobus_WPSEO {
 				/**
 				 * Filter for @see wpseo_linkdex_results
 				 * @scope admin
-				 * @since 1.2.2		 
-				 */				
+				 * @since 1.2.2
+				 */
 				add_filter( 'wpseo_linkdex_results', array(
 					'WPGlobus_WPSEO',
 					'filter__wpseo_linkdex_results'
-				), 10, 3 );	
+				), 10, 3 );
 			}
 
 
@@ -60,25 +60,25 @@ class WPGlobus_WPSEO {
 			 */
 			add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 			//add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
-			
+
 			/**
 			 * Filter for @see wpseo_title
 			 * @scope front
-			 * @since 1.1.1		 
-			 */			
+			 * @since 1.1.1
+			 */
 //			add_filter( 'wpseo_title', array( 'WPGlobus_WPSEO', 'filter__title' ), 0 );
-			
+
 			/**
 			 * Filter for @see wpseo_description
 			 * @scope front
-			 * @since 1.1.1		 
-			 */			
-			add_filter( 'wpseo_metadesc', array( 'WPGlobus_WPSEO', 'wpseo_metadesc' ), 0 );					
-		
+			 * @since 1.1.1
+			 */
+			add_filter( 'wpseo_metadesc', array( 'WPGlobus_WPSEO', 'wpseo_metadesc' ), 0 );
+
 		}
 
 	}
-	
+
 	/**
 	 * Filter results for Page Analysis tab in default language
      *
@@ -99,15 +99,15 @@ class WPGlobus_WPSEO {
 		$job['keyword'] 		= WPGlobus_Core::text_filter( $job['keyword'], WPGlobus::Config()->default_language );
 		$job['keyword_folded'] 	= WPGlobus_Core::text_filter( $job['keyword_folded'], WPGlobus::Config()->default_language );
 
-		$results = WPGlobus_WPSEO::calculate_results( 
-			$results, 
-			WPGlobus_Core::text_filter( $post->post_content, WPGlobus::Config()->default_language ), 
-			$job, 
-			$post 
+		$results = WPGlobus_WPSEO::calculate_results(
+			$results,
+			WPGlobus_Core::text_filter( $post->post_content, WPGlobus::Config()->default_language ),
+			$job,
+			$post
 		);
 
 		return $results;
-	}	
+	}
 
 	/**
 	 * Calculate the page analysis results for post.
@@ -121,18 +121,18 @@ class WPGlobus_WPSEO {
 	 *
 	 * @param array $results
 	 * @param string $post_content
-	 * @param array $job, 
+	 * @param array $job,
 	 * @param WP_Post object $post Post to calculate the results for.
 	 *
 	 * @return  array
 	 */
 	public static function calculate_results( $results, $post_content, $job, $post ) {
-	
+
 		$WPSEO_Metabox = new WPSEO_Metabox;
 
 		$dom                      = new domDocument;
 		$dom->strictErrorChecking = false;
-		$dom->preserveWhiteSpace  = false;		
+		$dom->preserveWhiteSpace  = false;
 
 		// Check if the post content is not empty.
 		if ( ! empty( $post_content ) ) {
@@ -222,58 +222,58 @@ class WPGlobus_WPSEO {
 		$count   = $WPSEO_Metabox->get_anchor_count( $xpath );
 
 		$WPSEO_Metabox->score_anchor_texts( $job, $results, $anchors, $count );
-		unset( $anchors, $count, $dom );	
+		unset( $anchors, $count, $dom );
 
-		return $results;	
-		
-	}	
-	 
+		return $results;
+
+	}
+
 	/**
 	 * Filter SEO meta description
 	 *
 	 * @scope front
-	 * @since 1.1.1		 
+	 * @since 1.1.1
 	 *
 	 * @param string $text
 	 *
 	 * @return string
-	 */		
+	 */
 	public static function wpseo_metadesc( $text ) {
-		
+
 		if ( empty( $text ) ) {
 			return $text;
-		}	
-		
+		}
+
 		return WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
-	
+
 	}
-	
+
 	/**
 	 * Generate title
 	 *
 	 * @see get_title_from_options()
 	 * @scope front
-	 * @since 1.1.1		 
+	 * @since 1.1.1
 	 *
 	 * @param string $text
 	 *
 	 * @return string
-	 */	
+	 */
 	public static function filter__title( $text ) {
 
 		$text = WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language );
 
 		$wpseo_f = WPSEO_Frontend::get_instance();
-		
+
 		if ( empty($text) ) {
 			global $post;
 			$text = $post->post_title . ' ' . $wpseo_f->get_title_from_options( 'wpseo_titles' );
 		}
-		
+
 		return $text;
-		
+
 	}
-	
+
 	/**
 	 * To translate Yoast columns
 	 * @see   WPSEO_Metabox::column_content
@@ -309,7 +309,7 @@ class WPGlobus_WPSEO {
 		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
 
 			WPGlobus::O()->vendors_scripts['WPSEO'] = true;
-			
+
 			$handle = 'wpglobus-wpseo';
 
 			/**
@@ -390,10 +390,10 @@ class WPGlobus_WPSEO {
 			</ul>    <?php
 			$metadesc   = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
 			$wpseotitle = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
-			$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true ); 			
+			$focuskw    = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true );
 			foreach ( WPGlobus::Config()->open_languages as $language ) {
 				$permalink['url'] = WPGlobus_Utils::localize_url( $permalink['url'], $language );
-				$url = apply_filters( 'wpglobus_wpseo_permalink', $permalink['url'], $language ); 
+				$url = apply_filters( 'wpglobus_wpseo_permalink', $permalink['url'], $language );
 				if ( $url != $permalink['url'] ) {
 					/* We accept that user's filter make complete permalink for draft */
 					/* @todo maybe need more investigation */
@@ -405,7 +405,7 @@ class WPGlobus_WPSEO {
 						 * @see var wpseosnippet_url in wpglobus-wpseo-**.js
 						 */
 						$permalink['action'] = '';
-					}	
+					}
 				}			?>
 				<div id="wpseo-tab-<?php echo $language; ?>" class="wpglobus-wpseo-general"
 				     data-language="<?php echo $language; ?>"

@@ -1,7 +1,7 @@
 <?php
 /**
  * Support of Yoast SEO 3.4
- * @package WPGlobus
+ * @package WPGlobus\Yoast
  * @since   1.5.10
  */
 
@@ -45,7 +45,7 @@ class WPGlobus_YoastSEO {
 					), 0 );
 
 				}
-				
+
 				/**
 				 * @since 1.6.3
 				 */
@@ -53,7 +53,7 @@ class WPGlobus_YoastSEO {
 					__CLASS__,
 					'action__save_compare_data'
 				) );
-				
+
 				add_action( 'admin_print_scripts', array(
 					__CLASS__,
 					'action__admin_print_scripts'
@@ -85,7 +85,7 @@ class WPGlobus_YoastSEO {
 		}
 
 	}
-	
+
 	/**
 	 * Fix empty yoast_wpseo_focuskw while saving/updating post with active extra language.
 	 *
@@ -97,7 +97,7 @@ class WPGlobus_YoastSEO {
 			if ( ! empty( $_POST[ 'yoast_wpseo_focuskw_text_input' ] ) ) {
 				$_POST[ 'yoast_wpseo_focuskw' ] = $_POST[ 'yoast_wpseo_focuskw_text_input' ];
 			}
-		}		
+		}
 	}
 
 	/**

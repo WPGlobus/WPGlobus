@@ -12,8 +12,8 @@
  * You should have received a copy of the GNU General Public License
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package     Redux_Field
- * @subpackage  ACE_Editor
+ * @package     WPGlobus\Admin\Options\Field
+ * @author      WPGlobus
  * @version     3.0.0
  */
 

@@ -12,8 +12,8 @@
  * You should have received a copy of the GNU General Public License
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package     ReduxFramework
- * @subpackage  Field_Info
+ * @package     WPGlobus\Admin\Options\Field
+ * @author      WPGlobus
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
  * @version     3.0.0

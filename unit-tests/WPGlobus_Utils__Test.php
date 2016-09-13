@@ -2,7 +2,7 @@
 /**
  * Unit test for Class WPGlobus_Utils
  *
- * @package WPGlobus
+ * @package WPGlobus\Unit-Tests
  */
 require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-utils.php';
 require_once dirname( __FILE__ ) . '/mocks-wp.php';

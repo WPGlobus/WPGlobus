@@ -3,17 +3,18 @@
  * Filters for customizer
  *
  * All add_filter and add_action calls should be placed here
- * @package WPGlobus
+ *
+ * @package WPGlobus\Admin\Customizer
  */
 add_filter( 'wpglobus_customize_disabled_sections', array( 'WPGlobus_Customize_Filters', 'disable_sections' ) );
 
-/**
- * Class WPGlobus_Customize_Filters
- */
-if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) : 
- 
+if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) :
+
+	/**
+	 * Class WPGlobus_Customize_Filters
+	 */
 	class WPGlobus_Customize_Filters {
-		
+
 		/**
 		 * Disable sections in customizer.
 		 *
@@ -29,11 +30,11 @@ if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) :
 				 */
 				$disabled_sections[] = 'tt_font_typography';
 			}
-			
-			return $disabled_sections;	
 
-		}	
-		
+			return $disabled_sections;
+
+		}
+
 	}
 
-endif;	
+endif;

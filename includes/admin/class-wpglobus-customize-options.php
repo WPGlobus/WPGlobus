@@ -1,8 +1,8 @@
 <?php
 /**
  * WPGlobus_Customize_Options
- * @package    WPGlobus
- * @subpackage WPGlobus/Admin
+ *
+ * @package WPGlobus\Admin\Customizer
  * @since      1.4.6
  *
  * @see http://www.narga.net/comprehensive-guide-wordpress-theme-options-with-customization-api/
@@ -50,6 +50,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}
 
 	/**
+	 * Class WPGlobusTextBox
 	 * Adds textbox support to the theme customizer
 	 *
 	 * @see wp-includes\class-wp-customize-control.php

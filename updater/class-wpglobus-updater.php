@@ -2,8 +2,10 @@
 /**
  * WPGlobus Updater
  *
+ * @deprecated Use TIVWP Updater.
+ *
  * @version   0.1.0
- * @package   WPGlobus-WC
+ * @package   WPGlobus\Updater
  * @author    WPGlobus http://www.wpglobus.com/
  * @copyright Copyright 2014-2015 The WPGlobus Team: Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  * @license   GNU General Public License v3.0 http://www.gnu.org/licenses/gpl-3.0.html

@@ -1,6 +1,9 @@
 <?php
 /**
- * @package   WPGlobus
+ * File: class-wpglobus-options.php
+ *
+ * @package     WPGlobus\Admin\Options
+ * @author      WPGlobus
  */
 
 /**

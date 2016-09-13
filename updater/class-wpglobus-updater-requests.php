@@ -1,7 +1,7 @@
 <?php
 /**
  * Requests to remote server
- * @package WPGlobus/Updater
+ * @package   WPGlobus\Updater
  */
 
 // Exit if accessed directly

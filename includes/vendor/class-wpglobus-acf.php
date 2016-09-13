@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPGlobus
+ * @package WPGlobus\ACF
  */
 
 /**

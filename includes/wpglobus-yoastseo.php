@@ -1,7 +1,13 @@
 <?php
-//*
+/**
+ * File: wpglobus-yoastseo.php
+ *
+ * @package WPGlobus\Yoast
+ */
+
+
 if ( defined( 'WPSEO_VERSION' ) ) {
-	
+
 	if ( version_compare( WPSEO_VERSION, '3.4', '>=' ) ) {
 
 		require_once 'vendor/class-wpglobus-yoastseo34.php';
@@ -20,14 +26,14 @@ if ( defined( 'WPSEO_VERSION' ) ) {
 				if ( version_compare( WPSEO_VERSION, '3.3.0', '>=' ) ) {
 					require_once 'vendor/class-wpglobus-yoastseo33.php';
 					WPGlobus_YoastSEO::controller();
-				} else {	
+				} else {
 					require_once 'vendor/class-wpglobus-yoastseo32.php';
 					WPGlobus_YoastSEO::controller();
-				}	
-			}	
+				}
+			}
 		}
-		
+
 	}
-	
+
 }
 // */
