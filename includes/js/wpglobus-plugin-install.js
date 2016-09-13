@@ -35,7 +35,18 @@ jQuery(document).ready(function($) {
 					}
 				}
 
-				$( ccard + ' .plugin-action-buttons .install-now' )
+				$( ccard + ' .plugin-action-buttons .button' ).each( function(i,e){
+					/**
+					 * Remove class 'install-now' to prevent action of standard install
+					 * @since 1.6.3
+					 * @see wp-admin\js\updates.js
+					 */
+					if ( $(e).hasClass( 'install-now' ) ) {
+						$(e).removeClass( 'install-now' ).addClass( 'wpglobus-install-now' );
+					}
+				});
+				
+				$( ccard + ' .plugin-action-buttons .wpglobus-install-now' )
 					.attr( 'href', WPGlobusPluginInstall.pluginData[ card ].extra_data.product_url )
 					.attr( 'target', '_blank' );
 
@@ -56,7 +67,7 @@ jQuery(document).ready(function($) {
 
 			});
 
-			$( '.plugin-action-buttons .install-now' ).css({'background-color':'#0f0'}).text( WPGlobusPluginInstall.i18n.get_it );
+			$( '.plugin-action-buttons .wpglobus-install-now' ).css({'background-color':'#0f0'}).text( WPGlobusPluginInstall.i18n.get_it );
 
 			/**
 			 * Fix links for WPGlobus for Black Studio TinyMCE Widget plugin
