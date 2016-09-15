@@ -7,7 +7,7 @@
 **Requires at least:** 4.2  
 **Tested up to:** 4.6  
 **Stable tag:** trunk  
-**License:** GPLv2  
+**License:** GPL-3.0  
 **License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
 
 **Multilingual / Globalization:** URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!  
@@ -16,15 +16,15 @@
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual / multilingual WordPress blogs and sites.
 
-**IMPORTANT NOTES!**
+**Important Technical Notes**
 ---------------
 * Some themes and 3rd party plugins are **not 100% WPGlobus-ready**. Read the "Compatibility" section below for details.
-* The **multisite** mode is not officially supported. Some things might not work.
-* We do not test our code with **old PHP** and **old WordPress** versions. Please upgrade.
+* We develop and test our software using the **latest versions of PHP and WordPress only**. While we do our best to write code compatible with older versions, we cannot be 100% sure that everything works correctly under older versions.
+* The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
 
-> **What is WPGlobus?**
+> **What is in the FREE version of WPGlobus?**
 
-The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
+The WPGlobus plugin provides you with the main multilingual tools.
 
 * **Manually translate** posts, pages, categories, tags menus and widgets; **NOTE: WPGlobus does NOT translate texts automatically!** To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/);
 * **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
@@ -34,20 +34,29 @@ The **WPGlobus Free Core plugin** provides you with the main multilingual tools.
 
 The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
-> **Free Add-ons**
+> **There are several Free Add-ons:**
 
 * [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/): allows setting featured images separately for each language.
-* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/): enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) has its own option panel, where you enter texts.
+* [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/): enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) allows you to enter some texts (headings, buttons, etc.) and stores them in the `options` table.
 * [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
 * [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/): adds multilingual editing capabilities to the visual editor widget.
 
-> **Premium Extensions**
+> **When do I need Premium Extensions?**
+
+* To translate URLS (`/my-page/` translates to `/fr/ma-page`, `/ru/моя-страница` and so on);
+* To "postpone" translation to all languages and publish only those that are ready;
+* To have completely separate menus for each language;
+* To translate WooCommerce products and taxonomies;
+* To have separate "focus keywords" for each language in the Yoast SEO;
+* ...and more.
+
+For more details, please check out the descriptions of each paid add-on on our website:
 
 * [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
 * [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
 * [WPGlobus Language Widgets](http://www.wpglobus.com/product/wpglobus-language-widget/): Multilingual widget logic: show and hide widget depending on the current language.
-* [WPGlobus Header Images](http://www.wpglobus.com/product/wpglobus-header-images/): Display different header images per language. Show images depending on the settings in customizer.
-* [WPGlobus Menu Visibility](http://www.wpglobus.com/product/wpglobus-menu-visibility/): Show of hide menu items depending on the current language.
+* [WPGlobus Header Images](http://www.wpglobus.com/product/wpglobus-header-images/): Display different header images per language. Show images depending on the settings in the Customizer.
+* [WPGlobus Menu Visibility](http://www.wpglobus.com/product/wpglobus-menu-visibility/): Show or hide menu items depending on the current language.
 * [WPGlobus Mobile Menu](http://www.wpglobus.com/product/wpglobus-mobile-menu/): makes the WPGlobus language switcher menu compatible with mobile devices and narrow screens.
 * [WPGlobus for Slider Revolution](http://www.wpglobus.com/product/wpglobus-for-slider-revolution/): Adds multilingual capabilities to the Slider Revolution plugin.
 * [Multilingual WooCommerce Nets Netaxept](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
@@ -55,7 +64,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 ### Compatibility with Themes ###
 
 * WPGlobus works correctly with all themes that apply proper filtering before outputting content.
-* As most of themes save their settings in the `options` table, you can use the [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to process those settings correctly.
+* As most of the themes save their settings in the `options` table, you can use the [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to process those settings correctly.
 * Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please **tell the theme / plugin authors**. We are ready to help them.
 * Read more on the topic [here](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/).
 
@@ -65,27 +74,33 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 WPGlobus is compatible with many plugins, including but not limited to:
 
-* Advanced Custom Fields (ACF),
+* ACF - Advanced Custom Fields. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is required for WYSIWYG fields support,
 * All in One SEO Pack,
 * Black Studio TinyMCE Widget (with our free add-on),
 * MailChimp for WordPress,
 * Max Mega Menu,
 * Popups - WordPress Popup,
 * Sidebar Login,
-* Slider Revolution - with our [premium add-on](http://www.wpglobus.com/product/wpglobus-for-slider-revolution/),
 * The Events Calendar,
 * WPBakery Visual Composer (with our free add-on),
 * Whistles,
 * Widget Logic,
-* WooCommerce and some of its extensions - [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/) premium add-on is required,
-* WordPress WooCommerce Nets Netaxept Payment Plugin by `sellxed/customweb` - with a [premium add-on](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/),
 * Yoast SEO. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis.
+
+Some 3rd party plugins are supported with our [premium add-ons](http://www.wpglobus.com/shop/):
+
+* [Slider Revolution](http://www.wpglobus.com/product/wpglobus-for-slider-revolution/),
+* [TablePress](http://www.wpglobus.com/product/wpglobus-plus/#tablepress),
+* [WooCommerce and some of its extensions](http://www.wpglobus.com/product/woocommerce-wpglobus/),
+* [WooCommerce Nets Netaxept Payment Plugin](http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/),
 
 ### Permalinks ###
 
 **IMPORTANT:** WPGlobus will not work if your URLs look like `example.com?p=123` or `example.com/index.php/category/post/`.
 
 Please go to `Settings->Permalinks` and change the permalink structure to non-default and with no `index.php` in it. If you are unable to do that for some reason, please talk to your hosting provider / systems administrator.
+
+**Note:** WooCommerce adds their own section to the Permalinks. It is important to fill in all the information. For example, you need to specify your Shop Base, for example `/product/`. If you leave it blank, WooCommerce will try to translate the base (eg `/produkt/` for German), which will result in a 404 error.
 
 ### Developing on `localhost` or custom ports ###
 
@@ -151,8 +166,8 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 ## Screenshots ##
 
-### 1. Welcome screen. ###
-![Welcome screen.](https://ps.w.org/wpglobus/assets/screenshot-1.png)
+### 1. The Welcome screen. ###
+![The Welcome screen.](https://ps.w.org/wpglobus/assets/screenshot-1.png)
 
 ### 2. Settings panel. ###
 ![Settings panel.](https://ps.w.org/wpglobus/assets/screenshot-2.png)
