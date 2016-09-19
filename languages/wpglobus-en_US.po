@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-09-13 16:10:13+00:00\n"
+"POT-Creation-Date: 2016-09-19 22:33:16+00:00\n"
 "PO-Revision-Date: 2016-09-11 16:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
@@ -44,7 +44,7 @@ msgid "Quick Start"
 msgstr "Quick Start"
 
 #: includes/admin/class-wpglobus-about.php:57
-#: includes/admin/class-wpglobus-about.php:86
+#: includes/admin/class-wpglobus-about.php:93
 #: includes/admin/class-wpglobus-clean.php:596
 msgid "Guide"
 msgstr "Guide"
@@ -63,14 +63,27 @@ msgid "Support"
 msgstr "Support"
 
 #: includes/admin/class-wpglobus-about.php:73
+msgid ""
+"Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:74
+msgid ""
+"The mbstring extension is required for the full UTF-8 compatibility and "
+"better performance. Without it, some parts of WordPress and WPGlobus may "
+"function incorrectly. Please contact your hosting company or systems "
+"administrator."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:80
 msgid "Easy as 1-2-3:"
 msgstr "Easy as 1-2-3:"
 
-#: includes/admin/class-wpglobus-about.php:75
+#: includes/admin/class-wpglobus-about.php:82
 msgid "Go to WPGlobus admin menu and choose the countries / languages;"
 msgstr "Go to WPGlobus admin menu and choose the countries / languages;"
 
-#: includes/admin/class-wpglobus-about.php:76
+#: includes/admin/class-wpglobus-about.php:83
 msgid ""
 "Enter the translations to the posts, pages, categories, tags and menus using "
 "a clean and simple interface."
@@ -78,7 +91,7 @@ msgstr ""
 "Enter the translations to the posts, pages, categories, tags and menus using "
 "a clean and simple interface."
 
-#: includes/admin/class-wpglobus-about.php:77
+#: includes/admin/class-wpglobus-about.php:84
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
@@ -86,23 +99,23 @@ msgstr ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
 
-#: includes/admin/class-wpglobus-about.php:81
+#: includes/admin/class-wpglobus-about.php:88
 msgid "Links:"
 msgstr "Links:"
 
-#: includes/admin/class-wpglobus-about.php:88
+#: includes/admin/class-wpglobus-about.php:95
 msgid "FAQs"
 msgstr "FAQs"
 
-#: includes/admin/class-wpglobus-about.php:90
+#: includes/admin/class-wpglobus-about.php:97
 msgid "Contact Us"
 msgstr "Contact Us"
 
-#: includes/admin/class-wpglobus-about.php:92
+#: includes/admin/class-wpglobus-about.php:99
 msgid "Please give us 5 stars!"
 msgstr "Please give us 5 stars!"
 
-#: includes/admin/class-wpglobus-about.php:104
+#: includes/admin/class-wpglobus-about.php:111
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
@@ -112,11 +125,11 @@ msgstr ""
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
 "com</code> and language queries <code>example.com?lang=xx</code>."
 
-#: includes/admin/class-wpglobus-about.php:107
+#: includes/admin/class-wpglobus-about.php:114
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr "Some themes and plugins are <strong>not multilingual-ready</strong>."
 
-#: includes/admin/class-wpglobus-about.php:109
+#: includes/admin/class-wpglobus-about.php:115
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
@@ -125,7 +138,7 @@ msgstr ""
 "mixed together."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
-#: includes/admin/class-wpglobus-about.php:113
+#: includes/admin/class-wpglobus-about.php:119
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
@@ -133,7 +146,7 @@ msgstr ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 
-#: includes/admin/class-wpglobus-about.php:123
+#: includes/admin/class-wpglobus-about.php:131
 #: includes/admin/class-wpglobus-addons.php:93
 msgid "Go to WPGlobus Settings"
 msgstr "Go to WPGlobus Settings"
