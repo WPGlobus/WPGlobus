@@ -51,6 +51,8 @@ global $WPGlobus;
 global $WPGlobus_Options;
 // @codingStandardsIgnoreEnd
 
+require_once dirname( __FILE__ ) . '/includes/compat/mbstring.php';
+
 /**
  * Abstract class for plugins.
  *
