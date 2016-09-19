@@ -30,9 +30,13 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $proper, 'xx' ), 'Non-existing language' );
 		self::assertEmpty( WPGlobus_Core::text_filter( $proper, 'xx', WPGlobus::RETURN_EMPTY ), 'Non-existing language, return empty' );
 
-		$qt_tags = '[:en]EN[:ru]RU';
+		$with_accents = '{:en}an ÅccENt{:}{:ru}anÖther ÄccENt{:}';
+		self::assertEquals( 'an ÅccENt', WPGlobus_Core::text_filter( $with_accents, 'en' ), __LINE__ );
+		self::assertEquals( 'anÖther ÄccENt', WPGlobus_Core::text_filter( $with_accents, 'ru' ), __LINE__ );
+
+		$qt_tags = '[:en]EN[:ru]Рус';
 		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_tags ), 'QT tags' );
-		self::assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_tags, 'ru' ), 'QT tags' );
+		self::assertEquals( 'Рус', WPGlobus_Core::text_filter( $qt_tags, 'ru' ), 'QT tags' );
 
 		$qt_comments = '<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->';
 		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_comments ), 'QT comments' );
@@ -127,7 +131,6 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 
 		unset( $post );
 
-
 		/**
 		 * Translate to a language other than the current one
 		 */
@@ -221,7 +224,6 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		self::assertEquals( 'term description RU', $term_object->description, '$term_object->description' );
 
 	}
-
 } // class
 
 # --- EOF
