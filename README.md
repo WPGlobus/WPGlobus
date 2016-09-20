@@ -21,6 +21,7 @@
 * Some themes and 3rd party plugins are **not 100% WPGlobus-ready**. Read the "Compatibility" section below for details.
 * We develop and test our software using the **latest versions of PHP and WordPress only**. While we do our best to write code compatible with older versions, we cannot be 100% sure that everything works correctly under older versions.
 * The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
+* For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
 
 > **What is in the FREE version of WPGlobus?**
 
@@ -196,6 +197,11 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.6.4 ###
+
+* FIXED:
+	* Additional checks and compatibility methods to avoid failures if `mbstring` PHP extension is not loaded.
 
 ### 1.6.3 ###
 

@@ -180,6 +180,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.6.4 =
+
+* FIXED:
+	* Additional checks and compatibility methods to avoid failures if `mbstring` PHP extension is not loaded.
+
 = 1.6.3 =
 
 * FIXED:

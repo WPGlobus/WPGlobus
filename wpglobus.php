@@ -45,6 +45,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'WPGLOBUS_VERSION', '1.6.4' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+/**
+ * WP Requirements library.
+ *
+ * @since   1.6.4
+ */
 if ( is_admin() ) {
 	require_once dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php';
 }
@@ -55,6 +60,11 @@ global $WPGlobus;
 global $WPGlobus_Options;
 // @codingStandardsIgnoreEnd
 
+/**
+ * Compatibility functions.
+ *
+ * @since   1.6.4
+ */
 require_once dirname( __FILE__ ) . '/includes/compat/mbstring.php';
 
 /**
