@@ -45,6 +45,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'WPGLOBUS_VERSION', '1.6.4' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+if ( is_admin() ) {
+	require_once dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php';
+}
+
 /** @todo Get rid of these */
 // @codingStandardsIgnoreStart
 global $WPGlobus;

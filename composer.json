@@ -14,6 +14,7 @@
     "notify-on-install": false
   },
   "require": {
+    "bemailr/wp-requirements": "^2.0.1",
     "tivwp/updater": "^1.0.4"
   },
   "repositories": [
