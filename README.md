@@ -202,6 +202,8 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Additional checks and compatibility methods to avoid failures if `mbstring` PHP extension is not loaded.
+* ADDED: 
+	* The correct filter for list of terms available to edit for the given post ID.
 
 ### 1.6.3 ###
 
