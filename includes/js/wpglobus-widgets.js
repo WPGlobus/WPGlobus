@@ -58,7 +58,7 @@
 
 				id = element.attr('id');
 				
-				if ( typeof id === 'undefined' || -1 != id.indexOf( '-number') ) {
+				if ( typeof id === 'undefined' || -1 != id.indexOf( '-number') || '' == id ) {
 					return true;
 				}	
 				
