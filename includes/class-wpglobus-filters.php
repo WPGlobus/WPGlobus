@@ -324,6 +324,29 @@ class WPGlobus_Filters {
 	}
 
 	/**
+	 * Filter @see get_terms_to_edit()
+	 * @since 1.6.4
+	 *
+	 * @param string 
+	 *
+	 * @return string
+	 */	
+	public static function filter__terms_to_edit( $terms_to_edit ) {
+		
+		if ( ! WPGlobus_Core::has_translations( $terms_to_edit ) ) {
+			return $terms_to_edit;
+		}		
+		
+		$terms = explode( ',', $terms_to_edit );
+		
+		foreach( $terms as $k=>$term ) {
+			$terms[$k] = WPGlobus_Core::text_filter( $term, WPGlobus::Config()->language );
+		}
+
+		return join( ',', $terms );
+	}	 
+	
+	/**
 	 * Localize home_url
 	 * Should be processed on:
 	 * - front

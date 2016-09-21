@@ -62,6 +62,15 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() || WPGlobus_WP::is_pagenow( 'n
 }
 
 /**
+ * Filter for @see get_terms_to_edit() wp-admin\includes\taxonomy.php 
+ * @scope admin
+ * @since 1.6.4
+ */
+if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && ( empty( $_GET['wpglobus'] ) || 'on' === $_GET['wpglobus'] ) ) {
+	add_filter( 'terms_to_edit', array( 'WPGlobus_Filters', 'filter__terms_to_edit'), 5 );
+}
+
+/**
  * Filter for @see wp_setup_nav_menu_item
  */
 if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
