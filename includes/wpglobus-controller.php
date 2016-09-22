@@ -19,17 +19,24 @@ if ( is_admin() ) {
 }
 
 /**
- * Admin: use filter for @see get_terms_to_edit function. See meta-boxes.php file.
- * @scope admin Edit post: see "Tags" metabox
- *        Does NOT affect the "Categories" metabox
- * @scope front WC breadcrumb
+ * Filter @see wp_get_object_terms()
  */
-if ( is_admin() && ! empty( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) {
-	/**
-	 * nothing to do
-	 */
-} else {
+if ( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) {
 	add_filter( 'wp_get_object_terms', array( 'WPGlobus_Filters', 'filter__wp_get_object_terms' ), 0 );
+}
+
+/**
+ * Filter for the "Tags" metabox in post edit. Does NOT affect the "Categories" metabox.
+ * @see   get_terms_to_edit() wp-admin\includes\taxonomy.php
+ * @scope admin
+ * @since 1.6.4
+ */
+if (
+	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] )
+	&& is_admin()
+	&& WPGlobus_WP::is_pagenow( 'post.php' )
+) {
+	add_filter( 'terms_to_edit', array( 'WPGlobus_Filters', 'filter__terms_to_edit' ), 5 );
 }
 
 
@@ -62,24 +69,15 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() || WPGlobus_WP::is_pagenow( 'n
 }
 
 /**
- * Filter for @see get_terms_to_edit() wp-admin\includes\taxonomy.php 
- * @scope admin
- * @since 1.6.4
- */
-if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && ( empty( $_GET['wpglobus'] ) || 'on' === $_GET['wpglobus'] ) ) {
-	add_filter( 'terms_to_edit', array( 'WPGlobus_Filters', 'filter__terms_to_edit'), 5 );
-}
-
-/**
  * Filter for @see wp_setup_nav_menu_item
  */
-if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
+//if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
 	/**
 	 * @todo temporarily disable the filter
 	 * need to test js in work
 	 */
 	//add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
-}
+//}
 
 if ( ! is_admin() ) {
 	/**
@@ -299,7 +297,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 
 	} else {
 
-		require_once 'vendor/class-wpglobus-aioseop.php';
+		require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-aioseop.php';
 
 		/**
 		 * Filter for @see localization
@@ -340,7 +338,7 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 	 * https://wordpress.org/plugins/the-events-calendar/
 	 */
 
-	require_once 'vendor/class-wpglobus-the-events-calendar.php';
+	require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-the-events-calendar.php';
 
 	add_filter( 'tribe_events_template_data_array', array( 'WPGlobus_The_Events_Calendar', 'filter__events_data' ), 0, 3 );
 
@@ -359,27 +357,28 @@ if ( class_exists( 'Mega_Menu' ) ) {
 
 if ( class_exists( 'RevSliderFront' ) ) {
 
-	if ( 
+	/* @noinspection NestedPositiveIfStatementsInspection */
+	if (
 		/**
 		 * Filter to start the support Slider Revolution.
 		 *
 		 * @since 1.6.1
 		 *
-		 * @param boolean true.
-		 * @return boolean.
-		*/	
-		apply_filters( 'wpglobus_revslider_start', true ) 
+		 * @param bool true.
+		 * @return bool
+		*/
+		apply_filters( 'wpglobus_revslider_start', true )
 	) :
-	
+
 		/**
 		 * Translate layers
 		 * @see https://revolution.themepunch.com/
 		 *
 		 * @since 1.5.0
 		 */
-		require_once 'vendor/class-wpglobus-revslider.php';
+		require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-revslider.php';
 		WPGlobus_RevSlider::controller();
-	
+
 	endif;
 
 }
@@ -392,7 +391,7 @@ if ( function_exists( '__mc4wp_flush' ) ) {
 	 *
 	 * @since 1.5.4
 	 */
-	require_once 'vendor/class-wpglobus-mailchimp-for-wp.php';
+	require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-mailchimp-for-wp.php';
 	WPGlobus_MailChimp_For_WP::controller();
 }
 

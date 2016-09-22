@@ -818,7 +818,7 @@ class WPGlobus {
 		}
 
 		$mode = 'off';
-		if ( isset( $_GET['wpglobus'] ) && 'off' == $_GET['wpglobus'] ) {
+		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) {
 			$mode = 'on';
 		}
 		?>

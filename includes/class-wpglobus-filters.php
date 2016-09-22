@@ -150,18 +150,21 @@ class WPGlobus_Filters {
 	 * @scope admin
 	 * @scope front
 	 *
-	 * @param string[]|object[] $terms An array of terms for the given object or objects.
+	 * @param string[]|stdClass[] $terms An array of terms for the given object or objects.
 	 *
 	 * @return array
 	 */
-	public static function filter__wp_get_object_terms( Array $terms ) {
+	public static function filter__wp_get_object_terms( array $terms ) {
 
 		/**
 		 * @internal
 		 * Do not need to check for is_wp_error($terms),
 		 * because the WP_Error is returned by wp_get_object_terms() before applying filter.
-		 * Do not need to check for empty($terms) because foreach won't loop.
 		 */
+
+		if ( ! count( $terms ) ) {
+			return $terms;
+		}
 
 		/**
 		 * Don't filter term names when saving or publishing posts
@@ -327,25 +330,25 @@ class WPGlobus_Filters {
 	 * Filter @see get_terms_to_edit()
 	 * @since 1.6.4
 	 *
-	 * @param string 
+	 * @param string
 	 *
 	 * @return string
-	 */	
+	 */
 	public static function filter__terms_to_edit( $terms_to_edit ) {
-		
+
 		if ( ! WPGlobus_Core::has_translations( $terms_to_edit ) ) {
 			return $terms_to_edit;
-		}		
-		
-		$terms = explode( ',', $terms_to_edit );
-		
-		foreach( $terms as $k=>$term ) {
-			$terms[$k] = WPGlobus_Core::text_filter( $term, WPGlobus::Config()->language );
 		}
 
-		return join( ',', $terms );
-	}	 
-	
+		$terms = explode( ',', $terms_to_edit );
+
+		foreach ( $terms as $k => $term ) {
+			$terms[ $k ] = WPGlobus_Core::text_filter( $term, WPGlobus::Config()->language );
+		}
+
+		return implode( ',', $terms );
+	}
+
 	/**
 	 * Localize home_url
 	 * Should be processed on:
