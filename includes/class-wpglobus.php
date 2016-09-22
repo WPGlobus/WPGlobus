@@ -47,6 +47,14 @@ class WPGlobus {
 	const PAGE_WPGLOBUS_CLEAN = 'wpglobus-clean';
 
 	/**
+	 * WPGlobus HelpDesk page
+	 *
+	 * @var string
+	 * @since 1.6.5
+	 */
+	const PAGE_WPGLOBUS_HELPDESK = 'wpglobus-helpdesk';
+
+	/**
 	 * List navigation menus
 	 * @var array
 	 */

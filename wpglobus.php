@@ -132,4 +132,19 @@ if (
 	require_once dirname( __FILE__ ) . '/vendor/tivwp/updater/updater.php';
 }
 
+/**
+ * In admin area
+ */
+if ( WPGlobus_WP::in_wp_admin() ) :
+
+	/**
+	 * HelpDesk
+	 *
+	 * @since 1.6.5
+	 */
+	include_once dirname( __FILE__ ) . '/includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php';
+	WPGlobus_Admin_HelpDesk::construct();
+
+endif;
+
 /*EOF*/

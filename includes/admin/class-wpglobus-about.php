@@ -62,7 +62,7 @@ class WPGlobus_About {
 				<a href="admin.php?page=wpglobus_options&amp;tab=4" class="nav-tab">
 					<?php esc_html_e( 'Add-ons', 'wpglobus' ); ?>
 				</a>
-				<a href="<?php echo esc_url( $url_wpglobus_site_contact ); ?>"
+				<a href="<?php echo esc_url( WPGlobus_Admin_HelpDesk::$admin_page_url ); ?>"
 				   class="nav-tab">
 					<?php esc_html_e( 'Support', 'wpglobus' ); ?>
 				</a>
