@@ -2,7 +2,7 @@
 /**
  * File: wpglobus.php
  *
- * @package WPGlobus
+ * @package   WPGlobus
  * @author    TIV.NET INC, Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
  * @copyright 2015-2016 TIV.NET INC. / WPGlobus
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License, version 3
@@ -50,7 +50,10 @@ define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
  *
  * @since   1.6.4
  */
-if ( is_admin() ) {
+if (
+	! defined( 'DOING_AJAX' ) && ! defined( 'DOING_CRON' ) && is_admin()
+	&& is_readable( dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php' )
+) {
 	require_once dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php';
 }
 
