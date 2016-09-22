@@ -184,10 +184,10 @@ No known backward incompatibility issues.
 
 * FIXED:
 	* Additional checks and compatibility methods to avoid failures if `mbstring` PHP extension is not loaded.
-	* Widgets: Doesn't make multilingual field with empty id.
+	* Widgets: Don't setup field as multilingual if its ID is empty.
 * ADDED:
 	* The correct filter for list of terms available to edit for the given post ID.
-	
+
 = 1.6.3 =
 
 * FIXED:
