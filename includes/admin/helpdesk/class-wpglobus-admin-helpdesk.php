@@ -7,7 +7,8 @@
 
 
 /**
- * Class WPGlobus_Admin_HelpDesk
+ * Class WPGlobus_Admin_HelpDesk.
+ * The Contact Support form.
  */
 class WPGlobus_Admin_HelpDesk {
 
@@ -21,7 +22,7 @@ class WPGlobus_Admin_HelpDesk {
 	 * Admin page title.
 	 * @var string
 	 */
-	protected static $page_title;
+	public static $page_title;
 	/**
 	 * Admin menu title.
 	 * @var string
@@ -114,7 +115,7 @@ class WPGlobus_Admin_HelpDesk {
 	public static function helpdesk_page() {
 		$data = self::get_data();
 
-		include dirname( __FILE__ ) . '/view-page.php';
+		include dirname( __FILE__ ) . '/wpglobus-admin-helpdesk-page.php';
 
 		// Split one-cell formatted list of plugins into the separate rows.
 		$active_plugins = explode( ', ', $data['active_plugins'] );
@@ -133,10 +134,16 @@ class WPGlobus_Admin_HelpDesk {
 				poweredBy: 0
 			});
 
-			jQuery(function () {
+			jQuery(function ($) {
 				HS.beacon.ready(function () {
 					//noinspection JSUnresolvedFunction
 					HS.beacon.identify(<?php echo wp_kses( wp_json_encode( $data ), array() );?>);
+				});
+
+				// Set a special class for the menu item.
+				$(".wpglobus_admin_hs_beacon_toggle").on("click", function (e) {
+					e.preventDefault();
+					HS.beacon.toggle();
 				});
 			});
 		</script>
@@ -158,7 +165,12 @@ class WPGlobus_Admin_HelpDesk {
 			'site_url'          => site_url(),
 			'REMOTE_ADDR'       => $_SERVER['REMOTE_ADDR'],
 			'SERVER_PORT'       => $_SERVER['SERVER_PORT'],
-			'OS'                => php_uname(),
+			'OS'                => implode( ' ', array(
+					php_uname( 's' ),
+					php_uname( 'r' ),
+					php_uname( 'v' ),
+				)
+			),
 			'PHP_SAPI'          => PHP_SAPI,
 			'PHP_VERSION'       => PHP_VERSION,
 			'loaded_extensions' => implode( ', ', get_loaded_extensions() ),

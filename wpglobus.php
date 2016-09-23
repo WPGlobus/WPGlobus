@@ -138,11 +138,18 @@ if (
 if ( WPGlobus_WP::in_wp_admin() ) :
 
 	/**
+	 * Admin page helpers
+	 *
+	 * @since 1.6.5
+	 */
+	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-admin-page.php';
+
+	/**
 	 * HelpDesk
 	 *
 	 * @since 1.6.5
 	 */
-	include_once dirname( __FILE__ ) . '/includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php';
+	require_once dirname( __FILE__ ) . '/includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php';
 	WPGlobus_Admin_HelpDesk::construct();
 
 endif;
