@@ -180,6 +180,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.6.5 =
+
+* ADDED:
+	* Helpdesk form directly in WP admin.
+
 = 1.6.4 =
 
 * FIXED:
