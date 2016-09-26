@@ -43,14 +43,13 @@ class WPGlobus_Admin_HelpDesk {
 	 * Static "constructor".
 	 */
 	public static function construct() {
-		self::set_vars();
 		self::set_hooks();
 	}
 
 	/**
 	 * Set class variables.
 	 */
-	protected static function set_vars() {
+	public static function set_vars() {
 		self::$page_title   = __( 'WPGlobus Help Desk', 'wpglobus' );
 		self::$menu_title   = __( 'Help Desk', 'wpglobus' );
 		self::$menu_tooltip = __( 'Contact WPGlobus Support', 'wpglobus' );
@@ -63,6 +62,7 @@ class WPGlobus_Admin_HelpDesk {
 	 * Setup actions and filters.
 	 */
 	protected static function set_hooks() {
+		add_action( 'admin_init', array( __CLASS__, 'set_vars' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_menu' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'show_submenu' ), PHP_INT_MAX );
 	}
