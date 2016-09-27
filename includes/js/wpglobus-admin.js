@@ -1396,6 +1396,14 @@ jQuery(document).ready(function () {
                 return '<img class="wpglobus_flag" src="' + WPGlobusAdmin.flag_url + language.text + '"/>&nbsp;&nbsp;' + language.text;
             },
 			set_dialog: function() {
+
+				if ( 'undefined' !== typeof WPGlobusAdmin.data.customFieldsEnabled ) {
+					WPGlobusAdmin.data.customFieldsEnabled = this.parseBool( WPGlobusAdmin.data.customFieldsEnabled );
+					if ( ! WPGlobusAdmin.data.customFieldsEnabled ) {
+						return;
+					}
+				}
+				
 				var ajaxify_row_id, added_control = false;
 				var add_elements = function(post_id) {
 

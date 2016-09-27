@@ -1063,6 +1063,24 @@ class WPGlobus {
 					}
 				}
 
+				$data[ 'customFieldsEnabled' ] = true;
+			
+				/**
+				 * Filter to enable/disable multilingual custom fields on post.php|post-new.php page.
+				 * Returning boolean.
+				 * @since 1.6.5
+				 *
+				 * @param boolean		 $data An array with data.
+				 * @param WP_Post Object $post Current post.
+				 */			
+				$data[ 'customFieldsEnabled' ] = apply_filters( 'wpglobus_custom_fields_enabled', $data[ 'customFieldsEnabled' ], $post );				
+				
+				if ( $data[ 'customFieldsEnabled' ] ) {
+					$data[ 'customFieldsEnabled' ] = 'true';
+				} else {
+					$data[ 'customFieldsEnabled' ] = 'false';
+				}
+				
 			} else if ( 'nav-menus.php' === $page ) {
 
 				$page_action = 'menu-edit';
@@ -1392,16 +1410,16 @@ class WPGlobus {
 				'WPGlobusCoreData',
 				array_merge(
 					array(
-						'version'           => WPGLOBUS_VERSION,
-						'default_language'  => $config->default_language,
-						'language'          => $config->language,
-						'enabled_languages' => $config->enabled_languages,
-						'open_languages'    => $config->open_languages,
-						'en_language_name'  => $config->en_language_name,
-						'locale_tag_start'  => self::LOCALE_TAG_START,
-						'locale_tag_end'    => self::LOCALE_TAG_END,
-						'page'              => $page_action,
-						'multisite'			=> $is_multisite,
+						'version'           	=> WPGLOBUS_VERSION,
+						'default_language'  	=> $config->default_language,
+						'language'          	=> $config->language,
+						'enabled_languages' 	=> $config->enabled_languages,
+						'open_languages'    	=> $config->open_languages,
+						'en_language_name'  	=> $config->en_language_name,
+						'locale_tag_start'  	=> self::LOCALE_TAG_START,
+						'locale_tag_end'    	=> self::LOCALE_TAG_END,
+						'page'              	=> $page_action,
+						'multisite'				=> $is_multisite,
 						'pluginInstallLocation'	=> array(
 							'single'	=> 	'plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus',
 							'multisite'	=>	'network/plugin-install.php?tab=search&s=WPGlobus&source=WPGlobus'
