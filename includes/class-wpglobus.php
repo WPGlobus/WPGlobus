@@ -532,8 +532,15 @@ class WPGlobus {
 		}
 		$posts_columns =
 			array_slice( $posts_columns, 0, $i + 1 ) + array( 'wpglobus_languages' => 'Language' ) + array_slice( $posts_columns, $i + 1 );
-
-		return $posts_columns;
+		
+		/**
+		 * Filter the columns displayed in the Posts list table.
+		 * Returning array.
+		 * @since 1.6.5
+		 *
+		 * @param array $posts_columns An array of column names.
+		 */							
+		return apply_filters( 'wpglobus_manage_posts_columns', $posts_columns );		
 
 	}
 
@@ -1070,7 +1077,7 @@ class WPGlobus {
 				 * Returning boolean.
 				 * @since 1.6.5
 				 *
-				 * @param boolean		 $data An array with data.
+				 * @param boolean		 $data[ 'customFieldsEnabled' ] Enabled by default.
 				 * @param WP_Post Object $post Current post.
 				 */			
 				$data[ 'customFieldsEnabled' ] = apply_filters( 'wpglobus_custom_fields_enabled', $data[ 'customFieldsEnabled' ], $post );				
