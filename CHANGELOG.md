@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+### 1.6.5 ###
+
+* ADDED:
+	* Helpdesk form directly in WP admin.
+    * Core: Filter to enable/disable multilingual custom fields on post.php|post-new.php page.
+    * Core: Filter the columns displayed in the Posts list table.
+* FIXED:
+    * A license activation bug that occurred when plugin "slug" did not match the plugin folder name (example: the `WPGlobus for Slider Revolution` premium add-on).
+
 ### 1.6.4 ###
 
 * FIXED:
