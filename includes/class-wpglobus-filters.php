@@ -441,6 +441,14 @@ class WPGlobus_Filters {
 	) {
 
 		/**
+		 * @todo This caching breaks the admin language switcher.
+		 */
+/*		static $cached_locale = null;
+		if ( null !== $cached_locale ) {
+			return $cached_locale;
+		}*/
+
+		/**
 		 * Special case: in admin area, show everything in the language of admin interface.
 		 * (set in the General Settings in WP 4.1)
 		 */
@@ -475,6 +483,8 @@ class WPGlobus_Filters {
 		} else {
 			$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
 		}
+
+/*		$cached_locale = $locale;*/
 
 		return $locale;
 
