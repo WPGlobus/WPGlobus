@@ -20,6 +20,7 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 * We develop and test our software using the **latest versions of PHP and WordPress only**. While we do our best to write code compatible with older versions, we cannot be 100% sure that everything works correctly under older versions.
 * The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
 * For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
+* Many modern themes have special panels in the Customizer, where they ask you to enter some texts: titles for the Home Page sections and similar. You will need to install the free [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to display those texts correctly.
 
 > **What is in the FREE version of WPGlobus?**
 
