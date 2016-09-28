@@ -202,7 +202,8 @@ No known backward incompatibility issues.
 
 * ADDED:
 	* Helpdesk form directly in WP admin.
-	* Core: Added filter to enable/disable multilingual custom fields on post.php|post-new.php page.
+    * Core: Filter to enable/disable multilingual custom fields on post.php|post-new.php page.	
+    * Core: Filter the columns displayed in the Posts list table.	
 
 ### 1.6.4 ###
 
