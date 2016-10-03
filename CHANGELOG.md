@@ -4,6 +4,8 @@
 
 ### 1.6.6 ###
 
+* ADDED:
+    * Core: Filter before output language items in edit.php page.
 * FIXED:
 	* Prevent creating duplicates of terms in edit.php page.
 	
