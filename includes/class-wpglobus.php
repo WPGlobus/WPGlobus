@@ -578,6 +578,16 @@ class WPGlobus {
 				}
 			}
 
+			/**
+			 * Filter language items before output.
+			 * Returning array.
+			 * @since 1.6.6
+			 *
+			 * @param string $output Array of language items.
+			 * @param array  $post   An object WP_Post.
+			 */			
+			$output = apply_filters( 'wpglobus_manage_language_items', $output, $post );			
+
 			if ( ! empty( $output ) ) {
 				echo implode( '<br />', $output );
 			}
