@@ -39,6 +39,18 @@ if (
 	add_filter( 'terms_to_edit', array( 'WPGlobus_Filters', 'filter__terms_to_edit' ), 5 );
 }
 
+/**
+ * Filter for the "Tags" box in edit.php page.
+ * @see filter 'pre_insert_term' in wp-includes\taxonomy.php
+ * @scope admin
+ * @since 1.6.6
+ */
+if (
+	WPGlobus_WP::is_http_post_action('inline-save') 
+	&& false !== strpos( $_SERVER[ 'HTTP_REFERER' ], 'edit.php' )
+) {
+	add_filter( 'pre_insert_term', array( 'WPGlobus_Filters', 'filter__pre_insert_term' ), 5, 2 );
+}
 
 /**
  * Full description is in @see WPGlobus_Filters::filter__sanitize_title

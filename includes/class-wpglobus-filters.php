@@ -350,6 +350,36 @@ class WPGlobus_Filters {
 	}
 
 	/**
+	 * Filter @see wp_insert_term().
+	 * @since 1.6.6
+	 *
+	 * @param string $term     The term to add or update.
+	 * @param string $taxonomy Taxonomy slug.
+	 *
+	 * @return string
+	 */	
+	public static function filter__pre_insert_term( $term, $taxonomy  ) {
+
+		$multilingual_term = esc_sql( $term );
+		if ( WPGlobus::Config()->language != WPGlobus::Config()->default_language ) {
+			$multilingual_term = WPGlobus_Utils::build_multilingual_string( array( WPGlobus::Config()->language=>$term ) );
+		}
+
+		global $wpdb;
+		$data = $wpdb->get_results( "SELECT * FROM $wpdb->terms AS terms WHERE terms.name LIKE '%{$multilingual_term}%'" );
+
+		if ( count( $data ) > 0 ) {
+			/**
+			 * Return empty to prevent creating duplicate term.
+			 * @see wp_insert_term() in wp-includes\taxonomy.php
+			 */
+			return '';
+		}
+		
+		return $term;
+	}	
+	
+	/**
 	 * Localize home_url
 	 * Should be processed on:
 	 * - front

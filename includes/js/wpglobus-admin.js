@@ -575,9 +575,9 @@ jQuery(document).ready(function () {
                         this.taxonomy_edit();
                     }
                 } else if ('taxonomy-quick-edit' === WPGlobusAdmin.page) {
-                    this.quick_edit('taxonomy');
+                    this.quickEdit('taxonomy');
                 } else if ('edit.php' === WPGlobusAdmin.page) {
-                    this.quick_edit('post');
+                    this.quickEdit('post');
                 } else if ('options-general.php' == WPGlobusAdmin.page) {
 					this.options_general();
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
@@ -649,7 +649,11 @@ jQuery(document).ready(function () {
                     });
                 });
 			},
-            quick_edit: function (type) {
+            quickEdit: function (type) {
+				
+				/**
+				 * For more info @see ajax handler 'wp_ajax_inline_save'
+				 */
                 if (typeof WPGlobusAdmin.data.has_items === 'undefined') {
                     return;
                 }
@@ -729,48 +733,74 @@ jQuery(document).ready(function () {
 					});
 				}
 
-				$('a.save, input#bulk_edit').on('mouseenter', function (event) {
+				$('button.save, input#bulk_edit').on('mouseenter', function (event) {
+					/**
+					 * Quick edit action for the "Tags" box in edit.php page.
+					 */
 					if ( typeof WPGlobusAdmin.data.tags === 'undefined' ) {
                         return;
                     }
+					
 					if (event.currentTarget.id=='bulk_edit') {
 						$('input#bulk_edit').unbind('click');
 					} else {
-						$('a.save').unbind('click');
+						$('button.save').unbind('click');
 					}
+					
+					$( 'button.save, input#bulk_edit').on('click', function (event) {
+						console.log( 'Start Updating' );
+						var promise	= $.when();
+					
+						var tagsHandler = function( $elem ) {
+							$elem.next('.spinner').css({'visibility':'visible'});
+							if (event.currentTarget.id != 'bulk_edit') {
+								$.ajaxSetup({async:false});
+							}
+							var p = $elem.parents('tr');
+							var id = p.attr('id').replace('edit-','');
+							var t,v,newTags;
 
-					$('a.save, input#bulk_edit').click(function (event) {
-						if (event.currentTarget.id != 'bulk_edit') {
-							$.ajaxSetup({async:false});
-						}
-						var p = $(this).parents('tr');
-						var id = p.attr('id').replace('edit-','');
-						var t,v,new_tags;
-
-						$.each( WPGlobusAdmin.data.tags, function(index,tag){
-							t = p.find("textarea[name='" + WPGlobusAdmin.data.names[tag] + "']");
-							if ( t.size() == 0 ) {
-                                return true;
-                            }
-							WPGlobusAdmin.data.value[tag]['post_id'][id] = t.val();
-							v = WPGlobusAdmin.data.value[tag]['post_id'][id].split(',');
-							new_tags = [];
-							for(var i=0; i<v.length; i++) {
-								v[i] = v[i].trim(' ');
-								if ( v[i] != '' ) {
-									if ( typeof WPGlobusAdmin.data.tag[tag][v[i]] === 'undefined' ) {
-										new_tags[i] = v[i];
-									} else {
-										new_tags[i] = WPGlobusAdmin.data.tag[tag][v[i]];
+							$.each( WPGlobusAdmin.data.tags, function(index,tag){
+								t = p.find("textarea[name='" + WPGlobusAdmin.data.names[tag] + "']");
+								if ( t.length == 0 ) {
+									return true;
+								}
+								WPGlobusAdmin.data.value[tag]['post_id'][id] = t.val();
+								v = WPGlobusAdmin.data.value[tag]['post_id'][id].split(',');
+								newTags = [];
+								for(var i=0; i<v.length; i++) {
+									v[i] = v[i].trim(' ');
+									if ( v[i] != '' ) {
+										if ( typeof WPGlobusAdmin.data.tag[tag][v[i]] === 'undefined' ) {
+											newTags[i] = v[i];
+										} else {
+											newTags[i] = WPGlobusAdmin.data.tag[tag][v[i]];
+										}
 									}
 								}
-							}
-							t.val(new_tags.join(', '));
-						});
-						if (event.currentTarget.id != 'bulk_edit') {
-							inlineEditPost.save(id);
-							$.ajaxSetup({async:true});
+								t.val( newTags.join(', ') );
+							});
 						}
+						
+						var $this = $(this);
+						var start = $.Deferred();
+						start.resolve( tagsHandler( $(this) ) );
+
+						promise = promise.then(function() {
+							return $.when(
+								start.done()
+							)	
+						}).then( function() {				
+							if (event.currentTarget.id != 'bulk_edit') {
+								setTimeout(
+									function() { 
+										inlineEditPost.save(id);
+										$.ajaxSetup({async:true});
+									},
+									50
+								);
+							}
+						});
 
 					});
 				});
@@ -786,16 +816,25 @@ jQuery(document).ready(function () {
 						return;
 					}
 
-					if ('post' === type && typeof WPGlobusAdmin.data.tags !== 'undefined') {
+					if ( 'post' === type && 'undefined' !== typeof WPGlobusAdmin.data.tags ) {
+						/**
+						 * @since 1.6.6
+						 */						
 						$.each( WPGlobusAdmin.data.tags, function(i,tag){
 							if ( WPGlobusAdmin.data.value[tag] != '' ) {
-								if (typeof WPGlobusAdmin.data.value[tag]['post_id'][id] !== 'undefined') {
-									$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(WPGlobusAdmin.data.value[tag]['post_id'][id]);
+								var val = $('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(),
+									currentTags;
+								if ( 'undefined' !== typeof val ) {
+									currentTags = val.split(','); 
+									$.each( currentTags, function(order,currentTag) {
+										val = val.replace(currentTag, WPGlobusCore.TextFilter(currentTag, WPGlobusCoreData.language));
+									});
+									$('#edit-' + id + ' textarea[name="' + WPGlobusAdmin.data.names[tag] + '"]').val(val);
 								}
 							}
 						});
 					}
-
+					
                     var e = $('#edit-' + id + ' input.ptitle').eq(0);
                     var p = e.parents('label');
 					e.val(WPGlobusAdmin.qedit_titles[id].source);
