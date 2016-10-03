@@ -199,6 +199,11 @@ No known backward incompatibility issues.
 
 ## Changelog ##
 
+### 1.6.6 ###
+
+* FIXED:
+	* Prevent creating duplicates of terms in edit.php page.
+	
 ### 1.6.5 ###
 
 * ADDED:
