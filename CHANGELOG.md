@@ -8,6 +8,7 @@
     * Core: Filter before output language items in edit.php page.
 * FIXED:
 	* Prevent creating duplicates of terms in edit.php page.
+	* Prevent duplicate keyword from language by default in meta name="keywords" for extra languages.	
 	
 ### 1.6.5 ###
 
