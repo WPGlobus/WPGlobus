@@ -301,7 +301,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 	if ( is_admin() ) {
 
 		/**
-		 * Filter for @see localization
+		 * Filter for @see localization.
 		 * @scope admin
 		 * @since 1.2.1
 		 */
@@ -312,14 +312,18 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 		require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-aioseop.php';
 
 		/**
-		 * Filter for @see localization
+		 * Filter for @see localization.
 		 * @scope front
+		 *
 		 * @since 1.1.1
+		 * add_filter( 'localization', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+		 *
+		 * @since 1.6.6
 		 */
-		add_filter( 'localization', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+		add_filter( 'localization', array( 'WPGlobus_All_in_One_SEO', 'filter__text' ), 0 );
 
 		/**
-		 * Filter for @see aioseop_description
+		 * Filter for @see aioseop_description.
 		 * @scope front
 		 * @since 1.0.8
 		 */

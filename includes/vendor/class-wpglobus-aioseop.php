@@ -106,7 +106,26 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	}
 
 	/**
-	 * Filter for post description
+	 * Filter text.
+	 * We need own filter to avoid duplicate keyword from language by default in extra languages.
+	 *
+	 * @since 1.6.6
+	 * @param string $text
+	 *
+	 * @return string
+	 */	
+	public static function filter__text( $text ) {
+		
+		if ( ! WPGlobus_Core::has_translations( $text ) ) {
+			return $text;
+		}
+
+		return WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+		
+	}
+	
+	/**
+	 * Filter for post description.
 	 *
 	 * @since 1.0.8
 	 * @param string $text
@@ -425,6 +444,9 @@ class WPGlobus_aioseop {
 		/**
 		 * get keywords for current post
 		 * use original function for compatibility
+		 * 
+		 * "All In One SEO Pack" may to add keywords in addition to any keywords you specify on the Edit Post screen.
+		 * @see options in Keyword Settings metabox on General Settings page.
 		 */
 		$keywords = $aio->get_all_keywords();
 		$keywords = explode( ',', $keywords );
@@ -437,7 +459,12 @@ class WPGlobus_aioseop {
 			if ( empty($keyword) ) {
 				$keywords_source[$keyword] = '';
 			} else {
-				$keywords_source[$keyword] = $wpdb->get_var( "SELECT name FROM $wpdb->terms WHERE name LIKE '%$keyword%'" );
+				$name = $wpdb->get_var( "SELECT name FROM $wpdb->terms WHERE name LIKE '%$keyword%'" );
+				if ( empty( $name ) ) {
+					$keywords_source[$keyword] = '';
+				} else {
+					$keywords_source[$keyword] = $name;
+				}
 			}
 		}
 
@@ -632,6 +659,9 @@ class WPGlobus_aioseop {
 
 								$placeholders = array();
 								foreach( $keywords as $keyword ) {
+									if ( empty( $keywords_source[$keyword] ) ) {
+										continue;
+									}
 									/**
 									 * @todo maybe better use WPGlobus::RETURN_EMPTY, in this case we will be have tags in native language only
 									 */
