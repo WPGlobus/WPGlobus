@@ -16,6 +16,13 @@ class WPGlobus_YoastSEO {
 	 * @var string
 	 */
 	public static $yoastseo_separator = '';
+	
+	/**
+	 * Name of the script.
+	 *
+	 * @var string
+	 */	
+	public static $handle_script = 'wpglobus-yoastseo';
 
 	/**
 	 * Static "controller"
@@ -285,7 +292,7 @@ class WPGlobus_YoastSEO {
 				'yoastseo_plus_access' => $yoastseo_plus_access
 			);
 
-			$handle = 'wpglobus-yoastseo';
+			$handle = self::$handle_script;
 
 			/** @noinspection PhpInternalEntityUsedInspection */
 			$src_version = version_compare( WPSEO_VERSION, '3.1', '>=' ) ? '31' : '30';
