@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.6.5\n"
+"Project-Id-Version: WPGlobus 1.6.6\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-09-28 18:08:09+00:00\n"
+"POT-Creation-Date: 2016-10-17 22:59:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -677,25 +677,25 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:997
+#: includes/class-wpglobus.php:1007
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1199
+#: includes/class-wpglobus.php:1209
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:3151
+#: includes/class-wpglobus.php:3161
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:3153
+#: includes/class-wpglobus.php:3163
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a "
 "non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:3292
+#: includes/class-wpglobus.php:3302
 msgid "Add"
 msgstr ""
 

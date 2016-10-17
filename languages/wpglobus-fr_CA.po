@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-09-28 16:44:26+00:00\n"
+"POT-Creation-Date: 2016-10-17 22:59:48+00:00\n"
 "PO-Revision-Date: 2016-09-11 16:52+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/wp-translations/"
@@ -717,21 +717,21 @@ msgstr "Liste déroulante avec drapeaux"
 msgid "Selector type"
 msgstr "Type de sélecteur"
 
-#: includes/class-wpglobus.php:997
+#: includes/class-wpglobus.php:1007
 msgid "You cannot disable the main language."
 msgstr "Vous ne pouvez pas désactiver la langue principale."
 
-#: includes/class-wpglobus.php:1199
+#: includes/class-wpglobus.php:1209
 msgid "*) Available after the menu is saved."
 msgstr "*) Disponible après que le menu ait été enregistré."
 
-#: includes/class-wpglobus.php:3151
+#: includes/class-wpglobus.php:3161
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Vous devez activer les jolis permaliens pour pouvoir utiliser WPGlobus "
 "correctement."
 
-#: includes/class-wpglobus.php:3153
+#: includes/class-wpglobus.php:3163
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -739,7 +739,7 @@ msgstr ""
 "Veuillez vous rendre dans Réglages > Permaliens et choisissez autre chose "
 "que la valeur par défaut."
 
-#: includes/class-wpglobus.php:3292
+#: includes/class-wpglobus.php:3302
 msgid "Add"
 msgstr "Ajouter"
 
