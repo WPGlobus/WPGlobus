@@ -290,7 +290,7 @@ class WPGlobus_Utils {
 
 			$hreflangs[ $language ] = sprintf( '<link rel="alternate" hreflang="%s" href="%s"/>',
 				str_replace( '_', '-', $config->locale[ $language ] ),
-				WPGlobus_Utils::localize_current_url( $language, $config )
+				esc_url( WPGlobus_Utils::localize_current_url( $language, $config ) )
 			);
 
 		}
