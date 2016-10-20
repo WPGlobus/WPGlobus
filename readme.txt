@@ -185,6 +185,7 @@ No known backward incompatibility issues.
 
 * ADDED:
     * Core: Filter before output language items in edit.php page.
+	* Core: Filter CSS rules for frontend (Ticket #304).
 * FIXED:
 	* Prevent creating duplicates of terms in edit.php page.
 	* Prevent duplicate keyword from language by default in meta name="keywords" for extra languages.
