@@ -1861,7 +1861,7 @@ class WPGlobus {
 		 */
 		foreach ( $config->enabled_languages as $language ) {
 			$css .= '.wpglobus_flag_' . $language .
-			        '{background-image:url(' . $config->flags_url . $config->flag[ $language ] . ')}';
+			        '{background-image:url(' . $config->flags_url . $config->flag[ $language ] . ")}\n";
 		}
 
 		/**
@@ -1873,7 +1873,16 @@ class WPGlobus {
 			        '.wpglobus_language_name{padding-right:22px;}';
 		}
 
-		$css .= strip_tags( $config->css_editor );
+		/**
+		 * Filter CSS rules for frontend.
+		 * @since 1.6.6
+		 *
+		 * @param string $css CSS rules for flags in the menu.
+		 * @param string $config->css_editor Custom CSS rules @see WPGlobus options.
+		 *
+		 * @return string
+		 */		
+		$css = apply_filters( 'wpglobus_styles', $css, $config->css_editor );		
 
 		if ( ! empty( $css ) ) {
 			?>

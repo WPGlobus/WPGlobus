@@ -283,6 +283,12 @@ add_action( 'admin_init', array( 'WPGlobus_Filters', 'action__admin_init' ), 0 )
 add_action( 'wp', array( 'WPGlobus_Filters', 'set_multilingual_meta_keys' ) );
 add_filter( 'get_post_metadata', array( 'WPGlobus_Filters', 'filter__postmeta' ), 0, 4 );
 
+/**
+ * Filter CSS rules.
+ */
+if ( ! is_admin() ) {
+	add_filter( 'wpglobus_styles', array( 'WPGlobus_Filters', 'filter__front_styles' ), 10, 2 );
+}
 
 /**
  * ACF filters

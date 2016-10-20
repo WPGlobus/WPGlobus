@@ -938,6 +938,18 @@ class WPGlobus_Filters {
 		}
 	}
 
+	/**
+	 * Filter CSS rules for frontend.
+	 * @since 1.6.6
+	 *
+	 * @scope front
+	 */
+	public static function filter__front_styles( $css, $css_editor ) {
+		if ( ! empty( $css_editor ) ) {
+			$css .= strip_tags( $css_editor );
+		}
+		return $css;
+	}
 
 } // class
 
