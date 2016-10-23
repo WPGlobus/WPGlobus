@@ -151,6 +151,14 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php';
 	WPGlobus_Admin_HelpDesk::construct();
+	
+	/**
+	 * Admin page central.
+	 *
+	 * @since 1.6.6
+	 */	
+	require_once dirname( __FILE__ ) . '/includes/admin/central/class-wpglobus-admin-central.php';
+	WPGlobus_Admin_Central::construct();
 
 endif;
 

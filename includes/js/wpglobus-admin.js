@@ -585,6 +585,8 @@ jQuery(document).ready(function () {
 					WPGlobusDialogApp.init({dialogTitle:'Edit text'});
                 } else if ('wpglobus_options' == WPGlobusAdmin.page) {
                     this.start();
+                } else if ('wpglobusAdminCentral' == WPGlobusAdmin.page) {
+					this.adminCentral();
                 } else {
 					// init WPGlobusDialogApp for using in a 3-party plugins
 					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
@@ -1408,6 +1410,32 @@ jQuery(document).ready(function () {
                 });
 
             },
+            adminCentral: function () {
+				
+				$( '.wpglobus-admin-central-tab' ).css({ 'display':'none' });
+				if ( $( '.nav-tab-active' ).length == 0 || $( '.nav-tab-active' ).length > 1 ) {
+					$( '.wpglobus-about-wrap .nav-tab-wrapper a' ).removeClass( 'nav-tab-active' );
+					$( '.wpglobus-about-wrap .nav-tab-wrapper a' ).eq(0).addClass( 'nav-tab-active' );
+				}
+				
+				var activePanel = $( '.wpglobus-about-wrap .nav-tab-active' ).data( 'tab-id' );
+				if ( '' != activePanel ) {
+					$( '#'+activePanel ).css({'display':'block'});
+				}
+				
+				$( document ).on( 'click', '.wpglobus-about-wrap .nav-tab', function(event){
+					var $t = $( this );
+					if ( $t.hasClass( 'nav-tab-active' ) ) {
+						return;
+					}
+					$( '.wpglobus-admin-central-tab' ).css({ 'display':'none' });
+					$( '.wpglobus-about-wrap .nav-tab' ).removeClass( 'nav-tab-active' );
+					$t.addClass( 'nav-tab-active' );
+					if ( '' != $t.data( 'tab-id' ) ) {
+						$( '#' + $t.data( 'tab-id' ) ).css({ 'display':'block' });
+					}
+				});
+			},
             start: function () {
                 var t = this;
                 $('#wpglobus_flags').select2({

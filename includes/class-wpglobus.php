@@ -53,6 +53,14 @@ class WPGlobus {
 	 * @since 1.6.5
 	 */
 	const PAGE_WPGLOBUS_HELPDESK = 'wpglobus-helpdesk';
+	
+	/**
+	 * WPGlobus Admin Central page
+	 *
+	 * @var string
+	 * @since 1.6.6
+	 */	
+	const PAGE_WPGLOBUS_ADMIN_CENTRAL = 'wpglobus-admin-central';
 
 	/**
 	 * List navigation menus
@@ -288,6 +296,12 @@ class WPGlobus {
 			 */
 			$this->enabled_pages[] = self::PAGE_WPGLOBUS_CLEAN;
 
+			/**
+			 * WPGlobus Admin Central page.
+			 * @since 1.6.6
+			 */
+			$this->enabled_pages[] = self::PAGE_WPGLOBUS_ADMIN_CENTRAL;
+			
 			add_action( 'admin_body_class', array( $this, 'on_add_admin_body_class' ) );
 
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
@@ -1337,6 +1351,13 @@ class WPGlobus {
 
 				$page_action = 'wpglobus_clean';
 
+			} else if ( in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) ) ) {
+				
+				/**
+				 * @since 1.6.6
+				 */
+				$page_action = 'wpglobusAdminCentral';
+				
 			} else {
 
 				$page_action = $page;
