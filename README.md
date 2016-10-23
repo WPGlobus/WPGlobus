@@ -202,6 +202,7 @@ No known backward incompatibility issues.
 ### 1.6.6 ###
 
 * ADDED:
+    * Core: WPGlobus Admin Central page.
     * Core: Filter before output language items in edit.php page.
 	* Core: Filter CSS rules for frontend (Ticket #304).
 * FIXED:
