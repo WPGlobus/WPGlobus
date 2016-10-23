@@ -1411,10 +1411,22 @@ jQuery(document).ready(function () {
 
             },
             adminCentral: function () {
-				
 				$( '.wpglobus-admin-central-tab' ).css({ 'display':'none' });
-				if ( $( '.nav-tab-active' ).length == 0 || $( '.nav-tab-active' ).length > 1 ) {
+					
+				if ( $( '.nav-tab-active' ).length > 1 ) {
 					$( '.wpglobus-about-wrap .nav-tab-wrapper a' ).removeClass( 'nav-tab-active' );
+				}
+				
+				var setFirstElement = true;
+				if ( 0 == location.hash.indexOf( '#' ) ) {
+					$( '.wpglobus-about-wrap .nav-tab-wrapper a').each( function( i, e ) {
+						if ( $(e).attr( 'href' ) == location.hash ) {
+							setFirstElement = false;
+							$(e).addClass( 'nav-tab-active' );
+						}						
+					});
+				}
+				if ( setFirstElement ) {
 					$( '.wpglobus-about-wrap .nav-tab-wrapper a' ).eq(0).addClass( 'nav-tab-active' );
 				}
 				
