@@ -1,16 +1,16 @@
-/* jshint node:true */
 /**
+ * @link https://www.npmjs.com/package/grunt-tivwp-po
  */
 module.exports = {
     all: {
         options: {
-            pot_file: '<%= package.tivwp_config.path.languages %>/<%= package.name %>.pot',
+            pot_file: "<%= cfg.path.languages %>/<%= package.name %>.pot",
             do_mo: true
         },
         files: [{
             expand: true,
-            cwd   : '<%= package.tivwp_config.path.languages %>/',
-            src   : ["*.po"]
+            cwd: "<%= cfg.path.languages %>/",
+            src: ["*.po"]
         }]
     }
 };

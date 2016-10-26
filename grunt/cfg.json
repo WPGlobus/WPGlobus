@@ -1,0 +1,14 @@
+{
+  "text_domain": "wpglobus",
+  "version": {
+    "define": "WPGLOBUS_VERSION"
+  },
+  "path": {
+    "dist": "/var/www/u/www.wpglobus.com/dist",
+    "js": "includes/{js,options/fields}",
+    "less": "includes/{css,options/fields}",
+    "css": "includes/css",
+    "languages": "languages",
+    "composer": "/cygwin64/usr/local/bin/composer.phar"
+  }
+}
