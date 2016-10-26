@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-10-17 22:59:48+00:00\n"
+"POT-Creation-Date: 2016-10-26 20:18:13+00:00\n"
 "PO-Revision-Date: 2016-09-11 16:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
@@ -27,11 +27,21 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
 
-#: includes/admin/class-wpglobus-about.php:32
-msgid "Quick Start"
-msgstr "Schnell-Start"
-
+#: includes/admin/central/class-wpglobus-admin-central.php:122
 #: includes/admin/class-wpglobus-about.php:42
+#: includes/admin/class-wpglobus-about.php:117
+#: includes/admin/class-wpglobus-clean.php:596
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
+msgid "Guide"
+msgstr "Anleitung"
+
+#: includes/admin/central/class-wpglobus-admin-central.php:142
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:53
+msgid "WPGlobus Help Desk"
+msgstr ""
+
+#: includes/admin/central/class-wpglobus-admin-central.php:164
+#: includes/admin/class-wpglobus-about.php:36
 #: includes/admin/class-wpglobus-clean.php:602
 #: includes/admin/class-wpglobus-customize-options.php:991
 #: includes/admin/class-wpglobus-customize-options.php:1023
@@ -40,24 +50,21 @@ msgstr "Schnell-Start"
 msgid "Add-ons"
 msgstr "Add-ons"
 
-#: includes/admin/class-wpglobus-about.php:48
-#: includes/admin/class-wpglobus-about.php:85
-#: includes/admin/class-wpglobus-clean.php:596
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
-msgid "Guide"
-msgstr "Anleitung"
+#: includes/admin/class-wpglobus-about.php:26
+msgid "Quick Start"
+msgstr "Schnell-Start"
 
-#: includes/admin/class-wpglobus-about.php:54
+#: includes/admin/class-wpglobus-about.php:48
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "FAQ"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:65
+#: includes/admin/class-wpglobus-about.php:59
 msgid ""
 "Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:66
+#: includes/admin/class-wpglobus-about.php:60
 msgid ""
 "The mbstring extension is required for the full UTF-8 compatibility and "
 "better performance. Without it, some parts of WordPress and WPGlobus may "
@@ -65,16 +72,21 @@ msgid ""
 "administrator."
 msgstr ""
 
-#: includes/admin/class-wpglobus-about.php:72
+#: includes/admin/class-wpglobus-about.php:87
+#: includes/admin/class-wpglobus-addons.php:93
+msgid "Go to WPGlobus Settings"
+msgstr "Zu den WPGlobus Einstellungen"
+
+#: includes/admin/class-wpglobus-about.php:98
 msgid "Easy as 1-2-3:"
 msgstr "Einfach wie 1-2-3:"
 
-#: includes/admin/class-wpglobus-about.php:74
+#: includes/admin/class-wpglobus-about.php:101
 msgid "Go to WPGlobus admin menu and choose the countries / languages;"
 msgstr ""
 "Gehen Sie ins WPGlobus Admin-Menü und wählen Sie die Länder / Sprachen aus;"
 
-#: includes/admin/class-wpglobus-about.php:75
+#: includes/admin/class-wpglobus-about.php:102
 msgid ""
 "Enter the translations to the posts, pages, categories, tags and menus using "
 "a clean and simple interface."
@@ -82,30 +94,58 @@ msgstr ""
 "Geben Sie Übersetzungen der Beiträge, Seiten, Kategorien, Tags und Menüs "
 "ein. Alles über eine saubere und einfache Oberfläche."
 
-#: includes/admin/class-wpglobus-about.php:76
+#: includes/admin/class-wpglobus-about.php:103
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
 msgstr ""
 "Wechsel der Sprache im Front-End per Dropdown Menü mit Ländername und Flagge."
 
-#: includes/admin/class-wpglobus-about.php:80
+#: includes/admin/class-wpglobus-about.php:111
 msgid "Links:"
 msgstr "Links:"
 
-#: includes/admin/class-wpglobus-about.php:87
+#: includes/admin/class-wpglobus-about.php:119
 msgid "FAQs"
 msgstr "FAQs"
 
-#: includes/admin/class-wpglobus-about.php:89
+#: includes/admin/class-wpglobus-about.php:121
 msgid "Contact Us"
 msgstr "Kontaktieren Sie uns"
 
-#: includes/admin/class-wpglobus-about.php:91
+#: includes/admin/class-wpglobus-about.php:123
 msgid "Please give us 5 stars!"
 msgstr "Bitte geben Sie uns 5 Sterne!"
 
-#: includes/admin/class-wpglobus-about.php:103
+#: includes/admin/class-wpglobus-about.php:133
+msgid "WPGlobus does not translate texts automatically!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:136
+msgid ""
+"There are many translation companies and individual translators who can help "
+"you write and proofread the texts."
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:137
+msgid ""
+"When you choose a translator, please look at their native language, country "
+"of residence, specialization and knowledge of WordPress."
+msgstr ""
+
+#. translators: %s are used to insert HTML link. Keep them in place.
+#: includes/admin/class-wpglobus-about.php:143
+msgid ""
+"We are planning to maintain a %s list of translators %s on the WPGlobus "
+"website. This is not an endorsement, just a courtesy. Please contact them "
+"directly and let us know how did it work for you!"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:154
+msgid "Important notes:"
+msgstr ""
+
+#: includes/admin/class-wpglobus-about.php:159
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
@@ -116,13 +156,13 @@ msgstr ""
 "Übersetzungfunktionalität für Sub-Domains<code>xx.example.com</code> oder "
 "Parameter-Abfragen <code>example.com?lang=xx</code> in der URL geplant."
 
-#: includes/admin/class-wpglobus-about.php:106
+#: includes/admin/class-wpglobus-about.php:162
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr ""
 "Einige Themen und Plugins unterstützen <strong>keine mehrsprachigkeit</"
 "strong>."
 
-#: includes/admin/class-wpglobus-about.php:107
+#: includes/admin/class-wpglobus-about.php:163
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
@@ -131,7 +171,7 @@ msgstr ""
 "Sprachen miteinander vermischt."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
-#: includes/admin/class-wpglobus-about.php:111
+#: includes/admin/class-wpglobus-about.php:167
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
@@ -139,11 +179,6 @@ msgstr ""
 "Bitte kontaktieren Sie das Plugin-Team. Wenn Sie Probleme bei der "
 "Installation oder Anpassung haben, können Sie %s das WPGlobus Team %s mit "
 "einer benutzerdefinierte Anpassung beauftragen."
-
-#: includes/admin/class-wpglobus-about.php:124
-#: includes/admin/class-wpglobus-addons.php:93
-msgid "Go to WPGlobus Settings"
-msgstr "Zu den WPGlobus Einstellungen"
 
 #: includes/admin/class-wpglobus-addons.php:50
 msgid "WPGlobus Add-ons / Extensions"
@@ -615,10 +650,6 @@ msgstr ""
 msgid "Installed"
 msgstr "Instaliert"
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:53
-msgid "WPGlobus Help Desk"
-msgstr ""
-
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:54
 msgid "Help Desk"
 msgstr ""
@@ -714,20 +745,20 @@ msgstr "Dropdown mit Flaggen"
 msgid "Selector type"
 msgstr "Selektor-Typ"
 
-#: includes/class-wpglobus.php:1007
+#: includes/class-wpglobus.php:1021
 msgid "You cannot disable the main language."
 msgstr "Die Hauptsprache kann nicht deaktiviert werden."
 
-#: includes/class-wpglobus.php:1209
+#: includes/class-wpglobus.php:1223
 msgid "*) Available after the menu is saved."
 msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
 
-#: includes/class-wpglobus.php:3161
+#: includes/class-wpglobus.php:3191
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Sie müssen schöne Permalinks aktivieren um WPGlobus verwenden zu können."
 
-#: includes/class-wpglobus.php:3163
+#: includes/class-wpglobus.php:3193
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -735,7 +766,7 @@ msgstr ""
 "Bitte gehen Sie zu Einstellungen > Permalinks > allgemeine Einstellungen, "
 "und wählen Sie die \"Beitragsname\" für schöne Permalinks."
 
-#: includes/class-wpglobus.php:3302
+#: includes/class-wpglobus.php:3332
 msgid "Add"
 msgstr "Hinzufügen"
 
