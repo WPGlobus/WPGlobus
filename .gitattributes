@@ -2,6 +2,7 @@
 .gitattributes export-ignore
 .gitignore export-ignore
 .tx export-ignore
+assets export-ignore
 CHANGELOG.md export-ignore
 grunt export-ignore
 Gruntfile.js export-ignore
