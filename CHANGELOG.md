@@ -5,13 +5,13 @@
 ### 1.6.6 ###
 
 * ADDED:
-    * Core: WPGlobus Admin Central page.
-    * Core: Filter before output language items in edit.php page.
-    * Core: Filter CSS rules for frontend (Ticket #304).
+    * Link to the [Professional Translation Service pages](http://www.wpglobus.com/translator/) from the `About WPGlobus` admin page.
+    * Core: Filter `wpglobus_manage_language_items` before outputting the language items on the `edit.php` page.
+	* Core: Filter `wpglobus_styles` for the frontend CSS rules (Ticket #304).
 * FIXED:
-	* Prevent creating duplicates of terms in edit.php page.
-	* Prevent duplicate keyword from language by default in meta name="keywords" for extra languages.	
-	
+	* Prevent creating duplicate terms on the `edit.php` page.
+	* All-in-One SEO: Prevent duplicate keywords in `meta name="keywords"` coming from extra languages.
+
 ### 1.6.5 ###
 
 * ADDED:

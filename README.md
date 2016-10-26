@@ -4,11 +4,11 @@
 **Contributors:** [tivnetinc](https://profiles.wordpress.org/tivnetinc), [alexgff](https://profiles.wordpress.org/alexgff), [tivnet](https://profiles.wordpress.org/tivnet)  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus  
-**Requires at least:** 4.2  
+**Requires at least:** 4.5  
 **Tested up to:** 4.6  
 **Stable tag:** trunk  
 **License:** GPL-3.0  
-**License URI:** https://github.com/WPGlobus/WPGlobus/blob/master/LICENSE  
+**License URI:** http://www.gnu.org/licenses/gpl.txt  
 
 **Multilingual / Globalization:** URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!  
 
@@ -26,9 +26,9 @@
 
 > **What is in the FREE version of WPGlobus?**
 
-The WPGlobus plugin provides you with the main multilingual tools.
+The WPGlobus plugin provides you with the general multilingual tools.
 
-* **Manually translate** posts, pages, categories, tags menus and widgets; **NOTE: WPGlobus does NOT translate texts automatically!** To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/);
+* **Manually translate** posts, pages, categories, tags menus and widgets; **NOTE: WPGlobus does NOT translate texts automatically!** To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/). If you need help with translation, please check out our [Professional Translation Services](http://www.wpglobus.com/translator/) directory;
 * **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
 * **Enable multilingual SEO features** of Yoast SEO and All in One SEO plugins;
 * **Switch the languages at the front-end** using: a drop-down menu extension and/or a customizable widget with various display options;
@@ -70,7 +70,7 @@ For more details, please check out the descriptions of each paid add-on on our w
 * Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please **tell the theme / plugin authors**. We are ready to help them.
 * Read more on the topic [here](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/).
 
-> Special note about "Page Builders / Composers": Currently, WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - are **not supported at this time**.
+> Special note about "Page Builders / Composers": Currently, WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - are **not supported at this time**. We are working on a solution.
 
 ### Plugin Compatibility ###
 
@@ -87,7 +87,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * WPBakery Visual Composer (with our free add-on),
 * Whistles,
 * Widget Logic,
-* Yoast SEO. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis.
+* Yoast SEO. [WPGlobus Plus](http://www.wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis. **Note:** the "Pro" version of Yoast SEO has some compatibility issues and we currently do not support it.
 
 Some 3rd party plugins are supported with our [premium add-ons](http://www.wpglobus.com/shop/):
 
@@ -202,13 +202,13 @@ No known backward incompatibility issues.
 ### 1.6.6 ###
 
 * ADDED:
-    * Core: WPGlobus Admin Central page.
-    * Core: Filter before output language items in edit.php page.
-	* Core: Filter CSS rules for frontend (Ticket #304).
+    * Link to the [Professional Translation Service pages](http://www.wpglobus.com/translator/) from the `About WPGlobus` admin page.
+    * Core: Filter `wpglobus_manage_language_items` before outputting the language items on the `edit.php` page.
+	* Core: Filter `wpglobus_styles` for the frontend CSS rules (Ticket #304).
 * FIXED:
-	* Prevent creating duplicates of terms in edit.php page.
-	* Prevent duplicate keyword from language by default in meta name="keywords" for extra languages.
-	
+	* Prevent creating duplicate terms on the `edit.php` page.
+	* All-in-One SEO: Prevent duplicate keywords in `meta name="keywords"` coming from extra languages.
+
 ### 1.6.5 ###
 
 * ADDED:
