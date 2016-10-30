@@ -53,13 +53,13 @@ class WPGlobus {
 	 * @since 1.6.5
 	 */
 	const PAGE_WPGLOBUS_HELPDESK = 'wpglobus-helpdesk';
-	
+
 	/**
 	 * WPGlobus Admin Central page
 	 *
 	 * @var string
 	 * @since 1.6.6
-	 */	
+	 */
 	const PAGE_WPGLOBUS_ADMIN_CENTRAL = 'wpglobus-admin-central';
 
 	/**
@@ -301,7 +301,7 @@ class WPGlobus {
 			 * @since 1.6.6
 			 */
 			$this->enabled_pages[] = self::PAGE_WPGLOBUS_ADMIN_CENTRAL;
-			
+
 			add_action( 'admin_body_class', array( $this, 'on_add_admin_body_class' ) );
 
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
@@ -546,15 +546,15 @@ class WPGlobus {
 		}
 		$posts_columns =
 			array_slice( $posts_columns, 0, $i + 1 ) + array( 'wpglobus_languages' => 'Language' ) + array_slice( $posts_columns, $i + 1 );
-		
+
 		/**
 		 * Filter the columns displayed in the Posts list table.
 		 * Returning array.
 		 * @since 1.6.5
 		 *
 		 * @param array $posts_columns An array of column names.
-		 */							
-		return apply_filters( 'wpglobus_manage_posts_columns', $posts_columns );		
+		 */
+		return apply_filters( 'wpglobus_manage_posts_columns', $posts_columns );
 
 	}
 
@@ -599,8 +599,8 @@ class WPGlobus {
 			 *
 			 * @param string $output Array of language items.
 			 * @param array  $post   An object WP_Post.
-			 */			
-			$output = apply_filters( 'wpglobus_manage_language_items', $output, $post );			
+			 */
+			$output = apply_filters( 'wpglobus_manage_language_items', $output, $post );
 
 			if ( ! empty( $output ) ) {
 				echo implode( '<br />', $output );
@@ -1095,7 +1095,7 @@ class WPGlobus {
 				}
 
 				$data[ 'customFieldsEnabled' ] = true;
-			
+
 				/**
 				 * Filter to enable/disable multilingual custom fields on post.php|post-new.php page.
 				 * Returning boolean.
@@ -1103,15 +1103,15 @@ class WPGlobus {
 				 *
 				 * @param boolean		 $data[ 'customFieldsEnabled' ] Enabled by default.
 				 * @param WP_Post Object $post Current post.
-				 */			
-				$data[ 'customFieldsEnabled' ] = apply_filters( 'wpglobus_custom_fields_enabled', $data[ 'customFieldsEnabled' ], $post );				
-				
+				 */
+				$data[ 'customFieldsEnabled' ] = apply_filters( 'wpglobus_custom_fields_enabled', $data[ 'customFieldsEnabled' ], $post );
+
 				if ( $data[ 'customFieldsEnabled' ] ) {
 					$data[ 'customFieldsEnabled' ] = 'true';
 				} else {
 					$data[ 'customFieldsEnabled' ] = 'false';
 				}
-				
+
 			} else if ( 'nav-menus.php' === $page ) {
 
 				$page_action = 'menu-edit';
@@ -1352,12 +1352,12 @@ class WPGlobus {
 				$page_action = 'wpglobus_clean';
 
 			} else if ( in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) ) ) {
-				
+
 				/**
 				 * @since 1.6.6
 				 */
 				$page_action = 'wpglobusAdminCentral';
-				
+
 			} else {
 
 				$page_action = $page;
@@ -1902,8 +1902,8 @@ class WPGlobus {
 		 * @param string $config->css_editor Custom CSS rules @see WPGlobus options.
 		 *
 		 * @return string
-		 */		
-		$css = apply_filters( 'wpglobus_styles', $css, $config->css_editor );		
+		 */
+		$css = apply_filters( 'wpglobus_styles', $css, $config->css_editor );
 
 		if ( ! empty( $css ) ) {
 			?>
@@ -3291,18 +3291,18 @@ class WPGlobus {
 		$wp_admin_bar->add_menu( array(
 			'id'     => 'wpglobus-language-select',
 			'parent' => 'top-secondary',
-			'title'  => '<a id="wpglobus-default-locale" style="color:#fff;" href="#" >' . WPGlobus::Config()->language_name[ WPGlobus::Config()->language ] . '&nbsp;&nbsp;&nbsp;<span><img src="' . WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ WPGlobus::Config()->language ] . '" /></span></a>',
-			'href'   => '',
-			'meta'   => array(
-				'class' => '',
-				'title' => __( 'My Account' )
-			),
+			'title'  => '<span class="ab-icon">' .
+			            '<img src="' . WPGlobus::Config()->flags_url .
+			            WPGlobus::Config()->flag[ WPGlobus::Config()->language ] . '"/>' .
+			            '</span><span class="ab-label">' .
+			            WPGlobus::Config()->language_name[ WPGlobus::Config()->language ] .
+			            '</span>',
 		) );
 
 		$add_more_languages = array();
 		foreach ( WPGlobus::Config()->enabled_languages as $language ) :
 
-			if ( WPGlobus::Config()->language == $language ) {
+			if ( WPGlobus::Config()->language === $language ) {
 				continue;
 			}
 

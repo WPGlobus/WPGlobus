@@ -256,3 +256,14 @@ ul.wpglobus-important li {
   background-color: yellow;
   color: black;
 }
+@media screen and (max-width: 782px) {
+  #wpadminbar li#wp-admin-bar-wpglobus-language-select {
+    display: block;
+  }
+  #wpadminbar li#wp-admin-bar-wpglobus-language-select .ab-icon {
+    margin-top: -3px;
+  }
+  #wpadminbar li#wp-admin-bar-wpglobus-language-select .ab-icon img {
+    height: 25px;
+  }
+}
