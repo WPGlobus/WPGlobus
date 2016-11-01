@@ -77,7 +77,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$plugin_card['free'] = array();
 			self::$plugin_card['paid'] = array();
 
-			self::_setup_premium_add_ons();
+			self::_setup_paid_plugins();
 
 			// Enqueue the CSS & JS scripts.
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
@@ -87,75 +87,30 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 		/**
 		 * List of the premium WPGlobus extensions.
+		 * This file is created manually.
 		 */
-		protected static function _setup_premium_add_ons() {
+		protected static function _setup_paid_plugins() {
 
-			self::$paid_plugins = array(
-				'woocommerce-wpglobus'      => array(
-					'dir'        => WP_PLUGIN_DIR .
-					                '/woocommerce-wpglobus/woocommerce-wpglobus.php',
-					'image_file' => 'woocommerce-wpglobus-logo-300x300.png',
-					'order'      => 9,
-				),
-				'wpglobus-plus'             => array(
-					'dir'        => WP_PLUGIN_DIR .
-					                '/wpglobus-plus/wpglobus-plus.php',
-					'image_file' => 'wpglobus-plus-logo-300x300.png',
-					'order'      => 8,
-				),
-				'wpglobus-mobile-menu'      => array(
-					'dir'        => WP_PLUGIN_DIR .
-					                '/wpglobus-mobile-menu/wpglobus-mobile-menu.php',
-					'image_file' => 'wpglobus-mobile-menu-logo-400x400.png',
-					'order'      => 2,
-				),
-				'wpglobus-language-widgets' => array(
-					'dir'        => WP_PLUGIN_DIR .
-					                '/wpglobus-language-widgets/wpglobus-language-widgets.php',
-					'image_file' => 'wpglobus-lw-logo-400x400.png',
-					'order'      => 4,
-				),
-				'wpglobus-menu-visibility'  => array(
-					'dir'        => WP_PLUGIN_DIR .
-					                '/wpglobus-menu-visibility/wpglobus-menu-visibility.php',
-					'image_file' => 'wpglobus-menu-visibility-logo.png',
-					'order'      => 4,
-				),
-				'wpglobus-header-images'    => array(
-					'dir'        => WP_PLUGIN_DIR .
-					                '/wpglobus-header-images/wpglobus-header-images.php',
-					'image_file' => 'wpglobus-hi-logo-400x400.png',
-					'order'      => 4,
-				),
-				'woocommerce-nets-netaxept' => array(
-					'dir'          => WP_PLUGIN_DIR .
-					                  '/woocommerce-nets-netaxept/woocommerce-nets-netaxept.php',
-					'product_slug' => 'multilingual-woocommerce-nets-netaxept',
-					'image_file'   => 'woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg',
+			self::$paid_plugins = array();
 
-					'order' => 5,
-				),
-				'wpglobus-revslider' => array(
-					'dir'          => WP_PLUGIN_DIR .
-					                  '/wpglobus-revslider/wpglobus-revslider.php',
-					'product_slug' => 'wpglobus-for-slider-revolution',
-					'image_file'   => 'wpglobus-revslider-logo-400x400.png',
-					'order' => 4,
-				)
-			);
+			$data_file = WPGlobus::data_path() . '/paid_plugins.json';
 
-			uasort( self::$paid_plugins, array( __CLASS__, 'sort_callback' ) );
+			if ( is_readable( $data_file ) ) {
+				$_json              = file_get_contents( $data_file );
+				self::$paid_plugins = json_decode( $_json, true );
+				uasort( self::$paid_plugins, array( __CLASS__, 'sort_paid_plugins' ) );
+			}
 		}
 
 		/**
-		 * Callback for sorting premium add-ons.
+		 * Callback for sorting the paid_plugins array.
 		 *
 		 * @param array $a First.
 		 * @param array $b Second.
 		 *
 		 * @return int
 		 */
-		public static function sort_callback( $a, $b ) {
+		public static function sort_paid_plugins( $a, $b ) {
 			return $a['order'] > $b['order'];
 		}
 
@@ -211,12 +166,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
 
-			$all_products = self::_get_all_product_info_from_server();
+			$all_products = self::_get_all_product_info();
 
 			foreach ( self::$paid_plugins as $plugin => $plugin_data ) {
 
-				if ( file_exists( $plugin_data['dir'] ) ) {
-					self::$paid_plugins[ $plugin ]['plugin_data'] = get_plugin_data( $plugin_data['dir'], false );
+				$plugin_file = implode( '/', array( WP_PLUGIN_DIR, $plugin_data['slug'], $plugin_data['loader'] ) );
+
+				if ( is_readable( $plugin_file ) ) {
+					// Plugin is installed.
+					self::$paid_plugins[ $plugin ]['plugin_data'] = get_plugin_data( $plugin_file, false );
 				} else {
 					self::$paid_plugins[ $plugin ]['plugin_data'] = null;
 
@@ -280,28 +238,19 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		}
 
 		/**
-		 * Call the WPGlobus server to get information about all premium plugins.
+		 * Get information about all premium plugins.
+		 * This file is created automatically at build. Do not edit!
 		 *
 		 * @return array[]
 		 */
-		protected static function _get_all_product_info_from_server() {
-			$all_product_info = get_transient( 'wpglobus_all_product_info' );
-			if ( false === $all_product_info ) {
+		protected static function _get_all_product_info() {
+			$all_product_info = array();
 
-				$all_product_info = array();
+			$data_file = WPGlobus::data_path() . '/wpglobus-product-info.json';
 
-				$http_response = wp_safe_remote_get(
-					WPGlobus_Utils::url_wpglobus_site() . 'wc-api/wpglobus-product-info'
-				);
-				if ( ! empty( $http_response['body'] ) ) {
-					$_decoded_json = json_decode( $http_response['body'], true );
-					if ( is_array( $_decoded_json ) ) {
-						$all_product_info = $_decoded_json;
-						set_transient( 'wpglobus_all_product_info',
-							$all_product_info, DAY_IN_SECONDS
-						);
-					}
-				}
+			if ( is_readable( $data_file ) ) {
+				$all_product_info_json = file_get_contents( $data_file );
+				$all_product_info      = json_decode( $all_product_info_json, true );
 			}
 
 			return $all_product_info;
@@ -352,7 +301,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 				wp_register_script(
 					'wpglobus-plugin-install',
-					dirname( plugin_dir_url( __FILE__ ) ) . '/js/wpglobus-plugin-install' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+					WPGlobus::$PLUGIN_DIR_URL . '/includes/js/wpglobus-plugin-install' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 					array( 'jquery' ),
 					WPGLOBUS_VERSION,
 					true

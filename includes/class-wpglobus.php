@@ -90,6 +90,15 @@ class WPGlobus {
 	}
 
 	/**
+	 * Path to data folder.
+	 *
+	 * @return string
+	 */
+	public static function data_path() {
+		return self::$PLUGIN_DIR_PATH . 'data';
+	}
+
+	/**
 	 * @var bool $_SCRIPT_DEBUG Internal representation of the define('SCRIPT_DEBUG')
 	 */
 	protected static $_SCRIPT_DEBUG = false;

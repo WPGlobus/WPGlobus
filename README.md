@@ -16,19 +16,23 @@
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual / multilingual WordPress blogs and sites.
 
-**Important Technical Notes**
+**Important Notes: PLEASE READ**
 ---------------
-* Some themes and 3rd party plugins are **not 100% WPGlobus-ready**. Read the "Compatibility" section below for details.
-* We develop and test our software using the **latest versions of PHP and WordPress only**. While we do our best to write code compatible with older versions, we cannot be 100% sure that everything works correctly under older versions.
-* The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
-* For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
-* Many modern themes have special panels in the Customizer, where they ask you to enter some texts: titles for the Home Page sections and similar. You will need to install the free [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to display those texts correctly.
+* NO AUTOMATIC TRANSLATION: WPGlobus does NOT translate texts! You will **translate texts manually**.
+* COMPATIBILITY: Some themes and plugins are **not 100% supported**. Read the "Compatibility" section below. If your theme asks to enter some texts in the Customizer you need to install the free [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to display those texts correctly.
+* IF YOU WANT TO UNINSTALL: WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}...`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
+* NO MULTISITE: The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
+* FREE/PAID: Some functionality is available only with our **premium add-ons**. Details below.
+* OLD PHP/WP: We develop and test our software using the **latest versions of PHP and WordPress only**. If you have an older versions and something is not working properly - please contact us and we'll help.
+* MBSTRING: For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
+
+Please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/) to see how WPGlobus works.
 
 > **What is in the FREE version of WPGlobus?**
 
 The WPGlobus plugin provides you with the general multilingual tools.
 
-* **Manually translate** posts, pages, categories, tags menus and widgets; **NOTE: WPGlobus does NOT translate texts automatically!** To see how it works, please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/). If you need help with translation, please check out our [Professional Translation Services](http://www.wpglobus.com/translator/) directory;
+* **Manually translate** posts, pages, categories, tags menus and widgets; If you need help with translation, please check out our [Professional Translation Services](http://www.wpglobus.com/translator/) directory;
 * **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
 * **Enable multilingual SEO features** of Yoast SEO and All in One SEO plugins;
 * **Switch the languages at the front-end** using: a drop-down menu extension and/or a customizable widget with various display options;
@@ -198,6 +202,13 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 ## Changelog ##
+
+### 1.6.7 ###
+
+* FIXED:
+	* Admin language selector is displayed correctly in the "Light" color scheme.
+	* Admin language selector is available on mobile (narrow) screens.
+	* The premium plugin information is stored locally, so no call to the server is required.
 
 ### 1.6.6 ###
 

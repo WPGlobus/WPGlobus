@@ -27,7 +27,16 @@ jQuery(document).ready(function($) {
 				$( ccard + ' .column-rating' ).css({'visibility':'hidden'});
 				$( ccard + ' .column-downloaded' ).css({'visibility':'hidden'});
 
-				var actions = $( ccard + ' .plugin-action-buttons li' );
+                /**
+                 * Hide the version and the entire row
+                 * because we do not have the live data anymore.
+                 * @since 1.6.7
+                 */
+                $(ccard + ' .column-rating').css({'display': 'none'});
+                $(ccard + ' .column-updated').css({'display': 'none'});
+
+
+                var actions = $( ccard + ' .plugin-action-buttons li' );
 				if ( actions.length == 1 ) {
 					/** add Installed button if it was lost */
 					if ( WPGlobusPluginInstall.pluginData[ card ].plugin_data !== null ) {
@@ -45,7 +54,7 @@ jQuery(document).ready(function($) {
 						$(e).removeClass( 'install-now' ).addClass( 'wpglobus-install-now' );
 					}
 				});
-				
+
 				$( ccard + ' .plugin-action-buttons .wpglobus-install-now' )
 					.attr( 'href', WPGlobusPluginInstall.pluginData[ card ].extra_data.product_url )
 					.attr( 'target', '_blank' );

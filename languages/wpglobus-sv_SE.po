@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-10-26 20:18:13+00:00\n"
+"POT-Creation-Date: 2016-11-01 17:39:36+00:00\n"
 "PO-Revision-Date: 2016-09-11 16:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
@@ -621,19 +621,19 @@ msgstr "Spara ändringarna"
 msgid "Back to the WPGlobus Settings"
 msgstr "Tillbaka till WPGlobus Inställningar"
 
-#: includes/admin/class-wpglobus-plugin-install.php:348
+#: includes/admin/class-wpglobus-plugin-install.php:297
 msgid "Current Version"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:349
+#: includes/admin/class-wpglobus-plugin-install.php:298
 msgid "Get it now!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:350
+#: includes/admin/class-wpglobus-plugin-install.php:299
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:351
+#: includes/admin/class-wpglobus-plugin-install.php:300
 #: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
 msgstr "Installerad"
@@ -733,19 +733,19 @@ msgstr "Rulllistmeny med flaggor"
 msgid "Selector type"
 msgstr "Väljartyp"
 
-#: includes/class-wpglobus.php:1021
+#: includes/class-wpglobus.php:1030
 msgid "You cannot disable the main language."
 msgstr "Du kan inte stänga av huvudspråk."
 
-#: includes/class-wpglobus.php:1223
+#: includes/class-wpglobus.php:1232
 msgid "*) Available after the menu is saved."
 msgstr "*) Tillgängligt när menyn sparats."
 
-#: includes/class-wpglobus.php:3191
+#: includes/class-wpglobus.php:3200
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Du måste aktivera Vackra Permalänkar för att använda WPGlobus."
 
-#: includes/class-wpglobus.php:3193
+#: includes/class-wpglobus.php:3202
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -753,7 +753,7 @@ msgstr ""
 "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-"
 "standardalternativet."
 
-#: includes/class-wpglobus.php:3332
+#: includes/class-wpglobus.php:3341
 msgid "Add"
 msgstr "Lägg till"
 

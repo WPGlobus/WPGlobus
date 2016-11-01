@@ -14,6 +14,7 @@
   "dist": [
     "exec:cpzu",
     "replace:version",
+    "http:product-info",
     "pomo",
     "readme_md",
     "less",

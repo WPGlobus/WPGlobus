@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2016-10-26 20:18:13+00:00\n"
+"POT-Creation-Date: 2016-11-01 17:39:36+00:00\n"
 "PO-Revision-Date: 2016-09-11 17:13+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
@@ -656,19 +656,19 @@ msgstr "Зберегти зміни"
 msgid "Back to the WPGlobus Settings"
 msgstr "Повернутися до налаштувань WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:348
+#: includes/admin/class-wpglobus-plugin-install.php:297
 msgid "Current Version"
 msgstr "Поточна версія"
 
-#: includes/admin/class-wpglobus-plugin-install.php:349
+#: includes/admin/class-wpglobus-plugin-install.php:298
 msgid "Get it now!"
 msgstr "Завантажити зараз!"
 
-#: includes/admin/class-wpglobus-plugin-install.php:350
+#: includes/admin/class-wpglobus-plugin-install.php:299
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:351
+#: includes/admin/class-wpglobus-plugin-install.php:300
 #: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
 msgstr "Встановлено"
@@ -768,21 +768,21 @@ msgstr "Випадаюче  меню з прапорами"
 msgid "Selector type"
 msgstr "Спосіб выбору мови"
 
-#: includes/class-wpglobus.php:1021
+#: includes/class-wpglobus.php:1030
 msgid "You cannot disable the main language."
 msgstr "Неможна відключити головну мову."
 
-#: includes/class-wpglobus.php:1223
+#: includes/class-wpglobus.php:1232
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно після збереження меню."
 
-#: includes/class-wpglobus.php:3191
+#: includes/class-wpglobus.php:3200
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Щоб використовувати плагін WPGlobus, необхідно увімкнути SEF URLs - постійні "
 "посилання."
 
-#: includes/class-wpglobus.php:3193
+#: includes/class-wpglobus.php:3202
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -790,7 +790,7 @@ msgstr ""
 "Будь-ласка, перейдіть в меню налаштування > Постійні посилання і змініть "
 "структуру посилань в розділі \"Загальні налаштування\"."
 
-#: includes/class-wpglobus.php:3332
+#: includes/class-wpglobus.php:3341
 msgid "Add"
 msgstr "Додати"
 

@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.6.7 ###
+
+* FIXED:
+	* Admin language selector is displayed correctly in the "Light" color scheme.
+	* Admin language selector is available on mobile (narrow) screens.
+	* The premium plugin information is stored locally, so no call to the server is required.
+
 ### 1.6.6 ###
 
 * ADDED:

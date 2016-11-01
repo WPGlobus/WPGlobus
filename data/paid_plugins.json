@@ -1,0 +1,52 @@
+{
+  "woocommerce-wpglobus": {
+    "slug": "woocommerce-wpglobus",
+    "loader": "woocommerce-wpglobus.php",
+    "image_file": "woocommerce-wpglobus-logo-300x300.png",
+    "order": 9
+  },
+  "wpglobus-plus": {
+    "slug": "wpglobus-plus",
+    "loader": "wpglobus-plus.php",
+    "image_file": "wpglobus-plus-logo-300x300.png",
+    "order": 8
+  },
+  "wpglobus-mobile-menu": {
+    "slug": "wpglobus-mobile-menu",
+    "loader": "wpglobus-mobile-menu.php",
+    "image_file": "wpglobus-mobile-menu-logo-400x400.png",
+    "order": 2
+  },
+  "wpglobus-language-widgets": {
+    "slug": "wpglobus-language-widgets",
+    "loader": "wpglobus-language-widgets.php",
+    "image_file": "wpglobus-lw-logo-400x400.png",
+    "order": 4
+  },
+  "wpglobus-menu-visibility": {
+    "slug": "wpglobus-menu-visibility",
+    "loader": "wpglobus-menu-visibility.php",
+    "image_file": "wpglobus-menu-visibility-logo.png",
+    "order": 4
+  },
+  "wpglobus-header-images": {
+    "slug": "wpglobus-header-images",
+    "loader": "wpglobus-header-images.php",
+    "image_file": "wpglobus-hi-logo-400x400.png",
+    "order": 4
+  },
+  "woocommerce-nets-netaxept": {
+    "slug": "woocommerce-nets-netaxept",
+    "loader": "woocommerce-nets-netaxept.php",
+    "product_slug": "multilingual-woocommerce-nets-netaxept",
+    "image_file": "woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg",
+    "order": 5
+  },
+  "wpglobus-revslider": {
+    "slug": "wpglobus-revslider",
+    "loader": "wpglobus-revslider.php",
+    "product_slug": "wpglobus-for-slider-revolution",
+    "image_file": "wpglobus-revslider-logo-400x400.png",
+    "order": 4
+  }
+}
