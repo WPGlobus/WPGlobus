@@ -12,6 +12,7 @@ module.exports = {
                 "**/*",
                 "!.git/**",
                 "!.gitignore",
+                "!.jshintrc",
                 "!.tx",
                 "!assets/**",
                 "!bin/**",
