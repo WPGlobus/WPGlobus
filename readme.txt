@@ -185,6 +185,11 @@ No known backward incompatibility issues.
 
 == Changelog ==
 
+= 1.6.8 =
+
+* FIXED:
+	* Updated flag image for the `my_MM` locale (Myanmar / Burmese).
+
 = 1.6.7 =
 
 * FIXED:
