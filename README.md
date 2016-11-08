@@ -193,8 +193,8 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 ### 7. Language Switcher widget and Multilingual Editor dialog. ###
 ![Language Switcher widget and Multilingual Editor dialog.](https://ps.w.org/wpglobus/assets/screenshot-7.png)
 
-### 8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/). ###
-![Multilingual WooCommerce store powered by WooCommerce WPGlobus.](https://ps.w.org/wpglobus/assets/screenshot-8.png)
+### 8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/). ###
+![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](http://www.wpglobus.com/product/woocommerce-wpglobus/).](https://ps.w.org/wpglobus/assets/screenshot-8.png)
 
 
 ## Upgrade Notice ##
@@ -236,54 +236,9 @@ No known backward incompatibility issues.
 * FIXED:
     * A license activation bug that occurred when plugin "slug" did not match the plugin folder name (example: the `WPGlobus for Slider Revolution` premium add-on).
 
-### 1.6.4 ###
-
-* FIXED:
-	* Additional checks and compatibility methods to avoid failures if `mbstring` PHP extension is not loaded.
-	* Widgets: Don't setup field as multilingual if its ID is empty.
-* ADDED:
-	* The correct filter for list of terms available to edit for the given post ID.
-
-### 1.6.3 ###
-
-* FIXED:
-	* Yoast: empty focus keyword when saving post with active extra language tab.
-	* Add-ons: better interface; get information from the server.
-	* Updater: do not offer upgrades if `.git` folder exists.
-	* Internal: some code/comments cleanup to avoid `PHPStorm`, `WPCS`, and `php7cc` notices.
-
-### 1.6.2 ###
-
-* FIXED:
-	* Refactored the language switch generation code for better compatibility with `BuddyPress`.
-	* MailChimp: incompatibility issue [#35](https://github.com/WPGlobus/WPGlobus/issues/35) [#37](https://github.com/WPGlobus/WPGlobus/issues/37) - props [nmohanan](https://github.com/nmohan) and [tbenny](https://github.com/tbenny).
-* ADDED:
-	* Filter `wpglobus_user_defined_post_type` to redefine post type while check for disabled post types.
-
-### 1.6.1 ###
-
-* FIXED:
-	* Wrong default menu title cases when taxonomy ID matches some post ID (props `mktatwp`).
-	* MailChimp: `Attempt to assign property of non-object` warning [#35](https://github.com/WPGlobus/WPGlobus/issues/35)  - props [nmohanan](https://github.com/nmohan).
-* ADDED:
-	* More languages, locales and flags are configured by default (applies to "fresh" plugin activations; does not change the existing settings of a previously installed WPGlobus).
-
-### 1.6.0 ###
-
-* COMPATIBILITY:
-	* WordPress 4.6.
-* FIXED:
-	* Empty Quick Edit titles in taxonomy views.
-	* Warning: Non-SSL link to image in admin (props `technima`).
-* ADDED:
-	* Customizer: User control on which fields can have multilingual values.
-	* Customizer: In the `Language Selector Menu`, if no menus created yet, show a link to create menus.
-	* Customizer: Filter to disable WPGlobus customizer for specific themes.
-	* Widgets: Language-dependent conditions if the `Widget Logic` plugin is active.
-
 ### Earlier versions ###
 
-* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
+* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
 
 ### WooCommerce-WPGlobus ###
 
