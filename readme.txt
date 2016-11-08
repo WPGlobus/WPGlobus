@@ -265,7 +265,7 @@ No known backward incompatibility issues.
 
 = Earlier versions =
 
-* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/changelog.md)
+* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
 
 = WooCommerce-WPGlobus =
 
