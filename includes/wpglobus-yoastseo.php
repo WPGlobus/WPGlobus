@@ -8,7 +8,12 @@
 
 if ( defined( 'WPSEO_VERSION' ) ) {
 
-	if ( version_compare( WPSEO_VERSION, '3.4', '>=' ) ) {
+	if ( version_compare( WPSEO_VERSION, '3.8', '>=' ) ) {
+
+		require_once 'vendor/class-wpglobus-yoastseo38.php';
+		WPGlobus_YoastSEO::controller();
+		
+	} else if ( version_compare( WPSEO_VERSION, '3.4', '>=' ) ) {
 
 		require_once 'vendor/class-wpglobus-yoastseo34.php';
 		WPGlobus_YoastSEO::controller();
