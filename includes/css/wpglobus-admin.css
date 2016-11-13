@@ -86,6 +86,9 @@ ul.wpglobus-important li {
 .wpglobus-wp-admin .wpglobus-link-lock-icon {
   cursor: not-allowed;
 }
+.wpglobus-wp-admin .wpglobus-link-trash-icon {
+  cursor: not-allowed;
+}
 .wpglobus-wp-admin .wpglobus-link-lock-icon:before {
   font-family: 'dashicons';
   font-weight: 400;
@@ -100,6 +103,14 @@ ul.wpglobus-important li {
   font-style: normal;
   text-decoration: inherit;
   content: "\f504";
+  font-size: 11px;
+}
+.wpglobus-wp-admin .wpglobus-link-trash-icon:before {
+  font-family: 'dashicons';
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: inherit;
+  content: "\f182";
   font-size: 11px;
 }
 .wpglobus-wp-admin .wpglobus-spinner {
