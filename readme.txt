@@ -16,13 +16,20 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 **Important Notes: PLEASE READ**
 ---------------
-* NO AUTOMATIC TRANSLATION: WPGlobus does NOT translate texts! You will **translate texts manually**.
-* COMPATIBILITY: Some themes and plugins are **not 100% supported**. Read the "Compatibility" section below. If your theme asks to enter some texts in the Customizer you need to install the free [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to display those texts correctly.
-* IF YOU WANT TO UNINSTALL: WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}...`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
-* NO MULTISITE: The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
-* FREE/PAID: Some functionality is available only with our **premium add-ons**. Details below.
-* OLD PHP/WP: We develop and test our software using the **latest versions of PHP and WordPress only**. If you have an older versions and something is not working properly - please contact us and we'll help.
-* MBSTRING: For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
+* NO AUTOMATIC TRANSLATION:
+	* WPGlobus does NOT translate texts! You will **translate texts manually**.
+* PAGE BUILDERS / COMPOSERS:
+	* The free version of WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - **require a premium add-on**, which is currently at the Beta-testing stage. [Please read the details here](http://www.wpglobus.com/wpglobus-page-builders-support/).
+* IF YOU WANT TO UNINSTALL:
+	* WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}...`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
+* NO MULTISITE:
+	* The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
+* FREE / PAID:
+	* Some functionality is available only with our **premium add-ons**. Details below.
+* OLD PHP / OLD WORDPRESS:
+	* We develop and test our software using the **latest versions of PHP and WordPress only**. If you have an older version and something is not working properly - please contact us and we'll help.
+* MBSTRING:
+	* For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
 
 Please read the [Quick Start Guide](http://www.wpglobus.com/quick-start/) to see how WPGlobus works.
 
@@ -71,8 +78,6 @@ For more details, please check out the descriptions of each paid add-on on our w
 * As most of the themes save their settings in the `options` table, you can use the [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to process those settings correctly.
 * Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please **tell the theme / plugin authors**. We are ready to help them.
 * Read more on the topic [here](http://www.wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/).
-
-> Special note about "Page Builders / Composers": Currently, WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - are **not supported at this time**. We are working on a solution.
 
 = Plugin Compatibility =
 
