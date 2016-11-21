@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.6.9 ###
+
+* ADDED:
+	* css class for trash icon for WPGlobus tabs on page post.php
+* FIXED:
+	* revised 'wpglobus_extra_languages' filter in class WPGlobusWidget.
+	
 ### 1.6.8 ###
 
 * ADDED:
