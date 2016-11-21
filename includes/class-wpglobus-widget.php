@@ -70,13 +70,18 @@ class WPGlobusWidget extends WP_Widget {
 				break;
 			case 'dropdown' :
 			case 'dropdown_with_flags' :
-				$sorted[] = WPGlobus::Config()->language;
-				foreach ( $enabled_languages as $language ) {
-					if ( $language != WPGlobus::Config()->language ) {
-						$sorted[] = $language;
-					}
-				}
-				$enabled_languages = $sorted;
+				/**
+				 * @todo remove after testing.
+				 * @since 1.6.9
+				 */
+				//$sorted[] = WPGlobus::Config()->language;
+				//foreach ( $enabled_languages as $language ) {
+					//if ( $language != WPGlobus::Config()->language ) {
+						//$sorted[] = $language;
+					//}
+				//}
+				//$enabled_languages = $sorted;
+				
 				$code              = '<div class="dropdown-styled"> <ul>
 					  <li>
 						{{language}}
@@ -91,19 +96,24 @@ class WPGlobusWidget extends WP_Widget {
 				$code = '<div class="flags-styled">{{inside}}</div>';
 				break;
 		endswitch;
-
+		
+		$extra_languages = array_diff( $enabled_languages, (array) WPGlobus::Config()->language );
+		
 		/**
-		 * Filter enabled languages.
+		 * Filter extra languages.
 		 *
 		 * Returning array.
 		 *
 		 * @since 1.0.13
+		 * @since 1.6.9
 		 *
-		 * @param array     $enabled_languages 			 An array with languages to show off in menu.
+		 * @param array     $extra_languages 			 An array with extra languages to show off in menu.
 		 * @param string    WPGlobus::Config()->language The current language.
 		 */
-		$enabled_languages = apply_filters( 'wpglobus_extra_languages', $enabled_languages, WPGlobus::Config()->language );
-
+		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );
+		
+		$enabled_languages = array_merge( (array)WPGlobus::Config()->language, $extra_languages );
+		
 		/**
 		 * Class for link in a and option tags. Used for adding hash.
 		 * @see class wpglobus-selector-link
