@@ -5,9 +5,9 @@
 ### 1.6.9 ###
 
 * ADDED:
-	* css class for trash icon for WPGlobus tabs on page post.php
+	* CSS rules for the trash icon `.wpglobus-link-trash-icon` in WPGlobus tabs in admin.
 * FIXED:
-	* revised 'wpglobus_extra_languages' filter in class WPGlobusWidget.
+	* Revised the `wpglobus_extra_languages` filter in the class `WPGlobusWidget`.
 	
 ### 1.6.8 ###
 

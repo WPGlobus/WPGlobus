@@ -14,8 +14,8 @@ Multilingual / Globalization: URL-based multilanguage; easy translation interfac
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual / multilingual WordPress blogs and sites.
 
-**Important Notes: PLEASE READ**
----------------
+> **Important Notes: PLEASE READ BEFORE USING WPGlobus!**
+
 * NO AUTOMATIC TRANSLATION:
 	* WPGlobus does NOT translate texts! You will **translate texts manually**.
 * PAGE BUILDERS / COMPOSERS:
@@ -189,6 +189,13 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 No known backward incompatibility issues.
 
 == Changelog ==
+
+= 1.6.9 =
+
+* ADDED:
+	* CSS rules for the trash icon `.wpglobus-link-trash-icon` in WPGlobus tabs in admin.
+* FIXED:
+	* Revised the `wpglobus_extra_languages` filter in the class `WPGlobusWidget`.
 
 = 1.6.8 =
 
