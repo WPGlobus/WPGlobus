@@ -16,7 +16,7 @@ class WPGlobus_WP {
 	 *  echo '<div class="notice ' . WPGlobus_WP::ADMIN_NOTICE_WARNING . '">';
 	 * </code>
 	 */
-	
+
 	const ADMIN_NOTICE_SUCCESS = 'notice-success';
 	const ADMIN_NOTICE_ERROR = 'notice-error';
 	const ADMIN_NOTICE_INFO = 'notice-info';
@@ -145,6 +145,15 @@ class WPGlobus_WP {
 		 * WP calls filters at level 4. This function adds one more level.
 		 */
 		$trace_level = 5;
+
+		if ( version_compare( $GLOBALS['wp_version'], '4.6.999', '>' ) ) {
+			/**
+			 * Starting with WordPress 4.7, WP_Hook adds one more level.
+			 * @since 1.7.0
+			 */
+			$trace_level = 6;
+		}
+
 		if ( version_compare( PHP_VERSION, '7.0.0', '>=' ) ) {
 			/**
 			 * In PHP 7, `call_user_func_array` no longer appears in the trace
