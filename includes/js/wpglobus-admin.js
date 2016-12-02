@@ -1536,7 +1536,7 @@ jQuery(document).ready(function () {
 						}
 						$t.append('<td style="width:20px;"><div id="wpglobus-dialog-start-'+id+'" data-type="control" data-source-type="textarea" data-source-id="'+id+'" class="'+classes+'"></div>'+cb+'</td>');
 					});
-					if ( ! added_control && $('#list-table .wpglobus_dialog_start').size() > 0 ) {
+					if ( ! added_control && $('#list-table .wpglobus_dialog_start').length > 0 ) {
 						$('#list-table thead tr').append('<th class="wpglobus-control-head"><div class="wpglobus_dialog_settings wpglobus_dialog_icon"></div></th>');
 						added_control = true;
 					}
