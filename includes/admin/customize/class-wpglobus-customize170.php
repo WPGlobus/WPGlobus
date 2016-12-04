@@ -2,7 +2,7 @@
 /**
  * Multilingual Customizer
  * @package    WPGlobus\Admin\Customizer
- * @since      1.4.0
+ * @since      1.7.0
  */
 
 if ( ! class_exists( 'WPGlobus_Customize' ) ) :
@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * @since 1.5.0
 			 */
 			if ( WPGlobus_WP::is_pagenow( 'customize.php' ) ) {
-				require_once 'admin/wpglobus-customize-filters.php';
+				require_once 'wpglobus-customize-filters.php';
 			}
 
 			add_action( 'customize_preview_init', array(
@@ -219,7 +219,9 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			/**
 			 * Generate language select button for customizer
 			 * @since 1.6.0
-			 */
+			 * 
+			 * @todo http://stackoverflow.com/questions/9607252/how-to-detect-when-an-element-over-another-element-in-javascript
+			 */	
 			$attributes['href'] 	= '#';
 			$attributes['style'] 	= 'margin-left:48px;';
 			$attributes['class'] 	= 'customize-controls-close wpglobus-customize-selector';
@@ -251,14 +253,14 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 								);
 
 			wp_enqueue_script(
-				'wpglobus-customize-control140',
-				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control140' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+				'wpglobus-customize-control170',
+				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control170' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
 			);
 			wp_localize_script(
-				'wpglobus-customize-control140',
+				'wpglobus-customize-control170',
 				'WPGlobusCustomize',
 				array(
 					'version' => WPGLOBUS_VERSION,
