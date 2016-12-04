@@ -107,8 +107,7 @@ require_once dirname( __FILE__ ) . '/includes/wpglobus-yoastseo.php';
  * Support of theme option panels and customizer
  * @since 1.4.0
  */
-require_once dirname( __FILE__ ) . '/includes/class-wpglobus-customize140.php';
-WPGlobus_Customize::controller();
+require_once dirname( __FILE__ ) . '/includes/admin/customize/wpglobus-customize.php';
 
 /**
  * WPGlobus customize options
