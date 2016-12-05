@@ -40,7 +40,7 @@ if (
 }
 
 /**
- * Filter for the "Tags" box in edit.php page.
+ * Filter for the "Tags" box on edit.php page.
  * @see filter 'pre_insert_term' in wp-includes\taxonomy.php
  * @scope admin
  * @since 1.6.6
@@ -48,6 +48,22 @@ if (
 if (
 	WPGlobus_WP::is_http_post_action('inline-save') 
 	&& false !== strpos( $_SERVER[ 'HTTP_REFERER' ], 'edit.php' )
+) {
+	add_filter( 'pre_insert_term', array( 'WPGlobus_Filters', 'filter__pre_insert_term' ), 5, 2 );
+}
+
+/**
+ * Filter for the "Tags" box on post.php page.
+ * To debug check $term before and after line "$term = apply_filters( 'pre_insert_term', $term, $taxonomy );"
+ *
+ * @see filter 'pre_insert_term' in wp-includes\taxonomy.php
+ * @scope admin
+ * @since 1.7.0
+ */
+if (
+	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] )
+	&& is_admin()
+	&& WPGlobus_WP::is_pagenow( 'post.php' )
 ) {
 	add_filter( 'pre_insert_term', array( 'WPGlobus_Filters', 'filter__pre_insert_term' ), 5, 2 );
 }
