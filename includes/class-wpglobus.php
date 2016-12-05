@@ -161,7 +161,7 @@ class WPGlobus {
 		) );
 
 		/**
-		 * @todo To check of using $WPGlobus_Options, may be get rid of it.
+		 * @todo $WPGlobus_Options is unused. Remove it.
 		 */
 		global $WPGlobus_Options;
 
@@ -1375,13 +1375,13 @@ class WPGlobus {
 				$page_action = $page;
 
 			}
-			
+
 			global $wp_version;
 			$version = '';
 			if ( version_compare( $wp_version, '4.6', '>=' ) ) {
 				$version = '-47';
 			}
-			
+
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . self::$_SCRIPT_SUFFIX . ".js",

@@ -4,8 +4,8 @@
 **Contributors:** [tivnetinc](https://profiles.wordpress.org/tivnetinc), [alexgff](https://profiles.wordpress.org/alexgff), [tivnet](https://profiles.wordpress.org/tivnet)  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus  
-**Requires at least:** 4.5  
-**Tested up to:** 4.6.2  
+**Requires at least:** 4.6  
+**Tested up to:** 4.7.0  
 **Stable tag:** trunk  
 **License:** GPL-3.0  
 **License URI:** http://www.gnu.org/licenses/gpl.txt  
@@ -204,9 +204,16 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 ## Upgrade Notice ##
 
-No known backward incompatibility issues.
+### 1.7.0 ###
+
+WPGlobus 1.7.0 is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
 
 ## Changelog ##
+
+### 1.7.0 ###
+
+* FIXED:
+	* Several additions and changes related to WordPress 4.7.
 
 ### 1.6.9 ###
 

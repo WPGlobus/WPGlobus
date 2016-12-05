@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.7.0 ###
+
+* FIXED:
+	* Several additions and changes related to WordPress 4.7.
+
 ### 1.6.9 ###
 
 * ADDED:

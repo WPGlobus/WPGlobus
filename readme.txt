@@ -186,14 +186,16 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 == Upgrade Notice ==
 
-No known backward incompatibility issues.
+= 1.7.0 =
+
+WPGlobus 1.7.0 is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
 
 == Changelog ==
 
 = 1.7.0 =
 
 * FIXED:
-	* `is_filter_called_by` method compatibility with WordPress 4.7
+	* Several additions and changes related to WordPress 4.7.
 
 = 1.6.9 =
 
