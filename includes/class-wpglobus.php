@@ -1378,7 +1378,7 @@ class WPGlobus {
 
 			global $wp_version;
 			$version = '';
-			if ( version_compare( $wp_version, '4.6', '>=' ) ) {
+			if ( version_compare( $wp_version, '4.6.1', '>' ) ) {
 				$version = '-47';
 			}
 
