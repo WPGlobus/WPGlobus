@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.7.1 ###
+
+* FIXED:
+	* Incorrect handing of WordPress version 4.6.2 when loading admin JS.
+
 ### 1.7.0 ###
 
 * FIXED:

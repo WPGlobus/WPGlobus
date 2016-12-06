@@ -188,9 +188,14 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 
 = 1.7.0 =
 
-WPGlobus 1.7.0 is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
+WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
 
 == Changelog ==
+
+= 1.7.1 =
+
+* FIXED:
+	* Incorrect handing of WordPress version 4.6.2 when loading admin JS.
 
 = 1.7.0 =
 

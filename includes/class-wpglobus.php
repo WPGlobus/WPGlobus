@@ -1376,9 +1376,13 @@ class WPGlobus {
 
 			}
 
+			/**
+			 * WordPress 4.7+ needs a new version of our admin JS.
+			 * @since 1.7.0
+			 */
 			global $wp_version;
 			$version = '';
-			if ( version_compare( $wp_version, '4.6.1', '>' ) ) {
+			if ( version_compare( $wp_version, '4.6.999', '>' ) ) {
 				$version = '-47';
 			}
 
