@@ -457,7 +457,7 @@ class WPGlobus_Options {
 		$default         = array();
 		$open_post_types = array();
 		foreach ( $post_types as $post_type ) {
-			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ), true ) ) {
+			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset' ), true ) ) {
 				$open_post_types[ $post_type ] = $post_type;
 				$default[ $post_type ]         = true;
 			}

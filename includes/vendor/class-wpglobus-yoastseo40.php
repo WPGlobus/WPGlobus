@@ -43,11 +43,8 @@ class WPGlobus_YoastSEO {
 
 				/** @see WPGlobus::__construct */
 				WPGlobus::O()->vendors_scripts['WPSEO'] = true;
-				//error_log( print_r( basename( __FILE__ ) . ' HERE: 1', true ) );
 				
 				if ( defined( 'WPSEO_PREMIUM_PLUGIN_FILE' ) ) {
-					//error_log( print_r( basename( __FILE__ ) . ' HERE: 2', true ) );
-					
 					/**
 					 * @see wordpress-seo-premium\wp-seo-premium.php
 					 */					

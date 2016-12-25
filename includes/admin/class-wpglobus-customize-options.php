@@ -858,7 +858,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 					$enabled_post_types = array();
 					foreach ( $post_types as $post_type ) {
-						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item' ), true ) ) {
+						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset' ), true ) ) {
 
 							if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
 								$enabled_post_types[ $post_type ] = $post_type;
