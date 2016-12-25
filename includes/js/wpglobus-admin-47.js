@@ -1171,11 +1171,15 @@ jQuery(document).ready(function () {
 				if (typeof WPGlobusVendor !== "undefined" && WPGlobusVendor.vendor.WPSEO ) {
 					if ( typeof wpglobus_wpseo !== "undefined" ) {
 						wpglobus_wpseo();
-					} else if ( typeof WPGlobusYoastSeo !== "undefined" ) {
-						//if ( WPGlobusYoastSeoPremium ) {
-							/** since WPGlobus ??? */
-							//WPGlobusYoastSeoPremium.init();
-						//}
+					} else if ( 'undefined' !== typeof WPGlobusYoastSeo ) {
+						if ( 'undefined' !== typeof WPGlobusYoastSeoPremium ) {
+							/** 
+							 * @since WPGlobus 1.7.2 
+							 */
+							if ( WPGlobusYoastSeoPremium ) { 
+								WPGlobusYoastSeoPremium.init();
+							}
+						}
 						/**
 						 * @since Yoast SEO 3.0
 						 */
