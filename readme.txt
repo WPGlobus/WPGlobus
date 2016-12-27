@@ -192,6 +192,13 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 == Changelog ==
 
+= 1.7.2 =
+
+* FIXED:
+	* Ignore WP 4.7's service post types `custom_css` and `customize_changeset` in the WPGlobus Settings and Customizer.
+* ADDED:
+	* Yoast SEO Premium: support multiple keywords for the default language.
+
 = 1.7.1 =
 
 * FIXED:
