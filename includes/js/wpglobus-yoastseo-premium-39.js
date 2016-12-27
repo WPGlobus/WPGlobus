@@ -141,6 +141,34 @@ jQuery(document).ready( function ($) {
 						}
 					});
 				},
+				setFocuskeyword: function( language ) {
+					/**
+					 * @see YoastMultiKeyword.prototype.updateKeywords
+					 */
+					if ( 'undefined' === typeof language ) {
+						language = WPGlobusCoreData.default_language;
+					}
+					
+					if ( language == WPGlobusCoreData.default_language ) {
+					
+						var keywords = WPGlobusYoastSeo.getKeywordsOrig();
+
+						// Exclude empty keywords.
+						keywords = _.filter(keywords, function (item) {
+							return item.keyword.length > 0;
+						});
+
+						if (0 === keywords.length) {
+							keywords.push({ keyword: "", score: 0 });
+						}
+
+						if (keywords.length > 0) {
+							var firstKeyword = keywords.splice(0, 1).shift();
+						}
+						$('#yoast_wpseo_focuskeywords_'+language).val(JSON.stringify(keywords));
+					}
+					
+				},				
 				addKeywordButton: function(){
 					$('#wpseo-tab-'+api.dLang+' #wpseo-metabox-tabs_'+api.dLang).append( api.keywordButton );
 				},
