@@ -1349,9 +1349,11 @@ jQuery(document).ready(function () {
 					/**
 					 * The end to handle taxonomy tags.
 					 */
-
 				});
 
+				/**
+				 * The alignment when default tab was clicked.
+				 */
                 $('.ui-state-default').on('click', function () {
                     if ('link-tab-default' === $(this).attr('id')) {
                         $(window).scrollTop($(window).scrollTop() + 1);
