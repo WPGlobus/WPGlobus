@@ -2,7 +2,7 @@
 /**
  * @package WPGlobus
  */
- 
+
 /**
  * Class WPGlobus_Media.
  *
@@ -11,15 +11,15 @@
 if ( ! class_exists( 'WPGlobus_Media' ) ) :
 
 	class WPGlobus_Media {
-		
+
 		/**
 		 * Instance.
 		 */
 		protected static $instance;
-		
+
 		/**
 		 * Post types to work on media page.
-		 */		
+		 */
 		protected $enabled_post_types = array();
 
 		/**
@@ -31,14 +31,14 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			}
 			return self::$instance;
 		}
-		
+
 		/**
 		 * Constructor.
 		 */
 		public function __construct() {
 
 			$this->enabled_post_types[] = 'attachment';
-		
+
 			/**
 			 * @scope admin
 			 * @since 1.7.3
@@ -46,8 +46,8 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			add_action( 'edit_form_after_editor', array(
 				$this,
 				'language_tabs'
-			) );			
-		
+			) );
+
 			/**
 			 * @scope admin
 			 * @since 1.7.3
@@ -56,7 +56,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				$this,
 				'media__admin_scripts'
 			) );
-	
+
 			/**
 			 * @scope admin
 			 * @since 1.7.3
@@ -65,29 +65,29 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				$this,
 				'post_php__admin_scripts'
 			), 5 );
-			
+
 			/**
 			 * @scope admin
 			 * @since 1.7.3
-			 */	
+			 */
 			add_action( 'admin_print_styles', array(
 				$this,
 				'action__admin_styles'
 			) );
-		
+
 			/**
 			 * @scope admin
 			 * @see filter 'media_send_to_editor' in media.php
 			 * @since 1.7.3
-			 */		
+			 */
 			add_filter( 'media_send_to_editor', array(
 				$this,
 				'filter__media_send_to_editor'
-			), 5, 3 );		
+			), 5, 3 );
 
-		
+
 		}
-		
+
 		/**
 		 * Check for enabled post types.
 		 *
@@ -96,36 +96,36 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @access public
 		 *
 		 * @return boolean
-		 */				
+		 */
 		public function filter__media_send_to_editor( $html, $id, $attachment ) {
-			
+
 			$fields = array(
 				'post_content',
 				'post_excerpt',
 				'image_alt'
 			);
-			
+
 			$current_language = WPGlobus::Config()->default_language;
 			if ( ! empty( $_POST['wpglobusLanguageTab'] ) ) {
 				/**
 				 * @see wpglobus-media.js
 				 */
 				$current_language = $_POST['wpglobusLanguageTab'];
-		
-				if ( ! in_array( $current_language, WPGlobus::Config()->enabled_languages ) ) {		
+
+				if ( ! in_array( $current_language, WPGlobus::Config()->enabled_languages ) ) {
 					return $html;
 				}
 			}
-			
+
 			foreach( $fields as $field ) {
 				if ( WPGlobus_Core::has_translations( $attachment[$field] ) ) {
 					$html = str_replace( $attachment[$field], WPGlobus_Core::text_filter( $attachment[$field], $current_language ), $html );
 				}
-			}			
-		
+			}
+
 			return $html;
 		}
-	
+
 		/**
 		 * Check for enabled post types.
 		 *
@@ -134,21 +134,21 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @access public
 		 *
 		 * @return boolean
-		 */			
+		 */
 		public function is_enabled() {
 
 			global $post;
-			
+
 			if ( empty( $post ) ) {
 				return false;
 			}
-			
+
 			if ( in_array( $post->post_type, $this->enabled_post_types ) ) {
 				return true;
 			}
 
-			return false;		
-		
+			return false;
+
 		}
 
 		/**
@@ -159,22 +159,22 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @access public
 		 *
 		 * @return void
-		 */		
+		 */
 		public function post_php__admin_scripts() {
-			
+
 			global $post;
 
 			if ( empty( $post ) ) {
 				return;
-			}			
-			
+			}
+
 			if ( in_array( $post->post_type, array( 'attachment' ) ) ) {
 				/**
 				 * Don't load on edit media page.
 				 */
 				return;
 			}
-		
+
 			wp_register_script(
 				'wpglobus-media-post-php',
 				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-media-post.php" . WPGlobus::SCRIPT_SUFFIX() . ".js",
@@ -182,10 +182,10 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				WPGLOBUS_VERSION,
 				true
 			);
-			wp_enqueue_script( 'wpglobus-media-post-php' );					
-		
+			wp_enqueue_script( 'wpglobus-media-post-php' );
+
 		}
-		
+
 		/**
 		 * Enqueue admin scripts.
 		 *
@@ -196,7 +196,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @return void
 		 */
 		public function media__admin_scripts() {
-		
+
 			if ( ! $this->is_enabled() ) {
 				return;
 			}
@@ -205,12 +205,11 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			 * WordPress 4.7+ needs a new version of our admin JS.
 			 * @since 1.7.0
 			 */
-			global $wp_version;
 			$version = '';
-			if ( version_compare( $wp_version, '4.6.1', '>' ) ) {
+			if ( version_compare( $GLOBALS['wp_version'], '4.6.999', '>' ) ) {
 				$version = '-47';
-			}			
-	
+			}
+
 			wp_register_script(
 				'wpglobus-admin',
 				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . WPGlobus::SCRIPT_SUFFIX() . ".js",
@@ -218,7 +217,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				WPGLOBUS_VERSION,
 				true
 			);
-			wp_enqueue_script( 'wpglobus-admin' );		
+			wp_enqueue_script( 'wpglobus-admin' );
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusAdmin',
@@ -227,22 +226,22 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 					'i18n'      => array(),
 					'data' 		=> array(
 						'default_language' => WPGlobus::Config()->default_language
-					)					
+					)
 				)
 			);
-			
+
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusCoreData',
-				array(			
+				array(
 					'multisite'			=> 'false',
 					'default_language' 	=> WPGlobus::Config()->default_language,
 					'enabled_languages' => WPGlobus::Config()->enabled_languages,
 					'locale_tag_start'  => WPGlobus::LOCALE_TAG_START,
-					'locale_tag_end'    => WPGlobus::LOCALE_TAG_END					
+					'locale_tag_end'    => WPGlobus::LOCALE_TAG_END
 				)
 			);
-			
+
 			wp_register_script(
 				'wpglobus-media',
 				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-media" . WPGlobus::SCRIPT_SUFFIX() . ".js",
@@ -250,11 +249,11 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				WPGLOBUS_VERSION,
 				true
 			);
-			wp_enqueue_script( 'wpglobus-media' );				
+			wp_enqueue_script( 'wpglobus-media' );
 			wp_localize_script(
 				'wpglobus-media',
 				'WPGlobusMedia',
-				array(			
+				array(
 					'version'			=> WPGLOBUS_VERSION,
 					'language'  		=> WPGlobus::Config()->default_language,
 					'defaultLanguage'  	=> WPGlobus::Config()->default_language,
@@ -265,9 +264,9 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 						'description' 	=> 'attachment_content'
 					)
 				)
-			);			
+			);
 		}
-	
+
 		/**
 		 * Enqueue admin styles.
 		 *
@@ -278,11 +277,11 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @return void
 		 */
 		public function action__admin_styles() {
-		
+
 			if ( ! $this->is_enabled() ) {
 				return;
 			}
-			
+
 			wp_register_style(
 				'wpglobus-admin-tabs',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-tabs' . WPGlobus::SCRIPT_SUFFIX() . '.css',
@@ -302,13 +301,13 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @access public
 		 *
 		 * @return void
-		 */		
+		 */
 		public function language_tabs() {
-			
+
 			if ( ! $this->is_enabled() ) {
 				return;
 			}
-			
+
 			?>
 			<div id="wpglobus-media-body-tabs" style="margin-top:20px;" class="wpglobus-post-body-tabs">
 				<ul class="wpglobus-post-body-tabs-list">    <?php
@@ -323,14 +322,14 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 						$order ++;
 					} ?>
 				</ul> <?php
-				foreach ( WPGlobus::Config()->open_languages as $language ) {	
+				foreach ( WPGlobus::Config()->open_languages as $language ) {
 					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language; ?>
 					<div id="tab-<?php echo $tab_suffix; ?>" style="display:none;"></div>	<?php
 				} ?>
 			</div>
-			<?php			
+			<?php
 		}
-	
+
 	}
-	
+
 endif;
