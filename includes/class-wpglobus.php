@@ -970,7 +970,7 @@ class WPGlobus {
 
 			if ( 'post.php' == $page || 'post-new.php' == $page ) {
 
-				$page_action = 'post-edit';
+				$page_action = 'post.php';
 
 				/**
 				 * We use $post_content, $post_title at edit post page

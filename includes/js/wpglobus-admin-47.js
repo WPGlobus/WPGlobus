@@ -570,7 +570,7 @@ jQuery(document).ready(function () {
 					var l=$(e).attr('id').replace('content_','');
 					$(e).attr('data-language',l);
 				});
-                if ('post-edit' === WPGlobusAdmin.page) {
+                if ('post.php' === WPGlobusAdmin.page) {
                     this.postEdit();
 					this.set_dialog();
 					if ( 'undefined' !== typeof WPGlobusAioseop ) {
