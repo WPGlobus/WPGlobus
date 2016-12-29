@@ -1435,6 +1435,7 @@ class WPGlobus {
 					'process_ajax' => __CLASS__ . '_process_ajax',
 					'flag_url'     => $config->flags_url,
 					'tabs'         => $tabs_suffix,
+					'currentTab'   => $config->default_language,
 					'i18n'         => $i18n,
 					'data'         => $data
 				)

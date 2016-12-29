@@ -1360,6 +1360,13 @@ jQuery(document).ready(function () {
                         $(window).scrollTop($(window).scrollTop() - 1);
                     }
                 });
+				
+				/**
+				 * Set current value after language tab of content was changed.
+				 */				
+				$(document).on( 'tabsactivate', content_tabs_id, function( event, ui ) {
+					WPGlobusAdmin.currentTab = ui.newTab[0].dataset.language;
+				});
 
             },
             adminCentral: function () {
