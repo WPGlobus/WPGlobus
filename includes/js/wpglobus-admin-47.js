@@ -1367,6 +1367,8 @@ jQuery(document).ready(function () {
 				$(document).on( 'tabsactivate', content_tabs_id, function( event, ui ) {
 					WPGlobusAdmin.currentTab = ui.newTab[0].dataset.language;
 				});
+				
+				$(document).triggerHandler('wpglobus_after_post_edit');
 
             },
             adminCentral: function () {
