@@ -268,6 +268,10 @@ class WPGlobus_YoastSEO {
 		if ( 'off' === WPGlobus::Config()->toggle ) {
 			return;
 		}
+		
+		if ( self::disabled_entity() ) {
+			return;
+		}				
 
 		/** @global string $pagenow */
 		global $pagenow;
@@ -340,8 +344,7 @@ class WPGlobus_YoastSEO {
 		/** @global WP_Post $post */
 		global $post;
 
-		$type = empty( $post ) ? '' : $post->post_type;
-		if ( WPGlobus::O()->disabled_entity( $type ) ) {
+		if ( self::disabled_entity() ) {
 			return;
 		}
 
@@ -499,6 +502,36 @@ class WPGlobus_YoastSEO {
 		</div>
 		<?php
 	}
+	
+	/**
+	 * Check disabled entity.
+	 * 
+	 * @since 1.7.3
+	 * @return boolean
+	 */
+	public static function disabled_entity() {
+		
+		if ( WPGlobus_WP::is_pagenow( array( 'edit-tags.php', 'term.php' ) ) ) :
+			/**
+			 * Don't check page when editing taxonomy.
+			 */
+			return false;
+		endif;
+		
+		/** @global WP_Post $post */
+		global $post;
+
+		$result = false;
+		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) :
+			if ( empty( $post ) ) {
+				$result = true;
+			} else if ( WPGlobus::O()->disabled_entity( $post->post_type ) ) {
+				$result = true;
+			}
+		endif;
+		return $result;
+	}
+	
 } // class
 
 # --- EOF

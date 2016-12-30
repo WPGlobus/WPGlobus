@@ -13,7 +13,6 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 		/**
 		 * Support Yoast SEO Premium version 3.9 or later.
 		 */
-		//error_log( print_r( basename( __FILE__ ) . ' HERE Yoast SEO Premium : '. WPSEO_VERSION, true ) );
 		require_once 'vendor/class-wpglobus-yoastseo40.php';
 		WPGlobus_YoastSEO::controller();
 	} else {
