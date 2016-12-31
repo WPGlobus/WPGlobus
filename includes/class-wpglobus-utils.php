@@ -152,6 +152,8 @@ class WPGlobus_Utils {
 	}
 
 	/**
+	 * DON'T use this function, you can use WPGlobus_WP::is_function_in_backtrace() instead @see class-wpglobus-wp.php 
+	 *
 	 * Check if was called by a specific function (could be any levels deep).
 	 * Note: does not check if the function is in a class method.
 	 *
