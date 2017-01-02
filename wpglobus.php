@@ -50,10 +50,7 @@ define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
  *
  * @since   1.6.4
  */
-if (
-	! defined( 'DOING_AJAX' ) && ! defined( 'DOING_CRON' ) && is_admin()
-	&& is_readable( dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php' )
-) {
+if ( is_readable( dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php';
 }
 
@@ -150,12 +147,12 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php';
 	WPGlobus_Admin_HelpDesk::construct();
-	
+
 	/**
 	 * Admin page central.
 	 *
 	 * @since 1.6.6
-	 */	
+	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/central/class-wpglobus-admin-central.php';
 	WPGlobus_Admin_Central::construct();
 
