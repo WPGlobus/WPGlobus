@@ -209,17 +209,15 @@ var WPGlobusDialogApp;
 				sb = api.startButton,
 				clone, v, style, nodeName = '';
 
-			api.element_by = 'id';
+			api.element_by = 'name';
+			node = document.getElementsByName(option.id);
 
-			node = document.getElementById(option.id);
-			if ( null ===  node ) {
-				api.element_by = 'name';
-				node = document.getElementsByName(option.id);
-			} else {
-				nodeName = node.nodeName;
-				nodeName = nodeName.toLowerCase();
-			}
 			if ( 0 == node.length ) {
+				api.element_by = 'id';
+				node = document.getElementById(option.id);
+			}
+
+			if ( null === node ) {
 				return;
 			} else {
 				id = option.id;
@@ -232,7 +230,7 @@ var WPGlobusDialogApp;
 				}
 			}
 
-			if ( 'undefined' === $element.attr('name') ) {
+			if ( 'undefined' === typeof $element.attr('name') || '' == $element.attr('name') ) {
 				name = id;
 			} else {
 				name = $element.attr('name');
