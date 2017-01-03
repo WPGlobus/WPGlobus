@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.7.3 ###
+
+* FIXED:
+	* Various code improvements related to WP47, Yoast, and our premium add-ons. See the  detailed log on [GitHub](https://github.com/WPGlobus/WPGlobus/commits/develop).
+* ADDED:
+	* Media: multilingual caption, description and `ALT` text.
+
 ### 1.7.2 ###
 
 * FIXED:
