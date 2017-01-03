@@ -432,6 +432,20 @@ class WPGlobus {
 
 				}
 
+				/**
+				 * Add multilingual Caption, Alternative Text, Description to media files.
+				 * @since 1.7.3
+				 */
+				if ( version_compare( $GLOBALS['wp_version'], '4.6.999', '>' ) ) :
+					if (
+						WPGlobus_WP::is_pagenow( 'post.php' ) ||
+						( WPGlobus_WP::is_doing_ajax() && WPGlobus_WP::is_http_post_action('send-attachment-to-editor') )
+					) {
+						require_once 'admin/media/class-wpglobus-media.php';
+						WPGlobus_Media::get_instance();
+					}
+				endif;
+			
 			}    // endif $devmode
 
 			if ( ( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] ) && WPGlobus_WP::is_pagenow( array(
@@ -467,20 +481,6 @@ class WPGlobus {
 				require_once 'admin/class-wpglobus-plugin-install.php';
 				WPGlobus_Plugin_Install::controller();
 			}
-
-			/**
-			 * Add multilingual Caption, Alternative Text, Description to media files.
-			 * @since 1.7.3
-			 */
-			if ( version_compare( $GLOBALS['wp_version'], '4.6.999', '>' ) ) :
-				if (
-					WPGlobus_WP::is_pagenow( 'post.php' ) ||
-					( WPGlobus_WP::is_doing_ajax() && WPGlobus_WP::is_http_post_action('send-attachment-to-editor') )
-				) {
-					require_once 'admin/media/class-wpglobus-media.php';
-					WPGlobus_Media::get_instance();
-				}
-			endif;
 
 		} else {
 
