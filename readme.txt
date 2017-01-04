@@ -192,6 +192,11 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 == Changelog ==
 
+= 1.7.4 =
+
+* FIXED:
+	* Media: incorrect script filename. Reported by `@tokkonopapa`.
+
 = 1.7.3 =
 
 * FIXED:

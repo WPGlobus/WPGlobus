@@ -177,7 +177,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 
 			wp_register_script(
 				'wpglobus-media-post-php',
-				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-media-post.php" . WPGlobus::SCRIPT_SUFFIX() . ".js",
+				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-media-post-php' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 				array(),
 				WPGLOBUS_VERSION,
 				true

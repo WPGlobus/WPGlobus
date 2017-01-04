@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.7.4 ###
+
+* FIXED:
+	* Media: incorrect script filename. Reported by `@tokkonopapa`.
+
 ### 1.7.3 ###
 
 * FIXED:
