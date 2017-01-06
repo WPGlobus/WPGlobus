@@ -261,7 +261,8 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 					'attachment' 		=> array(
 						'caption' 		=> 'attachment_caption',
 						'alt' 			=> 'attachment_alt',
-						'description' 	=> 'attachment_content'
+						'description' 	=> 'attachment_content',
+						'title'			=> 'title'
 					)
 				)
 			);
