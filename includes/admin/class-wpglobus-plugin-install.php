@@ -183,19 +183,18 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 					if ( isset( $all_products[ $product_slug ] ) ) {
 						$plugin_info = $all_products[ $product_slug ];
 
-						// Titles come as multilingual strings.
-						// $_plugin_title = WPGlobus_Filters::filter__text( $plugin_info['title'] );
-				
 						/**
-						 * Titles come as multilingual strings but in 2 languages ['en','ru'].
-						 * So we need to set our language code if language of admin is out of list.
+						 * Titles come as multilingual strings but only in 2 languages ['en','ru']
+						 * because the WPGlobus website has only those.
+						 * So we need to force `en` language code if the admin language
+						 * is out of the list.
 						 */
 						$language = WPGlobus::Config()->language;
-						if ( ! in_array( $language, array( 'en','ru' ) ) ) {
+						if ( ! in_array( $language, array( 'en', 'ru' ), true ) ) {
 							$language = 'en';
 						}
-						$_plugin_title = WPGlobus_Core::text_filter( $plugin_info['title'], $language );						
-						
+						$_plugin_title = WPGlobus_Core::text_filter( $plugin_info['title'], $language );
+
 						self::$paid_plugins[ $plugin ]['plugin_data'] = array(
 							'Description' => '', // TODO.
 							'Name'        => $_plugin_title,
