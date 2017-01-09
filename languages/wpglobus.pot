@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.7.4\n"
+"Project-Id-Version: WPGlobus 1.7.5\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-01-04 04:18:03+00:00\n"
+"POT-Creation-Date: 2017-01-09 18:08:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -597,19 +597,19 @@ msgstr ""
 msgid "Back to the WPGlobus Settings"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:297
+#: includes/admin/class-wpglobus-plugin-install.php:306
 msgid "Current Version"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:298
+#: includes/admin/class-wpglobus-plugin-install.php:307
 msgid "Get it now!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:299
+#: includes/admin/class-wpglobus-plugin-install.php:308
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:300
+#: includes/admin/class-wpglobus-plugin-install.php:309
 #: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
 msgstr ""

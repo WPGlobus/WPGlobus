@@ -192,6 +192,13 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 == Changelog ==
 
+= 1.7.5 =
+
+* ADDED:
+	* Media: Title is now multilingual.
+* FIXED:
+	* List of WPGlobus Plugins: display plugin info correctly if WP admin language is not one of the languages used on the `wpglobus.com` website.
+
 = 1.7.4 =
 
 * FIXED:

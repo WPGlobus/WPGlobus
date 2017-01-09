@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-01-03 16:02:12+00:00\n"
+"POT-Creation-Date: 2017-01-09 18:08:27+00:00\n"
 "PO-Revision-Date: 2016-09-11 16:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/wp-"
@@ -598,19 +598,19 @@ msgstr "Guardar Alterações"
 msgid "Back to the WPGlobus Settings"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:297
+#: includes/admin/class-wpglobus-plugin-install.php:306
 msgid "Current Version"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:298
+#: includes/admin/class-wpglobus-plugin-install.php:307
 msgid "Get it now!"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:299
+#: includes/admin/class-wpglobus-plugin-install.php:308
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:300
+#: includes/admin/class-wpglobus-plugin-install.php:309
 #: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
 msgstr "Instalado"
