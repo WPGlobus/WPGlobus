@@ -170,6 +170,15 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$disabled_setting_mask[] = 'vimeo';
 			/** since 1.6.0 */
 			$disabled_setting_mask[] = 'yelp';
+			
+			/** 
+			 * Exclude fields from Static Front Page section.
+			 * It may be added to customizer in many themes.
+			 * 
+			 * @since 1.7.6 
+			 */
+			$disabled_setting_mask[] = 'page_on_front';
+			$disabled_setting_mask[] = 'page_for_posts';
 
 			/**
 			 * Filter to disable fields in customizer.
