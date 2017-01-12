@@ -412,6 +412,18 @@ class WPGlobus_Options {
 					'subtitle' => __( '(Optional)', 'wpglobus' ),
 					'default'  => '',
 					'rows'     => 15
+				),
+				array(
+					'id'       => 'js_editor',
+					'type'     => 'wpglobus_ace_editor',
+					'title'    => __( 'Custom JS Code', 'wpglobus' ),
+					'mode'     => 'javascript',
+					'theme'    => 'chrome',
+					'compiler' => 'false',
+					'desc'     => __( '', 'wpglobus' ),
+					'subtitle' => __( '(Paste your JS code here.)', 'wpglobus' ),
+					'default'  => '',
+					'rows'     => 15
 				)
 			)
 		);

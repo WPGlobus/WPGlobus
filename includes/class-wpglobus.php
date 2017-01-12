@@ -525,6 +525,11 @@ class WPGlobus {
 				$this,
 				'on_wp_head'
 			), 11 );
+			
+			add_action( 'wp_footer', array(
+				$this,
+				'on__wp_footer'
+			), 99 );
 
 			add_action( 'wp_head', array(
 				$this,
@@ -3400,6 +3405,26 @@ class WPGlobus {
 		</script>
 		<?php
 	}
+
+	/**
+	 * Add custom JS to footer section.
+	 *
+	 * @since 1.7.6
+	 * @return void
+	 */	
+	public function on__wp_footer() {
+
+		$js = trim( WPGlobus::Config()->js_editor );
+	
+		if ( ! empty( $js ) ) {
+			?>
+			<script type="text/javascript">
+				<?php echo $js; ?>
+			</script>
+			<?php
+		}
+		
+	}	
 
 }
 

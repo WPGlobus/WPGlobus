@@ -160,6 +160,11 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	public $css_editor = '';
+	
+	/**
+	 * @var string
+	 */	
+	public $js_editor = '';
 
 	/**
 	 * WPGlobus devmode.
@@ -570,6 +575,15 @@ class WPGlobus_Config {
 			unset( $wpglobus_option['css_editor'] );
 		}
 
+		/**
+		 * Get custom JS.
+		 * @since 1.7.6
+		 */		
+		if ( isset( $wpglobus_option['js_editor'] ) ) {
+			$this->js_editor = $wpglobus_option['js_editor'];
+			unset( $wpglobus_option['js_editor'] );
+		}		
+		
 		/**
 		 * Get flag files without path
 		 */
