@@ -3018,6 +3018,17 @@ class WPGlobus {
 			}
 		}
 
+		/**
+		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
+		 * @since 1.7.6
+		 * 
+		 * @see 'wpglobus_disabled_entities' filter in 'admin_init' action.
+		 *
+		 * @param array $disabled_entities Array of disabled entities.
+		 * @return boolean 
+		 */		
+		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
+
 		if ( in_array( $entity, $this->disabled_entities ) ) {
 			return true;
 		}
@@ -3276,6 +3287,8 @@ class WPGlobus {
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.0.0
+		 *
+		 * @todo may be remove this filter @see 'wpglobus_disabled_entities' in disabled_entity(). 
 		 *
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
