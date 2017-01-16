@@ -177,7 +177,6 @@ class WPGlobus {
 		/** Set to true in @see WPGlobus_WPSEO::controller or WPGlobus_YoastSEO::controller */
 		$this->vendors_scripts['WPSEO']       	= false;
 		$this->vendors_scripts['WPSEO_PREMIUM'] = false;
-		$this->vendors_scripts['WPSEO']       	= false;
 		$this->vendors_scripts['WOOCOMMERCE']	= false;
 		$this->vendors_scripts['AIOSEOP']     	= false; // All In One SEO Pack
 		$this->vendors_scripts['WPCF7']       	= false; // Contact Form 7
