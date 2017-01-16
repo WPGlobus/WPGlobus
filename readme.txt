@@ -192,6 +192,14 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 == Changelog ==
 
+= 1.7.6 =
+
+* FIXED:
+	* Customizer: exclude the `Static Front Page` section fields from WPGlobus.
+	* Core: apply the `wpglobus_disabled_entities` filter on the array of entities returned for load tabs, scripts, styles.
+* ADDED:
+	* Settings: new section for a custom Javascript code to be embedded in the footer.
+
 = 1.7.5 =
 
 * ADDED:
@@ -227,46 +235,6 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 * FIXED:
 	* Several additions and changes related to WordPress 4.7.
-
-= 1.6.9 =
-
-* ADDED:
-	* CSS rules for the trash icon `.wpglobus-link-trash-icon` in WPGlobus tabs in admin.
-* FIXED:
-	* Revised the `wpglobus_extra_languages` filter in the class `WPGlobusWidget`.
-
-= 1.6.8 =
-
-* ADDED:
-	* Support for Yoast SEO 3.8.
-* FIXED:
-	* Updated flag image for the `my_MM` locale (Myanmar / Burmese).
-
-= 1.6.7 =
-
-* FIXED:
-	* Admin language selector is displayed correctly in the "Light" color scheme.
-	* Admin language selector is available on mobile (narrow) screens.
-	* The premium plugin information is stored locally, so no call to the server is required.
-
-= 1.6.6 =
-
-* ADDED:
-    * Link to the [Professional Translation Service pages](http://www.wpglobus.com/translator/) from the `About WPGlobus` admin page.
-    * Core: Filter `wpglobus_manage_language_items` before outputting the language items on the `edit.php` page.
-	* Core: Filter `wpglobus_styles` for the frontend CSS rules (Ticket #304).
-* FIXED:
-	* Prevent creating duplicate terms on the `edit.php` page.
-	* All-in-One SEO: Prevent duplicate keywords in `meta name="keywords"` coming from extra languages.
-
-= 1.6.5 =
-
-* ADDED:
-	* Helpdesk form directly in WP admin.
-    * Core: Filter to enable/disable multilingual custom fields on post.php|post-new.php page.
-    * Core: Filter the columns displayed in the Posts list table.
-* FIXED:
-    * A license activation bug that occurred when plugin "slug" did not match the plugin folder name (example: the `WPGlobus for Slider Revolution` premium add-on).
 
 = Earlier versions =
 

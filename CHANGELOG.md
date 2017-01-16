@@ -2,6 +2,14 @@
 
 ## Changelog ##
 
+### 1.7.6 ###
+
+* FIXED:
+	* Customizer: exclude the `Static Front Page` section fields from WPGlobus.
+	* Core: apply the `wpglobus_disabled_entities` filter on the array of entities returned for load tabs, scripts, styles.
+* ADDED:
+	* Settings: new section for a custom Javascript code to be embedded in the footer.
+
 ### 1.7.5 ###
 
 * ADDED:
