@@ -88,4 +88,19 @@ function esc_url( $sz ) {
 	return $sz;
 }
 
+/**
+ * Mark a function as deprecated and inform when it has been used.
+ *
+ * @param string      $function    The function that was called.
+ * @param string      $version     The version of WordPress that deprecated the function.
+ * @param string|null $replacement Optional. The function that should have been called. Default null.
+ */
+function _deprecated_function( $function, $version, $replacement = null ) {
+	if ( $replacement ) {
+		trigger_error( sprintf( '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.', $function, $version, $replacement ) );
+	} else {
+		trigger_error( sprintf( '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.', $function, $version ) );
+	}
+}
+
 # --- EOF

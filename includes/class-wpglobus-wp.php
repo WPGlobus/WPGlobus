@@ -191,7 +191,7 @@ class WPGlobus_WP {
 	/**
 	 * Check if was called by a specific function (could be any levels deep).
 	 *
-	 * @param callable $method Function name or array(class,function).
+	 * @param callable|string $method Function name or array(class,function).
 	 *
 	 * @return bool True if Function is in backtrace.
 	 */

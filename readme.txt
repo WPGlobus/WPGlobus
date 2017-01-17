@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: bilingual, globalization, i18n, international, l10n, localization, multilanguage, multilingual, language switcher, translate, translation, WPGlobus
 Requires at least: 4.6
-Tested up to: 4.7.1
+Tested up to: 4.7.2
 Stable tag: trunk
 License: GPL-3.0
 License URI: http://www.gnu.org/licenses/gpl.txt
@@ -191,6 +191,11 @@ From the [WPGlobus FAQ Archives](http://www.wpglobus.com/faq/):
 WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
 
 == Changelog ==
+
+= 1.7.7 =
+
+* FIXED:
+	* Core: `WPGlobus_Utils::is_function_in_backtrace` is deprecated in favor of more advanced `WPGlobus_WP::is_function_in_backtrace` method.
 
 = 1.7.6 =
 

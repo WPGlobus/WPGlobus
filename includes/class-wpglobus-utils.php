@@ -152,25 +152,17 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * DON'T use this function, you can use WPGlobus_WP::is_function_in_backtrace() instead @see class-wpglobus-wp.php 
-	 *
 	 * Check if was called by a specific function (could be any levels deep).
-	 * Note: does not check if the function is in a class method.
+	 * @deprecated 1.7.7 Use WPGlobus_WP::is_function_in_backtrace()
+	 * @see        WPGlobus_WP::is_function_in_backtrace()
 	 *
-	 * @param string $function_name
-	 * @return bool
+	 * @param string|callable $function_name Function name or array(class,function).
+	 *
+	 * @return bool True if Function is in backtrace.
 	 */
 	public static function is_function_in_backtrace( $function_name ) {
-		$function_in_backtrace = false;
-
-		foreach ( debug_backtrace() as $_ ) {
-			if ( ! empty( $_['function'] ) && $_['function'] === $function_name ) {
-				$function_in_backtrace = true;
-				break;
-			}
-		}
-
-		return $function_in_backtrace;
+		_deprecated_function( __METHOD__, 'WPGlobus 1.7.7', 'WPGlobus_WP::is_function_in_backtrace()' );
+		return WPGlobus_WP::is_function_in_backtrace( $function_name );
 	}
 
 	/**

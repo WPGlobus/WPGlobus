@@ -115,7 +115,7 @@ class WPGlobus_Filters {
 	 * Filter @see get_the_terms
 	 * @scope admin
 	 *
-	 * @param object[]|WP_Error $terms List of attached terms, or WP_Error on failure.
+	 * @param stdClass[]|WP_Error $terms List of attached terms, or WP_Error on failure.
 	 *
 	 * @return array
 	 */
@@ -132,9 +132,9 @@ class WPGlobus_Filters {
 		 * @todo     Keep watching this
 		 */
 
-		if ( ! is_wp_error( $terms ) && WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
+		if ( ! is_wp_error( $terms ) && WPGlobus_WP::is_function_in_backtrace( 'single_row' ) ) {
 
-			foreach ( $terms as &$_term ) {
+			foreach ( (array) $terms as &$_term ) {
 				WPGlobus_Core::translate_term( $_term, WPGlobus::Config()->language );
 			}
 			unset( $_term );
@@ -199,7 +199,7 @@ class WPGlobus_Filters {
 		/**
 		 * Don't filter term names for bulk edit post from edit.php page
 		 */
-		if ( is_admin() && WPGlobus_Utils::is_function_in_backtrace( 'bulk_edit_posts' ) ) {
+		if ( is_admin() && WPGlobus_WP::is_function_in_backtrace( 'bulk_edit_posts' ) ) {
 			return $terms;
 		}
 
@@ -217,7 +217,7 @@ class WPGlobus_Filters {
 		if ( WPGlobus_WP::is_http_post_action( 'inline-save' ) &&
 		     WPGlobus_WP::is_pagenow( 'admin-ajax.php' )
 		) {
-			if ( ! WPGlobus_Utils::is_function_in_backtrace( 'single_row' ) ) {
+			if ( ! WPGlobus_WP::is_function_in_backtrace( 'single_row' ) ) {
 				return $terms;
 			}
 
@@ -236,10 +236,11 @@ class WPGlobus_Filters {
 		/**
 		 * Don't filter term name at time generate checklist categories in metabox
 		 */
-		if ( is_admin() &&
-		     WPGlobus_WP::is_pagenow( 'post.php' ) &&
-		     empty( $_POST ) &&
-		     WPGlobus_Utils::is_function_in_backtrace( 'wp_terms_checklist' )
+		if (
+			empty( $_POST ) &&
+			is_admin() &&
+			WPGlobus_WP::is_pagenow( 'post.php' ) &&
+			WPGlobus_WP::is_function_in_backtrace( 'wp_terms_checklist' )
 		) {
 			return $terms;
 		}
@@ -357,7 +358,7 @@ class WPGlobus_Filters {
 	 * @param string $taxonomy Taxonomy slug.
 	 *
 	 * @return string
-	 */	
+	 */
 	public static function filter__pre_insert_term( $term, $taxonomy  ) {
 
 		$multilingual_term = esc_sql( $term );
@@ -375,10 +376,10 @@ class WPGlobus_Filters {
 			 */
 			return '';
 		}
-		
+
 		return $term;
-	}	
-	
+	}
+
 	/**
 	 * Localize home_url
 	 * Should be processed on:
@@ -751,6 +752,8 @@ class WPGlobus_Filters {
 		$text, $num_words, $more, $original_text
 	) {
 
+		// Method argument is ignored.
+		/* @noinspection SuspiciousAssignmentsInspection */
 		$text = WPGlobus_Core::text_filter( $original_text, WPGlobus::Config()->language );
 
 		if ( null === $more ) {

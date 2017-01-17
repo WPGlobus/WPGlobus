@@ -158,6 +158,13 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @see test_is_function_in_backtrace
+	 */
+	private static function _unit_test_for_backtrace() {
+		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( __FUNCTION__ ) );
+	}
+
+	/**
 	 * @covers WPGlobus_WP::is_function_in_backtrace
 	 */
 	public static function test_is_function_in_backtrace() {
@@ -165,11 +172,16 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( __CLASS__, __FUNCTION__ ) ) );
 		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( 'PHPUnit_Framework_TestCase', 'runTest' ) ) );
 
-		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( 'no-such-function' ) );
-		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( null ) );
-		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( 3.14 ) );
-		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( new stdClass ) );
-		self::assertFalse( WPGlobus_Utils::is_function_in_backtrace( array( 'a', 278, new stdClass ) ) );
+		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( 'no-such-function' ) );
+		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( null ) );
+		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( 3.14 ) );
+		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( new stdClass ) );
+		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( array( 'a', 278, new stdClass ) ) );
+
+		/**
+		 * One level deeper
+		 */
+		self::_unit_test_for_backtrace();
 	}
 
 	/**
