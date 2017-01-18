@@ -47,7 +47,7 @@ class LanguagesTable extends WP_List_Table {
 	 * Fill out table_fields and data arrays
 	 * @return void
 	 */
-	function get_data() {
+	public function get_data() {
 
 		$config = WPGlobus::Config();
 
@@ -112,11 +112,11 @@ class LanguagesTable extends WP_List_Table {
 
 	}
 
-	function no_items() {
+	public function no_items() {
 		_e( 'No items found', 'wpglobus' );
 	}
 
-	function display_table() {
+	public function display_table() {
 
 		$this->prepare_items();
 		?>
@@ -142,7 +142,7 @@ class LanguagesTable extends WP_List_Table {
 	 * @access public
 	 * @return void
 	 */
-	function prepare_items() {
+	public function prepare_items() {
 
 		$columns               = $this->get_columns();
 		$hidden                = array();

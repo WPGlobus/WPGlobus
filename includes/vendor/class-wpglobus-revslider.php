@@ -12,7 +12,7 @@ if ( ! class_exists( 'WPGlobus_RevSlider' ) ) :
 	 */
 	class WPGlobus_RevSlider {
 
-		static $links = array();
+		public static $links = array();
 
 		public static function controller() {
 

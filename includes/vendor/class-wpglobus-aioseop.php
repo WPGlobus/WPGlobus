@@ -113,17 +113,17 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	 * @param string $text
 	 *
 	 * @return string
-	 */	
+	 */
 	public static function filter__text( $text ) {
-		
+
 		if ( ! WPGlobus_Core::has_translations( $text ) ) {
 			return $text;
 		}
 
 		return WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
-		
+
 	}
-	
+
 	/**
 	 * Filter for post description.
 	 *
@@ -175,7 +175,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 
 	}
 
-	function wpg_get_option_row( $name, $opts, $args, $language ) {
+	public function wpg_get_option_row( $name, $opts, $args, $language ) {
 
 		$this->wpg_language = $language;
 
@@ -188,7 +188,7 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 	/**
 	 * Format a row for an option on a settings page.
 	 */
-	function get_option_row( $name, $opts, $args ) {
+	public function get_option_row( $name, $opts, $args ) {
 
 		$language = '_'.$this->wpg_language;
 
@@ -444,7 +444,7 @@ class WPGlobus_aioseop {
 		/**
 		 * get keywords for current post
 		 * use original function for compatibility
-		 * 
+		 *
 		 * "All In One SEO Pack" may to add keywords in addition to any keywords you specify on the Edit Post screen.
 		 * @see options in Keyword Settings metabox on General Settings page.
 		 */
