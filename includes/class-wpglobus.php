@@ -444,7 +444,7 @@ class WPGlobus {
 						WPGlobus_Media::get_instance();
 					}
 				endif;
-			
+
 			}    // endif $devmode
 
 			if ( ( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] ) && WPGlobus_WP::is_pagenow( array(
@@ -524,7 +524,7 @@ class WPGlobus {
 				$this,
 				'on_wp_head'
 			), 11 );
-			
+
 			add_action( 'wp_footer', array(
 				$this,
 				'on__wp_footer'
@@ -1323,11 +1323,10 @@ class WPGlobus {
 					foreach ( $tags as $tag ) {
 						$terms = self::_get_terms( $tag );
 						if ( ! empty( $terms ) ) {
-							$data['tags'][]                   = $tag;
-							$data['names'][ $tag ]            = 'tax_input[' . $tag . ']';
-							$data['tag'][ $tag ]              = $terms;
-							$data['value'][ $tag ]            = ''; // just init
-							$data['value'][ $tag ]['post_id'] = ''; // just init
+							$data['tags'][]        = $tag;
+							$data['names'][ $tag ] = 'tax_input[' . $tag . ']';
+							$data['tag'][ $tag ]   = $terms;
+							$data['value'][ $tag ] = array( 'post_id' => '' ); // just init
 						}
 					}
 				}
@@ -3021,12 +3020,12 @@ class WPGlobus {
 		/**
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.7.6
-		 * 
+		 *
 		 * @see 'wpglobus_disabled_entities' filter in 'admin_init' action.
 		 *
 		 * @param array $disabled_entities Array of disabled entities.
-		 * @return boolean 
-		 */		
+		 * @return boolean
+		 */
 		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
 
 		if ( in_array( $entity, $this->disabled_entities ) ) {
@@ -3288,7 +3287,7 @@ class WPGlobus {
 		 * Filter the array of disabled entities returned for load tabs, scripts, styles.
 		 * @since 1.0.0
 		 *
-		 * @todo may be remove this filter @see 'wpglobus_disabled_entities' in disabled_entity(). 
+		 * @todo may be remove this filter @see 'wpglobus_disabled_entities' in disabled_entity().
 		 *
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
@@ -3423,11 +3422,11 @@ class WPGlobus {
 	 *
 	 * @since 1.7.6
 	 * @return void
-	 */	
+	 */
 	public function on__wp_footer() {
 
 		$js = trim( WPGlobus::Config()->js_editor );
-	
+
 		if ( ! empty( $js ) ) {
 			?>
 			<script type="text/javascript">
@@ -3435,8 +3434,8 @@ class WPGlobus {
 			</script>
 			<?php
 		}
-		
-	}	
+
+	}
 
 }
 
