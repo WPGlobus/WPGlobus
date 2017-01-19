@@ -196,6 +196,8 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 * FIXED:
 	* Core: `WPGlobus_Utils::is_function_in_backtrace` is deprecated in favor of more advanced `WPGlobus_WP::is_function_in_backtrace` method.
+* ADDED:
+	* `WPGlobus News` admin dashboard widget.
 
 = 1.7.6 =
 

@@ -921,24 +921,28 @@ class WPGlobus_Filters {
 	 * Localize feed url
 	 * @since 1.5.3
 	 *
-	 * @scope front
+	 * @scope both (RSS are shown in admin dashboard "News" widgets).
+	 *
+	 * @param SimplePie $obj
 	 */
 	public static function fetch_feed_options( $obj ) {
 
+		$need_to_localize = true;
 		/**
 		 * Filter to disable localize feed url.
 		 * @since 1.5.3
 		 *
-		 * @param boolean			True is value by default.
-		 * @param SimplePie object  $obj.
-		 * @return boolean
+		 * @param bool      $need_to_localize True is value by default.
+		 * @param SimplePie $obj The feed object.
+		 *
+		 * @return bool
 		 */
-		if ( apply_filters( 'wpglobus_localize_feed_url', true, $obj ) ) {
-			if ( ! empty( $obj->feed_url ) ) {
-				$obj->feed_url = WPGlobus_Utils::localize_url( $obj->feed_url );
-			}
+		$need_to_localize = apply_filters( 'wpglobus_localize_feed_url', $need_to_localize, $obj );
 
+		if ( ! empty( $obj->feed_url ) && $need_to_localize ) {
+			$obj->feed_url = WPGlobus_Utils::localize_url( $obj->feed_url );
 		}
+
 	}
 
 	/**

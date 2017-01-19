@@ -156,6 +156,13 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	require_once dirname( __FILE__ ) . '/includes/admin/central/class-wpglobus-admin-central.php';
 	WPGlobus_Admin_Central::construct();
 
+	/**
+	 * WPGlobus News admin dashboard widget.
+	 * @since 1.7.7
+	 */
+	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-dashboard-news.php';
+	new WPGlobus_Dashboard_News();
+
 endif;
 
 /*EOF*/
