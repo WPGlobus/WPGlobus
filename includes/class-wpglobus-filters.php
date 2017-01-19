@@ -50,7 +50,7 @@ class WPGlobus_Filters {
 	 * @return array
 	 * @since 1.0.14
 	 */
-	public static function filter__the_posts( $posts, &$query ) {
+	public static function filter__the_posts( $posts, $query ) {
 
 		if ( $query->is_main_query() || $query->get( 'wpglobus_force_filter__the_posts' ) ) {
 			foreach ( $posts as $post ) {
