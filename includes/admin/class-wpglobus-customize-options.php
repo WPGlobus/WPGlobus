@@ -347,6 +347,14 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				'customizr',
 			);
 
+			/**
+			 * @since 1.7.7
+			 * Don't standard loading of the option 'theme_mods_experon'. Theme uses redux.
+			 * Don't standard behavior in customizer.
+			 * @see https://wordpress.org/themes/experon/
+			 */
+			self::$disabled_themes[] = 'experon';
+			
 			add_action( 'wp_loaded', array( __CLASS__, 'init' ) );
 
 			/**
