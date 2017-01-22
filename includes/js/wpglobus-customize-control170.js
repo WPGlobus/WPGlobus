@@ -23,6 +23,7 @@ jQuery(document).ready(function ($) {
 		instancesKeep: false,
 		widgetKeep: false,
 		action: false,
+		customizeSave: false,
 		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span style="font-weight:bold;">{{language}}</span>',
 		init: function(args) {
 			
@@ -323,7 +324,6 @@ jQuery(document).ready(function ($) {
 				if ( typeof api.controlWidgets[obj] === 'undefined' ) {
 					api.controlWidgets[obj] = {}; 
 					if ( api.action ) {
-						//console.log('!! START with api.action' );
 						api.ctrlWidgetCallback( obj, control );	
 					}	
 				}					
@@ -582,6 +582,7 @@ jQuery(document).ready(function ($) {
 			if ( typeof force === 'undefined' ) {
 				force = true;
 			}
+			
 			/** updateElements simple controls */
 			$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 				if ( ! data.userControl.enabled ) {
@@ -724,8 +725,8 @@ jQuery(document).ready(function ($) {
 			}); */					
 			
 			/** attachListeners: Save&Publish button */
-			$( '#save' ).on( 'mouseenter', function( event ) {
-				
+			$(document).on( 'mouseenter', '#save', function( event ) {
+
 				/** Save&Publish simple controls */
 				$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 					if ( data.userControl.enabled ) {
@@ -748,14 +749,31 @@ jQuery(document).ready(function ($) {
 					});
 				}); */			
 				
-			}).on( 'mouseleave', function( event ) {
+			}).on( 'mouseleave', '#save', function( event ) {
 				if ( ! api.instancesKeep ) {
 					api.updateElements();
 				}
-			}).on( 'click', function(event){
+			});
+			
+			/**
+			 * Don't use $(document) for this case.
+			 */
+			$('#save').on('click', function(event){
 				api.instancesKeep = true;
-			});			
+			});		
 		
+			/**
+			 * AttachListeners: ajaxSend event handler.
+			 */
+			$(document).on( 'ajaxSend', function( ev, jqXHR, ajaxOptions ) {
+				if ( typeof ajaxOptions.data === 'undefined' ) {
+					return;	
+				}
+				if ( -1 != ajaxOptions.data.indexOf( 'wp_customize=on' ) && -1 != ajaxOptions.data.indexOf( 'action=customize_save' ) ) {
+					api.customizeSave = true;
+				}	
+			});
+			
 			/**
 			 * AttachListeners: ajaxComplete event handler.
 			 */
@@ -767,13 +785,16 @@ jQuery(document).ready(function ($) {
 				/**
 				 * @todo check adding new widget. 
 				 */
-				if ( '{"success":true,"data":[]}' == response.responseText ) {
+				if ( api.customizeSave ) {
 
 					/** Save&Publish ajax complete */
 					api.updateElements( false );
-
-				} else {
+					if ( api.instancesKeep ) {
+						api.instancesKeep = false;
+					}
 					
+				} else {
+
 					if ( response.responseText.indexOf( 'WP_CUSTOMIZER_SIGNATURE' ) >= 0 ) {
 						api.action = 'customizerAjaxComplete';
 						api.setControlInstances();
@@ -802,6 +823,8 @@ jQuery(document).ready(function ($) {
 					});	
 
 				}
+				
+				api.customizeSave = false;
 				
 			});
 			
