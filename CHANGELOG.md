@@ -6,8 +6,12 @@
 
 * FIXED:
 	* Core: `WPGlobus_Utils::is_function_in_backtrace` is deprecated in favor of more advanced `WPGlobus_WP::is_function_in_backtrace` method.
+	* Code: a PHP 7.1 warning cleared.
+	* Customizer: JS code optimization and cleanup.
 * ADDED:
 	* `WPGlobus News` admin dashboard widget.
+	* Customizer: exclude some incompatible themes. Example: "Experon".
+	* Yoast SEO: version 4.1 support.
 
 ### 1.7.6 ###
 
