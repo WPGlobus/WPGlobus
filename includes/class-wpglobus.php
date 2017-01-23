@@ -389,11 +389,10 @@ class WPGlobus {
 					'on_add_title_fields'
 				) );
 
-				// Priority is 0 to make sure it comes before other add-ons (possible dependency).
 				add_action( 'admin_print_scripts', array(
 					$this,
 					'on_admin_scripts'
-				), 0 );
+				) );
 
 				add_action( 'admin_print_scripts', array(
 					$this,
