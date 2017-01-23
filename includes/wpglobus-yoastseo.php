@@ -12,8 +12,9 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 	if ( version_compare( WPSEO_VERSION, '3.9', '>=' ) ) {
 		/**
 		 * Support Yoast SEO Premium version 3.9 or later.
+		 * Version of file must be latest.
 		 */
-		require_once 'vendor/class-wpglobus-yoastseo40.php';
+		require_once 'vendor/class-wpglobus-yoastseo41.php';
 		WPGlobus_YoastSEO::controller();
 	} else {
 		require_once 'vendor/class-wpglobus-yoastseo38.php';
@@ -21,14 +22,17 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 	}
 	
 } else {
-	
+
 	if ( defined( 'WPSEO_VERSION' ) ) {
 
 		if ( version_compare( WPSEO_VERSION, '3.8', '>=' ) ) {
 
 			if ( version_compare( WPSEO_VERSION, '4.0', '>=' ) ) {
 				
-				require_once 'vendor/class-wpglobus-yoastseo40.php';
+				$version = '40';
+				$version = version_compare( WPSEO_VERSION, '4.1', '>=' ) ? '41' : $version;
+				
+				require_once "vendor/class-wpglobus-yoastseo$version.php";
 				WPGlobus_YoastSEO::controller();
 				
 			} else {
@@ -67,5 +71,6 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 
 	}
 
-}
-// */
+} // class
+
+# --- EOF

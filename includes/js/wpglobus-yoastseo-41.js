@@ -1,8 +1,8 @@
 /**
- * WPGlobus for YoastSeo 4.0.0
+ * WPGlobus for YoastSeo 4.1.0
  * Interface JS functions
  *
- * @since 1.7.2
+ * @since 1.7.7
  *
  * @package WPGlobus
  */
@@ -683,8 +683,8 @@ S				 */
 				/**
 				 * Hide original section content.
 				 */
-				api.iB.addClass( 'hidden' );
-				api.iB.css({'height':0,'overflow':'hidden','display':'none'});
+				//api.iB.addClass( 'hidden' );
+				//api.iB.css({'height':0,'overflow':'hidden','display':'none'});
 
 				if ( WPGlobusYoastSeoPremium ) {
 					/**
@@ -893,6 +893,9 @@ S				 */
 				$(document).on( 'click', '.wpglobus-post-body-tabs-list li', function(event){
 					var $t = $(this);
 					if ( $t.hasClass('wpglobus-post-tab') ) {
+						/**
+						 * @see 'tabsactivate' action.
+						 */
 						$('#wpglobus-wpseo-tabs').tabs( 'option', 'active', $t.data('order') );
 
 						/**
@@ -1049,12 +1052,12 @@ S				 */
 			});
 
 			/**
-			 * The action when language's tab was activated in Yoast SEO or Yoast SEO Premium metabox.
+			 * The action when language's tab was activated in Yoast SEO or Yoast SEO Premium metabox 
+			 * or synchronization was fired from "Post tab".
 			 * It is fired when user come from other language tab.
 			 * @see action ['click', '.wpglobus-post-body-tabs-list li']
 			 */
 			$(document).on( 'tabsactivate', WPGlobusYoastSeo.wpseoTabSelector, function(event, ui){
-
 				_this.language = ui.newPanel.attr( 'data-language' );
 				WPGlobusYoastSeo.wpseoTab = _this.language;
 				if ( ui.newPanel.attr( 'data-language' ) === WPGlobusCoreData.default_language ) {
