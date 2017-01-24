@@ -210,6 +210,11 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 ## Changelog ##
 
+### 1.7.7.1 ###
+
+* FIXED:
+	* Core: Casting $terms to (array) causes syntax error in PHP 5.3 and older.
+
 ### 1.7.7 ###
 
 * FIXED:

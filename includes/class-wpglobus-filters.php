@@ -134,7 +134,9 @@ class WPGlobus_Filters {
 
 		if ( ! is_wp_error( $terms ) && WPGlobus_WP::is_function_in_backtrace( 'single_row' ) ) {
 
-			foreach ( (array) $terms as &$_term ) {
+			// Casting $terms to (array) causes syntax error in PHP 5.3 and older.
+			/* @noinspection ForeachSourceInspection */
+			foreach ( $terms as &$_term ) {
 				WPGlobus_Core::translate_term( $_term, WPGlobus::Config()->language );
 			}
 			unset( $_term );
