@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.7.7.2 ###
+
+* FIXED:
+	* Yoast SEO: hide original section content for v.4.1.
+
 ### 1.7.7.1 ###
 
 * FIXED:

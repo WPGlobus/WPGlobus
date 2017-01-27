@@ -210,6 +210,11 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 ## Changelog ##
 
+### 1.7.7.2 ###
+
+* FIXED:
+	* Yoast SEO: hide original section content for v.4.1.
+	
 ### 1.7.7.1 ###
 
 * FIXED:
