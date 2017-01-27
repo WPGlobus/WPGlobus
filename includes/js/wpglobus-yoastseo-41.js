@@ -683,8 +683,8 @@ S				 */
 				/**
 				 * Hide original section content.
 				 */
-				//api.iB.addClass( 'hidden' );
-				//api.iB.css({'height':0,'overflow':'hidden','display':'none'});
+				api.iB.addClass( 'hidden' );
+				api.iB.css({'height':0,'overflow':'hidden','display':'none'});
 
 				if ( WPGlobusYoastSeoPremium ) {
 					/**
