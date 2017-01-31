@@ -317,7 +317,7 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * Localize www.wpglobus.com for use in outgoing links
+	 * Localize wpglobus.com for use in outgoing links
 	 *
 	 * @param WPGlobus_Config $config
 	 * @return string
