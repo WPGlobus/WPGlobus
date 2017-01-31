@@ -91,7 +91,7 @@
 ### 1.6.6 ###
 
 * ADDED:
-    * Link to the [Professional Translation Service pages](http://www.wpglobus.com/translator/) from the `About WPGlobus` admin page.
+    * Link to the [Professional Translation Service pages](https://wpglobus.com/translator/) from the `About WPGlobus` admin page.
     * Core: Filter `wpglobus_manage_language_items` before outputting the language items on the `edit.php` page.
 	* Core: Filter `wpglobus_styles` for the frontend CSS rules (Ticket #304).
 * FIXED:
@@ -420,7 +420,7 @@
 
 * ADDED:
 	* Handling the hash part of the URLs.
-	* New extension, [WooCommerce WPGlobus](http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
+	* New extension, [WooCommerce WPGlobus](https://wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
 	* Filter 'wpglobus_enabled_pages'
 * FIXED:
 	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.

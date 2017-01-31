@@ -17,7 +17,7 @@
  * Domain Path: /languages/
  * Version: 1.7.7.2
  * Author: WPGlobus
- * Author URI: http://www.wpglobus.com/
+ * Author URI: https://wpglobus.com/
  * Network: false
  * License: GPL-3.0
  * License URI: http://www.gnu.org/licenses/gpl.txt

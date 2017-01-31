@@ -4,7 +4,7 @@
     "define": "WPGLOBUS_VERSION"
   },
   "path": {
-    "dist": "/var/www/u/www.wpglobus.com/dist",
+    "dist": "/var/www/u/wpglobus.com/dist",
     "js": "includes/{js,options/fields}",
     "less": "includes/{css,options/fields}",
     "css": "includes/css",

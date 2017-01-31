@@ -14,7 +14,7 @@ class WPGlobus {
 	const LOCALE_TAG_OPEN = '{:';
 	const LOCALE_TAG_CLOSE = '}';
 
-	const URL_WPGLOBUS_SITE = 'http://www.wpglobus.com/';
+	const URL_WPGLOBUS_SITE = 'https://wpglobus.com/';
 
 	/**
 	 * @var string

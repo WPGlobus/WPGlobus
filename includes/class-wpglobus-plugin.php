@@ -74,7 +74,7 @@ abstract class WPGlobus_Plugin {
 			new TIVWP_Updater( array(
 				'plugin_file' => $this->plugin_file,
 				'product_id'  => $this->product_id,
-				'url_product' => 'http://www.wpglobus.com/product/' .
+				'url_product' => 'https://wpglobus.com/product/' .
 				                 $this->product_slug . '/',
 			) );
 		}

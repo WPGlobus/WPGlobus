@@ -14,21 +14,21 @@ class WPGlobus_Addons {
 	public static function addons_screen() {
 
 		$payed_addons              		 = array();
-		$payed_addons['woocommerce-wpglobus']['slug']    = 'woocommerce-wpglobus'; 
-		$payed_addons['woocommerce-wpglobus']['header']  = 'WooCommerce WPGlobus'; 
-		$payed_addons['woocommerce-wpglobus']['url']     = 'http://www.wpglobus.com/shop/extensions/woocommerce-wpglobus/'; 
-		$payed_addons['woocommerce-wpglobus']['img_src'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png'; 
-		
-		$payed_addons['wpglobus-plus']['slug']    = 'wpglobus-plus'; 
-		$payed_addons['wpglobus-plus']['header']  = 'WPGlobus Plus'; 
-		$payed_addons['wpglobus-plus']['url']     = 'http://www.wpglobus.com/shop/extensions/wpglobus-plus/'; 
-		$payed_addons['wpglobus-plus']['img_src'] = 'http://www.wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png'; 
-		
-		$payed_addons['nets-netaxept']['slug']    = 'nets-netaxept'; 
-		$payed_addons['nets-netaxept']['header']  = 'WooCommerce Nets Netaxept'; 
-		$payed_addons['nets-netaxept']['url']     = 'http://www.wpglobus.com/product/multilingual-woocommerce-nets-netaxept/'; 
-		$payed_addons['nets-netaxept']['img_src'] = 'http://www.wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg'; 		
-		
+		$payed_addons['woocommerce-wpglobus']['slug']    = 'woocommerce-wpglobus';
+		$payed_addons['woocommerce-wpglobus']['header']  = 'WooCommerce WPGlobus';
+		$payed_addons['woocommerce-wpglobus']['url']     = 'https://wpglobus.com/shop/extensions/woocommerce-wpglobus/';
+		$payed_addons['woocommerce-wpglobus']['img_src'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
+
+		$payed_addons['wpglobus-plus']['slug']    = 'wpglobus-plus';
+		$payed_addons['wpglobus-plus']['header']  = 'WPGlobus Plus';
+		$payed_addons['wpglobus-plus']['url']     = 'https://wpglobus.com/shop/extensions/wpglobus-plus/';
+		$payed_addons['wpglobus-plus']['img_src'] = 'https://wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
+
+		$payed_addons['nets-netaxept']['slug']    = 'nets-netaxept';
+		$payed_addons['nets-netaxept']['header']  = 'WooCommerce Nets Netaxept';
+		$payed_addons['nets-netaxept']['url']     = 'https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/';
+		$payed_addons['nets-netaxept']['img_src'] = 'https://wpglobus.com/app/uploads/2016/06/woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg';
+
 		$addons                    = array();
 		$addons['wordpress.org'][] = 'wpglobus-featured-images';
 		$addons['wordpress.org'][] = 'wpglobus-translate-options';
@@ -62,10 +62,10 @@ class WPGlobus_Addons {
 							<a target="_blank" href="<?php echo $addon['url'] ?>">
 								<h3><?php echo $addon['header'] ?></h3>
 								<div style="">
-									<img class="own-thumb" src="<?php echo $addon['img_src']; ?>" />	
+									<img class="own-thumb" src="<?php echo $addon['img_src']; ?>" />
 								</div>
 							</a>
-						</li>			<?php	
+						</li>			<?php
 					} ?>
 				</ul>
 				<ul class="products">    <?php
@@ -140,9 +140,9 @@ class WPGlobus_Addons {
 				} else {
 
 					$data = json_decode( $addon_json['body'] );
-					$data->addon_url = "https://wordpress.org/plugins/{$addon_slug}/"; 
+					$data->addon_url = "https://wordpress.org/plugins/{$addon_slug}/";
 					set_transient( 'wpglobus_addon_' . $addon_slug, json_encode($data), 24 * HOUR_IN_SECONDS );
-					
+
 				}
 			}
 

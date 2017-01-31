@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"Report-Msgid-Bugs-To: http://www.wpglobus.com/pg/contact-us/\n"
+"Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
 "POT-Creation-Date: 2017-01-23 16:50:46+00:00\n"
 "PO-Revision-Date: 2016-09-11 17:13+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
@@ -1215,5 +1215,5 @@ msgstr ""
 "віджетів, і т.д. - відразу на декількох мовах!"
 
 #. Author URI of the plugin/theme
-msgid "http://www.wpglobus.com/"
-msgstr "http://www.wpglobus.com/"
+msgid "https://wpglobus.com/"
+msgstr "https://wpglobus.com/"

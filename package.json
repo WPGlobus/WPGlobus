@@ -4,7 +4,7 @@
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "private": true,
-  "homepage": "http://www.wpglobus.com",
+  "homepage": "https://wpglobus.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/WPGlobus/wpglobus.git"
