@@ -151,14 +151,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 			/**
 			 * WPGlobus Add-ons tab.
 			 */
-			$href = add_query_arg(
-						array(
-							'tab'		=> 'search',
-							's' 		=> 'WPGlobus',
-							'source'	=> 'WPGlobus'
-						),
-						admin_url( 'plugin-install.php' )
-					);
+			$href = WPGlobus_Admin_Page::url_addons();
 
 			$tab = array(
 				'title' 	 => __( 'Add-ons', 'wpglobus' ),

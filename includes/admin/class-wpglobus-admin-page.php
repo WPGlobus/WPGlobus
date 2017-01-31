@@ -50,7 +50,14 @@ class WPGlobus_Admin_Page {
 	 * @return string
 	 */
 	public static function url_addons() {
-		return self_admin_url( 'plugin-install.php' ) . '?tab=search&s=WPGlobus&source=WPGlobus';
+		return add_query_arg(
+			array(
+				'tab'    => 'search',
+				's'      => 'WPGlobus',
+				'source' => 'WPGlobus',
+			),
+			self_admin_url( 'plugin-install.php' )
+		);
 	}
 
 	/**

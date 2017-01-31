@@ -496,17 +496,6 @@ class WPGlobus_Options {
 		);
 
 		/**
-		 * SECTION: Add-ons
-		 * We need add it for menu item only
-		 */
-		$this->sections[] = array(
-			'wpglobus_id' => 'add_ons',
-			'title'       => __( 'Add-ons', 'wpglobus' ),
-			'icon'        => 'el-icon-th-list',
-			'class'       => 'wpglobus-addons-group hidden'
-		);
-
-		/**
 		 * Filter the array of sections.
 		 *
 		 * @since 1.0.11
