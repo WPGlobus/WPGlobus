@@ -647,17 +647,17 @@ class WPGlobus_Options {
 		$ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
 
 		$this->args['share_icons'][] = array(
-			'url'   => 'https://wpglobus.com/quick-start/' . $ga_campaign,
+			'url'   => WPGlobus::URL_WPGLOBUS_SITE . 'quick-start/' . $ga_campaign,
 			'title' => esc_html__( 'Read the Quick Start Guide', 'wpglobus' ),
 			'icon'  => 'el el-question-sign'
 		);
 		$this->args['share_icons'][] = array(
-			'url'   => 'https://wpglobus.com/' . $ga_campaign,
+			'url'   => WPGlobus::URL_WPGLOBUS_SITE . $ga_campaign,
 			'title' => esc_html__( 'Visit our website', 'wpglobus' ),
 			'icon'  => 'el el-globe'
 		);
 		$this->args['share_icons'][] = array(
-			'url'   => 'https://wpglobus.com/product/woocommerce-wpglobus/' . $ga_campaign,
+			'url'   => WPGlobus::URL_WPGLOBUS_SITE . 'product/woocommerce-wpglobus/' . $ga_campaign,
 			'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
 			'icon'  => 'el el-icon-shopping-cart'
 		);

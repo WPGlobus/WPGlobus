@@ -123,7 +123,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 				'link_class' => array( 'nav-tab' ),
 				'span_class' => array( 'dashicons', 'dashicons-book-alt' ),
 				'link' 		 => self::$link_template,
-				'href' 		 => 'https://wpglobus.com/quick-start/',
+				'href' 		 => WPGlobus::URL_WPGLOBUS_SITE . 'quick-start/',
 				'tab_id'	 => ''
 			);
 			$tabs[ 'guide' ] = $tab;
