@@ -420,7 +420,7 @@
 
 * ADDED:
 	* Handling the hash part of the URLs.
-	* New extension, [WooCommerce WPGlobus](https://wpglobus.com/shop/extensions/woocommerce-wpglobus/) is referenced on the add-ons page.
+	* New extension, [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/) is referenced on the add-ons page.
 	* Filter 'wpglobus_enabled_pages'
 * FIXED:
 	* Center the flag icons vertically. Thanks to Nicolaus Sommer for the suggestion.

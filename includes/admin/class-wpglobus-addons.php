@@ -16,12 +16,12 @@ class WPGlobus_Addons {
 		$payed_addons              		 = array();
 		$payed_addons['woocommerce-wpglobus']['slug']    = 'woocommerce-wpglobus';
 		$payed_addons['woocommerce-wpglobus']['header']  = 'WooCommerce WPGlobus';
-		$payed_addons['woocommerce-wpglobus']['url']     = 'https://wpglobus.com/shop/extensions/woocommerce-wpglobus/';
+		$payed_addons['woocommerce-wpglobus']['url']     = 'https://wpglobus.com/product/woocommerce-wpglobus/';
 		$payed_addons['woocommerce-wpglobus']['img_src'] = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/woocommerce-wpglobus-logo-300x300.png';
 
 		$payed_addons['wpglobus-plus']['slug']    = 'wpglobus-plus';
 		$payed_addons['wpglobus-plus']['header']  = 'WPGlobus Plus';
-		$payed_addons['wpglobus-plus']['url']     = 'https://wpglobus.com/shop/extensions/wpglobus-plus/';
+		$payed_addons['wpglobus-plus']['url']     = 'https://wpglobus.com/product/wpglobus-plus/';
 		$payed_addons['wpglobus-plus']['img_src'] = 'https://wpglobus.com/app/uploads/2015/08/wpglobus-plus-logo-300x300.png';
 
 		$payed_addons['nets-netaxept']['slug']    = 'nets-netaxept';

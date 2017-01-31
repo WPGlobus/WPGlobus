@@ -657,7 +657,7 @@ class WPGlobus_Options {
 			'icon'  => 'el el-globe'
 		);
 		$this->args['share_icons'][] = array(
-			'url'   => 'https://wpglobus.com/shop/extensions/woocommerce-wpglobus/' . $ga_campaign,
+			'url'   => 'https://wpglobus.com/product/woocommerce-wpglobus/' . $ga_campaign,
 			'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
 			'icon'  => 'el el-icon-shopping-cart'
 		);

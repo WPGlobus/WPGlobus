@@ -38,7 +38,7 @@ module.exports = {
         src: ["README.md"],
         replacements: [
             {
-                from: "![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](https://wpglobus.com/shop/extensions/woocommerce-wpglobus/).](https://ps.w.org/wpglobus/assets/screenshot-8.png)",
+                from: "![Multilingual WooCommerce store powered by [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/).](https://ps.w.org/wpglobus/assets/screenshot-8.png)",
                 to: "![Multilingual WooCommerce store powered by WooCommerce WPGlobus.](https://ps.w.org/wpglobus/assets/screenshot-8.png)"
             },
             {
