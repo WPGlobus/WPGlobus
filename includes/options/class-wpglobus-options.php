@@ -306,7 +306,7 @@ class WPGlobus_Options {
 		$desc_languages_intro = implode( '', array(
 			'<ul style="list-style: disc; list-style-position: inside;">',
 			// translators: %s placeholder for the icon (actual picture)
-			'<li>' . sprintf( __( 'Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons.', 'wpglobus' ), '<i class="el el-move icon-large"></i>' ) . '</li>',
+			'<li>' . sprintf( __( 'Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons.', 'wpglobus' ), '<i class="dashicons dashicons-move"></i>' ) . '</li>',
 			'<li>' . __( '<strong>Uncheck</strong> the languages you do not plan to use.', 'wpglobus' ) . '</li>',
 			'<li>' . __( '<strong>Add</strong> more languages using the section below.', 'wpglobus' ) . '</li>',
 			'<li>' . __( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
