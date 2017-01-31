@@ -16,12 +16,12 @@ class WPGlobus_YoastSEO {
 	 * @var string
 	 */
 	public static $yoastseo_separator = '';
-	
+
 	/**
 	 * Name of the script.
 	 *
 	 * @var string
-	 */	
+	 */
 	public static $handle_script = 'wpglobus-yoastseo';
 
 	/**
@@ -271,8 +271,8 @@ class WPGlobus_YoastSEO {
 
 		if ( self::disabled_entity() ) {
 			return;
-		}		
-		
+		}
+
 		/** @global string $pagenow */
 		global $pagenow;
 
@@ -289,7 +289,7 @@ class WPGlobus_YoastSEO {
 
 			$yoastseo_plus_access = sprintf(
 				__( 'Please see %s to get access to page analysis with YoastSEO.', '' ),
-				'<a href="http://www.wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>'
+				'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>'
 			);
 
 			$i18n = array(
@@ -500,22 +500,22 @@ class WPGlobus_YoastSEO {
 		</div>
 		<?php
 	}
-	
+
 	/**
 	 * Check disabled entity.
-	 * 
+	 *
 	 * @since 1.7.3
 	 * @return boolean
 	 */
 	public static function disabled_entity() {
-		
+
 		if ( WPGlobus_WP::is_pagenow( array( 'edit-tags.php', 'term.php' ) ) ) :
 			/**
 			 * Don't check page when editing taxonomy.
 			 */
 			return false;
 		endif;
-		
+
 		/** @global WP_Post $post */
 		global $post;
 
@@ -529,7 +529,7 @@ class WPGlobus_YoastSEO {
 		endif;
 		return $result;
 	}
-	
+
 } // class
 
 # --- EOF

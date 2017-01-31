@@ -16,20 +16,20 @@ class WPGlobus_YoastSEO {
 	 * @var string
 	 */
 	public static $yoastseo_separator = '';
-	
+
 	/**
 	 * Name of the script.
 	 *
 	 * @var string
-	 */	
+	 */
 	public static $handle_script = 'wpglobus-yoastseo';
-	
+
 	/**
 	 * Name of the premium script.
 	 *
 	 * @since 1.7.2
 	 * @var string
-	 */		
+	 */
 	public static $handle_script_premium = 'wpglobus-yoastseo-premium';
 
 	/**
@@ -38,19 +38,19 @@ class WPGlobus_YoastSEO {
 	public static function controller() {
 
 		if ( is_admin() ) {
-		
+
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
 
 				/** @see WPGlobus::__construct */
 				WPGlobus::O()->vendors_scripts['WPSEO'] = true;
-				
+
 				if ( defined( 'WPSEO_PREMIUM_PLUGIN_FILE' ) ) {
 					/**
 					 * @see wordpress-seo-premium\wp-seo-premium.php
-					 */					
+					 */
 					WPGlobus::O()->vendors_scripts['WPSEO_PREMIUM'] = true;
 				}
-				
+
 				if ( WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
 
 					/**
@@ -114,7 +114,7 @@ class WPGlobus_YoastSEO {
 	 * @since 1.6.3
 	 * @since 1.7.7
 	 * @see filter 'wpseo_save_compare_data' wordpress-seo\admin\metabox\class-metabox.php
-	 * 
+	 *
 	 * @param WP_Post Object $post Current post.
 	 */
 	public static function action__save_compare_data( $post ) {
@@ -295,8 +295,8 @@ class WPGlobus_YoastSEO {
 
 		if ( self::disabled_entity() ) {
 			return;
-		}		
-		
+		}
+
 		/** @global string $pagenow */
 		global $pagenow;
 
@@ -308,19 +308,19 @@ class WPGlobus_YoastSEO {
 		);
 
 		if ( WPGlobus_WP::is_pagenow( $enabled_pages ) ) {
-		
+
 			WPGlobus::O()->vendors_scripts['WPSEO'] = true;
-			
+
 			if ( defined( 'WPSEO_PREMIUM_PLUGIN_FILE' ) ) {
 				/**
 				 * @see wordpress-seo-premium\wp-seo-premium.php
-				 */					
+				 */
 				WPGlobus::O()->vendors_scripts['WPSEO_PREMIUM'] = true;
 			}
 
 			$yoastseo_plus_access = sprintf(
 				__( 'Please see %s to get access to page analysis with YoastSEO.', '' ),
-				'<a href="http://www.wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>'
+				'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>'
 			);
 
 			$i18n = array(
@@ -329,7 +329,7 @@ class WPGlobus_YoastSEO {
 
 			$src_version 		 = false;
 			$src_version_premium = false;
-			
+
 			if ( ! WPGlobus::O()->vendors_scripts['WPSEO_PREMIUM'] ) {
 				/** @noinspection PhpInternalEntityUsedInspection */
 				$src_version = version_compare( WPSEO_VERSION, '4.0', '>=' ) ? '40' : $src_version;
@@ -339,7 +339,7 @@ class WPGlobus_YoastSEO {
 				/**
 				 * Start with Yoast SEO Premium.
 				 */
-				 
+
 				/**
 				 * Version of file yoast seo must be latest.
 				 */
@@ -350,9 +350,9 @@ class WPGlobus_YoastSEO {
 			}
 
 			if ( $src_version_premium ) :
-			
+
 				$handle = self::$handle_script_premium;
-				
+
 				$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/' .
 					   $handle . '-' . $src_version_premium .
 					   WPGlobus::SCRIPT_SUFFIX() . '.js';
@@ -363,14 +363,14 @@ class WPGlobus_YoastSEO {
 					array( 'jquery', 'underscore' ),
 					WPGLOBUS_VERSION,
 					true
-				);				
-				
+				);
+
 			endif;
-			
+
 			if ( $src_version ) :
-			
+
 				$handle = self::$handle_script;
-			
+
 				$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/' .
 					   $handle . '-' . $src_version .
 					   WPGlobus::SCRIPT_SUFFIX() . '.js';
@@ -393,7 +393,7 @@ class WPGlobus_YoastSEO {
 						'i18n'    => $i18n
 					)
 				);
-				
+
 			endif;
 
 		}
@@ -481,7 +481,7 @@ class WPGlobus_YoastSEO {
 			'focuskw_text_input-help-toggle',
 			'pageanalysis-help-toggle'
 		);
-		
+
 		?>
 
 		<div id="wpglobus-wpseo-tabs" style="width:90%; float:right; margin-top:-190px;">    <?php
@@ -533,7 +533,7 @@ class WPGlobus_YoastSEO {
 			$cite_contenteditable = 'false';
 
 			foreach ( WPGlobus::Config()->open_languages as $language ) {
-				
+
 				$focuskeywords = '';
 				if ( $language == WPGlobus::Config()->default_language ) {
 					/**
@@ -542,7 +542,7 @@ class WPGlobus_YoastSEO {
 					 */
 					$focuskeywords = get_post_meta( $post->ID, '_yoast_wpseo_focuskeywords', true );
 				}
-			
+
 				$yoast_cite_base = WPGlobus_Utils::localize_url( $yoast_permalink, $language );
 				$yoast_cite_base = str_replace( array( 'http://', 'https://' ), '', $yoast_cite_base );
 				$yoast_cite_base = str_replace( '//', '/', $yoast_cite_base );
@@ -571,29 +571,29 @@ class WPGlobus_YoastSEO {
 				     data-permalink="<?php echo esc_attr( $permalink['action'] ); ?>"
 				     data-metadesc="<?php echo esc_attr( WPGlobus_Core::text_filter( $metadesc, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
 				     data-wpseotitle="<?php echo esc_attr( WPGlobus_Core::text_filter( $wpseotitle, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
-				     data-focuskw="<?php echo esc_attr( WPGlobus_Core::text_filter( $focuskw, $language, WPGlobus::RETURN_EMPTY ) ); ?>" 
+				     data-focuskw="<?php echo esc_attr( WPGlobus_Core::text_filter( $focuskw, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
 				     data-focuskeywords='<?php echo $focuskeywords; ?>'>
 				</div> <?php
 			} ?>
 		</div>
 		<?php
 	}
-	
+
 	/**
 	 * Check disabled entity.
-	 * 
+	 *
 	 * @since 1.7.3
 	 * @return boolean
 	 */
 	public static function disabled_entity() {
-		
+
 		if ( WPGlobus_WP::is_pagenow( array( 'edit-tags.php', 'term.php' ) ) ) :
 			/**
 			 * Don't check page when editing taxonomy.
 			 */
 			return false;
 		endif;
-		
+
 		/** @global WP_Post $post */
 		global $post;
 
@@ -607,7 +607,7 @@ class WPGlobus_YoastSEO {
 		endif;
 		return $result;
 	}
-	
+
 } // class
 
 # --- EOF
