@@ -37,11 +37,6 @@ class WPGlobus {
 	const PAGE_WPGLOBUS_ABOUT = 'wpglobus-about';
 
 	/**
-	 * WPGlobus addons page
-	 */
-	const PAGE_WPGLOBUS_ADDONS = 'wpglobus-addons';
-
-	/**
 	 * WPGlobus clean page
 	 */
 	const PAGE_WPGLOBUS_CLEAN = 'wpglobus-clean';
@@ -1709,7 +1704,7 @@ class WPGlobus {
 
 		}
 
-		if ( in_array( $page, array( self::PAGE_WPGLOBUS_ADDONS, self::PAGE_WPGLOBUS_ABOUT ) ) ) {
+		if ( self::PAGE_WPGLOBUS_ABOUT === $page ) {
 			wp_register_style(
 				'wpglobus-special-pages',
 				self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-special-pages' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
@@ -1756,18 +1751,6 @@ class WPGlobus {
 			'',
 			'',
 			'administrator',
-			self::PAGE_WPGLOBUS_ADDONS,
-			array(
-				$this,
-				'wpglobus_addons'
-			)
-		);
-
-		add_submenu_page(
-			null,
-			'',
-			'',
-			'administrator',
 			self::PAGE_WPGLOBUS_CLEAN,
 			array(
 				$this,
@@ -1793,19 +1776,6 @@ class WPGlobus {
 	public function wpglobus_about() {
 		require_once 'admin/class-wpglobus-about.php';
 		WPGlobus_About::about_screen();
-	}
-
-	/**
-	 * Include file for WPGlobus addons page
-	 * @return void
-	 */
-	public function wpglobus_addons() {
-		/**
-		 * obsolete from 1.5.9
-		 * @todo remove after testing @see class WPGlobus_Plugin_Install
-		 */
-		//require_once 'admin/class-wpglobus-addons.php';
-		//WPGlobus_Addons::addons_screen();
 	}
 
 	/**
