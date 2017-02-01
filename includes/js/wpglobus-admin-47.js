@@ -1205,13 +1205,14 @@ jQuery(document).ready(function () {
 				if ( typeof wp.utils !== 'undefined' && typeof wp.utils.WordCounter !== 'undefined' ) {
 					WPGlobusCoreData.wordCounter = {};
 
-					var self = this;
+					var self = this, wpglobusEditors = {};
 
 					$.each( WPGlobusCoreData.enabled_languages, function( i, l ){
 						if ( l == WPGlobusCoreData.default_language ) {
 							return true;
 						}
-
+						wpglobusEditors[i] = 'content_'+l;
+						
 						( function( $, counter, l ) {
 							WPGlobusCoreData.wordCounter[ l ] = {};
 							WPGlobusCoreData.wordCounter[ l ][ 'counter' ] = counter;
@@ -1262,7 +1263,10 @@ jQuery(document).ready(function () {
 
 								$(document).on( 'tinymce-editor-init', function( event, editor ) {
 
-									if ( -1 == editor.id.indexOf( 'content_' ) ) {
+									if ( -1 == $.inArray(editor.id, wpglobusEditors) ) {
+										/**
+										 * Init WPGlobus editor only.
+										 */
 										return;
 									}
 									var l = editor.id.replace( 'content_', '' );
