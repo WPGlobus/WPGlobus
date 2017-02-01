@@ -192,12 +192,13 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 == Changelog ==
 
-= 1.7.7.3 =
+= 1.7.8 =
 
 * FIXED:
-	* Core: init WordCounter for WPGlobus tinymce editors only.
-	* Media: fixed PHP Notice Undefined index while loading image in wysiwyg editor.
-	
+	* Core: Initialize WordCounter for the WPGlobus TinyMCE editors only.
+	* Media: Fixed PHP Notice "Undefined index while loading image in WYSIWYG editor".
+	* Core: General code cleanup and testing with the latest versions of PHP and WordPress.
+
 = 1.7.7.2 =
 
 * FIXED:

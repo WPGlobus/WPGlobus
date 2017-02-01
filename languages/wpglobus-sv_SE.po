@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-01-23 16:50:46+00:00\n"
+"POT-Creation-Date: 2017-02-01 16:03:32+00:00\n"
 "PO-Revision-Date: 2016-09-11 16:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
@@ -40,13 +40,13 @@ msgstr "Guide"
 msgid "WPGlobus Help Desk"
 msgstr ""
 
-#: includes/admin/central/class-wpglobus-admin-central.php:164
+#: includes/admin/central/class-wpglobus-admin-central.php:157
 #: includes/admin/class-wpglobus-about.php:36
+#: includes/admin/class-wpglobus-admin-menu.php:28
 #: includes/admin/class-wpglobus-clean.php:602
 #: includes/admin/class-wpglobus-customize-options.php:999
 #: includes/admin/class-wpglobus-customize-options.php:1031
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
-#: includes/options/class-wpglobus-options.php:504
 msgid "Add-ons"
 msgstr "Tillägg"
 
@@ -73,7 +73,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:87
-#: includes/admin/class-wpglobus-addons.php:93
 msgid "Go to WPGlobus Settings"
 msgstr "Gå till WPGlobus inställningar"
 
@@ -177,8 +176,8 @@ msgstr ""
 "Kontakta temats / tilläggets författare. Om de inte kan hjälpa, överväg %s "
 "anställa WPGlobus Team %s för att skriva egen kod åt dig."
 
-#: includes/admin/class-wpglobus-addons.php:50
-msgid "WPGlobus Add-ons / Extensions"
+#: includes/admin/class-wpglobus-admin-menu.php:29
+msgid "View free and premium WPGlobus extensions"
 msgstr "WPGlobus Tillägg / Påbyggnader"
 
 #: includes/admin/class-wpglobus-admin-page.php:32
@@ -738,19 +737,19 @@ msgstr "Rulllistmeny med flaggor"
 msgid "Selector type"
 msgstr "Väljartyp"
 
-#: includes/class-wpglobus.php:1052
+#: includes/class-wpglobus.php:1047
 msgid "You cannot disable the main language."
 msgstr "Du kan inte stänga av huvudspråk."
 
-#: includes/class-wpglobus.php:1254
+#: includes/class-wpglobus.php:1249
 msgid "*) Available after the menu is saved."
 msgstr "*) Tillgängligt när menyn sparats."
 
-#: includes/class-wpglobus.php:3242
+#: includes/class-wpglobus.php:3212
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Du måste aktivera Vackra Permalänkar för att använda WPGlobus."
 
-#: includes/class-wpglobus.php:3244
+#: includes/class-wpglobus.php:3214
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -758,7 +757,7 @@ msgstr ""
 "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-"
 "standardalternativet."
 
-#: includes/class-wpglobus.php:3385
+#: includes/class-wpglobus.php:3355
 msgid "Add"
 msgstr "Lägg till"
 
@@ -876,35 +875,35 @@ msgstr "Språktabell"
 msgid "Use this table to add, edit or delete languages."
 msgstr "Använd denna tabell för att lägga till, redigera eller ta bort språk."
 
-#: includes/options/class-wpglobus-options.php:651
+#: includes/options/class-wpglobus-options.php:640
 msgid "Read the Quick Start Guide"
 msgstr "Läs Snabbstartsguiden"
 
-#: includes/options/class-wpglobus-options.php:656
+#: includes/options/class-wpglobus-options.php:645
 msgid "Visit our website"
 msgstr "Besök vår hemsida"
 
-#: includes/options/class-wpglobus-options.php:661
+#: includes/options/class-wpglobus-options.php:650
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr "Köp WPGlobus eget WooCommerce-tillägg"
 
-#: includes/options/class-wpglobus-options.php:666
+#: includes/options/class-wpglobus-options.php:655
 msgid "Collaborate on GitHub"
 msgstr "Samarbeta på GitHub"
 
-#: includes/options/class-wpglobus-options.php:672
+#: includes/options/class-wpglobus-options.php:661
 msgid "Like us on Facebook"
 msgstr "Gilla oss på Facebook."
 
-#: includes/options/class-wpglobus-options.php:677
+#: includes/options/class-wpglobus-options.php:666
 msgid "Follow us on Twitter"
 msgstr "Följ oss på Twitter"
 
-#: includes/options/class-wpglobus-options.php:682
+#: includes/options/class-wpglobus-options.php:671
 msgid "Find us on LinkedIn"
 msgstr "Hitta oss på LinkedIn"
 
-#: includes/options/class-wpglobus-options.php:687
+#: includes/options/class-wpglobus-options.php:676
 msgid "Circle us on Google+"
 msgstr "Ringa in oss på Google+"
 
@@ -1164,3 +1163,4 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://wpglobus.com/"
 msgstr ""
+

@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.7.7.2\n"
+"Project-Id-Version: WPGlobus 1.7.8\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-01-30 23:59:16+00:00\n"
+"POT-Creation-Date: 2017-02-01 16:19:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,13 +36,13 @@ msgstr ""
 msgid "WPGlobus Help Desk"
 msgstr ""
 
-#: includes/admin/central/class-wpglobus-admin-central.php:164
+#: includes/admin/central/class-wpglobus-admin-central.php:157
 #: includes/admin/class-wpglobus-about.php:36
+#: includes/admin/class-wpglobus-admin-menu.php:28
 #: includes/admin/class-wpglobus-clean.php:602
 #: includes/admin/class-wpglobus-customize-options.php:999
 #: includes/admin/class-wpglobus-customize-options.php:1031
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
-#: includes/options/class-wpglobus-options.php:504
 msgid "Add-ons"
 msgstr ""
 
@@ -68,7 +68,6 @@ msgid ""
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:87
-#: includes/admin/class-wpglobus-addons.php:93
 msgid "Go to WPGlobus Settings"
 msgstr ""
 
@@ -161,8 +160,8 @@ msgid ""
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 msgstr ""
 
-#: includes/admin/class-wpglobus-addons.php:50
-msgid "WPGlobus Add-ons / Extensions"
+#: includes/admin/class-wpglobus-admin-menu.php:29
+msgid "View free and premium WPGlobus extensions"
 msgstr ""
 
 #: includes/admin/class-wpglobus-admin-page.php:32
@@ -713,25 +712,25 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:1052
+#: includes/class-wpglobus.php:1047
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1254
+#: includes/class-wpglobus.php:1249
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:3242
+#: includes/class-wpglobus.php:3212
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:3244
+#: includes/class-wpglobus.php:3214
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a "
 "non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:3385
+#: includes/class-wpglobus.php:3355
 msgid "Add"
 msgstr ""
 
@@ -841,35 +840,35 @@ msgstr ""
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:651
+#: includes/options/class-wpglobus-options.php:640
 msgid "Read the Quick Start Guide"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:656
+#: includes/options/class-wpglobus-options.php:645
 msgid "Visit our website"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:661
+#: includes/options/class-wpglobus-options.php:650
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:666
+#: includes/options/class-wpglobus-options.php:655
 msgid "Collaborate on GitHub"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:672
+#: includes/options/class-wpglobus-options.php:661
 msgid "Like us on Facebook"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:677
+#: includes/options/class-wpglobus-options.php:666
 msgid "Follow us on Twitter"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:682
+#: includes/options/class-wpglobus-options.php:671
 msgid "Find us on LinkedIn"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:687
+#: includes/options/class-wpglobus-options.php:676
 msgid "Circle us on Google+"
 msgstr ""
 
