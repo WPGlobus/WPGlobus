@@ -118,7 +118,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			}
 
 			foreach( $fields as $field ) {
-				if ( WPGlobus_Core::has_translations( $attachment[$field] ) ) {
+				if ( ! empty( $attachment[$field] ) && WPGlobus_Core::has_translations( $attachment[$field] ) ) {
 					$html = str_replace( $attachment[$field], WPGlobus_Core::text_filter( $attachment[$field], $current_language ), $html );
 				}
 			}
