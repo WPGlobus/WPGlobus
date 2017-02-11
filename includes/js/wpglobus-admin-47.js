@@ -282,8 +282,8 @@ var WPGlobusDialogApp;
 			}
 
 			if ( 'textarea' == nodeName ) {
-				v = WPGlobusCore.getTranslations( $element.text() )[WPGlobusCoreData['language']];
-				clone.text( v );
+				v = WPGlobusCore.getTranslations( $element.val() )[WPGlobusCoreData['language']];
+				clone.val( v );
 				clone.attr( 'data-nodename', 'textarea' );
 				if ( '' == option.style ) {
 					clone.attr( 'style', style + ';width:95%;float:left;' );
