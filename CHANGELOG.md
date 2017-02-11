@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.7.8.1 ###
+
+* FIXED:
+	* Core: JS code improvements.
+
 ### 1.7.8 ###
 
 * FIXED:
