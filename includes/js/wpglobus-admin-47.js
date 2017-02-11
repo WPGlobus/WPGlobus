@@ -241,20 +241,20 @@ var WPGlobusDialogApp;
 				/**
 				 * To prevent add element to itself.
 				 */
-				return;
+				return false;
 			}
 
 			if ( $( '#wpglobus-'+api.clone_id ).length > 0 ) {
 				/**
 				 * WPGlobus element exists already.
 				 */
-				return;
+				return false;
 			}
 			if ( $( nodeName+'[name="wpglobus-'+name+'"]' ).length > 0 ) {
 				/**
 				 * WPGlobus element exists already.
 				 */
-				return;
+				return false;
 			}
 
 			clone = $( $element.clone() );
@@ -350,7 +350,7 @@ var WPGlobusDialogApp;
 				/**
 				 * Return because we had bound 'change' event already.
 				 */
-				return;
+				return true;
 			}
 
 			$(document).on( 'change', selector, function() {
@@ -364,6 +364,7 @@ var WPGlobusDialogApp;
 				}
 				$(sid).val( WPGlobusCore.getString( $(sid).val(), $t.val() ) );
 			});
+			return true;
 		},
 		saveDialog: function() {
 			var s = '', sdl = '', scl = '', $e, val, l;
