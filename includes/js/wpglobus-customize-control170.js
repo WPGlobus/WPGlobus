@@ -71,6 +71,18 @@ jQuery(document).ready(function ($) {
 				});
 				itemsHtml += '</ul>';
 				
+				if ( 'undefined' === typeof wp.customize.section( section ) ) {
+					/**
+					 * Case when theme's author had removed panel ( $wp_customize->remove_panel ) 
+					 * but missed remove all sections ( $wp_customize->remove_section ). 
+					 * The missed section has undefined type.
+					 * As example @see https://wordpress.org/themes/responsiveboat/ ( Remove About us section and Contact us )
+					 *
+					 * @since 1.7.8.2
+					 */
+					return true;
+				}
+				
 				sectionHtml = $sectionTmpl.replace( '{{section_title}}', wp.customize.section( section ).params.title );
 				sectionHtml = sectionHtml.replace( /{{section}}/g, section );
 				sectionHtml = sectionHtml.replace( '{{section_id}}', '"'+section+'"' );
