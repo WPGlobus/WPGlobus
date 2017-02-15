@@ -210,6 +210,11 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 ## Changelog ##
 
+### 1.7.8.2 ###
+
+* FIXED:
+	* Customizer: When the missed section has undefined type.
+	
 ### 1.7.8.1 ###
 
 * FIXED:
