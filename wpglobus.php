@@ -114,7 +114,7 @@ require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-customize-opt
 WPGlobus_Customize_Options::controller();
 
 // TODO remove this old updater.
-require_once dirname( __FILE__ ) . '/updater/class-wpglobus-updater.php';
+//require_once dirname( __FILE__ ) . '/updater/class-wpglobus-updater.php';
 
 /**
  * TIVWP Updater.
