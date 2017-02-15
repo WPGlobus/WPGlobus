@@ -5,7 +5,7 @@
 ### 1.7.8.2 ###
 
 * FIXED:
-	* Customizer: When the missed section has undefined type.
+	* Customizer: Handle the case of "orphaned" sections with no panel (have "undefined" type).
 
 ### 1.7.8.1 ###
 

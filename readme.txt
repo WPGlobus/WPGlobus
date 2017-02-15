@@ -195,8 +195,8 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 = 1.7.8.2 =
 
 * FIXED:
-	* Customizer: When the missed section has undefined type.
-	
+	* Customizer: Handle the case of "orphaned" sections with no panel (have "undefined" type).
+
 = 1.7.8.1 =
 
 * FIXED:
