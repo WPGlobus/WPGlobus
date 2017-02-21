@@ -81,7 +81,7 @@ class WPGlobusWidget extends WP_Widget {
 					//}
 				//}
 				//$enabled_languages = $sorted;
-				
+
 				$code              = '<div class="dropdown-styled"> <ul>
 					  <li>
 						{{language}}
@@ -92,13 +92,13 @@ class WPGlobusWidget extends WP_Widget {
 					</ul></div>';
 				break;
 			default:
-				//	This is case 'flags'. Having is as default makes $code always set.
+				//	This is case 'flags'. Having it as default makes $code always set.
 				$code = '<div class="flags-styled">{{inside}}</div>';
 				break;
 		endswitch;
-		
+
 		$extra_languages = array_diff( $enabled_languages, (array) WPGlobus::Config()->language );
-		
+
 		/**
 		 * Filter extra languages.
 		 *
@@ -111,9 +111,9 @@ class WPGlobusWidget extends WP_Widget {
 		 * @param string    WPGlobus::Config()->language The current language.
 		 */
 		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );
-		
+
 		$enabled_languages = array_merge( (array)WPGlobus::Config()->language, $extra_languages );
-		
+
 		/**
 		 * Class for link in a and option tags. Used for adding hash.
 		 * @see class wpglobus-selector-link
