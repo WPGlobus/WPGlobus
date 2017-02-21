@@ -303,7 +303,7 @@ class WPGlobus_Utils {
 
 		if ( ! $url ) {
 			/**
-			 * Use the global configuration is alternative not passed
+			 * Use the global configuration if alternative not passed
 			 */
 			if ( null === $config ) {
 				// @codeCoverageIgnoreStart
