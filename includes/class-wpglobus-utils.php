@@ -19,7 +19,6 @@ class WPGlobus_Utils {
 	 * @return string
 	 */
 	public static function localize_url( $url = '', $language = '', WPGlobus_Config $config = null ) {
-
 		/**
 		 * Use the global configuration if alternative not passed
 		 */
@@ -28,6 +27,22 @@ class WPGlobus_Utils {
 			$config = WPGlobus::Config();
 		}
 		// @codeCoverageIgnoreEnd
+
+		/**
+		 * Use the current language if not passed
+		 */
+		$language = empty( $language ) ? $config->language : $language;
+
+		/**
+		 * Local cache to speed-up processing on pages with multiple links.
+		 */
+		static $cache = array();
+		if ( isset( $cache[ $language ][ $url ] ) ) {
+			return $cache[ $language ][ $url ];
+		}
+		if ( ! isset( $cache[ $language ] ) ) {
+			$cache[ $language ] = array();
+		}
 
 		/**
 		 * In Admin-Settings-General:
@@ -39,11 +54,6 @@ class WPGlobus_Utils {
 		 * @todo Multisite?
 		 */
 		$home_url = get_option( 'home' );
-
-		/**
-		 * Use the current language if not passed
-		 */
-		$language = empty( $language ) ? $config->language : $language;
 
 		/**
 		 * `hide_default_language` means "Do not use language code in the default URL"
@@ -101,6 +111,11 @@ class WPGlobus_Utils {
 		 * Replace the existing (or empty) language prefix with the requested one
 		 */
 		$localized_url = preg_replace( $re, '\1' . $language_url_prefix . '\2', $url );
+
+		/**
+		 * Cache it.
+		 */
+		$cache[ $language ][ $url ] = $localized_url;
 
 		return $localized_url;
 	}
