@@ -52,6 +52,21 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		$not_a_string = 3.14;
 		self::assertEquals( 3.14, WPGlobus_Core::text_filter( $not_a_string ), 'Not a string' );
 
+		$multiple = '{:en}first_EN{:}{:ru}first_RU{:} &ndash; {:en}second_EN{:}{:ru}second_RU{:}';
+		self::assertEquals( 'first_EN', WPGlobus_Core::text_filter( $multiple ), __LINE__ );
+		self::assertEquals( 'first_RU', WPGlobus_Core::text_filter( $multiple, 'ru' ), __LINE__ );
+		self::assertEquals( 'first_EN', WPGlobus_Core::text_filter( $multiple, 'de' ), __LINE__ );
+
+	}
+
+	/**
+	 * @covers WPGlobus_Core::extract_text
+	 */
+	public function test_extract_text() {
+		$multiple = '{:en}first_EN{:}{:ru}first_RU{:} &ndash; {:en}second_EN{:}{:ru}second_RU{:}';
+		self::assertEquals( 'first_EN &ndash; second_EN', WPGlobus_Core::extract_text( $multiple ), __LINE__ );
+		self::assertEquals( 'first_RU &ndash; second_RU', WPGlobus_Core::extract_text( $multiple, 'ru' ), __LINE__ );
+
 	}
 
 	/**
