@@ -464,6 +464,14 @@ jQuery(document).ready(function ($) {
 			}
 			var r = [], tr = WPGlobusCore.getTranslations( text ),
 				i = 0, rE = true;
+			
+			if ( text == tr[WPGlobusCoreData.default_language] ) {
+				/**
+				 * Don't convert if text is in default language only.
+				 */
+				return text;
+			}			
+				
 			$.each( tr, function(l,e) {
 				if ( e == '' ) {
 					r[i] = 'null';
@@ -479,10 +487,14 @@ jQuery(document).ready(function ($) {
 			return r.join('|||');
 		},
 		getTranslations: function(text) {
+			if ( 'undefined' === typeof(text) ) {
+				return text;
+			}
+		
 			var t = {},
 				ar = text.split('|||');
 			$.each(WPGlobusCoreData.enabled_languages, function(i,l){
-				t[l] = ar[i] === 'undefined' || ar[i] === 'null' ? '' : ar[i];
+				t[l] = typeof ar[i] === 'undefined' || ar[i] === 'null' ? '' : ar[i];
 			});
 			return t;
 		},
@@ -499,16 +511,31 @@ jQuery(document).ready(function ($) {
 			}
 
 			var tr = api.getTranslations(s),
-				sR = [], i = 0;
+				sR = [], i = 0, rE = true;
+				
 			$.each( tr, function(l,t){
 				if ( l == lang ) {
-					sR[i] = newVal;
+					newVal = newVal.trim();
+					sR[i] = newVal == '' ? 'null' : newVal;
 				} else {
 					sR[i] = t == '' ? 'null' : t;
 				}
+				if ( l != WPGlobusCoreData.default_language ) {
+					if ( sR[i] != 'null' ) {
+						rE = false;
+					}
+				}				
 				i++;
 			});
-			sR = sR.join('|||');
+			if ( rE ) {
+				/**
+				 * Don't convert if sR is in default language only.
+				 */				
+				sR = sR[0];
+			} else {
+				sR = sR.join('|||');
+			}
+
 			return sR;
 		},
 		addLanguageSelector: function() {
