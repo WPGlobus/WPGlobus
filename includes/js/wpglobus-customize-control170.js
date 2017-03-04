@@ -396,13 +396,57 @@ jQuery(document).ready(function ($) {
 					api.controlInstances[obj]['title']    = null;
 					api.controlInstances[obj]['userControl']  = null;
 
+					
+					// Let's test with Zerif Lite theme.
+					// 
+					// When we open yoursite/wp-admin/customize.php:
+					//
+					// wp.customize.control('zerif_bigtitle_redbutton_url').setting() = 
+					//	  "{:en}http://wpglobus.com/hot-news-1{:}{:de}http://wpglobus.com/de/hot-news-2{:}"
+					// WPGlobusCustomize.controlInstances['zerif_bigtitle_redbutton_url'].setting = 
+					//    "http://wpglobus.com/hot-news-1|||http://wpglobus.com/de/hot-news-2|||null|||null"
+					
+					// After first saving of changeset we have:
+					//
+					// wp.customize.control('zerif_bigtitle_redbutton_url').setting() = 
+					//	  "http://wpglobus.com/hot-news-1/"
+					// WPGlobusCustomize.controlInstances['zerif_bigtitle_redbutton_url'].setting = 
+					//    "http://wpglobus.com/hot-news-1/|||http://wpglobus.com/de/hot-news-2|||null|||null"				
+					
+					// Reload page with changeset_uuid in URL:
+					//
+					// wp.customize.control('zerif_bigtitle_redbutton_url').setting() = 
+					//	  "http://wpglobus.com/hot-news-1/|||http://wpglobus.com/de/hot-news-2|||null|||null"
+					// WPGlobusCustomize.controlInstances['zerif_bigtitle_redbutton_url'].setting = 
+					//    "http://wpglobus.com/hot-news-1/|||http://wpglobus.com/de/hot-news-2|||null|||null"								
+					
+					// So, we must set correct URL value for default language when changeset was loaded.
+					
 					$.each( WPGlobusCustomize.setLinkBy, function( i, piece ) {
 
 						if ( obj.indexOf( piece ) >= 0 ) {
 							api.controlInstances[obj]['type'] = 'link';
+								
 							if ( '' == api.controlInstances[obj]['setting'] ) {
 								/** link perhaps was set to empty value */
 								api.controlInstances[obj]['setting'] = element[0].defaultValue;
+							}
+							
+							if ( WPGlobusCustomize.changeset_uuid ) {
+								/**
+								 * @since 1.7.9
+								 */
+								var val = wp.customize.control(obj).setting();
+								if ( -1 !== val.indexOf( '|||' ) ) {
+									var value = api.getTranslations(val);
+									wp.customize.control(obj).setting( value[WPGlobusCoreData.default_language] );
+									$( 
+										WPGlobusCustomize.controlInstances[obj].controlSelector + 
+										' ' + 
+										WPGlobusCustomize.controlInstances[obj].selector 
+									).val( value[WPGlobusCoreData.default_language] );
+								}
+								
 							}
 							element.addClass( 'wpglobus-control-link' );
 						}

@@ -118,6 +118,15 @@ jQuery(document).ready(function ($) {
 		setState: function( state ) {
 			wp.customize.state( 'saved' ).set( state );	
 		},
+		getCustomizeSaveData: function() {
+			return api.customizeSaveData;
+		},
+		enabledUserControl: function(setting) {
+			if ( 'undefined' === typeof WPGlobusCustomize.controlInstances[setting] ) { 
+				return false;
+			}			
+			return WPGlobusCustomize.controlInstances[setting].userControl.enabled;
+		},
 		userControlAjax: function( btn ) {
 			
 			$( btn ).prop( 'disabled', true );
@@ -149,65 +158,68 @@ jQuery(document).ready(function ($) {
 			});
 			
 		},	
-		ajax: function() {
+		ajax: function(ajaxAction, data) {
 			
-			var order = {};
-			order[ 'action' ]  = 'wpglobus_customize_save';
-			order[ 'options' ] = {};
+			if ( 'wpglobus_customize_save' == ajaxAction ) {
 			
-			$.each( WPGlobusCustomizeOptions.settings, function( section, el ) {
+				var order = {};
+				order['action']  = 'wpglobus_customize_save';
+				order['options'] = {};
+				
+				$.each( WPGlobusCustomizeOptions.settings, function( section, el ) {
 
-				$.each( el, function( id, obj ) {
-					
-					if ( id == 'wpglobus_customize_enabled_languages' ) {
+					$.each( el, function( id, obj ) {
 						
-						order[ 'options' ][ obj.option ] = {};
-						$( '#wpglobus-sortable input.wpglobus-language-item' ).each( function( i, e ) {
-							order[ 'options' ][ obj.option ][ $(this).data('language') ] = '1';
-						});
-						
-						return true;
-					}
-
-					if ( -1 != api.customizeSaveData.indexOf( 'wpglobus_customize_post_type_' ) &&
-							-1 != id.indexOf( 'wpglobus_customize_post_type_' ) ) {
-
-						if ( typeof order[ 'options' ][ obj.option ] === 'undefined' ) {
+						if ( id == 'wpglobus_customize_enabled_languages' ) {
+							
 							order[ 'options' ][ obj.option ] = {};
-						}	
-						order[ 'options' ][ obj.option ][ id.replace( 'wpglobus_customize_post_type_', '' ) ] = 
-							$( '#customize-control-' + id + ' input' ).prop( 'checked' ) ? 1 : 0;
-						
-					} else {	
-					
-						if ( -1 != api.customizeSaveData.indexOf( id ) ) {
-						
-							var s = $( '#customize-control-' + id + ' ' + obj.type ),
-								val = '';
+							$( '#wpglobus-sortable input.wpglobus-language-item' ).each( function( i, e ) {
+								order[ 'options' ][ obj.option ][ $(this).data('language') ] = '1';
+							});
 							
-							if ( 'textarea' == obj.type ) {
-								val = s.val();
-							} else if ( 'wpglobus_checkbox' == obj.type ) {
-								s = $( '#customize-control-' + id + ' input' );
-								if ( id == 'wpglobus_customize_selector_wp_list_pages' ) {
-									val = s.prop( 'checked' ) ? 1 : 0;
-								} else {	
-									val = s.prop( 'checked' ) ? 1 : '';
-								}	
-							} else if ( 'checkbox' == obj.type ) {
-								val = s.prop( 'checked' ) ? 1 : '';
-							} else if ( 'select' == obj.type ) {
-								val = s.val();
-							}		
-							order[ 'options' ][ obj.option ] = val;
-							
+							return true;
 						}
-					}			
+
+						if ( -1 != api.customizeSaveData.indexOf( 'wpglobus_customize_post_type_' ) &&
+								-1 != id.indexOf( 'wpglobus_customize_post_type_' ) ) {
+
+							if ( typeof order[ 'options' ][ obj.option ] === 'undefined' ) {
+								order[ 'options' ][ obj.option ] = {};
+							}	
+							order[ 'options' ][ obj.option ][ id.replace( 'wpglobus_customize_post_type_', '' ) ] = 
+								$( '#customize-control-' + id + ' input' ).prop( 'checked' ) ? 1 : 0;
+							
+						} else {	
+						
+							if ( -1 != api.customizeSaveData.indexOf( id ) ) {
+							
+								var s = $( '#customize-control-' + id + ' ' + obj.type ),
+									val = '';
+								
+								if ( 'textarea' == obj.type ) {
+									val = s.val();
+								} else if ( 'wpglobus_checkbox' == obj.type ) {
+									s = $( '#customize-control-' + id + ' input' );
+									if ( id == 'wpglobus_customize_selector_wp_list_pages' ) {
+										val = s.prop( 'checked' ) ? 1 : 0;
+									} else {	
+										val = s.prop( 'checked' ) ? 1 : '';
+									}	
+								} else if ( 'checkbox' == obj.type ) {
+									val = s.prop( 'checked' ) ? 1 : '';
+								} else if ( 'select' == obj.type ) {
+									val = s.val();
+								}		
+								order[ 'options' ][ obj.option ] = val;
+								
+							}
+						}			
+
+					});
 
 				});
-				
-
-			});
+			
+			}
 			
 			$.ajax({
 				beforeSend:function(){},
@@ -216,6 +228,70 @@ jQuery(document).ready(function ($) {
 				data: { action:WPGlobusCustomizeOptions.process_ajax, order:order },
 				dataType: 'json' 
 			});		
+		},
+		getChangesetData: function(ajaxData) {
+			/**
+			 * @since 1.7.9
+			 */		
+			if ( 'undefined' !== typeof ajaxData ) {
+
+				var changesetData  = /customize_changeset_data=([^&]+)/.exec(ajaxData);
+				
+				if ( 'undefined' === typeof changesetData[1] ) {
+					return;
+				}
+				
+				var settingsJson = decodeURIComponent( changesetData[1] );
+				var settings = JSON.parse(settingsJson);
+				var values, value;
+				
+				$.each( settings, function(setting, data) {
+
+					if ( 'undefined' !== typeof WPGlobusCustomize.controlInstances[setting] ) { 
+					
+						value = ''; 
+						if ( 'link' == WPGlobusCustomize.controlInstances[setting]['type'] ) {
+							if ( 1 ) {
+								/**
+								 * In "customize changeset" post we must save URL with ||| delimiters
+								 * otherwise we lost value after validating "$setting->validate( $value )"
+								 * @see function post_value() in wp-includes\class-wp-customize-manager.php
+								 */
+								value = WPGlobusCustomize.controlInstances[setting].setting;
+							} else {
+								/**
+								 * Using standard language marks {:en}url{:}.
+								 * This is correct code and approach but need to find ability to prevent validating.
+								 * @see upper comment.
+								 */
+								values = WPGlobusCustomize.getTranslations( WPGlobusCustomize.controlInstances[setting].setting );
+								/**
+								 * @todo make function to get string with language marks from object.
+								 */
+								$.each(WPGlobusCoreData.enabled_languages, function(i,l){
+									if ( '' != values[l] && 'undefined' !== typeof values[l] ) {
+										value = value + WPGlobusCore.addLocaleMarks(values[l], l);
+									}
+								});
+							}
+						} else {
+							
+							value = WPGlobusCustomize.controlInstances[setting].setting;
+						
+						}
+						settings[setting]['value'] = value;
+					}
+				});
+				
+				var newChangeset = JSON.stringify(settings);
+				newChangeset = encodeURIComponent(newChangeset);
+				newChangeset = newChangeset.replace( /%20/g, '+' );
+				
+				ajaxData = ajaxData.replace( changesetData[1], newChangeset );
+				
+			}
+			
+			return ajaxData;
 		},
 		ajaxListener: function() {
 			/**
@@ -226,11 +302,21 @@ jQuery(document).ready(function ($) {
 					return;	
 				}
 				
-				if ( -1 != ajaxOptions.data.indexOf( 'wp_customize=on' ) && -1 != ajaxOptions.data.indexOf( 'action=customize_save' ) ) {
-					api.customizeSave = true;
-					api.customizeSaveData = ajaxOptions.data;
+				if ( -1 != ajaxOptions.data.indexOf('wp_customize=on') && -1 != ajaxOptions.data.indexOf('action=customize_save') ) {
+					
+					if ( -1 != ajaxOptions.data.indexOf('customized=') ) {
+						api.customizeSave 		= true;
+						api.customizeSaveData 	= ajaxOptions.data;
+					} else if ( -1 != ajaxOptions.data.indexOf('customize_changeset_data=') ) {
+						/**
+						 * Ajax action when are saved changeset. 
+						 *
+						 * @since 1.7.9
+						 */
+						ajaxOptions.data = api.getChangesetData(ajaxOptions.data);	
+					}
+					
 				}	
-		
 			});			
 			
 			$( document ).on( 'ajaxComplete', function( ev, response, ajaxOptions ) {
@@ -239,7 +325,7 @@ jQuery(document).ready(function ($) {
 				}
 				if ( api.customizeSave ) {
 					api.customizeSave = false;
-					api.ajax();				
+					api.ajax('wpglobus_customize_save');				
 				}
 			});
 			
@@ -251,7 +337,7 @@ jQuery(document).ready(function ($) {
 				 */
 				if ( api.customizeSave ) {
 					api.customizeSave = false;
-					api.ajax();				
+					api.ajax('wpglobus_customize_save');				
 				}
 			});			
 		}	

@@ -90,5 +90,13 @@ jQuery(document).ready(function ($) {
     WPGlobusAcf = $.extend({}, WPGlobusAcf, api);
 
     WPGlobusAcf.init({'pro': WPGlobusAcf.pro});
+	
+	// @see https://secure.helpscout.net/conversation/323080611/782/?folderId=1004530
+    $('#page_template').change(function(){
+        $(document).on('ajaxComplete',function() {
+            WPGlobusAcf.init({'pro': WPGlobusAcf.pro});
+            $(document).off('ajaxComplete');
+        });
+    });	
 
 });
