@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.7.9 ###
+
+* ADDED:
+	* Customizer: Handle of changeset.
+* FIXED:
+	* Customizer: Don't convert if link was set in default language only.
+
 ### 1.7.8.2 ###
 
 * FIXED:
