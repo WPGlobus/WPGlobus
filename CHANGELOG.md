@@ -8,6 +8,8 @@
 	* Customizer: Handle of changeset.
 * FIXED:
 	* Customizer: Don't convert if link was set in default language only.
+	* Yoast SEO: correct the setting of keywords for v.4.1&4.2
+	* Yoast SEO: correct switching Readability/Keyword tabs for extra languages v.4.1&4.2
 
 ### 1.7.8.2 ###
 
