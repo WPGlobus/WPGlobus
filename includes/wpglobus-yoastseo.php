@@ -31,6 +31,7 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 				
 				$version = '40';
 				$version = version_compare( WPSEO_VERSION, '4.1', '>=' ) ? '41' : $version;
+				$version = version_compare( WPSEO_VERSION, '4.4', '>=' ) ? '44' : $version;
 				
 				require_once "vendor/class-wpglobus-yoastseo$version.php";
 				WPGlobus_YoastSEO::controller();
