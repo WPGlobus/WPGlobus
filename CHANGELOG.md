@@ -6,6 +6,7 @@
 
 * ADDED:
 	* Customizer: Handle of changeset.
+	* Yoast SEO: version 4.4 support.	
 * FIXED:
 	* Customizer: Don't convert if link was set in default language only.
 	* Yoast SEO: correct the setting of keywords for v.4.1&4.2
