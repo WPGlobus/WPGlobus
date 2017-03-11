@@ -5,19 +5,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-03-11 00:43:26+00:00\n"
+"POT-Creation-Date: 2017-03-11 14:53:57+00:00\n"
 "PO-Revision-Date: 2017-03-11 13:50+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
-"Language-Team: Arabic (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/ar/)\n"
+"Language-Team: Arabic (http://www.transifex.com/wp-translations/wpglobus-"
+"multilingual/language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-Bookmarks: \n"
-"X-Poedit-Country: United States\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
@@ -81,14 +84,14 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:102
 msgid ""
-"Enter the translations to the posts, pages, categories, tags and menus using"
-" a clean and simple interface."
+"Enter the translations to the posts, pages, categories, tags and menus using "
+"a clean and simple interface."
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:103
 msgid ""
-"Switch languages at the front-end using a drop-down menu with language names"
-" and country flags."
+"Switch languages at the front-end using a drop-down menu with language names "
+"and country flags."
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:111
@@ -113,8 +116,8 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:136
 msgid ""
-"There are many translation companies and individual translators who can help"
-" you write and proofread the texts."
+"There are many translation companies and individual translators who can help "
+"you write and proofread the texts."
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:137
@@ -137,10 +140,9 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:159
 msgid ""
-"WPGlobus only supports the localization URLs in the form of "
-"<code>example.com/xx/page/</code>. We do not plan to support subdomains "
-"<code>xx.example.com</code> and language queries "
-"<code>example.com?lang=xx</code>."
+"WPGlobus only supports the localization URLs in the form of <code>example."
+"com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
+"com</code> and language queries <code>example.com?lang=xx</code>."
 msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:162
@@ -207,8 +209,8 @@ msgstr ""
 #. translators: %1$s - language name, %1$s - language code. Do not remove.
 #: includes/admin/class-wpglobus-clean.php:622
 msgid ""
-"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN"
-" %1$s WILL BE DELETED! To change the main language, please go to Settings."
+"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
+"%1$s WILL BE DELETED! To change the main language, please go to Settings."
 msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:631
@@ -228,8 +230,8 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:652
 msgid ""
-"Uncheck if you do not want to write the operations log (we recommend to keep"
-" it checked)"
+"Uncheck if you do not want to write the operations log (we recommend to keep "
+"it checked)"
 msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:657
@@ -352,8 +354,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:731
 #: includes/options/class-wpglobus-options.php:363
 msgid ""
-"Choose the way language name and country flag are shown in the drop-down "
-"menu"
+"Choose the way language name and country flag are shown in the drop-down menu"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:768
@@ -443,8 +444,8 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:1101
 #: includes/options/class-wpglobus-options.php:183
 msgid ""
-"Should you have any questions or comments, please do not hesitate to contact"
-" us."
+"Should you have any questions or comments, please do not hesitate to contact "
+"us."
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1105
@@ -554,8 +555,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:337
 msgid ""
-"2-Letter ISO Language Code for the Language you want to insert. (Example: "
-"en)"
+"2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
 msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:341
@@ -568,8 +568,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:360
 msgid ""
-"The name of the language in its native alphabet. (Examples: English, "
-"Русский)"
+"The name of the language in its native alphabet. (Examples: English, Русский)"
 msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:365
@@ -652,8 +651,8 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
 msgid ""
-"Please note: we will receive some debug data together with your request. See"
-" the \"Technical Information\" table for the details."
+"Please note: we will receive some debug data together with your request. See "
+"the \"Technical Information\" table for the details."
 msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
@@ -668,8 +667,7 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
 msgid ""
-"Try deactivating other plugins to see if any of them conflicts with "
-"WPGlobus."
+"Try deactivating other plugins to see if any of them conflicts with WPGlobus."
 msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
@@ -781,8 +779,8 @@ msgstr ""
 #. translators: %s placeholder for the icon (actual picture)
 #: includes/options/class-wpglobus-options.php:309
 msgid ""
-"Place the <strong>main language</strong> of your site at the top of the list"
-" by dragging the %s icons."
+"Place the <strong>main language</strong> of your site at the top of the list "
+"by dragging the %s icons."
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:310
@@ -1079,8 +1077,8 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-check.php:350
 msgid ""
-"License not activated. Go to the settings page and enter the license key and"
-" email to activate."
+"License not activated. Go to the settings page and enter the license key and "
+"email to activate."
 msgstr ""
 
 #: updater/class-wpglobus-updater-check.php:351

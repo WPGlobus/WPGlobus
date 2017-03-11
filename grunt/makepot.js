@@ -12,6 +12,7 @@ module.exports = {
                 pot.headers["language-team"] = "The WPGlobus Team <support@wpglobus.com>";
                 pot.headers["last-translator"] = pot.headers["language-team"];
                 delete pot.headers["x-generator"];
+                delete pot.headers["x-poedit-country"];
                 return pot;
             },
             type: "wp-plugin",
