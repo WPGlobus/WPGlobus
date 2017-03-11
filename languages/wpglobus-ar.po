@@ -8,12 +8,12 @@ msgstr ""
 "POT-Creation-Date: 2017-03-11 00:43:26+00:00\n"
 "PO-Revision-Date: 2017-03-11 13:50+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/pt_PT/)\n"
+"Language-Team: Arabic (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_PT\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
@@ -43,16 +43,16 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:1031
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
 msgid "Add-ons"
-msgstr "Add-ons"
+msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:26
 msgid "Quick Start"
-msgstr ""
+msgstr "بداية سريعة"
 
 #: includes/admin/class-wpglobus-about.php:48
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "FAQ"
-msgstr "Perguntas Mais Frequentes"
+msgstr "أسئلة متداولة"
 
 #: includes/admin/class-wpglobus-about.php:59
 msgid ""
@@ -186,7 +186,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:606
 msgid "Support"
-msgstr "Apoio"
+msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:611
 msgid ""
@@ -261,7 +261,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:145
 #: includes/admin/class-wpglobus-customize-options.php:183
 msgid "Default"
-msgstr "Predefinição"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:264
 msgid "Section"
@@ -399,7 +399,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:857
 #: includes/options/class-wpglobus-options.php:493
 msgid "Post types"
-msgstr "Tipos de artigo"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:963
 #: includes/options/class-wpglobus-options.php:463
@@ -408,15 +408,15 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1014
 msgid "Title"
-msgstr "Título"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1015
 msgid "Label"
-msgstr "Etiqueta"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1019
 msgid "Description"
-msgstr "Descrição"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1083
 msgid ""
@@ -597,7 +597,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-language-edit.php:398
 #: updater/class-wpglobus-updater-admin.php:89
 msgid "Save Changes"
-msgstr "Guardar Alterações"
+msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:414
 msgid "Back to the WPGlobus Settings"
@@ -618,7 +618,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-plugin-install.php:309
 #: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
-msgstr "Instalado"
+msgstr ""
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:54
 msgid "Help Desk"
@@ -698,7 +698,7 @@ msgstr ""
 
 #: includes/class-wpglobus-widget.php:35
 msgid "Select"
-msgstr "Selecionar"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:36
 msgid "Select with language code"
@@ -706,7 +706,7 @@ msgstr ""
 
 #: includes/class-wpglobus-widget.php:37
 msgid "Dropdown"
-msgstr ""
+msgstr "القوائم المنسدلة"
 
 #: includes/class-wpglobus-widget.php:38
 msgid "Dropdown with flags"
@@ -822,7 +822,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:401
 msgid "Enable"
-msgstr "Ativar"
+msgstr ""
 
 #: includes/options/class-wpglobus-options.php:412
 msgid "(Optional)"
@@ -890,11 +890,11 @@ msgstr ""
 
 #: includes/options/fields/table/table-languages.php:62
 msgid "Edit"
-msgstr "Editar"
+msgstr ""
 
 #: includes/options/fields/table/table-languages.php:67
 msgid "Delete"
-msgstr "Eliminar"
+msgstr ""
 
 #: includes/options/fields/table/table-languages.php:73
 msgid "File"
@@ -974,7 +974,7 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:151
 msgid "License Key"
-msgstr "Código da Licença"
+msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:155
 msgid "License email"
@@ -995,11 +995,11 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:211
 msgid "Active"
-msgstr "Ativo"
+msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:212
 msgid "Inactive"
-msgstr "Inativo"
+msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:309
 msgid "License activated. "
