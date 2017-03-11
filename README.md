@@ -222,6 +222,7 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 * INTERNAL:
 	* Method to work with the strings having multiple language blocks. Required for WooCommerce 2.7.
 	* Code clean-up and performance improvements.
+	* Redux "Newsflash" admin notification is hidden.
 
 ### 1.7.8.2 ###
 
