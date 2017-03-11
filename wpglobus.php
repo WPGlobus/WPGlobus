@@ -170,4 +170,12 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-admin-menu.php';
 	WPGlobus_Admin_Menu::construct();
 
+	/**
+	 * Disable "Redux Blast"
+	 * @see ReduxFramework::__construct
+	 * (wpglobus/lib/ReduxCore/framework.php:416)
+	 * @since 1.7.9
+	 */
+	$GLOBALS['redux_notice_check'] = 1;
+
 endif;
