@@ -5,12 +5,15 @@
 ### 1.7.9 ###
 
 * ADDED:
-	* Customizer: Handle of changeset.
-	* Yoast SEO: version 4.4 support.	
+	* Customizer: Changesets handling.
+	* Yoast SEO: version 4.4 support.
 * FIXED:
-	* Customizer: Don't convert if link was set in default language only.
-	* Yoast SEO: correct the setting of keywords for v.4.1&4.2
-	* Yoast SEO: correct switching Readability/Keyword tabs for extra languages v.4.1&4.2
+	* Customizer: Don't convert if a link was set in the default language only.
+	* Yoast SEO: correct setting of keywords in versions 4.1 and 4.2.
+	* Yoast SEO: correct switching Readability/Keyword tabs for extra languages in versions 4.1 and 4.2.
+* INTERNAL:
+	* Method to work with the strings having multiple language blocks. Required for WooCommerce 2.7.
+	* Code clean-up and performance improvements.
 
 ### 1.7.8.2 ###
 

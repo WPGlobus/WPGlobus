@@ -210,6 +210,19 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 ## Changelog ##
 
+### 1.7.9 ###
+
+* ADDED:
+	* Customizer: Changesets handling.
+	* Yoast SEO: version 4.4 support.
+* FIXED:
+	* Customizer: Don't convert if a link was set in the default language only.
+	* Yoast SEO: correct setting of keywords in versions 4.1 and 4.2.
+	* Yoast SEO: correct switching Readability/Keyword tabs for extra languages in versions 4.1 and 4.2.
+* INTERNAL:
+	* Method to work with the strings having multiple language blocks. Required for WooCommerce 2.7.
+	* Code clean-up and performance improvements.
+
 ### 1.7.8.2 ###
 
 * FIXED:
