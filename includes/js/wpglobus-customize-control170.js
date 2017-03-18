@@ -42,6 +42,16 @@ jQuery(document).ready(function ($) {
 			api.setFieldsSection(); /* @since 1.6.0 */
 			api.attachListeners();
 		},
+		getSize: function(type) {
+			if ( 'undefined' === typeof type ) {
+				return _.size( api.controlInstances );
+			} else if ( 'widget' == type ) {
+				return _.size( api.controlWidgets );
+			} else if ( 'nav_menu' == type ) {
+				//return _.size( api.controlMenuItems );
+			}
+			return null;
+		},
 		setFieldsSection: function() {
 
 			var sections = {},
