@@ -110,7 +110,10 @@ jQuery(document).ready(function ($) {
 			 */
 			$( '#accordion-section-wpglobus_fields_settings_section .customize-section-description' ).addClass( 'hidden' );
 
-			$( '.'+WPGlobusCustomizeOptions.userControlIconClass ).on( 'click', function(ev) {
+			/**
+			 * Attach an event handler for user control icon.
+			 */
+			$(document).on( 'click', '.'+WPGlobusCustomizeOptions.userControlIconClass, function(ev) {
 				var section = $(this).data( 'section' );
 				$( WPGlobusCustomizeOptions.userControlBoxSelector ).each( function( i, e ) {
 					if ( section == $(e).data( 'section' ) ) {
@@ -121,6 +124,7 @@ jQuery(document).ready(function ($) {
 				});
 				wp.customize.control( 'wpglobus_fields_settings_section' ).expand();
 			});
+			
 			/**
 			 * Toggle help.
 			 */
