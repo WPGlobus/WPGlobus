@@ -135,7 +135,7 @@ jQuery(document).ready(function ($) {
 		},
 		setUserControls: function( control_id, obj ) {
 			var elem = obj.controlSelector + ' ' + obj.selector;
-			var cbIcon = '<img class="'+WPGlobusCustomizeOptions.userControlIconClass+'" data-section="'+obj.section+'" style="position:absolute;right:0px;" src="'+WPGlobusCustomizeOptions.userControlIcon+'" />';
+			var cbIcon = '<img class="'+WPGlobusCustomizeOptions.userControlIconClass+'" data-section="'+obj.section+'" style="position:absolute;right:0px;cursor:pointer;" src="'+WPGlobusCustomizeOptions.userControlIcon+'" />';
 			$( cbIcon ).insertBefore( elem );
 
 			if ( ! obj.userControl.enabled ) {
