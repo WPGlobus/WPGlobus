@@ -489,8 +489,8 @@ jQuery(document).ready(function ($) {
 					};
 
 					/* Get control title */
-					api.controlInstances[obj]['title'] = $( control.selector + ' .customize-control-title' ).text();
-
+					api.controlInstances[obj]['title'] = control.params.label;
+					
 					/* Enable/disable user control */
 					if ( WPGlobusCustomizeOptions.userControl !== null &&
 							typeof WPGlobusCustomizeOptions.userControl[ WPGlobusCustomizeOptions.themeName ] !== 'undefined' ) {
