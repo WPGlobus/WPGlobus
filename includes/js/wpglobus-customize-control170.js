@@ -76,8 +76,9 @@ jQuery(document).ready(function ($) {
 					} else {
 						checked = '';
 					}
-					itemsHtml += '<li><input id="wpglobus-cb-control-'+id+'" data-control="'+id+'" class="wpglobus-customize-cb-control" type="checkbox"'+checked+' /> ' + control.title + '</li>';
-
+					itemsHtml += '<li id="'+control.fieldSettings.itemID+'">';
+					itemsHtml += '<input id="'+control.fieldSettings.cbID+'" data-control="'+id+'" class="wpglobus-customize-cb-control" type="checkbox"'+checked+' /> ' + control.title;
+					itemsHtml += '</li>';
 				});
 				itemsHtml += '</ul>';
 
@@ -401,14 +402,22 @@ jQuery(document).ready(function ($) {
 				if ( element.length != 0 ) {
 
 					api.controlInstances[obj] = {};
-					api.controlInstances[obj]['element']  = element;
-					api.controlInstances[obj]['setting']  = control.setting();
+					api.controlInstances[obj]['element']  	= element;
+					api.controlInstances[obj]['elementID']  = '#'+element.attr('id');					
+					api.controlInstances[obj]['setting']  	= control.setting();
 					api.controlInstances[obj]['selector'] = e;
 					api.controlInstances[obj]['controlSelector'] = control.selector;
 					api.controlInstances[obj]['type'] 	  = '';
 					api.controlInstances[obj]['section']  = control.section();
 					api.controlInstances[obj]['title']    = null;
 					api.controlInstances[obj]['userControl']  = null;
+					/**
+					 * Field Settings for Fields Settings section in WPGlobus Settings panel.
+					 * @see #accordion-section-wpglobus_fields_settings_section
+					 */
+					api.controlInstances[obj]['fieldSettings']  			  = {};
+					api.controlInstances[obj]['fieldSettings']['itemID']  	  = 'item-wpglobus-cb-control-'+WPGlobusDialogApp.convertToId(obj);
+					api.controlInstances[obj]['fieldSettings']['cbID']  	  = 'wpglobus-cb-control-'+WPGlobusDialogApp.convertToId(obj);
 
 					
 					// Let's test with Zerif Lite theme.
