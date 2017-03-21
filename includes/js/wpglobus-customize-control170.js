@@ -403,7 +403,7 @@ jQuery(document).ready(function ($) {
 
 					api.controlInstances[obj] = {};
 					api.controlInstances[obj]['element']  	= element;
-					api.controlInstances[obj]['elementID']  = '#'+element.attr('id');					
+					api.controlInstances[obj]['elementID']  = element.attr('id') ? '#'+element.attr('id') : undefined;					
 					api.controlInstances[obj]['setting']  	= control.setting();
 					api.controlInstances[obj]['selector'] = e;
 					api.controlInstances[obj]['controlSelector'] = control.selector;
