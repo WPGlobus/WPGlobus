@@ -406,6 +406,10 @@ jQuery(document).ready(function ($) {
 					api.controlInstances[obj]['elementID']  = element.attr('id') ? '#'+element.attr('id') : undefined;					
 					api.controlInstances[obj]['setting']  	= control.setting();
 					api.controlInstances[obj]['selector'] = e;
+					/**
+					 * To get element in DOM @see parent li.customize-control of this control.
+					 * And element with 'data-customize-setting-link' attribute.
+					 */
 					api.controlInstances[obj]['controlSelector'] = control.selector;
 					api.controlInstances[obj]['type'] 	  = '';
 					api.controlInstances[obj]['section']  = control.section();
@@ -497,10 +501,10 @@ jQuery(document).ready(function ($) {
 						api.controlInstances[obj]['setting'] = api.convertString( element[0].defaultValue );
 					};
 
-					/* Get control title */
+					/** Get control title. */
 					api.controlInstances[obj]['title'] = control.params.label;
 					
-					/* Enable/disable user control */
+					/** Enable/disable user control. */
 					if ( WPGlobusCustomizeOptions.userControl !== null &&
 							typeof WPGlobusCustomizeOptions.userControl[ WPGlobusCustomizeOptions.themeName ] !== 'undefined' ) {
 
