@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.7.10 ###
+
+* ADDED:
+	* Core: basque flag.
+	* Customizer: Some JS code improvements.
+	
 ### 1.7.9 ###
 
 * ADDED:
