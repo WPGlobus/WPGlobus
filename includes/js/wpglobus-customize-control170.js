@@ -77,7 +77,7 @@ jQuery(document).ready(function ($) {
 						checked = '';
 					}
 					itemsHtml += '<li id="'+control.fieldSettings.itemID+'">';
-					itemsHtml += '<input id="'+control.fieldSettings.cbID+'" data-control="'+id+'" class="wpglobus-customize-cb-control" type="checkbox"'+checked+' /> ' + control.title;
+					itemsHtml += '<input id="'+control.fieldSettings.cbID+'" data-control="'+id+'" class="wpglobus-customize-cb-control" type="checkbox"'+checked+' /> ' + '<span class="wpglobus-cb-control-title">'+control.title+'</span>';
 					itemsHtml += '</li>';
 				});
 				itemsHtml += '</ul>';
