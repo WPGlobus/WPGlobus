@@ -644,6 +644,7 @@ jQuery(document).ready(function ($) {
 							return;
 						}
 					}
+				
 					if ( $e.hasClass( 'wpglobus-control-link' ) ) {
 						var t = api.getTranslations( WPGlobusCustomize.controlInstances[inst].setting );
 						$e.val( t[ WPGlobusCoreData.language ] );
@@ -777,10 +778,21 @@ jQuery(document).ready(function ($) {
 					 */
 					inst = $t.data( 'wpglobus-customize-control' );
 					if ( 'undefined' === typeof WPGlobusCustomize.controlInstances[inst] ) {
-						return;
+						/**
+						 * Now don't return from callback, we have trigger.
+						 * @since 1.7.10
+						 */
+						//return;
 					}
 				}
 
+				/** 
+				 * @since 1.7.10
+				 */
+				if ( 'undefined' !== typeof $(document).triggerHandler( 'wpglobus_customize_control_keyup', [ $t, inst ] ) ) {
+					return;
+				}				
+				
 				if ( WPGlobusCustomize.controlInstances[inst]['type'] == 'link' ) {
 
 					WPGlobusCustomize.controlInstances[inst]['setting'] = api.getString(
