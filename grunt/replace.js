@@ -25,7 +25,10 @@ module.exports = {
     },
     wpi18n: {
         overwrite: true,
-        src: ["node_modules/grunt-wp-i18n/vendor/wp-i18n-tools/extract.php"],
+        // For grunt-wp-i18n@0.5.4
+        // src: ["node_modules/grunt-wp-i18n/vendor/wp-i18n-tools/extract.php"],
+        // For grunt-wp-i18n@1.0.0
+        src: ["node_modules/grunt-wp-i18n/node_modules/node-wp-i18n/bin/php/extract.php"],
         replacements: [
             {
                 from: "public function entry_from_call( $call, $file_name ) {",

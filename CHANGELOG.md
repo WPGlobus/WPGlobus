@@ -5,8 +5,9 @@
 ### 1.7.10 ###
 
 * ADDED:
-	* Core: basque flag.
-	* Customizer: Some JS code improvements.
+	* Core: Basque Country flag image.
+* FIXED:
+	* Customizer: JS code improvements, optimization and cleanup.
 	
 ### 1.7.9 ###
 
