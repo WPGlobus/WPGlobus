@@ -25,6 +25,9 @@ jQuery(document).ready(function ($) {
 		action: false,
 		customizeSave: false,
 		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span style="font-weight:bold;">{{language}}</span>',
+		settingsSectionExpand: function() {
+			$(document).triggerHandler( 'wpglobus_fields_settings_section_expand', [this, api] );		
+		},
 		init: function(args) {
 
 			api.setTitle();
@@ -123,7 +126,9 @@ jQuery(document).ready(function ($) {
 						$(this).css({'display':'none'});
 					}
 				});
-				wp.customize.control( 'wpglobus_fields_settings_section' ).expand();
+				wp.customize.control( 'wpglobus_fields_settings_section' ).expand({
+					completeCallback: api.settingsSectionExpand
+				});
 			});
 			
 			/**
