@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-03-28 22:04:17+00:00\n"
-"PO-Revision-Date: 2017-03-18 14:08+0000\n"
-"Last-Translator: Franck\n"
+"POT-Creation-Date: 2017-03-30 21:37:23+00:00\n"
+"PO-Revision-Date: 2017-03-30 21:27+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_FR/)\n"
 "Language: fr_FR\n"
@@ -38,7 +38,7 @@ msgstr "Guide"
 #: includes/admin/central/class-wpglobus-admin-central.php:142
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:53
 msgid "WPGlobus Help Desk"
-msgstr "Centre d’aide de WPglobus"
+msgstr "Centre d’aide de WPGlobus"
 
 #: includes/admin/central/class-wpglobus-admin-central.php:157
 #: includes/admin/class-wpglobus-about.php:36
