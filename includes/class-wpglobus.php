@@ -470,7 +470,16 @@ class WPGlobus {
 				$this,
 				'on_admin_bar_menu'
 			) );
-
+				
+			/**
+			 * @scope admin
+			 * @since 1.7.11
+			 */	
+			add_action( 'admin_enqueue_scripts', array(
+				$this,
+				'enqueue_wpglobus_js'
+			), 1000 );		
+			
 			if ( WPGlobus_WP::is_pagenow( 'plugin-install.php' ) ) {
 				require_once 'admin/class-wpglobus-plugin-install.php';
 				WPGlobus_Plugin_Install::controller();
@@ -1420,7 +1429,7 @@ class WPGlobus {
 			} else {
 				$post_content_autop = $post_content;
 			}
-
+			
 			/**
 			 * Filter for data to send to JS.
 			 * Returning array.
@@ -1833,6 +1842,8 @@ class WPGlobus {
 
 	/**
 	 * Enqueue the `wpglobus.js` script.
+	 * @since 1.0
+	 * @since 1.7.11 Added WPGlobus::Config()->enabled_languages. 	 
 	 */
 	public function enqueue_wpglobus_js() {
 
@@ -1849,7 +1860,8 @@ class WPGlobus {
 			'WPGlobus',
 			array(
 				'version'  => WPGLOBUS_VERSION,
-				'language' => WPGlobus::Config()->language
+				'language' => WPGlobus::Config()->language,
+				'enabledLanguages'	=> WPGlobus::Config()->enabled_languages
 			)
 		);
 	}
