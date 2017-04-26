@@ -421,13 +421,14 @@ if ( class_exists( 'RevSliderFront' ) ) {
 
 }
 
-if ( function_exists( '__mc4wp_flush' ) ) {
+if ( function_exists( '__mc4wp_flush' ) || function_exists( '_mc4wp_load_plugin' ) ) {
 
 	/**
 	 * MailChimp for WordPress
 	 * @see https://wordpress.org/plugins/mailchimp-for-wp/
 	 *
 	 * @since 1.5.4
+	 * @since 1.7.11
 	 */
 	require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-mailchimp-for-wp.php';
 	WPGlobus_MailChimp_For_WP::controller();
