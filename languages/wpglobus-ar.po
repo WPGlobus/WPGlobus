@@ -1,13 +1,14 @@
 # Copyright (C) 2017 WPGlobus
 # This file is distributed under the GPL-3.0.
 # Translators:
+# Omar Anwar <omaraglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-04-30 14:01:14+00:00\n"
-"PO-Revision-Date: 2017-03-30 18:47+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"POT-Creation-Date: 2017-04-30 16:42:14+00:00\n"
+"PO-Revision-Date: 2017-04-17 11:29+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/ar/)\n"
 "Language: ar\n"
@@ -31,12 +32,12 @@ msgstr ""
 #: includes/admin/class-wpglobus-clean.php:596
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
 msgid "Guide"
-msgstr ""
+msgstr "الدليل"
 
 #: includes/admin/central/class-wpglobus-admin-central.php:142
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:53
 msgid "WPGlobus Help Desk"
-msgstr ""
+msgstr "WPGlobus دائرة المساعدة"
 
 #: includes/admin/central/class-wpglobus-admin-central.php:157
 #: includes/admin/class-wpglobus-about.php:36
@@ -72,11 +73,11 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:87
 msgid "Go to WPGlobus Settings"
-msgstr ""
+msgstr "إذهب إلي إعدادت WPGlobus "
 
 #: includes/admin/class-wpglobus-about.php:98
 msgid "Easy as 1-2-3:"
-msgstr ""
+msgstr "سهل مثل 1-2-3:"
 
 #: includes/admin/class-wpglobus-about.php:101
 msgid "Go to WPGlobus admin menu and choose the countries / languages;"
@@ -96,7 +97,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:111
 msgid "Links:"
-msgstr ""
+msgstr "الراوبط:"
 
 #: includes/admin/class-wpglobus-about.php:119
 msgid "FAQs"
@@ -104,15 +105,15 @@ msgstr "الأسئلة المتكررة"
 
 #: includes/admin/class-wpglobus-about.php:121
 msgid "Contact Us"
-msgstr ""
+msgstr "إتصل بنا"
 
 #: includes/admin/class-wpglobus-about.php:123
 msgid "Please give us 5 stars!"
-msgstr ""
+msgstr "من فضلك أعطنا 5 نجوم!"
 
 #: includes/admin/class-wpglobus-about.php:133
 msgid "WPGlobus does not translate texts automatically!"
-msgstr ""
+msgstr "WPGlobus  لا يُترجم النصوص تلقائياً!"
 
 #: includes/admin/class-wpglobus-about.php:136
 msgid ""
@@ -136,7 +137,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
-msgstr ""
+msgstr "ملاحظات هامة:"
 
 #: includes/admin/class-wpglobus-about.php:159
 msgid ""
@@ -263,7 +264,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:145
 #: includes/admin/class-wpglobus-customize-options.php:183
 msgid "Default"
-msgstr ""
+msgstr "الأفتراضي"
 
 #: includes/admin/class-wpglobus-customize-options.php:264
 msgid "Section"
@@ -302,12 +303,12 @@ msgstr "اللغات"
 #: includes/admin/class-wpglobus-customize-options.php:657
 #: includes/options/class-wpglobus-options.php:340
 msgid "Enabled Languages"
-msgstr ""
+msgstr "اللغات المفعلة"
 
 #: includes/admin/class-wpglobus-customize-options.php:659
 #: includes/options/class-wpglobus-options.php:342
 msgid "These languages are currently enabled on your site."
-msgstr ""
+msgstr "هذه اللغات هي حالياً مفغلة علي موقعك."
 
 #: includes/admin/class-wpglobus-customize-options.php:686
 msgid ""
@@ -324,12 +325,12 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:702
 #: includes/options/class-wpglobus-options.php:350
 msgid "Add Languages"
-msgstr ""
+msgstr "أضف لغة"
 
 #: includes/admin/class-wpglobus-customize-options.php:720
 #: includes/options/class-wpglobus-options.php:360
 msgid "Language Selector Mode"
-msgstr ""
+msgstr "وضع محدد اللغة"
 
 #: includes/admin/class-wpglobus-customize-options.php:725
 #: includes/options/class-wpglobus-options.php:369
@@ -349,7 +350,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:729
 #: includes/options/class-wpglobus-options.php:373
 msgid "Flags only"
-msgstr ""
+msgstr "أعلام فقط"
 
 #: includes/admin/class-wpglobus-customize-options.php:731
 #: includes/options/class-wpglobus-options.php:363
