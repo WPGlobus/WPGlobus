@@ -4,11 +4,12 @@
 
 ### 1.7.11 ###
 
-ADDED: 
-	* Core: added array of enabled languages to js.
-	* Core: enqueue wpglobus.js script for admin.
-	* Customizer: improvement.
-	* MailChimp: added support for MailChimp for WordPress since 4.1.1
+* ADDED: 
+	* Core: added array of enabled languages to JS.
+	* Core: enqueue `wpglobus.js` script for admin.
+	* Customizer: improvements.
+	* MailChimp: added support for `MailChimp for WordPress` 4.1.1.
+	* Admin: Added Bahasa Indonesia (`id_ID`) translation.
 	
 ### 1.7.10 ###
 

@@ -126,6 +126,7 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 * `de_DE` by [Tobias Hopp](http://www.tobiashopp.info/) ~ [WPGlobus ist ein Paket von mehreren WordPress-Plugins, die Möglichkeiten zur Übersetzung von Wordpress-Installationen bieten.](https://de.wordpress.org/plugins/wpglobus/)
 * `es_ES` by [FX Bénard](http://wp-translations.org/) and [Patricia Casado](http://mascositas.com/) ~ [WPGlobus es una familia de plugins de WordPress que ayudan en la traducción de blogs de WordPress.](https://es.wordpress.org/plugins/wpglobus/)
 * `fr_FR` by [FX Bénard](http://wp-translations.org/) ~ [WPGlobus fait partie des extensions WordPress qui vous aident à rendre les blogs et les sites WordPress multilingues.](https://fr.wordpress.org/plugins/wpglobus/)
+* `id_ID` by [ChameleonJohn](https://www.chameleonjohn.com/) ~ [WPGlobus adalah keluarga plugin WordPress yang membantu Anda dalam membuat blog dan situs WordPress multibahasa.](https://id.wordpress.org/plugins/wpglobus/)
 * `pl_PL` by [Maciej Gryniuk](http://maciej-gryniuk.tk/) ~ [WPGlobus jest rodziną wtyczek do WordPress'a pomocnych w tworzeniu wielojęzycznych blogów i stron na WordPress'ie.](https://pl.wordpress.org/plugins/wpglobus/)
 * `ro_RO` by [Rodica-Elena Andronache](http://themeisle.com/) ~ [WPGlobus este o familie de plugin-uri WordPress ce te asistă în realizarea de bloguri și site-uri WordPress multilingve.](https://ro.wordpress.org/plugins/wpglobus/)
 * `ru_RU` by [The WPGlobus Team](https://wpglobus.com/ru/) ~ [WPGlobus - это коллекция плагинов ВордПресс для создания мультиязычных сайтов](https://ru.wordpress.org/plugins/wpglobus/)
@@ -183,6 +184,15 @@ Then please read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
 
 == Changelog ==
+
+= 1.7.11 =
+
+* ADDED:
+	* Core: added array of enabled languages to JS.
+	* Core: enqueue `wpglobus.js` script for admin.
+	* Customizer: improvements.
+	* MailChimp: added support for `MailChimp for WordPress` 4.1.1.
+	* Admin: Added Bahasa Indonesia (`id_ID`) translation.
 
 = 1.7.10 =
 
