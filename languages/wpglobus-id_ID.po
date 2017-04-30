@@ -1,4 +1,5 @@
-﻿# This file is distributed under the GPL-3.0.
+# Copyright (C) 2017 WPGlobus
+# This file is distributed under the GPL-3.0.
 # Translators:
 # ChameleonJohn.com, 2017
 # Gregory Karpinsky <gregory@tiv.net>, 2017
@@ -6,31 +7,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-03-28 22:04:17+00:00\n"
-"PO-Revision-Date: 2017-04-30 09:44-0400\n"
+"POT-Creation-Date: 2017-04-30 16:20:51+00:00\n"
+"PO-Revision-Date: 2017-03-30 21:27+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
-"Language-Team: ChameleonJohn.com (http://www.transifex.com/wp-translations/wpglobus-multilingual/language/id_ID/)\n"
+"Language-Team: Indonesian (http://www.transifex.com/wp-translations/wpglobus-"
+"multilingual/language/id_ID/)\n"
 "Language: id_ID\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 2.0.1\n"
-"X-Poedit-SearchPath-0: .\n"
 
-#: includes/admin/central/class-wpglobus-admin-central.php:122 includes/admin/class-wpglobus-about.php:42 includes/admin/class-wpglobus-about.php:117 includes/admin/class-wpglobus-clean.php:596 includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
+#: includes/admin/central/class-wpglobus-admin-central.php:122
+#: includes/admin/class-wpglobus-about.php:42
+#: includes/admin/class-wpglobus-about.php:117
+#: includes/admin/class-wpglobus-clean.php:596
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
 msgid "Guide"
 msgstr "Panduan"
 
-#: includes/admin/central/class-wpglobus-admin-central.php:142 includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:53
+#: includes/admin/central/class-wpglobus-admin-central.php:142
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:53
 msgid "WPGlobus Help Desk"
 msgstr "Meja Bantuan WPGlobus"
 
-#: includes/admin/central/class-wpglobus-admin-central.php:157 includes/admin/class-wpglobus-about.php:36 includes/admin/class-wpglobus-admin-menu.php:28 includes/admin/class-wpglobus-clean.php:602 includes/admin/class-wpglobus-customize-options.php:999 includes/admin/class-wpglobus-customize-options.php:1031 includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
+#: includes/admin/central/class-wpglobus-admin-central.php:157
+#: includes/admin/class-wpglobus-about.php:36
+#: includes/admin/class-wpglobus-admin-menu.php:28
+#: includes/admin/class-wpglobus-clean.php:602
+#: includes/admin/class-wpglobus-customize-options.php:999
+#: includes/admin/class-wpglobus-customize-options.php:1031
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
 msgid "Add-ons"
 msgstr "Add-ons"
 
@@ -38,17 +53,27 @@ msgstr "Add-ons"
 msgid "Quick Start"
 msgstr "Mulai cepat"
 
-#: includes/admin/class-wpglobus-about.php:48 includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
+#: includes/admin/class-wpglobus-about.php:48
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "FAQ"
 msgstr "FAQ"
 
 #: includes/admin/class-wpglobus-about.php:59
-msgid "Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
+msgid ""
+"Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
 msgstr "Perhatian: ekstensi PHP String Multibyte (`mbstring`) tidak dimuat!"
 
 #: includes/admin/class-wpglobus-about.php:60
-msgid "The mbstring extension is required for the full UTF-8 compatibility and better performance. Without it, some parts of WordPress and WPGlobus may function incorrectly. Please contact your hosting company or systems administrator."
-msgstr "Ekstensi mbstring diperlukan untuk kompatibilitas UTF-8 penuh dan kinerja yang lebih baik. Tanpa itu, beberapa bagian WordPress dan WPGlobus mungkin tidak berfungsi dengan benar. Silahkan hubungi perusahaan hosting atau administrator sistem anda."
+msgid ""
+"The mbstring extension is required for the full UTF-8 compatibility and "
+"better performance. Without it, some parts of WordPress and WPGlobus may "
+"function incorrectly. Please contact your hosting company or systems "
+"administrator."
+msgstr ""
+"Ekstensi mbstring diperlukan untuk kompatibilitas UTF-8 penuh dan kinerja "
+"yang lebih baik. Tanpa itu, beberapa bagian WordPress dan WPGlobus mungkin "
+"tidak berfungsi dengan benar. Silahkan hubungi perusahaan hosting atau "
+"administrator sistem anda."
 
 #: includes/admin/class-wpglobus-about.php:87
 msgid "Go to WPGlobus Settings"
@@ -63,12 +88,20 @@ msgid "Go to WPGlobus admin menu and choose the countries / languages;"
 msgstr "Buka menu admin WPGlobus dan pilih negara / bahasa;"
 
 #: includes/admin/class-wpglobus-about.php:102
-msgid "Enter the translations to the posts, pages, categories, tags and menus using a clean and simple interface."
-msgstr "Masukkan terjemahan ke posting, halaman, kategori, tag dan menu menggunakan antarmuka yang bersih dan sederhana."
+msgid ""
+"Enter the translations to the posts, pages, categories, tags and menus using "
+"a clean and simple interface."
+msgstr ""
+"Masukkan terjemahan ke posting, halaman, kategori, tag dan menu menggunakan "
+"antarmuka yang bersih dan sederhana."
 
 #: includes/admin/class-wpglobus-about.php:103
-msgid "Switch languages at the front-end using a drop-down menu with language names and country flags."
-msgstr "Beralih bahasa di front-end menggunakan menu drop-down dengan nama bahasa dan bendera negara."
+msgid ""
+"Switch languages at the front-end using a drop-down menu with language names "
+"and country flags."
+msgstr ""
+"Beralih bahasa di front-end menggunakan menu drop-down dengan nama bahasa "
+"dan bendera negara."
 
 #: includes/admin/class-wpglobus-about.php:111
 msgid "Links:"
@@ -91,50 +124,86 @@ msgid "WPGlobus does not translate texts automatically!"
 msgstr "WPGlobus tidak menerjemahkan teks secara otomatis!"
 
 #: includes/admin/class-wpglobus-about.php:136
-msgid "There are many translation companies and individual translators who can help you write and proofread the texts."
-msgstr "Ada banyak perusahaan terjemahan dan penerjemah individual yang dapat membantu Anda menulis dan mengoreksi teks."
+msgid ""
+"There are many translation companies and individual translators who can help "
+"you write and proofread the texts."
+msgstr ""
+"Ada banyak perusahaan terjemahan dan penerjemah individual yang dapat "
+"membantu Anda menulis dan mengoreksi teks."
 
 #: includes/admin/class-wpglobus-about.php:137
-msgid "When you choose a translator, please look at their native language, country of residence, specialization and knowledge of WordPress."
-msgstr "Bila Anda memilih penerjemah, silakan lihat bahasa ibu, negara tempat tinggal, spesialisasi dan pengetahuan mereka tentang WordPress."
+msgid ""
+"When you choose a translator, please look at their native language, country "
+"of residence, specialization and knowledge of WordPress."
+msgstr ""
+"Bila Anda memilih penerjemah, silakan lihat bahasa ibu, negara tempat "
+"tinggal, spesialisasi dan pengetahuan mereka tentang WordPress."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
 #: includes/admin/class-wpglobus-about.php:143
-msgid "We are planning to maintain a %s list of translators %s on the WPGlobus website. This is not an endorsement, just a courtesy. Please contact them directly and let us know how did it work for you!"
-msgstr "Kami berencana untuk mempertahankan daftar %s penerjemah %s di situs WPGlobus. Ini bukan sebuah pengesahan, hanya sopan santun saja. Silahkan hubungi mereka secara langsung dan beritahu kami bagaimana cara kerjanya untuk Anda!"
+msgid ""
+"We are planning to maintain a %s list of translators %s on the WPGlobus "
+"website. This is not an endorsement, just a courtesy. Please contact them "
+"directly and let us know how did it work for you!"
+msgstr ""
+"Kami berencana untuk mempertahankan daftar %s penerjemah %s di situs "
+"WPGlobus. Ini bukan sebuah pengesahan, hanya sopan santun saja. Silahkan "
+"hubungi mereka secara langsung dan beritahu kami bagaimana cara kerjanya "
+"untuk Anda!"
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
 msgstr "Catatan penting:"
 
 #: includes/admin/class-wpglobus-about.php:159
-msgid "WPGlobus only supports the localization URLs in the form of <code>example.com/xx/page/</code>. We do not plan to support subdomains <code>xx.example.com</code> and language queries <code>example.com?lang=xx</code>."
-msgstr "WPGlobus hanya mendukung URL lokalisasi berupa <code>example.com/xx/page/</code>. Kami tidak berencana untuk mendukung subdomain <code>xx.example.com</code> dan kueri bahasa <code>example.com?lang=xx</code>."
+msgid ""
+"WPGlobus only supports the localization URLs in the form of <code>example."
+"com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
+"com</code> and language queries <code>example.com?lang=xx</code>."
+msgstr ""
+"WPGlobus hanya mendukung URL lokalisasi berupa <code>example.com/xx/page/</"
+"code>. Kami tidak berencana untuk mendukung subdomain <code>xx.example.com</"
+"code> dan kueri bahasa <code>example.com?lang=xx</code>."
 
 #: includes/admin/class-wpglobus-about.php:162
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr "Beberapa tema dan plugin <strong>tidak multibahasa-siap</strong>."
 
 #: includes/admin/class-wpglobus-about.php:163
-msgid "They might display some texts with no translation, or with all languages mixed together."
-msgstr "Mereka mungkin menampilkan beberapa teks tanpa terjemahan, atau dengan semua bahasa dicampur bersama."
+msgid ""
+"They might display some texts with no translation, or with all languages "
+"mixed together."
+msgstr ""
+"Mereka mungkin menampilkan beberapa teks tanpa terjemahan, atau dengan semua "
+"bahasa dicampur bersama."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
 #: includes/admin/class-wpglobus-about.php:167
-msgid "Please contact the theme / plugin author. If they are unable to assist, consider %s hiring the WPGlobus Team %s to write a custom code for you."
-msgstr "Silahkan hubungi penulis tema / plugin. Jika mereka tidak dapat membantu, pertimbangkan untuk %s menyewa Tim WPGlobus %s untuk menulis kode khusus untuk Anda."
+msgid ""
+"Please contact the theme / plugin author. If they are unable to assist, "
+"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+msgstr ""
+"Silahkan hubungi penulis tema / plugin. Jika mereka tidak dapat membantu, "
+"pertimbangkan untuk %s menyewa Tim WPGlobus %s untuk menulis kode khusus "
+"untuk Anda."
 
 #: includes/admin/class-wpglobus-admin-menu.php:29
 msgid "View free and premium WPGlobus extensions"
 msgstr "Lihat ekstensi WPGlobus gratis dan premium"
 
-#: includes/admin/class-wpglobus-admin-page.php:32 includes/admin/class-wpglobus-clean.php:581
+#: includes/admin/class-wpglobus-admin-page.php:32
+#: includes/admin/class-wpglobus-clean.php:581
 msgid "Multilingual Everything!"
 msgstr "Multilingual semuanya!"
 
-#: includes/admin/class-wpglobus-admin-page.php:34 includes/admin/class-wpglobus-clean.php:584
-msgid "WPGlobus is a family of WordPress plugins assisting you in making multilingual WordPress blogs and sites."
-msgstr "WPGlobus adalah keluarga plugin WordPress yang membantu Anda dalam membuat blog dan situs WordPress multibahasa."
+#: includes/admin/class-wpglobus-admin-page.php:34
+#: includes/admin/class-wpglobus-clean.php:584
+msgid ""
+"WPGlobus is a family of WordPress plugins assisting you in making "
+"multilingual WordPress blogs and sites."
+msgstr ""
+"WPGlobus adalah keluarga plugin WordPress yang membantu Anda dalam membuat "
+"blog dan situs WordPress multibahasa."
 
 #: includes/admin/class-wpglobus-clean.php:232
 msgid "Remove the WPGlobus settings (not recommended)"
@@ -149,17 +218,37 @@ msgid "Support"
 msgstr "Mendukung"
 
 #: includes/admin/class-wpglobus-clean.php:611
-msgid "WARNING: this operation is non-reversible. It is strongly recommended that you backup your database before proceeding."
-msgstr "PERINGATAN: operasi ini tidak dapat dibalikkan. Sangat disarankan agar Anda membuat backup database Anda sebelum melanjutkan."
+msgid ""
+"WARNING: this operation is non-reversible. It is strongly recommended that "
+"you backup your database before proceeding."
+msgstr ""
+"PERINGATAN: operasi ini tidak dapat dibalikkan. Sangat disarankan agar Anda "
+"membuat backup database Anda sebelum melanjutkan."
 
 #: includes/admin/class-wpglobus-clean.php:615
-msgid "This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on."
-msgstr "Alat ini hanya boleh digunakan jika Anda berencana untuk benar-benar menghapus WPGlobus. Dengan menjalankannya, Anda akan menghapus SEMUA terjemahan yang telah Anda masukkan ke posting, halaman, dll., Anda hanya menyimpan teks bahasa UTAMA. Pastikan semua entri memiliki beberapa konten dalam bahasa utama. Jika tidak, Anda mungkin berakhir dengan judul kosong, tidak ada konten, tidak ada kutipan, komentar kosong dan sebagainya."
+msgid ""
+"This tool should be used only if you plan to completely uninstall WPGlobus. "
+"By running it, you will remove ALL translations you have entered to your "
+"post, pages, etc., keeping only the MAIN language texts. Please make sure "
+"that all entries have some content in the main language. Otherwise, you "
+"might end up with empty titles, no content, no excerpts, blank comments and "
+"so on."
+msgstr ""
+"Alat ini hanya boleh digunakan jika Anda berencana untuk benar-benar "
+"menghapus WPGlobus. Dengan menjalankannya, Anda akan menghapus SEMUA "
+"terjemahan yang telah Anda masukkan ke posting, halaman, dll., Anda hanya "
+"menyimpan teks bahasa UTAMA. Pastikan semua entri memiliki beberapa konten "
+"dalam bahasa utama. Jika tidak, Anda mungkin berakhir dengan judul kosong, "
+"tidak ada konten, tidak ada kutipan, komentar kosong dan sebagainya."
 
 #. translators: %1$s - language name, %1$s - language code. Do not remove.
 #: includes/admin/class-wpglobus-clean.php:622
-msgid "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to Settings."
-msgstr "Bahasa utama saat ini ditetapkan ke %1$s (%2$s). SEMUA TEXTS YANG TIDAK DI %1$s AKAN DIHAPUS! Untuk mengubah bahasa utama, buka Pengaturan."
+msgid ""
+"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
+"%1$s WILL BE DELETED! To change the main language, please go to Settings."
+msgstr ""
+"Bahasa utama saat ini ditetapkan ke %1$s (%2$s). SEMUA TEXTS YANG TIDAK DI "
+"%1$s AKAN DIHAPUS! Untuk mengubah bahasa utama, buka Pengaturan."
 
 #: includes/admin/class-wpglobus-clean.php:631
 msgid "You are about to clean the content of the following database tables:"
@@ -170,12 +259,22 @@ msgid "The operations log"
 msgstr "Operasi log"
 
 #: includes/admin/class-wpglobus-clean.php:642
-msgid "We are going to write a detailed log of all the database changes performed. It should help in the case you need to restore something important. The log will be written to the file:"
-msgstr "Kita akan menulis log rinci dari semua perubahan database dilakukan. Ini akan membantu dalam kasus Anda perlu mengembalikan sesuatu yang penting. log akan ditulis ke file:"
+msgid ""
+"We are going to write a detailed log of all the database changes performed. "
+"It should help in the case you need to restore something important. The log "
+"will be written to the file:"
+msgstr ""
+"Kita akan menulis log rinci dari semua perubahan database dilakukan. Ini "
+"akan membantu dalam kasus Anda perlu mengembalikan sesuatu yang penting. log "
+"akan ditulis ke file:"
 
 #: includes/admin/class-wpglobus-clean.php:652
-msgid "Uncheck if you do not want to write the operations log (we recommend to keep it checked)"
-msgstr "Hapus centang jika Anda tidak ingin menulis log operasi (kami sarankan untuk tetap memeriksanya)"
+msgid ""
+"Uncheck if you do not want to write the operations log (we recommend to keep "
+"it checked)"
+msgstr ""
+"Hapus centang jika Anda tidak ingin menulis log operasi (kami sarankan untuk "
+"tetap memeriksanya)"
 
 #: includes/admin/class-wpglobus-clean.php:657
 msgid "You have been warned..."
@@ -186,8 +285,17 @@ msgid "Please confirm by checking the box below:"
 msgstr "Silahkan konfirmasi dengan mencentang kotak di bawah ini:"
 
 #: includes/admin/class-wpglobus-clean.php:661
-msgid "I have read and understood everything written on this page. I am aware that by using this tool I may loose some content of my website. I have made a database backup and know how to restore it if necessary. I am fully responsible for the results."
-msgstr "Saya telah membaca dan memahami semua yang tertulis di halaman ini. Saya sadar bahwa dengan menggunakan alat ini saya dapat kehilangan beberapa konten dari website saya. Saya telah membuat backup database dan tahu bagaimana untuk mengembalikannya jika perlu. Saya bertanggung jawab penuh atas hasil."
+msgid ""
+"I have read and understood everything written on this page. I am aware that "
+"by using this tool I may loose some content of my website. I have made a "
+"database backup and know how to restore it if necessary. I am fully "
+"responsible for the results."
+msgstr ""
+"Saya telah membaca dan memahami semua yang tertulis di halaman ini. Saya "
+"sadar bahwa dengan menggunakan alat ini saya dapat kehilangan beberapa "
+"konten dari website saya. Saya telah membuat backup database dan tahu "
+"bagaimana untuk mengembalikannya jika perlu. Saya bertanggung jawab penuh "
+"atas hasil."
 
 #: includes/admin/class-wpglobus-clean.php:664
 msgid "YES, I CONFIRM"
@@ -197,7 +305,10 @@ msgstr "YES, I CONFIRM"
 msgid "Process with the Clean-up"
 msgstr "Proses dengan Clean-up"
 
-#: includes/admin/class-wpglobus-customize-options.php:73 includes/admin/class-wpglobus-customize-options.php:100 includes/admin/class-wpglobus-customize-options.php:145 includes/admin/class-wpglobus-customize-options.php:183
+#: includes/admin/class-wpglobus-customize-options.php:73
+#: includes/admin/class-wpglobus-customize-options.php:100
+#: includes/admin/class-wpglobus-customize-options.php:145
+#: includes/admin/class-wpglobus-customize-options.php:183
 msgid "Default"
 msgstr "kegagalan"
 
@@ -218,8 +329,11 @@ msgid "WPGlobus"
 msgstr "WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:552
-msgid "You need to update WordPress to 4.5 or later to get Fields Settings section"
-msgstr "Anda perlu memperbarui WordPress ke 4.5 atau yang lebih baru untuk mendapatkan bagian Fields Settings"
+msgid ""
+"You need to update WordPress to 4.5 or later to get Fields Settings section"
+msgstr ""
+"Anda perlu memperbarui WordPress ke 4.5 atau yang lebih baru untuk "
+"mendapatkan bagian Fields Settings"
 
 #: includes/admin/class-wpglobus-customize-options.php:558
 msgid "Fields Settings"
@@ -229,56 +343,75 @@ msgstr "Pengaturan Fields"
 msgid "WPGlobus Settings"
 msgstr "Pengaturan WPGlobus"
 
-#: includes/admin/class-wpglobus-customize-options.php:639 includes/options/class-wpglobus-options.php:325
+#: includes/admin/class-wpglobus-customize-options.php:639
+#: includes/options/class-wpglobus-options.php:325
 msgid "Languages"
 msgstr "Bahasa"
 
-#: includes/admin/class-wpglobus-customize-options.php:657 includes/options/class-wpglobus-options.php:340
+#: includes/admin/class-wpglobus-customize-options.php:657
+#: includes/options/class-wpglobus-options.php:340
 msgid "Enabled Languages"
 msgstr "diaktifkan Bahasa"
 
-#: includes/admin/class-wpglobus-customize-options.php:659 includes/options/class-wpglobus-options.php:342
+#: includes/admin/class-wpglobus-customize-options.php:659
+#: includes/options/class-wpglobus-options.php:342
 msgid "These languages are currently enabled on your site."
 msgstr "Bahasa ini saat ini diaktifkan di situs Anda."
 
 #: includes/admin/class-wpglobus-customize-options.php:686
-msgid "Choose a language you would like to enable. <br>Press the [Save & Publish] button to confirm."
-msgstr "Pilih bahasa yang ingin Anda aktifkan. <br> Tekan tombol [Simpan & Publikasikan] untuk konfirmasi."
+msgid ""
+"Choose a language you would like to enable. <br>Press the [Save & Publish] "
+"button to confirm."
+msgstr ""
+"Pilih bahasa yang ingin Anda aktifkan. <br> Tekan tombol [Simpan & "
+"Publikasikan] untuk konfirmasi."
 
 #. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-#: includes/admin/class-wpglobus-customize-options.php:690 includes/options/class-wpglobus-options.php:320
+#: includes/admin/class-wpglobus-customize-options.php:690
+#: includes/options/class-wpglobus-options.php:320
 msgid "or Add new Language %1$s here %2$s"
 msgstr "Atau Tambahkan Bahasa baru %1$s di sini %2$s"
 
-#: includes/admin/class-wpglobus-customize-options.php:702 includes/options/class-wpglobus-options.php:350
+#: includes/admin/class-wpglobus-customize-options.php:702
+#: includes/options/class-wpglobus-options.php:350
 msgid "Add Languages"
 msgstr "Tambahkan Bahasa"
 
-#: includes/admin/class-wpglobus-customize-options.php:720 includes/options/class-wpglobus-options.php:360
+#: includes/admin/class-wpglobus-customize-options.php:720
+#: includes/options/class-wpglobus-options.php:360
 msgid "Language Selector Mode"
 msgstr "Mode Pemilih Bahasa"
 
-#: includes/admin/class-wpglobus-customize-options.php:725 includes/options/class-wpglobus-options.php:369
+#: includes/admin/class-wpglobus-customize-options.php:725
+#: includes/options/class-wpglobus-options.php:369
 msgid "Two-letter Code with flag (en, ru, it, etc.)"
 msgstr "Dua huruf Kode dengan bendera (en, ru, it, dll)"
 
-#: includes/admin/class-wpglobus-customize-options.php:726 includes/options/class-wpglobus-options.php:370
+#: includes/admin/class-wpglobus-customize-options.php:726
+#: includes/options/class-wpglobus-options.php:370
 msgid "Full Name (English, Russian, Italian, etc.)"
 msgstr "Nama Lengkap (Inggris, Rusia, Italia, dll.)"
 
-#: includes/admin/class-wpglobus-customize-options.php:728 includes/options/class-wpglobus-options.php:372
+#: includes/admin/class-wpglobus-customize-options.php:728
+#: includes/options/class-wpglobus-options.php:372
 msgid "Full Name with flag (English, Russian, Italian, etc.)"
 msgstr "Nama lengkap dengan bendera (Inggris, Rusia, Italia, dll.)"
 
-#: includes/admin/class-wpglobus-customize-options.php:729 includes/options/class-wpglobus-options.php:373
+#: includes/admin/class-wpglobus-customize-options.php:729
+#: includes/options/class-wpglobus-options.php:373
 msgid "Flags only"
 msgstr "Hanya bendera"
 
-#: includes/admin/class-wpglobus-customize-options.php:731 includes/options/class-wpglobus-options.php:363
-msgid "Choose the way language name and country flag are shown in the drop-down menu"
-msgstr "Pilihlah nama bahasa dan bendera negara yang ditunjukkan di menu drop-down"
+#: includes/admin/class-wpglobus-customize-options.php:731
+#: includes/options/class-wpglobus-options.php:363
+msgid ""
+"Choose the way language name and country flag are shown in the drop-down menu"
+msgstr ""
+"Pilihlah nama bahasa dan bendera negara yang ditunjukkan di menu drop-down"
 
-#: includes/admin/class-wpglobus-customize-options.php:768 includes/admin/class-wpglobus-customize-options.php:795 includes/options/class-wpglobus-options.php:381
+#: includes/admin/class-wpglobus-customize-options.php:768
+#: includes/admin/class-wpglobus-customize-options.php:795
+#: includes/options/class-wpglobus-options.php:381
 msgid "Language Selector Menu"
 msgstr "Bahasa Pemilih menu"
 
@@ -286,31 +419,47 @@ msgstr "Bahasa Pemilih menu"
 msgid "No menus have been created yet. Create some."
 msgstr "Belum ada menu yang dibuat. Buat beberapa."
 
-#: includes/admin/class-wpglobus-customize-options.php:779 includes/admin/class-wpglobus-customize-options.php:800 includes/options/class-wpglobus-options.php:384
+#: includes/admin/class-wpglobus-customize-options.php:779
+#: includes/admin/class-wpglobus-customize-options.php:800
+#: includes/options/class-wpglobus-options.php:384
 msgid "Choose the navigation menu where the language selector will be shown"
 msgstr "Pilih menu navigasi di mana pemilih bahasa akan ditampilkan"
 
-#: includes/admin/class-wpglobus-customize-options.php:818 includes/options/class-wpglobus-options.php:395
+#: includes/admin/class-wpglobus-customize-options.php:818
+#: includes/options/class-wpglobus-options.php:395
 msgid "\"All Pages\" menus Language selector"
 msgstr "\"Semua Halaman\" menu Bahasa pemilih"
 
-#: includes/admin/class-wpglobus-customize-options.php:821 includes/options/class-wpglobus-options.php:397
-msgid "Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)"
-msgstr "Menambahkan pemilih bahasa untuk menu yang secara otomatis daftar semua halaman yang ada (menggunakan `wp_list_pages`)"
+#: includes/admin/class-wpglobus-customize-options.php:821
+#: includes/options/class-wpglobus-options.php:397
+msgid ""
+"Adds language selector to the menus that automatically list all existing "
+"pages (using `wp_list_pages`)"
+msgstr ""
+"Menambahkan pemilih bahasa untuk menu yang secara otomatis daftar semua "
+"halaman yang ada (menggunakan `wp_list_pages`)"
 
-#: includes/admin/class-wpglobus-customize-options.php:836 includes/options/class-wpglobus-options.php:407
+#: includes/admin/class-wpglobus-customize-options.php:836
+#: includes/options/class-wpglobus-options.php:407
 msgid "Custom CSS"
 msgstr "CSS kustom"
 
-#: includes/admin/class-wpglobus-customize-options.php:840 includes/options/class-wpglobus-options.php:411
-msgid "Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `style-samples.css` file."
-msgstr "Di sini Anda dapat memasukkan aturan CSS untuk mengatur menu pemilih bahasa untuk tema Anda. Lihatlah contoh dalam file `gaya-samples.css`."
+#: includes/admin/class-wpglobus-customize-options.php:840
+#: includes/options/class-wpglobus-options.php:411
+msgid ""
+"Here you can enter the CSS rules to adjust the language selector menu for "
+"your theme. Look at the examples in the `style-samples.css` file."
+msgstr ""
+"Di sini Anda dapat memasukkan aturan CSS untuk mengatur menu pemilih bahasa "
+"untuk tema Anda. Lihatlah contoh dalam file `gaya-samples.css`."
 
-#: includes/admin/class-wpglobus-customize-options.php:857 includes/options/class-wpglobus-options.php:493
+#: includes/admin/class-wpglobus-customize-options.php:857
+#: includes/options/class-wpglobus-options.php:493
 msgid "Post types"
 msgstr "Jenis posting"
 
-#: includes/admin/class-wpglobus-customize-options.php:963 includes/options/class-wpglobus-options.php:463
+#: includes/admin/class-wpglobus-customize-options.php:963
+#: includes/options/class-wpglobus-options.php:463
 msgid "Uncheck to disable WPGlobus"
 msgstr "Hapus centang untuk menonaktifkan WPGlobus"
 
@@ -327,49 +476,91 @@ msgid "Description"
 msgstr "Deskripsi"
 
 #: includes/admin/class-wpglobus-customize-options.php:1083
-msgid "Here you can specify which fields should be considered multilingual by WPGlobus. To exclude a field, uncheck it and then press the button below."
-msgstr "Di sini Anda dapat menentukan bidang mana yang harus dianggap multibahasa oleh WPGlobus. Untuk mengecualikan sebuah bidang, hapus centang dan kemudian tekan tombol di bawah ini."
+msgid ""
+"Here you can specify which fields should be considered multilingual by "
+"WPGlobus. To exclude a field, uncheck it and then press the button below."
+msgstr ""
+"Di sini Anda dapat menentukan bidang mana yang harus dianggap multibahasa "
+"oleh WPGlobus. Untuk mengecualikan sebuah bidang, hapus centang dan kemudian "
+"tekan tombol di bawah ini."
 
-#: includes/admin/class-wpglobus-customize-options.php:1089 includes/options/class-wpglobus-options.php:170
+#: includes/admin/class-wpglobus-customize-options.php:1089
+#: includes/options/class-wpglobus-options.php:170
 msgid "Thank you for installing WPGlobus!"
 msgstr "Terima kasih telah menginstal WPGlobus!"
 
-#: includes/admin/class-wpglobus-customize-options.php:1093 includes/options/class-wpglobus-options.php:175
+#: includes/admin/class-wpglobus-customize-options.php:1093
+#: includes/options/class-wpglobus-options.php:175
 msgid "Read About WPGlobus"
 msgstr "Baca Tentang WPGlobus"
 
-#: includes/admin/class-wpglobus-customize-options.php:1096 includes/options/class-wpglobus-options.php:178
-msgid "Click the <strong>[Languages]</strong> tab at the left to setup the options."
-msgstr "Klik tab <strong>[Bahasa]</ strong> di sebelah kiri untuk menyiapkan opsi."
+#: includes/admin/class-wpglobus-customize-options.php:1096
+#: includes/options/class-wpglobus-options.php:178
+msgid ""
+"Click the <strong>[Languages]</strong> tab at the left to setup the options."
+msgstr ""
+"Klik tab <strong>[Bahasa]</ strong> di sebelah kiri untuk menyiapkan opsi."
 
-#: includes/admin/class-wpglobus-customize-options.php:1101 includes/options/class-wpglobus-options.php:183
-msgid "Should you have any questions or comments, please do not hesitate to contact us."
-msgstr "Jika Anda memiliki pertanyaan atau komentar, jangan ragu untuk menghubungi kami."
+#: includes/admin/class-wpglobus-customize-options.php:1101
+#: includes/options/class-wpglobus-options.php:183
+msgid ""
+"Should you have any questions or comments, please do not hesitate to contact "
+"us."
+msgstr ""
+"Jika Anda memiliki pertanyaan atau komentar, jangan ragu untuk menghubungi "
+"kami."
 
-#: includes/admin/class-wpglobus-customize-options.php:1105 includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69 includes/options/class-wpglobus-options.php:187
+#: includes/admin/class-wpglobus-customize-options.php:1105
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69
+#: includes/options/class-wpglobus-options.php:187
 msgid "Sincerely Yours,"
 msgstr "Hormat kami,"
 
-#: includes/admin/class-wpglobus-customize-options.php:1107 includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:70 includes/options/class-wpglobus-options.php:189 includes/options/wpglobus-options-header.php:29
+#: includes/admin/class-wpglobus-customize-options.php:1107
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:70
+#: includes/options/class-wpglobus-options.php:189
+#: includes/options/wpglobus-options-header.php:29
 msgid "The WPGlobus Team"
 msgstr "Tim WPGlobus"
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1126 includes/options/class-wpglobus-options.php:214
-msgid "We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
-msgstr "Kami akan suka melihat Anda pergi. Jika ada yang salah, jangan uninstall WPGlobus belum. Silakan %1$sberbicara dengan kami%2$s dan kami akan membantu!"
+#: includes/admin/class-wpglobus-customize-options.php:1126
+#: includes/options/class-wpglobus-options.php:214
+msgid ""
+"We would hate to see you go. If something goes wrong, do not uninstall "
+"WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
+msgstr ""
+"Kami akan suka melihat Anda pergi. Jika ada yang salah, jangan uninstall "
+"WPGlobus belum. Silakan %1$sberbicara dengan kami%2$s dan kami akan membantu!"
 
-#: includes/admin/class-wpglobus-customize-options.php:1133 includes/options/class-wpglobus-options.php:221
-msgid "Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language."
-msgstr "Perlu diketahui bahwa jika Anda menonaktifkan WPGlobus, situs Anda akan menampilkan semua bahasa bersama-sama, bercampur. Anda harus menghapus semua terjemahan, menjaga hanya satu bahasa."
+#: includes/admin/class-wpglobus-customize-options.php:1133
+#: includes/options/class-wpglobus-options.php:221
+msgid ""
+"Please note that if you deactivate WPGlobus, your site will show all the "
+"languages together, mixed up. You will need to remove all translations, "
+"keeping only one language."
+msgstr ""
+"Perlu diketahui bahwa jika Anda menonaktifkan WPGlobus, situs Anda akan "
+"menampilkan semua bahasa bersama-sama, bercampur. Anda harus menghapus semua "
+"terjemahan, menjaga hanya satu bahasa."
 
 #. translators: %s: link to the Clean-up Tool
-#: includes/admin/class-wpglobus-customize-options.php:1137 includes/options/class-wpglobus-options.php:225
-msgid "If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus."
-msgstr "Jika hanya ada beberapa tempat, Anda harus mengeditnya secara manual. Untuk secara otomatis menghapus semua terjemahan sekaligus, Anda dapat menggunakan %s . PERINGATAN: Operasi pembersihan tidak dapat diubah, jadi gunakan hanya jika Anda benar-benar menghapus WPGlobus."
+#: includes/admin/class-wpglobus-customize-options.php:1137
+#: includes/options/class-wpglobus-options.php:225
+msgid ""
+"If there are just a few places, you should edit them manually. To "
+"automatically remove all translations at once, you can use the %s. WARNING: "
+"The clean-up operation is irreversible, so use it only if you need to "
+"completely uninstall WPGlobus."
+msgstr ""
+"Jika hanya ada beberapa tempat, Anda harus mengeditnya secara manual. Untuk "
+"secara otomatis menghapus semua terjemahan sekaligus, Anda dapat menggunakan "
+"%s . PERINGATAN: Operasi pembersihan tidak dapat diubah, jadi gunakan hanya "
+"jika Anda benar-benar menghapus WPGlobus."
 
 #. translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1139 includes/options/class-wpglobus-options.php:227
+#: includes/admin/class-wpglobus-customize-options.php:1139
+#: includes/options/class-wpglobus-options.php:227
 msgid "%1$sClean-up Tool%2$s"
 msgstr "%1$sAlat Pembersih%2$s"
 
@@ -383,11 +574,13 @@ msgstr "Maaf, WPGlobus customizer tidak mendukung tema saat ini %s ."
 msgid "Please use %1$sWPGlobus options page%2$s instead."
 msgstr "Silakan gunakan %1$sWPGlobus halaman pilihan%2$s sebagai gantinya."
 
-#: includes/admin/class-wpglobus-dashboard-news.php:43 includes/admin/class-wpglobus-dashboard-news.php:59
+#: includes/admin/class-wpglobus-dashboard-news.php:43
+#: includes/admin/class-wpglobus-dashboard-news.php:59
 msgid "WPGlobus News"
 msgstr "Berita WPGlobus"
 
-#: includes/admin/class-wpglobus-language-edit.php:146 includes/admin/class-wpglobus-language-edit.php:151
+#: includes/admin/class-wpglobus-language-edit.php:146
+#: includes/admin/class-wpglobus-language-edit.php:151
 msgid "Options updated"
 msgstr "Pilihan diperbarui"
 
@@ -432,8 +625,10 @@ msgid "Language Code"
 msgstr "Kode bahasa"
 
 #: includes/admin/class-wpglobus-language-edit.php:337
-msgid "2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
-msgstr "2-Surat Kode bahasa ISO untuk Bahasa yang ingin Anda masukkan. (Contoh: en)"
+msgid ""
+"2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
+msgstr ""
+"2-Surat Kode bahasa ISO untuk Bahasa yang ingin Anda masukkan. (Contoh: en)"
 
 #: includes/admin/class-wpglobus-language-edit.php:341
 msgid "Language flag"
@@ -444,7 +639,8 @@ msgid "Name"
 msgstr "Nama"
 
 #: includes/admin/class-wpglobus-language-edit.php:360
-msgid "The name of the language in its native alphabet. (Examples: English, Русский)"
+msgid ""
+"The name of the language in its native alphabet. (Examples: English, Русский)"
 msgstr "Nama bahasa dalam alfabet aslinya. (Contoh: English, Русский)"
 
 #: includes/admin/class-wpglobus-language-edit.php:365
@@ -455,7 +651,8 @@ msgstr "Nama dalam bahasa Inggris"
 msgid "The name of the language in English"
 msgstr "Nama bahasa dalam bahasa Inggris"
 
-#: includes/admin/class-wpglobus-language-edit.php:374 includes/options/fields/table/table-languages.php:83
+#: includes/admin/class-wpglobus-language-edit.php:374
+#: includes/options/fields/table/table-languages.php:83
 msgid "Locale"
 msgstr "Lokal"
 
@@ -463,11 +660,13 @@ msgstr "Lokal"
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 msgstr "PHP / WordPress Lokal bahasa. (Contoh: en_US, id_ID)"
 
-#: includes/admin/class-wpglobus-language-edit.php:392 includes/admin/class-wpglobus-language-edit.php:406
+#: includes/admin/class-wpglobus-language-edit.php:392
+#: includes/admin/class-wpglobus-language-edit.php:406
 msgid "Delete Language"
 msgstr "Hapus Bahasa"
 
-#: includes/admin/class-wpglobus-language-edit.php:398 updater/class-wpglobus-updater-admin.php:89
+#: includes/admin/class-wpglobus-language-edit.php:398
+#: updater/class-wpglobus-updater-admin.php:89
 msgid "Save Changes"
 msgstr "Simpan perubahan"
 
@@ -487,7 +686,8 @@ msgstr "Dapatkan itu sekarang!"
 msgid "Premium add-on"
 msgstr "Premium add-on"
 
-#: includes/admin/class-wpglobus-plugin-install.php:309 includes/options/fields/table/table-languages.php:396
+#: includes/admin/class-wpglobus-plugin-install.php:309
+#: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
 msgstr "Dipasang"
 
@@ -508,7 +708,8 @@ msgid "Our Support Team is here to answer your questions or concerns."
 msgstr "Tim Dukungan kami di sini untuk menjawab pertanyaan Anda atau masalah."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:58
-msgid "Click the blue round button at the bottom right to open the Contact Form."
+msgid ""
+"Click the blue round button at the bottom right to open the Contact Form."
 msgstr "Klik tombol bulat biru di kanan bawah untuk membuka Formulir Kontak."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:59
@@ -516,24 +717,38 @@ msgid "Type in your name, email, subject and the detailed message."
 msgstr "Ketik nama, email, subjek dan pesan terperinci Anda."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:60
-msgid "If you can make a screenshot demonstrating the problem, please attach it."
-msgstr "Jika Anda bisa membuat tangkapan layar yang menunjukkan masalahnya, lampirkan."
+msgid ""
+"If you can make a screenshot demonstrating the problem, please attach it."
+msgstr ""
+"Jika Anda bisa membuat tangkapan layar yang menunjukkan masalahnya, "
+"lampirkan."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
-msgid "Please note: we will receive some debug data together with your request. See the \"Technical Information\" table for the details."
-msgstr "Harap dicatat: kami akan menerima beberapa data debug bersama dengan permintaan Anda. Lihat tabel \\ \"Informasi Teknis \" untuk rinciannya."
+msgid ""
+"Please note: we will receive some debug data together with your request. See "
+"the \"Technical Information\" table for the details."
+msgstr ""
+"Harap dicatat: kami akan menerima beberapa data debug bersama dengan "
+"permintaan Anda. Lihat tabel \\ \"Informasi Teknis \" untuk rinciannya."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
 msgid "To help us serve you better:"
 msgstr "Untuk membantu kami melayani Anda lebih baik:"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:65
-msgid "Please check if the problem persists if you switch to a standard WordPress theme."
-msgstr "Harap periksa apakah masalah berlanjut jika Anda beralih ke tema standar WordPress."
+msgid ""
+"Please check if the problem persists if you switch to a standard WordPress "
+"theme."
+msgstr ""
+"Harap periksa apakah masalah berlanjut jika Anda beralih ke tema standar "
+"WordPress."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
-msgid "Try deactivating other plugins to see if any of them conflicts with WPGlobus."
-msgstr "Cobalah menonaktifkan plugin lain untuk melihat apakah salah satu dari mereka bertentangan dengan WPGlobus."
+msgid ""
+"Try deactivating other plugins to see if any of them conflicts with WPGlobus."
+msgstr ""
+"Cobalah menonaktifkan plugin lain untuk melihat apakah salah satu dari "
+"mereka bertentangan dengan WPGlobus."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
 msgid "Technical Information"
@@ -579,23 +794,27 @@ msgstr "Dropdown dengan bendera"
 msgid "Selector type"
 msgstr "Jenis pemilih"
 
-#: includes/class-wpglobus.php:1047
+#: includes/class-wpglobus.php:1056
 msgid "You cannot disable the main language."
 msgstr "Anda tidak dapat menonaktifkan bahasa utama."
 
-#: includes/class-wpglobus.php:1249
+#: includes/class-wpglobus.php:1258
 msgid "*) Available after the menu is saved."
 msgstr "*) Tersedia setelah menu tersebut disimpan."
 
-#: includes/class-wpglobus.php:3212
+#: includes/class-wpglobus.php:3224
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Anda harus mengaktifkan Permalinks Cukup menggunakan WPGlobus."
 
-#: includes/class-wpglobus.php:3214
-msgid "Please go to Settings > Permalinks > Common Settings and choose a non-default option."
-msgstr "Silakan pergi ke Settings > Permalinks > Umum Pengaturan dan memilih pilihan non-default."
+#: includes/class-wpglobus.php:3226
+msgid ""
+"Please go to Settings > Permalinks > Common Settings and choose a non-"
+"default option."
+msgstr ""
+"Silakan pergi ke Settings > Permalinks > Umum Pengaturan dan memilih pilihan "
+"non-default."
 
-#: includes/class-wpglobus.php:3355
+#: includes/class-wpglobus.php:3367
 msgid "Add"
 msgstr "Menambahkan"
 
@@ -605,17 +824,27 @@ msgstr "PERINGATAN: versi lama ReduxFramework aktif!"
 
 #. translators: ReduxFramework - %1$s version, %2$s folder where installed
 #: includes/options/class-wpglobus-options.php:147
-msgid "The currently active ReduxFramework (version %1$s) was loaded from the %2$s folder."
+msgid ""
+"The currently active ReduxFramework (version %1$s) was loaded from the %2$s "
+"folder."
 msgstr "The ReduxFramework sedang aktif (versi %1$s) dimuat dari %2$s folder."
 
 #. translators: %1$s placeholder for the link to ReduxFramework plugin
 #: includes/options/class-wpglobus-options.php:155
-msgid "We recommend you to install the most recent version of the ReduxFramework plugin: %1$s."
-msgstr "Kami menyarankan Anda untuk menginstal versi terbaru dari plugin ReduxFramework: %1$s."
+msgid ""
+"We recommend you to install the most recent version of the ReduxFramework "
+"plugin: %1$s."
+msgstr ""
+"Kami menyarankan Anda untuk menginstal versi terbaru dari plugin "
+"ReduxFramework: %1$s."
 
 #: includes/options/class-wpglobus-options.php:180
-msgid "Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc."
-msgstr "Gunakan <strong>[Bahasa Table]</strong> untuk menambahkan bahasa baru atau mengedit bahasa atribut: nama, kode, ikon bendera, dll"
+msgid ""
+"Use the <strong>[Languages Table]</strong> section to add a new language or "
+"to edit the language attributes: name, code, flag icon, etc."
+msgstr ""
+"Gunakan <strong>[Bahasa Table]</strong> untuk menambahkan bahasa baru atau "
+"mengedit bahasa atribut: nama, kode, ikon bendera, dll"
 
 #: includes/options/class-wpglobus-options.php:208
 msgid "Deactivating / Uninstalling"
@@ -635,12 +864,18 @@ msgstr "Pilih menu navigasi"
 
 #. translators: %s placeholder for the icon (actual picture)
 #: includes/options/class-wpglobus-options.php:309
-msgid "Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons."
-msgstr "Tempatkan <strong>bahasa utama</strong> dari situs Anda di bagian atas daftar dengan menyeret %s ikon."
+msgid ""
+"Place the <strong>main language</strong> of your site at the top of the list "
+"by dragging the %s icons."
+msgstr ""
+"Tempatkan <strong>bahasa utama</strong> dari situs Anda di bagian atas "
+"daftar dengan menyeret %s ikon."
 
 #: includes/options/class-wpglobus-options.php:310
 msgid "<strong>Uncheck</strong> the languages you do not plan to use."
-msgstr "<strong>Hapus tanda centang</strong> bahasa Anda tidak berencana untuk menggunakan."
+msgstr ""
+"<strong>Hapus tanda centang</strong> bahasa Anda tidak berencana untuk "
+"menggunakan."
 
 #: includes/options/class-wpglobus-options.php:311
 msgid "<strong>Add</strong> more languages using the section below."
@@ -651,14 +886,19 @@ msgid "When done, click the [Save Changes] button."
 msgstr "Setelah selesai, klik [Save Changes] tombol."
 
 #: includes/options/class-wpglobus-options.php:317
-msgid "Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm."
-msgstr "Pilih bahasa yang Anda ingin mengaktifkan. Situs Tekan tombol [Save Changes] tombol untuk konfirmasi."
+msgid ""
+"Choose a language you would like to enable. <br>Press the [Save Changes] "
+"button to confirm."
+msgstr ""
+"Pilih bahasa yang Anda ingin mengaktifkan. Situs Tekan tombol [Save Changes] "
+"tombol untuk konfirmasi."
 
 #: includes/options/class-wpglobus-options.php:331
 msgid "Instructions:"
 msgstr "Petunjuk:"
 
-#: includes/options/class-wpglobus-options.php:332 includes/options/class-wpglobus-options.php:443
+#: includes/options/class-wpglobus-options.php:332
+#: includes/options/class-wpglobus-options.php:443
 msgid "NOTE: you cannot remove the main language."
 msgstr "CATATAN: Anda tidak dapat menghapus bahasa utama."
 
@@ -780,7 +1020,9 @@ msgstr "Kami mengandalkan dukungan Anda!"
 
 #: includes/options/wpglobus-options-header.php:23
 msgid "Please consider a small donation to support the future development."
-msgstr "Silakan mempertimbangkan sumbangan kecil untuk mendukung pembangunan masa depan."
+msgstr ""
+"Silakan mempertimbangkan sumbangan kecil untuk mendukung pembangunan masa "
+"depan."
 
 #: includes/options/wpglobus-options-header.php:27
 msgid "Thank you!"
@@ -791,8 +1033,12 @@ msgid "WPGlobus Plus!"
 msgstr "WPGlobus Plus!"
 
 #: includes/options/wpglobus-options-header.php:51
-msgid "Advanced features and tweaks: URL translation, multilingual SEO analysis, separate publishing and more! "
-msgstr "fitur canggih dan tweak: URL translation, analisis SEO multibahasa, penerbitan terpisah dan banyak lagi!"
+msgid ""
+"Advanced features and tweaks: URL translation, multilingual SEO analysis, "
+"separate publishing and more! "
+msgstr ""
+"fitur canggih dan tweak: URL translation, analisis SEO multibahasa, "
+"penerbitan terpisah dan banyak lagi!"
 
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
@@ -811,7 +1057,8 @@ msgstr "Tidak memiliki lisensi? Silakan pembelian satu di %s"
 msgid "Deactivates License so it can be used on another site."
 msgstr "Menonaktifkan Lisensi sehingga dapat digunakan di situs lain."
 
-#: updater/class-wpglobus-updater-admin.php:143 updater/class-wpglobus-updater.php:181
+#: updater/class-wpglobus-updater-admin.php:143
+#: updater/class-wpglobus-updater.php:181
 msgid "License Activation"
 msgstr "Aktivasi lisensi"
 
@@ -827,7 +1074,8 @@ msgstr "Kunci lisensi"
 msgid "License email"
 msgstr "Email lisensi"
 
-#: updater/class-wpglobus-updater-admin.php:179 updater/class-wpglobus-updater.php:182
+#: updater/class-wpglobus-updater-admin.php:179
+#: updater/class-wpglobus-updater.php:182
 msgid "License Deactivation"
 msgstr "Deaktivasi Lisensi"
 
@@ -855,13 +1103,18 @@ msgstr "Lisensi diaktifkan "
 msgid "Connection failed to the License Key API server. Try again later."
 msgstr "Sambungan gagal ke server API Kunci Lisensi. Coba lagi nanti."
 
-#: updater/class-wpglobus-updater-admin.php:391 updater/class-wpglobus-updater-requests.php:72
+#: updater/class-wpglobus-updater-admin.php:391
+#: updater/class-wpglobus-updater-requests.php:72
 msgid "The License Key / Email pair is empty or invalid."
 msgstr "Kunci Lisensi / pasangan Email kosong atau tidak sah."
 
 #: updater/class-wpglobus-updater-admin.php:421
-msgid "The license could not be deactivated. Use the License Deactivation tab to manually deactivate the license before activating a new license."
-msgstr "Lisensi tidak dapat dinonaktifkan. Gunakan tab Deaktivasi Lisensi untuk secara manual menonaktifkan lisensi sebelum mengaktifkan lisensi baru."
+msgid ""
+"The license could not be deactivated. Use the License Deactivation tab to "
+"manually deactivate the license before activating a new license."
+msgstr ""
+"Lisensi tidak dapat dinonaktifkan. Gunakan tab Deaktivasi Lisensi untuk "
+"secara manual menonaktifkan lisensi sebelum mengaktifkan lisensi baru."
 
 #: updater/class-wpglobus-updater-admin.php:439
 msgid "Please select the checkbox to confirm your intention."
@@ -876,8 +1129,11 @@ msgid "License deactivated. "
 msgstr "Lisensi dinonaktifkan. "
 
 #: updater/class-wpglobus-updater-check.php:338
-msgid "To check status, purchase or reactivate license, please go to your account."
-msgstr "Untuk memeriksa status, membeli atau mengaktifkan kembali lisensi, masuklah ke akun Anda."
+msgid ""
+"To check status, purchase or reactivate license, please go to your account."
+msgstr ""
+"Untuk memeriksa status, membeli atau mengaktifkan kembali lisensi, masuklah "
+"ke akun Anda."
 
 #: updater/class-wpglobus-updater-check.php:340
 msgid "License expired."
@@ -920,12 +1176,18 @@ msgid "No download permission. License / subscription probably expiring."
 msgstr "Tidak ada izin unduhan. Lisensi / langganan mungkin kedaluwarsa."
 
 #: updater/class-wpglobus-updater-check.php:350
-msgid "License not activated. Go to the settings page and enter the license key and email to activate."
-msgstr "Lisensi tidak diaktifkan Buka halaman pengaturan dan masukkan kunci lisensi dan email untuk mengaktifkan."
+msgid ""
+"License not activated. Go to the settings page and enter the license key and "
+"email to activate."
+msgstr ""
+"Lisensi tidak diaktifkan Buka halaman pengaturan dan masukkan kunci lisensi "
+"dan email untuk mengaktifkan."
 
 #: updater/class-wpglobus-updater-check.php:351
-msgid "Subscription changed. Please enter new license key in the settings page."
-msgstr "Berlangganan berubah Harap masukkan kunci lisensi baru di halaman pengaturan."
+msgid ""
+"Subscription changed. Please enter new license key in the settings page."
+msgstr ""
+"Berlangganan berubah Harap masukkan kunci lisensi baru di halaman pengaturan."
 
 #: updater/class-wpglobus-updater-requests.php:159
 msgid "Licensing server connection error."
@@ -949,16 +1211,24 @@ msgstr "Klik di sini untuk memasukkan kunci lisensi dan dapatkan pembaruannya."
 
 #. translators: %s - URL placeholder. Do not translate WP_... constants.
 #: updater/class-wpglobus-updater.php:471
-msgid "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to WP_ACCESSIBLE_HOSTS."
-msgstr "WP_HTTP_BLOCK_EXTERNAL disetel ke true. Untuk menerima pembaruan, tambahkan %s ke WP_ACCESSIBLE_HOSTS."
+msgid ""
+"WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s to "
+"WP_ACCESSIBLE_HOSTS."
+msgstr ""
+"WP_HTTP_BLOCK_EXTERNAL disetel ke true. Untuk menerima pembaruan, tambahkan "
+"%s ke WP_ACCESSIBLE_HOSTS."
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/WPGlobus/WPGlobus"
 msgstr "https://github.com/WPGlobus/WPGlobus"
 
 #. Description of the plugin/theme
-msgid "A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!"
-msgstr "Plugin Globalisasi / Multilingual WordPress. Pos, halaman, menu, widget dan bahkan bidang kustom - dalam banyak bahasa!"
+msgid ""
+"A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
+"widgets and even custom fields - in multiple languages!"
+msgstr ""
+"Plugin Globalisasi / Multilingual WordPress. Pos, halaman, menu, widget dan "
+"bahkan bidang kustom - dalam banyak bahasa!"
 
 #. Author URI of the plugin/theme
 msgid "https://wpglobus.com/"
