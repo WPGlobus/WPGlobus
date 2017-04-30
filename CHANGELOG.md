@@ -2,6 +2,14 @@
 
 ## Changelog ##
 
+### 1.7.11 ###
+
+ADDED: 
+	* Core: added array of enabled languages to js.
+	* Core: enqueue wpglobus.js script for admin.
+	* Customizer: improvement.
+	* MailChimp: added support for MailChimp for WordPress since 4.1.1
+	
 ### 1.7.10 ###
 
 * ADDED:
