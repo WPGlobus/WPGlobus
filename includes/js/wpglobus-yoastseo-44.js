@@ -346,8 +346,7 @@ S				 */
 				/**
 				 * The container window isn't the correct size, rectify this.
 				 */
-				$( '#TB_window' ).css( 'height', 235 );
-				$( '#TB_window' ).css( 'width', 680 );
+				$('#TB_window').css({'width':'680px','height':'350px'});
 			},
 			qtip: function() {
 				/** @see jQuery( '.yoast_help' ).qtip() */

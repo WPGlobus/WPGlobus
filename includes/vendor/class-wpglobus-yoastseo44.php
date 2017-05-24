@@ -346,7 +346,7 @@ class WPGlobus_YoastSEO {
 				 * Version of file yoast seo must be latest.
 				 */
 				/** @noinspection PhpInternalEntityUsedInspection */
-				$src_version 			= version_compare( WPSEO_VERSION, '3.9', '>=' ) ? '41' : $src_version;
+				$src_version 			= version_compare( WPSEO_VERSION, '3.9', '>=' ) ? '44' : $src_version;
 				/** @noinspection PhpInternalEntityUsedInspection */
 				$src_version_premium	= version_compare( WPSEO_VERSION, '3.9', '>=' ) ? '39' : $src_version_premium;
 			}
@@ -462,7 +462,15 @@ class WPGlobus_YoastSEO {
 			#from Yoast 4.4
 			'wpseo-focuskeyword-section',
 			'wpseo-pageanalysis-section',
-			'pageanalysis'
+			'pageanalysis',
+		);
+
+		/**
+		 * Array of special IDs for yoast premium.
+		 * @since 1.7.12
+		 */
+		$ids_premium_special = array(
+			'_yst_is_cornerstone'
 		);
 
 		$names = array(
@@ -492,14 +500,15 @@ class WPGlobus_YoastSEO {
 
 		?>
 
-		<div id="wpglobus-wpseo-tabs" style="width:90%; float:right; margin-top:-190px;">    <?php
+		<div id="wpglobus-wpseo-tabs" style="width:90%;float:right;margin-top:-190px;">    <?php
 			/**
 			 * Use span with attributes 'data' for send to js script ids, names elements for which needs to be set new ids, names with language code.
 			 */ ?>
 			<span id="wpglobus-wpseo-attr"
-			      data-ids="<?php echo esc_attr( implode( ',', $ids ) ); ?>"
-			      data-names="<?php echo esc_attr( implode( ',', $names ) ); ?>"
-			      data-qtip="<?php echo esc_attr( implode( ',', $qtip ) ); ?>">
+			      data-ids="<?php echo esc_attr( implode( ',', $ids ) ); ?>" 
+			      data-names="<?php echo esc_attr( implode( ',', $names ) ); ?>" 
+			      data-qtip="<?php echo esc_attr( implode( ',', $qtip ) ); ?>" 
+			      data-ids-premium-special="<?php echo esc_attr( implode( ',', $ids_premium_special ) ); ?>">
 			</span>
 			<ul class="wpglobus-wpseo-tabs-list">    <?php
 				$order = 0;

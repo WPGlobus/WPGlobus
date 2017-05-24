@@ -145,7 +145,15 @@ var WPGlobusDialogApp;
 			dialogTabs: '#wpglobus-dialog-tabs',
 			dialogTitle: '',
 			customData: null,
-			callback: function(){}
+			callback: function(){},
+			dialogOptions: {
+				title: '',
+				placeholder: '',
+				formFooter: '',
+				beforeOpen: function(){},
+				close: function(){},
+			},	
+			dialog: {}
 		},
 		form : undefined,
 		element : undefined,
@@ -173,6 +181,7 @@ var WPGlobusDialogApp;
 		startButtonClass : 'wpglobus_dialog_start wpglobus_dialog_icon',
 		clicks: 0,
 		init: function(args) {
+			api.option.dialog = api.option.dialogOptions;
 			api.option = $.extend(api.option, args);
 			$(api.option.dialogTabs).tabs();
 			api.dialogTitle = api.option.dialogTitle;
@@ -191,11 +200,12 @@ var WPGlobusDialogApp;
 		addElement: function(elem) {
 			var option = {
 				id: null,
-				dialogTitle: '',
 				style: '',
 				styleTextareaWrapper: '',
 				sbTitle: '',
-				onChangeClass: ''
+				onChangeClass: '',
+				dialogTitle: '',
+				dialog: api.option.dialogOptions
 			}
 			if ( 'string' == typeof(elem) ) {
 				option.id = elem;
@@ -264,7 +274,7 @@ var WPGlobusDialogApp;
 			clone.attr( 'id', 'wpglobus-'+api.clone_id ).attr( 'name', 'wpglobus-'+name );
 
 			/**
-			 * add WPGlobus translatable class
+			 * Add WPGlobus translatable class.
 			 */
 			clone.addClass( api.trClass );
 
@@ -298,7 +308,15 @@ var WPGlobusDialogApp;
 					clone.attr( 'style', style + ';' + option.style );
 				}
 			}
-
+	
+			/**
+			 * Add dialog options.
+			 * @since 1.7.12
+			 */
+			if ( '' != option.dialog ) {  
+				clone.attr( 'data-dialog', JSON.stringify(option.dialog) );
+			}
+			
 			sb = sb.replace(/{{clone_id}}/g, api.clone_id);
 			if ( 'id' == api.element_by ) {
 				sb = sb.replace(/{{id}}/g, api.clone_id);
@@ -405,7 +423,7 @@ var WPGlobusDialogApp;
                     click: function(){api.dialog.dialog('close');}
                 }
 			],
-			open: function() {
+			open: function( event, ui ) {
 				var title = api.dialogTitle;
 				if ( typeof api.attrs.maxlength !== 'undefined' ) {
 					$('.wpglobus_dialog_textarea').attr('maxlength', api.attrs.maxlength);
@@ -414,6 +432,11 @@ var WPGlobusDialogApp;
 				$('.wpglobus-dialog .ui-dialog-title').text(title);
 			},
 			close: function() {
+				/**
+				 * Close callback.
+				 */	
+				api.runCallback( api.option.dialog.close );
+				
 				api.form[0].reset();
 				//allFields.removeClass( "ui-state-error" );
 			}
@@ -505,10 +528,62 @@ var WPGlobusDialogApp;
 					api.value = WPGlobusCore.getTranslations(api.source);
 				}
 			}
+
+			/**
+			 * Get dialog form options.
+			 */
+			api.option.dialog = $.extend( {}, api.option.dialogOptions, $(api.wpglobus_id).data('dialog') );
+			
+			if ( '' != api.option.dialog.title ) {
+				api.dialogTitle = api.option.dialog.title;
+			}
+
 			$.each(api.value, function(l,e){
-				$('#wpglobus-dialog-'+l).val(e);
+				var $d = $('#wpglobus-dialog-'+l);
+				/**
+				 * Value.
+				 */
+				$d.val(e);
+				
+				/**
+				 * Placeholder.
+				 */				
+				$d.attr( 
+					'placeholder', 
+					WPGlobusCore.TextFilter( api.option.dialog.placeholder, l, 'RETURN_IN_DEFAULT_LANGUAGE' )
+				);				
 			});
+			
+			/**
+			 * Dialog form footer.
+			 */				
+			$('#wpglobus-dialog-form-footer').html(api.option.dialog.formFooter);
+	
+			/**
+			 * Before open callback.
+			 */		
+			api.runCallback( api.option.dialog.beforeOpen );
+			
 			api.dialog.dialog('open');
+		},
+		runCallback: function(callback) {
+
+			if ( 'object' === typeof callback ) {
+				var k  = Object.keys(callback)[0];
+				var fn = callback[Object.keys(callback)[0]]
+				if ( 'window' === k ) {
+					if ( 'function' === typeof window[fn] ) {
+						window[fn]( callback[Object.keys(callback)[1]] );
+					}
+				} else if ( 'function' === typeof window[k][fn] ) {
+					window[k][fn]( callback[Object.keys(callback)[1]] );
+				}
+			} else if ( 'string' === typeof callback ) {
+				if ( 'function' === typeof window[callback] ) {
+					window[callback]();
+				}
+			}			
+	
 		}
 	};
 

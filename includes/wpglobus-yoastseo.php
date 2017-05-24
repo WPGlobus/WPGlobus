@@ -14,7 +14,7 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 		 * Support Yoast SEO Premium version 3.9 or later.
 		 * Version of file must be latest.
 		 */
-		require_once 'vendor/class-wpglobus-yoastseo41.php';
+		require_once 'vendor/class-wpglobus-yoastseo44.php';
 		WPGlobus_YoastSEO::controller();
 	} else {
 		require_once 'vendor/class-wpglobus-yoastseo38.php';
