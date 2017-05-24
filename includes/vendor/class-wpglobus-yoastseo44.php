@@ -346,7 +346,7 @@ class WPGlobus_YoastSEO {
 				 * Version of file yoast seo must be latest.
 				 */
 				/** @noinspection PhpInternalEntityUsedInspection */
-				$src_version 			= version_compare( WPSEO_VERSION, '3.9', '>=' ) ? '41' : $src_version;
+				$src_version 			= version_compare( WPSEO_VERSION, '3.9', '>=' ) ? '44' : $src_version;
 				/** @noinspection PhpInternalEntityUsedInspection */
 				$src_version_premium	= version_compare( WPSEO_VERSION, '3.9', '>=' ) ? '39' : $src_version_premium;
 			}
