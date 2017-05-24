@@ -56,6 +56,7 @@ jQuery(document).ready( function ($) {
 				observerSelector: '',
 				observerStart	: false,
 				scoreClass		: 'bad ok good na 100',
+				idsSpecial		: '',
 				init: function() {
 					/**
 					 * @see wpglobus-admin-47.js to run.
@@ -64,14 +65,44 @@ jQuery(document).ready( function ($) {
 					api.keywordButton 	= $('#wpseo-meta-section-content li.wpseo-tab-add-keyword').detach();
 					api.bindKeywordRemoveOrig();
 					api.initFocuskeywords();
-
+					
+					/**
+					 * @since 1.7.12
+					 */
+					api.idsSpecial 	= WPGlobusYoastSeo.attrs.data('ids-premium-special');
+					api.idsSpecial 	= api.idsSpecial.split(',');
+					
 					setTimeout( function(){
-						api.setCSS();
 						api.setScores;
+						api.setCSS();
+						api.setSpecial();
 					}, 2000 );
 					
 					api.observerInterval = setInterval( api.addObserver, 2000 );
 					
+				},
+				setSpecial: function() {
+					if ( $('.wpseo-cornerstone-checkbox').length > 1 ) {
+						/**
+						 * Special case for #_yst_is_cornerstone.
+						 */
+						$.each( WPGlobusCoreData.enabled_languages, function(i,lang){
+							if ( lang == api.dLang ) {
+								/**
+								 * Rename original '_yst_is_cornerstone'.
+								 */
+								var special = $('#wpseofocuskeyword input#_yst_is_cornerstone');
+								$(special).attr('id', '_yst_is_cornerstone_origin').attr('name', '_yst_is_cornerstone_origin');
+								$(special).addClass('wpseo-cornerstone-checkbox_origin');
+								return true;
+							}
+							/**
+							 * Remove '_yst_is_cornerstone' for extra language.
+							 */
+							$('#wpseo-tab-'+lang+' .wpseo-cornerstone-checkbox').remove();
+							$('#wpseo-tab-'+lang+' label[for="_yst_is_cornerstone"]').remove();
+						});
+					}
 				},
 				setCSS: function() {
 					$('#wpglobus-wpseo-tabs').css({'margin-top':'0'});
