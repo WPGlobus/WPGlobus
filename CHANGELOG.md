@@ -2,6 +2,14 @@
 
 ## Changelog ##
 
+### 1.7.12 ###
+
+* ADDED: 
+	* Core: added options to WPGlobusDialogApp.
+	* Yoast SEO: Minor css improvements.
+* FIXED:
+	* Yoast SEO: the fix for '_yst_is_cornerstone' element.
+
 ### 1.7.11 ###
 
 * ADDED: 
