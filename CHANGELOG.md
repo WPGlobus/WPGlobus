@@ -12,7 +12,7 @@
 
 ### 1.7.11 ###
 
-* ADDED: 
+* ADDED:
 	* Core: added array of enabled languages to JS.
 	* Core: enqueue `wpglobus.js` script for admin.
 	* Customizer: improvements.
