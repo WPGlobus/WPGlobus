@@ -4,11 +4,11 @@
 
 ### 1.7.12 ###
 
-* ADDED: 
-	* Core: added options to WPGlobusDialogApp.
-	* Yoast SEO: Minor css improvements.
 * FIXED:
-	* Yoast SEO: the fix for '_yst_is_cornerstone' element.
+	* Yoast SEO: the fix for the `_yst_is_cornerstone` element.
+* ADDED:
+	* Core: added options to the `WPGlobusDialogApp`.
+	* Yoast SEO: Minor CSS improvements.
 
 ### 1.7.11 ###
 

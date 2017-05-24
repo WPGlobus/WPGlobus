@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: localization, multilanguage, multilingual, language switcher, translation
 Requires at least: 4.6
-Tested up to: 4.7.4
+Tested up to: 4.7.5
 Stable tag: trunk
 License: GPL-3.0
 License URI: http://www.gnu.org/licenses/gpl.txt
@@ -39,7 +39,7 @@ The WPGlobus plugin provides you with the general multilingual tools.
 
 * **Manually translate** posts, pages, categories, tags, menus, and widgets; If you need help with translation, please check out our [Professional Translation Services](https://wpglobus.com/translator/) directory;
 * **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
-* **Enable multilingual SEO features** of Yoast SEO and All in One SEO plugins;
+* **Enable multilingual SEO features** of "Yoast SEO" (FREE) and "All in One SEO" plugins;
 * **Switch the languages at the front-end** using: a drop-down menu extension and/or a customizable widget with various display options;
 * **Switch the Administrator interface language** using a top bar selector;
 
@@ -64,7 +64,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 For more details, please check out the descriptions of each paid add-on on our website:
 
 * [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
-* [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
+* [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more. Note: Yoast SEO Premium is not officially supported by WPGlobus.
 * [WPGlobus Language Widgets](https://wpglobus.com/product/wpglobus-language-widget/): Multilingual widget logic: show and hide widget depending on the current language.
 * [WPGlobus Header Images](https://wpglobus.com/product/wpglobus-header-images/): Display different header images per language. Show images depending on the settings in the Customizer.
 * [WPGlobus Menu Visibility](https://wpglobus.com/product/wpglobus-menu-visibility/): Show or hide menu items depending on the current language.
@@ -94,7 +94,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * WPBakery Visual Composer (with our free add-on),
 * Whistles,
 * Widget Logic,
-* Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis. **Note:** the "Pro" version of Yoast SEO has some compatibility issues and we currently do not support it.
+* Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis. **Note:** the "Premium" version of Yoast SEO has some compatibility issues and we currently do not support it.
 
 Some 3rd party plugins are supported with our [premium add-ons](https://wpglobus.com/shop/):
 
@@ -123,6 +123,8 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 
 = Admin interface translations: =
 
+**NOTE:** Please do not translate anything using the WordPress interface! Join our translation team on Transifex or translate the POT file using POEdit. Thank you!
+
 * `de_DE` by [Tobias Hopp](http://www.tobiashopp.info/) ~ [WPGlobus ist ein Paket von mehreren WordPress-Plugins, die Möglichkeiten zur Übersetzung von Wordpress-Installationen bieten.](https://de.wordpress.org/plugins/wpglobus/)
 * `es_ES` by [FX Bénard](http://wp-translations.org/) and [Patricia Casado](http://mascositas.com/) ~ [WPGlobus es una familia de plugins de WordPress que ayudan en la traducción de blogs de WordPress.](https://es.wordpress.org/plugins/wpglobus/)
 * `fr_FR` by [FX Bénard](http://wp-translations.org/) ~ [WPGlobus fait partie des extensions WordPress qui vous aident à rendre les blogs et les sites WordPress multilingues.](https://fr.wordpress.org/plugins/wpglobus/)
@@ -133,8 +135,6 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 * `sv_SE` by [Elger Lindgren](http://bilddigital.se/) ~ [WPGlobus är en familj av WordPress-tillägg som hjälper dig att göra flerspråkiga Wordpressbloggar och webbplatser.](https://sv.wordpress.org/plugins/wpglobus/)
 * `tr_TR` by [Borahan Conkeroglu](https://twitter.com/boracon68) ~ [WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir.](https://tr.wordpress.org/plugins/wpglobus/)
 * `uk` by [Pavlo Novak](https://plus.google.com/u/0/114797816817149043222) ~ ["WPGlobus - це колекція ВордПресс плагінів для створення багатомовних сайтів."](https://uk.wordpress.org/plugins/wpglobus/)
-
-**Please help us translate WPGlobus into your language!**
 
 == Installation ==
 
@@ -185,6 +185,14 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 
 == Changelog ==
 
+= 1.7.12 =
+
+* FIXED:
+	* Yoast SEO: the fix for the `_yst_is_cornerstone` element.
+* ADDED:
+	* Core: added options to the `WPGlobusDialogApp`.
+	* Yoast SEO: Minor CSS improvements.
+
 = 1.7.11 =
 
 * ADDED:
@@ -220,39 +228,6 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 * FIXED:
 	* Customizer: Handle the case of "orphaned" sections with no panel (have "undefined" type).
 
-= 1.7.8.1 =
-
-* FIXED:
-	* Core: JS code improvements.
-
-= 1.7.8 =
-
-* FIXED:
-	* Core: Initialize WordCounter for the WPGlobus TinyMCE editors only.
-	* Media: Fixed PHP Notice "Undefined index while loading image in WYSIWYG editor".
-	* Core: General code cleanup and testing with the latest versions of PHP and WordPress.
-
-= 1.7.7.2 =
-
-* FIXED:
-	* Yoast SEO: hide original section content for v.4.1.
-
-= 1.7.7.1 =
-
-* FIXED:
-	* Core: Casting $terms to (array) causes syntax error in PHP 5.3 and older.
-
-= 1.7.7 =
-
-* FIXED:
-	* Core: `WPGlobus_Utils::is_function_in_backtrace` is deprecated in favor of more advanced `WPGlobus_WP::is_function_in_backtrace` method.
-	* Code: a PHP 7.1 warning cleared.
-	* Customizer: JS code optimization and cleanup.
-* ADDED:
-	* `WPGlobus News` admin dashboard widget.
-	* Customizer: exclude some incompatible themes. Example: "Experon".
-	* Yoast SEO: version 4.1 support.
-
 = Earlier versions =
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
@@ -264,7 +239,7 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 == Demo Sites ==
 
 * [WPGlobus.com](https://wpglobus.com/):
-	* Bilingual site using a variety of posts, pages, custom post types, forms, a slider and a WooCommerce store with Subscription and API extensions.
+	* Bilingual site using a variety of posts, pages, custom post types, forms, and a WooCommerce store with Subscription and API extensions.
 * [Site in a subfolder](http://demo-subfolder.wpglobus.com/):
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](http://demo-store.wpglobus.com/):
