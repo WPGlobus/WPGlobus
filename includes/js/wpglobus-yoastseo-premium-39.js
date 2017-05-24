@@ -65,9 +65,16 @@ jQuery(document).ready( function ($) {
 					api.bindKeywordRemoveOrig();
 					api.initFocuskeywords();
 
-					setTimeout( api.setScores, 2000 );
+					setTimeout( function(){
+						api.setCSS();
+						api.setScores;
+					}, 2000 );
+					
 					api.observerInterval = setInterval( api.addObserver, 2000 );
-
+					
+				},
+				setCSS: function() {
+					$('#wpglobus-wpseo-tabs').css({'margin-top':'0'});
 				},
 				setScores: function() {
 					if ( WPGlobusYoastSeo.wpseoTab != WPGlobusCoreData.default_language ) {
