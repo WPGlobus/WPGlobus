@@ -158,6 +158,20 @@ class WPGlobus_Admin_HelpDesk {
 		$user  = wp_get_current_user();
 		$theme = wp_get_theme();
 
+		/**
+		 * @see php_uname can be disabled in php.ini for security reasons
+		 * disable_functions=php_uname
+		 * @since 1.7.13
+		 */
+		$OS = 'Unknown';
+		if ( function_exists( 'php_uname' ) ) {
+			$OS = implode( ' ', array(
+				php_uname( 's' ),
+				php_uname( 'r' ),
+				php_uname( 'v' ),
+			) );
+		}
+
 		$data = array(
 			'name'              => WPGlobus_Filters::filter__text( $user->display_name ),
 			'email'             => $user->user_email,
@@ -165,12 +179,7 @@ class WPGlobus_Admin_HelpDesk {
 			'site_url'          => site_url(),
 			'REMOTE_ADDR'       => $_SERVER['REMOTE_ADDR'],
 			'SERVER_PORT'       => $_SERVER['SERVER_PORT'],
-			'OS'                => implode( ' ', array(
-					php_uname( 's' ),
-					php_uname( 'r' ),
-					php_uname( 'v' ),
-				)
-			),
+			'OS'                => $OS,
 			'PHP_SAPI'          => PHP_SAPI,
 			'PHP_VERSION'       => PHP_VERSION,
 			'loaded_extensions' => implode( ', ', get_loaded_extensions() ),
