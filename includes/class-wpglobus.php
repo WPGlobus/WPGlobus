@@ -1385,13 +1385,22 @@ class WPGlobus {
 
 				$page_action = 'wpglobus_clean';
 
-			} else if ( in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) ) ) {
+			} else if ( 
+					( 'admin.php' == $pagenow && !empty($_GET['page']) && self::PAGE_WPGLOBUS_ADMIN_CENTRAL == $_GET['page']  ) 
+					|| in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) ) 
+				) {
 
 				/**
 				 * @since 1.6.6
 				 */
 				$page_action = 'wpglobusAdminCentral';
-
+				/**
+				 * @since 1.8
+				 */				
+				$data['pagenow'] 	= $pagenow;
+				$data['page'] 	 	= self::PAGE_WPGLOBUS_ADMIN_CENTRAL;
+				$data['pageAction'] = $page_action;
+				
 			} else {
 
 				$page_action = $page;
