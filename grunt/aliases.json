@@ -20,7 +20,7 @@
     "less",
     "cssmin",
     "uglify",
-    "compress:dist",
+    "exec:zip",
     "writefile:latest_zip"
   ]
 }

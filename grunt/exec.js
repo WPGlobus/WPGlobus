@@ -20,5 +20,8 @@ module.exports = {
     },
     cpzu: { // Install dependencies with Composer
         cmd: "php <%= cfg.path.composer %> update -q --no-autoloader"
+    },
+    zip: {
+        cmd: "zip -FSrT <%= cfg.path.dist %>/<%= package.name %>-<%= package.version %>.zip . -x@zip_exclude.txt"
     }
 };
