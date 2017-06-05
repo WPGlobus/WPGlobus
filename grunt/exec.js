@@ -22,6 +22,6 @@ module.exports = {
         cmd: "php <%= cfg.path.composer %> update -q --no-autoloader"
     },
     zip: {
-        cmd: "zip -FSrT <%= cfg.path.dist %>/<%= package.name %>-<%= package.version %>.zip . -x@zip_exclude.txt"
+        cmd: "cd .. && zip -FSrT <%= cfg.path.dist %>/<%= package.name %>-<%= package.version %>.zip <%= package.name %> -x@<%= package.name %>/zip_exclude.txt"
     }
 };
