@@ -106,6 +106,11 @@ jQuery(document).ready( function ($) {
 				},
 				setCSS: function() {
 					$('#wpglobus-wpseo-tabs').css({'margin-top':'0'});
+					/**
+					 * @since WPGlobus 1.8
+					 */
+					$('.wpglobus-wpseosnippet').css({'margin-bottom':'2em'});
+					$('.wpglobus-wpseofocuskeyword').css({'margin-bottom':'2em'});
 				},
 				setScores: function() {
 					if ( WPGlobusYoastSeo.wpseoTab != WPGlobusCoreData.default_language ) {
