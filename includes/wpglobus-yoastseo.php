@@ -12,10 +12,18 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 	if ( version_compare( WPSEO_VERSION, '3.9', '>=' ) ) {
 		/**
 		 * Support Yoast SEO Premium version 3.9 or later.
-		 * Version of file must be latest.
 		 */
-		require_once 'vendor/class-wpglobus-yoastseo44.php';
-		WPGlobus_YoastSEO::controller();
+		if ( version_compare( WPGLOBUS_VERSION, '1.8', '>=' ) ) {
+			/**
+			 * Version of file must be latest.
+			 */
+			$ver = '48'; 
+			require_once "vendor/class-wpglobus-yoastseo$ver.php";
+			WPGlobus_YoastSEO::controller($ver);
+		} else {
+			require_once 'vendor/class-wpglobus-yoastseo44.php';
+			WPGlobus_YoastSEO::controller();
+		}
 	} else {
 		require_once 'vendor/class-wpglobus-yoastseo38.php';
 		WPGlobus_YoastSEO::controller();		
@@ -32,9 +40,15 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 				$version = '40';
 				$version = version_compare( WPSEO_VERSION, '4.1', '>=' ) ? '41' : $version;
 				$version = version_compare( WPSEO_VERSION, '4.4', '>=' ) ? '44' : $version;
+				$version = version_compare( WPSEO_VERSION, '4.8', '>=' ) ? '48' : $version;
 				
 				require_once "vendor/class-wpglobus-yoastseo$version.php";
-				WPGlobus_YoastSEO::controller();
+				
+				if ( version_compare( WPSEO_VERSION, '4.8', '>=' ) ) {
+					WPGlobus_YoastSEO::controller($version);
+				} else {
+					WPGlobus_YoastSEO::controller();
+				}
 				
 			} else {
 				
