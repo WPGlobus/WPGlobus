@@ -1,9 +1,9 @@
 === WPGlobus - Multilingual Everything! ===
 Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
-Tags: localization, multilanguage, multilingual, language switcher, translation
+Tags: WPGlobus, localization, multilanguage, multilingual, translation
 Requires at least: 4.6
-Tested up to: 4.7.5
+Tested up to: 4.8.0
 Stable tag: trunk
 License: GPL-3.0
 License URI: http://www.gnu.org/licenses/gpl.txt
