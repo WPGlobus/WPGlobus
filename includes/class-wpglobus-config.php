@@ -160,10 +160,10 @@ class WPGlobus_Config {
 	 * @var string
 	 */
 	public $css_editor = '';
-	
+
 	/**
 	 * @var string
-	 */	
+	 */
 	public $js_editor = '';
 
 	/**
@@ -186,6 +186,12 @@ class WPGlobus_Config {
 	 * @var array
 	 */
 	public $extended_options = array();
+
+	/**
+	 * @var array
+	 * @since 1.8.0
+	 */
+	public $browser_redirect;
 
 	/**
 	 * Constructor
@@ -578,12 +584,12 @@ class WPGlobus_Config {
 		/**
 		 * Get custom JS.
 		 * @since 1.7.6
-		 */		
+		 */
 		if ( isset( $wpglobus_option['js_editor'] ) ) {
 			$this->js_editor = $wpglobus_option['js_editor'];
 			unset( $wpglobus_option['js_editor'] );
-		}		
-		
+		}
+
 		/**
 		 * Get flag files without path
 		 */
@@ -635,12 +641,12 @@ class WPGlobus_Config {
 		 * @since 1.2.3
 		 */
 		$this->extended_options = $wpglobus_option;
-		
+
 		/**
 		 * Option browser_redirect.
-		 * @since 1.8
+		 * @since 1.8.0
 		 */
-		if ( isset($wpglobus_option['browser_redirect']) ) {
+		if ( isset( $wpglobus_option['browser_redirect'] ) ) {
 			$this->browser_redirect = $wpglobus_option['browser_redirect'];
 			unset( $wpglobus_option['browser_redirect'] );
 		}
