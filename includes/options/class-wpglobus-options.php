@@ -491,7 +491,7 @@ class WPGlobus_Options {
 		$this->sections[] = array(
 			'wpglobus_id' => 'post_types',
 			'title'       => __( 'Post types', 'wpglobus' ),
-			'icon'        => 'el-icon-th-list',
+			'icon'        => 'el-icon-check',
 			'fields'      => $fields
 		);
 
@@ -503,32 +503,36 @@ class WPGlobus_Options {
 			array(
 				'id'     => 'description',
 				'type'   => 'wpglobus_info',
-				'title'  => __( 'Check option if you need to set the user\'s language based on the browser language at first visit.', 'wpglobus' ),
+				'title'  => __( 'When a user comes to the site for the first time, try to find the best matching language version of the page.', 'wpglobus' ),
 				'style'  => 'info',
 				'notice' => false
 			),
 		);
-		
-		$default = array();	
+
+		$default = array();
 		$options = array(
-			'redirect_by_language' =>  __( 'Enable', 'wpglobus' )
+			'redirect_by_language' =>  __( 'Preferred language set in the browser', 'wpglobus' ),
+//			'redirect_by_ip' =>  __( 'IP address', 'wpglobus' ),
 		);
-		
+
 		$fields[] = array(
 			'id'       => 'browser_redirect',
 			'type'     => 'wpglobus_checkbox',
 			'compiler' => false,
 			'default'  => $default,
+			'title'    => __( 'Choose the language automatically, based on:', 'wpglobus' ),
+			'subtitle' => '',
+			'desc'     => '',
 			'options'  => $options
 		);
-		
+
 		$this->sections[] = array(
 			'wpglobus_id' => 'redirect',
 			'title'       => __( 'Redirect', 'wpglobus' ),
-			'icon'        => 'el-icon-repeat',
+			'icon'        => 'el-icon-forward',
 			'fields'      => $fields
 		);
-		
+
 		/**
 		 * Filter the array of sections.
 		 *

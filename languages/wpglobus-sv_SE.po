@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-04-30 16:42:14+00:00\n"
-"PO-Revision-Date: 2017-03-11 13:50+0000\n"
+"POT-Creation-Date: 2017-06-07 21:29:45+00:00\n"
+"PO-Revision-Date: 2017-06-07 21:15+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/sv_SE/)\n"
@@ -736,19 +736,19 @@ msgstr "Rulllistmeny med flaggor"
 msgid "Selector type"
 msgstr "Väljartyp"
 
-#: includes/class-wpglobus.php:1056
+#: includes/class-wpglobus.php:1062
 msgid "You cannot disable the main language."
 msgstr "Du kan inte stänga av huvudspråk."
 
-#: includes/class-wpglobus.php:1258
+#: includes/class-wpglobus.php:1264
 msgid "*) Available after the menu is saved."
 msgstr "*) Tillgängligt när menyn sparats."
 
-#: includes/class-wpglobus.php:3224
+#: includes/class-wpglobus.php:3239
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Du måste aktivera Vackra Permalänkar för att använda WPGlobus."
 
-#: includes/class-wpglobus.php:3226
+#: includes/class-wpglobus.php:3241
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -756,7 +756,7 @@ msgstr ""
 "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-"
 "standardalternativet."
 
-#: includes/class-wpglobus.php:3367
+#: includes/class-wpglobus.php:3382
 msgid "Add"
 msgstr "Lägg till"
 
@@ -874,35 +874,53 @@ msgstr "Språktabell"
 msgid "Use this table to add, edit or delete languages."
 msgstr "Använd denna tabell för att lägga till, redigera eller ta bort språk."
 
-#: includes/options/class-wpglobus-options.php:640
+#: includes/options/class-wpglobus-options.php:506
+msgid ""
+"When a user comes to the site for the first time, try to find the best "
+"matching language version of the page."
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:514
+msgid "Preferred language set in the browser"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:523
+msgid "Choose the language automatically, based on:"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:531
+msgid "Redirect"
+msgstr "Omdirigera"
+
+#: includes/options/class-wpglobus-options.php:678
 msgid "Read the Quick Start Guide"
 msgstr "Läs Snabbstartsguiden"
 
-#: includes/options/class-wpglobus-options.php:645
+#: includes/options/class-wpglobus-options.php:683
 msgid "Visit our website"
 msgstr "Besök vår hemsida"
 
-#: includes/options/class-wpglobus-options.php:650
+#: includes/options/class-wpglobus-options.php:688
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr "Köp WPGlobus eget WooCommerce-tillägg"
 
-#: includes/options/class-wpglobus-options.php:655
+#: includes/options/class-wpglobus-options.php:693
 msgid "Collaborate on GitHub"
 msgstr "Samarbeta på GitHub"
 
-#: includes/options/class-wpglobus-options.php:661
+#: includes/options/class-wpglobus-options.php:699
 msgid "Like us on Facebook"
 msgstr "Gilla oss på Facebook."
 
-#: includes/options/class-wpglobus-options.php:666
+#: includes/options/class-wpglobus-options.php:704
 msgid "Follow us on Twitter"
 msgstr "Följ oss på Twitter"
 
-#: includes/options/class-wpglobus-options.php:671
+#: includes/options/class-wpglobus-options.php:709
 msgid "Find us on LinkedIn"
 msgstr "Hitta oss på LinkedIn"
 
-#: includes/options/class-wpglobus-options.php:676
+#: includes/options/class-wpglobus-options.php:714
 msgid "Circle us on Google+"
 msgstr "Ringa in oss på Google+"
 

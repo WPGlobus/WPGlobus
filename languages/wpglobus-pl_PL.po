@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-04-30 16:42:14+00:00\n"
-"PO-Revision-Date: 2017-03-11 13:50+0000\n"
+"POT-Creation-Date: 2017-06-07 21:29:45+00:00\n"
+"PO-Revision-Date: 2017-06-07 21:15+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/pl_PL/)\n"
@@ -630,7 +630,7 @@ msgstr "Wróć do ustawień WPGlobus'a"
 
 #: includes/admin/class-wpglobus-plugin-install.php:306
 msgid "Current Version"
-msgstr ""
+msgstr "Obecna wersja"
 
 #: includes/admin/class-wpglobus-plugin-install.php:307
 msgid "Get it now!"
@@ -740,20 +740,20 @@ msgstr "Rozwijana lista z flagami"
 msgid "Selector type"
 msgstr "Sposób wyboru"
 
-#: includes/class-wpglobus.php:1056
+#: includes/class-wpglobus.php:1062
 msgid "You cannot disable the main language."
 msgstr "Nie możesz wyłączyć głównego języka."
 
-#: includes/class-wpglobus.php:1258
+#: includes/class-wpglobus.php:1264
 msgid "*) Available after the menu is saved."
 msgstr "*) Dostępne po zapisaniu menu."
 
-#: includes/class-wpglobus.php:3224
+#: includes/class-wpglobus.php:3239
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Aby korzystać z WPGlobus'a, musisz ustawić przyjazne bezpośrednie odnośniki."
 
-#: includes/class-wpglobus.php:3226
+#: includes/class-wpglobus.php:3241
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -761,7 +761,7 @@ msgstr ""
 "Proszę przejść do Ustawienia > Bezpośrednie odnośniki > Popularne ustawienia "
 "i wybrać opcję Nazwa wpisu."
 
-#: includes/class-wpglobus.php:3367
+#: includes/class-wpglobus.php:3382
 msgid "Add"
 msgstr "Dodaj"
 
@@ -880,35 +880,53 @@ msgstr "Tabela języków"
 msgid "Use this table to add, edit or delete languages."
 msgstr "Użyj tej tabeli, aby dodać, zedytować lub usunąć języki."
 
-#: includes/options/class-wpglobus-options.php:640
+#: includes/options/class-wpglobus-options.php:506
+msgid ""
+"When a user comes to the site for the first time, try to find the best "
+"matching language version of the page."
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:514
+msgid "Preferred language set in the browser"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:523
+msgid "Choose the language automatically, based on:"
+msgstr ""
+
+#: includes/options/class-wpglobus-options.php:531
+msgid "Redirect"
+msgstr "Przekierowany"
+
+#: includes/options/class-wpglobus-options.php:678
 msgid "Read the Quick Start Guide"
 msgstr "Przeczytaj instrukcję szybkiego startu"
 
-#: includes/options/class-wpglobus-options.php:645
+#: includes/options/class-wpglobus-options.php:683
 msgid "Visit our website"
 msgstr "Odwiedź naszą stronę internetową"
 
-#: includes/options/class-wpglobus-options.php:650
+#: includes/options/class-wpglobus-options.php:688
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr "Zakup rozszerzenie WPGlobus'a dla WooCommerce"
 
-#: includes/options/class-wpglobus-options.php:655
+#: includes/options/class-wpglobus-options.php:693
 msgid "Collaborate on GitHub"
 msgstr "Współpracuj na GitHub'ie"
 
-#: includes/options/class-wpglobus-options.php:661
+#: includes/options/class-wpglobus-options.php:699
 msgid "Like us on Facebook"
 msgstr "Polub nas na Facebook'u"
 
-#: includes/options/class-wpglobus-options.php:666
+#: includes/options/class-wpglobus-options.php:704
 msgid "Follow us on Twitter"
 msgstr "Śledź nas na Twitterze"
 
-#: includes/options/class-wpglobus-options.php:671
+#: includes/options/class-wpglobus-options.php:709
 msgid "Find us on LinkedIn"
 msgstr "Znajdź nas na LinkedIn"
 
-#: includes/options/class-wpglobus-options.php:676
+#: includes/options/class-wpglobus-options.php:714
 msgid "Circle us on Google+"
 msgstr "Dodaj nas do kręgów na Google+"
 

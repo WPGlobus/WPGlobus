@@ -1,13 +1,13 @@
 # Copyright (C) 2017 WPGlobus
 # This file is distributed under the GPL-3.0.
 # Translators:
-# Gregory Karpinsky <gregory@tiv.net>, 2015-2016
+# Gregory Karpinsky <gregory@tiv.net>, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-04-30 16:42:14+00:00\n"
-"PO-Revision-Date: 2017-03-11 14:37+0000\n"
+"POT-Creation-Date: 2017-06-07 21:29:45+00:00\n"
+"PO-Revision-Date: 2017-06-07 21:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -794,21 +794,21 @@ msgstr "Выпадающее меню с флагами"
 msgid "Selector type"
 msgstr "Способ выбора языка"
 
-#: includes/class-wpglobus.php:1056
+#: includes/class-wpglobus.php:1062
 msgid "You cannot disable the main language."
 msgstr "Нельзя отключить основной язык."
 
-#: includes/class-wpglobus.php:1258
+#: includes/class-wpglobus.php:1264
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:3224
+#: includes/class-wpglobus.php:3239
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:3226
+#: includes/class-wpglobus.php:3241
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -816,7 +816,7 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:3367
+#: includes/class-wpglobus.php:3382
 msgid "Add"
 msgstr "Добавить"
 
@@ -936,35 +936,55 @@ msgid "Use this table to add, edit or delete languages."
 msgstr ""
 "Используйте эту таблицу, чтобы добавлять, удалять или редактировать языки."
 
-#: includes/options/class-wpglobus-options.php:640
+#: includes/options/class-wpglobus-options.php:506
+msgid ""
+"When a user comes to the site for the first time, try to find the best "
+"matching language version of the page."
+msgstr ""
+"Когда посетитель попадает на сайт в первый раз, попытаться выбрать язык "
+"страницы автоматически."
+
+#: includes/options/class-wpglobus-options.php:514
+msgid "Preferred language set in the browser"
+msgstr "Язык, указанный как предпочтительный в настройках браузера"
+
+#: includes/options/class-wpglobus-options.php:523
+msgid "Choose the language automatically, based on:"
+msgstr "Выбрать язык автоматически, основываясь на:"
+
+#: includes/options/class-wpglobus-options.php:531
+msgid "Redirect"
+msgstr "Перенаправление"
+
+#: includes/options/class-wpglobus-options.php:678
 msgid "Read the Quick Start Guide"
 msgstr "Прочтите краткое руководство"
 
-#: includes/options/class-wpglobus-options.php:645
+#: includes/options/class-wpglobus-options.php:683
 msgid "Visit our website"
 msgstr "Посетите наш веб-сайт"
 
-#: includes/options/class-wpglobus-options.php:650
+#: includes/options/class-wpglobus-options.php:688
 msgid "Buy WooCommerce WPGlobus extension"
 msgstr "Купите расширение WooCommerce WPGlobus"
 
-#: includes/options/class-wpglobus-options.php:655
+#: includes/options/class-wpglobus-options.php:693
 msgid "Collaborate on GitHub"
 msgstr "Совместная работа на GitHub"
 
-#: includes/options/class-wpglobus-options.php:661
+#: includes/options/class-wpglobus-options.php:699
 msgid "Like us on Facebook"
 msgstr "WPGlobus на Facebook"
 
-#: includes/options/class-wpglobus-options.php:666
+#: includes/options/class-wpglobus-options.php:704
 msgid "Follow us on Twitter"
 msgstr "WPGlobus в Твиттере"
 
-#: includes/options/class-wpglobus-options.php:671
+#: includes/options/class-wpglobus-options.php:709
 msgid "Find us on LinkedIn"
 msgstr "WPGlobus на LinkedIn"
 
-#: includes/options/class-wpglobus-options.php:676
+#: includes/options/class-wpglobus-options.php:714
 msgid "Circle us on Google+"
 msgstr "WPGlobus на Google+"
 
