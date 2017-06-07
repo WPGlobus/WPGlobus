@@ -1,7 +1,7 @@
 <?php
 /**
  * @package WPGlobus
- * @since   1.8
+ * @since   1.8.0
  */
 
 /**
@@ -13,7 +13,7 @@ class WPGlobus_Redirect {
 	 * Constructor.
 	 */
 	public static function construct() {
-		add_action( 'init', array( __CLASS__, 'on__init' ), 1 );
+		add_action( 'wp', array( __CLASS__, 'on__init' ), 1 );
 	}
 
 	/**
@@ -58,6 +58,15 @@ class WPGlobus_Redirect {
 			// No such language.
 			return;
 		}
+
+		if ( class_exists( 'WPGlobusPlus_Publish' ) && is_singular() ) {
+			$post_status = get_post_meta( get_the_ID(), WPGlobusPlus_Publish::LANGUAGE_POST_STATUS, true );
+			if ( isset( $post_status[ $language ] ) && 'draft' === $post_status[ $language ] ) {
+				// This language is set to draft by WPGlobus Plus.
+				return;
+			}
+		}
+
 
 		// Convert the current URL to the requested language and redirect.
 		$current_url = WPGlobus_Utils::current_url();
