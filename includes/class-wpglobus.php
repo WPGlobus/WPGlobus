@@ -22,6 +22,12 @@ class WPGlobus {
 	public static $minimalReduxFramework_version = '3.2.9.4';
 
 	/**
+	 * Cookie name.
+	 * @since 1.8
+	 */	
+	const _COOKIE = 'wpglobus-language';
+	
+	/**
 	 * Options page slug needed to get access to settings page
 	 */
 	const OPTIONS_PAGE_SLUG = 'wpglobus_options';
@@ -827,8 +833,8 @@ class WPGlobus {
 			 * Get language code from cookie. Example: redirect $_SERVER[REQUEST_URI] = /wp-comments-post.php
 			 */
 			if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp-comments-post.php' ) ) {
-				if ( ! empty( $_COOKIE['wpglobus-language'] ) ) {
-					$location = WPGlobus_Utils::localize_url( $location, $_COOKIE['wpglobus-language'] );
+				if ( ! empty( $_COOKIE[self::_COOKIE] ) ) {
+					$location = WPGlobus_Utils::localize_url( $location, $_COOKIE[self::_COOKIE] );
 				}
 			}
 		}

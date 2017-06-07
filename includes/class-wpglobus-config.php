@@ -635,7 +635,15 @@ class WPGlobus_Config {
 		 * @since 1.2.3
 		 */
 		$this->extended_options = $wpglobus_option;
-
+		
+		/**
+		 * Option browser_redirect.
+		 * @since 1.8
+		 */
+		if ( isset($wpglobus_option['browser_redirect']) ) {
+			$this->browser_redirect = $wpglobus_option['browser_redirect'];
+			unset( $wpglobus_option['browser_redirect'] );
+		}
 	}
 
 } //class

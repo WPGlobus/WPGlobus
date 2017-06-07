@@ -496,6 +496,40 @@ class WPGlobus_Options {
 		);
 
 		/**
+		 * SECTION: Browser redirect.
+		 * @since 1.8
+		 */
+		$fields = array(
+			array(
+				'id'     => 'description',
+				'type'   => 'wpglobus_info',
+				'title'  => __( 'Check option if you need to set the user\'s language based on the browser language at first visit.', 'wpglobus' ),
+				'style'  => 'info',
+				'notice' => false
+			),
+		);
+		
+		$default = array();	
+		$options = array(
+			'redirect_by_language' =>  __( 'Enable', 'wpglobus' )
+		);
+		
+		$fields[] = array(
+			'id'       => 'browser_redirect',
+			'type'     => 'wpglobus_checkbox',
+			'compiler' => false,
+			'default'  => $default,
+			'options'  => $options
+		);
+		
+		$this->sections[] = array(
+			'wpglobus_id' => 'redirect',
+			'title'       => __( 'Redirect', 'wpglobus' ),
+			'icon'        => 'el-icon-repeat',
+			'fields'      => $fields
+		);
+		
+		/**
 		 * Filter the array of sections.
 		 *
 		 * @since 1.0.11

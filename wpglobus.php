@@ -177,5 +177,11 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 * @since 1.7.9
 	 */
 	$GLOBALS['redux_notice_check'] = 1;
+else:
+
+	if ( isset( WPGlobus::Config()->browser_redirect['redirect_by_language'] ) && WPGlobus::Config()->browser_redirect['redirect_by_language'] ) {
+		require_once dirname( __FILE__ ) . '/includes/class-wpglobus-redirect.php';
+		WPGlobus_Redirect::construct();
+	}
 
 endif;
