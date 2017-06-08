@@ -62,25 +62,38 @@ class WPGlobus_Redirect {
 		// Convert the current URL to the requested language and redirect.
 		$current_url = WPGlobus_Utils::current_url();
 		$redirect_to = WPGlobus_Utils::localize_url( $current_url, $language );
-	
+
 		/**
-		 * Filter URL redirect to.
-		 * Returning a false value prevents redirect.
+		 * Filter the `$redirect_to` URL.
+		 * Returning a false value cancels redirect.
 		 *
 		 * @param string $redirect_to	URL redirect to.
-		 * @param string $current_url	Current url.
-		 * @param string $language		Language redirect to.				
+		 * @param string $language		Language redirect to.
 		 *
-		 * @return string|boolean
-		 */	
-		$redirect_to = apply_filters( 'wpglobus_first_visit_redirect', $redirect_to, $current_url, $language );
-		
+		 * @return string|false
+		 */
+		$redirect_to = apply_filters( 'wpglobus_first_visit_redirect', $redirect_to, $language );
+
 		if ( ! $redirect_to ) {
 			return;
 		}
-		
+
+		/**
+		 * @todo This is for the old versions of WPGlobus Plus that do not have the above filter.
+		 */
+		if ( class_exists( 'WPGlobusPlus_Publish' )
+		     && version_compare( WPGLOBUS_PLUS_VERSION, '1.1.31', '<' )
+		     && is_singular()
+		) {
+			$post_status = get_post_meta( get_the_ID(), WPGlobusPlus_Publish::LANGUAGE_POST_STATUS, true );
+			if ( isset( $post_status[ $language ] ) && 'draft' === $post_status[ $language ] ) {
+				// This language is set to draft by WPGlobus Plus.
+				return;
+			}
+		}
+
 		wp_redirect( $redirect_to );
 		exit;
-		
+
 	}
 }
