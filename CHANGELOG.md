@@ -2,6 +2,17 @@
 
 ## Changelog ##
 
+### 1.8.0 ###
+
+* COMPATIBILITY:
+	* WordPress 4.8
+	* Yoast SEO 4.9
+* FIXED:
+	* Yoast SEO: CSS fix for the Premium version.
+	* Core: No warning on the Helpdesk page if `php_uname` is disabled for security reason.
+* ADDED:
+	* Automatic redirect to the visitor's preferred language (first visit only). To turn it on, go to `WPGlobus -> Redirect` in the Admin menu.
+
 ### 1.7.12 ###
 
 * FIXED:

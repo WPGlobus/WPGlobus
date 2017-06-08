@@ -3,9 +3,9 @@
 # WPGlobus - Multilingual Everything! #
 **Contributors:** [tivnetinc](https://profiles.wordpress.org/tivnetinc), [alexgff](https://profiles.wordpress.org/alexgff), [tivnet](https://profiles.wordpress.org/tivnet)  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
-**Tags:** localization, multilanguage, multilingual, language switcher, translation  
+**Tags:** WPGlobus, localization, multilanguage, multilingual, translation  
 **Requires at least:** 4.6  
-**Tested up to:** 4.7.5  
+**Tested up to:** 4.8.0  
 **Stable tag:** trunk  
 **License:** GPL-3.0  
 **License URI:** http://www.gnu.org/licenses/gpl.txt  
@@ -158,6 +158,10 @@ Then please read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 * [The Quick Start Guide](https://wpglobus.com/quick-start/)
 * [Before contacting Support...](https://wpglobus.com/before-contacting-wpglobus-support/)
 
+### When I switch language, I am getting 404 on all pages ###
+
+Please go to the `Admin - Settings - Permalinks` page. Make sure that the `Common Settings` is not set to "Plain" and then press the `Save Changes` button. It should help.
+
 ### From the WPGlobus.com FAQ Archives: ###
 
 * [Do you support PHP 5.x? PHP 7?](https://wpglobus.com/faq/support-php-5-2/)
@@ -197,11 +201,22 @@ Then please read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 
 ## Upgrade Notice ##
 
-### 1.7.0 ###
+### 1.8.0 ###
 
-WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* updating WordPress.
+WPGlobus 1.8.x is required for WordPress 4.8.
 
 ## Changelog ##
+
+### 1.8.0 ###
+
+* COMPATIBILITY:
+	* WordPress 4.8
+	* Yoast SEO 4.9
+* FIXED:
+	* Yoast SEO: CSS fix for the Premium version.
+	* Core: No warning on the Helpdesk page if `php_uname` is disabled for security reason.
+* ADDED:
+	* Automatic redirect to the visitor's preferred language (first visit only). To turn it on, go to `WPGlobus -> Redirect` in the Admin menu.
 
 ### 1.7.12 ###
 
@@ -219,32 +234,6 @@ WPGlobus 1.7.x is required for WordPress 4.7. Please upgrade WPGlobus *before* u
 	* Customizer: improvements.
 	* MailChimp: added support for `MailChimp for WordPress` 4.1.1.
 	* Admin: Added Bahasa Indonesia (`id_ID`) translation.
-
-### 1.7.10 ###
-
-* ADDED:
-	* Core: Basque Country flag image.
-* FIXED:
-	* Customizer: JS code improvements, optimization and cleanup.
-
-### 1.7.9 ###
-
-* ADDED:
-	* Customizer: Changesets handling.
-	* Yoast SEO: version 4.4 support.
-* FIXED:
-	* Customizer: Don't convert if a link was set in the default language only.
-	* Yoast SEO: correct setting of keywords in versions 4.1 and 4.2.
-	* Yoast SEO: correct switching Readability/Keyword tabs for extra languages in versions 4.1 and 4.2.
-* INTERNAL:
-	* Method to work with the strings having multiple language blocks. Required for WooCommerce 2.7.
-	* Code clean-up and performance improvements.
-	* Redux "Newsflash" admin notification is hidden.
-
-### 1.7.8.2 ###
-
-* FIXED:
-	* Customizer: Handle the case of "orphaned" sections with no panel (have "undefined" type).
 
 ### Earlier versions ###
 
