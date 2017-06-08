@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-06-07 21:29:45+00:00\n"
-"PO-Revision-Date: 2017-06-07 21:25+0000\n"
+"POT-Creation-Date: 2017-06-08 14:02:40+00:00\n"
+"PO-Revision-Date: 2017-06-08 14:00+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -950,7 +950,7 @@ msgstr "Язык, указанный как предпочтительный в 
 
 #: includes/options/class-wpglobus-options.php:523
 msgid "Choose the language automatically, based on:"
-msgstr "Выбрать язык автоматически, основываясь на:"
+msgstr "Выбрать язык автоматически, учитывая:"
 
 #: includes/options/class-wpglobus-options.php:531
 msgid "Redirect"
