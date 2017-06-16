@@ -149,13 +149,12 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	WPGlobus_Admin_HelpDesk::construct();
 
 	/**
-	 * Admin page central.
+	 * WPGlobus Admin.
 	 *
-	 * @since 1.6.6
+	 * @since 1.8.1
 	 */
-	require_once dirname( __FILE__ ) . '/includes/admin/central/class-wpglobus-admin-central.php';
-	WPGlobus_Admin_Central::construct();
-
+	require_once dirname( __FILE__ ) . '/includes/admin/wpglobus-admin.php';
+	
 	/**
 	 * WPGlobus News admin dashboard widget.
 	 * @since 1.7.7
