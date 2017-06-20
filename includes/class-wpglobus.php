@@ -1270,12 +1270,15 @@ class WPGlobus {
 				$data['taxonomy']  = empty( $_GET['taxonomy'] ) ? false : $_GET['taxonomy'];
 				$data['tag_id']    = empty( $_GET['tag_ID'] ) ? false : $_GET['tag_ID'];
 				$data['has_items'] = true;
+				$data['multilingualSlug'] = array();
 
 				if ( $data['tag_id'] ) {
 					/**
 					 * For example url: edit-tags.php?action=edit&taxonomy=category&tag_ID=4&post_type=post
 					 */
 					$page_action = 'taxonomy-edit';
+					$data['multilingualSlug']['title'] = 
+						'<div class=""><a href="http://wpglobus.com/product/wpglobus-plus/#taxonomies" target="_blank">' . __('Need multilingual slug?', 'wpglobus') . '</a></div>';
 				} else {
 					/**
 					 * For example url: edit-tags.php?taxonomy=category
@@ -1425,7 +1428,7 @@ class WPGlobus {
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ),
+				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-tooltip' ),
 				WPGLOBUS_VERSION,
 				true
 			);
@@ -3154,10 +3157,12 @@ class WPGlobus {
 								          id="wpglobus-dialog-<?php echo $language; ?>"
 								          class="wpglobus_dialog_textarea textarea"
 								          data-language="<?php echo $language; ?>"
-								          data-order="save_dialog"></textarea>
+								          data-order="save_dialog" 
+								          placeholder=""></textarea>
 							</div> <?php
 						} ?>
 					</div>
+					<div id="wpglobus-dialog-form-footer" style="width:100%;"></div>
 				</form>
 			</div>        <?php
 		}
