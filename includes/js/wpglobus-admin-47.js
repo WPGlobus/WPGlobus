@@ -1020,6 +1020,15 @@ jQuery(document).ready(function () {
 					});
                     $('#' + save_to).val(s);
                 });
+				
+				/**
+				 * @since 1.8.1
+				 * $('<span class="wpglobus-multilingual-slug wpglobus_dialog_start wpglobus_dialog_icon" title="Title"></span>').insertBefore('#slug');
+				 * $('.term-slug-wrap th').css({'padding-right':'0'});
+				 * $('.term-slug-wrap td').css({'padding-left':'0'});				 
+				 */
+				$(WPGlobusAdmin.data.multilingualSlug.title).insertAfter('.term-slug-wrap th label');
+				
             },
             navMenus: function () {
                 var iID, menu_size,
