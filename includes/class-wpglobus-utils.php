@@ -328,6 +328,16 @@ class WPGlobus_Utils {
 			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language, $config );
 		}
 
+		/**
+		 * Filter after localize current URL.
+		 * Returning string.
+		 * @since 1.8.1
+		 *
+		 * @param string URL to modifying.
+		 * @param string $language.
+		 */		
+		$url = apply_filters( 'wpglobus_after_localize_current_url', $url, $language );
+		
 		return $url;
 	}
 
