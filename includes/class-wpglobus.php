@@ -24,9 +24,9 @@ class WPGlobus {
 	/**
 	 * Cookie name.
 	 * @since 1.8
-	 */	
+	 */
 	const _COOKIE = 'wpglobus-language';
-	
+
 	/**
 	 * Options page slug needed to get access to settings page
 	 */
@@ -476,16 +476,16 @@ class WPGlobus {
 				$this,
 				'on_admin_bar_menu'
 			) );
-				
+
 			/**
 			 * @scope admin
 			 * @since 1.7.11
-			 */	
+			 */
 			add_action( 'admin_enqueue_scripts', array(
 				$this,
 				'enqueue_wpglobus_js'
-			), 1000 );		
-			
+			), 1000 );
+
 			if ( WPGlobus_WP::is_pagenow( 'plugin-install.php' ) ) {
 				require_once 'admin/class-wpglobus-plugin-install.php';
 				WPGlobus_Plugin_Install::controller();
@@ -1277,8 +1277,8 @@ class WPGlobus {
 					 * For example url: edit-tags.php?action=edit&taxonomy=category&tag_ID=4&post_type=post
 					 */
 					$page_action = 'taxonomy-edit';
-					$data['multilingualSlug']['title'] = 
-						'<div class=""><a href="http://wpglobus.com/product/wpglobus-plus/#taxonomies" target="_blank">' . __('Need multilingual slug?', 'wpglobus') . '</a></div>';
+					$data['multilingualSlug']['title'] =
+						'<div class=""><a href="' . WPGlobus::URL_WPGLOBUS_SITE . '/product/wpglobus-plus/#taxonomies" target="_blank">' . esc_html__( 'Need a multilingual slug?', 'wpglobus' ) . '</a></div>';
 				} else {
 					/**
 					 * For example url: edit-tags.php?taxonomy=category
@@ -1394,9 +1394,9 @@ class WPGlobus {
 
 				$page_action = 'wpglobus_clean';
 
-			} else if ( 
-					( 'admin.php' == $pagenow && !empty($_GET['page']) && self::PAGE_WPGLOBUS_ADMIN_CENTRAL == $_GET['page']  ) 
-					|| in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) ) 
+			} else if (
+					( 'admin.php' == $pagenow && !empty($_GET['page']) && self::PAGE_WPGLOBUS_ADMIN_CENTRAL == $_GET['page']  )
+					|| in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) )
 				) {
 
 				/**
@@ -1405,11 +1405,11 @@ class WPGlobus {
 				$page_action = 'wpglobusAdminCentral';
 				/**
 				 * @since 1.8
-				 */				
+				 */
 				$data['pagenow'] 	= $pagenow;
 				$data['page'] 	 	= self::PAGE_WPGLOBUS_ADMIN_CENTRAL;
 				$data['pageAction'] = $page_action;
-				
+
 			} else {
 
 				$page_action = $page;
@@ -1447,7 +1447,7 @@ class WPGlobus {
 			} else {
 				$post_content_autop = $post_content;
 			}
-			
+
 			/**
 			 * Filter for data to send to JS.
 			 * Returning array.
@@ -1861,7 +1861,7 @@ class WPGlobus {
 	/**
 	 * Enqueue the `wpglobus.js` script.
 	 * @since 1.0
-	 * @since 1.7.11 Added WPGlobus::Config()->enabled_languages. 	 
+	 * @since 1.7.11 Added WPGlobus::Config()->enabled_languages.
 	 */
 	public function enqueue_wpglobus_js() {
 
@@ -3157,7 +3157,7 @@ class WPGlobus {
 								          id="wpglobus-dialog-<?php echo $language; ?>"
 								          class="wpglobus_dialog_textarea textarea"
 								          data-language="<?php echo $language; ?>"
-								          data-order="save_dialog" 
+								          data-order="save_dialog"
 								          placeholder=""></textarea>
 							</div> <?php
 						} ?>
