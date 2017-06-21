@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-06-08 16:12:42+00:00\n"
+"POT-Creation-Date: 2017-06-21 03:25:35+00:00\n"
 "PO-Revision-Date: 2017-06-07 21:14+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/wp-"
@@ -802,11 +802,15 @@ msgstr "Anda tidak dapat menonaktifkan bahasa utama."
 msgid "*) Available after the menu is saved."
 msgstr "*) Tersedia setelah menu tersebut disimpan."
 
-#: includes/class-wpglobus.php:3239
+#: includes/class-wpglobus.php:1281
+msgid "Need a multilingual slug?"
+msgstr ""
+
+#: includes/class-wpglobus.php:3244
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Anda harus mengaktifkan Permalinks Cukup menggunakan WPGlobus."
 
-#: includes/class-wpglobus.php:3241
+#: includes/class-wpglobus.php:3246
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -814,7 +818,7 @@ msgstr ""
 "Silakan pergi ke Settings > Permalinks > Umum Pengaturan dan memilih pilihan "
 "non-default."
 
-#: includes/class-wpglobus.php:3382
+#: includes/class-wpglobus.php:3387
 msgid "Add"
 msgstr "Menambahkan"
 

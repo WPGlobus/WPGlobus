@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.8.1 ###
+
+* ADDED:
+	* New filter `wpglobus_after_localize_current_url`.
+	* Support for the Multilingual Taxonomy Slug module in WPGlobus Plus.
+
 ### 1.8.0 ###
 
 * COMPATIBILITY:

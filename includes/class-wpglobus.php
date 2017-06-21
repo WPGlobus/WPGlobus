@@ -1278,7 +1278,7 @@ class WPGlobus {
 					 */
 					$page_action = 'taxonomy-edit';
 					$data['multilingualSlug']['title'] =
-						'<div class=""><a href="' . WPGlobus::URL_WPGLOBUS_SITE . '/product/wpglobus-plus/#taxonomies" target="_blank">' . esc_html__( 'Need a multilingual slug?', 'wpglobus' ) . '</a></div>';
+						'<div class=""><a href="' . WPGlobus::URL_WPGLOBUS_SITE . 'product/wpglobus-plus/#taxonomies" target="_blank">' . esc_html__( 'Need a multilingual slug?', 'wpglobus' ) . '</a></div>';
 				} else {
 					/**
 					 * For example url: edit-tags.php?taxonomy=category
