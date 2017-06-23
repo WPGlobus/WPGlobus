@@ -617,7 +617,7 @@ class WPGlobus_Options {
 			'output_tag'         => true,
 			// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
 			'footer_credit'      => '&copy; Copyright 2014-' . date( 'Y' ) .
-			                        ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">TIV.NET INC. / WPGlobus</a>.',
+			                        ', <a href="' . WPGlobus_Utils::url_wpglobus_site() . '">TIV.NET INC. / WPGlobus</a>.',
 			'database'           => 'options',
 			// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 			'system_info'        => false,
@@ -674,17 +674,17 @@ class WPGlobus_Options {
 		$ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
 
 		$this->args['share_icons'][] = array(
-			'url'   => WPGlobus::URL_WPGLOBUS_SITE . 'quick-start/' . $ga_campaign,
+			'url'   => WPGlobus_Utils::url_wpglobus_site() . 'quick-start/' . $ga_campaign,
 			'title' => esc_html__( 'Read the Quick Start Guide', 'wpglobus' ),
 			'icon'  => 'el el-question-sign'
 		);
 		$this->args['share_icons'][] = array(
-			'url'   => WPGlobus::URL_WPGLOBUS_SITE . $ga_campaign,
+			'url'   => WPGlobus_Utils::url_wpglobus_site() . $ga_campaign,
 			'title' => esc_html__( 'Visit our website', 'wpglobus' ),
 			'icon'  => 'el el-globe'
 		);
 		$this->args['share_icons'][] = array(
-			'url'   => WPGlobus::URL_WPGLOBUS_SITE . 'product/woocommerce-wpglobus/' . $ga_campaign,
+			'url'   => WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/' . $ga_campaign,
 			'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
 			'icon'  => 'el el-icon-shopping-cart'
 		);
