@@ -44,6 +44,31 @@ jQuery(document).ready(function ($) {
 			api.setControlInstances();
 			api.setFieldsSection(); /* @since 1.6.0 */
 			api.attachListeners();
+			/**
+			 * @since 1.8.2
+			 */
+			api.setTinymce();
+		},
+		updateTinymce: function(event) {
+			if ( 'tinymce' == WPGlobusCustomize.controlInstances[this.id]['type'] ) {
+				WPGlobusCustomize.controlInstances[this.id]['setting'] = 
+					WPGlobusCore.getString( WPGlobusCustomize.controlInstances[this.id]['setting'], event.target.textContent, WPGlobusCoreData.language );
+			}			
+		},
+		setTinymce: function(type) {
+			/**
+			 * If theme uses tinymce editor then we need to add 'tinymce-editor-init' event listener.
+			 */
+			$(document).on('tinymce-editor-init', function( event, editor ) {
+				if ( 'object' === typeof api.controlInstances[editor.id] ) {
+					/**
+					 * Set type of control instance as 'tinymce'.
+					 */
+					api.controlInstances[editor.id]['type'] = 'tinymce';
+					$(editor.iframeElement).addClass('wpglobus-customize-control').css({'width':'99%'});
+					editor.on( 'input', _.debounce( api.updateTinymce, 300 ) );
+				}
+			});
 		},
 		getSize: function(type) {
 			if ( 'undefined' === typeof type ) {
@@ -654,7 +679,14 @@ jQuery(document).ready(function ($) {
 						var t = api.getTranslations( WPGlobusCustomize.controlInstances[inst].setting );
 						$e.val( t[ WPGlobusCoreData.language ] );
 					} else {
-						$e.val( WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+						/**
+						 * @since 1.8.2
+						 */
+						var t = WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' );
+						if ( 'tinymce' == WPGlobusCustomize.controlInstances[inst]['type'] ) {
+							tinymce.get(inst).setContent( t, {format:'raw'} );
+						}
+						$e.val( WPGlobusCore.TextFilter( t, 'RETURN_EMPTY' ) );
 					}
 				});
 
@@ -715,6 +747,25 @@ jQuery(document).ready(function ($) {
 					} else {
 						data.element.val( t[ WPGlobusCoreData.language ] );
 					}
+				} else if ( data.type == 'tinymce' ) {
+					/**
+					 * @since 1.8.2
+					 * @todo check for 'force' param.
+					 */
+					//if ( force ) {
+						var t = WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' );
+						/**
+						 * First we need to set content for tinymce editor.
+						 */
+						tinymce.get(inst).setContent( t, {format:'raw'} );
+						/**
+						 * But user could choose Text mode, so we set value for textarea anyway.
+						 */
+						data.element.val( t );
+						//data.element.val( tinymce.get(inst).getContent() );
+					//} else {
+						//data.element.val( WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+					//}
 				} else {
 					if ( force ) {
 						control.setting.set( WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
@@ -858,7 +909,18 @@ jQuery(document).ready(function ($) {
 				/** Save&Publish simple controls */
 				$.each( WPGlobusCustomize.controlInstances, function( inst, data ) {
 					if ( data.userControl.enabled ) {
+						
 						var control = wp.customize.control.instance( inst );
+				
+						/**
+						 * @since 1.8.2
+						 */
+						if ( 'tinymce' == data.type ) {
+							tinymce.get(inst).setContent( data.setting, {format:'raw'} );
+						}
+						/**
+						 * But user could choose Text mode, so we set value for textarea anyway.
+						 */
 						control.setting.set( data.setting );
 						data.element.val( control.setting() );
 					}
@@ -880,6 +942,7 @@ jQuery(document).ready(function ($) {
 			}).on( 'mouseleave', '#save', function( event ) {
 				if ( ! api.instancesKeep ) {
 					api.updateElements();
+					wp.customize.previewer.refresh();
 				}
 			});
 
@@ -953,6 +1016,8 @@ jQuery(document).ready(function ($) {
 				}
 
 				api.customizeSave = false;
+				
+				wp.customize.previewer.refresh();
 
 			});
 
