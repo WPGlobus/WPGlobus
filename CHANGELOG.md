@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.8.2 ###
+
+* ADDED:
+	* Customizer: support tinymce editor in control.
+	* Customizer: preview refresh.
+
 ### 1.8.1 ###
 
 * ADDED:
