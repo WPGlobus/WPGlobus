@@ -5,7 +5,7 @@
 ### 1.8.2 ###
 
 * ADDED:
-	* Customizer: support tinymce editor in control.
+	* Customizer: support TinyMCE editor in controls.
 	* Customizer: preview refresh.
 
 ### 1.8.1 ###

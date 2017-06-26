@@ -4,7 +4,7 @@
 **Contributors:** [tivnetinc](https://profiles.wordpress.org/tivnetinc), [alexgff](https://profiles.wordpress.org/alexgff), [tivnet](https://profiles.wordpress.org/tivnet)  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** WPGlobus, localization, multilanguage, multilingual, translation  
-**Requires at least:** 4.6  
+**Requires at least:** 4.7  
 **Tested up to:** 4.8.0  
 **Stable tag:** trunk  
 **License:** GPL-3.0  
@@ -54,7 +54,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 * [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
 * [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/): adds multilingual editing capabilities to the visual editor widget.
 
-### When do I need Premium Extensions? ###
+### When do I need WPGlobus Premium Add-ons? ###
 
 * To translate URLs (`/my-page/` translates to `/fr/ma-page`, `/ru/моя-страница` and so on);
 * To "postpone" translation to all languages and publish only those that are ready;
@@ -74,14 +74,14 @@ For more details, please check out the descriptions of each paid add-on on our w
 * [WPGlobus for Slider Revolution](https://wpglobus.com/product/wpglobus-for-slider-revolution/): Adds multilingual capabilities to the Slider Revolution plugin.
 * [Multilingual WooCommerce Nets Netaxept](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
 
-### Compatibility with Themes ###
+### Compatibility with WordPress Themes ###
 
 * WPGlobus works correctly with all themes that apply proper filtering before outputting content.
 * As most of the themes save their settings in the `options` table, you can use the [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/) plugin to process those settings correctly.
 * Some themes incorporate 3rd party plugins (e.g., sliders, forms, composers) - not all of them are 100% multilingual-ready. When you see elements that cannot be translated, please **tell the theme/plugin authors**. We are ready to help them.
 * Read more on the topic [here](https://wpglobus.com/documentation/wpglobus-compatibility-with-themes-and-plugins/).
 
-### Plugin Compatibility ###
+### Compatibility with WordPress Plugins ###
 
 WPGlobus is compatible with many plugins, including but not limited to:
 
@@ -98,7 +98,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * Widget Logic,
 * Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis. **Note:** the "Premium" version of Yoast SEO has some compatibility issues and we currently do not support it.
 
-Some 3rd party plugins are supported with our [premium add-ons](https://wpglobus.com/shop/):
+Some 3rd-party plugins are supported with our [premium add-ons](https://wpglobus.com/shop/):
 
 * [Slider Revolution](https://wpglobus.com/product/wpglobus-for-slider-revolution/),
 * [TablePress](https://wpglobus.com/product/wpglobus-plus/#tablepress),
@@ -115,7 +115,7 @@ Please go to `Settings->Permalinks` and change the permalink structure to non-de
 
 ### Developing on `localhost` or custom ports ###
 
-WPGlobus may not work correctly on development servers having URLs like `//localhost/mysite` or on custom ports like `//myserver.dev:3000`. Please use a proper domain name (a fake one from `/etc/hosts` is OK) and port 80.
+WPGlobus may not work correctly on development servers having URLs like `//localhost/mysite` or on custom ports like `//myserver.dev:3000`. Please use a proper domain name (a fake one from `/etc/hosts` is OK), and port 80.
 
 ### More info and ways to contact the WPGlobus Development Team ###
 
@@ -125,7 +125,7 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 
 ### Admin interface translations: ###
 
-**NOTE:** Please do not translate anything using the WordPress interface! Join our translation team on Transifex or translate the POT file using POEdit. Thank you!
+**NOTE:** Please do not translate anything using the WordPress interface! Join our translation team on Transifex or translate the POT file using `POEdit`. Thank you!
 
 * `de_DE` by [Tobias Hopp](http://www.tobiashopp.info/) ~ [WPGlobus ist ein Paket von mehreren WordPress-Plugins, die Möglichkeiten zur Übersetzung von Wordpress-Installationen bieten.](https://de.wordpress.org/plugins/wpglobus/)
 * `es_ES` by [FX Bénard](http://wp-translations.org/) and [Patricia Casado](http://mascositas.com/) ~ [WPGlobus es una familia de plugins de WordPress que ayudan en la traducción de blogs de WordPress.](https://es.wordpress.org/plugins/wpglobus/)
@@ -167,7 +167,7 @@ Please go to the `Admin - Settings - Permalinks` page. Make sure that the `Commo
 * [Do you support PHP 5.x? PHP 7?](https://wpglobus.com/faq/support-php-5-2/)
 * [Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x?](https://wpglobus.com/faq/support-msie-opera-safari-chrome-firefox/)
 * [Do you plan to support subdomains and URL query parameters?](https://wpglobus.com/faq/subdomains-and-url-query-parameters/)
-* [I am using WPML (qTranslate, Polylang, Multilingual Press, etc.). Can I switch to WPGlobus?](https://wpglobus.com/faq/i-am-using-wpml-qtranslate-polylang-multilingual-press-etc-can-i-switch-to-wpglobus/)
+* [I am using WPML, qTranslate-X, Polylang, Multilingual Press, etc. Can I switch to WPGlobus?](https://wpglobus.com/faq/i-am-using-wpml-qtranslate-polylang-multilingual-press-etc-can-i-switch-to-wpglobus/)
 * [Do you support WooCommerce, EDD, other e-Commerce plugins?](https://wpglobus.com/faq/support-woocommerce-edd/)
 * [Is it possible to set the user's language automatically based on IP and/or browser language?](https://wpglobus.com/faq/set-language-by-ip/)
 * [How do I contribute to WPGlobus?](https://wpglobus.com/faq/how-do-i-contribute-to-wpglobus/)
@@ -207,6 +207,12 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 
 ## Changelog ##
 
+### 1.8.2 ###
+
+* ADDED:
+	* Customizer: support TinyMCE editor in controls.
+	* Customizer: preview refresh.
+
 ### 1.8.1 ###
 
 * ADDED:
@@ -223,23 +229,6 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 	* Core: No warning on the Helpdesk page if `php_uname` is disabled for security reason.
 * ADDED:
 	* Automatic redirect to the visitor's preferred language (first visit only). To turn it on, go to `WPGlobus -> Redirect` in the Admin menu.
-
-### 1.7.12 ###
-
-* FIXED:
-	* Yoast SEO: the fix for the `_yst_is_cornerstone` element.
-* ADDED:
-	* Core: added options to the `WPGlobusDialogApp`.
-	* Yoast SEO: Minor CSS improvements.
-
-### 1.7.11 ###
-
-* ADDED:
-	* Core: added array of enabled languages to JS.
-	* Core: enqueue `wpglobus.js` script for admin.
-	* Customizer: improvements.
-	* MailChimp: added support for `MailChimp for WordPress` 4.1.1.
-	* Admin: Added Bahasa Indonesia (`id_ID`) translation.
 
 ### Earlier versions ###
 
