@@ -36,7 +36,7 @@ jQuery(document).ready( function ($) {
 		api = WPGlobusYoastSeo = {
 			editorIDs: [ 'description' ],
 			editor: {},
-			submitId: '#submit',
+			submitId: '',
 			preventChangeEditor: false,
 			observer: null,
 			init: function() {
@@ -44,6 +44,14 @@ jQuery(document).ready( function ($) {
 				api.attachListeners();
 				_.delay( api.start, 1500 );
 
+			},
+			setSubmitID: function( event ) {
+				if ( $('.edit-tag-actions .button').length == 1 ) {
+					api.submitId = '.edit-tag-actions .button';
+				}
+				if ( $('#submit').length == 1 ) {
+					api.submitId = '#submit';
+				}
 			},
 			submit: function( event ) {
 
@@ -128,6 +136,7 @@ jQuery(document).ready( function ($) {
 				/**
 				 * Submit action.
 				 */
+				api.setSubmitID();
 				$(document).on( 'mouseenter', api.submitId, api.submit )
 					.on( 'mouseleave', api.submitId, api.submit )
 					.on( 'click', api.submitId, api.submit );
