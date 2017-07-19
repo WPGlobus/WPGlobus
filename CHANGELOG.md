@@ -7,7 +7,9 @@
 * ADDED:
 	* Widgets: the support of arbitraryTextOrHTML.
 	* Customizer: 'Customizr Pro' theme to the list of disabled themes.
-
+* FIXED:
+	* Yoast SEO: saving description on term.php page.
+	
 ### 1.8.2 ###
 
 * ADDED:
