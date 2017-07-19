@@ -97,7 +97,7 @@
 					'type="button" ' +
 					'id="'+editor.id+'-wpglobus-button" ' +
 					'data-widget-id="'+controls.$el[0].id+'"' +
-					'class="wp-switch-editor switch-wpglobus-language wpglobus-dialog-icon-globe">' +
+					'class="wp-switch-editor switch-wpglobus-language wpglobus-icon-globe">' +
 					'<span class="wpglobus-current-language" data-language="en" style="">En</span>' +
 				'</button>' +
 				'<div class="wpglobus-language-box" style="position:absolute;top:0;left:0;display:none;z-index:200100;border:1px solid #9e9e9e;border-radius:3px;background-color:#fff;padding: 2px 5px;">' +
@@ -133,6 +133,10 @@
 			}, 1000);
 		},
 		arbitraryTextOrHTML: function() {
+			/**
+			 * @see wp-admin\js\widgets\text-widgets.js
+			 */
+			 
 			/**
 			 * Open language selector box.
 			 */
