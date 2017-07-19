@@ -45,7 +45,7 @@ jQuery(document).ready( function ($) {
 				_.delay( api.start, 1500 );
 
 			},
-			setSubmitID: function( event ) {
+			setSubmitID: function() {
 				if ( $('.edit-tag-actions .button').length == 1 ) {
 					api.submitId = '.edit-tag-actions .button';
 				}
