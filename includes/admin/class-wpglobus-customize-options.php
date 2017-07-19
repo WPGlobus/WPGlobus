@@ -345,6 +345,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 			self::$disabled_themes = array(
 				'customizr',
+				'customizr pro'
 			);
 
 			/**
@@ -825,7 +826,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				/** @see option wpglobus_option['selector_wp_list_pages']['show_selector'] */
 				self::$settings['wpglobus_languages_section']['wpglobus_customize_selector_wp_list_pages']['option'] = 'show_selector';
 
-				/** Custom CSS */
+				/** 
+				 * Custom CSS.
+				 */
 				$wp_customize->add_setting( 'wpglobus_customize_css_editor', array(
 					'type'       => 'option',
 					'capability' => 'manage_options',
