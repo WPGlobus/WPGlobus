@@ -5,10 +5,10 @@
 ### 1.8.3 ###
 
 * ADDED:
-	* Widgets: the support of arbitraryTextOrHTML.
-	* Customizer: 'Customizr Pro' theme to the list of disabled themes.
+	* Multilingual editor for the WYSIWYG text widgets (`arbitraryTextOrHTML`).
+	* Customizer: `Customizr Pro` theme added to the list of exceptions.
 * FIXED:
-	* Yoast SEO: saving description on term.php page.
+	* Yoast SEO: saving description on the `term.php` page.
 	
 ### 1.8.2 ###
 

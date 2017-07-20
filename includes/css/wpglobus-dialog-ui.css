@@ -2,6 +2,13 @@
  * Admin dialog styles
  * @package WPGlobus
  */
+.wpglobus-wp-admin .wpglobus-icon-globe:before {
+  color: #00f;
+  display: inline-block;
+  font-family: 'dashicons';
+  content: "\f319";
+  font-size: 20px;
+}
 .wpglobus-wp-admin .wpglobus_dialog_icon {
   margin-top: 10px;
   cursor: pointer;
