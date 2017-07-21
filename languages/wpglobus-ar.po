@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-07-20 12:53:37+00:00\n"
-"PO-Revision-Date: 2017-06-07 21:15+0000\n"
+"POT-Creation-Date: 2017-07-21 11:24:16+00:00\n"
+"PO-Revision-Date: 2017-07-21 11:18+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Arabic (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/ar/)\n"
@@ -144,6 +144,8 @@ msgid ""
 "website. This is not an endorsement, just a courtesy. Please contact them "
 "directly and let us know how did it work for you!"
 msgstr ""
+"نحن نخطط لإبقاء %sقائمة بالمترجمين %s في موقع WPGlobus. هذا ليس إقرار، هي "
+"فقط مجاملة. من فضلك تواصل معهم وأعلمنا ماذا حدث معك!"
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
@@ -155,16 +157,19 @@ msgid ""
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
 "com</code> and language queries <code>example.com?lang=xx</code>."
 msgstr ""
+"WPGlobus يدعم فقط ترجمة الروابط في الصيغة<code>example.com/xx/page/</code>. "
+"نحن لا ننوي دعم النطاقات الفرعية<code>xx.example.com</code> وعلامات اللغة "
+"<code>example.com?lang=xx</code>."
 
 #: includes/admin/class-wpglobus-about.php:162
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
-msgstr ""
+msgstr "بعض الثيمات و الإضافات هي<strong>ليس لديها لغات متنوعة</strong>."
 
 #: includes/admin/class-wpglobus-about.php:163
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
-msgstr ""
+msgstr "هذا ربما يظهر بعض الكتابات بدون ترجمة، أو مع كل اللغات مختلطة."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
 #: includes/admin/class-wpglobus-about.php:167
@@ -172,15 +177,17 @@ msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 msgstr ""
+"من فضلك تواصل مع مالك الإضافة أو الثيم. إذا كانوا لا يستطيعوا المساعدة، فكر "
+"في %s تأجير فريق WPGlobus%s لكي يكتب كود مخصص لك."
 
 #: includes/admin/class-wpglobus-admin-menu.php:29
 msgid "View free and premium WPGlobus extensions"
-msgstr ""
+msgstr "أظهر إضافات WPGlobus المجانية والممتازة"
 
 #: includes/admin/class-wpglobus-admin-page.php:32
 #: includes/admin/class-wpglobus-clean.php:581
 msgid "Multilingual Everything!"
-msgstr ""
+msgstr "عدد لغات كل شئ!"
 
 #: includes/admin/class-wpglobus-admin-page.php:34
 #: includes/admin/class-wpglobus-clean.php:584
@@ -188,14 +195,16 @@ msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
 "multilingual WordPress blogs and sites."
 msgstr ""
+"WPGlobus هي عائلة من إضافات ووردبريس يساعد في جعل المواقع و المدونات متعددة "
+"اللغة."
 
 #: includes/admin/class-wpglobus-clean.php:232
 msgid "Remove the WPGlobus settings (not recommended)"
-msgstr ""
+msgstr "إمسح إعدادات WPGlobus (غير مُفضل)"
 
 #: includes/admin/class-wpglobus-clean.php:591
 msgid "Clean-up Tool"
-msgstr ""
+msgstr "أداة التنظيف"
 
 #: includes/admin/class-wpglobus-clean.php:606
 msgid "Support"
@@ -206,6 +215,8 @@ msgid ""
 "WARNING: this operation is non-reversible. It is strongly recommended that "
 "you backup your database before proceeding."
 msgstr ""
+"تحذير: العملية لا يمكن الرجوع عنها. يُفضل بشدة أن تعمل نسخة إحتياطية لقاعدة "
+"البيانات قبل المتابعة."
 
 #: includes/admin/class-wpglobus-clean.php:615
 msgid ""

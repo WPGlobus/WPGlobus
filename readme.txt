@@ -194,6 +194,7 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 * ADDED:
 	* Multilingual editor for the WYSIWYG text widgets (`arbitraryTextOrHTML`).
 	* Customizer: `Customizr Pro` theme added to the list of exceptions.
+	* Admin: additional translations in `ar` and `ro`.
 * FIXED:
 	* Yoast SEO: saving description on the `term.php` page.
 

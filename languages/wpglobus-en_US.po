@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-07-20 12:53:37+00:00\n"
-"PO-Revision-Date: 2017-06-07 21:14+0000\n"
+"POT-Creation-Date: 2017-07-21 11:24:16+00:00\n"
+"PO-Revision-Date: 2017-07-21 11:18+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_US/)\n"
@@ -798,7 +798,7 @@ msgstr "*) Available after the menu is saved."
 
 #: includes/class-wpglobus.php:1281
 msgid "Need a multilingual slug?"
-msgstr ""
+msgstr "Need a multilingual slug?"
 
 #: includes/class-wpglobus.php:3244
 msgid "You must enable Pretty Permalinks to use WPGlobus."

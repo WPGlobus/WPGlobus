@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-07-20 12:53:37+00:00\n"
-"PO-Revision-Date: 2017-06-07 21:15+0000\n"
+"POT-Creation-Date: 2017-07-21 11:24:16+00:00\n"
+"PO-Revision-Date: 2017-07-21 11:18+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Romanian (Romania) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ro_RO/)\n"
@@ -432,7 +432,7 @@ msgstr "Debifați pentru a dezactiva WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:1017
 msgid "Title"
-msgstr ""
+msgstr "Titlu"
 
 #: includes/admin/class-wpglobus-customize-options.php:1018
 msgid "Label"
@@ -633,7 +633,7 @@ msgstr "Înapoi la setările WPGlobus"
 
 #: includes/admin/class-wpglobus-plugin-install.php:306
 msgid "Current Version"
-msgstr ""
+msgstr "Versiune curentă"
 
 #: includes/admin/class-wpglobus-plugin-install.php:307
 msgid "Get it now!"
@@ -646,7 +646,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-plugin-install.php:309
 #: includes/options/fields/table/table-languages.php:396
 msgid "Installed"
-msgstr ""
+msgstr "Instalat"
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:54
 msgid "Help Desk"

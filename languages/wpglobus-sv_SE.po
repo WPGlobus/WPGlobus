@@ -1,14 +1,14 @@
 # Copyright (C) 2017 WPGlobus
 # This file is distributed under the GPL-3.0.
 # Translators:
-# Elger Lindgren <elger@bilddigital.se>, 2015
+# Elger Lindgren <inactive+Elger@transifex.com>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-07-20 12:53:37+00:00\n"
-"PO-Revision-Date: 2017-06-07 21:15+0000\n"
+"POT-Creation-Date: 2017-07-21 11:24:16+00:00\n"
+"PO-Revision-Date: 2017-07-21 11:18+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/sv_SE/)\n"
