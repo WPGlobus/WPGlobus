@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.8.4 ###
+
+* ADDED:
+	* Apply filter to the `url_to_postid()` function so it will return the correct Post ID for URLs in non-default language.
+	* Allow `oembed` to handle URLs in non-default language.
+	* Localize the output of the oembed's JSON.
+
 ### 1.8.3 ###
 
 * ADDED:

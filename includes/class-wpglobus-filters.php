@@ -960,6 +960,67 @@ class WPGlobus_Filters {
 		return $css;
 	}
 
+	/**
+	 * De-localize URL to the default language so that @see url_to_postid() can
+	 * determine the post ID.
+	 *
+	 * @since 1.8.4
+	 *
+	 * @param string $url The URL to derive the post ID from.
+	 *
+	 * @return string
+	 */
+	public static function filter__url_to_postid( $url ) {
+		$url = WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->default_language );
+
+		return $url;
+	}
+
+	/**
+	 * The post ID has been changed already by the @see filter__url_to_postid,
+	 * so we do not need to modify it here.
+	 * However, oembed does not know which language to use to fill in its $data
+	 * from the post.
+	 * Therefore, we use a workaround: extract the language from the URL and
+	 * store it in a special variable, to use later in
+	 * @see filter__oembed_response_data.
+	 *
+	 * @since 1.8.4
+	 *
+	 * @param int    $post_id The post ID.
+	 * @param string $url     The requested URL.
+	 *
+	 * @return int The post ID, unchanged.
+	 */
+	public static function filter__oembed_request_post_id( $post_id, $url ) {
+		$language = WPGlobus_Utils::extract_language_from_url( $url );
+		if ( $language !== WPGlobus::Config()->default_language ) {
+			WPGlobus::Config()->setLanguageForOembed( $language );
+		}
+
+		return $post_id;
+	}
+
+	/**
+	 * Filter the oembed data returned by the /wp-json/oembed/... calls.
+	 *
+	 * @param array   $data   The response data.
+	 *
+	 * @return array
+	 * @since 1.8.4
+	 */
+	public static function filter__oembed_response_data( $data ) {
+		// If $language_for_oembed is empty, text_filter will use the default language.
+		$language_for_oembed = WPGlobus::Config()->getAndResetLanguageForOembed();
+		foreach ( array( 'author_name', 'title' ) as $field ) {
+			if ( ! empty( $data[ $field ] ) ) {
+				$data[ $field ] = WPGlobus_Core::text_filter( $data[ $field ], $language_for_oembed );
+			}
+		}
+
+		return $data;
+	}
+
 } // class
 
 # --- EOF

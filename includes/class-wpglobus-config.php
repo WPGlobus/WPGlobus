@@ -194,6 +194,33 @@ class WPGlobus_Config {
 	public $browser_redirect;
 
 	/**
+	 * Used to temporarily store the language detected from the URL processed by oembed.
+	 * @var  string
+	 * @since 1.8.4
+	 */
+	protected $language_for_oembed = '';
+
+	/**
+	 * Can get it only once.
+	 * @return string
+	 * @since 1.8.4
+	 */
+	public function getAndResetLanguageForOembed() {
+		$to_return = $this->language_for_oembed;
+		$this->language_for_oembed = '';
+		return $to_return;
+	}
+
+	/**
+	 * Setter.
+	 * @param string $language_for_oembed
+	 * @since 1.8.4
+	 */
+	public function setLanguageForOembed( $language_for_oembed ) {
+		$this->language_for_oembed = $language_for_oembed;
+	}
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {

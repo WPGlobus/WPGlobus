@@ -46,7 +46,7 @@ if (
  * @since 1.6.6
  */
 if (
-	WPGlobus_WP::is_http_post_action('inline-save') 
+	WPGlobus_WP::is_http_post_action('inline-save')
 	&& false !== strpos( $_SERVER[ 'HTTP_REFERER' ], 'edit.php' )
 ) {
 	add_filter( 'pre_insert_term', array( 'WPGlobus_Filters', 'filter__pre_insert_term' ), 5, 2 );
@@ -305,6 +305,25 @@ add_filter( 'get_post_metadata', array( 'WPGlobus_Filters', 'filter__postmeta' )
 if ( ! is_admin() ) {
 	add_filter( 'wpglobus_styles', array( 'WPGlobus_Filters', 'filter__front_styles' ), 10, 2 );
 }
+
+/**
+ * Let @see url_to_postid() work with localized URLs.
+ * @since 1.8.4
+ */
+add_filter( 'url_to_postid', array( 'WPGlobus_Filters', 'filter__url_to_postid' ), - PHP_INT_MAX );
+
+/**
+ * Detect the language needed to correctly show oembed.
+ * @since 1.8.4
+ */
+add_filter( 'oembed_request_post_id', array( 'WPGlobus_Filters', 'filter__oembed_request_post_id' ), - PHP_INT_MAX, 2 );
+
+/**
+ * Filter the oembed data returned by the /wp-json/oembed/... calls.
+ * @since 1.8.4
+ */
+add_filter( 'oembed_response_data', array( 'WPGlobus_Filters', 'filter__oembed_response_data' ), - PHP_INT_MAX );
+
 
 /**
  * ACF filters
