@@ -59,7 +59,7 @@
 				 * Fix it.
 				 */
 				var p = controls.$el[0].offsetParent;
-				controls.$el[0].id = $(p).attr('id');;
+				controls.$el[0].id = $(p).attr('id');
 			}
 			
 			var sourceSelector 		= '#'+controls.$el[0].id+' #widget-'+widgetName+'-text';

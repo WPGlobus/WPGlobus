@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+### 1.8.5 ###
+* FIXED:
+	* Widgets: fixed the support arbitraryTextOrHTML for WP4.8.1
+
 ### 1.8.4 ###
 
 * ADDED:
