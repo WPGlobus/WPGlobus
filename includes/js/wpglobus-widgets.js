@@ -52,6 +52,16 @@
 		
 			if (ret) return;
 			
+			if ( '' == controls.$el[0].id ) {
+				var newID = $(p).attr('id');
+				/**
+				 * We have empty controls.$el[0].id @since WP 4.8.1.
+				 * Fix it.
+				 */
+				var p = controls.$el[0].offsetParent;
+				controls.$el[0].id = $(p).attr('id');;
+			}
+			
 			var sourceSelector 		= '#'+controls.$el[0].id+' #widget-'+widgetName+'-text';
 			var sourceTitleSelector = '#'+controls.$el[0].id+' #widget-'+widgetName+'-title';
 
