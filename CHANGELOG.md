@@ -2,7 +2,13 @@
 
 ## Changelog ##
 
+### 1.8.6 ###
+
+* ADDED:
+	* Widgets: the support of multiple WYSIWYG text widgets.
+	
 ### 1.8.5 ###
+
 * FIXED:
 	* Widgets: support the WYSIWYG text widgets changes introduced by WP 4.8.1.
 
