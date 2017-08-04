@@ -189,6 +189,11 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 
 == Changelog ==
 
+= 1.8.5 =
+
+* FIXED:
+	* Widgets: support the WYSIWYG text widgets changes introduced by WP 4.8.1.
+
 = 1.8.4 =
 
 * ADDED:

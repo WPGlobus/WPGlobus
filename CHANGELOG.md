@@ -4,7 +4,7 @@
 
 ### 1.8.5 ###
 * FIXED:
-	* Widgets: fixed the support arbitraryTextOrHTML for WP4.8.1
+	* Widgets: support the WYSIWYG text widgets changes introduced by WP 4.8.1.
 
 ### 1.8.4 ###
 
