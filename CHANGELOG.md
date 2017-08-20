@@ -6,6 +6,7 @@
 
 * ADDED:
 	* Widgets: the support of multiple WYSIWYG text widgets.
+	* Core: the ability to avoid the localize URL using CSS class "wpglobus-menu-item-url-nolocalize".
 	
 ### 1.8.5 ###
 
