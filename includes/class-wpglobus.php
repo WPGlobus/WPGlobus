@@ -1826,8 +1826,30 @@ class WPGlobus {
 	public function on_get_convert_url_menu_items( $sorted_menu_items ) {
 
 		foreach ( $sorted_menu_items as $key => $item ) {
+			
+			/**
+			 * Ability to avoid the localize URL.
+			 * @since 1.8.6
+			 */
+			$localize = true;
+			if ( ! empty( $item->classes ) && in_array( 'wpglobus-menu-item-url-nolocalize', $item->classes ) ) {
+				$localize = false;
+			}
+			
 			if ( 'custom' == $item->type ) {
-				$sorted_menu_items[ $key ]->url = WPGlobus_Utils::localize_url( $sorted_menu_items[ $key ]->url );
+				if ( $localize ) {
+					$sorted_menu_items[ $key ]->url = WPGlobus_Utils::localize_url( $sorted_menu_items[ $key ]->url );
+				}
+			} else {
+				if ( ! $localize ) {
+					/**
+					 * URL was localized already.
+					 * @see wp_setup_nav_menu_item() in p-includes\nav-menu.php
+					 * @since 1.8.6
+					 */
+					$sorted_menu_items[ $key ]->url = WPGlobus_Utils::localize_url( $sorted_menu_items[ $key ]->url, WPGlobus::Config()->default_language );
+				}
+
 			}
 		}
 
