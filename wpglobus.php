@@ -110,8 +110,10 @@ require_once dirname( __FILE__ ) . '/includes/admin/customize/wpglobus-customize
  * WPGlobus customize options
  * @since 1.4.6
  */
-require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-customize-options.php';
-WPGlobus_Customize_Options::controller();
+if ( !defined('WPGLOBUS_CUSTOMIZE') || WPGLOBUS_CUSTOMIZE ) { 
+	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-customize-options.php';
+	WPGlobus_Customize_Options::controller();
+}
 
 // TODO remove this old updater.
 //require_once dirname( __FILE__ ) . '/updater/class-wpglobus-updater.php';
