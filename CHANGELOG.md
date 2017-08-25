@@ -5,9 +5,9 @@
 ### 1.8.6 ###
 
 * ADDED:
-	* Widgets: the support of multiple WYSIWYG text widgets.
-	* Core: the ability to avoid the localize URL using CSS class "wpglobus-menu-item-url-nolocalize".
-	* Core: constant to disable WPGlobus customizer.
+	* Widgets: handle multiple WYSIWYG text widgets.
+	* Core: do not localize menu URLs marked with a special CSS class `wpglobus-menu-item-url-nolocalize`.
+	* Core: `define( 'WPGLOBUS_CUSTOMIZE', false )` disables WPGlobus options in the Customizer.
 	
 ### 1.8.5 ###
 

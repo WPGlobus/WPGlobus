@@ -189,6 +189,13 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 
 == Changelog ==
 
+= 1.8.6 =
+
+* ADDED:
+	* Widgets: handle multiple WYSIWYG text widgets.
+	* Core: do not localize menu URLs marked with a special CSS class `wpglobus-menu-item-url-nolocalize`.
+	* Core: `define( 'WPGLOBUS_CUSTOMIZE', false )` disables WPGlobus options in the Customizer.
+
 = 1.8.5 =
 
 * FIXED:

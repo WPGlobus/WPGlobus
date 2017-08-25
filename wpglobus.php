@@ -15,7 +15,7 @@
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.8.5
+ * Version: 1.8.6
  * Author: WPGlobus
  * Author URI: https://wpglobus.com/
  * Network: false
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.8.5' );
+define( 'WPGLOBUS_VERSION', '1.8.6' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
@@ -107,10 +107,15 @@ require_once dirname( __FILE__ ) . '/includes/wpglobus-yoastseo.php';
 require_once dirname( __FILE__ ) . '/includes/admin/customize/wpglobus-customize.php';
 
 /**
- * WPGlobus customize options
- * @since 1.4.6
+ * To disable WPGlobus Customizer Options, put this to wp-config:
+ * define( 'WPGLOBUS_CUSTOMIZE', false )
+ * @since 1.8.6
  */
-if ( !defined('WPGLOBUS_CUSTOMIZE') || WPGLOBUS_CUSTOMIZE ) { 
+if ( ! defined( 'WPGLOBUS_CUSTOMIZE' ) || WPGLOBUS_CUSTOMIZE ) {
+	/**
+	 * WPGlobus customize options
+	 * @since 1.4.6
+	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-customize-options.php';
 	WPGlobus_Customize_Options::controller();
 }
@@ -156,7 +161,7 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 * @since 1.8.1
 	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/wpglobus-admin.php';
-	
+
 	/**
 	 * WPGlobus News admin dashboard widget.
 	 * @since 1.7.7
