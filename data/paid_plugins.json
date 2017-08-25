@@ -15,7 +15,7 @@
     "slug": "wpglobus-mobile-menu",
     "loader": "wpglobus-mobile-menu.php",
     "image_file": "wpglobus-mobile-menu-logo-400x400.png",
-    "order": 2
+    "order": 3
   },
   "wpglobus-language-widgets": {
     "slug": "wpglobus-language-widgets",
@@ -48,5 +48,12 @@
     "product_slug": "wpglobus-for-slider-revolution",
     "image_file": "wpglobus-revslider-logo-400x400.png",
     "order": 4
+  },
+   "wpglobus-for-bridge-theme": {
+    "slug": "wpglobus-for-bridge-theme",
+    "loader": "wpglobus-for-bridge-theme.php",
+    "product_slug": "wpglobus-for-bridge-theme",
+    "image_file": "wpglobus-for-bridge-theme-logo-400x400.png",
+    "order": 2
   }
 }
