@@ -290,23 +290,23 @@
 			}
 			
 		},		
-		addElements : function(get_by, coid) {
+		addElements: function(get_by, coid) {
 			var id, elem = [], get_by_coid;
 			elem[0] = 'input[type="text"]';
 			elem[1] = 'textarea';
 			if ( typeof get_by === 'undefined' || get_by == 'class' ) {
 				get_by_coid = '.widget-liquid-right .widget .widget-content';
 				$.each(elem, function(i,e){
-					api.make_clone(get_by_coid, e);
+					api.makeClone(get_by_coid, e);
 				});
 			} else if ( get_by == 'id' ) {
 				get_by_coid = '#'+coid+' .widget-content';
 				$.each(elem, function(i,e){
-					api.make_clone(get_by_coid, e);
+					api.makeClone(get_by_coid, e);
 				});	
 			}
 		},
-		make_clone: function(get_by_coid, type) {
+		makeClone: function(get_by_coid, type) {
 			$(get_by_coid+' '+type).each(function(i,e){
 				var element = $(e),
 					clone, name, text, id, dis = false;
@@ -418,8 +418,33 @@
 			$(document).on('click','.widget-title, .widget-title-action',function(ev){
 				ev.preventDefault();
 				api.wysiwygClean();
+				api.imageWidget(this);
 			});				
-		}	
+		},
+		imageWidget: function(title) {
+			var wID  = $(title).parents('.widget').attr('id');
+			if ( -1 == wID.indexOf('media_image') ) {
+				return;
+			}
+			var $title = $('#'+wID+' .in-widget-title');
+			var elID   = $('#'+wID).find('input[type="text"]').attr('id');
+			if ( -1 != elID.indexOf('.') ) {
+				var name = 'wpg-'+elID.replace('.','_');
+				$('#'+wID).find('input[type="text"]').attr('name',name);
+				if ( WPGlobusDialogApp.addElement(name) ) {
+					var $el = $('#'+wID).find('input[name="'+name+'"]');
+					var v = WPGlobusCore.getTranslations( $el.val() )[WPGlobusCoreData['language']];
+					$title.text(': '+v);
+					setTimeout(function(){$('#wpglobus-'+name).val(v)},1000);
+				}
+			} else {
+				if ( WPGlobusDialogApp.addElement(elID) ) {
+					var v = WPGlobusCore.getTranslations( $('#'+elID).val() )[WPGlobusCoreData['language']];
+					$title.text(': '+v);
+					setTimeout(function(){$('#wpglobus-'+elID).val(v)},1000);
+				}				
+			}				
+		}
 	};
 	
 	WPGlobusWidgets = $.extend({}, WPGlobusWidgets, api);
