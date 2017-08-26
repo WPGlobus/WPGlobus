@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.8.7 ###
+
+* ADDED:
+	* Widgets: the support for title of image widgets.
+
 ### 1.8.6 ###
 
 * ADDED:
