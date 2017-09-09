@@ -209,6 +209,14 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 
 ## Changelog ##
 
+### 1.8.7 ###
+
+* COMPATIBILITY:
+	* WordPress 4.8.1
+* ADDED:
+	* Widgets: support for the title of the image widget.
+	* Core: recommend WooCommerce add-ons if not installed.
+
 ### 1.8.6 ###
 
 * ADDED:

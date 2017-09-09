@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-08-25 11:59:35+00:00\n"
+"POT-Creation-Date: 2017-09-09 04:37:13+00:00\n"
 "PO-Revision-Date: 2017-07-21 11:18+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
@@ -729,6 +729,36 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
 msgid "Technical Information"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:44
+msgid "WPGlobus Recommends:"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:53
+msgid "WPGlobus for WooCommerce"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:57
+msgid ""
+"Translate product titles and descriptions, product categories, tags and "
+"attributes."
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
+msgid "Get it now:"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
+msgid "WPGlobus Multi-Currency"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:76
+msgid "Accept multiple currencies in your online store!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:81
+msgid "Check it out:"
 msgstr ""
 
 #: includes/class-wpglobus-widget.php:27

@@ -4,8 +4,11 @@
 
 ### 1.8.7 ###
 
+* COMPATIBILITY:
+	* WordPress 4.8.1
 * ADDED:
-	* Widgets: the support for title of image widgets.
+	* Widgets: support for the title of the image widget.
+	* Core: recommend WooCommerce add-ons if not installed.
 
 ### 1.8.6 ###
 

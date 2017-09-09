@@ -15,7 +15,7 @@
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 1.8.6
+ * Version: 1.8.7
  * Author: WPGlobus
  * Author URI: https://wpglobus.com/
  * Network: false
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '1.8.6' );
+define( 'WPGLOBUS_VERSION', '1.8.7' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
@@ -183,6 +183,17 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 * @since 1.7.9
 	 */
 	$GLOBALS['redux_notice_check'] = 1;
+
+	/**
+	 * WPGlobus Recommendations.
+	 * To disable recommendations, put this to wp-config:
+	 * define( 'WPGLOBUS_RECOMMENDATIONS', false );
+	 * @since 1.8.7
+	 */
+	if ( ! defined( 'WPGLOBUS_RECOMMENDATIONS' ) || WPGLOBUS_RECOMMENDATIONS ) {
+		require_once dirname( __FILE__ ) . '/includes/admin/recommendations/class-wpglobus-admin-recommendations.php';
+		WPGlobus_Admin_Recommendations::setup_hooks();
+	}
 
 endif;
 
