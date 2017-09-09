@@ -2,13 +2,13 @@
 # This file is distributed under the GPL-3.0.
 # Translators:
 # Tobias Hopp <toby.hopp@gmail.com>, 2015
-# Gregory Karpinsky <gregory@tiv.net>, 2015
+# Gregory Karpinsky <gregory@tiv.net>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-09-09 14:24:38+00:00\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2017-09-09 14:43:59+00:00\n"
+"PO-Revision-Date: 2017-09-09 14:41+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/de_DE/)\n"
@@ -141,7 +141,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
-msgstr ""
+msgstr "Wichtige Hinweise"
 
 #: includes/admin/class-wpglobus-about.php:159
 msgid ""
@@ -297,7 +297,7 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "WPGlobus"
-msgstr ""
+msgstr "WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:553
 msgid ""
@@ -310,7 +310,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:604
 msgid "WPGlobus Settings"
-msgstr ""
+msgstr "WPGlobus Einstellungen"
 
 #: includes/admin/class-wpglobus-customize-options.php:640
 #: includes/options/class-wpglobus-options.php:325
@@ -642,7 +642,7 @@ msgstr "Aktelle Version"
 
 #: includes/admin/class-wpglobus-plugin-install.php:307
 msgid "Get it now!"
-msgstr ""
+msgstr "Jetzt holen"
 
 #: includes/admin/class-wpglobus-plugin-install.php:308
 msgid "Premium add-on"
@@ -659,7 +659,7 @@ msgstr ""
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:55
 msgid "Contact WPGlobus Support"
-msgstr ""
+msgstr "WPGlobus Support kontaktieren"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:55
 msgid "Thank you for using WPGlobus!"
@@ -706,7 +706,7 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
 msgid "Technical Information"
-msgstr ""
+msgstr "Systeminformationen"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:44
 msgid "WPGlobus Recommends:"
@@ -724,7 +724,7 @@ msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
 msgid "Get it now:"
-msgstr ""
+msgstr "Jetzt holen"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
 msgid "WPGlobus Multi-Currency"
@@ -1058,7 +1058,7 @@ msgstr "Jetzt zu WPGlobus Plus wechseln!"
 
 #: updater/class-wpglobus-updater-admin.php:94
 msgid "Deactivate!"
-msgstr ""
+msgstr "Deaktivieren!"
 
 #. translators: %s is an URL placeholder
 #: updater/class-wpglobus-updater-admin.php:109
@@ -1089,7 +1089,7 @@ msgstr ""
 #: updater/class-wpglobus-updater-admin.php:179
 #: updater/class-wpglobus-updater.php:182
 msgid "License Deactivation"
-msgstr ""
+msgstr "Lizenz deaktivieren"
 
 #: updater/class-wpglobus-updater-admin.php:186
 msgid "Deactivate License Key"
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: updater/class-wpglobus-updater-admin.php:482
 msgid "License deactivated. "
-msgstr ""
+msgstr "Lizenz deaktiviert"
 
 #: updater/class-wpglobus-updater-check.php:338
 msgid ""
@@ -1223,7 +1223,7 @@ msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/WPGlobus/WPGlobus"
-msgstr ""
+msgstr "https://github.com/WPGlobus/WPGlobus"
 
 #. Description of the plugin/theme
 msgid ""
@@ -1236,4 +1236,4 @@ msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "https://wpglobus.com/"
-msgstr ""
+msgstr "https://wpglobus.com/"
