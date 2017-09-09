@@ -1,15 +1,15 @@
 # Copyright (C) 2017 WPGlobus
 # This file is distributed under the GPL-3.0.
 # Translators:
-# Franck, 2015-2017
-# FX Bénard <fxb@wp-translations.org>, 2015-2017
+# Franck, 2015
+# FX Bénard <fxb@wp-translations.org>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-09-09 13:05:02+00:00\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2017-09-09 14:24:38+00:00\n"
+"PO-Revision-Date: 2017-09-09 13:20+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_CA/)\n"
