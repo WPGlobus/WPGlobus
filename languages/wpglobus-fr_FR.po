@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-09-09 04:37:13+00:00\n"
-"PO-Revision-Date: 2017-08-03 21:19+0000\n"
+"POT-Creation-Date: 2017-09-09 13:05:02+00:00\n"
+"PO-Revision-Date: 2017-09-09 13:03+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_FR/)\n"
@@ -63,8 +63,7 @@ msgstr "FAQ"
 msgid ""
 "Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
 msgstr ""
-"Attention&nbsp;: l'extension Multibyte String PHP (`mbstring`) n'est pas "
-"chargée&nbsp;!"
+"Attention : l’extension Multibyte String PHP (`mbstring`) n’est pas chargée !"
 
 #: includes/admin/class-wpglobus-about.php:60
 msgid ""
@@ -133,16 +132,16 @@ msgid ""
 "There are many translation companies and individual translators who can help "
 "you write and proofread the texts."
 msgstr ""
-"Il existe de nombreuses sociétés de traduction et des traducteurs "
-"individuels qui peuvent vous aider à rédiger et à relire les textes."
+"Il existe de nombreuses sociétés de traduction et des traducteurs freelances "
+"qui peuvent vous aider à rédiger et à relire les textes."
 
 #: includes/admin/class-wpglobus-about.php:137
 msgid ""
 "When you choose a translator, please look at their native language, country "
 "of residence, specialization and knowledge of WordPress."
 msgstr ""
-"Lorsque vous choisissez un traducteur,  veuillez regarder leur langue "
-"maternelle, le pays de résidence, la spécialisation et la connaissance de "
+"Lorsque vous choisissez un traducteur,  veuillez regarder sa langue "
+"maternelle, son pays de résidence, sa spécialisation et ses connaissances de "
 "WordPress."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
@@ -153,13 +152,13 @@ msgid ""
 "directly and let us know how did it work for you!"
 msgstr ""
 "Nous prévoyons de maintenir une %s liste de traducteurs %s sur le site web "
-"WPGlobus. Ce n'est pas une approbation, juste une courtoisie. Veuillez les "
-"contacter directement et nous faire savoir comment cela a fonctionné pour "
-"vous&nbsp;!"
+"WPGlobus. Ce n’est pas une approbation, juste une courtoisie. Veuillez les "
+"contacter directement et nous faire savoir comment cela c’est passé pour "
+"vous !"
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
-msgstr "Remarques importantes&nbsp;:"
+msgstr "Remarques importantes :"
 
 #: includes/admin/class-wpglobus-about.php:159
 msgid ""
@@ -167,7 +166,7 @@ msgid ""
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
 "com</code> and language queries <code>example.com?lang=xx</code>."
 msgstr ""
-"WPGlobus ne prends en charge les URL de localisation que dans la forme "
+"WPGlobus ne prend en charge les URL de localisation que dans la forme "
 "<code>example.com/xx/page/</code>. Nous ne prenons pas en charge les sous-"
 "domaines <code>xx.example.com</code> et les requêtes de langue <code>example."
 "com?lang=xx</code>."
@@ -182,8 +181,8 @@ msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
 msgstr ""
-"Ils peuvent afficher des textes sans traduction, ou avec tous les langages "
-"mélangés."
+"Ils peuvent afficher des textes sans traduction, ou avec toutes les langages "
+"mélangées."
 
 #. translators: %s are used to insert HTML link. Keep them in place.
 #: includes/admin/class-wpglobus-about.php:167
@@ -191,8 +190,8 @@ msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 msgstr ""
-"Veuillez contacter l'auteur du thème / extension. S'ils sont incapables "
-"d'apporter de l'aide, songez à %s embaucher l'équipe WPGlobus %s pour vous "
+"Veuillez contacter l’auteur du thème/extension. S’il est incapables "
+"d'apporter de l’aide, songez à %s embaucher l’équipe WPGlobus %s pour vous "
 "écrire un code personnalisé."
 
 #: includes/admin/class-wpglobus-admin-menu.php:29
@@ -202,7 +201,7 @@ msgstr "Voir les extensions WPGlobus gratuites et premium"
 #: includes/admin/class-wpglobus-admin-page.php:32
 #: includes/admin/class-wpglobus-clean.php:581
 msgid "Multilingual Everything!"
-msgstr "Tout multilingue&nbsp;!"
+msgstr "Tout multilingue !"
 
 #: includes/admin/class-wpglobus-admin-page.php:34
 #: includes/admin/class-wpglobus-clean.php:584
@@ -210,12 +209,12 @@ msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
 "multilingual WordPress blogs and sites."
 msgstr ""
-"WPGlobus fait partie des extensions WordPress qui vous aident à rendre les "
-"blogs et les sites WordPress multilingues."
+"WPGlobus fait partie de la famille des extensions WordPress qui vous aident "
+"à rendre les blogs et les sites WordPress multilingues."
 
 #: includes/admin/class-wpglobus-clean.php:232
 msgid "Remove the WPGlobus settings (not recommended)"
-msgstr "Retirer les réglages de WPGlobus (non recommandé)"
+msgstr "Supprimer les réglages de WPGlobus (non recommandé)"
 
 #: includes/admin/class-wpglobus-clean.php:591
 msgid "Clean-up Tool"
@@ -243,12 +242,12 @@ msgid ""
 "so on."
 msgstr ""
 "Cet outil doit être utilisé uniquement si vous prévoyez de désinstaller "
-"complètement WPGlobus. En l'utilisant, vous allez supprimer toutes les "
+"complètement WPGlobus. En l’utilisant, vous allez supprimer toutes les "
 "traductions que vous avez saisies dans vos articles, pages, etc..., pour ne "
 "garder que les textes de la langue principale. faire Veuillez vous assurez "
 "que toutes les entrées ont un contenu dans la langue principale. Sans cela, "
-"vous pourriez vous retrouver avec des titres vides, pas de contenu, pas "
-"d'extraits, des commentaires vierges et ainsi de suite."
+"vous pourriez vous retrouver avec des titres vides, sans contenu, sans "
+"extrait, des commentaires vierges et ainsi de suite."
 
 #. translators: %1$s - language name, %1$s - language code. Do not remove.
 #: includes/admin/class-wpglobus-clean.php:622
@@ -257,14 +256,14 @@ msgid ""
 "%1$s WILL BE DELETED! To change the main language, please go to Settings."
 msgstr ""
 "La langue principale est actuellement configurée à %1$s (%2$s). TOUS LES "
-"TEXTES QUI NE SONT PAS EN %1$s SERONT SUPPRIMÉS&nbsp;! Pour changer la "
-"langue principale, veuillez allez dans Réglages."
+"TEXTES QUI NE SONT PAS EN %1$s SERONT SUPPRIMÉS ! Pour changer la langue "
+"principale, veuillez allez dans Réglages."
 
 #: includes/admin/class-wpglobus-clean.php:631
 msgid "You are about to clean the content of the following database tables:"
 msgstr ""
 "Vous êtes sur le point de nettoyer le contenu des tables suivantes de la "
-"base de données&nbsp;:"
+"base de données :"
 
 #: includes/admin/class-wpglobus-clean.php:639
 msgid "The operations log"
@@ -860,7 +859,7 @@ msgstr "*) Disponible après que le menu ait été enregistré."
 
 #: includes/class-wpglobus.php:1281
 msgid "Need a multilingual slug?"
-msgstr ""
+msgstr "Vous avez besoin d’un identifiant multilingue ?"
 
 #: includes/class-wpglobus.php:3266
 msgid "You must enable Pretty Permalinks to use WPGlobus."

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: https://wpglobus.com/pg/contact-us/\n"
-"POT-Creation-Date: 2017-09-09 04:37:13+00:00\n"
-"PO-Revision-Date: 2017-07-21 11:18+0000\n"
+"POT-Creation-Date: 2017-09-09 13:05:02+00:00\n"
+"PO-Revision-Date: 2017-09-09 13:03+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_GB/)\n"
@@ -751,33 +751,35 @@ msgstr "Technical Information"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:44
 msgid "WPGlobus Recommends:"
-msgstr ""
+msgstr "WPGlobus Recommends:"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:53
 msgid "WPGlobus for WooCommerce"
-msgstr ""
+msgstr "WPGlobus for WooCommerce"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:57
 msgid ""
 "Translate product titles and descriptions, product categories, tags and "
 "attributes."
 msgstr ""
+"Translate product titles and descriptions, product categories, tags and "
+"attributes."
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
 msgid "Get it now:"
-msgstr ""
+msgstr "Get it now:"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
 msgid "WPGlobus Multi-Currency"
-msgstr ""
+msgstr "WPGlobus Multi-Currency"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:76
 msgid "Accept multiple currencies in your online store!"
-msgstr ""
+msgstr "Accept multiple currencies in your online store!"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:81
 msgid "Check it out:"
-msgstr ""
+msgstr "Check it out:"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -829,7 +831,7 @@ msgstr "*) Available after the menu is saved."
 
 #: includes/class-wpglobus.php:1281
 msgid "Need a multilingual slug?"
-msgstr ""
+msgstr "Need a multilingual slug?"
 
 #: includes/class-wpglobus.php:3266
 msgid "You must enable Pretty Permalinks to use WPGlobus."
