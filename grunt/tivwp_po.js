@@ -4,7 +4,7 @@
 module.exports = {
     all: {
         options: {
-            pot_file: "<%= cfg.path.languages %>/<%= package.name %>.pot",
+            pot_file: "<%= cfg.path.languages %>/<%= cfg.text_domain %>.pot",
             do_mo: true
         },
         files: [{

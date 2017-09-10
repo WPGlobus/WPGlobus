@@ -23,13 +23,29 @@ module.exports = {
             }
         ]
     },
-    wpi18n: {
+    pot: {
         overwrite: true,
-        src: ["node_modules/node-wp-i18n/bin/php/extract.php"],
+        src: ["<%= cfg.path.languages %>/<%= cfg.text_domain %>.pot"],
         replacements: [
             {
-                from: "public function entry_from_call( $call, $file_name ) {",
-                to: "public function entry_from_call( $call, $file_name ) { if ( $call['args'][ count( $call['args'] ) - 1 ] !== '<%= cfg.text_domain %>' ) { return null; }"
+                from: "# SOME DESCRIPTIVE TITLE.",
+                to: "# <%= package.title %>"
+            },
+            {
+                from: "# Copyright (C) YEAR <%= cfg.copyright %>",
+                to: "# Copyright (C) <%= cfg.copyright %>"
+            },
+            {
+                from: "# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.",
+                to: "#"
+            },
+            {
+                from: "\"Language: \\n\"",
+                to: "\"Language: en\\n\""
+            },
+            {
+                from: "Content-Type: text/plain; charset=CHARSET\n",
+                to: "Content-Type: text/plain; charset=UTF-8\n"
             }
         ]
     },
@@ -48,3 +64,4 @@ module.exports = {
         ]
     }
 };
+

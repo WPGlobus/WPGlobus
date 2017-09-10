@@ -1355,9 +1355,11 @@ class WPGlobus {
 			} else if ( 'customize.php' == $page ) {
 
 				if ( version_compare( WPGLOBUS_VERSION, '1.4.0-beta1', '<' ) ) {
+					/// Do not translate
 					$html = sprintf( __( 'You are customizing %s' ), '<strong class="theme-name site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' );
 				} else {
 					// @since 1.4.0 class panel-title site-title
+					/// Do not translate
 					$html = sprintf( __( 'You are customizing %s' ), '<strong class="panel-title site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' );
 				}
 
@@ -1826,7 +1828,7 @@ class WPGlobus {
 	public function on_get_convert_url_menu_items( $sorted_menu_items ) {
 
 		foreach ( $sorted_menu_items as $key => $item ) {
-			
+
 			/**
 			 * Ability to avoid the localize URL.
 			 * @since 1.8.6
@@ -1835,7 +1837,7 @@ class WPGlobus {
 			if ( ! empty( $item->classes ) && in_array( 'wpglobus-menu-item-url-nolocalize', $item->classes ) ) {
 				$localize = false;
 			}
-			
+
 			if ( 'custom' == $item->type ) {
 				if ( $localize ) {
 					$sorted_menu_items[ $key ]->url = WPGlobus_Utils::localize_url( $sorted_menu_items[ $key ]->url );
@@ -2648,7 +2650,9 @@ class WPGlobus {
 						<tbody>
 						<tr>
 							<td id="wp-word-count-<?php echo $language; ?>"
-							    class="wpglobus-wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count-' . $language . '">0</span>' ); ?></td>
+							    class="wpglobus-wp-word-count"><?php printf(
+									/// Do not translate
+							    	__( 'Word count: %s' ), '<span class="word-count-' . $language . '">0</span>' ); ?></td>
 							<td class="autosave-info">
 
 								<span class="autosave-message">&nbsp;</span>
@@ -2656,9 +2660,13 @@ class WPGlobus {
 								if ( 'auto-draft' != $post->post_status ) {
 									echo '<span id="last-edit">';
 									if ( $last_user ) {
-										printf( __( 'Last edited by %1$s on %2$s at %3$s' ), esc_html( $last_user->display_name ), mysql2date( get_option( 'date_format' ), $post->post_modified ), mysql2date( get_option( 'time_format' ), $post->post_modified ) );
+										printf(
+											/// Do not translate
+											__( 'Last edited by %1$s on %2$s at %3$s' ), esc_html( $last_user->display_name ), mysql2date( get_option( 'date_format' ), $post->post_modified ), mysql2date( get_option( 'time_format' ), $post->post_modified ) );
 									} else {
-										printf( __( 'Last edited on %1$s at %2$s' ), mysql2date( get_option( 'date_format' ), $post->post_modified ), mysql2date( get_option( 'time_format' ), $post->post_modified ) );
+										printf(
+											/// Do not translate
+											__( 'Last edited on %1$s at %2$s' ), mysql2date( get_option( 'date_format' ), $post->post_modified ), mysql2date( get_option( 'time_format' ), $post->post_modified ) );
 									}
 									echo '</span>';
 								} ?>
@@ -2954,7 +2962,9 @@ class WPGlobus {
 				<div id="titlediv-<?php echo $language; ?>" class="titlediv-wpglobus">
 					<div id="titlewrap-<?php echo $language; ?>" class="titlewrap-wpglobus">
 						<label class="screen-reader-text" id="title-prompt-text-<?php echo $language; ?>"
-						       for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
+						       for="title_<?php echo $language; ?>"><?php echo apply_filters( 'enter_title_here',
+								/// Do not translate
+								__( 'Enter title here' ), $post ); ?></label>
 						<input type="text" name="post_title_<?php echo $language; ?>" size="30"
 						       value="<?php echo esc_attr( htmlspecialchars( WPGlobus_Core::text_filter( $post->post_title, $language, WPGlobus::RETURN_EMPTY ) ) ); ?>"
 						       id="title_<?php echo $language; ?>"
@@ -3073,7 +3083,9 @@ class WPGlobus {
 		}
 
 		if ( ! taxonomy_exists( $taxonomy ) ) {
-			$error = new WP_Error( 'invalid_taxonomy', __( 'Invalid taxonomy' ) );
+			$error = new WP_Error( 'invalid_taxonomy',
+				/// Do not translate
+				__( 'Invalid taxonomy' ) );
 
 			return $error;
 		}

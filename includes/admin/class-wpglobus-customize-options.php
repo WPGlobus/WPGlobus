@@ -355,7 +355,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * @see https://wordpress.org/themes/experon/
 			 */
 			self::$disabled_themes[] = 'experon';
-			
+
 			add_action( 'wp_loaded', array( __CLASS__, 'init' ) );
 
 			/**
@@ -686,8 +686,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				$desc_add_languages =
 					__( 'Choose a language you would like to enable. <br>Press the [Save & Publish] button to confirm.',
 						'wpglobus' ) . '<br />';
-				// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 				$desc_add_languages .= sprintf(
+					/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 					__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
 					'<a style="text-decoration:underline;" href="' . admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=add" target="_blank">',
 					'</a>'
@@ -826,7 +826,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				/** @see option wpglobus_option['selector_wp_list_pages']['show_selector'] */
 				self::$settings['wpglobus_languages_section']['wpglobus_customize_selector_wp_list_pages']['option'] = 'show_selector';
 
-				/** 
+				/**
 				 * Custom CSS.
 				 */
 				$wp_customize->add_setting( 'wpglobus_customize_css_editor', array(
@@ -1125,7 +1125,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					$content = '<p><em>' .
 					           sprintf(
 						           esc_html(
-						           /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
+						           		/// translators: %?$s: HTML codes for hyperlink. Do not remove.
 							           __( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ) ),
 						           '<a href="' . $url_wpglobus_site_submit_ticket . '" target="_blank" style="text-decoration:underline;">',
 						           '</a>'
@@ -1136,10 +1136,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					           esc_html( __( 'Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language.', 'wpglobus' ) ) .
 					           '</strong></p>' .
 					           '<p>' .
-					           /* translators: %s: link to the Clean-up Tool */
-					           sprintf( __( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
-						           /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
-						           sprintf( __( '%1$sClean-up Tool%2$s', 'wpglobus' ),
+					           sprintf(
+						           /// translators: %s: link to the Clean-up Tool
+					           		__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
+						           sprintf(
+						           /// translators: %?$s: HTML codes for hyperlink. Do not remove.
+						           	__( '%1$sClean-up Tool%2$s', 'wpglobus' ),
 							           '<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
 							           '</a>'
 						           ) ) .
@@ -1149,13 +1151,15 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				case 'sorry_message' :
 
 					$content = '<p><strong>' .
-					           /* translators: %s: name of current theme */
-					           sprintf( __( 'Sorry, WPGlobus customizer doesn\'t support current theme %s.', 'wpglobus' ),
+					           sprintf(
+					           	/// translators: %s: name of current theme
+					           	__( 'Sorry, WPGlobus customizer doesn\'t support current theme %s.', 'wpglobus' ),
 						           '<em>' . $attrs->__get( 'name' ) . '</em>'
 					           ) .
 					           '<br />' .
-					           /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
-					           sprintf( __( 'Please use %1$sWPGlobus options page%2$s instead.', 'wpglobus' ),
+					           sprintf(
+						           /// translators: %?$s: HTML codes for hyperlink. Do not remove.
+					           	__( 'Please use %1$sWPGlobus options page%2$s instead.', 'wpglobus' ),
 						           '<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG . '&tab=0">',
 						           '</a>'
 					           ) .

@@ -618,7 +618,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				<div style="color:red; background-color: white; padding: .5em">
 					<?php
 					echo esc_html( sprintf(
-					/* translators: %1$s - language name, %1$s - language code. Do not remove. */
+						/// translators: %1$s - language name, %1$s - language code. Do not remove.
 						__( 'The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to Settings.', 'wpglobus' ),
 						WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
 						WPGlobus::Config()->default_language ) );

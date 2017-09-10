@@ -99,7 +99,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 				}
 
 				$placeholder =
-					( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : __( 'Select an item', 'redux-framework' );
+					( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) :
+						/// Do not translate
+						__( 'Select an item', 'redux-framework' );
 
 				if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
 					$select2_params = json_encode( $this->field['select2'] );
@@ -152,7 +154,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 
 				echo '</select>';
 			} else {
-				echo '<strong>' . __( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
+				echo '<strong>' .
+				     /// Do not translate
+				     __( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
 			}
 		} //function
 

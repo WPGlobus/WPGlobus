@@ -42,6 +42,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Translate plugin name and description in the Admin/Plugins.
+if ( 0 ):
+	/// Plugin Name
+	__( 'WPGlobus', 'wpglobus' );
+	/// Plugin Description
+	__( 'A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!', 'wpglobus' );
+	/// Plugin URI
+	__( 'https://github.com/WPGlobus/WPGlobus', 'wpglobus' );
+	/// Plugin Author
+	__( 'WPGlobus', 'wpglobus' );
+	/// Plugin Author URI
+	__( 'https://wpglobus.com/', 'wpglobus' );
+endif;
+
 define( 'WPGLOBUS_VERSION', '1.8.7' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 

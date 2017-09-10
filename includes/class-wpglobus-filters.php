@@ -654,14 +654,17 @@ class WPGlobus_Filters {
 			if ( is_wp_error( $saved ) ) {
 				$response['wp_autosave'] = array( 'success' => false, 'message' => $saved->get_error_message() );
 			} elseif ( empty( $saved ) ) {
-				$response['wp_autosave'] = array( 'success' => false, 'message' => __( 'Error while saving.' ) );
+				$response['wp_autosave'] = array( 'success' => false,
+				                                  /// Do not translate
+				                                  'message' => __( 'Error while saving.' ) );
 			} else {
-				/* translators: draft saved date format, see http://php.net/date */
+				/// Do not translate
 				$draft_saved_date_format = __( 'g:i:s a' );
-				/* translators: %s: date and time */
 				$response['wp_autosave'] = array(
 					'success' => true,
-					'message' => sprintf( __( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) )
+					'message' => sprintf(
+						/// Do not translate
+						__( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) )
 				);
 			}
 
@@ -759,12 +762,12 @@ class WPGlobus_Filters {
 		$text = WPGlobus_Core::text_filter( $original_text, WPGlobus::Config()->language );
 
 		if ( null === $more ) {
+			/// Do not translate
 			$more = __( '&hellip;' );
 		}
 
 		$text = wp_strip_all_tags( $text );
-		/* translators: If your word count is based on single characters (East Asian characters),
-		   enter 'characters'. Otherwise, enter 'words'. Do not translate into your own language. */
+		/// Do not translate
 		if ( 'characters' == _x( 'words', 'word count: words or characters?' ) && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
 			$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
 			preg_match_all( '/./u', $text, $words_array );

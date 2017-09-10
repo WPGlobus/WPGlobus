@@ -3,8 +3,8 @@
     "dist"
   ],
   "pomo": [
-    "replace:wpi18n",
-    "makepot",
+    "pot",
+    "replace:pot",
     "tivwp_po"
   ],
   "readme_md": [
@@ -15,7 +15,7 @@
     "exec:cpzu",
     "replace:version",
     "http:product-info",
-    "pomo",
+    "pot",
     "readme_md",
     "less",
     "cssmin",

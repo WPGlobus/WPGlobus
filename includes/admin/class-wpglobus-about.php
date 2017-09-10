@@ -28,7 +28,10 @@ class WPGlobus_About {
 			<a href="<?php echo esc_url( WPGlobus_Admin_Page::url_settings() ); ?>"
 			   class="nav-tab">
 				<?php WPGlobus_Admin_Page::nav_tab_icon_e( 'Settings' ); ?>
-				<?php esc_html_e( 'Settings' ); ?>
+				<?php
+				/// Do not translate
+				esc_html_e( 'Settings' );
+				?>
 			</a>
 			<a href="<?php echo esc_url( WPGlobus_Admin_Page::url_addons() ); ?>"
 			   class="nav-tab">
@@ -138,8 +141,8 @@ class WPGlobus_About {
 		</p>
 		<p>
 			<?php
-			/* translators: %s are used to insert HTML link. Keep them in place. */
 			printf(
+				/// translators: %s are used to insert HTML link. Keep them in place.
 				esc_html__( 'We are planning to maintain a %s list of translators %s on the WPGlobus website. This is not an endorsement, just a courtesy. Please contact them directly and let us know how did it work for you!', 'wpglobus' ),
 				'<a href="' . esc_url( WPGlobus_Utils::url_wpglobus_site() . 'translator/' . self::QA_CAMPAIGN ) . '">',
 				'</a>'
@@ -162,8 +165,8 @@ class WPGlobus_About {
 				<?php _e( 'Some themes and plugins are <strong>not multilingual-ready</strong>.', 'wpglobus' );  // WPCS: XSS ok. ?>
 				<?php esc_html_e( 'They might display some texts with no translation, or with all languages mixed together.', 'wpglobus' ); ?>
 				<?php
-				/* translators: %s are used to insert HTML link. Keep them in place. */
 				printf(
+					/// translators: %s are used to insert HTML link. Keep them in place.
 					esc_html__( 'Please contact the theme / plugin author. If they are unable to assist, consider %s hiring the WPGlobus Team %s to write a custom code for you.', 'wpglobus' ),
 					'<a href="' . esc_url( WPGlobus_Utils::url_wpglobus_site() . 'professional-support/' . self::QA_CAMPAIGN ) . '">',
 					'</a>'

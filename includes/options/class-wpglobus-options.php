@@ -138,21 +138,23 @@ class WPGlobus_Options {
 					'title'  => esc_html__( 'WARNING: old version of the ReduxFramework is active!', 'wpglobus' ),
 					'desc'   => '</br>' .
 					            sprintf(
-						            esc_html__( 'WPGlobus settings panel requires ReduxFramework %1$s or later.' ),
+						            esc_html__( 'WPGlobus settings panel requires ReduxFramework %1$s or later.', 'wpglobus' ),
 						            WPGlobus::$minimalReduxFramework_version
 					            ) .
 					            '</br>' .
 					            '</br>' .
-					            // translators: ReduxFramework - %1$s version, %2$s folder where installed
-					            sprintf( esc_html__( 'The currently active ReduxFramework (version %1$s) was loaded from the %2$s folder.', 'wpglobus' ),
+					            sprintf(
+					                /// translators: ReduxFramework - %1$s version, %2$s folder where installed
+					            	esc_html__( 'The currently active ReduxFramework (version %1$s) was loaded from the %2$s folder.', 'wpglobus' ),
 						            ReduxFramework::$_version,
 						            '<code>' . ReduxFramework::$_dir . '</code>'
 					            ) .
 					            '</br>' .
 					            '</br>' .
 					            '<strong>' .
-					            // translators: %1$s placeholder for the link to ReduxFramework plugin
-					            sprintf( esc_html__( 'We recommend you to install the most recent version of the ReduxFramework plugin: %1$s.', 'wpglobus' ), '<a href="https://wordpress.org/plugins/redux-framework/">https://wordpress.org/plugins/redux-framework/</a>' ) .
+					            sprintf(
+					                /// translators: %1$s placeholder for the link to ReduxFramework plugin
+					            	esc_html__( 'We recommend you to install the most recent version of the ReduxFramework plugin: %1$s.', 'wpglobus' ), '<a href="https://wordpress.org/plugins/redux-framework/">https://wordpress.org/plugins/redux-framework/</a>' ) .
 					            '</strong>'
 				,
 					'style'  => 'critical',
@@ -210,7 +212,7 @@ class WPGlobus_Options {
 				            '<p><em>' .
 				            sprintf(
 					            esc_html(
-					            /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
+					                /// translators: %?$s: HTML codes for hyperlink. Do not remove.
 						            __( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ) ),
 					            '<a href="' . $url_wpglobus_site_submit_ticket . '" target="_blank">',
 					            '</a>'
@@ -221,10 +223,12 @@ class WPGlobus_Options {
 				            esc_html( __( 'Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language.', 'wpglobus' ) ) .
 				            '</strong></p>' .
 				            '<p>' .
-				            /* translators: %s: link to the Clean-up Tool */
-				            sprintf( __( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
-					            /* translators: %?$s: HTML codes for hyperlink. Do not remove. */
-					            sprintf( __( '%1$sClean-up Tool%2$s', 'wpglobus' ),
+				            sprintf(
+				                /// translators: %s: link to the Clean-up Tool
+				            	__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
+					            sprintf(
+					                /// translators: %?$s: HTML codes for hyperlink. Do not remove.
+						            __( '%1$sClean-up Tool%2$s', 'wpglobus' ),
 						            '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
 						            '</a>'
 					            ) ) .
@@ -305,8 +309,9 @@ class WPGlobus_Options {
 
 		$desc_languages_intro = implode( '', array(
 			'<ul style="list-style: disc; list-style-position: inside;">',
-			// translators: %s placeholder for the icon (actual picture)
-			'<li>' . sprintf( __( 'Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons.', 'wpglobus' ), '<i class="dashicons dashicons-move"></i>' ) . '</li>',
+			'<li>' . sprintf(
+				/// translators: %s placeholder for the icon (actual picture)
+				__( 'Place the <strong>main language</strong> of your site at the top of the list by dragging the %s icons.', 'wpglobus' ), '<i class="dashicons dashicons-move"></i>' ) . '</li>',
 			'<li>' . __( '<strong>Uncheck</strong> the languages you do not plan to use.', 'wpglobus' ) . '</li>',
 			'<li>' . __( '<strong>Add</strong> more languages using the section below.', 'wpglobus' ) . '</li>',
 			'<li>' . __( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
@@ -316,8 +321,9 @@ class WPGlobus_Options {
 		$desc_more_languages =
 			__( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.',
 				'wpglobus' ) . '<br /><br />';
-		// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-		$desc_more_languages .= sprintf( __( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
+		$desc_more_languages .= sprintf(
+			/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+			__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
 			'<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
 
 		$this->sections[] = array(
@@ -420,7 +426,7 @@ class WPGlobus_Options {
 					'mode'     => 'javascript',
 					'theme'    => 'chrome',
 					'compiler' => 'false',
-					'desc'     => __( '', 'wpglobus' ),
+					//'desc'     => __( '', 'wpglobus' ),
 					'subtitle' => __( '(Paste your JS code here.)', 'wpglobus' ),
 					'default'  => '',
 					'rows'     => 15

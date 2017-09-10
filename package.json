@@ -21,12 +21,11 @@
     "grunt-contrib-cssmin": "^2.0.0",
     "grunt-contrib-less": "^1.4.0",
     "grunt-contrib-uglify": "^3.0.1",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-exec": "^2.0.0",
+    "grunt-exec": "^3.0.0",
+    "grunt-pot": "^0.3.0",
     "grunt-http": "^2.0.1",
     "grunt-text-replace": "^0.4.0",
     "grunt-tivwp-po": "^0.1.0",
-    "grunt-wp-i18n": "^1.0.0",
     "grunt-wp-readme-to-markdown": "^2.0.1",
     "grunt-writefile": "^0.1.4",
     "load-grunt-config": "^0.19.2",
@@ -35,6 +34,7 @@
   "dependencies": {},
   "scripts": {
     "list": "npm list --dept=0 && npm outdated",
+    "upup": "rm package-lock.json && npm install && npm run list",
     "changes": "git log --oneline develop --not master"
   }
 }
