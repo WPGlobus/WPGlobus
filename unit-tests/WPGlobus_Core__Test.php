@@ -12,7 +12,7 @@ require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-core.php';
 /**
  *
  */
-class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
+class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @covers WPGlobus_Core::text_filter
@@ -107,21 +107,23 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return WP_Post|PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected function createMockWPPost() {
+		/** @noinspection MockingFinalClassesInspection */
+		return $this->getMockBuilder( 'WP_Post' )->getMock();
+	}
+
+	/**
 	 * @covers WPGlobus_Core::translate_wp_post
 	 */
 	public function test_translate_wp_post() {
 
 		/**
-		 * We are using a mock, so need this to please the lint
-		 * @var WP_Post $post
-		 */
-
-		/**
 		 * Default behavior (no parameters)
 		 */
 
-		$post = $this->getMock( 'WP_Post' );
-
+		$post = $this->createMockWPPost();
 		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		$post->post_content = '{:en}post_content EN{:}{:ru}post_content RU{:}';
 		$post->post_excerpt = '{:en}post_excerpt EN{:}{:ru}post_excerpt RU{:}';
@@ -149,7 +151,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		/**
 		 * Translate to a language other than the current one
 		 */
-		$post             = $this->getMock( 'WP_Post' );
+		$post = $this->createMockWPPost();
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'ru' );
 		self::assertEquals( 'post_title RU', $post->post_title, 'post_title' );
@@ -158,7 +160,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		/**
 		 * Translate to a non-existing language - return in default language
 		 */
-		$post               = $this->getMock( 'WP_Post' );
+		$post = $this->createMockWPPost();
 		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		$post->post_content = '{:en}post_content EN{:}{:xx}post_content XX{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'xx' );
@@ -170,7 +172,7 @@ class WPGlobus_Core__Test extends PHPUnit_Framework_TestCase {
 		 * Repeated attempt to translate has no effect, when called with no parameters,
 		 * because we pass the post object by reference
 		 */
-		$post             = $this->getMock( 'WP_Post' );
+		$post = $this->createMockWPPost();
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'en' );
 		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );

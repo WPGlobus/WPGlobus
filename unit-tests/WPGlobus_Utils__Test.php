@@ -12,7 +12,7 @@ require_once dirname( __FILE__ ) . '/mocks-wp.php';
  */
 
 /** @noinspection PhpUndefinedClassInspection */
-class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
+class WPGlobus_Utils__Test extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var string $option_home
@@ -46,7 +46,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 *
 		 * @var WPGlobus_Config $config
 		 */
-		$config = $this->getMock( 'WPGlobus_Config' );
+		$config = $this->getMockBuilder( 'WPGlobus_Config' )->getMock();
 
 		/**
 		 * These languages are enabled
@@ -230,7 +230,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 *
 		 * @var WPGlobus_Config $config
 		 */
-		$config = $this->getMock( 'WPGlobus_Config' );
+		$config = $this->getMockBuilder( 'WPGlobus_Config' )->getMock();
 
 		/**
 		 * These languages are enabled
@@ -411,7 +411,7 @@ class WPGlobus_Utils__Test extends PHPUnit_Framework_TestCase {
 		 *
 		 * @var WPGlobus_Config $config
 		 */
-		$config = $this->getMock( 'WPGlobus_Config' );
+		$config = $this->getMockBuilder( 'WPGlobus_Config' )->getMock();
 
 		/**
 		 * These languages are enabled

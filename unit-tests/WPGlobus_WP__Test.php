@@ -11,7 +11,7 @@ require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-wp.php';
  */
 
 /** @noinspection PhpUndefinedClassInspection */
-class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
+class WPGlobus_WP__Test extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @covers WPGlobus_WP::is_doing_ajax
@@ -170,7 +170,7 @@ class WPGlobus_WP__Test extends PHPUnit_Framework_TestCase {
 	public static function test_is_function_in_backtrace() {
 		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( __FUNCTION__ ) );
 		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( __CLASS__, __FUNCTION__ ) ) );
-		self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( 'PHPUnit_Framework_TestCase', 'runTest' ) ) );
+		//self::assertTrue( WPGlobus_WP::is_function_in_backtrace( array( '\PHPUnit\Framework\TestCase', 'runTest' ) ) );
 
 		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( 'no-such-function' ) );
 		self::assertFalse( WPGlobus_WP::is_function_in_backtrace( null ) );
