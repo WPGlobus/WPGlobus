@@ -42,6 +42,11 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $qt_comments ), 'QT comments' );
 		self::assertEquals( 'RU', WPGlobus_Core::text_filter( $qt_comments, 'ru' ), 'QT comments' );
 
+		$qtx_tags = '[:en]EN[:ru]RU[:de]DE[:]';
+		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $qtx_tags ), __LINE__ );
+		self::assertEquals( 'RU', WPGlobus_Core::text_filter( $qtx_tags, 'ru' ), __LINE__ );
+		self::assertEquals( 'DE', WPGlobus_Core::text_filter( $qtx_tags, 'de' ), __LINE__ );
+
 		$no_tags = 'EN';
 		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags ), 'No tags' );
 		self::assertEquals( 'EN', WPGlobus_Core::text_filter( $no_tags, null, WPGlobus::RETURN_EMPTY ), 'No tags, return empty' );
@@ -77,12 +82,15 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		/** @var string[] $positives */
 		$positives = array(
 			'{:en}EN{:}{:ru}RU{:}',
-			'[:en]EN[:ru]RU',
-			'<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->',
 			"Multi-line\n\n {:en}E\nN{:}\n\n{:ru}RU{:}",
 			'{:xx',
 			'Lead {:xx',
 			'Lead {:xx trail',
+			// qTranslate
+			'[:en]EN[:ru]RU',
+			'<!--:en-->EN<!--:--><!--:ru-->RU<!--:-->',
+			// qTranslate-X
+			'[:en]EN[:ru]RU[:]',
 		);
 
 		foreach ( $positives as $_ ) {
