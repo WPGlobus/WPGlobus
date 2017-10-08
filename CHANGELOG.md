@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.8.8 ###
+
+* ADDED:
+	* Yoast SEO: support meta keywords tag.
+
 ### 1.8.7 ###
 
 * COMPATIBILITY:
