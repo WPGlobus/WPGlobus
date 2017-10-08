@@ -113,11 +113,34 @@ class WPGlobus_YoastSEO {
 			add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), PHP_INT_MAX );
 			add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), PHP_INT_MAX );
 			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 0, 4 );
+			
+			/**
+			 * Filter meta keywords.
+			 * @from 1.8.8
+			 */
+			add_filter( 'wpseo_metakeywords', array( __CLASS__, 'filter__metakeywords' ), 0 );
 
 		}
 
 	}
-
+	
+	/**
+	 * Filter Yoast post meta keywords.
+	 *
+	 * @scope front
+	 * @since 1.8.8
+	 *
+	 * @param string $keywords Multilingual keywords.
+	 *
+	 * @return string.
+	 */
+	public static function filter__metakeywords( $keywords ) {
+		if ( WPGlobus::Config()->language != WPGlobus::Config()->default_language ) {
+			return '';
+		}
+		return WPGlobus_Core::text_filter($keywords, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY);
+	}
+	
 	/**
 	 * Fix empty yoast_wpseo_focuskw while saving/updating post with active extra language.
 	 *
@@ -328,13 +351,19 @@ class WPGlobus_YoastSEO {
 				WPGlobus::O()->vendors_scripts['WPSEO_PREMIUM'] = true;
 			}
 
-			$yoastseo_plus_access = sprintf(
+			$yoastseo_plus_page_analysis_access = sprintf(
 				__( 'Please see %s to get access to page analysis with YoastSEO.', '' ),
 				'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>'
 			);
 
+			$yoastseo_plus_meta_keywords_access = sprintf(
+				__( 'Please see %s to get access to meta keywords with YoastSEO.', '' ),
+				'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>'
+			);			
+			
 			$i18n = array(
-				'yoastseo_plus_access' => $yoastseo_plus_access
+				'yoastseo_plus_page_analysis_access' => $yoastseo_plus_page_analysis_access,
+				'yoastseo_plus_meta_keywords_access' => $yoastseo_plus_meta_keywords_access
 			);
 
 			$src_version 		 = false;
@@ -482,7 +511,10 @@ class WPGlobus_YoastSEO {
 			'wpseo-focuskeyword-section',
 			'wpseo-pageanalysis-section',
 			'pageanalysis',
-			#'_yst_is_cornerstone'
+			#'_yst_is_cornerstone',
+			/* @since 1.8.8 */
+			'wpseometakeywords',
+			'yoast_wpseo_metakeywords'
 		);
 
 		/**
@@ -490,7 +522,9 @@ class WPGlobus_YoastSEO {
 		 * @since 1.7.12
 		 */
 		$ids_premium_special = array(
-			'_yst_is_cornerstone'
+			'_yst_is_cornerstone',
+			/* @since 1.8.8 */
+			'wpseometakeywords'
 		);
 
 		$names = array(
@@ -499,7 +533,9 @@ class WPGlobus_YoastSEO {
 			'yoast_wpseo_focuskeywords',
 			'yoast_wpseo_title',
 			'yoast_wpseo_metadesc',
-			'yoast_wpseo_linkdex'
+			'yoast_wpseo_linkdex',
+			/* @since 1.8.8 */
+			'yoast_wpseo_metakeywords'
 		);
 
 		$qtip = array(
