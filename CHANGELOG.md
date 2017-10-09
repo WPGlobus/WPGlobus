@@ -5,7 +5,7 @@
 ### 1.8.8 ###
 
 * ADDED:
-	* Yoast SEO: support meta keywords tag.
+	* Yoast SEO: support multiple languages in the `META KEYWORDS` tag.
 
 ### 1.8.7 ###
 

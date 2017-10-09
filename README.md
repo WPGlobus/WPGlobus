@@ -210,6 +210,13 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 
 ## Changelog ##
 
+### 1.8.8 ###
+
+* COMPATIBILITY:
+	* WordPress 4.8.2
+* ADDED:
+	* Yoast SEO: support multiple languages in the `META KEYWORDS` tag.
+
 ### 1.8.7 ###
 
 * COMPATIBILITY:

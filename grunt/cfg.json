@@ -10,6 +10,6 @@
     "less": "includes/{css,options/fields}",
     "css": "includes/css",
     "languages": "languages",
-    "composer": "/cygwin64/usr/local/bin/composer.phar"
+    "composer": "/tools/composer.phar"
   }
 }
