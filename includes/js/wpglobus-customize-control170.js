@@ -385,29 +385,38 @@ jQuery(document).ready(function ($) {
 						api.ctrlWidgetCallback( obj, control );
 					}
 				}
+				
 				api.controlWidgets[ obj ]['parent'] = control.selector;
 
-				/**
-				 * Add Mutation Observer for widget.
-				 */
-				api.controlWidgets[ obj ]['observer'] 	= new MutationObserver( function( mutations ) {
-					mutations.forEach( function( mutation ) {
-						if ( 'class' == mutation.attributeName ) {
-							if ( -1 != mutation.target.className.indexOf( 'expanding' ) ) {
-								/**
-								 * @todo Now are using 'expanding' class maybe need to use 'widget-rendered' with delay.
-								 */
-								api.ctrlWidgetCallback( obj );
+				if ( $(control.selector).length != 1 ) {
+					/**
+					 * Don't add MutationObserver for non-exists parent of control element.
+					 * @see https://wordpress.org/themes/ascend/
+					 */
+					api.controlWidgets[ obj ]['observer'] = null;
+				} else {
+					/**
+					 * Add Mutation Observer for widget.
+					 */
+					api.controlWidgets[ obj ]['observer'] = new MutationObserver( function( mutations ) {
+						mutations.forEach( function( mutation ) {
+							if ( 'class' == mutation.attributeName ) {
+								if ( -1 != mutation.target.className.indexOf( 'expanding' ) ) {
+									/**
+									 * @todo Now are using 'expanding' class maybe need to use 'widget-rendered' with delay.
+									 */
+									api.ctrlWidgetCallback( obj );
+								}
 							}
-						}
+						});
 					});
-				});
 
-				api.controlWidgets[ obj ]['observer'].observe(
-					document.querySelector( api.controlWidgets[ obj ]['parent'] ),
-						{ attributes: true, childList: true, characterData: true }
-				);
-
+					api.controlWidgets[ obj ]['observer'].observe(
+						document.querySelector( api.controlWidgets[ obj ]['parent'] ),
+							{ attributes: true, childList: true, characterData: true }
+					);
+				}
+				
 				return false;
 			}
 
