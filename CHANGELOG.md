@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.8.9 ###
+
+* FIXED:
+	* Customizer: don't add MutationObserver for non-exists parent of control element (e.g. @see https://wordpress.org/themes/ascend/).
+	
 ### 1.8.8 ###
 
 * ADDED:
