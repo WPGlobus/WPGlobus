@@ -15,7 +15,7 @@
     "exec:cpzu",
     "replace:version",
     "http:product-info",
-    "pot",
+    "pomo",
     "readme_md",
     "less",
     "cssmin",
