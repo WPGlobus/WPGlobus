@@ -1,0 +1,25 @@
+<phpunit
+	bootstrap="unit-tests/bootstrap.php"
+	colors="true"
+	verbose="true"
+	processIsolation="true"
+>
+	<testsuites>
+		<testsuite name="all">
+			<directory suffix="Test.php">unit-tests</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist
+			processUncoveredFilesFromWhitelist="true"
+		>
+			<directory>unit-tests</directory>
+			<exclude>
+				<directory suffix="Test.php">src</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	<php>
+		<const name="DOING_PHPUNIT" value="true"/>
+	</php>
+</phpunit>

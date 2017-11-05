@@ -4,7 +4,6 @@
  *
  * @package WPGlobus\Unit-Tests
  */
-require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-wp.php';
 
 /**
  * Class WPGlobus_WP__Test

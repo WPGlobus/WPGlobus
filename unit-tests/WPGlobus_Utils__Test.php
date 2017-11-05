@@ -4,8 +4,6 @@
  *
  * @package WPGlobus\Unit-Tests
  */
-require_once dirname( __FILE__ ) . '/../includes/class-wpglobus-utils.php';
-require_once dirname( __FILE__ ) . '/mocks-wp.php';
 
 /**
  * Class WPGlobus_Utils__Test
@@ -83,13 +81,13 @@ class WPGlobus_Utils__Test extends \PHPUnit\Framework\TestCase {
 			array( '?', '?', 'en' ),
 			//
 			array( '', '/pt', '' ),
-			array( '/cat/page/', '/pt/cat/page/' ),
 			array( '', '/ru', 'ru' ),
 			array( '/', '/ru/', 'ru' ),
 			array( '/pt/', '/ru/', 'ru' ),
 			array( '/ru/', '/ru/', 'ru' ),
 			array( '/de/', '/ru/de/', 'ru' ),
 			array( '/page/', '/ru/page/', 'ru' ),
+            array( '/cat/page/', '/pt/cat/page/', 'pt' ),
 			array( '/cat/page/', '/ru/cat/page/', 'ru' ),
 			array( '/cat/page/pt/aaa/', '/ru/cat/page/pt/aaa/', 'ru' ),
 			//
@@ -171,6 +169,8 @@ class WPGlobus_Utils__Test extends \PHPUnit\Framework\TestCase {
 			$home_url          = get_option( 'home' );
 
 			foreach ( $good as $_ ) {
+			    // Make sure that there are no missing array elements.
+                self::assertEquals(3, count($_), print_r($_, true));
 				list( $url, $localized_url, $language ) = $_;
 				self::assertEquals( $home_url . $localized_url,
 					WPGlobus_Utils::localize_url( $home_url . $url, $language, $config ),
