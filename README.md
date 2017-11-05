@@ -4,8 +4,8 @@
 **Contributors:** [tivnetinc](https://profiles.wordpress.org/tivnetinc), [alexgff](https://profiles.wordpress.org/alexgff), [tivnet](https://profiles.wordpress.org/tivnet)  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** WPGlobus, localization, multilanguage, multilingual, translation  
-**Requires at least:** 4.7  
-**Tested up to:** 4.8  
+**Requires at least:** 4.8  
+**Tested up to:** 4.9  
 **Requires PHP:** 5.3  
 **Stable tag:** trunk  
 **License:** GPL-3.0  
@@ -161,13 +161,43 @@ Then please read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 * [The Quick Start Guide](https://wpglobus.com/quick-start/)
 * [Before contacting Support...](https://wpglobus.com/before-contacting-wpglobus-support/)
 
+### No automatic translation ###
+
+WPGlobus does NOT translate texts! You need to **translate texts manually**.
+
+### Page builders / composers (Avada, Divi, etc.) ###
+
+WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - **require a premium add-on**, which is currently at the Beta-testing stage. [Please read the details here](https://wpglobus.com/wpglobus-page-builders-support/).
+
+### After deactivating WPGlobus, all my pages look like garbage! ###
+
+What you see is a mix of the languages, which WPGlobus normally knows how to handle.
+When you deactivate WPGlobus, your site is not multilingual anymore, and you have to remove all translations.
+
+WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
+
+### Unable to access WPGlobus settings ###
+
+Q: After changing from the default theme to another one, I am not allowed to access the WPGlobus plugin settings.
+ Getting the "Sorry, you are not allowed to access this page." error message.
+ When reverting back to the default theme, everything is OK.
+
+A: Please install and activate the [Redux Framework plugin](https://wordpress.org/plugins/redux-framework/).
+ It should solve the compatibility problem between your theme and WPGlobus.
+
 ### When I switch language, I am getting 404 on all pages ###
 
 Please go to the `Admin - Settings - Permalinks` page. Make sure that the `Common Settings` is not set to "Plain" and then press the `Save Changes` button. It should help.
 
+### Is there a PRO version? ###
+
+We do not make a "PRO" plugin that replaces the free one. Instead, we have a set of add-ons that extend the WPGlobus functionality. Please found them on [our website](https://wpglobus.com).
+
+**NOTE:** When you install an add-on, such as **WPGlobus Plus**, you must keep the WPGlobus plugin activated!
+
 ### From the WPGlobus.com FAQ Archives: ###
 
-* [Do you support PHP 5.x? PHP 7?](https://wpglobus.com/faq/support-php-5-2/)
+* [Do you support PHP 5.x? PHP 7.x?](https://wpglobus.com/faq/support-php-5-2/)
 * [Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x?](https://wpglobus.com/faq/support-msie-opera-safari-chrome-firefox/)
 * [Do you plan to support subdomains and URL query parameters?](https://wpglobus.com/faq/subdomains-and-url-query-parameters/)
 * [I am using WPML, qTranslate-X, Polylang, Multilingual Press, etc. Can I switch to WPGlobus?](https://wpglobus.com/faq/i-am-using-wpml-qtranslate-polylang-multilingual-press-etc-can-i-switch-to-wpglobus/)
@@ -210,6 +240,21 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 
 ## Changelog ##
 
+### 1.8.9 ###
+
+* TESTED WITH WordPress 4.9 and the following plugins active:
+	* advanced-custom-fields 4.4.12
+	* tablepress 1.8.1
+	* types 2.2.18
+	* woocommerce 3.2.3
+	* woocommerce-api-manager 1.5.4
+	* woocommerce-composite-products 3.12.2
+	* woocommerce-dynamic-pricing 3.1.2
+	* woocommerce-subscriptions 2.2.13
+	* wordpress-seo 5.7.1
+* FIXED:
+	* Customizer: don't add MutationObserver when a control element does not have a parent. Example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
+
 ### 1.8.8 ###
 
 * COMPATIBILITY:
@@ -231,50 +276,6 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 	* Widgets: handle multiple WYSIWYG text widgets.
 	* Core: do not localize menu URLs marked with a special CSS class `wpglobus-menu-item-url-nolocalize`.
 	* Core: `define( 'WPGLOBUS_CUSTOMIZE', false )` disables WPGlobus options in the Customizer.
-
-### 1.8.5 ###
-
-* FIXED:
-	* Widgets: support the WYSIWYG text widgets changes introduced by WP 4.8.1.
-
-### 1.8.4 ###
-
-* ADDED:
-	* Apply filter to the `url_to_postid()` function so it will return the correct Post ID for URLs in non-default language.
-	* Allow `oembed` to handle URLs in non-default language.
-	* Localize the output of the oembed's JSON.
-
-### 1.8.3 ###
-
-* ADDED:
-	* Multilingual editor for the WYSIWYG text widgets (`arbitraryTextOrHTML`).
-	* Customizer: `Customizr Pro` theme added to the list of exceptions.
-	* Admin: additional translations in `ar` and `ro`.
-* FIXED:
-	* Yoast SEO: saving description on the `term.php` page.
-
-### 1.8.2 ###
-
-* ADDED:
-	* Customizer: support TinyMCE editor in controls.
-	* Customizer: preview refresh.
-
-### 1.8.1 ###
-
-* ADDED:
-	* New filter `wpglobus_after_localize_current_url`.
-	* Support for the Multilingual Taxonomy Slug module in WPGlobus Plus.
-
-### 1.8.0 ###
-
-* COMPATIBILITY:
-	* WordPress 4.8
-	* Yoast SEO 4.9
-* FIXED:
-	* Yoast SEO: CSS fix for the Premium version.
-	* Core: No warning on the Helpdesk page if `php_uname` is disabled for security reason.
-* ADDED:
-	* Automatic redirect to the visitor's preferred language (first visit only). To turn it on, go to `WPGlobus -> Redirect` in the Admin menu.
 
 ### Earlier versions ###
 

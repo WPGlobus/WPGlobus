@@ -390,7 +390,7 @@ jQuery(document).ready(function ($) {
 
 				if ( $(control.selector).length != 1 ) {
 					/**
-					 * Don't add MutationObserver for non-exists parent of control element.
+					 * Don't add MutationObserver for non-existing parent of control element.
 					 * @see https://wordpress.org/themes/ascend/
 					 */
 					api.controlWidgets[ obj ]['observer'] = null;

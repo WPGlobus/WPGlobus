@@ -4,8 +4,18 @@
 
 ### 1.8.9 ###
 
+* TESTED WITH WordPress 4.9 and the following plugins active:
+	* advanced-custom-fields 4.4.12
+	* tablepress 1.8.1
+	* types 2.2.18
+	* woocommerce 3.2.3
+	* woocommerce-api-manager 1.5.4
+	* woocommerce-composite-products 3.12.2
+	* woocommerce-dynamic-pricing 3.1.2
+	* woocommerce-subscriptions 2.2.13
+	* wordpress-seo 5.7.1
 * FIXED:
-	* Customizer: don't add MutationObserver for non-exists parent of control element (e.g. @see https://wordpress.org/themes/ascend/).
+	* Customizer: don't add MutationObserver when a control element does not have a parent. Example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
 	
 ### 1.8.8 ###
 
