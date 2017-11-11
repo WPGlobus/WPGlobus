@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.9.0 ###
+
+* ADDED:
+	* Customizer: new language selector.
+* FIXED:
+	* Customizer: prevent case when control.setting is null.
+	
 ### 1.8.9 ###
 
 * TESTED WITH WordPress 4.9 and the following plugins active:
