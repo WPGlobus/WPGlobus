@@ -4,8 +4,11 @@
 
 ### 1.9.0 ###
 
+* COMPATIBILITY:
+	* WordPress 4.9
 * ADDED:
 	* Customizer: new language selector.
+	* Core: builtin 'oembed_cache' post type into array of disabled post types.
 * FIXED:
 	* Customizer: prevent case when control.setting is null.
 	
