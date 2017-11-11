@@ -251,6 +251,11 @@ class WPGlobus {
 		 * Add builtin post type
 		 */
 		$this->disabled_entities[] = 'attachment';
+		
+		/**
+		 * @since 1.9.0
+		 */
+		$this->disabled_entities[] = 'oembed_cache';
 
 		/**
 		 * Add disabled post types from option

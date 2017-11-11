@@ -458,7 +458,7 @@ class WPGlobus_Options {
 		);
 
 		/**
-		 *    SECTION: Post types
+		 * SECTION: Post types.
 		 */
 		$post_types = get_post_types( array( '_builtin' => true ) );
 
@@ -475,7 +475,10 @@ class WPGlobus_Options {
 		$default         = array();
 		$open_post_types = array();
 		foreach ( $post_types as $post_type ) {
-			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset' ), true ) ) {
+			/**
+			 * @see "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
+			 */			
+			if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache' ), true ) ) {
 				$open_post_types[ $post_type ] = $post_type;
 				$default[ $post_type ]         = true;
 			}

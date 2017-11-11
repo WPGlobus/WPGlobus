@@ -850,7 +850,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/** end SECTION: Language */
 
 			/**
-			 * SECTION: Post types
+			 * SECTION: Post types.
 			 */
 			if ( 1 ) {
 
@@ -869,7 +869,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 					$enabled_post_types = array();
 					foreach ( $post_types as $post_type ) {
-						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset' ), true ) ) {
+						/**
+						 * @see "SECTION: Post types" in includes\options\class-wpglobus-options.php for complete post type array.
+						 */
+						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache' ), true ) ) {
 
 							if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
 								$enabled_post_types[ $post_type ] = $post_type;
