@@ -8,9 +8,9 @@
 	* WordPress 4.9
 * ADDED:
 	* Customizer: new language selector.
-	* Core: builtin 'oembed_cache' post type into array of disabled post types.
+	* Core: disable the built-in `oembed_cache` post type (added to the array of disabled post types).
 * FIXED:
-	* Customizer: prevent case when control.setting is null.
+	* Customizer: correctly handle the case when `control.setting` is `null`.
 	
 ### 1.8.9 ###
 
@@ -25,7 +25,7 @@
 	* woocommerce-subscriptions 2.2.13
 	* wordpress-seo 5.7.1
 * FIXED:
-	* Customizer: don't add MutationObserver when a control element does not have a parent. Example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
+	* Customizer: don't add MutationObserver when a control element does not have a parent. An example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
 	
 ### 1.8.8 ###
 
@@ -204,7 +204,7 @@
 ### 1.7.1 ###
 
 * FIXED:
-	* Incorrect handing of WordPress version 4.6.2 when loading admin JS.
+	* Incorrect handling of WordPress version 4.6.2 when loading admin JS.
 
 ### 1.7.0 ###
 
@@ -257,13 +257,13 @@
 	* Additional checks and compatibility methods to avoid failures if `mbstring` PHP extension is not loaded.
 	* Widgets: Don't setup field as multilingual if its ID is empty.
 * ADDED:
-	* The correct filter for list of terms available to edit for the given post ID.
+	* The correct filter for the list of terms available to edit for the given post ID.
 
 ### 1.6.3 ###
 
 * FIXED:
-	* Yoast: empty focus keyword when saving post with active extra language tab.
-	* Add-ons: better interface; get information from the server.
+	* Yoast: empty focus keyword when saving a post with active extra language tab.
+	* Add-ons: a better interface; get information from the server.
 	* Updater: do not offer upgrades if `.git` folder exists.
 	* Internal: some code/comments cleanup to avoid `PHPStorm`, `WPCS`, and `php7cc` notices.
 
@@ -289,7 +289,7 @@
 	* WordPress 4.6.
 * FIXED:
 	* Empty Quick Edit titles in taxonomy views.
-	* Warning: Non-SSL link to image in admin (props `technima`).
+	* Warning: Non-SSL link to the image in admin (props `technima`).
 * ADDED:
 	* Customizer: User control on which fields can have multilingual values.
 	* Customizer: In the `Language Selector Menu`, if no menus created yet, show a link to create menus.
@@ -459,10 +459,10 @@
 
 * FIXED:
 	* Removed double slashes in URLs.
-	* Load minimized JS in customizer.
+	* Load minimized JS in the Customizer.
 	* Using class for globe icon instead of id.
 	* Rewriting the array of classes.
-	* Minor css improvements.
+	* Minor CSS improvements.
 
 ### 1.3.1 ###
 
@@ -540,7 +540,7 @@
 
 * ADDED:
 	* New extension, [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/) is referenced on the add-ons page.
-	* Support for the [The Events Calendar plugin](https://wordpress.org/plugins/the-events-calendar/).
+	* Support for [The Events Calendar plugin](https://wordpress.org/plugins/the-events-calendar/).
 	* Support hidden ACF groups.
 * FIXED:
 	* Correct Yoast SEO Page Analysis for the default language.

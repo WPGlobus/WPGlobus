@@ -218,9 +218,19 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 = 1.8.0 =
 
-WPGlobus 1.8.x is required for WordPress 4.8.
+WPGlobus 1.8.x is required for WordPress 4.8+.
 
 == Changelog ==
+
+= 1.9.0 =
+
+* COMPATIBILITY:
+	* WordPress 4.9
+* ADDED:
+	* Customizer: new language selector.
+	* Core: disable the built-in `oembed_cache` post type (added to the array of disabled post types).
+* FIXED:
+	* Customizer: correctly handle the case when `control.setting` is `null`.
 
 = 1.8.9 =
 
@@ -235,7 +245,7 @@ WPGlobus 1.8.x is required for WordPress 4.8.
 	* woocommerce-subscriptions 2.2.13
 	* wordpress-seo 5.7.1
 * FIXED:
-	* Customizer: don't add MutationObserver when a control element does not have a parent. Example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
+	* Customizer: don't add MutationObserver when a control element does not have a parent. An example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
 
 = 1.8.8 =
 

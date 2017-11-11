@@ -276,13 +276,13 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$selector_types = array('dropdown', 'switch');
 			
 			/**
-			 * Filter of selector type.
+			 * Filter selector type.
 			 *
-			 * Returning string.
 			 * @since 1.9.0
 			 *
-			 * @param string $selector_type Name of current selector type.
-			 * @param array  $selector_types An array of existed selector types.
+			 * @param string $selector_type Name of the current selector type.
+			 * @param array  $selector_types An array of existing selector types.
+			 * @return string
 			 */
 			$selector_type = apply_filters( 'wpglobus_customize_language_selector_type', $selector_type, $selector_types );
 
