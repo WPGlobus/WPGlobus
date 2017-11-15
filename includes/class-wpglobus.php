@@ -2887,7 +2887,7 @@ class WPGlobus {
 				<li id="wpglobus-link-tab-<?php echo $language; ?>" class=""
 				    data-language="<?php echo $language; ?>"
 				    data-name="<?php echo WPGlobus_Core::text_filter( $object->name, $language, $return ); ?>"
-				    data-description="<?php echo WPGlobus_Core::text_filter( $object->description, $language, $return ); ?>">
+				    data-description="<?php echo htmlentities( WPGlobus_Core::text_filter( $object->description, $language, $return ) ); ?>">
 					<a href="#taxonomy-tab-<?php echo $language; ?>"><?php echo self::Config()->en_language_name[ $language ]; ?></a>
 				</li> <?php
 			} ?>
