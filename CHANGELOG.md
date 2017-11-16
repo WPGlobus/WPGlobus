@@ -5,7 +5,7 @@
 ### 1.9.1 ###
 
 * FIXED:
-	* Core: convert all applicable characters to HTML entities in category description.
+	* Core: convert all applicable characters to HTML entities in the category description.
 
 ### 1.9.0 ###
 

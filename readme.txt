@@ -216,11 +216,16 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 == Upgrade Notice ==
 
-= 1.8.0 =
+### 1.9.1 ###
 
-WPGlobus 1.8.x is required for WordPress 4.8+.
+Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 == Changelog ==
+
+= 1.9.1 =
+
+* FIXED:
+	* Core: convert all applicable characters to HTML entities in the category description.
 
 = 1.9.0 =
 
