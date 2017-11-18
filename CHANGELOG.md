@@ -5,7 +5,7 @@
 ### 1.9.2 ###
 
 * FIXED:
-	* Core: correct saving post tags.
+	* Core: correctly saving post tags in WordPress 4.9.
 
 ### 1.9.1 ###
 

@@ -240,6 +240,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
 
+### 1.9.2 ###
+
+* FIXED:
+	* Core: correctly saving post tags in WordPress 4.9.
+
 ### 1.9.1 ###
 
 * FIXED:

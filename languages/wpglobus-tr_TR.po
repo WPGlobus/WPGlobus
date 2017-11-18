@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2017-11-11 10:58-0500\n"
+"POT-Creation-Date: 2017-11-17 23:40-0500\n"
 "PO-Revision-Date: 2017-09-09 13:03+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/wp-translations/"
@@ -853,39 +853,39 @@ msgid "You are customizing %s"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus.php:2660
+#: includes/class-wpglobus.php:2669
 #, php-format
 msgid "Word count: %s"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus.php:2670
+#: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus.php:2674
+#: includes/class-wpglobus.php:2683
 #, php-format
 msgid "Last edited on %1$s at %2$s"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus.php:2972
+#: includes/class-wpglobus.php:2981
 msgid "Enter title here"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus.php:3093
+#: includes/class-wpglobus.php:3102
 msgid "Invalid taxonomy"
 msgstr ""
 
-#: includes/class-wpglobus.php:3283
+#: includes/class-wpglobus.php:3292
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "WPGlobus' u kullanabilmek için Pretty Permalinks' i etkinleştirmelisiniz."
 
-#: includes/class-wpglobus.php:3285
+#: includes/class-wpglobus.php:3294
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -893,7 +893,7 @@ msgstr ""
 "Varsayılan olmayan bir seçeneği seçmek için lütfen Ayarlar>Kalıcı "
 "Bağlantılar>Genel Ayarlar' a gidin."
 
-#: includes/class-wpglobus.php:3426
+#: includes/class-wpglobus.php:3435
 msgid "Add"
 msgstr "Ekle"
 
