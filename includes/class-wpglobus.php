@@ -1432,6 +1432,15 @@ class WPGlobus {
 				$version = '-47';
 			}
 
+			/**
+			 * WordPress 4.9+ needs a new version of our admin JS.
+			 * @since 1.9.2
+			 */
+			$version = '';
+			if ( version_compare( $GLOBALS['wp_version'], '4.8.999', '>' ) ) {
+				$version = '-49';
+			}			
+			
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . self::$_SCRIPT_SUFFIX . ".js",
