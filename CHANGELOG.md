@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.2 ###
+
+* FIXED:
+	* Core: correct saving post tags.
+
 ### 1.9.1 ###
 
 * FIXED:
