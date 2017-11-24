@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.3 ###
+
+* ADDED:
+	* Customizer: the handling of URLs for customize changeset and theme mods.
+	
 ### 1.9.2 ###
 
 * FIXED:
