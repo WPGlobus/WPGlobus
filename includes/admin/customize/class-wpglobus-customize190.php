@@ -13,6 +13,9 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 	class WPGlobus_Customize {
 
 		public static function controller() {
+						
+			add_action('admin_init', array( __CLASS__, 'on__admin_init'), 1);
+			
 			/**
 			 * @see \WP_Customize_Manager::wp_loaded
 			 * It calls the `customize_register` action first,
@@ -51,8 +54,143 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				), 10, 2 );
 			}
 
-		}
+			/**
+			 * @see wp-includes\class-wp-customize-manager.php
+			 * @since 1.9.3
+			 */
+			add_filter( 'customize_changeset_save_data', array(
+				__CLASS__,
+				'filter__customize_changeset_save_data'
+			), 1, 2 );
 
+		}
+		
+		/**
+		 * @since 1.9.3
+		 */
+		public static function on__admin_init() {
+
+			$excluded_mods = array(
+				'0',
+				'nav_menu_locations',
+				'sidebars_widgets',
+				'custom_css_post_id',
+				'wpglobus_blogname',
+				'wpglobus_blogdescription'
+			);
+			
+			$mods = get_theme_mods();
+
+			$filtered_mods = array();
+			foreach( $mods as $mod_key=>$mod_value ) {
+				
+				if ( in_array($mod_key, $excluded_mods) ) {
+					continue;
+				}
+				
+				if ( ! is_string($mod_value) ) {
+					continue;
+				}				
+		
+				$filtered_mods[$mod_key] = $mod_value;
+	
+			}
+
+			/**
+			 * Filters the theme mods before save.
+			 *
+			 * @since 1.9.3
+			 *
+			 * @param array $filtered_mods  Filtered theme modifications.
+			 * @param array|void $mods 		Theme modifications.
+			 */			
+			$filtered_mods = apply_filters('wpglobus_customize_filtered_mods', $filtered_mods, $mods);
+			
+			foreach( $filtered_mods as $mod_key=>$mod_value ) {
+
+				/**
+				 * @see filter "pre_set_theme_mod_{$name}" in \wp-includes\theme.php
+				 */
+				add_filter( "pre_set_theme_mod_{$mod_key}", array(
+					__CLASS__,
+					'filter__pre_set_theme_mod'
+				), 1, 2 );
+				
+			}
+		}
+		
+		/**
+		 * Filter a theme mod.
+		 *
+		 * @since 1.9.3
+		 */	
+		public static function filter__pre_set_theme_mod($value, $old_value) {
+			
+			if ( ! is_string($value) ) {
+				return $value;
+			}
+			
+			$new_value = self::_build_multilingual_string($value);
+			
+			if ( $new_value ) {
+				return $new_value;
+			}
+			
+			return $value;
+
+		}
+		
+		/**
+		 * Save/update a changeset.
+		 *
+		 * @since 1.9.3
+		 */
+		public static function filter__customize_changeset_save_data($data, $filter_context) { 
+			
+			foreach( $data as $option=>$value ) {
+
+				$new_value = self::_build_multilingual_string($value['value']);
+				
+				if ( $new_value ) {
+					$data[$option]['value'] = $new_value;
+				}
+				
+			}
+			
+			return $data;
+			
+		}
+		
+		/**
+		 * Build standard WPGlobus multilingual string.
+		 *
+		 * @since 1.9.3
+		 */		
+		public static function _build_multilingual_string($value) {
+			
+			$new_value = '';
+			
+			if ( false === strpos( $value, '|||' ) ) {
+				$new_value = false;
+			} else {
+				
+				$arr1 = array();
+				$arr  = explode( '|||', $value );
+				foreach ( $arr as $k => $val ) {
+					// Note: 'null' is a string, not real `null`.
+					if ( 'null' !== $val ) {
+						$arr1[ WPGlobus::Config()->enabled_languages[ $k ] ] = $val;
+					}
+				}
+				
+				$new_value = WPGlobus_Utils::build_multilingual_string( $arr1 );
+				
+			}
+			
+			return $new_value;
+			
+		}
+		
 		/**
 		 * Filter a string to check translations for URL.
 		 * // We build multilingual URLs in customizer using the ':::' delimiter.
