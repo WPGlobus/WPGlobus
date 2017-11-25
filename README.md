@@ -240,6 +240,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
 
+### 1.9.3 ###
+
+* ADDED:
+	* Customizer: handling of the customize changeset and theme mods URLs.
+
 ### 1.9.2 ###
 
 * FIXED:

@@ -5,7 +5,7 @@
 ### 1.9.3 ###
 
 * ADDED:
-	* Customizer: the handling of URLs for customize changeset and theme mods.
+	* Customizer: handling of the customize changeset and theme mods URLs.
 	
 ### 1.9.2 ###
 
