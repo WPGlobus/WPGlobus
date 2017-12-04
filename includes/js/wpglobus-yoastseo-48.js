@@ -811,6 +811,12 @@ S				 */
 						$('#wpseo-metabox-tabs_'+l+' .wpseo_keyword_tab .wpseo_tablink').data('keyword', focuskw);
 					}
 					
+					/**
+					 * Set min-width, min-height for keyword tab to prevent the shifting of the elements when keyword is empty.
+					 * @since 1.9.4
+					 */					
+					$('#wpseo-metabox-tabs_'+l+' .wpseo_keyword_tab').css({'min-width':'60px','min-height':'29px'});
+					
 					/** since yoastseo 3.2 */
 					api.updateWpseoKeyword( focuskw, l );
 
