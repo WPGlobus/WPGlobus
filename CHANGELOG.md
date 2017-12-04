@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.4 ###
+
+* FIXED:
+	* Yoast SEO: set min-width, min-height for keyword tab to prevent the shifting of the elements when keyword is empty.
+	
 ### 1.9.3 ###
 
 * ADDED:
