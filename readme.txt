@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translation
 Requires at least: 4.8
-Tested up to: 4.9
+Tested up to: 4.9.1
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPL-3.0
@@ -94,7 +94,7 @@ WPGlobus is compatible with many plugins, including but not limited to:
 * Popups - WordPress Popup,
 * Sidebar Login,
 * The Events Calendar,
-* WPBakery Visual Composer (with our free add-on),
+* WPBakery Page Builder for WordPress (formerly Visual Composer),
 * Whistles,
 * Widget Logic,
 * Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis. **Note:** the "Premium" version of Yoast SEO has some compatibility issues and we currently do not support it.
@@ -148,7 +148,7 @@ You can install this plugin directly from your WordPress dashboard:
 1. Click *Install Now* next to the WPGlobus plugin.
 1. Activate the plugin.
 
-Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
+Alternatively, see the guide to [Manually Installing Plugins](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
 Then please read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 
@@ -222,6 +222,14 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 == Changelog ==
 
+= 1.9.4 =
+
+* COMPATIBILITY:
+	* Yoast SEO 5.9
+
+* FIXED:
+	* Yoast SEO: CSS tweaking (set `min-width`, `min-height` for the keyword tab to prevent shifting of the elements when the keyword is empty).
+
 = 1.9.3 =
 
 * ADDED:
@@ -262,35 +270,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 * FIXED:
 	* Customizer: don't add MutationObserver when a control element does not have a parent. An example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
 
-= 1.8.8 =
-
-* COMPATIBILITY:
-	* WordPress 4.8.2
-* ADDED:
-	* Yoast SEO: support multiple languages in the `META KEYWORDS` tag.
-
-= 1.8.7 =
-
-* COMPATIBILITY:
-	* WordPress 4.8.1
-* ADDED:
-	* Widgets: support for the title of the image widget.
-	* Core: recommend WooCommerce add-ons if not installed.
-
-= 1.8.6 =
-
-* ADDED:
-	* Widgets: handle multiple WYSIWYG text widgets.
-	* Core: do not localize menu URLs marked with a special CSS class `wpglobus-menu-item-url-nolocalize`.
-	* Core: `define( 'WPGLOBUS_CUSTOMIZE', false )` disables WPGlobus options in the Customizer.
-
-= Earlier versions =
+= Earlier versions and Add-ons =
 
 * [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
-
-= WooCommerce-WPGlobus =
-
-* [See the changelog here](https://wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
+* [WPGlobus for WooCommerce](https://wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
+* [WPGlobus Plus](https://wpglobus.com/extensions/wpglobus-plus/changelog/)
 
 == Demo Sites ==
 
@@ -299,4 +283,4 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 * [Site in a subfolder](http://demo-subfolder.wpglobus.com/):
 	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
 * [WooCommerce Multilingual](https://demo-store.wpglobus.com/):
-	* A multilingual WooCommerce site powered by the `woocommerce-wpglobus` plugin.
+	* A multilingual WooCommerce site powered by the `WPGlobus for WooCommerce` plugin.
