@@ -324,6 +324,19 @@ add_filter( 'oembed_request_post_id', array( 'WPGlobus_Filters', 'filter__oembed
  */
 add_filter( 'oembed_response_data', array( 'WPGlobus_Filters', 'filter__oembed_response_data' ), - PHP_INT_MAX );
 
+/**
+ * Filters the name to associate with the "from" email address.
+ * @see wp-includes\pluggable.php
+ * @since 1.9.5
+ */
+add_filter( 'wp_mail_from_name', array( 'WPGlobus_Filters', 'filter__text' ), 5 );
+
+/**
+ * Filters the wp_mail() arguments.
+ * @see wp-includes\pluggable.php
+ * @since 1.9.5
+ */
+add_filter( 'wp_mail', array( 'WPGlobus_Filters', 'filter__wp_mail' ), 5 );
 
 /**
  * ACF filters
