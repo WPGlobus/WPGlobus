@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.5 ###
+
+* ADDED:
+	* Core: added filters 'wp_mail', 'wp_mail_from_name'.
+	
 ### 1.9.4 ###
 
 * COMPATIBILITY:
