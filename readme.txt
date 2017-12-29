@@ -222,6 +222,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 == Changelog ==
 
+= 1.9.5 =
+
+* ADDED:
+	* Core: added multilingual filters to the `wp_mail` and `wp_mail_from_name` WP hooks.
+
 = 1.9.4 =
 
 * COMPATIBILITY:
