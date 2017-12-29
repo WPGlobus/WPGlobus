@@ -1023,8 +1023,8 @@ class WPGlobus_Filters {
 
 		return $data;
 	}
-	
-	/*	
+
+	/**
 	 * Filters the wp_mail() arguments.
 	 * @see wp-includes\pluggable.php
 	 *
@@ -1032,46 +1032,46 @@ class WPGlobus_Filters {
 	 *
 	 * @return array
 	 * @since 1.9.5
-	 */	
-	public static function filter__wp_mail($atts) {
+	 */
+	public static function filter__wp_mail( $atts ) {
 
 		/**
 		 * May be called many times. Let's cache.
 		 */
 		static $_cache;
-		if ( isset($_cache) ) {
+		if ( isset( $_cache ) ) {
 			return $_cache;
-		}	
-	
+		}
+
 		/**
 		 * Array of enabled attributes to translate.
 		 * Full array is 'to', 'subject', 'message', 'headers', 'attachments';
 		 */
-		$keys = array('subject', 'message', 'headers');
+		$keys = array( 'subject', 'message', 'headers' );
 
-		foreach( $keys as $key ):
-		
-			if ( empty($atts[$key]) ) {
+		foreach ( $keys as $key ):
+
+			if ( empty( $atts[ $key ] ) ) {
 				continue;
 			}
-		
+
 			if ( 'message' == $key ) {
-				$atts[$key] = str_replace( "\n", '[[wpg-newline]]', $atts[$key] );
+				$atts[ $key ] = str_replace( "\n", '[[wpg-newline]]', $atts[ $key ] );
 			}
-			
-			$atts[$key] = WPGlobus_Core::extract_text($atts[$key], WPGlobus::Config()->default_language);
-	
+
+			$atts[ $key ] = WPGlobus_Core::extract_text( $atts[ $key ], WPGlobus::Config()->default_language );
+
 			if ( 'message' == $key ) {
-				$atts[$key] = str_replace( '[[wpg-newline]]',  "\n", $atts[$key] );
+				$atts[ $key ] = str_replace( '[[wpg-newline]]', "\n", $atts[ $key ] );
 			}
-			
+
 		endforeach;
 
 		/**
 		 * Save to cache.
 		 */
 		$_cache = $atts;
-		
+
 		return $atts;
 	}
 	
