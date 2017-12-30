@@ -1038,10 +1038,11 @@ class WPGlobus_Filters {
 		/**
 		 * May be called many times. Let's cache.
 		 */
+		/*
 		static $_cache;
 		if ( isset( $_cache ) ) {
 			return $_cache;
-		}
+		} // */
 
 		/**
 		 * Array of enabled attributes to translate.
@@ -1070,7 +1071,7 @@ class WPGlobus_Filters {
 		/**
 		 * Save to cache.
 		 */
-		$_cache = $atts;
+		// $_cache = $atts;
 
 		return $atts;
 	}
