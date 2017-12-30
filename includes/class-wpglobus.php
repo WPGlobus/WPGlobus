@@ -100,6 +100,16 @@ class WPGlobus {
 	}
 
 	/**
+	 * Path to languages folder.
+	 *
+	 * @return string
+	 * @since 1.9.6
+	 */
+	public static function languages_path() {
+		return self::$PLUGIN_DIR_PATH . 'languages';
+	}
+
+	/**
 	 * @var bool $_SCRIPT_DEBUG Internal representation of the define('SCRIPT_DEBUG')
 	 */
 	protected static $_SCRIPT_DEBUG = false;

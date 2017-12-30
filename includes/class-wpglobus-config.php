@@ -367,7 +367,24 @@ class WPGlobus_Config {
 	 * @return void
 	 */
 	public function on_load_textdomain() {
-		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
+//		load_plugin_textdomain( 'wpglobus', false, basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
+		self::load_mofile();
+	}
+
+	/**
+	 * Load .MO file from the plugin's `languages` folder.
+	 * Used instead of @see load_plugin_textdomain to ignore translation files from WordPress.org, which are incorrect.
+	 * To force loading from a different place, use the `load_textdomain_mofile` filter.
+	 * @since 1.9.6
+	 *
+	 */
+	protected function load_mofile() {
+		$domain = 'wpglobus';
+		$locale = apply_filters( 'plugin_locale', is_admin() ? get_user_locale() : get_locale(), $domain );
+
+		$mofile = WPGlobus::languages_path() . '/' . $domain . '-' . $locale . '.mo';
+
+		return load_textdomain( $domain, $mofile );
 	}
 
 	/**

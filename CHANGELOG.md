@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.6 ###
+
+* FIXED:
+    * Core: do not load the WPGlobus translations from WordPress.org and always use those from the plugin's `languages` folder.
+
 ### 1.9.5 ###
 
 * ADDED:
