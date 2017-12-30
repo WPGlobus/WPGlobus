@@ -23,7 +23,7 @@
     "grunt-bower-task": "^0.5.0",
     "grunt-contrib-cssmin": "^2.2.1",
     "grunt-contrib-less": "^1.4.0",
-    "grunt-contrib-uglify": "^3.2.1",
+    "grunt-contrib-uglify": "^3.3.0",
     "grunt-exec": "^3.0.0",
     "grunt-pot": "^0.3.0",
     "grunt-http": "^2.3.0",
