@@ -6,6 +6,7 @@
 
 * FIXED:
     * Core: do not load the WPGlobus translations from WordPress.org and always use those from the plugin's `languages` folder.
+	* Customizer: fixed warning "strpos() expects parameter 1 to be string, array given".
 
 ### 1.9.5 ###
 
