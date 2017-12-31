@@ -167,9 +167,16 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 * @since 1.9.3
 		 */		
 		public static function _build_multilingual_string($value) {
+
+			/**
+			 * @since 1.9.6
+			 */
+			if ( ! is_string($value) ) {
+				return $value;
+			}
 			
-			$new_value = '';
-			
+			$new_value = '';			
+	
 			if ( false === strpos( $value, '|||' ) ) {
 				$new_value = false;
 			} else {
