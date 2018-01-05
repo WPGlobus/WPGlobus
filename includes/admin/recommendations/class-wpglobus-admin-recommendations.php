@@ -8,8 +8,7 @@ class WPGlobus_Admin_Recommendations {
 
 	public static function setup_hooks() {
 		add_filter( 'woocommerce_general_settings', array( __CLASS__, 'for_woocommerce' ) );
-
-
+		add_filter( 'wpglobus_edit_slug_box', array( __CLASS__, 'wpg_plus_slug' ) );
 	}
 
 	/**
@@ -106,5 +105,22 @@ class WPGlobus_Admin_Recommendations {
 
 		$settings[] =
 			array( 'type' => 'sectionend', 'id' => $id );
+	}
+
+	/**
+	 * Recommend WPGlobus Plus to edit permalinks.
+	 * @since 1.9.6
+	 */
+	public static function wpg_plus_slug() {
+		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
+			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/';
+			echo '<p style="padding:5px;"><span class="dashicons dashicons-admin-site"></span> ';
+			esc_html_e( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
+			echo ' ';
+			esc_html_e( 'Check it out:', 'wpglobus' );
+			echo ' ';
+			echo '<a href="' . $url . '">' . $url . '</a>';
+			echo '</p>';
+		}
 	}
 }
