@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2017-12-30 14:50-0500\n"
+"POT-Creation-Date: 2018-01-04 22:56-0500\n"
 "PO-Revision-Date: 2017-09-09 14:01+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/wp-translations/"
@@ -746,34 +746,39 @@ msgstr ""
 msgid "Technical Information"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:44
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:43
 msgid "WPGlobus Recommends:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:53
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:52
 msgid "WPGlobus for WooCommerce"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:57
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:56
 msgid ""
 "Translate product titles and descriptions, product categories, tags and "
 "attributes."
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:61
 msgid "Get it now:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:71
 msgid "WPGlobus Multi-Currency"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:76
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:75
 msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:81
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
 msgid "Check it out:"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
 #. / Do not translate

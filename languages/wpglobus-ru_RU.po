@@ -1,13 +1,16 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
-# Gregory Karpinsky <gregory@tiv.net>, 2015-2017
+# Gregory Karpinsky <gregory@tiv.net>, 2015-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2017-12-30 14:50-0500\n"
-"PO-Revision-Date: 2017-09-09 13:11+0000\n"
+"POT-Creation-Date: 2018-01-04 23:10-0500\n"
+"PO-Revision-Date: 2018-01-05 04:06+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -18,14 +21,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -84,9 +79,8 @@ msgstr "Быстрый Старт"
 #: includes/admin/class-wpglobus-about.php:33
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
-#, fuzzy
 msgid "Settings"
-msgstr "Настройки полей"
+msgstr "Настройки"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -793,62 +787,67 @@ msgstr ""
 msgid "Technical Information"
 msgstr "Техническая информация"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:44
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:43
 msgid "WPGlobus Recommends:"
 msgstr "WPGlobus рекомендует:"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:53
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:52
 msgid "WPGlobus for WooCommerce"
 msgstr "WPGlobus для WooCommerce"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:57
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:56
 msgid ""
 "Translate product titles and descriptions, product categories, tags and "
 "attributes."
 msgstr "Переведите названия и описания товаров, категорий, свойств и меток."
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:61
 msgid "Get it now:"
 msgstr "Установите прямо сейчас:"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:71
 msgid "WPGlobus Multi-Currency"
 msgstr "WPGlobus Мультивалютность"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:76
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:75
 msgid "Accept multiple currencies in your online store!"
 msgstr "Принимайте оплату в нескольких валютах!"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:81
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
 msgid "Check it out:"
 msgstr "Информация - здесь:"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr "Перевод ссылок возможен с помощью WPGlobus-Плюс!"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
 msgid "Error while saving."
-msgstr ""
+msgstr "Ошибка при сохранении."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:662
 msgid "g:i:s a"
-msgstr ""
+msgstr "g:i:s a"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:667
 #, php-format
 msgid "Draft saved at %s."
-msgstr ""
+msgstr "Черновик сохранен в %s."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:766
 msgid "&hellip;"
-msgstr ""
+msgstr "&hellip;"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:771
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr ""
+msgstr "слов"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -906,35 +905,35 @@ msgstr "Нужен мультиязычный ярлык?"
 #: includes/class-wpglobus.php:1374 includes/class-wpglobus.php:1378
 #, php-format
 msgid "You are customizing %s"
-msgstr ""
+msgstr "Вы настраиваете %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Word count: %s"
-msgstr ""
+msgstr "Количество слов: %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2689
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
+msgstr "Последний раз редактировалось пользователем %1$s %2$s в %3$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2693
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr ""
+msgstr "Последний раз редактировалось %1$s в %2$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2991
 msgid "Enter title here"
-msgstr ""
+msgstr "Ввести заголовок"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3112
 msgid "Invalid taxonomy"
-msgstr ""
+msgstr "Несуществующая таксономия"
 
 #: includes/class-wpglobus.php:3302
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -962,6 +961,8 @@ msgstr "ВНИМАНИЕ: обнаружена устаревшая версия
 #, php-format
 msgid "WPGlobus settings panel requires ReduxFramework %1$s or later."
 msgstr ""
+"Для корректной работы панели настроек WPGlobus требуется ReduxFramework %1$s "
+"или более поздняя версия."
 
 #. / translators: ReduxFramework - %1$s version, %2$s folder where installed
 #: includes/options/class-wpglobus-options.php:148
@@ -1180,14 +1181,13 @@ msgstr "Язык по умолчанию"
 
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:104
-#, fuzzy
 msgid "Select an item"
-msgstr "Способ выбора языка"
+msgstr "Выберите из списка"
 
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:159
 msgid "No items of this type were found."
-msgstr ""
+msgstr "Список пуст."
 
 #: includes/options/wpglobus-options-header.php:20
 msgid "We rely on your support!"
@@ -1218,141 +1218,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Установите WPGlobus Плюс прямо сейчас!"
-
-#~ msgid "Deactivate!"
-#~ msgstr "Деактивировать!"
-
-#~ msgid "Do not have a license? Please purchase one on %s"
-#~ msgstr "У Вас нет лицензии? Приобретите на %s"
-
-#~ msgid "Deactivates License so it can be used on another site."
-#~ msgstr ""
-#~ "Деактивирует лицензию для того, чтобы использовать её на другом сайте."
-
-#~ msgid "License Activation"
-#~ msgstr "Активация лицензии"
-
-#~ msgid "License Key Status"
-#~ msgstr "Статус лицензионного ключа"
-
-#~ msgid "License Key"
-#~ msgstr "Ключ лицензии"
-
-#~ msgid "License email"
-#~ msgstr "Адрес email, к которому привязана лицензия"
-
-#~ msgid "License Deactivation"
-#~ msgstr "Деактивация лицензии"
-
-#~ msgid "Deactivate License Key"
-#~ msgstr "Деактивировать лицензионный ключ"
-
-#~ msgid "Please contact support@wpglobus.com for assistance."
-#~ msgstr "Пожалуйста свяжитесь с нами: support@wpglobus.com."
-
-#~ msgid "Active"
-#~ msgstr "Активировано"
-
-#~ msgid "Inactive"
-#~ msgstr "Не действует"
-
-#~ msgid "License activated. "
-#~ msgstr "Лицензия активирована."
-
-#~ msgid "Connection failed to the License Key API server. Try again later."
-#~ msgstr "Не удалось соединиться с сервером. Попробуйте позже."
-
-#~ msgid "The License Key / Email pair is empty or invalid."
-#~ msgstr "Пара License Key / Email не заполнена или неверна."
-
-#~ msgid ""
-#~ "The license could not be deactivated. Use the License Deactivation tab to "
-#~ "manually deactivate the license before activating a new license."
-#~ msgstr ""
-#~ "Лизензия не может быть деактивирована. Используйте закладку деактивации "
-#~ "перед попыткой активировать новый лицензионный ключ."
-
-#~ msgid "Please select the checkbox to confirm your intention."
-#~ msgstr "Пожалуйста, отметьте чекбокс для подтверждения."
-
-#~ msgid "License / email not set or already deactivated."
-#~ msgstr "Лицензионный ключ / email не установлен, или уже деактивирован."
-
-#~ msgid "License deactivated. "
-#~ msgstr "Лицензия деактивирована."
-
-#~ msgid ""
-#~ "To check status, purchase or reactivate license, please go to your "
-#~ "account."
-#~ msgstr ""
-#~ "Для проверки статуса, покупки или продления лицензии, пожалуйста, зайдите "
-#~ "на страницу Вашего аккаунта."
-
-#~ msgid "License expired."
-#~ msgstr "Ключ лицензии просрочен."
-
-#~ msgid "Subscription on-hold."
-#~ msgstr "Подписка в статусе удержания."
-
-#~ msgid "Subscription cancelled."
-#~ msgstr "Подписка отменена."
-
-#~ msgid "Subscription suspended."
-#~ msgstr "Подписка приостановлена."
-
-#~ msgid "Subscription expired."
-#~ msgstr "Подписка просрочена."
-
-#~ msgid "Subscription pending."
-#~ msgstr "Подписка в статусе ожидания."
-
-#~ msgid "Subscription pending deletion."
-#~ msgstr "Подписка подготовлена к удалению."
-
-#~ msgid "Subscription not found."
-#~ msgstr "Подписка не найдена."
-
-#~ msgid "License key not found or deactivated."
-#~ msgstr "Ключ лицензии не найден или деактивирован."
-
-#~ msgid "No download permission. License / subscription probably expiring."
-#~ msgstr ""
-#~ "Нет разрешения на скачивание. Возможно, срок лицензии / подписки истекает "
-#~ "в ближайшее время."
-
-#~ msgid ""
-#~ "License not activated. Go to the settings page and enter the license key "
-#~ "and email to activate."
-#~ msgstr ""
-#~ "Лицензия не активирована. Пройдите на страницу настроек и введите ключ и "
-#~ "email для активации."
-
-#~ msgid ""
-#~ "Subscription changed. Please enter new license key in the settings page."
-#~ msgstr ""
-#~ "Подписка была изменена. Пожалуйста, введите новый лицензионный ключ на "
-#~ "странице настроек."
-
-#~ msgid "Licensing server connection error."
-#~ msgstr "Ошибка соединения с сервером."
-
-#~ msgid "Licensing server connection error (%d)."
-#~ msgstr "Ошибка соединения с сервером (%d)."
-
-#~ msgid "License"
-#~ msgstr "Лицензия"
-
-#~ msgid "License has not been activated."
-#~ msgstr "Лицензия не активирована."
-
-#~ msgid "Click here to enter the license key and get the updates."
-#~ msgstr ""
-#~ "Нажмите здесь, чтобы ввести лицензионный ключ и начать получать "
-#~ "обновления."
-
-#~ msgid ""
-#~ "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s "
-#~ "to WP_ACCESSIBLE_HOSTS."
-#~ msgstr ""
-#~ "Константа WP_HTTP_BLOCK_EXTERNAL установлена в true. Для того чтобы "
-#~ "получать обновления, пожалуйста добавьте %s в WP_ACCESSIBLE_HOSTS."
