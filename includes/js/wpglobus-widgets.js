@@ -265,17 +265,25 @@
 			 * Update editor content.
 			 */
 			function updateEditorContent(ev) {
-				if ( api.editor[ev.target.id] ) {
-					var l = $( api.editor[ev.target.id]['languageSelector'] ).data('language');
+
+				var id = '';
+				if ( ev.type == 'keyup' && ev.target.id == 'tinymce' ) {
+					id = $(ev.target).data('id');
+				} else {
+					id = ev.target.id;
+				}
+
+				if ( api.editor[id] ) {
+					var l = $( api.editor[id]['languageSelector'] ).data('language');
 					var newContent = '';
-					if (  tinymce.get(ev.target.id).isHidden() ) {
-						newContent = $('#'+ev.target.id).val();
+					if (  tinymce.get(id).isHidden() ) {
+						newContent = $('#'+id).val();
 					} else {
-						newContent = tinymce.get(ev.target.id).getContent({format:'raw'});
+						newContent = tinymce.get(id).getContent({format:'raw'});
 					}
 					
-					api.editor[ev.target.id]['content'] = WPGlobusCore.getString( 
-						api.editor[ev.target.id]['content'], 
+					api.editor[id]['content'] = WPGlobusCore.getString( 
+						api.editor[id]['content'], 
 						newContent, 
 						l
 					);
@@ -284,7 +292,8 @@
 					 * Sync with widget content hidden fields.
 					 * @see .widget-inside .widget-content 
 					 */
-					$(api.editor[ev.target.id]['sourceSelector']).val( api.editor[ev.target.id]['content'] );
+					$(api.editor[id]['sourceSelector']).val( api.editor[id]['content'] );
+					
 				}
 
 			}
