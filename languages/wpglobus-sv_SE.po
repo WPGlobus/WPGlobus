@@ -1,5 +1,8 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
 # Elger Lindgren <inactive+Elger@transifex.com>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015
@@ -7,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 22:56-0500\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2018-01-05 23:11-0500\n"
+"PO-Revision-Date: 2018-01-06 04:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/sv_SE/)\n"
@@ -17,14 +20,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -84,7 +79,7 @@ msgstr "Snabbstart"
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -466,7 +461,7 @@ msgstr "Titel"
 
 #: includes/admin/class-wpglobus-customize-options.php:1021
 msgid "Label"
-msgstr ""
+msgstr "Etikett"
 
 #: includes/admin/class-wpglobus-customize-options.php:1025
 msgid "Description"
@@ -761,40 +756,49 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
 msgid "Error while saving."
-msgstr ""
+msgstr "Fel vid sparandet."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:662
 msgid "g:i:s a"
-msgstr ""
+msgstr "g:i:s a"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:667
 #, php-format
 msgid "Draft saved at %s."
-msgstr ""
+msgstr "Utkast sparat på %s."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:766
 msgid "&hellip;"
-msgstr ""
+msgstr "&hellip;"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:771
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr ""
+msgstr "antal ord"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -852,35 +856,35 @@ msgstr ""
 #: includes/class-wpglobus.php:1374 includes/class-wpglobus.php:1378
 #, php-format
 msgid "You are customizing %s"
-msgstr ""
+msgstr "Du anpassar %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Word count: %s"
-msgstr ""
+msgstr "Ordräkning: %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2689
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
+msgstr "Senast redigerad av %1$s on %2$s at %3$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2693
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr ""
+msgstr "Senast redigerad den %1$s på %2$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2991
 msgid "Enter title here"
-msgstr ""
+msgstr "Ange rubrik här"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3112
 msgid "Invalid taxonomy"
-msgstr ""
+msgstr "Ogiltigt taxonomi"
 
 #: includes/class-wpglobus.php:3302
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -905,7 +909,7 @@ msgstr "VARNING: gamla versionen av ReduxFramework är aktiv!"
 #: includes/options/class-wpglobus-options.php:141
 #, php-format
 msgid "WPGlobus settings panel requires ReduxFramework %1$s or later."
-msgstr ""
+msgstr "WPGlobus inställningspanelen kräver ReduxFramework %1$s eller senare."
 
 #. / translators: ReduxFramework - %1$s version, %2$s folder where installed
 #: includes/options/class-wpglobus-options.php:148
@@ -1121,12 +1125,12 @@ msgstr "Standardspråk"
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:104
 msgid "Select an item"
-msgstr ""
+msgstr "Välj ett objekt"
 
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:159
 msgid "No items of this type were found."
-msgstr ""
+msgstr "Inga objekt av den här typen hittade."
 
 #: includes/options/wpglobus-options-header.php:20
 msgid "We rely on your support!"
@@ -1155,15 +1159,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Hämta WPGlobus Plus nu!"
-
-#~ msgid "License Key"
-#~ msgstr "Licensnyckel"
-
-#~ msgid "Active"
-#~ msgstr "Aktiva"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "License"
-#~ msgstr "Licens"

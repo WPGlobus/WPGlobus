@@ -1,5 +1,8 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
 # Franck, 2015
 # FX Bénard <fxb@wp-translations.org>, 2015
@@ -8,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 22:56-0500\n"
-"PO-Revision-Date: 2017-09-09 13:20+0000\n"
+"POT-Creation-Date: 2018-01-05 23:11-0500\n"
+"PO-Revision-Date: 2018-01-06 04:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_CA/)\n"
@@ -18,14 +21,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -86,7 +81,7 @@ msgstr "Démarrage rapide"
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr ""
+msgstr "Réglages"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -576,7 +571,7 @@ msgstr "L’équipe de WPGlobus"
 #. / translators: %?$s: HTML codes for hyperlink. Do not remove.
 #: includes/admin/class-wpglobus-customize-options.php:1132
 #: includes/options/class-wpglobus-options.php:216
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "We would hate to see you go. If something goes wrong, do not uninstall "
 "WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
@@ -845,12 +840,21 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
@@ -1251,144 +1255,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Obtenez WPGlobus Plus maintenant&nbsp;!"
-
-#~ msgid "Deactivate!"
-#~ msgstr "Désactivé&nbsp;!"
-
-#~ msgid "Do not have a license? Please purchase one on %s"
-#~ msgstr "Avez-vous une licence&nbsp;? Veuillez en acheter une sur %s."
-
-#~ msgid "Deactivates License so it can be used on another site."
-#~ msgstr ""
-#~ "Désactive la licence pour qu'elle puisse être utilisée sur un autre site."
-
-#~ msgid "License Activation"
-#~ msgstr "Activation de la licence"
-
-#~ msgid "License Key Status"
-#~ msgstr "État de la clé de licence"
-
-#~ msgid "License Key"
-#~ msgstr "Clé de licence"
-
-#~ msgid "License email"
-#~ msgstr "E-mail de la licence"
-
-#~ msgid "License Deactivation"
-#~ msgstr "Désactivation de la licence"
-
-#~ msgid "Deactivate License Key"
-#~ msgstr "Désactiver la clé de licence"
-
-#~ msgid "Please contact support@wpglobus.com for assistance."
-#~ msgstr "Veuillez contacter support@wpglobus.com pour l'assistance."
-
-#~ msgid "Active"
-#~ msgstr "Actif"
-
-#~ msgid "Inactive"
-#~ msgstr "Inactivée"
-
-#~ msgid "License activated. "
-#~ msgstr "Licence activée."
-
-#~ msgid "Connection failed to the License Key API server. Try again later."
-#~ msgstr ""
-#~ "Échec de la connexion avec l'API du serveur de la clé de licence. "
-#~ "Veuillez recommencer."
-
-#~ msgid "The License Key / Email pair is empty or invalid."
-#~ msgstr "La clé de licence / E-mail est vide ou non valide."
-
-#~ msgid ""
-#~ "The license could not be deactivated. Use the License Deactivation tab to "
-#~ "manually deactivate the license before activating a new license."
-#~ msgstr ""
-#~ "La licence ne peut pas être désactivée. Utilisez l'onglet Désactivation "
-#~ "de la licence pour désactiver manuellement la licence avant d'en activer "
-#~ "une nouvelle."
-
-#~ msgid "Please select the checkbox to confirm your intention."
-#~ msgstr "Veuillez cocher la case pour confirmer votre intention."
-
-#~ msgid "License / email not set or already deactivated."
-#~ msgstr "Licence / e-mail non configuré ou déjà désactivé."
-
-#~ msgid "License deactivated. "
-#~ msgstr "Licence désactivée."
-
-#~ msgid ""
-#~ "To check status, purchase or reactivate license, please go to your "
-#~ "account."
-#~ msgstr ""
-#~ "Pour vérifier l'état, acheter ou réactiver la licence, rendez-vous sur "
-#~ "votre compte."
-
-#~ msgid "License expired."
-#~ msgstr "Licence expirée."
-
-#~ msgid "Subscription on-hold."
-#~ msgstr "Abonnement en attente."
-
-#~ msgid "Subscription cancelled."
-#~ msgstr "Abonnement annulé."
-
-#~ msgid "Subscription suspended."
-#~ msgstr "Abonnement suspendu."
-
-#~ msgid "Subscription expired."
-#~ msgstr "Abonnement expiré."
-
-#~ msgid "Subscription pending."
-#~ msgstr "Abonnement en attente."
-
-#~ msgid "Subscription pending deletion."
-#~ msgstr "Abonnement en attente de suppression."
-
-#~ msgid "Subscription not found."
-#~ msgstr "Abonnement non trouvé."
-
-#~ msgid "License key not found or deactivated."
-#~ msgstr "Clé de licence non trouvée ou désactivée."
-
-#~ msgid "No download permission. License / subscription probably expiring."
-#~ msgstr ""
-#~ "Aucune autorisation de téléchargement. Licence / souscription "
-#~ "probablement expirée."
-
-#~ msgid ""
-#~ "License not activated. Go to the settings page and enter the license key "
-#~ "and email to activate."
-#~ msgstr ""
-#~ "La licence n'est pas activée. Allez sur la page des paramètres et entrez "
-#~ "la clé de licence et l'e-mail pour l'activer."
-
-#~ msgid ""
-#~ "Subscription changed. Please enter new license key in the settings page."
-#~ msgstr ""
-#~ "L'abonnement à changé. Veuillez saisir la nouvelle clé de licence dans la "
-#~ "page des réglages."
-
-#~ msgid "Licensing server connection error."
-#~ msgstr "Erreur de connexion au serveur de licences."
-
-#~ msgid "Licensing server connection error (%d)."
-#~ msgstr "Erreur de connexion au serveur de licences (%d)."
-
-#~ msgid "License"
-#~ msgstr "Licence"
-
-#~ msgid "License has not been activated."
-#~ msgstr "La licence n'a été activée."
-
-#~ msgid "Click here to enter the license key and get the updates."
-#~ msgstr ""
-#~ "Cliquez ici pour saisir la clé de licence et ainsi pouvoir recevoir les "
-#~ "mises à jour."
-
-#~ msgid ""
-#~ "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s "
-#~ "to WP_ACCESSIBLE_HOSTS."
-#~ msgstr ""
-#~ "WP_HTTP_BLOCK_EXTERNAL est réglé sur true. Pour recevoir des mises à "
-#~ "jour, veuillez ajouter %s à WP_ACCESSIBLE_HOSTS."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus 1.9.6\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 23:10-0500\n"
+"POT-Creation-Date: 2018-01-05 23:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -729,12 +729,21 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate

@@ -1,14 +1,18 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
 # Tobias Hopp <toby.hopp@gmail.com>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015,2017
+# Tobias Hopp <toby.hopp@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 22:56-0500\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2018-01-05 23:11-0500\n"
+"PO-Revision-Date: 2018-01-06 04:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Switzerland) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/de_CH/)\n"
@@ -17,14 +21,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -85,7 +81,7 @@ msgstr "Schnell-Start"
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -774,40 +770,49 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
 msgid "Error while saving."
-msgstr ""
+msgstr "Fehler beim Speichern."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:662
 msgid "g:i:s a"
-msgstr ""
+msgstr "H:i:s"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:667
 #, php-format
 msgid "Draft saved at %s."
-msgstr ""
+msgstr "Entwurf wurde um %s Uhr gespeichert."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:766
 msgid "&hellip;"
-msgstr ""
+msgstr "&hellip;"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:771
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr ""
+msgstr "Wörter"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -865,35 +870,35 @@ msgstr ""
 #: includes/class-wpglobus.php:1374 includes/class-wpglobus.php:1378
 #, php-format
 msgid "You are customizing %s"
-msgstr ""
+msgstr "Sie passen %s an"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Word count: %s"
-msgstr ""
+msgstr "Wörteranzahl: %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2689
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
+msgstr "Zuletzt geändert von %1$s am %2$s um %3$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2693
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr ""
+msgstr "Zuletzt geändert am %1$s um %2$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2991
 msgid "Enter title here"
-msgstr ""
+msgstr "Titel hier eingeben"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3112
 msgid "Invalid taxonomy"
-msgstr ""
+msgstr "Ungültige Taxonomie"
 
 #: includes/class-wpglobus.php:3302
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -1178,24 +1183,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Jetzt zu WPGlobus Plus wechseln!"
-
-#~ msgid "Deactivate!"
-#~ msgstr "Deaktivieren!"
-
-#~ msgid "License Key"
-#~ msgstr "Lizenzschlüssel"
-
-#~ msgid "License Deactivation"
-#~ msgstr "Lizenz deaktivieren"
-
-#~ msgid "Active"
-#~ msgstr "Aktiv"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "License deactivated. "
-#~ msgstr "Lizenz deaktiviert"
-
-#~ msgid "License"
-#~ msgstr "Lizenz"

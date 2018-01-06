@@ -1,12 +1,15 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 22:56-0500\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2018-01-05 23:11-0500\n"
+"PO-Revision-Date: 2018-01-06 04:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/pl_PL/)\n"
@@ -17,14 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -84,7 +79,7 @@ msgstr "Szybki start"
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -469,7 +464,7 @@ msgstr "Tytuł"
 
 #: includes/admin/class-wpglobus-customize-options.php:1021
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: includes/admin/class-wpglobus-customize-options.php:1025
 msgid "Description"
@@ -765,40 +760,49 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
 msgid "Error while saving."
-msgstr ""
+msgstr "Podczas zapisu wystąpił błąd."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:662
 msgid "g:i:s a"
-msgstr ""
+msgstr "H:i:s"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:667
 #, php-format
 msgid "Draft saved at %s."
-msgstr ""
+msgstr "Szkic został zapisany %s."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:766
 msgid "&hellip;"
-msgstr ""
+msgstr "&hellip;"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:771
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr ""
+msgstr "words"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -856,35 +860,35 @@ msgstr ""
 #: includes/class-wpglobus.php:1374 includes/class-wpglobus.php:1378
 #, php-format
 msgid "You are customizing %s"
-msgstr ""
+msgstr "Personalizujesz %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Word count: %s"
-msgstr ""
+msgstr "Liczba słów: %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2689
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
+msgstr "Autorem ostatniej edycji jest %1$s, została ona wykonana %2$s o %3$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2693
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr ""
+msgstr "Ostatnio edytowano %1$s o %2$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2991
 msgid "Enter title here"
-msgstr ""
+msgstr "Wprowadź tytuł"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3112
 msgid "Invalid taxonomy"
-msgstr ""
+msgstr "Błąd w taksonomii"
 
 #: includes/class-wpglobus.php:3302
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -1127,7 +1131,7 @@ msgstr "Język domyślny"
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:104
 msgid "Select an item"
-msgstr ""
+msgstr "Wybierz element"
 
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:159
@@ -1163,129 +1167,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Uzyskaj już teraz WPGlobus Plus!"
-
-#~ msgid "Deactivate!"
-#~ msgstr "Zdezaktywuj!"
-
-#~ msgid "Do not have a license? Please purchase one on %s"
-#~ msgstr "Nie posiadasz licencji? Zakup ją na %s"
-
-#~ msgid "Deactivates License so it can be used on another site."
-#~ msgstr ""
-#~ "Deaktywacja licencji oznacza, że będzie mogła być użyta na innej stronie."
-
-#~ msgid "License Activation"
-#~ msgstr "Aktywacja licencji"
-
-#~ msgid "License Key Status"
-#~ msgstr "Status klucza licencji"
-
-#~ msgid "License Key"
-#~ msgstr "Klucz licencji"
-
-#~ msgid "License email"
-#~ msgstr "Adres e-mail licencji"
-
-#~ msgid "License Deactivation"
-#~ msgstr "Deaktywacja licencji"
-
-#~ msgid "Deactivate License Key"
-#~ msgstr "Zdezaktywuj klucz licencji"
-
-#~ msgid "Active"
-#~ msgstr "Aktywny"
-
-#~ msgid "Inactive"
-#~ msgstr "Nieaktywny"
-
-#~ msgid "License activated. "
-#~ msgstr "Licencja aktywowana. "
-
-#~ msgid "Connection failed to the License Key API server. Try again later."
-#~ msgstr ""
-#~ "Łączenie z serwerem API klucza licencji nie powiodło się. Spróbuj później."
-
-#~ msgid ""
-#~ "The license could not be deactivated. Use the License Deactivation tab to "
-#~ "manually deactivate the license before activating a new license."
-#~ msgstr ""
-#~ "Licencja nie mogła zostać zdezaktywowana. Skorzystaj z zakładki "
-#~ "Dezaktywacja licencji lub ręcznie zdezaktywuj licencję zanim aktywujesz "
-#~ "nową."
-
-#~ msgid "Please select the checkbox to confirm your intention."
-#~ msgstr "Proszę zaznaczyć pole wyboru, aby potwierdzić swój zamiar."
-
-#~ msgid "License / email not set or already deactivated."
-#~ msgstr "Licencja/e-mail nie ustawiona lub już zdezaktywowana."
-
-#~ msgid "License deactivated. "
-#~ msgstr "Licencja zdezaktywowana. "
-
-#~ msgid ""
-#~ "To check status, purchase or reactivate license, please go to your "
-#~ "account."
-#~ msgstr ""
-#~ "Aby sprawdzić stan, zakupić lub ponownie aktywować licencję, przejdź do "
-#~ "swojego konta."
-
-#~ msgid "License expired."
-#~ msgstr "Licencja wygasła."
-
-#~ msgid "Subscription on-hold."
-#~ msgstr "Subskrypcja w oczekiwaniu."
-
-#~ msgid "Subscription cancelled."
-#~ msgstr "Subskrypcja anulowana."
-
-#~ msgid "Subscription suspended."
-#~ msgstr "Subskrypcja wstrzymana."
-
-#~ msgid "Subscription expired."
-#~ msgstr "Subskrypcja wygasła."
-
-#~ msgid "Subscription pending."
-#~ msgstr "Subskrypcja przetwarzana."
-
-#~ msgid "Subscription pending deletion."
-#~ msgstr "Subskrypcja oczekująca na usunięcie."
-
-#~ msgid "Subscription not found."
-#~ msgstr "Subskrypcja nie znaleziona."
-
-#~ msgid "License key not found or deactivated."
-#~ msgstr "Nie znaleziono lub zdezaktywowano klucz licencji."
-
-#~ msgid "No download permission. License / subscription probably expiring."
-#~ msgstr ""
-#~ "Brak uprawnień do pobierania. Prawdopodobnie licencja/subskrypcja "
-#~ "straciła ważność."
-
-#~ msgid ""
-#~ "License not activated. Go to the settings page and enter the license key "
-#~ "and email to activate."
-#~ msgstr ""
-#~ "Licencja nie została aktywowana. Przejdź do strony ustawień i w celu "
-#~ "aktywacji podaj klucz licencji oraz adres e-mail."
-
-#~ msgid ""
-#~ "Subscription changed. Please enter new license key in the settings page."
-#~ msgstr ""
-#~ "Subskrypcja zmieniona. Proszę podać nowy klucz licencji na stronie "
-#~ "ustawień."
-
-#~ msgid "License"
-#~ msgstr "Licencja"
-
-#~ msgid "License has not been activated."
-#~ msgstr "Licencja nie została aktywowana."
-
-#~ msgid "Click here to enter the license key and get the updates."
-#~ msgstr "Naciśnij tutaj, aby podać klucz licencji i otrzymywać aktualizacje."
-
-#~ msgid ""
-#~ "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s "
-#~ "to WP_ACCESSIBLE_HOSTS."
-#~ msgstr ""
-#~ "Stała WP_HTTP_BLOCK_EXTERNAL jest ustawiona na true. Aby otrzymywać "
-#~ "uaktualnienia, proszę dodać %s do WP_ACCESSIBLE_HOSTS."

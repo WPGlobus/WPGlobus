@@ -1,5 +1,8 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
 # ChameleonJohn.com, 2017
 # Gregory Karpinsky <gregory@tiv.net>, 2017
@@ -7,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 22:56-0500\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2018-01-05 23:11-0500\n"
+"PO-Revision-Date: 2018-01-06 04:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/id_ID/)\n"
@@ -17,14 +20,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -84,7 +79,7 @@ msgstr "Mulai cepat"
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -819,40 +814,49 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
 msgid "Error while saving."
-msgstr ""
+msgstr "Galat ketika sedang menyimpan."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:662
 msgid "g:i:s a"
-msgstr ""
+msgstr "H.i.s"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:667
 #, php-format
 msgid "Draft saved at %s."
-msgstr ""
+msgstr "Konsep disimpan di %s."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:766
 msgid "&hellip;"
-msgstr ""
+msgstr "&hellip;"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:771
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr ""
+msgstr "kata"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -910,35 +914,35 @@ msgstr ""
 #: includes/class-wpglobus.php:1374 includes/class-wpglobus.php:1378
 #, php-format
 msgid "You are customizing %s"
-msgstr ""
+msgstr "Anda sedang menyuaikan %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Word count: %s"
-msgstr ""
+msgstr "Jumlah kata: %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2689
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
+msgstr "Terakhir disunting oleh %1$s pada %2$s pukul %3$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2693
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr ""
+msgstr "Terakhir disunting pada %1$s pukul %2$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2991
 msgid "Enter title here"
-msgstr ""
+msgstr "Masukkan judul disini"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3112
 msgid "Invalid taxonomy"
-msgstr ""
+msgstr "Taksonomi tidak sah"
 
 #: includes/class-wpglobus.php:3302
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -1217,137 +1221,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Dapatkan WPGlobus Ditambah sekarang!"
-
-#~ msgid "Deactivate!"
-#~ msgstr "Menonaktifkan!"
-
-#~ msgid "Do not have a license? Please purchase one on %s"
-#~ msgstr "Tidak memiliki lisensi? Silakan pembelian satu di %s"
-
-#~ msgid "Deactivates License so it can be used on another site."
-#~ msgstr "Menonaktifkan Lisensi sehingga dapat digunakan di situs lain."
-
-#~ msgid "License Activation"
-#~ msgstr "Aktivasi lisensi"
-
-#~ msgid "License Key Status"
-#~ msgstr "Status Kunci Lisensi"
-
-#~ msgid "License Key"
-#~ msgstr "Kunci lisensi"
-
-#~ msgid "License email"
-#~ msgstr "Email lisensi"
-
-#~ msgid "License Deactivation"
-#~ msgstr "Deaktivasi Lisensi"
-
-#~ msgid "Deactivate License Key"
-#~ msgstr "Nonaktifkan Kunci Lisensi"
-
-#~ msgid "Please contact support@wpglobus.com for assistance."
-#~ msgstr "Silahkan hubungi support@wpglobus.com untuk mendapatkan bantuan."
-
-#~ msgid "Active"
-#~ msgstr "Aktif"
-
-#~ msgid "Inactive"
-#~ msgstr "Tidak aktif"
-
-#~ msgid "License activated. "
-#~ msgstr "Lisensi diaktifkan "
-
-#~ msgid "Connection failed to the License Key API server. Try again later."
-#~ msgstr "Sambungan gagal ke server API Kunci Lisensi. Coba lagi nanti."
-
-#~ msgid "The License Key / Email pair is empty or invalid."
-#~ msgstr "Kunci Lisensi / pasangan Email kosong atau tidak sah."
-
-#~ msgid ""
-#~ "The license could not be deactivated. Use the License Deactivation tab to "
-#~ "manually deactivate the license before activating a new license."
-#~ msgstr ""
-#~ "Lisensi tidak dapat dinonaktifkan. Gunakan tab Deaktivasi Lisensi untuk "
-#~ "secara manual menonaktifkan lisensi sebelum mengaktifkan lisensi baru."
-
-#~ msgid "Please select the checkbox to confirm your intention."
-#~ msgstr "Harap pilih kotak centang untuk mengonfirmasi niat Anda."
-
-#~ msgid "License / email not set or already deactivated."
-#~ msgstr "Lisensi / email tidak disetel atau sudah dinonaktifkan."
-
-#~ msgid "License deactivated. "
-#~ msgstr "Lisensi dinonaktifkan. "
-
-#~ msgid ""
-#~ "To check status, purchase or reactivate license, please go to your "
-#~ "account."
-#~ msgstr ""
-#~ "Untuk memeriksa status, membeli atau mengaktifkan kembali lisensi, "
-#~ "masuklah ke akun Anda."
-
-#~ msgid "License expired."
-#~ msgstr "Lisensi kadaluarsa"
-
-#~ msgid "Subscription on-hold."
-#~ msgstr "Berlangganan on-hold."
-
-#~ msgid "Subscription cancelled."
-#~ msgstr "Langganan dibatalkan"
-
-#~ msgid "Subscription suspended."
-#~ msgstr "Berlangganan ditangguhkan"
-
-#~ msgid "Subscription expired."
-#~ msgstr "Langganan kadaluarsa"
-
-#~ msgid "Subscription pending."
-#~ msgstr "Berlangganan tertunda"
-
-#~ msgid "Subscription pending deletion."
-#~ msgstr "Langganan menunggu keputusan penghapusan"
-
-#~ msgid "Subscription not found."
-#~ msgstr "Langganan tidak ditemukan"
-
-#~ msgid "License key not found or deactivated."
-#~ msgstr "Kunci lisensi tidak ditemukan atau dinonaktifkan."
-
-#~ msgid "No download permission. License / subscription probably expiring."
-#~ msgstr "Tidak ada izin unduhan. Lisensi / langganan mungkin kedaluwarsa."
-
-#~ msgid ""
-#~ "License not activated. Go to the settings page and enter the license key "
-#~ "and email to activate."
-#~ msgstr ""
-#~ "Lisensi tidak diaktifkan Buka halaman pengaturan dan masukkan kunci "
-#~ "lisensi dan email untuk mengaktifkan."
-
-#~ msgid ""
-#~ "Subscription changed. Please enter new license key in the settings page."
-#~ msgstr ""
-#~ "Berlangganan berubah Harap masukkan kunci lisensi baru di halaman "
-#~ "pengaturan."
-
-#~ msgid "Licensing server connection error."
-#~ msgstr "Kesalahan koneksi server lisensi"
-
-#~ msgid "Licensing server connection error (%d)."
-#~ msgstr "Kesalahan koneksi server lisensi ( %d )."
-
-#~ msgid "License"
-#~ msgstr "Lisensi"
-
-#~ msgid "License has not been activated."
-#~ msgstr "Lisensi belum diaktifkan"
-
-#~ msgid "Click here to enter the license key and get the updates."
-#~ msgstr ""
-#~ "Klik di sini untuk memasukkan kunci lisensi dan dapatkan pembaruannya."
-
-#~ msgid ""
-#~ "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s "
-#~ "to WP_ACCESSIBLE_HOSTS."
-#~ msgstr ""
-#~ "WP_HTTP_BLOCK_EXTERNAL disetel ke true. Untuk menerima pembaruan, "
-#~ "tambahkan %s ke WP_ACCESSIBLE_HOSTS."

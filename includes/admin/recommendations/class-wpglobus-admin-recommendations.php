@@ -92,10 +92,10 @@ class WPGlobus_Admin_Recommendations {
 	/**
 	 * Generic WC option section consisting of one block of text only.
 	 *
-	 * @param array  $settings Array of WC settings, passed by reference.
-	 * @param string $id       Section ID, must be unique.
-	 * @param string $title    Section title, no HTML.
-	 * @param string $desc     The text to display, HTML is allowed.
+	 * @param array $settings Array of WC settings, passed by reference.
+	 * @param string $id Section ID, must be unique.
+	 * @param string $title Section title, no HTML.
+	 * @param string $desc The text to display, HTML is allowed.
 	 *
 	 * @return void
 	 */
@@ -112,15 +112,29 @@ class WPGlobus_Admin_Recommendations {
 	 * @since 1.9.6
 	 */
 	public static function wpg_plus_slug() {
+
+		$container_start = '<p style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
+		$container_end   = '</p>';
+
 		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
-			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/';
-			echo '<p style="padding:5px;"><span class="dashicons dashicons-admin-site"></span> ';
+			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
+			echo $container_start;
 			esc_html_e( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
 			echo ' ';
 			esc_html_e( 'Check it out:', 'wpglobus' );
 			echo ' ';
-			echo '<a href="' . $url . '">' . $url . '</a>';
-			echo '</p>';
+			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . $url . '</a>';
+			echo $container_end;
+		} elseif ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
+			$url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
+			echo $container_start;
+			esc_html_e( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
+			echo ' ';
+			echo '<a href="' . esc_url( $url ) . '" target="_blank">' .
+			     /// Do not translate
+			     esc_html__( 'Go to WPGlobus Plus Options page', 'wpglobus-plus' ) .
+			     '.</a>';
+			echo $container_end;
 		}
 	}
 }

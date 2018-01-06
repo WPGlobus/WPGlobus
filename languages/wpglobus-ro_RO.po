@@ -1,12 +1,15 @@
-# Copyright (C) 2017 WPGlobus
-# This file is distributed under the GPL-3.0.
+# WPGlobus
+# Copyright (C) YEAR TIV.NET INC.
+# This file is distributed under the same license as the WPGlobus package.
+#
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 22:56-0500\n"
-"PO-Revision-Date: 2017-09-09 13:03+0000\n"
+"POT-Creation-Date: 2018-01-05 23:11-0500\n"
+"PO-Revision-Date: 2018-01-06 04:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Romanian (Romania) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ro_RO/)\n"
@@ -16,14 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Textdomain-Support: yes\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -83,7 +78,7 @@ msgstr "Început rapid"
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr ""
+msgstr "Setari"
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
@@ -768,40 +763,49 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
 msgid "Error while saving."
-msgstr ""
+msgstr "Eroare în timpul salvării."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:662
 msgid "g:i:s a"
-msgstr ""
+msgstr "G:i:s"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:667
 #, php-format
 msgid "Draft saved at %s."
-msgstr ""
+msgstr "Ciornă salvată la %s."
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:766
 msgid "&hellip;"
-msgstr ""
+msgstr "&hellip;"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:771
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr ""
+msgstr "words"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -859,35 +863,35 @@ msgstr ""
 #: includes/class-wpglobus.php:1374 includes/class-wpglobus.php:1378
 #, php-format
 msgid "You are customizing %s"
-msgstr ""
+msgstr "Personalizați %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2679
 #, php-format
 msgid "Word count: %s"
-msgstr ""
+msgstr "Număr cuvinte: %s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2689
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
+msgstr "Ultima editare de %1$s în %2$s la %3$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2693
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr ""
+msgstr "Ultima editare în %1$s la %2$s"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2991
 msgid "Enter title here"
-msgstr ""
+msgstr "Introdu aici titlul"
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3112
 msgid "Invalid taxonomy"
-msgstr ""
+msgstr "Clasificare invalidă"
 
 #: includes/class-wpglobus.php:3302
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -1131,12 +1135,12 @@ msgstr "Limbă maternă"
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:104
 msgid "Select an item"
-msgstr ""
+msgstr "Selecteaza un item"
 
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:159
 msgid "No items of this type were found."
-msgstr ""
+msgstr "Nu s-a găsit niciun articol de acest tip."
 
 #: includes/options/wpglobus-options-header.php:20
 msgid "We rely on your support!"
@@ -1167,130 +1171,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr "Obține WPGlobus Plus acum!"
-
-#~ msgid "Deactivate!"
-#~ msgstr "Dezactivează!"
-
-#~ msgid "Do not have a license? Please purchase one on %s"
-#~ msgstr "Nu aveți licență? Vă rugăm să o achiziționați pe% s"
-
-#~ msgid "Deactivates License so it can be used on another site."
-#~ msgstr ""
-#~ "Dezactivează licența astfel încât să poată fi folosită pe un alt site."
-
-#~ msgid "License Activation"
-#~ msgstr "Activare licență"
-
-#~ msgid "License Key Status"
-#~ msgstr "Stare cod de licență"
-
-#~ msgid "License Key"
-#~ msgstr "Cod licență"
-
-#~ msgid "License email"
-#~ msgstr "Email licență"
-
-#~ msgid "License Deactivation"
-#~ msgstr "Dezactivare licență"
-
-#~ msgid "Deactivate License Key"
-#~ msgstr "Dezactivează codul de licență"
-
-#~ msgid "Active"
-#~ msgstr "Activ"
-
-#~ msgid "Inactive"
-#~ msgstr "Inactiv"
-
-#~ msgid "License activated. "
-#~ msgstr "Licență activă"
-
-#~ msgid "Connection failed to the License Key API server. Try again later."
-#~ msgstr ""
-#~ "Conexiunea nu a reușit datorită licenței de server API. Încercați mai "
-#~ "târziu."
-
-#~ msgid ""
-#~ "The license could not be deactivated. Use the License Deactivation tab to "
-#~ "manually deactivate the license before activating a new license."
-#~ msgstr ""
-#~ "Licența nu poate fi dezactivată. Utilizați fila de dezactivare licență "
-#~ "pentru a dezactiva manual licența înainte de a activa o nouă licență."
-
-#~ msgid "Please select the checkbox to confirm your intention."
-#~ msgstr ""
-#~ "Vă rugăm să bifați caseta de selectare pentru a confirma intenția ta."
-
-#~ msgid "License / email not set or already deactivated."
-#~ msgstr "Licență / e-mail nu sunt setate sau sunt deja dezactivate."
-
-#~ msgid "License deactivated. "
-#~ msgstr "Licență dezactivată."
-
-#~ msgid ""
-#~ "To check status, purchase or reactivate license, please go to your "
-#~ "account."
-#~ msgstr ""
-#~ "Pentru a verifica starea, pentru a cumpăra sau reactiva licența, vă rugăm "
-#~ "să mergeți la contul dvs.."
-
-#~ msgid "License expired."
-#~ msgstr "Licență expirată"
-
-#~ msgid "Subscription on-hold."
-#~ msgstr "Abonament în așteptare."
-
-#~ msgid "Subscription cancelled."
-#~ msgstr "Abonament anulat."
-
-#~ msgid "Subscription suspended."
-#~ msgstr "Abonament suspendat."
-
-#~ msgid "Subscription expired."
-#~ msgstr "Abonament expirat."
-
-#~ msgid "Subscription pending."
-#~ msgstr "Abonament în așteptare."
-
-#~ msgid "Subscription pending deletion."
-#~ msgstr "Abonament în așteptare de ștergere."
-
-#~ msgid "Subscription not found."
-#~ msgstr "Abonamentul nu a fost găsit."
-
-#~ msgid "License key not found or deactivated."
-#~ msgstr "Codul de licență nu a fost găsit sau dezactivat."
-
-#~ msgid "No download permission. License / subscription probably expiring."
-#~ msgstr ""
-#~ "Fără permisiune de descărcare. Licență / abonament, probabil expirat."
-
-#~ msgid ""
-#~ "License not activated. Go to the settings page and enter the license key "
-#~ "and email to activate."
-#~ msgstr ""
-#~ "Licența nu este activată. Du-te la pagina de setări și introduceți codul "
-#~ "de licență și e-mail pentru a activa."
-
-#~ msgid ""
-#~ "Subscription changed. Please enter new license key in the settings page."
-#~ msgstr ""
-#~ "Abonament schimbat. Vă rugăm să introduceți noul cod de licență în pagina "
-#~ "de setări."
-
-#~ msgid "License"
-#~ msgstr "Licență"
-
-#~ msgid "License has not been activated."
-#~ msgstr "Licența nu a fost activată"
-
-#~ msgid "Click here to enter the license key and get the updates."
-#~ msgstr ""
-#~ "Click aici pentru a introduce licența și pentru a obține actualizări."
-
-#~ msgid ""
-#~ "WP_HTTP_BLOCK_EXTERNAL is set to true. To receive updates, please add %s "
-#~ "to WP_ACCESSIBLE_HOSTS."
-#~ msgstr ""
-#~ "WP_HTTP_BLOCK_EXTERNAL este setat la adevărat. Pentru a primi "
-#~ "actualizări, vă rugăm să adăugați% s la WP_ACCESSIBLE_HOSTS."

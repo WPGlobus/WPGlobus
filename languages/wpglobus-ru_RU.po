@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-04 23:10-0500\n"
-"PO-Revision-Date: 2018-01-05 04:06+0000\n"
+"POT-Creation-Date: 2018-01-05 23:14-0500\n"
+"PO-Revision-Date: 2018-01-06 04:13+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -814,13 +814,22 @@ msgid "Accept multiple currencies in your online store!"
 msgstr "Принимайте оплату в нескольких валютах!"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:120
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:124
 msgid "Check it out:"
 msgstr "Информация - здесь:"
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:118
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:122
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr "Перевод ссылок возможен с помощью WPGlobus-Плюс!"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:131
+msgid "To translate permalinks, please activate the module Slug."
+msgstr "Для перевода ссылок необходимо активировать модуль УРЛ."
+
+#. / Do not translate
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:135
+msgid "Go to WPGlobus Plus Options page"
+msgstr "Go to WPGlobus Plus Options page"
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:659
