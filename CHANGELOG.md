@@ -7,6 +7,7 @@
 * FIXED:
     * Core: do not load the WPGlobus translations from WordPress.org and always use those from the plugin's `languages` folder.
 	* Customizer: fixed warning "strpos() expects parameter 1 to be string, array given".
+	* Widgets: fixed handling the `keyup` event when editing in the visual mode.
 * ADDED:
     * Recommend `WPGlobus Plus` to edit permalinks.
 

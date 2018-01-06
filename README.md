@@ -240,6 +240,15 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
 
+### 1.9.6 ###
+
+* FIXED:
+    * Core: do not load the WPGlobus translations from WordPress.org and always use those from the plugin's `languages` folder.
+	* Customizer: fixed warning "strpos() expects parameter 1 to be string, array given".
+	* Widgets: fixed handling the `keyup` event when editing in the visual mode.
+* ADDED:
+    * Recommend `WPGlobus Plus` to edit permalinks.
+
 ### 1.9.5 ###
 
 * ADDED:
