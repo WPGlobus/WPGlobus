@@ -84,7 +84,22 @@ jQuery(document).ready(function ($) {
                     });
                 }
             });
-        }
+
+            // Attach listener for new ACF fields
+			var t = this;
+			if (acf.add_action) { // ACF v5
+				acf.add_action('append', function($el) {
+					t.replaceCloneIndex($el);
+				});
+			}
+		},
+
+        replaceCloneIndex: function($el) {
+            var cloneindex = $el.data('id');
+            $el.find('[data-source-id*="acfcloneindex"]').each(function(){
+                $(this).attr('data-source-id', $(this).attr('data-source-id').replace('acfcloneindex', cloneindex));
+            });
+		}
     }
 
     WPGlobusAcf = $.extend({}, WPGlobusAcf, api);
