@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.7 ###
+
+* FIXED:
+    * Acf: fixed the saving the data inside the repeater field, see issue #22.
+	
 ### 1.9.6 ###
 
 * FIXED:
