@@ -420,7 +420,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Ajax handler
+		 * Ajax handler.
 		 */
 		public static function action__process_ajax() {
 
@@ -431,17 +431,29 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 			switch ( $order['action'] ) :
 				case 'wpglobus_customize_save':
+				
 					/** @var array $options */
 					$options = get_option( WPGlobus::Config()->option );
-					foreach ( $order['options'] as $key => $value ) {
+				
+					foreach ( $order['options'] as $key=>$value ) {
 
-						if ( 'show_selector' === $key ) {
-							$options['selector_wp_list_pages'][ $key ] = $value;
-						} else {
-							$options[ $key ] = $value;
-						}
+						switch ($key) :
+							case 'show_selector':
+								$options['selector_wp_list_pages'][ $key ] = $value;
+								break;
+							case 'redirect_by_language':
+								/**
+								 * @todo check this option which do we really need?
+								 */
+								$options['browser_redirect'][ $key ] = $value;
+								$options[$key] = $value;
+								break;
+							default:
+								$options[ $key ] = $value;
+						endswitch;
 
 					}
+				
 					update_option( WPGlobus::Config()->option, $options );
 					break;
 				case 'cb-controls-save':
