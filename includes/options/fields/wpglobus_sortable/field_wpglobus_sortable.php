@@ -144,9 +144,13 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_sortable' ) ) {
 
 				echo '<input rel="'
 				     . esc_attr( $this->field['id'] . '-' . $k . '-hidden' )
-				     . '" class="' . esc_attr( $class ) . '" ' . $checked . 'type="'
+				     . '" class="' . esc_attr( $class ) . '" ';
+					 echo $checked; // WPCS: XSS ok.
+					 echo 'type="'
 				     . esc_attr( $this->field['mode'] )
-				     . '" ' . $name . 'id="'
+				     . '" ';
+					 echo $name; // WPCS: XSS ok.
+					 echo 'id="'
 				     . esc_attr( $this->field['id'] . '[' . $k . ']' )
 				     . '" value="' . esc_attr( $value_display ) . '" placeholder="' . esc_attr( $nicename ) . '" />';
 
@@ -159,7 +163,7 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_sortable' ) ) {
 					} else {
 						echo '<label for="'
 						     . esc_attr( $this->field['id'] . '[' . $k . ']' )
-						     .'"><strong>' . $options[ $k ] . '</strong></label>';
+						     .'"><strong>' . esc_html( $options[ $k ] ) . '</strong></label>';
 					}
 				}
 				if ( $this->field['mode'] === "checkbox" ) {

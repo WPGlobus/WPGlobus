@@ -17,7 +17,7 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 		 * Field Constructor.
 		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 		 *
-		 * @param array  $field
+		 * @param array $field
 		 * @param string $value
 		 * @param        $parent
 		 */
@@ -44,30 +44,15 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 		 */
 		public function enqueue() {
 
-			$post_types = get_post_types( array('_builtin'=>false) );
+			$post_types = get_post_types( array( '_builtin' => false ) );
 
 			/** @var array $options */
-			$options = get_option( 'wpglobus_option' );
+			$options            = get_option( 'wpglobus_option' );
 			$options_post_types = empty( $options['post_type'] ) ? array() : $options['post_type'];
-
-			/**
-			 * Add CPT from woocommerce
-			 * moved to class-wpglobus.php:175
-			 * @todo remove after test
-			 */
-			/*
-			$disabled_post_types = array();
-			$disabled_post_types[] = 'product';
-			$disabled_post_types[] = 'product_variation';
-			$disabled_post_types[] = 'shop_order';
-			$disabled_post_types[] = 'shop_order_refund';
-			$disabled_post_types[] = 'shop_coupon';
-			$disabled_post_types[] = 'shop_webhook';
-			// */
 
 			$enabled_post_types = array();
 
-			foreach( $post_types as $post_type ) {
+			foreach ( $post_types as $post_type ) {
 
 				if ( in_array( $post_type, WPGlobus::Config()->disabled_entities, true ) ) {
 
@@ -76,13 +61,10 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 						 * Add to enabled_post_types array for WPGlobus Post types setting page
 						 */
 						$enabled_post_types[] = $post_type;
-
 					}
-
 				} else {
 					$enabled_post_types[] = $post_type;
 				}
-
 			}
 
 			wp_enqueue_script(
@@ -97,13 +79,11 @@ if ( ! class_exists( 'ReduxFramework_post_types' ) ) {
 				'wpglobus_post_types',
 				array(
 					'post_type' => $enabled_post_types,
-					'options' 	=> $options_post_types
+					'options'   => $options_post_types,
 				)
 			);
 
 		}
 
-	} // class
+	}
 }
-
-# --- EOF

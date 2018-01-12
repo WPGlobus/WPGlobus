@@ -23,8 +23,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 		 *
 		 * @since ReduxFramework 1.0.0
-		 * @param array          $field
-		 * @param string|array   $value
+		 *
+		 * @param array $field
+		 * @param string|array $value
 		 * @param ReduxFramework $parent
 		 */
 		public function __construct( $field = array(), $value = '', $parent ) {
@@ -43,9 +44,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 			/** @var array $parent_args */
 			$parent_args = $this->parent->args;
 
-			$sortable = ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : "";
+			$sortable = ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : '';
 
-			if ( ! empty( $sortable ) ) { // Dummy proofing  :P
+			if ( ! empty( $sortable ) ) { // Dummy proofing  :P.
 				$this->field['multi'] = true;
 			}
 
@@ -54,17 +55,17 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 					$this->field['args'] = array();
 				}
 
-				if ( $this->field['data'] === "elusive-icons" || $this->field['data'] === "elusive-icon" || $this->field['data'] === "elusive" ) {
+				if ( $this->field['data'] === 'elusive-icons' || $this->field['data'] === 'elusive-icon' || $this->field['data'] === 'elusive' ) {
 					$icons_file = dirname( __FILE__ ) . '/elusive-icons.php';
 					/**
-					 * filter 'redux-font-icons-file}'
+					 * Filter 'redux-font-icons-file}'
 					 *
 					 * @param  array $icon_file File for the icons
 					 */
 					$icons_file = apply_filters( 'redux-font-icons-file', $icons_file );
 
 					/**
-					 * filter 'redux/{opt_name}/field/font/icons/file'
+					 * Filter 'redux/{opt_name}/field/font/icons/file'
 					 *
 					 * @param  array $icon_file File for the icons
 					 */
@@ -83,7 +84,7 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 			if ( ! empty( $this->field['data'] ) && ( $this->field['data'] === "elusive-icons" || $this->field['data'] === "elusive-icon" || $this->field['data'] === "elusive" ) ) {
 				$this->field['class'] .= " font-icons";
 			}
-			//if
+
 
 			if ( ! empty( $this->field['options'] ) ) {
 				$multi = ( isset( $this->field['multi'] ) && $this->field['multi'] ) ? ' multiple="multiple"' : "";
@@ -103,11 +104,11 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 						/// Do not translate
 						__( 'Select an item', 'redux-framework' );
 
-				if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
-					$select2_params = json_encode( $this->field['select2'] );
+				if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js.
+					$select2_params = wp_json_encode( $this->field['select2'] );
 					$select2_params = htmlspecialchars( $select2_params, ENT_QUOTES );
 
-					echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
+					echo '<input type="hidden" class="select2_params" value="' . esc_attr( $select2_params ) . '">';
 				}
 
 				/** @noinspection NotOptimalIfConditionsInspection */
@@ -131,13 +132,15 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 				$sortable =
 					( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : "";
 
-				echo '<select ' . $multi . ' id="' . $this->field['id'] . '-select" data-placeholder="' . $placeholder . '" name="' . $this->field['name'] . $this->field['name_suffix'] . $nameBrackets . '" class="redux-select-item ' . $this->field['class'] . $sortable . '"' . $width . ' rows="6">';
+				echo '<select ' . esc_attr( $multi ) . ' id="' . esc_attr( $this->field['id'] ) . '-select" data-placeholder="' . esc_attr( $placeholder ) . '" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . $nameBrackets ) . '" class="redux-select-item ' . esc_attr( $this->field['class'] . $sortable ) . '"';
+				echo $width; // WPCS: XSS ok, sanitization ok.
+				echo ' rows="6">';
 				echo '<option></option>';
 
 				foreach ( $this->field['options'] as $k => $v ) {
 
 					if ( is_array( $v ) ) {
-						echo '<optgroup label="' . $k . '">';
+						echo '<optgroup label="' . esc_attr( $k ) . '">';
 
 						foreach ( $v as $opt => $val ) {
 							$this->make_option( $opt, $val, $k );
@@ -150,13 +153,12 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 
 					$this->make_option( $k, $v );
 				}
-				//foreach
 
 				echo '</select>';
 			} else {
 				echo '<strong>' .
-				     /// Do not translate
-				     __( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
+					 /// Do not translate
+					 esc_html__( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
 			}
 		} //function
 
@@ -176,7 +178,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 				$selected = selected( $this->value, $id, false );
 			}
 
-			echo '<option value="' . $id . '"' . $selected . '>' . $value . '</option>';
+			echo '<option value="' . esc_attr( $id ) . '"';
+			echo $selected; // WPCS: XSS ok.
+			echo '>' . esc_html( $value ) . '</option>';
 		}
 
 		/**
@@ -207,6 +211,6 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 					WPGlobus::SCRIPT_VER()
 				);
 			}
-		} //function
-	} //class
+		}
+	}
 }

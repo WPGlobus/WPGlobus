@@ -35,8 +35,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_ace_editor' ) ) {
 		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 		 *
 		 * @since ReduxFramework 1.0.0
-		 * @param array          $field
-		 * @param string         $value
+		 *
+		 * @param array $field
+		 * @param string $value
 		 * @param ReduxFramework $parent
 		 */
 		public function __construct( $field = array(), $value = '', $parent ) {
@@ -84,17 +85,16 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_ace_editor' ) ) {
 			?>
 			<div class="ace-wrapper">
 				<input type="hidden" class="localize_data"
-				       value="<?php echo htmlspecialchars( json_encode( $params ) ); ?>"/>
-                <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>"
-                          id="<?php echo $this->field['id']; ?>-textarea"
-                          class="ace-editor hide <?php echo $this->field['class']; ?>"
-                          data-editor="<?php echo $this->field['id']; ?>-editor"
-                          data-mode="<?php echo $this->field['mode']; ?>"
-                          data-theme="<?php echo $this->field['theme']; ?>">
-                    <?php echo $this->value; ?>
-                </textarea>
-                <pre id="<?php echo $this->field['id']; ?>-editor"
-                     class="ace-editor-area"><?php echo htmlspecialchars( $this->value ); ?></pre>
+						value="<?php echo esc_attr( wp_json_encode( $params ) ); ?>"/>
+				<textarea name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>"
+						id="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"
+						class="ace-editor hide <?php echo esc_attr( $this->field['class'] ); ?>"
+						data-editor="<?php echo esc_attr( $this->field['id'] ); ?>-editor"
+						data-mode="<?php echo esc_attr( $this->field['mode'] ); ?>"
+						data-theme="<?php echo esc_attr( $this->field['theme'] ); ?>"
+						title="<?php esc_attr( $this->field['name'] ); ?>"><?php echo esc_html( $this->value ); ?></textarea>
+				<pre id="<?php echo esc_attr( $this->field['id'] ); ?>-editor"
+						class="ace-editor-area"><?php echo esc_attr( $this->value ); ?></pre>
 			</div>
 			<?php
 		}

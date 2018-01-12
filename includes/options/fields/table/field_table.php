@@ -21,7 +21,6 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 		 * @param array          $field
 		 * @param string         $value
 		 * @param ReduxFramework $parent
-		 * @return ReduxFramework_table
 		 */
 		public function __construct( $field = array(), $value = '', $parent ) {
 
@@ -39,7 +38,7 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 		 */
 		public function render() {
 
-			include( dirname( __FILE__ ) . '/table-languages.php' );
+			include dirname( __FILE__ ) . '/table-languages.php';
 			new LanguagesTable();
 
 		}
@@ -69,7 +68,5 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 
 		}
 
-	} // class
+	}
 }
-
-# --- EOF

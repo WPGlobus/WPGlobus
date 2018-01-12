@@ -40,8 +40,9 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_checkbox' ) ) {
 		 *
 		 * @since       1.0.0
 		 * @access      public
-		 * @param array          $field
-		 * @param string         $value
+		 *
+		 * @param array $field
+		 * @param string $value
 		 * @param ReduxFramework $parent
 		 */
 		public function __construct( Array $field = array(), $value = '', $parent ) {
@@ -78,13 +79,13 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_checkbox' ) ) {
 			}
 
 			$this->field['data_class'] =
-				( isset ( $this->field['multi_layout'] ) ) ? 'data-' . $this->field['multi_layout'] : 'data-full';
+				( isset( $this->field['multi_layout'] ) ) ? 'data-' . $this->field['multi_layout'] : 'data-full';
 
-			if ( ! empty ( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['default'] ) ) ) {
+			if ( ! empty( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['default'] ) ) ) {
 
-				echo '<ul class="' . $this->field['data_class'] . '">';
+				echo '<ul class="' . esc_attr( $this->field['data_class'] ) . '">';
 
-				if ( ! isset ( $this->value ) ) {
+				if ( ! isset( $this->value ) ) {
 					$this->value = array();
 				}
 
@@ -92,46 +93,49 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_checkbox' ) ) {
 					$this->value = array();
 				}
 
-				if ( empty ( $this->field['options'] ) && isset ( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
+				if ( empty( $this->field['options'] ) && isset( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
 					$this->field['options'] = $this->field['default'];
 				}
 
 				foreach ( $this->field['options'] as $k => $v ) {
 
-					if ( empty ( $this->value[ $k ] ) ) {
-						$this->value[ $k ] = "";
+					if ( empty( $this->value[ $k ] ) ) {
+						$this->value[ $k ] = '';
 					}
 
 					echo '<li>';
-					echo '<label for="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
+					echo '<label for="' . esc_attr( strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
+								'[' => '_',
+								']' => ''
+							) ) . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) ) . '">';
+
+					echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . esc_attr( $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] ) . '" value="' . esc_attr( $this->value[ $k ] ) . '" ' . '/>';
+
+					echo '<input type="checkbox" class="checkbox ' . esc_attr( $this->field['class'] ) . '" id="' . esc_attr( strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
 							'[' => '_',
 							']' => ''
-						) ) . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) . '">';
-					echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" value="' . $this->value[ $k ] . '" ' . '/>';
-					echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
-							'[' => '_',
-							']' => ''
-						) ) . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) . '" value="1" ' . checked( $this->value[ $k ], '1', false ) . '/>';
-					echo ' ' . $v . '</label>';
+						) ) . '_' . array_search( $k, array_keys( $this->field['options'] ), true ) ) . '" value="1" ' . checked( $this->value[ $k ], '1', false ) . '/>';
+
+					echo ' ' . esc_html( $v ) . '</label>';
 					echo '</li>';
 				}
 
 				echo '</ul>';
-			} else if ( empty ( $this->field['data'] ) ) {
+			} elseif ( empty( $this->field['data'] ) ) {
 
-				echo ( ! empty ( $this->field['desc'] ) ) ? ' <ul class="data-full"><li><label for="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . ']', array(
+				echo ( ! empty ( $this->field['desc'] ) ) ? ' <ul class="data-full"><li><label for="' . esc_attr( strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . ']', array(
 						'[' => '_',
 						']' => ''
-					) ) . '">' : '';
+					) ) ) . '">' : '';
 
 				// Got the "Checked" status as "0" or "1" then insert it as the "value" option
 				//$ch_value = 1; // checked($this->value, '1', false) == "" ? "0" : "1";
-				echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $this->value . '" ' . '/>';
-				echo '<input type="checkbox" id="' . strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . ']', array(
+				echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '" value="' . esc_attr( $this->value ) . '" ' . '/>';
+				echo '<input type="checkbox" id="' . esc_attr( strtr( $parent_args['opt_name'] . '[' . $this->field['id'] . ']', array(
 						'[' => '_',
 						']' => ''
-					) ) . '" value="1" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
-				echo isset( $this->field['label'] ) ? ' ' . $this->field['label'] : '';
+					) ) ) . '" value="1" class="checkbox ' . esc_attr( $this->field['class'] ) . '" ' . checked( $this->value, '1', false ) . '/>';
+				echo isset( $this->field['label'] ) ? ' ' . esc_html( $this->field['label'] ) : '';
 				echo '</label></li></ul>';
 			}
 		}
