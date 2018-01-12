@@ -632,13 +632,43 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			update_option( 'wpglobus_customize_css_editor', WPGlobus::Config()->css_editor );
 
 			/**
-			 * SECTION: Language
+			 * Init section priority.
+			 */
+			$section_priority = 0;
+			
+			/**
+			 * SECTION: Help.
+			 */
+			if ( 0 ) {
+				
+				$section_priority = $section_priority + 0;
+				
+				self::$sections['wpglobus_help_section'] = 'wpglobus_help_section';
+				$wp_customize->add_section( self::$sections['wpglobus_help_section'], array(
+					'title'    => __( 'Help', 'wpglobus' ),
+					'priority' => $section_priority,
+					'panel'    => 'wpglobus_settings_panel',
+				) );
+
+				$wp_customize->add_control( 'wpglobus_customize_add_onsZZZ', array(
+						'section'  => self::$sections['wpglobus_help_section'],
+						'settings' => array(),
+						'type'     => 'button',
+					)
+				);
+			}			
+			/** end SECTION: Help */
+			
+			/**
+			 * SECTION: Language.
 			 */
 			if ( 1 ) {
-
+				
+				$section_priority = $section_priority + 10;
+				
 				$wp_customize->add_section( 'wpglobus_languages_section', array(
 					'title'    => __( 'Languages', 'wpglobus' ),
-					'priority' => 10,
+					'priority' => $section_priority,
 					'panel'    => 'wpglobus_settings_panel'
 				) );
 				self::$sections['wpglobus_languages_section'] = 'wpglobus_languages_section';
@@ -853,12 +883,14 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * SECTION: Post types.
 			 */
 			if ( 1 ) {
-
+				
+				$section_priority = $section_priority + 10;
+				
 				$section = 'wpglobus_post_types_section';
 
 				$wp_customize->add_section( $section, array(
 					'title'    => __( 'Post types', 'wpglobus' ),
-					'priority' => 40,
+					'priority' => $section_priority,
 					'panel'    => 'wpglobus_settings_panel'
 				) );
 				self::$sections[ $section ] = $section;
@@ -991,10 +1023,37 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/** end SECTION: Post types */
 
 			/**
-			 * SECTION: Add ons
+			 * SECTION: Redirect.
+			 */
+			if ( 0 ) {
+				
+				$section_priority = $section_priority + 10;
+				
+				self::$sections['wpglobus_redirect_section'] = 'wpglobus_redirect_section';
+				$wp_customize->add_section( self::$sections['wpglobus_redirect_section'], array(
+					'title'    => __( 'Redirect', 'wpglobus' ),
+					'priority' => $section_priority,
+					'panel'    => 'wpglobus_settings_panel',
+				) );
+
+				//*
+				$wp_customize->add_control( 
+					'wpglobus_customize_redirect_control', array(
+						'section'  => self::$sections['wpglobus_redirect_section'],
+						'settings' => array(),
+						'type'     => 'button',
+					)
+				);	// */			
+			}
+			/** end SECTION: Redirect */
+			
+			/**
+			 * SECTION: Add ons.
 			 */
 			if ( 1 ) {
 
+				$section_priority = $section_priority + 10;
+			
 				global $wp_version;
 
 				self::$sections['wpglobus_addons_section'] = 'wpglobus_addons_section';
@@ -1003,7 +1062,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 					$wp_customize->add_section( self::$sections['wpglobus_addons_section'], array(
 						'title'    => __( 'Add-ons', 'wpglobus' ),
-						'priority' => 40,
+						'priority' => $section_priority,
 						'panel'    => 'wpglobus_settings_panel',
 					) );
 
@@ -1035,7 +1094,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 					$wp_customize->add_section( self::$sections['wpglobus_addons_section'], array(
 						'title'    => __( 'Add-ons', 'wpglobus' ),
-						'priority' => 40,
+						'priority' => $section_priority,
 						'panel'    => 'wpglobus_settings_panel',
 					) );
 
