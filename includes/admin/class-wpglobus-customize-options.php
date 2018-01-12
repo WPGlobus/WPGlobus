@@ -50,8 +50,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}
 
 	/**
-	 * Class WPGlobusTextBox
-	 * Adds textbox support to the theme customizer
+	 * Class WPGlobusTextBox.
+	 * Adds textbox support to the theme customizer.
 	 *
 	 * @see wp-includes\class-wp-customize-control.php
 	 */
@@ -128,7 +128,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}
 
 	/**
-	 * Adds link support to the theme customizer
+	 * Adds link support to the theme customizer.
 	 *
 	 * @see wp-includes\class-wp-customize-control.php
 	 */
@@ -166,7 +166,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}
 
 	/**
-	 * Adds CheckBoxSet support to the theme customizer
+	 * Adds CheckBoxSet support to the theme customizer.
 	 *
 	 * @see wp-includes\class-wp-customize-control.php
 	 */
@@ -244,7 +244,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}
 
 	/**
-	 * Adds Fields Settings Control support to the theme customizer
+	 * Adds Fields Settings Control support to the theme customizer.
 	 *
 	 * @see wp-includes\class-wp-customize-control.php
 	 */
@@ -500,7 +500,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Section for message about unsupported theme
+		 * Section for message about unsupported theme.
 		 *
 		 * @param WP_Customize_Manager $wp_customize
 		 * @param WP_Theme             $theme
@@ -534,7 +534,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Callback for register fields settings section
+		 * Callback for register fields settings section.
 		 *
 		 * @since 1.6.0
 		 *
@@ -600,7 +600,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Callback for customize_register
+		 * Callback for customize_register.
 		 *
 		 * @param WP_Customize_Manager $wp_customize
 		 */
@@ -652,6 +652,15 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			} else {
 				update_option( 'wpglobus_customize_redirect_by_language', WPGlobus::Config()->browser_redirect['redirect_by_language'] );
 			}
+			
+			/** wpglobus_customize_js_editor <=> wpglobus_option[js_editor]  */
+			if ( empty( WPGlobus::Config()->js_editor ) ) {
+				update_option( 'wpglobus_customize_js_editor', '' );
+			} else {
+				update_option( 'wpglobus_customize_js_editor', WPGlobus::Config()->js_editor );
+			}
+
+			
 			/** end updating options */
 			
 			/**
@@ -1095,6 +1104,48 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/** end SECTION: Redirect */
 			
 			/**
+			 * SECTION: Custom JS Code.
+			 */
+			if ( 1 ) {
+				
+				$section_priority = $section_priority + 10;
+				
+				self::$sections['wpglobus_js_editor_section'] = 'wpglobus_js_editor_section';
+				
+				$wp_customize->add_section( self::$sections['wpglobus_js_editor_section'], array(
+					'title'    => __( 'Custom JS code', 'wpglobus' ),
+					'priority' => $section_priority,
+					'panel'    => 'wpglobus_settings_panel',
+				) );
+	
+				/** 
+				 * Setting 'wpglobus_customize_js_editor'.
+				 */
+				$wp_customize->add_setting( 'wpglobus_customize_js_editor', array(
+					'type'       => 'option',
+					'capability' => 'manage_options',
+					'transport'  => 'postMessage'
+				) );
+				$wp_customize->add_control( new WP_Customize_Code_Editor_Control( $wp_customize,
+						'wpglobus_customize_js_editor', array(
+						'input_attrs'	=> array('rows'=>80),
+						'section'  		=> self::$sections['wpglobus_js_editor_section'],
+						'settings' 		=> 'wpglobus_customize_js_editor',
+						'title'    		=> __( 'Title', 'wpglobus' ),
+						'priority' 		=> 10,
+						'label'    		=> __( 'Custom JS Code', 'wpglobus' ),
+						'description' 	=> __( '(Paste your JS code here.)', 'wpglobus' )
+					)
+				) );
+	
+				self::$settings[ self::$sections['wpglobus_js_editor_section'] ]['wpglobus_customize_js_editor']['type'] = 'code_editor';
+				/** @see option wpglobus_option['css_editor'] */
+				self::$settings[ self::$sections['wpglobus_js_editor_section'] ]['wpglobus_customize_js_editor']['option'] = 'js_editor';	
+	
+			}				
+			/** end SECTION: Custom JS Code */
+			
+			/**
 			 * SECTION: Add ons.
 			 */
 			if ( 1 ) {
@@ -1176,7 +1227,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Get content for WPGlobusTextBox element
+		 * Get content for WPGlobusTextBox element.
 		 *
 		 * @param string $control
 		 * @param mixed  $attrs
@@ -1282,7 +1333,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Load Customize Preview JS
+		 * Load Customize Preview JS.
 		 *
 		 * Used by hook: 'customize_preview_init'
 		 * @see 'customize_preview_init'
@@ -1313,7 +1364,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Load Customize Control JS
+		 * Load Customize Control JS.
 		 */
 		public static function action__customize_controls_enqueue_scripts() {
 
@@ -1385,7 +1436,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		/**
-		 * Check for enabled theme
+		 * Check for enabled theme.
 		 *
 		 * @since 1.6.0
 		 * @return boolean
