@@ -278,10 +278,18 @@ class WPGlobus_Options {
 				$lang_in_en = ' (' . $config->en_language_name[ $lang ] . ')';
 			}
 
-			$enabled_languages[ $lang ] = $config->language_name[ $lang ] . $lang_in_en;
+			if ( ! empty( $config->language_name[ $lang ] ) ) {
+				$enabled_languages[ $lang ] = $config->language_name[ $lang ] . $lang_in_en;
+			}
 
-			$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
-				$config->language_name[ $wpglobus_option['more_languages'] ];
+			if (
+				! empty( $wpglobus_option['more_languages'] )
+				&& isset( $config->language_name[$wpglobus_option['more_languages']] )
+			) {
+				$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
+					$config->language_name[ $wpglobus_option['more_languages'] ];
+			}
+
 			update_option( $config->option, $wpglobus_option );
 
 		}
