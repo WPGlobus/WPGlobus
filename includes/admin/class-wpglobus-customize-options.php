@@ -83,7 +83,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 	}
 
 	/**
-	 * Adds checkbox with title support to the theme customizer
+	 * Adds checkbox with title support to the theme customizer.
 	 *
 	 * @see wp-includes\class-wp-customize-control.php
 	 */
@@ -615,6 +615,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 			}
 
+			/**
+			 * Updating options for customizer accordingly with WPGlobus::Config().
+			 */
 			/** wpglobus_customize_language_selector_mode <=> wpglobus_option[show_flag_name] */
 			update_option( 'wpglobus_customize_language_selector_mode', WPGlobus::Config()->show_flag_name );
 
@@ -631,6 +634,14 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/** wpglobus_customize_css_editor <=> wpglobus_option[css_editor]  */
 			update_option( 'wpglobus_customize_css_editor', WPGlobus::Config()->css_editor );
 
+			/** wpglobus_customize_redirect_by_language <=> wpglobus_option[browser_redirect][redirect_by_language]  */
+			if ( empty( WPGlobus::Config()->browser_redirect['redirect_by_language'] ) || (int) WPGlobus::Config()->browser_redirect['redirect_by_language'] == 0 ) {
+				update_option( 'wpglobus_customize_redirect_by_language', '' );
+			} else {
+				update_option( 'wpglobus_customize_redirect_by_language', WPGlobus::Config()->browser_redirect['redirect_by_language'] );
+			}
+			/** end updating options */
+			
 			/**
 			 * Init section priority.
 			 */
@@ -1025,25 +1036,49 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/**
 			 * SECTION: Redirect.
 			 */
-			if ( 0 ) {
+			if ( 1 ) {
 				
 				$section_priority = $section_priority + 10;
 				
 				self::$sections['wpglobus_redirect_section'] = 'wpglobus_redirect_section';
+				
 				$wp_customize->add_section( self::$sections['wpglobus_redirect_section'], array(
 					'title'    => __( 'Redirect', 'wpglobus' ),
 					'priority' => $section_priority,
 					'panel'    => 'wpglobus_settings_panel',
 				) );
-
-				//*
-				$wp_customize->add_control( 
-					'wpglobus_customize_redirect_control', array(
-						'section'  => self::$sections['wpglobus_redirect_section'],
-						'settings' => array(),
-						'type'     => 'button',
+				
+				/**
+				 * Option
+				 *  [browser_redirect] => Array
+				 *	(
+				 *		[redirect_by_language] => 0
+				 *	)
+				 */
+				
+				/** 
+				 * Setting wpglobus_customize_redirect_by_language.
+				 */
+				$wp_customize->add_setting( 'wpglobus_customize_redirect_by_language', array(
+					'type'       => 'option',
+					'capability' => 'manage_options',
+					'transport'  => 'postMessage'
+				) );
+				$wp_customize->add_control( new WPGlobusCheckBox( $wp_customize,
+					'wpglobus_customize_redirect_by_language', array(
+						'section'  		=> self::$sections['wpglobus_redirect_section'],
+						'settings' 		=> 'wpglobus_customize_redirect_by_language',
+						'title'    		=> __( 'Choose the language automatically, based on:', 'wpglobus' ),
+						'priority' 		=> 10,
+						'label'    		=> __( 'Preferred language set in the browser', 'wpglobus' ),
+						'description' 	=> '<br />' . __('When a user comes to the site for the first time, try to find the best matching language version of the page.', 'wpglobus')
 					)
-				);	// */			
+				) );
+			
+				self::$settings[ self::$sections['wpglobus_redirect_section'] ]['wpglobus_customize_redirect_by_language']['type'] 		= 'wpglobus_checkbox';
+				/** @see option wpglobus_option[browser_redirect][redirect_by_language] */
+				self::$settings[ self::$sections['wpglobus_redirect_section'] ]['wpglobus_customize_redirect_by_language']['option'] 	= 'redirect_by_language';
+
 			}
 			/** end SECTION: Redirect */
 			
