@@ -1769,12 +1769,24 @@ class WPGlobus {
 		}
 
 	}
-
+	
 	/**
 	 * Add hidden submenu for Language edit page
 	 * @return void
 	 */
 	public function on_admin_menu() {
+		
+		/**
+		 * @todo Temporarily add main menu.
+		 */
+		add_menu_page(
+			'WPGlobus',
+			'WPGlobus',
+			'administrator',
+			'wpglobus-main',
+			array( $this, 'wpglobus_about' )
+		);
+		
 		add_submenu_page(
 			null,
 			'',
