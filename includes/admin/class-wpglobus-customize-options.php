@@ -1106,7 +1106,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/**
 			 * SECTION: Custom JS Code.
 			 */
-			if ( 1 ) {
+			if ( 0 ) {
 				
 				$section_priority = $section_priority + 10;
 				
