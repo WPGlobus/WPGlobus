@@ -569,13 +569,13 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			?>
 			<style>
 				.wp-badge.wpglobus-badge {
-					background:      #ffffff url(<?php echo $url_wpglobus_logo; ?>) no-repeat;
+					background:      #ffffff url(<?php echo esc_url( $url_wpglobus_logo ); ?>) no-repeat;
 					background-size: contain;
 				}
 			</style>
 			<div class="wrap about-wrap wpglobus-about-wrap clean-wrap wpglobus-clean">
 				<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
-					<span class="wpglobus-version"><?php echo WPGLOBUS_VERSION; ?></span>
+					<span class="wpglobus-version"><?php echo esc_html( WPGLOBUS_VERSION ); ?></span>
 				</h1>
 
 				<div class="wpglobus-motto"><?php esc_html_e( 'Multilingual Everything!', 'wpglobus' ); ?></div>
@@ -588,22 +588,22 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 				<h2 class="nav-tab-wrapper">
 					<a href="#" class="nav-tab nav-tab-active">
-						<?php _e( 'Clean-up Tool', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Clean-up Tool', 'wpglobus' ); ?>
 					</a>
 					<a href="<?php echo esc_url( $url_wpglobus_site_quick_start ); ?>"
 					   target="_blank"
 					   class="nav-tab">
-						<?php _e( 'Guide', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Guide', 'wpglobus' ); ?>
 					</a>
 					<a href="admin.php?page=wpglobus_options" class="nav-tab">
-						<?php _e( 'Settings' ); ?>
+						<?php esc_html_e( 'Settings' ); ?>
 					</a>
 					<a href="<?php echo WPGlobus_Admin_Page::url_addons(); // WPCS: XSS ok. ?>" class="nav-tab">
-						<?php _e( 'Add-ons', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Add-ons', 'wpglobus' ); ?>
 					</a>
 					<a href="<?php echo esc_url( $url_wpglobus_site_contact ); ?>"
 					   class="nav-tab">
-						<?php _e( 'Support', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Support', 'wpglobus' ); ?>
 					</a>
 				</h2>
 
@@ -631,7 +631,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					<?php esc_html_e( 'You are about to clean the content of the following database tables:', 'wpglobus' ); ?>
 				</h3>
 
-				<?php echo self::get_table_list(); ?>
+				<?php echo self::get_table_list(); // WPCS: XSS ok. ?>
 
 				<hr />
 
@@ -643,7 +643,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				</div>
 				<br />
 				<code>
-					<?php echo self::$log_file; ?>
+					<?php echo self::$log_file; // WPCS: XSS ok. ?>
 				</code>
 				<br />
 				<br />
@@ -665,7 +665,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				</label>
 				<div class="return-to-dashboard">
 					<a id="wpglobus-clean-button" class="button button-primary hidden" href="#about-to-clean">
-						<?php _e( 'Process with the Clean-up', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Process with the Clean-up', 'wpglobus' ); ?>
 					</a>
 				</div>
 
