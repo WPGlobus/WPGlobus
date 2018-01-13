@@ -1113,7 +1113,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				self::$sections['wpglobus_js_editor_section'] = 'wpglobus_js_editor_section';
 				
 				$wp_customize->add_section( self::$sections['wpglobus_js_editor_section'], array(
-					'title'    => __( 'Custom JS code', 'wpglobus' ),
+					'title'    => __( 'Custom JS Code', 'wpglobus' ),
 					'priority' => $section_priority,
 					'panel'    => 'wpglobus_settings_panel',
 				) );
