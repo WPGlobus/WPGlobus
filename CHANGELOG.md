@@ -4,8 +4,12 @@
 
 ### 1.9.7 ###
 
+* SECURITY:
+    * Admin Panel: proper output escaping on the ReduxFramework-based pages. Thanks: `d4wner` (reporting), `slaFFik` (helping).
 * FIXED:
-    * Acf: fixed the saving the data inside the repeater field, see issue #22.
+    * Acf: fixed the saving the data inside the repeater field (issue #22).
+* ADDED:
+    * Customizer: additional settings. 
 	
 ### 1.9.6 ###
 
