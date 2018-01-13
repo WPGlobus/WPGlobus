@@ -222,6 +222,15 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 == Changelog ==
 
+= 1.9.7 =
+
+* SECURITY:
+    * Admin Panel: proper output escaping on the ReduxFramework-based pages. Thanks: `d4wner` (reporting), `slaFFik` (helping).
+* FIXED:
+    * Acf: fixed the saving the data inside the repeater field (issue #22).
+* ADDED:
+    * Customizer: additional settings.
+
 = 1.9.6 =
 
 * FIXED:
