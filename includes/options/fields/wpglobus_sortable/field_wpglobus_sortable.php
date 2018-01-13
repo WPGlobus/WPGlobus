@@ -119,10 +119,10 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_sortable' ) ) {
 					$class .= " checkbox_sortable";
 					$name = "";
 					echo '<input type="hidden" name="'
-					     . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' )
-					     . '" id="'
-					     . esc_attr( $this->field['id'] . '-' . $k . '-hidden" value="' . $value_display )
-					     . '" />';
+					    . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' )
+					    . '" id="'
+					    . esc_attr( $this->field['id'] . '-' . $k ) . '-hidden" value="' . esc_attr( $value_display )
+					    . '" />';
 
 					echo '<div class="checkbox-container">';
 				} else {

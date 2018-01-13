@@ -442,7 +442,7 @@ class LanguagesTable extends WP_List_Table {
 			$style = ' style="background-color:#0ff;" ';
 		}
 
-		echo '<tr' . esc_attr( $style ) . '>';
+		echo '<tr' . $style . '>'; // WPCS: XSS ok.
 		$this->single_row_columns( $item );
 		echo '</tr>';
 	}
