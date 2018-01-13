@@ -83,14 +83,14 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 					if ( ! empty( $tab['tab_id'] ) ) {
 						$html = str_replace( '{{href}}', '#' . $tab['tab_id'], $html );
 						$html = str_replace( '{{tab_id}}', $tab['tab_id'], $html );
-					} else if ( ! empty( $tab['href'] ) ) {
+					} elseif ( ! empty( $tab['href'] ) ) {
 						$html = str_replace( '{{href}}', $tab['href'], $html );
 						$html = str_replace( '{{tab_id}}', '', $html );
 					} else {
 						$html = str_replace( '{{href}}', '#', $html );
 						$html = str_replace( '{{tab_id}}', '', $html );
 					}
-					echo $html;
+					echo $html; // WPCS: XSS ok.
 				endforeach;	?>
 			</h2>	<?php
 
