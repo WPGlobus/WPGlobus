@@ -24,22 +24,22 @@ class WPGlobusWidget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'wpglobus',
-			__( 'WPGlobus widget', 'wpglobus' ),
+			esc_html__( 'WPGlobus widget', 'wpglobus' ),
 			array(
-				'description' => __( 'Add language switcher', 'wpglobus' )
+				'description' => esc_html__( 'Add language switcher', 'wpglobus' )
 			)
 		);
-		$this->types['flags']               = __( 'Flags', 'wpglobus' );
-		$this->types['list']                = __( 'List', 'wpglobus' );
-		$this->types['list_with_flags']     = __( 'List with flags', 'wpglobus' );
-		$this->types['select']              = __( 'Select', 'wpglobus' );
-		$this->types['select_with_code']    = __( 'Select with language code', 'wpglobus' );
-		$this->types['dropdown']            = __( 'Dropdown', 'wpglobus' );
-		$this->types['dropdown_with_flags'] = __( 'Dropdown with flags', 'wpglobus' );
+		$this->types['flags']               = esc_html__( 'Flags', 'wpglobus' );
+		$this->types['list']                = esc_html__( 'List', 'wpglobus' );
+		$this->types['list_with_flags']     = esc_html__( 'List with flags', 'wpglobus' );
+		$this->types['select']              = esc_html__( 'Select', 'wpglobus' );
+		$this->types['select_with_code']    = esc_html__( 'Select with language code', 'wpglobus' );
+		$this->types['dropdown']            = esc_html__( 'Dropdown', 'wpglobus' );
+		$this->types['dropdown_with_flags'] = esc_html__( 'Dropdown with flags', 'wpglobus' );
 	}
 
 	/**
-	 * Echo the widget content
+	 * Echo the widget content.
 	 *
 	 * @param array $args     Display arguments including before_title, after_title, before_widget, and after_widget.
 	 * @param array $instance The settings for the particular instance of the widget
@@ -127,9 +127,9 @@ class WPGlobusWidget extends WP_Widget {
 		 */
 		$flag_classes = array();
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; // WPCS: XSS ok.
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . $instance['title'] . $args['after_title'];
+			echo $args['before_title'] . $instance['title'] . $args['after_title']; // WPCS: XSS ok.
 		}
 		foreach ( $enabled_languages as $language ) :
 
@@ -208,14 +208,14 @@ class WPGlobusWidget extends WP_Widget {
 
 		endforeach;
 
-		echo str_replace( '{{inside}}', $inside, $code );
+		echo str_replace( '{{inside}}', $inside, $code ); // WPCS: XSS ok.
 
-		echo $args['after_widget'];
+		echo $args['after_widget']; // WPCS: XSS ok.
 
 	}
 
 	/**
-	 * Echo the settings update form
+	 * Echo the settings update form.
 	 *
 	 * @param array $instance Current settings
 	 *
@@ -233,11 +233,11 @@ class WPGlobusWidget extends WP_Widget {
 		}
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_name( 'type' ); ?>"><?php echo __( 'Title' ); ?></label>
-			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>"
-			       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>"/>
+			<label for="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>"><?php echo esc_html__( 'Title' ); ?></label>
+			<input type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
+			       name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_html( $instance['title'] ); ?>"/>
 		</p>
-		<p><?php _e( 'Selector type', 'wpglobus' ); ?></p>
+		<p><?php esc_html_e( 'Selector type', 'wpglobus' ); ?></p>
 		<p><?php
 			foreach ( $this->types as $type => $caption ) :
 				$checked = '';
@@ -245,9 +245,9 @@ class WPGlobusWidget extends WP_Widget {
 					$checked = ' checked';
 				} ?>
 				<input type="radio"
-				       id="<?php echo $this->get_field_id( 'type' ); ?>"
-				       name="<?php echo $this->get_field_name( 'type' ); ?>" <?php echo $checked; ?>
-				       value="<?php echo esc_attr( $type ); ?>"/> <?php echo $caption . '<br />';
+				       id="<?php echo esc_attr( $this->get_field_id( 'type' ) ); ?>"
+				       name="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>" <?php echo $checked; // WPCS: XSS ok. ?>
+				       value="<?php echo esc_attr( $type ); ?>"/> <?php echo $caption . '<br />'; // WPCS: XSS ok.
 			endforeach;
 			?></p>        <?php
 
