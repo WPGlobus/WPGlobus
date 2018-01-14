@@ -76,10 +76,28 @@ class WPGlobus {
 	public static $PLUGIN_DIR_PATH = '';
 
 	/**
+	 * Getter.
+	 *
+	 * @return string
+	 */
+	public static function plugin_dir_path() {
+		return self::$PLUGIN_DIR_PATH;
+	}
+
+	/**
 	 * Initialized at plugin loader
 	 * @var string
 	 */
 	public static $PLUGIN_DIR_URL = '';
+
+	/**
+	 * Getter.
+	 *
+	 * @return string
+	 */
+	public static function plugin_dir_url() {
+		return self::$PLUGIN_DIR_URL;
+	}
 
 	/**
 	 * URL for internal images.

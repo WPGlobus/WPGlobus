@@ -3,24 +3,47 @@
  * File: table-languages.php
  *
  * @package     WPGlobus\Admin\Options\Field
- * @author      WPGlobus
  */
 
+// Load the List_Table class.
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
+/** @noinspection PhpIncludeInspection */
+require_once WPGlobus::plugin_dir_path() . 'includes/admin/class-wpglobus-language-edit-request.php';
+
 /**
  * Class LanguagesTable
  */
-class LanguagesTable extends WP_List_Table {
+class WPGlobus_Languages_Table extends WP_List_Table {
 
+	/**
+	 * Data
+	 *
+	 * @var array
+	 */
 	public $data = array();
 
+	/**
+	 * Table fields
+	 *
+	 * @var array
+	 */
 	public $table_fields = array();
 
+	/**
+	 * Found data
+	 *
+	 * @var array
+	 */
 	public $found_data = array();
 
+	/**
+	 * Column headers
+	 *
+	 * @var array
+	 */
 	public $_column_headers = array();
 
 	/**
@@ -29,12 +52,12 @@ class LanguagesTable extends WP_List_Table {
 	public function __construct() {
 
 		parent::__construct( array(
-			'singular' => __( 'item', 'wpglobus' ),
 			// singular name of the listed records.
-			'plural'   => __( 'items', 'wpglobus' ),
+			'singular' => esc_html__( 'item', 'wpglobus' ),
 			// plural name of the listed records.
-			'ajax'     => true,
+			'plural'   => esc_html__( 'items', 'wpglobus' ),
 			// does this table support ajax?
+			'ajax'     => true,
 		) );
 
 		$this->get_data();
@@ -52,44 +75,44 @@ class LanguagesTable extends WP_List_Table {
 
 		$this->table_fields = array(
 			'wpglobus_code'             => array(
-				'caption'  => __( 'Code', 'wpglobus' ),
+				'caption'  => esc_html__( 'Code', 'wpglobus' ),
 				'sortable' => true,
 				'order'    => 'asc',
 				'actions'  => array(
 					'edit'   => array(
 						'action'  => 'edit',
-						'caption' => __( 'Edit', 'wpglobus' ),
+						'caption' => esc_html__( 'Edit', 'wpglobus' ),
 						'ajaxify' => false,
 					),
 					'delete' => array(
 						'action'  => 'delete',
-						'caption' => __( 'Delete', 'wpglobus' ),
+						'caption' => esc_html__( 'Delete', 'wpglobus' ),
 						'ajaxify' => false,
 					),
 				),
 			),
 			'wpglobus_file'             => array(
-				'caption'  => __( 'File', 'wpglobus' ),
+				'caption'  => esc_html__( 'File', 'wpglobus' ),
 				'sortable' => false,
 				'order'    => 'desc',
 			),
 			'wpglobus_flag'             => array(
-				'caption'  => __( 'Flag', 'wpglobus' ),
+				'caption'  => esc_html__( 'Flag', 'wpglobus' ),
 				'sortable' => false,
 				'order'    => 'desc',
 			),
 			'wpglobus_locale'           => array(
-				'caption'  => __( 'Locale', 'wpglobus' ),
+				'caption'  => esc_html__( 'Locale', 'wpglobus' ),
 				'sortable' => true,
 				'order'    => 'desc',
 			),
 			'wpglobus_language_name'    => array(
-				'caption'  => __( 'Language name', 'wpglobus' ),
+				'caption'  => esc_html__( 'Language name', 'wpglobus' ),
 				'sortable' => false,
 				'order'    => 'desc',
 			),
 			'wpglobus_en_language_name' => array(
-				'caption'  => __( 'English language name', 'wpglobus' ),
+				'caption'  => esc_html__( 'English language name', 'wpglobus' ),
 				'sortable' => true,
 			),
 		);
@@ -111,18 +134,31 @@ class LanguagesTable extends WP_List_Table {
 
 	}
 
+	/**
+	 * Show "no items" message
+	 */
 	public function no_items() {
 		esc_html_e( 'No items found', 'wpglobus' );
 	}
 
+	/**
+	 * Display table
+	 */
 	public function display_table() {
 
 		$this->prepare_items();
 		?>
 		<div class="wpglobus_flag_table_wrapper">
-			<a id="wpglobus_add_language"
-					href="<?php admin_url(); ?>admin.php?page=<?php echo esc_url( WPGlobus::LANGUAGE_EDIT_PAGE ); ?>&amp;action=add"
-					class="button button-primary"><?php esc_html_e( 'Add new Language', 'wpglobus' ); ?></a>
+			<?php
+			$url = add_query_arg( array(
+				'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
+				'action' => WPGlobus_Language_Edit_Request::ACTION_ADD,
+			), admin_url( 'admin.php' ) );
+			$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
+			?>
+			<a id="wpglobus_add_language" href="<?php echo esc_url( $url ); ?>" class="button button-primary">
+				<?php esc_html_e( 'Add new Language', 'wpglobus' ); ?>
+			</a>
 
 			<?php $this->prepare_items(); ?>
 			<div class="table-wrap wrap">
@@ -161,7 +197,6 @@ class LanguagesTable extends WP_List_Table {
 		 */
 		$this->process_row_action();
 
-
 		usort( $this->data, array(
 			$this,
 			'usort_reorder',
@@ -178,20 +213,26 @@ class LanguagesTable extends WP_List_Table {
 		 * REQUIRED. We also have to register our pagination options & calculations.
 		 */
 		$this->set_pagination_args( array(
+			// We have to calculate the total number of items.
 			'total_items' => $total_items,
-			// WE have to calculate the total number of items.
+			// We have to determine how many items to show on a page.
 			'per_page'    => $per_page,
-			// WE have to determine how many items to show on a page.
+			// We have to calculate the total number of pages.
 			'total_pages' => ceil( $total_items / $per_page ),
-			// WE have to calculate the total number of pages.
 		) );
 
-		/** @var  WP_List_table class */
+		/**
+		 * List table
+		 *
+		 * @var WP_List_table
+		 */
 		$this->items = $this->found_data;
 
 	}
 
 	/**
+	 * Get columns
+	 *
 	 * @return array
 	 */
 	public function get_columns() {
@@ -223,7 +264,7 @@ class LanguagesTable extends WP_List_Table {
 			if ( $attrs['sortable'] ) {
 				$sortable_columns[ $field ] = array(
 					$field,
-					false
+					false,
 				);
 			}
 		}
@@ -231,9 +272,15 @@ class LanguagesTable extends WP_List_Table {
 		return $sortable_columns;
 	}
 
+	/**
+	 * Process bulk action
+	 */
 	public function process_bulk_action() {
 	}
 
+	/**
+	 * Process row action
+	 */
 	public function process_row_action() {
 	}
 
@@ -242,46 +289,56 @@ class LanguagesTable extends WP_List_Table {
 	 *
 	 * @since    0.1
 	 *
-	 * @param $a
-	 * @param $b
+	 * @param array $a First value.
+	 * @param array $b Second value.
 	 *
 	 * @return int
 	 */
 	public function usort_reorder( $a, $b ) {
+		// TODO: This should be enabled when called not from the Redux.
+		if ( 0 ) {
+			check_admin_referer( WPGlobus_Language_Edit_Request::NONCE_ACTION );
+		}
+
 		// If no sort, get the default.
-		$i     = 0;
-		$field = $default_field = 'source';
+		$i             = 0;
+		$default_field = 'source';
+		$field         = $default_field;
 
 		foreach ( $this->table_fields as $field => $attrs ) {
-			$default_field = ( $i === 0 ) ? $field : $default_field;
+			$default_field = ( 0 === $i ? $field : $default_field );
 			if ( isset( $attrs['order'] ) ) {
 				break;
 			}
 			$i ++;
 		}
-		$field   = ( isset( $attrs['order'] ) ) ? $field : $default_field;
-		$orderby = ( ! empty( $_GET['orderby'] ) ) ? $_GET['orderby'] : $field;
+
+		$field = ( isset( $attrs['order'] ) ? $field : $default_field );
+
+		$orderby = ( ! empty( $_GET['orderby'] ) ) // WPCS: input var ok.
+			? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) // WPCS: input var ok.
+			: $field;
 
 		// If no order, default to asc.
 		if ( ! empty( $_GET['order'] ) ) {
-			$order = $_GET['order'];
+			$order = sanitize_text_field( wp_unslash( $_GET['order'] ) ); // WPCS: input var ok.
 		} else {
-			$order = ( isset( $attrs['order'] ) ) ? $attrs['order'] : 'asc';
+			$order = ( ! empty( $attrs['order'] ) ? $attrs['order'] : 'asc' );
 		}
 
 		// Determine sort order.
 		$result = strcmp( $a[ $orderby ], $b[ $orderby ] );
 
 		// Send final sort direction to usort.
-		return ( $order === 'asc' ) ? $result : - $result;
+		return 'asc' === $order ? $result : - $result;
 	}
 
 	/**
-	 * Define function for add item actions by name 'column_flag'
+	 * Define function to add item actions by name 'column_flag'
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  $item array
+	 * @param  array $item The item.
 	 *
 	 * @return string
 	 */
@@ -290,11 +347,11 @@ class LanguagesTable extends WP_List_Table {
 	}
 
 	/**
-	 * Define function for add item actions by name 'column_locale'
+	 * Define function to add item actions by name 'column_locale'
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  $item array
+	 * @param  array $item The item.
 	 *
 	 * @return string
 	 */
@@ -303,10 +360,11 @@ class LanguagesTable extends WP_List_Table {
 	}
 
 	/**
-	 * Define function for add item actions by name 'column_code'
+	 * Define function to add item actions by name 'column_code'
+	 *
 	 * @since 1.0.0
 	 *
-	 * @param  $item array
+	 * @param  array $item The item.
 	 *
 	 * @return string
 	 */
@@ -317,23 +375,47 @@ class LanguagesTable extends WP_List_Table {
 			$config  = WPGlobus::Config();
 			$actions = array();
 
+			// Add actions to the language code column.
 			foreach ( $this->table_fields['wpglobus_code']['actions'] as $action => $data ) {
-				/** Add actions for language code */
+
 				$class = $data['ajaxify'] ? 'class="ajaxify"' : '';
 
 				switch ( $action ) {
-					case 'edit':
-						$actions['edit'] =
-							sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['wpglobus_code'] . '&action=edit', $data['caption'] );
+					case WPGlobus_Language_Edit_Request::ACTION_EDIT:
+						$url = add_query_arg( array(
+							'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
+							'lang'   => $item['wpglobus_code'],
+							'action' => WPGlobus_Language_Edit_Request::ACTION_EDIT,
+						), admin_url( 'admin.php' ) );
+						$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
+
+						$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>',
+							$class,
+							esc_url( $url ),
+							esc_html( $data['caption'] )
+						);
+
 						break;
-					case 'delete':
+
+					case WPGlobus_Language_Edit_Request::ACTION_DELETE:
 						if ( $item['wpglobus_code'] === $config->default_language ) {
 							$actions['delete'] =
-								sprintf( '<a %1s href="#">%2s</a>', $class, __( 'Default language', 'wpglobus' ) );
+								sprintf( '<a %1s href="#">%2s</a>', $class, esc_html__( 'Default language', 'wpglobus' ) );
 						} else {
-							$actions['delete'] =
-								sprintf( '<a %1s href="%2s">%3s</a>', $class, admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&lang=' . $item['wpglobus_code'] . '&action=delete', $data['caption'] );
+							$url = add_query_arg( array(
+								'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
+								'lang'   => $item['wpglobus_code'],
+								'action' => WPGlobus_Language_Edit_Request::ACTION_DELETE,
+							), admin_url( 'admin.php' ) );
+							$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
+
+							$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>',
+								$class,
+								esc_url( $url ),
+								esc_html( $data['caption'] )
+							);
 						}
+
 						break;
 				}
 			}
@@ -350,31 +432,27 @@ class LanguagesTable extends WP_List_Table {
 
 
 	/**
-	 * Define function for add item actions by name 'column_default'
+	 * Define function to add item actions by name 'column_default'
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  $item        array
-	 * @param  $column_name string
+	 * @param  array  $item        The item.
+	 * @param  string $column_name Column name.
 	 *
 	 * @return string
 	 */
 	public function column_default( $item, $column_name ) {
-
-		if ( isset( $this->table_fields[ $column_name ] ) ) {
-			return $item[ $column_name ];
-		} else {
-			return print_r( $item, true ); // Show the whole array for troubleshooting purposes.
-		}
+		// Debug printout was here print_r( $item, true ); - replaced with empty string.
+		return isset( $this->table_fields[ $column_name ] ) ? $item[ $column_name ] : '';
 
 	}
 
 	/**
-	 * Define function for add item actions by name 'column_cb'
+	 * Define function tot add item actions by name 'column_cb'
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  $item array
+	 * @param  array $item The item.
 	 *
 	 * @return string
 	 */
@@ -389,13 +467,13 @@ class LanguagesTable extends WP_List_Table {
 	 *
 	 * @since 1.5.10
 	 *
-	 * @param  $item array
+	 * @param  array $item The item.
 	 *
 	 * @return string
 	 */
 	public function column_wpglobus_en_language_name( $item ) {
 		if ( in_array( $item['wpglobus_code'], WPGlobus::Config()->enabled_languages, true ) ) {
-			return $item['wpglobus_en_language_name'] . ' (<strong>' . __( 'Installed', 'wpglobus' ) . '</strong>)';
+			return $item['wpglobus_en_language_name'] . ' (<strong>' . esc_html__( 'Installed', 'wpglobus' ) . '</strong>)';
 		}
 
 		return $item['wpglobus_en_language_name'];
@@ -407,7 +485,7 @@ class LanguagesTable extends WP_List_Table {
 	 * @since  3.1.0
 	 * @access protected
 	 *
-	 * @param string $which
+	 * @param string $which Above or below.
 	 */
 	protected function display_tablenav( $which ) {
 		?>
@@ -431,18 +509,18 @@ class LanguagesTable extends WP_List_Table {
 	/**
 	 * Generates content for a single row of the table
 	 *
-	 * @since 1.5.10
+	 * @since  1.5.10
 	 * @access public
 	 *
 	 * @param object $item The current item.
 	 */
 	public function single_row( $item ) {
-		$style = '';
 		if ( in_array( $item['wpglobus_code'], WPGlobus::Config()->enabled_languages, true ) ) {
-			$style = ' style="background-color:#0ff;" ';
+			echo '<tr style="background-color:#d3e4f4;">';
+		} else {
+			echo '<tr>';
 		}
 
-		echo '<tr' . $style . '>'; // WPCS: XSS ok.
 		$this->single_row_columns( $item );
 		echo '</tr>';
 	}

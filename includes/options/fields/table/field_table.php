@@ -6,21 +6,21 @@
  * @author      WPGlobus
  */
 
+// .
 if ( ! class_exists( 'ReduxFramework_table' ) ) {
 
 	/**
 	 * Main ReduxFramework_table class
 	 */
 	class ReduxFramework_table {
-		/** @noinspection PhpUndefinedClassInspection */
 
 		/**
 		 * Field Constructor.
 		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 		 *
-		 * @param array          $field
-		 * @param string         $value
-		 * @param ReduxFramework $parent
+		 * @param array          $field  Field.
+		 * @param string         $value  Value.
+		 * @param ReduxFramework $parent Parent.
 		 */
 		public function __construct( $field = array(), $value = '', $parent ) {
 
@@ -38,8 +38,8 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 		 */
 		public function render() {
 
-			include dirname( __FILE__ ) . '/table-languages.php';
-			new LanguagesTable();
+			require_once dirname( __FILE__ ) . '/class-wpglobus-languages-table.php';
+			new WPGlobus_Languages_Table();
 
 		}
 
@@ -65,8 +65,6 @@ if ( ! class_exists( 'ReduxFramework_table' ) ) {
 				WPGlobus::SCRIPT_VER(),
 				true
 			);
-
 		}
-
 	}
 }
