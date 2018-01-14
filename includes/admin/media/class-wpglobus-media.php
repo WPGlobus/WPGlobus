@@ -315,17 +315,17 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 					$order = 0;
 					foreach ( WPGlobus::Config()->open_languages as $language ) {
 						$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language; ?>
-						<li id="link-tab-<?php echo $tab_suffix; // WPCS: XSS ok. ?>" data-language="<?php echo $language; // WPCS: XSS ok. ?>"
-							data-order="<?php echo $order; // WPCS: XSS ok. ?>"
+						<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>" data-language="<?php echo esc_attr( $language ); ?>"
+							data-order="<?php echo esc_attr( $order ); ?>"
 							class="wpglobus-post-tab">
-							<a href="#tab-<?php echo $tab_suffix; // WPCS: XSS ok. ?>"><?php echo WPGlobus::Config()->en_language_name[ $language ]; // WPCS: XSS ok. ?></a>
+							<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 						</li> <?php
 						$order ++;
 					} ?>
 				</ul> <?php
 				foreach ( WPGlobus::Config()->open_languages as $language ) {
 					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language; ?>
-					<div id="tab-<?php echo $tab_suffix; // WPCS: XSS ok. ?>" style="display:none;"></div>	<?php
+					<div id="tab-<?php echo esc_attr( $tab_suffix ); ?>" style="display:none;"></div>	<?php
 				} ?>
 			</div>
 			<?php
