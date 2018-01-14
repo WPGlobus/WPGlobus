@@ -20,9 +20,43 @@ jQuery(document).ready(function ($) {
 			$( '#wpglobus-sortable' ).sortable({
 				update: api.sortUpdate
 			});
-			
+			api.setJSCodeSection();
 			api.addListeners();
 			api.ajaxListener();
+		},
+		setJSCodeSection: function() {
+			var el = WPGlobusCustomizeOptions.settings['wpglobus_js_editor_section'];
+			if ( 'undefined' === typeof el ) {
+				return;
+			}
+			if ( 'undefined' === typeof el['wpglobus_customize_js_editor'] ) {
+				return
+			}
+			$('#customize-control-wpglobus_customize_js_editor .customize-control-title')
+				.css({'width':'50%'})
+				.after('<span class="wpglobus-customize-js-editor-expand" style="float:right;"><a href="#">'+WPGlobusCustomizeOptions.i18n['expandShrink']+'</a></span>');
+			
+			/**
+			 * Expand/Shrink editor.
+			 */ 
+			$(document).on('click', '.wpglobus-customize-js-editor-expand', function(ev){
+				var $t = $(this),
+					$f = $('#customize-controls');
+				$t.toggleClass('expanded');
+				if ( $t.hasClass('expanded') ) {
+					$f.css({'width':'500px'});
+				} else {
+					$f.css({'width':''});
+				}
+			});
+				
+			/**
+			 * Set defaults.
+			 */
+			$('#sub-accordion-section-wpglobus_js_editor_section .customize-section-back').on('click', function(ev){
+				$('#customize-controls').css({'width':''});
+				$('.wpglobus-customize-js-editor-expand').removeClass('expanded');
+			});
 			
 		},
 		addListeners: function() {
@@ -58,6 +92,20 @@ jQuery(document).ready(function ($) {
 			/** Save Fields Control settings & Reload customize page */
 			$( document ).on( 'click', '#' + WPGlobusCustomizeOptions.userControlSaveButton, function(){ api.userControlAjax( this ) } );
 			
+			/**
+			 * Init for wpglobus_js_editor_section.
+			 * @since 1.9.7
+			 */
+			$(document).on( 
+				'click',
+				'#accordion-section-' + WPGlobusCustomizeOptions.sections.wpglobus_js_editor_section + ' .accordion-section-title',
+				function(ev) {
+					/**
+					 * Fix Code Editor height.
+					 */
+					$('#customize-control-wpglobus_customize_js_editor .CodeMirror').css({'height':'40em'});
+				}
+			);				
 		},	
 		removeLanguage: function( t ) {
 			var l = t.data( 'language' ),
@@ -209,9 +257,22 @@ jQuery(document).ready(function ($) {
 									val = s.prop( 'checked' ) ? 1 : '';
 								} else if ( 'select' == obj.type ) {
 									val = s.val();
-								}		
-								order[ 'options' ][ obj.option ] = val;
+								} else if ( 'code_editor' == obj.type ) {
+									var control = wp.customize.control.instance(id);
+									if ( 'undefined' !== typeof control ) {
+										val = control.setting();
+									}
+								}
+								order['options'][obj.option] = val;
 								
+								if ( 'code_editor' == obj.type ) {
+									if ( 'undefined' === typeof control ) {
+										/**
+										 * If control is undefined then we don't need to save code.
+										 */										
+										delete order['options'][obj.option];
+									}
+								}
 							}
 						}			
 

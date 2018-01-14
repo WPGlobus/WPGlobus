@@ -395,8 +395,16 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				'action__process_ajax'
 			) );
 
-		}
+			/**
+			 * @since 1.9.8
+			 */
+			add_filter( 'wpglobus_customize_disabled_setting_mask', array(
+				__CLASS__,
+				'filter__disabled_setting_mask'
+			) );
 
+		}
+		
 		/**
 		 * Delayed processes.
 		 * @since 1.6.0
@@ -449,6 +457,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 								$options[$key] = $value;
 								break;
 							default:
+								$value = str_replace('\"', '"', $value);
+								$value = str_replace("\'", "'", $value);
 								$options[ $key ] = $value;
 						endswitch;
 
@@ -1108,7 +1118,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			/**
 			 * SECTION: Custom JS Code.
 			 */
-			if ( 0 ) {
+			if ( 1 ) {
 				
 				$section_priority = $section_priority + 10;
 				
@@ -1130,6 +1140,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				) );
 				$wp_customize->add_control( new WP_Customize_Code_Editor_Control( $wp_customize,
 						'wpglobus_customize_js_editor', array(
+						'code_type' 	=> 'javascript',
+						#'mode'			=> 'javascript',
 						'input_attrs'	=> array('rows'=>80),
 						'section'  		=> self::$sections['wpglobus_js_editor_section'],
 						'settings' 		=> 'wpglobus_customize_js_editor',
@@ -1384,6 +1396,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				}
 			}
 
+			$i18n = array();
+			$i18n['expandShrink'] = esc_html__('Expand/Shrink', 'wpglobus');
+			
 			wp_register_script(
 				'wpglobus-customize-options',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -1397,6 +1412,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				'WPGlobusCustomizeOptions',
 				array(
 					'version'                => WPGLOBUS_VERSION,
+					'i18n'					 => $i18n,
 					'config'                 => WPGlobus::Config(),
 					'ajaxurl'                => admin_url( 'admin-ajax.php' ),
 					'process_ajax'           => __CLASS__ . '_process_ajax',
@@ -1450,6 +1466,18 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			}
 
 			return true;
+		}
+		
+				
+		/**
+		 * Filter to disable the making multilingual our own settings.
+		 *
+		 * @since 1.9.8
+		 * @return array
+		 */
+		public static function filter__disabled_setting_mask($disabled_setting_mask) {
+			$disabled_setting_mask[] = 'wpglobus_customize_js_editor';
+			return $disabled_setting_mask;
 		}
 
 	} // class
