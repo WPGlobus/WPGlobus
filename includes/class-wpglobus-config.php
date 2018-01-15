@@ -266,8 +266,8 @@ class WPGlobus_Config {
 			 * because it's always `admin-ajax`.
 			 * Therefore, we'll rely on the HTTP_REFERER (if it exists).
 			 */
-			if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-				$url_to_check = $_SERVER['HTTP_REFERER'];
+			if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) { // WPCS: input var ok, sanitization ok.
+				$url_to_check = $_SERVER['HTTP_REFERER']; // WPCS: input var ok, sanitization ok.
 			}
 		} else {
 			/**
@@ -484,7 +484,7 @@ class WPGlobus_Config {
 		 *
 		 * @link wp-admin/?wpglobus-reset-language-table=1
 		 */
-		if ( ! defined( 'DOING_AJAX' ) && ! empty( $_GET['wpglobus-reset-language-table'] ) && is_admin() ) {
+		if ( ! defined( 'DOING_AJAX' ) && ! empty( $_GET['wpglobus-reset-language-table'] ) && is_admin() ) { // WPCS: input var ok, sanitization ok.
 			delete_option( $this->option_language_names );
 		}
 
@@ -655,7 +655,7 @@ class WPGlobus_Config {
 		/**
 		 * WPGlobus devmode.
 		 */
-		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) {
+		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
 			$this->toggle = 'off';
 		} else {
 			$this->toggle = 'on';
@@ -668,10 +668,10 @@ class WPGlobus_Config {
 		 * @see WPGlobus::on_save_post_data
 		 */
 		if (
-			empty( $_SERVER['QUERY_STRING'] )
-			&& isset( $_SERVER['HTTP_REFERER'] )
+			empty( $_SERVER['QUERY_STRING'] ) // WPCS: input var ok, sanitization ok.
+			&& isset( $_SERVER['HTTP_REFERER'] ) // WPCS: input var ok, sanitization ok.
 			&& WPGlobus_WP::is_pagenow( 'post.php' )
-			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' )
+			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) // WPCS: input var ok, sanitization ok.
 		) {
 			$this->toggle = 'off';
 		}
