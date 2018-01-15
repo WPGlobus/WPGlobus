@@ -1,8 +1,11 @@
 <?php
 /**
- * @package WPGlobus
+ * WPGlobus / Admin / Debug
+ *
+ * @package WPGlobus\Admin
  */
 
+// .
 if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 
 	/**
@@ -14,6 +17,8 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 
 		/**
 		 * Instance.
+		 *
+		 * @var WPGlobus_Admin_Debug
 		 */
 		protected static $instance;
 
@@ -34,18 +39,24 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		public function __construct() {
 
 			/**
+			 * Action.
+			 *
 			 * @scope admin
 			 * @since 1.8.1
 			 */
 			add_action( 'admin_print_scripts', array( $this, 'on__admin_scripts' ), 99 );
 
 			/**
+			 * Action.
+			 *
 			 * @scope admin
 			 * @since 1.8.1
 			 */
 			add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ), 99 );
 
 			/**
+			 * Action.
+			 *
 			 * @scope admin
 			 * @since 1.8.1
 			 */
@@ -58,15 +69,12 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.8.1
-		 * @access public
-		 *
-		 * @return void
 		 */
 		public function on__admin_styles() {
 
 			wp_register_style(
 				'wpglobus-admin-debug',
-				WPGlobus::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-debug' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+				WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-admin-debug' . WPGlobus::SCRIPT_SUFFIX() . '.css',
 				array(),
 				WPGLOBUS_VERSION
 			);
@@ -79,15 +87,12 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.8.1
-		 * @access public
-		 *
-		 * @return void
 		 */
 		public function on__admin_scripts() {
 
 			wp_register_script(
 				'wpglobus-admin-debug',
-				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-admin-debug' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+				WPGlobus::plugin_dir_url() . 'includes/js/wpglobus-admin-debug' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 				array( 'jquery' ),
 				WPGLOBUS_VERSION,
 				true
@@ -98,7 +103,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 				'WPGlobusAdminDebug',
 				array(
 					'version' => WPGLOBUS_VERSION,
-					'data'    => ''
+					'data'    => '',
 				)
 			);
 
@@ -109,9 +114,6 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.8.1
-		 * @access public
-		 *
-		 * @return void
 		 */
 		public function on__admin_footer() {
 
@@ -121,11 +123,15 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 				return;
 			}
 
-			if ( empty( $post->ID ) || (int) $post->ID === 0 ) {
+			if ( empty( $post->ID ) || 0 === (int) $post->ID ) {
 				return;
 			}
 
-			/** @var array $metas */
+			/**
+			 * Get metadata.
+			 *
+			 * @var array $metas
+			 */
 			$metas = get_metadata( 'post', $post->ID );
 
 			?>
@@ -137,7 +143,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 				 */
 				?>
 				<table class="table1" cellspacing="0">
-					<caption><?php echo 'get_metadata( "post", ' . $post->ID . ' )'; ?></caption>
+					<caption><?php echo 'get_metadata( "post", ' . esc_html( $post->ID ) . ' )'; ?></caption>
 					<thead>
 					<tr>
 						<th>№</th>
@@ -152,7 +158,6 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 					foreach ( $metas as $meta_key => $meta ) {
 						$code = false;
 						if ( is_array( $meta ) ) {
-							/** @var array $meta */
 							foreach ( $meta as $key => $val ) {
 								$meta[ $key ] = htmlspecialchars( $val );
 							}
@@ -161,14 +166,14 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 						}
 						?>
 						<tr>
-							<td><?php echo $order; ?></td>
-							<td><?php echo( print_r( $meta_key, true ) ); ?></td>
+							<td><?php echo esc_html( $order ); ?></td>
+							<td><?php echo esc_html( print_r( $meta_key, true ) ); ?></td>
 							<?php if ( $code ) { ?>
 								<td>
-									<pre><?php echo( print_r( $meta, true ) ); ?></pre>
+									<pre><?php echo esc_html( print_r( $meta, true ) ); ?></pre>
 								</td>
 							<?php } else { ?>
-								<td><?php echo( print_r( $meta, true ) ); ?></td>
+								<td><?php echo esc_html( print_r( $meta, true ) ); ?></td>
 							<?php } ?>
 						</tr>
 						<?php $order ++; ?>
@@ -194,26 +199,29 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 					</tr>
 					</thead>
 					<tbody>
-					<?php $order = 1; ?>
-					<?php foreach ( $results as $option_key => $option ) {
+					<?php
+
+					$order = 1;
+
+					foreach ( $results as $option_key => $option ) {
 						$code = false;
 						if ( is_array( $option->option_value ) ) {
 							foreach ( $option->option_value as $key => $value ) {
 								$option->option_value[ $key ] = htmlspecialchars( $value );
 							}
-						} else if ( is_string( $option->option_value ) ) {
+						} elseif ( is_string( $option->option_value ) ) {
 							$option->option_value = htmlspecialchars( $option->option_value );
 						}
 						?>
 						<tr>
-							<td><?php echo $option->option_id; ?></td>
-							<td><?php echo( print_r( $option->option_name, true ) ); ?></td>
+							<td><?php echo esc_html( $option->option_id ); ?></td>
+							<td><?php echo esc_html( print_r( $option->option_name, true ) ); ?></td>
 							<?php if ( $code ) { ?>
 								<td>
-									<pre><?php echo( print_r( $option->option_value, true ) ); ?></pre>
+									<pre><?php echo esc_html( print_r( $option->option_value, true ) ); ?></pre>
 								</td>
 							<?php } else { ?>
-								<td><?php echo( print_r( $option->option_value, true ) ); ?></td>
+								<td><?php echo esc_html( print_r( $option->option_value, true ) ); ?></td>
 							<?php } ?>
 						</tr>
 						<?php $order ++; ?>
