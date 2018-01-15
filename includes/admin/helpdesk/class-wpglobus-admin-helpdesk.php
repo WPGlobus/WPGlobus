@@ -177,8 +177,8 @@ class WPGlobus_Admin_HelpDesk {
 			'email'             => $user->user_email,
 			'home_url'          => home_url(),
 			'site_url'          => site_url(),
-			'REMOTE_ADDR'       => $_SERVER['REMOTE_ADDR'],
-			'SERVER_PORT'       => $_SERVER['SERVER_PORT'],
+			'REMOTE_ADDR'       => sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ), // WPCS: input var ok, sanitization ok.
+			'SERVER_PORT'       => sanitize_text_field( wp_unslash( $_SERVER['SERVER_PORT'] ) ), // WPCS: input var ok, sanitization ok.
 			'OS'                => $OS,
 			'PHP_SAPI'          => PHP_SAPI,
 			'PHP_VERSION'       => PHP_VERSION,
