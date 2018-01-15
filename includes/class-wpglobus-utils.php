@@ -272,7 +272,7 @@ class WPGlobus_Utils {
 	 * @since 1.1.1
 	 */
 	public static function current_url() {
-		return set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+		return set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ); // WPCS: input var ok, sanitization ok.
 	}
 
 	/**
