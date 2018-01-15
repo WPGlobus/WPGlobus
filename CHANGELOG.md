@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+### 1.9.7.1 ###
+
+* General code clean-up, output escaping and GET/POST sanitization.
+
 ### 1.9.7 ###
 
 * SECURITY:
