@@ -691,42 +691,90 @@ class WPGlobus {
 	public function on_process_ajax() {
 
 		$ajax_return = array();
-		$order       = $_POST['order'];
 
-		switch ( $order['action'] ) :
+		/**
+		 * Sanitize
+		 */
+
+		$order = wp_unslash( $_POST['order'] ); // WPCS: input var ok, sanitization ok.
+
+		$action = '';
+		if ( isset( $order['action'] ) && is_string( $order['action'] ) ) {
+			$action = sanitize_text_field( $order['action'] );
+		}
+		$post_type = '';
+		if ( isset( $order['post_type'] ) && is_string( $order['post_type'] ) ) {
+			$post_type = sanitize_text_field( $order['post_type'] );
+		}
+		$meta_key = '';
+		if ( isset( $order['meta_key'] ) && is_string( $order['meta_key'] ) ) {
+			$meta_key = sanitize_text_field( $order['meta_key'] );
+		}
+		$checked = '';
+		if ( isset( $order['checked'] ) && is_string( $order['checked'] ) ) {
+			$checked = sanitize_text_field( $order['checked'] );
+		}
+		$id = '';
+		if ( isset( $order['id'] ) && is_string( $order['id'] ) ) {
+			$id = sanitize_text_field( $order['id'] );
+		}
+		$locale = '';
+		if ( isset( $order['locale'] ) && is_string( $order['locale'] ) ) {
+			$locale = sanitize_text_field( $order['locale'] );
+		}
+		$type = '';
+		if ( isset( $order['type'] ) && is_string( $order['type'] ) ) {
+			$type = sanitize_text_field( $order['type'] );
+		}
+		$taxonomy = '';
+		if ( isset( $order['taxonomy'] ) && is_string( $order['taxonomy'] ) ) {
+			$taxonomy = sanitize_text_field( $order['taxonomy'] );
+		}
+		$titles = array();
+		if ( isset( $order['title'] ) && is_array( $order['title'] ) ) {
+			$titles = $order['title'];
+		}
+
+		switch ( $action ) {
 			case 'clean':
 			case 'wpglobus-reset':
-
 				require_once 'admin/class-wpglobus-clean.php';
 				WPGlobus_Clean::process_ajax( $order );
 
 				break;
 			case 'save_post_meta_settings':
+				/**
+				 * This is the WPGlobus icon, wrench and checkbox on custom post meta fields.
+				 */
+
 				$settings = (array) get_option( WPGlobus::Config()->option_post_meta_settings );
 
-				if ( empty( $settings[ $order['post_type'] ] ) ) {
-					$settings[ $order['post_type'] ] = array();
+				if ( empty( $settings[ $post_type ] ) ) {
+					$settings[ $post_type ] = array();
 				}
-				$settings[ $order['post_type'] ][ $order['meta_key'] ] = $order['checked'];
+				$settings[ $post_type ][ $meta_key ] = $checked;
 				if ( update_option( WPGlobus::Config()->option_post_meta_settings, $settings ) ) {
 					$ajax_return['result'] = 'ok';
 				} else {
 					$ajax_return['result'] = 'error';
 				}
-				$ajax_return['checked']  = $order['checked'];
-				$ajax_return['id']       = $order['id'];
-				$ajax_return['meta_key'] = $order['meta_key'];
+				$ajax_return['checked']  = $checked;
+				$ajax_return['id']       = $id;
+				$ajax_return['meta_key'] = $meta_key;
 				break;
 			case 'wpglobus_select_lang':
-				if ( $order['locale'] == 'en_US' ) {
+				if ( 'en_US' === $locale ) {
 					update_option( 'WPLANG', '' );
 				} else {
-					update_option( 'WPLANG', $order['locale'] );
+					update_option( 'WPLANG', $locale );
 				}
 				break;
 			case 'get_titles':
+				/**
+				 * Prepare multilingual titles for Quick Edit.
+				 */
 
-				if ( 'taxonomy' === $order['type'] ) {
+				if ( 'taxonomy' === $type ) {
 					/**
 					 * Remove filter to get raw term description
 					 */
@@ -741,64 +789,69 @@ class WPGlobus {
 				/**
 				 * Iterate through the Titles array.
 				 *
-				 * @var  int $id Post or Term ID.
-				 * @var  string $title Post or Term Name.
+				 * @var  int      $id   Post or Term ID.
+				 * @var  string[] $data Post or Term Name is stored in the $data['source'].
 				 */
-				foreach ( (array) $order['title'] as $id => $title ) {
+				foreach ( (array) $titles as $post_or_term_id => $data ) {
+					$title = '';
+					if ( ! empty( $data['source'] ) && is_string( $data['source'] ) ) {
+						$title = $data['source'];
+					}
 
-					if ( ! WPGlobus_Core::has_translations( $title['source'] ) ) {
+					if ( ! WPGlobus_Core::has_translations( $title ) ) {
 						/**
 						 * In some cases, we've lost the raw data for post title on edit.php page
 						 * for example product post type from Woo.
 						 */
 						$_title_from_db = '';
-						if ( 'post' === $order['type'] ) {
-							$_title_from_db = get_post_field( 'post_title', $id );
-						} elseif ( 'taxonomy' === $order['type'] ) {
-							if ( $_term_by_id = get_term_by( 'id', $id, $order['taxonomy'] ) ) {
+						if ( 'post' === $type ) {
+							$_title_from_db = get_post_field( 'post_title', $post_or_term_id );
+						} elseif ( 'taxonomy' === $type ) {
+							$_term_by_id = get_term_by( 'id', $post_or_term_id, $taxonomy );
+							if ( $_term_by_id ) {
 								$_title_from_db = $_term_by_id->name;
 							}
 						}
 
 						if ( $_title_from_db ) {
-							$title['source'] = $_title_from_db;
+							$title = $_title_from_db;
 						}
 
 						unset( $_term_by_id, $_title_from_db );
 					}
 
-					$result[ $id ]['source'] = $title['source'];
+					$result[ $post_or_term_id ]['source'] = $title;
 
-					$term = null; // should initialize before if because used in the next foreach
+					$term = null; // Should initialize before if because used in the next foreach.
 
-					if ( $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
-						$term = get_term( $id, $order['taxonomy'] );
+					if ( 'taxonomy' === $type && $taxonomy ) {
+						$term = get_term( $post_or_term_id, $taxonomy );
 						if ( is_wp_error( $term ) ) {
-							$order['taxonomy'] = false;
+							$taxonomy = false;
 						}
 					}
 
 					foreach ( $config->enabled_languages as $language ) {
 						$return =
-							$language == $config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
+							$language === $config->default_language ? WPGlobus::RETURN_IN_DEFAULT_LANGUAGE : WPGlobus::RETURN_EMPTY;
 
-						$result[ $id ][ $language ]['name'] =
-							WPGlobus_Core::text_filter( $title['source'], $language, $return );
-						if ( $term && $order['type'] == 'taxonomy' && $order['taxonomy'] ) {
-							$result[ $id ][ $language ]['description'] =
+						$result[ $post_or_term_id ][ $language ]['name'] =
+							WPGlobus_Core::text_filter( $title, $language, $return );
+						if ( $term && 'taxonomy' === $type && $taxonomy ) {
+							$result[ $post_or_term_id ][ $language ]['description'] =
 								WPGlobus_Core::text_filter( $term->description, $language, $return );
 						}
 
-						$bulkedit_post_titles[ $id ][ $language ]['name'] =
-							WPGlobus_Core::text_filter( $title['source'], $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+						$bulkedit_post_titles[ $post_or_term_id ][ $language ]['name'] =
+							WPGlobus_Core::text_filter( $title, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
 					}
 				}
 				$ajax_return['qedit_titles']         = $result;
 				$ajax_return['bulkedit_post_titles'] = $bulkedit_post_titles;
 				break;
-		endswitch;
+		}
 
-		echo json_encode( $ajax_return );
+		echo wp_json_encode( $ajax_return );
 		die();
 	}
 
@@ -858,16 +911,25 @@ class WPGlobus {
 	 */
 	public function on_wp_redirect( $location ) {
 		if ( is_admin() ) {
-			if ( isset( $_POST['_wp_http_referer'] ) && false !== strpos( $_POST['_wp_http_referer'], 'wpglobus=off' ) ) {
+			$_wp_http_referer = '';
+			if ( isset( $_POST['_wp_http_referer'] ) && is_string( $_POST['_wp_http_referer'] ) ) { // WPCS: input var ok, sanitization ok.
+				$_wp_http_referer = sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) ); // WPCS: input var ok.
+			}
+			if ( false !== strpos( $_wp_http_referer, 'wpglobus=off' ) ) {
 				$location .= '&wpglobus=off';
 			}
 		} else {
 			/**
 			 * Get language code from cookie. Example: redirect $_SERVER[REQUEST_URI] = /wp-comments-post.php
 			 */
-			if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp-comments-post.php' ) ) {
-				if ( ! empty( $_COOKIE[self::_COOKIE] ) ) {
-					$location = WPGlobus_Utils::localize_url( $location, $_COOKIE[self::_COOKIE] );
+			$request_uri = '';
+			if ( isset( $_SERVER['REQUEST_URI'] ) && is_string( $_SERVER['REQUEST_URI'] ) ) { // WPCS: input var ok, sanitization ok.
+				$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ); // WPCS: input var ok.
+			}
+			if ( false !== strpos( $request_uri, 'wp-comments-post.php' ) ) {
+				if ( ! empty( $_COOKIE[ self::_COOKIE ] ) && is_string( $_COOKIE[ self::_COOKIE ] ) ) { // WPCS: input var ok, sanitization ok.
+					$wpglobus_language_cookie = sanitize_text_field( wp_unslash( $_COOKIE[ self::_COOKIE ] ) ); // WPCS: input var ok.
+					$location                 = WPGlobus_Utils::localize_url( $location, $wpglobus_language_cookie );
 				}
 			}
 		}
@@ -931,7 +993,7 @@ class WPGlobus {
 		}
 
 		$mode = 'off';
-		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) {
+		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
 			$mode = 'on';
 		}
 		?>
@@ -1300,8 +1362,8 @@ class WPGlobus {
 
 				global $tag;
 
-				$data['taxonomy']  = empty( $_GET['taxonomy'] ) ? false : $_GET['taxonomy'];
-				$data['tag_id']    = empty( $_GET['tag_ID'] ) ? false : $_GET['tag_ID'];
+				$data['taxonomy']  = empty( $_GET['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ); // WPCS: input var ok, sanitization ok.
+				$data['tag_id']    = empty( $_GET['tag_ID'] ) ? false : sanitize_text_field( wp_unslash( $_GET['tag_ID'] ) ); // WPCS: input var ok, sanitization ok.
 				$data['has_items'] = true;
 				$data['multilingualSlug'] = array();
 
@@ -1317,8 +1379,8 @@ class WPGlobus {
 					 * For example url: edit-tags.php?taxonomy=category
 					 * edit-tags.php?taxonomy=product_cat&post_type=product
 					 */
-					if ( ! empty( $_GET['taxonomy'] ) ) {
-						$terms = get_terms( $_GET['taxonomy'], array( 'hide_empty' => false ) );
+					if ( $data['taxonomy']  ) {
+						$terms = get_terms( $data['taxonomy'] , array( 'hide_empty' => false ) );
 						if ( is_wp_error( $terms ) or empty( $terms ) ) {
 							$data['has_items'] = false;
 						}
@@ -1349,13 +1411,11 @@ class WPGlobus {
 
 				}
 
-			} else if ( 'edit.php' == $page ) {
+			} elseif ( $page == 'edit.php' ) {
 
 				$page_action = 'edit.php';
-				$post_type   = 'post';
-				if ( ! empty( $_GET['post_type'] ) ) {
-					$post_type = $_GET['post_type'];
-				}
+
+				$post_type  = empty( $_GET['post_type'] ) ? 'post' : sanitize_text_field( wp_unslash( $_GET['post_type'] ) ); // WPCS: input var ok, sanitization ok.
 
 				global $posts;
 				$data['has_items'] = empty( $posts ) ? false : true;
@@ -1377,15 +1437,15 @@ class WPGlobus {
 					}
 				}
 
-			} else if ( 'options-general.php' == $page ) {
+			} elseif ( 'options-general.php' === $page ) {
 
 				$page_action = 'options-general.php';
 
-			} else if ( 'widgets.php' == $page ) {
+			} elseif ( 'widgets.php' === $page ) {
 
 				$page_action = 'widgets.php';
 
-			} else if ( 'customize.php' == $page ) {
+			} elseif ( 'customize.php' === $page ) {
 
 				if ( version_compare( WPGLOBUS_VERSION, '1.4.0-beta1', '<' ) ) {
 					/// Do not translate
@@ -1421,18 +1481,19 @@ class WPGlobus {
 					)
 				);
 
-			} else if ( in_array( $page, array( 'wpglobus_options', self::LANGUAGE_EDIT_PAGE ) ) ) {
+			} elseif ( in_array( $page, array( 'wpglobus_options', self::LANGUAGE_EDIT_PAGE ), true ) ) {
 
 				$page_action = 'wpglobus_options';
 
-			} else if ( in_array( $page, array( self::PAGE_WPGLOBUS_CLEAN ) ) ) {
+			} elseif ( self::PAGE_WPGLOBUS_CLEAN === $page ) {
 
 				$page_action = 'wpglobus_clean';
 
-			} else if (
-					( 'admin.php' == $pagenow && !empty($_GET['page']) && self::PAGE_WPGLOBUS_ADMIN_CENTRAL == $_GET['page']  )
-					|| in_array( $page, array( self::PAGE_WPGLOBUS_ADMIN_CENTRAL ) )
-				) {
+			} elseif (
+				( 'admin.php' === $pagenow && ! empty( $_GET['page'] ) // WPCS: input var ok, sanitization ok.
+				  && self::PAGE_WPGLOBUS_ADMIN_CENTRAL === $_GET['page'] ) // WPCS: input var ok, sanitization ok.
+				|| self::PAGE_WPGLOBUS_ADMIN_CENTRAL === $page
+			) {
 
 				/**
 				 * @since 1.6.6
@@ -1464,7 +1525,6 @@ class WPGlobus {
 			 * WordPress 4.9+ needs a new version of our admin JS.
 			 * @since 1.9.2
 			 */
-			$version = '';
 			if ( version_compare( $GLOBALS['wp_version'], '4.8.999', '>' ) ) {
 				$version = '-49';
 			}			
@@ -1714,7 +1774,10 @@ class WPGlobus {
 	 */
 	public function on_admin_styles() {
 
-		$page = isset( $_GET['page'] ) ? $_GET['page'] : '';
+		$page = '';
+		if ( isset( $_GET['page'] ) && is_string( $_GET['page'] ) ) { // WPCS: input var ok, sanitization ok.
+			$page = sanitize_text_field( wp_unslash( $_GET['page'] ) ); // WPCS: input var ok.
+		}
 
 		wp_register_style(
 			'wpglobus-admin',
@@ -1724,7 +1787,6 @@ class WPGlobus {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-admin' );
-
 
 		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
 			/**
@@ -2816,14 +2878,14 @@ class WPGlobus {
 			return $data;
 		}
 
-		if ( 'trash' == $postarr['post_status'] ) {
+		if ( 'trash' === $postarr['post_status'] ) {
 			/**
 			 * Don't work with move to trash
 			 */
 			return $data;
 		}
 
-		if ( isset( $_GET['action'] ) && 'untrash' == $_GET['action'] ) {
+		if ( isset( $_GET['action'] ) && 'untrash' === $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
 			/**
 			 * Don't work with untrash
 			 */
@@ -3070,11 +3132,11 @@ class WPGlobus {
 			/**
 			 * Try get entity from url. Ex. edit-tags.php?taxonomy=product_cat&post_type=product
 			 */
-			if ( isset( $_GET['post_type'] ) ) {
-				$entity = $_GET['post_type'];
+			if ( isset( $_GET['post_type'] ) && is_string( $_GET['post_type'] ) ) { // WPCS: input var ok, sanitization ok.
+				$entity = sanitize_text_field( wp_unslash( $_GET['post_type'] ) ); // WPCS: input var ok.
 			}
-			if ( empty( $entity ) && isset( $_GET['taxonomy'] ) ) {
-				$entity      = $_GET['taxonomy'];
+			if ( empty( $entity ) && isset( $_GET['taxonomy'] ) && is_string( $_GET['taxonomy'] ) ) { // WPCS: input var ok, sanitization ok.
+				$entity      = sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ); // WPCS: input var ok.
 				$entity_type = 'taxonomy';
 			}
 			if ( empty( $entity ) && WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
@@ -3082,7 +3144,7 @@ class WPGlobus {
 			}
 		}
 
-		if ( 'post' == $entity_type ) {
+		if ( 'post' === $entity_type ) {
 			/**
 			 * Check for support 'title' and 'editor'
 			 */
@@ -3227,7 +3289,10 @@ class WPGlobus {
 		/** @global string $pagenow */
 		global $pagenow;
 
-		$page = empty( $_GET['page'] ) ? '' : $_GET['page'];
+		$page = '';
+		if ( isset( $_GET['page'] ) && is_string( $_GET['page'] ) ) { // WPCS: input var ok, sanitization ok.
+			$page = sanitize_text_field( wp_unslash( $_GET['page'] ) ); // WPCS: input var ok.
+		}
 
 		// @todo remove after testing
 		//if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'widgets.php' ) ) ) {
@@ -3364,7 +3429,7 @@ class WPGlobus {
 			 * For developers use only. Deletes settings with no warning! Irreversible!
 			 * @link wp-admin/admin.php?wpglobus-reset-all-options=1
 			 */
-			if ( ! empty( $_GET['wpglobus-reset-all-options'] ) ) {
+			if ( ! empty( $_GET['wpglobus-reset-all-options'] ) ) { // WPCS: input var ok, sanitization ok.
 				/** @global wpdb $wpdb */
 				global $wpdb;
 				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );
