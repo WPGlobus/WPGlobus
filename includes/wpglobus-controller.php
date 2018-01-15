@@ -21,7 +21,7 @@ if ( is_admin() ) {
 /**
  * Filter @see wp_get_object_terms()
  */
-if ( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) {
+if ( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
 	add_filter( 'wp_get_object_terms', array( 'WPGlobus_Filters', 'filter__wp_get_object_terms' ), 0 );
 }
 
@@ -32,7 +32,7 @@ if ( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) {
  * @since 1.6.4
  */
 if (
-	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] )
+	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) // WPCS: input var ok, sanitization ok.
 	&& is_admin()
 	&& WPGlobus_WP::is_pagenow( 'post.php' )
 ) {
@@ -61,7 +61,7 @@ if (
  * @since 1.7.0
  */
 if (
-	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] )
+	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) // WPCS: input var ok, sanitization ok.
 	&& is_admin()
 	&& WPGlobus_WP::is_pagenow( 'post.php' )
 ) {
