@@ -21,18 +21,18 @@ class WPGlobus_Redirect {
 	 */
 	public static function on__init() {
 
-		if ( empty( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
+		if ( empty( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) { // WPCS: input var ok, sanitization ok.
 			// No language information in browser.
 			return;
 		}
 
 		$cookie_name = WPGlobus::_COOKIE;
 
-		if ( ! isset( $_COOKIE[ $cookie_name ] ) ) {
+		if ( ! isset( $_COOKIE[ $cookie_name ] ) ) { // WPCS: input var ok, sanitization ok.
 			/**
 			 * First visit.
 			 */
-			$browser_language = substr( $_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2 );
+			$browser_language = substr( $_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2 ); // WPCS: input var ok, sanitization ok.
 			/* @noinspection SummerTimeUnsafeTimeManipulationInspection */
 			setcookie( $cookie_name, $browser_language, time() + 3600 * 24 * 365, '/' );
 			self::redirect( $browser_language );
