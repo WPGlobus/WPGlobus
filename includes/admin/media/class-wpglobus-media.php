@@ -93,7 +93,10 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.7.3
-		 * @access public
+		 *
+		 * @param string $html       HTML.
+		 * @param int    $id         Unused.
+		 * @param array  $attachment Attachment.
 		 *
 		 * @return boolean
 		 */
@@ -102,24 +105,24 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			$fields = array(
 				'post_content',
 				'post_excerpt',
-				'image_alt'
+				'image_alt',
 			);
 
 			$current_language = WPGlobus::Config()->default_language;
-			if ( ! empty( $_POST['wpglobusLanguageTab'] ) ) {
+			if ( ! empty( $_POST['wpglobusLanguageTab'] ) ) { // WPCS: input var ok, sanitization ok.
 				/**
-				 * @see wpglobus-media.js
+				 * See wpglobus-media.js
 				 */
-				$current_language = $_POST['wpglobusLanguageTab'];
+				$current_language = sanitize_text_field( wp_unslash( $_POST['wpglobusLanguageTab'] ) ); // WPCS: input var ok, sanitization ok.
 
-				if ( ! in_array( $current_language, WPGlobus::Config()->enabled_languages ) ) {
+				if ( ! in_array( $current_language, WPGlobus::Config()->enabled_languages, true ) ) {
 					return $html;
 				}
 			}
 
-			foreach( $fields as $field ) {
-				if ( ! empty( $attachment[$field] ) && WPGlobus_Core::has_translations( $attachment[$field] ) ) {
-					$html = str_replace( $attachment[$field], WPGlobus_Core::text_filter( $attachment[$field], $current_language ), $html );
+			foreach ( $fields as $field ) {
+				if ( ! empty( $attachment[ $field ] ) && WPGlobus_Core::has_translations( $attachment[ $field ] ) ) {
+					$html = str_replace( $attachment[ $field ], WPGlobus_Core::text_filter( $attachment[ $field ], $current_language ), $html );
 				}
 			}
 
