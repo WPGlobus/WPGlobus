@@ -265,8 +265,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * Since 1.7.9
 			 */
 			$changeset_uuid = null;
-			if ( ! empty( $_GET['changeset_uuid'] ) ) {
-				$changeset_uuid = $_GET['changeset_uuid'];
+			if ( ! empty( $_GET['changeset_uuid'] ) ) { // WPCS: input var ok, sanitization ok.
+				$changeset_uuid = sanitize_text_field( wp_unslash( $_GET['changeset_uuid'] ) ); // WPCS: input var ok.
 			}
 			
 			wp_enqueue_script(
