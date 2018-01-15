@@ -12,7 +12,7 @@
 require_once dirname( __FILE__ ) . '/central/class-wpglobus-admin-central.php';
 WPGlobus_Admin_Central::construct();
 
-if ( ! empty( $_GET['wpglobus-debug'] ) && 'godmode' === $_GET['wpglobus-debug'] ) {
+if ( ! empty( $_GET['wpglobus-debug'] ) && 'godmode' === $_GET['wpglobus-debug'] ) { // WPCS: input var ok, sanitization ok.
 	/**
 	 * To load debug info
 	 * site/wp-admin/post.php?post={{post_ID}}&action=edit&wpglobus-debug=godmode
