@@ -60,15 +60,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 */
 		public static function controller() {
 
-			if ( empty( $_GET['source'] ) ) {
+			if ( empty( $_GET['source'] ) ) { // WPCS: input var ok, sanitization ok.
 				return;
 			}
 
-			if ( empty( $_GET['s'] ) ) {
+			if ( empty( $_GET['s'] ) ) { // WPCS: input var ok, sanitization ok.
 				return;
 			}
 
-			if ( 'WPGlobus' !== $_GET['source'] || 'WPGlobus' !== $_GET['s'] ) {
+			if ( 'WPGlobus' !== $_GET['source'] || 'WPGlobus' !== $_GET['s'] ) { // WPCS: input var ok, sanitization ok.
 				return;
 			}
 
