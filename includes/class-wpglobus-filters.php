@@ -176,7 +176,7 @@ class WPGlobus_Filters {
 		if (
 			is_admin() &&
 			WPGlobus_WP::is_pagenow( 'post.php' ) &&
-			( ! empty( $_POST['save'] ) || ! empty( $_POST['publish'] ) )
+			( ! empty( $_POST['save'] ) || ! empty( $_POST['publish'] ) ) // WPCS: input var ok, sanitization ok.
 		) {
 			return $terms;
 		}
@@ -185,7 +185,7 @@ class WPGlobus_Filters {
 		 * Don't filter term names for trash and un-trash single post
 		 * @see we check post.php page instead of edit.php because redirect
 		 */
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset( $_GET['action'] ) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset( $_GET['action'] ) && ( 'trash' === $_GET['action'] || 'untrash' === $_GET['action'] ) // WPCS: input var ok, sanitization ok.
 		) {
 			return $terms;
 		}
@@ -193,7 +193,7 @@ class WPGlobus_Filters {
 		/**
 		 * Don't filter term names bulk trash and untrash posts
 		 */
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset( $_GET['action'] ) && ( 'trash' == $_GET['action'] || 'untrash' == $_GET['action'] )
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset( $_GET['action'] ) && ( 'trash' === $_GET['action'] || 'untrash' === $_GET['action'] ) // WPCS: input var ok, sanitization ok.
 		) {
 			return $terms;
 		}
@@ -230,7 +230,7 @@ class WPGlobus_Filters {
 		 */
 		if ( WPGlobus_WP::is_http_post_action( 'heartbeat' ) &&
 		     WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) &&
-		     ! empty( $_POST['data']['wp_autosave'] )
+		     ! empty( $_POST['data']['wp_autosave'] ) // WPCS: input var ok, sanitization ok.
 		) {
 			return $terms;
 		}
@@ -239,7 +239,7 @@ class WPGlobus_Filters {
 		 * Don't filter term name at time generate checklist categories in metabox
 		 */
 		if (
-			empty( $_POST ) &&
+			empty( $_POST ) && // WPCS: input var ok, sanitization ok.
 			is_admin() &&
 			WPGlobus_WP::is_pagenow( 'post.php' ) &&
 			WPGlobus_WP::is_function_in_backtrace( 'wp_terms_checklist' )
@@ -584,7 +584,7 @@ class WPGlobus_Filters {
 		$screen_id
 	) {
 
-		if ( false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) {
+		if ( false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) ) { // WPCS: input var ok, sanitization ok.
 			/**
 			 * Check $_SERVER['HTTP_REFERER'] for wpglobus toggle is off because wpglobus-admin.js doesn't loaded in this mode
 			 */
@@ -593,7 +593,7 @@ class WPGlobus_Filters {
 
 		if ( ! empty( $data['wp_autosave'] ) ) {
 
-			if ( empty( $data['wp_autosave']['post_id'] ) || (int) $data['wp_autosave']['post_id'] == 0 ) {
+			if ( empty( $data['wp_autosave']['post_id'] ) || 0 === (int) $data['wp_autosave']['post_id'] ) {
 				/**
 				 * wp_autosave may come from edit.php page
 				 */
