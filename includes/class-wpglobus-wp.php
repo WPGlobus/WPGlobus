@@ -109,7 +109,7 @@ class WPGlobus_WP {
 
 		$action = (array) $action;
 
-		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action ) );
+		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action, true ) ); // WPCS: input var ok, sanitization ok.
 	}
 
 	/**
@@ -121,7 +121,7 @@ class WPGlobus_WP {
 
 		$action = (array) $action;
 
-		return ( ! empty( $_GET['action'] ) && in_array( $_GET['action'], $action ) );
+		return ( ! empty( $_GET['action'] ) && in_array( $_GET['action'], $action, true ) ); // WPCS: input var ok, sanitization ok.
 	}
 
 	/**
