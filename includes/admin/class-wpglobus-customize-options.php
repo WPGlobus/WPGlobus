@@ -435,39 +435,46 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$result      = true;
 			$ajax_return = array();
 
-			$order = $_POST['order'];
+			$order = isset( $_POST['order'] ) ? $_POST['order'] : null; // WPCS: input var ok, sanitization ok.
 
-			switch ( $order['action'] ) :
+			$order['action'] = '';
+			if ( $order ) {
+				$order['action'] = sanitize_text_field( $order['action'] );
+			}
+
+			switch ( $order['action'] ) {
 				case 'wpglobus_customize_save':
-				
-					/** @var array $options */
+					/**
+					 * Options array.
+					 *
+					 * @var array
+					 */
 					$options = get_option( WPGlobus::Config()->option );
-				
-					foreach ( $order['options'] as $key=>$value ) {
 
-						switch ($key) :
+					foreach ( $order['options'] as $key => $value ) {
+
+						switch ( $key ) :
 							case 'show_selector':
 								$options['selector_wp_list_pages'][ $key ] = $value;
 								break;
 							case 'redirect_by_language':
-								/**
-								 * @todo check this option which do we really need?
-								 */
+								// @todo check this option which do we really need?
 								$options['browser_redirect'][ $key ] = $value;
-								$options[$key] = $value;
+								$options[ $key ]                     = $value;
 								break;
 							default:
-								$value = str_replace('\"', '"', $value);
-								$value = str_replace("\'", "'", $value);
+								$value = str_replace( '\"', '"', $value );
+								$value = str_replace( "\'", "'", $value );
+
 								$options[ $key ] = $value;
 						endswitch;
 
 					}
-				
+
 					update_option( WPGlobus::Config()->option, $options );
 					break;
-				case 'cb-controls-save':
 
+				case 'cb-controls-save':
 					$options = get_option( self::$options_key );
 
 					if ( empty( $order['controls'] ) ) {
@@ -499,14 +506,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					}
 
 					break;
-			endswitch;
+			}
 
 			if ( false === $result ) {
 				wp_send_json_error( $ajax_return );
 			}
 
 			wp_send_json_success( $ajax_return );
-
 		}
 
 		/**
