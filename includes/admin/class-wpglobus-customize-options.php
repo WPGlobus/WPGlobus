@@ -435,11 +435,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$result      = true;
 			$ajax_return = array();
 
-			$order = isset( $_POST['order'] ) ? $_POST['order'] : null; // WPCS: input var ok, sanitization ok.
+			$post_order = isset( $_POST['order'] ) ? $_POST['order'] : null; // WPCS: input var ok, sanitization ok.
 
-			$order['action'] = '';
-			if ( $order ) {
-				$order['action'] = sanitize_text_field( $order['action'] );
+			$order = array();
+			if ( $post_order ) {
+				$order['action']  = sanitize_text_field( $post_order['action'] );
+				$order['options'] = $post_order['options'];
 			}
 
 			switch ( $order['action'] ) {
@@ -462,10 +463,24 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 								$options['browser_redirect'][ $key ] = $value;
 								$options[ $key ]                     = $value;
 								break;
+							case 'use_nav_menu':
+								if ( '0' == $value ) {
+									$value = '';
+								} else {
+									$value = sanitize_text_field( $value );
+								}
+								$options[ $key ] = $value;
+								break;
+							case 'js_editor':
+								$value = trim($value);
+								if ( ! empty( $value ) ) {
+									$value = str_replace( '\"', '"', $value );
+									$value = str_replace( "\'", "'", $value );
+									$value = esc_html( $value );
+								}
+								$options[ $key ] = $value;
+								break;
 							default:
-								$value = str_replace( '\"', '"', $value );
-								$value = str_replace( "\'", "'", $value );
-
 								$options[ $key ] = $value;
 						endswitch;
 
