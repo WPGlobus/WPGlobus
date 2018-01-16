@@ -237,7 +237,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 				echo '</ul>'; ?>
 
-			</label>    <?php
+			</label> <hr />   <?php
 
 		}
 
@@ -721,7 +721,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				) );
 				self::$sections['wpglobus_languages_section'] = 'wpglobus_languages_section';
 
-				/** Enabled languages */
+				/** 
+				 * Setting: Enabled languages.
+				 */
 				$wp_customize->add_setting( 'wpglobus_customize_enabled_languages', array(
 					'type'       => 'option',
 					'capability' => 'manage_options',
@@ -743,8 +745,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				/** @see option wpglobus_option['enabled_languages'] */
 				self::$settings['wpglobus_languages_section']['wpglobus_customize_enabled_languages']['option'] = 'enabled_languages';
 
-				/** Add languages */
-
+				/** 
+				 * Setting: Add languages.
+				 */
 				/** Generate array $more_languages */
 				/** @var array $more_languages */
 				$more_languages           = array();
@@ -789,7 +792,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				) );
 				//self::$settings[ 'wpglobus_languages_section' ][ 'wpglobus_customize_add_language' ] = 'select';
 
-				/** Language Selector Mode */
+				/** 
+				 * Setting: Language Selector Mode.
+				 */
 				$wp_customize->add_setting( 'wpglobus_customize_language_selector_mode', array(
 					'type'       => 'option',
 					'capability' => 'manage_options',
@@ -827,8 +832,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				 * ) );
 				 * // */
 
-				/** Language Selector Menu */
-
+				/** 
+				 * Setting: Language Selector Menu.
+				 */
 				/** @var array $nav_menus */
 				$nav_menus = WPGlobus::_get_nav_menus();
 
@@ -887,7 +893,9 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 				}
 
-				/** "All Pages" menus Language selector */
+				/** 
+				 * Setting: "All Pages" menus Language selector.
+				 */
 				$wp_customize->add_setting( 'wpglobus_customize_selector_wp_list_pages', array(
 					'type'       => 'option',
 					'capability' => 'manage_options',
@@ -907,7 +915,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				self::$settings['wpglobus_languages_section']['wpglobus_customize_selector_wp_list_pages']['option'] = 'show_selector';
 
 				/**
-				 * Custom CSS.
+				 * Setting: Custom CSS.
 				 */
 				$wp_customize->add_setting( 'wpglobus_customize_css_editor', array(
 					'type'       => 'option',
