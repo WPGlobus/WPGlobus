@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.9.7.2 ###
+
+* FIXED:
+    * Customizer: the saving of options.
+* ADDED:
+    * Customizer: 'select navigation menu' option for 'Language Selector Menu' setting.
+
 ### 1.9.7.1 ###
 
 * General code clean-up, output escaping and GET/POST sanitization.
