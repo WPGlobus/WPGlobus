@@ -651,7 +651,11 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 			/**  */
 			if ( empty( WPGlobus::Config()->nav_menu ) ) {
-				delete_option( 'wpglobus_customize_language_selector_menu' );
+				/**
+				 * Menu item '--- select navigation menu ---' has value 0.
+				 * It is used when 'Language Selector Menu' setting is not selected.
+				 */
+				update_option( 'wpglobus_customize_language_selector_menu', '0' );
 			} else {
 				update_option( 'wpglobus_customize_language_selector_menu', WPGlobus::Config()->nav_menu );
 			}
@@ -845,6 +849,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				}
 				if ( ! empty( $nav_menus ) && count( $nav_menus ) > 1 ) {
 					$menus['all'] = 'All';
+				}
+				if ( ! empty( $nav_menus ) ) {
+					array_unshift(
+						$menus, 
+						'--- ' . esc_html__('select navigation menu', 'wpglobus'). ' ---'
+					);
 				}
 
 				if ( empty( $menus ) ) {
