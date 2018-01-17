@@ -76,7 +76,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 		public function render_content() {
 
-			echo esc_html($this->content);
+			echo $this->content;
 
 		}
 
@@ -1163,38 +1163,78 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				
 				self::$sections['wpglobus_js_editor_section'] = 'wpglobus_js_editor_section';
 				
-				$wp_customize->add_section( self::$sections['wpglobus_js_editor_section'], array(
-					'title'    => esc_html__( 'Custom JS Code', 'wpglobus' ),
-					'priority' => $section_priority,
-					'panel'    => 'wpglobus_settings_panel',
-				) );
-	
 				/** 
 				 * Setting 'wpglobus_customize_js_editor'.
 				 */
-				$wp_customize->add_setting( 'wpglobus_customize_js_editor', array(
-					'type'       => 'option',
-					'capability' => 'manage_options',
-					'transport'  => 'postMessage'
-				) );
-				$wp_customize->add_control( new WP_Customize_Code_Editor_Control( $wp_customize,
+				 
+				/**
+				 * class WP_Customize_Code_Editor_Control
+				 * @since WordPress 4.9.0
+				 * @see https://developer.wordpress.org/reference/classes/wp_customize_code_editor_control/
+				 */
+				if ( ! class_exists('WP_Customize_Code_Editor_Control') ) {
+					
+					$content  = esc_html__( 'To add Custom JS Code in customizer you need to update WordPress to version 4.9 or later.', 'wpglobus' );
+					$content .= '<br /><br />' .
+							   esc_html__( 'To add code just now you can do it on', 'wpglobus') .
+							   '<br />' .
+					           '<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG . '&tab=0">' .
+					           esc_html__( 'WPGlobus Settings page', 'wpglobus' ) .
+					           '</a>';
+					
+					$wp_customize->add_section( self::$sections['wpglobus_js_editor_section'], array(
+						'title'    => esc_html__( 'Custom JS Code', 'wpglobus' ),
+						'priority' => $section_priority,
+						'panel'    => 'wpglobus_settings_panel',
+					) );
+					
+					$wp_customize->add_setting( 'wpglobus_customize_js_editor', array(
+						'type'       => 'option',
+						'capability' => 'manage_options',
+						'transport'  => 'postMessage'
+					) );
+					
+					$wp_customize->add_control( new WPGlobusTextBox( $wp_customize,
 						'wpglobus_customize_js_editor', array(
-						'code_type' 	=> 'javascript',
-						#'mode'			=> 'javascript',
-						'input_attrs'	=> array('rows'=>80),
-						'section'  		=> self::$sections['wpglobus_js_editor_section'],
-						'settings' 		=> 'wpglobus_customize_js_editor',
-						'title'    		=> esc_html__( 'Title', 'wpglobus' ),
-						'priority' 		=> 10,
-						'label'    		=> esc_html__( 'Custom JS Code', 'wpglobus' ),
-						'description' 	=> esc_html__( '(Paste your JS code here.)', 'wpglobus' )
-					)
-				) );
-	
-				self::$settings[ self::$sections['wpglobus_js_editor_section'] ]['wpglobus_customize_js_editor']['type'] = 'code_editor';
-				/** @see option wpglobus_option['css_editor'] */
-				self::$settings[ self::$sections['wpglobus_js_editor_section'] ]['wpglobus_customize_js_editor']['option'] = 'js_editor';	
-	
+							'section'  => self::$sections['wpglobus_js_editor_section'],
+							'settings' => 'wpglobus_customize_js_editor',
+							'content'  => $content
+						)
+					) );
+					
+				} else {
+					
+					$wp_customize->add_section( self::$sections['wpglobus_js_editor_section'], array(
+						'title'    => esc_html__( 'Custom JS Code', 'wpglobus' ),
+						'priority' => $section_priority,
+						'panel'    => 'wpglobus_settings_panel',
+					) );
+		
+
+					$wp_customize->add_setting( 'wpglobus_customize_js_editor', array(
+						'type'       => 'option',
+						'capability' => 'manage_options',
+						'transport'  => 'postMessage'
+					) );
+					$wp_customize->add_control( new WP_Customize_Code_Editor_Control( $wp_customize,
+						'wpglobus_customize_js_editor', array(
+							'code_type' 	=> 'javascript',
+							#'mode'			=> 'javascript',
+							'input_attrs'	=> array('rows'=>80),
+							'section'  		=> self::$sections['wpglobus_js_editor_section'],
+							'settings' 		=> 'wpglobus_customize_js_editor',
+							'title'    		=> esc_html__( 'Title', 'wpglobus' ),
+							'priority' 		=> 10,
+							'label'    		=> esc_html__( 'Custom JS Code', 'wpglobus' ),
+							'description' 	=> esc_html__( '(Paste your JS code here.)', 'wpglobus' )
+						)
+					) );
+		
+					self::$settings[ self::$sections['wpglobus_js_editor_section'] ]['wpglobus_customize_js_editor']['type'] = 'code_editor';
+					/** @see option wpglobus_option['css_editor'] */
+					self::$settings[ self::$sections['wpglobus_js_editor_section'] ]['wpglobus_customize_js_editor']['option'] = 'js_editor';	
+				
+				}
 			}				
 			/** end SECTION: Custom JS Code */
 			
