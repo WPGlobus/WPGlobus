@@ -2,12 +2,17 @@
 
 ## Changelog ##
 
-### 1.9.7.2 ###
+### 1.9.7.3 ###
 
 * FIXED:
     * Customizer: the saving of options.
 * ADDED:
     * Customizer: 'select navigation menu' option for 'Language Selector Menu' setting.
+
+### 1.9.7.2 ###
+
+* FIXED
+	* Core: Invalid HTML tag escaping on the Edit Post screen.
 
 ### 1.9.7.1 ###
 
