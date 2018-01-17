@@ -5,7 +5,7 @@
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** WPGlobus, localization, multilanguage, multilingual, translation  
 **Requires at least:** 4.8  
-**Tested up to:** 4.9.1  
+**Tested up to:** 4.9.2  
 **Requires PHP:** 5.3  
 **Stable tag:** trunk  
 **License:** GPL-3.0  
@@ -240,6 +240,13 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
 
+### 1.9.7.3 ###
+
+* FIXED:
+    * Customizer: saving of the options.
+* ADDED:
+    * Customizer: `Select Navigation Menu` option for the `Language Selector Menu` setting.
+
 ### 1.9.7.2 ###
 
 * FIXED
@@ -279,46 +286,6 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 * FIXED:
 	* Yoast SEO: CSS tweaking (set `min-width`, `min-height` for the keyword tab to prevent shifting of the elements when the keyword is empty).
-
-### 1.9.3 ###
-
-* ADDED:
-	* Customizer: handling of the customize changeset and theme mods URLs.
-
-### 1.9.2 ###
-
-* FIXED:
-	* Core: correctly saving post tags in WordPress 4.9.
-
-### 1.9.1 ###
-
-* FIXED:
-	* Core: convert all applicable characters to HTML entities in the category description.
-
-### 1.9.0 ###
-
-* COMPATIBILITY:
-	* WordPress 4.9
-* ADDED:
-	* Customizer: new language selector.
-	* Core: disable the built-in `oembed_cache` post type (added to the array of disabled post types).
-* FIXED:
-	* Customizer: correctly handle the case when `control.setting` is `null`.
-
-### 1.8.9 ###
-
-* TESTED WITH WordPress 4.9 and the following plugins active:
-	* advanced-custom-fields 4.4.12
-	* tablepress 1.8.1
-	* types 2.2.18
-	* woocommerce 3.2.3
-	* woocommerce-api-manager 1.5.4
-	* woocommerce-composite-products 3.12.2
-	* woocommerce-dynamic-pricing 3.1.2
-	* woocommerce-subscriptions 2.2.13
-	* wordpress-seo 5.7.1
-* FIXED:
-	* Customizer: don't add MutationObserver when a control element does not have a parent. An example can be found in the [Ascend theme](https://wordpress.org/themes/ascend/).
 
 ### Earlier versions and Add-ons ###
 

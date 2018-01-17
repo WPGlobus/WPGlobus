@@ -3108,7 +3108,8 @@ class WPGlobus {
 							<b></b>
 						</div>
 					</div><!-- .inside -->';
-					echo apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language );
+					// DO NOT ESCAPE THIS: it's HTML, already escaped above.
+					echo apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language ); // WPCS: XSS ok.
 					?>
 				</div>    <!-- #titlediv -->    <?php
 

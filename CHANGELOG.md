@@ -5,9 +5,9 @@
 ### 1.9.7.3 ###
 
 * FIXED:
-    * Customizer: the saving of options.
+    * Customizer: saving of the options.
 * ADDED:
-    * Customizer: 'select navigation menu' option for 'Language Selector Menu' setting.
+    * Customizer: `Select Navigation Menu` option for the `Language Selector Menu` setting.
 
 ### 1.9.7.2 ###
 
