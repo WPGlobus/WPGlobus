@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.7.4 ###
+
+* FIXED:
+    * Customizer: prevent loading the class 'WP_Customize_Code_Editor_Control' for WP less  4.9.
+
 ### 1.9.7.3 ###
 
 * FIXED:
