@@ -3108,7 +3108,7 @@ class WPGlobus {
 							<b></b>
 						</div>
 					</div><!-- .inside -->';
-					echo esc_html( apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language ) );
+					echo apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language );
 					?>
 				</div>    <!-- #titlediv -->    <?php
 

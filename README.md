@@ -240,6 +240,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
 
+### 1.9.7.2 ###
+
+* FIXED
+	* Core: Invalid HTML tag escaping on the Edit Post screen.
+
 ### 1.9.7.1 ###
 
 * General code clean-up, output escaping and GET/POST sanitization.
