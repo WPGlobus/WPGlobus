@@ -4,6 +4,8 @@
 
 ### 1.9.7.4 ###
 
+* ADDED:
+    * All in One SEO Pack: the using new method that was added in AIOSEOP v.2.4.4.
 * FIXED:
     * Customizer: prevent loading the class 'WP_Customize_Code_Editor_Control' for WP less  4.9.
 
