@@ -171,7 +171,16 @@ class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 			$aioseop_options = get_option( 'aioseop_options' );
 
 			if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) ) {
-				$description = $aio->trim_excerpt_without_filters_full_length( $post->post_excerpt );
+				if ( method_exists($aio, 'trim_excerpt_without_filters_full_length') ) {
+					$description = $aio->trim_excerpt_without_filters_full_length( $post->post_excerpt );
+				} else if ( method_exists($aio, 'trim_text_without_filters_full_length') ) {
+					/**
+					 * @since All In One SEO Pack 2.4.4
+					 */
+					$description = $aio->trim_text_without_filters_full_length( $post->post_excerpt );
+				} else {
+					$description = WPGlobus_Core::text_filter( $post->post_excerpt );
+				}				
 			}
 			if ( ! $description && $aioseop_options["aiosp_generate_descriptions"] ) {
 				$content = $post->post_content;
@@ -657,8 +666,19 @@ class WPGlobus_aioseop {
 					$description = '';
 
 					if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) ) {
-						$description = $aio->trim_excerpt_without_filters_full_length( WPGlobus_Core::text_filter( $post->post_excerpt, $language, WPGlobus::RETURN_EMPTY ) );
-					}
+
+						if ( method_exists($aio, 'trim_excerpt_without_filters_full_length') ) {
+							$description = $aio->trim_excerpt_without_filters_full_length( WPGlobus_Core::text_filter( $post->post_excerpt, $language, WPGlobus::RETURN_EMPTY ) );
+						} else if ( method_exists($aio, 'trim_text_without_filters_full_length') ) {
+							/**
+							 * @since All In One SEO Pack 2.4.4
+							 */
+							$description = $aio->trim_text_without_filters_full_length( WPGlobus_Core::text_filter( $post->post_excerpt, $language, WPGlobus::RETURN_EMPTY ) );
+						} else {
+							$description = WPGlobus_Core::text_filter( $post->post_excerpt, $language, WPGlobus::RETURN_EMPTY );
+						}
+
+					}	
 
 					if ( ! $description && $aioseop_options["aiosp_generate_descriptions"] ) {
 						$content = WPGlobus_Core::text_filter( $post->post_content, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
