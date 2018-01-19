@@ -222,6 +222,13 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 == Changelog ==
 
+= 1.9.7.4 =
+
+* ADDED:
+    * All in One SEO Pack: using a new method that was added in AIOSEOP 2.4.4.
+* FIXED:
+    * Customizer: do not load the class `WP_Customize_Code_Editor_Control` when running under older WordPress versions (before 4.9).
+
 = 1.9.7.3 =
 
 * FIXED:
@@ -246,28 +253,6 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
     * Acf: fixed the saving the data inside the repeater field (issue #22).
 * ADDED:
     * Customizer: additional settings.
-
-= 1.9.6 =
-
-* FIXED:
-    * Core: do not load the WPGlobus translations from WordPress.org and always use those from the plugin's `languages` folder.
-	* Customizer: fixed warning "strpos() expects parameter 1 to be string, array given".
-	* Widgets: fixed handling the `keyup` event when editing in the visual mode.
-* ADDED:
-    * Recommend `WPGlobus Plus` to edit permalinks.
-
-= 1.9.5 =
-
-* ADDED:
-	* Core: added multilingual filters to the `wp_mail` and `wp_mail_from_name` WP hooks.
-
-= 1.9.4 =
-
-* COMPATIBILITY:
-	* Yoast SEO 5.9
-
-* FIXED:
-	* Yoast SEO: CSS tweaking (set `min-width`, `min-height` for the keyword tab to prevent shifting of the elements when the keyword is empty).
 
 = Earlier versions and Add-ons =
 

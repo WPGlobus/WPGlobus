@@ -1173,14 +1173,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				 * @see https://developer.wordpress.org/reference/classes/wp_customize_code_editor_control/
 				 */
 				if ( ! class_exists('WP_Customize_Code_Editor_Control') ) {
-					
-					$content  = esc_html__( 'To add Custom JS Code in customizer you need to update WordPress to version 4.9 or later.', 'wpglobus' );
+
+					$content = esc_html__( 'To add a Custom JS Code in Customizer, you need to upgrade WordPress to version 4.9 or later.', 'wpglobus' );
 					$content .= '<br /><br />' .
-							   esc_html__( 'To add code just now you can do it on', 'wpglobus') .
-							   '<br />' .
-					           '<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG . '&tab=0">' .
-					           esc_html__( 'WPGlobus Settings page', 'wpglobus' ) .
-					           '</a>';
+								esc_html__( 'With your version of WordPress, please use the', 'wpglobus' ) .
+								' <a style="text-decoration:underline;" target="_blank" href="' . esc_url( admin_url() . 'admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG . '&tab=0' ) . '">' .
+								esc_html__( 'WPGlobus Settings page', 'wpglobus' ) .
+								'.</a>';
 					
 					$wp_customize->add_section( self::$sections['wpglobus_js_editor_section'], array(
 						'title'    => esc_html__( 'Custom JS Code', 'wpglobus' ),
