@@ -19,8 +19,8 @@
  * Author: WPGlobus
  * Author URI: https://wpglobus.com/
  * Network: false
- * License: GPL-3.0
- * License URI: http://www.gnu.org/licenses/gpl.txt
+ * License: GPL-3.0-or-later
+ * License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
  */
 // </editor-fold>
 // <editor-fold desc="GNU Clause">

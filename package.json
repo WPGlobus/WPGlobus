@@ -13,7 +13,7 @@
     "url": "https://github.com/WPGlobus/wpglobus/issues"
   },
   "author": "The WPGlobus Team",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "jshintConfig": {
     "node": true
   },

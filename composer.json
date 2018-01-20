@@ -2,7 +2,7 @@
   "name": "wpglobus/wpglobus",
   "description": "WPGlobus - Multilingual Everything!",
   "type": "wordpress-plugin",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "minimum-stability": "stable",
   "config": {
     "preferred-install": {

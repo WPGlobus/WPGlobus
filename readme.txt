@@ -6,8 +6,8 @@ Requires at least: 4.8
 Tested up to: 4.9.2
 Requires PHP: 5.3
 Stable tag: trunk
-License: GPL-3.0
-License URI: http://www.gnu.org/licenses/gpl.txt
+License: GPL-3.0-or-later
+License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
 
 Multilingual/Globalization: URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!
 
