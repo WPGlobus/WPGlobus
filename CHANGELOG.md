@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.7.5 ###
+
+* FIXED:
+    * Options: using 'wp_kses' function instead of 'esc_html'.
+
 ### 1.9.7.4 ###
 
 * ADDED:
