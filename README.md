@@ -8,8 +8,8 @@
 **Tested up to:** 4.9.2  
 **Requires PHP:** 5.3  
 **Stable tag:** trunk  
-**License:** GPL-3.0  
-**License URI:** http://www.gnu.org/licenses/gpl.txt  
+**License:** GPL-3.0-or-later  
+**License URI:** https://spdx.org/licenses/GPL-3.0-or-later.html  
 
 **Multilingual/Globalization:** URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!  
 
@@ -239,6 +239,11 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
+
+### 1.9.7.5 ###
+
+* FIXED:
+    * Options Panel: Incorrect using of `esc_html` made a link unclickable. Changed to `wp_kses`.
 
 ### 1.9.7.4 ###
 

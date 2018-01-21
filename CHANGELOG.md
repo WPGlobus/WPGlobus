@@ -5,7 +5,7 @@
 ### 1.9.7.5 ###
 
 * FIXED:
-    * Options: using 'wp_kses' function instead of 'esc_html'.
+    * Options Panel: Incorrect using of `esc_html` made a link unclickable. Changed to `wp_kses`.
 
 ### 1.9.7.4 ###
 

@@ -222,6 +222,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 == Changelog ==
 
+= 1.9.7.5 =
+
+* FIXED:
+    * Options Panel: Incorrect using of `esc_html` made a link unclickable. Changed to `wp_kses`.
+
 = 1.9.7.4 =
 
 * ADDED:
