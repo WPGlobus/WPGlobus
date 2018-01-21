@@ -128,7 +128,14 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_info' ) ) {
 				echo esc_html( $this->field['desc'] );
 			} else {
 				if ( isset( $this->field['title'] ) && ! empty( $this->field['title'] ) ) {
-					$this->field['title'] = '<b>' . esc_html( $this->field['title'] ) . '</b><br/>';
+					$allowed_html = array(
+						'a' => array(
+							'href' => array(),
+							'title' => array(),
+							'target' => array()
+						)
+					);
+					$this->field['title'] = '<b>' . wp_kses( $this->field['title'], $allowed_html ) . '</b><br/>';
 				}
 
 				if ( isset( $this->field['icon'] ) && ! empty( $this->field['icon'] ) && $this->field['icon'] !== true ) {
