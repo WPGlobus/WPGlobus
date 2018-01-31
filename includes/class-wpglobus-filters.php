@@ -1076,6 +1076,40 @@ class WPGlobus_Filters {
 		return $atts;
 	}
 	
+	/**
+	 * Filters oEmbed HTML.
+	 *
+	 * @param mixed  $cache   The cached HTML result, stored in post meta.
+	 * @param string $url     The attempted embed URL.
+	 * @param array  $attr    An array of shortcode attributes.
+	 * @param int    $post_ID Post ID.
+	 *
+	 * @return string
+	 * @since 1.9.8
+	 */
+	public static function filter__embed_oembed_html($cache, $url, $attr, $post_ID) {
+		
+		if ( ! is_string($cache) ) {
+			/**
+			 * @since 1.9.8. We are working with string.
+			 */
+			return $cache;
+		}
+		
+		$language = WPGlobus_Utils::extract_language_from_url($url);
+
+		if ( empty($language) ) {
+			/**
+			 * URL has no language code. So this is default language.
+			 */
+			return $cache;
+		}
+		
+		$cache = str_replace(WPGlobus_Utils::localize_url($url, WPGlobus::Config()->default_language), $url, $cache);
+		
+		return $cache;
+	}
+	
 } // class
 
 # --- EOF

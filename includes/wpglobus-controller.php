@@ -339,6 +339,15 @@ add_filter( 'wp_mail_from_name', array( 'WPGlobus_Filters', 'filter__text' ), 5 
 add_filter( 'wp_mail', array( 'WPGlobus_Filters', 'filter__wp_mail' ), 5 );
 
 /**
+ * Filters oEmbed HTML. 
+ * Case when post has embedded local URL in content.
+ *
+ * @see wp-includes\class-wp-embed.php
+ * @since 1.9.8
+ */
+add_filter( 'embed_oembed_html', array( 'WPGlobus_Filters', 'filter__embed_oembed_html' ), 5, 4 );
+
+/**
  * ACF filters
  * @todo Move to a separate controller
  */
