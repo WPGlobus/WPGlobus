@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-19 17:06-0500\n"
+"POT-Creation-Date: 2018-01-31 21:44-0500\n"
 "PO-Revision-Date: 2018-01-19 22:06+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
@@ -897,28 +897,28 @@ msgid "Go to WPGlobus Plus Options page"
 msgstr "Go to WPGlobus Plus Options page"
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:659
+#: includes/class-wpglobus-filters.php:683
 msgid "Error while saving."
 msgstr "Ошибка при сохранении."
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:662
+#: includes/class-wpglobus-filters.php:687
 msgid "g:i:s a"
 msgstr "g:i:s a"
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:667
+#: includes/class-wpglobus-filters.php:692
 #, php-format
 msgid "Draft saved at %s."
 msgstr "Черновик сохранен в %s."
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:766
+#: includes/class-wpglobus-filters.php:794
 msgid "&hellip;"
 msgstr "&hellip;"
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:771
+#: includes/class-wpglobus-filters.php:799
 msgctxt "word count: words or characters?"
 msgid "words"
 msgstr "слов"

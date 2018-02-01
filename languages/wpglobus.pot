@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.9.7.5\n"
+"Project-Id-Version: WPGlobus 1.9.8\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-01-21 08:21-0500\n"
+"POT-Creation-Date: 2018-01-31 21:44-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -810,28 +810,28 @@ msgid "Go to WPGlobus Plus Options page"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:659
+#: includes/class-wpglobus-filters.php:683
 msgid "Error while saving."
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:662
+#: includes/class-wpglobus-filters.php:687
 msgid "g:i:s a"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:667
+#: includes/class-wpglobus-filters.php:692
 #, php-format
 msgid "Draft saved at %s."
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:766
+#: includes/class-wpglobus-filters.php:794
 msgid "&hellip;"
 msgstr ""
 
 #. / Do not translate
-#: includes/class-wpglobus-filters.php:771
+#: includes/class-wpglobus-filters.php:799
 msgctxt "word count: words or characters?"
 msgid "words"
 msgstr ""

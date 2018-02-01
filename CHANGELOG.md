@@ -5,7 +5,7 @@
 ### 1.9.8 ###
 
 * ADDED:
-	* Core: filter oEmbed HTML when post has embedded local URL in content.
+	* Core: filter `oEmbed HTML` when post has an embedded local URL in the content.
 
 ### 1.9.7.5 ###
 
