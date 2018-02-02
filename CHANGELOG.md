@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.8.1 ###
+
+* ADDED:
+	* Core: init WPGlobusDialogApp on 'options-general.php' page.
+	
 ### 1.9.8 ###
 
 * ADDED:
