@@ -240,6 +240,11 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
 
+### 1.9.8.1 ###
+
+* ADDED:
+	* Core: initialize `WPGlobusDialogApp` on `options-general.php` page.
+
 ### 1.9.8 ###
 
 * ADDED:
