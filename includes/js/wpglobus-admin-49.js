@@ -662,6 +662,7 @@ jQuery(document).ready(function () {
                     this.quickEdit('post');
                 } else if ('options-general.php' == WPGlobusAdmin.page) {
 					this.optionsGeneral();
+					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
 					WPGlobusWidgets.init();
 					WPGlobusDialogApp.init({dialogTitle:'Edit text'});
