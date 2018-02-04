@@ -977,7 +977,7 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add switcher to publish metabox
+	 * Add switcher to publish metabox.
 	 * @return void
 	 */
 	public function on_add_devmode_switcher() {
@@ -986,7 +986,11 @@ class WPGlobus {
 			return;
 		}
 
-		global $post;
+		global $post, $pagenow;
+		
+		if ( $pagenow != 'post.php' ) {
+			return;
+		}
 
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
@@ -996,12 +1000,29 @@ class WPGlobus {
 		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
 			$mode = 'on';
 		}
+		
+		$query_string = explode('&', $_SERVER['QUERY_STRING']);
+		
+		foreach( $query_string as $key=>$_q ) {
+			if ( false !== strpos($_q, 'wpglobus=') ) {
+				unset( $query_string[$key] );
+			}
+		}
+
+		$query = implode('&', $query_string );
+		$url = admin_url( 
+			add_query_arg( array(
+					'wpglobus' => esc_attr( $mode )
+				),
+				'post.php?'.$query 
+			) 
+		);
 		?>
 		<div class="misc-pub-section wpglobus-switch">
 			<span
 				id="wpglobus-raw" class="wpglobus-icon-globe">&nbsp;&nbsp;WPGlobus: <strong><?php echo strtoupper( $mode == 'on' ? 'off' : 'on' ); // WPCS: XSS ok. ?></strong></span>
-			<a href="post.php?post=<?php echo esc_attr( $post->ID ); ?>&action=edit&wpglobus=<?php echo esc_attr( $mode ); ?>">Toggle</a>
-		</div>
+			<a href="<?php echo $url; ?>"><?php esc_html_e('Toggle', 'wpglobus'); ?></a>
+		</div>		
 		<?php
 	}
 
