@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.9 ###
+
+* FIXED
+	* Core: Removed devmode switcher from 'post-new.php' page.
+	
 ### 1.9.8.1 ###
 
 * ADDED:
