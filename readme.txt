@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translation
 Requires at least: 4.8
-Tested up to: 4.9.2
+Tested up to: 4.9
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -14,6 +14,10 @@ Multilingual/Globalization: URL-based multilanguage; easy translation interface,
 == Description ==
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual/multilingual WordPress blogs and sites.
+
+= Quick Start Video =
+
+https://www.youtube.com/watch?v=zoTWY9JrXLs
 
 = Important Notes: please read before using WPGlobus! =
 
