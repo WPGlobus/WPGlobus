@@ -7,6 +7,7 @@
 
 // Load the List_Table class.
 if ( ! class_exists( 'WP_List_Table' ) ) {
+	/** @noinspection PhpIncludeInspection */
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
@@ -149,14 +150,8 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 		$this->prepare_items();
 		?>
 		<div class="wpglobus_flag_table_wrapper">
-			<?php
-			$url = add_query_arg( array(
-				'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
-				'action' => WPGlobus_Language_Edit_Request::ACTION_ADD,
-			), admin_url( 'admin.php' ) );
-			$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
-			?>
-			<a id="wpglobus_add_language" href="<?php echo esc_url( $url ); ?>" class="button button-primary">
+			<a id="wpglobus_add_language" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_add() ); ?>" class="button button-primary">
+				<i class="dashicons dashicons-plus-alt" style="line-height: inherit"></i>
 				<?php esc_html_e( 'Add new Language', 'wpglobus' ); ?>
 			</a>
 
@@ -382,16 +377,9 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 
 				switch ( $action ) {
 					case WPGlobus_Language_Edit_Request::ACTION_EDIT:
-						$url = add_query_arg( array(
-							'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
-							'lang'   => $item['wpglobus_code'],
-							'action' => WPGlobus_Language_Edit_Request::ACTION_EDIT,
-						), admin_url( 'admin.php' ) );
-						$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
-
 						$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>',
 							$class,
-							esc_url( $url ),
+							esc_url( WPGlobus_Language_Edit_Request::url_language_edit( $item['wpglobus_code'] ) ),
 							esc_html( $data['caption'] )
 						);
 
@@ -402,16 +390,9 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 							$actions['delete'] =
 								sprintf( '<a %1s href="#">%2s</a>', $class, esc_html__( 'Default language', 'wpglobus' ) );
 						} else {
-							$url = add_query_arg( array(
-								'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
-								'lang'   => $item['wpglobus_code'],
-								'action' => WPGlobus_Language_Edit_Request::ACTION_DELETE,
-							), admin_url( 'admin.php' ) );
-							$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
-
 							$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>',
 								$class,
-								esc_url( $url ),
+								esc_url( WPGlobus_Language_Edit_Request::url_language_delete( $item['wpglobus_code'] ) ),
 								esc_html( $data['caption'] )
 							);
 						}

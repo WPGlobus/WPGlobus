@@ -348,7 +348,7 @@ class WPGlobus_Language_Edit {
 		if ( WPGlobus_Language_Edit_Request::ACTION_EDIT === $this->action ) {
 			$header = __( 'Edit Language', 'wpglobus' );
 		} elseif ( WPGlobus_Language_Edit_Request::ACTION_DELETE === $this->action ) {
-			$header   = __( 'Are you sure you want to delete?', 'wpglobus' );
+			$header   = __( 'Delete Language', 'wpglobus' );
 			$disabled = 'disabled';
 		} else {
 			$header = __( 'Add Language', 'wpglobus' );
@@ -445,23 +445,19 @@ class WPGlobus_Language_Edit {
 					?>
 					<input class="button button-primary" type="submit" name="submit"
 							value="<?php esc_attr_e( 'Save Changes', 'wpglobus' ); ?>">
-					<hr/>
 					<?php
 
 					if ( WPGlobus_Language_Edit_Request::ACTION_EDIT === $this->action ) {
-						$url = add_query_arg( array(
-							'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
-							'lang'   => $this->language_code,
-							'action' => WPGlobus_Language_Edit_Request::ACTION_DELETE,
-						), admin_url( 'admin.php' ) );
-						$url = wp_nonce_url( $url, WPGlobus_Language_Edit_Request::NONCE_ACTION );
 						?>
-						<span class="dashicons dashicons-trash wp-ui-notification"></span>
-						<a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'Delete Language', 'wpglobus' ); ?></a>
+
+						<a class="button button-link-delete" style="margin-left: 1em" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_delete( $this->language_code ) ); ?>">
+							<i class="dashicons dashicons-trash" style="line-height: inherit;"></i>
+							<?php esc_html_e( 'Delete Language', 'wpglobus' ); ?>&hellip;</a>
 						<?php
 					}
 				} elseif ( WPGlobus_Language_Edit_Request::ACTION_DELETE === $this->action ) {
 					?>
+					<div class="notice-large wp-ui-notification"><?php esc_html_e( 'Are you sure you want to delete?', 'wpglobus' ); ?></div>
 					<p class="submit"><input class="button button-primary" type="submit" name="delete"
 								value="<?php esc_attr_e( 'Delete Language', 'wpglobus' ); ?>"></p>
 				<?php } ?>

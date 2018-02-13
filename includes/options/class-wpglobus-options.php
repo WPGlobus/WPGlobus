@@ -6,6 +6,9 @@
  * @author      WPGlobus
  */
 
+// Load the Request class.
+require_once dirname( dirname( __FILE__ ) ) . '/admin/class-wpglobus-language-edit-request.php';
+
 /**
  * Class WPGlobus_Options
  * Based on ReduxFramework Sample Config File
@@ -329,10 +332,12 @@ class WPGlobus_Options {
 		$desc_more_languages =
 			__( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.',
 				'wpglobus' ) . '<br /><br />';
+
 		$desc_more_languages .= sprintf(
-		/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+			/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 			__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
-			'<a href="?page=wpglobus_language_edit&action=add">', '</a>' );
+			'<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
+		);
 
 		$this->sections[] = array(
 			'wpglobus_id' => 'languages',

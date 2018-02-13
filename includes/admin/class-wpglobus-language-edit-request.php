@@ -223,4 +223,33 @@ class WPGlobus_Language_Edit_Request {
 	public function get_wpglobus_locale() {
 		return $this->wpglobus_locale;
 	}
+
+	public static function url_language_add() {
+		$url = add_query_arg( array(
+			'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
+			'action' => self::ACTION_ADD,
+		), admin_url( 'admin.php' ) );
+
+		return wp_nonce_url( $url, self::NONCE_ACTION );
+	}
+
+	public static function url_language_edit( $language_code ) {
+		$url = add_query_arg( array(
+			'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
+			'lang'   => $language_code,
+			'action' => self::ACTION_EDIT,
+		), admin_url( 'admin.php' ) );
+
+		return wp_nonce_url( $url, self::NONCE_ACTION );
+	}
+
+	public static function url_language_delete( $language_code ) {
+		$url = add_query_arg( array(
+			'page'   => WPGlobus::LANGUAGE_EDIT_PAGE,
+			'lang'   => $language_code,
+			'action' => self::ACTION_DELETE,
+		), admin_url( 'admin.php' ) );
+
+		return wp_nonce_url( $url, self::NONCE_ACTION );
+	}
 }
