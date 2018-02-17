@@ -1,19 +1,19 @@
 # WPGlobus
 # Copyright (C) YEAR TIV.NET INC.
 # This file is distributed under the same license as the WPGlobus package.
-# 
-# 
+#
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-02-17 07:46-0500\n"
-"PO-Revision-Date: 2018-01-06 04:07+0000\n"
+"POT-Creation-Date: 2018-02-17 07:54-0500\n"
+"PO-Revision-Date: 2018-02-17 12:46+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/wp-"
-"translations/wpglobus-multilingual/language/pt_PT/)\n"
-"Language: pt_PT\n"
+"Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/wp-"
+"translations/wpglobus-multilingual/language/bg_BG/)\n"
+"Language: bg_BG\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +65,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:1286
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
 msgid "Add-ons"
-msgstr "Add-ons"
+msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:26
 msgid "Quick Start"
@@ -76,12 +76,12 @@ msgstr ""
 #: includes/admin/class-wpglobus-clean.php:599
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
 msgid "Settings"
-msgstr "Definições"
+msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:51
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "FAQ"
-msgstr "Perguntas Mais Frequentes"
+msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:62
 msgid ""
@@ -130,7 +130,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:124
 msgid "Contact Us"
-msgstr "Contacte-nos"
+msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:126
 msgid "Please give us 5 stars!"
@@ -216,7 +216,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:606
 msgid "Support"
-msgstr "Apoio"
+msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:611
 msgid ""
@@ -292,7 +292,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:145
 #: includes/admin/class-wpglobus-customize-options.php:183
 msgid "Default"
-msgstr "Predefinição"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:264
 msgid "Section"
@@ -424,7 +424,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:952
 #: includes/options/class-wpglobus-options.php:426
 msgid "Custom CSS"
-msgstr "CSS personalizado"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:956
 #: includes/options/class-wpglobus-options.php:430
@@ -436,7 +436,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:975
 #: includes/options/class-wpglobus-options.php:522
 msgid "Post types"
-msgstr "Tipos de artigo"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1084
 #: includes/options/class-wpglobus-options.php:482
@@ -446,7 +446,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:1118
 #: includes/options/class-wpglobus-options.php:560
 msgid "Redirect"
-msgstr "Redirecionar"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1143
 #: includes/options/class-wpglobus-options.php:552
@@ -490,7 +490,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:1269
 #: includes/class-wpglobus-widget.php:236
 msgid "Title"
-msgstr "Título"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1228
 #: includes/options/class-wpglobus-options.php:443
@@ -499,11 +499,11 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1270
 msgid "Label"
-msgstr "Etiqueta"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1274
 msgid "Description"
-msgstr "Descrição"
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1338
 msgid ""
@@ -687,7 +687,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:447
 msgid "Save Changes"
-msgstr "Guardar Alterações"
+msgstr ""
 
 #: includes/admin/class-wpglobus-language-edit.php:460
 msgid "Are you sure you want to delete?"
@@ -712,7 +712,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-plugin-install.php:309
 #: includes/options/fields/table/class-wpglobus-languages-table.php:457
 msgid "Installed"
-msgstr "Instalado"
+msgstr ""
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:54
 msgid "Help Desk"
@@ -816,29 +816,29 @@ msgstr ""
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:683
 msgid "Error while saving."
-msgstr "Erro ao salvar."
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:687
 msgid "g:i:s a"
-msgstr "G:i:s"
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:692
 #, php-format
 msgid "Draft saved at %s."
-msgstr "Rascunho guardado em %s"
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:794
 msgid "&hellip;"
-msgstr "&hellip;"
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus-filters.php:799
 msgctxt "word count: words or characters?"
 msgid "words"
-msgstr "words"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -854,7 +854,7 @@ msgstr ""
 
 #: includes/class-wpglobus-widget.php:33
 msgid "List"
-msgstr "Lista"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:34
 msgid "List with flags"
@@ -862,7 +862,7 @@ msgstr ""
 
 #: includes/class-wpglobus-widget.php:35
 msgid "Select"
-msgstr "Selecionar"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:36
 msgid "Select with language code"
@@ -920,29 +920,29 @@ msgstr ""
 #: includes/class-wpglobus.php:2814
 #, php-format
 msgid "Word count: %s"
-msgstr "Palavras: %s"
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2824
 #, php-format
 msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr "Última edição por %1$s, em %2$s às %3$s "
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus.php:2832
 #, php-format
 msgid "Last edited on %1$s at %2$s"
-msgstr "Última edição em %1$s às %2$s "
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3133
 msgid "Enter title here"
-msgstr "Introduza o título aqui"
+msgstr ""
 
 #. / Do not translate
 #: includes/class-wpglobus.php:3255
 msgid "Invalid taxonomy"
-msgstr "Taxonomia inválida"
+msgstr ""
 
 #: includes/class-wpglobus.php:3448
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -1050,7 +1050,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:420
 msgid "Enable"
-msgstr "Ativar"
+msgstr ""
 
 #: includes/options/class-wpglobus-options.php:431
 msgid "(Optional)"
@@ -1110,11 +1110,11 @@ msgstr ""
 
 #: includes/options/fields/table/class-wpglobus-languages-table.php:85
 msgid "Edit"
-msgstr "Editar"
+msgstr ""
 
 #: includes/options/fields/table/class-wpglobus-languages-table.php:90
 msgid "Delete"
-msgstr "Eliminar"
+msgstr ""
 
 #: includes/options/fields/table/class-wpglobus-languages-table.php:96
 msgid "File"
@@ -1152,7 +1152,7 @@ msgstr ""
 #. / Do not translate
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:161
 msgid "No items of this type were found."
-msgstr "Nenhum item deste tipo foi encontrado."
+msgstr ""
 
 #: includes/options/wpglobus-options-header.php:20
 msgid "We rely on your support!"
@@ -1179,7 +1179,3 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:57
 msgid "Get WPGlobus Plus now!"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Custom JS code"
-#~ msgstr "CSS personalizado"

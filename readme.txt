@@ -231,6 +231,8 @@ Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 * FIXED
 	* Core: Removed `devmode` switcher from the `post-new.php` page.
 	* Core: Fix broken `Add Language` link. Code cleanup and cosmetics.
+* ADDED:
+    * Core: styling and translations for the `ON/OFF` WPGlobus switcher on the edit pages.
 
 = 1.9.8.1 =
 

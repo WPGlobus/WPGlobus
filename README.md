@@ -5,7 +5,7 @@
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
 **Tags:** WPGlobus, localization, multilanguage, multilingual, translation  
 **Requires at least:** 4.8  
-**Tested up to:** 4.9.2  
+**Tested up to:** 4.9  
 **Requires PHP:** 5.3  
 **Stable tag:** trunk  
 **License:** GPL-3.0-or-later  
@@ -16,6 +16,10 @@
 ## Description ##
 
 **WPGlobus** is a family of WordPress plugins assisting you in making bilingual/multilingual WordPress blogs and sites.
+
+### Quick Start Video ###
+
+https://www.youtube.com/watch?v=zoTWY9JrXLs
 
 ### Important Notes: please read before using WPGlobus! ###
 
@@ -239,6 +243,14 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
 
 ## Changelog ##
+
+### 1.9.9 ###
+
+* FIXED
+	* Core: Removed `devmode` switcher from the `post-new.php` page.
+	* Core: Fix broken `Add Language` link. Code cleanup and cosmetics.
+* ADDED:
+    * Core: styling and translations for the `ON/OFF` WPGlobus switcher on the edit pages.
 
 ### 1.9.8.1 ###
 
