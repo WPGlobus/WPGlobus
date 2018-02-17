@@ -978,7 +978,6 @@ class WPGlobus {
 
 	/**
 	 * Add switcher to publish metabox.
-	 * @return void
 	 */
 	public function on_add_devmode_switcher() {
 
@@ -987,7 +986,7 @@ class WPGlobus {
 		}
 
 		global $post, $pagenow;
-		
+
 		if ( $pagenow != 'post.php' ) {
 			return;
 		}
@@ -996,33 +995,49 @@ class WPGlobus {
 			return;
 		}
 
+		// "Reverse" logic here. It's the mode to turn to, not the current one.
 		$mode = 'off';
 		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
 			$mode = 'on';
 		}
-		
-		$query_string = explode('&', $_SERVER['QUERY_STRING']);
-		
-		foreach( $query_string as $key=>$_q ) {
-			if ( false !== strpos($_q, 'wpglobus=') ) {
-				unset( $query_string[$key] );
+
+		$query_string = explode( '&', $_SERVER['QUERY_STRING'] );
+
+		foreach ( $query_string as $key => $_q ) {
+			if ( false !== strpos( $_q, 'wpglobus=' ) ) {
+				unset( $query_string[ $key ] );
 			}
 		}
 
-		$query = implode('&', $query_string );
-		$url = admin_url( 
+		$query = implode( '&', $query_string );
+		$url   = admin_url(
 			add_query_arg( array(
-					'wpglobus' => esc_attr( $mode )
-				),
-				'post.php?'.$query 
-			) 
+				'wpglobus' => $mode,
+			),
+				'post.php?' . $query
+			)
 		);
+
+		if ( 'on' === $mode ) {
+			/// Translators: ON/OFF status of WPGlobus on the edit pages.
+			$status_text     = __( 'OFF', 'wpglobus' );
+			$toggle_text     = __( 'Turn on', 'wpglobus' );
+			$highlight_class = 'wp-ui-text-notification';
+		} else {
+			/// Translators: ON/OFF status of WPGlobus on the edit pages.
+			$status_text     = __( 'ON', 'wpglobus' );
+			$toggle_text     = __( 'Turn off', 'wpglobus' );
+			$highlight_class = 'wp-ui-text-highlight';
+		}
 		?>
 		<div class="misc-pub-section wpglobus-switch">
-			<span
-				id="wpglobus-raw" class="wpglobus-icon-globe">&nbsp;&nbsp;WPGlobus: <strong><?php echo strtoupper( $mode == 'on' ? 'off' : 'on' ); // WPCS: XSS ok. ?></strong></span>
-			<a href="<?php echo $url; ?>"><?php esc_html_e('Toggle', 'wpglobus'); ?></a>
-		</div>		
+			<span id="wpglobus-raw" style="margin-right: 2px;"
+					class="dashicons dashicons-admin-site <?php echo esc_attr( $highlight_class ); ?>"></span>
+			<?php esc_html_e( 'WPGlobus', 'wpglobus' ); ?>:
+			<strong class="<?php echo esc_attr( $highlight_class ); ?>"><?php echo esc_html( $status_text ); ?></strong>
+			<a class="button button-small" style="margin:-3px 0 0 3px;"
+					href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $toggle_text ); ?></a>
+		</div>
 		<?php
 	}
 
