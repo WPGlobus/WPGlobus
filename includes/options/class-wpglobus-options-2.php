@@ -111,12 +111,6 @@ class WPGlobus_Options {
 				'post_types'
 			) as $field_type
 		) {
-			// !!!!!!	
-			// redux/wpglobus_option/field/class/wpglobus_info
-			// redux/wpglobus_option/field/class/wpglobus_sortable
-			
-			
-			//add_filter( "redux/{$config->option}/field/class/{$field_type}", array(
 			add_filter( "wpglobus/options/field/{$field_type}", array(
 					$this,
 					'filter__add_custom_fields'
@@ -630,7 +624,11 @@ class WPGlobus_Options {
 					'desc'        => $desc_more_languages,
 					'placeholder' => esc_html__( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
+					'name'	   	  => 'wpglobus_option[more_languages]',
+					'name_suffix' 	=> '',
+					'class'			=> ''
 				),
+				/*
 				array(
 					'id'       => 'show_flag_name',
 					'type'     => 'wpglobus_select',
@@ -645,7 +643,6 @@ class WPGlobus_Options {
 					'options'  => array(
 						'code'      => esc_html__( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
 						'full_name' => esc_html__( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
-						/* @since 1.2.1 */
 						'name'      => esc_html__( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
 						'empty'     => esc_html__( 'Flags only', 'wpglobus' )
 					),
@@ -665,7 +662,7 @@ class WPGlobus_Options {
 					),
 					'options'     => $this->menus,
 					'placeholder' => $navigation_menu_placeholder,
-				),
+				), */
 				array(
 					'id'       => 'selector_wp_list_pages',
 					'type'     => 'wpglobus_checkbox',
@@ -746,16 +743,13 @@ class WPGlobus_Options {
 	 * @return string Path of the field class where we want Redux to find it
 	 */
 	public function filter__add_custom_fields( $file, $field ) {
-		
-		//*
+
 		$file = WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields2/{$field['type']}/field_{$field['type']}.php";
 
 		if ( ! file_exists( $file ) ) {
 			return false;	
 		}
-		
-		// */
-		//$file = true;
+
 		return $file;
 	}	
 	

@@ -86,13 +86,13 @@
 .wpglobus-options-main .wpglobus-options-field {
 	border: 1px solid #a9b6c2;
 	border-radius: 4px;
+	margin: 10px 0;
 }
 
 /** Field type: 'wpglobus_info' **/
 .wpglobus-options-main .wpglobus-options-field-wpglobus_info {
 	min-height: 20px;
     padding: 8px 19px;
-    margin: 10px 0;
 	color: #000;
     background-color: #d3e4f4;
 
@@ -136,3 +136,15 @@
 	font-weight: 600;
 }
 
+/** Field type: 'wpglobus_select' **/
+.wpglobus-options-main .wpglobus-options-field-wpglobus_select {
+	display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    grid-gap: 0;
+	background-color: #d3e4f4;		
+}
+.wpglobus-options-main .wpglobus-options-field-wpglobus_select .grid__item {
+	padding: initial;
+	max-width: none;
+}
