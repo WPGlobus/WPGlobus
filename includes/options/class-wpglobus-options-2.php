@@ -27,6 +27,8 @@ class WPGlobus_Options {
 	private $tab;
 
 	private $menus = array();
+	
+	private $current_page;
 
 	/**
 	 * Constructor
@@ -49,6 +51,8 @@ class WPGlobus_Options {
 			update_option( $option_name, $posted_data );
 		}
 
+		$this->current_page = WPGlobus_Utils::safe_get('page');
+		
 		$_tab = WPGlobus_Utils::safe_get('tab');
 		if ( empty($_tab) ) {
 			$_tab = 0;
@@ -759,6 +763,10 @@ class WPGlobus_Options {
 	 */	
 	public function on__admin_scripts() {
 
+		if ( $this->current_page != $this->page_slug ) {
+			return;
+		}
+	
 		wp_register_script(
 			'wpglobus-options',
 			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -772,10 +780,12 @@ class WPGlobus_Options {
 			'wpglobus-options',
 			'WPGlobusOptions',
 			array(
-				'version' => WPGLOBUS_VERSION,
-				'tab'	  => $this->tab
+				'version' 	=> WPGLOBUS_VERSION,
+				'tab'	  	=> $this->tab,
+				'sections'	=> $this->sections
 			)
-		);		
+		);
+		
 	}
 	
 	/**
@@ -785,6 +795,10 @@ class WPGlobus_Options {
 	 */		
 	public function on__admin_styles() {
 
+		if ( $this->current_page != $this->page_slug ) {
+			return;
+		}
+	
 		wp_register_style(
 			'wpglobus-options',
 			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
