@@ -576,11 +576,6 @@ class WPGlobus_Options {
 			esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
 			'<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
 		);
-
-		//error_log(print_r('HERE: ', true));
-		//error_log(print_r($wpglobus_option, true));
-		//error_log(print_r($defaults_for_enabled_languages, true));
-
 		
 		if ( empty($wpglobus_option['enabled_languages']) ) {
 			$_value_for_enabled_languages = $defaults_for_enabled_languages;
@@ -597,8 +592,7 @@ class WPGlobus_Options {
 					'id'       => 'languages_intro',
 					'type'     => 'wpglobus_info',
 					'title'    => esc_html__( 'Instructions:', 'wpglobus' ),
-					#'subtitle' => esc_html__( 'NOTE: you cannot remove the main language.', 'wpglobus' ),
-					'desc'     => $desc_languages_intro,
+					'html'	   => $desc_languages_intro,
 					'style'    => 'info',
 					'notice'   => false
 				),
