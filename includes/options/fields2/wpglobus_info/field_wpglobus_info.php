@@ -53,13 +53,16 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_info' ) ) {
 				data-id="<?php echo $this->field['id']; ?>" 
 				data-type="<?php echo $this->field['type']; ?>">
 					<?php if ( ! empty( $this->field['title'] ) ) {	?>
-						<p class="wpglobus-options-title"><?php echo $this->field['title']; ?></p>
+						<p class="title"><?php echo $this->field['title']; ?></p>
 					<?php }	?>		
 					<?php if ( ! empty( $this->field['subtitle'] ) ) {	?>
-						<p class="wpglobus-options-subtitle"><?php echo $this->field['subtitle']; ?></p>
+						<p class="subtitle"><?php echo $this->field['subtitle']; ?></p>
 					<?php }	?>
+					<?php if ( ! empty( $this->field['html'] ) ) {	?>
+						<?php echo $this->field['html']; ?>
+					<?php }	?>	
 					<?php if ( ! empty( $this->field['desc'] ) ) {	?>
-						<p class="wpglobus-options-desc"><?php echo $this->field['desc']; ?></p>
+						<p class="description"><?php echo $this->field['desc']; ?></p>
 					<?php }	?>	
 			</div>	
 			<div style="clear:both;"></div>
