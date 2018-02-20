@@ -412,9 +412,9 @@ class WPGlobus_Options {
 							esc_html__( 'Read About WPGlobus', 'wpglobus' ) .
 							'</a>' .
 							'<br/>' .
-							'&bull; ' . esc_html__( 'Click the <strong>[Languages]</strong> tab at the left to setup the options.', 'wpglobus' ) .
+							'&bull; ' . sprintf( esc_html__( 'Click the %1$s[Languages]%2$s tab at the left to setup the options.', 'wpglobus' ), '<strong>', '</strong>' ) .
 							'<br/>' .
-							'&bull; ' . esc_html__( 'Use the <strong>[Languages Table]</strong> section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ) .
+							'&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus'), '<strong>', '</strong>' ) .
 							'<br/>' .
 							'<br/>' .
 							esc_html__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
