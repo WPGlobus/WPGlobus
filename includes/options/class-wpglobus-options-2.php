@@ -14,6 +14,8 @@ require_once dirname( dirname( __FILE__ ) ) . '/admin/class-wpglobus-language-ed
  */
 class WPGlobus_Options {
 
+	const NONCE_ACTION = 'wpglobus-options-panel';
+
 	public $args = array();
 	public $sections = array();
 	public $theme;
@@ -35,7 +37,18 @@ class WPGlobus_Options {
 		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
 	
 		$this->page_slug = 'wpglobus-options';
-		
+
+		// TODO find a better place for this!
+		$option_name = WPGlobus::Config()->option;
+		if ( isset( $_POST[ $option_name ] ) ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( 'Unauthorized user' );
+			}
+			check_admin_referer( self::NONCE_ACTION );
+			$posted_data = wp_unslash( $_POST[ $option_name ] );
+			update_option( $option_name, $posted_data );
+		}
+
 		$_tab = WPGlobus_Utils::safe_get('tab');
 		if ( empty($_tab) ) {
 			$_tab = 0;
@@ -165,7 +178,15 @@ class WPGlobus_Options {
 					</div><!-- sidebar -->
 					<div class="wpglobus-options-main wpglobus-options-wrap__item">
 						<div class="wpglobus-options-info">
-							<?php foreach($this->sections as $section_tab=>$section) {	
+							<?php
+							if ( ! empty( $_POST ) ) {
+								echo '<xmp>';
+								print_r( $_POST );
+								echo '</xmp>';
+							}
+							?>
+							<form action="" method="post">
+							<?php foreach($this->sections as $section_tab=>$section) {
 								?>
 								<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab">
 									<h2><?php echo $section['title']; ?></h2>
@@ -179,6 +200,11 @@ class WPGlobus_Options {
 									<?php } /** end foreach **/ ?>
 								</div><!-- .wpglobus-options-tab -->
 							<?php }	?>
+								<?php
+								wp_nonce_field( self::NONCE_ACTION );
+								submit_button();
+								?>
+							</form>
 						</div><!-- .wpglobus-options-info -->
 					</div><!-- wpglobus-options-main block -->
 				</div>
