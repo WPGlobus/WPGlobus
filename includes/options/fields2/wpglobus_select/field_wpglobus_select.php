@@ -165,7 +165,9 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 					 /// Do not translate
 					 esc_html__( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
 			}
-			
+			if ( ! empty($this->field['desc']) ) {
+				echo '<p class="description">' . $this->field['desc'] . '</p>';
+			}
 			echo $this->render_wrapper('after');	
 			
 		} //function
@@ -195,7 +197,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 			} elseif ( 'after' == $wrapper ) {
 				?>
 					</div><!-- .grid__item -->
-				</div><!-- .wpglobus-options-field-wpglobus_select -->
+				</div><!-- #wpglobus-options-<?php echo $this->field['id']; ?> -->
 				<?php				
 				$render = ob_get_clean();
 			}
