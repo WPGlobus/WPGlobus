@@ -88,6 +88,13 @@
 	border-radius: 4px;
 	margin: 10px 0;
 }
+.wpglobus-options-main .wpglobus-options-field .title {
+	margin: 0 0 0.5em 1em;
+	font-weight: 600;
+}
+.wpglobus-options-main .wpglobus-options-field .description {
+	margin: 0 0 0.5em 1em;
+}
 
 /** Field type: 'wpglobus_info' **/
 .wpglobus-options-main .wpglobus-options-field-wpglobus_info {
@@ -128,12 +135,6 @@
 .wpglobus-options-main .wpglobus-options-field-wpglobus_sortable .grid__item {
 	padding: initial;
 	max-width: none;
-}
-.wpglobus-options-main .wpglobus-options-field-wpglobus_sortable .title, .wpglobus-options-main .wpglobus-options-field-wpglobus_sortable .description {
-	margin: 0 0 0.5em 1em;
-}
-.wpglobus-options-main .wpglobus-options-field-wpglobus_sortable .title {
-	font-weight: 600;
 }
 
 /** Field type: 'wpglobus_select' **/
