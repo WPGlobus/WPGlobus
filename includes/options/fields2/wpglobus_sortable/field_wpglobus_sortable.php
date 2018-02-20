@@ -193,7 +193,8 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 					id="wpglobus-options-<?php echo $this->field['id']; ?>" 
 					class="wpglobus-options-field wpglobus-options-field-wpglobus_sortable" 
 					data-id="<?php echo $this->field['id']; ?>"
-					data-type="<?php echo $this->field['type']; ?>">
+					data-type="<?php echo $this->field['type']; ?>" 
+					data-js-handler="handler<?php echo ucfirst($this->field['id']); ?>">
 					<div class="grid__item">
 						<p class="title"><?php echo $this->field['title']; ?></p>
 						<p class="subtitle"><?php echo $this->field['subtitle']; ?></p>

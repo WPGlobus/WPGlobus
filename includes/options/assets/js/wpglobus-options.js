@@ -9,14 +9,46 @@ jQuery(document).ready(function ($) {
 	
 	var api = {
 		currentTabID: 0,
+		firstLanguageCb: null,
 		init: function() {
+			api.initTab();
+			api.checkHandlers();
+			api.addListeners();
+		},
+		setFirstLanguageCb: function() {
+			if ( null !== api.firstLanguageCb ) {
+				api.firstLanguageCb.off('click');
+			}
+			$('#enabled_languages-list li input[type="checkbox"]').prop('disabled', false);
+			var $elm = $('#enabled_languages-list li').eq(0);
+			api.firstLanguageCb = $elm.find('input[type="checkbox"]');
+			api.firstLanguageCb.prop('checked','checked');
+			api.firstLanguageCb.prop('disabled','disabled');
+			api.firstLanguageCb.on('click', function(ev){
+				ev.preventDefault();
+				return false;
+			});			
+		},
+		handlerEnabled_languages: function() {
 			$('.wpglobus-sortable').sortable({
-				placeholder: 'ui-state-highlight'
+				placeholder: 'ui-state-highlight',
+				update: function(ev, ui){
+					api.setFirstLanguageCb();
+				}
 			});
 			$('.wpglobus-sortable').disableSelection();
-			
-			api.initTab();
-			api.addListeners();
+			api.setFirstLanguageCb();
+		},
+		checkHandlers: function() {
+			$('.wpglobus-options-field').each(function(i,e){
+				if ( 'undefined' === typeof $(e).data('js-handler') ) {
+					return true;
+				}
+				var func = $(e).data('js-handler');
+				if ( 'function' === typeof api[func] ) {
+					api[func]();
+				}
+			});
 		},
 		initTab: function() {
 			var curTab = $('#section-tab-'+WPGlobusOptions.tab);
