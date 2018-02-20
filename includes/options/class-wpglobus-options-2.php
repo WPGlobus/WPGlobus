@@ -140,9 +140,8 @@ class WPGlobus_Options {
 			'administrator',
 			$this->page_slug,
 			array($this, 'pageOptions'),
-			'$icon_url',
-			100
-		);		
+			'dashicons-admin-site'
+		);
 	}
 	
 	public function pageOptions() {
