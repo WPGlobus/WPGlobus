@@ -186,7 +186,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 					<div class="grid__item">
 						<p class="title"><?php echo $this->field['title']; ?></p>
 						<?php if ( ! empty($this->field['subtitle']) ) { 	?>
-							<p class="description"><?php echo $this->field['subtitle']; ?></p>
+							<p class="subtitle"><?php echo $this->field['subtitle']; ?></p>
 						<?php }	?>	
 					</div>
 					<div class="grid__item">

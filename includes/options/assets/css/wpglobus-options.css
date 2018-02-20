@@ -92,8 +92,11 @@
 	margin: 0 0 0.5em 1em;
 	font-weight: 600;
 }
-.wpglobus-options-main .wpglobus-options-field .description {
+.wpglobus-options-main .wpglobus-options-field .subtitle {
 	margin: 0 0 0.5em 1em;
+	padding: 0;
+	font-size: 13px;
+	font-weight: 400;
 }
 
 /** Field type: 'wpglobus_info' **/
