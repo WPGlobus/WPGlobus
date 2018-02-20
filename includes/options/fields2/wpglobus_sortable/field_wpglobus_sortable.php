@@ -196,7 +196,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 					data-type="<?php echo $this->field['type']; ?>">
 					<div class="grid__item">
 						<p class="title"><?php echo $this->field['title']; ?></p>
-						<p class="description"><?php echo $this->field['subtitle']; ?></p>
+						<p class="subtitle"><?php echo $this->field['subtitle']; ?></p>
 					</div>
 					<div class="grid__item">
 				<?php
