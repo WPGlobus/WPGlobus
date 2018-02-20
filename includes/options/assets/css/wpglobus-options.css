@@ -95,7 +95,10 @@
 	font-size: 13px;
 	font-weight: 400;
 }
-
+.wpglobus-options-main .wpglobus-options-field .description {
+	font-size: 13px;
+	font-style: normal;
+}
 /** Field type: 'wpglobus_info' **/
 .wpglobus-options-main .wpglobus-options-field-wpglobus_info {
 	min-height: 20px;
