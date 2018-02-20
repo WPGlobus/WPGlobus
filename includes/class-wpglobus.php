@@ -353,7 +353,11 @@ class WPGlobus {
 
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
 
-			require_once 'options/class-wpglobus-options.php';
+			if ( defined('WP_DEBUG') && WP_DEBUG && defined('WPGLOBUS_OPTIONS_2') && WPGLOBUS_OPTIONS_2 ) {
+				require_once 'options/class-wpglobus-options-2.php';
+			} else {
+				require_once 'options/class-wpglobus-options.php';
+			}
 			new WPGlobus_Options();
 
 			if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
