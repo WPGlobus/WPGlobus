@@ -622,7 +622,6 @@ class WPGlobus_Options {
 					'name_suffix' 	=> '',
 					'class'			=> ''
 				),
-				/*
 				array(
 					'id'       => 'show_flag_name',
 					'type'     => 'wpglobus_select',
@@ -640,7 +639,10 @@ class WPGlobus_Options {
 						'name'      => esc_html__( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
 						'empty'     => esc_html__( 'Flags only', 'wpglobus' )
 					),
-					'default'  => 'code'
+					'default' 		=> 'code',
+					'name' 			=> 'wpglobus_option[show_flag_name]',
+					'name_suffix' 	=> '',
+					'class' 		=> ''
 				),
 				array(
 					'id'          => 'use_nav_menu',
@@ -656,7 +658,10 @@ class WPGlobus_Options {
 					),
 					'options'     => $this->menus,
 					'placeholder' => $navigation_menu_placeholder,
-				), */
+					'name' 			=> 'wpglobus_option[use_nav_menu]',
+					'name_suffix' 	=> '',
+					'class' 		=> ''					
+				),
 				array(
 					'id'       => 'selector_wp_list_pages',
 					'type'     => 'wpglobus_checkbox',
