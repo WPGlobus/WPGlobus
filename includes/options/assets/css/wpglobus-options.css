@@ -56,12 +56,19 @@
 	}
 }
 
-/** main options wrapper **/
+/** 
+ * Main options wrapper.
+ */
 .wpglobus-options-wrap {
 	display: grid;
     grid-template-columns: 15% 85%;
     grid-gap: 0;
     background-color: rgb(243, 243, 243);
+}
+@media screen and (max-width: 750px) {
+	.wpglobus-options-wrap {
+		grid-template-columns: 7% 93%;
+	}
 }
 
 /** options tab hidden by default **/
@@ -69,11 +76,12 @@
 	display: none;
 }
 
-/** sidebar menu **/
+/** 
+ * Sidebar menu.
+ */
 .wpglobus-options-sidebar li a {
 	display: block;
     padding: 10px 4px 10px 14px;
-    background: #e0e0e0;
     background: transparent;
     border-width: 1px 0;
     border-style: solid;
@@ -86,12 +94,26 @@
     -webkit-transition: none;
     transition: none;
 }
+
+@media screen and (max-width: 750px) {
+	.wpglobus-options-sidebar li a {
+		padding: 10px 0;
+		text-align: center;
+	}
+}
+
 .wpglobus-options-sidebar li a:hover {
 	color: #00f !important;
 }
 
 .wpglobus-options-sidebar .wpglobus-tab-link-active {
 	background-color: rgb(252, 252, 252);
+}
+
+@media screen and (max-width: 750px) {
+	.wpglobus-options-sidebar .group_title {
+		display:none;
+	}
 }
 
 /** options main block **/
