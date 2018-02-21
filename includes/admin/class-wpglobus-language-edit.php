@@ -466,7 +466,7 @@ class WPGlobus_Language_Edit {
 
 			<hr/>
 			<span class="dashicons dashicons-admin-site"></span>
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wpglobus_options' ) ); ?>">
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=' ).WPGlobus::OPTIONS_PAGE_SLUG ); ?>">
 				<?php esc_html_e( 'Back to the WPGlobus Settings', 'wpglobus' ); ?>
 			</a>
 		</div>
