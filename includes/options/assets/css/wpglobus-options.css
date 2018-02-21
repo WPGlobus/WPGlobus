@@ -3,12 +3,18 @@
 
 #wpglobus-options-intro-text {
 	display: grid;
-    grid-template-columns: 20% 40% 40%;
-    /*align-items: center;*/
+    grid-template-columns: 100%;
 	place-items: center;
     grid-gap: 0;
 	background-color: #d3e4f4;
 }
+
+@media screen and (min-width: 699px) {
+	#wpglobus-options-intro-text {
+		grid-template-columns: 20% 40% 40%;
+	}
+}
+
 #wpglobus-options-intro-text .grid__item {
 	padding: initial;
 	max-width: none;
@@ -28,17 +34,26 @@
 }
 
 .wpg-bnr .wpg-bnr__item {
-	/* padding: initial; */
 	max-width: none;	
 }
 
+#wpglobus-options-intro-text .wpg-bnr-title {
+	padding: 20px 0;
+}
 .wpg-bnr .wpg-img-block {
 	height: 150px;
 	width: 150px;
 	background-color: #fff;
 }
 .wpg-bnr .wpg-text-block {
+	width: 40%;
 	padding:10px;
+}
+
+@media screen and (min-width: 699px) {
+	.wpg-bnr .wpg-text-block  {
+		width: 95%;
+	}
 }
 
 /** main options wrapper **/

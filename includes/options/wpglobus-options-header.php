@@ -8,7 +8,9 @@
 
 ob_start();
 ?>
-	<h1 class="grid__item">WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
+	<div class="grid__item wpg-bnr-title">
+		<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
+	</div>
 	<div class="wpg-bnr wpg-bnr-left grid__item">
 		<div class="wpg-img-block wpg-bnr__item">
 			<a class="wpg-a-img"
