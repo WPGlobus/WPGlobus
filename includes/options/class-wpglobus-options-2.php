@@ -169,7 +169,7 @@ class WPGlobus_Options {
 								}
 								?>
 								<li id="wpglobus-tab-link-<?php echo $section_tab; ?>" class="wpglobus-tab-link" data-tab="<?php echo $section_tab; ?>">
-									<a href="javascript:void(0);" data-tab="<?php echo $section_tab; ?>"><i class="el <?php //echo $section['share_icons']['icon']; ?>"></i><span class="group_title"><?php echo $section['title']; ?></span></a>
+									<a href="javascript:void(0);" data-tab="<?php echo $section_tab; ?>"><i class="<?php echo $section['icon']; ?>"></i>&nbsp;<span class="group_title"><?php echo $section['title']; ?></span></a>
 								</li>
 							<?php }	?>
 						</ul>
@@ -482,7 +482,8 @@ class WPGlobus_Options {
 		return array(
 			'wpglobus_id' => 'welcome',
 			'title'       => esc_html__( 'Welcome!', 'wpglobus' ),
-			'icon'        => 'el-icon-globe',
+            #'icon'        => 'el-icon-globe',
+			'icon'        => 'dashicons dashicons-admin-site',
 			'fields'      => $fields_home
 		);			
 			
@@ -590,7 +591,8 @@ class WPGlobus_Options {
 		$section = array(
 			'wpglobus_id' => 'languages',
 			'title'       => esc_html__( 'Languages', 'wpglobus' ),
-			'icon'        => 'el-icon-wrench-alt',
+			#'icon'        => 'el-icon-wrench-alt',
+			'icon'        => 'dashicons dashicons-admin-tools',
 			'fields'      => array(
 				array(
 					'id'       => 'languages_intro',
@@ -716,7 +718,8 @@ class WPGlobus_Options {
 		$section = array(
 			'wpglobus_id' => 'language_table',
 			'title'       => esc_html__( 'Languages table', 'wpglobus' ),
-			'icon'        => 'el-icon-th-list',
+			#'icon'        => 'el-icon-th-list',
+			'icon'        => 'dashicons dashicons-list-view',
 			'fields'      => array(
 				array(
 					'id'       => 'description',
