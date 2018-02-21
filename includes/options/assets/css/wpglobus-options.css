@@ -17,17 +17,28 @@
 /** top banners **/
 .wpg-bnr {
 	display: grid;
-    grid-template-columns: 30% 70%;
-	place-items: center;	
+    grid-template-columns: 100%;
+	place-items: center;
 }
+
+@media screen and (min-width: 1499px) {
+	.wpg-bnr {
+		grid-template-columns: 30% 70%;
+	}
+}
+
 .wpg-bnr .wpg-bnr__item {
-	padding: initial;
+	/* padding: initial; */
 	max-width: none;	
 }
-.wpg-bnr .wpg-a-img {
-	background-color: #fff;
+
+.wpg-bnr .wpg-img-block {
 	height: 150px;
 	width: 150px;
+	background-color: #fff;
+}
+.wpg-bnr .wpg-text-block {
+	padding:10px;
 }
 
 /** main options wrapper **/
