@@ -61,6 +61,21 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
+	 * URL of the WPGlobus Add-ons page.
+	 * @return string
+	 */
+	public static function url_addons_2() {
+		return add_query_arg(
+			array(
+				'tab'    => 'search',
+				's'      => 'WPGlobus',
+				'source' => 'WPGlobus',
+			),
+			'plugin-install.php'
+		);
+	}
+
+	/**
 	 * URL of the WPGlobus Settings page.
 	 * @return string
 	 */

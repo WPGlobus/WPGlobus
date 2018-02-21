@@ -14,10 +14,29 @@ class WPGlobus_Admin_Menu {
 	 * Static constructor.
 	 */
 	public static function construct() {
-		add_action( 'admin_footer', array( __CLASS__, '_add_ons' ),
-			// Below the Help Desk
-			PHP_INT_MAX - 10
+		if ( defined( 'WPGLOBUS_OPTIONS_2' ) && WPGLOBUS_OPTIONS_2 ) {
+			add_action( 'admin_menu', array( __CLASS__, 'add_menu' ), PHP_INT_MAX );
+		} else {
+			add_action( 'admin_footer', array( __CLASS__, '_add_ons' ),
+				// Below the Help Desk
+				PHP_INT_MAX - 10
+			);
+		}
+	}
+
+	public static function add_menu(  ) {
+		$icon_class     = 'dashicons dashicons-before dashicons-admin-plugins';
+		$menu_title     = __( 'Add-ons', 'wpglobus' );
+		add_submenu_page(
+			'wpglobus-options', // TODO rename constant WPGlobus::OPTIONS_PAGE_SLUG
+			$menu_title,
+			'<span class="' . esc_attr( $icon_class )
+			. '" style="vertical-align:middle"></span> '
+			. $menu_title,
+			'administrator',
+			WPGlobus_Admin_Page::url_addons_2() // TODO
 		);
+
 	}
 
 	/**

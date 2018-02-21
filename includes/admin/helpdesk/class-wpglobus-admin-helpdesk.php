@@ -43,6 +43,7 @@ class WPGlobus_Admin_HelpDesk {
 	 * Static "constructor".
 	 */
 	public static function construct() {
+		self::set_vars();
 		self::set_hooks();
 	}
 
@@ -62,9 +63,10 @@ class WPGlobus_Admin_HelpDesk {
 	 * Setup actions and filters.
 	 */
 	protected static function set_hooks() {
-		add_action( 'admin_init', array( __CLASS__, 'set_vars' ) );
-		add_action( 'admin_menu', array( __CLASS__, 'add_menu' ) );
-		add_action( 'admin_footer', array( __CLASS__, 'show_submenu' ), PHP_INT_MAX );
+		add_action( 'admin_menu', array( __CLASS__, 'add_menu' ), PHP_INT_MAX );
+		if ( ! defined( 'WPGLOBUS_OPTIONS_2' ) || ! WPGLOBUS_OPTIONS_2 ) {
+			add_action( 'admin_footer', array( __CLASS__, 'show_submenu' ), PHP_INT_MAX );
+		}
 	}
 
 	/**
@@ -72,14 +74,27 @@ class WPGlobus_Admin_HelpDesk {
 	 * It will become visible in @see WPGlobus_Admin_HelpDesk::show_submenu
 	 */
 	public static function add_menu() {
-		add_submenu_page(
-			null,
-			'',
-			'',
-			'administrator',
-			WPGlobus::PAGE_WPGLOBUS_HELPDESK,
-			array( __CLASS__, 'helpdesk_page' )
-		);
+		if ( defined( 'WPGLOBUS_OPTIONS_2' ) && WPGLOBUS_OPTIONS_2 ) {
+			add_submenu_page(
+				'wpglobus-options', // TODO rename constant WPGlobus::OPTIONS_PAGE_SLUG
+				self::$page_title,
+				'<span class="' . esc_attr( self::ICON_CLASS )
+				. '" style="vertical-align:middle"></span> '
+				. self::$menu_title,
+				'administrator',
+				WPGlobus::PAGE_WPGLOBUS_HELPDESK,
+				array( __CLASS__, 'helpdesk_page' )
+			);
+		} else {
+			add_submenu_page(
+				null,
+				'',
+				'',
+				'administrator',
+				WPGlobus::PAGE_WPGLOBUS_HELPDESK,
+				array( __CLASS__, 'helpdesk_page' )
+			);
+		}
 	}
 
 	/**

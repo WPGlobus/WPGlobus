@@ -36,7 +36,7 @@ class WPGlobus_Options {
 	public function __construct() {
 
 		// @todo 'wpglobus-options' make as WPGlobus::OPTIONS_PAGE_SLUG
-		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
+//		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
 	
 		$this->page_slug = 'wpglobus-options';
 
