@@ -785,7 +785,21 @@ class WPGlobus_Options {
 				'sections'	=> $this->sections
 			)
 		);
-		
+
+		/**
+		 * Enable jQuery-UI touch support.
+		 *
+		 * @link  http://touchpunch.furf.com/
+		 * @link  https://github.com/furf/jquery-ui-touch-punch/
+		 * @since 1.9.10
+		 */
+		wp_enqueue_script(
+			'wpglobus-options-touch',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			array( 'wpglobus-options' ),
+			WPGLOBUS_VERSION,
+			true
+		);
 	}
 	
 	/**
