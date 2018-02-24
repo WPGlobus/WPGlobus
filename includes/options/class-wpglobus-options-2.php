@@ -574,14 +574,18 @@ class WPGlobus_Options {
 		) );
 
 		$desc_more_languages =
-			esc_html__( 'Choose a language you would like to enable. <br>Press the [Save Changes] button to confirm.',
-				'wpglobus' ) . '<br /><br />';
-
-		$desc_more_languages .= sprintf(
+			esc_html__( 'Choose a language you would like to enable.', 'wpglobus' )
+			. '<br />'
+			/// translators: %s - placeholder for the "Save Changes" button text.
+			. sprintf( esc_html__( 'Press the %s button to confirm.', 'wpglobus' ),
+				/// DO NOT TRANSLATE
+				'<code>[' . esc_html__( 'Save Changes' ) . ']</code>' )
+			. '<br /><br />'
+			. sprintf(
 			/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-			esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
-			'<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
-		);
+				esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
+				'<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
+			);
 		
 		if ( empty($wpglobus_option['enabled_languages']) ) {
 			$_value_for_enabled_languages = $defaults_for_enabled_languages;
