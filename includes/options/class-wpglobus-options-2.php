@@ -163,13 +163,29 @@ class WPGlobus_Options {
 				<div class="wpglobus-options-wrap">
 					<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 						<ul class="wpglobus-options-menu">
-							<?php foreach($this->sections as $section_tab=>$section) {	
+							<?php foreach($this->sections as $section_tab=>$section) {
 								if ( $section['wpglobus_id'] == 'languages' ) {
 									//error_log(print_r($section, true)); // !!!!!!
 								}
+
+								if ( empty( $section['tab_href'] ) ) {
+									// No real link, just switch tab.
+									$tab_href = '#';
+									$li_class = 'wpglobus-tab-link';
+								} else {
+									// Real link specified. Use it and do not set the tab switching CSS class.
+									$tab_href = $section['tab_href'];
+									$li_class = '';
+								}
 								?>
-								<li id="wpglobus-tab-link-<?php echo $section_tab; ?>" class="wpglobus-tab-link" data-tab="<?php echo $section_tab; ?>">
-									<a href="javascript:void(0);" data-tab="<?php echo $section_tab; ?>"><i class="<?php echo $section['icon']; ?>"></i>&nbsp;<span class="group_title"><?php echo $section['title']; ?></span></a>
+								<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
+										class="<?php echo esc_attr( $li_class ); ?>"
+										data-tab="<?php echo esc_attr( $section_tab ); ?>">
+									<a href="<?php echo esc_url( $tab_href ); ?>"
+											data-tab="<?php echo esc_attr( $section_tab ); ?>">
+										<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
+										<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
+									</a>
 								</li>
 							<?php }	?>
 						</ul>
@@ -188,14 +204,18 @@ class WPGlobus_Options {
 								?>
 								<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab">
 									<h2><?php echo $section['title']; ?></h2>
-									<?php 
-									foreach($section['fields'] as $field) {
-										$field_type = $field['type'];
-										$file = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
-										if ( $file && file_exists($file) ) :
-											require($file);
-										endif; ?>
-									<?php } /** end foreach **/ ?>
+									<?php
+									if ( ! empty( $section['fields'] ) ) {
+										foreach ( $section['fields'] as $field ) {
+											$field_type = $field['type'];
+											$file       = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
+											if ( $file && file_exists( $file ) ) :
+												require( $file );
+											endif; ?>
+										<?php }
+										/** end foreach **/
+									}
+									?>
 								</div><!-- .wpglobus-options-tab -->
 							<?php }	?>
 								<?php
@@ -393,7 +413,9 @@ class WPGlobus_Options {
 		$this->sections[] = $this->welcomeSection();
 		$this->sections[] = $this->languagesSection();
 		$this->sections[] = $this->languageTableSection();
-	
+		$this->sections[] = $this->helpdeskSection();
+		$this->sections[] = $this->addonsSection();
+
 	}
 	
 	/**
@@ -489,7 +511,29 @@ class WPGlobus_Options {
 		);			
 			
 	}
-	
+
+	public function helpdeskSection() {
+
+		return array(
+			'wpglobus_id' => 'helpdesk',
+			'title'       => esc_html__( 'Help Desk', 'wpglobus' ),
+			'tab_href'    => admin_url( 'admin.php?page=' ) . WPGlobus::PAGE_WPGLOBUS_HELPDESK,
+			'icon'        => WPGlobus_Admin_HelpDesk::ICON_CLASS,
+		);
+
+	}
+
+	public function addonsSection() {
+
+		return array(
+			'wpglobus_id' => 'addons',
+			'title'       => esc_html__( 'Add-ons', 'wpglobus' ),
+			'tab_href'    => WPGlobus_Admin_Page::url_addons_2(),
+			'icon'        => 'dashicons dashicons-before dashicons-admin-plugins',
+		);
+
+	}
+
 	/**
 	 * SECTION: Languages.
 	 */
