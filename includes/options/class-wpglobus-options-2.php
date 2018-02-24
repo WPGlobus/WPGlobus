@@ -327,7 +327,8 @@ class WPGlobus_Options {
 			)
 		);
 
-		$this->args['intro_text'] = include 'wpglobus-options-header.php';
+		$this->args['intro_text'] = '<h1>' . esc_html__( 'WPGlobus', 'wpglobus' )
+									. ' ' . esc_html( WPGLOBUS_VERSION ) . '</h1>';
 
 		// Add content after the form.
 		//		$this->args['footer_text'] =
