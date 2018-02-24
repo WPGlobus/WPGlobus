@@ -1711,6 +1711,7 @@ class WPGlobus {
 					array(
 						'wpglobus_version' => WPGLOBUS_VERSION,
 						'pro'              => $this->vendors_scripts['ACFPRO'] ? true : false,
+						'fields'   		   => array(),
 						'disabledFields'   => $disabled_fields
 					)
 				);
