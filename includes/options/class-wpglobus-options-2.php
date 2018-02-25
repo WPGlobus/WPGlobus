@@ -415,7 +415,14 @@ class WPGlobus_Options {
 		$this->sections[] = $this->languageTableSection();
 		$this->sections[] = $this->helpdeskSection();
 		$this->sections[] = $this->addonsSection();
-
+		
+		/**
+		 * Filter the array of sections.
+		 *
+		 * @param array $sections Array of sections.
+		 */
+		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
+		
 	}
 	
 	/**
