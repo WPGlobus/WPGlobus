@@ -49,7 +49,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 				$this->field['mode'] = "text";
 			}
 
-			$class   = ( isset( $this->field['class'] ) ) ? $this->field['class'] : '';
+			$field_class   = ( isset( $this->field['class'] ) ) ? $this->field['class'] : '';
 			$options = $this->field['options'];
 
 			// This is to weed out missing options that might be in the default
@@ -105,10 +105,13 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 			
 			echo $this->render_wrapper('before');
 			
-			echo '<ul id="' . esc_attr( $this->field['id'] ) . '-list" class="wpglobus-sortable ' . esc_attr( $class . ' ' . $label_class ) . '">';
+			echo '<ul id="' . esc_attr( $this->field['id'] ) . '-list" class="wpglobus-sortable ' . esc_attr( $field_class . ' ' . $label_class ) . '">';
 
 
 			foreach ( $this->value as $k => $nicename ) {
+				
+				$class = $field_class;
+				
 				echo '<li class="ui-state-default">';
 
 				$checked = "";
