@@ -61,6 +61,17 @@ jQuery(document).ready(function ($) {
 			$('#wpglobus-tab-link-'+api.currentTabID).addClass('wpglobus-tab-link-active');
 		},
 		addListeners: function() {
+			$(document).on('click', 'input.wpglobus-enabled_languages', function(event){
+				var checked = $(this).prop('checked');
+				var id = $(this).attr('rel');
+				
+				if ( checked ) {
+					$('#'+id).val('1');
+				} else {
+					$('#'+id).val('');
+				}
+				
+			});
 			$(document).on('click', '.wpglobus-tab-link', function(event){
 				var tab = $(this).data('tab');
 				$('.wpglobus-options-tab').css({'display':'none'});

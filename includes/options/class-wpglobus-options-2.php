@@ -676,7 +676,7 @@ class WPGlobus_Options {
 					'name'        => 'wpglobus_option[enabled_languages]',
 					'name_suffix' => '',
 					'value'       => $_value_for_enabled_languages,
-					'class'		  => ''					
+					'class'		  => 'wpglobus-enabled_languages'					
 				),
 				array(
 					'id'          => 'more_languages',
