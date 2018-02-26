@@ -19,15 +19,15 @@ class WPGlobus_Options {
 	public $args = array();
 	public $sections = array();
 	public $theme;
-	
+
 	private $config;
-	
+
 	private $page_slug;
-	
+
 	private $tab;
 
 	private $menus = array();
-	
+
 	private $current_page;
 
 	/**
@@ -37,7 +37,7 @@ class WPGlobus_Options {
 
 		// @todo 'wpglobus-options' make as WPGlobus::OPTIONS_PAGE_SLUG
 //		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
-	
+
 		$this->page_slug = 'wpglobus-options';
 
 		// TODO find a better place for this!
@@ -51,17 +51,17 @@ class WPGlobus_Options {
 			update_option( $option_name, $posted_data );
 		}
 
-		$this->current_page = WPGlobus_Utils::safe_get('page');
-		
-		$_tab = WPGlobus_Utils::safe_get('tab');
-		if ( empty($_tab) ) {
+		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
+
+		$_tab = WPGlobus_Utils::safe_get( 'tab' );
+		if ( empty( $_tab ) ) {
 			$_tab = 0;
 		}
 		$this->tab = (int) $_tab;
-		
+
 		// error_log(print_r('HERE $this->tab : '.$this->tab, true));
 
-	
+
 		$nav_menus = WPGlobus::_get_nav_menus();
 
 		foreach ( $nav_menus as $menu ) {
@@ -75,19 +75,19 @@ class WPGlobus_Options {
 
 		add_action( 'admin_menu', array(
 			$this,
-			'on__admin_menu'
+			'on__admin_menu',
 		), 10 );
-	
+
 		add_action( 'admin_print_scripts', array(
 			$this,
-			'on__admin_scripts'
-		) );	
-	
+			'on__admin_scripts',
+		) );
+
 		add_action( 'admin_print_styles', array(
 			$this,
-			'on__admin_styles'
+			'on__admin_styles',
 		) );
-		
+
 	}
 
 	public function initSettings() {
@@ -112,15 +112,15 @@ class WPGlobus_Options {
 				'wpglobus_checkbox',
 				'wpglobus_ace_editor',
 				'table',
-				'post_types'
+				'post_types',
 			) as $field_type
 		) {
 			add_filter( "wpglobus/options/field/{$field_type}", array(
 					$this,
-					'filter__add_custom_fields'
+					'filter__add_custom_fields',
 				)
 				, 0, 2 );
-		} 
+		}
 		// */
 
 		// Set the default arguments.
@@ -145,94 +145,95 @@ class WPGlobus_Options {
 	 * @return void
 	 */
 	public function on__admin_menu() {
-		add_menu_page( 
+		add_menu_page(
 			$this->args['page_title'],
 			$this->args['menu_title'],
 			'administrator',
 			$this->page_slug,
-			array($this, 'pageOptions'),
+			array( $this, 'pageOptions' ),
 			'dashicons-admin-site'
 		);
 	}
-	
+
 	public function pageOptions() {
 		?>
 		<div class="wrap">
 			<div class="wpglobus-options-container">
-				<div id="wpglobus-options-intro-text"><?php echo $this->args['intro_text']; ?></div>
-				<div class="wpglobus-options-wrap">
-					<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
-						<ul class="wpglobus-options-menu">
-							<?php foreach($this->sections as $section_tab=>$section) {
-								if ( $section['wpglobus_id'] == 'languages' ) {
+				<form action="" method="post">
+					<div id="wpglobus-options-intro-text"><?php echo $this->args['intro_text']; ?></div>
+					<div class="wpglobus-options-wrap">
+						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
+							<ul class="wpglobus-options-menu">
+								<?php foreach ( $this->sections as $section_tab => $section ) {
+//									if ( $section['wpglobus_id'] == 'languages' ) {
 									//error_log(print_r($section, true)); // !!!!!!
-								}
+//									}
 
-								if ( empty( $section['tab_href'] ) ) {
-									// No real link, just switch tab.
-									$tab_href = '#';
-									$li_class = 'wpglobus-tab-link';
-								} else {
-									// Real link specified. Use it and do not set the tab switching CSS class.
-									$tab_href = $section['tab_href'];
-									$li_class = '';
-								}
-								?>
-								<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
-										class="<?php echo esc_attr( $li_class ); ?>"
-										data-tab="<?php echo esc_attr( $section_tab ); ?>">
-									<a href="<?php echo esc_url( $tab_href ); ?>"
-											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
-										<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
-									</a>
-								</li>
-							<?php }	?>
-						</ul>
-					</div><!-- sidebar -->
-					<div class="wpglobus-options-main wpglobus-options-wrap__item">
-						<div class="wpglobus-options-info">
-							<?php
-							if ( ! empty( $_POST ) ) {
-								echo '<xmp>';
-								print_r( $_POST );
-								echo '</xmp>';
-							}
-							?>
-							<form action="" method="post">
-							<?php foreach($this->sections as $section_tab=>$section) {
-								?>
-								<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab">
-									<h2><?php echo $section['title']; ?></h2>
-									<?php
-									if ( ! empty( $section['fields'] ) ) {
-										foreach ( $section['fields'] as $field ) {
-											$field_type = $field['type'];
-											$file       = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
-											if ( $file && file_exists( $file ) ) :
-												require( $file );
-											endif; ?>
-										<?php }
-										/** end foreach **/
+									if ( empty( $section['tab_href'] ) ) {
+										// No real link, just switch tab.
+										$tab_href = '#';
+										$li_class = 'wpglobus-tab-link';
+									} else {
+										// Real link specified. Use it and do not set the tab switching CSS class.
+										$tab_href = $section['tab_href'];
+										$li_class = '';
 									}
 									?>
-								</div><!-- .wpglobus-options-tab -->
-							<?php }	?>
+									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
+											class="<?php echo esc_attr( $li_class ); ?>"
+											data-tab="<?php echo esc_attr( $section_tab ); ?>">
+										<a href="<?php echo esc_url( $tab_href ); ?>"
+												data-tab="<?php echo esc_attr( $section_tab ); ?>">
+											<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
+											<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
+										</a>
+									</li>
+								<?php } ?>
+							</ul>
+						</div><!-- sidebar -->
+						<div class="wpglobus-options-main wpglobus-options-wrap__item">
+							<div class="wpglobus-options-info">
+								<?php
+								// TODO remove debug.
+								if ( ! empty( $_POST ) ) {
+									echo '<xmp>';
+									print_r( $_POST );
+									echo '</xmp>';
+								}
+								?>
+								<?php foreach ( $this->sections as $section_tab => $section ) {
+									?>
+									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab">
+										<h2><?php echo $section['title']; ?></h2>
+										<?php
+										if ( ! empty( $section['fields'] ) ) {
+											foreach ( $section['fields'] as $field ) {
+												$field_type = $field['type'];
+												$file       = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
+												if ( $file && file_exists( $file ) ) :
+													require $file;
+												endif; ?>
+											<?php }
+											/** end foreach **/
+										}
+										?>
+									</div><!-- .wpglobus-options-tab -->
+								<?php } ?>
 								<?php
 								wp_nonce_field( self::NONCE_ACTION );
-								submit_button();
 								?>
-							</form>
-						</div><!-- .wpglobus-options-info -->
-					</div><!-- wpglobus-options-main block -->
-				</div>
+							</div><!-- .wpglobus-options-info -->
+						</div><!-- wpglobus-options-main block -->
+						<?php submit_button(); ?>
+					</div>
+				</form>
 			</div>
 			<div class="clear"></div>
 		</div><!-- .wrap -->
 		<?php
-		
+
 	}
-	
+
 	/**
 	 * All the possible arguments for Redux.
 	 * For full documentation on arguments, please refer to:
@@ -252,7 +253,8 @@ class WPGlobus_Options {
 			//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
 			'allow_sub_menu'  => true,
 			// Show the sections below the admin menu item or not
-			'menu_title'      => 'WPGlobus 2', // @todo remove 2 after deleting old options.
+			'menu_title'      => 'WPGlobus 2',
+			// @todo remove 2 after deleting old options.
 			'page_title'      => 'WPGlobus',
 			// You will need to generate a Google API key to use this feature.
 			// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
@@ -344,7 +346,7 @@ class WPGlobus_Options {
 						'event'    => 'click mouseleave',
 					),
 				),
-			)
+			),
 		);
 
 		$this->args['intro_text'] = '<h1>' . esc_html__( 'WPGlobus', 'wpglobus' )
@@ -361,17 +363,17 @@ class WPGlobus_Options {
 		$this->args['share_icons'][] = array(
 			'url'   => WPGlobus_Utils::url_wpglobus_site() . 'quick-start/' . $ga_campaign,
 			'title' => esc_html__( 'Read the Quick Start Guide', 'wpglobus' ),
-			'icon'  => 'el el-question-sign'
+			'icon'  => 'el el-question-sign',
 		);
 		$this->args['share_icons'][] = array(
 			'url'   => WPGlobus_Utils::url_wpglobus_site() . $ga_campaign,
 			'title' => esc_html__( 'Visit our website', 'wpglobus' ),
-			'icon'  => 'el el-globe'
+			'icon'  => 'el el-globe',
 		);
 		$this->args['share_icons'][] = array(
 			'url'   => WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/' . $ga_campaign,
 			'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
-			'icon'  => 'el el-icon-shopping-cart'
+			'icon'  => 'el el-icon-shopping-cart',
 		);
 		$this->args['share_icons'][] = array(
 			'url'   => 'https://github.com/WPGlobus',
@@ -382,26 +384,26 @@ class WPGlobus_Options {
 		$this->args['share_icons'][] = array(
 			'url'   => 'https://www.facebook.com/WPGlobus',
 			'title' => esc_html__( 'Like us on Facebook', 'wpglobus' ),
-			'icon'  => 'el el-facebook'
+			'icon'  => 'el el-facebook',
 		);
 		$this->args['share_icons'][] = array(
 			'url'   => 'https://twitter.com/WPGlobus',
 			'title' => esc_html__( 'Follow us on Twitter', 'wpglobus' ),
-			'icon'  => 'el el-twitter'
+			'icon'  => 'el el-twitter',
 		);
 		$this->args['share_icons'][] = array(
 			'url'   => 'https://www.linkedin.com/company/wpglobus',
 			'title' => esc_html__( 'Find us on LinkedIn', 'wpglobus' ),
-			'icon'  => 'el el-linkedin'
+			'icon'  => 'el el-linkedin',
 		);
 		$this->args['share_icons'][] = array(
 			'url'   => 'https://plus.google.com/+Wpglobus',
 			'title' => esc_html__( 'Circle us on Google+', 'wpglobus' ),
-			'icon'  => 'el el-googleplus'
+			'icon'  => 'el el-googleplus',
 		);
 
 	}
-	
+
 	/**
 	 * Set sections.
 	 */
@@ -409,27 +411,35 @@ class WPGlobus_Options {
 
 		/** @var array $wpglobus_option */
 		//$wpglobus_option = get_option( $this->config->option );
-		
+
 		$this->sections[] = $this->welcomeSection();
 		$this->sections[] = $this->languagesSection();
 		$this->sections[] = $this->languageTableSection();
-		$this->sections[] = $this->helpdeskSection();
-		$this->sections[] = $this->addonsSection();
-		
+
+		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the entire options panel is.
+
+		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
+			$this->sections[] = $this->helpdeskSection();
+		}
+
+		if ( class_exists( 'WPGlobus_Admin_Page', false ) ) {
+			$this->sections[] = $this->addonsSection();
+		}
+
 		/**
 		 * Filter the array of sections.
 		 *
 		 * @param array $sections Array of sections.
 		 */
 		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
-		
+
 	}
-	
+
 	/**
 	 * SECTION: Welcome.
-	 */	
+	 */
 	public function welcomeSection() {
-		
+
 		$fields_home = array();
 
 		/**
@@ -448,7 +458,7 @@ class WPGlobus_Options {
 							'<br/>' .
 							'&bull; ' . sprintf( esc_html__( 'Click the %1$s[Languages]%2$s tab at the left to setup the options.', 'wpglobus' ), '<strong>', '</strong>' ) .
 							'<br/>' .
-							'&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus'), '<strong>', '</strong>' ) .
+							'&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ), '<strong>', '</strong>' ) .
 							'<br/>' .
 							'<br/>' .
 							esc_html__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
@@ -462,9 +472,9 @@ class WPGlobus_Options {
 							'',
 				'style'  => 'info',
 				'notice' => false,
-				'class'	 => ''
+				'class'  => '',
 			);
-			
+
 		/**
 		 * For Google Analytics.
 		 */
@@ -479,7 +489,7 @@ class WPGlobus_Options {
 				'type'   => 'wpglobus_info',
 				'title'  => esc_html__( 'Deactivating / Uninstalling', 'wpglobus' ),
 				'desc'   => '' .
-							'<p><em>' .
+							'<em>' .
 							sprintf(
 								esc_html(
 								/// translators: %?$s: HTML codes for hyperlink. Do not remove.
@@ -487,12 +497,12 @@ class WPGlobus_Options {
 								'<a href="' . $url_wpglobus_site_submit_ticket . '" target="_blank">',
 								'</a>'
 							) .
-							'</em></p>' .
+							'</em>' .
 							'<hr/>' .
-							'<p><i class="el el-exclamation-sign" style="color:red"></i> <strong>' .
+							'<i class="dashicons dashicons-flag" style="color:red"></i> <strong>' .
 							esc_html( __( 'Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language.', 'wpglobus' ) ) .
-							'</strong></p>' .
-							'<p>' .
+							'</strong>' .
+							'<hr>' .
 							sprintf(
 							/// translators: %s: link to the Clean-up Tool
 								esc_html__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
@@ -502,21 +512,20 @@ class WPGlobus_Options {
 									'<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
 									'</a>'
 								) ) .
-							'</p>' .
 							'',
 				'style'  => 'normal',
 				'notice' => false,
-				'class'	 => 'normal'
+				'class'  => 'normal',
 			);
-			
+
 		return array(
 			'wpglobus_id' => 'welcome',
 			'title'       => esc_html__( 'Welcome!', 'wpglobus' ),
-            #'icon'        => 'el-icon-globe',
+			#'icon'        => 'el-icon-globe',
 			'icon'        => 'dashicons dashicons-admin-site',
-			'fields'      => $fields_home
-		);			
-			
+			'fields'      => $fields_home,
+		);
+
 	}
 
 	public function helpdeskSection() {
@@ -547,7 +556,7 @@ class WPGlobus_Options {
 	public function languagesSection() {
 
 		$wpglobus_option = get_option( $this->config->option );
-	
+
 		/** @var array $enabled_languages contains all enabled languages */
 		$enabled_languages = array();
 
@@ -614,14 +623,14 @@ class WPGlobus_Options {
 		}
 
 		$desc_languages_intro = implode( '', array(
-			'<ul style="list-style: disc; list-style-position: inside;">',
+			'<ul style="list-style: disc inside;">',
 			'<li>' . sprintf(
 			/// translators: %3$s placeholder for the icon (actual picture)
 				esc_html__( 'Place the %1$smain language%2$s of your site at the top of the list by dragging the %3$s icons.', 'wpglobus' ), '<strong>', '</strong>', '<i class="dashicons dashicons-move"></i>' ) . '</li>',
 			'<li>' . sprintf( esc_html__( '%1$sUncheck%2$s the languages you do not plan to use.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
 			'<li>' . sprintf( esc_html__( '%1$sAdd%2$s more languages using the section below.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
 			'<li>' . esc_html__( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
-			'</ul>'
+			'</ul>',
 		) );
 
 		$desc_more_languages =
@@ -637,13 +646,13 @@ class WPGlobus_Options {
 				esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
 				'<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
 			);
-		
-		if ( empty($wpglobus_option['enabled_languages']) ) {
+
+		if ( empty( $wpglobus_option['enabled_languages'] ) ) {
 			$_value_for_enabled_languages = $defaults_for_enabled_languages;
 		} else {
 			$_value_for_enabled_languages = $wpglobus_option['enabled_languages'];
 		}
-		
+
 		$section = array(
 			'wpglobus_id' => 'languages',
 			'title'       => esc_html__( 'Languages', 'wpglobus' ),
@@ -651,25 +660,25 @@ class WPGlobus_Options {
 			'icon'        => 'dashicons dashicons-admin-tools',
 			'fields'      => array(
 				array(
-					'id'       => 'languages_intro',
-					'type'     => 'wpglobus_info',
-					'title'    => esc_html__( 'Instructions:', 'wpglobus' ),
-					'html'	   => $desc_languages_intro,
-					'style'    => 'info',
-					'notice'   => false
+					'id'     => 'languages_intro',
+					'type'   => 'wpglobus_info',
+					'title'  => esc_html__( 'Instructions:', 'wpglobus' ),
+					'html'   => $desc_languages_intro,
+					'style'  => 'info',
+					'notice' => false,
 				),
 				array(
-					'id'       => 'enabled_languages',
-					'type'     => 'wpglobus_sortable',
-					'title'    => esc_html__( 'Enabled Languages', 'wpglobus' ),
-					'subtitle' => esc_html__( 'These languages are currently enabled on your site.', 'wpglobus' ),
-					'compiler' => 'false',
-					'options'  => $enabled_languages,
-					'default'  => $defaults_for_enabled_languages,
-					'mode'     => 'checkbox',
-					'name'	   => 'wpglobus_option[enabled_languages]',
-					'name_suffix' 	=> '',
-					'value'			=> $_value_for_enabled_languages
+					'id'          => 'enabled_languages',
+					'type'        => 'wpglobus_sortable',
+					'title'       => esc_html__( 'Enabled Languages', 'wpglobus' ),
+					'subtitle'    => esc_html__( 'These languages are currently enabled on your site.', 'wpglobus' ),
+					'compiler'    => 'false',
+					'options'     => $enabled_languages,
+					'default'     => $defaults_for_enabled_languages,
+					'mode'        => 'checkbox',
+					'name'        => 'wpglobus_option[enabled_languages]',
+					'name_suffix' => '',
+					'value'       => $_value_for_enabled_languages,
 				),
 				array(
 					'id'          => 'more_languages',
@@ -680,31 +689,31 @@ class WPGlobus_Options {
 					'desc'        => $desc_more_languages,
 					'placeholder' => esc_html__( 'Select a language', 'wpglobus' ),
 					'options'     => $more_languages,
-					'name'	   	  => 'wpglobus_option[more_languages]',
-					'name_suffix' 	=> '',
-					'class'			=> ''
+					'name'        => 'wpglobus_option[more_languages]',
+					'name_suffix' => '',
+					'class'       => '',
 				),
 				array(
-					'id'       => 'show_flag_name',
-					'type'     => 'wpglobus_select',
-					'title'    => esc_html__( 'Language Selector Mode', 'wpglobus' ),
-					'compiler' => 'false',
-					'mode'     => false,
-					'desc'     => esc_html__( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' ),
-					'select2'  => array(
+					'id'          => 'show_flag_name',
+					'type'        => 'wpglobus_select',
+					'title'       => esc_html__( 'Language Selector Mode', 'wpglobus' ),
+					'compiler'    => 'false',
+					'mode'        => false,
+					'desc'        => esc_html__( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' ),
+					'select2'     => array(
 						'allowClear'              => false,
-						'minimumResultsForSearch' => - 1
+						'minimumResultsForSearch' => - 1,
 					),
-					'options'  => array(
+					'options'     => array(
 						'code'      => esc_html__( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
 						'full_name' => esc_html__( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
 						'name'      => esc_html__( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
-						'empty'     => esc_html__( 'Flags only', 'wpglobus' )
+						'empty'     => esc_html__( 'Flags only', 'wpglobus' ),
 					),
-					'default' 		=> 'code',
-					'name' 			=> 'wpglobus_option[show_flag_name]',
-					'name_suffix' 	=> '',
-					'class' 		=> ''
+					'default'     => 'code',
+					'name'        => 'wpglobus_option[show_flag_name]',
+					'name_suffix' => '',
+					'class'       => '',
 				),
 				array(
 					'id'          => 'use_nav_menu',
@@ -716,13 +725,13 @@ class WPGlobus_Options {
 					'desc'        => esc_html__( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
 					'select2'     => array(
 						'allowClear'              => true,
-						'minimumResultsForSearch' => - 1
+						'minimumResultsForSearch' => - 1,
 					),
 					'options'     => $this->menus,
 					'placeholder' => $navigation_menu_placeholder,
-					'name' 			=> 'wpglobus_option[use_nav_menu]',
-					'name_suffix' 	=> '',
-					'class' 		=> ''					
+					'name'        => 'wpglobus_option[use_nav_menu]',
+					'name_suffix' => '',
+					'class'       => '',
 				),
 				array(
 					'id'       => 'selector_wp_list_pages',
@@ -733,7 +742,7 @@ class WPGlobus_Options {
 					'compiler' => 'false',
 					'default'  => 1,
 					'options'  => array(
-						'show_selector' => esc_html__( 'Enable', 'wpglobus' )
+						'show_selector' => esc_html__( 'Enable', 'wpglobus' ),
 					),
 				),
 				array(
@@ -746,7 +755,7 @@ class WPGlobus_Options {
 					'desc'     => esc_html__( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `style-samples.css` file.', 'wpglobus' ),
 					'subtitle' => esc_html__( '(Optional)', 'wpglobus' ),
 					'default'  => '',
-					'rows'     => 15
+					'rows'     => 15,
 				),
 				array(
 					'id'       => 'js_editor',
@@ -758,18 +767,18 @@ class WPGlobus_Options {
 					//'desc'     => esc_html__( '', 'wpglobus' ),
 					'subtitle' => esc_html__( '(Paste your JS code here.)', 'wpglobus' ),
 					'default'  => '',
-					'rows'     => 15
-				)
-			)
+					'rows'     => 15,
+				),
+			),
 		);
-		
+
 		return $section;
-	
-	}	
-	
+
+	}
+
 	/**
-	 *	SECTION: Language table.
-	 */	
+	 *    SECTION: Language table.
+	 */
 	public function languageTableSection() {
 		$section = array(
 			'wpglobus_id' => 'language_table',
@@ -783,14 +792,15 @@ class WPGlobus_Options {
 					'title'    => esc_html__( 'Use this table to add, edit or delete languages.', 'wpglobus' ),
 					'subtitle' => esc_html__( 'NOTE: you cannot remove the main language.', 'wpglobus' ),
 					'style'    => 'info',
-					'notice'   => false
+					'notice'   => false,
 				),
 				array(
 					'id'   => 'lang_new',
-					'type' => 'table'
-				)
-			)
+					'type' => 'table',
+				),
+			),
 		);
+
 		return $section;
 	}
 
@@ -799,33 +809,33 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.2.2
 	 *
-	 * @param string $file Path of the field class where Redux is looking for it
-	 * @param array $field Field parameters
+	 * @param string $file  Path of the field class where Redux is looking for it
+	 * @param array  $field Field parameters
 	 *
 	 * @return string Path of the field class where we want Redux to find it
 	 */
-	public function filter__add_custom_fields( $file, $field ) {
+	public function filter__add_custom_fields( /** @noinspection PhpUnusedParameterInspection */ $file, $field ) {
 
 		$file = WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields2/{$field['type']}/field_{$field['type']}.php";
 
 		if ( ! file_exists( $file ) ) {
-			return false;	
+			return false;
 		}
 
 		return $file;
-	}	
-	
+	}
+
 	/**
 	 * Enqueue admin scripts.
 	 *
 	 * @return void
-	 */	
+	 */
 	public function on__admin_scripts() {
 
 		if ( $this->current_page != $this->page_slug ) {
 			return;
 		}
-	
+
 		wp_register_script(
 			'wpglobus-options',
 			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -839,9 +849,9 @@ class WPGlobus_Options {
 			'wpglobus-options',
 			'WPGlobusOptions',
 			array(
-				'version' 	=> WPGLOBUS_VERSION,
-				'tab'	  	=> $this->tab,
-				'sections'	=> $this->sections
+				'version'  => WPGLOBUS_VERSION,
+				'tab'      => $this->tab,
+				'sections' => $this->sections,
 			)
 		);
 
@@ -860,27 +870,27 @@ class WPGlobus_Options {
 			true
 		);
 	}
-	
+
 	/**
 	 * Enqueue admin styles.
 	 *
 	 * @return void
-	 */		
+	 */
 	public function on__admin_styles() {
 
 		if ( $this->current_page != $this->page_slug ) {
 			return;
 		}
-	
+
 		wp_register_style(
 			'wpglobus-options',
 			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
-			array('wpglobus-admin'),
+			array( 'wpglobus-admin' ),
 			WPGLOBUS_VERSION,
 			'all'
 		);
-		wp_enqueue_style('wpglobus-options');
-		
+		wp_enqueue_style( 'wpglobus-options' );
+
 	}
 
 } // class
