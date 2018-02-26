@@ -353,7 +353,9 @@ class WPGlobus {
 
 			add_action( 'wp_ajax_' . __CLASS__ . '_process_ajax', array( $this, 'on_process_ajax' ) );
 
-			if ( defined('WP_DEBUG') && WP_DEBUG && defined('WPGLOBUS_OPTIONS_2') && WPGLOBUS_OPTIONS_2 ) {
+			if ( defined('WP_DEBUG') && WP_DEBUG && defined('WPGLOBUS_OPTIONS_2') && WPGLOBUS_OPTIONS_2
+				 // TODO: Options panel should not be launched in AJAX.
+				 && !WPGlobus_WP::is_doing_ajax() ) {
 				require_once 'options/class-wpglobus-options-2.php';
 			} else {
 				require_once 'options/class-wpglobus-options.php';
