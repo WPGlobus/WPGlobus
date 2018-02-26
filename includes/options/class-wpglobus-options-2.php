@@ -47,8 +47,12 @@ class WPGlobus_Options {
 				wp_die( 'Unauthorized user' );
 			}
 			check_admin_referer( self::NONCE_ACTION );
-			$posted_data = wp_unslash( $_POST[ $option_name ] );
-			update_option( $option_name, $posted_data );
+
+			$posted_data = $this->sanitized_posted_data( $option_name );
+			if ( $posted_data ) {
+				update_option( $option_name, $posted_data );
+				wp_safe_redirect(add_query_arg( array( 'page' => $this->page_slug ), admin_url( 'admin.php' ) ));
+			}
 		}
 
 		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
@@ -193,14 +197,6 @@ class WPGlobus_Options {
 						</div><!-- sidebar -->
 						<div class="wpglobus-options-main wpglobus-options-wrap__item">
 							<div class="wpglobus-options-info">
-								<?php
-								// TODO remove debug.
-								if ( ! empty( $_POST ) ) {
-									echo '<xmp>';
-									print_r( $_POST );
-									echo '</xmp>';
-								}
-								?>
 								<?php foreach ( $this->sections as $section_tab => $section ) {
 									?>
 									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab">
@@ -576,30 +572,31 @@ class WPGlobus_Options {
 			$defaults_for_enabled_languages[ $code ] = true;
 		}
 
+		// Moved to sanitized_posted_data()
 		/** Add language from 'more_language' option to array $enabled_languages. */
-		if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
-
-			$lang       = $wpglobus_option['more_languages'];
-			$lang_in_en = '';
-			if ( isset( $this->config->en_language_name[ $lang ] ) && ! empty( $this->config->en_language_name[ $lang ] ) ) {
-				$lang_in_en = ' (' . $this->config->en_language_name[ $lang ] . ')';
-			}
-
-			if ( ! empty( $this->config->language_name[ $lang ] ) ) {
-				$enabled_languages[ $lang ] = $this->config->language_name[ $lang ] . $lang_in_en;
-			}
-
-			if (
-				! empty( $wpglobus_option['more_languages'] )
-				&& isset( $this->config->language_name[ $wpglobus_option['more_languages'] ] )
-			) {
-				$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
-					$this->config->language_name[ $wpglobus_option['more_languages'] ];
-			}
-
-			update_option( $this->config->option, $wpglobus_option );
-
-		}
+//		if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
+//
+//			$lang       = $wpglobus_option['more_languages'];
+//			$lang_in_en = '';
+//			if ( isset( $this->config->en_language_name[ $lang ] ) && ! empty( $this->config->en_language_name[ $lang ] ) ) {
+//				$lang_in_en = ' (' . $this->config->en_language_name[ $lang ] . ')';
+//			}
+//
+//			if ( ! empty( $this->config->language_name[ $lang ] ) ) {
+//				$enabled_languages[ $lang ] = $this->config->language_name[ $lang ] . $lang_in_en;
+//			}
+//
+//			if (
+//				! empty( $wpglobus_option['more_languages'] )
+//				&& isset( $this->config->language_name[ $wpglobus_option['more_languages'] ] )
+//			) {
+//				$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
+//					$this->config->language_name[ $wpglobus_option['more_languages'] ];
+//			}
+//
+//			update_option( $this->config->option, $wpglobus_option );
+//
+//		}
 
 		/** Generate array $more_languages */
 		foreach ( $this->config->flag as $code => $file ) {
@@ -814,7 +811,10 @@ class WPGlobus_Options {
 	 *
 	 * @return string Path of the field class where we want Redux to find it
 	 */
-	public function filter__add_custom_fields( /** @noinspection PhpUnusedParameterInspection */ $file, $field ) {
+	public function filter__add_custom_fields(
+		/** @noinspection PhpUnusedParameterInspection */
+		$file, $field
+	) {
 
 		$file = WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields2/{$field['type']}/field_{$field['type']}.php";
 
@@ -891,6 +891,45 @@ class WPGlobus_Options {
 		);
 		wp_enqueue_style( 'wpglobus-options' );
 
+	}
+
+	/**
+	 * Sanitize $_POST before saving it to the options table.
+	 *
+	 * @param string $option_name The POST's key (WPGlobus options name).
+	 *
+	 * @return array The sanitized data.
+	 */
+	protected function sanitized_posted_data( $option_name ) {
+		$data = array();
+
+		if ( ! empty( $_POST[ $option_name ] ) && is_array( $_POST[ $option_name ] ) ) {
+
+			// Standard WP anti-hack.
+			$data = wp_unslash( $_POST[ $option_name ] );
+			if ( ! is_array( $data ) ) {
+				// Something is wrong. This should never happen.
+				error_log( 'WPGlobus: options data sanitization error' );
+				return array();
+			}
+
+			// Do not need the button.
+			unset( $data['submit'] );
+
+			// All enabled languages must be in the form [code] => 1.
+			if ( ! empty( $data['enabled_languages'] ) &&  is_array( $data['enabled_languages'] ) ) {
+				$data['enabled_languages'] = array_fill_keys( array_keys( $data['enabled_languages'] ), 1 );
+			}
+
+			// "More languages" is appended to the "Enabled Languages".
+			if ( ! empty( $data['more_languages'] ) &&  is_string( $data['more_languages'] ) ) {
+				$data['enabled_languages'][$data['more_languages']] = 1;
+				unset( $data['more_languages'] );
+			}
+
+		}
+
+		return $data;
 	}
 
 } // class
