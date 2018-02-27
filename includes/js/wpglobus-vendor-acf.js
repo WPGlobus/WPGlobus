@@ -22,32 +22,44 @@ jQuery(document).ready(function ($) {
         init         : function (args) {
             api.option = $.extend(api.option, args);
             if (api.option.pro) {
-                api.startAcf('.acf-field');
+               api.startAcf('.acf-field');
             } else {
                 api.startAcf('.acf_postbox .field');
             }
 			api.attachListeners();
         },
-        disabledField: function (id) {
+        isDisabledField: function(id) {
             var res = false;
-            if (api.option.pro) {
-                var pId = $('#' + id).parents('.acf-field').attr('id');
-                $.each(WPGlobusAcf.disabledFields, function (i, e) {
-                    if (e == pId) {
-                        res = true;
-                    }
-                });
-            } else {
-                var id = id.replace('acf-field-', '');
-                $.each(WPGlobusAcf.disabledFields, function (i, e) {
-                    if (e == id) {
-                        res = true;
-                    }
-                });
-            }
+
+			/**
+			 * Check for ACF Pro.
+			 */
+			var parentId = $('#' + id).parents('.acf-field').attr('id');
+
+			if ( 'undefined' !== typeof parentId ) {
+				$.each(WPGlobusAcf.disabledFields, function (i, e) {
+					if (e == parentId) {
+						res = true;
+					}
+				});
+			}
+			
+			if ( res ) {
+				return res;
+			}
+			
+			/**
+			 * Check for ACF.
+			 */				
+			$.each(WPGlobusAcf.disabledFields, function (i, e) {
+				if (e == id) {
+					res = true;
+				}
+			});
+
             return res;
         },
-        startAcf     : function (acf_class) {
+        startAcf: function (acf_class) {
             var id;
             var style = 'width:90%;';
             var element, clone, name;
@@ -58,10 +70,14 @@ jQuery(document).ready(function ($) {
             $(acf_class).each(function () {
                 var $t = $(this), id, h;
                 if ($t.hasClass('field_type-textarea') || $t.hasClass('acf-field-textarea')) {
-                    id = $t.find('textarea').attr('id');
-                    if (api.disabledField(id)) {
+                    
+					id = $t.find('textarea').attr('id');
+
+					api.registerField(id);
+                    if (api.isDisabledField(id)) {
                         return true;
                     }
+
                     h = $('#' + id).height() + 20;
                     WPGlobusDialogApp.addElement({
                         id                  : id,
@@ -71,11 +87,16 @@ jQuery(document).ready(function ($) {
                         sbTitle             : 'Click for edit',
                         onChangeClass       : 'wpglobus-on-change-acf-field'
                     });
+					
                 } else if ($t.hasClass('field_type-text') || $t.hasClass('acf-field-text')) {
-                    id = $t.find('input').attr('id');
-                    if (api.disabledField(id)) {
+                    
+					id = $t.find('input').attr('id');
+
+					api.registerField(id);
+                    if (api.isDisabledField(id)) {
                         return true;
                     }
+
                     WPGlobusDialogApp.addElement({
                         id           : id,
                         dialogTitle  : 'Edit ACF field',
@@ -83,9 +104,45 @@ jQuery(document).ready(function ($) {
                         sbTitle      : 'Click for edit',
                         onChangeClass: 'wpglobus-on-change-acf-field'
                     });
+					
                 }
             });
         },
+		registerField: function(id, type) {
+			var register = false;
+			if ( 'undefined' !== typeof id ) {
+				if ( -1 == id.indexOf('acfcloneindex') ) {
+					/**
+					 * Don't register acf clone field.
+					 * e.g. acf-field_5a5734b531031-acfcloneindex-field_5a573503660e9
+					 */
+					if ( ! api.isRegisteredField(id) ) {
+						register = true;
+						WPGlobusAcf.fields.push(id);
+					}
+				}
+			}
+			if ( register ) {
+				return id;
+			}
+			return false;
+		},
+        getFields: function() {
+			return WPGlobusAcf.fields;
+		},
+        getDisabledFields: function() {
+			return WPGlobusAcf.disabledFields;
+		},		
+        isRegisteredField: function(id) {
+			var registered = false;
+			api.getFields().forEach(function(elm) {
+				if (elm == id) {
+					registered = true
+					return false;
+				}
+			});
+			return registered;
+		},
 		attachListeners: function() {
 			if (api.option.pro) {
 				/** 
