@@ -40,20 +40,9 @@ class WPGlobus_Options {
 
 		$this->page_slug = 'wpglobus-options';
 
-		// TODO find a better place for this!
-		$option_name = WPGlobus::Config()->option;
-		if ( isset( $_POST[ $option_name ] ) ) {
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( 'Unauthorized user' );
-			}
-			check_admin_referer( self::NONCE_ACTION );
-
-			$posted_data = $this->sanitized_posted_data( $option_name );
-			if ( $posted_data ) {
-				update_option( $option_name, $posted_data );
-				wp_safe_redirect(add_query_arg( array( 'page' => $this->page_slug ), admin_url( 'admin.php' ) ));
-			}
-		}
+		// Handle the main options form submit.
+		// If data posted, the options will be updated, and page reloaded (so no continue to the next line).
+		$this->handle_submit();
 
 		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
 
@@ -676,7 +665,7 @@ class WPGlobus_Options {
 					'name'        => 'wpglobus_option[enabled_languages]',
 					'name_suffix' => '',
 					'value'       => $_value_for_enabled_languages,
-					'class'		  => 'wpglobus-enabled_languages'					
+					'class'       => 'wpglobus-enabled_languages',
 				),
 				array(
 					'id'          => 'more_languages',
@@ -894,41 +883,59 @@ class WPGlobus_Options {
 
 	}
 
+	protected function handle_submit() {
+		$option_name = WPGlobus::Config()->option;
+		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) {
+			// No data or invalid data submitted.
+			return;
+		}
+
+		// WP anti-hacks.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Unauthorized user' );
+		}
+		check_admin_referer( self::NONCE_ACTION );
+
+		// Sanitize, and if OK then save the options and reload the page.
+		$posted_data = $this->sanitized_posted_data( $_POST[ $option_name ] );
+		if ( $posted_data ) {
+			update_option( $option_name, $posted_data );
+			wp_safe_redirect( add_query_arg( array( 'page' => $this->page_slug ), admin_url( 'admin.php' ) ) );
+		}
+	}
+
 	/**
 	 * Sanitize $_POST before saving it to the options table.
 	 *
-	 * @param string $option_name The POST's key (WPGlobus options name).
+	 * @param array $posted_data The submitted data.
 	 *
 	 * @return array The sanitized data.
 	 */
-	protected function sanitized_posted_data( $option_name ) {
-		$data = array();
+	protected function sanitized_posted_data( $posted_data ) {
 
-		if ( ! empty( $_POST[ $option_name ] ) && is_array( $_POST[ $option_name ] ) ) {
-
-			// Standard WP anti-hack.
-			$data = wp_unslash( $_POST[ $option_name ] );
-			if ( ! is_array( $data ) ) {
-				// Something is wrong. This should never happen.
-				error_log( 'WPGlobus: options data sanitization error' );
-				return array();
-			}
-
-			// Do not need the button.
-			unset( $data['submit'] );
-
-			// All enabled languages must be in the form [code] => 1.
-			if ( ! empty( $data['enabled_languages'] ) &&  is_array( $data['enabled_languages'] ) ) {
-				$data['enabled_languages'] = array_fill_keys( array_keys( $data['enabled_languages'] ), 1 );
-			}
-
-			// "More languages" is appended to the "Enabled Languages".
-			if ( ! empty( $data['more_languages'] ) &&  is_string( $data['more_languages'] ) ) {
-				$data['enabled_languages'][$data['more_languages']] = 1;
-				unset( $data['more_languages'] );
-			}
-
+		// Standard WP anti-hack. Should return a clean array.
+		$data = wp_unslash( $posted_data );
+		if ( ! is_array( $data ) ) {
+			// Something is wrong. This should never happen. Do not save.
+			wp_die( 'WPGlobus: options data sanitization error' );
 		}
+
+		if ( empty( $data['enabled_languages'] ) || ! is_array( $data['enabled_languages'] ) ) {
+			// Corrupted data / hack. This should never happen. Do not save this.
+			wp_die( 'WPGlobus: options data without enabled_languages' );
+		}
+
+		// All enabled languages must be in the form [code] => true.
+		// Remove the unchecked languages (empty values).
+		$data['enabled_languages'] = array_filter( $data['enabled_languages'] );
+		// Fill the rest with true.
+		$data['enabled_languages'] = array_fill_keys( array_keys( $data['enabled_languages'] ), true );
+
+		// "More languages" is appended to the "Enabled Languages".
+		if ( ! empty( $data['more_languages'] ) && is_string( $data['more_languages'] ) ) {
+			$data['enabled_languages'][ $data['more_languages'] ] = true;
+		}
+		unset( $data['more_languages'] );
 
 		return $data;
 	}
