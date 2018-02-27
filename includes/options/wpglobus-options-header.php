@@ -9,7 +9,8 @@
 ob_start();
 ?>
 	<div class="grid__item wpg-bnr-title">
-		<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
+		<!-- <h1>WPGlobus <?php//  echo esc_html( WPGLOBUS_VERSION ); ?></h1> -->
+		<!-- to use h2 or another header here -->
 	</div>
 	<div class="wpg-bnr wpg-bnr-left grid__item">
 		<div class="wpg-img-block wpg-bnr__item">

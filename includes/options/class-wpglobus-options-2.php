@@ -151,6 +151,7 @@ class WPGlobus_Options {
 	public function pageOptions() {
 		?>
 		<div class="wrap">
+			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); /** or anyway to stay this header empty to insert admin notices correctly */ ?></h1>
 			<div class="wpglobus-options-container">
 				<form action="" method="post">
 					<div id="wpglobus-options-intro-text"><?php echo $this->args['intro_text']; ?></div>
@@ -334,8 +335,8 @@ class WPGlobus_Options {
 			),
 		);
 
-		$this->args['intro_text'] = '<h1>' . esc_html__( 'WPGlobus', 'wpglobus' )
-									. ' ' . esc_html( WPGLOBUS_VERSION ) . '</h1>';
+		$this->args['intro_text'] = '<h2>' . esc_html__( 'WPGlobus', 'wpglobus' )
+									. ' ' . esc_html( WPGLOBUS_VERSION ) . '</h2>';
 
 		// Add content after the form.
 		//		$this->args['footer_text'] =
