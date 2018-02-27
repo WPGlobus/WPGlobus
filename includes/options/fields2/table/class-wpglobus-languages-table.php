@@ -156,8 +156,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 			</a>
 
 			<?php $this->prepare_items(); ?>
-			<div class="table-wrap wrap">
-
+			<div class="table-wrap">
 				<form method="post">
 					<?php $this->display(); ?>
 				</form>
