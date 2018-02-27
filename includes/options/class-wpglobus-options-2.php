@@ -411,6 +411,10 @@ class WPGlobus_Options {
 			$this->sections[] = $this->addonsSection();
 		}
 
+		if ( ! defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' ) && class_exists( 'WooCommerce' ) ) {
+			$this->sections[] = $this->section_recommend_wpg_wc();
+		}
+
 		/**
 		 * Filter the array of sections.
 		 *
@@ -533,6 +537,41 @@ class WPGlobus_Options {
 			'icon'        => 'dashicons dashicons-before dashicons-admin-plugins',
 		);
 
+	}
+
+	/**
+	 * @todo Move it to...
+	 * @see  \WPGlobus_Admin_Recommendations::for_woocommerce
+	 * @return array
+	 */
+	protected function section_recommend_wpg_wc() {
+
+		$name                   = esc_html__( 'WPGlobus for WooCommerce', 'wpglobus' );
+		$url                    = WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/';
+		$content_title_template = esc_html__( 'Recommended add-on: %s', 'wpglobus' );
+		$content_title          = sprintf( $content_title_template, $name );
+
+		$content_body = esc_html__( 'To translate WooCommerce product titles and descriptions, categories, tags and attributes, you need to install our premium WooCommerce extension.', 'wpglobus' );
+		$content_body .= '<h3>' . esc_html__( 'Click here to download:', 'wpglobus' ) . '</h3>';
+		$content_body .= '<a href="' . esc_url( $url ) . '">' . esc_html( $url ) . '</a>';
+
+		$tab_content[] =
+			array(
+				'id'     => 'recommend_wpg_wc_content',
+				'type'   => 'wpglobus_info',
+				'title'  => $content_title,
+				'desc'   => $content_body,
+				'style'  => 'info',
+				'notice' => false,
+				'class'  => '',
+			);
+
+		return array(
+			'wpglobus_id' => 'recommend_wpg_wc',
+			'title'       => esc_html__( 'WooCommerce', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-format-status',
+			'fields'      => $tab_content,
+		);
 	}
 
 	/**
