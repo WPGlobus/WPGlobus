@@ -335,8 +335,8 @@ class WPGlobus_Options {
 			),
 		);
 
-		$this->args['intro_text'] = '<h2>' . esc_html__( 'WPGlobus', 'wpglobus' )
-									. ' ' . esc_html( WPGLOBUS_VERSION ) . '</h2>';
+		// TODO use this space.
+		$this->args['intro_text'] = '&nbsp;';
 
 		// Add content after the form.
 		//		$this->args['footer_text'] =
