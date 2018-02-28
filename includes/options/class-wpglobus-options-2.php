@@ -151,7 +151,7 @@ class WPGlobus_Options {
 	public function pageOptions() {
 		?>
 		<div class="wrap">
-			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); /** or anyway to stay this header empty to insert admin notices correctly */ ?></h1>
+			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 			<div class="wpglobus-options-container">
 				<form action="" method="post">
 					<div id="wpglobus-options-intro-text"><?php echo $this->args['intro_text']; ?></div>
@@ -402,11 +402,18 @@ class WPGlobus_Options {
 		$this->sections[] = $this->languagesSection();
 		$this->sections[] = $this->languageTableSection();
 
-		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the entire options panel is.
+		/**
+		 * Filter the array of sections. Here add-ons can add their menus.
+		 *
+		 * @param array $sections Array of sections.
+		 */
+		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
 
-		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
-			$this->sections[] = $this->helpdeskSection();
-		}
+		/**
+		 * The below sections should be at the bottom.
+		 */
+
+		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the entire options panel is.
 
 		if ( class_exists( 'WPGlobus_Admin_Page', false ) ) {
 			$this->sections[] = $this->addonsSection();
@@ -416,12 +423,12 @@ class WPGlobus_Options {
 			$this->sections[] = $this->section_recommend_wpg_wc();
 		}
 
-		/**
-		 * Filter the array of sections.
-		 *
-		 * @param array $sections Array of sections.
-		 */
-		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
+		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
+			$this->sections[] = $this->helpdeskSection();
+		}
+
+
+		$this->sections[] = $this->section_uninstall();
 
 	}
 
@@ -464,6 +471,19 @@ class WPGlobus_Options {
 				'notice' => false,
 				'class'  => '',
 			);
+
+		return array(
+			'wpglobus_id' => 'welcome',
+			'title'       => esc_html__( 'Welcome!', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-admin-site',
+			'fields'      => $fields_home,
+		);
+
+	}
+
+	protected function section_uninstall() {
+
+		$fields_home = array();
 
 		/**
 		 * For Google Analytics.
@@ -509,10 +529,9 @@ class WPGlobus_Options {
 			);
 
 		return array(
-			'wpglobus_id' => 'welcome',
-			'title'       => esc_html__( 'Welcome!', 'wpglobus' ),
-			#'icon'        => 'el-icon-globe',
-			'icon'        => 'dashicons dashicons-admin-site',
+			'wpglobus_id' => 'uninstall',
+			'title'       => esc_html__( 'Uninstall', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-no',
 			'fields'      => $fields_home,
 		);
 
