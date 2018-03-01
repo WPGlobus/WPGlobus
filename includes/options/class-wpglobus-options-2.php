@@ -102,6 +102,7 @@ class WPGlobus_Options {
 				'wpglobus_info',
 				'wpglobus_sortable',
 				'wpglobus_select',
+				'wpglobus_dropdown',
 				'wpglobus_checkbox',
 				'wpglobus_ace_editor',
 				'table',
@@ -740,26 +741,20 @@ class WPGlobus_Options {
 					'class'       => '',
 				),
 				array(
-					'id'          => 'show_flag_name',
-					'type'        => 'wpglobus_select',
-					'title'       => esc_html__( 'Language Selector Mode', 'wpglobus' ),
-					'compiler'    => 'false',
-					'mode'        => false,
-					'desc'        => esc_html__( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' ),
-					'select2'     => array(
-						'allowClear'              => false,
-						'minimumResultsForSearch' => - 1,
+					'id'      => 'show_flag_name',
+					'type'    => 'wpglobus_dropdown',
+					'title'   => __( 'Language Selector Mode', 'wpglobus' ),
+					'desc'    => __( 'Choose the way language name and country flag are shown in the drop-down menu', 'wpglobus' ),
+					'options' => array(
+						'code'      => __( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
+						'full_name' => __( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
+						'name'      => __( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
+						'empty'     => __( 'Flags only', 'wpglobus' ),
 					),
-					'options'     => array(
-						'code'      => esc_html__( 'Two-letter Code with flag (en, ru, it, etc.)', 'wpglobus' ),
-						'full_name' => esc_html__( 'Full Name (English, Russian, Italian, etc.)', 'wpglobus' ),
-						'name'      => esc_html__( 'Full Name with flag (English, Russian, Italian, etc.)', 'wpglobus' ),
-						'empty'     => esc_html__( 'Flags only', 'wpglobus' ),
-					),
-					'default'     => 'code',
-					'name'        => 'wpglobus_option[show_flag_name]',
-					'name_suffix' => '',
-					'class'       => '',
+					'default' => ( empty( $wpglobus_option['show_flag_name'] )
+						? 'code'
+						: $wpglobus_option['show_flag_name'] ),
+					'name'    => 'wpglobus_option[show_flag_name]',
 				),
 				array(
 					'id'          => 'use_nav_menu',
