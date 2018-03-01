@@ -39,6 +39,15 @@ jQuery(document).ready(function ($) {
 			$('.wpglobus-sortable').disableSelection();
 			api.setFirstLanguageCb();
 		},
+		handlerLanguagesTable: function() {
+			var tab = $('#wpglobus-options-languagesTable').parents('.wpglobus-options-tab').data('tab') * 1;
+			
+			$('#wpglobus-options-languagesTable .manage-column.sortable a').each(function(i,e){
+				var href = $(e).attr('href');
+				href = href.replace(/tab=\d{1,}/, 'tab='+tab);
+				$(e).attr('href', href)
+			});
+		},
 		checkHandlers: function() {
 			$('.wpglobus-options-field').each(function(i,e){
 				if ( 'undefined' === typeof $(e).data('js-handler') ) {
@@ -74,6 +83,7 @@ jQuery(document).ready(function ($) {
 			});
 			$(document).on('click', '.wpglobus-tab-link', function(event){
 				var tab = $(this).data('tab');
+				window.history.pushState("data", "Title", WPGlobusOptions.newUrl.replace('{*}', tab));
 				$('.wpglobus-options-tab').css({'display':'none'});
 				$('#section-tab-'+tab).css({'display':'block'});
 				

@@ -12,7 +12,7 @@ if ( ! class_exists( 'WPGlobusOptions_table' ) ) {
 	 * Main WPGlobusOptions_table class.
 	 */
 	class WPGlobusOptions_table {
-
+	
 		/**
 		 * Field Constructor.
 		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
@@ -42,10 +42,10 @@ if ( ! class_exists( 'WPGlobusOptions_table' ) ) {
 		public function render() {
 
 			require_once dirname( __FILE__ ) . '/class-wpglobus-languages-table.php';
-			new WPGlobus_Languages_Table();
+			new WPGlobus_Languages_Table($this->field);
 
 		}
 		
 	}
 }
-new WPGlobusOptions_table();
+new WPGlobusOptions_table($field);

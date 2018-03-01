@@ -48,10 +48,19 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	public $_column_headers = array();
 
 	/**
+	 * Field.
+	 *
+	 * @var array
+	 */	
+	public $field = array();
+
+	/**
 	 *  Constructor.
 	 */
-	public function __construct() {
-
+	public function __construct($field) {
+	
+		$this->field = $field;
+	
 		parent::__construct( array(
 			// singular name of the listed records.
 			'singular' => esc_html__( 'item', 'wpglobus' ),
@@ -149,7 +158,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 
 		$this->prepare_items();
 		?>
-		<div class="wpglobus_flag_table_wrapper">
+		<div id="wpglobus-options-<?php echo $this->field['id']; ?>" class="wpglobus-languages-table-wrapper wpglobus-options-field" data-js-handler="handler<?php echo ucfirst($this->field['id']); ?>">
 			<a id="wpglobus_add_language" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_add() ); ?>" class="button button-primary">
 				<i class="dashicons dashicons-plus-alt" style="line-height: inherit"></i>
 				<?php esc_html_e( 'Add new Language', 'wpglobus' ); ?>
