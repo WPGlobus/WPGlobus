@@ -173,11 +173,17 @@ class WPGlobus_Options {
 										$tab_href = $section['tab_href'];
 										$li_class = '';
 									}
+									
+									$onclick = 'onclick="return false;"';
+									if ( ! empty($section['externalLink']) && $section['externalLink'] ) {
+										$onclick = '';
+									}
+									
 									?>
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
 											class="<?php echo esc_attr( $li_class ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<a href="<?php echo esc_url( $tab_href ); ?>"
+										<a href="<?php echo esc_url( $tab_href ); ?>" <?php echo $onclick; ?> 
 												data-tab="<?php echo esc_attr( $section_tab ); ?>">
 											<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
 											<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
@@ -190,7 +196,7 @@ class WPGlobus_Options {
 							<div class="wpglobus-options-info">
 								<?php foreach ( $this->sections as $section_tab => $section ) {
 									?>
-									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab">
+									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab" data-tab="<?php echo $section_tab; ?>">
 										<h2><?php echo $section['title']; ?></h2>
 										<?php
 										if ( ! empty( $section['fields'] ) ) {
@@ -428,7 +434,6 @@ class WPGlobus_Options {
 			$this->sections[] = $this->helpdeskSection();
 		}
 
-
 		$this->sections[] = $this->section_uninstall();
 
 	}
@@ -545,6 +550,7 @@ class WPGlobus_Options {
 			'title'       => esc_html__( 'Help Desk', 'wpglobus' ),
 			'tab_href'    => admin_url( 'admin.php?page=' ) . WPGlobus::PAGE_WPGLOBUS_HELPDESK,
 			'icon'        => WPGlobus_Admin_HelpDesk::ICON_CLASS,
+			'externalLink' => true
 		);
 
 	}
@@ -556,6 +562,7 @@ class WPGlobus_Options {
 			'title'       => esc_html__( 'Add-ons', 'wpglobus' ),
 			'tab_href'    => WPGlobus_Admin_Page::url_addons_2(),
 			'icon'        => 'dashicons dashicons-before dashicons-admin-plugins',
+			'externalLink' => true
 		);
 
 	}
@@ -836,8 +843,8 @@ class WPGlobus_Options {
 					'notice'   => false,
 				),
 				array(
-					'id'   => 'lang_new',
-					'type' => 'table',
+					'id'   => 'languagesTable',
+					'type' => 'table'
 				),
 			),
 		);
@@ -896,6 +903,7 @@ class WPGlobus_Options {
 				'version'  => WPGLOBUS_VERSION,
 				'tab'      => $this->tab,
 				'sections' => $this->sections,
+				'newUrl'   => 'admin.php?page='.$this->page_slug.'&tab={*}'
 			)
 		);
 
