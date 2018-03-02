@@ -595,7 +595,13 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					   class="nav-tab">
 						<?php esc_html_e( 'Guide', 'wpglobus' ); ?>
 					</a>
-					<a href="admin.php?page=wpglobus_options" class="nav-tab">
+					<?php 
+					$options_page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
+					if ( defined('WPGLOBUS_OPTIONS_2') && WPGLOBUS_OPTIONS_2 ) { 
+						$options_page_slug = 'wpglobus-options';
+					}
+					?>
+					<a href="admin.php?page=<?php echo $options_page_slug; ?>" class="nav-tab">
 						<?php esc_html_e( 'Settings' ); ?>
 					</a>
 					<a href="<?php echo WPGlobus_Admin_Page::url_addons(); // WPCS: XSS ok. ?>" class="nav-tab">
