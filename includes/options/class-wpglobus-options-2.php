@@ -92,10 +92,11 @@ class WPGlobus_Options {
 				'wpglobus_sortable',
 				'wpglobus_select',
 				'wpglobus_dropdown',
-				'wpglobus_checkbox',
-				'wpglobus_ace_editor',
+				'wpglobus_checkbox', //TODO
+				'wpglobus_multicheck',
+				'wpglobus_ace_editor', //TODO
 				'table',
-				'post_types',
+				'post_types',//TODO remove?
 			) as $field_type
 		) {
 			add_filter( "wpglobus/options/field/{$field_type}", array(
@@ -140,8 +141,8 @@ class WPGlobus_Options {
 
 	public function pageOptions() {
 
-		$current_tab = WPGlobus_Utils::safe_get('tab');
-		if ( empty($current_tab) ) {
+		$current_tab = WPGlobus_Utils::safe_get( 'tab' );
+		if ( empty( $current_tab ) ) {
 			$current_tab = '0';
 		}
 		?>
@@ -212,7 +213,8 @@ class WPGlobus_Options {
 								<?php
 								wp_nonce_field( self::NONCE_ACTION );
 								?>
-								<input type="hidden" name="wpglobus_options_current_tab" id="wpglobus_options_current_tab" value="<?php echo $current_tab; ?>" />
+								<input type="hidden" name="wpglobus_options_current_tab"
+										id="wpglobus_options_current_tab" value="<?php echo $current_tab; ?>"/>
 							</div><!-- .wpglobus-options-info -->
 						</div><!-- wpglobus-options-main block -->
 						<?php submit_button(); ?>
@@ -406,6 +408,7 @@ class WPGlobus_Options {
 		$this->sections[] = $this->welcomeSection();
 		$this->sections[] = $this->languagesSection();
 		$this->sections[] = $this->languageTableSection();
+		$this->sections[] = $this->section_post_types();
 
 		/**
 		 * Filter the array of sections. Here add-ons can add their menus.
@@ -821,6 +824,67 @@ class WPGlobus_Options {
 		);
 
 		return $section;
+	}
+
+	protected function section_post_types() {
+
+		$post_types = get_post_types( array( '_builtin' => false ), 'objects' );
+//	wp_die(print_r($post_types, true));
+		/** @var array $options */
+		$options            = get_option( $this->config->option );
+		$options_post_types = empty( $options['post_type'] ) ? array() : $options['post_type'];
+		$enabled_post_types = array();
+
+		/** @var WP_Post_Type $post_type */
+		foreach ( $post_types as $post_type ) {
+			$label = $post_type->label . ' (' . $post_type->name . ')';
+
+			// TODO check logic
+
+			if ( in_array( $post_type->name, WPGlobus::Config()->disabled_entities, true ) ) {
+
+				if ( array_key_exists( $post_type->name, $options_post_types ) ) {
+					/**
+					 * Add to enabled_post_types array for WPGlobus Post types setting page
+					 */
+					$enabled_post_types[ $post_type->name ] = $label;
+				}
+			} else {
+				$enabled_post_types[ $post_type->name ] = $label;
+			}
+		}
+
+		$fields = array();
+
+		$fields[] =
+			array(
+				'id'     => 'wpglobus_post_types_intro',
+				'type'   => 'wpglobus_info',
+				'title'  => '',
+				'desc'   => 'TODO', // TODO
+				'style'  => 'normal',
+				'notice' => false,
+				'class'  => 'normal',
+			);
+
+		$fields[] =
+			array(
+				'id'      => 'wpglobus_post_types_choose',
+				'type'    => 'wpglobus_multicheck',
+				'title'   => __( 'TODO', 'wpglobus' ),
+				'desc'    => __( 'TODO', 'wpglobus' ),
+				'options' => $enabled_post_types,
+				'checked' => array(), // TODO
+				'name'    => 'wpglobus_option[post_type]',
+			);
+
+		return array(
+			'wpglobus_id' => 'wpglobus_post_types',
+			'title'       => __( 'Post Types', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-admin-post',
+			'fields'      => $fields,
+		);
+
 	}
 
 	/**
