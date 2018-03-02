@@ -203,7 +203,8 @@
     grid-template-columns: 30% 70%;
     align-items: center;
     grid-gap: 0;
-	background-color: #d3e4f4;		
+	background-color: #d3e4f4;
+	padding: 20px 0 20px;	
 }
 .wpglobus-options-main .wpglobus-options-field-wpglobus_select .grid__item {
 	padding: initial;
