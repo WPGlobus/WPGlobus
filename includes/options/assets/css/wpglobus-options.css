@@ -126,6 +126,15 @@
     padding-left: 20px;
 }
 
+/** section: Language table   **/
+.wpglobus-options-main #wpglobus_add_language.button-primary {
+	margin: 15px 15px 0;	
+}
+
+.wpglobus-options-main .tablenav .one-page .displaying-num {
+	margin-right: 15px;
+}
+
 /** All field types **/
 .wpglobus-options-main .wpglobus-options-field {
 	border: 1px solid #a9b6c2;
