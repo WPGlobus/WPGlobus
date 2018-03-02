@@ -41,10 +41,13 @@ jQuery(document).ready(function ($) {
 		},
 		handlerLanguagesTable: function() {
 			var tab = $('#wpglobus-options-languagesTable').parents('.wpglobus-options-tab').data('tab') * 1;
-			
 			$('#wpglobus-options-languagesTable .manage-column.sortable a').each(function(i,e){
 				var href = $(e).attr('href');
-				href = href.replace(/tab=\d{1,}/, 'tab='+tab);
+				if ( false === /tab=\d{1,}/.test(href) ) {
+					href += '&tab='+tab;
+				} else {
+					href = href.replace(/tab=\d{1,}/, 'tab='+tab);
+				}
 				$(e).attr('href', href)
 			});
 		},
