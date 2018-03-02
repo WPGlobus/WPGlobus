@@ -930,10 +930,22 @@ class WPGlobus_Options {
 		check_admin_referer( self::NONCE_ACTION );
 
 		// Sanitize, and if OK then save the options and reload the page.
-		$posted_data = $this->sanitized_posted_data( $_POST[ $option_name ] );
+		$posted_data = $this->sanitize_posted_data( $_POST[ $option_name ] );
 		if ( $posted_data ) {
 			update_option( $option_name, $posted_data );
-			wp_safe_redirect( add_query_arg( array( 'page' => $this->page_slug ), admin_url( 'admin.php' ) ) );
+
+
+			// Need to get back to the current tab after reloading.
+			$tab = '0';
+			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
+				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] );
+				$tab = (string) abs( (int) $tab );
+			}
+
+			wp_safe_redirect( add_query_arg( array(
+				'page' => $this->page_slug,
+				'tab'  => $tab,
+			), admin_url( 'admin.php' ) ) );
 		}
 	}
 
@@ -944,7 +956,7 @@ class WPGlobus_Options {
 	 *
 	 * @return array The sanitized data.
 	 */
-	protected function sanitized_posted_data( $posted_data ) {
+	protected function sanitize_posted_data( $posted_data ) {
 
 		// Standard WP anti-hack. Should return a clean array.
 		$data = wp_unslash( $posted_data );
