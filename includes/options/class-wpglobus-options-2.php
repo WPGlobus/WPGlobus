@@ -26,8 +26,6 @@ class WPGlobus_Options {
 
 	private $tab;
 
-	private $menus = array();
-
 	private $current_page;
 
 	/**
@@ -54,15 +52,6 @@ class WPGlobus_Options {
 
 		// error_log(print_r('HERE $this->tab : '.$this->tab, true));
 
-
-		$nav_menus = WPGlobus::_get_nav_menus();
-
-		foreach ( $nav_menus as $menu ) {
-			$this->menus[ $menu->slug ] = $menu->name;
-		}
-		if ( ! empty( $nav_menus ) && count( $nav_menus ) > 1 ) {
-			$this->menus['all'] = 'All';
-		}
 
 		add_action( 'init', array( $this, 'initSettings' ) );
 
@@ -173,17 +162,17 @@ class WPGlobus_Options {
 										$tab_href = $section['tab_href'];
 										$li_class = '';
 									}
-									
+
 									$onclick = 'onclick="return false;"';
-									if ( ! empty($section['externalLink']) && $section['externalLink'] ) {
+									if ( ! empty( $section['externalLink'] ) && $section['externalLink'] ) {
 										$onclick = '';
 									}
-									
+
 									?>
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
 											class="<?php echo esc_attr( $li_class ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<a href="<?php echo esc_url( $tab_href ); ?>" <?php echo $onclick; ?> 
+										<a href="<?php echo esc_url( $tab_href ); ?>" <?php echo $onclick; ?>
 												data-tab="<?php echo esc_attr( $section_tab ); ?>">
 											<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
 											<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
@@ -196,7 +185,8 @@ class WPGlobus_Options {
 							<div class="wpglobus-options-info">
 								<?php foreach ( $this->sections as $section_tab => $section ) {
 									?>
-									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab" data-tab="<?php echo $section_tab; ?>">
+									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab"
+											data-tab="<?php echo $section_tab; ?>">
 										<h2><?php echo $section['title']; ?></h2>
 										<?php
 										if ( ! empty( $section['fields'] ) ) {
@@ -204,6 +194,8 @@ class WPGlobus_Options {
 												$field_type = $field['type'];
 												$file       = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
 												if ( $file && file_exists( $file ) ) :
+													// Intentionally "require" and not "require_once".
+													/** @noinspection PhpIncludeInspection */
 													require $file;
 												endif; ?>
 											<?php }
@@ -546,11 +538,11 @@ class WPGlobus_Options {
 	public function helpdeskSection() {
 
 		return array(
-			'wpglobus_id' => 'helpdesk',
-			'title'       => esc_html__( 'Help Desk', 'wpglobus' ),
-			'tab_href'    => admin_url( 'admin.php?page=' ) . WPGlobus::PAGE_WPGLOBUS_HELPDESK,
-			'icon'        => WPGlobus_Admin_HelpDesk::ICON_CLASS,
-			'externalLink' => true
+			'wpglobus_id'  => 'helpdesk',
+			'title'        => esc_html__( 'Help Desk', 'wpglobus' ),
+			'tab_href'     => admin_url( 'admin.php?page=' ) . WPGlobus::PAGE_WPGLOBUS_HELPDESK,
+			'icon'         => WPGlobus_Admin_HelpDesk::ICON_CLASS,
+			'externalLink' => true,
 		);
 
 	}
@@ -558,11 +550,11 @@ class WPGlobus_Options {
 	public function addonsSection() {
 
 		return array(
-			'wpglobus_id' => 'addons',
-			'title'       => esc_html__( 'Add-ons', 'wpglobus' ),
-			'tab_href'    => WPGlobus_Admin_Page::url_addons_2(),
-			'icon'        => 'dashicons dashicons-before dashicons-admin-plugins',
-			'externalLink' => true
+			'wpglobus_id'  => 'addons',
+			'title'        => esc_html__( 'Add-ons', 'wpglobus' ),
+			'tab_href'     => WPGlobus_Admin_Page::url_addons_2(),
+			'icon'         => 'dashicons dashicons-before dashicons-admin-plugins',
+			'externalLink' => true,
 		);
 
 	}
@@ -628,32 +620,6 @@ class WPGlobus_Options {
 			$defaults_for_enabled_languages[ $code ] = true;
 		}
 
-		// Moved to sanitized_posted_data()
-		/** Add language from 'more_language' option to array $enabled_languages. */
-//		if ( isset( $wpglobus_option['more_languages'] ) && ! empty( $wpglobus_option['more_languages'] ) ) {
-//
-//			$lang       = $wpglobus_option['more_languages'];
-//			$lang_in_en = '';
-//			if ( isset( $this->config->en_language_name[ $lang ] ) && ! empty( $this->config->en_language_name[ $lang ] ) ) {
-//				$lang_in_en = ' (' . $this->config->en_language_name[ $lang ] . ')';
-//			}
-//
-//			if ( ! empty( $this->config->language_name[ $lang ] ) ) {
-//				$enabled_languages[ $lang ] = $this->config->language_name[ $lang ] . $lang_in_en;
-//			}
-//
-//			if (
-//				! empty( $wpglobus_option['more_languages'] )
-//				&& isset( $this->config->language_name[ $wpglobus_option['more_languages'] ] )
-//			) {
-//				$wpglobus_option['enabled_languages'][ $wpglobus_option['more_languages'] ] =
-//					$this->config->language_name[ $wpglobus_option['more_languages'] ];
-//			}
-//
-//			update_option( $this->config->option, $wpglobus_option );
-//
-//		}
-
 		/** Generate array $more_languages */
 		foreach ( $this->config->flag as $code => $file ) {
 			if ( ! array_key_exists( $code, $enabled_languages ) ) {
@@ -669,11 +635,11 @@ class WPGlobus_Options {
 		/**
 		 * for miniGLOBUS.
 		 */
-		if ( empty( $this->menus ) ) {
-			$navigation_menu_placeholder = esc_html__( 'No navigation menu', 'wpglobus' );
-		} else {
-			$navigation_menu_placeholder = esc_html__( 'Select navigation menu', 'wpglobus' );
-		}
+//		if ( empty( $this->menus ) ) {
+//			$navigation_menu_placeholder = esc_html__( 'No navigation menu', 'wpglobus' );
+//		} else {
+//			$navigation_menu_placeholder = esc_html__( 'Select navigation menu', 'wpglobus' );
+//		}
 
 		$desc_languages_intro = implode( '', array(
 			'<ul style="list-style: disc inside;">',
@@ -706,10 +672,16 @@ class WPGlobus_Options {
 			$_value_for_enabled_languages = $wpglobus_option['enabled_languages'];
 		}
 
+		$nav_menus = WPGlobus::_get_nav_menus();
+
+		$menus['all'] = __( 'All menus', 'wpglobus' );
+		foreach ( $nav_menus as $menu ) {
+			$menus[ $menu->slug ] = $menu->name;
+		}
+
 		$section = array(
 			'wpglobus_id' => 'languages',
 			'title'       => esc_html__( 'Languages', 'wpglobus' ),
-			#'icon'        => 'el-icon-wrench-alt',
 			'icon'        => 'dashicons dashicons-admin-tools',
 			'fields'      => array(
 				array(
@@ -763,23 +735,17 @@ class WPGlobus_Options {
 						: $wpglobus_option['show_flag_name'] ),
 					'name'    => 'wpglobus_option[show_flag_name]',
 				),
+				# $WPGlobus_Config->nav_menu
 				array(
-					'id'          => 'use_nav_menu',
-					# $WPGlobus_Config->nav_menu
-					'type'        => 'wpglobus_select',
-					'title'       => esc_html__( 'Language Selector Menu', 'wpglobus' ),
-					'compiler'    => 'false',
-					'mode'        => false,
-					'desc'        => esc_html__( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
-					'select2'     => array(
-						'allowClear'              => true,
-						'minimumResultsForSearch' => - 1,
-					),
-					'options'     => $this->menus,
-					'placeholder' => $navigation_menu_placeholder,
-					'name'        => 'wpglobus_option[use_nav_menu]',
-					'name_suffix' => '',
-					'class'       => '',
+					'id'      => 'use_nav_menu',
+					'type'    => 'wpglobus_dropdown',
+					'title'   => __( 'Language Selector Menu', 'wpglobus' ),
+					'desc'    => __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
+					'options' => $menus,
+					'default' => ( empty( $wpglobus_option['use_nav_menu'] )
+						? 'all'
+						: $wpglobus_option['use_nav_menu'] ),
+					'name'    => 'wpglobus_option[use_nav_menu]',
 				),
 				array(
 					'id'       => 'selector_wp_list_pages',
@@ -831,7 +797,6 @@ class WPGlobus_Options {
 		$section = array(
 			'wpglobus_id' => 'language_table',
 			'title'       => esc_html__( 'Languages table', 'wpglobus' ),
-			#'icon'        => 'el-icon-th-list',
 			'icon'        => 'dashicons dashicons-list-view',
 			'fields'      => array(
 				array(
@@ -844,7 +809,7 @@ class WPGlobus_Options {
 				),
 				array(
 					'id'   => 'languagesTable',
-					'type' => 'table'
+					'type' => 'table',
 				),
 			),
 		);
@@ -903,7 +868,7 @@ class WPGlobus_Options {
 				'version'  => WPGLOBUS_VERSION,
 				'tab'      => $this->tab,
 				'sections' => $this->sections,
-				'newUrl'   => 'admin.php?page='.$this->page_slug.'&tab={*}'
+				'newUrl'   => 'admin.php?page=' . $this->page_slug . '&tab={*}',
 			)
 		);
 
