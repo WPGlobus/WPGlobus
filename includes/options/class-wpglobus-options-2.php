@@ -139,6 +139,11 @@ class WPGlobus_Options {
 	}
 
 	public function pageOptions() {
+
+		$current_tab = WPGlobus_Utils::safe_get('tab');
+		if ( empty($current_tab) ) {
+			$current_tab = '0';
+		}
 		?>
 		<div class="wrap">
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
@@ -203,10 +208,11 @@ class WPGlobus_Options {
 										}
 										?>
 									</div><!-- .wpglobus-options-tab -->
-								<?php } ?>
+								<?php } // endforeach; ?>
 								<?php
 								wp_nonce_field( self::NONCE_ACTION );
 								?>
+								<input type="hidden" name="wpglobus_options_current_tab" id="wpglobus_options_current_tab" value="<?php echo $current_tab; ?>" />
 							</div><!-- .wpglobus-options-info -->
 						</div><!-- wpglobus-options-main block -->
 						<?php submit_button(); ?>

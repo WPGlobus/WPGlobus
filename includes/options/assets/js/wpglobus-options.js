@@ -92,6 +92,7 @@ jQuery(document).ready(function ($) {
 				
 				$('.wpglobus-tab-link').removeClass('wpglobus-tab-link-active');
 				$('#wpglobus-tab-link-'+tab).addClass('wpglobus-tab-link-active');
+				$('#wpglobus_options_current_tab').val(tab);
 			});			
 		}
 	};
