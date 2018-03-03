@@ -288,7 +288,7 @@ class WPGlobus {
 		/**
 		 * Add disabled post types from option
 		 */
-		$option             = get_option( 'wpglobus_option' );
+		$option             = get_option( WPGlobus::Config()->option );
 		$options_post_types = empty( $option['post_type'] ) ? array() : $option['post_type'];
 		foreach ( $options_post_types as $post_type => $value ) {
 			if ( $value != '1' ) {
