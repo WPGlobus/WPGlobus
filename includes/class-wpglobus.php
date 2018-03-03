@@ -189,14 +189,7 @@ class WPGlobus {
 			'on_admin_init'
 		) );
 
-		/**
-		 * @todo $WPGlobus_Options is unused. Remove it.
-		 */
-		global $WPGlobus_Options;
-
 		global $pagenow;
-
-		$config = WPGlobus::Config();
 
 		/**
 		 * Init array of supported plugins
@@ -309,8 +302,7 @@ class WPGlobus {
 
 
 		/**
-		 * NOTE: do not check for !DOING_AJAX here. Redux uses AJAX, for example, for disabling tracking.
-		 * So, we need to load Redux on AJAX requests, too
+		 * NOTE: do not check for !DOING_AJAX here.
 		 */
 		if ( is_admin() ) {
 
