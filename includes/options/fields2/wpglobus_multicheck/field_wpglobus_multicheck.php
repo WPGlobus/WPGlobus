@@ -28,13 +28,11 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 
 		/**
 		 * Render the field.
+		 * The "control" hidden fields are used to capture the unchecked elements.
 		 *
 		 * @param array $field Field attributes.
 		 */
 		public function render( $field ) {
-			if ( ! isset( $field['default'] ) ) {
-				$field['default'] = '';
-			}
 			?>
 			<div id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>"
 					class="wpglobus-options-field wpglobus-options-field-wpglobus_select">
@@ -48,13 +46,15 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 				</div>
 				<div class="grid__item">
 					<fieldset id="<?php echo esc_attr( $field['id'] ); ?>-multicheck">
-						<?php foreach ( $field['options'] as $value => $label ): ?>
+						<?php foreach ( $field['options'] as $value => $attrs ): ?>
 						<div>
-							<input type="checkbox"<?php checked( $value, $field['default'] ); ?>
-									id="<?php echo esc_attr( $value ); ?>"
-									name="<?php echo esc_attr( $field['name'] ); ?>"
-									value="<?php echo esc_attr( $value ); ?>">
-							<label for="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></label>
+							<input type="hidden" value="0"
+									name="<?php echo esc_attr( $field['name'] ); ?>[control][<?php echo esc_attr( $value ); ?>]"/>
+							<input type="checkbox"<?php checked( $attrs['checked'] ); ?>
+									id="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"
+									name="<?php echo esc_attr( $field['name'] ); ?>[<?php echo esc_attr( $value ); ?>]"
+									value="1">
+							<label for="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $attrs['label'] ); ?></label>
 						</div>
 						<?php endforeach; ?>
 					</fieldset>

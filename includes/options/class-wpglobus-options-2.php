@@ -110,11 +110,9 @@ class WPGlobus_Options {
 		// Set the default arguments.
 		$this->setArguments();
 
-		// Set a few help tabs so you can see how it's done
-		//$this->setHelpTabs();
-
 		// Create the sections and fields.
-		$this->setSections();
+		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
+		add_action( 'wp_loaded', array( $this, 'setSections' ) );
 
 		if ( ! isset( $this->args['opt_name'] ) ) { // No errors please
 			return;
@@ -826,32 +824,28 @@ class WPGlobus_Options {
 		return $section;
 	}
 
+	/**
+	 * Section: disable post types.
+	 *
+	 * @return array
+	 */
 	protected function section_post_types() {
 
-		$post_types = get_post_types( array( '_builtin' => false ), 'objects' );
-//	wp_die(print_r($post_types, true));
-		/** @var array $options */
-		$options            = get_option( $this->config->option );
-		$options_post_types = empty( $options['post_type'] ) ? array() : $options['post_type'];
-		$enabled_post_types = array();
+		/** @var WP_Post_Type[] $post_types */
+		$post_types = get_post_types( array(), 'objects' );
 
-		/** @var WP_Post_Type $post_type */
+		$disabled_entities = apply_filters( 'wpglobus_disabled_entities', WPGlobus::Config()->disabled_entities );
+
+		$options = array();
+
 		foreach ( $post_types as $post_type ) {
-			$label = $post_type->label . ' (' . $post_type->name . ')';
+			$label   = $post_type->label . ' (' . $post_type->name . ')';
+			$checked = ! in_array( $post_type->name, $disabled_entities, true );
 
-			// TODO check logic
-
-			if ( in_array( $post_type->name, WPGlobus::Config()->disabled_entities, true ) ) {
-
-				if ( array_key_exists( $post_type->name, $options_post_types ) ) {
-					/**
-					 * Add to enabled_post_types array for WPGlobus Post types setting page
-					 */
-					$enabled_post_types[ $post_type->name ] = $label;
-				}
-			} else {
-				$enabled_post_types[ $post_type->name ] = $label;
-			}
+			$options[ $post_type->name ] = array(
+				'label'   => $label,
+				'checked' => $checked,
+			);
 		}
 
 		$fields = array();
@@ -860,8 +854,9 @@ class WPGlobus_Options {
 			array(
 				'id'     => 'wpglobus_post_types_intro',
 				'type'   => 'wpglobus_info',
-				'title'  => '',
-				'desc'   => 'TODO', // TODO
+				'title'  => 'Debug',
+				'desc'   => 'WPGlobus::Config()->disabled_entities<br/><xmp>' . print_r( $disabled_entities, true ) . '</xmp>',
+				// TODO
 				'style'  => 'normal',
 				'notice' => false,
 				'class'  => 'normal',
@@ -873,8 +868,7 @@ class WPGlobus_Options {
 				'type'    => 'wpglobus_multicheck',
 				'title'   => __( 'TODO', 'wpglobus' ),
 				'desc'    => __( 'TODO', 'wpglobus' ),
-				'options' => $enabled_post_types,
-				'checked' => array(), // TODO
+				'options' => $options,
 				'name'    => 'wpglobus_option[post_type]',
 			);
 
@@ -1046,9 +1040,29 @@ class WPGlobus_Options {
 		}
 		unset( $data['more_languages'] );
 
+		// Section `post_types` requires special processing to capture unchecked elements.
+		if ( ! empty( $data['post_type'] ) && is_array( $data['post_type'] ) ) {
+			// Extract "control" fields from the posted data.
+			$control = $data['post_type']['control'];
+			unset( $data['post_type']['control'] );
+
+			// Sanitize control: fill with '0'.
+			$control = array_fill_keys( array_keys( $control ), '0' );
+
+			// Sanitize the posted checkboxes: fill with '1'.
+			$data['post_type'] = array_fill_keys( array_keys( $data['post_type'] ), '1' );
+
+			// We need to know only the disabled elements.
+			// The control is the list of all post types, filled with zeroes, thus all disabled.
+			// The "diff" removes from the control those that were posted as "enabled.
+			// The result of "diff" is THE disabled post types.
+			$data['post_type'] = array_diff_key( $control, $data['post_type'] );
+		} else {
+			// Invalid data posted (not an array)..fix.
+			$data['post_type'] = array();
+		}
+
 		return $data;
 	}
 
 } // class
-
-# --- EOF
