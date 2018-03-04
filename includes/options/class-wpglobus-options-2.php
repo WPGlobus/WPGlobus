@@ -843,7 +843,7 @@ class WPGlobus_Options {
 			/**
 			 * @todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
 			 */
-			if ( in_array( $post_type->name, WPGlobus_Post_Types::get_hidden_types(), true ) ) {
+			if ( in_array( $post_type->name, WPGlobus_Post_Types::hidden_types(), true ) ) {
 				continue;
 			}
 
@@ -887,7 +887,7 @@ class WPGlobus_Options {
 								. 'WPGlobus::Config()->disabled_entities '
 								. print_r( WPGlobus::Config()->disabled_entities, true )
 								. 'WPGlobus_Post_Types::get_hidden_types() '
-								. print_r( WPGlobus_Post_Types::get_hidden_types(), true )
+								. print_r( WPGlobus_Post_Types::hidden_types(), true )
 								. '</xmp>',
 					// TODO
 					'style'  => 'normal',

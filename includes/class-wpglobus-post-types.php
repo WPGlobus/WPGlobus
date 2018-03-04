@@ -16,7 +16,7 @@ class WPGlobus_Post_Types {
 	 *
 	 * @var string[]
 	 */
-	protected static $hidden_types = array(
+	protected static $hidden_types_main = array(
 		// Built-in.
 		'attachment',
 		'revision',
@@ -31,13 +31,6 @@ class WPGlobus_Post_Types {
 		'wp-types-term-group',
 		'wpcf7_contact_form',
 		'tablepress_table',
-		// WooCommerce types: we either force-enable them in WPG-WC or we do not need to handle them.
-		'product',
-		'product_variation',
-		'shop_subscription',
-		'shop_coupon',
-		'shop_order',
-		'shop_order_refund',
 		// ACF: free and pro.
 		'acf',
 		'acf-field',
@@ -45,11 +38,33 @@ class WPGlobus_Post_Types {
 	);
 
 	/**
-	 * Getter: $hidden_types
+	 * WooCommerce types: we either force-enable them in WPG-WC or we do not need to handle them.
+	 * Will hide them only if WooCommerce is active, to prevent potential conflict with other plugins
+	 * that may use the same ("product") type(s).
+	 *
+	 * @var string[]
+	 */
+	protected static $hidden_types_wc = array(
+		'product',
+		'product_variation',
+		'shop_subscription',
+		'shop_coupon',
+		'shop_order',
+		'shop_order_refund',
+	);
+
+	/**
+	 * Get hidden post types.
 	 *
 	 * @return string[]
 	 */
-	public static function get_hidden_types() {
-		return self::$hidden_types;
+	public static function hidden_types() {
+		$hidden_types = self::$hidden_types_main;
+
+		if ( class_exists( 'WooCommerce', false ) ) {
+			$hidden_types = array_merge( $hidden_types, self::$hidden_types_wc );
+		}
+
+		return $hidden_types;
 	}
 }
