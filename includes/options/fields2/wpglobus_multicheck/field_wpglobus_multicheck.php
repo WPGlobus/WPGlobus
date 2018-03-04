@@ -37,9 +37,11 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 			<div id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>"
 					class="wpglobus-options-field wpglobus-options-field-wpglobus_select">
 				<div class="grid__item">
-					<p class="title">
-						<?php echo esc_html( $field['title'] ); ?>
-					</p>
+					<?php if ( ! empty( $field['title'] ) ) { ?>
+						<p class="title">
+							<?php echo esc_html( $field['title'] ); ?>
+						</p>
+					<?php } ?>
 					<?php if ( ! empty( $field['subtitle'] ) ) { ?>
 						<p class="subtitle"><?php echo esc_html( $field['subtitle'] ); ?></p>
 					<?php } ?>
@@ -47,15 +49,15 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 				<div class="grid__item">
 					<fieldset id="<?php echo esc_attr( $field['id'] ); ?>-multicheck">
 						<?php foreach ( $field['options'] as $value => $attrs ): ?>
-						<div>
-							<input type="hidden" value="0"
-									name="<?php echo esc_attr( $field['name'] ); ?>[control][<?php echo esc_attr( $value ); ?>]"/>
-							<input type="checkbox"<?php checked( $attrs['checked'] ); ?>
-									id="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"
-									name="<?php echo esc_attr( $field['name'] ); ?>[<?php echo esc_attr( $value ); ?>]"
-									value="1">
-							<label for="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $attrs['label'] ); ?></label>
-						</div>
+							<div>
+								<input type="hidden" value="0"
+										name="<?php echo esc_attr( $field['name'] ); ?>[control][<?php echo esc_attr( $value ); ?>]"/>
+								<input type="checkbox"<?php checked( $attrs['checked'] ); ?>
+										id="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"
+										name="<?php echo esc_attr( $field['name'] ); ?>[<?php echo esc_attr( $value ); ?>]"
+										value="1">
+								<label for="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $attrs['label'] ); ?></label>
+							</div>
 						<?php endforeach; ?>
 					</fieldset>
 					<?php if ( ! empty( $field['desc'] ) ): ?>
