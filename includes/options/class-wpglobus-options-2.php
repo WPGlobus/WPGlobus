@@ -864,7 +864,17 @@ class WPGlobus_Options {
 		}
 
 		$fields = array();
-
+		
+		$fields[] =
+			array(
+				'id'     => 'description',
+				'type'   => 'wpglobus_info',
+				'title'  => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
+				'style'  => 'info',
+				'notice' => false,
+				'class'  => 'info'
+			);
+		
 		$fields[] =
 			array(
 				'id'     => 'wpglobus_post_types_intro',
