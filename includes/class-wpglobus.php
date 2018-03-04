@@ -244,7 +244,7 @@ class WPGlobus {
 			 */
 			$this->disabled_entities[] = 'product_variation';
 			$this->disabled_entities[] = 'shop_order_refund';
-			$this->disabled_entities[] = 'shop_webhook';
+			$this->disabled_entities[] = 'shop_webhook'; // Obsolete in WC3.
 
 		}
 
@@ -288,6 +288,8 @@ class WPGlobus {
 				$this->disabled_entities[] = $post_type;
 			}
 		}
+
+		$this->disabled_entities = array_unique( $this->disabled_entities );
 
 		/**
 		 * Set disabled entities into config
