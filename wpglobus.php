@@ -98,6 +98,7 @@ require_once dirname( __FILE__ ) . '/includes/class-wpglobus-core.php';
 
 /**
  * Initialize
+ *
  * @todo Rename uppercase variables.
  */
 // @codingStandardsIgnoreStart
@@ -116,6 +117,7 @@ require_once dirname( __FILE__ ) . '/includes/wpglobus-yoastseo.php';
 
 /**
  * Support of theme option panels and customizer
+ *
  * @since 1.4.0
  */
 require_once dirname( __FILE__ ) . '/includes/admin/customize/wpglobus-customize.php';
@@ -123,11 +125,13 @@ require_once dirname( __FILE__ ) . '/includes/admin/customize/wpglobus-customize
 /**
  * To disable WPGlobus Customizer Options, put this to wp-config:
  * define( 'WPGLOBUS_CUSTOMIZE', false )
+ *
  * @since 1.8.6
  */
 if ( ! defined( 'WPGLOBUS_CUSTOMIZE' ) || WPGLOBUS_CUSTOMIZE ) {
 	/**
 	 * WPGlobus customize options
+	 *
 	 * @since 1.4.6
 	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-customize-options.php';
@@ -148,6 +152,15 @@ if (
 ) {
 	require_once dirname( __FILE__ ) . '/vendor/tivwp/updater/updater.php';
 }
+
+
+/**
+ * WPGlobus Post Types
+ *
+ * @since   1.9.10
+ */
+require_once dirname( __FILE__ ) . '/includes/class-wpglobus-post-types.php';
+
 
 /**
  * In admin area
@@ -178,6 +191,7 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 
 	/**
 	 * WPGlobus News admin dashboard widget.
+	 *
 	 * @since 1.7.7
 	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-dashboard-news.php';
@@ -185,6 +199,7 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 
 	/**
 	 * WPGlobus News admin dashboard widget.
+	 *
 	 * @since 1.7.8
 	 */
 	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-admin-menu.php';
@@ -192,16 +207,18 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 
 	/**
 	 * Disable "Redux Blast"
+	 *
 	 * @see   ReduxFramework::__construct
 	 * (wpglobus/lib/ReduxCore/framework.php:416)
 	 * @since 1.7.9
 	 */
-	$GLOBALS['redux_notice_check'] = 1;
+//	$GLOBALS['redux_notice_check'] = 1;
 
 	/**
 	 * WPGlobus Recommendations.
 	 * To disable recommendations, put this to wp-config:
 	 * define( 'WPGLOBUS_RECOMMENDATIONS', false );
+	 *
 	 * @since 1.8.7
 	 */
 	if ( ! defined( 'WPGLOBUS_RECOMMENDATIONS' ) || WPGLOBUS_RECOMMENDATIONS ) {
@@ -218,6 +235,7 @@ if ( ! is_admin() && ! WPGlobus_WP::is_doing_ajax() ) :
 
 	/**
 	 * First-time automatic redirect to the primary language specified in the browser.
+	 *
 	 * @since 1.8.0
 	 */
 

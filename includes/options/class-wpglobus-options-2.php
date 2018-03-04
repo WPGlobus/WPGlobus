@@ -841,16 +841,9 @@ class WPGlobus_Options {
 		foreach ( $post_types as $post_type ) {
 			
 			/**
-			 * @see "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
+			 * @todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
 			 */
-			if ( in_array( $post_type->name, array(
-				'attachment',
-				'revision',
-				'nav_menu_item',
-				'custom_css',
-				'customize_changeset',
-				'oembed_cache'
-			), true ) ) {
+			if ( in_array( $post_type->name, WPGlobus_Post_Types::get_hidden_types(), true ) ) {
 				continue;
 			}			
 			
