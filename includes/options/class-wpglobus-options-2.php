@@ -92,7 +92,7 @@ class WPGlobus_Options {
 				'wpglobus_sortable',
 				'wpglobus_select',
 				'wpglobus_dropdown',
-				'wpglobus_checkbox', //TODO
+				#'wpglobus_checkbox', //TODO
 				'wpglobus_multicheck',
 				'wpglobus_ace_editor', //TODO
 				'table',
@@ -798,7 +798,7 @@ class WPGlobus_Options {
 	}
 
 	/**
-	 *    SECTION: Language table.
+	 * SECTION: Language table.
 	 */
 	public function languageTableSection() {
 		$section = array(
@@ -825,7 +825,7 @@ class WPGlobus_Options {
 	}
 
 	/**
-	 * Section: disable post types.
+	 * SECTION: Post types.
 	 *
 	 * @return array
 	 */
@@ -839,6 +839,21 @@ class WPGlobus_Options {
 		$options = array();
 
 		foreach ( $post_types as $post_type ) {
+			
+			/**
+			 * @see "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
+			 */
+			if ( in_array( $post_type->name, array(
+				'attachment',
+				'revision',
+				'nav_menu_item',
+				'custom_css',
+				'customize_changeset',
+				'oembed_cache'
+			), true ) ) {
+				continue;
+			}			
+			
 			$label   = $post_type->label . ' (' . $post_type->name . ')';
 			$checked = ! in_array( $post_type->name, $disabled_entities, true );
 
