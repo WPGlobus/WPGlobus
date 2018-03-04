@@ -839,14 +839,14 @@ class WPGlobus_Options {
 		$options = array();
 
 		foreach ( $post_types as $post_type ) {
-			
+
 			/**
 			 * @todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
 			 */
 			if ( in_array( $post_type->name, WPGlobus_Post_Types::get_hidden_types(), true ) ) {
 				continue;
-			}			
-			
+			}
+
 			$label   = $post_type->label . ' (' . $post_type->name . ')';
 			$checked = ! in_array( $post_type->name, $disabled_entities, true );
 
@@ -857,38 +857,44 @@ class WPGlobus_Options {
 		}
 
 		$fields = array();
-		
-		$fields[] =
-			array(
-				'id'     => 'description',
-				'type'   => 'wpglobus_info',
-				'title'  => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
-				'style'  => 'info',
-				'notice' => false,
-				'class'  => 'info'
-			);
-		
+
 		$fields[] =
 			array(
 				'id'     => 'wpglobus_post_types_intro',
 				'type'   => 'wpglobus_info',
-				'title'  => 'Debug',
-				'desc'   => 'WPGlobus::Config()->disabled_entities<br/><xmp>' . print_r( $disabled_entities, true ) . '</xmp>',
-				// TODO
-				'style'  => 'normal',
+				'title'  => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
+				'style'  => 'info',
 				'notice' => false,
-				'class'  => 'normal',
+				'class'  => 'info',
 			);
 
 		$fields[] =
 			array(
 				'id'      => 'wpglobus_post_types_choose',
 				'type'    => 'wpglobus_multicheck',
-				'title'   => __( 'TODO', 'wpglobus' ),
-				'desc'    => __( 'TODO', 'wpglobus' ),
 				'options' => $options,
 				'name'    => 'wpglobus_option[post_type]',
+				'desc'    => __( 'Please note that there are post types which status is managed by other plugins and cannot be changed here.', 'wpglobus' ),
 			);
+
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			$fields[] =
+				array(
+					'id'     => 'wpglobus_post_types_debug',
+					'type'   => 'wpglobus_info',
+					'title'  => 'Debug',
+					'desc'   => '<xmp>'
+								. 'WPGlobus::Config()->disabled_entities '
+								. print_r( WPGlobus::Config()->disabled_entities, true )
+								. 'WPGlobus_Post_Types::get_hidden_types() '
+								. print_r( WPGlobus_Post_Types::get_hidden_types(), true )
+								. '</xmp>',
+					// TODO
+					'style'  => 'normal',
+					'notice' => false,
+					'class'  => 'normal',
+				);
+		}
 
 		return array(
 			'wpglobus_id' => 'wpglobus_post_types',
