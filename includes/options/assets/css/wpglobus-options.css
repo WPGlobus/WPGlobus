@@ -143,12 +143,12 @@
 }
 .wpglobus-options-main .wpglobus-options-field .title {
 	margin: 0;
+	padding: 0 2em 0 1.5em;
 	font-size: 14px;
 	font-weight: 600;
 }
 .wpglobus-options-main .wpglobus-options-field .subtitle {
-	margin: 0.5em 0 0.5em 1em;
-	padding: 0;
+	padding: 0 2em 0 1.5em;
 	font-size: 13px;
 	font-weight: 400;
 }
@@ -211,17 +211,22 @@
 	max-width: none;
 }
 
-.wpglobus-options-field.wpglobus-options-field-wpglobus_ace_editor {
+/** Field type: 'wpglobus_ace_editor' **/
+.wpglobus-options-main .wpglobus-options-field-wpglobus_ace_editor {
 	display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 20% 80%;
     align-items: center;
     grid-gap: 0;
 	background-color: #d3e4f4;
 	padding: 20px 0 20px;
 }
-.wpglobus-options-field.wpglobus-options-field-wpglobus_ace_editor .grid__item {
-    padding: 0 2em 0 1.5em;
+.wpglobus-options-main .wpglobus-options-field-wpglobus_ace_editor .grid__item {
+	padding: initial;
+	max-width: none;   
 }
-.wpglobus-options-field.wpglobus-options-field-wpglobus_ace_editor .subtitle {
+.wpglobus-options-main .wpglobus-options-field-wpglobus_ace_editor .subtitle {
     margin: 1em 0;
+}
+.wpglobus-options-main .wpglobus-options-field-wpglobus_ace_editor .ace_editor {
+	margin: 0 1em 0 0;
 }
