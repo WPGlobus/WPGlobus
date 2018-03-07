@@ -106,8 +106,8 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_ace_editor' ) ):
 
                     var editor = ace.edit("wpglobus-options-<?php echo esc_js( $field['id'] ); ?>", {
                         mode: "ace/mode/<?php echo esc_js( $field['mode'] ); ?>",
-                        minLines: 10,
-                        maxLines: 10,
+                        minLines: 20,
+                        maxLines: 20,
                         tabSize: 2,
                         showPrintMargin: false
                     });
