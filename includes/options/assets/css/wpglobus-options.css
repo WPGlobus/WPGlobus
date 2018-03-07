@@ -210,3 +210,18 @@
 	padding: initial;
 	max-width: none;
 }
+
+.wpglobus-options-field.wpglobus-options-field-wpglobus_ace_editor {
+	display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    grid-gap: 0;
+	background-color: #d3e4f4;
+	padding: 20px 0 20px;
+}
+.wpglobus-options-field.wpglobus-options-field-wpglobus_ace_editor .grid__item {
+    padding: 0 2em 0 1.5em;
+}
+.wpglobus-options-field.wpglobus-options-field-wpglobus_ace_editor .subtitle {
+    margin: 1em 0;
+}

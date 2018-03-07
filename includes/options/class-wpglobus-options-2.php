@@ -81,22 +81,15 @@ class WPGlobus_Options {
 
 		$this->config = WPGlobus::Config();
 
-		/**
-		 * To avoid any conflict with ReduxFramework embedded in theme, always use our own field classes.
-		 * Even the standard fields we use are forked and prefixed with 'wpglobus_'.
-		 */
-		//*
 		foreach (
 			array(
 				'wpglobus_info',
 				'wpglobus_sortable',
 				'wpglobus_select',
 				'wpglobus_dropdown',
-				#'wpglobus_checkbox', //TODO
 				'wpglobus_multicheck',
-				'wpglobus_ace_editor', //TODO
+				'wpglobus_ace_editor',
 				'table',
-				'post_types',//TODO remove?
 			) as $field_type
 		) {
 			add_filter( "wpglobus/options/field/{$field_type}", array(
@@ -105,7 +98,6 @@ class WPGlobus_Options {
 				)
 				, 0, 2 );
 		}
-		// */
 
 		// Set the default arguments.
 		$this->setArguments();
@@ -147,15 +139,12 @@ class WPGlobus_Options {
 		<div class="wrap">
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 			<div class="wpglobus-options-container">
-				<form action="" method="post">
+				<form id="form-wpglobus-options" method="post">
 					<div id="wpglobus-options-intro-text"><?php echo $this->args['intro_text']; ?></div>
 					<div class="wpglobus-options-wrap">
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
 								<?php foreach ( $this->sections as $section_tab => $section ) {
-//									if ( $section['wpglobus_id'] == 'languages' ) {
-									//error_log(print_r($section, true)); // !!!!!!
-//									}
 
 									if ( empty( $section['tab_href'] ) ) {
 										// No real link, just switch tab.
@@ -407,6 +396,7 @@ class WPGlobus_Options {
 		$this->sections[] = $this->languagesSection();
 		$this->sections[] = $this->languageTableSection();
 		$this->sections[] = $this->section_post_types();
+		$this->sections[] = $this->section_custom_code();
 
 		/**
 		 * Filter the array of sections. Here add-ons can add their menus.
@@ -638,16 +628,6 @@ class WPGlobus_Options {
 			}
 		}
 
-
-		/**
-		 * for miniGLOBUS.
-		 */
-//		if ( empty( $this->menus ) ) {
-//			$navigation_menu_placeholder = esc_html__( 'No navigation menu', 'wpglobus' );
-//		} else {
-//			$navigation_menu_placeholder = esc_html__( 'Select navigation menu', 'wpglobus' );
-//		}
-
 		$desc_languages_intro = implode( '', array(
 			'<ul style="list-style: disc inside;">',
 			'<li>' . sprintf(
@@ -766,30 +746,6 @@ class WPGlobus_Options {
 						'show_selector' => esc_html__( 'Enable', 'wpglobus' ),
 					),
 				),
-				array(
-					'id'       => 'css_editor',
-					'type'     => 'wpglobus_ace_editor',
-					'title'    => esc_html__( 'Custom CSS', 'wpglobus' ),
-					'mode'     => 'css',
-					'theme'    => 'chrome',
-					'compiler' => 'false',
-					'desc'     => esc_html__( 'Here you can enter the CSS rules to adjust the language selector menu for your theme. Look at the examples in the `style-samples.css` file.', 'wpglobus' ),
-					'subtitle' => esc_html__( '(Optional)', 'wpglobus' ),
-					'default'  => '',
-					'rows'     => 15,
-				),
-				array(
-					'id'       => 'js_editor',
-					'type'     => 'wpglobus_ace_editor',
-					'title'    => esc_html__( 'Custom JS Code', 'wpglobus' ),
-					'mode'     => 'javascript',
-					'theme'    => 'chrome',
-					'compiler' => 'false',
-					//'desc'     => esc_html__( '', 'wpglobus' ),
-					'subtitle' => esc_html__( '(Paste your JS code here.)', 'wpglobus' ),
-					'default'  => '',
-					'rows'     => 15,
-				),
 			),
 		);
 
@@ -903,6 +859,59 @@ class WPGlobus_Options {
 			'fields'      => $fields,
 		);
 
+	}
+
+	/**
+	 * Section "Custom Code".
+	 *
+	 * @return array
+	 */
+	protected function section_custom_code() {
+
+		$wpglobus_option = get_option( WPGlobus::Config()->option );
+
+		$fields = array();
+
+		$fields[] =
+			array(
+				'id'     => 'wpglobus_custom_code_intro',
+				'type'   => 'wpglobus_info',
+				'title'  => __( 'Here you can enter the CSS rules and JavaScript code, which will be applied to all front pages of your website.', 'wpglobus' ),
+				'style'  => 'normal',
+				'notice' => false,
+				'class'  => 'normal',
+			);
+
+		$fields[] =
+			array(
+				'id'       => 'wpglobus_custom_code_css',
+				'type'     => 'wpglobus_ace_editor',
+				'title'    => __( 'Custom CSS', 'wpglobus' ),
+				'mode'     => 'css',
+				'name'     => 'wpglobus_option[css_editor]',
+				'value'    => $wpglobus_option['css_editor'],
+				'subtitle' => '',
+				'desc'     => '',
+			);
+
+		$fields[] =
+			array(
+				'id'       => 'wpglobus_custom_code_js',
+				'type'     => 'wpglobus_ace_editor',
+				'title'    => __( 'Custom JS Code', 'wpglobus' ),
+				'mode'     => 'javascript',
+				'name'     => 'wpglobus_option[js_editor]',
+				'value'    => $wpglobus_option['js_editor'],
+				'subtitle' => '',
+				'desc'     => '',
+			);
+
+		return array(
+			'wpglobus_id' => 'wpglobus_custom_code',
+			'title'       => __( 'Custom Code', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-edit',
+			'fields'      => $fields,
+		);
 	}
 
 	/**
