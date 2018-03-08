@@ -579,7 +579,7 @@ class WPGlobus_Options {
 		$defaults_for_enabled_languages = array();
 
 		/** @var array $more_languages */
-		$more_languages = array();
+		$more_languages = array( '' => __( 'Select a language', 'wpglobus' ) );
 
 		foreach ( $this->config->enabled_languages as $code ) {
 			$lang_in_en = '';
@@ -668,17 +668,12 @@ class WPGlobus_Options {
 					'class'       => 'wpglobus-enabled_languages',
 				),
 				array(
-					'id'          => 'more_languages',
-					'type'        => 'wpglobus_select',
-					'title'       => esc_html__( 'Add Languages', 'wpglobus' ),
-					'compiler'    => 'false',
-					'mode'        => false,
-					'desc'        => $desc_more_languages,
-					'placeholder' => esc_html__( 'Select a language', 'wpglobus' ),
-					'options'     => $more_languages,
-					'name'        => 'wpglobus_option[more_languages]',
-					'name_suffix' => '',
-					'class'       => '',
+					'id'      => 'more_languages',
+					'type'    => 'wpglobus_dropdown',
+					'title'   => __( 'Add Languages', 'wpglobus' ),
+					'desc'    => $desc_more_languages,
+					'options' => $more_languages,
+					'default' => '', // Do not remove.
 				),
 				array(
 					'id'      => 'show_flag_name',
