@@ -35,12 +35,7 @@ class WPGlobus_Options {
 
 		// @todo 'wpglobus-options' make as WPGlobus::OPTIONS_PAGE_SLUG
 //		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
-
 		$this->page_slug = 'wpglobus-options';
-
-		// Handle the main options form submit.
-		// If data posted, the options will be updated, and page reloaded (so no continue to the next line).
-		$this->handle_submit();
 
 		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
 
@@ -50,34 +45,19 @@ class WPGlobus_Options {
 		}
 		$this->tab = (int) $_tab;
 
-		// error_log(print_r('HERE $this->tab : '.$this->tab, true));
+		add_action( 'init', array( $this, 'initSettings' ), PHP_INT_MAX - 1 ); // Before handle_submit().
+		// Handle the main options form submit.
+		// If data posted, the options will be updated, and page reloaded (so no continue to the next line).
+		add_action( 'init', array( $this, 'handle_submit' ), PHP_INT_MAX );
 
+		add_action( 'admin_menu', array( $this, 'on__admin_menu' ) );
 
-		add_action( 'init', array( $this, 'initSettings' ) );
+		add_action( 'admin_print_scripts', array( $this, 'on__admin_scripts' ) );
 
-		add_action( 'admin_menu', array(
-			$this,
-			'on__admin_menu',
-		), 10 );
-
-		add_action( 'admin_print_scripts', array(
-			$this,
-			'on__admin_scripts',
-		) );
-
-		add_action( 'admin_print_styles', array(
-			$this,
-			'on__admin_styles',
-		) );
-
+		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
 	}
 
 	public function initSettings() {
-
-		/*
-		if ( ! class_exists( 'ReduxFramework' ) ) {
-			require_once WPGlobus::$PLUGIN_DIR_PATH . 'lib/ReduxCore/framework.php';
-		} */
 
 		$this->config = WPGlobus::Config();
 
@@ -105,13 +85,6 @@ class WPGlobus_Options {
 		// Create the sections and fields.
 		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
 		add_action( 'wp_loaded', array( $this, 'setSections' ) );
-
-		if ( ! isset( $this->args['opt_name'] ) ) { // No errors please
-			return;
-		}
-
-		/** @noinspection PhpUndefinedClassInspection */
-		//$this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
 	}
 
 	/**
@@ -221,15 +194,13 @@ class WPGlobus_Options {
 	}
 
 	/**
-	 * All the possible arguments for Redux.
-	 * For full documentation on arguments, please refer to:
-	 * https://github.com/ReduxFramework/ReduxFramework/wiki/Arguments
+	 * All the possible arguments.
 	 **/
 	public function setArguments() {
 
 		$this->args = array(
 			// TYPICAL -> Change these values as you need/desire
-			'opt_name'        => WPGlobus::Config()->option,
+			'opt_name'        => $this->config->option,
 			// This is where your data is stored in the database and also becomes your global variable name.
 			'display_name'    => 'WPGlobus',
 			// Name that appears at the top of your panel
@@ -298,7 +269,7 @@ class WPGlobus_Options {
 			'hide_reset'       => true,
 			'disable_tracking' => true,
 			/**
-			 * With newer ReduxFramework, need to disable AJAX save,
+			 * Need to disable AJAX save,
 			 * so that list of languages is always fresh, after save.
 			 *
 			 * @since 1.2.2
@@ -394,9 +365,6 @@ class WPGlobus_Options {
 	 * Set sections.
 	 */
 	public function setSections() {
-
-		/** @var array $wpglobus_option */
-		//$wpglobus_option = get_option( $this->config->option );
 
 		$this->sections[] = $this->welcomeSection();
 		$this->sections[] = $this->languagesSection();
@@ -602,7 +570,7 @@ class WPGlobus_Options {
 	 */
 	public function languagesSection() {
 
-		$wpglobus_option = get_option( $this->config->option );
+		$wpglobus_option = get_option( $this->args['opt_name'] );
 
 		/** @var array $enabled_languages contains all enabled languages */
 		$enabled_languages = array();
@@ -796,7 +764,7 @@ class WPGlobus_Options {
 		/** @var WP_Post_Type[] $post_types */
 		$post_types = get_post_types( array(), 'objects' );
 
-		$disabled_entities = apply_filters( 'wpglobus_disabled_entities', WPGlobus::Config()->disabled_entities );
+		$disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->config->disabled_entities );
 
 		$options = array();
 
@@ -847,7 +815,7 @@ class WPGlobus_Options {
 					'title'  => 'Debug',
 					'desc'   => '<xmp>'
 								. 'WPGlobus::Config()->disabled_entities '
-								. print_r( WPGlobus::Config()->disabled_entities, true )
+								. print_r( $this->config->disabled_entities, true )
 								. 'WPGlobus_Post_Types::get_hidden_types() '
 								. print_r( WPGlobus_Post_Types::hidden_types(), true )
 								. '</xmp>',
@@ -874,7 +842,7 @@ class WPGlobus_Options {
 	 */
 	protected function section_custom_code() {
 
-		$wpglobus_option = get_option( WPGlobus::Config()->option );
+		$wpglobus_option = get_option( $this->args['opt_name'] );
 
 		$fields = array();
 
@@ -925,10 +893,10 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.2.2
 	 *
-	 * @param string $file  Path of the field class where Redux is looking for it
+	 * @param string $file  Path of the field class
 	 * @param array  $field Field parameters
 	 *
-	 * @return string Path of the field class where we want Redux to find it
+	 * @return string Path of the field class where we want to find it
 	 */
 	public function filter__add_custom_fields(
 		/** @noinspection PhpUnusedParameterInspection */
@@ -1013,8 +981,8 @@ class WPGlobus_Options {
 
 	}
 
-	protected function handle_submit() {
-		$option_name = WPGlobus::Config()->option;
+	public function handle_submit() {
+		$option_name = $this->config->option;
 		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) {
 			// No data or invalid data submitted.
 			return;
