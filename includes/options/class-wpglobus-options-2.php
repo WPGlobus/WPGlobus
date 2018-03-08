@@ -184,6 +184,12 @@ class WPGlobus_Options {
 										<?php
 										if ( ! empty( $section['fields'] ) ) {
 											foreach ( $section['fields'] as $field ) {
+												$field = $this->sanitize_field( $field );
+												if ( ! $field ) {
+													// Invalid field.
+													continue;
+												}
+
 												$field_type = $field['type'];
 												$file       = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
 												if ( $file && file_exists( $file ) ) :
@@ -1096,6 +1102,48 @@ class WPGlobus_Options {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Check the field parameters, fill in defaults if necessary.
+	 *
+	 * @param array $field The field.
+	 *
+	 * @return array|false The sanitized field or false if the field is invalid.
+	 */
+	protected function sanitize_field( $field ) {
+
+		if (
+			empty( $field['type'] )
+			|| empty( $field['id'] )
+		) {
+			return false;
+		}
+
+		if ( ! isset( $field['name'] ) ) {
+			$field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
+		}
+
+		// Fill some missing fields with blanks.
+		foreach (
+			array(
+				'title',
+				'subtitle',
+				'desc',
+				'class',
+				'name_suffix',
+				'style',
+				'value',
+				'mode',
+				'default',
+			) as $parameter
+		) {
+			if ( ! isset( $field[ $parameter ] ) ) {
+				$field[ $parameter ] = '';
+			}
+		}
+
+		return $field;
 	}
 
 } // class
