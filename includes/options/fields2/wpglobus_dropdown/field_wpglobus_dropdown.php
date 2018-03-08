@@ -32,9 +32,6 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 		 * @param array $field Field attributes.
 		 */
 		public function render( $field ) {
-			if ( ! isset( $field['default'] ) ) {
-				$field['default'] = '';
-			}
 			?>
 			<div id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>"
 					class="wpglobus-options-field wpglobus-options-field-wpglobus_select">
@@ -48,7 +45,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 				</div>
 				<div class="grid__item">
 					<select id="<?php echo esc_attr( $field['id'] ); ?>-select"
-							name="<?php echo esc_attr( $field['name'] ); ?>">';
+							name="<?php echo esc_attr( $field['name'] ); ?>">
 						<?php foreach ( $field['options'] as $value => $label ): ?>
 							<option value="<?php echo esc_attr( $value ); ?>"<?php selected( $value, $field['default'] ); ?>>
 								<?php echo esc_html( $label ); ?>

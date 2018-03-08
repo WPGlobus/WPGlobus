@@ -1124,6 +1124,12 @@ class WPGlobus_Options {
 			$field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
 		}
 
+		// If default is not passed, get the value from options.
+		if ( ! isset( $field['default'] ) ) {
+			$wpglobus_option  = get_option( $this->args['opt_name'] );
+			$field['default'] = isset( $wpglobus_option[ $field['id'] ] ) ? $wpglobus_option[ $field['id'] ] : '';
+		}
+
 		// Fill some missing fields with blanks.
 		foreach (
 			array(
@@ -1135,7 +1141,6 @@ class WPGlobus_Options {
 				'style',
 				'value',
 				'mode',
-				'default',
 			) as $parameter
 		) {
 			if ( ! isset( $field[ $parameter ] ) ) {
