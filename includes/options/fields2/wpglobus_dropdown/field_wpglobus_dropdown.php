@@ -53,7 +53,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 						<?php endforeach; ?>
 					</select>
 					<?php if ( ! empty( $field['desc'] ) ): ?>
-						<p class="description"><?php echo esc_html( $field['desc'] ); ?></p>
+						<p class="description"><?php echo wp_kses_post( $field['desc'] ); ?></p>
 					<?php endif; ?>
 				</div>
 			</div>
