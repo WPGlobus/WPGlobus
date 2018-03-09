@@ -114,7 +114,7 @@ class WPGlobus_Options {
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 			<div class="wpglobus-options-container">
 				<form id="form-wpglobus-options" method="post">
-					<div id="wpglobus-options-intro-text"><?php echo $this->args['intro_text']; ?></div>
+					<div id="wpglobus-options-intro-text"><?php echo wp_kses_post( $this->args['intro_text'] ); ?></div>
 					<div class="wpglobus-options-wrap">
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
@@ -152,9 +152,10 @@ class WPGlobus_Options {
 							<div class="wpglobus-options-info">
 								<?php foreach ( $this->sections as $section_tab => $section ) {
 									?>
-									<div id="section-tab-<?php echo $section_tab; ?>" class="wpglobus-options-tab"
-											data-tab="<?php echo $section_tab; ?>">
-										<h2><?php echo $section['title']; ?></h2>
+									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
+											class="wpglobus-options-tab"
+											data-tab="<?php echo esc_attr( $section_tab ); ?>">
+										<h2><?php echo esc_html( $section['title'] ); ?></h2>
 										<?php
 										if ( ! empty( $section['fields'] ) ) {
 											foreach ( $section['fields'] as $field ) {
@@ -181,7 +182,8 @@ class WPGlobus_Options {
 								wp_nonce_field( self::NONCE_ACTION );
 								?>
 								<input type="hidden" name="wpglobus_options_current_tab"
-										id="wpglobus_options_current_tab" value="<?php echo $current_tab; ?>"/>
+										id="wpglobus_options_current_tab"
+										value="<?php echo esc_attr( $current_tab ); ?>"/>
 							</div><!-- .wpglobus-options-info -->
 						</div><!-- wpglobus-options-main block -->
 						<?php submit_button(); ?>
@@ -384,14 +386,20 @@ class WPGlobus_Options {
 		 * The below sections should be at the bottom.
 		 */
 
+
+		if ( class_exists( 'WooCommerce' ) ) {
+			if ( ! defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' ) ) {
+				$this->sections[] = $this->section_recommend_wpg_wc();
+			}
+			if ( ! defined( 'WPGLOBUS_MC_VERSION' ) ) {
+				$this->sections[] = $this->section_recommend_wpg_mc();
+			}
+		}
+
 		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the entire options panel is.
 
 		if ( class_exists( 'WPGlobus_Admin_Page', false ) ) {
 			$this->sections[] = $this->addonsSection();
-		}
-
-		if ( ! defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' ) && class_exists( 'WooCommerce' ) ) {
-			$this->sections[] = $this->section_recommend_wpg_wc();
 		}
 
 		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
@@ -414,37 +422,35 @@ class WPGlobus_Options {
 		 */
 		$fields_home[] =
 			array(
-				'id'     => 'welcome_intro',
-				'type'   => 'wpglobus_info',
-				'title'  => esc_html__( 'Thank you for installing WPGlobus!', 'wpglobus' ),
-				'desc'   => '' .
-							'&bull; ' .
-							'<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ABOUT . '">' .
-							esc_html__( 'Read About WPGlobus', 'wpglobus' ) .
-							'</a>' .
-							'<br/>' .
-							'&bull; ' . sprintf( esc_html__( 'Click the %1$s[Languages]%2$s tab at the left to setup the options.', 'wpglobus' ), '<strong>', '</strong>' ) .
-							'<br/>' .
-							'&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ), '<strong>', '</strong>' ) .
-							'<br/>' .
-							'<br/>' .
-							esc_html__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
-							'<br/>' .
-							'<br/>' .
-							'<em>' .
-							esc_html__( 'Sincerely Yours,', 'wpglobus' ) .
-							'<br/>' .
-							esc_html__( 'The WPGlobus Team', 'wpglobus' ) .
-							'</em>' .
-							'',
-				'style'  => 'info',
-				'notice' => false,
-				'class'  => '',
+				'id'    => 'welcome_intro',
+				'type'  => 'wpglobus_info',
+				'title' => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
+				'desc'  => '' .
+						   '&bull; ' .
+						   '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ABOUT . '">' .
+						   esc_html__( 'Read About WPGlobus', 'wpglobus' ) .
+						   '</a>' .
+						   '<br/>' .
+						   '&bull; ' . sprintf( esc_html__( 'Click the %1$s[Languages]%2$s tab at the left to setup the options.', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<br/>' .
+						   '&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<br/>' .
+						   '<br/>' .
+						   esc_html__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
+						   '<br/>' .
+						   '<br/>' .
+						   '<em>' .
+						   esc_html__( 'Sincerely Yours,', 'wpglobus' ) .
+						   '<br/>' .
+						   esc_html__( 'The WPGlobus Team', 'wpglobus' ) .
+						   '</em>' .
+						   '',
+				'class' => 'info',
 			);
 
 		return array(
 			'wpglobus_id' => 'welcome',
-			'title'       => esc_html__( 'Welcome!', 'wpglobus' ),
+			'title'       => __( 'Welcome!', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-admin-site',
 			'fields'      => $fields_home,
 		);
@@ -500,7 +506,7 @@ class WPGlobus_Options {
 
 		return array(
 			'wpglobus_id' => 'uninstall',
-			'title'       => esc_html__( 'Uninstall', 'wpglobus' ),
+			'title'       => __( 'Uninstall', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-no',
 			'fields'      => $fields_home,
 		);
@@ -511,7 +517,7 @@ class WPGlobus_Options {
 
 		return array(
 			'wpglobus_id'  => 'helpdesk',
-			'title'        => esc_html__( 'Help Desk', 'wpglobus' ),
+			'title'        => __( 'Help Desk', 'wpglobus' ),
 			'tab_href'     => admin_url( 'admin.php?page=' ) . WPGlobus::PAGE_WPGLOBUS_HELPDESK,
 			'icon'         => WPGlobus_Admin_HelpDesk::ICON_CLASS,
 			'externalLink' => true,
@@ -523,9 +529,9 @@ class WPGlobus_Options {
 
 		return array(
 			'wpglobus_id'  => 'addons',
-			'title'        => esc_html__( 'Add-ons', 'wpglobus' ),
+			'title'        => __( 'All add-ons', 'wpglobus' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_addons_2(),
-			'icon'         => 'dashicons dashicons-before dashicons-admin-plugins',
+			'icon'         => 'dashicons dashicons-admin-plugins',
 			'externalLink' => true,
 		);
 
@@ -538,30 +544,101 @@ class WPGlobus_Options {
 	 */
 	protected function section_recommend_wpg_wc() {
 
-		$name                   = esc_html__( 'WPGlobus for WooCommerce', 'wpglobus' );
-		$url                    = WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/';
-		$content_title_template = esc_html__( 'Recommended add-on: %s', 'wpglobus' );
-		$content_title          = sprintf( $content_title_template, $name );
+		$id   = 'recommend_wpg_wc';
+		$name = __( 'WooCommerce?..', 'wpglobus' );
+		/**
+		 * For Google Analytics.
+		 */
+		$ga_campaign = '?utm_source=wpglobus-admin&utm_medium=link&utm_campaign=' . $id;
 
-		$content_body = esc_html__( 'To translate WooCommerce product titles and descriptions, categories, tags and attributes, you need to install our premium WooCommerce extension.', 'wpglobus' );
-		$content_body .= '<h3>' . esc_html__( 'Click here to download:', 'wpglobus' ) . '</h3>';
-		$content_body .= '<a href="' . esc_url( $url ) . '">' . esc_html( $url ) . '</a>';
+		$url = WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/' . $ga_campaign;
 
+		ob_start();
+
+		?>
+		<p>
+			<?php esc_html_e(
+				'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
+		</p>
+		<p><strong>
+				<?php esc_html_e(
+					'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
+			</strong></p>
+		<p class="wp-ui-notification" style="padding: 1em">
+			<?php esc_html_e( 'With the WPGlobus for WooCommerce premium add-on, you will be able to translate product titles and descriptions, categories, tags and attributes.', 'wpglobus' ); ?>
+		</p>
+		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+		</a>
+		<?php
+
+		$content_body = ob_get_clean();
+
+		$tab_content   = array();
 		$tab_content[] =
 			array(
-				'id'     => 'recommend_wpg_wc_content',
-				'type'   => 'wpglobus_info',
-				'title'  => $content_title,
-				'desc'   => $content_body,
-				'style'  => 'info',
-				'notice' => false,
-				'class'  => '',
+				'id'   => $id . '_content',
+				'type' => 'wpglobus_info',
+				'desc' => $content_body,
 			);
 
 		return array(
-			'wpglobus_id' => 'recommend_wpg_wc',
-			'title'       => esc_html__( 'WooCommerce', 'wpglobus' ),
-			'icon'        => 'dashicons dashicons-format-status',
+			'wpglobus_id' => $id,
+			'title'       => $name,
+			'icon'        => 'dashicons dashicons-cart',
+			'fields'      => $tab_content,
+		);
+	}
+
+	/**
+	 * @todo Move it to...
+	 * @see  \WPGlobus_Admin_Recommendations::for_woocommerce
+	 * @return array
+	 */
+	protected function section_recommend_wpg_mc() {
+
+		$id   = 'recommend_wpg_mc';
+		$name = __( 'Multi-currency?..', 'wpglobus' );
+		/**
+		 * For Google Analytics.
+		 */
+		$ga_campaign = '?utm_source=wpglobus-admin&utm_medium=link&utm_campaign=' . $id;
+		$url         = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-multi-currency/' . $ga_campaign;
+
+		ob_start();
+
+		?>
+		<p><strong>
+				<?php printf( esc_html__(
+					'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ); ?>
+			</strong></p>
+		<p>
+			<?php esc_html_e( 'With WPGlobus, you can add multiple currencies to your store and charge UK customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. Accepting multiple currencies will strengthen your competitive edge and positioning for global growth!', 'wpglobus' ); ?>
+
+		</p>
+		<p class="wp-ui-notification" style="padding: 1em">
+			<?php esc_html_e( 'The WPGlobus Multi-Currency premium add-on provides switching currencies and re-calculating prices on-the-fly.', 'wpglobus' ); ?>
+		</p>
+		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+		</a>
+		<?php
+
+		$content_body = ob_get_clean();
+
+		$tab_content   = array();
+		$tab_content[] =
+			array(
+				'id'   => $id . '_content',
+				'type' => 'wpglobus_info',
+				'desc' => $content_body,
+			);
+
+
+		return array(
+			'wpglobus_id' => $id,
+			'title'       => $name,
+			'icon'        => 'dashicons dashicons-cart',
 			'fields'      => $tab_content,
 		);
 	}
@@ -643,21 +720,20 @@ class WPGlobus_Options {
 
 		$section = array(
 			'wpglobus_id' => 'languages',
-			'title'       => esc_html__( 'Languages', 'wpglobus' ),
-			'icon'        => 'dashicons dashicons-admin-tools',
+			'title'       => __( 'Languages', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-translation',
 			'fields'      => array(
 				array(
-					'id'     => 'languages_intro',
-					'type'   => 'wpglobus_info',
-					'title'  => esc_html__( 'Instructions:', 'wpglobus' ),
-					'html'   => $desc_languages_intro,
-					'style'  => 'info',
-					'notice' => false,
+					'id'    => 'languages_intro',
+					'type'  => 'wpglobus_info',
+					'title' => __( 'Instructions:', 'wpglobus' ),
+					'html'  => $desc_languages_intro,
+					'class' => 'normal',
 				),
 				array(
 					'id'          => 'enabled_languages',
 					'type'        => 'wpglobus_sortable',
-					'title'       => esc_html__( 'Enabled Languages', 'wpglobus' ),
+					'title'       => __( 'Enabled Languages', 'wpglobus' ),
 					'subtitle'    => esc_html__( 'These languages are currently enabled on your site.', 'wpglobus' ),
 					'compiler'    => 'false',
 					'options'     => $enabled_languages,

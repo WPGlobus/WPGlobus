@@ -16,7 +16,7 @@ class WPGlobus_Admin_HelpDesk {
 	 * CSS class for the menu icon.
 	 * @var string
 	 */
-	const ICON_CLASS = 'dashicons dashicons-before dashicons-format-chat';
+	const ICON_CLASS = 'dashicons dashicons-before dashicons-phone';
 
 	/**
 	 * Admin page title.
