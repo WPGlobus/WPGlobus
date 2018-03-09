@@ -69,6 +69,7 @@ class WPGlobus_Options {
 				'wpglobus_dropdown',
 				'wpglobus_multicheck',
 				'wpglobus_ace_editor',
+				'wpglobus_checkbox',
 				'table',
 			) as $field_type
 		) {
@@ -709,11 +710,7 @@ class WPGlobus_Options {
 					'title'    => esc_html__( '"All Pages" menus Language selector', 'wpglobus' ),
 					'subtitle' => esc_html__( '(Found in some themes)', 'wpglobus' ),
 					'desc'     => esc_html__( 'Adds language selector to the menus that automatically list all existing pages (using `wp_list_pages`)', 'wpglobus' ),
-					'compiler' => 'false',
-					'default'  => 1,
-					'options'  => array(
-						'show_selector' => esc_html__( 'Enable', 'wpglobus' ),
-					),
+					'label'    => __( 'Enable', 'wpglobus' ),
 				),
 			),
 		);
@@ -1064,6 +1061,11 @@ class WPGlobus_Options {
 			$data['post_type'] = array();
 		}
 
+		// Checkbox: if passed, make it `true`. No garbage.
+		if ( ! empty( $data['selector_wp_list_pages'] ) ) {
+			$data['selector_wp_list_pages'] = true;
+		}
+
 		return $data;
 	}
 
@@ -1083,14 +1085,19 @@ class WPGlobus_Options {
 			return false;
 		}
 
+		$wpglobus_option = get_option( $this->args['opt_name'] );
+
 		if ( ! isset( $field['name'] ) ) {
 			$field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
 		}
 
-		// If default is not passed, get the value from options.
+		// If these are not passed, get them from options.
+
 		if ( ! isset( $field['default'] ) ) {
-			$wpglobus_option  = get_option( $this->args['opt_name'] );
 			$field['default'] = isset( $wpglobus_option[ $field['id'] ] ) ? $wpglobus_option[ $field['id'] ] : '';
+		}
+		if ( ! isset( $field['checked'] ) ) {
+			$field['checked'] = isset( $wpglobus_option[ $field['id'] ] );
 		}
 
 		// Fill some missing fields with blanks.
