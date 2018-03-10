@@ -1145,6 +1145,8 @@ class WPGlobus_Options {
 			return false;
 		}
 
+		$field = $this->field_backward_compatibility( $field );
+
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
 		if ( ! isset( $field['name'] ) ) {
@@ -1179,6 +1181,44 @@ class WPGlobus_Options {
 		}
 
 		return $field;
+	}
+
+	/**
+	 * Backward compatibility
+	 *
+	 * @param array $field The field parameters.
+	 *
+	 * @return array Converted to the new format if necessary.
+	 */
+	protected function field_backward_compatibility( $field ) {
+
+		if ( 'switcher_menu_style' === $field['id'] && 'wpglobus_select' === $field['type'] ) {
+			$field = self::field_switcher_menu_style();
+		}
+
+		return $field;
+	}
+
+	/**
+	 * For WPGlobus Plus.
+	 *
+	 * @see \WPGlobusPlus_Menu::add_option
+	 *
+	 * @return array Field parameters.
+	 */
+	public static function field_switcher_menu_style() {
+		return array(
+			'id'       => 'switcher_menu_style',
+			'type'     => 'wpglobus_dropdown',
+			'title'    => __( 'Language Selector Menu Style', 'wpglobus' ),
+			'subtitle' => '(' . __( 'WPGlobus Plus', 'wpglobus' ) . ')',
+			'desc'     => __( 'Drop-down languages menu or Flat (in one line)', 'wpglobus' ),
+			'options'  => array(
+				''         => __( 'Do not change', 'wpglobus' ),
+				'dropdown' => __( 'Drop-down (vertical)', 'wpglobus' ),
+				'flat'     => __( 'Flat (horizontal)', 'wpglobus' ),
+			),
+		);
 	}
 
 	/**
