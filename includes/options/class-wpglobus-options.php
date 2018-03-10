@@ -120,6 +120,12 @@ class WPGlobus_Options {
 							<ul class="wpglobus-options-menu">
 								<?php foreach ( $this->sections as $section_tab => $section ): ?>
 									<?php $section = $this->sanitize_section( $section ); ?>
+									<?php
+									// If section tab is not specified (old external sections?), create it from title.
+									if ( empty( $section_tab ) ) {
+										$section_tab = sanitize_title_with_dashes( $section['title'] );
+									}
+									?>
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
 											class="<?php echo esc_attr( $section['li_class'] ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
