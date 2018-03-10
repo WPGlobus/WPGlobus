@@ -6,6 +6,11 @@
  * @author      WPGlobus
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Load the Request class.
 require_once dirname( dirname( __FILE__ ) ) . '/admin/class-wpglobus-language-edit-request.php';
 
@@ -28,6 +33,8 @@ class WPGlobus_Options {
 
 	private $current_page;
 
+	const DEFAULT_TAB = 'languages';
+
 	/**
 	 * Constructor
 	 */
@@ -38,10 +45,10 @@ class WPGlobus_Options {
 		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
 
 		$_tab = WPGlobus_Utils::safe_get( 'tab' );
-		if ( empty( $_tab ) ) {
-			$_tab = 0;
+		if ( empty( $_tab ) || ! is_string( $_tab ) ) {
+			$_tab = self::DEFAULT_TAB;
 		}
-		$this->tab = (int) $_tab;
+		$this->tab = sanitize_title_with_dashes( $_tab );
 
 		add_action( 'init', array( $this, 'initSettings' ), PHP_INT_MAX - 1 ); // Before handle_submit().
 		// Handle the main options form submit.
@@ -102,11 +109,6 @@ class WPGlobus_Options {
 	}
 
 	public function pageOptions() {
-
-		$current_tab = WPGlobus_Utils::safe_get( 'tab' );
-		if ( empty( $current_tab ) ) {
-			$current_tab = '0';
-		}
 		?>
 		<div class="wrap">
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
@@ -165,7 +167,7 @@ class WPGlobus_Options {
 								?>
 								<input type="hidden" name="wpglobus_options_current_tab"
 										id="wpglobus_options_current_tab"
-										value="<?php echo esc_attr( $current_tab ); ?>"/>
+										value="<?php echo esc_attr( $this->tab ); ?>"/>
 							</div><!-- .wpglobus-options-info -->
 						</div><!-- wpglobus-options-main block -->
 						<?php submit_button(); ?>
@@ -351,11 +353,11 @@ class WPGlobus_Options {
 	 */
 	public function setSections() {
 
-		$this->sections[] = $this->welcomeSection();
-		$this->sections[] = $this->languagesSection();
-		$this->sections[] = $this->languageTableSection();
-		$this->sections[] = $this->section_post_types();
-		$this->sections[] = $this->section_custom_code();
+		$this->sections['welcome']        = $this->welcomeSection();
+		$this->sections['languages']      = $this->languagesSection();
+		$this->sections['language-table'] = $this->languageTableSection();
+		$this->sections['post-types']     = $this->section_post_types();
+		$this->sections['custom-code']    = $this->section_custom_code();
 
 		/**
 		 * Filter the array of sections. Here add-ons can add their menus.
@@ -371,10 +373,10 @@ class WPGlobus_Options {
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			if ( ! defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' ) ) {
-				$this->sections[] = $this->section_recommend_wpg_wc();
+				$this->sections['recommend-wpg-wc'] = $this->section_recommend_wpg_wc();
 			}
 			if ( ! defined( 'WPGLOBUS_MC_VERSION' ) ) {
-				$this->sections[] = $this->section_recommend_wpg_mc();
+				$this->sections['recommend-wpg-mc'] = $this->section_recommend_wpg_mc();
 			}
 		}
 
@@ -385,27 +387,27 @@ class WPGlobus_Options {
 
 		if ( class_exists( 'WPGlobus_Admin_Central', false ) ) {
 			if ( class_exists( 'WPGlobusMobileMenu', false ) ) {
-				$this->sections[] = $this->section_mobile_menu();
+				$this->sections['mobile-menu'] = $this->section_mobile_menu();
 			}
 			if ( class_exists( 'WPGlobus_Language_Widgets', false ) ) {
-				$this->sections[] = $this->section_language_widgets();
+				$this->sections['language-widgets'] = $this->section_language_widgets();
 			}
 			if ( class_exists( 'WPGlobus_Featured_Images', false ) ) {
-				$this->sections[] = $this->section_featured_images();
+				$this->sections['featured-images'] = $this->section_featured_images();
 			}
 		}
 
 		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the options panel might use AJAX.
 
 		if ( class_exists( 'WPGlobus_Admin_Page', false ) ) {
-			$this->sections[] = $this->addonsSection();
+			$this->sections['addons'] = $this->addonsSection();
 		}
 
 		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
-			$this->sections[] = $this->helpdeskSection();
+			$this->sections['helpdesk'] = $this->helpdeskSection();
 		}
 
-		$this->sections[] = $this->section_uninstall();
+		$this->sections['uninstall'] = $this->section_uninstall();
 
 	}
 
@@ -1098,10 +1100,9 @@ class WPGlobus_Options {
 
 
 			// Need to get back to the current tab after reloading.
-			$tab = '0';
+			$tab = '';
 			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
 				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] );
-				$tab = (string) abs( (int) $tab );
 			}
 
 			wp_safe_redirect( add_query_arg( array(
@@ -1285,8 +1286,8 @@ class WPGlobus_Options {
 			$section['tab_href'] = '#';
 			$section['li_class'] = 'wpglobus-tab-link';
 		} else {
-			// Real link specified. Use it and do not set the tab switching CSS class.
-			$section['li_class'] = '';
+			// Real link specified. Use it and do not set the "tab switching" CSS class.
+			$section['li_class'] = 'wpglobus-tab-external';
 		}
 
 		// Disable A-clicks unless it's a real (external) link.
@@ -1330,4 +1331,4 @@ class WPGlobus_Options {
 		return $section;
 	}
 
-} // class
+}
