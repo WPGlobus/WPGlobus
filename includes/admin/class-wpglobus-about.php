@@ -50,7 +50,7 @@ class WPGlobus_About {
 				<?php WPGlobus_Admin_Page::nav_tab_icon_e( 'FAQ' ); ?>
 				<?php esc_html_e( 'FAQ', 'wpglobus' ); ?>
 			</a>
-			<a href="<?php echo esc_url( WPGlobus_Admin_HelpDesk::$admin_page_url ); ?>"
+			<a href="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>"
 			   class="nav-tab">
 				<?php WPGlobus_Admin_Page::nav_tab_icon_e( 'Helpdesk' ); ?>
 				<?php echo esc_html( WPGlobus_Admin_HelpDesk::$page_title ); ?>
@@ -120,7 +120,7 @@ class WPGlobus_About {
 			              target="_blank"><?php esc_html_e( 'Guide', 'wpglobus' ); ?></a></li>
 			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Utils::url_wpglobus_site() . 'faq/' . self::QA_CAMPAIGN ); ?>"
 			              target="_blank"><?php esc_html_e( 'FAQs', 'wpglobus' ); ?></a></li>
-			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Admin_HelpDesk::$admin_page_url ); ?>"
+			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>"
 			              target="_blank"><?php esc_html_e( 'Contact Us', 'wpglobus' ); ?></a></li>
 			<li>&bull; <a href="https://wordpress.org/support/plugin/wpglobus/reviews/?filter=5"
 			              target="_blank"><?php esc_html_e( 'Please give us 5 stars!', 'wpglobus' ); ?></a>

@@ -28,16 +28,6 @@ class WPGlobus_Admin_HelpDesk {
 	 * @var string
 	 */
 	protected static $menu_title;
-	/**
-	 * Admin menu tooltip.
-	 * @var string
-	 */
-	protected static $menu_tooltip;
-	/**
-	 * Admin page URL.
-	 * @var string
-	 */
-	public static $admin_page_url;
 
 	/**
 	 * Static "constructor".
@@ -53,10 +43,6 @@ class WPGlobus_Admin_HelpDesk {
 	public static function set_vars() {
 		self::$page_title   = __( 'WPGlobus Help Desk', 'wpglobus' );
 		self::$menu_title   = __( 'Help Desk', 'wpglobus' );
-		self::$menu_tooltip = __( 'Contact WPGlobus Support', 'wpglobus' );
-
-		self::$admin_page_url = admin_url( 'admin.php?page=' ) .
-		                        WPGlobus::PAGE_WPGLOBUS_HELPDESK;
 	}
 
 	/**
@@ -64,64 +50,22 @@ class WPGlobus_Admin_HelpDesk {
 	 */
 	protected static function set_hooks() {
 		add_action( 'admin_menu', array( __CLASS__, 'add_menu' ), PHP_INT_MAX );
-		if ( ! defined( 'WPGLOBUS_OPTIONS_2' ) || ! WPGLOBUS_OPTIONS_2 ) {
-			add_action( 'admin_footer', array( __CLASS__, 'show_submenu' ), PHP_INT_MAX );
-		}
 	}
 
 	/**
-	 * Add a hidden admin menu item.
-	 * It will become visible in @see WPGlobus_Admin_HelpDesk::show_submenu
+	 * Add admin menu item.
 	 */
 	public static function add_menu() {
-		if ( defined( 'WPGLOBUS_OPTIONS_2' ) && WPGLOBUS_OPTIONS_2 ) {
-			add_submenu_page(
-				'wpglobus-options', // TODO rename constant WPGlobus::OPTIONS_PAGE_SLUG
-				self::$page_title,
-				'<span class="' . esc_attr( self::ICON_CLASS )
-				. '" style="vertical-align:middle"></span> '
-				. self::$menu_title,
-				'administrator',
-				WPGlobus::PAGE_WPGLOBUS_HELPDESK,
-				array( __CLASS__, 'helpdesk_page' )
-			);
-		} else {
-			add_submenu_page(
-				null,
-				'',
-				'',
-				'administrator',
-				WPGlobus::PAGE_WPGLOBUS_HELPDESK,
-				array( __CLASS__, 'helpdesk_page' )
-			);
-		}
-	}
-
-	/**
-	 * Make the admin menu item visible.
-	 * This is a workaround because the WPGlobus options panel is made by ReduxFramework.
-	 */
-	public static function show_submenu() {
-		?>
-		<script>
-			jQuery(function ($) {
-				$('#toplevel_page_wpglobus_options')
-					.find("ul")
-					.prepend($("<li>")
-						.append($("<a>")
-							.attr({
-								href: "<?php echo esc_url( self::$admin_page_url ); ?>",
-								title: "<?php echo esc_js( self::$menu_tooltip ); ?>"
-							})
-							.html(' <?php echo esc_js( self::$menu_title ); ?>')
-							.prepend($("<span>")
-								.attr({"class": "<?php echo esc_js( self::ICON_CLASS ); ?>"})
-							)
-						)
-					);
-			});
-		</script>
-		<?php
+		add_submenu_page(
+			WPGlobus::OPTIONS_PAGE_SLUG,
+			self::$page_title,
+			'<span class="' . esc_attr( self::ICON_CLASS )
+			. '" style="vertical-align:middle"></span> '
+			. self::$menu_title,
+			'administrator',
+			WPGlobus::PAGE_WPGLOBUS_HELPDESK,
+			array( __CLASS__, 'helpdesk_page' )
+		);
 	}
 
 	/**

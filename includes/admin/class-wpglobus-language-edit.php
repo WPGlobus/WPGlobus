@@ -466,14 +466,7 @@ class WPGlobus_Language_Edit {
 
 			<hr/>
 			<span class="dashicons dashicons-admin-site"></span>
-			<?php
-			$_options_page_slug = WPGlobus::OPTIONS_PAGE_SLUG; 
-			if ( defined('WPGLOBUS_OPTIONS_2') && WPGLOBUS_OPTIONS_2 ) {
-				$_options_page_slug = 'wpglobus-options';
-			}
-			$_url = admin_url( add_query_arg( array( 'page'=>$_options_page_slug, 'tab'=>2 ), 'admin.php' ) )
-			?>
-			<a href="<?php echo esc_url( $_url ); ?>">
+			<a href="<?php echo esc_url( WPGlobus_Admin_Page::url_settings() ); ?>">
 				<?php esc_html_e( 'Back to the WPGlobus Settings', 'wpglobus' ); ?>
 			</a>
 		</div>

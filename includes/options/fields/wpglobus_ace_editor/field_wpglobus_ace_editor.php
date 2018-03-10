@@ -1,20 +1,6 @@
 <?php
-
 /**
- * Redux Framework is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * any later version.
- * Redux Framework is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License
- * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
- *
- * @package     WPGlobus\Admin\Options\Field
- * @author      WPGlobus
- * @version     3.0.0
+ * wpglobus_ace_editor
  */
 
 // Exit if accessed directly
@@ -22,124 +8,132 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_wpglobus_ace_editor' ) ) {
+if ( ! class_exists( 'WPGlobusOptions_wpglobus_ace_editor' ) ):
+
 	/**
-	 * Class ReduxFramework_wpglobus_ace_editor
+	 * Class WPGlobusOptions_wpglobus_ace_editor
 	 */
-	class ReduxFramework_wpglobus_ace_editor {
-		/** @noinspection PhpUndefinedClassInspection */
+	class WPGlobusOptions_wpglobus_ace_editor {
+
 
 		/**
-		 * Field Constructor.
-		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+		 * WPGlobusOptions_wpglobus_ace_editor constructor.
 		 *
-		 * @since ReduxFramework 1.0.0
-		 *
-		 * @param array $field
-		 * @param string $value
-		 * @param ReduxFramework $parent
+		 * @param array $field Field attributes.
 		 */
-		public function __construct( $field = array(), $value = '', $parent ) {
-			$this->parent = $parent;
-			$this->field  = $field;
-			$this->value  = $value;
+		public function __construct( $field ) {
 
-			if ( is_array( $this->value ) ) {
-				$this->value = '';
-			} else {
-				$this->value = trim( $this->value );
-			}
-
-			if ( ! empty( $this->field['options'] ) ) {
-				$this->field['args'] = $this->field['options'];
-				unset( $this->field['options'] );
-			}
-
+			$this->render( $field );
 		}
 
 		/**
-		 * Field Render Function.
-		 * Takes the vars and outputs the HTML for the field in the settings
+		 * Render the field.
 		 *
-		 * @since ReduxFramework 1.0.0
+		 * @param array $field Field attributes.
 		 */
-		public function render() {
-
-			if ( ! isset( $this->field['mode'] ) ) {
-				$this->field['mode'] = 'javascript';
-			}
-			if ( ! isset( $this->field['theme'] ) ) {
-				$this->field['theme'] = 'monokai';
-			}
-
-			$params = array(
-				'minLines' => 10,
-				'maxLines' => 30,
-			);
-
-			if ( isset( $this->field['args'] ) && ! empty( $this->field['args'] ) && is_array( $this->field['args'] ) ) {
-				$params = wp_parse_args( $this->field['args'], $params );
-			}
-
+		public function render( $field ) {
 			?>
-			<div class="ace-wrapper">
-				<input type="hidden" class="localize_data"
-						value="<?php echo esc_attr( wp_json_encode( $params ) ); ?>"/>
-				<textarea name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>"
-						id="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"
-						class="ace-editor hide <?php echo esc_attr( $this->field['class'] ); ?>"
-						data-editor="<?php echo esc_attr( $this->field['id'] ); ?>-editor"
-						data-mode="<?php echo esc_attr( $this->field['mode'] ); ?>"
-						data-theme="<?php echo esc_attr( $this->field['theme'] ); ?>"
-						title="<?php esc_attr( $this->field['name'] ); ?>"><?php echo esc_html( $this->value ); ?></textarea>
-				<pre id="<?php echo esc_attr( $this->field['id'] ); ?>-editor"
-						class="ace-editor-area"><?php echo esc_attr( $this->value ); ?></pre>
+
+			<div class="wpglobus-options-field wpglobus-options-field-wpglobus_ace_editor">
+
+				<div class="grid__item">
+					<?php if ( ! empty( $field['title'] ) ) { ?>
+						<p class="title">
+							<?php echo esc_html( $field['title'] ); ?>
+						</p>
+					<?php } ?>
+					<?php if ( ! empty( $field['subtitle'] ) ) { ?>
+						<p class="subtitle"><?php echo esc_html( $field['subtitle'] ); ?></p>
+					<?php } ?>
+				</div>
+				<div class="grid__item">
+					<div id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>"><?php
+						echo esc_html( $field['value'] ); ?></div>
+					<input type="hidden" id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>_control"
+							name="<?php echo esc_attr( $field['name'] ); ?>" value=""/>
+					<?php if ( ! empty( $field['desc'] ) ): ?>
+						<p class="description"><?php echo esc_html( $field['desc'] ); ?></p>
+					<?php endif; ?>
+				</div>
 			</div>
 			<?php
-		}
 
-		/**
-		 * Enqueue Function.
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
-		 *
-		 * @since       1.0.0
-		 * @access      public
-		 * @return      void
-		 */
-		public function enqueue() {
+			/*
+			 * <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ace.js"
+        integrity="sha256-m7pa1Wh06liKoIDP19avGEdTGo+LoDNxeiHhVkq2hVQ=" crossorigin="anonymous"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify.min.js"
+        integrity="sha256-z3YWAUWq4ZqhJwjqxdTFwmXUOkEPpQUpdxWHCZVADA4=" crossorigin="anonymous"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify-css.min.js"
+        integrity="sha256-j7ahmt6lLS5KOhBLZUivk4/awJlkM8eDP/CYbrCDqRA=" crossorigin="anonymous"></script>
 
-			/** @var array $parent_args */
-			$parent_args = $this->parent->args;
-
-			if ( $parent_args['dev_mode'] && ! wp_style_is( 'redux-field-wpglobus_ace-editor-css' ) ) {
-				wp_enqueue_style(
-					'redux-field-wpglobus_ace-editor-css',
-					plugins_url( '/field_wpglobus_ace_editor' . WPGlobus::SCRIPT_SUFFIX() . '.css', __FILE__ ),
-					array(),
-					WPGlobus::SCRIPT_VER()
-				);
-			}
+			 */
 
 			if ( ! wp_script_is( 'ace-editor-js' ) ) {
 				wp_enqueue_script(
 					'ace-editor-js',
-					'//cdn.jsdelivr.net/ace/1.2.0/min/ace.js',
-					array( 'jquery' ),
+					'https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ace.js',
+					array(),
 					null,
 					true
 				);
 			}
 
-			if ( ! wp_script_is( 'redux-field-wpglobus_ace_editor-js' ) ) {
+			if ( ! wp_script_is( 'beautify-js' ) ) {
 				wp_enqueue_script(
-					'redux-field-wpglobus_ace_editor-js',
-					plugins_url( '/field_wpglobus_ace_editor' . WPGlobus::SCRIPT_SUFFIX() . '.js', __FILE__ ),
-					array( 'jquery', 'ace-editor-js', 'redux-js' ),
-					WPGlobus::SCRIPT_VER(),
+					'beautify-js',
+					'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify.min.js',
+					array(),
+					null,
 					true
 				);
 			}
+
+			if ( ! wp_script_is( 'beautify-css' ) ) {
+				wp_enqueue_script(
+					'beautify-css',
+					'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify-css.min.js',
+					array(),
+					null,
+					true
+				);
+			}
+
+			?>
+			<script>
+                jQuery(function ($) {
+
+                    var editor = ace.edit("wpglobus-options-<?php echo esc_js( $field['id'] ); ?>", {
+                        mode: "ace/mode/<?php echo esc_js( $field['mode'] ); ?>",
+                        minLines: 20,
+                        maxLines: 20,
+                        tabSize: 2,
+                        showPrintMargin: false
+                    });
+
+                    var beautify = <?php echo 'css' === $field['mode'] ? 'css_beautify' : 'js_beautify'; ?>;
+
+                    editor.getSession().setValue(beautify(editor.getValue(), {indent_size: 2}));
+
+                    $("#form-wpglobus-options").on("submit", function () {
+                        document
+                            .getElementById("wpglobus-options-<?php echo esc_js( $field['id'] ); ?>_control")
+                            .value = editor.getValue().replace(/[\s]+/g, " ");
+                    });
+
+                });
+			</script>
+			<?php
+
+
 		}
 	}
-}
+
+endif;
+
+/**
+ * @global array $field
+ * @see WPGlobus_Options::pageOptions
+ */
+new WPGlobusOptions_wpglobus_ace_editor( $field );

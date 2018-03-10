@@ -26,7 +26,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 
 			self::set_vars();
 
-			add_action( 'admin_menu', array( __CLASS__, 'add_menu' ) );
+			add_action( 'admin_menu', array( __CLASS__, 'add_menu' ), PHP_INT_MAX );
 
 		}
 
@@ -44,7 +44,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 
 		/**
 		 * Add a hidden admin menu item.
-		 * It will become visible in @see WPGlobus_Admin_HelpDesk::show_submenu
+		 * It serves as a base for several admin tabs, but currently do not have the "root" content.
 		 */
 		public static function add_menu() {
 			add_submenu_page(

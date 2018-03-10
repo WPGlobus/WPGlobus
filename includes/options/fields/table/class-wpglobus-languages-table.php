@@ -1,6 +1,6 @@
 <?php
 /**
- * File: table-languages.php
+ * File: class-wpglobus-languages-table.php
  *
  * @package     WPGlobus\Admin\Options\Field
  */
@@ -15,43 +15,52 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 require_once WPGlobus::plugin_dir_path() . 'includes/admin/class-wpglobus-language-edit-request.php';
 
 /**
- * Class LanguagesTable
+ * Class WPGlobus_Languages_Table.
  */
 class WPGlobus_Languages_Table extends WP_List_Table {
 
 	/**
-	 * Data
+	 * Data.
 	 *
 	 * @var array
 	 */
 	public $data = array();
 
 	/**
-	 * Table fields
+	 * Table fields.
 	 *
 	 * @var array
 	 */
 	public $table_fields = array();
 
 	/**
-	 * Found data
+	 * Found data.
 	 *
 	 * @var array
 	 */
 	public $found_data = array();
 
 	/**
-	 * Column headers
+	 * Column headers.
 	 *
 	 * @var array
 	 */
 	public $_column_headers = array();
 
 	/**
+	 * Field.
+	 *
+	 * @var array
+	 */	
+	public $field = array();
+
+	/**
 	 *  Constructor.
 	 */
-	public function __construct() {
-
+	public function __construct($field) {
+	
+		$this->field = $field;
+	
 		parent::__construct( array(
 			// singular name of the listed records.
 			'singular' => esc_html__( 'item', 'wpglobus' ),
@@ -68,7 +77,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Fill out table_fields and data arrays
+	 * Fill out table_fields and data arrays.
 	 */
 	public function get_data() {
 
@@ -136,28 +145,27 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Show "no items" message
+	 * Show "no items" message.
 	 */
 	public function no_items() {
 		esc_html_e( 'No items found', 'wpglobus' );
 	}
 
 	/**
-	 * Display table
+	 * Display table.
 	 */
 	public function display_table() {
 
 		$this->prepare_items();
 		?>
-		<div class="wpglobus_flag_table_wrapper">
+		<div id="wpglobus-options-<?php echo $this->field['id']; ?>" class="wpglobus-languages-table-wrapper wpglobus-options-field" data-js-handler="handler<?php echo ucfirst($this->field['id']); ?>">
 			<a id="wpglobus_add_language" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_add() ); ?>" class="button button-primary">
 				<i class="dashicons dashicons-plus-alt" style="line-height: inherit"></i>
 				<?php esc_html_e( 'Add new Language', 'wpglobus' ); ?>
 			</a>
 
 			<?php $this->prepare_items(); ?>
-			<div class="table-wrap wrap">
-
+			<div class="table-wrap">
 				<form method="post">
 					<?php $this->display(); ?>
 				</form>
@@ -188,7 +196,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 		$this->process_bulk_action();
 
 		/**
-		 * You can handle your row actions
+		 * You can handle your row actions.
 		 */
 		$this->process_row_action();
 
@@ -226,7 +234,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Get columns
+	 * Get columns.
 	 *
 	 * @return array
 	 */
@@ -249,7 +257,6 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	 * 'internal-name' => array( 'orderby', true )
 	 * The second format will make the initial sorting order be descending
 	 *
-	 * @since  3.1.0
 	 * @access protected
 	 * @return array
 	 */
@@ -268,21 +275,17 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Process bulk action
+	 * Process bulk action.
 	 */
-	public function process_bulk_action() {
-	}
+	public function process_bulk_action() {}
 
 	/**
-	 * Process row action
+	 * Process row action.
 	 */
-	public function process_row_action() {
-	}
+	public function process_row_action() {}
 
 	/**
-	 * User's defined function
-	 *
-	 * @since    0.1
+	 * User's defined function.
 	 *
 	 * @param array $a First value.
 	 * @param array $b Second value.
@@ -329,7 +332,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Define function to add item actions by name 'column_flag'
+	 * Define function to add item actions by name 'column_flag'.
 	 *
 	 * @since 1.0.0
 	 *
@@ -342,7 +345,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Define function to add item actions by name 'column_locale'
+	 * Define function to add item actions by name 'column_locale'.
 	 *
 	 * @since 1.0.0
 	 *
@@ -355,7 +358,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Define function to add item actions by name 'column_code'
+	 * Define function to add item actions by name 'column_code'.
 	 *
 	 * @since 1.0.0
 	 *
@@ -373,12 +376,20 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 			// Add actions to the language code column.
 			foreach ( $this->table_fields['wpglobus_code']['actions'] as $action => $data ) {
 
-				$class = $data['ajaxify'] ? 'class="ajaxify"' : '';
+				$class = array( 'button' );
+				//$class = $data['ajaxify'] ? 'class="button button-primary ajaxify"' : 'class="button button-primary"';
+				if ( ! empty( $data['ajaxify'] ) ) {
+					$class[] = 'ajaxify';
+				}
 
 				switch ( $action ) {
 					case WPGlobus_Language_Edit_Request::ACTION_EDIT:
+						
+						$class[] = 'button-primary';
+						$link_class = 'class="' . implode(' ', $class) . '"';
+						
 						$actions['edit'] = sprintf( '<a %1s href="%2s">%3s</a>',
-							$class,
+							$link_class,
 							esc_url( WPGlobus_Language_Edit_Request::url_language_edit( $item['wpglobus_code'] ) ),
 							esc_html( $data['caption'] )
 						);
@@ -386,12 +397,16 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 						break;
 
 					case WPGlobus_Language_Edit_Request::ACTION_DELETE:
+					
+						$link_class = 'class="' . implode(' ', $class) . '"';
+						
 						if ( $item['wpglobus_code'] === $config->default_language ) {
-							$actions['delete'] =
-								sprintf( '<a %1s href="#">%2s</a>', $class, esc_html__( 'Default language', 'wpglobus' ) );
+							$actions['delete'] = '';
+							//$actions['delete'] =
+								//sprintf( '<a %1s href="#">%2s</a>', $link_class, esc_html__( 'Default language', 'wpglobus' ) );
 						} else {
 							$actions['delete'] = sprintf( '<a %1s href="%2s">%3s</a>',
-								$class,
+								$link_class,
 								esc_url( WPGlobus_Language_Edit_Request::url_language_delete( $item['wpglobus_code'] ) ),
 								esc_html( $data['caption'] )
 							);
@@ -413,7 +428,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 
 
 	/**
-	 * Define function to add item actions by name 'column_default'
+	 * Define function to add item actions by name 'column_default'.
 	 *
 	 * @since 1.0.0
 	 *
@@ -429,7 +444,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Define function tot add item actions by name 'column_cb'
+	 * Define function tot add item actions by name 'column_cb'.
 	 *
 	 * @since 1.0.0
 	 *
@@ -444,7 +459,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Define function for add item actions by name 'wpglobus_en_language_name'
+	 * Define function for add item actions by name 'wpglobus_en_language_name'.
 	 *
 	 * @since 1.5.10
 	 *
@@ -461,9 +476,8 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Generate the table navigation above or below the table
+	 * Generate the table navigation above or below the table.
 	 *
-	 * @since  3.1.0
 	 * @access protected
 	 *
 	 * @param string $which Above or below.
@@ -488,7 +502,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Generates content for a single row of the table
+	 * Generates content for a single row of the table.
 	 *
 	 * @since  1.5.10
 	 * @access public

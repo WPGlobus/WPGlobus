@@ -61,26 +61,22 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
-	 * URL of the WPGlobus Add-ons page.
-	 * @return string
-	 */
-	public static function url_addons_2() {
-		return add_query_arg(
-			array(
-				'tab'    => 'search',
-				's'      => 'WPGlobus',
-				'source' => 'WPGlobus',
-			),
-			'plugin-install.php'
-		);
-	}
-
-	/**
 	 * URL of the WPGlobus Settings page.
+	 *
 	 * @return string
 	 */
 	public static function url_settings() {
-		return admin_url( 'admin.php' ) . '?page=wpglobus_options';
+		return add_query_arg( 'page', WPGlobus::OPTIONS_PAGE_SLUG, admin_url( 'admin.php' ) );
+	}
+
+	/**
+	 * URL of the WPGlobus Helpdesk page.
+	 *
+	 * @return string
+	 * @since 1.9.10
+	 */
+	public static function url_helpdesk() {
+		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_HELPDESK, admin_url( 'admin.php' ) );
 	}
 
 	/**

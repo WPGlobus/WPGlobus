@@ -11,38 +11,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
+if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 	/**
-	 * Class ReduxFramework_wpglobus_select
+	 * Class WPGlobusOptions_wpglobus_select
 	 */
-	class ReduxFramework_wpglobus_select {
+	class WPGlobusOptions_wpglobus_select {
 		/** @noinspection PhpUndefinedClassInspection */
 
 		/**
 		 * Field Constructor.
-		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-		 *
-		 * @since ReduxFramework 1.0.0
 		 *
 		 * @param array $field
 		 * @param string|array $value
-		 * @param ReduxFramework $parent
 		 */
-		public function __construct( $field = array(), $value = '', $parent ) {
-			$this->parent = $parent;
+		public function __construct( $field = array(), $value = '' ) {
+
 			$this->field  = $field;
-			$this->value  = $value;
+
+			if ( ! empty($field['value']) ) {
+				$this->value = $field['value'];
+			} else {
+				$this->value = $value;
+			}
+			
+			$this->render();
 		}
 
 		/**
 		 * Field Render Function.
 		 * Takes the vars and outputs the HTML for the field in the settings
 		 *
-		 * @since ReduxFramework 1.0.0
+		 * @since 
 		 */
 		public function render() {
 			/** @var array $parent_args */
-			$parent_args = $this->parent->args;
+			//$parent_args = $this->parent->args;
 
 			$sortable = ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : '';
 
@@ -132,6 +135,8 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 				$sortable =
 					( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : "";
 
+				echo $this->render_wrapper('before');	
+					
 				echo '<select ' . esc_attr( $multi ) . ' id="' . esc_attr( $this->field['id'] ) . '-select" data-placeholder="' . esc_attr( $placeholder ) . '" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . $nameBrackets ) . '" class="redux-select-item ' . esc_attr( $this->field['class'] . $sortable ) . '"';
 				echo $width; // WPCS: XSS ok, sanitization ok.
 				echo ' rows="6">';
@@ -160,8 +165,45 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 					 /// Do not translate
 					 esc_html__( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
 			}
+			if ( ! empty($this->field['desc']) ) {
+				echo '<p class="description">' . $this->field['desc'] . '</p>';
+			}
+			echo $this->render_wrapper('after');	
+			
 		} //function
-
+		
+		/**
+		 * @todo add doc.
+		 */
+		public function render_wrapper($wrapper = 'before') {
+			$render = '';
+			if ( 'before' == $wrapper ) {
+				ob_start();
+				?>
+				<div 
+					id="wpglobus-options-<?php echo $this->field['id']; ?>" 
+					class="wpglobus-options-field wpglobus-options-field-wpglobus_select" 
+					data-id="<?php echo $this->field['id']; ?>"
+					data-type="<?php echo $this->field['type']; ?>">
+					<div class="grid__item">
+						<p class="title"><?php echo $this->field['title']; ?></p>
+						<?php if ( ! empty($this->field['subtitle']) ) { 	?>
+							<p class="subtitle"><?php echo $this->field['subtitle']; ?></p>
+						<?php }	?>	
+					</div>
+					<div class="grid__item">
+				<?php
+				$render = ob_get_clean();
+			} elseif ( 'after' == $wrapper ) {
+				?>
+					</div><!-- .grid__item -->
+				</div><!-- #wpglobus-options-<?php echo $this->field['id']; ?> -->
+				<?php				
+				$render = ob_get_clean();
+			}
+			return $render;			
+		}
+		
 		/**
 		 * @param        $id
 		 * @param        $value
@@ -191,6 +233,10 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 		 */
 		public function enqueue() {
 			/** @var array $parent_args */
+			
+			return;
+			
+			
 			$parent_args = $this->parent->args;
 
 			wp_enqueue_style( 'select2-css' );
@@ -214,3 +260,4 @@ if ( ! class_exists( 'ReduxFramework_wpglobus_select' ) ) {
 		}
 	}
 }
+new WPGlobusOptions_wpglobus_select($field);
