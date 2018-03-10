@@ -1184,7 +1184,7 @@ class WPGlobus_Options {
 	}
 
 	/**
-	 * Backward compatibility
+	 * Backward compatibility for fields.
 	 *
 	 * @param array $field The field parameters.
 	 *
@@ -1232,6 +1232,9 @@ class WPGlobus_Options {
 	 * @return array
 	 */
 	protected function sanitize_section( $section ) {
+
+		$section = $this->section_backward_compatibility( $section );
+
 		if ( empty( $section['tab_href'] ) ) {
 			// No real link, just switch tab.
 			$section['tab_href'] = '#';
@@ -1247,9 +1250,36 @@ class WPGlobus_Options {
 			$section['onclick'] = '';
 		}
 
-		// Use the generic icon if not specified of one of the old icons.
+		// Use the generic icon if not specified or deprecated (Elusive).
 		if ( ! isset( $section['icon'] ) || 'el-icon' === substr( $section['icon'], 0, 7 ) ) {
 			$section['icon'] = 'dashicons dashicons-admin-generic';
+		}
+
+		return $section;
+	}
+
+	/**
+	 * Backward compatibility for sections.
+	 *
+	 * @param array $section The section parameters.
+	 *
+	 * @return array Converted to the new format if necessary.
+	 */
+	protected function section_backward_compatibility( $section ) {
+		/**
+		 * WPGlobus Translate Options.
+		 *
+		 * @link https://wordpress.org/plugins/wpglobus-translate-options/
+		 * @see  wpglobus_add_options_section()
+		 */
+		if ( 'Translation options' === $section['title'] ) {
+			$section = array(
+				'wpglobus_id'  => 'translate_options_link',
+				'title'        => __( 'Translate strings', 'wpglobus' ),
+				'tab_href'     => add_query_arg( 'page', 'wpglobus-translate-options', admin_url( 'admin.php' ) ),
+				'icon'         => 'dashicons dashicons-admin-generic',
+				'externalLink' => true,
+			);
 		}
 
 		return $section;
