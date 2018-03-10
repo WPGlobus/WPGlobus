@@ -1145,7 +1145,7 @@ class WPGlobus {
 
 		}
 
-		if ( self::LANGUAGE_EDIT_PAGE === $page ) {
+		if ( in_array( $page, array( self::LANGUAGE_EDIT_PAGE, self::OPTIONS_PAGE_SLUG ) ) ) {
 
 			/**
 			 * Using the same 'select2-js' ID as Redux Plugin does, to avoid duplicate enqueueing
