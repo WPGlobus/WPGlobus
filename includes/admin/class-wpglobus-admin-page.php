@@ -80,6 +80,18 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
+	 * URL of the Admin Central page.
+	 *
+	 * @param string $central_tab_id Tab on the page.
+	 *
+	 * @return string
+	 * @since 1.9.10
+	 */
+	public static function url_admin_central( $central_tab_id = '' ) {
+		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_ADMIN_CENTRAL . '#' . $central_tab_id, admin_url( 'admin.php' ) );
+	}
+
+	/**
 	 * Print icon for navigation tab item.
 	 *
 	 * @param string $icon_class A Dashicon CSS class or our internal alias.

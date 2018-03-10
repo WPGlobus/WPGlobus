@@ -378,7 +378,24 @@ class WPGlobus_Options {
 			}
 		}
 
-		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the entire options panel is.
+
+		/**
+		 * Links to Admin Central
+		 */
+
+		if ( class_exists( 'WPGlobus_Admin_Central', false ) ) {
+			if ( class_exists( 'WPGlobusMobileMenu', false ) ) {
+				$this->sections[] = $this->section_mobile_menu();
+			}
+			if ( class_exists( 'WPGlobus_Language_Widgets', false ) ) {
+				$this->sections[] = $this->section_language_widgets();
+			}
+			if ( class_exists( 'WPGlobus_Featured_Images', false ) ) {
+				$this->sections[] = $this->section_featured_images();
+			}
+		}
+
+		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the options panel might use AJAX.
 
 		if ( class_exists( 'WPGlobus_Admin_Page', false ) ) {
 			$this->sections[] = $this->addonsSection();
@@ -496,7 +513,6 @@ class WPGlobus_Options {
 	}
 
 	public function helpdeskSection() {
-
 		return array(
 			'wpglobus_id'  => 'helpdesk',
 			'title'        => __( 'Help Desk', 'wpglobus' ),
@@ -504,11 +520,9 @@ class WPGlobus_Options {
 			'icon'         => WPGlobus_Admin_HelpDesk::ICON_CLASS,
 			'externalLink' => true,
 		);
-
 	}
 
 	public function addonsSection() {
-
 		return array(
 			'wpglobus_id'  => 'addons',
 			'title'        => __( 'All add-ons', 'wpglobus' ),
@@ -516,7 +530,36 @@ class WPGlobus_Options {
 			'icon'         => 'dashicons dashicons-admin-plugins',
 			'externalLink' => true,
 		);
+	}
 
+	protected function section_mobile_menu() {
+		return array(
+			'wpglobus_id'  => 'mobile_menu',
+			'title'        => __( 'Mobile Menu', 'wpglobus' ),
+			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-mobile-menu' ),
+			'icon'         => 'dashicons dashicons-smartphone',
+			'externalLink' => true,
+		);
+	}
+
+	protected function section_language_widgets() {
+		return array(
+			'wpglobus_id'  => 'mobile_menu',
+			'title'        => __( 'Language Widgets', 'wpglobus' ),
+			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-language-widgets' ),
+			'icon'         => 'dashicons dashicons-archive',
+			'externalLink' => true,
+		);
+	}
+
+	protected function section_featured_images() {
+		return array(
+			'wpglobus_id'  => 'mobile_menu',
+			'title'        => __( 'Featured Images', 'wpglobus' ),
+			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-featured-images' ),
+			'icon'         => 'dashicons dashicons-images-alt',
+			'externalLink' => true,
+		);
 	}
 
 	/**
