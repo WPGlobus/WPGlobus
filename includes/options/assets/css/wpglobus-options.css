@@ -147,9 +147,13 @@
 
 .wpglobus-options-main .wpglobus-options-field .title {
     margin: 0;
-    padding: 0 2em 0 1.5em;
+    padding: 1em 2em 1em 0;
     font-size: 14px;
     font-weight: 600;
+}
+
+.wpglobus-options-main .wpglobus-options-field .grid__item .title {
+	padding: 1em 1em 0.5em 1.5em;
 }
 
 .wpglobus-options-main .wpglobus-options-field .subtitle {
