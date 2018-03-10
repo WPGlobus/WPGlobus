@@ -118,34 +118,18 @@ class WPGlobus_Options {
 					<div class="wpglobus-options-wrap">
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
-								<?php foreach ( $this->sections as $section_tab => $section ) {
-
-									if ( empty( $section['tab_href'] ) ) {
-										// No real link, just switch tab.
-										$tab_href = '#';
-										$li_class = 'wpglobus-tab-link';
-									} else {
-										// Real link specified. Use it and do not set the tab switching CSS class.
-										$tab_href = $section['tab_href'];
-										$li_class = '';
-									}
-
-									$onclick = 'onclick="return false;"';
-									if ( ! empty( $section['externalLink'] ) && $section['externalLink'] ) {
-										$onclick = '';
-									}
-
-									?>
+								<?php foreach ( $this->sections as $section_tab => $section ): ?>
+									<?php $section = self::sanitize_section( $section ); ?>
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
-											class="<?php echo esc_attr( $li_class ); ?>"
+											class="<?php echo esc_attr( $section['li_class'] ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<a href="<?php echo esc_url( $tab_href ); ?>" <?php echo $onclick; ?>
+										<a href="<?php echo esc_url( $section['tab_href'] ); ?>" <?php echo $section['onclick']; // XSS ok. ?>
 												data-tab="<?php echo esc_attr( $section_tab ); ?>">
 											<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
 											<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
 										</a>
 									</li>
-								<?php } ?>
+								<?php endforeach; ?>
 							</ul>
 						</div><!-- sidebar -->
 						<div class="wpglobus-options-main wpglobus-options-wrap__item">
@@ -1195,6 +1179,40 @@ class WPGlobus_Options {
 		}
 
 		return $field;
+	}
+
+	/**
+	 * Sanitize section parameters.
+	 * - handle real links vs. tabs
+	 * - fix icons
+	 * - etc.
+	 *
+	 * @param array $section The array of section parameters.
+	 *
+	 * @return array
+	 */
+	protected static function sanitize_section( $section ) {
+		if ( empty( $section['tab_href'] ) ) {
+			// No real link, just switch tab.
+			$section['tab_href'] = '#';
+			$section['li_class'] = 'wpglobus-tab-link';
+		} else {
+			// Real link specified. Use it and do not set the tab switching CSS class.
+			$section['li_class'] = '';
+		}
+
+		// Disable A-clicks unless it's a real (external) link.
+		$section['onclick'] = 'onclick="return false;"';
+		if ( ! empty( $section['externalLink'] ) && $section['externalLink'] ) {
+			$section['onclick'] = '';
+		}
+
+		// Use the generic icon if not specified of one of the old icons.
+		if ( ! isset( $section['icon'] ) || 'el-icon' === substr( $section['icon'], 0, 7 ) ) {
+			$section['icon'] = 'dashicons dashicons-admin-generic';
+		}
+
+		return $section;
 	}
 
 } // class
