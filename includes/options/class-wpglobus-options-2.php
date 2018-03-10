@@ -119,7 +119,7 @@ class WPGlobus_Options {
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
 								<?php foreach ( $this->sections as $section_tab => $section ): ?>
-									<?php $section = self::sanitize_section( $section ); ?>
+									<?php $section = $this->sanitize_section( $section ); ?>
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
 											class="<?php echo esc_attr( $section['li_class'] ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
@@ -1231,7 +1231,7 @@ class WPGlobus_Options {
 	 *
 	 * @return array
 	 */
-	protected static function sanitize_section( $section ) {
+	protected function sanitize_section( $section ) {
 		if ( empty( $section['tab_href'] ) ) {
 			// No real link, just switch tab.
 			$section['tab_href'] = '#';
