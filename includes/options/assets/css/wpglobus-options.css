@@ -228,6 +228,10 @@
     max-width: none;
 }
 
+.wpglobus-options-main .wpglobus-options-field-wpglobus_select .subtitle {
+    margin: 1em 0;
+}
+
 /** Field type: 'wpglobus_ace_editor' **/
 .wpglobus-options-main .wpglobus-options-field-wpglobus_ace_editor {
     display: grid;
