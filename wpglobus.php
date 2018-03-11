@@ -97,6 +97,13 @@ require_once dirname( __FILE__ ) . '/includes/class-wpglobus.php';
 require_once dirname( __FILE__ ) . '/includes/class-wpglobus-core.php';
 
 /**
+ * Admin page helpers.
+ *
+ * @since 1.6.5
+ */
+require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-admin-page.php';
+
+/**
  * Initialize
  *
  * @todo Rename uppercase variables.
@@ -166,13 +173,6 @@ require_once dirname( __FILE__ ) . '/includes/class-wpglobus-post-types.php';
  * In admin area
  */
 if ( WPGlobus_WP::in_wp_admin() ) :
-
-	/**
-	 * Admin page helpers
-	 *
-	 * @since 1.6.5
-	 */
-	require_once dirname( __FILE__ ) . '/includes/admin/class-wpglobus-admin-page.php';
 
 	/**
 	 * HelpDesk
