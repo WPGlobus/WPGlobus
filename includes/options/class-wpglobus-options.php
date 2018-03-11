@@ -884,41 +884,14 @@ class WPGlobus_Options {
 
 		$fields[] =
 			array(
-				'id'     => 'wpglobus_post_types_intro',
-				'type'   => 'wpglobus_info',
-				'title'  => __( 'Uncheck to disable WPGlobus', 'wpglobus' ),
-				'style'  => 'info',
-				'notice' => false,
-				'class'  => 'info',
+				'id'       => 'wpglobus_post_types_choose',
+				'type'     => 'wpglobus_multicheck',
+				'options'  => $options,
+				'name'     => 'wpglobus_option[post_type]',
+				'title'    => __( 'WPGlobus is enabled on these Post Types', 'wpglobus' ),
+				'subtitle' => __( 'Uncheck to disable', 'wpglobus' ),
+				'desc'     => __( 'Please note that there are post types, which status is managed by other plugins and cannot be changed here.', 'wpglobus' ),
 			);
-
-		$fields[] =
-			array(
-				'id'      => 'wpglobus_post_types_choose',
-				'type'    => 'wpglobus_multicheck',
-				'options' => $options,
-				'name'    => 'wpglobus_option[post_type]',
-				'desc'    => __( 'Please note that there are post types which status is managed by other plugins and cannot be changed here.', 'wpglobus' ),
-			);
-
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			$fields[] =
-				array(
-					'id'     => 'wpglobus_post_types_debug',
-					'type'   => 'wpglobus_info',
-					'title'  => 'Debug',
-					'desc'   => '<xmp>'
-								. 'WPGlobus::Config()->disabled_entities '
-								. print_r( $this->config->disabled_entities, true )
-								. 'WPGlobus_Post_Types::get_hidden_types() '
-								. print_r( WPGlobus_Post_Types::hidden_types(), true )
-								. '</xmp>',
-					// TODO
-					'style'  => 'normal',
-					'notice' => false,
-					'class'  => 'normal',
-				);
-		}
 
 		return array(
 			'wpglobus_id' => 'wpglobus_post_types',
@@ -926,7 +899,6 @@ class WPGlobus_Options {
 			'icon'        => 'dashicons dashicons-admin-post',
 			'fields'      => $fields,
 		);
-
 	}
 
 	/**
