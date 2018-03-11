@@ -6,6 +6,7 @@
 
 * ADDED:
     * ACF: the ability to use WPGlobusAcf.getFields() to define what fields can be disable ( @see WPGlobusAcf.getDisabledFields() ) ACF and ACF Pro field translation.
+    * Flags: new us-uk.png flag.
 
 ### 1.9.9 ###
 
