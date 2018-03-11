@@ -468,13 +468,6 @@ class WPGlobus_Options {
 
 		$fields_home = array();
 
-		/**
-		 * For Google Analytics.
-		 */
-		$ga_campaign = '?utm_source=wpglobus-admin-clean&utm_medium=link&utm_campaign=talk-to-us';
-
-		$url_wpglobus_site               = WPGlobus_Utils::url_wpglobus_site();
-		$url_wpglobus_site_submit_ticket = $url_wpglobus_site . 'support/submit-ticket/' . $ga_campaign;
 
 		$fields_home[] =
 			array(
@@ -487,7 +480,7 @@ class WPGlobus_Options {
 								esc_html(
 								/// translators: %?$s: HTML codes for hyperlink. Do not remove.
 									esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ) ),
-								'<a href="' . $url_wpglobus_site_submit_ticket . '" target="_blank">',
+								'<a href="' . esc_url( WPGlobus_Admin_Page::url_helpdesk() ) . '">',
 								'</a>'
 							) .
 							'</em>' .
