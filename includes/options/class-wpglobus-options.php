@@ -434,7 +434,7 @@ class WPGlobus_Options {
 				'title' => __( 'Thank you for installing WPGlobus!', 'wpglobus' ),
 				'desc'  => '' .
 						   '&bull; ' .
-						   '<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_ABOUT . '">' .
+						   '<a href="' . esc_url( WPGlobus_Admin_Page::url_about() ) . '">' .
 						   esc_html__( 'Read About WPGlobus', 'wpglobus' ) .
 						   '</a>' .
 						   '<br/>' .

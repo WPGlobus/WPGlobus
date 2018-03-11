@@ -90,6 +90,16 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
+	 * URL of the About page.
+	 *
+	 * @return string
+	 * @since 1.9.10
+	 */
+	public static function url_about() {
+		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_ABOUT, admin_url( 'admin.php' ) );
+	}
+
+	/**
 	 * URL of the Admin Central page.
 	 *
 	 * @param string $central_tab_id Tab on the page.
