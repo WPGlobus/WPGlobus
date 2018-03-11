@@ -13,9 +13,12 @@
 jQuery(document).ready(function ($) {
     "use strict";
 
-    if (typeof WPGlobusAcf == 'undefined') {
+    if (typeof WPGlobusAcf === 'undefined') {
         return;
     }
+    if (typeof WPGlobusDialogApp === 'undefined') {
+		return;
+	}
 
     var api = {
         option       : {},
