@@ -47,10 +47,14 @@ class WPGlobus_Admin_Page {
 
 	/**
 	 * URL of the WPGlobus Add-ons page.
+	 *
+	 * @param bool $relative Set it to true to get the URL relative to the admin.
+	 *
 	 * @return string
 	 */
-	public static function url_addons() {
-		return add_query_arg(
+	public static function url_addons( $relative = false ) {
+
+		$url = add_query_arg(
 			array(
 				'tab'    => 'search',
 				's'      => 'WPGlobus',
@@ -58,6 +62,13 @@ class WPGlobus_Admin_Page {
 			),
 			self_admin_url( 'plugin-install.php' )
 		);
+
+		if ( $relative ) {
+			$url = str_replace( self_admin_url(), '', $url );
+		}
+
+		return $url;
+
 	}
 
 	/**

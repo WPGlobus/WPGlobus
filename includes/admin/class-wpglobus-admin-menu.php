@@ -27,7 +27,7 @@ class WPGlobus_Admin_Menu {
 			. '" style="vertical-align:middle"></span> '
 			. $menu_title,
 			'administrator',
-			WPGlobus_Admin_Page::url_addons() // TODO
+			WPGlobus_Admin_Page::url_addons(true)
 		);
 
 	}
