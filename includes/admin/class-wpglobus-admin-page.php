@@ -112,6 +112,22 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
+	 * URL of the Options Panel.
+	 *
+	 * @param string $tab Tab on the page.
+	 *
+	 * @return string
+	 * @since 1.9.10
+	 */
+	public static function url_options_panel( $tab = WPGlobus_Options::DEFAULT_TAB ) {
+
+		return add_query_arg( array(
+			'page' => WPGlobus::OPTIONS_PAGE_SLUG,
+			'tab'  => $tab,
+		), admin_url( 'admin.php' ) );
+	}
+
+	/**
 	 * Print icon for navigation tab item.
 	 *
 	 * @param string $icon_class A Dashicon CSS class or our internal alias.

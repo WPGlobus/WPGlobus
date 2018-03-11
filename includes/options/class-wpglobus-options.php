@@ -1099,15 +1099,12 @@ class WPGlobus_Options {
 
 
 			// Need to get back to the current tab after reloading.
-			$tab = '';
+			$tab = self::DEFAULT_TAB;
 			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
 				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] );
 			}
 
-			wp_safe_redirect( add_query_arg( array(
-				'page' => $this->page_slug,
-				'tab'  => $tab,
-			), admin_url( 'admin.php' ) ) );
+			wp_safe_redirect( WPGlobus_Admin_Page::url_options_panel( $tab ) );
 		}
 	}
 
