@@ -403,11 +403,13 @@ class WPGlobus_Options {
 			}
 		}
 
-		// Checking class_exists because those classes are not loaded in DOING_AJAX, but the options panel might use AJAX.
-
-		if ( class_exists( 'WPGlobus_Admin_Page', false ) ) {
-			$this->sections['addons'] = $this->addonsSection();
+		// This section is added only if it's not empty.
+		$section_recommendations = $this->section_recommendations();
+		if ( $section_recommendations ) {
+//			$this->sections['recommendations'] = $section_recommendations;
 		}
+
+		$this->sections['addons'] = $this->addonsSection();
 
 		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
 			$this->sections['helpdesk'] = $this->helpdeskSection();
@@ -560,6 +562,96 @@ class WPGlobus_Options {
 			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-featured-images' ),
 			'icon'         => 'dashicons dashicons-images-alt',
 			'externalLink' => true,
+		);
+	}
+
+	protected function section_recommendations() {
+
+		$id = 'recommendations';
+		$tab_content   = array();
+		$tab_content[] = $this->recommend_wpg_wc();
+		$tab_content[] = $this->recommend_wpg_mc();
+
+		return array(
+			'wpglobus_id' => $id,
+			'title'       => __( 'We Recommend...', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-megaphone',
+			'fields'      => $tab_content,
+		);
+	}
+
+	protected function recommend_wpg_wc() {
+		$id           = 'recommend_wpg_wc';
+		$product_slug = 'woocommerce-wpglobus';
+		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
+
+		ob_start();
+
+		?>
+		<div class="wpglobus-recommend-logo alignleft">
+			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png" alt=""/>
+		</div>
+		<p>
+
+			<?php esc_html_e(
+				'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
+		</p>
+		<p><strong>
+				<?php esc_html_e(
+					'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
+			</strong></p>
+		<p>
+			<?php esc_html_e( 'With the WPGlobus for WooCommerce premium add-on, you will be able to translate product titles and descriptions, categories, tags and attributes.', 'wpglobus' ); ?>
+		</p>
+		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+		</a>
+		<?php
+
+		$content_body = ob_get_clean();
+
+
+		return array(
+			'id'   => $id . '_content',
+			'type' => 'wpglobus_info',
+			'desc' => $content_body,
+		);
+	}
+
+	protected function recommend_wpg_mc() {
+		$id           = 'recommend_wpg_wc';
+		$product_slug = 'wpglobus-multi-currency';
+		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
+
+		ob_start();
+
+		?>
+		<div class="wpglobus-recommend-logo alignleft">
+			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-multi-currency-logo.jpg"
+					alt=""/>
+		</div>
+		<p><strong>
+				<?php printf( esc_html__(
+					'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ); ?>
+			</strong></p>
+		<p>
+			<?php esc_html_e( 'With WPGlobus, you can add multiple currencies to your store and charge UK customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. Accepting multiple currencies will strengthen your competitive edge and positioning for global growth!', 'wpglobus' ); ?>
+
+		</p>
+		<p>
+			<?php esc_html_e( 'The WPGlobus Multi-Currency premium add-on provides switching currencies and re-calculating prices on-the-fly.', 'wpglobus' ); ?>
+		</p>
+		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+		</a>
+		<?php
+
+		$content_body = ob_get_clean();
+
+		return array(
+			'id'   => $id . '_content',
+			'type' => 'wpglobus_info',
+			'desc' => $content_body,
 		);
 	}
 
@@ -1297,6 +1389,26 @@ class WPGlobus_Options {
 		}
 
 		return $section;
+	}
+
+	/**
+	 * Add Google Analytics parameters to the URL.
+	 *
+	 * @param string $url      The URL.
+	 * @param string $campaign Campaign ID.
+	 * @param string $source   Optional.
+	 * @param string $medium   Optional.
+	 *
+	 * @return string
+	 */
+	protected function url_ga( $url, $campaign, $source = 'wpglobus-options-panel', $medium = 'link' ) {
+		return add_query_arg(
+			array(
+				'utm_campaign' => $campaign,
+				'utm_source'   => $source,
+				'utm_medium'   => $medium,
+			), $url
+		);
 	}
 
 }

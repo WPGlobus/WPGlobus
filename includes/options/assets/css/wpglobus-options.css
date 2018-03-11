@@ -338,3 +338,17 @@
         filter: opacity(.1);
     }
 }
+
+.wpglobus-recommend-logo {
+    margin: 0 2em 1em 0;
+}
+
+.wpglobus-recommend-logo img {
+    width: 150px;
+}
+
+@media screen and (max-width: 400px) {
+    .wpglobus-recommend-logo img {
+        width: 100%;
+    }
+}
