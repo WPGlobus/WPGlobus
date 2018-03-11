@@ -405,8 +405,8 @@ class WPGlobus_Options {
 
 		// This section is added only if it's not empty.
 		$section_recommendations = $this->section_recommendations();
-		if ( $section_recommendations ) {
-//			$this->sections['recommendations'] = $section_recommendations;
+		if ( count( $section_recommendations ) ) {
+			$this->sections['recommendations'] = $section_recommendations;
 		}
 
 		$this->sections['addons'] = $this->addonsSection();
@@ -567,13 +567,23 @@ class WPGlobus_Options {
 
 	protected function section_recommendations() {
 
-		$id = 'recommendations';
-		$tab_content   = array();
-		$tab_content[] = $this->recommend_wpg_wc();
-		$tab_content[] = $this->recommend_wpg_mc();
+		$tab_content = array();
+
+		$_ = $this->recommend_wpg_wc();
+		if ( count( $_ ) ) {
+			$tab_content[] = $_;
+		}
+		$_ = $this->recommend_wpg_mc();
+		if ( count( $_ ) ) {
+			$tab_content[] = $_;
+		}
+
+		if ( ! count( $tab_content ) ) {
+			return array();
+		}
 
 		return array(
-			'wpglobus_id' => $id,
+			'wpglobus_id' => 'recommendations',
 			'title'       => __( 'We Recommend...', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-megaphone',
 			'fields'      => $tab_content,
@@ -581,6 +591,13 @@ class WPGlobus_Options {
 	}
 
 	protected function recommend_wpg_wc() {
+
+		if ( defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' )
+			 || ! class_exists( 'WooCommerce', false )
+		) {
+			return array();
+		}
+
 		$id           = 'recommend_wpg_wc';
 		$product_slug = 'woocommerce-wpglobus';
 		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
@@ -589,7 +606,8 @@ class WPGlobus_Options {
 
 		?>
 		<div class="wpglobus-recommend-logo alignleft">
-			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png" alt=""/>
+			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png"
+					alt=""/>
 		</div>
 		<p>
 
@@ -619,6 +637,12 @@ class WPGlobus_Options {
 	}
 
 	protected function recommend_wpg_mc() {
+		if ( defined( 'WPGLOBUS_MC_VERSION' )
+			 || ! class_exists( 'WooCommerce', false )
+		) {
+			return array();
+		}
+
 		$id           = 'recommend_wpg_wc';
 		$product_slug = 'wpglobus-multi-currency';
 		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
