@@ -80,6 +80,16 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
+	 * URL of the Clean-up Tool page.
+	 *
+	 * @return string
+	 * @since 1.9.10
+	 */
+	public static function url_clean_up_tool() {
+		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_CLEAN, admin_url( 'admin.php' ) );
+	}
+
+	/**
 	 * URL of the Admin Central page.
 	 *
 	 * @param string $central_tab_id Tab on the page.

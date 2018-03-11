@@ -495,7 +495,7 @@ class WPGlobus_Options {
 								sprintf(
 								/// translators: %?$s: HTML codes for hyperlink. Do not remove.
 									esc_html__( '%1$sClean-up Tool%2$s', 'wpglobus' ),
-									'<a href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
+									'<a href="' . esc_url( WPGlobus_Admin_Page::url_clean_up_tool() ) . '">',
 									'</a>'
 								) ) .
 							'',
