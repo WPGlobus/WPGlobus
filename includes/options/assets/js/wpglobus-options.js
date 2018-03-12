@@ -46,7 +46,9 @@ jQuery(document).ready(function ($) {
 				if ( -1 != href.indexOf('tab') ) {
 					if ( -1 == href.indexOf('tab-from') ) {
 						href = href.replace(/tab/, 'tab-from');
+						href += '&tab='+tab;
 					}
+				} else {
 					href += '&tab='+tab;
 				}
 				$(e).attr('href', href)
