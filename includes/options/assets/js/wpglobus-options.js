@@ -66,7 +66,7 @@ jQuery(document).ready(function ($) {
 			var curTab = $('#section-tab-'+WPGlobusOptions.tab);
 			api.currentTabID = WPGlobusOptions.tab;
 			if ( 0 == curTab.length ) {
-				api.currentTabID = 0;
+				api.currentTabID = WPGlobusOptions.defaultTab;
 				curTab = $('#section-tab-'+api.currentTabID);
 			}
 			curTab.css({'display':'block'});

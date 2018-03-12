@@ -1082,10 +1082,11 @@ class WPGlobus_Options {
 			'wpglobus-options',
 			'WPGlobusOptions',
 			array(
-				'version'  => WPGLOBUS_VERSION,
-				'tab'      => $this->tab,
-				'sections' => $this->sections,
-				'newUrl'   => add_query_arg(
+				'version'  		=> WPGLOBUS_VERSION,
+				'tab'      		=> $this->tab,
+				'defaultTab'    => self::DEFAULT_TAB,
+				'sections' 		=> $this->sections,
+				'newUrl'   		=> add_query_arg(
 					array(
 						'page' => $this->page_slug,
 						'tab'  => '{*}',
