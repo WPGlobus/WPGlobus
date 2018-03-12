@@ -40,13 +40,14 @@ jQuery(document).ready(function ($) {
 			api.setFirstLanguageCb();
 		},
 		handlerLanguagesTable: function() {
-			var tab = $('#wpglobus-options-languagesTable').parents('.wpglobus-options-tab').data('tab') * 1;
+			var tab = $('#wpglobus-options-languagesTable').parents('.wpglobus-options-tab').data('tab');
 			$('#wpglobus-options-languagesTable .manage-column.sortable a').each(function(i,e){
 				var href = $(e).attr('href');
-				if ( false === /tab=\d{1,}/.test(href) ) {
+				if ( -1 != href.indexOf('tab') ) {
+					if ( -1 == href.indexOf('tab-from') ) {
+						href = href.replace(/tab/, 'tab-from');
+					}
 					href += '&tab='+tab;
-				} else {
-					href = href.replace(/tab=\d{1,}/, 'tab='+tab);
 				}
 				$(e).attr('href', href)
 			});
