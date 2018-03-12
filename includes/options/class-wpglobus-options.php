@@ -610,33 +610,37 @@ class WPGlobus_Options {
 		ob_start();
 
 		?>
-		<div class="wpglobus-recommend-logo alignleft">
-			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-plus-logo-300x300.png"
-					alt=""/>
+		<div class="wpglobus-recommend-container">
+			<div class="wpglobus-recommend-logo grid__item">
+				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-plus-logo-300x300.png"
+						alt=""/>
+			</div>
+			<div class="grid__item">
+				<p><strong>
+						<?php esc_html_e(
+							'Our premium add-on, WPGlobus Plus, will add several features to your website, such as:', 'wpglobus' ); ?>
+					</strong></p>
+				<p>
+					<?php esc_html_e(
+						'- Ability to write a post in one language and immediately publish it, not waiting for the translation to other languages;', 'wpglobus' ); ?>
+				</p>
+				<p>
+					<?php esc_html_e(
+						'- Set different URLs for each translation;', 'wpglobus' ); ?>
+				</p>
+				<p>
+					<?php esc_html_e(
+						'- In Yoast SEO, set the focus keyword and do the Page Analysis separately for each translation;', 'wpglobus' ); ?>
+				</p>
+				<p>
+					<?php esc_html_e(
+						'- and more...', 'wpglobus' ); ?>
+				</p>
+				<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+					<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+				</a>
+			</div>
 		</div>
-		<p><strong>
-				<?php esc_html_e(
-					'Our premium add-on, WPGlobus Plus, will add several features to your website, such as:', 'wpglobus' ); ?>
-			</strong></p>
-		<p>
-			<?php esc_html_e(
-				'- Ability to write a post in one language and immediately publish it, not waiting for the translation to other languages;', 'wpglobus' ); ?>
-		</p>
-		<p>
-			<?php esc_html_e(
-				'- Set different URLs for each translation;', 'wpglobus' ); ?>
-		</p>
-		<p>
-			<?php esc_html_e(
-				'- In Yoast SEO, set the focus keyword and do the Page Analysis separately for each translation;', 'wpglobus' ); ?>
-		</p>
-		<p>
-			<?php esc_html_e(
-				'- and more...', 'wpglobus' ); ?>
-		</p>
-		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
-			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
-		</a>
 		<?php
 
 		$content_body = ob_get_clean();
@@ -664,25 +668,29 @@ class WPGlobus_Options {
 		ob_start();
 
 		?>
-		<div class="wpglobus-recommend-logo alignleft">
-			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png"
-					alt=""/>
-		</div>
-		<p>
+		<div class="wpglobus-recommend-container">
+			<div class="wpglobus-recommend-logo grid__item">
+				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png"
+						alt=""/>
+			</div>
+			<div class="grid__item">
+				<p>
 
-			<?php esc_html_e(
-				'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
-		</p>
-		<p><strong>
-				<?php esc_html_e(
-					'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
-			</strong></p>
-		<p>
-			<?php esc_html_e( 'With the WPGlobus for WooCommerce premium add-on, you will be able to translate product titles and descriptions, categories, tags and attributes.', 'wpglobus' ); ?>
-		</p>
-		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
-			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
-		</a>
+					<?php esc_html_e(
+						'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
+				</p>
+				<p><strong>
+						<?php esc_html_e(
+							'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
+					</strong></p>
+				<p>
+					<?php esc_html_e( 'With the WPGlobus for WooCommerce premium add-on, you will be able to translate product titles and descriptions, categories, tags and attributes.', 'wpglobus' ); ?>
+				</p>
+				<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+					<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+				</a>
+			</div>
+		</div>
 		<?php
 
 		$content_body = ob_get_clean();
@@ -709,24 +717,28 @@ class WPGlobus_Options {
 		ob_start();
 
 		?>
-		<div class="wpglobus-recommend-logo alignleft">
-			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-multi-currency-logo.jpg"
-					alt=""/>
-		</div>
-		<p><strong>
-				<?php printf( esc_html__(
-					'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ); ?>
-			</strong></p>
-		<p>
-			<?php esc_html_e( 'With WPGlobus, you can add multiple currencies to your store and charge UK customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. Accepting multiple currencies will strengthen your competitive edge and positioning for global growth!', 'wpglobus' ); ?>
+		<div class="wpglobus-recommend-container">		
+			<div class="wpglobus-recommend-logo grid__item">
+				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-multi-currency-logo.jpg"
+						alt=""/>
+			</div>
+			<div class="grid__item">
+				<p><strong>
+						<?php printf( esc_html__(
+							'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ); ?>
+					</strong></p>
+				<p>
+					<?php esc_html_e( 'With WPGlobus, you can add multiple currencies to your store and charge UK customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. Accepting multiple currencies will strengthen your competitive edge and positioning for global growth!', 'wpglobus' ); ?>
 
-		</p>
-		<p>
-			<?php esc_html_e( 'The WPGlobus Multi-Currency premium add-on provides switching currencies and re-calculating prices on-the-fly.', 'wpglobus' ); ?>
-		</p>
-		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
-			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
-		</a>
+				</p>
+				<p>
+					<?php esc_html_e( 'The WPGlobus Multi-Currency premium add-on provides switching currencies and re-calculating prices on-the-fly.', 'wpglobus' ); ?>
+				</p>
+				<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+					<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+				</a>
+			</div>
+		</div>
 		<?php
 
 		$content_body = ob_get_clean();

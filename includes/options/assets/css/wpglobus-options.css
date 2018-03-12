@@ -338,16 +338,29 @@
     }
 }
 
-.wpglobus-recommend-logo {
-    margin: 0 2em 1em 0;
+/**
+ * Section-tab: recommendations.
+ */
+.wpglobus-recommend-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-gap: 1em;	
 }
 
-.wpglobus-recommend-logo img {
-    width: 150px;
+.wpglobus-recommend-container .grid__item {
+    padding: initial;
+    max-width: none;	
 }
 
-@media screen and (max-width: 400px) {
-    .wpglobus-recommend-logo img {
-        width: 100%;
+.wpglobus-recommend-container .wpglobus-recommend-logo img {
+	width: 100%;
+	max-width: 200px;
+}
+
+@media screen and (max-width: 500px) {
+    .wpglobus-recommend-container {
+        grid-template-columns: 100%;
+		place-items: center;
+		grid-gap: 0;
     }
 }
