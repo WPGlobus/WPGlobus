@@ -558,6 +558,10 @@ class WPGlobus_Options {
 
 		$tab_content = array();
 
+		$_ = $this->recommend_wpg_plus();
+		if ( count( $_ ) ) {
+			$tab_content[] = $_;
+		}
 		$_ = $this->recommend_wpg_wc();
 		if ( count( $_ ) ) {
 			$tab_content[] = $_;
@@ -576,6 +580,58 @@ class WPGlobus_Options {
 			'title'       => __( 'We Recommend...', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-megaphone',
 			'fields'      => $tab_content,
+		);
+	}
+
+	protected function recommend_wpg_plus() {
+
+		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
+			return array();
+		}
+
+		$id           = 'recommend_wpg_plu';
+		$product_slug = 'wpglobus-plus';
+		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
+
+		ob_start();
+
+		?>
+		<div class="wpglobus-recommend-logo alignleft">
+			<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-plus-logo-300x300.png"
+					alt=""/>
+		</div>
+		<p><strong>
+				<?php esc_html_e(
+					'Our premium add-on, WPGlobus Plus, will add several features to your website, such as:', 'wpglobus' ); ?>
+			</strong></p>
+		<p>
+			<?php esc_html_e(
+				'- Ability to write a post in one language and immediately publish it, not waiting for the translation to other languages;', 'wpglobus' ); ?>
+		</p>
+		<p>
+			<?php esc_html_e(
+				'- Set different URLs for each translation;', 'wpglobus' ); ?>
+		</p>
+		<p>
+			<?php esc_html_e(
+				'- In Yoast SEO, set the focus keyword and do the Page Analysis separately for each translation;', 'wpglobus' ); ?>
+		</p>
+		<p>
+			<?php esc_html_e(
+				'- and more...', 'wpglobus' ); ?>
+		</p>
+		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+		</a>
+		<?php
+
+		$content_body = ob_get_clean();
+
+
+		return array(
+			'id'   => $id . '_content',
+			'type' => 'wpglobus_info',
+			'desc' => $content_body,
 		);
 	}
 
