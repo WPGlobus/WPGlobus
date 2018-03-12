@@ -1090,7 +1090,7 @@ class WPGlobus_Options {
 					array(
 						'page' => $this->page_slug,
 						'tab'  => '{*}',
-					), admin_url()
+					), admin_url('admin.php')
 				),
 			)
 		);
