@@ -365,6 +365,10 @@ class WPGlobus_Options {
 		$this->sections['post-types']     = $this->section_post_types();
 		$this->sections['custom-code']    = $this->section_custom_code();
 
+		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
+			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
+		}
+
 		/**
 		 * Filter the array of sections. Here add-ons can add their menus.
 		 *
@@ -536,7 +540,7 @@ class WPGlobus_Options {
 
 	protected function section_language_widgets() {
 		return array(
-			'wpglobus_id'  => 'mobile_menu',
+			'wpglobus_id'  => 'language_widgets',
 			'title'        => __( 'Language Widgets', 'wpglobus' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-language-widgets' ),
 			'icon'         => 'dashicons dashicons-archive',
@@ -546,10 +550,20 @@ class WPGlobus_Options {
 
 	protected function section_featured_images() {
 		return array(
-			'wpglobus_id'  => 'mobile_menu',
+			'wpglobus_id'  => 'featured_images',
 			'title'        => __( 'Featured Images', 'wpglobus' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-featured-images' ),
 			'icon'         => 'dashicons dashicons-images-alt',
+			'externalLink' => true,
+		);
+	}
+
+	protected function section_wpglobus_plus() {
+		return array(
+			'wpglobus_id'  => 'wpglobus_plus',
+			'title'        => __( 'WPGlobus Plus', 'wpglobus' ),
+			'tab_href'     => WPGlobus_Admin_Page::url_wpglobus_plus_panel(),
+			'icon'         => 'dashicons dashicons-plus-alt',
 			'externalLink' => true,
 		);
 	}

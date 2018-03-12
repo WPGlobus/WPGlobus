@@ -18,7 +18,7 @@ class WPGlobus_Admin_Page {
 		?>
 		<style>
 			.wp-badge.wpglobus-badge {
-				background:      #ffffff url(<?php echo esc_url( $url_wpglobus_logo ); ?>) no-repeat;
+				background: #ffffff url(<?php echo esc_url( $url_wpglobus_logo ); ?>) no-repeat;
 				background-size: contain;
 			}
 		</style>
@@ -139,6 +139,25 @@ class WPGlobus_Admin_Page {
 	}
 
 	/**
+	 * URL of the WPGlobus-Plus Panel.
+	 *
+	 * @param string $tab Tab on the page.
+	 *
+	 * @return string
+	 * @since 1.9.10
+	 */
+	public static function url_wpglobus_plus_panel( $tab = 'modules' ) {
+		if ( class_exists( 'WPGlobusPlus', false ) ) {
+			return add_query_arg( array(
+				'page' => WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE,
+				'tab'  => $tab,
+			), admin_url( 'admin.php' ) );
+		} else {
+			return admin_url();
+		}
+	}
+
+	/**
 	 * Print icon for navigation tab item.
 	 *
 	 * @param string $icon_class A Dashicon CSS class or our internal alias.
@@ -164,7 +183,7 @@ class WPGlobus_Admin_Page {
 		}
 
 		echo '<span class="dashicons ' . esc_attr( $icon_class ) .
-		     '" style="vertical-align: middle"></span>';
+			 '" style="vertical-align: middle"></span>';
 	}
 }
 
