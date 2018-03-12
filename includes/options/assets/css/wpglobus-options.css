@@ -319,8 +319,7 @@
     color: hsl(140, 5%, 50%);
 }
 
-#wpglobus-tab-link-recommend-wpg-wc i,
-#wpglobus-tab-link-recommend-wpg-mc i {
+#wpglobus-tab-link-recommendations i {
     color: hsl(0, 100%, 25%);
     animation: filter-animation-blink 8s infinite;
 }

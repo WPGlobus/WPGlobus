@@ -376,17 +376,6 @@ class WPGlobus_Options {
 		 * The below sections should be at the bottom.
 		 */
 
-
-		if ( class_exists( 'WooCommerce' ) ) {
-			if ( ! defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' ) ) {
-				$this->sections['recommend-wpg-wc'] = $this->section_recommend_wpg_wc();
-			}
-			if ( ! defined( 'WPGLOBUS_MC_VERSION' ) ) {
-				$this->sections['recommend-wpg-mc'] = $this->section_recommend_wpg_mc();
-			}
-		}
-
-
 		/**
 		 * Links to Admin Central
 		 */
@@ -676,112 +665,6 @@ class WPGlobus_Options {
 			'id'   => $id . '_content',
 			'type' => 'wpglobus_info',
 			'desc' => $content_body,
-		);
-	}
-
-	/**
-	 * @todo Move it to...
-	 * @see  \WPGlobus_Admin_Recommendations::for_woocommerce
-	 * @return array
-	 */
-	protected function section_recommend_wpg_wc() {
-
-		$id   = 'recommend_wpg_wc';
-		$name = __( 'WooCommerce?..', 'wpglobus' );
-		/**
-		 * For Google Analytics.
-		 */
-		$ga_campaign = '?utm_source=wpglobus-admin&utm_medium=link&utm_campaign=' . $id;
-
-		$url = WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/' . $ga_campaign;
-
-		ob_start();
-
-		?>
-		<p>
-			<?php esc_html_e(
-				'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
-		</p>
-		<p><strong>
-				<?php esc_html_e(
-					'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
-			</strong></p>
-		<p class="wp-ui-notification" style="padding: 1em">
-			<?php esc_html_e( 'With the WPGlobus for WooCommerce premium add-on, you will be able to translate product titles and descriptions, categories, tags and attributes.', 'wpglobus' ); ?>
-		</p>
-		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
-			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
-		</a>
-		<?php
-
-		$content_body = ob_get_clean();
-
-		$tab_content   = array();
-		$tab_content[] =
-			array(
-				'id'   => $id . '_content',
-				'type' => 'wpglobus_info',
-				'desc' => $content_body,
-			);
-
-		return array(
-			'wpglobus_id' => $id,
-			'title'       => $name,
-			'icon'        => 'dashicons dashicons-cart',
-			'fields'      => $tab_content,
-		);
-	}
-
-	/**
-	 * @todo Move it to...
-	 * @see  \WPGlobus_Admin_Recommendations::for_woocommerce
-	 * @return array
-	 */
-	protected function section_recommend_wpg_mc() {
-
-		$id   = 'recommend_wpg_mc';
-		$name = __( 'Multi-currency?..', 'wpglobus' );
-		/**
-		 * For Google Analytics.
-		 */
-		$ga_campaign = '?utm_source=wpglobus-admin&utm_medium=link&utm_campaign=' . $id;
-		$url         = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-multi-currency/' . $ga_campaign;
-
-		ob_start();
-
-		?>
-		<p><strong>
-				<?php printf( esc_html__(
-					'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ); ?>
-			</strong></p>
-		<p>
-			<?php esc_html_e( 'With WPGlobus, you can add multiple currencies to your store and charge UK customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. Accepting multiple currencies will strengthen your competitive edge and positioning for global growth!', 'wpglobus' ); ?>
-
-		</p>
-		<p class="wp-ui-notification" style="padding: 1em">
-			<?php esc_html_e( 'The WPGlobus Multi-Currency premium add-on provides switching currencies and re-calculating prices on-the-fly.', 'wpglobus' ); ?>
-		</p>
-		<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
-			<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
-		</a>
-		<?php
-
-		$content_body = ob_get_clean();
-
-		$tab_content   = array();
-		$tab_content[] =
-			array(
-				'id'   => $id . '_content',
-				'type' => 'wpglobus_info',
-				'desc' => $content_body,
-			);
-
-
-		return array(
-			'wpglobus_id' => $id,
-			'title'       => $name,
-			'icon'        => 'dashicons dashicons-cart',
-			'fields'      => $tab_content,
 		);
 	}
 
