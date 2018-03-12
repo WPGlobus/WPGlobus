@@ -603,7 +603,7 @@ class WPGlobus_Options {
 			return array();
 		}
 
-		$id           = 'recommend_wpg_plu';
+		$id           = 'recommend_wpg_plus';
 		$product_slug = 'wpglobus-plus';
 		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
 
@@ -710,7 +710,7 @@ class WPGlobus_Options {
 			return array();
 		}
 
-		$id           = 'recommend_wpg_wc';
+		$id           = 'recommend_wpg_mc';
 		$product_slug = 'wpglobus-multi-currency';
 		$url          = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . "product/$product_slug/", $id );
 
