@@ -702,7 +702,8 @@ class WPGlobus_Options {
 	protected function section_featured_images() {
 		return array(
 			'wpglobus_id'  => 'featured_images',
-			'title'        => __( 'Featured Images', 'wpglobus' ),
+			/// DO NOT TRANSLATE
+			'title'        => __( 'Featured Images' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-featured-images' ),
 			'icon'         => 'dashicons dashicons-images-alt',
 			'externalLink' => true,
