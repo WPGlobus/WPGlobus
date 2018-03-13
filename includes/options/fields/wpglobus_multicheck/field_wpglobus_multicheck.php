@@ -73,6 +73,6 @@ endif;
 
 /**
  * @global array $field
- * @see WPGlobus_Options::pageOptions
+ * @see WPGlobus_Options::page_options
  */
 new WPGlobusOptions_wpglobus_multicheck( $field );

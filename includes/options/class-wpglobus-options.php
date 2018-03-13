@@ -21,25 +21,190 @@ class WPGlobus_Options {
 
 	const NONCE_ACTION = 'wpglobus-options-panel';
 
-	public $args = array();
-	public $sections = array();
-	public $theme;
-
-	private $config;
-
-	private $page_slug;
-
-	private $tab;
-
-	private $current_page;
-
 	const DEFAULT_TAB = 'languages';
+
+	protected $args = array();
+
+	protected $sections = array();
+
+	protected $config;
+
+	protected $page_slug;
+
+	protected $tab;
+
+	protected $current_page;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 
+		add_action( 'init', array( $this, 'on__init' ), PHP_INT_MAX );
+
+		add_action( 'wp_loaded', array( $this, 'on__wp_loaded' ), PHP_INT_MAX );
+
+		add_action( 'admin_menu', array( $this, 'on__admin_menu' ) );
+
+		add_action( 'admin_print_scripts', array( $this, 'on__admin_scripts' ) );
+
+		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
+	}
+
+	public function on__init() {
+
+		$this->setup_vars();
+
+		// Before handle_submit().
+		$this->init_settings();
+
+		// Handle the main options form submit.
+		// If data posted, the options will be updated, and page reloaded (so no continue to the next line).
+		$this->handle_submit();
+	}
+
+	public function on__wp_loaded() {
+		// Create the sections and fields.
+		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
+		$this->set_sections();
+	}
+
+	public function on__admin_menu() {
+		add_menu_page(
+			$this->args['page_title'],
+			$this->args['menu_title'],
+			'administrator',
+			$this->page_slug,
+			array( $this, 'on__add_menu_page' ),
+			'dashicons-admin-site'
+		);
+	}
+
+	public function on__add_menu_page() {
+		$this->page_options();
+	}
+
+	/**
+	 * Enqueue admin scripts.
+	 *
+	 * @return void
+	 */
+	public function on__admin_scripts() {
+
+		if ( $this->current_page != $this->page_slug ) {
+			return;
+		}
+
+		wp_register_script(
+			'wpglobus-options',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			array( 'jquery', 'jquery-ui-sortable' ),
+			WPGLOBUS_VERSION,
+			true
+		);
+		wp_enqueue_script( 'wpglobus-options' );
+		wp_localize_script(
+			'wpglobus-options',
+			'WPGlobusOptions',
+			array(
+				'version'    => WPGLOBUS_VERSION,
+				'tab'        => $this->tab,
+				'defaultTab' => self::DEFAULT_TAB,
+				'sections'   => $this->sections,
+				'newUrl'     => add_query_arg(
+					array(
+						'page' => $this->page_slug,
+						'tab'  => '{*}',
+					), admin_url( 'admin.php' )
+				),
+			)
+		);
+
+		/**
+		 * Enable jQuery-UI touch support.
+		 *
+		 * @link  http://touchpunch.furf.com/
+		 * @link  https://github.com/furf/jquery-ui-touch-punch/
+		 * @since 1.9.10
+		 */
+		wp_enqueue_script(
+			'wpglobus-options-touch',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			array( 'wpglobus-options' ),
+			WPGLOBUS_VERSION,
+			true
+		);
+	}
+
+	/**
+	 * Enqueue admin styles.
+	 *
+	 * @return void
+	 */
+	public function on__admin_styles() {
+
+		if ( $this->current_page != $this->page_slug ) {
+			return;
+		}
+
+		wp_register_style(
+			'wpglobus-options',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+			array( 'wpglobus-admin' ),
+			WPGLOBUS_VERSION,
+			'all'
+		);
+		wp_enqueue_style( 'wpglobus-options' );
+
+	}
+
+	/**
+	 * Tell where to find our custom fields.
+	 *
+	 * @since 1.2.2
+	 *
+	 * @param string $file  Path of the field class
+	 * @param array  $field Field parameters
+	 *
+	 * @return string Path of the field class where we want to find it
+	 */
+	public function filter__add_custom_fields(
+		/** @noinspection PhpUnusedParameterInspection */
+		$file, $field
+	) {
+
+		$file = WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
+
+		if ( ! file_exists( $file ) ) {
+			return false;
+		}
+
+		return $file;
+	}
+
+	/**
+	 * For WPGlobus Plus.
+	 *
+	 * @see \WPGlobusPlus_Menu::add_option
+	 *
+	 * @return array Field parameters.
+	 */
+	public static function field_switcher_menu_style() {
+		return array(
+			'id'       => 'switcher_menu_style',
+			'type'     => 'wpglobus_dropdown',
+			'title'    => __( 'Language Selector Menu Style', 'wpglobus' ),
+			'subtitle' => '(' . __( 'WPGlobus Plus', 'wpglobus' ) . ')',
+			'desc'     => __( 'Drop-down languages menu or Flat (in one line)', 'wpglobus' ),
+			'options'  => array(
+				''         => __( 'Do not change', 'wpglobus' ),
+				'dropdown' => __( 'Drop-down (vertical)', 'wpglobus' ),
+				'flat'     => __( 'Flat (horizontal)', 'wpglobus' ),
+			),
+		);
+	}
+
+	protected function setup_vars() {
 		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
 
 		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
@@ -49,20 +214,9 @@ class WPGlobus_Options {
 			$_tab = self::DEFAULT_TAB;
 		}
 		$this->tab = sanitize_title_with_dashes( $_tab );
-
-		add_action( 'init', array( $this, 'initSettings' ), PHP_INT_MAX - 1 ); // Before handle_submit().
-		// Handle the main options form submit.
-		// If data posted, the options will be updated, and page reloaded (so no continue to the next line).
-		add_action( 'init', array( $this, 'handle_submit' ), PHP_INT_MAX );
-
-		add_action( 'admin_menu', array( $this, 'on__admin_menu' ) );
-
-		add_action( 'admin_print_scripts', array( $this, 'on__admin_scripts' ) );
-
-		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
 	}
 
-	public function initSettings() {
+	protected function init_settings() {
 
 		$this->config = WPGlobus::Config();
 
@@ -86,29 +240,10 @@ class WPGlobus_Options {
 		}
 
 		// Set the default arguments.
-		$this->setArguments();
-
-		// Create the sections and fields.
-		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
-		add_action( 'wp_loaded', array( $this, 'setSections' ) );
+		$this->set_arguments();
 	}
 
-	/**
-	 * @todo add doc.
-	 * @return void
-	 */
-	public function on__admin_menu() {
-		add_menu_page(
-			$this->args['page_title'],
-			$this->args['menu_title'],
-			'administrator',
-			$this->page_slug,
-			array( $this, 'pageOptions' ),
-			'dashicons-admin-site'
-		);
-	}
-
-	public function pageOptions() {
+	protected function page_options() {
 		?>
 		<div class="wrap">
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
@@ -186,10 +321,39 @@ class WPGlobus_Options {
 
 	}
 
+	protected function handle_submit() {
+		$option_name = $this->config->option;
+		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) {
+			// No data or invalid data submitted.
+			return;
+		}
+
+		// WP anti-hacks.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Unauthorized user' );
+		}
+		check_admin_referer( self::NONCE_ACTION );
+
+		// Sanitize, and if OK then save the options and reload the page.
+		$posted_data = $this->sanitize_posted_data( $_POST[ $option_name ] );
+		if ( $posted_data ) {
+			update_option( $option_name, $posted_data );
+
+
+			// Need to get back to the current tab after reloading.
+			$tab = self::DEFAULT_TAB;
+			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
+				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] );
+			}
+
+			wp_safe_redirect( WPGlobus_Admin_Page::url_options_panel( $tab ) );
+		}
+	}
+
 	/**
 	 * All the possible arguments.
 	 **/
-	public function setArguments() {
+	protected function set_arguments() {
 
 		$this->args = array(
 			// TYPICAL -> Change these values as you need/desire
@@ -357,11 +521,11 @@ class WPGlobus_Options {
 	/**
 	 * Set sections.
 	 */
-	public function setSections() {
+	protected function set_sections() {
 
-		$this->sections['welcome']        = $this->welcomeSection();
-		$this->sections['languages']      = $this->languagesSection();
-		$this->sections['language-table'] = $this->languageTableSection();
+		$this->sections['welcome']        = $this->section_welcome();
+		$this->sections['languages']      = $this->section_languages();
+		$this->sections['language-table'] = $this->section_languages_table();
 		$this->sections['post-types']     = $this->section_post_types();
 		$this->sections['custom-code']    = $this->section_custom_code();
 
@@ -402,10 +566,10 @@ class WPGlobus_Options {
 			$this->sections['recommendations'] = $section_recommendations;
 		}
 
-		$this->sections['addons'] = $this->addonsSection();
+		$this->sections['addons'] = $this->section_all_addons();
 
 		if ( class_exists( 'WPGlobus_Admin_HelpDesk', false ) ) {
-			$this->sections['helpdesk'] = $this->helpdeskSection();
+			$this->sections['helpdesk'] = $this->section_helpdesk();
 		}
 
 		$this->sections['uninstall'] = $this->section_uninstall();
@@ -415,7 +579,7 @@ class WPGlobus_Options {
 	/**
 	 * SECTION: Welcome.
 	 */
-	public function welcomeSection() {
+	protected function section_welcome() {
 
 		$fields_home = array();
 
@@ -508,7 +672,7 @@ class WPGlobus_Options {
 
 	}
 
-	public function helpdeskSection() {
+	protected function section_helpdesk() {
 		return array(
 			'wpglobus_id'  => 'helpdesk',
 			'title'        => __( 'Help Desk', 'wpglobus' ),
@@ -518,7 +682,7 @@ class WPGlobus_Options {
 		);
 	}
 
-	public function addonsSection() {
+	protected function section_all_addons() {
 		return array(
 			'wpglobus_id'  => 'addons',
 			'title'        => __( 'All add-ons', 'wpglobus' ),
@@ -819,7 +983,7 @@ class WPGlobus_Options {
 	/**
 	 * SECTION: Languages.
 	 */
-	public function languagesSection() {
+	protected function section_languages() {
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
@@ -971,7 +1135,7 @@ class WPGlobus_Options {
 	/**
 	 * SECTION: Language table.
 	 */
-	public function languageTableSection() {
+	protected function section_languages_table() {
 		$section = array(
 			'wpglobus_id' => 'language_table',
 			'title'       => esc_html__( 'Languages table', 'wpglobus' ),
@@ -1099,133 +1263,6 @@ class WPGlobus_Options {
 			'icon'        => 'dashicons dashicons-edit',
 			'fields'      => $fields,
 		);
-	}
-
-	/**
-	 * Tell where to find our custom fields.
-	 *
-	 * @since 1.2.2
-	 *
-	 * @param string $file  Path of the field class
-	 * @param array  $field Field parameters
-	 *
-	 * @return string Path of the field class where we want to find it
-	 */
-	public function filter__add_custom_fields(
-		/** @noinspection PhpUnusedParameterInspection */
-		$file, $field
-	) {
-
-		$file = WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
-
-		if ( ! file_exists( $file ) ) {
-			return false;
-		}
-
-		return $file;
-	}
-
-	/**
-	 * Enqueue admin scripts.
-	 *
-	 * @return void
-	 */
-	public function on__admin_scripts() {
-
-		if ( $this->current_page != $this->page_slug ) {
-			return;
-		}
-
-		wp_register_script(
-			'wpglobus-options',
-			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
-			array( 'jquery', 'jquery-ui-sortable' ),
-			WPGLOBUS_VERSION,
-			true
-		);
-		wp_enqueue_script( 'wpglobus-options' );
-		wp_localize_script(
-			'wpglobus-options',
-			'WPGlobusOptions',
-			array(
-				'version'    => WPGLOBUS_VERSION,
-				'tab'        => $this->tab,
-				'defaultTab' => self::DEFAULT_TAB,
-				'sections'   => $this->sections,
-				'newUrl'     => add_query_arg(
-					array(
-						'page' => $this->page_slug,
-						'tab'  => '{*}',
-					), admin_url( 'admin.php' )
-				),
-			)
-		);
-
-		/**
-		 * Enable jQuery-UI touch support.
-		 *
-		 * @link  http://touchpunch.furf.com/
-		 * @link  https://github.com/furf/jquery-ui-touch-punch/
-		 * @since 1.9.10
-		 */
-		wp_enqueue_script(
-			'wpglobus-options-touch',
-			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
-			array( 'wpglobus-options' ),
-			WPGLOBUS_VERSION,
-			true
-		);
-	}
-
-	/**
-	 * Enqueue admin styles.
-	 *
-	 * @return void
-	 */
-	public function on__admin_styles() {
-
-		if ( $this->current_page != $this->page_slug ) {
-			return;
-		}
-
-		wp_register_style(
-			'wpglobus-options',
-			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
-			array( 'wpglobus-admin' ),
-			WPGLOBUS_VERSION,
-			'all'
-		);
-		wp_enqueue_style( 'wpglobus-options' );
-
-	}
-
-	public function handle_submit() {
-		$option_name = $this->config->option;
-		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) {
-			// No data or invalid data submitted.
-			return;
-		}
-
-		// WP anti-hacks.
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( 'Unauthorized user' );
-		}
-		check_admin_referer( self::NONCE_ACTION );
-
-		// Sanitize, and if OK then save the options and reload the page.
-		$posted_data = $this->sanitize_posted_data( $_POST[ $option_name ] );
-		if ( $posted_data ) {
-			update_option( $option_name, $posted_data );
-
-
-			// Need to get back to the current tab after reloading.
-			$tab = self::DEFAULT_TAB;
-			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
-				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] );
-			}
-
-			wp_safe_redirect( WPGlobus_Admin_Page::url_options_panel( $tab ) );
-		}
 	}
 
 	/**
@@ -1362,28 +1399,6 @@ class WPGlobus_Options {
 	}
 
 	/**
-	 * For WPGlobus Plus.
-	 *
-	 * @see \WPGlobusPlus_Menu::add_option
-	 *
-	 * @return array Field parameters.
-	 */
-	public static function field_switcher_menu_style() {
-		return array(
-			'id'       => 'switcher_menu_style',
-			'type'     => 'wpglobus_dropdown',
-			'title'    => __( 'Language Selector Menu Style', 'wpglobus' ),
-			'subtitle' => '(' . __( 'WPGlobus Plus', 'wpglobus' ) . ')',
-			'desc'     => __( 'Drop-down languages menu or Flat (in one line)', 'wpglobus' ),
-			'options'  => array(
-				''         => __( 'Do not change', 'wpglobus' ),
-				'dropdown' => __( 'Drop-down (vertical)', 'wpglobus' ),
-				'flat'     => __( 'Flat (horizontal)', 'wpglobus' ),
-			),
-		);
-	}
-
-	/**
 	 * Sanitize section parameters.
 	 * - handle real links vs. tabs
 	 * - fix icons
@@ -1467,7 +1482,6 @@ class WPGlobus_Options {
 		);
 	}
 
-
 	/**
 	 * Check if a plugin is installed.
 	 *
@@ -1485,5 +1499,4 @@ class WPGlobus_Options {
 
 		return (bool) get_plugins( '/' . $folder );
 	}
-
 }
