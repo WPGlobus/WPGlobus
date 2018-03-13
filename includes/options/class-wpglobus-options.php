@@ -3,7 +3,6 @@
  * File: class-wpglobus-options.php
  *
  * @package     WPGlobus\Admin\Options
- * @author      WPGlobus
  */
 
 // Exit if accessed directly
@@ -19,20 +18,60 @@ require_once dirname( dirname( __FILE__ ) ) . '/admin/class-wpglobus-language-ed
  */
 class WPGlobus_Options {
 
+	/**
+	 * Nonce.
+	 *
+	 * @var string
+	 */
 	const NONCE_ACTION = 'wpglobus-options-panel';
 
+	/**
+	 * Default tab.
+	 *
+	 * @var string
+	 */
 	const DEFAULT_TAB = 'languages';
 
+	/**
+	 * Various settings.
+	 *
+	 * @var array
+	 */
 	protected $args = array();
 
+	/**
+	 * Sections.
+	 *
+	 * @var array
+	 */
 	protected $sections = array();
 
+	/**
+	 * Object @see WPGlobus::Config().
+	 *
+	 * @var WPGlobus_Config
+	 */
 	protected $config;
 
+	/**
+	 * Var @see WPGlobus::OPTIONS_PAGE_SLUG.
+	 *
+	 * @var string
+	 */
 	protected $page_slug;
 
+	/**
+	 * The current tab.
+	 *
+	 * @var string
+	 */
 	protected $tab;
 
+	/**
+	 * The current admin page.
+	 *
+	 * @var string
+	 */
 	protected $current_page;
 
 	/**
@@ -51,6 +90,9 @@ class WPGlobus_Options {
 		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
 	}
 
+	/**
+	 * Handler `init`.
+	 */
 	public function on__init() {
 
 		$this->setup_vars();
@@ -63,12 +105,18 @@ class WPGlobus_Options {
 		$this->handle_submit();
 	}
 
+	/**
+	 * Handler `wp_loaded`.
+	 */
 	public function on__wp_loaded() {
 		// Create the sections and fields.
 		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
 		$this->set_sections();
 	}
 
+	/**
+	 * Handler `admin_menu`.
+	 */
 	public function on__admin_menu() {
 		add_menu_page(
 			$this->args['page_title'],
@@ -80,6 +128,9 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Callback for @see add_menu_page().
+	 */
 	public function on__add_menu_page() {
 		$this->page_options();
 	}
@@ -204,6 +255,9 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Setup variables.
+	 */
 	protected function setup_vars() {
 		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
 
@@ -216,6 +270,9 @@ class WPGlobus_Options {
 		$this->tab = sanitize_title_with_dashes( $_tab );
 	}
 
+	/**
+	 * Initialize settings.
+	 */
 	protected function init_settings() {
 
 		$this->config = WPGlobus::Config();
@@ -243,6 +300,9 @@ class WPGlobus_Options {
 		$this->set_arguments();
 	}
 
+	/**
+	 * The Options Panel page - linked to the admin menu.
+	 */
 	protected function page_options() {
 		?>
 		<div class="wrap">
@@ -321,6 +381,9 @@ class WPGlobus_Options {
 
 	}
 
+	/**
+	 * Handle the `Save Changes` form submit.
+	 */
 	protected function handle_submit() {
 		$option_name = $this->config->option;
 		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) {
@@ -623,6 +686,11 @@ class WPGlobus_Options {
 
 	}
 
+	/**
+	 * Section: Uninstall.
+	 *
+	 * @return array
+	 */
 	protected function section_uninstall() {
 
 		$fields_home = array();
@@ -672,6 +740,11 @@ class WPGlobus_Options {
 
 	}
 
+	/**
+	 * Section: Help Desk.
+	 *
+	 * @return array
+	 */
 	protected function section_helpdesk() {
 		return array(
 			'wpglobus_id'  => 'helpdesk',
@@ -682,6 +755,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Link: All Addons.
+	 *
+	 * @return array
+	 */
 	protected function section_all_addons() {
 		return array(
 			'wpglobus_id'  => 'addons',
@@ -692,6 +770,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Link: Mobile Menu.
+	 *
+	 * @return array
+	 */
 	protected function section_mobile_menu() {
 		return array(
 			'wpglobus_id'  => 'mobile_menu',
@@ -702,6 +785,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Link: Language Widgets.
+	 *
+	 * @return array
+	 */
 	protected function section_language_widgets() {
 		return array(
 			'wpglobus_id'  => 'language_widgets',
@@ -712,6 +800,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Link: Featured Images.
+	 *
+	 * @return array
+	 */
 	protected function section_featured_images() {
 		return array(
 			'wpglobus_id'  => 'featured_images',
@@ -722,6 +815,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Link: WPGlobus Plus.
+	 *
+	 * @return array
+	 */
 	protected function section_wpglobus_plus() {
 		return array(
 			'wpglobus_id'  => 'wpglobus_plus',
@@ -732,6 +830,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Section: Recommendations.
+	 *
+	 * @return array
+	 */
 	protected function section_recommendations() {
 
 		$tab_content = array();
@@ -765,6 +868,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Recommend: WPGlobus Plus.
+	 *
+	 * @return array
+	 */
 	protected function recommend_wpg_plus() {
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) || $this->is_plugin_installed( 'wpglobus-plus' ) ) {
@@ -821,6 +929,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Recommend: WPGlobus for WooCommerce.
+	 *
+	 * @return array
+	 */
 	protected function recommend_wpg_wc() {
 
 		if ( ! $this->is_plugin_installed( 'woocommerce' ) ) {
@@ -875,6 +988,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Recommend: WPGlobus Multi-currency.
+	 *
+	 * @return array
+	 */
 	protected function recommend_wpg_mc() {
 		if ( ! $this->is_plugin_installed( 'woocommerce' ) ) {
 			return array();
@@ -926,6 +1044,11 @@ class WPGlobus_Options {
 		);
 	}
 
+	/**
+	 * Recommend: WPGlobus Store.
+	 *
+	 * @return array
+	 */
 	protected function recommend_wpg_store() {
 
 		$id  = 'recommend_wpg_store';
