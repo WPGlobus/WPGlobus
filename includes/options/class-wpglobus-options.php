@@ -599,7 +599,7 @@ class WPGlobus_Options {
 
 	protected function recommend_wpg_plus() {
 
-		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
+		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) || $this->is_plugin_installed( 'wpglobus-plus' ) ) {
 			return array();
 		}
 
@@ -655,8 +655,12 @@ class WPGlobus_Options {
 
 	protected function recommend_wpg_wc() {
 
+		if ( ! $this->is_plugin_installed( 'woocommerce' ) ) {
+			return array();
+		}
+
 		if ( defined( 'WOOCOMMERCE_WPGLOBUS_VERSION' )
-			 || ! class_exists( 'WooCommerce', false )
+			 || $this->is_plugin_installed( 'woocommerce-wpglobus' )
 		) {
 			return array();
 		}
@@ -704,8 +708,12 @@ class WPGlobus_Options {
 	}
 
 	protected function recommend_wpg_mc() {
+		if ( ! $this->is_plugin_installed( 'woocommerce' ) ) {
+			return array();
+		}
+
 		if ( defined( 'WPGLOBUS_MC_VERSION' )
-			 || ! class_exists( 'WooCommerce', false )
+			 || $this->is_plugin_installed( 'wpglobus-multi-currency' )
 		) {
 			return array();
 		}
@@ -717,7 +725,7 @@ class WPGlobus_Options {
 		ob_start();
 
 		?>
-		<div class="wpglobus-recommend-container">		
+		<div class="wpglobus-recommend-container">
 			<div class="wpglobus-recommend-logo grid__item">
 				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-multi-currency-logo.jpg"
 						alt=""/>
@@ -1082,15 +1090,15 @@ class WPGlobus_Options {
 			'wpglobus-options',
 			'WPGlobusOptions',
 			array(
-				'version'  		=> WPGLOBUS_VERSION,
-				'tab'      		=> $this->tab,
-				'defaultTab'    => self::DEFAULT_TAB,
-				'sections' 		=> $this->sections,
-				'newUrl'   		=> add_query_arg(
+				'version'    => WPGLOBUS_VERSION,
+				'tab'        => $this->tab,
+				'defaultTab' => self::DEFAULT_TAB,
+				'sections'   => $this->sections,
+				'newUrl'     => add_query_arg(
 					array(
 						'page' => $this->page_slug,
 						'tab'  => '{*}',
-					), admin_url('admin.php')
+					), admin_url( 'admin.php' )
 				),
 			)
 		);
@@ -1399,6 +1407,25 @@ class WPGlobus_Options {
 				'utm_medium'   => $medium,
 			), $url
 		);
+	}
+
+
+	/**
+	 * Check if a plugin is installed.
+	 *
+	 * @see is_plugin_active
+	 *
+	 * @param string $folder For example, 'woocommerce'.
+	 *
+	 * @return bool
+	 */
+	protected function is_plugin_installed( $folder ) {
+
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+
+		return (bool) get_plugins( '/' . $folder );
 	}
 
 }
