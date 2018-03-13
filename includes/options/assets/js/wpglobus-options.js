@@ -24,6 +24,7 @@ jQuery(document).ready(function ($) {
 			api.firstLanguageCb = $elm.find('input[type="checkbox"]');
 			api.firstLanguageCb.prop('checked','checked');
 			api.firstLanguageCb.prop('disabled','disabled');
+			api.firstLanguageCb.css({'visibility':'hidden'});
 			api.firstLanguageCb.on('click', function(ev){
 				ev.preventDefault();
 				return false;
@@ -33,6 +34,7 @@ jQuery(document).ready(function ($) {
 			$('.wpglobus-sortable').sortable({
 				placeholder: 'ui-state-highlight',
 				update: function(ev, ui){
+					$('#enabled_languages-list li input[type="checkbox"]').css({'visibility':'visible'});
 					api.setFirstLanguageCb();
 				}
 			});
