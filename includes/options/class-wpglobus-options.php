@@ -786,6 +786,7 @@ class WPGlobus_Options {
 						alt=""/>
 			</div>
 			<div class="grid__item">
+				<h3><?php esc_html_e( 'WPGlobus Plus', 'wpglobus' ); ?></h3>
 				<p><strong>
 						<?php esc_html_e( 'Our premium add-on, WPGlobus Plus, will add several features to your website, such as:', 'wpglobus' ); ?>
 					</strong></p>
@@ -847,6 +848,7 @@ class WPGlobus_Options {
 						alt=""/>
 			</div>
 			<div class="grid__item">
+				<h3><?php esc_html_e( 'WPGlobus for WooCommerce', 'wpglobus' ); ?></h3>
 				<p>
 
 					<?php esc_html_e( 'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
@@ -902,10 +904,10 @@ class WPGlobus_Options {
 						alt=""/>
 			</div>
 			<div class="grid__item">
+				<h3><?php esc_html_e( 'Multi-currency', 'wpglobus' ); ?></h3>
 				<p><strong>
 						<?php
-						// Translators: placeholder for the currency sign, eq USD.
-						echo esc_html( sprintf( __( 'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ) );
+						esc_html_e( 'Your WooCommerce-powered store is set to show prices and accept payments in a single currency only.', 'wpglobus' );
 						?>
 					</strong></p>
 				<p>
@@ -950,6 +952,7 @@ class WPGlobus_Options {
 						alt=""/>
 			</div>
 			<div class="grid__item">
+				<h3><?php esc_html_e( 'WPGlobus Premium Add-ons', 'wpglobus' ); ?></h3>
 				<p><strong>
 						<?php esc_html_e( 'We have written several Premium add-ons for WPGlobus. With those add-ons, you will be able to:', 'wpglobus' ); ?>
 					</strong></p>

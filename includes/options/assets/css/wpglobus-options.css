@@ -344,23 +344,30 @@
 .wpglobus-recommend-container {
     display: grid;
     grid-template-columns: 20% 80%;
-    grid-gap: 1em;	
+    grid-gap: 2em;
 }
 
 .wpglobus-recommend-container .grid__item {
     padding: initial;
-    max-width: none;	
+    max-width: none;
 }
 
 .wpglobus-recommend-container .wpglobus-recommend-logo img {
-	width: 100%;
-	max-width: 200px;
+    background-color: white;
+    width: 100%;
+    max-width: 200px;
+    border: 1px solid #a9b6c2;
+}
+
+.wpglobus-recommend-container h3 {
+    margin-top: 0;
+    color: hsl(200, 100%, 33%);
 }
 
 @media screen and (max-width: 500px) {
     .wpglobus-recommend-container {
         grid-template-columns: 100%;
-		place-items: center;
-		grid-gap: 0;
+        place-items: center;
+        grid-gap: 0;
     }
 }
