@@ -142,13 +142,13 @@ class WPGlobus_Options {
 	 */
 	public function on__admin_scripts() {
 
-		if ( $this->current_page != $this->page_slug ) {
+		if ( $this->current_page !== $this->page_slug ) {
 			return;
 		}
 
 		wp_register_script(
 			'wpglobus-options',
-			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			WPGlobus::plugin_dir_url() . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 			array( 'jquery', 'jquery-ui-sortable' ),
 			WPGLOBUS_VERSION,
 			true
@@ -180,7 +180,7 @@ class WPGlobus_Options {
 		 */
 		wp_enqueue_script(
 			'wpglobus-options-touch',
-			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/js/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			WPGlobus::plugin_dir_url() . 'includes/options/assets/js/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 			array( 'wpglobus-options' ),
 			WPGLOBUS_VERSION,
 			true
@@ -194,13 +194,13 @@ class WPGlobus_Options {
 	 */
 	public function on__admin_styles() {
 
-		if ( $this->current_page != $this->page_slug ) {
+		if ( $this->current_page !== $this->page_slug ) {
 			return;
 		}
 
 		wp_register_style(
 			'wpglobus-options',
-			WPGlobus::$PLUGIN_DIR_URL . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+			WPGlobus::plugin_dir_url() . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
 			array( 'wpglobus-admin' ),
 			WPGLOBUS_VERSION,
 			'all'
@@ -224,7 +224,7 @@ class WPGlobus_Options {
 		$file, $field
 	) {
 
-		$file = WPGlobus::$PLUGIN_DIR_PATH . "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
+		$file = WPGlobus::plugin_dir_path() . "includes/options/fields/{$field['type']}/field_{$field['type']}.php";
 
 		if ( ! file_exists( $file ) ) {
 			return false;
@@ -289,11 +289,9 @@ class WPGlobus_Options {
 				'table',
 			) as $field_type
 		) {
-			add_filter( "wpglobus/options/field/{$field_type}", array(
-					$this,
-					'filter__add_custom_fields',
-				)
-				, 0, 2 );
+			add_filter( "wpglobus_options_field_{$field_type}",
+				array( $this, 'filter__add_custom_fields' ), 0, 2
+			);
 		}
 
 		// Set the default arguments.
@@ -313,7 +311,7 @@ class WPGlobus_Options {
 					<div class="wpglobus-options-wrap">
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
-								<?php foreach ( $this->sections as $section_tab => $section ): ?>
+								<?php foreach ( $this->sections as $section_tab => $section ) : ?>
 									<?php $section = $this->sanitize_section( $section ); ?>
 									<?php
 									// If section tab is not specified (old external sections?), create it from title.
@@ -335,8 +333,7 @@ class WPGlobus_Options {
 						</div><!-- sidebar -->
 						<div class="wpglobus-options-main wpglobus-options-wrap__item">
 							<div class="wpglobus-options-info">
-								<?php foreach ( $this->sections as $section_tab => $section ) {
-									?>
+								<?php foreach ( $this->sections as $section_tab => $section ) : ?>
 									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
 											class="wpglobus-options-tab"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
@@ -351,18 +348,17 @@ class WPGlobus_Options {
 												}
 
 												$field_type = $field['type'];
-												$file       = apply_filters( "wpglobus/options/field/{$field_type}", '', $field );
+												$file       = apply_filters( "wpglobus_options_field_{$field_type}", '', $field );
 												if ( $file && file_exists( $file ) ) :
 													// Intentionally "require" and not "require_once".
 													/** @noinspection PhpIncludeInspection */
 													require $file;
-												endif; ?>
-											<?php }
-											/** end foreach **/
+												endif;
+											} // foreach.
 										}
 										?>
 									</div><!-- .wpglobus-options-tab -->
-								<?php } // endforeach; ?>
+								<?php endforeach; ?>
 								<?php
 								wp_nonce_field( self::NONCE_ACTION );
 								?>
@@ -385,8 +381,11 @@ class WPGlobus_Options {
 	 * Handle the `Save Changes` form submit.
 	 */
 	protected function handle_submit() {
+
+		// Check if there were any posted data before nonce verification.
+
 		$option_name = $this->config->option;
-		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) {
+		if ( empty( $_POST[ $option_name ] ) || ! is_array( $_POST[ $option_name ] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 			// No data or invalid data submitted.
 			return;
 		}
@@ -402,7 +401,6 @@ class WPGlobus_Options {
 		if ( $posted_data ) {
 			update_option( $option_name, $posted_data );
 
-
 			// Need to get back to the current tab after reloading.
 			$tab = self::DEFAULT_TAB;
 			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
@@ -414,127 +412,26 @@ class WPGlobus_Options {
 	}
 
 	/**
-	 * All the possible arguments.
-	 **/
+	 * Settings.
+	 */
 	protected function set_arguments() {
 
 		$this->args = array(
-			// TYPICAL -> Change these values as you need/desire
-			'opt_name'        => $this->config->option,
-			// This is where your data is stored in the database and also becomes your global variable name.
-			'display_name'    => 'WPGlobus',
-			// Name that appears at the top of your panel
-			'display_version' => WPGLOBUS_VERSION,
-			// Version that appears at the top of your panel
-			'menu_type'       => 'menu',
-			//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
-			'allow_sub_menu'  => true,
-			// Show the sections below the admin menu item or not
-			'menu_title'      => 'WPGlobus',
-			// @todo remove 2 after deleting old options.
-			'page_title'      => 'WPGlobus',
-			// You will need to generate a Google API key to use this feature.
-			// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
-			'google_api_key'  => '',
-			// Must be defined to add google fonts to the typography module
 
-			'async_typography'   => false,
-			// Use a asynchronous font on the front end or font string
-			'admin_bar'          => false,
-			// Show the panel pages on the admin bar
-			'global_variable'    => '',
-			// Set a different name for your global variable other than the opt_name
-			'dev_mode'           => false,
-			// Show the time the page took to load, etc
-			'customizer'         => true,
-			// Enable basic customizer support
-
-			// OPTIONAL -> Give you extra features
-			'page_priority'      => null,
-			// Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
-			'page_parent'        => 'themes.php',
-			// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
-			'page_permissions'   => 'manage_options',
-			// Permissions needed to access the options panel.
-			'menu_icon'          => '',
-			// Specify a custom URL to an icon
-			'last_tab'           => '',
-			// Force your panel to always open to a specific tab (by id)
-			'page_icon'          => 'icon-themes',
-			// Icon displayed in the admin panel next to your menu_title
-			'page_slug'          => $this->page_slug,
-			// Page slug used to denote the panel
-			'save_defaults'      => true,
-			// On load save the defaults to DB before user clicks save or not
-			'default_show'       => false,
-			// If true, shows the default value next to each field that is not the default value.
-			'default_mark'       => '',
-			// What to print by the field's title if the value shown is default. Suggested: *
-			'show_import_export' => false,
-			// Shows the Import/Export panel when not used as a field.
-
-			// CAREFUL -> These options are for advanced use only
-			'transient_time'     => 60 * MINUTE_IN_SECONDS,
-			'output'             => true,
-			// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
-			'output_tag'         => true,
-			// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
-			'footer_credit'      => '&copy; Copyright 2014-' . date( 'Y' ) .
-									', <a href="' . WPGlobus_Utils::url_wpglobus_site() . '">TIV.NET INC. / WPGlobus</a>.',
-			'database'           => 'options',
-			// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-			'system_info'        => false,
-			// REMOVE
-
-			'hide_reset'       => true,
-			'disable_tracking' => true,
-			/**
-			 * Need to disable AJAX save,
-			 * so that list of languages is always fresh, after save.
-			 *
-			 * @since 1.2.2
-			 */
-			'ajax_save'        => false,
-			// HINTS
-			'hints'            => array(
-				'icon'          => 'icon-question-sign',
-				'icon_position' => 'right',
-				'icon_color'    => 'lightgray',
-				'icon_size'     => 'normal',
-				'tip_style'     => array(
-					'color'   => 'light',
-					'shadow'  => true,
-					'rounded' => false,
-					'style'   => '',
-				),
-				'tip_position'  => array(
-					'my' => 'top left',
-					'at' => 'bottom right',
-				),
-				'tip_effect'    => array(
-					'show' => array(
-						'effect'   => 'slide',
-						'duration' => '500',
-						'event'    => 'mouseover',
-					),
-					'hide' => array(
-						'effect'   => 'slide',
-						'duration' => '500',
-						'event'    => 'click mouseleave',
-					),
-				),
-			),
+			'opt_name'      => $this->config->option,
+			'menu_title'    => 'WPGlobus',
+			'page_title'    => 'WPGlobus',
+			'page_slug'     => $this->page_slug,
+			// TODO
+			'footer_credit' => '&copy; Copyright 2014-' . date( 'Y' ) .
+							   ', <a href="' . WPGlobus_Utils::url_wpglobus_site() . '">TIV.NET INC. / WPGlobus</a>.',
 		);
 
-		// TODO use this space.
+		// TODO.
 		$this->args['intro_text'] = '&nbsp;';
 
-		// Add content after the form.
-		//		$this->args['footer_text'] =
-		//			'&copy; Copyright 2014-' . date( 'Y' ) . ', <a href="' . WPGlobus::URL_WPGLOBUS_SITE . '">WPGlobus</a>.';
-
-
-		// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
+		// TODO: SOCIAL ICONS
+		/*
 		$ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
 
 		$this->args['share_icons'][] = array(
@@ -578,6 +475,7 @@ class WPGlobus_Options {
 			'title' => esc_html__( 'Circle us on Google+', 'wpglobus' ),
 			'icon'  => 'el el-googleplus',
 		);
+		*/
 
 	}
 
@@ -660,8 +558,10 @@ class WPGlobus_Options {
 						   esc_html__( 'Read About WPGlobus', 'wpglobus' ) .
 						   '</a>' .
 						   '<br/>' .
+						   // Translators: placeholders for "strong" tags.
 						   '&bull; ' . sprintf( esc_html__( 'Click the %1$s[Languages]%2$s tab at the left to setup the options.', 'wpglobus' ), '<strong>', '</strong>' ) .
 						   '<br/>' .
+						   // Translators: placeholders for "strong" tags.
 						   '&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ), '<strong>', '</strong>' ) .
 						   '<br/>' .
 						   '<br/>' .
@@ -693,20 +593,20 @@ class WPGlobus_Options {
 	 */
 	protected function section_uninstall() {
 
-		$fields_home = array();
+		// translators: %?$s: HTML codes for hyperlink. Do not remove.
+		$txt_link_to_cleanup_tool = sprintf( esc_html__( '%1$sClean-up Tool%2$s', 'wpglobus' ), '<a href="' . esc_url( WPGlobus_Admin_Page::url_clean_up_tool() ) . '">', '</a>' );
 
+		$fields_home = array();
 
 		$fields_home[] =
 			array(
 				'id'     => 'wpglobus_clean',
 				'type'   => 'wpglobus_info',
-				'title'  => esc_html__( 'Deactivating / Uninstalling', 'wpglobus' ),
+				'title'  => __( 'Deactivating / Uninstalling', 'wpglobus' ),
 				'desc'   => '' .
 							'<em>' .
-							sprintf(
-								esc_html(
-								/// translators: %?$s: HTML codes for hyperlink. Do not remove.
-									esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ) ),
+							// Translators: %?$s: HTML codes for hyperlink. Do not remove.
+							sprintf( esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ),
 								'<a href="' . esc_url( WPGlobus_Admin_Page::url_helpdesk() ) . '">',
 								'</a>'
 							) .
@@ -716,15 +616,9 @@ class WPGlobus_Options {
 							esc_html( __( 'Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language.', 'wpglobus' ) ) .
 							'</strong>' .
 							'<hr>' .
-							sprintf(
-							/// translators: %s: link to the Clean-up Tool
-								esc_html__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
-								sprintf(
-								/// translators: %?$s: HTML codes for hyperlink. Do not remove.
-									esc_html__( '%1$sClean-up Tool%2$s', 'wpglobus' ),
-									'<a href="' . esc_url( WPGlobus_Admin_Page::url_clean_up_tool() ) . '">',
-									'</a>'
-								) ) .
+							// translators: %s: link to the Clean-up Tool
+							sprintf( esc_html__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ), $txt_link_to_cleanup_tool
+							) .
 							'',
 				'style'  => 'normal',
 				'notice' => false,
@@ -888,29 +782,24 @@ class WPGlobus_Options {
 		?>
 		<div class="wpglobus-recommend-container">
 			<div class="wpglobus-recommend-logo grid__item">
-				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-plus-logo-300x300.png"
+				<img src="<?php echo esc_url( WPGlobus::plugin_dir_url() ); ?>includes/css/images/wpglobus-plus-logo-300x300.png"
 						alt=""/>
 			</div>
 			<div class="grid__item">
 				<p><strong>
-						<?php esc_html_e(
-							'Our premium add-on, WPGlobus Plus, will add several features to your website, such as:', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Our premium add-on, WPGlobus Plus, will add several features to your website, such as:', 'wpglobus' ); ?>
 					</strong></p>
 				<p>
-					<?php esc_html_e(
-						'- Ability to write a post in one language and immediately publish it, not waiting for the translation to other languages;', 'wpglobus' ); ?>
+					<?php esc_html_e( '- Ability to write a post in one language and immediately publish it, not waiting for the translation to other languages;', 'wpglobus' ); ?>
 				</p>
 				<p>
-					<?php esc_html_e(
-						'- Set different URLs for each translation;', 'wpglobus' ); ?>
+					<?php esc_html_e( '- Set different URLs for each translation;', 'wpglobus' ); ?>
 				</p>
 				<p>
-					<?php esc_html_e(
-						'- In Yoast SEO, set the focus keyword and do the Page Analysis separately for each translation;', 'wpglobus' ); ?>
+					<?php esc_html_e( '- In Yoast SEO, set the focus keyword and do the Page Analysis separately for each translation;', 'wpglobus' ); ?>
 				</p>
 				<p>
-					<?php esc_html_e(
-						'- and more...', 'wpglobus' ); ?>
+					<?php esc_html_e( '- and more...', 'wpglobus' ); ?>
 				</p>
 				<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
 					<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
@@ -920,7 +809,6 @@ class WPGlobus_Options {
 		<?php
 
 		$content_body = ob_get_clean();
-
 
 		return array(
 			'id'   => $id . '_content',
@@ -955,18 +843,16 @@ class WPGlobus_Options {
 		?>
 		<div class="wpglobus-recommend-container">
 			<div class="wpglobus-recommend-logo grid__item">
-				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png"
+				<img src="<?php echo esc_url( WPGlobus::plugin_dir_url() ); ?>includes/css/images/woocommerce-wpglobus-logo-300x300.png"
 						alt=""/>
 			</div>
 			<div class="grid__item">
 				<p>
 
-					<?php esc_html_e(
-						'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
+					<?php esc_html_e( 'Thanks for installing WPGlobus! Now you have a multilingual website and can translate your blog posts and pages to many languages.', 'wpglobus' ); ?>
 				</p>
 				<p><strong>
-						<?php esc_html_e(
-							'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
+						<?php esc_html_e( 'The next step is to translate your WooCommerce-based store!', 'wpglobus' ); ?>
 					</strong></p>
 				<p>
 					<?php esc_html_e( 'With the WPGlobus for WooCommerce premium add-on, you will be able to translate product titles and descriptions, categories, tags and attributes.', 'wpglobus' ); ?>
@@ -979,7 +865,6 @@ class WPGlobus_Options {
 		<?php
 
 		$content_body = ob_get_clean();
-
 
 		return array(
 			'id'   => $id . '_content',
@@ -1013,13 +898,15 @@ class WPGlobus_Options {
 		?>
 		<div class="wpglobus-recommend-container">
 			<div class="wpglobus-recommend-logo grid__item">
-				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-multi-currency-logo.jpg"
+				<img src="<?php echo esc_url( WPGlobus::plugin_dir_url() ); ?>includes/css/images/wpglobus-multi-currency-logo.jpg"
 						alt=""/>
 			</div>
 			<div class="grid__item">
 				<p><strong>
-						<?php printf( esc_html__(
-							'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ); ?>
+						<?php
+						// Translators: placeholder for the currency sign, eq USD.
+						echo esc_html( sprintf( __( 'Your WooCommerce-powered store is set to show prices and accept payments in %s.', 'wpglobus' ), get_woocommerce_currency() ) );
+						?>
 					</strong></p>
 				<p>
 					<?php esc_html_e( 'With WPGlobus, you can add multiple currencies to your store and charge UK customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. Accepting multiple currencies will strengthen your competitive edge and positioning for global growth!', 'wpglobus' ); ?>
@@ -1059,7 +946,7 @@ class WPGlobus_Options {
 		?>
 		<div class="wpglobus-recommend-container">
 			<div class="wpglobus-recommend-logo grid__item">
-				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-logo.jpg"
+				<img src="<?php echo esc_url( WPGlobus::plugin_dir_url() ); ?>includes/css/images/wpglobus-logo.jpg"
 						alt=""/>
 			</div>
 			<div class="grid__item">
@@ -1069,19 +956,19 @@ class WPGlobus_Options {
 				<blockquote>
 					<ul>
 						<li>
-							- <?php _e( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ); ?>
+							- <?php _e( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ); // WPCS: XSS ok. ?>
 						</li>
 						<li>
-							- <?php _e( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ); ?>
+							- <?php _e( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ); // WPCS: XSS ok. ?>
 						</li>
 						<li>
-							- <?php _e( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ); ?>
+							- <?php _e( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ); // WPCS: XSS ok. ?>
 						</li>
 						<li>
-							- <?php _e( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ); ?>
+							- <?php _e( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ); // WPCS: XSS ok. ?>
 						</li>
 						<li>
-							- <?php _e( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ); ?>
+							- <?php _e( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ); // WPCS: XSS ok. ?>
 						</li>
 					</ul>
 				</blockquote>
@@ -1142,27 +1029,30 @@ class WPGlobus_Options {
 
 		$desc_languages_intro = implode( '', array(
 			'<ul style="list-style: disc inside;">',
-			'<li>' . sprintf(
-			/// translators: %3$s placeholder for the icon (actual picture)
-				esc_html__( 'Place the %1$smain language%2$s of your site at the top of the list by dragging the %3$s icons.', 'wpglobus' ), '<strong>', '</strong>', '<i class="dashicons dashicons-move"></i>' ) . '</li>',
-			'<li>' . sprintf( esc_html__( '%1$sUncheck%2$s the languages you do not plan to use.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
-			'<li>' . sprintf( esc_html__( '%1$sAdd%2$s more languages using the section below.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
+			'<li>' .
+			// translators: %3$s placeholder for the icon (actual picture)
+			sprintf( esc_html__( 'Place the %1$smain language%2$s of your site at the top of the list by dragging the %3$s icons.', 'wpglobus' ), '<strong>', '</strong>', '<i class="dashicons dashicons-move"></i>' ) . '</li>',
+			'<li>' .
+			// translators: placeholders for the "strong" HTML tags.
+			sprintf( esc_html__( '%1$sUncheck%2$s the languages you do not plan to use.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
+			'<li>' .
+			// translators: placeholders for the "strong" HTML tags.
+			sprintf( esc_html__( '%1$sAdd%2$s more languages using the section below.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
 			'<li>' . esc_html__( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
 			'</ul>',
 		) );
 
+		/// DO NOT TRANSLATE
+		$txt_save_changes = esc_html__( 'Save Changes' );
+
 		$desc_more_languages =
 			esc_html__( 'Choose a language you would like to enable.', 'wpglobus' )
 			. '<br />'
-			/// translators: %s - placeholder for the "Save Changes" button text.
-			. sprintf( esc_html__( 'Press the %s button to confirm.', 'wpglobus' ),
-				/// DO NOT TRANSLATE
-				'<code>[' . esc_html__( 'Save Changes' ) . ']</code>' )
+			// translators: %s - placeholder for the "Save Changes" button text.
+			. sprintf( esc_html__( 'Press the %s button to confirm.', 'wpglobus' ), '<code>[' . $txt_save_changes . ']</code>' )
 			. '<br /><br />'
-			. sprintf(
-			/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-				esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
-				'<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
+			// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+			. sprintf( esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ), '<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
 			);
 
 		if ( empty( $wpglobus_option['enabled_languages'] ) ) {
@@ -1617,7 +1507,7 @@ class WPGlobus_Options {
 	protected function is_plugin_installed( $folder ) {
 
 		if ( ! function_exists( 'get_plugins' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		return (bool) get_plugins( '/' . $folder );
