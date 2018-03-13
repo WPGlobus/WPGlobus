@@ -584,6 +584,10 @@ class WPGlobus_Options {
 		if ( count( $_ ) ) {
 			$tab_content[] = $_;
 		}
+		$_ = $this->recommend_wpg_store();
+		if ( count( $_ ) ) {
+			$tab_content[] = $_;
+		}
 
 		if ( ! count( $tab_content ) ) {
 			return array();
@@ -744,6 +748,60 @@ class WPGlobus_Options {
 				</p>
 				<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
 					<?php esc_html_e( 'Click here to download', 'wpglobus' ); ?>
+				</a>
+			</div>
+		</div>
+		<?php
+
+		$content_body = ob_get_clean();
+
+		return array(
+			'id'   => $id . '_content',
+			'type' => 'wpglobus_info',
+			'desc' => $content_body,
+		);
+	}
+
+	protected function recommend_wpg_store() {
+
+		$id  = 'recommend_wpg_store';
+		$url = $this->url_ga( WPGlobus_Utils::url_wpglobus_site() . 'shop/', $id );
+
+		ob_start();
+
+		?>
+		<div class="wpglobus-recommend-container">
+			<div class="wpglobus-recommend-logo grid__item">
+				<img src="<?php echo esc_url( WPGlobus::$PLUGIN_DIR_URL ); ?>includes/css/images/wpglobus-logo.jpg"
+						alt=""/>
+			</div>
+			<div class="grid__item">
+				<p><strong>
+						<?php esc_html_e( 'We have written several Premium add-ons for WPGlobus. With those add-ons, you will be able to:', 'wpglobus' ); ?>
+					</strong></p>
+				<blockquote>
+					<ul>
+						<li>
+							- <?php _e( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ); ?>
+						</li>
+						<li>
+							- <?php _e( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ); ?>
+						</li>
+						<li>
+							- <?php _e( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ); ?>
+						</li>
+						<li>
+							- <?php _e( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ); ?>
+						</li>
+						<li>
+							- <?php _e( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ); ?>
+						</li>
+					</ul>
+				</blockquote>
+				<p><?php esc_html_e( '...and more.', 'wpglobus' ); ?></p>
+				<a class="button button-primary" href="<?php echo esc_url( $url ); ?>">
+					<i class="dashicons dashicons-cart" style="vertical-align:middle"></i>
+					<?php esc_html_e( 'Click here to visit the WPGlobus Store', 'wpglobus' ); ?>
 				</a>
 			</div>
 		</div>
