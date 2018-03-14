@@ -484,11 +484,12 @@ class WPGlobus_Options {
 	 */
 	protected function set_sections() {
 
-		$this->sections['welcome']        = $this->section_welcome();
-		$this->sections['languages']      = $this->section_languages();
-		$this->sections['language-table'] = $this->section_languages_table();
-		$this->sections['post-types']     = $this->section_post_types();
-		$this->sections['custom-code']    = $this->section_custom_code();
+		$this->sections['welcome']          = $this->section_welcome();
+		$this->sections['languages']        = $this->section_languages();
+		$this->sections['language-table']   = $this->section_languages_table();
+		$this->sections['post-types']       = $this->section_post_types();
+		$this->sections['custom-code']      = $this->section_custom_code();
+		$this->sections['browser_redirect'] = $this->section_browser_redirect();
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
@@ -1278,6 +1279,38 @@ class WPGlobus_Options {
 			'wpglobus_id' => 'wpglobus_custom_code',
 			'title'       => __( 'Custom Code', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-edit',
+			'fields'      => $fields,
+		);
+	}
+
+	/**
+	 * Section "Browser redirect".
+	 *
+	 * @return array
+	 */
+	protected function section_browser_redirect() {
+		$fields = array();
+
+		$fields[] =
+			array(
+				'id'    => 'browser_redirect_intro',
+				'type'  => 'wpglobus_info',
+				'title' => __( 'When a user comes to the site for the first time, try to find the best matching language version of the page.', 'wpglobus' ),
+				'class' => 'normal',
+			);
+
+		$fields[] =
+			array(
+				'id'    => 'browser_redirect_checkbox',
+				'type'  => 'wpglobus_checkbox',
+				'title' => __( 'Choose the language automatically, based on:', 'wpglobus' ),
+				'label' => __( 'Preferred language set in the browser', 'wpglobus' ),
+			);
+
+		return array(
+			'wpglobus_id' => 'browser_redirect',
+			'title'       => __( 'Redirect', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-arrow-right-alt',
 			'fields'      => $fields,
 		);
 	}
