@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"POT-Creation-Date: 2018-03-13 08:37-0400\n"
-"PO-Revision-Date: 2018-02-17 12:49+0000\n"
+"POT-Creation-Date: 2018-03-13 22:31-0400\n"
+"PO-Revision-Date: 2018-03-13 22:45-0400\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -21,6 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -409,7 +410,7 @@ msgstr "Добавить языки"
 #: includes/admin/class-wpglobus-customize-options.php:825
 #: includes/options/class-wpglobus-options.php:1112
 msgid "Language Selector Mode"
-msgstr "Способ показа переключателей "
+msgstr "Способ показа переключателей"
 
 #: includes/admin/class-wpglobus-customize-options.php:830
 #: includes/options/class-wpglobus-options.php:1115
@@ -439,7 +440,7 @@ msgstr "Выберите способ показа названий языков
 
 #: includes/admin/class-wpglobus-customize-options.php:871
 msgid "select navigation menu"
-msgstr "Выберите навигационное меню"
+msgstr "выберите навигационное меню"
 
 #: includes/admin/class-wpglobus-customize-options.php:880
 #: includes/admin/class-wpglobus-customize-options.php:907
@@ -1119,6 +1120,8 @@ msgid ""
 "- Ability to write a post in one language and immediately publish it, not "
 "waiting for the translation to other languages;"
 msgstr ""
+"-Возможность написать сообщение на одном языке и немедленно опубликовать "
+"его, не дожидаясь их перевода на другие языки;"
 
 #: includes/options/class-wpglobus-options.php:798
 msgid "- Set different URLs for each translation;"
@@ -1145,10 +1148,12 @@ msgid ""
 "Thanks for installing WPGlobus! Now you have a multilingual website and can "
 "translate your blog posts and pages to many languages."
 msgstr ""
+"Спасибо за установку WPGlobus! Теперь у вас есть многоязычный веб-сайт, и вы "
+"можете перевести записи в блоге и страницы на несколько языков."
 
 #: includes/options/class-wpglobus-options.php:858
 msgid "The next step is to translate your WooCommerce-based store!"
-msgstr ""
+msgstr "Следующий шаг - сделать мультиязычным ваш онлайн магазин!"
 
 #: includes/options/class-wpglobus-options.php:861
 msgid ""
@@ -1166,7 +1171,7 @@ msgstr "Мультивалютность"
 msgid ""
 "Your WooCommerce-powered store is set to show prices and accept payments in "
 "a single currency only."
-msgstr ""
+msgstr "Ваш магазин WooCommerce настроен на показ цен в одной валюте."
 
 #: includes/options/class-wpglobus-options.php:915
 msgid ""
@@ -1174,13 +1179,13 @@ msgid ""
 "customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. "
 "Accepting multiple currencies will strengthen your competitive edge and "
 "positioning for global growth!"
-msgstr ""
+msgstr "С помощью WPGlobus вы сможете автоматически пересчитывать цены по курсу и показывать клиентам привычную им валюту."
 
 #: includes/options/class-wpglobus-options.php:919
 msgid ""
 "The WPGlobus Multi-Currency premium add-on provides switching currencies and "
 "re-calculating prices on-the-fly."
-msgstr ""
+msgstr "Расширение WPGlobus-мультивалютность позволяет переключаться между валютами, автоматически пересчитывая цены."
 
 #: includes/options/class-wpglobus-options.php:956
 msgid "WPGlobus Premium Add-ons"
@@ -1190,37 +1195,41 @@ msgstr "Платные расширения"
 msgid ""
 "We have written several Premium add-ons for WPGlobus. With those add-ons, "
 "you will be able to:"
-msgstr ""
+msgstr "Мы написали несколько премиальных расширений для WPGlobus. С их помощью вы сможете:"
 
 #: includes/options/class-wpglobus-options.php:963
 msgid ""
 "<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/"
 "моя-страница and so on);"
 msgstr ""
+"<strong>Перевести УРЛы</strong> (/my-page/ станет /fr/ma-page/, /ru/"
+"моя-страница/ и так далее);"
 
 #: includes/options/class-wpglobus-options.php:966
 msgid ""
 "Postpone translation to some languages and <strong>publish only the "
 "translated texts</strong>;"
 msgstr ""
+"Отложить перевод на некоторые языки и <strong>опубликовать только "
+"переведенные тексты</strong>;"
 
 #: includes/options/class-wpglobus-options.php:969
 msgid "Maintain <strong>separate menus and widgets for each language</strong>;"
-msgstr ""
+msgstr "Поддерживать <strong>раздельные меню и виджеты для каждого языка</strong>;"
 
 #: includes/options/class-wpglobus-options.php:972
 msgid "<strong>Translate WooCommerce</strong> products and taxonomies;"
-msgstr ""
+msgstr "<strong>Перевести товары и категории WooCommerce</strong>;"
 
 #: includes/options/class-wpglobus-options.php:975
 msgid ""
 "Enter separate focus keywords for each language in the <strong>Yoast SEO</"
 "strong>;"
-msgstr ""
+msgstr "Проверять ключевые слова раздельно для каждого языка в <strong>Yoast SEO</strong>;"
 
 #: includes/options/class-wpglobus-options.php:979
 msgid "...and more."
-msgstr "...и много дополнительных возможностей."
+msgstr "...и не только это."
 
 #: includes/options/class-wpglobus-options.php:982
 msgid "Click here to visit the WPGlobus Store"
@@ -1231,13 +1240,13 @@ msgid "Select a language"
 msgstr "Выберите язык"
 
 #: includes/options/class-wpglobus-options.php:1038
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Place the %1$smain language%2$s of your site at the top of the list by "
 "dragging the %3$s icons."
 msgstr ""
-"Поместите %1$основной язык%2$s вашего сайта в верхней части списка, "
-"передвигая иконки %s."
+"Поместите %1$sосновной язык%2$s вашего сайта в верхней части списка, "
+"передвигая иконки %3$s."
 
 #: includes/options/class-wpglobus-options.php:1041
 #, php-format
@@ -1310,7 +1319,7 @@ msgstr "Типы записей"
 msgid ""
 "Here you can enter the CSS rules and JavaScript code, which will be applied "
 "to all front pages of your website."
-msgstr ""
+msgstr "Здесь вы можете ввести правила CSS и код JavaScript, которые будут применены ко всем фронтальным страницам вашего сайте."
 
 #: includes/options/class-wpglobus-options.php:1279
 msgid "Custom Code"
