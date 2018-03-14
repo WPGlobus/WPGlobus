@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
 "POT-Creation-Date: 2018-03-13 22:31-0400\n"
-"PO-Revision-Date: 2018-03-14 03:49+0000\n"
+"PO-Revision-Date: 2018-03-14 12:07+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -177,7 +177,7 @@ msgid ""
 msgstr ""
 "Мы планируем поддерживать %s список переводчиков %s на сайте WPGlobus. Не "
 "воспринимайте это как конкретную рекомендацию! Свяжитесь с переводчиками "
-"напрямую и потом расскажите нам, довольны ли Вы результатом."
+"напрямую и потом расскажите нам, довольны ли вы результатом."
 
 #: includes/admin/class-wpglobus-about.php:157
 msgid "Important notes:"
@@ -217,7 +217,7 @@ msgid ""
 msgstr ""
 "Пожалуйста, свяжитесь с авторами темы / плагина. Если они не могут помочь, "
 "рассмотрите возможность %s дать заказ команде разработчиков WPGlobus %s на "
-"написание кода специально для Вас."
+"написание кода специально для вас."
 
 #: includes/admin/class-wpglobus-admin-page.php:32
 #: includes/admin/class-wpglobus-clean.php:581
@@ -261,10 +261,10 @@ msgid ""
 "might end up with empty titles, no content, no excerpts, blank comments and "
 "so on."
 msgstr ""
-"Эту программу следует использовать только, если Вы планируете полностью "
+"Эту программу следует использовать только, если вы планируете полностью "
 "удалить WPGlobus. Программа удалит все переводы в записях, страницах, и т."
 "п., сохраняя только тексты на основном языке. Пожалуйста, убедитесь, что во "
-"всех записях присутствует контент на основном языке. В противном случае Вы "
+"всех записях присутствует контент на основном языке. В противном случае вы "
 "обнаружите пустые заголовки, отсутствие контента страниц, пустые комментарии "
 "и тому подобное."
 
@@ -294,7 +294,7 @@ msgid ""
 "will be written to the file:"
 msgstr ""
 "Мы собираемся записать все изменения в базе данных в журнал. Он может помочь "
-"в случае, если Вам потребуется восстановить что-то важное. Журнал будет "
+"в случае, если вам потребуется восстановить что-то важное. Журнал будет "
 "записываться в файл:"
 
 #: includes/admin/class-wpglobus-clean.php:651
@@ -302,7 +302,7 @@ msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
 msgstr ""
-"Снимите флажок, если Вы не хотите записывать операции в журнал (мы "
+"Снимите флажок, если вы не хотите записывать операции в журнал (мы "
 "рекомендуем оставить запись включённой)"
 
 #: includes/admin/class-wpglobus-clean.php:656
@@ -388,7 +388,7 @@ msgstr "Эти языки включены в настоящее время на
 #: includes/admin/class-wpglobus-customize-options.php:787
 #: includes/options/class-wpglobus-options.php:1053
 msgid "Choose a language you would like to enable."
-msgstr "Выберите из списка язык, который Вы хотите разрешить к использованию."
+msgstr "Выберите из списка язык, который вы хотите разрешить к использованию."
 
 #: includes/admin/class-wpglobus-customize-options.php:789
 msgid "Press the [Save & Publish] button to confirm."
@@ -482,7 +482,7 @@ msgid ""
 "Here you can enter the CSS rules to adjust the language selector menu for "
 "your theme. Look at the examples in the `style-samples.css` file."
 msgstr ""
-"Сюда Вы можете поместить набор правил CSS для тонкой настройки меню выбора "
+"Сюда вы можете поместить набор правил CSS для тонкой настройки меню выбора "
 "языков. Примеры для стандартных тем можно найти в файле `style-samples.css`."
 
 #: includes/admin/class-wpglobus-customize-options.php:975
@@ -523,7 +523,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1179
 msgid "With your version of WordPress, please use the"
-msgstr "Для Вашей версии ВордПресс, пожалуйста, перейдите сюда: "
+msgstr "Для вашей версии ВордПресс, пожалуйста, перейдите сюда: "
 
 #: includes/admin/class-wpglobus-customize-options.php:1181
 msgid "WPGlobus Settings page"
@@ -559,14 +559,14 @@ msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button below."
 msgstr ""
-"Здесь Вы можете указать, какие поля считаются многоязычными и должны "
+"Здесь вы можете указать, какие поля считаются многоязычными и должны "
 "обрабатываться WPGlobus. Чтобы исключить поле, снимите отметку и нажмите "
 "кнопку сохранения внизу."
 
 #: includes/admin/class-wpglobus-customize-options.php:1344
 #: includes/options/class-wpglobus-options.php:554
 msgid "Thank you for installing WPGlobus!"
-msgstr "Спасибо за то, что Вы установили плагин WPGlobus!"
+msgstr "Спасибо за то, что вы установили плагин WPGlobus!"
 
 #: includes/admin/class-wpglobus-customize-options.php:1348
 #: includes/options/class-wpglobus-options.php:558
@@ -584,7 +584,7 @@ msgid ""
 "Should you have any questions or comments, please do not hesitate to contact "
 "us."
 msgstr ""
-"Если у Вас есть вопросы или замечания, пожалуйста, обращайтесь к нам за "
+"Если у вас есть вопросы или замечания, пожалуйста, обращайтесь к нам за "
 "поддержкой."
 
 #: includes/admin/class-wpglobus-customize-options.php:1360
@@ -609,7 +609,7 @@ msgid ""
 "WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
 msgstr ""
 "Обнаружили проблему в WPGlobus? Не торопитесь удалять плагин. Пожалуйста "
-"%1$sобратитесь к нам%2$s и позвольте Вам помочь!"
+"%1$sобратитесь к нам%2$s и позвольте вам помочь!"
 
 #: includes/admin/class-wpglobus-customize-options.php:1388
 #: includes/options/class-wpglobus-options.php:616
@@ -618,7 +618,7 @@ msgid ""
 "languages together, mixed up. You will need to remove all translations, "
 "keeping only one language."
 msgstr ""
-"Пожалуйста, обратите внимание: если Вы отключите WPGlobus, Ваш сайт будет "
+"Пожалуйста, обратите внимание: если вы отключите WPGlobus, ваш сайт будет "
 "показывать все языки одновременно. Вам будет необходимо удалить все "
 "переводы, сохранив только один язык."
 
@@ -635,7 +635,7 @@ msgstr ""
 "Если есть лишь несколько мест с переводами, стоит отредактировать их "
 "вручную. Чтобы автоматически удалить все переводы сразу, можно использовать "
 "%s. Предупреждение: операция очистки является необратимой, так что "
-"используйте её, только если Вы решили окончательно удалить WPGlobus."
+"используйте её, только если вы решили окончательно удалить WPGlobus."
 
 #. / translators: %?$s: HTML codes for hyperlink. Do not remove.
 #: includes/admin/class-wpglobus-customize-options.php:1396
@@ -716,7 +716,7 @@ msgstr "Код языка"
 msgid ""
 "2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
 msgstr ""
-"Двухбуквенная ISO-кодировка языка, который Вы хотите добавить (Пример: en)"
+"Двухбуквенная ISO-кодировка языка, который вы хотите добавить (Пример: en)"
 
 #: includes/admin/class-wpglobus-language-edit.php:396
 msgid "Language flag"
@@ -786,11 +786,11 @@ msgstr "Поддержка"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:55
 msgid "Thank you for using WPGlobus!"
-msgstr "Спасибо за то, что Вы выбрали WPGlobus!"
+msgstr "Спасибо за то, что вы выбрали WPGlobus!"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:56
 msgid "Our Support Team is here to answer your questions or concerns."
-msgstr "Наша Служба Поддержки постарается ответить на любой из Ваших вопросов."
+msgstr "Наша Служба Поддержки постарается ответить на любой из ваших вопросов."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:58
 msgid ""
@@ -801,13 +801,13 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:59
 msgid "Type in your name, email, subject and the detailed message."
-msgstr "Введите Ваше имя, почту, тему и подробное сообщение."
+msgstr "Введите ваше имя, почту, тему и подробное сообщение."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:60
 msgid ""
 "If you can make a screenshot demonstrating the problem, please attach it."
 msgstr ""
-"Если Вы можете сделать скриншот, демонстрирующий проблему, пожалуйста, "
+"Если вы можете сделать скриншот, демонстрирующий проблему, пожалуйста, "
 "присоедините его."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
@@ -815,19 +815,19 @@ msgid ""
 "Please note: we will receive some debug data together with your request. See "
 "the \"Technical Information\" table for the details."
 msgstr ""
-"Внимание: вместе с Вашим сообщением мы получим некоторые технические данные "
-"о Вашем сайте. Детали - смотрите в таблице."
+"Внимание: вместе с вашим сообщением мы получим некоторые технические данные "
+"о вашем сайте. Детали - смотрите в таблице."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
 msgid "To help us serve you better:"
-msgstr "Чтобы ускорить поиск решения Вашей проблемы:"
+msgstr "Чтобы ускорить поиск решения вашей проблемы:"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:65
 msgid ""
 "Please check if the problem persists if you switch to a standard WordPress "
 "theme."
 msgstr ""
-"Пожалуйста, убедитесь, что проблема сохраняется, если Вы переключитесь на "
+"Пожалуйста, убедитесь, что проблема сохраняется, если вы переключитесь на "
 "стандартную тему ВордПресс."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
@@ -1332,8 +1332,8 @@ msgid ""
 "Here you can enter the CSS rules and JavaScript code, which will be applied "
 "to all front pages of your website."
 msgstr ""
-"Здесь вы можете ввести правила CSS и код JavaScript, которые будут применены "
-"ко всем фронтальным страницам вашего сайте."
+"Здесь вы можете добавить правила CSS и код JavaScript, которые будут "
+"применены ко всем фронтальным страницам вашего сайте."
 
 #: includes/options/class-wpglobus-options.php:1279
 msgid "Custom Code"
