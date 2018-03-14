@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
 "POT-Creation-Date: 2018-03-13 22:31-0400\n"
-"PO-Revision-Date: 2018-03-13 22:45-0400\n"
+"PO-Revision-Date: 2018-03-14 03:49+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -21,7 +21,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #. / Plugin Name
 #. / Plugin Author
@@ -1113,7 +1112,7 @@ msgstr "Рекомендуем..."
 msgid ""
 "Our premium add-on, WPGlobus Plus, will add several features to your "
 "website, such as:"
-msgstr ""
+msgstr "Расширение WPGlobus-Плюс позволит:"
 
 #: includes/options/class-wpglobus-options.php:795
 msgid ""
@@ -1125,13 +1124,15 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:798
 msgid "- Set different URLs for each translation;"
-msgstr ""
+msgstr "- Перевести УРЛы (постоянные ссылки) на различные языки;"
 
 #: includes/options/class-wpglobus-options.php:801
 msgid ""
 "- In Yoast SEO, set the focus keyword and do the Page Analysis separately "
 "for each translation;"
 msgstr ""
+"- В плагине Yoast SEO проверять ключевые слова и выполнять анализ текста для "
+"каждого языка;"
 
 #: includes/options/class-wpglobus-options.php:804
 msgid "- and more..."
@@ -1179,13 +1180,17 @@ msgid ""
 "customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. "
 "Accepting multiple currencies will strengthen your competitive edge and "
 "positioning for global growth!"
-msgstr "С помощью WPGlobus вы сможете автоматически пересчитывать цены по курсу и показывать клиентам привычную им валюту."
+msgstr ""
+"С помощью WPGlobus вы сможете автоматически пересчитывать цены по курсу и "
+"показывать клиентам привычную им валюту."
 
 #: includes/options/class-wpglobus-options.php:919
 msgid ""
 "The WPGlobus Multi-Currency premium add-on provides switching currencies and "
 "re-calculating prices on-the-fly."
-msgstr "Расширение WPGlobus-мультивалютность позволяет переключаться между валютами, автоматически пересчитывая цены."
+msgstr ""
+"Расширение WPGlobus-мультивалютность позволяет переключаться между валютами, "
+"автоматически пересчитывая цены."
 
 #: includes/options/class-wpglobus-options.php:956
 msgid "WPGlobus Premium Add-ons"
@@ -1195,15 +1200,17 @@ msgstr "Платные расширения"
 msgid ""
 "We have written several Premium add-ons for WPGlobus. With those add-ons, "
 "you will be able to:"
-msgstr "Мы написали несколько премиальных расширений для WPGlobus. С их помощью вы сможете:"
+msgstr ""
+"Мы написали несколько премиальных расширений для WPGlobus. С их помощью вы "
+"сможете:"
 
 #: includes/options/class-wpglobus-options.php:963
 msgid ""
 "<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/"
 "моя-страница and so on);"
 msgstr ""
-"<strong>Перевести УРЛы</strong> (/my-page/ станет /fr/ma-page/, /ru/"
-"моя-страница/ и так далее);"
+"<strong>Перевести УРЛы</strong> (/my-page/ станет /fr/ma-page/, /ru/моя-"
+"страница/ и так далее);"
 
 #: includes/options/class-wpglobus-options.php:966
 msgid ""
@@ -1215,7 +1222,8 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:969
 msgid "Maintain <strong>separate menus and widgets for each language</strong>;"
-msgstr "Поддерживать <strong>раздельные меню и виджеты для каждого языка</strong>;"
+msgstr ""
+"Поддерживать <strong>раздельные меню и виджеты для каждого языка</strong>;"
 
 #: includes/options/class-wpglobus-options.php:972
 msgid "<strong>Translate WooCommerce</strong> products and taxonomies;"
@@ -1225,7 +1233,9 @@ msgstr "<strong>Перевести товары и категории WooCommerc
 msgid ""
 "Enter separate focus keywords for each language in the <strong>Yoast SEO</"
 "strong>;"
-msgstr "Проверять ключевые слова раздельно для каждого языка в <strong>Yoast SEO</strong>;"
+msgstr ""
+"Проверять ключевые слова раздельно для каждого языка в <strong>Yoast SEO</"
+"strong>;"
 
 #: includes/options/class-wpglobus-options.php:979
 msgid "...and more."
@@ -1310,6 +1320,8 @@ msgid ""
 "Please note that there are post types, which status is managed by other "
 "plugins and cannot be changed here."
 msgstr ""
+"Внимание: некоторые типы записей управляются другими плагинами и поэтому не "
+"могут контролироваться в этой панели настроек."
 
 #: includes/options/class-wpglobus-options.php:1226
 msgid "Post Types"
@@ -1319,7 +1331,9 @@ msgstr "Типы записей"
 msgid ""
 "Here you can enter the CSS rules and JavaScript code, which will be applied "
 "to all front pages of your website."
-msgstr "Здесь вы можете ввести правила CSS и код JavaScript, которые будут применены ко всем фронтальным страницам вашего сайте."
+msgstr ""
+"Здесь вы можете ввести правила CSS и код JavaScript, которые будут применены "
+"ко всем фронтальным страницам вашего сайте."
 
 #: includes/options/class-wpglobus-options.php:1279
 msgid "Custom Code"
