@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGlobusOptions_wpglobus_checkbox' ) ):
+if ( ! class_exists( 'WPGlobusOptions_wpglobus_checkbox' ) ) :
 
 	/**
 	 * Class WPGlobusOptions_wpglobus_checkbox
@@ -49,7 +49,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_checkbox' ) ):
 							name="<?php echo esc_attr( $field['name'] ); ?>"
 							value="1">
 					<label for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
-					<?php if ( ! empty( $field['desc'] ) ): ?>
+					<?php if ( ! empty( $field['desc'] ) ) : ?>
 						<p class="description"><?php echo wp_kses_post( $field['desc'] ); ?></p>
 					<?php endif; ?>
 				</div>

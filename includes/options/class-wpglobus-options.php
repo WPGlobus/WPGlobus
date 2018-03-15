@@ -1299,12 +1299,26 @@ class WPGlobus_Options {
 				'class' => 'normal',
 			);
 
+		$wpglobus_option = get_option( $this->args['opt_name'] );
+
+		$options = array();
+
+		/**
+		 * Only one option is implemented at this time.
+		 * When we add more options, need to update the @see WPGlobus_Options::sanitize_posted_data() method.
+		 */
+		$options['redirect_by_language'] = array(
+			'label'   => __( 'Preferred language set in the browser', 'wpglobus' ),
+			'checked' => ! empty( $wpglobus_option['browser_redirect']['redirect_by_language'] ),
+		);
+
 		$fields[] =
 			array(
-				'id'    => 'browser_redirect_checkbox',
-				'type'  => 'wpglobus_checkbox',
-				'title' => __( 'Choose the language automatically, based on:', 'wpglobus' ),
-				'label' => __( 'Preferred language set in the browser', 'wpglobus' ),
+				'id'      => 'browser_redirect_choose',
+				'type'    => 'wpglobus_multicheck',
+				'options' => $options,
+				'name'    => 'wpglobus_option[browser_redirect]',
+				'title'   => __( 'Choose the language automatically, based on:', 'wpglobus' ),
 			);
 
 		return array(
@@ -1373,6 +1387,15 @@ class WPGlobus_Options {
 		// Checkbox: if passed, make it `true`. No garbage.
 		if ( ! empty( $data['selector_wp_list_pages'] ) ) {
 			$data['selector_wp_list_pages'] = true;
+		}
+
+		// The $data['browser_redirect'] currently can only have one choice.
+		if ( ! empty( $data['browser_redirect']['redirect_by_language'] ) ) {
+			// If passed and checked then it's 1.
+			$data['browser_redirect'] = array( 'redirect_by_language' => 1 );
+		} else {
+			// Otherwise it's 0.
+			$data['browser_redirect'] = array( 'redirect_by_language' => 0 );
 		}
 
 		return $data;
@@ -1544,6 +1567,7 @@ class WPGlobus_Options {
 	protected function is_plugin_installed( $folder ) {
 
 		if ( ! function_exists( 'get_plugins' ) ) {
+			/** @noinspection PhpIncludeInspection */
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
