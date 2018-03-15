@@ -30,7 +30,7 @@ class WPGlobus_Options {
 	 *
 	 * @var string
 	 */
-	const DEFAULT_TAB = 'languages';
+	const DEFAULT_TAB = 'welcome';
 
 	/**
 	 * Various settings.
