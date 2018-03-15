@@ -983,17 +983,24 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					$post_types = get_post_types();
 
 					$enabled_post_types = array();
+					
 					foreach ( $post_types as $post_type ) {
 						/**
 						 * @see "SECTION: Post types" in includes\options\class-wpglobus-options.php for complete post type array.
 						 */
-						if ( ! in_array( $post_type, array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache' ), true ) ) {
+						if ( ! in_array( $post_type, WPGlobus_Post_Types::hidden_types(), true ) ) {
 
+							/**
+							 * Obsolete from 1.9.10.
+							 * @todo Remove after testing.
+							 */
+							/**
+							
 							if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
 								$enabled_post_types[ $post_type ] = $post_type;
 								continue;
-							}
-
+							}							
+							
 							foreach ( WPGlobus::O()->vendors_scripts as $script => $status ) {
 
 								if ( empty( $status ) ) {
@@ -1001,18 +1008,12 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 								}
 
 								if ( $script == 'ACF' || $script == 'ACFPRO' ) {
-									/**
-									 * get list @see class-wpglobus.php:145
-									 */
 									if ( in_array( $post_type, array( 'acf-field-group', 'acf-field', 'acf' ) ) ) {
 										continue 2;
 									}
 								}
 
 								if ( $script == 'WOOCOMMERCE' ) {
-									/**
-									 * get list  @see class-wpglobus.php:171
-									 */
 									if ( in_array(
 										$post_type,
 										array(
@@ -1031,16 +1032,14 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 								}
 
 								if ( $script == 'WPCF7' ) {
-									/**
-									 * get list @see class-wpglobus.php:195
-									 */
 									if ( in_array( $post_type, array( 'wpcf7_contact_form' ) ) ) {
 										continue 2;
 									}
 								}
 
 							}
-
+							// */
+							
 							$enabled_post_types[ $post_type ] = $post_type;
 
 						}
