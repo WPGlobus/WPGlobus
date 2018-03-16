@@ -238,9 +238,9 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 ## Upgrade Notice ##
 
-### 1.9.1 ###
+### 1.9.10 ###
 
-Please upgrade WPGlobus to the version 1.9.1 or later if your WordPress is 4.9+.
+Note that the new WPGlobus Options panel will work with the modern browsers only!
 
 ## Changelog ##
 

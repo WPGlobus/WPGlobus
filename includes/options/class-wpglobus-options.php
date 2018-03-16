@@ -148,7 +148,7 @@ class WPGlobus_Options {
 
 		wp_register_script(
 			'wpglobus-options',
-			WPGlobus::plugin_dir_url() . 'includes/options/assets/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			WPGlobus::plugin_dir_url() . 'includes/js/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 			array( 'jquery', 'jquery-ui-sortable' ),
 			WPGLOBUS_VERSION,
 			true
@@ -180,7 +180,7 @@ class WPGlobus_Options {
 		 */
 		wp_enqueue_script(
 			'wpglobus-options-touch',
-			WPGlobus::plugin_dir_url() . 'includes/options/assets/js/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			WPGlobus::plugin_dir_url() . 'lib/jquery.ui.touch-punch' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 			array( 'wpglobus-options' ),
 			WPGLOBUS_VERSION,
 			true
@@ -200,7 +200,7 @@ class WPGlobus_Options {
 
 		wp_register_style(
 			'wpglobus-options',
-			WPGlobus::plugin_dir_url() . 'includes/options/assets/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+			WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
 			array( 'wpglobus-admin' ),
 			WPGLOBUS_VERSION,
 			'all'
@@ -304,7 +304,12 @@ class WPGlobus_Options {
 	protected function page_options() {
 		?>
 		<div class="wrap">
-			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
+			<h1>WPGlobus <?php esc_html_e( WPGLOBUS_VERSION ); ?></h1>
+			<div id="wpglobus-options-old-browser-warning" class="notice notice-error">
+				<p><strong>
+					<?php esc_html_e( 'If you see this message then your browser may not display the WPGlobus Settings panel properly. Please try another browser.', 'wpglobus' ); ?>
+					</strong></p>
+			</div>
 			<div class="wpglobus-options-container">
 				<form id="form-wpglobus-options" method="post">
 					<div id="wpglobus-options-intro-text"><?php echo wp_kses_post( $this->args['intro_text'] ); ?></div>
