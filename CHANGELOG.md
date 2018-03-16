@@ -5,8 +5,9 @@
 ### 1.9.10 ###
 
 * ADDED:
-    * ACF: the ability to use WPGlobusAcf.getFields() to define what fields can be disable ( @see WPGlobusAcf.getDisabledFields() ) ACF and ACF Pro field translation.
-    * Flags: new us-uk.png flag.
+    * ACF: the ability to use `WPGlobusAcf.getFields()` to define which fields can be disabled (see `WPGlobusAcf.getDisabledFields()` ). ACF and ACF Pro field translation.
+    * Flags: new `us-uk.png` flag.
+    * POMO: Estonian translation of admin panels. Props: `Rivo Zängov`
 
 ### 1.9.9 ###
 
