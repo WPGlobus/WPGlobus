@@ -843,7 +843,7 @@ class WPGlobus_Filters {
 	}
 
 	/**
-	 * Specify meta keys where the meta data can be multilingual
+	 * Specify meta keys where the meta data can be multilingual.
 	 *
 	 * @example
 	 * <code>
@@ -857,6 +857,16 @@ class WPGlobus_Filters {
 	 * @since 1.2.1
 	 */
 	public static function set_multilingual_meta_keys() {
+		
+		/**
+		 * Add Alternative Text meta value for media.
+		 * We need to use only one meta because Title, Caption and Description was stored in wp_posts table.
+		 * @todo may be to use another class to store keys for $multilingual_meta_keys in future version.
+		 * 
+		 * @since 1.9.11
+		 */
+		self::$multilingual_meta_keys['_wp_attachment_image_alt'] = true;
+		
 		self::$multilingual_meta_keys = apply_filters(
 			'wpglobus_multilingual_meta_keys', self::$multilingual_meta_keys
 		);
