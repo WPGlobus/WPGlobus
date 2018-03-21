@@ -660,6 +660,9 @@ jQuery(document).ready(function () {
                     this.quickEdit('taxonomy');
                 } else if ('edit.php' === WPGlobusAdmin.page) {
                     this.quickEdit('post');
+					if( _.size(WPGlobusAdmin.$_get) > 0 ) {
+						WPGlobusDialogApp.init();
+					}
                 } else if ('options-general.php' == WPGlobusAdmin.page) {
 					this.optionsGeneral();
 					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
