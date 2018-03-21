@@ -1562,7 +1562,7 @@ class WPGlobus {
 			wp_register_script(
 				'wpglobus-admin',
 				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-tooltip' ),
+				array( 'jquery', 'underscore', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-tooltip' ),
 				WPGLOBUS_VERSION,
 				true
 			);
@@ -1592,12 +1592,22 @@ class WPGlobus {
 			 */
 			$data = apply_filters( 'wpglobus_localize_data', $data, $page_action );
 
+			/**
+			 * Added $_GET array to JS.
+			 * @since 1.9.11
+			 */
+			$__get = array();
+			foreach( $_GET as $_key=>$_ ) {
+				$__get[$_key] = WPGlobus_Utils::safe_get($_key);
+			}
+			
 			wp_localize_script(
 				'wpglobus-admin',
 				'WPGlobusAdmin',
 				array(
 					'version'      => WPGLOBUS_VERSION,
 					'page'         => $page_action,
+					'$_get'        => $__get,
 					'content'      => $post_content_autop,
 					'title'        => $post_title,
 					'excerpt'      => $post_excerpt,
