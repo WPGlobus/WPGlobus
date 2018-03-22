@@ -7,6 +7,7 @@
 * FIXED:
 	* Customizer: fixed process order via ajax.
 * ADDED:
+	* Customizer: added 'settingType' attribute to prevent incorrect handling with objects.
 	* Filters: added '_wp_attachment_image_alt' meta.
 	* Core: init WPGlobusDialogApp for edit.php page.
 
