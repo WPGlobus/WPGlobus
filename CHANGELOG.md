@@ -2,6 +2,14 @@
 
 ## Changelog ##
 
+### 1.9.11 ###
+
+* FIXED:
+	* Customizer: fixed process order via ajax.
+* ADDED:
+	* Filters: added '_wp_attachment_image_alt' meta.
+	* Core: init WPGlobusDialogApp for edit.php page.
+
 ### 1.9.10 ###
 
 * ADDED:
