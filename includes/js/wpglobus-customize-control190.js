@@ -446,14 +446,13 @@ jQuery(document).ready(function ($) {
 						 */
 						return true;
 					}
-
-					
 					
 					api.controlInstances[obj] = {};
-					api.controlInstances[obj]['element']  	= element;
-					api.controlInstances[obj]['elementID']  = element.attr('id') ? '#'+element.attr('id') : undefined;					
-					api.controlInstances[obj]['setting']  	= control.setting();
-					api.controlInstances[obj]['selector'] 	= e;
+					api.controlInstances[obj]['element']  	 = element;
+					api.controlInstances[obj]['elementID']   = element.attr('id') ? '#'+element.attr('id') : undefined;					
+					api.controlInstances[obj]['setting']  	 = control.setting();
+					api.controlInstances[obj]['settingType'] = typeof control.setting();
+					api.controlInstances[obj]['selector'] 	 = e;
 					/**
 					 * To get element in DOM @see parent li.customize-control of this control.
 					 * And element with 'data-customize-setting-link' attribute.
@@ -536,7 +535,10 @@ jQuery(document).ready(function ($) {
 						}
 					}
 
-					element.val( WPGlobusCore.TextFilter( api.controlInstances[obj]['setting'], WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+					if( 'string' == api.controlInstances[obj]['settingType'] && api.controlInstances[obj]['setting'] != '' ) {
+						element.val( WPGlobusCore.TextFilter( api.controlInstances[obj]['setting'], WPGlobusCoreData.language, 'RETURN_EMPTY' ) );
+					}
+					
 					element.addClass( 'wpglobus-customize-control' );
 
 					/**
@@ -544,6 +546,11 @@ jQuery(document).ready(function ($) {
 					 * element.attr( 'data-wpglobus-customize-control', element.parents('li').attr('id').replace( 'customize-control-', '') );
 					 */
 					element.attr( 'data-wpglobus-customize-control', api.controlInstances[obj]['controlSelector'].replace( '#customize-control-', '') );
+					
+					/**
+					 * @since 1.9.11
+					 */
+					element.attr( 'data-wpglobus-customize-control-setting-type', api.controlInstances[obj]['settingType'] );
 
 					if ( api.controlInstances[obj]['type'] == 'link' ) {
 						api.controlInstances[obj]['setting'] = api.convertString( element[0].defaultValue );
@@ -821,12 +828,22 @@ jQuery(document).ready(function ($) {
 				} else {
 					/**
 					 * @since 1.8.2
+					 * @since 1.9.11
 					 */
-					var t = WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' );
-					if ( 'tinymce' == WPGlobusCustomize.controlInstances[inst]['type'] ) {
-						tinymce.get(inst).setContent( t, {format:'raw'} );
+					if ( 'object' == WPGlobusCustomize.controlInstances[inst]['settingType'] ) {
+						// @todo add the handling in future version.
+					} else if ( 'number' == WPGlobusCustomize.controlInstances[inst]['settingType'] ) {
+						// @todo add the handling in future version.
+					} else {
+						/**
+						 * string.
+						 */
+						var t = WPGlobusCore.TextFilter( WPGlobusCustomize.controlInstances[inst].setting, WPGlobusCoreData.language, 'RETURN_EMPTY' );
+						if ( 'tinymce' == WPGlobusCustomize.controlInstances[inst]['type'] ) {
+							tinymce.get(inst).setContent( t, {format:'raw'} );
+						}
+						$e.val( WPGlobusCore.TextFilter( t, 'RETURN_EMPTY' ) );
 					}
-					$e.val( WPGlobusCore.TextFilter( t, 'RETURN_EMPTY' ) );
 				}
 			});
 
