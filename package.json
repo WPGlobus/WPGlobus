@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "private": true,
@@ -13,7 +13,7 @@
     "url": "https://github.com/WPGlobus/wpglobus/issues"
   },
   "author": "The WPGlobus Team",
-  "license": "GPL-3.0-or-later",
+  "license": "GPL-3.0",
   "jshintConfig": {
     "node": true
   },

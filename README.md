@@ -244,6 +244,16 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 
 ## Changelog ##
 
+### 1.9.11 ###
+
+* FIXED:
+    * Updater: invalid requests when `php.ini` or `.htaccess` has the `arg_separator.output=&amp;` setting.
+	* Customizer: fixed processing order via AJAX.
+* ADDED:
+	* Customizer: added the `settingType` attribute to prevent incorrect objects handling.
+	* Filters: added the `_wp_attachment_image_alt` meta.
+	* Core: initialize `WPGlobusDialogApp` for the `edit.php` page.
+
 ### 1.9.10 ###
 
 * ADDED:
@@ -268,43 +278,6 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 
 * ADDED:
 	* Core: filter `oEmbed HTML` when post has an embedded local URL in the content.
-
-### 1.9.7.5 ###
-
-* FIXED:
-    * Options Panel: Incorrect using of `esc_html` made a link unclickable. Changed to `wp_kses`.
-
-### 1.9.7.4 ###
-
-* ADDED:
-    * All in One SEO Pack: using a new method that was added in AIOSEOP 2.4.4.
-* FIXED:
-    * Customizer: do not load the class `WP_Customize_Code_Editor_Control` when running under older WordPress versions (before 4.9).
-
-### 1.9.7.3 ###
-
-* FIXED:
-    * Customizer: saving of the options.
-* ADDED:
-    * Customizer: `Select Navigation Menu` option for the `Language Selector Menu` setting.
-
-### 1.9.7.2 ###
-
-* FIXED
-	* Core: Invalid HTML tag escaping on the Edit Post screen.
-
-### 1.9.7.1 ###
-
-* General code clean-up, output escaping and GET/POST sanitization.
-
-### 1.9.7 ###
-
-* SECURITY:
-    * Admin Panel: proper output escaping on the ReduxFramework-based pages. Thanks: `d4wner` (reporting), `slaFFik` (helping).
-* FIXED:
-    * Acf: fixed the saving the data inside the repeater field (issue #22).
-* ADDED:
-    * Customizer: additional settings.
 
 ### Earlier versions and Add-ons ###
 

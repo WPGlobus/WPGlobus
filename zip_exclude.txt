@@ -23,5 +23,4 @@
 */travis.yml
 */unit-tests/*
 */vendor/bin/*
-*/vendor/composer/*
 */zip_exclude.txt

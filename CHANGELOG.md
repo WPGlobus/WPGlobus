@@ -5,11 +5,12 @@
 ### 1.9.11 ###
 
 * FIXED:
-	* Customizer: fixed process order via ajax.
+    * Updater: invalid requests when `php.ini` or `.htaccess` has the `arg_separator.output=&amp;` setting.
+	* Customizer: fixed processing order via AJAX.
 * ADDED:
-	* Customizer: added 'settingType' attribute to prevent incorrect handling with objects.
-	* Filters: added '_wp_attachment_image_alt' meta.
-	* Core: init WPGlobusDialogApp for edit.php page.
+	* Customizer: added the `settingType` attribute to prevent incorrect objects handling.
+	* Filters: added the `_wp_attachment_image_alt` meta.
+	* Core: initialize `WPGlobusDialogApp` for the `edit.php` page.
 
 ### 1.9.10 ###
 
