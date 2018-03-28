@@ -3639,9 +3639,11 @@ class WPGlobus {
 		$js = trim( WPGlobus::Config()->js_editor );
 
 		if ( ! empty( $js ) ) {
+			$js = wp_kses( $js, array() );
+			$js = str_replace( array('&gt;','&lt;'), array('>','<'), $js );
 			?>
 			<script type="text/javascript">
-				<?php echo wp_kses( $js, array() ); ?>
+				<?php echo $js; ?>
 			</script>
 			<?php
 		}
