@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.12 ###
+
+* ADDED:
+    * Options Panel: Customize section.
+	
 ### 1.9.11 ###
 
 * FIXED:
