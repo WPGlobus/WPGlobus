@@ -312,3 +312,7 @@
     grid-gap: 0;
   }
 }
+.wpglobus-options-main #section-tab-customizer ul {
+  margin-left: 3em;
+  list-style: initial;
+}

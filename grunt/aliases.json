@@ -11,16 +11,18 @@
     "wp_readme_to_markdown",
     "replace:readme_md"
   ],
+  "css": [
+    "less",
+    "cssmin"
+  ],
   "dist": [
     "exec:cpzu",
     "replace:version",
     "http:product-info",
     "pomo",
     "readme_md",
-    "less",
-    "cssmin",
+    "css",
     "uglify",
-    "exec:zip",
-    "writefile:latest_zip"
+    "exec:zip"
   ]
 }

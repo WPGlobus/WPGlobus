@@ -1351,111 +1351,15 @@ class WPGlobus_Options {
 	 */
 	protected function section_customizer() {
 
-		$disabled_themes = WPGlobus_Customize_Themes::disabled_themes();
-
-		$current_theme = WPGlobus_Customize_Themes::current_theme();
-
-		$themes_list = '';
-
-		if ( ! empty( $disabled_themes ) ) {
-
-			$themes_list = '<ul style="margin-left:40px;">';
-			foreach ( $disabled_themes as $_theme ) {
-				$themes_list .= '<li>';
-				$themes_list .= $_theme;
-				$themes_list .= '</li>';
-			}
-			$themes_list .= '</ul>';
-
-		}
-
 		$fields = array();
-
-		$customizer_intro_desc = '' .
-								 '<br />' .
-								 '&bull; ' . sprintf( esc_html__( 'не все темы следуют стандартам %1$sWordPress%2$s', 'wpglobus' ), '<strong>', '</strong>' ) .
-								 ' ' .
-								 sprintf( esc_html__( 'поэтому возможна некорректная работа настройщика и %1$sWPGlobus Customizer%2$s', 'wpglobus' ), '<strong>', '</strong>' ) .
-								 '<br />' .
-								 '&bull; ' . sprintf( esc_html__( 'чтобы избежать некорректной работы %1$sWPGlobus Customizer%2$s можно отключить', 'wpglobus' ), '<strong>', '</strong>' ) .
-								 '<br />' .
-								 '{{variants}}' .
-								 '<hr />';
-
-		$customizer_intro_desc .= '' .
-								  sprintf( esc_html__( 'В текущей версии %1$sWPGlobus Customizer%2$s не поддерживает перевод', 'wpglobus' ), '<strong>', '</strong>' ) .
-								  '<br/>' .
-								  '<br/>' .
-								  '&bull; ' .
-								  sprintf( esc_html__( 'пунктов навигационного меню, для перевода перейдите на страницу %1$sМеню%2$s', 'wpglobus' ), '<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">', '</a>' ) .
-								  '<br/>';
-		/**
-		 * '&bull; ' .
-		 * sprintf( esc_html__( 'виджетов, для перевода перейдите на страницу %1$sВиджеты%2$s', 'wpglobus' ), '<a href="'.esc_url( admin_url('widgets.php') ).'">', '</a>' ) .
-		 * '';
-		 */
-
-		if ( ! empty( $themes_list ) ) {
-			$customizer_intro_desc .=
-				'<hr />' .
-				sprintf( esc_html__( 'Список тем, для которых по умолчанию не будет загружен %1$sWPGlobus Customizer%2$s', 'wpglobus' ), '<strong>', '</strong>' ) .
-				'<br />' .
-				$themes_list;
-		}
-
-		$customizer_intro_desc .= '' .
-								  '<hr />' .
-								  sprintf( esc_html__( 'Cейчас активна тема %1$s%2$ss%3$s', 'wpglobus' ), '<strong>', $current_theme, '</strong>' );
-
-		$customizer_intro_desc .=
-			'<hr />' .
-			'<a href="' . esc_url( admin_url( 'customize.php' ) ) . '" class="button button-primary">' .
-			esc_html__( 'Открыть настройку тем', 'wpglobus' ) .
-			'</a>';
-
-		$init_var = '';
-		if ( defined( 'WPGLOBUS_CUSTOMIZE' ) ) {
-			$wpglobus_customize_value = 'false';
-			if ( WPGLOBUS_CUSTOMIZE ) {
-				$wpglobus_customize_value = 'true';
-			}
-			$init_var = sprintf( esc_html__( 'сейчас %1$s установлена в %2$s', 'wpglobus' ), '<strong>WPGLOBUS_CUSTOMIZE</strong>', '<strong>' . $wpglobus_customize_value . '</strong>' );
-		} else {
-			$init_var = sprintf( esc_html__( 'сейчас %1$s не определена', 'wpglobus' ), '<strong>WPGLOBUS_CUSTOMIZE</strong>' );
-		}
-
-		$variants = '' .
-					'<ul style="margin-left:40px">' .
-					'<li>' .
-					sprintf( esc_html__( 'добавлением строки %1$s%2$s%3$s в файл wp-config.php', 'wpglobus' ), '<code>', 'define("WPGLOBUS_CUSTOMIZE", false );', '</code>' ) .
-					' (' . $init_var . ')' .
-					'</li>' .
-					'</ul>';
-		/** <li>2. ' . esc_html__( '2', 'wpglobus' ) . '</li>' */
-
-		$customizer_intro_desc = str_replace( '{{variants}}', $variants, $customizer_intro_desc );
 
 		$fields[] =
 			array(
 				'id'    => 'customizer_intro',
 				'type'  => 'wpglobus_info',
-				'title' => __( 'WPGlobus Customizer работает с настройщиком тем, однако следует иметь ввиду:', 'wpglobus' ),
-				'desc'  => $customizer_intro_desc,
+				'html'  => include dirname(__FILE__). '/templates/customize-intro.php',
 				'class' => 'normal',
 			);
-
-		/**
-		 * $fields[] =
-		 * array(
-		 * 'id'       => 'wpglobus_customizer',
-		 * 'type'     => 'wpglobus_checkbox',
-		 * 'title'    => esc_html__( 'Title', 'wpglobus' ),
-		 * 'subtitle' => sprintf( esc_html__( 'сейчас активна тема %1$s%2$ss%3$s', 'wpglobus' ), '<strong>', $current_theme, '</strong>' ),
-		 * 'desc'     => esc_html__( 'Description', 'wpglobus' ),
-		 * 'label'    => __( 'Enable', 'wpglobus' ),
-		 * 'name'     => 'wpglobus_option[customize]'
-		 * );
-		 * // */
 
 		return array(
 			'wpglobus_id' => 'wpglobus_customizer',
