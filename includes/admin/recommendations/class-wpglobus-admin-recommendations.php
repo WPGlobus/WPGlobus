@@ -150,7 +150,7 @@ class WPGlobus_Admin_Recommendations {
 			echo $container_start; // WPCS: XSS ok.
 			esc_html_e( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
 			echo ' ';
-			/// Do not translate
+			// Do not translate
 			$msg = __( 'Go to WPGlobus Plus Options page', 'wpglobus-plus' );
 
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $msg ) . '.</a>';

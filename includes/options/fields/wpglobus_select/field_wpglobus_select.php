@@ -104,8 +104,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 
 				$placeholder =
 					( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) :
-						/// Do not translate
-						__( 'Select an item', 'redux-framework' );
+						__( 'Select an item', 'wpglobus' );
 
 				if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js.
 					$select2_params = wp_json_encode( $this->field['select2'] );
@@ -162,8 +161,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 				echo '</select>';
 			} else {
 				echo '<strong>' .
-					 /// Do not translate
-					 esc_html__( 'No items of this type were found.', 'redux-framework' ) . '</strong>';
+					 esc_html__( 'No items of this type were found.', 'wpglobus' ) . '</strong>';
 			}
 			if ( ! empty($this->field['desc']) ) {
 				echo '<p class="description">' . $this->field['desc'] . '</p>';

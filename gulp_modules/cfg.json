@@ -1,0 +1,35 @@
+{
+  "text_domain": "wpglobus",
+  "copyright": "WPGlobus / TIV.NET INC.",
+  "bugReport": "support@wpglobus.com",
+  "version": {
+    "define": "WPGLOBUS_VERSION"
+  },
+  "path": {
+    "dist": "/var/www/u/wpglobus.com/dist",
+    "js": "assets/js",
+    "css": "assets/css",
+    "languages": "languages"
+  },
+  "src": {
+    "zip": [
+      "./**/{*,.*}",
+      "!node_modules/**/{.*,*}",
+      "!node_modules",
+      "!.git/**/{.*,*}",
+      "!.git",
+      "!gulp_modules/**/{.*,*}",
+      "!gulp_modules",
+      "!.gitignore",
+      "!.gitattributes",
+      "!.jshintrc",
+      "!changelog.md",
+      "!composer.json",
+      "!composer.lock",
+      "!package-lock.json",
+      "!package.json",
+      "!Gulpfile.js",
+      "!./**/*Test.php"
+    ]
+  }
+}

@@ -713,7 +713,7 @@ class WPGlobus_Options {
 	protected function section_featured_images() {
 		return array(
 			'wpglobus_id'  => 'featured_images',
-			/// DO NOT TRANSLATE
+			// DO NOT TRANSLATE
 			'title'        => __( 'Featured Images' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-featured-images' ),
 			'icon'         => 'dashicons dashicons-images-alt',
@@ -1057,7 +1057,6 @@ class WPGlobus_Options {
 			'</ul>',
 		) );
 
-		/// DO NOT TRANSLATE
 		$txt_save_changes = esc_html__( 'Save Changes' );
 
 		$desc_more_languages =
@@ -1363,7 +1362,6 @@ class WPGlobus_Options {
 
 		return array(
 			'wpglobus_id' => 'wpglobus_customizer',
-			/// DO NOT TRANSLATE
 			'title'       => __( 'Customize' ),
 			'icon'        => 'dashicons dashicons-admin-appearance',
 			'fields'      => $fields,

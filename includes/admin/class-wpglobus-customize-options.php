@@ -790,7 +790,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					esc_html__( 'Press the [Save & Publish] button to confirm.', 'wpglobus' ).
 					'<br />';
 				$desc_add_languages .= sprintf(
-					/// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+					// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 					esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ),
 					'<a style="text-decoration:underline;" href="' . admin_url() . 'admin.php?page=' . WPGlobus::LANGUAGE_EDIT_PAGE . '&action=add" target="_blank">',
 					'</a>'
@@ -1377,7 +1377,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					$content = '<p><em>' .
 					           sprintf(
 						           esc_html(
-						           		/// translators: %?$s: HTML codes for hyperlink. Do not remove.
+						           		// translators: %?$s: HTML codes for hyperlink. Do not remove.
 							           __( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ) ),
 						           '<a href="' . $url_wpglobus_site_submit_ticket . '" target="_blank" style="text-decoration:underline;">',
 						           '</a>'
@@ -1389,10 +1389,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					           '</strong></p>' .
 					           '<p>' .
 					           sprintf(
-						           /// translators: %s: link to the Clean-up Tool
+						           // translators: %s: link to the Clean-up Tool
 					           		esc_html__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
 						           sprintf(
-						           /// translators: %?$s: HTML codes for hyperlink. Do not remove.
+						           // translators: %?$s: HTML codes for hyperlink. Do not remove.
 						           	esc_html__( '%1$sClean-up Tool%2$s', 'wpglobus' ),
 							           '<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::PAGE_WPGLOBUS_CLEAN . '">',
 							           '</a>'
@@ -1404,13 +1404,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 					$content = '<p><strong>' .
 					           sprintf(
-					           	/// translators: %s: name of current theme
+					           	// translators: %s: name of current theme
 					           	esc_html__( 'Sorry, WPGlobus customizer doesn\'t support current theme %s.', 'wpglobus' ),
 						           '<em>' . $attrs->__get( 'name' ) . '</em>'
 					           ) .
 					           '<br />' .
 					           sprintf(
-						           /// translators: %?$s: HTML codes for hyperlink. Do not remove.
+						           // translators: %?$s: HTML codes for hyperlink. Do not remove.
 					           	esc_html__( 'Please use %1$sWPGlobus options page%2$s instead.', 'wpglobus' ),
 						           '<a style="text-decoration:underline;" target="_blank" href="' . admin_url() . 'admin.php?page=' . WPGlobus::OPTIONS_PAGE_SLUG . '&tab=0">',
 						           '</a>'

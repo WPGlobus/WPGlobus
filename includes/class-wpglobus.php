@@ -1013,12 +1013,12 @@ class WPGlobus {
 		);
 
 		if ( 'on' === $mode ) {
-			/// Translators: ON/OFF status of WPGlobus on the edit pages.
+			// Translators: ON/OFF status of WPGlobus on the edit pages.
 			$status_text     = __( 'OFF', 'wpglobus' );
 			$toggle_text     = __( 'Turn on', 'wpglobus' );
 			$highlight_class = 'wp-ui-text-notification';
 		} else {
-			/// Translators: ON/OFF status of WPGlobus on the edit pages.
+			// Translators: ON/OFF status of WPGlobus on the edit pages.
 			$status_text     = __( 'ON', 'wpglobus' );
 			$toggle_text     = __( 'Turn off', 'wpglobus' );
 			$highlight_class = 'wp-ui-text-highlight';
@@ -1478,11 +1478,9 @@ class WPGlobus {
 			} elseif ( 'customize.php' === $page ) {
 
 				if ( version_compare( WPGLOBUS_VERSION, '1.4.0-beta1', '<' ) ) {
-					/// Do not translate
 					$html = sprintf( __( 'You are customizing %s' ), '<strong class="theme-name site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' );
 				} else {
 					// @since 1.4.0 class panel-title site-title
-					/// Do not translate
 					$html = sprintf( __( 'You are customizing %s' ), '<strong class="panel-title site-title"><span id="wpglobus-customize-info">' . esc_html( WPGlobus_Core::text_filter( get_option( 'blogname' ), WPGlobus::Config()->default_language ) ) . '</span></strong>' );
 				}
 
@@ -2815,7 +2813,6 @@ class WPGlobus {
 						<tr>
 							<td id="wp-word-count-<?php echo esc_attr( $language ); ?>"
 							    class="wpglobus-wp-word-count"><?php printf(
-									/// Do not translate
 							    	esc_html__( 'Word count: %s' ), '<span class="word-count-' . esc_attr( $language ) . '">0</span>' ); ?></td>
 							<td class="autosave-info">
 
@@ -2825,7 +2822,6 @@ class WPGlobus {
 									echo '<span id="last-edit">';
 									if ( $last_user ) {
 										printf(
-										    /// Do not translate
 											esc_html__( 'Last edited by %1$s on %2$s at %3$s' ),
 											esc_html( $last_user->display_name ),
 											esc_html( mysql2date( get_option( 'date_format' ), $post->post_modified ) ),
@@ -2833,7 +2829,6 @@ class WPGlobus {
 										);
 									} else {
 										printf(
-											/// Do not translate
 											esc_html__(  'Last edited on %1$s at %2$s' ),
 											esc_html( mysql2date( get_option( 'date_format' ), $post->post_modified ) ),
 											esc_html( mysql2date( get_option( 'time_format' ), $post->post_modified ) )
@@ -3134,7 +3129,6 @@ class WPGlobus {
 					<div id="titlewrap-<?php echo esc_attr( $language ); ?>" class="titlewrap-wpglobus">
 						<label class="screen-reader-text" id="title-prompt-text-<?php echo esc_attr( $language ); ?>"
 						       for="title_<?php echo esc_attr( $language ); ?>"><?php echo esc_html( apply_filters( 'enter_title_here',
-								/// Do not translate
 								esc_html__( 'Enter title here' ), $post ) ); ?></label>
 						<input type="text" name="post_title_<?php echo esc_attr( $language ); ?>" size="30"
 						       value="<?php echo esc_attr( WPGlobus_Core::text_filter( $post->post_title, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
@@ -3256,7 +3250,6 @@ class WPGlobus {
 
 		if ( ! taxonomy_exists( $taxonomy ) ) {
 			$error = new WP_Error( 'invalid_taxonomy',
-				/// Do not translate
 				__( 'Invalid taxonomy' ) );
 
 			return $error;

@@ -21,16 +21,16 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#. / Plugin Name
-#. / Plugin Author
-#: wpglobus.php:48 wpglobus.php:54
+#: wpglobus.php:12, wpglobus.php:18, includes/class-wpglobus.php:1030,
 #: includes/admin/class-wpglobus-customize-options.php:546
-#: includes/class-wpglobus.php:1030
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
-#. / Plugin Description
-#: wpglobus.php:50
+#: wpglobus.php:13
+msgid "https://github.com/WPGlobus/WPGlobus"
+msgstr "https://github.com/WPGlobus/WPGlobus"
+
+#: wpglobus.php:14
 msgid ""
 "A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
 "widgets and even custom fields - in multiple languages!"
@@ -38,61 +38,131 @@ msgstr ""
 "Многоязычные сайты на ВордПресс. Редактируйте тексты записей, страниц, меню, "
 "виджетов, и т.п. - на нескольких языках сразу!"
 
-#. / Plugin URI
-#: wpglobus.php:52
-msgid "https://github.com/WPGlobus/WPGlobus"
-msgstr "https://github.com/WPGlobus/WPGlobus"
-
-#. / Plugin Author URI
-#: wpglobus.php:56
+#: wpglobus.php:19
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/ru/"
 
-#: includes/admin/central/class-wpglobus-admin-central.php:122
-#: includes/admin/class-wpglobus-about.php:45
-#: includes/admin/class-wpglobus-about.php:120
-#: includes/admin/class-wpglobus-clean.php:596
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
-msgid "Guide"
-msgstr "Инструкция"
+#: includes/class-wpglobus-widget.php:27
+msgid "WPGlobus widget"
+msgstr "WPGlobus виджет"
 
-#: includes/admin/central/class-wpglobus-admin-central.php:142
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:44
-msgid "WPGlobus Help Desk"
-msgstr "Поддержка"
+#: includes/class-wpglobus-widget.php:29
+msgid "Add language switcher"
+msgstr "Добавить переключатель языка"
 
-#: includes/admin/central/class-wpglobus-admin-central.php:157
-#: includes/admin/class-wpglobus-about.php:39
-#: includes/admin/class-wpglobus-admin-menu.php:22
-#: includes/admin/class-wpglobus-clean.php:602
-#: includes/admin/class-wpglobus-customize-options.php:1254
-#: includes/admin/class-wpglobus-customize-options.php:1286
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
-msgid "Add-ons"
-msgstr "Расширения"
+#: includes/class-wpglobus-widget.php:32
+msgid "Flags"
+msgstr "Флаги"
+
+#: includes/class-wpglobus-widget.php:33
+msgid "List"
+msgstr "Список"
+
+#: includes/class-wpglobus-widget.php:34
+msgid "List with flags"
+msgstr "Список с флажками"
+
+#: includes/class-wpglobus-widget.php:35
+msgid "Select"
+msgstr "Select"
+
+#: includes/class-wpglobus-widget.php:36
+msgid "Select with language code"
+msgstr "Select с кодом языка"
+
+#: includes/class-wpglobus-widget.php:37
+msgid "Dropdown"
+msgstr "Выпадающее меню"
+
+#: includes/class-wpglobus-widget.php:38
+msgid "Dropdown with flags"
+msgstr "Выпадающее меню с флагами"
+
+#: includes/class-wpglobus-widget.php:240
+msgid "Selector type"
+msgstr "Способ выбора языка"
+
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#: includes/class-wpglobus.php:1017
+msgid "OFF"
+msgstr ""
+
+#: includes/class-wpglobus.php:1018
+msgid "Turn on"
+msgstr ""
+
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#: includes/class-wpglobus.php:1022
+msgid "ON"
+msgstr ""
+
+#: includes/class-wpglobus.php:1023
+msgid "Turn off"
+msgstr ""
+
+#: includes/class-wpglobus.php:1187
+msgid "You cannot disable the main language."
+msgstr "Нельзя отключить основной язык."
+
+#: includes/class-wpglobus.php:1389
+msgid "*) Available after the menu is saved."
+msgstr "*) Доступно после сохранения меню."
+
+#: includes/class-wpglobus.php:1406
+msgid "Need a multilingual slug?"
+msgstr "Нужен мультиязычный ярлык?"
+
+#: includes/class-wpglobus.php:3446
+msgid "You must enable Pretty Permalinks to use WPGlobus."
+msgstr ""
+"Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
+"ссылки."
+
+#: includes/class-wpglobus.php:3448
+msgid ""
+"Please go to Settings > Permalinks > Common Settings and choose a non-"
+"default option."
+msgstr ""
+"Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
+"структуру ссылок в разделе \"Общие настройки\"."
+
+#: includes/class-wpglobus.php:3589
+msgid "Add"
+msgstr "Добавить"
 
 #: includes/admin/class-wpglobus-about.php:26
 msgid "Quick Start"
 msgstr "Быстрый Старт"
 
-#. / Do not translate
-#: includes/admin/class-wpglobus-about.php:33
-#: includes/admin/class-wpglobus-clean.php:599
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:26
-msgid "Settings"
-msgstr "Налады"
+#: includes/admin/class-wpglobus-about.php:36,
+#: includes/admin/class-wpglobus-admin-menu.php:22,
+#: includes/admin/class-wpglobus-clean.php:602,
+#: includes/admin/class-wpglobus-customize-options.php:1254,
+#: includes/admin/class-wpglobus-customize-options.php:1286,
+#: includes/admin/central/class-wpglobus-admin-central.php:157,
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
+msgid "Add-ons"
+msgstr "Расширения"
 
-#: includes/admin/class-wpglobus-about.php:51
+#: includes/admin/class-wpglobus-about.php:42,
+#: includes/admin/class-wpglobus-about.php:117,
+#: includes/admin/class-wpglobus-clean.php:596,
+#: includes/admin/central/class-wpglobus-admin-central.php:122,
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
+msgid "Guide"
+msgstr "Инструкция"
+
+#: includes/admin/class-wpglobus-about.php:48,
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "FAQ"
 msgstr "ЧаВо"
 
-#: includes/admin/class-wpglobus-about.php:62
+#: includes/admin/class-wpglobus-about.php:59
 msgid ""
 "Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
 msgstr "Внимание: расширение PHP Multibyte String (`mbstring`) не загружено!"
 
-#: includes/admin/class-wpglobus-about.php:63
+#: includes/admin/class-wpglobus-about.php:60
 msgid ""
 "The mbstring extension is required for the full UTF-8 compatibility and "
 "better performance. Without it, some parts of WordPress and WPGlobus may "
@@ -104,19 +174,19 @@ msgstr ""
 "WPGlobus могут функционировать некорректно. Пожалуйста, сообщите вашему "
 "провайдеру или системному администратору (вебмастеру)."
 
-#: includes/admin/class-wpglobus-about.php:90
+#: includes/admin/class-wpglobus-about.php:87
 msgid "Go to WPGlobus Settings"
 msgstr "Перейдите в настройки WPGlobus"
 
-#: includes/admin/class-wpglobus-about.php:101
+#: includes/admin/class-wpglobus-about.php:98
 msgid "Easy as 1-2-3:"
 msgstr "Просто, как 1-2-3:"
 
-#: includes/admin/class-wpglobus-about.php:104
+#: includes/admin/class-wpglobus-about.php:101
 msgid "Go to WPGlobus admin menu and choose the countries / languages;"
 msgstr "Войдите в меню администратора WPGlobus и выберите страны и языки;"
 
-#: includes/admin/class-wpglobus-about.php:105
+#: includes/admin/class-wpglobus-about.php:102
 msgid ""
 "Enter the translations to the posts, pages, categories, tags and menus using "
 "a clean and simple interface."
@@ -124,7 +194,7 @@ msgstr ""
 "Введите переводы записей, страниц, категорий, меток и меню, используя "
 "простой и удобный интерфейс."
 
-#: includes/admin/class-wpglobus-about.php:106
+#: includes/admin/class-wpglobus-about.php:103
 msgid ""
 "Switch languages at the front-end using a drop-down menu with language names "
 "and country flags."
@@ -132,33 +202,33 @@ msgstr ""
 "Переключайте языки, используя раскрывающееся меню с их названиями и флагами "
 "стран."
 
-#: includes/admin/class-wpglobus-about.php:114
+#: includes/admin/class-wpglobus-about.php:111
 msgid "Links:"
 msgstr "Ссылки:"
 
-#: includes/admin/class-wpglobus-about.php:122
+#: includes/admin/class-wpglobus-about.php:119
 msgid "FAQs"
 msgstr "Вопросы и ответы"
 
-#: includes/admin/class-wpglobus-about.php:124
+#: includes/admin/class-wpglobus-about.php:121
 msgid "Contact Us"
 msgstr "Обратная связь"
 
-#: includes/admin/class-wpglobus-about.php:126
+#: includes/admin/class-wpglobus-about.php:123
 msgid "Please give us 5 stars!"
 msgstr "Пожалуйста, поставьте нам 5 звездочек!"
 
-#: includes/admin/class-wpglobus-about.php:136
+#: includes/admin/class-wpglobus-about.php:133
 msgid "WPGlobus does not translate texts automatically!"
 msgstr "WPGlobus не делает автоматические переводы текста!"
 
-#: includes/admin/class-wpglobus-about.php:139
+#: includes/admin/class-wpglobus-about.php:136
 msgid ""
 "There are many translation companies and individual translators who can help "
 "you write and proofread the texts."
 msgstr "Вы можете воспользоваться услугами профессиональных переводчиков."
 
-#: includes/admin/class-wpglobus-about.php:140
+#: includes/admin/class-wpglobus-about.php:137
 msgid ""
 "When you choose a translator, please look at their native language, country "
 "of residence, specialization and knowledge of WordPress."
@@ -166,9 +236,7 @@ msgstr ""
 "При выборе переводчика обратите внимание на родной язык, страну проживания, "
 "специализацию и знание ВордПресс."
 
-#. / translators: %s are used to insert HTML link. Keep them in place.
-#: includes/admin/class-wpglobus-about.php:146
-#, php-format
+#: includes/admin/class-wpglobus-about.php:143
 msgid ""
 "We are planning to maintain a %s list of translators %s on the WPGlobus "
 "website. This is not an endorsement, just a courtesy. Please contact them "
@@ -178,11 +246,11 @@ msgstr ""
 "воспринимайте это как конкретную рекомендацию! Свяжитесь с переводчиками "
 "напрямую и потом расскажите нам, довольны ли Вы результатом."
 
-#: includes/admin/class-wpglobus-about.php:157
+#: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
 msgstr "Важная информация:"
 
-#: includes/admin/class-wpglobus-about.php:162
+#: includes/admin/class-wpglobus-about.php:159
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
 "com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
@@ -193,13 +261,13 @@ msgstr ""
 "example.com</code> и языковые параметры в УРЛах <code>example.com?lang=xx</"
 "code>."
 
-#: includes/admin/class-wpglobus-about.php:165
+#: includes/admin/class-wpglobus-about.php:162
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr ""
 "Некоторые темы и плагины <strong>не полностью поддерживают многоязычный "
 "режим</strong>."
 
-#: includes/admin/class-wpglobus-about.php:166
+#: includes/admin/class-wpglobus-about.php:163
 msgid ""
 "They might display some texts with no translation, or with all languages "
 "mixed together."
@@ -207,9 +275,7 @@ msgstr ""
 "Они могут выводить на экран некоторые тексты без перевода, или смешивая "
 "разные языки."
 
-#. / translators: %s are used to insert HTML link. Keep them in place.
-#: includes/admin/class-wpglobus-about.php:170
-#, php-format
+#: includes/admin/class-wpglobus-about.php:167
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
@@ -218,12 +284,12 @@ msgstr ""
 "рассмотрите возможность %s дать заказ команде разработчиков WPGlobus %s на "
 "написание кода специально для Вас."
 
-#: includes/admin/class-wpglobus-admin-page.php:32
+#: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:581
 msgid "Multilingual Everything!"
 msgstr "Всё - на всех языках!"
 
-#: includes/admin/class-wpglobus-admin-page.php:34
+#: includes/admin/class-wpglobus-admin-page.php:34,
 #: includes/admin/class-wpglobus-clean.php:584
 msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
@@ -267,9 +333,7 @@ msgstr ""
 "обнаружите пустые заголовки, отсутствие контента страниц, пустые комментарии "
 "и тому подобное."
 
-#. / translators: %1$s - language name, %1$s - language code. Do not remove.
 #: includes/admin/class-wpglobus-clean.php:621
-#, php-format
 msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
 "%1$s WILL BE DELETED! To change the main language, please go to Settings."
@@ -333,9 +397,9 @@ msgstr "ДА, Я ПОДТВЕРЖДАЮ"
 msgid "Process with the Clean-up"
 msgstr "Запустить программу очистки"
 
-#: includes/admin/class-wpglobus-customize-options.php:73
-#: includes/admin/class-wpglobus-customize-options.php:100
-#: includes/admin/class-wpglobus-customize-options.php:145
+#: includes/admin/class-wpglobus-customize-options.php:73,
+#: includes/admin/class-wpglobus-customize-options.php:100,
+#: includes/admin/class-wpglobus-customize-options.php:145,
 #: includes/admin/class-wpglobus-customize-options.php:183
 msgid "Default"
 msgstr "По умолчанию"
@@ -369,23 +433,23 @@ msgstr "Настройки WPGlobus"
 msgid "Help"
 msgstr "Дапамога"
 
-#: includes/admin/class-wpglobus-customize-options.php:738
-#: includes/options/class-wpglobus-options.php:1088
+#: includes/admin/class-wpglobus-customize-options.php:738,
+#: includes/options/class-wpglobus-options.php:1087
 msgid "Languages"
 msgstr "Языки"
 
-#: includes/admin/class-wpglobus-customize-options.php:758
-#: includes/options/class-wpglobus-options.php:1101
+#: includes/admin/class-wpglobus-customize-options.php:758,
+#: includes/options/class-wpglobus-options.php:1100
 msgid "Enabled Languages"
 msgstr "Установленные языки"
 
-#: includes/admin/class-wpglobus-customize-options.php:760
-#: includes/options/class-wpglobus-options.php:1102
+#: includes/admin/class-wpglobus-customize-options.php:760,
+#: includes/options/class-wpglobus-options.php:1101
 msgid "These languages are currently enabled on your site."
 msgstr "Эти языки включены в настоящее время на вашем сайте."
 
-#: includes/admin/class-wpglobus-customize-options.php:788
-#: includes/options/class-wpglobus-options.php:1064
+#: includes/admin/class-wpglobus-customize-options.php:788,
+#: includes/options/class-wpglobus-options.php:1063
 msgid "Choose a language you would like to enable."
 msgstr ""
 
@@ -393,45 +457,43 @@ msgstr ""
 msgid "Press the [Save & Publish] button to confirm."
 msgstr ""
 
-#. / translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-#: includes/admin/class-wpglobus-customize-options.php:794
-#: includes/options/class-wpglobus-options.php:1070
-#, php-format
+#: includes/admin/class-wpglobus-customize-options.php:794,
+#: includes/options/class-wpglobus-options.php:1069
 msgid "or Add new Language %1$s here %2$s"
 msgstr "или добавьте новый язык %1$s здесь %2$s"
 
-#: includes/admin/class-wpglobus-customize-options.php:806
-#: includes/options/class-wpglobus-options.php:1115
+#: includes/admin/class-wpglobus-customize-options.php:806,
+#: includes/options/class-wpglobus-options.php:1114
 msgid "Add Languages"
 msgstr "Добавить языки"
 
-#: includes/admin/class-wpglobus-customize-options.php:826
-#: includes/options/class-wpglobus-options.php:1123
+#: includes/admin/class-wpglobus-customize-options.php:826,
+#: includes/options/class-wpglobus-options.php:1122
 msgid "Language Selector Mode"
 msgstr "Способ показа переключателей "
 
-#: includes/admin/class-wpglobus-customize-options.php:831
-#: includes/options/class-wpglobus-options.php:1126
+#: includes/admin/class-wpglobus-customize-options.php:831,
+#: includes/options/class-wpglobus-options.php:1125
 msgid "Two-letter Code with flag (en, ru, it, etc.)"
 msgstr "Двухбуквенный код (en, ru, it, и т.п.) и флаг"
 
-#: includes/admin/class-wpglobus-customize-options.php:832
-#: includes/options/class-wpglobus-options.php:1127
+#: includes/admin/class-wpglobus-customize-options.php:832,
+#: includes/options/class-wpglobus-options.php:1126
 msgid "Full Name (English, Russian, Italian, etc.)"
 msgstr "Полное название (English, Russian, Italian, и т.п.)"
 
-#: includes/admin/class-wpglobus-customize-options.php:834
-#: includes/options/class-wpglobus-options.php:1128
+#: includes/admin/class-wpglobus-customize-options.php:834,
+#: includes/options/class-wpglobus-options.php:1127
 msgid "Full Name with flag (English, Russian, Italian, etc.)"
 msgstr "Полное название (English, Russian, Italian, и т.п.) и флаг"
 
-#: includes/admin/class-wpglobus-customize-options.php:835
-#: includes/options/class-wpglobus-options.php:1129
+#: includes/admin/class-wpglobus-customize-options.php:835,
+#: includes/options/class-wpglobus-options.php:1128
 msgid "Flags only"
 msgstr "Только флаги"
 
-#: includes/admin/class-wpglobus-customize-options.php:837
-#: includes/options/class-wpglobus-options.php:1124
+#: includes/admin/class-wpglobus-customize-options.php:837,
+#: includes/options/class-wpglobus-options.php:1123
 msgid ""
 "Choose the way language name and country flag are shown in the drop-down menu"
 msgstr "Выберите способ показа названий языков и флагов в навигационном меню"
@@ -440,9 +502,9 @@ msgstr "Выберите способ показа названий языков
 msgid "select navigation menu"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:881
-#: includes/admin/class-wpglobus-customize-options.php:908
-#: includes/options/class-wpglobus-options.php:1140
+#: includes/admin/class-wpglobus-customize-options.php:881,
+#: includes/admin/class-wpglobus-customize-options.php:908,
+#: includes/options/class-wpglobus-options.php:1139
 msgid "Language Selector Menu"
 msgstr "Навигационное меню"
 
@@ -450,20 +512,20 @@ msgstr "Навигационное меню"
 msgid "No menus have been created yet. Create some."
 msgstr "Ни одного меню ещё не создано. Создайте."
 
-#: includes/admin/class-wpglobus-customize-options.php:892
-#: includes/admin/class-wpglobus-customize-options.php:913
-#: includes/options/class-wpglobus-options.php:1141
+#: includes/admin/class-wpglobus-customize-options.php:892,
+#: includes/admin/class-wpglobus-customize-options.php:913,
+#: includes/options/class-wpglobus-options.php:1140
 msgid "Choose the navigation menu where the language selector will be shown"
 msgstr ""
 "Выберите навигационное меню, в котором будет показан переключатель языков"
 
-#: includes/admin/class-wpglobus-customize-options.php:933
-#: includes/options/class-wpglobus-options.php:1151
+#: includes/admin/class-wpglobus-customize-options.php:933,
+#: includes/options/class-wpglobus-options.php:1150
 msgid "\"All Pages\" menus Language selector"
 msgstr "Переключатель языка в меню «Все страницы»"
 
-#: includes/admin/class-wpglobus-customize-options.php:936
-#: includes/options/class-wpglobus-options.php:1153
+#: includes/admin/class-wpglobus-customize-options.php:936,
+#: includes/options/class-wpglobus-options.php:1152
 msgid ""
 "Adds language selector to the menus that automatically list all existing "
 "pages (using `wp_list_pages`)"
@@ -471,8 +533,8 @@ msgstr ""
 "Добавить переключатель языка в меню, которые автоматически показывают список "
 "всех страниц (с использованием `wp_list_pages`)"
 
-#: includes/admin/class-wpglobus-customize-options.php:953
-#: includes/options/class-wpglobus-options.php:1272
+#: includes/admin/class-wpglobus-customize-options.php:953,
+#: includes/options/class-wpglobus-options.php:1271
 msgid "Custom CSS"
 msgstr "Пользовательский CSS"
 
@@ -492,23 +554,23 @@ msgstr "Типы записей"
 msgid "Uncheck to disable WPGlobus"
 msgstr "Снимите флажок, чтобы отключить WPGlobus"
 
-#: includes/admin/class-wpglobus-customize-options.php:1118
-#: includes/options/class-wpglobus-options.php:1340
+#: includes/admin/class-wpglobus-customize-options.php:1118,
+#: includes/options/class-wpglobus-options.php:1339
 msgid "Redirect"
 msgstr "Перенаправление"
 
-#: includes/admin/class-wpglobus-customize-options.php:1143
-#: includes/options/class-wpglobus-options.php:1335
+#: includes/admin/class-wpglobus-customize-options.php:1143,
+#: includes/options/class-wpglobus-options.php:1334
 msgid "Choose the language automatically, based on:"
 msgstr "Выбрать язык автоматически, учитывая:"
 
-#: includes/admin/class-wpglobus-customize-options.php:1145
-#: includes/options/class-wpglobus-options.php:1325
+#: includes/admin/class-wpglobus-customize-options.php:1145,
+#: includes/options/class-wpglobus-options.php:1324
 msgid "Preferred language set in the browser"
 msgstr "Язык, указанный как предпочтительный в настройках браузера"
 
-#: includes/admin/class-wpglobus-customize-options.php:1146
-#: includes/options/class-wpglobus-options.php:1312
+#: includes/admin/class-wpglobus-customize-options.php:1146,
+#: includes/options/class-wpglobus-options.php:1311
 msgid ""
 "When a user comes to the site for the first time, try to find the best "
 "matching language version of the page."
@@ -530,16 +592,15 @@ msgstr ""
 msgid "WPGlobus Settings page"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:1185
-#: includes/admin/class-wpglobus-customize-options.php:1207
-#: includes/admin/class-wpglobus-customize-options.php:1227
-#: includes/options/class-wpglobus-options.php:1284
+#: includes/admin/class-wpglobus-customize-options.php:1185,
+#: includes/admin/class-wpglobus-customize-options.php:1207,
+#: includes/admin/class-wpglobus-customize-options.php:1227,
+#: includes/options/class-wpglobus-options.php:1283
 msgid "Custom JS Code"
 msgstr "Пользовательский JS"
 
-#: includes/admin/class-wpglobus-customize-options.php:1225
+#: includes/admin/class-wpglobus-customize-options.php:1225,
 #: includes/admin/class-wpglobus-customize-options.php:1269
-#: includes/class-wpglobus-widget.php:236
 msgid "Title"
 msgstr "Заголовок"
 
@@ -564,12 +625,12 @@ msgstr ""
 "обрабатываться WPGlobus. Чтобы исключить поле, снимите отметку и нажмите "
 "кнопку сохранения внизу."
 
-#: includes/admin/class-wpglobus-customize-options.php:1344
+#: includes/admin/class-wpglobus-customize-options.php:1344,
 #: includes/options/class-wpglobus-options.php:565
 msgid "Thank you for installing WPGlobus!"
 msgstr "Спасибо за то, что Вы установили плагин WPGlobus!"
 
-#: includes/admin/class-wpglobus-customize-options.php:1348
+#: includes/admin/class-wpglobus-customize-options.php:1348,
 #: includes/options/class-wpglobus-options.php:569
 msgid "Read About WPGlobus"
 msgstr "Подробно о WPGlobus"
@@ -579,7 +640,7 @@ msgid ""
 "Click the <strong>[Languages]</strong> tab at the left to setup the options."
 msgstr "Настройки плагина находятся в разделе <strong>[Языки]</strong>."
 
-#: includes/admin/class-wpglobus-customize-options.php:1356
+#: includes/admin/class-wpglobus-customize-options.php:1356,
 #: includes/options/class-wpglobus-options.php:579
 msgid ""
 "Should you have any questions or comments, please do not hesitate to contact "
@@ -588,23 +649,21 @@ msgstr ""
 "Если у Вас есть вопросы или замечания, пожалуйста, обращайтесь к нам за "
 "поддержкой."
 
-#: includes/admin/class-wpglobus-customize-options.php:1360
+#: includes/admin/class-wpglobus-customize-options.php:1360,
+#: includes/options/class-wpglobus-options.php:583,
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69
-#: includes/options/class-wpglobus-options.php:583
 msgid "Sincerely Yours,"
 msgstr "С Уважением,"
 
-#: includes/admin/class-wpglobus-customize-options.php:1362
+#: includes/admin/class-wpglobus-customize-options.php:1362,
+#: includes/options/class-wpglobus-options.php:585,
+#: includes/options/wpglobus-options-header.php:34,
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:70
-#: includes/options/class-wpglobus-options.php:585
-#: includes/options/wpglobus-options-header.php:34
 msgid "The WPGlobus Team"
 msgstr "Команда WPGlobus"
 
-#. / translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1381
+#: includes/admin/class-wpglobus-customize-options.php:1381,
 #: includes/options/class-wpglobus-options.php:620
-#, php-format
 msgid ""
 "We would hate to see you go. If something goes wrong, do not uninstall "
 "WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
@@ -612,7 +671,7 @@ msgstr ""
 "Обнаружили проблему в WPGlobus? Не торопитесь удалять плагин. Пожалуйста "
 "%1$sобратитесь к нам%2$s и позвольте Вам помочь!"
 
-#: includes/admin/class-wpglobus-customize-options.php:1388
+#: includes/admin/class-wpglobus-customize-options.php:1388,
 #: includes/options/class-wpglobus-options.php:627
 msgid ""
 "Please note that if you deactivate WPGlobus, your site will show all the "
@@ -623,10 +682,8 @@ msgstr ""
 "показывать все языки одновременно. Вам будет необходимо удалить все "
 "переводы, сохранив только один язык."
 
-#. / translators: %s: link to the Clean-up Tool
-#: includes/admin/class-wpglobus-customize-options.php:1393
+#: includes/admin/class-wpglobus-customize-options.php:1393,
 #: includes/options/class-wpglobus-options.php:631
-#, php-format
 msgid ""
 "If there are just a few places, you should edit them manually. To "
 "automatically remove all translations at once, you can use the %s. WARNING: "
@@ -638,22 +695,16 @@ msgstr ""
 "%s. Предупреждение: операция очистки является необратимой, так что "
 "используйте её, только если Вы решили окончательно удалить WPGlobus."
 
-#. / translators: %?$s: HTML codes for hyperlink. Do not remove.
-#: includes/admin/class-wpglobus-customize-options.php:1396
+#: includes/admin/class-wpglobus-customize-options.php:1396,
 #: includes/options/class-wpglobus-options.php:608
-#, php-format
 msgid "%1$sClean-up Tool%2$s"
 msgstr "%1$sПрограмму очистки%2$s"
 
-#. / translators: %s: name of current theme
 #: includes/admin/class-wpglobus-customize-options.php:1408
-#, php-format
 msgid "Sorry, WPGlobus customizer doesn't support current theme %s."
 msgstr "Извините, тема %s не поддерживается WPGlobus."
 
-#. / translators: %?$s: HTML codes for hyperlink. Do not remove.
 #: includes/admin/class-wpglobus-customize-options.php:1414
-#, php-format
 msgid "Please use %1$sWPGlobus options page%2$s instead."
 msgstr "Пожалуйста, используйте %1$sпанель настроек WPGlobus%2$s."
 
@@ -661,12 +712,12 @@ msgstr "Пожалуйста, используйте %1$sпанель настр
 msgid "Expand/Shrink"
 msgstr ""
 
-#: includes/admin/class-wpglobus-dashboard-news.php:43
+#: includes/admin/class-wpglobus-dashboard-news.php:43,
 #: includes/admin/class-wpglobus-dashboard-news.php:59
 msgid "WPGlobus News"
 msgstr "Новости WPGlobus"
 
-#: includes/admin/class-wpglobus-language-edit.php:192
+#: includes/admin/class-wpglobus-language-edit.php:192,
 #: includes/admin/class-wpglobus-language-edit.php:197
 msgid "Options updated"
 msgstr "Настройки сохранены"
@@ -699,8 +750,8 @@ msgstr "Пожалуйста, введите локаль!"
 msgid "Edit Language"
 msgstr "Изменить язык"
 
-#: includes/admin/class-wpglobus-language-edit.php:351
-#: includes/admin/class-wpglobus-language-edit.php:455
+#: includes/admin/class-wpglobus-language-edit.php:351,
+#: includes/admin/class-wpglobus-language-edit.php:455,
 #: includes/admin/class-wpglobus-language-edit.php:462
 msgid "Delete Language"
 msgstr "Удалить язык"
@@ -740,7 +791,7 @@ msgstr "Название по-английски"
 msgid "The name of the language in English"
 msgstr "Название языка по-английски"
 
-#: includes/admin/class-wpglobus-language-edit.php:432
+#: includes/admin/class-wpglobus-language-edit.php:432,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:115
 msgid "Locale"
 msgstr "Локаль"
@@ -749,9 +800,7 @@ msgstr "Локаль"
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 msgstr "PHP/WordPress локаль языка. (Пример: en_US, ru_RU)"
 
-#. / DO NOT TRANSLATE
 #: includes/admin/class-wpglobus-language-edit.php:447
-#: includes/options/class-wpglobus-options.php:1061
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
@@ -775,273 +824,17 @@ msgstr "Установить!"
 msgid "Premium add-on"
 msgstr "Платное расширение"
 
-#: includes/admin/class-wpglobus-plugin-install.php:309
+#: includes/admin/class-wpglobus-plugin-install.php:309,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
 msgstr "Установлен"
-
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:45
-#: includes/options/class-wpglobus-options.php:656
-msgid "Help Desk"
-msgstr "Поддержка"
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:55
-msgid "Thank you for using WPGlobus!"
-msgstr "Спасибо за то, что Вы выбрали WPGlobus!"
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:56
-msgid "Our Support Team is here to answer your questions or concerns."
-msgstr "Наша Служба Поддержки постарается ответить на любой из Ваших вопросов."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:58
-msgid ""
-"Click the blue round button at the bottom right to open the Contact Form."
-msgstr ""
-"Нажмите синюю круглую кнопку справа внизу для того, чтобы открыть форму "
-"контакта."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:59
-msgid "Type in your name, email, subject and the detailed message."
-msgstr "Введите Ваше имя, почту, тему и подробное сообщение."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:60
-msgid ""
-"If you can make a screenshot demonstrating the problem, please attach it."
-msgstr ""
-"Если Вы можете сделать скриншот, демонстрирующий проблему, пожалуйста, "
-"присоедините его."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
-msgid ""
-"Please note: we will receive some debug data together with your request. See "
-"the \"Technical Information\" table for the details."
-msgstr ""
-"Внимание: вместе с Вашим сообщением мы получим некоторые технические данные "
-"о Вашем сайте. Детали - смотрите в таблице."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
-msgid "To help us serve you better:"
-msgstr "Чтобы ускорить поиск решения Вашей проблемы:"
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:65
-msgid ""
-"Please check if the problem persists if you switch to a standard WordPress "
-"theme."
-msgstr ""
-"Пожалуйста, убедитесь, что проблема сохраняется, если Вы переключитесь на "
-"стандартную тему ВордПресс."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
-msgid ""
-"Try deactivating other plugins to see if any of them conflicts with WPGlobus."
-msgstr ""
-"Попробуйте деактивировать плагины, чтобы убедиться, не конфликтует ли какой-"
-"то из них с WPGlobus."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
-msgid "Technical Information"
-msgstr "Техническая информация"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:54
-msgid "WPGlobus Recommends:"
-msgstr "WPGlobus рекомендует:"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:63
-#: includes/options/class-wpglobus-options.php:863
-msgid "WPGlobus for WooCommerce"
-msgstr "WPGlobus для WooCommerce"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:67
-msgid ""
-"Translate product titles and descriptions, product categories, tags and "
-"attributes."
-msgstr "Переведите названия и описания товаров, категорий, свойств и меток."
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
-msgid "Get it now:"
-msgstr "Установите прямо сейчас:"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:82
-msgid "WPGlobus Multi-Currency"
-msgstr "WPGlobus Мультивалютность"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:86
-msgid "Accept multiple currencies in your online store!"
-msgstr "Принимайте оплату в нескольких валютах!"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:91
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:144
-msgid "Check it out:"
-msgstr "Информация - здесь:"
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:142
-msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
-msgstr ""
-
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:151
-msgid "To translate permalinks, please activate the module Slug."
-msgstr ""
-
-#. / Do not translate
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:154
-msgid "Go to WPGlobus Plus Options page"
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus-filters.php:683
-msgid "Error while saving."
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus-filters.php:687
-msgid "g:i:s a"
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus-filters.php:692
-#, php-format
-msgid "Draft saved at %s."
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus-filters.php:794
-msgid "&hellip;"
-msgstr "&hellip;"
-
-#. / Do not translate
-#: includes/class-wpglobus-filters.php:799
-msgctxt "word count: words or characters?"
-msgid "words"
-msgstr "words"
-
-#: includes/class-wpglobus-widget.php:27
-msgid "WPGlobus widget"
-msgstr "WPGlobus виджет"
-
-#: includes/class-wpglobus-widget.php:29
-msgid "Add language switcher"
-msgstr "Добавить переключатель языка"
-
-#: includes/class-wpglobus-widget.php:32
-msgid "Flags"
-msgstr "Флаги"
-
-#: includes/class-wpglobus-widget.php:33
-msgid "List"
-msgstr "Список"
-
-#: includes/class-wpglobus-widget.php:34
-msgid "List with flags"
-msgstr "Список с флажками"
-
-#: includes/class-wpglobus-widget.php:35
-msgid "Select"
-msgstr "Select"
-
-#: includes/class-wpglobus-widget.php:36
-msgid "Select with language code"
-msgstr "Select с кодом языка"
-
-#: includes/class-wpglobus-widget.php:37
-msgid "Dropdown"
-msgstr "Выпадающее меню"
-
-#: includes/class-wpglobus-widget.php:38
-msgid "Dropdown with flags"
-msgstr "Выпадающее меню с флагами"
-
-#: includes/class-wpglobus-widget.php:240
-msgid "Selector type"
-msgstr "Способ выбора языка"
-
-#. / Translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1017
-msgid "OFF"
-msgstr ""
-
-#: includes/class-wpglobus.php:1018
-msgid "Turn on"
-msgstr ""
-
-#. / Translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1022
-msgid "ON"
-msgstr ""
-
-#: includes/class-wpglobus.php:1023
-msgid "Turn off"
-msgstr ""
-
-#: includes/class-wpglobus.php:1187
-msgid "You cannot disable the main language."
-msgstr "Нельзя отключить основной язык."
-
-#: includes/class-wpglobus.php:1389
-msgid "*) Available after the menu is saved."
-msgstr "*) Доступно после сохранения меню."
-
-#: includes/class-wpglobus.php:1406
-msgid "Need a multilingual slug?"
-msgstr "Нужен мультиязычный ярлык?"
-
-#. / Do not translate
-#: includes/class-wpglobus.php:1482 includes/class-wpglobus.php:1486
-#, php-format
-msgid "You are customizing %s"
-msgstr "Вы змяняеце %s"
-
-#. / Do not translate
-#: includes/class-wpglobus.php:2819
-#, php-format
-msgid "Word count: %s"
-msgstr "Колькасьць слоў: %s"
-
-#. / Do not translate
-#: includes/class-wpglobus.php:2829
-#, php-format
-msgid "Last edited by %1$s on %2$s at %3$s"
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus.php:2837
-#, php-format
-msgid "Last edited on %1$s at %2$s"
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus.php:3138
-msgid "Enter title here"
-msgstr ""
-
-#. / Do not translate
-#: includes/class-wpglobus.php:3260
-msgid "Invalid taxonomy"
-msgstr "Нядзейнае успадкоўванне"
-
-#: includes/class-wpglobus.php:3453
-msgid "You must enable Pretty Permalinks to use WPGlobus."
-msgstr ""
-"Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
-"ссылки."
-
-#: includes/class-wpglobus.php:3455
-msgid ""
-"Please go to Settings > Permalinks > Common Settings and choose a non-"
-"default option."
-msgstr ""
-"Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
-"структуру ссылок в разделе \"Общие настройки\"."
-
-#: includes/class-wpglobus.php:3596
-msgid "Add"
-msgstr "Добавить"
 
 #: includes/options/class-wpglobus-options.php:250
 msgid "Language Selector Menu Style"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:251
-#: includes/options/class-wpglobus-options.php:732
+#: includes/options/class-wpglobus-options.php:251,
+#: includes/options/class-wpglobus-options.php:732,
 #: includes/options/class-wpglobus-options.php:801
 msgid "WPGlobus Plus"
 msgstr ""
@@ -1069,12 +862,10 @@ msgid ""
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:573
-#, php-format
 msgid "Click the %1$s[Languages]%2$s tab at the left to setup the options."
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:576
-#, php-format
 msgid ""
 "Use the %1$s[Languages Table]%2$s section to add a new language or to edit "
 "the language attributes: name, code, flag icon, etc."
@@ -1092,6 +883,11 @@ msgstr "Деактивация / Деинсталляция"
 msgid "Uninstall"
 msgstr ""
 
+#: includes/options/class-wpglobus-options.php:656,
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:45
+msgid "Help Desk"
+msgstr "Поддержка"
+
 #: includes/options/class-wpglobus-options.php:671
 msgid "All add-ons"
 msgstr ""
@@ -1102,11 +898,6 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:701
 msgid "Language Widgets"
-msgstr ""
-
-#. / DO NOT TRANSLATE
-#: includes/options/class-wpglobus-options.php:717
-msgid "Featured Images"
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:771
@@ -1139,11 +930,16 @@ msgstr ""
 msgid "- and more..."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:818
-#: includes/options/class-wpglobus-options.php:875
+#: includes/options/class-wpglobus-options.php:818,
+#: includes/options/class-wpglobus-options.php:875,
 #: includes/options/class-wpglobus-options.php:933
 msgid "Click here to download"
 msgstr ""
+
+#: includes/options/class-wpglobus-options.php:863,
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:63
+msgid "WPGlobus for WooCommerce"
+msgstr "WPGlobus для WooCommerce"
 
 #: includes/options/class-wpglobus-options.php:866
 msgid ""
@@ -1234,19 +1030,16 @@ msgid "Select a language"
 msgstr "Выберите язык"
 
 #: includes/options/class-wpglobus-options.php:1049
-#, php-format
 msgid ""
 "Place the %1$smain language%2$s of your site at the top of the list by "
 "dragging the %3$s icons."
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1052
-#, php-format
 msgid "%1$sUncheck%2$s the languages you do not plan to use."
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1055
-#, php-format
 msgid "%1$sAdd%2$s more languages using the section below."
 msgstr ""
 
@@ -1254,76 +1047,255 @@ msgstr ""
 msgid "When done, click the [Save Changes] button."
 msgstr "Когда закончите, нажмите кнопку [Сохранить изменения]."
 
-#: includes/options/class-wpglobus-options.php:1067
-#, php-format
+#: includes/options/class-wpglobus-options.php:1066
 msgid "Press the %s button to confirm."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1081
+#: includes/options/class-wpglobus-options.php:1080
 msgid "All menus"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1094
+#: includes/options/class-wpglobus-options.php:1093
 msgid "Instructions:"
 msgstr "Инструкции:"
 
-#: includes/options/class-wpglobus-options.php:1152
+#: includes/options/class-wpglobus-options.php:1151
 msgid "(Found in some themes)"
 msgstr "(Используется в некоторых темах)"
 
-#: includes/options/class-wpglobus-options.php:1154
+#: includes/options/class-wpglobus-options.php:1153
 msgid "Enable"
 msgstr "Включить"
 
-#: includes/options/class-wpglobus-options.php:1169
+#: includes/options/class-wpglobus-options.php:1168
 msgid "Languages table"
 msgstr "Таблица языков"
 
-#: includes/options/class-wpglobus-options.php:1175
+#: includes/options/class-wpglobus-options.php:1174
 msgid "Use this table to add, edit or delete languages."
 msgstr ""
 "Используйте эту таблицу, чтобы добавлять, удалять или редактировать языки."
 
-#: includes/options/class-wpglobus-options.php:1176
+#: includes/options/class-wpglobus-options.php:1175
 msgid "NOTE: you cannot remove the main language."
 msgstr "ВНИМАНИЕ: язык по умолчанию не может быть удален."
 
-#: includes/options/class-wpglobus-options.php:1230
+#: includes/options/class-wpglobus-options.php:1229
 msgid "WPGlobus is enabled on these Post Types"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1231
+#: includes/options/class-wpglobus-options.php:1230
 msgid "Uncheck to disable"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1232
+#: includes/options/class-wpglobus-options.php:1231
 msgid ""
 "Please note that there are post types, which status is managed by other "
 "plugins and cannot be changed here."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1237
+#: includes/options/class-wpglobus-options.php:1236
 msgid "Post Types"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1253
+#: includes/options/class-wpglobus-options.php:1252
 msgid ""
 "You should put here only the code provided by WPGlobus Support. Do not write "
 "anything else in the sections below as it might break the functionality of "
 "your website!"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1294
+#: includes/options/class-wpglobus-options.php:1293
 msgid "Custom Code"
 msgstr ""
 
-#. / DO NOT TRANSLATE
-#: includes/options/class-wpglobus-options.php:1367
-msgid "Customize"
-msgstr "Настроіць"
-
-#: includes/options/class-wpglobus-options.php:1570
+#: includes/options/class-wpglobus-options.php:1568
 msgid "Translate strings"
+msgstr ""
+
+#: includes/options/wpglobus-options-header.php:25
+msgid "We rely on your support!"
+msgstr "Спасибо за поддержку!"
+
+#: includes/options/wpglobus-options-header.php:28
+msgid "Please consider a small donation to support the future development."
+msgstr ""
+"Ваше пожертвование будет использовано для дальшейшего развития и улучшения "
+"плагина."
+
+#: includes/options/wpglobus-options-header.php:32
+msgid "Thank you!"
+msgstr "С благодарностью!"
+
+#: includes/options/wpglobus-options-header.php:55
+msgid "WPGlobus Plus!"
+msgstr "WPGlobus Плюс!"
+
+#: includes/options/wpglobus-options-header.php:58
+msgid ""
+"Advanced features and tweaks: URL translation, multilingual SEO analysis, "
+"separate publishing and more! "
+msgstr ""
+"Расширенные функции и настройки: переводы УРЛов, многоязычный SEO анализ, "
+"раздельная публикация и многое другое! "
+
+#: includes/options/wpglobus-options-header.php:64
+msgid "Get WPGlobus Plus now!"
+msgstr "Установите WPGlobus Плюс прямо сейчас!"
+
+#: includes/admin/central/class-wpglobus-admin-central.php:142,
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:44
+msgid "WPGlobus Help Desk"
+msgstr "Поддержка"
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:55
+msgid "Thank you for using WPGlobus!"
+msgstr "Спасибо за то, что Вы выбрали WPGlobus!"
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:56
+msgid "Our Support Team is here to answer your questions or concerns."
+msgstr "Наша Служба Поддержки постарается ответить на любой из Ваших вопросов."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:58
+msgid ""
+"Click the blue round button at the bottom right to open the Contact Form."
+msgstr ""
+"Нажмите синюю круглую кнопку справа внизу для того, чтобы открыть форму "
+"контакта."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:59
+msgid "Type in your name, email, subject and the detailed message."
+msgstr "Введите Ваше имя, почту, тему и подробное сообщение."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:60
+msgid ""
+"If you can make a screenshot demonstrating the problem, please attach it."
+msgstr ""
+"Если Вы можете сделать скриншот, демонстрирующий проблему, пожалуйста, "
+"присоедините его."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
+msgid ""
+"Please note: we will receive some debug data together with your request. See "
+"the \"Technical Information\" table for the details."
+msgstr ""
+"Внимание: вместе с Вашим сообщением мы получим некоторые технические данные "
+"о Вашем сайте. Детали - смотрите в таблице."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
+msgid "To help us serve you better:"
+msgstr "Чтобы ускорить поиск решения Вашей проблемы:"
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:65
+msgid ""
+"Please check if the problem persists if you switch to a standard WordPress "
+"theme."
+msgstr ""
+"Пожалуйста, убедитесь, что проблема сохраняется, если Вы переключитесь на "
+"стандартную тему ВордПресс."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
+msgid ""
+"Try deactivating other plugins to see if any of them conflicts with WPGlobus."
+msgstr ""
+"Попробуйте деактивировать плагины, чтобы убедиться, не конфликтует ли какой-"
+"то из них с WPGlobus."
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
+msgid "Technical Information"
+msgstr "Техническая информация"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:54
+msgid "WPGlobus Recommends:"
+msgstr "WPGlobus рекомендует:"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:67
+msgid ""
+"Translate product titles and descriptions, product categories, tags and "
+"attributes."
+msgstr "Переведите названия и описания товаров, категорий, свойств и меток."
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:72
+msgid "Get it now:"
+msgstr "Установите прямо сейчас:"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:82
+msgid "WPGlobus Multi-Currency"
+msgstr "WPGlobus Мультивалютность"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:86
+msgid "Accept multiple currencies in your online store!"
+msgstr "Принимайте оплату в нескольких валютах!"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:91,
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:144
+msgid "Check it out:"
+msgstr "Информация - здесь:"
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:142
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:151
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:35
+msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:39
+msgid "However, some themes do not follow all WordPress standards strictly."
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:41
+msgid "WPGlobus Customizer may behave incorrectly with those themes."
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:45
+msgid "To avoid conflicts, you can switch the WPGlobus Customizer off:"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:53
+msgid ""
+"Below is the list of themes that do not support the WPGlobus Customizer. "
+"With those themes, WPGlobus Customizer is switched off by default"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:60
+msgid "The currently active theme is"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:66
+msgid "In the current version, WPGlobus Customizer does not support"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:70
+msgid "translation of the navigation menus"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:72
+msgid "to translate, please go to"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:81
+msgid "Go to Customizer"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:85
+msgid "is set to"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:88
+msgid "is undefined"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:94
+msgid "by adding to the file wp-config.php"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:96
+msgid "now"
 msgstr ""
 
 #: includes/options/fields/table/class-wpglobus-languages-table.php:66
@@ -1370,104 +1342,32 @@ msgstr "Нет записей"
 msgid "Add new Language"
 msgstr "Добавить новый язык"
 
-#. / Do not translate
-#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:108
+#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:107
 msgid "Select an item"
 msgstr ""
 
-#. / Do not translate
-#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:166
+#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:164
 msgid "No items of this type were found."
 msgstr "Нічога не знойдзена."
 
-#: includes/options/templates/customize-intro.php:35
-msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
-msgstr ""
+#~ msgid "Settings"
+#~ msgstr "Налады"
 
-#: includes/options/templates/customize-intro.php:39
-msgid "However, some themes do not follow all WordPress standards strictly."
-msgstr ""
+#~ msgid "&hellip;"
+#~ msgstr "&hellip;"
 
-#: includes/options/templates/customize-intro.php:41
-msgid "WPGlobus Customizer may behave incorrectly with those themes."
-msgstr ""
+#~ msgctxt "word count: words or characters?"
+#~ msgid "words"
+#~ msgstr "words"
 
-#: includes/options/templates/customize-intro.php:45
-msgid "To avoid conflicts, you can switch the WPGlobus Customizer off:"
-msgstr ""
+#~ msgid "You are customizing %s"
+#~ msgstr "Вы змяняеце %s"
 
-#: includes/options/templates/customize-intro.php:53
-msgid ""
-"Below is the list of themes that do not support the WPGlobus Customizer. "
-"With those themes, WPGlobus Customizer is switched off by default"
-msgstr ""
+#~ msgid "Word count: %s"
+#~ msgstr "Колькасьць слоў: %s"
 
-#: includes/options/templates/customize-intro.php:60
-msgid "The currently active theme is"
-msgstr ""
+#~ msgid "Invalid taxonomy"
+#~ msgstr "Нядзейнае успадкоўванне"
 
-#: includes/options/templates/customize-intro.php:66
-msgid "In the current version, WPGlobus Customizer does not support"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:70
-msgid "translation of the navigation menus"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:72
-msgid "to translate, please go to"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:73
-msgid "Menus"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:81
-msgid "Go to Customizer"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:85
-msgid "is set to"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:88
-msgid "is undefined"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:94
-msgid "by adding to the file wp-config.php"
-msgstr ""
-
-#: includes/options/templates/customize-intro.php:96
-msgid "now"
-msgstr ""
-
-#: includes/options/wpglobus-options-header.php:25
-msgid "We rely on your support!"
-msgstr "Спасибо за поддержку!"
-
-#: includes/options/wpglobus-options-header.php:28
-msgid "Please consider a small donation to support the future development."
-msgstr ""
-"Ваше пожертвование будет использовано для дальшейшего развития и улучшения "
-"плагина."
-
-#: includes/options/wpglobus-options-header.php:32
-msgid "Thank you!"
-msgstr "С благодарностью!"
-
-#: includes/options/wpglobus-options-header.php:55
-msgid "WPGlobus Plus!"
-msgstr "WPGlobus Плюс!"
-
-#: includes/options/wpglobus-options-header.php:58
-msgid ""
-"Advanced features and tweaks: URL translation, multilingual SEO analysis, "
-"separate publishing and more! "
-msgstr ""
-"Расширенные функции и настройки: переводы УРЛов, многоязычный SEO анализ, "
-"раздельная публикация и многое другое! "
-
-#: includes/options/wpglobus-options-header.php:64
-msgid "Get WPGlobus Plus now!"
-msgstr "Установите WPGlobus Плюс прямо сейчас!"
+#~ msgid "Customize"
+#~ msgstr "Настроіць"

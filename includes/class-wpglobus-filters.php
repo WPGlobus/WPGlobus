@@ -679,16 +679,13 @@ class WPGlobus_Filters {
 			} elseif ( empty( $saved ) ) {
 				$response['wp_autosave'] = array(
 					'success' => false,
-					/// Do not translate
 					'message' => __( 'Error while saving.' ),
 				);
 			} else {
-				/// Do not translate
 				$draft_saved_date_format = __( 'g:i:s a' );
 				$response['wp_autosave'] = array(
 					'success' => true,
 					'message' => sprintf(
-					/// Do not translate
 						__( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) ),
 				);
 			}
@@ -790,12 +787,10 @@ class WPGlobus_Filters {
 		$text = WPGlobus_Core::text_filter( $original_text, WPGlobus::Config()->language );
 
 		if ( null === $more ) {
-			/// Do not translate
 			$more = __( '&hellip;' );
 		}
 
 		$text = wp_strip_all_tags( $text );
-		/// Do not translate
 		if ( 'characters' == _x( 'words', 'word count: words or characters?' ) && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
 			$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
 			preg_match_all( '/./u', $text, $words_array );
