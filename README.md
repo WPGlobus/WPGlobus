@@ -3,7 +3,7 @@
 # WPGlobus - Multilingual Everything! #
 **Contributors:** [tivnetinc](https://profiles.wordpress.org/tivnetinc), [alexgff](https://profiles.wordpress.org/alexgff), [tivnet](https://profiles.wordpress.org/tivnet)  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN  
-**Tags:** WPGlobus, localization, multilanguage, multilingual, translation  
+**Tags:** WPGlobus, localization, multilanguage, multilingual, translate  
 **Requires at least:** 4.8  
 **Tested up to:** 4.9  
 **Requires PHP:** 5.3  
@@ -244,6 +244,13 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 
 ## Changelog ##
 
+### 1.9.12 ###
+
+* ADDED:
+    * Options Panel: Customize section.
+* FIXED:
+    * Custom JS code: restore some special characters after applying filters.
+
 ### 1.9.11 ###
 
 * FIXED:
@@ -268,16 +275,6 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 	* Core: Fix broken `Add Language` link. Code cleanup and cosmetics.
 * ADDED:
     * Core: styling and translations for the `ON/OFF` WPGlobus switcher on the edit pages.
-
-### 1.9.8.1 ###
-
-* ADDED:
-	* Core: initialize `WPGlobusDialogApp` on `options-general.php` page.
-
-### 1.9.8 ###
-
-* ADDED:
-	* Core: filter `oEmbed HTML` when post has an embedded local URL in the content.
 
 ### Earlier versions and Add-ons ###
 

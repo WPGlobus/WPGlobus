@@ -6,6 +6,8 @@
 
 * ADDED:
     * Options Panel: Customize section.
+* FIXED:
+    * Custom JS code: restore some special characters after applying filters.
 	
 ### 1.9.11 ###
 
