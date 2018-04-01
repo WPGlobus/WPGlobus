@@ -12,7 +12,7 @@ const rename = require("gulp-rename");
 const print = require('gulp-print').default;
 
 
-function taskUglify() {
+module.exports = function () {
     return gulp
         .src([cfg.path.js + "/**/*.js", "!" + cfg.path.js + "/**/*.min.js"])
         .pipe(uglify())
@@ -20,6 +20,4 @@ function taskUglify() {
         .pipe(gulp.dest(cfg.path.js))
         .pipe(print())
         ;
-}
-
-module.exports = taskUglify;
+};

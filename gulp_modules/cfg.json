@@ -13,21 +13,31 @@
   },
   "src": {
     "zip": [
+    "zip": [
       "./**/{*,.*}",
       "!node_modules/**/{.*,*}",
       "!node_modules",
+      "!assets/**/{.*,*}",
+      "!assets",
       "!.git/**/{.*,*}",
       "!.git",
+      "!.tx/**/{.*,*}",
+      "!.tx",
+      "!unit-tests/**/{.*,*}",
+      "!unit-tests",
       "!gulp_modules/**/{.*,*}",
       "!gulp_modules",
       "!.gitignore",
       "!.gitattributes",
       "!.jshintrc",
-      "!changelog.md",
+      "!./**/.jshintrc",
+      "!CHANGELOG.md",
+      "!README.md",
       "!composer.json",
       "!composer.lock",
       "!package-lock.json",
       "!package.json",
+      "!phpunit.xml",
       "!Gulpfile.js",
       "!./**/*Test.php"
     ]
