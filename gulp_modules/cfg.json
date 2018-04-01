@@ -7,8 +7,8 @@
   },
   "path": {
     "dist": "/var/www/u/wpglobus.com/dist",
-    "js": "assets/js",
-    "css": "assets/css",
+    "js": "includes/js",
+    "css": "includes/css",
     "languages": "languages"
   },
   "src": {

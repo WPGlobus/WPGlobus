@@ -288,7 +288,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 
 			wp_register_style(
 				'wpglobus-admin-tabs',
-				WPGlobus::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-tabs' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+				WPGlobus::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-tabs.css',
 				array(),
 				WPGLOBUS_VERSION,
 				'all'

@@ -3,29 +3,29 @@
  * @package WPGlobus
  */
 
-.dashicon-checkmark() {
+@mixin dashicon-checkmark(){
 	content: "\f147";
 }
 
-.dashicon-triangle-right() {
+@mixin dashicon-triangle-right(){
 	content: "\f522";
 }
 
-.dashicon-globus() {
+@mixin dashicon-globus(){
 	content: "\f319";
 }
 
 // To use in the Redux Sortable instead of elusive
-.dashicons-image-flip-vertical() {
+@mixin dashicons-image-flip-vertical(){
 	content: "\f168";
 }
 
-.dashicons-move() {
+@mixin dashicons-move(){
 	content: "\f545";
 }
 
 #adminmenu li.toplevel_page_wpglobus_options div.wp-menu-image:before {
-	.dashicon-globus();
+	@include dashicon-globus();
 }
 
 .wpglobus-menu-item-box {
@@ -43,18 +43,18 @@
 }
 
 //noinspection CssNoGenericFontName
-.dashicon() {
+@mixin dashicon(){
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
-	font-family: 'dashicons';
+	font-family: dashicons;
 	font-weight: 400;
 	font-style: normal;
 	text-decoration: inherit;
 }
 
 .wpglobus-switch .wpglobus-icon-globe:before {
-	.dashicon();
-	.dashicon-globus();
+	@include dashicon();
+	@include dashicon-globus();
 	font-size: 20px;
 	vertical-align: text-bottom;
 	opacity: 0.6;
@@ -62,8 +62,8 @@
 
 ul.wpglobus-checkmarks {
 	li:before {
-		.dashicon();
-		.dashicon-checkmark();
+		@include dashicon();
+		@include dashicon-checkmark();
 		font-size: 2em;
 		vertical-align: top;
 		color: forestgreen;
@@ -76,8 +76,8 @@ ul.wpglobus-checkmarks {
 
 ul.wpglobus-important {
 	li:before {
-		.dashicon();
-		.dashicon-triangle-right();
+		@include dashicon();
+		@include dashicon-triangle-right();
 		font-size: 23px;
 		vertical-align: top;
 		color: darkred;
@@ -111,38 +111,38 @@ ul.wpglobus-important {
 }
 
 .wpglobus-wp-admin {
-    .wpglobus-translatable {
-      border-left: 3px solid blue !important;
-    }
+	.wpglobus-translatable {
+		border-left: 3px solid blue !important;
+	}
 	.wpglobus-link-lock-icon {
-	  cursor: not-allowed;
+		cursor: not-allowed;
 	}
 	.wpglobus-link-trash-icon {
-	  cursor: not-allowed;
+		cursor: not-allowed;
 	}
 	.wpglobus-link-lock-icon:before {
-	  font-family: 'dashicons';
-	  font-weight: 400;
-	  font-style: normal;
-	  text-decoration: inherit;
-	  content: "\f160";
-	  font-size: 11px;
+		font-family: dashicons;
+		font-weight: 400;
+		font-style: normal;
+		text-decoration: inherit;
+		content: "\f160";
+		font-size: 11px;
 	}
 	.wpglobus-link-open-icon:before {
-	  font-family: 'dashicons';
-	  font-weight: 400;
-	  font-style: normal;
-	  text-decoration: inherit;
-	  content: "\f504";
-	  font-size: 11px;
+		font-family: dashicons;
+		font-weight: 400;
+		font-style: normal;
+		text-decoration: inherit;
+		content: "\f504";
+		font-size: 11px;
 	}
 	.wpglobus-link-trash-icon:before {
-	  font-family: 'dashicons';
-	  font-weight: 400;
-	  font-style: normal;
-	  text-decoration: inherit;
-	  content: "\f182";
-	  font-size: 11px;
+		font-family: dashicons;
+		font-weight: 400;
+		font-style: normal;
+		text-decoration: inherit;
+		content: "\f182";
+		font-size: 11px;
 	}
 	.wpglobus-spinner {
 		background: url(images/spinner.gif) no-repeat;
@@ -187,13 +187,13 @@ ul.wpglobus-important {
 
 }
 
-@color-wpglobus-logo-globe: #E38869;
-@color-wpglobus-logo-wp: #23769C;
+$color-wpglobus-logo-globe: #E38869;
+$color-wpglobus-logo-wp: #23769C;
 
 // @since 1.5.8 Use our styles only with our `wrap` class.
 .about-wrap.wpglobus-about-wrap {
 	.wpglobus-version {
-		color: @color-wpglobus-logo-globe;
+		color: $color-wpglobus-logo-globe;
 		font-size: 95%;
 	}
 
@@ -202,7 +202,7 @@ ul.wpglobus-important {
 	}
 
 	.wpglobus-wp {
-		color: @color-wpglobus-logo-wp;
+		color: $color-wpglobus-logo-wp;
 	}
 
 	h1.wpglobus {
@@ -212,7 +212,7 @@ ul.wpglobus-important {
 	}
 
 	.wpglobus-stars {
-		color: @color-wpglobus-logo-globe;
+		color: $color-wpglobus-logo-globe;
 	}
 
 	// The `Customizr` theme breaks this by setting to "center".
@@ -232,13 +232,13 @@ ul.wpglobus-important {
 }
 
 // Use Dashicon instead of Elusive, because Elusive can be broken by a theme (ex. "Virtue")
-@color-wpglobus-icon-sortable: #2866a0;
+$color-wpglobus-icon-sortable: #2866a0;
 .toplevel_page_wpglobus_options {
 	.el-move::before {
-		.dashicon();
-		.dashicons-move();
-		border: 1px solid @color-wpglobus-icon-sortable;
-		color: @color-wpglobus-icon-sortable;
+		@include dashicon();
+		@include dashicons-move();
+		border: 1px solid $color-wpglobus-icon-sortable;
+		color: $color-wpglobus-icon-sortable;
 		background-color: white;
 		margin: 0 3px 0 3px;
 		line-height: 1.2;
@@ -250,12 +250,12 @@ ul.wpglobus-important {
 
 // Options panel header
 // @see includes/options/wpglobus-options-header.php
-@bg-redux-info: #d3e4f4;
+$bg-redux-info: #d3e4f4;
 .redux-container #redux-intro-text {
-	background-color: @bg-redux-info;
+	background-color: $bg-redux-info;
 	color: black;
 	h1 {
-		color: darken(@bg-redux-info, 50%);
+		color: darken($bg-redux-info, 50%);
 		float: left;
 		width: 204px;
 		margin: 0;
@@ -274,7 +274,7 @@ ul.wpglobus-important {
 		float: left;
 		display: block;
 		height: 100px;
-		border: 1px solid darken(@bg-redux-info, 30%);
+		border: 1px solid darken($bg-redux-info, 30%);
 		background-color: white;
 		margin-right: 1em;
 		img {
@@ -297,28 +297,28 @@ ul.wpglobus-important {
 }
 // @see customize.php
 .customize-controls-close.wpglobus-customize-selector:before {
-  content: "";
+	content: "";
 }
 .customize-controls-close.wpglobus-customize-selector .wpglobus-icon-globe:before {
-  color: #00f;
-  display: inline-block;
-  font-family: 'dashicons';
-  content: "\f319";
-  font-size: 20px;
+	color: #00f;
+	display: inline-block;
+	font-family: dashicons;
+	content: "\f319";
+	font-size: 20px;
 }
 .wpglobus-customize-translatable-element, .wpglobus-customize-control, .wpglobus-customize-widget-control {
-  border-left: 3px solid blue !important;
+	border-left: 3px solid blue !important;
 }
 @media screen and (max-width: 640px) {
-  .customize-controls-preview-toggle {
-    left: 88px;
-  }
+	.customize-controls-preview-toggle {
+		left: 88px;
+	}
 }
 
 // Fix Yoast help buttons. Because we wrap Yoast in jQ-UI tabs,
 // the style might be broken. Specifically, the "Types" plugin breaks it.
 .yoast_help.yoast-help-button.dashicons {
-	font-family: 'dashicons' !important;
+	font-family: dashicons !important;
 	font-size:   20px !important;
 }
 

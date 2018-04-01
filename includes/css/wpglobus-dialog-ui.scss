@@ -1,0 +1,277 @@
+/**
+ * Admin dialog styles
+ * @package WPGlobus
+ */
+
+.wpglobus-wp-admin {
+
+  .wpglobus-icon-globe:before {
+    color: #00f;
+    display: inline-block;
+    font-family: dashicons;
+    content: "\f319";
+    font-size: 20px;
+  }
+
+  .wpglobus_dialog_icon {
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  &.widgets-php .wpglobus_dialog_icon {
+    margin-top: 0;
+    float: right;
+    cursor: pointer;
+  }
+  .wpglobus_dialog_settings {
+    margin-top: 0;
+  }
+  .wpglobus_dialog_settings:before {
+    color: #00f;
+    display: inline-block;
+    font-family: dashicons;
+    content: "\f107";
+    font-size: 20px;
+  }
+  .wpglobus_dialog_start:before {
+    color: #00f;
+    display: inline-block;
+    font-family: dashicons;
+    content: "\f319";
+    font-size: 20px;
+  }
+  .wpglobus_dialog_start_hidden {
+    visibility: hidden;
+    width: 0;
+  }
+  .wpglobus_dialog_error:before {
+    color: #f00;
+  }
+  .wpglobus-dialog-tabs-list {
+    min-height: 3em;
+  }
+
+  .wpglobus-dialog-tabs {
+
+    li a, ul li {
+      float: left;
+      margin: 0;
+    }
+
+    li.ui-state-default {
+      border: 0;
+      background: transparent;
+    }
+
+    ul li a:hover {
+      color: #666;
+    }
+
+    ul li.ui-state-default a {
+      display: block;
+      color: #999;
+
+      background: #f9f9f9;
+      background: -moz-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, #f9f9f9), color-stop(100%, #ececec));
+      background: -webkit-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+      background: -o-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+      background: -ms-linear-gradient(left, #f9f9f9 0%, #ececec 100%);
+      background: linear-gradient(to right, #f9f9f9 0%, #ececec 100%);
+
+      border: 1px solid #ddd;
+      border-bottom: 0;
+      font-weight: normal;
+      height: 2em;
+      line-height: 2em;
+      margin-right: 5px;
+      padding: 0 10px;
+      text-decoration: none;
+      text-shadow: #fff 0 1px 1px;
+      -moz-border-radius-topleft: 3px;
+      -webkit-border-top-left-radius: 3px;
+      border-top-left-radius: 3px;
+      -moz-border-radius-topright: 3px;
+      -webkit-border-top-right-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    ul li.ui-state-active a {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-bottom-color: #fff;
+      color: #464646;
+      margin-bottom: -1px;
+      font-weight: normal;
+    }
+
+  }
+
+  .wpglobus-dialog {
+
+    z-index: 1000000;
+
+    .ui-dialog-title:before {
+      color: #00f;
+      display: inline-block;
+      font-family: dashicons;
+      content: "\f319";
+      font-size: 20px;
+      margin-right: 0.5em;
+      vertical-align: bottom;
+    }
+    .ui-dialog-title {
+      font-size: 20px;
+    }
+    .ui-dialog-buttonpane .ui-dialog-buttonset {
+      float: right;
+      margin-bottom: 10px;
+    }
+
+    .ui-dialog-buttonpane button {
+      cursor: pointer;
+    }
+
+    .ui-dialog-titlebar {
+      cursor: move;
+    }
+
+    .wpglobus-dialog-wrapper.ui-dialog-content.ui-widget-content {
+      position: relative;
+      border: 0;
+      padding: .5em 1em;
+      background: none;
+      overflow: auto;
+    }
+
+    .ui-tabs .ui-tabs-panel {
+      border-width: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    .ui-tabs .ui-tabs-nav {
+      margin: 0;
+      padding: 0;
+    }
+
+    .ui-corner-all {
+      border-radius: 0;
+    }
+
+    .ui-widget-header {
+      border: none;
+      background: transparent;
+      color: inherit;
+      font-weight: normal;
+    }
+
+    .ui-widget-content {
+      border: none;
+      background: transparent;
+      color: inherit;
+    }
+
+    .ui-widget {
+      font-family: inherit;
+      font-size: inherit;
+      textarea {
+        font-family: inherit;
+        font-size: inherit;
+      }
+    }
+
+    .ui-tabs {
+      padding: 0;
+    }
+
+    //
+    // Button styles
+    //
+    .wpglobus-button-cancel,
+    .wpglobus-button-save {
+      border-radius: 3px;
+      padding: .5em 1em;
+      border: none;
+      margin-right: 1em;
+    }
+
+    .wpglobus-button-save {
+      color: #ffffff;
+      background: #2ea2cc;
+    }
+
+    .wpglobus-button-cancel {
+      color: #000;
+      background: #eee;
+    }
+
+    .ui-button-text-only .ui-button-text {
+      padding: 0;
+    }
+
+  }
+
+  // Overlays
+  .ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .ui-widget-overlay {
+    background: #aaaaaa url("images/ui-bg_flat40x100.png") 50% 50% repeat-x;
+    opacity: .3;
+  }
+  .ui-widget-shadow {
+    margin: -8px 0 0 -8px;
+    padding: 8px;
+    opacity: .3;
+    border-radius: 8px;
+  }
+
+  .ui-dialog.wpglobus-dialog {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2em;
+    outline: 0;
+    background-color: #fff;
+
+    .ui-dialog-titlebar {
+      padding: .4em 1em;
+      position: relative;
+      height: 25px !important;
+      margin-bottom: 0 !important;
+      background-color: #e1e1e1 !important;
+    }
+
+    .ui-dialog-titlebar-close {
+      position: absolute;
+      right: .3em;
+      top: 50%;
+      width: 20px;
+      margin: -10px 0 0 0;
+      padding: 1px;
+      height: 20px;
+      display: none;
+    }
+    .ui-dialog-content textarea {
+      width: 100%;
+      min-height: 8em !important;
+      margin-bottom: 1em;
+    }
+    .ui-resizable-se {
+      width: 12px;
+      height: 12px;
+      right: -5px;
+      bottom: -5px;
+      background-position: 16px 16px;
+    }
+
+  }
+
+}
+
+// --- EOF

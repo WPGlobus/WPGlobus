@@ -203,7 +203,7 @@ class WPGlobus_Options {
 
 		wp_register_style(
 			'wpglobus-options',
-			WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-options' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+			WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-options.css',
 			array( 'wpglobus-admin' ),
 			WPGLOBUS_VERSION,
 			'all'

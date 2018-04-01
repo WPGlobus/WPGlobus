@@ -74,7 +74,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 
 			wp_register_style(
 				'wpglobus-admin-debug',
-				WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-admin-debug' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+				WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-admin-debug.css',
 				array(),
 				WPGLOBUS_VERSION
 			);

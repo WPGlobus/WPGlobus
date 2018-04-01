@@ -1,0 +1,62 @@
+#wpglobus-admin-debug-box {
+  clear: both;
+  background-color: #f1f1f1;
+  margin: 25px 0 0;
+  border-top: 1px solid #ccc;
+  min-width: 1000px;
+  padding: 0 0 35px 190px;
+  position: absolute;
+  bottom: -100px;
+
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  table {
+    position: absolute;
+    color: #333 !important;
+    border-collapse: collapse !important;
+    box-shadow: none !important;
+    width: 90% !important;
+    table-layout: auto !important;
+    margin: 0 0 30px;
+  }
+
+  td, th, caption {
+    background: #fff !important;
+    color: #333 !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 11px !important;
+    line-height: 16px !important;
+    font-family: Menlo, Monaco, Consolas, monospace !important;
+    border: 1px solid #e8e8e8 !important;
+    padding: 4px 6px 3px !important;
+    vertical-align: top !important;
+    text-shadow: none !important;
+    text-transform: none !important;
+    -webkit-font-smoothing: initial !important;
+    letter-spacing: normal !important;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  caption {
+    caption-side: top !important;
+    border-bottom-width: 0 !important;
+  }
+
+  tbody tr:hover td {
+    background: #f1f1f1 !important;
+  }
+
+  th[scope=col] {
+    border-bottom-width: 0 !important;
+  }
+
+}

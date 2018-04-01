@@ -1820,7 +1820,7 @@ class WPGlobus {
 
 		wp_register_style(
 			'wpglobus-admin',
-			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
+			self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin.css',
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
@@ -1857,7 +1857,7 @@ class WPGlobus {
 
 				wp_register_style(
 					'wpglobus-admin-tabs',
-					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-tabs' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
+					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-admin-tabs.css',
 					array(),
 					WPGLOBUS_VERSION,
 					'all'
@@ -1866,7 +1866,7 @@ class WPGlobus {
 
 				wp_enqueue_style(
 					'dialog-ui',
-					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-dialog-ui' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
+					self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-dialog-ui.css',
 					array(),
 					WPGLOBUS_VERSION,
 					'all'
@@ -1879,7 +1879,7 @@ class WPGlobus {
 		if ( self::PAGE_WPGLOBUS_ABOUT === $page ) {
 			wp_register_style(
 				'wpglobus-special-pages',
-				self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-special-pages' . WPGlobus::$_SCRIPT_SUFFIX . '.css',
+				self::$PLUGIN_DIR_URL . 'includes/css/wpglobus-special-pages.css',
 				array(),
 				WPGLOBUS_VERSION,
 				'all'

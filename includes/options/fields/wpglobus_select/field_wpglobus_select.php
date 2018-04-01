@@ -250,7 +250,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 			if ( $parent_args['dev_mode'] ) {
 				wp_enqueue_style(
 					'redux-field-select-css',
-					plugins_url( '/field_wpglobus_select' . WPGlobus::SCRIPT_SUFFIX() . '.css', __FILE__ ),
+					plugins_url( '/field_wpglobus_select.css', __FILE__ ),
 					array(),
 					WPGlobus::SCRIPT_VER()
 				);
