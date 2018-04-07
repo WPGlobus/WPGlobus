@@ -1,21 +1,20 @@
-/*
- * Copyright (c) 2018. TIV.NET INC. / WPGlobus. All Rights Reserved.
+/**
+ * gulp-tivwp-po.js
+ * Run msgmerge and msgfmt on all .po files in a folder.
+ * @link https://github.com/tivnet/gulp-tivwp-po
+ * @author Gregory Karpinsky
+ * @copyright (c) 2018 TIV.NET INC. - All Rights Reserved.
  */
 
 "use strict";
 
-const execSync = require("child_process").execSync;
-// through2 is a thin wrapper around node transform streams
-const through = require("through2");
-const PluginError = require('plugin-error');
+module.exports = function (opt) {
+    var PLUGIN_NAME = "gulp-tivwp-po";
+    var execSync = require("child_process").execSync;
+    var through = require("through2");
+    var PluginError = require('plugin-error');
+    var log = require('fancy-log');
 
-const log = require('fancy-log');
-
-// Consts
-const PLUGIN_NAME = "gulp-tivwp-po";
-
-// Plugin level function(dealing with files)
-function tivwpPOMO(opt) {
     opt = opt || {};
     if (!opt.potFile) {
         throw new PluginError(PLUGIN_NAME, "Missing potFile option.");
@@ -48,6 +47,4 @@ function tivwpPOMO(opt) {
         this.push(file);
         cb();
     });
-}
-
-module.exports = tivwpPOMO;
+};

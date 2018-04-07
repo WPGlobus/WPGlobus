@@ -1,18 +1,13 @@
-/*
- * Copyright (c) 2018. TIV.NET INC. / WPGlobus. All Rights Reserved.
- */
-
 "use strict";
 
-const gulp = require("gulp");
-const cfg = require("./cfg.json");
-const pkg = require('../package.json');
-const uglify = require("gulp-uglify");
-const rename = require("gulp-rename");
-const print = require('gulp-print').default;
-
-
 module.exports = function () {
+    var gulp = require("gulp");
+    var cfg = require("./cfg.json");
+    var pkg = require('../package.json');
+    var uglify = require("gulp-uglify");
+    var rename = require("gulp-rename");
+    var print = require('gulp-print').default;
+
     return gulp
         .src([cfg.path.js + "/**/*.js", "!" + cfg.path.js + "/**/*.min.js"])
         .pipe(uglify())

@@ -1,12 +1,12 @@
 "use strict";
 
-const gulp = require("gulp");
-const cfg = require("./cfg.json");
-const pkg = require('../package.json');
-const replace = require('gulp-replace');
-const log = require('fancy-log');
+module.exports = function () {
+    var gulp = require("gulp");
+    var cfg = require("./cfg.json");
+    var pkg = require('../package.json');
+    var replace = require('gulp-replace');
+    var log = require('fancy-log');
 
-function taskReplaceVersion() {
     log.info(pkg.version);
     return gulp
         .src([pkg.name + ".php"])
@@ -19,6 +19,4 @@ function taskReplaceVersion() {
             "define( '$1', '" + pkg.version + "' );"
         ))
         .pipe(gulp.dest("."));
-}
-
-module.exports = taskReplaceVersion;
+};

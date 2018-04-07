@@ -1,27 +1,23 @@
-/*
- * Copyright (c) 2018. TIV.NET INC. / WPGlobus. All Rights Reserved.
- */
-
 "use strict";
 
-const gulp = require("gulp");
-const cfg = require("./cfg.json");
-const sass = require("gulp-sass");
-const sourcemaps = require("gulp-sourcemaps");
-const autoprefixer = require("gulp-autoprefixer");
-const print = require('gulp-print').default;
+module.exports = function () {
+    var gulp = require("gulp");
+    var cfg = require("./cfg.json");
+    var sass = require("gulp-sass");
+    var sourcemaps = require("gulp-sourcemaps");
+    var autoprefixer = require("gulp-autoprefixer");
+    var print = require('gulp-print').default;
 
-const sassOptions = {
-    errLogToConsole: true,
-    outputStyle: "compressed"
-    // outputStyle: "expanded"
-};
+    var sassOptions = {
+        errLogToConsole: true,
+        outputStyle: "compressed"
+        // outputStyle: "expanded"
+    };
 
-const autoprefixerOptions = {
-    browsers: ["last 2 versions", "Firefox ESR", "ie 11"]
-};
+    var autoprefixerOptions = {
+        browsers: ["last 2 versions", "Firefox ESR", "ie 11"]
+    };
 
-function taskSass() {
     return gulp
         .src(cfg.path.css + "/**/*.scss")
         .pipe(print())
@@ -32,6 +28,4 @@ function taskSass() {
         .pipe(gulp.dest(cfg.path.css))
         .pipe(print())
         ;
-}
-
-module.exports = taskSass;
+};

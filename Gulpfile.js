@@ -1,4 +1,4 @@
-const gulp = require("gulp");
+var gulp = require("gulp");
 
 gulp.task("readme", require("./gulp_modules/task-readme"));
 

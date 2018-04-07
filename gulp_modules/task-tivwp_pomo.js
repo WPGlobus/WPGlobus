@@ -1,13 +1,13 @@
 "use strict";
 
-const gulp = require("gulp");
-const cfg = require("./cfg.json");
-const pkg = require('../package.json');
-const pomo = require("./gulp-tivwp-po");
-
 module.exports = function () {
+    var gulp = require("gulp");
+    var cfg = require("./cfg.json");
+    var pkg = require('../package.json');
+    var tivwpPO = require("./gulp-tivwp-po");
+
     return gulp.src(cfg.path.languages + "/*.po")
-        .pipe(pomo({
+        .pipe(tivwpPO({
             potFile: cfg.path.languages + "/" + pkg.name + ".pot"
         }));
 };

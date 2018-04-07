@@ -1,17 +1,13 @@
-/*
- * Copyright (c) 2018. TIV.NET INC. / WPGlobus. All Rights Reserved.
- */
-
 "use strict";
 
-const gulp = require("gulp");
-const wpPot = require("gulp-wp-pot");
-const cfg = require("./cfg.json");
-const pkg = require('../package.json');
-const log = require('fancy-log');
-const potFile = cfg.path.languages + "/" + pkg.name + ".pot";
-
 module.exports = function () {
+    var gulp = require("gulp");
+    var wpPot = require("gulp-wp-pot");
+    var cfg = require("./cfg.json");
+    var pkg = require('../package.json');
+    var log = require('fancy-log');
+    var potFile = cfg.path.languages + "/" + pkg.name + ".pot";
+
     log.info(potFile);
     return gulp.src(["**/*.php", "!**/*Test.php", "!vendor/**/"])
         .pipe(wpPot({
