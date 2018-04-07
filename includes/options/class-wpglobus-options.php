@@ -1076,8 +1076,12 @@ class WPGlobus_Options {
 		}
 
 		$nav_menus = WPGlobus::_get_nav_menus();
-
-		$menus['all'] = __( 'All menus', 'wpglobus' );
+		
+		/**
+		 * Make 'Language Selector Menu' option.
+		 */
+		$menus['--none--'] 	= __( '-- none --', 'wpglobus' );
+		$menus['all'] 		= __( 'All menus', 'wpglobus' );
 		foreach ( $nav_menus as $menu ) {
 			$menus[ $menu->slug ] = $menu->name;
 		}
@@ -1140,7 +1144,7 @@ class WPGlobus_Options {
 					'desc'    => __( 'Choose the navigation menu where the language selector will be shown', 'wpglobus' ),
 					'options' => $menus,
 					'default' => ( empty( $wpglobus_option['use_nav_menu'] )
-						? 'all'
+						? '--none--'
 						: $wpglobus_option['use_nav_menu'] ),
 					'name'    => 'wpglobus_option[use_nav_menu]',
 				),

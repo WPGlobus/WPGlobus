@@ -603,13 +603,17 @@ class WPGlobus_Config {
 		}
 
 		/**
-		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'
+		 * Get navigation menu slug for add flag in front-end 'use_nav_menu'.
 		 */
 		$this->nav_menu = '';
+
 		if ( isset( $wpglobus_option['use_nav_menu'] ) ) {
-			$this->nav_menu = $wpglobus_option['use_nav_menu'];
+			if ( '--none--' != $wpglobus_option['use_nav_menu'] ) {
+				$this->nav_menu = $wpglobus_option['use_nav_menu'];
+			}
 			unset( $wpglobus_option['use_nav_menu'] );
 		}
+		
 		// This can be used in `wp-config` to override the options settings.
 		if ( defined( 'WPGLOBUS_USE_NAV_MENU' ) ) {
 			$this->nav_menu = WPGLOBUS_USE_NAV_MENU;
