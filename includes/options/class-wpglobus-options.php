@@ -1080,6 +1080,7 @@ class WPGlobus_Options {
 		/**
 		 * Make 'Language Selector Menu' option.
 		 */
+		// translators: dropdown option meaning that none of the navigation menus should show the language selector
 		$menus['--none--'] 	= __( '-- none --', 'wpglobus' );
 		$menus['all'] 		= __( 'All menus', 'wpglobus' );
 		foreach ( $nav_menus as $menu ) {
