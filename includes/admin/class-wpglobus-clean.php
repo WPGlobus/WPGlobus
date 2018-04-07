@@ -508,7 +508,11 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			error_log( 'TABLE: ' . $table . "\n", 3, self::$log_file );
 			error_log( 'ID: ' . $id . "\n", 3, self::$log_file );
 			error_log( "BEFORE: \n" . print_r( $initial, true ) . "\n", 3, self::$log_file );
-			error_log( "AFTER: \n" . print_r( $converted, true ) . "\n", 3, self::$log_file );
+			if ( empty($converted) ) {
+				error_log( "AFTER: \n(empty)\n", 3, self::$log_file );
+			} else {
+				error_log( "AFTER: \n" . print_r( $converted, true ) . "\n", 3, self::$log_file );
+			}
 			error_log( '=================' . "\n\n", 3, self::$log_file );
 		}
 
