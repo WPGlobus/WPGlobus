@@ -133,7 +133,7 @@ class WPGlobus {
 	protected static $_SCRIPT_DEBUG = false;
 
 	/**
-	 * @var string $_SCRIPT_SUFFIX Whether to use minimized or full versions of JS and CSS.
+	 * @var string $_SCRIPT_SUFFIX Whether to use minimized or full versions of JS.
 	 */
 	protected static $_SCRIPT_SUFFIX = '.min';
 
@@ -2030,7 +2030,7 @@ class WPGlobus {
 	public function on_wp_styles() {
 		wp_register_style(
 			'wpglobus',
-			self::$PLUGIN_DIR_URL . "includes/css/wpglobus" . self::$_SCRIPT_SUFFIX . ".css",
+			self::$PLUGIN_DIR_URL . "includes/css/wpglobus.css",
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
