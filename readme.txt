@@ -13,30 +13,30 @@ Multilingual/Globalization: URL-based multilanguage; easy translation interface,
 
 == Description ==
 
-**WPGlobus** is a family of WordPress plugins assisting you in making bilingual/multilingual WordPress blogs and sites.
+**WPGlobus** is a family of WordPress plugins assisting you in translating and maintaining bilingual/multilingual WordPress blogs and sites.
 
 = Quick Start Video =
 
 https://www.youtube.com/watch?v=zoTWY9JrXLs
 
+Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
+
 = Important Notes: please read before using WPGlobus! =
 
 * NO AUTOMATIC TRANSLATION:
-	* WPGlobus does NOT translate texts! You will **translate texts manually**.
+	* WPGlobus does NOT translate texts automatically! You will **translate texts manually**.
 * PAGE BUILDERS / COMPOSERS:
 	* The free version of WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - **require a premium add-on**, which is currently at the Beta-testing stage. [Please read the details here](https://wpglobus.com/wpglobus-page-builders-support/).
-* IF YOU WANT TO UNINSTALL:
-	* WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
+* IF YOU UNINSTALL, YOU LOSE TRANSLATIONS:
+	* WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate and uninstall WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
 * NO MULTISITE:
 	* The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
-* FREE / PAID:
+* FREE PLUGIN with PAID EXTENSIONS:
 	* Some functionality is available only with our **premium add-ons**. Details below.
 * OLD PHP / OLD WORDPRESS:
 	* We develop and test our software using the **latest versions of PHP and WordPress only**. If you have an older version and something is not working properly - please contact us and we'll help.
 * MBSTRING:
 	* For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
-
-Please read the [Quick Start Guide](https://wpglobus.com/quick-start/) to see how WPGlobus works.
 
 = What is in the FREE version of WPGlobus? =
 
@@ -154,7 +154,10 @@ You can install this plugin directly from your WordPress dashboard:
 
 Alternatively, see the guide to [Manually Installing Plugins](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
-Then please read the [Quick Start Guide](https://wpglobus.com/quick-start/).
+To install with Composer:
+
+* https://wpackagist.org/search?q=wpglobus
+* https://packagist.org/packages/wpglobus/wpglobus
 
 == Frequently Asked Questions ==
 
@@ -173,19 +176,10 @@ WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such a
 
 = After deactivating WPGlobus, all my pages look like garbage! =
 
-What you see is a mix of the languages, which WPGlobus normally knows how to handle.
+What you see is a mix of the languages, which WPGlobus knows how to handle when it's active.
 When you deactivate WPGlobus, your site is not multilingual anymore, and you have to remove all translations.
 
-WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
-
-= Unable to access WPGlobus settings =
-
-Q: After changing from the default theme to another one, I am not allowed to access the WPGlobus plugin settings.
- Getting the "Sorry, you are not allowed to access this page." error message.
- When reverting back to the default theme, everything is OK.
-
-A: Please install and activate the [Redux Framework plugin](https://wordpress.org/plugins/redux-framework/).
- It should solve the compatibility problem between your theme and WPGlobus.
+WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Uninstall" tab in the WPGlobus Settings.
 
 = When I switch language, I am getting 404 on all pages =
 
@@ -226,6 +220,17 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 
 == Changelog ==
 
+= 1.9.13 =
+
+* FIXED:
+    * Correct language detection when doing WooCommerce AJAX calls.
+	* Options: correctly initialize Language Selector Menu dropdown ("None" option was missing).
+* TWEAK:
+    * Added a clarifying message to the clean-up procedure.
+* INTERNAL:
+    * Transition to Gulp and SCSS
+    * CSS are always minimized (no `.min.css`) and mapped to the `.scss` sources.
+
 = 1.9.12 =
 
 * ADDED:
@@ -249,14 +254,6 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
     * ACF: the ability to use `WPGlobusAcf.getFields()` to define which fields can be disabled (see `WPGlobusAcf.getDisabledFields()` ). ACF and ACF Pro field translation.
     * Flags: new `us-uk.png` flag.
     * POMO: Estonian translation of admin panels. Props: `Rivo Zängov`
-
-= 1.9.9 =
-
-* FIXED
-	* Core: Removed `devmode` switcher from the `post-new.php` page.
-	* Core: Fix broken `Add Language` link. Code cleanup and cosmetics.
-* ADDED:
-    * Core: styling and translations for the `ON/OFF` WPGlobus switcher on the edit pages.
 
 = Earlier versions and Add-ons =
 

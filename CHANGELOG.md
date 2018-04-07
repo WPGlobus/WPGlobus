@@ -6,7 +6,7 @@
 
 * FIXED:
     * Correct language detection when doing WooCommerce AJAX calls. 
-	* Options: correctly initialize Language Selector Menu option.
+	* Options: correctly initialize Language Selector Menu dropdown ("None" option was missing).
 * TWEAK:
     * Added a clarifying message to the clean-up procedure.
 * INTERNAL:
