@@ -4,9 +4,13 @@
 
 ### 1.9.13 ###
 
-* Internal: Transition to Gulp and SCSS
-* Core: CSS are always minimized (no `.min.css`) and mapped to the `.scss` sources.
-* Uninstall clean-up procedure: added a clarifying message.
+* FIXED:
+    * Correct language detection when doing WooCommerce AJAX calls. 
+* TWEAK:
+    * Added a clarifying message to the clean-up procedure.
+* INTERNAL:
+    * Transition to Gulp and SCSS
+    * CSS are always minimized (no `.min.css`) and mapped to the `.scss` sources.
 
 ### 1.9.12 ###
 
