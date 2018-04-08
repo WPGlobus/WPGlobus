@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.9.14 ###
+
+* ADDED:
+    * New action `wpglobus_after_load_textdomain`. Can use this action to load additional translations.
+* INTERNAL:
+    * Call `unload_textdomain` function instead of accessing the `$l10n` global directly.
+
 ### 1.9.13 ###
 
 * FIXED:

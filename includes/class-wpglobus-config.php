@@ -368,6 +368,13 @@ class WPGlobus_Config {
 	 */
 	public function on_load_textdomain() {
 		self::load_mofile();
+
+		/**
+		 * Can use this action to load additional translations.
+		 *
+		 * @since 1.9.14
+		 */
+		do_action( 'wpglobus_after_load_textdomain' );
 	}
 
 	/**
@@ -383,13 +390,9 @@ class WPGlobus_Config {
 		/**
 		 * Delete translations that could be loaded already from the main /languages/ folder.
 		 *
-		 * @global array $l10n
 		 * @since 1.9.10
 		 */
-		global $l10n;
-		if ( isset( $l10n[ $domain ] ) ) {
-			unset( $l10n[ $domain ] );
-		}
+		unload_textdomain( $domain );
 
 		/**
 		 * Load our translations.
