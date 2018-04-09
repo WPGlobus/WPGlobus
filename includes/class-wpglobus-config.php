@@ -238,10 +238,40 @@ class WPGlobus_Config {
 			'on_load_textdomain'
 		), 1 );
 
+		/**
+		 * Sets the current language and switches the translations according to the given locale.
+		 *
+		 * @param string $locale The locale to switch to.
+		 *
+		 * @since 1.9.14
+		 */
+		add_action( 'switch_locale', array( $this, 'on_switch_locale' ), - PHP_INT_MAX );
+
+		/**
+		 * Sets the current language and switches the translations according to the given locale.
+		 *
+		 * @param string $locale The locale to switch to.
+		 *
+		 * @since 1.9.14
+		 */
+		add_action( 'restore_previous_locale', array( $this, 'on_switch_locale' ), - PHP_INT_MAX );
+
 		add_action( 'upgrader_process_complete', array( $this, 'on_activate' ), 10, 2 );
 
 
 		$this->_get_options();
+	}
+
+	/**
+	 * Sets the current language and switches the translations according to the given locale.
+	 *
+	 * @param string $locale The locale to switch to.
+	 *
+	 * @since 1.9.14
+	 */
+	public function on_switch_locale( $locale ) {
+		$this->set_language( $locale );
+		$this->on_load_textdomain();
 	}
 
 	/**
@@ -333,20 +363,19 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * Set current language
+	 * Set the current language to match the given locale.
 	 *
-	 * @param string $locale
+	 * @since 1.9.14 : If we do not know such locale, set to default.
+	 *
+	 * @param string $locale The locale ('en_US', 'fr_FR', etc.).
 	 */
 	public function set_language( $locale ) {
-		/**
-		 * @todo Maybe use option for disable/enable setting current language corresponding with $locale ?
-		 */
-		foreach ( $this->locale as $language => $value ) {
-			if ( $locale === $value ) {
-				$this->language = $language;
-				break;
-			}
-		}
+
+		$locale_to_language = array_flip( $this->locale );
+
+		$this->language = empty( $locale_to_language[ $locale ] )
+			? $this->default_language
+			: $locale_to_language[ $locale ];
 	}
 
 	/**

@@ -6,6 +6,7 @@
 
 * ADDED:
     * New action `wpglobus_after_load_textdomain`. Can use this action to load additional translations.
+    * Change the current language and reload translations when `switch_locale()` or `restore_previous_locale()` functions are called. 
 * INTERNAL:
     * Call `unload_textdomain` function instead of accessing the `$l10n` global directly.
 
