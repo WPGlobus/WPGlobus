@@ -543,6 +543,8 @@ class WPGlobus_Options {
 		}
 
 		$this->sections['custom-code'] = $this->section_custom_code();
+		
+		$this->sections['debug-info']  = $this->section_debug_info();
 
 		$this->sections['uninstall'] = $this->section_uninstall();
 
@@ -1374,6 +1376,33 @@ class WPGlobus_Options {
 
 	}
 
+	/**
+	 * Section "Info".
+	 *
+	 * @since 1.9.14
+	 * @return array
+	 */
+	protected function section_debug_info() {
+
+		$fields = array();
+
+		$fields[] =
+			array(
+				'id'    => 'debug_info_theme',
+				'type'  => 'wpglobus_info',
+				'html'  => include dirname(__FILE__). '/templates/debug-info-theme.php',
+				'class' => 'normal',
+			);
+
+		return array(
+			'wpglobus_id' => 'wpglobus_debug_info',
+			'title'       => __( 'Info' ),
+			'icon'        => 'dashicons dashicons-info',
+			'fields'      => $fields,
+		);
+
+	}
+	
 	/**
 	 * Sanitize $_POST before saving it to the options table.
 	 *

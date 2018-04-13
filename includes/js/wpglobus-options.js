@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
 			api.initTab();
 			api.checkHandlers();
 			api.addListeners();
+			api.initSpecs();
 		},
 		setFirstLanguageCb: function() {
 			if ( null !== api.firstLanguageCb ) {
@@ -99,6 +100,11 @@ jQuery(document).ready(function ($) {
 				$('#wpglobus-tab-link-'+tab).addClass('wpglobus-tab-link-active');
 				$('#wpglobus_options_current_tab').val(tab);
 			});			
+		},
+		initSpecs: function() {
+			$(document).on('dblclick', '#section-tab-debug-info h2', function(ev){
+				$('.wpglobus-debug-info-spec').removeClass('hidden');
+			});
 		}
 	};
 	
