@@ -1404,6 +1404,67 @@ class WPGlobus_Options {
 	}
 	
 	/**
+	 * Read file.
+	 * @since 1.9.14
+	 */
+	protected function read_config_file($file = '') {
+		
+		if ( empty($file) ) {
+			return false;
+		}
+		
+		static $buffers;
+		if ( isset( $buffers[ $file ] ) ) {
+			return $buffers[ $file ];
+		}
+
+		$buffer = array();
+
+		$handle = @fopen($file, "r");
+		if ($handle) {
+			while (($_buffer = fgets($handle)) !== false) {
+				$buffer[] = $_buffer;
+			}
+			if (!feof($handle)) {
+				/**
+				 * @todo add error handling.
+				 */
+			}
+			fclose($handle);
+		}
+		
+		$buffers[ $file ] = $buffer;
+		
+		return $buffers[ $file ];
+	}	
+
+	/**
+	 * Filter options in file.
+	 * @since 1.9.14
+	 */
+	protected function config_file_filter($file = '', $filter = '') {
+		
+		if ( empty($file) ) {
+			return false;
+		}
+		
+		$_buffer = $this->read_config_file($file);
+
+		$buffer = array();
+		if ( empty($filter) ) {
+			return $_buffer;
+		} else {
+			foreach($_buffer as $_id=>$_value) {
+				if ( false !== strpos($_value, $filter) ) {
+					$buffer[] = $_value;
+				}				
+			}
+		}
+		
+		return $buffer;	
+	}
+	
+	/**
 	 * Sanitize $_POST before saving it to the options table.
 	 *
 	 * @param array $posted_data The submitted data.

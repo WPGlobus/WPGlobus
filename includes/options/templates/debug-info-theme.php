@@ -37,7 +37,8 @@ if ( ! empty( $parent_template ) ) {
 }	
 
 /**
- * Check compatibility with.
+ * Check compatibility.
+ * @since 1.9.14 with WPML.
  */
 $compatibility = array(
 	'wpml' => array(
@@ -113,6 +114,7 @@ ob_start();
 			</tr>	<?php
 		endforeach;
 		if ( ! empty($theme_compats) ) :
+
 			foreach( $theme_compats as $_id=>$_compat ) :	?>
 				<tr class="wpglobus-debug-info-spec hidden">
 					<td><b><?php echo $_compat['caption']; ?></b></td>
@@ -126,6 +128,18 @@ ob_start();
 					?></td>
 				</tr>	<?php
 			endforeach;
+			
+			if ( $_compat['compat'] ) {
+				$_filter = 'action="translate"';
+				if ( $buffer = $this->config_file_filter($_compat['file'], $_filter) ) {
+					foreach( $buffer as $_id=>$_value ) :	?>
+						<tr class="wpglobus-debug-info-spec hidden">
+							<td><b><?php echo $_filter; ?></b></td>
+							<td><?php echo $_value; ?></td>				
+						</tr><?php
+					endforeach;	
+				}
+			}
 		endif;	?>			
 	</tbody>
 </table>
@@ -155,6 +169,7 @@ if ( ! empty( $parent_theme ) ) {
 				</tr>	<?php
 			endforeach;
 			if ( ! empty($parent_compats) ) :
+			
 				foreach( $parent_compats as $_id=>$_compat ) :	?>
 					<tr class="wpglobus-debug-info-spec hidden">
 						<td><b><?php echo $_compat['caption']; ?></b></td>
@@ -168,6 +183,19 @@ if ( ! empty( $parent_theme ) ) {
 						?></td>
 					</tr>	<?php
 				endforeach;
+				
+				if ( $_compat['compat'] ) {
+					$_filter = 'action="translate"';
+					if ( $buffer = $this->config_file_filter($_compat['file'], $_filter) ) {
+						foreach( $buffer as $_id=>$_value ) :	?>
+							<tr class="wpglobus-debug-info-spec hidden">
+								<td><b><?php echo $_filter; ?></b></td>
+								<td><?php echo $_value; ?></td>				
+							</tr><?php
+						endforeach;	
+					}
+				}				
+				
 			endif;	?>		
 		</tbody>
 	</table>
