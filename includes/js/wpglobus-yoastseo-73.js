@@ -1431,7 +1431,10 @@ S				 */
 
 		}
 
-		WPGlobusYoastSeoPlugin.prototype.setScoreIcon = function(time = 1500) {
+		WPGlobusYoastSeoPlugin.prototype.setScoreIcon = function(time) {
+			if ( 'undefined' === typeof(time) ) {
+				time = 1500;
+			}
 			var iID;
 			var timer = function() {
 				var l = $('.wpglobus-wpseo-tabs-list .ui-tabs-active').data('language');
