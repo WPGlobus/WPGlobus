@@ -29,6 +29,8 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 	* The free version of WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - **require a premium add-on**, which is currently at the Beta-testing stage. [Please read the details here](https://wpglobus.com/wpglobus-page-builders-support/).
 * IF YOU UNINSTALL, YOU LOSE TRANSLATIONS:
 	* WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate and uninstall WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
+* COOKIES:
+    * WPGlobus use browser cookies to store the selected language in the form `wpglobus-language=xx` where `xx` is a two-letter language code: `en`, `de`, `fr`, etc.
 * NO MULTISITE:
 	* The **multisite** mode (multiple virtual sites sharing a single WordPress installation) is **not tested and not supported**.
 * FREE PLUGIN with PAID EXTENSIONS:
