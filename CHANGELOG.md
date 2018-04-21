@@ -10,7 +10,9 @@
 	* Options: Info section.
 * INTERNAL:
     * Call `unload_textdomain` function instead of accessing the `$l10n` global directly.
-
+COMPATIBILITY:
+	* Yoast SEO 7.3
+	
 ### 1.9.13 ###
 
 * FIXED:
