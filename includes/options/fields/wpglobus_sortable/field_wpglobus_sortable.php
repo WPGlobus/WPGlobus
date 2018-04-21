@@ -22,7 +22,6 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 		 * Field Constructor.
 		 * @param array  $field
 		 * @param string|array $value
-		 * @param ReduxFramework $parent
 		 */
 		public function __construct( $field = array(), $value = '' ) {
 

@@ -536,25 +536,6 @@ class WPGlobus_Config {
 		$wpglobus_option = get_option( $this->option );
 
 		/**
-		 * FIX: after "Reset All" Redux options we must reset all WPGlobus options
-		 * first of all look at $wpglobus_option['more_languages']
-		 */
-		if ( isset( $wpglobus_option['more_languages'] ) && is_array( $wpglobus_option['more_languages'] ) ) {
-
-			$wpglobus_option = array();
-			delete_option( $this->option );
-			delete_option( $this->option_language_names );
-			delete_option( $this->option_en_language_names );
-			delete_option( $this->option_locale );
-			delete_option( $this->option_flags );
-
-		}
-
-		if ( isset( $wpglobus_option['more_languages'] ) ) {
-			unset( $wpglobus_option['more_languages'] );
-		}
-
-		/**
 		 * Get enabled languages and default language ( just one main language )
 		 */
 		if ( isset( $wpglobus_option['enabled_languages'] ) && ! empty( $wpglobus_option['enabled_languages'] ) ) {

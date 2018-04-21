@@ -293,7 +293,7 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	 * @return int
 	 */
 	public function usort_reorder( $a, $b ) {
-		// TODO: This should be enabled when called not from the Redux.
+		// TODO: check if this is needed.
 		if ( 0 ) {
 			check_admin_referer( WPGlobus_Language_Edit_Request::NONCE_ACTION );
 		}

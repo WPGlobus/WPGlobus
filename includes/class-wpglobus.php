@@ -17,11 +17,6 @@ class WPGlobus {
 	const URL_WPGLOBUS_SITE = 'https://wpglobus.com/';
 
 	/**
-	 * @var string
-	 */
-	public static $minimalReduxFramework_version = '3.2.9.4';
-
-	/**
 	 * Cookie name.
 	 * @since 1.8
 	 */
@@ -865,8 +860,7 @@ class WPGlobus {
 	}
 
 	/**
-	 * Start WPGlobus on "init" hook, so if there is another ReduxFramework, it will be loaded first. Hopefully :-)
-	 * Note: "init" hook is not guaranteed to stay in the future versions.
+	 * Start WPGlobus on "init" hook.
 	 */
 	public static function init() {
 		/** @global WPGlobus WPGlobus */
