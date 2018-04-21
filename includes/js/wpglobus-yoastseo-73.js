@@ -911,7 +911,12 @@ S				 */
 						 * Readability tab.
 						 */
 						$('#wpseo-meta-section-content .wpseo_generic_tab').click(); 
-
+						
+						/**
+						 * @see .wpglobus-wp-admin .wpglobus-wpseo-meta-section .wpseotab element.
+						 */
+						$('.wpglobus-wp-admin .wpglobus-wpseo-meta-section .wpseotab').css({'width':'80%'});
+						
 						/** 
 						 * @since 1.9.14
 						 */
@@ -1802,8 +1807,13 @@ S				 */
 		 * Revised @since 1.9.4
 		 */
 		WPGlobusYoastSeoPlugin.prototype.updatePageAnalysis = function() {
-
+			
 			_.delay(function(){
+				/**
+				 * @see .wpglobus-wp-admin .wpglobus-wpseo-meta-section .wpseotab element.
+				 */
+				$('.wpglobus-wp-admin .wpglobus-wpseo-meta-section .wpseotab').css({'width':''});
+				
 				/**
 				 * Expand the lists.
 				 */
