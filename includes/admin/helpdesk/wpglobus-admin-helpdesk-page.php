@@ -55,7 +55,7 @@ WPGlobus_Admin_Page::print_header();
 					<?php esc_html_e( 'Thank you for using WPGlobus!', 'wpglobus' ); ?>
 					<?php esc_html_e( 'Our Support Team is here to answer your questions or concerns.', 'wpglobus' ); ?>
 				</em></p>
-			<p>&bull; <a href="#" class="wpglobus_admin_hs_beacon_toggle"><?php esc_html_e( 'Click the blue round button at the bottom right to open the Contact Form.', 'wpglobus' ); ?></a></p>
+			<p>&bull; <a href="#" class="wpglobus_admin_hs_beacon_toggle"><?php esc_html_e( 'Click here to open the Contact Form.', 'wpglobus' ); ?></a></p>
 			<p>&bull; <?php esc_html_e( 'Type in your name, email, subject and the detailed message.', 'wpglobus' ); ?></p>
 			<p>&bull; <?php esc_html_e( 'If you can make a screenshot demonstrating the problem, please attach it.', 'wpglobus' ); ?></p>
 			<p class="highlight"><?php esc_html_e( 'Please note: we will receive some debug data together with your request. See the "Technical Information" table for the details.', 'wpglobus' ); ?></p>
