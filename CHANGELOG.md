@@ -2,6 +2,17 @@
 
 ## Changelog ##
 
+### 1.9.15 ###
+
+* ADDED:
+    *
+* FIXED:
+    *
+* COMPATIBILITY:
+    *
+* INTERNAL:
+    *
+
 ### 1.9.14 ###
 
 * ADDED:
