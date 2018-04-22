@@ -60,7 +60,7 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 	* Some functionality is available only with our **premium add-ons**. Details below.
 
 * OLD PHP / OLD WORDPRESS:
-	* We develop and test our software using the **latest versions of PHP and WordPress only**. If you have an older version and something is not working properly - please contact us and we'll help.
+	* We develop and test our software using the **latest versions of PHP and WordPress**. If you have an older version and something is not working properly - please contact us and we'll help.
 
 * MBSTRING:
 
@@ -88,7 +88,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 * [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/): enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) allows you to enter some texts (headings, buttons, etc.) and stores them in the `options` table.
 
-* [WPGlobus for WPBakery Visual Composer](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Composer. Please note that Visual Composer is a commercial product, and therefore our support is limited.
+* [WPGlobus for WPBakery Page Builder](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Builder.
 
 * [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/): adds multilingual editing capabilities to the visual editor widget.
 
@@ -137,7 +137,7 @@ For more details, please check out the descriptions of each paid add-on on our w
 ### Compatibility with WordPress Plugins ###
 
 
-WPGlobus is compatible with many plugins, including but not limited to:
+We have checked WPGlobus together with many plugins, including:
 
 
 * ACF - Advanced Custom Fields. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for WYSIWYG fields support,
@@ -308,6 +308,21 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 
 ## Changelog ##
 
+### 1.9.14 ###
+
+
+* ADDED:
+    * New action `wpglobus_after_load_textdomain`. Can use this action to load additional translations.
+    * Change the current language and reload translations when `switch_locale()` or `restore_previous_locale()` functions are called.
+
+	* Options Panel: Info section.
+
+* COMPATIBILITY:
+	* Yoast SEO 7.3
+
+* INTERNAL:
+    * Call `unload_textdomain` function instead of accessing the `$l10n` global directly.
+
 ### 1.9.13 ###
 
 
@@ -333,34 +348,6 @@ Note that the new WPGlobus Options panel will work with the modern browsers only
 * FIXED:
 
     * Custom JS code: restore some special characters after applying filters.
-
-### 1.9.11 ###
-
-
-* FIXED:
-
-    * Updater: invalid requests when `php.ini` or `.htaccess` has the `arg_separator.output=&amp;` setting.
-
-	* Customizer: fixed processing order via AJAX.
-
-* ADDED:
-
-	* Customizer: added the `settingType` attribute to prevent incorrect objects handling.
-
-	* Filters: added the `_wp_attachment_image_alt` meta.
-
-	* Core: initialize `WPGlobusDialogApp` for the `edit.php` page.
-
-### 1.9.10 ###
-
-
-* ADDED:
-
-    * ACF: the ability to use `WPGlobusAcf.getFields()` to define which fields can be disabled (see `WPGlobusAcf.getDisabledFields()` ). ACF and ACF Pro field translation.
-
-    * Flags: new `us-uk.png` flag.
-
-    * POMO: Estonian translation of admin panels. Props: `Rivo Zängov`
 
 ### Earlier versions and Add-ons ###
 
