@@ -509,6 +509,7 @@ class WPGlobus_Filters {
 		if (
 			is_admin() &&
 			( ! WPGlobus_WP::is_doing_ajax() || WPGlobus_WP::is_admin_doing_ajax() )
+			&& apply_filters( 'wpglobus_use_admin_wplang', true )
 		) {
 			/**
 			 * @todo is_multisite
