@@ -5,13 +5,7 @@
 ### 1.9.15 ###
 
 * ADDED:
-    *
-* FIXED:
-    *
-* COMPATIBILITY:
-    *
-* INTERNAL:
-    *
+    * Filter `wpglobus_use_admin_wplang` to support upcoming advanced email localization features. 
 
 ### 1.9.14 ###
 

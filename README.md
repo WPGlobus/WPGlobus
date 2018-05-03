@@ -11,7 +11,7 @@ Requires at least: 4.8
 
 Tested up to: 4.9
 
-Requires PHP: 5.3
+Requires PHP: 5.4
 
 Stable tag: trunk
 
@@ -302,11 +302,17 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 
 ## Upgrade Notice ##
 
-### 1.9.10 ###
+### 1.9.15 ###
 
-Note that the new WPGlobus Options panel will work with the modern browsers only!
+Please make sure your website's PHP version is at least 5.4.
 
 ## Changelog ##
+
+### 1.9.15 ###
+
+
+* ADDED:
+    * Filter `wpglobus_use_admin_wplang` to support upcoming advanced email localization features.
 
 ### 1.9.14 ###
 

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 4.8
 Tested up to: 4.9
-Requires PHP: 5.3
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-3.0-or-later
 License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
@@ -216,11 +216,16 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 == Upgrade Notice ==
 
-= 1.9.10 =
+= 1.9.15 =
 
-Note that the new WPGlobus Options panel will work with the modern browsers only!
+Please make sure your website's PHP version is at least 5.4.
 
 == Changelog ==
+
+= 1.9.15 =
+
+* ADDED:
+    * Filter `wpglobus_use_admin_wplang` to support upcoming advanced email localization features.
 
 = 1.9.14 =
 

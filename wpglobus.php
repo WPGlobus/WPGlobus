@@ -4,7 +4,7 @@
  *
  * @package   WPGlobus
  * @author    TIV.NET INC, Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
- * @copyright 2015-2017 TIV.NET INC. / WPGlobus
+ * @copyright 2015-2018 TIV.NET INC. / WPGlobus
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License, version 3
  */
 
