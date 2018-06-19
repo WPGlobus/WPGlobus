@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.9.16 ###
+
+* ADDED:
+    * initialization WPGlobusDialogApp for nav-menu.php page.
+    * 'easy-to-read' flag.
+
 ### 1.9.15 ###
 
 * ADDED:
