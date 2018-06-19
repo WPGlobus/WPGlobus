@@ -838,6 +838,34 @@ class WPGlobus {
 				$ajax_return['qedit_titles']         = $result;
 				$ajax_return['bulkedit_post_titles'] = $bulkedit_post_titles;
 				break;
+			case 'getNavMenuItemsDescription':
+				/**
+				 * @since 1.9.16
+				 */
+				$ids = array();
+				foreach( $order['menuItems'] as $item_id ) {
+					$_id = str_replace( 'edit-menu-item-description-', '', $item_id );
+					$_id = (int) $_id;
+					if ( $_id > 0 ) {
+						$ids[] = $_id;
+					}
+				}
+				
+				$_results = array();
+				if ( ! empty( $ids ) ) {
+					$query = new WP_Query( array( 'post_type' => 'nav_menu_item', 'post__in' => $ids ) );
+					$_results = $query->posts;
+				}
+				
+				$ajax_return = array();
+				if ( ! empty( $_results ) ) {
+					foreach( $_results as $_post ) {
+						if ( ! empty( $_post->post_content ) ) {
+							$ajax_return['edit-menu-item-description-'.$_post->ID] = $_post->post_content;
+						}
+					}
+				}
+				break;
 		}
 
 		echo wp_json_encode( $ajax_return );
@@ -966,6 +994,7 @@ class WPGlobus {
 
 	/**
 	 * Add switcher to publish metabox.
+	 * @return void
 	 */
 	public function on_add_devmode_switcher() {
 

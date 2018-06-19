@@ -651,6 +651,10 @@ jQuery(document).ready(function () {
 						WPGlobusAioseop.init();
 					}
                 } else if ('menu-edit' === WPGlobusAdmin.page) {
+					/**
+					 * @since 1.9.16
+					 */
+					WPGlobusDialogApp.init({dialogTitle:'Edit description'});
                     this.navMenus();
                 } else if ('taxonomy-edit' === WPGlobusAdmin.page) {
                     if (WPGlobusAdmin.data.tag_id) {
@@ -1170,6 +1174,41 @@ jQuery(document).ready(function () {
                     }
 
                 });
+				
+				/**
+				 * @since 1.9.16
+				 */
+				var menuItems = [];
+				setTimeout(function () {
+					$('.edit-menu-item-description').each(function() {
+						var id = $(this).attr('id');
+						menuItems.push(id);
+						WPGlobusDialogApp.addElement(id);
+					});
+					$('.wpglobus_dialog_start').each(function() {
+						$(this).css({'font-style':'normal'});
+						$(this).after('<br />');
+					});
+					var order = {};
+					order['action'] 	= 'getNavMenuItemsDescription';
+					order['menuItems'] 	= menuItems;
+					$.ajax({type:'POST', url:WPGlobusAdmin.ajaxurl, data:{action:WPGlobusAdmin.process_ajax, order:order}, dataType:'json'})
+					.done(function (results) {
+						if ( 'object' != typeof results ) {
+							return;
+						}
+						$.each(results, function( id, value ) {
+							if ( '' != value ) {
+								$('#'+id).val(value);
+							}
+						});
+					})
+					.fail(function (error) {
+					})
+					.always(function (jqXHR, status) {
+					});
+				}, 1000 );
+	
             },
             postEdit: function () {
 				/**
@@ -1340,7 +1379,7 @@ jQuery(document).ready(function () {
 									} else {
 										text = WPGlobusCoreData.wordCounter[ l ][ 'contentEditor' ].getContent( { format: 'raw' } );
 									}
-
+			
 									count = WPGlobusCoreData.wordCounter[ l ][ 'counter' ].count( text );
 
 									if ( count !== WPGlobusCoreData.wordCounter[ l ][ 'prevCount' ] ) {
