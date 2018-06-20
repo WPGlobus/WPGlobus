@@ -5,8 +5,9 @@
 ### 1.9.16 ###
 
 * ADDED:
-    * initialization WPGlobusDialogApp for nav-menu.php page.
-    * 'easy-to-read' flag.
+    * Special "flag" icon: `"easy-to-read"`.
+* INTERNAL:
+    * Initialization of the `WPGlobusDialogApp` JS object on the `nav-menu.php` page.
 
 ### 1.9.15 ###
 

@@ -308,6 +308,13 @@ Please make sure your website's PHP version is at least 5.4.
 
 ## Changelog ##
 
+### 1.9.16 ###
+
+* ADDED:
+    * Special "flag" icon: `"easy-to-read"`.
+* INTERNAL:
+    * Initialization of the `WPGlobusDialogApp` JS object on the `nav-menu.php` page.
+
 ### 1.9.15 ###
 
 
