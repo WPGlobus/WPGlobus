@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.17 ###
+
+* INTERNAL:
+	* Correct setting description value on the `nav-menu.php` page.
+
 ### 1.9.16 ###
 
 * ADDED:
