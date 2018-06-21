@@ -1200,6 +1200,7 @@ jQuery(document).ready(function () {
 						$.each(results, function( id, value ) {
 							if ( '' != value ) {
 								$('#'+id).val(value);
+								$('#wpglobus-'+id).val( WPGlobusCore.TextFilter(value, WPGlobus.language, 'RETURN_EMPTY') );
 							}
 						});
 					})
