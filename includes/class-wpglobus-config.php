@@ -58,6 +58,20 @@ class WPGlobus_Config {
 	public $flags_url = '';
 
 	/**
+	 * Path to flags.
+	 * @var array
+	 * @since 1.9.17
+	 */
+	public $flag_path = array();
+	
+	/**
+	 * Location of flags.
+	 * @var array
+	 * @since 1.9.17
+	 */	
+	public $flag_urls = array();
+	
+	/**
 	 * Stores languages in pairs code=>name
 	 * @var array
 	 */
@@ -432,15 +446,29 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * Set flags URL
+	 * Set flags URL.
 	 * @return void
 	 */
 	public function _set_flags_url() {
 		$this->flags_url = WPGlobus::$PLUGIN_DIR_URL . 'flags/';
+		/**
+		 * @since 1.9.17
+		 */
+		$this->flag_urls['small'] = WPGlobus::$PLUGIN_DIR_URL . 'flags/';
+		$this->flag_urls['big']   = WPGlobus::$PLUGIN_DIR_URL . 'flags/big/';
 	}
 
 	/**
-	 *    Set languages by default
+	 * Set flag PATH.
+	 * @return void
+	 */
+	public function _set_flag_path() {
+		$this->flag_path['small'] = WPGlobus::$PLUGIN_DIR_PATH . 'flags/';
+		$this->flag_path['big']   = WPGlobus::$PLUGIN_DIR_PATH . 'flags/big/';
+	}	
+	
+	/**
+	 * Set languages by default.
 	 */
 	public function _set_languages() {
 
@@ -563,6 +591,11 @@ class WPGlobus_Config {
 		 * Set flags URL
 		 */
 		$this->_set_flags_url();
+
+		/**
+		 * Set flags PATH.
+		 */		
+		$this->_set_flag_path();
 
 		/**
 		 * Get languages name
