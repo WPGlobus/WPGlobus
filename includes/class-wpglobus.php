@@ -296,8 +296,17 @@ class WPGlobus {
 			$this,
 			'on_wp_redirect'
 		) );
-
-
+		
+		global $pagenow;
+		
+		/**
+		 * @since 1.9.17
+		 */
+		if ( WPGlobus::Config()->builder->maybe_run('gutenberg', false) ) {
+			require_once dirname( __FILE__ ).'/builders/gutenberg/class-wpglobus-gutenberg-update-post.php';
+			new WPGlobus_Gutenberg_Update_Post();
+		}
+		
 		/**
 		 * NOTE: do not check for !DOING_AJAX here.
 		 */
@@ -345,6 +354,65 @@ class WPGlobus {
 			require_once 'options/class-wpglobus-options.php';
 			new WPGlobus_Options();
 
+			/**
+			 * @since 1.9.17
+			 * @see 'post_submitbox_misc_actions'
+			 */	
+			add_action( 'post_submitbox_misc_actions', array(
+				$this,
+				'on_add_devmode_switcher'
+			) );			
+			
+			if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
+				
+				global $pagenow;
+				
+				/**
+				 * @since 1.9.17
+				 */
+				if ( WPGlobus::Config()->builder->maybe_run('gutenberg', true) ) {
+					require_once dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php';
+					require_once('/builders/gutenberg/class-wpglobus-gutenberg.php');
+					$builder = new WPGlobus_Gutenberg();
+				}
+				
+				/**
+				 * @since 1.9.17
+				 */
+				add_action( 'edit_form_after_editor', array(
+					$this,
+					'on_add_language_tabs'
+				) );
+				
+				add_action( 'admin_print_styles', array(
+					$this,
+					'on_admin_styles'
+				) );
+				
+				add_action( 'admin_print_scripts', array(
+					$this,
+					'on_admin_scripts'
+				) );
+				
+				/**
+				 * @since 1.9.17
+				 */
+				if ( WPGlobus::Config()->builder->maybe_run('', true) ) {
+					$_file =  dirname( __FILE__ ).'/builders/'.WPGlobus::Config()->builder->get_id().'/class-wpglobus-'.WPGlobus::Config()->builder->get_id().'.php';
+					if ( file_exists( $_file ) ) {
+					
+						require_once( dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php' );
+						require_once( $_file );
+
+						$builder_class 	= WPGlobus::Config()->builder->get_class();
+						if ( class_exists( $builder_class ) ) {
+							$builder = new $builder_class;
+						}
+						return;
+					}
+				}				
+			}
+			
 			if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
 				/**
 				 * Need to get taxonomy to use the correct filter.
@@ -402,20 +470,34 @@ class WPGlobus {
 					'on_add_wp_editors'
 				), 10 );
 
+				/**
+				 * Moved to another place.
+				 * @since 1.9.17
+				 * @todo remove after test.
+				 */					
+				/*
 				add_action( 'edit_form_after_editor', array(
 					$this,
 					'on_add_language_tabs'
 				) );
-
+				// */
+				
 				add_action( 'edit_form_after_title', array(
 					$this,
 					'on_add_title_fields'
 				) );
 
+				/**
+				 * Moved to another place.
+				 * @since 1.9.17
+				 * @todo remove after test.
+				 */	
+				/*
 				add_action( 'admin_print_scripts', array(
 					$this,
 					'on_admin_scripts'
 				) );
+				// */
 
 				add_action( 'admin_print_scripts', array(
 					$this,
@@ -463,8 +545,14 @@ class WPGlobus {
 						WPGlobus_WP::is_pagenow( 'post.php' ) ||
 						( WPGlobus_WP::is_doing_ajax() && WPGlobus_WP::is_http_post_action('send-attachment-to-editor') )
 					) {
-						require_once 'admin/media/class-wpglobus-media.php';
-						WPGlobus_Media::get_instance();
+						/**
+						 * @since 1.9.17
+						 */
+						if ( ! WPGlobus::Config()->builder->is_running() ) {
+							require_once 'admin/media/class-wpglobus-media.php';
+							WPGlobus_Media::get_instance();
+						}
+
 					}
 				endif;
 
@@ -479,20 +567,34 @@ class WPGlobus {
 				$WPGlobus_acf = new WPGlobus_Acf();
 			}
 
+			/**
+			 * Moved to another place.
+			 * @since 1.9.17
+			 * @todo remove after test.
+			 */			
+			/*
 			add_action( 'admin_print_styles', array(
 				$this,
 				'on_admin_styles'
 			) );
+			// */
 
 			add_action( 'admin_menu', array(
 				$this,
 				'on_admin_menu'
 			), 10 );
 
+			/**
+			 * Moved to another place.
+			 * @since 1.9.17
+			 * @todo remove after test.
+			 */
+			/*
 			add_action( 'post_submitbox_misc_actions', array(
 				$this,
 				'on_add_devmode_switcher'
-			) );
+			) ); 
+			// */
 
 			add_action( 'admin_bar_menu', array(
 				$this,
@@ -514,10 +616,30 @@ class WPGlobus {
 			}
 
 		} else {
-
+			
 			/**
 			 * @scope front
+			 */		
+
+			/**
+			 * @since 1.9.17
 			 */
+			if ( WPGlobus::Config()->builder->maybe_run('', true) ) {
+				
+				$_file =  dirname( __FILE__ ).'/builders/'.WPGlobus::Config()->builder->get_id().'/class-wpglobus-'.WPGlobus::Config()->builder->get_id().'.php';
+				if ( file_exists( $_file ) ) {
+
+					require_once( dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php' );
+					require_once( $_file );
+
+					$builder_class 	= WPGlobus::Config()->builder->get_class();
+					if ( class_exists( $builder_class ) ) {
+						$builder = new $builder_class;
+					}
+		
+				}
+				
+			}
 
 			$this->menus = self::_get_nav_menus();
 
@@ -1046,6 +1168,17 @@ class WPGlobus {
 			$toggle_text     = __( 'Turn off', 'wpglobus' );
 			$highlight_class = 'wp-ui-text-highlight';
 		}
+		
+		/**
+		 * @since 1.9.17
+		 */
+		$language = WPGlobus::Config()->default_language;
+		if ( ! empty( $_GET['language'] ) ) {
+			$language = sanitize_text_field( wp_unslash( $_GET['language'] ) ); // WPCS: input var ok.
+		}
+		if ( ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
+			$language = WPGlobus::Config()->default_language;
+		}
 		?>
 		<div class="misc-pub-section wpglobus-switch">
 			<span id="wpglobus-raw" style="margin-right: 2px;"
@@ -1054,6 +1187,9 @@ class WPGlobus {
 			<strong class="<?php echo esc_attr( $highlight_class ); ?>"><?php echo esc_html( $status_text ); ?></strong>
 			<a class="button button-small" style="margin:-3px 0 0 3px;"
 					href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $toggle_text ); ?></a>
+			
+			<!-- @since 1.9.17 -->
+			<input type="hidden" name="wpglobus-language" value="<?php echo $language; ?>" />
 		</div>
 		<?php
 	}
@@ -1578,16 +1714,45 @@ class WPGlobus {
 			 */
 			if ( version_compare( $GLOBALS['wp_version'], '4.8.999', '>' ) ) {
 				$version = '-49';
-			}			
+			}
 			
-			wp_register_script(
-				'wpglobus-admin',
-				self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . self::$_SCRIPT_SUFFIX . ".js",
-				array( 'jquery', 'underscore', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-tooltip' ),
-				WPGLOBUS_VERSION,
-				true
-			);
-			wp_enqueue_script( 'wpglobus-admin' );
+			/**
+			 * @since 1.9.17
+			 */
+			if ( WPGlobus::Config()->builder->maybe_run(false) ) {
+				
+				wp_register_script(
+					'wpglobus-admin',
+					self::$PLUGIN_DIR_URL . "includes/builders/assets/wpglobus-admin-builder$version" . self::$_SCRIPT_SUFFIX . ".js",
+					array( 'jquery', 'underscore', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-tooltip' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				wp_enqueue_script( 'wpglobus-admin' );
+				
+				$current_tab = $config->default_language;
+				if ( 'post.php' == $page_action ) {
+					$_current_tab = get_post_meta($_GET['post'], WPGlobus::Config()->builder->get_language_meta_key(), 'true');
+					if ( $_current_tab ) {
+						$current_tab = $_current_tab;
+					}
+				}
+			
+			} else {
+
+				wp_register_script(
+					'wpglobus-admin',
+					self::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . self::$_SCRIPT_SUFFIX . ".js",
+					array( 'jquery', 'underscore', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-tooltip' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				wp_enqueue_script( 'wpglobus-admin' );
+				
+				$current_tab = $config->default_language;
+
+			}
+
 
 			/**
 			 * We need to send the HTML breaks and not \r\n to the JS,
@@ -1637,8 +1802,9 @@ class WPGlobus {
 					'process_ajax' => __CLASS__ . '_process_ajax',
 					'flag_url'     => $config->flags_url,
 					'tabs'         => $tabs_suffix,
-					'currentTab'   => $config->default_language,
+					'currentTab'   => $current_tab,
 					'i18n'         => $i18n,
+					'builder'      => WPGlobus::Config()->builder->is_running() ? WPGlobus::Config()->builder->get_data() : 'false', # @since 1.9.17
 					'data'         => $data
 				)
 			);
