@@ -215,6 +215,12 @@ class WPGlobus_Config {
 	protected $language_for_oembed = '';
 
 	/**
+	 * Builder.
+	 * @since 1.9.17
+	 */
+	public $builder = null;	
+	
+	/**
 	 * Can get it only once.
 	 * @return string
 	 * @since 1.8.4
@@ -741,13 +747,43 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['last_tab'] ) ) {
 			unset( $wpglobus_option['last_tab'] );
 		}
+		
+		/**
+		 * Builders.
+		 * @since 1.9.17
+		 */
+		if ( defined('WPGLOBUS_BUILDERS') && WPGLOBUS_BUILDERS ) {
+			
+			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+			$this->builder = new WPGlobus_Config_Builder();
+			
+			if ( is_admin() ) {
+				
+				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
+				$config_vendor = WPGlobus_Config_Vendor::get_instance();					
+				
+				require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
+				$this->meta = WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
+				
+				require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
+				WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
 
+			}
+
+		} else {
+			
+			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+			$this->builder = new WPGlobus_Config_Builder(false);		
+			$this->meta = false;
+
+		}
+		
 		/**
 		 * Remaining wpglobus options after unset() is extended options
 		 * @since 1.2.3
 		 */
 		$this->extended_options = $wpglobus_option;
-
+		
 		/**
 		 * Option browser_redirect.
 		 * @since 1.8.0
