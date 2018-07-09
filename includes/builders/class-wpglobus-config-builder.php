@@ -67,7 +67,7 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 				
 			} else {
 
-				require_once dirname( __FILE__ ).'/class-wpglobus-config-builders.php' ; 
+				require_once dirname( __FILE__ ).'/class-wpglobus-builders.php' ;
 				$builder = WPGlobus_Builders::get(false);
 				
 			}
