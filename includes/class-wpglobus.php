@@ -17,6 +17,12 @@ class WPGlobus {
 	const URL_WPGLOBUS_SITE = 'https://wpglobus.com/';
 
 	/**
+	 * Language meta key.
+	 * @since 1.9.17
+	 */	
+	const LANGUAGE_META_KEY = 'wpglobus_language';
+	
+	/**
 	 * Cookie name.
 	 * @since 1.8
 	 */
@@ -1175,8 +1181,10 @@ class WPGlobus {
 		$language = WPGlobus::Config()->default_language;
 		if ( ! empty( $_GET['language'] ) ) {
 			$language = sanitize_text_field( wp_unslash( $_GET['language'] ) ); // WPCS: input var ok.
+		} else {
+			$language = get_post_meta($post->ID, self::LANGUAGE_META_KEY, true);
 		}
-		if ( ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
+		if ( empty($language) || ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
 			$language = WPGlobus::Config()->default_language;
 		}
 		?>
@@ -1189,7 +1197,8 @@ class WPGlobus {
 					href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $toggle_text ); ?></a>
 			
 			<!-- @since 1.9.17 -->
-			<input type="hidden" name="wpglobus-language" value="<?php echo $language; ?>" />
+			
+			<input type="hidden" name="<?php echo self::LANGUAGE_META_KEY; ?>" value="<?php echo $language; ?>" />
 		</div>
 		<?php
 	}
@@ -1719,7 +1728,7 @@ class WPGlobus {
 			/**
 			 * @since 1.9.17
 			 */
-			if ( WPGlobus::Config()->builder->maybe_run(false) ) {
+			if ( WPGlobus::Config()->builder->is_running() ) {
 				
 				wp_register_script(
 					'wpglobus-admin',
@@ -3124,6 +3133,29 @@ class WPGlobus {
 
 		if ( ! $devmode ) :
 
+			/**
+			 * @since 1.9.17
+			 */
+			$meta_value = WPGlobus::Config()->default_language;
+			if ( isset( $postarr[ self::LANGUAGE_META_KEY ] ) ) {
+				$meta_value = $postarr[ self::LANGUAGE_META_KEY ];
+			}
+			
+			/** @global wpdb $wpdb */
+			global $wpdb;
+			
+			$__table = _get_meta_table( 'post' );
+			
+			$__meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM $__table WHERE meta_key = %s AND post_id = %d", self::LANGUAGE_META_KEY, $postarr['ID'] ) );
+			if ( empty( $__meta_ids ) ) {
+				$__data = array( 'post_id' => $postarr['ID'], 'meta_key' => self::LANGUAGE_META_KEY, 'meta_value' => $meta_value );
+				$result = $wpdb->insert( $__table, $__data, array('%d', '%s', '%s') );
+			} else {
+				$__data  = compact( 'meta_value' );
+				$__where = array( 'post_id' => $postarr['ID'], 'meta_key' => self::LANGUAGE_META_KEY );
+				$result = $wpdb->update( $__table, $__data, $__where );	
+			}
+		
 			$support_title = true;
 			if ( ! post_type_supports( $data['post_type'], 'title' ) ) {
 				$support_title = false;
