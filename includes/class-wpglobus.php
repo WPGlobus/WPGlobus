@@ -129,6 +129,16 @@ class WPGlobus {
 	}
 
 	/**
+	 * Get language meta key.
+	 *
+	 * @return string
+	 * @since 1.9.17
+	 */
+	public static function get_language_meta_key() {
+		return self::LANGUAGE_META_KEY;
+	}		
+	
+	/**
 	 * @var bool $_SCRIPT_DEBUG Internal representation of the define('SCRIPT_DEBUG')
 	 */
 	protected static $_SCRIPT_DEBUG = false;
