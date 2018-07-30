@@ -17,13 +17,17 @@ class WPGlobus_Post_Types {
 	 * @var string[]
 	 */
 	protected static $hidden_types_main = array(
-		// Built-in.
+		/**
+		 * Built-in.
+		 * @see create_initial_post_types() in wp-includes\post.php
+		 */
 		'attachment',
 		'revision',
 		'nav_menu_item',
 		'custom_css',
 		'customize_changeset',
 		'oembed_cache',
+		'user_request', // @since 1.9.17
 		// Custom types that do not need WPGlobus' tabbed interface or those that we cannot handle.
 		'scheduled-action',
 		'wp-types-group',
@@ -35,6 +39,8 @@ class WPGlobus_Post_Types {
 		'acf',
 		'acf-field',
 		'acf-field-group',
+		// Gutenberg: @since 1.9.17
+		'wp_block' 
 	);
 
 	/**
