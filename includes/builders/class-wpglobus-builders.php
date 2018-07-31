@@ -325,7 +325,19 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 									}
 								}
 							}
-						
+
+							$post_type = '';
+							if ( ! empty( $_GET['post'] ) ) {
+								$post_type = self::get_post_type($_GET['post']);
+							}
+							
+							/**
+							 * Since 1.9.17 Gutenberg support will be start for posts and pages only.
+							 */
+							if ( ! in_array( $post_type, array('post', 'page') ) ) {
+								$load_gutenberg = false;
+							}
+
 						}
 
 					}
@@ -337,6 +349,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					'version' 		=> GUTENBERG_VERSION,
 					'class'			=> 'WPGlobus_Gutenberg',
 					'builder_page' 	=> false,
+					'post_type'		=> empty($post_type) ? '' : $post_type,
 					'message'		=> $message
 				);
 				
