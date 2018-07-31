@@ -2,7 +2,7 @@
  * WPGlobus Administration
  * Interface JS functions
  *
- * @since 2.0
+ * @since 1.9.17
  *
  * @package WPGlobus
  * @subpackage Administration/Gutenberg
@@ -17,6 +17,9 @@ jQuery(document).ready(function ($) {
 		initDone: false,
 		languageSelectorBoxDelta: 0,
 		init: function() {
+			if ( 'undefined' === typeof _wpGutenbergCodeEditorSettings ) {
+				return;
+			}
 			api.setTabs();
 			// api.setCookie();
 			api.formHandler();
