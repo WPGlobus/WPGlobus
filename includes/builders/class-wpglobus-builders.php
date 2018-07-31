@@ -42,7 +42,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					return $builder;
 				}
 				
-				/*
+				//*
 				$builder = self::is_js_composer();
 				if ( $builder ) {
 					return $builder;
@@ -239,6 +239,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				}
 				
 				$_attrs = array(
+					'id' 			=> 'js_composer',
 					'version' 		=> WPB_VC_VERSION,
 					'class'   		=> 'WPGlobus_JS_Composer',
 					'post_type' 	=> $post_type,
@@ -246,9 +247,9 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				);
 				
 				$attrs = self::get_attrs($_attrs);
+			
+				return $attrs;
 				
-				//return new WPGlobus_Config_Builder('js_composer', $attrs);
-				return false;
 			}
 			
 			return false;
@@ -372,14 +373,14 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		}
 		
 		/**
-		 *
+		 * Get attributes.
 		 */
 		protected static function get_attrs($_attrs) {
 			return array_merge( self::$attrs, $_attrs );
 		}
 
 		/**
-		 *
+		 * Get post type.
 		 */		
 		protected static function get_post_type( $id = '' ) {
 			if ( 0 == (int) $id ) {
