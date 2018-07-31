@@ -29,6 +29,13 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			//}
 			
 			/**
+			 * Filter's order:
+			 * 1. rest_pre_insert_post
+			 * 2. wp_insert_post_data
+			 * 3. rest_request_after_callbacks
+			 */
+			 
+			/**
 			 * @see wp-includes\rest-api\endpoints\class-wp-rest-posts-controller.php
 			 */			
 			add_filter( 'rest_pre_insert_post', array( $this, 'filter__pre_insert_post' ), 2, 2);
@@ -46,61 +53,69 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		}
 	
 		/**
-		 * Callback for 'rest_request_after_callbacks'.
+		 * Callback for 'rest_request_after_callbacks' will be fired after 'wp_insert_post_data' filter.
+		 *
+		 * @see 'filter__wp_insert_post_data'
 		 */
 		function filter__rest_after_callbacks($response, $handler, $request) {
 			
-			if ( ! empty($response->data['id']) ) {
-				$post_id = $response->data['id'];
-			} else {
+			if ( ! empty($handler['methods']['POST']) && ! empty($handler['methods']['PUT']) && ! empty($handler['methods']['PATCH']) ) {
 				/**
-				 * @todo What to do?
-				 */
-				return $response;		
-			}
-			
-			$builder_language = get_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), true);
-			if ( empty($builder_language) ) {
-				$builder_language = WPGlobus::Config()->default_language;
-			}	
+				 * Update post.
+				 */	
 
-			$fix_title = true;
-			if  ( ! empty($response->data['title']['raw']) && WPGlobus_Core::has_translations($response->data['title']['raw']) ) {
-				$response->data['title']['raw'] 	 = WPGlobus_Core::text_filter($response->data['title']['raw'], $builder_language);
-				$response->data['title']['rendered'] = $response->data['title']['raw'];
-				$fix_title = false;
-			}
-			
-			if  ( ! empty($response->data['excerpt']['raw']) && WPGlobus_Core::has_translations($response->data['excerpt']['raw']) ) {
-				$excerpt_in_default = WPGlobus_Core::text_filter($response->data['excerpt']['raw'], WPGlobus::Config()->default_language);
-				$excerpt 		    = WPGlobus_Core::text_filter($response->data['excerpt']['raw'], $builder_language);
-				$response->data['excerpt']['raw'] 	   = $excerpt;
-				$response->data['excerpt']['rendered'] = str_replace($excerpt_in_default, $excerpt, $response->data['excerpt']['rendered']);
-			}
-			
-			if ( $builder_language == WPGlobus::Config()->default_language ) {
-				return $response;
-			}
-			
-			if ( $fix_title ) :
 				/**
-				 * Fix the title.
-				 * When we have title with different value:
-				 * $response->data[title][raw] => Русский заголовок
-				 * $response->data[title][rendered] => English title
+				 * This returns incorrect language
+				 * $builder_language = get_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), true);
+				 * @todo check updating language meta after UPDATE post
 				 */
-				if ( empty($response->data['title']) ) {
-					return $response;
+				$builder_language = WPGlobus::Config()->builder->get_language();
+				if ( empty($builder_language) ) {
+					// @todo incorrect case
 				}
-				if ( empty($response->data['title']['rendered']) || empty($response->data['title']['raw']) ) {
+					
+				$fix_title = true;
+				if  ( ! empty($response->data['title']['raw']) && WPGlobus_Core::has_translations($response->data['title']['raw']) ) {
+					$response->data['title']['raw'] 	 = WPGlobus_Core::text_filter($response->data['title']['raw'], $builder_language, WPGlobus::RETURN_EMPTY);
+					$response->data['title']['rendered'] = $response->data['title']['raw'];
+					$fix_title = false;
+				}
+				
+				$fix_excerpt = true;
+				if  ( ! empty($response->data['excerpt']['raw']) && WPGlobus_Core::has_translations($response->data['excerpt']['raw']) ) {
+					$excerpt_in_default = WPGlobus_Core::text_filter($response->data['excerpt']['raw'], WPGlobus::Config()->default_language);
+					//$excerpt 		    = WPGlobus_Core::text_filter($response->data['excerpt']['raw'], $builder_language);
+					$excerpt 		    = WPGlobus_Core::text_filter($response->data['excerpt']['raw'], $builder_language, WPGlobus::RETURN_EMPTY);
+					$response->data['excerpt']['raw'] 	   = $excerpt;
+					$response->data['excerpt']['rendered'] = str_replace($excerpt_in_default, $excerpt, $response->data['excerpt']['rendered']);
+					$fix_excerpt = false;
+				}
+		
+				if ( $builder_language == WPGlobus::Config()->default_language ) {
 					return $response;
 				}
 				
-				if ( $response->data['title']['rendered'] != $response->data['title']['raw'] ) {
-					$response->data['title']['rendered'] = $response->data['title']['raw'];
-				}
+				if ( $fix_title ) :
+					/**
+					 * Fix the title.
+					 * When we have title with different value:
+					 * $response->data[title][raw] => Русский заголовок
+					 * $response->data[title][rendered] => English title
+					 */
+					if ( empty($response->data['title']) ) {
+						return $response;
+					}
+					if ( empty($response->data['title']['rendered']) || empty($response->data['title']['raw']) ) {
+						return $response;
+					}
+					
+					if ( $response->data['title']['rendered'] != $response->data['title']['raw'] ) {
+						$response->data['title']['rendered'] = $response->data['title']['raw'];
+					}
 
-			endif;
+				endif;
+			
+			}
 			
 			return $response;
 		}
@@ -112,20 +127,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			
 			global $wpdb;
 			$_post = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID = %d LIMIT 1", $prepared_post->ID ) );
-			
-			$fields = array();
-			if ( ! empty($prepared_post->post_title) ) {
-				$fields['post_title'] = $prepared_post->post_title;
-			}
-			
-			if ( ! empty($prepared_post->post_content) ) {
-				$fields['post_content'] = $prepared_post->post_content;
-			}
-			
-			if ( ! empty($prepared_post->post_excerpt) ) {
-				$fields['post_excerpt'] = $prepared_post->post_excerpt;
-			}	
-			
+
 			$builder_language = WPGlobus::Config()->builder->get_language();
 			
 			if ( empty($builder_language) ) {
@@ -135,6 +137,46 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				 */
 				// 
 			}
+			
+			$fields = array();
+			
+			/**
+			 * Post title.
+			 */
+			if ( ! empty($prepared_post->post_title) ) {
+				$fields['post_title'] = $prepared_post->post_title;
+			} else {
+				//$fields['post_title'] = '';
+			}
+			
+			/**
+			 * Post content.
+			 */			
+			if ( ! empty($prepared_post->post_content) ) {
+				$fields['post_content'] = $prepared_post->post_content;
+			} else {
+				$fields['post_content'] = '';
+			}
+			
+			/**
+			 * Post excerpt.
+			 */			
+			if ( isset( $prepared_post->post_excerpt ) ) {
+				if ( empty( $prepared_post->post_excerpt ) ) {
+					/**
+					 * Post excerpt was removed by user.
+					 */
+					$fields['post_excerpt'] = '';
+				} else {
+					$fields['post_excerpt'] = $prepared_post->post_excerpt;
+				}
+			} else {
+				/**
+				 * Post excerpt was not modified by user.
+				 * so, we have unset '$prepared_post->post_excerpt' field.
+				 */
+				 $fields['post_excerpt'] = WPGlobus_Core::text_filter($_post->post_excerpt, $builder_language, WPGlobus::RETURN_EMPTY);
+			}	
 			
 			$_fields = array();
 			
@@ -166,6 +208,9 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				
 			}
 			
+			/**
+			 * $this->_prepared_post contains 'post_title', 'post_content', 'post_excerpt' with language marks and ready to insert in DB.
+			 */
 			$this->_prepared_post = clone $prepared_post;
 	
 			return $prepared_post;					
@@ -179,6 +224,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		
 			/**
 			 * Check $this->_prepared_post was loaded with first XMLHttpRequest.
+			 * @see 'filter__pre_insert_post' filter.
 			 * @see Network tab in browser console.
 			 */
 			if ( ! is_object( $this->_prepared_post ) ) {
@@ -187,9 +233,11 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			
 			$_fields = array( 'post_title', 'post_content', 'post_excerpt' );
 			foreach( $_fields as $_field ) {
+			
 				if ( ! empty($data[$_field]) && ! empty($this->_prepared_post->$_field) ) {
 					$data[$_field] = $this->_prepared_post->$_field;
 				}
+				
 			}
 
 			return $data;
