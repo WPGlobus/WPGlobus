@@ -66,16 +66,15 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				 */
 				add_filter('content_edit_pre', array( $this, 'filter__content' ), 5, 2 );
 				add_filter('title_edit_pre', array( $this, 'filter__title' ), 5, 2 );
+				add_filter('excerpt_edit_pre', array( $this, 'filter__excerpt' ), 5, 2 );
 				
 			}
 			
 			/**
 			 * Show language tabs in post.php page.
+			 * @see wpglobus\includes\class-wpglobus.php
 			 */
 			add_filter( 'wpglobus_show_language_tabs', array( $this, 'filter__show_language_tabs' ), 5 );
-
-			//error_log(print_r('HERE: before wp_insert_post_data', true));
-			add_filter( 'wp_insert_post_data', array( $this, 'filter__save_post_data' ), 11, 2 );
 			
 		}
 
@@ -90,10 +89,18 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		/**
 		 * Filter content.
 		 */		
-		public function filter__content($content, $default_editor) {
+		public function filter__content($content, $post_id) {
 			$content = WPGlobus_Core::text_filter($content, $this->get_current_language(), WPGlobus::RETURN_EMPTY);
 			return $content;
 		}		
+	
+		/**
+		 * Filter excerpt.
+		 */		
+		public function filter__excerpt($excerpt, $post_id) {
+			$excerpt = WPGlobus_Core::text_filter($excerpt, $this->get_current_language(), WPGlobus::RETURN_EMPTY);
+			return $excerpt;
+		}
 		
 		/**
 		 * Redirect.
@@ -149,20 +156,10 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				return;
 			}
 			
-			//$___language = WPGlobus::Config()->builder->get_language();
-			//error_log(print_r(' class-wpglobus-builder.php  HERE 1: '.$___language, true));
-
-			//$language = WPGlobus::Config()->builder->get_language();
-			//error_log(print_r(' class-wpglobus-builder.php  HERE 2: '.$language, true));
-			
-			//$this->language = $language;
-			
 			$language = WPGlobus::Config()->default_language;
 		
-			// if ( empty($_REQUEST) ) {
 			if ( 1 ) {
-				
-				
+
 				$_set = false;
 				
 				/**
@@ -174,8 +171,6 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				if ( isset( $_REQUEST['language'] ) ) { // WPCS: input var ok, sanitization ok.
 					$language = sanitize_text_field($_REQUEST['language']);
 					$_set = true;
-					//error_log(print_r('HERE: language set by $_REQUEST[language] = '.$language, true));
-
 				}
 				/**
 				 * 2.
@@ -183,16 +178,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				if ( isset( $_REQUEST['wpglobus-language'] ) ) { // WPCS: input var ok, sanitization ok.
 					$language = sanitize_text_field($_REQUEST['wpglobus-language']);
 					$_set = true;
-					//error_log(print_r('HERE: language set by $_REQUEST[wpglobus-language] = '.$language, true));
 				}
 				/**
 				 * 3. Meta
 				 */
-				// error_log(print_r($_REQUEST, true));
 				$post_id = '';
 				if ( empty($_REQUEST['post']) ) {
 					
-					//error_log(print_r($_POST, true));
+					/**
+					 * @todo add doc
+					 */
 
 				} else {
 					if ( ! empty($_REQUEST['post']) ) {
@@ -211,26 +206,23 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 						$language = get_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), true);
 					}
 				}
-				if ( ! $_set ) {
-					//error_log(print_r('HERE: language set by default language = '.$language, true));	
-				}
 				
 			} // endif;
 			
 			if ( ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
 				$language = WPGlobus::Config()->default_language;
 				update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language);
-			}		
-			
+			}
+
 			$this->language = $language;
 			
 		}	
-	
+		
 		/**
 		 *
 		 */
 		public function filter__save_post_data( $data, $postarr ) {
-
+			
 			if ( (int) $postarr['ID'] == 0 ) {
 				return $data;
 			}
@@ -354,12 +346,6 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				}
 
 				$data[$field] = WPGlobus_Utils::build_multilingual_string($_new_text);
-				//if ( 'post_content' == $field ) {
-				if ( 'post_title' == $field ) {
-					/*
-					error_log(print_r($_new_text, true));
-					// */
-				}
 			
 			}
 			
@@ -425,7 +411,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * Add class to body in admin.
 		 * @see admin_body_class filter
 		 *
-		 * @since 2.0
+		 * @since 1.9.17
 		 * @param string $classes
 		 *
 		 * @return string
