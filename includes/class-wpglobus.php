@@ -318,9 +318,15 @@ class WPGlobus {
 		/**
 		 * @since 1.9.17
 		 */
-		if ( WPGlobus::Config()->builder->maybe_run('gutenberg', false) ) {
+		if ( 'gutenberg' == WPGlobus::Config()->builder->get_id() ) {
 			require_once dirname( __FILE__ ).'/builders/gutenberg/class-wpglobus-gutenberg-update-post.php';
 			new WPGlobus_Gutenberg_Update_Post();
+		} else {
+			$_file = dirname( __FILE__ ).'/builders/'.WPGlobus::Config()->builder->get_id().'/class-wpglobus-'.WPGlobus::Config()->builder->get_id().'-update-post.php';
+			if ( file_exists( $_file ) ) {
+				require_once( $_file );
+				new WPGlobus_Update_Post();
+			}
 		}
 		
 		/**
@@ -414,19 +420,24 @@ class WPGlobus {
 				 * @since 1.9.17
 				 */
 				if ( WPGlobus::Config()->builder->maybe_run('', true) ) {
+
 					$_file =  dirname( __FILE__ ).'/builders/'.WPGlobus::Config()->builder->get_id().'/class-wpglobus-'.WPGlobus::Config()->builder->get_id().'.php';
-					if ( file_exists( $_file ) ) {
 					
+					if ( file_exists( $_file ) ) {
+		
 						require_once( dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php' );
 						require_once( $_file );
-
+						/**
+						 * @todo test with builders.
+						 */
 						$builder_class 	= WPGlobus::Config()->builder->get_class();
 						if ( class_exists( $builder_class ) ) {
 							$builder = new $builder_class;
 						}
 						return;
 					}
-				}				
+				} 
+
 			}
 			
 			if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
