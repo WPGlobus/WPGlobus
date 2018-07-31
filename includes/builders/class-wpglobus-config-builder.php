@@ -16,8 +16,9 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 
 		/**
 		 * May be to use "wpglobus_language" meta (reserved in WPGlobus).
+		 * @todo remove after test
 		 */
-		protected $language_meta_key = '_wpglobus_builder_language';
+		//protected $language_meta_key = '_wpglobus_builder_language';
 		
 		protected $language_cookie = 'wpglobus-builder-language';
 		
@@ -78,7 +79,11 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 		 * Try to run builder.
 		 */
 		public function maybe_run($builder = '', $set_run_flag = false) {
-
+			
+			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+				return false;	
+			}
+			
 			if ( ! $this->id ) {
 				return false;
 			}
@@ -95,31 +100,38 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 			}
 			
 			if ( $check_run_flag && $this->is_run ) {
-				return false;	
+				/**
+				 * Don't run again.
+				 */
+				return false;
 			}
 			
 			if ( '' == $builder ) {
 				$builder = $this->id;
 			}
+			
 			if ( ! $builder ) {
 				return false;
 			}
+			
 			if ( $builder !== $this->id ) {
 				return false;
 			}
+			
 			if ( $this->is_front() ) {
 				if ( $set_run_flag ) {
 					$this->is_run = true;
 				}
 				return true;
 			}
+	
 			if ( $this->is_builder_page() ) {
 				if ( $set_run_flag ) {
 					$this->is_run = true;
 				}
 				return true;
 			}
-			
+
 			return false;
 			
 		}
@@ -293,7 +305,7 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 			if ( ! $this->id ) {
 				return false;
 			}
-			return $this->language_meta_key;
+			return WPGlobus::get_language_meta_key();
 		}
 
 		/**
