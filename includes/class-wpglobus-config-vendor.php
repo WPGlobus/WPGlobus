@@ -12,6 +12,8 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		
 		const PLUGIN_CONFIG_FILES = 'configs/*.json';
 		
+		const PLUGIN_CONFIG_DIR = 'configs/';
+		
 		/**
 		 * @var object Instance of this class.
 		 */
@@ -22,7 +24,14 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		protected static $post_meta_fields = null;
 		
 		protected static $wp_options = null;
-
+		
+		/**
+		 * Array of registered vendors.
+		 *
+		 * @var string[]
+		 */
+		protected static $vendors = array();
+	
 		/**
 		 * Constructor.
 		 */		
@@ -70,13 +79,32 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		 */
 		public static function get_config_files() {
 			
-			$dir = WPGlobus::$PLUGIN_DIR_PATH . self::PLUGIN_CONFIG_FILES;
+			//$dir = WPGlobus::$PLUGIN_DIR_PATH . self::PLUGIN_CONFIG_FILES;
+			
+			$config_plugin_dir = WPGlobus::$PLUGIN_DIR_PATH . self::PLUGIN_CONFIG_DIR;
 
-			foreach( glob($dir) as $file ) {
+			/**
+			 * WPGlobus SEO.
+			 */
+			if ( function_exists('wpglobus_seo__init') ) {
+				self::$vendors[] = 'wpglobus-seo.json';
+			}
+			
+			/**
+			 * Yoast SEO.
+			 */
+			if ( defined('WPSEO_VERSION') )  {
+				/**
+				 * check 'WPSEO_PREMIUM_PLUGIN_FILE' for premium add-on.
+				 */
+				self::$vendors[] = 'yoast-seo.json';
+			}
+			
+			foreach( self::$vendors as $file ) {
 				
-				if ( is_readable($file) ) {
+				if ( is_readable( $config_plugin_dir . $file ) ) {
 					$file_name = pathinfo( $file, PATHINFO_FILENAME );
-					self::$config[$file_name] = json_decode(file_get_contents($file), true);
+					self::$config[$file_name] = json_decode(file_get_contents($config_plugin_dir . $file), true);
 				}
 				
 			}
