@@ -51,6 +51,11 @@ if ( ! class_exists('WPGlobus_WP_Options') ) :
 			if ( ! is_string($option) ) {
 				return $option;
 			}
+			
+			if ( ! WPGlobus::Config()->builder->is_running() || empty( WPGlobus::Config()->builder->get_language() ) ) {
+				return $option;
+			}
+			
 			$option = WPGlobus_Core::text_filter( $option, WPGlobus::Config()->builder->get_language() );
 			return $option;
 		}
