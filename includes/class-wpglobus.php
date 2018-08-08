@@ -536,6 +536,9 @@ class WPGlobus {
 					'on_admin_footer'
 				) );
 
+				/**
+				 * @see browser tab on post.php page.
+				 */
 				add_filter( 'admin_title', array(
 					$this,
 					'on_admin_title'
