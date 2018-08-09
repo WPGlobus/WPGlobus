@@ -531,6 +531,9 @@ class WPGlobus {
 					'on_admin_enqueue_scripts'
 				), 99 );
 
+				/**
+				 * @todo move to section before builder start. 
+				 */
 				add_action( 'admin_footer', array(
 					$this,
 					'on_admin_footer'
@@ -1770,7 +1773,7 @@ class WPGlobus {
 						$current_tab = $_current_tab;
 					}
 				}
-			
+				
 			} else {
 
 				wp_register_script(
