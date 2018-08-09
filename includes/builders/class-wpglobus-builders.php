@@ -30,7 +30,9 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				'is_admin' 		=> true,
 				'builder_page' 	=> false,
 				'language'		=> '',
-				'message'		=> ''
+				'message'		=> '',
+				'multilingualFields' => array('post_title', 'excerpt'),
+				'translatableClass'	 => 'wpglobus-translatable'
 			);
 			
 			if ( $init ) {

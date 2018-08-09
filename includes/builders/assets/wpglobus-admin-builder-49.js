@@ -250,7 +250,41 @@ jQuery(document).ready(function ($) {
 				}
 			});
 
-			$(content_tabs_id).addClass('wpglobus-post-body-tabs');			
+			$(content_tabs_id).addClass('wpglobus-post-body-tabs');		
+
+			/**
+			 * Set fields as multilingual.
+			 */
+			//setTimeout(api.setMultilingualFields(), 1000);
+			api.setMultilingualFields();
+			
+
+		},
+		setMultilingualFields: function() {
+			$.each(WPGlobusAdmin.builder.multilingualFields, function(indx, field) {	
+				var elementBy = 'name';
+				var node = document.getElementsByName(field);
+				var $element;
+				
+				if ( 0 == node.length ) {
+					elementBy = 'id';
+					node = document.getElementById(field);
+				}	
+
+				if ( null === node ) {
+					return;
+				} else {
+					if ( 'id' == elementBy ) {
+						$element = $('#'+field);
+					} else {
+						var nodeName = node[0].nodeName;
+						nodeName = nodeName.toLowerCase();
+						$element = $(nodeName+'[name="'+field+'"]');
+					}
+					$element.addClass(WPGlobusAdmin.builder.translatableClass);
+				}				
+				
+			});			
 		}
 	}
 	
