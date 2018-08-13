@@ -204,3 +204,5 @@ if ( ! empty( $parent_theme ) ) {
 $debug_info_theme = ob_get_clean();
 
 return $debug_info_theme;
+
+# --- EOF
