@@ -39,17 +39,21 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 			
 				$builder = false;
 				
+				/**
+				 * @since 1.9.17
+				 */
 				$builder = self::is_gutenberg();
 				if ( $builder ) {
 					return $builder;
 				}
 				
-				//*
+				/**
+				 * @since 1.9.17
+				 */
 				$builder = self::is_js_composer();
 				if ( $builder ) {
 					return $builder;
 				}
-				// */
 
 				/*
 				$builder = self::is_elementor();
