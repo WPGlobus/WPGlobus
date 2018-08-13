@@ -416,6 +416,11 @@ class WPGlobus {
 					'on_admin_scripts'
 				) );
 				
+				add_action( 'edit_form_after_title', array(
+					$this,
+					'on_add_title_fields'
+				) );
+				
 				/**
 				 * @since 1.9.17
 				 */
@@ -509,11 +514,18 @@ class WPGlobus {
 				) );
 				// */
 				
+				/**
+				 * Moved to another place.
+				 * @since 1.9.17
+				 * @todo remove after test.
+				 */					
+				/*
 				add_action( 'edit_form_after_title', array(
 					$this,
 					'on_add_title_fields'
 				) );
-
+				// */
+				
 				/**
 				 * Moved to another place.
 				 * @since 1.9.17
@@ -3359,46 +3371,59 @@ class WPGlobus {
 		}
 
 		/**
-		 * Check for support 'title'
+		 * Check for support 'title'.
 		 */
 		if ( ! post_type_supports( $post->post_type, 'title' ) ) {
 			return;
 		}
 
-		foreach ( self::Config()->open_languages as $language ) :
-
-			if ( $language == self::Config()->default_language ) {
-
-				continue;
-
-			} else { ?>
-
-				<div id="titlediv-<?php echo esc_attr( $language ); ?>" class="titlediv-wpglobus">
-					<div id="titlewrap-<?php echo esc_attr( $language ); ?>" class="titlewrap-wpglobus">
-						<label class="screen-reader-text" id="title-prompt-text-<?php echo esc_attr( $language ); ?>"
-						       for="title_<?php echo esc_attr( $language ); ?>"><?php echo esc_html( apply_filters( 'enter_title_here',
-								esc_html__( 'Enter title here' ), $post ) ); ?></label>
-						<input type="text" name="post_title_<?php echo esc_attr( $language ); ?>" size="30"
-						       value="<?php echo esc_attr( WPGlobus_Core::text_filter( $post->post_title, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
-						       id="title_<?php echo esc_attr( $language ); ?>"
-						       class="title_wpglobus"
-						       data-language="<?php echo esc_attr( $language ); ?>"
-						       autocomplete="off" />
-					</div> <!-- #titlewrap -->
-					<?php
-					$slug_box = '<div class="inside">
-						<div id="edit-slug-box-' . esc_attr( $language ) . '" class="wpglobus-edit-slug-box hide-if-no-js">
-							<b></b>
-						</div>
-					</div><!-- .inside -->';
-					// DO NOT ESCAPE THIS: it's HTML, already escaped above.
-					echo apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language ); // WPCS: XSS ok.
-					?>
-				</div>    <!-- #titlediv -->    <?php
-
+		if ( WPGlobus::Config()->builder->is_running() ) {
+			/**
+			 * @since 1.9.17
+			 */
+			if ( WPGlobus::Config()->builder->get_language() != WPGlobus::Config()->default_language ) {
+				// DO NOT ESCAPE THIS: it's HTML, already escaped above.
+				echo apply_filters( 'wpglobus_edit_slug_box', '', WPGlobus::Config()->builder->get_language() ); // WPCS: XSS ok.
 			}
+			
+		} else {
+			
+			foreach ( self::Config()->open_languages as $language ) :
 
-		endforeach;
+				if ( $language == self::Config()->default_language ) {
+
+					continue;
+
+				} else { ?>
+
+					<div id="titlediv-<?php echo esc_attr( $language ); ?>" class="titlediv-wpglobus">
+						<div id="titlewrap-<?php echo esc_attr( $language ); ?>" class="titlewrap-wpglobus">
+							<label class="screen-reader-text" id="title-prompt-text-<?php echo esc_attr( $language ); ?>"
+								   for="title_<?php echo esc_attr( $language ); ?>"><?php echo esc_html( apply_filters( 'enter_title_here',
+									esc_html__( 'Enter title here' ), $post ) ); ?></label>
+							<input type="text" name="post_title_<?php echo esc_attr( $language ); ?>" size="30"
+								   value="<?php echo esc_attr( WPGlobus_Core::text_filter( $post->post_title, $language, WPGlobus::RETURN_EMPTY ) ); ?>"
+								   id="title_<?php echo esc_attr( $language ); ?>"
+								   class="title_wpglobus"
+								   data-language="<?php echo esc_attr( $language ); ?>"
+								   autocomplete="off" />
+						</div> <!-- #titlewrap -->
+						<?php
+						$slug_box = '<div class="inside">
+							<div id="edit-slug-box-' . esc_attr( $language ) . '" class="wpglobus-edit-slug-box hide-if-no-js">
+								<b></b>
+							</div>
+						</div><!-- .inside -->';
+						// DO NOT ESCAPE THIS: it's HTML, already escaped above.
+						echo apply_filters( 'wpglobus_edit_slug_box', $slug_box, $language ); // WPCS: XSS ok.
+						?>
+					</div>    <!-- #titlediv -->    <?php
+
+				}
+
+			endforeach;
+		
+		}
 	}
 
 	/**
