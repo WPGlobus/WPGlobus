@@ -21,6 +21,7 @@ class WPGlobus_Admin_Recommendations {
 		add_filter( 'woocommerce_general_settings', array( __CLASS__, 'for_woocommerce' ) );
 		add_filter( 'wpglobus_edit_slug_box', array( __CLASS__, 'wpg_plus_slug' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'on__admin_footer' ), 1000 );
+		add_action( 'wpglobus_gutenberg_metabox', array( __CLASS__, 'on__gutenberg_metabox' ) );
 	}
 
 	/**
@@ -134,7 +135,7 @@ class WPGlobus_Admin_Recommendations {
 	 *
 	 * @since 1.9.6
 	 */
-	public static function wpg_plus_slug() {
+	public static function wpg_plus_slug($run_js = true) {
 	
 		$container_start = '<p id="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
 		$container_end   = '</p>';
@@ -148,7 +149,9 @@ class WPGlobus_Admin_Recommendations {
 			echo ' ';
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $url ) . '</a>';
 			echo $container_end; // WPCS: XSS ok.
-			self::$run_js = true;
+			if( $run_js ) {
+				self::$run_js = true;
+			}
 		} elseif ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
 			$url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
 			echo $container_start; // WPCS: XSS ok.
@@ -159,19 +162,37 @@ class WPGlobus_Admin_Recommendations {
 
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $msg ) . '.</a>';
 			echo $container_end; // WPCS: XSS ok.
-			self::$run_js = true;
+			if( $run_js ) {
+				self::$run_js = true;
+			}
 		}
+	}
+
+	/**
+	 * @since 1.9.17
+	 */		
+	public static function on__gutenberg_metabox() {
+
+		if ( WPGlobus::Config()->builder->is_running() ) {
+			self::wpg_plus_slug(false);
+		}
+
 	}
 	
 	/**
 	 * @since 1.9.17
 	 */	
 	public static function on__admin_footer() {
-		if ( WPGlobus::Config()->builder->get_language() == WPGlobus::Config()->default_language ) {
+		
+		if ( ! self::$run_js ) {
 			return;
 		}
 		
-		if ( ! self::$run_js ) {
+		if ( ! WPGlobus::Config()->builder->is_running() ) {
+			return;
+		}		
+		
+		if ( WPGlobus::Config()->builder->get_language() == WPGlobus::Config()->default_language ) {
 			return;
 		}
 		
