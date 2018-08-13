@@ -37,14 +37,6 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			), 1000 );	
 			
 			/**
-			 * @todo remove after test.
-			add_action( 'admin_print_styles', array(
-				$this,
-				'on__admin_styles'
-			) );			
-			// */
-			
-			/**
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array($this, 'filter__seo_meta_box_title') );
@@ -223,38 +215,11 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	}
 	
 	/**
-	 *
+	 * Callback for 'add_meta_box' function.
 	 */
 	public function callback__meta_box() {
-	
 		echo $this->get_language_field();
-		
-		/**
-		 * @todo in next version.
-		 */
-		//foreach( WPGlobus::Config()->enabled_languages as $language ) {
-			//echo '<input name="wpglobus-permalink-'.$language.'" type="text" value="" placeholder="permalink" size="30" />';
-		//}
-		//echo '<hr />';
-		//do_action('wpglobus_gutenberg_test');
+		do_action('wpglobus_gutenberg_metabox');
 	}		
-	
-	/**
-	 * Enqueue admin styles.
-	 *
-	 * @return void
-	 */
-	public function on__admin_styles() {
-
-		wp_register_style(
-			'wpglobus-admin',
-			WPGlobus::plugin_dir_url() . 'includes/css/wpglobus-admin' . WPGlobus::SCRIPT_SUFFIX() . '.css',
-			array(),
-			WPGLOBUS_VERSION,
-			'all'
-		);
-		wp_enqueue_style( 'wpglobus-admin' );
-	
-	}
 	
 }
