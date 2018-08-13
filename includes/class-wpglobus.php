@@ -427,6 +427,14 @@ class WPGlobus {
 				) );
 				
 				/**
+				 * @see browser tab on post.php page.
+				 */
+				add_filter( 'admin_title', array(
+					$this,
+					'on__admin_title'
+				), 10, 2 );				
+				
+				/**
 				 * @since 1.9.17
 				 */
 				if ( WPGlobus::Config()->builder->maybe_run('', true) ) {
@@ -562,11 +570,18 @@ class WPGlobus {
 
 				/**
 				 * @see browser tab on post.php page.
+				 *
+				 * Moved to another place.
+				 * @since 1.9.17
+				 * @todo remove after test.
+				 *				 
 				 */
+				/* 
 				add_filter( 'admin_title', array(
 					$this,
-					'on_admin_title'
+					'on__admin_title'
 				), 10, 2 );
+				// */
 
 				if ( $this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow( array(
 						'post.php',
@@ -3568,14 +3583,20 @@ class WPGlobus {
 	 *
 	 * @return string
 	 */
-	public function on_admin_title(
+	public function on__admin_title(
 		/** @noinspection PhpUnusedParameterInspection */
 		$admin_title,
 		$title
 	) {
 		$blogname = get_option( 'blogname' );
-
-		return $title . ' &lsaquo; ' . WPGlobus_Core::text_filter( $blogname, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) . ' &#8212; WordPress';
+		
+		if ( WPGlobus::Config()->builder->is_running() ) {
+			$language = WPGlobus::Config()->builder->get_language();
+		} else {
+			$language = WPGlobus::Config()->language;
+		}
+		
+		return $title . ' &lsaquo; ' . WPGlobus_Core::text_filter( $blogname, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE ) . ' &#8212; WordPress';
 	}
 
 	/**
