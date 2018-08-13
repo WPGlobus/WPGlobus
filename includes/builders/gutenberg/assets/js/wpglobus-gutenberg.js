@@ -8,7 +8,7 @@
  * @subpackage Administration/Gutenberg
  */
 /*jslint browser: true */
-/*global jQuery, console*/
+/*global jQuery, console, _wpGutenbergCodeEditorSettings*/
 
 jQuery(document).ready(function ($) {
     "use strict";
@@ -22,7 +22,6 @@ jQuery(document).ready(function ($) {
 				return;
 			}
 			api.setTabs();
-			// api.setCookie();
 			api.formHandler();
 			api.attachListeners();
 		},
@@ -66,10 +65,6 @@ jQuery(document).ready(function ($) {
 					//console.log('Here: else');
 				}
 			}, 200);
-		},
-		setCookie: function() {
-			// @todo remove
-			// wpCookies.set('wpglobus-gutenberg-language', WPGlobusGutenberg.language, 31536000, '/');
 		},
 		setSelectorStatus: function() {
 			$('.wpglobus-gutenberg-selector-box').css({'opacity':'0.2'}).attr('onclick','return false;');
@@ -127,22 +122,7 @@ jQuery(document).ready(function ($) {
 			$(document).on('click', '.editor-post-publish-button', function() {
 				api.setSelectorStatus();
 			});
-			
-			$(document).ajaxComplete(function(event, jqxhr, settings) {
-				if ( -1 == settings.url.indexOf('wp/v2/posts/') ) {
-					return;
-				}
-				if ( -1 != window.location.search.indexOf('language=') ) {
-					return;
-				}				
-				var cookie = wpCookies.get(WPGlobusAdmin.builder.languageCookie);
-				if ( null !== cookie && history.pushState) {
-					cookie = cookie.split('+');
-					var language = cookie[0];
-					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search + '&language='+language;
-					window.history.pushState({path:newurl},'',newurl);
-				}
-			});
+
 		}
 	}
     WPGlobusGutenberg = $.extend({}, WPGlobusGutenberg, api);
