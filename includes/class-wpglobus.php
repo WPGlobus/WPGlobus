@@ -421,6 +421,11 @@ class WPGlobus {
 					'on_add_title_fields'
 				) );
 				
+				add_action( 'admin_footer', array(
+					$this,
+					'on__admin_footer'
+				) );
+				
 				/**
 				 * @since 1.9.17
 				 */
@@ -544,12 +549,16 @@ class WPGlobus {
 				), 99 );
 
 				/**
-				 * @todo move to section before builder start. 
-				 */
+				 * Moved to another place.
+				 * @since 1.9.17
+				 * @todo remove after test.
+				 */	
+				/* 
 				add_action( 'admin_footer', array(
 					$this,
-					'on_admin_footer'
+					'on__admin_footer'
 				) );
+				// */
 
 				/**
 				 * @see browser tab on post.php page.
@@ -3575,11 +3584,17 @@ class WPGlobus {
 	 * a Tagline (option blogdescription) at options-general.php page.
 	 * @return void
 	 */
-	public function on_admin_footer() {
+	public function on__admin_footer() {
 
 		$blogname = get_option( 'blogname' );
+
+		if ( WPGlobus::Config()->builder->is_running() ) {
+			$language = WPGlobus::Config()->builder->get_language();
+		} else {
+			$language = WPGlobus::Config()->language;
+		}
 		$bn       =
-			WPGlobus_Core::text_filter( $blogname, WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+			WPGlobus_Core::text_filter( $blogname, $language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
 
 		?>
 		<script type='text/javascript'>
@@ -3588,8 +3603,10 @@ class WPGlobus {
 			/* ]]> */
 		</script>
 		<?php
-
-
+		/**
+		 * @todo may be move code below to separate filter 'admin_footer' if builder is running. @since 1.9.17
+		 */
+		 
 		/**
 		 * For dialog form
 		 * @since 1.2.0
@@ -3601,9 +3618,6 @@ class WPGlobus {
 		if ( isset( $_GET['page'] ) && is_string( $_GET['page'] ) ) { // WPCS: input var ok, sanitization ok.
 			$page = sanitize_text_field( wp_unslash( $_GET['page'] ) ); // WPCS: input var ok.
 		}
-
-		// @todo remove after testing
-		//if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'widgets.php' ) ) ) {
 
 		if ( in_array( $pagenow, $this->enabled_pages ) || in_array( $page, $this->enabled_pages ) ) {
 			/**
