@@ -1,6 +1,7 @@
 {
   "post_meta_fields": {
     "_yoast_wpseo_focuskw": {},
+    "_yoast_wpseo_focuskw_text_input": {},
     "_yoast_wpseo_metadesc": {}
   },
   "wp_options": {
