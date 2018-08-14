@@ -127,6 +127,13 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				}
 			}
 
+			/**
+			 * Don't auto-modify this SQL query.
+			 */
+			$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
+			
+			/*
+			// Incorrect query.
 			$meta_ids = $wpdb->get_col( $wpdb->prepare(
 				'SELECT %s FROM %s WHERE meta_key = %s AND %s = %d',
 				$id_column,
@@ -135,6 +142,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				$column,
 				$object_id
 			) );
+			// */
 
 			if ( empty( $meta_ids ) ) {
 
