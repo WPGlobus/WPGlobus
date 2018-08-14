@@ -1260,8 +1260,8 @@ class WPGlobus {
 					href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $toggle_text ); ?></a>
 			
 			<!-- @since 1.9.17 -->
-			
-			<input type="hidden" name="<?php echo self::LANGUAGE_META_KEY; ?>" value="<?php echo $language; ?>" />
+			<?php // @todo add separate function ?>
+			<input type="hidden" id="<?php echo self::LANGUAGE_META_KEY; ?>" name="<?php echo self::LANGUAGE_META_KEY; ?>" value="<?php echo $language; ?>" />
 		</div>
 		<?php
 	}
