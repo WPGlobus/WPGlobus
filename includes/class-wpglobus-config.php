@@ -216,10 +216,12 @@ class WPGlobus_Config {
 
 	/**
 	 * Builder.
+	 *
+	 * @var WPGlobus_Config_Builder
 	 * @since 1.9.17
 	 */
-	public $builder = null;	
-	
+	public $builder = null;
+
 	/**
 	 * Can get it only once.
 	 * @return string
