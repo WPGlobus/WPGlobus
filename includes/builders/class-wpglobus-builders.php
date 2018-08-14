@@ -206,13 +206,25 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				
 				$post_id = WPGlobus_Utils::safe_get('post');
 				
+				if ( empty( $post_id ) ) {
+					/**
+					 * Before update post we can get empty $_GET array.
+					 * Let's check $_POST.
+					 */
+					$post_id = isset($_POST['post_ID']) ? $_POST['post_ID'] : '';
+				}
+				
+				if ( empty( $post_id ) ) {
+					// @todo add handling this case.
+				}
+				
 				$_post_type = $wpdb->get_col( $wpdb->prepare("SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id) );
 				
 				$post_type = '';
 				if ( ! empty($_post_type[0]) ) {
 					$post_type = $_post_type[0];
 				}
-
+				
 				if ( '' == $_opts[$_user->roles[0]]['capabilities']['vc_access_rules_post_types'] ) {
 					/**
 					 * All post types are disabled in WPBakery Page Builder.
@@ -228,6 +240,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					}
 
 				} else if ( 'custom' == $_opts[$_user->roles[0]]['capabilities']['vc_access_rules_post_types'] ) {
+				
 					/**
 					 * Custom settings for post types in WPBakery Page Builder.
 					 */					
