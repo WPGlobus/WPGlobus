@@ -35,7 +35,12 @@ if ( ! class_exists('WPGlobus_Meta') ) :
 	
 			if ( is_admin() ) {
 				add_filter( 'get_post_metadata', array( __CLASS__, 'filter__post_metadata' ), 5, 4 );
+				
+				/**
+				 * @see update_metadata() in wp-includes\meta.php
+				 */
 				add_filter( 'update_post_metadata', array( __CLASS__, 'filter__update_post_metadata' ), 5, 5 );
+				
 				add_filter( 'delete_post_metadata', array( __CLASS__, 'filter__delete_metadata' ), 5, 5 );
 			}			
 			
@@ -95,7 +100,7 @@ if ( ! class_exists('WPGlobus_Meta') ) :
 
 			$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
 			if ( empty( $meta_ids ) ) {
-				
+
 				$_passed_value = $passed_value;
 				
 				if ( ! empty($_passed_value) && WPGlobus::Config()->default_language != self::$builder->get_language() ) {
