@@ -131,7 +131,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @return string
 		 */		
 		public function get_language_field() {
-			return '<input type="hidden" id="wpglobus-language" name="wpglobus-language" value="'.$this->get_current_language().'" />';
+			/**
+			 * @see on_add_devmode_switcher() in wpglobus\includes\class-wpglobus.php
+			 * @todo may be add special function to get hidden language field.
+			 */
+			return '<input type="hidden" id="'.WPGlobus::get_language_meta_key().'" name="'.WPGlobus::get_language_meta_key().'" value="'.$this->get_current_language().'" />';
 		}
 		
 		/**
