@@ -135,8 +135,8 @@ class WPGlobus_Admin_Recommendations {
 	 *
 	 * @since 1.9.6
 	 */
-	public static function wpg_plus_slug($run_js = true) {
-	
+	public static function wpg_plus_slug() {
+
 		$container_start = '<p id="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
 		$container_end   = '</p>';
 
@@ -149,9 +149,9 @@ class WPGlobus_Admin_Recommendations {
 			echo ' ';
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $url ) . '</a>';
 			echo $container_end; // WPCS: XSS ok.
-			if( $run_js ) {
-				self::$run_js = true;
-			}
+
+			self::$run_js = true;
+
 		} elseif ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
 			$url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
 			echo $container_start; // WPCS: XSS ok.
@@ -162,9 +162,9 @@ class WPGlobus_Admin_Recommendations {
 
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $msg ) . '.</a>';
 			echo $container_end; // WPCS: XSS ok.
-			if( $run_js ) {
-				self::$run_js = true;
-			}
+
+			self::$run_js = true;
+
 		}
 	}
 
@@ -174,7 +174,8 @@ class WPGlobus_Admin_Recommendations {
 	public static function on__gutenberg_metabox() {
 
 		if ( WPGlobus::Config()->builder->is_running() ) {
-			self::wpg_plus_slug(false);
+			self::wpg_plus_slug();
+			self::$run_js = false;
 		}
 
 	}
@@ -183,7 +184,7 @@ class WPGlobus_Admin_Recommendations {
 	 * @since 1.9.17
 	 */	
 	public static function on__admin_footer() {
-		
+
 		if ( ! self::$run_js ) {
 			return;
 		}
@@ -195,7 +196,7 @@ class WPGlobus_Admin_Recommendations {
 		if ( WPGlobus::Config()->builder->get_language() == WPGlobus::Config()->default_language ) {
 			return;
 		}
-		
+
 		?>
 		<script type='text/javascript'>
 			/* <![CDATA[ */
