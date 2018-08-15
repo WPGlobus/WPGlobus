@@ -72,9 +72,11 @@ if ( ! class_exists( 'WPGlobus_Update_Post' ) ) :
 							$tr[$lang] = $text;
 						}
 					} else {
-						$text = WPGlobus_Core::text_filter($_post->$field, $lang , WPGlobus::RETURN_EMPTY);
-						if ( ! empty($text) ) {
-							$tr[$lang] = $text;
+						if ( isset($_post->$field) ) {
+							$text = WPGlobus_Core::text_filter($_post->$field, $lang , WPGlobus::RETURN_EMPTY);
+							if ( ! empty($text) ) {
+								$tr[$lang] = $text;
+							}
 						}
 					}
 
