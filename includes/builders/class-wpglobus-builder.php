@@ -169,20 +169,23 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				/**
 				 * Get language code: order is important.
 				 */
+				 
 				/**
 				 * 1.
 				 */	
-				if ( isset( $_REQUEST['language'] ) ) { // WPCS: input var ok, sanitization ok.
+				if ( isset( $_REQUEST['language'] ) && empty($_REQUEST['message']) ) { // WPCS: input var ok, sanitization ok.
 					$language = sanitize_text_field($_REQUEST['language']);
 					$_set = true;
 				}
+				
 				/**
 				 * 2.
 				 */					
-				if ( isset( $_REQUEST['wpglobus-language'] ) ) { // WPCS: input var ok, sanitization ok.
-					$language = sanitize_text_field($_REQUEST['wpglobus-language']);
+				if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) { // WPCS: input var ok, sanitization ok.
+					$language = sanitize_text_field($_REQUEST[ WPGlobus::get_language_meta_key() ]);
 					$_set = true;
 				}
+				
 				/**
 				 * 3. Meta
 				 */
@@ -359,7 +362,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		}		
 		
 		/**
-		 * Show language tabs in post.php page.
+		 * Show language tabs on post.php page.
 		 * 
 		 * @see includes\class-wpglobus.php
 		 * @param bool
