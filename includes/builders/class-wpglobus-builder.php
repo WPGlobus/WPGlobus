@@ -382,6 +382,10 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			?>
 			<ul class="wpglobus-post-body-tabs-list">    <?php
 				$order = 0;
+
+				$get_array = $_GET;
+				unset( $get_array['language'] );
+				
 				foreach ( WPGlobus::Config()->open_languages as $language ) {
 					
 					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language;
@@ -390,13 +394,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 					if ( $language == $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
-					
-					$link = add_query_arg( array(
-								'post' => $_GET['post'],
-								'action' => 'edit',
-								'language' => $language,
-							), admin_url($pagenow) );
-
+					$link = add_query_arg( array_merge( $get_array, array('language'=>$language) ), admin_url($pagenow) );
 					?>
 					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>" data-language="<?php echo esc_attr( $language ); ?>"
 						data-order="<?php echo esc_attr( $order ); ?>"
