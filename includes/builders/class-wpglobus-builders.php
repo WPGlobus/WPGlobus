@@ -44,7 +44,9 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				 */
 				$builder = self::is_gutenberg();
 				if ( $builder ) {
-					return $builder;
+					if ( $builder['builder_page'] ) {
+						return $builder;
+					}
 				}
 				
 				/**
