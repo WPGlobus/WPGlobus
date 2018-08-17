@@ -394,7 +394,7 @@ class WPGlobus {
 				 */
 				if ( WPGlobus::Config()->builder->maybe_run('gutenberg', true) ) {
 					require_once dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php';
-					require_once('/builders/gutenberg/class-wpglobus-gutenberg.php');
+					require_once dirname( __FILE__ ) . '/builders/gutenberg/class-wpglobus-gutenberg.php';
 					$builder = new WPGlobus_Gutenberg();
 				}
 				
