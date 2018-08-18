@@ -196,9 +196,9 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				
 				/**
 				 * @see vc_editor_post_types() (js_composer\include\helpers\helpers_api.php) doesn't work here.
-				 * so let's get 'wp_user_roles' option.
+				 * so let's check the roles.
 				 */
-				$_opts = get_option( 'wp_user_roles' );
+				$_opts = wp_roles()->roles;
 
 				if ( ! function_exists('wp_get_current_user') ) {
 					require_once( ABSPATH . WPINC . '/pluggable.php' );
@@ -241,6 +241,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					 */
 					$_builder_page = false; 
 
+				// TODO compare booleans and not '1'==true.
 				} else if ( '1' == $_opts[$_user->roles[0]]['capabilities']['vc_access_rules_post_types'] ) {
 					/**
 					 * WPBakery Page Builder is available for pages only.
