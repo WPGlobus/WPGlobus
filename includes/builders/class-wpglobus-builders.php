@@ -227,7 +227,15 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					$post_type = $_post_type[0];
 				}
 				
-				if ( '' == $_opts[$_user->roles[0]]['capabilities']['vc_access_rules_post_types'] ) {
+				if ( ! isset( $_opts[$_user->roles[0]]['capabilities']['vc_access_rules_post_types'] ) ) {
+					/**
+					 * WPBakery Page Builder is available for pages only (settings was not saved yet).
+					 */
+					if ( $post_type != 'page' ) {
+						$_builder_page = false;
+					}
+					
+				} else if ( '' == $_opts[$_user->roles[0]]['capabilities']['vc_access_rules_post_types'] ) {
 					/**
 					 * All post types are disabled in WPBakery Page Builder.
 					 */
