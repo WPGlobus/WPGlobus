@@ -213,7 +213,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					 * Before update post we can get empty $_GET array.
 					 * Let's check $_POST.
 					 */
-					$post_id = isset($_POST['post_ID']) ? $_POST['post_ID'] : '';
+					$post_id = isset($_POST['post_ID']) ? sanitize_text_field($_POST['post_ID']) : '';
 				}
 				
 				if ( empty( $post_id ) ) {
