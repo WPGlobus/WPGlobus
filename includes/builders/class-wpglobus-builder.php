@@ -226,7 +226,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		}	
 		
 		/**
-		 *
+		 * @todo remove it.
 		 */
 		public function filter__save_post_data( $data, $postarr ) {
 			
@@ -384,13 +384,18 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				$order = 0;
 
 				$get_array = $_GET;
+				/**
+				 * Unset unneeded elements.
+				 */
 				unset( $get_array['language'] );
+				unset( $get_array['message'] );
 				
 				foreach ( WPGlobus::Config()->open_languages as $language ) {
 					
 					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language;
 					
 					$_classes = $classes;
+					
 					if ( $language == $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
