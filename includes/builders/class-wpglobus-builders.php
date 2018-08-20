@@ -16,11 +16,10 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		protected static $attrs = array();
 		
 		public static function get($init = true) {
-			
-			/*
-			$meta_type = 'post';
-			add_filter( "update_{$meta_type}_metadata", array( __CLASS__, 'on__update_metadata' ), 5, 5 );
-			// */
+		
+			//if ( defined('DOING_AJAX') && DOING_AJAX ) {
+				//return false;
+			//}
 			
 			self::$attrs = array(
 				'id'			=> false,
@@ -29,6 +28,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				'post_type'		=> '',
 				'is_admin' 		=> true,
 				'builder_page' 	=> false,
+				'doing_ajax' 	=> WPGlobus_WP::is_doing_ajax(),
 				'language'		=> '',
 				'message'		=> '',
 				'multilingualFields' => array('post_title', 'excerpt'),
@@ -426,6 +426,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		 * Get post type.
 		 */		
 		protected static function get_post_type( $id = '' ) {
+			
 			if ( 0 == (int) $id ) {
 				return null;
 			}
