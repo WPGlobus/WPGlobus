@@ -71,6 +71,14 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				}
 				// */
 				
+				/**
+				 * @since 1.9.17
+				 */
+				$builder = self::is_yoast_seo();
+				if ( $builder ) {
+					return $builder;
+				}				
+				
 			}
 			
 			return self::$attrs;
@@ -178,6 +186,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		
 		/**
 		 * @see WPBakery Page Builder.
+		 * @since 1.9.17
 		 */
 		protected static function is_js_composer() {
 			
@@ -287,6 +296,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		
 		/**
 		 * Check for gutenberg.
+		 * @since 1.9.17
 		 */		
 		protected static function is_gutenberg() {
 		
@@ -414,6 +424,57 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 			}
 			return $result;
 		}
+		
+		/**
+		 * Check for Yoast SEO.
+		 * @since 1.9.17
+		 */		
+		protected static function is_yoast_seo() {
+			
+			if ( defined('WPSEO_VERSION') ) {
+				
+				global $pagenow;
+				
+				$post_type = '';
+				if ( ! empty( $_GET['post'] ) ) {
+					$post_type = self::get_post_type($_GET['post']);
+				}
+				
+				if ( empty($post_type) ) {
+					/**
+					 * Check $_REQUEST when post is updated.
+					 */
+					if ( ! empty($_REQUEST['post_type']) ) { 
+						$post_type = $_REQUEST['post_type'];
+					}
+				}
+				
+				$_attrs = array(
+					'id' 			=> 'yoast_seo',
+					'version' 		=> WPSEO_VERSION,
+					'class'			=> 'WPGlobus_Yoast_SEO',
+					'builder_page' 	=> true,
+					'post_type'		=> empty($post_type) ? '' : $post_type
+				);
+				
+				if ( empty($post_type) && 'post.php' == $pagenow ) {
+					/**
+					 * @since 1.9.17 detect builder page using $pagenow.
+					 */
+					$_attrs['builder_page'] = true;
+				} else if ( in_array( $post_type, array('post', 'page') ) ) {
+					$_attrs['builder_page'] = true;
+				}
+				
+				$attrs = self::get_attrs($_attrs);
+				
+				return $attrs;
+				
+			}
+			
+			return false;
+			
+		}		
 		
 		/**
 		 * Get attributes.
