@@ -55,7 +55,7 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 				$version = version_compare( WPSEO_VERSION, '7.3', '>=' ) ? '73' : $version;
 				$version = version_compare( WPSEO_VERSION, '7.7', '>=' ) ? $wpglobus_yoastseo_latest_version : $version;
 
-				if ( $version == '77' ) {
+				if ( $version == '77' && is_admin() ) {
 					
 					// Don't start support here.
 					
