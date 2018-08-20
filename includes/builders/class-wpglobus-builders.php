@@ -453,7 +453,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					'id' 			=> 'yoast_seo',
 					'version' 		=> WPSEO_VERSION,
 					'class'			=> 'WPGlobus_Yoast_SEO',
-					'builder_page' 	=> true,
+					'builder_page' 	=> false,
 					'post_type'		=> empty($post_type) ? '' : $post_type
 				);
 				
