@@ -434,41 +434,45 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 			if ( defined('WPSEO_VERSION') ) {
 				
 				global $pagenow;
+	
+				if ( 'post.php' == $pagenow ) {	
 				
-				$post_type = '';
-				if ( ! empty( $_GET['post'] ) ) {
-					$post_type = self::get_post_type($_GET['post']);
-				}
-				
-				if ( empty($post_type) ) {
-					/**
-					 * Check $_REQUEST when post is updated.
-					 */
-					if ( ! empty($_REQUEST['post_type']) ) { 
-						$post_type = $_REQUEST['post_type'];
+					$post_type = '';
+					if ( ! empty( $_GET['post'] ) ) {
+						$post_type = self::get_post_type($_GET['post']);
 					}
+					
+					if ( empty($post_type) ) {
+						/**
+						 * Check $_REQUEST when post is updated.
+						 */
+						if ( ! empty($_REQUEST['post_type']) ) { 
+							$post_type = $_REQUEST['post_type'];
+						}
+					}
+					
+					$_attrs = array(
+						'id' 			=> 'yoast_seo',
+						'version' 		=> WPSEO_VERSION,
+						'class'			=> 'WPGlobus_Yoast_SEO',
+						'builder_page' 	=> false,
+						'post_type'		=> empty($post_type) ? '' : $post_type
+					);
+					
+					if ( empty($post_type) ) {
+						/**
+						 * @since 1.9.17 detect builder page using $pagenow.
+						 */
+						$_attrs['builder_page'] = true;
+					} else if ( in_array( $post_type, array('post', 'page') ) ) {
+						$_attrs['builder_page'] = true;
+					}
+					
+					$attrs = self::get_attrs($_attrs);
+					
+					return $attrs;
+						
 				}
-				
-				$_attrs = array(
-					'id' 			=> 'yoast_seo',
-					'version' 		=> WPSEO_VERSION,
-					'class'			=> 'WPGlobus_Yoast_SEO',
-					'builder_page' 	=> false,
-					'post_type'		=> empty($post_type) ? '' : $post_type
-				);
-				
-				if ( empty($post_type) && 'post.php' == $pagenow ) {
-					/**
-					 * @since 1.9.17 detect builder page using $pagenow.
-					 */
-					$_attrs['builder_page'] = true;
-				} else if ( in_array( $post_type, array('post', 'page') ) ) {
-					$_attrs['builder_page'] = true;
-				}
-				
-				$attrs = self::get_attrs($_attrs);
-				
-				return $attrs;
 				
 			}
 			
