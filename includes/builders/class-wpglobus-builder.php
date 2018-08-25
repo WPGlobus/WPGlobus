@@ -62,7 +62,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				add_filter( 'admin_body_class', array( $this, 'filter__add_admin_body_class' ) );
 				
 				/**
-				 * @see wp-includes\post.php
+				 * @see "{$field_no_prefix}_edit_pre" in wp-includes\post.php
 				 */
 				add_filter('content_edit_pre', array( $this, 'filter__content' ), 5, 2 );
 				add_filter('title_edit_pre', array( $this, 'filter__title' ), 5, 2 );
