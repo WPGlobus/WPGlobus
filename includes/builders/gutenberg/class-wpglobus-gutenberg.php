@@ -40,7 +40,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array($this, 'filter__seo_meta_box_title') );
-		
+
 		}
 
 	}
@@ -49,7 +49,6 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * Translate post.
 	 */
 	public function translate_post($object) {
-
 		if ( $object instanceof WP_Post ) {
 			$object = WPGlobus_Core::translate_wp_post($object, $this->language, WPGlobus::RETURN_EMPTY);
 		}
