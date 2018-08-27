@@ -50,10 +50,13 @@ if ( ! class_exists( 'WPGlobus_Update_Post' ) ) :
 			$builder_language = WPGlobus::Config()->builder->get_language();
 			
 			if ( empty($builder_language) ) {
-				$builder_language = $postarr[ WPGlobus::get_language_meta_key() ];
-				/**
-				 * @todo Add handling for incorrect value. Save to log?
-				 */
+
+				if ( empty( $postarr[ WPGlobus::get_language_meta_key() ] ) ) {
+					$builder_language = WPGlobus::Config()->default_language;
+				} else {
+					$builder_language = $postarr[ WPGlobus::get_language_meta_key() ];
+				}
+				
 			}
 			
 			foreach( $fields as $field=>$value ) { 
