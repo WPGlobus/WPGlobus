@@ -3361,11 +3361,19 @@ class WPGlobus {
 
 		/** @global WP_Post $post */
 		global $post;
+		
+		global $pagenow;
 
 		if ( $this->disabled_entity( $post->post_type ) ) {
 			return;
 		}
-
+		
+		$tab_wrapper_class = 'wpglobus-post-body-tabs-list';
+		
+		if ( 'post.php' != $pagenow ) {
+			$tab_wrapper_class .= ' hidden';
+		}
+		
 		if (
 			/**
 			 * Filter to show language tabs in post page.
@@ -3377,7 +3385,7 @@ class WPGlobus {
 		apply_filters( 'wpglobus_show_language_tabs', true )
 		) : ?>
 
-			<ul class="wpglobus-post-body-tabs-list">    <?php
+			<ul class="<?php echo $tab_wrapper_class; ?>">    <?php
 				$order = 0;
 				foreach ( self::Config()->open_languages as $language ) {
 					$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
