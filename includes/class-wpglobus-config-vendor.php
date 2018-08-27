@@ -92,6 +92,7 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			
 			/**
 			 * Yoast SEO.
+			 * https://wordpress.org/plugins/wordpress-seo/
 			 */
 			if ( defined('WPSEO_VERSION') )  {
 				/**
@@ -99,7 +100,15 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 				 */
 				self::$vendors[] = 'yoast-seo.json';
 			}
-			
+		
+			/**
+			 * All in One SEO Pack.
+			 * https://wordpress.org/plugins/all-in-one-seo-pack/
+			 */
+			if ( defined('AIOSEOP_VERSION') )  {
+				self::$vendors[] = 'all-in-one-seo-pack.json';
+			}
+		
 			foreach( self::$vendors as $file ) {
 				
 				if ( is_readable( $config_plugin_dir . $file ) ) {

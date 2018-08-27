@@ -403,6 +403,7 @@ class WPGlobus {
 					require_once dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php';
 					require_once dirname( __FILE__ ) . '/builders/gutenberg/class-wpglobus-gutenberg.php';
 					$builder = new WPGlobus_Gutenberg();
+					require_once( dirname( __FILE__ ) . '/vendor/wpglobus-vendors.php' );
 				}
 				
 				/**
@@ -459,6 +460,7 @@ class WPGlobus {
 						if ( class_exists( $builder_class ) ) {
 							$builder = new $builder_class;
 						}
+						require_once( dirname( __FILE__ ) . '/vendor/wpglobus-vendors.php' );
 						return;
 					}
 				} 
@@ -712,6 +714,10 @@ class WPGlobus {
 					if ( class_exists( $builder_class ) ) {
 						$builder = new $builder_class;
 					}
+					/**
+					 * @todo check loading 
+					 */
+					//require_once( dirname( __FILE__ ) . '/vendor/wpglobus-vendors.php' );
 		
 				}
 				

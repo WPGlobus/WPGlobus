@@ -1,0 +1,11 @@
+{
+  "post_meta_fields": {
+    "_aioseop_title": {},
+    "_aioseop_description": {},
+    "_aioseop_keywords": {}
+  },
+  "wp_options": {
+	"blogname": {},
+	"blogdescription": null
+  }
+}
