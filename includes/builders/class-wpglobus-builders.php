@@ -17,9 +17,9 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		
 		public static function get($init = true) {
 		
-			//if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			if ( defined('DOING_AJAX') && DOING_AJAX ) {
 				//return false;
-			//}
+			}
 			
 			self::$attrs = array(
 				'id'			=> false,
@@ -27,10 +27,12 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				'class'   		=> '',
 				'post_type'		=> '',
 				'is_admin' 		=> true,
+				'pagenow' 		=> '',
 				'builder_page' 	=> false,
 				'doing_ajax' 	=> WPGlobus_WP::is_doing_ajax(),
 				'language'		=> '',
 				'message'		=> '',
+				'ajax_actions'	=> '',
 				'multilingualFields' => array('post_title', 'excerpt'),
 				'translatableClass'	 => 'wpglobus-translatable'
 			);
@@ -57,7 +59,11 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					return $builder;
 				}
 
-				/*
+				/**
+				 * @since 1.9.17
+				 * @todo WIP.
+				 */
+				/* 
 				$builder = self::is_elementor();
 				if ( $builder ) {
 					return $builder;
@@ -156,28 +162,76 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 			
 			global $pagenow;
 			
-			if ( 'post.php' == $pagenow ) {
+			$load_elementor = false;
+			
+			if ( in_array($pagenow, array('admin-ajax.php', 'post.php', 'index.php') ) ) {
+			
+				$ajax_actions 	= '';
+				$is_admin 		= true;
 				
+				if ( 'admin-ajax.php' == $pagenow ) {
+					
+					if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' != $_REQUEST['action'] ) {
+						return false;
+					}
+					if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
+						$ajax_actions = 'save_builder';
+						$load_elementor = true;
+					} else if ( false !== strpos( $_REQUEST['actions'], '"action":"render_widget"' ) ) {
+						$ajax_actions = 'render_widget';
+						$load_elementor = true;
+					} else {
+						return false;
+						
+					}
+					
+				} else if( 'index.php' == $pagenow ) {
+
+					if ( ! isset( $_GET['elementor-preview'] ) ) {
+						return false;
+					}
+					$load_elementor = true;
+					$is_admin = false;
+					
+				} else {
+					
+					$load_elementor = true;
+					
+				}
+
 				/**
-				 * $cpt_support = get_option( 'elementor_cpt_support', [ 'page', 'post' ] );
+				 * $cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );
 				 * @see elementor\includes\plugin.php
 				 */
-				$cpt_support = get_option( 'elementor_cpt_support', [ 'page', 'post' ] );			
+				$cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );			
 				
-				$post_type = self::get_post_type($_GET['post']);
+				$post_type = '';
+				if ( isset( $_GET['post'] ) ) {
+					$post_type = self::get_post_type($_GET['post']);
+				}
 				
-				$attrs = array(
+				$_attrs = array(
+					'id' 			=> 'elementor',
 					'version' 		=> ELEMENTOR_VERSION,
+					'is_admin' 		=> $is_admin,
 					'class'   		=> 'WPGlobus_Elementor',
-					'builder_page' 	=> false
+					'post_type' 	=> $post_type,
+					'builder_page' 	=> false,
+					'ajax_actions'	=> $ajax_actions
 				);
 				
 				if ( in_array( $post_type, $cpt_support ) ) {
-					$attrs['builder_page'] = true;
+					$_attrs['builder_page'] = true;
 				}
 				
-				//return new WPGlobus_Config_Builder('elementor', $attrs);
-				return false;
+				if ( $load_elementor ) {
+					$_attrs['builder_page'] = true;
+				}
+				
+				$attrs = self::get_attrs($_attrs);
+			
+				return $attrs;
+				
 			}
 			
 			return false;
@@ -322,9 +376,10 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 						if ( 'post-new.php' == $pagenow ) {
 							
 							/**
-							 * Don't load WPGlobus_Gutenberg for new post.
+							 * Load specific language switcher for this page.
+							 * @see get_switcher_box() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg.php
 							 */
-							$load_gutenberg = false; 
+							$load_gutenberg = true; 
 						
 						} elseif ( 'index.php' == $pagenow ) {
 
@@ -389,6 +444,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					'version' 		=> GUTENBERG_VERSION,
 					'class'			=> 'WPGlobus_Gutenberg',
 					'builder_page' 	=> false,
+					'pagenow' 		=> $pagenow,
 					'post_type'		=> empty($post_type) ? '' : $post_type,
 					'message'		=> $message
 				);
