@@ -1817,9 +1817,11 @@ class WPGlobus {
 				
 				$current_tab = $config->default_language;
 				if ( 'post.php' == $page_action ) {
-					$_current_tab = get_post_meta($_GET['post'], WPGlobus::Config()->builder->get_language_meta_key(), 'true');
-					if ( $_current_tab ) {
-						$current_tab = $_current_tab;
+					if ( isset($_GET['post']) ) {
+						$_current_tab = get_post_meta($_GET['post'], WPGlobus::Config()->builder->get_language_meta_key(), 'true');
+						if ( $_current_tab ) {
+							$current_tab = $_current_tab;
+						}
 					}
 				}
 				
