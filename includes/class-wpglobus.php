@@ -2316,10 +2316,22 @@ class WPGlobus {
 
 	/**
 	 * Enqueue the `wpglobus.js` script.
+	 *
 	 * @since 1.0
 	 * @since 1.7.11 Added WPGlobus::Config()->enabled_languages.
+	 * @since 1.9.17 Added WPGlobus::Config()->builder.
 	 */
 	public function enqueue_wpglobus_js() {
+		
+		$localize_data = array(
+			'version'  => WPGLOBUS_VERSION,
+			'language' => WPGlobus::Config()->language,
+			'enabledLanguages'	=> WPGlobus::Config()->enabled_languages
+		);
+		
+		if ( WPGlobus::Config()->builder->is_run() ) {
+			$localize_data['builder'] = WPGlobus::Config()->builder->get_data();
+		}
 
 		wp_enqueue_script(
 			'wpglobus',
@@ -2332,11 +2344,8 @@ class WPGlobus {
 		wp_localize_script(
 			'wpglobus',
 			'WPGlobus',
-			array(
-				'version'  => WPGLOBUS_VERSION,
-				'language' => WPGlobus::Config()->language,
-				'enabledLanguages'	=> WPGlobus::Config()->enabled_languages
-			)
+			$localize_data
+
 		);
 	}
 
