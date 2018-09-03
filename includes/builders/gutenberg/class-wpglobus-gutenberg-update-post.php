@@ -131,11 +131,13 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			$builder_language = WPGlobus::Config()->builder->get_language();
 			
 			if ( empty($builder_language) ) {
-				$builder_language = WPGlobus::Config()->default_language;
 				/**
-				 * @todo Add handling for incorrect value. Save to log.
+				 * @todo Probably we are working with WP Rest API here. 
+				 * Check  superglobal variable $_SERVER or may be something other.
+				 * May be to set current language in WPGlobus_Builder class.
 				 */
-				// 
+				$builder_language = get_post_meta( $prepared_post->ID, WPGlobus::get_language_meta_key(), true );
+
 			}
 			
 			$fields = array();
