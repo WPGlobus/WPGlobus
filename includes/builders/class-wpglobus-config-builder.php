@@ -80,9 +80,9 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 		 */
 		public function maybe_run($builder = '', $set_run_flag = false) {
 			
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
-				return false;	
-			}
+			//if ( defined('DOING_AJAX') && DOING_AJAX ) {
+				//return false;	
+			//}
 			
 			if ( ! $this->id ) {
 				return false;
