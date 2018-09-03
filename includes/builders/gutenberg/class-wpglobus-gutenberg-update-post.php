@@ -137,6 +137,14 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				 * May be to set current language in WPGlobus_Builder class.
 				 */
 				$builder_language = get_post_meta( $prepared_post->ID, WPGlobus::get_language_meta_key(), true );
+				
+				if ( empty($builder_language) ) {
+					/**
+					 * Case when post is draft and has post_status 'auto-draft'.
+					 */
+					 $builder_language = WPGlobus::Config()->default_language;
+				}
+
 
 			}
 			
@@ -179,9 +187,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				 */
 				 $fields['post_excerpt'] = WPGlobus_Core::text_filter($_post->post_excerpt, $builder_language, WPGlobus::RETURN_EMPTY);
 			}	
-			
-			$_fields = array();
-			
+
 			foreach( $fields as $field=>$value ) { 
 
 				$tr = array();
@@ -189,7 +195,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				foreach ( WPGlobus::Config()->enabled_languages as $lang ) :
 
 					if ( $lang == $builder_language ) {
-					
+
 						$text = $value;
 						if ( WPGlobus_Core::has_translations($value) ) {
 							$text = WPGlobus_Core::text_filter($value, $lang , WPGlobus::RETURN_EMPTY);
@@ -197,17 +203,20 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 						if ( ! empty($text) ) {
 							$tr[$lang] = $text;
 						}
+						
 					} else {
+						
 						$text = WPGlobus_Core::text_filter($_post->$field, $lang , WPGlobus::RETURN_EMPTY);
 						if ( ! empty($text) ) {
 							$tr[$lang] = $text;
 						}
+						
 					}
-
+					
 				endforeach;
 
 				$prepared_post->$field = WPGlobus_Utils::build_multilingual_string($tr);
-				
+	
 			}
 			
 			/**
