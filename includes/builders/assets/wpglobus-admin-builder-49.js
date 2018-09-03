@@ -154,7 +154,7 @@ jQuery(document).ready(function ($) {
 			}
 			console.log('Current language from hidden (#language) : ', lang);
 			
-			var lang = undefined;
+			lang = undefined;
 			if( $('#wpglobus-language').length > 0 ) {
 				lang = $('#wpglobus-language').val();
 			}
@@ -165,7 +165,13 @@ jQuery(document).ready(function ($) {
 				lang = $('input[name="wpglobus-language"]').val();
 			}
 			console.log('Current language from hidden (input[name="wpglobus-language"]) : ', lang);
-			console.log('Builder : ', WPGlobusAdmin.builder);
+			
+			lang = undefined;
+			if( $('input[name="wpglobus_language"]').length > 0 ) {
+				lang = $('input[name="wpglobus_language"]').val();
+			}
+			console.log('Current language from hidden (input[name="wpglobus_language"]) : ', lang);			
+            console.log('Builder : ', WPGlobusAdmin.builder);
 			
 			var content = $('#content').val();
 			if ( content == '' ) {
