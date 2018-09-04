@@ -162,7 +162,15 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			
 			$language = WPGlobus::Config()->default_language;
 		
-			if ( 1 ) {
+			if ( empty($_REQUEST) ) {
+				
+				/**
+				 * @todo Probably we are working with WP Rest API here.
+				 * @see filter__pre_insert_post() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg-update-post.php 
+				 * how to get current language for Gutenberg.
+				 */
+				 
+			} else {
 
 				$_set = false;
 				
@@ -220,7 +228,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				$language = WPGlobus::Config()->default_language;
 				update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language);
 			}
-
+			
 			$this->language = $language;
 			
 		}	
@@ -379,6 +387,13 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			$classes['ui-tabs-active']    = 'ui-tabs-active';
 			$classes['ui-tabs-loading']   = 'ui-tabs-loading';
 			
+			$link_style = array();
+			$link_title = '';
+			if ( 'post-new.php' == $pagenow ) {
+				$link_style['cursor'] = 'cursor:not-allowed';
+				$link_title = esc_html__('Save draft before using extra language.', 'wpglobus');
+			}
+			
 			?>
 			<ul class="wpglobus-post-body-tabs-list">    <?php
 				$order = 0;
@@ -396,16 +411,29 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 					
 					$_classes = $classes;
 					
+					$_link_style = $link_style;
+					
+					if ( 'post-new.php' == $pagenow && $language == WPGLobus::Config()->default_language ) {
+						$_link_style['cursor'] = '';
+					}
+					
 					if ( $language == $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
+					
 					$link = add_query_arg( array_merge( $get_array, array('language'=>$language) ), admin_url($pagenow) );
+					$_link_title = '';
+					if ( 'post-new.php' == $pagenow && $language != WPGLobus::Config()->default_language ) {
+						$link = '#';
+						$_link_title = $link_title;
+					}
 					?>
 					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>" data-language="<?php echo esc_attr( $language ); ?>"
 						data-order="<?php echo esc_attr( $order ); ?>"
 						class="<?php echo implode( ' ', $_classes ); ?>">
 						<!--<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>-->
-						<a href="<?php echo $link; ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
+						<a style="<?php echo implode( ';', $_link_style ); ?>" title="<?php echo $_link_title; ?>"
+							href="<?php echo $link; ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 					</li> <?php
 					$order ++;
 				} ?>
