@@ -137,6 +137,12 @@ class WPGlobus_Admin_Recommendations {
 	 */
 	public static function wpg_plus_slug() {
 
+		global $pagenow;
+
+		if ( 'post-new.php' == $pagenow ) {
+			return;
+		}
+	
 		$container_start = '<p id="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
 		$container_end   = '</p>';
 
