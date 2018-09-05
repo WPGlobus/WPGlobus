@@ -3380,9 +3380,14 @@ class WPGlobus {
 		}
 		
 		$tab_wrapper_class = 'wpglobus-post-body-tabs-list';
-		
-		if ( 'post.php' != $pagenow ) {
-			$tab_wrapper_class .= ' hidden';
+			
+		$link_class = array();
+		$link_style = array();
+		$link_title = '';		
+		if ( 'post-new.php' == $pagenow ) {
+			$link_class[] = 'ui-state-disabled';
+			$link_style['cursor'] = 'cursor:not-allowed';
+			$link_title = esc_html__('Save draft before using extra language.', 'wpglobus');
 		}
 		
 		if (
@@ -3399,11 +3404,24 @@ class WPGlobus {
 			<ul class="<?php echo $tab_wrapper_class; ?>">    <?php
 				$order = 0;
 				foreach ( self::Config()->open_languages as $language ) {
-					$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; ?>
+					$tab_suffix = $language == self::Config()->default_language ? 'default' : $language; 
+					
+					$_link_class = array();
+					$_link_style = array();
+					$_link_title = '';
+					$_onclick = '';
+					if ( 'post-new.php' == $pagenow && $language != WPGLobus::Config()->default_language ) {
+						$_link_class = $link_class;
+						$_link_style = $link_style;
+						$_link_title = $link_title;
+						$_onclick = 'onclick="return false;"';
+					}	?>
 					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>" data-language="<?php echo esc_attr( $language ); ?>"
 					    data-order="<?php echo esc_attr( $order ); ?>"
 					    class="wpglobus-post-tab">
-						<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( self::Config()->en_language_name[ $language ] ); ?></a>
+						<a style="<?php echo implode( ';', $_link_style ); ?>" 
+							title="<?php echo $_link_title; ?>" class="<?php echo implode( ' ', $_link_class ); ?>"  
+							href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( self::Config()->en_language_name[ $language ] ); ?></a>
 					</li> <?php
 					$order ++;
 				} ?>
