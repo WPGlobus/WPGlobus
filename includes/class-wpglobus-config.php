@@ -754,31 +754,23 @@ class WPGlobus_Config {
 		 * Builders.
 		 * @since 1.9.17
 		 */
-		if ( defined('WPGLOBUS_BUILDERS') && WPGLOBUS_BUILDERS ) {
+		require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+		$this->builder = new WPGlobus_Config_Builder();
+	
+		if ( is_admin() ) {
 			
-			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
-			$this->builder = new WPGlobus_Config_Builder();
-			
-			if ( is_admin() ) {
-				
-				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
-				$config_vendor = WPGlobus_Config_Vendor::get_instance();					
-				
-				require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
-				$this->meta = WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
-				
-				require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
-				WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
+			require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
+			$config_vendor = WPGlobus_Config_Vendor::get_instance();					
 
-			}
-
-		} else {
+			require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
+			WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
+			$this->meta = $config_vendor::get_meta_fields();
 			
-			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
-			$this->builder = new WPGlobus_Config_Builder(false);		
-			$this->meta = false;
+			require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
+			WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
 
 		}
+
 		
 		/**
 		 * Remaining wpglobus options after unset() is extended options
