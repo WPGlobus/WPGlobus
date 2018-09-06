@@ -153,6 +153,15 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 		}
 		
 		/**
+		 * Set builder language.
+		 */
+		public function set_language($language = '') {
+			if ( ! empty( $language ) ) {
+				$this->attrs['language'] = $this->language = $language;
+			}
+		}
+		
+		/**
 		 * Get builder language.
 		 */
 		public function get_language($post = '') {
@@ -240,6 +249,8 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 				
 			}
 
+			$this->language = $language;
+			
 			return $language;
 			
 		}

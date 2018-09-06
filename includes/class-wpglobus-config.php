@@ -339,6 +339,15 @@ class WPGlobus_Config {
 			if ( $language_from_url ) {
 				$this->language = $language_from_url;
 			}
+			if ( $this->builder && ! is_admin() ) {
+				/**
+				 * @since 1.9.17
+				 * Set language for builder.
+				 * For compatibility we set language here for front-end only.
+				 * As for the setting in admin @see wpglobus\includes\builders\class-wpglobus-config-builder.php
+				 */
+				$this->builder->set_language($this->language);
+			}			
 		}
 
 	}
