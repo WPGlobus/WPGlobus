@@ -15,11 +15,15 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		
 		protected static $attrs = array();
 		
+		protected static $admin_attrs = array();
+		
 		public static function get($init = true) {
 		
 			if ( defined('DOING_AJAX') && DOING_AJAX ) {
 				//return false;
 			}
+			
+			global $pagenow;
 			
 			self::$attrs = array(
 				'id'			=> false,
@@ -27,12 +31,15 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				'class'   		=> '',
 				'post_type'		=> '',
 				'is_admin' 		=> true,
-				'pagenow' 		=> '',
+				'pagenow' 		=> $pagenow,
 				'builder_page' 	=> false,
 				'doing_ajax' 	=> WPGlobus_WP::is_doing_ajax(),
 				'language'		=> '',
 				'message'		=> '',
-				'ajax_actions'	=> '',
+				'ajax_actions'	=> ''
+			);
+			
+			self::$admin_attrs = array(
 				'multilingualFields' => array('post_title', 'excerpt'),
 				'translatableClass'	 => 'wpglobus-translatable'
 			);
@@ -61,15 +68,15 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 
 				/**
 				 * @since 1.9.17
-				 * @todo WIP.
 				 */
-				/* 
 				$builder = self::is_elementor();
 				if ( $builder ) {
 					return $builder;
 				}
-				// */
-				
+	
+				/**
+				 * @since 1.9.17
+				 */	
 				/*
 				$builder = self::is_siteorigin_panels();
 				if ( $builder ) {
@@ -90,26 +97,10 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 			return self::$attrs;
 
 		}
-	
-		/**
-		 *
-		 */
-		public static function on__update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
-			
-			//error_log(print_r('HERE on__update_metadata : '.$meta_key, true));
-
-			
-			if ( 'panels_data' == $meta_key ) {
-				
-				//error_log(print_r($meta_key, true));
-				//error_log(print_r($this->language, true));
-			}
-			
-			return $check;
-		}
 		
 		/**
-		 * @see https://wordpress.org/plugins/siteorigin-panels/
+		 * Page Builder by SiteOrigin.
+		 * https://wordpress.org/plugins/siteorigin-panels/
 		 */
 		protected static function is_siteorigin_panels() {
 	
@@ -117,33 +108,53 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				return false;
 			}
 			
-			if ( ! is_admin() ) {
-				$_attrs = array(
-					'version' 		=> SITEORIGIN_PANELS_VERSION,
-					'class'   		=> 'WPGlobus_Siteorigin_Panels',
-					'is_admin' 		=> false
-				);
-				$attrs = self::get_attrs($_attrs);
-				return new WPGlobus_Config_Builder('siteorigin_panels', $attrs);				
-			}
-			
 			global $pagenow;
 			
-			if ( 'post.php' == $pagenow ) {
+			$load_elementor = false;
+	
+			if ( version_compare( SITEORIGIN_PANELS_VERSION, '2.8.1', '<=' ) ) {
 				
+				$message = 'Unsupported Page Builder by SiteOrigin version ' . SITEORIGIN_PANELS_VERSION. '.';
+	
 				$_attrs = array(
+					'id' 			=> 'siteorigin_panels',
 					'version' 		=> SITEORIGIN_PANELS_VERSION,
 					'class'   		=> 'WPGlobus_Siteorigin_Panels',
-					'builder_page' 	=> true
+					'is_admin' 		=> false,
+					'builder_page' 	=> false,
+					'message'		=> $message
 				);
 				
-				//if ( in_array( $post_type, $cpt_support ) ) {
-					//$attrs['builder_page'] = true;
-				//}
-			
 				$attrs = self::get_attrs($_attrs);
+
+				return $attrs;	
+	
+			} else {			
 			
-				return new WPGlobus_Config_Builder('siteorigin_panels', $attrs);
+				if ( 'post.php' == $pagenow ) {
+					
+					$_attrs = array(
+						'version' 		=> SITEORIGIN_PANELS_VERSION,
+						'class'   		=> 'WPGlobus_Siteorigin_Panels',
+						'builder_page' 	=> true
+					);
+					
+					//if ( in_array( $post_type, $cpt_support ) ) {
+						//$attrs['builder_page'] = true;
+					//}
+				
+
+					$_attrs = array(
+						'id' 			=> 'siteorigin_panels',
+						'version' 		=> SITEORIGIN_PANELS_VERSION,
+						'class'   		=> 'WPGlobus_Siteorigin_Panels',
+						'is_admin' 		=> false
+					);
+
+					$attrs = self::get_attrs($_attrs);
+					return $attrs;		
+				
+				}
 			
 			}
 			
@@ -152,86 +163,142 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		}
 		
 		/**
-		 * @see https://wordpress.org/plugins/elementor/
+		 * Elementor Page Builder.
+		 * https://wordpress.org/plugins/elementor/
 		 */
 		protected static function is_elementor() {
 			
 			if ( ! defined('ELEMENTOR_VERSION') ) {
 				return false;
 			}
-			
+		
 			global $pagenow;
-			
+
 			$load_elementor = false;
-			
-			if ( in_array($pagenow, array('admin-ajax.php', 'post.php', 'index.php') ) ) {
-			
-				$ajax_actions 	= '';
-				$is_admin 		= true;
+	
+			if ( version_compare( ELEMENTOR_VERSION, '2.2.0', '<=' ) ) {
 				
-				if ( 'admin-ajax.php' == $pagenow ) {
-					
-					if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' != $_REQUEST['action'] ) {
-						return false;
-					}
-					if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
-						$ajax_actions = 'save_builder';
-						$load_elementor = true;
-					} else if ( false !== strpos( $_REQUEST['actions'], '"action":"render_widget"' ) ) {
-						$ajax_actions = 'render_widget';
-						$load_elementor = true;
-					} else {
-						return false;
-						
-					}
-					
-				} else if( 'index.php' == $pagenow ) {
-
-					if ( ! isset( $_GET['elementor-preview'] ) ) {
-						return false;
-					}
-					$load_elementor = true;
-					$is_admin = false;
-					
-				} else {
-					
-					$load_elementor = true;
-					
-				}
-
-				/**
-				 * $cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );
-				 * @see elementor\includes\plugin.php
-				 */
-				$cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );			
-				
-				$post_type = '';
-				if ( isset( $_GET['post'] ) ) {
-					$post_type = self::get_post_type($_GET['post']);
-				}
-				
+				$message = 'Unsupported Elementor version.';
+	
 				$_attrs = array(
 					'id' 			=> 'elementor',
 					'version' 		=> ELEMENTOR_VERSION,
-					'is_admin' 		=> $is_admin,
 					'class'   		=> 'WPGlobus_Elementor',
-					'post_type' 	=> $post_type,
+					'is_admin' 		=> false,
 					'builder_page' 	=> false,
-					'ajax_actions'	=> $ajax_actions
+					'message'		=> $message
 				);
 				
-				if ( in_array( $post_type, $cpt_support ) ) {
-					$_attrs['builder_page'] = true;
-				}
-				
-				if ( $load_elementor ) {
-					$_attrs['builder_page'] = true;
-				}
-				
 				$attrs = self::get_attrs($_attrs);
-			
-				return $attrs;
+
+				return $attrs;	
+	
+			} else {
 				
+				if ( in_array($pagenow, array('admin-ajax.php', 'post.php', 'index.php', 'post-new.php') ) ) {
+					
+					/**
+					 * Init current post type.
+					 */
+					$post_type = '';
+				
+					$ajax_actions 	= '';
+					$is_admin 		= true;
+					
+					if ( 'admin-ajax.php' == $pagenow ) {
+						
+						if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' != $_REQUEST['action'] ) {
+							return false;
+						}
+						if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
+							$ajax_actions = 'save_builder';
+							$load_elementor = true;
+						} else if ( false !== strpos( $_REQUEST['actions'], '"action":"render_widget"' ) ) {
+							$ajax_actions = 'render_widget';
+							$load_elementor = true;
+						} else {
+							return false;
+							
+						}
+						
+					} else if( 'index.php' == $pagenow ) {
+
+						if ( ! isset( $_GET['elementor-preview'] ) ) {
+							//return false;
+						}
+						$load_elementor = true;
+						$is_admin = false;
+						
+					} else if( 'post.php' == $pagenow ) {
+
+						$is_admin = true;
+						if ( isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
+							$is_admin = false;
+							$load_elementor = true;
+						}
+					
+						/**
+						 * $cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );
+						 * @see elementor\includes\plugin.php
+						 */
+						$cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );			
+
+						if ( isset( $_GET['post_type'] ) ) {
+							/**
+							 * For post-new.php page.
+							 */
+							$post_type = sanitize_text_field( $_GET['post_type'] );
+						}				
+			
+						if ( empty( $post_type ) ) {
+							if( isset( $_GET['post'] ) ) {
+								$post_type = self::get_post_type($_GET['post']); // WPCS: input var ok, sanitization ok.
+							} else if ( isset($_REQUEST['post_ID']) ) {
+								$post_type = self::get_post_type($_REQUEST['post_ID']); // WPCS: input var ok, sanitization ok.
+							}
+						}
+
+						if ( empty( $post_type ) ) {  
+							/**
+							 * Post type by default.
+							 * If we can not define post type then we don't set it to default value.
+							 * Because it may cause incorrect behavior later.
+							 */
+							//$post_type = 'post';
+						}
+
+						if ( in_array( $post_type, $cpt_support ) ) {
+							$load_elementor = true;
+						}
+
+					} else {
+						/**
+						 * @todo may be use @see is_built_with_elementor() in elementor\core\base\document.php
+						 */
+						$load_elementor = true;
+					}
+		
+					$_attrs = array(
+						'id' 			=> 'elementor',
+						'version' 		=> ELEMENTOR_VERSION,
+						'is_admin' 		=> $is_admin,
+						'class'   		=> 'WPGlobus_Elementor',
+						'post_type' 	=> $post_type,
+						'builder_page' 	=> false,
+						'ajax_actions'	=> $ajax_actions
+					);
+					
+					if ( $load_elementor ) {
+						$_attrs['builder_page'] = true;
+					} else {
+						$_attrs['builder_page'] = false;
+					}
+					
+					$attrs = self::get_attrs($_attrs);
+
+					return $attrs;
+					
+				}
 			}
 			
 			return false;
@@ -239,8 +306,8 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		}
 		
 		/**
-		 * @see WPBakery Page Builder.
-		 * @since 1.9.17
+		 * WPBakery Page Builder.
+		 * https://wpbakery.com/
 		 */
 		protected static function is_js_composer() {
 			
@@ -340,7 +407,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				);
 				
 				$attrs = self::get_attrs($_attrs);
-			
+				
 				return $attrs;
 				
 			}
@@ -349,7 +416,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		}
 		
 		/**
-		 * Check for gutenberg.
+		 * Gutenberg.
 		 * @since 1.9.17
 		 */		
 		protected static function is_gutenberg() {
@@ -539,8 +606,14 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		/**
 		 * Get attributes.
 		 */
-		protected static function get_attrs($_attrs) {
-			return array_merge( self::$attrs, $_attrs );
+		protected static function get_attrs($attrs) {
+			$_attrs = array_merge( self::$attrs, $attrs );
+			if ( isset($_attrs['is_admin']) && ! $_attrs['is_admin'] ) {
+				// do nothing.
+			} else {
+				$_attrs = array_merge( $_attrs, self::$admin_attrs );
+			}
+			return $_attrs;
 		}
 
 		/**
