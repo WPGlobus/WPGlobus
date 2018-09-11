@@ -18,7 +18,12 @@ if ( ! class_exists( 'WPGlobus_Update_Post' ) ) :
 		 * Constructor.
 		 */
 		public function __construct() {
-			
+
+			/**
+			 * @see wpglobus\includes\class-wpglobus.php
+			 */
+			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10, 2 );
+		
 			/**
 			 * @todo incorrect the saving post in extra languages with priority = 10
 			 */
