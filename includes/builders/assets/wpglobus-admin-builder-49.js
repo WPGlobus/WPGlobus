@@ -264,7 +264,20 @@ jQuery(document).ready(function ($) {
 			//setTimeout(api.setMultilingualFields(), 1000);
 			api.setMultilingualFields();
 			
+			/**
+			 *
+			 */
+			//api.ajaxPrefilter();
 
+		},
+		ajaxPrefilter: function() {
+			/**
+			 * @todo WIP.
+			 */
+			$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+				// Modify options, control originalOptions, store jqXHR, etc
+				//console.log(options);
+			});		
 		},
 		setMultilingualFields: function() {
 			$.each(WPGlobusAdmin.builder.multilingualFields, function(indx, field) {	
