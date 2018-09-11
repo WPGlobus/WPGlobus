@@ -79,8 +79,6 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		 */
 		public static function get_config_files() {
 			
-			//$dir = WPGlobus::$PLUGIN_DIR_PATH . self::PLUGIN_CONFIG_FILES;
-			
 			$config_plugin_dir = WPGlobus::$PLUGIN_DIR_PATH . self::PLUGIN_CONFIG_DIR;
 
 			/**
@@ -108,7 +106,15 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			if ( defined('AIOSEOP_VERSION') )  {
 				self::$vendors[] = 'all-in-one-seo-pack.json';
 			}
-		
+	
+			/**
+			 * Elementor.
+			 * https://wordpress.org/plugins/elementor/
+			 */
+			if ( defined('ELEMENTOR_VERSION') )  {
+				self::$vendors[] = 'elementor.json';
+			}
+	
 			foreach( self::$vendors as $file ) {
 				
 				if ( is_readable( $config_plugin_dir . $file ) ) {

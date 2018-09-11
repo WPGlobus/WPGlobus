@@ -112,7 +112,13 @@ class WPGlobus_YoastSEO {
 			 */
 			add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), PHP_INT_MAX );
 			add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), PHP_INT_MAX );
-			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 0, 4 );
+			
+			/**
+			 * @todo check for '_yoast_wpseo_title' meta
+			 * @see <title> view-source:http://www.dev-wpg.com/test-post-seo/
+			 * @see <title> view-source:http://www.dev-wpg.com/ru/test-post-seo/
+			 */
+			//add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 0, 4 );
 			
 			/**
 			 * Filter meta keywords.
