@@ -319,21 +319,31 @@ class WPGlobus {
 		 * @since 1.9.17
 		 */
 		if ( 'gutenberg' == WPGlobus::Config()->builder->get_id() ) {
+			
 			require_once dirname( __FILE__ ).'/builders/gutenberg/class-wpglobus-gutenberg-update-post.php';
 			new WPGlobus_Gutenberg_Update_Post();
+		
 		} else {
-			$id = WPGlobus::Config()->builder->get_id();
-			if ( 'yoast_seo' == $id ) {
-				/**
-				 * @todo Temporarily using 'js_composer' instead of 'yoast_seo'.
-				 */
-				$id = 'js_composer';
+			
+			if ( WPGlobus::Config()->builder->is_builder_page() ) {
+
+				$id = WPGlobus::Config()->builder->get_id();
+				
+				if ( 'yoast_seo' == $id ) {
+					/**
+					 * @todo Temporarily using 'js_composer' instead of 'yoast_seo'.
+					 */
+					$id = 'js_composer';
+				}
+				
+				$_file = dirname( __FILE__ ).'/builders/'.$id.'/class-wpglobus-'.$id.'-update-post.php';
+				if ( file_exists( $_file ) ) {
+					require_once( $_file );
+					new WPGlobus_Update_Post();
+				}
+				
 			}
-			$_file = dirname( __FILE__ ).'/builders/'.$id.'/class-wpglobus-'.$id.'-update-post.php';
-			if ( file_exists( $_file ) ) {
-				require_once( $_file );
-				new WPGlobus_Update_Post();
-			}
+			
 		}
 		
 		/**
