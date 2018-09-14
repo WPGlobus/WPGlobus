@@ -339,14 +339,21 @@ class WPGlobus_Config {
 			if ( $language_from_url ) {
 				$this->language = $language_from_url;
 			}
+			/**
+			 * @since 1.9.17
+			 * Set language for builder.
+			 * For compatibility we set language here for front-end only.
+			 * As for the setting in admin @see wpglobus\includes\builders\class-wpglobus-config-builder.php
+			 */
 			if ( $this->builder && ! is_admin() ) {
 				/**
-				 * @since 1.9.17
-				 * Set language for builder.
-				 * For compatibility we set language here for front-end only.
-				 * As for the setting in admin @see wpglobus\includes\builders\class-wpglobus-config-builder.php
+				 * We can work with Gutenberg that was defined as front-end but we should set 'language' for real front-end without builder.
+				 * Any builder may have behavior like Gutenberg.
+				 * @todo check each builder that WPGlobus will be support.
 				 */
-				$this->builder->set_language($this->language);
+				if ( ! $this->builder->is_builder_page() ) {
+					$this->builder->set_language($this->language);
+				}	
 			}			
 		}
 
