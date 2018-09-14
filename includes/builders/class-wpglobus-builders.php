@@ -76,6 +76,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 	
 				/**
 				 * @since 1.9.17
+				 * @todo WIP
 				 */	
 				/*
 				$builder = self::is_siteorigin_panels();
@@ -109,8 +110,6 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 			}
 			
 			global $pagenow;
-			
-			$load_elementor = false;
 	
 			if ( version_compare( SITEORIGIN_PANELS_VERSION, '2.8.1', '<=' ) ) {
 				
@@ -129,31 +128,73 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 
 				return $attrs;	
 	
-			} else {			
-			
-				if ( 'post.php' == $pagenow ) {
-					
-					$_attrs = array(
-						'version' 		=> SITEORIGIN_PANELS_VERSION,
-						'class'   		=> 'WPGlobus_Siteorigin_Panels',
-						'builder_page' 	=> true
-					);
-					
-					//if ( in_array( $post_type, $cpt_support ) ) {
-						//$attrs['builder_page'] = true;
-					//}
+			} else {
 				
+				/**
+				 * Init current post type.
+				 */
+				$post_type = '';
+			
+				$ajax_actions 	= '';
+				$is_admin 		= false;
+				$load_builder	= false;	
 
+				if ( is_admin() ) {
+					
+					$is_admin 		= true;
+					$load_builder 	= false;
+					
+					if ( 'post.php' == $pagenow ) {
+						
+						$opts = get_option('siteorigin_panels_settings');		
+						
+						$cpt_support = array('page', 'post');
+						if ( ! empty( $opts['post-types'] ) ) {
+							$cpt_support = $opts['post-types'];
+						}
+						
+						if( isset( $_GET['post'] ) ) {
+							$post_type = self::get_post_type($_GET['post']); // WPCS: input var ok, sanitization ok.
+						} else if ( isset($_REQUEST['post_ID']) ) {
+							/**
+							 * Case when Update button was clicked.
+							 */
+							$post_type = self::get_post_type($_REQUEST['post_ID']); // WPCS: input var ok, sanitization ok.
+						}
+					
+						if ( in_array( $post_type, $cpt_support ) ) {
+							$load_builder = true;
+						}
+						
+						$_attrs = array(
+							'id' 			=> 'siteorigin_panels',
+							'version' 		=> SITEORIGIN_PANELS_VERSION,
+							'class'   		=> 'WPGlobus_Siteorigin_Panels',
+							'is_admin' 		=> $is_admin
+						);
+
+						if ( $load_builder ) {
+							$_attrs['builder_page'] = true;
+						} else {
+							$_attrs['builder_page'] = false;
+						}
+						$attrs = self::get_attrs($_attrs);
+						return $attrs;		
+					
+					}
+					
+				} else {
+					
 					$_attrs = array(
 						'id' 			=> 'siteorigin_panels',
 						'version' 		=> SITEORIGIN_PANELS_VERSION,
 						'class'   		=> 'WPGlobus_Siteorigin_Panels',
-						'is_admin' 		=> false
+						'is_admin' 		=> false,
+						'builder_page'	=> true
 					);
 
-					$attrs = self::get_attrs($_attrs);
-					return $attrs;		
-				
+					return self::get_attrs($_attrs);
+					
 				}
 			
 			}
@@ -456,6 +497,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 							if ( ! is_admin() ) {
 								/**
 								 * Gutenberg updates post as from front.
+								 * @see $_SERVER['REQUEST_URI']
 								 */
 								$actions = array('edit');
 								if ( false !== strpos($_SERVER['REQUEST_URI'], 'wp/v2/posts') ) {
@@ -620,7 +662,6 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 		 * Get post type.
 		 */		
 		protected static function get_post_type( $id = '' ) {
-			
 			if ( 0 == (int) $id ) {
 				return null;
 			}
