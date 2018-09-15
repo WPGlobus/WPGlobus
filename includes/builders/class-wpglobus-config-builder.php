@@ -230,8 +230,8 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 						$language = sanitize_text_field($_REQUEST['language']);
 					}
 					
-					if ( isset( $_REQUEST['wpglobus-language'] ) ) { // WPCS: input var ok, sanitization ok.
-						$language = sanitize_text_field($_REQUEST['wpglobus-language']);
+					if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) { // WPCS: input var ok, sanitization ok.
+						$language = sanitize_text_field($_REQUEST[ WPGlobus::get_language_meta_key() ]);
 					}
 					
 				}
@@ -266,6 +266,10 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 				 * - new post, post-new.php page;
 				 */
 				$language = $this->default_language;
+				/**
+				 * @todo test point if was incorrect setting of $language.
+				 */
+
 			}
 
 			$this->language = $language;
