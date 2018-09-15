@@ -30,6 +30,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 				'version' 		=> '',
 				'class'   		=> '',
 				'post_type'		=> '',
+				'post_id'		=> '',
 				'is_admin' 		=> true,
 				'pagenow' 		=> $pagenow,
 				'builder_page' 	=> false,
@@ -242,6 +243,11 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 					 * Init current post type.
 					 */
 					$post_type = '';
+					
+					/**
+					 * Init post ID.
+					 */					
+					$post_id = '';
 				
 					$ajax_actions 	= '';
 					$is_admin 		= true;
@@ -253,28 +259,31 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 						}
 						if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
 							$ajax_actions = 'save_builder';
-							$load_elementor = true;
 						} else if ( false !== strpos( $_REQUEST['actions'], '"action":"render_widget"' ) ) {
 							$ajax_actions = 'render_widget';
-							$load_elementor = true;
 						} else {
 							return false;
-							
 						}
+						$load_elementor = true;
+						$post_id = sanitize_text_field( $_REQUEST['editor_post_id'] );
 						
 					} else if( 'index.php' == $pagenow ) {
 
+						/**
+						 * @todo remove after testing.
 						if ( ! isset( $_GET['elementor-preview'] ) ) {
-							//return false;
+							return false;
 						}
-						$load_elementor = true;
+						// */
+						
+						$load_elementor = false;
 						$is_admin = false;
 						
 					} else if( 'post.php' == $pagenow ) {
 
 						$is_admin = true;
 						if ( isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
-							$is_admin = false;
+							//$is_admin = false;
 							$load_elementor = true;
 						}
 					
@@ -325,6 +334,7 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 						'is_admin' 		=> $is_admin,
 						'class'   		=> 'WPGlobus_Elementor',
 						'post_type' 	=> $post_type,
+						'post_id' 		=> $post_id,
 						'builder_page' 	=> false,
 						'ajax_actions'	=> $ajax_actions
 					);
