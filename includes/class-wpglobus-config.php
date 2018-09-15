@@ -771,7 +771,7 @@ class WPGlobus_Config {
 		 * @since 1.9.17
 		 */
 		require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
-		$this->builder = new WPGlobus_Config_Builder();
+		$this->builder = new WPGlobus_Config_Builder(true, array('default_language' => $this->default_language));
 	
 		if ( is_admin() ) {
 			
@@ -786,7 +786,6 @@ class WPGlobus_Config {
 			WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
 
 		}
-
 		
 		/**
 		 * Remaining wpglobus options after unset() is extended options
