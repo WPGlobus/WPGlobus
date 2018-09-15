@@ -142,13 +142,18 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 					/**
 					 * scope front.
 					 */
-	
+					
 					if ( isset( $meta_cache[ $meta_key ] ) && isset( $meta_cache[ $meta_key ][0] ) ) {
 
 						$_value = '';
 						
 						if ( WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
 							//$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
+							/**
+							 * We can get current language from WPGlobus::Config().
+							 */
+							//$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->language );
+							
 							$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language() );
 						} else {
 							$_value = $meta_cache[ $meta_key ][0];
