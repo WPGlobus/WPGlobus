@@ -612,6 +612,8 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 	
 				if ( 'post.php' == $pagenow ) {	
 				
+					$wpseo_titles = get_option('wpseo_titles');
+				
 					$post_type = '';
 					if ( ! empty( $_GET['post'] ) ) {
 						$post_type = self::get_post_type($_GET['post']);
@@ -639,12 +641,19 @@ if ( ! class_exists('WPGlobus_Builders') ) :
 						 * @since 1.9.17 detect builder page using $pagenow.
 						 */
 						$_attrs['builder_page'] = true;
-					} else if ( in_array( $post_type, array('post', 'page') ) ) {
-						$_attrs['builder_page'] = true;
+					} else {
+						
+						if ( isset($wpseo_titles['display-metabox-pt-'.$post_type]) && (int) $wpseo_titles['display-metabox-pt-'.$post_type] == 0 ) {
+							$_attrs['builder_page'] = false;
+						} else {
+							$_attrs['builder_page'] = true;
+						}
+						
+						
 					}
 					
 					$attrs = self::get_attrs($_attrs);
-					
+
 					return $attrs;
 						
 				}
