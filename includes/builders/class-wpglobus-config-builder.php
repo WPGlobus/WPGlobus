@@ -254,6 +254,12 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 				
 			}
 
+			if ( ! $language ) {
+				if ( $this->get_post_id() ) {
+					$language = get_post_meta( $this->get_post_id(), $this->get_language_meta_key(), true);
+				}
+			}
+			
 			if ( ! $language && ! empty($this->default_language) ) {
 				/**
 				 * Possible options when the language is not defined:
@@ -261,7 +267,7 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 				 */
 				$language = $this->default_language;
 			}
-			
+
 			$this->language = $language;
 			
 			return $language;
