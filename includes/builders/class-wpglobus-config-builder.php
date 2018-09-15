@@ -313,6 +313,16 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 		}
 
 		/**
+		 * Get post ID. 
+		 */		
+		public function get_post_id() {
+			if ( isset($this->attrs['post_id']) && (int) $this->attrs['post_id'] > 0 ) {
+				return $this->attrs['post_id'];
+			}
+			return false;
+		}		
+		
+		/**
 		 * Get builder class. 
 		 */		
 		public function get_class() {
