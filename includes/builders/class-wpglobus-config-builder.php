@@ -175,7 +175,11 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 			}
 		
 			if ( ! $this->is_builder_page() ) {
-				return false;
+				/**
+				 * @todo may be need to check the coincidence value of $this->language with value of WPGlobus::Config()->language.
+				 * @see Set language for builder in wpglobus\includes\class-wpglobus-config.php 
+				 */
+				return $this->language;
 			}
 			
 			if ( $this->language ) {
