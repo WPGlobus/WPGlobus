@@ -151,6 +151,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 							//$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
 							/**
 							 * We can get current language from WPGlobus::Config().
+							 * @todo just for testing purposes.
 							 */
 							//$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->language );
 							
