@@ -318,28 +318,31 @@ class WPGlobus {
 		/**
 		 * @since 1.9.17
 		 */
-		if ( 'gutenberg' == WPGlobus::Config()->builder->get_id() ) {
+		if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
 			
-			require_once dirname( __FILE__ ).'/builders/gutenberg/class-wpglobus-gutenberg-update-post.php';
-			new WPGlobus_Gutenberg_Update_Post();
-		
-		} else {
+			if ( 'gutenberg' == WPGlobus::Config()->builder->get_id() ) {
+				
+				require_once dirname( __FILE__ ).'/builders/gutenberg/class-wpglobus-gutenberg-update-post.php';
+				new WPGlobus_Gutenberg_Update_Post();
 			
-			if ( WPGlobus::Config()->builder->is_builder_page() ) {
+			} else {
+				
+				if ( WPGlobus::Config()->builder->is_builder_page() ) {
 
-				$id = WPGlobus::Config()->builder->get_id();
-				
-				if ( 'yoast_seo' == $id ) {
-					/**
-					 * @todo Temporarily using 'js_composer' instead of 'yoast_seo'.
-					 */
-					$id = 'js_composer';
-				}
-				
-				$_file = dirname( __FILE__ ).'/builders/'.$id.'/class-wpglobus-'.$id.'-update-post.php';
-				if ( file_exists( $_file ) ) {
-					require_once( $_file );
-					new WPGlobus_Update_Post();
+					$id = WPGlobus::Config()->builder->get_id();
+					
+					if ( 'yoast_seo' == $id ) {
+						/**
+						 * @todo Temporarily using 'js_composer' instead of 'yoast_seo'.
+						 */
+						$id = 'js_composer';
+					}
+					$_file = dirname( __FILE__ ).'/builders/'.$id.'/class-wpglobus-'.$id.'-update-post.php';
+					if ( file_exists( $_file ) ) {
+						require_once( $_file );
+						new WPGlobus_Update_Post();
+					}
+					
 				}
 				
 			}
@@ -3146,7 +3149,7 @@ class WPGlobus {
 	}
 
 	/**
-	 * Surround text with language tags
+	 * Surround text with language tags.
 	 *
 	 * @param string $text
 	 * @param string $language
@@ -3154,6 +3157,13 @@ class WPGlobus {
 	 * @return string
 	 */
 	public static function add_locale_marks( $text, $language ) {
+		/**
+		 * @since 1.9.17
+		 * Add marks for string only.
+		 */
+		if ( ! is_string($text) ) {
+			return $text;
+		}
 		return sprintf( WPGlobus::LOCALE_TAG, $language, $text );
 	}
 
