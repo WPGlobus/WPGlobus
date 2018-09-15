@@ -35,7 +35,11 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 		/**
 		 * Constructor.
 		 */
-		public function __construct($init = true) {
+		public function __construct($init = true, $init_attrs = array()) {
+			
+			if ( isset( $init_attrs['default_language'] ) ) {
+				$this->default_language = $init_attrs['default_language'];
+			}
 			
 			if ( $init ) {
 
@@ -200,14 +204,11 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 			if ( $_id ) {
 				$language = get_post_meta( $_id, $this->get_language_meta_key(), true );
 			}
-
-			/**
-			 *
-			 */
+			
 			if ( ! $language ) {
 				
 				if ( empty($_REQUEST) ) {
-
+				
 					if ( empty($_SERVER['HTTP_REFERER']) )  {
 						/**
 						 * @todo front-end? check it.
@@ -249,6 +250,14 @@ if ( ! class_exists('WPGlobus_Config_Builder') ) :
 				
 			}
 
+			if ( ! $language && ! empty($this->default_language) ) {
+				/**
+				 * Possible options when the language is not defined:
+				 * - new post, post-new.php page;
+				 */
+				$language = $this->default_language;
+			}
+			
 			$this->language = $language;
 			
 			return $language;

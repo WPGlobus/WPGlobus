@@ -159,7 +159,45 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			if( ! is_null($this->language) ) {
 				return;
 			}
+
+			/**
+			 * Don't duplicate the defining of current language.
+			 * Let's just get it from WPGlobus::Config()->builder.
+			 */
+			$this->language = WPGlobus::Config()->builder->get_language();
 			
+			if ( ! $this->language ) {
+				/**
+				 * Language was not set in WPGlobus_Config_Builder class.
+				 */
+			}
+			
+			$post_id = '';
+			if ( empty($_REQUEST['post']) ) {
+				
+				/**
+				 * @todo add doc
+				 */
+
+			} else {
+				if ( ! empty($_REQUEST['post']) ) {
+					$post_id = $_REQUEST['post'];
+				} else if( ! empty($_REQUEST['id']) ) {
+					$post_id = $_REQUEST['id'];
+				} else if( ! empty($_REQUEST['post_ID']) ) {
+					$post_id = $_REQUEST['post_ID'];
+				}
+			}
+			
+			if ( ! empty($post_id) && ! is_null($this->language) ) {
+				update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $this->language);
+			}
+			
+			return;
+
+			/**
+			 * @todo remove code after testing.
+			 */
 			$language = WPGlobus::Config()->default_language;
 		
 			if ( empty($_REQUEST) ) {
@@ -224,7 +262,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				
 			} // endif;
 			
-			if ( ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
+			if ( ! is_null($language) && ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
 				$language = WPGlobus::Config()->default_language;
 				update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language);
 			}
@@ -232,142 +270,6 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			$this->language = $language;
 			
 		}	
-		
-		/**
-		 * @todo remove it.
-		 */
-		public function filter__save_post_data( $data, $postarr ) {
-			
-			if ( (int) $postarr['ID'] == 0 ) {
-				return $data;
-			}
-		
-			if ( 'revision' == $postarr['post_type'] ) {
-				/**
-				 * Don't work with revisions
-				 * note: revision there are 2 types, its have some differences
-				 *        - [post_name] => {post_id}-autosave-v1    and [post_name] => {post_id}-revision-v1
-				 *        autosave         : when [post_name] == {post_id}-autosave-v1  $postarr has [post_content] and [post_title] in default_language
-				 *        regular revision : [post_name] == {post_id}-revision-v1 $postarr has [post_content] and [post_title] in all enabled languages with delimiters
-				 * @see https://codex.wordpress.org/Revision_Management
-				 * see $postarr for more info
-				 */
-				return $data;
-			}
-
-			if ( 'auto-draft' == $postarr['post_status'] ) {
-				/**
-				 * Auto draft was automatically created with no data.
-				 */
-				return $data;
-			}
-
-			/*
-			if ( $this->disabled_entity( $data['post_type'] ) ) {
-				return $data;
-			} */
-
-			/** @global string $pagenow */
-			//global $pagenow;
-
-			/**
-			 * Now we save post content and post title for all enabled languages for post.php, post-new.php
-			 * @todo Check also 'admin-ajax.php', 'nav-menus.php', etc.
-			 */
-			 /*
-			$enabled_pages[] = 'post.php';
-			$enabled_pages[] = 'post-new.php';
-
-			if ( ! in_array( $pagenow, $enabled_pages ) ) {
-				return $data;
-			}
-
-			// @todo check work with trash. !!!!!!
-			if ( 'trash' === $postarr['post_status'] ) {
-				//return $data;
-			}
-			// */
-			
-			if ( isset( $_GET['action'] ) && 'untrash' === $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
-				/**
-				 * Don't work with untrash.
-				 */
-				return $data;
-			}
-		
-			global $wpdb;
-			
-			/**
-			 * Get previous post data.
-			 */
-			$_post = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID = %d LIMIT 1", $postarr['ID'] ) );
-			
-			/**
-			 * Get new post data.
-			 */
-			$fields = array(
-				'post_title' 	=> trim($postarr['post_title']),
-				'post_content' 	=> trim($postarr['post_content']),
-				'post_excerpt' 	=> trim($postarr['post_excerpt'])
-			);
-
-			foreach( $fields as $field=>$new_value ) { 
-				
-				$new_value = trim( $new_value );
-				
-				$_new_text = array();
-
-				foreach ( WPGlobus::Config()->enabled_languages as $lang ) {
-					
-					if ( $lang == $this->get_current_language() ) {
-						
-						//*
-						$text = $new_value;
-						if ( WPGlobus_Core::has_translations($new_value) ) {
-							/**
-							 * $new_value may have string with language marks, e.g. Gutenberg.
-							 */
-							$text = WPGlobus_Core::text_filter($new_value, $lang , WPGlobus::RETURN_EMPTY);
-						}
-						if ( ! empty($text) ) {
-							$_new_text[$lang] = $text;
-						} 
-						// */
-						
-						/**
-						if ( ! empty($new_value) ) {
-							$_new_text[$lang] = $new_value;
-						}	*/					
-						
-					} else {
-						
-						/*
-						//$text = WPGlobus_Core::text_filter($_post->$field, $lang , WPGlobus::RETURN_EMPTY);
-						$text = WPGlobus_Core::text_filter($new_value, $lang , WPGlobus::RETURN_EMPTY);
-						if ( ! empty($text) ) {
-							$_text[$lang] = $text;
-						} // */
-						
-						/**
-						 * Just get text for not current language.
-						 */
-						$text = WPGlobus_Core::text_filter($_post->$field, $lang , WPGlobus::RETURN_EMPTY);
-						if ( ! empty($text) ) {
-							$_new_text[$lang] = $text;
-						}				
-					}
-					
-
-				}
-
-				$data[$field] = WPGlobus_Utils::build_multilingual_string($_new_text);
-			
-			}
-			
-			//$data = apply_filters( 'wpglobus_save_post_data', $data, $postarr, $devmode );
-			
-			return $data;
-		}		
 		
 		/**
 		 * Show language tabs on post.php page.
