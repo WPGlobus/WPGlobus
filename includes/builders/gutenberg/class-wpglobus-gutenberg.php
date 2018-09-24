@@ -51,7 +51,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 */
 	public function translate_post( $object ) {
 		if ( $object instanceof WP_Post ) {
-			$object = WPGlobus_Core::translate_wp_post( $object, $this->language, WPGlobus::RETURN_EMPTY );
+			WPGlobus_Core::translate_wp_post( $object, $this->language, WPGlobus::RETURN_EMPTY );
 		}
 	}
 
