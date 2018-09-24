@@ -56,15 +56,6 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	}
 
 	/**
-	 * Path to languages folder.
-	 *
-	 * @return string
-	 */
-	public function languages_path() {
-		return self::$PLUGIN_DIR_PATH . 'languages';
-	}
-
-	/**
 	 * Generate box with language switcher.
 	 *
 	 * @since 2.0
