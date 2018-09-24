@@ -94,7 +94,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$_box_style .= 'margin-top:3px;';
 		}
 
-		if ( 'post-new.php' == $page ) {
+		if ( 'post-new.php' === $page ) {
 
 			ob_start();
 			?>
@@ -124,7 +124,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$out = ob_get_contents();
 			ob_end_clean();
 
-		} elseif ( 'post.php' == $page ) {
+		} elseif ( 'post.php' === $page ) {
 
 			ob_start();
 			?>
@@ -147,7 +147,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				<ul class="wpglobus-gutenberg-selector-dropdown"
 						style="display:none;position:fixed;width:80px;border-left:1px solid #ddd;border-right:1px solid #ddd;background-color:#eee;margin:5px 0 0;list-style-type:none;">
 					<?php foreach ( WPGlobus::Config()->enabled_languages as $lang ) : ?>
-						<?php if ( $lang == $this->language ) {
+						<?php if ( $lang === $this->language ) {
 							continue;
 						} ?>
 						<li class="item"
@@ -186,7 +186,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		global $pagenow;
 
-		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) ) {
+		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
 			return;
 		}
 
