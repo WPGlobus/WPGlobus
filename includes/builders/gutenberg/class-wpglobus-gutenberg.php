@@ -75,9 +75,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		}
 		$query = implode( '&', $query_string );
 		$url   = admin_url(
-			add_query_arg( array(
-				'language' => '{{language}}',
-			),
+			add_query_arg(
+				array(
+					'language' => '{{language}}',
+				),
 				'post.php?' . $query
 			)
 		);
@@ -108,7 +109,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							href="#" class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
 						<img <?php echo $_height . $_width; ?>
 							<?php echo $_flag_style; ?>
-								src="<?php echo $_flag_img ?>"/>
+								src="<?php echo $_flag_img; ?>"/>
 					</a>
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
@@ -139,7 +140,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
 						<img <?php echo $_height . $_width; ?>
 							<?php echo $_flag_style; ?>
-								src="<?php echo $_flag_img ?>"/>
+								src="<?php echo $_flag_img; ?>"/>
 					</a>
 					<a style="text-decoration: none;"
 							href="<?php echo str_replace( '{{language}}', $this->language, $url ); ?>"
@@ -150,9 +151,11 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				<ul class="wpglobus-gutenberg-selector-dropdown"
 						style="display:none;position:fixed;width:80px;border-left:1px solid #ddd;border-right:1px solid #ddd;background-color:#eee;margin:5px 0 0;list-style-type:none;">
 					<?php foreach ( WPGlobus::Config()->enabled_languages as $lang ) : ?>
-						<?php if ( $lang === $this->language ) {
+						<?php
+						if ( $lang === $this->language ) {
 							continue;
-						} ?>
+						}
+						?>
 						<li class="item"
 								style="text-align:left;cursor:pointer;border-bottom:1px solid #ddd;margin:0;height:25px;padding:5px 0 5px 5px;"
 								data-language="<?php echo $lang; ?>">
@@ -206,7 +209,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		wp_register_script(
 			'wpglobus-gutenberg',
-			WPGlobus::plugin_dir_url() . "includes/builders/gutenberg/assets/js/wpglobus-gutenberg" . WPGlobus::SCRIPT_SUFFIX() . ".js",
+			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 			array( 'jquery' ),
 			WPGLOBUS_VERSION,
 			true
