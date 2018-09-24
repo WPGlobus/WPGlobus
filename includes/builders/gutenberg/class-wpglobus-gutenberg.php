@@ -90,7 +90,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$_height     = '';
 			$_width      = '';
 			$_flag_style = 'style="margin-top:5px;"';
-			$_box_style  .= 'margin-top:3px;';
+
+			$_box_style .= 'margin-top:3px;';
 		}
 
 		if ( 'post-new.php' == $page ) {
