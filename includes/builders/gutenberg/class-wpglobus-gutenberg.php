@@ -48,6 +48,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 	/**
 	 * Translate post.
+	 *
+	 * @param WP_Post $object
 	 */
 	public function translate_post( $object ) {
 		if ( $object instanceof WP_Post ) {
@@ -58,7 +60,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	/**
 	 * Generate box with language switcher.
 	 *
-	 * @since 2.0
+	 * @param string $page
+	 *
 	 * @return string
 	 */
 	private function get_switcher_box( $page ) {
@@ -172,6 +175,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 	/**
 	 * Callback for 'wpglobus_seo_meta_box_title'.
+	 *
+	 * @param string $meta_box_title
+	 *
+	 * @return string
 	 */
 	public function filter__seo_meta_box_title( $meta_box_title ) {
 		return $meta_box_title . ' for ' . WPGlobus::Config()->en_language_name[ $this->get_current_language() ];
@@ -184,6 +191,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 */
 	public function on__enqueue_scripts() {
 
+		/** @global string $pagenow */
 		global $pagenow;
 
 		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
