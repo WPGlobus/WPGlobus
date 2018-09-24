@@ -107,14 +107,14 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			?>
 			<div style="<?php echo $_box_style; ?>" class="wpglobus-gutenberg-selector-box">
 				<div style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
-					<a style="text-decoration:none;cursor:text;" onclick="return false; 
-						href="#" style="" class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
+					<a style="text-decoration:none;cursor:text;" onclick="return false;"
+						href="#" class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
 						<img <?php echo $_height . $_width; ?>  
 							<?php echo $_flag_style; ?>  
 							src="<?php echo $_flag_img ?>" />
 					</a>
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
-						href="#" style="" class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
+						href="#" class="wpglobus-gutenberg-selector" data-language="<?php echo $this->language; ?>">
 					&nbsp;<span><?php echo WPGlobus::Config()->en_language_name[$this->language]; ?></span>
 					</a>
 				</div>
