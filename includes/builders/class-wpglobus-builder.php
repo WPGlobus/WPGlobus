@@ -135,7 +135,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * @see on_add_devmode_switcher() in wpglobus\includes\class-wpglobus.php
 			 * @todo may be add special function to get hidden language field.
 			 */
-			return '<input type="hidden" id="'.WPGlobus::get_language_meta_key().'" name="'.WPGlobus::get_language_meta_key().'" value="'.$this->get_current_language().'" />';
+			return '<input type="hidden" id="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" name="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" value="' . esc_attr( $this->get_current_language() ) . '" />';
 		}
 		
 		/**
