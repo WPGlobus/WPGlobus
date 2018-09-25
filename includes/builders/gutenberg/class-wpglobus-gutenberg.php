@@ -98,6 +98,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$_box_style .= 'margin-top:3px;';
 		}
 
+		$out = '';
+
 		if ( 'post-new.php' === $page ) {
 
 			ob_start();
