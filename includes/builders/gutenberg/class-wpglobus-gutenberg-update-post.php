@@ -6,19 +6,21 @@
  * @author  Alex Gor(alexgff)
  */
 
-/**
- * Class WPGlobus_Gutenberg_Update_Post.
- */
 if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 
+	/**
+	 * Class WPGlobus_Gutenberg_Update_Post.
+	 */
 	class WPGlobus_Gutenberg_Update_Post {
 
+		/** @var string */
 		protected $language = null;
 
+		/** @var WP_Post */
 		protected $_prepared_post = null;
 
 		/**
-		 * Static "constructor".
+		 * Constructor.
 		 */
 		public function __construct() {
 
@@ -65,7 +67,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		 *
 		 * @return mixed
 		 */
-		function filter__rest_after_callbacks(
+		public function filter__rest_after_callbacks(
 			$response, $handler, /** @noinspection PhpUnusedParameterInspection */
 			$request
 		) {
@@ -83,9 +85,9 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				 */
 				$builder_language = $this->language;
 
-//				if ( empty( $builder_language ) ) {
+				// if ( empty( $builder_language ) ) {
 				// @todo incorrect case
-//				}
+				// }
 
 				$fix_title = true;
 				if ( ! empty( $response->data['title']['raw'] ) && WPGlobus_Core::has_translations( $response->data['title']['raw'] ) ) {
@@ -104,7 +106,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 					// $fix_excerpt                           = false;
 				}
 
-				if ( $builder_language == WPGlobus::Config()->default_language ) {
+				if ( WPGlobus::Config()->default_language === $builder_language ) {
 					return $response;
 				}
 
@@ -122,7 +124,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 						return $response;
 					}
 
-					if ( $response->data['title']['rendered'] != $response->data['title']['raw'] ) {
+					if ( $response->data['title']['rendered'] !== $response->data['title']['raw'] ) {
 						$response->data['title']['rendered'] = $response->data['title']['raw'];
 					}
 
@@ -164,7 +166,6 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 					 */
 					$builder_language = WPGlobus::Config()->default_language;
 				}
-
 			}
 
 			$this->language = $builder_language;
@@ -215,7 +216,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 
 				foreach ( WPGlobus::Config()->enabled_languages as $lang ) :
 
-					if ( $lang == $builder_language ) {
+					if ( $lang === $builder_language ) {
 
 						$text = $value;
 						if ( WPGlobus_Core::has_translations( $value ) ) {
@@ -224,14 +225,12 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 						if ( ! empty( $text ) ) {
 							$tr[ $lang ] = $text;
 						}
-
 					} else {
 
 						$text = WPGlobus_Core::text_filter( $_post->$field, $lang, WPGlobus::RETURN_EMPTY );
 						if ( ! empty( $text ) ) {
 							$tr[ $lang ] = $text;
 						}
-
 					}
 
 				endforeach;
@@ -278,7 +277,6 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				if ( ! empty( $data[ $_field ] ) && ! empty( $this->_prepared_post->$_field ) ) {
 					$data[ $_field ] = $this->_prepared_post->$_field;
 				}
-
 			}
 
 			return $data;
@@ -287,5 +285,3 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 	}
 
 endif;
-
-# --- EOF
