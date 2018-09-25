@@ -58,6 +58,12 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		 * Callback for 'rest_request_after_callbacks' will be fired after 'wp_insert_post_data' filter.
 		 *
 		 * @see 'filter__wp_insert_post_data'
+		 *
+		 * @param stdClass $response
+		 * @param array $handler
+		 * @param mixed $request Unused.
+		 *
+		 * @return mixed
 		 */
 		function filter__rest_after_callbacks( $response, $handler, $request ) {
 
@@ -126,6 +132,11 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 
 		/**
 		 * Callback for 'rest_pre_insert_post'.
+		 *
+		 * @param WP_Post $prepared_post
+		 * @param mixed $request Unused.
+		 *
+		 * @return mixed
 		 */
 		public function filter__pre_insert_post( $prepared_post, $request ) {
 
@@ -234,6 +245,11 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 
 		/**
 		 * Callback for 'wp_insert_post_data'.
+		 *
+		 * @param array $data
+		 * @param mixed $postarr Unused.
+		 *
+		 * @return array
 		 */
 		public function filter__wp_insert_post_data( $data, $postarr ) {
 
