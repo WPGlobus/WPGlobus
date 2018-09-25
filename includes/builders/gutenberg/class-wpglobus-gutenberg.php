@@ -190,7 +190,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * @return string
 	 */
 	public function filter__seo_meta_box_title( $meta_box_title ) {
-		return $meta_box_title . ' for ' . WPGlobus::Config()->en_language_name[ $this->get_current_language() ];
+		return $meta_box_title . ' ' .
+			   // Translators: Metabox title FOR language.
+			   _x( 'for', 'filter__seo_meta_box_title', 'wpglobus' )
+			   . ' ' . WPGlobus::Config()->en_language_name[ $this->get_current_language() ];
 	}
 
 	/**
