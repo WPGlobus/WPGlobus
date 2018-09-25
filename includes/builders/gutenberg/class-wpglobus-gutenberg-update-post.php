@@ -60,12 +60,15 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		 * @see 'filter__wp_insert_post_data'
 		 *
 		 * @param stdClass $response
-		 * @param array $handler
-		 * @param mixed $request Unused.
+		 * @param array    $handler
+		 * @param mixed    $request Unused.
 		 *
 		 * @return mixed
 		 */
-		function filter__rest_after_callbacks( $response, $handler, $request ) {
+		function filter__rest_after_callbacks(
+			$response, $handler, /** @noinspection PhpUnusedParameterInspection */
+			$request
+		) {
 
 			if ( ! empty( $handler['methods']['POST'] ) && ! empty( $handler['methods']['PUT'] ) && ! empty( $handler['methods']['PATCH'] ) ) {
 				/**
@@ -134,11 +137,14 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		 * Callback for 'rest_pre_insert_post'.
 		 *
 		 * @param WP_Post $prepared_post
-		 * @param mixed $request Unused.
+		 * @param mixed   $request Unused.
 		 *
 		 * @return mixed
 		 */
-		public function filter__pre_insert_post( $prepared_post, $request ) {
+		public function filter__pre_insert_post(
+			$prepared_post, /** @noinspection PhpUnusedParameterInspection */
+			$request
+		) {
 
 			global $wpdb;
 			$_post = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID = %d LIMIT 1", $prepared_post->ID ) );
@@ -251,7 +257,10 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		 *
 		 * @return array
 		 */
-		public function filter__wp_insert_post_data( $data, $postarr ) {
+		public function filter__wp_insert_post_data(
+			$data, /** @noinspection PhpUnusedParameterInspection */
+			$postarr
+		) {
 
 			/**
 			 * Check $this->_prepared_post was loaded with first XMLHttpRequest.
