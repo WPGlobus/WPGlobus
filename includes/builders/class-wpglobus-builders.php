@@ -146,7 +146,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					$is_admin     = true;
 					$load_builder = false;
 
-					if ( 'post.php' == $pagenow ) {
+					if ( 'post.php' === $pagenow ) {
 
 						$opts = get_option( 'siteorigin_panels_settings' );
 
@@ -164,7 +164,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // WPCS: input var ok, sanitization ok.
 						}
 
-						if ( in_array( $post_type, $cpt_support ) ) {
+						if ( in_array( $post_type, $cpt_support, true ) ) {
 							$load_builder = true;
 						}
 
@@ -238,7 +238,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			} else {
 
-				if ( in_array( $pagenow, array( 'admin-ajax.php', 'post.php', 'index.php', 'post-new.php' ) ) ) {
+				if ( in_array( $pagenow, array( 'admin-ajax.php', 'post.php', 'index.php', 'post-new.php' ), true ) ) {
 
 					/**
 					 * Init current post type.
@@ -253,9 +253,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					$ajax_actions = '';
 					$is_admin     = true;
 
-					if ( 'admin-ajax.php' == $pagenow ) {
+					if ( 'admin-ajax.php' === $pagenow ) {
 
-						if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' != $_REQUEST['action'] ) {
+						if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' !== $_REQUEST['action'] ) {
 							return false;
 						}
 						if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
@@ -268,7 +268,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$load_elementor = true;
 						$post_id        = sanitize_text_field( $_REQUEST['editor_post_id'] );
 
-					} elseif ( 'index.php' == $pagenow ) {
+					} elseif ( 'index.php' === $pagenow ) {
 
 						/**
 						 * @todo remove after testing.
@@ -280,10 +280,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$load_elementor = false;
 						$is_admin       = false;
 
-					} elseif ( 'post.php' == $pagenow ) {
+					} elseif ( 'post.php' === $pagenow ) {
 
 						$is_admin = true;
-						if ( isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
+						if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
 							//$is_admin = false;
 							$load_elementor = true;
 						}
@@ -319,7 +319,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							//$post_type = 'post';
 						// }
 
-						if ( in_array( $post_type, $cpt_support ) ) {
+						if ( in_array( $post_type, $cpt_support, true ) ) {
 							$load_elementor = true;
 						}
 					} else {
@@ -373,7 +373,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			/** @global wpdb $wpdb */
 			global $wpdb;
 
-			if ( 'post.php' == $pagenow ) {
+			if ( 'post.php' === $pagenow ) {
 
 				$_builder_page = true;
 
@@ -384,7 +384,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				$_opts = wp_roles()->roles;
 
 				if ( ! function_exists( 'wp_get_current_user' ) ) {
-					require_once( ABSPATH . WPINC . '/pluggable.php' );
+					require_once ABSPATH . WPINC . '/pluggable.php';
 				}
 
 				$_user = wp_get_current_user();
@@ -414,9 +414,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					/**
 					 * WPBakery Page Builder is available for pages only (settings was not saved yet).
 					 */
-					if ( $post_type != 'page' ) {
+					if ( 'page' !== $post_type ) {
 						$_builder_page = false;
 					}
+					// TODO compare booleans or check for empty and not ''==??.
 				} elseif ( '' == $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
 					/**
 					 * All post types are disabled in WPBakery Page Builder.
@@ -428,10 +429,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					/**
 					 * WPBakery Page Builder is available for pages only.
 					 */
-					if ( $post_type != 'page' ) {
+					if ( 'page' !== $post_type ) {
 						$_builder_page = false;
 					}
-				} elseif ( 'custom' == $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
+				} elseif ( 'custom' === $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
 
 					/**
 					 * Custom settings for post types in WPBakery Page Builder.
@@ -492,7 +493,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 					} else {
 
-						if ( 'post-new.php' == $pagenow ) {
+						if ( 'post-new.php' === $pagenow ) {
 
 							/**
 							 * Load specific language switcher for this page.
@@ -501,7 +502,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							 */
 							$load_gutenberg = true;
 
-						} elseif ( 'index.php' == $pagenow ) {
+						} elseif ( 'index.php' === $pagenow ) {
 
 							/**
 							 * When Update button was clicked.
@@ -517,26 +518,26 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 									$load_gutenberg = true;
 								}
 							}
-						} elseif ( 'post.php' == $pagenow ) {
+						} elseif ( 'post.php' === $pagenow ) {
 
 							$load_gutenberg = true;
 
 							$actions = array( 'edit', 'editpost' );
 							if ( ! empty( $_GET['action'] ) ) {
-								if ( in_array( $_GET['action'], $actions ) ) {
+								if ( in_array( $_GET['action'], $actions, true ) ) {
 									if ( array_key_exists( 'classic-editor', $_GET ) ) {
 										$load_gutenberg = false;
 									}
-									if ( isset( $_GET['meta_box'] ) && (int) $_GET['meta_box'] == 1 ) {
+									if ( isset( $_GET['meta_box'] ) && 1 === (int) $_GET['meta_box'] ) {
 										$load_gutenberg = true;
 									}
 								}
 							} elseif ( ! empty( $_POST['action'] ) ) {
-								if ( in_array( $_POST['action'], $actions ) ) {
+								if ( in_array( $_POST['action'], $actions, true ) ) {
 									if ( array_key_exists( 'classic-editor', $_POST ) ) {
 										$load_gutenberg = false;
 									}
-									if ( isset( $_POST['meta_box'] ) && (int) $_POST['meta_box'] == 1 ) {
+									if ( isset( $_POST['meta_box'] ) && 1 === (int) $_POST['meta_box'] ) {
 										$load_gutenberg = true;
 									}
 								}
@@ -550,7 +551,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							/**
 							 * Since 1.9.17 Gutenberg support will be start for posts and pages only.
 							 */
-							if ( ! in_array( $post_type, array( 'post', 'page' ) ) ) {
+							if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
 								$load_gutenberg = false;
 							}
 						}
@@ -591,7 +592,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			}
 
 			$actions = array( 'edit', 'editpost' );
-			if ( in_array( $_POST['action'], $actions ) ) {
+			if ( in_array( $_POST['action'], $actions, true ) ) {
 				if ( array_key_exists( 'gutenberg_meta_boxes', $_POST ) ) {
 					$result = true;
 				}
@@ -612,7 +613,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/** @global string $pagenow */
 				global $pagenow;
 
-				if ( 'post.php' == $pagenow ) {
+				if ( 'post.php' === $pagenow ) {
 
 					$wpseo_titles = get_option( 'wpseo_titles' );
 
@@ -645,7 +646,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$_attrs['builder_page'] = true;
 					} else {
 
-						if ( isset( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) && (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] == 0 ) {
+						if ( isset( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) {
 							$_attrs['builder_page'] = false;
 						} else {
 							$_attrs['builder_page'] = true;
@@ -689,7 +690,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 * @return null|string
 		 */
 		protected static function get_post_type( $id = '' ) {
-			if ( 0 == (int) $id ) {
+			if ( 0 === (int) $id ) {
 				return null;
 			}
 
