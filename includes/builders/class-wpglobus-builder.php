@@ -3,7 +3,7 @@
  * File: class-wpglobus-builder.php
  *
  * @package WPGlobus\Builders
- * @author Alex Gor(alexgff)
+ * @author  Alex Gor(alexgff)
  */
 
 /**
@@ -14,17 +14,17 @@
 if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 	class WPGlobus_Builder {
-	
+
 		/**
 		 * Current language of post.
 		 */
 		protected $language = null;
-		
+
 		/**
 		 * Builder ID.
 		 */
 		protected $id = null;
-		
+
 		/**
 		 * Array of activated builders.
 		 *
@@ -33,9 +33,9 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @var    array
 		 */
 		//protected $builders = array();
-		
+
 		protected $builder_post = null;
-		
+
 		/**
 		 * Constructor method.
 		 *
@@ -43,65 +43,69 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @access public
 		 * @return void
 		 */
-		public function __construct($id) {
-			
+		public function __construct( $id ) {
+
 			$this->id = $id;
 
 			$this->set_current_language();
 
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				/**
 				 * @todo Add the handling of AJAX.
 				 */
 			}
-			
+
 			if ( is_admin() ) {
-				
+
 				add_action( 'redirect_post_location', array( $this, 'on__redirect' ), 5, 2 );
-				
+
 				add_filter( 'admin_body_class', array( $this, 'filter__add_admin_body_class' ) );
-				
+
 				/**
 				 * @see "{$field_no_prefix}_edit_pre" in wp-includes\post.php
 				 */
-				add_filter('content_edit_pre', array( $this, 'filter__content' ), 5, 2 );
-				add_filter('title_edit_pre', array( $this, 'filter__title' ), 5, 2 );
-				add_filter('excerpt_edit_pre', array( $this, 'filter__excerpt' ), 5, 2 );
-				
+				add_filter( 'content_edit_pre', array( $this, 'filter__content' ), 5, 2 );
+				add_filter( 'title_edit_pre', array( $this, 'filter__title' ), 5, 2 );
+				add_filter( 'excerpt_edit_pre', array( $this, 'filter__excerpt' ), 5, 2 );
+
 			}
-			
+
 			/**
 			 * Show language tabs in post.php page.
+			 *
 			 * @see wpglobus\includes\class-wpglobus.php
 			 */
 			add_filter( 'wpglobus_show_language_tabs', array( $this, 'filter__show_language_tabs' ), 5 );
-			
+
 		}
 
 		/**
 		 * Filter title.
 		 */
-		public function filter__title($value, $post_id) {
-			$value = WPGlobus_Core::text_filter($value, $this->get_current_language(), WPGlobus::RETURN_EMPTY);
+		public function filter__title( $value, $post_id ) {
+			$value = WPGlobus_Core::text_filter( $value, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
+
 			return $value;
 		}
-		
+
 		/**
 		 * Filter content.
-		 */		
-		public function filter__content($content, $post_id) {
-			$content = WPGlobus_Core::text_filter($content, $this->get_current_language(), WPGlobus::RETURN_EMPTY);
+		 */
+		public function filter__content( $content, $post_id ) {
+			$content = WPGlobus_Core::text_filter( $content, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
+
 			return $content;
-		}		
-	
+		}
+
 		/**
 		 * Filter excerpt.
-		 */		
-		public function filter__excerpt($excerpt, $post_id) {
-			$excerpt = WPGlobus_Core::text_filter($excerpt, $this->get_current_language(), WPGlobus::RETURN_EMPTY);
+		 */
+		public function filter__excerpt( $excerpt, $post_id ) {
+			$excerpt = WPGlobus_Core::text_filter( $excerpt, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
+
 			return $excerpt;
 		}
-		
+
 		/**
 		 * Redirect.
 		 */
@@ -110,53 +114,54 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * Tested with:
 			 * - Page Builder by SiteOrigin OK.
 			 */
-			return  $location . '&language='.$this->language;
+			return $location . '&language=' . $this->language;
 		}
-		
+
 		public function get_id() {
-			return $this->id;	
+			return $this->id;
 		}
-		
+
 		public function is_builder_post() {
-			if ( is_null($this->builder_post) ) {
+			if ( is_null( $this->builder_post ) ) {
 				return false;
 			}
+
 			return true;
 		}
 
 		/**
 		 * Get hidden "wpglobus-language" field.
-		 * 
+		 *
 		 * @since 1.9.17
 		 * @return string
-		 */		
+		 */
 		public function get_language_field() {
 			/**
-			 * @see on_add_devmode_switcher() in wpglobus\includes\class-wpglobus.php
+			 * @see  on_add_devmode_switcher() in wpglobus\includes\class-wpglobus.php
 			 * @todo may be add special function to get hidden language field.
 			 */
 			return '<input type="hidden" id="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" name="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" value="' . esc_attr( $this->get_current_language() ) . '" />';
 		}
-		
+
 		/**
 		 * Return current language.
-		 * 
+		 *
 		 * @since 1.9.17
 		 * @return string
 		 */
 		public function get_current_language() {
 			return $this->language;
-		}		
-	
+		}
+
 		/**
 		 * Set current language.
 		 *
 		 * @since 1.9.17
 		 * @return void
-		 */		
+		 */
 		public function set_current_language() {
-			
-			if( ! is_null($this->language) ) {
+
+			if ( ! is_null( $this->language ) ) {
 				return;
 			}
 
@@ -165,142 +170,143 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * Let's just get it from WPGlobus::Config()->builder.
 			 */
 			$this->language = WPGlobus::Config()->builder->get_language();
-			
+
 			if ( ! $this->language ) {
 				/**
 				 * Language was not set in WPGlobus_Config_Builder class.
 				 */
 			}
-			
+
 			$post_id = '';
-			if ( empty($_REQUEST['post']) ) {
-				
+			if ( empty( $_REQUEST['post'] ) ) {
+
 				/**
 				 * @todo add doc
 				 */
 
 			} else {
-				if ( ! empty($_REQUEST['post']) ) {
+				if ( ! empty( $_REQUEST['post'] ) ) {
 					$post_id = $_REQUEST['post'];
-				} else if( ! empty($_REQUEST['id']) ) {
+				} elseif ( ! empty( $_REQUEST['id'] ) ) {
 					$post_id = $_REQUEST['id'];
-				} else if( ! empty($_REQUEST['post_ID']) ) {
+				} elseif ( ! empty( $_REQUEST['post_ID'] ) ) {
 					$post_id = $_REQUEST['post_ID'];
 				}
 			}
-			
-			if ( ! empty($post_id) && ! is_null($this->language) ) {
-				update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $this->language);
+
+			if ( ! empty( $post_id ) && ! is_null( $this->language ) ) {
+				update_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), $this->language );
 			}
-			
+
 			return;
 
 			/*********************************************************
-			/*********************************************************
-			/*********************************************************
-			/*********************************************************
-			/*********************************************************
-			/*********************************************************
+			 * /*********************************************************
+			 * /*********************************************************
+			 * /*********************************************************
+			 * /*********************************************************
+			 * /*********************************************************
 			 * @todo remove code after testing.
 			 */
 			$language = WPGlobus::Config()->default_language;
-		
-			if ( empty($_REQUEST) ) {
-				
+
+			if ( empty( $_REQUEST ) ) {
+
 				/**
 				 * @todo Probably we are working with WP Rest API here.
-				 * @see filter__pre_insert_post() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg-update-post.php 
+				 * @see  filter__pre_insert_post() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg-update-post.php
 				 * how to get current language for Gutenberg.
 				 */
-				 
+
 			} else {
 
 				$_set = false;
-				
+
 				/**
 				 * Get language code: order is important.
 				 */
-				 
+
 				/**
 				 * 1.
-				 */	
-				if ( isset( $_REQUEST['language'] ) && empty($_REQUEST['message']) ) { // WPCS: input var ok, sanitization ok.
-					$language = sanitize_text_field($_REQUEST['language']);
-					$_set = true;
+				 */
+				if ( isset( $_REQUEST['language'] ) && empty( $_REQUEST['message'] ) ) { // WPCS: input var ok, sanitization ok.
+					$language = sanitize_text_field( $_REQUEST['language'] );
+					$_set     = true;
 				}
-				
+
 				/**
 				 * 2.
-				 */					
+				 */
 				if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) { // WPCS: input var ok, sanitization ok.
-					$language = sanitize_text_field($_REQUEST[ WPGlobus::get_language_meta_key() ]);
-					$_set = true;
+					$language = sanitize_text_field( $_REQUEST[ WPGlobus::get_language_meta_key() ] );
+					$_set     = true;
 				}
-				
+
 				/**
 				 * 3. Meta
 				 */
 				$post_id = '';
-				if ( empty($_REQUEST['post']) ) {
-					
+				if ( empty( $_REQUEST['post'] ) ) {
+
 					/**
 					 * @todo add doc
 					 */
 
 				} else {
-					if ( ! empty($_REQUEST['post']) ) {
+					if ( ! empty( $_REQUEST['post'] ) ) {
 						$post_id = $_REQUEST['post'];
-					} else if( ! empty($_REQUEST['id']) ) {
+					} elseif ( ! empty( $_REQUEST['id'] ) ) {
 						$post_id = $_REQUEST['id'];
-					} else if( ! empty($_REQUEST['post_ID']) ) {
+					} elseif ( ! empty( $_REQUEST['post_ID'] ) ) {
 						$post_id = $_REQUEST['post_ID'];
 					}
 				}
-				
+
 				if ( ! empty( $post_id ) ) {
 					if ( $_set ) {
-						update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language);
+						update_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language );
 					} else {
-						$language = get_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), true);
+						$language = get_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), true );
 					}
 				}
-				
+
 			} // endif;
-			
-			if ( ! is_null($language) && ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
+
+			if ( ! is_null( $language ) && ! in_array( $language, WPGlobus::Config()->enabled_languages ) ) {
 				$language = WPGlobus::Config()->default_language;
-				update_post_meta($post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language);
+				update_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), $language );
 			}
-			
+
 			$this->language = $language;
-			
-		}	
-		
+
+		}
+
 		/**
 		 * Show language tabs on post.php page.
-		 * 
+		 *
 		 * @see includes\class-wpglobus.php
+		 *
 		 * @param bool
 		 * Returning boolean.
 		 */
-		public function filter__show_language_tabs($value) {
+		public function filter__show_language_tabs( $value ) {
 
 			global $pagenow;
-			
-			$classes = array();
+
+			$classes                      = array();
 			$classes['wpglobus-post-tab'] = 'wpglobus-post-tab';
 			$classes['ui-state-default']  = 'ui-state-default';
 			$classes['ui-corner-top']     = 'ui-corner-top';
 			$classes['ui-tabs-active']    = 'ui-tabs-active';
 			$classes['ui-tabs-loading']   = 'ui-tabs-loading';
-			
+
 			$link_style = array();
 			$link_title = '';
 			if ( 'post-new.php' == $pagenow ) {
 				$link_style['cursor'] = 'cursor:not-allowed';
-				$link_title = esc_html__('Save draft before using extra language.', 'wpglobus');
+				$link_title           = esc_html__( 'Save draft before using extra language.', 'wpglobus' );
 			}
-			
+
 			?>
 			<ul class="wpglobus-post-body-tabs-list">    <?php
 				$order = 0;
@@ -311,59 +317,62 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				 */
 				unset( $get_array['language'] );
 				unset( $get_array['message'] );
-				
+
 				foreach ( WPGlobus::Config()->open_languages as $language ) {
-					
+
 					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language;
-					
+
 					$_classes = $classes;
-					
+
 					$_link_style = $link_style;
-					
+
 					if ( 'post-new.php' == $pagenow && $language == WPGLobus::Config()->default_language ) {
 						$_link_style['cursor'] = '';
 					}
-					
+
 					if ( $language == $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
-					
-					$link = add_query_arg( array_merge( $get_array, array('language'=>$language) ), admin_url($pagenow) );
+
+					$link        = add_query_arg( array_merge( $get_array, array( 'language' => $language ) ), admin_url( $pagenow ) );
 					$_link_title = '';
 					if ( 'post-new.php' == $pagenow && $language != WPGLobus::Config()->default_language ) {
-						$link = '#';
+						$link        = '#';
 						$_link_title = $link_title;
 					}
 					?>
-					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>" data-language="<?php echo esc_attr( $language ); ?>"
-						data-order="<?php echo esc_attr( $order ); ?>"
-						class="<?php echo implode( ' ', $_classes ); ?>">
+					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>"
+							data-language="<?php echo esc_attr( $language ); ?>"
+							data-order="<?php echo esc_attr( $order ); ?>"
+							class="<?php echo implode( ' ', $_classes ); ?>">
 						<!--<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>-->
 						<a style="<?php echo implode( ';', $_link_style ); ?>" title="<?php echo $_link_title; ?>"
-							href="<?php echo $link; ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
+								href="<?php echo $link; ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 					</li> <?php
 					$order ++;
 				} ?>
-			</ul>   
+			</ul>
 			<?php
 			/**
 			 * Return false to prevent output standard WPGlobus tabs.
 			 */
 			return false;
 		}
-		
+
 		/**
 		 * Add class to body in admin.
-		 * @see admin_body_class filter
+		 *
+		 * @see   admin_body_class filter
 		 *
 		 * @since 1.9.17
+		 *
 		 * @param string $classes
 		 *
 		 * @return string
-		 */	
-		public function filter__add_admin_body_class($classes) {
-			return $classes . ' wpglobus-wp-admin-builder wpglobus-wp-admin-builder-'.$this->id;
-		}	
+		 */
+		public function filter__add_admin_body_class( $classes ) {
+			return $classes . ' wpglobus-wp-admin-builder wpglobus-wp-admin-builder-' . $this->id;
+		}
 
 	}
 
