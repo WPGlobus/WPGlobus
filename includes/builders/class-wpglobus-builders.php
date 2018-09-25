@@ -23,6 +23,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				//return false;
 			}
 
+			/** @global string $pagenow */
 			global $pagenow;
 
 			self::$attrs = array(
@@ -109,6 +110,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				return false;
 			}
 
+			/** @global string $pagenow */
 			global $pagenow;
 
 			if ( version_compare( SITEORIGIN_PANELS_VERSION, '2.8.1', '<=' ) ) {
@@ -212,6 +214,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				return false;
 			}
 
+			/** @global string $pagenow */
 			global $pagenow;
 
 			$load_elementor = false;
@@ -364,6 +367,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				return false;
 			}
 
+			/** @global string $pagenow */
 			global $pagenow;
 
 			/** @global wpdb $wpdb */
@@ -471,6 +475,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			$load_gutenberg = false;
 			$message        = '';
 
+			/** @global string $pagenow */
 			global $pagenow;
 
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
@@ -604,6 +609,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( defined( 'WPSEO_VERSION' ) ) {
 
+				/** @global string $pagenow */
 				global $pagenow;
 
 				if ( 'post.php' == $pagenow ) {
@@ -659,6 +665,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		/**
 		 * Get attributes.
+		 *
+		 * @param array $attrs
+		 *
+		 * @return array
 		 */
 		protected static function get_attrs( $attrs ) {
 			$_attrs = array_merge( self::$attrs, $attrs );
@@ -673,12 +683,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		/**
 		 * Get post type.
+		 *
+		 * @param string $id
+		 *
+		 * @return null|string
 		 */
 		protected static function get_post_type( $id = '' ) {
 			if ( 0 == (int) $id ) {
 				return null;
 			}
 
+			/** @global wpdb $wpdb */
 			global $wpdb;
 
 			$post_type = $wpdb->get_var( $wpdb->prepare( "SELECT post_type FROM $wpdb->posts WHERE ID = %d", $id ) );
