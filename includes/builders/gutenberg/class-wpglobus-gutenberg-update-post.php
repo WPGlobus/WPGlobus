@@ -83,9 +83,9 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 				 */
 				$builder_language = $this->language;
 
-				if ( empty( $builder_language ) ) {
-					// @todo incorrect case
-				}
+//				if ( empty( $builder_language ) ) {
+				// @todo incorrect case
+//				}
 
 				$fix_title = true;
 				if ( ! empty( $response->data['title']['raw'] ) && WPGlobus_Core::has_translations( $response->data['title']['raw'] ) ) {
@@ -176,7 +176,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			 */
 			if ( ! empty( $prepared_post->post_title ) ) {
 				$fields['post_title'] = $prepared_post->post_title;
-			} else {
+				// } else {
 				//$fields['post_title'] = '';
 			}
 
