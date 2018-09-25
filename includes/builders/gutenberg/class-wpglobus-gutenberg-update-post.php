@@ -94,14 +94,14 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 					$fix_title                           = false;
 				}
 
-				$fix_excerpt = true;
+				// $fix_excerpt = true;
 				if ( ! empty( $response->data['excerpt']['raw'] ) && WPGlobus_Core::has_translations( $response->data['excerpt']['raw'] ) ) {
 					$excerpt_in_default = WPGlobus_Core::text_filter( $response->data['excerpt']['raw'], WPGlobus::Config()->default_language );
 					//$excerpt 		    = WPGlobus_Core::text_filter($response->data['excerpt']['raw'], $builder_language);
 					$excerpt                               = WPGlobus_Core::text_filter( $response->data['excerpt']['raw'], $builder_language, WPGlobus::RETURN_EMPTY );
 					$response->data['excerpt']['raw']      = $excerpt;
 					$response->data['excerpt']['rendered'] = str_replace( $excerpt_in_default, $excerpt, $response->data['excerpt']['rendered'] );
-					$fix_excerpt                           = false;
+					// $fix_excerpt                           = false;
 				}
 
 				if ( $builder_language == WPGlobus::Config()->default_language ) {
