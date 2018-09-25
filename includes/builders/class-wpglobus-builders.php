@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( $init ) {
 
-				$builder = false;
+				//$builder = false;
 
 				/**
 				 * @since 1.9.17
@@ -137,9 +137,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				 */
 				$post_type = '';
 
-				$ajax_actions = '';
-				$is_admin     = false;
-				$load_builder = false;
+				//$ajax_actions = '';
+				//$is_admin     = false;
+				//$load_builder = false;
 
 				if ( is_admin() ) {
 
@@ -291,7 +291,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						/**
 						 * $cpt_support = get_option( 'elementor_cpt_support', array('page', 'post') );
 						 *
-						 * @see elementor\includes\plugin.php
+						 * @see_file elementor\includes\plugin.php
 						 */
 						$cpt_support = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
 
@@ -512,7 +512,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 								 *
 								 * @see $_SERVER['REQUEST_URI']
 								 */
-								$actions = array( 'edit' );
+								//$actions = array( 'edit' );
 								if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/posts' ) ) {
 									$load_gutenberg = true;
 								}
