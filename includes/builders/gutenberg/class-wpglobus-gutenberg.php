@@ -121,16 +121,14 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 					</a>
 				</div>
 				<ul class="wpglobus-gutenberg-selector-dropdown"
-						style="display:none;position:fixed;width:300px;border-left:1px solid #ddd;border-right:1px solid #ddd;background-color:#eee;margin:5px 0 0;list-style-type:none;">
-					<li class="item"
-							style="text-align:left;border-bottom:1px solid #ddd;margin:0 auto;height:25px;padding:3px 0 0 10px;">
-						<?php esc_html_e( 'Save draft or publish post and then reload the page.', 'wpglobus' ); ?>
+						style="display:none;position:fixed;margin:5px;list-style-type:none;">
+					<li class="item" style="border:1px solid #ddd;background-color:#eee;padding:4px;">
+						<?php esc_html_e( 'Before switching the language, please save draft or publish and reload the page.', 'wpglobus' ); ?>
 					</li>
 				</ul>
 			</div>
 			<?php
-			$out = ob_get_contents();
-			ob_end_clean();
+			$out = ob_get_clean();
 
 		} elseif ( 'post.php' === $page ) {
 
@@ -155,7 +153,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 					</a>
 				</div>
 				<ul class="wpglobus-gutenberg-selector-dropdown"
-						style="display:none;position:fixed;width:80px;border-left:1px solid #ddd;border-right:1px solid #ddd;background-color:#eee;margin:5px 0 0;list-style-type:none;">
+						style="display:none;position:fixed;border-left:1px solid #ddd;border-right:1px solid #ddd;background-color:#eee;margin:5px 0 0;padding:0 5px 5px 0;list-style-type:none;">
 					<?php foreach ( WPGlobus::Config()->enabled_languages as $lang ) : ?>
 						<?php
 						if ( $lang === $this->language ) {
@@ -173,8 +171,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				</ul>
 			</div>
 			<?php
-			$out = ob_get_contents();
-			ob_end_clean();
+			$out = ob_get_clean();
 
 		}
 
