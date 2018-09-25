@@ -19,9 +19,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		public static function get( $init = true ) {
 
-			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				//return false;
-			}
+			// }
 
 			/** @global string $pagenow */
 			global $pagenow;
@@ -310,14 +310,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							}
 						}
 
-						if ( empty( $post_type ) ) {
+						// if ( empty( $post_type ) ) {
 							/**
 							 * Post type by default.
 							 * If we can not define post type then we don't set it to default value.
 							 * Because it may cause incorrect behavior later.
 							 */
 							//$post_type = 'post';
-						}
+						// }
 
 						if ( in_array( $post_type, $cpt_support ) ) {
 							$load_elementor = true;
@@ -399,9 +399,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					$post_id = isset( $_POST['post_ID'] ) ? sanitize_text_field( $_POST['post_ID'] ) : '';
 				}
 
-				if ( empty( $post_id ) ) {
+				// if ( empty( $post_id ) ) {
 					// @todo add handling this case.
-				}
+				// }
 
 				$_post_type = $wpdb->get_col( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id ) );
 
