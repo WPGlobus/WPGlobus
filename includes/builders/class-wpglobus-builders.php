@@ -730,6 +730,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 */
 		protected static function get_attrs( $attrs ) {
 			$_attrs = array_merge( self::$attrs, $attrs );
+			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIF
 			if ( isset( $_attrs['is_admin'] ) && ! $_attrs['is_admin'] ) {
 				// do nothing.
 			} else {

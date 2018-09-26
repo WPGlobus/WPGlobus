@@ -67,7 +67,6 @@ class WPGlobus_Core {
 		 */
 		$text = htmlspecialchars_decode( $text );
 
-
 		$possible_delimiters =
 			array(
 				/**
@@ -145,7 +144,8 @@ class WPGlobus_Core {
 		 * If we could not find anything in the current language...
 		 */
 		if ( ! $is_local_text_found ) {
-			if ( $return === WPGlobus::RETURN_EMPTY ) {
+			if ( WPGlobus::RETURN_EMPTY === $return ) {
+				// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIF
 				if ( $language === $default_language && ! self::has_translations( $text ) ) {
 					/**
 					 * @todo Check the above condition. What if only one part is true?
@@ -243,7 +243,7 @@ class WPGlobus_Core {
 		 * @var int $pos_start
 		 */
 		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN );
-		if ( $pos_start !== false ) {
+		if ( false !== $pos_start ) {
 			if ( ctype_lower( $string[ $pos_start + 2 ] ) && ctype_lower( $string[ $pos_start + 3 ] ) ) {
 				return true;
 			}
@@ -300,9 +300,9 @@ class WPGlobus_Core {
 			'attr_title',
 		);
 
-		foreach ( $fields as $_ ) {
-			if ( ! empty( $post->$_ ) ) {
-				$post->$_ = self::text_filter( $post->$_, $language, $return, $default_language );
+		foreach ( $fields as $field ) {
+			if ( ! empty( $post->$field ) ) {
+				$post->$field = self::text_filter( $post->$field, $language, $return, $default_language );
 			}
 		}
 
