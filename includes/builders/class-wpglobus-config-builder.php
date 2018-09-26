@@ -55,11 +55,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 					$this->attrs['version'] = null;
 
 					foreach ( $builder as $key => $value ) {
-						if ( 'class' == $key ) {
+						if ( 'class' === $key ) {
 							$this->__class = $value;
-						} elseif ( 'builder_page' == $key ) {
+						} elseif ( 'builder_page' === $key ) {
 							$this->__builder_page = $value;
-						} elseif ( 'is_admin' == $key ) {
+						} elseif ( 'is_admin' === $key ) {
 							$this->__is_admin = $value;
 						}
 						$this->attrs[ $key ] = $value;
@@ -111,7 +111,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return false;
 			}
 
-			if ( '' == $builder ) {
+			if ( '' === $builder ) {
 				$builder = $this->id;
 			}
 
@@ -150,7 +150,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			if ( ! $this->id ) {
 				return false;
 			}
-			if ( 'id' == $attr ) {
+			if ( 'id' === $attr ) {
 				return $this->get_id();
 			}
 			if ( ! empty( $this->attrs[ $attr ] ) ) {
@@ -192,7 +192,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			$_id = false;
 
-			if ( '' == $post ) {
+			if ( '' === $post ) {
 				global $post;
 			}
 
@@ -203,7 +203,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				$_id = $post->ID;
 			} else {
 				$_id = (int) $post;
-				if ( 0 == $_id ) {
+				if ( 0 === $_id ) {
 					$_id = false;
 				}
 			}
@@ -241,11 +241,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $language ) {
 
-				if ( isset( $_REQUEST['post'] ) && (int) $_REQUEST['post'] != 0 ) { // WPCS: input var ok, sanitization ok.
+				if ( isset( $_REQUEST['post'] ) && (int) $_REQUEST['post'] !== 0 ) { // WPCS: input var ok, sanitization ok.
 
 					$language = get_post_meta( $_REQUEST['post'], $this->get_language_meta_key(), true );
 
-				} elseif ( isset( $_REQUEST['id'] ) && (int) $_REQUEST['id'] != 0 ) { // WPCS: input var ok, sanitization ok.
+				} elseif ( isset( $_REQUEST['id'] ) && (int) $_REQUEST['id'] !== 0 ) { // WPCS: input var ok, sanitization ok.
 
 					/**
 					 * Case when post in draft status are autosaved.
