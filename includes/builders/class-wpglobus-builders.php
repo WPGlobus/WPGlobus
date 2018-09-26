@@ -517,6 +517,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
 				$__builder = self::get_addon('gutenberg');
+				
+				if ( ! $__builder ) {
+					return false;
+				}
 
 				if ( version_compare( GUTENBERG_VERSION, $__builder['supported_min_version'], '<' ) ) {
 
