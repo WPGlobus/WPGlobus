@@ -54,7 +54,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		public static function get( $init = true ) {
 
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			//return false;
+				//return false;
 			// }
 
 			/** @global string $pagenow */
@@ -347,12 +347,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						}
 
 						// if ( empty( $post_type ) ) {
-						/**
-						 * Post type by default.
-						 * If we can not define post type then we don't set it to default value.
-						 * Because it may cause incorrect behavior later.
-						 */
-						//$post_type = 'post';
+							/**
+							 * Post type by default.
+							 * If we can not define post type then we don't set it to default value.
+							 * Because it may cause incorrect behavior later.
+							 */
+							//$post_type = 'post';
 						// }
 
 						if ( in_array( $post_type, $cpt_support, true ) ) {
@@ -436,7 +436,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				}
 
 				// if ( empty( $post_id ) ) {
-				// @todo add handling this case.
+					// @todo add handling this case.
 				// }
 
 				$_post_type = $wpdb->get_col( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id ) );
@@ -517,7 +517,11 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
-				$__builder = self::get_addon( 'gutenberg' );
+				$__builder = self::get_addon('gutenberg');
+
+				if ( ! $__builder ) {
+					return false;
+				}
 
 				if ( version_compare( GUTENBERG_VERSION, $__builder['supported_min_version'], '<' ) ) {
 
