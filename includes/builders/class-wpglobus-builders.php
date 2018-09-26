@@ -16,44 +16,45 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		protected static $attrs = array();
 
 		protected static $admin_attrs = array();
-		
+
 		protected static $add_on = array();
-		
+
 		public static function get_addons() {
-			
+
 			self::$add_on['gutenberg'] = array(
-				'id' => 'gutenberg',
+				'id'                    => 'gutenberg',
 				'supported_min_version' => '3.9.0',
-				'const' => 'GUTENBERG_VERSION',
-				'plugin_name' => 'Gutenberg',
-				'plugin_uri' => 'https://github.com/WordPress/gutenberg'
+				'const'                 => 'GUTENBERG_VERSION',
+				'plugin_name'           => 'Gutenberg',
+				'plugin_uri'            => 'https://github.com/WordPress/gutenberg',
 			);
 
 			self::$add_on['js_composer'] = array(
-				'id' => 'js_composer',
+				'id'                    => 'js_composer',
 				'supported_min_version' => '4.0.0',
-				'const' => 'WPB_VC_VERSION',
-				'plugin_name' => 'WPBakery Page Builder',
-				'plugin_uri' => 'https://wpbakery.com/'
+				'const'                 => 'WPB_VC_VERSION',
+				'plugin_name'           => 'WPBakery Page Builder',
+				'plugin_uri'            => 'https://wpbakery.com/',
 			);
-			
+
 			return self::$add_on;
 		}
-		
+
 		public static function get_addon( $builder = false ) {
 			if ( ! $builder ) {
 				return false;
 			}
-			if ( isset( self::$add_on[$builder] ) ) {
-				return self::$add_on[$builder];
+			if ( isset( self::$add_on[ $builder ] ) ) {
+				return self::$add_on[ $builder ];
 			}
+
 			return false;
 		}
-		
+
 		public static function get( $init = true ) {
 
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				//return false;
+			//return false;
 			// }
 
 			/** @global string $pagenow */
@@ -82,7 +83,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			if ( $init ) {
 
 				//$builder = false;
-				
+
 				self::get_addons();
 
 				/**
@@ -346,12 +347,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						}
 
 						// if ( empty( $post_type ) ) {
-							/**
-							 * Post type by default.
-							 * If we can not define post type then we don't set it to default value.
-							 * Because it may cause incorrect behavior later.
-							 */
-							//$post_type = 'post';
+						/**
+						 * Post type by default.
+						 * If we can not define post type then we don't set it to default value.
+						 * Because it may cause incorrect behavior later.
+						 */
+						//$post_type = 'post';
 						// }
 
 						if ( in_array( $post_type, $cpt_support, true ) ) {
@@ -435,7 +436,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				}
 
 				// if ( empty( $post_id ) ) {
-					// @todo add handling this case.
+				// @todo add handling this case.
 				// }
 
 				$_post_type = $wpdb->get_col( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id ) );
@@ -516,7 +517,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
-				$__builder = self::get_addon('gutenberg');
+				$__builder = self::get_addon( 'gutenberg' );
 
 				if ( version_compare( GUTENBERG_VERSION, $__builder['supported_min_version'], '<' ) ) {
 
