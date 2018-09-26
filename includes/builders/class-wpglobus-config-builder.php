@@ -35,6 +35,9 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		/**
 		 * Constructor.
+		 *
+		 * @param bool  $init
+		 * @param array $init_attrs
 		 */
 		public function __construct( $init = true, $init_attrs = array() ) {
 
@@ -81,6 +84,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		/**
 		 * Try to run builder.
+		 *
+		 * @param string $builder
+		 * @param bool   $set_run_flag
+		 *
+		 * @return bool
 		 */
 		public function maybe_run( $builder = '', $set_run_flag = false ) {
 
@@ -145,6 +153,10 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		/**
 		 * Get attribute.
+		 *
+		 * @param string $attr
+		 *
+		 * @return bool|mixed
 		 */
 		public function get( $attr = 'id' ) {
 			if ( ! $this->id ) {
@@ -162,6 +174,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		/**
 		 * Set builder language.
+		 *
+		 * @param string $language
 		 */
 		public function set_language( $language = '' ) {
 			if ( ! empty( $language ) ) {
@@ -171,6 +185,10 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		/**
 		 * Get builder language.
+		 *
+		 * @param string $post
+		 *
+		 * @return array|bool|mixed|string
 		 */
 		public function get_language( $post = '' ) {
 
@@ -193,6 +211,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			$_id = false;
 
 			if ( '' === $post ) {
+				/** @global WP_Post $post */
 				global $post;
 			}
 
@@ -371,7 +390,9 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		}
 
 		/**
+		 * @param string $cookie_name
 		 *
+		 * @return bool|null
 		 */
 		public function get_cookie( $cookie_name = '' ) {
 
