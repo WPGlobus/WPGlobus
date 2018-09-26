@@ -16,7 +16,30 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		protected static $attrs = array();
 
 		protected static $admin_attrs = array();
+		
+		protected static $add_on = array();
+		
+		public static function get_addons($init = true) {
+			
+			self::$add_on['gutenberg'] = array(
+				'id' => 'gutenberg',
+				'supported_min_version' => '3.9.0',
+				'const' => 'GUTENBERG_VERSION',
+				'plugin_name' => 'Gutenberg',
+				'plugin_uri' => 'https://github.com/WordPress/gutenberg'
+			);
 
+			self::$add_on['js_composer'] = array(
+				'id' => 'js_composer',
+				'supported_min_version' => '4.0.0',
+				'const' => 'WPB_VC_VERSION',
+				'plugin_name' => 'WPBakery Page Builder',
+				'plugin_uri' => 'https://wpbakery.com/'
+			);
+			
+			return self::$add_on;
+		}
+		
 		public static function get( $init = true ) {
 
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
