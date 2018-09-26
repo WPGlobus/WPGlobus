@@ -19,7 +19,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		
 		protected static $add_on = array();
 		
-		public static function get_addons($init = true) {
+		public static function get_addons() {
 			
 			self::$add_on['gutenberg'] = array(
 				'id' => 'gutenberg',
@@ -38,6 +38,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			);
 			
 			return self::$add_on;
+		}
+		
+		public static function get_addon( $builder = false ) {
+			if ( ! $builder ) {
+				return false;
+			}
+			if ( isset( self::$add_on[$builder] ) ) {
+				return self::$add_on[$builder];
+			}
+			return false;
 		}
 		
 		public static function get( $init = true ) {
@@ -72,6 +82,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			if ( $init ) {
 
 				//$builder = false;
+				
+				self::get_addons();
 
 				/**
 				 * @since 1.9.17
@@ -504,7 +516,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
-				if ( version_compare( GUTENBERG_VERSION, '3.1.999', '<=' ) ) {
+				$__builder = self::get_addon('gutenberg');
+
+				if ( version_compare( GUTENBERG_VERSION, $__builder['supported_min_version'], '<' ) ) {
 
 					$message = 'Unsupported Gutenberg version.';
 
