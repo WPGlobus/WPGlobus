@@ -54,7 +54,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		public static function get( $init = true ) {
 
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				//return false;
+			//return false;
 			// }
 
 			/** @global string $pagenow */
@@ -191,13 +191,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							$cpt_support = $opts['post-types'];
 						}
 
-						if ( isset( $_GET['post'] ) ) {
-							$post_type = self::get_post_type( $_GET['post'] ); // WPCS: input var ok, sanitization ok.
-						} elseif ( isset( $_REQUEST['post_ID'] ) ) {
+						if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+							$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+						} elseif ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 							/**
 							 * Case when Update button was clicked.
 							 */
-							$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // WPCS: input var ok, sanitization ok.
+							$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 						}
 
 						if ( in_array( $post_type, $cpt_support, true ) ) {
@@ -291,11 +291,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 					if ( 'admin-ajax.php' === $pagenow ) {
 
+						// phpcs:ignore WordPress.CSRF.NonceVerification
 						if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' !== $_REQUEST['action'] ) {
 							return false;
 						}
+						// phpcs:ignore WordPress.CSRF.NonceVerification
 						if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
 							$ajax_actions = 'save_builder';
+							// phpcs:ignore WordPress.CSRF.NonceVerification
 						} elseif ( false !== strpos( $_REQUEST['actions'], '"action":"render_widget"' ) ) {
 							$ajax_actions = 'render_widget';
 						} else {
@@ -319,7 +322,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					} elseif ( 'post.php' === $pagenow ) {
 
 						$is_admin = true;
-						if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
+						// phpcs:ignore WordPress.CSRF.NonceVerification
+						if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) {
 							//$is_admin = false;
 							$load_elementor = true;
 						}
@@ -331,6 +335,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						 */
 						$cpt_support = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
 
+						// phpcs:ignore WordPress.CSRF.NonceVerification
 						if ( isset( $_GET['post_type'] ) ) {
 							/**
 							 * For post-new.php page.
@@ -339,20 +344,21 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						}
 
 						if ( empty( $post_type ) ) {
+							// phpcs:ignore WordPress.CSRF.NonceVerification
 							if ( isset( $_GET['post'] ) ) {
-								$post_type = self::get_post_type( $_GET['post'] ); // WPCS: input var ok, sanitization ok.
-							} elseif ( isset( $_REQUEST['post_ID'] ) ) {
-								$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // WPCS: input var ok, sanitization ok.
+								$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+							} elseif ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+								$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 							}
 						}
 
 						// if ( empty( $post_type ) ) {
-							/**
-							 * Post type by default.
-							 * If we can not define post type then we don't set it to default value.
-							 * Because it may cause incorrect behavior later.
-							 */
-							//$post_type = 'post';
+						/**
+						 * Post type by default.
+						 * If we can not define post type then we don't set it to default value.
+						 * Because it may cause incorrect behavior later.
+						 */
+						//$post_type = 'post';
 						// }
 
 						if ( in_array( $post_type, $cpt_support, true ) ) {
@@ -432,11 +438,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					 * Before update post we can get empty $_GET array.
 					 * Let's check $_POST.
 					 */
+					// phpcs:ignore WordPress.CSRF.NonceVerification
 					$post_id = isset( $_POST['post_ID'] ) ? sanitize_text_field( $_POST['post_ID'] ) : '';
 				}
 
 				// if ( empty( $post_id ) ) {
-					// @todo add handling this case.
+				// @todo add handling this case.
 				// }
 
 				$_post_type = $wpdb->get_col( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id ) );
@@ -517,7 +524,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
-				$__builder = self::get_addon('gutenberg');
+				$__builder = self::get_addon( 'gutenberg' );
 
 				if ( ! $__builder ) {
 					return false;
@@ -565,20 +572,27 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							$load_gutenberg = true;
 
 							$actions = array( 'edit', 'editpost' );
+							// phpcs:ignore WordPress.CSRF.NonceVerification
 							if ( ! empty( $_GET['action'] ) ) {
+								// phpcs:ignore WordPress.CSRF.NonceVerification
 								if ( in_array( $_GET['action'], $actions, true ) ) {
+									// phpcs:ignore WordPress.CSRF.NonceVerification
 									if ( array_key_exists( 'classic-editor', $_GET ) ) {
 										$load_gutenberg = false;
 									}
+									// phpcs:ignore WordPress.CSRF.NonceVerification
 									if ( isset( $_GET['meta_box'] ) && 1 === (int) $_GET['meta_box'] ) {
 										$load_gutenberg = true;
 									}
 								}
-							} elseif ( ! empty( $_POST['action'] ) ) {
+							} elseif ( ! empty( $_POST['action'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+								// phpcs:ignore WordPress.CSRF.NonceVerification
 								if ( in_array( $_POST['action'], $actions, true ) ) {
+									// phpcs:ignore WordPress.CSRF.NonceVerification
 									if ( array_key_exists( 'classic-editor', $_POST ) ) {
 										$load_gutenberg = false;
 									}
+									// phpcs:ignore WordPress.CSRF.NonceVerification
 									if ( isset( $_POST['meta_box'] ) && 1 === (int) $_POST['meta_box'] ) {
 										$load_gutenberg = true;
 									}
@@ -586,8 +600,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							}
 
 							$post_type = '';
-							if ( ! empty( $_GET['post'] ) ) {
-								$post_type = self::get_post_type( $_GET['post'] );
+							if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+								$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 							}
 
 							/**
@@ -629,13 +643,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		protected static function is_gutenberg_ajax() {
 			$result = false;
 
+			// phpcs:ignore WordPress.CSRF.NonceVerification
 			if ( empty( $_POST ) || empty( $_POST['action'] ) ) {
 				return $result;
 			}
 
 			$actions = array( 'edit', 'editpost' );
-			if ( in_array( $_POST['action'], $actions, true ) ) {
-				if ( array_key_exists( 'gutenberg_meta_boxes', $_POST ) ) {
+			if ( in_array( $_POST['action'], $actions, true ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				if ( array_key_exists( 'gutenberg_meta_boxes', $_POST ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$result = true;
 				}
 			}
@@ -660,16 +675,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					$wpseo_titles = get_option( 'wpseo_titles' );
 
 					$post_type = '';
-					if ( ! empty( $_GET['post'] ) ) {
-						$post_type = self::get_post_type( $_GET['post'] );
+					if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 					}
 
 					if ( empty( $post_type ) ) {
 						/**
 						 * Check $_REQUEST when post is updated.
 						 */
-						if ( ! empty( $_REQUEST['post_type'] ) ) {
-							$post_type = $_REQUEST['post_type'];
+						if ( ! empty( $_REQUEST['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+							$post_type = $_REQUEST['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification
 						}
 					}
 
