@@ -115,6 +115,18 @@ class WPGlobusWidget extends WP_Widget {
 		$enabled_languages = array_merge( (array)WPGlobus::Config()->language, $extra_languages );
 
 		/**
+		 * Filter enabled languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.9.17
+		 *
+		 * @param array     $enabled_languages 			 An array with enabled languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */		
+		$enabled_languages = apply_filters( 'wpglobus/widget/enabled_languages', $enabled_languages, WPGlobus::Config()->language );
+		
+		/**
 		 * Class for link in a and option tags. Used for adding hash.
 		 * @see class wpglobus-selector-link
 		 * @since 1.2.0
