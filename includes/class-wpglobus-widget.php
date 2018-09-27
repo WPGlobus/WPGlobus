@@ -112,6 +112,18 @@ class WPGlobusWidget extends WP_Widget {
 		 */
 		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );
 
+		/**
+		 * Filter extra languages.
+		 *
+		 * Returning array.
+		 *
+		 * @since 1.9.17
+		 *
+		 * @param array     $extra_languages 			 An array with extra languages to show off in menu.
+		 * @param string    WPGlobus::Config()->language The current language.
+		 */
+		$extra_languages = apply_filters( 'wpglobus/widget/extra_languages', $extra_languages, WPGlobus::Config()->language );		
+		
 		$enabled_languages = array_merge( (array)WPGlobus::Config()->language, $extra_languages );
 
 		/**
