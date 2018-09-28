@@ -37,6 +37,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_uri'            => 'https://wpbakery.com/',
 			);
 
+			self::$add_on['elementor'] = array(
+				'id' 					=> 'elementor',
+				'supported_min_version' => '2.2.4',
+				'const' 				=> 'ELEMENTOR_VERSION',
+				'plugin_name' 			=> 'Elementor',
+				'plugin_uri' 			=> 'https://wordpress.org/plugins/elementor/'
+			);
+			
 			return self::$add_on;
 		}
 
@@ -249,13 +257,19 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
 				return false;
 			}
-
+			
+			$__builder = self::get_addon('elementor');
+	
+			if ( ! $__builder ) {
+				return false;
+			}
+	
 			/** @global string $pagenow */
 			global $pagenow;
 
 			$load_elementor = false;
 
-			if ( version_compare( ELEMENTOR_VERSION, '2.2.0', '<=' ) ) {
+			if ( version_compare( ELEMENTOR_VERSION, $__builder['supported_min_version'], '<' ) ) {
 
 				$message = 'Unsupported Elementor version.';
 
