@@ -48,7 +48,14 @@ class WPGlobus_YoastSEO {
 		self::$version = $version;
 
 		if ( is_admin() ) {
-
+			
+			/**
+			 * @since 1.9.17 to prevent start scripts on edit page.
+			 */
+			if ( version_compare( WPSEO_VERSION, '7.6.99', '>=' ) ) {
+				return;
+			}
+			
 			if ( ! WPGlobus_WP::is_doing_ajax() ) {
 
 				/** @see WPGlobus::__construct */
