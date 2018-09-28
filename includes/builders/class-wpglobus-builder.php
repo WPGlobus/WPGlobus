@@ -169,29 +169,23 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * Don't duplicate the defining of current language.
 			 * Let's just get it from WPGlobus::Config()->builder.
 			 */
-			$this->language = WPGlobus::Config()->builder->get_language();
+			$language = WPGlobus::Config()->builder->get_language();
 
-			if ( ! $this->language ) {
+			if ( ! $language ) {
 				/**
 				 * Language was not set in WPGlobus_Config_Builder class.
 				 */
+			} else {
+				$this->language = $language;
 			}
 
 			$post_id = '';
-			if ( empty( $_REQUEST['post'] ) ) {
-
-				/**
-				 * @todo add doc
-				 */
-
-			} else {
-				if ( ! empty( $_REQUEST['post'] ) ) {
-					$post_id = $_REQUEST['post'];
-				} elseif ( ! empty( $_REQUEST['id'] ) ) {
-					$post_id = $_REQUEST['id'];
-				} elseif ( ! empty( $_REQUEST['post_ID'] ) ) {
-					$post_id = $_REQUEST['post_ID'];
-				}
+			if ( ! empty( $_REQUEST['post'] ) ) {
+				$post_id = $_REQUEST['post'];
+			} elseif ( ! empty( $_REQUEST['id'] ) ) {
+				$post_id = $_REQUEST['id'];
+			} elseif ( ! empty( $_REQUEST['post_ID'] ) ) {
+				$post_id = $_REQUEST['post_ID'];
 			}
 
 			if ( ! empty( $post_id ) && ! is_null( $this->language ) ) {
