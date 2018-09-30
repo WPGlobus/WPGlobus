@@ -78,6 +78,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			} else {
 
 				require_once dirname( __FILE__ ) . '/class-wpglobus-builders.php';
+				/** @noinspection PhpUnusedLocalVariableInspection */
 				$builder = WPGlobus_Builders::get( false );
 
 			}
@@ -188,11 +189,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		/**
 		 * Get builder language.
 		 *
-		 * @param string $post
+		 * @param int|string $post_id
 		 *
 		 * @return array|bool|mixed|string
 		 */
-		public function get_language( $post = '' ) {
+		public function get_language( $post_id = '' ) {
 
 			if ( ! $this->id ) {
 				return false;
@@ -200,7 +201,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $this->is_builder_page() ) {
 				/**
-				 * @todo may be need to check the coincidence value of $this->language with value of WPGlobus::Config()->language.
+				 * @todo maybe need to check the matching of $this->language and WPGlobus::Config()->language.
 				 * @see  Set language for builder in wpglobus\includes\class-wpglobus-config.php
 				 */
 				return $this->language;
@@ -210,28 +211,18 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return $this->language;
 			}
 
-			$_id = false;
-
-			if ( '' === $post ) {
-				/** @global WP_Post $post */
-				global $post;
-			}
-
-			/**
-			 * Get post as global object.
-			 */
-			if ( $post instanceof WP_Post ) {
-				$_id = $post->ID;
-			} else {
-				$_id = (int) $post;
-				if ( 0 === $_id ) {
-					$_id = false;
+			$post_id = (int) $post_id;
+			if ( ! $post_id ) {
+				// Post ID not passed..getting from global Post.
+				$global_post = get_post();
+				if ( $global_post instanceof WP_Post ) {
+					$post_id = $global_post->ID;
 				}
 			}
 
 			$language = false;
-			if ( $_id ) {
-				$language = get_post_meta( $_id, $this->get_language_meta_key(), true );
+			if ( $post_id ) {
+				$language = get_post_meta( $post_id, $this->get_language_meta_key(), true );
 			}
 
 			if ( ! $language ) {
