@@ -229,7 +229,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $language ) {
 
-				if ( empty( $_REQUEST ) ) {
+				if ( empty( $_REQUEST ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 
 					if ( empty( $_SERVER['HTTP_REFERER'] ) ) {
 						/**
@@ -243,11 +243,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 					}
 				} else {
 
-					if ( ! empty( $_REQUEST['language'] ) ) { // WPCS: input var ok, sanitization ok.
+					if ( ! empty( $_REQUEST['language'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$language = sanitize_text_field( $_REQUEST['language'] );
 					}
 
-					if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) { // WPCS: input var ok, sanitization ok.
+					if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$language = sanitize_text_field( $_REQUEST[ WPGlobus::get_language_meta_key() ] );
 					}
 				}
@@ -255,16 +255,16 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $language ) {
 
-				if ( isset( $_REQUEST['post'] ) && 0 !== (int) $_REQUEST['post'] ) { // WPCS: input var ok, sanitization ok.
+				if ( isset( $_REQUEST['post'] ) && 0 !== (int) $_REQUEST['post'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 
-					$language = get_post_meta( $_REQUEST['post'], $this->get_language_meta_key(), true );
+					$language = get_post_meta( $_REQUEST['post'], $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 
-				} elseif ( isset( $_REQUEST['id'] ) && 0 !== (int) $_REQUEST['id'] ) { // WPCS: input var ok, sanitization ok.
+				} elseif ( isset( $_REQUEST['id'] ) && 0 !== (int) $_REQUEST['id'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 
 					/**
 					 * Case when post in draft status are autosaved.
 					 */
-					$language = get_post_meta( $_REQUEST['id'], $this->get_language_meta_key(), true );
+					$language = get_post_meta( $_REQUEST['id'], $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 
 				}
 			}
