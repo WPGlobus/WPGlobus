@@ -240,7 +240,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 						/**
 						 * @todo front-end? check it.
 						 */
-						return;
+						return false;
 
 					} elseif ( false !== strpos( $_SERVER['HTTP_REFERER'], 'language=' ) ) {
 						$language = explode( 'language=', $_SERVER['HTTP_REFERER'] );
