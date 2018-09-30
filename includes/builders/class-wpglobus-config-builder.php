@@ -70,7 +70,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 						$this->attrs[ $key ] = $value;
 					}
 
-					$this->attrs['language'] = $this->language = $this->get_language();
+					$this->language          = $this->get_language();
+					$this->attrs['language'] = $this->language;
 
 				} else {
 					unset( $this->attrs );
@@ -182,7 +183,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		 */
 		public function set_language( $language = '' ) {
 			if ( ! empty( $language ) ) {
-				$this->attrs['language'] = $this->language = $language;
+				$this->language          = $language;
+				$this->attrs['language'] = $this->language;
 			}
 		}
 
@@ -253,11 +255,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $language ) {
 
-				if ( isset( $_REQUEST['post'] ) && (int) $_REQUEST['post'] !== 0 ) { // WPCS: input var ok, sanitization ok.
+				if ( isset( $_REQUEST['post'] ) && 0 !== (int) $_REQUEST['post'] ) { // WPCS: input var ok, sanitization ok.
 
 					$language = get_post_meta( $_REQUEST['post'], $this->get_language_meta_key(), true );
 
-				} elseif ( isset( $_REQUEST['id'] ) && (int) $_REQUEST['id'] !== 0 ) { // WPCS: input var ok, sanitization ok.
+				} elseif ( isset( $_REQUEST['id'] ) && 0 !== (int) $_REQUEST['id'] ) { // WPCS: input var ok, sanitization ok.
 
 					/**
 					 * Case when post in draft status are autosaved.
@@ -410,7 +412,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		}
 
 		/**
-		 * Check if current page is bulder's page.
+		 * Check if current page is builder's page.
 		 */
 		public function is_builder_page() {
 			if ( ! $this->id ) {
