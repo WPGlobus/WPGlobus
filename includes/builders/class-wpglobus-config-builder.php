@@ -33,6 +33,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		protected $language = false;
 
+		protected $default_language;
+
 		/**
 		 * Constructor.
 		 *
