@@ -69,7 +69,7 @@ if ( ! class_exists( 'WPGlobus_Update_Post' ) ) :
 
 				foreach ( WPGlobus::Config()->enabled_languages as $lang ) :
 
-					if ( $lang == $builder_language ) {
+					if ( $lang === $builder_language ) {
 
 						$text = $value;
 						if ( WPGlobus_Core::has_translations( $value ) ) {
