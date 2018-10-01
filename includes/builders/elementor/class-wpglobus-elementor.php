@@ -41,7 +41,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			/**
 			 * @see_file  wpglobus\includes\class-wpglobus.php
-			 * @todo remove after test.
+			 * @todo      remove after test.
 			 */
 			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10 );
 
@@ -89,6 +89,10 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		/**
 		 * To avoid output content with language marks from $post->post_content field on elementor builder page
 		 * if "_elementor_data" meta has not content in extra language.
+		 *
+		 * @param WP_Post $object
+		 *
+		 * @return WP_Post
 		 */
 		public function filter__the_post( $object ) {
 
@@ -114,8 +118,18 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 		/**
 		 * Get meta callback.
+		 *
+		 * @param $check
+		 * @param $object_id
+		 * @param $meta_key
+		 * @param $single
+		 *
+		 * @return string
 		 */
-		public static function filter__post_metadata( $check, $object_id, $meta_key, $single ) {
+		public static function filter__post_metadata(
+			$check, $object_id, $meta_key, /** @noinspection PhpUnusedParameterInspection */
+			$single
+		) {
 
 			if ( self::ELEMENTOR_DATA_META_KEY == $meta_key ) {
 
@@ -234,10 +248,15 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 *
 		 * Filters the document edit url.
 		 *
-		 * @param string   $url      The edit url.
-		 * @param Document $instance The document instance.
+		 * @param string $url      The edit url.
+		 * @param mixed  $instance The document instance.
+		 *
+		 * @return string
 		 */
-		public function filter__url( $url, $instance ) {
+		public function filter__url(
+			$url, /** @noinspection PhpUnusedParameterInspection */
+			$instance
+		) {
 			if ( false === strpos( $url, 'language' ) ) {
 				$url = $url . '&language=' . WPGlobus::Config()->builder->get_language();
 			}
@@ -251,10 +270,15 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 *
 		 * Filters the WordPress preview URL.
 		 *
-		 * @param string   $url  WordPress preview URL.
-		 * @param Document $this The document instance.
+		 * @param string $url      WordPress preview URL.
+		 * @param mixed  $instance The document instance.
+		 *
+		 * @return string
 		 */
-		public function filter__preview_url( $url, $instance ) {
+		public function filter__preview_url(
+			$url, /** @noinspection PhpUnusedParameterInspection */
+			$instance
+		) {
 			$url = WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->builder->get_language() );
 
 			return $url;
