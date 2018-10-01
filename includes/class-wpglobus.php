@@ -339,8 +339,11 @@ class WPGlobus {
 					}
 					$_file = dirname( __FILE__ ).'/builders/'.$id.'/class-wpglobus-'.$id.'-update-post.php';
 					if ( file_exists( $_file ) ) {
-						require_once( $_file );
-						new WPGlobus_Update_Post();
+						/** @noinspection PhpIncludeInspection */
+						require_once $_file;
+						$class_update_post = "WPGlobus_${id}_Update_Post";
+						new $class_update_post();
+//						new WPGlobus_Update_Post();
 					}
 					
 				}

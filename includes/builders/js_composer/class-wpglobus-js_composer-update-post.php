@@ -7,12 +7,13 @@
  */
 
 /**
- * Class WPGlobus_Update_Post.
+ * Class WPGlobus_js_composer_Update_Post.
  */
 
-if ( ! class_exists( 'WPGlobus_Update_Post' ) ) :
+if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
 
-	class WPGlobus_Update_Post {
+	// phpcs:ignore PEAR.NamingConventions
+	class WPGlobus_js_composer_Update_Post {
 
 		/**
 		 * Constructor.
