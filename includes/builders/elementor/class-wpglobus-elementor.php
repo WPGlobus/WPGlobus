@@ -26,11 +26,11 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			parent::__construct( 'elementor' );
 
-			if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) {  // Input var okay.
+			if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 				/**
 				 * @see wp-includes/revision.php
 				 */
-				$post_id = ( $_GET['post'] );
+				$post_id = $_GET['post']; // phpcs:ignore WordPress.CSRF.NonceVerification
 				if ( (int) $post_id > 0 ) {
 					$revision = wp_get_post_autosave( $post_id );
 					if ( is_object( $revision ) ) {
@@ -211,8 +211,9 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 							foreach ( WPGlobus::Config()->enabled_languages as $language ) {
 								?>
 								<li style="margin-bottom:10px;cursor:auto;">
-								<a href="<?php echo $this->base_redirect_url . '&language=' . $language; ?>"><?php echo WPGlobus::Config()->en_language_name[ $language ] . " ($language)"; ?></a>
-								</li><?php
+									<a href="<?php echo esc_url( $this->base_redirect_url . '&language=' . $language ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] . " ($language)" ); ?></a>
+								</li>
+								<?php
 							}
 							?>
 						</ul>
