@@ -26,7 +26,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			parent::__construct( 'elementor' );
 
-			if ( isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) {  // Input var okay.
+			if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) {  // Input var okay.
 				/**
 				 * @see wp-includes/revision.php
 				 */
@@ -96,7 +96,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 */
 		public function filter__the_post( $object ) {
 
-			if ( 'post.php' != WPGlobus::Config()->builder->get( 'pagenow' ) ) {
+			if ( 'post.php' !== WPGlobus::Config()->builder->get( 'pagenow' ) ) {
 				return $object;
 			}
 
@@ -131,7 +131,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			$single
 		) {
 
-			if ( self::ELEMENTOR_DATA_META_KEY == $meta_key ) {
+			if ( self::ELEMENTOR_DATA_META_KEY === $meta_key ) {
 
 				$meta_cache = wp_cache_get( $object_id, 'post_meta' );
 
@@ -144,7 +144,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 						if ( WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
 							$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
 						} else {
-							if ( WPGlobus::Config()->builder->get_language() == WPGlobus::Config()->default_language ) {
+							if ( WPGlobus::Config()->builder->get_language() === WPGlobus::Config()->default_language ) {
 								$_value = $meta_cache[ $meta_key ][0];
 							}
 						}
@@ -160,6 +160,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 					if ( isset( $meta_cache[ $meta_key ] ) && isset( $meta_cache[ $meta_key ][0] ) ) {
 
+						/** @noinspection PhpUnusedLocalVariableInspection */
 						$_value = '';
 
 						if ( WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
