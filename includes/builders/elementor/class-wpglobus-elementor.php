@@ -43,7 +43,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			 * @see_file  wpglobus\includes\class-wpglobus.php
 			 * @todo remove after test.
 			 */
-			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10, 2 );
+			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10 );
 
 			add_filter( 'get_post_metadata', array( $this, 'filter__post_metadata' ), 13, 4 );
 
