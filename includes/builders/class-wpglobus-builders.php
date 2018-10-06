@@ -483,12 +483,15 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				// @todo add handling this case.
 				// }
 
-				$_post_type = $wpdb->get_col( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id ) );
+				// $_post_type = $wpdb->get_col( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}posts WHERE ID = %d", $post_id ) );
+				//
+				// $post_type = '';
+				// if ( ! empty( $_post_type[0] ) ) {
+				// 	$post_type = $_post_type[0];
+				// }
 
-				$post_type = '';
-				if ( ! empty( $_post_type[0] ) ) {
-					$post_type = $_post_type[0];
-				}
+				$post      = get_post( $post_id );
+				$post_type = ( $post ? $post->post_type : '' );
 
 				if ( ! isset( $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) ) {
 					/**
