@@ -449,7 +449,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			global $pagenow;
 
 			/** @global wpdb $wpdb */
-			global $wpdb;
+			// global $wpdb;
 
 			if ( 'post.php' === $pagenow ) {
 
@@ -495,20 +495,18 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 				if ( ! isset( $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) ) {
 					/**
-					 * WPBakery Page Builder is available for pages only (settings was not saved yet).
+					 * WPBakery Page Builder is available for pages only (settings were not saved yet).
 					 */
 					if ( 'page' !== $post_type ) {
 						$_builder_page = false;
 					}
-					// TODO compare booleans or check for empty and not ''==??.
-				} elseif ( '' == $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
+				} elseif ( empty( $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) ) {
 					/**
-					 * All post types are disabled in WPBakery Page Builder.
+					 * Settings exist but set to False, so all post types are disabled in WPBakery Page Builder.
 					 */
 					$_builder_page = false;
 
-					// TODO compare booleans and not '1'==true.
-				} elseif ( '1' == $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
+				} elseif ( false === $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
 					/**
 					 * WPBakery Page Builder is available for pages only.
 					 */
@@ -520,11 +518,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					/**
 					 * Custom settings for post types in WPBakery Page Builder.
 					 */
-					if ( ! empty( $_opts[ $_user->roles[0] ]['capabilities'][ 'vc_access_rules_post_types/' . $post_type ] )
-						 && '1' == $_opts[ $_user->roles[0] ]['capabilities'][ 'vc_access_rules_post_types/' . $post_type ] ) {
-
+					if ( ! empty( $_opts[ $_user->roles[0] ]['capabilities'][ 'vc_access_rules_post_types/' . $post_type ] ) ) {
+						// Setting for this post type exists and set to True.
 						$_builder_page = true;
-
 					} else {
 						$_builder_page = false;
 					}
