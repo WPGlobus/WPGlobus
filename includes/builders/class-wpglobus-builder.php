@@ -34,14 +34,18 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 */
 		//protected $builders = array();
 
+		/**
+		 * @var array
+		 * @todo Unused?
+		 */
 		protected $builder_post = null;
 
 		/**
 		 * Constructor method.
 		 *
 		 * @since  1.9.17
-		 * @access public
-		 * @return void
+		 *
+		 * @param string $id The Builder ID, such as 'gutenberg'.
 		 */
 		public function __construct( $id ) {
 
@@ -49,11 +53,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 			$this->set_current_language();
 
-			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				/**
-				 * @todo Add the handling of AJAX.
-				 */
-			}
+			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			/**
+			 * @todo Add the handling of AJAX.
+			 */
+			// }
 
 			if ( is_admin() ) {
 
@@ -73,7 +77,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			/**
 			 * Show language tabs in post.php page.
 			 *
-			 * @see wpglobus\includes\class-wpglobus.php
+			 * @see_file wpglobus\includes\class-wpglobus.php
 			 */
 			add_filter( 'wpglobus_show_language_tabs', array( $this, 'filter__show_language_tabs' ), 5 );
 
@@ -81,8 +85,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 		/**
 		 * Filter title.
+		 *
+		 * @param string $value   The title.
+		 * @param int    $post_id Unused.
+		 *
+		 * @return string
 		 */
-		public function filter__title( $value, $post_id ) {
+		public function filter__title(
+			$value, /** @noinspection PhpUnusedParameterInspection */
+			$post_id
+		) {
 			$value = WPGlobus_Core::text_filter( $value, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 
 			return $value;
@@ -90,8 +102,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 		/**
 		 * Filter content.
+		 *
+		 * @param string $content The content.
+		 * @param int    $post_id Post ID - Unused.
+		 *
+		 * @return string
 		 */
-		public function filter__content( $content, $post_id ) {
+		public function filter__content(
+			$content, /** @noinspection PhpUnusedParameterInspection */
+			$post_id
+		) {
 			$content = WPGlobus_Core::text_filter( $content, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 
 			return $content;
@@ -99,8 +119,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 		/**
 		 * Filter excerpt.
+		 *
+		 * @param string $excerpt The excerpt.
+		 * @param int    $post_id Post ID - Unused.
+		 *
+		 * @return string
 		 */
-		public function filter__excerpt( $excerpt, $post_id ) {
+		public function filter__excerpt(
+			$excerpt, /** @noinspection PhpUnusedParameterInspection */
+			$post_id
+		) {
 			$excerpt = WPGlobus_Core::text_filter( $excerpt, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 
 			return $excerpt;
@@ -108,8 +136,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 		/**
 		 * Redirect.
+		 *
+		 * @param string $location
+		 * @param int    $post_id Post ID - Unused.
+		 *
+		 * @return string
 		 */
-		public function on__redirect( $location, $post_id ) {
+		public function on__redirect(
+			$location, /** @noinspection PhpUnusedParameterInspection */
+			$post_id
+		) {
 			/**
 			 * Tested with:
 			 * - Page Builder by SiteOrigin OK.
@@ -117,10 +153,21 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			return $location . '&language=' . $this->language;
 		}
 
+		/**
+		 * Getter.
+		 *
+		 * @return null|string
+		 */
 		public function get_id() {
 			return $this->id;
 		}
 
+		/**
+		 * Is this a "builder" post?
+		 *
+		 * @return bool
+		 * @todo Unused?
+		 */
 		public function is_builder_post() {
 			if ( is_null( $this->builder_post ) ) {
 				return false;
@@ -199,6 +246,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * /*********************************************************
 			 * @todo remove code after testing.
 			 */
+			/** @noinspection PhpUnreachableStatementInspection */
 			$language = WPGlobus::Config()->default_language;
 
 			if ( empty( $_REQUEST ) ) {
@@ -275,12 +323,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		/**
 		 * Show language tabs on post.php page.
 		 *
-		 * @see includes\class-wpglobus.php
+		 * @see_file includes\class-wpglobus.php
 		 *
-		 * @param bool
-		 * Returning boolean.
+		 * @param bool $value
+		 *
+		 * @return bool
 		 */
-		public function filter__show_language_tabs( $value ) {
+		public function filter__show_language_tabs(
+			/** @noinspection PhpUnusedParameterInspection */
+			$value
+		) {
 
 			global $pagenow;
 
@@ -299,7 +351,8 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			}
 
 			?>
-			<ul class="wpglobus-post-body-tabs-list">    <?php
+			<ul class="wpglobus-post-body-tabs-list">
+				<?php
 				$order = 0;
 
 				$get_array = $_GET;
@@ -339,9 +392,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 						<!--<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>-->
 						<a style="<?php echo implode( ';', $_link_style ); ?>" title="<?php echo $_link_title; ?>"
 								href="<?php echo $link; ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
-					</li> <?php
+					</li>
+					<?php
 					$order ++;
-				} ?>
+				}
+				?>
 			</ul>
 			<?php
 			/**
@@ -368,4 +423,3 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 	}
 
 endif;
-# --- EOF
