@@ -171,11 +171,8 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 */
 			$language = WPGlobus::Config()->builder->get_language();
 
-			if ( ! $language ) {
-				/**
-				 * Language was not set in WPGlobus_Config_Builder class.
-				 */
-			} else {
+			if ( $language ) {
+				// Language was set in WPGlobus_Config_Builder class.
 				$this->language = $language;
 			}
 
