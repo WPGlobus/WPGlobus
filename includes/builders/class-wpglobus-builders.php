@@ -13,12 +13,24 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 	class WPGlobus_Builders {
 
+		/**
+		 * @var array
+		 */
 		protected static $attrs = array();
 
+		/**
+		 * @var array
+		 */
 		protected static $admin_attrs = array();
 
+		/**
+		 * @var array
+		 */
 		protected static $add_on = array();
 
+		/**
+		 * @return array
+		 */
 		public static function get_addons() {
 
 			self::$add_on['gutenberg'] = array(
@@ -38,16 +50,21 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			);
 
 			self::$add_on['elementor'] = array(
-				'id' 					=> 'elementor',
+				'id'                    => 'elementor',
 				'supported_min_version' => '2.2.4',
-				'const' 				=> 'ELEMENTOR_VERSION',
-				'plugin_name' 			=> 'Elementor',
-				'plugin_uri' 			=> 'https://wordpress.org/plugins/elementor/'
+				'const'                 => 'ELEMENTOR_VERSION',
+				'plugin_name'           => 'Elementor',
+				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
 			);
-			
+
 			return self::$add_on;
 		}
 
+		/**
+		 * @param bool $builder
+		 *
+		 * @return false|array
+		 */
 		public static function get_addon( $builder = false ) {
 			if ( ! $builder ) {
 				return false;
@@ -59,6 +76,11 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			return false;
 		}
 
+		/**
+		 * @param bool $init
+		 *
+		 * @return array|bool
+		 */
 		public static function get( $init = true ) {
 
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -257,13 +279,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
 				return false;
 			}
-			
-			$__builder = self::get_addon('elementor');
-	
+
+			$__builder = self::get_addon( 'elementor' );
+
 			if ( ! $__builder ) {
 				return false;
 			}
-	
+
 			/** @global string $pagenow */
 			global $pagenow;
 
@@ -440,6 +462,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				$_opts = wp_roles()->roles;
 
 				if ( ! function_exists( 'wp_get_current_user' ) ) {
+					/** @noinspection PhpIncludeInspection */
 					require_once ABSPATH . WPINC . '/pluggable.php';
 				}
 
