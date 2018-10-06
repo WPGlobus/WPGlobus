@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
 
 			$('.metabox-base-form #referredby').attr('value', val);
 			
-			var val = $('input[name="_wp_original_http_referer"]').attr('value');
+			val = $('input[name="_wp_original_http_referer"]').attr('value');
 			if ( 'undefined' !== typeof val ) {
 				if( val.indexOf('language=en') == -1 ) {
 					val = val+'&language='+WPGlobusGutenberg.language;
