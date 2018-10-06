@@ -34,6 +34,11 @@ if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
 
 		/**
 		 * Callback for 'wp_insert_post_data'.
+		 *
+		 * @param array $data
+		 * @param array $postarr
+		 *
+		 * @return array mixed
 		 */
 		public function filter__wp_insert_post_data( $data, $postarr ) {
 
