@@ -223,16 +223,16 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				$this->language = $language;
 			}
 
-			$post_id = '';
-			if ( ! empty( $_REQUEST['post'] ) ) {
-				$post_id = $_REQUEST['post'];
-			} elseif ( ! empty( $_REQUEST['id'] ) ) {
-				$post_id = $_REQUEST['id'];
-			} elseif ( ! empty( $_REQUEST['post_ID'] ) ) {
-				$post_id = $_REQUEST['post_ID'];
+			$post_id = 0;
+			if ( ! empty( $_REQUEST['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				$post_id = (int) $_REQUEST['post'];
+			} elseif ( ! empty( $_REQUEST['id'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				$post_id = (int) $_REQUEST['id'];
+			} elseif ( ! empty( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				$post_id = (int) $_REQUEST['post_ID'];
 			}
 
-			if ( ! empty( $post_id ) && ! is_null( $this->language ) ) {
+			if ( $post_id && ! is_null( $this->language ) ) {
 				update_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), $this->language );
 			}
 
@@ -246,6 +246,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * /*********************************************************
 			 * @todo remove code after testing.
 			 */
+			// phpcs:disable
 			/** @noinspection PhpUnreachableStatementInspection */
 			$language = WPGlobus::Config()->default_language;
 
@@ -317,7 +318,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			}
 
 			$this->language = $language;
-
+			// phpcs:enable
 		}
 
 		/**
@@ -345,7 +346,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 			$link_style = array();
 			$link_title = '';
-			if ( 'post-new.php' == $pagenow ) {
+			if ( 'post-new.php' === $pagenow ) {
 				$link_style['cursor'] = 'cursor:not-allowed';
 				$link_title           = esc_html__( 'Save draft before using extra language.', 'wpglobus' );
 			}
@@ -355,7 +356,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				<?php
 				$order = 0;
 
-				$get_array = $_GET;
+				$get_array = $_GET; // phpcs:ignore WordPress.CSRF.NonceVerification
 				/**
 				 * Unset unneeded elements.
 				 */
@@ -364,23 +365,23 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 				foreach ( WPGlobus::Config()->open_languages as $language ) {
 
-					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language;
+					$tab_suffix = WPGlobus::Config()->default_language === $language ? 'default' : $language;
 
 					$_classes = $classes;
 
 					$_link_style = $link_style;
 
-					if ( 'post-new.php' == $pagenow && $language == WPGLobus::Config()->default_language ) {
+					if ( 'post-new.php' === $pagenow && WPGLobus::Config()->default_language === $language ) {
 						$_link_style['cursor'] = '';
 					}
 
-					if ( $language == $this->language ) {
+					if ( $language === $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
 
 					$link        = add_query_arg( array_merge( $get_array, array( 'language' => $language ) ), admin_url( $pagenow ) );
 					$_link_title = '';
-					if ( 'post-new.php' == $pagenow && $language != WPGLobus::Config()->default_language ) {
+					if ( 'post-new.php' === $pagenow && WPGLobus::Config()->default_language !== $language ) {
 						$link        = '#';
 						$_link_title = $link_title;
 					}
@@ -388,10 +389,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>"
 							data-language="<?php echo esc_attr( $language ); ?>"
 							data-order="<?php echo esc_attr( $order ); ?>"
-							class="<?php echo implode( ' ', $_classes ); ?>">
+							class="<?php echo esc_attr( implode( ' ', $_classes ) ); ?>">
 						<!--<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>-->
-						<a style="<?php echo implode( ';', $_link_style ); ?>" title="<?php echo $_link_title; ?>"
-								href="<?php echo $link; ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
+						<a style="<?php echo esc_attr( implode( ';', $_link_style ) ); ?>"
+								title="<?php echo esc_attr( $_link_title ); ?>"
+								href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
 					<?php
 					$order ++;
