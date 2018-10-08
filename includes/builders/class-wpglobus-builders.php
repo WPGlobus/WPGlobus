@@ -506,7 +506,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					 */
 					$_builder_page = false;
 
-				} elseif ( false === $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
+				} elseif ( true === $_opts[ $_user->roles[0] ]['capabilities']['vc_access_rules_post_types'] ) {
 					/**
 					 * WPBakery Page Builder is available for pages only.
 					 */
