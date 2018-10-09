@@ -585,7 +585,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							 *
 							 * @see get_switcher_box() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg.php
 							 */
-							$load_gutenberg = true;
+							if ( isset($_GET['classic-editor']) ) {
+								/**
+								 * Don't start gutenberg support with classic editor.
+								 */
+							} else {
+								$load_gutenberg = true;
+								
+							}
 
 						} elseif ( 'index.php' === $pagenow ) {
 
