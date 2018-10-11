@@ -72,10 +72,28 @@ jQuery(document).ready(function ($) {
 			var iID = setInterval( function() {
 				if ( $('.is-saving').length == 0 ) {
 					clearInterval(iID);
+					if ( WPGlobusGutenberg.pagenow == WPGlobusGutenberg.postNewPage ) {
+						if ( location.pathname.indexOf(WPGlobusGutenberg.postEditPage) != -1 ) {
+							WPGlobusGutenberg.pagenow = WPGlobusGutenberg.postEditPage;
+							$('.wpglobus-gutenberg-selector-box').css({'opacity':'1'}).attr('onclick','');
+							api.reloadPage();
+							return;							
+						}
+					}
 					api.languageSelectorEnabled = true;
 					$('.wpglobus-gutenberg-selector-box').css({'opacity':'1'}).attr('onclick','');
 				}
 			}, 400);				
+		},
+		reloadPage: function() {
+			$('.wpglobus-selector-grid').css({'grid-template-columns':'10% 90%'}); 
+			$('.wpglobus-gutenberg-selector-text').text(WPGlobusGutenberg.i18n.reload); 
+			(function blink() { 
+			  $('.wpglobus-gutenberg-selector').fadeOut(500).fadeIn(500, blink); 
+			})();
+			setTimeout( function() {
+				location.reload();
+			}, 500);
 		},
 		attachListeners: function() {
 			
@@ -113,7 +131,6 @@ jQuery(document).ready(function ($) {
 			 */
 			$(document).on('click', '.editor-post-save-draft', function() {
 				api.setSelectorStatus();
-				
 			});
 			
 			/**

@@ -106,7 +106,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			?>
 			<div style="<?php echo $_box_style; // WPCS: XSS ok. ?>" class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
-				<div style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
+				<div class="wpglobus-selector-grid" style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
@@ -117,13 +117,13 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						&nbsp;<span><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
+						&nbsp;<span class="wpglobus-gutenberg-selector-text"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
 					</a>
 				</div>
 				<ul class="wpglobus-gutenberg-selector-dropdown"
 						style="display:none;position:fixed;margin:5px;list-style-type:none;">
 					<li class="item" style="border:1px solid #ddd;background-color:#eee;padding:4px;">
-						<?php esc_html_e( 'Before switching the language, please save draft or publish and reload the page.', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Before switching the language, please save draft or publish and the page will be reloaded automatically to take effect.', 'wpglobus' ); ?>
 					</li>
 				</ul>
 			</div>
@@ -136,7 +136,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			?>
 			<div style="<?php echo $_box_style; // WPCS: XSS ok. ?>" class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
-				<div style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
+				<div class="wpglobus-selector-grid" style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
 							class="wpglobus-gutenberg-selector"
@@ -149,7 +149,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
 							class="wpglobus-gutenberg-selector"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						&nbsp;<span><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
+						&nbsp;<span class="wpglobus-gutenberg-selector-text"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
 					</a>
 				</div>
 				<ul class="wpglobus-gutenberg-selector-dropdown"
@@ -214,6 +214,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		$tabs = $this->get_switcher_box( $pagenow );
 
+		$i18n = array();
+		$i18n['reload'] = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
+		
 		wp_register_script(
 			'wpglobus-gutenberg',
 			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -231,7 +234,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				'tabs'             => $tabs,
 				'language'         => $this->language,
 				'pagenow'          => $pagenow,
+				'postEditPage'	   => 'post.php',
+				'postNewPage'	   => 'post-new.php',
 				'defaultLanguage'  => WPGlobus::Config()->default_language,
+				'i18n'			   => $i18n
 			)
 		);
 	}
