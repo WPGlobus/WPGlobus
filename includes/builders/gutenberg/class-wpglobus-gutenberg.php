@@ -217,6 +217,14 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		$i18n = array();
 		$i18n['reload'] = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
 		
+		/**
+		 * Check for Yoast SEO.
+		 */
+		$yoast_seo = false; 
+		if ( defined( 'WPSEO_VERSION' ) ) {
+			$yoast_seo = true;
+		}
+		
 		wp_register_script(
 			'wpglobus-gutenberg',
 			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -237,7 +245,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				'postEditPage'	   => 'post.php',
 				'postNewPage'	   => 'post-new.php',
 				'defaultLanguage'  => WPGlobus::Config()->default_language,
-				'i18n'			   => $i18n
+				'i18n'			   => $i18n,
+				'yoastSeo'		   => $yoast_seo
 			)
 		);
 	}

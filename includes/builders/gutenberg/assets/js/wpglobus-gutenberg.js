@@ -17,13 +17,30 @@ jQuery(document).ready(function ($) {
 		initDone: false,
 		languageSelectorBoxDelta: 0,
 		languageSelectorEnabled: true,
+		parseBool: function(b)  {
+			return !(/^(false|0)$/i).test(b) && !!b;
+		},
 		init: function() {
 			if ( 'undefined' === typeof _wpGutenbergCodeEditorSettings ) {
 				return;
 			}
+			WPGlobusGutenberg.yoastSeo = api.parseBool(WPGlobusGutenberg.yoastSeo);
+			api.initListeners();
 			api.setTabs();
 			api.formHandler();
 			api.attachListeners();
+		},
+		initListeners: function() {
+			if ( WPGlobusGutenberg.yoastSeo && 1 == $('.yoast.wpseo-metabox').length ) {
+				/**
+				 * Prevent start of alert message when yoast seo is present.
+				 * Check getEventListeners(window).beforeunload in Chrome console for beforeunload event.
+				 * @see https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference#monitoreventsobject-events
+				 */
+				$(window).on('beforeunload', function (event) {
+					event.stopImmediatePropagation()
+				});				
+			}
 		},
 		formHandler: function() {
 			
