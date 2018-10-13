@@ -498,6 +498,7 @@ class WPGlobus_Options {
 		$this->sections['post-types']       = $this->section_post_types();
 		$this->sections['browser_redirect'] = $this->section_browser_redirect();
 		$this->sections['customizer']       = $this->section_customizer();
+		$this->sections['compatibility']    = $this->section_compatibility();
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
@@ -1374,6 +1375,32 @@ class WPGlobus_Options {
 			'fields'      => $fields,
 		);
 
+	}
+	
+	/**
+	 * Section "Сompatibility".
+	 *
+	 * @since 1.9.17
+	 * @return array
+	 */	
+	protected function section_compatibility() {
+		
+		$fields = array();
+
+		$fields[] =
+			array(
+				'id'    => 'compatibility',
+				'type'  => 'wpglobus_info',
+				'html'  => include dirname(__FILE__). '/templates/compatibility.php',
+				'class' => 'normal',
+			);
+
+		return array(
+			'wpglobus_id' => 'wpglobus_compatibility',
+			'title'       => __( 'Сompatibility' ),
+			'icon'        => 'dashicons dashicons-clipboard',
+			'fields'      => $fields,
+		);		
 	}
 
 	/**

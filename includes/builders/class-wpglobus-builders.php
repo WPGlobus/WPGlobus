@@ -39,14 +39,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
 				'plugin_uri'            => 'https://github.com/WordPress/gutenberg',
+				'path'            		=> 'gutenberg/gutenberg.php',
 			);
 
 			self::$add_on['js_composer'] = array(
 				'id'                    => 'js_composer',
-				'supported_min_version' => '4.0.0',
+				'supported_min_version' => '5.4.0',
 				'const'                 => 'WPB_VC_VERSION',
 				'plugin_name'           => 'WPBakery Page Builder',
 				'plugin_uri'            => 'https://wpbakery.com/',
+				'path'            		=> 'js_composer/js_composer.php',
 			);
 
 			self::$add_on['elementor'] = array(
@@ -55,8 +57,29 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'const'                 => 'ELEMENTOR_VERSION',
 				'plugin_name'           => 'Elementor',
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
+				'path'            		=> 'elementor/elementor.php',
 			);
+			
+			self::$add_on['yoast_seo'] = array(
+				'id'                    => 'yoast_seo',
+				'supported_min_version' => '7.7',
+				'const'                 => 'WPSEO_VERSION',
+				'plugin_name'           => 'Yoast SEO',
+				'plugin_uri'            => 'https://wordpress.org/plugins/wordpress-seo/',
+				'path'            		=> 'wordpress-seo/wp-seo.php',
+			);			
 
+			/**
+			self::$add_on['__test'] = array(
+				'id'                    => '__test',
+				'supported_min_version' => '1.0',
+				'const'                 => '__TEST_VERSION',
+				'plugin_name'           => 'Test Add-on',
+				'plugin_uri'            => '',
+				'path'            		=> 'test-add-on/test-add-on.php',
+			);
+			// */		
+			
 			return self::$add_on;
 		}
 
@@ -606,6 +629,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 								 * @see $_SERVER['REQUEST_URI']
 								 */
 								//$actions = array( 'edit' );
+								// @todo check 'wp/v2/' in wp.api.versionString (JS).
 								if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/posts' ) ) {
 									$load_gutenberg = true;
 								}
