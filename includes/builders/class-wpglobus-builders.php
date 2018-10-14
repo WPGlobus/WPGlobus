@@ -138,31 +138,33 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				//$builder = false;
 
 				self::get_addons();
-
+				
 				/**
 				 * @since 1.9.17
 				 */
 				$builder = self::is_gutenberg();
-				if ( $builder ) {
-					if ( $builder['builder_page'] ) {
+				if ( $builder && $builder['builder_page'] ) {
+					return $builder;
+				}
+
+				/**
+				 * @since 1.9.17
+				 */
+				if ( ! $builder ) { 
+					$builder = self::is_js_composer();
+					if ( $builder && $builder['builder_page'] ) {
 						return $builder;
 					}
 				}
-
+				
 				/**
 				 * @since 1.9.17
 				 */
-				$builder = self::is_js_composer();
-				if ( $builder ) {
-					return $builder;
-				}
-
-				/**
-				 * @since 1.9.17
-				 */
-				$builder = self::is_elementor();
-				if ( $builder ) {
-					return $builder;
+				if ( ! $builder ) { 
+					$builder = self::is_elementor();
+					if ( $builder && $builder['builder_page'] ) {
+						return $builder;
+					}
 				}
 
 				/**
