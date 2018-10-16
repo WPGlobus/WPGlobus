@@ -39,7 +39,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
 				'plugin_uri'            => 'https://github.com/WordPress/gutenberg',
-				'path'            		=> 'gutenberg/gutenberg.php',
+				'path'                  => 'gutenberg/gutenberg.php',
 			);
 
 			self::$add_on['js_composer'] = array(
@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'const'                 => 'WPB_VC_VERSION',
 				'plugin_name'           => 'WPBakery Page Builder',
 				'plugin_uri'            => 'https://wpbakery.com/',
-				'path'            		=> 'js_composer/js_composer.php',
+				'path'                  => 'js_composer/js_composer.php',
 			);
 
 			self::$add_on['elementor'] = array(
@@ -57,29 +57,29 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'const'                 => 'ELEMENTOR_VERSION',
 				'plugin_name'           => 'Elementor',
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
-				'path'            		=> 'elementor/elementor.php',
+				'path'                  => 'elementor/elementor.php',
 			);
-			
+
 			self::$add_on['yoast_seo'] = array(
 				'id'                    => 'yoast_seo',
 				'supported_min_version' => '7.7',
 				'const'                 => 'WPSEO_VERSION',
 				'plugin_name'           => 'Yoast SEO',
 				'plugin_uri'            => 'https://wordpress.org/plugins/wordpress-seo/',
-				'path'            		=> 'wordpress-seo/wp-seo.php',
-			);			
+				'path'                  => 'wordpress-seo/wp-seo.php',
+			);
 
 			/**
-			self::$add_on['__test'] = array(
-				'id'                    => '__test',
-				'supported_min_version' => '1.0',
-				'const'                 => '__TEST_VERSION',
-				'plugin_name'           => 'Test Add-on',
-				'plugin_uri'            => '',
-				'path'            		=> 'test-add-on/test-add-on.php',
-			);
-			// */		
-			
+			 * self::$add_on['__test'] = array(
+			 * 'id'                    => '__test',
+			 * 'supported_min_version' => '1.0',
+			 * 'const'                 => '__TEST_VERSION',
+			 * 'plugin_name'           => 'Test Add-on',
+			 * 'plugin_uri'            => '',
+			 * 'path'                    => 'test-add-on/test-add-on.php',
+			 * );
+			 * // */
+
 			return self::$add_on;
 		}
 
@@ -138,7 +138,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				//$builder = false;
 
 				self::get_addons();
-				
+
 				/**
 				 * @since 1.9.17
 				 */
@@ -150,17 +150,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/**
 				 * @since 1.9.17
 				 */
-				if ( ! $builder ) { 
+				if ( ! $builder ) {
 					$builder = self::is_js_composer();
 					if ( $builder && $builder['builder_page'] ) {
 						return $builder;
 					}
 				}
-				
+
 				/**
 				 * @since 1.9.17
 				 */
-				if ( ! $builder ) { 
+				if ( ! $builder ) {
 					$builder = self::is_elementor();
 					if ( $builder && $builder['builder_page'] ) {
 						return $builder;
@@ -610,15 +610,11 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							 *
 							 * @see get_switcher_box() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg.php
 							 */
-							if ( isset($_GET['classic-editor']) ) {
-								/**
-								 * Don't start gutenberg support with classic editor.
-								 */
-							} else {
+							if ( ! isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+								// Start Gutenberg support if classic editor was not requested.
 								$load_gutenberg = true;
-								
-							}
 
+							}
 						} elseif ( 'index.php' === $pagenow ) {
 
 							/**

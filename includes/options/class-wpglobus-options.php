@@ -307,7 +307,7 @@ class WPGlobus_Options {
 	protected function page_options() {
 		?>
 		<div class="wrap">
-			<h1>WPGlobus <?php esc_html_e( WPGLOBUS_VERSION ); ?></h1>
+			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 			<div id="wpglobus-options-old-browser-warning" class="notice notice-error">
 				<p><strong>
 						<?php esc_html_e( 'If you see this message then your browser may not display the WPGlobus Settings panel properly. Please try another browser.', 'wpglobus' ); ?>
@@ -544,8 +544,8 @@ class WPGlobus_Options {
 		}
 
 		$this->sections['custom-code'] = $this->section_custom_code();
-		
-		$this->sections['debug-info']  = $this->section_debug_info();
+
+		$this->sections['debug-info'] = $this->section_debug_info();
 
 		$this->sections['uninstall'] = $this->section_uninstall();
 
@@ -1079,13 +1079,13 @@ class WPGlobus_Options {
 		}
 
 		$nav_menus = WPGlobus::_get_nav_menus();
-		
+
 		/**
 		 * Make 'Language Selector Menu' option.
 		 */
 		// translators: dropdown option meaning that none of the navigation menus should show the language selector
-		$menus['--none--'] 	= __( '-- none --', 'wpglobus' );
-		$menus['all'] 		= __( 'All menus', 'wpglobus' );
+		$menus['--none--'] = __( '-- none --', 'wpglobus' );
+		$menus['all']      = __( 'All menus', 'wpglobus' );
 		foreach ( $nav_menus as $menu ) {
 			$menus[ $menu->slug ] = $menu->name;
 		}
@@ -1364,7 +1364,7 @@ class WPGlobus_Options {
 			array(
 				'id'    => 'customizer_intro',
 				'type'  => 'wpglobus_info',
-				'html'  => include dirname(__FILE__). '/templates/customize-intro.php',
+				'html'  => include dirname( __FILE__ ) . '/templates/customize-intro.php',
 				'class' => 'normal',
 			);
 
@@ -1376,22 +1376,22 @@ class WPGlobus_Options {
 		);
 
 	}
-	
+
 	/**
 	 * Section "Сompatibility".
 	 *
 	 * @since 1.9.17
 	 * @return array
-	 */	
+	 */
 	protected function section_compatibility() {
-		
+
 		$fields = array();
 
 		$fields[] =
 			array(
 				'id'    => 'compatibility',
 				'type'  => 'wpglobus_info',
-				'html'  => include dirname(__FILE__). '/templates/compatibility.php',
+				'html'  => include dirname( __FILE__ ) . '/templates/compatibility.php',
 				'class' => 'normal',
 			);
 
@@ -1400,7 +1400,7 @@ class WPGlobus_Options {
 			'title'       => __( 'Сompatibility' ),
 			'icon'        => 'dashicons dashicons-clipboard',
 			'fields'      => $fields,
-		);		
+		);
 	}
 
 	/**
@@ -1417,7 +1417,7 @@ class WPGlobus_Options {
 			array(
 				'id'    => 'debug_info_theme',
 				'type'  => 'wpglobus_info',
-				'html'  => include dirname(__FILE__). '/templates/debug-info-theme.php',
+				'html'  => include dirname( __FILE__ ) . '/templates/debug-info-theme.php',
 				'class' => 'normal',
 			);
 
@@ -1429,17 +1429,22 @@ class WPGlobus_Options {
 		);
 
 	}
-	
+
 	/**
 	 * Read file.
+	 *
 	 * @since 1.9.14
+	 *
+	 * @param string $file
+	 *
+	 * @return array|bool
 	 */
-	protected function read_config_file($file = '') {
-		
-		if ( empty($file) ) {
+	protected function read_config_file( $file = '' ) {
+
+		if ( empty( $file ) ) {
 			return false;
 		}
-		
+
 		static $buffers;
 		if ( isset( $buffers[ $file ] ) ) {
 			return $buffers[ $file ];
@@ -1447,50 +1452,56 @@ class WPGlobus_Options {
 
 		$buffer = array();
 
-		$handle = @fopen($file, "r");
-		if ($handle) {
-			while (($_buffer = fgets($handle)) !== false) {
+		$handle = @fopen( $file, 'r' ); // phpcs:ignore Generic.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
+		if ( $handle ) {
+			while ( ( $_buffer = fgets( $handle ) ) !== false ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition, Squiz.PHP.DisallowMultipleAssignments
 				$buffer[] = $_buffer;
 			}
-			if (!feof($handle)) {
+			// if ( ! feof( $handle ) ) {
 				/**
 				 * @todo add error handling.
 				 */
-			}
-			fclose($handle);
+			// }
+			fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		}
-		
+
 		$buffers[ $file ] = $buffer;
-		
+
 		return $buffers[ $file ];
-	}	
+	}
 
 	/**
 	 * Filter options in file.
+	 *
 	 * @since 1.9.14
+	 *
+	 * @param string $file
+	 * @param string $filter
+	 *
+	 * @return array|bool
 	 */
-	protected function config_file_filter($file = '', $filter = '') {
-		
-		if ( empty($file) ) {
+	protected function config_file_filter( $file = '', $filter = '' ) {
+
+		if ( empty( $file ) ) {
 			return false;
 		}
-		
-		$_buffer = $this->read_config_file($file);
+
+		$_buffer = $this->read_config_file( $file );
 
 		$buffer = array();
-		if ( empty($filter) ) {
+		if ( empty( $filter ) ) {
 			return $_buffer;
 		} else {
-			foreach($_buffer as $_id=>$_value) {
-				if ( false !== strpos($_value, $filter) ) {
+			foreach ( $_buffer as $_id => $_value ) {
+				if ( false !== strpos( $_value, $filter ) ) {
 					$buffer[] = $_value;
-				}				
+				}
 			}
 		}
-		
-		return $buffer;	
+
+		return $buffer;
 	}
-	
+
 	/**
 	 * Sanitize $_POST before saving it to the options table.
 	 *
