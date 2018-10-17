@@ -27,7 +27,14 @@ jQuery(document).ready(function ($) {
             if (api.option.pro) {
                api.startAcf('.acf-field');
             } else {
-                api.startAcf('.acf_postbox .field');
+                //api.startAcf('.acf_postbox .field');
+				// @since 1.9.17
+				if ( $('.acf_postbox .field').length > 0 ) {
+					api.startAcf('.acf_postbox .field');
+				}
+				if ( $('.acf-postbox .acf-field').length > 0 ) {
+					api.startAcf('.acf-postbox .acf-field');
+				}				
             }
 			api.attachListeners();
         },

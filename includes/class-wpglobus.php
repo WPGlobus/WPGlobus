@@ -235,6 +235,10 @@ class WPGlobus {
 
 				$this->vendors_scripts['ACF'] = true;
 				$this->disabled_entities[]    = 'acf';
+				/**
+				 * @since 1.9.17
+				 */
+				$this->disabled_entities[]    = 'acf-field-group';
 
 			}
 
