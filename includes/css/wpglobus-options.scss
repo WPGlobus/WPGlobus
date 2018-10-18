@@ -384,3 +384,13 @@
     list-style: initial;
   }
 }
+
+#wpglobus-options-compatibility {
+  border-collapse: collapse;
+}
+
+#wpglobus-options-compatibility th,
+#wpglobus-options-compatibility td {
+  border: 1px solid black;
+  padding: 3px;
+}
