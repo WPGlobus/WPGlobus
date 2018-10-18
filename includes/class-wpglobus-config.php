@@ -221,6 +221,14 @@ class WPGlobus_Config {
 	 * @since 1.9.17
 	 */
 	public $builder = null;
+	
+	/**
+	 * True if builder is disabled.
+	 *
+	 * @var boolean
+	 * @since 1.9.17
+	 */	
+	public $builder_disabled = true;
 
 	/**
 	 * Can get it only once.
@@ -765,27 +773,41 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['last_tab'] ) ) {
 			unset( $wpglobus_option['last_tab'] );
 		}
-		
+
 		/**
 		 * Builders.
 		 * @since 1.9.17
 		 */
-		require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
-		$this->builder = new WPGlobus_Config_Builder(true, array('default_language' => $this->default_language));
-	
-		if ( is_admin() ) {
+		if ( isset( $wpglobus_option['builder_disabled'] ) && 1 === (int) $wpglobus_option['builder_disabled'] ) {
+		
+			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+			$this->builder = new WPGlobus_Config_Builder(false);
 			
-			require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
-			$config_vendor = WPGlobus_Config_Vendor::get_instance();					
+			$this->builder_disabled = true;
+			unset( $wpglobus_option['builder_disabled'] );
 
-			require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
-			WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
-			$this->meta = $config_vendor::get_meta_fields();
+		} else {
 			
-			require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
-			WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
+			$this->builder_disabled = false;
+			
+			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+			$this->builder = new WPGlobus_Config_Builder(true, array('default_language' => $this->default_language));
+		
+			if ( is_admin() ) {
+				
+				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
+				$config_vendor = WPGlobus_Config_Vendor::get_instance();					
 
+				require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
+				WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
+				$this->meta = $config_vendor::get_meta_fields();
+				
+				require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
+				WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
+
+			}
 		}
+
 		
 		/**
 		 * Remaining wpglobus options after unset() is extended options

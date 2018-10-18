@@ -1387,6 +1387,27 @@ class WPGlobus_Options {
 
 		$fields = array();
 
+		$wpglobus_option = get_option( $this->args['opt_name'] );
+		
+		$options = array();
+		
+		/**
+		 * When we add more options, need to update the @see WPGlobus_Options::sanitize_posted_data() method.
+		 */
+		$options['builder_disabled'] = array(
+			'label'   => esc_html__( 'enabled', 'wpglobus' ),
+			'checked' => empty( $wpglobus_option['builder_disabled'] ) || ( isset( $options['builder_disabled'] ) && false === $options['builder_disabled'] ),
+		);
+		
+		$fields[] =
+			array(
+				'id'      => 'builder_disabled',
+				'type'    => 'wpglobus_multicheck',
+				'options' => $options,
+				'name'    => 'wpglobus_option[builder_disabled]',
+				'title'   => esc_html__( 'Builders support', 'wpglobus' ),
+			);
+
 		$fields[] =
 			array(
 				'id'    => 'compatibility',
@@ -1394,7 +1415,7 @@ class WPGlobus_Options {
 				'html'  => include dirname( __FILE__ ) . '/templates/compatibility.php',
 				'class' => 'normal',
 			);
-
+			
 		return array(
 			'wpglobus_id' => 'wpglobus_compatibility',
 			'title'       => __( 'Сompatibility' ),
@@ -1570,6 +1591,18 @@ class WPGlobus_Options {
 			// Otherwise it's 0.
 			$data['browser_redirect'] = array( 'redirect_by_language' => 0 );
 		}
+		
+		// The $data['builder_disabled'].
+		if ( empty( $data['builder_disabled']['builder_disabled'] ) ) {
+			// If passed and empty then set it as "disabled".
+			$data['builder_disabled'] = 1;
+		} else if ( '1' === $data['builder_disabled']['builder_disabled'] ) {
+			// Revert. Unset as "enabled".
+			unset( $data['builder_disabled'] );
+		} else if ( '0' === $data['builder_disabled']['builder_disabled'] ) {
+			// Revert. Set as "disabled".
+			$data['builder_disabled'] = 1;
+		}		
 
 		return $data;
 	}
