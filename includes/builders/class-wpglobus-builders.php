@@ -35,7 +35,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			self::$add_on['gutenberg'] = array(
 				'id'                    => 'gutenberg',
-				'supported_min_version' => '3.9.0',
+				'supported_min_version' => '4.0.0',
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
 				'plugin_uri'            => 'https://github.com/WordPress/gutenberg',
