@@ -125,7 +125,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				<ul class="wpglobus-gutenberg-selector-dropdown"
 						style="display:none;position:fixed;margin:5px;list-style-type:none;">
 					<li class="item" style="border:1px solid #ddd;background-color:#eee;padding:4px;">
-						<?php esc_html_e( 'Before switching the language, please save draft or publish and the page will be reloaded automatically to take effect.', 'wpglobus' ); ?>
+						<?php esc_html_e( 'Before switching the language, please save draft or publish.', 'wpglobus' ); ?>
 					</li>
 				</ul>
 			</div>
