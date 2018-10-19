@@ -40,7 +40,10 @@ class WPGlobus_Post_Types {
 		'acf-field',
 		'acf-field-group',
 		// Gutenberg: @since 1.9.17
-		'wp_block' 
+		'wp_block',
+		// WPBakery PB: @since 1.9.17
+		'vc4_templates',
+		'vc_grid_item'
 	);
 
 	/**
