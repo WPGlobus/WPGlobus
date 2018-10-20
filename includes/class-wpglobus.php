@@ -4028,6 +4028,27 @@ class WPGlobus {
 
 	}
 
+	/**
+	 * Check if script is active.
+	 *
+	 * @since 1.9.17
+	 * @param string $script An script code. 
+	 * @return boolean
+	 */	
+	public function is_script_active( $script = null ) {
+		
+		if ( is_null( $script) ) {
+			return false;
+		}
+		
+		if ( ! isset( $this->vendors_scripts[$script] ) ) {
+			return false;
+		}
+		
+		return $this->vendors_scripts[$script];
+
+	}
+
 }
 
 # --- EOF
