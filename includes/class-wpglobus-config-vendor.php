@@ -23,7 +23,16 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		
 		protected static $post_meta_fields = null;
 		
+		protected static $post_ml_fields = null;
+		
 		protected static $wp_options = null;
+		
+		/**
+		 * Builder.
+		 *
+		 * @var WPGlobus_Config_Builder
+		 */
+		protected static $builder = null;
 		
 		/**
 		 * Array of registered vendors.
@@ -35,11 +44,13 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		/**
 		 * Constructor.
 		 */		
-		protected function __construct() {
+		protected function __construct($builder) {
+			
+			self::$builder = $builder;
 			
 			self::get_config_files();
 			self::parse_config();
-			
+
 		}
 
 		/**
@@ -47,9 +58,9 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		 *
 		 * @return object
 		 */
-		public static function get_instance() {
+		public static function get_instance($builder) {
 			if ( ! ( self::$instance instanceof self ) ) {
-				self::$instance = new self();
+				self::$instance = new self($builder);
 			}
 			return self::$instance;
 		}
@@ -64,6 +75,16 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			return self::$post_meta_fields;			
 		}
 
+		/**
+		 * Get multilingual fields.
+		 */		
+		public static function get_ml_fields() {
+			if ( is_null(self::$post_ml_fields) ) {
+				return false;
+			}
+			return self::$post_ml_fields;			
+		}		
+		
 		/**
 		 * Get wp_options.
 		 */			
@@ -114,6 +135,20 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			if ( defined('ELEMENTOR_VERSION') )  {
 				self::$vendors[] = 'elementor.json';
 			}
+			
+			if ( function_exists( 'acf' ) ) {
+				self::$vendors[] = 'acf.json';
+			}
+			
+			/**
+			 * Page Builder by SiteOrigin.
+			 * https://wordpress.org/plugins/siteorigin-panels/
+			 */	
+			/* 
+			if ( defined('SITEORIGIN_PANELS_VERSION') )  {
+				self::$vendors[] = 'siteorigin-panels.json';
+			}
+			// */
 	
 			foreach( self::$vendors as $file ) {
 				
@@ -127,6 +162,52 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		}
 
 		/**
+		 * Get multilingual fields for post.
+		 */
+		public static function get_post_ml_fields( $_meta, $_init ) {
+			
+			$_post_ml_fields = array();
+			
+			if ( empty($_init) ) {
+				return $_post_ml_fields;
+			}
+			
+			$file 	= empty($_init['file'])  ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];	
+			$class 	= empty($_init['class']) ? '' : $_init['class'];
+			
+			if ( ! empty($class) && class_exists($class) ) {
+				$_post_ml_fields = $class::get_post_multilingual_fields();
+			}			
+
+			return $_post_ml_fields;
+		}
+		
+		/**
+		 * Get meta fields for post.
+		 */
+		public static function get_post_meta_fields( $_meta, $_init ) {	
+			
+			$_post_meta_fields = array();
+			
+			if ( empty($_init) ) {
+				return $_post_meta_fields;
+			}				
+				
+			$file 	= empty($_init['file'])  ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];	
+			$class 	= empty($_init['class']) ? '' : $_init['class'];
+			
+			if ( ! empty($file) && file_exists($file) ) {
+				include_once( $file );
+				if ( ! empty($class) && class_exists($class) ) {
+					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get('post_id') );
+				}
+			}
+
+			return $_post_meta_fields;
+				
+		}
+		
+		/**
 		 * Parse config files.
 		 */
 		public static function parse_config() {	
@@ -136,18 +217,51 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			 */
 			if ( is_null( self::$post_meta_fields ) ) {
 				
+				self::$post_meta_fields = array();
+				self::$post_ml_fields = array();
+				
 				foreach( self::$config as $vendor=>$data ) {
-					
+
 					if ( isset( $data['post_meta_fields'] ) && is_array( $data['post_meta_fields'] ) ) :
+					
 						foreach( $data['post_meta_fields'] as $_meta=>$_init ) {
+
 							if ( isset( $data['post_meta_fields'][$_meta] ) ) {
-								self::$post_meta_fields[] = $_meta;
+
+								if ( '*' == $_meta ) {
+									$_arr = self::get_post_meta_fields($_meta, $_init);
+									if ( ! empty( $_arr ) ) {
+										self::$post_meta_fields = array_merge( self::$post_meta_fields, $_arr );
+									}
+								} else {
+									self::$post_meta_fields[] = $_meta;
+								}
+								
+							}
+							
+						}
+						
+					endif;
+					
+					if ( isset( $data['post_ml_fields'] ) && is_array( $data['post_ml_fields'] ) ) :
+						foreach( $data['post_ml_fields'] as $_meta=>$_init ) {
+							if ( isset( $data['post_ml_fields'][$_meta] ) ) {
+								
+								if ( '*' == $_meta ) {
+									$_arr = self::get_post_ml_fields($_meta, $_init);
+									if ( ! empty( $_arr ) ) {
+										self::$post_ml_fields = array_merge( self::$post_ml_fields, $_arr );
+									}
+								} else {
+									self::$post_ml_fields[] = $_meta;
+								}
+							
 							}
 						}
-					endif;
+					endif;				
 				
 				}
-				
+
 			}
 				
 			/**
@@ -172,8 +286,6 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 				}
 				
 			}				
-			
-			
 			
 		}		
 		
