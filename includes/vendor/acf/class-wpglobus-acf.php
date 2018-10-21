@@ -67,11 +67,30 @@ class WPGlobus_Acf_2 {
 				), ARRAY_A);
 				
 				if ( ! empty($rows) ) {
+					
+					/**
+					 * Filter to enable/disable wysiwyg field.
+					 * Returning boolean.
+					 *
+					 * @since 1.9.17
+					 *
+					 * @param boolean.
+					 */
+					$field_wysiwyg_enabled = apply_filters('wpglobus/vendor/acf/field/wysiwyg', false);
+
 					self::$post_multilingual_fields = array();
 					foreach( $rows as $key=>$field ) {
 						if ( '_' == $field['meta_key'][0] ) {
-							$_post_meta_fields[] = substr_replace( $field['meta_key'], '', 0, 1 );
-							self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $field['meta_value'];
+					
+							$_acf_field = acf_maybe_get_field( $field['meta_value'] );
+
+							if ( $_acf_field['type'] == 'wysiwyg' && ! $field_wysiwyg_enabled ) {
+								// do nothing	
+							} else {
+								$_post_meta_fields[] = substr_replace( $field['meta_key'], '', 0, 1 );
+								self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $field['meta_value'];
+							}
+
 						}
 					}
 				}
