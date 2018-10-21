@@ -401,10 +401,14 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 							if ( WPGlobus_Core::has_translations( $_value ) ) {
 								$_value = WPGlobus_Core::text_filter( $_value, self::$builder->get_language(), WPGlobus::RETURN_EMPTY );
+							} elseif( self::$builder->get_language() != WPGlobus::Config()->default_language ) {
+								$_value = '';
 							}
 
 							if ( ! empty( $_value ) ) {
 								$meta_cache[ $meta_key ][ $_key ] = maybe_unserialize( $_value );
+							} else {
+								$meta_cache[ $meta_key ][ $_key ] = '';
 							}
 						}
 
