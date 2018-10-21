@@ -1,0 +1,12 @@
+{
+  "post_meta_fields": {
+    "*":{"file":"vendor/acf/class-wpglobus-acf.php","class":"WPGlobus_Acf_2"}
+  },
+  "post_ml_fields": {    
+	"*":{"file":"vendor/acf/class-wpglobus-acf.php","class":"WPGlobus_Acf_2"}
+  },
+  "wp_options": {
+	"blogname": {},
+	"blogdescription": null
+  }
+}

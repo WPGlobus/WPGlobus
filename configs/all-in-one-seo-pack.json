@@ -4,6 +4,11 @@
     "_aioseop_description": {},
     "_aioseop_keywords": {}
   },
+  "post_ml_fields": {
+    "aiosp_title": {},
+    "aiosp_description": {},
+    "aiosp_keywords": {}
+  },  
   "wp_options": {
 	"blogname": {},
 	"blogdescription": null
