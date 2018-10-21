@@ -281,7 +281,7 @@ msgid "Save &amp; Reload"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/class-wpglobus.php:1290, wpglobus.php:12, wpglobus.php:18
+#: includes/class-wpglobus.php:1320, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr ""
 
@@ -796,7 +796,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:351,
-#: includes/class-wpglobus.php:3417
+#: includes/class-wpglobus.php:3527
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -859,41 +859,41 @@ msgid "Selector type"
 msgstr "Tipo de selector"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1264
+#: includes/class-wpglobus.php:1294
 msgid "OFF"
 msgstr ""
 
-#: includes/class-wpglobus.php:1265
+#: includes/class-wpglobus.php:1295
 msgid "Turn on"
 msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1269
+#: includes/class-wpglobus.php:1299
 msgid "ON"
 msgstr "ON"
 
-#: includes/class-wpglobus.php:1270
+#: includes/class-wpglobus.php:1300
 msgid "Turn off"
 msgstr ""
 
-#: includes/class-wpglobus.php:1451
+#: includes/class-wpglobus.php:1483
 msgid "You cannot disable the main language."
 msgstr "No se puede desactivar el idioma principal."
 
-#: includes/class-wpglobus.php:1653
+#: includes/class-wpglobus.php:1684
 msgid "*) Available after the menu is saved."
 msgstr "No Se Puede Desactivar el director idioma."
 
-#: includes/class-wpglobus.php:1670
+#: includes/class-wpglobus.php:1701
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3831
+#: includes/class-wpglobus.php:3960
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Debes habilitar los Enlaces permanentes Pretty para utilizar WPGlobus ."
 
-#: includes/class-wpglobus.php:3833
+#: includes/class-wpglobus.php:3962
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -901,7 +901,7 @@ msgstr ""
 "Por favor, ve a Configuración > Enlaces permanentes > Ajustes comunes y "
 "selecciona una opción no predeterminada ."
 
-#: includes/class-wpglobus.php:3974
+#: includes/class-wpglobus.php:4108
 msgid "Add"
 msgstr "Añadir"
 

@@ -4,6 +4,11 @@
 
 ### 1.9.17 ###
 
+* COMPATIBILITY:
+    * ACF 5.7.7
+    * Yoast SEO 8.4
+    * Gutenberg 4.0.0
+    * WPBakery Page Builder 5.5.5
 * INTERNAL:
 	* Correct setting description value on the `nav-menu.php` page.
 

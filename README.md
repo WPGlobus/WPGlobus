@@ -42,8 +42,7 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 	* WPGlobus does NOT translate texts automatically! You will **translate texts manually**.
 
 * PAGE BUILDERS / COMPOSERS:
-
-	* The free version of WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - **require a premium add-on**, which is currently at the Beta-testing stage. [Please read the details here](https://wpglobus.com/wpglobus-page-builders-support/).
+	* Starting from the version 1.9.17, WPGlobus supports Gutenberg and WPBakery Page Builder. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. are currently in development.
 
 * IF YOU UNINSTALL, YOU LOSE TRANSLATIONS:
 
@@ -88,7 +87,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 * [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/): enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) allows you to enter some texts (headings, buttons, etc.) and stores them in the `options` table.
 
-* [WPGlobus for WPBakery Page Builder](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Builder.
+* [WPGlobus for WPBakery Page Builder](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Builder - **obsolete since WPGlobus 1.9.17**.
 
 * [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/): adds multilingual editing capabilities to the visual editor widget.
 
@@ -252,11 +251,6 @@ To install with Composer:
 
 WPGlobus does NOT translate texts! You need to **translate texts manually**.
 
-### Page builders / composers (Avada, Divi, etc.) ###
-
-
-WPGlobus is compatible with the WPBakery Visual Composer. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. - **require a premium add-on**, which is currently at the Beta-testing stage. [Please read the details here](https://wpglobus.com/wpglobus-page-builders-support/).
-
 ### After deactivating WPGlobus, all my pages look like garbage! ###
 
 What you see is a mix of the languages, which WPGlobus knows how to handle when it's active.
@@ -302,16 +296,31 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 
 ## Upgrade Notice ##
 
-### 1.9.15 ###
+### 1.9.17 ###
 
-Please make sure your website's PHP version is at least 5.4.
+This maintenance release introduces Gutenberg support in beta-stage.
 
 ## Changelog ##
 
+### 1.9.17 ###
+
+
+* COMPATIBILITY:
+    * ACF 5.7.7
+    * Yoast SEO 8.4
+    * Gutenberg 4.0.0
+    * WPBakery Page Builder 5.5.5
+
+* INTERNAL:
+	* Correct setting description value on the `nav-menu.php` page.
+
 ### 1.9.16 ###
 
+
 * ADDED:
+
     * Special "flag" icon: `"easy-to-read"`.
+
 * INTERNAL:
     * Initialization of the `WPGlobusDialogApp` JS object on the `nav-menu.php` page.
 
