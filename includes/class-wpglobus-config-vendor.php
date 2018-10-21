@@ -135,7 +135,11 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			if ( defined('ELEMENTOR_VERSION') )  {
 				self::$vendors[] = 'elementor.json';
 			}
-			
+
+			/**
+			 * Advanced Custom Fields.
+			 * https://wordpress.org/plugins/advanced-custom-fields/
+			 */			
 			if ( function_exists( 'acf' ) ) {
 				self::$vendors[] = 'acf.json';
 			}
