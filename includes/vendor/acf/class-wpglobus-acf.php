@@ -48,6 +48,8 @@ class WPGlobus_Acf_2 {
 		
 		/**
 		 * Get post meta.
+		 * Don't use get_field_objects() to get ACF fields @see advanced-custom-fields\includes\api\api-template.php
+		 * to prevent incorrect behavior on post page.
 		 */
 		public static function get_post_meta_fields( $post_id ) {
 			
