@@ -801,6 +801,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			} else {
 				$_attrs = array_merge( $_attrs, self::$admin_attrs );
 			}
+			
+			if ( empty( $_attrs['post_id'] ) ) {
+				if ( isset( $_GET['post'] ) ) {
+					$_attrs['post_id'] = sanitize_text_field( $_GET['post'] );
+				} elseif ( isset( $_REQUEST['post_ID'] ) ) {
+					$_attrs['post_id'] = sanitize_text_field( $_REQUEST['post_ID'] );
+				} else {
+					// @todo Maybe else way to get post ID.
+				}
+			}
 
 			return $_attrs;
 		}
