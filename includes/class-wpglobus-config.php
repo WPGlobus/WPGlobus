@@ -796,7 +796,7 @@ class WPGlobus_Config {
 			if ( is_admin() ) {
 				
 				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
-				$config_vendor = WPGlobus_Config_Vendor::get_instance();					
+				$config_vendor = WPGlobus_Config_Vendor::get_instance( $this->builder );					
 
 				require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
 				WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
@@ -805,6 +805,7 @@ class WPGlobus_Config {
 				require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
 				WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
 
+				$this->builder->set_multilingual_fields($config_vendor::get_ml_fields());
 			}
 		}
 

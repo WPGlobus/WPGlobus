@@ -449,6 +449,23 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			return $data;
 
 		}
+		
+		/**
+		 * Set multilingual fields.
+		 */
+		public function set_multilingual_fields($multilingual_fields) {
+			
+			if ( ! isset( $this->attrs ) ) {
+				return;
+			}
+
+			if ( is_array($multilingual_fields) && ! empty($multilingual_fields) ) {
+				$this->attrs['multilingualFields'] = array_merge($this->attrs['multilingualFields'], $multilingual_fields);
+			}
+			
+			return;
+
+		}
 
 	}
 
