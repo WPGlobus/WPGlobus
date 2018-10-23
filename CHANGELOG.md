@@ -5,9 +5,9 @@
 ### 1.9.18 ###
 
 * COMPATIBILITY:
-	* Elementor v.2.2.6
+	* Elementor 2.2.6
 * FIXED:
-	* Incorrect handling '_yoast_wpseo_title' field for Yoast SEO.
+	* Incorrect handling of the `_yoast_wpseo_title` field for Yoast SEO.
 
 ### 1.9.17 ###
 

@@ -218,6 +218,13 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 == Changelog ==
 
+= 1.9.18 =
+
+* COMPATIBILITY:
+	* Elementor 2.2.6
+* FIXED:
+	* Incorrect handling of the `_yoast_wpseo_title` field for Yoast SEO.
+
 = 1.9.17 =
 
 * COMPATIBILITY:

@@ -1,6 +1,6 @@
 {
   "text_domain": "wpglobus",
-  "copyright": "TIV.NET INC./WPGlobus",
+  "copyright": "WPGlobus / TIV.NET INC.",
   "bugReport": "support@wpglobus.com",
   "version": {
     "define": "WPGLOBUS_VERSION"
