@@ -168,7 +168,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 								return $builder;
 							}
 						} else {
-							include_once( WPGlobus::$PLUGIN_DIR_PATH.'\includes\builders\elementor\class-wpglobus-elementor-front.php' );
+							include_once( WPGlobus::$PLUGIN_DIR_PATH.'includes/builders/elementor/class-wpglobus-elementor-front.php' );
 							WPGlobus_Elementor_Front::init();
 						}
 					}
