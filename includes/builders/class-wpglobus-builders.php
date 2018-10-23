@@ -53,7 +53,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			self::$add_on['elementor'] = array(
 				'id'                    => 'elementor',
-				'supported_min_version' => '2.2.4',
+				'supported_min_version' => '2.2.6',
 				'const'                 => 'ELEMENTOR_VERSION',
 				'plugin_name'           => 'Elementor',
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
