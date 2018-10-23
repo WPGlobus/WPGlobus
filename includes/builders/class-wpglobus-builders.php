@@ -162,8 +162,15 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				 */
 				if ( ! $builder ) {
 					$builder = self::is_elementor();
-					if ( $builder && $builder['builder_page'] ) {
-						return $builder;
+					if ( $builder ) {
+						if ( $builder['is_admin'] ) {
+							if ( $builder['builder_page'] ) {
+								return $builder;
+							}
+						} else {
+							include_once( WPGlobus::$PLUGIN_DIR_PATH.'\includes\builders\elementor\class-wpglobus-elementor-front.php' );
+							WPGlobus_Elementor_Front::init();
+						}
 					}
 				}
 
