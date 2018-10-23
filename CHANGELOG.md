@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+### 1.9.18 ###
+* COMPATIBILITY:
+	* Elementor v.2.2.6
+	
 ### 1.9.17 ###
 
 * COMPATIBILITY:
