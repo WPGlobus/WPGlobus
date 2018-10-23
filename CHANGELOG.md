@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+### 1.9.19 ###
+
+* FIXED:
+	* Elementor: correct path to the file.
+	* Yoast SEO: extract title for the default language.
+
 ### 1.9.18 ###
 
 * COMPATIBILITY:
