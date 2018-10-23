@@ -151,9 +151,9 @@ class WPGlobus_YoastSEO {
 	 * @return string.
 	 */	
 	public static function filter__title( $title ) {
-		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			return $title;
-		}
+		//if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+			//return $title;
+		//}
 		return WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
 	}
 	
