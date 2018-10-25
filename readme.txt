@@ -218,6 +218,11 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 == Changelog ==
 
+= 1.9.20 =
+
+* FIXED:
+    * Missing some `*.min.js` files.
+
 = 1.9.19 =
 
 * FIXED:
