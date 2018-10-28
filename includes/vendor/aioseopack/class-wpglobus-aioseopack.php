@@ -46,7 +46,7 @@ class WPGlobus_All_in_One_SEO_Pack {
 			 */
 			add_filter( 'localization', array( __CLASS__, 'filter__title' ), 0 );
 		}
-
+	
 		/**
 		 * Get instance of this class.
 		 *
@@ -59,6 +59,18 @@ class WPGlobus_All_in_One_SEO_Pack {
 			return self::$instance;
 		}
 
+		/**
+		 * We need to have own copy of this function because we should save empty value if some field in current language is empty.
+		 * @since 1.9.18
+		 */
+		protected static function build_multilingual_string( $translations ) {
+			$sz = '';
+			foreach ( $translations as $language => $text ) {
+				$sz .= WPGlobus::add_locale_marks( $text, $language );
+			}
+			return $sz;
+		}
+		
 		/**
 		 * All In One SEO Pack has not filter for title when generate it in get_page_snippet_info() function.
 		 * @see '$title = $this->internationalize( get_post_meta( $post->ID, '_aioseop_title', true ) );' string in all-in-one-seo-pack\aioseop_class.php.
@@ -85,12 +97,21 @@ class WPGlobus_All_in_One_SEO_Pack {
 		
 		/**
 		 * Get exist fields before deleting.
+		 *
+		 * AioSEOPack does strange thing, it deletes meta from table and adds it again instead of updating.
+		 * Let's revise this scenario.
+		 * 1. get meta ID and meta Value for existing fields @see 'filter__get_exist_fields' filter.
+		 * 2. remove meta value for current language, if we don't do it in 'filter__get_exist_fields' then we can not do it in 'filter__rewrite_fields'.
+		 * 3. update meta @see 'filter__rewrite_fields' filter.
+		 * 4. or add meta if it is not exists.
 		 */
 		public static function filter__get_exist_fields( $check, $object_id, $meta_key, $meta_value, $delete_all ) {
 
 			if ( $delete_all ) {
 				return $check;
 			}
+			
+			global $wpdb;
 
 			if ( isset( self::$meta_fields[ $meta_key ] ) ) {
 				
@@ -100,12 +121,46 @@ class WPGlobus_All_in_One_SEO_Pack {
 				
 				global $wpdb;
 
-				//$value = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = %s AND post_id = %d;", $meta_key, $object_id ) );
 				$value = $wpdb->get_results( $wpdb->prepare( "SELECT meta_value, meta_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND post_id = %d;", $meta_key, $object_id ) );
 
 				if ( $value && $value[0] ) {
-					self::$meta_fields[ $meta_key ] = $value[0]->meta_value;
+					
 					self::$meta_fields_in_processing[ $meta_key ] = $value[0]->meta_id;
+					
+					if ( empty( $value[0]->meta_value ) ) {
+						
+						self::$meta_fields[ $meta_key ] = '';
+					
+					} else {
+						
+						self::$meta_fields[ $meta_key ] = $value[0]->meta_value;
+						
+						$_ml_value = array();
+						foreach( WPGlobus::Config()->enabled_languages as $language ) :
+							if ( $language == WPGlobus::Config()->builder->get_language() ) {
+								$_ml_value[$language] = '';
+							} else {							
+								$_ml_value[$language] = WPGlobus_Core::text_filter(self::$meta_fields[ $meta_key ], $language, WPGlobus::RETURN_EMPTY);
+							}
+						endforeach;					
+
+						self::$meta_fields[ $meta_key ] = self::build_multilingual_string($_ml_value);
+					
+						self::$meta_fields[ $meta_key ] = maybe_serialize( self::$meta_fields[ $meta_key ] );
+
+					}
+		
+					$result = $wpdb->update( 
+							$wpdb->postmeta, 
+							array(
+								'meta_key'   => $meta_key,
+								'meta_value' => self::$meta_fields[ $meta_key ]
+							),
+							array( 'meta_id' => self::$meta_fields_in_processing[ $meta_key ] ),
+							array( '%s', '%s' ),
+							array( '%d' )
+						);						
+					
 				}
 				
 			}
@@ -120,7 +175,7 @@ class WPGlobus_All_in_One_SEO_Pack {
 		public static function filter__rewrite_fields( $check, $object_id, $meta_key, $meta_value ) {
 
 			global $wpdb;
-			
+
 			if ( isset( self::$meta_fields[ $meta_key ] ) ) {
 				
 				if ( ! isset( self::$meta_fields_in_processing[ $meta_key ] ) ) {
@@ -134,21 +189,21 @@ class WPGlobus_All_in_One_SEO_Pack {
 						$ml_value[$language] = $val;
 					}
 				}
-
+				
 				if ( empty($meta_value) ) {
 					unset( $ml_value[ WPGlobus::Config()->builder->get_language() ] );
 				} else {
 					$ml_value[ WPGlobus::Config()->builder->get_language() ] = $meta_value;
 				}
-				
-				$meta_value = WPGlobus_Utils::build_multilingual_string($ml_value);
+
+				$meta_value = self::build_multilingual_string($ml_value);
 			
 				$meta_value = maybe_serialize( $meta_value );
+
+				$mid = (int) self::$meta_fields_in_processing[ $meta_key ];
 				
-				if ( isset(self::$meta_fields_in_processing[ $meta_key ]) && (int) self::$meta_fields_in_processing[ $meta_key ] > 0 ) {
-					
-					$mid = (int) self::$meta_fields_in_processing[ $meta_key ];
-					
+				if ( $mid > 0 ) {
+				
 					$result = $wpdb->update( 
 						$wpdb->postmeta, 
 						array(
@@ -183,11 +238,11 @@ class WPGlobus_All_in_One_SEO_Pack {
 				wp_cache_delete( $object_id, 'post_meta' );
 
 				unset( self::$meta_fields_in_processing[ $meta_key ] );
-				
+			
 				return $mid;
 				
 			}
-
+			
 			return $check;
 			
 		}	
