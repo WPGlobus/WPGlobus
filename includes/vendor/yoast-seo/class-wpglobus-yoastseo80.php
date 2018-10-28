@@ -116,10 +116,6 @@ class WPGlobus_YoastSEO {
 			 * AJAX is probably not required (waiting for a case).
 			 */
 			//add_filter( 'wpseo_title', array( 'WPGlobus_Filters', 'filter__text' ), PHP_INT_MAX );
-			/**
-			 * '_yoast_wpseo_title' field is not multilingual @see yoast-seo.json because it is a mask only.
-			 * @since 1.9.18
-			 */
 			add_filter( 'wpseo_title', array( __CLASS__, 'filter__title' ), PHP_INT_MAX );
 			
 			add_filter( 'wpseo_metadesc', array( 'WPGlobus_Filters', 'filter__text' ), PHP_INT_MAX );
@@ -129,14 +125,14 @@ class WPGlobus_YoastSEO {
 			 * @see <title> view-source:http://www.dev-wpg.com/test-post-seo/
 			 * @see <title> view-source:http://www.dev-wpg.com/ru/test-post-seo/
 			 */
-			//add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 0, 4 );
+			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 6, 4 );
 			
 			/**
 			 * Filter meta keywords.
 			 * @from 1.8.8
 			 */
 			add_filter( 'wpseo_metakeywords', array( __CLASS__, 'filter__metakeywords' ), 0 );
-
+						
 		}
 
 	}
@@ -151,10 +147,58 @@ class WPGlobus_YoastSEO {
 	 * @return string.
 	 */	
 	public static function filter__title( $title ) {
-		//if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			//return $title;
-		//}
-		return WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
+		/**
+		 * In some cases we can get $title like {:en}En title{:}{:ru}Ru title{:}{:fr}Fr title{:} - SiteTitle
+		 * so, let's filter.
+		 */
+		if ( WPGlobus_Core::has_translations($title) ) {
+			return WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
+		}
+		return $title;
+	}
+	
+	/**
+	 * Filter post meta.
+	 *
+	 * @since 1.9.21
+	 * @see function function get_value() in wordpress-seo\inc\class-wpseo-meta.php
+	 */
+	public static function filter__get_post_metadata( $check, $object_id, $meta_key, $single  ) {
+		
+		global $post;
+	
+		if ( $single ) {
+			return $check;
+		}
+		
+		if ( ! is_object($post) ) {
+			return $check;
+		}
+		
+		if ( $object_id != $post->ID ) {
+			return $check;
+		}
+		
+		$meta_type = 'post';	
+		
+		/**
+		 * May be called many times on one page. Let's cache.
+		 */
+		static $_cache;
+		if ( isset( $_cache[ $meta_type ][ $object_id ] ) ) {
+			return $_cache[ $meta_type ][ $object_id ];
+		}	
+		
+		$meta_cache = wp_cache_get($object_id, $meta_type . '_meta');
+
+		if ( ! empty($meta_cache['_yoast_wpseo_title'][0]) ) {
+			$meta_cache['_yoast_wpseo_title'][0] = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_title'][0], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+		}
+
+		$_cache[ $meta_type ][ $object_id ] = $meta_cache;
+		
+		return $meta_cache;
+
 	}
 	
 	/**
@@ -222,7 +266,7 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @return null|array Return metadata array if we are "in business".
 	 */
-	public static function filter__get_post_metadata(
+	public static function filter__get_post_metadata_OLD(
 		$metadata, $post_id, $meta_key, $single
 	) {
 		// Yoast does not pass any `meta_key`, and does not ask for `single`.
