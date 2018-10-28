@@ -218,6 +218,12 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 == Changelog ==
 
+= 1.9.21 =
+
+* FIXED:
+	* All in One SEO Pack: correct saving empty value (keyword, description) for extra languages.
+	* Yoast SEO: correct filter multilingual title on front-end.
+
 = 1.9.20 =
 
 * FIXED:

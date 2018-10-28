@@ -1,8 +1,8 @@
-# Copyright (C) 2018 WPGlobus 1.9.20
-# This file is distributed under the same license as the WPGlobus 1.9.20 package.
+# Copyright (C) 2018 WPGlobus 1.9.21
+# This file is distributed under the same license as the WPGlobus 1.9.21 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.9.20\n"
+"Project-Id-Version: WPGlobus 1.9.21\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
