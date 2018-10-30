@@ -266,6 +266,21 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 					 */
 					$language = get_post_meta( $_REQUEST['id'], $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 
+				} elseif ( isset( $_SERVER['REQUEST_URI'] ) ) {
+					
+					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' ) ) {
+						/**
+						 * Case when post status was changed ( draft->publish or publish->draft ) in Gutenberg.
+						 * @see also is_gutenberg() function in includes\builders\class-wpglobus-builders.php
+						 */
+						$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
+
+						$post_id = end( $_request_uri );
+						if ( 0 !== (int) $post_id ) {
+							$language = get_post_meta( $post_id, $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
+						}
+					}
+			
 				}
 			}
 
