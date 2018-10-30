@@ -27,6 +27,7 @@ $compatibility .= '<tr>';
 $compatibility .= '<th>' . esc_html__( 'Add-on', 'wpglobus' ) . '</th>';
 $compatibility .= '<th>' . esc_html__( 'Current version', 'wpglobus' ) . '</th>';
 $compatibility .= '<th>' . esc_html__( 'Supported minimum version', 'wpglobus' ) . '</th>';
+$compatibility .= '<th>' . esc_html__( 'Stage', 'wpglobus' ) . '</th>';
 $compatibility .= '<th>' . esc_html__( 'Status', 'wpglobus' ) . '</th>';
 $compatibility .= '</tr>';
 $compatibility .= '</thead>';
@@ -51,10 +52,22 @@ foreach ( $add_ons as $add_on ) {
 		$_status = esc_html__( 'Not installed', 'wpglobus' );
 	}
 
+	$_stage = '';
+	if ( empty( $add_on['stage'] ) ) {
+		$_stage = 'production';
+	} else {
+		if ( 'beta' == $add_on['stage'] ) { 
+			$_stage = $add_on['stage'] . ' (*)';
+		} else {
+			$_stage = $add_on['stage'];
+		}		
+	}
+	
 	$compatibility .= '<tr>';
 	$compatibility .= '<td>' . $add_on['plugin_name'] . '</td>';
 	$compatibility .= '<td>' . $_version . '</td>';
 	$compatibility .= '<td>' . $add_on['supported_min_version'] . '</td>';
+	$compatibility .= '<td>' . $_stage . '</td>';
 	$compatibility .= '<td>' . $_status . '</td>';
 	$compatibility .= '</tr>';
 

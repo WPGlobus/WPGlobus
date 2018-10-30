@@ -40,6 +40,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_name'           => 'Gutenberg',
 				'plugin_uri'            => 'https://github.com/WordPress/gutenberg',
 				'path'                  => 'gutenberg/gutenberg.php',
+				'stage'                 => 'production',
 			);
 
 			self::$add_on['js_composer'] = array(
@@ -49,6 +50,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_name'           => 'WPBakery Page Builder',
 				'plugin_uri'            => 'https://wpbakery.com/',
 				'path'                  => 'js_composer/js_composer.php',
+				'stage'                 => 'production',
 			);
 
 			self::$add_on['elementor'] = array(
@@ -58,6 +60,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_name'           => 'Elementor',
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
 				'path'                  => 'elementor/elementor.php',
+				'stage'                 => 'beta',
 			);
 
 			self::$add_on['yoast_seo'] = array(
@@ -67,6 +70,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_name'           => 'Yoast SEO',
 				'plugin_uri'            => 'https://wordpress.org/plugins/wordpress-seo/',
 				'path'                  => 'wordpress-seo/wp-seo.php',
+				'stage'                 => 'production',
 			);
 
 			/**
