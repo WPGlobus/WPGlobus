@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.22 ###
+
+* ADDED:
+    * Alert about builders beta stage.
+	
 ### 1.9.21 ###
 
 * FIXED:
