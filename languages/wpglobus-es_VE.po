@@ -1193,11 +1193,11 @@ msgstr ""
 msgid "Builders support"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1421
+#: includes/options/class-wpglobus-options.php:1429
 msgid "Сompatibility"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1734
+#: includes/options/class-wpglobus-options.php:1742
 msgid "Translate strings"
 msgstr ""
 
@@ -1253,6 +1253,18 @@ msgstr ""
 msgid "No items of this type were found."
 msgstr ""
 
+#: includes/options/templates/compatibility-beta.php:15
+msgid "Multilingual support of this add-on is currently in Beta stage."
+msgstr ""
+
+#: includes/options/templates/compatibility-beta.php:17
+msgid "We do not recommend using it on production sites."
+msgstr ""
+
+#: includes/options/templates/compatibility-beta.php:23
+msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
+msgstr ""
+
 #: includes/options/templates/compatibility.php:22
 msgid "List of supported add-ons"
 msgstr ""
@@ -1270,18 +1282,22 @@ msgid "Supported minimum version"
 msgstr ""
 
 #: includes/options/templates/compatibility.php:30
+msgid "Stage"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:31
 msgid "Status"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:46
+#: includes/options/templates/compatibility.php:47
 msgid "Active"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:48
+#: includes/options/templates/compatibility.php:49
 msgid "Installed, inactive"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:51
+#: includes/options/templates/compatibility.php:52
 msgid "Not installed"
 msgstr ""
 

@@ -172,7 +172,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 								return $builder;
 							}
 						} else {
-							include_once( WPGlobus::$PLUGIN_DIR_PATH.'includes/builders/elementor/class-wpglobus-elementor-front.php' );
+							/** @noinspection PhpIncludeInspection */
+							include_once WPGlobus::$PLUGIN_DIR_PATH . 'includes/builders/elementor/class-wpglobus-elementor-front.php';
 							WPGlobus_Elementor_Front::init();
 						}
 					}
@@ -812,14 +813,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			} else {
 				$_attrs = array_merge( $_attrs, self::$admin_attrs );
 			}
-			
+
 			if ( empty( $_attrs['post_id'] ) ) {
-				if ( isset( $_GET['post'] ) ) {
+				if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$_attrs['post_id'] = sanitize_text_field( $_GET['post'] );
-				} elseif ( isset( $_REQUEST['post_ID'] ) ) {
+				} elseif ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$_attrs['post_id'] = sanitize_text_field( $_REQUEST['post_ID'] );
-				} else {
-					// @todo Maybe else way to get post ID.
+					// } else {
+					// @todo Check additional ways to get post ID.
 				}
 			}
 

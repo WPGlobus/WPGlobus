@@ -1418,12 +1418,12 @@ class WPGlobus_Options {
 
 		$fields[] =
 			array(
-				'id'      => 'builder_beta_stage',
-				'type'    => 'wpglobus_info',
-				'html'    => include dirname( __FILE__ ) . '/templates/compatibility-beta.php',
-				'class'   => 'normal',
+				'id'    => 'builder_beta_stage',
+				'type'  => 'wpglobus_info',
+				'html'  => include dirname( __FILE__ ) . '/templates/compatibility-beta.php',
+				'class' => 'normal',
 			);
-			
+
 		return array(
 			'wpglobus_id' => 'wpglobus_compatibility',
 			'title'       => __( 'Сompatibility', 'wpglobus' ),

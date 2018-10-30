@@ -56,13 +56,13 @@ foreach ( $add_ons as $add_on ) {
 	if ( empty( $add_on['stage'] ) ) {
 		$_stage = 'production';
 	} else {
-		if ( 'beta' == $add_on['stage'] ) { 
-			$_stage = $add_on['stage'] . ' (*)';
+		if ( 'beta' === $add_on['stage'] ) {
+			$_stage = $add_on['stage'] . ' *)';
 		} else {
 			$_stage = $add_on['stage'];
-		}		
+		}
 	}
-	
+
 	$compatibility .= '<tr>';
 	$compatibility .= '<td>' . $add_on['plugin_name'] . '</td>';
 	$compatibility .= '<td>' . $_version . '</td>';

@@ -218,6 +218,13 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 == Changelog ==
 
+= 1.9.22 =
+
+* FIXED:
+	* Gutenberg: Correctly define language of the current post for REST API requests.
+* ADDED:
+    * Notice about builders in Beta stage.
+
 = 1.9.21 =
 
 * FIXED:

@@ -5,9 +5,9 @@
 ### 1.9.22 ###
 
 * FIXED:
-	* correct defining current post's language for REST API request (Gutenberg).
+	* Gutenberg: Correctly define language of the current post for REST API requests.
 * ADDED:
-    * Alert about builders beta stage.
+    * Notice about builders in Beta stage.
 	
 ### 1.9.21 ###
 
