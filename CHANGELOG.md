@@ -4,6 +4,8 @@
 
 ### 1.9.22 ###
 
+* FIXED:
+	* correct defining current post's language for REST API request (Gutenberg).
 * ADDED:
     * Alert about builders beta stage.
 	
