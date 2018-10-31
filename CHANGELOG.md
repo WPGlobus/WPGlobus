@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.23 ###
+
+* FIXED:
+	* ACF: Check the existing of function to prevent getting fatal error in older version.
+	
 ### 1.9.22 ###
 
 * FIXED:
