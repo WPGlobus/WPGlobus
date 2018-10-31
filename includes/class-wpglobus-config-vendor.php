@@ -141,7 +141,12 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 			 * https://wordpress.org/plugins/advanced-custom-fields/
 			 */			
 			if ( function_exists( 'acf' ) ) {
-				self::$vendors[] = 'acf.json';
+				/**
+				 * Let's check the existing of function to prevent getting fatal error in older version (checked with 4.4.12).
+				 */
+				if ( function_exists( 'acf_maybe_get_field' ) ) {
+					self::$vendors[] = 'acf.json';
+				}
 			}
 			
 			/**
