@@ -307,6 +307,8 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 * FIXED:
 
+    * Gutenberg: saving languages correctly when editing pages.
+
 	* ACF: Check the existence of the `acf_maybe_get_field` function to prevent fatal error in older versions.
 
 ### 1.9.22 ###

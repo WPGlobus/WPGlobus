@@ -40,7 +40,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			 */
 
 			/**
-			 * @see wp-includes\rest-api\endpoints\class-wp-rest-posts-controller.php
+			 * @see \WP_REST_Posts_Controller::prepare_item_for_database
 			 */
 			add_filter( 'rest_pre_insert_post', array( $this, 'filter__pre_insert_post' ), 2, 2 );
 			add_filter( 'rest_pre_insert_page', array( $this, 'filter__pre_insert_post' ), 2, 2 );
@@ -51,7 +51,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			add_filter( 'wp_insert_post_data', array( $this, 'filter__wp_insert_post_data' ), 100, 2 );
 
 			/**
-			 * @see \wp-includes\rest-api\class-wp-rest-server.php
+			 * @see \WP_REST_Server::dispatch in \wp-includes\rest-api\class-wp-rest-server.php
 			 */
 			add_filter( 'rest_request_after_callbacks', array( $this, 'filter__rest_after_callbacks' ), 10, 3 );
 

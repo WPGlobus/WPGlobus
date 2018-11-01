@@ -262,20 +262,21 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				} elseif ( isset( $_REQUEST['id'] ) && 0 !== (int) $_REQUEST['id'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 
 					/**
-					 * Case when post in draft status are autosaved.
+					 * Case when post in draft status is autosaved.
 					 */
 					$language = get_post_meta( $_REQUEST['id'], $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 
 				} elseif ( isset( $_SERVER['REQUEST_URI'] ) ) {
-					
+
 					/**
-					 * @see also Update action in includes\builders\class-wpglobus-builders.php
+					 * See also the Update action in @see \WPGlobus_Builders
 					 */
 					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' )
-							|| false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/pages/' ) ) {
+						 || false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/pages/' ) ) {
 						/**
 						 * Case when post status was changed ( draft->publish or publish->draft ) in Gutenberg.
-						 * @see also is_gutenberg() function in includes\builders\class-wpglobus-builders.php
+						 *
+						 * @see \WPGlobus_Builders::is_gutenberg()
 						 */
 						$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
 
@@ -284,7 +285,6 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 							$language = get_post_meta( $post_id, $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 						}
 					}
-			
 				}
 			}
 
@@ -468,22 +468,21 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			return $data;
 
 		}
-		
+
 		/**
 		 * Set multilingual fields.
+		 *
+		 * @param array $multilingual_fields
 		 */
-		public function set_multilingual_fields($multilingual_fields) {
-			
+		public function set_multilingual_fields( $multilingual_fields ) {
+
 			if ( ! isset( $this->attrs ) ) {
 				return;
 			}
 
-			if ( is_array($multilingual_fields) && ! empty($multilingual_fields) ) {
-				$this->attrs['multilingualFields'] = array_merge($this->attrs['multilingualFields'], $multilingual_fields);
+			if ( is_array( $multilingual_fields ) && ! empty( $multilingual_fields ) ) {
+				$this->attrs['multilingualFields'] = array_merge( $this->attrs['multilingualFields'], $multilingual_fields );
 			}
-			
-			return;
-
 		}
 
 	}
