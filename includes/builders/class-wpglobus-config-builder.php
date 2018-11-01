@@ -268,7 +268,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 				} elseif ( isset( $_SERVER['REQUEST_URI'] ) ) {
 					
-					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' ) ) {
+					/**
+					 * @see also Update action in includes\builders\class-wpglobus-builders.php
+					 */
+					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' )
+							|| false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/pages/' ) ) {
 						/**
 						 * Case when post status was changed ( draft->publish or publish->draft ) in Gutenberg.
 						 * @see also is_gutenberg() function in includes\builders\class-wpglobus-builders.php

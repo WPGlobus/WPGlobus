@@ -640,9 +640,15 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 								 */
 								//$actions = array( 'edit' );
 								// @todo check 'wp/v2/' in wp.api.versionString (JS).
-								if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/posts' ) ) {
+
+								// /wp-json/wp/v2/posts/
+								// /wp-json/wp/v2/pages/
+								// @todo check /wp-json/wp/v2/taxonomies?context=edit
+								if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/posts' )
+									|| false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/pages' ) ) {
 									$load_gutenberg = true;
 								}
+								
 							}
 						} elseif ( 'post.php' === $pagenow ) {
 
