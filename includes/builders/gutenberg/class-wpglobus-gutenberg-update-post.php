@@ -43,6 +43,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			 * @see wp-includes\rest-api\endpoints\class-wp-rest-posts-controller.php
 			 */
 			add_filter( 'rest_pre_insert_post', array( $this, 'filter__pre_insert_post' ), 2, 2 );
+			add_filter( 'rest_pre_insert_page', array( $this, 'filter__pre_insert_post' ), 2, 2 );
 
 			/**
 			 * @todo incorrect the saving post in extra languages with priority = 10
