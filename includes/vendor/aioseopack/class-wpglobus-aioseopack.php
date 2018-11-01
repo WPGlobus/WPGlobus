@@ -20,7 +20,7 @@ class WPGlobus_All_in_One_SEO_Pack {
 		protected static $meta_fields_in_processing = array();
 		
 		/**
-		 * @var object Instance of this class.
+		 * @var WPGlobus_All_in_One_SEO_Pack Instance of this class.
 		 */
 		protected static $instance;
 		
@@ -50,10 +50,10 @@ class WPGlobus_All_in_One_SEO_Pack {
 		/**
 		 * Get instance of this class.
 		 *
-		 * @return object
+		 * @return WPGlobus_All_in_One_SEO_Pack
 		 */
 		public static function get_instance() {
-			if ( ! ( self::$instance instanceof self ) ) {
+			if ( ! ( self::$instance instanceof WPGlobus_All_in_One_SEO_Pack ) ) {
 				self::$instance = new self();
 			}
 			return self::$instance;

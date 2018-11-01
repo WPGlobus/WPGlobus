@@ -27,10 +27,10 @@ class WPGlobus_Acf_2 {
 		/**
 		 * Get instance of this class.
 		 *
-		 * @return object
+		 * @return WPGlobus_Acf_2
 		 */
 		public static function get_instance() {
-			if ( ! ( self::$instance instanceof self ) ) {
+			if ( ! ( self::$instance instanceof WPGlobus_Acf_2 ) ) {
 				self::$instance = new self();
 			}
 			return self::$instance;

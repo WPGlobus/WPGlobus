@@ -3,51 +3,53 @@
  * Class WPGlobus_Config_Vendor
  *
  * @package WPGlobus\Config
- * @author Alex Gor(alexgff)
+ * @author  Alex Gor(alexgff)
  */
- 
-if ( ! class_exists('WPGlobus_Config_Vendor') ) :
+
+if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 	class WPGlobus_Config_Vendor {
-		
+
 		const PLUGIN_CONFIG_FILES = 'configs/*.json';
-		
+
 		const PLUGIN_CONFIG_DIR = 'configs/';
-		
+
 		/**
 		 * @var object Instance of this class.
 		 */
 		protected static $instance;
-		
+
 		protected static $config = array();
-		
+
 		protected static $post_meta_fields = null;
-		
+
 		protected static $post_ml_fields = null;
-		
+
 		protected static $wp_options = null;
-		
+
 		/**
 		 * Builder.
 		 *
 		 * @var WPGlobus_Config_Builder
 		 */
 		protected static $builder = null;
-		
+
 		/**
 		 * Array of registered vendors.
 		 *
 		 * @var string[]
 		 */
 		protected static $vendors = array();
-	
+
 		/**
 		 * Constructor.
-		 */		
-		protected function __construct($builder) {
-			
+		 *
+		 * @param $builder
+		 */
+		protected function __construct( $builder ) {
+
 			self::$builder = $builder;
-			
+
 			self::get_config_files();
 			self::parse_config();
 
@@ -56,251 +58,261 @@ if ( ! class_exists('WPGlobus_Config_Vendor') ) :
 		/**
 		 * Get instance of this class.
 		 *
-		 * @return object
+		 * @param $builder
+		 *
+		 * @return WPGlobus_Config_Vendor
 		 */
-		public static function get_instance($builder) {
-			if ( ! ( self::$instance instanceof self ) ) {
-				self::$instance = new self($builder);
+		public static function get_instance( $builder ) {
+			if ( ! ( self::$instance instanceof WPGlobus_Config_Vendor ) ) {
+				self::$instance = new self( $builder );
 			}
+
 			return self::$instance;
 		}
 
 		/**
 		 * Get meta fields.
-		 */		
+		 */
 		public static function get_meta_fields() {
-			if ( is_null(self::$post_meta_fields) ) {
+			if ( is_null( self::$post_meta_fields ) ) {
 				return false;
 			}
-			return self::$post_meta_fields;			
+
+			return self::$post_meta_fields;
 		}
 
 		/**
 		 * Get multilingual fields.
-		 */		
+		 */
 		public static function get_ml_fields() {
-			if ( is_null(self::$post_ml_fields) ) {
+			if ( is_null( self::$post_ml_fields ) ) {
 				return false;
 			}
-			return self::$post_ml_fields;			
-		}		
-		
+
+			return self::$post_ml_fields;
+		}
+
 		/**
 		 * Get wp_options.
-		 */			
+		 */
 		public static function get_wp_options() {
-			if ( is_null(self::$wp_options) ) {
+			if ( is_null( self::$wp_options ) ) {
 				return false;
 			}
+
 			return self::$wp_options;
 		}
-		
+
 		/**
 		 * Get config files.
 		 */
 		public static function get_config_files() {
-			
+
 			$config_plugin_dir = WPGlobus::$PLUGIN_DIR_PATH . self::PLUGIN_CONFIG_DIR;
 
 			/**
 			 * WPGlobus SEO.
 			 */
-			if ( function_exists('wpglobus_seo__init') ) {
+			if ( function_exists( 'wpglobus_seo__init' ) ) {
 				self::$vendors[] = 'wpglobus-seo.json';
 			}
-			
+
 			/**
 			 * Yoast SEO.
 			 * https://wordpress.org/plugins/wordpress-seo/
 			 */
-			if ( defined('WPSEO_VERSION') )  {
+			if ( defined( 'WPSEO_VERSION' ) ) {
 				/**
 				 * check 'WPSEO_PREMIUM_PLUGIN_FILE' for premium add-on.
 				 */
 				self::$vendors[] = 'yoast-seo.json';
 			}
-		
+
 			/**
 			 * All in One SEO Pack.
 			 * https://wordpress.org/plugins/all-in-one-seo-pack/
 			 */
-			if ( defined('AIOSEOP_VERSION') )  {
+			if ( defined( 'AIOSEOP_VERSION' ) ) {
 				self::$vendors[] = 'all-in-one-seo-pack.json';
 			}
-	
+
 			/**
 			 * Elementor.
 			 * https://wordpress.org/plugins/elementor/
 			 */
-			if ( defined('ELEMENTOR_VERSION') )  {
+			if ( defined( 'ELEMENTOR_VERSION' ) ) {
 				self::$vendors[] = 'elementor.json';
 			}
 
 			/**
 			 * Advanced Custom Fields.
 			 * https://wordpress.org/plugins/advanced-custom-fields/
-			 */			
+			 */
 			if ( function_exists( 'acf' ) ) {
 				/**
-				 * Let's check the existing of function to prevent getting fatal error in older version (checked with 4.4.12).
+				 * Check the existence of function to prevent getting fatal error in older version (checked with 4.4.12).
 				 */
 				if ( function_exists( 'acf_maybe_get_field' ) ) {
 					self::$vendors[] = 'acf.json';
 				}
 			}
-			
+
 			/**
 			 * Page Builder by SiteOrigin.
 			 * https://wordpress.org/plugins/siteorigin-panels/
-			 */	
-			/* 
-			if ( defined('SITEORIGIN_PANELS_VERSION') )  {
-				self::$vendors[] = 'siteorigin-panels.json';
-			}
-			// */
-	
-			foreach( self::$vendors as $file ) {
-				
+			 */
+			// if ( defined('SITEORIGIN_PANELS_VERSION') )  {
+			// 	self::$vendors[] = 'siteorigin-panels.json';
+			// }
+
+			foreach ( self::$vendors as $file ) {
+
 				if ( is_readable( $config_plugin_dir . $file ) ) {
-					$file_name = pathinfo( $file, PATHINFO_FILENAME );
-					self::$config[$file_name] = json_decode(file_get_contents($config_plugin_dir . $file), true);
+					$file_name                  = pathinfo( $file, PATHINFO_FILENAME );
+					self::$config[ $file_name ] = json_decode( file_get_contents( $config_plugin_dir . $file ), true );
 				}
-				
 			}
-			
+
 		}
 
 		/**
 		 * Get multilingual fields for post.
+		 *
+		 * @param $_meta
+		 * @param $_init
+		 *
+		 * @return array
 		 */
 		public static function get_post_ml_fields( $_meta, $_init ) {
-			
+
 			$_post_ml_fields = array();
-			
-			if ( empty($_init) ) {
+
+			if ( empty( $_init ) ) {
 				return $_post_ml_fields;
 			}
-			
-			$file 	= empty($_init['file'])  ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];	
-			$class 	= empty($_init['class']) ? '' : $_init['class'];
-			
-			if ( ! empty($class) && class_exists($class) ) {
+
+			$file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
+
+			/** @var WPGlobus_Acf_2 $class */
+			$class = empty( $_init['class'] ) ? '' : $_init['class'];
+
+			if ( ! empty( $class ) && class_exists( $class ) ) {
 				$_post_ml_fields = $class::get_post_multilingual_fields();
-			}			
+			}
 
 			return $_post_ml_fields;
 		}
-		
+
 		/**
 		 * Get meta fields for post.
+		 *
+		 * @param $_meta
+		 * @param $_init
+		 *
+		 * @return array
 		 */
-		public static function get_post_meta_fields( $_meta, $_init ) {	
-			
+		public static function get_post_meta_fields( $_meta, $_init ) {
+
 			$_post_meta_fields = array();
-			
-			if ( empty($_init) ) {
+
+			if ( empty( $_init ) ) {
 				return $_post_meta_fields;
-			}				
-				
-			$file 	= empty($_init['file'])  ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];	
-			$class 	= empty($_init['class']) ? '' : $_init['class'];
-			
-			if ( ! empty($file) && file_exists($file) ) {
-				include_once( $file );
-				if ( ! empty($class) && class_exists($class) ) {
-					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get('post_id') );
+			}
+
+			$file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
+
+			/** @var WPGlobus_Acf_2 $class */
+			$class = empty( $_init['class'] ) ? '' : $_init['class'];
+
+			if ( ! empty( $file ) && file_exists( $file ) ) {
+				/** @noinspection PhpIncludeInspection */
+				include_once $file;
+				if ( ! empty( $class ) && class_exists( $class ) ) {
+					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get( 'post_id' ) );
 				}
 			}
 
 			return $_post_meta_fields;
-				
+
 		}
-		
+
 		/**
 		 * Parse config files.
 		 */
-		public static function parse_config() {	
+		public static function parse_config() {
 
 			/**
 			 * Parse post meta fields.
 			 */
 			if ( is_null( self::$post_meta_fields ) ) {
-				
+
 				self::$post_meta_fields = array();
-				self::$post_ml_fields = array();
-				
-				foreach( self::$config as $vendor=>$data ) {
+				self::$post_ml_fields   = array();
+
+				foreach ( self::$config as $vendor => $data ) {
 
 					if ( isset( $data['post_meta_fields'] ) && is_array( $data['post_meta_fields'] ) ) :
-					
-						foreach( $data['post_meta_fields'] as $_meta=>$_init ) {
 
-							if ( isset( $data['post_meta_fields'][$_meta] ) ) {
+						foreach ( $data['post_meta_fields'] as $_meta => $_init ) {
+
+							if ( isset( $data['post_meta_fields'][ $_meta ] ) ) {
 
 								if ( '*' == $_meta ) {
-									$_arr = self::get_post_meta_fields($_meta, $_init);
+									$_arr = self::get_post_meta_fields( $_meta, $_init );
 									if ( ! empty( $_arr ) ) {
 										self::$post_meta_fields = array_merge( self::$post_meta_fields, $_arr );
 									}
 								} else {
 									self::$post_meta_fields[] = $_meta;
 								}
-								
 							}
-							
 						}
-						
+
 					endif;
-					
+
 					if ( isset( $data['post_ml_fields'] ) && is_array( $data['post_ml_fields'] ) ) :
-						foreach( $data['post_ml_fields'] as $_meta=>$_init ) {
-							if ( isset( $data['post_ml_fields'][$_meta] ) ) {
-								
+						foreach ( $data['post_ml_fields'] as $_meta => $_init ) {
+							if ( isset( $data['post_ml_fields'][ $_meta ] ) ) {
+
 								if ( '*' == $_meta ) {
-									$_arr = self::get_post_ml_fields($_meta, $_init);
+									$_arr = self::get_post_ml_fields( $_meta, $_init );
 									if ( ! empty( $_arr ) ) {
 										self::$post_ml_fields = array_merge( self::$post_ml_fields, $_arr );
 									}
 								} else {
 									self::$post_ml_fields[] = $_meta;
 								}
-							
 							}
 						}
-					endif;				
-				
-				}
+					endif;
 
+				}
 			}
-				
+
 			/**
 			 * Parse WP options.
 			 */
 			if ( is_null( self::$wp_options ) ) {
-				
-				foreach( self::$config as $vendor=>$data ) {	
+
+				foreach ( self::$config as $vendor => $data ) {
 
 					if ( isset( $data['wp_options'] ) && is_array( $data['wp_options'] ) ) :
-						foreach( $data['wp_options'] as $_option=>$_init ) {
-							if ( isset( $data['wp_options'][$_option] ) ) {
+						foreach ( $data['wp_options'] as $_option => $_init ) {
+							if ( isset( $data['wp_options'][ $_option ] ) ) {
 								self::$wp_options[] = $_option;
 							}
 						}
 					endif;
-					
+
 				}
-				
+
 				if ( ! is_null( self::$wp_options ) ) {
 					self::$wp_options = array_unique( self::$wp_options );
 				}
-				
-			}				
-			
-		}		
-		
-	
-	}
-	
-endif;
+			}
 
-# --- EOF
+		}
+
+	}
+
+endif;

@@ -44,7 +44,7 @@ if ( ! class_exists( 'WPGlobus_WP_Options' ) ) :
 		 * @return WPGlobus_WP_Options
 		 */
 		public static function get_instance( $wp_options ) {
-			if ( ! ( self::$instance instanceof self ) ) {
+			if ( ! ( self::$instance instanceof WPGlobus_WP_Options ) ) {
 				self::$instance = new self( $wp_options );
 			}
 

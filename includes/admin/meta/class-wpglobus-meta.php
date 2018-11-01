@@ -69,7 +69,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		 * @return WPGlobus_Meta
 		 */
 		public static function get_instance( $meta_fields, $builder ) {
-			if ( ! ( self::$instance instanceof self ) ) {
+			if ( ! ( self::$instance instanceof WPGlobus_Meta ) ) {
 				self::$instance = new self( $meta_fields, $builder );
 			}
 
@@ -130,8 +130,9 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			/**
 			 * Don't auto-modify this SQL query.
 			 */
+			// phpcs:ignore WordPress.WP.PreparedSQL
 			$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
-			
+
 			/*
 			// Incorrect query.
 			$meta_ids = $wpdb->get_col( $wpdb->prepare(
@@ -401,7 +402,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 							if ( WPGlobus_Core::has_translations( $_value ) ) {
 								$_value = WPGlobus_Core::text_filter( $_value, self::$builder->get_language(), WPGlobus::RETURN_EMPTY );
-							} elseif( self::$builder->get_language() != WPGlobus::Config()->default_language ) {
+							} elseif ( self::$builder->get_language() !== WPGlobus::Config()->default_language ) {
 								$_value = '';
 							}
 

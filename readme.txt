@@ -218,6 +218,11 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 == Changelog ==
 
+= 1.9.23 =
+
+* FIXED:
+	* ACF: Check the existence of the `acf_maybe_get_field` function to prevent fatal error in older versions.
+
 = 1.9.22 =
 
 * FIXED:
