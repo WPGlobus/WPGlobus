@@ -133,7 +133,12 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 * https://wordpress.org/plugins/all-in-one-seo-pack/
 			 */
 			if ( defined( 'AIOSEOP_VERSION' ) ) {
-				self::$vendors[] = 'all-in-one-seo-pack.json';
+				/**
+				 * Load config file for builder page only.
+				 */
+				if ( self::$builder->is_builder_page() ) {
+					self::$vendors[] = 'all-in-one-seo-pack.json';
+				}			
 			}
 
 			/**
