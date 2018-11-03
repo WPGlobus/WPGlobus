@@ -2,12 +2,15 @@
 /**
  * Class WPGlobus_Config_Vendor
  *
- * @package WPGlobus\Config
+ * @package WPGlobus
  * @author  Alex Gor(alexgff)
  */
 
 if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
+	/**
+	 * Vendor configuration.
+	 */
 	class WPGlobus_Config_Vendor {
 
 		const PLUGIN_CONFIG_FILES = 'configs/*.json';
@@ -15,16 +18,30 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		const PLUGIN_CONFIG_DIR = 'configs/';
 
 		/**
-		 * @var object Instance of this class.
+		 * Instance of this class.
+		 *
+		 * @var WPGlobus_Config_Vendor
 		 */
 		protected static $instance;
 
+		/**
+		 * @var array
+		 */
 		protected static $config = array();
 
+		/**
+		 * @var array|null
+		 */
 		protected static $post_meta_fields = null;
 
+		/**
+		 * @var array|null
+		 */
 		protected static $post_ml_fields = null;
 
+		/**
+		 * @var array|null
+		 */
 		protected static $wp_options = null;
 
 		/**
@@ -44,7 +61,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @param $builder
+		 * @param WPGlobus_Config_Builder $builder
 		 */
 		protected function __construct( $builder ) {
 
@@ -58,7 +75,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		/**
 		 * Get instance of this class.
 		 *
-		 * @param $builder
+		 * @param WPGlobus_Config_Builder $builder
 		 *
 		 * @return WPGlobus_Config_Vendor
 		 */
@@ -72,6 +89,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 		/**
 		 * Get meta fields.
+		 *
+		 * @return array|false
 		 */
 		public static function get_meta_fields() {
 			if ( is_null( self::$post_meta_fields ) ) {
@@ -83,6 +102,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 		/**
 		 * Get multilingual fields.
+		 *
+		 * @return array|false
 		 */
 		public static function get_ml_fields() {
 			if ( is_null( self::$post_ml_fields ) ) {
@@ -94,6 +115,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 		/**
 		 * Get wp_options.
+		 *
+		 * @return array|false
 		 */
 		public static function get_wp_options() {
 			if ( is_null( self::$wp_options ) ) {
@@ -138,7 +161,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				 */
 				if ( self::$builder->is_builder_page() ) {
 					self::$vendors[] = 'all-in-one-seo-pack.json';
-				}			
+				}
 			}
 
 			/**
@@ -173,7 +196,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			foreach ( self::$vendors as $file ) {
 
 				if ( is_readable( $config_plugin_dir . $file ) ) {
-					$file_name                  = pathinfo( $file, PATHINFO_FILENAME );
+					$file_name = pathinfo( $file, PATHINFO_FILENAME );
+
 					self::$config[ $file_name ] = json_decode( file_get_contents( $config_plugin_dir . $file ), true );
 				}
 			}
@@ -183,12 +207,15 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		/**
 		 * Get multilingual fields for post.
 		 *
-		 * @param $_meta
-		 * @param $_init
+		 * @param mixed $_meta Unused.
+		 * @param array $_init
 		 *
 		 * @return array
 		 */
-		public static function get_post_ml_fields( $_meta, $_init ) {
+		public static function get_post_ml_fields(
+			/** @noinspection PhpUnusedParameterInspection */
+			$_meta, $_init
+		) {
 
 			$_post_ml_fields = array();
 
@@ -196,7 +223,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				return $_post_ml_fields;
 			}
 
-			$file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
+			// $file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
 
 			/** @var WPGlobus_Acf_2 $class */
 			$class = empty( $_init['class'] ) ? '' : $_init['class'];
@@ -211,12 +238,15 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		/**
 		 * Get meta fields for post.
 		 *
-		 * @param $_meta
-		 * @param $_init
+		 * @param mixed $_meta Unused.
+		 * @param array $_init
 		 *
 		 * @return array
 		 */
-		public static function get_post_meta_fields( $_meta, $_init ) {
+		public static function get_post_meta_fields(
+			/** @noinspection PhpUnusedParameterInspection */
+			$_meta, $_init
+		) {
 
 			$_post_meta_fields = array();
 
@@ -262,7 +292,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 							if ( isset( $data['post_meta_fields'][ $_meta ] ) ) {
 
-								if ( '*' == $_meta ) {
+								if ( '*' === $_meta ) {
 									$_arr = self::get_post_meta_fields( $_meta, $_init );
 									if ( ! empty( $_arr ) ) {
 										self::$post_meta_fields = array_merge( self::$post_meta_fields, $_arr );
@@ -279,7 +309,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 						foreach ( $data['post_ml_fields'] as $_meta => $_init ) {
 							if ( isset( $data['post_ml_fields'][ $_meta ] ) ) {
 
-								if ( '*' == $_meta ) {
+								if ( '*' === $_meta ) {
 									$_arr = self::get_post_ml_fields( $_meta, $_init );
 									if ( ! empty( $_arr ) ) {
 										self::$post_ml_fields = array_merge( self::$post_ml_fields, $_arr );
