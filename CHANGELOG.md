@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.24 ###
+
+* FIXED:
+	* Vendor: load config file of All in One SEO Pack for builder page only.
+
 ### 1.9.23 ###
 
 * FIXED:
