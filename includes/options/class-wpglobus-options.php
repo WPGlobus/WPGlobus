@@ -658,7 +658,7 @@ class WPGlobus_Options {
 			'wpglobus_id'  => 'helpdesk',
 			'title'        => __( 'Help Desk', 'wpglobus' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_helpdesk(),
-			'icon'         => WPGlobus_Admin_HelpDesk::ICON_CLASS,
+			'icon'         => WPGlobus_Admin_Page::nav_tab_icon( 'Helpdesk' ),
 			'externalLink' => true,
 		);
 	}
