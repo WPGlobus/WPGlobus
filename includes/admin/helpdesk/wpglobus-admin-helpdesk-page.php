@@ -13,18 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 WPGlobus_Admin_Page::print_header();
 
-$tech_info = '';
-foreach ( $data as $key => $value ) {
-	if ( in_array( $key, array( 'name', 'email' ), true ) ) {
-		continue;
-	}
-	$tech_info .= $key . ' = ' . $value . "\n";
-}
-
-$subject = empty( $_POST['subject'] ) ? '' : $_POST['subject']; // phpcs:ignore WordPress.CSRF.NonceVerification
-
-$details = empty( $_POST['details'] ) ? '' : $_POST['details']; // phpcs:ignore WordPress.CSRF.NonceVerification
-
+/**
+ * Vars defined in @see \WPGlobus_Admin_HelpDesk::helpdesk_page
+ *
+ * @var string $subject
+ * @var string $tech_info
+ */
 ?>
 
 	<h2 class="nav-tab-wrapper wp-clearfix">
@@ -61,6 +55,15 @@ $details = empty( $_POST['details'] ) ? '' : $_POST['details']; // phpcs:ignore 
 			<?php echo esc_html( 'WPGlobus.com' ); ?>
 		</a>
 	</h2>
+
+<?php if ( WPGlobus_Admin_HelpDesk::getSubmissionMessage() ) : ?>
+	<div class="notice notice-<?php echo esc_attr( WPGlobus_Admin_HelpDesk::getSubmissionStatus() ); ?>">
+		<p>
+			<?php echo esc_html( WPGlobus_Admin_HelpDesk::getSubmissionMessage() ); ?>
+		</p>
+	</div>
+<?php endif; ?>
+
 	<p><em>
 			<?php esc_html_e( 'Thank you for using WPGlobus!', 'wpglobus' ); ?>
 			<?php esc_html_e( 'Our Support Team is here to answer your questions or concerns.', 'wpglobus' ); ?>
@@ -70,9 +73,8 @@ $details = empty( $_POST['details'] ) ? '' : $_POST['details']; // phpcs:ignore 
 		<li><?php esc_html_e( 'Please check if the problem persists if you switch to a standard WordPress theme.', 'wpglobus' ); ?></li>
 		<li><?php esc_html_e( 'Try deactivating other plugins to see if any of them conflicts with WPGlobus.', 'wpglobus' ); ?></li>
 	</ol>
-	<p>
-		&bull; <?php printf( esc_html( 'Please fill in and submit the form below. Alternatively, please email %s.', 'wpglobus' ), '<a href="mailto:support@wpglobus.com">support@wpglobus.com</a>' ); ?></p>
-	<hr/>
+
+	<h4><?php esc_html_e( 'Please fill in and submit the contact form:', 'wpglobus' ); ?></h4>
 
 	<form action="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>" method="post">
 
@@ -81,13 +83,15 @@ $details = empty( $_POST['details'] ) ? '' : $_POST['details']; // phpcs:ignore 
 			<tr class="form-field">
 				<th><label for="name"><?php esc_html_e( 'Name' ); ?>:</label></th>
 				<td><input required="required" type="text" name="name" id="name"
-							value="<?php echo esc_attr( $data['name'] ); ?>" data-lpignore="true"/></td>
+							value="<?php echo esc_attr( WPGlobus_Admin_HelpDesk::getName() ); ?>" data-lpignore="true"/>
+				</td>
 			</tr>
 			<tr class="form-field">
 				<th><label for="email"><?php esc_html_e( 'Email' ); ?>:</label></th>
 				<td>
 					<input required="required" type="email" name="email" id="email"
-							value="<?php echo esc_attr( $data['email'] ); ?>" data-lpignore="true"/>
+							value="<?php echo esc_attr( WPGlobus_Admin_HelpDesk::getEmail() ); ?>"
+							data-lpignore="true"/>
 					<p class="description">
 						<strong>
 							<?php esc_html_e( 'Please make sure the email address is correct.', 'wpglobus' ); ?>
@@ -108,7 +112,8 @@ $details = empty( $_POST['details'] ) ? '' : $_POST['details']; // phpcs:ignore 
 			<tr class="form-field">
 				<th><label for="details"><?php esc_html_e( 'Detailed description', 'wpglobus' ); ?>:</label></th>
 				<td>
-					<textarea required="required" name="details" id="details" rows="10"><?php echo esc_attr( $details ); ?></textarea>
+					<textarea required="required" name="details" id="details"
+							rows="10"><?php echo esc_attr( $details ); ?></textarea>
 				</td>
 			</tr>
 			<tr class="form-field">
@@ -134,6 +139,8 @@ $details = empty( $_POST['details'] ) ? '' : $_POST['details']; // phpcs:ignore 
 		</button>
 
 	</form>
+	<p>
+		*) <?php printf( esc_html( 'Alternatively, please email %s. Do not forget to copy and paste the technical information to your email message.', 'wpglobus' ), '<a href="mailto:' . esc_attr( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '">' . esc_html( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '</a>' ); ?></p>
 
 <?php
 
