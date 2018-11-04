@@ -21,12 +21,12 @@ msgstr ""
 #: includes/admin/class-wpglobus-about.php:42,
 #: includes/admin/class-wpglobus-about.php:117,
 #: includes/admin/class-wpglobus-clean.php:600,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "Guide"
 msgstr "Guide"
 
 #: includes/admin/central/class-wpglobus-admin-central.php:142,
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:44
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:102
 msgid "WPGlobus Help Desk"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-clean.php:606,
 #: includes/admin/class-wpglobus-customize-options.php:1254,
 #: includes/admin/class-wpglobus-customize-options.php:1286,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
 msgid "Add-ons"
 msgstr "Tillägg"
 
@@ -45,7 +45,7 @@ msgid "Quick Start"
 msgstr "Snabbstart"
 
 #: includes/admin/class-wpglobus-about.php:48,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:49
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -514,13 +514,11 @@ msgid ""
 msgstr "Om du har några frågor eller kommentarer, tveka inte att kontakta oss."
 
 #: includes/admin/class-wpglobus-customize-options.php:1360,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69,
 #: includes/options/class-wpglobus-options.php:586
 msgid "Sincerely Yours,"
 msgstr "Med vänlig hälsning,"
 
 #: includes/admin/class-wpglobus-customize-options.php:1362,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:70,
 #: includes/options/class-wpglobus-options.php:588,
 #: includes/options/wpglobus-options-header.php:34
 msgid "The WPGlobus Team"
@@ -692,55 +690,79 @@ msgstr ""
 msgid "Installed"
 msgstr "Installerad"
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:45,
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:103,
 #: includes/options/class-wpglobus-options.php:659
 msgid "Help Desk"
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:55
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:182
+msgid "Email not sent. Please fill in the entire form."
+msgstr ""
+
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:192
+msgid ""
+"Email not sent. Please verify that your name and email are entered correctly."
+msgstr ""
+
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:213
+msgid "Email sent."
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:68
 msgid "Thank you for using WPGlobus!"
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:56
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69
 msgid "Our Support Team is here to answer your questions or concerns."
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:58
-msgid "Click here to open the Contact Form."
-msgstr ""
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:59
-msgid "Type in your name, email, subject and the detailed message."
-msgstr ""
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:60
-msgid ""
-"If you can make a screenshot demonstrating the problem, please attach it."
-msgstr ""
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
-msgid ""
-"Please note: we will receive some debug data together with your request. See "
-"the \"Technical Information\" table for the details."
-msgstr ""
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:71
 msgid "To help us serve you better:"
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:65
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
 msgid ""
 "Please check if the problem persists if you switch to a standard WordPress "
 "theme."
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:74
 msgid ""
 "Try deactivating other plugins to see if any of them conflicts with WPGlobus."
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:77
+msgid "Please fill in and submit the contact form:"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:97
+msgid "Please make sure the email address is correct."
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
+msgid "Subject"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
+msgid "Short description of the problem"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:113
+msgid "Detailed description"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:120
 msgid "Technical Information"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:127
+msgid "This information helps us to find the problem source"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:143
+msgid ""
+"Alternatively, please email %s. Do not forget to copy and paste the "
+"technical information to your email message."
 msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:58

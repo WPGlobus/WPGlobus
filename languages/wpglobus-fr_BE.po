@@ -20,12 +20,12 @@ msgstr ""
 #: includes/admin/class-wpglobus-about.php:42,
 #: includes/admin/class-wpglobus-about.php:117,
 #: includes/admin/class-wpglobus-clean.php:600,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
 msgid "Guide"
 msgstr "Guide"
 
 #: includes/admin/central/class-wpglobus-admin-central.php:142,
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:44
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:102
 msgid "WPGlobus Help Desk"
 msgstr "Centre d’aide de WPGlobus"
 
@@ -35,7 +35,7 @@ msgstr "Centre d’aide de WPGlobus"
 #: includes/admin/class-wpglobus-clean.php:606,
 #: includes/admin/class-wpglobus-customize-options.php:1254,
 #: includes/admin/class-wpglobus-customize-options.php:1286,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:31
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
 msgid "Add-ons"
 msgstr "Modules"
 
@@ -44,7 +44,7 @@ msgid "Quick Start"
 msgstr "Démarrage rapide"
 
 #: includes/admin/class-wpglobus-about.php:48,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:43
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:49
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -568,13 +568,11 @@ msgstr ""
 "contacter."
 
 #: includes/admin/class-wpglobus-customize-options.php:1360,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69,
 #: includes/options/class-wpglobus-options.php:586
 msgid "Sincerely Yours,"
 msgstr "Cordialement,"
 
 #: includes/admin/class-wpglobus-customize-options.php:1362,
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:70,
 #: includes/options/class-wpglobus-options.php:588,
 #: includes/options/wpglobus-options-header.php:34
 msgid "The WPGlobus Team"
@@ -761,49 +759,39 @@ msgstr "Module premium"
 msgid "Installed"
 msgstr "Installée"
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:45,
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:103,
 #: includes/options/class-wpglobus-options.php:659
 msgid "Help Desk"
 msgstr "Centre de support"
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:55
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:182
+msgid "Email not sent. Please fill in the entire form."
+msgstr ""
+
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:192
+msgid ""
+"Email not sent. Please verify that your name and email are entered correctly."
+msgstr ""
+
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:213
+msgid "Email sent."
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:68
 msgid "Thank you for using WPGlobus!"
 msgstr "Merci d'utiliser WPGlobus&nbsp:;!"
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:56
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69
 msgid "Our Support Team is here to answer your questions or concerns."
 msgstr ""
 "Notre équipe d'assistance est là pour répondre à vos questions ou "
 "préoccupations."
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:58
-msgid "Click here to open the Contact Form."
-msgstr ""
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:59
-msgid "Type in your name, email, subject and the detailed message."
-msgstr "Saisissez votre nom, e-mail, sujet et le message détaillé."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:60
-msgid ""
-"If you can make a screenshot demonstrating the problem, please attach it."
-msgstr ""
-"Si vous pouvez faire une capture d'écran illustrant le problème, veuillez le "
-"joindre."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:61
-msgid ""
-"Please note: we will receive some debug data together with your request. See "
-"the \"Technical Information\" table for the details."
-msgstr ""
-"Veuillez notez que nous recevrons quelques données de débogage avec votre "
-"demande. Voir le tableau \"Informations techniques\" pour les détails."
-
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:63
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:71
 msgid "To help us serve you better:"
 msgstr "Pour nous aider à mieux vous servir&nbsp;:"
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:65
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
 msgid ""
 "Please check if the problem persists if you switch to a standard WordPress "
 "theme."
@@ -811,16 +799,46 @@ msgstr ""
 "Veuillez vérifier si le problème persiste si vous basculez vers un thème "
 "WordPress standard."
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:66
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:74
 msgid ""
 "Try deactivating other plugins to see if any of them conflicts with WPGlobus."
 msgstr ""
 "Essayez de désactiver d'autres extension pour voir si l'une d'entre elles "
 "est en conflit avec WPGlobus."
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:73
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:77
+msgid "Please fill in and submit the contact form:"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:97
+msgid "Please make sure the email address is correct."
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
+msgid "Subject"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
+msgid "Short description of the problem"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:113
+msgid "Detailed description"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:120
 msgid "Technical Information"
 msgstr "Informations techniques"
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:127
+msgid "This information helps us to find the problem source"
+msgstr ""
+
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:143
+msgid ""
+"Alternatively, please email %s. Do not forget to copy and paste the "
+"technical information to your email message."
+msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:58
 msgid "WPGlobus Recommends:"
@@ -1473,3 +1491,19 @@ msgstr ""
 #: wpglobus.php:19
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
+
+#~ msgid "Type in your name, email, subject and the detailed message."
+#~ msgstr "Saisissez votre nom, e-mail, sujet et le message détaillé."
+
+#~ msgid ""
+#~ "If you can make a screenshot demonstrating the problem, please attach it."
+#~ msgstr ""
+#~ "Si vous pouvez faire une capture d'écran illustrant le problème, veuillez "
+#~ "le joindre."
+
+#~ msgid ""
+#~ "Please note: we will receive some debug data together with your request. "
+#~ "See the \"Technical Information\" table for the details."
+#~ msgstr ""
+#~ "Veuillez notez que nous recevrons quelques données de débogage avec votre "
+#~ "demande. Voir le tableau \"Informations techniques\" pour les détails."

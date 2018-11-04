@@ -140,7 +140,7 @@ WPGlobus_Admin_Page::print_header();
 
 	</form>
 	<p>
-		*) <?php printf( esc_html( 'Alternatively, please email %s. Do not forget to copy and paste the technical information to your email message.', 'wpglobus' ), '<a href="mailto:' . esc_attr( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '">' . esc_html( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '</a>' ); ?></p>
+		*) <?php printf( esc_html__( 'Alternatively, please email %s. Do not forget to copy and paste the technical information to your email message.', 'wpglobus' ), '<a href="mailto:' . esc_attr( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '">' . esc_html( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '</a>' ); ?></p>
 
 <?php
 
