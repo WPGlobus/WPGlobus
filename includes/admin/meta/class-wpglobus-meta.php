@@ -344,6 +344,20 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			}
 
 			/**
+			 * Disable/enable to filter meta field.
+			 *
+			 * @since 1.9.25
+			 *
+			 * @param string $meta_key Meta key.
+			 *
+			 * @return string|boolean String if to filter meta field or false if not.		 
+			 */
+			$meta_key = apply_filters('wpglobus/meta/key', $meta_key);
+			if ( ! $meta_key ) {
+				return $check;
+			}
+			
+			/**
 			 * May be called many times on one page. Let's cache.
 			 */
 			static $_cache;
