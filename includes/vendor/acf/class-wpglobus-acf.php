@@ -10,6 +10,8 @@
  */
 class WPGlobus_Acf_2 {
 	
+		protected static $acf_fields = null;
+		
 		protected static $post_multilingual_fields = null;
 		
 		protected static $post_acf_field_prefix = 'acf-';
@@ -47,11 +49,96 @@ class WPGlobus_Acf_2 {
 		}
 		
 		/**
+		 * Retrieves acf fields which was got @see get_post_meta_fields().
+		 *
+		 * @since 1.9.25
+		 *
+		 * @param int|string $post_id Reserved for future version.
+		 *
+		 * @return array|false An array of acf fields or false if $acf_fields is null.		 
+		 */
+		public static function get_acf_fields( $post_id ) {
+			if ( ! is_null( self::$acf_fields ) ) {
+				return self::$acf_fields;
+			}
+			return false;	
+		}
+
+		/**
 		 * Get post meta.
+		 *
+		 * Don't use get_field_objects() to get ACF fields @see advanced-custom-fields\includes\api\api-template.php
+		 * to prevent incorrect behavior on post page.
+		 */		
+		public static function get_post_meta_fields( $post_id ) {
+			
+			global $wpdb;
+			
+			$_post_meta_fields = array();
+			
+			$post_id = (int) $post_id;
+
+			if ( $post_id > 0 ) {
+				
+				$info = acf_get_post_id_info( $post_id );
+				
+				if ( $info['type'] == 'post' ) {
+					
+					/**
+					 * @todo Check the case when DB has many records with 'acf-field' post type.
+					 */
+					$fields = $wpdb->get_results($wpdb->prepare(
+						"SELECT post_excerpt, post_name FROM $wpdb->posts WHERE post_type = '%s'",
+						'acf-field'
+					) );
+					
+					if ( ! empty($fields) ) {
+						
+						/**
+						 * Filter to enable/disable wysiwyg field.
+						 * Returning boolean.
+						 *
+						 * @since 1.9.17
+						 *
+						 * @param boolean.
+						 */
+						$field_wysiwyg_enabled = apply_filters('wpglobus/vendor/acf/field/wysiwyg', false);
+
+						self::$post_multilingual_fields = array();
+						
+						foreach( $fields as $key=>$field ) :
+
+							$_acf_field = acf_maybe_get_field( $field->post_name );
+
+							if ( empty($_acf_field['type']) ) {
+								continue;
+							}
+							
+							if ( $_acf_field['type'] == 'wysiwyg' && ! $field_wysiwyg_enabled ) {
+								// do nothing	
+							} else {
+								$_post_meta_fields[] = $field->post_excerpt;
+								self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $field->post_name;
+							}
+							self::$acf_fields[$field->post_excerpt] = $_acf_field;
+							
+						endforeach;
+					}
+				}
+			}
+
+			return $_post_meta_fields;
+			
+		}
+		
+		/**
+		 * Get post meta.
+		 *
+		 * Version 0.
 		 * Don't use get_field_objects() to get ACF fields @see advanced-custom-fields\includes\api\api-template.php
 		 * to prevent incorrect behavior on post page.
 		 */
-		public static function get_post_meta_fields( $post_id ) {
+		public static function get_post_meta_fields_0( $post_id ) {
 			
 			global $wpdb;
 			
