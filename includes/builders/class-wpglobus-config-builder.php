@@ -281,6 +281,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 						$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
 
 						$post_id = end( $_request_uri );
+						$post_id = preg_replace( '/\?.*/', '', $post_id );
+
 						if ( 0 !== (int) $post_id ) {
 							$language = get_post_meta( $post_id, $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 						}
