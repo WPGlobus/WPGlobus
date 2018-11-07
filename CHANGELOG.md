@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.26 ###
+
+* COMPATIBILITY:
+    * Gutenberg 4.2.0
+
 ### 1.9.25 ###
 
 * ADDED:
