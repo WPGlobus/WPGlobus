@@ -302,6 +302,15 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 ## Changelog ##
 
+### 1.9.25 ###
+
+
+* ADDED:
+
+	* Core/Meta: filter to enable/disable meta.
+
+	* Vendor/ACF: New function to get ACF fields for post.
+
 ### 1.9.24 ###
 
 

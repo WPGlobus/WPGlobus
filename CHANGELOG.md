@@ -6,7 +6,7 @@
 
 * ADDED:
 	* Core/Meta: filter to enable/disable meta.
-	* Vendor/Acf: New function to get acf fields for post.
+	* Vendor/ACF: New function to get ACF fields for post.
  
 ### 1.9.24 ###
 
