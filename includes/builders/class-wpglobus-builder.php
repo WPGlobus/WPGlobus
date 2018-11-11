@@ -66,6 +66,13 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				add_filter( 'admin_body_class', array( $this, 'filter__add_admin_body_class' ) );
 
 				/**
+				 * Add builder label to admin bar.
+				 *
+				 * @since 1.9.27
+				 */	
+				add_action( 'admin_bar_menu', array( $this, 'on__admin_bar_menu'), 11 );				
+				
+				/**
 				 * @see "{$field_no_prefix}_edit_pre" in wp-includes\post.php
 				 */
 				add_filter( 'content_edit_pre', array( $this, 'filter__content' ), 5, 2 );
@@ -420,6 +427,56 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 */
 		public function filter__add_admin_body_class( $classes ) {
 			return $classes . ' wpglobus-wp-admin-builder wpglobus-wp-admin-builder-' . $this->id;
+		}
+	
+		/**
+		 * Add builder label to admin bar.
+		 *
+		 * @since 1.9.27
+		 *
+		 * @param WP_Admin_Bar $wp_admin_bar
+		 */	
+		public function on__admin_bar_menu( WP_Admin_Bar $wp_admin_bar ) {
+
+			global $pagenow;
+			
+			if ( ! in_array( $pagenow, array('post.php', 'post-new.php') ) ) {
+				return;
+			}
+		
+			if ( class_exists( 'WPGlobus_Builders' ) ) {
+				$_builder = WPGlobus_Builders::get_addon($this->id);
+				$_builder_label = 'Builder Name: ' . $_builder['plugin_name'];
+			} else {
+				$_builder_label = 'Builder ID: ' . $this->id;
+			}
+			
+			$wp_admin_bar->add_menu( array(
+				'id'     => 'wpglobus-builder-id',
+				'parent' => 'top-secondary',
+				'title'  => '<span class="ab-label">'.$_builder_label.'</span>'
+			) );
+			
+			$_title = esc_html__( 'Open Сompatibility tab', 'wpglobus' );
+	
+			$_url   = admin_url(
+				add_query_arg(
+					array( 'page' => 'wpglobus_options', 'tab' => 'compatibility' ),
+					'admin.php'
+				)
+			);
+	
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'wpglobus-builder-id',
+				'id'     => 'wpglobus-builder-compatibility-link',
+				'title'  => '<span>'.$_title.'</span>',
+				'href'   => $_url,
+				'meta'   => array(
+					'_target' => 'blank',
+					'tabindex' => - 1
+				),
+			) );
+			
 		}
 
 	}
