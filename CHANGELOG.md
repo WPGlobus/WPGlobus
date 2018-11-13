@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 1.9.27 ###
+
+* COMPATIBILITY:
+    * Gutenberg 4.3.0
+* INTERNAL:
+	* Core/Builders: add builder label to admin bar.
+	
 ### 1.9.26 ###
 
 * COMPATIBILITY:
