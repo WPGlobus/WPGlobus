@@ -3,7 +3,9 @@
     "_yoast_wpseo_title": {},
     "_yoast_wpseo_metadesc": {},
     "_yoast_wpseo_focuskw": {},
-    "_yoast_wpseo_focuskw_text_input": null
+    "_yoast_wpseo_focuskw_text_input": null,
+    "_yoast_wpseo_keywordsynonyms": {},
+    "_yoast_wpseo_focuskeywords": {}
   },
   "wp_options": {
 	"blogname": {},
