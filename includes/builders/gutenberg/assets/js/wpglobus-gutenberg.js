@@ -21,9 +21,6 @@ jQuery(document).ready(function ($) {
 			return !(/^(false|0)$/i).test(b) && !!b;
 		},
 		init: function() {
-			if ( 'undefined' === typeof _wpGutenbergCodeEditorSettings ) {
-				return;
-			}
 			WPGlobusGutenberg.yoastSeo = api.parseBool(WPGlobusGutenberg.yoastSeo);
 			api.initListeners();
 			api.setTabs();
