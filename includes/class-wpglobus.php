@@ -2446,7 +2446,7 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add css styles to head section
+	 * Add css styles to head section.
 	 *
 	 * @return void
 	 */
@@ -2477,6 +2477,7 @@ class WPGlobus {
 		 * Filter CSS rules for frontend.
 		 *
 		 * @since 1.6.6
+		 * @since 1.9.27
 		 *
 		 * @param string $css    CSS rules for flags in the menu.
 		 * @param string $config ->css_editor Custom CSS rules @see WPGlobus options.
@@ -2486,9 +2487,11 @@ class WPGlobus {
 		$css = apply_filters( 'wpglobus_styles', $css, $config->css_editor );
 
 		if ( ! empty( $css ) ) {
+			$css = wp_kses( $css, array() );
+			$css = str_replace( array( '&gt;', '&lt;' ), array( '>', '<' ), $css );
 			?>
 			<style type="text/css" media="screen">
-				<?php echo wp_kses( $css, array() ); ?>
+				<?php echo $css; ?>
 			</style>
 			<?php
 		}
