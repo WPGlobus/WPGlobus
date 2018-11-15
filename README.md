@@ -69,8 +69,7 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 
 The WPGlobus plugin provides you with the general multilingual tools.
 
-
-* **Manually translate** posts, pages, categories, tags, menus, and widgets; If you need help with translation, please check out our [Professional Translation Services](https://wpglobus.com/translator/) directory;
+* **Manually translate** posts, pages, categories, tags, menus, and widgets;
 * **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
 * **Enable multilingual SEO features** of "Yoast SEO" (FREE) and "All in One SEO" plugins;
 
@@ -301,6 +300,16 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 This maintenance release introduces Gutenberg support in beta-stage.
 
 ## Changelog ##
+
+### 1.9.27 ###
+
+
+* COMPATIBILITY:
+    * Gutenberg 4.3.0
+
+* INTERNAL:
+
+	* Core/Builders: add builder label to admin bar.
 
 ### 1.9.26 ###
 

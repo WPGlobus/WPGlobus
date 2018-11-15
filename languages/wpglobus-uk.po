@@ -838,9 +838,17 @@ msgstr ""
 msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:351,
-#: includes/class-wpglobus.php:3527
+#: includes/builders/class-wpglobus-builder.php:358,
+#: includes/class-wpglobus.php:3532
 msgid "Save draft before using extra language."
+msgstr ""
+
+#: includes/builders/class-wpglobus-builder.php:447
+msgid "Builder"
+msgstr ""
+
+#: includes/builders/class-wpglobus-builder.php:462
+msgid "Сompatibility Settings"
 msgstr ""
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:208
@@ -931,13 +939,13 @@ msgstr "*) Доступно після збереження меню."
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3960
+#: includes/class-wpglobus.php:3965
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Щоб використовувати плагін WPGlobus, необхідно увімкнути SEF URLs - постійні "
 "посилання."
 
-#: includes/class-wpglobus.php:3962
+#: includes/class-wpglobus.php:3967
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -945,7 +953,7 @@ msgstr ""
 "Будь-ласка, перейдіть в меню налаштування > Постійні посилання і змініть "
 "структуру посилань в розділі \"Загальні налаштування\"."
 
-#: includes/class-wpglobus.php:4108
+#: includes/class-wpglobus.php:4113
 msgid "Add"
 msgstr "Додати"
 

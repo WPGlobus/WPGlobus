@@ -819,7 +819,9 @@ msgstr "Эта информация поможет нам в поиске ист
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
-msgstr "Вы также можете отправить нам сообщение на %s. Не забудьте скопировать техническую информацию в текст вашего сообщения."
+msgstr ""
+"Вы также можете отправить нам сообщение на %s. Не забудьте скопировать "
+"техническую информацию в текст вашего сообщения."
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:58
 msgid "WPGlobus Recommends:"
@@ -861,10 +863,18 @@ msgstr "Перевод ссылок возможен с помощью WPGlobus-
 msgid "To translate permalinks, please activate the module Slug."
 msgstr "Для перевода ссылок необходимо активировать модуль УРЛ."
 
-#: includes/builders/class-wpglobus-builder.php:351,
-#: includes/class-wpglobus.php:3527
+#: includes/builders/class-wpglobus-builder.php:358,
+#: includes/class-wpglobus.php:3532
 msgid "Save draft before using extra language."
 msgstr "Сохраните черновик перед переключением на другой язык."
+
+#: includes/builders/class-wpglobus-builder.php:447
+msgid "Builder"
+msgstr "Конструктор"
+
+#: includes/builders/class-wpglobus-builder.php:462
+msgid "Сompatibility Settings"
+msgstr "Настройки совместимости"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:208
 msgid "WPGlobus languages"
@@ -955,13 +965,13 @@ msgstr "*) Доступно после сохранения меню."
 msgid "Need a multilingual slug?"
 msgstr "Нужен мультиязычный ярлык?"
 
-#: includes/class-wpglobus.php:3960
+#: includes/class-wpglobus.php:3965
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:3962
+#: includes/class-wpglobus.php:3967
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -969,7 +979,7 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:4108
+#: includes/class-wpglobus.php:4113
 msgid "Add"
 msgstr "Добавить"
 

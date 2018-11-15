@@ -2491,7 +2491,9 @@ class WPGlobus {
 			$css = str_replace( array( '&gt;', '&lt;' ), array( '>', '<' ), $css );
 			?>
 			<style type="text/css" media="screen">
-				<?php echo $css; ?>
+				<?php
+				echo $css; // phpcs:ignore WordPress.XSS.EscapeOutput
+				?>
 			</style>
 			<?php
 		}

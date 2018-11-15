@@ -1,8 +1,8 @@
-# Copyright (C) 2018 WPGlobus 1.9.26
-# This file is distributed under the same license as the WPGlobus 1.9.26 package.
+# Copyright (C) 2018 WPGlobus 1.9.27
+# This file is distributed under the same license as the WPGlobus 1.9.27 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 1.9.26\n"
+"Project-Id-Version: WPGlobus 1.9.27\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -635,8 +635,16 @@ msgstr ""
 msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:351, includes/class-wpglobus.php:3527
+#: includes/builders/class-wpglobus-builder.php:358, includes/class-wpglobus.php:3532
 msgid "Save draft before using extra language."
+msgstr ""
+
+#: includes/builders/class-wpglobus-builder.php:447
+msgid "Builder"
+msgstr ""
+
+#: includes/builders/class-wpglobus-builder.php:462
+msgid "Сompatibility Settings"
 msgstr ""
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:208
@@ -727,15 +735,15 @@ msgstr ""
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3960
+#: includes/class-wpglobus.php:3965
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:3962
+#: includes/class-wpglobus.php:3967
 msgid "Please go to Settings > Permalinks > Common Settings and choose a non-default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:4108
+#: includes/class-wpglobus.php:4113
 msgid "Add"
 msgstr ""
 
