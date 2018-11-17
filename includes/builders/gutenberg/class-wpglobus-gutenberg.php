@@ -259,7 +259,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * Callback for 'add_meta_boxes'.
 	 */
 	public function on__add_meta_box() {
-		add_meta_box( 'wpglobus', __( 'WPGlobus' ), array( $this, 'callback__meta_box' ), 'post.php', 'side', 'core' );
+		add_meta_box( 'wpglobus', __( 'WPGlobus' ), array( $this, 'callback__meta_box' ), null, 'side', 'core' );
 	}
 
 	/**
