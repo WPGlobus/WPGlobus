@@ -20,7 +20,7 @@ License: GPL-3.0-or-later
 License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
 
 
-Multilingual/Globalization: URL-based multilanguage; easy translation interface, compatible with Yoast SEO, All in One SEO Pack and ACF!
+Multilingual/Globalization: URL-based multilanguage; easy translation interface, compatible with Gutenberg, Yoast SEO, All in One SEO Pack and ACF!
 
 ## Description ##
 
@@ -104,8 +104,6 @@ For more details, please check out the descriptions of each paid add-on on our w
 
 
 * [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
-
-* [WPGlobus Multi-Currency](https://wpglobus.com/product/wpglobus-multi-currency/): multiple currencies and automatic currency conversion in WooCommerce.
 
 * [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more. Note: Yoast SEO Premium is not officially supported by WPGlobus.
 
@@ -301,6 +299,13 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 ## Changelog ##
 
+### 1.9.28 ###
+
+
+* FIXED:
+
+	*  Builders/Gutenberg: enabled WPGlobus metabox for posts and pages.
+
 ### 1.9.27 ###
 
 
@@ -310,152 +315,6 @@ This maintenance release introduces Gutenberg support in beta-stage.
 * INTERNAL:
 
 	* Core/Builders: add builder label to admin bar.
-
-### 1.9.26 ###
-
-
-* COMPATIBILITY:
-    * Gutenberg 4.2.0
-
-### 1.9.25 ###
-
-
-* ADDED:
-
-	* Core/Meta: filter to enable/disable meta.
-
-	* Vendor/ACF: New function to get ACF fields for post.
-
-### 1.9.24 ###
-
-
-* FIXED:
-
-	* Vendor: load config file of All in One SEO Pack for builder page only.
-
-* INTERNAL:
-    * Helpdesk page refactored.
-
-### 1.9.23 ###
-
-
-* FIXED:
-
-    * Gutenberg: saving languages correctly when editing pages.
-
-	* ACF: Check the existence of the `acf_maybe_get_field` function to prevent fatal error in older versions.
-
-### 1.9.22 ###
-
-
-* FIXED:
-
-	* Gutenberg: Correctly define language of the current post for REST API requests.
-
-* ADDED:
-    * Notice about builders in Beta stage.
-
-### 1.9.21 ###
-
-
-* FIXED:
-
-	* All in One SEO Pack: correct saving empty value (keyword, description) for extra languages.
-
-	* Yoast SEO: correct filter multilingual title on front-end.
-
-### 1.9.20 ###
-
-
-* FIXED:
-    * Missing some `*.min.js` files.
-
-### 1.9.19 ###
-
-
-* FIXED:
-
-	* Elementor: correct path to the file.
-
-	* Yoast SEO: extract title for the default language.
-
-### 1.9.18 ###
-
-
-* COMPATIBILITY:
-	* Elementor 2.2.6
-
-* FIXED:
-	* Incorrect handling of the `_yoast_wpseo_title` field for Yoast SEO.
-
-### 1.9.17 ###
-
-
-* COMPATIBILITY:
-    * ACF 5.7.7
-    * Yoast SEO 8.4
-    * Gutenberg 4.0.0
-    * WPBakery Page Builder 5.5.5
-
-* INTERNAL:
-	* Correct setting description value on the `nav-menu.php` page.
-
-### 1.9.16 ###
-
-
-* ADDED:
-
-    * Special "flag" icon: `"easy-to-read"`.
-
-* INTERNAL:
-    * Initialization of the `WPGlobusDialogApp` JS object on the `nav-menu.php` page.
-
-### 1.9.15 ###
-
-
-* ADDED:
-    * Filter `wpglobus_use_admin_wplang` to support upcoming advanced email localization features.
-
-### 1.9.14 ###
-
-
-* ADDED:
-    * New action `wpglobus_after_load_textdomain`. Can use this action to load additional translations.
-    * Change the current language and reload translations when `switch_locale()` or `restore_previous_locale()` functions are called.
-
-	* Options Panel: Info section.
-
-* COMPATIBILITY:
-	* Yoast SEO 7.3
-
-* INTERNAL:
-    * Call `unload_textdomain` function instead of accessing the `$l10n` global directly.
-
-### 1.9.13 ###
-
-
-* FIXED:
-    * Correct language detection when doing WooCommerce AJAX calls.
-
-	* Options: correctly initialize Language Selector Menu dropdown ("None" option was missing).
-
-* TWEAK:
-    * Added a clarifying message to the clean-up procedure.
-
-* INTERNAL:
-    * Transition to Gulp and SCSS
-    * CSS are always minimized (no `.min.css`) and mapped to the `.scss` sources.
-
-### 1.9.12 ###
-
-
-* ADDED:
-
-    * Options Panel: Customize section.
-
-* FIXED:
-
-    * Custom JS code: restore some special characters after applying filters.
 
 ### Earlier versions and Add-ons ###
 

@@ -283,6 +283,7 @@ msgid "Save &amp; Reload"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:262,
 #: includes/class-wpglobus.php:1320, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"

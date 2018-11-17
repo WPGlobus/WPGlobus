@@ -5,7 +5,7 @@
 ### 1.9.28 ###
 
 * FIXED:
-	*  Builders/Gutenberg: enabled wpglobus metabox for post and page.
+	*  Builders/Gutenberg: enabled WPGlobus metabox for posts and pages.
 	
 ### 1.9.27 ###
 
