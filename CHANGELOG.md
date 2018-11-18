@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.29 ###
+
+* ADDED:
+	*  Builders/Gutenberg: CSS tweaks.
+	
 ### 1.9.28 ###
 
 * FIXED:
