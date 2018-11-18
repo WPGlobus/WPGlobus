@@ -4,7 +4,7 @@
 
 ### 1.9.29 ###
 
-* ADDED:
+* FIXED:
 	*  Builders/Gutenberg: CSS tweaks.
 	
 ### 1.9.28 ###

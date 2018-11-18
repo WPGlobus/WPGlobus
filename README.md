@@ -299,6 +299,13 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 ## Changelog ##
 
+### 1.9.29 ###
+
+
+* FIXED:
+
+	*  Builders/Gutenberg: CSS tweaks.
+
 ### 1.9.28 ###
 
 

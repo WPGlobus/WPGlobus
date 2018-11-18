@@ -313,7 +313,7 @@ msgid "Save &amp; Reload"
 msgstr "Сохранить и перезагрузить"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:262,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:304,
 #: includes/class-wpglobus.php:1320, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -881,20 +881,20 @@ msgstr "Настройки совместимости"
 msgid "WPGlobus languages"
 msgstr "Языки WPGlobus"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:128
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:136
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 "Опубликуйте, или сохраните черновик перед переключением на другой язык."
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:196
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:204
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr "для"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:222
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:264
 msgid "Page is being reloaded. Please wait..."
-msgstr "Страница перезагружеатся. Подождите..."
+msgstr "Страница перезагружается. Подождите..."
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
