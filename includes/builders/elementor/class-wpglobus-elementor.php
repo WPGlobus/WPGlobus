@@ -108,7 +108,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			$_post->post_content = WPGlobus_Core::text_filter( $this->post_content, WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
 
 			/**
-			 * @see c:\var\htdocs\www.dev-wpg.com\wp-includes\cache.php
+			 * @see \wp-includes\cache.php
 			 */
 			wp_cache_replace( $object->ID, $_post, 'posts' );
 
