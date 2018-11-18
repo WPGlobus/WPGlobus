@@ -38,6 +38,14 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			), 1000 );
 
 			/**
+			 * @since 1.9.29
+			 */
+			add_action( 'admin_print_styles', array(
+				$this,
+				'on__enqueue_styles',
+			) );			
+			
+			/**
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array( $this, 'filter__seo_meta_box_title' ) );
@@ -107,16 +115,16 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			<div style="<?php echo $_box_style; // WPCS: XSS ok. ?>" class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
 				<div class="wpglobus-selector-grid"
-						style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
+						style="">
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
-							href="#" class="wpglobus-gutenberg-selector"
+							href="#" class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-1"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						<img <?php echo $_height . $_width; // WPCS: XSS ok. ?>
 							<?php echo $_flag_style; // WPCS: XSS ok. ?>
 								src="<?php echo esc_url( $_flag_img ); ?>"/>
 					</a>
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
-							href="#" class="wpglobus-gutenberg-selector"
+							href="#" class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-2"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						&nbsp;<span
 								class="wpglobus-gutenberg-selector-text"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
@@ -139,10 +147,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			<div style="<?php echo $_box_style; // WPCS: XSS ok. ?>" class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
 				<div class="wpglobus-selector-grid"
-						style="display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;">
+						style="">
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
-							class="wpglobus-gutenberg-selector"
+							class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-1"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						<img <?php echo $_height . $_width; // WPCS: XSS ok. ?>
 							<?php echo $_flag_style; // WPCS: XSS ok. ?>
@@ -150,7 +158,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 					</a>
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
-							class="wpglobus-gutenberg-selector"
+							class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-2"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						&nbsp;<span
 								class="wpglobus-gutenberg-selector-text"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
@@ -197,6 +205,40 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			   . ' ' . WPGlobus::Config()->en_language_name[ $this->get_current_language() ];
 	}
 
+	/**
+	 * Enqueue styles.
+	 *
+	 * @since 1.9.29
+	 * @return void
+	 */
+	public function on__enqueue_styles() {
+		/** @global string $pagenow */
+		global $pagenow;
+
+		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.CSRF.NonceVerification
+		if ( isset( $_GET['classic-editor'] ) ) {
+			return;
+		}
+		
+		/**
+		 * While testing process is run, don't add .scss and .map files.
+		 */
+		wp_register_style(
+			'wpglobus-gutenberg',
+			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+			array(),
+			WPGLOBUS_VERSION,
+			'all'
+		);
+		wp_enqueue_style( 'wpglobus-gutenberg' );
+
+		
+	}	
+	
 	/**
 	 * Enqueue scripts.
 	 *

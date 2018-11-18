@@ -66,6 +66,7 @@ jQuery(document).ready(function ($) {
 				var $toolbar = $('.edit-post-header__settings');
 				if( $toolbar.length == 1 ) {
 					$toolbar.before(WPGlobusGutenberg.tabs);
+					/*
 					var width = $('.edit-post-header-toolbar').css('width');
 					width = width.replace('px','') * 1;
 					if ( width < 50 ) {
@@ -74,6 +75,7 @@ jQuery(document).ready(function ($) {
 						width = width + 30;
 					}
 					$('.wpglobus-gutenberg-selector-box').css({'margin-left':width+'px'});
+					// */
 					clearInterval(intervalID)
 				} else {
 					//console.log('Here: else');
