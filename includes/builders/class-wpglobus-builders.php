@@ -33,8 +33,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 */
 		public static function get_addons() {
 
+			if ( ! empty( self::$add_on ) ) {
+				return  self::$add_on;
+			}
+		
 			self::$add_on['gutenberg'] = array(
 				'id'                    => 'gutenberg',
+				'role'					=> 'builder',
 				'supported_min_version' => '4.0.0',
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
@@ -45,6 +50,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			self::$add_on['js_composer'] = array(
 				'id'                    => 'js_composer',
+				'role'					=> 'builder',
 				'supported_min_version' => '5.4.0',
 				'const'                 => 'WPB_VC_VERSION',
 				'plugin_name'           => 'WPBakery Page Builder',
@@ -55,6 +61,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			self::$add_on['elementor'] = array(
 				'id'                    => 'elementor',
+				'role'					=> 'builder',
 				'supported_min_version' => '2.2.6',
 				'const'                 => 'ELEMENTOR_VERSION',
 				'plugin_name'           => 'Elementor',
@@ -65,6 +72,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			self::$add_on['yoast_seo'] = array(
 				'id'                    => 'yoast_seo',
+				'role'					=> 'builder',
 				'supported_min_version' => '7.7',
 				'const'                 => 'WPSEO_VERSION',
 				'plugin_name'           => 'Yoast SEO',
@@ -73,6 +81,36 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'stage'                 => 'production',
 			);
 
+			if ( defined('WPGLOBUS_WC_BUILDERS') && WPGLOBUS_WC_BUILDERS ) {
+				
+				self::$add_on['woocommerce'] = array(
+					'id'                    => 'woocommerce',
+					'role'					=> 'add-on',
+					'config_file'			=> 'woocommerce.json',
+					'supported_min_version' => '3.5.1',
+					'const'                 => 'WC_PLUGIN_FILE',
+					'plugin_name'           => 'WooCommerce',
+					'plugin_uri'            => 'https://woocommerce.com',
+					'path'                  => 'woocommerce/woocommerce.php',
+					'stage'                 => 'beta',
+				);	
+			
+			}
+			
+			/**
+			self::$add_on['wp-subtitle'] = array(
+				'id'                    => 'wp-subtitle',
+				'role'					=> 'add-on',
+				'config_file'			=> 'wp-subtitle.json',
+				'supported_min_version' => '3.1',
+				'const'                 => 'WPSUBTITLE_DIR',
+				'plugin_name'           => 'WP Subtitle',
+				'plugin_uri'            => 'http://wordpress.org/plugins/wp-subtitle/',
+				'path'                  => 'wp-subtitle/wp-subtitle.php',
+				'stage'                 => 'production',
+			);
+			// */
+			
 			/**
 			 * self::$add_on['__test'] = array(
 			 * 'id'                    => '__test',

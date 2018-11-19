@@ -192,7 +192,26 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			// if ( defined('SITEORIGIN_PANELS_VERSION') )  {
 			// 	self::$vendors[] = 'siteorigin-panels.json';
 			// }
+			
+			if ( self::$builder->get_id() != '' && self::$builder->is_builder_page() ) {
 
+				$addons = WPGlobus_Builders::get_addons();
+			
+				if ( ! empty($addons) ) {
+					foreach( $addons as $id=>$addon ) {
+						if ( 'add-on' == $addon['role'] ) {
+							if ( ! empty( $addon['const'] ) && defined( $addon['const'] ) ) {
+								self::$vendors[] = $addon['config_file'];
+							}
+						}
+					}
+				}
+
+			}				
+			
+			/**
+			 * Now handle with config files.
+			 */
 			foreach ( self::$vendors as $file ) {
 
 				if ( is_readable( $config_plugin_dir . $file ) ) {
