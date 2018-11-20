@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 1.9.30 ###
+
+* FIXED:
+	*  Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
+
 ### 1.9.29 ###
 
 * FIXED:

@@ -299,29 +299,19 @@ This maintenance release introduces Gutenberg support in beta-stage.
 
 ## Changelog ##
 
+### 1.9.30 ###
+
+
+* FIXED:
+
+	*  Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
+
 ### 1.9.29 ###
 
 
 * FIXED:
 
 	*  Builders/Gutenberg: CSS tweaks.
-
-### 1.9.28 ###
-
-
-* FIXED:
-
-	*  Builders/Gutenberg: enabled WPGlobus metabox for posts and pages.
-
-### 1.9.27 ###
-
-
-* COMPATIBILITY:
-    * Gutenberg 4.3.0
-
-* INTERNAL:
-
-	* Core/Builders: add builder label to admin bar.
 
 ### Earlier versions and Add-ons ###
 
