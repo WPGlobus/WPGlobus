@@ -302,7 +302,13 @@ This maintenance release introduces Gutenberg support in beta-stage.
 ### 1.9.30 ###
 
 
+* ADDED:
+
+    *  Builders/Gutenberg: Checking 3rd party add-ons status for Gutenberg.
+
 * FIXED:
+
+	*  Options Panel: CSS tweaks.
 
 	*  Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
 

@@ -117,8 +117,7 @@ class WPGlobus_Admin_HelpDesk {
 		add_submenu_page(
 			WPGlobus::OPTIONS_PAGE_SLUG,
 			self::$page_title,
-			'<span class="dashicons ' . esc_attr( WPGlobus_Admin_Page::nav_tab_icon( 'Helpdesk' ) )
-			. '" style="vertical-align:middle"></span> '
+			'<span class="' . esc_attr( WPGlobus_Admin_Page::nav_tab_icon( 'Helpdesk' ) ) . '"></span> '
 			. self::$menu_title,
 			'administrator',
 			WPGlobus::PAGE_WPGLOBUS_HELPDESK,

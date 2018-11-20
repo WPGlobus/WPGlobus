@@ -767,16 +767,16 @@ msgstr "Installée"
 msgid "Help Desk"
 msgstr "Centre de support"
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:182
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:181
 msgid "Email not sent. Please fill in the entire form."
 msgstr ""
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:192
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:191
 msgid ""
 "Email not sent. Please verify that your name and email are entered correctly."
 msgstr ""
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:213
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:212
 msgid "Email sent."
 msgstr ""
 

@@ -160,8 +160,8 @@ class WPGlobus_Admin_Page {
 	/**
 	 * Icon for navigation tab item.
 	 *
-	 * @param string  $icon_class 			A Dashicon CSS class or our internal alias.
-	 * @param boolean $add_dashicons_class  Add "dashicons" class before icon class.
+	 * @param string  $icon_class          A Dashicon CSS class or our internal alias.
+	 * @param boolean $add_dashicons_class Add "dashicons" class before icon class.
 	 *
 	 * @link https://developer.wordpress.org/resource/dashicons/
 	 * @return string
@@ -185,9 +185,9 @@ class WPGlobus_Admin_Page {
 		}
 
 		if ( $add_dashicons_class ) {
-			$icon_class = 'dashicons '.$icon_class;
+			$icon_class = 'dashicons dashicons-before ' . $icon_class;
 		}
-		
+
 		return $icon_class;
 
 	}
@@ -198,8 +198,6 @@ class WPGlobus_Admin_Page {
 	 * @param string $icon_class A Dashicon CSS class or our internal alias.
 	 */
 	public static function nav_tab_icon_e( $icon_class ) {
-		echo '<span class="dashicons ' . esc_attr( self::nav_tab_icon( $icon_class ) ) .
-			 '" style="vertical-align: middle"></span>';
-
+		echo '<span class="' . esc_attr( self::nav_tab_icon( $icon_class ) ) . '"></span>';
 	}
 }

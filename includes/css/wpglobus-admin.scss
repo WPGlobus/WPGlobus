@@ -228,6 +228,13 @@ $color-wpglobus-logo-wp: #23769C;
     display: block !important;
     margin-right: 140px;
   }
+
+  // @since 1.9.30 Vertical align icons in admin tabs.
+  .nav-tab {
+    .dashicons, .dashicons-before {
+      vertical-align: middle;
+    }
+  }
 }
 
 // Hide Redux annoyances
