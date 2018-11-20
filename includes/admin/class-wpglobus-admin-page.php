@@ -160,12 +160,13 @@ class WPGlobus_Admin_Page {
 	/**
 	 * Icon for navigation tab item.
 	 *
-	 * @param string $icon_class A Dashicon CSS class or our internal alias.
+	 * @param string  $icon_class 			A Dashicon CSS class or our internal alias.
+	 * @param boolean $add_dashicons_class  Add "dashicons" class before icon class.
 	 *
 	 * @link https://developer.wordpress.org/resource/dashicons/
 	 * @return string
 	 */
-	public static function nav_tab_icon( $icon_class ) {
+	public static function nav_tab_icon( $icon_class, $add_dashicons_class = true ) {
 
 		static $aliases = array(
 			'faq'      => 'dashicons-editor-help',
@@ -183,6 +184,10 @@ class WPGlobus_Admin_Page {
 			$icon_class = $aliases[ $icon_class ];
 		}
 
+		if ( $add_dashicons_class ) {
+			$icon_class = 'dashicons '.$icon_class;
+		}
+		
 		return $icon_class;
 
 	}
