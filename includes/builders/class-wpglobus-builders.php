@@ -157,6 +157,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			self::$attrs = array(
 				'id'           => false,
+				'context'      => 'add-on',
 				'version'      => '',
 				'class'        => '',
 				'post_type'    => '',
@@ -631,8 +632,91 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			$message        = '';
 
 			/** @global string $pagenow */
-			global $pagenow;
+			global $pagenow, $wp_version;
+			
+			if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
+				
+				/**
+				 * @since 2.0
+				 */
+				if ( 'post-new.php' === $pagenow ) {
 
+					/**
+					 * Load specific language switcher for this page.
+					 *
+					 * @see get_switcher_box() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg.php
+					 */
+					//if ( ! isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						// Start Gutenberg support if classic editor was not requested.
+						//$load_gutenberg = true;
+					//}
+					
+					$load_gutenberg = true;
+					
+					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg );
+
+				} else if ( 'index.php' === $pagenow ) {
+					
+					/**
+					 * When Update button was clicked.
+					 */
+					if ( ! is_admin() ) {
+						/**
+						 * Gutenberg updates post as from front.
+						 *
+						 * @see $_SERVER['REQUEST_URI']
+						 */
+						//$actions = array( 'edit' );
+						// @todo check 'wp/v2/' in wp.api.versionString (JS).
+
+						// /wp-json/wp/v2/posts/
+						// /wp-json/wp/v2/pages/
+						// @todo check /wp-json/wp/v2/taxonomies?context=edit
+						if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/posts' )
+							 || false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/pages' ) ) {
+							$load_gutenberg = true;
+						}
+						
+					}
+					
+				} else if ( 'post.php' === $pagenow ) {
+			
+					$load_gutenberg = true;
+
+					$post_type = '';
+					if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+					}
+
+					if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
+						$load_gutenberg = false;
+					}
+
+					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg );
+					
+				}
+			
+				$_attrs = array(
+					'id'           => 'gutenberg',
+					'version'      => $wp_version,
+					'class'        => 'WPGlobus_Gutenberg',
+					'builder_page' => false,
+					'pagenow'      => $pagenow,
+					'post_type'    => empty( $post_type ) ? '' : $post_type,
+					'message'      => $message,
+					'context'      => 'core',
+				);
+
+				if ( $load_gutenberg ) {
+					$_attrs['builder_page'] = true;
+				}
+
+				$attrs = self::get_attrs( $_attrs );
+				
+				return $attrs;
+				
+			}
+			
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
 				$__builder = self::get_addon( 'gutenberg' );

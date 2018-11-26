@@ -247,7 +247,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	public function on__enqueue_scripts() {
 
 		/** @global string $pagenow */
-		global $pagenow;
+		global $pagenow, $wp_version;
 
 		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
 			return;
@@ -263,6 +263,17 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		$i18n           = array();
 		$i18n['reload'] = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
 
+		/**
+		 * We have Gutenberg in core since WP 5.0.
+		 * @since 2.0 
+		 */
+		$version_gutenberg = ''; 
+		if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
+			$version_gutenberg = $wp_version;
+		} else if ( defined('GUTENBERG_VERSION') ) {
+			$version_gutenberg = GUTENBERG_VERSION;
+		}		
+		 
 		/**
 		 * Check for Yoast SEO.
 		 */
@@ -284,7 +295,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'WPGlobusGutenberg',
 			array(
 				'version'          => WPGLOBUS_VERSION,
-				'versionGutenberg' => GUTENBERG_VERSION,
+				'versionGutenberg' => $version_gutenberg,
+				'context' 		   => WPGlobus::Config()->builder->get('context'),
 				'tabs'             => $tabs,
 				'language'         => $this->language,
 				'pagenow'          => $pagenow,
