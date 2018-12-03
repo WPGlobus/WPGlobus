@@ -42,13 +42,14 @@ jQuery(document).ready(function ($) {
 		formHandler: function() {
 			
 			var val = $('.metabox-base-form #referredby').attr('value');
-			if( val.indexOf('language=en') == -1 ) {
-				val = val+'&language='+WPGlobusGutenberg.language;
-			} else {
-				val = val.replace('language=en', 'language='+WPGlobusGutenberg.language);
+			if ( 'undefined' !== typeof val ) {
+				if( val.indexOf('language=en') == -1 ) {
+					val = val+'&language='+WPGlobusGutenberg.language;
+				} else {
+					val = val.replace('language=en', 'language='+WPGlobusGutenberg.language);
+				}
+				$('.metabox-base-form #referredby').attr('value', val);
 			}
-
-			$('.metabox-base-form #referredby').attr('value', val);
 			
 			val = $('input[name="_wp_original_http_referer"]').attr('value');
 			if ( 'undefined' !== typeof val ) {
