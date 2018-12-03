@@ -73,6 +73,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			self::$add_on['yoast_seo'] = array(
 				'id'                    => 'yoast_seo',
 				'role'                  => 'builder',
+				'admin_bar_label'       => 'Add-on',
 				'supported_min_version' => '7.7',
 				'const'                 => 'WPSEO_VERSION',
 				'plugin_name'           => 'Yoast SEO',
