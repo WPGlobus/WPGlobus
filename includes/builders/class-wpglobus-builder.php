@@ -66,7 +66,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				add_filter( 'admin_body_class', array( $this, 'filter__add_admin_body_class' ) );
 
 				/**
-				 * Add builder label to admin bar.
+				 * Add builder/add-on label to admin bar.
 				 *
 				 * @since 1.9.27
 				 */
@@ -440,14 +440,17 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 			global $pagenow;
 
-			if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
+			if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php', 'term.php' ), true ) ) {
 				return;
 			}
 
-			$_builder_label = __( 'Builder', 'wpglobus' ) . ': ';
+			$_builder_label = esc_html__( 'Builder', 'wpglobus' ) . ': ';
 			if ( class_exists( 'WPGlobus_Builders' ) ) {
 				$_builder = WPGlobus_Builders::get_addon( $this->id );
-
+				
+				if ( ! empty( $_builder['admin_bar_label'] ) ) {
+					$_builder_label = $_builder['admin_bar_label'] . ': ';
+				}
 				$_builder_label .= $_builder['plugin_name'];
 			} else {
 				$_builder_label .= $this->id;
