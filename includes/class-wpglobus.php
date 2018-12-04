@@ -348,12 +348,6 @@ class WPGlobus {
 
 					$id = self::Config()->builder->get_id();
 
-					if ( 'yoast_seo' === $id ) {
-						/**
-						 * @todo Temporarily using 'js_composer' instead of 'yoast_seo'.
-						 */
-						$id = 'js_composer';
-					}
 					$_file = dirname( __FILE__ ) . '/builders/' . $id . '/class-wpglobus-' . $id . '-update-post.php';
 					if ( file_exists( $_file ) ) {
 						/** @noinspection PhpIncludeInspection */
@@ -429,6 +423,24 @@ class WPGlobus {
 
 				global $pagenow;
 
+				if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
+					/**
+					 * Need to get taxonomy to use the correct filter.
+					 */
+					$taxonomy_slug = WPGlobus_Utils::safe_get( 'taxonomy' );
+					if ( $taxonomy_slug ) {
+						add_action( "{$taxonomy_slug}_pre_edit_form",
+							array( $this, 'on_add_language_tabs_edit_taxonomy' ),
+							10, 2
+						);
+
+						add_action( "{$taxonomy_slug}_edit_form",
+							array( $this, 'on_add_taxonomy_form_wrapper' ),
+							10, 2
+						);
+					}
+				}
+				
 				/**
 				 * @since 1.9.17
 				 */
@@ -498,24 +510,6 @@ class WPGlobus {
 
 						return;
 					}
-				}
-			}
-
-			if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
-				/**
-				 * Need to get taxonomy to use the correct filter.
-				 */
-				$taxonomy_slug = WPGlobus_Utils::safe_get( 'taxonomy' );
-				if ( $taxonomy_slug ) {
-					add_action( "{$taxonomy_slug}_pre_edit_form",
-						array( $this, 'on_add_language_tabs_edit_taxonomy' ),
-						10, 2
-					);
-
-					add_action( "{$taxonomy_slug}_edit_form",
-						array( $this, 'on_add_taxonomy_form_wrapper' ),
-						10, 2
-					);
 				}
 			}
 
@@ -1867,14 +1861,25 @@ class WPGlobus {
 				wp_enqueue_script( 'wpglobus-admin' );
 
 				$current_tab = $config->default_language;
+				
 				if ( 'post.php' == $page_action ) {
+					
 					if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$_current_tab = get_post_meta( $_GET['post'], self::Config()->builder->get_language_meta_key(), 'true' ); // phpcs:ignore WordPress.CSRF.NonceVerification
 						if ( $_current_tab ) {
 							$current_tab = $_current_tab;
 						}
 					}
+					
+				} else if ( 'taxonomy-edit' == $page_action ) {
+
+					$_current_tab = isset($_GET['language']) ? $_GET['language'] : false;
+					if ( $_current_tab ) {
+						$current_tab = $_current_tab;
+					}
+					
 				}
+				
 			} else {
 
 				wp_register_script(
@@ -3490,12 +3495,25 @@ class WPGlobus {
 				foreach ( self::Config()->open_languages as $language ) {
 					$return =
 						$language == self::Config()->default_language ? self::RETURN_IN_DEFAULT_LANGUAGE : self::RETURN_EMPTY;
+										
+						$_href = '';
+						$_onclick = '';
+						if ( self::Config()->builder->get('taxonomy') && self::Config()->builder->is_builder_page() ) {
+							$get = $_GET;
+							unset( $get['language'] );
+							$get['language'] = $language;
+							$_href = admin_url( add_query_arg( $get, 'term.php' ) );
+ 							$_onclick = 'onclick="return false;"';
+						}
+						
 					?>
-					<li id="wpglobus-link-tab-<?php echo esc_attr( $language ); ?>" class=""
+					<li id="wpglobus-link-tab-<?php echo esc_attr( $language ); ?>" class="wpglobus-tax-edit-tab"
 							data-language="<?php echo esc_attr( $language ); ?>"
 							data-name="<?php echo esc_attr( WPGlobus_Core::text_filter( $object->name, $language, $return ) ); ?>"
 							data-description="<?php echo esc_attr( WPGlobus_Core::text_filter( $object->description, $language, $return ) ); ?>">
-						<a href="#taxonomy-tab-<?php echo esc_attr( $language ); ?>"><?php echo esc_html( self::Config()->en_language_name[ $language ] ); ?></a>
+						<a data-language="<?php echo esc_attr( $language ); ?>" 
+							data-href="<?php echo $_href; ?>" <?php echo $_onclick; ?>  	
+							href="#taxonomy-tab-<?php echo esc_attr( $language ); ?>"><?php echo esc_html( self::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
 					<?php
 				}
