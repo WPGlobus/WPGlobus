@@ -909,9 +909,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/** @global string $pagenow */
 				global $pagenow;
 
+				$wpseo_titles = get_option( 'wpseo_titles' );
+				
 				if ( 'post.php' === $pagenow ) {
-
-					$wpseo_titles = get_option( 'wpseo_titles' );
 
 					$post_type = '';
 					if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
@@ -953,7 +953,70 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 					return $attrs;
 
+				} else if( 'term.php' === $pagenow ) {
+
+					$tax = empty( $_GET['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification
+					
+					if ( $tax ) {
+						
+						$_attrs = array(
+							'id'           => 'yoast_seo',
+							'version'      => WPSEO_VERSION,
+							'class'        => 'WPGlobus_Yoast_SEO',
+							'builder_page' => false,
+							'post_type'    => '',
+							'taxonomy'     => $tax,
+						);
+						
+						self::$admin_attrs = array(
+							'multilingualFields' => array( 'name', 'description_ifr' ),
+							'translatableClass'  => 'wpglobus-translatable',
+						);
+						
+						if ( isset( $wpseo_titles[ 'display-metabox-tax-' . $tax ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-tax-' . $tax ] ) {
+							$_attrs['builder_page'] = false;
+						} else {
+							$_attrs['builder_page'] = true;
+						}
+						
+						$attrs = self::get_attrs( $_attrs );
+
+						return $attrs;						
+					}
+					
+				} else if ( 'edit-tags.php' === $pagenow ) {
+					/**
+					 * Case when Update button was clicked on term.php page .
+					 */
+					$tax = empty( $_POST['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) );
+					
+					if ( $tax ) {
+						
+						$_attrs = array(
+							'id'           => 'yoast_seo',
+							'version'      => WPSEO_VERSION,
+							'class'        => 'WPGlobus_Yoast_SEO',
+							'builder_page' => false,
+							'post_type'    => '',
+							'taxonomy'     => $tax,
+						);
+						
+						self::$admin_attrs = array(
+							'multilingualFields' => array( 'name', 'description_ifr' ),
+							'translatableClass'  => 'wpglobus-translatable',
+						);
+						
+						if ( isset( $_POST['action'] ) && 'editedtag' === $_POST['action'] ) {
+							$_attrs['builder_page'] = true;
+						}
+						
+						$attrs = self::get_attrs( $_attrs );
+
+						return $attrs;						
+					}					
+					
 				}
+				
 			}
 
 			return false;
