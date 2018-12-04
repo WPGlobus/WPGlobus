@@ -1156,5 +1156,71 @@ class WPGlobus_Filters {
 
 		return $cache;
 	}
+	
+	/**
+	 * Filters a 'wpseo_taxonomy_meta' option before its value is updated.
+	 *
+	 * @since 2.0
+	 *
+	 * @param mixed  $new_value The new, unserialized option value.
+	 * @param mixed  $old_value The old option value.
+	 * @param string $option    Option name.
+	 */
+	public static function filter__pre_update_wpseo_taxonomy_meta( $new_value, $old_value, $option ) {
+		
+		global $pagenow;
+		
+		if ( 'edit-tags.php' == $pagenow && $_POST['action'] == 'editedtag' ) {
+			/**
+			 * Update button was clicked on term.php page.
+			 */
+			$current_language = WPGlobus::Config()->builder->get_language();
+			$taxonomy         = WPGlobus::Config()->builder->get('taxonomy');
+			$tag_ID 		  = (int) $_POST['tag_ID'];
+			
+			$_enabled_keys = array('wpseo_title', 'wpseo_desc', 'wpseo_focuskw');
+			
+			/**
+			 * Get option.
+			 */
+			global $wpdb;
+			$query  = "SELECT option_value FROM $wpdb->options WHERE option_name = 'wpseo_taxonomy_meta'";
+			$result = $wpdb->get_col( $query );
+			$option_values = maybe_unserialize( $result[0] );
+
+			foreach( $_enabled_keys as $field ) {
+
+				$new = array();
+				
+				foreach ( WPGlobus::Config()->enabled_languages as $lang ) :
+					
+					if ( $lang === $current_language ) {
+
+						if ( empty( $new_value[$taxonomy][$tag_ID][$field] ) ) {
+							//$text = '';
+						} else {
+							$new[ $lang ] = $new_value[$taxonomy][$tag_ID][$field];
+						}
+					
+					} else {
+
+						$_text = WPGlobus_Core::text_filter( $option_values[$taxonomy][$tag_ID][$field], $lang, WPGlobus::RETURN_EMPTY );
+						if ( ! empty( $_text ) ) {
+							$new[ $lang ] = $_text;
+						}
+						
+					}
+
+				endforeach;		
+
+				$new_value[$taxonomy][$tag_ID][$field] = WPGlobus_Utils::build_multilingual_string( $new );
+				
+			} // endforeach
+			
+		}
+		
+		return $new_value;
+
+	}
 
 }

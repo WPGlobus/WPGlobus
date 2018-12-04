@@ -402,6 +402,16 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 	}
 }
 
+/**
+ * Yoast SEO filters.
+ * @since 2.0
+ */
+if ( defined( 'WPSEO_VERSION' ) ) {
+	if ( is_admin() ) {
+		add_filter( "pre_update_option_wpseo_taxonomy_meta", array( 'WPGlobus_Filters', 'filter__pre_update_wpseo_taxonomy_meta' ), 5, 3 );
+	}
+}
+
 if ( class_exists( 'Whistles_Load' ) ) {
 	/**
 	 * Translate "Whistles"
