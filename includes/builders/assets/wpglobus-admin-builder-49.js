@@ -145,7 +145,11 @@ jQuery(document).ready(function ($) {
 		locationPathname: '/wp-admin/post.php',
 		init: function() {
 			//api.setCookie();
-			api.start();
+			if ('taxonomy-edit' === WPGlobusAdmin.page) {
+				api.taxonomyEdit();
+			} else {
+				api.start();
+			}
 		},
 		_info: function() {
 			var lang = undefined;
@@ -218,12 +222,44 @@ jQuery(document).ready(function ($) {
 				window.history.pushState({path:newurl},'',newurl);
 			}				
 		},
+		taxonomyEdit: function() {
+			
+			$('.wpglobus-taxonomy-tabs').insertAfter('#ajax-response');
+
+			/**
+			 * Make class wrap as tabs container.
+			 * Tabs on.
+			 */
+			$('.wrap').tabs();
+			
+			$(WPGlobusAdmin.data.multilingualSlug.title).insertAfter('.term-slug-wrap th label');
+			
+			if ( WPGlobusAdmin.currentTab !== WPGlobusAdmin.data.default_language ) {
+				$('.wpglobus-tax-edit-tab').removeClass('ui-tabs-active ui-state-active');
+				$('#wpglobus-link-tab-'+WPGlobusAdmin.currentTab).addClass('ui-tabs-active ui-state-active');
+			}
+			
+			$(document).on('click', '.wpglobus-tax-edit-tab a', function(event) {
+				event.preventDefault();
+				var _href = $(this).data('href');
+				location.href = _href;
+			});			
+			
+			api.setMultilingualFields();
+			
+			/**
+			 * Init Yoast tinymce editor for description.
+			 */
+			$(document).on( 'tinymce-editor-init', function( event, editor ) {	
+				$( '#' + editor.getContainer().id ).find('iframe').addClass(WPGlobusAdmin.builder.translatableClass).css({'width':''});
+			});			
+		},
 		start: function() {
 			/**
 			 *
 			 */
 			api.setLocationSearch();
-			 
+			
 			/**
 			 *
 			 */			 
