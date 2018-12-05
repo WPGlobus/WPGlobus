@@ -1040,9 +1040,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			}
 
 			if ( empty( $_attrs['post_id'] ) ) {
-				if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				if ( isset( $_GET['post'] ) && is_string( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					/**
+					 * With bulk action (trash, untrash) we get $_GET['post'] as array.
+					 * @since WPGlobus 2.0 we are working with single post only.
+					 */
 					$_attrs['post_id'] = sanitize_text_field( $_GET['post'] );
-				} elseif ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				} elseif ( isset( $_REQUEST['post_ID'] ) && is_string( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$_attrs['post_id'] = sanitize_text_field( $_REQUEST['post_ID'] );
 					// } else {
 					// @todo Check additional ways to get post ID.
