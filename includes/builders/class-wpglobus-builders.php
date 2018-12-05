@@ -866,9 +866,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/**
 				 * @see https://wordpress.org/plugins/classic-editor/
 				 */
-				$classic_editor_replace = get_option( 'classic-editor-replace' );
-				if ( empty( $classic_editor_replace ) || 'replace' === $classic_editor_replace ) {
+				if ( isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					/**
+					 * Option 'Use the Block editor by default and include optional links back to the Classic editor' was selected.
+					 */
 					$load_gutenberg = false;
+				} else {				 
+					$classic_editor_replace = get_option( 'classic-editor-replace' );
+					if ( empty( $classic_editor_replace ) || 'replace' === $classic_editor_replace ) {
+						$load_gutenberg = false;
+					}
 				}
 			}
 
