@@ -469,10 +469,21 @@ class WPGlobus {
 					'on_admin_scripts',
 				) );
 
-				add_action( 'edit_form_after_title', array(
-					$this,
-					'on_add_title_fields',
-				) );
+				if ( 'core' == self::Config()->builder->get('context') && self::Config()->builder->is_builder_page() ) {
+					/**
+					 * @since WPGlobus 2.0
+					 */
+					add_action( 'block_editor_meta_box_hidden_fields', array(
+						$this,
+						'on_add_title_fields',
+					) );					
+				} else {
+					
+					add_action( 'edit_form_after_title', array(
+						$this,
+						'on_add_title_fields',
+					) );
+				}
 
 				add_action( 'admin_footer', array(
 					$this,
