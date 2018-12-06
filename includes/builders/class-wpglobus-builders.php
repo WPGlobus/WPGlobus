@@ -637,6 +637,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			
 			if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
 				
+				$context = 'core';
+				
 				/**
 				 * @since 2.0
 				 */
@@ -705,7 +707,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					'pagenow'      => $pagenow,
 					'post_type'    => empty( $post_type ) ? '' : $post_type,
 					'message'      => $message,
-					'context'      => 'core',
+					'context'      => $context,
 				);
 
 				if ( $load_gutenberg ) {
@@ -862,6 +864,25 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 */
 		protected static function get_3rd_party_status_for_gutenberg( $load_gutenberg ) {
 
+			if ( defined( 'WC_PLUGIN_FILE' ) ) {
+				/**
+				 * Woocommerce.
+				 */
+				$post_type = '';
+				if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+				}
+				
+				if ( empty($post_type) && ! empty($_GET['post_type']) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					$post_type = $_GET['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
+				}
+
+				if ( 'product' == $post_type ) {
+					$load_gutenberg = false;
+				}
+				
+			}				
+							
 			if ( function_exists( 'classic_editor_settings' ) ) {
 				/**
 				 * @see https://wordpress.org/plugins/classic-editor/
