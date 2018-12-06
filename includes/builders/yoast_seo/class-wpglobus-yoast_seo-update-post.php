@@ -65,6 +65,8 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 		 */
 		public function build_ml_description() {
 			
+			global $wpdb;
+			
 			$current_language = WPGlobus::Config()->builder->get_language();
 			
 			$tag_ID 	= (int) $_POST['tag_ID'];
@@ -72,6 +74,22 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 			
 			$this->tag = get_term( $tag_ID, $taxonomy );
 
+			if ( is_wp_error($this->tag) ) {
+				
+				$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.*, tt.* FROM $wpdb->terms AS t INNER JOIN $wpdb->term_taxonomy AS tt ON t.term_id = tt.term_id WHERE t.term_id = %d", $tag_ID) );
+				if ( ! empty($terms[0]) && is_object($terms[0]) ) {
+					$this->tag = $terms[0]; 
+				}
+
+			}
+			
+			if ( is_wp_error($this->tag) ) {
+				/**
+				 * @todo Investigate.
+				 */
+				return;
+			}
+			
 			$new_desc = array();
 			
 			foreach ( WPGlobus::Config()->enabled_languages as $lang ) :
@@ -107,6 +125,14 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 		 * @param array  $args     Arguments passed to wp_update_term().
 		 */
 		public function filter__update_term_data( $data, $term_id, $taxonomy, $args ) {
+
+			if ( is_wp_error($this->tag) ) {
+				/**
+				 * @todo Investigate.
+				 * may be to use $args.
+				 */
+				return $data;
+			}
 			
 			if ( WPGlobus::Config()->builder && ! WPGlobus::Config()->builder->is_builder_page() ) {
 				return $data;
