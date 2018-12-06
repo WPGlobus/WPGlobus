@@ -1187,7 +1187,7 @@ class WPGlobus_Filters {
 			$query  = "SELECT option_value FROM $wpdb->options WHERE option_name = 'wpseo_taxonomy_meta'";
 			$result = $wpdb->get_col( $query );
 			$option_values = maybe_unserialize( $result[0] );
-
+			
 			foreach( $_enabled_keys as $field ) {
 
 				$new = array();
@@ -1203,10 +1203,14 @@ class WPGlobus_Filters {
 						}
 					
 					} else {
-
-						$_text = WPGlobus_Core::text_filter( $option_values[$taxonomy][$tag_ID][$field], $lang, WPGlobus::RETURN_EMPTY );
-						if ( ! empty( $_text ) ) {
-							$new[ $lang ] = $_text;
+						
+						if ( ! empty( $option_values[$taxonomy][$tag_ID][$field] ) ) {
+							
+							$_text = WPGlobus_Core::text_filter( $option_values[$taxonomy][$tag_ID][$field], $lang, WPGlobus::RETURN_EMPTY );
+							if ( ! empty( $_text ) ) {
+								$new[ $lang ] = $_text;
+							}
+						
 						}
 						
 					}
