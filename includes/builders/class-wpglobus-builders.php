@@ -82,21 +82,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'stage'                 => 'production',
 			);
 
-			if ( defined( 'WPGLOBUS_WC_BUILDERS' ) && WPGLOBUS_WC_BUILDERS ) {
-
-				self::$add_on['woocommerce'] = array(
-					'id'                    => 'woocommerce',
-					'role'                  => 'add-on',
-					'config_file'           => 'woocommerce.json',
-					'supported_min_version' => '3.5.1',
-					'const'                 => 'WC_PLUGIN_FILE',
-					'plugin_name'           => 'WooCommerce',
-					'plugin_uri'            => 'https://woocommerce.com',
-					'path'                  => 'woocommerce/woocommerce.php',
-					'stage'                 => 'beta',
-				);
-
-			}
+			self::$add_on['woocommerce'] = array(
+				'id'                    => 'woocommerce',
+				'role'                  => 'add-on',
+				'config_file'           => 'woocommerce.json',
+				'supported_min_version' => '3.5.1',
+				'const'                 => 'WC_PLUGIN_FILE',
+				'plugin_name'           => 'WooCommerce',
+				'plugin_uri'            => 'https://woocommerce.com',
+				'path'                  => 'woocommerce/woocommerce.php',
+				'stage'                 => 'production',
+			);
 
 			/**
 			 * self::$add_on['wp-subtitle'] = array(
