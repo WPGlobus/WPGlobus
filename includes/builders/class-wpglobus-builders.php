@@ -711,7 +711,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				}
 
 				$attrs = self::get_attrs( $_attrs );
-				
+
 				return $attrs;
 				
 			}
@@ -881,19 +881,67 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							
 			if ( function_exists( 'classic_editor_settings' ) ) {
 				/**
-				 * @see https://wordpress.org/plugins/classic-editor/
+				 * @see ver.0.5 https://wordpress.org/plugins/classic-editor/#developers
 				 */
 				if ( isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					/**
 					 * Option 'Use the Block editor by default and include optional links back to the Classic editor' was selected.
 					 */
 					$load_gutenberg = false;
-				} else {				 
+				} else {
 					$classic_editor_replace = get_option( 'classic-editor-replace' );
 					if ( empty( $classic_editor_replace ) || 'replace' === $classic_editor_replace ) {
 						$load_gutenberg = false;
 					}
 				}
+			}
+
+			if ( class_exists( 'Classic_Editor' ) ) {
+				/** @global string $wp_version */
+				global $wp_version;
+				
+				if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
+					// continue
+				} else {
+					/**
+					 * Incorrect work with WP 4.9
+					 * @see https://wordpress.org/support/topic/does-nor-work-anymore-since-v-1-0/
+					 */
+					return $load_gutenberg;
+				}
+				
+				/**
+				 * ver.1.0 https://wordpress.org/plugins/classic-editor/
+				 */
+				if ( isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					$load_gutenberg = false;
+				} else if ( isset( $_GET['classic-editor__forget'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					$load_gutenberg = true;
+				} else {
+					$post_id = isset($_GET['post']) ? (int) $_GET['post'] : 0;
+					
+					if ( $post_id != 0 ) {
+						$classic_editor_remember = get_post_meta( $post_id, 'classic-editor-remember', true );
+						if ( 'classic-editor' == $classic_editor_remember ) {
+							$load_gutenberg = false;
+							return $load_gutenberg;
+						} else if ( 'block-editor' == $classic_editor_remember ) {
+							$load_gutenberg = true;
+							return $load_gutenberg;
+						}
+					}
+
+					$classic_editor_replace = get_option( 'classic-editor-replace' );
+					if ( empty( $classic_editor_replace ) || 'classic' === $classic_editor_replace ) {
+						$load_gutenberg = false;
+					} else if( 'block' === $classic_editor_replace ) {
+						$load_gutenberg = true;
+					} else {
+						$load_gutenberg = false;
+						
+					}
+					
+				}				
 			}
 
 			return $load_gutenberg;
