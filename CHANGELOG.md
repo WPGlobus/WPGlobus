@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.0.1 ###
+
+* FIXED:
+    *  Builders/Gutenberg: correct saving post in 'classic-editor' mode. WP5.
+
 ### 2.0.0 ###
 
 * COMPATIBILITY:
