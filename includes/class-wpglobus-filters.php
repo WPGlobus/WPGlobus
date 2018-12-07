@@ -98,7 +98,7 @@ class WPGlobus_Filters {
 	 *
 	 * @return array
 	 */
-	public static function filter__get_terms( Array $terms ) {
+	public static function filter__get_terms( array $terms ) {
 
 		/**
 		 * @todo Example of a "stopper" filter
@@ -184,7 +184,7 @@ class WPGlobus_Filters {
 		if (
 			is_admin() &&
 			WPGlobus_WP::is_pagenow( 'post.php' ) &&
-			( ! empty( $_POST['save'] ) || ! empty( $_POST['publish'] ) ) // WPCS: input var ok, sanitization ok.
+			( ! empty( $_POST['save'] ) || ! empty( $_POST['publish'] ) ) // phpcs:ignore WordPress.CSRF.NonceVerification
 		) {
 			return $terms;
 		}
@@ -194,7 +194,7 @@ class WPGlobus_Filters {
 		 *
 		 * @see we check post.php page instead of edit.php because redirect
 		 */
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset( $_GET['action'] ) && ( 'trash' === $_GET['action'] || 'untrash' === $_GET['action'] ) // WPCS: input var ok, sanitization ok.
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'post.php' ) && isset( $_GET['action'] ) && ( 'trash' === $_GET['action'] || 'untrash' === $_GET['action'] ) // phpcs:ignore WordPress.CSRF.NonceVerification
 		) {
 			return $terms;
 		}
@@ -202,7 +202,7 @@ class WPGlobus_Filters {
 		/**
 		 * Don't filter term names bulk trash and untrash posts
 		 */
-		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset( $_GET['action'] ) && ( 'trash' === $_GET['action'] || 'untrash' === $_GET['action'] ) // WPCS: input var ok, sanitization ok.
+		if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit.php' ) && isset( $_GET['action'] ) && ( 'trash' === $_GET['action'] || 'untrash' === $_GET['action'] ) // phpcs:ignore WordPress.CSRF.NonceVerification
 		) {
 			return $terms;
 		}
@@ -239,7 +239,7 @@ class WPGlobus_Filters {
 		 */
 		if ( WPGlobus_WP::is_http_post_action( 'heartbeat' ) &&
 			 WPGlobus_WP::is_pagenow( 'admin-ajax.php' ) &&
-			 ! empty( $_POST['data']['wp_autosave'] ) // WPCS: input var ok, sanitization ok.
+			 ! empty( $_POST['data']['wp_autosave'] ) // phpcs:ignore WordPress.CSRF
 		) {
 			return $terms;
 		}
@@ -248,7 +248,7 @@ class WPGlobus_Filters {
 		 * Don't filter term name at time generate checklist categories in metabox
 		 */
 		if (
-			empty( $_POST ) && // WPCS: input var ok, sanitization ok.
+			empty( $_POST ) && // phpcs:ignore WordPress.CSRF
 			is_admin() &&
 			WPGlobus_WP::is_pagenow( 'post.php' ) &&
 			WPGlobus_WP::is_function_in_backtrace( 'wp_terms_checklist' )
@@ -321,7 +321,7 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__get_term( $term ) {
 
-		if ( WPGlobus_WP::is_http_post_action( 'inline-save-tax' ) ) {
+		if ( WPGlobus_WP::is_http_post_action( 'inline-save-tax' ) ) { // phpcs:ignore Generic
 			/**
 			 * Don't filter ajax action 'inline-save-tax' from edit-tags.php page.
 			 * See quick_edit() in includes/js/wpglobus.admin.js
@@ -375,7 +375,11 @@ class WPGlobus_Filters {
 	 *
 	 * @return string
 	 */
-	public static function filter__pre_insert_term( $term, $taxonomy ) {
+	public static function filter__pre_insert_term(
+		$term,
+		/** @noinspection PhpUnusedParameterInspection */
+		$taxonomy
+	) {
 
 		$multilingual_term = esc_sql( $term );
 		if ( WPGlobus::Config()->language !== WPGlobus::Config()->default_language ) {
@@ -383,6 +387,7 @@ class WPGlobus_Filters {
 		}
 
 		global $wpdb;
+		// phpcs:ignore WordPress.WP.PreparedSQL
 		$data = $wpdb->get_results( "SELECT * FROM $wpdb->terms AS terms WHERE terms.name LIKE '%{$multilingual_term}%'" );
 
 		if ( count( $data ) > 0 ) {
@@ -632,7 +637,7 @@ class WPGlobus_Filters {
 			$content_ext    = '';
 
 			foreach ( WPGlobus::Config()->enabled_languages as $language ) {
-				if ( $language === WPGlobus::Config()->default_language ) {
+				if ( WPGlobus::Config()->default_language === $language ) {
 
 					$post_title_ext .= WPGlobus::add_locale_marks( $data['wp_autosave']['post_title'], $language );
 					$content_ext    .= WPGlobus::add_locale_marks( $data['wp_autosave']['content'], $language );
@@ -687,7 +692,8 @@ class WPGlobus_Filters {
 				$response['wp_autosave'] = array(
 					'success' => true,
 					'message' => sprintf(
-						__( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format ) ),
+						__( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format )
+					),
 				);
 			}
 		}
@@ -792,7 +798,7 @@ class WPGlobus_Filters {
 		}
 
 		$text = wp_strip_all_tags( $text );
-		if ( 'characters' == _x( 'words', 'word count: words or characters?' ) && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
+		if ( 'characters' == _x( 'words', 'word count: words or characters?' ) && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {//phpcs:ignore WordPress.PHP.StrictComparisons
 			$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
 			preg_match_all( '/./u', $text, $words_array );
 			$words_array = array_slice( $words_array[0], 0, $num_words + 1 );
@@ -853,16 +859,17 @@ class WPGlobus_Filters {
 	 * @since 1.2.1
 	 */
 	public static function set_multilingual_meta_keys() {
-		
+
 		/**
 		 * Add Alternative Text meta value for media.
 		 * We need to use only one meta because Title, Caption and Description was stored in wp_posts table.
-		 * @todo may be to use another class to store keys for $multilingual_meta_keys in future version.
-		 * 
+		 *
+		 * @todo  may be to use another class to store keys for $multilingual_meta_keys in future version.
+		 *
 		 * @since 1.9.11
 		 */
 		self::$multilingual_meta_keys['_wp_attachment_image_alt'] = true;
-		
+
 		self::$multilingual_meta_keys = apply_filters(
 			'wpglobus_multilingual_meta_keys', self::$multilingual_meta_keys
 		);
@@ -919,7 +926,7 @@ class WPGlobus_Filters {
 				/**
 				 * @todo Refactor this. Write a `filter__array` method.
 				 */
-				$_meta_array = unserialize( $meta_value );
+				$_meta_array = unserialize( $meta_value ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
 				foreach ( $_meta_array as &$_value ) {
 					if ( is_array( $_value ) ) {
 						foreach ( $_value as &$_deep_value ) {
@@ -999,6 +1006,11 @@ class WPGlobus_Filters {
 	 * @since 1.6.6
 	 *
 	 * @scope front
+	 *
+	 * @param string $css
+	 * @param string $css_editor
+	 *
+	 * @return string
 	 */
 	public static function filter__front_styles( $css, $css_editor ) {
 		if ( ! empty( $css_editor ) ) {
@@ -1043,7 +1055,7 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__oembed_request_post_id( $post_id, $url ) {
 		$language = WPGlobus_Utils::extract_language_from_url( $url );
-		if ( $language !== WPGlobus::Config()->default_language ) {
+		if ( WPGlobus::Config()->default_language !== $language ) {
 			WPGlobus::Config()->setLanguageForOembed( $language );
 		}
 
@@ -1134,7 +1146,13 @@ class WPGlobus_Filters {
 	 * @return string
 	 * @since 1.9.8
 	 */
-	public static function filter__embed_oembed_html( $cache, $url, $attr, $post_ID ) {
+	public static function filter__embed_oembed_html(
+		$cache, $url,
+		/** @noinspection PhpUnusedParameterInspection */
+		$attr,
+		/** @noinspection PhpUnusedParameterInspection */
+		$post_ID
+	) {
 
 		if ( ! is_string( $cache ) ) {
 			/**
@@ -1156,7 +1174,7 @@ class WPGlobus_Filters {
 
 		return $cache;
 	}
-	
+
 	/**
 	 * Filters a 'wpseo_taxonomy_meta' option before its value is updated.
 	 *
@@ -1165,64 +1183,68 @@ class WPGlobus_Filters {
 	 * @param mixed  $new_value The new, unserialized option value.
 	 * @param mixed  $old_value The old option value.
 	 * @param string $option    Option name.
+	 *
+	 * @return mixed
 	 */
-	public static function filter__pre_update_wpseo_taxonomy_meta( $new_value, $old_value, $option ) {
-		
+	public static function filter__pre_update_wpseo_taxonomy_meta(
+		$new_value,
+		/** @noinspection PhpUnusedParameterInspection */
+		$old_value,
+		/** @noinspection PhpUnusedParameterInspection */
+		$option
+	) {
+
 		global $pagenow;
-		
-		if ( 'edit-tags.php' == $pagenow && $_POST['action'] == 'editedtag' ) {
+
+		if ( 'edit-tags.php' === $pagenow && 'editedtag' === $_POST['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 			/**
 			 * Update button was clicked on term.php page.
 			 */
 			$current_language = WPGlobus::Config()->builder->get_language();
-			$taxonomy         = WPGlobus::Config()->builder->get('taxonomy');
-			$tag_ID 		  = (int) $_POST['tag_ID'];
-			
-			$_enabled_keys = array('wpseo_title', 'wpseo_desc', 'wpseo_focuskw');
-			
+			$taxonomy         = WPGlobus::Config()->builder->get( 'taxonomy' );
+			$tag_ID           = (int) $_POST['tag_ID'];
+
+			$_enabled_keys = array( 'wpseo_title', 'wpseo_desc', 'wpseo_focuskw' );
+
 			/**
 			 * Get option.
 			 */
 			global $wpdb;
-			$query  = "SELECT option_value FROM $wpdb->options WHERE option_name = 'wpseo_taxonomy_meta'";
-			$result = $wpdb->get_col( $query );
+			$query         = "SELECT option_value FROM $wpdb->options WHERE option_name = 'wpseo_taxonomy_meta'";
+			$result        = $wpdb->get_col( $query ); // phpcs:ignore WordPress.WP.PreparedSQL
 			$option_values = maybe_unserialize( $result[0] );
-			
-			foreach( $_enabled_keys as $field ) {
+
+			foreach ( $_enabled_keys as $field ) {
 
 				$new = array();
-				
+
 				foreach ( WPGlobus::Config()->enabled_languages as $lang ) :
-					
+
 					if ( $lang === $current_language ) {
 
-						if ( empty( $new_value[$taxonomy][$tag_ID][$field] ) ) {
+						if ( empty( $new_value[ $taxonomy ][ $tag_ID ][ $field ] ) ) {//phpcs:ignore Generic.CodeAnalysis
 							//$text = '';
 						} else {
-							$new[ $lang ] = $new_value[$taxonomy][$tag_ID][$field];
+							$new[ $lang ] = $new_value[ $taxonomy ][ $tag_ID ][ $field ];
 						}
-					
 					} else {
-						
-						if ( ! empty( $option_values[$taxonomy][$tag_ID][$field] ) ) {
-							
-							$_text = WPGlobus_Core::text_filter( $option_values[$taxonomy][$tag_ID][$field], $lang, WPGlobus::RETURN_EMPTY );
+
+						if ( ! empty( $option_values[ $taxonomy ][ $tag_ID ][ $field ] ) ) {
+
+							$_text = WPGlobus_Core::text_filter( $option_values[ $taxonomy ][ $tag_ID ][ $field ], $lang, WPGlobus::RETURN_EMPTY );
 							if ( ! empty( $_text ) ) {
 								$new[ $lang ] = $_text;
 							}
-						
 						}
-						
 					}
 
-				endforeach;		
+				endforeach;
 
-				$new_value[$taxonomy][$tag_ID][$field] = WPGlobus_Utils::build_multilingual_string( $new );
-				
+				$new_value[ $taxonomy ][ $tag_ID ][ $field ] = WPGlobus_Utils::build_multilingual_string( $new );
+
 			} // endforeach
-			
 		}
-		
+
 		return $new_value;
 
 	}

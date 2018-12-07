@@ -310,8 +310,8 @@ msgid "Save &amp; Reload"
 msgstr "Save &amp; Reload"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:304,
-#: includes/class-wpglobus.php:1320, wpglobus.php:12, wpglobus.php:18
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:316,
+#: includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -859,7 +859,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:358,
-#: includes/class-wpglobus.php:3532
+#: includes/class-wpglobus.php:3561
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -867,7 +867,7 @@ msgstr ""
 msgid "Builder"
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:462
+#: includes/builders/class-wpglobus-builder.php:465
 msgid "Сompatibility Settings"
 msgstr ""
 
@@ -930,40 +930,40 @@ msgid "Selector type"
 msgstr "Selector type"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1294
+#: includes/class-wpglobus.php:1299
 msgid "OFF"
 msgstr "OFF"
 
-#: includes/class-wpglobus.php:1295
+#: includes/class-wpglobus.php:1300
 msgid "Turn on"
 msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1299
+#: includes/class-wpglobus.php:1304
 msgid "ON"
 msgstr "ON"
 
-#: includes/class-wpglobus.php:1300
+#: includes/class-wpglobus.php:1305
 msgid "Turn off"
 msgstr ""
 
-#: includes/class-wpglobus.php:1483
+#: includes/class-wpglobus.php:1488
 msgid "You cannot disable the main language."
 msgstr "You cannot disable the main language."
 
-#: includes/class-wpglobus.php:1684
+#: includes/class-wpglobus.php:1689
 msgid "*) Available after the menu is saved."
 msgstr "*) Available after the menu is saved."
 
-#: includes/class-wpglobus.php:1701
+#: includes/class-wpglobus.php:1706
 msgid "Need a multilingual slug?"
 msgstr "Need a multilingual slug?"
 
-#: includes/class-wpglobus.php:3965
+#: includes/class-wpglobus.php:3994
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "You must enable Pretty Permalinks to use WPGlobus."
 
-#: includes/class-wpglobus.php:3967
+#: includes/class-wpglobus.php:3996
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -971,7 +971,7 @@ msgstr ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 
-#: includes/class-wpglobus.php:4113
+#: includes/class-wpglobus.php:4142
 msgid "Add"
 msgstr "Add"
 
@@ -1335,39 +1335,43 @@ msgstr ""
 msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
 msgstr ""
 
-#: includes/options/templates/compatibility.php:22
+#: includes/options/templates/compatibility.php:37
 msgid "List of supported add-ons"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:27
+#: includes/options/templates/compatibility.php:42
 msgid "Add-on"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:28
+#: includes/options/templates/compatibility.php:43
 msgid "Current version"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:29
+#: includes/options/templates/compatibility.php:44
 msgid "Supported minimum version"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:30
+#: includes/options/templates/compatibility.php:45
 msgid "Stage"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:31
+#: includes/options/templates/compatibility.php:46
 msgid "Status"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:47
+#: includes/options/templates/compatibility.php:59
+msgid "In core"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:71
 msgid "Active"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:49
+#: includes/options/templates/compatibility.php:73
 msgid "Installed, inactive"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:52
+#: includes/options/templates/compatibility.php:76
 msgid "Not installed"
 msgstr ""
 

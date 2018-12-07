@@ -630,11 +630,11 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			/** @global string $pagenow */
 			global $pagenow, $wp_version;
-			
+
 			if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
-				
+
 				$context = 'core';
-				
+
 				/**
 				 * @since 2.0
 				 */
@@ -646,16 +646,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					 * @see get_switcher_box() in wpglobus\includes\builders\gutenberg\class-wpglobus-gutenberg.php
 					 */
 					//if ( ! isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-						// Start Gutenberg support if classic editor was not requested.
-						//$load_gutenberg = true;
+					// Start Gutenberg support if classic editor was not requested.
+					//$load_gutenberg = true;
 					//}
-					
+
 					$load_gutenberg = true;
-					
+
 					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg );
 
-				} else if ( 'index.php' === $pagenow ) {
-					
+				} elseif ( 'index.php' === $pagenow ) {
+
 					/**
 					 * When Update button was clicked.
 					 */
@@ -675,11 +675,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							 || false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/pages' ) ) {
 							$load_gutenberg = true;
 						}
-						
 					}
-					
-				} else if ( 'post.php' === $pagenow ) {
-			
+				} elseif ( 'post.php' === $pagenow ) {
+
 					$load_gutenberg = true;
 
 					$post_type = '';
@@ -692,9 +690,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					}
 
 					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg );
-					
+
 				}
-			
+
 				$_attrs = array(
 					'id'           => 'gutenberg',
 					'version'      => $wp_version,
@@ -713,9 +711,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				$attrs = self::get_attrs( $_attrs );
 
 				return $attrs;
-				
+
 			}
-			
+
 			if ( defined( 'GUTENBERG_VERSION' ) ) {
 
 				$__builder = self::get_addon( 'gutenberg' );
@@ -868,17 +866,16 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 				}
-				
-				if ( empty($post_type) && ! empty($_GET['post_type']) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+
+				if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$post_type = $_GET['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
 				}
 
-				if ( 'product' == $post_type ) {
+				if ( 'product' === $post_type ) {
 					$load_gutenberg = false;
 				}
-				
-			}				
-							
+			}
+
 			if ( function_exists( 'classic_editor_settings' ) ) {
 				/**
 				 * @see ver.0.5 https://wordpress.org/plugins/classic-editor/#developers
@@ -899,34 +896,37 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			if ( class_exists( 'Classic_Editor' ) ) {
 				/** @global string $wp_version */
 				global $wp_version;
-				
-				if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
+
+				if ( version_compare( $wp_version, '4.9.99', '>' ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 					// continue
 				} else {
 					/**
 					 * Incorrect work with WP 4.9
+					 *
 					 * @see https://wordpress.org/support/topic/does-nor-work-anymore-since-v-1-0/
 					 */
 					return $load_gutenberg;
 				}
-				
+
 				/**
 				 * ver.1.0 https://wordpress.org/plugins/classic-editor/
 				 */
 				if ( isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$load_gutenberg = false;
-				} else if ( isset( $_GET['classic-editor__forget'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				} elseif ( isset( $_GET['classic-editor__forget'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$load_gutenberg = true;
 				} else {
-					$post_id = isset($_GET['post']) ? (int) $_GET['post'] : 0;
-					
-					if ( $post_id != 0 ) {
+					$post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0; // phpcs:ignore WordPress.CSRF.NonceVerification
+
+					if ( 0 !== $post_id ) {
 						$classic_editor_remember = get_post_meta( $post_id, 'classic-editor-remember', true );
-						if ( 'classic-editor' == $classic_editor_remember ) {
+						if ( 'classic-editor' === $classic_editor_remember ) {
 							$load_gutenberg = false;
+
 							return $load_gutenberg;
-						} else if ( 'block-editor' == $classic_editor_remember ) {
+						} elseif ( 'block-editor' === $classic_editor_remember ) {
 							$load_gutenberg = true;
+
 							return $load_gutenberg;
 						}
 					}
@@ -934,14 +934,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					$classic_editor_replace = get_option( 'classic-editor-replace' );
 					if ( empty( $classic_editor_replace ) || 'classic' === $classic_editor_replace ) {
 						$load_gutenberg = false;
-					} else if( 'block' === $classic_editor_replace ) {
+					} elseif ( 'block' === $classic_editor_replace ) {
 						$load_gutenberg = true;
 					} else {
 						$load_gutenberg = false;
-						
+
 					}
-					
-				}				
+				}
 			}
 
 			return $load_gutenberg;
@@ -982,7 +981,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				global $pagenow;
 
 				$wpseo_titles = get_option( 'wpseo_titles' );
-				
+
 				if ( 'post.php' === $pagenow ) {
 
 					$post_type = '';
@@ -1025,12 +1024,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 					return $attrs;
 
-				} else if( 'term.php' === $pagenow ) {
+				} elseif ( 'term.php' === $pagenow ) {
 
 					$tax = empty( $_GET['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification
-					
+
 					if ( $tax ) {
-						
+
 						$_attrs = array(
 							'id'           => 'yoast_seo',
 							'version'      => WPSEO_VERSION,
@@ -1039,31 +1038,31 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							'post_type'    => '',
 							'taxonomy'     => $tax,
 						);
-						
+
 						self::$admin_attrs = array(
 							'multilingualFields' => array( 'name', 'description_ifr' ),
 							'translatableClass'  => 'wpglobus-translatable',
 						);
-						
+
 						if ( isset( $wpseo_titles[ 'display-metabox-tax-' . $tax ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-tax-' . $tax ] ) {
 							$_attrs['builder_page'] = false;
 						} else {
 							$_attrs['builder_page'] = true;
 						}
-						
+
 						$attrs = self::get_attrs( $_attrs );
 
-						return $attrs;						
+						return $attrs;
 					}
-					
-				} else if ( 'edit-tags.php' === $pagenow ) {
+				} elseif ( 'edit-tags.php' === $pagenow ) {
 					/**
 					 * Case when Update button was clicked on term.php page .
 					 */
+					// phpcs:ignore WordPress.CSRF.NonceVerification
 					$tax = empty( $_POST['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) );
-					
+
 					if ( $tax ) {
-						
+
 						$_attrs = array(
 							'id'           => 'yoast_seo',
 							'version'      => WPSEO_VERSION,
@@ -1072,23 +1071,21 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							'post_type'    => '',
 							'taxonomy'     => $tax,
 						);
-						
+
 						self::$admin_attrs = array(
 							'multilingualFields' => array( 'name', 'description_ifr' ),
 							'translatableClass'  => 'wpglobus-translatable',
 						);
-						
-						if ( isset( $_POST['action'] ) && 'editedtag' === $_POST['action'] ) {
+
+						if ( isset( $_POST['action'] ) && 'editedtag' === $_POST['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 							$_attrs['builder_page'] = true;
 						}
-						
+
 						$attrs = self::get_attrs( $_attrs );
 
-						return $attrs;						
-					}					
-					
+						return $attrs;
+					}
 				}
-				
 			}
 
 			return false;
@@ -1115,6 +1112,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				if ( isset( $_GET['post'] ) && is_string( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					/**
 					 * With bulk action (trash, untrash) we get $_GET['post'] as array.
+					 *
 					 * @since WPGlobus 2.0 we are working with single post only.
 					 */
 					$_attrs['post_id'] = sanitize_text_field( $_GET['post'] );

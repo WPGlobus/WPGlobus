@@ -211,11 +211,18 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 == Upgrade Notice ==
 
-= 1.9.17 =
+= 2.0.0 =
 
-This maintenance release introduces Gutenberg support in beta-stage.
+WPGlobus Version 2 supports WordPress 5.
 
 == Changelog ==
+
+= 2.0.0 =
+
+* COMPATIBILITY:
+    * WordPress 5.0 (with Gutenberg in the WP Core)
+* ADDED:
+    *  Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page).
 
 = 1.9.30 =
 

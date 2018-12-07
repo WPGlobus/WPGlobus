@@ -3,9 +3,11 @@
 ## Changelog ##
 
 ### 2.0.0 ###
+
+* COMPATIBILITY:
+    * WordPress 5.0 (with Gutenberg in the WP Core)
 * ADDED:
-    *  support Gutenberg in core WordPress 5.0
-    *  Vendor/Yoast SEO: support multilingual taxonomy (term.php page). 
+    *  Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page). 
 
 ### 1.9.30 ###
 

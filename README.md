@@ -7,11 +7,11 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
-Requires at least: 4.8
+Requires at least: 4.9
 
-Tested up to: 4.9
+Tested up to: 5.0
 
-Requires PHP: 5.4
+Requires PHP: 5.6
 
 Stable tag: trunk
 
@@ -105,7 +105,7 @@ For more details, please check out the descriptions of each paid add-on on our w
 
 * [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/): adds multilingual capabilities to WooCommerce-based online stores.
 
-* [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more. Note: Yoast SEO Premium is not officially supported by WPGlobus.
+* [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/): adds URL fine-tuning, publishing status per translation, multilingual Yoast SEO analysis and more.
 
 * [WPGlobus Language Widgets](https://wpglobus.com/product/wpglobus-language-widget/): Multilingual widget logic: show and hide widget depending on the current language.
 
@@ -148,7 +148,7 @@ We have checked WPGlobus together with many plugins, including:
 * Whistles,
 * Widget Logic,
 
-* Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis. **Note:** the "Premium" version of Yoast SEO has some compatibility issues and we currently do not support it.
+* Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis.
 
 
 Some 3rd-party plugins are supported with our [premium add-ons](https://wpglobus.com/shop/):
@@ -293,11 +293,21 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 
 ## Upgrade Notice ##
 
-### 1.9.17 ###
+### 2.0.0 ###
 
-This maintenance release introduces Gutenberg support in beta-stage.
+WPGlobus Version 2 supports WordPress 5.
 
 ## Changelog ##
+
+### 2.0.0 ###
+
+
+* COMPATIBILITY:
+    * WordPress 5.0 (with Gutenberg in the WP Core)
+
+* ADDED:
+
+    *  Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page).
 
 ### 1.9.30 ###
 
