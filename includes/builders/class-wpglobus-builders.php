@@ -912,12 +912,28 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				 * ver.1.0 https://wordpress.org/plugins/classic-editor/
 				 */
 				if ( isset( $_GET['classic-editor'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					/**
+					 * @todo
+					 * 1. set 'classic-editor-remember' as 'block-editor'.
+					 * 2. load yoursite/wp-admin/post.php?post=POST_ID&action=edit&classic-editor.
+					 * 3. incorrect loading post page.
+					 */
+					//update_post_meta( POST_ID, 'classic-editor-remember', 'classic-editor' );
+
 					$load_gutenberg = false;
 				} elseif ( isset( $_GET['classic-editor__forget'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 					$load_gutenberg = true;
 				} else {
 					$post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0; // phpcs:ignore WordPress.CSRF.NonceVerification
 
+					if ( 0 == $post_id ) {
+						/**
+						 * We need to check $_POST when the saving post in 'classic-editor' mode.
+						 * As option we can use $_POST['classic-editor'], but now get 'classic-editor-remember' meta.
+						 */
+						$post_id = isset( $_POST['post_ID'] ) ? (int) $_POST['post_ID'] : 0; // phpcs:ignore WordPress.CSRF.NonceVerification
+					}
+					
 					if ( 0 !== $post_id ) {
 						$classic_editor_remember = get_post_meta( $post_id, 'classic-editor-remember', true );
 						if ( 'classic-editor' === $classic_editor_remember ) {
@@ -940,6 +956,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$load_gutenberg = false;
 
 					}
+				
 				}
 			}
 
