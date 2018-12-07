@@ -5,7 +5,7 @@
 ### 2.0.1 ###
 
 * FIXED:
-    *  Builders/Gutenberg: correct saving post in 'classic-editor' mode. WP5.
+    *  Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
 
 ### 2.0.0 ###
 

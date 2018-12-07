@@ -217,6 +217,11 @@ WPGlobus Version 2 supports WordPress 5.
 
 == Changelog ==
 
+= 2.0.1 =
+
+* FIXED:
+    *  Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
+
 = 2.0.0 =
 
 * COMPATIBILITY:
