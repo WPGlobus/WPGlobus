@@ -1212,8 +1212,13 @@ class WPGlobus_Filters {
 			global $wpdb;
 			$query         = "SELECT option_value FROM $wpdb->options WHERE option_name = 'wpseo_taxonomy_meta'";
 			$result        = $wpdb->get_col( $query ); // phpcs:ignore WordPress.WP.PreparedSQL
-			$option_values = maybe_unserialize( $result[0] );
 
+			if ( ! empty($result[0]) ) {
+				$option_values = maybe_unserialize( $result[0] );
+			} else {
+				$option_values = array();
+			}
+			
 			foreach ( $_enabled_keys as $field ) {
 
 				$new = array();
