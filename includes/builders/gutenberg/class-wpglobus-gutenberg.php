@@ -168,7 +168,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 									 * Filter the current language name.
 									 * Returning string.
 									 *
-									 * @since 2.1.1
+									 * @since 2.1.0
 									 *
 									 * @param string  English language name.
 									 * @param string  $language Current language.
