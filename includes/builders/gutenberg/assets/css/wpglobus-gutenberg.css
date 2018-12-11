@@ -1,5 +1,8 @@
 .wpglobus-selector-grid {
-  display:grid;grid-template-columns:50% 50%;place-items:center;grid-gap:0;
+  display:grid;grid-template-columns:40% 60%;place-items:center;grid-gap:0;
+}
+.wpglobus-selector-grid .wpglobus-gutenberg-selector-column-2 {
+  width: 90px;	
 }
 .wpglobus-gutenberg-selector-box {
   margin-left: 220px;
