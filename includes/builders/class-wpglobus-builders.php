@@ -69,19 +69,43 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'path'                  => 'elementor/elementor.php',
 				'stage'                 => 'beta',
 			);
+			
+			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo-premium/wp-seo-premium.php') ) {
 
-			self::$add_on['yoast_seo'] = array(
-				'id'                    => 'yoast_seo',
-				'role'                  => 'builder',
-				'admin_bar_label'       => 'Add-on',
-				'supported_min_version' => '7.7',
-				'const'                 => 'WPSEO_VERSION',
-				'plugin_name'           => 'Yoast SEO',
-				'plugin_uri'            => 'https://wordpress.org/plugins/wordpress-seo/',
-				'path'                  => 'wordpress-seo/wp-seo.php',
-				'stage'                 => 'production',
-			);
-
+				self::$add_on['yoast_seo'] = array(
+					'id'                    => 'yoast_seo',
+					'role'                  => 'builder',
+					'admin_bar_label'       => 'Add-on',
+					'supported_min_version' => '7.7',
+					'const'                 => 'WPSEO_VERSION',
+					'plugin_name'           => 'Yoast SEO Premium',
+					'plugin_uri'            => 'https://yoast.com/wordpress/plugins/seo/',
+					'path'                  => 'wordpress-seo-premium/wp-seo-premium.php',
+					'stage'                 => 'production',
+				);
+								
+			}
+			
+			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo/wp-seo.php') ) {
+				
+				if ( ! defined( 'WPSEO_PREMIUM_PLUGIN_FILE' ) ) {
+					
+					self::$add_on['yoast_seo'] = array(
+						'id'                    => 'yoast_seo',
+						'role'                  => 'builder',
+						'admin_bar_label'       => 'Add-on',
+						'supported_min_version' => '7.7',
+						'const'                 => 'WPSEO_VERSION',
+						'plugin_name'           => 'Yoast SEO',
+						'plugin_uri'            => 'https://wordpress.org/plugins/wordpress-seo/',
+						'path'                  => 'wordpress-seo/wp-seo.php',
+						'stage'                 => 'production',
+					);
+					
+				}
+				
+			}
+			
 			self::$add_on['woocommerce'] = array(
 				'id'                    => 'woocommerce',
 				'role'                  => 'add-on',
