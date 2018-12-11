@@ -74,6 +74,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 */
 	private function get_switcher_box( $page ) {
 
+		global $post;
+	
 		$query_string = explode( '&', $_SERVER['QUERY_STRING'] );
 
 		foreach ( $query_string as $key => $_q ) {
@@ -161,7 +163,21 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-2"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						&nbsp;<span
-								class="wpglobus-gutenberg-selector-text"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ); ?></span>
+								class="wpglobus-gutenberg-selector-text"><?php 
+									/**
+									 * Filter the current language name.
+									 * Returning string.
+									 *
+									 * @since 2.1.1
+									 *
+									 * @param string  English language name.
+									 * @param string  $language Current language.
+									 * @param WP_Post $post The current post.
+									 */								
+									echo apply_filters( 
+										'wpglobus/gutenberg/selector_text', esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ), $this->language, $post
+									); 
+								?></span>
 					</a>
 				</div>
 				<ul class="wpglobus-gutenberg-selector-dropdown"
@@ -235,8 +251,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-gutenberg' );
-
-		
+	
 	}	
 	
 	/**
