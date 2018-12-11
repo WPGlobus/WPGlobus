@@ -42,9 +42,20 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 			/**
 			 * @see \WP_REST_Posts_Controller::prepare_item_for_database
 			 */
-			add_filter( 'rest_pre_insert_post', array( $this, 'filter__pre_insert_post' ), 2, 2 );
-			add_filter( 'rest_pre_insert_page', array( $this, 'filter__pre_insert_post' ), 2, 2 );
+			if ( 'core' == WPGlobus::Config()->builder->get('context') ) { 
+				
+				$post_type = WPGlobus::Config()->builder->get('post_type');
+				if ( ! empty($post_type) ) {
+					add_filter( "rest_pre_insert_{$post_type}", array( $this, 'filter__pre_insert_post' ), 2, 2 );
+				}
+				
+			} else {
 
+				add_filter( 'rest_pre_insert_post', array( $this, 'filter__pre_insert_post' ), 2, 2 );
+				add_filter( 'rest_pre_insert_page', array( $this, 'filter__pre_insert_post' ), 2, 2 );				
+			
+			}
+			
 			/**
 			 * @todo incorrect the saving post in extra languages with priority = 10
 			 */
