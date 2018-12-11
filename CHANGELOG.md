@@ -4,7 +4,10 @@
 
 ### 2.1.0 ###
 
+* INTERNAL:
+	* Builders/Gutenberg: visual improvements.
 * ADDED:
+    *  Builders/Core: added Yoast SEO Premium in list of supported add-ons.
     *  Builders/Gutenberg: added the Custom Post Type support.
 
 ### 2.0.1 ###
