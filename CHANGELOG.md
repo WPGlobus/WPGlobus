@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.1.0 ###
+
+* ADDED:
+    *  Builders/Gutenberg: added the Custom Post Type support.
+
 ### 2.0.1 ###
 
 * FIXED:
