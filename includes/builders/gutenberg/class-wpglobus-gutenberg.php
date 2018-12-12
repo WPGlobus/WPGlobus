@@ -175,7 +175,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 									 * @param WP_Post $post The current post.
 									 */								
 									echo apply_filters( 
-										'wpglobus/gutenberg/selector_text', esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ), $this->language, $post
+										'wpglobus_gutenberg_selector_text', esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ), $this->language, $post
 									); 
 								?></span>
 					</a>
