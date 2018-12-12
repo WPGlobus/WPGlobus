@@ -69,8 +69,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'path'                  => 'elementor/elementor.php',
 				'stage'                 => 'beta',
 			);
-			
-			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo-premium/wp-seo-premium.php') ) {
+
+			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo-premium/wp-seo-premium.php' ) ) {
 
 				self::$add_on['yoast_seo'] = array(
 					'id'                    => 'yoast_seo',
@@ -83,13 +83,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					'path'                  => 'wordpress-seo-premium/wp-seo-premium.php',
 					'stage'                 => 'production',
 				);
-								
+
 			}
-			
-			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo/wp-seo.php') ) {
-				
+
+			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo/wp-seo.php' ) ) {
+
 				if ( ! defined( 'WPSEO_PREMIUM_PLUGIN_FILE' ) ) {
-					
+
 					self::$add_on['yoast_seo'] = array(
 						'id'                    => 'yoast_seo',
 						'role'                  => 'builder',
@@ -101,11 +101,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						'path'                  => 'wordpress-seo/wp-seo.php',
 						'stage'                 => 'production',
 					);
-					
+
 				}
-				
 			}
-			
+
 			self::$add_on['woocommerce'] = array(
 				'id'                    => 'woocommerce',
 				'role'                  => 'add-on',
@@ -696,42 +695,41 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						// /wp-json/wp/v2/pages/
 						/**
 						 * We need define post type for correct work.
-						 * 
-						 * @todo check 
+						 *
+						 * @todo check
 						 * /wp-json/wp/v2/taxonomies?context=edit
 						 * /wp-json/wp/v2/taxonomies?context=edit&_locale=user
 						 * /wp-json/wp/v2/types/wp_block?_locale=user
 						 * /wp-json/wp/v2/blocks?per_page=100&_locale=user
 						 */
-						
+
 						$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
-						$post_id = end( $_request_uri );
-						$post_id = preg_replace( '/\?.*/', '', $post_id );
-						
-						$_continue = false; 
+						$post_id      = end( $_request_uri );
+						$post_id      = preg_replace( '/\?.*/', '', $post_id );
+
+						$_continue = false;
 						if ( 0 !== (int) $post_id ) {
 							$GLOBALS['WPGlobus']['post_id'] = $post_id;
-							switch( $_request_uri[4] ) {
-								case 'posts' :
+							switch ( $_request_uri[4] ) {
+								case 'posts':
 									$post_type = 'post';
 									break;
-								case 'pages' :
+								case 'pages':
 									$post_type = 'page';
 									break;
 								default:
 									$post_type = $_request_uri[4];
 							}
 							$GLOBALS['WPGlobus']['post_type'] = $post_type;
-							$_continue = true;
+							$_continue                        = true;
 						}
 
 						if ( false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/posts' )
-							 || false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/pages' ) 
+							 || false !== strpos( $_SERVER['REQUEST_URI'], 'wp/v2/pages' )
 							 || $_continue ) {
 							$load_gutenberg = true;
 						}
 					}
-					
 				} elseif ( 'post.php' === $pagenow ) {
 
 					$load_gutenberg = true;
@@ -1000,11 +998,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							$load_gutenberg = true;
 
 							return $load_gutenberg;
-						} else {
-							/**
-							 * @todo meta doesn't exist?
-							 */
-						}	
+						}
+						//else {
+						/**
+						 * @todo meta doesn't exist?
+						 */
+						//}
 					}
 
 					$classic_editor_replace = get_option( 'classic-editor-replace' );

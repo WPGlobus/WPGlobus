@@ -43,8 +43,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			add_action( 'admin_print_styles', array(
 				$this,
 				'on__enqueue_styles',
-			) );			
-			
+			) );
+
 			/**
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
@@ -75,7 +75,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	private function get_switcher_box( $page ) {
 
 		global $post;
-	
+
 		$query_string = explode( '&', $_SERVER['QUERY_STRING'] );
 
 		foreach ( $query_string as $key => $_q ) {
@@ -162,22 +162,29 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
 							class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-2"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						&nbsp;<span
-								class="wpglobus-gutenberg-selector-text"><?php 
-									/**
-									 * Filter the current language name.
-									 * Returning string.
-									 *
-									 * @since 2.1.0
-									 *
-									 * @param string  English language name.
-									 * @param string  $language Current language.
-									 * @param WP_Post $post The current post.
-									 */								
-									echo apply_filters( 
-										'wpglobus_gutenberg_selector_text', esc_html( WPGlobus::Config()->en_language_name[ $this->language ] ), $this->language, $post
-									); 
-								?></span>
+						&nbsp;<span class="wpglobus-gutenberg-selector-text">
+							<?php
+							/**
+							 * Filter the current language name.
+							 * Returning string.
+							 *
+							 * @since 2.1.0
+							 *
+							 * @param string  English language name.
+							 * @param string  $language Current language.
+							 * @param WP_Post $post     The current post.
+							 */
+							echo esc_html(
+								// phpcs:ignore WordPress.NamingConventions
+								apply_filters(
+									'wpglobus_gutenberg_selector_text',
+									WPGlobus::Config()->en_language_name[ $this->language ],
+									$this->language,
+									$post
+								)
+							);
+							?>
+						</span>
 					</a>
 				</div>
 				<ul class="wpglobus-gutenberg-selector-dropdown"
@@ -239,7 +246,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		if ( isset( $_GET['classic-editor'] ) ) {
 			return;
 		}
-		
+
 		/**
 		 * While testing process is run, don't add .scss and .map files.
 		 */
@@ -251,9 +258,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'all'
 		);
 		wp_enqueue_style( 'wpglobus-gutenberg' );
-	
-	}	
-	
+
+	}
+
 	/**
 	 * Enqueue scripts.
 	 *
@@ -280,15 +287,16 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		/**
 		 * We have Gutenberg in core since WP 5.0.
-		 * @since 2.0 
+		 *
+		 * @since 2.0
 		 */
-		$version_gutenberg = ''; 
+		$version_gutenberg = '';
 		if ( version_compare( $wp_version, '4.9.99', '>' ) ) {
 			$version_gutenberg = $wp_version;
-		} else if ( defined('GUTENBERG_VERSION') ) {
+		} elseif ( defined( 'GUTENBERG_VERSION' ) ) {
 			$version_gutenberg = GUTENBERG_VERSION;
-		}		
-		 
+		}
+
 		/**
 		 * Check for Yoast SEO.
 		 */
@@ -311,7 +319,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			array(
 				'version'          => WPGLOBUS_VERSION,
 				'versionGutenberg' => $version_gutenberg,
-				'context' 		   => WPGlobus::Config()->builder->get('context'),
+				'context'          => WPGlobus::Config()->builder->get( 'context' ),
 				'tabs'             => $tabs,
 				'language'         => $this->language,
 				'pagenow'          => $pagenow,
@@ -328,7 +336,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * Callback for 'add_meta_boxes'.
 	 */
 	public function on__add_meta_box() {
-		add_meta_box( 'wpglobus', __( 'WPGlobus', 'wpglobus' ), array( $this, 'callback__meta_box' ), null, 'side', 'core' );
+		add_meta_box( 'wpglobus', __( 'WPGlobus', 'wpglobus' ), array(
+			$this,
+			'callback__meta_box',
+		), null, 'side', 'core' );
 	}
 
 	/**

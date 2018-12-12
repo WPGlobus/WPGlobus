@@ -1,8 +1,8 @@
-# Copyright (C) 2018 WPGlobus 2.0.1
-# This file is distributed under the same license as the WPGlobus 2.0.1 package.
+# Copyright (C) 2018 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.0.1\n"
+"Project-Id-Version: WPGlobus\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Save &amp; Reload"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:546, includes/builders/gutenberg/class-wpglobus-gutenberg.php:316, includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
+#: includes/admin/class-wpglobus-customize-options.php:546, includes/builders/gutenberg/class-wpglobus-gutenberg.php:339, includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr ""
 
@@ -651,17 +651,17 @@ msgstr ""
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:136
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:204
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:227
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:264
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:286
 msgid "Page is being reloaded. Please wait..."
 msgstr ""
 

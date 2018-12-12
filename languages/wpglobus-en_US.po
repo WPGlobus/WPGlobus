@@ -1,11 +1,11 @@
-# Copyright (C) 2018 WPGlobus 1.9.15
-# This file is distributed under the same license as the WPGlobus 1.9.15 package.
+# Copyright (C) 2018 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2018-04-21 13:55+0000\n"
+"PO-Revision-Date: 2018-12-12 02:33+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_US/)\n"
@@ -308,7 +308,7 @@ msgid "Save &amp; Reload"
 msgstr "Save &amp; Reload"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:316,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:339,
 #: includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -745,16 +745,17 @@ msgstr "Help Desk"
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:181
 msgid "Email not sent. Please fill in the entire form."
-msgstr ""
+msgstr "Email not sent. Please fill in the entire form."
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:191
 msgid ""
 "Email not sent. Please verify that your name and email are entered correctly."
 msgstr ""
+"Email not sent. Please verify that your name and email are entered correctly."
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:212
 msgid "Email sent."
-msgstr ""
+msgstr "Email sent."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:68
 msgid "Thank you for using WPGlobus!"
@@ -784,23 +785,23 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:77
 msgid "Please fill in and submit the contact form:"
-msgstr ""
+msgstr "Please fill in and submit the contact form:"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:97
 msgid "Please make sure the email address is correct."
-msgstr ""
+msgstr "Please make sure the email address is correct."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
 msgid "Subject"
-msgstr ""
+msgstr "Subject"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
 msgid "Short description of the problem"
-msgstr ""
+msgstr "Short description of the problem"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:113
 msgid "Detailed description"
-msgstr ""
+msgstr "Detailed description"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:120
 msgid "Technical Information"
@@ -808,13 +809,15 @@ msgstr "Technical Information"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:127
 msgid "This information helps us to find the problem source"
-msgstr ""
+msgstr "This information helps us to find the problem source"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:143
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
 msgstr ""
+"Alternatively, please email %s. Do not forget to copy and paste the "
+"technical information to your email message."
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:58
 msgid "WPGlobus Recommends:"
@@ -861,33 +864,33 @@ msgstr "To translate permalinks, please activate the module Slug."
 #: includes/builders/class-wpglobus-builder.php:358,
 #: includes/class-wpglobus.php:3561
 msgid "Save draft before using extra language."
-msgstr ""
+msgstr "Save draft before using extra language."
 
 #: includes/builders/class-wpglobus-builder.php:447
 msgid "Builder"
-msgstr ""
+msgstr "Builder"
 
 #: includes/builders/class-wpglobus-builder.php:465
 msgid "Сompatibility Settings"
-msgstr ""
+msgstr "Сompatibility Settings"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:208
 msgid "WPGlobus languages"
-msgstr ""
+msgstr "WPGlobus languages"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:136
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."
-msgstr ""
+msgstr "Before switching the language, please save draft or publish."
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:204
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:227
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
-msgstr ""
+msgstr "for"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:264
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:286
 msgid "Page is being reloaded. Please wait..."
-msgstr ""
+msgstr "Page is being reloaded. Please wait..."
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -1295,15 +1298,15 @@ msgstr "Custom Code"
 
 #: includes/options/class-wpglobus-options.php:1398
 msgid "Enabled"
-msgstr ""
+msgstr "Enabled"
 
 #: includes/options/class-wpglobus-options.php:1408
 msgid "Builders support"
-msgstr ""
+msgstr "Builders support"
 
 #: includes/options/class-wpglobus-options.php:1429
 msgid "Сompatibility"
-msgstr ""
+msgstr "Сompatibility"
 
 #: includes/options/class-wpglobus-options.php:1742
 msgid "Translate strings"
@@ -1363,55 +1366,55 @@ msgstr "No items of this type were found."
 
 #: includes/options/templates/compatibility-beta.php:15
 msgid "Multilingual support of this add-on is currently in Beta stage."
-msgstr ""
+msgstr "Multilingual support of this add-on is currently in Beta stage."
 
 #: includes/options/templates/compatibility-beta.php:17
 msgid "We do not recommend using it on production sites."
-msgstr ""
+msgstr "We do not recommend using it on production sites."
 
 #: includes/options/templates/compatibility-beta.php:23
 msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
-msgstr ""
+msgstr "Please report all problems to %1$sWPGlobus Technical Support%2$s."
 
 #: includes/options/templates/compatibility.php:37
 msgid "List of supported add-ons"
-msgstr ""
+msgstr "List of supported add-ons"
 
 #: includes/options/templates/compatibility.php:42
 msgid "Add-on"
-msgstr ""
+msgstr "Add-on"
 
 #: includes/options/templates/compatibility.php:43
 msgid "Current version"
-msgstr ""
+msgstr "Current version"
 
 #: includes/options/templates/compatibility.php:44
 msgid "Supported minimum version"
-msgstr ""
+msgstr "Supported minimum version"
 
 #: includes/options/templates/compatibility.php:45
 msgid "Stage"
-msgstr ""
+msgstr "Stage"
 
 #: includes/options/templates/compatibility.php:46
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: includes/options/templates/compatibility.php:59
 msgid "In core"
-msgstr ""
+msgstr "In core"
 
 #: includes/options/templates/compatibility.php:71
 msgid "Active"
-msgstr ""
+msgstr "Active"
 
 #: includes/options/templates/compatibility.php:73
 msgid "Installed, inactive"
-msgstr ""
+msgstr "Installed, inactive"
 
 #: includes/options/templates/compatibility.php:76
 msgid "Not installed"
-msgstr ""
+msgstr "Not installed"
 
 #: includes/options/templates/customize-intro.php:35
 msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
@@ -1516,21 +1519,3 @@ msgstr ""
 #: wpglobus.php:19
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
-
-#~ msgid "Click here to open the Contact Form."
-#~ msgstr "Click here to open the Contact Form."
-
-#~ msgid "Type in your name, email, subject and the detailed message."
-#~ msgstr "Type in your name, email, subject and the detailed message."
-
-#~ msgid ""
-#~ "If you can make a screenshot demonstrating the problem, please attach it."
-#~ msgstr ""
-#~ "If you can make a screenshot demonstrating the problem, please attach it."
-
-#~ msgid ""
-#~ "Please note: we will receive some debug data together with your request. "
-#~ "See the \"Technical Information\" table for the details."
-#~ msgstr ""
-#~ "Please note: we will receive some debug data together with your request. "
-#~ "See the \"Technical Information\" table for the details."

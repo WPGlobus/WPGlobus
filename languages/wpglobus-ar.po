@@ -1,5 +1,5 @@
-# Copyright (C) 2018 WPGlobus 1.9.15
-# This file is distributed under the same license as the WPGlobus 1.9.15 package.
+# Copyright (C) 2018 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2018
 # Omar Anwar <omaraglan91@yahoo.com>, 2017
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2018-04-21 13:55+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2018-12-12 02:33+0000\n"
+"Last-Translator: Mo'men Mohamed <mo2menmuhamed@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/ar/)\n"
 "Language: ar\n"
@@ -288,7 +288,7 @@ msgid "Save &amp; Reload"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:316,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:339,
 #: includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -743,7 +743,7 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
 msgid "Subject"
-msgstr ""
+msgstr "العنوان"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
 msgid "Short description of the problem"
@@ -814,7 +814,7 @@ msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:447
 msgid "Builder"
-msgstr ""
+msgstr "البانى"
 
 #: includes/builders/class-wpglobus-builder.php:465
 msgid "Сompatibility Settings"
@@ -824,17 +824,17 @@ msgstr ""
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:136
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:204
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:227
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:264
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:286
 msgid "Page is being reloaded. Please wait..."
 msgstr ""
 
@@ -1204,7 +1204,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1398
 msgid "Enabled"
-msgstr ""
+msgstr "مفعل"
 
 #: includes/options/class-wpglobus-options.php:1408
 msgid "Builders support"
@@ -1304,7 +1304,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:46
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #: includes/options/templates/compatibility.php:59
 msgid "In core"
@@ -1312,7 +1312,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:71
 msgid "Active"
-msgstr ""
+msgstr "فعال"
 
 #: includes/options/templates/compatibility.php:73
 msgid "Installed, inactive"

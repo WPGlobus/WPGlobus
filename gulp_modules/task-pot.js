@@ -12,7 +12,7 @@ module.exports = function () {
     return gulp.src(["**/*.php", "!**/*Test.php", "!vendor/**/"])
         .pipe(wpPot({
             domain: cfg.text_domain,
-            package: pkg.title + " " + pkg.version,
+            package: pkg.title,
             bugReport: cfg.bugReport,
             headers: false,
             lastTranslator: pkg.author,

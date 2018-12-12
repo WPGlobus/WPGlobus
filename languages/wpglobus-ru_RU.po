@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2018-04-21 13:57+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2018-12-12 02:33+0000\n"
+"Last-Translator: Vladimir <coder3@web-axioma.ru>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
 "Language: ru_RU\n"
@@ -313,7 +313,7 @@ msgid "Save &amp; Reload"
 msgstr "Сохранить и перезагрузить"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:316,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:339,
 #: includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -871,30 +871,30 @@ msgstr "Сохраните черновик перед переключение�
 
 #: includes/builders/class-wpglobus-builder.php:447
 msgid "Builder"
-msgstr "Конструктор"
+msgstr "Билдер"
 
 #: includes/builders/class-wpglobus-builder.php:465
 msgid "Сompatibility Settings"
-msgstr "Настройки совместимости"
+msgstr ""
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:208
 msgid "WPGlobus languages"
 msgstr "Языки WPGlobus"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:136
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 "Опубликуйте, или сохраните черновик перед переключением на другой язык."
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:204
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:227
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr "для"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:264
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:286
 msgid "Page is being reloaded. Please wait..."
-msgstr "Страница перезагружается. Подождите..."
+msgstr "Страница перезагружеатся. Подождите..."
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -1404,7 +1404,7 @@ msgstr "Статус"
 
 #: includes/options/templates/compatibility.php:59
 msgid "In core"
-msgstr "В ядре"
+msgstr ""
 
 #: includes/options/templates/compatibility.php:71
 msgid "Active"

@@ -4,41 +4,41 @@
 
 ### 2.1.0 ###
 
-* INTERNAL:
-	* Builders/Gutenberg: visual improvements.
 * ADDED:
-    *  Builders/Core: added Yoast SEO Premium in list of supported add-ons.
-    *  Builders/Gutenberg: added the Custom Post Type support.
+    * Builders/Core: added Yoast SEO Premium to the list of supported add-ons.
+    * Builders/Gutenberg: added the Custom Post Type support.
+* TWEAK:
+	* Builders/Gutenberg: visual improvements.
 
 ### 2.0.1 ###
 
 * FIXED:
-    *  Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
+    * Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
 
 ### 2.0.0 ###
 
 * COMPATIBILITY:
     * WordPress 5.0 (with Gutenberg in the WP Core)
 * ADDED:
-    *  Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page). 
+    * Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page). 
 
 ### 1.9.30 ###
 
 * ADDED:
-    *  Builders/Gutenberg: Checking 3rd party add-ons status for Gutenberg.
+    * Builders/Gutenberg: Checking 3rd party add-ons status for Gutenberg.
 * FIXED:
-	*  Options Panel: CSS tweaks.
-	*  Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
+	* Options Panel: CSS tweaks.
+	* Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
 
 ### 1.9.29 ###
 
 * FIXED:
-	*  Builders/Gutenberg: CSS tweaks.
+	* Builders/Gutenberg: CSS tweaks.
 	
 ### 1.9.28 ###
 
 * FIXED:
-	*  Builders/Gutenberg: enabled WPGlobus metabox for posts and pages.
+	* Builders/Gutenberg: enabled WPGlobus metabox for posts and pages.
 	
 ### 1.9.27 ###
 

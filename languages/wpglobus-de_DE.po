@@ -1,5 +1,5 @@
-# Copyright (C) 2018 WPGlobus 1.9.15
-# This file is distributed under the same license as the WPGlobus 1.9.15 package.
+# Copyright (C) 2018 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Tobias Hopp <toby.hopp@gmail.com>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015,2017
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2018-04-21 13:55+0000\n"
+"PO-Revision-Date: 2018-12-12 02:33+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/de_DE/)\n"
@@ -283,7 +283,7 @@ msgid "Save &amp; Reload"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:316,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:339,
 #: includes/class-wpglobus.php:1325, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -754,7 +754,7 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
 msgid "Subject"
-msgstr ""
+msgstr "Betreff"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
 msgid "Short description of the problem"
@@ -835,17 +835,17 @@ msgstr ""
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:136
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:204
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:227
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:264
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:286
 msgid "Page is being reloaded. Please wait..."
 msgstr ""
 
@@ -1220,7 +1220,7 @@ msgstr "Benutzerdefinierter Code"
 
 #: includes/options/class-wpglobus-options.php:1398
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiviert"
 
 #: includes/options/class-wpglobus-options.php:1408
 msgid "Builders support"
@@ -1304,11 +1304,11 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:42
 msgid "Add-on"
-msgstr ""
+msgstr "Add-on"
 
 #: includes/options/templates/compatibility.php:43
 msgid "Current version"
-msgstr ""
+msgstr "Derzeitige Version"
 
 #: includes/options/templates/compatibility.php:44
 msgid "Supported minimum version"
@@ -1320,7 +1320,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:46
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: includes/options/templates/compatibility.php:59
 msgid "In core"
@@ -1328,7 +1328,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:71
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: includes/options/templates/compatibility.php:73
 msgid "Installed, inactive"
@@ -1336,7 +1336,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:76
 msgid "Not installed"
-msgstr ""
+msgstr "Nicht installiert"
 
 #: includes/options/templates/customize-intro.php:35
 msgid "WPGlobus Customizer is integrated into the Customize Theme panel"

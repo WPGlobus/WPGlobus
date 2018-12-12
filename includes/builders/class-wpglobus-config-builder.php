@@ -271,12 +271,12 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 					/**
 					 * See also the Update action in @see \WPGlobus_Builders
 					 */
-					$_continue = false; 
+					$_continue = false;
 					if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']['post_type'] ) ) {
 						$_continue = true;
-					} 
+					}
 					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' )
-						 || false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/pages/' ) 
+						 || false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/pages/' )
 						 || $_continue ) {
 						/**
 						 * Case when post status was changed ( draft->publish or publish->draft ) in Gutenberg.
@@ -285,13 +285,13 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 						 */
 						if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']['post_id'] ) ) {
 							$post_id = $GLOBALS['WPGlobus']['post_id'];
-						} else {						
+						} else {
 							$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
 
 							$post_id = end( $_request_uri );
 							$post_id = preg_replace( '/\?.*/', '', $post_id );
 						}
-						
+
 						if ( 0 !== (int) $post_id ) {
 							$language = get_post_meta( $post_id, $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
 						}

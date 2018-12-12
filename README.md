@@ -299,12 +299,25 @@ WPGlobus Version 2 supports WordPress 5.
 
 ## Changelog ##
 
+### 2.1.0 ###
+
+
+* ADDED:
+
+    * Builders/Core: added Yoast SEO Premium to the list of supported add-ons.
+
+    * Builders/Gutenberg: added the Custom Post Type support.
+
+* TWEAK:
+
+	* Builders/Gutenberg: visual improvements.
+
 ### 2.0.1 ###
 
 
 * FIXED:
 
-    *  Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
+    * Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
 
 ### 2.0.0 ###
 
@@ -314,27 +327,20 @@ WPGlobus Version 2 supports WordPress 5.
 
 * ADDED:
 
-    *  Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page).
+    * Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page).
 
 ### 1.9.30 ###
 
 
 * ADDED:
 
-    *  Builders/Gutenberg: Checking 3rd party add-ons status for Gutenberg.
+    * Builders/Gutenberg: Checking 3rd party add-ons status for Gutenberg.
 
 * FIXED:
 
-	*  Options Panel: CSS tweaks.
+	* Options Panel: CSS tweaks.
 
-	*  Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
-
-### 1.9.29 ###
-
-
-* FIXED:
-
-	*  Builders/Gutenberg: CSS tweaks.
+	* Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
 
 ### Earlier versions and Add-ons ###
 
