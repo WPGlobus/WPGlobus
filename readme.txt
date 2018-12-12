@@ -36,7 +36,7 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 * FREE PLUGIN with PAID EXTENSIONS:
 	* Some functionality is available only with our **premium add-ons**. Details below.
 * OLD PHP / OLD WORDPRESS:
-	* We develop and test our software using the **latest versions of PHP and WordPress**. If you have an older version and something is not working properly - please contact us and we'll help.
+	* We develop and test our software using the **latest versions of PHP, WordPress, and all plugins**. If you have an older version and something is not working properly - please upgrade before contacting us.
 * MBSTRING:
 	* For the full UTF-8 compatibility and better performance, please make sure that the [Multibyte String](http://php.net/manual/en/intro.mbstring.php) PHP extension is enabled.
 
@@ -46,7 +46,7 @@ The WPGlobus plugin provides you with the general multilingual tools.
 
 * **Manually translate** posts, pages, categories, tags, menus, and widgets;
 * **Add one or several languages** to your WP blog/site using custom combinations of country flags, locales and language names;
-* **Enable multilingual SEO features** of "Yoast SEO" (FREE) and "All in One SEO" plugins;
+* **Enable multilingual SEO features** of "Yoast SEO" and "All in One SEO" plugins;
 * **Switch the languages at the front-end** using: a drop-down menu extension and/or a customizable widget with various display options;
 * **Switch the Administrator interface language** using a top bar selector;
 
@@ -127,7 +127,6 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 
 * [WPGlobus.com website](https://wpglobus.com/).
 * [Open source code on GitHub](https://github.com/WPGlobus).
-* WPGlobus on social networks: [Facebook](https://www.facebook.com/WPGlobus), [Twitter](https://twitter.com/WPGlobus), [Google Plus](https://plus.google.com/+Wpglobus), [LinkedIn](https://www.linkedin.com/company/wpglobus).
 
 = Admin interface translations: =
 
@@ -213,7 +212,7 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 = 2.0.0 =
 
-WPGlobus Version 2 supports WordPress 5.
+WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
