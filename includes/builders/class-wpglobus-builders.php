@@ -37,9 +37,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				return self::$add_on;
 			}
 
+			global $wp_version;
+			
 			self::$add_on['gutenberg'] = array(
 				'id'                    => 'gutenberg',
 				'role'                  => 'builder',
+				'admin_bar_label'		=> version_compare( $wp_version, '4.9.99', '>' ) ? 'Core' : 'Builder',
 				'supported_min_version' => '4.0.0',
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
