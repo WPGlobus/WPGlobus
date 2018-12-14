@@ -76,7 +76,7 @@ WPGlobus_Admin_Page::print_header();
 
 	<h4><?php esc_html_e( 'Please fill in and submit the contact form:', 'wpglobus' ); ?></h4>
 
-	<form action="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>" method="post">
+	<form action="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>" method="post" id="wpglobus-form-helpdesk">
 
 		<table class="form-table">
 			<tbody>
@@ -137,6 +137,13 @@ WPGlobus_Admin_Page::print_header();
 			<?php WPGlobus_Admin_Page::nav_tab_icon_e( 'Helpdesk' ); ?>
 			<?php esc_html_e( 'Submit' ); ?>
 		</button>
+		<script>
+            jQuery(function ($) {
+                $("#wpglobus-form-helpdesk").on("submit", function (e) {
+                    $("#send_email").prop("disabled", true);
+                });
+            });
+		</script>
 
 	</form>
 	<p>
