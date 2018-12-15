@@ -5,9 +5,10 @@
 ### 2.1.1 ###
 
 * FIXED:
-    * Builders/Core: correct defining language for 'post-new.php' page.
+    * Builders/Core: use the default language when creating a new post (on the `post-new.php` admin page).
 * TWEAK:
-	* Builders/Core: update admin bar label for the WordPress 5.
+	* Builders/Core: update admin bar label for WordPress 5.
+	* Helpdesk: prevent duplicate clicks on the `Send` button.
 	
 ### 2.1.0 ###
 

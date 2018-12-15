@@ -212,18 +212,21 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			if ( $this->language ) {
 				return $this->language;
 			}
-	
+
+			/** @global string $pagenow */
 			global $pagenow;
-			
-			if ( 'post-new.php' == $pagenow ) {
+
+			if ( 'post-new.php' === $pagenow ) {
 				/**
-				 * Correct defining language for 'post-new.php' page.
+				 * Correctly define language for the 'post-new.php' page.
+				 *
 				 * @since 2.1.1
 				 */
 				$this->language = $this->default_language;
-				return $this->language;				
+
+				return $this->language;
 			}
-			
+
 			$post_id = (int) $post_id;
 			if ( ! $post_id ) {
 				// Post ID not passed..getting from global Post.

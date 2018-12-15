@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 4.9
 
-Tested up to: 5.0
+Tested up to: 5.0.2
 
 Requires PHP: 5.6
 
@@ -297,6 +297,19 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.1 ###
+
+
+* FIXED:
+
+    * Builders/Core: use the default language when creating a new post (on the `post-new.php` admin page).
+
+* TWEAK:
+
+	* Builders/Core: update admin bar label for WordPress 5.
+
+	* Helpdesk: prevent duplicate clicks on the `Send` button.
+
 ### 2.1.0 ###
 
 
@@ -326,19 +339,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * ADDED:
 
     * Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page).
-
-### 1.9.30 ###
-
-
-* ADDED:
-
-    * Builders/Gutenberg: Checking 3rd party add-ons status for Gutenberg.
-
-* FIXED:
-
-	* Options Panel: CSS tweaks.
-
-	* Options Panel: invalid call to `ob_get_clear()` resulted in duplicate sidebar menu under certain conditions.
 
 ### Earlier versions and Add-ons ###
 

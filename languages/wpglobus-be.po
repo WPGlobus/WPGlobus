@@ -812,7 +812,7 @@ msgstr "Техническая информация"
 msgid "This information helps us to find the problem source"
 msgstr ""
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:143
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:150
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
