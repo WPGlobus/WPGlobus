@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 2.1.1 ###
+
+* FIXED:
+    * Builders/Core: correct defining language for 'post-new.php' page.
+* TWEAK:
+	* Builders/Core: update admin bar label for the WordPress 5.
+	
 ### 2.1.0 ###
 
 * ADDED:
