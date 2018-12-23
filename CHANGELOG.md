@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.1.2 ###
+
+* FIXED:
+    * Builders/Gutenberg: the CPT support without Classic Editor plugin.
+	
 ### 2.1.1 ###
 
 * FIXED:
