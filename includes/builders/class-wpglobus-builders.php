@@ -741,10 +741,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 					}
-
-					if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
-						$load_gutenberg = false;
-					}
+					
+					/**
+					 * @todo don't check post type @since 2.1.2
+					 */
+					// if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
+					//	$load_gutenberg = false;
+					// }
 
 					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg );
 
