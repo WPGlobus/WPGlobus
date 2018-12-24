@@ -44,6 +44,9 @@
     "dist": "php /tools/composer.phar update && gulp dist",
     "push_pot": "tx push -s",
     "pull_translations": "tx pull -a -f --mode=translator",
-    "pomo": "gulp pomo"
+    "pomo": "gulp pomo",
+    "git fetch": "git fetch --all",
+    "merge dev to master": "git checkout master && git merge develop",
+    "checkout dev": "git checkout develop"
   }
 }
