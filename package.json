@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "private": true,
@@ -41,6 +41,9 @@
     "audit": "npm audit",
     "upup": "del package-lock.json && del /s /q node_modules && npm install && npm run list",
     "changes": "git log --oneline develop --not master",
-    "dist": "php /tools/composer.phar update && gulp dist"
+    "dist": "php /tools/composer.phar update && gulp dist",
+    "push_pot": "tx push -s",
+    "pull_translations": "tx pull -a -f --mode=translator",
+    "pomo": "gulp pomo"
   }
 }

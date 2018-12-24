@@ -297,6 +297,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.2 ###
+
+
+* FIXED:
+
+    * Builders/Gutenberg: the CPT support when the `Classic Editor` plugin is not active.
+
 ### 2.1.1 ###
 
 

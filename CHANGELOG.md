@@ -5,7 +5,7 @@
 ### 2.1.2 ###
 
 * FIXED:
-    * Builders/Gutenberg: the CPT support without Classic Editor plugin.
+    * Builders/Gutenberg: the CPT support when the `Classic Editor` plugin is not active.
 	
 ### 2.1.1 ###
 
