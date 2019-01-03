@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.1.3 ###
+
+* ADDED:
+    * Vendor/ACF: support ACF repeater field in builder mode.
+
 ### 2.1.2 ###
 
 * FIXED:
