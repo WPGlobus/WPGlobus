@@ -282,7 +282,10 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				/** @noinspection PhpIncludeInspection */
 				include_once $file;
 				if ( ! empty( $class ) && class_exists( $class ) ) {
-					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get( 'post_id' ) );
+					/**
+					 * @since 2.1.3 Added post type parameter.
+					 */
+					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get( 'post_id' ), self::$builder->get( 'post_type' ) );
 				}
 			}
 

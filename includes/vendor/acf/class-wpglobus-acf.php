@@ -63,18 +63,30 @@ class WPGlobus_Acf_2 {
 			}
 			return false;	
 		}
-
+		
 		/**
 		 * Get post meta.
 		 *
 		 * Don't use get_field_objects() to get ACF fields @see advanced-custom-fields\includes\api\api-template.php
 		 * to prevent incorrect behavior on post page.
+		 * Don't call WPGlobus::Config() inside function to prevent the resetting of `meta` property.
+		 * 
+		 * @param $post_id
+		 * @param string $post_type @since 2.1.3
 		 */		
-		public static function get_post_meta_fields( $post_id ) {
-			
+		public static function get_post_meta_fields( $post_id, $post_type = 'post' ) {
+	
+			if ( in_array( $post_type, array('acf-field-group', 'acf-field') ) ) {
+				/**
+				 * Prevent working with own post type.
+				 */
+				return array();
+			}
+	
 			global $wpdb;
 			
-			$_post_meta_fields = array();
+			$_post_meta_fields 		= array();
+			$_post_meta_fields_temp = array();
 			
 			$post_id = (int) $post_id;
 
@@ -88,10 +100,10 @@ class WPGlobus_Acf_2 {
 					 * @todo Check the case when DB has many records with 'acf-field' post type.
 					 */
 					$fields = $wpdb->get_results($wpdb->prepare(
-						"SELECT post_excerpt, post_name FROM $wpdb->posts WHERE post_type = '%s'",
+						"SELECT ID, post_excerpt, post_name, post_parent FROM $wpdb->posts WHERE post_type = '%s'",
 						'acf-field'
 					) );
-					
+
 					if ( ! empty($fields) ) {
 						
 						/**
@@ -106,23 +118,92 @@ class WPGlobus_Acf_2 {
 
 						self::$post_multilingual_fields = array();
 						
+						$repeaters = array();
+						
 						foreach( $fields as $key=>$field ) :
 
-							$_acf_field = acf_maybe_get_field( $field->post_name );
-
+							/**
+							 * Because incorrect behaviour don't use 
+							 * $_acf_field = acf_maybe_get_field( $field->post_name, $post_id );
+							 * and 
+							 * $_acf_field = acf_get_field($field->post_name);
+							 */
+							$_acf_field = _acf_get_field_by_key( $field->post_name );
+							
 							if ( empty($_acf_field['type']) ) {
 								continue;
 							}
 							
-							if ( $_acf_field['type'] == 'wysiwyg' && ! $field_wysiwyg_enabled ) {
-								// do nothing	
+							if ( 'wysiwyg' == $_acf_field['type'] && ! $field_wysiwyg_enabled ) {
+								/**
+								 * do nothing.
+								 */
+							} else if( 'repeater' == $_acf_field['type'] ) {
+								/**
+								 * Get repeater to process it later.
+								 */
+								$repeaters[ $_acf_field['name'] ] = $_acf_field;
 							} else {
-								$_post_meta_fields[] = $field->post_excerpt;
+
+								$_post_meta_fields_temp[$field->post_excerpt] = $field->post_excerpt;
 								self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $field->post_name;
+
 							}
 							self::$acf_fields[$field->post_excerpt] = $_acf_field;
 							
 						endforeach;
+						
+						if ( empty( $repeaters ) ) {	
+						
+							$_post_meta_fields = $_post_meta_fields_temp;
+						
+						} else {
+							
+							$meta_data = get_metadata( 'post', $post_id );
+
+							foreach( $repeaters as $key=>$repeater ) :
+
+								/**
+								 * Get fields that the repeater contains.
+								 * @see advanced-custom-fields\includes\api\api-field.php
+								 * @see advanced-custom-fields-pro\includes\api\api-field.php
+								 */
+								$repeater_fields = acf_get_fields_by_id( $repeater['ID'] );
+								
+								if ( ! empty($repeater_fields) ) {
+
+									foreach( $repeater_fields as $_key=>$_field ) {
+										
+										/**
+										 * Unset unneeded field.
+										 */
+										unset( $_post_meta_fields_temp[ $_field['name'] ] );
+
+										foreach( $meta_data as $meta=>$data ) {
+											
+											if ( 0 == strpos( $meta, $repeater['name'] ) && false !== strpos( $meta, $_field['name'] ) ) {
+												$_post_meta_fields_temp[$meta] = $meta;
+												
+												/**
+												 * @todo W.I.P.
+												 */
+												//self::$acf_fields[ $_field['name'] ]['wpglobus'] = array();
+									
+												$_key = str_replace( array($repeater['name'] . '_', '_' . $_field['name']), '', $meta );
+												self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $repeater['key'] . '-' . $_key . '-' . $_field['key'];
+											}
+											
+										}
+									
+									}
+									
+								}
+								
+							endforeach;
+							
+							$_post_meta_fields = $_post_meta_fields_temp;
+						
+						}
 					}
 				}
 			}
