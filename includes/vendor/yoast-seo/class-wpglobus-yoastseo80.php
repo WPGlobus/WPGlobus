@@ -122,8 +122,8 @@ class WPGlobus_YoastSEO {
 			
 			/**
 			 * @todo check for '_yoast_wpseo_title' meta
-			 * @see <title> view-source:http://www.dev-wpg.com/test-post-seo/
-			 * @see <title> view-source:http://www.dev-wpg.com/ru/test-post-seo/
+			 * @see <title> view-source:http://test/test-post-seo/
+			 * @see <title> view-source:http://test/ru/test-post-seo/
 			 */
 			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 6, 4 );
 			
@@ -161,10 +161,11 @@ class WPGlobus_YoastSEO {
 	 * Filter post meta.
 	 *
 	 * @since 1.9.21
+	 * @since 2.1.3
 	 * @see function function get_value() in wordpress-seo\inc\class-wpseo-meta.php
 	 */
 	public static function filter__get_post_metadata( $check, $object_id, $meta_key, $single  ) {
-		
+
 		global $post;
 	
 		if ( $single ) {
@@ -179,25 +180,26 @@ class WPGlobus_YoastSEO {
 			return $check;
 		}
 		
-		$meta_type = 'post';	
-		
 		/**
 		 * May be called many times on one page. Let's cache.
 		 */
-		static $_cache;
-		if ( isset( $_cache[ $meta_type ][ $object_id ] ) ) {
-			return $_cache[ $meta_type ][ $object_id ];
-		}	
+		static $_done = null;	
+		if ( ! is_null($_done) ) {
+			return $check;
+		}
+		
+		$meta_type = 'post';	
 		
 		$meta_cache = wp_cache_get($object_id, $meta_type . '_meta');
-
+		
 		if ( ! empty($meta_cache['_yoast_wpseo_title'][0]) ) {
 			$meta_cache['_yoast_wpseo_title'][0] = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_title'][0], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+			wp_cache_replace( $object_id, $meta_cache, $meta_type . '_meta' );
 		}
-
-		$_cache[ $meta_type ][ $object_id ] = $meta_cache;
 		
-		return $meta_cache;
+		$_done = true;
+		
+		return $check;
 
 	}
 	
