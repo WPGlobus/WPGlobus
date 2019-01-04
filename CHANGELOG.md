@@ -6,7 +6,9 @@
 
 * ADDED:
     * Vendor/ACF: support ACF repeater field in builder mode.
-
+* REVISED:
+	* Vendor/Yoast: `get_post_metadata` filter.
+	
 ### 2.1.2 ###
 
 * FIXED:
