@@ -117,7 +117,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 */
 		public function on__admin_footer() {
 
-			global $post;
+			global $wpdb, $post;
 
 			if ( ! is_object( $post ) ) {
 				return;
@@ -132,48 +132,45 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 			 *
 			 * @var array $metas
 			 */
-			$metas = get_metadata( 'post', $post->ID );
+			$query = $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post->ID );
+			$metas = $wpdb->get_results( $query, ARRAY_A );
 
 			?>
 			<div id="wpglobus-admin-debug-box" class="" style="display:none;">
 				<h4>WPGlobus debug box</h4>
 				<?php
 				/**
-				 * Get metadata.
+				 * Output metadata.
 				 */
 				?>
 				<table class="table1" cellspacing="0">
-					<caption><?php echo 'get_metadata( "post", ' . esc_html( $post->ID ) . ' )'; ?></caption>
+					<caption><strong><?php echo '"' . $query . '"'; ?></strong></caption>
 					<thead>
 					<tr>
-						<th>№</th>
-						<th>meta</th>
-						<th>value</th>
+						<th><strong>№</strong></th>
+						<th><strong>meta</strong></th>
+						<th><strong>value</strong></th>
 					</tr>
 					</thead>
 					<tbody>
 					<?php
 					$order = 1;
 
-					foreach ( $metas as $meta_key => $meta ) {
+					foreach ( $metas as $key=>$meta ) {
 						$code = false;
 						if ( is_array( $meta ) ) {
-							foreach ( $meta as $key => $val ) {
-								$meta[ $key ] = htmlspecialchars( $val );
-							}
-						} elseif ( is_string( $meta ) ) {
-							$meta = htmlspecialchars( $meta );
+							$metas[$key]['meta_key'] = htmlspecialchars( $meta['meta_value'] );
 						}
 						?>
 						<tr>
 							<td><?php echo esc_html( $order ); ?></td>
-							<td><?php echo esc_html( print_r( $meta_key, true ) ); ?></td>
+							<td><?php echo esc_html( print_r( $meta[ 'meta_key' ], true ) ); ?></td>
 							<?php if ( $code ) { ?>
 								<td>
-									<pre><?php echo esc_html( print_r( $meta, true ) ); ?></pre>
+									<pre><?php echo esc_html( print_r( $meta[ 'meta_value' ], true ) ); ?></pre>
 								</td>
 							<?php } else { ?>
-								<td><?php echo esc_html( print_r( $meta, true ) ); ?></td>
+								<td><?php echo esc_html( print_r( $meta[ 'meta_value' ], true ) ); ?></td>
 							<?php } ?>
 						</tr>
 						<?php $order ++; ?>
@@ -189,13 +186,13 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 				$results = $wpdb->get_results( $query );
 				?>
 				<table class="table2" cellspacing="0">
-					<caption><?php echo '"SELECT * FROM $wpdb->options WHERE option_name LIKE \'%wpglobus%\'"'; ?></caption>
+					<caption><strong><?php echo '"SELECT * FROM $wpdb->options WHERE option_name LIKE \'%wpglobus%\'"'; ?></strong></caption>
 					<caption><?php echo 'Option count: ' . count( $results ); ?></caption>
 					<thead>
 					<tr>
-						<th>Option ID</th>
-						<th>Option Name</th>
-						<th>Option Value</th>
+						<th><strong>Option ID</strong></th>
+						<th><strong>Option Name</strong></th>
+						<th><strong>Option Value</strong></th>
 					</tr>
 					</thead>
 					<tbody>
