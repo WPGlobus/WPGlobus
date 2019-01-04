@@ -192,23 +192,24 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			// if ( defined('SITEORIGIN_PANELS_VERSION') )  {
 			// 	self::$vendors[] = 'siteorigin-panels.json';
 			// }
-			
+
+			// TODO: builder ID can be a string or `false`. Need to refactor this condition or the `get_id` method.
+			// phpcs:ignore WordPress.PHP.StrictComparisons
 			if ( self::$builder->get_id() != '' && self::$builder->is_builder_page() ) {
 
 				$addons = WPGlobus_Builders::get_addons();
-			
-				if ( ! empty($addons) ) {
-					foreach( $addons as $id=>$addon ) {
-						if ( 'add-on' == $addon['role'] ) {
+
+				if ( ! empty( $addons ) ) {
+					foreach ( $addons as $id => $addon ) {
+						if ( 'add-on' === $addon['role'] ) {
 							if ( ! empty( $addon['const'] ) && defined( $addon['const'] ) ) {
 								self::$vendors[] = $addon['config_file'];
 							}
 						}
 					}
 				}
+			}
 
-			}				
-			
 			/**
 			 * Now handle with config files.
 			 */

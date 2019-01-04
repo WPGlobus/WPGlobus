@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 4.9
-Tested up to: 5.0.2
+Tested up to: 5.0.3
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -215,6 +215,13 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
+
+= 2.1.3 =
+
+* ADDED:
+    * Vendor/ACF: support ACF repeater field in builder mode.
+* REVISED:
+	* Vendor/Yoast: `get_post_metadata` filter.
 
 = 2.1.2 =
 

@@ -10,6 +10,9 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 	class WPGlobus_Config_Builder {
 
+		/**
+		 * @var string|false
+		 */
 		protected $id = false;
 
 		protected $is_run = false;
