@@ -216,6 +216,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.1.4 =
+
+* FIXED:
+	* Builders: prevent to filter disabled post types.
+
 = 2.1.3 =
 
 * ADDED:
@@ -227,34 +232,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * FIXED:
     * Builders/Gutenberg: the CPT support when the `Classic Editor` plugin is not active.
-
-= 2.1.1 =
-
-* FIXED:
-    * Builders/Core: use the default language when creating a new post (on the `post-new.php` admin page).
-* TWEAK:
-	* Builders/Core: update admin bar label for WordPress 5.
-	* Helpdesk: prevent duplicate clicks on the `Send` button.
-
-= 2.1.0 =
-
-* ADDED:
-    * Builders/Core: added Yoast SEO Premium to the list of supported add-ons.
-    * Builders/Gutenberg: added the Custom Post Type support.
-* TWEAK:
-	* Builders/Gutenberg: visual improvements.
-
-= 2.0.1 =
-
-* FIXED:
-    * Builders/Gutenberg: saving posts correctly in the WordPress 5 'classic-editor' mode.
-
-= 2.0.0 =
-
-* COMPATIBILITY:
-    * WordPress 5.0 (with Gutenberg in the WP Core)
-* ADDED:
-    * Vendor/Yoast SEO: multilingual taxonomy support  (`term.php` page).
 
 = Earlier versions and Add-ons =
 

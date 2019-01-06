@@ -44,12 +44,13 @@ if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
 
 			/**
 			 * Prevent to filter disabled post type.
+			 *
 			 * @since 2.1.4
 			 */
-			if ( in_array( $data['post_type'], WPGlobus::Config()->disabled_entities ) ) {
+			if ( in_array( $data['post_type'], WPGlobus::Config()->disabled_entities, true ) ) {
 				return $data;
 			}
-			
+
 			global $wpdb;
 			$_post = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID = %d AND post_type = %s LIMIT 1", $postarr['ID'], $postarr['post_type'] ) );
 
