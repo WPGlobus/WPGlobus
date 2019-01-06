@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.1.4 ###
+
+* FIXED:
+	* Builders: prevent to filter disabled post type.
+	
 ### 2.1.3 ###
 
 * ADDED:
