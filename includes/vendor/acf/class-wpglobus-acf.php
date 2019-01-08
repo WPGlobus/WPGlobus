@@ -63,7 +63,111 @@ class WPGlobus_Acf_2 {
 			}
 			return false;	
 		}
-		
+
+		/**
+		 * Get post meta.
+		 *
+		 * Don't use get_field_objects() to get ACF fields @see advanced-custom-fields\includes\api\api-template.php
+		 * to prevent incorrect behavior on post page.
+		 * Don't call WPGlobus::Config() inside function to prevent the resetting of `meta` property.
+		 * 
+		 * @param $post_id
+		 * @param string $post_type @since 2.1.3
+		 */				
+		public static function get_post_meta_fields( $post_id, $post_type = 'post' ) {
+			
+			if ( in_array( $post_type, array('acf-field-group', 'acf-field') ) ) {
+				/**
+				 * Prevent working with own post type.
+				 */
+				return array();
+			}
+	
+			global $wpdb;
+			
+			$_post_meta_fields 		= array();
+			$_post_meta_fields_temp = array();
+			
+			$post_id = (int) $post_id;
+
+			if ( $post_id > 0 ) {
+				
+				$info = acf_get_post_id_info( $post_id );
+				
+				if ( $info['type'] == 'post' ) {
+					
+					/**
+					 * @todo Check the case when DB has many records with 'acf-field' post type.
+					 */
+					$fields = $wpdb->get_results($wpdb->prepare(
+						"SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_value LIKE 'field_%'",
+						$post_id
+					) );
+					
+					if ( ! empty($fields) ) {
+						
+						/**
+						 * Filter to enable/disable wysiwyg field.
+						 * Returning boolean.
+						 *
+						 * @since 1.9.17
+						 *
+						 * @param boolean.
+						 */
+						$field_wysiwyg_enabled = apply_filters('wpglobus/vendor/acf/field/wysiwyg', false);
+
+						self::$post_multilingual_fields = array();
+						
+						
+						foreach( $fields as $key=>$field ) :
+						
+							$_key = ltrim($field->meta_key, '_');
+						
+							/**
+							 * Because incorrect behaviour don't use 
+							 * $_acf_field = acf_maybe_get_field( $field->post_name, $post_id );
+							 * and 
+							 * $_acf_field = acf_get_field($field->post_name);
+							 */
+							$_acf_field = _acf_get_field_by_key( $field->meta_value );
+							
+							if ( 'wysiwyg' == $_acf_field['type'] ) {
+								if ( $field_wysiwyg_enabled ) {
+									$_post_meta_fields_temp[$_key] = $_key;									
+								}
+							} else if( 'repeater' == $_acf_field['type'] ) {
+								/**
+								 * do nothing.
+								 */
+							} else if( 'flexible_content' == $_acf_field['type'] ) {
+								/**
+								 * do nothing.
+								 */
+							} else {
+							
+								$_post_meta_fields_temp[$_key] = $_key;
+								
+								/**
+								 * W.I.P
+								 */
+								//self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $field->post_name;
+
+							}
+							self::$acf_fields[$_key] = $_acf_field;
+							
+						endforeach;
+						
+					}
+
+				}
+
+			}
+
+			$_post_meta_fields = $_post_meta_fields_temp;
+			
+			return $_post_meta_fields;	
+		}
+	
 		/**
 		 * Get post meta.
 		 *
@@ -74,7 +178,7 @@ class WPGlobus_Acf_2 {
 		 * @param $post_id
 		 * @param string $post_type @since 2.1.3
 		 */		
-		public static function get_post_meta_fields( $post_id, $post_type = 'post' ) {
+		public static function get_post_meta_fields_1( $post_id, $post_type = 'post' ) {
 	
 			if ( in_array( $post_type, array('acf-field-group', 'acf-field') ) ) {
 				/**
