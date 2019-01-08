@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 2.1.5 ###
+
+* REVISED:
+	* Vendor/ACF: `get_post_meta_fields` function.
+* INTERNAL:
+	* Prevent to the handling array and object in `add_locale_marks` function.	
+	
 ### 2.1.4 ###
 
 * FIXED:
