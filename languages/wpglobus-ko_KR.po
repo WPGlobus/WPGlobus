@@ -784,7 +784,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:358,
-#: includes/class-wpglobus.php:3561
+#: includes/class-wpglobus.php:3562
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -884,17 +884,17 @@ msgstr ""
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3994
+#: includes/class-wpglobus.php:3995
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:3996
+#: includes/class-wpglobus.php:3997
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 msgstr ""
 
-#: includes/class-wpglobus.php:4142
+#: includes/class-wpglobus.php:4143
 msgid "Add"
 msgstr "추가하기"
 

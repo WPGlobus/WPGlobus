@@ -297,6 +297,17 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.5 ###
+
+
+* REVISED:
+
+	* Vendor/ACF: `get_post_meta_fields` function.
+
+* INTERNAL:
+
+	* `WPGlobus::add_locale_marks` refactored to ignore arrays and objects if passed as the first parameter.
+
 ### 2.1.4 ###
 
 
@@ -314,22 +325,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * REVISED:
 
 	* Vendor/Yoast: `get_post_metadata` filter.
-
-### 2.1.2 ###
-
-
-* FIXED:
-
-    * Builders/Gutenberg: the CPT support when the `Classic Editor` plugin is not active.
-
-### Earlier versions and Add-ons ###
-
-
-* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
-
-* [WPGlobus for WooCommerce](https://wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
-
-* [WPGlobus Plus](https://wpglobus.com/extensions/wpglobus-plus/changelog/)
 
 ## Demo Sites ##
 
