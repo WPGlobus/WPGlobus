@@ -3275,10 +3275,11 @@ class WPGlobus {
 	 */
 	public static function add_locale_marks( $text, $language ) {
 		/**
-		 * @since 1.9.17
-		 * Add marks for string only.
+		 * @since 1.9.17 Add marks for string only.
+		 * @since 2.1.5  Prevent to the handling array and object.
 		 */
-		if ( ! is_string( $text ) ) {
+		//if ( ! is_string( $text ) ) {
+		if ( is_array( $text ) || is_object( $text ) ) {
 			return $text;
 		}
 
