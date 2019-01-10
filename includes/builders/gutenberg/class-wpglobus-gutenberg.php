@@ -336,6 +336,13 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * Callback for 'add_meta_boxes'.
 	 */
 	public function on__add_meta_box() {
+				
+		global $post;
+
+		if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities ) ) {
+			return;
+		}		
+		
 		add_meta_box( 'wpglobus', __( 'WPGlobus', 'wpglobus' ), array(
 			$this,
 			'callback__meta_box',
