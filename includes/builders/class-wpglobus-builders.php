@@ -757,7 +757,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					//	$load_gutenberg = false;
 					// }
 
-					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg );
+					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg, $post_type );
 
 				}
 
@@ -920,11 +920,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		/**
 		 * @since 1.9.30
 		 *
-		 * @param bool $load_gutenberg
+		 * @param bool 	 $load_gutenberg
+		 * @param string $post_type @since 2.1.6
 		 *
 		 * @return bool
 		 */
-		protected static function get_3rd_party_status_for_gutenberg( $load_gutenberg ) {
+		protected static function get_3rd_party_status_for_gutenberg( $load_gutenberg, $post_type = '' ) {
 
 			if ( defined( 'WC_PLUGIN_FILE' ) ) {
 				/**
