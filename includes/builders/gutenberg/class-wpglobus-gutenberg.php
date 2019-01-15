@@ -123,7 +123,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						<img <?php echo $_height . $_width; // WPCS: XSS ok. ?>
 							<?php echo $_flag_style; // WPCS: XSS ok. ?>
-								src="<?php echo esc_url( $_flag_img ); ?>"/>
+								src="<?php echo esc_url( $_flag_img ); ?>" alt=""/>
 					</a>
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-2"
@@ -156,7 +156,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							data-language="<?php echo esc_attr( $this->language ); ?>">
 						<img <?php echo $_height . $_width; // WPCS: XSS ok. ?>
 							<?php echo $_flag_style; // WPCS: XSS ok. ?>
-								src="<?php echo $_flag_img; // WPCS: XSS ok. ?>"/>
+								src="<?php echo $_flag_img; // WPCS: XSS ok. ?>" alt=""/>
 					</a>
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
@@ -175,7 +175,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							 * @param WP_Post $post     The current post.
 							 */
 							echo esc_html(
-								// phpcs:ignore WordPress.NamingConventions
+							// phpcs:ignore WordPress.NamingConventions
 								apply_filters(
 									'wpglobus_gutenberg_selector_text',
 									WPGlobus::Config()->en_language_name[ $this->language ],
@@ -199,7 +199,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 								style="text-align:left;cursor:pointer;border-bottom:1px solid #ddd;margin:0;height:25px;padding:5px 0 5px 5px;"
 								data-language="<?php echo esc_attr( $lang ); ?>">
 							<a href="<?php echo esc_url( str_replace( '{{language}}', $lang, $url ) ); ?>">
-								<img src="<?php echo esc_url( WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $lang ] ); ?>"/>&nbsp;<?php echo esc_html( WPGlobus::Config()->en_language_name[ $lang ] ); ?>
+								<img src="<?php echo esc_url( WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $lang ] ); ?>" alt=""/>&nbsp;<?php echo esc_html( WPGlobus::Config()->en_language_name[ $lang ] ); ?>
 							</a>
 						</li>
 					<?php endforeach; ?>
@@ -336,13 +336,13 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * Callback for 'add_meta_boxes'.
 	 */
 	public function on__add_meta_box() {
-				
+
 		global $post;
 
-		if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities ) ) {
+		if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities, true ) ) {
 			return;
-		}		
-		
+		}
+
 		add_meta_box( 'wpglobus', __( 'WPGlobus', 'wpglobus' ), array(
 			$this,
 			'callback__meta_box',

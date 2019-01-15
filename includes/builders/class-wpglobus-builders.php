@@ -38,11 +38,11 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			}
 
 			global $wp_version;
-			
+
 			self::$add_on['gutenberg'] = array(
 				'id'                    => 'gutenberg',
 				'role'                  => 'builder',
-				'admin_bar_label'		=> version_compare( $wp_version, '4.9.99', '>' ) ? 'Core' : 'Builder',
+				'admin_bar_label'       => version_compare( $wp_version, '4.9.99', '>' ) ? 'Core' : 'Builder',
 				'supported_min_version' => '4.0.0',
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
@@ -740,16 +740,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					$post_type = '';
 					/**
 					 * Check out $_POST['post_type'] to define post type.
+					 *
 					 * @since 2.1.6
 					 */
 					if ( ! empty( $_POST['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_type = $_POST['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
 					}
-					
-					if ( empty($post_type) && ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+
+					if ( empty( $post_type ) && ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 					}
-					
+
 					/**
 					 * @todo don't check post type @since 2.1.2
 					 */
@@ -920,7 +921,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		/**
 		 * @since 1.9.30
 		 *
-		 * @param bool 	 $load_gutenberg
+		 * @param bool   $load_gutenberg
 		 * @param string $post_type @since 2.1.6
 		 *
 		 * @return bool
@@ -929,18 +930,18 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			if ( defined( 'WC_PLUGIN_FILE' ) ) {
 				/**
-				 * Woocommerce.
+				 * WooCommerce.
 				 */
 				if ( 'product' === $post_type ) {
-					
+
 					$load_gutenberg = false;
-				
-				} else if ( '' == $post_type ) {
-					
+
+				} elseif ( '' === $post_type ) {
+
 					if ( ! empty( $_POST['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-						$post_type = $_POST['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
+						$post_type = $_POST['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification
 					}
-					
+
 					if ( empty( $post_type ) && ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 					}
@@ -952,7 +953,6 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					if ( 'product' === $post_type ) {
 						$load_gutenberg = false;
 					}
-					
 				}
 			}
 

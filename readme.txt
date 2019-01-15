@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 4.9
-Tested up to: 5.0.3
+Tested up to: 5.0.4
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -216,6 +216,15 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.1.6 =
+
+* FIXED:
+	* Builders/Gutenberg: don't show our metabox when editing post types where WPGlobus is disabled.
+* INTERNAL:
+	* Core/Builders: use the `$_POST['post_type']` value to define post type on the `post.php` page (WordPress 5).
+	* Core/Builders: added the `$post_type` parameter to the `get_3rd_party_status_for_gutenberg()` function.
+	* Builders/WooCommerce: revised `get_3rd_party_status_for_gutenberg()` algorithm when WooCommerce is active.
+
 = 2.1.5 =
 
 * REVISED:
@@ -227,13 +236,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * FIXED:
 	* Builders: prevent to filter disabled post types.
-
-= 2.1.3 =
-
-* ADDED:
-    * Vendor/ACF: support ACF repeater field in builder mode.
-* REVISED:
-	* Vendor/Yoast: `get_post_metadata` filter.
 
 == Demo Sites ==
 

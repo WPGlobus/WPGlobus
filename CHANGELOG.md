@@ -5,11 +5,11 @@
 ### 2.1.6 ###
 
 * FIXED:
-	* Builders/Gutenberg: don't add metabox for disabled post type.
+	* Builders/Gutenberg: don't show our metabox when editing post types where WPGlobus is disabled.
 * INTERNAL:
-	* Core/Builders: check out $_POST['post_type'] to define post type for `post.php` page (WP5).
-	* Core/Builders: added $post_type parameter for `get_3rd_party_status_for_gutenberg` function.
-	* Builders/Woocommerce: revised the getting of status when woocommerce is active.
+	* Core/Builders: use the `$_POST['post_type']` value to define post type on the `post.php` page (WordPress 5).
+	* Core/Builders: added the `$post_type` parameter to the `get_3rd_party_status_for_gutenberg()` function.
+	* Builders/WooCommerce: revised `get_3rd_party_status_for_gutenberg()` algorithm when WooCommerce is active.
 	
 ### 2.1.5 ###
 
