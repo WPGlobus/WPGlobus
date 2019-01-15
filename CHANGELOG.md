@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+### 2.1.6 ###
+
+* FIXED:
+	* Builders/Gutenberg: don't add metabox for disabled post type.
+* INTERNAL:
+	* Core/Builders: check out $_POST['post_type'] to define post type for `post.php` page (WP5).
+	* Core/Builders: added $post_type parameter for `get_3rd_party_status_for_gutenberg` function.
+	* Builders/Woocommerce: revised the getting of status when woocommerce is active.
+	
 ### 2.1.5 ###
 
 * REVISED:
