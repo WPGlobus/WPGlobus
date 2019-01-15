@@ -931,17 +931,28 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/**
 				 * Woocommerce.
 				 */
-				$post_type = '';
-				if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-					$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
-				}
-
-				if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-					$post_type = $_GET['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
-				}
-
 				if ( 'product' === $post_type ) {
+					
 					$load_gutenberg = false;
+				
+				} else if ( '' == $post_type ) {
+					
+					if ( ! empty( $_POST['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						$post_type = $_POST['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
+					}
+					
+					if ( empty( $post_type ) && ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+					}
+
+					if ( empty( $post_type ) && ! empty( $_GET['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						$post_type = $_GET['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
+					}
+
+					if ( 'product' === $post_type ) {
+						$load_gutenberg = false;
+					}
+					
 				}
 			}
 
