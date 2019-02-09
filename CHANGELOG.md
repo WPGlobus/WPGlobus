@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.1.7 ###
+
+* INTERNAL:
+	* Core/Meta: Serialize if meta value is array.
+
 ### 2.1.6 ###
 
 * FIXED:
