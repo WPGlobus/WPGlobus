@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 4.9
 
-Tested up to: 5.0.4
+Tested up to: 5.1
 
 Requires PHP: 5.6
 
@@ -296,6 +296,16 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.1.7 ###
+
+
+* COMPATIBILITY:
+    * WordPress 5.1
+
+* INTERNAL:
+
+	* Core/Meta: Serialize meta value if it is an array.
 
 ### 2.1.6 ###
 

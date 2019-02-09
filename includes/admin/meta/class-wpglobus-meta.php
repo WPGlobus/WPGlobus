@@ -76,12 +76,12 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			return self::$instance;
 		}
-		
+
 		/**
-		public static function get_post_meta( $post_id = false ) {
-			$meta_cache = wp_cache_get($post_id, 'post_meta');
-		}
-		// */
+		 * public static function get_post_meta( $post_id = false ) {
+		 * $meta_cache = wp_cache_get($post_id, 'post_meta');
+		 * }
+		 * // */
 
 		/**
 		 * Update post meta data.
@@ -132,13 +132,13 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 					}
 				}
 			}
-			
+
 			$_meta_value = $meta_value;
 			/**
 			 * @since 2.1.7
-			 */			 
-			$meta_value = maybe_serialize( $meta_value );			
-			
+			 */
+			$meta_value = maybe_serialize( $meta_value );
+
 			/**
 			 * Don't auto-modify this SQL query.
 			 */
@@ -162,11 +162,13 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				$_passed_value = $_meta_value;
 
 				if ( ! empty( $_passed_value ) && WPGlobus::Config()->default_language !== self::$builder->get_language() ) {
+					// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 					if ( WPGlobus_Core::has_translations( $_passed_value ) ) {
-					/**
-					 * We get multilingual $meta_value. Let save it as is.
-					 * @since 1.9.25 do nothing. 
-					 */						
+						/**
+						 * We get multilingual $meta_value. Let save it as is.
+						 *
+						 * @since 1.9.25 do nothing.
+						 */
 					} else {
 						$_passed_value = self::build_multilingual_string( array( self::$builder->get_language() => $_passed_value ) );
 					}
@@ -195,13 +197,14 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( isset( $meta_cache[ $meta_key ] ) ) {
 
 				//if ( WPGlobus_Core::has_translations( $passed_value ) ) {
+				// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 				if ( WPGlobus_Core::has_translations( $meta_value ) ) {
 					/**
 					 * We get multilingual $meta_value. Let save it as is.
 					 */
-					// @since 1.9.25 do nothing. 
+					// @since 1.9.25 do nothing.
 				} else {
-					
+
 					foreach ( $meta_cache[ $meta_key ] as $_key => $_ml_value ) {
 
 						$_new_ml_array = array();
@@ -250,7 +253,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 					}
 				}
 			}
-				
+
 			$data  = compact( 'meta_value' );
 			$where = array(
 				$column    => $object_id,
@@ -258,7 +261,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			);
 
 			$result = $wpdb->update( $table, $data, $where );
-		
+
 			if ( ! $result ) {
 				return false;
 			}
@@ -379,15 +382,16 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			 *
 			 * @param string $meta_key Meta key.
 			 *
-			 * @return string|boolean String if to filter meta field or false if not.		 
+			 * @return string|boolean String if to filter meta field or false if not.
 			 */
-			if ( ! empty($meta_key) && is_string($meta_key) ) {
-				$meta_key = apply_filters('wpglobus/meta/key', $meta_key);
+			if ( ! empty( $meta_key ) && is_string( $meta_key ) ) {
+				// phpcs:ignore WordPress.NamingConventions
+				$meta_key = apply_filters( 'wpglobus/meta/key', $meta_key );
 				if ( false === $meta_key ) {
 					return $check;
 				}
 			}
-			
+
 			/**
 			 * May be called many times on one page. Let's cache.
 			 */
@@ -420,7 +424,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 						}
 					}
 				}
-				
+
 				$_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] = $meta_cache;
 
 				return $meta_cache;
@@ -432,15 +436,14 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 					if ( $single ) {
 
 						$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], self::$builder->get_language(), WPGlobus::RETURN_EMPTY );
-					
+
 						if ( ! empty( $_value ) ) {
 							$_value = maybe_unserialize( $_value );
 						}
 
-						
-						if ( is_array($_value) ) {
+						if ( is_array( $_value ) ) {
 							// !!!!!!
-							$_value = array($_value);
+							$_value = array( $_value );
 						} else {
 							$_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] = $_value;
 						}
@@ -499,27 +502,31 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			return false;
 		}
-		
+
 		/**
 		 * Build multilingual string.
 		 *
 		 * @since 1.9.25
-		 * @todo First idea is: This function needs for Page Builder by SiteOrigin because it should serialize array before creating multilingual string.
+		 * @todo  First idea is: This function needs for Page Builder by SiteOrigin because it should serialize array before creating multilingual string.
+		 *
+		 * @param string[] $ml_array
+		 *
+		 * @return string
 		 */
 		protected static function build_multilingual_string( $ml_array ) {
-			
+
 			/**
 			 * @todo W.I.P with Page Builder by SiteOrigin.
 			 */
-			/** 
-			foreach( $ml_array as $language=>$value ) {
-				if ( is_array($value) ) {
-					$ml_array[$language] = maybe_serialize($value);
-				}
-			}
-			// */
-			
-			$_str = WPGlobus_Utils::build_multilingual_string($ml_array);
+			/**
+			 * foreach( $ml_array as $language=>$value ) {
+			 * if ( is_array($value) ) {
+			 * $ml_array[$language] = maybe_serialize($value);
+			 * }
+			 * }
+			 * // */
+
+			$_str = WPGlobus_Utils::build_multilingual_string( $ml_array );
 
 			return $_str;
 		}

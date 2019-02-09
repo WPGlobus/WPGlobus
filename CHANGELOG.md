@@ -4,8 +4,10 @@
 
 ### 2.1.7 ###
 
+* COMPATIBILITY:
+    * WordPress 5.1
 * INTERNAL:
-	* Core/Meta: Serialize if meta value is array.
+	* Core/Meta: Serialize meta value if it is an array.
 
 ### 2.1.6 ###
 
