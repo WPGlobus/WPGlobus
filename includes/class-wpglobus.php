@@ -272,6 +272,9 @@ class WPGlobus {
 			$this->disabled_entities[] = 'shop_order_refund';
 			$this->disabled_entities[] = 'shop_webhook'; // Obsolete in WC3.
 
+			// TODO
+			// $this->disabled_entities[] = 'shop_subscription';
+
 		}
 
 		if ( defined( 'AIOSEOP_VERSION' ) ) {
