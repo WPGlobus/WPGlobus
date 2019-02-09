@@ -122,7 +122,6 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			$id_column = 'meta_id';
 
 			$raw_meta_key = $meta_key;
-			$passed_value = $meta_value;
 
 			// Compare existing value to new value if no prev value given and the key exists only once.
 			if ( empty( $prev_value ) ) {
@@ -133,7 +132,13 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 					}
 				}
 			}
-
+			
+			$_meta_value = $meta_value;
+			/**
+			 * @since 2.1.7
+			 */			 
+			$meta_value = maybe_serialize( $meta_value );			
+			
 			/**
 			 * Don't auto-modify this SQL query.
 			 */
@@ -154,7 +159,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			if ( empty( $meta_ids ) ) {
 
-				$_passed_value = $passed_value;
+				$_passed_value = $_meta_value;
 
 				if ( ! empty( $_passed_value ) && WPGlobus::Config()->default_language !== self::$builder->get_language() ) {
 					if ( WPGlobus_Core::has_translations( $_passed_value ) ) {
@@ -189,7 +194,8 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			if ( isset( $meta_cache[ $meta_key ] ) ) {
 
-				if ( WPGlobus_Core::has_translations( $passed_value ) ) {
+				//if ( WPGlobus_Core::has_translations( $passed_value ) ) {
+				if ( WPGlobus_Core::has_translations( $meta_value ) ) {
 					/**
 					 * We get multilingual $meta_value. Let save it as is.
 					 */
