@@ -2929,6 +2929,11 @@ class WPGlobus {
 				$items[] = $item->ID;
 			}
 
+			/* with 2019 theme */
+//error_log(print_r($items, true));
+//unset( $items[1] );
+//error_log(print_r($this->menus, true));					
+			
 			$disable_add_selector = true;
 			foreach ( $this->menus as $key => $menu ) {
 				$diff = array_diff( $items, $menu->menu_items );

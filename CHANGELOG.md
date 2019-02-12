@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+### 2.1.8 ###
+
+* INTERNAL:
+	* Core: Synchronize Config.
+
 ### 2.1.7 ###
 
 * COMPATIBILITY:
