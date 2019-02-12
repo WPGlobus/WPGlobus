@@ -3757,6 +3757,12 @@ class WPGlobus {
 		 * @return boolean
 		 */
 		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
+		
+		/**
+		 * Synchronize with Config.
+		 * @since 2.1.8
+		 */
+		self::Config()->disabled_entities = $this->disabled_entities;
 
 		if ( in_array( $entity, $this->disabled_entities ) ) {
 			return true;
@@ -4049,6 +4055,12 @@ class WPGlobus {
 		 * @param array $disabled_entities Array of disabled entities.
 		 */
 		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
+		
+		/**
+		 * Synchronize with Config.
+		 * @since 2.1.8
+		 */
+		self::Config()->disabled_entities = $this->disabled_entities;		
 
 		/**
 		 * Filter the array of opened languages.
