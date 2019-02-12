@@ -297,6 +297,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.8 ###
+
+
+* INTERNAL:
+
+	* Core: Synchronize Config.
+
 ### 2.1.7 ###
 
 
@@ -332,13 +339,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * INTERNAL:
 
 	* `WPGlobus::add_locale_marks` refactored to ignore arrays and objects if passed as the first parameter.
-
-### 2.1.4 ###
-
-
-* FIXED:
-
-	* Builders: prevent to filter disabled post types.
 
 ## Demo Sites ##
 

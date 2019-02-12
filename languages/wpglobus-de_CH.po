@@ -820,7 +820,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:358,
-#: includes/class-wpglobus.php:3565
+#: includes/class-wpglobus.php:3570
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -920,12 +920,12 @@ msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3998
+#: includes/class-wpglobus.php:4009
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Sie müssen schöne Permalinks aktivieren um WPGlobus verwenden zu können."
 
-#: includes/class-wpglobus.php:4000
+#: includes/class-wpglobus.php:4011
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -933,7 +933,7 @@ msgstr ""
 "Bitte gehen Sie zu Einstellungen > Permalinks > allgemeine Einstellungen, "
 "und wählen Sie die \"Beitragsname\" für schöne Permalinks."
 
-#: includes/class-wpglobus.php:4146
+#: includes/class-wpglobus.php:4163
 msgid "Add"
 msgstr "Hinzufügen"
 
