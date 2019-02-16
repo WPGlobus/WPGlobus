@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+### 2.1.9 ###
+
+* COMPATIBILITY:
+    * Vendor/Acf: ACF v.5.7.12
+* INTERNAL:
+	* Core: Fixed PHP Notice: undefined index menuItems.
+
 ### 2.1.8 ###
 
 * INTERNAL:
