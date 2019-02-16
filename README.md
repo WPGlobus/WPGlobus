@@ -297,6 +297,17 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.9 ###
+
+
+* COMPATIBILITY:
+
+    * Vendor/Acf: ACF v.5.7.12
+
+* INTERNAL:
+
+	* Core: Fixed PHP Notice: `undefined index menuItems`.
+
 ### 2.1.8 ###
 
 
@@ -328,17 +339,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 	* Core/Builders: added the `$post_type` parameter to the `get_3rd_party_status_for_gutenberg()` function.
 
 	* Builders/WooCommerce: revised `get_3rd_party_status_for_gutenberg()` algorithm when WooCommerce is active.
-
-### 2.1.5 ###
-
-
-* REVISED:
-
-	* Vendor/ACF: `get_post_meta_fields` function.
-
-* INTERNAL:
-
-	* `WPGlobus::add_locale_marks` refactored to ignore arrays and objects if passed as the first parameter.
 
 ## Demo Sites ##
 

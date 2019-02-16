@@ -129,16 +129,16 @@ class WPGlobus_Acf_2 {
 						$_key = ltrim( $field->meta_key, '_' );
 
 						/**
-						 * Because incorrect behaviour don't use
+						 * Because of incorrect behaviour don't use
 						 * $_acf_field = acf_maybe_get_field( $field->post_name, $post_id );
 						 * and
 						 * $_acf_field = acf_get_field($field->post_name);
 						 */
-						if ( function_exists('_acf_get_field_by_key') ) {
+						if ( function_exists( '_acf_get_field_by_key' ) ) {
 							$_acf_field = _acf_get_field_by_key( $field->meta_value );
 						} else {
 							$_acf_field = self::_acf_get_field_by_key( $field->meta_value );
-						}						
+						}
 
 						if ( 'wysiwyg' == $_acf_field['type'] ) {
 							if ( $field_wysiwyg_enabled ) {

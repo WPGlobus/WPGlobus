@@ -314,7 +314,7 @@ msgstr "Сохранить и перезагрузить"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:346,
-#: includes/class-wpglobus.php:1328, wpglobus.php:12, wpglobus.php:18
+#: includes/class-wpglobus.php:1330, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -865,7 +865,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr "Для перевода ссылок необходимо активировать модуль УРЛ."
 
 #: includes/builders/class-wpglobus-builder.php:358,
-#: includes/class-wpglobus.php:3570
+#: includes/class-wpglobus.php:3572
 msgid "Save draft before using extra language."
 msgstr "Сохраните черновик перед переключением на другой язык."
 
@@ -937,42 +937,42 @@ msgid "Selector type"
 msgstr "Способ выбора языка"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1302
+#: includes/class-wpglobus.php:1304
 msgid "OFF"
 msgstr "ВЫКЛ"
 
-#: includes/class-wpglobus.php:1303
+#: includes/class-wpglobus.php:1305
 msgid "Turn on"
 msgstr "Включить"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1307
+#: includes/class-wpglobus.php:1309
 msgid "ON"
 msgstr "ВКЛ"
 
-#: includes/class-wpglobus.php:1308
+#: includes/class-wpglobus.php:1310
 msgid "Turn off"
 msgstr "Выключить"
 
-#: includes/class-wpglobus.php:1491
+#: includes/class-wpglobus.php:1493
 msgid "You cannot disable the main language."
 msgstr "Нельзя отключить основной язык."
 
-#: includes/class-wpglobus.php:1692
+#: includes/class-wpglobus.php:1694
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
-#: includes/class-wpglobus.php:1709
+#: includes/class-wpglobus.php:1711
 msgid "Need a multilingual slug?"
 msgstr "Нужен мультиязычный ярлык?"
 
-#: includes/class-wpglobus.php:4009
+#: includes/class-wpglobus.php:4011
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:4011
+#: includes/class-wpglobus.php:4013
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -980,7 +980,7 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:4163
+#: includes/class-wpglobus.php:4165
 msgid "Add"
 msgstr "Добавить"
 
