@@ -124,7 +124,6 @@ class WPGlobus_Acf_2 {
 
 					self::$post_multilingual_fields = array();
 
-
 					foreach ( $fields as $key => $field ) :
 
 						$_key = ltrim( $field->meta_key, '_' );
@@ -135,7 +134,11 @@ class WPGlobus_Acf_2 {
 						 * and
 						 * $_acf_field = acf_get_field($field->post_name);
 						 */
-						$_acf_field = _acf_get_field_by_key( $field->meta_value );
+						if ( function_exists('_acf_get_field_by_key') ) {
+							$_acf_field = _acf_get_field_by_key( $field->meta_value );
+						} else {
+							$_acf_field = self::_acf_get_field_by_key( $field->meta_value );
+						}						
 
 						if ( 'wysiwyg' == $_acf_field['type'] ) {
 							if ( $field_wysiwyg_enabled ) {
@@ -377,5 +380,132 @@ class WPGlobus_Acf_2 {
 		return $_post_meta_fields;
 
 	}
+	
+	/**
+	 * _acf_get_field_by_key
+	 *
+	 * This function will get a field via its key
+	 *
+	 * @see advanced-custom-fields\includes\api\api-field.php Version: 5.7.10
+	 *
+	 * @param	$key (string)
+	 * @return	$field (array)
+	 */	
+	protected static function _acf_get_field_by_key( $key = '', $db_only = false ) {
+	
+		// try JSON before DB to save query time
+		/**
+		 * @todo check
+		 * acf_is_local_field() & acf_get_local_field()
+		 */
+		if( !$db_only && acf_is_local_field( $key ) ) {
+			
+			return acf_get_local_field( $key );
+			
+		}
+		
+		// vars
+		$post_id = self::acf_get_field_id( $key );
+		
+		// bail early if no post_id
+		if( !$post_id ) return false;
+		
+		// return
+		return self::_acf_get_field_by_id( $post_id, $db_only );
+		
+	}
+	
+	/**
+	 * _acf_get_field_by_id
+	 *
+	 * This function will get a field via its ID
+	 *
+	 * @see advanced-custom-fields\includes\api\api-field.php Version: 5.7.10 
+	 *
+	 * @param	$post_id (int)
+	 * @return	$field (array)
+	 */
+	protected static function _acf_get_field_by_id( $post_id = 0, $db_only = false ) {
+		
+		// get post
+		$post = get_post( $post_id );
 
+		// bail early if no post, or is not a field
+		if( empty($post) || $post->post_type != 'acf-field' ) return false;
+		
+		
+		// unserialize
+		$field = maybe_unserialize( $post->post_content );
+		
+		
+		// update attributes
+		$field['ID'] = $post->ID;
+		$field['key'] = $post->post_name;
+		$field['label'] = $post->post_title;
+		$field['name'] = $post->post_excerpt;
+		$field['menu_order'] = $post->menu_order;
+		$field['parent'] = $post->post_parent;
+
+		// override with JSON
+		if( !$db_only && acf_is_local_field($field['key']) ) {
+			
+			// load JSON field
+			$local = acf_get_local_field( $field['key'] );
+			
+			
+			// override IDs
+			$local['ID'] = $field['ID'];
+			$local['parent'] = $field['parent'];
+			
+			
+			// return
+			return $local;
+			
+		}
+		
+		
+		// return
+		return $field;
+		
+	}
+	
+	/**
+	 * acf_get_field_id
+	 *
+	 * This function will lookup a field's ID from the DB
+	 * Useful for local fields to find DB sibling
+	 *
+	 * @see advanced-custom-fields\includes\api\api-field.php Version: 5.7.10
+	 *
+	 * @param	$key (string)
+	 * @return	$post_id (int)
+	 */
+	protected static function acf_get_field_id( $key = '' ) {
+	
+		// vars
+		$args = array(
+			'posts_per_page'	=> 1,
+			'post_type'			=> 'acf-field',
+			'orderby' 			=> 'menu_order title',
+			'order'				=> 'ASC',
+			'suppress_filters'	=> false,
+			'acf_field_key'		=> $key,
+			'update_post_meta_cache'	=> false,
+			'update_post_term_cache'	=> false
+		);
+		
+		
+		// load posts
+		$posts = get_posts( $args );
+		
+		
+		// validate
+		if( empty($posts) ) return 0;
+		
+		
+		// return
+		return $posts[0]->ID;
+		
+	}
+	
 }
