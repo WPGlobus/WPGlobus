@@ -1098,11 +1098,13 @@ class WPGlobus {
 				 * @since 1.9.16
 				 */
 				$ids = array();
-				foreach ( $order['menuItems'] as $item_id ) {
-					$_id = str_replace( 'edit-menu-item-description-', '', $item_id );
-					$_id = (int) $_id;
-					if ( $_id > 0 ) {
-						$ids[] = $_id;
+				if ( ! empty($order['menuItems']) ) {
+					foreach ( $order['menuItems'] as $item_id ) {
+						$_id = str_replace( 'edit-menu-item-description-', '', $item_id );
+						$_id = (int) $_id;
+						if ( $_id > 0 ) {
+							$ids[] = $_id;
+						}
 					}
 				}
 
