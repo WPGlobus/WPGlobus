@@ -1863,6 +1863,15 @@ class WPGlobus {
 			}
 
 			/**
+			 * WordPress 5.1+ needs a new version of our admin JS.
+			 *
+			 * @since 2.1.10
+			 */
+			if ( version_compare( $GLOBALS['wp_version'], '5.0.999', '>' ) ) {
+				$version = '-51';
+			}			
+			
+			/**
 			 * @since 1.9.17
 			 */
 			if ( self::Config()->builder->is_running() ) {
