@@ -222,6 +222,18 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				}
 			}
 
+			/**
+			 * Filter vendor's config.
+			 *
+			 * @since 2.1.10
+			 *
+			 * @param array  $config  Config.
+			 * @param object $builder An object WPGlobus_Config_Builder.
+			 *
+			 * @return array
+			 */
+			self::$config = apply_filters( 'wpglobus_config_vendors', self::$config, self::$builder );			
+			
 		}
 
 		/**
