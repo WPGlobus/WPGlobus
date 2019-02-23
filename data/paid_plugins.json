@@ -11,12 +11,6 @@
     "image_file": "wpglobus-plus-logo-300x300.png",
     "order": 90
   },
-  "wpglobus-multi-currency": {
-    "slug": "wpglobus-multi-currency",
-    "loader": "wpglobus-multi-currency.php",
-    "image_file": "wpglobus-multi-currency-logo.jpg",
-    "order": 80
-  },
   "wpglobus-revslider": {
     "slug": "wpglobus-revslider",
     "loader": "wpglobus-revslider.php",
@@ -47,6 +41,12 @@
     "loader": "wpglobus-mobile-menu.php",
     "image_file": "wpglobus-mobile-menu-logo-400x400.png",
     "order": 20
+  },
+  "wpglobus-multilingual-notices": {
+    "slug": "wpglobus-multilingual-notices",
+    "loader": "wpglobus-multilingual-notices.php",
+    "image_file": "wpglobus-multilingual-notices-logo.png",
+    "order": 10
   },
   "wpglobus-for-bridge-theme": {
     "slug": "wpglobus-for-bridge-theme",

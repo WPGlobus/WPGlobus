@@ -722,19 +722,19 @@ msgstr "Удалить? Вы уверены?"
 msgid "Back to the WPGlobus Settings"
 msgstr "Вернуться к настройкам WPGlobus"
 
-#: includes/admin/class-wpglobus-plugin-install.php:306
+#: includes/admin/class-wpglobus-plugin-install.php:302
 msgid "Current Version"
 msgstr "Текущая версия"
 
-#: includes/admin/class-wpglobus-plugin-install.php:307
+#: includes/admin/class-wpglobus-plugin-install.php:303
 msgid "Get it now!"
 msgstr "Установить!"
 
-#: includes/admin/class-wpglobus-plugin-install.php:308
+#: includes/admin/class-wpglobus-plugin-install.php:304
 msgid "Premium add-on"
 msgstr "Платное расширение"
 
-#: includes/admin/class-wpglobus-plugin-install.php:309,
+#: includes/admin/class-wpglobus-plugin-install.php:305,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
 msgstr "Установлен"
@@ -859,7 +859,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:358,
-#: includes/class-wpglobus.php:3572
+#: includes/class-wpglobus.php:3581
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -959,13 +959,13 @@ msgstr "*) Доступно после сохранения меню."
 msgid "Need a multilingual slug?"
 msgstr "Нужен мультиязычный ярлык?"
 
-#: includes/class-wpglobus.php:4011
+#: includes/class-wpglobus.php:4020
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "
 "ссылки."
 
-#: includes/class-wpglobus.php:4013
+#: includes/class-wpglobus.php:4022
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -973,7 +973,7 @@ msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
 
-#: includes/class-wpglobus.php:4165
+#: includes/class-wpglobus.php:4174
 msgid "Add"
 msgstr "Добавить"
 

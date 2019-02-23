@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-02-23 - version 2.1.10
+* Compatibility: new JS for Admin and Builders support, to work with WordPress 5.1.*
+
+---
 ### 2.1.9 ###
 
 * COMPATIBILITY:

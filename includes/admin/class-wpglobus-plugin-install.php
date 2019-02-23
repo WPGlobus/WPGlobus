@@ -60,15 +60,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 */
 		public static function controller() {
 
-			if ( empty( $_GET['source'] ) ) { // WPCS: input var ok, sanitization ok.
-				return;
-			}
-
-			if ( empty( $_GET['s'] ) ) { // WPCS: input var ok, sanitization ok.
-				return;
-			}
-
-			if ( 'WPGlobus' !== $_GET['source'] || 'WPGlobus' !== $_GET['s'] ) { // WPCS: input var ok, sanitization ok.
+			// phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+			if ( empty( $_GET['s'] ) || 'wpglobus' !== strtolower( $_GET['s'] ) ) {
 				return;
 			}
 
@@ -77,7 +70,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			self::$plugin_card['free'] = array();
 			self::$plugin_card['paid'] = array();
 
-			self::_setup_paid_plugins();
+			self::setup_paid_plugins();
 
 			// Enqueue the CSS & JS scripts.
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
@@ -89,7 +82,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 * List of the premium WPGlobus extensions.
 		 * This file is created manually.
 		 */
-		protected static function _setup_paid_plugins() {
+		protected static function setup_paid_plugins() {
 
 			self::$paid_plugins = array();
 
@@ -140,6 +133,10 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			}
 
 			foreach ( (array) $res->plugins as $key => $plugin ) {
+				if ( is_array( $plugin ) ) {
+					/** @since  2.1.10 */
+					$plugin = (object) $plugin;
+				}
 				if ( false === strpos( $plugin->slug, 'wpglobus' ) ) {
 					unset( $res->plugins[ $key ] );
 				} else {
@@ -166,7 +163,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
 
-			$all_products = self::_get_all_product_info();
+			$all_products = self::get_all_product_info();
 
 			foreach ( self::$paid_plugins as $plugin => $plugin_data ) {
 
@@ -201,7 +198,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 							'Title'       => $_plugin_title,
 							'Version'     => $plugin_info['_api_new_version'],
 							'PluginURI'   => $url_wpglobus_site . 'product/' .
-							                 $product_slug . '/',
+											 $product_slug . '/',
 						);
 					}
 				}
@@ -210,36 +207,35 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			/**
 			 * Prepend the premium add-ons to the list of plugins.
 			 */
-			foreach ( self::$paid_plugins as $slug => $paid_plugin ) :
+			foreach ( self::$paid_plugins as $slug => $paid_plugin ) {
 
-				$_info = self::_plugin_info_template();
+				$info = self::plugin_info_template();
 
-				$_info->slug = $slug;
+				$info->slug = $slug;
 
-				$_info->icons['default'] =
-				$_info->icons['1x'] =
-				$_info->icons['2x'] = WPGlobus::internal_images_url() . '/' .
-				                      $paid_plugin['image_file'];
+				$info->icons['default'] = WPGlobus::internal_images_url() . '/' . $paid_plugin['image_file'];
+				$info->icons['1x']      = $info->icons['default'];
+				$info->icons['2x']      = $info->icons['default'];
 
 				if ( ! empty( $paid_plugin['plugin_data'] ) ) {
-					$_info->name              = $paid_plugin['plugin_data']['Name'];
-					$_info->short_description = $paid_plugin['plugin_data']['Description'];
-					$_info->homepage          = $paid_plugin['plugin_data']['PluginURI'];
+					$info->name              = $paid_plugin['plugin_data']['Name'];
+					$info->short_description = $paid_plugin['plugin_data']['Description'];
+					$info->homepage          = $paid_plugin['plugin_data']['PluginURI'];
 				} else {
-					$_info->name = $slug;
+					$info->name = $slug;
 				}
 
 				self::$plugin_card['paid'][] = $slug;
 
-				self::$paid_plugins[ $slug ]['card'] = $_info;
+				self::$paid_plugins[ $slug ]['card'] = $info;
 
 				self::$paid_plugins[ $slug ]['extra_data']['product_url'] =
 				self::$paid_plugins[ $slug ]['extra_data']['details_url'] =
-					$_info->homepage;
+					$info->homepage;
 
-				array_unshift( $res->plugins, $_info );
+				array_unshift( $res->plugins, $info );
 
-			endforeach;
+			}
 
 			$res->info['results'] = count( $res->plugins );
 
@@ -252,7 +248,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 *
 		 * @return array[]
 		 */
-		protected static function _get_all_product_info() {
+		protected static function get_all_product_info() {
 			$all_product_info = array();
 
 			$data_file = WPGlobus::data_path() . '/wpglobus-product-info.json';
@@ -270,7 +266,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 *
 		 * @return stdClass
 		 */
-		protected static function _plugin_info_template() {
+		protected static function plugin_info_template() {
 			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
 
 			$template                    = new stdClass();
@@ -298,7 +294,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 *
 		 * @param string $hook_page The current admin page.
 		 */
-		static public function enqueue_scripts( $hook_page ) {
+		public static function enqueue_scripts( $hook_page ) {
 
 			if ( 'plugin-install.php' === $hook_page ) {
 
@@ -332,4 +328,3 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 	}
 
 endif;
-/*EOF*/

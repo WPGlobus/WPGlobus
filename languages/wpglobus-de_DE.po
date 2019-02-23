@@ -686,19 +686,19 @@ msgstr "Sind Sie sicher, dass Sie die Lösch-Aktion durchführen möchten?"
 msgid "Back to the WPGlobus Settings"
 msgstr "Zurück zu den WPGlobus-Einstellungen"
 
-#: includes/admin/class-wpglobus-plugin-install.php:306
+#: includes/admin/class-wpglobus-plugin-install.php:302
 msgid "Current Version"
 msgstr "Aktelle Version"
 
-#: includes/admin/class-wpglobus-plugin-install.php:307
+#: includes/admin/class-wpglobus-plugin-install.php:303
 msgid "Get it now!"
 msgstr "Jetzt holen"
 
-#: includes/admin/class-wpglobus-plugin-install.php:308
+#: includes/admin/class-wpglobus-plugin-install.php:304
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:309,
+#: includes/admin/class-wpglobus-plugin-install.php:305,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
 msgstr "Instaliert"
@@ -819,7 +819,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:358,
-#: includes/class-wpglobus.php:3572
+#: includes/class-wpglobus.php:3581
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -919,12 +919,12 @@ msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:4011
+#: includes/class-wpglobus.php:4020
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Sie müssen schöne Permalinks aktivieren um WPGlobus verwenden zu können."
 
-#: includes/class-wpglobus.php:4013
+#: includes/class-wpglobus.php:4022
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -932,7 +932,7 @@ msgstr ""
 "Bitte gehen Sie zu Einstellungen > Permalinks > allgemeine Einstellungen, "
 "und wählen Sie die \"Beitragsname\" für schöne Permalinks."
 
-#: includes/class-wpglobus.php:4165
+#: includes/class-wpglobus.php:4174
 msgid "Add"
 msgstr "Hinzufügen"
 

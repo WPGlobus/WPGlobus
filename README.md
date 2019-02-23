@@ -297,6 +297,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.10 ###
+
+
+* Compatibility: new JS for Admin and Builders support, to work with WordPress 5.1.x
+
 ### 2.1.9 ###
 
 
@@ -324,21 +329,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * INTERNAL:
 
 	* Core/Meta: Serialize meta value if it is an array.
-
-### 2.1.6 ###
-
-
-* FIXED:
-
-	* Builders/Gutenberg: don't show our metabox when editing post types where WPGlobus is disabled.
-
-* INTERNAL:
-
-	* Core/Builders: use the `$_POST['post_type']` value to define post type on the `post.php` page (WordPress 5).
-
-	* Core/Builders: added the `$post_type` parameter to the `get_3rd_party_status_for_gutenberg()` function.
-
-	* Builders/WooCommerce: revised `get_3rd_party_status_for_gutenberg()` algorithm when WooCommerce is active.
 
 ## Demo Sites ##
 

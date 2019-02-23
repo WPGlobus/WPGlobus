@@ -232,8 +232,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 *
 			 * @return array
 			 */
-			self::$config = apply_filters( 'wpglobus_config_vendors', self::$config, self::$builder );			
-			
+			self::$config = apply_filters( 'wpglobus_config_vendors', self::$config, self::$builder );
+
 		}
 
 		/**
