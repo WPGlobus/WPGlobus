@@ -395,13 +395,24 @@ class WPGlobus_Acf_2 {
 	protected static function get_3rd_party_field_status( $field ) {
 		
 		if ( function_exists('acf_table_load_plugin_textdomain') ) {
+			
+			/**
+			 * Filter to enable/disable `table` field.
+			 * Returning boolean.
+			 *
+			 * @since 2.1.11
+			 *
+			 * @param boolean.
+			 */
+			$field_table_enabled = apply_filters( 'wpglobus/vendor/acf/field/table', false );
+			
 			/**
 			 * Advanced Custom Fields: Table Field.
 			 * https://wordpress.org/plugins/advanced-custom-fields-table-field/
 			 * 
 			 * @todo ACF: Table Field has incorrect filter 'update_post_metadata' @see advanced-custom-fields-table-field\acf-table-v5.php
 			 */
-			if ( 'table' == $field['type'] ) { 
+			if ( 'table' == $field['type'] && ! $field_table_enabled ) { 
 				return false;
 			}
 
