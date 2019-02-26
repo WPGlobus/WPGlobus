@@ -154,8 +154,12 @@ class WPGlobus_Acf_2 {
 							 */
 						} else {
 
-							$_post_meta_fields_temp[ $_key ] = $_key;
-
+							$status = self::get_3rd_party_field_status($_acf_field);
+						
+							if ( $status ) {
+								$_post_meta_fields_temp[ $_key ] = $_key;
+							}
+							
 							/**
 							 * W.I.P
 							 */
@@ -379,6 +383,30 @@ class WPGlobus_Acf_2 {
 
 		return $_post_meta_fields;
 
+	}
+	
+	/**
+	 * @since 2.1.11
+	 *
+	 * @param array $field
+	 *
+	 * @return bool
+	 */
+	protected static function get_3rd_party_field_status( $field ) {
+		
+		if ( function_exists('acf_table_load_plugin_textdomain') ) {
+			/**
+			 * Advanced Custom Fields: Table Field.
+			 * https://wordpress.org/plugins/advanced-custom-fields-table-field/
+			 * 
+			 * @todo ACF: Table Field has incorrect filter 'update_post_metadata' @see advanced-custom-fields-table-field\acf-table-v5.php
+			 */
+			if ( 'table' == $field['type'] ) { 
+				return false;
+			}
+
+		}
+		return true;
 	}
 	
 	/**
