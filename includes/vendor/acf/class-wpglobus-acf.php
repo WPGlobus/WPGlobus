@@ -158,12 +158,15 @@ class WPGlobus_Acf_2 {
 						
 							if ( $status ) {
 								$_post_meta_fields_temp[ $_key ] = $_key;
+								
+								/**
+								 * Add field to array to output it with `wpglobus-translatable` class.
+								 * @since 2.1.11
+								 *
+								 * @todo W.I.P maybe to exclude some type of field, e.g. table.
+								 */
+								self::$post_multilingual_fields[$_key] = self::$post_acf_field_prefix . $_acf_field['key'];
 							}
-							
-							/**
-							 * W.I.P
-							 */
-							//self::$post_multilingual_fields[] = self::$post_acf_field_prefix . $field->post_name;
 
 						}
 						self::$acf_fields[ $_key ] = $_acf_field;
