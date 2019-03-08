@@ -249,6 +249,14 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			$_meta, $_init
 		) {
 
+			if ( ! self::$builder->is_builder_page() ) {
+				/**
+				 * Prevent getting multilingual fields for no builder page. 
+				 * @since 2.1.11
+				 */
+				return false;
+			}
+
 			$_post_ml_fields = array();
 
 			if ( empty( $_init ) ) {
@@ -279,13 +287,21 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/** @noinspection PhpUnusedParameterInspection */
 			$_meta, $_init
 		) {
-
+			
+			if ( ! self::$builder->is_builder_page() ) {
+				/**
+				 * Prevent getting meta fields for no builder page. 
+				 * @since 2.1.11
+				 */
+				return false;
+			}
+			
 			$_post_meta_fields = array();
 
 			if ( empty( $_init ) ) {
 				return $_post_meta_fields;
 			}
-
+				
 			$file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
 
 			/** @var WPGlobus_Acf_2 $class */
@@ -357,6 +373,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 					endif;
 
 				}
+				
 			}
 
 			/**
