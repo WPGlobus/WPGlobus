@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-03-09 - version 2.1.11
+* Fixed: [Vendor/ACF] peventing reset `table` field of ACF:Table Field plugin.
+* Fixed: prevent filter meta and multilingual fields for no builder page.
+
 2019-02-23 - version 2.1.10
 * Compatibility: new JS for Admin and Builders support, to work with WordPress 5.1.*
 
