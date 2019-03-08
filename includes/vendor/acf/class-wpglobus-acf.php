@@ -410,13 +410,15 @@ class WPGlobus_Acf_2 {
 			 * Advanced Custom Fields: Table Field.
 			 * https://wordpress.org/plugins/advanced-custom-fields-table-field/
 			 * 
-			 * @todo ACF: Table Field has incorrect filter 'update_post_metadata' @see advanced-custom-fields-table-field\acf-table-v5.php
+			 * Table Field has incorrect filter 'update_post_metadata' @see advanced-custom-fields-table-field\acf-table-v5.php
+			 * starting from v.1.3.5 an issue with the update_post_metadata filter was fixed.
 			 */
 			if ( 'table' == $field['type'] && ! $field_table_enabled ) { 
 				return false;
 			}
 
 		}
+		
 		return true;
 	}
 	
