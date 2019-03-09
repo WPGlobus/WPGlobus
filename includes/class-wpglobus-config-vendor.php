@@ -188,10 +188,10 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/**
 			 * Page Builder by SiteOrigin.
 			 * https://wordpress.org/plugins/siteorigin-panels/
+			 * // if ( defined('SITEORIGIN_PANELS_VERSION') )  {
+			 * //    self::$vendors[] = 'siteorigin-panels.json';
+			 * // }
 			 */
-			// if ( defined('SITEORIGIN_PANELS_VERSION') )  {
-			// 	self::$vendors[] = 'siteorigin-panels.json';
-			// }
 
 			// TODO: builder ID can be a string or `false`. Need to refactor this condition or the `get_id` method.
 			// phpcs:ignore WordPress.PHP.StrictComparisons
@@ -242,7 +242,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		 * @param mixed $_meta Unused.
 		 * @param array $_init
 		 *
-		 * @return array
+		 * @return array|false
 		 */
 		public static function get_post_ml_fields(
 			/** @noinspection PhpUnusedParameterInspection */
@@ -251,7 +251,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 			if ( ! self::$builder->is_builder_page() ) {
 				/**
-				 * Prevent getting multilingual fields for no builder page. 
+				 * Prevent getting multilingual fields for no builder page.
+				 *
 				 * @since 2.1.11
 				 */
 				return false;
@@ -263,7 +264,8 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				return $_post_ml_fields;
 			}
 
-			// $file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
+			// phpcs:ignore
+			// $file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file']; // TODO remove
 
 			/** @var WPGlobus_Acf_2 $class */
 			$class = empty( $_init['class'] ) ? '' : $_init['class'];
@@ -281,27 +283,28 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		 * @param mixed $_meta Unused.
 		 * @param array $_init
 		 *
-		 * @return array
+		 * @return array|false
 		 */
 		public static function get_post_meta_fields(
 			/** @noinspection PhpUnusedParameterInspection */
 			$_meta, $_init
 		) {
-			
+
 			if ( ! self::$builder->is_builder_page() ) {
 				/**
-				 * Prevent getting meta fields for no builder page. 
+				 * Prevent getting meta fields for no builder page.
+				 *
 				 * @since 2.1.11
 				 */
 				return false;
 			}
-			
+
 			$_post_meta_fields = array();
 
 			if ( empty( $_init ) ) {
 				return $_post_meta_fields;
 			}
-				
+
 			$file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
 
 			/** @var WPGlobus_Acf_2 $class */
@@ -373,7 +376,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 					endif;
 
 				}
-				
+
 			}
 
 			/**

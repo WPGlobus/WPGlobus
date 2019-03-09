@@ -32,7 +32,8 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @access protected
 		 * @var    array
 		 */
-		//protected $builders = array();
+		// phpcs:ignore
+		//protected $builders = array(); TODO remove
 
 		/**
 		 * @var array
@@ -53,6 +54,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 			$this->set_current_language();
 
+			// phpcs:ignore
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			/**
 			 * @todo Add the handling of AJAX.
@@ -243,8 +245,6 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				update_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), $this->language );
 			}
 
-			return;
-
 		}
 
 		/**
@@ -322,7 +322,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 								href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
 					<?php
-					$order ++;
+					$order++;
 				}
 				?>
 			</ul>
@@ -366,7 +366,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			$_builder_label = esc_html__( 'Builder', 'wpglobus' ) . ': ';
 			if ( class_exists( 'WPGlobus_Builders' ) ) {
 				$_builder = WPGlobus_Builders::get_addon( $this->id );
-				
+
 				if ( ! empty( $_builder['admin_bar_label'] ) ) {
 					$_builder_label = $_builder['admin_bar_label'] . ': ';
 				}
@@ -375,11 +375,13 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				$_builder_label .= $this->id;
 			}
 
-			$wp_admin_bar->add_menu( array(
-				'id'     => 'wpglobus-builder-id',
-				'parent' => 'top-secondary',
-				'title'  => '<span class="ab-label">' . $_builder_label . '</span>',
-			) );
+			$wp_admin_bar->add_menu(
+				array(
+					'id'     => 'wpglobus-builder-id',
+					'parent' => 'top-secondary',
+					'title'  => '<span class="ab-label">' . $_builder_label . '</span>',
+				)
+			);
 
 			$_title = esc_html__( 'Сompatibility Settings', 'wpglobus' );
 
@@ -393,16 +395,18 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				)
 			);
 
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpglobus-builder-id',
-				'id'     => 'wpglobus-builder-compatibility-link',
-				'title'  => '<span>' . $_title . '</span>',
-				'href'   => $_url,
-				'meta'   => array(
-					'_target'  => 'blank',
-					'tabindex' => - 1,
-				),
-			) );
+			$wp_admin_bar->add_menu(
+				array(
+					'parent' => 'wpglobus-builder-id',
+					'id'     => 'wpglobus-builder-compatibility-link',
+					'title'  => '<span>' . $_title . '</span>',
+					'href'   => $_url,
+					'meta'   => array(
+						'_target'  => 'blank',
+						'tabindex' => -1,
+					),
+				)
+			);
 
 		}
 
