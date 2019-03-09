@@ -297,6 +297,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.11 ###
+
+
+* Fixed: (Vendor/ACF) Do not reset the `table` field of the `ACF:Table Field` plugin.
+
+* Fixed: Do not filter meta and multilingual fields for no-builder pages.
+
 ### 2.1.10 ###
 
 
@@ -320,15 +327,14 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 	* Core: Synchronize Config.
 
-### 2.1.7 ###
+### Earlier versions and Add-ons ###
 
 
-* COMPATIBILITY:
-    * WordPress 5.1
+* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
 
-* INTERNAL:
+* [WPGlobus for WooCommerce](https://wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
 
-	* Core/Meta: Serialize meta value if it is an array.
+* [WPGlobus Plus](https://wpglobus.com/extensions/wpglobus-plus/changelog/)
 
 ## Demo Sites ##
 
