@@ -1,4 +1,4 @@
-# Copyright (C) 2018 WPGlobus
+# Copyright (C) 2019 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2015-2018
@@ -864,16 +864,16 @@ msgstr "Перевод ссылок возможен с помощью WPGlobus-
 msgid "To translate permalinks, please activate the module Slug."
 msgstr "Для перевода ссылок необходимо активировать модуль УРЛ."
 
-#: includes/builders/class-wpglobus-builder.php:358,
+#: includes/builders/class-wpglobus-builder.php:277,
 #: includes/class-wpglobus.php:3581
 msgid "Save draft before using extra language."
 msgstr "Сохраните черновик перед переключением на другой язык."
 
-#: includes/builders/class-wpglobus-builder.php:447
+#: includes/builders/class-wpglobus-builder.php:366
 msgid "Builder"
 msgstr "Билдер"
 
-#: includes/builders/class-wpglobus-builder.php:465
+#: includes/builders/class-wpglobus-builder.php:386
 msgid "Сompatibility Settings"
 msgstr ""
 

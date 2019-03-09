@@ -635,15 +635,15 @@ msgstr ""
 msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:358, includes/class-wpglobus.php:3581
+#: includes/builders/class-wpglobus-builder.php:277, includes/class-wpglobus.php:3581
 msgid "Save draft before using extra language."
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:447
+#: includes/builders/class-wpglobus-builder.php:366
 msgid "Builder"
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:465
+#: includes/builders/class-wpglobus-builder.php:386
 msgid "Сompatibility Settings"
 msgstr ""
 

@@ -1,9 +1,9 @@
-# Copyright (C) 2018 WPGlobus
+# Copyright (C) 2019 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
-# Franck, 2015
-# FX Bénard <fxb@wp-translations.org>, 2015
-# Gregory Karpinsky <gregory@tiv.net>, 2015
+# Franck, 2015-2017
+# FX Bénard <fxb@wp-translations.org>, 2015-2017
+# Gregory Karpinsky <gregory@tiv.net>, 2015,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
@@ -345,7 +345,7 @@ msgstr "Réglages de WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:716
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
 #: includes/admin/class-wpglobus-customize-options.php:738,
 #: includes/options/class-wpglobus-options.php:1095
@@ -819,7 +819,7 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
 msgid "Short description of the problem"
@@ -883,16 +883,16 @@ msgstr ""
 msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:358,
+#: includes/builders/class-wpglobus-builder.php:277,
 #: includes/class-wpglobus.php:3581
 msgid "Save draft before using extra language."
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:447
+#: includes/builders/class-wpglobus-builder.php:366
 msgid "Builder"
-msgstr ""
+msgstr "Constructeur"
 
-#: includes/builders/class-wpglobus-builder.php:465
+#: includes/builders/class-wpglobus-builder.php:386
 msgid "Сompatibility Settings"
 msgstr ""
 
@@ -957,7 +957,7 @@ msgstr "Type de sélecteur"
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #: includes/class-wpglobus.php:1304
 msgid "OFF"
-msgstr ""
+msgstr "NON"
 
 #: includes/class-wpglobus.php:1305
 msgid "Turn on"
@@ -966,7 +966,7 @@ msgstr ""
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #: includes/class-wpglobus.php:1309
 msgid "ON"
-msgstr ""
+msgstr "OUI"
 
 #: includes/class-wpglobus.php:1310
 msgid "Turn off"
@@ -1056,7 +1056,7 @@ msgstr "Désactivation / Désinstallation"
 
 #: includes/options/class-wpglobus-options.php:644
 msgid "Uninstall"
-msgstr ""
+msgstr "Désinstaller"
 
 #: includes/options/class-wpglobus-options.php:674
 msgid "All add-ons"
@@ -1064,7 +1064,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:689
 msgid "Mobile Menu"
-msgstr ""
+msgstr "Menu mobile"
 
 #: includes/options/class-wpglobus-options.php:704
 msgid "Language Widgets"
@@ -1270,7 +1270,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1244
 msgid "Post Types"
-msgstr ""
+msgstr "Types de contenu"
 
 #: includes/options/class-wpglobus-options.php:1260
 msgid ""
@@ -1281,7 +1281,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1301
 msgid "Custom Code"
-msgstr ""
+msgstr "Code personnalisé"
 
 #: includes/options/class-wpglobus-options.php:1398
 msgid "Enabled"
@@ -1345,11 +1345,11 @@ msgstr "Ajouter une nouvelle langue"
 
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:107
 msgid "Select an item"
-msgstr ""
+msgstr "Sélectionnez un élément"
 
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:164
 msgid "No items of this type were found."
-msgstr ""
+msgstr "Aucun élément de ce type n'a été trouvé."
 
 #: includes/options/templates/compatibility-beta.php:15
 msgid "Multilingual support of this add-on is currently in Beta stage."
@@ -1369,11 +1369,11 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:42
 msgid "Add-on"
-msgstr ""
+msgstr "Extension"
 
 #: includes/options/templates/compatibility.php:43
 msgid "Current version"
-msgstr ""
+msgstr "Version actuelle"
 
 #: includes/options/templates/compatibility.php:44
 msgid "Supported minimum version"
@@ -1393,7 +1393,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:71
 msgid "Active"
-msgstr "Actif"
+msgstr "Activé"
 
 #: includes/options/templates/compatibility.php:73
 msgid "Installed, inactive"
@@ -1401,7 +1401,7 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:76
 msgid "Not installed"
-msgstr ""
+msgstr "Non installé"
 
 #: includes/options/templates/customize-intro.php:35
 msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
@@ -1459,7 +1459,7 @@ msgstr ""
 
 #: includes/options/templates/customize-intro.php:96
 msgid "now"
-msgstr ""
+msgstr "maintenant"
 
 #: includes/options/wpglobus-options-header.php:25
 msgid "We rely on your support!"
