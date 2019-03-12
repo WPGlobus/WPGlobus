@@ -56,7 +56,7 @@ The WPGlobus plugin serves as the **foundation** to other plugins in the family.
 
 * [WPGlobus Featured Images](https://wordpress.org/plugins/wpglobus-featured-images/): allows setting featured images separately for each language.
 * [WPGlobus Translate Options](https://wordpress.org/plugins/wpglobus-translate-options/): enables selective translation of the `wp_options` table strings. You need to use it when your theme or a 3rd party plugin (a slider, for example) allows you to enter some texts (headings, buttons, etc.) and stores them in the `options` table.
-* [WPGlobus for WPBakery Page Builder](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Builder - **obsolete since WPGlobus 1.9.17**.
+* [WPGlobus for WPBakery Page Builder](https://wordpress.org/plugins/wpglobus-for-wpbakery-visual-composer/): enables WPGlobus on certain themes that use WPBakery's Builder in the standard ("classic") mode.
 * [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/): adds multilingual editing capabilities to the visual editor widget.
 
 = When do I need WPGlobus Premium Add-ons? =
@@ -110,6 +110,8 @@ Some 3rd-party plugins are supported with our [premium add-ons](https://wpglobus
 * [TablePress](https://wpglobus.com/product/wpglobus-plus/#tablepress),
 * [WooCommerce and some of its extensions](https://wpglobus.com/product/woocommerce-wpglobus/),
 * [WooCommerce Nets Netaxept Payment Plugin](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
+
+WPGlobus is compatible with ClassicPress Version 1.
 
 = Permalinks =
 
