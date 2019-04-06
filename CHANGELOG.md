@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2019-04-06 - version 2.1.12
-* Internal: (Core/Options) Updated `Compatibility` tab on WPGlobus Options page.
+* Internal: (Core/Options) Updated the `Compatibility` tab on the `WPGlobus Options` page.
 
 2019-03-09 - version 2.1.11
 * Fixed: (Vendor/ACF) Do not reset the `table` field of the `ACF:Table Field` plugin.

@@ -1,13 +1,13 @@
 # Copyright (C) 2019 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
-# Gregory Karpinsky <gregory@tiv.net>, 2015-2018
+# Gregory Karpinsky <gregory@tiv.net>, 2015-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2018-12-12 02:33+0000\n"
-"Last-Translator: Vladimir <coder3@web-axioma.ru>\n"
+"PO-Revision-Date: 2019-04-06 13:58+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
 "Language: ru_RU\n"
@@ -875,7 +875,7 @@ msgstr "Билдер"
 
 #: includes/builders/class-wpglobus-builder.php:386
 msgid "Сompatibility Settings"
-msgstr ""
+msgstr "Совместимость"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:208
 msgid "WPGlobus languages"
@@ -1378,43 +1378,62 @@ msgstr "Не рекомендуется использовать на рабоч
 msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
 msgstr "О возникших проблемах сообщайте в %1$sслужбу поддержки%2$s."
 
-#: includes/options/templates/compatibility.php:37
-msgid "List of supported add-ons"
-msgstr "Список поддерживаемых расширений"
+#: includes/options/templates/compatibility.php:44
+msgid "In the WordPress core"
+msgstr "В ядре WordPress"
 
-#: includes/options/templates/compatibility.php:42
-msgid "Add-on"
-msgstr "Расширение"
+#: includes/options/templates/compatibility.php:46
+msgid "Core"
+msgstr "Ядро"
 
-#: includes/options/templates/compatibility.php:43
+#: includes/options/templates/compatibility.php:52,
+#: includes/options/templates/compatibility.php:79
 msgid "Current version"
 msgstr "Установленная версия"
 
-#: includes/options/templates/compatibility.php:44
-msgid "Supported minimum version"
-msgstr "Минимальная поддерживаемая версия"
-
-#: includes/options/templates/compatibility.php:45
+#: includes/options/templates/compatibility.php:53,
+#: includes/options/templates/compatibility.php:81
 msgid "Stage"
 msgstr "Готовность"
 
-#: includes/options/templates/compatibility.php:46
+#: includes/options/templates/compatibility.php:54,
+#: includes/options/templates/compatibility.php:82
 msgid "Status"
 msgstr "Статус"
 
-#: includes/options/templates/compatibility.php:59
-msgid "In core"
-msgstr ""
+#: includes/options/templates/compatibility.php:60
+msgid "Block editor"
+msgstr "Редактор блоков"
 
-#: includes/options/templates/compatibility.php:71
+#: includes/options/templates/compatibility.php:62
+msgid "production"
+msgstr "production"
+
+#: includes/options/templates/compatibility.php:69
+msgid "WordPress version"
+msgstr "Версия WordPress"
+
+#: includes/options/templates/compatibility.php:73
+msgid "List of supported add-ons"
+msgstr "Список поддерживаемых расширений"
+
+#: includes/options/templates/compatibility.php:78
+msgid "Add-on"
+msgstr "Расширение"
+
+#: includes/options/templates/compatibility.php:80
+msgid "Supported minimum version"
+msgstr "Минимальная поддерживаемая версия"
+
+#: includes/options/templates/compatibility.php:100
 msgid "Active"
 msgstr "Активно"
 
-#: includes/options/templates/compatibility.php:73
+#: includes/options/templates/compatibility.php:102
 msgid "Installed, inactive"
 msgstr "Установлено, не активно"
 
-#: includes/options/templates/compatibility.php:76
+#: includes/options/templates/compatibility.php:105
 msgid "Not installed"
 msgstr "Не установлено"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2018-12-12 02:33+0000\n"
+"PO-Revision-Date: 2019-04-06 13:51+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Venezuela) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/es_VE/)\n"
@@ -1296,43 +1296,62 @@ msgstr ""
 msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
 msgstr ""
 
-#: includes/options/templates/compatibility.php:37
-msgid "List of supported add-ons"
-msgstr ""
-
-#: includes/options/templates/compatibility.php:42
-msgid "Add-on"
-msgstr ""
-
-#: includes/options/templates/compatibility.php:43
-msgid "Current version"
-msgstr ""
-
 #: includes/options/templates/compatibility.php:44
-msgid "Supported minimum version"
-msgstr ""
-
-#: includes/options/templates/compatibility.php:45
-msgid "Stage"
+msgid "In the WordPress core"
 msgstr ""
 
 #: includes/options/templates/compatibility.php:46
+msgid "Core"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:52,
+#: includes/options/templates/compatibility.php:79
+msgid "Current version"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:53,
+#: includes/options/templates/compatibility.php:81
+msgid "Stage"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:54,
+#: includes/options/templates/compatibility.php:82
 msgid "Status"
 msgstr "Estado"
 
-#: includes/options/templates/compatibility.php:59
-msgid "In core"
+#: includes/options/templates/compatibility.php:60
+msgid "Block editor"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:71
+#: includes/options/templates/compatibility.php:62
+msgid "production"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:69
+msgid "WordPress version"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:73
+msgid "List of supported add-ons"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:78
+msgid "Add-on"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:80
+msgid "Supported minimum version"
+msgstr ""
+
+#: includes/options/templates/compatibility.php:100
 msgid "Active"
 msgstr "Activo"
 
-#: includes/options/templates/compatibility.php:73
+#: includes/options/templates/compatibility.php:102
 msgid "Installed, inactive"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:76
+#: includes/options/templates/compatibility.php:105
 msgid "Not installed"
 msgstr ""
 

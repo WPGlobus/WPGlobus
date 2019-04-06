@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.12 ###
+
+
+* Internal: (Core/Options) Updated the `Compatibility` tab on the `WPGlobus Options` page.
+
 ### 2.1.11 ###
 
 
@@ -321,13 +326,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * INTERNAL:
 
 	* Core: Fixed PHP Notice: `undefined index menuItems`.
-
-### 2.1.8 ###
-
-
-* INTERNAL:
-
-	* Core: Synchronize Config.
 
 ### Earlier versions and Add-ons ###
 
