@@ -126,8 +126,8 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			// Compare existing value to new value if no prev value given and the key exists only once.
 			if ( empty( $prev_value ) ) {
 				$old_value = get_metadata( $meta_type, $object_id, $meta_key );
-				if ( count( $old_value ) === 1 ) {
-					if ( $old_value[0] === $meta_value ) {
+				if ( count( $old_value ) == 1 ) {
+					if ( ! empty($old_value[0]) && $old_value[0] === $meta_value ) {
 						return false;
 					}
 				}
