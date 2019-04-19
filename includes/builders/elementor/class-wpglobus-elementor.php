@@ -142,11 +142,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 						$_value = '';
 
 						if ( WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
-							$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
+							// @todo remove after testing
+							// $_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
+							$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language() );
 						} else {
-							if ( WPGlobus::Config()->builder->get_language() === WPGlobus::Config()->default_language ) {
+							// @todo remove after testing
+							// if ( WPGlobus::Config()->builder->get_language() === WPGlobus::Config()->default_language ) {
 								$_value = $meta_cache[ $meta_key ][0];
-							}
+							// }
 						}
 
 						return $_value;
@@ -209,9 +212,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 						<ul id="wpglobus-elementor-selector" style="display:none;margin:10px;" class="hidden">
 							<?php
 							foreach ( WPGlobus::Config()->enabled_languages as $language ) {
+								$_current = '';
+								if ( $language == WPGlobus::Config()->builder->get_language() ) {
+									$_current = esc_html__( 'current', 'wpglobus' );
+									$_current = ' - ' . $_current;
+								}
 								?>
 								<li style="margin-bottom:10px;cursor:auto;">
-									<a href="<?php echo esc_url( $this->base_redirect_url . '&language=' . $language ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] . " ($language)" ); ?></a>
+									<a href="<?php echo esc_url( $this->base_redirect_url . '&language=' . $language ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] . " ($language)" ); echo $_current; ?></a>
 								</li>
 								<?php
 							}
@@ -226,7 +234,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
                 setTimeout(function () {
                     var wpglobusElementorPanelMenu = jQuery("#wpglobus-elementor-wrapper").html();
                     jQuery(document).on('click', "#elementor-panel-header-menu-button", function () {
-                        jQuery(".elementor-panel-menu-items").eq(-1).append(wpglobusElementorPanelMenu);
+                        jQuery(".elementor-panel-menu-item").eq(7).after(wpglobusElementorPanelMenu);
                     });
                     jQuery(document).on('click', "#wpglobus-elementor-selector-title", function () {
                         var $t = jQuery("#wpglobus-elementor-selector");
