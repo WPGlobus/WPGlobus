@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-04-19 - version 2.1.13
+* Internal: (Builders/Elementor) Beta-2 version for Elementor support.
+
 2019-04-06 - version 2.1.12
 * Internal: (Core/Options) Updated the `Compatibility` tab on the `WPGlobus Options` page.
 
