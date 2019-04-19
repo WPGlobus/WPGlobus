@@ -877,9 +877,13 @@ msgstr "Билдер"
 msgid "Сompatibility Settings"
 msgstr "Совместимость"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:208
+#: includes/builders/elementor/class-wpglobus-elementor.php:211
 msgid "WPGlobus languages"
 msgstr "Языки WPGlobus"
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:217
+msgid "current"
+msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."

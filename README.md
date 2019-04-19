@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.13 ###
+
+
+* Internal: (Builders/Elementor) Beta-2 version for Elementor support.
+
 ### 2.1.12 ###
 
 
@@ -315,17 +320,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 
 * Compatibility: new JS for Admin and Builders support, to work with WordPress 5.1.x
-
-### 2.1.9 ###
-
-
-* COMPATIBILITY:
-
-    * Vendor/Acf: ACF v.5.7.12
-
-* INTERNAL:
-
-	* Core: Fixed PHP Notice: `undefined index menuItems`.
 
 ### Earlier versions and Add-ons ###
 

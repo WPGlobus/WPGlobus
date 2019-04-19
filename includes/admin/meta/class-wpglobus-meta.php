@@ -126,8 +126,8 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			// Compare existing value to new value if no prev value given and the key exists only once.
 			if ( empty( $prev_value ) ) {
 				$old_value = get_metadata( $meta_type, $object_id, $meta_key );
-				if ( count( $old_value ) == 1 ) {
-					if ( ! empty($old_value[0]) && $old_value[0] === $meta_value ) {
+				if ( 1 === count( $old_value ) ) {
+					if ( ! empty( $old_value[0] ) && $old_value[0] === $meta_value ) {
 						return false;
 					}
 				}
@@ -142,7 +142,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			/**
 			 * Don't auto-modify this SQL query.
 			 */
-			// phpcs:ignore WordPress.WP.PreparedSQL
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
 
 			/*
@@ -316,7 +316,8 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 				$_meta_value =
 					$wpdb->get_col(
-						$wpdb->prepare( "SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s",
+						$wpdb->prepare(
+							"SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s",
 							$object_id,
 							$meta_key
 						)

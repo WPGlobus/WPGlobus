@@ -647,8 +647,12 @@ msgstr ""
 msgid "Сompatibility Settings"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:208
+#: includes/builders/elementor/class-wpglobus-elementor.php:211
 msgid "WPGlobus languages"
+msgstr ""
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:217
+msgid "current"
 msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138

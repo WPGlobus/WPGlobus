@@ -874,9 +874,13 @@ msgstr "Builder"
 msgid "Сompatibility Settings"
 msgstr "Сompatibility Settings"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:208
+#: includes/builders/elementor/class-wpglobus-elementor.php:211
 msgid "WPGlobus languages"
 msgstr "WPGlobus languages"
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:217
+msgid "current"
+msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:138
 msgid "Before switching the language, please save draft or publish."
