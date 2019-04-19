@@ -65,12 +65,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			self::$add_on['elementor'] = array(
 				'id'                    => 'elementor',
 				'role'                  => 'builder',
-				'supported_min_version' => '2.2.6',
+				'supported_min_version' => '2.5.14',
 				'const'                 => 'ELEMENTOR_VERSION',
 				'plugin_name'           => 'Elementor',
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
 				'path'                  => 'elementor/elementor.php',
 				'stage'                 => 'beta',
+				'beta_version'          => '2'
 			);
 
 			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo-premium/wp-seo-premium.php' ) ) {
@@ -217,6 +218,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				 * @since 1.9.17
 				 */
 				if ( ! $builder ) {
+				// if ( ! $builder || ! $builder['builder_page'] ) {
 					$builder = self::is_js_composer();
 					if ( $builder && $builder['builder_page'] ) {
 						return $builder;
@@ -226,7 +228,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/**
 				 * @since 1.9.17
 				 */
-				if ( ! $builder ) {
+				if ( ! $builder || ! $builder['builder_page'] ) {
 					$builder = self::is_elementor();
 					if ( $builder ) {
 						if ( $builder['is_admin'] ) {
@@ -1223,7 +1225,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					// @todo Check additional ways to get post ID.
 				}
 			}
-
+			
+			// @todo may be disable post type here.
+			// $_attrs['builder_page'] = false;
+			// error_log(print_r($_attrs, true));			
 			return $_attrs;
 		}
 
