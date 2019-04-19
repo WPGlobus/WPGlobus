@@ -110,7 +110,12 @@ foreach ( $add_ons as $_id => $add_on ) {
 		$_stage = 'production';
 	} else {
 		if ( 'beta' === $add_on['stage'] ) {
-			$_stage = $add_on['stage'] . ' *)';
+			if ( ! empty( $add_on['beta_version'] ) ) {
+				$_stage = $add_on['stage'] . '-' . $add_on['beta_version'];
+			} else {
+				$_stage .= $add_on['stage'];
+			}
+			$_stage .= ' *)';
 		} else {
 			$_stage = $add_on['stage'];
 		}
