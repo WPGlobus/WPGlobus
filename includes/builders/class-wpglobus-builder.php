@@ -370,7 +370,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				if ( ! empty( $_builder['admin_bar_label'] ) ) {
 					$_builder_label = $_builder['admin_bar_label'] . ': ';
 				}
-				$_builder_label .= $_builder['plugin_name'];
+				if ( empty( $_builder['admin_bar_builder_label'] ) ) {
+					$_builder_label .= $_builder['plugin_name'];
+				} else {
+					$_builder_label .= $_builder['admin_bar_builder_label'];
+				}
 			} else {
 				$_builder_label .= $this->id;
 			}
