@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+2019-04-29 - version 2.1.14
+* Fixed: (Core/JS) Issue with incorrect behavior of dialog form with `hidden` class.
+* Added: (Core/Builders) Element 'admin_bar_builder_label' to WP admin bar.
+* Internal: (Flags) Added purple.globe icon.
+
 2019-04-19 - version 2.1.13
 * Internal: (Builders/Elementor) Beta-2 version for Elementor support.
 
