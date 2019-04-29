@@ -430,8 +430,20 @@ var WPGlobusDialogApp;
 					title += ' | maxlength='+api.attrs.maxlength;
 				}
 				$('.wpglobus-dialog .ui-dialog-title').text(title);
+				
+				/**
+				 * Some 3rd party plugin or theme might have class `hidden` with `display:none !important` rule.
+				 * Remove this class to prevent incorrect behavior of dialog form.
+				 * @since 2.1.14
+				 */
+				$(this).removeClass('hidden');
 			},
 			close: function() {
+				/**
+				 * @since 2.1.14
+				 */
+				$(this).addClass('hidden');
+				
 				/**
 				 * Close callback.
 				 */	
