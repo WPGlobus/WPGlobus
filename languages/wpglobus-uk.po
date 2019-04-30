@@ -850,7 +850,7 @@ msgstr ""
 msgid "Builder"
 msgstr "Конструктор"
 
-#: includes/builders/class-wpglobus-builder.php:386
+#: includes/builders/class-wpglobus-builder.php:390
 msgid "Сompatibility Settings"
 msgstr ""
 

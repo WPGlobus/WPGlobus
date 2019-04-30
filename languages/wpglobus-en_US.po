@@ -870,7 +870,7 @@ msgstr "Save draft before using extra language."
 msgid "Builder"
 msgstr "Builder"
 
-#: includes/builders/class-wpglobus-builder.php:386
+#: includes/builders/class-wpglobus-builder.php:390
 msgid "Сompatibility Settings"
 msgstr "Сompatibility Settings"
 

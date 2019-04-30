@@ -873,7 +873,7 @@ msgstr "Сохраните черновик перед переключение�
 msgid "Builder"
 msgstr "Билдер"
 
-#: includes/builders/class-wpglobus-builder.php:386
+#: includes/builders/class-wpglobus-builder.php:390
 msgid "Сompatibility Settings"
 msgstr "Совместимость"
 

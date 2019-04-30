@@ -299,6 +299,15 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.1.14 ###
+
+
+* Fixed: (Core/JS) Issue with an incorrect behavior of the dialog form with `hidden` class.
+
+* Added: (Core/Builders) Element `admin_bar_builder_label` to the WP admin bar.
+
+* Internal: (Flags) Added `purple.globe` icon.
+
 ### 2.1.13 ###
 
 
@@ -315,11 +324,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Fixed: (Vendor/ACF) Do not reset the `table` field of the `ACF:Table Field` plugin.
 
 * Fixed: Do not filter meta and multilingual fields for no-builder pages.
-
-### 2.1.10 ###
-
-
-* Compatibility: new JS for Admin and Builders support, to work with WordPress 5.1.x
 
 ### Earlier versions and Add-ons ###
 
