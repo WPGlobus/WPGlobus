@@ -238,7 +238,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						} else {
 							/** @noinspection PhpIncludeInspection */
 							include_once WPGlobus::$PLUGIN_DIR_PATH . 'includes/builders/elementor/class-wpglobus-elementor-front.php';
-							WPGlobus_Elementor_Front::init();
+							WPGlobus_Elementor_Front::init($builder);
 						}
 					}
 				}
@@ -517,6 +517,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						'post_id'      => $post_id,
 						'builder_page' => false,
 						'ajax_actions' => $ajax_actions,
+						'post_css_meta_key' 	  => '_wpglobus_elementor_css',
+						'elementor_data_meta_key' => '_elementor_data',
+						'elementor_css_meta_key'  => '_elementor_css'
 					);
 
 					if ( $load_elementor ) {
