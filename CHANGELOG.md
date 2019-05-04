@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-05-04 - version 2.1.15
+* Internal: (Builders/Elementor) Beta-3 version for Elementor support.
+
 2019-04-29 - version 2.1.14
 * Fixed: (Core/JS) Issue with an incorrect behavior of the dialog form with `hidden` class.
 * Added: (Core/Builders) Element `admin_bar_builder_label` to the WP admin bar.
