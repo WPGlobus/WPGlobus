@@ -57,6 +57,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'supported_min_version' => '5.4.0',
 				'const'                 => 'WPB_VC_VERSION',
 				'plugin_name'           => 'WPBakery Page Builder',
+				'admin_bar_builder_label' => 'WPBakery PB',
 				'plugin_uri'            => 'https://wpbakery.com/',
 				'path'                  => 'js_composer/js_composer.php',
 				'stage'                 => 'production',
