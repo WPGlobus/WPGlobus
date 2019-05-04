@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.1.14",
+  "version": "2.1.15",
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "private": true,
@@ -46,7 +46,14 @@
     "pull_translations": "tx pull -a -f --mode=translator",
     "pomo": "gulp pomo",
     "git fetch": "git fetch --all",
+    "git pull": "git pull",
     "merge dev to master": "git checkout master && git merge develop",
-    "checkout dev": "git checkout develop"
+    "checkout dev": "git checkout develop",
+    "svn:sync": "svn_sync.cmd",
+    "svn:up": "cd wpsvn\\wpglobus && svn up",
+    "svn:add": "cd wpsvn\\wpglobus && svn add --force trunk",
+    "svn:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% %npm_package_version%\" --username tivnet",
+    "svn:tag": "cd wpsvn\\wpglobus && svn cp trunk tags/%npm_package_version% && svn stat",
+    "svn:tag:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% tag %npm_package_version%\" --username tivnet"
   }
 }

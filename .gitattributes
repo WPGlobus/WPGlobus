@@ -9,3 +9,5 @@
 /package.json export-ignore
 /README.md export-ignore
 /unit-tests export-ignore
+/svn_exclude.txt export-ignore
+/svn_sync.cmd export-ignore

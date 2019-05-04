@@ -26,6 +26,8 @@
       "!unit-tests",
       "!gulp_modules/**/{.*,*}",
       "!gulp_modules",
+      "!wpsvn/**/{.*,*}",
+      "!wpsvn",
       "!.gitignore",
       "!.gitattributes",
       "!.jshintrc",
@@ -38,6 +40,7 @@
       "!package.json",
       "!phpunit.xml",
       "!Gulpfile.js",
+      "!svn_*.*",
       "!./**/*Test.php"
     ]
   }
