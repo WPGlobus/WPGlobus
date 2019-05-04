@@ -6,6 +6,10 @@
  * @author  Alex Gor(alexgff)
  */
 
+if ( file_exists( WP_PLUGIN_DIR . '/elementor/core/files/manager.php' ) ) {
+	require_once( WP_PLUGIN_DIR . '/elementor/core/files/manager.php' );
+}
+
 if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 	/**
@@ -13,12 +17,20 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 	 */
 	class WPGlobus_Elementor extends WPGlobus_Builder {
 
-		const ELEMENTOR_DATA_META_KEY = '_elementor_data';
-
 		protected $base_redirect_url = '';
 
 		protected $post_content = null;
+		
+		/**
+		 * @since 2.1.15
+		 */
+		protected static $post_css_meta_key = null;
 
+		/**
+		 * @since 2.1.15
+		 */
+		protected static $elementor_data_meta_key = null;		
+		
 		/**
 		 * Constructor.
 		 */
@@ -26,6 +38,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			parent::__construct( 'elementor' );
 
+			if ( ! empty( WPGlobus::Config()->builder->get('post_css_meta_key') ) ) {
+				self::$post_css_meta_key = WPGlobus::Config()->builder->get('post_css_meta_key');
+			}
+	
+			if ( ! empty( WPGlobus::Config()->builder->get('elementor_data_meta_key') ) ) {
+				self::$elementor_data_meta_key = WPGlobus::Config()->builder->get('elementor_data_meta_key');
+			}
+	
 			if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 				/**
 				 * @see wp-includes/revision.php
@@ -46,16 +66,38 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10 );
 
 			add_filter( 'get_post_metadata', array( $this, 'filter__post_metadata' ), 13, 4 );
-
+			
+			// @todo may be need this filter for admin, @see includes\builders\elementor\class-wpglobus-elementor-front.php
+			//add_filter( 'update_post_metadata', array( $this, 'filter__update_metadata' ), 5, 5 );						
+		
 			/**
 			 * Elementor editor footer.
 			 *
 			 * @see_file elementor\includes\editor.php
 			 */
 			add_action( 'elementor/editor/footer', array( $this, 'on__elementor_footer' ), 100 );
-
+			
+			/**
+			 * AJAX handling.
+			 */
+			if ( defined('DOING_AJAX') && DOING_AJAX )  {
+				if ( 'elementor_ajax' == $_POST['action'] && false !== strpos($_POST['actions'], '"action":"save_builder"') ) {
+					if ( class_exists( '\Elementor\Core\Files\Manager' ) ) {
+						/**
+						 * Clear Elementor cache and WPGlobus css meta.
+						 * @since 2.1.15
+						 */
+						$_fm = new \Elementor\Core\Files\Manager;
+						$_fm->clear_cache();
+						if ( ! is_null(self::$post_css_meta_key) ) {
+							update_post_meta( WPGlobus::Config()->builder->get('post_id'), self::$post_css_meta_key, '' );
+						}
+					}
+				}
+			}
+			
 			if ( is_admin() ) {
-
+			
 				add_filter( 'the_post', array( $this, 'filter__the_post' ), 5 );
 
 				/**
@@ -85,7 +127,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			}
 
 		}
-
+		
 		/**
 		 * To avoid output content with language marks from $post->post_content field on elementor builder page
 		 * if "_elementor_data" meta has not content in extra language.
@@ -115,7 +157,17 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			return $object;
 
 		}
-
+	
+		/**
+		 * @todo W.I.P
+		 */
+		public static function filter__update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
+			if ( '_elementor_css' != $meta_key ) {
+				return $check;
+			}
+			return $check;
+		}
+		
 		/**
 		 * Get meta callback.
 		 *
@@ -131,7 +183,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			$single
 		) {
 
-			if ( self::ELEMENTOR_DATA_META_KEY === $meta_key ) {
+			if ( self::$elementor_data_meta_key === $meta_key ) {
 
 				$meta_cache = wp_cache_get( $object_id, 'post_meta' );
 
@@ -142,14 +194,9 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 						$_value = '';
 
 						if ( WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
-							// @todo remove after testing
-							// $_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language(), WPGlobus::RETURN_EMPTY );
 							$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->builder->get_language() );
 						} else {
-							// @todo remove after testing
-							// if ( WPGlobus::Config()->builder->get_language() === WPGlobus::Config()->default_language ) {
-								$_value = $meta_cache[ $meta_key ][0];
-							// }
+							$_value = $meta_cache[ $meta_key ][0];
 						}
 
 						return $_value;

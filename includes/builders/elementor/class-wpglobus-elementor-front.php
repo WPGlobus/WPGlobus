@@ -6,32 +6,107 @@
  * @author  Alex Gor(alexgff)
  */
 
-// W.I.P
-// use Elementor\Core\Files\CSS\Post as Post_CSS;
+/**
+ * @see elementor\core\files\css\post.php
+ */
+use Elementor\Core\Files\CSS\Post as Post_CSS;
 
 if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 
 	/**
 	 * Class WPGlobus_Elementor_Front.
 	 */
-	class WPGlobus_Elementor_Front{
-
-		const ELEMENTOR_DATA_META_KEY = '_elementor_data';
+	class WPGlobus_Elementor_Front {
 
 		public static $file_prefix = 'post-';
 		
 		/**
+		 * @since 2.1.15
+		 */
+		protected static $post_css_meta_key = null;
+
+		/**
+		 * @since 2.1.15
+		 */
+		protected static $elementor_data_meta_key = null;	
+		
+		/**
+		 * @since 2.1.15
+		 */
+		protected static $elementor_css_meta_key = null;	
+		
+		/**
 		 * Init.
 		 */
-		public static function init() {
-			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__post_metadata' ), 5, 4 );
+		public static function init($attrs) {
+			
+			if ( ! empty($attrs['post_css_meta_key']) ) {
+				self::$post_css_meta_key = $attrs['post_css_meta_key'];
+			}
+
+			if ( ! empty($attrs['elementor_data_meta_key']) ) {
+				self::$elementor_data_meta_key = $attrs['elementor_data_meta_key'];
+			}
+
+			if ( ! empty($attrs['elementor_css_meta_key']) ) {
+				self::$elementor_css_meta_key = $attrs['elementor_css_meta_key'];
+			}
+			
+			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_metadata' ), 5, 4 );
+
+			/**
+			 * @since 2.1.15
+			 */
+			add_filter( 'update_post_metadata', array( __CLASS__, 'filter__update_metadata' ), 5, 5 );		
+
+			/**
+			 * @since 2.1.15
+			 */			
+			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'on__enqueue_styles' ), 20 );
+			
+			/**
+			 * @todo may be use elementor action instead of `wp_enqueue_scripts`.
+			 */
+			//add_action( 'elementor/frontend/after_enqueue_styles', array( __CLASS__, 'on__enqueue_styles' ) );		
 			
 			/**
 			 * @since 2.1.13
+			 * @see elementor\core\files\base.php
 			 */
-			add_filter( 'elementor/files/file_name', array( __CLASS__, 'filter__elementor_files_file_name' ), 5, 4 );
+			add_action( 'elementor/files/file_name', array( __CLASS__, 'filter__elementor_files_file_name' ), 5, 4 );
 		}
 
+		/**
+		 * @since 2.1.15
+		 */
+		public static function on__enqueue_styles() {
+
+			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return;
+			}
+			
+			$css_file = new Post_CSS( get_the_ID() );
+			
+			/**
+			 * @see elementor\core\files\css\post.php
+			 */
+			$handle = 'elementor-post-' . $css_file->get_post_id() .'-' . WPGlobus::Config()->language;
+			
+			/**
+			 * @see elementor\core\files\base.php
+			 */
+			$url = $css_file->get_url();
+			
+			wp_register_style(
+				$handle,
+				$url,
+				array(),
+				'wpglobus-' . WPGLOBUS_VERSION
+				
+			);
+			wp_enqueue_style($handle);	
+		}
+		
 		/**
 		 * Filters the file name
 		 *
@@ -75,12 +150,12 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 		 *
 		 * @return string
 		 */
-		public static function filter__post_metadata(
+		public static function filter__get_metadata(
 			$check, $object_id, $meta_key, /** @noinspection PhpUnusedParameterInspection */
 			$single
 		) {
 
-			if ( self::ELEMENTOR_DATA_META_KEY === $meta_key ) {
+			if ( self::$elementor_data_meta_key === $meta_key ) {
 
 				$meta_cache = wp_cache_get( $object_id, 'post_meta' );
 
@@ -99,33 +174,139 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 
 				}
 				
-			} elseif ( '_elementor_css' === $meta_key ) {
+			} elseif ( self::$elementor_css_meta_key === $meta_key ) {
 				
-				// @todo W.I.P
-				/*
+				if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+					return $check;
+				}
+				
 				$meta_cache = wp_cache_get( $object_id, 'post_meta' );
-
-				if ( isset( $meta_cache[ $meta_key ] ) && isset( $meta_cache[ $meta_key ][0] ) ) {
+				
+				if ( isset( $meta_cache[ self::$post_css_meta_key ] ) && isset( $meta_cache[ self::$post_css_meta_key ][0] ) ) {
 
 					$_value = '';
+					
+					$has_translations = WPGlobus_Core::has_translations( $meta_cache[ self::$post_css_meta_key ][0] );
 
-					if ( WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
-						$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->language );
-						//$_value = WPGlobus_Core::text_filter( $meta_cache[ $meta_key ][0], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
-					} else {
-						$_value = $meta_cache[ $meta_key ][0];
+					if ( $has_translations ) {
+						$_value = WPGlobus_Core::text_filter( $meta_cache[ self::$post_css_meta_key ][0], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+					}
+
+					if ( ! empty($_value) ) {
+						$_value = maybe_unserialize( $_value );
+						
+						/**
+						 * @todo may be better return value for default language.
+						 */
+						//if ( isset( $meta_cache[ self::$elementor_css_meta_key ] ) && isset( $meta_cache[ self::$elementor_css_meta_key ][0] ) ) {
+							//$_value = maybe_unserialize( $meta_cache[ self::$elementor_css_meta_key ] );
+						//}
 					}
 
 					return $_value;
-
 				}
-				// */
+
 			}
 
 			return $check;
-
 		}
+		
+		/**
+		 * @since 2.1.15
+		 */
+		public static function filter__update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
 
-	}
+			if ( self::$elementor_css_meta_key != $meta_key ) {
+				return $check;
+			}
+
+			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return $check;
+			}
+			
+			$meta_cache = wp_cache_get( $object_id, 'post_meta' );
+			
+			if ( isset( $meta_cache[ self::$post_css_meta_key ] ) && isset( $meta_cache[ self::$post_css_meta_key ][0] ) ) {
+				
+				$new_value  = $check;
+				$_tr 		= array();
+
+				foreach( WPGlobus::Config()->enabled_languages as $language ) {
+					$_s = WPGlobus_Core::text_filter( $meta_cache[ self::$post_css_meta_key ][0], $language, WPGlobus::RETURN_EMPTY );
+					if ( ! empty( $_s ) ) {
+						$_tr[$language] = $_s;
+					}
+				}
+				
+				/**
+				 * Fix for $meta_value[0].
+				 */
+				$meta_value[0] = '';
+					
+				$_tr[WPGlobus::Config()->language] = maybe_serialize($meta_value);
+				$new_value = WPGlobus_Utils::build_multilingual_string($_tr);
+				
+				if ( $new_value != $check ) {
+					
+					global $wpdb;
+					
+					$meta_value = $new_value;
+					$table = _get_meta_table('post');
+					$data  = compact( 'meta_value' );
+					$where = array(
+						'post_id'  => $object_id,
+						'meta_key' => self::$post_css_meta_key
+					);
+
+					$result = $wpdb->update( $table, $data, $where );
+					
+					if ( ! $result ) {
+						return false;
+					}
+
+				}
+				
+				return $new_value;
+				
+			} else {
+				
+				/**
+				 * $meta_cache[ $meta_key ] is undefined.
+				 */ 
+				
+				global $wpdb;
+				
+				$_tr = array();
+				$_tr[WPGlobus::Config()->language] = maybe_serialize($meta_value);
+				$new_value = WPGlobus_Utils::build_multilingual_string($_tr);
+
+				$table = _get_meta_table('post');
+
+				$result = $wpdb->insert(
+					$table, 
+					array( 
+						'post_id'  	 => $object_id, 
+						'meta_key' 	 => self::$post_css_meta_key,
+						'meta_value' => $new_value
+					), 
+					array( 
+						'%d',
+						'%s',
+						'%s'
+					) 
+				);
+				
+				if ( ! $result ) {
+					return false;
+				}
+				
+				return $new_value;
+			}
+			
+			return $check;
+
+		}	
+
+	} // end class WPGlobus_Elementor_Front.
 
 endif;

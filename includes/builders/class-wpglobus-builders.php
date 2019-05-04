@@ -72,7 +72,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
 				'path'                  => 'elementor/elementor.php',
 				'stage'                 => 'beta',
-				'beta_version'          => '2'
+				'beta_version'          => '3'
 			);
 
 			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo-premium/wp-seo-premium.php' ) ) {
