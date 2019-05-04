@@ -38,12 +38,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			parent::__construct( 'elementor' );
 
-			if ( ! empty( WPGlobus::Config()->builder->get('post_css_meta_key') ) ) {
-				self::$post_css_meta_key = WPGlobus::Config()->builder->get('post_css_meta_key');
+			$_post_css_meta_key = WPGlobus::Config()->builder->get('post_css_meta_key');
+			if ( ! empty( $_post_css_meta_key ) ) {
+				self::$post_css_meta_key = $_post_css_meta_key;
 			}
 	
-			if ( ! empty( WPGlobus::Config()->builder->get('elementor_data_meta_key') ) ) {
-				self::$elementor_data_meta_key = WPGlobus::Config()->builder->get('elementor_data_meta_key');
+			$_elementor_data_meta_key = WPGlobus::Config()->builder->get('elementor_data_meta_key');
+			if ( ! empty( $_elementor_data_meta_key ) ) {
+				self::$elementor_data_meta_key = $_elementor_data_meta_key;
 			}
 	
 			if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
