@@ -877,11 +877,11 @@ msgstr "Билдер"
 msgid "Сompatibility Settings"
 msgstr "Совместимость"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:211
+#: includes/builders/elementor/class-wpglobus-elementor.php:258
 msgid "WPGlobus languages"
 msgstr "Языки WPGlobus"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:217
+#: includes/builders/elementor/class-wpglobus-elementor.php:264
 msgid "current"
 msgstr ""
 

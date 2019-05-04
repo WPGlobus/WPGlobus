@@ -874,11 +874,11 @@ msgstr "Builder"
 msgid "Сompatibility Settings"
 msgstr "Сompatibility Settings"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:211
+#: includes/builders/elementor/class-wpglobus-elementor.php:258
 msgid "WPGlobus languages"
 msgstr "WPGlobus languages"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:217
+#: includes/builders/elementor/class-wpglobus-elementor.php:264
 msgid "current"
 msgstr ""
 

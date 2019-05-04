@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.1.15 =
+
+* Internal: (Builders/Elementor) Beta-3 version of the `Elementor` support.
+
 = 2.1.14 =
 
 * Fixed: (Core/JS) Issue with an incorrect behavior of the dialog form with `hidden` class.
@@ -226,16 +230,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.1.13 =
 
-* Internal: (Builders/Elementor) Beta-2 version for Elementor support.
+* Internal: (Builders/Elementor) Beta-2 version of the `Elementor` support.
 
 = 2.1.12 =
 
 * Internal: (Core/Options) Updated the `Compatibility` tab on the `WPGlobus Options` page.
-
-= 2.1.11 =
-
-* Fixed: (Vendor/ACF) Do not reset the `table` field of the `ACF:Table Field` plugin.
-* Fixed: Do not filter meta and multilingual fields for no-builder pages.
 
 = Earlier versions and Add-ons =
 
