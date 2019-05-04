@@ -52,15 +52,15 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			);
 
 			self::$add_on['js_composer'] = array(
-				'id'                    => 'js_composer',
-				'role'                  => 'builder',
-				'supported_min_version' => '5.4.0',
-				'const'                 => 'WPB_VC_VERSION',
-				'plugin_name'           => 'WPBakery Page Builder',
+				'id'                      => 'js_composer',
+				'role'                    => 'builder',
+				'supported_min_version'   => '5.4.0',
+				'const'                   => 'WPB_VC_VERSION',
+				'plugin_name'             => 'WPBakery Page Builder',
 				'admin_bar_builder_label' => 'WPBakery PB',
-				'plugin_uri'            => 'https://wpbakery.com/',
-				'path'                  => 'js_composer/js_composer.php',
-				'stage'                 => 'production',
+				'plugin_uri'              => 'https://wpbakery.com/',
+				'path'                    => 'js_composer/js_composer.php',
+				'stage'                   => 'production',
 			);
 
 			self::$add_on['elementor'] = array(
@@ -72,7 +72,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_uri'            => 'https://wordpress.org/plugins/elementor/',
 				'path'                  => 'elementor/elementor.php',
 				'stage'                 => 'beta',
-				'beta_version'          => '3'
+				'beta_version'          => '3',
 			);
 
 			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo-premium/wp-seo-premium.php' ) ) {
@@ -219,7 +219,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				 * @since 1.9.17
 				 */
 				if ( ! $builder ) {
-				// if ( ! $builder || ! $builder['builder_page'] ) {
+					// if ( ! $builder || ! $builder['builder_page'] ) {
 					$builder = self::is_js_composer();
 					if ( $builder && $builder['builder_page'] ) {
 						return $builder;
@@ -239,7 +239,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						} else {
 							/** @noinspection PhpIncludeInspection */
 							include_once WPGlobus::$PLUGIN_DIR_PATH . 'includes/builders/elementor/class-wpglobus-elementor-front.php';
-							WPGlobus_Elementor_Front::init($builder);
+							WPGlobus_Elementor_Front::init( $builder );
 						}
 					}
 				}
@@ -429,21 +429,22 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 					if ( 'admin-ajax.php' === $pagenow ) {
 
-						// phpcs:ignore WordPress.CSRF.NonceVerification
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						if ( ! isset( $_REQUEST['action'] ) || 'elementor_ajax' !== $_REQUEST['action'] ) {
 							return false;
 						}
-						// phpcs:ignore WordPress.CSRF.NonceVerification
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						if ( false !== strpos( $_REQUEST['actions'], 'save_builder' ) ) {
 							$ajax_actions = 'save_builder';
-							// phpcs:ignore WordPress.CSRF.NonceVerification
+							// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						} elseif ( false !== strpos( $_REQUEST['actions'], '"action":"render_widget"' ) ) {
 							$ajax_actions = 'render_widget';
 						} else {
 							return false;
 						}
 						$load_elementor = true;
-						$post_id        = sanitize_text_field( $_REQUEST['editor_post_id'] );
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$post_id = sanitize_text_field( $_REQUEST['editor_post_id'] );
 
 					} elseif ( 'index.php' === $pagenow ) {
 
@@ -460,7 +461,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					} elseif ( 'post.php' === $pagenow ) {
 
 						$is_admin = true;
-						// phpcs:ignore WordPress.CSRF.NonceVerification
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) {
 							//$is_admin = false;
 							$load_elementor = true;
@@ -473,11 +474,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						 */
 						$cpt_support = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
 
-						// phpcs:ignore WordPress.CSRF.NonceVerification
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						if ( isset( $_GET['post_type'] ) ) {
 							/**
 							 * For post-new.php page.
 							 */
+							// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 							$post_type = sanitize_text_field( $_GET['post_type'] );
 						}
 
@@ -510,17 +512,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					}
 
 					$_attrs = array(
-						'id'           => 'elementor',
-						'version'      => ELEMENTOR_VERSION,
-						'is_admin'     => $is_admin,
-						'class'        => 'WPGlobus_Elementor',
-						'post_type'    => $post_type,
-						'post_id'      => $post_id,
-						'builder_page' => false,
-						'ajax_actions' => $ajax_actions,
-						'post_css_meta_key' 	  => '_wpglobus_elementor_css',
+						'id'                      => 'elementor',
+						'version'                 => ELEMENTOR_VERSION,
+						'is_admin'                => $is_admin,
+						'class'                   => 'WPGlobus_Elementor',
+						'post_type'               => $post_type,
+						'post_id'                 => $post_id,
+						'builder_page'            => false,
+						'ajax_actions'            => $ajax_actions,
+						'post_css_meta_key'       => '_wpglobus_elementor_css',
 						'elementor_data_meta_key' => '_elementor_data',
-						'elementor_css_meta_key'  => '_elementor_css'
+						'elementor_css_meta_key'  => '_elementor_css',
 					);
 
 					if ( $load_elementor ) {
@@ -580,7 +582,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					 * Before update post we can get empty $_GET array.
 					 * Let's check $_POST.
 					 */
-					// phpcs:ignore WordPress.CSRF.NonceVerification
+					// phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$post_id = isset( $_POST['post_ID'] ) ? sanitize_text_field( $_POST['post_ID'] ) : '';
 				}
 
@@ -853,27 +855,27 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							$load_gutenberg = true;
 
 							$actions = array( 'edit', 'editpost' );
-							// phpcs:ignore WordPress.CSRF.NonceVerification
+							// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 							if ( ! empty( $_GET['action'] ) ) {
-								// phpcs:ignore WordPress.CSRF.NonceVerification
+								// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 								if ( in_array( $_GET['action'], $actions, true ) ) {
-									// phpcs:ignore WordPress.CSRF.NonceVerification
+									// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 									if ( array_key_exists( 'classic-editor', $_GET ) ) {
 										$load_gutenberg = false;
 									}
-									// phpcs:ignore WordPress.CSRF.NonceVerification
+									// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 									if ( isset( $_GET['meta_box'] ) && 1 === (int) $_GET['meta_box'] ) {
 										$load_gutenberg = true;
 									}
 								}
 							} elseif ( ! empty( $_POST['action'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-								// phpcs:ignore WordPress.CSRF.NonceVerification
+								// phpcs:ignore WordPress.Security.NonceVerification.Missing
 								if ( in_array( $_POST['action'], $actions, true ) ) {
-									// phpcs:ignore WordPress.CSRF.NonceVerification
+									// phpcs:ignore WordPress.Security.NonceVerification.Missing
 									if ( array_key_exists( 'classic-editor', $_POST ) ) {
 										$load_gutenberg = false;
 									}
-									// phpcs:ignore WordPress.CSRF.NonceVerification
+									// phpcs:ignore WordPress.Security.NonceVerification.Missing
 									if ( isset( $_POST['meta_box'] ) && 1 === (int) $_POST['meta_box'] ) {
 										$load_gutenberg = true;
 									}
@@ -1060,7 +1062,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		protected static function is_gutenberg_ajax() {
 			$result = false;
 
-			// phpcs:ignore WordPress.CSRF.NonceVerification
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( empty( $_POST ) || empty( $_POST['action'] ) ) {
 				return $result;
 			}
@@ -1165,7 +1167,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					/**
 					 * Case when Update button was clicked on term.php page .
 					 */
-					// phpcs:ignore WordPress.CSRF.NonceVerification
+					// phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$tax = empty( $_POST['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) );
 
 					if ( $tax ) {
@@ -1208,7 +1210,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 */
 		protected static function get_attrs( $attrs ) {
 			$_attrs = array_merge( self::$attrs, $attrs );
-			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIF
+			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
 			if ( isset( $_attrs['is_admin'] ) && ! $_attrs['is_admin'] ) {
 				// do nothing.
 			} else {
@@ -1222,17 +1224,20 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					 *
 					 * @since WPGlobus 2.0 we are working with single post only.
 					 */
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					$_attrs['post_id'] = sanitize_text_field( $_GET['post'] );
-				} elseif ( isset( $_REQUEST['post_ID'] ) && is_string( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				} elseif ( isset( $_REQUEST['post_ID'] ) && is_string( $_REQUEST['post_ID'] ) ) {
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					$_attrs['post_id'] = sanitize_text_field( $_REQUEST['post_ID'] );
 					// } else {
 					// @todo Check additional ways to get post ID.
 				}
 			}
-			
+
 			// @todo may be disable post type here.
 			// $_attrs['builder_page'] = false;
-			// error_log(print_r($_attrs, true));			
+			// error_log(print_r($_attrs, true));
 			return $_attrs;
 		}
 
