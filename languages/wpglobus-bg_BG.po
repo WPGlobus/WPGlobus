@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-04-06 13:51+0000\n"
+"PO-Revision-Date: 2019-05-12 13:40+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/bg_BG/)\n"
@@ -743,43 +743,43 @@ msgid ""
 "technical information to your email message."
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:58
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
 msgid "WPGlobus Recommends:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:67,
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:71,
 #: includes/options/class-wpglobus-options.php:866
 msgid "WPGlobus for WooCommerce"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:71
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:75
 msgid ""
 "Translate product titles and descriptions, product categories, tags and "
 "attributes."
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:76
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
 msgid "Get it now:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:86
-msgid "WPGlobus Multi-Currency"
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:90
+msgid "WooCommerce Multi-Currency"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:90
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:94
 msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:95,
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:154
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:99,
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:158
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:152
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:156
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:164
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:168
 msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
@@ -796,11 +796,11 @@ msgstr ""
 msgid "Сompatibility Settings"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:258
+#: includes/builders/elementor/class-wpglobus-elementor.php:260
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:264
+#: includes/builders/elementor/class-wpglobus-elementor.php:266
 msgid "current"
 msgstr ""
 

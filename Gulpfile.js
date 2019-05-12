@@ -9,6 +9,9 @@ gulp.task("sass", require("./gulp_modules/task-sass"));
 gulp.task("uglify", require("./gulp_modules/task-uglify"));
 gulp.task("product-info", require("./gulp_modules/task-product-info") );
 
-gulp.task("dist", ["readme", "pomo", "sass", "uglify", "product-info"], require("./gulp_modules/task-dist"));
+// With ZIP.
+// gulp.task("dist", ["readme", "pomo", "sass", "uglify", "product-info"], require("./gulp_modules/task-dist"));
+// No ZIP.
+gulp.task("dist", ["readme", "pomo", "sass", "uglify", "product-info"]);
 
 gulp.task("default", ["dist"]);

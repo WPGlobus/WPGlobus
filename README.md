@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 4.9
 
-Tested up to: 5.1
+Tested up to: 5.2
 
 Requires PHP: 5.6
 
@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.0 ###
+
+
+* Compatibility: WordPress 5.2
+
+* Fixed: (Customizer) WPGlobus language selector alignment for WordPress 5.2.
+
 ### 2.1.15 ###
 
 
@@ -317,11 +324,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 
 * Internal: (Builders/Elementor) Beta-2 version of the `Elementor` support.
-
-### 2.1.12 ###
-
-
-* Internal: (Core/Options) Updated the `Compatibility` tab on the `WPGlobus Options` page.
 
 ### Earlier versions and Add-ons ###
 

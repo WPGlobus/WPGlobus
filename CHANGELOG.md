@@ -3,7 +3,8 @@
 ## Changelog ##
 
 2019-05-12 - version 2.2.0
-* Internal: (Customizer) WPGlobus language selector alignment for WordPress 5.2.
+* Compatibility: WordPress 5.2
+* Fixed: (Customizer) WPGlobus language selector alignment for WordPress 5.2.
 
 2019-05-04 - version 2.1.15
 * Internal: (Builders/Elementor) Beta-3 version of the `Elementor` support.

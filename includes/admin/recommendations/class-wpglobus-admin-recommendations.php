@@ -2,9 +2,8 @@
 /**
  * WPGlobus Recommendations.
  *
- * @package WPGlobus\Admin
- *
  * @since   1.8.7
+ * @package WPGlobus\Admin
  */
 
 /**
@@ -12,8 +11,13 @@
  */
 class WPGlobus_Admin_Recommendations {
 
+	/**
+	 * True if need to run JS.
+	 *
+	 * @var bool
+	 */
 	protected static $run_js = false;
-	
+
 	/**
 	 * Setup actions and filters.
 	 */
@@ -27,11 +31,11 @@ class WPGlobus_Admin_Recommendations {
 	/**
 	 * Recommendations for WooCommerce.
 	 *
-	 * @internal
-	 *
 	 * @param array $settings Passed by WooCommerce.
 	 *
 	 * @return array
+	 *
+	 * @internal
 	 */
 	public static function for_woocommerce( $settings ) {
 		// Ugly set of "IFs" to display heading only if needed, and only once.
@@ -44,7 +48,7 @@ class WPGlobus_Admin_Recommendations {
 			$need_to_recommend_wpg_wc = true;
 		}
 
-		if ( ! is_plugin_active( 'wpglobus-multi-currency/wpglobus-multi-currency.php' ) ) {
+		if ( ! is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) {
 			$need_to_show_wc_heading  = true;
 			$need_to_recommend_wpg_mc = true;
 		}
@@ -83,7 +87,7 @@ class WPGlobus_Admin_Recommendations {
 		if ( $need_to_recommend_wpg_mc ) {
 			$url   = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-multi-currency/';
 			$id    = 'wpglobus-recommend-wpg-mc';
-			$title = '&bull; ' . __( 'WPGlobus Multi-Currency', 'wpglobus' );
+			$title = '&bull; ' . __( 'WooCommerce Multi-Currency', 'wpglobus' );
 			$desc  =
 				'<p class="wp-ui-text-notification">' .
 				'<strong>' .
@@ -139,35 +143,35 @@ class WPGlobus_Admin_Recommendations {
 
 		global $pagenow;
 
-		if ( 'post-new.php' == $pagenow ) {
+		if ( 'post-new.php' === $pagenow ) {
 			return;
 		}
-	
+
 		$container_start = '<p id="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
 		$container_end   = '</p>';
 
 		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
 			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
-			echo $container_start; // WPCS: XSS ok.
+			echo $container_start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			esc_html_e( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
 			echo ' ';
 			esc_html_e( 'Check it out:', 'wpglobus' );
 			echo ' ';
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $url ) . '</a>';
-			echo $container_end; // WPCS: XSS ok.
+			echo $container_end; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			self::$run_js = true;
 
 		} elseif ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
 			$url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
-			echo $container_start; // WPCS: XSS ok.
+			echo $container_start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			esc_html_e( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
 			echo ' ';
-			// Do not translate
+			// Do not translate.
 			$msg = __( 'Go to WPGlobus Plus Options page', 'wpglobus-plus' );
 
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $msg ) . '.</a>';
-			echo $container_end; // WPCS: XSS ok.
+			echo $container_end; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			self::$run_js = true;
 
@@ -175,8 +179,10 @@ class WPGlobus_Admin_Recommendations {
 	}
 
 	/**
+	 * Action wpglobus_gutenberg_metabox.
+	 *
 	 * @since 1.9.17
-	 */		
+	 */
 	public static function on__gutenberg_metabox() {
 
 		if ( WPGlobus::Config()->builder->is_running() ) {
@@ -185,33 +191,34 @@ class WPGlobus_Admin_Recommendations {
 		}
 
 	}
-	
+
 	/**
+	 * Action admin_footer.
+	 *
 	 * @since 1.9.17
-	 */	
+	 */
 	public static function on__admin_footer() {
 
 		if ( ! self::$run_js ) {
 			return;
 		}
-		
+
 		if ( ! WPGlobus::Config()->builder->is_running() ) {
 			return;
-		}		
-		
-		if ( WPGlobus::Config()->builder->get_language() == WPGlobus::Config()->default_language ) {
+		}
+
+		if ( WPGlobus::Config()->builder->get_language() === WPGlobus::Config()->default_language ) {
 			return;
 		}
 
 		?>
-		<script type='text/javascript'>
-			/* <![CDATA[ */
-			jQuery('#edit-slug-box').css({'display':'none'});
+		<script>
+			var $edit_slug_box = jQuery('#edit-slug-box');
+			$edit_slug_box.css({'display': 'none'});
 			var wpglobus_slug_recomm_box = jQuery('#wpglobus-plus-slug-recommendation').remove();
-			jQuery('#edit-slug-box').before(wpglobus_slug_recomm_box);
-			/* ]]> */
+			$edit_slug_box.before(wpglobus_slug_recomm_box);
 		</script>
-		<?php		
+		<?php
 	}
-	
+
 }
