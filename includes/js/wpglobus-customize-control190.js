@@ -24,12 +24,13 @@ jQuery(document).ready(function ($) {
 		widgetKeep: false,
 		action: false,
 		customizeSave: false,
-		selectorHtml: '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span class="current-language" style="font-weight:bold;">{{language}}</span>',
+		selectorHtml: '',
 		settingsSectionExpand: function() {
 			$(document).triggerHandler( 'wpglobus_fields_settings_section_expand', [this, api] );		
 		},
 		init: function(args) {
 
+			api.selectorHtml = WPGlobusCustomize.selector_html;
 			api.setTitle();
 
 			if ( WPGlobusCustomizeOptions.themeEnabled == 'false' ) {

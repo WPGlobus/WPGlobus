@@ -267,6 +267,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 */
 		public static function action__customize_controls_enqueue_scripts() {
 
+			global $wp_version;
+		
 			/**
 			 * @see wp.customize.control elements
 			 * for example wp.customize.control('blogname');
@@ -435,6 +437,14 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				$selector_type = 'dropdown';				
 			}
 			
+			/**
+			 * @since 2.2.0
+			 */
+			$selector_html = '<span style="margin-left:5px;" class="wpglobus-icon-globe"></span><span class="current-language" style="font-weight:bold;">{{language}}</span>'; 
+			if ( version_compare( $wp_version, '5.1.999', '>' ) ) {
+				$selector_html = '<span style="position:fixed;top:-7px;">' . $selector_html . '</span>'; 
+			}
+			
 			wp_enqueue_script(
 				'wpglobus-customize-control190',
 				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-customize-control190' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -455,7 +465,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					'setLinkBy'				=> $set_link_by,
 					'disabledSections'		=> $disabled_sections,
 					'controlClass'			=> 'wpglobus-customize-control',
-					'changeset_uuid'		=> $changeset_uuid
+					'changeset_uuid'		=> $changeset_uuid,
+					'selector_html'			=> $selector_html
 				)
 			);
 
