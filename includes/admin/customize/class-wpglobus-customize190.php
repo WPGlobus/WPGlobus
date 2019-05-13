@@ -99,18 +99,23 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$mods = get_theme_mods();
 
 			$filtered_mods = array();
-			foreach ( $mods as $mod_key => $mod_value ) {
 
-				if ( in_array( $mod_key, $excluded_mods, true ) ) {
-					continue;
+			if ( $mods ) {
+				
+				foreach ( $mods as $mod_key => $mod_value ) {
+
+					if ( in_array( $mod_key, $excluded_mods, true ) ) {
+						continue;
+					}
+
+					if ( ! is_string( $mod_value ) ) {
+						continue;
+					}
+
+					$filtered_mods[ $mod_key ] = $mod_value;
+
 				}
-
-				if ( ! is_string( $mod_value ) ) {
-					continue;
-				}
-
-				$filtered_mods[ $mod_key ] = $mod_value;
-
+				
 			}
 
 			/**
