@@ -2057,6 +2057,19 @@ class WPGlobus {
 				 */
 				$disabled_fields = apply_filters( 'wpglobus_disabled_acf_fields', array(), $this->vendors_scripts['ACFPRO'] );
 
+				/**
+				 * @since 2.2.1
+				 * @todo may be add filter for $actions array.
+				 */
+				$actions = array(
+					'fixTextFields' => false
+				);
+				if ( defined('ACF_VERSION') ) {
+					if ( version_compare( ACF_VERSION, '5.8.0', '>=' ) ) {
+						$actions['fixTextFields'] = true;
+					}
+				}
+
 				wp_register_script(
 					'wpglobus-acf',
 					self::$PLUGIN_DIR_URL . 'includes/js/wpglobus-vendor-acf' . self::$_SCRIPT_SUFFIX . '.js',
@@ -2071,8 +2084,10 @@ class WPGlobus {
 					array(
 						'wpglobus_version' => WPGLOBUS_VERSION,
 						'pro'              => $this->vendors_scripts['ACFPRO'] ? true : false,
+						'acf_version'      => defined('ACF_VERSION') ? ACF_VERSION : false,
+						'actions'      	   => $actions,
 						'fields'           => array(),
-						'disabledFields'   => $disabled_fields,
+						'disabledFields'   => $disabled_fields
 					)
 				);
 

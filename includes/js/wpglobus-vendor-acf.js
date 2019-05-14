@@ -21,11 +21,12 @@ jQuery(document).ready(function ($) {
 	}
 
     var api = {
-        option       : {},
-        init         : function (args) {
+        option: {},
+        init: function (args) {
             api.option = $.extend(api.option, args);
             if (api.option.pro) {
-               api.startAcf('.acf-field');
+				api.startAcf('.acf-field');
+				api.runActions();
             } else {
                 //api.startAcf('.acf_postbox .field');
 				// @since 1.9.17
@@ -38,6 +39,25 @@ jQuery(document).ready(function ($) {
             }
 			api.attachListeners();
         },
+        runActions: function() {
+			if ( 'undefined' !== typeof WPGlobusAcf.actions.fixTextFields && WPGlobusAcf.actions.fixTextFields ) {
+				api.fixTextFields();   
+			}
+		},
+        fixTextFields: function() {
+			// fix hidden WPGlobus dialog start icon with ACF Pro from v.5.8
+			$.each(WPGlobusAcf.fields, function(i, id){
+				var $tf = $('input[type="text"]#'+id);
+				if ( $tf.length == 1 ) {
+					var $tfp = $tf.parent('.acf-input-wrap');
+					if ( $tfp.length == 1 ) {
+						if ( $tfp.hasClass('acf-input-wrap') ) {
+							$tfp.css('overflow','visible');
+						}
+					}
+				}
+			});
+		},
         isDisabledField: function(id) {
             var res = false;
 
