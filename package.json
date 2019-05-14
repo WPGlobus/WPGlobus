@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "private": true,
@@ -30,7 +30,7 @@
     "gulp-sass": "4.0.2",
     "gulp-sourcemaps": "2.6.5",
     "gulp-uglify": "3.0.2",
-    "gulp-vinyl-zip": "^2.1.2",
+    "gulp-vinyl-zip": "2.1.2",
     "gulp-wp-pot": "2.3.5",
     "plugin-error": "1.0.1",
     "through2": "3.0.1"

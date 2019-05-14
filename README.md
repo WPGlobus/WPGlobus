@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.1 ###
+
+
+* Fixed: (Vendor/Acf) Fixed hidden WPGlobus dialog start icon with ACF Pro from v.5.8
+
+* Fixed: (Customizer) Fixed PHP Warning `Invalid argument supplied for foreach`.
+
 ### 2.2.0 ###
 
 
@@ -319,11 +326,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Added: (Core/Builders) Element `admin_bar_builder_label` to the WP admin bar.
 
 * Internal: (Flags) Added `purple.globe` icon.
-
-### 2.1.13 ###
-
-
-* Internal: (Builders/Elementor) Beta-2 version of the `Elementor` support.
 
 ### Earlier versions and Add-ons ###
 

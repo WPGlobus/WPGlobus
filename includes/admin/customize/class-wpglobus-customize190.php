@@ -68,8 +68,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			/**
 			 * Filter customize_changeset_save_data.
 			 *
+			 * @see   wp-includes\class-wp-customize-manager.php
 			 * @since 1.9.3
-			 * @see wp-includes\class-wp-customize-manager.php
 			 */
 			add_filter(
 				'customize_changeset_save_data',
@@ -101,7 +101,6 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			$filtered_mods = array();
 
 			if ( $mods ) {
-				
 				foreach ( $mods as $mod_key => $mod_value ) {
 
 					if ( in_array( $mod_key, $excluded_mods, true ) ) {
@@ -115,7 +114,6 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 					$filtered_mods[ $mod_key ] = $mod_value;
 
 				}
-				
 			}
 
 			/**
@@ -279,6 +277,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 						$arr1[ WPGlobus::Config()->enabled_languages[ $k ] ] = $val;
 					}
 				}
+
 				return WPGlobus_Utils::build_multilingual_string( $arr1 );
 			}
 
@@ -291,7 +290,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 *
 		 * @param WP_Customize_Manager $wp_customize Customize Manager.
 		 */
-		public static function action__customize_register( WP_Customize_Manager $wp_customize ) {}
+		public static function action__customize_register( WP_Customize_Manager $wp_customize ) {
+		}
 
 		/**
 		 * Load Customize Preview JS
@@ -502,8 +502,9 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 *
 			 * @since 1.9.0
 			 *
-			 * @param string $selector_type Name of the current selector type.
+			 * @param string $selector_type  Name of the current selector type.
 			 * @param array  $selector_types An array of existing selector types.
+			 *
 			 * @return string
 			 */
 			$selector_type = apply_filters( 'wpglobus_customize_language_selector_type', $selector_type, $selector_types );
