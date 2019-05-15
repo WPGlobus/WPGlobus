@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2019-05-15 - version 2.2.2
-* Fixed: (Vendor/Acf) Changed attribute to 'height' for text element.
+* Fixed: (Vendor/Acf) Changed attribute to 'height' for text elements.
 
 2019-05-14 - version 2.2.1
 * Fixed: (Vendor/Acf) Fixed hidden WPGlobus dialog start icon with ACF Pro from v.5.8

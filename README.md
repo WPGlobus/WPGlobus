@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.2 ###
+
+
+* Fixed: (Vendor/Acf) Changed attribute to 'height' for text elements.
+
 ### 2.2.1 ###
 
 
@@ -317,15 +322,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 
 * Internal: (Builders/Elementor) Beta-3 version of the `Elementor` support.
-
-### 2.1.14 ###
-
-
-* Fixed: (Core/JS) Issue with an incorrect behavior of the dialog form with `hidden` class.
-
-* Added: (Core/Builders) Element `admin_bar_builder_label` to the WP admin bar.
-
-* Internal: (Flags) Added `purple.globe` icon.
 
 ### Earlier versions and Add-ons ###
 
