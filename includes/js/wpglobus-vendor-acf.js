@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
 					var $tfp = $tf.parent('.acf-input-wrap');
 					if ( $tfp.length == 1 ) {
 						if ( $tfp.hasClass('acf-input-wrap') ) {
-							$tfp.css('overflow','visible');
+							$tfp.css('height','auto');
 						}
 					}
 				}
