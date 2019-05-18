@@ -73,6 +73,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		// return;
 		
+		if ( ! empty( WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) && '1' == WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) {
+			return;
+		}		
+		
 		/**
 		 * Enqueue the bundled block JS file.
 		 */
