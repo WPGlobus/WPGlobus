@@ -46,6 +46,15 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			) );
 
 			/**
+			 * @see wp-includes\script-loader.php
+			 * @since 2.2.3
+			 */
+			add_action( 'enqueue_block_assets', array(
+				$this,
+				'on__enqueue_block_assets'
+			) );
+
+			/**
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array( $this, 'filter__seo_meta_box_title' ) );
@@ -54,6 +63,37 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 	}
 
+	/**
+	 * @since 2.2.3
+	 */
+	public function on__enqueue_block_assets() {
+		
+		$script_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.js';
+		$style_file  = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.css';
+
+		// return;
+		
+		/**
+		 * Enqueue the bundled block JS file.
+		 */
+		wp_enqueue_script(
+			'wpglobus-block-editor-js',
+			$script_file,
+			array('wp-i18n', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api'),
+			WPGLOBUS_VERSION
+		);
+
+		/** 
+		 * Enqueue frontend and editor block styles.
+		 */
+		wp_enqueue_style(
+			'wpglobus-block-editor-css',
+			$style_file,
+			'',
+			WPGLOBUS_VERSION
+		);		
+	}
+	
 	/**
 	 * Translate post.
 	 *
@@ -280,11 +320,18 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			return;
 		}
 
-		$tabs = $this->get_switcher_box( $pagenow );
+		/**
+		 * @since 2.2.3
+		 */
+		$tabs = '';
+		if ( ! empty( WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) && '1' == WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) {
+			$tabs = $this->get_switcher_box( $pagenow );
+		}
 
 		$i18n           = array();
-		$i18n['reload'] = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
-
+		$i18n['reload']    = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
+		$i18n['save_post'] = esc_html__( 'Before switching the language, please save draft or publish.', 'wpglobus' );
+		
 		/**
 		 * We have Gutenberg in core since WP 5.0.
 		 *
@@ -303,6 +350,33 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		$yoast_seo = false;
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$yoast_seo = true;
+		}
+
+		/**
+		 * @since 2.2.3
+		 */
+		$block_editor_tab_url = admin_url(
+			add_query_arg(
+				array( 'page' => WPGlobus::OPTIONS_PAGE_SLUG, 'tab' => 'block-editor' ),
+				'admin.php'
+			)
+		);
+		
+		/**
+		 * @since 2.2.3
+		 */		
+		$store_link = 'https://wpglobus.com/shop/';
+		
+		/**
+		 * @since 2.2.3
+		 */
+		$flags_url = array(); 
+		foreach( WPGlobus::Config()->enabled_languages as $language ) { 
+			if ( file_exists( WPGlobus::Config()->flag_path['big'] . WPGlobus::Config()->flag[ $language ] ) ) {
+				$flags_url[ $language ] = WPGlobus::Config()->flag_urls['big'] . WPGlobus::Config()->flag[ $language ];
+			} else {
+				$flags_url[ $language ] = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
+			}
 		}
 
 		wp_register_script(
@@ -328,6 +402,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				'defaultLanguage'  => WPGlobus::Config()->default_language,
 				'i18n'             => $i18n,
 				'yoastSeo'         => $yoast_seo,
+				'flags_url'        => $flags_url,
+				'store_link' 	   => $store_link,
+				'block_editor_tab_url' => $block_editor_tab_url,
 			)
 		);
 	}
