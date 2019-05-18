@@ -16,9 +16,13 @@ jQuery(document).ready(function ($) {
 	var api = {
 		initDone: false,
 		languageSelectorBoxDelta: 0,
+		oldLanguageSelector: false,
 		languageSelectorEnabled: true,
 		parseBool: function(b)  {
 			return !(/^(false|0)$/i).test(b) && !!b;
+		},
+		isOldLanguageSelector: function() {
+			return api.oldLanguageSelector;
 		},
 		init: function() {
 			WPGlobusGutenberg.yoastSeo = api.parseBool(WPGlobusGutenberg.yoastSeo);
@@ -62,6 +66,10 @@ jQuery(document).ready(function ($) {
 			}			
 		},
 		setTabs: function() {
+			if ( WPGlobusGutenberg.tabs.length == 0 ) {
+				return;
+			}
+			api.oldLanguageSelector = true;
 			var intervalID = setInterval( function() {
 				/** var $toolbar = $('.edit-post-header'); **/
 				var $toolbar = $('.edit-post-header__settings');
@@ -84,6 +92,9 @@ jQuery(document).ready(function ($) {
 			}, 200);
 		},
 		setSelectorStatus: function() {
+			if ( ! api.isOldLanguageSelector() ) {
+				return;
+			}
 			$('.wpglobus-gutenberg-selector-box').css({'opacity':'0.2'}).attr('onclick','return false;');
 			api.languageSelectorEnabled = false;
 			var iID = setInterval( function() {
@@ -113,7 +124,9 @@ jQuery(document).ready(function ($) {
 			}, 500);
 		},
 		attachListeners: function() {
-			
+			if ( ! api.isOldLanguageSelector() ) {
+				return;
+			}			
 			/**
 			 * Language selector.
 			 */
