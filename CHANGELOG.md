@@ -2,6 +2,8 @@
 
 ## Changelog ##
 
+* Added: (Builders/Gutenberg) New language switcher.
+
 2019-05-15 - version 2.2.2
 * Fixed: (Vendor/Acf) Changed attribute to 'height' for text elements.
 
