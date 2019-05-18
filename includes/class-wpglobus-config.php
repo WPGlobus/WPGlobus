@@ -729,6 +729,15 @@ class WPGlobus_Config {
 		}
 
 		/**
+		 * Old fashioned language switcher for Block Editor (Gutenberg).
+		 * @since 2.2.3
+		 */
+		if ( isset( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) ) {
+			$this->block_editor_old_fashioned_language_switcher = $wpglobus_option['block_editor_old_fashioned_language_switcher'];
+			unset( $wpglobus_option['block_editor_old_fashioned_language_switcher'] );
+		}
+		
+		/**
 		 * Get flag files without path
 		 */
 		$option = get_option( $this->option_flags );
