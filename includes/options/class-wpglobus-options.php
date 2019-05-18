@@ -345,8 +345,13 @@ class WPGlobus_Options {
 									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
 											class="wpglobus-options-tab"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<h2><?php echo esc_html( $section['title'] ); ?></h2>
 										<?php
+										if ( empty($section['caption']) ) {	?>
+											<h2><?php echo esc_html( $section['title'] ); ?></h2>
+										<?php } else { ?>
+											<h2><?php echo esc_html( $section['caption'] ); ?></h2>
+										<?php
+										}
 										if ( ! empty( $section['fields'] ) ) {
 											foreach ( $section['fields'] as $field ) {
 												$field = $this->sanitize_field( $field );
@@ -499,6 +504,7 @@ class WPGlobus_Options {
 		$this->sections['browser_redirect'] = $this->section_browser_redirect();
 		$this->sections['customizer']       = $this->section_customizer();
 		$this->sections['compatibility']    = $this->section_compatibility();
+		$this->sections['block-editor']     = $this->section_block_editor();
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
@@ -1430,6 +1436,47 @@ class WPGlobus_Options {
 			'icon'        => 'dashicons dashicons-clipboard',
 			'fields'      => $fields,
 		);
+	}
+
+	/**
+	 * Section "Block Editor".
+	 *
+	 * @since 2.2.3
+	 * @return array
+	 */
+	protected function section_block_editor() {
+
+		$fields = array();
+
+		$wpglobus_option = get_option( $this->args['opt_name'] );
+
+		$options = array();
+
+		/**
+		 * When we add more options, need to update the @see WPGlobus_Options::sanitize_posted_data() method.
+		 */
+		$_checked = false;
+		if ( ! empty( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) && 1 == $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) {
+			$_checked = true;
+		}
+
+		$fields[] =
+			array(
+				'id'      => 'block_editor_old_fashioned_language_switcher',
+				'type'    => 'wpglobus_checkbox',
+				'checked' => $_checked,
+				'name'    => 'wpglobus_option[block_editor_old_fashioned_language_switcher]',
+				'title'   => esc_html__( 'Old fashioned language switcher', 'wpglobus' ),
+				'label'   => esc_html__( 'Enabled', 'wpglobus' ),
+			);
+			
+		return array(
+			'wpglobus_id' => 'wpglobus_block_editor',
+			'title'       => esc_html__( 'Block Editor', 'wpglobus' ),
+			'caption'     => esc_html__( 'Block Editor Options', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-layout',
+			'fields'      => $fields,
+		);			
 	}
 
 	/**
