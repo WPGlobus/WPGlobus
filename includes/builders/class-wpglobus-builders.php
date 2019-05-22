@@ -217,9 +217,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 				/**
 				 * @since 1.9.17
+				 * @since 2.2.3
 				 */
-				if ( ! $builder ) {
-					// if ( ! $builder || ! $builder['builder_page'] ) {
+				if ( ! $builder || ! $builder['builder_page'] ) {
 					$builder = self::is_js_composer();
 					if ( $builder && $builder['builder_page'] ) {
 						return $builder;
