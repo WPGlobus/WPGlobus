@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.3 ###
+
+
+* Added: (Builders/Gutenberg) New language switcher.
+
+* Internal: (Builders/JS_Composer) Start `js_composer` as a builder with WP 5.
+
 ### 2.2.2 ###
 
 
@@ -317,11 +324,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Compatibility: WordPress 5.2
 
 * Fixed: (Customizer) WPGlobus language selector alignment for WordPress 5.2.
-
-### 2.1.15 ###
-
-
-* Internal: (Builders/Elementor) Beta-3 version of the `Elementor` support.
 
 ### Earlier versions and Add-ons ###
 

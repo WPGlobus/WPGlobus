@@ -5,7 +5,7 @@
  * @package     WPGlobus\Admin\Options
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -169,7 +169,8 @@ class WPGlobus_Options {
 					array(
 						'page' => $this->page_slug,
 						'tab'  => '{*}',
-					), admin_url( 'admin.php' )
+					),
+					admin_url( 'admin.php' )
 				),
 			)
 		);
@@ -217,13 +218,17 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.2.2
 	 *
-	 * @param string $file  Path of the field class
-	 * @param array  $field Field parameters
+	 * @param string $file  Path of the field class.
+	 * @param array  $field Field parameters.
 	 *
 	 * @return string Path of the field class where we want to find it
 	 */
 	public function filter__add_custom_fields(
-		/** @noinspection PhpUnusedParameterInspection */
+		/**
+		 * Unused.
+		 *
+		 * @noinspection PhpUnusedParameterInspection
+		 */
 		$file, $field
 	) {
 
@@ -292,9 +297,7 @@ class WPGlobus_Options {
 				'table',
 			) as $field_type
 		) {
-			add_filter( "wpglobus_options_field_{$field_type}",
-				array( $this, 'filter__add_custom_fields' ), 0, 2
-			);
+			add_filter( "wpglobus_options_field_{$field_type}", array( $this, 'filter__add_custom_fields' ), 0, 2 );
 		}
 
 		// Set the default arguments.
@@ -330,7 +333,7 @@ class WPGlobus_Options {
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
 											class="<?php echo esc_attr( $section['li_class'] ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<a href="<?php echo esc_url( $section['tab_href'] ); ?>" <?php echo $section['onclick']; // XSS ok. ?>
+										<a href="<?php echo esc_url( $section['tab_href'] ); ?>" <?php echo $section['onclick']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 												data-tab="<?php echo esc_attr( $section_tab ); ?>">
 											<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
 											<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
@@ -345,13 +348,12 @@ class WPGlobus_Options {
 									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
 											class="wpglobus-options-tab"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<?php
-										if ( empty($section['caption']) ) {	?>
+										<?php if ( empty( $section['caption'] ) ) { ?>
 											<h2><?php echo esc_html( $section['title'] ); ?></h2>
 										<?php } else { ?>
 											<h2><?php echo esc_html( $section['caption'] ); ?></h2>
+										<?php } ?>
 										<?php
-										}
 										if ( ! empty( $section['fields'] ) ) {
 											foreach ( $section['fields'] as $field ) {
 												$field = $this->sanitize_field( $field );
@@ -363,8 +365,11 @@ class WPGlobus_Options {
 												$field_type = $field['type'];
 												$file       = apply_filters( "wpglobus_options_field_{$field_type}", '', $field );
 												if ( $file && file_exists( $file ) ) :
-													// Intentionally "require" and not "require_once".
-													/** @noinspection PhpIncludeInspection */
+													/**
+													 * Intentionally "require" and not "require_once".
+													 *
+													 * @noinspection PhpIncludeInspection
+													 */
 													require $file;
 												endif;
 											} // foreach.
@@ -410,14 +415,14 @@ class WPGlobus_Options {
 		check_admin_referer( self::NONCE_ACTION );
 
 		// Sanitize, and if OK then save the options and reload the page.
-		$posted_data = $this->sanitize_posted_data( $_POST[ $option_name ] );
+		$posted_data = $this->sanitize_posted_data( $_POST[ $option_name ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		if ( $posted_data ) {
 			update_option( $option_name, $posted_data );
 
 			// Need to get back to the current tab after reloading.
 			$tab = self::DEFAULT_TAB;
 			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
-				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] );
+				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			}
 
 			wp_safe_redirect( WPGlobus_Admin_Page::url_options_panel( $tab ) );
@@ -435,7 +440,7 @@ class WPGlobus_Options {
 			'menu_title'    => 'WPGlobus',
 			'page_title'    => 'WPGlobus',
 			'page_slug'     => $this->page_slug,
-			// TODO
+			// TODO.
 			'footer_credit' => '&copy; Copyright 2014-' . date( 'Y' ) .
 							   ', <a href="' . WPGlobus_Utils::url_wpglobus_site() . '">TIV.NET INC. / WPGlobus</a>.',
 		);
@@ -443,8 +448,8 @@ class WPGlobus_Options {
 		// TODO.
 		$this->args['intro_text'] = '&nbsp;';
 
-		// TODO: SOCIAL ICONS
-		/*
+		// TODO: SOCIAL ICONS.
+		/**
 		$ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
 
 		$this->args['share_icons'][] = array(
@@ -625,8 +630,8 @@ class WPGlobus_Options {
 				'title'  => __( 'Deactivating / Uninstalling', 'wpglobus' ),
 				'desc'   => '' .
 							'<em>' .
-							// Translators: %?$s: HTML codes for hyperlink. Do not remove.
-							sprintf( esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ),
+							sprintf(// Translators: %?$s: HTML codes for hyperlink. Do not remove.
+									esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ),
 								'<a href="' . esc_url( WPGlobus_Admin_Page::url_helpdesk() ) . '">',
 								'</a>'
 							) .
@@ -636,8 +641,9 @@ class WPGlobus_Options {
 							esc_html( __( 'Please note that if you deactivate WPGlobus, your site will show all the languages together, mixed up. You will need to remove all translations, keeping only one language.', 'wpglobus' ) ) .
 							'</strong>' .
 							'<hr>' .
-							// translators: %s: link to the Clean-up Tool
-							sprintf( esc_html__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ), $txt_link_to_cleanup_tool
+							sprintf(// translators: %s: link to the Clean-up Tool.
+								esc_html__( 'If there are just a few places, you should edit them manually. To automatically remove all translations at once, you can use the %s. WARNING: The clean-up operation is irreversible, so use it only if you need to completely uninstall WPGlobus.', 'wpglobus' ),
+								$txt_link_to_cleanup_tool
 							) .
 							'',
 				'style'  => 'normal',
@@ -722,7 +728,7 @@ class WPGlobus_Options {
 	protected function section_featured_images() {
 		return array(
 			'wpglobus_id'  => 'featured_images',
-			// DO NOT TRANSLATE
+			// DO NOT TRANSLATE.
 			'title'        => __( 'Featured Images' ),
 			'tab_href'     => WPGlobus_Admin_Page::url_admin_central( 'tab-featured-images' ),
 			'icon'         => 'dashicons dashicons-images-alt',
@@ -980,19 +986,19 @@ class WPGlobus_Options {
 				<blockquote>
 					<ul>
 						<li>
-							- <?php _e( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ); // WPCS: XSS ok. ?>
+							- <?php _e( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						</li>
 						<li>
-							- <?php _e( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ); // WPCS: XSS ok. ?>
+							- <?php _e( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						</li>
 						<li>
-							- <?php _e( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ); // WPCS: XSS ok. ?>
+							- <?php _e( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						</li>
 						<li>
-							- <?php _e( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ); // WPCS: XSS ok. ?>
+							- <?php _e( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						</li>
 						<li>
-							- <?php _e( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ); // WPCS: XSS ok. ?>
+							- <?php _e( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						</li>
 					</ul>
 				</blockquote>
@@ -1021,13 +1027,25 @@ class WPGlobus_Options {
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
-		/** @var array $enabled_languages contains all enabled languages */
+		/**
+		 * Contains all enabled languages.
+		 *
+		 * @var array $enabled_languages
+		 */
 		$enabled_languages = array();
 
-		/** @var array $defaults_for_enabled_languages Need for the sortable field setup */
+		/**
+		 * Need for the sortable field setup.
+		 *
+		 * @var array $defaults_for_enabled_languages
+		 */
 		$defaults_for_enabled_languages = array();
 
-		/** @var array $more_languages */
+		/**
+		 * Additional languages.
+		 *
+		 * @var array $more_languages
+		 */
 		$more_languages = array( '' => __( 'Select a language', 'wpglobus' ) );
 
 		foreach ( $this->config->enabled_languages as $code ) {
@@ -1051,20 +1069,23 @@ class WPGlobus_Options {
 			}
 		}
 
-		$desc_languages_intro = implode( '', array(
-			'<ul style="list-style: disc inside;">',
-			'<li>' .
-			// translators: %3$s placeholder for the icon (actual picture)
-			sprintf( esc_html__( 'Place the %1$smain language%2$s of your site at the top of the list by dragging the %3$s icons.', 'wpglobus' ), '<strong>', '</strong>', '<i class="dashicons dashicons-move"></i>' ) . '</li>',
-			'<li>' .
-			// translators: placeholders for the "strong" HTML tags.
-			sprintf( esc_html__( '%1$sUncheck%2$s the languages you do not plan to use.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
-			'<li>' .
-			// translators: placeholders for the "strong" HTML tags.
-			sprintf( esc_html__( '%1$sAdd%2$s more languages using the section below.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
-			'<li>' . esc_html__( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
-			'</ul>',
-		) );
+		$desc_languages_intro = implode(
+			'',
+			array(
+				'<ul style="list-style: disc inside;">',
+				'<li>' .
+				// translators: %3$s placeholder for the icon (actual picture).
+				sprintf( esc_html__( 'Place the %1$smain language%2$s of your site at the top of the list by dragging the %3$s icons.', 'wpglobus' ), '<strong>', '</strong>', '<i class="dashicons dashicons-move"></i>' ) . '</li>',
+				'<li>' .
+				// translators: placeholders for the "strong" HTML tags.
+				sprintf( esc_html__( '%1$sUncheck%2$s the languages you do not plan to use.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
+				'<li>' .
+				// translators: placeholders for the "strong" HTML tags.
+				sprintf( esc_html__( '%1$sAdd%2$s more languages using the section below.', 'wpglobus' ), '<strong>', '</strong>' ) . '</li>',
+				'<li>' . esc_html__( 'When done, click the [Save Changes] button.', 'wpglobus' ) . '</li>',
+				'</ul>',
+			)
+		);
 
 		$txt_save_changes = esc_html__( 'Save Changes' );
 
@@ -1074,9 +1095,8 @@ class WPGlobus_Options {
 			// translators: %s - placeholder for the "Save Changes" button text.
 			. sprintf( esc_html__( 'Press the %s button to confirm.', 'wpglobus' ), '<code>[' . $txt_save_changes . ']</code>' )
 			. '<br /><br />'
-			// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
-			. sprintf( esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ), '<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>'
-			);
+			// translators: %1$s and %2$s - placeholders to insert HTML link around 'here'.
+			. sprintf( esc_html__( 'or Add new Language %1$s here %2$s', 'wpglobus' ), '<a href="' . esc_url( WPGlobus_Language_Edit_Request::url_language_add() ) . '">', '</a>' );
 
 		if ( empty( $wpglobus_option['enabled_languages'] ) ) {
 			$_value_for_enabled_languages = $defaults_for_enabled_languages;
@@ -1089,7 +1109,7 @@ class WPGlobus_Options {
 		/**
 		 * Make 'Language Selector Menu' option.
 		 */
-		// translators: dropdown option meaning that none of the navigation menus should show the language selector
+		// translators: dropdown option meaning that none of the navigation menus should show the language selector.
 		$menus['--none--'] = __( '-- none --', 'wpglobus' );
 		$menus['all']      = __( 'All menus', 'wpglobus' );
 		foreach ( $nav_menus as $menu ) {
@@ -1146,7 +1166,7 @@ class WPGlobus_Options {
 						: $wpglobus_option['show_flag_name'] ),
 					'name'    => 'wpglobus_option[show_flag_name]',
 				),
-				# $WPGlobus_Config->nav_menu
+				// $WPGlobus_Config->nav_menu
 				array(
 					'id'      => 'use_nav_menu',
 					'type'    => 'wpglobus_dropdown',
@@ -1207,7 +1227,11 @@ class WPGlobus_Options {
 	 */
 	protected function section_post_types() {
 
-		/** @var WP_Post_Type[] $post_types */
+		/**
+		 * Post types.
+		 *
+		 * @var WP_Post_Type[] $post_types
+		 */
 		$post_types = get_post_types( array(), 'objects' );
 
 		$disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->config->disabled_entities );
@@ -1216,9 +1240,7 @@ class WPGlobus_Options {
 
 		foreach ( $post_types as $post_type ) {
 
-			/**
-			 * @todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
-			 */
+			// todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
 			if ( in_array( $post_type->name, WPGlobus_Post_Types::hidden_types(), true ) ) {
 				continue;
 			}
@@ -1450,13 +1472,13 @@ class WPGlobus_Options {
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
-		$options = array();
+		// $options = array();
 
 		/**
 		 * When we add more options, need to update the @see WPGlobus_Options::sanitize_posted_data() method.
 		 */
 		$_checked = false;
-		if ( ! empty( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) && 1 == $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) {
+		if ( ! empty( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) && 1 == $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) { // phpcs:ignore
 			$_checked = true;
 		}
 
@@ -1469,14 +1491,14 @@ class WPGlobus_Options {
 				'title'   => esc_html__( 'Old fashioned language switcher', 'wpglobus' ),
 				'label'   => esc_html__( 'Enabled', 'wpglobus' ),
 			);
-			
+
 		return array(
 			'wpglobus_id' => 'wpglobus_block_editor',
 			'title'       => esc_html__( 'Block Editor', 'wpglobus' ),
 			'caption'     => esc_html__( 'Block Editor Options', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-layout',
 			'fields'      => $fields,
-		);			
+		);
 	}
 
 	/**
@@ -1511,7 +1533,7 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.9.14
 	 *
-	 * @param string $file
+	 * @param string $file File path.
 	 *
 	 * @return array|bool
 	 */
@@ -1528,16 +1550,17 @@ class WPGlobus_Options {
 
 		$buffer = array();
 
-		$handle = @fopen( $file, 'r' ); // phpcs:ignore Generic.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
+		$handle = @fopen( $file, 'r' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
 		if ( $handle ) {
 			while ( ( $_buffer = fgets( $handle ) ) !== false ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition, Squiz.PHP.DisallowMultipleAssignments
 				$buffer[] = $_buffer;
 			}
-			// if ( ! feof( $handle ) ) {
 			/**
+			 * // if ( ! feof( $handle ) ) {.
+			 *
 			 * @todo add error handling.
+			 * // }
 			 */
-			// }
 			fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		}
 
@@ -1551,8 +1574,8 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.9.14
 	 *
-	 * @param string $file
-	 * @param string $filter
+	 * @param string $file File path.
+	 * @param string $filter Filter.
 	 *
 	 * @return array|bool
 	 */
@@ -1812,7 +1835,8 @@ class WPGlobus_Options {
 				'utm_campaign' => $campaign,
 				'utm_source'   => $source,
 				'utm_medium'   => $medium,
-			), $url
+			),
+			$url
 		);
 	}
 
@@ -1828,7 +1852,11 @@ class WPGlobus_Options {
 	protected function is_plugin_installed( $folder ) {
 
 		if ( ! function_exists( 'get_plugins' ) ) {
-			/** @noinspection PhpIncludeInspection */
+			/**
+			 * Include plugin.php.
+			 *
+			 * @noinspection PhpIncludeInspection
+			 */
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 

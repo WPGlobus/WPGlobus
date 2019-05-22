@@ -30,6 +30,17 @@ module.exports = function (cb) {
         .pipe(print())
     ;
 
+    gulp
+        .src([
+            "includes/builders/gutenberg/assets/js/dist/*.js",
+            "!includes/**/*.min.js"
+        ])
+        .pipe(uglify())
+        .pipe(rename({suffix: ".min"}))
+        .pipe(gulp.dest("includes/builders/gutenberg/assets/js/dist"))
+        .pipe(print())
+    ;
+
     return gulp
         .src([cfg.path.js + "/**/*.js", "!" + cfg.path.js + "/**/*.min.js"])
         .pipe(uglify())

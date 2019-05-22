@@ -216,8 +216,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				}
 
 				/**
+				 * JS Composer.
+				 *
 				 * @since 1.9.17
-				 * @since 2.2.3
+				 * @since 2.2.3 Start js_composer as a builder.
 				 */
 				if ( ! $builder || ! $builder['builder_page'] ) {
 					$builder = self::is_js_composer();

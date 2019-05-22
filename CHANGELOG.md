@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2019-05-22 - version 2.2.3
-* Internal: (Builders/JS_Composer) Start `js_composer` as builder with WP 5.
 * Added: (Builders/Gutenberg) New language switcher.
+* Internal: (Builders/JS_Composer) Start `js_composer` as a builder with WP 5.
 
 2019-05-15 - version 2.2.2
 * Fixed: (Vendor/Acf) Changed attribute to 'height' for text elements.
