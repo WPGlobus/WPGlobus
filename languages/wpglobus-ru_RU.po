@@ -1318,15 +1318,15 @@ msgstr "Совместимость"
 
 #: includes/options/class-wpglobus-options.php:1491
 msgid "Old fashioned language switcher"
-msgstr ""
+msgstr "Использовать прежний переключатель языка"
 
 #: includes/options/class-wpglobus-options.php:1497
 msgid "Block Editor"
-msgstr ""
+msgstr "Редактор блоков"
 
 #: includes/options/class-wpglobus-options.php:1498
 msgid "Block Editor Options"
-msgstr ""
+msgstr "Настройки редактора блоков"
 
 #: includes/options/class-wpglobus-options.php:1812
 msgid "Translate strings"
