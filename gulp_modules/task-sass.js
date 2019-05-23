@@ -18,6 +18,28 @@ module.exports = function () {
         browsers: ["last 2 versions", "Firefox ESR", "ie 11"]
     };
 
+    gulp
+        .src("includes/builders/gutenberg/assets/css/*.scss")
+        .pipe(print())
+        .pipe(sourcemaps.init())
+        .pipe(sass(sassOptions).on("error", sass.logError))
+        .pipe(autoprefixer(autoprefixerOptions))
+        .pipe(sourcemaps.write(".", {includeContent: false}))
+        .pipe(gulp.dest("includes/builders/gutenberg/assets/css"))
+        .pipe(print())
+        ;
+
+    gulp
+        .src("includes/builders/gutenberg/assets/css/dist/*.scss")
+        .pipe(print())
+        .pipe(sourcemaps.init())
+        .pipe(sass(sassOptions).on("error", sass.logError))
+        .pipe(autoprefixer(autoprefixerOptions))
+        .pipe(sourcemaps.write(".", {includeContent: false}))
+        .pipe(gulp.dest("includes/builders/gutenberg/assets/css/dist"))
+        .pipe(print())
+        ;
+
     return gulp
         .src(cfg.path.css + "/**/*.scss")
         .pipe(print())

@@ -288,7 +288,7 @@ msgid "Save &amp; Reload"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:427,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:424,
 #: includes/class-wpglobus.php:1330, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -829,7 +829,7 @@ msgid "current"
 msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:182,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:337
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:334
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
@@ -839,7 +839,7 @@ msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:336
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:333
 msgid "Page is being reloaded. Please wait..."
 msgstr ""
 

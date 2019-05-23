@@ -69,7 +69,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	public function on__enqueue_block_assets() {
 		
 		$script_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.js';
-		$style_file  = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.css';
+		$style_file  = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-block-editor.css';
 
 		// return;
 		
@@ -291,12 +291,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			return;
 		}
 
-		/**
-		 * While testing process is run, don't add .scss and .map files.
-		 */
 		wp_register_style(
 			'wpglobus-gutenberg',
-			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.css',
+			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/wpglobus-gutenberg.css',
 			array(),
 			WPGLOBUS_VERSION,
 			'all'
