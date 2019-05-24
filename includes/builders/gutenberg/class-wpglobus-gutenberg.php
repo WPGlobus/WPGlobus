@@ -64,16 +64,19 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	}
 
 	/**
+	 * Enqueue block assets.
+	 *
 	 * @since 2.2.3
 	 */
 	public function on__enqueue_block_assets() {
 
-		if ( ! empty( WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) && '1' == WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) {
+		if ( ! empty( WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) && '1' === WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) {
 			return;
-		}	
-		 
-		$style_file  = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-block-editor.css';
-		/** 
+		}
+
+		$style_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-block-editor.css';
+
+		/**
 		 * Enqueue frontend and editor block styles.
 		 */
 		wp_enqueue_style(
@@ -81,16 +84,17 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$style_file,
 			'',
 			WPGLOBUS_VERSION
-		);			
-		
+		);
+
 		/**
-		 * @since 2.2.3 We are using ES5 syntax for WPGlobus plugin for Block Editor.
 		 * Using ESNext syntax @W.I.P.
-		 */	
+		 *
+		 * @since 2.2.3 We are using ES5 syntax for WPGlobus plugin for Block Editor.
+		 */
 		return;
-		
+
 		$script_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.js';
-		
+
 		/**
 		 * Enqueue the bundled block JS file.
 		 */
@@ -101,7 +105,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			WPGLOBUS_VERSION
 		);
 
-		/** 
+		/**
 		 * Enqueue frontend and editor block styles.
 		 */
 		wp_enqueue_style(
@@ -109,9 +113,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$style_file,
 			'',
 			WPGLOBUS_VERSION
-		);		
+		);
 	}
-	
+
 	/**
 	 * Translate post.
 	 *

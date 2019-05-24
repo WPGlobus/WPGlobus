@@ -315,7 +315,7 @@ jQuery(document).ready(function ($) {
 						  PanelBody,
 						  { className: 'wpglobus-block-editor-panel__body' },
 						  Layout()
-						),
+						)
 						
 					)
 				);

@@ -221,23 +221,33 @@ class WPGlobus_Config {
 	 * @since 1.9.17
 	 */
 	public $builder = null;
-	
+
 	/**
 	 * True if builder is disabled.
 	 *
 	 * @var boolean
 	 * @since 1.9.17
-	 */	
+	 */
 	public $builder_disabled = true;
 
 	/**
+	 * If '1', use the old style language switcher in Gutenberg. Set through the Options Panel.
+	 *
+	 * @var string
+	 * @since 2.2.3
+	 */
+	public $block_editor_old_fashioned_language_switcher = '';
+
+	/**
 	 * Can get it only once.
-	 * @return string
+	 *
 	 * @since 1.8.4
+	 * @return string
 	 */
 	public function getAndResetLanguageForOembed() {
-		$to_return = $this->language_for_oembed;
+		$to_return                 = $this->language_for_oembed;
 		$this->language_for_oembed = '';
+
 		return $to_return;
 	}
 
