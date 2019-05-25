@@ -21,6 +21,13 @@ class WPGlobus {
 	const URL_WPGLOBUS_SITE = 'https://wpglobus.com/';
 
 	/**
+	 * WPGlobus store URL.
+	 *
+	 * @since 2.2.4
+	 */
+	const URL_WPGLOBUS_SHOP = 'https://wpglobus.com/shop/';
+
+	/**
 	 * Language meta key.
 	 *
 	 * @since 1.9.17
