@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-05-25 - version 2.2.4
+* Fixed: (Builders/Gutenberg) Don't start JS script on disabled post type.
+
 2019-05-22 - version 2.2.3
 * Added: (Builders/Gutenberg) New language switcher.
 * Internal: (Builders/JS_Composer) Start `js_composer` as a builder with WP 5.
