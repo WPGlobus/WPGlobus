@@ -282,8 +282,8 @@ msgid "Save &amp; Reload"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:442,
-#: includes/class-wpglobus.php:1330, wpglobus.php:12, wpglobus.php:18
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:503,
+#: includes/class-wpglobus.php:1337, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr ""
 
@@ -810,7 +810,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:277,
-#: includes/class-wpglobus.php:3596
+#: includes/class-wpglobus.php:3603
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -830,18 +830,18 @@ msgstr ""
 msgid "current"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:200,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:352
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:224,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:389
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
 #. translators: Metabox title FOR language.
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:289
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:314
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:351
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:388
 msgid "Page is being reloaded. Please wait..."
 msgstr ""
 
@@ -886,41 +886,41 @@ msgid "Selector type"
 msgstr "Değiştirici tipi"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1304
+#: includes/class-wpglobus.php:1311
 msgid "OFF"
 msgstr "KAPALI"
 
-#: includes/class-wpglobus.php:1305
+#: includes/class-wpglobus.php:1312
 msgid "Turn on"
 msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1309
+#: includes/class-wpglobus.php:1316
 msgid "ON"
 msgstr "AÇIK"
 
-#: includes/class-wpglobus.php:1310
+#: includes/class-wpglobus.php:1317
 msgid "Turn off"
 msgstr ""
 
-#: includes/class-wpglobus.php:1493
+#: includes/class-wpglobus.php:1500
 msgid "You cannot disable the main language."
 msgstr "Asıl dili etkisizleştiremezsiniz."
 
-#: includes/class-wpglobus.php:1694
+#: includes/class-wpglobus.php:1701
 msgid "*) Available after the menu is saved."
 msgstr "*) Menü kaydedildikten sonra kullanılabilir."
 
-#: includes/class-wpglobus.php:1711
+#: includes/class-wpglobus.php:1718
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:4035
+#: includes/class-wpglobus.php:4042
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "WPGlobus' u kullanabilmek için Pretty Permalinks' i etkinleştirmelisiniz."
 
-#: includes/class-wpglobus.php:4037
+#: includes/class-wpglobus.php:4044
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -928,7 +928,7 @@ msgstr ""
 "Varsayılan olmayan bir seçeneği seçmek için lütfen Ayarlar>Kalıcı "
 "Bağlantılar>Genel Ayarlar' a gidin."
 
-#: includes/class-wpglobus.php:4189
+#: includes/class-wpglobus.php:4196
 msgid "Add"
 msgstr "Ekle"
 

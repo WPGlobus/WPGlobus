@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.4 =
+
+* Fixed: (Builders/Gutenberg) Don't start JS script on disabled post type.
+
 = 2.2.3 =
 
 * Added: (Builders/Gutenberg) New language switcher.
@@ -231,11 +235,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * Fixed: (Vendor/Acf) Fixed hidden WPGlobus dialog start icon with ACF Pro from v.5.8
 * Fixed: (Customizer) Fixed PHP Warning `Invalid argument supplied for foreach`.
-
-= 2.2.0 =
-
-* Compatibility: WordPress 5.2
-* Fixed: (Customizer) WPGlobus language selector alignment for WordPress 5.2.
 
 = Earlier versions and Add-ons =
 
