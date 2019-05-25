@@ -32,29 +32,26 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			 */
 			add_action( 'add_meta_boxes', array( $this, 'on__add_meta_box' ) );
 
-			add_action( 'admin_enqueue_scripts', array(
-				$this,
-				'on__enqueue_scripts',
-			), 1000 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'on__enqueue_scripts' ), 1000 );
 
 			/**
+			 * Action admin_print_styles.
+			 *
 			 * @since 1.9.29
 			 */
-			add_action( 'admin_print_styles', array(
-				$this,
-				'on__enqueue_styles',
-			) );
+			add_action( 'admin_print_styles', array( $this, 'on__enqueue_styles' ) );
 
 			/**
-			 * @see wp-includes\script-loader.php
+			 * Action enqueue_block_assets.
+			 *
+			 * @see   wp-includes\script-loader.php
 			 * @since 2.2.3
 			 */
-			add_action( 'enqueue_block_assets', array(
-				$this,
-				'on__enqueue_block_assets'
-			) );
+			add_action( 'enqueue_block_assets', array( $this, 'on__enqueue_block_assets' ) );
 
 			/**
+			 * Filter wpglobus_seo_meta_box_title.
+			 *
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array( $this, 'filter__seo_meta_box_title' ) );
@@ -93,6 +90,13 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		 */
 		return;
 
+		// phpcs:disable
+
+		/**
+		 * Temporarily.
+		 *
+		 * @noinspection PhpUnreachableStatementInspection
+		 */
 		$script_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.js';
 
 		/**
@@ -101,8 +105,20 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		wp_enqueue_script(
 			'wpglobus-block-editor-js',
 			$script_file,
-			array('wp-i18n', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api'),
-			WPGLOBUS_VERSION
+			array(
+				'wp-i18n',
+				'wp-blocks',
+				'wp-edit-post',
+				'wp-element',
+				'wp-editor',
+				'wp-components',
+				'wp-data',
+				'wp-plugins',
+				'wp-edit-post',
+				'wp-api',
+			),
+			WPGLOBUS_VERSION,
+			false
 		);
 
 		/**
@@ -114,12 +130,15 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'',
 			WPGLOBUS_VERSION
 		);
+
+		// phpcs:enable
+
 	}
 
 	/**
 	 * Translate post.
 	 *
-	 * @param WP_Post $object
+	 * @param WP_Post $object The Post object.
 	 */
 	public function translate_post( $object ) {
 		if ( $object instanceof WP_Post ) {
@@ -130,7 +149,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	/**
 	 * Generate box with language switcher.
 	 *
-	 * @param string $page
+	 * @param string $page The page.
 	 *
 	 * @return string
 	 */
@@ -138,7 +157,11 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		global $post;
 
-		$query_string = explode( '&', $_SERVER['QUERY_STRING'] );
+		// TODO check if $_SERVER['QUERY_STRING'] exists and sanitize it.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized: Detected usage of a non-sanitized input variable: $_SERVER['QUERY_STRING'].
+		// phpcs: WordPress.Security.ValidatedSanitizedInput.InputNotValidated: Detected usage of a possibly undefined superglobal array index: $_SERVER['QUERY_STRING']. Use isset() or empty() to check the index exists before using it.
+		// phpcs: WordPress.Security.ValidatedSanitizedInput.MissingUnslash: $_SERVER data not unslashed before sanitization. Use wp_unslash() or similar.
+		$query_string = explode( '&', $_SERVER['QUERY_STRING'] ); // phpcs:ignore
 
 		foreach ( $query_string as $key => $_q ) {
 			if ( false !== strpos( $_q, 'language=' ) ) {
@@ -176,15 +199,16 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 			ob_start();
 			?>
-			<div style="<?php echo $_box_style; // WPCS: XSS ok. ?>" class="wpglobus-gutenberg-selector-box">
+			<div style="<?php echo $_box_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
+					class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
 				<div class="wpglobus-selector-grid"
 						style="">
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-1"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						<img <?php echo $_height . $_width; // WPCS: XSS ok. ?>
-							<?php echo $_flag_style; // WPCS: XSS ok. ?>
+						<img <?php echo $_height . $_width; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<?php echo $_flag_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 								src="<?php echo esc_url( $_flag_img ); ?>" alt=""/>
 					</a>
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
@@ -208,7 +232,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 			ob_start();
 			?>
-			<div style="<?php echo $_box_style; // WPCS: XSS ok. ?>" class="wpglobus-gutenberg-selector-box">
+			<div style="<?php echo $_box_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
+					class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
 				<div class="wpglobus-selector-grid"
 						style="">
@@ -216,9 +241,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
 							class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-1"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						<img <?php echo $_height . $_width; // WPCS: XSS ok. ?>
-							<?php echo $_flag_style; // WPCS: XSS ok. ?>
-								src="<?php echo $_flag_img; // WPCS: XSS ok. ?>" alt=""/>
+						<img <?php echo $_height . $_width; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<?php echo $_flag_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								src="<?php echo $_flag_img; // phpcs:ignore WordPress.Security.EscapeOutput ?>" alt=""/>
 					</a>
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
@@ -228,23 +253,22 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 							<?php
 							/**
 							 * Filter the current language name.
-							 * Returning string.
 							 *
 							 * @since 2.1.0
 							 *
-							 * @param string  English language name.
-							 * @param string  $language Current language.
-							 * @param WP_Post $post     The current post.
+							 * @param string  $en_language_name English language name.
+							 * @param string  $language         Current language.
+							 * @param WP_Post $post             The current post.
+							 *
+							 * @return string
 							 */
-							echo esc_html(
-							// phpcs:ignore WordPress.NamingConventions
-								apply_filters(
-									'wpglobus_gutenberg_selector_text',
-									WPGlobus::Config()->en_language_name[ $this->language ],
-									$this->language,
-									$post
-								)
+							$en_language_name = apply_filters(
+								'wpglobus_gutenberg_selector_text',
+								WPGlobus::Config()->en_language_name[ $this->language ],
+								$this->language,
+								$post
 							);
+							echo esc_html( $en_language_name );
 							?>
 						</span>
 					</a>
@@ -261,7 +285,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 								style="text-align:left;cursor:pointer;border-bottom:1px solid #ddd;margin:0;height:25px;padding:5px 0 5px 5px;"
 								data-language="<?php echo esc_attr( $lang ); ?>">
 							<a href="<?php echo esc_url( str_replace( '{{language}}', $lang, $url ) ); ?>">
-								<img src="<?php echo esc_url( WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $lang ] ); ?>" alt=""/>&nbsp;<?php echo esc_html( WPGlobus::Config()->en_language_name[ $lang ] ); ?>
+								<img src="<?php echo esc_url( WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $lang ] ); ?>"
+										alt=""/>&nbsp;<?php echo esc_html( WPGlobus::Config()->en_language_name[ $lang ] ); ?>
 							</a>
 						</li>
 					<?php endforeach; ?>
@@ -279,7 +304,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	/**
 	 * Callback for 'wpglobus_seo_meta_box_title'.
 	 *
-	 * @param string $meta_box_title
+	 * @param string $meta_box_title Metabox title.
 	 *
 	 * @return string
 	 */
@@ -297,14 +322,18 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * @return void
 	 */
 	public function on__enqueue_styles() {
-		/** @global string $pagenow */
+		/**
+		 * Pagenow global.
+		 *
+		 * @var string $pagenow
+		 */
 		global $pagenow;
 
 		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
 			return;
 		}
 
-		// phpcs:ignore WordPress.CSRF.NonceVerification
+		// phpcs:ignore WordPress.Security.NonceVerification
 		if ( isset( $_GET['classic-editor'] ) ) {
 			return;
 		}
@@ -327,30 +356,38 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 */
 	public function on__enqueue_scripts() {
 
-		/** @global string $pagenow */
+		/**
+		 * Globals.
+		 *
+		 * @var string   $pagenow
+		 * @var string   $wp_version
+		 * @var \WP_Post $post
+		 */
 		global $pagenow, $wp_version, $post;
 
 		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
 			return;
 		}
 
-		// phpcs:ignore WordPress.CSRF.NonceVerification
+		// phpcs:ignore WordPress.Security.NonceVerification
 		if ( isset( $_GET['classic-editor'] ) ) {
 			return;
 		}
 
 		/**
+		 * Old-style switcher.
+		 *
 		 * @since 2.2.3
 		 */
 		$tabs = '';
-		if ( ! empty( WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) && '1' == WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) {
+		if ( ! empty( WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) && 1 === (int) WPGlobus::Config()->block_editor_old_fashioned_language_switcher ) {
 			$tabs = $this->get_switcher_box( $pagenow );
 		}
 
-		$i18n           = array();
+		$i18n              = array();
 		$i18n['reload']    = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
 		$i18n['save_post'] = esc_html__( 'Before switching the language, please save draft or publish.', 'wpglobus' );
-		
+
 		/**
 		 * We have Gutenberg in core since WP 5.0.
 		 *
@@ -372,25 +409,27 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		}
 
 		/**
+		 * Block editor tab URL.
+		 *
 		 * @since 2.2.3
 		 */
 		$block_editor_tab_url = admin_url(
 			add_query_arg(
-				array( 'page' => WPGlobus::OPTIONS_PAGE_SLUG, 'tab' => 'block-editor' ),
+				array(
+					'page' => WPGlobus::OPTIONS_PAGE_SLUG,
+					'tab'  => 'block-editor',
+				),
 				'admin.php'
 			)
 		);
-		
+
 		/**
-		 * @since 2.2.3
-		 */		
-		$store_link = 'https://wpglobus.com/shop/';
-		
-		/**
+		 * Build the flags URL.
+		 *
 		 * @since 2.2.3
 		 */
-		$flags_url = array(); 
-		foreach( WPGlobus::Config()->enabled_languages as $language ) { 
+		$flags_url = array();
+		foreach ( WPGlobus::Config()->enabled_languages as $language ) {
 			if ( file_exists( WPGlobus::Config()->flag_path['big'] . WPGlobus::Config()->flag[ $language ] ) ) {
 				$flags_url[ $language ] = WPGlobus::Config()->flag_urls['big'] . WPGlobus::Config()->flag[ $language ];
 			} else {
@@ -399,21 +438,23 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		}
 
 		/**
+		 * Pass the $post to JS.
+		 *
 		 * @since 2.2.4
 		 */
 		$__post = array(
-			'ID' => '',
-			'type' => '',
-			'disabled' => false
+			'ID'       => '',
+			'type'     => '',
+			'disabled' => false,
 		);
 		if ( $post instanceof WP_Post ) {
-			$__post['ID'] 	= $post->ID;
+			$__post['ID']   = $post->ID;
 			$__post['type'] = $post->post_type;
-			if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities ) ) {
-				$__post['disabled'] = true; 				
+			if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities, true ) ) {
+				$__post['disabled'] = true;
 			}
 		}
-		
+
 		wp_register_script(
 			'wpglobus-gutenberg',
 			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -426,20 +467,20 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'wpglobus-gutenberg',
 			'WPGlobusGutenberg',
 			array(
-				'version'          => WPGLOBUS_VERSION,
-				'versionGutenberg' => $version_gutenberg,
-				'context'          => WPGlobus::Config()->builder->get( 'context' ),
-				'tabs'             => $tabs,
-				'language'         => $this->language,
-				'pagenow'          => $pagenow,
-				'postEditPage'     => 'post.php',
-				'postNewPage'      => 'post-new.php',
-				'defaultLanguage'  => WPGlobus::Config()->default_language,
-				'i18n'             => $i18n,
-				'yoastSeo'         => $yoast_seo,
-				'flags_url'        => $flags_url,
-				'store_link' 	   => $store_link,
-				'__post'   		   => $__post,
+				'version'              => WPGLOBUS_VERSION,
+				'versionGutenberg'     => $version_gutenberg,
+				'context'              => WPGlobus::Config()->builder->get( 'context' ),
+				'tabs'                 => $tabs,
+				'language'             => $this->language,
+				'pagenow'              => $pagenow,
+				'postEditPage'         => 'post.php',
+				'postNewPage'          => 'post-new.php',
+				'defaultLanguage'      => WPGlobus::Config()->default_language,
+				'i18n'                 => $i18n,
+				'yoastSeo'             => $yoast_seo,
+				'flags_url'            => $flags_url,
+				'store_link'           => WPGlobus::URL_WPGLOBUS_SHOP,
+				'__post'               => $__post,
 				'block_editor_tab_url' => $block_editor_tab_url,
 				'disabled_entities'    => WPGlobus::Config()->disabled_entities,
 			)
@@ -457,17 +498,21 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			return;
 		}
 
-		add_meta_box( 'wpglobus', __( 'WPGlobus', 'wpglobus' ), array(
-			$this,
-			'callback__meta_box',
-		), null, 'side', 'core' );
+		add_meta_box(
+			'wpglobus',
+			__( 'WPGlobus', 'wpglobus' ),
+			array( $this, 'callback__meta_box' ),
+			null,
+			'side',
+			'core'
+		);
 	}
 
 	/**
 	 * Callback for 'add_meta_box' function.
 	 */
 	public function callback__meta_box() {
-		echo $this->get_language_field(); // WPCS: XSS ok.
+		echo $this->get_language_field(); // phpcs:ignore WordPress.Security.EscapeOutput
 		do_action( 'wpglobus_gutenberg_metabox' );
 	}
 
