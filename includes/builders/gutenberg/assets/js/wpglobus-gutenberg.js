@@ -25,8 +25,14 @@ jQuery(document).ready(function ($) {
 		isOldLanguageSelector: function() {
 			return api.oldLanguageSelector;
 		},
+		isPostDisabled: function() {
+			return WPGlobusGutenberg.__post.disabled;
+		},
 		init: function() {
 			WPGlobusGutenberg.yoastSeo = api.parseBool(WPGlobusGutenberg.yoastSeo);
+			if ( api.isPostDisabled() ) {
+				return;
+			}
 			api.initListeners();
 			api.setTabs();
 			api.formHandler();

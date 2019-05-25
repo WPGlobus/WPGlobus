@@ -328,7 +328,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	public function on__enqueue_scripts() {
 
 		/** @global string $pagenow */
-		global $pagenow, $wp_version;
+		global $pagenow, $wp_version, $post;
 
 		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
 			return;
@@ -398,6 +398,22 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			}
 		}
 
+		/**
+		 * @since 2.2.4
+		 */
+		$__post = array(
+			'ID' => '',
+			'type' => '',
+			'disabled' => false
+		);
+		if ( $post instanceof WP_Post ) {
+			$__post['ID'] 	= $post->ID;
+			$__post['type'] = $post->post_type;
+			if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities ) ) {
+				$__post['disabled'] = true; 				
+			}
+		}
+		
 		wp_register_script(
 			'wpglobus-gutenberg',
 			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -423,7 +439,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				'yoastSeo'         => $yoast_seo,
 				'flags_url'        => $flags_url,
 				'store_link' 	   => $store_link,
+				'__post'   		   => $__post,
 				'block_editor_tab_url' => $block_editor_tab_url,
+				'disabled_entities'    => WPGlobus::Config()->disabled_entities,
 			)
 		);
 	}
