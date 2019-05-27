@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-05-27 - version 2.2.5
+* Fixed: (Core/JS) Fixed first buttons group alignment issue in tinyMCE editor (standard mode).
+
 2019-05-25 - version 2.2.4
 * Fixed: (Builders/Gutenberg) Don't start JS script on disabled post type.
 
