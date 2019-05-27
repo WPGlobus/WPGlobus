@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.5 =
+
+* Fixed: (Core/JS) Fixed first buttons group alignment issue in tinyMCE editor (standard mode).
+
 = 2.2.4 =
 
 * Fixed: (Builders/Gutenberg) Don't start JS script on disabled post type.
@@ -230,11 +234,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.2.2 =
 
 * Fixed: (Vendor/Acf) Changed attribute to 'height' for text elements.
-
-= 2.2.1 =
-
-* Fixed: (Vendor/Acf) Fixed hidden WPGlobus dialog start icon with ACF Pro from v.5.8
-* Fixed: (Customizer) Fixed PHP Warning `Invalid argument supplied for foreach`.
 
 = Earlier versions and Add-ons =
 
