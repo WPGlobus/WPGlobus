@@ -496,6 +496,25 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			return $data;
 
 		}
+		
+		/**
+		 * @since 2.2.6
+		 * 
+		 * @return null|boolean If $this->default_language was not set it returns `null`.
+		 *						If the language is equal default_language it returns `true`,
+		 *						otherwise it returns `false`.
+		 */
+		public function is_default_language() {
+			
+			if ( empty( $this->default_language ) ) {
+				return null;
+			}
+			if ( $this->language == $this->default_language ) {
+				return true;
+			}
+			
+			return false;
+		}
 
 		/**
 		 * Set multilingual fields.
