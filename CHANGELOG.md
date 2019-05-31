@@ -3,9 +3,9 @@
 ## Changelog ##
 
 2019-05-31 - version 2.2.6
+* Fixed: (Builders/Elementor] Revised the language switcher JS script.
+* Added: (Builders/Elementor] Localized permalink for the `View Page` button.
 * Internal: (Core/Config Builder] Added `is_default_language` function.
-* Added: (Builders/Elementor] Localized permalink for `View Page` button.
-* Fixed: (Builders/Elementor] Revised JS script for language switcher.
 
 2019-05-27 - version 2.2.5
 * Fixed: (Core/JS) Fixed first buttons group alignment issue in tinyMCE editor (standard mode).

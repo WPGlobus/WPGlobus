@@ -218,6 +218,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.6 =
+
+* Fixed: (Builders/Elementor] Revised the language switcher JS script.
+* Added: (Builders/Elementor] Localized permalink for the `View Page` button.
+* Internal: (Core/Config Builder] Added `is_default_language` function.
+
 = 2.2.5 =
 
 * Fixed: (Core/JS) Fixed first buttons group alignment issue in tinyMCE editor (standard mode).
@@ -230,10 +236,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * Added: (Builders/Gutenberg) New language switcher.
 * Internal: (Builders/JS_Composer) Start `js_composer` as a builder with WP 5.
-
-= 2.2.2 =
-
-* Fixed: (Vendor/Acf) Changed attribute to 'height' for text elements.
 
 = Earlier versions and Add-ons =
 

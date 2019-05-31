@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-05-12 13:40+0000\n"
+"PO-Revision-Date: 2019-05-22 12:16+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Korean (Korea) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ko_KR/)\n"
@@ -796,11 +796,11 @@ msgstr ""
 msgid "Сompatibility Settings"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:260
+#: includes/builders/elementor/class-wpglobus-elementor.php:294
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:266
+#: includes/builders/elementor/class-wpglobus-elementor.php:300
 msgid "current"
 msgstr ""
 

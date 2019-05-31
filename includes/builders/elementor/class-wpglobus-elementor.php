@@ -125,14 +125,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				 * @see_file elementor\core\base\document.php
 				 */
 				add_filter( 'elementor/document/urls/preview', array( $this, 'filter__preview_url' ), 5, 2 );
-				
+
 				/**
 				 * Filters the editor localized settings.
 				 *
-				 * @since 2.2.6
+				 * @since    2.2.6
 				 *
 				 * @see_file elementor\includes\editor.php
-				 */				
+				 */
 				add_filter( 'elementor/editor/localize_settings', array( $this, 'filter__localize_settings' ), 5, 2 );
 
 			}
@@ -148,17 +148,22 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 *
 		 * @param array $localized_settings Localized settings.
 		 * @param int   $post_id            The ID of the current post being edited.
+		 *
+		 * @return array
 		 */
 		public function filter__localize_settings( $localized_settings, $post_id ) {
-			
+
 			if ( WPGlobus::Config()->builder->is_default_language() ) {
 				return $localized_settings;
 			}
+
 			$url = get_permalink( $post_id );
+
 			$localized_settings['document']['urls']['permalink'] = WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->builder->get_language() );
+
 			return $localized_settings;
 		}
-		
+
 		/**
 		 * To avoid output content with language marks from $post->post_content field on elementor builder page
 		 * if "_elementor_data" meta has not content in extra language.
@@ -306,12 +311,12 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 					</div>
 				</div>
 			</div>
-
+			<?php // phpcs:disable ?>
 			<script type='text/javascript'>
                 /* <![CDATA[ */
 				var WPGlobusTimeID;
                 WPGlobusTimeID = setInterval(function(){
-					if ( jQuery("#elementor-panel-header-menu-button").length == 0 ) {
+					if ( jQuery("#elementor-panel-header-menu-button").length === 0 ) {
 						return;
 					}
 					clearInterval(WPGlobusTimeID);
@@ -333,6 +338,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				}, 500);
                 /* ]]> */
 			</script>
+			<?php // phpcs:enable ?>
 			<?php
 		}
 
@@ -347,7 +353,12 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 * @return string
 		 */
 		public function filter__url(
-			$url, /** @noinspection PhpUnusedParameterInspection */
+			$url,
+			/**
+			 * Unused.
+			 *
+			 * @noinspection PhpUnusedParameterInspection
+			 */
 			$instance
 		) {
 			if ( false === strpos( $url, 'language' ) ) {
@@ -369,7 +380,12 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 * @return string
 		 */
 		public function filter__preview_url(
-			$url, /** @noinspection PhpUnusedParameterInspection */
+			$url,
+			/**
+			 * Unused.
+			 *
+			 * @noinspection PhpUnusedParameterInspection
+			 */
 			$instance
 		) {
 			$url = WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->builder->get_language() );
