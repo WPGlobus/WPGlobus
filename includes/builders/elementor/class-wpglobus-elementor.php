@@ -309,7 +309,12 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			<script type='text/javascript'>
                 /* <![CDATA[ */
-                setTimeout(function () {
+				var WPGlobusTimeID;
+                WPGlobusTimeID = setInterval(function(){
+					if ( jQuery("#elementor-panel-header-menu-button").length == 0 ) {
+						return;
+					}
+					clearInterval(WPGlobusTimeID);
                     var wpglobusElementorPanelMenu = jQuery("#wpglobus-elementor-wrapper").html();
                     jQuery(document).on('click', "#elementor-panel-header-menu-button", function () {
                         jQuery(".elementor-panel-menu-item").eq(7).after(wpglobusElementorPanelMenu);
@@ -324,8 +329,8 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
                             jQuery('#wpglobus-elementor-selector-box').css({'padding-top': '10px'});
                             $t.css({'display': 'block'});
                         }
-                    });
-                }, 3000);
+                    });					
+				}, 500);
                 /* ]]> */
 			</script>
 			<?php
