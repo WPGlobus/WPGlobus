@@ -125,9 +125,38 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				 * @see_file elementor\core\base\document.php
 				 */
 				add_filter( 'elementor/document/urls/preview', array( $this, 'filter__preview_url' ), 5, 2 );
+				
+				/**
+				 * Filters the editor localized settings.
+				 *
+				 * @since 2.2.6
+				 *
+				 * @see_file elementor\includes\editor.php
+				 */				
+				add_filter( 'elementor/editor/localize_settings', array( $this, 'filter__localize_settings' ), 5, 2 );
 
 			}
 
+		}
+
+		/**
+		 * Localize editor settings.
+		 *
+		 * Filters the editor localized settings.
+		 *
+		 * @since 2.2.6
+		 *
+		 * @param array $localized_settings Localized settings.
+		 * @param int   $post_id            The ID of the current post being edited.
+		 */
+		public function filter__localize_settings( $localized_settings, $post_id ) {
+			
+			if ( WPGlobus::Config()->builder->is_default_language() ) {
+				return $localized_settings;
+			}
+			$url = get_permalink( $post_id );
+			$localized_settings['document']['urls']['permalink'] = WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->builder->get_language() );
+			return $localized_settings;
 		}
 		
 		/**
