@@ -44,6 +44,8 @@ class WPGlobus_Post_Types {
 		// WPBakery PB: @since 1.9.17
 		'vc4_templates',
 		'vc_grid_item',
+		// Elementor: @since 2.2.7
+		'elementor_library',
 	);
 
 	/**
