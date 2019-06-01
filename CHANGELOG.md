@@ -2,9 +2,12 @@
 
 ## Changelog ##
 
+2019-06-01 - version 2.2.7
+* Internal: (Core/Admin bar menu) Revised WPGlobus language menu in admin bar.
+
 2019-05-31 - version 2.2.6
-* Fixed: (Builders/Elementor] Revised the language switcher JS script.
-* Added: (Builders/Elementor] Localized permalink for the `View Page` button.
+* Fixed: (Builders/Elementor) Revised the language switcher JS script.
+* Added: (Builders/Elementor) Localized permalink for the `View Page` button.
 * Internal: (Core/Config Builder] Added `is_default_language` function.
 
 2019-05-27 - version 2.2.5
