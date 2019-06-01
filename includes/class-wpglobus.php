@@ -4136,96 +4136,18 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add language selector to admin bar
+	 * Add language selector to admin bar.
 	 *
 	 * @since 1.0.8
+	 * @since 2.2.7 Added class `WPGlobus_Admin_Bar_Menu`.
 	 *
 	 * @param WP_Admin_Bar $wp_admin_bar
 	 */
 	public function on_admin_bar_menu( WP_Admin_Bar $wp_admin_bar ) {
-
-		$available_languages = get_available_languages();
-
-		$user_id = get_current_user_id();
-
-		if ( ! $user_id ) {
-			return;
-		}
-
-		$wp_admin_bar->add_menu( array(
-			'id'     => 'wpglobus-language-select',
-			'parent' => 'top-secondary',
-			'title'  => '<span class="ab-icon">' .
-						'<img src="' . self::Config()->flags_url .
-						self::Config()->flag[ self::Config()->language ] . '"/>' .
-						'</span><span class="ab-label">' .
-						self::Config()->language_name[ self::Config()->language ] .
-						'</span>',
-		) );
-
-		$add_more_languages = array();
-		foreach ( self::Config()->enabled_languages as $language ) :
-
-			if ( self::Config()->language === $language ) {
-				continue;
-			}
-
-			$locale = self::Config()->locale[ $language ];
-
-			if ( $locale != 'en_US' ) {
-				if ( ! in_array( $locale, $available_languages ) ) {
-					$add_more_languages[] = self::Config()->language_name[ $language ];
-					continue;
-				}
-			}
-
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpglobus-language-select',
-				'id'     => 'wpglobus-' . $language,
-				'title'  => '<span><img src="' . self::Config()->flags_url . self::Config()->flag[ $language ] . '" /></span>&nbsp;&nbsp;' . self::Config()->language_name[ $language ],
-				'href'   => admin_url( 'options-general.php' ),
-				'meta'   => array(
-					'tabindex' => - 1,
-					'onclick'  => 'wpglobus_select_lang("' . $locale . '");return false;',
-				),
-			) );
-
-		endforeach;
-
-		if ( ! empty( $add_more_languages ) ) {
-			$title = __( 'Add', 'wpglobus' ) . ' (' . implode( ', ', $add_more_languages ) . ')';
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpglobus-language-select',
-				'id'     => 'wpglobus-add-languages',
-				'title'  => $title,
-				'href'   => admin_url( 'options-general.php' ),
-				'meta'   => array(
-					'tabindex' => - 1,
-				),
-			) );
-		}
-		?>
-		<!--suppress AnonymousFunctionJS -->
-		<script type="text/javascript">
-            //<![CDATA[
-            jQuery(document).ready(function ($) {
-                $('#wpglobus-default-locale').on('click', function (e) {
-                    wpglobus_select_lang('<?php echo esc_js( self::Config()->locale[ self::Config()->language ] ); ?>');
-                });
-                wpglobus_select_lang = function (locale) {
-                    $.post(ajaxurl, {
-                        action: 'WPGlobus_process_ajax',
-                        order: {action: 'wpglobus_select_lang', locale: locale}
-                    }, function (d) {
-                    })
-                        .done(function () {
-                            window.location.reload();
-                        });
-                }
-            });
-            //]]>
-		</script>
-		<?php
+		
+		require_once dirname( __FILE__ ) . '/admin/class-wpglobus-admin-bar-menu.php';
+		WPGlobus_Admin_Bar_Menu::construct($wp_admin_bar);
+	
 	}
 
 	/**
