@@ -170,6 +170,14 @@ msgstr ""
 "Installation oder Anpassung haben, können Sie %s das WPGlobus Team %s mit "
 "einer benutzerdefinierte Anpassung beauftragen."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "Hinzufügen"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -937,10 +945,6 @@ msgid ""
 msgstr ""
 "Bitte gehen Sie zu Einstellungen > Permalinks > allgemeine Einstellungen, "
 "und wählen Sie die \"Beitragsname\" für schöne Permalinks."
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "Hinzufügen"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"

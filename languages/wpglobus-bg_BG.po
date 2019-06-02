@@ -152,6 +152,14 @@ msgid ""
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 msgstr ""
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr ""
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -897,10 +905,6 @@ msgstr ""
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
-msgstr ""
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
 msgstr ""
 
 #: includes/options/class-wpglobus-options.php:255

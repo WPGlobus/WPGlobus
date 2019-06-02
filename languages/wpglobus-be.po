@@ -179,6 +179,14 @@ msgstr ""
 "рассмотрите возможность %s дать заказ команде разработчиков WPGlobus %s на "
 "написание кода специально для Вас."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "Добавить"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -977,10 +985,6 @@ msgid ""
 msgstr ""
 "Пожалуйста, перейдите в меню Настройки > Постоянные ссылки и поменяйте "
 "структуру ссылок в разделе \"Общие настройки\"."
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "Добавить"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"

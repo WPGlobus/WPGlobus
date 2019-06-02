@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.7 ###
+
+
+* Internal: (Core/Admin bar menu) Revised WPGlobus language menu in admin bar.
+
 ### 2.2.6 ###
 
 
@@ -317,13 +322,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 
 * Fixed: (Builders/Gutenberg) Don't start JS script on disabled post type.
-
-### 2.2.3 ###
-
-
-* Added: (Builders/Gutenberg) New language switcher.
-
-* Internal: (Builders/JS_Composer) Start `js_composer` as a builder with WP 5.
 
 ### Earlier versions and Add-ons ###
 

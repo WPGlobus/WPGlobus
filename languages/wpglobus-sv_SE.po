@@ -166,6 +166,14 @@ msgstr ""
 "Kontakta temats / tilläggets författare. Om de inte kan hjälpa, överväg %s "
 "anställa WPGlobus Team %s för att skriva egen kod åt dig."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "Lägg till"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -923,10 +931,6 @@ msgid ""
 msgstr ""
 "Gå till Inställningar> Permalänkar> Vanliga inställningar och välj ett icke-"
 "standardalternativet."
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "Lägg till"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"

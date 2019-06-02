@@ -167,6 +167,14 @@ msgstr ""
 "ayudarte, considera % s la contratación del WPGlobus % s para escribir un "
 "código personalizado para tí."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "Añadir"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -936,10 +944,6 @@ msgid ""
 msgstr ""
 "Por favor, ve a Configuración > Enlaces permanentes > Ajustes comunes y "
 "selecciona una opción no predeterminada ."
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "Añadir"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"

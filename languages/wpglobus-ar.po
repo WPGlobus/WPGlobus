@@ -172,6 +172,14 @@ msgstr ""
 "من فضلك تواصل مع مالك الإضافة أو الثيم. إذا كانوا لا يستطيعوا المساعدة، فكر "
 "في %s تأجير فريق WPGlobus%s لكي يكتب كود مخصص لك."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "إضافة"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -922,10 +930,6 @@ msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
 msgstr ""
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "إضافة"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"

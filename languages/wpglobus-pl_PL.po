@@ -168,6 +168,14 @@ msgstr ""
 "stanie pomóc, rozważ %s zatrudnienie Zespołu WPGlobus %s do napisania kodu "
 "dla Ciebie."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "Dodaj"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -928,10 +936,6 @@ msgid ""
 msgstr ""
 "Proszę przejść do Ustawienia > Bezpośrednie odnośniki > Popularne ustawienia "
 "i wybrać opcję Nazwa wpisu."
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "Dodaj"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"

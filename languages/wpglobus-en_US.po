@@ -175,6 +175,14 @@ msgstr ""
 "Please contact the theme / plugin author. If they are unable to assist, "
 "consider %s hiring the WPGlobus Team %s to write a custom code for you."
 
+#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+msgid "Language was set on your profile page"
+msgstr ""
+
+#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+msgid "Add"
+msgstr "Add"
+
 #: includes/admin/class-wpglobus-admin-page.php:32,
 #: includes/admin/class-wpglobus-clean.php:585
 msgid "Multilingual Everything!"
@@ -978,10 +986,6 @@ msgid ""
 msgstr ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
-
-#: includes/class-wpglobus.php:4196
-msgid "Add"
-msgstr "Add"
 
 #: includes/options/class-wpglobus-options.php:255
 msgid "Language Selector Menu Style"
