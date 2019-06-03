@@ -167,11 +167,11 @@ msgstr ""
 "în măsură să ajute, ia în considerare %s angajarea echipei WPGlobus %s "
 "pentru a scrie un cod personalizat pentru tine."
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+#: includes/admin/class-wpglobus-admin-bar-menu.php:124
 msgid "Language was set on your profile page"
 msgstr ""
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+#: includes/admin/class-wpglobus-admin-bar-menu.php:194
 msgid "Add"
 msgstr "Adaugă"
 

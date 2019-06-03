@@ -179,11 +179,11 @@ msgstr ""
 "рассмотрите возможность %s дать заказ команде разработчиков WPGlobus %s на "
 "написание кода специально для вас."
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+#: includes/admin/class-wpglobus-admin-bar-menu.php:124
 msgid "Language was set on your profile page"
 msgstr "Язык указан на странице вашего профиля"
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+#: includes/admin/class-wpglobus-admin-bar-menu.php:194
 msgid "Add"
 msgstr "Добавить"
 

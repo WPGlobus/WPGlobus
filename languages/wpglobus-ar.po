@@ -172,11 +172,11 @@ msgstr ""
 "من فضلك تواصل مع مالك الإضافة أو الثيم. إذا كانوا لا يستطيعوا المساعدة، فكر "
 "في %s تأجير فريق WPGlobus%s لكي يكتب كود مخصص لك."
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+#: includes/admin/class-wpglobus-admin-bar-menu.php:124
 msgid "Language was set on your profile page"
 msgstr ""
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+#: includes/admin/class-wpglobus-admin-bar-menu.php:194
 msgid "Add"
 msgstr "إضافة"
 

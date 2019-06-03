@@ -166,11 +166,11 @@ msgstr ""
 "Kontakta temats / tilläggets författare. Om de inte kan hjälpa, överväg %s "
 "anställa WPGlobus Team %s för att skriva egen kod åt dig."
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+#: includes/admin/class-wpglobus-admin-bar-menu.php:124
 msgid "Language was set on your profile page"
 msgstr ""
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+#: includes/admin/class-wpglobus-admin-bar-menu.php:194
 msgid "Add"
 msgstr "Lägg till"
 

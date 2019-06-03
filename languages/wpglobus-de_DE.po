@@ -169,11 +169,11 @@ msgstr ""
 "Installation oder Anpassung haben, können Sie %s das WPGlobus Team %s mit "
 "einer benutzerdefinierte Anpassung beauftragen."
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:81
+#: includes/admin/class-wpglobus-admin-bar-menu.php:124
 msgid "Language was set on your profile page"
 msgstr ""
 
-#: includes/admin/class-wpglobus-admin-bar-menu.php:150
+#: includes/admin/class-wpglobus-admin-bar-menu.php:194
 msgid "Add"
 msgstr "Hinzufügen"
 
