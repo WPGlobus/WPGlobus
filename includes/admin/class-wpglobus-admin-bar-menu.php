@@ -68,7 +68,6 @@ if ( ! class_exists( 'WPGlobus_Admin_Bar_Menu' ) ) :
 			<script type="text/javascript">
 				//<![CDATA[
 				jQuery(document).ready(function ($) {
-					console.log('JS start:: ');
 					wpglobus_select_lang = function (locale) {
 						$.post(ajaxurl, {
 							action: 'WPGlobus_process_ajax',
