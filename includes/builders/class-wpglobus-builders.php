@@ -1124,11 +1124,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$_attrs['builder_page'] = true;
 					} else {
 
-						if ( isset( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) {
+						if ( empty($wpseo_titles[ 'display-metabox-pt-' . $post_type ]) ) {
+							/**
+							 * @since 2.2.8
+							 */
+							$_attrs['builder_page'] = false;
+						} elseif ( isset( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) {
 							$_attrs['builder_page'] = false;
 						} else {
 							$_attrs['builder_page'] = true;
 						}
+						
 					}
 
 					$attrs = self::get_attrs( $_attrs );
