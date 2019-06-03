@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-06-03 - version 2.2.8
+* Internal: (Core/Admin bar menu) Moved JS script to footer.
+* Fixed: (Builders/Yoast) Don't run builder mode for undefined post type, e.g. `slides` from Bridge theme.
+
 2019-06-01 - version 2.2.7
 * Internal: (Core/Admin bar menu) Revised WPGlobus language menu in admin bar.
 
