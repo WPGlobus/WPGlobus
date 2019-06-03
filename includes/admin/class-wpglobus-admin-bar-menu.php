@@ -19,6 +19,11 @@ if ( ! class_exists( 'WPGlobus_Admin_Bar_Menu' ) ) :
 		 * @var array
 		 */
 		protected static $available_languages = array();
+		
+		/**
+		 * @since 2.2.8
+		 */ 
+		protected static $run_script = true;
 
 		/**
 		 * Static constructor.
@@ -36,15 +41,54 @@ if ( ! class_exists( 'WPGlobus_Admin_Bar_Menu' ) ) :
 			self::$available_languages = get_available_languages();
 
 			$user_locale = get_user_meta( $user_id, 'locale', true );
+			
+			add_action( 'admin_footer', array( __CLASS__, 'on__admin_footer' ), 1000 );
 
 			if ( empty( $user_locale ) ) {
 				self::add_language_menu( $wp_admin_bar );
 			} else {
-				self::add_info_menu( $wp_admin_bar, $user_locale );
+				if ( ! self::add_info_menu( $wp_admin_bar, $user_locale ) ) {
+					self::$run_script = false;
+				}
 			}
 
 		}
 
+		/**
+		 * @since 2.2.8
+		 */
+		public static function on__admin_footer() {
+			
+			if ( ! self::$run_script ) {
+				return;
+			}
+			
+			?>
+			<!--suppress AnonymousFunctionJS, JSUnusedLocalSymbols -->
+			<script type="text/javascript">
+				//<![CDATA[
+				jQuery(document).ready(function ($) {
+					console.log('JS start:: ');
+					wpglobus_select_lang = function (locale) {
+						$.post(ajaxurl, {
+							action: 'WPGlobus_process_ajax',
+							order: {action: 'wpglobus_select_lang', locale: locale}
+						}, function (d) {
+						})
+							.done(function () {
+								window.location.reload();
+							});
+					}
+					$('#wpglobus-default-locale').on('click', function (e) {
+						wpglobus_select_lang('<?php echo esc_js( WPGlobus::Config()->locale[ WPGlobus::Config()->language ] ); ?>');
+					});
+
+				});
+				//]]>
+			</script>
+			<?php			
+		}
+		
 		/**
 		 * Language menu with link to `profile.php` page.
 		 *
@@ -56,11 +100,11 @@ if ( ! class_exists( 'WPGlobus_Admin_Bar_Menu' ) ) :
 			$user_profile_language = array_search( $user_locale, WPGlobus::Config()->locale, true );
 
 			if ( ! $user_profile_language ) {
-				return;
+				return false;
 			}
 
 			if ( empty( WPGlobus::Config()->language_name[ $user_profile_language ] ) ) {
-				return;
+				return false;
 			}
 
 			$img = '';
@@ -90,7 +134,8 @@ if ( ! class_exists( 'WPGlobus_Admin_Bar_Menu' ) ) :
 					),
 				)
 			);
-
+			
+			return true;
 		}
 
 		/**
@@ -160,28 +205,8 @@ if ( ! class_exists( 'WPGlobus_Admin_Bar_Menu' ) ) :
 					)
 				);
 			}
-			?>
-			<!--suppress AnonymousFunctionJS, JSUnusedLocalSymbols -->
-			<script type="text/javascript">
-				//<![CDATA[
-				jQuery(document).ready(function ($) {
-					$('#wpglobus-default-locale').on('click', function (e) {
-						wpglobus_select_lang('<?php echo esc_js( WPGlobus::Config()->locale[ WPGlobus::Config()->language ] ); ?>');
-					});
-					var wpglobus_select_lang = function (locale) {
-						$.post(ajaxurl, {
-							action: 'WPGlobus_process_ajax',
-							order: {action: 'wpglobus_select_lang', locale: locale}
-						}, function (d) {
-						})
-							.done(function () {
-								window.location.reload();
-							});
-					}
-				});
-				//]]>
-			</script>
-			<?php
+			
+			return;
 
 		}
 	}
