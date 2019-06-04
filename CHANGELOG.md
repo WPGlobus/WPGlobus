@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-06-04 - version 2.2.9
+* Added: (Vendor/All In One SEO Pack) Support `All In One SEO Pack` 3.
+
 2019-06-03 - version 2.2.8
 * Internal: (Core/Admin bar menu) Moved JS script to footer.
 * Fixed: (Builders/Yoast) Don't run builder mode for undefined post type, e.g. `slides` from Bridge theme.
