@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.9 =
+
+* Added: (Vendor/All In One SEO Pack) Support `All In One SEO Pack` 3.
+
 = 2.2.8 =
 
 * Internal: (Core/Admin bar menu) Moved JS script to footer.
@@ -236,10 +240,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.2.5 =
 
 * Fixed: (Core/JS) Fixed first buttons group alignment issue in tinyMCE editor (standard mode).
-
-= 2.2.4 =
-
-* Fixed: (Builders/Gutenberg) Don't start JS script on disabled post type.
 
 = Earlier versions and Add-ons =
 
