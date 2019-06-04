@@ -3,6 +3,7 @@
  * Interface JS functions
  *
  * @since 1.0.8
+ * @since 2.2.9 Support All In One SEO Pack 3.
  *
  * @package WPGlobus
  * @subpackage Administration
@@ -10,24 +11,38 @@
 /* jslint browser: true */
 /* global jQuery, console, WPGlobusCore, WPGlobusCoreData */
 
-var WPGlobusAioseop;
-
 (function($) {
     "use strict";
-	var api;
-	api = WPGlobusAioseop = {
+	
+	if ( 'undefined' === typeof WPGlobusAioseop ) {
+		return;	
+	}	
+
+	var api = {
+		addRules: false,
+		parseBool: function(b)  {
+			return !(/^(false|0)$/i).test(b) && !!b;
+		},
 		init: function() {
 			if ( 0 == $('#aiosp_snippet_wrapper').size() ) {
 				/* maybe All in One SEO Pack Pro license key is not set yet or invalid */
 				return;	
 			}
+			api.addRules = api.parseBool(WPGlobusAioseop.add_css_rules);
 			// tabs on
 			$('#wpglobus-aioseop-tabs').removeClass('hidden wpglobus-hidden').tabs();
 			$('#wpglobus-aioseop-tabs').insertBefore($('#aiosp_snippet_wrapper'));
 			$('#aiosp_snippet_wrapper, #aiosp_title_wrapper, #aiosp_description_wrapper, #aiosp_keywords_wrapper').addClass('hidden');
 			api.setCounters();
+			if ( api.addRules ) {
+				api.addCssRules();
+			}
 			api.attachListeners();
-
+		},
+		addCssRules: function() {
+			$('.wpglobus-aioseop-general .aioseop_wrapper.aioseop_html_type').each(function(i, elm){
+				$(elm).css({'border-radius':'4px', 'border':'1px solid #8d96a0', 'padding':'10px 10px 0', 'max-width':'97%', 'margin-bottom':'15px'});
+			});				
 		},
 		setCounters: function() {
 			$('.wpglobus_countable').each(function(i,e){
@@ -105,4 +120,6 @@ var WPGlobusAioseop;
 			
 		}	
 	};
+	WPGlobusAioseop = $.extend({}, WPGlobusAioseop, api);
+	WPGlobusAioseop.init();
 })(jQuery);

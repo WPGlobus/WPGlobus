@@ -649,17 +649,25 @@ class WPGlobus {
 						'edit.php',
 					) )
 				) {
+					
+					if ( self::Config()->builder->is_builder_page() ) {
+						/** Don't run in builder mode. */
+					} else {						
+						/**
+						 * Support standard mode.
+						 */
+						 
+						/** @global WP_Post $post */
+						global $post;
 
-					/** @global WP_Post $post */
-					global $post;
+						$type = empty( $post ) ? '' : $post->post_type;
+						if ( ! $this->disabled_entity( $type ) ) {
 
-					$type = empty( $post ) ? '' : $post->post_type;
-					if ( ! $this->disabled_entity( $type ) ) {
-
-						require_once 'vendor/class-wpglobus-aioseop.php';
-						if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
-							/** @noinspection PhpUnusedLocalVariableInspection */
-							$WPGlobus_aioseop = new WPGlobus_aioseop();
+							require_once 'vendor/class-wpglobus-aioseop.php';
+							if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
+								/** @noinspection PhpUnusedLocalVariableInspection */
+								$WPGlobus_aioseop = new WPGlobus_aioseop();
+							}
 						}
 					}
 				}

@@ -7,7 +7,6 @@
 
 /**
  * All In One SEO Pack.
- * @todo check loading 'vendor/class-wpglobus-aioseop.php' in class-wpglobus.php:628 for WPGlobus > 1.9.16
  */
 if ( defined( 'AIOSEOP_VERSION' ) ) {
 	require_once( dirname( __FILE__ ) . '/aioseopack/class-wpglobus-aioseopack.php' );

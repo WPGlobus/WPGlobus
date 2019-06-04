@@ -54,288 +54,361 @@ function aioseop_mrt_pccolumn( $aioseopcn, $aioseoppi ) {
 require_once AIOSEOP_PLUGIN_DIR . 'aioseop_class.php';
 
 /**
- * Class WPGlobus_All_in_One_SEO
+ * Class WPGlobus_All_in_One_SEO.
  */
-class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
+if ( ! class_exists('WPGlobus_All_in_One_SEO') ) :
 
-	private $wpg_language = '';
+	class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 
-	public function __construct() {
-	}
+		private $wpg_language = '';
+		
+		/**
+		 * @since 2.2.9
+		 */ 
+		public $version = '';
 
-	/**
-	 * Filter for post title
-	 *
-	 * @since 1.0.8
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 */
-	public static function filter__title( $text ) {
-
-		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			return $text;
+		public function __construct() {
+			
+			/**
+			 * @since 2.2.9
+			 */ 			
+			$this->version = AIOSEOP_VERSION;
 		}
 
-		global $post;
+		/**
+		 * Filter for post title.
+		 *
+		 * @since 1.0.8
+		 *
+		 * @param string $text
+		 *
+		 * @return string
+		 */
+		public static function filter__title( $text ) {
 
-		$title = $text;
-
-		if ( is_singular() ) {
-
-			$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
-
-			if ( empty( $title_source ) ) {
-				$default_title = null;
-			} else {
-				$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );
+			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return $text;
 			}
 
-			if ( $default_title != null && false !== strpos( mb_strtolower( $text ), mb_strtolower( $default_title ) ) ) {
+			global $post;
+
+			$title = $text;
+
+			if ( is_singular() ) {
+
+				$title_source = get_post_meta( $post->ID, "_aioseop_title", true );
+
+				if ( empty( $title_source ) ) {
+					$default_title = null;
+				} else {
+					$default_title = WPGlobus_Core::text_filter( $title_source, WPGlobus::Config()->default_language );
+				}
+
+				if ( $default_title != null && false !== strpos( mb_strtolower( $text ), mb_strtolower( $default_title ) ) ) {
+
+					/**
+					 * Because we have not translation of SEO title for current language need to autogenerate it
+					 */
+					if ( false === strpos( $text, '|' ) ) {
+						$title = $post->post_title;
+
+					} else {
+
+						$title_arr = explode( '|', $text );
+						$title     = $post->post_title;
+						$title     .= ' |';
+						$title     .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null );
+
+					}
+
+				} else {
+					$title = $text;
+				}
+
+			}
+
+			return $title;
+
+		}
+
+		/**
+		 * Filter text.
+		 * We need own filter to avoid duplicate keyword from language by default in extra languages.
+		 *
+		 * @since 1.6.6
+		 *
+		 * @param string $text
+		 *
+		 * @return string
+		 */
+		public static function filter__text( $text ) {
+
+			if ( ! WPGlobus_Core::has_translations( $text ) ) {
+				return $text;
+			}
+
+			return WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+
+		}
+
+		/**
+		 * Filter for post description.
+		 *
+		 * @since 1.0.8
+		 *
+		 * @param string $text
+		 *
+		 * @return string
+		 */
+		public static function filter__description( $text ) {
+
+			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return $text;
+			}
+
+			global $post;
+
+			$description_source  = get_post_meta( $post->ID, "_aioseop_description", true );
+			$default_description = WPGlobus_Core::text_filter( $description_source, WPGlobus::Config()->default_language );
+
+			if ( $default_description == $text ) {
 
 				/**
-				 * Because we have not translation of SEO title for current language need to autogenerate it
+				 * Because we have not translation of SEO description for current language need to autogenerate it
+				 *
+				 * @see get_post_description() in original plugin
 				 */
-				if ( false === strpos( $text, '|' ) ) {
-					$title = $post->post_title;
+				$aio = new All_in_One_SEO_Pack();
 
-				} else {
+				$aioseop_options = get_option( 'aioseop_options' );
 
-					$title_arr = explode( '|', $text );
-					$title     = $post->post_title;
-					$title     .= ' |';
-					$title     .= WPGlobus_Core::text_filter( $title_arr[1], WPGlobus::Config()->language, null );
-
+				if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) ) {
+					if ( method_exists($aio, 'trim_excerpt_without_filters_full_length') ) {
+						$description = $aio->trim_excerpt_without_filters_full_length( $post->post_excerpt );
+					} else if ( method_exists($aio, 'trim_text_without_filters_full_length') ) {
+						/**
+						 * @since All In One SEO Pack 2.4.4
+						 */
+						$description = $aio->trim_text_without_filters_full_length( $post->post_excerpt );
+					} else {
+						$description = WPGlobus_Core::text_filter( $post->post_excerpt );
+					}				
 				}
+				if ( ! $description && $aioseop_options["aiosp_generate_descriptions"] ) {
+					$content = $post->post_content;
+					if ( ! empty( $aioseop_options["aiosp_run_shortcodes"] ) ) {
+						$content = do_shortcode( $content );
+					}
+					$content     = wp_strip_all_tags( $content );
+					$description = $aio->trim_excerpt_without_filters( $content );
+				}
+
+				// "internal whitespace trim"
+				$description = preg_replace( "/\s\s+/u", " ", $description );
+
+				$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
 
 			} else {
-				$title = $text;
+				$description = $text;
 			}
 
+			return $description;
+
 		}
 
-		return $title;
+		public function wpg_get_option_row( $name, $opts, $args, $language ) {
 
-	}
+			$this->wpg_language = $language;
 
-	/**
-	 * Filter text.
-	 * We need own filter to avoid duplicate keyword from language by default in extra languages.
-	 *
-	 * @since 1.6.6
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 */
-	public static function filter__text( $text ) {
+			if ( version_compare( $this->version, '2.9.99', '>' ) ) {
+				$r = $this->get_option_row_3( $name, $opts, $args );
+			} else {
+				$r = $this->get_option_row( $name, $opts, $args );
+			}
 
-		if ( ! WPGlobus_Core::has_translations( $text ) ) {
-			return $text;
+			return $r;
+
 		}
 
-		return WPGlobus_Core::text_filter( $text, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+		/**
+		 * Format a row for an option on a settings page.
+		 */
+		public function get_option_row( $name, $opts, $args ) {
 
-	}
+			$language = '_' . $this->wpg_language;
 
-	/**
-	 * Filter for post description.
-	 *
-	 * @since 1.0.8
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 */
-	public static function filter__description( $text ) {
-
-		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			return $text;
-		}
-
-		global $post;
-
-		$description_source  = get_post_meta( $post->ID, "_aioseop_description", true );
-		$default_description = WPGlobus_Core::text_filter( $description_source, WPGlobus::Config()->default_language );
-
-		if ( $default_description == $text ) {
-
-			/**
-			 * Because we have not translation of SEO description for current language need to autogenerate it
-			 *
-			 * @see get_post_description() in original plugin
-			 */
-			$aio = new All_in_One_SEO_Pack();
-
-			$aioseop_options = get_option( 'aioseop_options' );
-
-			if ( empty( $aioseop_options["aiosp_skip_excerpt"] ) ) {
-				if ( method_exists($aio, 'trim_excerpt_without_filters_full_length') ) {
-					$description = $aio->trim_excerpt_without_filters_full_length( $post->post_excerpt );
-				} else if ( method_exists($aio, 'trim_text_without_filters_full_length') ) {
-					/**
-					 * @since All In One SEO Pack 2.4.4
-					 */
-					$description = $aio->trim_text_without_filters_full_length( $post->post_excerpt );
+			$label_text = $input_attr = $help_text_2 = $id_attr = '';
+			if ( $opts['label'] == 'top' ) {
+				$align = 'left';
+			} else {
+				$align = 'right';
+			}
+			if ( isset( $opts['id'] ) ) {
+				$id_attr .= " id=\"{$opts['id']}_div\" ";
+			}
+			if ( $opts['label'] != 'none' ) {
+				if ( isset( $opts['help_text'] ) ) {
+					$help_text   = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_HELP_START, __( 'Click for Help!', 'all_in_one_seo_pack' ), $name . $language, $opts['name'] );
+					$help_text_2 = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_HELP_END, $name . $language, $opts['help_text'] );
 				} else {
-					$description = WPGlobus_Core::text_filter( $post->post_excerpt );
-				}				
-			}
-			if ( ! $description && $aioseop_options["aiosp_generate_descriptions"] ) {
-				$content = $post->post_content;
-				if ( ! empty( $aioseop_options["aiosp_run_shortcodes"] ) ) {
-					$content = do_shortcode( $content );
+					$help_text = $opts['name'];
 				}
-				$content     = wp_strip_all_tags( $content );
-				$description = $aio->trim_excerpt_without_filters( $content );
+				$label_text = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_LABEL_FORMAT, $align, $help_text );
+			} else {
+				$input_attr .= ' aioseop_no_label ';
 			}
+			if ( $opts['label'] == 'top' ) {
+				$label_text .= All_in_One_SEO_Pack_Module::DISPLAY_TOP_LABEL;
+			}
+			$input_attr .= " aioseop_{$opts['type']}_type";
 
-			// "internal whitespace trim"
-			$description = preg_replace( "/\s\s+/u", " ", $description );
-
-			$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
-
-		} else {
-			$description = $text;
+			return sprintf( All_in_One_SEO_Pack_Module::DISPLAY_ROW_TEMPLATE, $input_attr, $name . $language, $label_text, $id_attr, $this->get_option_html( $args ), $help_text_2 );
 		}
 
-		return $description;
+		/**
+		 * Format a row for an option on a settings page.
+		 *
+		 * @since 2.2.9
+		 * @see all-in-one-seo-pack\admin\aioseop_module_class.php
+		 */
+		public function get_option_row_3( $name, $opts, $args ) {
 
-	}
+			$language = '_' . $this->wpg_language;
 
-	public function wpg_get_option_row( $name, $opts, $args, $language ) {
+			$label_text = $input_attr = $id_attr = '';
 
-		$this->wpg_language = $language;
+			if ( ! class_exists('AIOSEOP_Helper') ) {
+				require_once( AIOSEOP_PLUGIN_DIR . 'admin/class-aioseop-helper.php' );
+			}
+			$info = new AIOSEOP_Helper( get_class( $this ) );
 
-		$r = $this->get_option_row( $name, $opts, $args );
-
-		return $r;
-
-	}
-
-	/**
-	 * Format a row for an option on a settings page.
-	 */
-	public function get_option_row( $name, $opts, $args ) {
-
-		$language = '_' . $this->wpg_language;
-
-		$label_text = $input_attr = $help_text_2 = $id_attr = '';
-		if ( $opts['label'] == 'top' ) {
-			$align = 'left';
-		} else {
 			$align = 'right';
-		}
-		if ( isset( $opts['id'] ) ) {
-			$id_attr .= " id=\"{$opts['id']}_div\" ";
-		}
-		if ( $opts['label'] != 'none' ) {
-			if ( isset( $opts['help_text'] ) ) {
-				$help_text   = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_HELP_START, __( 'Click for Help!', 'all_in_one_seo_pack' ), $name . $language, $opts['name'] );
-				$help_text_2 = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_HELP_END, $name . $language, $opts['help_text'] );
-			} else {
-				$help_text = $opts['name'];
+			if ( $opts['label'] == 'top' ) {
+				$align = 'left';
 			}
-			$label_text = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_LABEL_FORMAT, $align, $help_text );
-		} else {
-			$input_attr .= ' aioseop_no_label ';
-		}
-		if ( $opts['label'] == 'top' ) {
-			$label_text .= All_in_One_SEO_Pack_Module::DISPLAY_TOP_LABEL;
-		}
-		$input_attr .= " aioseop_{$opts['type']}_type";
+			if ( isset( $opts['id'] ) ) {
+				$id_attr .= " id=\"{$opts['id']}_div\" ";
+			}
+			if ( $opts['label'] != 'none' ) {
+				$tmp_help_text = $info->get_help_text( $name );
+				if ( isset( $tmp_help_text ) && ! empty( $tmp_help_text ) ) {
+					$display_help = '<a class="aioseop_help_text_link" style="cursor: help;" title="%s"></a><label class="aioseop_label textinput">%s</label>';
 
-		return sprintf( All_in_One_SEO_Pack_Module::DISPLAY_ROW_TEMPLATE, $input_attr, $name . $language, $label_text, $id_attr, $this->get_option_html( $args ), $help_text_2 );
-	}
-
-	/**
-	 * Outputs a setting item for settings pages and metaboxes.
-	 */
-	function get_option_html( $args ) {
-		static $n = 0;
-		extract( $args );
-		if ( $options['type'] == 'custom' ) {
-			return apply_filters( "{$prefix}output_option", '', $args );
-		}
-		if ( in_array( $options['type'], Array(
-				'multiselect',
-				'select',
-				'multicheckbox',
-				'radio',
-				'checkbox',
-				'textarea',
-				'text',
-				'submit',
-				'hidden',
-			) ) && ( is_string( $value ) ) ) {
-			$value = esc_attr( $value );
-		}
-		$buf    = '';
-		$onload = '';
-		if ( ! empty( $options['count'] ) ) {
-			$n ++;
-			$attr   .= ''; // " onKeyDown='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)' onKeyUp='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)'";
-			$onload = ''; // "if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n);";
-		}
-		if ( isset( $opts['id'] ) ) {
-			$attr .= " id=\"{$opts['id']}\" ";
-		}
-		switch ( $options['type'] ) {
-			case 'multiselect':
-				$attr         .= ' MULTIPLE';
-				$args['attr'] = $attr;
-				$args['name'] = $name = "{$name}[]";
-			case 'select':
-				$buf .= $this->do_multi_input( $args );
-				break;
-			case 'multicheckbox':
-				$args['name']            = $name = "{$name}[]";
-				$args['options']['type'] = $options['type'] = 'checkbox';
-			case 'radio':
-				$buf .= $this->do_multi_input( $args );
-				break;
-			case 'checkbox':
-				if ( $value ) {
-					$attr .= ' CHECKED';
+					$__help_text = $info->get_help_text( $name );
+					if ( false !== strpos( $__help_text, 'DEV: Missing Help Text:' ) ) {
+						$help_text    = sprintf( $display_help, esc_html( $opts['help_text'] ), $opts['name'] );
+					} else {
+						$help_text    = sprintf( $display_help, $__help_text, $opts['name'] );
+					}
+				} else {
+					$help_text = $opts['name'];
 				}
-				$buf .= "<input name='$name' type='{$options['type']}' $attr>\n";
-				break;
-			case 'textarea':
-				$buf .= "<textarea name='$name' $attr $data $classes>$value</textarea>";
-				break;
-			case 'image':
-				$buf .= "<input class='aioseop_upload_image_button button-primary' type='button' value='Upload Image' style='float:left;' />" .
-						"<input class='aioseop_upload_image_label' name='$name' type='text' $attr value='$value' size=57 style='float:left;clear:left;'>\n";
-				break;
-			case 'html':
-				$buf .= $value;
-				break;
-			default:
-				$buf .= "<input name='$name' type='{$options['type']}' $attr $data $classes value='$value'>\n";
-		}
-		if ( ! empty( $options['count'] ) ) {
-			$size = 60;
-			if ( isset( $options['size'] ) ) {
-				$size = $options['size'];
-			} elseif ( isset( $options['rows'] ) && isset( $options['cols'] ) ) {
-				$size = $options['rows'] * $options['cols'];
-			}
-			if ( isset( $options['count_desc'] ) ) {
-				$count_desc = $options['count_desc'];
+
+				// TODO Possible remove text align.
+				// Currently aligns to the right when everything is being aligned to the left; which is usually a workaround.
+				$display_label_format = '<span class="aioseop_option_label" style="text-align:%s;vertical-align:top;">%s</span>';
+				$label_text           = sprintf( $display_label_format, $align, $help_text );
 			} else {
-				$count_desc = __( ' characters. Most search engines use a maximum of %s chars for the %s.', 'all_in_one_seo_pack' );
+				$input_attr .= ' aioseop_no_label ';
 			}
-			$buf .= "<br /><input readonly type='text' name='{$prefix}length{$suffix}' size='3' maxlength='3' style='width:53px;height:23px;margin:0px;padding:0px 0px 0px 10px;' value='" . $this->strlen( $value ) . "' />"
-					. sprintf( $count_desc, $size, trim( $this->strtolower( $options['name'] ), ':' ) );
-			if ( ! empty( $onload ) ) {
-				$buf .= "<script>jQuery( document ).ready(function() { {$onload} });</script>";
+			if ( $opts['label'] == 'top' ) {
+				$label_text .= "</div><div class='aioseop_input aioseop_top_label'>";
 			}
+			$input_attr .= " aioseop_{$opts['type']}_type";
+
+			$display_row_template = '<div class="aioseop_wrapper%s" id="%s_wrapper"><div class="aioseop_input">%s<span class="aioseop_option_input"><div class="aioseop_option_div" %s>%s</div></span><p style="clear:left"></p></div></div>';
+			return sprintf( $display_row_template, $input_attr, $name . $language, $label_text, $id_attr, $this->get_option_html( $args ) );
 		}
 
-		return $buf;
+		/**
+		 * Outputs a setting item for settings pages and metaboxes.
+		 */
+		function get_option_html( $args ) {
+			static $n = 0;
+			extract( $args );
+			if ( $options['type'] == 'custom' ) {
+				return apply_filters( "{$prefix}output_option", '', $args );
+			}
+			if ( in_array( $options['type'], Array(
+					'multiselect',
+					'select',
+					'multicheckbox',
+					'radio',
+					'checkbox',
+					'textarea',
+					'text',
+					'submit',
+					'hidden',
+				) ) && ( is_string( $value ) ) ) {
+				$value = esc_attr( $value );
+			}
+			$buf    = '';
+			$onload = '';
+			if ( ! empty( $options['count'] ) ) {
+				$n ++;
+				$attr   .= ''; // " onKeyDown='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)' onKeyUp='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)'";
+				$onload = ''; // "if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n);";
+			}
+			if ( isset( $opts['id'] ) ) {
+				$attr .= " id=\"{$opts['id']}\" ";
+			}
+			switch ( $options['type'] ) {
+				case 'multiselect':
+					$attr         .= ' MULTIPLE';
+					$args['attr'] = $attr;
+					$args['name'] = $name = "{$name}[]";
+				case 'select':
+					$buf .= $this->do_multi_input( $args );
+					break;
+				case 'multicheckbox':
+					$args['name']            = $name = "{$name}[]";
+					$args['options']['type'] = $options['type'] = 'checkbox';
+				case 'radio':
+					$buf .= $this->do_multi_input( $args );
+					break;
+				case 'checkbox':
+					if ( $value ) {
+						$attr .= ' CHECKED';
+					}
+					$buf .= "<input name='$name' type='{$options['type']}' $attr>\n";
+					break;
+				case 'textarea':
+					$buf .= "<textarea name='$name' $attr $data $classes>$value</textarea>";
+					break;
+				case 'image':
+					$buf .= "<input class='aioseop_upload_image_button button-primary' type='button' value='Upload Image' style='float:left;' />" .
+							"<input class='aioseop_upload_image_label' name='$name' type='text' $attr value='$value' size=57 style='float:left;clear:left;'>\n";
+					break;
+				case 'html':
+					$buf .= $value;
+					break;
+				default:
+					$buf .= "<input name='$name' type='{$options['type']}' $attr $data $classes value='$value'>\n";
+			}
+			if ( ! empty( $options['count'] ) ) {
+				$size = 60;
+				if ( isset( $options['size'] ) ) {
+					$size = $options['size'];
+				} elseif ( isset( $options['rows'] ) && isset( $options['cols'] ) ) {
+					$size = $options['rows'] * $options['cols'];
+				}
+				if ( isset( $options['count_desc'] ) ) {
+					$count_desc = $options['count_desc'];
+				} else {
+					$count_desc = __( ' characters. Most search engines use a maximum of %s chars for the %s.', 'all_in_one_seo_pack' );
+				}
+				$buf .= "<br /><input readonly type='text' name='{$prefix}length{$suffix}' size='3' maxlength='3' style='width:53px;height:23px;margin:0px;padding:0px 0px 0px 10px;' value='" . $this->strlen( $value ) . "' />"
+						. sprintf( $count_desc, $size, trim( $this->strtolower( $options['name'] ), ':' ) );
+				if ( ! empty( $onload ) ) {
+					$buf .= "<script>jQuery( document ).ready(function() { {$onload} });</script>";
+				}
+			}
+
+			return $buf;
+		}
 	}
-}
+	
+endif;
 
 /**
  * Class WPGlobus_aioseop
@@ -360,12 +433,18 @@ class WPGlobus_aioseop {
 	}
 
 	/**
-	 * Enqueue admin scripts
+	 * Enqueue admin scripts.
 	 *
 	 * @return void
 	 */
 	function on_admin_scripts() {
 		//global $WPGlobus;
+		
+		$add_css_rules = false;
+		if ( version_compare( AIOSEOP_VERSION, '2.9.99', '>' ) ) {
+			$add_css_rules = true;
+		}
+		
 		wp_register_script(
 			'wpglobus-aioseop',
 			WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-vendor-aioseop" . WPGlobus::SCRIPT_SUFFIX() . ".js",
@@ -379,6 +458,8 @@ class WPGlobus_aioseop {
 			'WPGlobusAioseop',
 			array(
 				'version' => WPGLOBUS_VERSION,
+				'vendor_version' => AIOSEOP_VERSION,
+				'add_css_rules'  => $add_css_rules,
 			)
 		);
 
