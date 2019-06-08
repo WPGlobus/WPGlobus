@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-06-07 - version 2.2.10
+* Fixed: (Vendor/All In One SEO Pack) The defining of version less then 3.0.
+
 2019-06-04 - version 2.2.9
 * Added: (Vendor/All In One SEO Pack) Support `All In One SEO Pack` 3.
 
