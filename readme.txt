@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.10 =
+
+* Fixed: (Vendor/All In One SEO Pack) The detection of version less than 3.0.
+
 = 2.2.9 =
 
 * Added: (Vendor/All In One SEO Pack) Support `All In One SEO Pack` 3.
@@ -236,10 +240,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Fixed: (Builders/Elementor] Revised the language switcher JS script.
 * Added: (Builders/Elementor] Localized permalink for the `View Page` button.
 * Internal: (Core/Config Builder] Added `is_default_language` function.
-
-= 2.2.5 =
-
-* Fixed: (Core/JS) Fixed first buttons group alignment issue in tinyMCE editor (standard mode).
 
 = Earlier versions and Add-ons =
 

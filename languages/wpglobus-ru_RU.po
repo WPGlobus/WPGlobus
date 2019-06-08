@@ -891,7 +891,7 @@ msgstr "Языки WPGlobus"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:300
 msgid "current"
-msgstr ""
+msgstr "текущий"
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:224,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:389
