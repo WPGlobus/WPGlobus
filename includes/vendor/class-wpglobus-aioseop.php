@@ -220,7 +220,7 @@ if ( ! class_exists('WPGlobus_All_in_One_SEO') ) :
 
 			$this->wpg_language = $language;
 
-			if ( version_compare( $this->version, '2.9.99', '>' ) ) {
+			if ( version_compare( $this->version, '2.99.99', '>' ) ) {
 				$r = $this->get_option_row_3( $name, $opts, $args );
 			} else {
 				$r = $this->get_option_row( $name, $opts, $args );
