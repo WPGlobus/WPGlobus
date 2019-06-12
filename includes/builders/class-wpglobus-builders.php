@@ -272,107 +272,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		/**
 		 * Page Builder by SiteOrigin.
+		 * @todo W.I.P
 		 * https://wordpress.org/plugins/siteorigin-panels/
 		 */
-		protected static function is_siteorigin_panels() {
-
-			if ( ! defined( 'SITEORIGIN_PANELS_VERSION' ) ) {
-				return false;
-			}
-
-			/** @global string $pagenow */
-			global $pagenow;
-
-			if ( version_compare( SITEORIGIN_PANELS_VERSION, '2.8.1', '<=' ) ) {
-
-				$message = 'Unsupported Page Builder by SiteOrigin version ' . SITEORIGIN_PANELS_VERSION . '.';
-
-				$_attrs = array(
-					'id'           => 'siteorigin_panels',
-					'version'      => SITEORIGIN_PANELS_VERSION,
-					'class'        => 'WPGlobus_Siteorigin_Panels',
-					'is_admin'     => false,
-					'builder_page' => false,
-					'message'      => $message,
-				);
-
-				$attrs = self::get_attrs( $_attrs );
-
-				return $attrs;
-
-			} else {
-
-				/**
-				 * Init current post type.
-				 */
-				$post_type = '';
-
-				//$ajax_actions = '';
-				//$is_admin     = false;
-				//$load_builder = false;
-
-				if ( is_admin() ) {
-
-					$is_admin     = true;
-					$load_builder = false;
-
-					if ( 'post.php' === $pagenow ) {
-
-						$opts = get_option( 'siteorigin_panels_settings' );
-
-						$cpt_support = array( 'page', 'post' );
-						if ( ! empty( $opts['post-types'] ) ) {
-							$cpt_support = $opts['post-types'];
-						}
-
-						if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-							$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
-						} elseif ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-							/**
-							 * Case when Update button was clicked.
-							 */
-							$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
-						}
-
-						if ( in_array( $post_type, $cpt_support, true ) ) {
-							$load_builder = true;
-						}
-
-						$_attrs = array(
-							'id'       => 'siteorigin_panels',
-							'version'  => SITEORIGIN_PANELS_VERSION,
-							'class'    => 'WPGlobus_Siteorigin_Panels',
-							'is_admin' => $is_admin,
-						);
-
-						if ( $load_builder ) {
-							$_attrs['builder_page'] = true;
-						} else {
-							$_attrs['builder_page'] = false;
-						}
-						$attrs = self::get_attrs( $_attrs );
-
-						return $attrs;
-
-					}
-				} else {
-
-					$_attrs = array(
-						'id'           => 'siteorigin_panels',
-						'version'      => SITEORIGIN_PANELS_VERSION,
-						'class'        => 'WPGlobus_Siteorigin_Panels',
-						'is_admin'     => false,
-						'builder_page' => true,
-					);
-
-					return self::get_attrs( $_attrs );
-
-				}
-			}
-
-			return false;
-
-		}
+		protected static function is_siteorigin_panels() {}
 
 		/**
 		 * Elementor Page Builder.
