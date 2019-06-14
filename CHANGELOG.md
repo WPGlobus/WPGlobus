@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-06-?? - version 2.2.11
+* Fixed: Default locale and flag for Taiwan.
+
 2019-06-07 - version 2.2.10
 * Fixed: (Vendor/All In One SEO Pack) The detection of version less than 3.0.
 

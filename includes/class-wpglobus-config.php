@@ -532,7 +532,7 @@ class WPGlobus_Config {
 			'ca' => array( 'English (CA)', 'English (CA)', 'en_CA', 'ca.png' ),
 			'gb' => array( 'English (UK)', 'English (UK)', 'en_GB', 'uk.png' ),
 			'zh' => array( 'Chinese', '&#31616;&#20307;&#20013;&#25991;', 'zh_CN', 'cn.png' ),
-			'tw' => array( 'Chinese (TW)', '&#32321;&#39636;&#20013;&#25991;', 'zh_CN', 'cn.png' ),
+			'tw' => array( 'Chinese (TW)', '&#32321;&#39636;&#20013;&#25991;', 'zh_TW', 'mm.png' ),
 			'da' => array( 'Danish', 'Dansk', 'da_DK', 'dk.png' ),
 			'nl' => array( 'Dutch', 'Nederlands', 'nl_NL', 'nl.png' ),
 			'gl' => array( 'Galician', 'Galego', 'gl_ES', 'galego.png' ),
