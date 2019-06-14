@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-05-22 12:16+0000\n"
+"PO-Revision-Date: 2019-06-02 01:13+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/de_DE/)\n"
@@ -132,7 +132,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
-msgstr "Wichtige Hinweise"
+msgstr "Wichtige Hinweise:"
 
 #: includes/admin/class-wpglobus-about.php:159
 msgid ""
@@ -265,7 +265,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:667
 msgid "YES, I CONFIRM"
-msgstr ""
+msgstr "JA, ICH STIMME ZU"
 
 #: includes/admin/class-wpglobus-clean.php:671
 msgid "Process with the Clean-up"
@@ -680,7 +680,7 @@ msgstr "Lokale"
 
 #: includes/admin/class-wpglobus-language-edit.php:437
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
-msgstr "PHP/Wordpress Gebietsschema der Sprache. (Beispiele: en_US, de_DE)"
+msgstr "PHP/WordPress Gebietsschema der Sprache. (Beispiele: en_US, de_DE)"
 
 #: includes/admin/class-wpglobus-language-edit.php:447
 msgid "Save Changes"
@@ -696,7 +696,7 @@ msgstr "Zurück zu den WPGlobus-Einstellungen"
 
 #: includes/admin/class-wpglobus-plugin-install.php:302
 msgid "Current Version"
-msgstr "Aktelle Version"
+msgstr "Aktuelle Version"
 
 #: includes/admin/class-wpglobus-plugin-install.php:303
 msgid "Get it now!"
@@ -709,7 +709,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-plugin-install.php:305,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
-msgstr "Instaliert"
+msgstr "Installiert"
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:103,
 #: includes/options/class-wpglobus-options.php:671
@@ -731,11 +731,12 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:68
 msgid "Thank you for using WPGlobus!"
-msgstr ""
+msgstr "Danke, dass du WPGlobus! nutzt."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69
 msgid "Our Support Team is here to answer your questions or concerns."
 msgstr ""
+"Unser Support-Team ist dazu da, deine Fragen oder Anliegen zu beantworten."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:71
 msgid "To help us serve you better:"

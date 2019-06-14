@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-05-22 12:16+0000\n"
+"PO-Revision-Date: 2019-06-02 01:13+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/sv_SE/)\n"
@@ -132,7 +132,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-about.php:154
 msgid "Important notes:"
-msgstr ""
+msgstr "Viktiga noteringar:"
 
 #: includes/admin/class-wpglobus-about.php:159
 msgid ""
@@ -147,7 +147,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-about.php:162
 msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
 msgstr ""
-"Vissa teman och tillägg är <strong>inte färdiga för flerspråkighet.</strong>"
+"Vissa teman och tillägg är <strong>inte färdiga för flerspråkighet</strong>."
 
 #: includes/admin/class-wpglobus-about.php:163
 msgid ""
@@ -190,7 +190,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:232
 msgid "Remove the WPGlobus settings (not recommended)"
-msgstr ""
+msgstr "Ta bort WPGlobus-inställningarna (rekommenderas inte)"
 
 #: includes/admin/class-wpglobus-clean.php:595
 msgid "Clean-up Tool"
@@ -246,11 +246,11 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:660
 msgid "You have been warned..."
-msgstr ""
+msgstr "Du har blivit varnad…"
 
 #: includes/admin/class-wpglobus-clean.php:662
 msgid "Please confirm by checking the box below:"
-msgstr ""
+msgstr "Bekräfta genom att kryssa i rutan nedan:"
 
 #: includes/admin/class-wpglobus-clean.php:664
 msgid ""
@@ -262,7 +262,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-clean.php:667
 msgid "YES, I CONFIRM"
-msgstr ""
+msgstr "JA, JAG BEKRÄFTAR"
 
 #: includes/admin/class-wpglobus-clean.php:671
 msgid "Process with the Clean-up"
@@ -277,21 +277,21 @@ msgstr "Standard"
 
 #: includes/admin/class-wpglobus-customize-options.php:264
 msgid "Section"
-msgstr ""
+msgstr "Sektion"
 
 #: includes/admin/class-wpglobus-customize-options.php:277
 msgid "Show all sections"
-msgstr ""
+msgstr "Visa alla sektioner"
 
 #: includes/admin/class-wpglobus-customize-options.php:279
 msgid "Save &amp; Reload"
-msgstr ""
+msgstr "Spara och ladda om"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:503,
 #: includes/class-wpglobus.php:1345, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
-msgstr ""
+msgstr "WPGlobus"
 
 #: includes/admin/class-wpglobus-customize-options.php:597
 msgid ""
@@ -300,7 +300,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:603
 msgid "Fields Settings"
-msgstr ""
+msgstr "Fältinställningar"
 
 #: includes/admin/class-wpglobus-customize-options.php:648
 msgid "WPGlobus Settings"
@@ -328,7 +328,7 @@ msgstr "Dessa språk är aktiverade på din webbplats."
 #: includes/admin/class-wpglobus-customize-options.php:788,
 #: includes/options/class-wpglobus-options.php:1093
 msgid "Choose a language you would like to enable."
-msgstr ""
+msgstr "Välj ett språk som du vill aktivera."
 
 #: includes/admin/class-wpglobus-customize-options.php:790
 msgid "Press the [Save & Publish] button to confirm."
@@ -473,7 +473,7 @@ msgstr ""
 #: includes/admin/class-wpglobus-customize-options.php:1227,
 #: includes/options/class-wpglobus-options.php:1319
 msgid "Custom JS Code"
-msgstr ""
+msgstr "Anpassad JS-kod"
 
 #: includes/admin/class-wpglobus-customize-options.php:1225,
 #: includes/admin/class-wpglobus-customize-options.php:1269
@@ -482,7 +482,7 @@ msgstr "Titel"
 
 #: includes/admin/class-wpglobus-customize-options.php:1228
 msgid "(Paste your JS code here.)"
-msgstr ""
+msgstr "(Klistra in din JS-kod här.)"
 
 #: includes/admin/class-wpglobus-customize-options.php:1270
 msgid "Label"
@@ -688,7 +688,7 @@ msgstr "Nuvarande version"
 
 #: includes/admin/class-wpglobus-plugin-install.php:303
 msgid "Get it now!"
-msgstr ""
+msgstr "Skaffa det nu!"
 
 #: includes/admin/class-wpglobus-plugin-install.php:304
 msgid "Premium add-on"
@@ -702,24 +702,26 @@ msgstr "Installerad"
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:103,
 #: includes/options/class-wpglobus-options.php:671
 msgid "Help Desk"
-msgstr ""
+msgstr "Kundtjänst"
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:181
 msgid "Email not sent. Please fill in the entire form."
-msgstr ""
+msgstr "E-post inte skickat. Fyll i hela formuläret."
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:191
 msgid ""
 "Email not sent. Please verify that your name and email are entered correctly."
 msgstr ""
+"E-post inte skickat. Verifiera att ditt namn och e-postadress är angivna "
+"korrekt."
 
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:212
 msgid "Email sent."
-msgstr ""
+msgstr "E-post skickad."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:68
 msgid "Thank you for using WPGlobus!"
-msgstr ""
+msgstr "Tack för att du använder WPGlobus!"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:69
 msgid "Our Support Team is here to answer your questions or concerns."
@@ -742,11 +744,11 @@ msgstr ""
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:77
 msgid "Please fill in and submit the contact form:"
-msgstr ""
+msgstr "Fyll i och skicka in kontaktformuläret:"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:97
 msgid "Please make sure the email address is correct."
-msgstr ""
+msgstr "Se till att e-postadressen är korrekt."
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:103
 msgid "Subject"
@@ -754,19 +756,19 @@ msgstr "Ämne"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:108
 msgid "Short description of the problem"
-msgstr ""
+msgstr "Kort beskrivning av problemet"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:113
 msgid "Detailed description"
-msgstr ""
+msgstr "Detaljerad beskrivning"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:120
 msgid "Technical Information"
-msgstr ""
+msgstr "Teknisk information"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:127
 msgid "This information helps us to find the problem source"
-msgstr ""
+msgstr "Denna information hjälper oss att hitta källan på problemet"
 
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:150
 msgid ""
@@ -776,7 +778,7 @@ msgstr ""
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
 msgid "WPGlobus Recommends:"
-msgstr ""
+msgstr "WPGlobus rekommenderar:"
 
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:71,
 #: includes/options/class-wpglobus-options.php:878
@@ -817,15 +819,15 @@ msgstr ""
 #: includes/builders/class-wpglobus-builder.php:277,
 #: includes/class-wpglobus.php:3611
 msgid "Save draft before using extra language."
-msgstr ""
+msgstr "Spara utkast innan du använder extra språk."
 
 #: includes/builders/class-wpglobus-builder.php:366
 msgid "Builder"
-msgstr ""
+msgstr "Byggare"
 
 #: includes/builders/class-wpglobus-builder.php:390
 msgid "Сompatibility Settings"
-msgstr ""
+msgstr "Inställningar för kompatibilitet"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:294
 msgid "WPGlobus languages"
@@ -833,7 +835,7 @@ msgstr ""
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:300
 msgid "current"
-msgstr ""
+msgstr "nuvarande"
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:224,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:389
@@ -844,11 +846,11 @@ msgstr ""
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:314
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
-msgstr ""
+msgstr "för"
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:388
 msgid "Page is being reloaded. Please wait..."
-msgstr ""
+msgstr "Sidan laddas om. Vänta…"
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -906,7 +908,7 @@ msgstr "PÅ"
 
 #: includes/class-wpglobus.php:1325
 msgid "Turn off"
-msgstr ""
+msgstr "Stäng av"
 
 #: includes/class-wpglobus.php:1508
 msgid "You cannot disable the main language."
@@ -948,7 +950,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:259
 msgid "Do not change"
-msgstr ""
+msgstr "Ändra inte"
 
 #: includes/options/class-wpglobus-options.php:260
 msgid "Drop-down (vertical)"
@@ -975,6 +977,8 @@ msgid ""
 "Use the %1$s[Languages Table]%2$s section to add a new language or to edit "
 "the language attributes: name, code, flag icon, etc."
 msgstr ""
+"Använd sektionen %1$s[Språktabell]%2$s för att lägga till ett nytt språk "
+"eller för att redigera språkattributen: namn, kod, flaggikon, osv."
 
 #: includes/options/class-wpglobus-options.php:607
 msgid "Welcome!"
@@ -982,19 +986,19 @@ msgstr "Välkommen!"
 
 #: includes/options/class-wpglobus-options.php:630
 msgid "Deactivating / Uninstalling"
-msgstr ""
+msgstr "Inaktivera/avinstallera"
 
 #: includes/options/class-wpglobus-options.php:656
 msgid "Uninstall"
-msgstr ""
+msgstr "Avinstallera"
 
 #: includes/options/class-wpglobus-options.php:686
 msgid "All add-ons"
-msgstr ""
+msgstr "Alla utökningar"
 
 #: includes/options/class-wpglobus-options.php:701
 msgid "Mobile Menu"
-msgstr ""
+msgstr "Mobilmeny"
 
 #: includes/options/class-wpglobus-options.php:716
 msgid "Language Widgets"
@@ -1002,7 +1006,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:786
 msgid "We Recommend..."
-msgstr ""
+msgstr "Vi rekommenderar…"
 
 #: includes/options/class-wpglobus-options.php:818
 msgid ""
@@ -1028,13 +1032,13 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:830
 msgid "- and more..."
-msgstr ""
+msgstr "- och mer…"
 
 #: includes/options/class-wpglobus-options.php:833,
 #: includes/options/class-wpglobus-options.php:890,
 #: includes/options/class-wpglobus-options.php:948
 msgid "Click here to download"
-msgstr ""
+msgstr "Klicka här för att ladda ner"
 
 #: includes/options/class-wpglobus-options.php:881
 msgid ""
@@ -1114,7 +1118,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1005
 msgid "...and more."
-msgstr ""
+msgstr "…och mer."
 
 #: includes/options/class-wpglobus-options.php:1008
 msgid "Click here to visit the WPGlobus Store"
@@ -1130,16 +1134,18 @@ msgid ""
 "Place the %1$smain language%2$s of your site at the top of the list by "
 "dragging the %3$s icons."
 msgstr ""
+"Placera %1$shuvudspråket%2$s på din webbplats högst upp i listan genom att "
+"dra %3$s ikonerna."
 
 #. translators: placeholders for the "strong" HTML tags.
 #: includes/options/class-wpglobus-options.php:1081
 msgid "%1$sUncheck%2$s the languages you do not plan to use."
-msgstr ""
+msgstr "%1$sAvmarkera%2$s de språk du inte planerar att använda."
 
 #. translators: placeholders for the "strong" HTML tags.
 #: includes/options/class-wpglobus-options.php:1084
 msgid "%1$sAdd%2$s more languages using the section below."
-msgstr ""
+msgstr "%1$sLägg till%2$s fler språk med sektionen nedan."
 
 #: includes/options/class-wpglobus-options.php:1085
 msgid "When done, click the [Save Changes] button."
@@ -1148,16 +1154,16 @@ msgstr "När du är klar klickar du på knappen [Spara ändringar]."
 #. translators: %s - placeholder for the "Save Changes" button text.
 #: includes/options/class-wpglobus-options.php:1096
 msgid "Press the %s button to confirm."
-msgstr ""
+msgstr "Tryck på knappen %s för att bekräfta."
 
 #. translators: dropdown option meaning that none of the navigation menus should show the language selector.
 #: includes/options/class-wpglobus-options.php:1113
 msgid "-- none --"
-msgstr ""
+msgstr "-- ingen --"
 
 #: includes/options/class-wpglobus-options.php:1114
 msgid "All menus"
-msgstr ""
+msgstr "Alla menyer"
 
 #: includes/options/class-wpglobus-options.php:1127
 msgid "Instructions:"
@@ -1189,7 +1195,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1266
 msgid "Uncheck to disable"
-msgstr ""
+msgstr "Avmarkera för att inaktivera"
 
 #: includes/options/class-wpglobus-options.php:1267
 msgid ""
@@ -1199,7 +1205,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1272
 msgid "Post Types"
-msgstr ""
+msgstr "Inläggstyper"
 
 #: includes/options/class-wpglobus-options.php:1288
 msgid ""
@@ -1210,7 +1216,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1329
 msgid "Custom Code"
-msgstr ""
+msgstr "Anpassad kod"
 
 #: includes/options/class-wpglobus-options.php:1426,
 #: includes/options/class-wpglobus-options.php:1492
@@ -1223,7 +1229,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1457
 msgid "Сompatibility"
-msgstr ""
+msgstr "Kompatibilitet"
 
 #: includes/options/class-wpglobus-options.php:1491
 msgid "Old fashioned language switcher"
@@ -1239,7 +1245,7 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:1812
 msgid "Translate strings"
-msgstr ""
+msgstr "Översätt strängar"
 
 #: includes/options/fields/table/class-wpglobus-languages-table.php:66
 msgid "item"
@@ -1307,11 +1313,11 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:44
 msgid "In the WordPress core"
-msgstr ""
+msgstr "I WordPress-kärnan"
 
 #: includes/options/templates/compatibility.php:46
 msgid "Core"
-msgstr ""
+msgstr "Kärna"
 
 #: includes/options/templates/compatibility.php:52,
 #: includes/options/templates/compatibility.php:79
@@ -1342,11 +1348,11 @@ msgstr ""
 
 #: includes/options/templates/compatibility.php:73
 msgid "List of supported add-ons"
-msgstr ""
+msgstr "Lista på utökningar som stöds"
 
 #: includes/options/templates/compatibility.php:78
 msgid "Add-on"
-msgstr ""
+msgstr "Utökning"
 
 #: includes/options/templates/compatibility.php:80
 msgid "Supported minimum version"
@@ -1358,11 +1364,11 @@ msgstr "Aktiv"
 
 #: includes/options/templates/compatibility.php:102
 msgid "Installed, inactive"
-msgstr ""
+msgstr "Installerad, inaktiv"
 
 #: includes/options/templates/compatibility.php:105
 msgid "Not installed"
-msgstr ""
+msgstr "Inte installerad"
 
 #: includes/options/templates/customize-intro.php:35
 msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
@@ -1370,21 +1376,23 @@ msgstr ""
 
 #: includes/options/templates/customize-intro.php:39
 msgid "However, some themes do not follow all WordPress standards strictly."
-msgstr ""
+msgstr "Men vissa teman följer inte alla WordPress-standarder strikt."
 
 #: includes/options/templates/customize-intro.php:41
 msgid "WPGlobus Customizer may behave incorrectly with those themes."
-msgstr ""
+msgstr "WPGlobus-anpassaren kan uppträda felaktigt med dessa teman."
 
 #: includes/options/templates/customize-intro.php:45
 msgid "To avoid conflicts, you can switch the WPGlobus Customizer off:"
-msgstr ""
+msgstr "För att undvika konflikter kan du stänga av WPGlobus-anpassaren:"
 
 #: includes/options/templates/customize-intro.php:53
 msgid ""
 "Below is the list of themes that do not support the WPGlobus Customizer. "
 "With those themes, WPGlobus Customizer is switched off by default"
 msgstr ""
+"Nedan är listan över teman som inte stöder WPGlobus-anpassaren. Med dessa "
+"teman är WPGlobus-anpassaren avstängd som standard"
 
 #: includes/options/templates/customize-intro.php:60
 msgid "The currently active theme is"
@@ -1400,11 +1408,11 @@ msgstr ""
 
 #: includes/options/templates/customize-intro.php:72
 msgid "to translate, please go to"
-msgstr ""
+msgstr "att översätta, gå till"
 
 #: includes/options/templates/customize-intro.php:81
 msgid "Go to Customizer"
-msgstr ""
+msgstr "Gå till anpassare"
 
 #: includes/options/templates/customize-intro.php:85
 msgid "is set to"
@@ -1420,7 +1428,7 @@ msgstr ""
 
 #: includes/options/templates/customize-intro.php:96
 msgid "now"
-msgstr ""
+msgstr "nu"
 
 #: includes/options/wpglobus-options-header.php:25
 msgid "We rely on your support!"
@@ -1452,7 +1460,7 @@ msgstr "Hämta WPGlobus Plus nu!"
 
 #: wpglobus.php:13
 msgid "https://github.com/WPGlobus/WPGlobus"
-msgstr ""
+msgstr "https://github.com/WPGlobus/WPGlobus"
 
 #: wpglobus.php:14
 msgid ""
@@ -1464,4 +1472,4 @@ msgstr ""
 
 #: wpglobus.php:19
 msgid "https://wpglobus.com/"
-msgstr ""
+msgstr "https://wpglobus.com/"
