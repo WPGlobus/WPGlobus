@@ -1,6 +1,10 @@
 <?php
 /**
  * wpglobus_multicheck
+ *
+ * @since 2.2.11 
+ * 	- added `disabled` attribute.
+ * 	- added `field_wrapper_style` attribute.
  */
 
 // Exit if accessed directly
@@ -14,7 +18,6 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 	 * Class WPGlobusOptions_wpglobus_multicheck
 	 */
 	class WPGlobusOptions_wpglobus_multicheck {
-
 
 		/**
 		 * WPGlobusOptions_wpglobus_multicheck constructor.
@@ -48,14 +51,18 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 				</div>
 				<div class="grid__item">
 					<fieldset id="<?php echo esc_attr( $field['id'] ); ?>-multicheck">
-						<?php foreach ( $field['options'] as $value => $attrs ): ?>
-							<div>
+						<?php foreach ( $field['options'] as $value => $attrs ): 
+							$disabled = (! empty($attrs['disabled']) && ($attrs['disabled'] == 'disabled' || $attrs['disabled'] === true) ) ? 'disabled' : '';
+							$field_wrapper_style = empty($attrs['field_wrapper_style']) ? '' : $attrs['field_wrapper_style'];
+						?>
+							<div class="field-wrapper" style="<?php echo $field_wrapper_style; ?>">
 								<input type="hidden" value="0"
 										name="<?php echo esc_attr( $field['name'] ); ?>[control][<?php echo esc_attr( $value ); ?>]"/>
 								<input type="checkbox"<?php checked( $attrs['checked'] ); ?>
 										id="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"
 										name="<?php echo esc_attr( $field['name'] ); ?>[<?php echo esc_attr( $value ); ?>]"
-										value="1">
+										value="1" 
+										<?php echo $disabled; ?>>
 								<label for="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $attrs['label'] ); ?></label>
 							</div>
 						<?php endforeach; ?>
