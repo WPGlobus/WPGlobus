@@ -37,6 +37,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		protected $language = false;
 
 		protected $default_language;
+		
+		/**
+		 * @since 2.2.11
+		 */
+		public $post_types = array();
 
 		/**
 		 * Constructor.
@@ -49,11 +54,21 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			if ( isset( $init_attrs['default_language'] ) ) {
 				$this->default_language = $init_attrs['default_language'];
 			}
+			
+			/**
+			 * @since 2.2.11
+			 */
+			if ( isset( $init_attrs['post_types'] ) ) {
+				$this->post_types = $init_attrs['post_types'];
+			}
 
 			if ( $init ) {
 
 				require_once dirname( __FILE__ ) . '/class-wpglobus-builders.php';
-				$builder = WPGlobus_Builders::get();
+				/**
+				 * @since 2.2.11 was added second parameter.
+				 */				
+				$builder = WPGlobus_Builders::get(true, $this->post_types);
 
 				$this->id = $builder['id'];
 				unset( $builder['id'] );
