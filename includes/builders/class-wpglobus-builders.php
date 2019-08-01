@@ -29,6 +29,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		protected static $add_on = array();
 
 		/**
+		 * @var string
+		 * @since 2.2.11
+		 */		
+		protected static $post_type = null;
+
+		/**
 		 * @return array
 		 */
 		public static function get_addons() {
@@ -167,12 +173,13 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		}
 
 		/**
-		 * @param bool $init
+		 * @param bool  $init
+		 * @param array $post_types was added @since 2.2.11 
 		 *
 		 * @return array|bool
 		 */
-		public static function get( $init = true ) {
-
+		public static function get( $init = true, $post_types = array() ) {
+				
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			//return false;
 			// }
@@ -200,6 +207,32 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'multilingualFields' => array( 'post_title', 'excerpt' ),
 				'translatableClass'  => 'wpglobus-translatable',
 			);
+			 
+			/**
+			 * @since 2.2.11
+			 */
+			if ( in_array( $pagenow, array('post.php', 'post-new.php', 'media-new.php') ) ) {
+				
+				$post_type = self::get_post_type_2();
+
+				/**
+				 * Filter for post types.
+				 *
+				 * @since 2.2.11
+				 *
+				 * @param array  $post_types Array of post types.
+				 * @param string $post_type  Current post type.
+				 *
+				 * @return array
+				 */
+				$post_types = apply_filters( 'wpglobus_builders_post_types', $post_types, $post_type );
+
+				if ( ! array_key_exists( $post_type, $post_types ) ) {
+					return self::$attrs;
+				} else if ( ! $post_types[$post_type] ) {
+					return self::$attrs;
+				}
+			}
 
 			if ( $init ) {
 
@@ -248,7 +281,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 				/**
 				 * @since 1.9.17
-				 * @todo  WIP
+				 * @W.I.P
 				 */
 				/*
 				$builder = self::is_siteorigin_panels();
@@ -272,7 +305,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		/**
 		 * Page Builder by SiteOrigin.
-		 * @todo W.I.P
+		 * @W.I.P
 		 * https://wordpress.org/plugins/siteorigin-panels/
 		 */
 		protected static function is_siteorigin_panels() {}
@@ -322,7 +355,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					/**
 					 * Init current post type.
 					 */
-					$post_type = '';
+					$post_type = is_null(self::$post_type) ? '' : self::$post_type;
 
 					/**
 					 * Init post ID.
@@ -359,9 +392,27 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						 * return false;
 						 * }
 						 * // */
+						// @W.I.P @since 2.2.11
+						// [REQUEST_URI] => /?p=75&elementor-preview=75&ver=1561202861
 
 						$load_elementor = false;
 						$is_admin       = false;
+						
+						/**
+						 * @todo Preview page for draft status.
+						 * [REQUEST_URI] => /?p=75&elementor-preview=75&ver=1561202861
+						 * @W.I.P
+						 * @since 2.2.11 [REQUEST_URI] was changed to `?p=75&preview_id=75&preview_nonce=da660129a7&preview=true`.
+						 */
+						/* 
+						if ( ! empty( $_GET['p'] ) ) {
+							$load_elementor = true;
+							$is_admin       = true;
+							$post_id		= sanitize_text_field( $_GET['p'] );
+							$post_type 		= self::get_post_type($post_id);
+							
+						}
+						// */
 
 					} elseif ( 'post.php' === $pagenow ) {
 
@@ -380,7 +431,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$cpt_support = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
 
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-						if ( isset( $_GET['post_type'] ) ) {
+						if ( empty( $post_type ) && isset( $_GET['post_type'] ) ) {
 							/**
 							 * For post-new.php page.
 							 */
@@ -547,6 +598,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					'post_type'    => $post_type,
 					'builder_page' => $_builder_page,
 				);
+				
+				/**
+				 * @since 2.2.11
+				 * @W.I.P
+				 */
+				//self::$admin_attrs['multilingualFields'][] = 'wpb_visual_composer';
 
 				$attrs = self::get_attrs( $_attrs );
 
@@ -625,6 +682,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 						$_continue = false;
 						if ( 0 !== (int) $post_id ) {
+
+							$GLOBALS['WPGlobus']['builder'] = 'gutenberg';
+							$GLOBALS['WPGlobus']['context'] = $context;
 							$GLOBALS['WPGlobus']['post_id'] = $post_id;
 							switch ( $_request_uri[4] ) {
 								case 'posts':
@@ -650,13 +710,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 					$load_gutenberg = true;
 
-					$post_type = '';
+					$post_type = is_null(self::$post_type) ? '' : self::$post_type;
+					
 					/**
 					 * Check out $_POST['post_type'] to define post type.
 					 *
 					 * @since 2.1.6
 					 */
-					if ( ! empty( $_POST['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					if ( empty( $post_type ) && ! empty( $_POST['post_type'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_type = $_POST['post_type']; // phpcs:ignore WordPress.CSRF.NonceVerification					
 					}
 
@@ -672,7 +733,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					// }
 
 					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg, $post_type );
-
+					
 				}
 
 				$_attrs = array(
@@ -786,9 +847,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 									}
 								}
 							}
-
-							$post_type = '';
-							if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+							
+							$post_type = is_null(self::$post_type) ? '' : self::$post_type;
+							
+							if ( empty($post_type) && ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 								$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 							}
 
@@ -840,13 +902,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 * @return bool
 		 */
 		protected static function get_3rd_party_status_for_gutenberg( $load_gutenberg, $post_type = '' ) {
-
+	
+			if ( '' === $post_type ) {
+				$post_type = self::get_post_type_2();
+			}
+			
 			if ( defined( 'WC_PLUGIN_FILE' ) ) {
 				/**
 				 * WooCommerce.
 				 */
 				if ( 'product' === $post_type ) {
-
+	
 					$load_gutenberg = false;
 
 				} elseif ( '' === $post_type ) {
@@ -997,9 +1063,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				$wpseo_titles = get_option( 'wpseo_titles' );
 
 				if ( 'post.php' === $pagenow ) {
-
-					$post_type = '';
-					if ( ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					
+					$post_type = is_null(self::$post_type) ? '' : self::$post_type;
+					
+					if ( empty( $post_type ) && ! empty( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_type = self::get_post_type( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 					}
 
@@ -1148,7 +1215,6 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			// @todo may be disable post type here.
 			// $_attrs['builder_page'] = false;
-			// error_log(print_r($_attrs, true));
 			return $_attrs;
 		}
 
@@ -1160,6 +1226,20 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 * @return null|string
 		 */
 		protected static function get_post_type( $id = '' ) {
+
+			/**
+			 * Get post type.
+			 *
+			 * @since 2.2.11
+			 */			
+			if ( ! is_null( self::$post_type ) ) {
+				return self::$post_type;	
+			}
+			
+			/**
+			 * @since 2.2.11
+			 * @W.I.P to use get_post_type_2()
+			 */
 			if ( 0 === (int) $id ) {
 				return null;
 			}
@@ -1170,6 +1250,65 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			$post_type = $wpdb->get_var( $wpdb->prepare( "SELECT post_type FROM $wpdb->posts WHERE ID = %d", $id ) );
 
 			return $post_type;
+		}
+		
+		/**
+		 * Get post type 2.
+		 *
+		 * @since 2.2.11
+		 */
+		protected static function get_post_type_2() {
+			
+			if ( ! is_null( self::$post_type ) ) {
+				return self::$post_type;	
+			}
+			
+			/** @global string $pagenow */
+			global $pagenow;			
+			
+			$post_type = '';
+			$post_id   = '';
+
+			switch ($pagenow) {
+				case 'media-new.php' :
+					$post_type = 'attachment';
+					break;
+				case 'post-new.php':
+					if ( isset( $_GET['post_type'] ) ) {
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$post_type = sanitize_text_field( $_GET['post_type'] );
+					} else {
+						$post_type = 'post';
+					}
+					break;
+				default:
+					// post.php page.
+					if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						$post_id = $_GET['post']; // phpcs:ignore WordPress.CSRF.NonceVerification
+					} else if ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						/**
+						 * Case when Update button was clicked.
+						 */
+						$post_id = $_REQUEST['post_ID']; // phpcs:ignore WordPress.CSRF.NonceVerification
+					}
+					break;
+			}
+
+			if ( ! empty($post_type) ) {
+				self::$post_type = $post_type;
+				return self::$post_type;
+			}
+			
+			if ( 0 === (int) $post_id ) {
+				return false;
+			}
+			
+			/** @global wpdb $wpdb */
+			global $wpdb;
+
+			self::$post_type = $wpdb->get_var( $wpdb->prepare( "SELECT post_type FROM $wpdb->posts WHERE ID = %d", $post_id ) );
+
+			return self::$post_type;			
 		}
 
 	}
