@@ -808,14 +808,56 @@ class WPGlobus_Config {
 		} else {
 			
 			$this->builder_disabled = false;
+
+			/**
+			 * @since 2.2.11
+			 */
+			if ( empty( $wpglobus_option['builder_post_types'] ) ) {
+				$builder_post_types = array();			
+			} else {
+				$builder_post_types = $wpglobus_option['builder_post_types'];
+				unset( $wpglobus_option['builder_post_types'] );
+			}
 			
+			/**
+			 * Init post types settings.
+			 *
+			 * @since 2.2.11
+			 */
+			$builder_default_post_types = array(
+				'post' => true,
+				'page' => true,
+				'attachment' => false
+			);
+			
+			/** $wpglobus_option['post_type'] contains disabled post types. */
+			$post_types_disabled = array_intersect_key($builder_default_post_types, $wpglobus_option['post_type']);
+
+			foreach( $post_types_disabled as $_post_type=>$status ) {
+				if ( array_key_exists($_post_type, $builder_default_post_types) ) {
+					$builder_default_post_types[$_post_type] = false;
+				}
+			}
+			
+			if ( empty($builder_post_types) ) {
+				$builder_post_types = $builder_default_post_types;
+			} else {
+				$builder_post_types= array_merge( $builder_default_post_types,  $builder_post_types );
+			}
+
 			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
-			$this->builder = new WPGlobus_Config_Builder(true, array('default_language' => $this->default_language));
+			$this->builder = new WPGlobus_Config_Builder(
+				true, 
+				array(
+					'default_language' => $this->default_language, 
+					'post_types' => $builder_post_types
+				)
+			);
 		
 			if ( is_admin() ) {
 				
 				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
-				$config_vendor = WPGlobus_Config_Vendor::get_instance( $this->builder );					
+				$config_vendor = WPGlobus_Config_Vendor::get_instance( $this->builder );
 
 				require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
 				WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
@@ -828,6 +870,12 @@ class WPGlobus_Config {
 			}
 		}
 
+		/**
+		 * @since 2.2.11
+		 */
+		if ( isset( $wpglobus_option['post_type'] ) ) {
+			unset( $wpglobus_option['post_type'] );
+		}
 		
 		/**
 		 * Remaining wpglobus options after unset() is extended options
