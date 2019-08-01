@@ -568,6 +568,8 @@ class WPGlobus_Options {
 	protected function section_welcome() {
 
 		$fields_home = array();
+	
+		$tab_compatibility = __( 'Сompatibility', 'wpglobus' );
 
 		/**
 		 * The Welcome message.
@@ -588,6 +590,25 @@ class WPGlobus_Options {
 						   '<br/>' .
 						   // Translators: placeholders for "strong" tags.
 						   '&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<br/>' .
+						   '<br/>' .
+						   '<h4>' . esc_html__( 'Важные уведомления', 'wpglobus' ) . '</h4>' .
+						   '' . sprintf( esc_html__( 'Версия %1$s1.9.17%2$s ', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<br/>' .
+						   '' . sprintf( esc_html__( 'Начиная с этой версии %1$sWPGlobus%2$s работает в двух режимах', 'wpglobus' ), '<strong>', '</strong>' ) . ':' .
+						   '<br/>' .
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( '%1$sBuilder mode%2$s: WPGlobus автоматически входит в этот режим, когда обнаруживает какие-либо плагины/надстройки, перечисленные на вкладке %1$s[%3$s]%2$s.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
+						   '<br/>' .
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( '%1$sStandard/Classic mode%2$s: используется, когда нет плагинов `Builder` или если вы явно отключили поддержку компоновщика на вкладке %1$s[%3$s]%2$s.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
+						   '<br/>' .
+						   '<br/>' .
+						   '' . sprintf( esc_html__( 'Версия %1$s2.2.11%2$s ', 'wpglobus' ), '<strong>', '</strong>' ) .						   
+						   '<br/>' .
+						   '' . esc_html__( 'Начиная с этой версии', 'wpglobus' ) . ':' .						   
+						   '<br/>' .						   
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( 'Для всех пользовательских типов постов (CPT) %1$sBuilder mode%2$s отключен по умолчанию.', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<br/>' .
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( 'Чтобы включить поддержку %1$sBuilder mode%2$s для определённого типа постов перейдите на вкладку %1$s[%3$s]%2$s.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
 						   '<br/>' .
 						   '<br/>' .
 						   esc_html__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
