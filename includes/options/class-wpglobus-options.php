@@ -1228,31 +1228,23 @@ class WPGlobus_Options {
 	protected function section_post_types() {
 
 		/**
-		 * Post types.
-		 *
-		 * @var WP_Post_Type[] $post_types
-		 */
-		$post_types = get_post_types( array(), 'objects' );
-
-		$disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->config->disabled_entities );
+		 * @since 2.2.11
+		 */			
+		$post_types = $this->get_post_types();
 
 		$options = array();
 
 		foreach ( $post_types as $post_type ) {
 
-			// todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
-			if ( in_array( $post_type->name, WPGlobus_Post_Types::hidden_types(), true ) ) {
-				continue;
-			}
-
 			$label   = $post_type->label . ' (' . $post_type->name . ')';
-			$checked = ! in_array( $post_type->name, $disabled_entities, true );
+
+			$checked = ! $post_type->wpglobus['post_type_disabled'];
 
 			$options[ $post_type->name ] = array(
 				'label'   => $label,
 				'checked' => $checked,
 			);
-		}
+		}			
 
 		$fields = array();
 
@@ -1427,6 +1419,9 @@ class WPGlobus_Options {
 			'checked' => empty( $wpglobus_option['builder_disabled'] ) || ( isset( $options['builder_disabled'] ) && false === $options['builder_disabled'] ),
 		);
 
+		/**
+		 * Field: "Builders support".
+		 */
 		$fields[] =
 			array(
 				'id'      => 'builder_disabled',
@@ -1435,7 +1430,65 @@ class WPGlobus_Options {
 				'name'    => 'wpglobus_option[builder_disabled]',
 				'title'   => __( 'Builders support', 'wpglobus' ),
 			);
+			
+		/**
+		 * Field: "Builder mode is enabled on these Post Types".
+		 *
+		 * @since 2.2.11
+		 */
+		if ( empty( $wpglobus_option['builder_disabled'] ) || ( isset( $options['builder_disabled'] ) && false === $options['builder_disabled'] ) ) :
+		
+			$post_types = $this->get_post_types();
+			
+			$options = array();
+			
+			foreach ( $post_types as $post_type ) {
 
+				$label   = $post_type->label . ' (' . $post_type->name . ')';
+
+				$checked = ! $post_type->wpglobus['post_type_disabled'];
+				
+				$disabled = '';
+				
+				$field_wrapper_style = '';
+				
+				if ( $checked || in_array( $post_type->name, array('post', 'page') ) ) {
+		
+					if ( in_array( $post_type->name, array('post', 'page') ) ) {
+						$disabled = true;
+					} else {
+						$checked = false;
+						if ( ! empty( $this->config->builder->post_types[$post_type->name] ) && $this->config->builder->post_types[$post_type->name] == 1  ) {
+							$checked = true;
+						}
+					}
+					
+				} else {
+					$field_wrapper_style = 'display:none;';
+				}
+									
+				$options[ $post_type->name ] = array(
+					'label'    => $label,
+					'checked'  => $checked,
+					'disabled' => $disabled,
+					'field_wrapper_style' => $field_wrapper_style,
+				);
+			}
+			
+			$fields[] =
+				array(
+					'id'      => 'builder_post_types',
+					'type'    => 'wpglobus_multicheck',
+					'options' => $options,
+					'name'    => 'wpglobus_option[builder_post_types]',
+					'title'   => __( 'Builder mode is enabled on these Post Types', 'wpglobus' ),
+				);
+				
+		endif;		
+		
+		/**
+		 * Other fields.
+		 */
 		$fields[] =
 			array(
 				'id'    => 'compatibility',
@@ -1443,7 +1496,7 @@ class WPGlobus_Options {
 				'html'  => include dirname( __FILE__ ) . '/templates/compatibility.php',
 				'class' => 'normal',
 			);
-
+		
 		$fields[] =
 			array(
 				'id'    => 'builder_beta_stage',
@@ -1681,6 +1734,20 @@ class WPGlobus_Options {
 			// Revert. Set as "disabled".
 			$data['builder_disabled'] = 1;
 		}
+		
+		// @since 2.2.11 The $data['builder_post_types'].
+		// Don't handle `post` and `page` post type. @see `section_compatibility` function.
+		if ( ! empty( $data['builder_post_types']['control'] ) ) {
+			unset( $data['builder_post_types']['control'] );
+		}
+		// We need synchronize with $data['post_type'].
+		if ( ! empty($data['post_type']) ) {
+			foreach( $data['post_type'] as $post_type=>$init ) {
+				if ( 0 == (int) $init && ! empty($data['builder_post_types'][$post_type]) ) {
+					unset( $data['builder_post_types'][$post_type] );
+				}
+			}
+		}
 
 		return $data;
 	}
@@ -1862,4 +1929,62 @@ class WPGlobus_Options {
 
 		return (bool) get_plugins( '/' . $folder );
 	}
+
+	/**
+	 * Get post types.
+	 *
+	 * @since 2.2.11
+	 *
+	 * @return array
+	 */	
+	protected function get_post_types() {
+		
+		static $post_types = null;
+		
+		if ( ! is_null($post_types) ) {
+			return $post_types;
+		}		
+		
+		/**
+		 * Post types.
+		 *
+		 * @var WP_Post_Type[] $_post_types
+		 */
+		$_post_types = get_post_types( array(), 'objects' );
+
+		/**
+		 * Filter the array of disabled entities.
+		 * @see `wpglobus_disabled_entities` filter in includes\class-wpglobus.php
+		 *
+		 * @since 2.2.11
+		 */
+		$disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->config->disabled_entities );
+
+		$hidden_types = WPGlobus_Post_Types::hidden_types();
+
+		foreach ( $_post_types as $post_type ) {
+
+			// todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
+			if ( in_array( $post_type->name, $hidden_types, true ) ) {
+				
+				unset( $_post_types[$post_type->name] );
+			
+			} else {
+				
+				$_post_types[$post_type->name]->wpglobus = array();
+				if ( in_array( $post_type->name, $disabled_entities, true ) ) {
+					$_post_types[$post_type->name]->wpglobus['post_type_disabled'] = true;
+				} else {
+					$_post_types[$post_type->name]->wpglobus['post_type_disabled'] = false;
+				}
+				
+			}
+		}
+		
+		$post_types = $_post_types;
+		return $post_types;
+	}
 }
+
+
+# --- EOF
