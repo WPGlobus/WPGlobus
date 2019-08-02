@@ -474,28 +474,39 @@ class WPGlobus_aioseop {
 		$permalink['action'] = 'complete';
 
 		$fields = array();
-
+		
 		/**
-		 * Keywords
+		 * @since 2.2.11
 		 */
-		$fields['aiosp_keywords']['opts']              = array(
-			'name'      => __( 'Keywords (comma separated)', 'all_in_one_seo_pack' ),
-			'type'      => 'text',
-			'label'     => '',
-			'help_text' => __( 'A comma separated list of your most important keywords for this page that will be written as META keywords.', 'all_in_one_seo_pack' ),
-		);
-		$fields['aiosp_keywords']['opts']['help_text'] .= '<br /><a target="_blank" href="http://semperplugins.com/sections/postpage-settings/">Click here for documentation on this setting</a>';
-		$fields['aiosp_keywords']['args']              = array(
-			'name'    => 'aiosp_keywords',
-			'attr'    => 'placeholder="{{placeholder}}"',
-			'data'    => '',
-			'classes' => 'class="wpglobus-aioseop_keywords wpglobus-translatable"',
-			'value'   => '',
-			'prefix'  => '',
-			'options' => $fields['aiosp_keywords']['opts'],
-		);
-
-
+		$aioseop_options = aioseop_get_options();		
+		
+		if ( ! empty( $aioseop_options['aiosp_togglekeywords'] ) || (int) $aioseop_options['aiosp_togglekeywords'] === 1 ) {
+			/**
+			 * Do not set the keywords field in according to the option.
+			 * @since 2.2.11
+			 */ 
+		} else {
+			/**
+			 * Keywords.
+			 */
+			$fields['aiosp_keywords']['opts']              = array(
+				'name'      => __( 'Keywords (comma separated)', 'all_in_one_seo_pack' ),
+				'type'      => 'text',
+				'label'     => '',
+				'help_text' => __( 'A comma separated list of your most important keywords for this page that will be written as META keywords.', 'all_in_one_seo_pack' ),
+			);
+			$fields['aiosp_keywords']['opts']['help_text'] .= '<br /><a target="_blank" href="http://semperplugins.com/sections/postpage-settings/">Click here for documentation on this setting</a>';
+			$fields['aiosp_keywords']['args']              = array(
+				'name'    => 'aiosp_keywords',
+				'attr'    => 'placeholder="{{placeholder}}"',
+				'data'    => '',
+				'classes' => 'class="wpglobus-aioseop_keywords wpglobus-translatable"',
+				'value'   => '',
+				'prefix'  => '',
+				'options' => $fields['aiosp_keywords']['opts'],
+			);
+		}
+		
 		/**
 		 * Description
 		 */
@@ -626,8 +637,6 @@ class WPGlobus_aioseop {
 				}
 			}
 		}
-
-		$aioseop_options = aioseop_get_options();
 
 		switch ( $post->post_type ) :
 			case 'post' :
