@@ -568,7 +568,7 @@ class WPGlobus_Options {
 	protected function section_welcome() {
 
 		$fields_home = array();
-	
+
 		$tab_compatibility = __( 'Сompatibility', 'wpglobus' );
 
 		/**
@@ -592,23 +592,30 @@ class WPGlobus_Options {
 						   '&bull; ' . sprintf( esc_html__( 'Use the %1$s[Languages Table]%2$s section to add a new language or to edit the language attributes: name, code, flag icon, etc.', 'wpglobus' ), '<strong>', '</strong>' ) .
 						   '<br/>' .
 						   '<br/>' .
-						   '<h4>' . esc_html__( 'Важные уведомления', 'wpglobus' ) . '</h4>' .
-						   '' . sprintf( esc_html__( 'Версия %1$s1.9.17%2$s ', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<h4>' . esc_html__( 'Important notes', 'wpglobus' ) . '</h4>' .
+						   // Translators: placeholders for "strong" tags.
+						   '' . sprintf( esc_html__( 'Version %1$s1.9.17%2$s ', 'wpglobus' ), '<strong>', '</strong>' ) .
 						   '<br/>' .
-						   '' . sprintf( esc_html__( 'Начиная с этой версии %1$sWPGlobus%2$s работает в двух режимах', 'wpglobus' ), '<strong>', '</strong>' ) . ':' .
+						   // Translators: placeholders for "strong" tags.
+						   '' . sprintf( esc_html__( 'Starting from this version, %1$sWPGlobus%2$s operates in two modes', 'wpglobus' ), '<strong>', '</strong>' ) . ':' .
 						   '<br/>' .
-						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( '%1$sBuilder mode%2$s: WPGlobus автоматически входит в этот режим, когда обнаруживает какие-либо плагины/надстройки, перечисленные на вкладке %1$s[%3$s]%2$s.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
+						   // Translators: placeholders for "strong" tags; compatibility tab link.
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( '%1$sBuilder mode%2$s: WPGlobus turns this mode on automatically when it discovers any of the plugins/add-ons listed on the %1$s[%3$s]%2$s tab.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
 						   '<br/>' .
-						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( '%1$sStandard/Classic mode%2$s: используется, когда нет плагинов `Builder` или если вы явно отключили поддержку компоновщика на вкладке %1$s[%3$s]%2$s.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
+						   // Translators: placeholders for "strong" tags; compatibility tab link.
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( '%1$sStandard/Classic mode%2$s: is used when there are no plugins `Builder` or if you explicitly turned off builder support on the %1$s[%3$s]%2$s tab.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
 						   '<br/>' .
 						   '<br/>' .
-						   '' . sprintf( esc_html__( 'Версия %1$s2.2.11%2$s ', 'wpglobus' ), '<strong>', '</strong>' ) .						   
+						   // Translators: placeholders for "strong" tags.
+						   '' . sprintf( esc_html__( 'Version %1$s2.2.11%2$s ', 'wpglobus' ), '<strong>', '</strong>' ) .
 						   '<br/>' .
-						   '' . esc_html__( 'Начиная с этой версии', 'wpglobus' ) . ':' .						   
-						   '<br/>' .						   
-						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( 'Для всех пользовательских типов постов (CPT) %1$sBuilder mode%2$s отключен по умолчанию.', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '' . esc_html__( 'Starting from this version', 'wpglobus' ) . ':' .
 						   '<br/>' .
-						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( 'Чтобы включить поддержку %1$sBuilder mode%2$s для определённого типа постов перейдите на вкладку %1$s[%3$s]%2$s.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
+						   // Translators: placeholders for "strong" tags.
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( 'The %1$sBuilder mode%2$s is turned OFF by default for all custom post types (CPT).', 'wpglobus' ), '<strong>', '</strong>' ) .
+						   '<br/>' .
+						   // Translators: placeholders for "strong" tags.
+						   '&nbsp;&nbsp;&nbsp;&bull; ' . sprintf( esc_html__( 'To turn on the %1$sBuilder mode%2$s for specific post types, please visit the %1$s[%3$s]%2$s tab.', 'wpglobus' ), '<strong>', '</strong>', $tab_compatibility ) .
 						   '<br/>' .
 						   '<br/>' .
 						   esc_html__( 'Should you have any questions or comments, please do not hesitate to contact us.', 'wpglobus' ) .
@@ -1250,14 +1257,14 @@ class WPGlobus_Options {
 
 		/**
 		 * @since 2.2.11
-		 */			
+		 */
 		$post_types = $this->get_post_types();
 
 		$options = array();
 
 		foreach ( $post_types as $post_type ) {
 
-			$label   = $post_type->label . ' (' . $post_type->name . ')';
+			$label = $post_type->label . ' (' . $post_type->name . ')';
 
 			$checked = ! $post_type->wpglobus['post_type_disabled'];
 
@@ -1265,7 +1272,7 @@ class WPGlobus_Options {
 				'label'   => $label,
 				'checked' => $checked,
 			);
-		}			
+		}
 
 		$fields = array();
 
@@ -1458,23 +1465,23 @@ class WPGlobus_Options {
 		 * @since 2.2.11
 		 */
 		if ( empty( $wpglobus_option['builder_disabled'] ) || ( isset( $options['builder_disabled'] ) && false === $options['builder_disabled'] ) ) :
-		
+
 			$post_types = $this->get_post_types();
-			
+
 			$options = array();
-			
+
 			foreach ( $post_types as $post_type ) {
 
-				$label   = $post_type->label . ' (' . $post_type->name . ')';
+				$label = $post_type->label . ' (' . $post_type->name . ')';
 
 				$checked = ! $post_type->wpglobus['post_type_disabled'];
-				
+
 				$disabled = '';
-				
+
 				$field_wrapper_style = '';
-				
+
 				if ( $checked || in_array( $post_type->name, array('post', 'page') ) ) {
-		
+
 					if ( in_array( $post_type->name, array('post', 'page') ) ) {
 						$disabled = true;
 					} else {
@@ -1483,19 +1490,18 @@ class WPGlobus_Options {
 							$checked = true;
 						}
 					}
-					
 				} else {
 					$field_wrapper_style = 'display:none;';
 				}
-									
+
 				$options[ $post_type->name ] = array(
-					'label'    => $label,
-					'checked'  => $checked,
-					'disabled' => $disabled,
+					'label'               => $label,
+					'checked'             => $checked,
+					'disabled'            => $disabled,
 					'field_wrapper_style' => $field_wrapper_style,
 				);
 			}
-			
+
 			$fields[] =
 				array(
 					'id'      => 'builder_post_types',
@@ -1755,17 +1761,17 @@ class WPGlobus_Options {
 			// Revert. Set as "disabled".
 			$data['builder_disabled'] = 1;
 		}
-		
+
 		// @since 2.2.11 The $data['builder_post_types'].
 		// Don't handle `post` and `page` post type. @see `section_compatibility` function.
 		if ( ! empty( $data['builder_post_types']['control'] ) ) {
 			unset( $data['builder_post_types']['control'] );
 		}
 		// We need synchronize with $data['post_type'].
-		if ( ! empty($data['post_type']) ) {
-			foreach( $data['post_type'] as $post_type=>$init ) {
-				if ( 0 == (int) $init && ! empty($data['builder_post_types'][$post_type]) ) {
-					unset( $data['builder_post_types'][$post_type] );
+		if ( ! empty( $data['post_type'] ) ) {
+			foreach ( $data['post_type'] as $post_type => $init ) {
+				if ( 0 == (int) $init && ! empty( $data['builder_post_types'][ $post_type ] ) ) {
+					unset( $data['builder_post_types'][ $post_type ] );
 				}
 			}
 		}
@@ -1957,15 +1963,15 @@ class WPGlobus_Options {
 	 * @since 2.2.11
 	 *
 	 * @return array
-	 */	
+	 */
 	protected function get_post_types() {
-		
+
 		static $post_types = null;
-		
-		if ( ! is_null($post_types) ) {
+
+		if ( ! is_null( $post_types ) ) {
 			return $post_types;
-		}		
-		
+		}
+
 		/**
 		 * Post types.
 		 *
@@ -1987,25 +1993,21 @@ class WPGlobus_Options {
 
 			// todo "SECTION: Post types" in includes\admin\class-wpglobus-customize-options.php to adjust post type list.
 			if ( in_array( $post_type->name, $hidden_types, true ) ) {
-				
-				unset( $_post_types[$post_type->name] );
-			
+
+				unset( $_post_types[ $post_type->name ] );
 			} else {
-				
-				$_post_types[$post_type->name]->wpglobus = array();
+
+				$_post_types[ $post_type->name ]->wpglobus = array();
 				if ( in_array( $post_type->name, $disabled_entities, true ) ) {
-					$_post_types[$post_type->name]->wpglobus['post_type_disabled'] = true;
+					$_post_types[ $post_type->name ]->wpglobus['post_type_disabled'] = true;
 				} else {
-					$_post_types[$post_type->name]->wpglobus['post_type_disabled'] = false;
+					$_post_types[ $post_type->name ]->wpglobus['post_type_disabled'] = false;
 				}
-				
 			}
 		}
-		
+
 		$post_types = $_post_types;
 		return $post_types;
 	}
 }
 
-
-# --- EOF
