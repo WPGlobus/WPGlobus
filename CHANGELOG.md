@@ -2,9 +2,14 @@
 
 ## Changelog ##
 
-2019-06-?? - version 2.2.11
+2019-08-05 - version 2.2.11
 * Fixed: Default locale and flag for Taiwan.
-* Added: More translated strings in `de_DE` and `sv_SE` (WPGlobus Admin interface).
+* Fixed: (Vendor/All In One SEO Pack) Do not set the keywords field in according to the option.
+* Added: (WPGlobus Admin interface) More translated strings in `de_DE` and `sv_SE`.
+* Added: (Config) (Options/Сompatibility) `builder_post_types` option.
+* Added: (Config/Builder) `post_types` property.
+* Added: (Options/Welcome) Notices to `Welcome` tab.
+* Added: (Vendor/All In One SEO Pack) `wpglobus-translatable` class for multilingual fields.
 
 2019-06-07 - version 2.2.10
 * Fixed: (Vendor/All In One SEO Pack) The detection of version less than 3.0.
