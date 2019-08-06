@@ -1,6 +1,5 @@
 {
   "name": "wpglobus",
-  "version": "2.2.11",
   "title": "WPGlobus",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "private": true,
@@ -36,6 +35,7 @@
     "through2": "3.0.1"
   },
   "dependencies": {},
+  "version": "2.2.12",
   "scripts": {
     "list": "npm list --dept=0 && npm outdated",
     "audit": "npm audit",
@@ -44,7 +44,9 @@
     "// 1. Get updates": "npm run git:fetch:all && npm run git:pull:dev",
     "git:fetch:all": "git fetch --all",
     "git:pull:dev": "git checkout develop && git pull",
-    "// 2. UPDATE VERSION IN THIS FILE!": "",
+    "// 2. MANUAL WORK:": "",
+    "// 2.1 UPDATE version": "",
+    "// 2.2 UPDATE readme.txt": "",
     "// 3. Build": "",
     "build": "php /tools/composer.phar update && gulp dist",
     "// 3.1 If translations changed": "",
@@ -54,10 +56,9 @@
     "pomo": "gulp pomo",
     "// 3.2 If translations changed - BUILD AGAIN!": "",
     "build:again": "gulp dist",
-    "// 4. Commit and tag AND PUSH TO develop!": "",
+    "// 4. Commit and tag AND PUSH TO develop!": "npm run git:commit && npm run git:tag && npm run git:push:develop",
     "git:commit": "git add . && git commit -m \"%npm_package_version%\"",
     "git:tag": "git tag %npm_package_version%",
-    "// 4.1 PUSH TO develop!": "",
     "git:push:develop": "git push && git push --tags && npm run git:fetch:all",
     "// 5. To master": "",
     "git:merge": "git checkout master && git merge develop",

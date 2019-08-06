@@ -1378,11 +1378,11 @@ msgstr "Разрешена"
 
 #: includes/options/class-wpglobus-options.php:1459
 msgid "Builders support"
-msgstr "Поддержка конструкторов страниц"
+msgstr "Поддержка конструкторов страниц (Builders)"
 
 #: includes/options/class-wpglobus-options.php:1511
 msgid "Builder mode is enabled on these Post Types"
-msgstr ""
+msgstr "Режим `Builder` активен для этих типов записей"
 
 #: includes/options/class-wpglobus-options.php:1571
 msgid "Old fashioned language switcher"

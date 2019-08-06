@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.12 ###
+
+
+* Fixed: (Config) PHP warnings for clean install.
+
 ### 2.2.11 ###
 
 
