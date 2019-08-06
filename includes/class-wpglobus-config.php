@@ -831,18 +831,24 @@ class WPGlobus_Config {
 			);
 			
 			/** $wpglobus_option['post_type'] contains disabled post types. */
-			$post_types_disabled = array_intersect_key($builder_default_post_types, $wpglobus_option['post_type']);
+			if ( empty( $wpglobus_option['post_type'] ) ) {
+				$post_types_disabled = array();
+			} else {
+				$post_types_disabled = array_intersect_key($builder_default_post_types, $wpglobus_option['post_type']);
+			}
 
-			foreach( $post_types_disabled as $_post_type=>$status ) {
-				if ( array_key_exists($_post_type, $builder_default_post_types) ) {
-					$builder_default_post_types[$_post_type] = false;
+			if ( ! empty( $post_types_disabled ) ) {
+				foreach( $post_types_disabled as $_post_type=>$status ) {
+					if ( array_key_exists($_post_type, $builder_default_post_types) ) {
+						$builder_default_post_types[$_post_type] = false;
+					}
 				}
 			}
 			
 			if ( empty($builder_post_types) ) {
 				$builder_post_types = $builder_default_post_types;
 			} else {
-				$builder_post_types= array_merge( $builder_default_post_types,  $builder_post_types );
+				$builder_post_types = array_merge( $builder_default_post_types,  $builder_post_types );
 			}
 
 			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
