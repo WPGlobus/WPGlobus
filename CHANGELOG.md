@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-08-06 - version 2.2.12
+* Fixed: (Config) PHP warnings for clean install.
+
 2019-08-05 - version 2.2.11
 * Fixed: Default locale and flag for Taiwan.
 * Fixed: (Vendor/All In One SEO Pack) Do not set the keywords field in according to the option.
