@@ -25,12 +25,13 @@ class WPGlobus_Utils__Test extends \PHPUnit\Framework\TestCase {
 	 * If necessary, can change to true
 	 */
 	public static $is_404_response = false;
+	/** @noinspection PhpLanguageLevelInspection */
 
 	/**
 	 * Run before each test.
 	 * To run after each test, @see tearDown
 	 */
-	protected function setUp() {
+	protected function setUp() : void {
 		self::$option_home = 'http://www.example.com';
 	}
 
