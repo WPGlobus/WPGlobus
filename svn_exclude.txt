@@ -5,6 +5,7 @@
 .gitignore
 .tx
 .jshintrc
+.phpunit.result.cache
 assets
 Gruntfile.js
 Gulpfile.js
