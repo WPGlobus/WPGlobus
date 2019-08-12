@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.13 =
+
+* Fixed: `extract_text()` regex to support line breaks in strings.
+
 = 2.2.12 =
 
 * Fixed: (Config) PHP warnings for clean install.
@@ -244,16 +248,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * Internal: (Core/Admin bar menu) Moved JS script to footer.
 * Fixed: (Builders/Yoast) Don't run builder mode for undefined post type, e.g. `slides` from Bridge theme.
-
-= 2.2.7 =
-
-* Internal: (Core/Admin bar menu) Revised WPGlobus language menu in admin bar.
-
-= 2.2.6 =
-
-* Fixed: (Builders/Elementor] Revised the language switcher JS script.
-* Added: (Builders/Elementor] Localized permalink for the `View Page` button.
-* Internal: (Core/Config Builder] Added `is_default_language` function.
 
 = Earlier versions and Add-ons =
 
