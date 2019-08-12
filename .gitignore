@@ -2,3 +2,4 @@
 /wpsvn/
 /vendor/
 *.po~
+.phpunit.result.cache

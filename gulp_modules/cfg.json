@@ -24,6 +24,7 @@
       "!.tx",
       "!unit-tests/**/{.*,*}",
       "!unit-tests",
+      "!.phpunit.result.cache",
       "!gulp_modules/**/{.*,*}",
       "!gulp_modules",
       "!wpsvn/**/{.*,*}",
