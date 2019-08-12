@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-08-?? - version 2.2.13
+* Fixed: `extract_text()` regex to support line breaks in strings.
+
 2019-08-06 - version 2.2.12
 * Fixed: (Config) PHP warnings for clean install.
 

@@ -187,7 +187,6 @@ class WPGlobus_Core {
 	 * Extract text from a string which is either:
 	 * - in the requested language (could be multiple blocks)
 	 * - or does not have the language marks
-	 * @todo  Works with single line of text only. If the text contains line breaks, they will be removed.
 	 * @todo  May fail on large texts because regex are used.
 	 *
 	 * @example
@@ -202,9 +201,10 @@ class WPGlobus_Core {
 	 *
 	 * @return string
 	 * @since 1.7.9
+	 * @since 2.2.12 Fixed regex to support line breaks in strings.
 	 */
 	public static function extract_text( $text = '', $language = '' ) {
-		if ( ! $text ) {
+		if ( ! $text || ! is_string( $text ) ) {
 			return $text;
 		}
 
@@ -212,9 +212,9 @@ class WPGlobus_Core {
 		 * `$language` not passed
 		 */
 		if ( ! $language ) {
-			// When in unit tests:
+			// When in unit tests.
 			$language = 'en';
-			// Normally:
+			// Normally.
 			if ( class_exists( 'WPGlobus_Config', false ) ) {
 				$language = WPGlobus::Config()->language;
 			}
@@ -223,7 +223,7 @@ class WPGlobus_Core {
 		// Pass 1. Remove the language marks surrounding the language we need.
 		// Pass 2. Remove the texts surrounded with other language marks, together with the marks.
 		return preg_replace(
-			array( '/{:' . $language . '}(.+?){:}/m', '/{:.+?}.+?{:}/m' ),
+			array( '/{:' . $language . '}([\S\s]+?){:}/m', '/{:.+?}[\S\s]+?{:}/m' ),
 			array( '\\1', '' ),
 			$text
 		);

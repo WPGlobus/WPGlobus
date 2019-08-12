@@ -8,7 +8,7 @@
 /**
  *
  */
-class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
+class WPGlobus_Core_Test extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @covers WPGlobus_Core::text_filter
@@ -67,6 +67,18 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		$multiple = '{:en}first_EN{:}{:ru}first_RU{:} &ndash; {:en}second_EN{:}{:ru}second_RU{:}';
 		self::assertEquals( 'first_EN &ndash; second_EN', WPGlobus_Core::extract_text( $multiple ), __LINE__ );
 		self::assertEquals( 'first_RU &ndash; second_RU', WPGlobus_Core::extract_text( $multiple, 'ru' ), __LINE__ );
+
+
+		// Content with line breaks.
+		$_content = ' <br /> <h2 style="color:#fff;" class="message-title">{:en}English Title{:}{:ru}Русский заголовок{:}</h2> <div class="message-content"> <p style="color:#fff;">{:en}English Content{:}{:ru}Русский контент.
+Русский контент.{:}</p> </div>';
+
+		$expected_en = ' <br /> <h2 style="color:#fff;" class="message-title">English Title</h2> <div class="message-content"> <p style="color:#fff;">English Content</p> </div>';
+		self::assertEquals( $expected_en, WPGlobus_Core::extract_text( $_content, 'en' ) );
+
+		$expected_ru = ' <br /> <h2 style="color:#fff;" class="message-title">Русский заголовок</h2> <div class="message-content"> <p style="color:#fff;">Русский контент.
+Русский контент.</p> </div>';
+		self::assertEquals( $expected_ru, WPGlobus_Core::extract_text( $_content, 'ru' ) );
 
 	}
 
@@ -127,7 +139,7 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		 * Default behavior (no parameters)
 		 */
 
-		$post = $this->createMockWPPost();
+		$post               = $this->createMockWPPost();
 		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		$post->post_content = '{:en}post_content EN{:}{:ru}post_content RU{:}';
 		$post->post_excerpt = '{:en}post_excerpt EN{:}{:ru}post_excerpt RU{:}';
@@ -155,7 +167,7 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		/**
 		 * Translate to a language other than the current one
 		 */
-		$post = $this->createMockWPPost();
+		$post             = $this->createMockWPPost();
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'ru' );
 		self::assertEquals( 'post_title RU', $post->post_title, 'post_title' );
@@ -164,7 +176,7 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		/**
 		 * Translate to a non-existing language - return in default language
 		 */
-		$post = $this->createMockWPPost();
+		$post               = $this->createMockWPPost();
 		$post->post_title   = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		$post->post_content = '{:en}post_content EN{:}{:xx}post_content XX{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'xx' );
@@ -176,7 +188,7 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		 * Repeated attempt to translate has no effect, when called with no parameters,
 		 * because we pass the post object by reference
 		 */
-		$post = $this->createMockWPPost();
+		$post             = $this->createMockWPPost();
 		$post->post_title = '{:en}post_title EN{:}{:ru}post_title RU{:}';
 		WPGlobus_Core::translate_wp_post( $post, 'en' );
 		self::assertEquals( 'post_title EN', $post->post_title, 'post_title' );
