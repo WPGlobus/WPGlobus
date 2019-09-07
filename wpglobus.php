@@ -44,6 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'WPGLOBUS_VERSION', '2.2.13' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'WPGLOBUS_AJAX', 'wpglobus-ajax' );
 
 /**
  * WP Requirements library.

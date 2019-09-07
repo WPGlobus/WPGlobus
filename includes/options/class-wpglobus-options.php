@@ -91,6 +91,12 @@ class WPGlobus_Options {
 		add_action( 'admin_print_scripts', array( $this, 'on__admin_scripts' ) );
 
 		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
+		
+		/**
+		 * @since 2.2.14
+		 */
+		add_action( 'wp_ajax_' . WPGLOBUS_AJAX, array( $this, 'on__process_ajax' ) );
+		
 	}
 
 	/**
@@ -2009,5 +2015,47 @@ class WPGlobus_Options {
 		$post_types = $_post_types;
 		return $post_types;
 	}
+	
+	/**
+	 * @since 2.2.14
+	 */
+	public function on__process_ajax() {
+		
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$response = array(
+				'message'  => 'You are not allowed to manage options for this site.',
+				'result'   => 'error'
+			);
+			wp_send_json_error($response);
+		}
+		
+		$option_name = WPGlobus::Config()->option; // don't use $config here.
+		$data = $_POST['data'];
+
+		$response = array(
+			'message'  => 'Incorrect option.',
+			'postData' => $data,
+			'result'   => 'error'
+		);		
+		
+		if ( 'saveOption' == $data['_action'] ) {
+			$opts = get_option($option_name);
+			foreach( $data['options'] as $option=>$value ) {
+				$opts[$option] = sanitize_text_field($value) ;
+			}
+			if ( update_option($option_name, $opts) ) {
+				$response['message'] = 'Options was updated.';
+				$response['result']  = 'success';
+			} else {
+				$response['message'] = 'Option was not updated.';
+			}
+		}
+		
+		if ( 'success' == $response['result'] ) {
+			wp_send_json_success($response);
+			
+		}
+		wp_send_json_error($response);
+	}	
 }
 

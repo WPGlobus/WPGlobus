@@ -1,0 +1,50 @@
+.edit-post-pinned-plugins .components-icon-button.is-toggled svg.dashicons-admin-site,
+.edit-post-pinned-plugins .components-icon-button.is-toggled svg.dashicons-admin-site *{fill:#0000ff !important;display:none}
+.edit-post-pinned-plugins .components-icon-button:not(.is-toggled) svg.dashicons-admin-site,
+.edit-post-pinned-plugins .components-icon-button:not(.is-toggled) svg.dashicons-admin-site *{fill:#0000ff;display:none}
+.edit-post-pinned-plugins .wpglobus-switcher-button{border-color:#cccccc;border-radius:3px}
+.edit-post-layout .wpglobus-switcher-panel__notice.components-notice{min-height:0}
+.edit-post-layout .wpglobus-switcher-panel__settings-link{float:right;margin-bottom:10px}
+.edit-post-layout .wpglobus-switcher-panel__info{float:left;margin-bottom:10px}
+.edit-post-layout .wpglobus-switcher-panel__flag{vertical-align:middle}
+.wpglobus-switcher-panel__notice{border-left:0}
+.wpglobus-switcher-panel__notice .components-notice__content{margin-top:0;margin-bottom:0;color:#000;font-weight:500}
+.wpglobus-switcher-panel__body .components-base-control__help{margin-top:10px}
+.wpglobus-switcher-panel__body.is-opened{padding-top:0}
+.wpglobus-switcher-components-panel .wpglobus-switcher-message {
+	z-index:10;width:90%;position:absolute;border:2px solid #ff8100;margin:5px 10px;padding:5px;border-radius:6px;background-color:#ff8100;
+	font-size:14px;color:#000;font-weight:500;text-align:center;
+}
+.wpglobus-switcher-pulsate-radio {
+	-webkit-animation: pulsate-radio 0.5s ease-in-out infinite both;
+	animation: pulsate-radio 0.5s ease-in-out infinite both;
+}
+/** animation pulsate-radio */
+@-webkit-keyframes pulsate-radio {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+@keyframes pulsate-radio {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}

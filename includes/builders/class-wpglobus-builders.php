@@ -213,6 +213,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			 */
 			if ( in_array( $pagenow, array('post.php', 'post-new.php', 'media-new.php') ) ) {
 				
+				/**
+				 * @W.I.P @since 2.2.14
+				 * if ( in_array( $pagenow, array('post.php', 'post-new.php', 'media-new.php', 'admin-ajax.php') ) ) {
+				 */	 
 				$post_type = self::get_post_type_2();
 
 				/**
@@ -679,6 +683,10 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
 						$post_id      = end( $_request_uri );
 						$post_id      = preg_replace( '/\?.*/', '', $post_id );
+
+						/**
+						 * @todo @see https://wpglobus.freshdesk.com/a/tickets/4103
+						 */
 
 						$_continue = false;
 						if ( 0 !== (int) $post_id ) {
@@ -1281,6 +1289,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$post_type = 'post';
 					}
 					break;
+				/**	
+				 * @W.I.P @since 2.2.14
+				case 'admin-ajax.php' :
+					$post_type = '';
+					break;	
+				// */		
 				default:
 					// post.php page.
 					if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification

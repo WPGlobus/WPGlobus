@@ -59,7 +59,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		}
 
 	}
-
+	
 	/**
 	 * Enqueue block assets.
 	 *
@@ -71,13 +71,17 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			return;
 		}
 
-		$style_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-block-editor.css';
+		/**
+		 * @since 2.2.3  wpglobus-block-editor.css
+		 * @since 2.2.14 wpglobus-switcher.css
+		 */
+		$style_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/css/dist/wpglobus-switcher.css';
 
 		/**
 		 * Enqueue frontend and editor block styles.
 		 */
 		wp_enqueue_style(
-			'wpglobus-block-editor-css',
+			'wpglobus-switcher-css',
 			$style_file,
 			'',
 			WPGLOBUS_VERSION
@@ -454,7 +458,55 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				$__post['disabled'] = true;
 			}
 		}
+ 
+		/**
+		 * @see includes\class-wpglobus-config.php for config options.
+		 * @since 2.2.14
+		 */
+		$key_option = array();
+		$key_option['switcherButtonType'] = 'block_editor_switcher_plugin_button_type';
+		
+		$options = array();
+		foreach($key_option as $key=>$option) {
+			$options[ $option ] = '';
+			if ( ! empty( WPGlobus::Config()->$option ) ) {
+				$options[$option] = WPGlobus::Config()->$option;
+			}
+		}
 
+		$data = array(
+			'version'              => WPGLOBUS_VERSION,
+			'versionGutenberg'     => $version_gutenberg,
+			'wpglobusAjax'         => WPGLOBUS_AJAX,
+			'context'              => WPGlobus::Config()->builder->get( 'context' ),
+			'tabs'                 => $tabs,
+			'language'             => $this->language,
+			'pagenow'              => $pagenow,
+			'postEditPage'         => 'post.php',
+			'postNewPage'          => 'post-new.php',
+			'defaultLanguage'      => WPGlobus::Config()->default_language,
+			'i18n'                 => $i18n,
+			'yoastSeo'             => $yoast_seo,
+			'flags_url'            => $flags_url,
+			'store_link'           => WPGlobus::URL_WPGLOBUS_SHOP,
+			'__post'               => $__post,
+			'block_editor_tab_url' => $block_editor_tab_url,
+			'disabled_entities'    => WPGlobus::Config()->disabled_entities,
+			'options'			   => $options,
+			'enabledOptionsTab'	   => true,
+			'keyOption'		       => $key_option
+		);
+
+		/**
+		 * Filter for data to send to JS.
+		 * Returning array.
+		 *
+		 * @since 2.2.14
+		 *
+		 * @param array  $data An array with data.
+		 */
+		$data = apply_filters( 'wpglobus_block_editor_localize_data', $data );
+			
 		wp_register_script(
 			'wpglobus-gutenberg',
 			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -466,24 +518,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		wp_localize_script(
 			'wpglobus-gutenberg',
 			'WPGlobusGutenberg',
-			array(
-				'version'              => WPGLOBUS_VERSION,
-				'versionGutenberg'     => $version_gutenberg,
-				'context'              => WPGlobus::Config()->builder->get( 'context' ),
-				'tabs'                 => $tabs,
-				'language'             => $this->language,
-				'pagenow'              => $pagenow,
-				'postEditPage'         => 'post.php',
-				'postNewPage'          => 'post-new.php',
-				'defaultLanguage'      => WPGlobus::Config()->default_language,
-				'i18n'                 => $i18n,
-				'yoastSeo'             => $yoast_seo,
-				'flags_url'            => $flags_url,
-				'store_link'           => WPGlobus::URL_WPGLOBUS_SHOP,
-				'__post'               => $__post,
-				'block_editor_tab_url' => $block_editor_tab_url,
-				'disabled_entities'    => WPGlobus::Config()->disabled_entities,
-			)
+			$data
 		);
 	}
 

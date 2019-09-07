@@ -237,6 +237,14 @@ class WPGlobus_Config {
 	 * @since 2.2.3
 	 */
 	public $block_editor_old_fashioned_language_switcher = '';
+	
+	/**
+	 * Type of switcher button for WPGlobusSwitcherPlugin. 
+	 *
+	 * @var string
+	 * @since 2.2.14
+	 */	
+	public $block_editor_switcher_plugin_button_type = '';
 
 	/**
 	 * Can get it only once.
@@ -745,6 +753,15 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) ) {
 			$this->block_editor_old_fashioned_language_switcher = $wpglobus_option['block_editor_old_fashioned_language_switcher'];
 			unset( $wpglobus_option['block_editor_old_fashioned_language_switcher'] );
+		}
+
+		/**
+		 * Type of switcher button for WPGlobusSwitcherPlugin (Gutenberg).
+		 * @since 2.2.14
+		 */
+		if ( isset( $wpglobus_option['block_editor_switcher_plugin_button_type'] ) ) {
+			$this->block_editor_switcher_plugin_button_type = $wpglobus_option['block_editor_switcher_plugin_button_type'];
+			unset( $wpglobus_option['block_editor_switcher_plugin_button_type'] );
 		}
 		
 		/**
