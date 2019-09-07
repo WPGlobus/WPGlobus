@@ -35,7 +35,7 @@
     "through2": "3.0.1"
   },
   "dependencies": {},
-  "version": "2.2.13",
+  "version": "2.2.14",
   "scripts": {
     "list": "npm list --dept=0 && npm outdated",
     "audit": "npm audit",
@@ -48,7 +48,7 @@
     "// 2.1 UPDATE version": "",
     "// 2.2 UPDATE readme.txt": "",
     "// 3. Build": "",
-    "build": "php /tools/composer.phar update && gulp dist",
+    "build": "php /tools/composer.phar update && node ./node_modules/gulp/bin/gulp.js dist",
     "// 3.1 If translations changed": "",
     "tx:push:pot": "tx push -s",
     "tx:push:ru": "tx push -t -f -l ru_RU",

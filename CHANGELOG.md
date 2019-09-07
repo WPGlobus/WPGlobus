@@ -2,9 +2,9 @@
 
 ## Changelog ##
 
-2019-09-?? - version 2.2.14
+2019-09-07 - version 2.2.14
 * Added: (Options/Builders) Pinned button type option for builder mode.
-* Added: (Flag) serbska_malka.png.
+* Added: (Flag) `serbska_malka.png`.
 
 2019-08-12 - version 2.2.13
 * Fixed: `extract_text()` regex to support line breaks in strings.
