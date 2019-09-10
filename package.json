@@ -38,6 +38,12 @@
     "through2": "3.0.1"
   },
   "dependencies": {},
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
   "version": "2.2.14",
   "scripts": {
     "list": "npm list --dept=0 && npm outdated",

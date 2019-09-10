@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.14 ###
+
+
+* Added: (Options/Builders) Pinned button type option for builder mode.
+
+* Added: (Flag) `serbska_malka.png`.
+
 ### 2.2.13 ###
 
 
@@ -335,13 +342,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 
 * Added: (Vendor/All In One SEO Pack) Support `All In One SEO Pack` 3.
-
-### 2.2.8 ###
-
-
-* Internal: (Core/Admin bar menu) Moved JS script to footer.
-
-* Fixed: (Builders/Yoast) Don't run builder mode for undefined post type, e.g. `slides` from Bridge theme.
 
 ### Earlier versions and Add-ons ###
 

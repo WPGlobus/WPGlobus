@@ -14,9 +14,7 @@ module.exports = function () {
         // outputStyle: "expanded"
     };
 
-    var autoprefixerOptions = {
-        browsers: ["last 2 versions", "Firefox ESR", "ie 11"]
-    };
+    var autoprefixerOptions = {};
 
     gulp
         .src("includes/builders/gutenberg/assets/css/*.scss")
