@@ -9,11 +9,11 @@
 "use strict";
 
 module.exports = function (opt) {
-    var PLUGIN_NAME = "gulp-tivwp-po";
-    var execSync = require("child_process").execSync;
-    var through = require("through2");
-    var PluginError = require('plugin-error');
-    var log = require('fancy-log');
+    const PLUGIN_NAME = "gulp-tivwp-po";
+    const execSync = require("child_process").execSync;
+    const through = require("through2");
+    const PluginError = require('plugin-error');
+    const log = require('fancy-log');
 
     opt = opt || {};
     if (!opt.potFile) {
@@ -22,11 +22,11 @@ module.exports = function (opt) {
 
     // Creating a stream through which each file will pass
     return through.obj(function (file, enc, cb) {
-        var potFile = opt.potFile;
-        var poFile = file.path;
-        var poFileName = file.relative;
-        var moFile = poFile.replace(/\.po$/, ".mo");
-        var moFileName = poFileName.replace(/\.po$/, ".mo");
+        const potFile = opt.potFile;
+        const poFile = file.path;
+        const poFileName = file.relative;
+        const moFile = poFile.replace(/\.po$/, ".mo");
+        const moFileName = poFileName.replace(/\.po$/, ".mo");
 
         log.info("Making PO: " + poFileName);
         execSync("msgmerge -v --backup=none --no-fuzzy-matching --update " + poFile + " " + potFile,

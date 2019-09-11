@@ -1,70 +1,35 @@
 {
   "name": "wpglobus",
-  "title": "WPGlobus",
-  "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
-  "private": true,
-  "homepage": "https://wpglobus.com",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/WPGlobus/wpglobus.git"
-  },
-  "bugs": {
-    "url": "https://github.com/WPGlobus/wpglobus/issues"
-  },
-  "author": "The WPGlobus Team <support@wpglobus.com>",
-  "license": "GPL-3.0",
-  "jshintConfig": {
-    "node": true
-  },
-  "main": "Gulpfile.js",
-  "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "fancy-log": "1.3.3",
-    "gulp": "3.9.1",
-    "gulp-append-prepend": "1.0.8",
-    "gulp-autoprefixer": "6.1.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-downloader": "1.0.4",
-    "gulp-print": "5.0.2",
-    "gulp-rename": "1.4.0",
-    "gulp-replace": "1.0.0",
-    "gulp-sass": "4.0.2",
-    "gulp-sourcemaps": "2.6.5",
-    "gulp-uglify": "3.0.2",
-    "gulp-vinyl-zip": "2.1.2",
-    "gulp-wp-pot": "2.3.5",
-    "plugin-error": "1.0.1",
-    "through2": "3.0.1"
-  },
-  "dependencies": {},
-  "browserslist": [
-    "last 2 versions",
-    "> 1%",
-    "maintained node versions",
-    "not dead"
-  ],
   "version": "2.2.14",
+  "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
+  "title": "WPGlobus",
+  "main": "Gulpfile.js",
   "scripts": {
-    "list": "npm list --dept=0 && npm outdated",
-    "audit": "npm audit",
-    "upup": "del package-lock.json && del /s /q node_modules && npm install && npm run list",
-    "changes": "git log --oneline develop --not master",
+    "watch": "gulp watch",
+    "dist": "composer update -o && gulp dist",
+    "// Global npm": "",
+    "g:list": "npm list -g --dept=0 && npm -g outdated",
+    "g:update": "npm update -g && npm run g:list",
+    "// Local npm": "",
+    "l:list": "npm list --dept=0 && npm outdated",
+    "l:install": "npm install && npm run l:list",
+    "l:update": "npm update && npm run l:list",
+    "l:reinstall": "del package-lock.json && del /s /q node_modules && npm run l:install",
     "// 1. Get updates": "npm run git:fetch:all && npm run git:pull:dev",
     "git:fetch:all": "git fetch --all",
     "git:pull:dev": "git checkout develop && git pull",
     "// 2. MANUAL WORK:": "",
     "// 2.1 UPDATE version": "",
-    "// 2.2 UPDATE readme.txt": "",
+    "// 2.2 UPDATE readme.txt": "echo readme.txt",
     "// 3. Build": "",
-    "build": "php /tools/composer.phar update && node ./node_modules/gulp/bin/gulp.js dist",
+    "build": "npm run dist",
     "// 3.1 If translations changed": "",
     "tx:push:pot": "tx push -s",
     "tx:push:ru": "tx push -t -f -l ru_RU",
     "tx:pull:all": "tx pull -a -f --mode=translator",
     "pomo": "gulp pomo",
     "// 3.2 If translations changed - BUILD AGAIN!": "",
-    "build:again": "gulp dist",
+    "build:again": "npm run dist",
     "// 4. Commit and tag AND PUSH TO develop!": "npm run git:commit && npm run git:tag && npm run git:push:develop",
     "git:commit": "git add . && git commit -m \"%npm_package_version%\"",
     "git:tag": "git tag %npm_package_version%",
@@ -82,5 +47,51 @@
     "svn:tag:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% tag %npm_package_version%\" --username tivnet",
     "// 7. Back to develop branch": "",
     "git:checkout:dev": "git checkout develop"
-  }
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WPGlobus/wpglobus.git"
+  },
+  "author": "The WPGlobus Team <support@wpglobus.com>",
+  "license": "GPL-3.0",
+  "jshintConfig": {
+    "node": true
+  },
+  "bugs": {
+    "url": "https://github.com/WPGlobus/wpglobus/issues"
+  },
+  "homepage": "https://wpglobus.com",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",
+    "gulp-append-prepend": "1.0.8",
+    "gulp-autoprefixer": "7.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-downloader": "^1.0.4",
+    "gulp-print": "^5.0.2",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-vinyl-zip": "2.1.2",
+    "gulp-wp-pot": "^2.3.5",
+    "plugin-error": "^1.0.1",
+    "pump": "^3.0.0",
+    "through2": "^3.0.1",
+    "lodash": ">=4.17.13",
+    "lodash.merge": ">=4.6.2",
+    "lodash.template": ">=4.5.0",
+    "lodash.defaultsdeep": ">=4.6.1"
+  },
+  "dependencies": {},
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
 }

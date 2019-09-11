@@ -1,51 +1,59 @@
 "use strict";
 
-module.exports = function () {
-    var gulp = require("gulp");
-    var cfg = require("./cfg.json");
-    var sass = require("gulp-sass");
-    var sourcemaps = require("gulp-sourcemaps");
-    var autoprefixer = require("gulp-autoprefixer");
-    var print = require('gulp-print').default;
+const task_sass = cb => {
+	const {src, dest} = require("gulp");
+	const cfg = require("./cfg.json");
+	const sass = require("gulp-sass");
+	const sourcemaps = require("gulp-sourcemaps");
+	const autoprefixer = require("gulp-autoprefixer");
+	const print = require('gulp-print').default;
+	const pump = require('pump');
 
-    var sassOptions = {
-        errLogToConsole: true,
-        outputStyle: "compressed"
-        // outputStyle: "expanded"
-    };
+	const sassOptions = {
+		errLogToConsole: true,
+		outputStyle: "compressed"
+		// outputStyle: "expanded"
+	};
 
-    var autoprefixerOptions = {};
+	const autoprefixerOptions = {};
 
-    gulp
-        .src("includes/builders/gutenberg/assets/css/*.scss")
-        .pipe(print())
-        .pipe(sourcemaps.init())
-        .pipe(sass(sassOptions).on("error", sass.logError))
-        .pipe(autoprefixer(autoprefixerOptions))
-        .pipe(sourcemaps.write(".", {includeContent: false}))
-        .pipe(gulp.dest("includes/builders/gutenberg/assets/css"))
-        .pipe(print())
-        ;
+	pump([
+			src("includes/builders/gutenberg/assets/css/*.scss"),
+			print(),
+			sourcemaps.init(),
+			sass(sassOptions).on("error", sass.logError),
+			autoprefixer(autoprefixerOptions),
+			sourcemaps.write(".", {includeContent: false}),
+			dest("includes/builders/gutenberg/assets/css"),
+			print()
+		],
+	);
 
-    gulp
-        .src("includes/builders/gutenberg/assets/css/dist/*.scss")
-        .pipe(print())
-        .pipe(sourcemaps.init())
-        .pipe(sass(sassOptions).on("error", sass.logError))
-        .pipe(autoprefixer(autoprefixerOptions))
-        .pipe(sourcemaps.write(".", {includeContent: false}))
-        .pipe(gulp.dest("includes/builders/gutenberg/assets/css/dist"))
-        .pipe(print())
-        ;
+	pump([
+			src("includes/builders/gutenberg/assets/css/dist/*.scss"),
+			print(),
+			sourcemaps.init(),
+			sass(sassOptions).on("error", sass.logError),
+			autoprefixer(autoprefixerOptions),
+			sourcemaps.write(".", {includeContent: false}),
+			dest("includes/builders/gutenberg/assets/css/dist"),
+			print()
+		],
+	);
 
-    return gulp
-        .src(cfg.path.css + "/**/*.scss")
-        .pipe(print())
-        .pipe(sourcemaps.init())
-        .pipe(sass(sassOptions).on("error", sass.logError))
-        .pipe(autoprefixer(autoprefixerOptions))
-        .pipe(sourcemaps.write(".", {includeContent: false}))
-        .pipe(gulp.dest(cfg.path.css))
-        .pipe(print())
-        ;
+	pump([
+			src(cfg.path.css + "/**/*.scss"),
+			print(),
+			sourcemaps.init(),
+			sass(sassOptions).on("error", sass.logError),
+			autoprefixer(autoprefixerOptions),
+			sourcemaps.write(".", {includeContent: false}),
+			dest(cfg.path.css),
+			print()
+		],
+		cb
+	);
+
 };
+
+module.exports = task_sass;

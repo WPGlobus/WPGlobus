@@ -4,19 +4,26 @@
 
 "use strict";
 
-const gulp = require("gulp");
+const {src, dest} = require("gulp");
 const print = require('gulp-print').default;
 const download = require("gulp-downloader");
+const pump = require('pump');
 
+const task_product_info = cb => {
 
-module.exports = function () {
-    return download({
-        fileName: "wpglobus-product-info.json",
-        request: {
-            url: "https://wpglobus.com/wc-api/wpglobus-product-info"
-        }
-    })
-        .pipe(gulp.dest("data"))
-        .pipe(print())
-        ;
+	pump([
+			download({
+				fileName: "wpglobus-product-info.json",
+				request: {
+					url: "https://wpglobus.com/wc-api/wpglobus-product-info"
+				}
+			}),
+			dest("data"),
+			print()
+		],
+		cb
+	);
+
 };
+
+module.exports = task_product_info;

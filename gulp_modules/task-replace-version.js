@@ -1,22 +1,32 @@
 "use strict";
 
-module.exports = function () {
-    var gulp = require("gulp");
-    var cfg = require("./cfg.json");
-    var pkg = require('../package.json');
-    var replace = require('gulp-replace');
-    var log = require('fancy-log');
+const task_replace_version = cb => {
+	const {src, dest} = require("gulp"),
+		cfg = require("./cfg.json"),
+		pkg = require('../package.json'),
+		rpl = require('gulp-replace'),
+		print = require('gulp-print').default,
+		log = require('fancy-log'),
+		pump = require('pump')
+	;
 
-    log.info(pkg.version);
-    return gulp
-        .src([pkg.name + ".php"])
-        .pipe(replace(
-            new RegExp(" \\* Version: .+"),
-            " * Version: " + pkg.version
-        ))
-        .pipe(replace(
-            new RegExp("define\\( '(" + cfg.version.define + ")'.+"),
-            "define( '$1', '" + pkg.version + "' );"
-        ))
-        .pipe(gulp.dest("."));
+	log.info(pkg.version);
+
+	pump([
+			src([pkg.name + ".php"]),
+			print(),
+			rpl(
+				new RegExp("Version: .+"),
+				"Version: " + pkg.version
+			),
+			rpl(
+				new RegExp("define\\( '(" + cfg.version.define + ")'.+"),
+				"define( '$1', '" + pkg.version + "' );"
+			),
+			dest(".")
+		],
+		cb
+	);
 };
+
+module.exports = task_replace_version;

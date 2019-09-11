@@ -1,67 +1,62 @@
 "use strict";
 
-module.exports = function (cb) {
-	var gulp = require("gulp");
-	var cfg = require("./cfg.json");
-	var pkg = require('../package.json');
-	var babel = require('gulp-babel');
-	var uglify = require("gulp-uglify");
-	var rename = require("gulp-rename");
-	var print = require('gulp-print').default;
+const task_uglify = cb => {
+	const {src, dest} = require("gulp");
+	const cfg = require("./cfg.json");
+	const uglify = require("gulp-uglify");
+	const rename = require("gulp-rename");
+	const print = require('gulp-print').default;
+	const pump = require('pump');
+	const babel = require('gulp-babel');
 
-	if (1)
-		gulp
-			.src([
+	pump([
+			src([
 				"includes/builders/assets/*.js",
 				"!includes/**/*.min.js"
-			])
-			.pipe(uglify())
-			.pipe(rename({suffix: ".min"}))
-			.pipe(gulp.dest("includes/builders/assets"))
-			.pipe(print())
-		;
+			]),
+			uglify(),
+			rename({suffix: ".min"}),
+			dest("includes/builders/assets"),
+			print()
+		],
+	);
 
-	gulp
-		.src([
-			"includes/builders/gutenberg/assets/js/*.js",
-			"!includes/**/*.min.js"
-		])
-		.pipe(babel({presets: ['@babel/env']}))
-		.pipe(uglify())
-		.pipe(rename({suffix: ".min"}))
-		.pipe(gulp.dest("includes/builders/gutenberg/assets/js"))
-		.pipe(print())
-	;
-	if (1)
-		gulp
-			.src([
+	pump([
+			src([
+				"includes/builders/gutenberg/assets/js/*.js",
+				"!includes/**/*.min.js"
+			]),
+			babel({presets: ['@babel/env']}),
+			uglify(),
+			rename({suffix: ".min"}),
+			dest("includes/builders/gutenberg/assets/js"),
+			print()
+		],
+	);
+
+	pump([
+			src([
 				"includes/builders/gutenberg/assets/js/dist/*.js",
 				"!includes/**/*.min.js"
-			])
-			.pipe(uglify())
-			.pipe(rename({suffix: ".min"}))
-			.pipe(gulp.dest("includes/builders/gutenberg/assets/js/dist"))
-			.pipe(print())
-		;
+			]),
+			uglify(),
+			rename({suffix: ".min"}),
+			dest("includes/builders/gutenberg/assets/js/dist"),
+			print()
+		],
+	);
 
-	if (1)
-		gulp
-			.src([cfg.path.js + "/**/*.js", "!" + cfg.path.js + "/**/*.min.js"])
-			.pipe(uglify())
-			.pipe(rename({suffix: ".min"}))
-			.pipe(gulp.dest(cfg.path.js))
-			.pipe(print())
-		;
-
-	cb();
+	pump([
+			src([cfg.path.js + "/**/*.js", "!" + cfg.path.js + "/**/*.min.js"]),
+			uglify(),
+			rename({suffix: ".min"}),
+			dest(cfg.path.js),
+			print()
+		],
+		cb
+	);
 };
 
+module.exports = task_uglify;
 
-// var pump = require('pump');
-// pump([
-//     gulp.src("includes/builders/assets/**/*.js"),
-//     uglify(),
-//     rename({suffix: ".min"}),
-//     print()
-// ], cb)
-// ;
+
