@@ -206,6 +206,11 @@ jQuery(document).ready(function ($) {
 		WPGlobusSwitcherPlugin: function(){
 			// @since 2.2.3
 			// @since 2.2.14
+			
+			if ( 'undefined' === typeof wp.editPost || 'undefined' === typeof wp.plugins ) {
+				// @since 2.2.15
+				return;
+			}
 			var language = WPGlobusGutenberg.language;
 			var enabledLanguages = WPGlobusCoreData.enabled_languages;
 			var languageNames = WPGlobusCoreData.en_language_name;
