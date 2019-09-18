@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-09-18 - version 2.2.15
+* Fixed: (Builders/Gutenberg) TypeError `Cannot read property 'PluginSidebarMoreMenuItem' of undefined`.
+
 2019-09-07 - version 2.2.14
 * Added: (Options/Builders) Pinned button type option for builder mode.
 * Added: (Flag) `serbska_malka.png`.
