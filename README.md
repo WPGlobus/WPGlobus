@@ -302,6 +302,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 ### 2.2.14 ###
 
 
+* Fixed: (Builders/Gutenberg) TypeError `Cannot read property 'PluginSidebarMoreMenuItem' of undefined`.
+
+### 2.2.14 ###
+
+
 * Added: (Options/Builders) Pinned button type option for builder mode.
 
 * Added: (Flag) `serbska_malka.png`.
@@ -332,16 +337,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Added: (Options/Welcome) Notices to `Welcome` tab.
 
 * Added: (Vendor/All In One SEO Pack) `wpglobus-translatable` class for multilingual fields.
-
-### 2.2.10 ###
-
-
-* Fixed: (Vendor/All In One SEO Pack) The detection of version less than 3.0.
-
-### 2.2.9 ###
-
-
-* Added: (Vendor/All In One SEO Pack) Support `All In One SEO Pack` 3.
 
 ### Earlier versions and Add-ons ###
 
