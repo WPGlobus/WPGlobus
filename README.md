@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 4.9
 
-Tested up to: 5.2
+Tested up to: 5.3
 
 Requires PHP: 5.6
 
@@ -299,7 +299,7 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
-### 2.2.14 ###
+### 2.2.15 ###
 
 
 * Fixed: (Builders/Gutenberg) TypeError `Cannot read property 'PluginSidebarMoreMenuItem' of undefined`.
