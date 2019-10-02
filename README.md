@@ -299,6 +299,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.16 ###
+
+2019-10-02 - version 2.2.16
+
+* Added: (Vendor/Yoast) Filters for `SEO Title`, `Meta Desc` on `edit.php` page.
+
 ### 2.2.15 ###
 
 
