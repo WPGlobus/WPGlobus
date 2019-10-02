@@ -39,6 +39,14 @@ class WPGlobus_YoastSEO {
 	 * @var string	 
 	 */
 	protected static $version = '';
+
+	/**
+	 * Contains wpseo meta.
+	 *
+	 * @since 2.2.16
+	 * @var null|array 
+	 */	
+	protected static $wpseo_meta = null;
 	
 	/**
 	 * Static "controller"
@@ -49,8 +57,33 @@ class WPGlobus_YoastSEO {
 
 		if ( is_admin() ) {
 			
+			if ( WPGlobus_WP::is_pagenow( 'edit.php' ) ) {
+				
+				/**
+				 * To translate Yoast columns on `edit.php` page.
+				 * @since 2.2.16
+				 */
+				 
+				add_filter( 'wpseo_title', array(
+					__CLASS__,
+					'filter__wpseo_title'
+				), 5 );
+				
+				
+				add_filter( 'wpseo_metadesc', array(
+					__CLASS__,
+					'filter__wpseo_metadesc'
+				), 5 );
+				
+				/**
+				 * @W.I.P @since 2.2.16 with 'wpseo-focuskw'. There is no filter.
+				 * @see case 'wpseo-focuskw': in wordpress-seo\admin\class-meta-columns.php
+				 */
+				
+			}
+			
 			/**
-			 * Don't start in admin @since 1.9.17
+			 * Don't run further in admin @since 1.9.17
 			 */
 			return;
 
@@ -351,6 +384,108 @@ class WPGlobus_YoastSEO {
 		return 'tinymce';
 	}
 
+	/**
+	 * Filter wpseo meta description.
+	 *
+	 * @see wordpress-seo\admin\class-meta-columns.php
+	 * @scope admin
+	 * @since 2.2.16
+	 *
+	 * @param string $metadesc_val Value in default language.
+	 *
+	 * @return string
+	 */
+	public static function filter__wpseo_metadesc( $metadesc_val ) {
+		
+		if ( empty($metadesc_val) ) {
+			return $metadesc_val;
+		}
+		
+		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+			return $metadesc_val;
+		}
+
+		return self::get_meta( '_yoast_wpseo_metadesc', $metadesc_val );
+	}
+	
+	/**
+	 * To translate Yoast `column-wpseo-title`.
+	 *
+	 * @see wordpress-seo\admin\class-meta-columns.php
+	 * @scope admin
+	 * @since 2.2.16
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public static function filter__wpseo_title( $title ) {
+		return WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );	
+	}
+
+	/**
+	 * Get meta for extra language.
+	 *
+	 * @scope admin
+	 * @since 2.2.16
+	 */	
+	protected static function get_meta( $meta_key, $meta_value = '' ) {
+
+		if ( is_null(self::$wpseo_meta) ) {
+			self::set_wpseo_meta();
+		}
+			
+		if ( empty( self::$wpseo_meta[ $meta_key ] ) ) {
+			return '';
+		}
+		
+		$_return_value = '';
+		foreach( self::$wpseo_meta[ $meta_key ] as $_meta_value ) {
+			if ( false !== strpos( $_meta_value, $meta_value ) ) {
+				$_return_value = WPGlobus_Core::text_filter( $_meta_value, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+				break;
+			}
+		}
+		
+		return $_return_value;
+	}
+	
+	/**
+	 * Set `_yoast_wpseo_metadesc`, `_yoast_wpseo_focuskw` meta.
+	 *
+	 * @scope admin
+	 * @since 2.2.16
+	 */
+	protected static function set_wpseo_meta() {
+		
+		/** @global wpdb $wpdb */
+		global $wpdb;
+		
+		$post_type = 'post';
+		if ( ! empty( $_GET['post_type'] ) ) {
+			$post_type = sanitize_text_field( $_GET['post_type'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+		}
+
+		$query = $wpdb->prepare( 
+			"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.post_type = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
+			$post_type,
+			'_yoast_wpseo_metadesc',
+			'_yoast_wpseo_focuskw'
+		);
+							  
+		$metas = $wpdb->get_results( $query, ARRAY_A  );
+
+		if ( ! empty( $metas ) ) {
+			foreach( $metas as $_meta ) {
+				if ( ! isset( self::$wpseo_meta[ $_meta['meta_key'] ] ) ) {
+					self::$wpseo_meta[ $_meta['meta_key'] ] = array();
+				}
+				self::$wpseo_meta[ $_meta['meta_key'] ][] = $_meta['meta_value'];
+			}
+		}
+		
+	}
+	
 	/**
 	 * To translate Yoast columns
 	 * @see   WPSEO_Meta_Columns::column_content
