@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-10-02 - version 2.2.16
+* Added: (Vendor/Yoast) Filters for `SEO Title`, `Meta Desc` on `edit.php` page.
+
 2019-09-18 - version 2.2.15
 * Fixed: (Builders/Gutenberg) TypeError `Cannot read property 'PluginSidebarMoreMenuItem' of undefined`.
 
