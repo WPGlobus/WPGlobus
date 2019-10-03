@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-10-?? - version 2.2.17
+* Added: (Core/Post Types) Hide Gutenberg's post types.
+
 2019-10-02 - version 2.2.16
 * Added: (Vendor/Yoast) Filters for `SEO Title`, `Meta Desc` on `edit.php` page.
 
