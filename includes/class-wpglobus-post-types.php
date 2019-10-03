@@ -41,6 +41,9 @@ class WPGlobus_Post_Types {
 		'acf-field-group',
 		// Gutenberg: @since 1.9.17
 		'wp_block',
+		// Gutenberg: @since 2.2.17
+		'wp_template',
+		'wp_area',
 		// WPBakery PB: @since 1.9.17
 		'vc4_templates',
 		'vc_grid_item',
