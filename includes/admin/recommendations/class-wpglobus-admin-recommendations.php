@@ -26,6 +26,33 @@ class WPGlobus_Admin_Recommendations {
 		add_filter( 'wpglobus_edit_slug_box', array( __CLASS__, 'wpg_plus_slug' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'on__admin_footer' ), 1000 );
 		add_action( 'wpglobus_gutenberg_metabox', array( __CLASS__, 'on__gutenberg_metabox' ) );
+		add_filter(
+			'plugin_action_links_' . dirname( dirname( dirname( dirname( plugin_basename( __FILE__ ) ) ) ) ) . '/wpglobus.php',
+			array(
+				__CLASS__,
+				'filter__plugin_action_links',
+			)
+		);
+		
+	}
+	
+	/**
+	 * Add a link to the Recommendations tab.
+	 *
+	 * @since 2.2.17
+	 *
+	 * @param array $links array of links for the plugins, adapted when the current plugin is found.
+	 *
+	 * @return array
+	 */	
+	public static function filter__plugin_action_links( $links ) {
+		
+		$_url = add_query_arg( array( 'page' => WPGlobus::OPTIONS_PAGE_SLUG, 'tab' => 'recommendations' ), admin_url( 'admin.php' ) );
+		
+		$recommend_link = '<a style="font-weight: bold;" href="' . $_url . '">' . esc_html__( 'Go Premium' ) . '</a>';
+		array_unshift( $links, $recommend_link );
+
+		return $links;
 	}
 
 	/**
