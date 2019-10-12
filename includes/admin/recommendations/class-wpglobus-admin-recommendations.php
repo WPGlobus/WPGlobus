@@ -39,7 +39,7 @@ class WPGlobus_Admin_Recommendations {
 	/**
 	 * Add a link to the Recommendations tab.
 	 *
-	 * @since 2.2.17
+	 * @since 2.2.20
 	 *
 	 * @param array $links array of links for the plugins, adapted when the current plugin is found.
 	 *
