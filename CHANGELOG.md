@@ -2,8 +2,13 @@
 
 ## Changelog ##
 
-2019-10-?? - version 2.2.17
+2019-10-16 - version 2.2.20
 * Added: (Core/Post Types) Hide Gutenberg's post types.
+* Added: (Core/Recommendation) A link to the Recommendations tab from plugins.php page.
+* Added: (Admin/HelpDesk) Get subject from $_GET array.
+* Added: (Vendor/Yoast) Support Yoast SEO from v.12.
+* Added: (Vendor/Yoast) Support Yoast SEO Premium from v.12.(Beta stage).
+* Added: (Core/WPGlobusDialogApp) `afterSave` callback.
 
 2019-10-02 - version 2.2.16
 * Added: (Vendor/Yoast) Filters for `SEO Title`, `Meta Desc` on `edit.php` page.
