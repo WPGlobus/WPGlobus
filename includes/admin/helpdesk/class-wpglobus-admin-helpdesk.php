@@ -155,6 +155,10 @@ class WPGlobus_Admin_HelpDesk {
 
 		/** @noinspection PhpUnusedLocalVariableInspection */
 		$subject = empty( $_POST['subject'] ) ? '' : sanitize_text_field( $_POST['subject'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+		if ( empty($subject) ) {
+			$subject = empty( $_GET['subject'] ) ? '' : sanitize_text_field( $_GET['subject'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+		}
+
 
 		/** @noinspection PhpUnusedLocalVariableInspection */
 		$details = empty( $_POST['details'] ) ? '' : sanitize_textarea_field( $_POST['details'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
