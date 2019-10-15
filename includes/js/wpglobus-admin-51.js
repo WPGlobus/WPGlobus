@@ -151,6 +151,7 @@ var WPGlobusDialogApp;
 				placeholder: '',
 				formFooter: '',
 				beforeOpen: function(){},
+				afterSave: function(){},
 				close: function(){},
 			},	
 			dialog: {}
@@ -404,6 +405,11 @@ var WPGlobusDialogApp;
 			$(api.id).val(s);
 			s = scl == '' ? sdl : scl;
 			$(api.wpglobus_id).val(s);
+			
+			/**
+			 * `After save` callback.
+			 */
+			api.runCallback( api.option.dialog.afterSave );
 		},
 		dialog : $('#wpglobus-dialog-wrapper').dialog({
 			autoOpen: false,
@@ -594,7 +600,9 @@ var WPGlobusDialogApp;
 				if ( 'function' === typeof window[callback] ) {
 					window[callback]();
 				}
-			}			
+			} else if ( 'function' === typeof callback ) {
+				callback();
+			}				
 	
 		}
 	};
