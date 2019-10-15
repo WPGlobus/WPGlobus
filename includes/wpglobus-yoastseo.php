@@ -17,7 +17,16 @@
  * @since 1.9.18
  * 23.10.2018 - 80
  */   
-$wpglobus_yoastseo_latest_version = '80';
+/**
+ * @since 2.2.20
+ * 16.10.2019 - 120
+ */ 
+$wpglobus_yoastseo_latest_version = '120';
+ 
+/**
+ * @since 2.2.20
+ */
+$wpglobus_yoastseo_plus_access = apply_filters( 'wpglobus_yoastseo_plus_access', false );
 
 if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 	/**
@@ -34,7 +43,8 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 			 */
 			$ver = $wpglobus_yoastseo_latest_version; 
 			require_once "vendor/yoast-seo/class-wpglobus-yoastseo$ver.php";
-			WPGlobus_YoastSEO::controller($ver);
+			WPGlobus_YoastSEO::controller($ver, $wpglobus_yoastseo_plus_access );
+
 		} elseif ( version_compare( WPGLOBUS_VERSION, '1.8', '>=' ) ) {
 			/**
 			 * Version of file must be latest.
@@ -75,7 +85,7 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 				} elseif ( version_compare( WPSEO_VERSION, '8.0', '>=' ) ) { 
 				
 					require_once "vendor/yoast-seo/class-wpglobus-yoastseo$version.php";
-					WPGlobus_YoastSEO::controller($version);
+					WPGlobus_YoastSEO::controller($version, $wpglobus_yoastseo_plus_access);
 					
 				} else {
 				
