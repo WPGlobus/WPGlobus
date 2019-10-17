@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
-Requires at least: 4.9
+Requires at least: 5.0
 
 Tested up to: 5.3
 
@@ -299,9 +299,23 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.20 ###
+
+
+* Added: (Core/Post Types) Hide Gutenberg's post types.
+
+* Added: (Core/Recommendation) A link to the "Recommendations" tab from the `plugins.php` page.
+
+* Added: (Admin/HelpDesk) Get subject from `$_GET` array.
+
+* Added: (Vendor/Yoast) Support Yoast SEO from v.12.
+
+* Added: (Vendor/Yoast) Support Yoast SEO Premium from v.12.(Beta stage).
+
+* Added: (Core/WPGlobusDialogApp) `afterSave` callback.
+
 ### 2.2.16 ###
 
-2019-10-02 - version 2.2.16
 
 * Added: (Vendor/Yoast) Filters for `SEO Title`, `Meta Desc` on `edit.php` page.
 
@@ -326,23 +340,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 
 * Fixed: (Config) PHP warnings for clean install.
-
-### 2.2.11 ###
-
-
-* Fixed: Default locale and flag for Taiwan.
-
-* Fixed: (Vendor/All In One SEO Pack) Do not set the keywords field in according to the option.
-
-* Added: (WPGlobus Admin interface) More translated strings in `de_DE` and `sv_SE`.
-
-* Added: (Config) (Options/Сompatibility) `builder_post_types` option.
-
-* Added: (Config/Builder) `post_types` property.
-
-* Added: (Options/Welcome) Notices to `Welcome` tab.
-
-* Added: (Vendor/All In One SEO Pack) `wpglobus-translatable` class for multilingual fields.
 
 ### Earlier versions and Add-ons ###
 

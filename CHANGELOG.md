@@ -4,8 +4,8 @@
 
 2019-10-16 - version 2.2.20
 * Added: (Core/Post Types) Hide Gutenberg's post types.
-* Added: (Core/Recommendation) A link to the Recommendations tab from plugins.php page.
-* Added: (Admin/HelpDesk) Get subject from $_GET array.
+* Added: (Core/Recommendation) A link to the "Recommendations" tab from the `plugins.php` page.
+* Added: (Admin/HelpDesk) Get subject from `$_GET` array.
 * Added: (Vendor/Yoast) Support Yoast SEO from v.12.
 * Added: (Vendor/Yoast) Support Yoast SEO Premium from v.12.(Beta stage).
 * Added: (Core/WPGlobusDialogApp) `afterSave` callback.
