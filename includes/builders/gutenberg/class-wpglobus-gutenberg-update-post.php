@@ -246,7 +246,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 
 				endforeach;
 
-				$prepared_post->$field = WPGlobus_Utils::build_multilingual_string( $tr );
+				$prepared_post->$field = wp_slash( WPGlobus_Utils::build_multilingual_string( $tr ) );
 
 			}
 
