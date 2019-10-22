@@ -390,7 +390,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		$i18n              = array();
 		$i18n['reload']    = esc_html__( 'Page is being reloaded. Please wait...', 'wpglobus' );
-		$i18n['save_post'] = esc_html__( 'Before switching the language, please save draft or publish.', 'wpglobus' );
+		$i18n['save_post'] = esc_html__( 'Before switching the language, please save draft or publish, then reload page.', 'wpglobus' );
 
 		/**
 		 * We have Gutenberg in core since WP 5.0.
