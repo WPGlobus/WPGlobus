@@ -1364,14 +1364,16 @@ jQuery(document).ready(function () {
 							/** 
 							 * @since WPGlobus 1.7.2 
 							 */
-							if ( WPGlobusYoastSeoPremium ) { 
+							if ( WPGlobusYoastSeoPremium && 'function' === typeof WPGlobusYoastSeoPremium.init ) { 
 								WPGlobusYoastSeoPremium.init();
 							}
 						}
 						/**
 						 * @since Yoast SEO 3.0
 						 */
-						WPGlobusYoastSeo.init();
+						if ( 'function' === typeof WPGlobusYoastSeo.init ) { 
+							WPGlobusYoastSeo.init();
+						}
 					}
                 }
 
