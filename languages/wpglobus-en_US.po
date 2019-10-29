@@ -1,11 +1,11 @@
-# Copyright (C) 2019 WPGlobus
-# This file is distributed under the same license as the WPGlobus package.
+# Copyright (C) 2019 WPGlobus 2.2.21
+# This file is distributed under the same license as the WPGlobus 2.2.21 package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-06-02 01:13+0000\n"
+"PO-Revision-Date: 2019-10-29 02:08+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_US/)\n"
@@ -890,8 +890,7 @@ msgstr "WPGlobus languages"
 msgid "current"
 msgstr "current"
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228
 msgid "Before switching the language, please save draft or publish."
 msgstr "Before switching the language, please save draft or publish."
 
@@ -904,6 +903,14 @@ msgstr "for"
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:392
 msgid "Page is being reloaded. Please wait..."
 msgstr "Page is being reloaded. Please wait..."
+
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+msgid ""
+"Before switching the language, please save draft or publish, then reload "
+"page."
+msgstr ""
+"Before switching the language, please save draft or publish, then reload "
+"page."
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"
@@ -1042,17 +1049,17 @@ msgstr ""
 
 #: includes/options/class-wpglobus-options.php:601
 msgid "Important notes"
-msgstr ""
+msgstr "Important notes"
 
 #. translators: placeholders for "strong" tags.
 #: includes/options/class-wpglobus-options.php:603
 msgid "Version %1$s1.9.17%2$s "
-msgstr ""
+msgstr "Version %1$s1.9.17%2$s "
 
 #. translators: placeholders for "strong" tags.
 #: includes/options/class-wpglobus-options.php:606
 msgid "Starting from this version, %1$sWPGlobus%2$s operates in two modes"
-msgstr ""
+msgstr "Starting from this version, %1$sWPGlobus%2$s operates in two modes"
 
 #. translators: placeholders for "strong" tags; compatibility tab link.
 #: includes/options/class-wpglobus-options.php:609
@@ -1060,6 +1067,8 @@ msgid ""
 "%1$sBuilder mode%2$s: WPGlobus turns this mode on automatically when it "
 "discovers any of the plugins/add-ons listed on the %1$s[%3$s]%2$s tab."
 msgstr ""
+"%1$sBuilder mode%2$s: WPGlobus turns this mode on automatically when it "
+"discovers any of the plugins/add-ons listed on the %1$s[%3$s]%2$s tab."
 
 #. translators: placeholders for "strong" tags; compatibility tab link.
 #: includes/options/class-wpglobus-options.php:612
@@ -1067,15 +1076,17 @@ msgid ""
 "%1$sStandard/Classic mode%2$s: is used when there are no plugins `Builder` "
 "or if you explicitly turned off builder support on the %1$s[%3$s]%2$s tab."
 msgstr ""
+"%1$sStandard/Classic mode%2$s: is used when there are no plugins `Builder` "
+"or if you explicitly turned off builder support on the %1$s[%3$s]%2$s tab."
 
 #. translators: placeholders for "strong" tags.
 #: includes/options/class-wpglobus-options.php:616
 msgid "Version %1$s2.2.11%2$s "
-msgstr ""
+msgstr "Version %1$s2.2.11%2$s "
 
 #: includes/options/class-wpglobus-options.php:618
 msgid "Starting from this version"
-msgstr ""
+msgstr "Starting from this version"
 
 #. translators: placeholders for "strong" tags.
 #: includes/options/class-wpglobus-options.php:621
@@ -1083,6 +1094,8 @@ msgid ""
 "The %1$sBuilder mode%2$s is turned OFF by default for all custom post types "
 "(CPT)."
 msgstr ""
+"The %1$sBuilder mode%2$s is turned OFF by default for all custom post types "
+"(CPT)."
 
 #. translators: placeholders for "strong" tags.
 #: includes/options/class-wpglobus-options.php:624
@@ -1090,6 +1103,8 @@ msgid ""
 "To turn on the %1$sBuilder mode%2$s for specific post types, please visit "
 "the %1$s[%3$s]%2$s tab."
 msgstr ""
+"To turn on the %1$sBuilder mode%2$s for specific post types, please visit "
+"the %1$s[%3$s]%2$s tab."
 
 #: includes/options/class-wpglobus-options.php:641
 msgid "Welcome!"
@@ -1372,7 +1387,7 @@ msgstr "Builders support"
 
 #: includes/options/class-wpglobus-options.php:1517
 msgid "Builder mode is enabled on these Post Types"
-msgstr ""
+msgstr "Builder mode is enabled on these Post Types"
 
 #: includes/options/class-wpglobus-options.php:1577
 msgid "Old fashioned language switcher"

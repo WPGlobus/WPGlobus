@@ -1,8 +1,8 @@
-# Copyright (C) 2019 WPGlobus 2.2.20
-# This file is distributed under the same license as the WPGlobus 2.2.20 package.
+# Copyright (C) 2019 WPGlobus 2.2.21
+# This file is distributed under the same license as the WPGlobus 2.2.21 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.2.20\n"
+"Project-Id-Version: WPGlobus 2.2.21\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -663,7 +663,7 @@ msgstr ""
 msgid "current"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228, includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
@@ -675,6 +675,10 @@ msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:392
 msgid "Page is being reloaded. Please wait..."
+msgstr ""
+
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+msgid "Before switching the language, please save draft or publish, then reload page."
 msgstr ""
 
 #: includes/class-wpglobus-widget.php:27

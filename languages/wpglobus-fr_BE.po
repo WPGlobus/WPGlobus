@@ -1,12 +1,12 @@
-# Copyright (C) 2019 WPGlobus
-# This file is distributed under the same license as the WPGlobus package.
+# Copyright (C) 2019 WPGlobus 2.2.21
+# This file is distributed under the same license as the WPGlobus 2.2.21 package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-06-02 01:13+0000\n"
+"PO-Revision-Date: 2019-10-29 02:08+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (Belgium) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_BE/)\n"
@@ -773,16 +773,16 @@ msgstr "Installée"
 msgid "Help Desk"
 msgstr "Centre de support"
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:181
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:185
 msgid "Email not sent. Please fill in the entire form."
 msgstr ""
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:191
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:195
 msgid ""
 "Email not sent. Please verify that your name and email are entered correctly."
 msgstr ""
 
-#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:212
+#: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:216
 msgid "Email sent."
 msgstr ""
 
@@ -849,43 +849,43 @@ msgid ""
 "technical information to your email message."
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:62
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:89
 msgid "WPGlobus Recommends:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:71,
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:98,
 #: includes/options/class-wpglobus-options.php:912
 msgid "WPGlobus for WooCommerce"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:75
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:102
 msgid ""
 "Translate product titles and descriptions, product categories, tags and "
 "attributes."
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:80
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:107
 msgid "Get it now:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:90
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:117
 msgid "WooCommerce Multi-Currency"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:94
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:121
 msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:99,
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:158
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:126,
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:185
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:156
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:183
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:168
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:195
 msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
@@ -910,8 +910,7 @@ msgstr ""
 msgid "current"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
@@ -923,6 +922,12 @@ msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:392
 msgid "Page is being reloaded. Please wait..."
+msgstr ""
+
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+msgid ""
+"Before switching the language, please save draft or publish, then reload "
+"page."
 msgstr ""
 
 #: includes/class-wpglobus-widget.php:27

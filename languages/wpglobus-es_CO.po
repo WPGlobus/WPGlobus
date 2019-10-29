@@ -1,12 +1,12 @@
-# Copyright (C) 2019 WPGlobus
-# This file is distributed under the same license as the WPGlobus package.
+# Copyright (C) 2019 WPGlobus 2.2.21
+# This file is distributed under the same license as the WPGlobus 2.2.21 package.
 # Translators:
 # FX Bénard <fxb@wp-translations.org>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-06-02 01:13+0000\n"
+"PO-Revision-Date: 2019-10-29 02:08+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Colombia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/es_CO/)\n"
@@ -847,8 +847,7 @@ msgstr ""
 msgid "current"
 msgstr ""
 
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
 
@@ -860,6 +859,12 @@ msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:392
 msgid "Page is being reloaded. Please wait..."
+msgstr ""
+
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:393
+msgid ""
+"Before switching the language, please save draft or publish, then reload "
+"page."
 msgstr ""
 
 #: includes/class-wpglobus-widget.php:27

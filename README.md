@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.21 ###
+
+
+* Fixed: (Core) Uncaught `TypeError: WPGlobusYoastSeo.init is not a function`.
+
+* Internal: (Builders/Gutenberg) Updated save post message.
+
 ### 2.2.20 ###
 
 
