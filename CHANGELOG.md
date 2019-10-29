@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-10-29 - version 2.2.21
+* Fixed: (Core) Uncaught TypeError: WPGlobusYoastSeo.init is not a function.
+* Internal: (Builders/Gutenberg) Updated save post message.
+
 2019-10-16 - version 2.2.20
 * Added: (Core/Post Types) Hide Gutenberg's post types.
 * Added: (Core/Recommendation) A link to the "Recommendations" tab from the `plugins.php` page.
