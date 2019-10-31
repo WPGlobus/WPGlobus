@@ -319,7 +319,7 @@ msgstr "Save &amp; Reload"
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:538,
-#: includes/class-wpglobus.php:1345, wpglobus.php:12, wpglobus.php:18
+#: includes/class-wpglobus.php:1340, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -867,7 +867,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:277,
-#: includes/class-wpglobus.php:3611
+#: includes/class-wpglobus.php:3606
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -948,40 +948,40 @@ msgid "Selector type"
 msgstr "Selector type"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1319
+#: includes/class-wpglobus.php:1314
 msgid "OFF"
 msgstr ""
 
-#: includes/class-wpglobus.php:1320
+#: includes/class-wpglobus.php:1315
 msgid "Turn on"
 msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1324
+#: includes/class-wpglobus.php:1319
 msgid "ON"
 msgstr ""
 
-#: includes/class-wpglobus.php:1325
+#: includes/class-wpglobus.php:1320
 msgid "Turn off"
 msgstr ""
 
-#: includes/class-wpglobus.php:1508
+#: includes/class-wpglobus.php:1503
 msgid "You cannot disable the main language."
 msgstr "You cannot disable the main language."
 
-#: includes/class-wpglobus.php:1709
+#: includes/class-wpglobus.php:1704
 msgid "*) Available after the menu is saved."
 msgstr "*) Available after the menu is saved."
 
-#: includes/class-wpglobus.php:1726
+#: includes/class-wpglobus.php:1721
 msgid "Need a multilingual slug?"
 msgstr "Need a multilingual slug?"
 
-#: includes/class-wpglobus.php:4050
+#: includes/class-wpglobus.php:4045
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "You must enable Pretty Permalinks to use WPGlobus."
 
-#: includes/class-wpglobus.php:4052
+#: includes/class-wpglobus.php:4047
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."

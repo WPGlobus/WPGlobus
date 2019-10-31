@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2019-10-31 - version 2.2.22
-* Added: (Core/Media) Media files support for standard and builder mode.
-* Added: (Vendor/Acf) Filter for `Url` field type.
+* Added: (Core/Media) Media files support for the standard and Builder modes.
+* Added: (Vendor/Acf) Filter for the `Url` field type.
 
 2019-10-29 - version 2.2.21
 * Fixed: (Core) Uncaught `TypeError: WPGlobusYoastSeo.init is not a function`.

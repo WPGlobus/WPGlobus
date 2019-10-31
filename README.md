@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.22 ###
+
+
+* Added: (Core/Media) Media files support for the standard and Builder modes.
+
+* Added: (Vendor/Acf) Filter for the `Url` field type.
+
 ### 2.2.21 ###
 
 
