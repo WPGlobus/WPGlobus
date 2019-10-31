@@ -459,6 +459,11 @@ class WPGlobus {
 					require_once dirname( __FILE__ ) . '/builders/gutenberg/class-wpglobus-gutenberg.php';
 					$builder = new WPGlobus_Gutenberg();
 					require_once dirname( __FILE__ ) . '/vendor/wpglobus-vendors.php';
+					
+					/**
+					 * @since 2.2.22
+					 */
+					require_once 'admin/media/wpglobus-media.php';
 				}
 
 				/**
@@ -528,6 +533,11 @@ class WPGlobus {
 							$builder = new $builder_class();
 						}
 						require_once dirname( __FILE__ ) . '/vendor/wpglobus-vendors.php';
+
+						/**
+						 * @since 2.2.22
+						 */
+						require_once 'admin/media/wpglobus-media.php';
 
 						return;
 					}
@@ -671,26 +681,11 @@ class WPGlobus {
 						}
 					}
 				}
-
+				
 				/**
-				 * Add multilingual Caption, Alternative Text, Description to media files.
-				 *
-				 * @since 1.7.3
+			     * @since 2.2.22
 				 */
-				if ( version_compare( $GLOBALS['wp_version'], '4.6.999', '>' ) ) :
-					if (
-						WPGlobus_WP::is_pagenow( 'post.php' ) ||
-						( WPGlobus_WP::is_doing_ajax() && WPGlobus_WP::is_http_post_action( 'send-attachment-to-editor' ) )
-					) {
-						/**
-						 * @since 1.9.17
-						 */
-						if ( ! self::Config()->builder->is_running() ) {
-							require_once 'admin/media/class-wpglobus-media.php';
-							WPGlobus_Media::get_instance();
-						}
-					}
-				endif;
+				require_once 'admin/media/wpglobus-media.php';
 
 			}    // endif $devmode
 
