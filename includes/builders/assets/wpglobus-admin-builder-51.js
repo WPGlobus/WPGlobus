@@ -304,7 +304,21 @@ jQuery(document).ready(function ($) {
 			 *
 			 */
 			//api.ajaxPrefilter();
+			
+			/**
+			 * @since 2.2.22
+			 */			
+			if ('post.php' === WPGlobusAdmin.page) {
+				this.postEdit();
+			}
 
+		},
+		postEdit: function() {
+			/**
+			 * For compatibility with wpglobus-admin-51.js.
+			 * @since 2.2.22
+			 */
+			$(document).triggerHandler('wpglobus_after_post_edit');
 		},
 		ajaxPrefilter: function() {
 			/**
