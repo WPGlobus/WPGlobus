@@ -246,17 +246,17 @@ class WPGlobus {
 				 * @since 1.2.6
 				 */
 				$this->vendors_scripts['ACFPRO'] = true;
-				$this->disabled_entities[]       = 'acf-field-group';
-				$this->disabled_entities[]       = 'acf-field';
+				//$this->disabled_entities[]       = 'acf-field-group';
+				//$this->disabled_entities[]       = 'acf-field';
 
 			} else {
 
 				$this->vendors_scripts['ACF'] = true;
-				$this->disabled_entities[]    = 'acf';
+				//$this->disabled_entities[]    = 'acf';
 				/**
 				 * @since 1.9.17
 				 */
-				$this->disabled_entities[] = 'acf-field-group';
+				//$this->disabled_entities[] = 'acf-field-group';
 
 			}
 		}
@@ -264,20 +264,20 @@ class WPGlobus {
 		if ( defined( 'WC_VERSION' ) || defined( 'WOOCOMMERCE_VERSION' ) ) {
 
 			$this->vendors_scripts['WOOCOMMERCE'] = true;
-			$this->disabled_entities[]            = 'product';
+			//$this->disabled_entities[]            = 'product';
 			$this->disabled_entities[]            = 'product_tag';
 			$this->disabled_entities[]            = 'product_cat';
-			$this->disabled_entities[]            = 'shop_order';
-			$this->disabled_entities[]            = 'shop_coupon';
+			//$this->disabled_entities[]            = 'shop_order';
+			//$this->disabled_entities[]            = 'shop_coupon';
 
 			/**
 			 * Gathering Woocommerce's post types in one place
 			 *
 			 * @since 1.4.3
 			 */
-			$this->disabled_entities[] = 'product_variation';
-			$this->disabled_entities[] = 'shop_order_refund';
-			$this->disabled_entities[] = 'shop_webhook'; // Obsolete in WC3.
+			//$this->disabled_entities[] = 'product_variation';
+			//$this->disabled_entities[] = 'shop_order_refund';
+			//$this->disabled_entities[] = 'shop_webhook'; // Obsolete in WC3.
 
 			// TODO
 			// $this->disabled_entities[] = 'shop_subscription';
@@ -295,7 +295,7 @@ class WPGlobus {
 			 *
 			 * @since 1.4.6
 			 */
-			$this->disabled_entities[] = 'wpcf7_contact_form';
+			//$this->disabled_entities[] = 'wpcf7_contact_form';
 		}
 
 		/**
@@ -308,12 +308,18 @@ class WPGlobus {
 		/**
 		 * Add builtin post type
 		 */
-		$this->disabled_entities[] = 'attachment';
+		//$this->disabled_entities[] = 'attachment';
 
 		/**
 		 * @since 1.9.0
 		 */
-		$this->disabled_entities[] = 'oembed_cache';
+		//$this->disabled_entities[] = 'oembed_cache';
+
+		/**
+		 * @since 2.2.23
+		 * @todo remove duplicate post types @see above after testing.
+		 */
+		$this->disabled_entities = array_merge( $this->disabled_entities, WPGlobus_Post_Types::hidden_types() );
 
 		/**
 		 * Add disabled post types from option
