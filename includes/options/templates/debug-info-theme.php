@@ -116,7 +116,7 @@ ob_start();
 		if ( ! empty($theme_compats) ) :
 
 			foreach( $theme_compats as $_id=>$_compat ) :	?>
-				<tr class="wpglobus-debug-info-spec hidden">
+				<tr class="wpglobus-theme-info-spec hidden">
 					<td><b><?php echo $_compat['caption']; ?></b></td>
 					<td><?php 
 						if ( $_compat['compat'] ) {
@@ -133,7 +133,7 @@ ob_start();
 				$_filter = 'action="translate"';
 				if ( $buffer = $this->config_file_filter($_compat['file'], $_filter) ) {
 					foreach( $buffer as $_id=>$_value ) :	?>
-						<tr class="wpglobus-debug-info-spec hidden">
+						<tr class="wpglobus-theme-info-spec hidden">
 							<td><b><?php echo $_filter; ?></b></td>
 							<td><?php echo $_value; ?></td>				
 						</tr><?php
@@ -171,7 +171,7 @@ if ( ! empty( $parent_theme ) ) {
 			if ( ! empty($parent_compats) ) :
 			
 				foreach( $parent_compats as $_id=>$_compat ) :	?>
-					<tr class="wpglobus-debug-info-spec hidden">
+					<tr class="wpglobus-theme-info-spec hidden">
 						<td><b><?php echo $_compat['caption']; ?></b></td>
 						<td><?php 
 							if ( $_compat['compat'] ) {
@@ -188,7 +188,7 @@ if ( ! empty( $parent_theme ) ) {
 					$_filter = 'action="translate"';
 					if ( $buffer = $this->config_file_filter($_compat['file'], $_filter) ) {
 						foreach( $buffer as $_id=>$_value ) :	?>
-							<tr class="wpglobus-debug-info-spec hidden">
+							<tr class="wpglobus-theme-info-spec hidden">
 								<td><b><?php echo $_filter; ?></b></td>
 								<td><?php echo $_value; ?></td>				
 							</tr><?php

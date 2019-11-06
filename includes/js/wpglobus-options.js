@@ -102,8 +102,8 @@ jQuery(document).ready(function ($) {
 			});			
 		},
 		initSpecs: function() {
-			$(document).on('dblclick', '#section-tab-debug-info h2', function(ev){
-				$('.wpglobus-debug-info-spec').removeClass('hidden');
+			$(document).on('dblclick', '#section-tab-customizer h2', function(ev){
+				$('.wpglobus-theme-info-spec').removeClass('hidden');
 			});
 		}
 	};
