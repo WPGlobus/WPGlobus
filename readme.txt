@@ -99,7 +99,7 @@ We have checked WPGlobus together with many plugins, including:
 * Popups - WordPress Popup,
 * Sidebar Login,
 * The Events Calendar,
-* WPBakery Page Builder for WordPress (formerly Visual Composer),
+* WPBakery Page Builder,
 * Whistles,
 * Widget Logic,
 * Yoast SEO. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for multilingual focus keyword and SEO analysis.
@@ -156,7 +156,7 @@ You can install this plugin directly from your WordPress dashboard:
 
 Alternatively, see the guide to [Manually Installing Plugins](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
-To install with Composer:
+To install with PHP Composer:
 
 * https://wpackagist.org/search?q=wpglobus
 * https://packagist.org/packages/wpglobus/wpglobus
@@ -217,6 +217,11 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
+
+= 2.2.23 =
+
+* Internal: (Options) Moved theme info to `Customize` section.
+* Internal: (Core) Get hidden post types from the corresponding class.
 
 = 2.2.22 =
 
