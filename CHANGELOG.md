@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-11-06 - version 2.2.23
+* Internal: (Options) Moved theme info to `Customize` section.
+* Internal: (Core) Get hidden post types from the corresponding class.
+
 2019-10-31 - version 2.2.22
 * Added: (Core/Media) Media files support for the standard and Builder modes.
 * Added: (Vendor/Acf) Filter for the `Url` field type.
