@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-11-08 - version 2.2.24
+* Added: (Core/Builders) Added the checking of using block editor for post type.
+
 2019-11-06 - version 2.2.23
 * Internal: (Options) Moved theme info to `Customize` section.
 * Internal: (Core) Get hidden post types from the corresponding class.
