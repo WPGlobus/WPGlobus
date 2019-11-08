@@ -12,6 +12,12 @@
 require_once dirname( __FILE__ ) . '/central/class-wpglobus-admin-central.php';
 WPGlobus_Admin_Central::construct();
 
+/**
+ * @since 2.2.24
+ */
+require_once dirname( __FILE__ ) . '/register-post-types/class-wpglobus-register-post-types.php';
+WPGlobus_Register_Post_Types::construct();
+
 if ( ! empty( $_GET['wpglobus-debug'] ) && 'godmode' === $_GET['wpglobus-debug'] ) { // WPCS: input var ok, sanitization ok.
 	/**
 	 * To load debug info
