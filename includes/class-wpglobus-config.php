@@ -171,6 +171,13 @@ class WPGlobus_Config {
 	public $option_post_meta_settings = 'wpglobus_option_post_meta_settings';
 
 	/**
+	 * WPGlobus option key for registered post types.
+	 * @since 2.2.24
+	 * @var string
+	 */	
+	public $option_register_post_types = 'wpglobus_option_register_post_types';
+
+	/**
 	 * @var string
 	 */
 	public $css_editor = '';
@@ -872,8 +879,11 @@ class WPGlobus_Config {
 			$this->builder = new WPGlobus_Config_Builder(
 				true, 
 				array(
-					'default_language' => $this->default_language, 
-					'post_types' => $builder_post_types
+					'default_language'   => $this->default_language, 
+					'post_types' 		 => $builder_post_types,
+					'options' 			 => array( 
+												'register_post_types' => $this->option_register_post_types,  // @since 2.2.24
+											)
 				)
 			);
 		
