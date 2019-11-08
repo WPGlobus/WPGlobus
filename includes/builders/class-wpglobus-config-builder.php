@@ -66,9 +66,9 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 				require_once dirname( __FILE__ ) . '/class-wpglobus-builders.php';
 				/**
-				 * @since 2.2.11 was added second parameter.
+				 * @since 2.2.24 added $init_attrs.
 				 */				
-				$builder = WPGlobus_Builders::get(true, $this->post_types);
+				$builder = WPGlobus_Builders::get(true, $init_attrs);
 
 				$this->id = $builder['id'];
 				unset( $builder['id'] );

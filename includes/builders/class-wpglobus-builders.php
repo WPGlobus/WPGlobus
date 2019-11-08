@@ -33,6 +33,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 * @since 2.2.11
 		 */		
 		protected static $post_type = null;
+		
+		/**
+		 * @var array
+		 * @since 2.2.24
+		 */
+		protected static $init_attrs = null;
 
 		/**
 		 * @return array
@@ -174,16 +180,26 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		/**
 		 * @param bool  $init
-		 * @param array $post_types was added @since 2.2.11 
+		 * @param array $init_attrs added @since 2.2.24 
 		 *
 		 * @return array|bool
 		 */
-		public static function get( $init = true, $post_types = array() ) {
+		public static function get( $init = true, $init_attrs = array() ) {
 				
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			//return false;
 			// }
-
+		
+			/**
+			 * @since 2.2.24
+			 */
+			self::$init_attrs = $init_attrs;
+			
+			/**
+			 * @since 2.2.24
+			 */				
+			$post_types = $init_attrs['post_types'];
+			
 			/** @global string $pagenow */
 			global $pagenow;
 
@@ -739,7 +755,18 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					// if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
 					//	$load_gutenberg = false;
 					// }
-
+					
+					/**
+					 * @since 2.2.24
+					 */
+					if ( ! self::use_block_editor_for_post_type($post_type) ) {
+						/**
+						 * Don't start Block Editor support.
+						 */
+						return false;
+						
+					}
+					
 					$load_gutenberg = self::get_3rd_party_status_for_gutenberg( $load_gutenberg, $post_type );
 					
 				}
@@ -1324,7 +1351,43 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			return self::$post_type;			
 		}
+		
+		/**
+		 * Check for post type supports.
+		 *
+		 * @since 2.2.24
+		 *
+		 * @return bool
+		 */
+		protected static function use_block_editor_for_post_type($post_type) {
+			
+			$_opts = get_option(self::$init_attrs['options']['register_post_types']);
 
-	}
+			if ( empty($_opts[$post_type]) ) {
+				/**
+				 * We don't have info about post type.
+				 */
+				return true;
+			}
+			
+			if ( empty($_opts[$post_type]['features']['editor']) || (int) $_opts[$post_type]['features']['editor'] == 0 ) {
+				/**
+				 * Don't start Block Editor support.
+				 * @see `use_block_editor_for_post_type()` in wp-admin\includes\post.php
+				 */
+				return false;
+			}
+			
+			if ( ! empty($_opts[$post_type]['show_in_rest']) && (int) $_opts[$post_type]['show_in_rest'] == 0 ) {
+				/**
+				 * Don't start Block Editor support.
+				 * @see `use_block_editor_for_post_type()` in wp-admin\includes\post.php
+				 */				
+				return false;
+			}
+			
+			return true;
+		}
+	}	
 
 endif;
