@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2019-11-08 - version 2.2.24
-* Added: (Core/Builders) Added the checking of using block editor for post type.
+* Added: (Core/Builders) Check if block editor is used with specific post types.
 
 2019-11-06 - version 2.2.23
 * Internal: (Options) Moved theme info to `Customize` section.

@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.24 =
+
+* Added: (Core/Builders) Check if block editor is used with specific post types.
+
 = 2.2.23 =
 
 * Internal: (Options) Moved theme info to `Customize` section.
@@ -241,27 +245,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Added: (Vendor/Yoast) Support Yoast SEO from v.12.
 * Added: (Vendor/Yoast) Support Yoast SEO Premium from v.12.(Beta stage).
 * Added: (Core/WPGlobusDialogApp) `afterSave` callback.
-
-= 2.2.16 =
-
-* Added: (Vendor/Yoast) Filters for `SEO Title`, `Meta Desc` on `edit.php` page.
-
-= 2.2.15 =
-
-* Fixed: (Builders/Gutenberg) TypeError `Cannot read property 'PluginSidebarMoreMenuItem' of undefined`.
-
-= 2.2.14 =
-
-* Added: (Options/Builders) Pinned button type option for builder mode.
-* Added: (Flag) `serbska_malka.png`.
-
-= 2.2.13 =
-
-* Fixed: `extract_text()` regex to support line breaks in strings.
-
-= 2.2.12 =
-
-* Fixed: (Config) PHP warnings for clean install.
 
 = Earlier versions and Add-ons =
 
