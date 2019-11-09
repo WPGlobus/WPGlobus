@@ -45,7 +45,7 @@ jQuery(document).ready( function ($) {
 			return api.parseBool(WPGlobusYoastSeo.is_default_language);
 		},
 		isBuilderPage: function(){
-			return api.parseBool(WPGlobusYoastSeo.is_builder_page);
+			return api.parseBool(WPGlobusYoastSeo.builder_page);
 		},
 		getSuggest: function(type){
 			var suggest = '';

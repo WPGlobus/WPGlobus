@@ -1131,9 +1131,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 						if ( empty( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) ) {
 							/**
-							 * @since 2.2.8
+							 * @since 2.2.25
 							 */
-							$_attrs['builder_page'] = false;
+							$_attrs['builder_page'] = true;
 						} elseif ( isset( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) {
 							$_attrs['builder_page'] = false;
 						} else {
