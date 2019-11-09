@@ -1129,12 +1129,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$_attrs['builder_page'] = true;
 					} else {
 
-						if ( empty( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) ) {
+						if ( ! array_key_exists( 'display-metabox-pt-' . $post_type, $wpseo_titles ) ) {
 							/**
 							 * @since 2.2.25
 							 */
 							$_attrs['builder_page'] = true;
-						} elseif ( isset( $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) && 0 === (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) {
+						} elseif ( 0 === (int) $wpseo_titles[ 'display-metabox-pt-' . $post_type ] ) {
 							$_attrs['builder_page'] = false;
 						} else {
 							$_attrs['builder_page'] = true;
