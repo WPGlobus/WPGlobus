@@ -1,5 +1,5 @@
-# Copyright (C) 2019 WPGlobus 2.2.21
-# This file is distributed under the same license as the WPGlobus 2.2.21 package.
+# Copyright (C) 2019 WPGlobus 2.2.25
+# This file is distributed under the same license as the WPGlobus 2.2.25 package.
 # Translators:
 # Rivo Zängov <eraser@eraser.ee>, 2018
 msgid ""

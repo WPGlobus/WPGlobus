@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.25 ###
+
+
+* Fixed: (Vendor/Yoast) Don't start JS if support module was not defined.
+
+* Fixed: (Vendor/Yoast) Start the support module while the corresponding option is missing.
+
 ### 2.2.24 ###
 
 
