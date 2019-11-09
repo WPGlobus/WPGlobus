@@ -716,6 +716,7 @@ class WPGlobus_YoastSEO {
 						'version' 		=> WPGLOBUS_VERSION,
 						'src_version'   => $src_version,
 						'builder_id'    => WPGlobus::Config()->builder->get('id'),
+						'builder_page'  => WPGlobus::Config()->builder->is_builder_page() ? 'true' : 'false',
 						'language'   	=> WPGlobus::Config()->builder->get_language(),
 						'is_default_language' => WPGlobus::Config()->builder->is_default_language() ? true : false,
 						'src_version_premium' => $src_version_premium,

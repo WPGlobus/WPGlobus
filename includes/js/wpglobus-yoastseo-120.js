@@ -44,6 +44,9 @@ jQuery(document).ready( function ($) {
 		isDefaultLanguage: function(){
 			return api.parseBool(WPGlobusYoastSeo.is_default_language);
 		},
+		isBuilderPage: function(){
+			return api.parseBool(WPGlobusYoastSeo.is_builder_page);
+		},
 		getSuggest: function(type){
 			var suggest = '';
 			if ( 'undefined' === typeof type ) {
@@ -70,7 +73,9 @@ jQuery(document).ready( function ($) {
 			return suggest;
 		},
 		init: function() {
-			api.start();
+			if ( api.isBuilderPage() ) {
+				api.start();
+			}
 		},
 		start: function() {
 			if ( ! api.isDefaultLanguage() ) {
