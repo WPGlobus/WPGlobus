@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-11-09 - version 2.2.25
+* Fixed: (Vendor/Yoast) Don't start JS if support module was not defined.
+* Fixed: (Vendor/Yoast) Start the support module while the corresponding option is missing.
+
 2019-11-08 - version 2.2.24
 * Added: (Core/Builders) Check if block editor is used with specific post types.
 
