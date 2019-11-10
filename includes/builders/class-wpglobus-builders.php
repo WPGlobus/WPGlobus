@@ -58,6 +58,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'supported_min_version' => '4.0.0',
 				'const'                 => 'GUTENBERG_VERSION',
 				'plugin_name'           => 'Gutenberg',
+				'admin_bar_builder_label' => '',
 				'plugin_uri'            => 'https://github.com/WordPress/gutenberg',
 				'path'                  => 'gutenberg/gutenberg.php',
 				'stage'                 => 'production',
@@ -787,6 +788,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				}
 
 				$attrs = self::get_attrs( $_attrs );
+
+				self::$add_on['gutenberg']['admin_bar_builder_label'] = 'Block Editor';
 
 				return $attrs;
 
