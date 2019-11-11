@@ -218,6 +218,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.26 =
+
+* Fixed: (Core/Builders) Don't initialize the Builders class when initial attributes are empty.
+* Internal: (Builders/Block Editor) Changed the admin bar builder label to `Block Editor`.
+
 = 2.2.25 =
 
 * Fixed: (Vendor/Yoast) Don't start JS if support module was not defined.

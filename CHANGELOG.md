@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2019-11-11 - version 2.2.26
-* Fixed: (Core/Builders) Don't init builders class while initial attributes is empty.
+* Fixed: (Core/Builders) Don't initialize the Builders class when initial attributes are empty.
 * Internal: (Builders/Block Editor) Changed the admin bar builder label to `Block Editor`.
 
 2019-11-09 - version 2.2.25
