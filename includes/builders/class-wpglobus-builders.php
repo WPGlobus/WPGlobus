@@ -190,7 +190,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			//return false;
 			// }
-		
+	
+			/**
+			 * @since 2.2.26
+			 */
+			if ( empty($init_attrs) ) {
+				return false;
+			}
+			
 			/**
 			 * @since 2.2.24
 			 */
