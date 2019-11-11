@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2019-11-11 - version 2.2.26
+* Fixed: (Core/Builders) Don't init builders class while initial attributes is empty.
+* Internal: (Builders/Block Editor) Changed the admin bar builder label to `Block Editor`.
+
 2019-11-09 - version 2.2.25
 * Fixed: (Vendor/Yoast) Don't start JS if support module was not defined.
 * Fixed: (Vendor/Yoast) Start the support module while the corresponding option is missing.
