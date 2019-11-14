@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2019-11-14 - version 2.2.27
+* Added: (Vendor/Acf) If editor is hidden by ACF, we hide WPGlobus, too..
+
 2019-11-11 - version 2.2.26
 * Fixed: (Core/Builders) Don't initialize the Builders class when initial attributes are empty.
 * Internal: (Builders/Block Editor) Changed the admin bar builder label to `Block Editor`.
