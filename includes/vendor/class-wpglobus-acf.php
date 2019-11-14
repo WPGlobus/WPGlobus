@@ -23,8 +23,49 @@ class WPGlobus_Acf {
 			), 99, 2
 		);
 
+		/**
+		 * @since 2.2.27
+		 * @see advanced-custom-fields\includes\acf-field-group-functions.php
+		 */
+		add_filter(
+			'acf/get_field_group_style',
+			array(
+				__CLASS__,
+				'filter__get_field_group_style'
+			), 10, 2
+		);
 	}
+	
+	/**
+	 * Filters the generated CSS styles.
+	 *
+	 * @since 2.2.27
+	 *
+	 * @param	string $style The CSS styles.
+	 * @param	array $field_group The field group array.
+	 */	
+	public static function filter__get_field_group_style($style, $field_group){
+		
+		if( is_array($field_group['hide_on_screen']) ) {
+			
+			if ( in_array( 'the_content', $field_group['hide_on_screen'], true ) ) {
+				/**
+				 * If editor is hidden by ACF, we hide WPGlobus, too.
+				 */
+				add_filter(
+					'wpglobus_postdivrich_style',
+					array(
+						__CLASS__,
+						'filter__postdivrich_style'
+					), 10, 2
+				);
+			}
+			
+		}
 
+		return $style;
+	}
+	
 	/**
 	 * Filter @see 'acf/field_group/get_options'
 	 *
