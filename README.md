@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.27 ###
+
+
+* Added: (Vendor/Acf) If editor is hidden by ACF, we hide WPGlobus, too.
+
 ### 2.2.26 ###
 
 
@@ -338,21 +343,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Fixed: (Core) Uncaught `TypeError: WPGlobusYoastSeo.init is not a function`.
 
 * Internal: (Builders/Gutenberg) Updated save post message.
-
-### 2.2.20 ###
-
-
-* Added: (Core/Post Types) Hide Gutenberg's post types.
-
-* Added: (Core/Recommendation) A link to the "Recommendations" tab from the `plugins.php` page.
-
-* Added: (Admin/HelpDesk) Get subject from `$_GET` array.
-
-* Added: (Vendor/Yoast) Support Yoast SEO from v.12.
-
-* Added: (Vendor/Yoast) Support Yoast SEO Premium from v.12.(Beta stage).
-
-* Added: (Core/WPGlobusDialogApp) `afterSave` callback.
 
 ### Earlier versions and Add-ons ###
 
