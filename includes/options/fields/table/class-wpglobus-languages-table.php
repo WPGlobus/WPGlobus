@@ -159,8 +159,8 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 		$this->prepare_items();
 		?>
 		<div id="wpglobus-options-<?php echo $this->field['id']; ?>" class="wpglobus-languages-table-wrapper wpglobus-options-field" data-js-handler="handler<?php echo ucfirst($this->field['id']); ?>">
-			<a id="wpglobus_add_language" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_add() ); ?>" class="button button-primary">
-				<i class="dashicons dashicons-plus-alt" style="line-height: inherit"></i>
+			<a id="wpglobus_add_language" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_add() ); ?>" class="button button-primary" style="height:36px;padding-top:3px;">
+				<i class="dashicons dashicons-plus-alt" style="line-height: initial;margin-top: 3px;"></i>
 				<?php esc_html_e( 'Add new Language', 'wpglobus' ); ?>
 			</a>
 
