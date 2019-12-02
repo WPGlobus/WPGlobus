@@ -447,6 +447,20 @@ jQuery(document).ready(function ($) {
 						 */
 						return true;
 					}
+
+					/**
+					 * @todo W.I.P
+					 * Prevent using element with no id attribute.
+					 * @since 2.2.28
+					 * For example, the "Homepage section" -> "Slider section" -> "Default" option and
+					 * the "Typography" -> "Sections" in
+					 * @link https://wordpress.org/themes/startkit/
+					 */
+					if ( 'undefined' === typeof element.attr('id') ) {
+						//console.log( 'control.section:: ', control.section() );
+						//console.log( 'element:: ', element );
+						//return true;
+					}
 					
 					api.controlInstances[obj] = {};
 					api.controlInstances[obj]['element']  	 = element;
