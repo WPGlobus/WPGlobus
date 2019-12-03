@@ -185,6 +185,7 @@ add_filter( 'get_the_excerpt', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
  */
 if ( ! is_admin() ) {
 	add_filter( 'the_posts', array( 'WPGlobus_Filters', 'filter__the_posts' ), 0, 2 );
+	add_filter( 'the_post', array( 'WPGlobus_Filters', 'filter__the_post' ), 0, 2 );
 }
 
 /**

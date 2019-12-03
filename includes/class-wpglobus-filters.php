@@ -68,6 +68,30 @@ class WPGlobus_Filters {
 	}
 
 	/**
+	 * This filter is needed to display correctly the post with the '--- MORE ---' separator
+	 * on the front page.
+	 * Without it, the post content is truncated at the beginning of <!--more-->, thus keeping
+	 * only the first language.
+	 *
+	 * @param object   $post
+	 * @param WP_Query $query
+	 *
+	 * @return object
+	 * @since 2.2.???
+	 */
+	public static function filter__the_post( $post, $query ) {
+
+		WPGlobus_Core::translate_wp_post(
+			$post,
+			WPGlobus::Config()->language,
+			WPGlobus::RETURN_IN_DEFAULT_LANGUAGE
+		);
+
+		return $post;
+
+	}
+
+	/**
 	 * This is similar to the @see filter__text filter,
 	 * but it returns text in the DEFAULT language.
 	 *
