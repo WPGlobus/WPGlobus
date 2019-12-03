@@ -4,7 +4,7 @@
 
 2019-12-02 - version 2.2.28
 * Added: (Options) new style for `Add new Language` button.
-* Fixed: (Customizer) Disable sections to prevent using elements with no id attribute for Startkit theme.
+* Fixed: (Customizer) Disable sections to prevent using elements with no `id` attribute with the `Startkit` theme.
 
 2019-11-14 - version 2.2.27
 * Added: (Vendor/Acf) If editor is hidden by ACF, we hide WPGlobus, too.

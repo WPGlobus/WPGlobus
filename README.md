@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.28 ###
+
+
+* Added: (Options) new style for `Add new Language` button.
+
+* Fixed: (Customizer) Disable sections to prevent using elements with no `id` attribute with the `Startkit` theme.
+
 ### 2.2.27 ###
 
 
@@ -310,39 +317,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Fixed: (Core/Builders) Don't initialize the Builders class when initial attributes are empty.
 
 * Internal: (Builders/Block Editor) Changed the admin bar builder label to `Block Editor`.
-
-### 2.2.25 ###
-
-
-* Fixed: (Vendor/Yoast) Don't start JS if support module was not defined.
-
-* Fixed: (Vendor/Yoast) Start the support module while the corresponding option is missing.
-
-### 2.2.24 ###
-
-
-* Added: (Core/Builders) Check if block editor is used with specific post types.
-
-### 2.2.23 ###
-
-
-* Internal: (Options) Moved theme info to `Customize` section.
-
-* Internal: (Core) Get hidden post types from the corresponding class.
-
-### 2.2.22 ###
-
-
-* Added: (Core/Media) Media files support for the standard and Builder modes.
-
-* Added: (Vendor/Acf) Filter for the `Url` field type.
-
-### 2.2.21 ###
-
-
-* Fixed: (Core) Uncaught `TypeError: WPGlobusYoastSeo.init is not a function`.
-
-* Internal: (Builders/Gutenberg) Updated save post message.
 
 ### Earlier versions and Add-ons ###
 
