@@ -49,6 +49,14 @@ class WPGlobus_Post_Types {
 		'vc_grid_item',
 		// Elementor: @since 2.2.7
 		'elementor_library',
+		// NextGEN Gallery: @since 2.2.29
+		'ngg_album',
+		'ngg_gallery',
+		'ngg_pictures',
+		'lightbox_library',
+		'displayed_gallery',
+		'display_type',
+		'gal_display_source',
 	);
 
 	/**
