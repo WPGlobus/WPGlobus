@@ -245,7 +245,11 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 					}
 
 				endforeach;
-
+				
+				/**
+				 * @since 2.2.29 we are using `wp_slash` function.
+				 * @see https://github.com/WPGlobus/WPGlobus/pull/83
+				 */
 				$prepared_post->$field = wp_slash( WPGlobus_Utils::build_multilingual_string( $tr ) );
 
 			}
