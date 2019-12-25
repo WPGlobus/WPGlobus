@@ -218,6 +218,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.29 =
+
+* Fixed: (Builders/Gutenberg) Slash stripping on Gutenberg editor.
+* Added: (Core/Post Types) Added post types of `NextGEN Gallery` to the list of hidden types.
+
 = 2.2.28 =
 
 * Added: (Options) new style for `Add new Language` button.
@@ -226,11 +231,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.2.27 =
 
 * Added: (Vendor/Acf) If editor is hidden by ACF, we hide WPGlobus, too.
-
-= 2.2.26 =
-
-* Fixed: (Core/Builders) Don't initialize the Builders class when initial attributes are empty.
-* Internal: (Builders/Block Editor) Changed the admin bar builder label to `Block Editor`.
 
 = Earlier versions and Add-ons =
 

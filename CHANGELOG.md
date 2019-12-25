@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2019-12-25 - version 2.2.29
-* Fixed: (Builders/Gutenberg) Slash striping on gutenberg editor.
-* Added: (Core/Post Types) Added post types of `NextGEN Gallery` to hidden types array.
+* Fixed: (Builders/Gutenberg) Slash stripping on Gutenberg editor.
+* Added: (Core/Post Types) Added post types of `NextGEN Gallery` to the list of hidden types.
 
 2019-12-02 - version 2.2.28
 * Added: (Options) new style for `Add new Language` button.
