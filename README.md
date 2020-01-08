@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.30 ###
+
+
+* Fixed: (Customizer) Disable sections to prevent using elements with for `Google Fonts Typography` and `Google Fonts for WordPress` plugins.
+
 ### 2.2.29 ###
 
 
@@ -312,11 +317,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Added: (Options) new style for `Add new Language` button.
 
 * Fixed: (Customizer) Disable sections to prevent using elements with no `id` attribute with the `Startkit` theme.
-
-### 2.2.27 ###
-
-
-* Added: (Vendor/Acf) If editor is hidden by ACF, we hide WPGlobus, too.
 
 ### Earlier versions and Add-ons ###
 
