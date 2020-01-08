@@ -30,6 +30,21 @@ if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) :
 				 */
 				$disabled_sections[] = 'tt_font_typography';
 			}
+
+			/**
+			 * @since 2.2.30
+			 */			
+			if ( defined( 'GFP_VERSION' ) // premium
+				|| 
+				defined( 'OGF_VERSION' ) // free
+			) {
+				/**
+				 * @see premium https://fontsplugin.com/
+				 * @see free https://wordpress.org/plugins/olympus-google-fonts/
+				 */
+				$disabled_sections[] = 'ogf_custom';
+				$disabled_sections[] = 'ogf_advanced__css';
+			}
 			
 			/**
 			 * @since 2.2.28
