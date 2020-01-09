@@ -74,8 +74,17 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			 * @see elementor\core\files\base.php
 			 */
 			add_action( 'elementor/files/file_name', array( __CLASS__, 'filter__elementor_files_file_name' ), 5, 4 );
+			
+			/**
+			 * @since 2.2.11
+			 * @W.I.P 
+			 * @todo maybe we need to use these filters.
+			 */
+			//add_filter( 'elementor/editor/localize_settings', array( __CLASS__, 'filter__localize_settings' ), 10, 2 );	
+			//add_action( 'elementor/editor/after_enqueue_scripts', array( __CLASS__, 'filter__localize_settings' ) );			
+			
 		}
-
+		
 		/**
 		 * @since 2.1.15
 		 */

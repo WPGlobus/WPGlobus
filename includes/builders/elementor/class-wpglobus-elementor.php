@@ -2,6 +2,8 @@
 /**
  * File: class-wpglobus-elementor.php
  *
+ * @since 2.2.31 We are providing support for `External File` only. @see elementor\core\files\css\base.php::use_external_file().
+ * 
  * @package WPGlobus\Builders\Elementor
  * @author  Alex Gor(alexgff)
  */
@@ -78,7 +80,23 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			 * @see_file elementor\includes\editor.php
 			 */
 			add_action( 'elementor/editor/footer', array( $this, 'on__elementor_footer' ), 100 );
-			
+
+			/**
+			 * @since 2.2.11
+			 * @W.I.P 
+			 * @see meta classic-editor-remember = block-editor OR classic-editor
+			 * @todo maybe to use `wp_footer` action instead of `elementor/editor/footer`.
+			 */
+			//add_action( 'wp_footer', array( $this, 'on__elementor_footer' ), 100 );
+
+			/**
+			 * @since 2.2.11
+			 * @W.I.P 
+			 * @todo maybe useful
+			 */
+			//add_filter( 'elementor/editor/localize_settings', array( $this, 'on__localize_settings' ), 10, 2 );
+			//add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'on__localize_settings' ) );	
+
 			/**
 			 * AJAX handling.
 			 */
@@ -99,6 +117,11 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			}
 			
 			if ( is_admin() ) {
+			
+				/**
+				 * @since 2.2.31
+				 */
+				add_action( 'admin_notices', array( $this, 'on__admin_notice' ) );
 			
 				add_filter( 'the_post', array( $this, 'filter__the_post' ), 5 );
 
@@ -154,6 +177,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		public function filter__localize_settings( $localized_settings, $post_id ) {
 
 			if ( WPGlobus::Config()->builder->is_default_language() ) {
+				return $localized_settings;
+			}
+
+			/**
+			 * @since 2.2.31
+			 */			
+			if ( 'external' !== WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
 				return $localized_settings;
 			}
 
@@ -280,6 +310,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		 * Used to prints scripts or any other HTML before closing the body tag.
 		 */
 		public function on__elementor_footer() {
+
+			/**
+			 * @since 2.2.31
+			 */			
+			if ( 'external' != WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
+				return;
+			}
+			
 			$this->base_redirect_url = str_replace( array( '&language=' . WPGlobus::Config()->builder->get_language() ), '', $this->base_redirect_url );
 			$this->base_redirect_url = str_replace( '&action=edit', '&action=elementor', $this->base_redirect_url );
 			?>
@@ -361,9 +399,17 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			 */
 			$instance
 		) {
-			if ( false === strpos( $url, 'language' ) ) {
-				$url = $url . '&language=' . WPGlobus::Config()->builder->get_language();
+			
+			if ( 'external' === WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
+				if ( false === strpos( $url, 'language' ) ) {
+					$url = $url . '&language=' . WPGlobus::Config()->builder->get_language();
+				}
+			} else {
+				if ( false === strpos( $url, 'language' ) ) {
+					$url = $url . '&language=' . WPGlobus::Config()->default_language;
+				}				
 			}
+			
 			$this->base_redirect_url = $url;
 
 			return $url;
@@ -388,11 +434,50 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			 */
 			$instance
 		) {
+			/**
+			 * @since 2.2.31
+			 */					
+			if ( 'external' !== WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
+				return $url;
+			}			
+			
 			$url = WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->builder->get_language() );
 
 			return $url;
 		}
 
+		/**
+		 * Prints admin screen notices.
+		 *
+		 * @since 2.2.31
+		 */
+		public function on__admin_notice() {
+
+			if ( 'post.php' != WPGlobus::Config()->builder->get('pagenow') ) {
+				return;
+			}
+			
+			if ( 'external' == WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
+				return;
+			}
+			
+			$_url = add_query_arg(
+				array(
+					'page' => 'elementor#tab-advanced',
+				),
+				admin_url( 'admin.php' )
+			);
+			
+			echo '<div class="notice error"><p>';
+			printf(
+				esc_html__( 'WPGlobus поддерживает мультиязычные страницы для Elementor только с опцией %1$s%2$s%3$s установленной в %4$s.', 'wpglobus' ),
+				'<a href="'.$_url.'" target="_blank">',
+				'<strong>CSS Print Method</strong>',
+				'</a>',
+				'<strong>External File</strong>'
+			);
+			echo '</p></div>';		
+		}
 	}
 
 endif;

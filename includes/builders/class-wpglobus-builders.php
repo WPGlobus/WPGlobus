@@ -507,6 +507,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						'post_css_meta_key'       => '_wpglobus_elementor_css',
 						'elementor_data_meta_key' => '_elementor_data',
 						'elementor_css_meta_key'  => '_elementor_css',
+						'elementor_css_print_method' => get_option('elementor_css_print_method', 'external'), // @since 2.2.31
 					);
 
 					if ( $load_elementor ) {
