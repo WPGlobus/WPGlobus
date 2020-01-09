@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.2.30
-# This file is distributed under the same license as the WPGlobus 2.2.30 package.
+# Copyright (C) 2020 WPGlobus 2.2.31
+# This file is distributed under the same license as the WPGlobus 2.2.31 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.2.30\n"
+"Project-Id-Version: WPGlobus 2.2.31\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -655,12 +655,16 @@ msgstr ""
 msgid "Сompatibility Settings"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:294
+#: includes/builders/elementor/class-wpglobus-elementor.php:332
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:300
+#: includes/builders/elementor/class-wpglobus-elementor.php:338
 msgid "current"
+msgstr ""
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:473
+msgid "WPGlobus provides multilingual support for Elementor only when the option %1$s%2$s%3$s is set to %4$s."
 msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228

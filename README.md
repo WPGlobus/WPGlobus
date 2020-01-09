@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.31 ###
+
+
+* Added: (Builders/Elementor) Support the `CSS Print Method` for the `"External File"` option only.
+
+* Fixed: (Core/Block Editor, Builders/Gutenberg) Setting of the switcher button in the Block Editor when Gutenberg is active.
+
 ### 2.2.30 ###
 
 
@@ -310,13 +317,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Fixed: (Builders/Gutenberg) Slash stripping on Gutenberg editor.
 
 * Added: (Core/Post Types) Added post types of `NextGEN Gallery` to the list of hidden types.
-
-### 2.2.28 ###
-
-
-* Added: (Options) new style for `Add new Language` button.
-
-* Fixed: (Customizer) Disable sections to prevent using elements with no `id` attribute with the `Startkit` theme.
 
 ### Earlier versions and Add-ons ###
 

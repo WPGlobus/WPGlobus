@@ -1,11 +1,11 @@
-# Copyright (C) 2019 WPGlobus 2.2.25
-# This file is distributed under the same license as the WPGlobus 2.2.25 package.
+# Copyright (C) 2020 WPGlobus 2.2.31
+# This file is distributed under the same license as the WPGlobus 2.2.31 package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2019-10-29 02:08+0000\n"
+"PO-Revision-Date: 2020-01-09 12:45+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Korean (Korea) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ko_KR/)\n"
@@ -804,12 +804,18 @@ msgstr ""
 msgid "Сompatibility Settings"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:294
+#: includes/builders/elementor/class-wpglobus-elementor.php:332
 msgid "WPGlobus languages"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:300
+#: includes/builders/elementor/class-wpglobus-elementor.php:338
 msgid "current"
+msgstr ""
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:473
+msgid ""
+"WPGlobus provides multilingual support for Elementor only when the option "
+"%1$s%2$s%3$s is set to %4$s."
 msgstr ""
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:228

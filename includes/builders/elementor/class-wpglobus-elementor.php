@@ -470,7 +470,7 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			
 			echo '<div class="notice error"><p>';
 			printf(
-				esc_html__( 'WPGlobus поддерживает мультиязычные страницы для Elementor только с опцией %1$s%2$s%3$s установленной в %4$s.', 'wpglobus' ),
+				esc_html__( 'WPGlobus provides multilingual support for Elementor only when the option %1$s%2$s%3$s is set to %4$s.', 'wpglobus' ),
 				'<a href="'.$_url.'" target="_blank">',
 				'<strong>CSS Print Method</strong>',
 				'</a>',

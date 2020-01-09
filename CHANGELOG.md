@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2020-01-09 - version 2.2.31
-* Added: (Builders/Elementor) The support `External File` of `CSS Print Method` option only.
-* Fixed: (Core/Block Editor,Builders/Gutenberg) The setting of switcher button in Block Editor when Gutenberg is active.
+* Added: (Builders/Elementor) Support the `CSS Print Method` for the `"External File"` option only.
+* Fixed: (Core/Block Editor, Builders/Gutenberg) Setting of the switcher button in the Block Editor when Gutenberg is active.
 
 2020-01-08 - version 2.2.30
 * Fixed: (Customizer) Disable sections to prevent using elements with for `Google Fonts Typography` and `Google Fonts for WordPress` plugins.
