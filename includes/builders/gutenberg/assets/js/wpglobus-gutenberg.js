@@ -215,6 +215,7 @@ jQuery(document).ready(function ($) {
 			var enabledLanguages = WPGlobusCoreData.enabled_languages;
 			var languageNames = WPGlobusCoreData.en_language_name;
 			var flagsUrl = WPGlobusGutenberg.flags_url;
+			var switcherButtonTitle = 'WPGlobus Switcher';
 			var ref = location.href;
 			var refs = {};
 			for (var key in enabledLanguages) {
@@ -261,6 +262,10 @@ jQuery(document).ready(function ($) {
 			
 			function getSwitcherButtonType() {
 				return switcherPluginButtonType;
+			}
+			
+			function getSwitcherButtonTitle() {
+				return switcherButtonTitle;
 			}
 			
 			setSwitcherButtonType(WPGlobusGutenberg.options[optionSwitcherButtonType]);
@@ -368,21 +373,19 @@ jQuery(document).ready(function ($) {
 				}
 
 				setTimeout(function() {
-					var buttons = document.getElementsByClassName('components-icon-button');
-					for (var i = 0; i < buttons.length; i++) { 
-						var status = buttons[i].getAttribute('aria-label');
-						if ( null !== status && -1 != status.indexOf('WPGlobus') ) { 
-							var done = buttons[i].dataset.done;
-							if ( 'undefined' === typeof done ) {
-								var content = buttons[i].innerHTML;
-								buttons[i].innerHTML = content + getSwitcherButton(type);
-								buttons[i].dataset.done = 'init';	
-							} else {
-								buttons[i].innerHTML = getSwitcherButton(type);
-								buttons[i].dataset.done = 'changed';	
-							}
-						}
+					var button = document.querySelector('[aria-label="'+getSwitcherButtonTitle()+'"]');
+					if ( 'undefined' === typeof button || null === button ) {
+						return;
 					}
+					var status = button.dataset.status;
+					if ( 'undefined' === typeof status ) {
+						var content = button.innerHTML;
+						button.innerHTML = content + getSwitcherButton(type);
+						button.dataset.status = 'init';	
+					} else {
+						button.innerHTML = getSwitcherButton(type);
+						button.dataset.status = 'changed';	
+					}					
 				}, 300);
 			}
 			
@@ -561,7 +564,7 @@ jQuery(document).ready(function ($) {
 						PluginSidebar,
 						{
 						  name: 'wpglobus-switcher-sidebar',
-						  title: 'WPGlobus',
+						  title: getSwitcherButtonTitle(),
 						  className: 'wpglobus-switcher-components-panel',
 						  //togglePin: @see wp-includes\js\dist\edit-post.js
 						},
