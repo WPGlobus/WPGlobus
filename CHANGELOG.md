@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-01-09 - version 2.2.31
+* Fixed: (Core/Block Editor,Builders/Gutenberg) The setting of switcher button in Block Editor when Gutenberg is active.
+
 2020-01-08 - version 2.2.30
 * Fixed: (Customizer) Disable sections to prevent using elements with for `Google Fonts Typography` and `Google Fonts for WordPress` plugins.
 
