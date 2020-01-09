@@ -3,6 +3,7 @@
 ## Changelog ##
 
 2020-01-09 - version 2.2.31
+* Added: (Builders/Elementor) The support `External File` of `CSS Print Method` option only.
 * Fixed: (Core/Block Editor,Builders/Gutenberg) The setting of switcher button in Block Editor when Gutenberg is active.
 
 2020-01-08 - version 2.2.30
