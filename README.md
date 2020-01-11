@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.32 ###
+
+
+* Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.
+
+* Internal: (Options/Templates) updated the `"theme info"` template.
+
 ### 2.2.31 ###
 
 

@@ -4,7 +4,7 @@
 
 2020-01-11 - version 2.2.32
 * Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.
-* Internal: (Options/Templates) updated info theme template.
+* Internal: (Options/Templates) updated the `"theme info"` template.
 
 2020-01-09 - version 2.2.31
 * Added: (Builders/Elementor) Support the `CSS Print Method` for the `"External File"` option only.
