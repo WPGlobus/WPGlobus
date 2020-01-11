@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-01-11 - version 2.2.32
+* Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.
+* Internal: (Options/Templates) updated info theme template.
+
 2020-01-09 - version 2.2.31
 * Added: (Builders/Elementor) Support the `CSS Print Method` for the `"External File"` option only.
 * Fixed: (Core/Block Editor, Builders/Gutenberg) Setting of the switcher button in the Block Editor when Gutenberg is active.
