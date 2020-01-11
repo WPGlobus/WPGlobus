@@ -42,12 +42,20 @@ if ( ! empty( $parent_template ) ) {
  */
 $compatibility = array(
 	'wpml' => array(
-		'caption'	=> 'WPML',
+		'caption'	=> 'Config file',
 		'file_name' => 'wpml-config.xml',
 		'file' 		=> '',
 		'compat'	=> false
 	)
 );
+
+/**
+ * @since 2.2.32.
+ */
+$theme_info_spec_class = 'hidden';
+if ( ! empty( $_GET['config-file'] ) ) {
+	$theme_info_spec_class = '';
+}
 
 /**
  * Theme compatibility.
@@ -94,6 +102,7 @@ if ( ! empty( $parent_template ) ) {
 
 ob_start();
 ?>
+<a name="current-theme"></a>
 <table class="active_theme" cellspacing="10">
 	<caption><h2><?php echo $theme_caption; ?></h2></caption>
 	<thead>
@@ -116,7 +125,7 @@ ob_start();
 		if ( ! empty($theme_compats) ) :
 
 			foreach( $theme_compats as $_id=>$_compat ) :	?>
-				<tr class="wpglobus-theme-info-spec hidden">
+				<tr class="wpglobus-theme-info-spec <?php echo $theme_info_spec_class; ?>">
 					<td><b><?php echo $_compat['caption']; ?></b></td>
 					<td><?php 
 						if ( $_compat['compat'] ) {
@@ -171,7 +180,7 @@ if ( ! empty( $parent_theme ) ) {
 			if ( ! empty($parent_compats) ) :
 			
 				foreach( $parent_compats as $_id=>$_compat ) :	?>
-					<tr class="wpglobus-theme-info-spec hidden">
+					<tr class="wpglobus-theme-info-spec <?php echo $theme_info_spec_class; ?>">
 						<td><b><?php echo $_compat['caption']; ?></b></td>
 						<td><?php 
 							if ( $_compat['compat'] ) {
