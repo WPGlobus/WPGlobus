@@ -107,7 +107,17 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( ! self::meta_key_exists( $meta_key ) ) {
 				return $check;
 			}
-
+			
+			if ( empty( self::$builder->get_language() ) ) {
+				/**
+				 * Prevent update post meta when $builder is not set.
+				 * For example, Elementor saves meta `_elementor_data` for Template (post type `elementor_library`).
+				 * And we have meta `_elementor_data` in `$meta_fields` array @see wpglobus\configs\elementor.json
+				 * @since 2.2.33
+				 */
+				return $check;
+			}
+			
 			$meta_type = 'post';
 
 			/** @global wpdb $wpdb */
