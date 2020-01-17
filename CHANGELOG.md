@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-01-17 - version 2.2.33
+* Fixed: (Core/Meta) Prevent update post meta when `$builder` is not set.
+
 2020-01-11 - version 2.2.32
 * Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.
 * Internal: (Options/Templates) updated the `"theme info"` template.
