@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2020-01-17 - version 2.2.33
-* Fixed: (Core/Meta) Prevent update post meta when `$builder` is not set.
-* Added: (Builders/Yoast SEO) Filter for `_yoast_wpseo_focuskw` for front-end.
+* Fixed: (Core/Meta) Prevent updating post meta when `$builder` is not set.
+* Added: (Builders/Yoast SEO) Filter for `_yoast_wpseo_focuskw` at frontend.
 
 2020-01-11 - version 2.2.32
 * Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.

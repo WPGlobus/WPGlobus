@@ -218,6 +218,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.2.33 =
+
+* Fixed: (Core/Meta) Prevent updating post meta when `$builder` is not set.
+* Added: (Builders/Yoast SEO) Filter for `_yoast_wpseo_focuskw` at frontend.
+
 = 2.2.32 =
 
 * Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.
