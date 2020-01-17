@@ -142,6 +142,17 @@ WPGlobus_Admin_Page::print_header();
                 $("#wpglobus-form-helpdesk").on("submit", function (e) {
                     $("#send_email").prop("disabled", true);
                 });
+				function adjustHeight(el, minHeight) {
+					var outerHeight = parseInt(window.getComputedStyle(el).height, 10);
+					var diff = outerHeight - el.clientHeight;
+					el.style.height = 0;
+					el.style.height = Math.max(minHeight, el.scrollHeight + diff) + 'px';
+				}
+				var textArea = [].slice.call(document.querySelectorAll('textarea#info'));
+				if ( textArea.length == 1 ) {
+					adjustHeight(textArea[0], textArea[0].scrollHeight);
+				}
+				
             });
 		</script>
 
