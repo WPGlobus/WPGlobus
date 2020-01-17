@@ -162,6 +162,11 @@ class WPGlobus_YoastSEO {
 			}
 
 		} else {
+			
+			/**
+			 * front-end.
+			 */
+			 
 			/**
 			 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
 			 * AJAX is probably not required (waiting for a case).
@@ -248,6 +253,14 @@ class WPGlobus_YoastSEO {
 			wp_cache_replace( $object_id, $meta_cache, $meta_type . '_meta' );
 		}
 		
+		/**
+		 * @since 2.2.33
+		 */
+		if ( ! empty($meta_cache['_yoast_wpseo_focuskw'][0]) ) {
+			$meta_cache['_yoast_wpseo_focuskw'][0] = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_focuskw'][0], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+			wp_cache_replace( $object_id, $meta_cache, $meta_type . '_meta' );
+		}
+
 		$_done = true;
 		
 		return $check;
