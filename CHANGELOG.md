@@ -3,9 +3,9 @@
 ## Changelog ##
 
 2020-01-18 - version 2.2.34
-Fixed: (Core/Builders) Incorrect behavior with empty `show_in_rest`.
-Added: (Core/Post Types) Post types of `Pods` to hidden types array.
-Internal: (HelpDesk) Adjust the height of the Tech Info textarea.
+* Fixed: (Core/Builders) Incorrect behavior with empty `show_in_rest`.
+* Added: (Core/Post Types) Post types of `Pods` to hidden types array.
+* Internal: (HelpDesk) Adjust the height of the Tech Info textarea.
 
 2020-01-17 - version 2.2.33
 * Fixed: (Core/Meta) Prevent updating post meta when `$builder` is not set.
