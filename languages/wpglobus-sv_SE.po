@@ -771,7 +771,7 @@ msgstr "Teknisk information"
 msgid "This information helps us to find the problem source"
 msgstr "Denna information hjälper oss att hitta källan på problemet"
 
-#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:150
+#: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:161
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
