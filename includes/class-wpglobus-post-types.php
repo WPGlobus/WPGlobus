@@ -59,6 +59,10 @@ class WPGlobus_Post_Types {
 		'gal_display_source',
 		// MC4WP: Mailchimp for WordPress(https://wordpress.org/plugins/mailchimp-for-wp/) : @since 2.2.32
 		'mc4wp-form',
+		// Pods: https://wordpress.org/plugins/pods/ @since 2.2.34
+		'_pods_template',
+		'_pods_pod',
+		'_pods_field',
 	);
 
 	/**
