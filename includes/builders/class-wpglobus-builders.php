@@ -1367,6 +1367,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 		 * Check for post type supports.
 		 *
 		 * @since 2.2.24
+		 * @since 2.2.34 Fix with empty `show_in_rest`.
 		 *
 		 * @return bool
 		 */
@@ -1388,8 +1389,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				 */
 				return false;
 			}
-			
-			if ( ! empty($_opts[$post_type]['show_in_rest']) && (int) $_opts[$post_type]['show_in_rest'] == 0 ) {
+
+			if ( empty($_opts[$post_type]['show_in_rest']) || (int) $_opts[$post_type]['show_in_rest'] == 0 ) {
 				/**
 				 * Don't start Block Editor support.
 				 * @see `use_block_editor_for_post_type()` in wp-admin\includes\post.php
