@@ -25,9 +25,22 @@
 			}, 1000);
 			
 			setTimeout(function(){
-				var h = $('#wpglobus-admin-debug-box .table1').css('height').replace('px', '') * 1;
-				h += 50;
-				$('#wpglobus-admin-debug-box .table2').css({'margin-top':h+'px'});
+				var marginTop=0,h1=0,h2=0;
+				var $table1 = jQuery('#wpglobus-admin-debug-box .table1');
+				if ( $table1.length == 1 ) {
+					h1 = $table1.css('height').replace('px', '') * 1;
+					marginTop = h1+50;
+				}
+				var $table2 = jQuery('#wpglobus-admin-debug-box .table2');
+				if ( $table2.length == 1 ) {
+					$table2.css({'margin-top':marginTop+'px'});
+					h2 = $table2.css('height').replace('px', '') * 1;
+					marginTop = h1+h2+100;
+				}
+				var $table3 = jQuery('#wpglobus-admin-debug-box .table3');
+				if ( $table3.length == 1 ) {
+					$table3.css({'margin-top':marginTop+'px'});
+				}
 			}, 1200);
 		}
 	};

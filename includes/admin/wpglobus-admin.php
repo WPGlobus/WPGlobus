@@ -18,11 +18,14 @@ WPGlobus_Admin_Central::construct();
 require_once dirname( __FILE__ ) . '/register-post-types/class-wpglobus-register-post-types.php';
 WPGlobus_Register_Post_Types::construct();
 
-if ( ! empty( $_GET['wpglobus-debug'] ) && 'godmode' === $_GET['wpglobus-debug'] ) { // WPCS: input var ok, sanitization ok.
+if ( isset( $_GET['wpglobus-debug'] ) ) { // WPCS: input var ok, sanitization ok.
 	/**
 	 * To load debug info
 	 * site/wp-admin/post.php?post={{post_ID}}&action=edit&wpglobus-debug=godmode
+	 * or
+	 * site/wp-admin/post.php?post={{post_ID}}&action=edit&wpglobus-debug=meta
 	 */
 	require_once dirname( __FILE__ ) . '/debug/class-wpglobus-admin-debug.php';
 	WPGlobus_Admin_Debug::get_instance();
 }
+
