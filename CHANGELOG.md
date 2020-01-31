@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-01-31 - version 2.2.35
+* Added: (Core/Builders) `WPGlobus_Builder_Update_Post` class.
+* Internal: (Debug) Updated `WPGlobus_Admin_Debug` class.
+
 2020-01-18 - version 2.2.34
 * Fixed: (Core/Builders) Incorrect behavior with empty `show_in_rest`.
 * Added: (Core/Post Types) Post types of `Pods` to hidden types array.
