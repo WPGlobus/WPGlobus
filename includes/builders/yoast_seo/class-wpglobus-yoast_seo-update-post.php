@@ -13,7 +13,7 @@
 if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 
 	// phpcs:ignore PEAR.NamingConventions
-	class WPGlobus_yoast_seo_Update_Post {
+	class WPGlobus_yoast_seo_Update_Post extends WPGlobus_Builder_Update_Post {
 
 		/**
 		 * Current taxonomy.
@@ -29,6 +29,8 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 		 * Constructor.
 		 */
 		public function __construct() {
+
+			parent::__construct( 'yoast_seo' );
 
 			global $pagenow;
 

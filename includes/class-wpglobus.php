@@ -355,6 +355,11 @@ class WPGlobus {
 
 			if ( 'gutenberg' === self::Config()->builder->get_id() ) {
 
+				/**
+				 * @since 2.2.35
+				 */
+				require_once dirname( __FILE__ ) . '/builders/class-wpglobus-builder-update-post.php';
+				
 				require_once dirname( __FILE__ ) . '/builders/gutenberg/class-wpglobus-gutenberg-update-post.php';
 				new WPGlobus_Gutenberg_Update_Post();
 
@@ -366,6 +371,11 @@ class WPGlobus {
 
 					$_file = dirname( __FILE__ ) . '/builders/' . $id . '/class-wpglobus-' . $id . '-update-post.php';
 					if ( file_exists( $_file ) ) {
+						/**
+						 * @since 2.2.35
+						 */
+						require_once dirname( __FILE__ ) . '/builders/class-wpglobus-builder-update-post.php';
+						
 						/** @noinspection PhpIncludeInspection */
 						require_once $_file;
 						$class_update_post = "WPGlobus_${id}_Update_Post";

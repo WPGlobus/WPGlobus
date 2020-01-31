@@ -11,7 +11,7 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 	/**
 	 * Class WPGlobus_Gutenberg_Update_Post.
 	 */
-	class WPGlobus_Gutenberg_Update_Post {
+	class WPGlobus_Gutenberg_Update_Post extends WPGlobus_Builder_Update_Post {
 
 		/** @var string */
 		protected $language = null;
@@ -24,6 +24,8 @@ if ( ! class_exists( 'WPGlobus_Gutenberg_Update_Post' ) ) :
 		 */
 		public function __construct() {
 
+			parent::__construct( 'gutenberg' );
+			
 			/**
 			 * @todo to save meta see request ($_REQUEST)
 			 * post.php?post=259&action=edit&classic-editor=1&meta_box=1

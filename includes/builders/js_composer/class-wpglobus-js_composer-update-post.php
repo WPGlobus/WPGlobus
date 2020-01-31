@@ -13,13 +13,15 @@
 if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
 
 	// phpcs:ignore PEAR.NamingConventions
-	class WPGlobus_js_composer_Update_Post {
+	class WPGlobus_js_composer_Update_Post extends WPGlobus_Builder_Update_Post {
 
 		/**
 		 * Constructor.
 		 */
 		public function __construct() {
 
+			parent::__construct( 'js_composer' );
+			
 			/**
 			 * @see_file wpglobus\includes\class-wpglobus.php
 			 */
