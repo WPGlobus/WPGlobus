@@ -299,14 +299,21 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.2.35 ###
+
+
+* Added: (Core/Builders) `WPGlobus_Builder_Update_Post` class.
+
+* Internal: (Debug) Updated `WPGlobus_Admin_Debug` class.
+
 ### 2.2.34 ###
 
 
-Fixed: (Core/Builders) Incorrect behavior with empty `show_in_rest`.
+* Fixed: (Core/Builders) Incorrect behavior with empty `show_in_rest`.
 
-Added: (Core/Post Types) Post types of `Pods` to hidden types array.
+* Added: (Core/Post Types) Post types of `Pods` to hidden types array.
 
-Internal: (HelpDesk) Adjust the height of the Tech Info textarea.
+* Internal: (HelpDesk) Adjust the height of the Tech Info textarea.
 
 ### 2.2.33 ###
 
@@ -333,13 +340,6 @@ Internal: (HelpDesk) Adjust the height of the Tech Info textarea.
 
 
 * Fixed: (Customizer) Disable sections to prevent using elements with for `Google Fonts Typography` and `Google Fonts for WordPress` plugins.
-
-### 2.2.29 ###
-
-
-* Fixed: (Builders/Gutenberg) Slash stripping on Gutenberg editor.
-
-* Added: (Core/Post Types) Added post types of `NextGEN Gallery` to the list of hidden types.
 
 ### Earlier versions and Add-ons ###
 
