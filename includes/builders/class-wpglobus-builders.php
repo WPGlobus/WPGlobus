@@ -136,6 +136,23 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			);
 
 			/**
+			 * @since 2.3.0
+			 */
+			self::$add_on['pods'] = array(
+				'id'                    => 'pods',
+				'role'                  => 'builder',
+				'admin_bar_label'       => 'Add-on',
+				'config_file'           => 'pods.json',
+				'supported_min_version' => '2.7.16',
+				'const'                 => 'PODS_VERSION',
+				'plugin_name'           => 'Pods-Custom Content Types and Fields',
+				'plugin_uri'            => 'https://wordpress.org/plugins/pods/',
+				'path'                  => 'pods/init.php',
+				'stage'                 => 'production',
+				'admin_bar_builder_label' => 'Pods',
+			);
+
+			/**
 			 * self::$add_on['wp-subtitle'] = array(
 			 * 'id'                    => 'wp-subtitle',
 			 * 'role'                    => 'add-on',
@@ -321,10 +338,25 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				/**
 				 * @since 1.9.17
 				 */
-				$builder = self::is_yoast_seo();
-				if ( $builder ) {
-					return $builder;
+				if ( ! $builder || ! $builder['builder_page'] ) {
+					$builder = self::is_yoast_seo();
+					if ( $builder && $builder['builder_page'] ) {
+						return $builder;
+					}
 				}
+
+				/**
+				 * Pods – Custom Content Types and Fields.
+				 *
+				 * @since 2.3.0
+				 */
+				if ( ! $builder || ! $builder['builder_page'] ) {
+					$builder = self::is_pods();
+					if ( $builder && $builder['builder_page'] ) {
+						return $builder;
+					}					
+					
+				}				
 			}
 
 			return self::$attrs;
@@ -1225,6 +1257,37 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 		}
 
+		/**
+		 * Check for Pods – Custom Content Types and Fields.
+		 *
+		 * @since 2.3.0
+		 */
+		protected static function is_pods() {
+			
+			if ( ! defined( 'PODS_VERSION' ) ) {
+				return false;
+			}
+
+			$post_type = self::get_post_type_2();
+			
+			$_attrs = array(
+				'id'           => 'pods',
+				'version'      => PODS_VERSION,
+				'class'        => 'WPGlobus_Pods',
+				'builder_page' => false,
+				'post_type'    => empty( $post_type ) ? '' : $post_type,
+			);	
+			
+			require_once 'pods/class-wpglobus-builder-pods.php';
+			$_attrs = WPGlobus_Builder_Pods::get_attrs( self::get_attrs( $_attrs ) );
+			
+			if ( ! $_attrs ) {
+				return false;
+			}
+			
+			return $_attrs;	
+		}
+		
 		/**
 		 * Get attributes.
 		 *
