@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-02-03 - version 2.3.0
+* Added: (Builders/Pods) Support `Pods – Custom Content Types and Fields`.
+
 2020-01-31 - version 2.2.35
 * Added: (Core/Builders) `WPGlobus_Builder_Update_Post` class.
 * Internal: (Debug) Updated `WPGlobus_Admin_Debug` class.
