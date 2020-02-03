@@ -489,4 +489,18 @@ if ( function_exists( '__mc4wp_flush' ) || function_exists( '_mc4wp_load_plugin'
 	WPGlobus_MailChimp_For_WP::controller();
 }
 
+if ( function_exists('pods_api') ) {
+	
+	/**
+	 * Pods – Custom Content Types and Fields.
+	 * https://wordpress.org/plugins/pods/
+	 *
+	 * @since 2.3.0
+	 */
+	if ( ! is_admin() ) {
+		require_once dirname( __FILE__ ) . '/vendor/pods/class-wpglobus-vendor-pods-front.php';
+		WPGlobus_Vendor_Pods_Front::controller();
+	}
+}
+
 /*EOF*/
