@@ -1,0 +1,12 @@
+{
+  "post_meta_fields": {
+    "*":{"file":"vendor/pods/class-wpglobus-vendor-pods.php","class":"WPGlobus_Vendor_Pods"}
+  },
+  "post_ml_fields": {    
+	"*":{"file":"vendor/pods/class-wpglobus-vendor-pods.php","class":"WPGlobus_Vendor_Pods"}
+  },
+  "wp_options": {
+	"blogname": {},
+	"blogdescription": null
+  }
+}

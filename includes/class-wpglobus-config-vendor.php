@@ -186,6 +186,15 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			}
 
 			/**
+			 * Pods – Custom Content Types and Fields.
+			 * https://wordpress.org/plugins/pods/
+			 * @since 2.3.0
+			 */
+			if ( defined( 'PODS_VERSION' ) ) {
+				self::$vendors[] = 'pods.json';
+			}
+
+			/**
 			 * Page Builder by SiteOrigin.
 			 * https://wordpress.org/plugins/siteorigin-panels/
 			 * // if ( defined('SITEORIGIN_PANELS_VERSION') )  {
@@ -318,11 +327,20 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 					 * @since 2.1.3 Added post type parameter.
 					 */
 					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get( 'post_id' ), self::$builder->get( 'post_type' ) );
+				} else {
+					/**
+					 * Mark as being incorrectly called.
+					 */
+					_doing_it_wrong( 'Class `' . $class . '` (in ' . __FILE__ . ')', 'Check out `configs\*.json` files.', '2.3.0' );
 				}
+			} else {
+				/**
+				 * Mark as being incorrectly called.
+				 */
+				_doing_it_wrong( 'File `' . $file . '` (in ' . __FILE__ . ')', 'Check out `configs\*.json` files.', '2.3.0' );
 			}
 
 			return $_post_meta_fields;
-
 		}
 
 		/**
@@ -406,3 +424,5 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 	}
 
 endif;
+
+# --- EOF

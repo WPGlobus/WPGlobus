@@ -1,7 +1,8 @@
 <?php
 /**
  * @package WPGlobus\Vendor
- *
+ * 
+ * We start this file to support the plugins/add-ons in builder mode.
  * @since 1.9.17
  */
 
@@ -11,6 +12,15 @@
 if ( defined( 'AIOSEOP_VERSION' ) ) {
 	require_once( dirname( __FILE__ ) . '/aioseopack/class-wpglobus-aioseopack.php' );
 	WPGlobus_All_in_One_SEO_Pack::get_instance();	
+}
+
+/**
+ * Pods.
+ * @since 2.3.0
+ */
+if ( defined( 'PODS_VERSION' ) ) {
+	require_once( dirname( __FILE__ ) . '/pods/class-wpglobus-vendor-pods.php' );
+	WPGlobus_Vendor_Pods::get_instance();
 }
 
 /**
@@ -24,6 +34,5 @@ if ( $this->is_script_active('ACF') || $this->is_script_active('ACFPRO') ) {
 	WPGlobus_Acf_1::get_instance();	
 }
 // */
-
 
 # --- EOF
