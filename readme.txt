@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.3.0 =
+
+* Added: (Builders/Pods) Support (partially - Standard and Custom Post Types) `Pods – Custom Content Types and Fields`.
+
 = 2.2.35 =
 
 * Added: (Core/Builders) `WPGlobus_Builder_Update_Post` class.
