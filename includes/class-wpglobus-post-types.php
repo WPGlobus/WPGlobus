@@ -63,6 +63,9 @@ class WPGlobus_Post_Types {
 		'_pods_template',
 		'_pods_pod',
 		'_pods_field',
+		// Elementor Pro: @since 2.3.1
+		'elementor_font',
+		'elementor_icons',
 	);
 
 	/**
