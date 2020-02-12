@@ -151,6 +151,7 @@ var WPGlobusDialogApp;
 				placeholder: '',
 				formFooter: '',
 				beforeOpen: function(){},
+				afterOpen: function(){},
 				afterSave: function(){},
 				close: function(){},
 			},	
@@ -583,6 +584,12 @@ var WPGlobusDialogApp;
 			api.runCallback( api.option.dialog.beforeOpen );
 			
 			api.dialog.dialog('open');
+			
+			/**
+			 * After open callback.
+			 * @since 2.3.1
+			 */					
+			api.runCallback( api.option.dialog.afterOpen );
 		},
 		runCallback: function(callback) {
 
