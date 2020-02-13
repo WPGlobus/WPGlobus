@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-02-12 - version 2.3.1
-* Added: (Core/Post Types) post types of `Elementor Pro` to hidden types array.
+* Added: (Core/Post Types) post types of `Elementor Pro` to the hidden types array.
 * Added: (Core/WPGlobusDialogApp) `afterOpen` callback.
 
 2020-02-03 - version 2.3.0

@@ -299,6 +299,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.3.1 ###
+
+
+* Added: (Core/Post Types) post types of `Elementor Pro` to the hidden types array.
+
+* Added: (Core/WPGlobusDialogApp) `afterOpen` callback.
+
 ### 2.3.0 ###
 
 
