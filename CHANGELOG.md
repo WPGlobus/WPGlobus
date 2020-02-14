@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-02-14 - version 2.3.2
+* Added: (Core/Post Types) `wpglobus_hidden_types` filter.
+
 2020-02-12 - version 2.3.1
 * Added: (Core/Post Types) post types of `Elementor Pro` to the hidden types array.
 * Added: (Core/WPGlobusDialogApp) `afterOpen` callback.
