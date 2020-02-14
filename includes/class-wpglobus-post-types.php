@@ -90,11 +90,22 @@ class WPGlobus_Post_Types {
 	 * @return string[]
 	 */
 	public static function hidden_types() {
+		
 		$hidden_types = self::$hidden_types_main;
 
 		if ( class_exists( 'WooCommerce', false ) ) {
 			$hidden_types = array_merge( $hidden_types, self::$hidden_types_wc );
 		}
+
+		/**
+		 * Filter for hidden post types.
+		 * @see filter `wpglobus_disabled_entities` in includes\class-wpglobus.php for admin.
+		 *
+		 * @since 2.3.2
+		 *
+		 * @param array $hidden_types Array of hidden types.
+		 */
+		$hidden_types = apply_filters( 'wpglobus_hidden_types', $hidden_types );
 
 		return $hidden_types;
 	}
