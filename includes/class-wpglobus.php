@@ -246,41 +246,20 @@ class WPGlobus {
 				 * @since 1.2.6
 				 */
 				$this->vendors_scripts['ACFPRO'] = true;
-				//$this->disabled_entities[]       = 'acf-field-group';
-				//$this->disabled_entities[]       = 'acf-field';
-
 			} else {
-
 				$this->vendors_scripts['ACF'] = true;
-				//$this->disabled_entities[]    = 'acf';
-				/**
-				 * @since 1.9.17
-				 */
-				//$this->disabled_entities[] = 'acf-field-group';
-
 			}
 		}
 
 		if ( defined( 'WC_VERSION' ) || defined( 'WOOCOMMERCE_VERSION' ) ) {
 
 			$this->vendors_scripts['WOOCOMMERCE'] = true;
-			//$this->disabled_entities[]            = 'product';
-			$this->disabled_entities[]            = 'product_tag';
-			$this->disabled_entities[]            = 'product_cat';
-			//$this->disabled_entities[]            = 'shop_order';
-			//$this->disabled_entities[]            = 'shop_coupon';
-
+			
 			/**
-			 * Gathering Woocommerce's post types in one place
-			 *
-			 * @since 1.4.3
-			 */
-			//$this->disabled_entities[] = 'product_variation';
-			//$this->disabled_entities[] = 'shop_order_refund';
-			//$this->disabled_entities[] = 'shop_webhook'; // Obsolete in WC3.
-
-			// TODO
-			// $this->disabled_entities[] = 'shop_subscription';
+			 * @todo May be move to includes\class-wpglobus-post-types.php
+			 */ 
+			$this->disabled_entities[] = 'product_tag';
+			$this->disabled_entities[] = 'product_cat';
 
 		}
 
@@ -290,30 +269,14 @@ class WPGlobus {
 
 		if ( defined( 'WPCF7_VERSION' ) ) {
 			$this->vendors_scripts['WPCF7'] = true;
-			/**
-			 * Disable cpt of plugin Contact Form 7 by default
-			 *
-			 * @since 1.4.6
-			 */
-			//$this->disabled_entities[] = 'wpcf7_contact_form';
 		}
 
 		/**
 		 * If you need add new vendors script and disable cpt
 		 * you must add it to customizer also
 		 *
-		 * @see class-wpglobus-customize-options.php:596
+		 * @see includes\admin\class-wpglobus-customize-options.php
 		 */
-
-		/**
-		 * Add builtin post type
-		 */
-		//$this->disabled_entities[] = 'attachment';
-
-		/**
-		 * @since 1.9.0
-		 */
-		//$this->disabled_entities[] = 'oembed_cache';
 
 		/**
 		 * @since 2.2.23
