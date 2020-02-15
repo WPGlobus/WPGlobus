@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.3.2 ###
+
+
+* Added: (Core/Post Types) `wpglobus_hidden_types` filter.
+
 ### 2.3.1 ###
 
 
