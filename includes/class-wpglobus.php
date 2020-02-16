@@ -280,7 +280,6 @@ class WPGlobus {
 
 		/**
 		 * @since 2.2.23
-		 * @todo remove duplicate post types @see above after testing.
 		 */
 		$this->disabled_entities = array_merge( $this->disabled_entities, WPGlobus_Post_Types::hidden_types() );
 
@@ -681,34 +680,10 @@ class WPGlobus {
 				$WPGlobus_acf = new WPGlobus_Acf();
 			}
 
-			/**
-			 * Moved to another place.
-			 *
-			 * @since 1.9.17
-			 * @todo  remove after test.
-			 */
-			/*
-			add_action( 'admin_print_styles', array(
-				$this,
-				'on_admin_styles'
-			) );
-			// */
-
 			add_action( 'admin_menu', array(
 				$this,
 				'on_admin_menu',
 			), 10 );
-
-			/**
-			 * Moved to another place.
-			 *
-			 * @since 1.9.17
-			 * @todo  remove after test.
-			 */
-			// add_action( 'post_submitbox_misc_actions', array(
-			// 	$this,
-			// 	'on_add_devmode_switcher'
-			// ) );
 
 			add_action( 'admin_bar_menu', array(
 				$this,
