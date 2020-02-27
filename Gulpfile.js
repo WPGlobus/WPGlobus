@@ -1,5 +1,6 @@
 const
 	{series} = require("gulp"),
+	bump = require("./gulp_modules/task-bump"),
 	readme = require("./gulp_modules/task-readme"),
 	replace_version = require("./gulp_modules/task-replace-version"),
 	pot = series(replace_version, require("./gulp_modules/task-pot")),
@@ -10,6 +11,7 @@ const
 	dist = series(readme, sass, uglify, product_info, pomo)
 ;
 
+exports.bump = bump;
 exports.readme = readme;
 exports.replace_version = replace_version;
 exports.pot = pot;

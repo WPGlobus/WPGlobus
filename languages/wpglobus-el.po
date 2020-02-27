@@ -274,7 +274,7 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:546,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:538,
-#: includes/class-wpglobus.php:1319, wpglobus.php:12, wpglobus.php:18
+#: includes/class-wpglobus.php:1294, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -793,7 +793,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:277,
-#: includes/class-wpglobus.php:3585
+#: includes/class-wpglobus.php:3560
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -880,40 +880,40 @@ msgid "Selector type"
 msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1293
+#: includes/class-wpglobus.php:1268
 msgid "OFF"
 msgstr ""
 
-#: includes/class-wpglobus.php:1294
+#: includes/class-wpglobus.php:1269
 msgid "Turn on"
 msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1298
+#: includes/class-wpglobus.php:1273
 msgid "ON"
 msgstr ""
 
-#: includes/class-wpglobus.php:1299
+#: includes/class-wpglobus.php:1274
 msgid "Turn off"
 msgstr ""
 
-#: includes/class-wpglobus.php:1482
+#: includes/class-wpglobus.php:1457
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1683
+#: includes/class-wpglobus.php:1658
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:1700
+#: includes/class-wpglobus.php:1675
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:4024
+#: includes/class-wpglobus.php:3999
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:4026
+#: includes/class-wpglobus.php:4001
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."

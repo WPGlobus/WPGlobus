@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.3.3 =
+
+Added: (Builders/Elementor) handle multiple file names.
+
 = 2.3.2 =
 
 * Added: (Core/Post Types) `wpglobus_hidden_types` filter.
@@ -230,36 +234,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.3.0 =
 
 * Added: (Builders/Pods) Support (partially - Standard and Custom Post Types) `Pods – Custom Content Types and Fields`.
-
-= 2.2.35 =
-
-* Added: (Core/Builders) `WPGlobus_Builder_Update_Post` class.
-* Internal: (Debug) Updated `WPGlobus_Admin_Debug` class.
-
-= 2.2.34 =
-
-* Fixed: (Core/Builders) Incorrect behavior with empty `show_in_rest`.
-* Added: (Core/Post Types) Post types of `Pods` to hidden types array.
-* Internal: (HelpDesk) Adjust the height of the Tech Info textarea.
-
-= 2.2.33 =
-
-* Fixed: (Core/Meta) Prevent updating post meta when `$builder` is not set.
-* Added: (Builders/Yoast SEO) Filter for `_yoast_wpseo_focuskw` at frontend.
-
-= 2.2.32 =
-
-* Added: (Core/Post Types) post type of `Mailchimp for WordPress` to the list of hidden types.
-* Internal: (Options/Templates) updated the `"theme info"` template.
-
-= 2.2.31 =
-
-* Added: (Builders/Elementor) Support the `CSS Print Method` for the `"External File"` option only.
-* Fixed: (Core/Block Editor, Builders/Gutenberg) Setting of the switcher button in the Block Editor when Gutenberg is active.
-
-= 2.2.30 =
-
-* Fixed: (Customizer) Disable sections to prevent using elements with for `Google Fonts Typography` and `Google Fonts for WordPress` plugins.
 
 = Earlier versions and Add-ons =
 
