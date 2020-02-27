@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-02-27 - version 2.3.3
+* Added: (Builders/Elementor) handle multiple file names.
+
 2020-02-14 - version 2.3.2
 * Added: (Core/Post Types) `wpglobus_hidden_types` filter.
 
