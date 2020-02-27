@@ -117,34 +117,49 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 		}
 		
 		/**
-		 * Filters the file name
+		 * Filters the file name.
 		 *
 		 * @since 2.1.13
+		 * @since 2.3.3   Handle multiple file names.
 		 *
-		 * @param string $file_name
+		 * @param string $file_name CSS file name.
 		 * @param object $instance  The file instance, which inherits Elementor\Core\Files
 		 */
 		public static function filter__elementor_files_file_name( $file_name, $instance ) {
-			
-			static $_file_name = null;
-			
-			if ( ! is_null( $_file_name ) ) {
-				return $_file_name;
-			}
 
+			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return $file_name;
+			}
+			
 			if ( false === strpos( $file_name, self::$file_prefix ) ) {
 				return $file_name;
-			} else {
-				// case when $file_name == 'post-ID.css'
-				if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-					$_file_name = $file_name;
-				} else {
-					if ( false !== strpos( $file_name, '.css' ) ) {
-						$_file_name = str_replace( '.css', '-' . WPGlobus::Config()->language . '.css', $file_name );
-					}
-				}
+			}
+			
+			/**
+			 * @since 2.3.3 @W.I.P May be check out for global post ID.
+			 */
+			//global $post;
+			//if ( ! $post instanceof WP_Post ) {
+				//return $file_name;
+			//}
+			//$file_unique_part = str_replace( self::$file_prefix, '', $file_name );
+			//if ( false === strpos( $file_unique_part, $post->ID . '.' ) ) {
+				//return $file_name;
+			//}
+
+			static $_file_names = null;
+			
+			if ( ! is_null( $_file_names ) && ! empty( $_file_names[$file_name] ) ) {
+				return $_file_names[$file_name];
 			}
 
+			$_file_name = $file_name;
+			if ( false !== strpos( $file_name, '.css' ) ) {
+				$_file_name = str_replace( '.css', '-' . WPGlobus::Config()->language . '.css', $file_name );
+			}
+				
+			$_file_names[$file_name] = $_file_name;
+				
 			return $_file_name;
 		}
 		
