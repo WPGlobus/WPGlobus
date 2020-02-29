@@ -516,6 +516,7 @@ class WPGlobus_Options {
 		$this->sections['customizer']       = $this->section_customizer();
 		$this->sections['compatibility']    = $this->section_compatibility();
 		$this->sections['block-editor']     = $this->section_block_editor();
+		$this->sections['seo']     		  	= $this->section_seo(); // @since 2.3.4
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
@@ -1600,6 +1601,116 @@ class WPGlobus_Options {
 	}
 
 	/**
+	 * Section "Multilingual Seo".
+	 *
+	 * @since 2.3.4
+	 * @return array
+	 */
+	protected function section_seo() {
+
+		/**
+		 * We can get options from WPGlobus::Config().
+		 */		
+		$wpglobus_option = get_option( $this->args['opt_name'] );
+
+		$hreflang_type_default = 'zz-ZZ';
+		$hreflang_type_default_language = false;
+
+		$hreflang_type = empty( $wpglobus_option['seo_hreflang_type'] ) ? $hreflang_type_default : $wpglobus_option['seo_hreflang_type'];
+		$hreflang_type_for_default_language = empty( $wpglobus_option['seo_hreflang_default_language_type'] ) ? false : $wpglobus_option['seo_hreflang_default_language_type'];
+		
+		$home_url = home_url('/');
+		
+		$_info_desc  = '<strong>';
+		$_info_desc .= esc_html__( 'С текущими настройками вы увидите эти строки в секции head ваших страниц', 'wpglobus' );
+		$_info_desc .= '&nbsp;';
+		$_info_desc .= esc_html__( '(пример для двух языков)', 'wpglobus' );
+		$_info_desc .= '</strong>';
+		$_info_desc .= ':<br />';
+
+		$draft = '<link rel="alternate" hreflang="{{code}}" href="{{link}}" />';
+		
+		$i = 0;
+		foreach( WPGlobus::Config()->enabled_languages as $language ) {
+			
+			if ( $i > 1 ) {
+				break;
+			}
+			
+			switch ($hreflang_type) {
+				case 'zz':
+					$_hreflang_type = $language;
+					break;
+				case 'zz-zz':
+					$_hreflang_type = str_replace( '_', '-', strtolower(WPGlobus::Config()->locale[ $language ]) );
+					break;
+				default :
+					// 'zz-ZZ'
+					$_hreflang_type = str_replace( '_', '-', WPGlobus::Config()->locale[ $language ] );	
+					break;
+			}			
+			
+			if ( $language == WPGlobus::Config()->default_language ) {
+				if ( $hreflang_type_for_default_language ) {
+					$_hreflang_type = $hreflang_type_for_default_language;
+				}
+			}
+			
+			$_draft = str_replace( 
+				array('{{code}}', '{{link}}'), 
+				array($_hreflang_type, WPGlobus_Utils::localize_url($home_url, $language) ), 
+				$draft 
+			);
+			$_info_desc .= htmlspecialchars( $_draft, ENT_QUOTES, 'UTF-8');
+			$_info_desc .= '<br />';
+			
+			$i++;
+		}
+		
+		$fields[] =
+			array(
+				'id'     => 'wpglobus_hreflang',
+				'type'	 => 'wpglobus_info',
+				'title'  => esc_html__( 'Tell search engines about localized versions of your pages using hreflang', 'wpglobus' ),
+				'desc'   => $_info_desc,
+				'class'  => 'info', // or normal
+			);
+		
+		$fields[] =
+			array(
+				'id'      => 'seo_hreflang_type',
+				'type'    => 'wpglobus_dropdown',
+				'title'   => esc_html__( 'Выводить код hreflang как', 'wpglobus' ),
+				'desc'    => '',
+				'options' => array(
+					'zz-ZZ' => esc_html__( 'Language- and region-specific (en-US, ru-RU, etc.)', 'wpglobus' ),
+					'zz-zz' => esc_html__( 'Language- and region-specific (en-us, ru-ru, etc.)', 'wpglobus' ),
+					'zz'    => esc_html__( 'Language code only (en, ru, etc.)', 'wpglobus' ),
+				),
+				'default' => $hreflang_type,
+				'name' => 'wpglobus_option[seo_hreflang_type]',
+			);
+	
+		$fields[] =
+			array(
+				'id'      => 'seo_hreflang_default_language_type',
+				'type'    => 'wpglobus_checkbox',
+				'checked' => $hreflang_type_for_default_language ? true : false,
+				'name'    => 'wpglobus_option[seo_hreflang_default_language_type]',
+				'title'   => esc_html__( 'Использовать код `x-default` для языка по умолчанию', 'wpglobus' ),
+				'label'   => esc_html__( 'Enabled', 'wpglobus' ),
+			);
+	
+		return array(
+			'wpglobus_id' => 'wpglobus_multilingual_seo',
+			'title'       => esc_html__( 'Multilingual SEO', 'wpglobus' ),
+			'caption'     => esc_html__( 'Multilingual SEO Options', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-code-standards',
+			'fields'      => $fields,
+		);		
+	}
+
+	/**
 	 * Section "Info".
 	 *
 	 * @since 1.9.14
@@ -1776,6 +1887,18 @@ class WPGlobus_Options {
 				if ( 0 == (int) $init && ! empty( $data['builder_post_types'][ $post_type ] ) ) {
 					unset( $data['builder_post_types'][ $post_type ] );
 				}
+			}
+		}
+
+		/**
+		 * @since 2.3.4
+		 * @see section_seo()
+		 */
+		if ( ! empty( $data['seo_hreflang_default_language_type'] ) ) {
+			if ( 1 == (int) $data['seo_hreflang_default_language_type'] ) {
+				$data['seo_hreflang_default_language_type'] = 'x-default';
+			} else {
+				unset( $data['seo_hreflang_default_language_type'] );
 			}
 		}
 
