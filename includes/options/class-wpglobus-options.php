@@ -1622,9 +1622,9 @@ class WPGlobus_Options {
 		$home_url = home_url('/');
 		
 		$_info_desc  = '<strong>';
-		$_info_desc .= esc_html__( 'С текущими настройками вы увидите эти строки в секции head ваших страниц', 'wpglobus' );
+		$_info_desc .= esc_html__( 'With the current settings, you will see the following lines in the section HEAD of your site pages', 'wpglobus' );
 		$_info_desc .= '&nbsp;';
-		$_info_desc .= esc_html__( '(пример для двух языков)', 'wpglobus' );
+		$_info_desc .= esc_html__( '(example for two languages)', 'wpglobus' );
 		$_info_desc .= '</strong>';
 		$_info_desc .= ':<br />';
 
@@ -1671,7 +1671,7 @@ class WPGlobus_Options {
 			array(
 				'id'     => 'wpglobus_hreflang',
 				'type'	 => 'wpglobus_info',
-				'title'  => esc_html__( 'Tell search engines about localized versions of your pages using hreflang', 'wpglobus' ),
+				'title'  => esc_html__( 'Tell search engines about localized versions of your pages using the hreflang tag', 'wpglobus' ),
 				'desc'   => $_info_desc,
 				'class'  => 'info', // or normal
 			);
@@ -1680,7 +1680,7 @@ class WPGlobus_Options {
 			array(
 				'id'      => 'seo_hreflang_type',
 				'type'    => 'wpglobus_dropdown',
-				'title'   => esc_html__( 'Выводить код hreflang как', 'wpglobus' ),
+				'title'   => esc_html__( 'Output the hreflang tag as', 'wpglobus' ),
 				'desc'    => '',
 				'options' => array(
 					'zz-ZZ' => esc_html__( 'Language- and region-specific (en-US, ru-RU, etc.)', 'wpglobus' ),
@@ -1697,7 +1697,7 @@ class WPGlobus_Options {
 				'type'    => 'wpglobus_checkbox',
 				'checked' => $hreflang_type_for_default_language ? true : false,
 				'name'    => 'wpglobus_option[seo_hreflang_default_language_type]',
-				'title'   => esc_html__( 'Использовать код `x-default` для языка по умолчанию', 'wpglobus' ),
+				'title'   => esc_html__( 'Use the code `x-default` for the main language', 'wpglobus' ),
 				'label'   => esc_html__( 'Enabled', 'wpglobus' ),
 			);
 	

@@ -218,9 +218,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.3.4 =
+
+* Added: option to set the `hreflang` tag format.
+
 = 2.3.3 =
 
-Added: (Builders/Elementor) handle multiple file names.
+* Added: (Builders/Elementor) handle multiple file names.
 
 = 2.3.2 =
 
