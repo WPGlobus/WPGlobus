@@ -254,6 +254,22 @@ class WPGlobus_Config {
 	public $block_editor_switcher_plugin_button_type = '';
 
 	/**
+	 * Language- and region-specific hreflang. 
+	 *
+	 * @var string
+	 * @since 2.3.4
+	 */	
+	public $seo_hreflang_type = 'zz-ZZ';
+
+	/**
+	 * Language- and region-specific hreflang for default language. 
+	 *
+	 * @var string
+	 * @since 2.3.4
+	 */	
+	public $seo_hreflang_default_language_type = false;
+
+	/**
 	 * Can get it only once.
 	 *
 	 * @since 1.8.4
@@ -769,6 +785,24 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['block_editor_switcher_plugin_button_type'] ) ) {
 			$this->block_editor_switcher_plugin_button_type = $wpglobus_option['block_editor_switcher_plugin_button_type'];
 			unset( $wpglobus_option['block_editor_switcher_plugin_button_type'] );
+		}
+
+		/**
+		 * Type of hreflang tag. Language- and region-specific hreflang.
+		 * @since 2.3.4
+		 */
+		if ( isset( $wpglobus_option['seo_hreflang_type'] ) ) {
+			$this->seo_hreflang_type = $wpglobus_option['seo_hreflang_type'];
+			unset( $wpglobus_option['seo_hreflang_type'] );
+		}
+
+		/**
+		 * Type of hreflang tag for default language. Language- and region-specific hreflang for default language.
+		 * @since 2.3.4
+		 */
+		if ( isset( $wpglobus_option['seo_hreflang_default_language_type'] ) ) {
+			$this->seo_hreflang_default_language_type = $wpglobus_option['seo_hreflang_default_language_type'];
+			unset( $wpglobus_option['seo_hreflang_default_language_type'] );
 		}
 		
 		/**
