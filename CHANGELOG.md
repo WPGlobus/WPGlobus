@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-02-29 - version 2.3.4
+* Added the ability to set up type of hreflang tag.
+
 2020-02-27 - version 2.3.3
 * Added: (Builders/Elementor) handle multiple file names.
 
