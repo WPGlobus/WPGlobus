@@ -276,9 +276,10 @@ class WPGlobus_Utils {
 	}
 
 	/**
-	 * Build hreflang metas
+	 * Build hreflang metas.
 	 *
 	 * @since 1.1.1
+	 * @since 2.3.4 Revised code.
 	 *
 	 * @param WPGlobus_Config $config Alternative configuration (i.e. Unit Test mock object)
 	 *
@@ -300,11 +301,31 @@ class WPGlobus_Utils {
 		if ( is_404() ) {
 			return $hreflangs;
 		}
-
+		
 		foreach ( $config->enabled_languages as $language ) {
+	
+			switch ( $config->seo_hreflang_type ) {
+				case 'zz':
+					$_hreflang_type = $language;
+					break;
+				case 'zz-zz':
+					$_hreflang_type = str_replace( '_', '-', strtolower($config->locale[ $language ]) );
+					break;
+				default :
+					// 'zz-ZZ'
+					$_hreflang_type = str_replace( '_', '-', $config->locale[ $language ] );	
+					break;
+			}
+
+			if ( $language == $config->default_language ) {
+				if ( ! empty($config->seo_hreflang_default_language_type) && $config->seo_hreflang_default_language_type ) {
+					$_hreflang_type = $config->seo_hreflang_default_language_type;
+
+				}
+			}
 
 			$hreflangs[ $language ] = sprintf( '<link rel="alternate" hreflang="%s" href="%s"/>',
-				str_replace( '_', '-', $config->locale[ $language ] ),
+				$_hreflang_type,
 				esc_url( WPGlobus_Utils::localize_current_url( $language, $config ) )
 			);
 
