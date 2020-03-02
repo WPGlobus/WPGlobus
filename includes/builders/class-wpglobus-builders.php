@@ -744,9 +744,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						/**
 						 * @todo @see https://wpglobus.freshdesk.com/a/tickets/4103
 						 */
-
+						
+						/**
+						 * @since 2.3.5 Added checking $_request_uri[4].
+						 */
 						$_continue = false;
-						if ( 0 !== (int) $post_id ) {
+						if ( 0 !== (int) $post_id && ! empty($_request_uri[4]) ) {
 
 							$GLOBALS['WPGlobus']['builder'] = 'gutenberg';
 							$GLOBALS['WPGlobus']['context'] = $context;
