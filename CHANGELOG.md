@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-03-02 - version 2.3.5
+* (Core/Builders) Fixed PHP Notice Undefined offset.
+
 2020-02-29 - version 2.3.4
 * Added: option to set the `hreflang` tag format.
 
