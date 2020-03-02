@@ -299,6 +299,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.3.5 ###
+
+* (Core/Builders) Fixed the `Undefined offset` PHP Notice in the `is_gutenberg()` method.
+
 ### 2.3.4 ###
 
 
@@ -320,11 +324,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Added: (Core/Post Types) post types of `Elementor Pro` to the hidden types array.
 
 * Added: (Core/WPGlobusDialogApp) `afterOpen` callback.
-
-### 2.3.0 ###
-
-
-* Added: (Builders/Pods) Support (partially - Standard and Custom Post Types) `Pods – Custom Content Types and Fields`.
 
 ### Earlier versions and Add-ons ###
 
