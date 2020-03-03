@@ -1649,6 +1649,10 @@ jQuery(document).ready(function () {
 					}
 				}
 
+				if ( 'undefined' === typeof WPGlobusAdmin.data.excludeCustomFields ) {
+					WPGlobusAdmin.data.excludeCustomFields = false;
+				}
+
 				var ajaxify_row_id, added_control = false;
 				var add_elements = function(post_id) {
 
@@ -1678,6 +1682,11 @@ jQuery(document).ready(function () {
 							return true;
 						}
 						meta_key = $('#'+tid+'-key').val();
+						
+						if ( WPGlobusAdmin.data.excludeCustomFields && -1 != $.inArray(meta_key, WPGlobusAdmin.data.excludeCustomFields) ) {
+							return true;
+						}
+						
 						clone = $('#'+id).clone();
 						$(element).addClass('wpglobus-dialog-field-source hidden');
 						name = element.attr('name');

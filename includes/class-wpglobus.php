@@ -1547,6 +1547,13 @@ class WPGlobus {
 				} else {
 					$data['customFieldsEnabled'] = 'false';
 				}
+				
+				/**
+				 * Exclude some meta from being multilingual.
+				 * @since 2.3.6
+				 */
+				$data['excludeCustomFields'] = array( self::LANGUAGE_META_KEY, 'classic-editor-remember' );
+				
 			} elseif ( 'nav-menus.php' === $page ) {
 
 				$page_action = 'menu-edit';
