@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+2020-03-03 - version 2.3.6
+* (Builders/Elementor) Prevent `The preview could not be loaded` for language in draft status.
+* (Core/Admin) Exclude some meta from being multilingual.
+* (Core/Post Types) Added post types of `WPForms Lite` plugin and `Bodega` theme to hidden types array.
+
 2020-03-02 - version 2.3.5
 * (Core/Builders) Fixed the `Undefined offset` PHP Notice in the `is_gutenberg()` method.
 
