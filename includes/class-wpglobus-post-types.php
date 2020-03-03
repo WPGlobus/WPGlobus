@@ -66,6 +66,9 @@ class WPGlobus_Post_Types {
 		// Elementor Pro: @since 2.3.1
 		'elementor_font',
 		'elementor_icons',
+		// WPForms Lite: https://wordpress.org/plugins/wpforms-lite/ @since 2.3.6
+		'wpforms',
+		'wpforms_log',
 	);
 
 	/**
