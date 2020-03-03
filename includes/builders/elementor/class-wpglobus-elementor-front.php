@@ -83,6 +83,10 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			//add_filter( 'elementor/editor/localize_settings', array( __CLASS__, 'filter__localize_settings' ), 10, 2 );	
 			//add_action( 'elementor/editor/after_enqueue_scripts', array( __CLASS__, 'filter__localize_settings' ) );			
 			
+			/**
+			 * @since 2.3.6
+			 */
+			add_filter( 'wpglobus_plus_publish_template_include_handler', array( __CLASS__, 'filter__template_include_handler' ) );
 		}
 		
 		/**
@@ -329,8 +333,21 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			
 			return $check;
 
-		}	
-
+		}
+	
+		/**
+		 * @since 2.3.6
+		 */	
+		public static function filter__template_include_handler($handler) {
+			/**
+			 * Don't fire `template_include` filter with active Elementor
+			 * to prevent `The preview could not be loaded` for language in draft status.
+			 */
+			if ( empty( $_GET['elementor-preview'] ) ) {
+				return $handler;
+			}
+			return false;
+		}
 	} // end class WPGlobus_Elementor_Front.
 
 endif;
