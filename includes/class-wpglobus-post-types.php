@@ -93,6 +93,16 @@ class WPGlobus_Post_Types {
 	 * @return string[]
 	 */
 	public static function hidden_types() {
+
+		/**
+		 * @since 2.3.6
+		 * @see https://themeforest.net/item/bodega-a-stylish-theme-for-small-businesses/10276763
+		 */
+		if ( defined('BODEGA_CORE_VERSION') ) {
+			self::$hidden_types_main[] = 'testimonials';
+			self::$hidden_types_main[] = 'slides';
+			self::$hidden_types_main[] = 'carousels';
+		}
 		
 		$hidden_types = self::$hidden_types_main;
 
