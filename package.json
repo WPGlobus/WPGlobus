@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "title": "WPGlobus",
   "main": "Gulpfile.js",
@@ -40,6 +40,7 @@
     "svn:sync": "svn_sync.cmd",
     "svn:add": "cd wpsvn\\wpglobus && svn add --force trunk && svn status",
     "// 7.1 IF DELETED FILES, svn delete THEM MANUALLY!": "",
+    "!7.2 SVN commit": "npm run svn:commit && npm run svn:tag && npm run svn:tag:commit",
     "svn:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% %npm_package_version%\" --username tivnet",
     "svn:tag": "cd wpsvn\\wpglobus && svn cp trunk tags/%npm_package_version% && svn stat",
     "svn:tag:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% tag %npm_package_version%\" --username tivnet"
