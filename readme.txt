@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 5.0
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -218,6 +218,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.3.7 =
+
+* (Core/Builders) Fixed PHP Warning "The first argument should be either a string or an integer" in the `array_key_exists` function.
+* (Vendor/Acf) Code clean-up.
+
 = 2.3.6 =
 
 * (Builders/Elementor) Prevent `The preview could not be loaded` for language in draft status.
@@ -239,11 +244,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.3.2 =
 
 * Added: (Core/Post Types) `wpglobus_hidden_types` filter.
-
-= 2.3.1 =
-
-* Added: (Core/Post Types) post types of `Elementor Pro` to the hidden types array.
-* Added: (Core/WPGlobusDialogApp) `afterOpen` callback.
 
 = Earlier versions and Add-ons =
 
