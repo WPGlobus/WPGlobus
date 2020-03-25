@@ -1403,6 +1403,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					// post.php page.
 					if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						$post_id = $_GET['post']; // phpcs:ignore WordPress.CSRF.NonceVerification
+					} else if ( isset( $_GET['post_id'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+						/**
+						 * For example when loading WPBakery PB's front editor.
+						 * @since 2.3.7
+						 */
+						$post_id = $_GET['post_id']; // phpcs:ignore WordPress.CSRF.NonceVerification 
 					} else if ( isset( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 						/**
 						 * Case when Update button was clicked.
