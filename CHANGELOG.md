@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-03-25 - version 2.3.7
+* (Core/Builders) Fixed PHP Warning The first argument should be either a string or an integer in `array_key_exists` function.
+* (Vendor/Acf) Clean-up code.
+
 2020-03-03 - version 2.3.6
 * (Builders/Elementor) Prevent `The preview could not be loaded` for language in draft status.
 * (Core/Admin) Exclude some meta from being multilingual.
