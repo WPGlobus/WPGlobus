@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-04-01 - version 2.3.8
-* (Vendor/Acf) Added filter for the `Number` field type.(Note: Multilingual numbers will be accessible in builder mode.)
+* (Vendor/Acf) Added filter for the `Number` field type. (Note: Multilingual numbers will be accessible in the "Builder" mode.)
 
 2020-03-25 - version 2.3.7
 * (Core/Builders) Fixed PHP Warning "The first argument should be either a string or an integer" in the `array_key_exists` function.
