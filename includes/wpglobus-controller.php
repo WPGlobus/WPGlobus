@@ -359,6 +359,11 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	 * @since 2.2.22
 	 */
 	add_filter( 'acf/load_value/type=url', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	/**
+	 * Multilingual numbers will be accessible in builder mode.
+	 * @since 2.3.8
+	 */	
+	add_filter( 'acf/load_value/type=number', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
 /**
