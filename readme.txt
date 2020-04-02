@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.3.9 =
+
+* (Vendor/All In One SEO Pack) Support All In One SEO Pack 3.4.2.
+
 = 2.3.8 =
 
 * (Vendor/Acf) Added filter for the `Number` field type. (Note: Multilingual numbers will be accessible in the "Builder" mode.)
@@ -240,14 +244,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.3.4 =
 
 * Added: option to set the `hreflang` tag format.
-
-= 2.3.3 =
-
-* Added: (Builders/Elementor) handle multiple file names.
-
-= 2.3.2 =
-
-* Added: (Core/Post Types) `wpglobus_hidden_types` filter.
 
 = Earlier versions and Add-ons =
 
