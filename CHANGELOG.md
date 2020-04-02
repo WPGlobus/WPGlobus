@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-04-02 - version 2.3.9
+* (Vendor/All In One SEO Pack) Support All In One SEO Pack 3.4.2.
+
 2020-04-01 - version 2.3.8
 * (Vendor/Acf) Added filter for the `Number` field type. (Note: Multilingual numbers will be accessible in the "Builder" mode.)
 
