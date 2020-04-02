@@ -1,6 +1,12 @@
 <?php
 /**
- * @package   WPGlobus\All-in-One-SEO
+ * @package WPGlobus\All-in-One-SEO
+ *
+ * @since 1.0.7 Initial.
+ *
+ * @since 2.3.9 
+ * 	Using `mb_strlen` function instead of All_in_One_SEO_Pack_Module->strlen().
+ * 	Using `mb_strtolower` function instead of All_in_One_SEO_Pack_Module->strtolower().
  */
 
 /**
@@ -51,13 +57,15 @@ function aioseop_mrt_pccolumn( $aioseopcn, $aioseoppi ) {
 }
 
 /* @noinspection PhpIncludeInspection */
-require_once AIOSEOP_PLUGIN_DIR . 'aioseop_class.php';
+if ( ! class_exists('All_in_One_SEO_Pack') ) {
+	require_once AIOSEOP_PLUGIN_DIR . 'aioseop_class.php';
+}
 
 /**
  * Class WPGlobus_All_in_One_SEO.
  */
 if ( ! class_exists('WPGlobus_All_in_One_SEO') ) :
-
+	
 	class WPGlobus_All_in_One_SEO extends All_in_One_SEO_Pack {
 
 		private $wpg_language = '';
@@ -397,8 +405,8 @@ if ( ! class_exists('WPGlobus_All_in_One_SEO') ) :
 				} else {
 					$count_desc = __( ' characters. Most search engines use a maximum of %s chars for the %s.', 'all_in_one_seo_pack' );
 				}
-				$buf .= "<br /><input readonly type='text' name='{$prefix}length{$suffix}' size='3' maxlength='3' style='width:53px;height:23px;margin:0px;padding:0px 0px 0px 10px;' value='" . $this->strlen( $value ) . "' />"
-						. sprintf( $count_desc, $size, trim( $this->strtolower( $options['name'] ), ':' ) );
+				$buf .= "<br /><input readonly type='text' name='{$prefix}length{$suffix}' size='3' maxlength='3' style='width:53px;height:23px;margin:0px;padding:0px 0px 0px 10px;' value='" . mb_strlen( $value ) . "' />"
+						. sprintf( $count_desc, $size, trim( mb_strtolower( $options['name'] ), ':' ) );
 				if ( ! empty( $onload ) ) {
 					$buf .= "<script>jQuery( document ).ready(function() { {$onload} });</script>";
 				}
@@ -876,3 +884,5 @@ class WPGlobus_aioseop {
 
 	}
 }
+
+# --- EOF

@@ -639,10 +639,10 @@ class WPGlobus {
 				) {
 					
 					if ( self::Config()->builder->is_builder_page() ) {
-						/** Don't run in builder mode. */
+						/** Don't run in Builder mode. */
 					} else {						
 						/**
-						 * Support standard mode.
+						 * Support Standard/Classic mode.
 						 */
 						 
 						/** @global WP_Post $post */
@@ -651,11 +651,15 @@ class WPGlobus {
 						$type = empty( $post ) ? '' : $post->post_type;
 						if ( ! $this->disabled_entity( $type ) ) {
 
-							require_once 'vendor/class-wpglobus-aioseop.php';
-							if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
+							require_once 'vendor/wpglobus-aioseop.php';
+							/**
+							 * @since 2.3.9 remove after testing.
+							 */
+							//require_once 'vendor/class-wpglobus-aioseop.php';
+							//if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
 								/** @noinspection PhpUnusedLocalVariableInspection */
-								$WPGlobus_aioseop = new WPGlobus_aioseop();
-							}
+								//$WPGlobus_aioseop = new WPGlobus_aioseop();
+							//}
 						}
 					}
 				}
