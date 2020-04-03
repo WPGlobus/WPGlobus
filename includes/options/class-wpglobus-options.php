@@ -1335,7 +1335,7 @@ class WPGlobus_Options {
 				'title'    => __( 'Custom CSS', 'wpglobus' ),
 				'mode'     => 'css',
 				'name'     => 'wpglobus_option[css_editor]',
-				'value'    => $wpglobus_option['css_editor'],
+				'value'    => empty($wpglobus_option['css_editor']) ? '' : $wpglobus_option['css_editor'],
 				'subtitle' => '',
 				'desc'     => '',
 			);
@@ -1347,7 +1347,7 @@ class WPGlobus_Options {
 				'title'    => __( 'Custom JS Code', 'wpglobus' ),
 				'mode'     => 'javascript',
 				'name'     => 'wpglobus_option[js_editor]',
-				'value'    => $wpglobus_option['js_editor'],
+				'value'    => empty($wpglobus_option['js_editor']) ? '' : $wpglobus_option['js_editor'],
 				'subtitle' => '',
 				'desc'     => '',
 			);
