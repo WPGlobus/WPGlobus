@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-04-03 - version 2.3.10
-* (Core/Options) Fixed PHP Notice "Undefined index" in custom code section.
+* (Core/Options) Fixed PHP Notice "Undefined index" in the `"Custom Code"` section.
 
 2020-04-02 - version 2.3.9
 * (Vendor/All In One SEO Pack) Support All In One SEO Pack 3.4.2.
