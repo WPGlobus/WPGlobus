@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-04-07 - version 2.3.11
-* (Builders/Yoast SEO) Added `WPGLOBUS_YOAST_PLUGIN_FILE` constant to set up custom file path.
+* (Builders/Yoast SEO) Added `WPGLOBUS_YOAST_PLUGIN_FILE` constant to set the custom file path.
 
 2020-04-03 - version 2.3.10
 * (Core/Options) Fixed PHP Notice "Undefined index" in the `"Custom Code"` section.
