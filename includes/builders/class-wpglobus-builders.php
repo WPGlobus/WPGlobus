@@ -104,7 +104,17 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 
 			}
 
-			if ( file_exists( WP_PLUGIN_DIR . '/wordpress-seo/wp-seo.php' ) ) {
+			/**
+			 * @since 2.3.11
+			 */
+			$_file = 'wordpress-seo/wp-seo.php';
+			$_plugin_name = 'Yoast SEO';
+			if ( defined( 'WPGLOBUS_YOAST_PLUGIN_FILE' ) ) {
+				$_file = WPGLOBUS_YOAST_PLUGIN_FILE;
+				$_plugin_name = 'Yoast SEO('.$_file.')';
+			}
+			
+			if ( file_exists( WP_PLUGIN_DIR . '/' . $_file ) ) {
 
 				if ( ! defined( 'WPSEO_PREMIUM_PLUGIN_FILE' ) ) {
 
@@ -114,9 +124,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						'admin_bar_label'       => 'Add-on',
 						'supported_min_version' => '7.7',
 						'const'                 => 'WPSEO_VERSION',
-						'plugin_name'           => 'Yoast SEO',
+						'plugin_name'           => $_plugin_name,
 						'plugin_uri'            => 'https://wordpress.org/plugins/wordpress-seo/',
-						'path'                  => 'wordpress-seo/wp-seo.php',
+						'path'                  => $_file,
 						'stage'                 => 'production',
 					);
 
