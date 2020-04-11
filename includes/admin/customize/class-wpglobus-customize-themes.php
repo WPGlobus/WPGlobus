@@ -26,7 +26,8 @@ if ( ! class_exists('WPGlobus_Customize_Themes') ) :
 		protected static $disabled_themes = array( 
 			'customizr',
 			'customizr pro',
-			'experon'	
+			'experon',
+			'gwangi', // @since 2.3.12	
 		);
 		
 		/**

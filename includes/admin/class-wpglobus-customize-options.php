@@ -355,6 +355,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 * @see https://wordpress.org/themes/experon/
 			 */
 			self::$disabled_themes[] = 'experon';
+			
+			/**
+			 * @since 2.3.12
+			 * Don't standard behavior with links in Appearance section (requires installing an additional module).
+			 * @see https://gwangi-theme.com/
+			 */			
+			self::$disabled_themes[] = 'gwangi';
 
 			add_action( 'wp_loaded', array( __CLASS__, 'init' ) );
 
