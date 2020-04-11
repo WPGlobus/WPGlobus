@@ -69,6 +69,8 @@ class WPGlobus_Post_Types {
 		// WPForms Lite: https://wordpress.org/plugins/wpforms-lite/ @since 2.3.6
 		'wpforms',
 		'wpforms_log',
+		// rtMedia for WordPress, BuddyPress and bbPress: https://wordpress.org/plugins/buddypress-media/ @since 2.3.12
+		'rtmedia_album',
 	);
 
 	/**
