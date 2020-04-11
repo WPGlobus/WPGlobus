@@ -71,6 +71,12 @@ class WPGlobus_Post_Types {
 		'wpforms_log',
 		// rtMedia for WordPress, BuddyPress and bbPress: https://wordpress.org/plugins/buddypress-media/ @since 2.3.12
 		'rtmedia_album',
+		// Divi: https://www.elegantthemes.com/gallery/divi/ @since 2.3.12
+		'et_theme_builder',
+		'et_template',
+		'et_header_layout',
+		'et_body_layout',
+		'et_footer_layout',
 	);
 
 	/**
