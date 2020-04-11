@@ -218,6 +218,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.3.12 =
+
+* (Customizer) WPGlobus Customizer is switched off for `Gwangi` theme.
+* (Core/Post Types) Added post type of `rtMedia` plugin to the hidden types array.
+* (Core/Post Types) Added post types of `Divi` theme to the hidden types array.
+
 = 2.3.11 =
 
 * (Builders/Yoast SEO) Added `WPGLOBUS_YOAST_PLUGIN_FILE` constant to set the custom file path.
