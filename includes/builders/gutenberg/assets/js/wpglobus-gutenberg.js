@@ -288,12 +288,16 @@ jQuery(document).ready(function ($) {
 					elems.forEach(function(elem) {
 					  elem.classList.add(elem.value);
 					  elem.classList.remove('wpglobus-switcher-pulsate-radio');
+					  elem.classList.add('wpglobus-switcher-pulsate-radio-off');
 					});
 					var elem = document.querySelector('.wpglobus-switcher-components-radio-control .'+promisedPluginButtonType);
+					elem.classList.remove('wpglobus-switcher-pulsate-radio-off');
 					elem.classList.add('wpglobus-switcher-pulsate-radio');
 				} else {
 					elems.forEach(function(elem) {
 					  elem.classList.remove('wpglobus-switcher-pulsate-radio');
+					  elem.classList.remove('wpglobus-switcher-pulsate-radio-off');
+					  elem.classList.add('wpglobus-switcher-pulsate-radio-on');
 					});					
 				}
 			}

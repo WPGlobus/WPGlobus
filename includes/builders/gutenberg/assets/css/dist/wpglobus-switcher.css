@@ -15,9 +15,75 @@
 	z-index:10;width:90%;position:absolute;border:2px solid #ff8100;margin:5px 10px;padding:5px;border-radius:6px;background-color:#ff8100;
 	font-size:14px;color:#000;font-weight:500;text-align:center;
 }
+.wpglobus-switcher-pulsate-radio-on {
+	-webkit-animation: pulsate-radio-on 0.3s ease-in-out both;
+	animation: pulsate-radio-on 0.3s ease-in-out both;
+}
+.wpglobus-switcher-pulsate-radio-off {
+	-webkit-animation: pulsate-radio-off 0.3s ease-in-out both;
+	animation: pulsate-radio-off 0.3s ease-in-out both;
+}
 .wpglobus-switcher-pulsate-radio {
 	-webkit-animation: pulsate-radio 0.5s ease-in-out infinite both;
 	animation: pulsate-radio 0.5s ease-in-out infinite both;
+}
+/** animation pulsate-radio-on */
+@-webkit-keyframes pulsate-radio-on {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+@keyframes pulsate-radio-on {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+/** animation pulsate-radio-off */
+@-webkit-keyframes pulsate-radio-off {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+@keyframes pulsate-radio-off {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
 }
 /** animation pulsate-radio */
 @-webkit-keyframes pulsate-radio {
