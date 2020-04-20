@@ -562,73 +562,10 @@ class WPGlobus {
 					'on_add_wp_editors',
 				), 10 );
 
-				/**
-				 * Moved to another place.
-				 *
-				 * @since 1.9.17
-				 * @todo  remove after test.
-				 */
-				/*
-				add_action( 'edit_form_after_editor', array(
-					$this,
-					'on_add_language_tabs'
-				) );
-				// */
-
-				/**
-				 * Moved to another place.
-				 *
-				 * @since 1.9.17
-				 * @todo  remove after test.
-				 */
-				/*
-				add_action( 'edit_form_after_title', array(
-					$this,
-					'on_add_title_fields'
-				) );
-				// */
-
-				/**
-				 * Moved to another place.
-				 *
-				 * @since 1.9.17
-				 * @todo  remove after test.
-				 */
-				/*
-				add_action( 'admin_print_scripts', array(
-					$this,
-					'on_admin_scripts'
-				) );
-				// */
-
 				add_action( 'admin_print_scripts', array(
 					$this,
 					'on_admin_enqueue_scripts',
 				), 99 );
-
-				/**
-				 * Moved to another place.
-				 *
-				 * @since 1.9.17
-				 * @todo  remove after test.
-				 */
-				// add_action( 'admin_footer', array(
-				// 	$this,
-				// 	'on__admin_footer'
-				// ) );
-
-				/**
-				 * @see   browser tab on post.php page.
-				 *
-				 * Moved to another place.
-				 * @since 1.9.17
-				 * @todo  remove after test.
-				 *
-				 */
-				// add_filter( 'admin_title', array(
-				// 	$this,
-				// 	'on__admin_title'
-				// ), 10, 2 );
 
 				if (
 					$this->vendors_scripts['AIOSEOP'] && WPGlobus_WP::is_pagenow( array(
