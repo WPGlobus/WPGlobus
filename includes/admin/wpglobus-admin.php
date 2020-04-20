@@ -18,6 +18,12 @@ WPGlobus_Admin_Central::construct();
 require_once dirname( __FILE__ ) . '/register-post-types/class-wpglobus-register-post-types.php';
 WPGlobus_Register_Post_Types::construct();
 
+/**
+ * @since 2.4
+ */
+require_once dirname( __FILE__ ) . '/class-wpglobus-admin-post.php';
+WPGlobus_Admin_Post::construct();
+
 if ( isset( $_GET['wpglobus-debug'] ) ) { // WPCS: input var ok, sanitization ok.
 	/**
 	 * To load debug info
@@ -29,3 +35,4 @@ if ( isset( $_GET['wpglobus-debug'] ) ) { // WPCS: input var ok, sanitization ok
 	WPGlobus_Admin_Debug::get_instance();
 }
 
+# --- EOF
