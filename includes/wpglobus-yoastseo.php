@@ -21,7 +21,11 @@
  * @since 2.2.20
  * 16.10.2019 - 120
  */ 
-$wpglobus_yoastseo_latest_version = '120';
+/**
+ * @since 2.4
+ * 28.04.2020 - 140
+ */  
+$wpglobus_yoastseo_latest_version = '140';
  
 /**
  * @since 2.2.20
@@ -70,23 +74,25 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 			if ( version_compare( WPSEO_VERSION, '4.0', '>=' ) ) {
 				
 				$version = '40';
-				$version = version_compare( WPSEO_VERSION, '4.1', '>=' ) ? '41' : $version;
-				$version = version_compare( WPSEO_VERSION, '4.4', '>=' ) ? '44' : $version;
-				$version = version_compare( WPSEO_VERSION, '4.8', '>=' ) ? '48' : $version;
-				$version = version_compare( WPSEO_VERSION, '5.9', '>=' ) ? '59' : $version;
-				$version = version_compare( WPSEO_VERSION, '7.3', '>=' ) ? '73' : $version;
-				$version = version_compare( WPSEO_VERSION, '7.7', '>=' ) ? '77' : $version;
-				$version = version_compare( WPSEO_VERSION, '8.0', '>=' ) ? $wpglobus_yoastseo_latest_version : $version;
+				$version = version_compare( WPSEO_VERSION, '4.1', '>=' )  ? '41'  : $version;
+				$version = version_compare( WPSEO_VERSION, '4.4', '>=' )  ? '44'  : $version;
+				$version = version_compare( WPSEO_VERSION, '4.8', '>=' )  ? '48'  : $version;
+				$version = version_compare( WPSEO_VERSION, '5.9', '>=' )  ? '59'  : $version;
+				$version = version_compare( WPSEO_VERSION, '7.3', '>=' )  ? '73'  : $version;
+				$version = version_compare( WPSEO_VERSION, '7.7', '>=' )  ? '77'  : $version;
+				$version = version_compare( WPSEO_VERSION, '8.0', '>=' )  ? '80'  : $version;
+				$version = version_compare( WPSEO_VERSION, '12.0', '>=' ) ? '120' : $version;
+				$version = version_compare( WPSEO_VERSION, '14.0-RC6', '>=' ) ? $wpglobus_yoastseo_latest_version : $version;
 
 				if ( $version == '77' && is_admin() ) {
 					
 					// Don't start support here.
 					
 				} elseif ( version_compare( WPSEO_VERSION, '8.0', '>=' ) ) { 
-				
+					
 					require_once "vendor/yoast-seo/class-wpglobus-yoastseo$version.php";
 					WPGlobus_YoastSEO::controller($version, $wpglobus_yoastseo_plus_access);
-					
+				
 				} else {
 				
 					require_once "vendor/class-wpglobus-yoastseo$version.php";
