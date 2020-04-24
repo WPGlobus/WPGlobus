@@ -270,6 +270,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			$classes['ui-tabs-active']    = 'ui-tabs-active';
 			$classes['ui-tabs-loading']   = 'ui-tabs-loading';
 
+			$link_class = array();
 			$link_style = array();
 			$link_title = '';
 			if ( 'post-new.php' === $pagenow ) {
@@ -295,12 +296,15 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 					$_classes = $classes;
 
+					$_link_class = $link_class;
 					$_link_style = $link_style;
 
 					if ( 'post-new.php' === $pagenow && WPGLobus::Config()->default_language === $language ) {
 						$_link_style['cursor'] = '';
 					}
-
+					
+					$_link_class['tab-link-active'] = WPGlobus::Config()->builder->get_language() === $language ? 'wpglobus-tab-link-active' : '';
+					
 					if ( $language === $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
@@ -319,6 +323,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 						<!--<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>-->
 						<a style="<?php echo esc_attr( implode( ';', $_link_style ) ); ?>"
 								title="<?php echo esc_attr( $_link_title ); ?>"
+								class="<?php echo esc_attr( implode( ' ', $_link_class ) ); ?>" 
 								href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
 					<?php
