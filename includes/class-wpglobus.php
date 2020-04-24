@@ -3506,6 +3506,8 @@ class WPGlobus {
 			$link_class[]         = 'ui-state-disabled';
 			$link_style['cursor'] = 'cursor:not-allowed';
 			$link_title           = esc_html__( 'Save draft before using extra language.', 'wpglobus' );
+		} else {
+			$link_class['tab-link'] = 'wpglobus-tab-link';
 		}
 
 		if (
@@ -3535,7 +3537,13 @@ class WPGlobus {
 						$_link_style = $link_style;
 						$_link_title = $link_title;
 						$_onclick    = 'onclick="return false;"';
+					} else {
+						$_link_class = $link_class;
 					}
+					
+					if ( WPGlobus::Config()->language === $language ) {
+						$_link_class['tab-link-active'] = 'wpglobus-tab-link-active';
+					}					
 					?>
 					<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>"
 							data-language="<?php echo esc_attr( $language ); ?>"

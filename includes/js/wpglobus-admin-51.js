@@ -1335,6 +1335,13 @@ jQuery(document).ready(function () {
 							
 							var otab = ui.oldTab[0].id.replace('link-tab-','');
 							var ntab = ui.newTab[0].id.replace('link-tab-','');
+							
+							/**
+							 * @since 2.4
+							 */
+							$('.wpglobus-tab-link').removeClass('wpglobus-tab-link-active');
+							$('#link-tab-'+ntab+' .wpglobus-tab-link').addClass('wpglobus-tab-link-active');
+							
 							if ( 'default' == otab ) {
 								otab = WPGlobusCoreData.default_language;
 							}
@@ -1572,6 +1579,13 @@ jQuery(document).ready(function () {
 				$(document).on( 'tabsactivate', content_tabs_id, function( event, ui ) {
 					WPGlobusAdmin.currentTab = ui.newTab[0].dataset.language;
 				});
+				
+				/**
+				 * Add translatable class.
+				 * @since 2.4
+				 */
+				$('#titlewrap input').addClass('wpglobus-translatable');
+				$('.title_wpglobus').addClass('wpglobus-translatable');
 				
 				$(document).triggerHandler('wpglobus_after_post_edit');
 

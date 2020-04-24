@@ -92,7 +92,11 @@
       // To guarantee some space at the bottom
       min-height: 3em;
     }
-
+	
+	.wpglobus-post-body-tabs-list .wpglobus-tab-link-active {
+	  border-top:2px solid #00f;
+	}
+	
     .ui-corner-all {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
