@@ -363,10 +363,6 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		 */
 		public static function filter__post_metadata( $check, $object_id, $meta_key, $single ) {
 
-			if ( ! is_admin() ) {
-				return $check;
-			}
-
 			if ( empty( self::$meta_fields ) ) {
 				return $check;
 			}
@@ -407,9 +403,10 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			 * May be called many times on one page. Let's cache.
 			 */
 			static $_cache;
-			if ( isset( $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] ) ) {
-				return $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ];
-			}
+			//if ( isset( $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] ) ) {
+				// @since 2.4
+				//return $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ];
+			//}
 
 			$meta_type = 'post';
 
