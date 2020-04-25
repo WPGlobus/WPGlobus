@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+2020-04-25 - version 2.4
+* (Vendor/Yoast) Added support Yoast SEO from v.14.
+* (Core) Clean-up code.
+* (Core) Interface improvements on `post.php` page.
+* (Core/Builder) Interface improvements on `post.php` page.
+* (Core/AdminPost) Localized `Preview Changes` link.
+* (Core/Meta) Removed caching meta data.
+* (Builders/Gutenberg) Prevent multiple clicking on language switcher.
+
 2020-04-11 - version 2.3.12
 * (Customizer) WPGlobus Customizer is switched off for `Gwangi` theme.
 * (Core/Post Types) Added post type of `rtMedia` plugin to the hidden types array.
