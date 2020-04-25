@@ -2,12 +2,12 @@
 
 ## Changelog ##
 
-2020-04-25 - version 2.4
+2020-04-25 - version 2.4.0
 * (Vendor/Yoast) Added support Yoast SEO from v.14.
-* (Core) Clean-up code.
-* (Core) Interface improvements on `post.php` page.
-* (Core/Builder) Interface improvements on `post.php` page.
-* (Core/AdminPost) Localized `Preview Changes` link.
+* (Core) Code clean-up.
+* (Core) Interface improvements on the `post.php` page.
+* (Core/Builder) Interface improvements on the `post.php` page.
+* (Core/AdminPost) Localized the `Preview Changes` link.
 * (Core/Meta) Removed caching meta data.
 * (Builders/Gutenberg) Prevent multiple clicking on language switcher.
 

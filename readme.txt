@@ -218,6 +218,16 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.4.0 =
+
+* (Vendor/Yoast) Added support Yoast SEO from v.14.
+* (Core) Code clean-up.
+* (Core) Interface improvements on the `post.php` page.
+* (Core/Builder) Interface improvements on the `post.php` page.
+* (Core/AdminPost) Localized the `Preview Changes` link.
+* (Core/Meta) Removed caching meta data.
+* (Builders/Gutenberg) Prevent multiple clicking on language switcher.
+
 = 2.3.12 =
 
 * (Customizer) WPGlobus Customizer is switched off for `Gwangi` theme.
@@ -265,7 +275,3 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * [WPGlobus.com](https://wpglobus.com/):
 	* Bilingual site using a variety of posts, pages, custom post types, forms, and a WooCommerce store with Subscription and API extensions.
-* [Site in a subfolder](http://demo-subfolder.wpglobus.com/):
-	* Demonstration of two WPGlobus-powered sites, one of which is installed in a subfolder of another. Shows the correct behavior of WPGlobus with URLs like `example.com/folder/wordpress`.
-* [WooCommerce Multilingual](https://demo-store.wpglobus.com/):
-	* A multilingual WooCommerce site powered by the `WPGlobus for WooCommerce` plugin.

@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.3.12",
+  "version": "2.4.0",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "title": "WPGlobus",
   "main": "Gulpfile.js",
@@ -11,7 +11,7 @@
     "g:list": "npm list -g --dept=0 && npm -g outdated",
     "g:update": "npm update -g && npm run g:list",
     "// Local npm": "",
-    "l:list": "npm list --dept=0 && npm outdated",
+    "l:list": "npm list --dept=0 && npm outdated || exit 0",
     "l:install": "npm install && npm run l:list",
     "l:update": "npm update && npm run l:list",
     "l:reinstall": "del package-lock.json && del /s /q node_modules && npm run l:install",
