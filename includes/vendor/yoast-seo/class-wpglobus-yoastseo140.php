@@ -127,7 +127,7 @@ class WPGlobus_YoastSEO {
 			/**
 			 * @since 2.4 @W.I.P
 			 */		
-			add_filter( 'wpseo_breadcrumb_output', array( __CLASS__, 'filter__breadcrumb_output' ), 5, 2 );	
+			//add_filter( 'wpseo_breadcrumb_output', array( __CLASS__, 'filter__breadcrumb_output' ), 5, 2 );	
 
 			/**
 			 * @todo check for '_yoast_wpseo_title' meta
@@ -313,7 +313,7 @@ class WPGlobus_YoastSEO {
 	/**
 	 * Filter wpseo meta description.
 	 *
-	 * @see wordpress-seo\src\presenters\meta-description-presenter.php
+	 * @see wordpress-seo\src\presenters\meta-description-presenter.php 
 	 * @see wordpress-seo\src\presenters\open-graph\description-presenter.php
 	 * @scope front
 	 * @since 2.4
@@ -324,10 +324,27 @@ class WPGlobus_YoastSEO {
 	 * @return string
 	 */
 	public static function filter_front__description( $meta_description, $presentation ) {
+
+		/**
+		 * $meta_description is received from `description` field in `wp_yoast_indexable` table. 
+		 */
+
+		/**
+		 * Key to define that `wpseo_metadesc` filter was already fired earlier.
+		 */
+		static $meta_description_presenter_was_fired = false;
 		
-		if ( empty($meta_description) ) {
-			return $meta_description;
+		if ( $meta_description_presenter_was_fired ) {
+			/**
+			 * Set meta description to empty value for `wpseo_opengraph_desc` filter like for empty $meta_description in `wpseo_metadesc` filter.
+			 */
+			$meta_description = '';
+		} else {
+			if ( empty($meta_description) ) {
+				$meta_description_presenter_was_fired = true;
+			}
 		}
+		
 		return self::get_meta( '_yoast_wpseo_metadesc', $meta_description );
 	}
 
@@ -417,11 +434,28 @@ class WPGlobus_YoastSEO {
 	protected static function get_meta( $meta_key, $meta_value = '' ) {
 
 		if ( is_null(self::$wpseo_meta) ) {
-			self::set_wpseo_meta();
+			self::get_wpseo_meta();
 		}
-			
+
 		if ( empty( self::$wpseo_meta[ $meta_key ] ) ) {
 			return '';
+		}
+		
+		/** @global WP_Post $post */
+		global $post;
+		
+		if ( empty( $meta_value ) ) {
+			/**
+			 * Try get meta by post ID.
+			 */
+			if ( ! $post instanceof WP_Post ) {
+				return '';
+			}
+			if ( empty( self::$wpseo_meta[$meta_key][$post->ID] ) ) {
+				return '';
+			}
+			
+			return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$post->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 		}
 		
 		$_return_value = '';
@@ -436,12 +470,12 @@ class WPGlobus_YoastSEO {
 	}
 	
 	/**
-	 * Set `_yoast_wpseo_metadesc`, `_yoast_wpseo_focuskw` meta.
+	 * Get `_yoast_wpseo_metadesc`, `_yoast_wpseo_focuskw` meta.
 	 *
 	 * @scope admin
-	 * @since 2.2.16
+	 * @since 2.4
 	 */
-	protected static function set_wpseo_meta() {
+	protected static function get_wpseo_meta() {
 		
 		/** @global wpdb $wpdb */
 		global $wpdb;
@@ -465,7 +499,7 @@ class WPGlobus_YoastSEO {
 				if ( ! isset( self::$wpseo_meta[ $_meta['meta_key'] ] ) ) {
 					self::$wpseo_meta[ $_meta['meta_key'] ] = array();
 				}
-				self::$wpseo_meta[ $_meta['meta_key'] ][] = $_meta['meta_value'];
+				self::$wpseo_meta[ $_meta['meta_key'] ][ $_meta['ID'] ] = $_meta['meta_value'];
 			}
 		}
 		
