@@ -299,6 +299,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.1 ###
+
+* (Vendor/Yoast) Set support for minimum version Yoast SEO Premium v12.
+
 ### 2.4.0 ###
 
 * (Vendor/Yoast) Added support Yoast SEO from v.14.
