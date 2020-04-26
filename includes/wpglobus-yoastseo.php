@@ -45,7 +45,9 @@ if ( defined('WPSEO_VERSION') && defined('WPSEO_PREMIUM_PLUGIN_FILE') ) {
 			 * Version of file must be latest.
 			 * @todo W.I.P.
 			 */
-			$ver = $wpglobus_yoastseo_latest_version; 
+			$ver = '120'; 
+			$ver = version_compare( WPSEO_VERSION, '14.0-RC6', '>=' ) ? $wpglobus_yoastseo_latest_version : $ver;			
+			
 			require_once "vendor/yoast-seo/class-wpglobus-yoastseo$ver.php";
 			WPGlobus_YoastSEO::controller($ver, $wpglobus_yoastseo_plus_access );
 
