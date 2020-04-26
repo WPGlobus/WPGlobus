@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-04-26 - version 2.4.1
+* (Vendor/Yoast) Set support for minimum version Yoast SEO Premium v12.
+
 2020-04-25 - version 2.4.0
 * (Vendor/Yoast) Added support Yoast SEO from v.14.
 * (Core) Code clean-up.
