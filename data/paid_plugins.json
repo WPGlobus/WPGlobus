@@ -16,7 +16,8 @@
     "loader": "wpglobus-revslider.php",
     "product_slug": "wpglobus-for-slider-revolution",
     "image_file": "wpglobus-revslider-logo-400x400.png",
-    "order": 60
+    "order": 60,
+	"available": false
   },
   "wpglobus-language-widgets": {
     "slug": "wpglobus-language-widgets",

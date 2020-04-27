@@ -233,8 +233,14 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				self::$paid_plugins[ $slug ]['extra_data']['details_url'] =
 					$info->homepage;
 
-				array_unshift( $res->plugins, $info );
-
+				/**
+				 * @since 2.4.2
+				 */
+				if ( isset( $paid_plugin['available'] ) && ( empty($paid_plugin['available']) || false === $paid_plugin['available'] ) ) {
+					// Don't add unavailable plugin in response.
+				} else {
+					array_unshift( $res->plugins, $info );
+				}
 			}
 
 			$res->info['results'] = count( $res->plugins );
