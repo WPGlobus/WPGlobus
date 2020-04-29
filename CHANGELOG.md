@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2020-04-29 - version 2.4.2
-* (Vendor/Yoast) Added support the multilingual breadcrumbs for posts, pages, taxonomies.
-* (Core/Plugin Install) Added status `available` for paid add-ons.
+* (Vendor/Yoast) Support multilingual breadcrumbs for posts, pages, and taxonomies.
+* (Core/Plugin Install) Added status `"available"` for the premium add-ons.
 
 2020-04-26 - version 2.4.1
 * (Vendor/Yoast) Set support for minimum version Yoast SEO Premium v12.

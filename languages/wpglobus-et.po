@@ -660,19 +660,19 @@ msgstr "Oled sa kindel, et soovid seda kustutada?"
 msgid "Back to the WPGlobus Settings"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:302
+#: includes/admin/class-wpglobus-plugin-install.php:308
 msgid "Current Version"
 msgstr "Praegune versioon"
 
-#: includes/admin/class-wpglobus-plugin-install.php:303
+#: includes/admin/class-wpglobus-plugin-install.php:309
 msgid "Get it now!"
 msgstr "Hangi kohe!"
 
-#: includes/admin/class-wpglobus-plugin-install.php:304
+#: includes/admin/class-wpglobus-plugin-install.php:310
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:305,
+#: includes/admin/class-wpglobus-plugin-install.php:311,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
 msgstr "Paigaldatud"

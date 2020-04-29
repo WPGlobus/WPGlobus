@@ -299,6 +299,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.2 ###
+
+* (Vendor/Yoast) Support multilingual breadcrumbs for posts, pages, and taxonomies.
+* (Core/Plugin Install) Added status `"available"` for the premium add-ons.
+
 ### 2.4.1 ###
 
 * (Vendor/Yoast) Set support for minimum version Yoast SEO Premium v12.
@@ -318,38 +323,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Customizer) WPGlobus Customizer is switched off for `Gwangi` theme.
 * (Core/Post Types) Added post type of `rtMedia` plugin to the hidden types array.
 * (Core/Post Types) Added post types of `Divi` theme to the hidden types array.
-
-### 2.3.11 ###
-
-* (Builders/Yoast SEO) Added `WPGLOBUS_YOAST_PLUGIN_FILE` constant to set the custom file path.
-
-### 2.3.10 ###
-
-* (Core/Options) Fixed PHP Notice "Undefined index" in the `"Custom Code"` section.
-
-### 2.3.9 ###
-
-* (Vendor/All In One SEO Pack) Support All In One SEO Pack 3.4.2.
-
-### 2.3.8 ###
-
-
-* (Vendor/Acf) Added filter for the `Number` field type. (Note: Multilingual numbers will be accessible in the "Builder" mode.)
-
-### 2.3.7 ###
-
-* (Core/Builders) Fixed PHP Warning "The first argument should be either a string or an integer" in the `array_key_exists` function.
-* (Vendor/Acf) Code clean-up.
-
-### 2.3.6 ###
-
-* (Builders/Elementor) Prevent `The preview could not be loaded` for language in draft status.
-* (Core/Admin) Exclude some meta from being multilingual.
-* (Core/Post Types) Added post types of `WPForms Lite` plugin and `Bodega` theme to hidden types array.
-
-### 2.3.5 ###
-
-* (Core/Builders) Fixed the `Undefined offset` PHP Notice in the `is_gutenberg()` method.
 
 ### Earlier versions and Add-ons ###
 

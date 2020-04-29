@@ -683,19 +683,19 @@ msgstr "هل أنت متأكد من المسح؟"
 msgid "Back to the WPGlobus Settings"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:302
+#: includes/admin/class-wpglobus-plugin-install.php:308
 msgid "Current Version"
 msgstr "النسخة الحالية"
 
-#: includes/admin/class-wpglobus-plugin-install.php:303
+#: includes/admin/class-wpglobus-plugin-install.php:309
 msgid "Get it now!"
 msgstr "إحصل عليها الأن!"
 
-#: includes/admin/class-wpglobus-plugin-install.php:304
+#: includes/admin/class-wpglobus-plugin-install.php:310
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:305,
+#: includes/admin/class-wpglobus-plugin-install.php:311,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
 msgstr "مُثبت"

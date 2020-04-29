@@ -695,19 +695,19 @@ msgstr "Sind Sie sicher, dass Sie die Lösch-Aktion durchführen möchten?"
 msgid "Back to the WPGlobus Settings"
 msgstr "Zurück zu den WPGlobus-Einstellungen"
 
-#: includes/admin/class-wpglobus-plugin-install.php:302
+#: includes/admin/class-wpglobus-plugin-install.php:308
 msgid "Current Version"
 msgstr "Aktuelle Version"
 
-#: includes/admin/class-wpglobus-plugin-install.php:303
+#: includes/admin/class-wpglobus-plugin-install.php:309
 msgid "Get it now!"
 msgstr "Jetzt holen"
 
-#: includes/admin/class-wpglobus-plugin-install.php:304
+#: includes/admin/class-wpglobus-plugin-install.php:310
 msgid "Premium add-on"
 msgstr ""
 
-#: includes/admin/class-wpglobus-plugin-install.php:305,
+#: includes/admin/class-wpglobus-plugin-install.php:311,
 #: includes/options/fields/table/class-wpglobus-languages-table.php:472
 msgid "Installed"
 msgstr "Installiert"
