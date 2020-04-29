@@ -98,7 +98,7 @@ class WPGlobus_YoastSEO {
 			/**
 			 * Frontend.
 			 */
-		 
+			 
 			/**
 			 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
 			 * AJAX is probably not required (waiting for a case).
@@ -125,9 +125,10 @@ class WPGlobus_YoastSEO {
 			add_filter( 'wpseo_opengraph_url', array( __CLASS__, 'filter_front__localize_url' ), 5, 2 );	
 			
 			/**
-			 * @since 2.4 @W.I.P
+			 * Filter the HTML output of the Yoast SEO breadcrumbs class.
+			 * @since 2.4.2
 			 */		
-			//add_filter( 'wpseo_breadcrumb_output', array( __CLASS__, 'filter__breadcrumb_output' ), 5, 2 );	
+			add_filter( 'wpseo_breadcrumb_output', array( __CLASS__, 'filter__breadcrumb_output' ), 5, 2 );	
 
 			/**
 			 * @todo check for '_yoast_wpseo_title' meta
@@ -377,14 +378,141 @@ class WPGlobus_YoastSEO {
 	}
 	
 	/**
+	 * Filter the HTML output of the Yoast SEO breadcrumbs class.
+	 *
+	 * @see wordpress-seo\src\presenters\breadcrumbs-presenter.php
 	 * @scope front
-	 * @since 2.4
-	 * @W.I.P
+	 * @since 2.4.2
+	 *
+	 * @param $output 							   The HTML output
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 *
+	 * @api string $output The HTML output.	 
+	 *
+	 * @return string
 	 */
 	public static function filter__breadcrumb_output( $output, $presentation ) {
+		
+		/** @global wpdb $wpdb */
+		global $wpdb;
+		
+		$object_type 	 = null;
+		$object_sub_type = null;
+		$object_order 	 = null;
+		
+		if ( $presentation->source instanceof WP_Post ) {
+			
+			$object_type = 'post';	
+			$object_sub_type = $presentation->source->post_type;	
+		
+		} elseif ( $presentation->source instanceof WP_Term ) {
+		
+			$object_type = 'taxonomy';	
+			$object_sub_type = $presentation->source->taxonomy;	
+
+			if ( $presentation->source->parent == 0 ) {
+				$object_order = array($presentation->source->term_id);
+			} else {
+				$object_order = get_ancestors($presentation->source->term_id, $object_sub_type);
+				if ( count($object_order) > 1 ) {
+					$object_order = array_reverse( $object_order );
+				}
+				$object_order[] = $presentation->source->term_id;
+			}
+
+		}
+		
+		$ids = array();
+		$breadcrumbs = array();
+		$i = 0;
+		
+		foreach( $presentation->breadcrumbs as $order=>$piece ) {	
+			
+			if ( $order == 0 ) {
+				
+				if ( empty( $piece['id'] ) ) {
+					/**
+					 * If homepage displays as latest posts, then we should force the setting of `Home` for all languages.
+					 */
+					$output = str_replace( $piece['url'], home_url('/'), $output );
+				} else {
+					if ( WPGlobus::Config()->language != WPGlobus::Config()->default_language ) {
+						$output = str_replace( $piece['url'], home_url('/'), $output );
+					}
+				}
+				
+				if ( WPGlobus_Core::has_translations($piece['text']) ) {
+					$_home_text = WPGlobus_Core::text_filter( $piece['text'], WPGlobus::Config()->language, WPGlobus::RETURN_IN_DEFAULT_LANGUAGE );
+					$output = str_replace( $piece['text'], $_home_text, $output );
+				}
+				
+			} else {
+			
+				switch ($object_type) :
+					case 'post' :
+						if ( ! empty($piece['id']) ) {
+							$ids[] = $piece['id']; 
+							$breadcrumbs[ $piece['id'] ] = $piece;
+							$breadcrumbs[ $piece['id'] ]['object_type'] = $object_type;
+							$breadcrumbs[ $piece['id'] ]['object_sub_type'] = $object_sub_type;
+						}
+						break;
+					case 'taxonomy' :
+						$_id = $order;
+						if ( ! is_null( $object_order ) ) {
+							$_id = $object_order[$i];
+							$ids[] = $_id; 
+						}
+						$breadcrumbs[ $_id ] = $piece;
+						$breadcrumbs[ $_id ]['object_type'] = $object_type;
+						$breadcrumbs[ $_id ]['object_sub_type'] = $object_sub_type;
+						$i++;
+						break;
+				endswitch;
+			}				
+		}
+
+		$query = null;
+		
+		if ( ! empty($ids) ) {
+			
+			$_ids = implode( ',', $ids );
+			switch ($object_type) :
+				case 'post' :
+					$select   = $wpdb->prepare( "SELECT ID, post_title AS ml_title, post_name, post_type FROM $wpdb->posts WHERE ID IN ( %s )", $_ids );
+					$select   = str_replace( "'", '', $select );
+					break;
+				case 'taxonomy' :
+					$select   = $wpdb->prepare( "SELECT term_id, name AS ml_title, slug FROM $wpdb->terms WHERE term_id IN ( %s )", $_ids );
+					$select   = str_replace( "'", '', $select );
+					break;
+			endswitch;		
+
+			$query = $wpdb->get_results( $select, OBJECT_K );
+			
+			foreach( $breadcrumbs as $id=>$piece ) {
+			
+				$output = str_replace( 
+					array( 
+						$piece['url'],
+						$piece['text'] 
+					),
+					array( 
+						WPGlobus_Utils::localize_url( $piece['url'], WPGlobus::Config()->language ), 
+						WPGlobus_Core::text_filter( $query[$id]->ml_title, WPGlobus::Config()->language ) 
+					), 
+					$output 
+				);
+			}
+		}
+
+		/**
+		 * @since 2.4.2 @W.I.P
+		 */
+		//$output = apply_filters( 'wpglobus_wpseo_breadcrumb_output', $output, $breadcrumbs, $query );
+		
 		return $output;
 	}
-
 	
 	/**
 	 * Filter wpseo meta description.
