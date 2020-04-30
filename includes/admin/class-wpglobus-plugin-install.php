@@ -309,6 +309,12 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				$i18n['get_it']          = esc_html__( 'Get it now!', 'wpglobus' );
 				$i18n['card_header']     = esc_html__( 'Premium add-on', 'wpglobus' );
 				$i18n['installed']       = esc_html__( 'Installed', 'wpglobus' );
+				
+				/**
+				 * @since 2.4.3
+				 */
+				$pre_addons_info = esc_html__( 'Если вы уже купили какое-либо расширение, то прочтите %1$sУстановка платных расширений WPGlobus%2$s', 'wpglobus' );
+				$i18n['pre_addons_info'] = sprintf( $pre_addons_info, '<a href="https://wpglobus.com/extensions/how-to-install/" target="_blank" style="color:#fff;">', '</a>' );
 
 				wp_register_script(
 					'wpglobus-plugin-install',

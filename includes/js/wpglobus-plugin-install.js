@@ -20,6 +20,7 @@ jQuery(document).ready(function($) {
 		pluginInstalled: '<li><span class="button button-disabled">' + WPGlobusPluginInstall.i18n.installed + '</span></li>',
 		columnName: '<a href="{{href}}" class=""  target="_blank">{{name}}<img src="{{img}}" class="plugin-icon"></a>',
 		currentVersion: '<strong>' + WPGlobusPluginInstall.i18n.current_version + ': </strong>{{version}}',
+		showPreAddonsInfo: true,
 		init: function() {
 
 			$.each( WPGlobusPluginInstall.pluginCard.paid, function(i, card) {
@@ -41,6 +42,7 @@ jQuery(document).ready(function($) {
 					/** add Installed button if it was lost */
 					if ( WPGlobusPluginInstall.pluginData[ card ].plugin_data !== null ) {
 						$( ccard + ' .plugin-action-buttons' ).prepend( api.pluginInstalled );
+						api.showPreAddonsInfo = false;
 					}
 				}
 
@@ -88,11 +90,23 @@ jQuery(document).ready(function($) {
 					$l.attr( 'href', nHref );
 				}
 			});
-
+			
+			/**
+			 * @since 2.4.3
+			 */
+			api.showPreAddonsInfoBlock(); 
 		},
+		showPreAddonsInfoBlock: function() {
+			if ( ! api.showPreAddonsInfo ) {
+				return;
+			}
+			if ( WPGlobusPluginInstall.i18n.pre_addons_info == '' ) {
+				return;
+			}
+			$('#plugin-filter').prepend('<div style="color:#fff;text-align:center;height:70px;background-color:#00a0d2;margin-top:15px;"><h3 style="padding-top:22px;font-size:18px;color:#fff;">'+WPGlobusPluginInstall.i18n.pre_addons_info+'</h3></div>');
+		}
 	};
 
 	WPGlobusPluginInstall = $.extend({}, WPGlobusPluginInstall, api);
 	WPGlobusPluginInstall.init();
-
 });
