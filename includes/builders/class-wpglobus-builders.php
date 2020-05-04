@@ -163,6 +163,23 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			);
 
 			/**
+			 * @since 2.4.3
+			 */
+			self::$add_on['rank_math_seo'] = array(
+				'id'                    => 'rank_math_seo',
+				'role'                  => 'builder',
+				'admin_bar_label'       => 'Add-on',
+				'config_file'           => 'rank-math-seo.json',
+				'supported_min_version' => '1.0.42',
+				'const'                 => 'RANK_MATH_VERSION',
+				'plugin_name'           => 'Rank Math SEO',
+				'plugin_uri'            => 'https://wordpress.org/plugins/seo-by-rank-math/',
+				'path'                  => 'seo-by-rank-math/rank-math.php',
+				'stage'                 => 'beta',
+				'admin_bar_builder_label' => 'RankMathSEO',
+			);
+
+			/**
 			 * self::$add_on['wp-subtitle'] = array(
 			 * 'id'                    => 'wp-subtitle',
 			 * 'role'                    => 'add-on',
@@ -366,7 +383,20 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						return $builder;
 					}					
 					
-				}				
+				}
+				
+				/**
+				 * Rank Math SEO.
+				 *
+				 * @since 2.4.3
+				 */
+				if ( ! $builder || ! $builder['builder_page'] ) {
+					$builder = self::is_rank_math_seo();
+					if ( $builder && $builder['builder_page'] ) {
+						return $builder;
+					}					
+					
+				}	
 			}
 
 			return self::$attrs;
@@ -1299,6 +1329,37 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			}
 			
 			return $_attrs;	
+		}
+		
+		/**
+		 * Check for Rank Math SEO Plugin.
+		 *
+		 * @since 2.4.3
+		 */		
+		protected static function is_rank_math_seo() {
+			
+			if ( ! defined( 'RANK_MATH_VERSION' ) ) {
+				return false;
+			}
+
+			$post_type = self::get_post_type_2();
+			
+			$_attrs = array(
+				'id'           => 'rank_math_seo',
+				'version'      => RANK_MATH_VERSION,
+				'class'        => 'WPGlobus_RankMathSEO',
+				'builder_page' => false,
+				'post_type'    => empty( $post_type ) ? '' : $post_type,
+			);	
+			
+			require_once 'rank_math_seo/class-wpglobus-builder-rank_math_seo.php';
+			$_attrs = WPGlobus_Builder_RankMathSEO::get_attrs( self::get_attrs( $_attrs ) );
+			
+			if ( ! $_attrs ) {
+				return false;
+			}
+
+			return $_attrs;				
 		}
 		
 		/**
