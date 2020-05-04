@@ -1,0 +1,14 @@
+{
+  "post_meta_fields": {
+    "*":{"file":"vendor/rank-math-seo/class-wpglobus-vendor-rank_math_seo.php","class":"WPGlobus_Vendor_RankMathSEO"}
+  },
+  "post_ml_fields": {    
+	"rank_math_title": {},
+	"rank_math_description": {},
+	"rank_math_focus_keyword": {}
+  },
+  "wp_options": {
+	"blogname": {},
+	"blogdescription": null
+  }
+}

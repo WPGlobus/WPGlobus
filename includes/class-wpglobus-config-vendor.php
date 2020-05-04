@@ -195,6 +195,15 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			}
 
 			/**
+			 * Rank Math SEO.
+			 * https://wordpress.org/plugins/seo-by-rank-math/
+			 * @since 2.4.3
+			 */
+			if ( defined( 'RANK_MATH_VERSION' ) ) {
+				self::$vendors[] = 'rank-math-seo.json';
+			}
+
+			/**
 			 * Page Builder by SiteOrigin.
 			 * https://wordpress.org/plugins/siteorigin-panels/
 			 * // if ( defined('SITEORIGIN_PANELS_VERSION') )  {

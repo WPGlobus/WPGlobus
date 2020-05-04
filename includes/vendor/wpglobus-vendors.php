@@ -24,6 +24,15 @@ if ( defined( 'PODS_VERSION' ) ) {
 }
 
 /**
+ * Rank Math SEO.
+ * @since 2.4.3
+ */
+if ( defined( 'RANK_MATH_VERSION' ) ) {
+	require_once( dirname( __FILE__ ) . '/rank-math-seo/class-wpglobus-vendor-rank_math_seo.php' );
+	WPGlobus_Vendor_RankMathSEO::get_instance();
+}
+
+/**
  * ACF.
  * https://wordpress.org/plugins/advanced-custom-fields/
  * @todo W.I.P
