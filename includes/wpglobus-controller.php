@@ -508,4 +508,18 @@ if ( function_exists('pods_api') ) {
 	}
 }
 
+if ( defined('RANK_MATH_VERSION') ) {
+	
+	/**
+	 * WordPress SEO Plugin – Rank Math.
+	 * https://wordpress.org/plugins/seo-by-rank-math/
+	 *
+	 * @since 2.4.3
+	 */
+	if ( ! is_admin() ) {
+		require_once dirname( __FILE__ ) . '/vendor/rank-math-seo/class-wpglobus-vendor-rank_math_seo-front.php';
+		WPGlobus_Vendor_RankMathSEO_Front::controller();
+	}
+}
+
 /*EOF*/
