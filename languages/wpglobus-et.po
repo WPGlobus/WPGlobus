@@ -677,6 +677,13 @@ msgstr ""
 msgid "Installed"
 msgstr "Paigaldatud"
 
+#. translators: placeholders are for the HTML tags.
+#: includes/admin/class-wpglobus-plugin-install.php:319
+msgid ""
+"If you have already purchased a WPGlobus premium extension, please read "
+"%1$sthe installation instructions here%2$s"
+msgstr ""
+
 #: includes/admin/helpdesk/class-wpglobus-admin-helpdesk.php:103,
 #: includes/options/class-wpglobus-options.php:707
 msgid "Help Desk"
