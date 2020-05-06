@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-05-06 - version 2.4.3
+* (Builders/RankMathSEO) Added `WordPress SEO Plugin – Rank Math` support (Beta stage).
+* (Core/Plugin Install) Added info box before add-ons list.
+
 2020-04-29 - version 2.4.2
 * (Vendor/Yoast) Support multilingual breadcrumbs for posts, pages, and taxonomies.
 * (Core/Plugin Install) Added status `"available"` for the premium add-ons.
