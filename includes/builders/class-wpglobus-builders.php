@@ -176,7 +176,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_uri'            => 'https://wordpress.org/plugins/seo-by-rank-math/',
 				'path'                  => 'seo-by-rank-math/rank-math.php',
 				'stage'                 => 'beta',
-				'admin_bar_builder_label' => 'RankMathSEO',
+				'admin_bar_builder_label' => 'Rank Math SEO',
 			);
 
 			/**
@@ -1350,11 +1350,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'class'        => 'WPGlobus_RankMathSEO',
 				'builder_page' => false,
 				'post_type'    => empty( $post_type ) ? '' : $post_type,
+				'taxonomy'     => ''
 			);	
 			
 			require_once 'rank_math_seo/class-wpglobus-builder-rank_math_seo.php';
 			$_attrs = WPGlobus_Builder_RankMathSEO::get_attrs( self::get_attrs( $_attrs ) );
-			
+
 			if ( ! $_attrs ) {
 				return false;
 			}
