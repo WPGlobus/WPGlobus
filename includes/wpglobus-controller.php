@@ -516,7 +516,14 @@ if ( defined('RANK_MATH_VERSION') ) {
 	 *
 	 * @since 2.4.3
 	 */
-	if ( ! is_admin() ) {
+	if ( is_admin() ) {
+		/**
+		 * We use WPGlobus_RankMathSEO_Functions class instead of WPGlobus_rank_math_seo_Update_Post class.
+		 * Unlike of Yoast Update class, filter `wp_update_term_data` doesn't fire from WPGlobus_rank_math_seo_Update_Post class.
+		 */
+		require_once dirname( __FILE__ ) . '/builders/rank_math_seo/class-wpglobus-rank_math_seo-functions.php';
+		WPGlobus_RankMathSEO_Functions::controller();
+	} else {
 		require_once dirname( __FILE__ ) . '/vendor/rank-math-seo/class-wpglobus-vendor-rank_math_seo-front.php';
 		WPGlobus_Vendor_RankMathSEO_Front::controller();
 	}
