@@ -45,6 +45,25 @@ if ( ! class_exists( 'WPGlobus_Builder_RankMathSEO' ) ) :
 				}
 				
 				return $attrs;
+				
+			} elseif ( 'term.php' === $pagenow ) {
+				
+				$tax = empty( $_GET['taxonomy'] ) ? false : sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification
+				
+				if ( $tax ) {
+					
+					$opts = get_option( self::$options_titles );
+
+					if ( ! empty( $opts[ "tax_{$tax}_add_meta_box" ] ) && 'off' == $opts[ "tax_{$tax}_add_meta_box" ] ) {
+						$attrs = false;
+					} else {
+						$attrs['post_type'] 	= ''; // reset post type.
+						$attrs['taxonomy']  	= $tax;
+						$attrs['builder_page']  = true;
+					}
+					
+					return $attrs;
+				}			
 			}
 			
 			return false;
