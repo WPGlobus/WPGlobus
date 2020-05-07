@@ -26,7 +26,7 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 * NO AUTOMATIC TRANSLATION:
 	* WPGlobus does NOT translate texts automatically! You will **translate texts manually**.
 * PAGE BUILDERS / COMPOSERS:
-	* Starting from the version 1.9.17, WPGlobus supports Gutenberg and WPBakery Page Builder. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. are currently in development.
+	* Starting from the version 1.9.17, WPGlobus supports Gutenberg, WPBakery Page Builder and Elementor. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. are currently in development.
 * IF YOU UNINSTALL, YOU LOSE TRANSLATIONS:
 	* WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate and uninstall WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
 * COOKIES:
@@ -76,7 +76,6 @@ For more details, please check out the descriptions of each paid add-on on our w
 * [WPGlobus Header Images](https://wpglobus.com/product/wpglobus-header-images/): Display different header images per language. Show images depending on the settings in the Customizer.
 * [WPGlobus Menu Visibility](https://wpglobus.com/product/wpglobus-menu-visibility/): Show or hide menu items depending on the current language.
 * [WPGlobus Mobile Menu](https://wpglobus.com/product/wpglobus-mobile-menu/): makes the WPGlobus language switcher menu compatible with mobile devices and narrow screens.
-* [WPGlobus for Slider Revolution](https://wpglobus.com/product/wpglobus-for-slider-revolution/): Adds multilingual capabilities to the Slider Revolution plugin.
 * [WPGlobus for the "Bridge" theme](https://wpglobus.com/product/wpglobus-for-bridge-theme/): create different sliders for each language when using theme "Bridge".
 * [Multilingual WooCommerce Nets Netaxept](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
 
@@ -93,12 +92,12 @@ We have checked WPGlobus together with many plugins, including:
 
 * ACF - Advanced Custom Fields. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for WYSIWYG fields support,
 * All in One SEO Pack,
+* WordPress SEO Plugin – Rank Math,
 * Black Studio TinyMCE Widget (with our free add-on),
 * MailChimp for WordPress,
 * Max Mega Menu,
 * Popups - WordPress Popup,
 * Sidebar Login,
-* The Events Calendar,
 * WPBakery Page Builder,
 * Whistles,
 * Widget Logic,
@@ -106,7 +105,6 @@ We have checked WPGlobus together with many plugins, including:
 
 Some 3rd-party plugins are supported with our [premium add-ons](https://wpglobus.com/shop/):
 
-* [Slider Revolution](https://wpglobus.com/product/wpglobus-for-slider-revolution/),
 * [TablePress](https://wpglobus.com/product/wpglobus-plus/#tablepress),
 * [WooCommerce and some of its extensions](https://wpglobus.com/product/woocommerce-wpglobus/),
 * [WooCommerce Nets Netaxept Payment Plugin](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
