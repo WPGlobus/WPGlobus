@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-05-07 - version 2.4.4
+* (Builders/RankMathSEO) Added filters for title and description on frontend.
+
 2020-05-06 - version 2.4.3
 * (Builders/RankMathSEO) Added `WordPress SEO Plugin – Rank Math` support (Beta stage).
 * (Core/Plugin Install) Added info box before add-ons list.
