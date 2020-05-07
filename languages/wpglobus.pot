@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.4.4
-# This file is distributed under the same license as the WPGlobus 2.4.4 package.
+# Copyright (C) 2020 WPGlobus 2.4.5
+# This file is distributed under the same license as the WPGlobus 2.4.5 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.4.4\n"
+"Project-Id-Version: WPGlobus 2.4.5\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -760,11 +760,11 @@ msgstr ""
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3955
+#: includes/class-wpglobus.php:3956
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:3957
+#: includes/class-wpglobus.php:3958
 msgid "Please go to Settings > Permalinks > Common Settings and choose a non-default option."
 msgstr ""
 
@@ -1320,6 +1320,18 @@ msgstr ""
 
 #: includes/options/wpglobus-options-header.php:64
 msgid "Get WPGlobus Plus now!"
+msgstr ""
+
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:674
+msgid "Bulk editing of the multilingual titles and descriptions is not supported by the current version."
+msgstr ""
+
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:675
+msgid "Therefore, to avoid any data loss, we do not recommend using this."
+msgstr ""
+
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:678
+msgid "WPGlobus warning: "
 msgstr ""
 
 #: wpglobus.php:13

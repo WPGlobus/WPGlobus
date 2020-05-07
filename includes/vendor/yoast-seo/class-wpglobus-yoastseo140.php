@@ -670,15 +670,15 @@ class WPGlobus_YoastSEO {
 		if ( WPGlobus_WP::is_pagenow( 'admin.php' ) ) {
 			
 			if ( 'wpseo_tools' == WPGlobus_Utils::safe_get('page') && 'bulk-editor' == WPGlobus_Utils::safe_get('tool') ) {
-				
-				$wrng1 = '<div>'.esc_html__( 'Текущая версия не поддерживает возможность массового редактирования многоязычных заголовков и описаний.', 'wpglobus' ).'</div>';
-				$wrng2 = '<div>'.esc_html__( 'Поэтому не рекомендуем использовать этот режим во избежание потери данных.', 'wpglobus' ).'</div>';
-				
+
+				$wrng1 = '<div>' . esc_html__( 'Bulk editing of the multilingual titles and descriptions is not supported by the current version.', 'wpglobus' ) . '</div>';
+				$wrng2 = '<div>' . esc_html__( 'Therefore, to avoid any data loss, we do not recommend using this.', 'wpglobus' ) . '</div>';
+
 				$i18n = array(
-					'preWarning' 		=> esc_html__( 'Предупреждение WPGlobus: ', 'wpglobus' ),
-					'bulkEditorWarning' => $wrng1.$wrng2
+					'preWarning'        => esc_html__( 'WPGlobus warning: ', 'wpglobus' ),
+					'bulkEditorWarning' => $wrng1 . $wrng2,
 				);
-				
+
 				$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-yoastseo-dashboard' . WPGlobus::SCRIPT_SUFFIX() . '.js';
 
 				wp_register_script(

@@ -939,11 +939,11 @@ msgstr ""
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:3955
+#: includes/class-wpglobus.php:3956
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:3957
+#: includes/class-wpglobus.php:3958
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -1565,6 +1565,20 @@ msgstr ""
 #: includes/options/wpglobus-options-header.php:64
 msgid "Get WPGlobus Plus now!"
 msgstr "أحصل علي WPGlobus الأضافي الأن!"
+
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:674
+msgid ""
+"Bulk editing of the multilingual titles and descriptions is not supported by "
+"the current version."
+msgstr ""
+
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:675
+msgid "Therefore, to avoid any data loss, we do not recommend using this."
+msgstr ""
+
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:678
+msgid "WPGlobus warning: "
+msgstr ""
 
 #: wpglobus.php:13
 msgid "https://github.com/WPGlobus/WPGlobus"

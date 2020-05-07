@@ -216,6 +216,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.4.5 =
+
+* (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.
+* (Vendor/Yoast) Added JS script for dashboard.
+
 = 2.4.4 =
 
 * (Builders/RankMathSEO) Added filters for title and description on frontend.
