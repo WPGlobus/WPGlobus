@@ -301,6 +301,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ### 2.4.3 ###
 
+* (Builders/RankMathSEO) Added filters for title and description on frontend.
+
+### 2.4.3 ###
+
 * (Builders/RankMathSEO) Added `WordPress SEO Plugin – Rank Math` support (Beta stage).
 * (Core/Plugin Install) Added info box before add-ons list.
 
