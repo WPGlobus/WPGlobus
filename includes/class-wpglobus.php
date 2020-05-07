@@ -3541,7 +3541,10 @@ class WPGlobus {
 						$_link_class = $link_class;
 					}
 					
-					if ( WPGlobus::Config()->language === $language ) {
+					/**
+					 * @since 2.4.5
+					 */
+					if ( self::Config()->default_language === $language ) {
 						$_link_class['tab-link-active'] = 'wpglobus-tab-link-active';
 					}					
 					?>
@@ -3560,9 +3563,7 @@ class WPGlobus {
 				?>
 			</ul>
 		<?php
-
 		endif;
-
 	}
 
 	/**
