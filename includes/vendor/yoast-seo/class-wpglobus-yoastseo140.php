@@ -24,6 +24,14 @@ class WPGlobus_YoastSEO {
 	 * @var string
 	 */
 	public static $handle_script = 'wpglobus-yoastseo';
+	
+	/**
+	 * Name of the dashboard script.
+	 *
+	 * @since 2.4.5
+	 * @var string
+	 */
+	public static $handle_script_dashboard = 'wpglobus-yoastseo-dashboard';
 
 	/**
 	 * Name of the premium script.
@@ -652,10 +660,53 @@ class WPGlobus_YoastSEO {
 
 	/**
 	 * Enqueue JS for YoastSEO support.
+	 *
 	 * @since 1.4.0
 	 * @since 2.2.20
+	 * @since 2.4.5  Add JS script on dashboard.
 	 */
 	public static function action__admin_print_scripts() {
+
+		if ( WPGlobus_WP::is_pagenow( 'admin.php' ) ) {
+			
+			if ( 'wpseo_tools' == WPGlobus_Utils::safe_get('page') && 'bulk-editor' == WPGlobus_Utils::safe_get('tool') ) {
+				
+				$wrng1 = '<div>'.esc_html__( 'Текущая версия не поддерживает возможность массового редактирования многоязычных заголовков и описаний.', 'wpglobus' ).'</div>';
+				$wrng2 = '<div>'.esc_html__( 'Поэтому не рекомендуем использовать этот режим во избежание потери данных.', 'wpglobus' ).'</div>';
+				
+				$i18n = array(
+					'preWarning' 		=> esc_html__( 'Предупреждение WPGlobus: ', 'wpglobus' ),
+					'bulkEditorWarning' => $wrng1.$wrng2
+				);
+				
+				$src = WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-yoastseo-dashboard' . WPGlobus::SCRIPT_SUFFIX() . '.js';
+
+				wp_register_script(
+					self::$handle_script_dashboard,
+					$src,
+					array( 'jquery' ),
+					WPGLOBUS_VERSION,
+					true
+				);
+				
+				wp_enqueue_script(self::$handle_script_dashboard);
+
+				wp_localize_script(
+					self::$handle_script_dashboard,
+					'WPGlobusYoastSeoDashboard',
+					array(
+						'version' 		=> WPGLOBUS_VERSION,
+						'wpseo_version' => WPSEO_VERSION,
+						'pagenow' 		=> 'admin.php',
+						'page' 			=> WPGlobus_Utils::safe_get('page'),
+						'tool' 			=> WPGlobus_Utils::safe_get('tool'),
+						'i18n'    		=> $i18n
+					)				
+				);
+				
+				return;
+			}
+		}
 
 		if ( 'off' === WPGlobus::Config()->toggle ) {
 			return;
