@@ -218,7 +218,7 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
-= 2.4.3 =
+= 2.4.4 =
 
 * (Builders/RankMathSEO) Added filters for title and description on frontend.
 
