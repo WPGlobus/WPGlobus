@@ -4,6 +4,7 @@
 
 2020-05-08 - version 2.4.5
 * (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.
+* (Vendor/Yoast) Added JS script for dashboard.
 
 2020-05-07 - version 2.4.4
 * (Builders/RankMathSEO) Added filters for title and description on frontend.
