@@ -1,6 +1,8 @@
 # WPGlobus - Multilingual Everything! #
 
 ## Changelog ##
+2020-05-10 - version 2.4.6
+* (Vendor/Yoast) Fix Support multilingual breadcrumbs for ancestor category on products and posts page.
 
 2020-05-08 - version 2.4.5
 * (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.

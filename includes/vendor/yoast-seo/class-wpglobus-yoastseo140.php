@@ -458,18 +458,52 @@ class WPGlobus_YoastSEO {
 			
 				switch ($object_type) :
 					case 'post' :
-						if ( ! empty($piece['id']) ) {
-							$ids[] = $piece['id']; 
-							$breadcrumbs[ $piece['id'] ] = $piece;
-							$breadcrumbs[ $piece['id'] ]['object_type'] = $object_type;
-							$breadcrumbs[ $piece['id'] ]['object_sub_type'] = $object_sub_type;
-						}
+                                                if ( WPGlobus_Core::has_translations($piece['text']) ) {
+                                                    //element save from backoffice (so translation in indexer yoast)
+                                                    $output = str_replace( 
+                                                            array( 
+                                                                    $piece['url'],
+                                                                    $piece['text'] 
+                                                            ),
+                                                            array( 
+                                                                    WPGlobus_Utils::localize_url( $piece['url'], WPGlobus::Config()->language ), 
+                                                                    WPGlobus_Core::text_filter( $piece['text'], WPGlobus::Config()->language ) 
+                                                            ), 
+                                                            $output 
+                                                    );
+                                                } else if ( ! empty($piece['id']) ) {
+                                                    //element save from frontoffice (so current translation in indexer yoast)
+                                                    $ids[] = $piece['id']; 
+                                                    $breadcrumbs[ $piece['id'] ] = $piece;
+                                                    $breadcrumbs[ $piece['id'] ]['object_type'] = $object_type;
+                                                    $breadcrumbs[ $piece['id'] ]['object_sub_type'] = $object_sub_type;
+						} else {
+                                                    //no id no translation because parent element of post (category)
+                                                    //search by slug url in permalink
+                                                    $lasturl = basename($piece['url']);
+                                                    $parentCategory = get_term_by('slug',$lasturl,'category');
+                                                    if (!$parentCategory) {
+                                                        //mode woocommerce
+                                                        $parentCategory = get_term_by('slug',$lasturl,'product_cat');
+                                                    }
+                                                    $output = str_replace( 
+                                                            array( 
+                                                                    $piece['url'],
+                                                                    $piece['text'] 
+                                                            ),
+                                                            array( 
+                                                                    WPGlobus_Utils::localize_url( $piece['url'], WPGlobus::Config()->language ), 
+                                                                    $mycategory->name 
+                                                            ), 
+                                                            $output 
+                                                    );
+                                                }
 						break;
 					case 'taxonomy' :
 						$_id = $order;
-						if ( ! is_null( $object_order ) ) {
-							$_id = $object_order[$i];
-							$ids[] = $_id; 
+						if ( ! is_null( $object_order ) ) {	
+                                                    $_id = $object_order[$i];
+                                                    $ids[] = $_id; 
 						}
 						$breadcrumbs[ $_id ] = $piece;
 						$breadcrumbs[ $_id ]['object_type'] = $object_type;
