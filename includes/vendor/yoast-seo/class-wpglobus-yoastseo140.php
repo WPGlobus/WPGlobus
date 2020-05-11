@@ -181,6 +181,7 @@ class WPGlobus_YoastSEO {
 	 * @see wordpress-seo\src\presenters\open-graph\title-presenter.php
 	 * @scope front
 	 * @since 2.4
+	 * @since 2.4.6 Removed checking for default language.
 	 *
 	 * @param string 				 $title 	   The title.
 	 * @param Indexable_Presentation $presentation The presentation of an indexable.
@@ -189,14 +190,9 @@ class WPGlobus_YoastSEO {
 	 */
 	public static function filter_front__title( $title, $presentation ) {
 		
-		if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
-			return $title;
-		}
-		
 		if ( empty( $title ) ) {
 			return $title;
 		}
-		
 		return self::filter__title( $title );
 	}
 	
@@ -581,6 +577,7 @@ class WPGlobus_YoastSEO {
 		global $post;
 		
 		if ( empty( $meta_value ) ) {
+
 			/**
 			 * Try get meta by post ID.
 			 */
@@ -608,17 +605,30 @@ class WPGlobus_YoastSEO {
 	/**
 	 * Get `_yoast_wpseo_metadesc`, `_yoast_wpseo_focuskw` meta.
 	 *
-	 * @scope admin
+	 * @scope both
 	 * @since 2.4
+	 * @since 2.4.6 Separate the defining of post type for frontend and admin.
 	 */
 	protected static function get_wpseo_meta() {
 		
 		/** @global wpdb $wpdb */
 		global $wpdb;
 		
+		/** @global WP_Post $post */
+		global $post;
+
 		$post_type = 'post';
-		if ( ! empty( $_GET['post_type'] ) ) {
+		
+		if ( is_admin() && ! empty( $_GET['post_type'] ) ) {
+			/**
+			 * Admin.
+			 */
 			$post_type = sanitize_text_field( $_GET['post_type'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+		} elseif ( ! empty( $post->post_type ) ) {
+			/**
+			 * Front-end.
+			 */
+			$post_type = $post->post_type;
 		}
 
 		$query = $wpdb->prepare( 
@@ -638,7 +648,6 @@ class WPGlobus_YoastSEO {
 				self::$wpseo_meta[ $_meta['meta_key'] ][ $_meta['ID'] ] = $_meta['meta_value'];
 			}
 		}
-		
 	}
 	
 	/**
