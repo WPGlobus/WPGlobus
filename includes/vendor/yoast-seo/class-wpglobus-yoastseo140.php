@@ -631,22 +631,41 @@ class WPGlobus_YoastSEO {
 			$post_type = $post->post_type;
 		}
 
-		$query = $wpdb->prepare( 
-			"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.post_type = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
-			$post_type,
-			'_yoast_wpseo_metadesc',
-			'_yoast_wpseo_focuskw'
-		);
-							  
-		$metas = $wpdb->get_results( $query, ARRAY_A  );
+		$query = false;
+		
+		if ( is_admin() ) {
+			$query = $wpdb->prepare( 
+				"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.post_type = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
+				$post_type,
+				'_yoast_wpseo_metadesc',
+				'_yoast_wpseo_focuskw'
+			);
+		} else {
+			
+			if ( (int) $post->ID > 0 ) {
+				$query = $wpdb->prepare( 
+					"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.ID = %s AND p.post_type = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
+					$post->ID,
+					$post_type,
+					'_yoast_wpseo_metadesc',
+					'_yoast_wpseo_focuskw'
+				);
+			}				
+		}
+		
+		if ( $query ) {
+			
+			$metas = $wpdb->get_results( $query, ARRAY_A  );
 
-		if ( ! empty( $metas ) ) {
-			foreach( $metas as $_meta ) {
-				if ( ! isset( self::$wpseo_meta[ $_meta['meta_key'] ] ) ) {
-					self::$wpseo_meta[ $_meta['meta_key'] ] = array();
+			if ( ! empty( $metas ) ) {
+				foreach( $metas as $_meta ) {
+					if ( ! isset( self::$wpseo_meta[ $_meta['meta_key'] ] ) ) {
+						self::$wpseo_meta[ $_meta['meta_key'] ] = array();
+					}
+					self::$wpseo_meta[ $_meta['meta_key'] ][ $_meta['ID'] ] = $_meta['meta_value'];
 				}
-				self::$wpseo_meta[ $_meta['meta_key'] ][ $_meta['ID'] ] = $_meta['meta_value'];
 			}
+			
 		}
 	}
 	
