@@ -295,6 +295,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.6 ###
+
+* (Vendor/Yoast) Correct defining post type for frontend.
+
 ### 2.4.5 ###
 
 * (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.
@@ -327,12 +331,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Core/AdminPost) Localized the `Preview Changes` link.
 * (Core/Meta) Removed caching meta data.
 * (Builders/Gutenberg) Prevent multiple clicking on language switcher.
-
-### 2.3.12 ###
-
-* (Customizer) WPGlobus Customizer is switched off for `Gwangi` theme.
-* (Core/Post Types) Added post type of `rtMedia` plugin to the hidden types array.
-* (Core/Post Types) Added post types of `Divi` theme to the hidden types array.
 
 ### Earlier versions and Add-ons ###
 

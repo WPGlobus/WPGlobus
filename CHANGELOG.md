@@ -7,10 +7,10 @@
 
 2020-05-08 - version 2.4.5
 * (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.
-* (Vendor/Yoast) Added JS script for dashboard.
+* (Vendor/Yoast) Added JS script for the dashboard.
 
 2020-05-07 - version 2.4.4
-* (Builders/RankMathSEO) Added filters for title and description on frontend.
+* (Builders/RankMathSEO) Added filters for title and description on the frontend.
 
 2020-05-06 - version 2.4.3
 * (Builders/RankMathSEO) Added `WordPress SEO Plugin – Rank Math` support (Beta stage).
