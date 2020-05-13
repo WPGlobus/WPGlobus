@@ -56,6 +56,14 @@ class WPGlobus_YoastSEO {
 	 * @var null|array 
 	 */	
 	protected static $wpseo_meta = null;
+
+	/**
+	 * Contains document title.
+	 *
+	 * @since 2.4.7
+	 * @var null|string
+	 */		
+	protected static $title = null;
 	
 	/**
 	 * Plus access.
@@ -150,6 +158,12 @@ class WPGlobus_YoastSEO {
 			 * @from 1.8.8
 			 */
 			add_filter( 'wpseo_metakeywords', array( __CLASS__, 'filter__metakeywords' ), 0 );
+
+			/**
+			 * Filter schema generator.
+			 * @from 2.4.7
+			 */			
+			add_filter( 'wpseo_schema_breadcrumb', array( __CLASS__, 'filter__wpseo_schema_breadcrumb' ), 5, 2 );
 						
 		}
 	}
@@ -159,19 +173,55 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @scope front
 	 * @since 1.9.18
+	 * @since 2.4.7	  Handle multilingual title from `postmeta` table.
 	 *
 	 * @param string $title Post title.
 	 *
 	 * @return string.
 	 */	
 	public static function filter__title( $title ) {
+		
 		/**
 		 * In some cases we can get $title like {:en}En title{:}{:ru}Ru title{:}{:fr}Fr title{:} - SiteTitle
 		 * so, let's filter.
 		 */
 		if ( WPGlobus_Core::has_translations($title) ) {
-			return WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
+		
+			if ( is_null( self::$title ) ) {
+				self::$title = $title;
+			}			
+			return WPGlobus_Core::extract_text( self::$title, WPGlobus::Config()->language );
 		}
+
+		/**
+		 * We can get title in last saved language (has no multilingual) from @see `wp_yoast_indexable` table.  
+		 * So, we need get multilingual title from `postmeta` table.
+		 * @since 2.4.7
+		 */
+		if ( ! is_null( self::$title ) ) {
+			return WPGlobus_Core::extract_text( self::$title, WPGlobus::Config()->language );
+		}
+		
+		/** @global wpdb $wpdb */		
+		global $wpdb;
+		
+		/** @global WP_Post $post */
+		global $post;
+		
+		if ( (int) $post->ID > 0 ) {
+			$query = $wpdb->prepare( 
+				"SELECT meta_value FROM {$wpdb->prefix}postmeta AS m WHERE m.post_id = %s AND m.meta_key = %s",
+				$post->ID,
+				'_yoast_wpseo_title'
+			);
+			
+			$meta = $wpdb->get_var($query);
+			if ( ! empty($meta)	&& false != mb_strpos($meta, $title) && WPGlobus_Core::has_translations($meta) ) {
+				self::$title = $meta;
+				return WPGlobus_Core::extract_text( self::$title, WPGlobus::Config()->language );
+			}
+		}		
+	
 		return $title;
 	}
 	
@@ -961,6 +1011,35 @@ class WPGlobus_YoastSEO {
 		return $result;
 	}
 
+	/**
+	 * Filter allows changing graph breadcrumb output.
+	 *
+	 * @see wordpress-seo\src\generators\schema-generator.php
+	 * @see "application/ld+json" in html code on front.
+	 *
+	 * @since 2.4.7
+	 *
+	 * @scope front
+	 * @param array $graph_piece		 Array of graph piece.
+	 * @param Meta_Tags_Context $context A value object with context variables.
+	 * @return string
+	 */
+	public static function filter__wpseo_schema_breadcrumb( $graph_piece, $context ) {
+
+		if ( empty( $graph_piece['itemListElement'] ) ) {
+			return $graph_piece;		
+		}
+
+		$itemListElement = $graph_piece['itemListElement'];
+		
+		foreach( $itemListElement as $_key=>$_item ) {
+			if ( ! empty( $_item['item']['name'] ) && WPGlobus_Core::has_translations( $_item['item']['name'] ) ) {
+				$graph_piece['itemListElement'][$_key]['item']['name'] = WPGlobus_Core::extract_text( $graph_piece['itemListElement'][$_key]['item']['name'], WPGlobus::Config()->language );
+			}
+		}
+		
+		return $graph_piece;		
+	}
 } // class
 
 # --- EOF
