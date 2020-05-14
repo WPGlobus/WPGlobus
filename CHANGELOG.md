@@ -4,7 +4,7 @@
 
 2020-05-13 - version 2.4.7
 * (Vendor/Yoast) Added filter of schema generator.
-* (Vendor/Yoast) Updated filter of post title that has no multilingual value for frontend.
+* (Vendor/Yoast) Updated filter for the post title that has no multilingual value for the frontend.
 
 2020-05-11 - version 2.4.6
 * (Vendor/Yoast) Correct defining post type for frontend.

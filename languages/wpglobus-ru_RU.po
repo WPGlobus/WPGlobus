@@ -1687,7 +1687,7 @@ msgstr ""
 msgid "Get WPGlobus Plus now!"
 msgstr "Установите WPGlobus Плюс прямо сейчас!"
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:702
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:752
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
@@ -1695,12 +1695,12 @@ msgstr ""
 "Текущая версия не поддерживает возможность массового редактирования "
 "многоязычных заголовков и описаний."
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:703
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:753
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
 "Поэтому не рекомендуем использовать этот режим во избежание потери данных."
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:706
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:756
 msgid "WPGlobus warning: "
 msgstr "Предупреждение WPGlobus: "
 

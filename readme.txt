@@ -216,6 +216,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.4.7 =
+
+* (Vendor/Yoast) Added filter of schema generator.
+* (Vendor/Yoast) Updated filter for the post title that has no multilingual value for the frontend.
+
 = 2.4.6 =
 
 * (Vendor/Yoast) Correct defining post type for frontend.
