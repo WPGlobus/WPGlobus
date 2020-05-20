@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-05-20 - version 2.4.8
+* (Core/Clean-Up Tool) Updated description.
+
 2020-05-13 - version 2.4.7
 * (Vendor/Yoast) Added filter of schema generator.
 * (Vendor/Yoast) Updated filter for the post title that has no multilingual value for the frontend.
