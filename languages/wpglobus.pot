@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.4.7
-# This file is distributed under the same license as the WPGlobus 2.4.7 package.
+# Copyright (C) 2020 WPGlobus 2.4.8
+# This file is distributed under the same license as the WPGlobus 2.4.8 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.4.7\n"
+"Project-Id-Version: WPGlobus 2.4.8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -144,48 +144,52 @@ msgstr ""
 msgid "WARNING: this operation is non-reversible. It is strongly recommended that you backup your database before proceeding."
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:618
+#: includes/admin/class-wpglobus-clean.php:619
 msgid "This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on."
 msgstr ""
 
-#. translators: %1$s - language name, %1$s - language code. Do not remove.
-#: includes/admin/class-wpglobus-clean.php:625
-msgid "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to Settings."
+#: includes/admin/class-wpglobus-clean.php:622
+msgid "Make sure that your active theme does not have any code related to WPGlobus. Such code could be added by you or by a 3rd party developer. If that code runs without first verifying that WPGlobus is active, WordPress may die with a fatal error."
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:634
+#. translators: %1$s - language name, %2$s - language code. Do not remove.
+#: includes/admin/class-wpglobus-clean.php:630
+msgid "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
+msgstr ""
+
+#: includes/admin/class-wpglobus-clean.php:641
 msgid "You are about to clean the content of the following database tables:"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:642
+#: includes/admin/class-wpglobus-clean.php:649
 msgid "The operations log"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:645
+#: includes/admin/class-wpglobus-clean.php:652
 msgid "We are going to write a detailed log of all the database changes performed. It should help in the case you need to restore something important. The log will be written to the file:"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:655
+#: includes/admin/class-wpglobus-clean.php:662
 msgid "Uncheck if you do not want to write the operations log (we recommend to keep it checked)"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:660
+#: includes/admin/class-wpglobus-clean.php:667
 msgid "You have been warned..."
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:662
+#: includes/admin/class-wpglobus-clean.php:669
 msgid "Please confirm by checking the box below:"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:664
+#: includes/admin/class-wpglobus-clean.php:671
 msgid "I have read and understood everything written on this page. I am aware that by using this tool I may loose some content of my website. I have made a database backup and know how to restore it if necessary. I am fully responsible for the results."
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:667
+#: includes/admin/class-wpglobus-clean.php:674
 msgid "YES, I CONFIRM"
 msgstr ""
 
-#: includes/admin/class-wpglobus-clean.php:671
+#: includes/admin/class-wpglobus-clean.php:678
 msgid "Process with the Clean-up"
 msgstr ""
 

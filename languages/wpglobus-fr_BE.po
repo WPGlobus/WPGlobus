@@ -225,7 +225,7 @@ msgstr ""
 "AVERTISSEMENT&nbsp;: cette opération est irréversible. Il est fortement "
 "recommandé de sauvegarder votre base de données avant de continuer."
 
-#: includes/admin/class-wpglobus-clean.php:618
+#: includes/admin/class-wpglobus-clean.php:619
 msgid ""
 "This tool should be used only if you plan to completely uninstall WPGlobus. "
 "By running it, you will remove ALL translations you have entered to your "
@@ -242,27 +242,32 @@ msgstr ""
 "vous pourriez vous retrouver avec des titres vides, sans contenu, sans "
 "extrait, des commentaires vierges et ainsi de suite."
 
-#. translators: %1$s - language name, %1$s - language code. Do not remove.
-#: includes/admin/class-wpglobus-clean.php:625
+#: includes/admin/class-wpglobus-clean.php:622
+msgid ""
+"Make sure that your active theme does not have any code related to WPGlobus. "
+"Such code could be added by you or by a 3rd party developer. If that code "
+"runs without first verifying that WPGlobus is active, WordPress may die with "
+"a fatal error."
+msgstr ""
+
+#. translators: %1$s - language name, %2$s - language code. Do not remove.
+#: includes/admin/class-wpglobus-clean.php:630
 msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
-"%1$s WILL BE DELETED! To change the main language, please go to Settings."
+"%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
 msgstr ""
-"La langue principale est actuellement configurée à %1$s (%2$s). TOUS LES "
-"TEXTES QUI NE SONT PAS EN %1$s SERONT SUPPRIMÉS ! Pour changer la langue "
-"principale, veuillez allez dans Réglages."
 
-#: includes/admin/class-wpglobus-clean.php:634
+#: includes/admin/class-wpglobus-clean.php:641
 msgid "You are about to clean the content of the following database tables:"
 msgstr ""
 "Vous êtes sur le point de nettoyer le contenu des tables suivantes de la "
 "base de données :"
 
-#: includes/admin/class-wpglobus-clean.php:642
+#: includes/admin/class-wpglobus-clean.php:649
 msgid "The operations log"
 msgstr "Le journal des opérations"
 
-#: includes/admin/class-wpglobus-clean.php:645
+#: includes/admin/class-wpglobus-clean.php:652
 msgid ""
 "We are going to write a detailed log of all the database changes performed. "
 "It should help in the case you need to restore something important. The log "
@@ -273,7 +278,7 @@ msgstr ""
 "dans le cas où vous auriez besoin de restaurer quelque chose d'important. Le "
 "journal sera écrit dans le fichier&nbsp;:"
 
-#: includes/admin/class-wpglobus-clean.php:655
+#: includes/admin/class-wpglobus-clean.php:662
 msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
@@ -281,15 +286,15 @@ msgstr ""
 "Décochez si vous ne voulez pas écrire le journal des opérations (nous vous "
 "recommandons de le garder coché)"
 
-#: includes/admin/class-wpglobus-clean.php:660
+#: includes/admin/class-wpglobus-clean.php:667
 msgid "You have been warned..."
 msgstr "Vous avez été prévenus..."
 
-#: includes/admin/class-wpglobus-clean.php:662
+#: includes/admin/class-wpglobus-clean.php:669
 msgid "Please confirm by checking the box below:"
 msgstr "Veuillez confirmer en cochant la case ci-dessous&nbsp;:"
 
-#: includes/admin/class-wpglobus-clean.php:664
+#: includes/admin/class-wpglobus-clean.php:671
 msgid ""
 "I have read and understood everything written on this page. I am aware that "
 "by using this tool I may loose some content of my website. I have made a "
@@ -301,11 +306,11 @@ msgstr ""
 "fait une sauvegarde de la base de données et je sais comment la restaurer si "
 "nécessaire. Je suis pleinement responsable des résultats."
 
-#: includes/admin/class-wpglobus-clean.php:667
+#: includes/admin/class-wpglobus-clean.php:674
 msgid "YES, I CONFIRM"
 msgstr "OUI, JE CONFIRME"
 
-#: includes/admin/class-wpglobus-clean.php:671
+#: includes/admin/class-wpglobus-clean.php:678
 msgid "Process with the Clean-up"
 msgstr "Processus avec le Nettoyage"
 
@@ -1678,3 +1683,12 @@ msgstr ""
 #: wpglobus.php:19
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
+
+#~ msgid ""
+#~ "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT "
+#~ "IN %1$s WILL BE DELETED! To change the main language, please go to "
+#~ "Settings."
+#~ msgstr ""
+#~ "La langue principale est actuellement configurée à %1$s (%2$s). TOUS LES "
+#~ "TEXTES QUI NE SONT PAS EN %1$s SERONT SUPPRIMÉS ! Pour changer la langue "
+#~ "principale, veuillez allez dans Réglages."

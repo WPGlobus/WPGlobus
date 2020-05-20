@@ -295,6 +295,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.8 ###
+
+* (Core/Clean-Up Tool) Updated description.
+
 ### 2.4.7 ###
 
 * (Vendor/Yoast) Added filter of schema generator.

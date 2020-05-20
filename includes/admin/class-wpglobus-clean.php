@@ -619,8 +619,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						1. <?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
 					</strong></p>
 					<p><strong>
-						2. <?php esc_html_e( 'Убедитесь что в вашей активной теме не останется кода связанного с WPGlobus, который мог быть добавлен вами или сторонним разработчиком. Если такой код использован без проверки активирован ли WPGlobus, то это может привести к неработоспособности всего сайта (белый экран смерти).', 'wpglobus' ); ?>
-					</strong></p>					
+						2. <?php esc_html_e( 'Make sure that your active theme does not have any code related to WPGlobus. Such code could be added by you or by a 3rd party developer. If that code runs without first verifying that WPGlobus is active, WordPress may die with a fatal error.', 'wpglobus' ); ?>
+					</strong></p>
 				</div>
 
 				<div style="color:red; background-color: white; padding: .5em">

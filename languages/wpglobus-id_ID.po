@@ -221,7 +221,7 @@ msgstr ""
 "PERINGATAN: operasi ini tidak dapat dibalikkan. Sangat disarankan agar Anda "
 "membuat backup database Anda sebelum melanjutkan."
 
-#: includes/admin/class-wpglobus-clean.php:618
+#: includes/admin/class-wpglobus-clean.php:619
 msgid ""
 "This tool should be used only if you plan to completely uninstall WPGlobus. "
 "By running it, you will remove ALL translations you have entered to your "
@@ -237,24 +237,30 @@ msgstr ""
 "dalam bahasa utama. Jika tidak, Anda mungkin berakhir dengan judul kosong, "
 "tidak ada konten, tidak ada kutipan, komentar kosong dan sebagainya."
 
-#. translators: %1$s - language name, %1$s - language code. Do not remove.
-#: includes/admin/class-wpglobus-clean.php:625
+#: includes/admin/class-wpglobus-clean.php:622
+msgid ""
+"Make sure that your active theme does not have any code related to WPGlobus. "
+"Such code could be added by you or by a 3rd party developer. If that code "
+"runs without first verifying that WPGlobus is active, WordPress may die with "
+"a fatal error."
+msgstr ""
+
+#. translators: %1$s - language name, %2$s - language code. Do not remove.
+#: includes/admin/class-wpglobus-clean.php:630
 msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
-"%1$s WILL BE DELETED! To change the main language, please go to Settings."
+"%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
 msgstr ""
-"Bahasa utama saat ini ditetapkan ke %1$s (%2$s). SEMUA TEXTS YANG TIDAK DI "
-"%1$s AKAN DIHAPUS! Untuk mengubah bahasa utama, buka Pengaturan."
 
-#: includes/admin/class-wpglobus-clean.php:634
+#: includes/admin/class-wpglobus-clean.php:641
 msgid "You are about to clean the content of the following database tables:"
 msgstr "Anda akan membersihkan isi tabel database berikut:"
 
-#: includes/admin/class-wpglobus-clean.php:642
+#: includes/admin/class-wpglobus-clean.php:649
 msgid "The operations log"
 msgstr "Operasi log"
 
-#: includes/admin/class-wpglobus-clean.php:645
+#: includes/admin/class-wpglobus-clean.php:652
 msgid ""
 "We are going to write a detailed log of all the database changes performed. "
 "It should help in the case you need to restore something important. The log "
@@ -264,7 +270,7 @@ msgstr ""
 "akan membantu dalam kasus Anda perlu mengembalikan sesuatu yang penting. log "
 "akan ditulis ke file:"
 
-#: includes/admin/class-wpglobus-clean.php:655
+#: includes/admin/class-wpglobus-clean.php:662
 msgid ""
 "Uncheck if you do not want to write the operations log (we recommend to keep "
 "it checked)"
@@ -272,15 +278,15 @@ msgstr ""
 "Hapus centang jika Anda tidak ingin menulis log operasi (kami sarankan untuk "
 "tetap memeriksanya)"
 
-#: includes/admin/class-wpglobus-clean.php:660
+#: includes/admin/class-wpglobus-clean.php:667
 msgid "You have been warned..."
 msgstr "Anda telah diperingatkan..."
 
-#: includes/admin/class-wpglobus-clean.php:662
+#: includes/admin/class-wpglobus-clean.php:669
 msgid "Please confirm by checking the box below:"
 msgstr "Silahkan konfirmasi dengan mencentang kotak di bawah ini:"
 
-#: includes/admin/class-wpglobus-clean.php:664
+#: includes/admin/class-wpglobus-clean.php:671
 msgid ""
 "I have read and understood everything written on this page. I am aware that "
 "by using this tool I may loose some content of my website. I have made a "
@@ -293,11 +299,11 @@ msgstr ""
 "bagaimana untuk mengembalikannya jika perlu. Saya bertanggung jawab penuh "
 "atas hasil."
 
-#: includes/admin/class-wpglobus-clean.php:667
+#: includes/admin/class-wpglobus-clean.php:674
 msgid "YES, I CONFIRM"
 msgstr "YES, I CONFIRM"
 
-#: includes/admin/class-wpglobus-clean.php:671
+#: includes/admin/class-wpglobus-clean.php:678
 msgid "Process with the Clean-up"
 msgstr "Proses dengan Clean-up"
 
@@ -1653,3 +1659,11 @@ msgstr ""
 #: wpglobus.php:19
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
+
+#~ msgid ""
+#~ "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT "
+#~ "IN %1$s WILL BE DELETED! To change the main language, please go to "
+#~ "Settings."
+#~ msgstr ""
+#~ "Bahasa utama saat ini ditetapkan ke %1$s (%2$s). SEMUA TEXTS YANG TIDAK "
+#~ "DI %1$s AKAN DIHAPUS! Untuk mengubah bahasa utama, buka Pengaturan."
