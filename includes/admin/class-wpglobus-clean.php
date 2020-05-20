@@ -614,18 +614,25 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					<?php esc_html_e( 'WARNING: this operation is non-reversible. It is strongly recommended that you backup your database before proceeding.', 'wpglobus' ); ?>
 				</div>
 
-				<div style="padding: .5em"><strong>
-						<?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
-					</strong></div>
+				<div style="padding: .5em">
+					<p><strong>
+						1. <?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
+					</strong></p>
+					<p><strong>
+						2. <?php esc_html_e( 'Убедитесь что в вашей активной теме не останется кода связанного с WPGlobus, который мог быть добавлен вами или сторонним разработчиком. Если такой код использован без проверки активирован ли WPGlobus, то это может привести к неработоспособности всего сайта (белый экран смерти).', 'wpglobus' ); ?>
+					</strong></p>					
+				</div>
 
 				<div style="color:red; background-color: white; padding: .5em">
 					<?php
-					echo esc_html( sprintf(
-						// translators: %1$s - language name, %1$s - language code. Do not remove.
-						__( 'The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to Settings.', 'wpglobus' ),
+					$_message = esc_html( sprintf(
+						// translators: %1$s - language name, %2$s - language code. Do not remove.
+						__( 'The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to {{settings}}.', 'wpglobus' ),
 						WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
-						WPGlobus::Config()->default_language ) );
-
+						WPGlobus::Config()->default_language ) 
+					);
+					$_settings_link =  '<a href="'.esc_url( WPGlobus_Admin_Page::url_settings('languages') ).'">' . esc_html( 'Settings', 'wpglobus' ) . '</a>';
+					echo str_replace( '{{settings}}', $_settings_link, $_message );
 					?>
 				</div>
 

@@ -74,10 +74,15 @@ class WPGlobus_Admin_Page {
 	/**
 	 * URL of the WPGlobus Settings page.
 	 *
+	 * @since 2.4.8 Added $tab parameter.
+	 * 
 	 * @return string
 	 */
-	public static function url_settings() {
-		return add_query_arg( 'page', WPGlobus::OPTIONS_PAGE_SLUG, admin_url( 'admin.php' ) );
+	public static function url_settings( $tab = '' ) {
+		if ( empty($tab) ) {
+			return add_query_arg( 'page', WPGlobus::OPTIONS_PAGE_SLUG, admin_url( 'admin.php' ) );
+		}
+		return add_query_arg( array('page'=>WPGlobus::OPTIONS_PAGE_SLUG, 'tab'=>$tab), admin_url( 'admin.php' ) );
 	}
 
 	/**
