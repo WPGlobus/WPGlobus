@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-06-02 - version 2.4.9
+* (Vendor/All In One SEO Pack) Interface improvements on post edit page.
+
 2020-05-20 - version 2.4.8
 * (Core/Clean-Up Tool) Updated description.
 
