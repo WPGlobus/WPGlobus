@@ -37,6 +37,7 @@
 			if ( api.addRules ) {
 				api.addCssRules();
 			}
+			api.tabDecoration(true);
 			api.attachListeners();
 		},
 		addCssRules: function() {
@@ -75,16 +76,35 @@
 				}
 			}	
 		},	
+		tabDecoration: function(init) {
+			if ( 'undefined' === typeof init ) {
+				init = false;
+			}
+			if ('boolean' === typeof init && init) {
+				$('.wpglobus-aioseop-tabs-list li#aioseop-link-tab-'+WPGlobusCoreData.default_language+' a').css({'border-top':'2px solid #00f'});
+				return;
+			}
+			if ( 'string' === typeof init ) {
+				$('.wpglobus-aioseop-tabs-list li a').css({'border-top':''});
+				$('.wpglobus-aioseop-tabs-list li#aioseop-link-tab-'+init+' a').css({'border-top':'2px solid #00f'});
+			}
+		},
 		attachListeners: function() {
 			$('.wpglobus_countable').on('keyup', function(event) {
 				var $t = $(this); 
 				api.countChars($t, $t.data('field-count'));
 			});
 
+			// tabsactivate			
+			$('#wpglobus-aioseop-tabs').on('tabsactivate', function(event, ui){
+				api.tabDecoration($(ui.newTab).data('language'));
+			});
+
 			$('body').on('click', '.wpglobus-post-body-tabs-list li', function(event){
 				var $t = $(this);
 				if ( $t.hasClass('wpglobus-post-tab') ) {
 					$('#wpglobus-aioseop-tabs').tabs('option','active', $t.data('order'));
+					api.tabDecoration($t.data('language'));
 				}	
 			});				
 			
