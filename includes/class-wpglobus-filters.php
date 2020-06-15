@@ -729,13 +729,23 @@ class WPGlobus_Filters {
 	 *
 	 * @see   WP_Widget::display_callback
 	 * @scope front
+     *
+	 * @since 1.0.6
+	 * @since 2.4.10 Prevent handling of incorrect widget instance's settings.
 	 *
 	 * @param string[] $instance
 	 *
 	 * @return string[]
-	 * @since 1.0.6
 	 */
 	public static function filter__widget_display_callback( $instance ) {
+		
+		/**
+		 * Prevent handling of incorrect widget instance's settings.
+		 * @since 2.4.10
+		 */
+		if ( empty($instance) || is_bool($instance) ) {
+			return $instance;
+		}			
 
 		foreach ( $instance as &$widget_setting ) {
 
