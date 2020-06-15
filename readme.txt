@@ -216,6 +216,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.4.10 =
+
+* (Core/Filters) Prevent handling of incorrect widget instance's settings.
+
 = 2.4.9 =
 
 * (Vendor/All In One SEO Pack) Interface improvements on post edit page.
