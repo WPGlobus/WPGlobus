@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-06-22 - version 2.4.11
+* (Block Editor) Initializing to work with Elementor.
+
 2020-06-15 - version 2.4.10
 * (Core/Filters) Prevent handling of incorrect widget instance's settings.
 
