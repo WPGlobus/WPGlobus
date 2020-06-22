@@ -5,6 +5,16 @@
  * @package WPGlobus\Builders
  * @author  Alex Gor(alexgff)
  */
+ 
+/**
+ * Elementor.
+ * @since 2.4.11
+ */
+use Elementor\Modules\Gutenberg;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class WPGlobus_Builders.
@@ -1055,6 +1065,24 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					}
 				}
 			}
+			
+			/**
+			 * Elementor.
+			 *
+			 * @since 2.4.11
+			 * @see elementor\modules\gutenberg\module.php
+			 */
+			if ( defined( 'ELEMENTOR_VERSION' ) ) {
+				$gutenberg_module = new Gutenberg\Module();
+				if ( $gutenberg_module->is_active() ) {
+					if ( isset($_GET['action']) && 'elementor' == $_GET['action'] ) {
+						/**
+						 * Prevent init block editor support when elementor edit page is loading.
+						 */
+						return false;
+					}
+				}
+			}	
 
 			if ( function_exists( 'classic_editor_settings' ) ) {
 				/**
@@ -1145,7 +1173,6 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			}
 
 			return $load_gutenberg;
-
 		}
 
 		/**

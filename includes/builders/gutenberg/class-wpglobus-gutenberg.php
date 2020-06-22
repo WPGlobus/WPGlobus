@@ -393,6 +393,13 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		$i18n['save_post'] = esc_html__( 'Before switching the language, please save draft or publish, then reload page.', 'wpglobus' );
 
 		/**
+		 * Extra data.
+		 *
+		 * @since 2.4.11
+		 */
+		$__data = array();
+
+		/**
 		 * We have Gutenberg in core since WP 5.0.
 		 *
 		 * @since 2.0
@@ -411,7 +418,29 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$yoast_seo = true;
 		}
-
+		
+		/**
+		 * Check for Elementor.
+		 *
+		 * @since 2.4.11
+		 */
+		$elementor = false;
+		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+			$elementor = true;
+			$__data['elementorVersion'] = ELEMENTOR_VERSION;
+			$__data['elementorCssPrintMethod'] = get_option('elementor_css_print_method', 'external');
+			$_url = add_query_arg(
+				array(
+					'page' => 'elementor#tab-advanced',
+				),
+				admin_url( 'admin.php' )
+			);
+			$i18n['elementorWarning'] = esc_html__( 'WPGlobus provides multilingual support for Elementor only when the option `CSS Print Method` is set to `External File`.', 'wpglobus' );
+			$i18n['elementorActionLabel']  = esc_html__( 'Open Elementor Settings page', 'wpglobus' );
+			$i18n['elementorActionLink']   = $_url;
+		}		 
+		 
+		 
 		/**
 		 * Block editor tab URL.
 		 *
@@ -487,6 +516,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'defaultLanguage'      => WPGlobus::Config()->default_language,
 			'i18n'                 => $i18n,
 			'yoastSeo'             => $yoast_seo,
+			'elementor'            => $elementor,
 			'flags_url'            => $flags_url,
 			'store_link'           => WPGlobus::URL_WPGLOBUS_SHOP,
 			'__post'               => $__post,
@@ -494,7 +524,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'disabled_entities'    => WPGlobus::Config()->disabled_entities,
 			'options'			   => $options,
 			'enabledOptionsTab'	   => true,
-			'keyOption'		       => $key_option
+			'keyOption'		       => $key_option,
+			'data'				   => $__data
 		);
 
 		/**

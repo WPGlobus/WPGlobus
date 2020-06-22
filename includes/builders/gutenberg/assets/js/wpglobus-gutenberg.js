@@ -54,10 +54,12 @@ jQuery(document).ready(function ($) {
 		},
 		init: function() {
 			WPGlobusGutenberg.yoastSeo = api.parseBool(WPGlobusGutenberg.yoastSeo);
+			WPGlobusGutenberg.elementor = api.parseBool(WPGlobusGutenberg.elementor);
 			if ( api.isPostDisabled() ) {
 				return;
 			}
 			api.initListeners();
+			api.initNotifications();
 			api.setTabs();
 			api.formHandler();
 			api.attachListeners();
@@ -95,6 +97,34 @@ jQuery(document).ready(function ($) {
 				}			
 				$('input[name="_wp_original_http_referer"]').attr('value', val);
 			}			
+		},
+		initNotifications: function() {
+			// @since 2.4.11
+			if ( 'undefined' === typeof wp.editPost || 'undefined' === typeof wp.plugins ) {
+				return;
+			}
+			if ( ! WPGlobusGutenberg.elementor ) {
+				return;	
+			}
+			if ( 'internal' != WPGlobusGutenberg.data.elementorCssPrintMethod ) {
+				return;	
+			}
+			
+			wp.data.dispatch('core/notices').createNotice(
+				'error', // Can be one of: success, info, warning, error.
+				WPGlobusGutenberg.i18n.elementorWarning, // Text string to display.
+				{
+					id: 'elementorcssprintmethodnotice', // Assigning an ID prevents the notice from being added repeatedly.
+					isDismissible: true, // Whether the user can dismiss the notice.
+					actions: [
+						// Any actions the user can perform.
+						{
+							url: WPGlobusGutenberg.i18n.elementorActionLink,
+							label: WPGlobusGutenberg.i18n.elementorActionLabel
+						}
+					]
+				}
+			);			
 		},
 		setTabs: function() {
 			if ( WPGlobusGutenberg.tabs.length == 0 ) {
