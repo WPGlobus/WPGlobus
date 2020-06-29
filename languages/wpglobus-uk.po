@@ -324,7 +324,7 @@ msgid "Save &amp; Reload"
 msgstr "Зберегти та перезавантажити"
 
 #: includes/admin/class-wpglobus-customize-options.php:553,
-#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:538,
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:569,
 #: includes/class-wpglobus.php:1235, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -932,6 +932,16 @@ msgid ""
 msgstr ""
 "Опублікуйте або збережіть чернетку перед перемиканням на іншу мову. Потім "
 "перезавантажте сторінку."
+
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:438
+msgid ""
+"WPGlobus provides multilingual support for Elementor only when the option "
+"`CSS Print Method` is set to `External File`."
+msgstr ""
+
+#: includes/builders/gutenberg/class-wpglobus-gutenberg.php:439
+msgid "Open Elementor Settings page"
+msgstr ""
 
 #: includes/class-wpglobus-widget.php:27
 msgid "WPGlobus widget"

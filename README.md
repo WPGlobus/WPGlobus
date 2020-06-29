@@ -295,6 +295,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.11 ###
+
+* (Block Editor) Initializing to work with Elementor.
+
 ### 2.4.10 ###
 
 * (Core/Filters) Prevent handling of incorrect widget instance's settings.
@@ -320,34 +324,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.
 * (Vendor/Yoast) Added JS script for dashboard.
-
-### 2.4.4 ###
-
-* (Builders/RankMathSEO) Added filters for title and description on frontend.
-
-### 2.4.3 ###
-
-* (Builders/RankMathSEO) Added `WordPress SEO Plugin – Rank Math` support (Beta stage).
-* (Core/Plugin Install) Added info box before add-ons list.
-
-### 2.4.2 ###
-
-* (Vendor/Yoast) Support multilingual breadcrumbs for posts, pages, and taxonomies.
-* (Core/Plugin Install) Added status `"available"` for the premium add-ons.
-
-### 2.4.1 ###
-
-* (Vendor/Yoast) Set support for minimum version Yoast SEO Premium v12.
-
-### 2.4.0 ###
-
-* (Vendor/Yoast) Added support Yoast SEO from v.14.
-* (Core) Code clean-up.
-* (Core) Interface improvements on the `post.php` page.
-* (Core/Builder) Interface improvements on the `post.php` page.
-* (Core/AdminPost) Localized the `Preview Changes` link.
-* (Core/Meta) Removed caching meta data.
-* (Builders/Gutenberg) Prevent multiple clicking on language switcher.
 
 ### Earlier versions and Add-ons ###
 
