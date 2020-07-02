@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2020-07-02 - version 2.4.12
-* (Core/Class WPGlobus) Added `do_action` to add to the publish metabox.
-* (Builder/Elementor) Disable Elementor's support for post, that doesn't use Elementor builder.
+* (Core/Class WPGlobus) Added `do_action` to add to the `publish` metabox.
+* (Builder/Elementor) Disable Elementor's support for posts that don't use Elementor builder.
 
 2020-06-22 - version 2.4.11
 * (Block Editor) Initializing to work with Elementor.

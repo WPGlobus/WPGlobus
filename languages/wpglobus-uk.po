@@ -325,7 +325,7 @@ msgstr "Зберегти та перезавантажити"
 
 #: includes/admin/class-wpglobus-customize-options.php:553,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:569,
-#: includes/class-wpglobus.php:1235, wpglobus.php:12, wpglobus.php:18
+#: includes/class-wpglobus.php:1277, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -885,7 +885,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr "Для перекладу посилань необхідно активувати модуль URL."
 
 #: includes/builders/class-wpglobus-builder.php:278,
-#: includes/class-wpglobus.php:3508
+#: includes/class-wpglobus.php:3550
 msgid "Save draft before using extra language."
 msgstr "Збережіть чернетку перед перемиканням на іншу мову."
 
@@ -897,15 +897,43 @@ msgstr "Конструктор"
 msgid "Сompatibility Settings"
 msgstr "Cумісність"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:332
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#: includes/builders/elementor/class-wpglobus-elementor.php:250,
+#: includes/class-wpglobus.php:1251
+msgid "OFF"
+msgstr "ВИМК"
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:251,
+#: includes/class-wpglobus.php:1252
+msgid "Turn on"
+msgstr "Увімкнути"
+
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#: includes/builders/elementor/class-wpglobus-elementor.php:255,
+#: includes/class-wpglobus.php:1256
+msgid "ON"
+msgstr "УВІМК"
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:256,
+#: includes/class-wpglobus.php:1257
+msgid "Turn off"
+msgstr "Вимкнути"
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:281
+msgid "Elementor"
+msgstr ""
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:508
 msgid "WPGlobus languages"
 msgstr "Мови WPGlobus"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:338
+#: includes/builders/elementor/class-wpglobus-elementor.php:514
 msgid "current"
 msgstr "поточний"
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:473
+#: includes/builders/elementor/class-wpglobus-elementor.php:671
 msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "%1$s%2$s%3$s is set to %4$s."
@@ -983,43 +1011,25 @@ msgstr "Випадаюче  меню з прапорами"
 msgid "Selector type"
 msgstr "Спосіб выбору мови"
 
-#. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1209
-msgid "OFF"
-msgstr "ВИМК"
-
-#: includes/class-wpglobus.php:1210
-msgid "Turn on"
-msgstr "Увімкнути"
-
-#. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/class-wpglobus.php:1214
-msgid "ON"
-msgstr "УВІМК"
-
-#: includes/class-wpglobus.php:1215
-msgid "Turn off"
-msgstr "Вимкнути"
-
-#: includes/class-wpglobus.php:1398
+#: includes/class-wpglobus.php:1440
 msgid "You cannot disable the main language."
 msgstr "Неможна відключити головну мову."
 
-#: includes/class-wpglobus.php:1606
+#: includes/class-wpglobus.php:1648
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно після збереження меню."
 
-#: includes/class-wpglobus.php:1623
+#: includes/class-wpglobus.php:1665
 msgid "Need a multilingual slug?"
 msgstr "Потрібен багатомовний ярлик?"
 
-#: includes/class-wpglobus.php:3956
+#: includes/class-wpglobus.php:3998
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Щоб використовувати плагін WPGlobus, необхідно увімкнути SEF URLs - постійні "
 "посилання."
 
-#: includes/class-wpglobus.php:3958
+#: includes/class-wpglobus.php:4000
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
