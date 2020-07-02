@@ -407,6 +407,15 @@ class WPGlobus {
 				'on_add_devmode_switcher',
 			) );
 
+			/**
+			 * @since 2.4.12
+			 * @see   'post_submitbox_misc_actions'
+			 */
+			add_action( 'post_submitbox_misc_actions', array(
+				$this,
+				'on__add_actions',
+			) );
+
 			if ( self::Config()->toggle == 'on' || ! $this->user_can( 'wpglobus_toggle' ) ) {
 
 				global $pagenow;
@@ -1161,6 +1170,39 @@ class WPGlobus {
 		return in_array( $role, $current_user->roles );
 	}
 
+	/**
+	 * Add any action to the publish metabox.
+	 *
+	 * @since 2.4.12
+	 *
+	 * @return void	
+	 */
+	public function on__add_actions() {
+
+		if ( 'off' == WPGlobus::Config()->toggle ) {
+			return;
+		}
+
+		global $post, $pagenow;
+
+		if ( 'post.php' != $pagenow ) {
+			return;
+		}
+
+		if ( $this->disabled_entity( $post->post_type ) ) {
+			return;
+		}
+		
+		/**
+		 * Add switcher to the publish metabox.
+		 *
+		 * @since 2.4.12
+		 *
+		 * @param WP_Post $post The post that is being edited.
+		 */
+		do_action( 'wpglobus_submitbox_action', $post );
+	}
+	
 	/**
 	 * Add switcher to publish metabox.
 	 *
