@@ -279,6 +279,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'language'     => '',
 				'message'      => '',
 				'ajax_actions' => '',
+				'builder_support' => true, // @since 2.4.12
 			);
 
 			self::$admin_attrs = array(
@@ -344,6 +345,8 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				}
 
 				/**
+				 * Elementor.
+				 *
 				 * @since 1.9.17
 				 */
 				if ( ! $builder || ! $builder['builder_page'] ) {
@@ -472,6 +475,12 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 					 */
 					$post_id = '';
 
+					/**
+					 * Init `builder_support`.
+					 * @since 2.4.12
+					 */
+					$builder_support = true;
+
 					$ajax_actions = '';
 					$is_admin     = true;
 
@@ -505,8 +514,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						// @W.I.P @since 2.2.11
 						// [REQUEST_URI] => /?p=75&elementor-preview=75&ver=1561202861
 
-						$load_elementor = false;
-						$is_admin       = false;
+						$load_elementor  = false;
+						$is_admin        = false;
+						$builder_support = null; // @since 2.4.12
 						
 						/**
 						 * @todo Preview page for draft status.
@@ -523,7 +533,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 							
 						}
 						// */
-
+					
 					} elseif ( 'post.php' === $pagenow ) {
 
 						$is_admin = true;
@@ -557,7 +567,14 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 								$post_type = self::get_post_type( $_REQUEST['post_ID'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
 							}
 						}
-
+						
+						/**
+						 * @since 2.4.12
+						 */
+						if ( isset( $_GET['post'] ) ) {
+							$post_id = sanitize_text_field( $_GET['post'] );
+						}
+						
 						// if ( empty( $post_type ) ) {
 						/**
 						 * Post type by default.
@@ -570,6 +587,33 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						if ( in_array( $post_type, $cpt_support, true ) ) {
 							$load_elementor = true;
 						}
+						
+						/**
+						 * @since 2.4.12
+						 */
+						if ( $load_elementor ) {
+
+							if ( ! empty($post_id) && (int) $post_id > 0 ) {
+								
+								$wpglobus_elementor_support = get_post_meta( $post_id, '_wpglobus_elementor_support', true );
+								if ( 'off' === $wpglobus_elementor_support ) {
+									$builder_support = false;
+								}
+								
+								if ( $builder_support ) {
+		
+									$elementor_edit_mode = get_post_meta( $post_id, '_elementor_edit_mode', true );
+
+									if ( 'builder' !== $elementor_edit_mode ) {
+										/**
+										 * Disable elementor support for post, that doesn't use elementor builder.
+										 */
+										$builder_support = false;
+									}										
+								}
+							}
+						}							
+						
 					} else {
 						/**
 						 * @todo may be use @see is_built_with_elementor() in elementor\core\base\document.php
@@ -587,9 +631,11 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						'builder_page'            => false,
 						'ajax_actions'            => $ajax_actions,
 						'post_css_meta_key'       => '_wpglobus_elementor_css',
+						'post_support_meta_key'   => '_wpglobus_elementor_support', // @since 2.4.12
 						'elementor_data_meta_key' => '_elementor_data',
 						'elementor_css_meta_key'  => '_elementor_css',
-						'elementor_css_print_method' => get_option('elementor_css_print_method', 'external'), // @since 2.2.31
+						'elementor_edit_mode_meta_key' => '_elementor_edit_mode', // @since 2.4.12
+						'elementor_css_print_method'   => get_option('elementor_css_print_method', 'external'), // @since 2.2.31
 					);
 
 					if ( $load_elementor ) {
@@ -598,15 +644,18 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 						$_attrs['builder_page'] = false;
 					}
 
+					/**
+					 * @since 2.4.12
+					 */
+					$_attrs['builder_support'] = $builder_support;
+
 					$attrs = self::get_attrs( $_attrs );
 
 					return $attrs;
-
 				}
 			}
 
 			return false;
-
 		}
 
 		/**
@@ -1574,3 +1623,5 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 	}	
 
 endif;
+
+# --- EOF

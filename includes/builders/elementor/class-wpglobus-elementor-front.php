@@ -33,7 +33,22 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 		/**
 		 * @since 2.1.15
 		 */
-		protected static $elementor_css_meta_key = null;	
+		protected static $elementor_css_meta_key = null;
+
+		/**
+		 * @since 2.4.12
+	     */			
+		protected static $elementor_edit_mode_meta_key = null;	
+
+		/**
+		 * @since 2.4.12
+	     */			
+		protected static $post_elementor_support_meta_key = null;
+		
+		/**
+		 * @since 2.4.12
+	     */	
+		protected static $post_elementor_support = null;	
 		
 		/**
 		 * Init.
@@ -50,6 +65,20 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 
 			if ( ! empty($attrs['elementor_css_meta_key']) ) {
 				self::$elementor_css_meta_key = $attrs['elementor_css_meta_key'];
+			}
+
+			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! empty($attrs['elementor_edit_mode_meta_key']) ) {
+				self::$elementor_edit_mode_meta_key = $attrs['elementor_edit_mode_meta_key'];
+			}
+			
+			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! empty($attrs['post_support_meta_key']) ) {
+				self::$post_elementor_support_meta_key = $attrs['post_support_meta_key'];
 			}
 			
 			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_metadata' ), 5, 4 );
@@ -87,6 +116,59 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			 * @since 2.3.6
 			 */
 			add_filter( 'wpglobus_plus_publish_template_include_handler', array( __CLASS__, 'filter__template_include_handler' ) );
+
+			/**
+			 * @since 2.4.12
+			 */				
+			add_action( 'template_include', array( __CLASS__, 'on__template_include' ) );
+		}
+
+		/**
+		 * @since 2.4.12
+		 */		
+		public static function is_builder_support() {
+			if ( is_null( self::$post_elementor_support ) || self::$post_elementor_support ) {
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * @since 2.4.12
+		 */			
+		public static function on__template_include( $template ) {
+			
+			if ( ! is_single() ) {
+				return $template;
+			}
+			
+			if ( is_null( self::$post_elementor_support ) ) { 
+
+				/** @global WP_Post $post */
+				global $post;
+													
+				$_support = get_post_meta( $post->ID, self::$post_elementor_support_meta_key, true );
+				
+				if ( 'off' === $_support ) {
+					self::$post_elementor_support = false;
+				} else {
+					self::$post_elementor_support = true;
+				}
+				
+				if ( self::$post_elementor_support ) {
+					
+					$_support = get_post_meta( $post->ID, self::$elementor_edit_mode_meta_key, true );
+					
+					if ( 'builder' !== $_support ) {
+						/**
+						 * Disable elementor support for post, that doesn't use elementor builder.
+						 */
+						self::$post_elementor_support = false;
+					}		
+				}
+			}	
+			
+			return $template;
 		}
 		
 		/**
@@ -95,6 +177,13 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 		public static function on__enqueue_styles() {
 
 			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return;
+			}
+
+			/**
+			 * @since 2.4.12
+			 */			
+			if ( ! self::is_builder_support() ) {
 				return;
 			}
 			
@@ -136,6 +225,13 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			}
 			
 			if ( false === strpos( $file_name, self::$file_prefix ) ) {
+				return $file_name;
+			}
+
+			/**
+			 * @since 2.4.12
+			 */				
+			if ( ! self::is_builder_support() ) {
 				return $file_name;
 			}
 			
@@ -339,6 +435,14 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 		 * @since 2.3.6
 		 */	
 		public static function filter__template_include_handler($handler) {
+			
+			/**
+			 * @W.I.P @since 2.4.12 Do we need to check is_builder_support?
+			 */			
+			//if ( ! self::is_builder_support() ) {
+				//return $handler;
+			//}
+			
 			/**
 			 * Don't fire `template_include` filter with active Elementor
 			 * to prevent `The preview could not be loaded` for language in draft status.
@@ -351,3 +455,5 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 	} // end class WPGlobus_Elementor_Front.
 
 endif;
+
+# --- EOF

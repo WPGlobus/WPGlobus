@@ -3,6 +3,8 @@
  * File: class-wpglobus-elementor.php
  *
  * @since 2.2.31 We are providing support for `External File` only. @see elementor\core\files\css\base.php::use_external_file().
+ * @since 2.4.12 Disable elementor support for post, that doesn't use elementor builder. 
+				 Add submit box switcher to ON/OFF elementor's support.
  * 
  * @package WPGlobus\Builders\Elementor
  * @author  Alex Gor(alexgff)
@@ -31,7 +33,27 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		/**
 		 * @since 2.1.15
 		 */
-		protected static $elementor_data_meta_key = null;		
+		protected static $elementor_data_meta_key = null;	
+
+		/**
+		 * @since 2.4.12
+		 */			
+		protected static $elementor_edit_mode_meta_key = null;		
+
+		/**
+		 * @since 2.4.12
+		 */		
+		protected static $post_elementor_support_meta_key = null;
+		
+		/**
+		 * @since 2.4.12
+		 */			
+		protected static $post_elementor_support_get_key = 'wpglobus-elementor-support';
+		
+		/**
+		 * @since 2.4.12
+		 */			
+		protected static $post_elementor_support = null;
 		
 		/**
 		 * Constructor.
@@ -45,10 +67,26 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				self::$post_css_meta_key = $_post_css_meta_key;
 			}
 	
+			/**
+			 * @since 2.4.12
+			 */
+			$_post_support_meta_key = WPGlobus::Config()->builder->get('post_support_meta_key');
+			if ( ! empty( $_post_support_meta_key ) ) {
+				self::$post_elementor_support_meta_key = $_post_support_meta_key;
+			}	
+	
 			$_elementor_data_meta_key = WPGlobus::Config()->builder->get('elementor_data_meta_key');
 			if ( ! empty( $_elementor_data_meta_key ) ) {
 				self::$elementor_data_meta_key = $_elementor_data_meta_key;
 			}
+
+			/**
+			 * @since 2.4.12
+			 */
+			$_elementor_edit_mode_meta_key = WPGlobus::Config()->builder->get('elementor_edit_mode_meta_key');
+			if ( ! empty( $_elementor_edit_mode_meta_key ) ) {
+				self::$elementor_edit_mode_meta_key = $_elementor_edit_mode_meta_key;
+			}	
 	
 			if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
 				/**
@@ -62,6 +100,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 					}
 				}
 			}
+
+			/**
+			 * @see wpglobus\includes\class-wpglobus.php
+			 *
+			 * @since 2.4.12
+			 */
+			add_action( 'wpglobus_submitbox_action', array( $this, 'on__submitbox_switcher' ) );
 
 			/**
 			 * @see_file  wpglobus\includes\class-wpglobus.php
@@ -157,11 +202,122 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				 * @see_file elementor\includes\editor.php
 				 */
 				add_filter( 'elementor/editor/localize_settings', array( $this, 'filter__localize_settings' ), 5, 2 );
-
 			}
 
 		}
 
+		/**
+		 * @since 2.4.12
+		 */
+		public function on__submitbox_switcher( $post ) {
+
+			if ( ! $post instanceof WP_Post ) {
+				return;
+			}
+
+			if ( 'builder' !== get_post_meta( $post->ID, $this->get_elementor_edit_mode_meta_key(), true ) ) {
+				/**
+				 * Disable elementor support for post, that doesn't use elementor builder.
+				 */
+				self::$post_elementor_support = false;
+				return;
+			}
+
+			if ( ! empty( $_GET[ self::$post_elementor_support_get_key ] ) ) {
+				$current_mode = sanitize_text_field( $_GET[ self::$post_elementor_support_get_key ] );
+				if ( in_array( $current_mode, array('on', 'off') ) ) {
+					update_post_meta( $post->ID, self::$post_elementor_support_meta_key, $current_mode );
+				}
+			}
+
+			$elementor_support = get_post_meta( $post->ID, self::$post_elementor_support_meta_key, true );
+			
+			if ( 'off' === $elementor_support ) {
+				self::$post_elementor_support = false;
+			} else {
+				$elementor_support = 'on';
+				self::$post_elementor_support = true;
+			}
+
+			// "Reverse" logic here. It's the mode to turn to, not the current one.
+			$switch_to_mode = 'off';
+			if ( 'off' === $elementor_support ) {
+				$switch_to_mode = 'on';
+			}
+	
+			if ( 'off' === $elementor_support ) {
+				// Translators: ON/OFF status of WPGlobus on the edit pages.
+				$status_text     = __( 'OFF', 'wpglobus' );
+				$toggle_text     = __( 'Turn on', 'wpglobus' );
+				$highlight_class = 'wp-ui-text-notification';
+			} else {
+				// Translators: ON/OFF status of WPGlobus on the edit pages.
+				$status_text     = __( 'ON', 'wpglobus' );
+				$toggle_text     = __( 'Turn off', 'wpglobus' );
+				$highlight_class = 'wp-ui-text-highlight';
+			}
+			
+			$query_string = explode( '&', $_SERVER['QUERY_STRING'] );
+
+			foreach ( $query_string as $key => $_q ) {
+				if ( false !== strpos( $_q, 'wpglobus=' ) ) {
+					unset( $query_string[ $key ] );
+				}
+			}
+
+			$query = implode( '&', $query_string );
+
+			$url = admin_url(
+				add_query_arg(
+					array( self::$post_elementor_support_get_key => $switch_to_mode ),
+					'post.php?' . $query
+				)
+			);
+
+			?>
+			<div class="misc-pub-section wpglobus-elementor-support-switch">
+				<span id="wpglobus-elementor-support-raw" style="margin-right: 2px;"
+						class="dashicons dashicons-admin-site <?php echo esc_attr( $highlight_class ); ?>"></span>
+				<?php esc_html_e( 'Elementor', 'wpglobus' ); ?>:
+				<strong class="<?php echo esc_attr( $highlight_class ); ?>"><?php echo esc_html( $status_text ); ?></strong>
+				<a class="button button-small" style="margin:-3px 0 0 3px;"
+						href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $toggle_text ); ?></a>
+			</div>
+			<?php			
+		}
+
+		/**
+		 * @since 2.4.12
+		 */		
+		public function is_elementor_support() {
+			
+			if ( is_null( self::$post_elementor_support ) ) {
+				
+				global $post;
+				
+				$elementor_support = get_post_meta( $post->ID, self::$post_elementor_support_meta_key, true );
+				
+				if ( 'off' === $elementor_support ) {
+					self::$post_elementor_support = false;
+				} else {
+					self::$post_elementor_support = true;
+				}
+			}
+			
+			if ( self::$post_elementor_support ) {
+				return true;
+			}
+			
+			return false;			
+		}
+	
+		/**
+		 * @since 2.4.12
+		 */
+		public function get_elementor_edit_mode_meta_key() {
+			return self::$elementor_edit_mode_meta_key;		
+		}
+	
 		/**
 		 * Localize editor settings.
 		 *
@@ -180,6 +336,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				return $localized_settings;
 			}
 
+			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! $this->is_elementor_support() ) {
+				return $localized_settings;
+			}
+			
 			/**
 			 * @since 2.2.31
 			 */			
@@ -208,6 +371,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 				return $object;
 			}
 
+			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! $this->is_elementor_support() ) {
+				return $object;
+			}
+
 			if ( is_null( $this->post_content ) ) {
 				$this->post_content = $object->post_content;
 			}
@@ -221,7 +391,6 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			wp_cache_replace( $object->ID, $_post, 'posts' );
 
 			return $object;
-
 		}
 	
 		/**
@@ -312,6 +481,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		public function on__elementor_footer() {
 
 			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! $this->is_elementor_support() ) {
+				return;
+			}
+
+			/**
 			 * @since 2.2.31
 			 */			
 			if ( 'external' != WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
@@ -399,6 +575,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			 */
 			$instance
 		) {
+	
+			/**
+			 * @since 2.4.12
+			 */		
+			if ( ! $this->is_elementor_support() ) {
+				return $url;
+			}
 			
 			if ( 'external' === WPGlobus::Config()->builder->get('elementor_css_print_method') ) {
 				if ( false === strpos( $url, 'language' ) ) {
@@ -434,6 +617,14 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			 */
 			$instance
 		) {
+			
+			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! $this->is_elementor_support() ) {
+				return $url;
+			}			
+			
 			/**
 			 * @since 2.2.31
 			 */					
@@ -454,6 +645,13 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 		public function on__admin_notice() {
 
 			if ( 'post.php' != WPGlobus::Config()->builder->get('pagenow') ) {
+				return;
+			}
+
+			/**
+			 * @since 2.4.12
+			 */	
+			if ( ! $this->is_elementor_support() ) {
 				return;
 			}
 			
@@ -481,3 +679,5 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 	}
 
 endif;
+
+# --- EOF
