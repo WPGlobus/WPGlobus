@@ -295,6 +295,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.13 ###
+
+* (Builder/Elementor) Disable Elementor support for all post types that don't use the Elementor builder.
+
 ### 2.4.12 ###
 
 * (Core/Class WPGlobus) Added `do_action` to add to the `publish` metabox.
@@ -311,24 +315,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 ### 2.4.9 ###
 
 * (Vendor/All In One SEO Pack) Interface improvements on post edit page.
-
-### 2.4.8 ###
-
-* (Core/Clean-Up Tool) Updated description.
-
-### 2.4.7 ###
-
-* (Vendor/Yoast) Added filter of schema generator.
-* (Vendor/Yoast) Updated filter for the post title that has no multilingual value for the frontend.
-
-### 2.4.6 ###
-
-* (Vendor/Yoast) Correct defining post type for frontend.
-
-### 2.4.5 ###
-
-* (Core) Correct setting initial language tab in Standard/Classic mode on the `post.php` page.
-* (Vendor/Yoast) Added JS script for dashboard.
 
 ### Earlier versions and Add-ons ###
 

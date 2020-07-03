@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-07-03 - version 2.4.13
-(Builder/Elementor) Disable Elementor's support for all post types that don't use Elementor builder.
+(Builder/Elementor) Disable Elementor support for all post types that don't use the Elementor builder.
 
 2020-07-02 - version 2.4.12
 * (Core/Class WPGlobus) Added `do_action` to add to the `publish` metabox.
