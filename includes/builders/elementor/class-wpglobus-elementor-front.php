@@ -138,7 +138,7 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 		 */			
 		public static function on__template_include( $template ) {
 			
-			if ( ! is_single() ) {
+			if ( ! is_singular() ) {
 				return $template;
 			}
 			
