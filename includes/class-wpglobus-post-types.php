@@ -77,6 +77,8 @@ class WPGlobus_Post_Types {
 		'et_header_layout',
 		'et_body_layout',
 		'et_footer_layout',
+		// GDPR Cookie Consent: https://wordpress.org/plugins/cookie-law-info/ @since 2.4.14
+		'cookielawinfo',
 	);
 
 	/**
