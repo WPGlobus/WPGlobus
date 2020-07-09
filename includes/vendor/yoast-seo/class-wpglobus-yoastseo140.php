@@ -170,13 +170,6 @@ class WPGlobus_YoastSEO {
 			 * @since 2.4.14
 			 */	
 			add_filter( 'wpseo_schema_webpage', array( __CLASS__, 'filter__wpseo_schema_webpage' ), 5, 2 );
-
-			/**
-			 * Filter `wpseo_titles` option.
-			 * @W.I.P @since 2.4.14
-			 * @see Case when homepage displays latest posts.
-			 */	
-			//add_filter( 'option_wpseo_titles', array( __CLASS__, 'filter__option_wpseo_titles' ), 5, 1 );
 		}
 	}
 	
@@ -1059,6 +1052,7 @@ class WPGlobus_YoastSEO {
 	 * @see "application/ld+json" in html code on front.
 	 *
 	 * @since 2.4.14
+	 * @since 2.4.15 Localize description.
 	 * 
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
@@ -1071,26 +1065,16 @@ class WPGlobus_YoastSEO {
 			$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
 		}
 
+		/**
+		 * @since 2.4.15
+		 */
+		if ( ! empty( $graph_piece['description'] ) && WPGlobus_Core::has_translations( $graph_piece['description'] ) ) {
+			$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
+		}		
+
 		return $graph_piece;
 	}
-	
-	/**
-	 * @W.I.P @since 2.4.14 
-	 */ 
-	public static function filter__option_wpseo_titles( $option_value ) {
-		
-		$keys = array(
-			'metadesc-home-wpseo'
-		);
 
-		foreach( $keys as $key ) {
-			if ( ! empty( $option_value[$key] ) && WPGlobus_Core::has_translations( $option_value[$key] ) ) {
-				$option_value[ $key ] = WPGlobus_Core::extract_text( $option_value[ $key ], WPGlobus::Config()->language );
-			}
-		}
-
-		return $option_value;
-	}
 } // class
 
 # --- EOF
