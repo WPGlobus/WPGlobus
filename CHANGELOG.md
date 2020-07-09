@@ -2,8 +2,14 @@
 
 ## Changelog ##
 
+2020-07-09 - version 2.4.14
+* (Core/Post Types) Added post type of `GDPR Cookie Consent` plugin to the hidden types array.
+* (Vendor/Yoast) Fixed PHP Notice: Trying to get property 'ID' of non-object.
+* (Vendor/Yoast) Revised code of `get_wpseo_meta` function.
+* (Vendor/Yoast) Added filter for changing output of graph `webpage`.
+
 2020-07-03 - version 2.4.13
-(Builder/Elementor) Disable Elementor support for all post types that don't use the Elementor builder.
+* (Builder/Elementor) Disable Elementor support for all post types that don't use the Elementor builder.
 
 2020-07-02 - version 2.4.12
 * (Core/Class WPGlobus) Added `do_action` to add to the `publish` metabox.
