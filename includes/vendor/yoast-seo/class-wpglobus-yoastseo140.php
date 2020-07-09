@@ -155,16 +155,22 @@ class WPGlobus_YoastSEO {
 			
 			/**
 			 * Filter meta keywords.
-			 * @from 1.8.8
+			 * @since 1.8.8
 			 */
 			add_filter( 'wpseo_metakeywords', array( __CLASS__, 'filter__metakeywords' ), 0 );
 
 			/**
 			 * Filter schema generator.
-			 * @from 2.4.7
+			 * @since 2.4.7
 			 */			
 			add_filter( 'wpseo_schema_breadcrumb', array( __CLASS__, 'filter__wpseo_schema_breadcrumb' ), 5, 2 );
 						
+			/**
+			 * Filter `wpseo_titles` option.
+			 * @W.I.P @since 2.4.14
+			 * @see Case when homepage displays latest posts.
+			 */	
+			//add_filter( 'option_wpseo_titles', array( __CLASS__, 'filter__option_wpseo_titles' ), 5, 1 );
 		}
 	}
 	
@@ -207,8 +213,11 @@ class WPGlobus_YoastSEO {
 		
 		/** @global WP_Post $post */
 		global $post;
-		
-		if ( (int) $post->ID > 0 ) {
+	
+		/**
+		 * @since 2.4.14 Fixed PHP Notice: Trying to get property 'ID' of non-object.
+		 */
+		if ( $post instanceof WP_Post && (int) $post->ID > 0 ) {
 			$query = $wpdb->prepare( 
 				"SELECT meta_value FROM {$wpdb->prefix}postmeta AS m WHERE m.post_id = %s AND m.meta_key = %s",
 				$post->ID,
@@ -657,7 +666,8 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @scope both
 	 * @since 2.4
-	 * @since 2.4.6 Separate the defining of post type for frontend and admin.
+	 * @since 2.4.6  Separate the defining of post type for frontend and admin.
+	 * @since 2.4.14 Revised code.
 	 */
 	protected static function get_wpseo_meta() {
 		
@@ -667,43 +677,37 @@ class WPGlobus_YoastSEO {
 		/** @global WP_Post $post */
 		global $post;
 
-		$post_type = 'post';
+		$post_id = false;
 		
-		if ( is_admin() && ! empty( $_GET['post_type'] ) ) {
+		if ( is_admin() ) {
+			
 			/**
 			 * Admin.
 			 */
-			$post_type = sanitize_text_field( $_GET['post_type'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
-		} elseif ( ! empty( $post->post_type ) ) {
-			/**
-			 * Front-end.
-			 */
-			$post_type = $post->post_type;
-		}
+			if ( ! empty( $_GET['post'] ) ) { 
+				$post_id = sanitize_text_field( $_GET['post'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+			}
+			
+		} else {
 
-		$query = false;
+			if ( $post instanceof WP_Post ) {
+				
+				/**
+				 * Front-end.
+				 */
+				$post_id = $post->ID;
+
+			}			
+		}
 		
-		if ( is_admin() ) {
+		if ( $post_id ) {
+			
 			$query = $wpdb->prepare( 
-				"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.post_type = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
-				$post_type,
+				"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.ID = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
+				$post_id,
 				'_yoast_wpseo_metadesc',
 				'_yoast_wpseo_focuskw'
 			);
-		} else {
-			
-			if ( (int) $post->ID > 0 ) {
-				$query = $wpdb->prepare( 
-					"SELECT p.ID, p.post_type, pm.meta_key, pm.meta_value FROM {$wpdb->prefix}posts AS p JOIN {$wpdb->prefix}postmeta AS pm ON p.ID = pm.post_id WHERE p.ID = %s AND p.post_type = %s AND (pm.meta_key = %s OR pm.meta_key = %s)",
-					$post->ID,
-					$post_type,
-					'_yoast_wpseo_metadesc',
-					'_yoast_wpseo_focuskw'
-				);
-			}				
-		}
-		
-		if ( $query ) {
 			
 			$metas = $wpdb->get_results( $query, ARRAY_A  );
 
@@ -714,8 +718,9 @@ class WPGlobus_YoastSEO {
 					}
 					self::$wpseo_meta[ $_meta['meta_key'] ][ $_meta['ID'] ] = $_meta['meta_value'];
 				}
-			}
-			
+			}			
+		} else {
+			// Here we can add code to get meta for multiple posts.
 		}
 	}
 	
@@ -1039,6 +1044,24 @@ class WPGlobus_YoastSEO {
 		}
 		
 		return $graph_piece;		
+	}
+	
+	/**
+	 * @W.I.P @since 2.4.14 
+	 */ 
+	public static function filter__option_wpseo_titles( $option_value ) {
+		
+		$keys = array(
+			'metadesc-home-wpseo'
+		);
+
+		foreach( $keys as $key ) {
+			if ( ! empty( $option_value[$key] ) && WPGlobus_Core::has_translations( $option_value[$key] ) ) {
+				$option_value[ $key ] = WPGlobus_Core::extract_text( $option_value[ $key ], WPGlobus::Config()->language );
+			}
+		}
+
+		return $option_value;
 	}
 } // class
 
