@@ -295,6 +295,14 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.14 ###
+
+* (Core/Post Types) Added post type of `GDPR Cookie Consent` plugin to the hidden types array.
+
+* (Vendor/Yoast) Fixed PHP Notice: Trying to get property 'ID' of non-object.
+* (Vendor/Yoast) Revised code of `get_wpseo_meta` function.
+* (Vendor/Yoast) Added filter for changing output of graph `webpage`.
+
 ### 2.4.13 ###
 
 * (Builder/Elementor) Disable Elementor support for all post types that don't use the Elementor builder.
@@ -303,18 +311,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * (Core/Class WPGlobus) Added `do_action` to add to the `publish` metabox.
 * (Builder/Elementor) Disable Elementor's support for posts that don't use Elementor builder.
-
-### 2.4.11 ###
-
-* (Block Editor) Initializing to work with Elementor.
-
-### 2.4.10 ###
-
-* (Core/Filters) Prevent handling of incorrect widget instance's settings.
-
-### 2.4.9 ###
-
-* (Vendor/All In One SEO Pack) Interface improvements on post edit page.
 
 ### Earlier versions and Add-ons ###
 

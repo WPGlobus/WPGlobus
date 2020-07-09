@@ -35,8 +35,8 @@ msgstr ""
 #: includes/admin/class-wpglobus-about.php:36,
 #: includes/admin/class-wpglobus-admin-menu.php:22,
 #: includes/admin/class-wpglobus-clean.php:606,
-#: includes/admin/class-wpglobus-customize-options.php:1261,
 #: includes/admin/class-wpglobus-customize-options.php:1293,
+#: includes/admin/class-wpglobus-customize-options.php:1261,
 #: includes/admin/helpdesk/wpglobus-admin-helpdesk-page.php:37
 msgid "Add-ons"
 msgstr "Add-ons"
@@ -395,22 +395,22 @@ msgstr ""
 msgid "select navigation menu"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:888,
 #: includes/admin/class-wpglobus-customize-options.php:915,
+#: includes/admin/class-wpglobus-customize-options.php:888,
 #: includes/options/class-wpglobus-options.php:1209
 msgid "Language Selector Menu"
 msgstr "Language Selector Menu"
 
-#: includes/admin/class-wpglobus-customize-options.php:898
-msgid "No menus have been created yet. Create some."
-msgstr ""
-
-#: includes/admin/class-wpglobus-customize-options.php:899,
 #: includes/admin/class-wpglobus-customize-options.php:920,
+#: includes/admin/class-wpglobus-customize-options.php:899,
 #: includes/options/class-wpglobus-options.php:1210
 msgid "Choose the navigation menu where the language selector will be shown"
 msgstr ""
 "Wählen Sie das Navigationsmenü, wo die Sprachwahl angezeigt werden soll."
+
+#: includes/admin/class-wpglobus-customize-options.php:898
+msgid "No menus have been created yet. Create some."
+msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:940,
 #: includes/options/class-wpglobus-options.php:1220
@@ -470,6 +470,22 @@ msgid ""
 "matching language version of the page."
 msgstr ""
 
+#: includes/admin/class-wpglobus-customize-options.php:1214,
+#: includes/admin/class-wpglobus-customize-options.php:1234,
+#: includes/admin/class-wpglobus-customize-options.php:1192,
+#: includes/options/class-wpglobus-options.php:1347
+msgid "Custom JS Code"
+msgstr ""
+
+#: includes/admin/class-wpglobus-customize-options.php:1232,
+#: includes/admin/class-wpglobus-customize-options.php:1276
+msgid "Title"
+msgstr "Titel"
+
+#: includes/admin/class-wpglobus-customize-options.php:1235
+msgid "(Paste your JS code here.)"
+msgstr ""
+
 #: includes/admin/class-wpglobus-customize-options.php:1184
 msgid ""
 "To add a Custom JS Code in Customizer, you need to upgrade WordPress to "
@@ -482,22 +498,6 @@ msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1188
 msgid "WPGlobus Settings page"
-msgstr ""
-
-#: includes/admin/class-wpglobus-customize-options.php:1192,
-#: includes/admin/class-wpglobus-customize-options.php:1214,
-#: includes/admin/class-wpglobus-customize-options.php:1234,
-#: includes/options/class-wpglobus-options.php:1347
-msgid "Custom JS Code"
-msgstr ""
-
-#: includes/admin/class-wpglobus-customize-options.php:1232,
-#: includes/admin/class-wpglobus-customize-options.php:1276
-msgid "Title"
-msgstr "Titel"
-
-#: includes/admin/class-wpglobus-customize-options.php:1235
-msgid "(Paste your JS code here.)"
 msgstr ""
 
 #: includes/admin/class-wpglobus-customize-options.php:1277
@@ -605,8 +605,8 @@ msgstr ""
 msgid "WPGlobus News"
 msgstr "WPGlobus-Nachrichten"
 
-#: includes/admin/class-wpglobus-language-edit.php:192,
-#: includes/admin/class-wpglobus-language-edit.php:197
+#: includes/admin/class-wpglobus-language-edit.php:197,
+#: includes/admin/class-wpglobus-language-edit.php:192
 msgid "Options updated"
 msgstr "Optionen aktualisiert"
 
@@ -634,19 +634,19 @@ msgstr "Bitte geben Sie die Sprache in Englischer Bezeichnung an!"
 msgid "Please enter the locale!"
 msgstr "Bitte geben Sie die sogenannte Locale an!"
 
-#: includes/admin/class-wpglobus-language-edit.php:349
-msgid "Edit Language"
-msgstr "Sprache ändern"
-
-#: includes/admin/class-wpglobus-language-edit.php:351,
-#: includes/admin/class-wpglobus-language-edit.php:455,
-#: includes/admin/class-wpglobus-language-edit.php:462
-msgid "Delete Language"
-msgstr "Sprache löschen"
-
 #: includes/admin/class-wpglobus-language-edit.php:354
 msgid "Add Language"
 msgstr "Sprache hinzufügen"
+
+#: includes/admin/class-wpglobus-language-edit.php:351,
+#: includes/admin/class-wpglobus-language-edit.php:462,
+#: includes/admin/class-wpglobus-language-edit.php:455
+msgid "Delete Language"
+msgstr "Sprache löschen"
+
+#: includes/admin/class-wpglobus-language-edit.php:349
+msgid "Edit Language"
+msgstr "Sprache ändern"
 
 #: includes/admin/class-wpglobus-language-edit.php:384
 msgid "Language Code"
@@ -691,13 +691,13 @@ msgstr "Lokale"
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
 msgstr "PHP/Wordpress Gebietsschema der Sprache. (Beispiele: en_US, de_DE)"
 
-#: includes/admin/class-wpglobus-language-edit.php:447
-msgid "Save Changes"
-msgstr "Änderungen speichern"
-
 #: includes/admin/class-wpglobus-language-edit.php:460
 msgid "Are you sure you want to delete?"
 msgstr "Sind Sie sicher, dass Sie die Lösch-Aktion durchführen möchten?"
+
+#: includes/admin/class-wpglobus-language-edit.php:447
+msgid "Save Changes"
+msgstr "Änderungen speichern"
 
 #: includes/admin/class-wpglobus-language-edit.php:470
 msgid "Back to the WPGlobus Settings"
@@ -834,12 +834,12 @@ msgstr ""
 msgid "Check it out:"
 msgstr ""
 
-#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:183
-msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
-msgstr ""
-
 #: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:195
 msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+#: includes/admin/recommendations/class-wpglobus-admin-recommendations.php:183
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:278,
@@ -857,18 +857,6 @@ msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/builders/elementor/class-wpglobus-elementor.php:250,
-#: includes/class-wpglobus.php:1251
-msgid "OFF"
-msgstr ""
-
-#: includes/builders/elementor/class-wpglobus-elementor.php:251,
-#: includes/class-wpglobus.php:1252
-msgid "Turn on"
-msgstr ""
-
-#. translators: ON/OFF status of WPGlobus on the edit pages.
-#. translators: ON/OFF status of WPGlobus on the edit pages.
 #: includes/builders/elementor/class-wpglobus-elementor.php:255,
 #: includes/class-wpglobus.php:1256
 msgid "ON"
@@ -877,6 +865,16 @@ msgstr ""
 #: includes/builders/elementor/class-wpglobus-elementor.php:256,
 #: includes/class-wpglobus.php:1257
 msgid "Turn off"
+msgstr ""
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:250,
+#: includes/class-wpglobus.php:1251
+msgid "OFF"
+msgstr ""
+
+#: includes/builders/elementor/class-wpglobus-elementor.php:251,
+#: includes/class-wpglobus.php:1252
+msgid "Turn on"
 msgstr ""
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:281
@@ -971,13 +969,13 @@ msgstr "Selektor-Typ"
 msgid "You cannot disable the main language."
 msgstr "Die Hauptsprache kann nicht deaktiviert werden."
 
-#: includes/class-wpglobus.php:1648
-msgid "*) Available after the menu is saved."
-msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
-
 #: includes/class-wpglobus.php:1665
 msgid "Need a multilingual slug?"
 msgstr ""
+
+#: includes/class-wpglobus.php:1648
+msgid "*) Available after the menu is saved."
+msgstr "*) Verfügbar nachdem das Menü gespeichert wurde."
 
 #: includes/class-wpglobus.php:3998
 msgid "You must enable Pretty Permalinks to use WPGlobus."
@@ -1448,12 +1446,12 @@ msgstr "Keine Einträge gefunden"
 msgid "Add new Language"
 msgstr "Fügen Sie neue Sprache hinzu"
 
-#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:107
-msgid "Select an item"
-msgstr ""
-
 #: includes/options/fields/wpglobus_select/field_wpglobus_select.php:164
 msgid "No items of this type were found."
+msgstr ""
+
+#: includes/options/fields/wpglobus_select/field_wpglobus_select.php:107
+msgid "Select an item"
 msgstr ""
 
 #: includes/options/templates/compatibility-beta.php:15
@@ -1466,6 +1464,10 @@ msgstr ""
 
 #: includes/options/templates/compatibility-beta.php:23
 msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
+msgstr ""
+
+#: includes/options/templates/compatibility.php:69
+msgid "WordPress version"
 msgstr ""
 
 #: includes/options/templates/compatibility.php:44
@@ -1499,10 +1501,6 @@ msgstr ""
 msgid "production"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:69
-msgid "WordPress version"
-msgstr ""
-
 #: includes/options/templates/compatibility.php:73
 msgid "List of supported add-ons"
 msgstr ""
@@ -1515,17 +1513,17 @@ msgstr ""
 msgid "Supported minimum version"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:100
-msgid "Active"
-msgstr "Aktiv"
+#: includes/options/templates/compatibility.php:105
+msgid "Not installed"
+msgstr ""
 
 #: includes/options/templates/compatibility.php:102
 msgid "Installed, inactive"
 msgstr ""
 
-#: includes/options/templates/compatibility.php:105
-msgid "Not installed"
-msgstr ""
+#: includes/options/templates/compatibility.php:100
+msgid "Active"
+msgstr "Aktiv"
 
 #: includes/options/templates/customize-intro.php:35
 msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
@@ -1569,12 +1567,12 @@ msgstr ""
 msgid "Go to Customizer"
 msgstr ""
 
-#: includes/options/templates/customize-intro.php:85
-msgid "is set to"
-msgstr ""
-
 #: includes/options/templates/customize-intro.php:88
 msgid "is undefined"
+msgstr ""
+
+#: includes/options/templates/customize-intro.php:85
+msgid "is set to"
 msgstr ""
 
 #: includes/options/templates/customize-intro.php:94
@@ -1615,17 +1613,17 @@ msgstr ""
 msgid "Get WPGlobus Plus now!"
 msgstr "Jetzt zu WPGlobus Plus wechseln!"
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:752
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:763
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:753
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:764
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:756
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:767
 msgid "WPGlobus warning: "
 msgstr ""
 
