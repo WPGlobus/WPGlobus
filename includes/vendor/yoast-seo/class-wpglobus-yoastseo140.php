@@ -160,11 +160,17 @@ class WPGlobus_YoastSEO {
 			add_filter( 'wpseo_metakeywords', array( __CLASS__, 'filter__metakeywords' ), 0 );
 
 			/**
-			 * Filter schema generator.
+			 * Filter `wpseo_schema_breadcrumb` generator.
 			 * @since 2.4.7
 			 */			
 			add_filter( 'wpseo_schema_breadcrumb', array( __CLASS__, 'filter__wpseo_schema_breadcrumb' ), 5, 2 );
-						
+
+			/**
+			 * Filter `wpseo_schema_webpage` generator.
+			 * @since 2.4.14
+			 */	
+			add_filter( 'wpseo_schema_webpage', array( __CLASS__, 'filter__wpseo_schema_webpage' ), 5, 2 );
+
 			/**
 			 * Filter `wpseo_titles` option.
 			 * @W.I.P @since 2.4.14
@@ -1027,7 +1033,7 @@ class WPGlobus_YoastSEO {
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
 	 * @param Meta_Tags_Context $context A value object with context variables.
-	 * @return string
+	 * @return array
 	 */
 	public static function filter__wpseo_schema_breadcrumb( $graph_piece, $context ) {
 
@@ -1044,6 +1050,28 @@ class WPGlobus_YoastSEO {
 		}
 		
 		return $graph_piece;		
+	}
+	
+	/**
+	 * Filter allows changing output of graph `webpage`.
+	 *
+	 * @see wordpress-seo\src\generators\schema-generator.php
+	 * @see "application/ld+json" in html code on front.
+	 *
+	 * @since 2.4.14
+	 * 
+	 * @scope front
+	 * @param array $graph_piece		 Array of graph piece.
+	 * @param Meta_Tags_Context $context A value object with context variables.
+	 * @return array	 
+	 */ 	
+	public static function filter__wpseo_schema_webpage( $graph_piece, $context ) {
+		
+		if ( ! empty( $graph_piece['name'] ) && WPGlobus_Core::has_translations( $graph_piece['name'] ) ) {
+			$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
+		}
+
+		return $graph_piece;
 	}
 	
 	/**
