@@ -451,7 +451,7 @@ class WPGlobus_Language_Edit {
 						?>
 
 						<a class="button button-link-delete" style="margin-left: 1em" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_delete( $this->language_code ) ); ?>">
-							<i class="dashicons dashicons-trash" style="line-height: inherit;"></i>
+							<i class="dashicons dashicons-trash" style="margin-top: 4px;"></i>
 							<?php esc_html_e( 'Delete Language', 'wpglobus' ); ?>&hellip;</a>
 						<?php
 					}
