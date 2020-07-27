@@ -4,7 +4,7 @@
 
 2020-07-26 - version 2.4.15
 * (Core/Options) Options Panel: CSS tweaks.
-* (Vendor/Yoast) Added filter for changing output of description for graph `webpage`.
+* (Vendor/Yoast) Added filter for changing the output of description for graph `webpage`.
 * (Core/Post Types) Added post types of `Advanced Post List` plugin to the hidden types array.
 
 2020-07-09 - version 2.4.14

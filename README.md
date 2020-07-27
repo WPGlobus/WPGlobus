@@ -295,6 +295,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.15 ###
+
+
+* (Core/Options) Options Panel: CSS tweaks.
+* (Vendor/Yoast) Added filter for changing the output of description for graph `webpage`.
+* (Core/Post Types) Added post types of `Advanced Post List` plugin to the hidden types array.
+
 ### 2.4.14 ###
 
 * (Core/Post Types) Added post type of `GDPR Cookie Consent` plugin to the hidden types array.

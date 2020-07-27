@@ -975,8 +975,8 @@ msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "`CSS Print Method` is set to `External File`."
 msgstr ""
-"WPGlobus обеспечивает мультиязычную поддержку Elementor только если "
-"`CSS Print Method` установлен в `External File`."
+"WPGlobus обеспечивает мультиязычную поддержку Elementor только если `CSS "
+"Print Method` установлен в `External File`."
 
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:439
 msgid "Open Elementor Settings page"
@@ -1719,7 +1719,7 @@ msgstr ""
 msgid "Get WPGlobus Plus now!"
 msgstr "Установите WPGlobus Плюс прямо сейчас!"
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:763
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:756
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
@@ -1727,12 +1727,12 @@ msgstr ""
 "Текущая версия не поддерживает возможность массового редактирования "
 "многоязычных заголовков и описаний."
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:764
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:757
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
 "Поэтому не рекомендуем использовать этот режим во избежание потери данных."
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:767
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:760
 msgid "WPGlobus warning: "
 msgstr "Предупреждение WPGlobus: "
 

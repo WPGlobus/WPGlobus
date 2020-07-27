@@ -1600,17 +1600,17 @@ msgstr ""
 msgid "Get WPGlobus Plus now!"
 msgstr "WPGlobus Plus' ı şimdi edinin!"
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:763
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:756
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:764
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:757
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:767
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:760
 msgid "WPGlobus warning: "
 msgstr ""
 
