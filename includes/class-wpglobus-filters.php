@@ -34,6 +34,24 @@ class WPGlobus_Filters {
 	}
 
 	/**
+	 * This is the alternate filter used to extract the text portion in the current language from a string.
+	 *
+	 * @since 2.4.16
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public static function filter__extract_text( $text ) {
+	
+		return WPGlobus_Core::extract_text(
+			$text,
+			WPGlobus::Config()->language
+		);
+
+	}
+
+	/**
 	 * This filter is needed to display correctly the posts with the '--- MORE ---' separator
 	 * in archives.
 	 * Without it, the post content is truncated at the beginning of <!--more-->, thus keeping
@@ -1265,3 +1283,5 @@ class WPGlobus_Filters {
 	}
 
 }
+
+# --- EOF

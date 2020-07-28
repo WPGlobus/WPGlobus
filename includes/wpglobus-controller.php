@@ -529,4 +529,22 @@ if ( defined('RANK_MATH_VERSION') ) {
 	}
 }
 
-/*EOF*/
+if ( defined('APL_VERSION') ) {
+	
+	/**
+	 * Advanced Post List.
+	 * https://wordpress.org/plugins/advanced-post-list/
+	 *
+	 * @since 2.4.16
+	 */
+	if ( ! is_admin() ) {
+		/**
+		 * @see advanced-post-list\class-apl-core.php
+		 */
+		add_filter( 'apl_core_loop_before', 	   array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
+		add_filter( 'apl_core_loop_after_content', array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
+		add_filter( 'apl_core_loop_after', 		   array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
+	}
+}
+
+# --- EOF
