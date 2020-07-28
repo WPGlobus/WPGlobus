@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-07-28 - version 2.4.16
+* (Core/Controller) Added  `Advanced Post List` (https://wordpress.org/plugins/advanced-post-list/) support.
+
 2020-07-26 - version 2.4.15
 * (Core/Options) Options Panel: CSS tweaks.
 * (Vendor/Yoast) Added filter for changing the output of description for graph `webpage`.
