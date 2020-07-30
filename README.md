@@ -135,6 +135,7 @@ We have checked WPGlobus together with many plugins, including:
 
 
 * ACF - Advanced Custom Fields. [WPGlobus Plus](https://wpglobus.com/product/wpglobus-plus/) premium add-on is required for WYSIWYG fields support,
+* Advanced Post List,
 * All in One SEO Pack,
 * WordPress SEO Plugin – Rank Math,
 * Black Studio TinyMCE Widget (with our free add-on),
@@ -294,6 +295,11 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.4.16 ###
+
+
+* (Integration) The [Advanced Post List](https://wordpress.org/plugins/advanced-post-list/) plugin is now supported.
 
 ### 2.4.15 ###
 

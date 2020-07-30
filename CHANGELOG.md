@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-07-28 - version 2.4.16
-* (Core/Controller) Added  `Advanced Post List` (https://wordpress.org/plugins/advanced-post-list/) support.
+* (Integration) The [Advanced Post List](https://wordpress.org/plugins/advanced-post-list/) plugin is now supported.
 
 2020-07-26 - version 2.4.15
 * (Core/Options) Options Panel: CSS tweaks.
