@@ -3,14 +3,14 @@
  * Interface JS functions
  *
  * @since 1.0.6
+ * @since 2.4.17 To use WPGlobusCoreData.language instead of WPGlobusCoreData.default_language.
+ *               Hide unneeded dialog icons.
  *
  * @package WPGlobus
  * @subpackage Administration
  */
 /*jslint browser: true*/
 /*global jQuery, console, WPGlobusCore, WPGlobusCoreData, WPGlobusWidgets*/
-
-//var WPGlobusWidgets;
 
 (function($) {
     "use strict";
@@ -101,7 +101,10 @@
 			/**
 			 * Set init value for tinymce editor via textarea field.
 			 */
-			var ic = WPGlobusCore.TextFilter( api.editor[editor.id]['content'], WPGlobusCoreData.default_language, 'RETURN_EMPTY' );
+			/**
+			 * @since 2.4.17 
+			 */
+			var ic = WPGlobusCore.TextFilter( api.editor[editor.id]['content'], WPGlobusCoreData.language , 'RETURN_EMPTY' );
 			$('#'+editor.id).val(ic);
 			
 			/**
@@ -130,7 +133,7 @@
 					'id="'+editor.id+'-wpglobus-button" ' +
 					'data-widget-id="'+controlElementID+'"' +
 					'class="wp-switch-editor switch-wpglobus-language wpglobus-icon-globe">' +
-					'<span class="wpglobus-current-language" data-language="en" style="">En</span>' +
+					'<span class="wpglobus-current-language" data-language="'+WPGlobusCoreData.language+'" style="">'+WPGlobusCoreData.language+'</span>' +
 				'</button>' +
 				'<div class="wpglobus-language-box" style="position:absolute;top:0;left:0;display:none;z-index:200100;border:1px solid #9e9e9e;border-radius:3px;background-color:#fff;padding: 2px 5px;">' +
 					'<div style="display:flex;flex-direction:column;">' + items + '</div>' +
@@ -148,8 +151,16 @@
 			/**
 			 * Set widget title.
 			 */
-			api.arbitraryWidgetTitle(editor.id); 
-		
+			api.arbitraryWidgetTitle(editor.id);
+
+			/**
+			 * Hide unneeded dialog icon.
+			 * @since 2.4.17
+			 */
+			if ( $(sourceSelector).hasClass('hidden') ) {
+				var parentElement = $(sourceSelector).parent();
+				$(parentElement).find('div.wpglobus-widgets.wpglobus_dialog_start.wpglobus_dialog_icon').css({'display':'none'});
+			}				
 		},
 		arbitraryWidgetTitle: function(editorID) {
 			var title = WPGlobusCore.TextFilter( 
@@ -453,6 +464,42 @@
 					setTimeout(function(){$('#wpglobus-'+elID).val(v)},1000);
 				}				
 			}				
+		},
+		__getEditorContent: function() {
+			if ( Object.keys(api.editor).length == 0 ) {
+				console.log('WPGlobusWidgets editors length is: 0');
+				return;
+			}
+			console.log('WPGlobusWidgets editors length is: ', Object.keys(api.editor).length );
+			
+			for(var key in api.editor) {
+				console.log('editor        : ', key, ' -> widgetName: ', api.editor[key].widgetName);
+				console.log('source content: ', api.editor[key].content);
+				$.each(WPGlobusCoreData.enabled_languages, function(i,lang){
+					console.log('Language: ', lang);
+					var cont = WPGlobusCore.TextFilter(api.editor[key].content, lang, 'RETURN_EMPTY');
+					if ( '' == cont ) {
+						console.log('empty');
+					} else {
+						console.log('Content: ', cont);
+						
+					}
+				});
+				console.log('--------------------');
+			}
+		},
+		__getEditorLanguage: function() {
+			if ( Object.keys(api.editor).length == 0 ) {
+				console.log('WPGlobusWidgets editors length is: 0');
+				return;
+			}
+			console.log('WPGlobusWidgets editors length is: ', Object.keys(api.editor).length );
+			
+			for(var key in api.editor) {
+				console.log('editor           : ', key, ' -> widgetName: ', api.editor[key].widgetName);
+				console.log('current language : ', $( api.editor[key]['languageSelector'] ).data('language'));
+				console.log('--------------------');
+			}
 		}
 	};
 	
