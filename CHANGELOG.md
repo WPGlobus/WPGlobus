@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-08-01 - version 2.4.17
+* (Core/WidgetsJS) To use WPGlobusCoreData.language instead of WPGlobusCoreData.default_language; Hide unneeded dialog icons.
+
 2020-07-28 - version 2.4.16
 * (Integration) The [Advanced Post List](https://wordpress.org/plugins/advanced-post-list/) plugin is now supported.
 
