@@ -296,6 +296,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.4.17 ###
+
+* (Core/WidgetsJS) Use `WPGlobusCoreData.language` instead of `WPGlobusCoreData.default_language`; Hide unneeded dialog icons.
+
 ### 2.4.16 ###
 
 
