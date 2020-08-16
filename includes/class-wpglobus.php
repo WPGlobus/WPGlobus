@@ -1824,6 +1824,15 @@ class WPGlobus {
 			if ( version_compare( $GLOBALS['wp_version'], '5.0.999', '>' ) ) {
 				$version = '-51';
 			}			
+
+			/**
+			 * WordPress 5.5+ needs a new version of our admin JS.
+			 *
+			 * @since 2.5
+			 */
+			if ( version_compare( $GLOBALS['wp_version'], '5.4.999', '>' ) ) {
+				$version = '-55';
+			}
 			
 			/**
 			 * @since 1.9.17
