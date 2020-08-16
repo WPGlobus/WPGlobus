@@ -77,6 +77,23 @@ jQuery(document).ready(function ($) {
 			}
 			curTab.css({'display':'block'});
 			$('#wpglobus-tab-link-'+api.currentTabID).addClass('wpglobus-tab-link-active');
+			
+			api.initLanguageTable();
+		},
+		initLanguageTable: function() {
+			var $items = $('.wpglobus-the-language-item-installed');
+			if ( $items.length > 9 ) {
+				return;
+			}
+			var rows = [];
+			$items.each(function(indx){
+				var order = $(this).data('order') * 1;
+				rows[order] = $(this);
+			});
+			var ib = $('#wpglobus-options-languagesTable #the-list tr').eq(0)
+			$.each(rows, function(index, row) {
+				$(ib).before(row);
+			});
 		},
 		addListeners: function() {
 			$(document).on('click', 'input.wpglobus-enabled_languages', function(event){
@@ -104,6 +121,9 @@ jQuery(document).ready(function ($) {
 		initSpecs: function() {
 			$(document).on('dblclick', '#section-tab-customizer h2', function(ev){
 				$('.wpglobus-theme-info-spec').removeClass('hidden');
+			});
+			$(document).on('dblclick', '.column-wpglobus_flag', function(ev){
+				location = location.href + '&flags';
 			});
 		}
 	};
