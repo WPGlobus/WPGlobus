@@ -269,7 +269,7 @@ class WPGlobusWidget extends WP_Widget {
 					$checked = ' checked';
 				} ?>
 				<input type="radio"
-				       id="<?php echo esc_attr( $this->get_field_id( 'type' ) ); ?>"
+				       id="<?php echo esc_attr( $this->get_field_id( 'type' ) ) . '-' . $type; ?>"
 				       name="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>" <?php echo $checked; // WPCS: XSS ok. ?>
 				       value="<?php echo esc_attr( $type ); ?>"/> <?php echo $caption . '<br />'; // WPCS: XSS ok.
 			endforeach;
