@@ -349,21 +349,26 @@
 				 
 				if ( dis )  return true;
 
-				clone = $('#'+id).clone();
-				$(element).addClass('wpglobus-dialog-field-source hidden');
-				name = element.attr('name');
-				$(clone).attr('id', 'wpglobus-'+id);
-				$(clone).attr('name', 'wpglobus-'+name);
-				$(clone).attr('data-source-id', id);
-				$(clone).attr('class', 'wpglobus-dialog-field');
-				$(clone).attr('style', 'width:90%;');
-				text = WPGlobusCore.TextFilter($(element).val(), WPGlobusCoreData.language);
-				$(clone).val(text);
-				$('<div style="width:20px;" data-type="control" data-source-type="" data-source-id="'+id+'" class="wpglobus-widgets wpglobus_dialog_start wpglobus_dialog_icon"></div>').insertAfter(element);
-				$(clone).insertAfter(element);
-				if ( 'input[type="text"]' == type && '' != text ) {
-					var w_id = element.parents('.widget').attr('id');
-					$('#'+w_id+' .in-widget-title').text(': '+text);
+				if ( -1 != id.indexOf('-title') ) {
+					/**
+					 * @since 2.5 Set multilingual field for title only.
+					 */ 
+					clone = $('#'+id).clone();
+					$(element).addClass('wpglobus-dialog-field-source hidden');
+					name = element.attr('name');
+					$(clone).attr('id', 'wpglobus-'+id);
+					$(clone).attr('name', 'wpglobus-'+name);
+					$(clone).attr('data-source-id', id);
+					$(clone).attr('class', 'wpglobus-dialog-field');
+					$(clone).attr('style', 'width:90%;');
+					text = WPGlobusCore.TextFilter($(element).val(), WPGlobusCoreData.language);
+					$(clone).val(text);
+					$('<div style="width:20px;" data-type="control" data-source-type="" data-source-id="'+id+'" class="wpglobus-widgets wpglobus_dialog_start wpglobus_dialog_icon"></div>').insertAfter(element);
+					$(clone).insertAfter(element);
+					if ( 'input[type="text"]' == type && '' != text ) {
+						var w_id = element.parents('.widget').attr('id');
+						$('#'+w_id+' .in-widget-title').text(': '+text);
+					}
 				}
 			});				
 		},	
