@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -217,35 +217,16 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.5.0 =
+
+* (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.5.*
+* (Core/WidgetsJS) Fixed issue with non-unique ID.
+* (Options/Languages table) Installed languages moved to the top of the table.
+* (Core/WidgetsJS) Set multilingual field for the title only.
+
 = 2.4.17 =
 
 * (Core/WidgetsJS) Use `WPGlobusCoreData.language` instead of `WPGlobusCoreData.default_language`; Hide unneeded dialog icons.
-
-= 2.4.16 =
-
-* (Integration) The [Advanced Post List](https://wordpress.org/plugins/advanced-post-list/) plugin is now supported.
-
-= 2.4.15 =
-
-* (Core/Options) Options Panel: CSS tweaks.
-* (Vendor/Yoast) Added filter for changing the output of description for graph `webpage`.
-* (Core/Post Types) Added post types of `Advanced Post List` plugin to the hidden types array.
-
-= 2.4.14 =
-
-* (Core/Post Types) Added post type of `GDPR Cookie Consent` plugin to the hidden types array.
-* (Vendor/Yoast) Fixed PHP Notice: Trying to get property 'ID' of non-object.
-* (Vendor/Yoast) Revised code of `get_wpseo_meta` function.
-* (Vendor/Yoast) Added filter for changing output of graph `webpage`.
-
-= 2.4.13 =
-
-* (Builder/Elementor) Disable Elementor support for all post types that don't use the Elementor builder.
-
-= 2.4.12 =
-
-* (Core/Class WPGlobus) Added `do_action` to add to the `publish` metabox.
-* (Builder/Elementor) Disable Elementor's support for posts that don't use Elementor builder.
 
 = Earlier versions and Add-ons =
 

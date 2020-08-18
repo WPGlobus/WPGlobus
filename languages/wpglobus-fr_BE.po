@@ -902,7 +902,7 @@ msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:278,
-#: includes/class-wpglobus.php:3550
+#: includes/class-wpglobus.php:3559
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -1036,13 +1036,13 @@ msgstr "Vous avez besoin d’un identifiant multilingue ?"
 msgid "*) Available after the menu is saved."
 msgstr "*) Disponible après que le menu ait été enregistré."
 
-#: includes/class-wpglobus.php:3998
+#: includes/class-wpglobus.php:4007
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Vous devez activer les jolis permaliens pour pouvoir utiliser WPGlobus "
 "correctement."
 
-#: includes/class-wpglobus.php:4000
+#: includes/class-wpglobus.php:4009
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."

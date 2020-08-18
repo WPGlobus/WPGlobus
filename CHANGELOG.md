@@ -3,10 +3,10 @@
 ## Changelog ##
 
 2020-08-18 - version 2.5.0
-* (Compatibility) New JS for Admin and Builders support, to work with WordPress 5.5.*
-* (Core/WidgetsJS) Fixed issue with non-unique id.
-* (Options/Languages table) Installed languages moved to top of table.
-* (Core/WidgetsJS) Set multilingual field for title only.
+* (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.5.*
+* (Core/WidgetsJS) Fixed issue with non-unique ID.
+* (Options/Languages table) Installed languages moved to the top of the table.
+* (Core/WidgetsJS) Set multilingual field for the title only.
 
 2020-08-01 - version 2.4.17
 * (Core/WidgetsJS) Use `WPGlobusCoreData.language` instead of `WPGlobusCoreData.default_language`; Hide unneeded dialog icons.

@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.4.17
-# This file is distributed under the same license as the WPGlobus 2.4.17 package.
+# Copyright (C) 2020 WPGlobus 2.5.0
+# This file is distributed under the same license as the WPGlobus 2.5.0 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.4.17\n"
+"Project-Id-Version: WPGlobus 2.5.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -652,7 +652,7 @@ msgstr ""
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:278, includes/class-wpglobus.php:3550
+#: includes/builders/class-wpglobus-builder.php:278, includes/class-wpglobus.php:3559
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -776,11 +776,11 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:3998
+#: includes/class-wpglobus.php:4007
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:4000
+#: includes/class-wpglobus.php:4009
 msgid "Please go to Settings > Permalinks > Common Settings and choose a non-default option."
 msgstr ""
 
