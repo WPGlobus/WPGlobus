@@ -3484,7 +3484,9 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add language tabs for edit taxonomy name at edit-tags.php page
+	 * Add language tabs for edit taxonomy name at edit-tags.php page.
+	 *
+	 * @since 2.5.1 Interface improvements.
 	 *
 	 * @param $object
 	 * @param $taxonomy
@@ -3497,9 +3499,10 @@ class WPGlobus {
 		if ( $this->disabled_entity() ) {
 			return;
 		}
+		$_link_class = array();
 		?>
 		<div class="wpglobus-taxonomy-tabs">
-			<ul class="wpglobus-taxonomy-tabs-list">
+			<ul class="wpglobus-taxonomy-tabs-list wpglobus-post-body-tabs-list">
 				<?php
 				foreach ( self::Config()->open_languages as $language ) {
 					$return =
@@ -3513,15 +3516,23 @@ class WPGlobus {
 							$get['language'] = $language;
 							$_href = admin_url( add_query_arg( $get, 'term.php' ) );
  							$_onclick = 'onclick="return false;"';
+							
+							if ( $language == self::Config()->builder->get_language() ) {
+								$_link_class['tab-link-active'] = 'wpglobus-tab-link-active';
+							} else {
+								$_link_class['tab-link-active'] = '';
+							}
+						} else {
+							$_link_class['tab-link-active'] = $language == self::Config()->default_language ? 'wpglobus-tab-link-active' : '';
 						}
-						
 					?>
 					<li id="wpglobus-link-tab-<?php echo esc_attr( $language ); ?>" class="wpglobus-tax-edit-tab"
 							data-language="<?php echo esc_attr( $language ); ?>"
 							data-name="<?php echo esc_attr( WPGlobus_Core::text_filter( $object->name, $language, $return ) ); ?>"
 							data-description="<?php echo esc_attr( WPGlobus_Core::text_filter( $object->description, $language, $return ) ); ?>">
 						<a data-language="<?php echo esc_attr( $language ); ?>" 
-							data-href="<?php echo $_href; ?>" <?php echo $_onclick; ?>  	
+							data-href="<?php echo $_href; ?>" <?php echo $_onclick; ?> 
+							class="<?php echo implode( $_link_class ); ?>" 
 							href="#taxonomy-tab-<?php echo esc_attr( $language ); ?>"><?php echo esc_html( self::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
 					<?php

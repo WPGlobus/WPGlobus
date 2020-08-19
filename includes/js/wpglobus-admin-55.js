@@ -1043,6 +1043,11 @@ jQuery(document).ready(function () {
 					var language = $t.data('language');
 					$('.wpglobus-element').addClass('hidden');
 					$('.wpglobus-element_'+language).removeClass('hidden');
+					/**
+					 * @since 2.5.1
+					 */
+					$('.wpglobus-tax-edit-tab a').removeClass('wpglobus-tab-link-active');
+					$('#wpglobus-link-tab-'+language+' a').addClass('wpglobus-tab-link-active');
 				});
 
                 $('.wpglobus-element').on('change', function () {
@@ -1067,7 +1072,6 @@ jQuery(document).ready(function () {
 				 * $('.term-slug-wrap td').css({'padding-left':'0'});				 
 				 */
 				$(WPGlobusAdmin.data.multilingualSlug.title).insertAfter('.term-slug-wrap th label');
-				
             },
             navMenus: function () {
                 var iID, menu_size,
