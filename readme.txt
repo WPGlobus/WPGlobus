@@ -217,6 +217,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.5.1 =
+
+* (Vendor/Yoast) Added: Taxonomies can now output multilingual meta descriptions and localized URLs.
+* (Core) Interface improvements on the `term.php` page.
+
 = 2.5.0 =
 
 * (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.5.*

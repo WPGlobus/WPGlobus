@@ -837,7 +837,7 @@ msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:278,
-#: includes/class-wpglobus.php:3559
+#: includes/class-wpglobus.php:3570
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -971,11 +971,11 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr "*) Disponibil după ce meniul este salvat."
 
-#: includes/class-wpglobus.php:4007
+#: includes/class-wpglobus.php:4018
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr "Trebuie să activezi Pretty Permalinks pentru a folosi WPGlobus."
 
-#: includes/class-wpglobus.php:4009
+#: includes/class-wpglobus.php:4020
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."
@@ -1605,17 +1605,17 @@ msgstr ""
 msgid "Get WPGlobus Plus now!"
 msgstr "Obține WPGlobus Plus acum!"
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:756
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:837
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:757
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:838
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:760
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:841
 msgid "WPGlobus warning: "
 msgstr ""
 
