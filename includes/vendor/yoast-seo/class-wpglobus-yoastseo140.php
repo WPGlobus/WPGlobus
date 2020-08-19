@@ -50,12 +50,20 @@ class WPGlobus_YoastSEO {
 	protected static $version = '';
 
 	/**
-	 * Contains wpseo meta.
+	 * Contains wpseo post meta.
 	 *
 	 * @since 2.2.16
 	 * @var null|array 
 	 */	
 	protected static $wpseo_meta = null;
+
+	/**
+	 * Contains wpseo taxonomy meta.
+	 *
+	 * @since 2.5.1
+	 * @var null|array 
+	 */	
+	protected static $wpseo_taxonomy_meta = null;
 
 	/**
 	 * Contains document title.
@@ -378,8 +386,11 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @see wordpress-seo\src\presenters\meta-description-presenter.php 
 	 * @see wordpress-seo\src\presenters\open-graph\description-presenter.php
-	 * @scope front
+	 *
 	 * @since 2.4
+	 * @since 2.5.1 Added support of taxonomies.
+	 *
+	 * @scope front
 	 *
 	 * @param string 				 $meta_description Value from @see `description` field in `wp_yoast_indexable` table.
 	 * @param Indexable_Presentation $presentation The presentation of an indexable.
@@ -391,24 +402,64 @@ class WPGlobus_YoastSEO {
 		/**
 		 * $meta_description is received from `description` field in `wp_yoast_indexable` table. 
 		 */
+		 
+		/**
+		 * Init description.
+		 */
+		$description = '';
 
 		/**
 		 * Key to define that `wpseo_metadesc` filter was already fired earlier.
-		 */
+		 */		
 		static $meta_description_presenter_was_fired = false;
-		
-		if ( $meta_description_presenter_was_fired ) {
+
+		if ( 'post' == $presentation->model->object_type ) {
+			
 			/**
-			 * Set meta description to empty value for `wpseo_opengraph_desc` filter like for empty $meta_description in `wpseo_metadesc` filter.
+			 * Post.
+			 */		
+			if ( $meta_description_presenter_was_fired ) {
+				/**
+				 * Set meta description to empty value for `wpseo_opengraph_desc` filter like for empty $meta_description in `wpseo_metadesc` filter.
+				 */
+				$meta_description = '';
+			} else {
+				if ( empty($meta_description) ) {
+					$meta_description_presenter_was_fired = true;
+				}
+			}
+
+			$description = self::get_meta( '_yoast_wpseo_metadesc', $meta_description );
+			
+		} elseif ( 'term' == $presentation->model->object_type ) {
+			
+			/**
+			 * Taxonomy.
+			 * @since 2.5.1
 			 */
-			$meta_description = '';
-		} else {
-			if ( empty($meta_description) ) {
-				$meta_description_presenter_was_fired = true;
+			if ( $meta_description_presenter_was_fired ) {
+				
+				/**
+				 * This is `wpseo_opengraph_desc` filter with empty yoast description.
+				 * @todo maybe need to use cache for term object.
+				 */
+				$term = get_term( $presentation->model->object_id );
+				if ( $term  instanceof WP_Term ) {
+					$description = $term->description;
+				} else {
+					$description = '';
+				}
+			
+			} else {
+			
+				$description = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id );
+				if ( empty($description) ) {
+					$meta_description_presenter_was_fired = true;
+				}
 			}
 		}
 		
-		return self::get_meta( '_yoast_wpseo_metadesc', $meta_description );
+		return $description;
 	}
 
 	/**
@@ -418,6 +469,7 @@ class WPGlobus_YoastSEO {
 	 * @see wordpress-seo\src\presenters\open-graph\url-presenter.php
 	 * @scope front
 	 * @since 2.4
+	 * @since 2.5.1 Added support of taxonomies.
 	 *
 	 * @param string 				 $url The canonical URL or open graph URL.
 	 * @param Indexable_Presentation $presentation The presentation of an indexable.
@@ -432,11 +484,11 @@ class WPGlobus_YoastSEO {
 			return $url;
 		}		
 
-		if ( ! is_singular() ) {
-			return $url;
+		if ( is_singular() || is_category() || is_tax() ) {
+			return WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->language );
 		}
-
-		return WPGlobus_Utils::localize_current_url( WPGlobus::Config()->language );
+		
+		return $url;
 	}
 	
 	/**
@@ -724,6 +776,35 @@ class WPGlobus_YoastSEO {
 	}
 	
 	/**
+	 * Get taxonomy meta from `wpseo_taxonomy_meta` option.
+	 *
+	 * @scope front
+	 * @since 2.5.1
+	 */	
+	protected static function get_taxonomy_meta( $object_sub_type, $object_id, $meta_description = '' ) {
+		
+		if ( is_null( self::$wpseo_taxonomy_meta ) ) {
+			self::$wpseo_taxonomy_meta = get_option( 'wpseo_taxonomy_meta' );
+		}
+
+		if ( empty( self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ] ) ) {
+			return '';
+		}
+		
+		if ( empty( self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ][ 'wpseo_desc' ] ) ) {
+			return '';
+		}
+		
+		$description = WPGlobus_Core::text_filter( 
+			self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ][ 'wpseo_desc' ],
+			WPGlobus::Config()->language,
+			WPGlobus::RETURN_EMPTY
+		);
+
+		return $description;
+	}
+	
+	/**
 	 * @obsolete
 	 *
 	 * To translate Yoast columns
@@ -1008,7 +1089,7 @@ class WPGlobus_YoastSEO {
 		if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) :
 			if ( empty( $post ) ) {
 				$result = true;
-			} else if ( WPGlobus::O()->disabled_entity( $post->post_type ) ) {
+			} elseif ( WPGlobus::O()->disabled_entity( $post->post_type ) ) {
 				$result = true;
 			}
 		endif;
@@ -1053,6 +1134,7 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @since 2.4.14
 	 * @since 2.4.15 Localize description.
+	 * @since 2.5.1  Added support of taxonomies.
 	 * 
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
@@ -1061,16 +1143,30 @@ class WPGlobus_YoastSEO {
 	 */ 	
 	public static function filter__wpseo_schema_webpage( $graph_piece, $context ) {
 		
-		if ( ! empty( $graph_piece['name'] ) && WPGlobus_Core::has_translations( $graph_piece['name'] ) ) {
-			$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
-		}
+		if ( 'post' == $context->indexable->object_type ) {
+		
+			if ( ! empty( $graph_piece['name'] ) && WPGlobus_Core::has_translations( $graph_piece['name'] ) ) {
+				$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
+			}
 
-		/**
-		 * @since 2.4.15
-		 */
-		if ( ! empty( $graph_piece['description'] ) && WPGlobus_Core::has_translations( $graph_piece['description'] ) ) {
-			$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
-		}		
+			/**
+			 * @since 2.4.15
+			 */
+			if ( ! empty( $graph_piece['description'] ) && WPGlobus_Core::has_translations( $graph_piece['description'] ) ) {
+				$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
+			}		
+
+		} elseif ( 'term' == $context->indexable->object_type ) {
+			
+			/**
+			 * Taxonomy.
+			 * @since 2.5.1
+			 */
+			$graph_piece['description'] = self::get_taxonomy_meta( $context->indexable->object_sub_type, $context->indexable->object_id );
+			$graph_piece['url'] 		= WPGlobus_Utils::localize_url( $graph_piece['url'], WPGlobus::Config()->language );
+			$graph_piece['@id'] 		= WPGlobus_Utils::localize_url( $graph_piece['@id'], WPGlobus::Config()->language );
+			$graph_piece['breadcrumb']['@id'] = WPGlobus_Utils::localize_url( $graph_piece['breadcrumb']['@id'], WPGlobus::Config()->language );
+		}
 
 		return $graph_piece;
 	}
