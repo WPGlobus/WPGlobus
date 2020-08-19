@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-08-19 - version 2.5.1
+* (Vendor/Yoast) Added support taxonomies for output multilingual meta description and localized URLs.
+
 2020-08-18 - version 2.5.0
 * (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.5.*
 * (Core/WidgetsJS) Fixed issue with non-unique ID.
