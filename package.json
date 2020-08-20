@@ -44,7 +44,8 @@
     "!7.2 SVN commit": "npm run svn:commit && npm run svn:tag && npm run svn:tag:commit",
     "svn:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% %npm_package_version%\" --username tivnet",
     "svn:tag": "cd wpsvn\\wpglobus && svn cp trunk tags/%npm_package_version% && svn stat",
-    "svn:tag:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% tag %npm_package_version%\" --username tivnet"
+    "svn:tag:commit": "cd wpsvn\\wpglobus && svn ci -m \"%npm_package_title% tag %npm_package_version%\" --username tivnet",
+    "!!svn:tag:remove": "cd wpsvn\\wpglobus && svn rm tags/%npm_package_version% && svn stat"
   },
   "private": true,
   "repository": {
