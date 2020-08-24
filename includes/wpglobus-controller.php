@@ -364,6 +364,11 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	 * @since 2.3.8
 	 */	
 	add_filter( 'acf/load_value/type=number', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
+	/**
+	 * Multilingual value for image will be accessible in builder mode.
+	 * @since 2.5.2
+	 */	
+	add_filter( 'acf/load_value/type=image', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
 /**
