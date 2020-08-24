@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-08-24 - version 2.5.2
+* (Vendor/Acf) Added filter for the Image field type. (Note: Multilingual value will be accessible in the "Builder" mode.)
+
 2020-08-19 - version 2.5.1
 * (Vendor/Yoast) Added: Taxonomies can now output multilingual meta descriptions and localized URLs.
 * (Core) Interface improvements on the `term.php` page.
