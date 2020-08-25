@@ -296,6 +296,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.2 ###
+
+
+* (Vendor/Acf) Added filter for the Image field type. (Note: Multilingual value will be accessible in the "Builder" mode.)
+
 ### 2.5.1 ###
 
 
