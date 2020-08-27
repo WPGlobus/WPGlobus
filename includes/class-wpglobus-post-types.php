@@ -81,7 +81,9 @@ class WPGlobus_Post_Types {
 		'cookielawinfo',
 		// Advanced Post List: https://wordpress.org/plugins/advanced-post-list/ @since 2.4.15
 		'apl_post_list',
-		'apl_design'
+		'apl_design',
+		// Molongui Author Box: https://wordpress.org/plugins/molongui-authorship/ @since 2.5.3
+		'guest_author'
 	);
 
 	/**
