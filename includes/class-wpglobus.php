@@ -76,6 +76,13 @@ class WPGlobus {
 	 * @since 1.6.6
 	 */
 	const PAGE_WPGLOBUS_ADMIN_CENTRAL = 'wpglobus-admin-central';
+	
+	/**
+	 * WordPress User edit page name.
+	 *
+	 * @since 2.5.3
+	 */	
+	const WP_USER_EDIT_PAGE = 'user-edit.php';
 
 	/**
 	 * List navigation menus
