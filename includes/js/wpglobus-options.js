@@ -79,6 +79,20 @@ jQuery(document).ready(function ($) {
 			$('#wpglobus-tab-link-'+api.currentTabID).addClass('wpglobus-tab-link-active');
 			
 			api.initLanguageTable();
+			
+			/** 
+			 * Fix no JS elements.
+			 * @since 2.5.3
+			 */
+			$('.wpglobus-options-wrap .no-inline-js').attr('onclick', 'return false;');
+			
+			/**
+			 * Display subsection if exists.
+			 * @since 2.5.3
+			 */
+			setTimeout(function(){
+				$('#section-tab-'+WPGlobusOptions.tab+' .wpglobus-options-menu .wpglobus-tab-link-subsection').eq(0).click();
+			}, 200);
 		},
 		initLanguageTable: function() {
 			var $items = $('.wpglobus-the-language-item-installed');
@@ -116,7 +130,22 @@ jQuery(document).ready(function ($) {
 				$('.wpglobus-tab-link').removeClass('wpglobus-tab-link-active');
 				$('#wpglobus-tab-link-'+tab).addClass('wpglobus-tab-link-active');
 				$('#wpglobus_options_current_tab').val(tab);
-			});			
+				
+				/**
+				 * Display active subsection again.
+				 * @since 2.5.3
+				 */
+				$('#section-tab-'+tab+' .wpglobus-tab-link-subsection.wpglobus-tab-link-active').click();
+			});
+			/* @since 2.5.3 */
+			$(document).on('click', '.wpglobus-tab-link-subsection', function(event){
+				var tab = $(this).data('tab');
+				$('.wpglobus-options-tab-subsection').css({'display':'none'});
+				$('#subsection-tab-'+tab).css({'display':'block'});
+				
+				$('.wpglobus-tab-link-subsection').removeClass('wpglobus-tab-link-active');
+				$('#wpglobus-tab-link-subsection-'+tab).addClass('wpglobus-tab-link-active');
+			});				
 		},
 		initSpecs: function() {
 			$(document).on('dblclick', '#section-tab-customizer h2', function(ev){
