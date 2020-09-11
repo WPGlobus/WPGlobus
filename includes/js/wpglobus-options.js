@@ -132,10 +132,16 @@ jQuery(document).ready(function ($) {
 				$('#wpglobus_options_current_tab').val(tab);
 				
 				/**
-				 * Display active subsection again.
+				 * Display/Set active subsection.
 				 * @since 2.5.3
 				 */
-				$('#section-tab-'+tab+' .wpglobus-tab-link-subsection.wpglobus-tab-link-active').click();
+				if ( $('#section-tab-'+tab+' .wpglobus-tab-link-subsection.wpglobus-tab-link-active').length == 1 ) {
+					$('#section-tab-'+tab+' .wpglobus-tab-link-subsection.wpglobus-tab-link-active').click();
+				} else {
+					if ( $('#section-tab-'+tab+' .wpglobus-tab-link-subsection').length > 0 ) {
+						$('#section-tab-'+tab+' .wpglobus-tab-link-subsection').eq(0).click();
+					}
+				}
 			});
 			/* @since 2.5.3 */
 			$(document).on('click', '.wpglobus-tab-link-subsection', function(event){
