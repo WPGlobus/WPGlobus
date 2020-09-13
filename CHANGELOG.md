@@ -2,10 +2,11 @@
 
 ## Changelog ##
 
-2020-09-11 - version 2.5.3
+2020-09-13 - version 2.5.3
 * (Core) Added `WP_USER_EDIT_PAGE` constant to set the User edit page name.
 * (Core/Options) Added support of subsections on WPGlobus Options page.
 * (Core/Post Types) Added post types of `Molongui Author Box` plugin to the hidden types array.
+* (Builders/Elementor) Added language switcher for Elementor v.3.
 
 2020-08-24 - version 2.5.2
 * (Vendor/Acf) Added filter for the Image field type. (Note: Multilingual value will be accessible in the "Builder" mode.)
