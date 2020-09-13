@@ -222,6 +222,7 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Core) Added `WP_USER_EDIT_PAGE` constant to set the User edit page name.
 * (Core/Options) Added support of subsections on the WPGlobus Options page.
 * (Core/Post Types) Added post types of `Molongui Author Box` plugin to the hidden types array.
+* (Builders/Elementor) Added language switcher for Elementor v.3.
 
 = 2.5.2 =
 
