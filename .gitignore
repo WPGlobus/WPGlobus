@@ -3,3 +3,4 @@
 /vendor/
 *.po~
 .phpunit.result.cache
+package-lock.json
