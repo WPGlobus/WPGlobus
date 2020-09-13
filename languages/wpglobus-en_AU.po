@@ -926,7 +926,7 @@ msgstr ""
 msgid "current"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:671
+#: includes/builders/elementor/class-wpglobus-elementor.php:675
 msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "%1$s%2$s%3$s is set to %4$s."
