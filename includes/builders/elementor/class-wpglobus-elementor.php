@@ -530,13 +530,17 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
                 /* <![CDATA[ */
 				var WPGlobusTimeID;
                 WPGlobusTimeID = setInterval(function(){
-					if ( jQuery("#elementor-panel-header-menu-button").length === 0 ) {
+					if ( jQuery("#elementor-panel-header-menu-button").length === 0 || 'undefined' === typeof elementor.config.version ) {
 						return;
 					}
 					clearInterval(WPGlobusTimeID);
                     var wpglobusElementorPanelMenu = jQuery("#wpglobus-elementor-wrapper").html();
                     jQuery(document).on('click', "#elementor-panel-header-menu-button", function () {
-                        jQuery(".elementor-panel-menu-item").eq(7).after(wpglobusElementorPanelMenu);
+						if ( elementor.config.version[0] == '3' ) {
+							jQuery(".elementor-panel-menu-item-exit-to-dashboard").before(wpglobusElementorPanelMenu);
+						} else {
+							jQuery(".elementor-panel-menu-item").eq(7).after(wpglobusElementorPanelMenu);
+						}
                     });
                     jQuery(document).on('click', "#wpglobus-elementor-selector-title", function () {
                         var $t = jQuery("#wpglobus-elementor-selector");
