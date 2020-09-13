@@ -1,0 +1,67 @@
+# TIVWP Updater
+# Copyright (c) 2016 TIV.NET INC.
+# This file is distributed under the same license as the TIVWP Updater package.
+# FIRST AUTHOR <gregory@tiv.net>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TIVWP Updater 1.0.3\n"
+"POT-Creation-Date: 2016-09-28 12:06-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class-tivwp-updater.php:423
+msgid "Please visit the plugin page for more information"
+msgstr "Veuillez visiter la page du plugin pour plus d’informations"
+
+#: class-tivwp-updater.php:501 class-tivwp-updater.php:657
+#: class-tivwp-updater.php:666
+msgid "Licensing server connection error."
+msgstr "Erreur de serveur."
+
+#: class-tivwp-updater.php:641
+msgid "License / email is empty or invalid."
+msgstr "Licence / email est vide ou invalide."
+
+#: includes/license-management-form.php:17
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: includes/license-management-form.php:21
+msgctxt "updates-are"
+msgid "Active"
+msgstr "Actif"
+
+#: includes/license-management-form.php:22
+msgctxt "updates-are"
+msgid "Inactive"
+msgstr "Inactif"
+
+#: includes/license-management-form.php:27
+msgid "Instance"
+msgstr "Instance"
+
+#: includes/license-management-form.php:36
+msgid "Check Status"
+msgstr "Vérifier son état"
+
+#: includes/license-management-form.php:43
+msgid "A current subscription is required for updates."
+msgstr "Un abonnement en cours est nécessaire pour les mises à jour."
+
+#: includes/license-management-form.php:46
+msgid "Purchase or renew here."
+msgstr "Acheter ou renouveler ici."

@@ -1,0 +1,86 @@
+# Copyright (C) 2016 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/bemailr/wp-requirements/issues\n"
+"POT-Creation-Date: 2016-10-18 22:19:07+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: The Bemailr Team <translations@bemailr.com>\n"
+"Language-Team: The Bemailr Team <translations@bemailr.com>\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+
+#: includes/class-wp-requirements.php:387
+msgid ""
+"%s will not function correctly because your site doesn't meet some of the "
+"requirements:"
+msgstr ""
+
+#: includes/class-wp-requirements.php:396
+msgid "Please read more details %s here %s."
+msgstr ""
+
+#: includes/class-wp-requirements.php:422
+msgid "%s: current %s, required %s"
+msgstr ""
+
+#: includes/class-wp-requirements.php:423
+msgid "%s is activated"
+msgstr ""
+
+#: includes/class-wp-requirements.php:424
+msgid "%s is not activated"
+msgstr ""
+
+#: includes/class-wp-requirements.php:425
+msgid "%s is activated and has a required version %s"
+msgstr ""
+
+#: includes/class-wp-requirements.php:426
+msgid "%s version %s must be activated"
+msgstr ""
+
+#: includes/class-wp-requirements.php:429
+msgid "%s must be activated"
+msgstr ""
+
+#: includes/class-wp-requirements.php:430
+msgid "%s must NOT be activated"
+msgstr ""
+
+#: includes/class-wp-requirements.php:434
+msgid "PHP Version"
+msgstr ""
+
+#: includes/class-wp-requirements.php:435
+msgid "PHP Extension"
+msgstr ""
+
+#: includes/class-wp-requirements.php:436
+msgid "MySQL Version"
+msgstr ""
+
+#: includes/class-wp-requirements.php:437
+msgid "WordPress Version"
+msgstr ""
+
+#: includes/class-wp-requirements.php:438
+msgid "Plugin"
+msgstr ""
+
+#: includes/class-wp-requirements.php:439
+msgid "Theme"
+msgstr ""

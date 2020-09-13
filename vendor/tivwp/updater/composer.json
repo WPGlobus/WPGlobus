@@ -1,0 +1,12 @@
+{
+  "name": "tivwp/updater",
+  "description": "Interface to WooCommerce API Manager",
+  "minimum-stability": "stable",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Gregory Karpinsky",
+      "email": "gregory@tiv.net"
+    }
+  ]
+}

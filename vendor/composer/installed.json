@@ -1,0 +1,62 @@
+[
+    {
+        "name": "bemailr/wp-requirements",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bemailr/wp-requirements.git",
+            "reference": "e903973b0dfc1178f89c757bd205327811ea4658"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bemailr/wp-requirements/zipball/e903973b0dfc1178f89c757bd205327811ea4658",
+            "reference": "e903973b0dfc1178f89c757bd205327811ea4658",
+            "shasum": ""
+        },
+        "time": "2016-10-18T23:09:16+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0"
+        ],
+        "description": "A helpful library for checking the prerequisites when activating / running a WordPress plugin.",
+        "keywords": [
+            "wordpress"
+        ]
+    },
+    {
+        "name": "tivwp/updater",
+        "version": "1.0.9",
+        "version_normalized": "1.0.9.0",
+        "source": {
+            "type": "git",
+            "url": "https://bitbucket.org/tivwp/tivwp-updater.git",
+            "reference": "6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://bitbucket.org/tivwp/tivwp-updater/get/6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729.zip",
+            "reference": "6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729",
+            "shasum": ""
+        },
+        "time": "2018-03-23T12:14:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "license": [
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory Karpinsky",
+                "email": "gregory@tiv.net"
+            }
+        ],
+        "description": "Interface to WooCommerce API Manager",
+        "homepage": "https://bitbucket.org/tivwp/tivwp-updater",
+        "support": {
+            "source": "https://bitbucket.org/tivwp/tivwp-updater/src/6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729/?at=1.0.9"
+        }
+    }
+]
