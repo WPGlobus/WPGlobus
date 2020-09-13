@@ -4,11 +4,11 @@
 
 2020-09-11 - version 2.5.3
 * (Core) Added `WP_USER_EDIT_PAGE` constant to set the User edit page name.
-* (Core/Options) Added support of subsections on WPGlobus Options page.
+* (Core/Options) Added support of subsections on the WPGlobus Options page.
 * (Core/Post Types) Added post types of `Molongui Author Box` plugin to the hidden types array.
 
 2020-08-24 - version 2.5.2
-* (Vendor/Acf) Added filter for the Image field type. (Note: Multilingual value will be accessible in the "Builder" mode.)
+* (Vendor/ACF) Added filter for the Image field type. (Note: Multilingual value will be accessible in the "Builder" mode.)
 
 2020-08-19 - version 2.5.1
 * (Vendor/Yoast) Added: Taxonomies can now output multilingual meta descriptions and localized URLs.

@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.5.2
-# This file is distributed under the same license as the WPGlobus 2.5.2 package.
+# Copyright (C) 2020 WPGlobus 2.5.3
+# This file is distributed under the same license as the WPGlobus 2.5.3 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.5.2\n"
+"Project-Id-Version: WPGlobus 2.5.3\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Save &amp; Reload"
 msgstr ""
 
-#: includes/admin/class-wpglobus-customize-options.php:553, includes/builders/gutenberg/class-wpglobus-gutenberg.php:569, includes/class-wpglobus.php:1277, wpglobus.php:12, wpglobus.php:18
+#: includes/admin/class-wpglobus-customize-options.php:553, includes/builders/gutenberg/class-wpglobus-gutenberg.php:569, includes/class-wpglobus.php:1284, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
-#: includes/builders/class-wpglobus-builder.php:278, includes/class-wpglobus.php:3570
+#: includes/builders/class-wpglobus-builder.php:278, includes/class-wpglobus.php:3577
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -666,19 +666,19 @@ msgstr ""
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #. translators: ON/OFF status of WPGlobus on the edit pages.
-#: includes/builders/elementor/class-wpglobus-elementor.php:255, includes/class-wpglobus.php:1256
+#: includes/builders/elementor/class-wpglobus-elementor.php:255, includes/class-wpglobus.php:1263
 msgid "ON"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:256, includes/class-wpglobus.php:1257
+#: includes/builders/elementor/class-wpglobus-elementor.php:256, includes/class-wpglobus.php:1264
 msgid "Turn off"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:250, includes/class-wpglobus.php:1251
+#: includes/builders/elementor/class-wpglobus-elementor.php:250, includes/class-wpglobus.php:1258
 msgid "OFF"
 msgstr ""
 
-#: includes/builders/elementor/class-wpglobus-elementor.php:251, includes/class-wpglobus.php:1252
+#: includes/builders/elementor/class-wpglobus-elementor.php:251, includes/class-wpglobus.php:1259
 msgid "Turn on"
 msgstr ""
 
@@ -764,23 +764,23 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:1440
+#: includes/class-wpglobus.php:1447
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1665
+#: includes/class-wpglobus.php:1672
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:1648
+#: includes/class-wpglobus.php:1655
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:4018
+#: includes/class-wpglobus.php:4025
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:4020
+#: includes/class-wpglobus.php:4027
 msgid "Please go to Settings > Permalinks > Common Settings and choose a non-default option."
 msgstr ""
 

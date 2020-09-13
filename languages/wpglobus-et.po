@@ -282,7 +282,7 @@ msgstr "Salvesta ja laadi uuesti"
 
 #: includes/admin/class-wpglobus-customize-options.php:553,
 #: includes/builders/gutenberg/class-wpglobus-gutenberg.php:569,
-#: includes/class-wpglobus.php:1277, wpglobus.php:12, wpglobus.php:18
+#: includes/class-wpglobus.php:1284, wpglobus.php:12, wpglobus.php:18
 msgid "WPGlobus"
 msgstr "WPGlobus"
 
@@ -808,7 +808,7 @@ msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
 #: includes/builders/class-wpglobus-builder.php:278,
-#: includes/class-wpglobus.php:3570
+#: includes/class-wpglobus.php:3577
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -823,22 +823,22 @@ msgstr ""
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #: includes/builders/elementor/class-wpglobus-elementor.php:255,
-#: includes/class-wpglobus.php:1256
+#: includes/class-wpglobus.php:1263
 msgid "ON"
 msgstr "SEES"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:256,
-#: includes/class-wpglobus.php:1257
+#: includes/class-wpglobus.php:1264
 msgid "Turn off"
 msgstr "Lülita välja"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:250,
-#: includes/class-wpglobus.php:1251
+#: includes/class-wpglobus.php:1258
 msgid "OFF"
 msgstr "VÄLJAS"
 
 #: includes/builders/elementor/class-wpglobus-elementor.php:251,
-#: includes/class-wpglobus.php:1252
+#: includes/class-wpglobus.php:1259
 msgid "Turn on"
 msgstr "Lülita sisse"
 
@@ -930,23 +930,23 @@ msgstr ""
 msgid "Selector type"
 msgstr ""
 
-#: includes/class-wpglobus.php:1440
+#: includes/class-wpglobus.php:1447
 msgid "You cannot disable the main language."
 msgstr ""
 
-#: includes/class-wpglobus.php:1665
+#: includes/class-wpglobus.php:1672
 msgid "Need a multilingual slug?"
 msgstr ""
 
-#: includes/class-wpglobus.php:1648
+#: includes/class-wpglobus.php:1655
 msgid "*) Available after the menu is saved."
 msgstr ""
 
-#: includes/class-wpglobus.php:4018
+#: includes/class-wpglobus.php:4025
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 
-#: includes/class-wpglobus.php:4020
+#: includes/class-wpglobus.php:4027
 msgid ""
 "Please go to Settings > Permalinks > Common Settings and choose a non-"
 "default option."

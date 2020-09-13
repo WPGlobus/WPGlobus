@@ -296,6 +296,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.3 ###
+
+* (Core) Added `WP_USER_EDIT_PAGE` constant to set the User edit page name.
+* (Core/Options) Added support of subsections on the WPGlobus Options page.
+* (Core/Post Types) Added post types of `Molongui Author Box` plugin to the hidden types array.
+
 ### 2.5.2 ###
 
 
@@ -313,10 +319,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Core/WidgetsJS) Fixed issue with non-unique ID.
 * (Options/Languages table) Installed languages moved to the top of the table.
 * (Core/WidgetsJS) Set multilingual field for the title only.
-
-### 2.4.17 ###
-
-* (Core/WidgetsJS) Use `WPGlobusCoreData.language` instead of `WPGlobusCoreData.default_language`; Hide unneeded dialog icons.
 
 ### Earlier versions and Add-ons ###
 
