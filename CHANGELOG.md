@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-09-19 - version 2.5.4
+* (Core/Options) Handling `li_class` attribute for section.
+* (Core/Post Types) Added post type of the `Comments – wpDiscuz` plugin to the hidden types array.
+
 2020-09-13 - version 2.5.3
 * (Core) Added `WP_USER_EDIT_PAGE` constant to set the User edit page name.
 * (Core/Options) Added support of subsections on the WPGlobus Options page.
