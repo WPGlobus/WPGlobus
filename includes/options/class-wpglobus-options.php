@@ -536,7 +536,6 @@ class WPGlobus_Options {
 		/**
 		 * Links to Admin Central
 		 */
-
 		if ( class_exists( 'WPGlobus_Admin_Central', false ) ) {
 			if ( class_exists( 'WPGlobusMobileMenu', false ) ) {
 				$this->sections['mobile-menu'] = $this->section_mobile_menu();
@@ -1290,14 +1289,14 @@ class WPGlobus_Options {
 				'type'     => 'wpglobus_multicheck',
 				'options'  => $options,
 				'name'     => 'wpglobus_option[post_type]',
-				'title'    => __( 'WPGlobus is enabled on these Post Types', 'wpglobus' ),
-				'subtitle' => __( 'Uncheck to disable', 'wpglobus' ),
-				'desc'     => __( 'Please note that there are post types, which status is managed by other plugins and cannot be changed here.', 'wpglobus' ),
+				'title'    => esc_html__( 'WPGlobus is enabled on these Post Types', 'wpglobus' ),
+				'subtitle' => esc_html__( 'Uncheck to disable', 'wpglobus' ),
+				'desc'     => esc_html__( 'Please note that there are post types, which status is managed by other plugins and cannot be changed here.', 'wpglobus' ),
 			);
 
 		return array(
 			'wpglobus_id' => 'wpglobus_post_types',
-			'title'       => __( 'Post Types', 'wpglobus' ),
+			'title'       => esc_html__( 'Post Types', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-admin-post',
 			'fields'      => $fields,
 		);
@@ -1566,12 +1565,18 @@ class WPGlobus_Options {
 	 * @return array
 	 */
 	protected function section_block_editor() {
-
+		
+		/**
+		 * @since 2.5.4
+		 */
+		$_li_class = 'hidden';
+		if ( defined('WP_DEBUG') && WP_DEBUG ) {
+			$_li_class = '';
+		}
+		
 		$fields = array();
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
-
-		// $options = array();
 
 		/**
 		 * When we add more options, need to update the @see WPGlobus_Options::sanitize_posted_data() method.
@@ -1597,6 +1602,7 @@ class WPGlobus_Options {
 			'caption'     => esc_html__( 'Block Editor Options', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-layout',
 			'fields'      => $fields,
+			'li_class'    => $_li_class,
 		);
 	}
 
@@ -1989,13 +1995,21 @@ class WPGlobus_Options {
 
 		$section = $this->section_backward_compatibility( $section );
 
+		/** 
+		 * @since 2.5.4
+		 */
+		$_li_class = '';
+		if( ! empty( $section['li_class'] ) && is_string( $section['li_class'] ) ) {
+			$_li_class = ' ' . $section['li_class'];
+		}
+
 		if ( empty( $section['tab_href'] ) ) {
 			// No real link, just switch tab.
 			$section['tab_href'] = '#';
-			$section['li_class'] = 'wpglobus-tab-link';
+			$section['li_class'] = 'wpglobus-tab-link' . $_li_class;
 		} else {
 			// Real link specified. Use it and do not set the "tab switching" CSS class.
-			$section['li_class'] = 'wpglobus-tab-external';
+			$section['li_class'] = 'wpglobus-tab-external' . $_li_class;
 		}
 
 		// Disable A-clicks unless it's a real (external) link.
