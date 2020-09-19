@@ -83,7 +83,9 @@ class WPGlobus_Post_Types {
 		'apl_post_list',
 		'apl_design',
 		// Molongui Author Box: https://wordpress.org/plugins/molongui-authorship/ @since 2.5.3
-		'guest_author'
+		'guest_author',
+		// Comments – wpDiscuz: https://wordpress.org/plugins/wpdiscuz/ @since 2.5.4
+		'wpdiscuz_form'
 	);
 
 	/**
