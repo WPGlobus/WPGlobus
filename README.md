@@ -296,11 +296,17 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.4 ###
+
+* (Core/Options) Handling `li_class` attribute for section.
+* (Core/Post Types) Added post type of the `Comments – wpDiscuz` plugin to the hidden types array.
+
 ### 2.5.3 ###
 
 * (Core) Added `WP_USER_EDIT_PAGE` constant to set the User edit page name.
 * (Core/Options) Added support of subsections on the WPGlobus Options page.
 * (Core/Post Types) Added post types of `Molongui Author Box` plugin to the hidden types array.
+* (Builders/Elementor) Added language switcher for Elementor v.3.
 
 ### 2.5.2 ###
 
@@ -312,13 +318,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * (Vendor/Yoast) Added: Taxonomies can now output multilingual meta descriptions and localized URLs.
 * (Core) Interface improvements on the `term.php` page.
-
-### 2.5.0 ###
-
-* (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.5.*
-* (Core/WidgetsJS) Fixed issue with non-unique ID.
-* (Options/Languages table) Installed languages moved to the top of the table.
-* (Core/WidgetsJS) Set multilingual field for the title only.
 
 ### Earlier versions and Add-ons ###
 
