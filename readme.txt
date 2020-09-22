@@ -217,6 +217,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.5.5 =
+
+* (Builders/Elementor) Added support for the Elementor Kit loading CSS.
+
 = 2.5.4 =
 
 * (Core/Options) Handling `li_class` attribute for section.

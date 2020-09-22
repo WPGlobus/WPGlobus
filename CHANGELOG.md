@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-09-22 - version 2.5.5
-* (Builders/Elementor) Added support loading CSS for elementor kit.
+* (Builders/Elementor) Added support for the Elementor Kit loading CSS.
 
 2020-09-19 - version 2.5.4
 * (Core/Options) Handling `li_class` attribute for section.
