@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-09-22 - version 2.5.5
+* (Builders/Elementor) Added support loading CSS for elementor kit.
+
 2020-09-19 - version 2.5.4
 * (Core/Options) Handling `li_class` attribute for section.
 * (Core/Post Types) Added post type of the `Comments – wpDiscuz` plugin to the hidden types array.
