@@ -10,6 +10,16 @@
  * @see elementor\core\files\css\post.php
  */
 use Elementor\Core\Files\CSS\Post as Post_CSS;
+/**
+ * @since 2.5.5
+ * @see elementor\core\files\css\post-preview.php
+ */
+use Elementor\Core\Files\CSS\Post_Preview as Post_Preview;
+/**
+ * @since 2.5.5
+ * @see elementor\core\kits\manager.php
+ */
+use Elementor\Core\Kits\Manager as Manager;
 
 if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 
@@ -94,9 +104,11 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'on__enqueue_styles' ), 20 );
 			
 			/**
-			 * @todo may be use elementor action instead of `wp_enqueue_scripts`.
+			 * @since 2.5.5
+			 * @see `do_action` in elementor\includes\frontend.php
+			 * @see callback function name and using it in elementor\core\kits\manager.php
 			 */
-			//add_action( 'elementor/frontend/after_enqueue_styles', array( __CLASS__, 'on__enqueue_styles' ) );		
+			add_action( 'elementor/frontend/after_enqueue_styles', array( __CLASS__, 'frontend_before_enqueue_styles' ), 0 );		
 			
 			/**
 			 * @since 2.1.13
@@ -169,6 +181,51 @@ if ( ! class_exists( 'WPGlobus_Elementor_Front' ) ) :
 			}	
 			
 			return $template;
+		}
+			
+		/**
+		 * @since 2.5.5
+		 */	
+		public static function frontend_before_enqueue_styles() {
+
+			if ( WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+				return;
+			}
+	
+			if ( ! self::is_builder_support() ) {
+				return;
+			}
+			
+			$manager = new Manager();
+			
+			$kit = $manager->get_kit_for_frontend();
+
+			if ( $kit ) {
+				if ( $kit->is_autosave() ) {
+					$css_file = Post_Preview::create( $kit->get_id() );
+				} else {
+					$css_file = Post_CSS::create( $kit->get_id() );
+				}
+
+				$handle = 'elementor-post-' . $css_file->get_post_id() .'-' . WPGlobus::Config()->language;
+				
+				$url = $css_file->get_url();
+				
+				/**
+				 * @since 2.5.5 @W.I.P `enqueue` doesn't work here.
+				 * @see `frontend_before_enqueue_styles` in elementor\core\kits\manager.php.
+				 */
+				// $css_file->enqueue();
+				
+				wp_register_style(
+					$handle,
+					$url,
+					array(),
+					'wpglobus-' . WPGLOBUS_VERSION
+					
+				);
+				wp_enqueue_style($handle);	
+			}		
 		}
 		
 		/**
