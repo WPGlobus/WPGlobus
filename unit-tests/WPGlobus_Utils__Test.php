@@ -439,6 +439,8 @@ class WPGlobus_Utils__Test extends \PHPUnit\Framework\TestCase {
 		$config->locale['ru'] = "ru_RU";
 		$config->locale['pt'] = "pt_PT";
 
+		$config->seo_hreflang_type = 'zz-ZZ';
+
 
 		/**
 		 * Mock web request
