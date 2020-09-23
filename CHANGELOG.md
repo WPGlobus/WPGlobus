@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-09-23 - version 2.5.6
+* (Core) Added `has_translation` function.
+
 2020-09-22 - version 2.5.5
 * (Builders/Elementor) Added support for the Elementor Kit loading CSS.
 
