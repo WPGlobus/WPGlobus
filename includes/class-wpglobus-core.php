@@ -35,6 +35,7 @@ class WPGlobus_Core {
 
 		/**
 		 * There are cases when numeric terms are passed here. We should not tamper with them.
+		 *
 		 * @since 1.0.8.1 Before, was returning empty string, which was incorrect.
 		 */
 		if ( ! is_string( $text ) ) {
@@ -63,6 +64,7 @@ class WPGlobus_Core {
 		/**
 		 * Fix for the case
 		 * &lt;!--:en--&gt;ENG&lt;!--:--&gt;&lt;!--:ru--&gt;RUS&lt;!--:--&gt;
+		 *
 		 * @todo need careful investigation
 		 */
 		$text = htmlspecialchars_decode( $text );
@@ -79,6 +81,7 @@ class WPGlobus_Core {
 				/**
 				 * qTranslate compatibility
 				 * qTranslate uses these two types of delimiters
+				 *
 				 * @example
 				 * <!--:en-->English<!--:--><!--:ru-->Russian<!--:-->
 				 * [:en]English S[:ru]Russian S
@@ -163,6 +166,7 @@ class WPGlobus_Core {
 					if ( self::has_translations( $text ) ) {
 						/**
 						 * Rare case of text in default language doesn't exist
+						 *
 						 * @todo make option for return warning message or maybe another action
 						 */
 						$text = '';
@@ -170,6 +174,7 @@ class WPGlobus_Core {
 				} else {
 					/**
 					 * Try the default language (recursion)
+					 *
 					 * @qa  covered by the 'one_tag' case
 					 * @see WPGlobus_QA::_test_string_parsing()
 					 */
@@ -187,8 +192,14 @@ class WPGlobus_Core {
 	 * Extract text from a string which is either:
 	 * - in the requested language (could be multiple blocks)
 	 * - or does not have the language marks
-	 * @todo  May fail on large texts because regex are used.
 	 *
+	 * @since 1.7.9
+	 * @since 2.2.12 Fixed regex to support line breaks in strings.
+	 *
+	 * @param string $text     Input text.
+	 * @param string $language Language to extract. Default is the current language.
+	 *
+	 * @return string
 	 * @example
 	 * Input:
 	 *  '{:en}first_EN{:}{:ru}first_RU{:} blah-blah {:en}second_EN{:}{:ru}second_RU{:}'
@@ -196,12 +207,8 @@ class WPGlobus_Core {
 	 * Output:
 	 *  'first_EN blah-blah second_EN'
 	 *
-	 * @param string $text     Input text.
-	 * @param string $language Language to extract. Default is the current language.
+	 * @todo  May fail on large texts because regex are used.
 	 *
-	 * @return string
-	 * @since 1.7.9
-	 * @since 2.2.12 Fixed regex to support line breaks in strings.
 	 */
 	public static function extract_text( $text = '', $language = '' ) {
 		if ( ! $text || ! is_string( $text ) ) {
@@ -240,6 +247,7 @@ class WPGlobus_Core {
 
 		/**
 		 * This should detect majority of the strings with our delimiters without calling preg_match
+		 *
 		 * @var int $pos_start
 		 */
 		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN );
@@ -261,27 +269,30 @@ class WPGlobus_Core {
 	 *
 	 * @since 2.5.6
 	 *
-	 * @param string $string
+	 * @param string $string   The string to test.
 	 * @param string $language 2-Letter language code.
 	 *
 	 * @return bool
 	 */
 	public static function has_translation( $string, $language = '' ) {
 
+		if ( class_exists( 'WPGlobus_Config' ) ) {
+			$default_language = WPGlobus::Config()->default_language;
+		} else {
+			// When in unit tests.
+			$default_language = 'en';
+		}
+
 		/**
 		 * `$language` not passed.
 		 */
 		if ( ! $language ) {
-			if ( class_exists( 'WPGlobus_Config' ) ) {
-				$language = WPGlobus::Config()->default_language;
-			} else {
-				// When in unit tests.
-				$language = 'en';
-			}
+			$language = $default_language;
 		}
 
 		/**
 		 * This should detect majority of the strings with our delimiters without calling preg_match.
+		 *
 		 * @var int $pos_start
 		 */
 		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN . $language . WPGlobus::LOCALE_TAG_CLOSE );
@@ -290,7 +301,7 @@ class WPGlobus_Core {
 				return true;
 			}
 		} else {
-			if ( ! empty( $string ) && class_exists( 'WPGlobus_Config' ) && $language == WPGlobus::Config()->default_language ) {
+			if ( ! empty( $string ) && $language === $default_language ) {
 				return true;
 			}
 		}
@@ -298,7 +309,7 @@ class WPGlobus_Core {
 		/**
 		 * For compatibility, etc. - the universal procedure with regexp.
 		 */
-		return (bool) preg_match( '/(\{:|\[:|<!--:)'.$language.'\}/', $string );
+		return (bool) preg_match( '/({:|\[:|<!--:)' . $language . '}/', $string );
 	}
 
 	/**
