@@ -136,12 +136,13 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		 * @var string[] $positives
 		 */
 		$positives = array(
-			'{:en}EN{:}{:ru}RU{:}'                      => 'en',
-			"Multi-line\n\n {:en}E\nN{:}\n\n{:ru}RU{:}" => 'en',
-			'{:xx}'                                     => 'xx',
-			'Lead {:xx}'                                => 'xx',
-			'Lead {:xx} trail'                          => 'xx',
-			'No delimiters, en'                         => 'en',
+			'{:en}EN{:}{:ru}RU{:}'                                  => 'en',
+			"Multi-line\n\n {:en}E\nN{:}\n\n{:ru}RU{:}"             => 'en',
+			'{:xx}'                                                 => 'xx',
+			'Lead {:xx}'                                            => 'xx',
+			'Lead {:xx} trail'                                      => 'xx',
+			'No delimiters, en'                                     => 'en',
+			'English exists w/o delimiters plus some garbage {xx:}' => 'en',
 		);
 
 		foreach ( $positives as $string => $language ) {
@@ -154,14 +155,18 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 		 * @var string[] $negatives
 		 */
 		$negatives = array(
-			''                                                  => 'en',
-			'No delimiters, NOT en'                             => 'xx',
-			// 'Wrong delimiter {xx:}'                 => 'en',
-			// 'One-character locale {:e}'             => 'e',
-			// 'Non-alpha locale {:e1}EN{:}{:r2}RU{:}' => 'e1',
-			// 'Non-latin locale {:ан}EN{:}{:ру}RU{:}' => 'en',
-			'Uppercase non-default locale {:EN}EN{:}{:RU}RU{:}' => 'ru',
-			// 'Uppercase default locale {:EN}EN{:}{:RU}RU{:}' => 'en',
+			// Non-latin locale
+			'{:ан}EN{:}{:ру}RU{:}'                          => 'ан',
+			''                                              => 'en',
+			'No delimiters, NOT en'                         => 'xx',
+			'{:xx}No English{:}{:yy}Blah{:}'                => 'en',
+			'Russian but in uppercase {:EN}EN{:}{:RU}RU{:}' => 'ru',
+			// 'Non-alpha locale
+			'{:e1}EN{:}{:r2}RU{:}'                          => 'e1',
+			// 'Uppercase default locale
+			'{:EN}EN{:}{:RU}RU{:}'                          => 'EN',
+			// 'One-character locale
+			'{:e}'                                          => 'e',
 		);
 
 		foreach ( $negatives as $string => $language ) {

@@ -265,6 +265,27 @@ class WPGlobus_Core {
 	}
 
 	/**
+	 * True if language code is a string of two [a-z] characters.
+	 *
+	 * @since 2.5.6
+	 *
+	 * @param string $language The language code.
+	 *
+	 * @return bool
+	 */
+	public static function is_language_code_valid( $language ) {
+		if (
+			is_string( $language )
+			&& 2 === strlen( $language )
+			&& ctype_lower( $language )
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Check if string has language delimiters for the given language.
 	 *
 	 * @since 2.5.6
@@ -276,6 +297,10 @@ class WPGlobus_Core {
 	 */
 	public static function has_translation( $string, $language = '' ) {
 
+		if ( ! is_string( $string ) || ! $string ) {
+			return false;
+		}
+
 		if ( class_exists( 'WPGlobus_Config' ) ) {
 			$default_language = WPGlobus::Config()->default_language;
 		} else {
@@ -283,41 +308,33 @@ class WPGlobus_Core {
 			$default_language = 'en';
 		}
 
-		/**
-		 * `$language` not passed.
-		 */
-		if ( ! $language ) {
+		if ( $language ) {
+			if ( ! self::is_language_code_valid( $language ) ) {
+				return false;
+			}
+		} else {
+			// `$language` not passed.
 			$language = $default_language;
 		}
+
+		$language_open_tag = WPGlobus::LOCALE_TAG_OPEN . $language . WPGlobus::LOCALE_TAG_CLOSE;
 
 		/**
 		 * This should detect majority of the strings with our delimiters without calling preg_match.
 		 *
 		 * @var int $pos_start
 		 */
-		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN . $language . WPGlobus::LOCALE_TAG_CLOSE );
+		$pos_start = strpos( $string, $language_open_tag );
 		if ( false !== $pos_start ) {
-			if ( ctype_lower( $string[ $pos_start + 2 ] ) && ctype_lower( $string[ $pos_start + 3 ] ) ) {
-				return true;
-			}
+			// Found {:xx} where xx is the language code we were looking for.
+			return true;
 		} else {
-			/**
-			if ( ! empty( $string ) && $language === $default_language ) {
-				return true;
-			}
-			// */
-			if ( ! empty( $string ) ) {
-				if ( empty( self::text_filter( $string, $language, WPGlobus::RETURN_EMPTY, $default_language ) ) ) {
-					return false;
-				}
-				return true;
-			}
-		}
+			// Try to extract the language portion.
+			$filtered = self::text_filter( $string, $language, WPGlobus::RETURN_EMPTY, $default_language );
 
-		/**
-		 * For compatibility, etc. - the universal procedure with regexp.
-		 */
-		return (bool) preg_match( '/({:|\[:|<!--:)' . $language . '}/', $string );
+			// Non-empty `filtered` is OK.
+			return (bool) $filtered;
+		}
 	}
 
 	/**
