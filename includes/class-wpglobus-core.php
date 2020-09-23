@@ -257,6 +257,47 @@ class WPGlobus_Core {
 	}
 
 	/**
+	 * Check if string has language delimiters for the given language.
+	 *
+	 * @since 2.5.6
+	 *
+	 * @param string $string
+	 * @param string $language 2-Letter language code.
+	 *
+	 * @return bool
+	 */
+	public static function has_translation( $string, $language = '' ) {
+
+		/**
+		 * `$language` not passed.
+		 */
+		if ( ! $language ) {
+			if ( class_exists( 'WPGlobus_Config' ) ) {
+				$language = WPGlobus::Config()->default_language;
+			} else {
+				// When in unit tests.
+				$language = 'en';
+			}
+		}
+
+		/**
+		 * This should detect majority of the strings with our delimiters without calling preg_match.
+		 * @var int $pos_start
+		 */
+		$pos_start = strpos( $string, WPGlobus::LOCALE_TAG_OPEN . $language . WPGlobus::LOCALE_TAG_CLOSE );
+		if ( false !== $pos_start ) {
+			if ( ctype_lower( $string[ $pos_start + 2 ] ) && ctype_lower( $string[ $pos_start + 3 ] ) ) {
+				return true;
+			}
+		}
+
+		/**
+		 * For compatibility, etc. - the universal procedure with regexp.
+		 */
+		return (bool) preg_match( '/(\{:|\[:|<!--:)'.$language.'\}/', $string );
+	}
+
+	/**
 	 * Keeps only one language in all textual fields of the `$post` object.
 	 *
 	 * @see \WPGlobus_Core::text_filter for the parameters description
