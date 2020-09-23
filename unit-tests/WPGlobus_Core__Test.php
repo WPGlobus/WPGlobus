@@ -8,7 +8,7 @@
 /**
  *
  */
-class WPGlobus_Core_Test extends \PHPUnit\Framework\TestCase {
+class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @covers WPGlobus_Core::text_filter
@@ -123,10 +123,59 @@ class WPGlobus_Core_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * Test `has_translation`.
+	 *
+	 * @since  2.5.6
+	 * @covers WPGlobus_Core::has_translation
+	 */
+	public function test_has_translation() {
+
+		/**
+		 * These must pass.
+		 *
+		 * @var string[] $positives
+		 */
+		$positives = array(
+			'{:en}EN{:}{:ru}RU{:}'                      => 'en',
+			"Multi-line\n\n {:en}E\nN{:}\n\n{:ru}RU{:}" => 'en',
+			'{:xx}'                                     => 'xx',
+			'Lead {:xx}'                                => 'xx',
+			'Lead {:xx} trail'                          => 'xx',
+			'No delimiters, en'                         => 'en',
+		);
+
+		foreach ( $positives as $string => $language ) {
+			self::assertTrue( WPGlobus_Core::has_translation( $string, $language ), 'Has translation: ' . $string . ', ' . $language );
+		}
+
+		/**
+		 * These must not pass.
+		 *
+		 * @var string[] $negatives
+		 */
+		$negatives = array(
+			''                                                  => 'en',
+			'No delimiters, NOT en'                             => 'xx',
+			// 'Wrong delimiter {xx:}'                 => 'en',
+			// 'One-character locale {:e}'             => 'e',
+			// 'Non-alpha locale {:e1}EN{:}{:r2}RU{:}' => 'e1',
+			// 'Non-latin locale {:ан}EN{:}{:ру}RU{:}' => 'en',
+			'Uppercase non-default locale {:EN}EN{:}{:RU}RU{:}' => 'ru',
+			// 'Uppercase default locale {:EN}EN{:}{:RU}RU{:}' => 'en',
+		);
+
+		foreach ( $negatives as $string => $language ) {
+			self::assertFalse( WPGlobus_Core::has_translation( $string, $language ), 'Has no translation: ' . $string . ', ' . $language );
+		}
+	}
+
+	/**
+	 * Mock WP_Post.
+	 *
 	 * @return WP_Post|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function createMockWPPost() {
-		/** @noinspection MockingFinalClassesInspection */
+		/** @noinspection PhpParamsInspection */
 		return $this->getMockBuilder( 'WP_Post' )->getMock();
 	}
 
