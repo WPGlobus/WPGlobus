@@ -301,7 +301,15 @@ class WPGlobus_Core {
 				return true;
 			}
 		} else {
+			/**
 			if ( ! empty( $string ) && $language === $default_language ) {
+				return true;
+			}
+			// */
+			if ( ! empty( $string ) ) {
+				if ( empty( self::text_filter( $string, $language, WPGlobus::RETURN_EMPTY, $default_language ) ) ) {
+					return false;
+				}
 				return true;
 			}
 		}
