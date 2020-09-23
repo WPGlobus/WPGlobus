@@ -289,6 +289,10 @@ class WPGlobus_Core {
 			if ( ctype_lower( $string[ $pos_start + 2 ] ) && ctype_lower( $string[ $pos_start + 3 ] ) ) {
 				return true;
 			}
+		} else {
+			if ( ! empty( $string ) && class_exists( 'WPGlobus_Config' ) && $language == WPGlobus::Config()->default_language ) {
+				return true;
+			}
 		}
 
 		/**
