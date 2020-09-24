@@ -217,6 +217,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.5.6 =
+
+* (Core) Added `has_translation` function.
+
 = 2.5.5 =
 
 * (Builders/Elementor) Added support for the Elementor Kit loading CSS.
