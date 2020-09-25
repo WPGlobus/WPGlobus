@@ -83,6 +83,8 @@ require_once dirname( __FILE__ ) . '/includes/class-wpglobus.php';
 
 require_once dirname( __FILE__ ) . '/includes/class-wpglobus-core.php';
 
+require_once dirname( __FILE__ ) . '/includes/class-wpglobus-rest-api.php';
+
 /**
  * Admin page helpers.
  *
@@ -103,6 +105,8 @@ WPGlobus::Config();
 
 require_once dirname( __FILE__ ) . '/includes/class-wpglobus-filters.php';
 require_once dirname( __FILE__ ) . '/includes/wpglobus-controller.php';
+
+WPGlobus_Rest_API::construct();
 
 /**
  * Support for Yoast SEO
