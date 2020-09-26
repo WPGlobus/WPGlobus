@@ -61,13 +61,25 @@ class WPGlobus_Core__Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * Test for extract_text.
+	 *
 	 * @covers WPGlobus_Core::extract_text
 	 */
 	public function test_extract_text() {
+
+		$_content = '{:ru}Тут только русский контент{:}';
+		self::assertEmpty( WPGlobus_Core::extract_text( $_content ), __LINE__ );
+
+		// See the method description:
+		//  - or does not have the language marks
+		$_content    = 'Content in default language only';
+		$expected_ru = 'Content in default language only';
+		$actual_ru   = WPGlobus_Core::extract_text( $_content, 'ru' );
+		self::assertSame( $expected_ru, $actual_ru, __LINE__ );
+
 		$multiple = '{:en}first_EN{:}{:ru}first_RU{:} &ndash; {:en}second_EN{:}{:ru}second_RU{:}';
 		self::assertEquals( 'first_EN &ndash; second_EN', WPGlobus_Core::extract_text( $multiple ), __LINE__ );
 		self::assertEquals( 'first_RU &ndash; second_RU', WPGlobus_Core::extract_text( $multiple, 'ru' ), __LINE__ );
-
 
 		// Content with line breaks.
 		$_content = ' <br /> <h2 style="color:#fff;" class="message-title">{:en}English Title{:}{:ru}Русский заголовок{:}</h2> <div class="message-content"> <p style="color:#fff;">{:en}English Content{:}{:ru}Русский контент.
