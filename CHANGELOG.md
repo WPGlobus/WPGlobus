@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-09-25 - version 2.5.7
-* (Core) Registered a new field `translation` in the response of Rest API for posts.
+* (Core) Registered a new field, `translation`, in the Rest API response for posts.
 
 2020-09-23 - version 2.5.6
 * (Core) Added `has_translation` function.
