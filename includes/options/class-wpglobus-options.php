@@ -36,6 +36,15 @@ class WPGlobus_Options {
 	const DEFAULT_TAB = 'welcome';
 
 	/**
+	 *  WPGlobus Options image URL.
+	 *
+	 * @since 2.5.8
+	 *
+	 * @var string
+	 */
+	protected $url_options_image = '';
+
+	/**
 	 * Various settings.
 	 *
 	 * @var array
@@ -81,6 +90,8 @@ class WPGlobus_Options {
 	 * Constructor
 	 */
 	public function __construct() {
+
+		$this->url_options_image = WPGlobus::$PLUGIN_DIR_URL . 'includes/options/images/';
 
 		add_action( 'init', array( $this, 'on__init' ), PHP_INT_MAX );
 
@@ -517,6 +528,7 @@ class WPGlobus_Options {
 		$this->sections['compatibility']    = $this->section_compatibility();
 		$this->sections['block-editor']     = $this->section_block_editor();
 		$this->sections['seo']     		  	= $this->section_seo(); // @since 2.3.4
+		$this->sections['rest-api']     	= $this->section_rest_api(); // @since 2.5.8
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
@@ -1714,6 +1726,116 @@ class WPGlobus_Options {
 			'icon'        => 'dashicons dashicons-code-standards',
 			'fields'      => $fields,
 		);		
+	}
+
+	/**
+	 * Section "Rest API".
+	 *
+	 * @since 2.5.8
+	 * @return array
+	 */
+	protected function section_rest_api() {
+		
+		$fields = array();
+
+		$_post_id = 1;
+		$_route_for_post = rest_get_route_for_post( $_post_id );
+		$_namespace = 'wp/v2';
+		$_default_language_name = WPGlobus::Config()->language_name[WPGlobus::Config()->default_language];
+		$_extra_language_name   = WPGlobus::Config()->language_name[WPGlobus::Config()->enabled_languages[1]];
+		
+		if ( ! empty( $_route_for_post ) ) {
+			$_rest_rout = rest_get_url_prefix() .  $_route_for_post;
+			$_url = home_url( $_rest_rout );
+		} else {
+			$_rest_rout = rest_get_url_prefix();
+			$_url = home_url( $_rest_rout . '/' . $_namespace . '/posts/' );
+		}
+
+		$_info_desc  = esc_html__( 'ВПГлобус позволяет получать переводы постов и страниц используя Rest API.', 'wpglobus' );
+		$_info_desc .= '<br />';
+		
+		if ( ! empty( $_route_for_post ) ) {
+			
+			$_info_desc .= esc_html__( 'В качестве примера можно использовать первый пост который создаётся при установке ВордПресс.', 'wpglobus' );
+			$_info_desc .= '<br />';
+			$_info_desc .= sprintf( 
+				esc_html__( 'Перейдите по ссылке %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
+				'<a href="'.$_url.'" target="_blank">',
+				$_url,
+				'</a>',
+				$_default_language_name
+			);
+			$_info_desc .= '<br />';
+			$_info_desc .= sprintf( 
+				esc_html__( 'Перейдите по ссылке %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
+				'<a href="'.$_url.'" target="_blank">',
+				WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] ),
+				'</a>',
+				$_extra_language_name
+			);
+			$_info_desc .= '<br />';
+			
+		} else {
+			
+			$_info_desc .= sprintf( 
+				esc_html__( 'Используйте ссылку %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
+				'<a href="'.$_url.'" target="_blank">',
+				$_url,
+				'</a>',
+				$_default_language_name
+			);			
+			$_info_desc .= '<br />';
+			$_info_desc .= sprintf( 
+				esc_html__( 'Используйте ссылку %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
+				'<a href="'.$_url.'" target="_blank">',
+				WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] ),
+				'</a>',
+				$_extra_language_name
+			);
+			$_info_desc .= '<br />';			
+		}
+
+		$_info_desc .= sprintf( 
+			esc_html__( 'Для получения подробной информации обратитесь к %1$sофициальной документации%2$s.', 'wpglobus' ),
+			'<a href="https://developer.wordpress.org/rest-api/" target="_blank">',
+			'</a>'
+		);
+		$_info_desc .= '<br />';
+		
+		$_info_desc .= sprintf( 
+			esc_html__( 'В ответе Rest API вы найдёте поле %1$stranslation%2$s которое даёт возможность проверить существуют ли', 'wpglobus' ),
+			'<strong>',
+			'</strong>'
+		);
+		$_info_desc .= '<br />';
+		
+		$_info_desc .= sprintf( 
+			esc_html__( 'переводы полей %1$stitle%2$s, %1$scontent%2$s и %1$sexcerpt%2$s для каждого языка (см.скриншот).', 'wpglobus' ),
+			'<strong>',
+			'</strong>'
+		);
+		
+		$_info_desc .= '<div class="img-container" style="vertical-align:middle;text-align:center;">';
+		$_info_desc .=		'<img src="' . $this->url_options_image . 'rest-api-response-field-translation.jpg" />';
+		$_info_desc .= '</div>';
+		
+		$fields[] =
+			array(
+				'id'     => 'wpglobus_rest_api_info',
+				'type'	 => 'wpglobus_info',
+				'title'  => esc_html__( 'Описание:', 'wpglobus' ),
+				'desc'   => $_info_desc,
+				'class'  => 'info', // or normal
+			);
+	
+		return array(
+			'wpglobus_id' => 'wpglobus_rest_api',
+			'title'       => esc_html__( 'Rest API', 'wpglobus' ),
+			'caption'     => esc_html__( 'Rest API', 'wpglobus' ),
+			'icon'        => 'dashicons dashicons-rest-api',
+			'fields'      => $fields,
+		);			
 	}
 
 	/**
