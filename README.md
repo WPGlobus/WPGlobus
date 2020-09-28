@@ -296,6 +296,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.8 ###
+
+* (Core/Options) Added `"REST API"` section to the Options Panel.
+
 ### 2.5.7 ###
 
 * (Core) Registered a new field, `translation`, in the Rest API response for posts.

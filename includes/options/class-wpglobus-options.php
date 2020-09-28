@@ -102,12 +102,12 @@ class WPGlobus_Options {
 		add_action( 'admin_print_scripts', array( $this, 'on__admin_scripts' ) );
 
 		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
-		
+
 		/**
 		 * @since 2.2.14
 		 */
 		add_action( 'wp_ajax_' . WPGLOBUS_AJAX, array( $this, 'on__process_ajax' ) );
-		
+
 	}
 
 	/**
@@ -467,50 +467,50 @@ class WPGlobus_Options {
 
 		// TODO: SOCIAL ICONS.
 		/**
-		$ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
-
-		$this->args['share_icons'][] = array(
-			'url'   => WPGlobus_Utils::url_wpglobus_site() . 'quick-start/' . $ga_campaign,
-			'title' => esc_html__( 'Read the Quick Start Guide', 'wpglobus' ),
-			'icon'  => 'el el-question-sign',
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => WPGlobus_Utils::url_wpglobus_site() . $ga_campaign,
-			'title' => esc_html__( 'Visit our website', 'wpglobus' ),
-			'icon'  => 'el el-globe',
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/' . $ga_campaign,
-			'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
-			'icon'  => 'el el-icon-shopping-cart',
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => 'https://github.com/WPGlobus',
-			'title' => esc_html__( 'Collaborate on GitHub', 'wpglobus' ),
-			'icon'  => 'el el-github'
-			//'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => 'https://www.facebook.com/WPGlobus',
-			'title' => esc_html__( 'Like us on Facebook', 'wpglobus' ),
-			'icon'  => 'el el-facebook',
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => 'https://twitter.com/WPGlobus',
-			'title' => esc_html__( 'Follow us on Twitter', 'wpglobus' ),
-			'icon'  => 'el el-twitter',
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => 'https://www.linkedin.com/company/wpglobus',
-			'title' => esc_html__( 'Find us on LinkedIn', 'wpglobus' ),
-			'icon'  => 'el el-linkedin',
-		);
-		$this->args['share_icons'][] = array(
-			'url'   => 'https://plus.google.com/+Wpglobus',
-			'title' => esc_html__( 'Circle us on Google+', 'wpglobus' ),
-			'icon'  => 'el el-googleplus',
-		);
-		*/
+		 * $ga_campaign = '?utm_source=wpglobus-options-socials&utm_medium=link&utm_campaign=options-panel';
+		 *
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => WPGlobus_Utils::url_wpglobus_site() . 'quick-start/' . $ga_campaign,
+		 * 'title' => esc_html__( 'Read the Quick Start Guide', 'wpglobus' ),
+		 * 'icon'  => 'el el-question-sign',
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => WPGlobus_Utils::url_wpglobus_site() . $ga_campaign,
+		 * 'title' => esc_html__( 'Visit our website', 'wpglobus' ),
+		 * 'icon'  => 'el el-globe',
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => WPGlobus_Utils::url_wpglobus_site() . 'product/woocommerce-wpglobus/' . $ga_campaign,
+		 * 'title' => esc_html__( 'Buy WooCommerce WPGlobus extension', 'wpglobus' ),
+		 * 'icon'  => 'el el-icon-shopping-cart',
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => 'https://github.com/WPGlobus',
+		 * 'title' => esc_html__( 'Collaborate on GitHub', 'wpglobus' ),
+		 * 'icon'  => 'el el-github'
+		 * //'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => 'https://www.facebook.com/WPGlobus',
+		 * 'title' => esc_html__( 'Like us on Facebook', 'wpglobus' ),
+		 * 'icon'  => 'el el-facebook',
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => 'https://twitter.com/WPGlobus',
+		 * 'title' => esc_html__( 'Follow us on Twitter', 'wpglobus' ),
+		 * 'icon'  => 'el el-twitter',
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => 'https://www.linkedin.com/company/wpglobus',
+		 * 'title' => esc_html__( 'Find us on LinkedIn', 'wpglobus' ),
+		 * 'icon'  => 'el el-linkedin',
+		 * );
+		 * $this->args['share_icons'][] = array(
+		 * 'url'   => 'https://plus.google.com/+Wpglobus',
+		 * 'title' => esc_html__( 'Circle us on Google+', 'wpglobus' ),
+		 * 'icon'  => 'el el-googleplus',
+		 * );
+		 */
 
 	}
 
@@ -527,8 +527,8 @@ class WPGlobus_Options {
 		$this->sections['customizer']       = $this->section_customizer();
 		$this->sections['compatibility']    = $this->section_compatibility();
 		$this->sections['block-editor']     = $this->section_block_editor();
-		$this->sections['seo']     		  	= $this->section_seo(); // @since 2.3.4
-		$this->sections['rest-api']     	= $this->section_rest_api(); // @since 2.5.8
+		$this->sections['seo']              = $this->section_seo(); // @since 2.3.4
+		$this->sections['rest-api']         = $this->section_rest_api(); // @since 2.5.8
 
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
@@ -678,7 +678,7 @@ class WPGlobus_Options {
 				'desc'   => '' .
 							'<em>' .
 							sprintf(// Translators: %?$s: HTML codes for hyperlink. Do not remove.
-									esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ),
+								esc_html__( 'We would hate to see you go. If something goes wrong, do not uninstall WPGlobus yet. Please %1$stalk to us%2$s and let us help!', 'wpglobus' ),
 								'<a href="' . esc_url( WPGlobus_Admin_Page::url_helpdesk() ) . '">',
 								'</a>'
 							) .
@@ -1213,7 +1213,9 @@ class WPGlobus_Options {
 						: $wpglobus_option['show_flag_name'] ),
 					'name'    => 'wpglobus_option[show_flag_name]',
 				),
-				// $WPGlobus_Config->nav_menu
+				/**
+				 * $WPGlobus_Config->nav_menu
+				 */
 				array(
 					'id'      => 'use_nav_menu',
 					'type'    => 'wpglobus_dropdown',
@@ -1346,7 +1348,7 @@ class WPGlobus_Options {
 				'title'    => __( 'Custom CSS', 'wpglobus' ),
 				'mode'     => 'css',
 				'name'     => 'wpglobus_option[css_editor]',
-				'value'    => empty($wpglobus_option['css_editor']) ? '' : $wpglobus_option['css_editor'],
+				'value'    => empty( $wpglobus_option['css_editor'] ) ? '' : $wpglobus_option['css_editor'],
 				'subtitle' => '',
 				'desc'     => '',
 			);
@@ -1358,7 +1360,7 @@ class WPGlobus_Options {
 				'title'    => __( 'Custom JS Code', 'wpglobus' ),
 				'mode'     => 'javascript',
 				'name'     => 'wpglobus_option[js_editor]',
-				'value'    => empty($wpglobus_option['js_editor']) ? '' : $wpglobus_option['js_editor'],
+				'value'    => empty( $wpglobus_option['js_editor'] ) ? '' : $wpglobus_option['js_editor'],
 				'subtitle' => '',
 				'desc'     => '',
 			);
@@ -1434,7 +1436,7 @@ class WPGlobus_Options {
 				'html'  => include dirname( __FILE__ ) . '/templates/customize-intro.php',
 				'class' => 'normal',
 			);
-		
+
 		/**
 		 * @since 2.2.23
 		 */
@@ -1444,7 +1446,7 @@ class WPGlobus_Options {
 				'type'  => 'wpglobus_info',
 				'html'  => include dirname( __FILE__ ) . '/templates/debug-info-theme.php',
 				'class' => 'normal',
-			);		
+			);
 
 		return array(
 			'wpglobus_id' => 'wpglobus_customizer',
@@ -1488,7 +1490,7 @@ class WPGlobus_Options {
 				'name'    => 'wpglobus_option[builder_disabled]',
 				'title'   => __( 'Builders support', 'wpglobus' ),
 			);
-			
+
 		/**
 		 * Field: "Builder mode is enabled on these Post Types".
 		 *
@@ -1510,13 +1512,13 @@ class WPGlobus_Options {
 
 				$field_wrapper_style = '';
 
-				if ( $checked || in_array( $post_type->name, array('post', 'page') ) ) {
+				if ( $checked || in_array( $post_type->name, array( 'post', 'page' ) ) ) {
 
-					if ( in_array( $post_type->name, array('post', 'page') ) ) {
+					if ( in_array( $post_type->name, array( 'post', 'page' ) ) ) {
 						$disabled = true;
 					} else {
 						$checked = false;
-						if ( ! empty( $this->config->builder->post_types[$post_type->name] ) && $this->config->builder->post_types[$post_type->name] == 1  ) {
+						if ( ! empty( $this->config->builder->post_types[ $post_type->name ] ) && $this->config->builder->post_types[ $post_type->name ] == 1 ) {
 							$checked = true;
 						}
 					}
@@ -1540,9 +1542,9 @@ class WPGlobus_Options {
 					'name'    => 'wpglobus_option[builder_post_types]',
 					'title'   => __( 'Builder mode is enabled on these Post Types', 'wpglobus' ),
 				);
-				
-		endif;		
-		
+
+		endif;
+
 		/**
 		 * Other fields.
 		 */
@@ -1553,7 +1555,7 @@ class WPGlobus_Options {
 				'html'  => include dirname( __FILE__ ) . '/templates/compatibility.php',
 				'class' => 'normal',
 			);
-		
+
 		$fields[] =
 			array(
 				'id'    => 'builder_beta_stage',
@@ -1577,15 +1579,15 @@ class WPGlobus_Options {
 	 * @return array
 	 */
 	protected function section_block_editor() {
-		
+
 		/**
 		 * @since 2.5.4
 		 */
 		$_li_class = 'hidden';
-		if ( defined('WP_DEBUG') && WP_DEBUG ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			$_li_class = '';
 		}
-		
+
 		$fields = array();
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
@@ -1628,18 +1630,18 @@ class WPGlobus_Options {
 
 		/**
 		 * We can get options from WPGlobus::Config().
-		 */		
+		 */
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
-		$hreflang_type_default = 'zz-ZZ';
+		$hreflang_type_default          = 'zz-ZZ';
 		$hreflang_type_default_language = false;
 
-		$hreflang_type = empty( $wpglobus_option['seo_hreflang_type'] ) ? $hreflang_type_default : $wpglobus_option['seo_hreflang_type'];
+		$hreflang_type                      = empty( $wpglobus_option['seo_hreflang_type'] ) ? $hreflang_type_default : $wpglobus_option['seo_hreflang_type'];
 		$hreflang_type_for_default_language = empty( $wpglobus_option['seo_hreflang_default_language_type'] ) ? false : $wpglobus_option['seo_hreflang_default_language_type'];
-		
-		$home_url = home_url('/');
-		
-		$_info_desc  = '<strong>';
+
+		$home_url = home_url( '/' );
+
+		$_info_desc = '<strong>';
 		$_info_desc .= esc_html__( 'With the current settings, you will see the following lines in the section HEAD of your site pages', 'wpglobus' );
 		$_info_desc .= '&nbsp;';
 		$_info_desc .= esc_html__( '(example for two languages)', 'wpglobus' );
@@ -1647,53 +1649,53 @@ class WPGlobus_Options {
 		$_info_desc .= ':<br />';
 
 		$draft = '<link rel="alternate" hreflang="{{code}}" href="{{link}}" />';
-		
+
 		$i = 0;
-		foreach( WPGlobus::Config()->enabled_languages as $language ) {
-			
+		foreach ( WPGlobus::Config()->enabled_languages as $language ) {
+
 			if ( $i > 1 ) {
 				break;
 			}
-			
-			switch ($hreflang_type) {
+
+			switch ( $hreflang_type ) {
 				case 'zz':
 					$_hreflang_type = $language;
 					break;
 				case 'zz-zz':
-					$_hreflang_type = str_replace( '_', '-', strtolower(WPGlobus::Config()->locale[ $language ]) );
+					$_hreflang_type = str_replace( '_', '-', strtolower( WPGlobus::Config()->locale[ $language ] ) );
 					break;
 				default :
 					// 'zz-ZZ'
-					$_hreflang_type = str_replace( '_', '-', WPGlobus::Config()->locale[ $language ] );	
+					$_hreflang_type = str_replace( '_', '-', WPGlobus::Config()->locale[ $language ] );
 					break;
-			}			
-			
+			}
+
 			if ( $language == WPGlobus::Config()->default_language ) {
 				if ( $hreflang_type_for_default_language ) {
 					$_hreflang_type = $hreflang_type_for_default_language;
 				}
 			}
-			
-			$_draft = str_replace( 
-				array('{{code}}', '{{link}}'), 
-				array($_hreflang_type, WPGlobus_Utils::localize_url($home_url, $language) ), 
-				$draft 
+
+			$_draft     = str_replace(
+				array( '{{code}}', '{{link}}' ),
+				array( $_hreflang_type, WPGlobus_Utils::localize_url( $home_url, $language ) ),
+				$draft
 			);
-			$_info_desc .= htmlspecialchars( $_draft, ENT_QUOTES, 'UTF-8');
+			$_info_desc .= htmlspecialchars( $_draft, ENT_QUOTES, 'UTF-8' );
 			$_info_desc .= '<br />';
-			
+
 			$i++;
 		}
-		
+
 		$fields[] =
 			array(
-				'id'     => 'wpglobus_hreflang',
-				'type'	 => 'wpglobus_info',
-				'title'  => esc_html__( 'Tell search engines about localized versions of your pages using the hreflang tag', 'wpglobus' ),
-				'desc'   => $_info_desc,
-				'class'  => 'info', // or normal
+				'id'    => 'wpglobus_hreflang',
+				'type'  => 'wpglobus_info',
+				'title' => esc_html__( 'Tell search engines about localized versions of your pages using the hreflang tag', 'wpglobus' ),
+				'desc'  => $_info_desc,
+				'class' => 'info', // or normal
 			);
-		
+
 		$fields[] =
 			array(
 				'id'      => 'seo_hreflang_type',
@@ -1706,9 +1708,9 @@ class WPGlobus_Options {
 					'zz'    => esc_html__( 'Language code only (en, ru, etc.)', 'wpglobus' ),
 				),
 				'default' => $hreflang_type,
-				'name' => 'wpglobus_option[seo_hreflang_type]',
+				'name'    => 'wpglobus_option[seo_hreflang_type]',
 			);
-	
+
 		$fields[] =
 			array(
 				'id'      => 'seo_hreflang_default_language_type',
@@ -1718,14 +1720,14 @@ class WPGlobus_Options {
 				'title'   => esc_html__( 'Use the code `x-default` for the main language', 'wpglobus' ),
 				'label'   => esc_html__( 'Enabled', 'wpglobus' ),
 			);
-	
+
 		return array(
 			'wpglobus_id' => 'wpglobus_multilingual_seo',
 			'title'       => esc_html__( 'Multilingual SEO', 'wpglobus' ),
 			'caption'     => esc_html__( 'Multilingual SEO Options', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-code-standards',
 			'fields'      => $fields,
-		);		
+		);
 	}
 
 	/**
@@ -1735,107 +1737,101 @@ class WPGlobus_Options {
 	 * @return array
 	 */
 	protected function section_rest_api() {
-		
+
 		$fields = array();
 
-		$_post_id = 1;
-		$_route_for_post = rest_get_route_for_post( $_post_id );
-		$_namespace = 'wp/v2';
-		$_default_language_name = WPGlobus::Config()->language_name[WPGlobus::Config()->default_language];
-		$_extra_language_name   = WPGlobus::Config()->language_name[WPGlobus::Config()->enabled_languages[1]];
-		
+		$_post_id               = 1;
+		$_route_for_post        = rest_get_route_for_post( $_post_id );
+		$_namespace             = 'wp/v2';
+		$_default_language_name = WPGlobus::Config()->language_name[ WPGlobus::Config()->default_language ];
+		$_extra_language_name   = WPGlobus::Config()->language_name[ WPGlobus::Config()->enabled_languages[1] ];
+
 		if ( ! empty( $_route_for_post ) ) {
-			$_rest_rout = rest_get_url_prefix() .  $_route_for_post;
-			$_url = home_url( $_rest_rout );
+			$_rest_rout = rest_get_url_prefix() . $_route_for_post;
+			$_url       = home_url( $_rest_rout );
 		} else {
 			$_rest_rout = rest_get_url_prefix();
-			$_url = home_url( $_rest_rout . '/' . $_namespace . '/posts/' );
+			$_url       = home_url( $_rest_rout . '/' . $_namespace . '/posts/' );
 		}
 
-		$_info_desc  = esc_html__( 'ВПГлобус позволяет получать переводы постов и страниц используя Rest API.', 'wpglobus' );
-		$_info_desc .= '<br />';
-		
+		$_info_desc = esc_html__( 'With WPGlobus, you can get translations for posts and pages using REST API.', 'wpglobus' );
+		$_info_desc .= '<br /><br />';
+
 		if ( ! empty( $_route_for_post ) ) {
-			
-			$_info_desc .= esc_html__( 'В качестве примера можно использовать первый пост который создаётся при установке ВордПресс.', 'wpglobus' );
+
+			$_info_desc .= esc_html__( 'For demonstration, you can try the first post that WordPress creates at the initial installation.', 'wpglobus' );
 			$_info_desc .= '<br />';
-			$_info_desc .= sprintf( 
-				esc_html__( 'Перейдите по ссылке %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
-				'<a href="'.$_url.'" target="_blank">',
+			$_info_desc .= sprintf(
+				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
+				'<a href="' . $_url . '" target="_blank">',
 				$_url,
 				'</a>',
 				$_default_language_name
 			);
 			$_info_desc .= '<br />';
-			$_info_desc .= sprintf( 
-				esc_html__( 'Перейдите по ссылке %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
-				'<a href="'.$_url.'" target="_blank">',
+			$_info_desc .= sprintf(
+				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
+				'<a href="' . $_url . '" target="_blank">',
 				WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] ),
 				'</a>',
 				$_extra_language_name
 			);
 			$_info_desc .= '<br />';
-			
+
 		} else {
-			
-			$_info_desc .= sprintf( 
-				esc_html__( 'Используйте ссылку %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
-				'<a href="'.$_url.'" target="_blank">',
+
+			$_info_desc .= sprintf(
+				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
+				'<a href="' . $_url . '" target="_blank">',
 				$_url,
 				'</a>',
 				$_default_language_name
-			);			
+			);
 			$_info_desc .= '<br />';
-			$_info_desc .= sprintf( 
-				esc_html__( 'Используйте ссылку %1$s%2$s%3$s для получения данных на языке: %4$s.', 'wpglobus' ),
-				'<a href="'.$_url.'" target="_blank">',
+			$_info_desc .= sprintf(
+				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
+				'<a href="' . $_url . '" target="_blank">',
 				WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] ),
 				'</a>',
 				$_extra_language_name
 			);
-			$_info_desc .= '<br />';			
+			$_info_desc .= '<br />';
 		}
 
-		$_info_desc .= sprintf( 
-			esc_html__( 'Для получения подробной информации обратитесь к %1$sофициальной документации%2$s.', 'wpglobus' ),
+		$_info_desc .= '<br />';
+		$_info_desc .= sprintf(
+			esc_html__( 'Please read the %1$sWordPress REST API documentation%2$s for more information.', 'wpglobus' ),
 			'<a href="https://developer.wordpress.org/rest-api/" target="_blank">',
 			'</a>'
 		);
-		$_info_desc .= '<br />';
-		
-		$_info_desc .= sprintf( 
-			esc_html__( 'В ответе Rest API вы найдёте поле %1$stranslation%2$s которое даёт возможность проверить существуют ли', 'wpglobus' ),
-			'<strong>',
-			'</strong>'
+		$_info_desc .= '<br /><br />';
+
+		$_info_desc .= sprintf(
+			esc_html__( 'In the REST API response, you can find the %1$stranslation%2$s field, which shows whether translations exist for the fields %1$stitle%2$s, %1$scontent%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:', 'wpglobus' ),
+			'<code>',
+			'</code>'
 		);
-		$_info_desc .= '<br />';
-		
-		$_info_desc .= sprintf( 
-			esc_html__( 'переводы полей %1$stitle%2$s, %1$scontent%2$s и %1$sexcerpt%2$s для каждого языка (см.скриншот).', 'wpglobus' ),
-			'<strong>',
-			'</strong>'
-		);
-		
+
 		$_info_desc .= '<div class="img-container" style="vertical-align:middle;text-align:center;">';
-		$_info_desc .=		'<img src="' . $this->url_options_image . 'rest-api-response-field-translation.jpg" />';
+		$_info_desc .= '<img src="' . $this->url_options_image . 'rest-api-response-field-translation.jpg" />';
 		$_info_desc .= '</div>';
-		
+
 		$fields[] =
 			array(
-				'id'     => 'wpglobus_rest_api_info',
-				'type'	 => 'wpglobus_info',
-				'title'  => esc_html__( 'Описание:', 'wpglobus' ),
-				'desc'   => $_info_desc,
-				'class'  => 'info', // or normal
+				'id'    => 'wpglobus_rest_api_info',
+				'type'  => 'wpglobus_info',
+				'title' => esc_html__( 'Description:', 'wpglobus' ),
+				'desc'  => $_info_desc,
+				'class' => 'info', // or normal
 			);
-	
+
 		return array(
 			'wpglobus_id' => 'wpglobus_rest_api',
-			'title'       => esc_html__( 'Rest API', 'wpglobus' ),
-			'caption'     => esc_html__( 'Rest API', 'wpglobus' ),
+			'title'       => esc_html__( 'REST API', 'wpglobus' ),
+			'caption'     => esc_html__( 'REST API', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-rest-api',
 			'fields'      => $fields,
-		);			
+		);
 	}
 
 	/**
@@ -1896,7 +1892,7 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.9.14
 	 *
-	 * @param string $file File path.
+	 * @param string $file   File path.
 	 * @param string $filter Filter.
 	 *
 	 * @return array|bool
@@ -2019,8 +2015,8 @@ class WPGlobus_Options {
 		}
 
 		/**
+		 * @see   section_seo()
 		 * @since 2.3.4
-		 * @see section_seo()
 		 */
 		if ( ! empty( $data['seo_hreflang_default_language_type'] ) ) {
 			if ( 1 == (int) $data['seo_hreflang_default_language_type'] ) {
@@ -2117,11 +2113,11 @@ class WPGlobus_Options {
 
 		$section = $this->section_backward_compatibility( $section );
 
-		/** 
+		/**
 		 * @since 2.5.4
 		 */
 		$_li_class = '';
-		if( ! empty( $section['li_class'] ) && is_string( $section['li_class'] ) ) {
+		if ( ! empty( $section['li_class'] ) && is_string( $section['li_class'] ) ) {
 			$_li_class = ' ' . $section['li_class'];
 		}
 
@@ -2243,7 +2239,8 @@ class WPGlobus_Options {
 
 		/**
 		 * Filter the array of disabled entities.
-		 * @see `wpglobus_disabled_entities` filter in includes\class-wpglobus.php
+		 *
+		 * @see   `wpglobus_disabled_entities` filter in includes\class-wpglobus.php
 		 *
 		 * @since 2.2.11
 		 */
@@ -2269,49 +2266,50 @@ class WPGlobus_Options {
 		}
 
 		$post_types = $_post_types;
+
 		return $post_types;
 	}
-	
+
 	/**
 	 * @since 2.2.14
 	 */
 	public function on__process_ajax() {
-		
+
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$response = array(
-				'message'  => 'You are not allowed to manage options for this site.',
-				'result'   => 'error'
+				'message' => 'You are not allowed to manage options for this site.',
+				'result'  => 'error',
 			);
-			wp_send_json_error($response);
+			wp_send_json_error( $response );
 		}
-		
+
 		$option_name = WPGlobus::Config()->option; // don't use $config here.
-		$data = $_POST['data'];
+		$data        = $_POST['data'];
 
 		$response = array(
 			'message'  => 'Incorrect option.',
 			'postData' => $data,
-			'result'   => 'error'
-		);		
-		
+			'result'   => 'error',
+		);
+
 		if ( 'saveOption' == $data['_action'] ) {
-			$opts = get_option($option_name);
-			foreach( $data['options'] as $option=>$value ) {
-				$opts[$option] = sanitize_text_field($value) ;
+			$opts = get_option( $option_name );
+			foreach ( $data['options'] as $option => $value ) {
+				$opts[ $option ] = sanitize_text_field( $value );
 			}
-			if ( update_option($option_name, $opts) ) {
+			if ( update_option( $option_name, $opts ) ) {
 				$response['message'] = 'Options was updated.';
 				$response['result']  = 'success';
 			} else {
 				$response['message'] = 'Option was not updated.';
 			}
 		}
-		
+
 		if ( 'success' == $response['result'] ) {
-			wp_send_json_success($response);
-			
+			wp_send_json_success( $response );
+
 		}
-		wp_send_json_error($response);
-	}	
+		wp_send_json_error( $response );
+	}
 }
 

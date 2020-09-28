@@ -3,10 +3,10 @@
 ## Changelog ##
 
 2020-09-27 - version 2.5.8
-* (Core/Options) Added `"Rest API"` section on option panel.
+* (Core/Options) Added `"REST API"` section to the Options Panel.
 
 2020-09-25 - version 2.5.7
-* (Core) Registered a new field, `translation`, in the Rest API response for posts.
+* (Core) Registered a new field, `translation`, in the REST API response for posts.
 
 2020-09-23 - version 2.5.6
 * (Core) Added `has_translation` function.
