@@ -129,8 +129,17 @@ class WPGlobus_Options {
 	 * Handler `wp_loaded`.
 	 */
 	public function on__wp_loaded() {
+		
 		// Create the sections and fields.
 		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
+		
+		/**
+		 * @since 2.5.10
+		 */
+		if ( $this->current_page !== $this->page_slug ) {
+			return;
+		}
+		
 		$this->set_sections();
 	}
 
