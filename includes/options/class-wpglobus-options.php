@@ -340,6 +340,7 @@ class WPGlobus_Options {
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
 								<?php foreach ( $this->sections as $section_tab => $section ) : ?>
+									<?php if ( empty( $section ) ) { continue; }; ?>
 									<?php $section = $this->sanitize_section( $section ); ?>
 									<?php
 									// If section tab is not specified (old external sections?), create it from title.
@@ -362,6 +363,7 @@ class WPGlobus_Options {
 						<div class="wpglobus-options-main wpglobus-options-wrap__item">
 							<div class="wpglobus-options-info">
 								<?php foreach ( $this->sections as $section_tab => $section ) : ?>
+									<?php if ( empty( $section ) ) { continue; }; ?>
 									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
 											class="wpglobus-options-tab"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
@@ -1737,6 +1739,13 @@ class WPGlobus_Options {
 	 * @return array
 	 */
 	protected function section_rest_api() {
+		
+		if ( version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ) {
+			/**
+			 * @since 2.5.9
+			 */
+			return array();
+		}
 
 		$fields = array();
 
