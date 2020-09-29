@@ -14,22 +14,50 @@ if ( ! class_exists( 'WPGlobus_Rest_API' ) ) :
 	class WPGlobus_Rest_API {
 		
 		/**
+		 * The name of the WPGlobus field.
+		 * 
+		 * @since 2.5.10
+		 * @var string
+		 */
+		const REST_FIELD_NAME = 'translation';
+		
+		/**
 		 * Constructor.
 		 */
 		public static function construct() {
 			
 			/**
 			 * @see wp-includes\rest-api.php
-			 */
-			register_rest_field( 
-				'post', 
-				'translation', 
-				array(
-					'get_callback' => array( __CLASS__, 'on__register_rest_field' ),
-				)
-			);			
+			 */			
+			add_action( 'rest_api_init', array( __CLASS__, 'on__rest_api_init' ), 5 );
 		}
 
+		/**
+		 * Preparing to serve an API request.
+		 *
+		 * @since 2.5.10
+		 *
+		 * @param WP_REST_Server $wp_rest_server Server object.
+		 */
+		public static function on__rest_api_init( WP_REST_Server $wp_rest_server ) {
+
+			$public_post_types = self::get_public_post_types();
+			
+			foreach ( $public_post_types as $post_type ) {
+				/**
+				 * @see wp-includes\rest-api.php
+				 */
+				register_rest_field( 
+					$post_type, 
+					self::REST_FIELD_NAME, 
+					array(
+						'get_callback' => array( __CLASS__, 'rest_field__for_post' ),
+					)
+				);
+			}			
+			
+		}
+		
 		/**
 		 * Registers a new field.
 		 *
@@ -50,8 +78,17 @@ if ( ! class_exists( 'WPGlobus_Rest_API' ) ) :
 		 *                                          Default is 'null', no schema entry will be returned.
 		 * }
 		 */
-		public static function on__register_rest_field( $object_type, $attribute, $args ) {
-			
+		public static function rest_field__for_post( $object_type, $attribute, $args ) {
+
+			if ( 'attachment' == $object_type['type'] ) {
+				$_fields = array( 'title' );
+				/**
+				 * @W.I.P @since 2.5.10 Add description, caption, alternative text fields for attachment.
+				 */
+			} else {
+				$_fields = array( 'title', 'content', 'excerpt' );
+			}
+
 			$response = array(
 				'provider' 			=> 'WPGlobus',
 				'version' 			=> WPGLOBUS_VERSION,
@@ -60,7 +97,6 @@ if ( ! class_exists( 'WPGlobus_Rest_API' ) ) :
 				'languages' 		=> null
 			);
 			
-			$_fields = array( 'title', 'content', 'excerpt' );
 			foreach( WPGlobus::Config()->enabled_languages as $_language ) {
 				foreach( $_fields as $_field ) {
 					if ( empty( $object_type[$_field]['raw'] ) ) {
@@ -73,6 +109,20 @@ if ( ! class_exists( 'WPGlobus_Rest_API' ) ) :
 		
 			return $response;
 		}
+		
+		/**
+		 * Returns an array with the public post types.
+		 *
+		 * @since 2.5.10
+		 *
+		 * @param string $output The output type to use.
+		 *
+		 * @return array Array with all the public post_types.
+		 */
+		public static function get_public_post_types( $output = 'names' ) {
+			return get_post_types( array( 'public' => true ), $output );
+		}
+		
 	} // class
 	
 endif;
