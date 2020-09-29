@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-09-28 - version 2.5.9
+* (Core/Options) Omit `"REST API"` section for WordPress version before 5.5.
+
 2020-09-27 - version 2.5.8
 * (Core/Options) Added `"REST API"` section to the Options Panel.
 
