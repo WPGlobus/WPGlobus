@@ -517,16 +517,16 @@ jQuery(document).ready(function ($) {
 						  isLink: true,
 						  target: "_blank"
 						},
-						__( 'WPGlobus Premium Add-ons' )
+						__( 'WPGlobus Premium' )
 					),
 					el(
 						Button,
 						{
 						  className: 'wpglobus-switcher-panel__button-link wpglobus-switcher-panel__settings-link',
-						  href: WPGlobusGutenberg.block_editor_tab_url,
+						  href: WPGlobusGutenberg.options_page_url,
 						  isLink: true
 						},
-						__( 'Settings' )
+						__( 'WPGlobus Options' )
 					)			
 				);
 			}

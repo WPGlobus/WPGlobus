@@ -457,6 +457,21 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		);
 
 		/**
+		 * Optons page URL.
+		 *
+		 * @since 2.5.10
+		 */
+		$options_page_url = admin_url(
+			add_query_arg(
+				array(
+					'page' => WPGlobus::OPTIONS_PAGE_SLUG
+				),
+				'admin.php'
+			)
+		);
+
+
+		/**
 		 * Build the flags URL.
 		 *
 		 * @since 2.2.3
@@ -521,6 +536,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'store_link'           => WPGlobus::URL_WPGLOBUS_SHOP,
 			'__post'               => $__post,
 			'block_editor_tab_url' => $block_editor_tab_url,
+			'options_page_url' 	   => $options_page_url,
 			'disabled_entities'    => WPGlobus::Config()->disabled_entities,
 			'options'			   => $options,
 			'enabledOptionsTab'	   => true,
