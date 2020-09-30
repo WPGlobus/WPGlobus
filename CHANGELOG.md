@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+2020-09-30 - version 2.5.10
+* (Core/Options) Start the sections settings function on the WPGlobus Options page only.
+* (Core/RestAPI) Register `translation` field for public post types.
+* (Builders/Gutenberg) Language switcher tweaks.
+* (Vendor/Yoast) Added filter `wpglobus_wpseo_localize_url`.
+
 2020-09-28 - version 2.5.9
 * (Core/Options) Omit `"REST API"` section for WordPress version before 5.5.
 
