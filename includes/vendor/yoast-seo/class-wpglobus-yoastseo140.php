@@ -470,6 +470,7 @@ class WPGlobus_YoastSEO {
 	 * @scope front
 	 * @since 2.4
 	 * @since 2.5.1 Added support of taxonomies.
+	 * @since 2.5.10 Added `wpglobus_wpseo_localize_url` filter.
 	 *
 	 * @param string 				 $url The canonical URL or open graph URL.
 	 * @param Indexable_Presentation $presentation The presentation of an indexable.
@@ -484,8 +485,28 @@ class WPGlobus_YoastSEO {
 			return $url;
 		}		
 
-		if ( is_singular() || is_category() || is_tax() ) {
-			return WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->language );
+		$tag = false;
+		if ( is_singular() ) {
+			$tag = 'singular';
+		} elseif ( is_category() ) {
+			$tag = 'category';
+		} elseif ( is_tag() ) {
+			$tag = 'tag';
+		} elseif ( is_tax() ) {
+			$tag = 'tax';
+		}
+			
+		if ( $tag ) {
+			/**
+			 * Filters for a localized url.
+			 *
+			 * @since 2.5.10
+			 *
+			 * @param string $url		Localized URL.
+			 * @param string $language  Current language.
+			 * @param string $tag  		Conditional Tag.
+			 */			
+			return apply_filters( 'wpglobus_wpseo_localize_url', WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->language ), WPGlobus::Config()->language, $tag );
 		}
 		
 		return $url;
