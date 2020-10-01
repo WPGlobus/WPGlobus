@@ -85,7 +85,13 @@ class WPGlobus_Post_Types {
 		// Molongui Author Box: https://wordpress.org/plugins/molongui-authorship/ @since 2.5.3
 		'guest_author',
 		// Comments – wpDiscuz: https://wordpress.org/plugins/wpdiscuz/ @since 2.5.4
-		'wpdiscuz_form'
+		'wpdiscuz_form',
+		// FooGallery: https://wordpress.org/plugins/foogallery/ @since 2.5.11
+		'foogallery',
+		// Customizable WordPress Gallery Plugin – Modula Image Gallery: https://wordpress.org/plugins/modula-best-grid-gallery/ @since 2.5.11
+		'modula-gallery',
+		// Kali Forms - WordPress Forms Made Easy: https://wordpress.org/plugins/kali-forms/ @since 2.5.11
+		'kaliforms_forms',
 	);
 
 	/**
