@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-10-01 - version 2.5.11
+* (Core/Post Types) Added post types of the `FooGallery`, `Modula Image Gallery`, `Kali Forms` plugins to the hidden types array.
+* (Vendor/Yoast) Filtering of the rel `prev` and `next` URL put out by Yoast SEO.
+
 2020-09-30 - version 2.5.10
 * (Core/Options) Start the sections settings function on the WPGlobus Options page only.
 * (Core/RestAPI) Register `translation` field for public post types.
