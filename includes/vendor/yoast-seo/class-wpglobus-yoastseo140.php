@@ -80,7 +80,15 @@ class WPGlobus_YoastSEO {
 	 * @var boolean|string
 	 */		
 	protected static $plus_module = false;
-	
+
+	/**
+	 * Canonical URLs.
+	 *
+	 * @since 2.5.11
+	 * @var array
+	 */			
+	protected static $canonical_url = array();
+
 	/**
 	 * Static "controller"
 	 */
@@ -142,11 +150,17 @@ class WPGlobus_YoastSEO {
 			add_filter( 'wpseo_opengraph_desc', array( __CLASS__, 'filter_front__description' ), 5, 2 );	
 			
 			/**
-			 * Filter canonical URL and open graph URL
+			 * Filter canonical URL and open graph URL.
 			 * @since 2.4
 			 */
 			add_filter( 'wpseo_canonical', array( __CLASS__, 'filter_front__localize_url' ), 5, 2 );	
 			add_filter( 'wpseo_opengraph_url', array( __CLASS__, 'filter_front__localize_url' ), 5, 2 );	
+	
+			/**
+			 * Filter of the rel prev and next URL put out by Yoast SEO.
+			 * @since 2.5.11
+			 */
+			add_filter( 'wpseo_adjacent_rel_url', array( __CLASS__, 'filter_front__wpseo_adjacent_rel_url' ), 5, 3 );	
 			
 			/**
 			 * Filter the HTML output of the Yoast SEO breadcrumbs class.
@@ -495,8 +509,13 @@ class WPGlobus_YoastSEO {
 		} elseif ( is_tax() ) {
 			$tag = 'tax';
 		}
-			
+
 		if ( $tag ) {
+			
+			$language =WPGlobus::Config()->language;
+			
+			self::$canonical_url[ WPGlobus::Config()->default_language ] = $url; 
+			
 			/**
 			 * Filters for a localized url.
 			 *
@@ -505,11 +524,47 @@ class WPGlobus_YoastSEO {
 			 * @param string $url		Localized URL.
 			 * @param string $language  Current language.
 			 * @param string $tag  		Conditional Tag.
-			 */			
-			return apply_filters( 'wpglobus_wpseo_localize_url', WPGlobus_Utils::localize_url( $url, WPGlobus::Config()->language ), WPGlobus::Config()->language, $tag );
+			 */
+			self::$canonical_url[ $language ] = apply_filters( 'wpglobus_wpseo_localize_url', WPGlobus_Utils::localize_url( $url, $language ), $language, $tag );
+			
+			self::$canonical_url[ $language ] = urldecode( self::$canonical_url[ $language ] );
+			
+			return self::$canonical_url[ $language ];
 		}
 		
 		return $url;
+	}
+	
+	/**
+	 * Filtering of the rel `prev` and `next` URL put out by Yoast SEO.
+	 *
+	 * @see wordpress-seo\src\presenters\rel-prev-presenter.php
+	 * @see wordpress-seo\src\presenters\rel-next-presenter.php
+	 * @scope front
+	 *
+	 * @since 2.5.11
+	 *
+	 * @param string 				 $url 		   Link relationship, prev or next.
+	 * @param string 				 $relationship `prev` or `next`.
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 *
+	 * @return string
+	 */
+	public static function filter_front__wpseo_adjacent_rel_url( $link, $relationship, $presentation ) {
+		
+		if ( empty( $link ) || WPGlobus::Config()->language == WPGlobus::Config()->default_language ) {
+			return $link;
+		}				
+
+		if ( empty( self::$canonical_url ) ) {
+			return $link;
+		}
+
+		return str_replace( 
+			self::$canonical_url[ WPGlobus::Config()->default_language ],
+			self::$canonical_url[ WPGlobus::Config()->language ], 
+			$link 
+		);
 	}
 	
 	/**
