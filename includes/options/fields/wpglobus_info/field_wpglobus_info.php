@@ -46,6 +46,9 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_info' ) ) {
 				<?php if ( ! empty( $field['html'] ) ) { ?>
 					<?php echo wp_kses_post( $field['html'] ); ?>
 				<?php } ?>
+				<?php if ( ! empty( $field['raw_html'] ) ) { ?>
+					<?php echo $field['raw_html']; ?>
+				<?php } ?>				
 				<?php if ( ! empty( $field['desc'] ) ) { ?>
 					<p class="description"><?php echo wp_kses_post( $field['desc'] ); ?></p>
 				<?php } ?>

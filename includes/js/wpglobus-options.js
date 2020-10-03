@@ -8,13 +8,19 @@ jQuery(document).ready(function ($) {
     }	
 	
 	var api = {
-		currentTabID: 0,
+		currentTabID: '',
 		firstLanguageCb: null,
 		init: function() {
 			api.initTab();
 			api.checkHandlers();
 			api.addListeners();
 			api.initSpecs();
+		},
+		setCurrentTabID: function(tabID) {
+			api.currentTabID = tabID;
+		},
+		getCurrentTabID: function() {
+			return api.currentTabID;
 		},
 		setFirstLanguageCb: function() {
 			if ( null !== api.firstLanguageCb ) {
@@ -70,9 +76,9 @@ jQuery(document).ready(function ($) {
 		},
 		initTab: function() {
 			var curTab = $('#section-tab-'+WPGlobusOptions.tab);
-			api.currentTabID = WPGlobusOptions.tab;
+			api.setCurrentTabID( WPGlobusOptions.tab );
 			if ( 0 == curTab.length ) {
-				api.currentTabID = WPGlobusOptions.defaultTab;
+				api.setCurrentTabID( WPGlobusOptions.defaultTab );
 				curTab = $('#section-tab-'+api.currentTabID);
 			}
 			curTab.css({'display':'block'});
@@ -123,6 +129,7 @@ jQuery(document).ready(function ($) {
 			});
 			$(document).on('click', '.wpglobus-tab-link', function(event){
 				var tab = $(this).data('tab');
+				api.setCurrentTabID(tab);
 				window.history.pushState("data", "Title", WPGlobusOptions.newUrl.replace('{*}', tab));
 				$('.wpglobus-options-tab').css({'display':'none'});
 				$('#section-tab-'+tab).css({'display':'block'});

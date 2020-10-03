@@ -527,6 +527,7 @@ class WPGlobus_Options {
 
 	/**
 	 * Set sections.
+	 * @since 2.5.12 Moved filter to end of the function.
 	 */
 	protected function set_sections() {
 
@@ -544,17 +545,6 @@ class WPGlobus_Options {
 		if ( defined( 'WPGLOBUS_PLUS_VERSION' ) ) {
 			$this->sections['wpglobus-plus'] = $this->section_wpglobus_plus();
 		}
-
-		/**
-		 * Filter the array of sections. Here add-ons can add their menus.
-		 *
-		 * @param array $sections Array of sections.
-		 */
-		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
-
-		/**
-		 * The below sections should be at the bottom.
-		 */
 
 		/**
 		 * Links to Admin Central
@@ -589,7 +579,13 @@ class WPGlobus_Options {
 		//$this->sections['debug-info'] = $this->section_debug_info();
 
 		$this->sections['uninstall'] = $this->section_uninstall();
-
+		
+		/**
+		 * Filter the array of sections. Here add-ons can add their menus.
+		 *
+		 * @param array $sections Array of sections.
+		 */
+		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );		
 	}
 
 	/**
