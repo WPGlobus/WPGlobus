@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-10-03 - version 2.5.12
-* (Core/Options) Code's tweaks.
+* (Core/Options) Minor code tweaks.
 
 2020-10-01 - version 2.5.11
 * (Core/Post Types) Added post types of the `FooGallery`, `Modula Image Gallery`, and `Kali Forms` plugins to the hidden types array.

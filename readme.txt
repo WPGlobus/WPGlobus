@@ -217,6 +217,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.5.12 =
+
+* (Core/Options) Minor code tweaks.
+
 = 2.5.11 =
 
 * (Core/Post Types) Added post types of the `FooGallery`, `Modula Image Gallery`, and `Kali Forms` plugins to the hidden types array.
