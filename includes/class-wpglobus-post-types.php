@@ -92,6 +92,10 @@ class WPGlobus_Post_Types {
 		'modula-gallery',
 		// Kali Forms - WordPress Forms Made Easy: https://wordpress.org/plugins/kali-forms/ @since 2.5.11
 		'kaliforms_forms',
+		// Schema & Structured Data for WP & AMP: https://wordpress.org/plugins/schema-and-structured-data-for-wp/ @since 2.5.13
+		'saswp_reviews',
+		'saswp_rvs_location',
+		'saswp-collections',
 	);
 
 	/**
