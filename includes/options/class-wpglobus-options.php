@@ -278,13 +278,14 @@ class WPGlobus_Options {
 		return array(
 			'id'       => 'switcher_menu_style',
 			'type'     => 'wpglobus_dropdown',
-			'title'    => __( 'Language Selector Menu Style', 'wpglobus' ),
-			'subtitle' => '(' . __( 'WPGlobus Plus', 'wpglobus' ) . ')',
-			'desc'     => __( 'Drop-down languages menu or Flat (in one line)', 'wpglobus' ),
+			'title'    => esc_html__( 'Language Selector Menu Style', 'wpglobus' ),
+			'subtitle' => '(' . esc_html__( 'WPGlobus Plus', 'wpglobus' ) . ')',
+			'desc'     => esc_html__( 'Drop-down languages menu or Flat (in one line)', 'wpglobus' ),
+			'anchor'   => 'language-selector-menu-style',
 			'options'  => array(
-				''         => __( 'Do not change', 'wpglobus' ),
-				'dropdown' => __( 'Drop-down (vertical)', 'wpglobus' ),
-				'flat'     => __( 'Flat (horizontal)', 'wpglobus' ),
+				''         => esc_html__( 'Do not change', 'wpglobus' ),
+				'dropdown' => esc_html__( 'Drop-down (vertical)', 'wpglobus' ),
+				'flat'     => esc_html__( 'Flat (horizontal)', 'wpglobus' ),
 			),
 		);
 	}

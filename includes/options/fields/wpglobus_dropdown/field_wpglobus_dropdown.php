@@ -32,6 +32,9 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 		 * @param array $field Field attributes.
 		 */
 		public function render( $field ) {
+			if ( ! empty( $field['anchor'] ) ) {
+				echo '<a name="'.esc_attr( $field['anchor'] ).'"></a>';
+			}
 			?>
 			<div id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>"
 					class="wpglobus-options-field wpglobus-options-field-wpglobus_select">
@@ -68,3 +71,4 @@ endif;
  * @see WPGlobus_Options::page_options
  */
 new WPGlobusOptions_wpglobus_dropdown( $field );
+# --- EOF
