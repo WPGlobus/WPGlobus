@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+2020-10-06 - version 2.5.13
+* (Core/Post Types) Added post types of the `Schema & Structured Data for WP & AMP` plugin to the hidden types array.
+* (Core/Options) Added `anchor` attribute to the render `WPGlobusOptions_wpglobus_dropdown` class.
+* (Core/Options) Minor code tweaks.
+
 2020-10-03 - version 2.5.12
 * (Core/Options) Minor code tweaks.
 
