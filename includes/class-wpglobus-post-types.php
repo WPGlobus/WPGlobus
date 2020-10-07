@@ -44,6 +44,9 @@ class WPGlobus_Post_Types {
 		// Gutenberg: @since 2.2.20
 		'wp_template',
 		'wp_area',
+		// Gutenberg: @since 2.5.14
+		'wp_template_part',
+		'wp_global_styles',
 		// WPBakery PB: @since 1.9.17
 		'vc4_templates',
 		'vc_grid_item',
