@@ -274,9 +274,9 @@ jQuery(document).ready(function ($) {
 			var pluginStarButton = $('.components-panel__header.edit-post-sidebar-header button.components-icon-button').eq(0);
 			
 			var switcherButtonHTML = {
-				flagOnly: '<img height="20px" width="20px" src="'+WPGlobusGutenberg.flags_url[WPGlobusGutenberg.language]+'" />',
-				flagLanguage: '<img height="20px" width="20px" src="'+WPGlobusGutenberg.flags_url[WPGlobusGutenberg.language]+'" />&nbsp;' + WPGlobusAdmin.data.en_language_name[WPGlobusGutenberg.language],
-				flagCode: '<img height="20px" width="20px" src="'+WPGlobusGutenberg.flags_url[WPGlobusGutenberg.language]+'" />&nbsp;' + WPGlobusGutenberg.language,
+				flagOnly: '<img height="20" width="20" style="width:20px;" src="'+WPGlobusGutenberg.flags_url[WPGlobusGutenberg.language]+'" />',
+				flagLanguage: '<img height="20" width="20" style="width:20px;" src="'+WPGlobusGutenberg.flags_url[WPGlobusGutenberg.language]+'" />&nbsp;' + WPGlobusAdmin.data.en_language_name[WPGlobusGutenberg.language],
+				flagCode: '<img height="20" width="20" style="width:20px;" src="'+WPGlobusGutenberg.flags_url[WPGlobusGutenberg.language]+'" />&nbsp;' + WPGlobusGutenberg.language,
 				languageOnly: '&nbsp;' + WPGlobusAdmin.data.en_language_name[WPGlobusGutenberg.language],
 				languageCode: '&nbsp;' + WPGlobusGutenberg.language,
 			};
@@ -439,7 +439,7 @@ jQuery(document).ready(function ($) {
 					enabledLanguages.map(
 						function(lang){
 							return el( 'li', {key:lang, className:'language-item'}, 
-								el('img', {style:{marginRight:'7px'},className:'wpglobus-switcher-panel__flag', height:'20px', width:'20px', src:flagsUrl[lang]}),
+								el('img', {style:{marginRight:'7px',width:'20px'},className:'wpglobus-switcher-panel__flag', height:'20', width:'20', src:flagsUrl[lang]}),
 								el(Button, {href:refs[lang], isSmall:true, isPrimary:true}, languageNames[lang]) 
 							);
 						}
