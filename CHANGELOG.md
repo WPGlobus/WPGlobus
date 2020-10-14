@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-10-14 - version 2.5.14
+* (Builders/Gutenberg) Language switcher CSS tweaks to prevent show oversize flag image in some themes.
+* (Core/Post Types) Added post types of the `Gutenberg` plugin to the hidden types array.
+
 2020-10-06 - version 2.5.13
 * (Core/Post Types) Added post types of the `Schema & Structured Data for WP & AMP` plugin to the hidden types array.
 * (Core/Options) Added `anchor` attribute to the render `WPGlobusOptions_wpglobus_dropdown` class.
