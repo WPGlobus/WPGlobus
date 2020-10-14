@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-10-14 - version 2.5.14
-* (Builders/Gutenberg) Language switcher CSS tweaks to prevent show oversize flag image in some themes.
+* (Builders/Gutenberg) Language switcher CSS tweaks to prevent showing oversize flag images in some themes.
 * (Core/Post Types) Added post types of the `Gutenberg` plugin to the hidden types array.
 
 2020-10-06 - version 2.5.13
