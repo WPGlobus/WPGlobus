@@ -1784,10 +1784,11 @@ class WPGlobus_Options {
 				$_default_language_name
 			);
 			$_info_desc .= '<br />';
+			$_extra_url = WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] );
 			$_info_desc .= sprintf(
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
-				'<a href="' . $_url . '" target="_blank">',
-				WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] ),
+				'<a href="' . $_extra_url . '" target="_blank">',
+				$_extra_url,
 				'</a>',
 				$_extra_language_name
 			);
