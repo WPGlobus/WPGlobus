@@ -99,6 +99,8 @@ class WPGlobus_Post_Types {
 		'saswp_reviews',
 		'saswp_rvs_location',
 		'saswp-collections',
+		// Getwid – Gutenberg Blocks: https://wordpress.org/plugins/getwid/ @since 2.5.15
+		'getwid_template_part'
 	);
 
 	/**
