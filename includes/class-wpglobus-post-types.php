@@ -100,7 +100,10 @@ class WPGlobus_Post_Types {
 		'saswp_rvs_location',
 		'saswp-collections',
 		// Getwid – Gutenberg Blocks: https://wordpress.org/plugins/getwid/ @since 2.5.15
-		'getwid_template_part'
+		'getwid_template_part',
+		// Web Stories: https://wordpress.org/plugins/web-stories/ @since 2.5.15
+		'web-story-template',
+		'web-story',
 	);
 
 	/**
