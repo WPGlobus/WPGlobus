@@ -73,6 +73,15 @@ class WPGlobus_Filters {
 
 		if ( $query->is_main_query() || $query->get( 'wpglobus_force_filter__the_posts' ) ) {
 			foreach ( $posts as $post ) {
+				
+				/**
+				 * Don't filter post of disabled post type.
+				 * @since 2.5.15
+				 */
+				if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities ) ) {
+					continue;
+				}
+				
 				WPGlobus_Core::translate_wp_post(
 					$post,
 					WPGlobus::Config()->language,
@@ -82,7 +91,6 @@ class WPGlobus_Filters {
 		}
 
 		return $posts;
-
 	}
 
 	/**
