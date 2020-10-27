@@ -3,9 +3,9 @@
 ## Changelog ##
 
 2020-10-25 - version 2.5.15
-* (Core/Filters) Don't filter post of disabled post type (issue #90).
-* (Core/Options) Fixed URL for second language on REST API tab.
-* (Core/Post Types) Added post type of the `Getwid`, `Web Stories` plugins to the hidden types array.
+* (Core/Filters) Don't apply multilingual filter  on disabled post types (issue #90).
+* (Core/Options) Fixed URL for the second language on the REST API tab.
+* (Core/Post Types) Added  the `Getwid`, `Web Stories` plugins' post types to the `"hidden types"` list.
 
 2020-10-14 - version 2.5.14
 * (Builders/Gutenberg) Language switcher CSS tweaks to prevent showing oversize flag images in some themes.

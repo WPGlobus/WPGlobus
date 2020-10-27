@@ -296,6 +296,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.15 ###
+
+* (Core/Filters) Don't apply multilingual filter  on disabled post types (issue #90).
+* (Core/Options) Fixed URL for the second language on the REST API tab.
+* (Core/Post Types) Added  the `Getwid`, `Web Stories` plugins' post types to the `"hidden types"` list.
+
 ### 2.5.14 ###
 
 * (Builders/Gutenberg) Language switcher CSS tweaks to prevent showing oversize flag images in some themes.
@@ -305,10 +311,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * (Core/Post Types) Added post types of the `Schema & Structured Data for WP & AMP` plugin to the hidden types array.
 * (Core/Options) Added `anchor` attribute to the render `WPGlobusOptions_wpglobus_dropdown` class.
-* (Core/Options) Minor code tweaks.
-
-### 2.5.12 ###
-
 * (Core/Options) Minor code tweaks.
 
 ### Earlier versions and Add-ons ###

@@ -1439,10 +1439,10 @@ msgid ""
 "With WPGlobus, you can get translations for posts and pages using REST API."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1799,
-#: includes/options/class-wpglobus-options.php:1807,
+#: includes/options/class-wpglobus-options.php:1800,
+#: includes/options/class-wpglobus-options.php:1808,
 #: includes/options/class-wpglobus-options.php:1780,
-#: includes/options/class-wpglobus-options.php:1788
+#: includes/options/class-wpglobus-options.php:1789
 msgid "Go to %1$s%2$s%3$s to see the content in language: %4$s."
 msgstr ""
 
@@ -1452,29 +1452,29 @@ msgid ""
 "initial installation."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1818
+#: includes/options/class-wpglobus-options.php:1819
 msgid ""
 "Please read the %1$sWordPress REST API documentation%2$s for more "
 "information."
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1825
+#: includes/options/class-wpglobus-options.php:1826
 msgid ""
 "In the REST API response, you can find the %1$stranslation%2$s field, which "
 "shows whether translations exist for the fields %1$stitle%2$s, %1$scontent"
 "%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1838
+#: includes/options/class-wpglobus-options.php:1839
 msgid "Description:"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:1845,
-#: includes/options/class-wpglobus-options.php:1846
+#: includes/options/class-wpglobus-options.php:1846,
+#: includes/options/class-wpglobus-options.php:1847
 msgid "REST API"
 msgstr ""
 
-#: includes/options/class-wpglobus-options.php:2179
+#: includes/options/class-wpglobus-options.php:2180
 msgid "Translate strings"
 msgstr ""
 
