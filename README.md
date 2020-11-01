@@ -296,6 +296,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.16 ###
+
+
+* (Core/Meta) Fixed PHP Warning: count(): Parameter must be an array or an object that implements Countable.
+* (Vendor/Yoast) Removed unneeded code. Small tweaks.
+
 ### 2.5.15 ###
 
 * (Core/Filters) Don't apply multilingual filter  on disabled post types (issue #90).
@@ -306,12 +312,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * (Builders/Gutenberg) Language switcher CSS tweaks to prevent showing oversize flag images in some themes.
 * (Core/Post Types) Added post types of the `Gutenberg` plugin to the hidden types array.
-
-### 2.5.13 ###
-
-* (Core/Post Types) Added post types of the `Schema & Structured Data for WP & AMP` plugin to the hidden types array.
-* (Core/Options) Added `anchor` attribute to the render `WPGlobusOptions_wpglobus_dropdown` class.
-* (Core/Options) Minor code tweaks.
 
 ### Earlier versions and Add-ons ###
 
