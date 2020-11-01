@@ -984,6 +984,9 @@ class WPGlobus_YoastSEO {
 			
 			$yoastseo_plus_meta_keywords_access   = '';
 			$yoastseo_plus_meta_keywords_inactive = '';
+
+			$yoastseo_plus_social_access = '';
+			$yoastseo_plus_social_inactive = '';
 			
 			if ( WPGlobus::Config()->builder->is_builder_page() ) {
 
@@ -1001,40 +1004,52 @@ class WPGlobus_YoastSEO {
 				}
 
 				$yoastseo_plus_readability_access = sprintf(
-					__( 'Please see %1s to get access to Analysis results in %2s with YoastSEO.', '' ),
+					esc_html__( 'Please see %1s to get access to Analysis results in %2s with YoastSEO.', '' ),
 					'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>',
 					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
 				);
 				$yoastseo_plus_readability_inactive = sprintf(
-					__( 'Please activate %1sYoast SEO Plus%2s module to get access to Analysis results in %3s with YoastSEO.', '' ),
+					esc_html__( 'Please activate %1sYoast SEO Plus%2s module to get access to Analysis results in %3s with YoastSEO.', '' ),
 					'<a href="'.$_url.'">',
 					'</a>',
 					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
 				);
 				
 				$yoastseo_plus_page_analysis_access = sprintf(
-					__( 'Please see %1s to get access to Analysis results in %2s with YoastSEO.', '' ),
+					esc_html__( 'Please see %1s to get access to Analysis results in %2s with YoastSEO.', '' ),
 					'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>',
 					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
 				);
 				$yoastseo_plus_page_analysis_inactive = sprintf(
-					__( 'Please activate %1sYoast SEO Plus%2s module to get access to Analysis results in %3s with YoastSEO.', '' ),
+					esc_html__( 'Please activate %1sYoast SEO Plus%2s module to get access to Analysis results in %3s with YoastSEO.', '' ),
 					'<a href="'.$_url.'">',
 					'</a>',
 					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
 				);
 
 				$yoastseo_plus_meta_keywords_access = sprintf(
-					__( 'Please see %1s to get access to Focus keyphrase in %2s with YoastSEO.', '' ),
+					esc_html__( 'Please see %1s to get access to Focus keyphrase in %2s with YoastSEO.', '' ),
 					'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>',
 					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
 				);
 				$yoastseo_plus_meta_keywords_inactive = sprintf(
-					__( 'Please activate %1sYoast SEO Plus%2s module to get access to Focus keyphrase in %1s with YoastSEO.', '' ),
+					esc_html__( 'Please activate %1sYoast SEO Plus%2s module to get access to Focus keyphrase in %1s with YoastSEO.', '' ),
 					'<a href="'.$_url.'">',
 					'</a>',
 					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
-				);				
+				);
+
+				$yoastseo_plus_social_access = sprintf(
+					esc_html__( 'Please see %1s to get access to Social Tab content in %2s with YoastSEO.', '' ),
+					'<a href="https://wpglobus.com/product/wpglobus-plus/#yoastseo" target="_blank">WPGlobus Plus</a>',
+					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
+				);
+				$yoastseo_plus_social_inactive = sprintf(
+					esc_html__( 'Please activate %1sYoast SEO Plus%2s module to get access to Social Tab content in %1s with YoastSEO.', '' ),
+					'<a href="'.$_url.'">',
+					'</a>',
+					WPGlobus::Config()->en_language_name[ WPGlobus::Config()->builder->get_language() ]
+				);					
 			}
 			
 			$i18n = array(
@@ -1043,7 +1058,9 @@ class WPGlobus_YoastSEO {
 				'yoastseo_plus_page_analysis_access' 	=> $yoastseo_plus_page_analysis_access,
 				'yoastseo_plus_page_analysis_inactive'  => $yoastseo_plus_page_analysis_inactive,
 				'yoastseo_plus_meta_keywords_access' 	=> $yoastseo_plus_meta_keywords_access,
-				'yoastseo_plus_meta_keywords_inactive' 	=> $yoastseo_plus_meta_keywords_inactive
+				'yoastseo_plus_meta_keywords_inactive' 	=> $yoastseo_plus_meta_keywords_inactive,
+				'yoastseo_plus_social_access' 			=> $yoastseo_plus_social_access,
+				'yoastseo_plus_social_inactive' 		=> $yoastseo_plus_social_inactive
 			);
 
 			$src_version 		 = false;
@@ -1114,6 +1131,7 @@ class WPGlobus_YoastSEO {
 						'is_default_language' => WPGlobus::Config()->builder->is_default_language() ? true : false,
 						'src_version_premium' => $src_version_premium,
 						'plus_module'   	  => self::$plus_module,
+						'access_extra'   	  => ( defined( 'WPGLOBUS_YOAST_SEO_ACCESS_EXTRA' ) && WPGLOBUS_YOAST_SEO_ACCESS_EXTRA ) ? 'true' : 'false'
 					)
 				);
 
@@ -1129,9 +1147,7 @@ class WPGlobus_YoastSEO {
 				);
 
 			endif;
-
 		}
-
 	}
 
 	/**
@@ -1210,7 +1226,7 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @since 2.4.14
 	 * @since 2.4.15 Localize description.
-	 * @since 2.5.1  Added support of taxonomies.
+	 * @since 2.5.1 Added support of taxonomies.
 	 * 
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
@@ -1247,6 +1263,6 @@ class WPGlobus_YoastSEO {
 		return $graph_piece;
 	}
 
-} // class
+} // class WPGlobus_YoastSEO.
 
 # --- EOF
