@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-11-01 - version 2.5.16
+* (Core/Meta) Fixed PHP Warning: count(): Parameter must be an array or an object that implements Countable.
+* (Vendor/Yoast) Removed unneeded code. Small tweaks.
+
 2020-10-25 - version 2.5.15
 * (Core/Filters) Don't apply multilingual filter  on disabled post types (issue #90).
 * (Core/Options) Fixed URL for the second language on the REST API tab.
