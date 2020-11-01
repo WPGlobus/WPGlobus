@@ -132,16 +132,19 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			$id_column = 'meta_id';
 
 			$raw_meta_key = $meta_key;
-
-			// Compare existing value to new value if no prev value given and the key exists only once.
+			
+			/** 
+			 * Compare existing value to new value if no prev value given and the key exists only once.
+			 * @since 2.5.16 Fixed PHP Warning: count(): Parameter must be an array or an object that implements Countable.
+			 */
 			if ( empty( $prev_value ) ) {
-				$old_value = get_metadata( $meta_type, $object_id, $meta_key );
-				if ( 1 === count( $old_value ) ) {
-					if ( ! empty( $old_value[0] ) && $old_value[0] === $meta_value ) {
+				$old_value = get_metadata_raw( $meta_type, $object_id, $meta_key );
+				if ( is_countable( $old_value ) && count( $old_value ) === 1 ) {
+					if ( $old_value[0] === $meta_value ) {
 						return false;
 					}
 				}
-			}
+			}			
 
 			$_meta_value = $meta_value;
 			/**
@@ -279,7 +282,6 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			wp_cache_delete( $object_id, $meta_type . '_meta' );
 
 			return true;
-
 		}
 
 		/**
