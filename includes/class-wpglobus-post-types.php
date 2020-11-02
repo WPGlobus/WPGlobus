@@ -104,6 +104,10 @@ class WPGlobus_Post_Types {
 		// Web Stories: https://wordpress.org/plugins/web-stories/ @since 2.5.15
 		'web-story-template',
 		'web-story',
+		// 3D FlipBook Dflip Lite: https://wordpress.org/plugins/3d-flipbook-dflip-lite/ @since 2.5.17
+		'dflip',
+		// https://oceanwp.org/ @since 2.5.17
+		'oceanwp_library',
 	);
 
 	/**
