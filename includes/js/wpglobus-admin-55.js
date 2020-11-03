@@ -836,7 +836,8 @@ jQuery(document).ready(function () {
 					if ( typeof so !== 'undefined' ) {
 						s = so;
 					}
-                    $( 'input.ptitle' ).eq( 0 ).attr( 'value',  s ) ;
+                    // @since 2.5.17 Using `val` function instead of `attr`.
+                    $( 'input.ptitle' ).eq( 0 ).val( s ) ;
 					WPGlobusAdmin.qedit_titles[ id ][ 'source' ] = s;
                 });
 
@@ -950,6 +951,10 @@ jQuery(document).ready(function () {
 
                     var e = $('#edit-' + id + ' input.ptitle').eq(0);
                     var p = e.parents('label');
+					if ( 'undefined' === typeof WPGlobusAdmin.qedit_titles ) {
+						// @since 2.5.17 Fixed Uncaught TypeError: Cannot read property of undefined.
+						return;
+					}
 					e.val(WPGlobusAdmin.qedit_titles[id].source);
 					e.addClass('hidden');
                     $(WPGlobusAdmin.data.template).insertAfter(p);
@@ -975,7 +980,8 @@ jQuery(document).ready(function () {
                         if ( typeof  WPGlobusAdmin.qedit_titles[id][l] !== 'undefined' ) {
 							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\'/g, "'" );
 							WPGlobusAdmin.qedit_titles[id][l]['name'] = WPGlobusAdmin.qedit_titles[id][l]['name'].replace( /\\\"/g, '"' );
-                            $e.attr( 'value', WPGlobusAdmin.qedit_titles[id][l]['name'] );
+                            // @since 2.5.17 Using `val` function instead of `attr`.
+                            $e.val( WPGlobusAdmin.qedit_titles[id][l]['name'] );
 							WPGlobusAdmin.qedit_titles[id]['source'] =
 								WPGlobusCore.getString(
 									WPGlobusAdmin.qedit_titles[id]['source'],
@@ -984,7 +990,8 @@ jQuery(document).ready(function () {
 								);
                         }
                     });
-					$( 'input.ptitle' ).eq( 0 ).attr( 'value', WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );
+					// @since 2.5.17 Using `val` function instead of `attr`.
+					$( 'input.ptitle' ).eq(0).val( WPGlobusAdmin.qedit_titles[ id ][ 'source' ] );
                 });
 
             },
