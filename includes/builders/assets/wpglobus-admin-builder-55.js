@@ -3,6 +3,7 @@
  * Interface JS functions
  *
  * @since 2.5
+ * @since 2.5.17 Revised `setMultilingualFields` function to use field param as string or object.
  *
  * @package WPGlobus
  * @subpackage Administration
@@ -330,30 +331,71 @@ jQuery(document).ready(function ($) {
 			});		
 		},
 		setMultilingualFields: function() {
-			$.each(WPGlobusAdmin.builder.multilingualFields, function(indx, field) {	
-				var elementBy = 'name';
-				var node = document.getElementsByName(field);
-				var $element;
-				
-				if ( 0 == node.length ) {
-					elementBy = 'id';
-					node = document.getElementById(field);
-				}	
-
-				if ( null === node ) {
-					return;
-				} else {
-					if ( 'id' == elementBy ) {
-						$element = $('#'+field);
-					} else {
-						var nodeName = node[0].nodeName;
-						nodeName = nodeName.toLowerCase();
-						$element = $(nodeName+'[name="'+field+'"]');
-					}
-					$element.addClass(WPGlobusAdmin.builder.translatableClass);
-				}				
-				
+			$.each(WPGlobusAdmin.builder.multilingualFields, function(indx, field) {
+				/**
+				 * @since 2.5.17 Revised function to use field param as string or object.
+				 */
+				var attrs = api.getFieldAttrs(field);
+				if ( 'function' === typeof WPGlobusAdmin[attrs.fieldFunction] ) {
+					WPGlobusAdmin[attrs.fieldFunction](attrs);
+				}
 			});			
+		},
+		textField: function(attrs){
+			var id = attrs.id;
+			var elementBy = 'name';
+			var node = document.getElementsByName(id);
+			var $element;
+			
+			if ( 0 == node.length ) {
+				elementBy = 'id';
+				node = document.getElementById(id);
+			}	
+
+			if ( null === node ) {
+				return true;
+			} else {
+				if ( 'id' == elementBy ) {
+					$element = $('#'+id);
+				} else {
+					var nodeName = node[0].nodeName;
+					nodeName = nodeName.toLowerCase();
+					$element = $(nodeName+'[name="'+id+'"]');
+				}
+				$element.addClass(WPGlobusAdmin.builder.translatableClass);
+			}				
+		},
+		wysiwygField: function(attrs){
+			$(document).on('wpglobus_wysiwyg_field', function(evnt,params) {
+				params.callback(attrs);
+			});
+		},
+		fileField: function(attrs){
+			// @since 2.5.17 @W.I.P
+			/*
+			$(document).on('wpglobus_file_field', function(evnt,params) {
+				params.callback(attrs);
+			}); // */
+		},
+		getFieldAttrs: function(field){
+			var defaultAttrs = {
+				'id': false,
+				'type': 'text',
+				'fieldFunction': 'textField'
+			}
+			var attrs = {};
+			if ( 'string' === typeof field ) {
+				attrs['id'] = field;
+			} else if ( 'object' === typeof field ) {
+				if ( 'undefined' !== typeof field.id ) {
+					attrs['id'] = field.id;
+				}
+				if ( 'undefined' !== typeof field.type ) {
+					attrs['type'] = field.type;
+					attrs['fieldFunction'] = field.type+'Field';
+				}				
+			}
+			return $.extend({}, defaultAttrs, attrs);	
 		}
 	}
 	
