@@ -19,6 +19,8 @@
  * Author: WPGlobus
  * Author URI: https://wpglobus.com/
  * Network: false
+ * Requires at least: 5.0
+ * Requires PHP: 5.6
  * License: GPL-3.0-or-later
  * License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
  */
