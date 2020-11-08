@@ -37,10 +37,6 @@ jQuery(document).ready(function($){
 		
 			tinymce.PluginManager.add('wpglobus_globe', function(editor, url) {
 			
-				console.log( 'editor.id :: ', editor.id );
-				console.log( '       id :: ',  id );
-			
-			
 				if ( -1 === editor.id.indexOf(id) ) {
 					return;
 				}
