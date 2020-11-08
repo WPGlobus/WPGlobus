@@ -65,9 +65,14 @@ class WPGlobus_Core {
 		 * Fix for the case
 		 * &lt;!--:en--&gt;ENG&lt;!--:--&gt;&lt;!--:ru--&gt;RUS&lt;!--:--&gt;
 		 *
-		 * @todo need careful investigation
+		 * @since 2.5.17 Disabled. Breaks block editing and converts markup-as-text to actual markup.
+		 * <code>
+		 * // This `if` solves only the block editing. But we still have issues with viewing the post.
+		 * if ( ! WPGlobus_WP::is_function_in_backtrace( array( 'WPGlobus_Gutenberg', 'translate_post' ) ) ) {
+		 *   $text = htmlspecialchars_decode( $text );
+		 * }
+		 * </code>
 		 */
-		$text = htmlspecialchars_decode( $text );
 
 		$possible_delimiters =
 			array(
@@ -91,6 +96,15 @@ class WPGlobus_Core {
 				array(
 					'start' => "<!--:{$language}-->",
 					'end'   => '<!--:-->',
+				),
+				/**
+				 * Check for encoded version here instead of applying htmlspecialchars_decode().
+				 *
+				 * @since 2.5.17
+				 */
+				array(
+					'start' => "&lt;!--:{$language}--&gt;",
+					'end'   => '&lt;!--:--&gt;',
 				),
 				array(
 					'start' => "[:{$language}]",
