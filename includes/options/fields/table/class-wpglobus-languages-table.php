@@ -505,13 +505,22 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 	 * Generates content for a single row of the table.
 	 *
 	 * @since  1.5.10
+	 * @since  2.5.17 Installed languages moved to top of table.
+	 *
 	 * @access public
 	 *
 	 * @param object $item The current item.
 	 */
 	public function single_row( $item ) {
+		
 		if ( in_array( $item['wpglobus_code'], WPGlobus::Config()->enabled_languages, true ) ) {
-			echo '<tr style="background-color:#d3e4f4;">';
+			$order = '-1';
+			foreach( WPGlobus::Config()->enabled_languages as $order=>$language ) {
+				if ( $language == $item['wpglobus_code'] ) {
+					break;
+				}
+			}
+			echo '<tr class="wpglobus-the-language-item wpglobus-the-language-item-installed" style="background-color:#d3e4f4;" data-order="'.$order.'">';
 		} else {
 			echo '<tr>';
 		}
@@ -520,3 +529,5 @@ class WPGlobus_Languages_Table extends WP_List_Table {
 		echo '</tr>';
 	}
 }
+
+# --- EOF
