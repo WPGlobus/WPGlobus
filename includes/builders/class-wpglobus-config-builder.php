@@ -304,7 +304,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 					 * See also the Update action in @see \WPGlobus_Builders
 					 */
 					$_continue = false;
-					if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']['post_type'] ) ) {
+					if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']->post_type ) ) {
 						$_continue = true;
 					}
 					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' )
@@ -315,7 +315,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 						 *
 						 * @see \WPGlobus_Builders::is_gutenberg()
 						 */
-						if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']['post_id'] ) ) {
+						if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']->post_id ) ) {
 							$post_id = $GLOBALS['WPGlobus']['post_id'];
 						} else {
 							$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
