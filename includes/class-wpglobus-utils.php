@@ -272,7 +272,7 @@ class WPGlobus_Utils {
 	 * @since 1.1.1
 	 */
 	public static function current_url() {
-		return set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ); // WPCS: input var ok, sanitization ok.
+		return \set_url_scheme( 'http://' . self::http_host() . self::request_uri('/') );
 	}
 
 	/**
@@ -474,5 +474,37 @@ class WPGlobus_Utils {
 
 		/* @noinspection SubStrUsedAsStrPosInspection */
 		return ( $n === substr( $s, 0, strlen( $n ) ) );
+	}
+
+	/**
+	 * Returns sanitized $_SERVER['REQUEST_URI'].
+	 *
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function request_uri( $default = '' ) {
+		if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+			// Something abnormal.
+			return $default;
+		}
+
+		return \esc_url_raw( \wp_unslash( $_SERVER['REQUEST_URI'] ) );
+	}
+
+	/**
+	 * Returns sanitized $_SERVER['HTTP_HOST'].
+	 *
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function http_host( $default = 'localhost' ) {
+		if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
+			// Something abnormal. Maybe WP-CLI.
+			return $default;
+		}
+
+		return \sanitize_text_field( \wp_unslash( $_SERVER['HTTP_HOST'] ) );
 	}
 }
