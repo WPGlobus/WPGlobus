@@ -2,6 +2,18 @@
 
 ## Changelog ##
 
+2020-11-15 - version 2.5.17
+* (Core/JS) Fixed Uncaught TypeError: Cannot read property of undefined.
+* (Core/JS) Using `val` function instead of `attr`.
+* (Core/Admin) CSS tweak for edit slug box.
+* (Core/Config) Changed the priority for `plugins_loaded` action.
+* (Core/Config Builder) Check $GLOBALS['WPGlobus'] for an array to prevent an occurring error `Cannot use object of type WPGlobus as array`.
+* (Core/Utils) Fixed current_url() warning when plugin deactivated with WP-CLI.
+* (Core) Do not decode special characters.
+* (Builders/Pods) Added support `phone`, `wysiwyg` fields of `Pods – Custom Content Types and Fields`.
+* (Core/Post Types) Added  the `3D FlipBook Dflip Lite` plugin and `OceanWP` theme's post types to the `"hidden types"` list.
+* (Options/Languages table) Installed languages moved to top of table.
+
 2020-11-01 - version 2.5.16
 * (Core/Meta) Fixed PHP Warning: count(): Parameter must be an array or an object that implements Countable.
 * (Vendor/Yoast) Removed unneeded code. Small tweaks.
