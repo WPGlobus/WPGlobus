@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-11-15 - version 2.5.18
+* (Builders/Pods) Fixed `Uncaught Error: Call to a member function fields() on bool`.
+
 2020-11-15 - version 2.5.17
 * (Core/JS) Fixed `Uncaught TypeError: Cannot read property of undefined`.
 * (Core/JS) Using `val` function instead of `attr`.
