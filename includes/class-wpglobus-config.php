@@ -292,17 +292,19 @@ class WPGlobus_Config {
 	}
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public function __construct() {
 
 		/**
 		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all plugins already loaded their translations.
-		 */
+		 * @since 2.5.17 Change the priority for compatibility with `woocommerce-pdf-invoices-italian-add-on`, 
+		 * it seems that calling init_current_language() in plugin_loaded hook with priority 0 is too late, with -1 it works fine.
+		 */		 
 		add_action( 'plugins_loaded', array(
 			$this,
 			'init_current_language'
-		), 0 );
+		), -1 );
 
 		add_action( 'plugins_loaded', array(
 			$this,
