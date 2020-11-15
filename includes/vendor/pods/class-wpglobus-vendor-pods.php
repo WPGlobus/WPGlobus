@@ -177,9 +177,18 @@ if ( ! class_exists( 'WPGlobus_Vendor_Pods' ) ) :
 		protected static function get_fields( $post_id, $post_type ) {
 							 
 				/**
-				 * @see pods\classes\Pods.php
+				 * @see pods\includes\classes.php
 				 */
 				$pods = pods($post_type, $post_id); 
+				
+				/**
+				 * Return if Pods is false.
+				 * @since 2.5.18
+				 */
+				if ( ! $pods ) {
+					return false;
+				}
+				
 				$_fields = $pods->fields();
 				
 				if ( empty( $_fields ) ) {

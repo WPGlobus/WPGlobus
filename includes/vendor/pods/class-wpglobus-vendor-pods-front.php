@@ -1,6 +1,6 @@
 <?php
 /**
- * class-wpglobus-vendor-pods-front.php
+ * File: class-wpglobus-vendor-pods-front.php
  *
  * @since 2.3.0
  *
