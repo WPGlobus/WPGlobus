@@ -304,7 +304,16 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 					 * See also the Update action in @see \WPGlobus_Builders
 					 */
 					$_continue = false;
-					if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']['post_type'] ) ) {
+
+					/**
+					 * @since 2.5.17 Check $GLOBALS['WPGlobus'] for an array to prevent an occurring error `Cannot use object of type WPGlobus as array`.
+					 * @todo In a rare case (so far only one) $GLOBALS['WPGlobus'] defined as object. Need an investigation.
+					 */
+					if ( isset( $GLOBALS['WPGlobus'] ) && 
+						is_array( $GLOBALS['WPGlobus'] ) && 
+						! empty( $GLOBALS['WPGlobus']['post_type'] ) 
+					)
+					{
 						$_continue = true;
 					}
 					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' )
