@@ -217,6 +217,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.5.18 =
+
+* (Builders/Pods) Fixed `Uncaught Error: Call to a member function fields() on bool`.
+
 = 2.5.17 =
 
 * (Core/JS) Fixed `Uncaught TypeError: Cannot read property of undefined`.
