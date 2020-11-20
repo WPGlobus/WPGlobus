@@ -5,7 +5,18 @@
     "_yoast_wpseo_focuskw": {},
     "_yoast_wpseo_focuskw_text_input": null,
     "_yoast_wpseo_keywordsynonyms": {},
-    "_yoast_wpseo_focuskeywords": {}
+    "_yoast_wpseo_focuskeywords": {},
+    "_yoast_wpseo_opengraph-title": {},
+    "_yoast_wpseo_opengraph-description": {},
+    "_yoast_wpseo_opengraph-image": {},
+    "_yoast_wpseo_opengraph-image-id": {},
+    "_yoast_wpseo_twitter-title": {},
+    "_yoast_wpseo_twitter-description": {},
+    "_yoast_wpseo_twitter-image": {},
+    "_yoast_wpseo_twitter-image-id": {}
+  },
+  "post_ml_fields": {    
+	"focus-keyword-input-metabox": {}
   },
   "wp_options": {
 	"blogname": {},

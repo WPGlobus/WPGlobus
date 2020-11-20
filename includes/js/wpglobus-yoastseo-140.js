@@ -4,6 +4,7 @@
  *
  * @since 2.4
  * @since 2.5.16 Removed unneeded code. Small tweaks.
+ * @since 2.5.19 Added support multilingual fields for social tab.
  *
  * @package WPGlobus
  */
@@ -48,8 +49,15 @@ jQuery(document).ready( function ($) {
 		isBuilderPage: function(){
 			return api.parseBool(WPGlobusYoastSeo.builder_page);
 		},
-		getSuggest: function(type){
-			var suggest = '';
+		isBlockEditor: function(){
+			if ( api.isBuilderPage() && 'gutenberg' === WPGlobusYoastSeo.builder_id ) {
+				return true;
+			}
+			return false;
+		},
+		getSuggest: function(type, attrs){
+			var suggest = '', className = 'wpglobus-suggest';
+			attrs = attrs || {};
 			if ( 'undefined' === typeof type ) {
 				return suggest;
 			}
@@ -74,8 +82,15 @@ jQuery(document).ready( function ($) {
 					suggest = WPGlobusVendor.i18n.yoastseo_plus_social_access;
 				}			
 			}
-			suggest = '<div class="wpglobus-suggest" style="font-weight:bold;border:1px solid rgb(221, 221, 221);padding:20px 10px;">'+suggest+'</div>';
-			return suggest;
+			className += ' '+'wpglobus-suggest-'+type;
+			var id = '';
+			if ( 'undefined' !== typeof attrs.id ) {
+				if ( $('#'+attrs.id).length > 0 ) {
+					return false;
+				}
+				id = 'id="'+attrs.id+'"';
+			}
+			return '<div '+id+' class="'+className+'" style="font-weight:bold;border:1px solid rgb(221, 221, 221);padding:20px 10px;">'+suggest+'</div>';
 		},
 		init: function() {
 			if ( api.isBuilderPage() ) {
@@ -90,7 +105,8 @@ jQuery(document).ready( function ($) {
 					api.setKeywordFieldSuggest();
 					api.setSeoAnalysisSuggest();
 					api.setReadabilitySuggest();					
-					// api.setSocialSuggest(); @since 2.5.16 @W.I.P					
+					api.setSocialSuggest();		
+					api.attachListeners();					
 				}
 			}
 		},
@@ -98,19 +114,70 @@ jQuery(document).ready( function ($) {
 			setTimeout( function(){
 				var $box = $('#wpseo-section-social');
 				if ( $box.length == 1 ) {
-					$box.empty().append( api.getSuggest('social') );
+					$box.empty().append( api.getSuggest('social',{id:'wpglobus-suggest-social-metabox'}) );
 				}
 			}, 500);
+			
+			if ( api.isBlockEditor() ) {
+				// Click by header in sidebar in Block editor mode.
+				var modalObserver = new MutationObserver( function( mutations ) {
+					mutations.forEach( function( mutation ) {
+						var $addedNodes = $(mutation.addedNodes);
+						var selector = 'div.yoast-modal-content';
+						var $filteredElems = $addedNodes.find(selector);
+						if ( $filteredElems.length == 1 ) {
+						
+							if ( $filteredElems.find('#yoast-snippet-preview-container').length > 0 ) {
+								return true;
+							}
+
+							var $elems = $filteredElems.find('div');
+							$elems.each(function(){
+								var $this = $(this);
+								var className = $this.attr('class') || '';
+								if ( -1 !== className.indexOf('SocialMetadataPreviewForm__') ) {
+									var suggest = api.getSuggest('social',{id:'wpglobus-suggest-social-modal'});
+									if ( suggest ) {
+										$this.after(suggest);
+									}
+									$this.empty();
+								}
+								if ( -1 !== className.indexOf('shared__FormSection') ) {
+									$this.empty();
+								}								
+							});
+						}							
+					} );
+				} );
+				modalObserver.observe($('body.block-editor-page')[0],{childList:true, subtree:true});
+			}
 		},
 		setKeywordFieldSuggest: function() {
-			setTimeout( function(){
-				var box = $('#focus-keyword-input-metabox').parent('div');
-				if ( box.length == 1 ) {
-					box.empty().append( api.getSuggest('keyword') );
-				}
-			}, 2000);
+			if ( api.isBlockEditor() ) {
+				setTimeout( function(){
+					// Sidebar in Block editor mode.
+					var box = $('#focus-keyword-input-sidebar').parent('div');
+					if ( box.length == 1 ) {
+						box.empty().append( api.getSuggest('keyword') );
+					}
+					// Metabox in Block editor mode.
+					box = $('#focus-keyword-input-metabox').parent('div');
+					if ( box.length == 1 ) {
+						box.empty().append( api.getSuggest('keyword') );
+					}					
+				}, 2000);					
+			} else {
+				// Metabox in Standard/Classic mode.
+				setTimeout( function(){
+					var box = $('#focus-keyword-input-metabox').parent('div');
+					if ( box.length == 1 ) {
+						box.empty().append( api.getSuggest('keyword') );
+					}
+				}, 2000);				
+			}
 		},
 		setReadabilitySuggest: function() {
+			// Standard/Classic mode.
 			var selector = $('.yoast-aria-tabs li').eq(1);
 			$(document).on('click', selector, function(ev) {
 				if ( ! api.initReadability ) {
@@ -128,6 +195,7 @@ jQuery(document).ready( function ($) {
 			});
 		},
 		setSeoAnalysisSuggest: function() {
+			// Standard/Classic mode.
 			var container;
 			setTimeout( function(){
 				var containers = $('#yoast-seo-analysis-collapsible-metabox').parents('div');
@@ -154,6 +222,32 @@ jQuery(document).ready( function ($) {
 					}
 				}, 300);
 			});
+		},
+		attachListeners: function() {
+			if ( api.isBlockEditor() ) {
+				//  Seo Analysis & Readability Analysis in sidebar.
+				$(document).on('click', '.yoast.components-panel__body', function(ev){
+					setTimeout( function(){
+						$('div').each(function(i,e){
+							var elmClass = $(e).attr('class');
+							if ( 'undefined' != typeof elmClass && -1 != elmClass.indexOf('ContentAnalysis__ContentAnalysisContainer') ) {
+								$(e).empty().append( api.getSuggest('analysis') );
+							}
+						});
+					}, 200);	
+				});
+				// KeywordField in sidebar in Block editor mode.
+				var yoastPinnedButton = document.querySelector('[aria-label="Yoast SEO"]');
+				$(document).on('click', yoastPinnedButton, function(ev){
+					setTimeout( function(){
+						// @see setKeywordFieldSuggest function.
+						var box = $('#focus-keyword-input-sidebar').parent('div');
+						if ( box.length == 1 ) {
+							box.empty().append( api.getSuggest('keyword') );
+						}
+					}, 100);	
+				});				
+			}			
 		},
 		setMetaBoxTitle: function() {
 			var box = $('#wpseo_meta .hndle'); // post.php

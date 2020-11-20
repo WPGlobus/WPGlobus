@@ -1,9 +1,12 @@
 <?php
 /**
+ * File: class-wpglobus-yoastseo140.php
+ * 
  * Support of Yoast SEO 14.0
  *
  * @package WPGlobus\Vendor\YoastSEO
  * @since 2.4
+ * @since 2.5.19 Added support multilingual fields for social tab.
  */
 
 /**
@@ -136,25 +139,38 @@ class WPGlobus_YoastSEO {
 			 * AJAX is probably not required (waiting for a case).
 			 */
 			add_filter( 'wpseo_title', array( __CLASS__, 'filter__title' ), PHP_INT_MAX );
-			/**
-			 * Filter opengraph title.
-			 * @since 2.4
-			 */			
-			add_filter( 'wpseo_opengraph_title', array( __CLASS__, 'filter_front__title' ), 5, 2 );	
 	
 			/**
 			 * Filter meta description.
 			 * @since 2.4
 			 */
 			add_filter( 'wpseo_metadesc', array( __CLASS__, 'filter_front__description' ), 5, 2 );	
-			add_filter( 'wpseo_opengraph_desc', array( __CLASS__, 'filter_front__description' ), 5, 2 );	
+			
+			/**
+			 * Open Graph.
+			 * @since 2.4 Open Graph title.
+			 * @since 2.4 Open Graph description.
+			 * @since 2.4 Open Graph URL.
+			 * @since 2.5.19 Open Graph image. 
+			 */			
+			add_filter( 'wpseo_opengraph_title', array( __CLASS__, 'filter_front__opengraph_title' ), 5, 2 );	
+			add_filter( 'wpseo_opengraph_desc', array( __CLASS__, 'filter_front__opengraph_description' ), 5, 2 );	
+			add_filter( 'wpseo_opengraph_image', array( __CLASS__, 'filter_front__opengraph_image' ), 5, 2 );
+			add_filter( 'wpseo_opengraph_url', array( __CLASS__, 'filter_front__localize_url' ), 5, 2 );
+			
+			/**
+			 * Twitter.
+			 * @since 2.5.19
+			 */
+			add_filter( 'wpseo_twitter_title', array( __CLASS__, 'filter_front__twitter_title' ), 5, 2 );
+			add_filter( 'wpseo_twitter_description', array( __CLASS__, 'filter_front__twitter_description' ), 5, 2 );
+			add_filter( 'wpseo_twitter_image', array( __CLASS__, 'filter_front__twitter_image' ), 5, 2 );
 			
 			/**
 			 * Filter canonical URL and open graph URL.
 			 * @since 2.4
 			 */
 			add_filter( 'wpseo_canonical', array( __CLASS__, 'filter_front__localize_url' ), 5, 2 );	
-			add_filter( 'wpseo_opengraph_url', array( __CLASS__, 'filter_front__localize_url' ), 5, 2 );	
 	
 			/**
 			 * Filter of the rel prev and next URL put out by Yoast SEO.
@@ -256,24 +272,237 @@ class WPGlobus_YoastSEO {
 	}
 	
 	/**
-	 * Filter wpseo title.
+	 * Filter for changing the Yoast SEO generated Open Graph description.
+	 *
+	 * @see wordpress-seo\src\presenters\open-graph\description-presenter.php
+	 *
+	 * @since 2.5.19
+	 *
+	 * @scope front
+	 * @param string 				 $description  The description.
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 *
+	 * @return string
+	 */
+	public static function filter_front__opengraph_description( $description, $presentation ) {
+		
+		if ( empty( $description ) ) {
+			return $description;
+		}
+		
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_opengraph-description'][0] ) ) {
+				
+				$description = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_opengraph-description'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */					
+					$description = wpseo_replace_vars( $description, $presentation->source );
+				}
+			}
+		}
+
+		return $description;
+	}
+	
+	/**
+	 * Filter for changing the Open Graph image.
+	 *
+	 * @see wordpress-seo\src\presenters\open-graph\image-presenter.php
+	 *
+	 * @since 2.5.19
+	 *
+	 * @scope front
+	 * @param string 				 $image_url		The URL of the Open Graph image.
+	 * @param Indexable_Presentation $presentation  The presentation of an indexable.
+	 *
+	 * @return string
+	 */
+	public static function filter_front__opengraph_image( $image_url, $presentation ) {
+
+		if ( empty( $image_url) ) {
+			return $image_url;
+		}
+		
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_opengraph-image'][0] ) ) {
+				
+				$image_url = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_opengraph-image'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */
+					$image_url = wpseo_replace_vars( $image_url, $presentation->source );
+				}
+			}
+		}
+
+		return $image_url;
+	}	
+	
+	/**
+	 * Filter for changing the Twitter title.
+	 *
+	 * @see wordpress-seo\src\presenters\twitter\title-presenter.php
+	 *
+	 * @since 2.5.19
+	 *
+	 * @scope front
+	 * @param string 				 $title 		The Twitter title.
+	 * @param Indexable_Presentation $presentation  The presentation of an indexable.
+	 *
+	 * @return string
+	 */
+	public static function filter_front__twitter_title( $title, $presentation ) {
+
+		if ( empty( $title ) ) {
+			return $title;
+		}
+		
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_twitter-title'][0] ) ) {
+				
+				$title = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_twitter-title'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */
+					$title = wpseo_replace_vars( $title, $presentation->source );
+				}
+			}
+		}
+
+		return $title;
+	}
+
+	/**
+	 * Filter for changing the Twitter description as output in the Twitter card by Yoast SEO.
+	 *
+	 * @see wordpress-seo\src\presenters\twitter\description-presenter.php
+	 *
+	 * @since 2.5.19
+	 *
+	 * @scope front
+	 * @param string 				 $description  The description string.
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 *
+	 * @return string
+	 */	
+	public static function filter_front__twitter_description( $description, $presentation ) {
+
+		if ( empty( $description ) ) {
+			return $description;
+		}
+		
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_twitter-description'][0] ) ) {
+				
+				$description = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_twitter-description'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */					
+					$description = wpseo_replace_vars( $description, $presentation->source );
+				}
+			}
+		}
+
+		return $description;		
+	}
+	
+	/**
+	 * Filter for changing the Twitter Card image.
+	 *
+	 * @see wordpress-seo\src\presenters\twitter\image-presenter.php
+	 *
+	 * @since 2.5.19
+	 *
+	 * @scope front
+	 * @param string 				 $image        Image URL string.
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 *
+	 * @return string
+	 */		
+	public static function filter_front__twitter_image( $image, $presentation ) {
+
+		if ( empty( $image ) ) {
+			return $image;
+		}
+		
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_twitter-image'][0] ) ) {
+				
+				$image = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_twitter-image'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */					
+					$image = wpseo_replace_vars( $image, $presentation->source );
+				}
+			}
+		}
+		
+		return $image;
+	}
+	
+	/**
+	 * Filter for changing the Yoast SEO generated title.
 	 *
 	 * @see wordpress-seo\src\presenters\open-graph\title-presenter.php
-	 * @scope front
-	 * @since 2.4
-	 * @since 2.4.6 Removed checking for default language.
 	 *
+	 * @since 2.5.19
+	 *
+	 * @scope front
 	 * @param string 				 $title 	   The title.
 	 * @param Indexable_Presentation $presentation The presentation of an indexable.
 	 *
 	 * @return string
 	 */
-	public static function filter_front__title( $title, $presentation ) {
+	public static function filter_front__opengraph_title( $title, $presentation ) {
 		
 		if ( empty( $title ) ) {
 			return $title;
 		}
-		return self::filter__title( $title );
+
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_opengraph-title'][0] ) ) {
+				
+				$title = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_opengraph-title'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */					
+					$title = wpseo_replace_vars( $title, $presentation->source );
+				}
+			}
+		}
+	
+		return $title;
 	}
 	
 	/**
@@ -327,7 +556,6 @@ class WPGlobus_YoastSEO {
 		$_done = true;
 		
 		return $check;
-
 	}
 	
 	/**
