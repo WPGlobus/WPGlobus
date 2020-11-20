@@ -410,7 +410,6 @@ class WPGlobus_Config {
 
 	}
 
-
 	/**
 	 * Check plugin version and update versioning option
 	 *
@@ -593,7 +592,8 @@ class WPGlobus_Config {
 			'uk' => array( 'Ukrainian', 'Українська', 'uk', 'ua.png' ),
 			'vi' => array( 'Vietnamese', 'Tiếng Việt', 'vi', 'vn.png' ),
 			'cy' => array( 'Welsh', 'Cymraeg', 'cy', 'cy.png' ),
-			);
+			'ka' => array( 'Georgian', 'ქართული', 'ka_GE', 'ka.png' ),
+		);
 
 		foreach ( $language_table as $language => $data ) {
 			list(
