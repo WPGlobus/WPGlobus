@@ -296,6 +296,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.19 ###
+
+* (Options/Languages table) Added Georgian language and flag image.
+* (Vendor/Yoast) Added multilingual support for the fields in the Social tab.
+
 ### 2.5.18 ###
 
 

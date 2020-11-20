@@ -4,7 +4,7 @@
 
 2020-11-20 - version 2.5.19
 * (Options/Languages table) Added Georgian language and flag image.
-* (Vendor/Yoast) Added support multilingual fields for social tab.
+* (Vendor/Yoast) Added multilingual support for the fields in the Social tab.
 	
 2020-11-15 - version 2.5.18
 * (Builders/Pods) Fixed `Uncaught Error: Call to a member function fields() on bool`.
