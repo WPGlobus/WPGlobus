@@ -2,8 +2,8 @@
 /**
  * File: class-wpglobus-plugin-install.php
  *
- * @package WPGlobus\Admin
  * @since   1.5.9
+ * @package WPGlobus\Admin
  */
 
 if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
@@ -236,7 +236,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				/**
 				 * @since 2.4.2
 				 */
-				if ( isset( $paid_plugin['available'] ) && ( empty($paid_plugin['available']) || false === $paid_plugin['available'] ) ) {
+				if ( isset( $paid_plugin['available'] ) && ( empty( $paid_plugin['available'] ) || false === $paid_plugin['available'] ) ) {
 					// Don't add unavailable plugin in response.
 				} else {
 					array_unshift( $res->plugins, $info );
@@ -306,9 +306,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 				$i18n                    = array();
 				$i18n['current_version'] = esc_html__( 'Current Version', 'wpglobus' );
-				$i18n['get_it']          = esc_html__( 'Get it now!', 'wpglobus' );
 				$i18n['card_header']     = esc_html__( 'Premium add-on', 'wpglobus' );
 				$i18n['installed']       = esc_html__( 'Installed', 'wpglobus' );
+
+				/**
+				 * Fix for '&nbsp;!' in French translation.
+				 *
+				 * @since 2.5.20
+				 */
+				$i18n['get_it'] = html_entity_decode( __( 'Get it now!', 'wpglobus' ) );
 
 				/**
 				 * Link to the installation instructions.
