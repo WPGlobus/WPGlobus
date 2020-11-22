@@ -507,14 +507,14 @@ msgstr "Tillbaka till WPGlobus Inställningar"
 msgid "Current Version"
 msgstr "Nuvarande version"
 
-msgid "Get it now!"
-msgstr "Skaffa det nu!"
-
 msgid "Premium add-on"
 msgstr ""
 
 msgid "Installed"
 msgstr "Installerad"
+
+msgid "Get it now!"
+msgstr "Skaffa det nu!"
 
 #. translators: placeholders are for the HTML tags.
 msgid ""

@@ -404,13 +404,13 @@ msgstr ""
 msgid "Current Version"
 msgstr ""
 
-msgid "Get it now!"
-msgstr ""
-
 msgid "Premium add-on"
 msgstr ""
 
 msgid "Installed"
+msgstr ""
+
+msgid "Get it now!"
 msgstr ""
 
 #. translators: placeholders are for the HTML tags.

@@ -513,14 +513,14 @@ msgstr "Înapoi la setările WPGlobus"
 msgid "Current Version"
 msgstr "Versiune curentă"
 
-msgid "Get it now!"
-msgstr ""
-
 msgid "Premium add-on"
 msgstr ""
 
 msgid "Installed"
 msgstr "Instalat"
+
+msgid "Get it now!"
+msgstr ""
 
 #. translators: placeholders are for the HTML tags.
 msgid ""

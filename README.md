@@ -7,7 +7,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
-Requires at least: 5.0
+Requires at least: 5.5
 
 Tested up to: 5.5
 
@@ -296,6 +296,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.20 ###
+
+* (Core/Recommendations) Added admin notices about required versions of WordPress PHP.
+
 ### 2.5.19 ###
 
 * (Options/Languages table) Added Georgian language and flag image.
@@ -331,11 +335,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Core/Filters) Don't apply multilingual filter  on disabled post types (issue #90).
 * (Core/Options) Fixed URL for the second language on the REST API tab.
 * (Core/Post Types) Added  the `Getwid`, `Web Stories` plugins' post types to the `"hidden types"` list.
-
-### 2.5.14 ###
-
-* (Builders/Gutenberg) Language switcher CSS tweaks to prevent showing oversize flag images in some themes.
-* (Core/Post Types) Added post types of the `Gutenberg` plugin to the hidden types array.
 
 ### Earlier versions and Add-ons ###
 

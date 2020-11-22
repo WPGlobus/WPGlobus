@@ -552,14 +552,14 @@ msgstr "Повернутися до налаштувань WPGlobus"
 msgid "Current Version"
 msgstr "Поточна версія"
 
-msgid "Get it now!"
-msgstr "Завантажити зараз!"
-
 msgid "Premium add-on"
 msgstr "Платне розширення"
 
 msgid "Installed"
 msgstr "Встановлено"
+
+msgid "Get it now!"
+msgstr "Завантажити зараз!"
 
 #. translators: placeholders are for the HTML tags.
 msgid ""

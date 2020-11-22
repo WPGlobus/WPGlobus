@@ -551,14 +551,14 @@ msgstr "Back to the WPGlobus Settings"
 msgid "Current Version"
 msgstr "Current Version"
 
-msgid "Get it now!"
-msgstr "Get it now!"
-
 msgid "Premium add-on"
 msgstr "Premium add-on"
 
 msgid "Installed"
 msgstr "Installed"
+
+msgid "Get it now!"
+msgstr "Get it now!"
 
 #. translators: placeholders are for the HTML tags.
 msgid ""

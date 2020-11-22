@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-11-22 - version 2.5.20
-* (Core/Recommendations) Added an admin notices for required WordPress and PHP versions.
+* (Core/Recommendations) Added admin notices about required versions of WordPress PHP.
 
 2020-11-20 - version 2.5.19
 * (Options/Languages table) Added Georgian language and flag image.

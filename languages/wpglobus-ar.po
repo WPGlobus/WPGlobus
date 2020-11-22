@@ -507,14 +507,14 @@ msgstr ""
 msgid "Current Version"
 msgstr "النسخة الحالية"
 
-msgid "Get it now!"
-msgstr "إحصل عليها الأن!"
-
 msgid "Premium add-on"
 msgstr ""
 
 msgid "Installed"
 msgstr "مُثبت"
+
+msgid "Get it now!"
+msgstr "إحصل عليها الأن!"
 
 #. translators: placeholders are for the HTML tags.
 msgid ""

@@ -484,14 +484,14 @@ msgstr ""
 msgid "Current Version"
 msgstr "Praegune versioon"
 
-msgid "Get it now!"
-msgstr "Hangi kohe!"
-
 msgid "Premium add-on"
 msgstr ""
 
 msgid "Installed"
 msgstr "Paigaldatud"
+
+msgid "Get it now!"
+msgstr "Hangi kohe!"
 
 #. translators: placeholders are for the HTML tags.
 msgid ""

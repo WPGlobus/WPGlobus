@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.5.19",
+  "version": "2.5.20",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "title": "WPGlobus",
   "main": "Gulpfile.js",
@@ -28,8 +28,6 @@
     "// 4.1 If translations changed": "",
     "tx:push:pot": "tx push -s",
     "tx:push:ru": "tx push -t -f -l ru_RU",
-    "tx:push:fr": "tx push -t -f -l fr_FR",
-    "tx:pull:fr": "tx pull -f -l fr_FR --mode=translator",
     "tx:pull:all": "tx pull -a -f --mode=translator",
     "pomo": "gulp pomo",
     "// 4.2 If translations changed - BUILD AGAIN!": "",
