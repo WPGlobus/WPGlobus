@@ -871,7 +871,7 @@ msgstr "Version %1$s1.9.17%2$s "
 
 #. translators: placeholders for "strong" tags.
 msgid "Starting from this version, %1$sWPGlobus%2$s operates in two modes"
-msgstr "À partir de cette version, %1$sWPGlobus%2$ fonctionne en deux modes"
+msgstr "À partir de cette version, %1$sWPGlobus%2$s fonctionne en deux modes"
 
 #. translators: placeholders for "strong" tags; compatibility tab link.
 msgid ""

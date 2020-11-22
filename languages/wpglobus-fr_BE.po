@@ -34,7 +34,8 @@ msgstr "FAQ"
 msgid ""
 "Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
 msgstr ""
-"Attention : l’extension Multibyte String PHP (`mbstring`) n’est pas chargée !"
+"Attention&nbsp;: l’extension Multibyte String PHP (`mbstring`) n’est pas "
+"chargée&nbsp;!"
 
 msgid ""
 "The mbstring extension is required for the full UTF-8 compatibility and "
@@ -82,10 +83,10 @@ msgid "Contact Us"
 msgstr "Contactez-nous"
 
 msgid "Please give us 5 stars!"
-msgstr "Donnez-nous 5 étoiles !"
+msgstr "Donnez-nous 5 étoiles&nbsp;!"
 
 msgid "WPGlobus does not translate texts automatically!"
-msgstr "WPGlobus ne traduit pas les textes automatiquement !"
+msgstr "WPGlobus ne traduit pas les textes automatiquement&nbsp;"
 
 msgid ""
 "There are many translation companies and individual translators who can help "
@@ -98,7 +99,7 @@ msgid ""
 "When you choose a translator, please look at their native language, country "
 "of residence, specialization and knowledge of WordPress."
 msgstr ""
-"Lorsque vous choisissez un traducteur,  veuillez regarder sa langue "
+"Lorsque vous choisissez un traducteur, veuillez regarder sa langue "
 "maternelle, son pays de résidence, sa spécialisation et ses connaissances de "
 "WordPress."
 
@@ -111,10 +112,10 @@ msgstr ""
 "Nous prévoyons de maintenir une %s liste de traducteurs %s sur le site web "
 "WPGlobus. Ce n’est pas une approbation, juste une courtoisie. Veuillez les "
 "contacter directement et nous faire savoir comment cela c’est passé pour "
-"vous !"
+"vous&nbsp;!"
 
 msgid "Important notes:"
-msgstr "Remarques importantes :"
+msgstr "Remarques importantes&nbsp;:"
 
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
@@ -147,13 +148,13 @@ msgstr ""
 "écrire un code personnalisé."
 
 msgid "Language was set on your profile page"
-msgstr ""
+msgstr "La langue a été fixée sur votre page de profil"
 
 msgid "Add"
 msgstr "Ajouter"
 
 msgid "Multilingual Everything!"
-msgstr "Tout multilingue !"
+msgstr "Tout multilingue&nbsp;!"
 
 msgid ""
 "WPGlobus is a family of WordPress plugins assisting you in making "
@@ -210,7 +211,7 @@ msgstr ""
 msgid "You are about to clean the content of the following database tables:"
 msgstr ""
 "Vous êtes sur le point de nettoyer le contenu des tables suivantes de la "
-"base de données :"
+"base de données&nbsp;:"
 
 msgid "The operations log"
 msgstr "Le journal des opérations"
@@ -265,7 +266,7 @@ msgid "Show all sections"
 msgstr "Afficher toutes les sections"
 
 msgid "Save &amp; Reload"
-msgstr "Enregistrer & recharger"
+msgstr "Enregistrer &amp; recharger"
 
 msgid "WPGlobus"
 msgstr "WPGlobus"
@@ -283,7 +284,7 @@ msgid "WPGlobus Settings"
 msgstr "Réglages de WPGlobus"
 
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
 msgid "Languages"
 msgstr "Langues"
@@ -295,10 +296,10 @@ msgid "These languages are currently enabled on your site."
 msgstr "Ces langues sont actuellement disponibles sur votre site."
 
 msgid "Choose a language you would like to enable."
-msgstr ""
+msgstr "Choisissez une langue que vous souhaitez activer."
 
 msgid "Press the [Save & Publish] button to confirm."
-msgstr ""
+msgstr "Appuyez sur le bouton [Enregistrer et publier] pour confirmer."
 
 #. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
 #. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'.
@@ -330,7 +331,7 @@ msgstr ""
 "affichés dans le menu déroulant. "
 
 msgid "select navigation menu"
-msgstr ""
+msgstr "sélectionnez le menu de navigation"
 
 msgid "Language Selector Menu"
 msgstr "Menu du sélecteur de langue"
@@ -343,7 +344,7 @@ msgid "No menus have been created yet. Create some."
 msgstr "Aucun menu n’a été créé pour le moment. Faites-le."
 
 msgid "\"All Pages\" menus Language selector"
-msgstr "Menu du sélecteur de langues pour « Toutes les pages »"
+msgstr "Menu du sélecteur de langues pour «&nbsp;Toutes les pages&nbsp;»"
 
 msgid ""
 "Adds language selector to the menus that automatically list all existing "
@@ -398,12 +399,14 @@ msgid ""
 "To add a Custom JS Code in Customizer, you need to upgrade WordPress to "
 "version 4.9 or later."
 msgstr ""
+"Pour ajouter un code JS personnalisé dans Customizer, vous devez mettre à "
+"niveau WordPress à la version 4.9 ou plus."
 
 msgid "With your version of WordPress, please use the"
-msgstr ""
+msgstr "Avec votre version de WordPress, veuillez utiliser le"
 
 msgid "WPGlobus Settings page"
-msgstr ""
+msgstr "Page de paramètres WPGlobus"
 
 msgid "Label"
 msgstr "Libellé"
@@ -420,7 +423,7 @@ msgstr ""
 "dessous."
 
 msgid "Thank you for installing WPGlobus!"
-msgstr "Merci pour votre installation de WPGlobus !"
+msgstr "Merci pour votre installation de WPGlobus&nbsp;!"
 
 msgid "Read About WPGlobus"
 msgstr "En savoir plus à propos de WPGlobus"
@@ -492,7 +495,7 @@ msgid "Please use %1$sWPGlobus options page%2$s instead."
 msgstr "Veuillez utiliser à la place la %1$spage d'options WPGlobus%2$s."
 
 msgid "Expand/Shrink"
-msgstr ""
+msgstr "Élargir/Rétrécir"
 
 msgid "WPGlobus News"
 msgstr "Nouvelles WPGlobus"
@@ -591,17 +594,19 @@ msgid "Help Desk"
 msgstr "Centre de support"
 
 msgid "Email not sent. Please fill in the entire form."
-msgstr ""
+msgstr "Courriel non envoyé. Veuillez remplir le formulaire entier."
 
 msgid ""
 "Email not sent. Please verify that your name and email are entered correctly."
 msgstr ""
+"Courriel non envoyé. Veuillez vérifier que votre nom et votre e-mail sont "
+"entrés correctement."
 
 msgid "Email sent."
-msgstr ""
+msgstr "Email envoyé."
 
 msgid "Thank you for using WPGlobus!"
-msgstr "Merci d'utiliser WPGlobus&nbsp:;!"
+msgstr "Merci d'utiliser WPGlobus&nbsp;!"
 
 msgid "Our Support Team is here to answer your questions or concerns."
 msgstr ""
@@ -625,59 +630,63 @@ msgstr ""
 "est en conflit avec WPGlobus."
 
 msgid "Please fill in and submit the contact form:"
-msgstr ""
+msgstr "Veuillez remplir et soumettre le formulaire de contact&nbsp;:"
 
 msgid "Please make sure the email address is correct."
-msgstr ""
+msgstr "S’il vous plaît assurez-vous que l’adresse e-mail est correcte."
 
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 msgid "Short description of the problem"
-msgstr ""
+msgstr "Brève description du problème"
 
 msgid "Detailed description"
-msgstr ""
+msgstr "Description détaillée"
 
 msgid "Technical Information"
 msgstr "Informations techniques"
 
 msgid "This information helps us to find the problem source"
-msgstr ""
+msgstr "Cette information nous aide à trouver la source de problème"
 
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
 msgstr ""
+"Sinon, veuillez envoyer un courriel à %s. N'oubliez pas de copier et de "
+"coller les informations techniques dans votre message électronique."
 
 msgid "WPGlobus Recommends:"
-msgstr ""
+msgstr "WPGlobus recommande&nbsp;:"
 
 msgid "WPGlobus for WooCommerce"
-msgstr ""
+msgstr "WPGlobus pour WooCommerce"
 
 msgid ""
 "Translate product titles and descriptions, product categories, tags and "
 "attributes."
 msgstr ""
+"Traduire les titres et descriptions de produits, les catégories de produits, "
+"les étiquettes et les attributs."
 
 msgid "Get it now:"
-msgstr ""
+msgstr "Obtenez-le maintenant&nbsp;:"
 
 msgid "WooCommerce Multi-Currency"
-msgstr ""
+msgstr "WooCommerce Multi-Monnaie"
 
 msgid "Accept multiple currencies in your online store!"
-msgstr ""
+msgstr "Acceptez plusieurs devises dans votre boutique en ligne&nbsp;!"
 
 msgid "Check it out:"
-msgstr ""
+msgstr "Détails&nbsp;:"
 
 msgid "To translate permalinks, please activate the module Slug."
-msgstr ""
+msgstr "Pour traduire les permalinks, s’il vous plaît activer le module Slug."
 
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
-msgstr ""
+msgstr "Traduisez les permalinks avec notre add-on premium, WPGlobus Plus!"
 
 #. translators: %1$s - this plugin name. %2$s - the required PHP version.
 msgid "For %1$s to work correctly, PHP version %2$s or later is required."
@@ -693,57 +702,62 @@ msgid ""
 msgstr ""
 
 msgid "Save draft before using extra language."
-msgstr ""
+msgstr "Enregistrer le brouillon avant d’utiliser un langage supplémentaire."
 
 msgid "Builder"
-msgstr ""
+msgstr "Constructeur"
 
 msgid "Сompatibility Settings"
-msgstr ""
+msgstr "Paramètres de compatibilité"
 
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 msgid "ON"
-msgstr ""
+msgstr "OUI"
 
 msgid "Turn off"
-msgstr ""
+msgstr "Désactiver"
 
 msgid "OFF"
-msgstr ""
+msgstr "NON"
 
 msgid "Turn on"
-msgstr ""
+msgstr "Activer"
 
 msgid "Elementor"
 msgstr ""
 
 msgid "WPGlobus languages"
-msgstr ""
+msgstr "Langues WPGlobus"
 
 msgid "current"
-msgstr ""
+msgstr "actuel"
 
 msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "%1$s%2$s%3$s is set to %4$s."
 msgstr ""
+"WPGlobus fournit un support multilangue pour Elementor uniquement lorsque "
+"l'option %1$s%2$s%3$s est fixée à %4$s."
 
 msgid "Before switching the language, please save draft or publish."
 msgstr ""
+"Avant de changer de langue, veuillez enregistrer le brouillon ou publier."
 
 #. translators: Metabox title FOR language.
 msgctxt "filter__seo_meta_box_title"
 msgid "for"
-msgstr ""
+msgstr "pour"
 
 msgid "Page is being reloaded. Please wait..."
-msgstr ""
+msgstr "La page est en cours de rechargement. Veuillez patienter..."
 
 msgid ""
 "Before switching the language, please save draft or publish, then reload "
 "page."
 msgstr ""
+"Avant de changer de langue, s’il vous plaît enregistrer brouillon ou "
+"publier, puis recharger la page."
 
 msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
@@ -787,7 +801,7 @@ msgid "You cannot disable the main language."
 msgstr "Vous ne pouvez pas désactiver la langue principale."
 
 msgid "Need a multilingual slug?"
-msgstr "Vous avez besoin d’un identifiant multilingue ?"
+msgstr "Vous avez besoin d’un identifiant multilingue&nbsp;?"
 
 msgid "*) Available after the menu is saved."
 msgstr "*) Disponible après que le menu ait été enregistré."
@@ -805,82 +819,98 @@ msgstr ""
 "que la valeur par défaut."
 
 msgid "Language Selector Menu Style"
-msgstr ""
+msgstr "Style de menu de sélection de langues"
 
 msgid "WPGlobus Plus"
-msgstr ""
+msgstr "WPGlobus Plus"
 
 msgid "Drop-down languages menu or Flat (in one line)"
-msgstr ""
+msgstr "Menu déroulant des langues ou à Plat (en une ligne)"
 
 msgid "Do not change"
-msgstr ""
+msgstr "Ne change pas"
 
 msgid "Drop-down (vertical)"
-msgstr ""
+msgstr "Déroulant (vertical)"
 
 msgid "Flat (horizontal)"
-msgstr ""
+msgstr "A plat (horizontal)"
 
 msgid ""
 "If you see this message then your browser may not display the WPGlobus "
 "Settings panel properly. Please try another browser."
 msgstr ""
+"Si vous voyez ce message, votre navigateur peut ne pas afficher correctement "
+"le panneau Paramètres WPGlobus. S’il vous plaît essayer un autre navigateur."
 
 msgid "Сompatibility"
-msgstr ""
+msgstr "Compatibilité"
 
 #. translators: placeholders for "strong" tags.
 msgid "Click the %1$s[Languages]%2$s tab at the left to setup the options."
 msgstr ""
+"Cliquez sur l’onglet %1$s[Langues]%2$s à gauche pour configurer les options."
 
 #. translators: placeholders for "strong" tags.
 msgid ""
 "Use the %1$s[Languages Table]%2$s section to add a new language or to edit "
 "the language attributes: name, code, flag icon, etc."
 msgstr ""
+"Utilisez la section %1$s[Languages Table]%2$s pour ajouter une nouvelle "
+"langue ou pour modifier les attributs linguistiques&nbsp;: nom, code, icône "
+"de drapeau, etc."
 
 msgid "Important notes"
-msgstr ""
+msgstr "Notes importantes"
 
 #. translators: placeholders for "strong" tags.
 msgid "Version %1$s1.9.17%2$s "
-msgstr ""
+msgstr "Version %1$s1.9.17%2$s "
 
 #. translators: placeholders for "strong" tags.
 msgid "Starting from this version, %1$sWPGlobus%2$s operates in two modes"
-msgstr ""
+msgstr "À partir de cette version, %1$sWPGlobus%2$s fonctionne en deux modes"
 
 #. translators: placeholders for "strong" tags; compatibility tab link.
 msgid ""
 "%1$sBuilder mode%2$s: WPGlobus turns this mode on automatically when it "
 "discovers any of the plugins/add-ons listed on the %1$s[%3$s]%2$s tab."
 msgstr ""
+"%1$sMode construction%2$s&nbsp;: WPGlobus active ce mode automatiquement "
+"lorsqu'il découvre l'un des plugins/addons listés dans l'onglet %1$s "
+"[%3$s]%2$s."
 
 #. translators: placeholders for "strong" tags; compatibility tab link.
 msgid ""
 "%1$sStandard/Classic mode%2$s: is used when there are no plugins `Builder` "
 "or if you explicitly turned off builder support on the %1$s[%3$s]%2$s tab."
 msgstr ""
+"%1$sStandard/Classic mode%2$s: est utilisé quand il n’y a pas de plugins "
+"'Builder' ou si vous avez explicitement désactivé le support du constructeur "
+"sur le %1$s[%3$s]%2$s onglet."
 
 #. translators: placeholders for "strong" tags.
 msgid "Version %1$s2.2.11%2$s "
-msgstr ""
+msgstr "Version %1$s2.2.11%2$s "
 
 msgid "Starting from this version"
-msgstr ""
+msgstr "A partir de cette version"
 
 #. translators: placeholders for "strong" tags.
 msgid ""
 "The %1$sBuilder mode%2$s is turned OFF by default for all custom post types "
 "(CPT)."
 msgstr ""
+"Le %1$smode Builder%2$s est désactivé OFF par défaut pour tous les types de "
+"poste personnalisés (CPT)."
 
 #. translators: placeholders for "strong" tags.
 msgid ""
 "To turn on the %1$sBuilder mode%2$s for specific post types, please visit "
 "the %1$s[%3$s]%2$s tab."
 msgstr ""
+"Pour activer le mode %1$sBuilder%2$s pour des types de poste spécifiques, "
+"veuillez visiter l’onglet %1$s[%3$s]%2$s."
 
 msgid "Welcome!"
 msgstr "Bienvenue&nbsp;!"
@@ -889,64 +919,77 @@ msgid "Deactivating / Uninstalling"
 msgstr "Désactivation / Désinstallation"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Désinstaller"
 
 msgid "All add-ons"
-msgstr ""
+msgstr "Tous les Modules"
 
 msgid "Mobile Menu"
-msgstr ""
+msgstr "Menu mobile"
 
 msgid "Language Widgets"
-msgstr ""
+msgstr "Widgets linguistiques"
 
 msgid "We Recommend..."
-msgstr ""
+msgstr "Nous recommandons..."
 
 msgid ""
 "Our premium add-on, WPGlobus Plus, will add several features to your "
 "website, such as:"
 msgstr ""
+"Notre module premium, WPGlobus Plus, ajoutera plusieurs fonctionnalités à "
+"votre site Web, telles que&nbsp;:"
 
 msgid ""
 "- Ability to write a post in one language and immediately publish it, not "
 "waiting for the translation to other languages;"
 msgstr ""
+"- Possibilité d’écrire un message dans une langue et de le publier "
+"immédiatement, sans attendre la traduction vers d’autres langues;"
 
 msgid "- Set different URLs for each translation;"
-msgstr ""
+msgstr "- Définir différentes URLs pour chaque traduction ;"
 
 msgid ""
 "- In Yoast SEO, set the focus keyword and do the Page Analysis separately "
 "for each translation;"
 msgstr ""
+"- Dans Yoast SEO, définir le mot clé de mise au point et effectuer l’analyse "
+"de page séparément pour chaque traduction&nbsp;;"
 
 msgid "- and more..."
-msgstr ""
+msgstr "- et plus encore..."
 
 msgid "Click here to download"
-msgstr ""
+msgstr "Cliquez ici pour télécharger"
 
 msgid ""
 "Thanks for installing WPGlobus! Now you have a multilingual website and can "
 "translate your blog posts and pages to many languages."
 msgstr ""
+"Merci d’installer WPGlobus! Maintenant, vous avez un site web multilingue et "
+"pouvez traduire vos billets de blog et vos pages en de nombreuses langues."
 
 msgid "The next step is to translate your WooCommerce-based store!"
-msgstr ""
+msgstr "L’étape suivante consiste à traduire votre magasin WooCommerce!"
 
 msgid ""
 "With the WPGlobus for WooCommerce premium add-on, you will be able to "
 "translate product titles and descriptions, categories, tags and attributes."
 msgstr ""
+"Avec l’add-on WPGlobus pour WooCommerce premium, vous pourrez traduire des "
+"titres et des descriptions de produits, des catégories, des balises et des "
+"attributs."
 
 msgid "Multi-currency"
-msgstr ""
+msgstr "Multi-tarifs"
 
 msgid ""
 "Your WooCommerce-powered store is set to show prices and accept payments in "
 "a single currency only."
 msgstr ""
+"Votre magasin WooCommerce est prêt à afficher les prix et à accepter les "
+"paiements seulement dans une seule devise."
 
 msgid ""
 "With WPGlobus, you can add multiple currencies to your store and charge UK "
@@ -954,46 +997,63 @@ msgid ""
 "Accepting multiple currencies will strengthen your competitive edge and "
 "positioning for global growth!"
 msgstr ""
+"Avec WPGlobus, vous pouvez ajouter plusieurs devises à votre magasin et "
+"facturer aux clients britanniques en livres, aux clients américains en "
+"Dollars, aux clients espagnols en euros, etc. Accepter plusieurs devises "
+"renforcera votre avantage concurrentiel et votre positionnement pour la "
+"croissance mondiale&nbsp;!"
 
 msgid ""
 "The WPGlobus Multi-Currency premium add-on provides switching currencies and "
 "re-calculating prices on-the-fly."
 msgstr ""
+"L’add-on WPGlobus Multi-Currency premium fournit des monnaies de commutation "
+"et recalcule les prix à la volée."
 
 msgid "WPGlobus Premium Add-ons"
-msgstr ""
+msgstr "Module premium WPGlobus"
 
 msgid ""
 "We have written several Premium add-ons for WPGlobus. With those add-ons, "
 "you will be able to:"
 msgstr ""
+"Nous avons écrit plusieurs add-ons Premium pour WPGlobus. Avec ces add-ons, "
+"vous serez en mesure de:"
 
 msgid ""
 "<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/"
 "моя-страница and so on);"
 msgstr ""
+"<strong>Traduire URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-"
+"страница and so on);"
 
 msgid ""
 "Postpone translation to some languages and <strong>publish only the "
 "translated texts</strong>;"
 msgstr ""
+"Reporter la traduction dans certaines langues et <strong>ne publier que les "
+"textes traduits</strong>;"
 
 msgid "Maintain <strong>separate menus and widgets for each language</strong>;"
 msgstr ""
+"Maintenir des <strong>menus et des widgets distincts pour chaque langue</"
+"strong>;"
 
 msgid "<strong>Translate WooCommerce</strong> products and taxonomies;"
-msgstr ""
+msgstr "<strong>Traduction de WooCommerce</strong> produits et taxonomies;"
 
 msgid ""
 "Enter separate focus keywords for each language in the <strong>Yoast SEO</"
 "strong>;"
 msgstr ""
+"Entrez des mots clés de mise au point distincts pour chaque langue dans le "
+"<strong>SEO Yoast</strong>;"
 
 msgid "...and more."
-msgstr ""
+msgstr "...et bien plus encore."
 
 msgid "Click here to visit the WPGlobus Store"
-msgstr ""
+msgstr "Cliquez ici pour visiter le WPGlobus Store"
 
 msgid "Select a language"
 msgstr "Sélectionner une langue"
@@ -1003,14 +1063,17 @@ msgid ""
 "Place the %1$smain language%2$s of your site at the top of the list by "
 "dragging the %3$s icons."
 msgstr ""
+"Placez la %1$ langue principale%2$s de votre site en haut de la liste en "
+"faisant glisser les icônes %3$ ."
 
 #. translators: placeholders for the "strong" HTML tags.
 msgid "%1$sUncheck%2$s the languages you do not plan to use."
 msgstr ""
+"%1$sDécochez%2$s les langues que vous n’avez pas l’intention d’utiliser."
 
 #. translators: placeholders for the "strong" HTML tags.
 msgid "%1$sAdd%2$s more languages using the section below."
-msgstr ""
+msgstr "%1$sAjoutez%2$s plus de langues en utilisant la section ci-dessous."
 
 msgid "When done, click the [Save Changes] button."
 msgstr ""
@@ -1018,14 +1081,14 @@ msgstr ""
 
 #. translators: %s - placeholder for the "Save Changes" button text.
 msgid "Press the %s button to confirm."
-msgstr ""
+msgstr "Appuyez sur le bouton %s pour confirmer."
 
 #. translators: dropdown option meaning that none of the navigation menus should show the language selector.
 msgid "-- none --"
-msgstr ""
+msgstr "-- aucun --"
 
 msgid "All menus"
-msgstr ""
+msgstr "Tous les menus"
 
 msgid "Instructions:"
 msgstr "Instructions&nbsp;:"
@@ -1046,45 +1109,50 @@ msgid "NOTE: you cannot remove the main language."
 msgstr "Remarque&nbsp;: vous ne pouvez pas supprimer la langue principale."
 
 msgid "WPGlobus is enabled on these Post Types"
-msgstr ""
+msgstr "WPGlobus est activé sur ces types de publications"
 
 msgid "Uncheck to disable"
-msgstr ""
+msgstr "Dévérifier pour désactiver"
 
 msgid ""
 "Please note that there are post types, which status is managed by other "
 "plugins and cannot be changed here."
 msgstr ""
+"Veuillez noter qu’il existe des types de publications, dont le statut est "
+"géré par d’autres plugins et ne peuvent pas être modifiés ici."
 
 msgid "Post Types"
-msgstr ""
+msgstr "Types de contenu"
 
 msgid ""
 "You should put here only the code provided by WPGlobus Support. Do not write "
 "anything else in the sections below as it might break the functionality of "
 "your website!"
 msgstr ""
+"Vous devez mettre ici uniquement le code fourni par le Support WPGlobus. "
+"N’écrivez rien d’autre dans les sections ci-dessous car il pourrait briser "
+"la fonctionnalité de votre site Web!"
 
 msgid "Custom Code"
-msgstr ""
+msgstr "Code personnalisé"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Activé"
 
 msgid "Builders support"
-msgstr ""
+msgstr "Soutien des constructeurs"
 
 msgid "Builder mode is enabled on these Post Types"
-msgstr ""
+msgstr "Le mode Constructeur est activé sur ces types de post"
 
 msgid "Old fashioned language switcher"
-msgstr ""
+msgstr "Commutateur de langue démodé"
 
 msgid "Block Editor"
-msgstr ""
+msgstr "Éditeur de blocs"
 
 msgid "Block Editor Options"
-msgstr ""
+msgstr "Options d’éditeur de bloc"
 
 msgid ""
 "With the current settings, you will see the following lines in the section "
@@ -1144,13 +1212,13 @@ msgid ""
 msgstr ""
 
 msgid "Description:"
-msgstr ""
+msgstr "Description&nbsp;:"
 
 msgid "REST API"
 msgstr ""
 
 msgid "Translate strings"
-msgstr ""
+msgstr "Traduire des chaînes de caractères"
 
 msgid "item"
 msgstr "élément"
@@ -1186,105 +1254,115 @@ msgid "Add new Language"
 msgstr "Ajouter une nouvelle langue"
 
 msgid "No items of this type were found."
-msgstr ""
+msgstr "Aucun élément de ce type n'a été trouvé."
 
 msgid "Select an item"
-msgstr ""
+msgstr "Sélectionnez un élément"
 
 msgid "Multilingual support of this add-on is currently in Beta stage."
-msgstr ""
+msgstr "Le support multilingue de cet add-on est actuellement en phase bêta."
 
 msgid "We do not recommend using it on production sites."
-msgstr ""
+msgstr "Nous ne recommandons pas de l’utiliser sur les sites en production."
 
 msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
 msgstr ""
+"S’il vous plaît signaler tous les problèmes à %1$s Support Technique WPGlobus"
+"%2$s."
 
 msgid "WordPress version"
-msgstr ""
+msgstr "Version WordPress"
 
 msgid "In the WordPress core"
-msgstr ""
+msgstr "Dans le noyau WordPress"
 
 msgid "Core"
-msgstr ""
+msgstr "Noyau"
 
 msgid "Current version"
-msgstr ""
+msgstr "Version actuelle"
 
 msgid "Stage"
-msgstr ""
+msgstr "Étape"
 
 msgid "Status"
-msgstr ""
+msgstr "État"
 
 msgid "Block editor"
-msgstr ""
+msgstr "Éditeur de blocs"
 
 msgid "production"
-msgstr ""
+msgstr "production"
 
 msgid "List of supported add-ons"
-msgstr ""
+msgstr "Liste des modules complémentaires pris en charge"
 
 msgid "Add-on"
-msgstr ""
+msgstr "Extension"
 
 msgid "Supported minimum version"
-msgstr ""
+msgstr "Version minimale prise en charge"
 
 msgid "Not installed"
-msgstr ""
+msgstr "Non installé"
 
 msgid "Installed, inactive"
-msgstr ""
+msgstr "Installé, inactif"
 
 msgid "Active"
-msgstr "Actif"
+msgstr "Activé"
 
 msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
 msgstr ""
+"WPGlobus Customizer est intégré dans le panel du thème \"Personnaliser\""
 
 msgid "However, some themes do not follow all WordPress standards strictly."
 msgstr ""
+"Cependant, certains thèmes ne suivent pas strictement toutes les normes "
+"WordPress."
 
 msgid "WPGlobus Customizer may behave incorrectly with those themes."
 msgstr ""
+"WPGlobus Customizer peut se comporter de manière incorrecte avec ces thèmes."
 
 msgid "To avoid conflicts, you can switch the WPGlobus Customizer off:"
 msgstr ""
+"Pour éviter les conflits, vous pouvez désactiver le WPGlobus "
+"Customizer&nbsp;:"
 
 msgid ""
 "Below is the list of themes that do not support the WPGlobus Customizer. "
 "With those themes, WPGlobus Customizer is switched off by default"
 msgstr ""
+"Voici la liste des thèmes qui ne prennent pas en charge le customiseur "
+"WPGlobus. Avec ces thèmes, WPGlobus Customizer est désactivé par défaut"
 
 msgid "The currently active theme is"
-msgstr ""
+msgstr "Le thème actuellement actif est"
 
 msgid "In the current version, WPGlobus Customizer does not support"
-msgstr ""
+msgstr "Dans la version actuelle, WPGlobus Customizer ne prend pas en charge"
 
 msgid "translation of the navigation menus"
-msgstr ""
+msgstr "traduction des menus de navigation"
 
 msgid "to translate, please go to"
-msgstr ""
+msgstr "pour traduire, s’il vous plaît aller à"
 
 msgid "Go to Customizer"
-msgstr ""
+msgstr "Personnaliser maintenant"
 
 msgid "is undefined"
-msgstr ""
+msgstr "est indéfinie"
 
 msgid "is set to"
-msgstr ""
+msgstr "est réglé à"
 
 msgid "by adding to the file wp-config.php"
-msgstr ""
+msgstr "en ajoutant au fichier wp-config.php"
 
 msgid "now"
-msgstr ""
+msgstr "maintenant"
 
 msgid "We rely on your support!"
 msgstr "Nous dépendons de votre soutien&nbsp;!"
@@ -1294,7 +1372,7 @@ msgstr ""
 "Pensez à faire un petit don pour aider le développement futur de l'extension."
 
 msgid "Thank you!"
-msgstr "Merci !"
+msgstr "Merci&nbsp;!"
 
 msgid "WPGlobus Plus!"
 msgstr "WPGlobus Plus&nbsp;!"
@@ -1303,8 +1381,8 @@ msgid ""
 "Advanced features and tweaks: URL translation, multilingual SEO analysis, "
 "separate publishing and more! "
 msgstr ""
-"Fonctionnalités avancées et améliorations&nbsp;: traduction des URLs, "
-"analyse SEO multilangue, publication séparées et bien plus&nbsp;!"
+"Fonctionnalités et réglages avancés&nbsp;: traduction URL, analyse seO "
+"multilingue, publication séparée et plus encore! "
 
 msgid "Get WPGlobus Plus now!"
 msgstr "Obtenez WPGlobus Plus maintenant&nbsp;!"
