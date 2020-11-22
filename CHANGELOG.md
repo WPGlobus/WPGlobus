@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-11-22 - version 2.5.20
+* (Core/Recommendations) Added an admin notices for required WordPress and PHP versions.
+
 2020-11-20 - version 2.5.19
 * (Options/Languages table) Added Georgian language and flag image.
 * (Vendor/Yoast) Added multilingual support for the fields in the Social tab.
