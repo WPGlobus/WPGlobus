@@ -1,8 +1,10 @@
 <?php
 /**
+ * File: class-wpglobus-admin-recommendations.php
+ *
  * WPGlobus Recommendations.
  *
- * @since   1.8.7
+ * @since 1.8.7
  * @package WPGlobus\Admin
  */
 
@@ -33,6 +35,11 @@ class WPGlobus_Admin_Recommendations {
 				'filter__plugin_action_links',
 			)
 		);
+
+		/**
+		 * @since 2.5.20
+		 */			
+		add_action( 'admin_notices', array( __CLASS__, 'on__admin_notices' ) );
 		
 	}
 	
@@ -248,4 +255,48 @@ class WPGlobus_Admin_Recommendations {
 		<?php
 	}
 
-}
+	/**
+	 * Display an admin notice in WordPress admin area.
+	 *
+	 * @since 2.5.20
+	 */	
+	public static function on__admin_notices() {
+		
+		global $wp_version;
+		
+		/**
+		 * Check for PHP version.
+		 */
+		if ( version_compare( PHP_VERSION, '5.6.0', '<' ) ) {
+		
+			echo '<div class="notice notice-error"><p>';
+			printf(
+				// Translators: %1$s - this plugin name. %2$s - the required PHP version. %3$s - the current PHP version.
+				esc_html__( 'Для корректной работы %1$s нужно использовать PHP версии %2$s или выше.', 'wpglobus' ) . ' ' .
+				esc_html__( 'Текущая версия PHP %3$s.', 'wpglobus' ),
+				'<strong>WPGlobus</strong>',
+				'<strong>5.6</strong>',
+				'<strong>' .PHP_VERSION . '</strong>',
+			);
+			echo '</p></div>';				
+		}
+
+		/**
+		 * Check for WordPress version.
+		 */
+		if ( version_compare( $wp_version, '5.4.99', '<' ) ) {
+		
+			echo '<div class="notice notice-error"><p>';
+			printf(
+				// Translators: %1$s - this plugin name. %2$s - the required WordPress version.
+				esc_html__( 'Для корректной работы %1$s нужно использовать WordPress версии %2$s или выше. ', 'wpglobus' ),
+				'<strong>WPGlobus '. WPGLOBUS_VERSION .'</strong>',
+				'<strong>5.5</strong>'
+			);
+			echo '</p></div>';				
+		}	
+	}
+	
+} // class WPGlobus_Admin_Recommendations.
+
+# --- EOF
