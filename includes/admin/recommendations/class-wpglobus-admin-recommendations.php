@@ -268,33 +268,32 @@ class WPGlobus_Admin_Recommendations {
 		 * Check for PHP version.
 		 */
 		if ( version_compare( PHP_VERSION, '5.6.0', '<' ) ) {
-		
+
 			echo '<div class="notice notice-error"><p>';
-			printf(
-				// Translators: %1$s - this plugin name. %2$s - the required PHP version. %3$s - the current PHP version.
-				esc_html__( 'Для корректной работы %1$s нужно использовать PHP версии %2$s или выше.', 'wpglobus' ) . ' ' .
-				esc_html__( 'Текущая версия PHP %3$s.', 'wpglobus' ),
+			printf( // Translators: %1$s - this plugin name. %2$s - the required PHP version.
+				esc_html__( 'For %1$s to work correctly, PHP version %2$s or later is required.', 'wpglobus' ) . ' ' .
+				// Translators: %3$s - the current PHP version.
+				esc_html__( 'The PHP version on your server is %3$s.', 'wpglobus' ),
 				'<strong>WPGlobus</strong>',
 				'<strong>5.6</strong>',
-				'<strong>' .PHP_VERSION . '</strong>',
+				'<strong>' . PHP_VERSION . '</strong>'
 			);
-			echo '</p></div>';				
+			echo '</p></div>';
 		}
 
 		/**
 		 * Check for WordPress version.
 		 */
 		if ( version_compare( $wp_version, '5.4.99', '<' ) ) {
-		
+
 			echo '<div class="notice notice-error"><p>';
-			printf(
-				// Translators: %1$s - this plugin name. %2$s - the required WordPress version.
-				esc_html__( 'Для корректной работы %1$s нужно использовать WordPress версии %2$s или выше. ', 'wpglobus' ),
-				'<strong>WPGlobus '. WPGLOBUS_VERSION .'</strong>',
+			printf( // Translators: %1$s - this plugin name. %2$s - the required WordPress version.
+				esc_html__( 'For %1$s to work correctly, WordPress version %2$s or later is required.', 'wpglobus' ) . ' ',
+				'<strong>WPGlobus ' . esc_html( WPGLOBUS_VERSION ) . '</strong>',
 				'<strong>5.5</strong>'
 			);
-			echo '</p></div>';				
-		}	
+			echo '</p></div>';
+		}
 	}
 	
 } // class WPGlobus_Admin_Recommendations.

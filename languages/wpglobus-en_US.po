@@ -1,11 +1,11 @@
-# Copyright (C) 2020 WPGlobus 2.3.4
-# This file is distributed under the same license as the WPGlobus 2.3.4 package.
+# Copyright (C) 2020 WPGlobus 2.5.20
+# This file is distributed under the same license as the WPGlobus 2.5.20 package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-02-29 05:07+0000\n"
+"PO-Revision-Date: 2020-11-22 15:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United States) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_US/)\n"
@@ -191,12 +191,18 @@ msgid ""
 "runs without first verifying that WPGlobus is active, WordPress may die with "
 "a fatal error."
 msgstr ""
+"Make sure that your active theme does not have any code related to WPGlobus. "
+"Such code could be added by you or by a 3rd party developer. If that code "
+"runs without first verifying that WPGlobus is active, WordPress may die with "
+"a fatal error."
 
 #. translators: %1$s - language name, %2$s - language code. Do not remove.
 msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
 "%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
 msgstr ""
+"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
+"%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
 
 msgid "You are about to clean the content of the following database tables:"
 msgstr "You are about to clean the content of the following database tables:"
@@ -565,6 +571,8 @@ msgid ""
 "If you have already purchased a WPGlobus premium extension, please read "
 "%1$sthe installation instructions here%2$s"
 msgstr ""
+"If you have already purchased a WPGlobus premium extension, please read "
+"%1$sthe installation instructions here%2$s"
 
 msgid "Help Desk"
 msgstr "Help Desk"
@@ -660,6 +668,20 @@ msgstr "To translate permalinks, please activate the module Slug."
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr "Translate permalinks with our premium add-on, WPGlobus Plus!"
 
+#. translators: %1$s - this plugin name. %2$s - the required PHP version.
+msgid "For %1$s to work correctly, PHP version %2$s or later is required."
+msgstr "For %1$s to work correctly, PHP version %2$s or later is required."
+
+#. translators: %3$s - the current PHP version.
+msgid "The PHP version on your server is %3$s."
+msgstr "The PHP version on your server is %3$s."
+
+#. translators: %1$s - this plugin name. %2$s - the required WordPress version.
+msgid ""
+"For %1$s to work correctly, WordPress version %2$s or later is required."
+msgstr ""
+"For %1$s to work correctly, WordPress version %2$s or later is required."
+
 msgid "Save draft before using extra language."
 msgstr "Save draft before using extra language."
 
@@ -684,7 +706,7 @@ msgid "Turn on"
 msgstr "Turn on"
 
 msgid "Elementor"
-msgstr ""
+msgstr "Elementor"
 
 msgid "WPGlobus languages"
 msgstr "WPGlobus languages"
@@ -721,9 +743,11 @@ msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "`CSS Print Method` is set to `External File`."
 msgstr ""
+"WPGlobus provides multilingual support for Elementor only when the option "
+"`CSS Print Method` is set to `External File`."
 
 msgid "Open Elementor Settings page"
-msgstr ""
+msgstr "Open Elementor Settings page"
 
 msgid "WPGlobus widget"
 msgstr "WPGlobus widget"
@@ -1142,31 +1166,39 @@ msgstr "Multilingual SEO Options"
 msgid ""
 "With WPGlobus, you can get translations for posts and pages using REST API."
 msgstr ""
+"With WPGlobus, you can get translations for posts and pages using REST API."
 
 msgid "Go to %1$s%2$s%3$s to see the content in language: %4$s."
-msgstr ""
+msgstr "Go to %1$s%2$s%3$s to see the content in language: %4$s."
 
 msgid ""
 "For demonstration, you can try the first post that WordPress creates at the "
 "initial installation."
 msgstr ""
+"For demonstration, you can try the first post that WordPress creates at the "
+"initial installation."
 
 msgid ""
 "Please read the %1$sWordPress REST API documentation%2$s for more "
 "information."
 msgstr ""
+"Please read the %1$sWordPress REST API documentation%2$s for more "
+"information."
 
 msgid ""
 "In the REST API response, you can find the %1$stranslation%2$s field, which "
 "shows whether translations exist for the fields %1$stitle%2$s, %1$scontent"
 "%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:"
 msgstr ""
+"In the REST API response, you can find the %1$stranslation%2$s field, which "
+"shows whether translations exist for the fields %1$stitle%2$s, %1$scontent"
+"%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:"
 
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 msgid "REST API"
-msgstr ""
+msgstr "REST API"
 
 msgid "Translate strings"
 msgstr "Translate strings"
@@ -1333,12 +1365,14 @@ msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
 msgstr ""
+"Bulk editing of the multilingual titles and descriptions is not supported by "
+"the current version."
 
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
-msgstr ""
+msgstr "Therefore, to avoid any data loss, we do not recommend using this."
 
 msgid "WPGlobus warning: "
-msgstr ""
+msgstr "WPGlobus warning: "
 
 msgid "https://github.com/WPGlobus/WPGlobus"
 msgstr "https://github.com/WPGlobus/WPGlobus"
@@ -1352,12 +1386,3 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
-
-#~ msgid ""
-#~ "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT "
-#~ "IN %1$s WILL BE DELETED! To change the main language, please go to "
-#~ "Settings."
-#~ msgstr ""
-#~ "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT "
-#~ "IN %1$s WILL BE DELETED! To change the main language, please go to "
-#~ "Settings."

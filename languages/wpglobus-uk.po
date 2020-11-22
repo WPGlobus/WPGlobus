@@ -1,5 +1,5 @@
-# Copyright (C) 2020 WPGlobus 2.3.4
-# This file is distributed under the same license as the WPGlobus 2.3.4 package.
+# Copyright (C) 2020 WPGlobus 2.5.20
+# This file is distributed under the same license as the WPGlobus 2.5.20 package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2016
 # Jack Willson <666noob404@gmail.com>, 2019
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-02-29 05:07+0000\n"
+"PO-Revision-Date: 2020-11-22 15:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/uk/)\n"
@@ -661,6 +661,19 @@ msgstr "Для перекладу посилань необхідно актив
 
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr "Переклад посилань можливий за допомогою WPGlobus-Плюс!"
+
+#. translators: %1$s - this plugin name. %2$s - the required PHP version.
+msgid "For %1$s to work correctly, PHP version %2$s or later is required."
+msgstr ""
+
+#. translators: %3$s - the current PHP version.
+msgid "The PHP version on your server is %3$s."
+msgstr ""
+
+#. translators: %1$s - this plugin name. %2$s - the required WordPress version.
+msgid ""
+"For %1$s to work correctly, WordPress version %2$s or later is required."
+msgstr ""
 
 msgid "Save draft before using extra language."
 msgstr "Збережіть чернетку перед перемиканням на іншу мову."
@@ -1348,12 +1361,3 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/ru/"
-
-#~ msgid ""
-#~ "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT "
-#~ "IN %1$s WILL BE DELETED! To change the main language, please go to "
-#~ "Settings."
-#~ msgstr ""
-#~ "В налаштуваннях WPGlobus вказано, що основна мова - %1$s (%2$s). Всі "
-#~ "тексти, крім %1$s будуть видалені! Щоб змінити головну мову, будь-ласка, "
-#~ "перейдіть в налаштування."

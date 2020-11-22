@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.5.19
-# This file is distributed under the same license as the WPGlobus 2.5.19 package.
+# Copyright (C) 2020 WPGlobus 2.5.20
+# This file is distributed under the same license as the WPGlobus 2.5.20 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.5.19\n"
+"Project-Id-Version: WPGlobus 2.5.20\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -493,6 +493,18 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr ""
 
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+#. translators: %1$s - this plugin name. %2$s - the required PHP version.
+msgid "For %1$s to work correctly, PHP version %2$s or later is required."
+msgstr ""
+
+#. translators: %3$s - the current PHP version.
+msgid "The PHP version on your server is %3$s."
+msgstr ""
+
+#. translators: %1$s - this plugin name. %2$s - the required WordPress version.
+msgid "For %1$s to work correctly, WordPress version %2$s or later is required."
 msgstr ""
 
 msgid "Save draft before using extra language."

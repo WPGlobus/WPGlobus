@@ -1,5 +1,5 @@
-# Copyright (C) 2020 WPGlobus 2.3.4
-# This file is distributed under the same license as the WPGlobus 2.3.4 package.
+# Copyright (C) 2020 WPGlobus 2.5.20
+# This file is distributed under the same license as the WPGlobus 2.5.20 package.
 # Translators:
 # Tobias Hopp <toby.hopp@gmail.com>, 2015
 # Gregory Karpinsky <gregory@tiv.net>, 2015,2017,2019
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-02-29 05:07+0000\n"
+"PO-Revision-Date: 2020-11-22 15:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/de_DE/)\n"
@@ -621,6 +621,19 @@ msgstr ""
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
+#. translators: %1$s - this plugin name. %2$s - the required PHP version.
+msgid "For %1$s to work correctly, PHP version %2$s or later is required."
+msgstr ""
+
+#. translators: %3$s - the current PHP version.
+msgid "The PHP version on your server is %3$s."
+msgstr ""
+
+#. translators: %1$s - this plugin name. %2$s - the required WordPress version.
+msgid ""
+"For %1$s to work correctly, WordPress version %2$s or later is required."
+msgstr ""
+
 msgid "Save draft before using extra language."
 msgstr ""
 
@@ -1073,7 +1086,7 @@ msgid ""
 msgstr ""
 
 msgid "Description:"
-msgstr ""
+msgstr "Beschreibung:"
 
 msgid "REST API"
 msgstr ""

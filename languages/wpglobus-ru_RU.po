@@ -1,12 +1,13 @@
-# Copyright (C) 2020 WPGlobus 2.3.4
-# This file is distributed under the same license as the WPGlobus 2.3.4 package.
+# Copyright (C) 2020 WPGlobus 2.5.20
+# This file is distributed under the same license as the WPGlobus 2.5.20 package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2015-2020
+# Irina Fedulova <istartlin@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-02-29 05:18+0000\n"
+"PO-Revision-Date: 2020-11-22 15:26+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -670,6 +671,21 @@ msgstr "Для перевода ссылок необходимо активир
 
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr "Перевод ссылок возможен с помощью WPGlobus-Плюс!"
+
+#. translators: %1$s - this plugin name. %2$s - the required PHP version.
+msgid "For %1$s to work correctly, PHP version %2$s or later is required."
+msgstr ""
+"Для корректной работы %1$s нужно использовать PHP версии %2$s или выше."
+
+#. translators: %3$s - the current PHP version.
+msgid "The PHP version on your server is %3$s."
+msgstr "Используемая вашим сервером версия PHP - %3$s."
+
+#. translators: %1$s - this plugin name. %2$s - the required WordPress version.
+msgid ""
+"For %1$s to work correctly, WordPress version %2$s or later is required."
+msgstr ""
+"Для корректной работы %1$s нужно использовать WordPress версии %2$s или выше."
 
 msgid "Save draft before using extra language."
 msgstr "Сохраните черновик перед переключением на другой язык."
