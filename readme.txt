@@ -2,7 +2,7 @@
 Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
-Requires at least: 5.0
+Requires at least: 5.5
 Tested up to: 5.5
 Requires PHP: 5.6
 Stable tag: trunk
