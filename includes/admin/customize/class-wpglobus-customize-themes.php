@@ -1,9 +1,11 @@
 <?php
 /**
+ * File: class-wpglobus-customize-themes.php
+ *
  * WPGlobus Customize Themes.
  *
  * @package WPGlobus
- * @since   1.9.12
+ * @since 1.9.12
  */
 
 /**
@@ -28,6 +30,7 @@ if ( ! class_exists('WPGlobus_Customize_Themes') ) :
 			'customizr pro',
 			'experon',
 			'gwangi', // @since 2.3.12	
+			'newyork city', // @since 2.5.21	
 		);
 		
 		/**
@@ -81,3 +84,5 @@ if ( ! class_exists('WPGlobus_Customize_Themes') ) :
 	}
 
 endif;
+
+# --- EOF

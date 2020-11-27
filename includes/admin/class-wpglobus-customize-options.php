@@ -1,5 +1,7 @@
 <?php
 /**
+ * File: class-wpglobus-customize-options.php
+ *
  * WPGlobus_Customize_Options
  *
  * @package    WPGlobus\Admin\Customizer
@@ -363,6 +365,13 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 */			
 			self::$disabled_themes[] = 'gwangi';
 
+			/**
+			 * @since 2.5.21
+			 * Is not correct saving the `Items Content` fields in some site configuration.
+			 * @see https://wordpress.org/themes/newyork-city/
+			 */					
+			self::$disabled_themes[] = 'newyork city';
+
 			add_action( 'wp_loaded', array( __CLASS__, 'init' ) );
 
 			/**
@@ -606,11 +615,15 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 
 				self::$sections['wpglobus_fields_settings_section'] = 'wpglobus_fields_settings_section';
 
+				/**
+				 * CSS tweak for the `description` field.
+				 * @since 2.5.21 
+				 */
 				$wp_customize->add_section( self::$sections['wpglobus_fields_settings_section'], array(
 					'title'       => esc_html__( 'Fields Settings', 'wpglobus' ),
 					'priority'    => 500,
 					'panel'       => 'wpglobus_settings_panel',
-					'description' => '<div class="inner" style="background-color:#fff;padding:0 5px;">' .
+					'description' => '<div class="inner" style="background-color:#00669b;padding:5px 10px;border-radius:5px;font-size:14px;color:#fff;border:3px solid #00669b;">' .
 					                 self::get_content( 'settings_section_help' ) .
 					                 '</div>'
 				) );
@@ -1342,7 +1355,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$content = '';
 			switch ( $control ) :
 				case 'settings_section_help' :
-					$content = esc_html__( 'Here you can specify which fields should be considered multilingual by WPGlobus. To exclude a field, uncheck it and then press the button below.', 'wpglobus' );
+					$content = sprintf( 
+						esc_html__( 'Here you can specify which fields should be considered multilingual by WPGlobus. To exclude a field, uncheck it and then press the button %1s below.', 'wpglobus'), 
+						'<strong>' . esc_html__( 'Save &amp; Reload', 'wpglobus' ) . '</strong>' 
+					);
 
 					break;
 				case 'welcome_message' :
@@ -1565,7 +1581,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			return $disabled_setting_mask;
 		}
 
-	} // class
+	} // class WPGlobus_Customize_Options.
 
 endif;
+
 # --- EOF

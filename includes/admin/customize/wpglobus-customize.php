@@ -7,7 +7,7 @@
 
 global $wp_version;
 
-if ( !defined('WPGLOBUS_CUSTOMIZE') || WPGLOBUS_CUSTOMIZE ) {
+if ( ! defined('WPGLOBUS_CUSTOMIZE') || WPGLOBUS_CUSTOMIZE ) {
 		
 	if ( version_compare( $wp_version, '4.9-Beta1', '>=' ) ) {
 		require_once 'class-wpglobus-customize190.php';
@@ -17,6 +17,6 @@ if ( !defined('WPGLOBUS_CUSTOMIZE') || WPGLOBUS_CUSTOMIZE ) {
 		require_once 'class-wpglobus-customize140.php';
 	}			
 	WPGlobus_Customize::controller();
-	
 }
+
 # --- EOF
