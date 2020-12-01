@@ -1,11 +1,11 @@
-# Copyright (C) 2020 WPGlobus 2.5.20
-# This file is distributed under the same license as the WPGlobus 2.5.20 package.
+# Copyright (C) 2020 WPGlobus 2.5.21
+# This file is distributed under the same license as the WPGlobus 2.5.21 package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-11-22 15:25+0000\n"
+"PO-Revision-Date: 2020-12-01 15:06+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Romanian (Romania) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ro_RO/)\n"
@@ -371,7 +371,7 @@ msgstr "Descriere"
 
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
-"WPGlobus. To exclude a field, uncheck it and then press the button below."
+"WPGlobus. To exclude a field, uncheck it and then press the button %s below."
 msgstr ""
 
 msgid "Thank you for installing WPGlobus!"

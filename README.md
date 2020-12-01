@@ -296,6 +296,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.21 ###
+
+* (Customizer) WPGlobus Customizer is switched off for the `NewYork City` theme.
+* (Customizer) CSS tweak for the `description` field.
+
 ### 2.5.20 ###
 
 * (Core/Recommendations) Added admin notices about required versions of WordPress PHP.
@@ -323,18 +328,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Builders/Pods) Added support for the `phone` and `wysiwyg` fields of `Pods – Custom Content Types and Fields`.
 * (Core/Post Types) Added  the `3D FlipBook Dflip Lite` plugin and `OceanWP` theme's post types to the `"hidden types"` list.
 * (Options/Languages table) Installed languages moved to the top of the table.
-
-### 2.5.16 ###
-
-
-* (Core/Meta) Fixed PHP Warning: count(): Parameter must be an array or an object that implements Countable.
-* (Vendor/Yoast) Removed unneeded code. Small tweaks.
-
-### 2.5.15 ###
-
-* (Core/Filters) Don't apply multilingual filter  on disabled post types (issue #90).
-* (Core/Options) Fixed URL for the second language on the REST API tab.
-* (Core/Post Types) Added  the `Getwid`, `Web Stories` plugins' post types to the `"hidden types"` list.
 
 ### Earlier versions and Add-ons ###
 

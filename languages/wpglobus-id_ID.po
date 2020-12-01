@@ -1,14 +1,14 @@
-# Copyright (C) 2020 WPGlobus 2.5.20
-# This file is distributed under the same license as the WPGlobus 2.5.20 package.
+# Copyright (C) 2020 WPGlobus 2.5.21
+# This file is distributed under the same license as the WPGlobus 2.5.21 package.
 # Translators:
 # ChameleonJohn.com, 2017
-# Gregory Karpinsky <gregory@tiv.net>, 2017
+# Gregory Karpinsky <gregory@tiv.net>, 2017,2020
 # wongcie <dwexz_cie@yahoo.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-11-22 15:25+0000\n"
+"PO-Revision-Date: 2020-12-01 15:15+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/id_ID/)\n"
@@ -401,11 +401,11 @@ msgstr "Deskripsi"
 
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
-"WPGlobus. To exclude a field, uncheck it and then press the button below."
+"WPGlobus. To exclude a field, uncheck it and then press the button %s below."
 msgstr ""
 "Di sini Anda dapat menentukan bidang mana yang harus dianggap multibahasa "
 "oleh WPGlobus. Untuk mengecualikan sebuah bidang, hapus centang dan kemudian "
-"tekan tombol di bawah ini."
+"tekan tombol %s di bawah ini."
 
 msgid "Thank you for installing WPGlobus!"
 msgstr "Terima kasih telah menginstal WPGlobus!"

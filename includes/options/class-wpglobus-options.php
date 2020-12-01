@@ -823,10 +823,10 @@ class WPGlobus_Options {
 		if ( count( $_ ) ) {
 			$tab_content[] = $_;
 		}
-		$_ = $this->recommend_wpg_mc();
-		if ( count( $_ ) ) {
-			$tab_content[] = $_;
-		}
+		// $_ = $this->recommend_wpg_mc();
+		// if ( count( $_ ) ) {
+		// 	$tab_content[] = $_;
+		// }
 		$_ = $this->recommend_wpg_store();
 		if ( count( $_ ) ) {
 			$tab_content[] = $_;

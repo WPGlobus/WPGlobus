@@ -1,12 +1,12 @@
-# Copyright (C) 2020 WPGlobus 2.5.20
-# This file is distributed under the same license as the WPGlobus 2.5.20 package.
+# Copyright (C) 2020 WPGlobus 2.5.21
+# This file is distributed under the same license as the WPGlobus 2.5.21 package.
 # Translators:
-# Gregory Karpinsky <gregory@tiv.net>, 2018
+# Gregory Karpinsky <gregory@tiv.net>, 2018,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-11-22 15:25+0000\n"
+"PO-Revision-Date: 2020-12-01 15:12+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Belarusian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/be/)\n"
@@ -400,11 +400,11 @@ msgstr "Описание"
 
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
-"WPGlobus. To exclude a field, uncheck it and then press the button below."
+"WPGlobus. To exclude a field, uncheck it and then press the button %s below."
 msgstr ""
 "Здесь Вы можете указать, какие поля считаются многоязычными и должны "
 "обрабатываться WPGlobus. Чтобы исключить поле, снимите отметку и нажмите "
-"кнопку сохранения внизу."
+"кнопку %s внизу."
 
 msgid "Thank you for installing WPGlobus!"
 msgstr "Спасибо за то, что Вы установили плагин WPGlobus!"

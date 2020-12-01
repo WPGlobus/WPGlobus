@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.5.20",
+  "version": "2.5.21",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "title": "WPGlobus",
   "main": "Gulpfile.js",

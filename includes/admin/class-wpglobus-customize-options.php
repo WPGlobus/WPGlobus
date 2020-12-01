@@ -1356,7 +1356,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			switch ( $control ) :
 				case 'settings_section_help' :
 					$content = sprintf( 
-						esc_html__( 'Here you can specify which fields should be considered multilingual by WPGlobus. To exclude a field, uncheck it and then press the button %1s below.', 'wpglobus'), 
+						esc_html__( 'Here you can specify which fields should be considered multilingual by WPGlobus. To exclude a field, uncheck it and then press the button %s below.', 'wpglobus'),
 						'<strong>' . esc_html__( 'Save &amp; Reload', 'wpglobus' ) . '</strong>' 
 					);
 

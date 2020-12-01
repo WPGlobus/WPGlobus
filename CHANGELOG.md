@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2020-11-27 - version 2.5.21
-* (Customizer) WPGlobus Customizer is switched off for `NewYork City` theme.
+* (Customizer) WPGlobus Customizer is switched off for the `NewYork City` theme.
 * (Customizer) CSS tweak for the `description` field.
 
 2020-11-22 - version 2.5.20

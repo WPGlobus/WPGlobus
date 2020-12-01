@@ -24,7 +24,15 @@ class WPGlobus_Admin_Recommendations {
 	 * Setup actions and filters.
 	 */
 	public static function setup_hooks() {
-		add_filter( 'woocommerce_general_settings', array( __CLASS__, 'for_woocommerce' ) );
+		/**
+		 * Recommendations on WC Settings page.
+		 *
+		 * @since 2.5.21 Disabled. Needs refactoring.
+		 * <code>
+		 * add_filter( 'woocommerce_general_settings', array( __CLASS__, 'for_woocommerce' ) );
+		 * </code>
+		 */
+
 		add_filter( 'wpglobus_edit_slug_box', array( __CLASS__, 'wpg_plus_slug' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'on__admin_footer' ), 1000 );
 		add_action( 'wpglobus_gutenberg_metabox', array( __CLASS__, 'on__gutenberg_metabox' ) );
