@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2020-12-02 - version 2.5.22
+* (Vendor/Yoast) Added filters for the taxonomy title, description, Open Graph title and description.
+* (Vendor/Yoast) Fixed filter for the post title.
+
 2020-11-27 - version 2.5.21
 * (Customizer) WPGlobus Customizer is switched off for the `NewYork City` theme.
 * (Customizer) CSS tweak for the `description` field.
