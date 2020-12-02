@@ -296,6 +296,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.22 ###
+
+* (Vendor/Yoast) Added filters for the taxonomy title, description, Open Graph title and description.
+* (Vendor/Yoast) Fixed filter for the post title.
+
 ### 2.5.21 ###
 
 * (Customizer) WPGlobus Customizer is switched off for the `NewYork City` theme.
