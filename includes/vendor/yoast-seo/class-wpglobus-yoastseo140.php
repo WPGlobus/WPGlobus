@@ -138,7 +138,12 @@ class WPGlobus_YoastSEO {
 			 * Filter SEO title and meta description on front only, when the page header HTML tags are generated.
 			 * AJAX is probably not required (waiting for a case).
 			 */
-			add_filter( 'wpseo_title', array( __CLASS__, 'filter__title' ), PHP_INT_MAX );
+			// add_filter( 'wpseo_title', array( __CLASS__, 'filter__title' ), PHP_INT_MAX );
+			/**
+			 * Filter title description.
+			 * @since 2.5.22
+			 */			
+			add_filter( 'wpseo_title', array( __CLASS__, 'filter_front__title' ), PHP_INT_MAX, 2 );
 	
 			/**
 			 * Filter meta description.
@@ -212,6 +217,7 @@ class WPGlobus_YoastSEO {
 	}
 	
 	/**
+	 * obsolete @since 2.5.22
 	 * Filter Yoast post meta title.
 	 *
 	 * @scope front
@@ -223,7 +229,7 @@ class WPGlobus_YoastSEO {
 	 * @return string.
 	 */	
 	public static function filter__title( $title ) {
-		
+
 		/**
 		 * In some cases we can get $title like {:en}En title{:}{:ru}Ru title{:}{:fr}Fr title{:} - SiteTitle
 		 * so, let's filter.
@@ -305,6 +311,28 @@ class WPGlobus_YoastSEO {
 					$description = wpseo_replace_vars( $description, $presentation->source );
 				}
 			}
+			
+		} elseif ( 'term' == $presentation->model->object_type ) {
+			
+			/**
+			 * Taxonomy.
+			 */
+			$__desc = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id, 'wpseo_desc' );
+
+			if ( empty( $__desc ) ) {
+				
+				$__template = self::get_option( 'wpseo_titles', 'metadesc-tax-' . $presentation->model->object_sub_type );
+
+				if ( ! empty( $__template ) ) {
+					$__desc = $__template;
+				} else {
+					// @W.I.P if empty `Meta description` from Yoast, then we need output `Description` from Edit taxonomy page.
+					$__desc = $presentation->source->description;
+				}
+
+			}
+		
+			$description = wpseo_replace_vars( $__desc, $presentation->source );	
 		}
 
 		return $description;
@@ -500,8 +528,21 @@ class WPGlobus_YoastSEO {
 					$title = wpseo_replace_vars( $title, $presentation->source );
 				}
 			}
+			
+		} elseif ( 'term' == $presentation->model->object_type ) {
+			
+			/**
+			 * Taxonomy.
+			 */
+			$__title = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id, 'wpseo_title' );
+
+			if ( empty( $__title ) ) {
+				$__title = self::get_option( 'wpseo_titles', 'title-tax-' . $presentation->model->object_sub_type );
+			}
+		
+			$title = wpseo_replace_vars( $__title, $presentation->source );			
 		}
-	
+
 		return $title;
 	}
 	
@@ -576,54 +617,6 @@ class WPGlobus_YoastSEO {
 	}
 	
 	/**
-	 * @obsolete
-	 *
-	 * Fix empty yoast_wpseo_focuskw while saving/updating post with active extra language.
-	 *
-	 * @since 1.6.3
-	 * @since 1.7.7
-	 * @see filter 'wpseo_save_compare_data' wordpress-seo\admin\metabox\class-metabox.php
-	 *
-	 * @param WP_Post Object $post Current post.
-	 */
-	public static function action__save_compare_data( $post ) {
-		// @see wpglobus\includes\vendor\yoast-seo\class-wpglobus-yoastseo120.php	
-	}
-
-	/**
-	 * @obsolete
-	 * 
-	 * Filter to get yoast seo separator.
-	 *
-	 * @since 1.5.3
-	 *
-	 * @param array $sep Contains separator.
-	 *
-	 * @return string
-	 */
-	public static function filter__get_separator( $sep ) {
-		// @see wpglobus\includes\vendor\yoast-seo\class-wpglobus-yoastseo120.php	
-	}
-
-	/**
-	 * @obsolete
-	 * 
-	 * Filter which editor should be displayed by default.
-	 *
-	 * @since 1.4.8
-	 *
-	 * @param array $editors An array of editors. Accepts 'tinymce', 'html', 'test'.
-	 *
-	 * @return string
-	 */
-	public static function set_default_editor(
-		/** @noinspection PhpUnusedParameterInspection */
-		$editors
-	) {
-		// @see wpglobus\includes\vendor\yoast-seo\class-wpglobus-yoastseo120.php	
-	}
-
-	/**
 	 * Filter wpseo meta description.
 	 *
 	 * @see wordpress-seo\src\presenters\meta-description-presenter.php 
@@ -694,9 +687,15 @@ class WPGlobus_YoastSEO {
 			
 			} else {
 			
-				$description = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id );
+				/**
+				 * @since 2.5.22
+				 */
+				$description = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id, 'wpseo_desc' );
+
 				if ( empty($description) ) {
 					$meta_description_presenter_was_fired = true;
+				} else {
+					$description = wpseo_replace_vars( $description, $presentation->source );
 				}
 			}
 		}
@@ -805,7 +804,7 @@ class WPGlobus_YoastSEO {
 	 * @param $output 							   The HTML output
 	 * @param Indexable_Presentation $presentation The presentation of an indexable.
 	 *
-	 * @api string $output The HTML output.	 
+	 * @api string $output The HTML output.	
 	 *
 	 * @return string
 	 */
@@ -847,16 +846,16 @@ class WPGlobus_YoastSEO {
 		foreach( $presentation->breadcrumbs as $order=>$piece ) {	
 			
 			if ( $order == 0 ) {
+
+				$_piece = '/' . preg_quote($piece['url'], '/') . '/';
 				
 				if ( empty( $piece['id'] ) ) {
 					/**
 					 * If homepage displays as latest posts, then we should force the setting of `Home` for all languages.
 					 */
-					$output = str_replace( $piece['url'], home_url('/'), $output );
+					$output = preg_replace( $_piece, home_url('/'), $output, 1  );
 				} else {
-					if ( WPGlobus::Config()->language != WPGlobus::Config()->default_language ) {
-						$output = str_replace( $piece['url'], home_url('/'), $output );
-					}
+					$output = preg_replace( $_piece, home_url('/'), $output, 1  );
 				}
 				
 				if ( WPGlobus_Core::has_translations($piece['text']) ) {
@@ -1082,10 +1081,17 @@ class WPGlobus_YoastSEO {
 	/**
 	 * Get taxonomy meta from `wpseo_taxonomy_meta` option.
 	 *
-	 * @scope front
 	 * @since 2.5.1
+	 * @since 2.5.22 Added $meta_key parameter to the `get_taxonomy_meta` function.
+	 * @scope front
+	 *
+	 * @param string 				 $object_sub_type The Indexable Object sub type.
+	 * @param string 				 $object_id	      The object ID.
+	 * @param Indexable_Presentation $meta_key		  The WPSEO meta key.
+	 *
+	 * return string | array
 	 */	
-	protected static function get_taxonomy_meta( $object_sub_type, $object_id, $meta_description = '' ) {
+	protected static function get_taxonomy_meta( $object_sub_type, $object_id, $meta_key = '' ) {
 		
 		if ( is_null( self::$wpseo_taxonomy_meta ) ) {
 			self::$wpseo_taxonomy_meta = get_option( 'wpseo_taxonomy_meta' );
@@ -1095,34 +1101,21 @@ class WPGlobus_YoastSEO {
 			return '';
 		}
 		
-		if ( empty( self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ][ 'wpseo_desc' ] ) ) {
-			return '';
+		if ( empty( $meta_key ) ) {
+			return self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ];
 		}
 		
-		$description = WPGlobus_Core::text_filter( 
-			self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ][ 'wpseo_desc' ],
+		if ( empty( self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ][ $meta_key ] ) ) {
+			return '';
+		}
+	
+		$meta_value = WPGlobus_Core::text_filter( 
+			self::$wpseo_taxonomy_meta[ $object_sub_type ][ $object_id ][ $meta_key ],
 			WPGlobus::Config()->language,
 			WPGlobus::RETURN_EMPTY
-		);
-
-		return $description;
-	}
-	
-	/**
-	 * @obsolete
-	 *
-	 * To translate Yoast columns
-	 * @see   WPSEO_Meta_Columns::column_content
-	 * @scope admin
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 * @todo  Yoast said things might change in the next version. See the pull request
-	 * @link  https://github.com/Yoast/wordpress-seo/pull/1946
-	 */
-	public static function filter__wpseo_columns( $text ) {
-		// @see wpglobus\includes\vendor\yoast-seo\class-wpglobus-yoastseo120.php	
+		);	
+		
+		return $meta_value;
 	}
 
 	/**
@@ -1379,15 +1372,6 @@ class WPGlobus_YoastSEO {
 	}
 
 	/**
-	 * @obsolete
-	 *
-	 * Add language tabs to wpseo metabox ( .wpseo-metabox-tabs-div )
-	 */
-	public static function action__wpseo_tab_content() {
-		// @see wpglobus\includes\vendor\yoast-seo\class-wpglobus-yoastseo120.php
-	}
-
-	/**
 	 * Check disabled entity.
 	 *
 	 * @since 1.7.3
@@ -1482,7 +1466,7 @@ class WPGlobus_YoastSEO {
 			 * Taxonomy.
 			 * @since 2.5.1
 			 */
-			$graph_piece['description'] = self::get_taxonomy_meta( $context->indexable->object_sub_type, $context->indexable->object_id );
+			$graph_piece['description'] = self::get_taxonomy_meta( $context->indexable->object_sub_type, $context->indexable->object_id, 'wpseo_desc' );
 			$graph_piece['url'] 		= WPGlobus_Utils::localize_url( $graph_piece['url'], WPGlobus::Config()->language );
 			$graph_piece['@id'] 		= WPGlobus_Utils::localize_url( $graph_piece['@id'], WPGlobus::Config()->language );
 			$graph_piece['breadcrumb']['@id'] = WPGlobus_Utils::localize_url( $graph_piece['breadcrumb']['@id'], WPGlobus::Config()->language );
@@ -1490,6 +1474,92 @@ class WPGlobus_YoastSEO {
 
 		return $graph_piece;
 	}
+	
+	/**
+	 * Filter for changing the Yoast SEO generated title.
+	 *
+	 * @see wordpress-seo\src\presenters\title-presenter.php
+	 *
+	 * @since 2.5.22
+	 *
+	 * @scope front
+	 *
+	 * @param string 				 $title        The title.
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 *
+	 * @return string
+	 */	
+	public static function filter_front__title( $title, $presentation ) {
+		
+		if ( 'post' == $presentation->model->object_type ) {
+			
+			/**
+			 * Post.
+			 */	
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'post_meta' );
+			
+			if ( ! empty( $meta_cache['_yoast_wpseo_title'][0] ) ) {
+				
+				$__title = WPGlobus_Core::text_filter( $meta_cache['_yoast_wpseo_title'][0], WPGlobus::Config()->language );
+				
+				if ( $presentation->source instanceof WP_Post ) {
+
+					if ( WPGlobus_Core::has_translations( $presentation->source->post_title ) ) {
+						$presentation->source->post_title = WPGlobus_Core::text_filter( $presentation->source->post_title, WPGlobus::Config()->language );
+					}
+
+					/**
+					 * @see wordpress-seo\inc\wpseo-functions.php
+					 */						
+					$title = wpseo_replace_vars( $__title, $presentation->source );
+				}
+			}
+			
+		} elseif ( 'term' == $presentation->model->object_type ) {
+			
+			/**
+			 * Taxonomy.
+			 */
+			$__title = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id, 'wpseo_title' );
+			
+			if ( empty( $__title ) ) {
+				$__title = self::get_option( 'wpseo_titles', 'title-tax-' . $presentation->model->object_sub_type );
+			}
+		
+			$title = wpseo_replace_vars( $__title, $presentation->source );
+ 
+		}
+		
+		return $title;
+	}	
+	
+	/**
+	 * Get wpseo options.
+	 *
+	 * @since 2.5.22
+	 *
+	 * @return array|string 
+	 */
+	public static function get_option( $option = 'wpseo_titles', $key = '' ) {
+		
+		/**
+		 * @todo Maybe to use WPSEO_Options.
+		 * @see wordpress-seo\inc\options\class-wpseo-options.php
+		 * @since 2.5.22
+		 */
+		
+		$options = get_option( $option );
+		
+		if ( empty( $key ) ) {
+			return $options;
+		}
+		
+		if ( ! isset( $options[$key] ) ) {
+			return null;
+		}
+		
+		return $options[$key];
+	}		
 
 } // class WPGlobus_YoastSEO.
 
