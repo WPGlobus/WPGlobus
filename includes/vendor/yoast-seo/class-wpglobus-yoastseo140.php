@@ -527,6 +527,16 @@ class WPGlobus_YoastSEO {
 					 */					
 					$title = wpseo_replace_vars( $title, $presentation->source );
 				}
+				
+			} else {
+				
+				/** 
+				 * @since 2.5.23
+				 */
+				if ( WPGlobus_Core::has_translations( $title ) ) {
+					$title = WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
+				}
+				
 			}
 			
 		} elseif ( 'term' == $presentation->model->object_type ) {
@@ -1513,6 +1523,16 @@ class WPGlobus_YoastSEO {
 					 */						
 					$title = wpseo_replace_vars( $__title, $presentation->source );
 				}
+				
+			} else {
+				
+				/** 
+				 * @since 2.5.23
+				 */
+				if ( WPGlobus_Core::has_translations( $title ) ) {
+					$title = WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
+				}
+				
 			}
 			
 		} elseif ( 'term' == $presentation->model->object_type ) {
