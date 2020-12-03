@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2020-12-03 - version 2.5.23
+* (Vendor/Yoast) Fixed filter for the post title when post meta is empty.
+
 2020-12-02 - version 2.5.22
 * (Vendor/Yoast) Added filters for the taxonomy title, description, Open Graph title and description.
 * (Vendor/Yoast) Fixed filter for the post title.
