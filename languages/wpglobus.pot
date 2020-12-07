@@ -1,8 +1,8 @@
-# Copyright (C) 2020 WPGlobus 2.5.22
-# This file is distributed under the same license as the WPGlobus 2.5.22 package.
+# Copyright (C) 2020 WPGlobus 2.5.23
+# This file is distributed under the same license as the WPGlobus 2.5.23 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.5.22\n"
+"Project-Id-Version: WPGlobus 2.5.23\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

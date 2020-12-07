@@ -296,6 +296,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.5.23 ###
+* (Vendor/Yoast) Fixed filter for the post title when post meta is empty.
+
 ### 2.5.22 ###
 
 * (Vendor/Yoast) Added filters for the taxonomy title, description, Open Graph title and description.
