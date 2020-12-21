@@ -5,6 +5,7 @@
  * @since 1.0.6
  * @since 2.4.17 To use WPGlobusCoreData.language instead of WPGlobusCoreData.default_language.
  *               Hide unneeded dialog icons.
+ * @since 2.6.0 Code refactored for Image widgets.
  *
  * @package WPGlobus
  * @subpackage Administration
@@ -24,16 +25,17 @@
 		editor: {},
 		languageBoxActive: false,
 		languageBoxTimeout: null,
+		imageWidgets: {},
 		init: function() {
 			api.addElements();
 			api.attachListeners();
 			api.arbitraryTextOrHTML();
 		},
 		wysiwygClean: function(){
-			// remove wpglobus textarea and dialog start button from wysiwyg
+			// remove wpglobus textarea and dialog start button from wysiwyg.
 			$('.wpglobus-dialog-field').each(function(i,e){
 				var source = $(e).data('source-id');
-				if (  $('#'+source+'-tmce').size() == 1 ) {
+				if (  $('#'+source+'-tmce').length == 1 ) {
 					var ds = $(e).next('.wpglobus_dialog_start');
 					$(e).remove();
 					$(ds).remove();
@@ -443,32 +445,28 @@
 			$(document).on('click','.widget-title, .widget-title-action',function(ev){
 				ev.preventDefault();
 				api.wysiwygClean();
-				api.imageWidget(this);
+				api.setImageWidget(this);
 			});				
 		},
-		imageWidget: function(title) {
+		getImageWidgets: function(title) {
+			return api.imageWidgets;
+		},
+		setImageWidget: function(title) {
+
 			var wID  = $(title).parents('.widget').attr('id');
+			if ( 'undefined' === typeof wID ) {
+				return;
+			}
+
 			if ( -1 == wID.indexOf('media_image') ) {
 				return;
 			}
-			var $title = $('#'+wID+' .in-widget-title');
-			var elID   = $('#'+wID).find('input[type="text"]').attr('id');
-			if ( -1 != elID.indexOf('.') ) {
-				var name = 'wpg-'+elID.replace('.','_');
-				$('#'+wID).find('input[type="text"]').attr('name',name);
-				if ( WPGlobusDialogApp.addElement(name) ) {
-					var $el = $('#'+wID).find('input[name="'+name+'"]');
-					var v = WPGlobusCore.getTranslations( $el.val() )[WPGlobusCoreData['language']];
-					$title.text(': '+v);
-					setTimeout(function(){$('#wpglobus-'+name).val(v)},1000);
-				}
-			} else {
-				if ( WPGlobusDialogApp.addElement(elID) ) {
-					var v = WPGlobusCore.getTranslations( $('#'+elID).val() )[WPGlobusCoreData['language']];
-					$title.text(': '+v);
-					setTimeout(function(){$('#wpglobus-'+elID).val(v)},1000);
-				}				
-			}				
+			
+			// @since 2.6.0
+			if ( 'undefined' === typeof api.imageWidgets[wID] ) {
+				$('<hr /><div class="">'+WPGlobusWidgets.l10n['imageWidget']['suggest']+'</div>').appendTo('#'+wID+' .widget-inside');
+				api.imageWidgets[wID] = true;
+			}
 		},
 		__getEditorContent: function() {
 			if ( Object.keys(api.editor).length == 0 ) {

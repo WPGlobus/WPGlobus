@@ -1,5 +1,7 @@
 <?php
 /**
+ * File: class-wpglobus.php
+ *
  * @package WPGlobus
  */
 
@@ -2085,8 +2087,43 @@ class WPGlobus {
 				 *
 				 * @return array
 				 */
-				$disabled_widgets_mask = apply_filters( 'wpglobus_disabled_widgets_mask', $disabled_widgets_mask );
+				$disabled_widgets_mask = apply_filters( 'wpglobus_widgets_disabled_mask', $disabled_widgets_mask );
 
+				/**
+				 * @since 2.6.0
+				 */
+				$l10n = array();
+				$l10n['imageWidget'] = array();
+				$l10n['imageWidget']['suggest']  = 
+					sprintf( 
+						esc_html__( 'Чтобы применить виджет %1sИзображение%2s для нескольких языков', 'wpglobus' ),
+						'<strong>',
+						'</strong>' 
+					) . ' ';
+				$l10n['imageWidget']['suggest'] .= 
+					sprintf(
+						esc_html__( 'вы можете использовать расширение %1sWPGlobus для виджетов%2s', 'wpglobus' ),
+						'<a href="https://wpglobus.com/product/wpglobus-language-widgets/" target="_blank">',
+						'</a>'
+					);
+
+				$data = array(
+					'wpglobus_version' => WPGLOBUS_VERSION,
+					'disabledMask'     => $disabled_widgets_mask,
+					'l10n'         	   => $l10n,
+				);
+				
+				/**
+				 * Filter for localize data.
+				 *
+				 * @since 2.6.0
+				 *
+				 * @param array $data The data can be either a single or multi-dimensional array.
+				 *
+				 * @return array
+				 */
+				$data = apply_filters( 'wpglobus_widgets_localize_script', $data );
+				
 				wp_register_script(
 					'wpglobus-widgets',
 					self::$PLUGIN_DIR_URL . 'includes/js/wpglobus-widgets' . self::$_SCRIPT_SUFFIX . '.js',
@@ -2098,10 +2135,7 @@ class WPGlobus {
 				wp_localize_script(
 					'wpglobus-widgets',
 					'WPGlobusWidgets',
-					array(
-						'wpglobus_version' => WPGLOBUS_VERSION,
-						'disabledMask'     => $disabled_widgets_mask,
-					)
+					$data
 				);
 
 			}
