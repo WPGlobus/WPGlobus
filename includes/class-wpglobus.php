@@ -2094,15 +2094,15 @@ class WPGlobus {
 				 */
 				$l10n = array();
 				$l10n['imageWidget'] = array();
-				$l10n['imageWidget']['suggest']  = 
-					sprintf( 
-						esc_html__( 'Чтобы применить виджет %1sИзображение%2s для нескольких языков', 'wpglobus' ),
+				$l10n['imageWidget']['suggest']  =
+					sprintf( // translators: %s are for A tags.
+						esc_html__( 'To have the %1$sImage%2$s widget varying by language,', 'wpglobus' ),
 						'<strong>',
-						'</strong>' 
+						'</strong>'
 					) . ' ';
-				$l10n['imageWidget']['suggest'] .= 
-					sprintf(
-						esc_html__( 'вы можете использовать расширение %1sWPGlobus для виджетов%2s', 'wpglobus' ),
+				$l10n['imageWidget']['suggest'] .=
+					sprintf( // translators: %s are for A tags.
+						esc_html__( 'please use the %1$sWPGlobus language widgets%2$s add-on', 'wpglobus' ),
 						'<a href="https://wpglobus.com/product/wpglobus-language-widgets/" target="_blank">',
 						'</a>'
 					);

@@ -793,6 +793,14 @@ msgstr "Нужен мультиязычный ярлык?"
 msgid "*) Available after the menu is saved."
 msgstr "*) Доступно после сохранения меню."
 
+#. translators: %s are for A tags.
+msgid "To have the %1$sImage%2$s widget varying by language,"
+msgstr "Чтобы применить виджет %1$sИзображение%2$s для нескольких языков"
+
+#. translators: %s are for A tags.
+msgid "please use the %1$sWPGlobus language widgets%2$s add-on"
+msgstr "вы можете использовать расширение %1$sWPGlobus для виджетов%2$s"
+
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Чтобы использовать плагин WPGlobus, необходимо включить ЧПУ - постоянные "

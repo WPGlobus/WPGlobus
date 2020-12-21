@@ -732,6 +732,14 @@ msgstr ""
 msgid "*) Available after the menu is saved."
 msgstr "No Se Puede Desactivar el director idioma."
 
+#. translators: %s are for A tags.
+msgid "To have the %1$sImage%2$s widget varying by language,"
+msgstr ""
+
+#. translators: %s are for A tags.
+msgid "please use the %1$sWPGlobus language widgets%2$s add-on"
+msgstr ""
+
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
 "Debes habilitar los Enlaces permanentes Pretty para utilizar WPGlobus ."
