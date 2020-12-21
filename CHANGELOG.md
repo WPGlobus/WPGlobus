@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+2020-12-21 - version 2.6.0
+* (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.6.*
+* (Core) Revised filters on `widgets.php` page.
+* (Core/WidgetsJS) Code refactored for Image widgets.
+
 2020-12-03 - version 2.5.23
 * (Vendor/Yoast) Fixed filter for the post title when post meta is empty.
 
