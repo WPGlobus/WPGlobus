@@ -217,6 +217,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.6.0 =
+* (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.6.*
+* (Core) Revised filters on `widgets.php` page.
+* (Core/WidgetsJS) Code refactored for Image widgets.
+
 = 2.5.23 =
 * (Vendor/Yoast) Fixed filter for the post title when post meta is empty.
 
@@ -242,19 +247,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.5.18 =
 
 * (Builders/Pods) Fixed `Uncaught Error: Call to a member function fields() on bool`.
-
-= 2.5.17 =
-
-* (Core/JS) Fixed `Uncaught TypeError: Cannot read property of undefined`.
-* (Core/JS) Using `val` function instead of `attr`.
-* (Core/Admin) CSS tweak for the `edit slug` box.
-* (Core/Config) Changed the priority for `plugins_loaded` action.
-* (Core/Config Builder) Check `$GLOBALS['WPGlobus']` for an array to prevent an occurring error `Cannot use object of type WPGlobus as array`.
-* (Core/Utils) Fixed `current_url()` warning when plugin deactivated with WP-CLI.
-* (Core) Do not decode special characters.
-* (Builders/Pods) Added support for the `phone` and `wysiwyg` fields of `Pods – Custom Content Types and Fields`.
-* (Core/Post Types) Added  the `3D FlipBook Dflip Lite` plugin and `OceanWP` theme's post types to the `"hidden types"` list.
-* (Options/Languages table) Installed languages moved to the top of the table.
 
 = Earlier versions and Add-ons =
 

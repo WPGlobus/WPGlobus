@@ -1,12 +1,12 @@
-# Copyright (C) 2020 WPGlobus 2.5.21
-# This file is distributed under the same license as the WPGlobus 2.5.21 package.
+# Copyright (C) 2020 WPGlobus 2.6.0
+# This file is distributed under the same license as the WPGlobus 2.6.0 package.
 # Translators:
 # BORAHAN CONKEROGLU <boracon@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-12-01 15:06+0000\n"
+"PO-Revision-Date: 2020-12-22 18:27+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/tr_TR/)\n"

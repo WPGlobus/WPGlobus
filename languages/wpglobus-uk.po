@@ -1,5 +1,5 @@
-# Copyright (C) 2020 WPGlobus 2.5.21
-# This file is distributed under the same license as the WPGlobus 2.5.21 package.
+# Copyright (C) 2020 WPGlobus 2.6.0
+# This file is distributed under the same license as the WPGlobus 2.6.0 package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2016,2020
 # Jack Willson <666noob404@gmail.com>, 2019
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-12-01 15:10+0000\n"
+"PO-Revision-Date: 2020-12-22 18:27+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/uk/)\n"
