@@ -5,9 +5,12 @@
  * @package TIVWP_Updater
  */
 
-// This is to avoid the PHPStorm warning about multiple Updater classes in the project.
-// Had to place it file-wide because otherwise PHPCS complains about improper class comment.
-/* @noinspection PhpUndefinedClassInspection */
+/**
+ * This is to avoid the PHPStorm warning about multiple Updater classes in the project.
+ * Had to place it file-wide because otherwise PHPCS complains about improper class comment.
+ * @noinspection RedundantSuppression
+ * @noinspection PhpUndefinedClassInspection
+ */
 
 /**
  * Class TIVWP_Updater_Setup_Admin_Area
@@ -33,36 +36,10 @@ class TIVWP_Updater_Setup_Admin_Area {
 	 * Embed the stylesheet.
 	 */
 	public static function embed_css() {
-		ob_start();
-		?>
 
-		<!--suppress CssUnusedSymbol -->
-		<style id="tivwp-updater-css" data-version="<?php echo esc_attr( TIVWP_UPDATER_VERSION ); ?>">
-			.tivwp-updater-status-value {
-				font-weight: 700;
-			}
-
-			.tivwp-updater-status-inactive .tivwp-updater-status-value {
-				color: #cc0000;
-				background-color: #ffffff;
-			}
-
-			.tivwp-updater-instance,
-			.tivwp-updater-notifications {
-				opacity: .6;
-			}
-		</style>
-		<?php
-		$the_css = ob_get_clean();
-		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
-			$the_css = preg_replace( '/\s+/', ' ', $the_css );
-		}
-		echo wp_kses( $the_css, array(
-			'style' => array(
-				'id'           => array(),
-				'data-version' => array(),
-			),
-		) );
+		echo '<style id="tivwp-updater-css">';
+		include __DIR__ . '/../assets/css/tivwp-updater.css';
+		echo '</style>';
 	}
 
 	/**
@@ -72,30 +49,9 @@ class TIVWP_Updater_Setup_Admin_Area {
 	 * @since 1.0.2
 	 */
 	public static function embed_js() {
-		ob_start();
-		?>
-
-		<script id="tivwp-updater-js" data-version="<?php echo esc_attr( TIVWP_UPDATER_VERSION ); ?>">
-            jQuery(function ($) {
-                $('.tivwp-updater-action-button').on("click", function () {
-                    var dataPlugin = $(this).data('tivwp-updater-plugin');
-                    $(this).css({cursor: "wait", opacity: ".3"});
-                    $('input[type="checkbox"]').prop("checked", false);
-                    $('tr[data-plugin="' + dataPlugin + '"]').find('input[type="checkbox"]').prop("checked", true);
-                })
-            });
-		</script>
-		<?php
-		$the_script = ob_get_clean();
-		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
-			$the_script = preg_replace( '/\s+/', ' ', $the_script );
-		}
-		echo wp_kses( $the_script, array(
-			'script' => array(
-				'id'           => array(),
-				'data-version' => array(),
-			),
-		) );
+		echo '<script id="tivwp-updater-js">';
+		include __DIR__ . '/../assets/js/tivwp-updater.js';
+		echo '</script>';
 	}
 
 	/**
@@ -107,14 +63,27 @@ class TIVWP_Updater_Setup_Admin_Area {
 	protected static function load_translations() {
 
 		$domain = 'tivwp-updater';
-		$locale = get_locale();
-		$mofile = $domain . '-' . $locale . '.mo';
+
+		if ( function_exists( 'determine_locale' ) ) {
+			$locale = determine_locale();
+		} else {
+			$locale = is_admin() ? get_user_locale() : get_locale();
+		}
+		$locale = apply_filters( 'plugin_locale', $locale, $domain );
+
+		$mofile_name = $domain . '-' . $locale . '.mo';
 
 		// Try to load from the languages directory first.
-		if ( ! load_textdomain( $domain, WP_LANG_DIR . '/' . $mofile ) ) {
-			// Then try to load from our languages folder.
-			load_textdomain( $domain, dirname( __FILE__ ) . '/../languages/' . $mofile );
+		if ( defined( 'WP_LANG_DIR' ) ) {
+			$mofile = WP_LANG_DIR . '/' . $mofile_name;
+			if ( load_textdomain( $domain, $mofile ) ) {
+				return;
+			}
 		}
+
+		// Then try to load from our languages folder.
+		$mofile = __DIR__ . '/../languages/' . $mofile_name;
+		load_textdomain( $domain, $mofile );
 
 	}
 }

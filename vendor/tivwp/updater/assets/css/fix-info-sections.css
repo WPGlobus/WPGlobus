@@ -1,0 +1,7 @@
+#section-holder .section h2 {
+    clear: none;
+}
+
+#section-holder .section img {
+    max-width: 100%
+}

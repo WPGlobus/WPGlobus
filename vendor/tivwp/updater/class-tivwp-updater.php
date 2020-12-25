@@ -5,9 +5,13 @@
  * @package TIVWP_Updater
  */
 
-// This is to avoid the PHPStorm warning about multiple Updater classes in the project.
-// Had to place it file-wide because otherwise PHPCS complains about improper class comment.
-/* @noinspection PhpUndefinedClassInspection */
+/**
+ * This is to avoid the PHPStorm warning about multiple Updater classes in the project.
+ * Had to place it file-wide because otherwise PHPCS complains about improper class comment.
+ *
+ * @noinspection RedundantSuppression
+ * @noinspection PhpUndefinedClassInspection
+ */
 
 /**
  * Class TIVWP_Updater
@@ -149,7 +153,7 @@ class TIVWP_Updater {
 	 */
 	public function __construct( array $args = array() ) {
 
-		$this->_initialize_class_variables( $args );
+		$this->initialize_class_variables( $args );
 
 		// Note: these settings are for a specific plugin, so cannot do it at the loader.
 		$ok_to_run = true;
@@ -162,18 +166,18 @@ class TIVWP_Updater {
 		/**
 		 * Override the $ok_to_run value.
 		 *
-		 * @example
-		 * <code>
-		 *    add_filter( 'tivwp-updater-ok-to-run', '__return_true' );
-		 * </code>
-		 *
 		 * @param bool          $ok_to_run The value.
 		 * @param TIVWP_Updater $this      The Updater class instance.
+		 *
+		 * @example
+		 *    <code>
+		 *    add_filter( 'tivwp-updater-ok-to-run', '__return_true' );
+		 *    </code>
 		 */
-		$ok_to_run = apply_filters( 'tivwp-updater-ok-to-run', $ok_to_run, $this );
+		$ok_to_run = apply_filters( 'tivwp_updater_ok_to_run', $ok_to_run, $this );
 
 		if ( $ok_to_run ) {
-			$this->_set_hooks();
+			$this->set_hooks();
 		}
 
 	}
@@ -183,7 +187,7 @@ class TIVWP_Updater {
 	 *
 	 * @param array $args To initialize class variables.
 	 */
-	protected function _initialize_class_variables( array $args ) {
+	protected function initialize_class_variables( array $args ) {
 		foreach ( explode( ',', self::CONSTRUCTOR_VARS ) as $var_name ) {
 			if ( isset( $args[ $var_name ] ) ) {
 				/* @noinspection PhpVariableVariableInspection */
@@ -206,10 +210,11 @@ class TIVWP_Updater {
 	/**
 	 * Setup filters and actions.
 	 */
-	protected function _set_hooks() {
+	protected function set_hooks() {
 
 		// Tell WP where to check for plugin updates.
-		add_filter( 'pre_set_site_transient_update_plugins',
+		add_filter(
+			'pre_set_site_transient_update_plugins',
 			array(
 				$this,
 				'filter__pre_set_site_transient_update_plugins',
@@ -230,17 +235,12 @@ class TIVWP_Updater {
 	 */
 	public function action__init() {
 		foreach ( explode( ',', self::PERSISTENT_VARS ) as $key ) {
-			$this->_var_load( $key );
+			$this->var_load( $key );
 		}
 
-		/**
-		 * These two methods will work only if there is no instance yet.
-		 * Migration should be tried first, and then - generate a new instance.
-		 */
-		$this->_migration();
-		$this->_maybe_generate_instance();
+		$this->maybe_generate_instance();
 
-		$this->_process_admin_requests();
+		$this->process_admin_requests();
 
 		/**
 		 * This action will display the License Management Form after the plugin row.
@@ -262,7 +262,7 @@ class TIVWP_Updater {
 	 */
 	public function action__shutdown() {
 		foreach ( explode( ',', self::PERSISTENT_VARS ) as $key ) {
-			$this->_var_save( $key );
+			$this->var_save( $key );
 		}
 	}
 
@@ -271,7 +271,7 @@ class TIVWP_Updater {
 	 *
 	 * @param string $key The variable name.
 	 */
-	protected function _var_save( $key ) {
+	protected function var_save( $key ) {
 		/* @noinspection PhpVariableVariableInspection */
 		if ( ! isset( $this->$key ) ) {
 			return;
@@ -296,7 +296,7 @@ class TIVWP_Updater {
 	 *
 	 * @param string $key The variable name.
 	 */
-	protected function _var_load( $key ) {
+	protected function var_load( $key ) {
 		/* @noinspection PhpVariableVariableInspection */
 		if ( ! isset( $this->$key ) ) {
 			return;
@@ -305,6 +305,8 @@ class TIVWP_Updater {
 		if ( null !== $stored_value ) {
 			/* @noinspection PhpVariableVariableInspection */
 			$this->$key = $stored_value;
+		} elseif ( 'email' === $key ) {
+			$this->email = get_option( 'admin_email', '' );
 		}
 	}
 
@@ -325,7 +327,7 @@ class TIVWP_Updater {
 	 * @return array The response array.
 	 */
 	public function get_status() {
-		return $this->_get_server_response( $this->_url_status() );
+		return $this->get_server_response( $this->url_status() );
 	}
 
 	/**
@@ -334,7 +336,7 @@ class TIVWP_Updater {
 	 * @return array The response array.
 	 */
 	public function activate() {
-		return $this->_get_server_response( $this->_url_activation() );
+		return $this->get_server_response( $this->url_activation() );
 	}
 
 	/**
@@ -343,7 +345,7 @@ class TIVWP_Updater {
 	 * @return array The response array.
 	 */
 	public function deactivate() {
-		return $this->_get_server_response( $this->_url_deactivation() );
+		return $this->get_server_response( $this->url_deactivation() );
 	}
 
 	/**
@@ -353,7 +355,7 @@ class TIVWP_Updater {
 	 *
 	 * @see set_site_transient
 	 *
-	 * @param  mixed $transient The value of site transient.
+	 * @param mixed $transient The value of site transient.
 	 *
 	 * @return mixed $transient Updated value of site transient.
 	 */
@@ -363,7 +365,7 @@ class TIVWP_Updater {
 			// Not our business?
 			empty( $transient->checked[ $this->plugin_name ] )
 			// Do we have data?
-			|| ! $this->_is_license_pair_filled_in()
+			|| ! $this->is_license_pair_filled_in()
 		) {
 			return $transient;
 		}
@@ -376,10 +378,11 @@ class TIVWP_Updater {
 			'version' => $current_version,
 		);
 
-		$response = $this->_get_upgrade_api_response( $request_parameters );
+		$response = $this->get_upgrade_api_response( $request_parameters );
 
-		if ( isset( $response->new_version )
-			 && version_compare( (string) $response->new_version, $current_version, '>' )
+		if (
+			isset( $response->new_version )
+			&& version_compare( (string) $response->new_version, $current_version, '>' )
 		) {
 			$transient->response[ $this->plugin_name ] = $response;
 		}
@@ -423,7 +426,7 @@ class TIVWP_Updater {
 			'software_version' => $current_version,
 		);
 
-		$response = $this->_get_upgrade_api_response( $request_parameters );
+		$response = $this->get_upgrade_api_response( $request_parameters );
 
 		// If everything is okay return the $response.
 		if ( isset( $response->sections ) ) {
@@ -490,17 +493,9 @@ class TIVWP_Updater {
 	 * Images must not go wider than their container.
 	 */
 	public function fix_info_sections_style() {
-		?>
-		<style id="tivwp-updater-fix-info-css">
-			#section-holder .section h2 {
-				clear: none;
-			}
-
-			#section-holder .section img {
-				max-width: 100%
-			}
-		</style>
-		<?php
+		echo '<style id="tivwp-updater-fix-info-css">';
+		include __DIR__ . '/assets/css/fix-info-sections.css';
+		echo '</style>';
 	}
 
 	/**
@@ -510,18 +505,20 @@ class TIVWP_Updater {
 	 *
 	 * @return stdClass The response.
 	 */
-	protected function _get_upgrade_api_response( array $request_parameters ) {
-		$request_parameters = array_merge( array(
-			'activation_email' => $this->email,
-			'api_key'          => $this->licence_key,
-			'domain'           => $this->platform,
-			'instance'         => $this->instance,
-			'plugin_name'      => $this->plugin_name,
-			'product_id'       => $this->product_id,
-		), $request_parameters );
+	protected function get_upgrade_api_response( array $request_parameters ) {
+		$request_parameters = array_merge(
+			array(
+				'activation_email' => $this->email,
+				'api_key'          => $this->licence_key,
+				'domain'           => $this->platform,
+				'instance'         => $this->instance,
+				'plugin_name'      => $this->plugin_name,
+				'product_id'       => $this->product_id,
+			),
+			$request_parameters
+		);
 
-		$url = add_query_arg( 'wc-api', 'upgrade-api', $this->url_product ) . '&' .
-			   http_build_query( $request_parameters, '', '&' );
+		$url = add_query_arg( 'wc-api', 'upgrade-api', $this->url_product ) . '&' . http_build_query( $request_parameters, '', '&' );
 
 		$result = wp_safe_remote_get( esc_url_raw( $url ) );
 
@@ -533,9 +530,7 @@ class TIVWP_Updater {
 			|| ( 200 !== (int) wp_remote_retrieve_response_code( $result ) )
 		) {
 
-			$error_message = '<h3>' .
-							 esc_html__( 'Licensing server connection error.', 'tivwp-updater' ) .
-							 '</h3>';
+			$error_message = '<h3>' . esc_html__( 'Licensing server connection error.', 'tivwp-updater' ) . '</h3>';
 
 			/* @noinspection NotOptimalIfConditionsInspection */
 			if ( is_wp_error( $result ) ) {
@@ -574,9 +569,9 @@ class TIVWP_Updater {
 		 */
 
 		$response_body = wp_remote_retrieve_body( $result );
-		if ( is_serialized( $response_body ) ) :
+		if ( is_serialized( $response_body ) ) {
 
-			$response_object = unserialize( $response_body );
+			$response_object = maybe_unserialize( $response_body );
 
 			if ( is_object( $response_object ) ) {
 				/**
@@ -599,7 +594,7 @@ class TIVWP_Updater {
 
 				return $response_object;
 			}
-		endif;
+		}
 
 		/**
 		 * And this is an "impossible" case. WP will show a default error message.
@@ -614,18 +609,19 @@ class TIVWP_Updater {
 	 *
 	 * @return string The response.
 	 */
-	protected function _build_url( array $args ) {
-		$args = array_merge( array(
-			'product_id'  => $this->product_id,
-			'instance'    => $this->instance,
-			'email'       => $this->email,
-			'licence_key' => $this->licence_key,
-			'platform'    => $this->platform,
-		), $args );
+	protected function build_url( array $args ) {
+		$args = array_merge(
+			array(
+				'product_id'  => $this->product_id,
+				'instance'    => $this->instance,
+				'email'       => $this->email,
+				'licence_key' => $this->licence_key,
+				'platform'    => $this->platform,
+			),
+			$args
+		);
 
-
-		$url = add_query_arg( 'wc-api', 'am-software-api', $this->url_product ) . '&' .
-			   http_build_query( $args, '', '&' );
+		$url = add_query_arg( 'wc-api', 'am-software-api', $this->url_product ) . '&' . http_build_query( $args, '', '&' );
 
 		if ( class_exists( 'TIVWP_Debug_Bar' ) ) {
 			TIVWP_Debug_Bar::print_link( $url );
@@ -639,10 +635,8 @@ class TIVWP_Updater {
 	 *
 	 * @return string The URL.
 	 */
-	protected function _url_status() {
-		return $this->_build_url( array(
-			'request' => 'status',
-		) );
+	protected function url_status() {
+		return $this->build_url( array( 'request' => 'status' ) );
 	}
 
 	/**
@@ -650,10 +644,8 @@ class TIVWP_Updater {
 	 *
 	 * @return string The URL.
 	 */
-	protected function _url_activation() {
-		return $this->_build_url( array(
-			'request' => 'activation',
-		) );
+	protected function url_activation() {
+		return $this->build_url( array( 'request' => 'activation' ) );
 	}
 
 	/**
@@ -661,10 +653,8 @@ class TIVWP_Updater {
 	 *
 	 * @return string The URL.
 	 */
-	protected function _url_deactivation() {
-		return $this->_build_url( array(
-			'request' => 'deactivation',
-		) );
+	protected function url_deactivation() {
+		return $this->build_url( array( 'request' => 'deactivation' ) );
 	}
 
 	/**
@@ -674,16 +664,18 @@ class TIVWP_Updater {
 	 *
 	 * @return array Response from the server.
 	 */
-	protected function _get_server_response( $url ) {
+	protected function get_server_response( $url ) {
 
-		if ( ! $this->_is_license_pair_filled_in() ) {
-			$response_body = wp_json_encode( array(
-				self::KEY_ERROR =>
-					__( 'License / email is empty or invalid.', 'tivwp-updater' ),
-			) );
+		if ( ! $this->is_license_pair_filled_in() ) {
+			$response_body = wp_json_encode(
+				array(
+					self::KEY_ERROR =>
+						__( 'License / email is empty or invalid.', 'tivwp-updater' ),
+				)
+			);
 
 		} else {
-			$result = wp_safe_remote_get( $url );
+			$result = wp_safe_remote_get( $url, array( 'sslverify' => false ) );
 			if ( is_wp_error( $result ) ) {
 
 				$error_message = '';
@@ -693,44 +685,58 @@ class TIVWP_Updater {
 					$error_message = implode( '; ', $error_messages );
 				}
 
-				$response_body = wp_json_encode( array(
-					self::KEY_ERROR => implode( ' ', array(
-						__( 'Licensing server connection error.', 'tivwp-updater' ),
-						$error_message,
-					) ),
-				) );
+				$response_body = wp_json_encode(
+					array(
+						self::KEY_ERROR => implode(
+							' ',
+							array(
+								__( 'Licensing server connection error.', 'tivwp-updater' ),
+								$error_message,
+							)
+						),
+					)
+				);
 
 			} elseif ( 200 !== (int) wp_remote_retrieve_response_code( $result ) ) {
 
-				$response_body = wp_json_encode( array(
-					self::KEY_ERROR => implode( ' ', array(
-						__( 'Licensing server connection error.', 'tivwp-updater' ),
-						$result['response']['code'] . ' - '
-						. $result['response']['message'],
-					) ),
-				) );
+				$response_body = wp_json_encode(
+					array(
+						self::KEY_ERROR => implode(
+							' ',
+							array(
+								__( 'Licensing server connection error.', 'tivwp-updater' ),
+								$result['response']['code'] . ' - '
+								. $result['response']['message'],
+							)
+						),
+					)
+				);
 			} else {
 				$response_body = wp_remote_retrieve_body( $result );
 			}
 		}
 
-		// The JSON_OBJECT_AS_ARRAY constant exists since PHP 5.4
+		/**
+		 * The JSON_OBJECT_AS_ARRAY constant exists since PHP 5.4
+		 *
+		 * @noinspection PhpComposerExtensionStubsInspection
+		 */
 		return json_decode( $response_body, true );
 	}
 
 	/**
 	 * Generate a new instance if not set yet.
 	 */
-	protected function _maybe_generate_instance() {
+	protected function maybe_generate_instance() {
 		if ( ! $this->instance ) {
-			$this->instance = substr( sha1( site_url() . (string) mt_rand( 100, 999 ) ), 0, 12 );
+			$this->instance = substr( sha1( site_url() . (string) wp_rand( 100, 999 ) ), 0, 12 );
 
 			/**
 			 * If a new instance has been generated, we must update the state.
 			 * Updating must be hooked, and not run here, when we are called from
 			 * the Constructor.
 			 */
-			$this->_reset_state();
+			$this->reset_state();
 			add_action( 'admin_init', array( $this, 'update_state' ) );
 		}
 	}
@@ -740,7 +746,7 @@ class TIVWP_Updater {
 	 *
 	 * @todo nonce.
 	 */
-	protected function _process_admin_requests() {
+	protected function process_admin_requests() {
 		// @codingStandardsIgnoreStart
 		if ( empty( $_POST ) ) {
 			return;
@@ -772,18 +778,15 @@ class TIVWP_Updater {
 
 		$key = 'action';
 		$_sk = $this->slug . '_' . $key;
-		if ( 1
-			 && $this->licence_key
-			 && $this->email
-			 && isset( $form_data[ $_sk ] )
-
-		) {
+		if ( $this->licence_key && $this->email && isset( $form_data[ $_sk ] ) ) {
 			if ( 'activate' === $form_data[ $_sk ] ) {
-				$this->_try_to_activate();
+				$this->try_to_activate();
+				$this->update_state();
 			} elseif ( 'deactivate' === $form_data[ $_sk ] ) {
-				$this->_try_to_deactivate();
+				$this->try_to_deactivate();
+				$this->update_state();
 			} elseif ( 'status' === $form_data[ $_sk ] ) {
-				$this->_try_to_get_status();
+				$this->try_to_get_status();
 			}
 		}
 
@@ -792,8 +795,8 @@ class TIVWP_Updater {
 	/**
 	 * Reset the state: clear notification and the transient.
 	 */
-	protected function _reset_state() {
-		$this->_notification_clear_all();
+	protected function reset_state() {
+		$this->notification_clear_all();
 		delete_site_transient( 'update_plugins' );
 	}
 
@@ -801,7 +804,7 @@ class TIVWP_Updater {
 	 * Public wrapper to use in callbacks.
 	 */
 	public function update_state() {
-		$this->_try_to_get_status();
+		$this->try_to_get_status();
 	}
 
 	/**
@@ -809,7 +812,7 @@ class TIVWP_Updater {
 	 *
 	 * @param string|string[] $message Message or array of messages.
 	 */
-	protected function _notifications_set( $message = '' ) {
+	protected function notifications_set( $message = '' ) {
 		$this->notifications = (array) $message;
 	}
 
@@ -818,103 +821,41 @@ class TIVWP_Updater {
 	 *
 	 * @param string $message The message.
 	 */
-	protected function _notification_add( $message ) {
+	protected function notification_add( $message ) {
 		$this->notifications[] = $message;
 	}
 
 	/**
 	 * Clear all notification messages.
 	 */
-	protected function _notification_clear_all() {
+	protected function notification_clear_all() {
 		$this->notifications = array();
-	}
-
-	/**
-	 * Migrate options from the old WPGlobus Updater.
-	 * Works only if there is no instance yet.
-	 */
-	protected function _migration() {
-
-		if ( $this->instance ) {
-			return;
-		}
-
-		/**
-		 * Example of the old options. (slug is `wpglobus_plus`)
-		 *
-		 * <code>
-		 * wpgupd_wpglobus_plus_act
-		 * Activated
-		 *
-		 * wpgupd_wpglobus_plus_data
-		 * a:2:{s:24:"wpgupd_wpglobus_plus_api";s:38:"wc_order_****";
-		 * s:37:"wpgupd_wpglobus_plus_activation_email";s:20:"email@example.com";}
-		 *
-		 * wpgupd_wpglobus_plus_dea_cb_key
-		 * on
-		 *
-		 * wpgupd_wpglobus_plus_inst
-		 * d91ae12*****
-		 *
-		 * wpgupd_wpglobus_plus_pid
-		 * WPGlobus Plus
-		 * </code>
-		 */
-
-		// Options prefix - code snipped copied from the WPGlobus Updater.
-		$prefix = $this->product_id;
-		$prefix = strtolower( $prefix );
-		$prefix = preg_replace( '/[^%a-z0-9 _-]/', '', $prefix );
-		$prefix = preg_replace( '/[\s-_]+/', '_', $prefix );
-		$prefix = trim( $prefix, '_' );
-		$prefix = 'wpgupd_' . $prefix;
-
-		// Migrate instance.
-		$_old_instance = get_option( $prefix . '_inst' );
-		if ( $_old_instance ) {
-			$this->instance = $_old_instance;
-		}
-
-		// Migrate license and email (serialized in `_data`).
-		$_old_data = get_option( $prefix . '_data' );
-		if ( ! $this->licence_key && ! empty( $_old_data[ $prefix . '_api' ] ) ) {
-			$this->licence_key = $_old_data[ $prefix . '_api' ];
-		}
-		if ( ! $this->email && ! empty( $_old_data[ $prefix . '_activation_email' ] ) ) {
-			$this->email = $_old_data[ $prefix . '_activation_email' ];
-		}
-
-		// Update status after migration.
-		$this->_try_to_get_status();
-
 	}
 
 	/**
 	 * Try to activate and update status.
 	 */
-	protected function _try_to_activate() {
-		$this->_reset_state();
+	protected function try_to_activate() {
+		$this->reset_state();
 		$result = $this->activate();
 		if ( ! empty( $result[ self::KEY_ERROR ] ) ) {
-			$this->_notification_add( $result[ self::KEY_ERROR ] );
-		} elseif ( isset( $result['activated'] )
-				   && $result['activated']
-		) {
+			$this->notification_add( $result[ self::KEY_ERROR ] );
+		} elseif ( isset( $result['activated'] ) && $result['activated'] ) {
 			$this->status = self::STATUS_ACTIVE;
-			$this->_notification_add( $result['message'] );
+			$this->notification_add( $result['message'] );
 		}
 	}
 
 	/**
 	 * Try to deactivate and update status.
 	 */
-	protected function _try_to_deactivate() {
-		$this->_reset_state();
+	protected function try_to_deactivate() {
+		$this->reset_state();
 		$result = $this->deactivate();
 		if ( ! empty( $result[ self::KEY_ERROR ] ) ) {
-			$this->_notification_add( $result[ self::KEY_ERROR ] );
+			$this->notification_add( $result[ self::KEY_ERROR ] );
 			if ( ! empty( $result[ self::KEY_ADDITIONAL_INFO ] ) ) {
-				$this->_notification_add( $result[ self::KEY_ADDITIONAL_INFO ] );
+				$this->notification_add( $result[ self::KEY_ADDITIONAL_INFO ] );
 			}
 			/**
 			 * If the server returns status "inactive" then we assume that the
@@ -927,12 +868,10 @@ class TIVWP_Updater {
 			if ( isset( $result['activated'] ) && self::STATUS_INACTIVE === $result['activated'] ) {
 				$this->status = self::STATUS_INACTIVE;
 			}
-		} elseif ( isset( $result['deactivated'] )
-				   && $result['deactivated']
-		) {
+		} elseif ( isset( $result['deactivated'] ) && $result['deactivated'] ) {
 			$this->status = self::STATUS_INACTIVE;
 			if ( ! empty( $result['activations_remaining'] ) ) {
-				$this->_notification_add( $result['activations_remaining'] );
+				$this->notification_add( $result['activations_remaining'] );
 			}
 		}
 	}
@@ -940,16 +879,16 @@ class TIVWP_Updater {
 	/**
 	 * Get status from the Licensing server and update the class variables.
 	 */
-	protected function _try_to_get_status() {
+	protected function try_to_get_status() {
 
 		$result = $this->get_status();
 		if ( ! empty( $result[ self::KEY_ERROR ] ) ) {
 			$this->status = self::STATUS_INACTIVE;
-			$this->_notifications_set( $result[ self::KEY_ERROR ] );
+			$this->notifications_set( $result[ self::KEY_ERROR ] );
 		} elseif ( ! empty( $result['status_check'] ) ) {
 			$this->status = $result['status_check'];
 			if ( ! empty( $result['activations_remaining'] ) ) {
-				$this->_notifications_set( $result['activations_remaining'] );
+				$this->notifications_set( $result['activations_remaining'] );
 			}
 		}
 	}
@@ -959,7 +898,7 @@ class TIVWP_Updater {
 	 *
 	 * @return bool True if both are not empty.
 	 */
-	protected function _is_license_pair_filled_in() {
+	protected function is_license_pair_filled_in() {
 		return ( $this->licence_key && $this->email );
 	}
 }

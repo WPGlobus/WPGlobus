@@ -2,10 +2,14 @@
 /**
  * View: License management form.
  *
- * @package TIVWP_Updater
- *
  * @var TIVWP_Updater $this
+ * @package TIVWP_Updater
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $_slug = sanitize_title( $this->slug );
 ?>
@@ -30,7 +34,7 @@ $_slug = sanitize_title( $this->slug );
 			<?php echo esc_html( $this->instance ); ?>
 		</div>
 		<button type="submit"
-				class="tivwp-updater-action-button"
+				class="button tivwp-updater-action-button"
 				data-tivwp-updater-slug="<?php echo esc_attr( $_slug ); ?>"
 				data-tivwp-updater-plugin="<?php echo esc_attr( $this->plugin_name ); ?>"
 				name="<?php echo esc_attr( $_slug ); ?>_action"
@@ -51,22 +55,28 @@ $_slug = sanitize_title( $this->slug );
 			</div>
 		<?php endif; ?>
 		<div>
-			<label for="<?php echo esc_attr( $_slug ); ?>_licence_key">
+			<?php if ( TIVWP_Updater::STATUS_ACTIVE === $this->status ) : ?>
 				<?php esc_html_e( 'Key' ); ?>:
-			</label>
-			<input type="text" id="<?php echo esc_attr( $_slug ); ?>_licence_key"
-					name="<?php echo esc_attr( $_slug ); ?>_licence_key"
-					value="<?php echo esc_attr( $this->licence_key ); ?>"
-				<?php disabled( TIVWP_Updater::STATUS_ACTIVE === $this->status && $this->licence_key ); ?>
-			/>
-			<label for="<?php echo esc_attr( $_slug ); ?>_email">
+				<code>'<?php echo esc_attr( $this->licence_key ); ?>'</code>
+
 				<?php esc_html_e( 'Email' ); ?>:
-			</label>
-			<input type="email" id="<?php echo esc_attr( $_slug ); ?>_email"
-					name="<?php echo esc_attr( $_slug ); ?>_email"
-					value="<?php echo esc_attr( $this->email ); ?>"
-				<?php disabled( TIVWP_Updater::STATUS_ACTIVE === $this->status && $this->email ); ?>
-			/>
+				<code>'<?php echo esc_attr( $this->email ); ?>'</code>
+			<?php else : ?>
+				<label for="<?php echo esc_attr( $_slug ); ?>_licence_key">
+					<?php esc_html_e( 'Key' ); ?>:
+				</label>
+				<input type="text" id="<?php echo esc_attr( $_slug ); ?>_licence_key"
+						name="<?php echo esc_attr( $_slug ); ?>_licence_key"
+						value="<?php echo esc_attr( $this->licence_key ); ?>"
+				/>
+				<label for="<?php echo esc_attr( $_slug ); ?>_email">
+					<?php esc_html_e( 'Email' ); ?>:
+				</label>
+				<input type="email" id="<?php echo esc_attr( $_slug ); ?>_email"
+						name="<?php echo esc_attr( $_slug ); ?>_email"
+						value="<?php echo esc_attr( $this->email ); ?>"
+				/>
+			<?php endif; ?>
 			<?php
 			$_action       = ( TIVWP_Updater::STATUS_ACTIVE === $this->status ? 'deactivate' : 'activate' );
 			$_action_label = ( TIVWP_Updater::STATUS_ACTIVE === $this->status
@@ -75,7 +85,7 @@ $_slug = sanitize_title( $this->slug );
 			);
 			?>
 			<button type="submit"
-					class="tivwp-updater-action-button"
+					class="button tivwp-updater-action-button"
 					data-tivwp-updater-slug="<?php echo esc_attr( $_slug ); ?>"
 					data-tivwp-updater-plugin="<?php echo esc_attr( $this->plugin_name ); ?>"
 					name="<?php echo esc_attr( $_slug ); ?>_action"
@@ -95,4 +105,7 @@ $_slug = sanitize_title( $this->slug );
 		}
 		?>
 	</td>
+	<?php if ( version_compare( $GLOBALS['wp_version'], '5.5.0', '>=' ) ) : ?>
+		<td class="column-auto-updates">&nbsp;</td>
+	<?php endif; ?>
 </tr>

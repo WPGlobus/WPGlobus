@@ -1,62 +1,68 @@
-[
-    {
-        "name": "bemailr/wp-requirements",
-        "version": "2.0.3",
-        "version_normalized": "2.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bemailr/wp-requirements.git",
-            "reference": "e903973b0dfc1178f89c757bd205327811ea4658"
+{
+    "packages": [
+        {
+            "name": "bemailr/wp-requirements",
+            "version": "2.0.3",
+            "version_normalized": "2.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bemailr/wp-requirements.git",
+                "reference": "e903973b0dfc1178f89c757bd205327811ea4658"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bemailr/wp-requirements/zipball/e903973b0dfc1178f89c757bd205327811ea4658",
+                "reference": "e903973b0dfc1178f89c757bd205327811ea4658",
+                "shasum": ""
+            },
+            "time": "2016-10-18T23:09:16+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "description": "A helpful library for checking the prerequisites when activating / running a WordPress plugin.",
+            "keywords": [
+                "wordpress"
+            ],
+            "install-path": "../bemailr/wp-requirements"
         },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bemailr/wp-requirements/zipball/e903973b0dfc1178f89c757bd205327811ea4658",
-            "reference": "e903973b0dfc1178f89c757bd205327811ea4658",
-            "shasum": ""
-        },
-        "time": "2016-10-18T23:09:16+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-3.0"
-        ],
-        "description": "A helpful library for checking the prerequisites when activating / running a WordPress plugin.",
-        "keywords": [
-            "wordpress"
-        ]
-    },
-    {
-        "name": "tivwp/updater",
-        "version": "1.0.9",
-        "version_normalized": "1.0.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://bitbucket.org/tivwp/tivwp-updater.git",
-            "reference": "6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://bitbucket.org/tivwp/tivwp-updater/get/6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729.zip",
-            "reference": "6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729",
-            "shasum": ""
-        },
-        "time": "2018-03-23T12:14:51+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "license": [
-            "GPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "Gregory Karpinsky",
-                "email": "gregory@tiv.net"
-            }
-        ],
-        "description": "Interface to WooCommerce API Manager",
-        "homepage": "https://bitbucket.org/tivwp/tivwp-updater",
-        "support": {
-            "source": "https://bitbucket.org/tivwp/tivwp-updater/src/6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729/?at=1.0.9"
+        {
+            "name": "tivwp/updater",
+            "version": "1.0.10",
+            "version_normalized": "1.0.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/tivwp/tivwp-updater.git",
+                "reference": "c380367c0e30359c16dde53d023208e349257be2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/tivwp/tivwp-updater/get/c380367c0e30359c16dde53d023208e349257be2.zip",
+                "reference": "c380367c0e30359c16dde53d023208e349257be2",
+                "shasum": ""
+            },
+            "time": "2020-12-25T19:34:18+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory Karpinsky",
+                    "email": "gregory@tiv.net"
+                }
+            ],
+            "description": "Interface to WooCommerce API Manager",
+            "homepage": "https://bitbucket.org/tivwp/tivwp-updater",
+            "support": {
+                "source": "https://bitbucket.org/tivwp/tivwp-updater/src/c380367c0e30359c16dde53d023208e349257be2/?at=1.0.10"
+            },
+            "install-path": "../tivwp/updater"
         }
-    }
-]
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

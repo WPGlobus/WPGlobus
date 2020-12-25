@@ -1,0 +1,18 @@
+.tivwp-updater-status-value {
+    font-weight: 700;
+}
+
+.tivwp-updater-status-inactive .tivwp-updater-status-value {
+    color: #cc0000;
+    background-color: #ffffff;
+}
+
+.tivwp-updater-instance,
+.tivwp-updater-notifications {
+    opacity: .6;
+}
+
+input[id$='_licence_key'] {
+    min-width: 23em;
+    font-family: monospace;
+}

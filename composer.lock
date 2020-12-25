@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f6eb9bf1f073a03375eac29170c9ff1",
+    "content-hash": "ce979670c16e39c68421c398bc713025",
     "packages": [
         {
             "name": "bemailr/wp-requirements",
@@ -29,20 +29,24 @@
             "keywords": [
                 "wordpress"
             ],
+            "support": {
+                "issues": "https://github.com/bemailr/wp-requirements/issues",
+                "source": "https://github.com/bemailr/wp-requirements/tree/develop"
+            },
             "time": "2016-10-18T23:09:16+00:00"
         },
         {
             "name": "tivwp/updater",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/tivwp/tivwp-updater.git",
-                "reference": "6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729"
+                "reference": "c380367c0e30359c16dde53d023208e349257be2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/tivwp/tivwp-updater/get/6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729.zip",
-                "reference": "6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729",
+                "url": "https://bitbucket.org/tivwp/tivwp-updater/get/c380367c0e30359c16dde53d023208e349257be2.zip",
+                "reference": "c380367c0e30359c16dde53d023208e349257be2",
                 "shasum": ""
             },
             "type": "library",
@@ -58,9 +62,9 @@
             "description": "Interface to WooCommerce API Manager",
             "homepage": "https://bitbucket.org/tivwp/tivwp-updater",
             "support": {
-                "source": "https://bitbucket.org/tivwp/tivwp-updater/src/6bd2adb27bc18e7cdbdba1eaf269a39fa8a0f729/?at=1.0.9"
+                "source": "https://bitbucket.org/tivwp/tivwp-updater/src/c380367c0e30359c16dde53d023208e349257be2/?at=1.0.10"
             },
-            "time": "2018-03-23T12:14:51+00:00"
+            "time": "2020-12-25T19:34:18+00:00"
         }
     ],
     "packages-dev": [],
@@ -70,5 +74,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
