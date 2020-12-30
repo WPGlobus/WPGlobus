@@ -5,7 +5,7 @@
  * @since 2.4.3
  * @since 2.4.4 Add filters for title, description.
  *
- * @package WPGlobus\Builders\RankMathSEO.
+ * @package WPGlobus\Vendors\RankMathSEO.
  * @author  Alex Gor(alexgff)
  */
 

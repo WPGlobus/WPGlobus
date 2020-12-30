@@ -4,7 +4,7 @@
  *
  * @since 2.4.3
  *
- * @package WPGlobus\Builders\RankMathSEO.
+ * @package WPGlobus\Vendors\RankMathSEO.
  * @author  Alex Gor(alexgff)
  */
 /**
