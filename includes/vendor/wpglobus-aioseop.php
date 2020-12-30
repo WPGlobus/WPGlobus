@@ -4,12 +4,13 @@
  * Support Standard/Classic mode.
  *
  * @since 2.3.9
+ * @since 2.6.1 Support All in One SEO v.3 only.
  *
  * @package WPGlobus\All-in-One-SEO
  */
 
 if ( defined( 'AIOSEOP_VERSION' ) ) {
-
+	
 	if ( version_compare( AIOSEOP_VERSION, '3.4.2', '>=' ) ) {
 		
 		/**
