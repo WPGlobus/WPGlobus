@@ -605,16 +605,7 @@ class WPGlobus {
 
 						$type = empty( $post ) ? '' : $post->post_type;
 						if ( ! $this->disabled_entity( $type ) ) {
-
 							require_once 'vendor/wpglobus-aioseop.php';
-							/**
-							 * @since 2.3.9 remove after testing.
-							 */
-							//require_once 'vendor/class-wpglobus-aioseop.php';
-							//if ( WPGlobus_WP::is_pagenow( array( 'post.php', 'post-new.php' ) ) ) {
-								/** @noinspection PhpUnusedLocalVariableInspection */
-								//$WPGlobus_aioseop = new WPGlobus_aioseop();
-							//}
 						}
 					}
 				}
