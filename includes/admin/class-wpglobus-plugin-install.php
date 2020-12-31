@@ -104,7 +104,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 * @return int
 		 */
 		public static function sort_paid_plugins( $a, $b ) {
-			return $a['order'] > $b['order'];
+			return ( $a['order'] < $b['order'] ) ? - 1 : 1;
 		}
 
 		/**
