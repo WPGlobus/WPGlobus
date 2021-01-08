@@ -552,4 +552,16 @@ if ( defined('APL_VERSION') ) {
 	}
 }
 
+/**
+ * https://sitekit.withgoogle.com/
+ * https://github.com/WPGlobus/WPGlobus/issues/94
+ * @since 2.6.1
+ */
+add_filter(
+	'googlesitekit_canonical_home_url',
+	function() {
+		return get_option( 'home' );
+	}
+);
+
 # --- EOF
