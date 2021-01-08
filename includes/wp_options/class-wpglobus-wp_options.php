@@ -1,11 +1,15 @@
 <?php
 /**
- * Class WPGlobus_WP_Options
+ * File: class-wpglobus-wp_options.php
  *
  * @package WPGlobus\WP_Options
  * @author  Alex Gor(alexgff)
  */
 
+/**
+ * Class WPGlobus_WP_Options.
+ * To filter the options from `wp_options` table.
+ */
 if ( ! class_exists( 'WPGlobus_WP_Options' ) ) :
 
 	class WPGlobus_WP_Options {
@@ -30,10 +34,15 @@ if ( ! class_exists( 'WPGlobus_WP_Options' ) ) :
 
 			if ( is_admin() ) {
 				foreach ( $wp_options as $option ) {
-					add_filter( 'option_' . $option, array( __CLASS__, 'filter__translate_option' ) );
+					if ( ! empty( $option ) ) {
+						if ( is_string( $option ) ) {
+							add_filter( 'option_' . $option, array( __CLASS__, 'filter__translate_option' ) );
+						} else {
+							// @since 2.6.1 Case for array.
+						}
+					}
 				}
 			}
-
 		}
 
 		/**
@@ -78,3 +87,5 @@ if ( ! class_exists( 'WPGlobus_WP_Options' ) ) :
 	}
 
 endif;
+
+# --- EOF
