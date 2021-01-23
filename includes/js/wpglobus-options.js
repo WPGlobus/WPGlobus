@@ -99,6 +99,11 @@ jQuery(document).ready(function ($) {
 			setTimeout(function(){
 				$('#section-tab-'+WPGlobusOptions.tab+' .wpglobus-options-menu .wpglobus-tab-link-subsection').eq(0).click();
 			}, 200);
+			
+			/**
+			 * @since 2.6.1
+			 */
+			api.tabActions( api.getCurrentTabID() );
 		},
 		initLanguageTable: function() {
 			var $items = $('.wpglobus-the-language-item-installed');
@@ -149,7 +154,11 @@ jQuery(document).ready(function ($) {
 						$('#section-tab-'+tab+' .wpglobus-tab-link-subsection').eq(0).click();
 					}
 				}
+				
+				// @since 2.6.1
+				api.tabActions( $(this) );
 			});
+			
 			/* @since 2.5.3 */
 			$(document).on('click', '.wpglobus-tab-link-subsection', function(event){
 				var tab = $(this).data('tab');
@@ -159,6 +168,28 @@ jQuery(document).ready(function ($) {
 				$('.wpglobus-tab-link-subsection').removeClass('wpglobus-tab-link-active');
 				$('#wpglobus-tab-link-subsection-'+tab).addClass('wpglobus-tab-link-active');
 			});				
+		},
+		tabActions: function($tab) {
+			/**
+			 * @since 2.6.1
+			 */		
+			if ( 'string' === typeof $tab ) {
+				$tab = $('#wpglobus-tab-link-'+$tab).eq(0);
+			}
+			
+			if ( $tab.length == 0 ) {
+				return;
+			}
+
+			/**
+			 * Hide/Show submit button.
+			 * @since 2.6.1
+			 */
+			if ( $tab.hasClass('wpglobus-tab-hide-submit-button') ) {
+				$('#form-wpglobus-options .submit').addClass('hidden');
+			} else {
+				$('#form-wpglobus-options .submit').removeClass('hidden');
+			}
 		},
 		initSpecs: function() {
 			$(document).on('dblclick', '#section-tab-customizer h2', function(ev){
