@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+2021-01-23 - version 2.6.1
+* (Core/Options) Added the handling of actions for tabs.
+* (Core/Controller) Added filter `googlesitekit_canonical_home_url`.
+* (Core/WP_Options) Fixed PHP Notice: Array to string conversion.
+* (Core/Plugin Install) Fixed uasort warning.
+* (Core) Clean up code.
+* (Vendor/RankMathSEO) Typo.
+* (Core/Updater) Updater v.1.0.10.
+
 2020-12-21 - version 2.6.0
 * (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.6.*
 * (Core) Revised filters on `widgets.php` page.
