@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-01-27 - version 2.6.2
+* (Core) Added `wpglobus_show_title_fields` filter.
+* (Core/Post Types) Added  the `Ultimate Member` plugin post types to the `"hidden types"` list.
+
 2021-01-23 - version 2.6.1
 * (Core/Options) Added handling of actions for the tabs.
 * (Core/Controller) Added filter `googlesitekit_canonical_home_url`.
