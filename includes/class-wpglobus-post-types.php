@@ -108,6 +108,9 @@ class WPGlobus_Post_Types {
 		'dflip',
 		// https://oceanwp.org/ @since 2.5.17
 		'oceanwp_library',
+		// Ultimate Member – User Profile, User Registration, Login & Membership Plugin: https://wordpress.org/plugins/ultimate-member/ @since 2.6.2
+		'um_form',
+		'um_directory'
 	);
 
 	/**
