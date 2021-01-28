@@ -4,7 +4,7 @@
  *
  * @package   WPGlobus
  * @author    TIV.NET INC, Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
- * @copyright 2015-2019 TIV.NET INC. / WPGlobus
+ * @copyright 2015-2021 TIV.NET INC. / WPGlobus
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License, version 3
  */
 
@@ -15,7 +15,7 @@
  * Description: A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, widgets and even custom fields - in multiple languages!
  * Text Domain: wpglobus
  * Domain Path: /languages/
- * Version: 2.6.1
+ * Version: 2.6.2
  * Author: WPGlobus
  * Author URI: https://wpglobus.com/
  * Network: false
@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPGLOBUS_VERSION', '2.6.1' );
+define( 'WPGLOBUS_VERSION', '2.6.2' );
 define( 'WPGLOBUS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WPGLOBUS_AJAX', 'wpglobus-ajax' );
 

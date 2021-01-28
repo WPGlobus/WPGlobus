@@ -285,8 +285,15 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 ## Screenshots ##
 
+1. The Welcome screen.
+2. Settings panel.
+3. Languages setup.
+4. Attaching language switcher to a menu.
+5. Editing post in multiple languages.
+6. Multilingual Yoast SEO and Featured Images.
+7. Language Switcher widget and Multilingual Editor dialog.
 
-https://wordpress.org/plugins/wpglobus/#screenshots
+8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/).
 
 ## Upgrade Notice ##
 
@@ -295,6 +302,10 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.6.2 ###
+* (Core) Added `wpglobus_show_title_fields` filter.
+* (Core/Post Types) Added  the `Ultimate Member` plugin post types to the `"hidden types"` list.
 
 ### 2.6.1 ###
 * (Core/Options) Added handling of actions for the tabs.
