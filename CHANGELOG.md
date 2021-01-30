@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-01-30 - version 2.6.3
+* (Vendor/Yoast) Fixed issue with empty Open Graph description.
+
 2021-01-27 - version 2.6.2
 * (Core) Added `wpglobus_show_title_fields` filter.
 * (Core/Post Types) Added  the `Ultimate Member` plugin post types to the `"hidden types"` list.
