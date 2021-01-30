@@ -91,6 +91,15 @@ class WPGlobus_YoastSEO {
 	 * @var array
 	 */			
 	protected static $canonical_url = array();
+	
+	/**
+	 * Description meta value.
+	 *
+	 * @scope front
+	 * @since 2.6.3
+	 * @var string
+	 */	
+	protected static $description = '';
 
 	/**
 	 * Static "controller"
@@ -310,6 +319,12 @@ class WPGlobus_YoastSEO {
 					 */					
 					$description = wpseo_replace_vars( $description, $presentation->source );
 				}
+			} else {
+				/**
+				 * Opengraph description is empty. We get it from `description` meta.
+				 * @since 2.6.3
+				 */
+				$description = self::$description;
 			}
 			
 		} elseif ( 'term' == $presentation->model->object_type ) {
@@ -709,6 +724,11 @@ class WPGlobus_YoastSEO {
 				}
 			}
 		}
+	
+		/**
+		 * @since 2.6.3
+		 */	
+		self::$description = $description;
 		
 		return $description;
 	}
