@@ -303,6 +303,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.6.3 ###
+* (Vendor/Yoast) Fixed issue with empty Open Graph description.
+* (Updater) Missing assets in the ZIP file.
+
 ### 2.6.2 ###
 * (Core) Added `wpglobus_show_title_fields` filter.
 * (Core/Post Types) Added  the `Ultimate Member` plugin post types to the `"hidden types"` list.

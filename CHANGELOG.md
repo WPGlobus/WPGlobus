@@ -4,6 +4,7 @@
 
 2021-01-30 - version 2.6.3
 * (Vendor/Yoast) Fixed issue with empty Open Graph description.
+* (Updater) Missing assets in the ZIP file.
 
 2021-01-27 - version 2.6.2
 * (Core) Added `wpglobus_show_title_fields` filter.
