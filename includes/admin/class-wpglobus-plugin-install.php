@@ -2,7 +2,7 @@
 /**
  * File: class-wpglobus-plugin-install.php
  *
- * @since   1.5.9
+ * @since 1.5.9
  * @package WPGlobus\Admin
  */
 
@@ -213,7 +213,21 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 				$info->slug = $slug;
 
-				$info->icons['default'] = WPGlobus::internal_images_url() . '/' . $paid_plugin['image_file'];
+				/**
+				 * @since 2.6.4
+				 */
+				$internal_image = true;
+				foreach( array( 'http://', 'https://' ) as $_scheme ) {
+					if ( false !== strpos( $paid_plugin['image_file'], $_scheme ) ) {
+						$internal_image = false;		
+					}
+				}
+
+				if ( $internal_image ) {
+					$info->icons['default'] = WPGlobus::internal_images_url() . '/' . $paid_plugin['image_file'];
+				} else {
+					$info->icons['default'] = $paid_plugin['image_file'];
+				}
 				$info->icons['1x']      = $info->icons['default'];
 				$info->icons['2x']      = $info->icons['default'];
 
@@ -349,3 +363,5 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 	}
 
 endif;
+
+# --- EOF

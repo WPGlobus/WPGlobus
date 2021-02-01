@@ -43,6 +43,12 @@
     "image_file": "wpglobus-mobile-menu-logo-400x400.png",
     "order": 20
   },
+  "wpglobus-for-ultimate-member": {
+    "slug": "wpglobus-for-ultimate-member",
+    "loader": "wpglobus-for-ultimate-member.php",
+    "image_file": "https://wpglobus.com/app/uploads/2021/01/wpglobus-for-um-logo-400x400-1.png",
+    "order": 15
+  },
   "wpglobus-multilingual-notices": {
     "slug": "wpglobus-multilingual-notices",
     "loader": "wpglobus-multilingual-notices.php",
