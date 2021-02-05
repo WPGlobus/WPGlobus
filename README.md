@@ -303,6 +303,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.6.4 ###
+* (Core/Plugin Install) Added `WPGlobus for Ultimate Member` info box to the plugins list.
+* (Core/Post Types) Added  the `Popup Maker` plugin post types to the `"hidden types"` list.
+
 ### 2.6.3 ###
 * (Vendor/Yoast) Fixed issue with empty Open Graph description.
 * (Updater) Missing assets in the ZIP file.
@@ -325,33 +329,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.6.*
 * (Core) Revised filters on `widgets.php` page.
 * (Core/WidgetsJS) Code refactored for Image widgets.
-
-### 2.5.23 ###
-* (Vendor/Yoast) Fixed filter for the post title when post meta is empty.
-
-### 2.5.22 ###
-
-* (Vendor/Yoast) Added filters for the taxonomy title, description, Open Graph title and description.
-* (Vendor/Yoast) Fixed filter for the post title.
-
-### 2.5.21 ###
-
-* (Customizer) WPGlobus Customizer is switched off for the `NewYork City` theme.
-* (Customizer) CSS tweak for the `description` field.
-
-### 2.5.20 ###
-
-* (Core/Recommendations) Added admin notices about required versions of WordPress PHP.
-
-### 2.5.19 ###
-
-* (Options/Languages table) Added Georgian language and flag image.
-* (Vendor/Yoast) Added multilingual support for the fields in the Social tab.
-
-### 2.5.18 ###
-
-
-* (Builders/Pods) Fixed `Uncaught Error: Call to a member function fields() on bool`.
 
 ### Earlier versions and Add-ons ###
 
