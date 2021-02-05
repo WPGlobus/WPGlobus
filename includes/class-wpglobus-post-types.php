@@ -110,7 +110,10 @@ class WPGlobus_Post_Types {
 		'oceanwp_library',
 		// Ultimate Member – User Profile, User Registration, Login & Membership Plugin: https://wordpress.org/plugins/ultimate-member/ @since 2.6.2
 		'um_form',
-		'um_directory'
+		'um_directory',
+		// Popup Maker – Popup for opt-ins, lead gen, & more: https://wordpress.org/plugins/popup-maker/ @since 2.6.4
+		'popup',
+		'popup_theme'
 	);
 
 	/**
