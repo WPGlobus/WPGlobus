@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-02-05 - version 2.6.4
+* (Core/Plugin Install) Added `WPGlobus for Ultimate Member` info box to the plugins list.
+* (Core/Post Types) Added  the `Popup Maker` plugin post types to the `"hidden types"` list.
+
 2021-01-30 - version 2.6.3
 * (Vendor/Yoast) Fixed issue with empty Open Graph description.
 * (Updater) Missing assets in the ZIP file.
