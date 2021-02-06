@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-02-06 - version 2.6.5
+* (Core/Plugin Install) Added `WPGlobus Multilingual Popups` info box to the plugins list.
+* (Core/Post Types) Added  the `Popup Builder` plugin post types to the `"hidden types"` list.
+
 2021-02-05 - version 2.6.4
 * (Core/Plugin Install) Added `WPGlobus for Ultimate Member` info box to the plugins list.
 * (Core/Post Types) Added  the `Popup Maker` plugin post types to the `"hidden types"` list.
