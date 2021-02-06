@@ -303,6 +303,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.6.5 ###
+* (Core/Plugin Install) Added `WPGlobus Multilingual Popups` info box to the plugins list.
+* (Core/Post Types) Added  the `Popup Builder` plugin post types to the `"hidden types"` list.
+
 ### 2.6.4 ###
 * (Core/Plugin Install) Added `WPGlobus for Ultimate Member` info box to the plugins list.
 * (Core/Post Types) Added  the `Popup Maker` plugin post types to the `"hidden types"` list.
