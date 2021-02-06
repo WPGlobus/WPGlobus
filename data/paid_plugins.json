@@ -3,70 +3,76 @@
     "slug": "woocommerce-wpglobus",
     "loader": "woocommerce-wpglobus.php",
     "image_file": "woocommerce-wpglobus-logo-300x300.png",
-    "order": 100
+    "order": 120
   },
   "wpglobus-plus": {
     "slug": "wpglobus-plus",
     "loader": "wpglobus-plus.php",
     "image_file": "wpglobus-plus-logo-300x300.png",
-    "order": 90
+    "order": 110
   },
   "wpglobus-revslider": {
     "slug": "wpglobus-revslider",
     "loader": "wpglobus-revslider.php",
     "product_slug": "wpglobus-for-slider-revolution",
     "image_file": "wpglobus-revslider-logo-400x400.png",
-    "order": 60,
+    "order": 100,
 	"available": false
   },
   "wpglobus-language-widgets": {
     "slug": "wpglobus-language-widgets",
     "loader": "wpglobus-language-widgets.php",
     "image_file": "wpglobus-lw-logo-400x400.png",
-    "order": 50
+    "order": 90
   },
   "wpglobus-menu-visibility": {
     "slug": "wpglobus-menu-visibility",
     "loader": "wpglobus-menu-visibility.php",
     "image_file": "wpglobus-menu-visibility-logo.png",
-    "order": 40
+    "order": 80
   },
   "wpglobus-header-images": {
     "slug": "wpglobus-header-images",
     "loader": "wpglobus-header-images.php",
     "image_file": "wpglobus-hi-logo-400x400.png",
-    "order": 30
+    "order": 70
   },
   "wpglobus-mobile-menu": {
     "slug": "wpglobus-mobile-menu",
     "loader": "wpglobus-mobile-menu.php",
     "image_file": "wpglobus-mobile-menu-logo-400x400.png",
-    "order": 20
+    "order": 60
   },
   "wpglobus-for-ultimate-member": {
     "slug": "wpglobus-for-ultimate-member",
     "loader": "wpglobus-for-ultimate-member.php",
     "image_file": "https://wpglobus.com/app/uploads/2021/01/wpglobus-for-um-logo-400x400-1.png",
-    "order": 15
+    "order": 50
   },
+  "wpglobus-multilingual-popups": {
+    "slug": "wpglobus-multilingual-popups",
+    "loader": "wpglobus-multilingual-popups.php",
+    "image_file": "https://wpglobus.com/app/uploads/2021/02/wpglobus-ml-pop-400x400-1.png",
+    "order": 40
+  },  
   "wpglobus-multilingual-notices": {
     "slug": "wpglobus-multilingual-notices",
     "loader": "wpglobus-multilingual-notices.php",
     "image_file": "wpglobus-multilingual-notices-logo.png",
-    "order": 10
+    "order": 30
   },
   "wpglobus-for-bridge-theme": {
     "slug": "wpglobus-for-bridge-theme",
     "loader": "wpglobus-for-bridge-theme.php",
     "product_slug": "wpglobus-for-bridge-theme",
     "image_file": "wpglobus-for-bridge-theme-logo-400x400.png",
-    "order": 10
+    "order": 20
   },
   "woocommerce-nets-netaxept": {
     "slug": "woocommerce-nets-netaxept",
     "loader": "woocommerce-nets-netaxept.php",
     "product_slug": "multilingual-woocommerce-nets-netaxept",
     "image_file": "woocommerce-wpglobus-netaxeptcw-logo-300x300.jpg",
-    "order": 1
+    "order": 10
   }
 }
