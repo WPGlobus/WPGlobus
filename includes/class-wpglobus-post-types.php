@@ -113,7 +113,9 @@ class WPGlobus_Post_Types {
 		'um_directory',
 		// Popup Maker – Popup for opt-ins, lead gen, & more: https://wordpress.org/plugins/popup-maker/ @since 2.6.4
 		'popup',
-		'popup_theme'
+		'popup_theme',
+		// Popup Builder — Responsive WordPress Pop up: https://ru.wordpress.org/plugins/popup-builder/ @since 2.6.5
+		'popupbuilder'
 	);
 
 	/**
