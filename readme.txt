@@ -78,6 +78,9 @@ For more details, please check out the descriptions of each paid add-on on our w
 * [WPGlobus Mobile Menu](https://wpglobus.com/product/wpglobus-mobile-menu/): makes the WPGlobus language switcher menu compatible with mobile devices and narrow screens.
 * [WPGlobus for the "Bridge" theme](https://wpglobus.com/product/wpglobus-for-bridge-theme/): create different sliders for each language when using theme "Bridge".
 * [Multilingual WooCommerce Nets Netaxept](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/): with this add-on, you will be able to translate the Nets payment methods' titles and descriptions to multiple languages.
+* [WPGlobus for Ultimate Member](https://wpglobus.com/product/wpglobus-for-ultimate-member/): enables multilingual for all forms of the Ultimate Member (login, registration, user profile, etc), the Member Directories pages, the admin settings that are visible on frontend.
+* [WPGlobus Multilingual Popups](https://wpglobus.com/product/wpglobus-multilingual-popups/): enables multilingual support for the following plugins: Popup Maker – Popup for opt-ins, lead gen, & more; Popup Builder — Responsive WordPress Pop up.
+* [WPGlobus Multilingual Notices](https://wpglobus.com/product/wpglobus-multilingual-notices/): adds the multilanguage capabilities to various WordPress GDPR/cookie notifications plugins.
 
 = Compatibility with WordPress Themes =
 
