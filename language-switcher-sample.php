@@ -1,6 +1,7 @@
 <?php 
 /**
  * WPGlobus language switcher.
+ * Example 1: with using module `Publish` from WPGlobus Plus.
  */
 if ( class_exists( 'WPGlobus' ) ): ?>
 	<div class="wpglobus-selector-box">  <?php
@@ -28,4 +29,37 @@ if ( class_exists( 'WPGlobus' ) ): ?>
 		endforeach; ?>
 	  
    </div>  <?php 
-endif; ?>
+endif; 
+
+/**
+ * WPGlobus language switcher.
+ * Example 2: for two languages and active language is hidden.
+ */
+if ( class_exists( 'WPGlobus' ) ):
+
+	$wpglobus_language_image = array(
+		'en' => array( 
+			'src' => 'https://wetag.io/wp-content/plugins/language-icons-flags-switcher/img/english.png',
+			'alt' => 'English',
+			'title' => 'English'
+		),
+		'vi' => array( 
+			'src' => 'https://wetag.io/wp-content/plugins/language-icons-flags-switcher/img/Vietnam.png',
+			'alt' => 'Vietnam',
+			'title' => 'Vietnam'
+		)
+	);
+	echo '<div class="wpglobus-language-switcher">';
+	foreach( WPGlobus::Config()->enabled_languages as $language ) {
+		if ( $language == WPGlobus::Config()->language ) {
+			continue;
+		}
+		echo '<a href="' . WPGlobus_Utils::localize_current_url( $language ). '" class="">';
+		echo '<img alt="'.$wpglobus_language_image[$language]['alt'].'" title="'.$wpglobus_language_image[$language]['title'].'" src="'.$wpglobus_language_image[$language]['src'].'" />';
+		echo '</a>';
+	}
+	echo '</div>';
+	
+endif;  
+
+# --- EOF
