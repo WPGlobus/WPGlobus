@@ -115,7 +115,11 @@ class WPGlobus_Post_Types {
 		'popup',
 		'popup_theme',
 		// Popup Builder — Responsive WordPress Pop up: https://ru.wordpress.org/plugins/popup-builder/ @since 2.6.5
-		'popupbuilder'
+		'popupbuilder',
+		// Simple Custom CSS and JS: https://wordpress.org/plugins/custom-css-js/ @since 2.6.6
+		'custom-css-js',
+		// Content Blocks (Custom Post Widget): https://wordpress.org/plugins/custom-post-widget/ @since 2.6.6
+		'content_block',
 	);
 
 	/**
