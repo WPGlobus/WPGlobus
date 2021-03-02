@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPGlobus\Vendor
+ * @package WPGlobus\Vendors
  * 
  * We start this file to support the plugins/add-ons in builder mode.
  * @since 1.9.17
@@ -35,13 +35,15 @@ if ( defined( 'RANK_MATH_VERSION' ) ) {
 /**
  * ACF.
  * https://wordpress.org/plugins/advanced-custom-fields/
- * @todo W.I.P
+ * @since 2.6.6
  */
-/* 
-if ( $this->is_script_active('ACF') || $this->is_script_active('ACFPRO') ) {
-	require_once( dirname( __FILE__ ) . '/acf/class-wpglobus-acf.php' );
-	WPGlobus_Acf_1::get_instance();	
+if ( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] ) {
+	require_once( dirname( __FILE__ ) . '/acf/class-wpglobus-vendor-acf.php' );
+	WPGlobus_Vendor_Acf::get_instance( 
+		array(
+			'vendor_scripts' => $this->vendors_scripts
+		)
+	);
 }
-// */
 
 # --- EOF
