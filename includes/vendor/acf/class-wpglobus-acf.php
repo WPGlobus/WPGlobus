@@ -1,5 +1,7 @@
 <?php
 /**
+ * File: class-wpglobus-acf.php
+ *
  * @package WPGlobus\Vendor\ACF.
  *
  * @since 1.9.17
@@ -174,13 +176,67 @@ class WPGlobus_Acf_2 {
 			}
 		}
 
-		$_post_meta_fields = $_post_meta_fields_temp;
+		/**
+		 * @since 2.6.6
+		 */
+		$_post_meta_fields = self::handle_acf_fields( $_post_meta_fields_temp );
 
 		return $_post_meta_fields;
 	}
 
 	/**
+	 * @since 2.6.6
+	 *
+	 * @return array
+	 */
+	protected static function handle_acf_fields( $post_meta_fields ) {
+		
+		if ( ! empty( self::$acf_fields ) ) :
+		
+			if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) {
+				require_once( 'class-wpglobus-vendor-acf.php' );
+			}
+
+			$WPGlobus_Vendor_Acf = WPGlobus_Vendor_Acf::get_instance();
+			
+			$multilingual_field_name = $WPGlobus_Vendor_Acf::get_multilingual_field_name();
+		
+			$acf_fields = self::$acf_fields;
+
+			foreach( $acf_fields as $name=>$attrs ) {
+				
+				if ( empty( $name ) ) {
+					continue;
+				}
+				
+				if ( ! $WPGlobus_Vendor_Acf::is_enabled_field_type( $attrs['type'] ) ) {
+					/**
+					 * Remove field that has disabled type.
+					 */
+					unset( self::$acf_fields[$name] );
+					unset( self::$post_multilingual_fields[$name] );
+					unset( $post_meta_fields[$name] );
+					continue;	
+				}
+				
+				if ( isset( $attrs[ $multilingual_field_name ] ) && false == $attrs[ $multilingual_field_name ] ) {
+					/**
+					 * Remove field that had been checked as non-multilingual.
+					 */
+					unset( self::$acf_fields[$name] );
+					unset( self::$post_multilingual_fields[$name] );
+					unset( $post_meta_fields[$name] );
+				}			
+			}
+		
+		endif;
+
+		return $post_meta_fields;
+	}
+
+	/**
 	 * @since 2.1.11
+	 * @since 2.6.6 obsolete @see `self::$field_types` in Constructor (wpglobus\includes\vendor\acf\class-wpglobus-vendor-acf.php).
 	 *
 	 * @param array $field
 	 *
@@ -188,6 +244,11 @@ class WPGlobus_Acf_2 {
 	 */
 	protected static function get_3rd_party_field_status( $field ) {
 		
+		return true;
+		
+		/**
+		 * @todo Remove after testing.
+		 */
 		if ( function_exists('acf_table_load_plugin_textdomain') ) {
 			
 			/**
