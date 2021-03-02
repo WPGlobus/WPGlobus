@@ -16,13 +16,26 @@ jQuery(document).ready(function ($) {
     if (typeof WPGlobusAcf === 'undefined') {
         return;
     }
-    if (typeof WPGlobusDialogApp === 'undefined') {
-		return;
-	}
 
     var api = {
+		parseBool: function(b)  {
+			return !(/^(false|0)$/i).test(b) && !!b;
+		},
+        isPro: function(){
+			return api.parseBool( WPGlobusAcf.pro );
+		},
+        isBuilder: function(){
+			return api.parseBool( WPGlobusAcf.builder_id );
+		},
+		vendorAcfFields: null,
         option: {},
         init: function (args) {
+			
+			// @since 2.6.6
+			if ( api.isBuilder() && 'undefined' ===  typeof WPGlobusDialogApp ) {
+				return;
+			}
+			
             api.option = $.extend(api.option, args);
             if (api.option.pro) {
 				api.startAcf('.acf-field');
@@ -108,6 +121,11 @@ jQuery(document).ready(function ($) {
                         return true;
                     }
 
+					// @since 2.6.6
+                    if ( ! api.isVendorAcfField(id) ) {
+                        return true;
+                    }	
+
                     h = $('#' + id).height() + 20;
                     WPGlobusDialogApp.addElement({
                         id                  : id,
@@ -126,6 +144,11 @@ jQuery(document).ready(function ($) {
                     if (api.isDisabledField(id)) {
                         return true;
                     }
+
+					// @since 2.6.6					
+                    if ( ! api.isVendorAcfField(id) ) {
+                        return true;
+                    }					
 
                     WPGlobusDialogApp.addElement({
                         id           : id,
@@ -162,7 +185,48 @@ jQuery(document).ready(function ($) {
 		},
         getDisabledFields: function() {
 			return WPGlobusAcf.disabledFields;
-		},		
+		},
+        unificationField: function(field) {
+			// @since 2.6.6	
+			if ( /acf\[/.test(field) ) {
+				field = field.replace('[','-');
+				field = field.replace(']','');
+			}
+			return field;
+		},
+        getVendorAcfFields: function() {
+			// @since 2.6.6	
+			if ( api.vendorAcfFields === null ) {
+				if ( 'undefined' === typeof WPGlobusVendorAcfFields || '' == WPGlobusVendorAcfFields ) {
+					api.vendorAcfFields = false;
+					return api.vendorAcfFields;
+				}				
+				api.vendorAcfFields = WPGlobusVendorAcfFields.split(',');
+			}
+			return api.vendorAcfFields;
+		},
+        isVendorAcfField: function( field ) {
+			// @since 2.6.6
+			if ( 'undefined' === typeof field ) {
+				return false;
+			}
+			// We can receive here `field` in two forms
+			// 1. acf-field_5f8a8fd1c97f7
+			// 2. acf[field_5f8a8fd1c97f7]
+			field = api.unificationField(field);
+			var _result = false;
+			var _fields = api.getVendorAcfFields();
+			if ( ! _fields ) {
+				return _result;
+			}
+			$.each( _fields, function(i,_field){
+				if ( _field === field ) {
+					_result = true;
+					return false;
+				}
+			});
+			return _result;
+		},
         isRegisteredField: function(id) {
 			var registered = false;
 			api.getFields().forEach(function(elm) {
@@ -195,7 +259,5 @@ jQuery(document).ready(function ($) {
     }
 
     WPGlobusAcf = $.extend({}, WPGlobusAcf, api);
-
     WPGlobusAcf.init({'pro': WPGlobusAcf.pro});
-
 });
