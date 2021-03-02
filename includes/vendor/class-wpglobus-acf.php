@@ -1,6 +1,8 @@
 <?php
 /**
- * @package WPGlobus\ACF
+ * File: class-wpglobus-acf.php
+ *
+ * @package WPGlobus\Vendor\ACF.
  */
 
 /**
@@ -15,6 +17,10 @@ class WPGlobus_Acf {
 	 */
 	public function __construct() {
 
+		/**
+		 * obsolete @since 2.6.6 
+		 * @todo Remove after testing.
+		 */
 		add_filter(
 			'acf/field_group/get_options',
 			array(
