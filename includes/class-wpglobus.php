@@ -352,6 +352,14 @@ class WPGlobus {
 						$class_update_post = "WPGlobus_${id}_Update_Post";
 						new $class_update_post();
 						//						new WPGlobus_Update_Post();
+					} else {
+						/**
+						 * @since 2.6.6
+						 */
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							$_short_file = 'builders/' . $id . '/class-wpglobus-' . $id . '-update-post.php';
+							error_log( print_r( '['.basename(__FILE__).']:: File `' . $_short_file . '` was expected in `' . __CLASS__ . '` class.' , true ) );
+						}		
 					}
 				}
 			}
@@ -536,6 +544,14 @@ class WPGlobus {
 						require_once 'admin/media/wpglobus-media.php';
 
 						return;
+					} else {
+						/**
+						 * @since 2.6.6
+						 */
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							$_short_file = 'builders/' . self::Config()->builder->get_id() . '/class-wpglobus-' . self::Config()->builder->get_id() . '.php';
+							error_log( print_r( '['.basename(__FILE__).']:: File `' . $_short_file . '` was expected in `' . __CLASS__ . '` class.' , true ) );
+						}						
 					}
 				}
 			}
