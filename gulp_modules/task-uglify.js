@@ -9,17 +9,23 @@ const task_uglify = cb => {
 	const pump = require('pump');
 	const babel = require('gulp-babel');
 
-	pump([
-			src([
-				"includes/builders/assets/*.js",
-				"!includes/**/*.min.js"
-			]),
-			uglify(),
-			rename({suffix: ".min"}),
-			dest("includes/builders/assets"),
-			print()
-		],
-	);
+	const paths_to_process = [
+		"includes/vendor",
+		"includes/builders/assets",
+		"includes/builders/gutenberg/assets/js/dist",
+		cfg.path.js
+	];
+
+	paths_to_process.forEach(function (path_js) {
+		pump([
+				src([`${path_js}/**/*.js`, `!${path_js}/**/*.min.js`], {base: path_js}),
+				uglify(),
+				rename({suffix: ".min"}),
+				dest(path_js),
+				print()
+			],
+		);
+	});
 
 	pump([
 			src([
@@ -32,31 +38,8 @@ const task_uglify = cb => {
 			dest("includes/builders/gutenberg/assets/js"),
 			print()
 		],
-	);
-
-	pump([
-			src([
-				"includes/builders/gutenberg/assets/js/dist/*.js",
-				"!includes/**/*.min.js"
-			]),
-			uglify(),
-			rename({suffix: ".min"}),
-			dest("includes/builders/gutenberg/assets/js/dist"),
-			print()
-		],
-	);
-
-	pump([
-			src([cfg.path.js + "/**/*.js", "!" + cfg.path.js + "/**/*.min.js"]),
-			uglify(),
-			rename({suffix: ".min"}),
-			dest(cfg.path.js),
-			print()
-		],
 		cb
 	);
 };
 
 module.exports = task_uglify;
-
-
