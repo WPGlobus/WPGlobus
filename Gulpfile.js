@@ -1,6 +1,8 @@
 const
 	{series} = require("gulp"),
 	bump = require("./gulp_modules/task-bump"),
+	bump_minor = require("./gulp_modules/task-bump-minor"),
+	bump_major = require("./gulp_modules/task-bump-major"),
 	readme = require("./gulp_modules/task-readme"),
 	replace_version = require("./gulp_modules/task-replace-version"),
 	make_pot = series(replace_version, require("./gulp_modules/task-pot")),

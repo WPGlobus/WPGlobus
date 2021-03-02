@@ -16,6 +16,7 @@ const task_pot = cb => {
 			src([
 				"**/*.php",
 				"!**/*Test.php",
+				"!node_modules/**/*",
 				"!wpsvn/**/*",
 				"!vendor/**/*"
 			]),
