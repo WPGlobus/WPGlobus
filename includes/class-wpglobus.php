@@ -625,25 +625,34 @@ class WPGlobus {
 						}
 					}
 				}
-				
+	
+				/**
+				 * @since 2.6.6
+				 */
+				if (
+					( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] )
+					&& WPGlobus_WP::is_pagenow(
+						array(
+							'post.php',
+							'post-new.php',
+						)
+					)
+				) {
+					require_once( 'vendor/acf/class-wpglobus-vendor-acf.php' );
+					WPGlobus_Vendor_Acf::get_instance( 
+						array(
+							'vendor_scripts' => $this->vendors_scripts
+						)
+					);					
+					require_once 'vendor/class-wpglobus-acf.php';
+					$WPGlobus_acf = new WPGlobus_Acf();
+				}
+	
 				/**
 			     * @since 2.2.22
 				 */
 				require_once 'admin/media/wpglobus-media.php';
 
-			}    // endif $devmode
-
-			if (
-				( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] )
-				&& WPGlobus_WP::is_pagenow(
-					array(
-						'post.php',
-						'post-new.php',
-					)
-				)
-			) {
-				require_once 'vendor/class-wpglobus-acf.php';
-				$WPGlobus_acf = new WPGlobus_Acf();
 			}
 
 			add_action( 'admin_menu', array(
@@ -2022,64 +2031,9 @@ class WPGlobus {
 			);
 
 			/**
-			 * Enqueue js for ACF support
+			 * Enqueue js for ACF support.
+			 * @since 2.6.6 Code moved to `includes\vendor\acf\class-wpglobus-vendor-acf.php`.
 			 */
-			if (
-				( $this->vendors_scripts['ACF'] || $this->vendors_scripts['ACFPRO'] )
-				&& in_array( $page, array( 'post.php', 'post-new.php' )
-				)
-			) {
-
-				/**
-				 * Filter to disable translation of selected ACF and ACF Pro fields.
-				 *
-				 * @since 1.5.0
-				 *
-				 * To exclude field in ACF plugin you need to use the field name from Field Group ( usually wp-admin/edit.php?post_type=acf ).
-				 * To exclude field in ACF Pro plugin you need to use id, see Wrapper Attributes section on field's edit page.
-				 *
-				 * @param array   $disabled_fields Default is empty array.
-				 * @param boolean $is_acf_pro      Type of ACF plugin.
-				 *
-				 * @return array
-				 */
-				$disabled_fields = apply_filters( 'wpglobus_disabled_acf_fields', array(), $this->vendors_scripts['ACFPRO'] );
-
-				/**
-				 * @since 2.2.1
-				 * @todo may be add filter for $actions array.
-				 */
-				$actions = array(
-					'fixTextFields' => false
-				);
-				if ( defined('ACF_VERSION') ) {
-					if ( version_compare( ACF_VERSION, '5.8.0', '>=' ) ) {
-						$actions['fixTextFields'] = true;
-					}
-				}
-
-				wp_register_script(
-					'wpglobus-acf',
-					self::$PLUGIN_DIR_URL . 'includes/js/wpglobus-vendor-acf' . self::$_SCRIPT_SUFFIX . '.js',
-					array( 'jquery', 'wpglobus-admin' ),
-					WPGLOBUS_VERSION,
-					true
-				);
-				wp_enqueue_script( 'wpglobus-acf' );
-				wp_localize_script(
-					'wpglobus-acf',
-					'WPGlobusAcf',
-					array(
-						'wpglobus_version' => WPGLOBUS_VERSION,
-						'pro'              => $this->vendors_scripts['ACFPRO'] ? true : false,
-						'acf_version'      => defined('ACF_VERSION') ? ACF_VERSION : false,
-						'actions'      	   => $actions,
-						'fields'           => array(),
-						'disabledFields'   => $disabled_fields
-					)
-				);
-
-			}
 
 			if ( 'widgets.php' == $page ) {
 
@@ -3507,7 +3461,7 @@ class WPGlobus {
 				}
 			endforeach;
 
-		endif;  //  $devmode
+		endif;  // end ! $devmode.
 
 		if ( ! $has_extra_post_title ) {
 			$data['post_title'] = $post_title;
