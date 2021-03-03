@@ -1,5 +1,5 @@
-# Copyright (C) 2020 WPGlobus 2.6.0
-# This file is distributed under the same license as the WPGlobus 2.6.0 package.
+# Copyright (C) 2021 WPGlobus 2.6.6
+# This file is distributed under the same license as the WPGlobus 2.6.6 package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2015-2020
 # Irina Fedulova <istartlin@gmail.com>, 2020
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-12-22 18:27+0000\n"
+"PO-Revision-Date: 2021-03-03 02:25+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -1375,6 +1375,17 @@ msgstr ""
 
 msgid "Get WPGlobus Plus now!"
 msgstr "Установите WPGlobus Плюс прямо сейчас!"
+
+#. translators: %s are for A tags.
+msgid "Use as multilingual with %1$sWPGlobus%2$s"
+msgstr "Использовать как многоязычное с %1$sWPGlobus%2$s"
+
+msgid "Multilingual"
+msgstr "Многоязычное"
+
+#. translators: %s are for A tags.
+msgid "To use this field, please activate the %1$sACF Plus%2$s module"
+msgstr "Для использования поля нужно активировать модуль %1$sACF Plus%2$s"
 
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "

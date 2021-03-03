@@ -220,6 +220,16 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.6.6 =
+* (Core) If a builder's file is missing, write a message to the webserver error log file (in `WP_DEBUG` mode only).
+* (Core/ACF) Revised loading `WPGlobus_Acf` and `WPGlobus_Vendor_Acf` classes.
+* (Core/Post Types) Added  the `Simple Custom CSS and JS`, `Content Blocks (Custom Post Widget)` plugins' post types to the `"hidden types"` list.
+* (Vendors) Added ACF support.
+* (Vendor/ACF) Updated doc.
+* (Vendor/ACF) Revised `WPGlobus_Acf_2` class.
+* (Vendor/ACF) Added `WPGlobus_Vendor_Acf` class.
+* (Vendor/ACF) Updated JS.
+
 = 2.6.5 =
 * (Core/Plugin Install) Added `WPGlobus Multilingual Popups` info box to the plugins list.
 * (Core/Post Types) Added  the `Popup Builder` plugin post types to the `"hidden types"` list.

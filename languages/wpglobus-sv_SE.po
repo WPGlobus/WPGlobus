@@ -1,5 +1,5 @@
-# Copyright (C) 2020 WPGlobus 2.6.0
-# This file is distributed under the same license as the WPGlobus 2.6.0 package.
+# Copyright (C) 2021 WPGlobus 2.6.6
+# This file is distributed under the same license as the WPGlobus 2.6.6 package.
 # Translators:
 # e314000eb7822ddff37f90aedba9a07c_cdf5e13 <3d5ba02b5c1e3beabe9eb3fc79749b38_312842>, 2015
 # e314000eb7822ddff37f90aedba9a07c_cdf5e13 <3d5ba02b5c1e3beabe9eb3fc79749b38_312842>, 2015
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2020-12-22 18:27+0000\n"
+"PO-Revision-Date: 2021-03-03 02:24+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/sv_SE/)\n"
@@ -1249,6 +1249,17 @@ msgstr ""
 
 msgid "Get WPGlobus Plus now!"
 msgstr "Hämta WPGlobus Plus nu!"
+
+#. translators: %s are for A tags.
+msgid "Use as multilingual with %1$sWPGlobus%2$s"
+msgstr ""
+
+msgid "Multilingual"
+msgstr ""
+
+#. translators: %s are for A tags.
+msgid "To use this field, please activate the %1$sACF Plus%2$s module"
+msgstr ""
 
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "

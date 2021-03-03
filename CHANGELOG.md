@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2021-03-02 - version 2.6.6
-* (Core) If builder's file is missing, then output message in log file in debug mode.
+* (Core) If a builder's file is missing, write a message to the webserver error log file (in `WP_DEBUG` mode only).
 * (Core/ACF) Revised loading `WPGlobus_Acf` and `WPGlobus_Vendor_Acf` classes.
 * (Core/Post Types) Added  the `Simple Custom CSS and JS`, `Content Blocks (Custom Post Widget)` plugins' post types to the `"hidden types"` list.
 * (Vendors) Added ACF support.

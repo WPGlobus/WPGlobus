@@ -254,16 +254,16 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 			}
 	
 			$_instructions = sprintf( // translators: %s are for A tags.
-				esc_html__( 'Использовать как многоязычное с %1$sWPGlobus%2$s', 'wpglobus' ),
+				esc_html__( 'Use as multilingual with %1$sWPGlobus%2$s', 'wpglobus' ),
 				'<a href="#" target="_blank">',
 				'</a>'
 			);
 			
 			/**
-			 * @see advanced-custom-fields\includes\acf-field-functions.php
+			 * @see advanced-custom-fields/includes/acf-field-functions.php
 			 */
 			acf_render_field_setting( $field, array(
-				'label'			=> esc_html__( 'Многоязычное', 'wpglobus' ),
+				'label'			=> esc_html__( 'Multilingual', 'wpglobus' ),
 				'instructions'	=> $_instructions,
 				'name'			=> $_name,
 				'type'			=> 'true_false',
@@ -273,9 +273,9 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 		}
 
 		/**
-		 * Check if field is mutlilingual.
+		 * Check if field is multilingual.
 		 *
-		 * @param $field Field array.
+		 * @param array $field Field array.
 		 *
 		 * return boolean
 		 */		
@@ -481,7 +481,7 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 			
 			$l10n = array();
 			$l10n['wysiwyg-pretender-tip'] = sprintf( // translators: %s are for A tags.
-				esc_html__( 'Для использования поля нужно активировать модуль %1$sACF Plus%2$s', 'wpglobus' ),
+				esc_html__( 'To use this field, please activate the %1$sACF Plus%2$s module', 'wpglobus' ),
 				'<a href="'.WPGlobus::URL_WPGLOBUS_SHOP.'wpglobus-plus/#acf" target="_blank" style="text-decoration:underline">',
 				'</a>'
 			);
