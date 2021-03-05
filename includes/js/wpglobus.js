@@ -30,9 +30,16 @@ jQuery(document).ready(function ($) {
             });
         }
 
-        wpCookies.set('wpglobus-language-old', WPGlobus.language, 31536000, '/');
-
-        wpCookies.set('wpglobus-language', WPGlobus.language, 31536000, '/');
+        /**
+         * wpCookies does not have the SameSite option. Replacing with document.cookie.
+         * @since 2.6.7
+         */
+        var cookie_secure = (document.location.protocol === 'https:') ? ';secure' : '';
+        var cookie_settings = ";path=/;max-age=31536000;samesite=strict" + cookie_secure;
+        document.cookie = "wpglobus-language-old=" + WPGlobus.language + cookie_settings;
+        document.cookie = "wpglobus-language=" + WPGlobus.language + cookie_settings;
+        // wpCookies.set('wpglobus-language-old', WPGlobus.language, 31536000, '/');
+        // wpCookies.set('wpglobus-language', WPGlobus.language, 31536000, '/');
 
         /**
          * Add hash (`#`) to the menu items when the current URL has it.
