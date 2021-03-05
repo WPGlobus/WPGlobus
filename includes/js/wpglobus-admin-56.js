@@ -1001,9 +1001,14 @@ jQuery(document).ready(function () {
 				elements[0] = 'name';
 				elements[1] = 'description';
 
-				var make_clone = function(id,language){
-					var $element = $('#'+id),
-						clone = $element.clone(),
+				var makeClone = function(id,language){
+					var $element = $('#'+id);
+					
+					if ( $element.length != 1 ) {
+						return false;
+					}
+					
+					var	clone = $element.clone(),
 						name = $element.attr('name'),
 						classes = 'wpglobus-element wpglobus-element_'+id+' wpglobus-element_'+language+' wpglobus-translatable',
 						node;
@@ -1029,11 +1034,12 @@ jQuery(document).ready(function () {
 					} else {
 						$(clone).insertAfter($('.wpglobus-element_'+id).last());
 					}
+					return true;
 				};
 
 				$.each(WPGlobusCoreData.enabled_languages, function(i,l){
 					$.each(elements, function(i,e){
-						make_clone(e,l);
+						makeClone(e,l);
 					});
 				});
 
