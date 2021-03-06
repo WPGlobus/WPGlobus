@@ -4,6 +4,7 @@
 
 2021-03-05 - version 2.6.7
 * (Core/JS) Fixed `Uncaught TypeError: Cannot read property nodeName of null`.
+* (Core/JS) Tweak: Frontend cookies set with `SameSite=strict` attribute.
 
 2021-03-02 - version 2.6.6
 * (Core) If a builder's file is missing, write a message to the webserver error log file (in `WP_DEBUG` mode only).

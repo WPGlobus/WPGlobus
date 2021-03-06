@@ -309,6 +309,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.6.7 ###
+
+* (Core/JS) Fixed `Uncaught TypeError: Cannot read property nodeName of null`.
+
+* (Core/JS) Tweak: Frontend cookies set with `SameSite=strict` attribute.
+
 ### 2.6.6 ###
 * (Core) If a builder's file is missing, write a message to the webserver error log file (in `WP_DEBUG` mode only).
 * (Core/ACF) Revised loading `WPGlobus_Acf` and `WPGlobus_Vendor_Acf` classes.
@@ -326,29 +332,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 ### 2.6.4 ###
 * (Core/Plugin Install) Added `WPGlobus for Ultimate Member` info box to the plugins list.
 * (Core/Post Types) Added  the `Popup Maker` plugin post types to the `"hidden types"` list.
-
-### 2.6.3 ###
-* (Vendor/Yoast) Fixed issue with empty Open Graph description.
-* (Updater) Missing assets in the ZIP file.
-
-### 2.6.2 ###
-* (Core) Added `wpglobus_show_title_fields` filter.
-* (Core/Post Types) Added  the `Ultimate Member` plugin post types to the `"hidden types"` list.
-
-### 2.6.1 ###
-* (Core/Options) Added handling of actions for the tabs.
-* (Core/Controller) Added filter `googlesitekit_canonical_home_url`.
-
-* (Core/WP_Options) Fixed PHP Notice: `Array to string conversion`.
-* (Core/Plugin Install) Fixed `uasort` warning.
-* (Core) Code clean-up.
-* (Vendor/RankMathSEO) Typo.
-* (Core/Updater) Updater v.1.0.10.
-
-### 2.6.0 ###
-* (Compatibility) Admin and Builders JavaScript code refactored to work with WordPress 5.6.*
-* (Core) Revised filters on `widgets.php` page.
-* (Core/WidgetsJS) Code refactored for Image widgets.
 
 ### Earlier versions and Add-ons ###
 

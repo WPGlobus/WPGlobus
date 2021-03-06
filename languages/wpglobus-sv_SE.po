@@ -1,5 +1,5 @@
-# Copyright (C) 2021 WPGlobus 2.6.6
-# This file is distributed under the same license as the WPGlobus 2.6.6 package.
+# Copyright (C) 2021 WPGlobus 2.6.7
+# This file is distributed under the same license as the WPGlobus 2.6.7 package.
 # Translators:
 # e314000eb7822ddff37f90aedba9a07c_cdf5e13 <3d5ba02b5c1e3beabe9eb3fc79749b38_312842>, 2015
 # e314000eb7822ddff37f90aedba9a07c_cdf5e13 <3d5ba02b5c1e3beabe9eb3fc79749b38_312842>, 2015
