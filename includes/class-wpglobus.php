@@ -4163,14 +4163,13 @@ class WPGlobus {
 
 		if ( ! empty( $js ) ) {
 			$js = wp_kses( $js, array() );
-			$js = str_replace( array( '&gt;', '&lt;' ), array( '>', '<' ), $js );
+			$js = str_replace( array( '&gt;', '&lt;', '&quot;', '&#039;' ), array( '>', '<', '"', "'" ), $js );
 			?>
 			<script type="text/javascript">
 				<?php echo $js; // phpcs:ignore WordPress.XSS.EscapeOutput ?>
 			</script>
 			<?php
 		}
-
 	}
 
 	/**
