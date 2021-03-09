@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-03-09 - version 2.6.8
+* (Core) Added HTML entities to convert in JS.
+
 2021-03-05 - version 2.6.7
 * (Core/JS) Fixed `Uncaught TypeError: Cannot read property nodeName of null`.
 * (Core/JS) Tweak: Frontend cookies set with `SameSite=strict` attribute.
