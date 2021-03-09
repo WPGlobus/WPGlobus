@@ -291,15 +291,8 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 
 ## Screenshots ##
 
-1. The Welcome screen.
-2. Settings panel.
-3. Languages setup.
-4. Attaching language switcher to a menu.
-5. Editing post in multiple languages.
-6. Multilingual Yoast SEO and Featured Images.
-7. Language Switcher widget and Multilingual Editor dialog.
 
-8. Multilingual WooCommerce store powered by [WooCommerce WPGlobus](https://wpglobus.com/product/woocommerce-wpglobus/).
+https://wordpress.org/plugins/wpglobus/#screenshots
 
 ## Upgrade Notice ##
 
@@ -308,6 +301,9 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.6.8 ###
+* (Core) Added HTML entities to convert in JS.
 
 ### 2.6.7 ###
 

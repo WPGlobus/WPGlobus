@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.6.8 =
+* (Core) Added HTML entities to convert in JS.
+
 = 2.6.7 =
 * (Core/JS) Fixed `Uncaught TypeError: Cannot read property nodeName of null`.
 * (Core/JS) Tweak: Frontend cookies set with `SameSite=strict` attribute.
