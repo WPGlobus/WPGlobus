@@ -717,6 +717,13 @@ class WPGlobus_YoastSEO {
 				 */
 				$description = self::get_taxonomy_meta( $presentation->model->object_sub_type, $presentation->model->object_id, 'wpseo_desc' );
 
+				/**
+				 * @since 2.7.0
+				 */
+				if ( empty($description) ) {
+					$description = self::get_option( 'wpseo_titles', 'metadesc-tax-' . $presentation->model->object_sub_type );
+				}
+				
 				if ( empty($description) ) {
 					$meta_description_presenter_was_fired = true;
 				} else {
