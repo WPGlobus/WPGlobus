@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+2021-04-01 - version 2.7.0
+* (Compatibility) Tested up to WordPress 5.7
+* (Core/Post Types) Added  the `SlidersPack` plugin post type to the `"hidden types"` list.
+* (Vendor/Yoast) Fixed issue with empty taxonomy meta description.
+
 2021-03-09 - version 2.6.8
 * (Core) Added HTML entities to convert in JS.
 
