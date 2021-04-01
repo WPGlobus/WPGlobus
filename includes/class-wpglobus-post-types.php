@@ -120,6 +120,8 @@ class WPGlobus_Post_Types {
 		'custom-css-js',
 		// Content Blocks (Custom Post Widget): https://wordpress.org/plugins/custom-post-widget/ @since 2.6.6
 		'content_block',
+		// SlidersPack – All In One Image/Post Slider: https://wordpress.org/plugins/sliderspack-all-in-one-image-sliders/ @since 2.7.0
+		'wpspaios_slider',
 	);
 
 	/**
