@@ -15,6 +15,8 @@ const
 ;
 
 exports.bump = bump;
+exports.bump_minor = bump_minor;
+exports.bump_major = bump_major;
 exports.readme = readme;
 exports.replace_version = replace_version;
 exports.pot = pot;

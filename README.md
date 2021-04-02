@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 5.5
 
-Tested up to: 5.6
+Tested up to: 5.7
 
 Requires PHP: 5.6
 
@@ -302,6 +302,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.7.0 ###
+* (Compatibility) Tested up to WordPress 5.7
+* (Core/Post Types) Added  the `SlidersPack` plugin post type to the `"hidden types"` list.
+* (Vendor/Yoast) Fixed issue with empty taxonomy meta description.
+
 ### 2.6.8 ###
 * (Core) Added HTML entities to convert in JS.
 
@@ -320,14 +325,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Vendor/ACF) Revised `WPGlobus_Acf_2` class.
 * (Vendor/ACF) Added `WPGlobus_Vendor_Acf` class.
 * (Vendor/ACF) Updated JS.
-
-### 2.6.5 ###
-* (Core/Plugin Install) Added `WPGlobus Multilingual Popups` info box to the plugins list.
-* (Core/Post Types) Added  the `Popup Builder` plugin post types to the `"hidden types"` list.
-
-### 2.6.4 ###
-* (Core/Plugin Install) Added `WPGlobus for Ultimate Member` info box to the plugins list.
-* (Core/Post Types) Added  the `Popup Maker` plugin post types to the `"hidden types"` list.
 
 ### Earlier versions and Add-ons ###
 
