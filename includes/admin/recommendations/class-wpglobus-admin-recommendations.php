@@ -189,7 +189,7 @@ class WPGlobus_Admin_Recommendations {
 			return;
 		}
 
-		$container_start = '<p id="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
+		$container_start = '<p class="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
 		$container_end   = '</p>';
 
 		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
