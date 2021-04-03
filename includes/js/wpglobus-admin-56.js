@@ -262,13 +262,18 @@ var WPGlobusDialogApp;
 				 */
 				return false;
 			}
+			
+			/**
+			 * @since 2.7.1
+			 * Omit element name checking to using elements with the same `name` to make it as multilingual.
+			 */
+			/* 
 			if ( $( nodeName+'[name="wpglobus-'+name+'"]' ).length > 0 ) {
-				/**
-				 * WPGlobus element exists already.
-				 */
+				// WPGlobus element exists already.
 				return false;
 			}
-
+			// */
+			
 			clone = $( $element.clone() );
 			//$element.addClass('hidden');
 			style = $element.attr('style') || '';
