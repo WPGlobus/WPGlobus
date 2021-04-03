@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-04-03 - version 2.7.1
+* (Core/Recommendations) Using `class` instead of `id` for recommendation box.
+* (Core/JS) Omit element name checking to using elements with the same `name` to make it as multilingual.
+
 2021-04-01 - version 2.7.0
 * (Compatibility) Tested up to WordPress 5.7
 * (Core/Post Types) Added  the `SlidersPack` plugin post type to the `"hidden types"` list.
