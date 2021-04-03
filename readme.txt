@@ -220,6 +220,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.1 =
+* (Core/Recommendations) Using `class` instead of `id` for recommendation box.
+* (Core/JS) Omit element name checking to using elements with the same `name` to make it as multilingual.
+
 = 2.7.0 =
 * (Compatibility) Tested up to WordPress 5.7
 * (Core/Post Types) Added  the `SlidersPack` plugin post type to the `"hidden types"` list.
@@ -231,16 +235,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.6.7 =
 * (Core/JS) Fixed `Uncaught TypeError: Cannot read property nodeName of null`.
 * (Core/JS) Tweak: Frontend cookies set with `SameSite=strict` attribute.
-
-= 2.6.6 =
-* (Core) If a builder's file is missing, write a message to the webserver error log file (in `WP_DEBUG` mode only).
-* (Core/ACF) Revised loading `WPGlobus_Acf` and `WPGlobus_Vendor_Acf` classes.
-* (Core/Post Types) Added  the `Simple Custom CSS and JS`, `Content Blocks (Custom Post Widget)` plugins' post types to the `"hidden types"` list.
-* (Vendors) Added ACF support.
-* (Vendor/ACF) Updated doc.
-* (Vendor/ACF) Revised `WPGlobus_Acf_2` class.
-* (Vendor/ACF) Added `WPGlobus_Vendor_Acf` class.
-* (Vendor/ACF) Updated JS.
 
 = Earlier versions and Add-ons =
 
