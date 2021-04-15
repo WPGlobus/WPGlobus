@@ -153,14 +153,12 @@ if (
 	require_once dirname( __FILE__ ) . '/vendor/tivwp/updater/updater.php';
 }
 
-
 /**
  * WPGlobus Post Types
  *
  * @since   1.9.10
  */
 require_once dirname( __FILE__ ) . '/includes/class-wpglobus-post-types.php';
-
 
 /**
  * In admin area
@@ -208,6 +206,20 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	if ( ! defined( 'WPGLOBUS_RECOMMENDATIONS' ) || WPGLOBUS_RECOMMENDATIONS ) {
 		require_once dirname( __FILE__ ) . '/includes/admin/recommendations/class-wpglobus-admin-recommendations.php';
 		WPGlobus_Admin_Recommendations::setup_hooks();
+	}
+
+	/**
+	 * WPGlobus with Gutenberg widgets block editor.
+	 * To disable, put this to wp-config:
+	 * define( 'WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR', false );
+	 *
+	 * @since 2.7.2
+	 */
+	if ( ! defined('WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR') || WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR ) {
+		if ( defined('GUTENBERG_VERSION') ) {
+			require_once dirname( __FILE__ ) . '/includes/admin/gutenberg/class-wpglobus-admin-gutenberg.php';
+			WPGlobus_Admin_Gutenberg::construct();
+		}
 	}
 
 endif;
