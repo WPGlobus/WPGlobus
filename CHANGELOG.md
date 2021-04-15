@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-04-15 - version 2.7.2
+* (Core/Gutenberg) Activated access to the standard widgets edit page when Gutenberg plugin is active.
+
 2021-04-03 - version 2.7.1
 * (Core/Recommendations) Using `class` instead of `id` for recommendation box.
 * (Core/JS) Omit element name checking to using elements with the same `name` to make it as multilingual.
