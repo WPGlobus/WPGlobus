@@ -302,6 +302,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.7.2 ###
+* (Core/Gutenberg) Activated access to the standard widgets edit page when Gutenberg plugin is active.
+
 ### 2.7.1 ###
 * (Core/Recommendations) Using `class` instead of `id` for recommendation box.
 * (Core/JS) Omit element name checking to using elements with the same `name` to make it as multilingual.
@@ -310,15 +313,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Compatibility) Tested up to WordPress 5.7
 * (Core/Post Types) Added  the `SlidersPack` plugin post type to the `"hidden types"` list.
 * (Vendor/Yoast) Fixed issue with empty taxonomy meta description.
-
-### 2.6.8 ###
-* (Core) Added HTML entities to convert in JS.
-
-### 2.6.7 ###
-
-* (Core/JS) Fixed `Uncaught TypeError: Cannot read property nodeName of null`.
-
-* (Core/JS) Tweak: Frontend cookies set with `SameSite=strict` attribute.
 
 ### Earlier versions and Add-ons ###
 

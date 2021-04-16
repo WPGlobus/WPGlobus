@@ -1,8 +1,8 @@
-# Copyright (C) 2021 WPGlobus 2.7.1
-# This file is distributed under the same license as the WPGlobus 2.7.1 package.
+# Copyright (C) 2021 WPGlobus 2.7.2
+# This file is distributed under the same license as the WPGlobus 2.7.2 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.7.1\n"
+"Project-Id-Version: WPGlobus 2.7.2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -415,6 +415,9 @@ msgstr ""
 
 #. translators: placeholders are for the HTML tags.
 msgid "If you have already purchased a WPGlobus premium extension, please read %1$sthe installation instructions here%2$s"
+msgstr ""
+
+msgid "Widgets with WPGlobus"
 msgstr ""
 
 msgid "Help Desk"

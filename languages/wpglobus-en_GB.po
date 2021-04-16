@@ -1,5 +1,5 @@
-# Copyright (C) 2021 WPGlobus 2.6.7
-# This file is distributed under the same license as the WPGlobus 2.6.7 package.
+# Copyright (C) 2021 WPGlobus 2.7.2
+# This file is distributed under the same license as the WPGlobus 2.7.2 package.
 # Translators:
 # Andi Chandler <andi@gowling.com>, 2017
 # Gregory Karpinsky <gregory@tiv.net>, 2017
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2021-03-03 02:24+0000\n"
+"PO-Revision-Date: 2021-04-16 11:56+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/en_GB/)\n"
@@ -562,6 +562,9 @@ msgstr "Get it now!"
 msgid ""
 "If you have already purchased a WPGlobus premium extension, please read "
 "%1$sthe installation instructions here%2$s"
+msgstr ""
+
+msgid "Widgets with WPGlobus"
 msgstr ""
 
 msgid "Help Desk"
