@@ -348,6 +348,16 @@ class WPGlobus_YoastSEO {
 			}
 		
 			$description = wpseo_replace_vars( $__desc, $presentation->source );	
+		
+		} elseif ( 'home-page' == $presentation->model->object_type ) {
+			
+			/**
+			 * When homepage displays latest post.
+			 * @since 2.7.3
+			 */
+			if ( WPGlobus_Core::has_translations($description) ) {
+				$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
+			}
 		}
 
 		return $description;
@@ -730,6 +740,25 @@ class WPGlobus_YoastSEO {
 					$description = wpseo_replace_vars( $description, $presentation->source );
 				}
 			}
+			
+		} elseif ( 'home-page' == $presentation->model->object_type ) {
+			
+			/**
+			 * When homepage displays latest post.
+			 * @since 2.7.3
+			 * 
+			 * We get description from
+			 *   1. Meta Description ('metadesc-home-wpseo') option @see tab General, page wp-admin/admin.php?page=wpseo_titles
+			 *   	or
+			 *   2. Tagline from General Settings page, if Meta Description is empty.
+			 */
+			$description = $presentation->model->description;
+			
+			if ( WPGlobus_Core::has_translations($description) ) {
+				$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
+			}
+
+			$description = wpseo_replace_vars( $description, $presentation->source );
 		}
 	
 		/**
@@ -1507,6 +1536,16 @@ class WPGlobus_YoastSEO {
 			$graph_piece['url'] 		= WPGlobus_Utils::localize_url( $graph_piece['url'], WPGlobus::Config()->language );
 			$graph_piece['@id'] 		= WPGlobus_Utils::localize_url( $graph_piece['@id'], WPGlobus::Config()->language );
 			$graph_piece['breadcrumb']['@id'] = WPGlobus_Utils::localize_url( $graph_piece['breadcrumb']['@id'], WPGlobus::Config()->language );
+		
+		} elseif ( 'home-page' == $context->indexable->object_type ) {
+		
+			/**
+			 * When homepage displays latest post.
+			 * @since 2.7.3
+			 */
+			if ( ! empty( $graph_piece['description'] ) && WPGlobus_Core::has_translations( $graph_piece['description'] ) ) {
+				$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
+			}	
 		}
 
 		return $graph_piece;
