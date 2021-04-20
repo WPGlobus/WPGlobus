@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.3 =
+* (Vendor/Yoast) Fixed issue with meta description when homepage displays latest posts.
+
 = 2.7.2 =
 * (Core/Gutenberg) Activated access to the standard widgets edit page when Gutenberg plugin is active.
 
