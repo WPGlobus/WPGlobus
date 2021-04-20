@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-04-20 - version 2.7.3
+* (Vendor/Yoast) Fixed issue with meta description when homepage displays latest posts.
+
 2021-04-15 - version 2.7.2
 * (Core/Gutenberg) Activated access to the standard widgets edit page when Gutenberg plugin is active.
 
