@@ -26,7 +26,7 @@ Please also read the [Quick Start Guide](https://wpglobus.com/quick-start/).
 * NO AUTOMATIC TRANSLATION:
 	* WPGlobus does NOT translate texts automatically! You will **translate texts manually**.
 * PAGE BUILDERS / COMPOSERS:
-	* Starting from the version 1.9.17, WPGlobus supports Gutenberg, WPBakery Page Builder and Elementor. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), etc. are currently in development.
+	* WPGlobus supports Gutenberg and WPBakery Page Builder. Other builders, such as "Page Builder by SiteOrigin", "Beaver Builder", Fusion ("Avada"), Elegant ("Divi"), Elementor, etc. are currently in development.
 * IF YOU UNINSTALL, YOU LOSE TRANSLATIONS:
 	* WPGlobus stores all translations using a special format: `{:en}English{:}{:fr}French{:}{:es}Spanish{:}`. If you decide to **deactivate and uninstall WPGlobus**, you **must run the clean-up tool** to keep only one language. See the details on the "Welcome" tab in the WPGlobus Settings.
 * COOKIES:
