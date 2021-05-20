@@ -2219,6 +2219,14 @@ class WPGlobus_Options {
 	 */
 	protected function is_plugin_installed( $folder ) {
 
+		/**
+		 * Avoid warning when `get_plugins` tries to open non-existing folder.
+		 */
+		$plugin_root = WP_PLUGIN_DIR;
+		if ( ! is_dir( $plugin_root . '/' . $folder ) ) {
+			return false;
+		}
+
 		if ( ! function_exists( 'get_plugins' ) ) {
 			/**
 			 * Include plugin.php.
