@@ -222,7 +222,36 @@ class WPGlobus_YoastSEO {
 			 * @since 2.4.14
 			 */	
 			add_filter( 'wpseo_schema_webpage', array( __CLASS__, 'filter__wpseo_schema_webpage' ), 5, 2 );
+
+			/**
+			 * Filter "application/ld+json".
+			 * @since 2.7.4
+			 * 
+			 * @see wordpress-seo\src\presenters\schema-presenter.php
+			 */			
+			add_action( 'wpseo_json_ld', array( __CLASS__, 'on__wpseo_json_ld' ), 5 );
 		}
+	}
+	
+	/**
+	 * Filter "application/ld+json".
+	 * @since 2.7.4
+	 */	
+	public static function on__wpseo_json_ld() {
+		add_filter( 'wp_get_attachment_caption', array( __CLASS__, 'filter__wp_get_attachment_caption' ), 5, 2 ); 
+	}
+	
+	/**
+     * Filters the attachment caption in "application/ld+json".
+	 * @since 2.7.4
+	 */
+	public static function filter__wp_get_attachment_caption( $caption, $post_id ) {
+		
+		if ( WPGlobus_Core::has_translations($caption) ) {
+			return WPGlobus_Core::extract_text( $caption, WPGlobus::Config()->language );
+		}
+
+		return $caption;
 	}
 	
 	/**
