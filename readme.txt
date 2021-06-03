@@ -220,6 +220,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.4 =
+* (Vendor/Yoast) Fixed issue with attachment caption in Schema Presenter.
+* (Core/Options) Avoid warning when `get_plugins` tries to open non-existing folder.
+
 = 2.7.3 =
 * (Vendor/Yoast) Fixed issue with meta description when homepage displays latest posts.
 
@@ -229,11 +233,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.7.1 =
 * (Core/Recommendations) Using `class` instead of `id` for recommendation box.
 * (Core/JS) Omit element name checking to using elements with the same `name` to make it as multilingual.
-
-= 2.7.0 =
-* (Compatibility) Tested up to WordPress 5.7
-* (Core/Post Types) Added  the `SlidersPack` plugin post type to the `"hidden types"` list.
-* (Vendor/Yoast) Fixed issue with empty taxonomy meta description.
 
 = Earlier versions and Add-ons =
 
