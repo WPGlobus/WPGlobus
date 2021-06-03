@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-06-03 - version 2.7.4
+* (Vendor/Yoast) Fixed issue with attachment caption in Schema Presenter.
+* (Core/Options) Avoid warning when `get_plugins` tries to open non-existing folder.
+
 2021-04-20 - version 2.7.3
 * (Vendor/Yoast) Fixed issue with meta description when homepage displays latest posts.
 
