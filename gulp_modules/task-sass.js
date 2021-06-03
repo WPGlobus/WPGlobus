@@ -3,27 +3,28 @@
 const task_sass = cb => {
 	const {src, dest} = require("gulp");
 	const cfg = require("./cfg.json");
-	const sass = require("gulp-sass");
-	const sourcemaps = require("gulp-sourcemaps");
+	const sass = require("gulp-dart-scss");
+	const postcss = require("gulp-postcss");
+	const keep_font_icons = require('postcss-sass-unicode');
 	const autoprefixer = require("gulp-autoprefixer");
 	const print = require('gulp-print').default;
 	const pump = require('pump');
 
 	const sassOptions = {
-		errLogToConsole: true,
 		outputStyle: "compressed"
 		// outputStyle: "expanded"
 	};
 
-	const autoprefixerOptions = {};
+	const postcss_plugins = [
+		keep_font_icons,
+		autoprefixer
+	];
 
 	pump([
 			src("includes/builders/gutenberg/assets/css/*.scss"),
 			print(),
-			sourcemaps.init(),
-			sass(sassOptions).on("error", sass.logError),
-			autoprefixer(autoprefixerOptions),
-			sourcemaps.write(".", {includeContent: false}),
+			sass(sassOptions),
+			postcss(postcss_plugins),
 			dest("includes/builders/gutenberg/assets/css"),
 			print()
 		],
@@ -32,10 +33,8 @@ const task_sass = cb => {
 	pump([
 			src("includes/builders/gutenberg/assets/css/dist/*.scss"),
 			print(),
-			sourcemaps.init(),
-			sass(sassOptions).on("error", sass.logError),
-			autoprefixer(autoprefixerOptions),
-			sourcemaps.write(".", {includeContent: false}),
+			sass(sassOptions),
+			postcss(postcss_plugins),
 			dest("includes/builders/gutenberg/assets/css/dist"),
 			print()
 		],
@@ -44,10 +43,8 @@ const task_sass = cb => {
 	pump([
 			src(cfg.path.css + "/**/*.scss"),
 			print(),
-			sourcemaps.init(),
-			sass(sassOptions).on("error", sass.logError),
-			autoprefixer(autoprefixerOptions),
-			sourcemaps.write(".", {includeContent: false}),
+			sass(sassOptions),
+			postcss(postcss_plugins),
 			dest(cfg.path.css),
 			print()
 		],
