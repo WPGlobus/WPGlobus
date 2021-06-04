@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-06-04 - version 2.7.5
+* (Customizer) Added check/uncheck all fields option in Fields Settings section.
+
 2021-06-03 - version 2.7.4
 * (Vendor/Yoast) Fixed issue with attachment caption in Schema Presenter.
 * (Core/Options) Avoid warning when `get_plugins` tries to open non-existing folder.
