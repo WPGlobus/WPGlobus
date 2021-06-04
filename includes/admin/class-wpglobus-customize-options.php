@@ -278,7 +278,18 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					<div style="border-bottom:1px solid black;margin: 0 0 5px;padding-left:5px;">
 						<a href="#" onclick="jQuery('.wpglobus-fields_settings_control_box .items-box' ).css('display','block');"><b><?php esc_html_e( 'Show all sections', 'wpglobus' ); ?></b></a>
 					</div>
-					<input type="submit" style="float:right;" name="<?php echo WPGlobus_Customize_Options::$controls_save_button; // WPCS: XSS ok. ?>" id="<?php echo WPGlobus_Customize_Options::$controls_save_button; // WPCS: XSS ok. ?>" class="button button-primary save" value="<?php esc_html_e( 'Save &amp; Reload', 'wpglobus' ); ?>">
+					<div class="<?php echo WPGlobus_Customize_Options::$controls_buttons_wrapper; ?>">
+						<div style="margin-top:3px;float:left;">
+							<input type="checkbox" 
+								onclick="if (jQuery('.wpglobus-customize-cb-control').prop('checked') ){jQuery('.wpglobus-customize-cb-control').prop('checked',false);}else{jQuery('.wpglobus-customize-cb-control').prop('checked','checked');};return false;" 
+								style="display:none;" 
+								name="<?php echo WPGlobus_Customize_Options::$cb_button; // WPCS: XSS ok. ?>" 
+								id="<?php echo WPGlobus_Customize_Options::$cb_button; // WPCS: XSS ok. ?>" 
+								class="" />
+							<label for="<?php echo WPGlobus_Customize_Options::$cb_button; // WPCS: XSS ok. ?>"><?php esc_html_e( 'Check/Uncheck all', 'wpglobus' ); ?></label>
+						</div>
+						<input type="submit" style="float:right;" name="<?php echo WPGlobus_Customize_Options::$controls_save_button; // WPCS: XSS ok. ?>" id="<?php echo WPGlobus_Customize_Options::$controls_save_button; // WPCS: XSS ok. ?>" class="button button-primary save" value="<?php esc_html_e( 'Save &amp; Reload', 'wpglobus' ); ?>">
+					</div>
 				<?php else: ?>
 					<div>
 						<?php if ( ! empty( $this->args['message'] ) ) {
@@ -316,9 +327,21 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		public static $options_key = 'wpglobus_customize_options';
 
 		/**
-		 * Save button ID
+		 * Save button ID.
 		 */
 		public static $controls_save_button = 'wpglobus-user-controls-save';
+
+		/**
+		 * Check/uncheck checkbox button ID.
+		 * @since 2.7.5
+		 */
+		public static $cb_button = 'wpglobus-user-controls-cb';
+		
+		/**
+		 * Controls buttons wrapper ID.
+		 * @since 2.7.5
+		 */
+		public static $controls_buttons_wrapper = 'wpglobus-user-controls-buttons-wrapper';
 
 		/**
 		 * Current theme.
@@ -1526,6 +1549,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					'helpButton'             => '<span style="float:right;cursor:pointer;" class="wpglobus-customize-icon-help customize-help-toggle dashicons dashicons-editor-help" tabindex="0" aria-expanded="false"></span>',
 					'userControl'            => $options,
 					'userControlSaveButton'  => self::$controls_save_button,
+					'userControlButtonsWrapper' => self::$controls_buttons_wrapper, // @since 2.7.5
 					'userControlIcon'        => WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/checkbox-icon.png',
 					'userControlIconClass'   => 'wpglobus-customize-user-control-icon',
 					'userControlBoxSelector' => '.wpglobus-fields_settings_control_box .items-box'

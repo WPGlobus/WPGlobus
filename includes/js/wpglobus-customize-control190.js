@@ -129,7 +129,9 @@ jQuery(document).ready(function ($) {
 				sectionHtml = sectionHtml.replace( '{{section_id}}', '"'+section+'"' );
 				sectionHtml = sectionHtml.replace( '{{items}}', itemsHtml );
 
-				$( sectionHtml ).insertBefore( $( '#' + WPGlobusCustomizeOptions.userControlSaveButton ) );
+				// $( sectionHtml ).insertBefore( $( '#' + WPGlobusCustomizeOptions.userControlSaveButton ) );
+				// @since 2.7.5
+				$( sectionHtml ).insertBefore( $( '.' + WPGlobusCustomizeOptions.userControlButtonsWrapper ) );
 			});
 
 			$( '#accordion-section-wpglobus_fields_settings_section' ).css({'margin-top':'15px'});
@@ -592,6 +594,22 @@ jQuery(document).ready(function ($) {
 				}
 			});
 
+		},
+		getControlInstances: function(mask, prop) {
+			// @since 2.7.5
+			if ( 'string' === typeof mask ) {
+				$.each(api.controlInstances, function(objID,val){
+					if ( -1 !== objID.indexOf(mask) ) {
+						if ( 'string' === typeof prop ) {
+							console.log(objID+' ->', prop+':: ',val[prop]);
+						} else {
+							console.log(objID, val);
+						}
+					}
+				});
+				return;
+			}
+			console.log(api.controlInstances);
 		},
 		setControlInstances: function() {
 			wp.customize.control.each( api.ctrlCallback );
@@ -1189,41 +1207,9 @@ jQuery(document).ready(function ($) {
 				wp.customize.previewer.refresh();
 
 			});
-
-			/**
-			 * AttachListeners: Event handler for tracking clicks by widgets title.
-			 */
-			/**
-			 * @todo remove this listener after testing with WP4.7.
-			 */
-			/*
-			$(document).on( 'click', '.widget-title, .widget-title-action', function(ev){
-				return;
-				var id = $(this).parents( '.customize-control-widget_form' ).attr( 'id' );
-				$.each( api.controlWidgets, function( obj, d ) {
-					if ( '#'+id == d.parent ) {
-						api.ctrlWidgetCallback( obj );
-						return false;
-					}
-				});
-			});  */
-
-			/**
-			 * attachListeners: Event handler for tracking clicks by menu item title.
-			 */
-			/**
-			$(document).on( 'click', '.control-section-nav_menu .accordion-section-title', function(ev){
-				$.each( api.controlMenuItems, function( obj, d ) {
-					api.ctrlMenuItemsCallback( obj );
-				});
-			}); */
-
-
 		}
 	};
 
 	WPGlobusCustomize =  $.extend( {}, WPGlobusCustomize, api );
-
 	WPGlobusCustomize.init();
-
 });
