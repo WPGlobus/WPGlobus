@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.5 =
+* (Customizer) Added check/uncheck all fields option in Fields Settings section.
+
 = 2.7.4 =
 * (Vendor/Yoast) Fixed issue with attachment caption in Schema Presenter.
 * (Core/Options) Avoid warning when `get_plugins` tries to open non-existing folder.
@@ -229,10 +232,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.7.2 =
 * (Core/Gutenberg) Activated access to the standard widgets edit page when Gutenberg plugin is active.
-
-= 2.7.1 =
-* (Core/Recommendations) Using `class` instead of `id` for recommendation box.
-* (Core/JS) Omit element name checking to using elements with the same `name` to make it as multilingual.
 
 = Earlier versions and Add-ons =
 

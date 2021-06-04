@@ -1,12 +1,12 @@
-# Copyright (C) 2021 WPGlobus 2.7.2
-# This file is distributed under the same license as the WPGlobus 2.7.2 package.
+# Copyright (C) 2021 WPGlobus 2.7.5
+# This file is distributed under the same license as the WPGlobus 2.7.5 package.
 # Translators:
 # FX Bénard <fxb@wp-translations.org>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2021-04-16 11:56+0000\n"
+"PO-Revision-Date: 2021-06-04 12:20+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/es_MX/)\n"
@@ -225,6 +225,9 @@ msgid "Section"
 msgstr ""
 
 msgid "Show all sections"
+msgstr ""
+
+msgid "Check/Uncheck all"
 msgstr ""
 
 msgid "Save &amp; Reload"
