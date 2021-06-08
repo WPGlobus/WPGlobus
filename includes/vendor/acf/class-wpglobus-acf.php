@@ -197,7 +197,20 @@ class WPGlobus_Acf_2 {
 				require_once( 'class-wpglobus-vendor-acf.php' );
 			}
 
-			$WPGlobus_Vendor_Acf = WPGlobus_Vendor_Acf::get_instance();
+			$_vendors = array(
+				'ACF'	 => false,
+				'ACFPRO' => false
+			);
+			
+			if ( defined('ACF_PRO') ) {
+				$_vendors['ACFPRO'] = true;
+			} else if( defined('ACF') ) {
+				$_vendors['ACF'] = true;
+			}
+			
+			$WPGlobus_Vendor_Acf = WPGlobus_Vendor_Acf::get_instance(
+				array( 'vendor_scripts' => $_vendors )
+			);
 			
 			$multilingual_field_name = $WPGlobus_Vendor_Acf::get_multilingual_field_name();
 		
