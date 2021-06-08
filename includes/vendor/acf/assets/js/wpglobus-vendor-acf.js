@@ -5,7 +5,7 @@
  * @since 2.6.6
  *
  * @package WPGlobus
- * @subpackage Administration
+ * @subpackage Administration/EditFieldGroup
  */
 /*jslint browser: true*/
 /*global jQuery, console, WPGlobusVendorAcf*/
