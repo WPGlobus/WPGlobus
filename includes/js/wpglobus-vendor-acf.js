@@ -197,9 +197,10 @@ jQuery(document).ready(function ($) {
 		},
         unificationField: function(field) {
 			// @since 2.6.6	
+			// @since 2.7.6 Perform a global search and replace.
 			if ( /acf\[/.test(field) ) {
-				field = field.replace('[','-');
-				field = field.replace(']','');
+				field = field.replace(/\[/g,'-');
+				field = field.replace(/]/g,'');
 			}
 			return field;
 		},
@@ -220,8 +221,8 @@ jQuery(document).ready(function ($) {
 				return false;
 			}
 			// We can receive here `field` in two forms
-			// 1. acf-field_5f8a8fd1c97f7
-			// 2. acf[field_5f8a8fd1c97f7]
+			// 1. acf-field_5f8a8fd1c97f7  or repeater field: acf[field_5cda40e0978f9][row-0][field_60900acc19d17]
+			// 2. acf[field_5f8a8fd1c97f7] or repeater field: acf-field_5cda40e0978f9-row-0-field_60900acc19d17
 			field = api.unificationField(field);
 			var _result = false;
 			var _fields = api.getVendorAcfFields();
