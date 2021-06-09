@@ -443,14 +443,15 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 				'wpglobus-acf',
 				'WPGlobusAcf',
 				array(
-					'wpglobus_version' => WPGLOBUS_VERSION,
-					'acf_version'      => defined('ACF_VERSION') ? ACF_VERSION : false,
-					'pro'              => self::is_acf_pro() ? 'true' : 'false',
-					'actions'      	   => $actions,
-					'fields'           => array(),
-					'disabledFields'   => $disabled_fields,
-					'source'       	   => $_source,
-					'builder_id'       => WPGlobus::Config()->builder->get_id()
+					'wpglobus_version'  => WPGLOBUS_VERSION,
+					'acf_version'       => defined('ACF_VERSION') ? ACF_VERSION : false,
+					'pro'               => self::is_acf_pro() ? 'true' : 'false',
+					'actions'      	    => $actions,
+					'fields'            => array(),
+					'disabledFields'    => $disabled_fields,
+					'source'       	    => $_source,
+					'builder_id'        => WPGlobus::Config()->builder->get_id(),
+					'translatableClass' => 'wpglobus-translatable',
 				)
 			);			
 		}
