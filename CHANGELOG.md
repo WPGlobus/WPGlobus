@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+2021-06-09 - version 2.7.6
+* (Vendor/ACF) Updated doc.
+* (Vendor/ACF) Added init param for WPGlobus_Vendor_Acf class.
+* (Vendor/ACF) Added `translatableClass` key in localizing script.
+* (Vendor/ACF) Set `translatableClass` for elements in Builder mode.
+* (Vendor/ACF) Perform a global search and replace in JS.
+
 2021-06-04 - version 2.7.5
 * (Customizer) Added check/uncheck all fields option in Fields Settings section.
 
