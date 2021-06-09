@@ -220,6 +220,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.6 =
+* (Vendor/ACF) Updated doc.
+* (Vendor/ACF) Added init param for WPGlobus_Vendor_Acf class.
+* (Vendor/ACF) Added `translatableClass` key in localizing script.
+* (Vendor/ACF) Set `translatableClass` for elements in Builder mode.
+* (Vendor/ACF) Perform a global search and replace in JS.
+
 = 2.7.5 =
 * (Customizer) Added check/uncheck all fields option in Fields Settings section.
 
@@ -229,9 +236,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.7.3 =
 * (Vendor/Yoast) Fixed issue with meta description when homepage displays latest posts.
-
-= 2.7.2 =
-* (Core/Gutenberg) Activated access to the standard widgets edit page when Gutenberg plugin is active.
 
 = Earlier versions and Add-ons =
 
