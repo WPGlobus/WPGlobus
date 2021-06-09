@@ -33,6 +33,7 @@ jQuery(document).ready(function ($) {
 			
 			// @since 2.6.6
 			if ( api.isBuilder() && 'undefined' ===  typeof WPGlobusDialogApp ) {
+				api.setTranslatableClass();
 				return;
 			}
 			
@@ -52,6 +53,14 @@ jQuery(document).ready(function ($) {
             }
 			api.attachListeners();
         },
+        setTranslatableClass: function(){
+			// @since 2.7.6	
+			setTimeout( function(){
+				$.each(api.getVendorAcfFields(), function(indx, fieldId){
+					$('#'+fieldId).addClass(WPGlobusAcf.translatableClass);
+				});
+			}, 500);
+		},
         runActions: function() {
 			if ( 'undefined' !== typeof WPGlobusAcf.actions.fixTextFields && WPGlobusAcf.actions.fixTextFields ) {
 				api.fixTextFields();   
