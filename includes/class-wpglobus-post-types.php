@@ -122,6 +122,10 @@ class WPGlobus_Post_Types {
 		'content_block',
 		// SlidersPack – All In One Image/Post Slider: https://wordpress.org/plugins/sliderspack-all-in-one-image-sliders/ @since 2.7.0
 		'wpspaios_slider',
+		// WP MyLinks - https://wordpress.org/plugins/wp-mylinks/ @since 2.7.7
+		'mylink',
+		// Ninja Forms Contact Form - https://wordpress.org/plugins/ninja-forms/ @since 2.7.7
+		'nf_sub',
 	);
 
 	/**
