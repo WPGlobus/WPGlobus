@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-06-18 - version 2.7.7
+* (Vendor/Yoast) Added filter for `wpseo_titles` option.
+* (Core/Post Types) Added  the `WP MyLinks`, `Ninja Forms` plugins post types to the `"hidden types"` list.
+
 2021-06-09 - version 2.7.6
 * (Vendor/ACF) Updated doc.
 * (Vendor/ACF) Added init param for WPGlobus_Vendor_Acf class.
