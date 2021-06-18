@@ -230,6 +230,11 @@ class WPGlobus_YoastSEO {
 			 * @see wordpress-seo\src\presenters\schema-presenter.php
 			 */			
 			add_action( 'wpseo_json_ld', array( __CLASS__, 'on__wpseo_json_ld' ), 5 );
+			
+			/**	
+			 * @since 2.7.7
+			 */			
+			add_filter( 'option_wpseo_titles', array( __CLASS__, 'filter__wpseo_titles' ), 5, 2 ); 			
 		}
 	}
 	
@@ -238,7 +243,21 @@ class WPGlobus_YoastSEO {
 	 * @since 2.7.4
 	 */	
 	public static function on__wpseo_json_ld() {
-		add_filter( 'wp_get_attachment_caption', array( __CLASS__, 'filter__wp_get_attachment_caption' ), 5, 2 ); 
+		add_filter( 'wp_get_attachment_caption', array( __CLASS__, 'filter__wp_get_attachment_caption' ), 5, 2 );
+	}
+
+	/**	
+	 * Filter `wpseo_titles` option.
+	 * @since 2.7.7
+	 */	
+	public static function filter__wpseo_titles( $value, $option ) {
+		$_keys[] = 'breadcrumbs-home';
+		foreach ( $_keys as $_key ) {
+			if ( WPGlobus_Core::has_translations($value[$_key]) ) {
+				$value[$_key] = WPGlobus_Core::extract_text( $value[$_key], WPGlobus::Config()->language );
+			}
+		}			
+		return $value;
 	}
 	
 	/**
