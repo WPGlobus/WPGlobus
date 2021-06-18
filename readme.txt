@@ -220,6 +220,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.7 =
+* (Vendor/Yoast) Added filter for `wpseo_titles` option.
+* (Core/Post Types) Added  the `WP MyLinks`, `Ninja Forms` plugins post types to the `"hidden types"` list.
+
 = 2.7.6 =
 * (Vendor/ACF) Updated doc.
 * (Vendor/ACF) Added init param for WPGlobus_Vendor_Acf class.
@@ -233,9 +237,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 = 2.7.4 =
 * (Vendor/Yoast) Fixed issue with attachment caption in Schema Presenter.
 * (Core/Options) Avoid warning when `get_plugins` tries to open non-existing folder.
-
-= 2.7.3 =
-* (Vendor/Yoast) Fixed issue with meta description when homepage displays latest posts.
 
 = Earlier versions and Add-ons =
 
