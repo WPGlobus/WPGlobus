@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.8 =
+* (Vendor/ACF) Fixed an issue with empty ACF fields.
+
 = 2.7.7 =
 * (Vendor/Yoast) Added filter for `wpseo_titles` option.
 * (Core/Post Types) Added  the `WP MyLinks`, `Ninja Forms` plugins post types to the `"hidden types"` list.
@@ -233,10 +236,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.7.5 =
 * (Customizer) Added check/uncheck all fields option in Fields Settings section.
-
-= 2.7.4 =
-* (Vendor/Yoast) Fixed issue with attachment caption in Schema Presenter.
-* (Core/Options) Avoid warning when `get_plugins` tries to open non-existing folder.
 
 = Earlier versions and Add-ons =
 

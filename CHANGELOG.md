@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2021-06-22 - version 2.7.8
-* (Vendor/ACF) Fixed issue with empty ACF field.
+* (Vendor/ACF) Fixed an issue with empty ACF fields.
 
 2021-06-18 - version 2.7.7
 * (Vendor/Yoast) Added filter for `wpseo_titles` option.
