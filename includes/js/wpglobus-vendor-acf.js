@@ -30,10 +30,11 @@ jQuery(document).ready(function ($) {
 		vendorAcfFields: null,
         option: {},
         init: function (args) {
-			
 			// @since 2.6.6
 			if ( api.isBuilder() && 'undefined' ===  typeof WPGlobusDialogApp ) {
 				api.setTranslatableClass();
+				// @since 2.7.9	
+				api.setAcfPostboxTitle();
 				return;
 			}
 			
@@ -53,6 +54,21 @@ jQuery(document).ready(function ($) {
             }
 			api.attachListeners();
         },
+        setAcfPostboxTitle: function(){
+			// @since 2.7.9
+			if ( 'undefined' === typeof WPGlobusCoreData ) {
+				return;
+			}
+			setTimeout(function(){
+				var $postBoxes = $('.acf-postbox');
+				if ( $postBoxes.length > 0 ) {
+					$.each($postBoxes, function(i,elem){
+						var t = $(elem).find('h2.hndle').text();
+						$(elem).find('h2.hndle').text(t+' ('+WPGlobusCoreData.en_language_name[WPGlobusAcf.language]+')');
+					});
+				}
+			}, 1000);
+		},
         setTranslatableClass: function(){
 			// @since 2.7.6	
 			setTimeout( function(){

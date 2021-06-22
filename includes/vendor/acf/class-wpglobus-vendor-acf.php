@@ -451,6 +451,7 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 					'disabledFields'    => $disabled_fields,
 					'source'       	    => $_source,
 					'builder_id'        => WPGlobus::Config()->builder->get_id(),
+					'language'        	=> WPGlobus::Config()->builder->get_language(),
 					'translatableClass' => 'wpglobus-translatable',
 				)
 			);			
