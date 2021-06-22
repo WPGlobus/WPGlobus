@@ -139,6 +139,17 @@ class WPGlobus_Acf_2 {
 							$_acf_field = self::_acf_get_field_by_key( $field->meta_value );
 						}
 
+						/**
+						 * @since 2.7.8
+						 */
+						if ( empty( $_acf_field ) || ! is_array( $_acf_field ) ) {
+							/**
+							 * In some rarily cases self::_acf_get_field_by_key returns empty field.
+							 * @todo need more investigation
+							 */
+							continue;
+						}
+
 						if ( 'wysiwyg' == $_acf_field['type'] ) {
 							if ( $field_wysiwyg_enabled ) {
 								$_post_meta_fields_temp[ $_key ] = $_key;
