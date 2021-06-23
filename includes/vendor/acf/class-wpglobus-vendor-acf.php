@@ -34,7 +34,7 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 		const MULTILINGUAL = 'multilingual';	
 		
 		/**
-		 * Multilingual field name.
+		 * Multilingual field name (`wpglobus_multilingual_field`).
 		 */
 		const MULTILINGUAL_FIELD_NAME = 'wpglobus_' . self::MULTILINGUAL . '_field';
 
@@ -138,6 +138,20 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 				), 5, 1
 			);
 			// */
+	
+			/**
+			 * Filters the $field array before it is updated.
+			 * 
+			 * @since 2.7.9
+			 * @see advanced-custom-fields\includes\acf-field-functions.php
+			 */
+			add_filter( 
+				'acf/update_field',
+				array(
+					__CLASS__,
+					'on__update_field'
+				), 5, 1
+			);	
 	
 			/**
 			 * Filter on post, page and CPT except Edit Field Group page.
@@ -358,7 +372,26 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 
 			return $style;
 		}
-
+		
+		/**
+		 * Filters the field array before it is updated.
+		 *
+		 * @since 2.7.9
+		 *
+		 * @return array
+		 */
+		public static function on__update_field( $field ) {
+			
+			if ( (int) $field['ID'] == 0 && ! isset( $field[ self::MULTILINGUAL_FIELD_NAME ] ) ) {
+				// New field.
+				if ( self::is_multilingual_field( $field ) ) {
+					// We need to add MULTILINGUAL_FIELD_NAME for each new field. 
+					$field[ self::MULTILINGUAL_FIELD_NAME ] = 1;
+				}
+			}
+			return $field;
+		}
+		
 		/**
 		 * Callback for admin footer.
 		 *
