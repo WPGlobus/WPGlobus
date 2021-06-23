@@ -517,6 +517,15 @@ class WPGlobus {
 					'on__admin_title',
 				), 10, 2 );
 
+				/** 
+				 * Moved from below.
+				 * @since 2.7.9
+				 */
+				add_action( 'admin_bar_menu', array(
+					$this,
+					'on_admin_bar_menu',
+				) );
+
 				/**
 				 * @since 1.9.17
 				 */
@@ -660,10 +669,11 @@ class WPGlobus {
 				'on_admin_menu',
 			), 10 );
 
-			add_action( 'admin_bar_menu', array(
-				$this,
-				'on_admin_bar_menu',
-			) );
+			// @since 2.7.9 moved above
+			//add_action( 'admin_bar_menu', array(
+				//$this,
+				//'on_admin_bar_menu',
+			//) );
 
 			/**
 			 * @scope admin
@@ -4145,10 +4155,8 @@ class WPGlobus {
 	 * @param WP_Admin_Bar $wp_admin_bar
 	 */
 	public function on_admin_bar_menu( WP_Admin_Bar $wp_admin_bar ) {
-		
 		require_once dirname( __FILE__ ) . '/admin/class-wpglobus-admin-bar-menu.php';
 		WPGlobus_Admin_Bar_Menu::construct($wp_admin_bar);
-	
 	}
 
 	/**
