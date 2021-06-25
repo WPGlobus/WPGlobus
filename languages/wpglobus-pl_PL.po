@@ -1,5 +1,5 @@
-# Copyright (C) 2021 WPGlobus 2.7.5
-# This file is distributed under the same license as the WPGlobus 2.7.5 package.
+# Copyright (C) 2021 WPGlobus 2.7.9
+# This file is distributed under the same license as the WPGlobus 2.7.9 package.
 # Translators:
 msgid ""
 msgstr ""

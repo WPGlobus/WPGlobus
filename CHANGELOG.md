@@ -3,9 +3,10 @@
 ## Changelog ##
 
 2021-06-25 - version 2.7.9
-* (Vendor/ACF) Added current language name for ACF fields metabox in Builder mode.
-* (Vendor/ACF) Added filter of the field array before it is updated.
-* (Core) Added language switcher to admin bar for posts in Builder mode.
+* (Vendor/ACF) Added the current language name for the ACF fields metabox in the Builder mode.
+* (Vendor/ACF) Added filtering of the field array before it is updated.
+* (Core) Added language switcher to the admin bar for the posts in the Builder mode.
+* (POMO) Ukrainian translations completed (thanks go to Jack Willson)
 
 2021-06-22 - version 2.7.8
 * (Vendor/ACF) Fixed an issue with empty ACF fields.

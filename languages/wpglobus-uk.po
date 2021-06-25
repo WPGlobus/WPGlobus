@@ -1,14 +1,14 @@
-# Copyright (C) 2021 WPGlobus 2.7.5
-# This file is distributed under the same license as the WPGlobus 2.7.5 package.
+# Copyright (C) 2021 WPGlobus 2.7.9
+# This file is distributed under the same license as the WPGlobus 2.7.9 package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2016,2020
-# Jack Willson <666noob404@gmail.com>, 2019
+# Jack Willson <666noob404@gmail.com>, 2019,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
 "Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2021-06-04 12:20+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2021-06-12 20:19+0000\n"
+"Last-Translator: Jack Willson <666noob404@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/uk/)\n"
 "Language: uk\n"
@@ -193,12 +193,19 @@ msgid ""
 "runs without first verifying that WPGlobus is active, WordPress may die with "
 "a fatal error."
 msgstr ""
+"Переконайтеся, що у вашій активній темі немає коду, пов’язаного з WPGlobus. "
+"Який міг бути доданий вами або 3 стороннім розробником. Якщо такий код "
+"виконується без перевірки, активованої WPGlobus, це може сприяти "
+"нероботоспроможності всього веб-сайту."
 
 #. translators: %1$s - language name, %2$s - language code. Do not remove.
 msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
 "%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
 msgstr ""
+"В налаштуваннях WPGlobus зазначено, що основна мова %1$s (%2$s). Всі тексти, "
+"крім %1$s будуть видалені! Щоб змінити основну мову, будь ласка, перейдіть в "
+"{{settings}}."
 
 msgid "You are about to clean the content of the following database tables:"
 msgstr "Програма виконає очистку наступних таблиць бази даних:"
@@ -255,7 +262,7 @@ msgid "Show all sections"
 msgstr "Показати всі розділи"
 
 msgid "Check/Uncheck all"
-msgstr ""
+msgstr "Обрати/Скасувати всі"
 
 msgid "Save &amp; Reload"
 msgstr "Зберегти та перезавантажити"
@@ -569,9 +576,11 @@ msgid ""
 "If you have already purchased a WPGlobus premium extension, please read "
 "%1$sthe installation instructions here%2$s"
 msgstr ""
+"Якщо ви вже придбали розширення WPGlobus premium, будь ласка, прочитайте "
+"%1$sінструкції з встановлення тут%2$s"
 
 msgid "Widgets with WPGlobus"
-msgstr ""
+msgstr "Віджети з WPGlobus"
 
 msgid "Help Desk"
 msgstr "Підтримка"
@@ -671,15 +680,19 @@ msgstr "Переклад посилань можливий за допомого
 #. translators: %1$s - this plugin name. %2$s - the required PHP version.
 msgid "For %1$s to work correctly, PHP version %2$s or later is required."
 msgstr ""
+"Для коректної роботи %1$s потрібно використовувати PHP версії %2$s або "
+"останню."
 
 #. translators: %3$s - the current PHP version.
 msgid "The PHP version on your server is %3$s."
-msgstr ""
+msgstr "Версія PHP на вашому сервері %3$s."
 
 #. translators: %1$s - this plugin name. %2$s - the required WordPress version.
 msgid ""
 "For %1$s to work correctly, WordPress version %2$s or later is required."
 msgstr ""
+"Для коректної роботи %1$s потрібно використовувати WordPress версії %2$s або "
+"останню."
 
 msgid "Save draft before using extra language."
 msgstr "Збережіть чернетку перед перемиканням на іншу мову."
@@ -705,7 +718,7 @@ msgid "Turn on"
 msgstr "Увімкнути"
 
 msgid "Elementor"
-msgstr ""
+msgstr "Elementor"
 
 msgid "WPGlobus languages"
 msgstr "Мови WPGlobus"
@@ -717,6 +730,8 @@ msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "%1$s%2$s%3$s is set to %4$s."
 msgstr ""
+"WPGlobus підтримує багатомовні сторінки для Elementor тільки з опцією %1$s "
+"%2$s %3$s встановленої в %4$s."
 
 msgid "Before switching the language, please save draft or publish."
 msgstr "Опублікуйте або збережіть чернетку перед перемиканням на іншу мову."
@@ -740,9 +755,11 @@ msgid ""
 "WPGlobus provides multilingual support for Elementor only when the option "
 "`CSS Print Method` is set to `External File`."
 msgstr ""
+"WPGlobus забезпечує багатомовну підтримку Elementor тільки якщо `CSS Print "
+"Method` встановлений в` External File`."
 
 msgid "Open Elementor Settings page"
-msgstr ""
+msgstr "Сторінка налаштувань Elementor"
 
 msgid "WPGlobus widget"
 msgstr "WPGlobus віджет"
@@ -785,11 +802,13 @@ msgstr "*) Доступно після збереження меню."
 
 #. translators: %s are for A tags.
 msgid "To have the %1$sImage%2$s widget varying by language,"
-msgstr ""
+msgstr "Щоб застосувати віджет%1$sЗображення%2$s для декількох мов"
 
 #. translators: %s are for A tags.
 msgid "please use the %1$sWPGlobus language widgets%2$s add-on"
 msgstr ""
+"Ви також можете використовувати розширення %1$sWPGlobus для мовних віджетів"
+"%2$s"
 
 msgid "You must enable Pretty Permalinks to use WPGlobus."
 msgstr ""
@@ -1128,64 +1147,77 @@ msgid ""
 "With the current settings, you will see the following lines in the section "
 "HEAD of your site pages"
 msgstr ""
+"З поточними налаштуваннями ви побачите ці рядки в секції head ваших сторінок"
 
 msgid "(example for two languages)"
-msgstr ""
+msgstr "(Приклад для двох мов)"
 
 msgid ""
 "Tell search engines about localized versions of your pages using the "
 "hreflang tag"
 msgstr ""
+"Повідомте пошуковим системам про локалізовані версії ваших сторінок за "
+"допомогою тегу hreflang"
 
 msgid "Output the hreflang tag as"
-msgstr ""
+msgstr "Вивести тег hreflang як"
 
 msgid "Language- and region-specific (en-US, ru-RU, etc.)"
-msgstr ""
+msgstr "Мова- і регіон в форматі (en-US, ru-RU, etc.)"
 
 msgid "Language- and region-specific (en-us, ru-ru, etc.)"
-msgstr ""
+msgstr "Мова- і регіон в форматі (en-us, ru-ru, etc.)"
 
 msgid "Language code only (en, ru, etc.)"
-msgstr ""
+msgstr "Тільки код мови (en, ru, etc.)"
 
 msgid "Use the code `x-default` for the main language"
-msgstr ""
+msgstr "Використовувати код `x-default` для мови за замовчуванням"
 
 msgid "Multilingual SEO"
-msgstr ""
+msgstr "Багатомовний SEO"
 
 msgid "Multilingual SEO Options"
-msgstr ""
+msgstr "Налаштування багатомовного SEO"
 
 msgid ""
 "With WPGlobus, you can get translations for posts and pages using REST API."
 msgstr ""
+"За допомогою WPGlobus ви можете отримувати переклади публікацій та сторінок "
+"за допомогою REST API."
 
 msgid "Go to %1$s%2$s%3$s to see the content in language: %4$s."
 msgstr ""
+"Перейдіть по посиланню %1$s%2$s%3$s для отримання даних на мову: %4$ss."
 
 msgid ""
 "For demonstration, you can try the first post that WordPress creates at the "
 "initial installation."
 msgstr ""
+"Для демонстрації ви можете спробувати перший допис, який WordPress створює "
+"під час початкової інсталяції."
 
 msgid ""
 "Please read the %1$sWordPress REST API documentation%2$s for more "
 "information."
 msgstr ""
+"Для отримання додаткової інформації прочитайте %1$s документацію щодо API "
+"WordPress REST%2$s."
 
 msgid ""
 "In the REST API response, you can find the %1$stranslation%2$s field, which "
 "shows whether translations exist for the fields %1$stitle%2$s, %1$scontent"
 "%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:"
 msgstr ""
+"У відповіді REST API ви знайдете поле %1$stranslation%2$s, яке дає "
+"можливість перевірити, чи існують переклади полів%1$s title%2$s, %1$scontent"
+"%2$s і%1$sexcerpt%2$s для кожної мови. Дивіться.скріншот нижче:"
 
 msgid "Description:"
-msgstr ""
+msgstr "Опис:"
 
 msgid "REST API"
-msgstr ""
+msgstr "REST API"
 
 msgid "Translate strings"
 msgstr "Переклади рядків"
@@ -1354,25 +1386,29 @@ msgstr "Встановіть WPGlobus Плюс прямо зараз!"
 
 #. translators: %s are for A tags.
 msgid "Use as multilingual with %1$sWPGlobus%2$s"
-msgstr ""
+msgstr "Використовувати як багатомовне з%1$sWPGlobus%2$s"
 
 msgid "Multilingual"
-msgstr ""
+msgstr "Багатомовне"
 
 #. translators: %s are for A tags.
 msgid "To use this field, please activate the %1$sACF Plus%2$s module"
-msgstr ""
+msgstr "Для використання поля потрібно активувати модуль %1$sACF Plus%2$s"
 
 msgid ""
 "Bulk editing of the multilingual titles and descriptions is not supported by "
 "the current version."
 msgstr ""
+"Поточна версія не підтримує можливість масового редагування багатомовних "
+"заголовків і описів."
 
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
+"Тому, щоб уникнути втрати даних, ми не рекомендуємо використовувати цей "
+"режим."
 
 msgid "WPGlobus warning: "
-msgstr ""
+msgstr "Попередження WPGlobus:"
 
 msgid "https://github.com/WPGlobus/WPGlobus"
 msgstr "https://github.com/WPGlobus/WPGlobus"

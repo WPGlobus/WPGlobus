@@ -1,10 +1,11 @@
 {
   "name": "wpglobus",
-  "version": "2.7.8",
+  "version": "2.7.9",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "title": "WPGlobus",
   "main": "Gulpfile.js",
   "scripts": {
+    "// == WPGlobus == //": "",
     "// 1! Get updates": "npm run git:fetch:all && npm run git:pull:dev",
     "git:fetch:all": "git fetch --all",
     "git:pull:dev": "git checkout develop && git pull",

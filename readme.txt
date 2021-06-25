@@ -145,7 +145,7 @@ WPGlobus may not work correctly on development servers having URLs like `//local
 * `ru_RU` by [The WPGlobus Team](https://wpglobus.com/ru/) ~ [WPGlobus - это коллекция плагинов ВордПресс для создания мультиязычных сайтов](https://ru.wordpress.org/plugins/wpglobus/)
 * `sv_SE` by [Elger Lindgren](http://bilddigital.se/) ~ [WPGlobus är en familj av WordPress-tillägg som hjälper dig att göra flerspråkiga Wordpressbloggar och webbplatser.](https://sv.wordpress.org/plugins/wpglobus/)
 * `tr_TR` by [Borahan Conkeroglu](https://twitter.com/boracon68) ~ [WPGlobus WordPress bloglarını ve sitelerini çokdilli yapmakta size yardım eden bir WordPress eklentileri ailesidir.](https://tr.wordpress.org/plugins/wpglobus/)
-* `uk` by [Pavlo Novak](https://plus.google.com/u/0/114797816817149043222) ~ ["WPGlobus - це колекція ВордПресс плагінів для створення багатомовних сайтів."](https://uk.wordpress.org/plugins/wpglobus/)
+* `uk` by Pavlo Novak and Jack Willson ~ ["WPGlobus - це колекція ВордПресс плагінів для створення багатомовних сайтів."](https://uk.wordpress.org/plugins/wpglobus/)
 
 == Installation ==
 
@@ -220,6 +220,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.9 =
+* (Vendor/ACF) Added the current language name for the ACF fields metabox in the Builder mode.
+* (Vendor/ACF) Added filtering of the field array before it is updated.
+* (Core) Added language switcher to the admin bar for the posts in the Builder mode.
+* (POMO) Ukrainian translations completed (thanks go to Jack Willson)
+
 = 2.7.8 =
 * (Vendor/ACF) Fixed an issue with empty ACF fields.
 
@@ -233,9 +239,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Vendor/ACF) Added `translatableClass` key in localizing script.
 * (Vendor/ACF) Set `translatableClass` for elements in Builder mode.
 * (Vendor/ACF) Perform a global search and replace in JS.
-
-= 2.7.5 =
-* (Customizer) Added check/uncheck all fields option in Fields Settings section.
 
 = Earlier versions and Add-ons =
 
