@@ -29,7 +29,7 @@ module.exports = function (opt) {
         const moFileName = poFileName.replace(/\.po$/, ".mo");
 
         log.info("Making PO: " + poFileName);
-        execSync("msgmerge -v --backup=none --no-fuzzy-matching --update " + poFile + " " + potFile,
+        execSync("msgmerge -v -q --no-location --backup=none --no-fuzzy-matching --update " + poFile + " " + potFile,
             function (err, stdout, stderr) {
                 console.log(stdout);
                 console.log(stderr);
