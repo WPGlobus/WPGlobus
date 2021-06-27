@@ -1,8 +1,8 @@
-# Copyright (C) 2021 WPGlobus 2.7.9
-# This file is distributed under the same license as the WPGlobus 2.7.9 package.
+# Copyright (C) 2021 WPGlobus 2.7.10
+# This file is distributed under the same license as the WPGlobus 2.7.10 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPGlobus 2.7.9\n"
+"Project-Id-Version: WPGlobus 2.7.10\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1413,15 +1413,15 @@ msgstr ""
 msgid "To use this field, please activate the %1$sACF Plus%2$s module"
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:1248
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:1267
 msgid "Bulk editing of the multilingual titles and descriptions is not supported by the current version."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:1249
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:1268
 msgid "Therefore, to avoid any data loss, we do not recommend using this."
 msgstr ""
 
-#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:1252
+#: includes/vendor/yoast-seo/class-wpglobus-yoastseo140.php:1271
 msgid "WPGlobus warning: "
 msgstr ""
 

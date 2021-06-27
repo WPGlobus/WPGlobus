@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2021-06-27 - version 2.7.10
-* (Vendor/Yoast) Fixed issue with using variables in post description.
+* (Vendor/Yoast) Fixed an issue with using variables in post descriptions.
 
 2021-06-25 - version 2.7.9
 * (Vendor/ACF) Added the current language name for the ACF fields metabox in the Builder mode.

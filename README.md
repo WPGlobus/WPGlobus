@@ -302,6 +302,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.7.10 ###
+* (Vendor/Yoast) Fixed an issue with using variables in post descriptions.
+
 ### 2.7.9 ###
 * (Vendor/ACF) Added the current language name for the ACF fields metabox in the Builder mode.
 * (Vendor/ACF) Added filtering of the field array before it is updated.
