@@ -747,9 +747,13 @@ class WPGlobus_YoastSEO {
 				}
 			}
 
-			$description = self::get_meta( '_yoast_wpseo_metadesc', $meta_description );
+			/**
+			 * Added $presentation->source as parameter.
+			 * @since 2.7.10
+			 */
+			$description = self::get_meta( '_yoast_wpseo_metadesc', $meta_description, $presentation->source );
 			
-		} elseif ( 'term' == $presentation->model->object_type ) {
+		} else if ( 'term' == $presentation->model->object_type ) {
 			
 			/**
 			 * Taxonomy.
@@ -789,7 +793,7 @@ class WPGlobus_YoastSEO {
 				}
 			}
 			
-		} elseif ( 'home-page' == $presentation->model->object_type ) {
+		} else if ( 'home-page' == $presentation->model->object_type ) {
 			
 			/**
 			 * When homepage displays latest post.
@@ -1087,10 +1091,11 @@ class WPGlobus_YoastSEO {
 	/**
 	 * Get meta for extra language.
 	 *
-	 * @scope admin
+	 * @scope both
 	 * @since 2.2.16
+	 * @since 2.7.10 Added $presentation_source parameter.
 	 */	
-	protected static function get_meta( $meta_key, $meta_value = '' ) {
+	protected static function get_meta( $meta_key, $meta_value = '', $presentation_source = null ) {
 
 		if ( is_null(self::$wpseo_meta) ) {
 			self::get_wpseo_meta();
@@ -1105,6 +1110,13 @@ class WPGlobus_YoastSEO {
 		
 		if ( empty( $meta_value ) ) {
 
+			if ( $presentation_source instanceof WP_Post ) {
+				if ( empty( self::$wpseo_meta[$meta_key][$presentation_source->ID] ) ) {
+					return '';
+				}
+				return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$presentation_source->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );				
+			}			
+			
 			/**
 			 * Try get meta by post ID.
 			 */
@@ -1117,15 +1129,22 @@ class WPGlobus_YoastSEO {
 			
 			return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$post->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 		}
-		
+
 		$_return_value = '';
 		foreach( self::$wpseo_meta[ $meta_key ] as $_meta_value ) {
+			
+			if ( $presentation_source instanceof WP_Post ) {
+				$_meta_value =  wpseo_replace_vars( $_meta_value, $presentation_source );
+			} else if ( $post instanceof WP_Post ) {
+				$_meta_value =  wpseo_replace_vars( $_meta_value, $post );
+			}
+
 			if ( false !== strpos( $_meta_value, $meta_value ) ) {
 				$_return_value = WPGlobus_Core::text_filter( $_meta_value, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 				break;
 			}
 		}
-		
+
 		return $_return_value;
 	}
 	
