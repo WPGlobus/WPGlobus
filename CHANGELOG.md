@@ -3,8 +3,8 @@
 ## Changelog ##
 
 2021-07-07 - version 2.7.11
-* (Vendor/Yoast) Fixed issue with breadcrumb title (generated from taxonomy title) in Schema Presenter.
-* (Core/Post Types) Added  the `elementor_snippet` post type to the `"hidden types"` list.
+* (Vendor/Yoast) Fixed issue with the breadcrumbs title (generated from the taxonomy title) in the `Schema Presenter`.
+* (Core/Post Types) Added the `elementor_snippet` post type to the `"hidden types"` list.
 
 2021-06-27 - version 2.7.10
 * (Vendor/Yoast) Fixed an issue with using variables in post descriptions.
