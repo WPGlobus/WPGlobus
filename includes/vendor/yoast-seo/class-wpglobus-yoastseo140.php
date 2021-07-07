@@ -1571,7 +1571,8 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @since 2.4.14
 	 * @since 2.4.15 Localize description.
-	 * @since 2.5.1 Added support of taxonomies.
+	 * @since 2.5.1  Added support of taxonomies.
+	 * @since 2.7.11 Added filter for breadcrumb title.
 	 * 
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
@@ -1593,8 +1594,8 @@ class WPGlobus_YoastSEO {
 				$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
 			}		
 
-		} elseif ( 'term' == $context->indexable->object_type ) {
-			
+		} else if ( 'term' == $context->indexable->object_type ) {
+		
 			/**
 			 * Taxonomy.
 			 * @since 2.5.1
@@ -1603,8 +1604,16 @@ class WPGlobus_YoastSEO {
 			$graph_piece['url'] 		= WPGlobus_Utils::localize_url( $graph_piece['url'], WPGlobus::Config()->language );
 			$graph_piece['@id'] 		= WPGlobus_Utils::localize_url( $graph_piece['@id'], WPGlobus::Config()->language );
 			$graph_piece['breadcrumb']['@id'] = WPGlobus_Utils::localize_url( $graph_piece['breadcrumb']['@id'], WPGlobus::Config()->language );
-		
-		} elseif ( 'home-page' == $context->indexable->object_type ) {
+
+			/**
+			 * Filter breadcrumb title.
+			 * @since 2.7.11
+			 */	
+			if ( WPGlobus_Core::has_translations($context->indexable->breadcrumb_title) ) {
+				$context->indexable->breadcrumb_title = WPGlobus_Core::extract_text( $context->indexable->breadcrumb_title, WPGlobus::Config()->language );
+			}
+			
+		} else if ( 'home-page' == $context->indexable->object_type ) {
 		
 			/**
 			 * When homepage displays latest post.
