@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.12 =
+* (Core/JS) Force init `WPGlobusDialogApp` before using.
+
 = 2.7.11 =
 * (Vendor/Yoast) Fixed issue with the breadcrumbs title (generated from the taxonomy title) in the `Schema Presenter`.
 * (Core/Post Types) Added the `elementor_snippet` post type to the `"hidden types"` list.
@@ -235,10 +238,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.7.8 =
 * (Vendor/ACF) Fixed an issue with empty ACF fields.
-
-= 2.7.7 =
-* (Vendor/Yoast) Added filter for `wpseo_titles` option.
-* (Core/Post Types) Added  the `WP MyLinks`, `Ninja Forms` plugins post types to the `"hidden types"` list.
 
 = Earlier versions and Add-ons =
 
