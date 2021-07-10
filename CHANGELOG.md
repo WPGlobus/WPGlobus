@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-07-10 - version 2.7.12
+* (Core/JS) Force init `WPGlobusDialogApp` before using.
+
 2021-07-07 - version 2.7.11
 * (Vendor/Yoast) Fixed issue with the breadcrumbs title (generated from the taxonomy title) in the `Schema Presenter`.
 * (Core/Post Types) Added the `elementor_snippet` post type to the `"hidden types"` list.
