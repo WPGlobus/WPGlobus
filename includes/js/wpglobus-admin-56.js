@@ -139,6 +139,7 @@ var WPGlobusDialogApp;
 
 	var api;
 	api = WPGlobusDialogApp = {
+		inited: false,
 		option : {
 			listenClass : '.wpglobus_dialog_start',
 			settingsClass : '.wpglobus_dialog_settings',
@@ -183,6 +184,9 @@ var WPGlobusDialogApp;
 		startButtonClass : 'wpglobus_dialog_start wpglobus_dialog_icon',
 		clicks: 0,
 		init: function(args) {
+			if ( api.inited ) {
+				return;
+			}
 			api.option.dialog = api.option.dialogOptions;
 			api.option = $.extend(api.option, args);
 			$(api.option.dialogTabs).tabs();
@@ -193,6 +197,7 @@ var WPGlobusDialogApp;
 					api.addElement(e);
 				});
 			}
+			api.inited = true;
 		},
 		convertToId: function(s){
 			s = s.replace(/\]/g,'');
@@ -200,6 +205,7 @@ var WPGlobusDialogApp;
 			return s;
 		},
 		addElement: function(elem) {
+			api.init();
 			var option = {
 				id: null,
 				style: '',
