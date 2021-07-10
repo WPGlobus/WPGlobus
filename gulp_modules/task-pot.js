@@ -23,10 +23,9 @@ const task_pot = cb => {
 			print(),
 			wpPot({
 				domain: cfg.text_domain,
-				package: pkg.title + " " + pkg.version,
-				bugReport: cfg.bugReport,
+				package: pkg.title,
 				headers: false,
-				lastTranslator: pkg.author,
+				noFilePaths: true,
 				relativeTo: ".",
 				metadataFile: pkg.name + ".php"
 			}),

@@ -1,5 +1,5 @@
-# Copyright (C) 2021 WPGlobus 2.7.9
-# This file is distributed under the same license as the WPGlobus 2.7.9 package.
+# Copyright (C) 2021 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Franck, 2015-2017
 # FX Bénard <fxb@wp-translations.org>, 2015-2017
@@ -7,7 +7,6 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"Report-Msgid-Bugs-To: support@wpglobus.com\n"
 "PO-Revision-Date: 2021-06-04 12:20+0000\n"
 "Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"

@@ -1,12 +1,11 @@
-# Copyright (C) 2021 WPGlobus 2.7.9
-# This file is distributed under the same license as the WPGlobus 2.7.9 package.
+# Copyright (C) 2021 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"Report-Msgid-Bugs-To: support@wpglobus.com\n"
-"PO-Revision-Date: 2021-06-04 12:20+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2021-07-07 16:47+0000\n"
+"Last-Translator: clovio\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/pt_PT/)\n"
 "Language: pt_PT\n"
@@ -686,7 +685,7 @@ msgid "Select with language code"
 msgstr ""
 
 msgid "Dropdown"
-msgstr ""
+msgstr "Menu Suspenso"
 
 msgid "Dropdown with flags"
 msgstr ""
