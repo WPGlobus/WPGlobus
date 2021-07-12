@@ -220,6 +220,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.13 =
+* (Vendor/Yoast) Init `TinyMCE` description editor on the `term.php` page.
+* (Vendor/Yoast) Fixed incorrect rewriting taxonomy metas during the update process.
+
 = 2.7.12 =
 * (Core/JS) Force init `WPGlobusDialogApp` before using.
 
@@ -235,15 +239,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Vendor/ACF) Added filtering of the field array before it is updated.
 * (Core) Added language switcher to the admin bar for the posts in the Builder mode.
 * (POMO) Ukrainian translations completed (thanks go to Jack Willson)
-
-= 2.7.8 =
-* (Vendor/ACF) Fixed an issue with empty ACF fields.
-
-= Earlier versions and Add-ons =
-
-* [See the complete changelog here](https://github.com/WPGlobus/WPGlobus/blob/master/CHANGELOG.md)
-* [WPGlobus for WooCommerce](https://wpglobus.com/extensions/woocommerce-wpglobus/woocommerce-wpglobus-changelog/)
-* [WPGlobus Plus](https://wpglobus.com/extensions/wpglobus-plus/changelog/)
 
 == Demo Sites ==
 
