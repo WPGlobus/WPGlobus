@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-07-12 - version 2.7.13
+* (Vendor/Yoast) Init tinymce description editor on `term.php` page.
+* (Vendor/Yoast) Fixed incorrect rewriting the taxonomy meta in update process.
+
 2021-07-10 - version 2.7.12
 * (Core/JS) Force init `WPGlobusDialogApp` before using.
 
