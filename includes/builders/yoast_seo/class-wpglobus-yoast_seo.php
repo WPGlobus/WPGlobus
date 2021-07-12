@@ -47,7 +47,15 @@ if ( ! class_exists( 'WPGlobus_Yoast_SEO' ) ) :
 					$this->wpseo_taxonomy_option_name = 'wpseo_taxonomy_meta';
 				}
 
-				add_filter( "option_{$this->wpseo_taxonomy_option_name}", array( $this, 'filter__wpseo_taxonomy_meta' ), 5, 2 );
+				if ( ! empty( $_POST['action'] ) &&  'editedtag' === $_POST['action'] ) {
+					/**
+					 * Don't filter the option when saving taxonomy meta.
+					 * List of meta @see inside `filter__wpseo_taxonomy_meta` function.
+					 * @since 2.7.13
+					 */
+				} else {
+					add_filter( "option_{$this->wpseo_taxonomy_option_name}", array( $this, 'filter__wpseo_taxonomy_meta' ), 5, 2 );
+				}
 				
 				/**
 				 * @see wordpress-seo\inc\class-wpseo-replace-vars.php
