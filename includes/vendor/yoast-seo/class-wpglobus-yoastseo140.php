@@ -1478,6 +1478,7 @@ class WPGlobus_YoastSEO {
 					array(
 						'version' 		=> WPGLOBUS_VERSION,
 						'wpseo_version' => WPSEO_VERSION,
+						'pagenow'   	=> $pagenow,
 						'src_version'   => $src_version,
 						'builder_id'    => WPGlobus::Config()->builder->get('id'),
 						'builder_page'  => WPGlobus::Config()->builder->is_builder_page() ? 'true' : 'false',

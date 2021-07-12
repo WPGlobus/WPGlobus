@@ -246,13 +246,6 @@ jQuery(document).ready(function ($) {
 			});			
 			
 			api.setMultilingualFields();
-			
-			/**
-			 * Init Yoast tinymce editor for description.
-			 */
-			$(document).on( 'tinymce-editor-init', function( event, editor ) {	
-				$( '#' + editor.getContainer().id ).find('iframe').addClass(WPGlobusAdmin.builder.translatableClass).css({'width':''});
-			});			
 		},
 		start: function() {
 			/**

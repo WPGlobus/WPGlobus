@@ -100,6 +100,7 @@ jQuery(document).ready( function ($) {
 		start: function() {
 			api.accessExtra  = api.parseBool(WPGlobusYoastSeo.access_extra);
 			api.setMetaBoxTitle();
+			api.initEditors();
 			if ( ! api.isDefaultLanguage() ) {
 				if ( 'inactive' == api.moduleState() || ! api.moduleState() ) {
 					api.setKeywordFieldSuggest();
@@ -260,6 +261,18 @@ jQuery(document).ready( function ($) {
 			if ( box.length == 1 ) {
 				var content = box.text();
 				box.text(content+' ('+WPGlobusCoreData.en_language_name[ WPGlobusYoastSeo.language ]+')');
+			}				
+		},
+		initEditors: function() {
+			if ('term.php' == WPGlobusYoastSeo.pagenow) {
+				/**
+				 * Init Yoast tinymce editor for description.
+				 */
+				$(document).on( 'tinymce-editor-init', function( event, editor ) {	
+					if ( 'description' == editor.id ) {
+						$( '#' + editor.getContainer().id ).find('iframe').addClass(WPGlobusAdmin.builder.translatableClass).css({'width':''});
+					}
+				});
 			}				
 		}
 	}
