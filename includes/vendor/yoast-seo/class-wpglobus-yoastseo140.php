@@ -753,6 +753,11 @@ class WPGlobus_YoastSEO {
 			 */
 			$description = self::get_meta( '_yoast_wpseo_metadesc', $meta_description, $presentation->source );
 			
+			/**
+			 * @since 2.7.14
+			 */
+			$description = wpseo_replace_vars( $description, $presentation->source );
+			
 		} else if ( 'term' == $presentation->model->object_type ) {
 			
 			/**
