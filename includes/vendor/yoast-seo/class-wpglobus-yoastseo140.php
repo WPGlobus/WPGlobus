@@ -756,7 +756,9 @@ class WPGlobus_YoastSEO {
 			/**
 			 * @since 2.7.14
 			 */
-			$description = wpseo_replace_vars( $description, $presentation->source );
+			if ( ! empty($description) ) { 
+				$description = wpseo_replace_vars( $description, $presentation->source );
+			}
 			
 		} else if ( 'term' == $presentation->model->object_type ) {
 			
