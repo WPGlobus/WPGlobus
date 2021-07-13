@@ -234,10 +234,41 @@ class WPGlobus_YoastSEO {
 			/**	
 			 * @since 2.7.7
 			 */			
-			add_filter( 'option_wpseo_titles', array( __CLASS__, 'filter__wpseo_titles' ), 5, 2 ); 			
+			add_filter( 'option_wpseo_titles', array( __CLASS__, 'filter__wpseo_titles' ), 5, 2 );
+
+			/**
+			 * @since 2.7.14
+			 */
+			add_filter( 'wpseo_replacements', array( __CLASS__, 'filter__wpseo_replacements' ), 0, 2 );
+
 		}
 	}
-	
+
+	/**
+	 * Customization of the replacements before they are applied.
+	 *
+	 * @since 2.7.14
+	 *
+	 * @param array $replacements The replacements.
+	 * @param array $args         The object some of the replacement values might come from,
+	 *                            could be a post, taxonomy or term.
+	 */
+	public static function filter__wpseo_replacements( $replacements, $args ) {
+
+		if ( empty( $replacements ) ) {
+			return $replacements;
+		}
+
+		$replacements = (array) $replacements;
+
+		foreach ( $replacements as &$replacement ) {
+			$replacement = WPGlobus_Core::extract_text( $replacement );
+		}
+
+		return $replacements;
+	}
+
+
 	/**
 	 * Filter "application/ld+json".
 	 * @since 2.7.4
@@ -1102,12 +1133,22 @@ class WPGlobus_YoastSEO {
 	 */	
 	protected static function get_meta( $meta_key, $meta_value = '', $presentation_source = null ) {
 
+		// TODO: Test it!
+		if ( ! empty( $meta_value ) ) {
+			return WPGlobus_Core::extract_text( $meta_value );
+		}
+
 		if ( is_null(self::$wpseo_meta) ) {
 			self::get_wpseo_meta();
 		}
 
 		if ( empty( self::$wpseo_meta[ $meta_key ] ) ) {
-			return '';
+			// TODO: Test it!
+			if ( ! empty( $presentation_source->ID ) ) {
+				self::$wpseo_meta[ $meta_key ][ $presentation_source->ID ] = $meta_value;
+			} else {
+				return '';
+			}
 		}
 		
 		/** @global WP_Post $post */
@@ -1119,7 +1160,8 @@ class WPGlobus_YoastSEO {
 				if ( empty( self::$wpseo_meta[$meta_key][$presentation_source->ID] ) ) {
 					return '';
 				}
-				return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$presentation_source->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );				
+				// TODO: Test it!
+				return WPGlobus_Core::extract_text( self::$wpseo_meta[$meta_key][$presentation_source->ID] );
 			}			
 			
 			/**
@@ -1131,8 +1173,9 @@ class WPGlobus_YoastSEO {
 			if ( empty( self::$wpseo_meta[$meta_key][$post->ID] ) ) {
 				return '';
 			}
-			
-			return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$post->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+
+			// TODO: Test it!
+			return WPGlobus_Core::extract_text( self::$wpseo_meta[$meta_key][$post->ID] );
 		}
 
 		$_return_value = '';
@@ -1145,7 +1188,8 @@ class WPGlobus_YoastSEO {
 			}
 
 			if ( false !== strpos( $_meta_value, $meta_value ) ) {
-				$_return_value = WPGlobus_Core::text_filter( $_meta_value, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
+				// TODO: Test it!
+				$_return_value = WPGlobus_Core::extract_text( $_meta_value );
 				break;
 			}
 		}
