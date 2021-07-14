@@ -240,10 +240,73 @@ class WPGlobus_YoastSEO {
 			 * @since 2.7.14
 			 */
 			add_filter( 'wpseo_replacements', array( __CLASS__, 'filter__wpseo_replacements' ), 0, 2 );
+			
+			/**
+			 * @since 2.7.14
+			 */			
+			add_filter( 'wpseo_enhanced_slack_data', array( __CLASS__, 'filter__wpseo_enhanced_slack_data' ), 5, 2 );
 
+			/**
+			 * @since 2.7.14
+			 */				
+			add_filter( 'wpseo_schema_person', array( __CLASS__, 'filter__wpseo_schema_person' ), 5, 4 );
+
+			/**
+			 * @since 2.7.14
+			 * @todo Add filters like "get_the_author_{$field}" to controller, @see wp-includes\author-template.php
+			 */				
+			add_filter( 'get_the_author_display_name', array( 'WPGlobus_Filters', 'filter__text' ), 5 );
+			add_filter( 'get_the_author_description', array( 'WPGlobus_Filters', 'filter__text' ), 5 );			
 		}
 	}
 
+	/**
+	 * Filter: 'wpseo_schema_<type>' - Allows changing graph piece output by @type.
+	 * @see wordpress-seo\src\generators\schema-generator.php
+	 *
+	 * @since 2.7.14
+	 *
+	 * @param array $graph_piece 							  The graph piece to filter.
+	 * @param Meta_Tags_Context $context 				  	  A value object with context variables.
+	 * @param Abstract_Schema_Piece $graph_piece_generator    A value object with context variables.
+	 * @param Abstract_Schema_Piece[] $graph_piece_generators A value object with context variables.
+	 */
+	public static function filter__wpseo_schema_person( $graph_piece, $context, $graph_piece_generator, $graph_piece_generators ) {
+		
+		$keys = array( 'name', 'description' );
+		foreach( $keys as $_key ) {
+			if ( WPGlobus_Core::has_translations( $graph_piece[$_key] ) ) {
+				$graph_piece[$_key] = WPGlobus_Core::extract_text( $graph_piece[$_key], WPGlobus::Config()->language );
+			}		
+		}
+		
+		$image_keys = array( 'caption' );
+		foreach( $image_keys as $_key ) {
+			if ( WPGlobus_Core::has_translations( $graph_piece['image'][$_key] ) ) {
+				$graph_piece['image'][$_key] = WPGlobus_Core::extract_text( $graph_piece['image'][$_key], WPGlobus::Config()->language );
+			}		
+		}		
+		return $graph_piece;
+	}
+	
+	/**
+	 * Filter: 'wpseo_enhanced_slack_data' - Allows filtering of the enhanced data for sharing on Slack.
+	 * @see wordpress-seo\src\presenters\slack\enhanced-data-presenter.php
+	 *
+	 * @since 2.7.14
+	 *
+	 * @param array $data 						   The enhanced Slack sharing data.
+	 * @param Indexable_Presentation $presentation The presentation of an indexable.
+	 */
+	public static function filter__wpseo_enhanced_slack_data( $data, $presentation ) {
+		foreach( $data as $_key=>$_value ) {
+			if ( WPGlobus_Core::has_translations($_value) ) {
+				$data[$_key] = WPGlobus_Core::extract_text( $_value, WPGlobus::Config()->language );
+			}
+		}
+		return $data;
+	}
+	
 	/**
 	 * Customization of the replacements before they are applied.
 	 *
