@@ -2,8 +2,9 @@
 
 ## Changelog ##
 
-2021-07-13 - version 2.7.14
-* (Vendor/Yoast) Replaced snippet variables in description for string with default language only.
+2021-07-14 - version 2.7.14
+* (Vendor/Yoast) Fixed incorrect meta description output in some situations.
+* (Vendor/Yoast) Additional multilingual filters.
 
 2021-07-12 - version 2.7.13
 * (Vendor/Yoast) Init `TinyMCE` description editor on the `term.php` page.

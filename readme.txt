@@ -220,6 +220,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.7.14 =
+* (Vendor/Yoast) Fixed incorrect meta description output in some situations.
+* (Vendor/Yoast) Additional multilingual filters.
+
 = 2.7.13 =
 * (Vendor/Yoast) Init `TinyMCE` description editor on the `term.php` page.
 * (Vendor/Yoast) Fixed incorrect rewriting taxonomy metas during the update process.
@@ -233,12 +237,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.7.10 =
 * (Vendor/Yoast) Fixed an issue with using variables in post descriptions.
-
-= 2.7.9 =
-* (Vendor/ACF) Added the current language name for the ACF fields metabox in the Builder mode.
-* (Vendor/ACF) Added filtering of the field array before it is updated.
-* (Core) Added language switcher to the admin bar for the posts in the Builder mode.
-* (POMO) Ukrainian translations completed (thanks go to Jack Willson)
 
 == Demo Sites ==
 
