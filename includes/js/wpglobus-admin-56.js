@@ -713,8 +713,10 @@ jQuery(document).ready(function () {
 					this.optionsGeneral();
 					WPGlobusDialogApp.init({customData:WPGlobusCoreData.page_custom_data});
                 } else if ('widgets.php' == WPGlobusAdmin.page) {
-					WPGlobusWidgets.init();
-					WPGlobusDialogApp.init({dialogTitle:'Edit text'});
+					if ( 'undefined' !== typeof WPGlobusWidgets ) {
+						WPGlobusWidgets.init();
+						WPGlobusDialogApp.init({dialogTitle:'Edit text'});
+					}
                 } else if ('wpglobus_options' == WPGlobusAdmin.page) {
                     this.start();
                 } else if ('wpglobusAdminCentral' == WPGlobusAdmin.page) {
