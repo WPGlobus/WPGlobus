@@ -1287,9 +1287,32 @@ class WPGlobus_Filters {
 		}
 
 		return $new_value;
-
 	}
 
+	/**
+	 * Filters whether or not to use the block editor to manage widgets.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param boolean $use_widgets_block_editor Whether or not to use the block editor to manage widgets.
+	 */	
+	public static function filter__use_widgets_block_editor($use_block_editor) {
+	
+		if ( ! $use_block_editor ) {
+			
+			$theme_support_widgets_block_editor = get_theme_support( 'widgets-block-editor' );
+			
+			if ( ! $theme_support_widgets_block_editor ) {
+				return $theme_support_widgets_block_editor;
+			}
+		}
+
+		if ( ! empty( WPGlobus::Config()->use_widgets_block_editor ) && (bool) WPGlobus::Config()->use_widgets_block_editor ) {
+			return $use_block_editor;
+		}
+		
+		return false;
+	}
 }
 
 # --- EOF

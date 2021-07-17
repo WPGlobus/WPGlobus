@@ -348,6 +348,15 @@ add_filter( 'wp_mail', array( 'WPGlobus_Filters', 'filter__wp_mail' ), 5 );
 add_filter( 'embed_oembed_html', array( 'WPGlobus_Filters', 'filter__embed_oembed_html' ), 5, 4 );
 
 /**
+ * Filter to use the block editor to manage widgets.
+ * @since 2.8.0
+ */
+/** @see wp-includes\widgets.php */
+add_filter( 'use_widgets_block_editor', array( 'WPGlobus_Filters', 'filter__use_widgets_block_editor' ) );
+/** @see gutenberg\lib\widgets.php  @todo may be need to use this filter too. */
+// add_filter( 'gutenberg_use_widgets_block_editor', array( 'WPGlobus_Filters', 'filter__use_widgets_block_editor' ) );
+
+/**
  * ACF filters
  * @todo Move to a separate controller
  */
