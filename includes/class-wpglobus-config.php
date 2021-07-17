@@ -252,6 +252,14 @@ class WPGlobus_Config {
 	 * @since 2.2.14
 	 */	
 	public $block_editor_switcher_plugin_button_type = '';
+	
+	/**
+	 * To use Block Editor on widgets page. Set through the Options Panel.
+	 *
+	 * @var boolean
+	 * @since 2.8.0
+	 */	
+	public $use_widgets_block_editor = false;
 
 	/**
 	 * Language- and region-specific hreflang. 
@@ -787,6 +795,15 @@ class WPGlobus_Config {
 		if ( isset( $wpglobus_option['block_editor_switcher_plugin_button_type'] ) ) {
 			$this->block_editor_switcher_plugin_button_type = $wpglobus_option['block_editor_switcher_plugin_button_type'];
 			unset( $wpglobus_option['block_editor_switcher_plugin_button_type'] );
+		}
+
+		/**
+		 * Get status of the block editor for managing widgets.
+		 * @since 2.8.0
+		 */
+		if ( isset( $wpglobus_option['use_widgets_block_editor'] ) ) {
+			$this->use_widgets_block_editor = $wpglobus_option['use_widgets_block_editor'];
+			unset( $wpglobus_option['use_widgets_block_editor'] );
 		}
 
 		/**
