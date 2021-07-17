@@ -1584,47 +1584,80 @@ class WPGlobus_Options {
 	 * Section "Block Editor".
 	 *
 	 * @since 2.2.3
+	 * @since 2.8.0 Added `use_widgets_block_editor` option.
 	 * @return array
 	 */
 	protected function section_block_editor() {
 
-		/**
-		 * @since 2.5.4
-		 */
-		$_li_class = 'hidden';
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			$_li_class = '';
-		}
-
 		$fields = array();
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
-
+		
 		/**
-		 * When we add more options, need to update the @see WPGlobus_Options::sanitize_posted_data() method.
+		 * Get the theme support `widgets-block-editor` feature.
 		 */
-		$_checked = false;
-		if ( ! empty( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) && 1 == $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) { // phpcs:ignore
-			$_checked = true;
-		}
-
-		$fields[] =
-			array(
-				'id'      => 'block_editor_old_fashioned_language_switcher',
-				'type'    => 'wpglobus_checkbox',
-				'checked' => $_checked,
-				'name'    => 'wpglobus_option[block_editor_old_fashioned_language_switcher]',
-				'title'   => esc_html__( 'Old fashioned language switcher', 'wpglobus' ),
-				'label'   => esc_html__( 'Enabled', 'wpglobus' ),
+		$theme_support_widgets_block_editor = (bool) get_theme_support( 'widgets-block-editor' );
+		
+		if ( ! $theme_support_widgets_block_editor ) {
+			
+			$fields[] =			
+				array(
+					'id'    => 'use_widgets_block_editor_info',
+					'type'  => 'wpglobus_info',
+					'title' => esc_html__( 'Вы не можете использовать редактор блоков на странице Виджеты, так как его поддержка отключена в теме.', 'wpglobus' ),
+					#'html'  => '',
+					'class' => 'normal',
+				);
+				
+		} else {
+		
+			$_desc = sprintf(
+				esc_html__( '%1$sВнимание%2$s', 'wpglobus' ),
+				'<strong>',
+				'</strong>'
 			);
+			$_desc .= ': ' . esc_html__( 'Текущая версия WPGlobus не поддерживает мультиязычность виджетов при использовании редактора блоков', 'wpglobus' );
+		
+			$_checked = false;
+			if ( ! empty( $wpglobus_option['use_widgets_block_editor'] ) && 1 == $wpglobus_option['use_widgets_block_editor'] ) { // phpcs:ignore
+				$_checked = true;
+			}		
+			$fields[] =
+				array(
+					'id'      => 'use_widgets_block_editor',
+					'type'    => 'wpglobus_checkbox',
+					'checked' => $_checked,
+					'name'    => 'wpglobus_option[use_widgets_block_editor]',
+					'title'   => esc_html__( 'Использовать редактор блоков на странице Виджеты', 'wpglobus' ),
+					'label'   => esc_html__( 'Enabled', 'wpglobus' ),
+					'desc'	  => $_desc
+				);		
 
+			/**
+			 * @todo may be need to use this option too.
+			$_checked = false;
+			if ( ! empty( $wpglobus_option['gutenberg_use_widgets_block_editor'] ) && 1 == $wpglobus_option['gutenberg_use_widgets_block_editor'] ) { // phpcs:ignore
+				$_checked = true;
+			}		
+			$fields[] =
+				array(
+					'id'      => 'gutenberg_use_widgets_block_editor',
+					'type'    => 'wpglobus_checkbox',
+					'checked' => $_checked,
+					'name'    => 'wpglobus_option[gutenberg_use_widgets_block_editor]',
+					'title'   => esc_html__( 'Использовать редактор блоков на странице Виджеты в плагине Gutenberg', 'wpglobus' ),
+					'label'   => esc_html__( 'Enabled', 'wpglobus' ),
+				);
+			// */	
+		}
+		
 		return array(
 			'wpglobus_id' => 'wpglobus_block_editor',
 			'title'       => esc_html__( 'Block Editor', 'wpglobus' ),
 			'caption'     => esc_html__( 'Block Editor Options', 'wpglobus' ),
 			'icon'        => 'dashicons dashicons-layout',
 			'fields'      => $fields,
-			'li_class'    => $_li_class,
+			'li_class'    => '',
 		);
 	}
 
