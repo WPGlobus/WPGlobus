@@ -2082,6 +2082,8 @@ class WPGlobus {
 					'wpglobus_version' => WPGLOBUS_VERSION,
 					'disabledMask'     => $disabled_widgets_mask,
 					'l10n'         	   => $l10n,
+					'wp_version'	   => $GLOBALS['wp_version'], // @since 2.8.0
+					'useWidgetsBlockEditor' => WPGlobus::Config()->use_widgets_block_editor // @since 2.8.0
 				);
 				
 				/**

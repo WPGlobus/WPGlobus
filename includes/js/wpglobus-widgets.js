@@ -6,6 +6,7 @@
  * @since 2.4.17 To use WPGlobusCoreData.language instead of WPGlobusCoreData.default_language.
  *               Hide unneeded dialog icons.
  * @since 2.6.0 Code refactored for Image widgets.
+ * @since 2.8.0 Don't run with WP 5.8 when the block editor enables for managing widgets.
  *
  * @package WPGlobus
  * @subpackage Administration
@@ -26,7 +27,11 @@
 		languageBoxActive: false,
 		languageBoxTimeout: null,
 		imageWidgets: {},
+		parseBool: function(b){return !(/^(false|0)$/i).test(b) && !!b;},		
 		init: function() {
+			if ( api.parseBool(WPGlobusWidgets.useWidgetsBlockEditor) ) {
+				return;
+			}
 			api.addElements();
 			api.attachListeners();
 			api.arbitraryTextOrHTML();
