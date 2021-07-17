@@ -3,6 +3,7 @@
  * File: class-wpglobus-admin-gutenberg.php
  *
  * @since 2.7.2
+ * @deprecated 2.8.0
  */
 
 if ( ! class_exists('WPGlobus_Admin_Gutenberg') ) :

@@ -214,13 +214,14 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 * define( 'WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR', false );
 	 *
 	 * @since 2.7.2
+	 * @deprecated 2.8.0
 	 */
-	if ( ! defined('WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR') || WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR ) {
-		if ( defined('GUTENBERG_VERSION') ) {
-			require_once dirname( __FILE__ ) . '/includes/admin/gutenberg/class-wpglobus-admin-gutenberg.php';
-			WPGlobus_Admin_Gutenberg::construct();
-		}
-	}
+	// if ( ! defined('WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR') || WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR ) {
+		// if ( defined('GUTENBERG_VERSION') ) {
+			// require_once dirname( __FILE__ ) . '/includes/admin/gutenberg/class-wpglobus-admin-gutenberg.php';
+			// WPGlobus_Admin_Gutenberg::construct();
+		// }
+	// }
 
 endif;
 
