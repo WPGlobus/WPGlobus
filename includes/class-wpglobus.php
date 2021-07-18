@@ -2040,11 +2040,6 @@ class WPGlobus {
 				)
 			);
 
-			/**
-			 * Enqueue js for ACF support.
-			 * @since 2.6.6 Code moved to `includes\vendor\acf\class-wpglobus-vendor-acf.php`.
-			 */
-
 			if ( 'widgets.php' == $page ) {
 
 				$disabled_widgets_mask = array( 'rss-url' );
