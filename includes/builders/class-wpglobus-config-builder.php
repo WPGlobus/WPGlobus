@@ -17,13 +17,6 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		protected $is_run = false;
 
-		/**
-		 * May be to use "wpglobus_language" meta (reserved in WPGlobus).
-		 *
-		 * @todo remove after test
-		 */
-		//protected $language_meta_key = '_wpglobus_builder_language';
-
 		protected $language_cookie = 'wpglobus-builder-language';
 
 		protected $attrs = array();
