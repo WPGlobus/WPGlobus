@@ -2,6 +2,15 @@
 
 ## Changelog ##
 
+2021-07-18 - version 2.8.0
+* (Compatibility) Tested up to WordPress 5.8
+* (Core/Options) Added `use_widgets_block_editor` option.
+* (Core/Config) Added `use_widgets_block_editor` option.
+* (Core/Controller) Added `use_widgets_block_editor` filter.
+* (Core) Class `WPGlobus_Admin_Gutenberg` is deprecated.
+* (Core/JS) Checking existing WPGlobusWidgets before init.
+* (Core/JS) Don't run with WP 5.8 when the block editor enables for managing widgets.
+
 2021-07-14 - version 2.7.14
 * (Vendor/Yoast) Fixed incorrect meta description output in some situations.
 * (Vendor/Yoast) Additional multilingual filters.
