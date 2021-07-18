@@ -1611,7 +1611,7 @@ class WPGlobus_Options {
 				array(
 					'id'    => 'use_widgets_block_editor_info',
 					'type'  => 'wpglobus_info',
-					'title' => esc_html__( 'Вы не можете использовать редактор блоков на странице Виджеты, так как его поддержка отключена в теме.', 'wpglobus' ),
+					'title' => esc_html__( 'You cannot use block editor on the Widgets page because your theme disabled it.', 'wpglobus' ),
 					#'html'  => '',
 					'class' => 'normal',
 				);
@@ -1619,11 +1619,11 @@ class WPGlobus_Options {
 		} else {
 		
 			$_desc = sprintf(
-				esc_html__( '%1$sВнимание%2$s', 'wpglobus' ),
+				esc_html__( '%1$sAttention%2$s', 'wpglobus' ),
 				'<strong>',
 				'</strong>'
 			);
-			$_desc .= ': ' . esc_html__( 'Текущая версия WPGlobus не поддерживает мультиязычность виджетов при использовании редактора блоков', 'wpglobus' );
+			$_desc .= ': ' . esc_html__( 'The current version of WPGlobus does not support multililngual widgets with block editor', 'wpglobus' );
 		
 			$_checked = false;
 			if ( ! empty( $wpglobus_option['use_widgets_block_editor'] ) && 1 == $wpglobus_option['use_widgets_block_editor'] ) { // phpcs:ignore
@@ -1635,7 +1635,7 @@ class WPGlobus_Options {
 					'type'    => 'wpglobus_checkbox',
 					'checked' => $_checked,
 					'name'    => 'wpglobus_option[use_widgets_block_editor]',
-					'title'   => esc_html__( 'Использовать редактор блоков на странице Виджеты', 'wpglobus' ),
+					'title'   => esc_html__( 'Use block editor on the Widgets page', 'wpglobus' ),
 					'label'   => esc_html__( 'Enabled', 'wpglobus' ),
 					'desc'	  => $_desc
 				);		

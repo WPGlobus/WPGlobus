@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 5.5
 
-Tested up to: 5.7
+Tested up to: 5.8
 
 Requires PHP: 5.6
 
@@ -301,6 +301,15 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.8.0 ###
+* (Compatibility) Tested up to WordPress 5.8
+* (Core/Options) Added `use_widgets_block_editor` option.
+* (Core/Config) Added `use_widgets_block_editor` option.
+* (Core/Controller) Added `use_widgets_block_editor` filter.
+* (Core) Class `WPGlobus_Admin_Gutenberg` is deprecated.
+* (Core/JS) Checking existing WPGlobusWidgets before init.
+* (Core/JS) Don't run with WP 5.8 when the block editor enables for managing widgets.
 
 ### 2.7.14 ###
 * (Vendor/Yoast) Fixed incorrect meta description output in some situations.

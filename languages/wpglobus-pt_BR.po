@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-06-04 12:20+0000\n"
+"PO-Revision-Date: 2021-07-18 15:12+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/pt_BR/)\n"
@@ -990,7 +990,20 @@ msgstr ""
 msgid "Builder mode is enabled on these Post Types"
 msgstr ""
 
-msgid "Old fashioned language switcher"
+msgid "%1$sAttention%2$s"
+msgstr ""
+
+msgid ""
+"The current version of WPGlobus does not support multililngual widgets with "
+"block editor"
+msgstr ""
+
+msgid "Use block editor on the Widgets page"
+msgstr ""
+
+msgid ""
+"You cannot use block editor on the Widgets page because your theme disabled "
+"it."
 msgstr ""
 
 msgid "Block Editor"
