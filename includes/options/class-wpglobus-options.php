@@ -1589,6 +1589,13 @@ class WPGlobus_Options {
 	 */
 	protected function section_block_editor() {
 
+		if ( version_compare( $GLOBALS['wp_version'], '5.7.99', '<' ) ) {
+			/**
+			 * @since 2.8.0
+			 */
+			return array();
+		}
+
 		$fields = array();
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
