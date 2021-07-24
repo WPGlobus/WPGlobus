@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://qa.wpglobus.com",
+  "video": false,
+  "viewportWidth": 1280,
+  "viewportHeight": 900
+}

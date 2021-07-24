@@ -1199,9 +1199,9 @@ class WPGlobus_YoastSEO {
 	protected static function get_meta( $meta_key, $meta_value = '', $presentation_source = null ) {
 
 		// TODO: Test it!
-		if ( ! empty( $meta_value ) ) {
-			return WPGlobus_Core::extract_text( $meta_value );
-		}
+		// if ( ! empty( $meta_value ) ) {
+		// 	return WPGlobus_Core::extract_text( $meta_value );
+		// }
 
 		if ( is_null(self::$wpseo_meta) ) {
 			self::get_wpseo_meta();
