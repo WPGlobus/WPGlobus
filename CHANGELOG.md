@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2021-07-25 - version 2.8.1
+* (Vendor/Yoast) Fixed PHP Notice: `Undefined index: description`.
+* (Vendor/Yoast) Fixed an issue with og title.
+
 2021-07-18 - version 2.8.0
 * (Compatibility) Tested up to WordPress 5.8
 * (Core/Options) Added `use_widgets_block_editor` option.
