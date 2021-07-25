@@ -696,14 +696,21 @@ class WPGlobus_YoastSEO {
 				}
 				
 			} else {
-				
+
 				/** 
 				 * @since 2.5.23
 				 */
 				if ( WPGlobus_Core::has_translations( $title ) ) {
 					$title = WPGlobus_Core::extract_text( $title, WPGlobus::Config()->language );
+				} else {
+					/** 
+					 * The Opengraph title is received in the last saved language. Get it from meta.			
+					 * @since 2.8.1
+					 */					
+					$title = $meta_cache['_yoast_wpseo_title'][0];
+					$title = wpseo_replace_vars( $title, $presentation->source );		
 				}
-				
+			
 			}
 			
 		} elseif ( 'term' == $presentation->model->object_type ) {
