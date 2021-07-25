@@ -1206,9 +1206,9 @@ class WPGlobus_YoastSEO {
 	protected static function get_meta( $meta_key, $meta_value = '', $presentation_source = null ) {
 
 		// TODO: Test it!
-		if ( ! empty( $meta_value ) ) {
-			return WPGlobus_Core::extract_text( $meta_value );
-		}
+		// if ( ! empty( $meta_value ) ) {
+			// return WPGlobus_Core::extract_text( $meta_value );
+		// }
 
 		if ( is_null(self::$wpseo_meta) ) {
 			self::get_wpseo_meta();
@@ -1216,11 +1216,11 @@ class WPGlobus_YoastSEO {
 
 		if ( empty( self::$wpseo_meta[ $meta_key ] ) ) {
 			// TODO: Test it!
-			if ( ! empty( $presentation_source->ID ) ) {
-				self::$wpseo_meta[ $meta_key ][ $presentation_source->ID ] = $meta_value;
-			} else {
+			// if ( ! empty( $presentation_source->ID ) ) {
+				// self::$wpseo_meta[ $meta_key ][ $presentation_source->ID ] = $meta_value;
+			// } else {
 				return '';
-			}
+			// }
 		}
 		
 		/** @global WP_Post $post */
@@ -1233,7 +1233,8 @@ class WPGlobus_YoastSEO {
 					return '';
 				}
 				// TODO: Test it!
-				return WPGlobus_Core::extract_text( self::$wpseo_meta[$meta_key][$presentation_source->ID] );
+				// return WPGlobus_Core::extract_text( self::$wpseo_meta[$meta_key][$presentation_source->ID] );
+				return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$presentation_source->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 			}			
 			
 			/**
@@ -1247,7 +1248,8 @@ class WPGlobus_YoastSEO {
 			}
 
 			// TODO: Test it!
-			return WPGlobus_Core::extract_text( self::$wpseo_meta[$meta_key][$post->ID] );
+			// return WPGlobus_Core::extract_text( self::$wpseo_meta[$meta_key][$post->ID] );
+			return WPGlobus_Core::text_filter( self::$wpseo_meta[$meta_key][$post->ID], WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 		}
 
 		$_return_value = '';
@@ -1261,7 +1263,8 @@ class WPGlobus_YoastSEO {
 
 			if ( false !== strpos( $_meta_value, $meta_value ) ) {
 				// TODO: Test it!
-				$_return_value = WPGlobus_Core::extract_text( $_meta_value );
+				// $_return_value = WPGlobus_Core::extract_text( $_meta_value );
+				$_return_value = WPGlobus_Core::text_filter( $_meta_value, WPGlobus::Config()->language, WPGlobus::RETURN_EMPTY );
 				break;
 			}
 		}
