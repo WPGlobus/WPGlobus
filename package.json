@@ -41,7 +41,6 @@
     "svn:tag:commit": "cd wpsvn\\wpglobus && ndx svn ci -m %npm_package_version% --username tivnet",
     "!!svn:tag:remove": "cd wpsvn\\wpglobus && ndx svn rm tags/%npm_package_version% && svn stat",
     "// --": "",
-    "cypress:open": "node_modules\\.bin\\cypress.cmd open",
     "watch": "gulp watch",
     "dist": "composer update -o && gulp dist",
     "// Global npm": "",
@@ -96,8 +95,7 @@
     "plugin-error": "^1.0.1",
     "postcss-sass-unicode": "^0.1.0",
     "pump": "^3.0.0",
-    "through2": "^4.0.2",
-    "cypress": "^8.0.0"
+    "through2": "^4.0.2"
   },
   "browserslist": [
     "last 2 versions",
