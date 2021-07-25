@@ -706,11 +706,13 @@ class WPGlobus_YoastSEO {
 					/** 
 					 * The Opengraph title is received in the last saved language. Get it from meta.			
 					 * @since 2.8.1
-					 */					
-					$title = $meta_cache['_yoast_wpseo_title'][0];
-					$title = wpseo_replace_vars( $title, $presentation->source );		
+					 */
+					if ( ! empty( $meta_cache['_yoast_wpseo_focuskw'][0] ) ) {
+						$title = $meta_cache['_yoast_wpseo_title'][0];
+						$title = wpseo_replace_vars( $title, $presentation->source );
+					}
 				}
-			
+
 			}
 			
 		} elseif ( 'term' == $presentation->model->object_type ) {
