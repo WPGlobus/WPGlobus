@@ -272,10 +272,10 @@ class WPGlobus_YoastSEO {
 	 * @param Abstract_Schema_Piece[] $graph_piece_generators A value object with context variables.
 	 */
 	public static function filter__wpseo_schema_person( $graph_piece, $context, $graph_piece_generator, $graph_piece_generators ) {
-		
+
 		$keys = array( 'name', 'description' );
 		foreach( $keys as $_key ) {
-			if ( WPGlobus_Core::has_translations( $graph_piece[$_key] ) ) {
+			if ( ! empty( $graph_piece[$_key] ) && WPGlobus_Core::has_translations( $graph_piece[$_key] ) ) {
 				$graph_piece[$_key] = WPGlobus_Core::extract_text( $graph_piece[$_key], WPGlobus::Config()->language );
 			}		
 		}
