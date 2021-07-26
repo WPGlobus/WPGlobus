@@ -220,6 +220,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.8.1 =
+* (Vendor/Yoast) Fixed PHP Notice: `Undefined index: description`.
+* (Vendor/Yoast) Fixed an issue with `og:title` meta.
+
 = 2.8.0 =
 * (Compatibility) Tested up to WordPress 5.8
 * (Core/Options) Added `use_widgets_block_editor` option.
@@ -228,24 +232,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Core) Class `WPGlobus_Admin_Gutenberg` is deprecated.
 * (Core/JS) Checking existing WPGlobusWidgets before init.
 * (Core/JS) Don't run with WP 5.8 when the block editor enables for managing widgets.
-
-= 2.7.14 =
-* (Vendor/Yoast) Fixed incorrect meta description output in some situations.
-* (Vendor/Yoast) Additional multilingual filters.
-
-= 2.7.13 =
-* (Vendor/Yoast) Init `TinyMCE` description editor on the `term.php` page.
-* (Vendor/Yoast) Fixed incorrect rewriting taxonomy metas during the update process.
-
-= 2.7.12 =
-* (Core/JS) Force init `WPGlobusDialogApp` before using.
-
-= 2.7.11 =
-* (Vendor/Yoast) Fixed issue with the breadcrumbs title (generated from the taxonomy title) in the `Schema Presenter`.
-* (Core/Post Types) Added the `elementor_snippet` post type to the `"hidden types"` list.
-
-= 2.7.10 =
-* (Vendor/Yoast) Fixed an issue with using variables in post descriptions.
 
 == Demo Sites ==
 
