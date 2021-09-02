@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-09-02 - version 2.8.2
+* (Core/JS) Set new value using `val` function instead of `attr` for menu item label and title.
+
 2021-07-25 - version 2.8.1
 * (Vendor/Yoast) Fixed PHP Notice: `Undefined index: description`.
 * (Vendor/Yoast) Fixed an issue with `og:title` meta.
