@@ -1099,14 +1099,14 @@ jQuery(document).ready(function () {
 				 */
 				$(WPGlobusAdmin.data.multilingualSlug.title).insertAfter('.term-slug-wrap th label');
             },
-            navMenus: function () {
-                var iID, menu_size,
-                    menu_item = '#menu-to-edit .menu-item';
+            navMenus: function() {
+                var iID, menuSize,
+                    menuItem = '#menu-to-edit .menu-item';
 
-                var timer = function () {
-                    if ( menu_size !== $(menu_item).length ) {
+                var timer = function() {
+                    if ( menuSize !== $(menuItem).length ) {
                         clearInterval(iID);
-                        $(menu_item).each(function (index, li) {
+                        $(menuItem).each(function (index, li) {
                             var $li = $(li);
                             if ($li.hasClass('wpglobus-menu-item')) {
                                 return; /** the same as continue */
@@ -1135,19 +1135,19 @@ jQuery(document).ready(function () {
                             return;
                         }
                         if (PlainObject.data.indexOf('action=add-menu-item') >= 0) {
-                            menu_size = $(menu_item).length;
+                            menuSize = $(menuItem).length;
                             iID = setInterval(timer, 500);
                         }
                     }
                 });
 
-                $(menu_item).each(function (index, li) {
+				$(menuItem).each(function(index, li) {
+					
+					var id = $(li).attr('id'),
+						item_id = id.replace('menu-item-', '');
 
-                    var id = $(li).attr('id'),
-                        item_id = id.replace('menu-item-', '');
-
-                    $.each(['input.edit-menu-item-title', 'input.edit-menu-item-attr-title'], function (input_index, input) {
-                        var $i = $('#' + id + ' ' + input);
+					$.each(['input.edit-menu-item-title', 'input.edit-menu-item-attr-title'], function (input_index, input) {
+						var $i = $('#' + id + ' ' + input);
 						if ( $i.val() != WPGlobusAdmin.data.items[ item_id ][ input ][ 'source' ] ) {
 							/**
 							 * fix for case when value resets by WP core
@@ -1155,40 +1155,42 @@ jQuery(document).ready(function () {
 							$i.val( WPGlobusAdmin.data.items[ item_id ][ input ][ 'source' ] );
 						}
 
-                        var p = $( '#' + id + ' ' + input ).parents('p');
-                        var height = 0;
+						var p = $( '#' + id + ' ' + input ).parents('p');
+						var height = 0;
 
-                        $.each(WPGlobusAdmin.data.open_languages, function (index, language) {
-                            var new_element = $i.clone();
-                            new_element.attr('id', $i.attr('id') + '-' + language);
-                            new_element.attr('name', $i.attr('id') + '-' + language);
-                            new_element.attr('data-language', language);
-                            new_element.attr('data-item-id', item_id);
-                            new_element.attr('placeholder', WPGlobusAdmin.data.en_language_name[language]);
+						$.each(WPGlobusAdmin.data.open_languages, function(languageIndex, language) {
+							var newElement = $i.clone();
+							newElement.attr('id', $i.attr('id') + '-' + language);
+							newElement.attr('name', $i.attr('id') + '-' + language);
+							newElement.attr('data-language', language);
+							newElement.attr('data-item-id', item_id);
+							newElement.attr('placeholder', WPGlobusAdmin.data.en_language_name[language]);
+							newElement.attr('value', '');
 
-                            var classes = WPGlobusAdmin.data.items[item_id][language][input]['class'];
-                            if (input_index === 0 && language === WPGlobusAdmin.data.default_language) {
-                                new_element.attr('class', classes + ' edit-menu-item-title');
-                            } else {
-                                new_element.attr('class', classes);
-                            }
-
-							if ( WPGlobusAdmin.data.items[ item_id ][ language ][ input ][ 'caption' ] != '' ) {
-								new_element.attr('value', WPGlobusAdmin.data.items[item_id][language][input]['caption']);
+							var classes = WPGlobusAdmin.data.items[item_id][language][input]['class'];
+							if (input_index === 0 && language === WPGlobusAdmin.data.default_language) {
+								newElement.attr('class', classes + ' edit-menu-item-title');
 							} else {
-								new_element.attr('value', '');
+								newElement.attr('class', classes);
 							}
-							new_element.css('margin-bottom', '0.6em');
-							$(p).append( new_element );
-							height = index;
-                        });
-                        height = (height + 1) * 40;
-                        $i.css('display', 'none').attr('class', '').addClass('widefat wpglobus-hidden');
-                        $(p).css('height', height + 'px').addClass('wpglobus-menu-item-box');
+							
+							if ( WPGlobusAdmin.data.items[ item_id ][ language ][ input ][ 'caption' ] == '' ) {
+								newElement.val('');
+							} else {
+								newElement.val(WPGlobusAdmin.data.items[item_id][language][input]['caption']);
+							}
 
-                    });
-                    $(li).addClass('wpglobus-menu-item');
-                });
+							newElement.css('margin-bottom', '0.6em');
+							$(p).append( newElement );
+							height = languageIndex;
+						});
+						height = (height + 1) * 40;
+						$i.css('display', 'none').attr('class', '').addClass('widefat wpglobus-hidden');
+						$(p).css('height', height + 'px').addClass('wpglobus-menu-item-box');
+
+					});
+					$(li).addClass('wpglobus-menu-item');
+				});
 
 				$('.menus-move-left, .menus-move-right').each(function(index,e) {
 					var $e = $(e), new_title;
@@ -1240,7 +1242,7 @@ jQuery(document).ready(function () {
 				 * @since 1.9.16
 				 */
 				var menuItems = [];
-				setTimeout(function () {
+				setTimeout(function() {
 					$('.edit-menu-item-description').each(function() {
 						var id = $(this).attr('id');
 						menuItems.push(id);
@@ -1269,7 +1271,7 @@ jQuery(document).ready(function () {
 					})
 					.always(function (jqXHR, status) {
 					});
-				}, 1000 );
+				}, 1000);
 	
             },
             postEdit: function () {
