@@ -302,6 +302,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.8.2 ###
+* (Core/JS) Set new value using `val` function instead of `attr` for menu item labels and titles.
+
 ### 2.8.1 ###
 
 * (Vendor/Yoast) Fixed PHP Notice: `Undefined index: description`.
