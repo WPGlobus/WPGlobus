@@ -3595,11 +3595,12 @@ class WPGlobus {
 			 * Filter to show language tabs in post page.
 			 *
 			 * @since 1.5.5
+			 * @since 2.8.3 Added $post parameter.
 			 *
 			 * @param bool
 			 * Returning boolean.
 			 */
-		apply_filters( 'wpglobus_show_language_tabs', true )
+		apply_filters( 'wpglobus_show_language_tabs', true, $post )
 		) :
 			?>
 			<ul class="<?php echo esc_attr( $tab_wrapper_class ); ?>">
