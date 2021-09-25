@@ -1397,8 +1397,13 @@ jQuery(document).ready(function () {
 
                 /**
 				 * Setup for default language.
+				 * @since 2.8.3 Added trigger handler.
 				 */
-                $('#title').val(WPGlobusAdmin.title);
+				var postTitle = $(document).triggerHandler('wpglobus_post_title', [ WPGlobusAdmin.title ]); 
+				if ( 'undefined' === typeof postTitle ) {
+					postTitle = WPGlobusAdmin.title;
+				}
+                $('#title').val(postTitle);
 
                 /**
                  * See other places with the same bookmark.
