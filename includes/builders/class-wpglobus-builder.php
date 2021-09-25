@@ -87,9 +87,9 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * Show language tabs in post.php page.
 			 *
 			 * @see_file wpglobus\includes\class-wpglobus.php
+			 * @since 2.8.3 Added $post parameter.
 			 */
-			add_filter( 'wpglobus_show_language_tabs', array( $this, 'filter__show_language_tabs' ), 5 );
-
+			add_filter( 'wpglobus_show_language_tabs', array( $this, 'filter__show_language_tabs' ), 5, 2 );
 		}
 
 		/**
@@ -252,13 +252,17 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 *
 		 * @see_file includes\class-wpglobus.php
 		 *
+		 * @since 2.8.3 Added $post parameter.
+		 *
 		 * @param bool $value
+		 * @param WP_Post $post 
 		 *
 		 * @return bool
 		 */
 		public function filter__show_language_tabs(
 			/** @noinspection PhpUnusedParameterInspection */
-			$value
+			$value,
+			$post
 		) {
 
 			global $pagenow;
