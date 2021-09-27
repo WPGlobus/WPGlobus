@@ -302,6 +302,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.8.3 ###
+* (Core/JS) Added trigger handler `wpglobus_post_title`.
+* (Core) Added second $post parameter for `wpglobus_show_language_tabs` filter.
+* (Core/Builder) Added second $post parameter for `wpglobus_show_language_tabs` filter.
+
 ### 2.8.2 ###
 * (Core/JS) Set new value using `val` function instead of `attr` for menu item labels and titles.
 
