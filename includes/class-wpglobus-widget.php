@@ -46,11 +46,12 @@ class WPGlobusWidget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		if ( ! empty( $instance['type'] ) ) {
-			$type = $instance['type'];
-		} else {
-			$type = 'flags';
-		}
+		$type = ! empty( $instance['type'] ) ? $instance['type'] : 'flags';
+
+		/**
+		 * @since 2.8.4
+		 */
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : 'Language switcher';
 
 		$inside = '';
 
@@ -151,9 +152,16 @@ class WPGlobusWidget extends WP_Widget {
 		 */
 		$flag_classes = array();
 
+		/** 
+		 * @since 2.8.4
+		 *
+		 * This filter is documented in wp-includes/widgets/class-wp-widget-pages.php
+		 */
+		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
+
 		echo $args['before_widget']; // WPCS: XSS ok.
-		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . $instance['title'] . $args['after_title']; // WPCS: XSS ok.
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title']; // WPCS: XSS ok.
 		}
 		foreach ( $enabled_languages as $language ) :
 
