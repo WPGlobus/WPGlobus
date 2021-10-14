@@ -2,10 +2,11 @@
 
 ## Changelog ##
 
-2021-10-13 - version 2.8.4
+2021-10-14 - version 2.8.4
 * (Core/Widget class) Added `widget_title` filter.
 * (Vendor/Yoast) Fixed PHP Notice: `Undefined index: _yoast_wpseo_title`.
 * (Builders/Yoast) Added compatibility with Yoast from v.17.3.
+* (Core/Media) Translate post title in submit box.
 
 2021-09-25 - version 2.8.3
 * (Core/JS) Added trigger handler `wpglobus_post_title`.
