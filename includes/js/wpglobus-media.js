@@ -32,6 +32,7 @@
 			wpglobusTabs.tabs();
 			api.iniSet();
 			api.setContent();
+			api.translate();
 			api.attachListeners();
 		},
 		iniSet: function() {
@@ -52,6 +53,16 @@
 				$.each( WPGlobusMedia.attachment, function( name, id ){
 					$('#'+id).val( WPGlobusCore.TextFilter( api.content[id], WPGlobusMedia.language, 'RETURN_EMPTY' ) );
 				});
+			}
+		},
+		translate: function() {
+			/* Translate post title in Suvmit Box */
+			var $postTitle = $('#submitpost .misc-pub-uploadedto strong');
+			if ( $postTitle.length == 1 ) {
+				var title = $postTitle.text();
+				if ( '' != title ) {
+					$postTitle.text(WPGlobusCore.TextFilter(title));
+				}
 			}
 		},
 		attachListeners: function() {
