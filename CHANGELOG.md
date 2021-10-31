@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-10-31 - version 2.8.5
+* (Core/Filters) Update `widget_display_callback` filter.
+
 2021-10-14 - version 2.8.4
 * (Core/Widget class) Added `widget_title` filter.
 * (Vendor/Yoast) Fixed PHP Notice: `Undefined index: _yoast_wpseo_title`.
