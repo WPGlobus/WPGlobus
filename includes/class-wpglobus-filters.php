@@ -758,6 +758,8 @@ class WPGlobus_Filters {
      *
 	 * @since 1.0.6
 	 * @since 2.4.10 Prevent handling of incorrect widget instance's settings.
+	 * @since 2.8.5 Added checking for translations in $widget_setting. 
+	 * 				Using `extract_text` instead of `text_filter`.
 	 *
 	 * @param string[] $instance
 	 *
@@ -776,9 +778,9 @@ class WPGlobus_Filters {
 		foreach ( $instance as &$widget_setting ) {
 
 			/** @noinspection ReferenceMismatchInspection */
-			if ( ! empty( $widget_setting ) && is_string( $widget_setting ) ) {
+			if ( ! empty( $widget_setting ) && is_string( $widget_setting ) && WPGlobus_Core::has_translations( $widget_setting ) ) {
 				$widget_setting =
-					WPGlobus_Core::text_filter( $widget_setting, WPGlobus::Config()->language );
+					WPGlobus_Core::extract_text( $widget_setting, WPGlobus::Config()->language );
 			}
 		}
 
