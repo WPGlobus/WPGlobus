@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.8.5 =
+* (Core/Filters) Update `widget_display_callback` filter.
+
 = 2.8.4 =
 * (Core/Widget class) Added `widget_title` filter.
 * (Vendor/Yoast) Fixed PHP Notice: `Undefined index: _yoast_wpseo_title`.
@@ -233,19 +236,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 = 2.8.2 =
 * (Core/JS) Set new value using `val` function instead of `attr` for menu item labels and titles.
-
-= 2.8.1 =
-* (Vendor/Yoast) Fixed PHP Notice: `Undefined index: description`.
-* (Vendor/Yoast) Fixed an issue with `og:title` meta.
-
-= 2.8.0 =
-* (Compatibility) Tested up to WordPress 5.8
-* (Core/Options) Added `use_widgets_block_editor` option.
-* (Core/Config) Added `use_widgets_block_editor` option.
-* (Core/Controller) Added `use_widgets_block_editor` filter.
-* (Core) Class `WPGlobus_Admin_Gutenberg` is deprecated.
-* (Core/JS) Checking existing WPGlobusWidgets before init.
-* (Core/JS) Don't run with WP 5.8 when the block editor enables for managing widgets.
 
 == Demo Sites ==
 
