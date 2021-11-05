@@ -1618,13 +1618,16 @@ class WPGlobus_Options {
 				
 		} else {
 		
+			/** 
+			 * obsolete @since 2.8.6
 			$_desc = sprintf(
 				esc_html__( '%1$sAttention%2$s', 'wpglobus' ),
 				'<strong>',
 				'</strong>'
 			);
 			$_desc .= ': ' . esc_html__( 'The current version of WPGlobus does not support multililngual widgets with block editor', 'wpglobus' );
-		
+			//*/
+			
 			$_checked = false;
 			if ( ! empty( $wpglobus_option['use_widgets_block_editor'] ) && 1 == $wpglobus_option['use_widgets_block_editor'] ) { // phpcs:ignore
 				$_checked = true;
@@ -1637,7 +1640,7 @@ class WPGlobus_Options {
 					'name'    => 'wpglobus_option[use_widgets_block_editor]',
 					'title'   => esc_html__( 'Use block editor on the Widgets page', 'wpglobus' ),
 					'label'   => esc_html__( 'Enabled', 'wpglobus' ),
-					'desc'	  => $_desc
+					'desc'	  => '' // $_desc
 				);		
 
 			/**
