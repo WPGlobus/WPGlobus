@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2021-11-05 - version 2.8.6
+* (Core/Widgets) Added support widgets block editor.
+
 2021-10-31 - version 2.8.5
 * (Core/Filters) Update `widget_display_callback` filter.
 
