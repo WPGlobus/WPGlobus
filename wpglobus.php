@@ -161,6 +161,16 @@ if (
 require_once dirname( __FILE__ ) . '/includes/class-wpglobus-post-types.php';
 
 /**
+ * WPGlobus Widgets.
+ *
+ * @since 2.8.6
+ */
+if ( WPGlobus::Config()->use_widgets_block_editor ) {
+	require_once dirname( __FILE__ ) . '/includes/widgets/class-wpglobus-widgets.php';
+	WPGlobus_Widgets::get_instance( __FILE__ );
+}
+
+/**
  * In admin area
  */
 if ( WPGlobus_WP::in_wp_admin() ) :
