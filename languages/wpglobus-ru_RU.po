@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-07-18 15:13+0000\n"
+"PO-Revision-Date: 2021-11-06 13:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: Russian (Russia) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ru_RU/)\n"
@@ -1132,16 +1132,6 @@ msgstr "Поддержка конструкторов страниц (Builders)"
 
 msgid "Builder mode is enabled on these Post Types"
 msgstr "Режим `Builder` активен для этих типов записей"
-
-msgid "%1$sAttention%2$s"
-msgstr "%1$sВнимание%2$s"
-
-msgid ""
-"The current version of WPGlobus does not support multililngual widgets with "
-"block editor"
-msgstr ""
-"Текущая версия WPGlobus не поддерживает мультиязычность виджетов при "
-"использовании редактора блоков"
 
 msgid "Use block editor on the Widgets page"
 msgstr "Использовать редактор блоков на странице Виджеты"

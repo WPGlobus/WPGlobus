@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-07-18 15:12+0000\n"
+"PO-Revision-Date: 2021-11-06 13:42+0000\n"
 "Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_FR/)\n"
@@ -1156,14 +1156,6 @@ msgstr "Soutien des constructeurs"
 
 msgid "Builder mode is enabled on these Post Types"
 msgstr "Le mode Constructeur est activé sur ces types de post"
-
-msgid "%1$sAttention%2$s"
-msgstr ""
-
-msgid ""
-"The current version of WPGlobus does not support multililngual widgets with "
-"block editor"
-msgstr ""
 
 msgid "Use block editor on the Widgets page"
 msgstr ""

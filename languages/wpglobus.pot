@@ -846,12 +846,6 @@ msgstr ""
 msgid "Builder mode is enabled on these Post Types"
 msgstr ""
 
-msgid "%1$sAttention%2$s"
-msgstr ""
-
-msgid "The current version of WPGlobus does not support multililngual widgets with block editor"
-msgstr ""
-
 msgid "Use block editor on the Widgets page"
 msgstr ""
 

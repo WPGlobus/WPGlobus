@@ -220,6 +220,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.8.6 =
+* (Core/Widgets) Added support for the widgets block editor.
+
 = 2.8.5 =
 * (Core/Filters) Update `widget_display_callback` filter.
 
