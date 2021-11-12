@@ -302,6 +302,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.8.7 ###
+
+* (Vendor/Yoast) Fixed: posts having the `Canonical` meta field set were missing in the `sitemap.xml`.
+
 ### 2.8.6 ###
 * (Core/Widgets) Added support for the widgets block editor.
 

@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2021-11-12 - version 2.8.7
-* (Vendor/Yoast) Fixed omit post URLs in sitemap.xml with set canonical meta field.
+* (Vendor/Yoast) Fixed: posts having the `Canonical` meta field set were missing in the `sitemap.xml`.
 
 2021-11-05 - version 2.8.6
 * (Core/Widgets) Added support for the widgets block editor.
