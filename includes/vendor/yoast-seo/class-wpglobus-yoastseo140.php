@@ -204,6 +204,12 @@ class WPGlobus_YoastSEO {
 			 * @see <title> view-source:http://test/ru/test-post-seo/
 			 */
 			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__get_post_metadata' ), 6, 4 );
+
+			/**
+			 * Filter metadata during sitemap generation.
+			 * @since 2.8.7
+			 */			
+			add_filter( 'get_post_metadata', array( __CLASS__, 'filter__sitemap_get_post_metadata' ), 5, 4 );
 			
 			/**
 			 * Filter meta keywords.
@@ -747,7 +753,7 @@ class WPGlobus_YoastSEO {
 	 * @since 2.1.3
 	 * @see function function get_value() in wordpress-seo\inc\class-wpseo-meta.php
 	 */
-	public static function filter__get_post_metadata( $check, $object_id, $meta_key, $single  ) {
+	public static function filter__get_post_metadata( $check, $object_id, $meta_key, $single ) {
 
 		global $post;
 	
@@ -792,6 +798,57 @@ class WPGlobus_YoastSEO {
 		
 		return $check;
 	}
+	
+	/**
+	 * Filter metadata during sitemap generation.
+	 *
+	 * @since 2.8.7
+	 * 
+	 * If post has Canonical URL from Yoast, then it interferes during multilingual sitemap generation.
+	 * @see `_yoast_wpseo_canonical` meta
+	 * @see `canonical` variable in `get_url($post)` function in wordpress-seo\inc\sitemaps\class-post-type-sitemap-provider.php
+	 * @see `init` for query_vars in wordpress-seo\inc\sitemaps\class-sitemaps-router.php
+	 */
+	public static function filter__sitemap_get_post_metadata( $check, $object_id, $meta_key, $single ) {
+		
+		$language = WPGlobus::Config()->language;
+		
+		if ( $language === WPGlobus::Config()->default_language ) {
+			return $check;
+		}
+		
+		global $wp_query;
+		
+		if ( ! isset( $wp_query->query_vars['sitemap'] ) ) {
+			return $check;
+		}
+		
+		static $_done = array();	
+		if ( isset( $_done[$object_id] ) && $_done[$object_id] ) {
+			return $check;
+		}
+		
+		$meta_type = 'post';	
+		
+		$meta_cache = wp_cache_get($object_id, $meta_type . '_meta');
+		
+		if ( ! empty( $meta_cache['_yoast_wpseo_canonical'][0] ) ) {
+			
+			/**
+			 * Unset `_yoast_wpseo_canonical` during generating sitemap.
+			 * We can use WPGlobus_Utils::localize_url, but we should be added fix for WPGlobus Plus too.
+			 * Don't use `get_permalink` here.
+			 */
+			unset( $meta_cache['_yoast_wpseo_canonical'] );
+			wp_cache_replace( $object_id, $meta_cache, $meta_type . '_meta' );
+		}		
+		
+		unset( $meta_cache ); 
+
+		$_done[$object_id] = true;
+		
+		return $check;
+	}	
 	
 	/**
 	 * Filter Yoast post meta keywords.
