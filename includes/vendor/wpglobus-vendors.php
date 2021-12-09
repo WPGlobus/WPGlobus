@@ -1,9 +1,12 @@
 <?php
 /**
+ * File: wpglobus-vendors.php
+ *
  * @package WPGlobus\Vendors
  * 
  * We start this file to support the plugins/add-ons in builder mode.
  * @since 1.9.17
+ * @see function maybe_run gutenberg builder in wpglobus\includes\class-wpglobus.php
  */
 
 /**
