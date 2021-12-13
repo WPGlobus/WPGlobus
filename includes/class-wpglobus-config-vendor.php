@@ -1,6 +1,6 @@
 <?php
 /**
- * Class WPGlobus_Config_Vendor
+ * File: class-wpglobus-config-vendor.php
  *
  * @package WPGlobus
  * @author  Alex Gor(alexgff)
@@ -69,7 +69,6 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 			self::get_config_files();
 			self::parse_config();
-
 		}
 
 		/**
@@ -197,11 +196,12 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/**
 			 * Rank Math SEO.
 			 * https://wordpress.org/plugins/seo-by-rank-math/
-			 * @since 2.4.3
+			 * @since 2.4.3 
+			 * @since 2.8.9 obsolete. Info from self::$add_on['rank_math_seo'] @see `wpglobus\includes\builders\class-wpglobus-builders.php` is enough.
 			 */
-			if ( defined( 'RANK_MATH_VERSION' ) ) {
-				self::$vendors[] = 'rank-math-seo.json';
-			}
+			// if ( defined( 'RANK_MATH_VERSION' ) ) {
+				// self::$vendors[] = 'rank-math-seo.json'; 
+			// }
 
 			/**
 			 * Page Builder by SiteOrigin.
@@ -216,13 +216,24 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			if ( self::$builder->get_id() != '' && self::$builder->is_builder_page() ) {
 
 				$addons = WPGlobus_Builders::get_addons();
-
 				if ( ! empty( $addons ) ) {
-					foreach ( $addons as $id => $addon ) {
+					foreach ( $addons as $key => $addon ) {
+
+						/**
+						 * @since 2.8.9
+						 */		
+						if ( empty( $addon['config_file'] ) ) {
+							continue;
+						}
+						
 						if ( 'add-on' === $addon['role'] ) {
 							if ( ! empty( $addon['const'] ) && defined( $addon['const'] ) ) {
-								self::$vendors[] = $addon['config_file'];
+								self::$vendors[$key] = $addon['config_file'];
 							}
+						} elseif ( 'builder' === $addon['role'] ) {
+							if ( ! empty( $addon['const'] ) && defined( $addon['const'] ) ) {
+								self::$vendors[$key] = $addon['config_file'];
+							}							
 						}
 					}
 				}
@@ -231,12 +242,12 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/**
 			 * Now handle with config files.
 			 */
-			foreach ( self::$vendors as $file ) {
-
+			foreach ( self::$vendors as $id=>$file ) {
 				if ( is_readable( $config_plugin_dir . $file ) ) {
-					$file_name = pathinfo( $file, PATHINFO_FILENAME );
-
-					self::$config[ $file_name ] = json_decode( file_get_contents( $config_plugin_dir . $file ), true );
+					self::$config[ $id ] = json_decode( file_get_contents( $config_plugin_dir . $file ), true );
+					/**
+					 * @todo add warning if file is incorrect. @since 2.8.9
+					 */
 				}
 			}
 
@@ -251,7 +262,6 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 * @return array
 			 */
 			self::$config = apply_filters( 'wpglobus_config_vendors', self::$config, self::$builder );
-
 		}
 
 		/**
@@ -365,7 +375,10 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				self::$post_meta_fields = array();
 				self::$post_ml_fields   = array();
 
-				foreach ( self::$config as $vendor => $data ) {
+				/**
+				 * @since 2.8.9 Changed $vendor to $vendor_key.
+				 */
+				foreach ( self::$config as $vendor_key => $data ) {
 
 					if ( isset( $data['post_meta_fields'] ) && is_array( $data['post_meta_fields'] ) ) :
 
@@ -411,7 +424,10 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 */
 			if ( is_null( self::$wp_options ) ) {
 
-				foreach ( self::$config as $vendor => $data ) {
+				/**
+				 * @since 2.8.9 Changed $vendor to $vendor_key.
+				 */
+				foreach ( self::$config as $vendor_key => $data ) {
 
 					if ( isset( $data['wp_options'] ) && is_array( $data['wp_options'] ) ) :
 						foreach ( $data['wp_options'] as $_option => $_init ) {
