@@ -1763,8 +1763,9 @@ class WPGlobus_YoastSEO {
 	 *
 	 * @since 2.4.14
 	 * @since 2.4.15 Localize description.
-	 * @since 2.5.1  Added support of taxonomies.
+	 * @since 2.5.1 Added support of taxonomies.
 	 * @since 2.7.11 Added filter for breadcrumb title.
+	 * @since 2.8.9 Added filter for taxonomy term name.
 	 * 
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
@@ -1803,6 +1804,14 @@ class WPGlobus_YoastSEO {
 			 */	
 			if ( WPGlobus_Core::has_translations($context->indexable->breadcrumb_title) ) {
 				$context->indexable->breadcrumb_title = WPGlobus_Core::extract_text( $context->indexable->breadcrumb_title, WPGlobus::Config()->language );
+			}
+
+			/**
+			 * Filter taxonomy term name.
+			 * @since 2.8.9
+			 */				
+			if ( WPGlobus_Core::has_translations($graph_piece['name']) ) {
+				$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
 			}
 			
 		} else if ( 'home-page' == $context->indexable->object_type ) {
