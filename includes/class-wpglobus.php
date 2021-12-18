@@ -462,6 +462,9 @@ class WPGlobus {
 					require_once dirname( __FILE__ ) . '/builders/class-wpglobus-builder.php';
 					require_once dirname( __FILE__ ) . '/builders/gutenberg/class-wpglobus-gutenberg.php';
 					$builder = new WPGlobus_Gutenberg();
+					/**
+					 * Let's load all needed vendors.
+					 */
 					require_once dirname( __FILE__ ) . '/vendor/wpglobus-vendors.php';
 					
 					/**
