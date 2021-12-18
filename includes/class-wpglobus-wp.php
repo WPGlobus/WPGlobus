@@ -1,6 +1,8 @@
 <?php
 /**
- * WordPress shortcuts
+ * File: class-wpglobus-wp.php
+ *
+ * WordPress shortcuts.
  * @package WPGlobus
  */
 
@@ -262,6 +264,30 @@ class WPGlobus_WP {
 		return ( is_admin() && ! self::is_doing_ajax() );
 	}
 
+	/**
+	 * True if doing REST API request.
+	 *
+	 * @since 2.8.9
+	 *
+	 * @return bool
+	 */
+	public static function is_rest_api_request() {
+
+		if ( self::is_doing_ajax() ) {
+			return false;
+		}
+		
+		/**
+		 * @see wp-includes\rest-api.php
+		 * @see wp-includes\load.php
+		 */
+		if ( defined( 'REST_REQUEST' ) || wp_is_json_request() ) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 } // class
 
 # --- EOF
