@@ -40,6 +40,18 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		protected static $post_ml_fields = null;
 
 		/**
+		 * @since 2.8.9
+		 * @var array|null
+		 */
+		protected static $term_meta_fields = null;
+
+		/**
+		 * @since 2.8.9
+		 * @var array|null
+		 */
+		protected static $term_ml_fields = null;
+
+		/**
 		 * @var array|null
 		 */
 		protected static $wp_options = null;
@@ -89,14 +101,27 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		/**
 		 * Get meta fields.
 		 *
+		 * @since 2.8.9 Return term and post meta fields.
+		 *
 		 * @return array|false
 		 */
 		public static function get_meta_fields() {
-			if ( is_null( self::$post_meta_fields ) ) {
-				return false;
+		
+			$meta_fields = false;
+			
+			if ( ! is_null( self::$post_meta_fields ) && ! empty( self::$post_meta_fields )  ) {
+				$meta_fields = self::$post_meta_fields;
 			}
 
-			return self::$post_meta_fields;
+			if ( ! is_null( self::$term_meta_fields ) && ! empty( self::$term_meta_fields )  ) {
+				if ( $meta_fields ) {
+					$meta_fields = array_merge( $meta_fields, self::$term_meta_fields );
+				} else {
+					$meta_fields = self::$term_meta_fields;
+				}
+			}
+			
+			return $meta_fields;
 		}
 
 		/**
@@ -197,7 +222,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 * Rank Math SEO.
 			 * https://wordpress.org/plugins/seo-by-rank-math/
 			 * @since 2.4.3 
-			 * @since 2.8.9 obsolete. Info from self::$add_on['rank_math_seo'] @see `wpglobus\includes\builders\class-wpglobus-builders.php` is enough.
+			 * obsolete @since 2.8.9 Info from self::$add_on['rank_math_seo'] @see `wpglobus\includes\builders\class-wpglobus-builders.php` is enough.
 			 */
 			// if ( defined( 'RANK_MATH_VERSION' ) ) {
 				// self::$vendors[] = 'rank-math-seo.json'; 
@@ -246,7 +271,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				if ( is_readable( $config_plugin_dir . $file ) ) {
 					self::$config[ $id ] = json_decode( file_get_contents( $config_plugin_dir . $file ), true );
 					/**
-					 * @todo add warning if file is incorrect. @since 2.8.9
+					 * @todo Add warning if file is incorrect. @since 2.8.9
 					 */
 				}
 			}
@@ -262,6 +287,60 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 * @return array
 			 */
 			self::$config = apply_filters( 'wpglobus_config_vendors', self::$config, self::$builder );
+		}
+
+		/**
+		 * Get term meta fields.
+		 *
+		 * @since 2.8.9
+		 */
+		protected static function get_term_meta_fields() {
+
+			/**
+			 * Parse term meta fields.
+			 */			
+			self::$term_meta_fields = array();
+			self::$term_ml_fields   = array();
+
+			foreach ( self::$config as $vendor_key => $data ) {
+
+				if ( isset( $data['term_meta_fields'] ) && is_array( $data['term_meta_fields'] ) ) :
+
+					foreach ( $data['term_meta_fields'] as $_meta => $_init ) {
+
+						if ( isset( $data['term_meta_fields'][ $_meta ] ) ) {
+
+							if ( '*' === $_meta ) {
+								// @todo Add in future version.
+								// $_arr = self::get_term_meta_fields( $_meta, $_init );
+								// if ( ! empty( $_arr ) ) {
+									// self::$term_meta_fields = array_merge( self::$term_meta_fields, $_arr );
+								// }
+							} else {
+								self::$term_meta_fields[] = $_meta;
+							}
+						}
+					}
+
+				endif;
+
+				if ( isset( $data['term_ml_fields'] ) && is_array( $data['term_ml_fields'] ) ) :
+					foreach ( $data['term_ml_fields'] as $_meta => $_init ) {
+						if ( isset( $data['term_ml_fields'][ $_meta ] ) ) {
+
+							if ( '*' === $_meta ) {
+								// @todo Add in future version.
+								// $_arr = self::get_term_ml_fields( $_meta, $_init );
+								// if ( ! empty( $_arr ) ) {
+									// self::$term_ml_fields = array_merge( self::$term_ml_fields, $_arr );
+								// }
+							} else {
+								self::$term_ml_fields[] = $_meta;
+							}
+						}
+					}
+				endif;
+			}
 		}
 
 		/**
@@ -361,12 +440,18 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 			return $_post_meta_fields;
 		}
-
+		
 		/**
 		 * Parse config files.
 		 */
 		public static function parse_config() {
-
+			
+			/**
+			 * Get term meta fields.
+			 * @since 2.8.9
+			 */
+			self::get_term_meta_fields();
+			
 			/**
 			 * Parse post meta fields.
 			 */
@@ -388,6 +473,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 								if ( '*' === $_meta ) {
 									$_arr = self::get_post_meta_fields( $_meta, $_init );
+									
 									if ( ! empty( $_arr ) ) {
 										self::$post_meta_fields = array_merge( self::$post_meta_fields, $_arr );
 									}
