@@ -935,13 +935,16 @@ class WPGlobus_Config {
 					'default_language'   => $this->default_language, 
 					'post_types' 		 => $builder_post_types,
 					'options' 			 => array( 
-												'register_post_types' => $this->option_register_post_types,  // @since 2.2.24
-											)
+						'register_post_types' => $this->option_register_post_types,  // @since 2.2.24
+					)
 				)
 			);
+			
+			/**
+			 * @since 2.8.9 Added support REST API requests.
+			 */
+			if ( is_admin() || WPGlobus_WP::is_rest_api_request() ) {
 		
-			if ( is_admin() ) {
-				
 				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
 				$config_vendor = WPGlobus_Config_Vendor::get_instance( $this->builder );
 
