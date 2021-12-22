@@ -220,6 +220,25 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.8.9 =
+
+* (Vendors) Updated doc.
+* (Configs) Updated `rank-math-seo.json` file.
+* (Core/WPGlobus) Updated doc.
+* (Core/WPGlobus_WP) Added `is_rest_api_request` function.
+* (Core/Builders) Added: builder attributes.
+* (Core/Meta) Added: support term meta data.
+* (Core/Config) Added: support REST API requests.
+* (Builder/Config) Set builder language for REST API requests.
+* (Vendor/Config) Added: handling term meta fields.
+* (Vendor/Yoast) Filter taxonomy term name in the `Schema Generator`.
+* (Vendor/RankMathSEO) Don't check post IDs.
+* (Builders/RankMathSEO) Added: support multilingual columns on `edit.php` page.
+* (Builders/RankMathSEO) Added: support for the REST API requests.
+
+= 2.8.8 =
+* Version 2.8.7 was a broken build. Fixed.
+
 = 2.8.7 =
 * (Vendor/Yoast) Fixed: posts having the `Canonical` meta field set were missing in the `sitemap.xml`.
 
