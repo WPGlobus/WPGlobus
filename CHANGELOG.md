@@ -2,6 +2,21 @@
 
 ## Changelog ##
 
+2021-12-22 - version 2.8.9
+* (Vendors) Updated doc.
+* (Configs) Updated `rank-math-seo.json` file.
+* (Core/WPGlobus) Updated doc.
+* (Core/WPGlobus_WP) Added `is_rest_api_request` function.
+* (Core/Builders) Added builder attributes.
+* (Core/Meta) Added support term meta data.
+* (Core/Config) Added support REST API requests.
+* (Builder/Config) Set builder language for REST API request.
+* (Vendor/Config) Added handling term meta fields.
+* (Vendor/Yoast) Filter taxonomy term name in the `Schema Generator`.
+* (Vendor/RankMathSEO) Don't check out post ID.
+* (Builders/RankMathSEO) Added support multilingual columns on `edit.php` page.
+* (Builders/RankMathSEO) Added support REST API requests.
+
 2021-11-12 - version 2.8.7
 * (Vendor/Yoast) Fixed: posts having the `Canonical` meta field set were missing in the `sitemap.xml`.
 
