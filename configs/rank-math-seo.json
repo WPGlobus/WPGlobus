@@ -2,13 +2,20 @@
   "post_meta_fields": {
     "*":{"file":"vendor/rank-math-seo/class-wpglobus-vendor-rank_math_seo.php","class":"WPGlobus_Vendor_RankMathSEO"}
   },
+  "term_meta_fields": {    
+		"rank_math_description": {},
+		"rank_math_seo_score": {},
+		"rank_math_title": {},
+		"rank_math_focus_keyword": {}
+  },
   "post_ml_fields": {    
-	"rank_math_title": {},
-	"rank_math_description": {},
-	"rank_math_focus_keyword": {}
+		"rank_math_title": {},
+		"rank_math_description": {},
+		"rank_math_focus_keyword": {},
+		"rank_math_seo_score": {}
   },
   "wp_options": {
-	"blogname": {},
-	"blogdescription": null
+		"blogname": {},
+		"blogdescription": null
   }
 }
