@@ -81,8 +81,16 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 						$this->attrs[ $key ] = $value;
 					}
 
-					$this->language          = $this->get_language();
-					$this->attrs['language'] = $this->language;
+					/**
+					 * @since 2.8.9 Get REST API request language.
+					 * For example for setting language @see wpglobus\includes\builders\rank_math_seo\class-wpglobus-builder-rank_math_seo.php
+					 */	
+					if ( isset($builder['rest_request']) && $builder['rest_request'] && isset($builder['rest_language']) ) {
+						$this->set_language( $builder['rest_language'] );
+					} else {
+						$this->language          = $this->get_language();
+						$this->attrs['language'] = $this->language;
+					}
 
 				} else {
 					unset( $this->attrs );
@@ -94,7 +102,6 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				$builder = WPGlobus_Builders::get( false );
 
 			}
-
 		}
 
 		/**
