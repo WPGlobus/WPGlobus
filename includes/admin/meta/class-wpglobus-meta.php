@@ -1,9 +1,10 @@
 <?php
 /**
- * Class WPGlobus_Meta
+ * File: class-wpglobus-meta.php
  *
  * @since   1.9.17
  * @since   1.9.25 Added build_multilingual_string function.
+ * @since   2.8.9 Added support for term meta. 
  *
  * @package WPGlobus\Admin\Meta
  * @author  Alex Gor(alexgff)
@@ -47,8 +48,12 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			self::$meta_fields = $meta_fields;
 			self::$builder     = $builder;
-
-			if ( is_admin() ) {
+			
+			/**
+			 * @since 2.8.9 Added checking REST API request.
+			 */
+			if ( is_admin() || WPGlobus_WP::is_rest_api_request() ) {
+				
 				add_filter( 'get_post_metadata', array( __CLASS__, 'filter__post_metadata' ), 5, 4 );
 
 				/**
@@ -57,8 +62,23 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				add_filter( 'update_post_metadata', array( __CLASS__, 'filter__update_post_metadata' ), 5, 5 );
 
 				add_filter( 'delete_post_metadata', array( __CLASS__, 'filter__delete_metadata' ), 5, 5 );
+				
+				/**
+				 * @since 2.8.9
+				 */
+				add_filter( 'get_term_metadata', array( __CLASS__, 'filter__term_metadata' ), 5, 4 );
+	
+				/**
+				 * @since 2.8.9
+				 */	
+				add_filter( 'update_term_metadata', array( __CLASS__, 'filter__update_term_metadata' ), 5, 5 );
+				
+				/**
+				 * @todo Test deleting term meta with Yoast and Rank Math(REST query).
+				 * @since 2.8.9
+				 */
+				// add_filter( 'delete_term_metadata', array( __CLASS__, 'filter__delete_term_metadata' ), 5, 5 );
 			}
-
 		}
 
 		/**
@@ -75,6 +95,215 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			}
 
 			return self::$instance;
+		}
+
+		/**
+		 * Update meta data.
+		 *
+		 * Internal use.
+		 * @since 2.8.9
+		 */
+		protected static function _update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value, $meta_type = '' ) {
+
+			if ( empty( $meta_type ) ) {
+				return $check;
+			}
+
+			/** @global wpdb $wpdb */
+			global $wpdb;
+
+			$table = _get_meta_table( $meta_type );
+			if ( ! $table ) {
+				return false;
+			}
+
+			$column    = $meta_type . '_id';
+			$id_column = 'meta_id';
+
+			$raw_meta_key = $meta_key;
+
+			if ( empty( $prev_value ) ) {
+				$old_value = get_metadata_raw( $meta_type, $object_id, $meta_key );
+				if ( is_countable( $old_value ) && count( $old_value ) === 1 ) {
+					if ( $old_value[0] === $meta_value ) {
+						return false;
+					}
+				}
+			}			
+
+			$_meta_value = $meta_value;
+
+			$meta_value = maybe_serialize( $meta_value );
+
+			/**
+			 * Don't auto-modify this SQL query.
+			 */
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$prev_meta = $wpdb->get_row( $wpdb->prepare( "SELECT $id_column, meta_value FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
+			
+			if ( is_null( $prev_meta ) ) {
+
+				$_passed_value = $_meta_value;
+
+				if ( ! empty( $_passed_value ) && WPGlobus::Config()->default_language !== self::$builder->get_language() ) {
+					// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
+					if ( WPGlobus_Core::has_translations( $_passed_value ) ) {
+						/**
+						 * We get multilingual $meta_value. Let save it as is.
+						 */
+					} else {
+						$_passed_value = self::build_multilingual_string( array( self::$builder->get_language() => $_passed_value ) );
+					}
+				}
+
+				return add_metadata( $meta_type, $object_id, $raw_meta_key, $_passed_value );
+			}
+			
+			/**
+			 * WPGlobus Core.
+			 * We get $meta_value in language that can be retrieved with self::$builder->get_language().
+			 */
+
+			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
+			if ( WPGlobus_Core::has_translations( $meta_value ) ) {
+				/**
+				 * We get multilingual $meta_value. Let save it as is.
+				 */
+			} else {
+
+				$_new_ml_array = array();
+
+				if ( WPGlobus_Core::has_translations($prev_meta->meta_value) ) {
+
+					foreach ( WPGlobus::Config()->enabled_languages as $language ) :
+
+						if ( $language === self::$builder->get_language() ) {
+
+							if ( ! empty( $meta_value ) ) {
+								$_new_ml_array[ $language ] = $meta_value;
+							}
+						} else {
+
+							$_value = WPGlobus_Core::text_filter( $prev_meta->meta_value, $language, WPGlobus::RETURN_EMPTY );
+
+							if ( '' !== $_value ) {
+								$_new_ml_array[ $language ] = $_value;
+							}
+						}
+
+					endforeach;
+
+					$_new_value = self::build_multilingual_string( $_new_ml_array );
+
+				} else {
+
+					if ( WPGlobus::Config()->default_language === self::$builder->get_language() ) {
+						$_new_ml_array[ WPGlobus::Config()->default_language ] = $meta_value;
+					} else {
+						$_new_ml_array[ WPGlobus::Config()->default_language ] = $prev_meta->meta_value;
+						if ( ! empty( $meta_value ) ) {
+							$_new_ml_array[ self::$builder->get_language() ] = $meta_value;
+						}
+					}
+
+					$_new_value = self::build_multilingual_string( $_new_ml_array );
+
+				}
+
+				if ( ! empty( $_new_value ) ) {
+					$meta_value = $_new_value;
+				}
+			}
+
+			$data  = compact( 'meta_value' );
+			$where = array(
+				$column    => $object_id,
+				'meta_key' => $meta_key,
+			);
+
+			$result = $wpdb->update( $table, $data, $where );
+
+			if ( ! $result ) {
+				return false;
+			}
+
+			wp_cache_delete( $object_id, $meta_type . '_meta' );
+
+			return true;			
+		}
+
+		/**
+		 * Filter term meta data.
+		 *
+		 * @since 2.8.9
+		 */	
+		public static function filter__term_metadata( $check, $object_id, $meta_key, $single ) {
+
+			if ( empty( self::$meta_fields ) ) {
+				return $check;
+			}
+
+			if ( ! self::meta_key_exists( $meta_key ) ) {
+				return $check;
+			}
+			
+			if ( empty( self::$builder->get_language() ) ) {
+				/**
+				 * Prevent update term meta when $builder is not set.
+				 */
+				return $check;
+			}
+
+			$meta_type = 'term';
+
+			$meta_cache = wp_cache_get( $object_id, $meta_type . '_meta' );
+
+			if ( ! $meta_cache ) {
+				$meta_cache = update_meta_cache( $meta_type, array( $object_id ) );
+				$meta_cache = $meta_cache[ $object_id ];
+			}
+			
+			if ( ! empty( $meta_cache[$meta_key][0] ) && WPGlobus_Core::has_translations( $meta_cache[$meta_key][0] ) ) {
+				
+				$meta_cache[$meta_key][0] = WPGlobus_Core::text_filter( 
+					$meta_cache[$meta_key][0], 
+					self::$builder->get_language(), 
+					WPGlobus::RETURN_EMPTY 
+				);
+				
+				wp_cache_replace(
+					$object_id,
+					$meta_cache,
+					$meta_type . '_meta'
+				);
+			}
+			
+			return $check;
+		}
+		
+		/**
+		 * Update term meta data.
+		 * 
+		 * @since 2.8.9
+		 */
+		public static function filter__update_term_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
+
+			if ( empty( self::$meta_fields ) ) {
+				return $check;
+			}
+
+			if ( ! self::meta_key_exists( $meta_key ) ) {
+				return $check;
+			}
+			
+			if ( empty( self::$builder->get_language() ) ) {
+				/**
+				 * Prevent update term meta when $builder is not set.
+				 */
+				return $check;
+			}
+
+			return self::_update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value, 'term' );
 		}
 
 		/**
@@ -347,7 +576,6 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			}
 
 			return $result;
-
 		}
 
 		/**
@@ -543,3 +771,5 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 	}
 
 endif;
+
+# --- EOF
