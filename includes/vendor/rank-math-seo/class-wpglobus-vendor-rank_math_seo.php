@@ -3,6 +3,7 @@
  * File: class-wpglobus-vendor-rank_math_seo.php
  *
  * @since 2.4.3
+ * @since 2.8.9 Don't check out post_id.
  *
  * @package WPGlobus\Vendors\RankMathSEO.
  * @author  Alex Gor(alexgff)
@@ -71,16 +72,17 @@ if ( ! class_exists( 'WPGlobus_Vendor_RankMathSEO' ) ) :
 				return self::$post_meta_fields;
 			}
 
-			$post_id = (int) $post_id;
-
-			if ( $post_id > 0 ) {
+			// @since 2.8.9 Don't check out post_id.
+			// $post_id = (int) $post_id;
+			// if ( $post_id > 0 ) {
+			// }
 				
-				self::$post_meta_fields = array(
-					'rank_math_title',
-					'rank_math_description',
-					'rank_math_focus_keyword',
-				);
-			}
+			self::$post_meta_fields = array(
+				'rank_math_title',
+				'rank_math_description',
+				'rank_math_focus_keyword',
+				'rank_math_seo_score',
+			);
 
 			return self::$post_meta_fields;
 		}
