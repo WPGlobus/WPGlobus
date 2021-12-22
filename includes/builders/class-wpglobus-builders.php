@@ -248,6 +248,9 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'message'      => '',
 				'ajax_actions' => '',
 				'builder_support' => true, // @since 2.4.12
+				'taxonomy'    	  => '',   // @since 2.8.9
+				'tag_ID'    	  => '',   // @since 2.8.9
+				'rest_request'    => WPGlobus_WP::is_rest_api_request(), // @since 2.8.9
 			);
 
 			self::$admin_attrs = array(
@@ -286,8 +289,6 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 			}
 
 			if ( $init ) {
-
-				//$builder = false;
 
 				self::get_addons();
 
