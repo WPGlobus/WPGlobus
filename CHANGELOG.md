@@ -2,6 +2,11 @@
 
 ## Changelog ##
 
+2021-12-28 - version 2.8.10
+* (Core/Post Types) Added the `wp_navigation` post type to the `"hidden types"` list.
+* (Core/Options) Updated compatibility info.
+* (Options/Languages table) Added Frisian language.
+
 2021-12-22 - version 2.8.9
 * (Vendors) Updated doc.
 * (Configs) Updated `rank-math-seo.json` file.
