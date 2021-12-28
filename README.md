@@ -302,8 +302,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
-### 2.8.9 ###
+### 2.8.10 ###
+* (Core/Post Types) Added the `wp_navigation` post type to the `"hidden types"` list.
+* (Core/Options) Updated the compatibility info.
+* (Options/Languages table) Added `Frisian` language.
 
+### 2.8.9 ###
 * (Vendors) Updated doc.
 * (Configs) Updated `rank-math-seo.json` file.
 * (Core/WPGlobus) Updated doc.
