@@ -153,7 +153,7 @@ if ( ! class_exists( 'WPGlobus_Builders' ) ) :
 				'plugin_name'           => 'Rank Math SEO',
 				'plugin_uri'            => 'https://wordpress.org/plugins/seo-by-rank-math/',
 				'path'                  => 'seo-by-rank-math/rank-math.php',
-				'stage'                 => 'beta',
+				'stage'                 => 'production',
 				'admin_bar_builder_label' => 'Rank Math SEO',
 			);
 
