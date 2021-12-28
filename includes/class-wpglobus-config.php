@@ -555,7 +555,7 @@ class WPGlobus_Config {
 	public function _set_languages() {
 
 		/**
-		 * Names, flags and locales
+		 * Names, flags and locales.
 		 * Useful links
 		 * - languages in ISO 639-1 format http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 		 * - regions http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -601,6 +601,7 @@ class WPGlobus_Config {
 			'vi' => array( 'Vietnamese', 'Tiếng Việt', 'vi', 'vn.png' ),
 			'cy' => array( 'Welsh', 'Cymraeg', 'cy', 'cy.png' ),
 			'ka' => array( 'Georgian', 'ქართული', 'ka_GE', 'ka.png' ),
+			'fy' => array( 'Frisian', 'Frysk', 'fy', 'nl.png' ),
 		);
 
 		foreach ( $language_table as $language => $data ) {
@@ -681,7 +682,7 @@ class WPGlobus_Config {
 		$this->_set_flag_path();
 
 		/**
-		 * Get languages name
+		 * Get languages name.
 		 * big array of used languages
 		 */
 		$this->language_name = get_option( $this->option_language_names );
@@ -694,7 +695,7 @@ class WPGlobus_Config {
 		}
 
 		/**
-		 * Get locales
+		 * Get locales.
 		 */
 		$this->locale = get_option( $this->option_locale );
 		if ( empty( $this->locale ) ) {
@@ -705,7 +706,7 @@ class WPGlobus_Config {
 		}
 
 		/**
-		 * Get enabled locales
+		 * Get enabled locales.
 		 */
 		foreach ( $this->enabled_languages as $language ) {
 			$this->enabled_locale[] = $this->locale[ $language ];
