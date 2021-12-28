@@ -127,6 +127,8 @@ class WPGlobus_Post_Types {
 		'mylink',
 		// Ninja Forms Contact Form - https://wordpress.org/plugins/ninja-forms/ @since 2.7.7
 		'nf_sub',
+		// Core - @see register_post_type `wp_navigation` in wp-includes\post.php  @since 2.8.10
+		'wp_navigation'
 	);
 
 	/**
