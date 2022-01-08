@@ -395,6 +395,22 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 */					
 			self::$disabled_themes[] = 'newyork city';
 
+			/**
+			 * @since 2.8.11
+			 * Don't standard managing content in customize.
+			 * @see https://extendthemes.com/go/mesmerize-home/
+			 * @see https://extendthemes.com/highlight/
+			 */					
+			self::$disabled_themes[] = 'mesmerize';
+			self::$disabled_themes[] = 'highlight';
+
+			/**
+			 * @since 2.8.11
+			 * With Layout Builder.
+			 * @see https://themeforest.net/item/enfold-responsive-multipurpose-theme/
+			 */		
+			self::$disabled_themes[] = 'enfold';
+
 			add_action( 'wp_loaded', array( __CLASS__, 'init' ) );
 
 			/**
