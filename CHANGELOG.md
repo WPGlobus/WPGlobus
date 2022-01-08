@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2022-01-08 - version 2.8.11
+* (Options/Languages table) Added `Frisian` flag image.
+* (Customizer) Exclude incompatible themes: "Mesmerize", "Highlight", "Enfold".
+
 2021-12-28 - version 2.8.10
 * (Core/Post Types) Added the `wp_navigation` post type to the `"hidden types"` list.
 * (Core/Options) Updated the compatibility info.
