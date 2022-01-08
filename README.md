@@ -302,6 +302,11 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.8.11 ###
+* (Options/Languages table) Added the `Frisian` flag image.
+
+* (Customizer) Exclude incompatible themes: `Mesmerize`, `Highlight`, and `Enfold`.
+
 ### 2.8.10 ###
 * (Core/Post Types) Added the `wp_navigation` post type to the `"hidden types"` list.
 * (Core/Options) Updated the compatibility info.
@@ -327,34 +332,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Builders/RankMathSEO) Added: support multilingual columns on `edit.php` page.
 
 * (Builders/RankMathSEO) Added: support for the REST API requests.
-
-### 2.8.8 ###
-* Version 2.8.7 was a broken build. Fixed.
-
-### 2.8.7 ###
-
-* (Vendor/Yoast) Fixed: posts having the `Canonical` meta field set were missing in the `sitemap.xml`.
-
-### 2.8.6 ###
-* (Core/Widgets) Added support for the widgets block editor.
-
-### 2.8.5 ###
-* (Core/Filters) Update `widget_display_callback` filter.
-
-### 2.8.4 ###
-* (Core/Widget class) Added `widget_title` filter.
-
-* (Vendor/Yoast) Fixed PHP Notice: `Undefined index: _yoast_wpseo_title`.
-* (Builders/Yoast) Added compatibility with Yoast from v.17.3.
-* (Core/Media) Translate post title in submit box.
-
-### 2.8.3 ###
-* (Core/JS) Added trigger handler `wpglobus_post_title`.
-* (Core) Added second $post parameter for `wpglobus_show_language_tabs` filter.
-* (Core/Builder) Added second $post parameter for `wpglobus_show_language_tabs` filter.
-
-### 2.8.2 ###
-* (Core/JS) Set new value using `val` function instead of `attr` for menu item labels and titles.
 
 ## Demo Sites ##
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 msgid ""
 msgstr ""
