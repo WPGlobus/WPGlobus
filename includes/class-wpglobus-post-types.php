@@ -52,6 +52,8 @@ class WPGlobus_Post_Types {
 		'vc_grid_item',
 		// Elementor: @since 2.2.7
 		'elementor_library',
+		// Elementor Header & Footer Builder: https://wordpress.org/plugins/header-footer-elementor/ @since 2.10.0
+		'elementor-hf',
 		// NextGEN Gallery: @since 2.2.29
 		'ngg_album',
 		'ngg_gallery',
@@ -183,3 +185,5 @@ class WPGlobus_Post_Types {
 		return $hidden_types;
 	}
 }
+
+# --- EOF
