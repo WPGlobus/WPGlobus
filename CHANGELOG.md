@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2022-06-16 - version 2.10.0
+* (Compatibility) Tested up to WordPress 6.0
+* (Core/Post Types) Added the `elementor-hf` post type to the `"hidden types"` list.
+
 2022-01-08 - version 2.8.11
 * (Options/Languages table) Added the `Frisian` flag image.
 * (Customizer) Exclude incompatible themes: `Mesmerize`, `Highlight`, and `Enfold`.
