@@ -302,6 +302,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.10.0 ###
+* (Compatibility) Tested up to WordPress 6.0
+* (Core/Post Types) Added the `elementor-hf` post type to the `"hidden types"` list.
+
 ### 2.8.11 ###
 * (Options/Languages table) Added the `Frisian` flag image.
 
