@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 5.5
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -112,8 +112,6 @@ Some 3rd-party plugins are supported with our [premium add-ons](https://wpglobus
 * [TablePress](https://wpglobus.com/product/wpglobus-plus/#tablepress),
 * [WooCommerce and some of its extensions](https://wpglobus.com/product/woocommerce-wpglobus/),
 * [WooCommerce Nets Netaxept Payment Plugin](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
-
-WPGlobus is compatible with ClassicPress Version 1.
 
 = Permalinks =
 

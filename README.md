@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 5.5
 
-Tested up to: 5.8
+Tested up to: 6.0
 
 Requires PHP: 5.6
 
@@ -164,8 +164,6 @@ Some 3rd-party plugins are supported with our [premium add-ons](https://wpglobus
 * [WooCommerce and some of its extensions](https://wpglobus.com/product/woocommerce-wpglobus/),
 
 * [WooCommerce Nets Netaxept Payment Plugin](https://wpglobus.com/product/multilingual-woocommerce-nets-netaxept/)
-
-WPGlobus is compatible with ClassicPress Version 1.
 
 ### Permalinks ###
 
