@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 		 */
 		public static function add_menu() {
 			add_submenu_page(
-				null,
+				'',
 				'',
 				'',
 				'administrator',
