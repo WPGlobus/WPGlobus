@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2022-07-12 - version 2.10.1
+* (Vendor/Yoast) Added filters for the user Open Graph title and description, Schema Graph name and description.
+
 2022-06-16 - version 2.10.0
 * (Compatibility) Tested up to WordPress 6.0
 * (Core/Post Types) Added the `elementor-hf` post type to the `"hidden types"` list.
