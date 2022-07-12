@@ -506,6 +506,35 @@ class WPGlobus_YoastSEO {
 			if ( WPGlobus_Core::has_translations($description) ) {
 				$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
 			}
+			
+		} elseif ( 'user' == $presentation->model->object_type ) {
+			
+			/** 
+			 * @since 2.10.1
+			 */			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'user_meta' );
+			
+			if ( ! empty( $meta_cache['wpseo_metadesc'][0] ) ) {
+				
+				$description = WPGlobus_Core::text_filter( $meta_cache['wpseo_metadesc'][0], WPGlobus::Config()->language );
+				$description = wpseo_replace_vars( $description, $presentation->source );
+			
+			} else {
+
+				if ( empty($description) ) {
+					$description = self::get_option( 'wpseo_titles', 'metadesc-author-wpseo' );
+				}
+
+				if (  ! empty($description) ) {
+						
+					if ( WPGlobus_Core::has_translations($description) ) {
+						$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );
+					}
+					
+					$description = wpseo_replace_vars( $description, $presentation->source );
+				}			
+				
+			}
 		}
 
 		return $description;
@@ -740,7 +769,35 @@ class WPGlobus_YoastSEO {
 				$__title = self::get_option( 'wpseo_titles', 'title-tax-' . $presentation->model->object_sub_type );
 			}
 		
-			$title = wpseo_replace_vars( $__title, $presentation->source );			
+			$title = wpseo_replace_vars( $__title, $presentation->source );
+			
+		} elseif ( 'user' == $presentation->model->object_type ) {
+			
+			/** 
+			 * @since 2.10.1
+			 */			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'user_meta' );
+			
+			if ( ! empty( $meta_cache['wpseo_title'][0] ) ) {
+				
+				$title = WPGlobus_Core::text_filter( $meta_cache['wpseo_title'][0], WPGlobus::Config()->language );
+				$title = wpseo_replace_vars( $title, $presentation->source );
+			
+			} else {
+				
+				if ( empty($title) ) {
+					$title = self::get_option( 'wpseo_titles', 'title-author-wpseo' );
+				}
+				
+				if ( ! empty($title) ) {
+			
+					if ( WPGlobus_Core::has_translations($title) ) {
+						$title = WPGlobus_Core::text_filter( $title, WPGlobus::Config()->language );	
+					}
+					
+					$title = wpseo_replace_vars( $title, $presentation->source );
+				}
+			}
 		}
 
 		return $title;
@@ -928,7 +985,7 @@ class WPGlobus_YoastSEO {
 				$description = wpseo_replace_vars( $description, $presentation->source );
 			}
 			
-		} else if ( 'term' == $presentation->model->object_type ) {
+		} elseif ( 'term' == $presentation->model->object_type ) {
 			
 			/**
 			 * Taxonomy.
@@ -968,7 +1025,7 @@ class WPGlobus_YoastSEO {
 				}
 			}
 			
-		} else if ( 'home-page' == $presentation->model->object_type ) {
+		} elseif ( 'home-page' == $presentation->model->object_type ) {
 			
 			/**
 			 * When homepage displays latest post.
@@ -986,6 +1043,37 @@ class WPGlobus_YoastSEO {
 			}
 
 			$description = wpseo_replace_vars( $description, $presentation->source );
+			
+		} elseif ( 'user' == $presentation->model->object_type ) {
+			
+			/** 
+			 * @since 2.10.1
+			 */			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'user_meta' );
+			
+			if ( ! empty( $meta_cache['wpseo_metadesc'][0] ) ) {
+				
+				$description = WPGlobus_Core::text_filter( $meta_cache['wpseo_metadesc'][0], WPGlobus::Config()->language );
+				$description = wpseo_replace_vars( $description, $presentation->source );
+			
+			} else {
+
+				if ( empty($description) ) {
+					$description = self::get_option( 'wpseo_titles', 'metadesc-author-wpseo' );
+				}
+				
+				if ( empty($description) ) {
+					$meta_description_presenter_was_fired = true;
+				} else {
+
+					if ( WPGlobus_Core::has_translations($description) ) {
+						$description = WPGlobus_Core::text_filter( $description, WPGlobus::Config()->language );	
+					}					
+					$description = wpseo_replace_vars( $description, $presentation->source );
+					
+				}				
+				
+			}
 		}
 	
 		/**
@@ -1766,6 +1854,7 @@ class WPGlobus_YoastSEO {
 	 * @since 2.5.1 Added support of taxonomies.
 	 * @since 2.7.11 Added filter for breadcrumb title.
 	 * @since 2.8.9 Added filter for taxonomy term name.
+	 * @since 2.10.1 Added filter for user object type.
 	 * 
 	 * @scope front
 	 * @param array $graph_piece		 Array of graph piece.
@@ -1787,7 +1876,7 @@ class WPGlobus_YoastSEO {
 				$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
 			}		
 
-		} else if ( 'term' == $context->indexable->object_type ) {
+		} elseif ( 'term' == $context->indexable->object_type ) {
 		
 			/**
 			 * Taxonomy.
@@ -1814,7 +1903,7 @@ class WPGlobus_YoastSEO {
 				$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
 			}
 			
-		} else if ( 'home-page' == $context->indexable->object_type ) {
+		} elseif ( 'home-page' == $context->indexable->object_type ) {
 		
 			/**
 			 * When homepage displays latest post.
@@ -1822,7 +1911,21 @@ class WPGlobus_YoastSEO {
 			 */
 			if ( ! empty( $graph_piece['description'] ) && WPGlobus_Core::has_translations( $graph_piece['description'] ) ) {
 				$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
+			}
+			
+		} elseif ( 'user' == $context->indexable->object_type ) {
+		
+			/**
+			 * @since 2.10.1
+			 */
+			if ( ! empty( $graph_piece['description'] ) && WPGlobus_Core::has_translations( $graph_piece['description'] ) ) {
+				$graph_piece['description'] = WPGlobus_Core::extract_text( $graph_piece['description'], WPGlobus::Config()->language );
+			}
+	
+			if ( ! empty( $graph_piece['name'] ) && WPGlobus_Core::has_translations( $graph_piece['name'] ) ) {
+				$graph_piece['name'] = WPGlobus_Core::extract_text( $graph_piece['name'], WPGlobus::Config()->language );
 			}	
+			
 		}
 
 		return $graph_piece;
@@ -1891,6 +1994,34 @@ class WPGlobus_YoastSEO {
 		
 			$title = wpseo_replace_vars( $__title, $presentation->source );
  
+		} elseif ( 'user' == $presentation->model->object_type ) {
+			
+			/** 
+			 * @since 2.10.1
+			 */			
+			$meta_cache = wp_cache_get( $presentation->model->object_id, 'user_meta' );
+			
+			if ( ! empty( $meta_cache['wpseo_title'][0] ) ) {
+				
+				$title = WPGlobus_Core::text_filter( $meta_cache['wpseo_title'][0], WPGlobus::Config()->language );
+				$title = wpseo_replace_vars( $title, $presentation->source );
+			
+			} else {
+				
+				if ( empty($title) ) {
+					$title = self::get_option( 'wpseo_titles', 'title-author-wpseo' );
+				}
+				
+				if ( ! empty($title) ) {
+			
+					if ( WPGlobus_Core::has_translations($title) ) {
+						$title = WPGlobus_Core::text_filter( $title, WPGlobus::Config()->language );	
+					}
+					
+					$title = wpseo_replace_vars( $title, $presentation->source );
+				}
+			}		
+			
 		}
 		
 		return $title;
