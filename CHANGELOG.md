@@ -4,6 +4,7 @@
 
 2022-07-12 - version 2.10.1
 * (Vendor/Yoast) Added filters for the user Open Graph title and description, Schema Graph name and description.
+* (Core) Fixed PHP 8.1 notice about `add_submenu_page()` parameter.
 
 2022-06-16 - version 2.10.0
 * (Compatibility) Tested up to WordPress 6.0

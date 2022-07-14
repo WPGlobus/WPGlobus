@@ -218,33 +218,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.10.1 =
+* (Vendor/Yoast) Added filters for the user Open Graph title and description, Schema Graph name and description.
+* (Core) Fixed PHP 8.1 notice about `add_submenu_page()` parameter.
+
 = 2.10.0 =
 * (Compatibility) Tested up to WordPress 6.0
 * (Core/Post Types) Added the `elementor-hf` post type to the `"hidden types"` list.
-
-= 2.8.11 =
-* (Options/Languages table) Added the `Frisian` flag image.
-* (Customizer) Exclude incompatible themes: `Mesmerize`, `Highlight`, and `Enfold`.
-
-= 2.8.10 =
-* (Core/Post Types) Added the `wp_navigation` post type to the `"hidden types"` list.
-* (Core/Options) Updated the compatibility info.
-* (Options/Languages table) Added `Frisian` language.
-
-= 2.8.9 =
-* (Vendors) Updated doc.
-* (Configs) Updated `rank-math-seo.json` file.
-* (Core/WPGlobus) Updated doc.
-* (Core/WPGlobus_WP) Added `is_rest_api_request` function.
-* (Core/Builders) Added: builder attributes.
-* (Core/Meta) Added: support term meta data.
-* (Core/Config) Added: support REST API requests.
-* (Builder/Config) Set builder language for REST API requests.
-* (Vendor/Config) Added: handling term meta fields.
-* (Vendor/Yoast) Filter taxonomy term name in the `Schema Generator`.
-* (Vendor/RankMathSEO) Don't check post IDs.
-* (Builders/RankMathSEO) Added: support multilingual columns on `edit.php` page.
-* (Builders/RankMathSEO) Added: support for the REST API requests.
 
 == Demo Sites ==
 
