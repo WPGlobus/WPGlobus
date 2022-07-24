@@ -139,7 +139,7 @@ class WPGlobus_Utils {
 		}
 
 		/**
-		 * Use the global configuration is alternative not passed
+		 * Use the global configuration if alternative not passed
 		 */
 		if ( null === $config ) {
 			// @codeCoverageIgnoreStart
@@ -149,7 +149,9 @@ class WPGlobus_Utils {
 
 		$path = parse_url( $url, PHP_URL_PATH );
 
-		$path_home = untrailingslashit( parse_url( get_option( 'home' ), PHP_URL_PATH ) );
+		// Because `parse_url` may return `null`, do `untrailingslashit` separately.
+		$path_home = parse_url( get_option( 'home' ), PHP_URL_PATH );
+		$path_home = is_string( $path_home ) ? untrailingslashit( $path_home ) : '';
 
 		/**
 		 * Regex to find the language prefix.
@@ -301,9 +303,9 @@ class WPGlobus_Utils {
 		if ( is_404() ) {
 			return $hreflangs;
 		}
-		
+
 		foreach ( $config->enabled_languages as $language ) {
-	
+
 			switch ( $config->seo_hreflang_type ) {
 				case 'zz':
 					$_hreflang_type = $language;
@@ -313,7 +315,7 @@ class WPGlobus_Utils {
 					break;
 				default :
 					// 'zz-ZZ'
-					$_hreflang_type = str_replace( '_', '-', $config->locale[ $language ] );	
+					$_hreflang_type = str_replace( '_', '-', $config->locale[ $language ] );
 					break;
 			}
 
