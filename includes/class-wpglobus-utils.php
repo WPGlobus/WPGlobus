@@ -86,9 +86,13 @@ class WPGlobus_Utils {
 		 * We ignore http(s) and domain prefix, but we must match the domain-tld, so any external URLs
 		 * are not localized.
 		 */
+		// Because `parse_url` may return `null`, do `str_replace` separately (PHP81 deprecated).
+		$path_home = parse_url( $home_url, PHP_URL_PATH );
+		$path_home = is_string( $path_home ) ? str_replace( '/', '\/', $path_home ) : '';
+
 		$re_host_part = '(https?:\/\/(?:.+\.)?' .
 		                str_replace( '.', '\.', $home_domain_tld ) .
-		                str_replace( '/', '\/', parse_url( $home_url, PHP_URL_PATH ) )
+		                $path_home
 		                . ')';
 
 		/**
