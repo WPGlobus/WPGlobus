@@ -138,12 +138,13 @@ class WPGlobus_About {
 		</p>
 		<p>
 			<?php
+			/*
 			printf(
 				// translators: %s are used to insert HTML link. Keep them in place.
 				esc_html__( 'We are planning to maintain a %s list of translators %s on the WPGlobus website. This is not an endorsement, just a courtesy. Please contact them directly and let us know how did it work for you!', 'wpglobus' ),
 				'<a href="' . esc_url( WPGlobus_Utils::url_wpglobus_site() . 'translator/' . self::QA_CAMPAIGN ) . '">',
 				'</a>'
-			); ?>
+			); // */ ?>
 		</p>
 		<?php
 	}
