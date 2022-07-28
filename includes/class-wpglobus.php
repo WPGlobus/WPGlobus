@@ -2905,7 +2905,7 @@ class WPGlobus {
 	}
 
 	/**
-	 * Add language switcher to navigation menu
+	 * Add language switcher to navigation menu.
 	 *
 	 * @see wp_nav_menu()
 	 *
@@ -2959,6 +2959,9 @@ class WPGlobus {
 		}
 
 		/**
+		 * @deprecated 
+		 * @since 2.10.2
+		 *
 		 * Filter to add or not language selector to the menu.
 		 * Returning boolean.
 		 *
@@ -2968,6 +2971,23 @@ class WPGlobus {
 		 * @param stdClass $args                 An object containing wp_nav_menu() arguments.
 		 */
 		$disable_add_selector = apply_filters( 'wpglobus_menu_add_selector', $disable_add_selector, $args );
+
+		/**
+		 * Filter to add or not language switcher to the menu.
+		 *
+		 * @since 2.10.2
+		 *
+		 * @param boolean  $disable_add_selector Disable or not to add language switcher to the menu.
+		 * @param string   $language             Current language.
+		 * @param string   $nav_menu             Slug of current navigation menu.
+		 * @return boolean
+		 */
+		$disable_add_selector = apply_filters( 
+			'wpglobus_disable_switcher', 
+			$disable_add_selector,
+			self::Config()->language,
+			self::Config()->nav_menu
+		);
 
 		if ( $disable_add_selector ) {
 			return $sorted_menu_items;
