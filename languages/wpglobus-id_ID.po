@@ -99,17 +99,6 @@ msgstr ""
 "Bila Anda memilih penerjemah, silakan lihat bahasa ibu, negara tempat "
 "tinggal, spesialisasi dan pengetahuan mereka tentang WordPress."
 
-#. translators: %s are used to insert HTML link. Keep them in place.
-msgid ""
-"We are planning to maintain a %s list of translators %s on the WPGlobus "
-"website. This is not an endorsement, just a courtesy. Please contact them "
-"directly and let us know how did it work for you!"
-msgstr ""
-"Kami berencana untuk mempertahankan daftar %s penerjemah %s di situs "
-"WPGlobus. Ini bukan sebuah pengesahan, hanya sopan santun saja. Silahkan "
-"hubungi mereka secara langsung dan beritahu kami bagaimana cara kerjanya "
-"untuk Anda!"
-
 msgid "Important notes:"
 msgstr "Catatan penting:"
 
@@ -1338,3 +1327,13 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
+
+#~ msgid ""
+#~ "We are planning to maintain a %s list of translators %s on the WPGlobus "
+#~ "website. This is not an endorsement, just a courtesy. Please contact them "
+#~ "directly and let us know how did it work for you!"
+#~ msgstr ""
+#~ "Kami berencana untuk mempertahankan daftar %s penerjemah %s di situs "
+#~ "WPGlobus. Ini bukan sebuah pengesahan, hanya sopan santun saja. Silahkan "
+#~ "hubungi mereka secara langsung dan beritahu kami bagaimana cara kerjanya "
+#~ "untuk Anda!"

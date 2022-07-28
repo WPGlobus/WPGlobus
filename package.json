@@ -1,6 +1,6 @@
 {
   "name": "wpglobus",
-  "version": "2.10.1",
+  "version": "2.10.2",
   "description": "WPGlobus is a plugin for making bilingual / multilingual WordPress blogs and sites.",
   "title": "WPGlobus",
   "main": "Gulpfile.js",
@@ -24,7 +24,7 @@
     "pomo": "gulp pomo",
     "// 4.2 If translations changed - BUILD AGAIN!": "",
     "build:again": "gulp dist",
-    "// 5! Commit, tag and push to develop": "npm run git:commit && npm run git:tag && npm run git:push:develop",
+    "// 5! To develop": "npm run git:commit && npm run git:tag && npm run git:push:develop",
     "git:commit": "git add . && ndx git commit -m %npm_package_version%",
     "git:tag": "ndx git tag %npm_package_version%",
     "git:push:develop": "git push && git push --tags && npm run git:fetch:all",

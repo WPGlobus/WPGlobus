@@ -218,6 +218,13 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.10.2 =
+* (Core/WPGlobus About) Removed obsolete information.
+* (Core/WPGlobus) Added filter `wpglobus_disable_switcher` in the `WPGlobus` class.
+* Fix: PHP81 notice about passing `null` to `untrailingslashit`.
+* Fix: PHP81 notice about passing `null` to `str_replace`.
+* Updated WPGlobus language switcher examples file.
+
 = 2.10.1 =
 * (Vendor/Yoast) Added filters for the user Open Graph title and description, Schema Graph name and description.
 * (Core) Fixed PHP 8.1 notice about `add_submenu_page()` parameter.

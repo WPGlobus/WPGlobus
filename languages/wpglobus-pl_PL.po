@@ -90,13 +90,6 @@ msgid ""
 "of residence, specialization and knowledge of WordPress."
 msgstr ""
 
-#. translators: %s are used to insert HTML link. Keep them in place.
-msgid ""
-"We are planning to maintain a %s list of translators %s on the WPGlobus "
-"website. This is not an endorsement, just a courtesy. Please contact them "
-"directly and let us know how did it work for you!"
-msgstr ""
-
 msgid "Important notes:"
 msgstr ""
 

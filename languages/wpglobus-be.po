@@ -97,16 +97,6 @@ msgstr ""
 "При выборе переводчика обратите внимание на родной язык, страну проживания, "
 "специализацию и знание ВордПресс."
 
-#. translators: %s are used to insert HTML link. Keep them in place.
-msgid ""
-"We are planning to maintain a %s list of translators %s on the WPGlobus "
-"website. This is not an endorsement, just a courtesy. Please contact them "
-"directly and let us know how did it work for you!"
-msgstr ""
-"Мы планируем поддерживать %s список переводчиков %s на сайте WPGlobus. Не "
-"воспринимайте это как конкретную рекомендацию! Свяжитесь с переводчиками "
-"напрямую и потом расскажите нам, довольны ли Вы результатом."
-
 msgid "Important notes:"
 msgstr "Важная информация:"
 
@@ -1339,3 +1329,12 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/ru/"
+
+#~ msgid ""
+#~ "We are planning to maintain a %s list of translators %s on the WPGlobus "
+#~ "website. This is not an endorsement, just a courtesy. Please contact them "
+#~ "directly and let us know how did it work for you!"
+#~ msgstr ""
+#~ "Мы планируем поддерживать %s список переводчиков %s на сайте WPGlobus. Не "
+#~ "воспринимайте это как конкретную рекомендацию! Свяжитесь с переводчиками "
+#~ "напрямую и потом расскажите нам, довольны ли Вы результатом."
