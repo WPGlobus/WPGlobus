@@ -60,6 +60,40 @@ if ( class_exists( 'WPGlobus' ) ):
 	}
 	echo '</div>';
 	
-endif;  
+endif; 
 
+/**
+ * WPGlobus language switcher.
+ * Example 3: If you need to hide extra languages from the switcher on the category or tag page.
+ */
+if ( class_exists( 'WPGlobus' ) ):
+
+	add_filter( 'wpglobus_extra_languages', 'filter__extra_languages', 5, 2 );
+	function filter__extra_languages( $extra_languages, $current_language ) {
+		if ( is_tag() || is_category() ) {
+			return array();
+		}
+		return $extra_languages;
+	}
+	
+endif;
+
+/**
+ * WPGlobus language switcher.
+ * Example 4: You can remove the language switcher from a particular page at all.
+ * @since WPGlobus v.2.10.2
+ */
+if ( class_exists( 'WPGlobus' ) ):
+
+	add_filter( 'wpglobus_disable_switcher', 'filter__disable_switcher', 5, 3 );
+	function filter__disable_switcher( $disable_switcher, $current_language, $nav_menu ) {
+		
+		if ( is_tag() ) {
+			return true;
+		}
+		
+		return $disable_switcher;
+	}	
+	
+endif;
 # --- EOF
