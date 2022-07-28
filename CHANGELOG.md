@@ -2,6 +2,13 @@
 
 ## Changelog ##
 
+2022-07-28 - version 2.10.2
+* (Core/WPGlobus About) Deleted obsolete information.
+* (Core/WPGlobus) Added filter `wpglobus_disable_switcher` into class WPGlobus.
+* Fix: PHP81 notice about passing null to untrailingslashit.
+* Fix: PHP81 notice about passing null to str_replace.
+* Updated WPGlobus language switcher examples file.
+
 2022-07-12 - version 2.10.1
 * (Vendor/Yoast) Added filters for the user Open Graph title and description, Schema Graph name and description.
 * (Core) Fixed PHP 8.1 notice about `add_submenu_page()` parameter.
