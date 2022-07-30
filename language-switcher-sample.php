@@ -65,6 +65,10 @@ endif;
 /**
  * WPGlobus language switcher.
  * Example 3: If you need to hide extra languages from the switcher on the category or tag page.
+ *
+ * You can add this code to your active theme's `functions.php` file.
+ * Please note the information about the child theme
+ * https://developer.wordpress.org/themes/advanced-topics/child-themes/
  */
 if ( class_exists( 'WPGlobus' ) ):
 
@@ -82,6 +86,10 @@ endif;
  * WPGlobus language switcher.
  * Example 4: You can remove the language switcher from a particular page at all.
  * @since WPGlobus v.2.10.2
+ *
+ * You can add this code to your active theme's `functions.php` file.
+ * Please note the information about the child theme
+ * https://developer.wordpress.org/themes/advanced-topics/child-themes/ 
  */
 if ( class_exists( 'WPGlobus' ) ):
 
