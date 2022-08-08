@@ -507,7 +507,7 @@ class WPGlobus_Filters {
 	/**
 	 * Filter for @see get_locale
 	 *
-	 * @param string $locale
+	 * @param string $locale Locale.
 	 *
 	 * @return string
 	 * @todo    Do we need to do setlocale(LC_???, $locale)? (*** NOT HERE )
@@ -515,27 +515,17 @@ class WPGlobus_Filters {
 	 * @link    http://php.net/manual/en/function.setlocale.php
 	 * @example echo setlocale(LC_ALL, 'Russian'); => Russian_Russia.1251
 	 */
-	public static function filter__get_locale(
-		/** @noinspection PhpUnusedParameterInspection */
-		$locale
-	) {
+	public static function filter__get_locale( $locale ) {
 
-		/**
-		 * @todo This caching breaks the admin language switcher.
-		 */
-		/*		static $cached_locale = null;
-				if ( null !== $cached_locale ) {
-					return $cached_locale;
-				}*/
+		static $cached_locale = null;
 
 		/**
 		 * Special case: in admin area, show everything in the language of admin interface.
 		 * (set in the General Settings in WP 4.1)
-		 */
-		/**
-		 * @internal
 		 * We need to exclude is_admin when it's a front-originated AJAX,
-		 * so we are doing a "hack" checking @see WPGlobus_WP::is_admin_doing_ajax.
+		 * so we are doing a "hack" checking.
+		 *
+		 * @see WPGlobus_WP::is_admin_doing_ajax.
 		 */
 		if (
 			is_admin() &&
@@ -543,32 +533,36 @@ class WPGlobus_Filters {
 			&& apply_filters( 'wpglobus_use_admin_wplang', true )
 		) {
 			/**
-			 * @todo is_multisite
-			 * @todo Pre-WP4, WPLANG constant from wp-config
+			 * Set locale in admin area using WPLANG option.
+			 *
+			 * @since 2.10.3 Do not set if WPLANG is empty.
 			 */
-			$WPLANG = get_option( 'WPLANG' );
-			if ( empty( $WPLANG ) ) {
-				$WPLANG = 'en_US';
-			}
-			WPGlobus::Config()->set_language( $WPLANG );
-
-		}
-
-		if ( is_admin() ) {
-			/**
-			 * Checking case for set locale which does not set in WPGlobus
-			 */
-			if ( WPGlobus::Config()->is_enabled_locale( $locale ) ) {
-				$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
+			$wp_lang = get_option( 'WPLANG' );
+			if ( ! empty( $wp_lang ) ) {
+				WPGlobus::Config()->set_language( $wp_lang );
 			}
 		} else {
-			$locale = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
+			/**
+			 * Caching breaks the admin language switcher. So, use only when not in admin area.
+			 * @since 2.10.3
+			 */
+			if ( null !== $cached_locale ) {
+				return $cached_locale;
+			}
 		}
 
-		/*		$cached_locale = $locale;*/
+		/**
+		 * Only set locale if it's enabled in WPGlobus.
+		 *
+		 * @since 2.10.3 - check always, not only in admin.
+		 * @since 2.10.3 - Update cache.
+		 */
+		if ( WPGlobus::Config()->is_enabled_locale( $locale ) ) {
+			$locale        = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
+			$cached_locale = $locale;
+		}
 
 		return $locale;
-
 	}
 
 	/**
