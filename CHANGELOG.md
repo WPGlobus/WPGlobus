@@ -3,9 +3,9 @@
 ## Changelog ##
 
 2022-08-09 - version 2.10.3
-* (Core/Filters) Code cleanup: class-wpglobus-filters.php - filter__get_locale().
+* (Core/Filters) Code cleanup: `filter__get_locale()` in `class-wpglobus-filters.php`.
 * (Options/Languages table) Added the `vi.alt.png` flag.
-* package.json - patches for the new npm.
+* (Internal) `package.json` - patches for the new `npm`.
 
 2022-07-28 - version 2.10.2
 * (Core/WPGlobus About) Removed obsolete information.
