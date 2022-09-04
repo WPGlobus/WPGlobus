@@ -833,11 +833,23 @@ if ( ! class_exists( 'WPGlobus_Widgets' ) ) :
 					$language_flag_url[ $language ] = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
 				}
 			}
+			
+			/**
+			 * Switcher Version 2.0
+			 *
+			 * @since 2.10.4 
+			 */
+			$stat_content = 'none';
+			$stat_file = dirname( dirname( __FILE__ ) ) . '/widgets/assets/js/build-stat.json';
+			if ( is_readable($stat_file) ) {
+				$stat_content = file_get_contents($stat_file);
+			}
 
 			$data = array(
 				'wpVersion'   => $GLOBALS['wp_version'],
 				'version'     => WPGLOBUS_VERSION,
-				'phase'	  	  => 'production',
+				'switcherVersion' => '2.0.0',
+				'NODE_ENV'	  => 'production',
 				'homeUrl'	  => home_url('/'),
 				'currentUrl'  => add_query_arg(
 					array(),
@@ -862,10 +874,12 @@ if ( ! class_exists( 'WPGlobus_Widgets' ) ) :
 					admin_url( 'admin.php' )
 				),
 				'optionIcon'       => $option_icon,
-				'singleTabLayout'  => true,
+				'wpDebug'		   => defined('WP_DEBUG') && WP_DEBUG ? 'true' : 'false',
+				'reactVersion'	   => '', // Will be set in JS script.
+				'buildStat'		   => $stat_content
 			);
 			
-			if ( defined('WPGLOBUS_WIDGETS_PHP_DEBUG') && defined('WPGLOBUS_WIDGETS_PHP_ASSETS_URL') ) {
+			if ( defined('WPGLOBUS_WIDGETS_PHP_ASSETS_URL') ) {
 				$app_js = WPGLOBUS_WIDGETS_PHP_ASSETS_URL . 'js/wpglobus-widgets-block-editor.min.js';
 				$app_css = WPGLOBUS_WIDGETS_PHP_ASSETS_URL . 'css/wpglobus-widgets-block-editor.min.css';
 			} else {
