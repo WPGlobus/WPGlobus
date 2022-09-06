@@ -3,7 +3,7 @@
 ## Changelog ##
 
 2022-09-04 - version 2.10.4
-* (Core/Widgets) Update for the widgets block editor to v.2.0.
+* (Core/Widgets) Update for the widgets block editor v.2.0.
 
 2022-08-09 - version 2.10.3
 * (Core/Filters) Code cleanup: `filter__get_locale()` in `class-wpglobus-filters.php`.

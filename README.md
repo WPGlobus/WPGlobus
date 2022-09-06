@@ -300,6 +300,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.10.4 ###
+* (Core/Widgets) Update for the widgets block editor v.2.0.
+
 ### 2.10.3 ###
 
 * (Core/Filters) Code cleanup: `filter__get_locale()` in `class-wpglobus-filters.php`.
