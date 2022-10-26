@@ -4,7 +4,8 @@
  *
  * @since 2.2.31 We are providing support for `External File` only. @see elementor\core\files\css\base.php::use_external_file().
  * @since 2.4.12 Disable elementor support for post, that doesn't use elementor builder. 
-				 Add submit box switcher to ON/OFF elementor's support.
+ *  			 Add submit box switcher to ON/OFF elementor's support.
+ * @since 2.10.5 Update language switcher.				 
  * 
  * @package WPGlobus\Builders\Elementor
  * @author  Alex Gor(alexgff)
@@ -500,12 +501,12 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			<div id="wpglobus-elementor-wrapper">
 				<div class="elementor-panel-menu-item" id="wpglobus-elementor-panel-menu-item" style="cursor:auto;">
 					<div class="elementor-panel-menu-item-icon">
-						<i class="fa fa-globe"></i>
+						<i class="eicon-globe"></i>
 					</div>
 					<div class="elementor-panel-menu-item-title" id="wpglobus-elementor-selector-box"
 							style="padding-top:0;">
 						<span id="wpglobus-elementor-selector-title"
-								style="cursor:pointer;"><?php esc_html_e( 'WPGlobus languages', 'wpglobus' ); ?></span>
+								style="cursor:pointer;color:#6d7882;"><?php esc_html_e( 'WPGlobus languages', 'wpglobus' ); ?></span>
 						<ul id="wpglobus-elementor-selector" style="display:none;margin:10px;" class="hidden">
 							<?php
 							foreach ( WPGlobus::Config()->enabled_languages as $language ) {
@@ -528,16 +529,23 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 			<?php // phpcs:disable ?>
 			<script type='text/javascript'>
                 /* <![CDATA[ */
-				var WPGlobusTimeID;
-                WPGlobusTimeID = setInterval(function(){
+				var WPGlobusIntervalID;
+                WPGlobusIntervalID = setInterval(function(){
 					if ( jQuery("#elementor-panel-header-menu-button").length === 0 || 'undefined' === typeof elementor.config.version ) {
 						return;
 					}
-					clearInterval(WPGlobusTimeID);
+					clearInterval(WPGlobusIntervalID);
                     var wpglobusElementorPanelMenu = jQuery("#wpglobus-elementor-wrapper").html();
                     jQuery(document).on('click', "#elementor-panel-header-menu-button", function () {
-						if ( elementor.config.version[0] == '3' ) {
-							jQuery(".elementor-panel-menu-item-exit-to-dashboard").before(wpglobusElementorPanelMenu);
+						if ( elementor.config.version[0] === '3' ) {
+							var elems = [".elementor-panel-menu-item-exit-to-dashboard",".elementor-panel-menu-item-exit"];
+							jQuery.each(elems, function(i,elem) {
+								var $item = jQuery(elem);
+								if ( $item.length === 1 ) {
+									$item.before(wpglobusElementorPanelMenu);
+									return false;
+								}
+							});
 						} else {
 							jQuery(".elementor-panel-menu-item").eq(7).after(wpglobusElementorPanelMenu);
 						}
