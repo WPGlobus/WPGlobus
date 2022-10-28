@@ -1,21 +1,22 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Franck, 2015-2017
 # FX Bénard <fxb@wp-translations.org>, 2015-2017
-# Gregory Karpinsky <gregory@tiv.net>, 2015,2018
+# Gregory Karpinsky <gregory@tiv.net>, 2015,2018,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>, 2015,2018,2022\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/fr_FR/)\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 msgid "Guide"
 msgstr "Guide"
@@ -197,6 +198,9 @@ msgid ""
 "The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
 "%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
 msgstr ""
+"La langue principale est actuellement configurée à %1$s (%2$s). TOUS LES "
+"TEXTES QUI NE SONT PAS EN %1$s SERONT SUPPRIMÉS ! Pour changer la langue "
+"principale, veuillez allez dans Réglages."
 
 msgid "You are about to clean the content of the following database tables:"
 msgstr ""
@@ -444,7 +448,7 @@ msgid ""
 "WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
 msgstr ""
 "Nous détesterions vous voir partir. Si quelque chose va mal, ne désinstallez "
-"pas tout de suite WPGlobus. Veuillez %1$nous contacter%2$s et laissez-nous "
+"pas tout de suite WPGlobus. Veuillez %1$s nous contacter%2$s et laissez-nous "
 "vous aider&nbsp;!"
 
 msgid ""
@@ -1064,8 +1068,8 @@ msgid ""
 "Place the %1$smain language%2$s of your site at the top of the list by "
 "dragging the %3$s icons."
 msgstr ""
-"Placez la %1$ langue principale%2$s de votre site en haut de la liste en "
-"faisant glisser les icônes %3$ ."
+"Placez la %1$s langue principale%2$s de votre site en haut de la liste en "
+"faisant glisser les icônes %3$s ."
 
 #. translators: placeholders for the "strong" HTML tags.
 msgid "%1$sUncheck%2$s the languages you do not plan to use."
@@ -1428,13 +1432,3 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
-
-#~ msgid ""
-#~ "We are planning to maintain a %s list of translators %s on the WPGlobus "
-#~ "website. This is not an endorsement, just a courtesy. Please contact them "
-#~ "directly and let us know how did it work for you!"
-#~ msgstr ""
-#~ "Nous prévoyons de maintenir une %s liste de traducteurs %s sur le site "
-#~ "web WPGlobus. Ce n’est pas une approbation, juste une courtoisie. "
-#~ "Veuillez les contacter directement et nous faire savoir comment cela "
-#~ "c’est passé pour vous&nbsp;!"
