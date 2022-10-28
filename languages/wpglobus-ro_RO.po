@@ -1,11 +1,10 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
 "Language-Team: Romanian (Romania) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/ro_RO/)\n"
 "Language: ro_RO\n"

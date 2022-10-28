@@ -1,4 +1,4 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # e314000eb7822ddff37f90aedba9a07c_cdf5e13 <3d5ba02b5c1e3beabe9eb3fc79749b38_312842>, 2015
@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>, 2015\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/"
 "wpglobus-multilingual/language/sv_SE/)\n"
 "Language: sv_SE\n"

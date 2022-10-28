@@ -1,12 +1,12 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2018,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>, 2018,2020\n"
 "Language-Team: Belarusian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/be/)\n"
 "Language: be\n"
@@ -1329,12 +1329,3 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/ru/"
-
-#~ msgid ""
-#~ "We are planning to maintain a %s list of translators %s on the WPGlobus "
-#~ "website. This is not an endorsement, just a courtesy. Please contact them "
-#~ "directly and let us know how did it work for you!"
-#~ msgstr ""
-#~ "Мы планируем поддерживать %s список переводчиков %s на сайте WPGlobus. Не "
-#~ "воспринимайте это как конкретную рекомендацию! Свяжитесь с переводчиками "
-#~ "напрямую и потом расскажите нам, довольны ли Вы результатом."

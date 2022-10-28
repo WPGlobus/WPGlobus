@@ -1,13 +1,14 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Gregory Karpinsky <gregory@tiv.net>, 2016,2020
-# Jack Willson <666noob404@gmail.com>, 2019,2021
+# b178f66ae21091f08a6de73093bc629b_f649941 <e1032743bd2bca7a0d63bafff0062cdd_813705>, 2019,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Last-Translator: b178f66ae21091f08a6de73093bc629b_f649941 "
+"<e1032743bd2bca7a0d63bafff0062cdd_813705>, 2019,2021\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wp-translations/wpglobus-"
 "multilingual/language/uk/)\n"
 "Language: uk\n"
@@ -1416,12 +1417,3 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/ru/"
-
-#~ msgid ""
-#~ "We are planning to maintain a %s list of translators %s on the WPGlobus "
-#~ "website. This is not an endorsement, just a courtesy. Please contact them "
-#~ "directly and let us know how did it work for you!"
-#~ msgstr ""
-#~ "Ми плануємо підтримувати%sсписок перекладачів%sна сайті WPGlobus. Не "
-#~ "сприймайте це як конкретну рекомендацію! Зв'яжіться з перекладачами "
-#~ "безпосередньо і потім розкажіть нам, чи задоволені ви результатом."

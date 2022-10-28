@@ -1,4 +1,4 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # Tobias Hopp <toby.hopp@gmail.com>, 2015
@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>, 2015,2017\n"
 "Language-Team: German (Switzerland) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/de_CH/)\n"
 "Language: de_CH\n"

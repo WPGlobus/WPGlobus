@@ -1,4 +1,4 @@
-# Copyright (C) 2021 WPGlobus
+# Copyright (C) 2022 WPGlobus
 # This file is distributed under the same license as the WPGlobus package.
 # Translators:
 # ChameleonJohn.com, 2017
@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPGlobus Multilingual\n"
-"PO-Revision-Date: 2021-11-06 13:42+0000\n"
-"Last-Translator: Gregory Karpinsky <gregory@tiv.net>\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Last-Translator: Gregory Karpinsky <gregory@tiv.net>, 2017,2020\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/wp-"
 "translations/wpglobus-multilingual/language/id_ID/)\n"
 "Language: id_ID\n"
@@ -1327,13 +1327,3 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
-
-#~ msgid ""
-#~ "We are planning to maintain a %s list of translators %s on the WPGlobus "
-#~ "website. This is not an endorsement, just a courtesy. Please contact them "
-#~ "directly and let us know how did it work for you!"
-#~ msgstr ""
-#~ "Kami berencana untuk mempertahankan daftar %s penerjemah %s di situs "
-#~ "WPGlobus. Ini bukan sebuah pengesahan, hanya sopan santun saja. Silahkan "
-#~ "hubungi mereka secara langsung dan beritahu kami bagaimana cara kerjanya "
-#~ "untuk Anda!"
