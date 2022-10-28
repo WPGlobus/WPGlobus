@@ -505,7 +505,6 @@ class WPGlobus_Config {
 	/**
 	 * Load .MO file from the plugin's `languages` folder.
 	 * Used instead of @see load_plugin_textdomain to ignore translation files from WordPress.org, which are outdated.
-	 * To force loading from a different place, use the `load_textdomain_mofile` filter.
 	 *
 	 * @since 1.9.6
 	 */
@@ -523,7 +522,26 @@ class WPGlobus_Config {
 		 * Load our translations.
 		 */
 		$locale = apply_filters( 'plugin_locale', is_admin() ? get_user_locale() : get_locale(), $domain );
-		$mofile = WPGlobus::languages_path() . '/' . $domain . '-' . $locale . '.mo';
+
+		/**
+		 * When we do not have a specific country translation, try using what we have.
+		 *
+		 * @since 2.10.5
+		 */
+		$same_pomo   = array(
+			'fr_BE' => 'fr_FR',
+			'fr_CA' => 'fr_FR',
+		);
+		$pomo_locale = isset( $same_pomo[ $locale ] ) ? $same_pomo[ $locale ] : $locale;
+		$mofile      = WPGlobus::languages_path() . '/' . $domain . '-' . $pomo_locale . '.mo';
+
+		/**
+		 * To force loading from a different place, use the `load_textdomain_mofile` filter.
+		 *
+		 * @since 2.10.5
+		 */
+		$mofile = apply_filters( 'load_textdomain_mofile', $mofile, $domain );
+
 		load_textdomain( $domain, $mofile );
 	}
 
