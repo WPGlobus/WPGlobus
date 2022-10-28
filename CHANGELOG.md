@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+2022-10-30 - version 2.10.5
+* Fix: (Core/Filters) Translations not loaded correctly in some situations (refactored `\WPGlobus_Filters::filter__get_locale`).
+* Fix: (Elementor) Update language switcher.
+* Fix: (Core) Broken translations file `wpglobus-fr_FR.po`.
+* Tweak: (Core) When we do not have a specific country translation, try using what we have (WIP).
+
 2022-09-04 - version 2.10.4
 * (Core/Widgets) Update for the widgets block editor v.2.0.
 
