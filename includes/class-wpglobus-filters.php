@@ -518,18 +518,21 @@ class WPGlobus_Filters {
 	public static function filter__get_locale( $locale ) {
 
 		static $cached_locale = null;
+		if ( null !== $cached_locale ) {
+			return $cached_locale;
+		}
 
 		/**
-		 * Special case: in admin area, show everything in the language of admin interface.
-		 * (set in the General Settings in WP 4.1)
-		 * We need to exclude is_admin when it's a front-originated AJAX,
-		 * so we are doing a "hack" checking.
-		 *
-		 * @see WPGlobus_WP::is_admin_doing_ajax.
+		 * Admin.
+		 * In admin area, we show everything in the language of admin interface.
+		 * The admin interface is set in the Settings -> General and saved as 'WPLANG' option.
+		 * For that, we only need to set the WPGlobus language, not changing the locale.
+		 * Note: no caching in admin!
 		 */
 		if (
-			is_admin() &&
-			( ! WPGlobus_WP::is_doing_ajax() || WPGlobus_WP::is_admin_doing_ajax() )
+			// We need to exclude is_admin when it's a front-originated AJAX.
+			is_admin()
+			&& ( ! WPGlobus_WP::is_doing_ajax() || WPGlobus_WP::is_admin_doing_ajax() )
 			&& apply_filters( 'wpglobus_use_admin_wplang', true )
 		) {
 			/**
@@ -540,26 +543,23 @@ class WPGlobus_Filters {
 			$wp_lang = get_option( 'WPLANG' );
 			if ( ! empty( $wp_lang ) ) {
 				WPGlobus::Config()->set_language( $wp_lang );
+			} else {
+				// We should not be here. No changes.
+				return $locale;
 			}
 		} else {
-			/**
-			 * Caching breaks the admin language switcher. So, use only when not in admin area.
-			 * @since 2.10.3
-			 */
-			if ( null !== $cached_locale ) {
-				return $cached_locale;
-			}
-		}
 
-		/**
-		 * Only set locale if it's enabled in WPGlobus.
-		 *
-		 * @since 2.10.3 - check always, not only in admin.
-		 * @since 2.10.3 - Update cache.
-		 */
-		if ( WPGlobus::Config()->is_enabled_locale( $locale ) ) {
-			$locale        = WPGlobus::Config()->locale[ WPGlobus::Config()->language ];
-			$cached_locale = $locale;
+			/**
+			 * Frontend.
+			 * Set locale if the language is enabled in WPGlobus.
+			 *
+			 * @since 2.10.3 - Cache it.
+			 */
+			$language = WPGlobus::Config()->language;
+			if ( WPGlobus_Utils::is_enabled( $language ) ) {
+				$locale        = WPGlobus::Config()->locale[ $language ];
+				$cached_locale = $locale;
+			}
 		}
 
 		return $locale;
