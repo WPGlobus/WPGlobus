@@ -43,7 +43,7 @@ class WPGlobus_Filters {
 	 * @return string
 	 */
 	public static function filter__extract_text( $text ) {
-	
+
 		return WPGlobus_Core::extract_text(
 			$text,
 			WPGlobus::Config()->language
@@ -73,7 +73,7 @@ class WPGlobus_Filters {
 
 		if ( $query->is_main_query() || $query->get( 'wpglobus_force_filter__the_posts' ) ) {
 			foreach ( $posts as $post ) {
-				
+
 				/**
 				 * Don't filter post of disabled post type.
 				 * @since 2.5.15
@@ -81,7 +81,7 @@ class WPGlobus_Filters {
 				if ( in_array( $post->post_type, WPGlobus::Config()->disabled_entities ) ) {
 					continue;
 				}
-				
+
 				WPGlobus_Core::translate_wp_post(
 					$post,
 					WPGlobus::Config()->language,
@@ -537,29 +537,26 @@ class WPGlobus_Filters {
 		) {
 			/**
 			 * Set locale in admin area using WPLANG option.
-			 *
-			 * @since 2.10.3 Do not set if WPLANG is empty.
 			 */
-			$wp_lang = get_option( 'WPLANG' );
-			if ( ! empty( $wp_lang ) ) {
-				WPGlobus::Config()->set_language( $wp_lang );
-			} else {
-				// We should not be here. No changes.
-				return $locale;
+			$locale_from_wplang = get_option( 'WPLANG' );
+			if ( ! $locale_from_wplang ) {
+				$locale_from_wplang = 'en_US';
 			}
-		} else {
+			WPGlobus::Config()->set_language( $locale_from_wplang );
 
-			/**
-			 * Frontend.
-			 * Set locale if the language is enabled in WPGlobus.
-			 *
-			 * @since 2.10.3 - Cache it.
-			 */
-			$language = WPGlobus::Config()->language;
-			if ( WPGlobus_Utils::is_enabled( $language ) ) {
-				$locale        = WPGlobus::Config()->locale[ $language ];
-				$cached_locale = $locale;
-			}
+			// Return w/o caching - important!
+			return $locale_from_wplang;
+		}
+
+		/**
+		 * Set locale if the language is enabled in WPGlobus.
+		 *
+		 * @since 2.10.3 - Cache it.
+		 */
+		$language = WPGlobus::Config()->language;
+		if ( WPGlobus_Utils::is_enabled( $language ) ) {
+			$locale        = WPGlobus::Config()->locale[ $language ];
+			$cached_locale = $locale;
 		}
 
 		return $locale;
@@ -752,7 +749,7 @@ class WPGlobus_Filters {
      *
 	 * @since 1.0.6
 	 * @since 2.4.10 Prevent handling of incorrect widget instance's settings.
-	 * @since 2.8.5 Added checking for translations in $widget_setting. 
+	 * @since 2.8.5 Added checking for translations in $widget_setting.
 	 * 				Using `extract_text` instead of `text_filter`.
 	 *
 	 * @param string[] $instance
@@ -760,14 +757,14 @@ class WPGlobus_Filters {
 	 * @return string[]
 	 */
 	public static function filter__widget_display_callback( $instance ) {
-		
+
 		/**
 		 * Prevent handling of incorrect widget instance's settings.
 		 * @since 2.4.10
 		 */
 		if ( empty($instance) || is_bool($instance) ) {
 			return $instance;
-		}			
+		}
 
 		foreach ( $instance as &$widget_setting ) {
 
@@ -1250,7 +1247,7 @@ class WPGlobus_Filters {
 			} else {
 				$option_values = array();
 			}
-			
+
 			foreach ( $_enabled_keys as $field ) {
 
 				$new = array();
@@ -1291,13 +1288,13 @@ class WPGlobus_Filters {
 	 * @since 2.8.0
 	 *
 	 * @param boolean $use_widgets_block_editor Whether or not to use the block editor to manage widgets.
-	 */	
+	 */
 	public static function filter__use_widgets_block_editor($use_block_editor) {
-	
+
 		if ( ! $use_block_editor ) {
-			
+
 			$theme_support_widgets_block_editor = get_theme_support( 'widgets-block-editor' );
-			
+
 			if ( ! $theme_support_widgets_block_editor ) {
 				return $theme_support_widgets_block_editor;
 			}
@@ -1306,7 +1303,7 @@ class WPGlobus_Filters {
 		if ( ! empty( WPGlobus::Config()->use_widgets_block_editor ) && (bool) WPGlobus::Config()->use_widgets_block_editor ) {
 			return $use_block_editor;
 		}
-		
+
 		return false;
 	}
 }
