@@ -300,6 +300,16 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.10.5 ###
+
+* Fix: (Core/Filters) Translations not loaded correctly in some situations (refactored `\WPGlobus_Filters::filter__get_locale`).
+
+* Fix: (Elementor) Update language switcher.
+
+* Fix: (Core) Broken translations file `wpglobus-fr_FR.po`.
+
+* Tweak: (Core) When we do not have a specific country translation, try using what we have (WIP).
+
 ### 2.10.4 ###
 * (Core/Widgets) Update for the widgets block editor v.2.0.
 
@@ -308,23 +318,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * (Core/Filters) Code cleanup: `filter__get_locale()` in `class-wpglobus-filters.php`.
 * (Options/Languages table) Added the `vi.alt.png` flag.
 * (Internal) `package.json` - patches for the new `npm`.
-
-### 2.10.2 ###
-* (Core/WPGlobus About) Removed obsolete information.
-* (Core/WPGlobus) Added filter `wpglobus_disable_switcher` in the `WPGlobus` class.
-
-* Fix: PHP81 notice about passing `null` to `untrailingslashit`.
-
-* Fix: PHP81 notice about passing `null` to `str_replace`.
-* Updated WPGlobus language switcher examples file.
-
-### 2.10.1 ###
-* (Vendor/Yoast) Added filters for the user Open Graph title and description, Schema Graph name and description.
-* (Core) Fixed PHP 8.1 notice about `add_submenu_page()` parameter.
-
-### 2.10.0 ###
-* (Compatibility) Tested up to WordPress 6.0
-* (Core/Post Types) Added the `elementor-hf` post type to the `"hidden types"` list.
 
 ## Demo Sites ##
 
