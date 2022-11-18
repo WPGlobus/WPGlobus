@@ -6,7 +6,7 @@
 * Tested up to: 6.1
 * Fix: (Core) Don't run JS script if jQuery is not defined.
 
-* 2022-10-30 - version 2.10.5
+2022-10-30 - version 2.10.5
 * Fix: (Core/Filters) Translations not loaded correctly in some situations (refactored `\WPGlobus_Filters::filter__get_locale`).
 * Fix: (Elementor) Update language switcher.
 * Fix: (Core) Broken translations file `wpglobus-fr_FR.po`.
