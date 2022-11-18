@@ -9,7 +9,7 @@ Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 5.5
 
-Tested up to: 6.0
+Tested up to: 6.1
 
 Requires PHP: 5.6
 
@@ -299,6 +299,12 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.10.6 ###
+
+* Tested up to: 6.1
+
+* Fix: (Core) Don't run JS script if jQuery is not defined.
 
 ### 2.10.5 ###
 

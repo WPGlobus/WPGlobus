@@ -3,7 +3,7 @@ Contributors: tivnetinc, alexgff, tivnet
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 Requires at least: 5.5
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -217,6 +217,10 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
+
+= 2.10.6 =
+* Tested up to: 6.1
+* Fix: (Core) Don't run JS script if jQuery is not defined.
 
 = 2.10.5 =
 * Fix: (Core/Filters) Translations not loaded correctly in some situations (refactored `\WPGlobus_Filters::filter__get_locale`).
