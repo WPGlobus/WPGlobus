@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2022-12-01 - version 2.10.7
+* Fix: (Core) Cleanup tool failed under MySQL8/PHP8.
+
 2022-11-18 - version 2.10.6
 * Tested up to: 6.1
 * Fix: (Core) Don't run JS script if jQuery is not defined.

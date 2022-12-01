@@ -363,8 +363,13 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			/**
 			 * Standard regexp
+			 *
+			 * @since 2.10.7 Changed regexp because it did not work with mysqli 8/PHP8.
 			 */
-			$wpg_regexp = '{:[a-z]{2}|[[.[.]]:[a-z]{2}|<!--:[a-z]{2}';
+			$wpg_regexp = '(\\\\{|\\\\[|<!--):[a-z][a-z]';
+			if ( defined( 'WPGLOBUS_OLD_CLEANER' ) ) {
+				$wpg_regexp = '{:[a-z]{2}|[[.[.]]:[a-z]{2}|<!--:[a-z]{2}';
+			}
 
 			/**
 			 * Post status
