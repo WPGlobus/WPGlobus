@@ -2,8 +2,9 @@
 
 ## Changelog ##
 
-2022-12-01 - version 2.10.7
+2022-12-17 - version 2.10.7
 * Fix: (Core) Cleanup tool failed under MySQL8/PHP8.
+* Fix: (Core) Locale determined incorrectly under some conditions.
 
 2022-11-18 - version 2.10.6
 * Tested up to: 6.1

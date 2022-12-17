@@ -300,6 +300,12 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.10.7 ###
+
+* Fix: (Core) Cleanup tool failed under MySQL8/PHP8.
+
+* Fix: (Core) Locale determined incorrectly under some conditions.
+
 ### 2.10.6 ###
 
 * Tested up to: 6.1

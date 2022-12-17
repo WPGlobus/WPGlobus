@@ -517,11 +517,6 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__get_locale( $locale ) {
 
-		static $cached_locale = null;
-		if ( null !== $cached_locale ) {
-			return $cached_locale;
-		}
-
 		/**
 		 * Admin.
 		 * In admin area, we show everything in the language of admin interface.
@@ -552,11 +547,11 @@ class WPGlobus_Filters {
 		 * Set locale if the language is enabled in WPGlobus.
 		 *
 		 * @since 2.10.3 - Cache it.
+		 * @since 2.10.7 - Removing caching as it does not work under certain conditions.
 		 */
 		$language = WPGlobus::Config()->language;
 		if ( WPGlobus_Utils::is_enabled( $language ) ) {
-			$locale        = WPGlobus::Config()->locale[ $language ];
-			$cached_locale = $locale;
+			$locale = WPGlobus::Config()->locale[ $language ];
 		}
 
 		return $locale;
