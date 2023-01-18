@@ -2,6 +2,8 @@
 /**
  * File: class-wpglobus-gutenberg.php
  *
+ * @since 2.10.8 Added default switcher items.
+ *
  * @package WPGlobus\Builders\Gutenberg
  * @author  Alex Gor(alexgff)
  */
@@ -55,9 +57,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array( $this, 'filter__seo_meta_box_title' ) );
-
 		}
-
 	}
 	
 	/**
@@ -302,7 +302,6 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		}
 
 		return $out;
-
 	}
 
 	/**
@@ -518,6 +517,38 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			}
 		}
 
+		/**
+		 * Added default switcher items.
+		 *
+		 * @since 2.10.8
+		 */
+		$switcher_items = array(
+			'top' => array(
+				'containerClassName' => 'flex-row',
+				'elements' => array(
+					array(
+						'tagName' => 'img',
+						'props' => array(
+							'className' => 'wpglobus-switcher-panel__flag',
+							'style'  	=> array(),
+							'src' 	 	=> '{{flagUrl}}',
+						)
+					),
+					array(
+						'tagName' => 'Button',
+						'props' => array(
+							'className' => 'button-switch',
+							'style'		=> array(),
+							'href' 		=> '{{href}}',
+							'isSmall' 	=> true,
+							'isPrimary' => true,
+						),
+						'children' => '{{LanguageName}}'
+					)
+				)	
+			)	
+		);
+
 		$data = array(
 			'version'              => WPGLOBUS_VERSION,
 			'versionGutenberg'     => $version_gutenberg,
@@ -541,6 +572,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'options'			   => $options,
 			'enabledOptionsTab'	   => true,
 			'keyOption'		       => $key_option,
+			'switcherItems'    	   => $switcher_items,
 			'data'				   => $__data
 		);
 

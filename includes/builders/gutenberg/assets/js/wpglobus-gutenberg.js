@@ -4,6 +4,7 @@
  *
  * @since 1.9.17
  * @since 2.2.3
+ * @since 2.10.8 Updated WPGlobusSwitcherPlugin.
  *
  * @package WPGlobus
  * @subpackage Administration/Gutenberg
@@ -11,9 +12,8 @@
 /*jslint browser: true */
 /*global jQuery, console, _wpGutenbergCodeEditorSettings*/
 
-jQuery(document).ready(function ($) {
-    "use strict";
-	
+jQuery(document).ready(function($){
+	"use strict";
 	var api = {
 		counter: 0,
 		noticeOn: false,
@@ -236,11 +236,15 @@ jQuery(document).ready(function ($) {
 		WPGlobusSwitcherPlugin: function(){
 			// @since 2.2.3
 			// @since 2.2.14
+			// @since 2.8.10
 			
 			if ( 'undefined' === typeof wp.editPost || 'undefined' === typeof wp.plugins ) {
 				// @since 2.2.15
 				return;
 			}
+			
+			var useState = wp.element.useState;
+			
 			var language = WPGlobusGutenberg.language;
 			var enabledLanguages = WPGlobusCoreData.enabled_languages;
 			var languageNames = WPGlobusCoreData.en_language_name;
@@ -261,10 +265,11 @@ jQuery(document).ready(function ($) {
 			var Fragment = wp.element.Fragment;
 			
 			var TabPanel = wp.components.TabPanel;
-			var withState = wp.compose.withState;
 			var RadioControl = wp.components.RadioControl;
 			var Notice = wp.components.Notice;
 			var Button = wp.components.Button;
+			var TextControl = wp.components.TextControl;
+			var CheckboxControl = wp.components.CheckboxControl;
 
 			var PluginSidebarMoreMenuItem = wp.editPost.PluginSidebarMoreMenuItem;
 			var PanelBody = wp.components.PanelBody;
@@ -284,7 +289,7 @@ jQuery(document).ready(function ($) {
 			var switcherPluginButtonType = '';
 			var promisedPluginButtonType = '';
 			var optionSwitcherButtonType = api.getOptionKey('switcherButtonType');
-			
+				
 			function setSwitcherButtonType(type) {
 				type = type || 'flagLanguage';
 				switcherPluginButtonType = type;
@@ -348,7 +353,6 @@ jQuery(document).ready(function ($) {
 				option = option || '';
 				value  = value || '';
 				if ( optionSwitcherButtonType == option ) {
-					rbAnimate(true);
 					saveOptions(option, value).then(function(response){
 						if ('success' == response.result) {
 							setSwitcherButtonType(value);
@@ -374,7 +378,7 @@ jQuery(document).ready(function ($) {
 						}
 					})
 					.always(function() {
-						rbAnimate(false);
+						// rbAnimate(false);
 					});
 				}					
 			}
@@ -423,7 +427,10 @@ jQuery(document).ready(function ($) {
 				}, 300);
 			}
 			
-			function languageList() {
+			/**
+			 * languageList component.
+			 */
+			const languageList = () => {
 				
 				if ( WPGlobusGutenberg.pagenow == WPGlobusGutenberg.postNewPage ) {
 					return el(
@@ -446,15 +453,224 @@ jQuery(document).ready(function ($) {
 					)
 				);
 			}
+
+			/**
+			 * InputText component.
+			 */
+			const InputText = function(props) {
+				let {
+					className = '',
+					style = '',
+					value = '',
+					placeholder = '',
+				} = props;
+
+				const [ elValue, setElValue ] = useState(value);
+
+				let classes = 'components-text';
+				if ( className !== '' ) {
+					classes += ' ' + className;
+				}
+				
+				const handleChange = (evnt) => {
+					setElValue(evnt.target.value);
+				}
+				
+				return el(
+					'input', 
+					{
+						type: 'text',
+						value: elValue,
+						className: classes,
+						style: style,
+						placeholder: placeholder,
+						onChange: handleChange,
+					}
+				)
+			}
+	
+			/** 
+			 * getEl.
+			 */
+			const getEl = function( elProps ) {
+
+				var {
+					language,
+					key,
+					tagName,
+					callBack,
+					children
+				} = elProps;				
+				
+				let props = Object.assign({}, elProps.props);
+				
+				/**
+				 * Fix `Warning: Each child in a list should have a unique "key" prop.`
+				 */
+				props.key = key;
+				
+				var type = 'htmlElement';
+				if ( tagName[0] === tagName[0].toUpperCase() ) {
+					type = 'ReactComponent';
+				}
+				
+				props = replace(props, language);
+				if ( children !== null ) {
+					children = replace(children, language);
+				}
+				
+				if ( 'htmlElement' === type ) {
+					props.className = 'components-'+tagName+' '+props.className;
+					return el(
+						tagName,
+						props,
+						children
+					);
+				}
+				
+				var component = null;
+				switch(tagName) {
+					case 'Button':
+						component = el(Button, props, children);
+						break;
+					case 'InputText':
+						component = el(InputText, props);
+						break;
+					case '__SomeElement__':
+						break;
+					default:
+						if ( 'string' === typeof callBack ) {
+							props.tagName = tagName;
+							props.language = language;
+							props.children = children;
+							try { 
+								component = el(eval(callBack).getComponent, props);
+							} catch(e) {
+								console.log('Incorrect PubStatus callBack: ',callBack);
+							}
+						}
+						break;
+				}
+				return component;
+			}
+			
+			/**
+			 * Replacer.
+			 */
+			const replace = (item, language) => {
+				if ( 'string' === typeof item ) {
 					
+					if ( -1 !== item.indexOf('{{') ) {
+						if ( item.indexOf('{{LanguageName}}') !== -1 ) {
+							item = item.replace( '{{LanguageName}}', WPGlobusAdmin.data.en_language_name[language] );
+						} else if ( item.indexOf('{{flagUrl}}') !== -1 ) {
+							item = item.replace( '{{flagUrl}}', flagsUrl[language] );
+						} else if ( item.indexOf('{{href}}') !== -1 ) {
+							item = item.replace( '{{href}}', refs[language] );
+						}
+					}
+				} else if ( 'object' === typeof item ) {
+					Object.entries(item).forEach(([key, value]) => {
+						if ( 'style' !== key ) {
+							item[key] = replace(value, language);
+						}
+					});
+				}
+				return item;
+			}
+			
+			/**
+			 * languageListEl.
+			 */
+			function languageListEl() {
+				
+				if ( typeof WPGlobusGutenberg.switcherItems !== 'object' ) {
+					return el( 
+						'div', 
+						{
+							key: 0,
+							className: 'container wpglobus-switcher-message wpglobus-switcher-error-message',
+							style: {position:"initial"}
+						},
+						'Error: Invalid switcherItems object',
+					)
+				}
+				
+				/**
+				 * getContainerItems.
+				 */
+				var getContainerItems = (items, language) => {
+					return items.map(
+						function(item, index){
+							return getEl( 
+								$.extend(
+									{
+										language:language,
+										key:index
+									},
+									item
+								) 
+							)
+						}
+					)	
+				}
+				
+				/**
+				 * getContainerList.
+				 */
+				var getContainerList = (language, indx) => {	
+					var containers = [];
+					Object.entries(WPGlobusGutenberg.switcherItems).map((container,index) => {
+						var containerName = container[0];
+						var containerElements = container[1]['elements'];
+						containers.push(
+							el( 
+								'div', 
+								{
+									key: index,
+									className: 'container container-'+containerName+' '+container[1]['containerClassName']
+								},
+								getContainerItems(containerElements, language),
+							)
+						)
+					});
+					return containers; 
+				}
+		
+				var languageList = enabledLanguages.map(
+					function(language,indx){
+						return el( 
+							'li',
+							{
+								key:indx,
+								className:'language-item'
+							},
+							getContainerList(language, indx)
+						)
+					}
+				)
+
+				return el(
+					'ul',
+					{className: 'language-list'},
+					languageList
+				);
+			}
+			
+			/**
+			 * onTabSelect.
+			 */
 			function onTabSelect(tab) {
-				if ( tab.name == 'switcher' ) {
+				if ( tab.name === 'switcher' ) {
 					return SwitcherTabContent();
-				} else if ( tab.name == 'options' ) {
+				} else if ( tab.name === 'options' ) {
 					return OptionsTabContent();
 				}	
 			}
 
+			/**
+			 * TabLayout.
+			 */
 			function TabLayout() {
 
 				var tabs = [
@@ -486,7 +702,10 @@ jQuery(document).ready(function ($) {
 					onTabSelect
 				);
 			}
-			
+
+			/**
+			 * SwitcherTabContent.
+			 */
 			function SwitcherTabContent() {
 				return el(
 					'div',
@@ -507,7 +726,7 @@ jQuery(document).ready(function ($) {
 						{ 
 						  className: 'wpglobus-switcher-panel__switcher-box' 
 						},
-						languageList()
+						languageListEl()
 					),		
 					el(
 						Button,
@@ -530,34 +749,39 @@ jQuery(document).ready(function ($) {
 					)			
 				);
 			}
-
-			var SwitcherPluginButton = withState({
-			  value: promisedPluginButtonType
-			})(({
-			  value,
-			  setState
-			}) => el(RadioControl, {
-			  label: '',
-			  help: 'Select type of switcher language button.',
-			  selected: promisedPluginButtonType,
-			  className: 'wpglobus-switcher-components-radio-control',
-			  options: [
-				{ label: 'Flag only', value: 'flagOnly' },
-				{ label: 'Flag with language', value: 'flagLanguage' },
-				{ label: 'Flag with language code', value: 'flagCode' },
-				{ label: 'Language only', value: 'languageOnly' },
-				{ label: 'Language code', value: 'languageCode' },
-			  ],
-			  onChange: value => {
-			    promisedPluginButtonType = value;
-				setState({
-				  value
-				});
-				// @see setOption function for setSwitcherButtonType(value) and setSwitcherPluginButton(value)
-				setOption(optionSwitcherButtonType, value);
-			  }
-			}));
-		
+			
+			/**
+			 * SwitcherPluginButton.
+			 */
+			var SwitcherPluginButton = () => {
+				const [ selectedType, setSelectedType ] = useState(promisedPluginButtonType);
+				return (
+					el(
+						RadioControl, 
+						{
+							label: '',
+							help: 'Select type of switcher language button.',
+							selected: selectedType,
+							className: 'wpglobus-switcher-components-radio-control',
+							options: [
+								{ label: 'Flag only', value: 'flagOnly' },
+								{ label: 'Flag with language', value: 'flagLanguage' },
+								{ label: 'Flag with language code', value: 'flagCode' },
+								{ label: 'Language only', value: 'languageOnly' },
+								{ label: 'Language code', value: 'languageCode' },
+							],
+							onChange: (value) => {
+								setSelectedType(value);
+								setOption(optionSwitcherButtonType, value);
+							}
+						}
+					)
+				)
+			}
+	
+			/**
+			 * OptionsTabContent.
+			 */
 			function OptionsTabContent() {
 				return el(
 					'div',
@@ -579,8 +803,11 @@ jQuery(document).ready(function ($) {
 					)
 				);
 			}
-
-			function Component() {
+			
+			/**
+			 * Main switcher component.
+			 */
+			function MainSwitcher() {
 				setSwitcherPluginButton();
 				return el(
 					Fragment,
@@ -621,12 +848,13 @@ jQuery(document).ready(function ($) {
 					)
 				);
 			}
+			
 			registerPlugin( 'wpglobus-switcher', {
 				icon: '',
-				render: Component,
+				render: MainSwitcher,
 			} );			
 		}
 	}
-    WPGlobusGutenberg = $.extend({}, WPGlobusGutenberg, api);
-    WPGlobusGutenberg.init();	
+	WPGlobusGutenberg = $.extend({}, WPGlobusGutenberg, api);
+	WPGlobusGutenberg.init();	
 });

@@ -15,6 +15,12 @@
 	z-index:10;width:90%;position:absolute;border:2px solid #ff8100;margin:5px 10px;padding:5px;border-radius:6px;background-color:#ff8100;
 	font-size:14px;color:#000;font-weight:500;text-align:center;
 }
+.wpglobus-switcher-components-panel .language-item{display:flex;gap:0.5em;flex-direction: column;}
+.wpglobus-switcher-components-panel .language-item .divider{margin:0 0 0.5em;}
+.wpglobus-switcher-components-panel .language-item .components-a{cursor:pointer;}
+.wpglobus-switcher-components-panel .language-item .container.flex-row{display:flex;flex-direction:row;gap:5px;align-items:center;}
+.wpglobus-switcher-components-panel .language-item .wpglobus-switcher-panel__flag{width:20px;height:20px;margin-right:5px;}
+.wpglobus-switcher-components-panel .language-item .button-switch{min-width:70px;justify-content:center;}
 .wpglobus-switcher-pulsate-radio-on {
 	-webkit-animation: pulsate-radio-on 0.3s ease-in-out both;
 	animation: pulsate-radio-on 0.3s ease-in-out both;
@@ -114,3 +120,4 @@
             transform: scale(1.1);
   }
 }
+
