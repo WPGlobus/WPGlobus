@@ -87,7 +87,7 @@ class WPGlobus_Admin_Recommendations {
 			$content = array();
 			
 			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
-			$message .= esc_html__( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
+			$message  = esc_html__( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
 			$message .= ' ';
 			$link_url = esc_html( $url ) ;
 			$link_content = 'Check it out  ';
