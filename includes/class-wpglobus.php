@@ -4053,7 +4053,6 @@ class WPGlobus {
 		}
 
 		return $config;
-
 	}
 
 	/**
@@ -4159,7 +4158,6 @@ class WPGlobus {
 		 * @param array $enabled_pages Array of enabled pages.
 		 */
 		$this->enabled_pages = apply_filters( 'wpglobus_enabled_pages', $this->enabled_pages );
-
 	}
 
 	/**
@@ -4231,9 +4229,49 @@ class WPGlobus {
 		}
 
 		return $this->vendors_scripts[ $script ];
-
 	}
-
+	
+	/**
+	 * @todo Now we have a `get_language_field` function in wpglobus\includes\builders\class-wpglobus-builder.php
+	 *       it may be necessary to move it to this `WPGlobus` class.
+	 *
+	 * @since 2.10.8 @W.I.P
+	 */
+	/** 
+	public static function get_language_field() {
+		return '<input type="hidden" id="' . esc_attr( self::get_language_meta_key() ) . '" name="' . esc_attr( self::get_language_meta_key() ) . '" value="" />';
+	}
+	// */
+	
+	/**
+	 * Check if we are using the WPGlobusEditPost Sidebar plugin.
+	 *
+	 * @since 2.10.8
+	 *
+	 * @scope admin
+	 * @return boolean
+	 */
+	public static function use_block_editor_sidebar_v2() {
+		return ! self::use_block_editor_sidebar_v1();
+	}
+	
+	/**
+	 * Check if we are using the previous version sidebar with the standard WPGlobus metabox.
+	 * To force v.1 you can add `define( 'WPGLOBUS_BLOCK_EDITOR_SIDEBAR_V1', true )` to your `wp-config.php` file.
+	 *
+	 * @since 2.10.8
+	 *
+	 * @scope admin
+	 * @return boolean
+	 */
+	public static function use_block_editor_sidebar_v1() {
+			
+		if ( defined( 'WPGLOBUS_BLOCK_EDITOR_SIDEBAR_V1' ) && WPGLOBUS_BLOCK_EDITOR_SIDEBAR_V1 ) {
+			return true;	
+		}
+		
+		return false;
+	}	
 }
 
 # --- EOF
