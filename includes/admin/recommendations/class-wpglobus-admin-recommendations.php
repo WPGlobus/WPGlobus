@@ -5,6 +5,8 @@
  * WPGlobus Recommendations.
  *
  * @since 1.8.7
+ * @since 2.10.8 Added support WPGlobusEditPost Sidebar plugin (block editor sidebar) v.2.
+ *
  * @package WPGlobus\Admin
  */
 
@@ -48,8 +50,119 @@ class WPGlobus_Admin_Recommendations {
 		 * @since 2.5.20
 		 */			
 		add_action( 'admin_notices', array( __CLASS__, 'on__admin_notices' ) );
-		
+
+		/**
+		 * @since 2.10.8
+		 */		
+		add_action( 'admin_print_scripts',array( __CLASS__, 'on__print_scripts' ) );
 	}
+	
+	/**
+	 * Enqueue the script for the WPGlobusEditPost Sidebar plugin (block editor sidebar) v.2.
+	 *
+	 * @since 2.10.8
+	 */
+	public static function on__print_scripts() {
+		
+		global $pagenow;
+		
+		if ( 'post.php' !== $pagenow ) {
+			return;
+		}
+		
+		if ( 'gutenberg' !== WPGlobus::Config()->builder->get_id() ) {
+			return;
+		}	
+	
+		if ( WPGlobus::use_block_editor_sidebar_v1() ) {
+			return;
+		}
+
+		$content  = '';
+		$link_url = '';
+		$link_content = '';
+		
+		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
+			
+			$content = array();
+			
+			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
+			$message .= esc_html__( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
+			$message .= ' ';
+			$link_url = esc_html( $url ) ;
+			$link_content = 'Check it out  ';
+			
+			$content['slug'] = array(
+				'message'  => $message,
+				'linkUrl'  => $link_url,
+				'linkContent' => $link_content,
+			);
+			
+			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#publish';
+			$message  = esc_html__( 'With Publish module, you will be able to write a post in one language and immediately publish it, not waiting for the translation to other languages.', 'wpglobus' );
+			$message .= ' ';
+			$link_url = esc_html( $url ) ;
+			$link_content = 'Check it out  ';
+
+			$content['publish'] = array(
+				'message'  => $message,
+				'linkUrl'  => $link_url,
+				'linkContent' => $link_content,
+			);
+
+		} else {
+
+			$content = array();
+
+			$link_url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
+			$link_content = esc_html__( 'Go to WPGlobus Plus Options page', 'wpglobus-plus' );
+				
+			if ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
+				
+				$current_key = 'slug';
+				$message 	 = esc_html__( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
+				
+				$content[$current_key] = array(
+					'message'  => $message,
+				);
+			}
+			
+			if ( ! class_exists( 'WPGlobusPlus_Publish', false ) ) {
+				
+				$current_key = 'publish';
+				$message 	 = esc_html__( 'To use module Publish, please activate it.', 'wpglobus' );
+	
+				$content[$current_key] = array(
+					'message'  => $message,
+				);				
+			}
+			
+			if ( empty($content) ) {
+				$content = '';
+			} else {
+				$content[$current_key]['linkContent'] = $link_content;
+				$content[$current_key]['linkUrl']	  = $link_url;
+			}
+		}		
+		
+		wp_register_script(
+			'wpglobus-edit-post-sidebar',
+			WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-edit-post-sidebar' . WPGlobus::SCRIPT_SUFFIX() . '.js',
+			array(),
+			WPGLOBUS_VERSION,
+			true
+		);
+		wp_enqueue_script( 'wpglobus-edit-post-sidebar' );
+		wp_localize_script(
+			'wpglobus-edit-post-sidebar',
+			'WPGlobusEditPostSidebar',
+			array(
+				'version'  => WPGLOBUS_VERSION,
+				'content'  => $content,
+				'hideStandardMetabox' => true,
+			)
+		);			
+	}		
 	
 	/**
 	 * Add a link to the Recommendations tab.
@@ -204,7 +317,7 @@ class WPGlobus_Admin_Recommendations {
 
 			self::$run_js = true;
 
-		} elseif ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
+		} else if ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
 			$url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
 			echo $container_start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			esc_html_e( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
@@ -226,12 +339,18 @@ class WPGlobus_Admin_Recommendations {
 	 * @since 1.9.17
 	 */
 	public static function on__gutenberg_metabox() {
-
+	
+		/**
+		 * @since 2.10.8
+		 */
+		if ( WPGlobus::use_block_editor_sidebar_v2() ) {
+			return;
+		}
+		
 		if ( WPGlobus::Config()->builder->is_running() ) {
 			self::wpg_plus_slug();
 			self::$run_js = false;
 		}
-
 	}
 
 	/**
