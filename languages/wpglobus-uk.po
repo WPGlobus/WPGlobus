@@ -638,6 +638,20 @@ msgstr ""
 "Ви також можете відправити нам повідомлення на%s. Не забудьте скопіювати "
 "технічну інформацію в текст Вашого повідомлення."
 
+msgid "To translate permalinks, please activate the module Slug."
+msgstr "Для перекладу посилань необхідно активувати модуль URL."
+
+msgid "To use module Publish, please activate it."
+msgstr ""
+
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr "Переклад посилань можливий за допомогою WPGlobus-Плюс!"
+
+msgid ""
+"With Publish module, you will be able to write a post in one language and "
+"immediately publish it, not waiting for the translation to other languages."
+msgstr ""
+
 msgid "WPGlobus Recommends:"
 msgstr "WPGlobus рекомендує:"
 
@@ -660,12 +674,6 @@ msgstr "Приймайте оплату в декількох валютах!"
 
 msgid "Check it out:"
 msgstr "Інформація - тут:"
-
-msgid "To translate permalinks, please activate the module Slug."
-msgstr "Для перекладу посилань необхідно активувати модуль URL."
-
-msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
-msgstr "Переклад посилань можливий за допомогою WPGlobus-Плюс!"
 
 #. translators: %1$s - this plugin name. %2$s - the required PHP version.
 msgid "For %1$s to work correctly, PHP version %2$s or later is required."

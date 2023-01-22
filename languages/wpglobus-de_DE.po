@@ -590,6 +590,20 @@ msgid ""
 "technical information to your email message."
 msgstr ""
 
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+msgid "To use module Publish, please activate it."
+msgstr ""
+
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+msgid ""
+"With Publish module, you will be able to write a post in one language and "
+"immediately publish it, not waiting for the translation to other languages."
+msgstr ""
+
 msgid "WPGlobus Recommends:"
 msgstr ""
 
@@ -611,12 +625,6 @@ msgid "Accept multiple currencies in your online store!"
 msgstr ""
 
 msgid "Check it out:"
-msgstr ""
-
-msgid "To translate permalinks, please activate the module Slug."
-msgstr ""
-
-msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr ""
 
 #. translators: %1$s - this plugin name. %2$s - the required PHP version.

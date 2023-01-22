@@ -218,6 +218,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.10.8 =
+* Added: (Core) `WPGlobusEditPost` Sidebar plugin v.2.
+* (Core/Recommendations) New recommendations box.
+
 = 2.10.7 =
 * Fix: (Core) Cleanup tool failed under MySQL8/PHP8.
 * Fix: (Core) Locale determined incorrectly under some conditions.
