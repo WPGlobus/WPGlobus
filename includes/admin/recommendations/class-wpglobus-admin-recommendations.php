@@ -140,8 +140,11 @@ class WPGlobus_Admin_Recommendations {
 			if ( empty($content) ) {
 				$content = '';
 			} else {
-				$content[$current_key]['linkContent'] = $link_content;
-				$content[$current_key]['linkUrl']	  = $link_url;
+				/**
+				 * Add external link to options page.
+				 */
+				$content['linkToOptions']['linkContent'] = $link_content;
+				$content['linkToOptions']['linkUrl']	 = $link_url;
 			}
 		}		
 		

@@ -78,6 +78,12 @@ jQuery(document).ready(function ($) {
 			if ( ! api.hasContent() ) {
 				return false;
 			}
+			var isLink = function(item) {
+				if ( typeof item.linkUrl === 'string' && typeof item.linkContent === 'string' ) {
+					return true;
+				}
+				return false;
+			}
 			var registerPlugin = wp.plugins.registerPlugin;
 			var Link = wp.components.ExternalLink;
 			var el = wp.element.createElement;
@@ -87,25 +93,25 @@ jQuery(document).ready(function ($) {
 				var _content = [];
 				var _key = 0;
 				Object.entries(api.getContent()).forEach(([itemKey, item]) => {
-					var linkEl = null;
-					if ( typeof item.linkUrl === 'string' && typeof item.linkContent === 'string' ) {
-						linkEl = el(
+					var message = typeof item.message === 'undefined' ? null : item.message;
+					var children = null;
+					if ( isLink(item) ) {
+						children = el(
 							Link,
 							{href:item.linkUrl,children:item.linkContent}
-						)	;
+						);
 					}
 					_content.push(
 						el(
 							Text,
 							{
 								tagName: 'p',
-								className: 'wpglobus-plus-slug-recommendation',
+								className: 'wpglobus-recommendation',
 								style: {fontWeight:'600'},
 								key: _key,
 							},
-							item.message,
-							el(Br,{}),
-							linkEl				
+							message,
+							children			
 						)
 					)
 					_key++;
