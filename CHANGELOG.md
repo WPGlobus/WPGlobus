@@ -2,8 +2,12 @@
 
 ## Changelog ##
 
+2023-02-02 - version 2.10.9
+* (Vendor/Yoast) Fix `Warning: Undefined array key image`.
+* (Core/Recommendations) Visual improvements.
+
 2023-01-18 - version 2.10.8
-* Added: (Core) `WPGlobusEditPost` Sidebar plugin v.2.
+* Added: (Core) `WPGlobusEditPost Sidebar` plugin v.2.
 * (Core/Recommendations) New recommendations box.
 
 2022-12-17 - version 2.10.7
