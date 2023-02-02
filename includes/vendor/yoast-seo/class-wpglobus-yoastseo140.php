@@ -286,12 +286,20 @@ class WPGlobus_YoastSEO {
 			}		
 		}
 		
-		$image_keys = array( 'caption' );
-		foreach( $image_keys as $_key ) {
-			if ( WPGlobus_Core::has_translations( $graph_piece['image'][$_key] ) ) {
-				$graph_piece['image'][$_key] = WPGlobus_Core::extract_text( $graph_piece['image'][$_key], WPGlobus::Config()->language );
-			}		
-		}		
+		/**
+		 * Fix `Warning: Undefined array key "image"`.
+		 * 
+		 * @since 2.10.9
+		 */
+		if ( ! empty( $graph_piece['image'] ) && is_array( $graph_piece['image'] ) ) {
+			$image_keys = array( 'caption' );
+			foreach( $image_keys as $_key ) {
+				if ( ! empty( $graph_piece['image'][$_key] ) && WPGlobus_Core::has_translations( $graph_piece['image'][$_key] ) ) {
+					$graph_piece['image'][$_key] = WPGlobus_Core::extract_text( $graph_piece['image'][$_key], WPGlobus::Config()->language );
+				}		
+			}
+		}
+		
 		return $graph_piece;
 	}
 	
