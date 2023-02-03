@@ -273,7 +273,7 @@ We do not make a "PRO" plugin that replaces the free one. Instead, we have a set
 ### From the WPGlobus.com FAQ Archives: ###
 
 
-* [Do you support PHP 5.x? PHP 7.x?](https://wpglobus.com/faq/support-php-5-2/)
+* [Do you support PHP 5.x? PHP 8.x?](https://wpglobus.com/faq/support-php-5-2/)
 
 * [Do you support MSIE / Opera / Safari / Chrome / Firefox - Version x.x?](https://wpglobus.com/faq/support-msie-opera-safari-chrome-firefox/)
 
@@ -299,6 +299,11 @@ https://wordpress.org/plugins/wpglobus/#screenshots
 WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
+
+### 2.10.9 ###
+
+* (Vendor/Yoast) Fix `Warning: Undefined array key image`.
+* (Core/Recommendations) Visual improvements.
 
 ### 2.10.8 ###
 
@@ -326,15 +331,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 * Fix: (Core) Broken translations file `wpglobus-fr_FR.po`.
 
 * Tweak: (Core) When we do not have a specific country translation, try using what we have (WIP).
-
-### 2.10.4 ###
-* (Core/Widgets) Update for the widgets block editor v.2.0.
-
-### 2.10.3 ###
-
-* (Core/Filters) Code cleanup: `filter__get_locale()` in `class-wpglobus-filters.php`.
-* (Options/Languages table) Added the `vi.alt.png` flag.
-* (Internal) `package.json` - patches for the new `npm`.
 
 ## Demo Sites ##
 
