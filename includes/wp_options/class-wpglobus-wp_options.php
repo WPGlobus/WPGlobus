@@ -38,7 +38,7 @@ if ( ! class_exists( 'WPGlobus_WP_Options' ) ) :
 						if ( is_string( $option ) ) {
 							add_filter( 'option_' . $option, array( __CLASS__, 'filter__translate_option' ) );
 						} else {
-							// @since 2.6.1 Case for array.
+							// @since 2.6.1 @W.I.P Case for array. 
 						}
 					}
 				}
@@ -83,7 +83,6 @@ if ( ! class_exists( 'WPGlobus_WP_Options' ) ) :
 
 			return $option;
 		}
-
 	}
 
 endif;
