@@ -197,12 +197,15 @@ if ( ! class_exists( 'WPGlobus_Vendor_Acf' ) ) :
 		/**
 		 * Get instance of this class.
 		 *
-		 * @return WPGlobus_Vendor_Acf || void
+		 * @return WPGlobus_Vendor_Acf || null
 		 */
 		public static function get_instance( $args = array() ) {
 			
 			if ( ! WPGlobus_WP::is_pagenow( array('post.php','post-new.php') ) ) {
-				return;
+				/**
+				 * @since 2.10.10 Return null.
+				 */				
+				return null;
 			}
 
 			if ( ! ( self::$instance instanceof WPGlobus_Vendor_Acf  ) ) {

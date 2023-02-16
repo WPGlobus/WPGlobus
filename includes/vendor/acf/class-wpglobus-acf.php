@@ -223,6 +223,13 @@ class WPGlobus_Acf_2 {
 				array( 'vendor_scripts' => $_vendors )
 			);
 			
+			/**
+			 * @since 2.10.10 Check $WPGlobus_Vendor_Acf for null.
+			 */
+			if ( is_null($WPGlobus_Vendor_Acf) ) {
+				return $post_meta_fields;
+			}	
+			
 			$multilingual_field_name = $WPGlobus_Vendor_Acf::get_multilingual_field_name();
 		
 			$acf_fields = self::$acf_fields;
