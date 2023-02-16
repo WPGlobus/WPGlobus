@@ -2,6 +2,9 @@
 
 ## Changelog ##
 
+2023-02-16 - version 2.10.10
+*  Fix: (Vendor/ACF) `Uncaught Error: Class name must be a valid object or a string`.
+
 2023-02-02 - version 2.10.9
 * (Vendor/Yoast) Fix `Warning: Undefined array key image`.
 * (Core/Recommendations) Visual improvements.
