@@ -300,6 +300,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.10.10 ###
+
+*  Fix: (Vendor/ACF) `Uncaught Error: Class name must be a valid object or a string`.
+
 ### 2.10.9 ###
 
 * (Vendor/Yoast) Fix `Warning: Undefined array key image`.
