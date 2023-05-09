@@ -4,6 +4,7 @@
  *
  * @since 2.4.3
  * @since 2.8.9 Added support multilingual columns on `edit.php` page.
+ * @since 2.12.0 Filter multilingual strings for the options page.
  *
  * @package WPGlobus\Builders\RankMathSEO.
  * @author  Alex Gor(alexgff)
@@ -15,6 +16,13 @@ if ( ! class_exists( 'WPGlobus_RankMathSEO_Functions' ) ) :
 	 * Class WPGlobus_RankMathSEO_Functions.
 	 */
 	class WPGlobus_RankMathSEO_Functions {
+
+		/**
+		 * RankMath options page prefix.
+		 *
+		 * @since 2.12.0
+		 */
+		protected static $options_page_prefix = 'rank-math';
 
 		/**
 		 * Current taxonomy.
@@ -46,6 +54,11 @@ if ( ! class_exists( 'WPGlobus_RankMathSEO_Functions' ) ) :
 				add_filter( 'get_post_metadata', array( __CLASS__, 'filter__post_metadata' ), 2, 4 );
 			}				
 
+			/**
+			 * @since 2.12.0
+			 */
+			self::handle_options_page();
+
 			if ( is_admin() ) {
 
 				if ( empty( $_POST['nonce_CMB2phprank_math_metabox'] ) || empty( $_POST['action'] ) ) {
@@ -72,6 +85,54 @@ if ( ! class_exists( 'WPGlobus_RankMathSEO_Functions' ) ) :
 			}
 		}
 
+		/**
+		 * @since 2.12.0
+		 */
+		protected static function handle_options_page() {
+			
+			if ( ! is_admin() ) {
+				return;
+			}
+			
+			global $pagenow;
+			
+			if ( 'admin.php' !== $pagenow ) {
+				return;
+			}
+			
+			$page = WPGlobus_Utils::safe_get('page');
+			
+			/**
+			 * Make sure we are on the options page.
+			 */
+			if ( false === strpos( $page, self::$options_page_prefix ) ) {
+				return;
+			}
+			
+			/**
+			 * @see `setup_json` function in seo-by-rank-math\includes\replace-variables\class-manager.php
+			 * @see `do_filter` function in seo-by-rank-math\includes\traits\class-hooker.php
+			 */
+			add_filter('rank_math/vars/replacements', array( __CLASS__, 'filter__vars_replacements' ), 10);
+		}
+
+		/**
+		 * @since 2.12.0
+		 */
+		public static function filter__vars_replacements($args) {
+			
+			$enabled_keys = array('example');
+			
+			foreach( $args as $key=>$data ) {
+				foreach($enabled_keys as $enabled_key)
+				if ( ! empty($data[$enabled_key]) && WPGlobus_Core::has_translations($data[$enabled_key]) ) {
+					$args[$key][$enabled_key] = WPGlobus_Core::extract_text( $data[$enabled_key], WPGlobus::Config()->default_language );
+				}
+			}
+			
+			return $args;
+		}
+	
 		/**
 		 * @since 2.8.9
 		 */
