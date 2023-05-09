@@ -642,7 +642,7 @@ msgid "To translate permalinks, please activate the module Slug."
 msgstr "Для перевода ссылок необходимо активировать модуль УРЛ."
 
 msgid "To use module Publish, please activate it."
-msgstr ""
+msgstr "Чтобы использовать модуль Publish, его необходимо активировать."
 
 msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
 msgstr "Перевод ссылок возможен с помощью WPGlobus-Плюс!"
@@ -650,7 +650,7 @@ msgstr "Перевод ссылок возможен с помощью WPGlobus-
 msgid ""
 "With Publish module, you will be able to write a post in one language and "
 "immediately publish it, not waiting for the translation to other languages."
-msgstr ""
+msgstr "С помощью модуля Publish вы сможете опубликовать страницу в одном языке, не дожидаясь готовности переводов на другие языки."
 
 msgid "WPGlobus Recommends:"
 msgstr "WPGlobus рекомендует:"

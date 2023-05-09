@@ -3,8 +3,6 @@
 
 Contributors: [TIV.NET INC.](https://profiles.wordpress.org/tivnetinc), [Alex Gor](https://profiles.wordpress.org/alexgff), [Gregory Karpinsky](https://profiles.wordpress.org/tivnet)
 
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SLF8M4YNZHNQN
-
 Tags: WPGlobus, localization, multilanguage, multilingual, translate
 
 Requires at least: 5.5
@@ -300,6 +298,10 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.12.0 ###
+* (Compatibility) Tested up to WordPress 6.2
+* (Builders/RankMathSEO) Added filter multilingual strings for the options page.
+
 ### 2.10.10 ###
 
 *  Fix: (Vendor/ACF) `Uncaught Error: Class name must be a valid object or a string`.
@@ -308,33 +310,6 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 * (Vendor/Yoast) Fix `Warning: Undefined array key image`.
 * (Core/Recommendations) Visual improvements.
-
-### 2.10.8 ###
-
-* Added: (Core) `WPGlobusEditPost` Sidebar plugin v.2.
-* (Core/Recommendations) New recommendations box.
-
-### 2.10.7 ###
-
-* Fix: (Core) Cleanup tool failed under MySQL8/PHP8.
-
-* Fix: (Core) Locale determined incorrectly under some conditions.
-
-### 2.10.6 ###
-
-* Tested up to: 6.1
-
-* Fix: (Core) Don't run JS script if jQuery is not defined.
-
-### 2.10.5 ###
-
-* Fix: (Core/Filters) Translations not loaded correctly in some situations (refactored `\WPGlobus_Filters::filter__get_locale`).
-
-* Fix: (Elementor) Update language switcher.
-
-* Fix: (Core) Broken translations file `wpglobus-fr_FR.po`.
-
-* Tweak: (Core) When we do not have a specific country translation, try using what we have (WIP).
 
 ## Demo Sites ##
 
