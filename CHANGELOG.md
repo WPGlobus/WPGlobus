@@ -2,6 +2,10 @@
 
 ## Changelog ##
 
+2023-05-09 - version 2.12.0
+* (Compatibility) Tested up to WordPress 6.2
+* (Builders/RankMathSEO) Added filter multilingual strings for the options page.
+
 2023-02-16 - version 2.10.10
 *  Fix: (Vendor/ACF) `Uncaught Error: Class name must be a valid object or a string`.
 
