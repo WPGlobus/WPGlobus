@@ -11,11 +11,18 @@
     "github-protocols": [
       "https"
     ],
-    "notify-on-install": false
+    "notify-on-install": false,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "require": {
     "bemailr/wp-requirements": "^2.0.2",
     "tivwp/updater": "^1.0.10"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "woocommerce/woocommerce-sniffs": "*"
   },
   "repositories": [
     {

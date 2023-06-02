@@ -3,3 +3,12 @@
 *.po~
 .phpunit.result.cache
 package-lock.json
+/vendor/bin/phpcbf
+/vendor/bin/phpcbf.bat
+/vendor/bin/phpcs
+/vendor/bin/phpcs.bat
+/vendor/dealerdirect
+/vendor/phpcompatibility
+/vendor/squizlabs
+/vendor/woocommerce/woocommerce-sniffs
+/vendor/wp-coding-standards

@@ -1,42 +1,113 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => 'dev-develop',
-    'version' => 'dev-develop',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'name' => 'wpglobus/wpglobus',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '37544949ffba3e95691f779a7c76978004d4e4ce',
+        'type' => 'wordpress-plugin',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
     ),
-    'reference' => '8be7f5ab873c73ea567597fdd26f07e620363071',
-    'name' => 'wpglobus/wpglobus',
-  ),
-  'versions' => 
-  array (
-    'bemailr/wp-requirements' => 
-    array (
-      'pretty_version' => '2.0.3',
-      'version' => '2.0.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e903973b0dfc1178f89c757bd205327811ea4658',
+    'versions' => array(
+        'bemailr/wp-requirements' => array(
+            'pretty_version' => '2.0.3',
+            'version' => '2.0.3.0',
+            'reference' => 'e903973b0dfc1178f89c757bd205327811ea4658',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bemailr/wp-requirements',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'dealerdirect/phpcodesniffer-composer-installer' => array(
+            'pretty_version' => 'v0.7.2',
+            'version' => '0.7.2.0',
+            'reference' => '1c968e542d8843d7cd71de3c5c9c3ff3ad71a1db',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../dealerdirect/phpcodesniffer-composer-installer',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phpcompatibility/php-compatibility' => array(
+            'pretty_version' => '9.3.5',
+            'version' => '9.3.5.0',
+            'reference' => '9fb324479acf6f39452e0655d2429cc0d3914243',
+            'type' => 'phpcodesniffer-standard',
+            'install_path' => __DIR__ . '/../phpcompatibility/php-compatibility',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phpcompatibility/phpcompatibility-paragonie' => array(
+            'pretty_version' => '1.3.2',
+            'version' => '1.3.2.0',
+            'reference' => 'bba5a9dfec7fcfbd679cfaf611d86b4d3759da26',
+            'type' => 'phpcodesniffer-standard',
+            'install_path' => __DIR__ . '/../phpcompatibility/phpcompatibility-paragonie',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phpcompatibility/phpcompatibility-wp' => array(
+            'pretty_version' => '2.1.4',
+            'version' => '2.1.4.0',
+            'reference' => 'b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5',
+            'type' => 'phpcodesniffer-standard',
+            'install_path' => __DIR__ . '/../phpcompatibility/phpcompatibility-wp',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'roave/security-advisories' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '4dac38892bfbf1fc7536b70b0a1f60718b39af1c',
+            'type' => 'metapackage',
+            'install_path' => NULL,
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'squizlabs/php_codesniffer' => array(
+            'pretty_version' => '3.7.2',
+            'version' => '3.7.2.0',
+            'reference' => 'ed8e00df0a83aa96acf703f8c2979ff33341f879',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'tivwp/updater' => array(
+            'pretty_version' => '1.0.10',
+            'version' => '1.0.10.0',
+            'reference' => 'c380367c0e30359c16dde53d023208e349257be2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tivwp/updater',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'woocommerce/woocommerce-sniffs' => array(
+            'pretty_version' => '0.1.3',
+            'version' => '0.1.3.0',
+            'reference' => '4576d54595614d689bc4436acff8baaece3c5bb0',
+            'type' => 'phpcodesniffer-standard',
+            'install_path' => __DIR__ . '/../woocommerce/woocommerce-sniffs',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'wp-coding-standards/wpcs' => array(
+            'pretty_version' => '2.3.0',
+            'version' => '2.3.0.0',
+            'reference' => '7da1894633f168fe244afc6de00d141f27517b62',
+            'type' => 'phpcodesniffer-standard',
+            'install_path' => __DIR__ . '/../wp-coding-standards/wpcs',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'wpglobus/wpglobus' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '37544949ffba3e95691f779a7c76978004d4e4ce',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
     ),
-    'tivwp/updater' => 
-    array (
-      'pretty_version' => '1.0.10',
-      'version' => '1.0.10.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c380367c0e30359c16dde53d023208e349257be2',
-    ),
-    'wpglobus/wpglobus' => 
-    array (
-      'pretty_version' => 'dev-develop',
-      'version' => 'dev-develop',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '8be7f5ab873c73ea567597fdd26f07e620363071',
-    ),
-  ),
 );
