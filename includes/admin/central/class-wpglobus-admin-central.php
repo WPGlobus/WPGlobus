@@ -15,6 +15,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 
 		/**
 		 * Link template.
+		 *
 		 * @var string
 		 */
 		public static $link_template;
@@ -35,9 +36,10 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 		 */
 		public static function set_vars() {
 
-			self::$link_template  = '<a href="{{href}}" class="{{link_class}}" data-tab-id="{{tab_id}}">';
-			self::$link_template .= 	'<span class="{{span_class}}" style="vertical-align: sub;"></span>';
-			self::$link_template .= 	'{{title}}';
+			self::$link_template = '<a href="{{href}}" class="{{link_class}}" data-tab-id="{{tab_id}}">';
+
+			self::$link_template .= '<span class="{{span_class}}" style="vertical-align: sub;"></span>';
+			self::$link_template .= '{{title}}';
 			self::$link_template .= '</a>';
 
 		}
@@ -65,6 +67,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 			/**
 			 * Filter tabs.
 			 * Returning array.
+			 *
 			 * @since 1.6.6
 			 *
 			 * @param array $tabs Array of tabs.
@@ -75,11 +78,17 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 			WPGlobus_Admin_Page::print_header();
 
 			?>
-			<h2 class="nav-tab-wrapper">	<?php
-				foreach ( $tabs as $type=>$tab ) :
-					$html = str_replace( '{{link_class}}', 	implode( ' ', $tab['link_class'] ), $tab['link'] );
-					$html = str_replace( '{{span_class}}', 	implode( ' ', $tab['span_class'] ), $html );
-					$html = str_replace( '{{title}}', 		$tab['title'], 		$html );
+			<h2 class="nav-tab-wrapper">
+				<?php
+				/**
+				 * Unused $type
+				 *
+				 * @noinspection PhpUnusedLocalVariableInspection
+				 */
+				foreach ( $tabs as $type => $tab ) :
+					$html = str_replace( '{{link_class}}', implode( ' ', $tab['link_class'] ), $tab['link'] );
+					$html = str_replace( '{{span_class}}', implode( ' ', $tab['span_class'] ), $html );
+					$html = str_replace( '{{title}}', $tab['title'], $html );
 					if ( ! empty( $tab['tab_id'] ) ) {
 						$html = str_replace( '{{href}}', '#' . $tab['tab_id'], $html );
 						$html = str_replace( '{{tab_id}}', $tab['tab_id'], $html );
@@ -90,10 +99,11 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 						$html = str_replace( '{{href}}', '#', $html );
 						$html = str_replace( '{{tab_id}}', '', $html );
 					}
-					echo $html; // WPCS: XSS ok.
-				endforeach;	?>
-			</h2>	<?php
-
+					echo wp_kses_post( $html );
+				endforeach;
+				?>
+			</h2>
+			<?php
 			/**
 			 * Fires to render a specific tab panel.
 			 *
@@ -109,6 +119,7 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 
 		/**
 		 * Add standard tabs.
+		 *
 		 * @return array
 		 */
 		protected static function set_tabs() {
@@ -119,34 +130,36 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 			 * WPGlobus Guide tab.
 			 */
 			$tab = array(
-				'title' 	 => __( 'Guide', 'wpglobus' ),
+				'title'      => __( 'Guide', 'wpglobus' ),
 				'link_class' => array( 'nav-tab' ),
 				'span_class' => array( 'dashicons', 'dashicons-book-alt' ),
-				'link' 		 => self::$link_template,
-				'href' 		 => WPGlobus::URL_WPGLOBUS_SITE . 'quick-start/',
-				'tab_id'	 => ''
+				'link'       => self::$link_template,
+				'href'       => WPGlobus::URL_WPGLOBUS_SITE . 'quick-start/',
+				'tab_id'     => '',
 			);
-			$tabs[ 'guide' ] = $tab;
+
+			$tabs['guide'] = $tab;
 
 			/**
 			 * WPGlobus Help Desk tab.
 			 */
 			$href = add_query_arg(
-						array(
-							'page' => WPGlobus::PAGE_WPGLOBUS_HELPDESK
-						),
-						admin_url( 'admin.php' )
-					);
+				array(
+					'page' => WPGlobus::PAGE_WPGLOBUS_HELPDESK,
+				),
+				admin_url( 'admin.php' )
+			);
 
 			$tab = array(
-				'title' 	 => __( 'WPGlobus Help Desk', 'wpglobus' ),
+				'title'      => __( 'WPGlobus Help Desk', 'wpglobus' ),
 				'link_class' => array( 'nav-tab' ),
 				'span_class' => array( 'dashicons', 'dashicons-format-chat' ),
-				'link' 		 => self::$link_template,
-				'href' 		 => $href,
-				'tab_id'	 => ''
+				'link'       => self::$link_template,
+				'href'       => $href,
+				'tab_id'     => '',
 			);
-			$tabs[ 'helpdesk' ] = $tab;
+
+			$tabs['helpdesk'] = $tab;
 
 			/**
 			 * WPGlobus Add-ons tab.
@@ -154,14 +167,15 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 			$href = WPGlobus_Admin_Page::url_addons();
 
 			$tab = array(
-				'title' 	 => __( 'Add-ons', 'wpglobus' ),
+				'title'      => __( 'Add-ons', 'wpglobus' ),
 				'link_class' => array( 'nav-tab' ),
 				'span_class' => array( 'dashicons', 'dashicons-admin-plugins' ),
-				'link' 		 => self::$link_template,
-				'href' 		 => $href,
-				'tab_id'	 => ''
+				'link'       => self::$link_template,
+				'href'       => $href,
+				'tab_id'     => '',
 			);
-			$tabs[ 'add_ons' ] = $tab;
+
+			$tabs['add_ons'] = $tab;
 
 			return $tabs;
 
@@ -169,4 +183,3 @@ if ( ! class_exists( 'WPGlobus_Admin_Central' ) ) :
 	}
 
 endif;
-/* EOF */
