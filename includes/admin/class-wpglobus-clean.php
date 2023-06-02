@@ -1,7 +1,9 @@
 <?php
 /**
- * @package   WPGlobus/Admin
+ * WPGlobus_Clean
+ *
  * @since     1.4.3
+ * @package   WPGlobus/Admin
  */
 
 if ( ! class_exists( 'WPGlobus_Clean' ) ) :
@@ -22,16 +24,18 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 */
 		public static function controller() {
 
-			self::_set_log_file();
+			self::set_log_file();
 
 			self::get_table();
 
 			self::screen();
 
-			add_action( 'admin_footer', array(
-				'WPGlobus_Clean',
-				'action__admin_print_scripts'
-			),
+			add_action(
+				'admin_footer',
+				array(
+					'WPGlobus_Clean',
+					'action__admin_print_scripts',
+				),
 				99
 			);
 
@@ -40,22 +44,39 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		/**
 		 * Initialize the class variable `log_file`.
 		 * Note: 'wp-content' can be set to a different path, so we are using the standard WP method.
+		 *
 		 * @todo Check if the folder exists and file is writeable.
 		 */
-		protected static function _set_log_file() {
+		protected static function set_log_file() {
 			$upload_dir        = wp_upload_dir();
-			$wpglobus_logs_dir = $upload_dir['basedir'] . '/' . 'wpglobus-logs';
+			$wpglobus_logs_dir = $upload_dir['basedir'] . '/wpglobus-logs';
 
 			wp_mkdir_p( $wpglobus_logs_dir );
-			// Protect the folder from reading via URL
-			if ( ! file_exists( $wpglobus_logs_dir . '/.htaccess' ) ) {
-				file_put_contents( $wpglobus_logs_dir . '/.htaccess', 'deny from all' );
-			}
-			if ( ! file_exists( $wpglobus_logs_dir . '/index.php' ) ) {
-				file_put_contents( $wpglobus_logs_dir . '/index.php', '' );
-			}
 
 			self::$log_file = $wpglobus_logs_dir . '/' . self::LOG_BASENAME . '.log';
+
+			// Protect the folder from reading via URL
+
+			/**
+			 * WP_Filesystem
+			 *
+			 * @global WP_Filesystem_Direct $wp_filesystem
+			 */
+			global $wp_filesystem;
+			if ( ! $wp_filesystem ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+				if ( ! WP_Filesystem() ) {
+					return;
+				}
+			}
+
+			if ( ! $wp_filesystem->exists( $wpglobus_logs_dir . '/.htaccess' ) ) {
+				$wp_filesystem->put_contents( $wpglobus_logs_dir . '/.htaccess', 'deny from all' );
+			}
+			if ( ! $wp_filesystem->exists( $wpglobus_logs_dir . '/index.php' ) ) {
+				$wp_filesystem->put_contents( $wpglobus_logs_dir . '/index.php', '' );
+			}
+
 		}
 
 		/**
@@ -74,20 +95,18 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'posts' === $table || $get_all ) {
 
-				/**
-				 * table posts
-				 */
+				// Table posts
 				$posts                 = new stdClass();
 				$posts->include_fields = array(
 					'post_content',
 					'post_title',
 					'post_excerpt',
-					'post_content_filtered'
+					'post_content_filtered',
 				);
 				$posts->id_field       = 'ID';
 				$posts->post_status    = array(
 					'publish',
-					'draft'
+					'draft',
 				);
 
 				self::$tables['posts'] = $posts;
@@ -96,12 +115,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'postmeta' === $table || $get_all ) {
 
-				/**
-				 * table postmeta
-				 */
+				// Table postmeta
 				$postmeta                 = new stdClass();
 				$postmeta->include_fields = array(
-					'meta_value'
+					'meta_value',
 				);
 				$postmeta->id_field       = 'meta_id';
 
@@ -111,12 +128,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'options' === $table || $get_all ) {
 
-				/**
-				 * table options
-				 */
+				// Table options
 				$options                 = new stdClass();
 				$options->include_fields = array(
-					'option_value'
+					'option_value',
 				);
 				$options->id_field       = 'option_id';
 
@@ -126,12 +141,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'terms' === $table || $get_all ) {
 
-				/**
-				 * table terms
-				 */
+				// Table terms
 				$terms                 = new stdClass();
 				$terms->include_fields = array(
-					'name'
+					'name',
 				);
 				$terms->id_field       = 'term_id';
 
@@ -141,12 +154,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'term_taxonomy' === $table || $get_all ) {
 
-				/**
-				 * table term_taxonomy
-				 */
+				// Table term_taxonomy
 				$term_taxonomy                 = new stdClass();
 				$term_taxonomy->include_fields = array(
-					'description'
+					'description',
 				);
 				$term_taxonomy->id_field       = 'term_taxonomy_id';
 
@@ -156,12 +167,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'usermeta' === $table || $get_all ) {
 
-				/**
-				 * table usermeta
-				 */
+				// Table usermeta
 				$usermeta                 = new stdClass();
 				$usermeta->include_fields = array(
-					'meta_value'
+					'meta_value',
 				);
 
 				$usermeta->id_field = 'umeta_id';
@@ -170,19 +179,17 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			}
 
-
 			if ( class_exists( 'WooCommerce' ) ) :
 
 				/**
 				 * WooCommerce tables
 				 */
 				if ( 'woocommerce_attribute_taxonomies' === $table || $get_all ) {
-					/**
-					 * table woocommerce_attribute_taxonomies
-					 */
+
+					// Table woocommerce_attribute_taxonomies
 					$woocommerce_attribute_taxonomies                 = new stdClass();
 					$woocommerce_attribute_taxonomies->include_fields = array(
-						'attribute_label'
+						'attribute_label',
 					);
 					$woocommerce_attribute_taxonomies->id_field       = 'attribute_id';
 
@@ -190,12 +197,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				}
 
 				if ( 'woocommerce_order_items' === $table || $get_all ) {
-					/**
-					 * table woocommerce_order_items
-					 */
+					// Table woocommerce_order_items
 					$woocommerce_order_items                 = new stdClass();
 					$woocommerce_order_items->include_fields = array(
-						'order_item_name'
+						'order_item_name',
 					);
 					$woocommerce_order_items->id_field       = 'order_item_id';
 
@@ -217,8 +222,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			foreach ( self::$tables as $table => $data ) {
 
 				$list .= '<li id="' . $table . '">';
-				/** @noinspection DisconnectedForeachInstructionInspection */
-				$list .= '<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
+				$list .= '<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '"  alt=""/></span>';
 				$list .= '<span class="wpglobus-result" style="float:left;width:20px;height:20px;"></span>';
 				$list .= '<span class=""><input type="checkbox" id="cb-' . $table . '" checked disabled /></span>';
 				$list .= $table;
@@ -226,7 +230,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			}
 			$list .= '<li id="wpglobus_options">';
-			$list .= '<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '" /></span>';
+			$list .= '<span class="wpglobus-spinner" style="float:left;margin-right:10px;"><img src="' . $spinner . '"  alt=""/></span>';
 			$list .= '<span class="wpglobus-result" style="float:left;width:20px;height:20px;"></span>';
 			$list .= '<span class=""><input type="checkbox" id="cb-wpglobus_options" name="cb-wpglobus_options" /></span>';
 			$list .= esc_html( __( 'Remove the WPGlobus settings (not recommended)', 'wpglobus' ) );
@@ -244,7 +248,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 */
 		public static function process_ajax( $order ) {
 
-			self::_set_log_file();
+			self::set_log_file();
 
 			$_log = false;
 
@@ -252,16 +256,15 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				$_log = true;
 			}
 
-			if ( $order['action'] === 'die' ) {
+			if ( 'die' === $order['action'] ) {
 				wp_send_json_success( $order );
 			}
 
-			if ( $order['action'] === 'wpglobus-reset' ) {
+			if ( 'wpglobus-reset' === $order['action'] ) {
 
 				/**
 				 * SELECT * FROM `wp_options` WHERE `option_name` REGEXP 'wpglobus'
 				 */
-
 				global $wpdb;
 
 				/**
@@ -271,6 +274,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 				$query = "SELECT `option_id`, `option_name` FROM `$table` WHERE `option_name` REGEXP 'wpglobus'";
 
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 				$ids = $wpdb->get_results( $query, ARRAY_A );
 
 				$records = array();
@@ -280,7 +284,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 					foreach ( $data as $field_id => $record_id ) {
 						if ( 'option_id' === $field_id ) {
 							$records[] = $record_id;
-						} else if ( 'option_name' === $field_id ) {
+						} elseif ( 'option_name' === $field_id ) {
 							$fields[] = $record_id;
 						}
 					}
@@ -290,11 +294,12 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				if ( ! empty( $records ) ) {
 
 					if ( $_log ) {
-						self::_log( $table, '', $fields, '' );
+						self::log( $table, '', $fields, '' );
 					}
 
-					$set    = implode( ',', $records );
-					$query  = "DELETE FROM $table WHERE `option_id` IN ($set)";
+					$set   = implode( ',', $records );
+					$query = "DELETE FROM $table WHERE `option_id` IN ($set)";
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 					$result = $wpdb->query( $query );
 				}
 
@@ -306,7 +311,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			}
 
-			if ( $order['action'] !== 'clean' ) {
+			if ( 'clean' !== $order['action'] ) {
 				wp_send_json_error( $order );
 			}
 
@@ -314,6 +319,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			/**
 			 * Set of examples of sql queries
+			 *
 			 * @see http://dev.mysql.com/doc/refman/5.7/en/pattern-matching.html
 			 * @see http://dev.mysql.com/doc/refman/5.7/en/regexp.html
 			 */
@@ -386,19 +392,16 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			 * Set condition
 			 */
 			$condition = false;
+			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
 			if ( count( self::$tables[ $order['table'] ]->include_fields ) === 0 ) {
-				/** do nothing */
-			} else if ( count( self::$tables[ $order['table'] ]->include_fields ) === 1 ) {
-				/**
-				 * one field
-				 */
+				// Do nothing
+			} elseif ( count( self::$tables[ $order['table'] ]->include_fields ) === 1 ) {
+				// One field
 				$field     = self::$tables[ $order['table'] ]->include_fields[0];
 				$condition = "AND $field REGEXP '$wpg_regexp'";
 
 			} else {
-				/**
-				 * multiple fields
-				 */
+				// Multiple fields
 				$temp = array();
 				foreach ( self::$tables[ $order['table'] ]->include_fields as $field ) {
 					$temp[] = "$field REGEXP '$wpg_regexp'";
@@ -426,6 +429,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			$query = "SELECT $id FROM $table WHERE 1=1 $post_status $condition";
 
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			$ids = $wpdb->get_results( $query, ARRAY_A );
 
 			$result = true;
@@ -434,12 +438,11 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 				foreach ( $data as $field_id => $record_id ) {
 
-					/** @noinspection DisconnectedForeachInstructionInspection */
 					$ifields = implode( ', ', self::$tables[ $order['table'] ]->include_fields );
 
 					$query1 = "SELECT $ifields FROM $table WHERE $field_id = '$record_id'";
 
-					/** @var array $record */
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 					$record = $wpdb->get_results( $query1 );
 
 					$update_fields = array();
@@ -462,7 +465,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						$converted = self::convert( $value );
 
 						if ( $_log ) {
-							self::_log( $table, $record_id, $value, $converted );
+							self::log( $table, $record_id, $value, $converted );
 						}
 
 						if ( $serialized ) {
@@ -480,16 +483,14 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						$updates   = implode( ', ', $update_fields );
 						$upd_query = "UPDATE `$table` SET $updates WHERE `$field_id` = $record_id";
 
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 						$res = $wpdb->query( $upd_query );
 
 						if ( false === $res ) {
 							$result = false;
 						}
-
 					}
-
 				} // endforeach
-
 			} // endforeach
 
 			if ( false === $result ) {
@@ -508,17 +509,19 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 * @param string $initial
 		 * @param string $converted
 		 */
-		public static function _log( $table = '', $id = '', $initial = '', $converted = '' ) {
-			error_log( date( DATE_ATOM ) . "\n", 3, self::$log_file );
-			error_log( 'TABLE: ' . $table . "\n", 3, self::$log_file );
-			error_log( 'ID: ' . $id . "\n", 3, self::$log_file );
-			error_log( "BEFORE: \n" . print_r( $initial, true ) . "\n", 3, self::$log_file );
-			if ( empty($converted) ) {
-				error_log( "AFTER: \n(empty)\n", 3, self::$log_file );
+		protected static function log( $table = '', $id = '', $initial = '', $converted = '' ) {
+			$fn_log     = 'error_log';
+			$fn_print_r = 'print_r';
+			$fn_log( gmdate( DATE_ATOM ) . "\n", 3, self::$log_file );
+			$fn_log( 'TABLE: ' . $table . "\n", 3, self::$log_file );
+			$fn_log( 'ID: ' . $id . "\n", 3, self::$log_file );
+			$fn_log( "BEFORE: \n" . $fn_print_r( $initial, true ) . "\n", 3, self::$log_file );
+			if ( empty( $converted ) ) {
+				$fn_log( "AFTER: \n(empty)\n", 3, self::$log_file );
 			} else {
-				error_log( "AFTER: \n" . print_r( $converted, true ) . "\n", 3, self::$log_file );
+				$fn_log( "AFTER: \n" . $fn_print_r( $converted, true ) . "\n", 3, self::$log_file );
 			}
-			error_log( '=================' . "\n\n", 3, self::$log_file );
+			$fn_log( '=================' . "\n\n", 3, self::$log_file );
 		}
 
 		/**
@@ -547,11 +550,9 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				array(
 					'version' => WPGLOBUS_VERSION,
 					'icons'   => $result_icons,
-					'data'    => array_merge( self::$tables, array( 'wpglobus_options' => new stdClass() ) )
+					'data'    => array_merge( self::$tables, array( 'wpglobus_options' => new stdClass() ) ),
 				)
 			);
-
-
 		}
 
 		/**
@@ -566,22 +567,27 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			 */
 			$ga_campaign = '?utm_source=wpglobus-admin-clean&utm_medium=link&utm_campaign=clean-up-tool';
 
-			$url_wpglobus_site = WPGlobus_Utils::url_wpglobus_site();
-//			$url_wpglobus_site_home        = $url_wpglobus_site . $ga_campaign;
+			$url_wpglobus_site             = WPGlobus_Utils::url_wpglobus_site();
 			$url_wpglobus_site_contact     = $url_wpglobus_site . 'pg/contact-us/' . $ga_campaign;
 			$url_wpglobus_site_quick_start = $url_wpglobus_site . 'quick-start/' . $ga_campaign;
-//			$url_wpglobus_site_faq         = $url_wpglobus_site . 'faq/' . $ga_campaign;
-//			$url_wpglobus_site_pro_support = $url_wpglobus_site . 'professional-support/' . $ga_campaign;
-
+			/**
+			 * //            $url_wpglobus_site_home        = $url_wpglobus_site . $ga_campaign;
+			 * //            $url_wpglobus_site_faq         = $url_wpglobus_site . 'faq/' . $ga_campaign;
+			 * //            $url_wpglobus_site_pro_support = $url_wpglobus_site . 'professional-support/' . $ga_campaign;
+			 */
 			$url_wpglobus_logo = WPGlobus::$PLUGIN_DIR_URL . 'includes/css/images/wpglobus-logo-180x180.png';
 
+			// @formatter:off
 			?>
 			<style>
-				.wp-badge.wpglobus-badge {
-					background:      #ffffff url(<?php echo esc_url( $url_wpglobus_logo ); ?>) no-repeat;
-					background-size: contain;
-				}
+			.wp-badge.wpglobus-badge {
+				background: #ffffff url(<?php echo esc_url( $url_wpglobus_logo ); ?>) no-repeat;
+				background-size: contain;
+			}
 			</style>
+			<?php
+			// @formatter:on
+			?>
 			<div class="wrap about-wrap wpglobus-about-wrap clean-wrap wpglobus-clean">
 				<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
 					<span class="wpglobus-version"><?php echo esc_html( WPGLOBUS_VERSION ); ?></span>
@@ -600,8 +606,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 						<?php esc_html_e( 'Clean-up Tool', 'wpglobus' ); ?>
 					</a>
 					<a href="<?php echo esc_url( $url_wpglobus_site_quick_start ); ?>"
-					   target="_blank"
-					   class="nav-tab">
+							target="_blank"
+							class="nav-tab">
 						<?php esc_html_e( 'Guide', 'wpglobus' ); ?>
 					</a>
 					<a href="<?php echo esc_url( WPGlobus_Admin_Page::url_settings() ); ?>" class="nav-tab">
@@ -621,34 +627,36 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 				<div style="padding: .5em">
 					<p><strong>
-						1. <?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
-					</strong></p>
+							1. <?php esc_html_e( 'This tool should be used only if you plan to completely uninstall WPGlobus. By running it, you will remove ALL translations you have entered to your post, pages, etc., keeping only the MAIN language texts. Please make sure that all entries have some content in the main language. Otherwise, you might end up with empty titles, no content, no excerpts, blank comments and so on.', 'wpglobus' ); ?>
+						</strong></p>
 					<p><strong>
-						2. <?php esc_html_e( 'Make sure that your active theme does not have any code related to WPGlobus. Such code could be added by you or by a 3rd party developer. If that code runs without first verifying that WPGlobus is active, WordPress may die with a fatal error.', 'wpglobus' ); ?>
-					</strong></p>
+							2. <?php esc_html_e( 'Make sure that your active theme does not have any code related to WPGlobus. Such code could be added by you or by a 3rd party developer. If that code runs without first verifying that WPGlobus is active, WordPress may die with a fatal error.', 'wpglobus' ); ?>
+						</strong></p>
 				</div>
 
 				<div style="color:red; background-color: white; padding: .5em">
 					<?php
-					$_message = esc_html( sprintf(
-						// translators: %1$s - language name, %2$s - language code. Do not remove.
-						__( 'The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to {{settings}}.', 'wpglobus' ),
-						WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
-						WPGlobus::Config()->default_language ) 
+					$_message = esc_html(
+						sprintf( // translators: %1$s - language name, %2$s - language code. Do not remove.
+							__( 'The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN %1$s WILL BE DELETED! To change the main language, please go to {{settings}}.', 'wpglobus' ),
+							WPGlobus::Config()->en_language_name[ WPGlobus::Config()->default_language ],
+							WPGlobus::Config()->default_language
+						)
 					);
-					$_settings_link =  '<a href="'.esc_url( WPGlobus_Admin_Page::url_settings('languages') ).'">' . esc_html( 'Settings', 'wpglobus' ) . '</a>';
-					echo str_replace( '{{settings}}', $_settings_link, $_message );
+
+					$_settings_link = '<a href="' . esc_url( WPGlobus_Admin_Page::url_settings( 'languages' ) ) . '">' . esc_html__( 'Settings' ) . '</a>';
+					echo wp_kses_post( str_replace( '{{settings}}', $_settings_link, $_message ) );
 					?>
 				</div>
 
-				<hr />
+				<hr/>
 				<h3 id="about-to-clean">
 					<?php esc_html_e( 'You are about to clean the content of the following database tables:', 'wpglobus' ); ?>
 				</h3>
 
-				<?php echo self::get_table_list(); // WPCS: XSS ok. ?>
+				<?php echo wp_kses_post( self::get_table_list() ); ?>
 
-				<hr />
+				<hr/>
 
 				<h3>
 					<?php esc_html_e( 'The operations log', 'wpglobus' ); ?>
@@ -656,27 +664,28 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				<div>
 					<?php esc_html_e( 'We are going to write a detailed log of all the database changes performed. It should help in the case you need to restore something important. The log will be written to the file:', 'wpglobus' ); ?>
 				</div>
-				<br />
+				<br/>
 				<code>
-					<?php echo self::$log_file; // WPCS: XSS ok. ?>
+					<?php echo esc_html( self::$log_file ); ?>
 				</code>
-				<br />
-				<br />
+				<br/>
+				<br/>
 				<label>
-					<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log" checked="checked" />
+					<input type="checkbox" name="wpglobus-clean-log" id="wpglobus-clean-log" checked="checked"/>
 					<?php esc_html_e( 'Uncheck if you do not want to write the operations log (we recommend to keep it checked)', 'wpglobus' ); ?>
 
 				</label>
-				<hr />
+				<hr/>
 				<h3>
 					<?php esc_html_e( 'You have been warned...', 'wpglobus' ); ?>
 				</h3>
-					<?php esc_html_e( 'Please confirm by checking the box below:', 'wpglobus' ); ?>
+				<?php esc_html_e( 'Please confirm by checking the box below:', 'wpglobus' ); ?>
 				<div style="color:red; background-color: white; padding: .5em; margin: 1em 0;">
 					<?php esc_html_e( 'I have read and understood everything written on this page. I am aware that by using this tool I may loose some content of my website. I have made a database backup and know how to restore it if necessary. I am fully responsible for the results.', 'wpglobus' ); ?>
 				</div>
 
-				<label><input type="checkbox" name="wpglobus-clean-activate" id="wpglobus-clean-activate" /><?php esc_html_e( 'YES, I CONFIRM', 'wpglobus' ); ?>
+				<label><input type="checkbox" name="wpglobus-clean-activate"
+							id="wpglobus-clean-activate"/><?php esc_html_e( 'YES, I CONFIRM', 'wpglobus' ); ?>
 				</label>
 				<div class="return-to-dashboard">
 					<a id="wpglobus-clean-button" class="button button-primary hidden" href="#about-to-clean">
@@ -729,9 +738,8 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			foreach ( $data as $key => $value ) {
 				if ( is_array( $data ) ) {
-					/** @noinspection AlterInForeachInspection */
 					$data[ $key ] = self::convert( $value );
-				} else if ( is_object( $data ) ) {
+				} elseif ( is_object( $data ) ) {
 					$data->$key = self::convert( $value );
 				}
 			}
@@ -739,10 +747,6 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			return $data;
 
 		}
-
-
-	} //class
+	}
 
 endif;
-
-# --- EOF
