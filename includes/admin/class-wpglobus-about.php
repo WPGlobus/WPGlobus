@@ -1,10 +1,8 @@
 <?php
 /**
- * @package   WPGlobus\Admin
- */
-
-/**
  * Class WPGlobus_About
+ *
+ * @package   WPGlobus\Admin
  */
 class WPGlobus_About {
 
@@ -92,6 +90,11 @@ class WPGlobus_About {
 		WPGlobus_Admin_Page::print_footer();
 	}
 
+	/**
+	 * Method easy_1_2_3.
+	 *
+	 * @return void
+	 */
 	protected static function easy_1_2_3() {
 		?>
 		<h4 class="dashicons-before dashicons-admin-settings bar">
@@ -105,6 +108,11 @@ class WPGlobus_About {
 		<?php
 	}
 
+	/**
+	 * Method links.
+	 *
+	 * @return void
+	 */
 	protected static function links() {
 		?>
 		<h4 class="dashicons-before dashicons-admin-links bar">
@@ -112,21 +120,28 @@ class WPGlobus_About {
 		</h4>
 		<ul>
 			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Utils::url_wpglobus_site() . self::QA_CAMPAIGN ); ?>"
-			              target="_blank">WPGlobus.com</a></li>
-			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Utils::url_wpglobus_site() . 'quick-start/' . self::QA_CAMPAIGN ); ?>"
-			              target="_blank"><?php esc_html_e( 'Guide', 'wpglobus' ); ?></a></li>
-			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Utils::url_wpglobus_site() . 'faq/' . self::QA_CAMPAIGN ); ?>"
-			              target="_blank"><?php esc_html_e( 'FAQs', 'wpglobus' ); ?></a></li>
+						target="_blank">WPGlobus.com</a></li>
+			<li>&bull; <a
+						href="<?php echo esc_url( WPGlobus_Utils::url_wpglobus_site() . 'quick-start/' . self::QA_CAMPAIGN ); ?>"
+						target="_blank"><?php esc_html_e( 'Guide', 'wpglobus' ); ?></a></li>
+			<li>&bull; <a
+						href="<?php echo esc_url( WPGlobus_Utils::url_wpglobus_site() . 'faq/' . self::QA_CAMPAIGN ); ?>"
+						target="_blank"><?php esc_html_e( 'FAQs', 'wpglobus' ); ?></a></li>
 			<li>&bull; <a href="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>"
-			              target="_blank"><?php esc_html_e( 'Contact Us', 'wpglobus' ); ?></a></li>
+						target="_blank"><?php esc_html_e( 'Contact Us', 'wpglobus' ); ?></a></li>
 			<li>&bull; <a href="https://wordpress.org/support/plugin/wpglobus/reviews/?filter=5"
-			              target="_blank"><?php esc_html_e( 'Please give us 5 stars!', 'wpglobus' ); ?></a>
+						target="_blank"><?php esc_html_e( 'Please give us 5 stars!', 'wpglobus' ); ?></a>
 				<span class="wpglobus-stars">&#x2606;&#x2606;&#x2606;&#x2606;&#x2606;</span></li>
 
 		</ul>
 		<?php
 	}
 
+	/**
+	 * Method translation_help.
+	 *
+	 * @return void
+	 */
 	protected static function translation_help() {
 		?>
 		<h4 class="dashicons-before dashicons-translation highlight">
@@ -136,19 +151,14 @@ class WPGlobus_About {
 			<?php esc_html_e( 'There are many translation companies and individual translators who can help you write and proofread the texts.', 'wpglobus' ); ?>
 			<?php esc_html_e( 'When you choose a translator, please look at their native language, country of residence, specialization and knowledge of WordPress.', 'wpglobus' ); ?>
 		</p>
-		<p>
-			<?php
-			/*
-			printf(
-				// translators: %s are used to insert HTML link. Keep them in place.
-				esc_html__( 'We are planning to maintain a %s list of translators %s on the WPGlobus website. This is not an endorsement, just a courtesy. Please contact them directly and let us know how did it work for you!', 'wpglobus' ),
-				'<a href="' . esc_url( WPGlobus_Utils::url_wpglobus_site() . 'translator/' . self::QA_CAMPAIGN ) . '">',
-				'</a>'
-			); // */ ?>
-		</p>
 		<?php
 	}
 
+	/**
+	 * Method important_notes.
+	 *
+	 * @return void
+	 */
 	protected static function important_notes() {
 		?>
 		<h4 class="dashicons-before dashicons-info highlight">
@@ -157,23 +167,22 @@ class WPGlobus_About {
 		<ul class="wpglobus-important">
 
 			<li>
-				<?php _e( 'WPGlobus only supports the localization URLs in the form of <code>example.com/xx/page/</code>. We do not plan to support subdomains <code>xx.example.com</code> and language queries <code>example.com?lang=xx</code>.', 'wpglobus' ); // WPCS: XSS ok. ?>
+				<?php echo wp_kses_post( __( 'WPGlobus only supports the localization URLs in the form of <code>example.com/xx/page/</code>. We do not plan to support subdomains <code>xx.example.com</code> and language queries <code>example.com?lang=xx</code>.', 'wpglobus' ) ); ?>
 			</li>
 			<li>
-				<?php _e( 'Some themes and plugins are <strong>not multilingual-ready</strong>.', 'wpglobus' );  // WPCS: XSS ok. ?>
+				<?php echo wp_kses_post( __( 'Some themes and plugins are <strong>not multilingual-ready</strong>.', 'wpglobus' ) ); ?>
 				<?php esc_html_e( 'They might display some texts with no translation, or with all languages mixed together.', 'wpglobus' ); ?>
 				<?php
 				printf(
 					// translators: %s are used to insert HTML link. Keep them in place.
-					esc_html__( 'Please contact the theme / plugin author. If they are unable to assist, consider %s hiring the WPGlobus Team %s to write a custom code for you.', 'wpglobus' ),
+					esc_html__( 'Please contact the theme / plugin author. If they are unable to assist, consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you.', 'wpglobus' ),
 					'<a href="' . esc_url( WPGlobus_Utils::url_wpglobus_site() . 'professional-support/' . self::QA_CAMPAIGN ) . '">',
 					'</a>'
-				); ?>
+				);
+				?>
 			</li>
 
 		</ul>
 		<?php
 	}
-} //class
-
-/*EOF*/
+}
