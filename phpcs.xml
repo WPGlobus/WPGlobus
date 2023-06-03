@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards">
-    <description>WooCommerce extension PHP_CodeSniffer ruleset.</description>
+<ruleset name="WPGlobus">
+    <description>WPGlobus PHP_CodeSniffer ruleset.</description>
 
     <!-- Exclude paths -->
     <exclude-pattern>tests/</exclude-pattern>
