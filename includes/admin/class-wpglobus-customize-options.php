@@ -69,7 +69,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 		}
 
 		public function render_content() {
-			echo $this->content;
+			echo wp_kses_post( $this->content );
 		}
 	}
 
@@ -210,9 +210,27 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				<?php
 				endif;
 
-				$new_item = str_replace( '{{class}}', 'wpglobus-checkbox ' . $this->args['checkbox_class'], $this->skeleton );
+				/**
+				 * W/o kses was:
+				 *
+				 * $new_item = str_replace( '{{class}}', 'wpglobus-checkbox ' . $this->args['checkbox_class'], $this->skeleton );
+				 * echo '<div style="display:none" id="wpglobus-item-skeleton">';
+				 * echo $new_item;
+				 * echo '</div>';
+				 */
 				echo '<div style="display:none" id="wpglobus-item-skeleton">';
-				echo $new_item;
+				/**
+				 * The skeleton here is repeated because `kses` cannot handle things like `{{flag}}`.
+				 * Tag `img` w/o attributes in the skeleton
+				 *
+				 * @noinspection HtmlRequiredAltAttribute
+				 */
+				echo '<a href="{{edit-link}}" target="_blank"><span style="cursor:pointer">Edit</span></a>&nbsp;' .
+					 '<img style="cursor:move" {{flag}} />&nbsp;' .
+					 '<input name="wpglobus_item_{{name}}" id="wpglobus_item_{{id}}" type="checkbox" checked="{{checked}}" ' .
+					 ' class="wpglobus-checkbox ' . esc_attr( $this->args['checkbox_class'] ) . '" ' .
+					 ' data-order="{{order}}" data-language="{{language}}" disabled="{{disabled}}" />' .
+					 '<span style="cursor:move">{{item}}</span>';
 				echo '</div>';
 
 				echo '<ul id="wpglobus-sortable" style="margin-top:10px;margin-left:20px;">';
@@ -308,7 +326,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					<div>
 						<?php
 						if ( ! empty( $this->args['message'] ) ) {
-							echo $this->args['message'];
+							echo esc_html( $this->args['message'] );
 						}
 						?>
 					</div>
@@ -689,7 +707,10 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				$message       = '';
 				if ( version_compare( $wp_version, '4.5-RC1', '<' ) ) :
 					$start_section = false;
-					$message       = esc_html__( 'You need to update WordPress to 4.5 or later to get Fields Settings section', 'wpglobus' );
+					/**
+					 * Use esc_html when output the message, not here.
+					 */
+					$message = __( 'You need to update WordPress to 4.5 or later to get Fields Settings section', 'wpglobus' );
 				endif;
 
 				self::$sections['wpglobus_fields_settings_section'] = 'wpglobus_fields_settings_section';
