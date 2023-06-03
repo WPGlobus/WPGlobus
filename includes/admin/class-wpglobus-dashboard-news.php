@@ -2,6 +2,7 @@
 
 /**
  * Class WPGlobus_Dashboard_News
+ *
  * @since 1.7.7
  */
 class WPGlobus_Dashboard_News {
@@ -12,12 +13,12 @@ class WPGlobus_Dashboard_News {
 	public function __construct() {
 		add_action( 'wp_dashboard_setup', array(
 			$this,
-			'action__wp_dashboard_setup'
+			'action__wp_dashboard_setup',
 		) );
 
 		add_filter( 'wpglobus_localize_feed_url', array(
 			$this,
-			'filter__wpglobus_localize_feed_url'
+			'filter__wpglobus_localize_feed_url',
 		), 0, 2 );
 
 	}
@@ -43,7 +44,7 @@ class WPGlobus_Dashboard_News {
 			esc_html__( 'WPGlobus News', 'wpglobus' ),
 			array(
 				$this,
-				'dashboard_widget'
+				'dashboard_widget',
 			),
 			'dashboard', 'side', 'high'
 		);
@@ -60,7 +61,7 @@ class WPGlobus_Dashboard_News {
 			'items'        => 3,
 			'show_summary' => 1,
 			'show_author'  => 0,
-			'show_date'    => 1
+			'show_date'    => 1,
 		) );
 		echo '</div>';
 	}
