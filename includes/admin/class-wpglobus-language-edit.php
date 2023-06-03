@@ -125,7 +125,7 @@ class WPGlobus_Language_Edit {
 			$location = '?page=' . WPGlobus::OPTIONS_PAGE_SLUG;
 			// @formatter:off
 			?>
-			<script>jQuery(document).ready(function () {window.location = window.location.protocol + '//' + window.location.host + window.location.pathname + '<?php echo $location; // WPCS: XSS ok. ?>'});</script>
+			<script>jQuery(document).ready(function () {window.location = window.location.protocol + '//' + window.location.host + window.location.pathname + '<?php echo esc_js($location ); ?>'});</script>
 			<?php
 			// @formatter:on
 		}
@@ -450,7 +450,8 @@ class WPGlobus_Language_Edit {
 					if ( WPGlobus_Language_Edit_Request::ACTION_EDIT === $this->action ) {
 						?>
 
-						<a class="button button-link-delete" style="margin-left: 1em" href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_delete( $this->language_code ) ); ?>">
+						<a class="button button-link-delete" style="margin-left: 1em"
+								href="<?php echo esc_url( WPGlobus_Language_Edit_Request::url_language_delete( $this->language_code ) ); ?>">
 							<i class="dashicons dashicons-trash" style="margin-top: 4px;"></i>
 							<?php esc_html_e( 'Delete Language', 'wpglobus' ); ?>&hellip;</a>
 						<?php
