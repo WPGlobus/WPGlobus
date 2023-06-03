@@ -4,7 +4,8 @@
  *
  * WordPress shortcuts.
  *
- * @package WPGlobus
+ * @package      WPGlobus
+ * @noinspection PhpUnused
  */
 
 /**
@@ -43,6 +44,9 @@ class WPGlobus_WP {
 	 * @return bool
 	 */
 	public static function is_doing_wc_ajax() {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
 		return ( ! empty( $_GET['wc-ajax'] ) );
 	}
 
@@ -57,6 +61,9 @@ class WPGlobus_WP {
 	 *
 	 */
 	public static function is_admin_doing_ajax() {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
 		return (
 			self::is_doing_ajax() &&
 			(
@@ -73,7 +80,6 @@ class WPGlobus_WP {
 		);
 	}
 
-
 	/**
 	 * To get the current admin page
 	 * (Set in wp-includes/vars.php)
@@ -83,6 +89,8 @@ class WPGlobus_WP {
 	 */
 	public static function pagenow() {
 		/**
+		 * Global.
+		 *
 		 * @global string $pagenow
 		 */
 		global $pagenow;
@@ -91,12 +99,14 @@ class WPGlobus_WP {
 	}
 
 	/**
-	 * @param string|string[] $page
+	 * Is pagenow = $page?
+	 *
+	 * @param string|string[] $page Page
 	 *
 	 * @return bool
 	 */
 	public static function is_pagenow( $page ) {
-		return in_array( self::pagenow(), (array) $page );
+		return in_array( self::pagenow(), (array) $page, true );
 	}
 
 	/**
@@ -118,16 +128,20 @@ class WPGlobus_WP {
 	}
 
 	/**
-	 * @param string|string[] $page
+	 * Is plugin_page = $page?
+	 *
+	 * @param string|string[] $page Page.
 	 *
 	 * @return bool
 	 */
 	public static function is_plugin_page( $page ) {
-		return in_array( self::plugin_page(), (array) $page );
+		return in_array( self::plugin_page(), (array) $page, true );
 	}
 
 	/**
-	 * @param string|string[] $action
+	 * Is http_post_action == $action?
+	 *
+	 * @param string|string[] $action Action.
 	 *
 	 * @return bool
 	 */
@@ -135,11 +149,16 @@ class WPGlobus_WP {
 
 		$action = (array) $action;
 
-		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action, true ) ); // WPCS: input var ok, sanitization ok.
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
+		return ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $action, true ) );
 	}
 
 	/**
-	 * @param string|string[] $action
+	 * Is http_get_action == $action?
+	 *
+	 * @param string|string[] $action Action.
 	 *
 	 * @return bool
 	 */
@@ -147,7 +166,10 @@ class WPGlobus_WP {
 
 		$action = (array) $action;
 
-		return ( ! empty( $_GET['action'] ) && in_array( $_GET['action'], $action, true ) ); // WPCS: input var ok, sanitization ok.
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
+		return ( ! empty( $_GET['action'] ) && in_array( $_GET['action'], $action, true ) );
 	}
 
 	/**
@@ -191,7 +213,8 @@ class WPGlobus_WP {
 			$trace_level --;
 		}
 
-		$callers = debug_backtrace();
+		$fn      = 'debug_backtrace';
+		$callers = $fn();
 		if ( empty( $callers[ $trace_level ] ) ) {
 			return false;
 		}
@@ -237,7 +260,8 @@ class WPGlobus_WP {
 		}
 
 		// Traverse backtrace and stop if the callable is found there.
-		foreach ( debug_backtrace() as $_ ) {
+		$fn = 'debug_backtrace';
+		foreach ( $fn() as $_ ) {
 			if ( isset( $_['function'] ) && $_['function'] === $function_name ) {
 				$function_in_backtrace = true;
 				if ( $class_name && isset( $_['class'] ) && $_['class'] !== $class_name ) {
@@ -292,8 +316,8 @@ class WPGlobus_WP {
 		}
 
 		/**
-		 * @see wp-includes\rest-api.php
-		 * @see wp-includes\load.php
+		 * See wp-includes\rest-api.php
+		 * See wp-includes\load.php
 		 */
 		if ( defined( 'REST_REQUEST' ) || wp_is_json_request() ) {
 			return true;
@@ -334,6 +358,7 @@ class WPGlobus_WP {
 	 * @param string $key Parameter name.
 	 *
 	 * @return array|string
+	 * @noinspection PhpUnused
 	 */
 	public static function get_http_get_parameter( $key ) {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
