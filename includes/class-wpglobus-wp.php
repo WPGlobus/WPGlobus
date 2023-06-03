@@ -3,6 +3,7 @@
  * File: class-wpglobus-wp.php
  *
  * WordPress shortcuts.
+ *
  * @package WPGlobus
  */
 
@@ -13,6 +14,7 @@ class WPGlobus_WP {
 
 	/**
 	 * CSS classes for admin notices
+	 *
 	 * @example
 	 * <code>
 	 *  echo '<div class="notice ' . WPGlobus_WP::ADMIN_NOTICE_WARNING . '">';
@@ -20,15 +22,15 @@ class WPGlobus_WP {
 	 */
 
 	const ADMIN_NOTICE_SUCCESS = 'notice-success';
-	const ADMIN_NOTICE_ERROR = 'notice-error';
-	const ADMIN_NOTICE_INFO = 'notice-info';
+	const ADMIN_NOTICE_ERROR   = 'notice-error';
+	const ADMIN_NOTICE_INFO    = 'notice-info';
 	const ADMIN_NOTICE_WARNING = 'notice-warning';
 
 	/**
 	 * Check if doing AJAX call.
 	 *
-	 * @return bool
 	 * @since 1.9.13 - also checks for WC AJAX.
+	 * @return bool
 	 */
 	public static function is_doing_ajax() {
 		return ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || self::is_doing_wc_ajax();
@@ -37,8 +39,8 @@ class WPGlobus_WP {
 	/**
 	 * Check if doing WooCommerce AJAX call.
 	 *
-	 * @return bool
 	 * @since 1.9.13
+	 * @return bool
 	 */
 	public static function is_doing_wc_ajax() {
 		return ( ! empty( $_GET['wc-ajax'] ) );
@@ -46,12 +48,13 @@ class WPGlobus_WP {
 
 	/**
 	 * Attempt to check if an AJAX call was originated from admin screen.
+	 *
+	 * @return bool
+	 * @todo add $action parameter for case to check for it only
 	 * @todo There should be other actions. See $core_actions_get in admin-ajax.php
 	 *       Can also check $GLOBALS['_SERVER']['HTTP_REFERER']
 	 *       and $GLOBALS['current_screen']->in_admin()
 	 *
-	 * @todo add $action parameter for case to check for it only
-	 * @return bool
 	 */
 	public static function is_admin_doing_ajax() {
 		return (
@@ -74,8 +77,9 @@ class WPGlobus_WP {
 	/**
 	 * To get the current admin page
 	 * (Set in wp-includes/vars.php)
-	 * @return string $page
+	 *
 	 * @since 1.2.0
+	 * @return string $page
 	 */
 	public static function pagenow() {
 		/**
@@ -97,13 +101,15 @@ class WPGlobus_WP {
 
 	/**
 	 * To get the plugin page ID
-	 * @example    On wp-admin/index.php?page=woothemes-helper, will return `woothemes-helper`.
-	 * @return string
+	 *
 	 * @since      1.2.0
+	 * @return string
+	 * @example    On wp-admin/index.php?page=woothemes-helper, will return `woothemes-helper`.
 	 */
 	public static function plugin_page() {
 		/**
 		 * Set in wp-admin/admin.php
+		 *
 		 * @global string $plugin_page
 		 */
 		global $plugin_page;
@@ -169,6 +175,7 @@ class WPGlobus_WP {
 		if ( version_compare( $GLOBALS['wp_version'], '4.6.999', '>' ) ) {
 			/**
 			 * Starting with WordPress 4.7, WP_Hook adds one more level.
+			 *
 			 * @since 1.7.0
 			 */
 			$trace_level = 6;
@@ -178,6 +185,7 @@ class WPGlobus_WP {
 			/**
 			 * In PHP 7, `call_user_func_array` no longer appears in the trace
 			 * as a separate call.
+			 *
 			 * @since 1.5.4
 			 */
 			$trace_level --;
@@ -198,8 +206,8 @@ class WPGlobus_WP {
 			 * Now check if we also asked for a specific class, and it matches
 			 */
 			if ( ! empty( $class ) &&
-			     ! empty( $callers[ $trace_level ]['class'] ) &&
-			     $callers[ $trace_level ]['class'] !== $class
+				 ! empty( $callers[ $trace_level ]['class'] ) &&
+				 $callers[ $trace_level ]['class'] !== $class
 			) {
 				$maybe = false;
 			}
@@ -251,7 +259,7 @@ class WPGlobus_WP {
 	 *
 	 * @return bool True if any of the pair is found in the backtrace.
 	 */
-	public static function is_functions_in_backtrace( Array $callables ) {
+	public static function is_functions_in_backtrace( array $callables ) {
 		foreach ( $callables as $callable ) {
 			if ( self::is_function_in_backtrace( $callable ) ) {
 				return true;
@@ -263,6 +271,7 @@ class WPGlobus_WP {
 
 	/**
 	 * True if I am in the Admin Panel, not doing AJAX
+	 *
 	 * @return bool
 	 */
 	public static function in_wp_admin() {
@@ -281,7 +290,7 @@ class WPGlobus_WP {
 		if ( self::is_doing_ajax() ) {
 			return false;
 		}
-		
+
 		/**
 		 * @see wp-includes\rest-api.php
 		 * @see wp-includes\load.php
@@ -289,10 +298,89 @@ class WPGlobus_WP {
 		if ( defined( 'REST_REQUEST' ) || wp_is_json_request() ) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
-} // class
 
-# --- EOF
+	/**
+	 * Get sanitized_value from array.
+	 *
+	 * @param array  $array The array.
+	 * @param string $key   The key.
+	 *
+	 * @return array|string The value.
+	 */
+	protected static function get_sanitized_value( array $array, $key ) {
+		$value = '';
+
+		if ( array_key_exists( $key, $array ) ) {
+			$value = $array[ $key ];
+		}
+
+		if ( '' !== $value ) {
+			$value = wp_unslash( $value );
+
+			if ( is_string( $value ) ) {
+				$value = sanitize_text_field( $value );
+			}
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Get a $_GET parameter value.
+	 *
+	 * @param string $key Parameter name.
+	 *
+	 * @return array|string
+	 */
+	public static function get_http_get_parameter( $key ) {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
+		return self::get_sanitized_value( $_GET, $key );
+	}
+
+	/**
+	 * Get a $_POST parameter value.
+	 *
+	 * @param string $key Parameter name.
+	 *
+	 * @return array|string
+	 */
+	public static function get_http_post_parameter( $key ) {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
+		return self::get_sanitized_value( $_POST, $key );
+	}
+
+	/**
+	 * Extend $allowedposttags for kses.
+	 *
+	 * @return array
+	 */
+	public static function allowed_post_tags_extended() {
+		global $allowedposttags;
+		if ( ! is_array( $allowedposttags ) ) {
+			// Impossible?
+			return array();
+		}
+
+		$allowed_post_tags = $allowedposttags;
+
+		$allowed_post_tags['input'] = array(
+			'name'          => true,
+			'id'            => true,
+			'type'          => true,
+			'checked'       => true,
+			'class'         => true,
+			'data-order'    => true,
+			'data-language' => true,
+			'disabled'      => true,
+		);
+
+		return $allowed_post_tags;
+	}
+}
