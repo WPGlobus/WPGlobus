@@ -329,6 +329,8 @@ class WPGlobus_WP {
 	/**
 	 * Get sanitized_value from array.
 	 *
+	 * @since 1.10.1
+	 *
 	 * @param array  $array The array.
 	 * @param string $key   The key.
 	 *
@@ -355,10 +357,11 @@ class WPGlobus_WP {
 	/**
 	 * Get a $_GET parameter value.
 	 *
+	 * @since 1.10.1
+	 *
 	 * @param string $key Parameter name.
 	 *
 	 * @return array|string
-	 * @noinspection PhpUnused
 	 */
 	public static function get_http_get_parameter( $key ) {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
@@ -369,6 +372,8 @@ class WPGlobus_WP {
 
 	/**
 	 * Get a $_POST parameter value.
+	 *
+	 * @since 1.10.1
 	 *
 	 * @param string $key Parameter name.
 	 *
@@ -384,6 +389,7 @@ class WPGlobus_WP {
 	/**
 	 * Extend $allowedposttags for kses.
 	 *
+	 * @since 1.10.1
 	 * @return array
 	 */
 	public static function allowed_post_tags_extended() {
@@ -407,5 +413,49 @@ class WPGlobus_WP {
 		);
 
 		return $allowed_post_tags;
+	}
+
+	/**
+	 * Method get_fs.
+	 *
+	 * @since 1.10.1
+	 * @return WP_Filesystem_Direct|null
+	 */
+	public static function get_fs() {
+		/**
+		 * WP_Filesystem
+		 *
+		 * @global WP_Filesystem_Direct $wp_filesystem
+		 */
+		global $wp_filesystem;
+		if ( ! $wp_filesystem ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			if ( ! WP_Filesystem() ) {
+				return null;
+			}
+		}
+
+		return $wp_filesystem;
+	}
+
+	/**
+	 * Method fs_get_contents replaces {@see file_get_contents()}.
+	 * phpcs: WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents: file_get_contents() is discouraged.
+	 *
+	 * @since 1.10.1
+	 *
+	 * @param string $file Name of the file to read.
+	 *
+	 * @return string|false Read data on success, false on failure.
+	 */
+	public static function fs_get_contents( $file ) {
+		$contents = false;
+
+		$fs = self::get_fs();
+		if ( $fs && $fs->is_readable( $file ) ) {
+			$contents = $fs->get_contents( $file );
+		}
+
+		return $contents;
 	}
 }
