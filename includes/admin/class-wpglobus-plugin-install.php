@@ -2,7 +2,7 @@
 /**
  * File: class-wpglobus-plugin-install.php
  *
- * @since 1.5.9
+ * @since   1.5.9
  * @package WPGlobus\Admin
  */
 
@@ -39,29 +39,28 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 		 *
 		 * @var array
 		 */
-		static protected $plugin_card = array();
+		protected static $plugin_card = array();
 
 		/**
 		 * Array of paid plugins data.
 		 *
 		 * @var array
 		 */
-		static protected $paid_plugins = array();
+		protected static $paid_plugins = array();
 
 		/**
 		 * Array of free plugins data.
 		 *
 		 * @var array
 		 */
-		static protected $free_plugins = array();
+		protected static $free_plugins = array();
 
 		/**
 		 * Controller.
 		 */
 		public static function controller() {
 
-			// phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
-			if ( empty( $_GET['s'] ) || 'wpglobus' !== strtolower( $_GET['s'] ) ) {
+			if ( 'wpglobus' !== strtolower( WPGlobus_WP::get_http_get_parameter( 's' ) ) ) {
 				return;
 			}
 
@@ -88,8 +87,9 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			$data_file = WPGlobus::data_path() . '/paid_plugins.json';
 
-			if ( is_readable( $data_file ) ) {
-				$_json              = file_get_contents( $data_file );
+			$_json = WPGlobus_WP::fs_get_contents( $data_file );
+
+			if ( $_json ) {
 				self::$paid_plugins = json_decode( $_json, true );
 				uasort( self::$paid_plugins, array( __CLASS__, 'sort_paid_plugins' ) );
 			}
@@ -134,7 +134,11 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 			foreach ( (array) $res->plugins as $key => $plugin ) {
 				if ( is_array( $plugin ) ) {
-					/** @since  2.1.10 */
+					/**
+					 * Make it object.
+					 *
+					 * @since  2.1.10
+					 */
 					$plugin = (object) $plugin;
 				}
 				if ( false === strpos( $plugin->slug, 'wpglobus' ) ) {
@@ -214,12 +218,14 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				$info->slug = $slug;
 
 				/**
+				 * Internal image.
+				 *
 				 * @since 2.6.4
 				 */
 				$internal_image = true;
-				foreach( array( 'http://', 'https://' ) as $_scheme ) {
+				foreach ( array( 'http://', 'https://' ) as $_scheme ) {
 					if ( false !== strpos( $paid_plugin['image_file'], $_scheme ) ) {
-						$internal_image = false;		
+						$internal_image = false;
 					}
 				}
 
@@ -228,8 +234,8 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 				} else {
 					$info->icons['default'] = $paid_plugin['image_file'];
 				}
-				$info->icons['1x']      = $info->icons['default'];
-				$info->icons['2x']      = $info->icons['default'];
+				$info->icons['1x'] = $info->icons['default'];
+				$info->icons['2x'] = $info->icons['default'];
 
 				if ( ! empty( $paid_plugin['plugin_data'] ) ) {
 					$info->name              = $paid_plugin['plugin_data']['Name'];
@@ -243,16 +249,15 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 
 				self::$paid_plugins[ $slug ]['card'] = $info;
 
-				self::$paid_plugins[ $slug ]['extra_data']['product_url'] =
-				self::$paid_plugins[ $slug ]['extra_data']['details_url'] =
-					$info->homepage;
+				self::$paid_plugins[ $slug ]['extra_data']['product_url'] = $info->homepage;
+				self::$paid_plugins[ $slug ]['extra_data']['details_url'] = $info->homepage;
 
 				/**
+				 * Don't add unavailable plugin in response.
+				 *
 				 * @since 2.4.2
 				 */
-				if ( isset( $paid_plugin['available'] ) && ( empty( $paid_plugin['available'] ) || false === $paid_plugin['available'] ) ) {
-					// Don't add unavailable plugin in response.
-				} else {
+				if ( ! empty( $paid_plugin['available'] ) && false !== $paid_plugin['available'] ) {
 					array_unshift( $res->plugins, $info );
 				}
 			}
@@ -274,7 +279,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$data_file = WPGlobus::data_path() . '/wpglobus-product-info.json';
 
 			if ( is_readable( $data_file ) ) {
-				$all_product_info_json = file_get_contents( $data_file );
+				$all_product_info_json = WPGlobus_WP::fs_get_contents( $data_file );
 				$all_product_info      = json_decode( $all_product_info_json, true );
 			}
 
@@ -304,7 +309,7 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 			$template->icons['default']  = '';
 			$template->icons['2x']       = '';
 			$template->icons['1x']       = '';
-			$template->last_updated      = date( 'c' );
+			$template->last_updated      = gmdate( 'c' );
 
 			return $template;
 		}
@@ -363,5 +368,3 @@ if ( ! class_exists( 'WPGlobus_Plugin_Install' ) ) :
 	}
 
 endif;
-
-# --- EOF
