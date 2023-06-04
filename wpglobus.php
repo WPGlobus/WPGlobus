@@ -3,9 +3,9 @@
  * File: wpglobus.php
  *
  * @package   WPGlobus
- * @author    TIV.NET INC, Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
- * @copyright 2015-2023 TIV.NET INC. / WPGlobus
- * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License, version 3
+ * Author    TIV.NET INC, Alex Gor (alexgff) and Gregory Karpinsky (tivnet)
+ * Copyright 2015-2023 TIV.NET INC. / WPGlobus
+ * License   http://www.gnu.org/licenses/gpl.txt GNU General Public License, version 3
  */
 
 // <editor-fold desc="WordPress plugin header">
@@ -57,7 +57,9 @@ if ( is_readable( dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loa
 	require_once dirname( __FILE__ ) . '/vendor/bemailr/wp-requirements/wpr-loader.php';
 }
 
-/** @todo Get rid of these */
+/*
+ * @todo Get rid of these
+ */
 // @codingStandardsIgnoreStart
 global $WPGlobus;
 global $WPGlobus_Options;
@@ -223,15 +225,17 @@ if ( WPGlobus_WP::in_wp_admin() ) :
 	 * To disable, put this to wp-config:
 	 * define( 'WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR', false );
 	 *
-	 * @since 2.7.2
+	 * @since      2.7.2
 	 * @deprecated 2.8.0
+	 * <code>
+	 * // if ( ! defined('WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR') || WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR ) {
+	 * // if ( defined('GUTENBERG_VERSION') ) {
+	 * // require_once dirname( __FILE__ ) . '/includes/admin/gutenberg/class-wpglobus-admin-gutenberg.php';
+	 * // WPGlobus_Admin_Gutenberg::construct();
+	 * // }
+	 * // }
+	 * </code>
 	 */
-	// if ( ! defined('WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR') || WPGLOBUS_GUTENBERG_WIDGETS_BLOCK_EDITOR ) {
-		// if ( defined('GUTENBERG_VERSION') ) {
-			// require_once dirname( __FILE__ ) . '/includes/admin/gutenberg/class-wpglobus-admin-gutenberg.php';
-			// WPGlobus_Admin_Gutenberg::construct();
-		// }
-	// }
 
 endif;
 
