@@ -25,7 +25,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 * It calls the `customize_register` action first,
 			 * and then - the `customize_preview_init` action.
 			 *
-			 * @see \WP_Customize_Manager::wp_loaded
+			 * @see WP_Customize_Manager::wp_loaded
 			 *
 			 * add_action( 'customize_register', array(
 			 * 'WPGlobus_Customize',
@@ -67,8 +67,8 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 
 			/**
 			 * Filter customize_changeset_save_data.
+			 * See wp-includes\class-wp-customize-manager.php
 			 *
-			 * @see   wp-includes\class-wp-customize-manager.php
 			 * @since 1.9.3
 			 */
 			add_filter(
@@ -165,7 +165,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 				return $value;
 			}
 
-			$new_value = self::_build_multilingual_string( $value );
+			$new_value = self::build_multilingual_string( $value );
 
 			if ( $new_value ) {
 				return $new_value;
@@ -197,7 +197,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 
 			foreach ( $data as $option => $value ) {
 
-				$new_value = self::_build_multilingual_string( $value['value'] );
+				$new_value = self::build_multilingual_string( $value['value'] );
 
 				if ( $new_value ) {
 					$data[ $option ]['value'] = $new_value;
@@ -217,7 +217,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		 *
 		 * @return bool|string
 		 */
-		public static function _build_multilingual_string( $value ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		protected static function build_multilingual_string( $value ) {
 
 			/**
 			 * Ignore if not a string.
@@ -227,8 +227,6 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			if ( ! is_string( $value ) ) {
 				return $value;
 			}
-
-			// $new_value = '';
 
 			if ( false === strpos( $value, '|||' ) ) {
 				$new_value = false;
@@ -285,13 +283,15 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 		}
 
 		/**
+		 * UNUSED.
 		 * Add multilingual controls.
 		 * The original controls will be hidden.
 		 *
 		 * @param WP_Customize_Manager $wp_customize Customize Manager.
+		 *
+		 *public static function action__customize_register( WP_Customize_Manager $wp_customize ) {
+		 *}
 		 */
-		public static function action__customize_register( WP_Customize_Manager $wp_customize ) {
-		}
 
 		/**
 		 * Load Customize Preview JS
@@ -364,7 +364,7 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 */
 			$disabled_setting_mask[] = 'tumblr';
 			$disabled_setting_mask[] = 'flickr';
-			$disabled_setting_mask[] = 'wordpress'; // phpcs:ignore WordPress.WP.CapitalPDangit.Misspelled
+			$disabled_setting_mask[] = strtolower( 'WordPress' );
 			$disabled_setting_mask[] = 'youtube';
 			$disabled_setting_mask[] = 'pinterest';
 			$disabled_setting_mask[] = 'github';
@@ -443,6 +443,11 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			 */
 			$disabled_sections = array();
 
+			/**
+			 * Filter wpglobus_customize_disabled_sections
+			 *
+			 * @since 1.5.0
+			 */
 			$disabled_sections = apply_filters( 'wpglobus_customize_disabled_sections', $disabled_sections );
 
 			/**
@@ -486,9 +491,9 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 			/**
 			 * Since 1.7.9
 			 */
-			$changeset_uuid = null;
-			if ( ! empty( $_GET['changeset_uuid'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$changeset_uuid = sanitize_text_field( wp_unslash( $_GET['changeset_uuid'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$changeset_uuid = WPGlobus_WP::get_http_get_parameter( 'changeset_uuid' );
+			if ( ! $changeset_uuid ) {
+				$changeset_uuid = null;
 			}
 
 			/**
@@ -550,6 +555,5 @@ if ( ! class_exists( 'WPGlobus_Customize' ) ) :
 
 		}
 
-	} // class
-
+	}
 endif;
