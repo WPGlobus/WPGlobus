@@ -25,41 +25,45 @@ if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) :
 		public static function disable_sections( $disabled_sections ) {
 
 			if ( class_exists( 'Easy_Google_Fonts' ) ) {
-				/**
-				 * @see https://wordpress.org/plugins/easy-google-fonts/
+				/*
+				 * @link https://wordpress.org/plugins/easy-google-fonts/
 				 */
 				$disabled_sections[] = 'tt_font_typography';
 			}
 
 			/**
+			 * GFP_VERSION
+			 *
 			 * @since 2.2.30
 			 */			
 			if ( defined( 'GFP_VERSION' ) // premium
 				|| 
 				defined( 'OGF_VERSION' ) // free
 			) {
-				/**
-				 * @see premium https://fontsplugin.com/
-				 * @see free https://wordpress.org/plugins/olympus-google-fonts/
+				/*
+				 * @link premium https://fontsplugin.com/
+				 * @link free https://wordpress.org/plugins/olympus-google-fonts/
 				 */
 				$disabled_sections[] = 'ogf_custom';
 				$disabled_sections[] = 'ogf_advanced__css';
 			}
 			
 			/**
+			 * If WPGlobus_Customize_Themes
+			 *
 			 * @since 2.2.28
 			 */
 			if ( class_exists( 'WPGlobus_Customize_Themes' ) ) {
 				
-				/**
-				 * @see W.I.P. `Prevent using element with no id attribute` in includes\js\wpglobus-customize-control190.js 
+				/*
+				 * See W.I.P. `Prevent using element with no id attribute` in includes\js\wpglobus-customize-control190.js
 				 * to getting sections for disabling.
 				 */
 				$theme_name = WPGlobus_Customize_Themes::get_theme_name_lc();
 				
-				if ( 'startkit' == $theme_name ) {
-					/**
-					 * @see https://wordpress.org/themes/startkit/
+				if ( 'startkit' === $theme_name ) {
+					/*
+					 * @link https://wordpress.org/themes/startkit/
 					 */
 					$disabled_sections[] = 'slider_setting';
 					$disabled_sections[] = 'service_setting';
@@ -79,9 +83,6 @@ if ( ! class_exists( 'WPGlobus_Customize_Filters' ) ) :
 			}
 			
 			return $disabled_sections;
-
 		}
-
 	}
-
 endif;
