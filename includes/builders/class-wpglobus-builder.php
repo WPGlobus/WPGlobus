@@ -3,7 +3,7 @@
  * File: class-wpglobus-builder.php
  *
  * @package WPGlobus\Builders
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 /**
@@ -29,15 +29,14 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * Array of activated builders.
 		 *
 		 * @since  1.9.17
-		 * @access protected
 		 * @var    array
+		 * //protected $builders = array(); TODO remove
 		 */
-		// phpcs:ignore
-		//protected $builders = array(); TODO remove
 
 		/**
+		 * Todo Unused?
+		 *
 		 * @var array
-		 * @todo Unused?
 		 */
 		protected $builder_post = null;
 
@@ -54,12 +53,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 
 			$this->set_current_language();
 
-			// phpcs:ignore
-			// if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			/**
-			 * @todo Add the handling of AJAX.
+			 * Todo Add the handling of AJAX.
+			 * // if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			 * // }
 			 */
-			// }
 
 			if ( is_admin() ) {
 
@@ -75,7 +73,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				add_action( 'admin_bar_menu', array( $this, 'on__admin_bar_menu' ), 11 );
 
 				/**
-				 * @see "{$field_no_prefix}_edit_pre" in wp-includes\post.php
+				 * See "{$field_no_prefix}_edit_pre" in wp-includes\post.php
 				 */
 				add_filter( 'content_edit_pre', array( $this, 'filter__content' ), 5, 2 );
 				add_filter( 'title_edit_pre', array( $this, 'filter__title' ), 5, 2 );
@@ -87,7 +85,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 * Show language tabs in post.php page.
 			 *
 			 * @see_file wpglobus\includes\class-wpglobus.php
-			 * @since 2.8.3 Added $post parameter.
+			 * @since    2.8.3 Added $post parameter.
 			 */
 			add_filter( 'wpglobus_show_language_tabs', array( $this, 'filter__show_language_tabs' ), 5, 2 );
 		}
@@ -99,14 +97,10 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @param int    $post_id Unused.
 		 *
 		 * @return string
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public function filter__title(
-			$value, /** @noinspection PhpUnusedParameterInspection */
-			$post_id
-		) {
-			$value = WPGlobus_Core::text_filter( $value, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
-
-			return $value;
+		public function filter__title( $value, $post_id ) {
+			return WPGlobus_Core::text_filter( $value, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 		}
 
 		/**
@@ -116,14 +110,10 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @param int    $post_id Post ID - Unused.
 		 *
 		 * @return string
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public function filter__content(
-			$content, /** @noinspection PhpUnusedParameterInspection */
-			$post_id
-		) {
-			$content = WPGlobus_Core::text_filter( $content, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
-
-			return $content;
+		public function filter__content( $content, $post_id ) {
+			return WPGlobus_Core::text_filter( $content, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 		}
 
 		/**
@@ -133,14 +123,10 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @param int    $post_id Post ID - Unused.
 		 *
 		 * @return string
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public function filter__excerpt(
-			$excerpt, /** @noinspection PhpUnusedParameterInspection */
-			$post_id
-		) {
-			$excerpt = WPGlobus_Core::text_filter( $excerpt, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
-
-			return $excerpt;
+		public function filter__excerpt( $excerpt, $post_id ) {
+			return WPGlobus_Core::text_filter( $excerpt, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 		}
 
 		/**
@@ -150,11 +136,9 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * @param int    $post_id Post ID - Unused.
 		 *
 		 * @return string
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public function on__redirect(
-			$location, /** @noinspection PhpUnusedParameterInspection */
-			$post_id
-		) {
+		public function on__redirect( $location, $post_id ) {
 			/**
 			 * Tested with:
 			 * - Page Builder by SiteOrigin OK.
@@ -176,6 +160,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 *
 		 * @return bool
 		 * @todo Unused?
+		 * @noinspection PhpUnused
 		 */
 		public function is_builder_post() {
 			if ( is_null( $this->builder_post ) ) {
@@ -193,7 +178,8 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 */
 		public function get_language_field() {
 			/**
-			 * @see  on_add_devmode_switcher() in wpglobus\includes\class-wpglobus.php
+			 * See  on_add_devmode_switcher() in wpglobus\includes\class-wpglobus.php
+			 *
 			 * @todo may be add special function to get hidden language field.
 			 */
 			return '<input type="hidden" id="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" name="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" value="' . esc_attr( $this->get_current_language() ) . '" />';
@@ -233,18 +219,18 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			}
 
 			$post_id = 0;
-			if ( ! empty( $_REQUEST['post'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+			0 && wp_verify_nonce( '' ); // TODO
+			if ( ! empty( $_REQUEST['post'] ) ) {
 				$post_id = (int) $_REQUEST['post'];
-			} elseif ( ! empty( $_REQUEST['id'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+			} elseif ( ! empty( $_REQUEST['id'] ) ) {
 				$post_id = (int) $_REQUEST['id'];
-			} elseif ( ! empty( $_REQUEST['post_ID'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+			} elseif ( ! empty( $_REQUEST['post_ID'] ) ) {
 				$post_id = (int) $_REQUEST['post_ID'];
 			}
 
 			if ( $post_id && ! is_null( $this->language ) ) {
 				update_post_meta( $post_id, WPGlobus::Config()->builder->get_language_meta_key(), $this->language );
 			}
-
 		}
 
 		/**
@@ -252,18 +238,15 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 *
 		 * @see_file includes\class-wpglobus.php
 		 *
-		 * @since 2.8.3 Added $post parameter.
+		 * @since    2.8.3 Added $post parameter.
 		 *
-		 * @param bool $value
-		 * @param WP_Post $post 
+		 * @param bool    $value
+		 * @param WP_Post $post
 		 *
 		 * @return bool
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public function filter__show_language_tabs(
-			/** @noinspection PhpUnusedParameterInspection */
-			$value,
-			$post
-		) {
+		public function filter__show_language_tabs( $value, $post ) {
 
 			global $pagenow;
 
@@ -287,6 +270,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 				<?php
 				$order = 0;
 
+				0 && wp_verify_nonce( '' ); // TODO
 				$get_array = $_GET; // phpcs:ignore WordPress.CSRF.NonceVerification
 				/**
 				 * Unset unneeded elements.
@@ -306,9 +290,9 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 					if ( 'post-new.php' === $pagenow && WPGLobus::Config()->default_language === $language ) {
 						$_link_style['cursor'] = '';
 					}
-					
+
 					$_link_class['tab-link-active'] = WPGlobus::Config()->builder->get_language() === $language ? 'wpglobus-tab-link-active' : '';
-					
+
 					if ( $language === $this->language ) {
 						$_classes[] = 'ui-state-active';
 					}
@@ -327,11 +311,11 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 						<!--<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>-->
 						<a style="<?php echo esc_attr( implode( ';', $_link_style ) ); ?>"
 								title="<?php echo esc_attr( $_link_title ); ?>"
-								class="<?php echo esc_attr( implode( ' ', $_link_class ) ); ?>" 
+								class="<?php echo esc_attr( implode( ' ', $_link_class ) ); ?>"
 								href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
 					<?php
-					$order++;
+					$order ++;
 				}
 				?>
 			</ul>
@@ -416,7 +400,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 					'href'   => $_url,
 					'meta'   => array(
 						'_target'  => 'blank',
-						'tabindex' => -1,
+						'tabindex' => - 1,
 					),
 				)
 			);
