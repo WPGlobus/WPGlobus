@@ -28,12 +28,15 @@ if ( ! class_exists('WPGlobus_Admin_Gutenberg') ) :
 		 */
 		public static function construct() {
 
-			if ( ! empty( $_GET['page'] ) && self::DUMMY_REDIRECT_PAGE === $_GET['page'] && ! empty( $_GET['redirect-to'] ) ) {
+			$get_page        = WPGlobus_WP::get_http_get_parameter( 'page' );
+			$get_redirect_to = WPGlobus_WP::get_http_get_parameter( 'redirect-to' );
+
+			if ( self::DUMMY_REDIRECT_PAGE === $get_page && $get_redirect_to ) {
 				
 				/**
 				 * Make redirect from dummy page to http://site/wp-admin/widgets.php.
 				 */
-				$url  = add_query_arg( 
+				$url = add_query_arg(
 					array(), 
 					admin_url(self::REDIRECT_TO_PAGE) 
 				);
@@ -55,7 +58,7 @@ if ( ! class_exists('WPGlobus_Admin_Gutenberg') ) :
 				esc_html__( 'Widgets with WPGlobus', 'wpglobus' ),
 				esc_html__( 'Widgets with WPGlobus', 'wpglobus' ),
 				'edit_theme_options',
-				self::DUMMY_REDIRECT_PAGE . '&redirect-to='.self::REDIRECT_TO_PAGE,
+				self::DUMMY_REDIRECT_PAGE . '&redirect-to=' . self::REDIRECT_TO_PAGE,
 				array( __CLASS__, 'dummy_function' )
 			);
 		}
@@ -77,7 +80,7 @@ if ( ! class_exists('WPGlobus_Admin_Gutenberg') ) :
 			}
 		 
 			if ( $status < 300 || 399 < $status ) {
-				wp_die( __( 'HTTP redirect status code must be a redirection code, 3xx.' ) );
+				wp_die( esc_html__( 'HTTP redirect status code must be a redirection code, 3xx.' ) );
 			}
 		 
 			if ( ! $is_IIS && 'cgi-fcgi' !== PHP_SAPI ) {
@@ -96,5 +99,3 @@ if ( ! class_exists('WPGlobus_Admin_Gutenberg') ) :
 	}
 
 endif;
-
-# --- EOF
