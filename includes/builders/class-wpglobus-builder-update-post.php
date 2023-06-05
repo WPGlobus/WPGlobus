@@ -2,11 +2,11 @@
 /**
  * File: class-wpglobus-builder-update-post.php
  *
- * @since 2.2.35
- * @since 2.4.3   Added `wp_insert_post_data` filter.
+ * @since   2.2.35
+ * @since   2.4.3   Added `wp_insert_post_data` filter.
  *
  * @package WPGlobus\Builders
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 /**
@@ -20,45 +20,48 @@ if ( ! class_exists( 'WPGlobus_Builder_Update_Post' ) ) :
 		 * Builder ID.
 		 */
 		protected $id = null;
-		
+
 		/**
 		 * Constructor.
 		 */
 		public function __construct( $id ) {
-			
+
 			$this->id = $id;
-			
+
 			/**
 			 * Do not start for `gutenberg`.
 			 * The block editor prohibits saving post with an empty post title from post edit page.
 			 */
-			if ( 'gutenberg' == $this->id ) {
+			if ( 'gutenberg' === $this->id ) {
 				return;
 			}
-			
-			add_filter( 'wp_insert_post_empty_content', array( $this, 'filter__post_empty_content' ), 10, 2);
+
+			add_filter( 'wp_insert_post_empty_content', array( $this, 'filter__post_empty_content' ), 10, 2 );
 
 			/**
+			 * Todo incorrect the saving post in extra languages with priority = 10
+			 *
 			 * @since 2.4.3
-			 * @todo incorrect the saving post in extra languages with priority = 10
-			 */			
+			 */
 			add_filter( 'wp_insert_post_data', array( $this, 'filter__wp_insert_post_data' ), 100, 2 );
 		}
 
 		/**
 		 * Filters whether the post should be considered "empty".
-		 * 
-		 * @see wp-includes\post.php
+		 *
+		 * See wp-includes\post.php
 		 *
 		 * @param bool  $maybe_empty Whether the post should be considered "empty".
 		 * @param array $postarr     Array of post data.
-		 */		
+		 *
+		 * @noinspection PhpUnusedParameterInspection
+		 */
 		public function filter__post_empty_content( $maybe_empty, $postarr ) {
 
 			if ( WPGlobus::Config()->builder->is_default_language() ) {
 				return $maybe_empty;
 			}
-			
+
 			/**
 			 * Don't return a truthy value for extra language.
 			 */
@@ -69,15 +72,18 @@ if ( ! class_exists( 'WPGlobus_Builder_Update_Post' ) ) :
 		 * Callback for 'wp_insert_post_data'.
 		 *
 		 * @since 2.4.3
+		 *
 		 * @param array $data
 		 * @param array $postarr
 		 *
 		 * @return mixed
 		 */
 		public function filter__wp_insert_post_data( $data, $postarr ) {
-			
+
 			/**
 			 * Prevent to filter disabled post type.
+			 *
+			 * @noinspection DuplicatedCode
 			 */
 			if ( in_array( $data['post_type'], WPGlobus::Config()->disabled_entities, true ) ) {
 				return $data;
@@ -145,5 +151,3 @@ if ( ! class_exists( 'WPGlobus_Builder_Update_Post' ) ) :
 	} // class WPGlobus_Builder_Update_Post.
 
 endif;
-
-# --- EOF
