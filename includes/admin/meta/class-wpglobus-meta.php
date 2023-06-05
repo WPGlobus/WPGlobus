@@ -4,10 +4,10 @@
  *
  * @since   1.9.17
  * @since   1.9.25 Added build_multilingual_string function.
- * @since   2.8.9 Added support for term meta. 
+ * @since   2.8.9 Added support for term meta.
  *
  * @package WPGlobus\Admin\Meta
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 if ( ! class_exists( 'WPGlobus_Meta' ) ) :
@@ -48,36 +48,45 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			self::$meta_fields = $meta_fields;
 			self::$builder     = $builder;
-			
+
 			/**
-			 * @since 2.8.9 Added checking REST API request.
+			 * Added checking REST API request.
+			 *
+			 * @since 2.8.9
 			 */
 			if ( is_admin() || WPGlobus_WP::is_rest_api_request() ) {
-				
+
 				add_filter( 'get_post_metadata', array( __CLASS__, 'filter__post_metadata' ), 5, 4 );
 
 				/**
-				 * @see update_metadata() in wp-includes\meta.php
+				 * In wp-includes\meta.php
+				 *
+				 * @see update_metadata()
 				 */
 				add_filter( 'update_post_metadata', array( __CLASS__, 'filter__update_post_metadata' ), 5, 5 );
 
 				add_filter( 'delete_post_metadata', array( __CLASS__, 'filter__delete_metadata' ), 5, 5 );
-				
+
 				/**
+				 * Filter get_term_metadata
+				 *
 				 * @since 2.8.9
 				 */
 				add_filter( 'get_term_metadata', array( __CLASS__, 'filter__term_metadata' ), 5, 4 );
-	
+
 				/**
-				 * @since 2.8.9
-				 */	
-				add_filter( 'update_term_metadata', array( __CLASS__, 'filter__update_term_metadata' ), 5, 5 );
-				
-				/**
-				 * @todo Test deleting term meta with Yoast and Rank Math(REST query).
+				 * Filter update_term_metadata
+				 *
 				 * @since 2.8.9
 				 */
-				// add_filter( 'delete_term_metadata', array( __CLASS__, 'filter__delete_term_metadata' ), 5, 5 );
+				add_filter( 'update_term_metadata', array( __CLASS__, 'filter__update_term_metadata' ), 5, 5 );
+
+				/**
+				 * Todo  Test deleting term meta with Yoast and Rank Math(REST query).
+				 *
+				 * @since 2.8.9
+				 * // add_filter( 'delete_term_metadata', array( __CLASS__, 'filter__delete_term_metadata' ), 5, 5 );
+				 */
 			}
 		}
 
@@ -101,17 +110,20 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		 * Update meta data.
 		 *
 		 * Internal use.
+		 *
 		 * @since 2.8.9
 		 */
-		protected static function _update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value, $meta_type = '' ) {
+		protected static function update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value, $meta_type = '' ) {
 
 			if ( empty( $meta_type ) ) {
 				return $check;
 			}
 
-			/** @global wpdb $wpdb */
-			global $wpdb;
-
+			/**
+			 * DuplicatedCode
+			 *
+			 * @noinspection DuplicatedCode
+			 */
 			$table = _get_meta_table( $meta_type );
 			if ( ! $table ) {
 				return false;
@@ -129,51 +141,54 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 						return false;
 					}
 				}
-			}			
+			}
 
 			$_meta_value = $meta_value;
 
 			$meta_value = maybe_serialize( $meta_value );
 
 			/**
+			 * Global
+			 *
+			 * @global wpdb $wpdb
+			 */
+			global $wpdb;
+
+			/**
 			 * Don't auto-modify this SQL query.
 			 */
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$prev_meta = $wpdb->get_row( $wpdb->prepare( "SELECT $id_column, meta_value FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
-			
+
 			if ( is_null( $prev_meta ) ) {
 
 				$_passed_value = $_meta_value;
 
 				if ( ! empty( $_passed_value ) && WPGlobus::Config()->default_language !== self::$builder->get_language() ) {
-					// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-					if ( WPGlobus_Core::has_translations( $_passed_value ) ) {
-						/**
-						 * We get multilingual $meta_value. Let save it as is.
-						 */
-					} else {
+					/**
+					 * If we get multilingual $meta_value, let save it as is.
+					 */
+					if ( ! WPGlobus_Core::has_translations( $_passed_value ) ) {
 						$_passed_value = self::build_multilingual_string( array( self::$builder->get_language() => $_passed_value ) );
 					}
 				}
 
 				return add_metadata( $meta_type, $object_id, $raw_meta_key, $_passed_value );
 			}
-			
+
 			/**
 			 * WPGlobus Core.
 			 * We get $meta_value in language that can be retrieved with self::$builder->get_language().
 			 */
 
-			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-			if ( WPGlobus_Core::has_translations( $meta_value ) ) {
-				/**
-				 * We get multilingual $meta_value. Let save it as is.
-				 */
-			} else {
+			/**
+			 * If we get multilingual $meta_value, let save it as is.
+			 */
+			if ( ! WPGlobus_Core::has_translations( $meta_value ) ) {
 
 				$_new_ml_array = array();
 
-				if ( WPGlobus_Core::has_translations($prev_meta->meta_value) ) {
+				if ( WPGlobus_Core::has_translations( $prev_meta->meta_value ) ) {
 
 					foreach ( WPGlobus::Config()->enabled_languages as $language ) :
 
@@ -215,10 +230,16 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				}
 			}
 
-			$data  = compact( 'meta_value' );
-			$where = array(
-				$column    => $object_id,
-				'meta_key' => $meta_key,
+			/**
+			 * DuplicatedCode
+			 *
+			 * @noinspection DuplicatedCode
+			 */
+			$data           = compact( 'meta_value' );
+			$field_meta_key = 'meta_key'; // To please PHPCS
+			$where          = array(
+				$column         => $object_id,
+				$field_meta_key => $meta_key,
 			);
 
 			$result = $wpdb->update( $table, $data, $where );
@@ -229,14 +250,15 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			wp_cache_delete( $object_id, $meta_type . '_meta' );
 
-			return true;			
+			return true;
 		}
 
 		/**
 		 * Filter term meta data.
 		 *
-		 * @since 2.8.9
-		 */	
+		 * @since        2.8.9
+		 * @noinspection PhpUnusedParameterInspection
+		 */
 		public static function filter__term_metadata( $check, $object_id, $meta_key, $single ) {
 
 			if ( empty( self::$meta_fields ) ) {
@@ -246,7 +268,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( ! self::meta_key_exists( $meta_key ) ) {
 				return $check;
 			}
-			
+
 			if ( empty( self::$builder->get_language() ) ) {
 				/**
 				 * Prevent update term meta when $builder is not set.
@@ -262,28 +284,28 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				$meta_cache = update_meta_cache( $meta_type, array( $object_id ) );
 				$meta_cache = $meta_cache[ $object_id ];
 			}
-			
-			if ( ! empty( $meta_cache[$meta_key][0] ) && WPGlobus_Core::has_translations( $meta_cache[$meta_key][0] ) ) {
-				
-				$meta_cache[$meta_key][0] = WPGlobus_Core::text_filter( 
-					$meta_cache[$meta_key][0], 
-					self::$builder->get_language(), 
-					WPGlobus::RETURN_EMPTY 
+
+			if ( ! empty( $meta_cache[ $meta_key ][0] ) && WPGlobus_Core::has_translations( $meta_cache[ $meta_key ][0] ) ) {
+
+				$meta_cache[ $meta_key ][0] = WPGlobus_Core::text_filter(
+					$meta_cache[ $meta_key ][0],
+					self::$builder->get_language(),
+					WPGlobus::RETURN_EMPTY
 				);
-				
+
 				wp_cache_replace(
 					$object_id,
 					$meta_cache,
 					$meta_type . '_meta'
 				);
 			}
-			
+
 			return $check;
 		}
-		
+
 		/**
 		 * Update term meta data.
-		 * 
+		 *
 		 * @since 2.8.9
 		 */
 		public static function filter__update_term_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
@@ -295,7 +317,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( ! self::meta_key_exists( $meta_key ) ) {
 				return $check;
 			}
-			
+
 			if ( empty( self::$builder->get_language() ) ) {
 				/**
 				 * Prevent update term meta when $builder is not set.
@@ -303,19 +325,20 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				return $check;
 			}
 
-			return self::_update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value, 'term' );
+			return self::update_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value, 'term' );
 		}
 
 		/**
+		 * Unused.
 		 * public static function get_post_meta( $post_id = false ) {
 		 * $meta_cache = wp_cache_get($post_id, 'post_meta');
 		 * }
-		 * // */
+		 */
 
 		/**
 		 * Update post meta data.
 		 *
-		 * @see wp-includes\meta.php "update_{$meta_type}_metadata".
+		 * See wp-includes\meta.php "update_{$meta_type}_metadata".
 		 *
 		 * @param null|bool $check      Whether to allow updating metadata for the given type.
 		 * @param int       $object_id  Object ID.
@@ -336,22 +359,32 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( ! self::meta_key_exists( $meta_key ) ) {
 				return $check;
 			}
-			
+
 			if ( empty( self::$builder->get_language() ) ) {
 				/**
 				 * Prevent update post meta when $builder is not set.
 				 * For example, Elementor saves meta `_elementor_data` for Template (post type `elementor_library`).
-				 * And we have meta `_elementor_data` in `$meta_fields` array @see wpglobus\configs\elementor.json
+				 * And we have meta `_elementor_data` in `$meta_fields` array See wpglobus\configs\elementor.json
+				 *
 				 * @since 2.2.33
 				 */
 				return $check;
 			}
-			
+
 			$meta_type = 'post';
 
-			/** @global wpdb $wpdb */
+			/**
+			 * Global
+			 *
+			 * @global wpdb $wpdb
+			 */
 			global $wpdb;
 
+			/**
+			 * DuplicatedCode
+			 *
+			 * @noinspection DuplicatedCode
+			 */
 			$table = _get_meta_table( $meta_type );
 			if ( ! $table ) {
 				return false;
@@ -361,9 +394,10 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			$id_column = 'meta_id';
 
 			$raw_meta_key = $meta_key;
-			
-			/** 
+
+			/**
 			 * Compare existing value to new value if no prev value given and the key exists only once.
+			 *
 			 * @since 2.5.16 Fixed PHP Warning: count(): Parameter must be an array or an object that implements Countable.
 			 */
 			if ( empty( $prev_value ) ) {
@@ -373,10 +407,12 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 						return false;
 					}
 				}
-			}			
+			}
 
 			$_meta_value = $meta_value;
 			/**
+			 * Use maybe_serialize
+			 *
 			 * @since 2.1.7
 			 */
 			$meta_value = maybe_serialize( $meta_value );
@@ -387,31 +423,29 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
 
-			/*
-			// Incorrect query.
-			$meta_ids = $wpdb->get_col( $wpdb->prepare(
-				'SELECT %s FROM %s WHERE meta_key = %s AND %s = %d',
-				$id_column,
-				$table,
-				$meta_key,
-				$column,
-				$object_id
-			) );
-			// */
+			/**
+			 * Incorrect query.
+			 * $meta_ids = $wpdb->get_col( $wpdb->prepare(
+			 * 'SELECT %s FROM %s WHERE meta_key = %s AND %s = %d',
+			 * $id_column,
+			 * $table,
+			 * $meta_key,
+			 * $column,
+			 * $object_id
+			 * ) );
+			 */
 
 			if ( empty( $meta_ids ) ) {
 
 				$_passed_value = $_meta_value;
 
 				if ( ! empty( $_passed_value ) && WPGlobus::Config()->default_language !== self::$builder->get_language() ) {
-					// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-					if ( WPGlobus_Core::has_translations( $_passed_value ) ) {
-						/**
-						 * We get multilingual $meta_value. Let save it as is.
-						 *
-						 * @since 1.9.25 do nothing.
-						 */
-					} else {
+					/**
+					 * If we get multilingual $meta_value, save it as is.
+					 *
+					 * @since 1.9.25 do nothing.
+					 */
+					if ( ! WPGlobus_Core::has_translations( $_passed_value ) ) {
 						$_passed_value = self::build_multilingual_string( array( self::$builder->get_language() => $_passed_value ) );
 					}
 				}
@@ -429,24 +463,27 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			 * May be we need to update meta cache.
 			 *
 			 * @see 'filter__post_metadata' function.
+			 *
+			 * //            if ( !$meta_cache ) {
+			 * //                $meta_cache = update_meta_cache( $meta_type, array( $object_id ) );
+			 * //                $meta_cache = $meta_cache[$object_id];
+			 * //            }
 			 */
-
-			//			if ( !$meta_cache ) {
-			//				$meta_cache = update_meta_cache( $meta_type, array( $object_id ) );
-			//				$meta_cache = $meta_cache[$object_id];
-			//			}
 
 			if ( isset( $meta_cache[ $meta_key ] ) ) {
 
-				//if ( WPGlobus_Core::has_translations( $passed_value ) ) {
-				// phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-				if ( WPGlobus_Core::has_translations( $meta_value ) ) {
-					/**
-					 * We get multilingual $meta_value. Let save it as is.
-					 */
-					// @since 1.9.25 do nothing.
-				} else {
+				/**
+				 * If we get multilingual $meta_value, save it as is.
+				 *
+				 * @since 1.9.25 do nothing.
+				 */
+				if ( ! WPGlobus_Core::has_translations( $meta_value ) ) {
 
+					/**
+					 * Unused _key
+					 *
+					 * @noinspection PhpUnusedLocalVariableInspection
+					 */
 					foreach ( $meta_cache[ $meta_key ] as $_key => $_ml_value ) {
 
 						$_new_ml_array = array();
@@ -489,17 +526,26 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 						}
 
 						if ( ! empty( $_new_value ) ) {
-							//$meta_value = maybe_unserialize( $_new_value );
+							/**
+							 * Need?
+							 * $meta_value = maybe_unserialize( $_new_value );
+							 */
 							$meta_value = $_new_value;
 						}
 					}
 				}
 			}
 
-			$data  = compact( 'meta_value' );
-			$where = array(
-				$column    => $object_id,
-				'meta_key' => $meta_key,
+			/**
+			 * DuplicatedCode
+			 *
+			 * @noinspection DuplicatedCode
+			 */
+			$data           = compact( 'meta_value' );
+			$field_meta_key = 'meta_key'; // To please PHPCS
+			$where          = array(
+				$column         => $object_id,
+				$field_meta_key => $meta_key,
 			);
 
 			$result = $wpdb->update( $table, $data, $where );
@@ -516,9 +562,9 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		/**
 		 * Delete metadata for the specified object.
 		 *
-		 * in our case we should prevent deleting multilingual string when $meta_value is empty.
+		 * In our case we should prevent deleting multilingual string when $meta_value is empty.
 		 *
-		 * @see wp-includes\meta.php "delete_{$meta_type}_metadata".
+		 * See wp-includes\meta.php "delete_{$meta_type}_metadata".
 		 *
 		 * @param null|bool $check      Whether to allow metadata deletion of the given type.
 		 * @param int       $object_id  Object ID.
@@ -529,10 +575,10 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		 *                              Default false.
 		 *
 		 * @return bool|null
+		 * @noinspection PhpUnusedParameterInspection
 		 */
 		public static function filter__delete_metadata(
 			$check, $object_id, $meta_key, $meta_value,
-			/** @noinspection PhpUnusedParameterInspection */
 			$delete_all = false
 		) {
 
@@ -549,10 +595,14 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( empty( $meta_value ) && WPGlobus::Config()->default_language === self::$builder->get_language() ) {
 
 				/**
-				 * @todo check for extra languages.
+				 * Todo check for extra languages.
 				 */
 
-				/** @global wpdb $wpdb */
+				/**
+				 * Global
+				 *
+				 * @global wpdb $wpdb
+				 */
 				global $wpdb;
 
 				$_meta_value =
@@ -581,7 +631,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		/**
 		 * Get post meta.
 		 *
-		 * @see \get_metadata()
+		 * @see get_metadata()
 		 *
 		 * @param null|array|string $check     The value get_metadata() should return - a single metadata value,
 		 *                                     or an array of values.
@@ -622,7 +672,11 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			 * @return string|boolean String if to filter meta field or false if not.
 			 */
 			if ( ! empty( $meta_key ) && is_string( $meta_key ) ) {
-				// phpcs:ignore WordPress.NamingConventions
+				/**
+				 * Filter 'wpglobus/meta/key'
+				 *
+				 * @since 1.9.25
+				 */
 				$meta_key = apply_filters( 'wpglobus/meta/key', $meta_key );
 				if ( false === $meta_key ) {
 					return $check;
@@ -631,12 +685,12 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 
 			/**
 			 * May be called many times on one page. Let's cache.
+			 * //if ( isset( $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] ) ) {
+			 * // @since 2.4
+			 * //return $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ];
+			 * //}
 			 */
 			static $_cache;
-			//if ( isset( $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] ) ) {
-				// @since 2.4
-				//return $_cache[ $_cache_meta_key ][ $object_id ][ $return_value ];
-			//}
 
 			$meta_type = 'post';
 
@@ -650,7 +704,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 			if ( ! $meta_key ) {
 
 				/**
-				 * @todo add doc.
+				 * Todo add doc.
 				 */
 				if ( ! empty( $meta_cache ) ) {
 
@@ -680,7 +734,7 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 						}
 
 						if ( is_array( $_value ) ) {
-							// !!!!!!
+							// Note!
 							$_value = array( $_value );
 						} else {
 							$_cache[ $_cache_meta_key ][ $object_id ][ $return_value ] = $_value;
@@ -719,11 +773,12 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 				}
 			}
 
-			// We should not be here. Keeping as a precaution for potential code changes.
-
-			/** @noinspection PhpUnreachableStatementInspection */
+			/**
+			 * We should not be here. Keeping as a precaution for potential code changes.
+			 *
+			 * @noinspection PhpUnreachableStatementInspection
+			 */
 			return $check;
-
 		}
 
 		/**
@@ -745,31 +800,26 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		 * Build multilingual string.
 		 *
 		 * @since 1.9.25
-		 * @todo  First idea is: This function needs for Page Builder by SiteOrigin because it should serialize array before creating multilingual string.
 		 *
 		 * @param string[] $ml_array
 		 *
 		 * @return string
+		 * @todo  First idea is: This function needs for Page Builder by SiteOrigin because it should serialize array before creating multilingual string.
+		 *
 		 */
 		protected static function build_multilingual_string( $ml_array ) {
 
 			/**
-			 * @todo W.I.P with Page Builder by SiteOrigin.
-			 */
-			/**
+			 * Todo W.I.P with Page Builder by SiteOrigin.
 			 * foreach( $ml_array as $language=>$value ) {
 			 * if ( is_array($value) ) {
 			 * $ml_array[$language] = maybe_serialize($value);
 			 * }
 			 * }
-			 * // */
+			 */
 
-			$_str = WPGlobus_Utils::build_multilingual_string( $ml_array );
-
-			return $_str;
+			return WPGlobus_Utils::build_multilingual_string( $ml_array );
 		}
 	}
 
 endif;
-
-# --- EOF
