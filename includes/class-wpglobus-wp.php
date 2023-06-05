@@ -329,7 +329,7 @@ class WPGlobus_WP {
 	/**
 	 * Get sanitized_value from array.
 	 *
-	 * @since 1.10.1
+	 * @since 2.12.1
 	 *
 	 * @param array  $array The array.
 	 * @param string $key   The key.
@@ -357,7 +357,7 @@ class WPGlobus_WP {
 	/**
 	 * Get a $_GET parameter value.
 	 *
-	 * @since 1.10.1
+	 * @since 2.12.1
 	 *
 	 * @param string $key Parameter name.
 	 *
@@ -373,7 +373,7 @@ class WPGlobus_WP {
 	/**
 	 * Get a $_POST parameter value.
 	 *
-	 * @since 1.10.1
+	 * @since 2.12.1
 	 *
 	 * @param string $key Parameter name.
 	 *
@@ -387,9 +387,40 @@ class WPGlobus_WP {
 	}
 
 	/**
+	 * Get a $_REQUEST parameter value.
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $key Parameter name.
+	 *
+	 * @return array|string
+	 */
+	public static function get_http_request_parameter( $key ) {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && wp_verify_nonce( '' );
+
+		return self::get_sanitized_value( $_REQUEST, $key );
+	}
+
+	/**
+	 * Run strpos on a $_REQUEST parameter value.
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $key    Parameter in $_REQUEST
+	 * @param string $needle String to search for
+	 *
+	 * @return bool
+	 */
+	public static function is_strpos_http_request( $key, $needle ) {
+
+		return false !== strpos( self::get_http_request_parameter( $key ), $needle );
+	}
+
+	/**
 	 * Extend $allowedposttags for kses.
 	 *
-	 * @since 1.10.1
+	 * @since 2.12.1
 	 * @return array
 	 */
 	public static function allowed_post_tags_extended() {
@@ -418,7 +449,7 @@ class WPGlobus_WP {
 	/**
 	 * Method get_fs.
 	 *
-	 * @since 1.10.1
+	 * @since 2.12.1
 	 * @return WP_Filesystem_Direct|null
 	 */
 	public static function get_fs() {
@@ -442,7 +473,7 @@ class WPGlobus_WP {
 	 * Method fs_get_contents replaces {@see file_get_contents()}.
 	 * phpcs: WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents: file_get_contents() is discouraged.
 	 *
-	 * @since 1.10.1
+	 * @since 2.12.1
 	 *
 	 * @param string $file Name of the file to read.
 	 *
@@ -457,5 +488,53 @@ class WPGlobus_WP {
 		}
 
 		return $contents;
+	}
+
+	/**
+	 * Returns sanitized $_SERVER['REQUEST_URI'].
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function request_uri( $default = '' ) {
+		if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+			// Something abnormal.
+			return $default;
+		}
+
+		return esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+	}
+
+	/**
+	 * True if a parameter exists in $_GET.
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $name The parameter name.
+	 *
+	 * @return bool
+	 */
+	public static function is_parameter_in_http_get( $name ) {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && \wp_verify_nonce( '' );
+		return array_key_exists( $name, $_GET );
+	}
+
+	/**
+	 * True if a parameter exists in $_POST.
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $name The parameter name.
+	 *
+	 * @return bool
+	 */
+	public static function is_parameter_in_http_post( $name ) {
+		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
+		0 && \wp_verify_nonce( '' );
+		return array_key_exists( $name, $_POST );
 	}
 }
