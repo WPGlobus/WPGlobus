@@ -20,17 +20,19 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 * @var WPGlobus_Admin_Debug
 		 */
 		protected static $instance;
-		
+
 		/**
 		 * Debug mode.
+		 *
 		 * @since 2.2.35
 		 */
 		protected static $mode = 'godmode';
 
 		/**
 		 * Key.
+		 *
 		 * @since 2.2.35
-		 */		
+		 */
 		protected static $key = '';
 
 		/**
@@ -49,20 +51,22 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 */
 		public function __construct() {
 
-			if ( 'meta' == $_GET['wpglobus-debug'] ) { // WPCS: input var ok, sanitization ok.
+			$get_debug = WPGlobus_WP::get_http_get_parameter( 'wpglobus-debug' );
+			if ( 'meta' === $get_debug ) {
 				self::$mode = 'meta';
-			} else if ( 'wpglobus_options' == $_GET['wpglobus-debug'] || 'wpglobus-options' == $_GET['wpglobus-debug'] ) { // WPCS: input var ok, sanitization ok.
+			} elseif ( 'wpglobus_options' === $get_debug || 'wpglobus-options' === $get_debug ) {
 				self::$mode = 'wpglobus_options';
-			} else if ( 'yoast' == $_GET['wpglobus-debug'] ) { // WPCS: input var ok, sanitization ok.
+			} elseif ( 'yoast' === $get_debug ) {
 				self::$mode = 'yoast';
 			}
-			
+
 			if ( 'godmode' !== self::$mode ) {
-				if ( ! empty( $_GET['key'] ) ) { // WPCS: input var ok, sanitization ok. )
-					self::$key = sanitize_text_field($_GET['key']);
+				$get_key = WPGlobus_WP::get_http_get_parameter( 'key' );
+				if ( $get_key ) {
+					self::$key = $get_key;
 				}
 			}
-			
+
 			/**
 			 * Action.
 			 *
@@ -88,17 +92,24 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 			add_action( 'admin_footer', array( $this, 'on__admin_footer' ), 9999 );
 
 		}
-		
+
 		/**
+		 * Method is_enabled_section.
+		 *
 		 * @since 2.2.35
+		 *
+		 * @param string $section
+		 *
+		 * @return bool
 		 */
-		public function is_enabled_section($section) {
-			if ( 'godmode' == self::$mode ) {
+		public function is_enabled_section( $section ) {
+			if ( 'godmode' === self::$mode ) {
 				return true;
 			}
-			if ( $section == self::$mode ) {
+			if ( $section === self::$mode ) {
 				return true;
 			}
+
 			return false;
 		}
 
@@ -155,67 +166,68 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 		 */
 		public function on__admin_footer() {
 
+			static $fn_dump = 'print_r';
+
 			global $wpdb, $post, $pagenow;
 
-			if ( 'post.php' == $pagenow ) {
+			$meta_query_caption = '';
+
+			if ( 'post.php' === $pagenow ) {
 				if ( is_object( $post ) ) {
-					/**
-					 * post.php page.
-					 */
+					// post.php page.
 					if ( empty( $post->ID ) || 0 === (int) $post->ID ) {
 						return;
 					}
-					
+
+					$_id                = $post->ID;
+					$meta_query_caption = "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = $_id";
 					/**
 					 * Get metadata.
 					 *
 					 * @var array $metas
 					 */
-					$meta_query = $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post->ID );
-					$_id = $post->ID;
-					$meta_query_caption = "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = $_id";
-					$metas = $wpdb->get_results( $meta_query, ARRAY_A );
+					$metas = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post->ID ), ARRAY_A );
 				}
-			} else if ( 'term.php' == $pagenow ) {
-				
-				if ( empty( $_GET['tag_ID'] ) ) {
+			} elseif ( 'term.php' === $pagenow ) {
+
+				$get_tag_ID = WPGlobus_WP::get_http_get_parameter( 'tag_ID' );
+				if ( ! $get_tag_ID ) {
 					return;
 				}
-				
-				$_id = sanitize_text_field( $_GET['tag_ID'] );
-			
+				$_id = $get_tag_ID;
+
+				$meta_query_caption = "SELECT meta_key, meta_value FROM $wpdb->termmeta WHERE term_id = $_id";
+
 				/**
 				 * Get metadata.
 				 *
 				 * @var array $metas
-				 */				
-				$meta_query = $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->termmeta WHERE term_id = %d", $_id );
-				$meta_query_caption = "SELECT meta_key, meta_value FROM $wpdb->termmeta WHERE term_id = $_id";
-				$metas = $wpdb->get_results( $meta_query, ARRAY_A );						
+				 */
+				$metas = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->termmeta WHERE term_id = %d", $_id ), ARRAY_A );
 			} else {
 				return;
 			}
-
 			?>
 			<div id="wpglobus-admin-debug-box" class="" style="display:none;">
 				<h4>WPGlobus debug box</h4>
 				<?php
-				if ( $this->is_enabled_section('yoast') ) :
+				if ( $this->is_enabled_section( 'yoast' ) ) :
 					/**
 					 * Output yoast options.
 					 */
-					if ( empty( self::$key ) ) { 
-						$query = $wpdb->prepare( "SELECT * FROM $wpdb->options WHERE option_name LIKE '%s' OR option_name LIKE '%s'", '%wpseo%', '%yoast%' );
+					if ( empty( self::$key ) ) {
 						$query_caption = "SELECT * FROM $wpdb->options WHERE option_name LIKE '%wpseo%' OR option_name LIKE '%yoast%'";
+
+						$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->options WHERE option_name LIKE %s OR option_name LIKE %s", '%wpseo%', '%yoast%' ) );
 					} else {
-						$query = $wpdb->prepare( "SELECT * FROM $wpdb->options WHERE option_name = %s", self::$key );
-						$_key = self::$key;
+						$_key          = self::$key;
 						$query_caption = "SELECT * FROM $wpdb->options WHERE option_name = $_key";
+
+						$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->options WHERE option_name = %s", self::$key ) );
 					}
-					$results = $wpdb->get_results( $query );
 					?>
-					<table class="table1" cellspacing="0">
-						<caption><strong><?php echo '"' . $query_caption . '"'; ?></strong></caption>
+					<table class="table1">
+						<caption><strong><?php echo '"' . esc_html( $query_caption ) . '"'; ?></strong></caption>
 						<thead>
 						<tr>
 							<th><strong>№</strong></th>
@@ -227,45 +239,56 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 						<?php
 						$order = 1;
 
-						foreach ( $results as $key=>$value ) {
+						/**
+						 * Unused $key
+						 *
+						 * @noinspection PhpUnusedLocalVariableInspection
+						 */
+						foreach ( $results as $key => $value ) {
 							$code = false;
-							//if ( is_array( $meta ) ) {
-								//$results[$key]['meta_key'] = htmlspecialchars( $meta['meta_value'] );
-							//}
+							/**
+							 * UNUSED
+							 * //if ( is_array( $meta ) ) {
+							 * //$results[$key]['meta_key'] = htmlspecialchars( $meta['meta_value'] );
+							 * //}
+							 */
+							0 && wp_verify_nonce( '' );
 							$args = $_GET;
-							if ( empty( self::$key ) ) { 
+							if ( empty( self::$key ) ) {
 								$args['wpglobus-debug'] = 'yoast';
-								$args = array_merge( $args, array('key'=>$value->option_name) );
-								$_url = admin_url( add_query_arg( $args, $pagenow ) );
+								$args                   = array_merge( $args, array( 'key' => $value->option_name ) );
+								$_url                   = admin_url( add_query_arg( $args, $pagenow ) );
 							} else {
 								$_url = admin_url( add_query_arg( $args, $pagenow ) );
 							}
 							?>
 							<tr>
 								<td><?php echo esc_html( $order ); ?></td>
-								<td><?php echo sprintf( '<a href="%s">%s</a>', $_url, esc_html( $value->option_name ) ); ?></td>
+								<td>
+									<a href="<?php echo esc_url( $_url ); ?>"><?php echo esc_html( $value->option_name ); ?></a>
+								</td>
 								<?php if ( $code ) { ?>
 									<td>
-										<pre><?php echo esc_html( print_r( $value->option_value, true ) ); ?></pre>
+										<pre><?php echo esc_html( $fn_dump( $value->option_value, true ) ); ?></pre>
 									</td>
 								<?php } else { ?>
-									<td><?php echo esc_html( print_r( $value->option_value, true ) ); ?></td>
+									<td><?php echo esc_html( $fn_dump( $value->option_value, true ) ); ?></td>
 								<?php } ?>
 							</tr>
 							<?php $order ++; ?>
 						<?php } ?>
 						</tbody>
 					</table>
-					<?php				
+				<?php
 				endif;
-				
-				if ( $this->is_enabled_section('meta') ) :
+
+				if ( $this->is_enabled_section( 'meta' ) ) :
 					/**
 					 * Output metadata.
 					 */
 					?>
-					<table class="table2" cellspacing="0">
-						<caption><strong><?php echo '"' . $meta_query_caption . '"'; ?></strong></caption>
+					<table class="table2">
+						<caption><strong><?php echo '"' . esc_html( $meta_query_caption ) . '"'; ?></strong></caption>
 						<thead>
 						<tr>
 							<th><strong>№</strong></th>
@@ -274,49 +297,53 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 						</tr>
 						</thead>
 						<tbody>
-						<?php
-						if ( empty($metas) ) {	?>
+						<?php if ( empty( $metas ) ) { ?>
 							<tr>
-								<td></td>							
+								<td></td>
 								<td>No data</td>
 								<td>No data</td>
-							</tr> <?php	
+							</tr>
+							<?php
 						} else {
 							$order = 1;
-							foreach ( $metas as $key=>$meta ) {
+							foreach ( $metas as $key => $meta ) {
 								$code = false;
 								if ( is_array( $meta ) ) {
-									$metas[$key]['meta_key'] = htmlspecialchars( $meta['meta_value'] );
+									$_meta_key                   = 'meta_key';
+									$metas[ $key ][ $_meta_key ] = htmlspecialchars( $meta['meta_value'] );
 								}
 								?>
 								<tr>
 									<td><?php echo esc_html( $order ); ?></td>
-									<td><?php echo esc_html( print_r( $meta[ 'meta_key' ], true ) ); ?></td>
+									<td><?php echo esc_html( $fn_dump( $meta['meta_key'], true ) ); ?></td>
 									<?php if ( $code ) { ?>
 										<td>
-											<pre><?php echo esc_html( print_r( $meta[ 'meta_value' ], true ) ); ?></pre>
+											<pre><?php echo esc_html( $fn_dump( $meta['meta_value'], true ) ); ?></pre>
 										</td>
 									<?php } else { ?>
-										<td><?php echo esc_html( print_r( $meta[ 'meta_value' ], true ) ); ?></td>
+										<td><?php echo esc_html( $fn_dump( $meta['meta_value'], true ) ); ?></td>
 									<?php } ?>
 								</tr>
-								<?php $order ++;
+								<?php
+								$order ++;
 							}
-						} ?>	
+						}
+						?>
 						</tbody>
 					</table>
-					<?php
+				<?php
 				endif;
-				
-				if ( $this->is_enabled_section('wpglobus_options') ) :
+
+				if ( $this->is_enabled_section( 'wpglobus_options' ) ) :
 					/**
 					 * Output WPGlobus options.
 					 */
-					$query   = "SELECT * FROM $wpdb->options WHERE option_name LIKE '%wpglobus%'";
-					$results = $wpdb->get_results( $query );
+					$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM $wpdb->options WHERE option_name LIKE %s', '%wpglobus%' ) );
 					?>
-					<table class="table3" cellspacing="0">
-						<caption><strong><?php echo '"SELECT * FROM $wpdb->options WHERE option_name LIKE \'%wpglobus%\'"'; ?></strong></caption>
+					<table class="table3">
+						<caption>
+							<strong><?php echo '"SELECT * FROM $wpdb->options WHERE option_name LIKE \'%wpglobus%\'"'; ?></strong>
+						</caption>
 						<caption><?php echo 'Option count: ' . count( $results ); ?></caption>
 						<thead>
 						<tr>
@@ -330,6 +357,11 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 
 						$order = 1;
 
+						/**
+						 * Unused $option_key
+						 *
+						 * @noinspection PhpUnusedLocalVariableInspection
+						 */
 						foreach ( $results as $option_key => $option ) {
 							$code = false;
 							if ( is_array( $option->option_value ) ) {
@@ -342,22 +374,28 @@ if ( ! class_exists( 'WPGlobus_Admin_Debug' ) ) :
 							?>
 							<tr>
 								<td><?php echo esc_html( $option->option_id ); ?></td>
-								<td><?php echo esc_html( print_r( $option->option_name, true ) ); ?></td>
+								<td><?php echo esc_html( $fn_dump( $option->option_name, true ) ); ?></td>
 								<?php if ( $code ) { ?>
 									<td>
-										<pre><?php echo esc_html( print_r( $option->option_value, true ) ); ?></pre>
+										<pre><?php echo esc_html( $fn_dump( $option->option_value, true ) ); ?></pre>
 									</td>
 								<?php } else { ?>
-									<td><?php echo esc_html( print_r( $option->option_value, true ) ); ?></td>
+									<td><?php echo esc_html( $fn_dump( $option->option_value, true ) ); ?></td>
 								<?php } ?>
 							</tr>
-							<?php $order ++; ?>
+							<?php
+							/**
+							 * Result of $order ++ is unused.
+							 *
+							 * @noinspection PhpUnusedLocalVariableInspection
+							 */
+							$order ++;
+							?>
 						<?php } ?>
 						</tbody>
-					</table><?php
-				endif; ?>
+					</table>
+				<?php endif; ?>
 			</div>
-
 			<?php
 		}
 
