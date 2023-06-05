@@ -2,7 +2,7 @@
 /**
  * File: class-wpglobus-register-post-types.php
  *
- * @since 2.2.24
+ * @since   2.2.24
  * @package WPGlobus\Admin
  */
 
@@ -14,28 +14,33 @@ if ( ! class_exists( 'WPGlobus_Register_Post_Types' ) ) :
 	class WPGlobus_Register_Post_Types {
 
 		/**
+		 * Pages.
+		 *
 		 * @var array
 		 */
 		protected static $pages = array( 'edit.php', 'post.php' );
 
 		/**
-		 * Don't handling with these post types.
+		 * Don't handle these post types.
+		 *
 		 * @var array
-		 */		
-		protected static $excluded_post_types = array( 
-			'attachment', 
+		 */
+		protected static $excluded_post_types = array(
+			'attachment',
 			'attachment:audio',
-			'attachment:video', 
-			'revision', 
-			'nav_menu_item', 
-			'custom_css', 
-			'customize_changeset', 
-			'oembed_cache', 
-			'user_request', 
-			'wp_block', 
+			'attachment:video',
+			'revision',
+			'nav_menu_item',
+			'custom_css',
+			'customize_changeset',
+			'oembed_cache',
+			'user_request',
+			'wp_block',
 		);
-		
+
 		/**
+		 * Post types.
+		 *
 		 * @var array
 		 */
 		protected static $post_types = array();
@@ -45,15 +50,15 @@ if ( ! class_exists( 'WPGlobus_Register_Post_Types' ) ) :
 		 */
 		public static function construct() {
 
-			if ( ! WPGlobus_WP::is_pagenow(self::$pages) ) {
+			if ( ! WPGlobus_WP::is_pagenow( self::$pages ) ) {
 				return;
 			}
 
 			/**
-			 * @see wp-includes\post.php
+			 * See wp-includes\post.php
 			 */
 			add_action( 'registered_post_type', array( __CLASS__, 'on__registered' ), 10, 2 );
-			
+
 			add_action( 'wp_loaded', array( __CLASS__, 'on__wp_loaded' ) );
 
 		}
@@ -67,50 +72,50 @@ if ( ! class_exists( 'WPGlobus_Register_Post_Types' ) ) :
 		public static function on__registered( $post_type, $post_type_object ) {
 
 			global $_wp_post_type_features;
-			
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				return;
 			}
-			
+
 			static $_init = null;
-			
-			if ( is_null($_init) ) {
-				
-				self::$excluded_post_types = array_merge(self::$excluded_post_types, WPGlobus::Config()->disabled_entities);
-				
+
+			if ( is_null( $_init ) ) {
+
+				self::$excluded_post_types = array_merge( self::$excluded_post_types, WPGlobus::Config()->disabled_entities );
+
 				self::$excluded_post_types = array_unique( self::$excluded_post_types );
-				
+
 				$_init = true;
 
 			}
-			
-			if ( self::is_excluded_post_type($post_type) ) {
+
+			if ( self::is_excluded_post_type( $post_type ) ) {
 				return;
 			}
-			
-			if ( empty($_wp_post_type_features[$post_type]) ) {
+
+			if ( empty( $_wp_post_type_features[ $post_type ] ) ) {
 				return;
 			}
-			
+
 			/**
-			 * @see `use_block_editor_for_post_type()` in wp-admin\includes\post.php
+			 * See `use_block_editor_for_post_type()` in wp-admin\includes\post.php
 			 */
-			self::$post_types[$post_type] = array(
-				'show_in_rest'  => $post_type_object->show_in_rest,
-				'features' 		=> $_wp_post_type_features[$post_type]
+			self::$post_types[ $post_type ] = array(
+				'show_in_rest' => $post_type_object->show_in_rest,
+				'features'     => $_wp_post_type_features[ $post_type ],
 			);
 
 		}
-		
+
 		/**
 		 * Fired to save option.
 		 */
 		public static function on__wp_loaded() {
-			
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				return;
 			}
-			if ( ! empty(self::$post_types) ) {
+			if ( ! empty( self::$post_types ) ) {
 				update_option( WPGlobus::Config()->option_register_post_types, self::$post_types, false );
 			}
 		}
@@ -120,19 +125,19 @@ if ( ! class_exists( 'WPGlobus_Register_Post_Types' ) ) :
 		 *
 		 * @return bool
 		 */
-		public static function is_excluded_post_type( $post_type = '') {
-			
-			if ( empty($post_type) ) {
+		public static function is_excluded_post_type( $post_type = '' ) {
+
+			if ( empty( $post_type ) ) {
 				return true;
 			}
-			
-			if ( in_array( $post_type, self::get_excluded_post_types() ) ) {
+
+			if ( in_array( $post_type, self::get_excluded_post_types(), true ) ) {
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		/**
 		 * Get excluded post types.
 		 *
@@ -144,4 +149,3 @@ if ( ! class_exists( 'WPGlobus_Register_Post_Types' ) ) :
 	}
 
 endif;
-/* EOF */
