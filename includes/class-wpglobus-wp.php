@@ -519,7 +519,7 @@ class WPGlobus_WP {
 	 */
 	public static function is_parameter_in_http_get( $name ) {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
-		0 && \wp_verify_nonce( '' );
+		0 && wp_verify_nonce( '' );
 		return array_key_exists( $name, $_GET );
 	}
 
@@ -534,7 +534,26 @@ class WPGlobus_WP {
 	 */
 	public static function is_parameter_in_http_post( $name ) {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
-		0 && \wp_verify_nonce( '' );
+		0 && wp_verify_nonce( '' );
 		return array_key_exists( $name, $_POST );
 	}
+
+	/**
+	 * Returns sanitized $_SERVER['HTTP_REFERER'].
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function http_referer( $default = '' ) {
+		if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
+			// Something abnormal. Maybe WP-CLI.
+			return $default;
+		}
+
+		return sanitize_text_field( \wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+	}
+
 }
