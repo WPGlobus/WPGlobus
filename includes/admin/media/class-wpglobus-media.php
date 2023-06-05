@@ -1,7 +1,4 @@
 <?php
-/**
- * @package WPGlobus
- */
 
 /**
  * Class WPGlobus_Media.
@@ -26,102 +23,111 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		/**
 		 * Get instance.
 		 */
-		public static function get_instance($http_post_action = false, $http_post_actions = array()){
-			if( null == self::$instance ){
-				self::$instance = new self($http_post_action, $http_post_actions);
+		public static function get_instance( $http_post_action = false, $http_post_actions = array() ) {
+			if ( null === self::$instance ) {
+				self::$instance = new self( $http_post_action, $http_post_actions );
 			}
+
 			return self::$instance;
 		}
 
 		/**
 		 * Constructor.
 		 */
-		public function __construct($http_post_action, $http_post_actions) {
+		public function __construct( $http_post_action, $http_post_actions ) {
 
 			/**
+			 * On admin_print_scripts
+			 *
 			 * @scope admin
 			 * @since 1.7.3
 			 */
 			add_action( 'admin_print_scripts', array(
 				$this,
-				'post_php__admin_scripts'
-			), 5 );			
+				'post_php__admin_scripts',
+			), 5 );
 
-			if ( in_array($http_post_action, $http_post_actions) ) {
+			if ( in_array( $http_post_action, $http_post_actions, true ) ) {
 
-				if ( 'send-attachment-to-editor' == $http_post_action ) {
-					
+				if ( 'send-attachment-to-editor' === $http_post_action ) {
+
 					/**
+					 * See filter 'media_send_to_editor' in wp-admin\includes\media.php
+					 *
 					 * @scope admin
-					 * @see filter 'media_send_to_editor' in wp-admin\includes\media.php
 					 * @since 1.7.3
 					 */
 					add_filter( 'media_send_to_editor', array(
 						$this,
-						'filter__media_send_to_editor'
+						'filter__media_send_to_editor',
 					), 5, 3 );
-				
-				} else if ( 'query-attachments' == $http_post_action ) {
-						
+
+				} elseif ( 'query-attachments' === $http_post_action ) {
+
 					/**
+					 * See filter 'wp_prepare_attachment_for_js' in wp-includes\media.php
+					 *
 					 * @scope admin
-					 * @see filter 'wp_prepare_attachment_for_js' in wp-includes\media.php
 					 * @since 2.2.22
 					 */
 					add_filter( 'wp_prepare_attachment_for_js', array(
 						$this,
-						'filter__prepare_attachment_for_js'
+						'filter__prepare_attachment_for_js',
 					), 5, 3 );
-					
+
 				}
-				
-				return;	
+
+				return;
 			}
-			
+
 			$this->enabled_post_types[] = 'attachment';
 
 			/**
+			 * On edit_form_after_editor
+			 *
 			 * @scope admin
 			 * @since 1.7.3
 			 */
 			add_action( 'edit_form_after_editor', array(
 				$this,
-				'language_tabs'
+				'language_tabs',
 			) );
 
 			/**
+			 * On admin_print_scripts
+			 *
 			 * @scope admin
 			 * @since 1.7.3
 			 */
 			add_action( 'admin_print_scripts', array(
 				$this,
-				'media__admin_scripts'
+				'media__admin_scripts',
 			) );
 
 			/**
+			 * On admin_print_styles
+			 *
 			 * @scope admin
 			 * @since 1.7.3
 			 */
 			add_action( 'admin_print_styles', array(
 				$this,
-				'action__admin_styles'
+				'action__admin_styles',
 			) );
-
-
-
 		}
 
 		/**
 		 * Filters the HTML markup for a media item sent to the editor.
 		 *
-		 * @scope  admin
-		 * @since  1.7.3
+		 * @scope        admin
+		 * @since        1.7.3
 		 *
 		 * @param string $html       HTML markup.
 		 * @param int    $id         Unused.
 		 * @param array  $attachment Array of attachment metadata.
 		 *
-		 * @return boolean
+		 * @return bool
+		 * @noinspection PhpUnusedParameterInspection
 		 */
 		public function filter__media_send_to_editor( $html, $id, $attachment ) {
 
@@ -132,11 +138,13 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			);
 
 			$current_language = WPGlobus::Config()->default_language;
-			if ( ! empty( $_POST['wpglobusLanguageTab'] ) ) { // WPCS: input var ok, sanitization ok.
+
+			$post_language_tab = WPGlobus_WP::get_http_post_parameter( 'wpglobusLanguageTab' );
+			if ( $post_language_tab ) {
 				/**
 				 * See wpglobus-media.js
 				 */
-				$current_language = sanitize_text_field( wp_unslash( $_POST['wpglobusLanguageTab'] ) ); // WPCS: input var ok, sanitization ok.
+				$current_language = $post_language_tab;
 
 				if ( ! in_array( $current_language, WPGlobus::Config()->enabled_languages, true ) ) {
 					return $html;
@@ -157,7 +165,6 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.7.3
-		 * @access public
 		 *
 		 * @return boolean
 		 */
@@ -169,7 +176,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				return false;
 			}
 
-			if ( in_array( $post->post_type, $this->enabled_post_types ) ) {
+			if ( in_array( $post->post_type, $this->enabled_post_types, true ) ) {
 				return true;
 			}
 
@@ -182,7 +189,6 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.7.3
-		 * @access public
 		 *
 		 * @return void
 		 */
@@ -194,7 +200,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				return;
 			}
 
-			if ( in_array( $post->post_type, array( 'attachment' ) ) ) {
+			if ( 'attachment' === $post->post_type ) {
 				/**
 				 * Don't load on edit media page.
 				 */
@@ -213,10 +219,10 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				'wpglobus-media-post-php',
 				'WPGlobusMediaInPost',
 				array(
-					'version'	=> WPGLOBUS_VERSION,
-					'builderID'	=> WPGlobus::Config()->builder->get_id(),
+					'version'   => WPGLOBUS_VERSION,
+					'builderID' => WPGlobus::Config()->builder->get_id(),
 				)
-			);			
+			);
 
 		}
 
@@ -225,7 +231,6 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.7.3
-		 * @access public
 		 *
 		 * @return void
 		 */
@@ -237,6 +242,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 
 			/**
 			 * WordPress 4.7+ needs a new version of our admin JS.
+			 *
 			 * @since 1.7.0
 			 */
 			$version = '';
@@ -246,7 +252,7 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 
 			wp_register_script(
 				'wpglobus-admin',
-				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . WPGlobus::SCRIPT_SUFFIX() . ".js",
+				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-admin$version" . WPGlobus::SCRIPT_SUFFIX() . '.js',
 				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs' ),
 				WPGLOBUS_VERSION,
 				true
@@ -256,11 +262,11 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				'wpglobus-admin',
 				'WPGlobusAdmin',
 				array(
-					'version'	=> WPGLOBUS_VERSION,
-					'i18n'      => array(),
-					'data' 		=> array(
-						'default_language' => WPGlobus::Config()->default_language
-					)
+					'version' => WPGLOBUS_VERSION,
+					'i18n'    => array(),
+					'data'    => array(
+						'default_language' => WPGlobus::Config()->default_language,
+					),
 				)
 			);
 
@@ -268,17 +274,17 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				'wpglobus-admin',
 				'WPGlobusCoreData',
 				array(
-					'multisite'			=> 'false',
-					'default_language' 	=> WPGlobus::Config()->default_language,
+					'multisite'         => 'false',
+					'default_language'  => WPGlobus::Config()->default_language,
 					'enabled_languages' => WPGlobus::Config()->enabled_languages,
 					'locale_tag_start'  => WPGlobus::LOCALE_TAG_START,
-					'locale_tag_end'    => WPGlobus::LOCALE_TAG_END
+					'locale_tag_end'    => WPGlobus::LOCALE_TAG_END,
 				)
 			);
 
 			wp_register_script(
 				'wpglobus-media',
-				WPGlobus::$PLUGIN_DIR_URL . "includes/js/wpglobus-media" . WPGlobus::SCRIPT_SUFFIX() . ".js",
+				WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-media' . WPGlobus::SCRIPT_SUFFIX() . '.js',
 				array( 'jquery', 'wpglobus-admin' ),
 				WPGLOBUS_VERSION,
 				true
@@ -288,16 +294,16 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 				'wpglobus-media',
 				'WPGlobusMedia',
 				array(
-					'version'			=> WPGLOBUS_VERSION,
-					'language'  		=> WPGlobus::Config()->default_language,
-					'defaultLanguage'  	=> WPGlobus::Config()->default_language,
-					'enabledLanguages' 	=> WPGlobus::Config()->enabled_languages,
-					'attachment' 		=> array(
-						'caption' 		=> 'attachment_caption',
-						'alt' 			=> 'attachment_alt',
-						'description' 	=> 'attachment_content',
-						'title'			=> 'title'
-					)
+					'version'          => WPGLOBUS_VERSION,
+					'language'         => WPGlobus::Config()->default_language,
+					'defaultLanguage'  => WPGlobus::Config()->default_language,
+					'enabledLanguages' => WPGlobus::Config()->enabled_languages,
+					'attachment'       => array(
+						'caption'     => 'attachment_caption',
+						'alt'         => 'attachment_alt',
+						'description' => 'attachment_content',
+						'title'       => 'title',
+					),
 				)
 			);
 		}
@@ -307,7 +313,6 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.7.3
-		 * @access public
 		 *
 		 * @return void
 		 */
@@ -333,7 +338,6 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 *
 		 * @scope  admin
 		 * @since  1.7.3
-		 * @access public
 		 *
 		 * @return void
 		 */
@@ -345,26 +349,35 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 
 			?>
 			<div id="wpglobus-media-body-tabs" style="margin-top:20px;" class="wpglobus-post-body-tabs">
-				<ul class="wpglobus-post-body-tabs-list">    <?php
+				<ul class="wpglobus-post-body-tabs-list">
+					<?php
 					$order = 0;
 					foreach ( WPGlobus::Config()->open_languages as $language ) {
-						$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language; ?>
-						<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>" data-language="<?php echo esc_attr( $language ); ?>"
-							data-order="<?php echo esc_attr( $order ); ?>"
-							class="wpglobus-post-tab">
+						$tab_suffix = WPGlobus::Config()->default_language === $language ? 'default' : $language;
+						?>
+						<li id="link-tab-<?php echo esc_attr( $tab_suffix ); ?>"
+								data-language="<?php echo esc_attr( $language ); ?>"
+								data-order="<?php echo esc_attr( $order ); ?>"
+								class="wpglobus-post-tab">
 							<a href="#tab-<?php echo esc_attr( $tab_suffix ); ?>"><?php echo esc_html( WPGlobus::Config()->en_language_name[ $language ] ); ?></a>
-						</li> <?php
+						</li>
+						<?php
 						$order ++;
-					} ?>
-				</ul> <?php
+					}
+					?>
+				</ul>
+				<?php
 				foreach ( WPGlobus::Config()->open_languages as $language ) {
-					$tab_suffix = $language == WPGlobus::Config()->default_language ? 'default' : $language; ?>
-					<div id="tab-<?php echo esc_attr( $tab_suffix ); ?>" style="display:none;"></div>	<?php
-				} ?>
+					$tab_suffix = WPGlobus::Config()->default_language === $language ? 'default' : $language;
+					?>
+					<div id="tab-<?php echo esc_attr( $tab_suffix ); ?>" style="display:none"></div>
+					<?php
+				}
+				?>
 			</div>
 			<?php
 		}
-		
+
 		/**
 		 * Filters the attachment data prepared for JavaScript.
 		 *
@@ -373,13 +386,14 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 		 * @param array       $response   Array of prepared attachment data.
 		 * @param WP_Post     $attachment Attachment object.
 		 * @param array|false $meta       Array of attachment meta data, or false if there is none.
-		 */		
+		 * @noinspection PhpUnusedParameterInspection
+		 */
 		public function filter__prepare_attachment_for_js( $response, $attachment, $meta ) {
 
-			if ( empty( $_POST['wpglobusPrepareAttachments'] ) ) { // WPCS: input var ok, sanitization ok.
+			if ( ! WPGlobus_WP::get_http_post_parameter( 'wpglobusPrepareAttachments' ) ) {
 				return $response;
 			}
-			
+
 			$fields = array(
 				'alt',
 				'description',
@@ -388,17 +402,19 @@ if ( ! class_exists( 'WPGlobus_Media' ) ) :
 			);
 
 			$current_language = WPGlobus::Config()->default_language;
-			if ( ! empty( $_POST['wpglobusLanguageTab'] ) ) { // WPCS: input var ok, sanitization ok.
+
+			$post_language_tab = WPGlobus_WP::get_http_post_parameter( 'wpglobusLanguageTab' );
+			if ( $post_language_tab ) {
 				/**
-				 * See includes\js\wpglobus-media.js
+				 * See wpglobus-media.js
 				 */
-				$current_language = sanitize_text_field( wp_unslash( $_POST['wpglobusLanguageTab'] ) ); // WPCS: input var ok, sanitization ok.
+				$current_language = $post_language_tab;
 
 				if ( ! in_array( $current_language, WPGlobus::Config()->enabled_languages, true ) ) {
 					return $response;
 				}
 			}
-			
+
 			foreach ( $fields as $field ) {
 				if ( ! empty( $response[ $field ] ) && WPGlobus_Core::has_translations( $response[ $field ] ) ) {
 					$response[ $field ] = WPGlobus_Core::text_filter( $response[ $field ], $current_language );
