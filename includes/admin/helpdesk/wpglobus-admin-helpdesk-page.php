@@ -14,8 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 WPGlobus_Admin_Page::print_header();
 
 /**
- * Vars defined in @see \WPGlobus_Admin_HelpDesk::helpdesk_page
+ * Vars defined in @see WPGlobus_Admin_HelpDesk::helpdesk_page()
  *
+ * @var string $details
  * @var string $subject
  * @var string $tech_info
  */
@@ -76,7 +77,8 @@ WPGlobus_Admin_Page::print_header();
 
 	<h4><?php esc_html_e( 'Please fill in and submit the contact form:', 'wpglobus' ); ?></h4>
 
-	<form action="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>" method="post" id="wpglobus-form-helpdesk">
+	<form action="<?php echo esc_url( WPGlobus_Admin_Page::url_helpdesk() ); ?>" method="post"
+			id="wpglobus-form-helpdesk">
 
 		<table class="form-table">
 			<tbody>
@@ -138,27 +140,35 @@ WPGlobus_Admin_Page::print_header();
 			<?php esc_html_e( 'Submit' ); ?>
 		</button>
 		<script>
-            jQuery(function ($) {
-                $("#wpglobus-form-helpdesk").on("submit", function (e) {
-                    $("#send_email").prop("disabled", true);
-                });
-				function adjustHeight(el, minHeight) {
-					var outerHeight = parseInt(window.getComputedStyle(el).height, 10);
-					var diff = outerHeight - el.clientHeight;
-					el.style.height = 0;
-					el.style.height = Math.max(minHeight, el.scrollHeight + diff) + 'px';
+			// @formatter:off
+			jQuery(function ($) {
+					$("#wpglobus-form-helpdesk").on("submit", function () {
+						$("#send_email").prop("disabled", true);
+						}
+					);
+					function adjustHeight(el, minHeight) {
+						var outerHeight = parseInt(window.getComputedStyle(el).height, 10);
+						var diff = outerHeight - el.clientHeight;
+						el.style.height = 0;
+						el.style.height = Math.max(minHeight, el.scrollHeight + diff) + 'px';
+					}
+					var textArea = [].slice.call(document.querySelectorAll('textarea#info'));
+					if ( textArea.length === 1 ) {
+						adjustHeight(textArea[0], textArea[0].scrollHeight);
+					}
 				}
-				var textArea = [].slice.call(document.querySelectorAll('textarea#info'));
-				if ( textArea.length == 1 ) {
-					adjustHeight(textArea[0], textArea[0].scrollHeight);
-				}
-				
-            });
+			);
+			// @formatter:on
 		</script>
 
 	</form>
 	<p>
-		*) <?php printf( esc_html__( 'Alternatively, please email %s. Do not forget to copy and paste the technical information to your email message.', 'wpglobus' ), '<a href="mailto:' . esc_attr( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '">' . esc_html( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '</a>' ); ?></p>
+		*)
+		<?php
+		// Translators: %s - placeholder for email.
+		printf( esc_html__( 'Alternatively, please email %s. Do not forget to copy and paste the technical information to your email message.', 'wpglobus' ), '<a href="mailto:' . esc_attr( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '">' . esc_html( WPGlobus_Admin_HelpDesk::EMAIL_SUPPORT ) . '</a>' );
+		?>
+	</p>
 
 <?php
 
