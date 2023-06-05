@@ -3,7 +3,7 @@
  * File: class-wpglobus-config-builder.php
  *
  * @package WPGlobus\Builders
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
@@ -11,6 +11,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 	class WPGlobus_Config_Builder {
 
 		/**
+		 * ID
+		 *
 		 * @var string|false
 		 */
 		protected $id = false;
@@ -21,17 +23,19 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 		protected $attrs = array();
 
-		protected $__class = null;
+		protected $the_class = null;
 
-		protected $__builder_page = false;
+		protected $builder_page = false;
 
-		protected $__is_admin = false;
+		protected $is_admin = false;
 
 		protected $language = false;
 
 		protected $default_language;
-		
+
 		/**
+		 * Var post_types
+		 *
 		 * @since 2.2.11
 		 */
 		public $post_types = array();
@@ -47,8 +51,10 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			if ( isset( $init_attrs['default_language'] ) ) {
 				$this->default_language = $init_attrs['default_language'];
 			}
-			
+
 			/**
+			 * Check $init_attrs['post_types']
+			 *
 			 * @since 2.2.11
 			 */
 			if ( isset( $init_attrs['post_types'] ) ) {
@@ -59,9 +65,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 				require_once dirname( __FILE__ ) . '/class-wpglobus-builders.php';
 				/**
-				 * @since 2.2.24 added $init_attrs.
-				 */				
-				$builder = WPGlobus_Builders::get(true, $init_attrs);
+				 * Added $init_attrs.
+				 *
+				 * @since 2.2.24
+				 */
+				$builder = WPGlobus_Builders::get( true, $init_attrs );
 
 				$this->id = $builder['id'];
 				unset( $builder['id'] );
@@ -72,20 +80,22 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 					foreach ( $builder as $key => $value ) {
 						if ( 'class' === $key ) {
-							$this->__class = $value;
+							$this->the_class = $value;
 						} elseif ( 'builder_page' === $key ) {
-							$this->__builder_page = $value;
+							$this->builder_page = $value;
 						} elseif ( 'is_admin' === $key ) {
-							$this->__is_admin = $value;
+							$this->is_admin = $value;
 						}
 						$this->attrs[ $key ] = $value;
 					}
 
 					/**
-					 * @since 2.8.9 Get REST API request language.
-					 * For example for setting language @see wpglobus\includes\builders\rank_math_seo\class-wpglobus-builder-rank_math_seo.php
-					 */	
-					if ( isset($builder['rest_request']) && $builder['rest_request'] && isset($builder['rest_language']) ) {
+					 * Get REST API request language
+					 * For example for setting language see wpglobus\includes\builders\rank_math_seo\class-wpglobus-builder-rank_math_seo.php
+					 *
+					 * @since 2.8.9
+					 */
+					if ( isset( $builder['rest_request'] ) && $builder['rest_request'] && isset( $builder['rest_language'] ) ) {
 						$this->set_language( $builder['rest_language'] );
 					} else {
 						$this->language          = $this->get_language();
@@ -98,7 +108,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			} else {
 
 				require_once dirname( __FILE__ ) . '/class-wpglobus-builders.php';
-				/** @noinspection PhpUnusedLocalVariableInspection */
+				/**
+				 * Need it?
+				 *
+				 * @noinspection PhpUnusedLocalVariableInspection
+				 */
 				$builder = WPGlobus_Builders::get( false );
 
 			}
@@ -113,11 +127,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		 * @return bool
 		 */
 		public function maybe_run( $builder = '', $set_run_flag = false ) {
-
-			//if ( defined('DOING_AJAX') && DOING_AJAX ) {
-			//return false;
-			//}
-
+			/**
+			 * //if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			 * //return false;
+			 * //}
+			 */
 			if ( ! $this->id ) {
 				return false;
 			}
@@ -125,13 +139,10 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 			$check_run_flag = true;
 
 			if ( is_bool( $builder ) ) {
-				// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIF
-				if ( $builder ) {
-					// @todo
-				} else {
+				if ( ! $builder ) {
 					$check_run_flag = false;
 					$set_run_flag   = false;
-				}
+				} // Else TODO
 			}
 
 			if ( $check_run_flag && $this->is_run ) {
@@ -221,8 +232,8 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $this->is_builder_page() ) {
 				/**
-				 * @todo maybe need to check the matching of $this->language and WPGlobus::Config()->language.
-				 * @see  Set language for builder in wpglobus\includes\class-wpglobus-config.php
+				 * Todo maybe need to check the matching of $this->language and WPGlobus::Config()->language.
+				 * See Set language for builder in wpglobus\includes\class-wpglobus-config.php
 				 */
 				return $this->language;
 			}
@@ -231,10 +242,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return $this->language;
 			}
 
-			/** @global string $pagenow */
-			global $pagenow;
-
-			if ( 'post-new.php' === $pagenow ) {
+			if ( WPGlobus_WP::is_pagenow( 'post-new.php' ) ) {
 				/**
 				 * Correctly define language for the 'post-new.php' page.
 				 *
@@ -261,25 +269,27 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $language ) {
 
-				if ( empty( $_REQUEST ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				0 && wp_verify_nonce( '' );
+				if ( empty( $_REQUEST ) ) {
 
-					if ( empty( $_SERVER['HTTP_REFERER'] ) ) {
+					$_SERVER_HTTP_REFERER = WPGlobus_WP::http_referer();
+					if ( empty( $_SERVER_HTTP_REFERER ) ) {
 						/**
-						 * @todo front-end? check it.
+						 * Todo front-end? check it.
 						 */
 						return false;
 
-					} elseif ( false !== strpos( $_SERVER['HTTP_REFERER'], 'language=' ) ) {
-						$language = explode( 'language=', $_SERVER['HTTP_REFERER'] );
+					} elseif ( false !== strpos( $_SERVER_HTTP_REFERER, 'language=' ) ) {
+						$language = explode( 'language=', $_SERVER_HTTP_REFERER );
 						$language = $language[1];
 					}
 				} else {
 
-					if ( ! empty( $_REQUEST['language'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					if ( ! empty( $_REQUEST['language'] ) ) {
 						$language = sanitize_text_field( $_REQUEST['language'] );
 					}
 
-					if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					if ( isset( $_REQUEST[ WPGlobus::get_language_meta_key() ] ) ) {
 						$language = sanitize_text_field( $_REQUEST[ WPGlobus::get_language_meta_key() ] );
 					}
 				}
@@ -287,54 +297,58 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 
 			if ( ! $language ) {
 
-				if ( isset( $_REQUEST['post'] ) && 0 !== (int) $_REQUEST['post'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+				$_REQUEST_post       = WPGlobus_WP::get_http_request_parameter( 'post' );
+				$_REQUEST_id         = WPGlobus_WP::get_http_request_parameter( 'id' );
+				$_SERVER_REQUEST_URI = WPGlobus_WP::request_uri();
 
-					$language = get_post_meta( $_REQUEST['post'], $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
+				if ( 0 !== (int) $_REQUEST_post ) {
 
-				} elseif ( isset( $_REQUEST['id'] ) && 0 !== (int) $_REQUEST['id'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+					$language = get_post_meta( $_REQUEST_post, $this->get_language_meta_key(), true );
+
+				} elseif ( 0 !== (int) $_REQUEST_id ) {
 
 					/**
 					 * Case when post in draft status is autosaved.
 					 */
-					$language = get_post_meta( $_REQUEST['id'], $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
+					$language = get_post_meta( $_REQUEST_id, $this->get_language_meta_key(), true );
 
-				} elseif ( isset( $_SERVER['REQUEST_URI'] ) ) {
+				} elseif ( $_SERVER_REQUEST_URI ) {
 
 					/**
-					 * See also the Update action in @see \WPGlobus_Builders
+					 * See also the Update action in @see WPGlobus_Builders
 					 */
 					$_continue = false;
 
 					/**
+					 * Todo  In a rare case (so far only one) $GLOBALS['WPGlobus'] defined as object. Need an investigation.
+					 *
 					 * @since 2.5.17 Check $GLOBALS['WPGlobus'] for an array to prevent an occurring error `Cannot use object of type WPGlobus as array`.
-					 * @todo In a rare case (so far only one) $GLOBALS['WPGlobus'] defined as object. Need an investigation.
 					 */
-					if ( isset( $GLOBALS['WPGlobus'] ) && 
-						is_array( $GLOBALS['WPGlobus'] ) && 
-						! empty( $GLOBALS['WPGlobus']['post_type'] ) 
-					)
-					{
+					if ( isset( $GLOBALS['WPGlobus'] ) &&
+						 is_array( $GLOBALS['WPGlobus'] ) &&
+						 ! empty( $GLOBALS['WPGlobus']['post_type'] )
+					) {
 						$_continue = true;
 					}
-					if ( false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/posts/' )
-						 || false !== strpos( $_SERVER['REQUEST_URI'], '/wp-json/wp/v2/pages/' )
+					if ( false !== strpos( $_SERVER_REQUEST_URI, '/wp-json/wp/v2/posts/' )
+						 || false !== strpos( $_SERVER_REQUEST_URI, '/wp-json/wp/v2/pages/' )
 						 || $_continue ) {
 						/**
 						 * Case when post status was changed ( draft->publish or publish->draft ) in Gutenberg.
 						 *
-						 * @see \WPGlobus_Builders::is_gutenberg()
+						 * @see WPGlobus_Builders::is_gutenberg()
 						 */
 						if ( isset( $GLOBALS['WPGlobus'] ) && ! empty( $GLOBALS['WPGlobus']['post_id'] ) ) {
 							$post_id = $GLOBALS['WPGlobus']['post_id'];
 						} else {
-							$_request_uri = explode( '/', $_SERVER['REQUEST_URI'] );
+							$_request_uri = explode( '/', $_SERVER_REQUEST_URI );
 
 							$post_id = end( $_request_uri );
 							$post_id = preg_replace( '/\?.*/', '', $post_id );
 						}
 
 						if ( 0 !== (int) $post_id ) {
-							$language = get_post_meta( $post_id, $this->get_language_meta_key(), true ); // phpcs:ignore WordPress.CSRF.NonceVerification
+							$language = get_post_meta( $post_id, $this->get_language_meta_key(), true );
 						}
 					}
 				}
@@ -353,7 +367,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				 */
 				$language = $this->default_language;
 				/**
-				 * @todo test point if was incorrect setting of $language.
+				 * Todo test point if was incorrect setting of $language.
 				 */
 
 			}
@@ -390,7 +404,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return false;
 			}
 
-			return $this->__is_admin;
+			return $this->is_admin;
 		}
 
 		/**
@@ -401,7 +415,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return false;
 			}
 
-			return ! $this->__is_admin;
+			return ! $this->is_admin;
 		}
 
 		/**
@@ -430,11 +444,11 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return false;
 			}
 
-			return $this->__class;
+			return $this->the_class;
 		}
 
 		/**
-		 *
+		 * Method get_language_meta_key
 		 */
 		public function get_language_meta_key() {
 			if ( ! $this->id ) {
@@ -445,7 +459,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		}
 
 		/**
-		 *
+		 * Method get_cookie_name
 		 */
 		public function get_cookie_name() {
 			if ( ! $this->id ) {
@@ -456,9 +470,12 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 		}
 
 		/**
+		 * Method get_cookie
+		 *
 		 * @param string $cookie_name
 		 *
 		 * @return bool|null
+		 * @noinspection PhpUnused
 		 */
 		public function get_cookie( $cookie_name = '' ) {
 
@@ -475,7 +492,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				if ( empty( $_COOKIE[ $cookie_name ] ) ) {
 					$_cookie_value = false;
 				} else {
-					$_cookie_value = $_COOKIE[ $cookie_name ];
+					$_cookie_value = sanitize_text_field( $_COOKIE[ $cookie_name ] );
 				}
 			}
 
@@ -490,7 +507,7 @@ if ( ! class_exists( 'WPGlobus_Config_Builder' ) ) :
 				return false;
 			}
 
-			return $this->__builder_page;
+			return $this->builder_page;
 		}
 
 		/**
