@@ -40,11 +40,15 @@ class WPGlobus_Admin_HelpDesk {
 	protected static $menu_title;
 
 	/**
+	 * Name.
+	 *
 	 * @var string
 	 */
 	protected static $name;
 
 	/**
+	 * Getter.
+	 *
 	 * @return string
 	 */
 	public static function getName() {
@@ -52,11 +56,15 @@ class WPGlobus_Admin_HelpDesk {
 	}
 
 	/**
+	 * Email.
+	 *
 	 * @var string
 	 */
 	protected static $email;
 
 	/**
+	 * Getter.
+	 *
 	 * @return string
 	 */
 	public static function getEmail() {
@@ -64,11 +72,15 @@ class WPGlobus_Admin_HelpDesk {
 	}
 
 	/**
+	 * Submission status.
+	 *
 	 * @var string
 	 */
 	protected static $submission_status = 'success';
 
 	/**
+	 * Getter.
+	 *
 	 * @return string
 	 */
 	public static function getSubmissionStatus() {
@@ -76,11 +88,15 @@ class WPGlobus_Admin_HelpDesk {
 	}
 
 	/**
+	 * Submission message
+	 *
 	 * @var string
 	 */
 	protected static $submission_message = '';
 
 	/**
+	 * Getter.
+	 *
 	 * @return string
 	 */
 	public static function getSubmissionMessage() {
@@ -129,7 +145,7 @@ class WPGlobus_Admin_HelpDesk {
 	 * The admin page.
 	 */
 	public static function helpdesk_page() {
-		/** @noinspection PhpUnusedLocalVariableInspection */
+
 		$data = self::get_data();
 
 		self::handle_submit();
@@ -153,19 +169,15 @@ class WPGlobus_Admin_HelpDesk {
 			$tech_info .= $name . ' = ' . $version . "\n";
 		}
 
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$subject = empty( $_POST['subject'] ) ? '' : sanitize_text_field( $_POST['subject'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
-		if ( empty($subject) ) {
-			$subject = empty( $_GET['subject'] ) ? '' : sanitize_text_field( $_GET['subject'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+		$subject = WPGlobus_WP::get_http_post_parameter( 'subject' );
+		if ( ! $subject ) {
+			$subject = WPGlobus_WP::get_http_get_parameter( 'subject' );
 		}
 
-
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$details = empty( $_POST['details'] ) ? '' : sanitize_textarea_field( $_POST['details'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+		$details = WPGlobus_WP::get_http_post_parameter( 'details' );
 
 		// Render view.
 		include dirname( __FILE__ ) . '/wpglobus-admin-helpdesk-page.php';
-
 	}
 
 	/**
@@ -210,7 +222,8 @@ class WPGlobus_Admin_HelpDesk {
 
 			add_action( 'wp_mail_failed', array( __CLASS__, 'action__wp_mail_failed' ) );
 
-			if ( wp_mail( self::EMAIL_SUPPORT, $_POST['subject'], $message, $headers ) ) :
+			$subject = WPGlobus_WP::get_http_post_parameter( 'subject' );
+			if ( wp_mail( self::EMAIL_SUPPORT, $subject, $message, $headers ) ) :
 
 				self::$submission_status  = 'success';
 				self::$submission_message = __( 'Email sent.', 'wpglobus' );
@@ -235,26 +248,19 @@ class WPGlobus_Admin_HelpDesk {
 		$theme = wp_get_theme();
 
 		/**
-		 * @see   php_uname can be disabled in php.ini for security reasons
+		 * OS.
+		 *
+		 * @see   php_uname() can be disabled in php.ini for security reasons
 		 * disable_functions=php_uname
 		 * @since 1.7.13
 		 */
-		$OS = 'Unknown';
-		if ( function_exists( 'php_uname' ) ) {
-			$OS = implode( ' ', array(
-				php_uname( 's' ),
-				php_uname( 'r' ),
-				php_uname( 'v' ),
-			) );
-		}
+		$OS = function_exists( 'php_uname' ) ? php_uname() : 'Unknown';
 
 		$data = array(
 			'home_url'          => home_url(),
 			'site_url'          => site_url(),
-			'REMOTE_ADDR'       => sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ),
-			// WPCS: input var ok, sanitization ok.
-			'SERVER_PORT'       => sanitize_text_field( wp_unslash( $_SERVER['SERVER_PORT'] ) ),
-			// WPCS: input var ok, sanitization ok.
+			'REMOTE_ADDR'       => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'Unknown',
+			'SERVER_PORT'       => isset( $_SERVER['SERVER_PORT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_PORT'] ) ) : 'Unknown',
 			'OS'                => $OS,
 			'PHP_SAPI'          => PHP_SAPI,
 			'PHP_VERSION'       => PHP_VERSION,
