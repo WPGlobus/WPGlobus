@@ -4,8 +4,8 @@
  *
  * WPGlobus Recommendations.
  *
- * @since 1.8.7
- * @since 2.10.8 Added support WPGlobusEditPost Sidebar plugin (block editor sidebar) v.2.
+ * @since   1.8.7
+ * @since   2.10.8 Added support WPGlobusEditPost Sidebar plugin (block editor sidebar) v.2.
  *
  * @package WPGlobus\Admin
  */
@@ -47,66 +47,70 @@ class WPGlobus_Admin_Recommendations {
 		);
 
 		/**
+		 * On admin_notices
+		 *
 		 * @since 2.5.20
-		 */			
+		 */
 		add_action( 'admin_notices', array( __CLASS__, 'on__admin_notices' ) );
 
 		/**
+		 * On admin_print_scripts
+		 *
 		 * @since 2.10.8
-		 */		
-		add_action( 'admin_print_scripts',array( __CLASS__, 'on__print_scripts' ) );
+		 */
+		add_action( 'admin_print_scripts', array( __CLASS__, 'on__print_scripts' ) );
 	}
-	
+
 	/**
 	 * Enqueue the script for the WPGlobusEditPost Sidebar plugin (block editor sidebar) v.2.
 	 *
 	 * @since 2.10.8
 	 */
 	public static function on__print_scripts() {
-		
+
 		global $pagenow;
-		
+
 		if ( 'post.php' !== $pagenow ) {
 			return;
 		}
-		
+
 		if ( 'gutenberg' !== WPGlobus::Config()->builder->get_id() ) {
 			return;
-		}	
-	
+		}
+
 		if ( WPGlobus::use_block_editor_sidebar_v1() ) {
 			return;
 		}
 
-		$content  = '';
-		$link_url = '';
-		$link_content = '';
-		
 		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
-			
+
 			$content = array();
-			
-			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
-			$message  = esc_html__( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
+
+			$url     = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
+			$message = esc_html__( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
+
 			$message .= ' ';
-			$link_url = esc_html( $url ) ;
+
+			$link_url     = esc_html( $url );
 			$link_content = 'Check it out  ';
-			
+
 			$content['slug'] = array(
-				'message'  => $message,
-				'linkUrl'  => $link_url,
+				'message'     => $message,
+				'linkUrl'     => $link_url,
 				'linkContent' => $link_content,
 			);
-			
-			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#publish';
-			$message  = esc_html__( 'With Publish module, you will be able to write a post in one language and immediately publish it, not waiting for the translation to other languages.', 'wpglobus' );
+
+			$url     = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#publish';
+			$message = esc_html__( 'With Publish module, you will be able to write a post in one language and immediately publish it, not waiting for the translation to other languages.', 'wpglobus' );
+
 			$message .= ' ';
-			$link_url = esc_html( $url ) ;
+
+			$link_url     = esc_html( $url );
 			$link_content = 'Check it out  ';
 
 			$content['publish'] = array(
-				'message'  => $message,
-				'linkUrl'  => $link_url,
+				'message'     => $message,
+				'linkUrl'     => $link_url,
 				'linkContent' => $link_content,
 			);
 
@@ -114,40 +118,40 @@ class WPGlobus_Admin_Recommendations {
 
 			$content = array();
 
-			$link_url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
+			$link_url     = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
 			$link_content = esc_html__( 'Go to WPGlobus Plus Options page', 'wpglobus-plus' );
-				
+
 			if ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
-				
+
 				$current_key = 'slug';
-				$message 	 = esc_html__( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
-				
-				$content[$current_key] = array(
-					'message'  => $message,
+				$message     = esc_html__( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
+
+				$content[ $current_key ] = array(
+					'message' => $message,
 				);
 			}
-			
+
 			if ( ! class_exists( 'WPGlobusPlus_Publish', false ) ) {
-				
+
 				$current_key = 'publish';
-				$message 	 = esc_html__( 'To use module Publish, please activate it.', 'wpglobus' );
-	
-				$content[$current_key] = array(
-					'message'  => $message,
-				);				
+				$message     = esc_html__( 'To use module Publish, please activate it.', 'wpglobus' );
+
+				$content[ $current_key ] = array(
+					'message' => $message,
+				);
 			}
-			
-			if ( empty($content) ) {
+
+			if ( empty( $content ) ) {
 				$content = '';
 			} else {
 				/**
 				 * Add external link to options page.
 				 */
 				$content['linkToOptions']['linkContent'] = $link_content;
-				$content['linkToOptions']['linkUrl']	 = $link_url;
+				$content['linkToOptions']['linkUrl']     = $link_url;
 			}
-		}		
-		
+		}
+
 		wp_register_script(
 			'wpglobus-edit-post-sidebar',
 			WPGlobus::$PLUGIN_DIR_URL . 'includes/js/wpglobus-edit-post-sidebar' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -160,13 +164,13 @@ class WPGlobus_Admin_Recommendations {
 			'wpglobus-edit-post-sidebar',
 			'WPGlobusEditPostSidebar',
 			array(
-				'version'  => WPGLOBUS_VERSION,
-				'content'  => $content,
+				'version'             => WPGLOBUS_VERSION,
+				'content'             => $content,
 				'hideStandardMetabox' => true,
 			)
-		);			
-	}		
-	
+		);
+	}
+
 	/**
 	 * Add a link to the Recommendations tab.
 	 *
@@ -175,11 +179,14 @@ class WPGlobus_Admin_Recommendations {
 	 * @param array $links array of links for the plugins, adapted when the current plugin is found.
 	 *
 	 * @return array
-	 */	
+	 */
 	public static function filter__plugin_action_links( $links ) {
-		
-		$_url = add_query_arg( array( 'page' => WPGlobus::OPTIONS_PAGE_SLUG, 'tab' => 'recommendations' ), admin_url( 'admin.php' ) );
-		
+
+		$_url = add_query_arg( array(
+			'page' => WPGlobus::OPTIONS_PAGE_SLUG,
+			'tab'  => 'recommendations',
+		), admin_url( 'admin.php' ) );
+
 		$recommend_link = '<a style="font-weight: bold;" href="' . $_url . '">' . esc_html__( 'Go Premium' ) . '</a>';
 		array_unshift( $links, $recommend_link );
 
@@ -194,6 +201,7 @@ class WPGlobus_Admin_Recommendations {
 	 * @return array
 	 *
 	 * @internal
+	 * @noinspection PhpUnused
 	 */
 	public static function for_woocommerce( $settings ) {
 		// Ugly set of "IFs" to display heading only if needed, and only once.
@@ -293,6 +301,26 @@ class WPGlobus_Admin_Recommendations {
 	}
 
 	/**
+	 * Method e_container_start.
+	 *
+	 * @since 2.12.1
+	 * @return void
+	 */
+	protected static function e_container_start() {
+		echo '<p class="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
+	}
+
+	/**
+	 * Method e_container_end.
+	 *
+	 * @since 2.12.1
+	 * @return void
+	 */
+	protected static function e_container_end() {
+		echo '</p>';
+	}
+
+	/**
 	 * Recommend WPGlobus Plus to edit permalinks.
 	 *
 	 * @since 1.9.6
@@ -305,31 +333,28 @@ class WPGlobus_Admin_Recommendations {
 			return;
 		}
 
-		$container_start = '<p class="wpglobus-plus-slug-recommendation" style="padding:5px; font-weight: bold"><span class="dashicons dashicons-admin-site"></span> ';
-		$container_end   = '</p>';
-
 		if ( ! is_plugin_active( 'wpglobus-plus/wpglobus-plus.php' ) ) {
 			$url = WPGlobus_Utils::url_wpglobus_site() . 'product/wpglobus-plus/#slug';
-			echo $container_start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			self::e_container_start();
 			esc_html_e( 'Translate permalinks with our premium add-on, WPGlobus Plus!', 'wpglobus' );
 			echo ' ';
 			esc_html_e( 'Check it out:', 'wpglobus' );
 			echo ' ';
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $url ) . '</a>';
-			echo $container_end; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			self::e_container_end();
 
 			self::$run_js = true;
 
-		} else if ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
+		} elseif ( ! class_exists( 'WPGlobusPlus_Slug', false ) ) {
 			$url = admin_url( 'admin.php' ) . '?page=' . WPGlobusPlus::WPGLOBUS_PLUS_OPTIONS_PAGE . '&tab=modules';
-			echo $container_start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			self::e_container_start();
 			esc_html_e( 'To translate permalinks, please activate the module Slug.', 'wpglobus' );
 			echo ' ';
 			// Do not translate.
 			$msg = __( 'Go to WPGlobus Plus Options page', 'wpglobus-plus' );
 
 			echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $msg ) . '.</a>';
-			echo $container_end; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			self::e_container_end();
 
 			self::$run_js = true;
 
@@ -342,14 +367,16 @@ class WPGlobus_Admin_Recommendations {
 	 * @since 1.9.17
 	 */
 	public static function on__gutenberg_metabox() {
-	
+
 		/**
+		 * If use_block_editor_sidebar_v2
+		 *
 		 * @since 2.10.8
 		 */
 		if ( WPGlobus::use_block_editor_sidebar_v2() ) {
 			return;
 		}
-		
+
 		if ( WPGlobus::Config()->builder->is_running() ) {
 			self::wpg_plus_slug();
 			self::$run_js = false;
@@ -389,11 +416,11 @@ class WPGlobus_Admin_Recommendations {
 	 * Display an admin notice in WordPress admin area.
 	 *
 	 * @since 2.5.20
-	 */	
+	 */
 	public static function on__admin_notices() {
-		
+
 		global $wp_version;
-		
+
 		/**
 		 * Check for PHP version.
 		 */
@@ -425,7 +452,7 @@ class WPGlobus_Admin_Recommendations {
 			echo '</p></div>';
 		}
 	}
-	
+
 } // class WPGlobus_Admin_Recommendations.
 
 # --- EOF
