@@ -2,10 +2,10 @@
 /**
  * File: class-wpglobus-gutenberg.php
  *
- * @since 2.10.8 Added default switcher items.
+ * @since   2.10.8 Added default switcher items.
  *
  * @package WPGlobus\Builders\Gutenberg
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 /**
@@ -25,7 +25,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			/**
 			 * Filter the post for Gutenberg editor.
 			 *
-			 * @see wp-includes\class-wp-query.php
+			 * See wp-includes\class-wp-query.php
 			 */
 			add_action( 'the_post', array( $this, 'translate_post' ), 5 );
 
@@ -46,7 +46,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			/**
 			 * Action enqueue_block_assets.
 			 *
-			 * @see   wp-includes\script-loader.php
+			 * See   wp-includes\script-loader.php
+			 *
 			 * @since 2.2.3
 			 */
 			add_action( 'enqueue_block_assets', array( $this, 'on__enqueue_block_assets' ) );
@@ -54,12 +55,12 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			/**
 			 * Filter wpglobus_seo_meta_box_title.
 			 *
-			 * @see wpglobus-seo\includes\class-wpglobus-seo.php
+			 * See wpglobus-seo\includes\class-wpglobus-seo.php
 			 */
 			add_filter( 'wpglobus_seo_meta_box_title', array( $this, 'filter__seo_meta_box_title' ) );
 		}
 	}
-	
+
 	/**
 	 * Enqueue block assets.
 	 *
@@ -72,6 +73,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		}
 
 		/**
+		 * Set $style_file
+		 *
 		 * @since 2.2.3  wpglobus-block-editor.css
 		 * @since 2.2.14 wpglobus-switcher.css
 		 */
@@ -92,51 +95,49 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		 *
 		 * @since 2.2.3 We are using ES5 syntax for WPGlobus plugin for Block Editor.
 		 */
-		return;
-
-		// phpcs:disable
 
 		/**
 		 * Temporarily.
-		 *
-		 * @noinspection PhpUnreachableStatementInspection
 		 */
-		$script_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.js';
+		$_return_here = true;
+		if ( $_return_here ) {
+			return;
+		} else {
 
-		/**
-		 * Enqueue the bundled block JS file.
-		 */
-		wp_enqueue_script(
-			'wpglobus-block-editor-js',
-			$script_file,
-			array(
-				'wp-i18n',
-				'wp-blocks',
-				'wp-edit-post',
-				'wp-element',
-				'wp-editor',
-				'wp-components',
-				'wp-data',
-				'wp-plugins',
-				'wp-edit-post',
-				'wp-api',
-			),
-			WPGLOBUS_VERSION,
-			false
-		);
+			$script_file = WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/dist/wpglobus-block-editor' . WPGlobus::SCRIPT_SUFFIX() . '.js';
 
-		/**
-		 * Enqueue frontend and editor block styles.
-		 */
-		wp_enqueue_style(
-			'wpglobus-block-editor-css',
-			$style_file,
-			'',
-			WPGLOBUS_VERSION
-		);
+			/**
+			 * Enqueue the bundled block JS file.
+			 */
+			wp_enqueue_script(
+				'wpglobus-block-editor-js',
+				$script_file,
+				array(
+					'wp-i18n',
+					'wp-blocks',
+					'wp-edit-post',
+					'wp-element',
+					'wp-editor',
+					'wp-components',
+					'wp-data',
+					'wp-plugins',
+					'wp-edit-post',
+					'wp-api',
+				),
+				WPGLOBUS_VERSION,
+				false
+			);
 
-		// phpcs:enable
-
+			/**
+			 * Enqueue frontend and editor block styles.
+			 */
+			wp_enqueue_style(
+				'wpglobus-block-editor-css',
+				$style_file,
+				'',
+				WPGLOBUS_VERSION
+			);
+		}
 	}
 
 	/**
@@ -161,11 +162,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 		global $post;
 
-		// TODO check if $_SERVER['QUERY_STRING'] exists and sanitize it.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized: Detected usage of a non-sanitized input variable: $_SERVER['QUERY_STRING'].
-		// phpcs: WordPress.Security.ValidatedSanitizedInput.InputNotValidated: Detected usage of a possibly undefined superglobal array index: $_SERVER['QUERY_STRING']. Use isset() or empty() to check the index exists before using it.
-		// phpcs: WordPress.Security.ValidatedSanitizedInput.MissingUnslash: $_SERVER data not unslashed before sanitization. Use wp_unslash() or similar.
-		$query_string = explode( '&', $_SERVER['QUERY_STRING'] ); // phpcs:ignore
+		$query_string = explode( '&', WPGlobus_WP::query_string() );
 
 		foreach ( $query_string as $key => $_q ) {
 			if ( false !== strpos( $_q, 'language=' ) ) {
@@ -185,14 +182,14 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		$_box_style = 'position:absolute;top:15px;left:10px;z-index:100;';
 		if ( file_exists( WPGlobus::Config()->flag_path['big'] . WPGlobus::Config()->flag[ $this->language ] ) ) {
 			$_flag_img   = WPGlobus::Config()->flag_urls['big'] . WPGlobus::Config()->flag[ $this->language ];
-			$_height     = 'height="25px"';
-			$_width      = 'width="25px"';
-			$_flag_style = 'style="border: 1px solid #bfbfbf;border-radius: 25px;"';
+			$_height     = '25px';
+			$_width      = '25px';
+			$_flag_style = 'border:1px solid #bfbfbf;border-radius:25px';
 		} else {
 			$_flag_img   = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $this->language ];
 			$_height     = '';
 			$_width      = '';
-			$_flag_style = 'style="margin-top:5px;"';
+			$_flag_style = 'margin-top:5px';
 
 			$_box_style .= 'margin-top:3px;';
 		}
@@ -203,17 +200,18 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 			ob_start();
 			?>
-			<div style="<?php echo $_box_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
+			<div style="<?php echo esc_attr( $_box_style ); ?>"
 					class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
-				<div class="wpglobus-selector-grid"
-						style="">
+				<div class="wpglobus-selector-grid" style="">
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-1"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						<img <?php echo $_height . $_width; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-							<?php echo $_flag_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-								src="<?php echo esc_url( $_flag_img ); ?>" alt=""/>
+						<img alt=""
+								height="<?php echo esc_attr( $_height ); ?>"
+								width="<?php echo esc_attr( $_width ); ?>"
+								style="<?php echo esc_attr( $_flag_style ); ?>"
+								src="<?php echo esc_url( $_flag_img ); ?>"/>
 					</a>
 					<a style="text-decoration:none;cursor:text;" onclick="return false;"
 							href="#" class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-2"
@@ -236,18 +234,19 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 
 			ob_start();
 			?>
-			<div style="<?php echo $_box_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
+			<div style="<?php echo esc_attr( $_box_style ); ?>"
 					class="wpglobus-gutenberg-selector-box">
 				<!--suppress CssInvalidPropertyValue -->
-				<div class="wpglobus-selector-grid"
-						style="">
+				<div class="wpglobus-selector-grid" style="">
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
 							class="wpglobus-gutenberg-selector wpglobus-gutenberg-selector-column-1"
 							data-language="<?php echo esc_attr( $this->language ); ?>">
-						<img <?php echo $_height . $_width; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-							<?php echo $_flag_style; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-								src="<?php echo $_flag_img; // phpcs:ignore WordPress.Security.EscapeOutput ?>" alt=""/>
+						<img alt=""
+								height="<?php echo esc_attr( $_height ); ?>"
+								width="<?php echo esc_attr( $_width ); ?>"
+								style="<?php echo esc_attr( $_flag_style ); ?>"
+								src="<?php echo esc_url( $_flag_img ); ?>"/>
 					</a>
 					<a style="text-decoration: none;"
 							href="<?php echo esc_url( str_replace( '{{language}}', $this->language, $url ) ); ?>"
@@ -336,8 +335,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( isset( $_GET['classic-editor'] ) ) {
+		if ( WPGlobus_WP::is_parameter_in_http_get( 'classic-editor' ) ) {
 			return;
 		}
 
@@ -362,9 +360,9 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		/**
 		 * Globals.
 		 *
-		 * @var string   $pagenow
-		 * @var string   $wp_version
-		 * @var \WP_Post $post
+		 * @var string  $pagenow
+		 * @var string  $wp_version
+		 * @var WP_Post $post
 		 */
 		global $pagenow, $wp_version, $post;
 
@@ -372,8 +370,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( isset( $_GET['classic-editor'] ) ) {
+		if ( WPGlobus_WP::is_parameter_in_http_get( 'classic-editor' ) ) {
 			return;
 		}
 
@@ -417,7 +414,7 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		if ( defined( 'WPSEO_VERSION' ) ) {
 			$yoast_seo = true;
 		}
-		
+
 		/**
 		 * Check for Elementor.
 		 *
@@ -425,21 +422,21 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		 */
 		$elementor = false;
 		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			$elementor = true;
-			$__data['elementorVersion'] = ELEMENTOR_VERSION;
-			$__data['elementorCssPrintMethod'] = get_option('elementor_css_print_method', 'external');
-			$_url = add_query_arg(
+			$elementor                         = true;
+			$__data['elementorVersion']        = ELEMENTOR_VERSION;
+			$__data['elementorCssPrintMethod'] = get_option( 'elementor_css_print_method', 'external' );
+			$_url                              = add_query_arg(
 				array(
 					'page' => 'elementor#tab-advanced',
 				),
 				admin_url( 'admin.php' )
 			);
-			$i18n['elementorWarning'] = esc_html__( 'WPGlobus provides multilingual support for Elementor only when the option `CSS Print Method` is set to `External File`.', 'wpglobus' );
-			$i18n['elementorActionLabel']  = esc_html__( 'Open Elementor Settings page', 'wpglobus' );
-			$i18n['elementorActionLink']   = $_url;
-		}		 
-		 
-		 
+			$i18n['elementorWarning']          = esc_html__( 'WPGlobus provides multilingual support for Elementor only when the option `CSS Print Method` is set to `External File`.', 'wpglobus' );
+			$i18n['elementorActionLabel']      = esc_html__( 'Open Elementor Settings page', 'wpglobus' );
+			$i18n['elementorActionLink']       = $_url;
+		}
+
+
 		/**
 		 * Block editor tab URL.
 		 *
@@ -456,14 +453,14 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		);
 
 		/**
-		 * Optons page URL.
+		 * Options page URL.
 		 *
 		 * @since 2.5.10
 		 */
 		$options_page_url = admin_url(
 			add_query_arg(
 				array(
-					'page' => WPGlobus::OPTIONS_PAGE_SLUG
+					'page' => WPGlobus::OPTIONS_PAGE_SLUG,
 				),
 				'admin.php'
 			)
@@ -473,7 +470,8 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		/**
 		 * Build the flags URL.
 		 *
-		 * @since 2.2.3
+		 * @since        2.2.3
+		 * @noinspection DuplicatedCode
 		 */
 		$flags_url = array();
 		foreach ( WPGlobus::Config()->enabled_languages as $language ) {
@@ -501,19 +499,25 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				$__post['disabled'] = true;
 			}
 		}
- 
+
 		/**
-		 * @see includes\class-wpglobus-config.php for config options.
+		 * See   includes\class-wpglobus-config.php for config options.
+		 *
 		 * @since 2.2.14
 		 */
-		$key_option = array();
+		$key_option                       = array();
 		$key_option['switcherButtonType'] = 'block_editor_switcher_plugin_button_type';
-		
+
 		$options = array();
-		foreach($key_option as $key=>$option) {
+		/**
+		 * Unused $key
+		 *
+		 * @noinspection PhpUnusedLocalVariableInspection
+		 */
+		foreach ( $key_option as $key => $option ) {
 			$options[ $option ] = '';
 			if ( ! empty( WPGlobus::Config()->$option ) ) {
-				$options[$option] = WPGlobus::Config()->$option;
+				$options[ $option ] = WPGlobus::Config()->$option;
 			}
 		}
 
@@ -525,28 +529,28 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		$switcher_items = array(
 			'top' => array(
 				'containerClassName' => 'flex-row',
-				'elements' => array(
+				'elements'           => array(
 					array(
 						'tagName' => 'img',
-						'props' => array(
+						'props'   => array(
 							'className' => 'wpglobus-switcher-panel__flag',
-							'style'  	=> array(),
-							'src' 	 	=> '{{flagUrl}}',
-						)
+							'style'     => array(),
+							'src'       => '{{flagUrl}}',
+						),
 					),
 					array(
-						'tagName' => 'Button',
-						'props' => array(
+						'tagName'  => 'Button',
+						'props'    => array(
 							'className' => 'button-switch',
-							'style'		=> array(),
-							'href' 		=> '{{href}}',
-							'isSmall' 	=> true,
+							'style'     => array(),
+							'href'      => '{{href}}',
+							'isSmall'   => true,
 							'isPrimary' => true,
 						),
-						'children' => '{{LanguageName}}'
-					)
-				)	
-			)	
+						'children' => '{{LanguageName}}',
+					),
+				),
+			),
 		);
 
 		$data = array(
@@ -567,13 +571,13 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			'store_link'           => WPGlobus::URL_WPGLOBUS_SHOP,
 			'__post'               => $__post,
 			'block_editor_tab_url' => $block_editor_tab_url,
-			'options_page_url' 	   => $options_page_url,
+			'options_page_url'     => $options_page_url,
 			'disabled_entities'    => WPGlobus::Config()->disabled_entities,
-			'options'			   => $options,
-			'enabledOptionsTab'	   => true,
-			'keyOption'		       => $key_option,
-			'switcherItems'    	   => $switcher_items,
-			'data'				   => $__data
+			'options'              => $options,
+			'enabledOptionsTab'    => true,
+			'keyOption'            => $key_option,
+			'switcherItems'        => $switcher_items,
+			'data'                 => $__data,
 		);
 
 		/**
@@ -582,10 +586,10 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 		 *
 		 * @since 2.2.14
 		 *
-		 * @param array  $data An array with data.
+		 * @param array $data An array with data.
 		 */
 		$data = apply_filters( 'wpglobus_block_editor_localize_data', $data );
-			
+
 		wp_register_script(
 			'wpglobus-gutenberg',
 			WPGlobus::plugin_dir_url() . 'includes/builders/gutenberg/assets/js/wpglobus-gutenberg' . WPGlobus::SCRIPT_SUFFIX() . '.js',
@@ -626,8 +630,12 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 	 * Callback for 'add_meta_box' function.
 	 */
 	public function callback__meta_box() {
-		echo $this->get_language_field(); // phpcs:ignore WordPress.Security.EscapeOutput
+		$this->e_language_field();
+		/**
+		 * Action wpglobus_gutenberg_metabox
+		 *
+		 * @since 1.9.17
+		 */
 		do_action( 'wpglobus_gutenberg_metabox' );
 	}
-
 }
