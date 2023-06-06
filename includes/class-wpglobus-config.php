@@ -1,27 +1,26 @@
 <?php
 /**
- * @package   WPGlobus
- */
-
-/**
  * Class WPGlobus_Config
  */
 class WPGlobus_Config {
 
 	/**
 	 * Language by default
+	 *
 	 * @var string
 	 */
 	public $default_language = 'en';
 
 	/**
 	 * Current language. Should be set to default initially.
+	 *
 	 * @var string
 	 */
 	public $language = 'en';
 
 	/**
 	 * Enabled languages
+	 *
 	 * @var string[]
 	 */
 	public $enabled_languages = array(
@@ -34,12 +33,14 @@ class WPGlobus_Config {
 
 	/**
 	 * Hide from URL language by default
+	 *
 	 * @var bool
 	 */
 	public $hide_default_language = true;
 
 	/**
 	 * Opened languages
+	 *
 	 * @var string[]
 	 */
 	public $open_languages = array();
@@ -47,18 +48,21 @@ class WPGlobus_Config {
 	/**
 	 * Flag images configuration
 	 * Look in /flags/ directory for a huge list of flags for usage
+	 *
 	 * @var array
 	 */
 	public $flag = array();
 
 	/**
 	 * Location of flags (needs trailing slash!)
+	 *
 	 * @var string
 	 */
 	public $flags_url = '';
 
 	/**
 	 * Path to flags.
+	 *
 	 * @var array
 	 * @since 1.9.17
 	 */
@@ -66,6 +70,7 @@ class WPGlobus_Config {
 	
 	/**
 	 * Location of flags.
+	 *
 	 * @var array
 	 * @since 1.9.17
 	 */	
@@ -73,24 +78,28 @@ class WPGlobus_Config {
 	
 	/**
 	 * Stores languages in pairs code=>name
+	 *
 	 * @var array
 	 */
 	public $language_name = array();
 
 	/**
 	 * Stores languages names in English
+	 *
 	 * @var array
 	 */
 	public $en_language_name = array();
 
 	/**
 	 * Stores locales
+	 *
 	 * @var array
 	 */
 	public $locale = array();
 
 	/**
 	 * Stores enabled locales
+	 *
 	 * @since 1.0.10
 	 * @var array
 	 */
@@ -98,12 +107,14 @@ class WPGlobus_Config {
 
 	/**
 	 * Stores version and update from WPGlobus Mini info
+	 *
 	 * @var array
 	 */
 	public $version = array();
 
 	/**
 	 * Use flag name for navigation menu : 'name' || 'code' || ''
+	 *
 	 * @var string
 	 */
 	public $show_flag_name = 'code';
@@ -111,12 +122,14 @@ class WPGlobus_Config {
 	/**
 	 * Use navigation menu by slug
 	 * for use in all nav menu set value to 'all'
+	 *
 	 * @var string
 	 */
 	public $nav_menu = '';
 
 	/**
 	 * Add language selector to navigation menu which was created with wp_list_pages
+	 *
 	 * @since 1.0.7
 	 * @var bool
 	 */
@@ -124,78 +137,93 @@ class WPGlobus_Config {
 
 	/**
 	 * Custom CSS
+	 *
 	 * @var string
 	 */
 	public $custom_css = '';
 
 	/**
 	 * WPGlobus option key
+	 *
 	 * @var string
 	 */
 	public $option = 'wpglobus_option';
 
 	/**
 	 * WPGlobus option versioning key
+	 *
 	 * @var string
 	 */
 	public static $option_versioning = 'wpglobus_option_versioning';
 
 	/**
 	 * WPGlobus option key for $language_name
+	 *
 	 * @var string
 	 */
 	public $option_language_names = 'wpglobus_option_language_names';
 
 	/**
 	 * WPGlobus option key for $en_language_name
+	 *
 	 * @var string
 	 */
 	public $option_en_language_names = 'wpglobus_option_en_language_names';
 
 	/**
 	 * WPGlobus option key for $locale
+	 *
 	 * @var string
 	 */
 	public $option_locale = 'wpglobus_option_locale';
 
 	/**
 	 * WPGlobus option key for $flag
+	 *
 	 * @var string
 	 */
 	public $option_flags = 'wpglobus_option_flags';
 
 	/**
 	 * WPGlobus option key for meta settings
+	 *
 	 * @var string
 	 */
 	public $option_post_meta_settings = 'wpglobus_option_post_meta_settings';
 
 	/**
 	 * WPGlobus option key for registered post types.
+	 *
 	 * @since 2.2.24
 	 * @var string
 	 */	
 	public $option_register_post_types = 'wpglobus_option_register_post_types';
 
 	/**
+	 * Var
+	 *
 	 * @var string
 	 */
 	public $css_editor = '';
 
 	/**
+	 * Var
+	 *
 	 * @var string
 	 */
 	public $js_editor = '';
 
 	/**
 	 * WPGlobus devmode.
+	 *
 	 * @var string
 	 */
 	public $toggle = 'on';
 
 	/**
-	 * @todo Refactor this
 	 * Duplicate var @see WPGlobus
+	 *
+	 * @todo Refactor this
 	 * @var array
 	 */
 	public $disabled_entities = array();
@@ -209,6 +237,8 @@ class WPGlobus_Config {
 	public $extended_options = array();
 
 	/**
+	 * Var
+	 *
 	 * @var array
 	 * @since 1.8.0
 	 */
@@ -216,6 +246,7 @@ class WPGlobus_Config {
 
 	/**
 	 * Used to temporarily store the language detected from the URL processed by oembed.
+	 *
 	 * @var  string
 	 * @since 1.8.4
 	 */
@@ -292,6 +323,7 @@ class WPGlobus_Config {
 
 	/**
 	 * Setter.
+	 *
 	 * @param string $language_for_oembed
 	 * @since 1.8.4
 	 */
@@ -305,6 +337,8 @@ class WPGlobus_Config {
 	public function __construct() {
 
 		/**
+		 * Update
+		 *
 		 * @since 1.0.9 Hooked to 'plugins_loaded'. The 'init' is too late, because it happens after all plugins already loaded their translations.
 		 * @since 2.5.17 Change the priority for compatibility with `woocommerce-pdf-invoices-italian-add-on`, 
 		 * it seems that calling init_current_language() in plugin_loaded hook with priority 0 is too late, with -1 it works fine.
@@ -340,7 +374,7 @@ class WPGlobus_Config {
 		add_action( 'upgrader_process_complete', array( $this, 'on_activate' ), 10, 2 );
 
 
-		$this->_get_options();
+		$this->get_options();
 	}
 
 	/**
@@ -357,6 +391,7 @@ class WPGlobus_Config {
 
 	/**
 	 * Set the current language: if not found in the URL or REFERER, then keep the default
+	 *
 	 * @since 1.1.1
 	 */
 	public function init_current_language() {
@@ -377,8 +412,9 @@ class WPGlobus_Config {
 			 * because it's always `admin-ajax`.
 			 * Therefore, we'll rely on the HTTP_REFERER (if it exists).
 			 */
-			if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) { // WPCS: input var ok, sanitization ok.
-				$url_to_check = $_SERVER['HTTP_REFERER']; // WPCS: input var ok, sanitization ok.
+			$_SERVER_HTTP_REFERER = WPGlobus_WP::http_referer();
+			if ( $_SERVER_HTTP_REFERER ) {
+				$url_to_check = $_SERVER_HTTP_REFERER;
 			}
 		} else {
 			/**
@@ -399,15 +435,17 @@ class WPGlobus_Config {
 				$this->language = $language_from_url;
 			}
 			/**
-			 * @since 1.9.17
 			 * Set language for builder.
 			 * For compatibility we set language here for front-end only.
-			 * As for the setting in admin @see wpglobus\includes\builders\class-wpglobus-config-builder.php
+			 * As for the setting in admin see wpglobus\includes\builders\class-wpglobus-config-builder.php
+			 *
+			 * @since 1.9.17
 			 */
 			if ( $this->builder && ! is_admin() ) {
 				/**
 				 * We can work with Gutenberg that was defined as front-end but we should set 'language' for real front-end without builder.
 				 * Any builder may have behavior like Gutenberg.
+				 *
 				 * @todo check each builder that WPGlobus will be support.
 				 */
 				if ( ! $this->builder->is_builder_page() ) {
@@ -425,16 +463,13 @@ class WPGlobus_Config {
 	 * @param array    $options
 	 *
 	 * @return void
+	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public function on_activate(
-		/** @noinspection PhpUnusedParameterInspection */
-		$object = null,
-		$options = array()
-	) {
+	public function on_activate( $object = null, $options = array() ) {
 
 		if (
-			empty( $options['plugin'] ) or $options['plugin'] !== WPGLOBUS_PLUGIN_BASENAME or
-			empty( $options['action'] ) or $options['action'] !== 'update'
+			empty( $options['plugin'] ) || ( WPGLOBUS_PLUGIN_BASENAME !== $options['plugin'] ) ||
+			empty( $options['action'] ) || ( 'update' !== $options['action'] )
 		) {
 			/**
 			 * Not our business
@@ -476,11 +511,13 @@ class WPGlobus_Config {
 
 	/**
 	 * Check for enabled locale
+	 *
 	 * @since 1.0.10
 	 *
 	 * @param string $locale
 	 *
 	 * @return boolean
+	 * @noinspection PhpUnused
 	 */
 	public function is_enabled_locale( $locale ) {
 		return in_array( $locale, $this->enabled_locale, true );
@@ -488,6 +525,7 @@ class WPGlobus_Config {
 
 	/**
 	 * Load textdomain
+	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
@@ -520,6 +558,8 @@ class WPGlobus_Config {
 
 		/**
 		 * Load our translations.
+		 *
+		 * @since 1.9.10
 		 */
 		$locale = apply_filters( 'plugin_locale', is_admin() ? get_user_locale() : get_locale(), $domain );
 
@@ -547,11 +587,14 @@ class WPGlobus_Config {
 
 	/**
 	 * Set flags URL.
+	 *
 	 * @return void
 	 */
-	public function _set_flags_url() {
+	public function set_flags_url() {
 		$this->flags_url = WPGlobus::$PLUGIN_DIR_URL . 'flags/';
 		/**
+		 * Update
+		 *
 		 * @since 1.9.17
 		 */
 		$this->flag_urls['small'] = WPGlobus::$PLUGIN_DIR_URL . 'flags/';
@@ -560,9 +603,10 @@ class WPGlobus_Config {
 
 	/**
 	 * Set flag PATH.
+	 *
 	 * @return void
 	 */
-	public function _set_flag_path() {
+	public function set_flag_path() {
 		$this->flag_path['small'] = WPGlobus::$PLUGIN_DIR_PATH . 'flags/';
 		$this->flag_path['big']   = WPGlobus::$PLUGIN_DIR_PATH . 'flags/big/';
 	}	
@@ -570,7 +614,7 @@ class WPGlobus_Config {
 	/**
 	 * Set languages by default.
 	 */
-	public function _set_languages() {
+	public function set_languages() {
 
 		/**
 		 * Names, flags and locales.
@@ -636,9 +680,9 @@ class WPGlobus_Config {
 	/**
 	 * Initialize the language table with the hard-coded names, locales and flags.
 	 *
-	 * @see _set_languages For the hard-coded table.
+	 * @see set_languages For the hard-coded table.
 	 */
-	protected function _init_language_table() {
+	protected function init_language_table() {
 
 		update_option( $this->option_language_names, $this->language_name );
 		update_option( $this->option_en_language_names, $this->en_language_name );
@@ -649,16 +693,17 @@ class WPGlobus_Config {
 
 	/**
 	 * Get options from DB and wp-config.php
+	 *
 	 * @return void
 	 */
-	protected function _get_options() {
+	protected function get_options() {
 
 		/**
 		 * For developers use only. Re-creates language table with no warning! Irreversible!
 		 *
 		 * @link wp-admin/?wpglobus-reset-language-table=1
 		 */
-		if ( ! defined( 'DOING_AJAX' ) && ! empty( $_GET['wpglobus-reset-language-table'] ) && is_admin() ) { // WPCS: input var ok, sanitization ok.
+		if ( ! defined( 'DOING_AJAX' ) && ! empty( WPGlobus_WP::get_http_get_parameter(  'wpglobus-reset-language-table' ) ) && is_admin() ) {
 			delete_option( $this->option_language_names );
 		}
 
@@ -692,12 +737,12 @@ class WPGlobus_Config {
 		/**
 		 * Set flags URL
 		 */
-		$this->_set_flags_url();
+		$this->set_flags_url();
 
 		/**
 		 * Set flags PATH.
 		 */		
-		$this->_set_flag_path();
+		$this->set_flag_path();
 
 		/**
 		 * Get languages name.
@@ -707,8 +752,8 @@ class WPGlobus_Config {
 
 		if ( empty( $this->language_name ) ) {
 
-			$this->_set_languages();
-			$this->_init_language_table();
+			$this->set_languages();
+			$this->init_language_table();
 
 		}
 
@@ -718,8 +763,8 @@ class WPGlobus_Config {
 		$this->locale = get_option( $this->option_locale );
 		if ( empty( $this->locale ) ) {
 
-			$this->_set_languages();
-			$this->_init_language_table();
+			$this->set_languages();
+			$this->init_language_table();
 
 		}
 
@@ -756,7 +801,7 @@ class WPGlobus_Config {
 		$this->nav_menu = '';
 
 		if ( isset( $wpglobus_option['use_nav_menu'] ) ) {
-			if ( '--none--' != $wpglobus_option['use_nav_menu'] ) {
+			if ( '--none--' !== $wpglobus_option['use_nav_menu'] ) {
 				$this->nav_menu = $wpglobus_option['use_nav_menu'];
 			}
 			unset( $wpglobus_option['use_nav_menu'] );
@@ -770,10 +815,11 @@ class WPGlobus_Config {
 
 		/**
 		 * Get selector_wp_list_pages option
+		 *
 		 * @since 1.0.7
 		 */
 		if ( empty( $wpglobus_option['selector_wp_list_pages']['show_selector'] ) ||
-		     (int) $wpglobus_option['selector_wp_list_pages']['show_selector'] === 0
+			 0 === (int) $wpglobus_option['selector_wp_list_pages']['show_selector']
 		) {
 			$this->selector_wp_list_pages = false;
 		}
@@ -791,6 +837,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Get custom JS.
+		 *
 		 * @since 1.7.6
 		 */
 		if ( isset( $wpglobus_option['js_editor'] ) ) {
@@ -800,6 +847,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Old fashioned language switcher for Block Editor (Gutenberg).
+		 *
 		 * @since 2.2.3
 		 */
 		if ( isset( $wpglobus_option['block_editor_old_fashioned_language_switcher'] ) ) {
@@ -809,6 +857,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Type of switcher button for WPGlobusSwitcherPlugin (Gutenberg).
+		 *
 		 * @since 2.2.14
 		 */
 		if ( isset( $wpglobus_option['block_editor_switcher_plugin_button_type'] ) ) {
@@ -818,6 +867,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Get status of the block editor for managing widgets.
+		 *
 		 * @since 2.8.0
 		 */
 		if ( isset( $wpglobus_option['use_widgets_block_editor'] ) ) {
@@ -827,6 +877,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Type of hreflang tag. Language- and region-specific hreflang.
+		 *
 		 * @since 2.3.4
 		 */
 		if ( isset( $wpglobus_option['seo_hreflang_type'] ) ) {
@@ -836,6 +887,7 @@ class WPGlobus_Config {
 
 		/**
 		 * Type of hreflang tag for default language. Language- and region-specific hreflang for default language.
+		 *
 		 * @since 2.3.4
 		 */
 		if ( isset( $wpglobus_option['seo_hreflang_default_language_type'] ) ) {
@@ -864,7 +916,7 @@ class WPGlobus_Config {
 		/**
 		 * WPGlobus devmode.
 		 */
-		if ( isset( $_GET['wpglobus'] ) && 'off' === $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
+		if ( 'off' === WPGlobus_WP::get_http_get_parameter( 'wpglobus' ) ) {
 			$this->toggle = 'off';
 		} else {
 			$this->toggle = 'on';
@@ -874,13 +926,15 @@ class WPGlobus_Config {
 		 * Need additional check for devmode (toggle=OFF)
 		 * in case 'wpglobus' was not set to 'off' at /wp-admin/post.php
 		 * and $_SERVER[QUERY_STRING] is empty at the time of `wp_insert_post_data` action
+		 *
 		 * @see WPGlobus::on_save_post_data
 		 */
+		$_SERVER_HTTP_REFERER = WPGlobus_WP::http_referer();
 		if (
-			empty( $_SERVER['QUERY_STRING'] ) // WPCS: input var ok, sanitization ok.
-			&& isset( $_SERVER['HTTP_REFERER'] ) // WPCS: input var ok, sanitization ok.
+			empty( $_SERVER['QUERY_STRING'] )
+			&& $_SERVER_HTTP_REFERER
 			&& WPGlobus_WP::is_pagenow( 'post.php' )
-			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'wpglobus=off' ) // WPCS: input var ok, sanitization ok.
+			&& false !== strpos( $_SERVER_HTTP_REFERER, 'wpglobus=off' )
 		) {
 			$this->toggle = 'off';
 		}
@@ -891,11 +945,12 @@ class WPGlobus_Config {
 
 		/**
 		 * Builders.
+		 *
 		 * @since 1.9.17
 		 */
 		if ( isset( $wpglobus_option['builder_disabled'] ) && 1 === (int) $wpglobus_option['builder_disabled'] ) {
-		
-			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+
+			require_once dirname( __FILE__ ) . '/builders/class-wpglobus-config-builder.php';
 			$this->builder = new WPGlobus_Config_Builder(false);
 			
 			$this->builder_disabled = true;
@@ -906,6 +961,8 @@ class WPGlobus_Config {
 			$this->builder_disabled = false;
 
 			/**
+			 * Check
+			 *
 			 * @since 2.2.11
 			 */
 			if ( empty( $wpglobus_option['builder_post_types'] ) ) {
@@ -934,7 +991,7 @@ class WPGlobus_Config {
 			}
 
 			if ( ! empty( $post_types_disabled ) ) {
-				foreach( $post_types_disabled as $_post_type=>$status ) {
+				foreach ( $post_types_disabled as $_post_type => $status ) {
 					if ( array_key_exists($_post_type, $builder_default_post_types) ) {
 						$builder_default_post_types[$_post_type] = false;
 					}
@@ -944,10 +1001,10 @@ class WPGlobus_Config {
 			if ( empty($builder_post_types) ) {
 				$builder_post_types = $builder_default_post_types;
 			} else {
-				$builder_post_types = array_merge( $builder_default_post_types,  $builder_post_types );
+				$builder_post_types = array_merge( $builder_default_post_types, $builder_post_types );
 			}
 
-			require_once dirname( __FILE__ ).'/builders/class-wpglobus-config-builder.php' ; 
+			require_once dirname( __FILE__ ) . '/builders/class-wpglobus-config-builder.php';
 			$this->builder = new WPGlobus_Config_Builder(
 				true, 
 				array(
@@ -960,18 +1017,20 @@ class WPGlobus_Config {
 			);
 			
 			/**
-			 * @since 2.8.9 Added support REST API requests.
+			 * Added support for REST API requests
+			 *
+			 * @since 2.8.9
 			 */
 			if ( is_admin() || WPGlobus_WP::is_rest_api_request() ) {
 		
 				require_once dirname( __FILE__ ) . '/class-wpglobus-config-vendor.php';
 				$config_vendor = WPGlobus_Config_Vendor::get_instance( $this->builder );
 
-				require_once dirname( __FILE__ ).'/admin/meta/class-wpglobus-meta.php' ; 
+				require_once dirname( __FILE__ ) . '/admin/meta/class-wpglobus-meta.php';
 				WPGlobus_Meta::get_instance( $config_vendor::get_meta_fields(), $this->builder );
 				$this->meta = $config_vendor::get_meta_fields();
-				
-				require_once dirname( __FILE__ ).'/wp_options/class-wpglobus-wp_options.php' ; 
+
+				require_once dirname( __FILE__ ) . '/wp_options/class-wpglobus-wp_options.php';
 				WPGlobus_WP_Options::get_instance( $config_vendor::get_wp_options() );
 
 				$this->builder->set_multilingual_fields($config_vendor::get_ml_fields());
@@ -979,6 +1038,8 @@ class WPGlobus_Config {
 		}
 
 		/**
+		 * Check
+		 *
 		 * @since 2.2.11
 		 */
 		if ( isset( $wpglobus_option['post_type'] ) ) {
@@ -987,12 +1048,14 @@ class WPGlobus_Config {
 		
 		/**
 		 * Remaining wpglobus options after unset() is extended options
+		 *
 		 * @since 1.2.3
 		 */
 		$this->extended_options = $wpglobus_option;
 		
 		/**
 		 * Option browser_redirect.
+		 *
 		 * @since 1.8.0
 		 */
 		if ( isset( $wpglobus_option['browser_redirect'] ) ) {
@@ -1001,6 +1064,4 @@ class WPGlobus_Config {
 		}
 	}
 
-} //class
-
-# --- EOF
+}
