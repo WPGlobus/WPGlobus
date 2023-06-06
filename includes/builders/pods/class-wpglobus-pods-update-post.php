@@ -2,20 +2,19 @@
 /**
  * File: class-wpglobus-pods-update-post.php
  *
- * @since 2.3.0
+ * @since   2.3.0
  *
  * @package WPGlobus\Builders\Pods.
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 /**
  * Class WPGlobus_pods_Update_Post.
  */
-if ( ! class_exists( 'WPGlobus_pods_Update_Post' ) ) :
+if ( ! class_exists( 'WPGlobus_PODS_Update_Post' ) ) :
 
-	// phpcs:ignore PEAR.NamingConventions
-	class WPGlobus_pods_Update_Post extends WPGlobus_Builder_Update_Post {
-		
+	class WPGlobus_PODS_Update_Post extends WPGlobus_Builder_Update_Post {
+
 		/**
 		 * Constructor.
 		 */
@@ -24,12 +23,12 @@ if ( ! class_exists( 'WPGlobus_pods_Update_Post' ) ) :
 			parent::__construct( 'pods' );
 
 			/**
-			 * @see_file wpglobus\includes\class-wpglobus.php
+			 * See_file wpglobus\includes\class-wpglobus.php
 			 */
 			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10 );
 
 			/**
-			 * @todo incorrect the saving post in extra languages with priority = 10
+			 * Todo incorrect the saving post in extra languages with priority = 10
 			 */
 			add_filter( 'wp_insert_post_data', array( $this, 'filter__wp_insert_post_data' ), 100, 2 );
 
@@ -110,11 +109,6 @@ if ( ! class_exists( 'WPGlobus_pods_Update_Post' ) ) :
 			}
 
 			return $data;
-
 		}
-
 	}
-
 endif;
-
-# --- EOF
