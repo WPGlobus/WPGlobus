@@ -91,9 +91,9 @@ class WPGlobus_Utils {
 		$path_home = is_string( $path_home ) ? str_replace( '/', '\/', $path_home ) : '';
 
 		$re_host_part = '(https?:\/\/(?:.+\.)?' .
-		                str_replace( '.', '\.', $home_domain_tld ) .
-		                $path_home
-		                . ')';
+						str_replace( '.', '\.', $home_domain_tld ) .
+						$path_home
+						. ')';
 
 		/**
 		 * The "language" part (optional, not captured, will be thrown away)
@@ -163,7 +163,7 @@ class WPGlobus_Utils {
 		 * @example !^/(en|ru|pt)/!
 		 */
 		$re = '!^' . $path_home .
-		      '/(' . implode( '|', $config->enabled_languages ) . ')(?:/|$)' . '!';
+			  '/(' . implode( '|', $config->enabled_languages ) . ')(?:/|$)' . '!';
 
 		if ( preg_match( $re, $path, $match ) ) {
 			// Found language information
@@ -176,12 +176,13 @@ class WPGlobus_Utils {
 
 	/**
 	 * Check if was called by a specific function (could be any levels deep).
-	 * @deprecated 1.7.7 Use WPGlobus_WP::is_function_in_backtrace()
+	 *
 	 * @see        WPGlobus_WP::is_function_in_backtrace()
 	 *
 	 * @param string|callable $function_name Function name or array(class,function).
 	 *
 	 * @return bool True if Function is in backtrace.
+	 * @deprecated 1.7.7 Use WPGlobus_WP::is_function_in_backtrace()
 	 */
 	public static function is_function_in_backtrace( $function_name ) {
 		_deprecated_function( __METHOD__, 'WPGlobus 1.7.7', 'WPGlobus_WP::is_function_in_backtrace()' );
@@ -193,10 +194,11 @@ class WPGlobus_Utils {
 	 * Strip the prefix from the host name
 	 * http://www.example.com becomes example.com
 	 *
+	 * @since 1.0.12
+	 *
 	 * @param string $url
 	 *
 	 * @return string
-	 * @since 1.0.12
 	 */
 	public static function domain_tld( $url ) {
 
@@ -278,7 +280,7 @@ class WPGlobus_Utils {
 	 * @since 1.1.1
 	 */
 	public static function current_url() {
-		return \set_url_scheme( 'http://' . self::http_host() . self::request_uri('/') );
+		return \set_url_scheme( 'http://' . self::http_host() . self::request_uri( '/' ) );
 	}
 
 	/**
@@ -315,7 +317,7 @@ class WPGlobus_Utils {
 					$_hreflang_type = $language;
 					break;
 				case 'zz-zz':
-					$_hreflang_type = str_replace( '_', '-', strtolower($config->locale[ $language ]) );
+					$_hreflang_type = str_replace( '_', '-', strtolower( $config->locale[ $language ] ) );
 					break;
 				default :
 					// 'zz-ZZ'
@@ -324,7 +326,7 @@ class WPGlobus_Utils {
 			}
 
 			if ( $language == $config->default_language ) {
-				if ( ! empty($config->seo_hreflang_default_language_type) && $config->seo_hreflang_default_language_type ) {
+				if ( ! empty( $config->seo_hreflang_default_language_type ) && $config->seo_hreflang_default_language_type ) {
 					$_hreflang_type = $config->seo_hreflang_default_language_type;
 
 				}
@@ -342,6 +344,7 @@ class WPGlobus_Utils {
 
 	/**
 	 * Localize the current URL.
+	 *
 	 * @since 1.2.3
 	 *
 	 * @param string          $language Language to localize the URL to.
@@ -392,10 +395,11 @@ class WPGlobus_Utils {
 	/**
 	 * Localize wpglobus.com for use in outgoing links
 	 *
+	 * @since 1.2.6
+	 *
 	 * @param WPGlobus_Config $config
 	 *
 	 * @return string
-	 * @since 1.2.6
 	 */
 	public static function url_wpglobus_site( WPGlobus_Config $config = null ) {
 		if ( null === $config ) {
@@ -427,22 +431,14 @@ class WPGlobus_Utils {
 	/**
 	 * Secure access to scalars in $_GET.
 	 *
+	 * @deprecated 2.12.1
+	 *
 	 * @param string $key Index ($_GET[ $key ]).
 	 *
 	 * @return string The value or empty string if not exists or not scalar.
 	 */
 	public static function safe_get( $key ) {
-		$value = '';
-
-		if ( isset( $_GET[ $key ] ) ) { // Input var okay.
-			$get_key = $_GET[ $key ]; // Input var okay; sanitization okay.
-
-			if ( is_scalar( $get_key ) ) {
-				$value = sanitize_text_field( $get_key );
-			}
-		}
-
-		return $value;
+		return WPGlobus_WP::get_http_get_parameter( $key );
 	}
 
 	/**
@@ -452,26 +448,26 @@ class WPGlobus_Utils {
 	 */
 
 	/**
+	 * @param string $language
+	 *
+	 * @return bool
 	 * @deprecated
 	 * @codeCoverageIgnore
 	 * Return true if language is in array of opened languages, otherwise false
 	 *
-	 * @param string $language
-	 *
-	 * @return bool
 	 */
 	public static function is_open( $language ) {
 		return in_array( $language, WPGlobus::Config()->open_languages, true );
 	}
 
 	/**
-	 * @deprecated
-	 * @codeCoverageIgnore
-	 *
 	 * @param string $s
 	 * @param string $n
 	 *
 	 * @return bool
+	 * @deprecated
+	 * @codeCoverageIgnore
+	 *
 	 */
 	public static function starts_with( $s, $n ) {
 		if ( strlen( $n ) > strlen( $s ) ) {
