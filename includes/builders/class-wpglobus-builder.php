@@ -174,6 +174,7 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 		 * Get hidden "wpglobus-language" field.
 		 *
 		 * @since 1.9.17
+		 * @since 2.12.1 Use {@see e_language_field()} for PHPCS.
 		 * @return string
 		 */
 		public function get_language_field() {
@@ -182,7 +183,19 @@ if ( ! class_exists( 'WPGlobus_Builder' ) ) :
 			 *
 			 * @todo may be add special function to get hidden language field.
 			 */
-			return '<input type="hidden" id="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" name="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" value="' . esc_attr( $this->get_current_language() ) . '" />';
+			ob_start();
+			$this->e_language_field();
+			return ob_get_clean();
+		}
+
+		/**
+		 * Output hidden "wpglobus-language" field.
+		 *
+		 * @since 2.12.1
+		 * @return void
+		 */
+		public function e_language_field() {
+			echo '<input type="hidden" id="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" name="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" value="' . esc_attr( $this->get_current_language() ) . '" />';
 		}
 
 		/**
