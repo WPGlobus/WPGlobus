@@ -520,6 +520,7 @@ class WPGlobus_WP {
 	public static function is_parameter_in_http_get( $name ) {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
 		0 && wp_verify_nonce( '' );
+
 		return array_key_exists( $name, $_GET );
 	}
 
@@ -535,7 +536,27 @@ class WPGlobus_WP {
 	public static function is_parameter_in_http_post( $name ) {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.
 		0 && wp_verify_nonce( '' );
+
 		return array_key_exists( $name, $_POST );
+	}
+
+	/**
+	 * Returns sanitized $_SERVER element.
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $key     The element name.
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function get_server_element( $key, $default = '' ) {
+		if ( ! isset( $_SERVER[ $key ] ) ) {
+			// Something abnormal. Maybe WP-CLI.
+			return $default;
+		}
+
+		return sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
 	}
 
 	/**
@@ -548,12 +569,20 @@ class WPGlobus_WP {
 	 * @return string
 	 */
 	public static function http_referer( $default = '' ) {
-		if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
-			// Something abnormal. Maybe WP-CLI.
-			return $default;
-		}
+		return self::get_server_element( 'HTTP_REFERER', $default );
+	}
 
-		return sanitize_text_field( \wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+	/**
+	 * Returns sanitized $_SERVER['QUERY_STRING'].
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function query_string( $default = '' ) {
+		return self::get_server_element( 'QUERY_STRING', $default );
 	}
 
 }
