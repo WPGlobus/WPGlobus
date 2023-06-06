@@ -3,17 +3,15 @@
  * File: class-wpglobus-yoast_seo-update-post.php
  *
  * @package WPGlobus\Builders\Yoast_SEO
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
-/**
- * Class WPGlobus_yoast_seo_Update_Post.
- */
+if ( ! class_exists( 'WPGlobus_Yoast_SEO_Update_Post' ) ) :
 
-if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
-
-	// phpcs:ignore PEAR.NamingConventions
-	class WPGlobus_yoast_seo_Update_Post extends WPGlobus_Builder_Update_Post {
+	/**
+	 * Class WPGlobus_yoast_seo_Update_Post.
+	 */
+	class WPGlobus_Yoast_SEO_Update_Post extends WPGlobus_Builder_Update_Post {
 
 		/**
 		 * Current taxonomy.
@@ -22,6 +20,8 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 
 		/**
 		 * WP_Term object.
+		 *
+		 * @var WP_Term
 		 */
 		protected $tag;
 
@@ -34,7 +34,8 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 
 			global $pagenow;
 
-			if ( 'edit-tags.php' === $pagenow && 'editedtag' === $_POST['action'] ) { // phpcs:ignore WordPress.CSRF.NonceVerification
+			$_POST_action = WPGlobus_WP::get_http_post_parameter( 'action' );
+			if ( 'edit-tags.php' === $pagenow && 'editedtag' === $_POST_action ) {
 				/**
 				 * Update button was clicked.
 				 */
@@ -42,12 +43,12 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 			}
 
 			/**
-			 * @see_file wpglobus\includes\class-wpglobus.php
+			 * See_file wpglobus\includes\class-wpglobus.php
 			 */
 			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10 );
 
 			/**
-			 * @todo incorrect the saving post in extra languages with priority = 10
+			 * Todo incorrect the saving post in extra languages with priority = 10
 			 */
 			add_filter( 'wp_insert_post_data', array( $this, 'filter__wp_insert_post_data' ), 100, 2 );
 
@@ -70,8 +71,8 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 
 			$current_language = WPGlobus::Config()->builder->get_language();
 
-			$tag_ID   = (int) $_POST['tag_ID'];
-			$taxonomy = $_POST['taxonomy']; // phpcs:ignore WordPress.CSRF.NonceVerification
+			$tag_ID   = (int) WPGlobus_WP::get_http_post_parameter( 'tag_ID' );
+			$taxonomy = WPGlobus_WP::get_http_post_parameter( 'taxonomy' );
 
 			$this->tag = get_term( $tag_ID, $taxonomy );
 
@@ -85,7 +86,7 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 
 			if ( is_wp_error( $this->tag ) ) {
 				/**
-				 * @todo Investigate.
+				 * Todo Investigate.
 				 */
 				return;
 			}
@@ -96,7 +97,8 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 
 				if ( $lang === $current_language ) {
 
-					$text = trim( $_POST['description'] ); // phpcs:ignore WordPress.CSRF.NonceVerification
+					0 && wp_verify_nonce( '' );
+					$text = trim( isset($_POST['description']) ? wp_kses_post( $_POST['description'] ) : '' );
 					if ( ! empty( $text ) ) {
 						$new_desc[ $lang ] = $text;
 					}
@@ -123,21 +125,14 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 		 * @param array  $args     Arguments passed to wp_update_term().
 		 *
 		 * @return array
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public function filter__update_term_data(
-			$data,
-			/** @noinspection PhpUnusedParameterInspection */
-			$term_id,
-			/** @noinspection PhpUnusedParameterInspection */
-			$taxonomy,
-			/** @noinspection PhpUnusedParameterInspection */
-			$args
-		) {
+		public function filter__update_term_data( $data, $term_id, $taxonomy, $args ) {
 
 			if ( is_wp_error( $this->tag ) ) {
 				/**
-				 * @todo Investigate.
-				 * may be to use $args.
+				 * Todo Investigate.
+				 * maybe to use $args.
 				 */
 				return $data;
 			}
@@ -188,6 +183,7 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 			 * Prevent to filter disabled post type.
 			 *
 			 * @since 2.1.4
+			 * @noinspection DuplicatedCode
 			 */
 			if ( in_array( $data['post_type'], WPGlobus::Config()->disabled_entities, true ) ) {
 				return $data;
@@ -255,5 +251,4 @@ if ( ! class_exists( 'WPGlobus_yoast_seo_Update_Post' ) ) :
 		}
 
 	}
-
 endif;
