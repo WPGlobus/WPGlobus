@@ -12,7 +12,7 @@ class WPGlobus_Core {
 
 	/**
 	 * The main filter function.
-	 * Default behavior: extracts text in one language from multi-lingual strings.
+	 * Default behavior: extracts text in one language from multilingual strings.
 	 *
 	 * @param string $text             Multilingual text, with special delimiters between languages
 	 * @param string $language         The code of the language to be extracted from the `$text`
@@ -84,7 +84,7 @@ class WPGlobus_Core {
 					'end'   => WPGlobus::LOCALE_TAG_END,
 				),
 				/**
-				 * qTranslate compatibility
+				 * For qTranslate compatibility
 				 * qTranslate uses these two types of delimiters
 				 *
 				 * @example
@@ -162,12 +162,14 @@ class WPGlobus_Core {
 		 */
 		if ( ! $is_local_text_found ) {
 			if ( WPGlobus::RETURN_EMPTY === $return ) {
-				// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIF
 				if ( $language === $default_language && ! self::has_translations( $text ) ) {
 					/**
-					 * @todo Check the above condition. What if only one part is true?
+					 * Todo Check the above condition. What if only one part is true?
 					 * If text does not contain language delimiters nothing to do
+					 *
+					 * @noinspection PhpUnusedLocalVariableInspection
 					 */
+					$_noop = true;
 				} else {
 					/** We are forced to return empty string. */
 					$text = '';
@@ -195,7 +197,7 @@ class WPGlobus_Core {
 					$text = self::text_filter( $text, $default_language );
 				}
 			}
-			/** else - we do not change the input string, and it will be returned as-is */
+			/** Else - we do not change the input string, and it will be returned as-is */
 		}
 
 		return $text;
@@ -354,7 +356,7 @@ class WPGlobus_Core {
 	/**
 	 * Keeps only one language in all textual fields of the `$post` object.
 	 *
-	 * @see \WPGlobus_Core::text_filter for the parameters description
+	 * @see WPGlobus_Core::text_filter for the parameters description
 	 *
 	 * @param WP_Post|mixed $post The Post object. Object always passed by reference.
 	 * @param string        $language
@@ -428,6 +430,4 @@ class WPGlobus_Core {
 	}
 
 
-} // class
-
-# --- EOF
+}
