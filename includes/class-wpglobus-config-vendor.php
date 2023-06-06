@@ -3,7 +3,7 @@
  * File: class-wpglobus-config-vendor.php
  *
  * @package WPGlobus
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
@@ -13,7 +13,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 	 */
 	class WPGlobus_Config_Vendor {
 
-		const PLUGIN_CONFIG_FILES = 'configs/*.json';
+		/*		const PLUGIN_CONFIG_FILES = 'configs/*.json';*/
 
 		const PLUGIN_CONFIG_DIR = 'configs/';
 
@@ -25,33 +25,45 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		protected static $instance;
 
 		/**
+		 * Var
+		 *
 		 * @var array
 		 */
 		protected static $config = array();
 
 		/**
+		 * Var
+		 *
 		 * @var array|null
 		 */
 		protected static $post_meta_fields = null;
 
 		/**
+		 * Var
+		 *
 		 * @var array|null
 		 */
 		protected static $post_ml_fields = null;
 
 		/**
+		 * Var
+		 *
 		 * @since 2.8.9
 		 * @var array|null
 		 */
 		protected static $term_meta_fields = null;
 
 		/**
+		 * Var
+		 *
 		 * @since 2.8.9
 		 * @var array|null
 		 */
 		protected static $term_ml_fields = null;
 
 		/**
+		 * Var
+		 *
 		 * @var array|null
 		 */
 		protected static $wp_options = null;
@@ -106,21 +118,21 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		 * @return array|false
 		 */
 		public static function get_meta_fields() {
-		
+
 			$meta_fields = false;
-			
-			if ( ! is_null( self::$post_meta_fields ) && ! empty( self::$post_meta_fields )  ) {
+
+			if ( ! is_null( self::$post_meta_fields ) && ! empty( self::$post_meta_fields ) ) {
 				$meta_fields = self::$post_meta_fields;
 			}
 
-			if ( ! is_null( self::$term_meta_fields ) && ! empty( self::$term_meta_fields )  ) {
+			if ( ! is_null( self::$term_meta_fields ) && ! empty( self::$term_meta_fields ) ) {
 				if ( $meta_fields ) {
 					$meta_fields = array_merge( $meta_fields, self::$term_meta_fields );
 				} else {
 					$meta_fields = self::$term_meta_fields;
 				}
 			}
-			
+
 			return $meta_fields;
 		}
 
@@ -170,7 +182,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 */
 			if ( defined( 'WPSEO_VERSION' ) ) {
 				/**
-				 * check 'WPSEO_PREMIUM_PLUGIN_FILE' for premium add-on.
+				 * Check 'WPSEO_PREMIUM_PLUGIN_FILE' for premium add-on.
 				 */
 				self::$vendors[] = 'yoast-seo.json';
 			}
@@ -212,6 +224,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/**
 			 * Pods – Custom Content Types and Fields.
 			 * https://wordpress.org/plugins/pods/
+			 *
 			 * @since 2.3.0
 			 */
 			if ( defined( 'PODS_VERSION' ) ) {
@@ -221,11 +234,12 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/**
 			 * Rank Math SEO.
 			 * https://wordpress.org/plugins/seo-by-rank-math/
-			 * @since 2.4.3 
+			 *
+			 * @since 2.4.3
 			 * obsolete @since 2.8.9 Info from self::$add_on['rank_math_seo'] @see `wpglobus\includes\builders\class-wpglobus-builders.php` is enough.
 			 */
 			// if ( defined( 'RANK_MATH_VERSION' ) ) {
-				// self::$vendors[] = 'rank-math-seo.json'; 
+			// self::$vendors[] = 'rank-math-seo.json';
 			// }
 
 			/**
@@ -237,28 +251,29 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			 */
 
 			// TODO: builder ID can be a string or `false`. Need to refactor this condition or the `get_id` method.
-			// phpcs:ignore WordPress.PHP.StrictComparisons
-			if ( self::$builder->get_id() != '' && self::$builder->is_builder_page() ) {
+			if ( self::$builder->get_id() !== '' && self::$builder->is_builder_page() ) {
 
 				$addons = WPGlobus_Builders::get_addons();
 				if ( ! empty( $addons ) ) {
 					foreach ( $addons as $key => $addon ) {
 
 						/**
+						 * Check
+						 *
 						 * @since 2.8.9
-						 */		
+						 */
 						if ( empty( $addon['config_file'] ) ) {
 							continue;
 						}
-						
+
 						if ( 'add-on' === $addon['role'] ) {
 							if ( ! empty( $addon['const'] ) && defined( $addon['const'] ) ) {
-								self::$vendors[$key] = $addon['config_file'];
+								self::$vendors[ $key ] = $addon['config_file'];
 							}
 						} elseif ( 'builder' === $addon['role'] ) {
 							if ( ! empty( $addon['const'] ) && defined( $addon['const'] ) ) {
-								self::$vendors[$key] = $addon['config_file'];
-							}							
+								self::$vendors[ $key ] = $addon['config_file'];
+							}
 						}
 					}
 				}
@@ -267,11 +282,11 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			/**
 			 * Now handle with config files.
 			 */
-			foreach ( self::$vendors as $id=>$file ) {
+			foreach ( self::$vendors as $id => $file ) {
 				if ( is_readable( $config_plugin_dir . $file ) ) {
-					self::$config[ $id ] = json_decode( file_get_contents( $config_plugin_dir . $file ), true );
+					self::$config[ $id ] = json_decode( WPGlobus_WP::fs_get_contents( $config_plugin_dir . $file ), true );
 					/**
-					 * @todo Add warning if file is incorrect. @since 2.8.9
+					 * Todo Add warning if file is incorrect. @since 2.8.9
 					 */
 				}
 			}
@@ -298,10 +313,15 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 			/**
 			 * Parse term meta fields.
-			 */			
+			 */
 			self::$term_meta_fields = array();
 			self::$term_ml_fields   = array();
 
+			/**
+			 * Unused $vendor_key
+			 *
+			 * @noinspection PhpUnusedLocalVariableInspection
+			 */
 			foreach ( self::$config as $vendor_key => $data ) {
 
 				if ( isset( $data['term_meta_fields'] ) && is_array( $data['term_meta_fields'] ) ) :
@@ -310,14 +330,14 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 						if ( isset( $data['term_meta_fields'][ $_meta ] ) ) {
 
-							if ( '*' === $_meta ) {
+							if ( '*' !== $_meta ) {
+								self::$term_meta_fields[] = $_meta;
+								// } else {
 								// @todo Add in future version.
 								// $_arr = self::get_term_meta_fields( $_meta, $_init );
 								// if ( ! empty( $_arr ) ) {
-									// self::$term_meta_fields = array_merge( self::$term_meta_fields, $_arr );
+								// self::$term_meta_fields = array_merge( self::$term_meta_fields, $_arr );
 								// }
-							} else {
-								self::$term_meta_fields[] = $_meta;
 							}
 						}
 					}
@@ -328,14 +348,14 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 					foreach ( $data['term_ml_fields'] as $_meta => $_init ) {
 						if ( isset( $data['term_ml_fields'][ $_meta ] ) ) {
 
-							if ( '*' === $_meta ) {
+							if ( '*' !== $_meta ) {
+								self::$term_ml_fields[] = $_meta;
+								// } else {
 								// @todo Add in future version.
 								// $_arr = self::get_term_ml_fields( $_meta, $_init );
 								// if ( ! empty( $_arr ) ) {
-									// self::$term_ml_fields = array_merge( self::$term_ml_fields, $_arr );
+								// self::$term_ml_fields = array_merge( self::$term_ml_fields, $_arr );
 								// }
-							} else {
-								self::$term_ml_fields[] = $_meta;
 							}
 						}
 					}
@@ -350,11 +370,9 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		 * @param array $_init
 		 *
 		 * @return array|false
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public static function get_post_ml_fields(
-			/** @noinspection PhpUnusedParameterInspection */
-			$_meta, $_init
-		) {
+		public static function get_post_ml_fields( $_meta, $_init ) {
 
 			if ( ! self::$builder->is_builder_page() ) {
 				/**
@@ -374,7 +392,11 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			// phpcs:ignore
 			// $file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file']; // TODO remove
 
-			/** @var WPGlobus_Acf_2 $class */
+			/**
+			 * WPGlobus_Acf_2
+			 *
+			 * @var string $class
+			 */
 			$class = empty( $_init['class'] ) ? '' : $_init['class'];
 
 			if ( ! empty( $class ) && class_exists( $class ) ) {
@@ -391,11 +413,9 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 		 * @param array $_init
 		 *
 		 * @return array|false
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		public static function get_post_meta_fields(
-			/** @noinspection PhpUnusedParameterInspection */
-			$_meta, $_init
-		) {
+		public static function get_post_meta_fields( $_meta, $_init ) {
 
 			if ( ! self::$builder->is_builder_page() ) {
 				/**
@@ -414,44 +434,50 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 			$file = empty( $_init['file'] ) ? '' : WPGlobus::$PLUGIN_DIR_PATH . 'includes/' . $_init['file'];
 
-			/** @var WPGlobus_Acf_2 $class */
+			/**
+			 * WPGlobus_Acf_2
+			 *
+			 * @var string $class
+			 */
 			$class = empty( $_init['class'] ) ? '' : $_init['class'];
 
 			if ( ! empty( $file ) && file_exists( $file ) ) {
-				/** @noinspection PhpIncludeInspection */
 				include_once $file;
 				if ( ! empty( $class ) && class_exists( $class ) ) {
 					/**
-					 * @since 2.1.3 Added post type parameter.
+					 * Added post type parameter
+					 *
+					 * @since 2.1.3
 					 */
 					$_post_meta_fields = $class::get_post_meta_fields( self::$builder->get( 'post_id' ), self::$builder->get( 'post_type' ) );
 				} else {
 					/**
 					 * Mark as being incorrectly called.
 					 */
-					_doing_it_wrong( 'Class `' . $class . '` (in ' . __FILE__ . ')', 'Check out `configs\*.json` files.', '2.3.0' );
+					_doing_it_wrong( esc_html( 'Class `' . $class . '` (in ' . __FILE__ . ')' ), 'Check out `configs\*.json` files.', '2.3.0' );
 				}
 			} else {
 				/**
 				 * Mark as being incorrectly called.
 				 */
-				_doing_it_wrong( 'File `' . $file . '` (in ' . __FILE__ . ')', 'Check out `configs\*.json` files.', '2.3.0' );
+				_doing_it_wrong( esc_html( 'File `' . $file . '` (in ' . __FILE__ . ')' ), 'Check out `configs\*.json` files.', '2.3.0' );
 			}
 
 			return $_post_meta_fields;
 		}
-		
+
 		/**
 		 * Parse config files.
 		 */
 		public static function parse_config() {
-			
+
 			/**
 			 * Get term meta fields.
+			 *
 			 * @since 2.8.9
 			 */
 			self::get_term_meta_fields();
-			
+
 			/**
 			 * Parse post meta fields.
 			 */
@@ -461,7 +487,10 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 				self::$post_ml_fields   = array();
 
 				/**
-				 * @since 2.8.9 Changed $vendor to $vendor_key.
+				 * Changed $vendor to $vendor_key
+				 *
+				 * @since        2.8.9
+				 * @noinspection PhpUnusedLocalVariableInspection
 				 */
 				foreach ( self::$config as $vendor_key => $data ) {
 
@@ -473,7 +502,7 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 
 								if ( '*' === $_meta ) {
 									$_arr = self::get_post_meta_fields( $_meta, $_init );
-									
+
 									if ( ! empty( $_arr ) ) {
 										self::$post_meta_fields = array_merge( self::$post_meta_fields, $_arr );
 									}
@@ -511,7 +540,10 @@ if ( ! class_exists( 'WPGlobus_Config_Vendor' ) ) :
 			if ( is_null( self::$wp_options ) ) {
 
 				/**
-				 * @since 2.8.9 Changed $vendor to $vendor_key.
+				 * Changed $vendor to $vendor_key
+				 *
+				 * @since        2.8.9
+				 * @noinspection PhpUnusedLocalVariableInspection
 				 */
 				foreach ( self::$config as $vendor_key => $data ) {
 
