@@ -2,58 +2,60 @@
 /**
  * File: class-wpglobus-rank_math_seo.php
  *
- * @since 2.4.3
+ * @since   2.4.3
  *
  * @package WPGlobus\Builders\RankMathSEO.
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
- 
+
 if ( ! class_exists( 'WPGlobus_RankMathSEO' ) ) :
 
 	/**
 	 * Class WPGlobus_RankMathSEO.
 	 */
 	class WPGlobus_RankMathSEO extends WPGlobus_Builder {
-		
+
 		/**
 		 * Current taxonomy.
 		 */
 		protected $taxonomy = null;
-		
+
 		/**
 		 * Constructor.
 		 */
 		public function __construct( $id = null ) {
-			
-			if ( is_null($id) ) {
+
+			if ( is_null( $id ) ) {
 				$id = WPGlobus::Config()->builder->get_id();
 			}
 
 			parent::__construct( $id );
-			
-			$this->taxonomy = WPGlobus::Config()->builder->get('taxonomy'); 
-			
-			if ( ! is_null($this->taxonomy) ) {
+
+			$this->taxonomy = WPGlobus::Config()->builder->get( 'taxonomy' );
+
+			if ( ! is_null( $this->taxonomy ) ) {
 
 				add_action( "{$this->taxonomy}_pre_edit_form", array( $this, 'on__pre_edit_form' ), 10, 2 );
-				
+
 				add_action( "{$this->taxonomy}_term_edit_form_top", array( $this, 'on__edit_form' ), 10, 2 );
-			}			
+			}
 
 		}
-		
+
 		/**
 		 * Fires before the Edit Term form for all taxonomies.
 		 *
 		 * @param object $tag      Current taxonomy term object.
 		 * @param string $taxonomy Current $taxonomy slug.
+		 *
+		 * @noinspection PhpUnusedParameterInspection
 		 */
 		public function on__pre_edit_form( $tag, $taxonomy ) {
 			/**
 			 * Init Name and Description in current language.
 			 */
-			$tag->description	= WPGlobus_Core::text_filter( $tag->description, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
-			$tag->name 			= WPGlobus_Core::text_filter( $tag->name, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
+			$tag->description = WPGlobus_Core::text_filter( $tag->description, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
+			$tag->name        = WPGlobus_Core::text_filter( $tag->name, $this->get_current_language(), WPGlobus::RETURN_EMPTY );
 		}
 
 		/**
@@ -62,12 +64,12 @@ if ( ! class_exists( 'WPGlobus_RankMathSEO' ) ) :
 		 *
 		 * @param object $tag      Current taxonomy term object.
 		 * @param string $taxonomy Current $taxonomy slug.
+		 *
+		 * @noinspection PhpUnusedParameterInspection
 		 */
 		public function on__edit_form( $tag, $taxonomy ) {
-			echo '<input type="hidden" name="'.WPGlobus::get_language_meta_key().'" value="'.$this->get_current_language().'">';
+			echo '<input type="hidden" name="' . esc_attr( WPGlobus::get_language_meta_key() ) . '" value="' . esc_attr( $this->get_current_language() ) . '">';
 		}
 	}
 
 endif;
-
-# --- EOF
