@@ -3,7 +3,7 @@
  * File: class-wpglobus-js_composer.php
  *
  * @package WPGlobus\Builders\WPBakeryPageBuilder
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
 
