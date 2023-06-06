@@ -46,7 +46,7 @@
     "!!svn:tag:remove": "cd wpsvn\\wpglobus && ndx svn rm tags/%npm_package_version% && svn stat",
     "// EXAMPLE tag remove": "cd wpsvn\\wpglobus && svn delete https://plugins.svn.wordpress.org/wpglobus/tags/2.2.12 -m \"Tags cleanup\" --username tivnetinc && svn up",
     "// --- DONE ---": "",
-    "phpcs": "phpcs.cmd -s ./includes ./wpglobus.php",
+    "phpcs": "phpcs.cmd --extensions=php,html,inc -s ./includes ./wpglobus.php",
     "cpz:dump": "composer dump-autoload -o",
     "cpz:dev": "composer update --ansi -o",
     "cpz:prod": "composer update --ansi --no-dev -o",

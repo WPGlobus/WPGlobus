@@ -18,6 +18,8 @@
         <exclude name="Generic.Commenting.DocComment.SpacingAfter" />
         <exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
         <exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma" />
+        <exclude name="Generic.Files.OneObjectStructurePerFile.MultipleFound" />
+        <exclude name="Generic.Classes.OpeningBraceSameLine.ContentAfterBrace" />
         <exclude name="PEAR.Functions.FunctionCallSignature" />
         <exclude name="Squiz.Commenting" />
         <exclude name="Squiz.PHP.DisallowSizeFunctionsInLoops.Found" />
