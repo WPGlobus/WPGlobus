@@ -3,17 +3,15 @@
  * File: class-wpglobus-js_composer-update-post.php
  *
  * @package WPGlobus\Builders\JS_Composer
- * @author  Alex Gor(alexgff)
+ * Author  Alex Gor(alexgff)
  */
 
-/**
- * Class WPGlobus_js_composer_Update_Post.
- */
+if ( ! class_exists( 'WPGlobus_JS_Composer_Update_Post' ) ) :
 
-if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
-
-	// phpcs:ignore PEAR.NamingConventions
-	class WPGlobus_js_composer_Update_Post extends WPGlobus_Builder_Update_Post {
+	/**
+	 * Class WPGlobus_JS_Composer_Update_Post.
+	 */
+	class WPGlobus_JS_Composer_Update_Post extends WPGlobus_Builder_Update_Post {
 
 		/**
 		 * Constructor.
@@ -21,14 +19,14 @@ if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
 		public function __construct() {
 
 			parent::__construct( 'js_composer' );
-			
+
 			/**
-			 * @see_file wpglobus\includes\class-wpglobus.php
+			 * See_file wpglobus\includes\class-wpglobus.php
 			 */
 			remove_action( 'wp_insert_post_data', array( 'WPGlobus', 'on_save_post_data' ), 10 );
 
 			/**
-			 * @todo incorrect the saving post in extra languages with priority = 10
+			 * Todo incorrect the saving post in extra languages with priority = 10
 			 */
 			add_filter( 'wp_insert_post_data', array( $this, 'filter__wp_insert_post_data' ), 100, 2 );
 
@@ -47,7 +45,8 @@ if ( ! class_exists( 'WPGlobus_js_composer_Update_Post' ) ) :
 			/**
 			 * Prevent to filter disabled post type.
 			 *
-			 * @since 2.1.4
+			 * @since        2.1.4
+			 * @noinspection DuplicatedCode
 			 */
 			if ( in_array( $data['post_type'], WPGlobus::Config()->disabled_entities, true ) ) {
 				return $data;
