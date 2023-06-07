@@ -1,11 +1,9 @@
 <?php
-/**
- * @package WPGlobus
- * @since   1.8.0
- */
 
 /**
  * Class WPGlobus_Redirect
+ *
+ * @since   1.8.0
  */
 class WPGlobus_Redirect {
 
@@ -28,11 +26,11 @@ class WPGlobus_Redirect {
 
 		$cookie_name = WPGlobus::_COOKIE;
 
-		if ( ! isset( $_COOKIE[ $cookie_name ] ) ) { // WPCS: input var ok, sanitization ok.
+		if ( ! isset( $_COOKIE[ $cookie_name ] ) ) {
 			/**
 			 * First visit.
 			 */
-			$browser_language = substr( $_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2 ); // WPCS: input var ok, sanitization ok.
+			$browser_language = substr( WPGlobus_WP::get_server_element( 'HTTP_ACCEPT_LANGUAGE' ), 0, 2 );
 			/* @noinspection SummerTimeUnsafeTimeManipulationInspection */
 			setcookie( $cookie_name, $browser_language, time() + 3600 * 24 * 365, '/' );
 			self::redirect( $browser_language );
@@ -49,7 +47,7 @@ class WPGlobus_Redirect {
 	 */
 	public static function redirect( $language ) {
 
-		if ( $language === WPGlobus::Config()->language ) {
+		if ( WPGlobus::Config()->language === $language ) {
 			// Already in that language.
 			return;
 		}
@@ -67,8 +65,10 @@ class WPGlobus_Redirect {
 		 * Filter the `$redirect_to` URL.
 		 * Returning a false value cancels redirect.
 		 *
-		 * @param string $redirect_to	URL redirect to.
-		 * @param string $language		Language redirect to.
+		 * @since 1.8.0
+		 *
+		 * @param string $redirect_to URL redirect to.
+		 * @param string $language    Language redirect to.
 		 *
 		 * @return string|false
 		 */
@@ -79,11 +79,11 @@ class WPGlobus_Redirect {
 		}
 
 		/**
-		 * @todo This is for the old versions of WPGlobus Plus that do not have the above filter.
+		 * Todo This is for the old versions of WPGlobus Plus that do not have the above filter.
 		 */
 		if ( class_exists( 'WPGlobusPlus_Publish' )
-		     && version_compare( WPGLOBUS_PLUS_VERSION, '1.1.31', '<' )
-		     && is_singular()
+			 && version_compare( WPGLOBUS_PLUS_VERSION, '1.1.31', '<' )
+			 && is_singular()
 		) {
 			$post_status = get_post_meta( get_the_ID(), WPGlobusPlus_Publish::LANGUAGE_POST_STATUS, true );
 			if ( isset( $post_status[ $language ] ) && 'draft' === $post_status[ $language ] ) {
@@ -92,8 +92,7 @@ class WPGlobus_Redirect {
 			}
 		}
 
-		wp_redirect( $redirect_to );
+		wp_safe_redirect( $redirect_to );
 		exit;
-
 	}
 }
