@@ -87,7 +87,7 @@ class WPGlobus_Utils {
 		 * are not localized.
 		 */
 		// Because `parse_url` may return `null`, do `str_replace` separately (PHP81 deprecated).
-		$path_home = parse_url( $home_url, PHP_URL_PATH );
+		$path_home = wp_parse_url( $home_url, PHP_URL_PATH );
 		$path_home = is_string( $path_home ) ? str_replace( '/', '\/', $path_home ) : '';
 
 		$re_host_part = '(https?:\/\/(?:.+\.)?' .
@@ -151,10 +151,10 @@ class WPGlobus_Utils {
 		}
 		// @codeCoverageIgnoreEnd
 
-		$path = parse_url( $url, PHP_URL_PATH );
+		$path = wp_parse_url( $url, PHP_URL_PATH );
 
 		// Because `parse_url` may return `null`, do `untrailingslashit` separately.
-		$path_home = parse_url( get_option( 'home' ), PHP_URL_PATH );
+		$path_home = wp_parse_url( get_option( 'home' ), PHP_URL_PATH );
 		$path_home = is_string( $path_home ) ? untrailingslashit( $path_home ) : '';
 
 		/**
@@ -163,7 +163,7 @@ class WPGlobus_Utils {
 		 * @example !^/(en|ru|pt)/!
 		 */
 		$re = '!^' . $path_home .
-			  '/(' . implode( '|', $config->enabled_languages ) . ')(?:/|$)' . '!';
+			  '/(' . implode( '|', $config->enabled_languages ) . ')(?:/|$)!';
 
 		if ( preg_match( $re, $path, $match ) ) {
 			// Found language information
@@ -207,6 +207,8 @@ class WPGlobus_Utils {
 		 * Short-circuit processing to provide own return for the cases not covered by the algorithm.
 		 * Ex. www.example.carrara-massa.it (carrara-massa.it is a TLD)
 		 *
+		 * @since 1.2.9
+		 *
 		 * @param string $pre Empty string. Return your domain_tld instead.
 		 * @param string $url The URL to extract domain_tld from.
 		 */
@@ -220,7 +222,7 @@ class WPGlobus_Utils {
 			$url = '//' . $url;
 		}
 
-		$host = parse_url( $url, PHP_URL_HOST );
+		$host = wp_parse_url( $url, PHP_URL_HOST );
 
 		if ( ! $host ) {
 			// parse_url failed. We cannot do much. Let's return the original url.
@@ -235,7 +237,7 @@ class WPGlobus_Utils {
 		 *
 		 * @link https://publicsuffix.org/list/
 		 */
-		$re         = '/([a-z0-9][a-z0-9\-]+\.[a-z\.]{2,6})$/';
+		$re         = '/([a-z0-9][a-z0-9\-]+\.[a-z.]{2,6})$/';
 		$domain_tld = $host;
 		if ( preg_match( $re, $host, $matches ) ) {
 			$domain_tld = $matches[1];
@@ -255,7 +257,7 @@ class WPGlobus_Utils {
 		$sz     = '';
 		$single = ( 1 === count( $translations ) );
 		foreach ( $translations as $language => $text ) {
-			if ( $single && $language === WPGlobus::Config()->default_language ) {
+			if ( $single && WPGlobus::Config()->default_language === $language ) {
 				$sz = $text;
 			} else {
 				$sz .= WPGlobus::add_locale_marks( $text, $language );
@@ -280,7 +282,7 @@ class WPGlobus_Utils {
 	 * @since 1.1.1
 	 */
 	public static function current_url() {
-		return \set_url_scheme( 'http://' . self::http_host() . self::request_uri( '/' ) );
+		return set_url_scheme( 'http://' . WPGlobus_WP::http_host() . WPGlobus_WP::request_uri( '/' ) );
 	}
 
 	/**
@@ -319,13 +321,13 @@ class WPGlobus_Utils {
 				case 'zz-zz':
 					$_hreflang_type = str_replace( '_', '-', strtolower( $config->locale[ $language ] ) );
 					break;
-				default :
+				default:
 					// 'zz-ZZ'
 					$_hreflang_type = str_replace( '_', '-', $config->locale[ $language ] );
 					break;
 			}
 
-			if ( $language == $config->default_language ) {
+			if ( $language === $config->default_language ) {
 				if ( ! empty( $config->seo_hreflang_default_language_type ) && $config->seo_hreflang_default_language_type ) {
 					$_hreflang_type = $config->seo_hreflang_default_language_type;
 
@@ -334,7 +336,7 @@ class WPGlobus_Utils {
 
 			$hreflangs[ $language ] = sprintf( '<link rel="alternate" hreflang="%s" href="%s"/>',
 				$_hreflang_type,
-				esc_url( WPGlobus_Utils::localize_current_url( $language, $config ) )
+				esc_url( self::localize_current_url( $language, $config ) )
 			);
 
 		}
@@ -358,6 +360,8 @@ class WPGlobus_Utils {
 		 * If a non-empty string is returned by the filter, then the `localize_url()`
 		 * won't be called.
 		 *
+		 * @since 1.2.3
+		 *
 		 * @param string $url      Empty string is passed.
 		 * @param string $language The language that the URL is going to be localized to.
 		 *
@@ -374,7 +378,7 @@ class WPGlobus_Utils {
 				$config = WPGlobus::Config();
 			}
 			// @codeCoverageIgnoreEnd
-			$url = WPGlobus_Utils::localize_url( WPGlobus_Utils::current_url(), $language, $config );
+			$url = self::localize_url( self::current_url(), $language, $config );
 		}
 
 		/**
@@ -387,9 +391,7 @@ class WPGlobus_Utils {
 		 *
 		 * @return string
 		 */
-		$url = apply_filters( 'wpglobus_after_localize_current_url', $url, $language );
-
-		return $url;
+		return apply_filters( 'wpglobus_after_localize_current_url', $url, $language );
 	}
 
 	/**
@@ -410,19 +412,19 @@ class WPGlobus_Utils {
 
 		$url = WPGlobus::URL_WPGLOBUS_SITE;
 		if ( 'ru' === $config->language ) {
-			$url .= 'ru' . '/';
+			$url .= 'ru/';
 		}
 
 		return $url;
 	}
 
 	/**
-	 * @codeCoverageIgnore
 	 * Return true if language is in array of enabled languages, otherwise false
 	 *
 	 * @param string $language
 	 *
 	 * @return bool
+	 * @codeCoverageIgnore
 	 */
 	public static function is_enabled( $language ) {
 		return in_array( $language, WPGlobus::Config()->enabled_languages, true );
@@ -431,43 +433,47 @@ class WPGlobus_Utils {
 	/**
 	 * Secure access to scalars in $_GET.
 	 *
-	 * @deprecated 2.12.1
-	 *
 	 * @param string $key Index ($_GET[ $key ]).
 	 *
 	 * @return string The value or empty string if not exists or not scalar.
+	 * @deprecated 2.12.1
+	 *
 	 */
 	public static function safe_get( $key ) {
 		return WPGlobus_WP::get_http_get_parameter( $key );
 	}
 
 	/**
-	 * @todo The methods below are not used by the WPGlobus plugin.
 	 * Need to check if they are used by any add-on.
 	 * Marking them as deprecated so they will pop-up on code inspection.
+	 *
+	 * @todo The methods below are not used by the WPGlobus plugin.
 	 */
 
 	/**
+	 * Return true if language is in array of opened languages, otherwise false
+	 *
 	 * @param string $language
 	 *
 	 * @return bool
 	 * @deprecated
 	 * @codeCoverageIgnore
-	 * Return true if language is in array of opened languages, otherwise false
 	 *
+	 * @noinspection PhpUnused
 	 */
 	public static function is_open( $language ) {
 		return in_array( $language, WPGlobus::Config()->open_languages, true );
 	}
 
 	/**
+	 * Method starts_with
+	 *
 	 * @param string $s
 	 * @param string $n
 	 *
 	 * @return bool
 	 * @deprecated
 	 * @codeCoverageIgnore
-	 *
 	 */
 	public static function starts_with( $s, $n ) {
 		if ( strlen( $n ) > strlen( $s ) ) {
@@ -475,7 +481,7 @@ class WPGlobus_Utils {
 		}
 
 		/* @noinspection SubStrUsedAsStrPosInspection */
-		return ( $n === substr( $s, 0, strlen( $n ) ) );
+		return ( substr( $s, 0, strlen( $n ) ) === $n );
 	}
 
 	/**
@@ -484,14 +490,11 @@ class WPGlobus_Utils {
 	 * @param string $default Default to return when unset.
 	 *
 	 * @return string
+	 * @deprecated 2.12.1
+	 *
 	 */
 	public static function request_uri( $default = '' ) {
-		if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
-			// Something abnormal.
-			return $default;
-		}
-
-		return \esc_url_raw( \wp_unslash( $_SERVER['REQUEST_URI'] ) );
+		return WPGlobus_WP::request_uri( $default );
 	}
 
 	/**
@@ -500,13 +503,10 @@ class WPGlobus_Utils {
 	 * @param string $default Default to return when unset.
 	 *
 	 * @return string
+	 * @deprecated 2.12.1
+	 *
 	 */
 	public static function http_host( $default = 'localhost' ) {
-		if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
-			// Something abnormal. Maybe WP-CLI.
-			return $default;
-		}
-
-		return \sanitize_text_field( \wp_unslash( $_SERVER['HTTP_HOST'] ) );
+		return WPGlobus_WP::http_host( $default );
 	}
 }
