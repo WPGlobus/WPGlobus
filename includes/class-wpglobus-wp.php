@@ -585,4 +585,16 @@ class WPGlobus_WP {
 		return self::get_server_element( 'QUERY_STRING', $default );
 	}
 
+	/**
+	 * Returns sanitized $_SERVER['HTTP_HOST'].
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string $default Default to return when unset.
+	 *
+	 * @return string
+	 */
+	public static function http_host( $default = 'localhost' ) {
+		return self::get_server_element( 'HTTP_HOST', $default );
+	}
 }
