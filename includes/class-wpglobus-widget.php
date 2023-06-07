@@ -1,6 +1,7 @@
 <?php
 /**
  * Widget
+ *
  * @since   1.0.7
  * @package WPGlobus
  */
@@ -12,7 +13,7 @@ class WPGlobusWidget extends WP_Widget {
 
 	/**
 	 * Array types of switcher
-	 * @access private
+	 *
 	 * @since  1.0.7
 	 * @var array
 	 */
@@ -49,6 +50,8 @@ class WPGlobusWidget extends WP_Widget {
 		$type = ! empty( $instance['type'] ) ? $instance['type'] : 'flags';
 
 		/**
+		 * Update
+		 *
 		 * @since 2.8.4
 		 */
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : 'Language switcher';
@@ -58,21 +61,22 @@ class WPGlobusWidget extends WP_Widget {
 		$enabled_languages = WPGlobus::Config()->enabled_languages;
 
 		switch ( $type ) :
-			case 'list' :
+			case 'list':
 				$code = '<div class="list">{{inside}}</div>';
 				break;
-			case 'list_with_flags' :
+			case 'list_with_flags':
 				$code = '<div class="list flags">{{inside}}</div>';
 				break;
-			case 'select' :
-			case 'select_with_code' :
+			case 'select':
+			case 'select_with_code':
 				$code =
 					'<div class="select-styled"><select onchange="document.location.href = this.value;">{{inside}}</select></div>';
 				break;
-			case 'dropdown' :
-			case 'dropdown_with_flags' :
+			case 'dropdown':
+			case 'dropdown_with_flags':
 				/**
-				 * @todo remove after testing.
+				 * Todo remove after testing.
+				 *
 				 * @since 1.6.9
 				 */
 				//$sorted[] = WPGlobus::Config()->language;
@@ -83,7 +87,7 @@ class WPGlobusWidget extends WP_Widget {
 				//}
 				//$enabled_languages = $sorted;
 
-				$code              = '<div class="dropdown-styled"> <ul>
+			$code = '<div class="dropdown-styled"> <ul>
 					  <li>
 						{{language}}
 						<ul>
@@ -123,9 +127,9 @@ class WPGlobusWidget extends WP_Widget {
 		 * @param array     $extra_languages 			 An array with extra languages to show off in menu.
 		 * @param string    WPGlobus::Config()->language The current language.
 		 */
-		$extra_languages = apply_filters( 'wpglobus/widget/extra_languages', $extra_languages, WPGlobus::Config()->language );		
-		
-		$enabled_languages = array_merge( (array)WPGlobus::Config()->language, $extra_languages );
+		$extra_languages = apply_filters( 'wpglobus/widget/extra_languages', $extra_languages, WPGlobus::Config()->language );
+
+		$enabled_languages = array_merge( (array) WPGlobus::Config()->language, $extra_languages );
 
 		/**
 		 * Filter enabled languages.
@@ -140,28 +144,29 @@ class WPGlobusWidget extends WP_Widget {
 		$enabled_languages = apply_filters( 'wpglobus/widget/enabled_languages', $enabled_languages, WPGlobus::Config()->language );
 		
 		/**
-		 * Class for link in a and option tags. Used for adding hash.
-		 * @see class wpglobus-selector-link
+		 * CSS class for link in a and option tags. Used for adding hash.
+		 *
 		 * @since 1.2.0
-	     */
+		 */
 		$link_classes['selector_link'] = 'wpglobus-selector-link';
 
 		/**
-		 * Class for flag box
+		 * CSS class for flag box
+		 *
 		 * @since 1.4.0
 		 */
 		$flag_classes = array();
 
 		/** 
-		 * @since 2.8.4
-		 *
 		 * This filter is documented in wp-includes/widgets/class-wp-widget-pages.php
+		 *
+		 * @since 2.8.4
 		 */
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 
-		echo $args['before_widget']; // WPCS: XSS ok.
+		echo wp_kses_post( $args['before_widget'] );
 		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . $title . $args['after_title']; // WPCS: XSS ok.
+			echo wp_kses_post( $args['before_title'] . $title . $args['after_title'] );
 		}
 		foreach ( $enabled_languages as $language ) :
 
@@ -177,18 +182,18 @@ class WPGlobusWidget extends WP_Widget {
 			 */
 			$flag_classes['current_language'] = '';
 
-			if ( $language == WPGlobus::Config()->language ) {
+			if ( WPGlobus::Config()->language === $language ) {
 				$selected = ' selected';
 				switch ( $type ) :
-					case 'flags' :
+					case 'flags':
 						$flag_classes['current_language'] = 'wpglobus-current-language';
-					break;
-					case 'list' :
-					case 'list_with_flags' :
-					case 'dropdown' :
-					case 'dropdown_with_flags' :
+						break;
+					case 'list':
+					case 'list_with_flags':
+					case 'dropdown':
+					case 'dropdown_with_flags':
 						$link_classes['current_language'] = 'wpglobus-current-language';
-					break;
+						break;
 				endswitch;
 			}
 
@@ -197,53 +202,52 @@ class WPGlobusWidget extends WP_Widget {
 			$flag = WPGlobus::Config()->flags_url . WPGlobus::Config()->flag[ $language ];
 
 			switch ( $type ) :
-				case 'flags' :
+				case 'flags':
 					$inside .= '<span class="flag ' . implode( ' ', $flag_classes ) . '">';
-					$inside .= 		'<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '"><img src="' . $flag . '"/></a>';
+					$inside .= 		'<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '"><img alt="" src="' . $flag . '"/></a>';
 					$inside .= '</span>';
 					break;
-				case 'list' :
-				case 'list_with_flags' :
+				case 'list':
+				case 'list_with_flags':
 					$inside .= '<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '">' .
-					           '<img src="' . $flag . '" alt=""/>' .
-					           ' ' .
-					           '<span class="name">' .
-					           WPGlobus::Config()->language_name[ $language ] .
-					           '</span>' .
-					           ' ' .
-					           '<span class="code">' . strtoupper( $language ) . '</span>' .
-					           '</a>';
+							   '<img src="' . $flag . '" alt=""/>' .
+							   ' ' .
+							   '<span class="name">' .
+							   WPGlobus::Config()->language_name[ $language ] .
+							   '</span>' .
+							   ' ' .
+							   '<span class="code">' . strtoupper( $language ) . '</span>' .
+							   '</a>';
 					break;
-				case 'select' :
+				case 'select':
 					$inside .= '<option class="' . implode( ' ', $link_classes ) . '" ' . $selected . ' value="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '</option>';
 					break;
-				case 'select_with_code' :
+				case 'select_with_code':
 					$inside .= '<option class="' . implode( ' ', $link_classes ) . '" ' . $selected . ' value="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</option>';
 					break;
-				case 'dropdown' :
-					if ( '' != $selected ) {
+				case 'dropdown':
+					if ( '' !== $selected ) {
 						$code =
 							str_replace( '{{language}}', '<a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</a>', $code );
 					} else {
 						$inside .= '<li><a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '">' . WPGlobus::Config()->language_name[ $language ] . '&nbsp;(' . strtoupper( $language ) . ')</a></li>';
 					}
 					break;
-				case 'dropdown_with_flags' :
-					if ( '' != $selected ) {
+				case 'dropdown_with_flags':
+					if ( '' !== $selected ) {
 						$code =
-							str_replace( '{{language}}', '<a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a>', $code );
+							str_replace( '{{language}}', '<a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '"><img alt="" src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a>', $code );
 					} else {
-						$inside .= '<li><a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '"><img src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a></li>';
+						$inside .= '<li><a class="' . implode( ' ', $link_classes ) . '" href="' . $url . '"><img alt="" src="' . $flag . '"/>&nbsp;&nbsp;' . WPGlobus::Config()->language_name[ $language ] . '</a></li>';
 					}
 					break;
 			endswitch;
 
 		endforeach;
 
-		echo str_replace( '{{inside}}', $inside, $code ); // WPCS: XSS ok.
+		echo wp_kses_post( str_replace( '{{inside}}', $inside, $code ) );
 
-		echo $args['after_widget']; // WPCS: XSS ok.
-
+		echo wp_kses_post( $args['after_widget'] );
 	}
 
 	/**
@@ -266,22 +270,26 @@ class WPGlobusWidget extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>"><?php echo esc_html__( 'Title' ); ?></label>
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<input type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
-			       name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_html( $instance['title'] ); ?>"/>
+					name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
+					value="<?php echo esc_html( $instance['title'] ); ?>"/>
 		</p>
 		<p><?php esc_html_e( 'Selector type', 'wpglobus' ); ?></p>
-		<p><?php
-			foreach ( $this->types as $type => $caption ) :
-				$checked = '';
-				if ( $selected_type == $type ) {
-					$checked = ' checked';
-				} ?>
+		<p>
+			<?php foreach ( $this->types as $type => $caption ) : ?>
+				<!--suppress HtmlFormInputWithoutLabel -->
 				<input type="radio"
-				       id="<?php echo esc_attr( $this->get_field_id( 'type' ) ) . '-' . $type; ?>"
-				       name="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>" <?php echo $checked; // WPCS: XSS ok. ?>
-				       value="<?php echo esc_attr( $type ); ?>"/> <?php echo $caption . '<br />'; // WPCS: XSS ok.
+						id="<?php echo esc_attr( $this->get_field_id( 'type' ) . '-' . $type ); ?>"
+						name="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>"
+					<?php checked( $type, $selected_type ); ?>
+						value="<?php echo esc_attr( $type ); ?>"/>
+				<?php
+				echo esc_html( $caption ) . '<br />';
 			endforeach;
-			?></p>        <?php
+			?>
+		</p>
+		<?php
 
 		return '';
 
@@ -306,5 +314,3 @@ class WPGlobusWidget extends WP_Widget {
 		return $instance;
 	}
 }
-
-# --- EOF
