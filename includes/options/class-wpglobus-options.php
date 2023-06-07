@@ -1159,7 +1159,7 @@ class WPGlobus_Options {
 			$_value_for_enabled_languages = $wpglobus_option['enabled_languages'];
 		}
 
-		$nav_menus = WPGlobus::_get_nav_menus();
+		$nav_menus = WPGlobus::get_nav_menus();
 
 		/**
 		 * Make 'Language Selector Menu' option.

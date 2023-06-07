@@ -982,7 +982,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				 *
 				 * @var array $nav_menus
 				 */
-				$nav_menus = WPGlobus::_get_nav_menus();
+				$nav_menus = WPGlobus::get_nav_menus();
 
 				$menus = array();
 
