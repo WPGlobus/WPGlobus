@@ -104,6 +104,8 @@ class WPGlobus_Options {
 		add_action( 'admin_print_styles', array( $this, 'on__admin_styles' ) );
 
 		/**
+		 * AJAX
+		 *
 		 * @since 2.2.14
 		 */
 		add_action( 'wp_ajax_' . WPGLOBUS_AJAX, array( $this, 'on__process_ajax' ) );
@@ -134,6 +136,8 @@ class WPGlobus_Options {
 		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
 		
 		/**
+		 * Set.
+		 *
 		 * @since 2.5.10
 		 */
 		if ( $this->current_page !== $this->page_slug ) {
@@ -270,7 +274,7 @@ class WPGlobus_Options {
 	/**
 	 * For WPGlobus Plus.
 	 *
-	 * @see \WPGlobusPlus_Menu::add_option
+	 * @see WPGlobusPlus_Menu::add_option
 	 *
 	 * @return array Field parameters.
 	 */
@@ -296,9 +300,9 @@ class WPGlobus_Options {
 	protected function setup_vars() {
 		$this->page_slug = WPGlobus::OPTIONS_PAGE_SLUG;
 
-		$this->current_page = WPGlobus_Utils::safe_get( 'page' );
+		$this->current_page = WPGlobus_WP::get_http_get_parameter( 'page' );
 
-		$_tab = WPGlobus_Utils::safe_get( 'tab' );
+		$_tab = WPGlobus_WP::get_http_get_parameter( 'tab' );
 		if ( empty( $_tab ) || ! is_string( $_tab ) ) {
 			$_tab = self::DEFAULT_TAB;
 		}
@@ -350,7 +354,11 @@ class WPGlobus_Options {
 						<div class="wpglobus-options-sidebar wpglobus-options-wrap__item">
 							<ul class="wpglobus-options-menu">
 								<?php foreach ( $this->sections as $section_tab => $section ) : ?>
-									<?php if ( empty( $section ) ) { continue; }; ?>
+									<?php
+									if ( empty( $section ) ) {
+										continue;
+									};
+									?>
 									<?php $section = $this->sanitize_section( $section ); ?>
 									<?php
 									// If section tab is not specified (old external sections?), create it from title.
@@ -361,7 +369,13 @@ class WPGlobus_Options {
 									<li id="wpglobus-tab-link-<?php echo esc_attr( $section_tab ); ?>"
 											class="<?php echo esc_attr( $section['li_class'] ); ?>"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
-										<a href="<?php echo esc_url( $section['tab_href'] ); ?>" <?php echo $section['onclick']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										<a href="<?php echo esc_url( $section['tab_href'] ); ?>"
+											<?php
+											// Disable A-clicks unless it's a real (external) link.
+											if ( empty( $section['externalLink'] ) || ! $section['externalLink'] ) {
+												echo ' onclick="return false;" ';
+											}
+											?>
 												data-tab="<?php echo esc_attr( $section_tab ); ?>">
 											<i class="<?php echo esc_attr( $section['icon'] ); ?>"></i>
 											<span class="group_title"><?php echo esc_html( $section['title'] ); ?></span>
@@ -373,7 +387,11 @@ class WPGlobus_Options {
 						<div class="wpglobus-options-main wpglobus-options-wrap__item">
 							<div class="wpglobus-options-info">
 								<?php foreach ( $this->sections as $section_tab => $section ) : ?>
-									<?php if ( empty( $section ) ) { continue; }; ?>
+									<?php
+									if ( empty( $section ) ) {
+										continue;
+									};
+									?>
 									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
 											class="wpglobus-options-tab"
 											data-tab="<?php echo esc_attr( $section_tab ); ?>">
@@ -392,12 +410,15 @@ class WPGlobus_Options {
 												}
 
 												$field_type = $field['type'];
-												$file       = apply_filters( "wpglobus_options_field_{$field_type}", '', $field );
+												/**
+												 * Filter wpglobus_options_field_{$field_type}
+												 *
+												 * @since 1.9.10
+												 */
+												$file = apply_filters( "wpglobus_options_field_{$field_type}", '', $field );
 												if ( $file && file_exists( $file ) ) :
 													/**
 													 * Intentionally "require" and not "require_once".
-													 *
-													 * @noinspection PhpIncludeInspection
 													 */
 													require $file;
 												endif;
@@ -444,14 +465,16 @@ class WPGlobus_Options {
 		check_admin_referer( self::NONCE_ACTION );
 
 		// Sanitize, and if OK then save the options and reload the page.
-		$posted_data = $this->sanitize_posted_data( $_POST[ $option_name ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$posted_data = $this->sanitize_posted_data( WPGlobus_WP::get_http_post_parameter(  $option_name ) );
 		if ( $posted_data ) {
 			update_option( $option_name, $posted_data );
 
 			// Need to get back to the current tab after reloading.
 			$tab = self::DEFAULT_TAB;
-			if ( ! empty( $_POST['wpglobus_options_current_tab'] ) ) {
-				$tab = sanitize_text_field( $_POST['wpglobus_options_current_tab'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+			$_POST_wpglobus_options_current_tab = WPGlobus_WP::get_http_post_parameter( 'wpglobus_options_current_tab' );
+			if ( $_POST_wpglobus_options_current_tab ) {
+				$tab = $_POST_wpglobus_options_current_tab;
 			}
 
 			wp_safe_redirect( WPGlobus_Admin_Page::url_options_panel( $tab ) );
@@ -469,8 +492,7 @@ class WPGlobus_Options {
 			'menu_title'    => 'WPGlobus',
 			'page_title'    => 'WPGlobus',
 			'page_slug'     => $this->page_slug,
-			// TODO.
-			'footer_credit' => '&copy; Copyright 2014-' . date( 'Y' ) .
+			'footer_credit' => '&copy; Copyright 2014-' . gmdate( 'Y' ) .
 							   ', <a href="' . WPGlobus_Utils::url_wpglobus_site() . '">TIV.NET INC. / WPGlobus</a>.',
 		);
 
@@ -528,6 +550,7 @@ class WPGlobus_Options {
 
 	/**
 	 * Set sections.
+	 *
 	 * @since 2.5.12 Moved filter to end of the function.
 	 */
 	protected function set_sections() {
@@ -583,6 +606,8 @@ class WPGlobus_Options {
 		
 		/**
 		 * Filter the array of sections. Here add-ons can add their menus.
+		 *
+		 * @since 2.5.12
 		 *
 		 * @param array $sections Array of sections.
 		 */
@@ -961,6 +986,7 @@ class WPGlobus_Options {
 	 * Recommend: WPGlobus Multi-currency.
 	 *
 	 * @return array
+	 * @noinspection PhpUnused
 	 */
 	protected function recommend_wpg_mc() {
 		if ( ! $this->is_plugin_installed( 'woocommerce' ) ) {
@@ -1041,19 +1067,19 @@ class WPGlobus_Options {
 				<blockquote>
 					<ul>
 						<li>
-							- <?php _e( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							- <?php echo wp_kses_post( __( '<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/моя-страница and so on);', 'wpglobus' ) ); ?>
 						</li>
 						<li>
-							- <?php _e( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							- <?php echo wp_kses_post( __( 'Postpone translation to some languages and <strong>publish only the translated texts</strong>;', 'wpglobus' ) ); ?>
 						</li>
 						<li>
-							- <?php _e( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							- <?php echo wp_kses_post( __( 'Maintain <strong>separate menus and widgets for each language</strong>;', 'wpglobus' ) ); ?>
 						</li>
 						<li>
-							- <?php _e( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							- <?php echo wp_kses_post( __( '<strong>Translate WooCommerce</strong> products and taxonomies;', 'wpglobus' ) ); ?>
 						</li>
 						<li>
-							- <?php _e( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							- <?php echo wp_kses_post( __( 'Enter separate focus keywords for each language in the <strong>Yoast SEO</strong>;', 'wpglobus' ) ); ?>
 						</li>
 					</ul>
 				</blockquote>
@@ -1285,6 +1311,8 @@ class WPGlobus_Options {
 	protected function section_post_types() {
 
 		/**
+		 * Set.
+		 *
 		 * @since 2.2.11
 		 */
 		$post_types = $this->get_post_types();
@@ -1446,6 +1474,8 @@ class WPGlobus_Options {
 			);
 
 		/**
+		 * Set.
+		 *
 		 * @since 2.2.23
 		 */
 		$fields[] =
@@ -1520,13 +1550,13 @@ class WPGlobus_Options {
 
 				$field_wrapper_style = '';
 
-				if ( $checked || in_array( $post_type->name, array( 'post', 'page' ) ) ) {
+				if ( $checked || in_array( $post_type->name, array( 'post', 'page' ), true ) ) {
 
-					if ( in_array( $post_type->name, array( 'post', 'page' ) ) ) {
+					if ( in_array( $post_type->name, array( 'post', 'page' ), true ) ) {
 						$disabled = true;
 					} else {
 						$checked = false;
-						if ( ! empty( $this->config->builder->post_types[ $post_type->name ] ) && $this->config->builder->post_types[ $post_type->name ] == 1 ) {
+						if ( ! empty( $this->config->builder->post_types[ $post_type->name ] ) && 1 === (int) $this->config->builder->post_types[ $post_type->name ] ) {
 							$checked = true;
 						}
 					}
@@ -1591,6 +1621,8 @@ class WPGlobus_Options {
 
 		if ( version_compare( $GLOBALS['wp_version'], '5.7.99', '<' ) ) {
 			/**
+			 * Return
+			 *
 			 * @since 2.8.0
 			 */
 			return array();
@@ -1617,19 +1649,21 @@ class WPGlobus_Options {
 				);
 				
 		} else {
-		
-			/** 
-			 * obsolete @since 2.8.6
-			$_desc = sprintf(
-				esc_html__( '%1$sAttention%2$s', 'wpglobus' ),
-				'<strong>',
-				'</strong>'
-			);
-			$_desc .= ': ' . esc_html__( 'The current version of WPGlobus does not support multililngual widgets with block editor', 'wpglobus' );
-			//*/
+
+			/**
+			 * Obsolete
+			 *
+			 * @since 2.8.6
+			 * $_desc = sprintf(
+			 * esc_html__( '%1$sAttention%2$s', 'wpglobus' ),
+			 * '<strong>',
+			 * '</strong>'
+			 * );
+			 * $_desc .= ': ' . esc_html__( 'The current version of WPGlobus does not support multilingual widgets with block editor', 'wpglobus' );
+			 * //*/
 			
 			$_checked = false;
-			if ( ! empty( $wpglobus_option['use_widgets_block_editor'] ) && 1 == $wpglobus_option['use_widgets_block_editor'] ) { // phpcs:ignore
+			if ( ! empty( $wpglobus_option['use_widgets_block_editor'] ) && 1 === (int) $wpglobus_option['use_widgets_block_editor'] ) {
 				$_checked = true;
 			}		
 			$fields[] =
@@ -1644,7 +1678,7 @@ class WPGlobus_Options {
 				);		
 
 			/**
-			 * @todo may be need to use this option too.
+			 * Todo may be need to use this option too.
 			$_checked = false;
 			if ( ! empty( $wpglobus_option['gutenberg_use_widgets_block_editor'] ) && 1 == $wpglobus_option['gutenberg_use_widgets_block_editor'] ) { // phpcs:ignore
 				$_checked = true;
@@ -1685,7 +1719,7 @@ class WPGlobus_Options {
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
 		$hreflang_type_default          = 'zz-ZZ';
-		$hreflang_type_default_language = false;
+		// $hreflang_type_default_language = false;
 
 		$hreflang_type                      = empty( $wpglobus_option['seo_hreflang_type'] ) ? $hreflang_type_default : $wpglobus_option['seo_hreflang_type'];
 		$hreflang_type_for_default_language = empty( $wpglobus_option['seo_hreflang_default_language_type'] ) ? false : $wpglobus_option['seo_hreflang_default_language_type'];
@@ -1693,6 +1727,7 @@ class WPGlobus_Options {
 		$home_url = home_url( '/' );
 
 		$_info_desc = '<strong>';
+
 		$_info_desc .= esc_html__( 'With the current settings, you will see the following lines in the section HEAD of your site pages', 'wpglobus' );
 		$_info_desc .= '&nbsp;';
 		$_info_desc .= esc_html__( '(example for two languages)', 'wpglobus' );
@@ -1715,23 +1750,24 @@ class WPGlobus_Options {
 				case 'zz-zz':
 					$_hreflang_type = str_replace( '_', '-', strtolower( WPGlobus::Config()->locale[ $language ] ) );
 					break;
-				default :
+				default:
 					// 'zz-ZZ'
 					$_hreflang_type = str_replace( '_', '-', WPGlobus::Config()->locale[ $language ] );
 					break;
 			}
 
-			if ( $language == WPGlobus::Config()->default_language ) {
+			if ( WPGlobus::Config()->default_language === $language ) {
 				if ( $hreflang_type_for_default_language ) {
 					$_hreflang_type = $hreflang_type_for_default_language;
 				}
 			}
 
-			$_draft     = str_replace(
+			$_draft = str_replace(
 				array( '{{code}}', '{{link}}' ),
 				array( $_hreflang_type, WPGlobus_Utils::localize_url( $home_url, $language ) ),
 				$draft
 			);
+
 			$_info_desc .= htmlspecialchars( $_draft, ENT_QUOTES, 'UTF-8' );
 			$_info_desc .= '<br />';
 
@@ -1791,6 +1827,8 @@ class WPGlobus_Options {
 		
 		if ( version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ) {
 			/**
+			 * Return
+			 *
 			 * @since 2.5.9
 			 */
 			return array();
@@ -1813,6 +1851,7 @@ class WPGlobus_Options {
 		}
 
 		$_info_desc = esc_html__( 'With WPGlobus, you can get translations for posts and pages using REST API.', 'wpglobus' );
+
 		$_info_desc .= '<br /><br />';
 
 		if ( ! empty( $_route_for_post ) ) {
@@ -1820,15 +1859,19 @@ class WPGlobus_Options {
 			$_info_desc .= esc_html__( 'For demonstration, you can try the first post that WordPress creates at the initial installation.', 'wpglobus' );
 			$_info_desc .= '<br />';
 			$_info_desc .= sprintf(
+					// Translators:
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
 				'<a href="' . $_url . '" target="_blank">',
 				$_url,
 				'</a>',
 				$_default_language_name
 			);
-			$_info_desc .= '<br />';
+
 			$_extra_url = WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] );
+
+			$_info_desc .= '<br />';
 			$_info_desc .= sprintf(
+					// Translators:
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
 				'<a href="' . $_extra_url . '" target="_blank">',
 				$_extra_url,
@@ -1840,6 +1883,7 @@ class WPGlobus_Options {
 		} else {
 
 			$_info_desc .= sprintf(
+			// Translators:
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
 				'<a href="' . $_url . '" target="_blank">',
 				$_url,
@@ -1848,6 +1892,7 @@ class WPGlobus_Options {
 			);
 			$_info_desc .= '<br />';
 			$_info_desc .= sprintf(
+			// Translators:
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
 				'<a href="' . $_url . '" target="_blank">',
 				WPGlobus_Utils::localize_url( $_url, WPGlobus::Config()->enabled_languages[1] ),
@@ -1859,6 +1904,7 @@ class WPGlobus_Options {
 
 		$_info_desc .= '<br />';
 		$_info_desc .= sprintf(
+		// Translators:
 			esc_html__( 'Please read the %1$sWordPress REST API documentation%2$s for more information.', 'wpglobus' ),
 			'<a href="https://developer.wordpress.org/rest-api/" target="_blank">',
 			'</a>'
@@ -1866,6 +1912,7 @@ class WPGlobus_Options {
 		$_info_desc .= '<br /><br />';
 
 		$_info_desc .= sprintf(
+		// Translators:
 			esc_html__( 'In the REST API response, you can find the %1$stranslation%2$s field, which shows whether translations exist for the fields %1$stitle%2$s, %1$scontent%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:', 'wpglobus' ),
 			'<code>',
 			'</code>'
@@ -1898,8 +1945,7 @@ class WPGlobus_Options {
 	 *
 	 * @since 1.9.14
 	 * @since 2.2.23 Move theme info to `Customize` section.
-	 *
-	 * @return array
+	 * @noinspection PhpUnused
 	 */
 	protected function section_debug_info() {
 		// @todo to use in future versions.
@@ -1927,19 +1973,24 @@ class WPGlobus_Options {
 
 		$buffer = array();
 
-		$handle = @fopen( $file, 'r' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
-		if ( $handle ) {
-			while ( ( $_buffer = fgets( $handle ) ) !== false ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition, Squiz.PHP.DisallowMultipleAssignments
-				$buffer[] = $_buffer;
+		// TODO: is this used? If yes, rewrite.
+		// phpcs:disable
+		if ( is_readable( $file ) ) {
+			$handle = fopen( $file, 'r' );
+			if ( $handle ) {
+				while ( ( $_buffer = fgets( $handle ) ) !== false ) {
+					$buffer[] = $_buffer;
+				}
+				/**
+				 * // if ( ! feof( $handle ) ) {.
+				 *
+				 * @todo add error handling.
+				 * // }
+				 */
+				fclose( $handle );
 			}
-			/**
-			 * // if ( ! feof( $handle ) ) {.
-			 *
-			 * @todo add error handling.
-			 * // }
-			 */
-			fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		}
+		// phpcs:enable
 
 		$buffers[ $file ] = $buffer;
 
@@ -2067,18 +2118,20 @@ class WPGlobus_Options {
 		// We need synchronize with $data['post_type'].
 		if ( ! empty( $data['post_type'] ) ) {
 			foreach ( $data['post_type'] as $post_type => $init ) {
-				if ( 0 == (int) $init && ! empty( $data['builder_post_types'][ $post_type ] ) ) {
+				if ( 0 === (int) $init && ! empty( $data['builder_post_types'][ $post_type ] ) ) {
 					unset( $data['builder_post_types'][ $post_type ] );
 				}
 			}
 		}
 
 		/**
+		 * SEO
+		 *
 		 * @see   section_seo()
 		 * @since 2.3.4
 		 */
 		if ( ! empty( $data['seo_hreflang_default_language_type'] ) ) {
-			if ( 1 == (int) $data['seo_hreflang_default_language_type'] ) {
+			if ( 1 === (int) $data['seo_hreflang_default_language_type'] ) {
 				$data['seo_hreflang_default_language_type'] = 'x-default';
 			} else {
 				unset( $data['seo_hreflang_default_language_type'] );
@@ -2173,6 +2226,8 @@ class WPGlobus_Options {
 		$section = $this->section_backward_compatibility( $section );
 
 		/**
+		 * Set.
+		 *
 		 * @since 2.5.4
 		 */
 		$_li_class = '';
@@ -2187,12 +2242,6 @@ class WPGlobus_Options {
 		} else {
 			// Real link specified. Use it and do not set the "tab switching" CSS class.
 			$section['li_class'] = 'wpglobus-tab-external' . $_li_class;
-		}
-
-		// Disable A-clicks unless it's a real (external) link.
-		$section['onclick'] = 'onclick="return false;"';
-		if ( ! empty( $section['externalLink'] ) && $section['externalLink'] ) {
-			$section['onclick'] = '';
 		}
 
 		// Use the generic icon if not specified or deprecated (Elusive).
@@ -2273,8 +2322,6 @@ class WPGlobus_Options {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			/**
 			 * Include plugin.php.
-			 *
-			 * @noinspection PhpIncludeInspection
 			 */
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
@@ -2338,6 +2385,8 @@ class WPGlobus_Options {
 	}
 
 	/**
+	 * Method on__process_ajax
+	 *
 	 * @since 2.2.14
 	 */
 	public function on__process_ajax() {
@@ -2351,7 +2400,7 @@ class WPGlobus_Options {
 		}
 
 		$option_name = WPGlobus::Config()->option; // don't use $config here.
-		$data        = $_POST['data'];
+		$data        = WPGlobus_WP::get_http_post_parameter( 'data' );
 
 		$response = array(
 			'message'  => 'Incorrect option.',
@@ -2359,7 +2408,7 @@ class WPGlobus_Options {
 			'result'   => 'error',
 		);
 
-		if ( 'saveOption' == $data['_action'] ) {
+		if ( 'saveOption' === $data['_action'] ) {
 			$opts = get_option( $option_name );
 			foreach ( $data['options'] as $option => $value ) {
 				$opts[ $option ] = sanitize_text_field( $value );
@@ -2372,7 +2421,7 @@ class WPGlobus_Options {
 			}
 		}
 
-		if ( 'success' == $response['result'] ) {
+		if ( 'success' === $response['result'] ) {
 			wp_send_json_success( $response );
 
 		}
