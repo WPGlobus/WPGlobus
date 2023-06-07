@@ -70,12 +70,11 @@ abstract class WPGlobus_Plugin {
 	 */
 	public function setup_updater() {
 		if ( $this->plugin_file && $this->product_id && $this->product_slug ) {
-			/* @noinspection PhpUndefinedClassInspection */
 			new TIVWP_Updater( array(
 				'plugin_file' => $this->plugin_file,
 				'product_id'  => $this->product_id,
 				'url_product' => WPGlobus::URL_WPGLOBUS_SITE . 'product/' .
-				                 $this->product_slug . '/',
+								 $this->product_slug . '/',
 			) );
 		}
 	}
@@ -92,5 +91,3 @@ abstract class WPGlobus_Plugin {
 		}
 	}
 }
-
-/* EOF */
