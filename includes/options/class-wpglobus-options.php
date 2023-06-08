@@ -94,6 +94,8 @@ class WPGlobus_Options {
 		$this->url_options_image = WPGlobus::$PLUGIN_DIR_URL . 'includes/options/images/';
 
 		/**
+		 * For developers use only. Deletes settings! Irreversible!
+		 *
 		 * @since 2.12.1
 		 */
 		add_action( 'admin_init', array($this, 'on__admin_init') );
@@ -117,6 +119,8 @@ class WPGlobus_Options {
 	}
 
 	/**
+	 * For developers use only. Deletes settings! Irreversible!
+	 *
 	 * @since 2.12.1
 	 */
 	public function on__admin_init() {
@@ -125,7 +129,11 @@ class WPGlobus_Options {
 			return;
 		}
 
-		/** @global wpdb $wpdb */
+		/**
+		 * WPDB
+		 *
+		 * @global wpdb $wpdb
+		 */
 		global $wpdb;
 
 		/**
@@ -135,7 +143,7 @@ class WPGlobus_Options {
 		 */
 		if ( 1 === (int) WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) && ! empty($_POST['_wpnonce']) ) { 
 
-			if ( wp_verify_nonce( $_POST['_wpnonce'], self::NONCE_ACTION ) ) {
+			if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), self::NONCE_ACTION ) ) {
 				
 				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );				
 				wp_safe_redirect( admin_url() );
@@ -391,7 +399,7 @@ class WPGlobus_Options {
 		 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
 		 * 
 		 */
-		if ( ! empty( $_GET['wpglobus-reset-all-options'] ) ) { ?>
+		if ( ! empty( WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) ) ) { ?>
 			<div class="wrap">
 				<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 				<form id="form-wpglobus-options" method="post">
@@ -399,9 +407,11 @@ class WPGlobus_Options {
 					<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Reset all options"></p>
 					<?php wp_nonce_field( self::NONCE_ACTION ); ?>								
 				</form>
-			</div><?php									
+			</div>
+			<?php
 			return;
-		} ?>
+		}
+		?>
 		<div class="wrap">
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 			<div id="wpglobus-options-old-browser-warning" class="notice notice-error">
@@ -419,7 +429,7 @@ class WPGlobus_Options {
 									<?php
 									if ( empty( $section ) ) {
 										continue;
-									};
+									}
 									?>
 									<?php $section = $this->sanitize_section( $section ); ?>
 									<?php
@@ -452,7 +462,7 @@ class WPGlobus_Options {
 									<?php
 									if ( empty( $section ) ) {
 										continue;
-									};
+									}
 									?>
 									<div id="section-tab-<?php echo esc_attr( $section_tab ); ?>"
 											class="wpglobus-options-tab"
@@ -2068,6 +2078,7 @@ class WPGlobus_Options {
 	 * @param string $filter Filter.
 	 *
 	 * @return array|bool
+	 * @noinspection PhpUnused
 	 */
 	protected function config_file_filter( $file = '', $filter = '' ) {
 
@@ -2081,6 +2092,11 @@ class WPGlobus_Options {
 		if ( empty( $filter ) ) {
 			return $_buffer;
 		} else {
+			/**
+			 * Unused $_id
+			 *
+			 * @noinspection PhpUnusedLocalVariableInspection
+			 */
 			foreach ( $_buffer as $_id => $_value ) {
 				if ( false !== strpos( $_value, $filter ) ) {
 					$buffer[] = $_value;
@@ -2490,4 +2506,3 @@ class WPGlobus_Options {
 		wp_send_json_error( $response );
 	}
 }
-
