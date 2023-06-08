@@ -1,6 +1,6 @@
 <?php
 /**
- * wpglobus_checkbox
+ * File wpglobus_checkbox
  */
 
 // Exit if accessed directly
@@ -61,6 +61,8 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_checkbox' ) ) :
 endif;
 
 /**
+ * Go
+ *
  * @global array $field
  * @see WPGlobus_Options::page_options
  */
