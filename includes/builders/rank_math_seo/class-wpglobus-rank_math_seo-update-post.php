@@ -2,7 +2,7 @@
 /**
  * File: class-wpglobus-rank_math_seo-update-post.php
  *
- * @since 2.4.3
+ * @since   2.4.3
  *
  * @package WPGlobus\Builders\RankMathSEO.
  * Author  Alex Gor(alexgff)
@@ -14,13 +14,13 @@ if ( ! class_exists( 'WPGlobus_Rank_Math_SEO_Update_Post' ) ) :
 	 * Class WPGlobus_rank_math_seo_Update_Post.
 	 */
 	class WPGlobus_Rank_Math_SEO_Update_Post extends WPGlobus_Builder_Update_Post {
-		
+
 		/**
 		 * Constructor.
 		 */
 		public function __construct( $id = null ) {
 
-			if ( is_null($id) ) {
+			if ( is_null( $id ) ) {
 				$id = WPGlobus::Config()->builder->get_id();
 			}
 

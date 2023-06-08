@@ -436,7 +436,6 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 			$i18n['elementorActionLink']       = $_url;
 		}
 
-
 		/**
 		 * Block editor tab URL.
 		 *
@@ -465,7 +464,6 @@ class WPGlobus_Gutenberg extends WPGlobus_Builder {
 				'admin.php'
 			)
 		);
-
 
 		/**
 		 * Build the flags URL.

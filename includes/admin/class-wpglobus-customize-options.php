@@ -533,7 +533,6 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			 *                                   Enter the lowercase theme name (not slug, no dashes).
 			 *                                   For example, to disable the "Parallax One" theme,
 			 *                                   enter 'parallax one'.
-			 *
 			 */
 			self::$disabled_themes = apply_filters( 'wpglobus_customizer_disabled_themes', self::$disabled_themes, self::$theme_name, self::$theme );
 		}
@@ -546,7 +545,7 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$result      = true;
 			$ajax_return = array();
 
-			$post_order = WPGlobus_WP::get_http_post_parameter('order');
+			$post_order = WPGlobus_WP::get_http_post_parameter( 'order' );
 
 			$order = array();
 			if ( $post_order ) {
@@ -554,17 +553,17 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 				$order['options']  = isset( $post_order['options'] ) ? $post_order['options'] : array();
 				$order['controls'] = isset( $post_order['controls'] ) ? $post_order['controls'] : array();
 			}
-			
+
 			/**
 			 * Prohibit saving options on the customizer page for an unauthorized user.
 			 *
 			 * @since 2.12.1
 			 */
-			if ( ! current_user_can('manage_options') ) {
-				$response['order'] = $order;
-				$response['status'] = 'error';
+			if ( ! current_user_can( 'manage_options' ) ) {
+				$response['order']   = $order;
+				$response['status']  = 'error';
 				$response['message'] = 'No access rights';
-				wp_send_json_error($response);
+				wp_send_json_error( $response );
 			}
 
 			switch ( $order['action'] ) {
@@ -847,7 +846,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 					'panel'    => 'wpglobus_settings_panel',
 				) );
 
-				$wp_customize->add_control( 'wpglobus_customize_add_onsZZZ', array(
+				$wp_customize->add_control( 'wpglobus_customize_add_onsZZZ',
+					array(
 						'section'  => self::$sections['wpglobus_help_section'],
 						'settings' => array(),
 						'type'     => 'button',
@@ -1348,7 +1348,6 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 						'panel'    => 'wpglobus_settings_panel',
 					) );
 
-
 					$wp_customize->add_setting( 'wpglobus_customize_js_editor', array(
 						'type'       => 'option',
 						'capability' => 'manage_options',
@@ -1428,7 +1427,8 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 						'panel'    => 'wpglobus_settings_panel',
 					) );
 
-					$wp_customize->add_control( 'wpglobus_customize_add_ons', array(
+					$wp_customize->add_control( 'wpglobus_customize_add_ons',
+						array(
 							'section'  => self::$sections['wpglobus_addons_section'],
 							'settings' => array(),
 							'type'     => 'button',

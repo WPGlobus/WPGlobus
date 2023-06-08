@@ -94,7 +94,6 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 				$this->field['class'] .= ' font-icons';
 			}
 
-
 			if ( ! empty( $this->field['options'] ) ) {
 				$multi = ( isset( $this->field['multi'] ) && $this->field['multi'] ) ? ' multiple="multiple"' : '';
 

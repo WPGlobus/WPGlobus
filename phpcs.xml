@@ -15,9 +15,9 @@
 
     <!-- Rules -->
     <rule ref="WordPress-Extra">
-        <exclude name="Generic.Commenting.DocComment.SpacingAfter" />
-        <exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
-        <exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma" />
+<!--        <exclude name="Generic.Commenting.DocComment.SpacingAfter" />-->
+<!--        <exclude name="Generic.Files.LineEndings.InvalidEOLChar" />-->
+<!--        <exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma" />-->
         <exclude name="Generic.Files.OneObjectStructurePerFile.MultipleFound" />
         <exclude name="Generic.Classes.OpeningBraceSameLine.ContentAfterBrace" />
         <exclude name="PEAR.Functions.FunctionCallSignature" />
@@ -27,8 +27,14 @@
         <exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
         <exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
         <exclude name="Squiz.PHP.DisallowSizeFunctionsInLoops.Found" />
-        <exclude name="Squiz.WhiteSpace" />
-        <exclude name="WordPress.Arrays" />
+<!--        <exclude name="Squiz.WhiteSpace" />-->
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fopen" />
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fclose" />
+<!--        <exclude name="WordPress.Arrays" />-->
+        <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys" />
+        <exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition" />
+        <exclude name="WordPress.DB.PreparedSQL.InterpolatedNotPrepared" />
+        <exclude name="WordPress.DB.PreparedSQL.NotPrepared" />
         <exclude name="WordPress.Files.FileName" />
         <exclude name="WordPress.NamingConventions" />
         <exclude name="WordPress.Security.ValidatedSanitizedInput.MissingUnslash" />

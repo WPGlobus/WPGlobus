@@ -437,7 +437,6 @@ class WPGlobus_Utils {
 	 *
 	 * @return string The value or empty string if not exists or not scalar.
 	 * @deprecated 2.12.1
-	 *
 	 */
 	public static function safe_get( $key ) {
 		return WPGlobus_WP::get_http_get_parameter( $key );
@@ -491,7 +490,6 @@ class WPGlobus_Utils {
 	 *
 	 * @return string
 	 * @deprecated 2.12.1
-	 *
 	 */
 	public static function request_uri( $default = '' ) {
 		return WPGlobus_WP::request_uri( $default );
@@ -504,7 +502,6 @@ class WPGlobus_Utils {
 	 *
 	 * @return string
 	 * @deprecated 2.12.1
-	 *
 	 */
 	public static function http_host( $default = 'localhost' ) {
 		return WPGlobus_WP::http_host( $default );

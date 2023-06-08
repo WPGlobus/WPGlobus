@@ -15,6 +15,7 @@ class WPGlobus_Admin_Page {
 	 */
 	public static function print_header() {
 		$url_wpglobus_logo = WPGlobus::internal_images_url() . '/wpglobus-logo-180x180.png';
+		// @formatter:off
 		?>
 		<style>
 			.wp-badge.wpglobus-badge {
@@ -22,8 +23,10 @@ class WPGlobus_Admin_Page {
 				background-size: contain;
 			}
 		</style>
-
-		<?php echo '<div class="wrap about-wrap wpglobus-about-wrap">'; ?>
+		<?php
+		// @formatter:on
+		?>
+		<div class="wrap about-wrap wpglobus-about-wrap">
 
 		<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
 			<span class="wpglobus-version"><?php echo esc_html( WPGLOBUS_VERSION ); ?></span>
@@ -75,21 +78,25 @@ class WPGlobus_Admin_Page {
 	 * URL of the WPGlobus Settings page.
 	 *
 	 * @since 2.4.8 Added $tab parameter.
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function url_settings( $tab = '' ) {
-		if ( empty($tab) ) {
+		if ( empty( $tab ) ) {
 			return add_query_arg( 'page', WPGlobus::OPTIONS_PAGE_SLUG, admin_url( 'admin.php' ) );
 		}
-		return add_query_arg( array('page'=>WPGlobus::OPTIONS_PAGE_SLUG, 'tab'=>$tab), admin_url( 'admin.php' ) );
+
+		return add_query_arg( array(
+			'page' => WPGlobus::OPTIONS_PAGE_SLUG,
+			'tab'  => $tab,
+		), admin_url( 'admin.php' ) );
 	}
 
 	/**
 	 * URL of the WPGlobus Helpdesk page.
 	 *
-	 * @return string
 	 * @since 1.9.10
+	 * @return string
 	 */
 	public static function url_helpdesk() {
 		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_HELPDESK, admin_url( 'admin.php' ) );
@@ -98,8 +105,8 @@ class WPGlobus_Admin_Page {
 	/**
 	 * URL of the Clean-up Tool page.
 	 *
-	 * @return string
 	 * @since 1.9.10
+	 * @return string
 	 */
 	public static function url_clean_up_tool() {
 		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_CLEAN, admin_url( 'admin.php' ) );
@@ -108,8 +115,8 @@ class WPGlobus_Admin_Page {
 	/**
 	 * URL of the About page.
 	 *
-	 * @return string
 	 * @since 1.9.10
+	 * @return string
 	 */
 	public static function url_about() {
 		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_ABOUT, admin_url( 'admin.php' ) );
@@ -118,10 +125,11 @@ class WPGlobus_Admin_Page {
 	/**
 	 * URL of the Admin Central page.
 	 *
+	 * @since 1.9.10
+	 *
 	 * @param string $central_tab_id Tab on the page.
 	 *
 	 * @return string
-	 * @since 1.9.10
 	 */
 	public static function url_admin_central( $central_tab_id = '' ) {
 		return add_query_arg( 'page', WPGlobus::PAGE_WPGLOBUS_ADMIN_CENTRAL . '#' . $central_tab_id, admin_url( 'admin.php' ) );
@@ -130,10 +138,11 @@ class WPGlobus_Admin_Page {
 	/**
 	 * URL of the Options Panel.
 	 *
+	 * @since 1.9.10
+	 *
 	 * @param string $tab Tab on the page.
 	 *
 	 * @return string
-	 * @since 1.9.10
 	 */
 	public static function url_options_panel( $tab = WPGlobus_Options::DEFAULT_TAB ) {
 
@@ -146,10 +155,11 @@ class WPGlobus_Admin_Page {
 	/**
 	 * URL of the WPGlobus-Plus Panel.
 	 *
+	 * @since 1.9.10
+	 *
 	 * @param string $tab Tab on the page.
 	 *
 	 * @return string
-	 * @since 1.9.10
 	 */
 	public static function url_wpglobus_plus_panel( $tab = 'modules' ) {
 		if ( class_exists( 'WPGlobusPlus', false ) ) {
@@ -168,8 +178,8 @@ class WPGlobus_Admin_Page {
 	 * @param string  $icon_class          A Dashicon CSS class or our internal alias.
 	 * @param boolean $add_dashicons_class Add "dashicons" class before icon class.
 	 *
-	 * @link https://developer.wordpress.org/resource/dashicons/
 	 * @return string
+	 * @link https://developer.wordpress.org/resource/dashicons/
 	 */
 	public static function nav_tab_icon( $icon_class, $add_dashicons_class = true ) {
 

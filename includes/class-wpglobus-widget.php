@@ -27,7 +27,7 @@ class WPGlobusWidget extends WP_Widget {
 			'wpglobus',
 			esc_html__( 'WPGlobus widget', 'wpglobus' ),
 			array(
-				'description' => esc_html__( 'Add language switcher', 'wpglobus' )
+				'description' => esc_html__( 'Add language switcher', 'wpglobus' ),
 			)
 		);
 		$this->types['flags']               = esc_html__( 'Flags', 'wpglobus' );
@@ -81,13 +81,13 @@ class WPGlobusWidget extends WP_Widget {
 				 */
 				//$sorted[] = WPGlobus::Config()->language;
 				//foreach ( $enabled_languages as $language ) {
-					//if ( $language != WPGlobus::Config()->language ) {
-						//$sorted[] = $language;
-					//}
+				//if ( $language != WPGlobus::Config()->language ) {
+				//$sorted[] = $language;
+				//}
 				//}
 				//$enabled_languages = $sorted;
 
-			$code = '<div class="dropdown-styled"> <ul>
+				$code = '<div class="dropdown-styled"> <ul>
 					  <li>
 						{{language}}
 						<ul>
@@ -112,7 +112,7 @@ class WPGlobusWidget extends WP_Widget {
 		 * @since 1.0.13
 		 * @since 1.6.9
 		 *
-		 * @param array     $extra_languages 			 An array with extra languages to show off in menu.
+		 * @param array $extra_languages An array with extra languages to show off in menu.
 		 * @param string    WPGlobus::Config()->language The current language.
 		 */
 		$extra_languages = apply_filters( 'wpglobus_extra_languages', $extra_languages, WPGlobus::Config()->language );
@@ -124,7 +124,7 @@ class WPGlobusWidget extends WP_Widget {
 		 *
 		 * @since 1.9.17
 		 *
-		 * @param array     $extra_languages 			 An array with extra languages to show off in menu.
+		 * @param array $extra_languages An array with extra languages to show off in menu.
 		 * @param string    WPGlobus::Config()->language The current language.
 		 */
 		$extra_languages = apply_filters( 'wpglobus/widget/extra_languages', $extra_languages, WPGlobus::Config()->language );
@@ -138,11 +138,11 @@ class WPGlobusWidget extends WP_Widget {
 		 *
 		 * @since 1.9.17
 		 *
-		 * @param array     $enabled_languages 			 An array with enabled languages to show off in menu.
+		 * @param array $enabled_languages An array with enabled languages to show off in menu.
 		 * @param string    WPGlobus::Config()->language The current language.
-		 */		
+		 */
 		$enabled_languages = apply_filters( 'wpglobus/widget/enabled_languages', $enabled_languages, WPGlobus::Config()->language );
-		
+
 		/**
 		 * CSS class for link in a and option tags. Used for adding hash.
 		 *
@@ -157,7 +157,7 @@ class WPGlobusWidget extends WP_Widget {
 		 */
 		$flag_classes = array();
 
-		/** 
+		/**
 		 * This filter is documented in wp-includes/widgets/class-wp-widget-pages.php
 		 *
 		 * @since 2.8.4
@@ -204,7 +204,7 @@ class WPGlobusWidget extends WP_Widget {
 			switch ( $type ) :
 				case 'flags':
 					$inside .= '<span class="flag ' . implode( ' ', $flag_classes ) . '">';
-					$inside .= 		'<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '"><img alt="" src="' . $flag . '"/></a>';
+					$inside .= '<a href="' . $url . '" class="' . implode( ' ', $link_classes ) . '"><img alt="" src="' . $flag . '"/></a>';
 					$inside .= '</span>';
 					break;
 				case 'list':

@@ -38,7 +38,7 @@ if ( ! class_exists( 'WPGlobus_Builder_Pods' ) ) :
 			 * Globals
 			 *
 			 * @global string $pagenow
-			 * @global WPDB $wpdb
+			 * @global WPDB   $wpdb
 			 */
 			global $pagenow, $wpdb;
 
@@ -49,7 +49,10 @@ if ( ! class_exists( 'WPGlobus_Builder_Pods' ) ) :
 				/**
 				 * See pods\includes\classes.php
 				 */
-				$pods = pods_api()->load_pods( array( 'type' => 'post_type', 'fields' => true ) );
+				$pods = pods_api()->load_pods( array(
+					'type'   => 'post_type',
+					'fields' => true,
+				) );
 
 				self::$pods_type = 'post_type';
 
@@ -105,7 +108,6 @@ if ( ! class_exists( 'WPGlobus_Builder_Pods' ) ) :
 				 * //}
 				 */
 			}
-
 
 			return false;
 		}

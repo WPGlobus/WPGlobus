@@ -805,7 +805,6 @@ if ( ! class_exists( 'WPGlobus_Meta' ) ) :
 		 *
 		 * @return string
 		 * @todo  First idea is: This function needs for Page Builder by SiteOrigin because it should serialize array before creating multilingual string.
-		 *
 		 */
 		protected static function build_multilingual_string( $ml_array ) {
 

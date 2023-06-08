@@ -98,7 +98,7 @@ class WPGlobus_Options {
 		 *
 		 * @since 2.12.1
 		 */
-		add_action( 'admin_init', array($this, 'on__admin_init') );
+		add_action( 'admin_init', array( $this, 'on__admin_init' ) );
 
 		add_action( 'init', array( $this, 'on__init' ), PHP_INT_MAX );
 
@@ -125,7 +125,7 @@ class WPGlobus_Options {
 	 */
 	public function on__admin_init() {
 
-		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
 
@@ -141,26 +141,26 @@ class WPGlobus_Options {
 		 *
 		 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
 		 */
-		if ( 1 === (int) WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) && ! empty($_POST['_wpnonce']) ) { 
+		if ( 1 === (int) WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) && ! empty( $_POST['_wpnonce'] ) ) {
 
 			if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), self::NONCE_ACTION ) ) {
-				
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );				
+
+				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );
 				wp_safe_redirect( admin_url() );
-				exit();		
-			
+				exit();
+
 			} else {
-				wp_safe_redirect( 
+				wp_safe_redirect(
 					add_query_arg(
 						array(
-							'page' => 'wpglobus_options'
+							'page' => 'wpglobus_options',
 						),
-						admin_url('admin.php')
-					) 
+						admin_url( 'admin.php' )
+					)
 				);
-				exit();		
+				exit();
 			}
-		}			
+		}
 	}
 
 	/**
@@ -182,10 +182,10 @@ class WPGlobus_Options {
 	 * Handler `wp_loaded`.
 	 */
 	public function on__wp_loaded() {
-		
+
 		// Create the sections and fields.
 		// This is delayed so we have, for example, all CPTs registered for the 'post_types' section.
-		
+
 		/**
 		 * Set.
 		 *
@@ -194,7 +194,7 @@ class WPGlobus_Options {
 		if ( $this->current_page !== $this->page_slug ) {
 			return;
 		}
-		
+
 		$this->set_sections();
 	}
 
@@ -396,16 +396,16 @@ class WPGlobus_Options {
 		 *
 		 * @since 2.12.1
 		 *
-		 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
-		 * 
+		 * @link  wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
 		 */
 		if ( ! empty( WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) ) ) { ?>
 			<div class="wrap">
 				<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 				<form id="form-wpglobus-options" method="post">
 					<h3>Deletes settings! Irreversible!</h3>
-					<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Reset all options"></p>
-					<?php wp_nonce_field( self::NONCE_ACTION ); ?>								
+					<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary"
+								value="Reset all options"></p>
+					<?php wp_nonce_field( self::NONCE_ACTION ); ?>
 				</form>
 			</div>
 			<?php
@@ -537,7 +537,7 @@ class WPGlobus_Options {
 		check_admin_referer( self::NONCE_ACTION );
 
 		// Sanitize, and if OK then save the options and reload the page.
-		$posted_data = $this->sanitize_posted_data( WPGlobus_WP::get_http_post_parameter(  $option_name ) );
+		$posted_data = $this->sanitize_posted_data( WPGlobus_WP::get_http_post_parameter( $option_name ) );
 		if ( $posted_data ) {
 			update_option( $option_name, $posted_data );
 
@@ -675,7 +675,7 @@ class WPGlobus_Options {
 		//$this->sections['debug-info'] = $this->section_debug_info();
 
 		$this->sections['uninstall'] = $this->section_uninstall();
-		
+
 		/**
 		 * Filter the array of sections. Here add-ons can add their menus.
 		 *
@@ -683,7 +683,7 @@ class WPGlobus_Options {
 		 *
 		 * @param array $sections Array of sections.
 		 */
-		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );		
+		$this->sections = apply_filters( 'wpglobus_option_sections', $this->sections );
 	}
 
 	/**
@@ -1703,15 +1703,15 @@ class WPGlobus_Options {
 		$fields = array();
 
 		$wpglobus_option = get_option( $this->args['opt_name'] );
-		
+
 		/**
 		 * Get the theme support `widgets-block-editor` feature.
 		 */
 		$theme_support_widgets_block_editor = (bool) get_theme_support( 'widgets-block-editor' );
-		
+
 		if ( ! $theme_support_widgets_block_editor ) {
-			
-			$fields[] =			
+
+			$fields[] =
 				array(
 					'id'    => 'use_widgets_block_editor_info',
 					'type'  => 'wpglobus_info',
@@ -1719,7 +1719,7 @@ class WPGlobus_Options {
 					#'html'  => '',
 					'class' => 'normal',
 				);
-				
+
 		} else {
 
 			/**
@@ -1733,11 +1733,11 @@ class WPGlobus_Options {
 			 * );
 			 * $_desc .= ': ' . esc_html__( 'The current version of WPGlobus does not support multilingual widgets with block editor', 'wpglobus' );
 			 * //*/
-			
+
 			$_checked = false;
 			if ( ! empty( $wpglobus_option['use_widgets_block_editor'] ) && 1 === (int) $wpglobus_option['use_widgets_block_editor'] ) {
 				$_checked = true;
-			}		
+			}
 			$fields[] =
 				array(
 					'id'      => 'use_widgets_block_editor',
@@ -1746,27 +1746,27 @@ class WPGlobus_Options {
 					'name'    => 'wpglobus_option[use_widgets_block_editor]',
 					'title'   => esc_html__( 'Use block editor on the Widgets page', 'wpglobus' ),
 					'label'   => esc_html__( 'Enabled', 'wpglobus' ),
-					'desc'	  => '' // $_desc
-				);		
+					'desc'    => '', // $_desc
+				);
 
 			/**
 			 * Todo may be need to use this option too.
-			$_checked = false;
-			if ( ! empty( $wpglobus_option['gutenberg_use_widgets_block_editor'] ) && 1 == $wpglobus_option['gutenberg_use_widgets_block_editor'] ) { // phpcs:ignore
-				$_checked = true;
-			}		
-			$fields[] =
-				array(
-					'id'      => 'gutenberg_use_widgets_block_editor',
-					'type'    => 'wpglobus_checkbox',
-					'checked' => $_checked,
-					'name'    => 'wpglobus_option[gutenberg_use_widgets_block_editor]',
-					'title'   => esc_html__( 'Использовать редактор блоков на странице Виджеты в плагине Gutenberg', 'wpglobus' ),
-					'label'   => esc_html__( 'Enabled', 'wpglobus' ),
-				);
-			// */	
+			 * $_checked = false;
+			 * if ( ! empty( $wpglobus_option['gutenberg_use_widgets_block_editor'] ) && 1 == $wpglobus_option['gutenberg_use_widgets_block_editor'] ) { // phpcs:ignore
+			 * $_checked = true;
+			 * }
+			 * $fields[] =
+			 * array(
+			 * 'id'      => 'gutenberg_use_widgets_block_editor',
+			 * 'type'    => 'wpglobus_checkbox',
+			 * 'checked' => $_checked,
+			 * 'name'    => 'wpglobus_option[gutenberg_use_widgets_block_editor]',
+			 * 'title'   => esc_html__( 'Использовать редактор блоков на странице Виджеты в плагине Gutenberg', 'wpglobus' ),
+			 * 'label'   => esc_html__( 'Enabled', 'wpglobus' ),
+			 * );
+			 * // */
 		}
-		
+
 		return array(
 			'wpglobus_id' => 'wpglobus_block_editor',
 			'title'       => esc_html__( 'Block Editor', 'wpglobus' ),
@@ -1843,7 +1843,7 @@ class WPGlobus_Options {
 			$_info_desc .= htmlspecialchars( $_draft, ENT_QUOTES, 'UTF-8' );
 			$_info_desc .= '<br />';
 
-			$i++;
+			$i ++;
 		}
 
 		$fields[] =
@@ -1896,7 +1896,7 @@ class WPGlobus_Options {
 	 * @return array
 	 */
 	protected function section_rest_api() {
-		
+
 		if ( version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ) {
 			/**
 			 * Return
@@ -1931,7 +1931,7 @@ class WPGlobus_Options {
 			$_info_desc .= esc_html__( 'For demonstration, you can try the first post that WordPress creates at the initial installation.', 'wpglobus' );
 			$_info_desc .= '<br />';
 			$_info_desc .= sprintf(
-					// Translators:
+			// Translators:
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
 				'<a href="' . $_url . '" target="_blank">',
 				$_url,
@@ -1943,7 +1943,7 @@ class WPGlobus_Options {
 
 			$_info_desc .= '<br />';
 			$_info_desc .= sprintf(
-					// Translators:
+			// Translators:
 				esc_html__( 'Go to %1$s%2$s%3$s to see the content in language: %4$s.', 'wpglobus' ),
 				'<a href="' . $_extra_url . '" target="_blank">',
 				$_extra_url,
@@ -2015,8 +2015,8 @@ class WPGlobus_Options {
 	/**
 	 * Section "Info".
 	 *
-	 * @since 1.9.14
-	 * @since 2.2.23 Move theme info to `Customize` section.
+	 * @since        1.9.14
+	 * @since        2.2.23 Move theme info to `Customize` section.
 	 * @noinspection PhpUnused
 	 */
 	protected function section_debug_info() {
@@ -2072,7 +2072,7 @@ class WPGlobus_Options {
 	/**
 	 * Filter options in file.
 	 *
-	 * @since 1.9.14
+	 * @since        1.9.14
 	 *
 	 * @param string $file   File path.
 	 * @param string $filter Filter.

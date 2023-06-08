@@ -332,7 +332,6 @@ if ( ! class_exists( 'WPGlobus_Widgets' ) ) :
 				$scope = self::SCOPE_FRONT;
 			}
 
-
 			return self::_get_sidebars_widgets( $value, $language, $scope );
 		}
 
@@ -880,9 +879,12 @@ if ( ! class_exists( 'WPGlobus_Widgets' ) ) :
 				'extraLanguages'   => $extra_languages,
 				'currentLanguage'  => (array) self::get_language(),
 				'languageFlagUrl'  => $language_flag_url,
-				'wpgPremiumURL'    => 'https://wpglobus.com/shop/',
+				'wpgPremiumURL'    => WPGlobus::URL_WPGLOBUS_SHOP,
 				'wpgOptionsURL'    => add_query_arg(
-					array( 'page' => 'wpglobus_options', 'tab' => 'block-editor' ),
+					array(
+						'page' => 'wpglobus_options',
+						'tab'  => 'block-editor',
+					),
 					admin_url( 'admin.php' )
 				),
 				'optionIcon'       => $option_icon,

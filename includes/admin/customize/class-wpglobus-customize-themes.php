@@ -29,11 +29,11 @@ if ( ! class_exists( 'WPGlobus_Customize_Themes' ) ) :
 			'customizr',
 			'customizr pro',
 			'experon',
-			'gwangi', // @since 2.3.12	
-			'newyork city', // @since 2.5.21	
-			'mesmerize', // @since 2.8.11	
-			'highlight', // @since 2.8.11	
-			'enfold', // @since 2.8.11	
+			'gwangi', // @since 2.3.12
+			'newyork city', // @since 2.5.21
+			'mesmerize', // @since 2.8.11
+			'highlight', // @since 2.8.11
+			'enfold', // @since 2.8.11
 		);
 
 		/**

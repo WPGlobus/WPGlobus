@@ -67,11 +67,13 @@ class WPGlobus_Filters {
 	 * when the 'wpglobus_force_filter__the_posts' is set
 	 * (@see WPGlobus_QA::_test_get_posts for example).
 	 *
-	 * @param array    $posts
+	 * @since 1.0.14
+	 *
 	 * @param WP_Query $query
 	 *
+	 * @param array    $posts
+	 *
 	 * @return array
-	 * @since 1.0.14
 	 */
 	public static function filter__the_posts( $posts, $query ) {
 
@@ -102,7 +104,8 @@ class WPGlobus_Filters {
 	 * This is similar to the @see filter__text filter,
 	 * but it returns text in the DEFAULT language.
 	 *
-	 * @since 1.0.8
+	 * @since        1.0.8
+	 *
 	 * @param string $text
 	 *
 	 * @return string
@@ -326,13 +329,13 @@ class WPGlobus_Filters {
 	 * @see               WPGLobus_QA::_test_post_name
 	 * -
 	 * @see               WPSEO_Metabox::localize_script
-	 * @todo              Check what's going on in localize_script of WPSEO?
-	 * @todo              What if there is no EN language? Only ru and kz but - we cannot use 'en' for permalink
-	 * @todo              check guid
 	 *
 	 * @param string $title
 	 *
 	 * @return string
+	 * @todo              Check what's going on in localize_script of WPSEO?
+	 * @todo              What if there is no EN language? Only ru and kz but - we cannot use 'en' for permalink
+	 * @todo              check guid
 	 */
 	public static function filter__sanitize_title( $title ) {
 
@@ -406,7 +409,7 @@ class WPGlobus_Filters {
 	/**
 	 * Filter @see wp_insert_term().
 	 *
-	 * @since 1.6.6
+	 * @since        1.6.6
 	 *
 	 * @param string $term     The term to add or update.
 	 * @param string $taxonomy Taxonomy slug.
@@ -516,11 +519,12 @@ class WPGlobus_Filters {
 	/**
 	 * Filter for @see get_locale
 	 *
+	 * @see     setlocale
+	 *
 	 * @param string $locale Locale.
 	 *
 	 * @return string
 	 * @todo    Do we need to do setlocale(LC_???, $locale)? (*** NOT HERE )
-	 * @see     setlocale
 	 * @link    http://php.net/manual/en/function.setlocale.php
 	 * @example echo setlocale(LC_ALL, 'Russian'); => Russian_Russia.1251
 	 */
@@ -574,7 +578,7 @@ class WPGlobus_Filters {
 	/**
 	 * Filter @see wp_setup_nav_menu_item in wp-includes\nav-menu.php for more info
 	 *
-	 * @since 1.0.0
+	 * @since        1.0.0
 	 *
 	 * @param WP_Post[]|object $object
 	 *
@@ -621,7 +625,7 @@ class WPGlobus_Filters {
 	/**
 	 * Filter @see heartbeat_received
 	 *
-	 * @since 1.0.1
+	 * @since        1.0.1
 	 *
 	 * @param array  $response
 	 * @param array  $data
@@ -632,7 +636,7 @@ class WPGlobus_Filters {
 	 */
 	public static function filter__heartbeat_received( $response, $data, $screen_id ) {
 
-		if ( false !== strpos( WPGlobus_WP::http_referer() , 'wpglobus=off' ) ) {
+		if ( false !== strpos( WPGlobus_WP::http_referer(), 'wpglobus=off' ) ) {
 			/**
 			 * Check $_SERVER['HTTP_REFERER'] for wpglobus toggle is off because wpglobus-admin.js doesn't loaded in this mode
 			 */
@@ -716,7 +720,7 @@ class WPGlobus_Filters {
 				$response['wp_autosave'] = array(
 					'success' => true,
 					'message' => sprintf(
-						// Translators:
+					// Translators:
 						__( 'Draft saved at %s.' ), date_i18n( $draft_saved_date_format )
 					),
 				);
@@ -758,7 +762,7 @@ class WPGlobus_Filters {
 	 * @since 1.0.6
 	 * @since 2.4.10 Prevent handling of incorrect widget instance's settings.
 	 * @since 2.8.5 Added checking for translations in $widget_setting.
-	 * 				Using `extract_text` instead of `text_filter`.
+	 *                Using `extract_text` instead of `text_filter`.
 	 *
 	 * @param string[] $instance
 	 *
@@ -771,7 +775,7 @@ class WPGlobus_Filters {
 		 *
 		 * @since 2.4.10
 		 */
-		if ( empty($instance) || is_bool($instance) ) {
+		if ( empty( $instance ) || is_bool( $instance ) ) {
 			return $instance;
 		}
 
@@ -815,9 +819,9 @@ class WPGlobus_Filters {
 	/**
 	 * Filter @see wp_trim_words
 	 *
-	 * @qa    At the /wp-admin/index.php page is a Quick Draft metabox
+	 * @qa           At the /wp-admin/index.php page is a Quick Draft metabox
 	 *      which shows 3 last post drafts. This filter lets post content in default language.
-	 * @since 1.0.14
+	 * @since        1.0.14
 	 *
 	 * @param string $text          The trimmed text.
 	 * @param int    $num_words     The number of words to trim the text to.
@@ -890,16 +894,16 @@ class WPGlobus_Filters {
 	/**
 	 * Specify meta keys where the meta data can be multilingual.
 	 *
+	 * @since   1.2.1
 	 * @example
-	 * <code>
-	 *  add_filter( 'wpglobus_multilingual_meta_keys',
-	 *      function ( $multilingual_meta_keys ) {
+	 *          <code>
+	 *          add_filter( 'wpglobus_multilingual_meta_keys',
+	 *          function ( $multilingual_meta_keys ) {
 	 *          $multilingual_meta_keys['slides'] = true;
 	 *          return $multilingual_meta_keys;
-	 *      }
-	 *  );
-	 * </code>
-	 * @since 1.2.1
+	 *          }
+	 *          );
+	 *          </code>
 	 */
 	public static function set_multilingual_meta_keys() {
 
@@ -907,9 +911,8 @@ class WPGlobus_Filters {
 		 * Add Alternative Text meta value for media.
 		 * We need to use only one meta because Title, Caption and Description was stored in wp_posts table.
 		 *
-		 * @todo  may be to use another class to store keys for $multilingual_meta_keys in future version.
-		 *
 		 * @since 1.9.11
+		 * @todo  may be to use another class to store keys for $multilingual_meta_keys in future version.
 		 */
 		self::$multilingual_meta_keys['_wp_attachment_image_alt'] = true;
 
@@ -1110,10 +1113,11 @@ class WPGlobus_Filters {
 	/**
 	 * Filter the oembed data returned by the /wp-json/oembed/... calls.
 	 *
+	 * @since 1.8.4
+	 *
 	 * @param array $data The response data.
 	 *
 	 * @return array
-	 * @since 1.8.4
 	 */
 	public static function filter__oembed_response_data( $data ) {
 		// If $language_for_oembed is empty, text_filter will use the default language.
@@ -1132,10 +1136,11 @@ class WPGlobus_Filters {
 	 *
 	 * See   wp-includes\pluggable.php
 	 *
+	 * @since 1.9.5
+	 *
 	 * @param array $atts A compacted array of wp_mail() arguments.
 	 *
 	 * @return array
-	 * @since 1.9.5
 	 */
 	public static function filter__wp_mail( $atts ) {
 
@@ -1183,14 +1188,16 @@ class WPGlobus_Filters {
 	/**
 	 * Filters oEmbed HTML.
 	 *
-	 * @param mixed  $cache   The cached HTML result, stored in post meta.
+	 * @since        1.9.8
+	 * @noinspection PhpUnusedParameterInspection
+	 *
 	 * @param string $url     The attempted embed URL.
 	 * @param array  $attr    An array of shortcode attributes.
 	 * @param int    $post_ID Post ID.
 	 *
+	 * @param mixed  $cache   The cached HTML result, stored in post meta.
+	 *
 	 * @return string
-	 * @since 1.9.8
-	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public static function filter__embed_oembed_html( $cache, $url, $attr, $post_ID ) {
 
@@ -1218,7 +1225,7 @@ class WPGlobus_Filters {
 	/**
 	 * Filters a 'wpseo_taxonomy_meta' option before its value is updated.
 	 *
-	 * @since 2.0
+	 * @since        2.0
 	 *
 	 * @param mixed  $new_value The new, unserialized option value.
 	 * @param mixed  $old_value The old option value.
@@ -1247,7 +1254,7 @@ class WPGlobus_Filters {
 			global $wpdb;
 			$result = $wpdb->get_col( "SELECT option_value FROM $wpdb->options WHERE option_name = 'wpseo_taxonomy_meta'" );
 
-			if ( ! empty($result[0]) ) {
+			if ( ! empty( $result[0] ) ) {
 				$option_values = maybe_unserialize( $result[0] );
 			} else {
 				$option_values = array();

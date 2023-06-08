@@ -136,8 +136,11 @@ if ( ! class_exists( 'WPGlobus_Elementor' ) ) :
 
 			add_filter( 'get_post_metadata', array( $this, 'filter__post_metadata' ), 13, 4 );
 
-			// @todo may be need this filter for admin, @see includes\builders\elementor\class-wpglobus-elementor-front.php
-			//add_filter( 'update_post_metadata', array( $this, 'filter__update_metadata' ), 5, 5 );						
+			/**
+			 * Todo may be need this filter for admin
+			 * See includes\builders\elementor\class-wpglobus-elementor-front.php
+			 * add_filter( 'update_post_metadata', array( $this, 'filter__update_metadata' ), 5, 5 );
+			 */
 
 			/**
 			 * Elementor editor footer.

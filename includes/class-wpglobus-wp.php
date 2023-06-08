@@ -58,7 +58,6 @@ class WPGlobus_WP {
 	 * @todo There should be other actions. See $core_actions_get in admin-ajax.php
 	 *       Can also check $GLOBALS['_SERVER']['HTTP_REFERER']
 	 *       and $GLOBALS['current_screen']->in_admin()
-	 *
 	 */
 	public static function is_admin_doing_ajax() {
 		// PHPCS: WordPress.Security.NonceVerification.Missing is invalid in the context of this method.

@@ -189,8 +189,9 @@ class WPGlobus {
 	/**
 	 * To use as the 'version' argument for JS/CSS enqueue.
 	 *
-	 * @since 1.2.2
+	 * @since        1.2.2
 	 * @return string
+	 * @noinspection PhpUnused
 	 */
 	public static function SCRIPT_VER() {
 		return ( self::$SCRIPT_DEBUG ? sprintf( 'debug-%d', time() ) : WPGLOBUS_VERSION );
@@ -987,14 +988,13 @@ class WPGlobus {
 		switch ( $action ) {
 			case 'clean':
 			case 'wpglobus-reset':
-
 				if ( current_user_can( 'manage_options' ) ) {
 					require_once 'admin/class-wpglobus-clean.php';
-					WPGlobus_Clean::process_ajax($order);
+					WPGlobus_Clean::process_ajax( $order );
 				} else {
-					$ajax_return['status'] = 'error';
+					$ajax_return['status']  = 'error';
 					$ajax_return['message'] = 'No access rights';
-					$ajax_return['order'] = $order;
+					$ajax_return['order']   = $order;
 				}
 
 				break;
@@ -1186,7 +1186,6 @@ class WPGlobus {
 	 *
 	 * @return void
 	 * @todo use $WPGlobus_Config to determine running this function?
-	 *
 	 */
 	public static function activated( $plugin ) {
 		if ( WPGLOBUS_PLUGIN_BASENAME === $plugin ) {
@@ -2861,7 +2860,6 @@ class WPGlobus {
 	 *
 	 * @return string HTML with appended switcher
 	 * @deprecated from 1.5.8
-	 *
 	 */
 	public function on_wp_list_pages( $output ) {
 
@@ -2990,7 +2988,7 @@ class WPGlobus {
 	/**
 	 * Add language switcher to navigation menu.
 	 *
-	 * @see wp_nav_menu()
+	 * @see          wp_nav_menu()
 	 *
 	 * @param stdClass $args An object containing wp_nav_menu() arguments.
 	 *
@@ -3048,13 +3046,14 @@ class WPGlobus {
 		 * Filter to add or not language selector to the menu.
 		 * Returning boolean.
 		 *
-		 * @deprecated
 		 * @since 2.10.2
 		 *
 		 * @since 1.5.8
 		 *
 		 * @param bool     $disable_add_selector Disable or not to add language selector to the menu.
 		 * @param stdClass $args                 An object containing wp_nav_menu() arguments.
+		 *
+		 * @deprecated
 		 */
 		$disable_add_selector = apply_filters( 'wpglobus_menu_add_selector', $disable_add_selector, $args );
 
@@ -3063,13 +3062,14 @@ class WPGlobus {
 		 *
 		 * @since 2.10.2
 		 *
-		 * @param boolean  $disable_add_selector Disable or not to add language switcher to the menu.
-		 * @param string   $language             Current language.
-		 * @param string   $nav_menu             Slug of current navigation menu.
+		 * @param boolean $disable_add_selector Disable or not to add language switcher to the menu.
+		 * @param string  $language             Current language.
+		 * @param string  $nav_menu             Slug of current navigation menu.
+		 *
 		 * @return boolean
 		 */
-		$disable_add_selector = apply_filters( 
-			'wpglobus_disable_switcher', 
+		$disable_add_selector = apply_filters(
+			'wpglobus_disable_switcher',
 			$disable_add_selector,
 			self::Config()->language,
 			self::Config()->nav_menu
@@ -3227,11 +3227,10 @@ class WPGlobus {
 	/**
 	 * Method _get_language_classes.
 	 *
-	 * @deprecated 2.12.1
-	 *
 	 * @param $language
 	 *
 	 * @return array|string[]
+	 * @deprecated 2.12.1
 	 */
 	public function _get_language_classes( $language = '' ) {
 		return $this->get_language_classes( $language );
@@ -3329,6 +3328,7 @@ class WPGlobus {
 				 * Filter wpglobus_postdivrich_class
 				 *
 				 * @since 1.9.17
+				 *
 				 * @param string $language
 				 */
 				$_class = apply_filters( 'wpglobus_postdivrich_class', 'postdivrich-wpglobus', $language );
@@ -3337,6 +3337,7 @@ class WPGlobus {
 				 * Filter wpglobus_postdivrich_style
 				 *
 				 * @since 1.9.17
+				 *
 				 * @param string $language
 				 */
 				$_style = apply_filters( 'wpglobus_postdivrich_style', '', $language );
@@ -3344,7 +3345,7 @@ class WPGlobus {
 				<div id="postdivrich-<?php echo esc_attr( $language ); ?>"
 						class="postarea <?php echo esc_attr( $_class ); ?>"
 						style="<?php echo esc_attr( $_style ); ?>">
-				<?php
+					<?php
 
 					wp_editor(
 						WPGlobus_Core::text_filter(
@@ -3374,7 +3375,7 @@ class WPGlobus {
 					 *
 					 * @since 1.0.13
 					 */
-				?>
+					?>
 					<table id="post-status-info-<?php echo esc_attr( $language ); ?>" class="wpglobus-post-status-info">
 						<tbody>
 						<tr>
@@ -3641,11 +3642,11 @@ class WPGlobus {
 
 		endif;  // end ! $devmode.
 
-		if ( ! empty( $has_extra_post_title ) && !empty( $post_title ) ) {
+		if ( ! empty( $has_extra_post_title ) && ! empty( $post_title ) ) {
 			$data['post_title'] = $post_title;
 		}
 
-		if ( ! empty( $has_extra_post_content ) && !empty( $post_content ) ) {
+		if ( ! empty( $has_extra_post_content ) && ! empty( $post_content ) ) {
 			$data['post_content'] = $post_content;
 		}
 
@@ -3678,10 +3679,11 @@ class WPGlobus {
 	/**
 	 * Add language tabs for edit taxonomy name at edit-tags.php page.
 	 *
-	 * @since 2.5.1 Interface improvements.
+	 * @since        2.5.1 Interface improvements.
 	 *
 	 * @param $object
 	 * @param $taxonomy
+	 *
 	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function on_add_language_tabs_edit_taxonomy( $object, $taxonomy ) {
@@ -3721,7 +3723,7 @@ class WPGlobus {
 							data-name="<?php echo esc_attr( WPGlobus_Core::text_filter( $object->name, $language, $return ) ); ?>"
 							data-description="<?php echo esc_attr( WPGlobus_Core::text_filter( $object->description, $language, $return ) ); ?>">
 						<a data-language="<?php echo esc_attr( $language ); ?>"
-								data-href="<?php echo esc_attr( $_href ); ?>" <?php echo esc_attr(  $_onclick ); ?>
+								data-href="<?php echo esc_attr( $_href ); ?>" <?php echo esc_attr( $_onclick ); ?>
 								class="<?php echo esc_attr( implode( $_link_class ) ); ?>"
 								href="#taxonomy-tab-<?php echo esc_attr( $language ); ?>"><?php echo esc_html( self::Config()->en_language_name[ $language ] ); ?></a>
 					</li>
@@ -4030,7 +4032,6 @@ class WPGlobus {
 	 *
 	 * @return array|WP_Error
 	 * @todo This method should be somewhere else
-	 *
 	 */
 	public static function get_terms( $taxonomy = '' ) {
 
@@ -4110,7 +4111,7 @@ class WPGlobus {
 		?>
 		<script type='text/javascript'>
 			/* <![CDATA[ */
-			if ( 'function' === typeof jQuery ) {
+			if ('function' === typeof jQuery) {
 				jQuery('#wp-admin-bar-site-name a').eq(0).text("<?php echo esc_js( $bn ); ?>");
 			}
 			/* ]]> */
@@ -4264,12 +4265,12 @@ class WPGlobus {
 	public function admin_notice_permalink_structure() {
 		?>
 		<div class="notice notice-error error">
-		<p>
-			<?php esc_html_e( 'You must enable Pretty Permalinks to use WPGlobus.', 'wpglobus' ); ?>
-			<strong>
-				<?php esc_html_e( 'Please go to Settings > Permalinks > Common Settings and choose a non-default option.', 'wpglobus' ); ?>
-			</strong>
-		</p>
+			<p>
+				<?php esc_html_e( 'You must enable Pretty Permalinks to use WPGlobus.', 'wpglobus' ); ?>
+				<strong>
+					<?php esc_html_e( 'Please go to Settings > Permalinks > Common Settings and choose a non-default option.', 'wpglobus' ); ?>
+				</strong>
+			</p>
 		</div>
 		<?php
 	}
@@ -4280,13 +4281,13 @@ class WPGlobus {
 	public function on_admin_init() {
 
 		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
-			
+
 			/**
 			 * For developers use only. Deletes settings! Irreversible!
 			 *
 			 * @since 2.12.1 Moved to `WPGlobus_Options` class with nonce check.
 			 *
-			 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
+			 * @link  wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
 			 */
 
 			/**
@@ -4311,7 +4312,6 @@ class WPGlobus {
 		 * @param array $disabled_entities Array of disabled entities.
 		 *
 		 * @todo  may be remove this filter @see 'wpglobus_disabled_entities' in disabled_entity().
-		 *
 		 */
 		$this->disabled_entities = apply_filters( 'wpglobus_disabled_entities', $this->disabled_entities );
 
@@ -4394,7 +4394,7 @@ class WPGlobus {
 	/**
 	 * Check if script is active.
 	 *
-	 * @since 1.9.17
+	 * @since        1.9.17
 	 *
 	 * @param string $script An script code.
 	 *
@@ -4425,7 +4425,7 @@ class WPGlobus {
 	 * }
 	 * //
 	 */
-	
+
 	/**
 	 * Check if we are using the WPGlobusEditPost Sidebar plugin.
 	 *
@@ -4437,7 +4437,7 @@ class WPGlobus {
 	public static function use_block_editor_sidebar_v2() {
 		return ! self::use_block_editor_sidebar_v1();
 	}
-	
+
 	/**
 	 * Check if we are using the previous version sidebar with the standard WPGlobus metabox.
 	 * To force v.1 you can add `define( 'WPGLOBUS_BLOCK_EDITOR_SIDEBAR_V1', true )` to your `wp-config.php` file.
@@ -4448,13 +4448,13 @@ class WPGlobus {
 	 * @return boolean
 	 */
 	public static function use_block_editor_sidebar_v1() {
-			
+
 		if ( defined( 'WPGLOBUS_BLOCK_EDITOR_SIDEBAR_V1' ) && WPGLOBUS_BLOCK_EDITOR_SIDEBAR_V1 ) {
-			return true;	
+			return true;
 		}
-		
+
 		return false;
-	}	
+	}
 }
 
 # --- EOF

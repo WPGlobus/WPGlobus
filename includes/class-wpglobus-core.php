@@ -224,7 +224,6 @@ class WPGlobus_Core {
 	 *  'first_EN blah-blah second_EN'
 	 *
 	 * @todo  May fail on large texts because regex are used.
-	 *
 	 */
 	public static function extract_text( $text = '', $language = '' ) {
 		if ( ! $text || ! is_string( $text ) ) {

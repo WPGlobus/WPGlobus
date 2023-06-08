@@ -262,9 +262,6 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 			if ( 'wpglobus-reset' === $order['action'] ) {
 
-				/**
-				 * SELECT * FROM `wp_options` WHERE `option_name` REGEXP 'wpglobus'
-				 */
 				global $wpdb;
 
 				/**
@@ -272,10 +269,7 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 				 */
 				$table = $wpdb->prefix . 'options';
 
-				$query = "SELECT `option_id`, `option_name` FROM `$table` WHERE `option_name` REGEXP 'wpglobus'";
-
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-				$ids = $wpdb->get_results( $query, ARRAY_A );
+				$ids = $wpdb->get_results( "SELECT `option_id`, `option_name` FROM `{$wpdb->prefix}options` WHERE `option_name` REGEXP 'wpglobus'", ARRAY_A );
 
 				$records = array();
 				$fields  = array();
@@ -299,6 +293,10 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 
 					$set   = implode( ',', $records );
 					$query = "DELETE FROM $table WHERE `option_id` IN ($set)";
+
+					/**
+					 * Todo: resolve "NotPrepared" by doing DELETE in the loop above
+					 */
 					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 					$result = $wpdb->query( $query );
 				}
@@ -392,9 +390,14 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 			 * Set condition
 			 */
 			$condition = false;
-			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
+
 			if ( count( self::$tables[ $order['table'] ]->include_fields ) === 0 ) {
-				// Do nothing
+				/**
+				 * Do nothing
+				 *
+				 * @noinspection PhpUnusedLocalVariableInspection
+				 */
+				$_noop = true;
 			} elseif ( count( self::$tables[ $order['table'] ]->include_fields ) === 1 ) {
 				// One field
 				$field     = self::$tables[ $order['table'] ]->include_fields[0];
@@ -561,22 +564,24 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 * @return void
 		 */
 		public static function screen() {
-			
+
 			/**
 			 * WP anti-hacks.
-			 * @since 2.12.1
 			 *
+			 * @since 2.12.1
 			 */
-			if ( ! current_user_can( 'manage_options' ) ) { ?>
+			if ( ! current_user_can( 'manage_options' ) ) {
+				?>
 				<div class="wrap about-wrap wpglobus-about-wrap clean-wrap wpglobus-clean">
 					<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
 						<span class="wpglobus-version"><?php echo esc_html( WPGLOBUS_VERSION ); ?></span>
 					</h1>
 					<h4>Unauthorized user</h4>
-				</div><?php		
+				</div>
+				<?php
 				return;
 			}
-			
+
 			/**
 			 * For Google Analytics
 			 */
