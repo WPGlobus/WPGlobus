@@ -993,7 +993,7 @@ class WPGlobus {
 					WPGlobus_Clean::process_ajax($order);
 				} else {
 					$ajax_return['status'] = 'error';
-					$ajax_return['message'] = 'Not access rights';
+					$ajax_return['message'] = 'No access rights';
 					$ajax_return['order'] = $order;
 				}
 
