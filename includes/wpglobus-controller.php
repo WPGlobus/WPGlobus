@@ -2,12 +2,14 @@
 /**
  * Controller
  * All add_filter and add_action calls should be placed here
+ *
  * @package WPGlobus
  */
 
 /**
  * Note the priority '2', and not '0'.
- * @see \WPGlobus_Config::__construct for the actions that must be performed before this one.
+ *
+ * @see WPGlobus_Config::__construct for the actions that must be performed before this one.
  */
 add_action( 'plugins_loaded', array( 'WPGlobus', 'init' ), 2 );
 
@@ -18,21 +20,24 @@ if ( is_admin() ) {
 	add_filter( 'get_the_terms', array( 'WPGlobus_Filters', 'filter__get_the_terms' ), 0 );
 }
 
+$_GET_wpglobus = WPGlobus_WP::get_http_get_parameter( 'wpglobus' );
+
 /**
  * Filter @see wp_get_object_terms()
  */
-if ( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) { // WPCS: input var ok, sanitization ok.
+if ( ! $_GET_wpglobus || 'off' !== $_GET_wpglobus ) {
 	add_filter( 'wp_get_object_terms', array( 'WPGlobus_Filters', 'filter__wp_get_object_terms' ), 0 );
 }
 
 /**
  * Filter for the "Tags" metabox in post edit. Does NOT affect the "Categories" metabox.
+ *
  * @see   get_terms_to_edit() wp-admin\includes\taxonomy.php
  * @scope admin
  * @since 1.6.4
  */
 if (
-	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) // WPCS: input var ok, sanitization ok.
+	( ! $_GET_wpglobus || 'off' !== $_GET_wpglobus )
 	&& is_admin()
 	&& WPGlobus_WP::is_pagenow( 'post.php' )
 ) {
@@ -41,13 +46,14 @@ if (
 
 /**
  * Filter for the "Tags" box on edit.php page.
- * @see filter 'pre_insert_term' in wp-includes\taxonomy.php
+ *
+ * @see   filter 'pre_insert_term' in wp-includes\taxonomy.php
  * @scope admin
  * @since 1.6.6
  */
 if (
-	WPGlobus_WP::is_http_post_action('inline-save')
-	&& false !== strpos( $_SERVER[ 'HTTP_REFERER' ], 'edit.php' )
+	WPGlobus_WP::is_http_post_action( 'inline-save' )
+	&& false !== strpos( WPGlobus_WP::http_referer(), 'edit.php' )
 ) {
 	add_filter( 'pre_insert_term', array( 'WPGlobus_Filters', 'filter__pre_insert_term' ), 5, 2 );
 }
@@ -56,12 +62,12 @@ if (
  * Filter for the "Tags" box on post.php page.
  * To debug check $term before and after line "$term = apply_filters( 'pre_insert_term', $term, $taxonomy );"
  *
- * @see filter 'pre_insert_term' in wp-includes\taxonomy.php
+ * @see   filter 'pre_insert_term' in wp-includes\taxonomy.php
  * @scope admin
  * @since 1.7.0
  */
 if (
-	( empty( $_GET['wpglobus'] ) || 'off' !== $_GET['wpglobus'] ) // WPCS: input var ok, sanitization ok.
+	( ! $_GET_wpglobus || 'off' !== $_GET_wpglobus )
 	&& is_admin()
 	&& WPGlobus_WP::is_pagenow( 'post.php' )
 ) {
@@ -70,12 +76,14 @@ if (
 
 /**
  * Full description is in @see WPGlobus_Filters::filter__sanitize_title
+ *
  * @scope both
  */
 add_filter( 'sanitize_title', array( 'WPGlobus_Filters', 'filter__sanitize_title' ), 0 );
 
 /**
  * Used by @see get_terms (3 places in the function)
+ *
  * @scope both
  * -
  * Example of WP core using this filter: @see _post_format_get_terms
@@ -100,11 +108,11 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() || WPGlobus_WP::is_pagenow( 'n
  * Filter for @see wp_setup_nav_menu_item
  */
 //if ( WPGlobus_WP::is_pagenow( 'nav-menus.php' ) ) {
-	/**
-	 * @todo temporarily disable the filter
-	 * need to test js in work
-	 */
-	//add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
+/**
+ * Todo temporarily disable the filter
+ * need to test js in work
+ */
+//add_filter( 'wp_setup_nav_menu_item', array( 'WPGlobus_Filters', 'filter__nav_menu_item' ), 0 );
 //}
 
 if ( ! is_admin() ) {
@@ -147,6 +155,7 @@ add_filter( 'comment_moderation_text', array( 'WPGlobus_Filters', 'filter__comme
 
 /**
  * Filter @see the_category
+ *
  * @scope admin
  * @since 1.0.3
  * Show default category name in the current language - on the
@@ -158,6 +167,7 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'edit-tags.php' ) ) {
 
 /**
  * Filter @see wp_trim_words
+ *
  * @scope admin
  * @since 1.0.14
  * Trims text to a certain number of words in the current language
@@ -170,6 +180,7 @@ if ( is_admin() && WPGlobus_WP::is_pagenow( 'index.php' ) ) {
  * Basic post/page filters
  * -
  * Note: We don't use 'the_excerpt' filter because 'get_the_excerpt' will be run anyway
+ *
  * @see  the_excerpt()
  * @see  get_the_excerpt()
  * @todo look at 'the_excerpt_export' filter where the post excerpt used for WXR exports.
@@ -179,7 +190,8 @@ add_filter( 'the_content', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 add_filter( 'get_the_excerpt', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 
 /**
- * @see   WPGlobus_Filters::filter__the_posts for the description
+ * For the description @see WPGlobus_Filters::filter__the_posts
+ *
  * @scope front
  * @since 1.0.14
  */
@@ -188,13 +200,15 @@ if ( ! is_admin() ) {
 }
 
 /**
- * @internal
- * Do not need to apply the wp_title filter
- * but need to make sure all possible components of @see wp_title are filtered:
+ * Unused
+ *
+ * @see wp_title are filtered:
  * post_type_archive_title
  * single_term_title
  * blog_info
- * @todo Check date localization in date archives
+ * @internal
+ * Do not need to apply the wp_title filter
+ * but need to make sure all possible components of @todo Check date localization in date archives
  */
 //add_filter( 'wp_title', [ 'WPGlobus_Filters', 'filter__text' ], 0 );
 
@@ -204,13 +218,13 @@ if ( ! is_admin() ) {
 add_filter( 'single_post_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 
 /**
- * @see post_type_archive_title has its own filter on $post_type_obj->labels->name
+ * The @see post_type_archive_title has its own filter on $post_type_obj->labels->name
  *                              and is used by @see wp_title
  */
 add_filter( 'post_type_archive_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 
 /**
- * @see single_term_title() uses several filters depending on the term type
+ * The @see single_term_title() uses several filters depending on the term type
  */
 add_filter( 'single_cat_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 add_filter( 'single_tag_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
@@ -218,12 +232,14 @@ add_filter( 'single_term_title', array( 'WPGlobus_Filters', 'filter__text' ), 0 
 
 /**
  * Feed options.
- * @see 'wp_feed_options' action in wp-includes\feed.php
+ *
+ * See 'wp_feed_options' action in wp-includes\feed.php
  */
 add_action( 'wp_feed_options', array( 'WPGlobus_Filters', 'fetch_feed_options' ) );
 
 /**
  * Register the WPGlobus widgets
+ *
  * @see   WPGlobusWidget
  * @since 1.0.7
  */
@@ -256,7 +272,7 @@ if ( ! is_admin() ) {
 	 * The condition set in the default language works for all languages if not overwritten
 	 * in the corresponding tab.
 	 *
-	 * @link https://wordpress.org/plugins/widget-logic/
+	 * @link  https://wordpress.org/plugins/widget-logic/
 	 *
 	 * @since 1.6.0
 	 */
@@ -266,6 +282,8 @@ if ( ! is_admin() ) {
 }
 
 /**
+ * Blog name and desc
+ *
  * @see   get_bloginfo in general-template.php
  *                   Specific call example is get_option('blogdescription');
  * @see   get_option in option.php
@@ -283,17 +301,18 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 }
 
 /**
- * @see get_locale()
+ * For @see get_locale()
  */
 add_filter( 'locale', array( 'WPGlobus_Filters', 'filter__get_locale' ), PHP_INT_MAX );
 
-/** @todo Move the filter to Filters class */
+/** Todo Move the filter to Filters class */
 add_action( 'activated_plugin', array( 'WPGlobus', 'activated' ) );
 
 add_action( 'admin_init', array( 'WPGlobus_Filters', 'action__admin_init' ), 0 );
 
 /**
  * Translate metadata
+ *
  * @since 1.2.1
  */
 add_action( 'wp', array( 'WPGlobus_Filters', 'set_multilingual_meta_keys' ) );
@@ -308,56 +327,63 @@ if ( ! is_admin() ) {
 
 /**
  * Let @see url_to_postid() work with localized URLs.
+ *
  * @since 1.8.4
  */
 add_filter( 'url_to_postid', array( 'WPGlobus_Filters', 'filter__url_to_postid' ), - PHP_INT_MAX );
 
 /**
  * Detect the language needed to correctly show oembed.
+ *
  * @since 1.8.4
  */
 add_filter( 'oembed_request_post_id', array( 'WPGlobus_Filters', 'filter__oembed_request_post_id' ), - PHP_INT_MAX, 2 );
 
 /**
  * Filter the oembed data returned by the /wp-json/oembed/... calls.
+ *
  * @since 1.8.4
  */
 add_filter( 'oembed_response_data', array( 'WPGlobus_Filters', 'filter__oembed_response_data' ), - PHP_INT_MAX );
 
 /**
  * Filters the name to associate with the "from" email address.
- * @see wp-includes\pluggable.php
+ *
+ * @see   wp-includes\pluggable.php
  * @since 1.9.5
  */
 add_filter( 'wp_mail_from_name', array( 'WPGlobus_Filters', 'filter__text' ), 5 );
 
 /**
  * Filters the wp_mail() arguments.
- * @see wp-includes\pluggable.php
+ *
+ * @see   wp-includes\pluggable.php
  * @since 1.9.5
  */
 add_filter( 'wp_mail', array( 'WPGlobus_Filters', 'filter__wp_mail' ), 5 );
 
 /**
- * Filters oEmbed HTML. 
+ * Filters oEmbed HTML.
  * Case when post has embedded local URL in content.
  *
- * @see wp-includes\class-wp-embed.php
+ * @see   wp-includes\class-wp-embed.php
  * @since 1.9.8
  */
 add_filter( 'embed_oembed_html', array( 'WPGlobus_Filters', 'filter__embed_oembed_html' ), 5, 4 );
 
 /**
  * Filter to use the block editor to manage widgets.
+ *
  * @since 2.8.0
+ * See wp-includes\widgets.php
  */
-/** @see wp-includes\widgets.php */
 add_filter( 'use_widgets_block_editor', array( 'WPGlobus_Filters', 'filter__use_widgets_block_editor' ) );
-/** @see gutenberg\lib\widgets.php  @todo may be need to use this filter too. */
+/** See gutenberg\lib\widgets.php  @todo may be need to use this filter too. */
 // add_filter( 'gutenberg_use_widgets_block_editor', array( 'WPGlobus_Filters', 'filter__use_widgets_block_editor' ) );
 
 /**
  * ACF filters
+ *
  * @todo Move to a separate controller
  */
 if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
@@ -365,18 +391,22 @@ if ( WPGlobus_WP::is_doing_ajax() || ! is_admin() ) {
 	add_filter( 'acf/load_value/type=textarea', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 	add_filter( 'acf/load_value/type=wysiwyg', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 	/**
+	 * ACF
+	 *
 	 * @since 2.2.22
 	 */
 	add_filter( 'acf/load_value/type=url', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 	/**
 	 * Multilingual numbers will be accessible in builder mode.
+	 *
 	 * @since 2.3.8
-	 */	
+	 */
 	add_filter( 'acf/load_value/type=number', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 	/**
 	 * Multilingual value for image will be accessible in builder mode.
+	 *
 	 * @since 2.5.2
-	 */	
+	 */
 	add_filter( 'acf/load_value/type=image', array( 'WPGlobus_Filters', 'filter__text' ), 0 );
 }
 
@@ -388,6 +418,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 
 		/**
 		 * Filter for @see localization.
+		 *
 		 * @scope admin
 		 * @since 1.2.1
 		 */
@@ -399,6 +430,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 
 		/**
 		 * Filter for @see localization.
+		 *
 		 * @scope front
 		 *
 		 * @since 1.1.1
@@ -410,6 +442,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 
 		/**
 		 * Filter for @see aioseop_description.
+		 *
 		 * @scope front
 		 * @since 1.0.8
 		 */
@@ -417,6 +450,7 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 
 		/**
 		 * Filter for @see aioseop_title
+		 *
 		 * @scope front
 		 * @since 1.0.8
 		 */
@@ -427,11 +461,15 @@ if ( defined( 'AIOSEOP_VERSION' ) ) {
 
 /**
  * Yoast SEO filters.
+ *
  * @since 2.0
  */
 if ( defined( 'WPSEO_VERSION' ) ) {
 	if ( is_admin() ) {
-		add_filter( "pre_update_option_wpseo_taxonomy_meta", array( 'WPGlobus_Filters', 'filter__pre_update_wpseo_taxonomy_meta' ), 5, 3 );
+		add_filter( 'pre_update_option_wpseo_taxonomy_meta', array(
+			'WPGlobus_Filters',
+			'filter__pre_update_wpseo_taxonomy_meta',
+		), 5, 3 );
 	}
 }
 
@@ -452,7 +490,10 @@ if ( class_exists( 'Tribe__Events__Main' ) ) {
 
 	require_once dirname( __FILE__ ) . '/vendor/class-wpglobus-the-events-calendar.php';
 
-	add_filter( 'tribe_events_template_data_array', array( 'WPGlobus_The_Events_Calendar', 'filter__events_data' ), 0, 3 );
+	add_filter( 'tribe_events_template_data_array', array(
+		'WPGlobus_The_Events_Calendar',
+		'filter__events_data',
+	), 0, 3 );
 
 }
 
@@ -477,14 +518,16 @@ if ( class_exists( 'RevSliderFront' ) ) {
 		 * @since 1.6.1
 		 *
 		 * @param bool true.
+		 *
 		 * @return bool
-		*/
-		apply_filters( 'wpglobus_revslider_start', true )
+		 */
+	apply_filters( 'wpglobus_revslider_start', true )
 	) :
 
 		/**
 		 * Translate layers
-		 * @see https://revolution.themepunch.com/
+		 *
+		 * @see   https://revolution.themepunch.com/
 		 *
 		 * @since 1.5.0
 		 */
@@ -499,7 +542,8 @@ if ( function_exists( '__mc4wp_flush' ) || function_exists( '_mc4wp_load_plugin'
 
 	/**
 	 * MailChimp for WordPress
-	 * @see https://wordpress.org/plugins/mailchimp-for-wp/
+	 *
+	 * @see   https://wordpress.org/plugins/mailchimp-for-wp/
 	 *
 	 * @since 1.5.4
 	 * @since 1.7.11
@@ -508,8 +552,8 @@ if ( function_exists( '__mc4wp_flush' ) || function_exists( '_mc4wp_load_plugin'
 	WPGlobus_MailChimp_For_WP::controller();
 }
 
-if ( function_exists('pods_api') ) {
-	
+if ( function_exists( 'pods_api' ) ) {
+
 	/**
 	 * Pods – Custom Content Types and Fields.
 	 * https://wordpress.org/plugins/pods/
@@ -522,8 +566,8 @@ if ( function_exists('pods_api') ) {
 	}
 }
 
-if ( defined('RANK_MATH_VERSION') ) {
-	
+if ( defined( 'RANK_MATH_VERSION' ) ) {
+
 	/**
 	 * WordPress SEO Plugin – Rank Math.
 	 * https://wordpress.org/plugins/seo-by-rank-math/
@@ -543,8 +587,8 @@ if ( defined('RANK_MATH_VERSION') ) {
 	}
 }
 
-if ( defined('APL_VERSION') ) {
-	
+if ( defined( 'APL_VERSION' ) ) {
+
 	/**
 	 * Advanced Post List.
 	 * https://wordpress.org/plugins/advanced-post-list/
@@ -553,24 +597,24 @@ if ( defined('APL_VERSION') ) {
 	 */
 	if ( ! is_admin() ) {
 		/**
-		 * @see advanced-post-list\class-apl-core.php
+		 * See advanced-post-list\class-apl-core.php
 		 */
-		add_filter( 'apl_core_loop_before', 	   array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
+		add_filter( 'apl_core_loop_before', array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
 		add_filter( 'apl_core_loop_after_content', array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
-		add_filter( 'apl_core_loop_after', 		   array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
+		add_filter( 'apl_core_loop_after', array( 'WPGlobus_Filters', 'filter__extract_text' ), 2 );
 	}
 }
 
 /**
- * https://sitekit.withgoogle.com/
- * https://github.com/WPGlobus/WPGlobus/issues/94
+ * Google site kit
+ *
+ * @link  https://sitekit.withgoogle.com/
+ * @link  https://github.com/WPGlobus/WPGlobus/issues/94
  * @since 2.6.1
  */
 add_filter(
 	'googlesitekit_canonical_home_url',
-	function() {
+	function () {
 		return get_option( 'home' );
 	}
 );
-
-# --- EOF
