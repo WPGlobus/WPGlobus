@@ -3,7 +3,7 @@
  * File: field_wpglobus_select.php
  *
  * @package     WPGlobus\Admin\Options\Field
- * @author      WPGlobus
+ * Author      WPGlobus
  */
 
 // Exit if accessed directly
@@ -16,24 +16,23 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 	 * Class WPGlobusOptions_wpglobus_select
 	 */
 	class WPGlobusOptions_wpglobus_select {
-		/** @noinspection PhpUndefinedClassInspection */
 
 		/**
 		 * Field Constructor.
 		 *
-		 * @param array $field
+		 * @param array        $field
 		 * @param string|array $value
 		 */
 		public function __construct( $field = array(), $value = '' ) {
 
-			$this->field  = $field;
+			$this->field = $field;
 
-			if ( ! empty($field['value']) ) {
+			if ( ! empty( $field['value'] ) ) {
 				$this->value = $field['value'];
 			} else {
 				$this->value = $value;
 			}
-			
+
 			$this->render();
 		}
 
@@ -41,10 +40,10 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 		 * Field Render Function.
 		 * Takes the vars and outputs the HTML for the field in the settings
 		 *
-		 * @since 
+		 * @since
 		 */
 		public function render() {
-			/** @var array $parent_args */
+			/* @var array $parent_args */
 			//$parent_args = $this->parent->args;
 
 			$sortable = ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : '';
@@ -58,48 +57,50 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 					$this->field['args'] = array();
 				}
 
-				if ( $this->field['data'] === 'elusive-icons' || $this->field['data'] === 'elusive-icon' || $this->field['data'] === 'elusive' ) {
+				if ( 'elusive-icons' === $this->field['data'] || 'elusive-icon' === $this->field['data'] || 'elusive' === $this->field['data'] ) {
 					$icons_file = dirname( __FILE__ ) . '/elusive-icons.php';
 					/**
 					 * Filter 'redux-font-icons-file}'
 					 *
-					 * @param  array $icon_file File for the icons
+					 * @since 1.2.2
+					 *
+					 * @param array $icon_file File for the icons
 					 */
 					$icons_file = apply_filters( 'redux-font-icons-file', $icons_file );
 
 					/**
 					 * Filter 'redux/{opt_name}/field/font/icons/file'
 					 *
-					 * @param  array $icon_file File for the icons
+					 * @since 1.2.2
+					 *
+					 * @param array $icon_file File for the icons
 					 */
-					$icons_file =
-						apply_filters( "redux/{$parent_args['opt_name']}/field/font/icons/file", $icons_file );
+					$icons_file = apply_filters( "redux/{$parent_args['opt_name']}/field/font/icons/file", $icons_file );
 					if ( file_exists( $icons_file ) ) {
-						/** @noinspection PhpIncludeInspection */
 						require_once $icons_file;
 					}
 				}
 
+				/**
+				 * Undefined parent?
+				 *
+				 * @noinspection PhpUndefinedFieldInspection
+				 */
 				$this->field['options'] =
 					$this->parent->get_wordpress_data( $this->field['data'], $this->field['args'] );
 			}
 
-			if ( ! empty( $this->field['data'] ) && ( $this->field['data'] === "elusive-icons" || $this->field['data'] === "elusive-icon" || $this->field['data'] === "elusive" ) ) {
-				$this->field['class'] .= " font-icons";
+			if ( ! empty( $this->field['data'] ) && ( 'elusive-icons' === $this->field['data'] || 'elusive-icon' === $this->field['data'] || 'elusive' === $this->field['data'] ) ) {
+				$this->field['class'] .= ' font-icons';
 			}
 
 
 			if ( ! empty( $this->field['options'] ) ) {
-				$multi = ( isset( $this->field['multi'] ) && $this->field['multi'] ) ? ' multiple="multiple"' : "";
+				$multi = ( isset( $this->field['multi'] ) && $this->field['multi'] ) ? ' multiple="multiple"' : '';
 
-				$width = ' style="width: 40%;"';
-				if ( ! empty( $this->field['width'] ) ) {
-					$width = ' style="' . $this->field['width'] . '"';
-				}
-
-				$nameBrackets = "";
+				$nameBrackets = '';
 				if ( ! empty( $multi ) ) {
-					$nameBrackets = "[]";
+					$nameBrackets = '[]';
 				}
 
 				$placeholder =
@@ -113,7 +114,6 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 					echo '<input type="hidden" class="select2_params" value="' . esc_attr( $select2_params ) . '">';
 				}
 
-				/** @noinspection NotOptimalIfConditionsInspection */
 				if ( isset( $this->field['multi'], $this->field['sortable'] ) && $this->field['multi'] && $this->field['sortable'] && ! empty( $this->value ) && is_array( $this->value ) ) {
 					$origOption             = $this->field['options'];
 					$this->field['options'] = array();
@@ -132,12 +132,16 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 				}
 
 				$sortable =
-					( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : "";
+					( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : '';
 
-				echo $this->render_wrapper('before');	
-					
+				echo wp_kses_post( $this->render_wrapper( 'before' ) );
+
 				echo '<select ' . esc_attr( $multi ) . ' id="' . esc_attr( $this->field['id'] ) . '-select" data-placeholder="' . esc_attr( $placeholder ) . '" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . $nameBrackets ) . '" class="redux-select-item ' . esc_attr( $this->field['class'] . $sortable ) . '"';
-				echo $width; // WPCS: XSS ok, sanitization ok.
+
+				if ( ! empty( $this->field['width'] ) ) {
+					echo ' style="' . empty( $this->field['width'] ) ? '40%' : esc_attr( $this->field['width'] ) . '"';
+				}
+
 				echo ' rows="6">';
 				echo '<option></option>';
 
@@ -163,54 +167,59 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 				echo '<strong>' .
 					 esc_html__( 'No items of this type were found.', 'wpglobus' ) . '</strong>';
 			}
-			if ( ! empty($this->field['desc']) ) {
-				echo '<p class="description">' . $this->field['desc'] . '</p>';
+			if ( ! empty( $this->field['desc'] ) ) {
+				echo '<p class="description">' . esc_html( $this->field['desc'] ) . '</p>';
 			}
-			echo $this->render_wrapper('after');	
-			
+			echo wp_kses_post( $this->render_wrapper( 'after' ) );
+
 		} //function
-		
+
 		/**
-		 * @todo add doc.
+		 * Method render_wrapper.
+		 *
+		 * @param string $wrapper
+		 *
+		 * @return false|string
 		 */
-		public function render_wrapper($wrapper = 'before') {
+		public function render_wrapper( $wrapper = 'before' ) {
 			$render = '';
-			if ( 'before' == $wrapper ) {
+			if ( 'before' === $wrapper ) {
 				ob_start();
 				?>
-				<div 
-					id="wpglobus-options-<?php echo $this->field['id']; ?>" 
-					class="wpglobus-options-field wpglobus-options-field-wpglobus_select" 
-					data-id="<?php echo $this->field['id']; ?>"
-					data-type="<?php echo $this->field['type']; ?>">
-					<div class="grid__item">
-						<p class="title"><?php echo $this->field['title']; ?></p>
-						<?php if ( ! empty($this->field['subtitle']) ) { 	?>
-							<p class="subtitle"><?php echo $this->field['subtitle']; ?></p>
-						<?php }	?>	
-					</div>
-					<div class="grid__item">
+				<div
+				id="wpglobus-options-<?php echo esc_attr( $this->field['id'] ); ?>"
+				class="wpglobus-options-field wpglobus-options-field-wpglobus_select"
+				data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+				data-type="<?php echo esc_attr( $this->field['type'] ); ?>">
+				<div class="grid__item">
+					<p class="title"><?php echo esc_html( $this->field['title'] ); ?></p>
+					<?php if ( ! empty( $this->field['subtitle'] ) ) { ?>
+						<p class="subtitle"><?php echo esc_html( $this->field['subtitle'] ); ?></p>
+					<?php } ?>
+				</div>
+				<div class="grid__item">
 				<?php
 				$render = ob_get_clean();
-			} elseif ( 'after' == $wrapper ) {
+			} elseif ( 'after' === $wrapper ) {
 				?>
-					</div><!-- .grid__item -->
-				</div><!-- #wpglobus-options-<?php echo $this->field['id']; ?> -->
-				<?php				
+				</div><!-- .grid__item -->
+				</div><!-- #wpglobus-options-<?php echo esc_attr( $this->field['id'] ); ?> -->
+				<?php
 				$render = ob_get_clean();
 			}
-			return $render;			
+
+			return $render;
 		}
-		
+
 		/**
+		 * Method make_option
+		 *
 		 * @param        $id
 		 * @param        $value
 		 * @param string $group_name
+		 * @noinspection PhpUnusedParameterInspection
 		 */
-		private function make_option(
-			$id, $value, /** @noinspection PhpUnusedParameterInspection */
-			$group_name = ''
-		) {
+		private function make_option( $id, $value, $group_name = '' ) {
 			if ( is_array( $this->value ) ) {
 				$selected =
 					( is_array( $this->value ) && in_array( $id, $this->value, true ) ) ? ' selected="selected"' : '';
@@ -219,7 +228,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 			}
 
 			echo '<option value="' . esc_attr( $id ) . '"';
-			echo $selected; // WPCS: XSS ok.
+			echo wp_kses_post( $selected );
 			echo '>' . esc_html( $value ) . '</option>';
 		}
 
@@ -230,11 +239,12 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function enqueue() {
-			/** @var array $parent_args */
-			
+
 			return;
-			
-			
+
+			/*
+			 * @var array $parent_args
+
 			$parent_args = $this->parent->args;
 
 			wp_enqueue_style( 'select2-css' );
@@ -255,7 +265,14 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_select' ) ) {
 					WPGlobus::SCRIPT_VER()
 				);
 			}
+			*/
 		}
 	}
 }
-new WPGlobusOptions_wpglobus_select($field);
+/**
+ * Go
+ *
+ * @see WPGlobus_Options::page_options
+ * @global array $field
+ */
+new WPGlobusOptions_wpglobus_select( $field );
