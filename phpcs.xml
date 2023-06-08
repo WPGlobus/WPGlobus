@@ -21,8 +21,11 @@
         <exclude name="Generic.Files.OneObjectStructurePerFile.MultipleFound" />
         <exclude name="Generic.Classes.OpeningBraceSameLine.ContentAfterBrace" />
         <exclude name="PEAR.Functions.FunctionCallSignature" />
+        <exclude name="PEAR.NamingConventions.ValidClassName.Invalid" />
         <exclude name="Squiz.Commenting" />
         <exclude name="Squiz.PHP.CommentedOutCode.Found" />
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
         <exclude name="Squiz.PHP.DisallowSizeFunctionsInLoops.Found" />
         <exclude name="Squiz.WhiteSpace" />
         <exclude name="WordPress.Arrays" />
