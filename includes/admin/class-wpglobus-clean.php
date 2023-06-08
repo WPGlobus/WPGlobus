@@ -561,7 +561,22 @@ if ( ! class_exists( 'WPGlobus_Clean' ) ) :
 		 * @return void
 		 */
 		public static function screen() {
-
+			
+			/**
+			 * WP anti-hacks.
+			 * @since 2.12.1
+			 *
+			 */
+			if ( ! current_user_can( 'manage_options' ) ) { ?>
+				<div class="wrap about-wrap wpglobus-about-wrap clean-wrap wpglobus-clean">
+					<h1 class="wpglobus"><span class="wpglobus-wp">WP</span>Globus
+						<span class="wpglobus-version"><?php echo esc_html( WPGLOBUS_VERSION ); ?></span>
+					</h1>
+					<h4>Unauthorized user</h4>
+				</div><?php		
+				return;
+			}
+			
 			/**
 			 * For Google Analytics
 			 */
