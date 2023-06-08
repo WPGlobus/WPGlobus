@@ -3,7 +3,6 @@
  * File: field_table.php
  *
  * @package     WPGlobus\Admin\Options\Field
- * @author      WPGlobus
  */
 
 if ( ! class_exists( 'WPGlobusOptions_table' ) ) {
@@ -22,7 +21,7 @@ if ( ! class_exists( 'WPGlobusOptions_table' ) ) {
 		 */
 		public function __construct( $field = array(), $value = '' ) {
 
-			$this->field  = $field;
+			$this->field = $field;
 			if ( ! empty($field['value']) ) {
 				$this->value = $field['value'];
 			} else {
@@ -48,4 +47,10 @@ if ( ! class_exists( 'WPGlobusOptions_table' ) ) {
 		
 	}
 }
-new WPGlobusOptions_table($field);
+/**
+ * Go
+ *
+ * @see WPGlobus_Options::page_options
+ * @global array $field
+ */
+new WPGlobusOptions_table( $field );
