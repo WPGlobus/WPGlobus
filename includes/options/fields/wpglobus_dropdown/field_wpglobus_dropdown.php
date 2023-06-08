@@ -1,6 +1,6 @@
 <?php
 /**
- * wpglobus_dropdown
+ * File wpglobus_dropdown
  */
 
 // Exit if accessed directly
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
+if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ) :
 
 	/**
 	 * Class WPGlobusOptions_wpglobus_dropdown
@@ -33,7 +33,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 		 */
 		public function render( $field ) {
 			if ( ! empty( $field['anchor'] ) ) {
-				echo '<a name="'.esc_attr( $field['anchor'] ).'"></a>';
+				echo '<a name="' . esc_attr( $field['anchor'] ) . '"></a>';
 			}
 			?>
 			<div id="wpglobus-options-<?php echo esc_attr( $field['id'] ); ?>"
@@ -49,13 +49,13 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 				<div class="grid__item">
 					<select id="<?php echo esc_attr( $field['id'] ); ?>-select"
 							name="<?php echo esc_attr( $field['name'] ); ?>">
-						<?php foreach ( $field['options'] as $value => $label ): ?>
+						<?php foreach ( $field['options'] as $value => $label ) : ?>
 							<option value="<?php echo esc_attr( $value ); ?>"<?php selected( $value, $field['default'] ); ?>>
 								<?php echo esc_html( $label ); ?>
 							</option>
 						<?php endforeach; ?>
 					</select>
-					<?php if ( ! empty( $field['desc'] ) ): ?>
+					<?php if ( ! empty( $field['desc'] ) ) : ?>
 						<p class="description"><?php echo wp_kses_post( $field['desc'] ); ?></p>
 					<?php endif; ?>
 				</div>
@@ -67,8 +67,9 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_dropdown' ) ):
 endif;
 
 /**
- * @global array $field
+ * Go
+ *
  * @see WPGlobus_Options::page_options
+ * @global array $field
  */
 new WPGlobusOptions_wpglobus_dropdown( $field );
-# --- EOF
