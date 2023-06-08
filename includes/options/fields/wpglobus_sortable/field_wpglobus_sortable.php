@@ -3,7 +3,6 @@
  * File: field_wpglobus_sortable.php
  *
  * @package     WPGlobus\Admin\Options\Field
- * @author      WPGlobus
  */
 
 // Exit if accessed directly
@@ -19,11 +18,15 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 	class WPGlobusOptions_wpglobus_sortable {
 
 		/**
+		 * Field
+		 *
 		 * @var array
 		 */
 		private $field;
 
 		/**
+		 * Value
+		 *
 		 * @var string
 		 */
 		private $value;
@@ -107,13 +110,13 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 			$use_labels  = false;
 			$label_class = '';
 			if ( 'checkbox' !== $this->field['mode'] ) {
-				if ( ( isset( $this->field['label'] ) && true == $this->field['label'] ) ) { // phpcs:ignore WordPress.PHP.StrictComparisons
+				if ( ( isset( $this->field['label'] ) && true === $this->field['label'] ) ) {
 					$use_labels  = true;
 					$label_class = ' labeled';
 				}
 			}
 
-			echo $this->render_wrapper( 'before' ); // phpcs:ignore WordPress.XSS
+			echo wp_kses_post( $this->render_wrapper( 'before' ) );
 
 			echo '<ul id="' . esc_attr( $this->field['id'] ) . '-list" class="wpglobus-sortable ' . esc_attr( $field_class . ' ' . $label_class ) . '">';
 
@@ -161,11 +164,11 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 				echo '<input rel="'
 					 . esc_attr( $this->field['id'] . '-' . $k . '-hidden' )
 					 . '" class="' . esc_attr( $class ) . '" ';
-				echo $checked; // WPCS: XSS ok.
+				echo wp_kses_post( $checked );
 				echo 'type="'
 					 . esc_attr( $this->field['mode'] )
 					 . '" ';
-				echo $name; // WPCS: XSS ok.
+				echo wp_kses_post( $name );
 				echo 'id="'
 					 . esc_attr( $this->field['id'] . '[' . $k . ']' )
 					 . '" value="' . esc_attr( $value_display ) . '" placeholder="' . esc_attr( $nicename ) . '" />';
@@ -190,7 +193,7 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 			}
 			echo '</ul>';
 
-			echo $this->render_wrapper( 'after' ); // phpcs:ignore WordPress.XSS
+			echo wp_kses_post( $this->render_wrapper( 'after' ) );
 
 		}
 
@@ -231,7 +234,9 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_sortable' ) ) {
 	}
 }
 /**
+ * Go
+ *
  * @global array $field
- * @see \WPGlobus_Options::page_options
+ * @see WPGlobus_Options::page_options
  */
 new WPGlobusOptions_wpglobus_sortable( $field );
