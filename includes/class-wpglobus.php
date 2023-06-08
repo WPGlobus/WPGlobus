@@ -4273,17 +4273,14 @@ class WPGlobus {
 	public function on_admin_init() {
 
 		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
+			
 			/**
-			 * For developers use only. Deletes settings with no warning! Irreversible!
+			 * For developers use only. Deletes settings! Irreversible!
 			 *
-			 * @link wp-admin/admin.php?wpglobus-reset-all-options=1
+			 * @since 2.12.1 Moved to `WPGlobus_Options` class with nonce check.
+			 *
+			 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
 			 */
-			if ( 1 === (int) WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) ) {
-				global $wpdb;
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );
-				wp_safe_redirect( admin_url() );
-				exit();
-			}
 
 			/**
 			 * Check for transient wpglobus_activated

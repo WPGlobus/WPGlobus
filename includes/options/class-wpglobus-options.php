@@ -93,6 +93,11 @@ class WPGlobus_Options {
 
 		$this->url_options_image = WPGlobus::$PLUGIN_DIR_URL . 'includes/options/images/';
 
+		/**
+		 * @since 2.12.1
+		 */
+		add_action( 'admin_init', array($this, 'on__admin_init') );
+
 		add_action( 'init', array( $this, 'on__init' ), PHP_INT_MAX );
 
 		add_action( 'wp_loaded', array( $this, 'on__wp_loaded' ), PHP_INT_MAX );
@@ -109,7 +114,45 @@ class WPGlobus_Options {
 		 * @since 2.2.14
 		 */
 		add_action( 'wp_ajax_' . WPGLOBUS_AJAX, array( $this, 'on__process_ajax' ) );
+	}
 
+	/**
+	 * @since 2.12.1
+	 */
+	public function on__admin_init() {
+
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			return;
+		}
+
+		/** @global wpdb $wpdb */
+		global $wpdb;
+
+		/**
+		 * For developers use only. Deletes settings! Irreversible!
+		 *
+		 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
+		 */
+		if ( 1 === (int) WPGlobus_WP::get_http_get_parameter( 'wpglobus-reset-all-options' ) && ! empty($_POST['_wpnonce']) ) { 
+
+			if ( wp_verify_nonce( $_POST['_wpnonce'], self::NONCE_ACTION ) ) {
+				
+				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpglobus_option%';" );				
+				wp_safe_redirect( admin_url() );
+				exit();		
+			
+			} else {
+				wp_safe_redirect( 
+					add_query_arg(
+						array(
+							'page' => 'wpglobus_options'
+						),
+						admin_url('admin.php')
+					) 
+				);
+				exit();		
+			}
+		}			
 	}
 
 	/**
@@ -339,7 +382,26 @@ class WPGlobus_Options {
 	 * The Options Panel page - linked to the admin menu.
 	 */
 	protected function page_options() {
-		?>
+
+		/**
+		 * For developers use only. Deletes settings! Irreversible!
+		 *
+		 * @since 2.12.1
+		 *
+		 * @link wp-admin/admin.php?page=wpglobus_options&wpglobus-reset-all-options=1
+		 * 
+		 */
+		if ( ! empty( $_GET['wpglobus-reset-all-options'] ) ) { ?>
+			<div class="wrap">
+				<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
+				<form id="form-wpglobus-options" method="post">
+					<h3>Deletes settings! Irreversible!</h3>
+					<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Reset all options"></p>
+					<?php wp_nonce_field( self::NONCE_ACTION ); ?>								
+				</form>
+			</div><?php									
+			return;
+		} ?>
 		<div class="wrap">
 			<h1>WPGlobus <?php echo esc_html( WPGLOBUS_VERSION ); ?></h1>
 			<div id="wpglobus-options-old-browser-warning" class="notice notice-error">
