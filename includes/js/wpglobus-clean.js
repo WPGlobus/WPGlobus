@@ -76,6 +76,13 @@ jQuery(document).ready(function($) {
 					/* error in promise */
 					/* return $.ajax( ); */
 				}).then( function( result ) {
+					
+					if (typeof result === 'object' && result.status === 'error') {
+						$('#'+result.order.table+' .wpglobus-spinner' ).css({'visibility':'hidden'});
+						$('#'+result.order.table+' .wpglobus-result' ).html( '<img title="'+result.message+'" src="'+WPGlobusClean.icons.error+'" />' );
+						return;
+					}
+					
 					if ( typeof result.data !== 'undefined' ) {
 
 						$( '#'+result.data.table+' .wpglobus-spinner' ).css({'visibility':'hidden'});

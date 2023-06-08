@@ -987,8 +987,15 @@ class WPGlobus {
 		switch ( $action ) {
 			case 'clean':
 			case 'wpglobus-reset':
-				require_once 'admin/class-wpglobus-clean.php';
-				WPGlobus_Clean::process_ajax( $order );
+
+				if ( current_user_can( 'manage_options' ) ) {
+					require_once 'admin/class-wpglobus-clean.php';
+					WPGlobus_Clean::process_ajax($order);
+				} else {
+					$ajax_return['status'] = 'error';
+					$ajax_return['message'] = 'Not access rights';
+					$ajax_return['order'] = $order;
+				}
 
 				break;
 			case 'save_post_meta_settings':
