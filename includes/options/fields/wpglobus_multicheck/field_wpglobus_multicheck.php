@@ -1,10 +1,10 @@
 <?php
 /**
- * wpglobus_multicheck
+ * Field wpglobus_multicheck
  *
- * @since 2.2.11 
- * 	- added `disabled` attribute.
- * 	- added `field_wrapper_style` attribute.
+ * @since 2.2.11
+ *    - added `disabled` attribute.
+ *    - added `field_wrapper_style` attribute.
  */
 
 // Exit if accessed directly
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
+if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ) :
 
 	/**
 	 * Class WPGlobusOptions_wpglobus_multicheck
@@ -51,23 +51,25 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 				</div>
 				<div class="grid__item">
 					<fieldset id="<?php echo esc_attr( $field['id'] ); ?>-multicheck">
-						<?php foreach ( $field['options'] as $value => $attrs ): 
-							$disabled = (! empty($attrs['disabled']) && ($attrs['disabled'] == 'disabled' || $attrs['disabled'] === true) ) ? 'disabled' : '';
-							$field_wrapper_style = empty($attrs['field_wrapper_style']) ? '' : $attrs['field_wrapper_style'];
-						?>
-							<div class="field-wrapper" style="<?php echo $field_wrapper_style; ?>">
+						<?php
+						foreach ( $field['options'] as $value => $attrs ) :
+							$disabled = ( ! empty( $attrs['disabled'] ) && ( 'disabled' === $attrs['disabled'] || true === $attrs['disabled'] ) ) ? 'disabled' : '';
+
+							$field_wrapper_style = empty( $attrs['field_wrapper_style'] ) ? '' : $attrs['field_wrapper_style'];
+							?>
+							<div class="field-wrapper" style="<?php echo esc_attr( $field_wrapper_style ); ?>">
 								<input type="hidden" value="0"
 										name="<?php echo esc_attr( $field['name'] ); ?>[control][<?php echo esc_attr( $value ); ?>]"/>
 								<input type="checkbox"<?php checked( $attrs['checked'] ); ?>
 										id="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"
 										name="<?php echo esc_attr( $field['name'] ); ?>[<?php echo esc_attr( $value ); ?>]"
-										value="1" 
-										<?php echo $disabled; ?>>
+										value="1"
+									<?php echo wp_kses_post( $disabled ); ?>>
 								<label for="<?php echo esc_attr( $field['id'] ); ?>-<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $attrs['label'] ); ?></label>
 							</div>
 						<?php endforeach; ?>
 					</fieldset>
-					<?php if ( ! empty( $field['desc'] ) ): ?>
+					<?php if ( ! empty( $field['desc'] ) ) : ?>
 						<p class="description"><?php echo esc_html( $field['desc'] ); ?></p>
 					<?php endif; ?>
 				</div>
@@ -79,7 +81,9 @@ if ( ! class_exists( 'WPGlobusOptions_wpglobus_multicheck' ) ):
 endif;
 
 /**
- * @global array $field
+ * Go
+ *
  * @see WPGlobus_Options::page_options
+ * @global array $field
  */
 new WPGlobusOptions_wpglobus_multicheck( $field );
