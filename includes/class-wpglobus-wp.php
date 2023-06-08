@@ -491,6 +491,27 @@ class WPGlobus_WP {
 	}
 
 	/**
+	 * Method fs_put_contents replaces {@see file_put_contents()}.
+	 *
+	 * @since 2.12.1
+	 *
+	 * @param string    $file     Remote path to the file where to write the data.
+	 * @param string    $contents The data to write.
+	 * @param int|false $mode     Optional. The file permissions as octal number, usually 0644.
+	 *                            Default false.
+	 * @return bool True on success, false on failure.
+	 */
+	public static function fs_put_contents( $file, $contents, $mode = false ) {
+
+		$fs = self::get_fs();
+		if ( $fs ) {
+			return $fs->put_contents( $file, $contents, $mode );
+		}
+
+		return false;
+	}
+
+	/**
 	 * Returns sanitized $_SERVER['REQUEST_URI'].
 	 *
 	 * @since 2.12.1
