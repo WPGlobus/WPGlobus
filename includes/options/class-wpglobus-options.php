@@ -1718,7 +1718,7 @@ class WPGlobus_Options {
 		 */
 		$wpglobus_option = get_option( $this->args['opt_name'] );
 
-		$hreflang_type_default          = 'zz-ZZ';
+		$hreflang_type_default = 'zz-ZZ';
 		// $hreflang_type_default_language = false;
 
 		$hreflang_type                      = empty( $wpglobus_option['seo_hreflang_type'] ) ? $hreflang_type_default : $wpglobus_option['seo_hreflang_type'];
