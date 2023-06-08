@@ -298,6 +298,15 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 ## Changelog ##
 
+### 2.12.1 ###
+
+* Fix: (Security) Authentication check in `class-wpglobus.php` function `on_admin_init()`.
+
+* Fix: (Security) Permission check in `class-wpglobus-customize-options.php` function `action__process_ajax()`.
+
+* Fix: (Security) Permission check in `class-wpglobus.php` function `on_process_ajax()`.
+* (Core) General code cleanup using PHPCS (WP and Woo) recommendations.
+
 ### 2.12.0 ###
 * (Compatibility) Tested up to WordPress 6.2
 * (Builders/RankMathSEO) Added filter multilingual strings for the options page.

@@ -119,10 +119,10 @@ msgstr ""
 #. translators: %s are used to insert HTML link. Keep them in place.
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
-"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+"consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you."
 msgstr ""
 "Bitte kontaktieren Sie das Plugin-Team. Wenn Sie Probleme bei der "
-"Installation oder Anpassung haben, können Sie %s das WPGlobus Team %s mit "
+"Installation oder Anpassung haben, können Sie %1$s das WPGlobus Team %2$s mit "
 "einer benutzerdefinierte Anpassung beauftragen."
 
 msgid "Language was set on your profile page"
@@ -368,6 +368,7 @@ msgstr "Beschriftung"
 msgid "Description"
 msgstr "Umschreibung"
 
+#. translators: %s is placeholder for Button
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button %s below."
@@ -585,6 +586,7 @@ msgstr "Systeminformationen"
 msgid "This information helps us to find the problem source"
 msgstr ""
 
+#. translators: %s - placeholder for email.
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."

@@ -126,10 +126,10 @@ msgstr ""
 #. translators: %s are used to insert HTML link. Keep them in place.
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
-"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+"consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you."
 msgstr ""
 "Пожалуйста, свяжитесь с авторами темы / плагина. Если они не могут помочь, "
-"рассмотрите возможность %s дать заказ команде разработчиков WPGlobus %s на "
+"рассмотрите возможность %1$s дать заказ команде разработчиков WPGlobus %2$s на "
 "написание кода специально для вас."
 
 msgid "Language was set on your profile page"
@@ -400,6 +400,7 @@ msgstr "Метка"
 msgid "Description"
 msgstr "Описание"
 
+#. translators: %s is placeholder for Button
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button %s below."
@@ -631,6 +632,7 @@ msgstr "Техническая информация"
 msgid "This information helps us to find the problem source"
 msgstr "Эта информация поможет нам в поиске источника проблемы"
 
+#. translators: %s - placeholder for email.
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
@@ -650,7 +652,9 @@ msgstr "Перевод ссылок возможен с помощью WPGlobus-
 msgid ""
 "With Publish module, you will be able to write a post in one language and "
 "immediately publish it, not waiting for the translation to other languages."
-msgstr "С помощью модуля Publish вы сможете опубликовать страницу в одном языке, не дожидаясь готовности переводов на другие языки."
+msgstr ""
+"С помощью модуля Publish вы сможете опубликовать страницу в одном языке, не "
+"дожидаясь готовности переводов на другие языки."
 
 msgid "WPGlobus Recommends:"
 msgstr "WPGlobus рекомендует:"

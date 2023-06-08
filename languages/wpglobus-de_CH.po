@@ -92,7 +92,7 @@ msgid ""
 msgstr ""
 
 msgid "Important notes:"
-msgstr "Wichtige Hinweise"
+msgstr "Wichtige Hinweise:"
 
 msgid ""
 "WPGlobus only supports the localization URLs in the form of <code>example."
@@ -119,10 +119,10 @@ msgstr ""
 #. translators: %s are used to insert HTML link. Keep them in place.
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
-"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+"consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you."
 msgstr ""
 "Bitte kontaktieren Sie das Plugin-Team. Wenn Sie Probleme bei der "
-"Installation oder Anpassung haben, können Sie %s das WPGlobus Team %s mit "
+"Installation oder Anpassung haben, können Sie %1$s das WPGlobus Team %2$s mit "
 "einer benutzerdefinierte Anpassung beauftragen."
 
 msgid "Language was set on your profile page"
@@ -208,7 +208,7 @@ msgid ""
 msgstr ""
 
 msgid "YES, I CONFIRM"
-msgstr ""
+msgstr "JA, ICH STIMME ZU"
 
 msgid "Process with the Clean-up"
 msgstr ""
@@ -368,6 +368,7 @@ msgstr "Beschriftung"
 msgid "Description"
 msgstr "Umschreibung"
 
+#. translators: %s is placeholder for Button
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button %s below."
@@ -500,7 +501,7 @@ msgid "Locale"
 msgstr "Lokale"
 
 msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
-msgstr "PHP/Wordpress Gebietsschema der Sprache. (Beispiele: en_US, de_DE)"
+msgstr "PHP/WordPress Gebietsschema der Sprache. (Beispiele: en_US, de_DE)"
 
 msgid "Are you sure you want to delete?"
 msgstr "Sind Sie sicher, dass Sie die Lösch-Aktion durchführen möchten?"
@@ -512,13 +513,13 @@ msgid "Back to the WPGlobus Settings"
 msgstr "Zurück zu den WPGlobus-Einstellungen"
 
 msgid "Current Version"
-msgstr "Aktelle Version"
+msgstr "Aktuelle Version"
 
 msgid "Premium add-on"
 msgstr ""
 
 msgid "Installed"
-msgstr "Instaliert"
+msgstr "Installiert"
 
 msgid "Get it now!"
 msgstr "Jetzt holen"
@@ -546,10 +547,11 @@ msgid "Email sent."
 msgstr ""
 
 msgid "Thank you for using WPGlobus!"
-msgstr ""
+msgstr "Danke, dass du WPGlobus! nutzt."
 
 msgid "Our Support Team is here to answer your questions or concerns."
 msgstr ""
+"Unser Support-Team ist dazu da, deine Fragen oder Anliegen zu beantworten."
 
 msgid "To help us serve you better:"
 msgstr ""
@@ -570,7 +572,7 @@ msgid "Please make sure the email address is correct."
 msgstr ""
 
 msgid "Subject"
-msgstr "Thema"
+msgstr "Betreff"
 
 msgid "Short description of the problem"
 msgstr ""
@@ -584,6 +586,7 @@ msgstr "Systeminformationen"
 msgid "This information helps us to find the problem source"
 msgstr ""
 
+#. translators: %s - placeholder for email.
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
@@ -651,13 +654,13 @@ msgstr ""
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 #. translators: ON/OFF status of WPGlobus on the edit pages.
 msgid "ON"
-msgstr ""
+msgstr "EIN"
 
 msgid "Turn off"
 msgstr ""
 
 msgid "OFF"
-msgstr ""
+msgstr "AUS"
 
 msgid "Turn on"
 msgstr ""
@@ -795,7 +798,7 @@ msgid ""
 msgstr ""
 
 msgid "Important notes"
-msgstr ""
+msgstr "Wichtige Hinweise"
 
 #. translators: placeholders for "strong" tags.
 msgid "Version %1$s1.9.17%2$s "
@@ -843,7 +846,7 @@ msgid "Deactivating / Uninstalling"
 msgstr ""
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Deinstallieren"
 
 msgid "All add-ons"
 msgstr ""
@@ -1012,7 +1015,7 @@ msgid ""
 msgstr ""
 
 msgid "Post Types"
-msgstr ""
+msgstr "Post-Types"
 
 msgid ""
 "You should put here only the code provided by WPGlobus Support. Do not write "
@@ -1021,10 +1024,10 @@ msgid ""
 msgstr ""
 
 msgid "Custom Code"
-msgstr ""
+msgstr "Benutzerdefinierter Code"
 
 msgid "Enabled"
-msgstr "aktiv"
+msgstr "Aktiviert"
 
 msgid "Builders support"
 msgstr ""
@@ -1104,7 +1107,7 @@ msgid ""
 msgstr ""
 
 msgid "Description:"
-msgstr ""
+msgstr "Beschreibung:"
 
 msgid "REST API"
 msgstr ""
@@ -1146,10 +1149,10 @@ msgid "Add new Language"
 msgstr "Fügen Sie neue Sprache hinzu"
 
 msgid "No items of this type were found."
-msgstr ""
+msgstr "Es wurden keine Elemente dieses Typs gefunden."
 
 msgid "Select an item"
-msgstr ""
+msgstr "Wählen Sie ein Element"
 
 msgid "Multilingual support of this add-on is currently in Beta stage."
 msgstr ""
@@ -1161,16 +1164,16 @@ msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
 msgstr ""
 
 msgid "WordPress version"
-msgstr ""
+msgstr "WordPress Version"
 
 msgid "In the WordPress core"
 msgstr ""
 
 msgid "Core"
-msgstr ""
+msgstr "Kern"
 
 msgid "Current version"
-msgstr ""
+msgstr "Derzeitige Version"
 
 msgid "Stage"
 msgstr ""
@@ -1179,7 +1182,7 @@ msgid "Status"
 msgstr "Status"
 
 msgid "Block editor"
-msgstr ""
+msgstr "Block-Editor"
 
 msgid "production"
 msgstr ""
@@ -1188,13 +1191,13 @@ msgid "List of supported add-ons"
 msgstr ""
 
 msgid "Add-on"
-msgstr ""
+msgstr "Add-on"
 
 msgid "Supported minimum version"
 msgstr ""
 
 msgid "Not installed"
-msgstr ""
+msgstr "Nicht installiert"
 
 msgid "Installed, inactive"
 msgstr ""

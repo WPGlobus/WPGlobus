@@ -124,11 +124,8 @@ msgstr ""
 #. translators: %s are used to insert HTML link. Keep them in place.
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
-"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+"consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you."
 msgstr ""
-"Silahkan hubungi penulis tema / plugin. Jika mereka tidak dapat membantu, "
-"pertimbangkan untuk %s menyewa Tim WPGlobus %s untuk menulis kode khusus "
-"untuk Anda."
 
 msgid "Language was set on your profile page"
 msgstr ""
@@ -390,6 +387,7 @@ msgstr "Label"
 msgid "Description"
 msgstr "Deskripsi"
 
+#. translators: %s is placeholder for Button
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button %s below."
@@ -618,6 +616,7 @@ msgstr "Informasi teknis"
 msgid "This information helps us to find the problem source"
 msgstr ""
 
+#. translators: %s - placeholder for email.
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
@@ -1335,3 +1334,11 @@ msgstr ""
 
 msgid "https://wpglobus.com/"
 msgstr "https://wpglobus.com/"
+
+#~ msgid ""
+#~ "Please contact the theme / plugin author. If they are unable to assist, "
+#~ "consider %s hiring the WPGlobus Team %s to write a custom code for you."
+#~ msgstr ""
+#~ "Silahkan hubungi penulis tema / plugin. Jika mereka tidak dapat membantu, "
+#~ "pertimbangkan untuk %s menyewa Tim WPGlobus %s untuk menulis kode khusus "
+#~ "untuk Anda."

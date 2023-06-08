@@ -2,6 +2,12 @@
 
 ## Changelog ##
 
+2023-06-09 - version 2.12.1
+* Fix: (Security) Authentication check in `class-wpglobus.php` function `on_admin_init()`.
+* Fix: (Security) Permission check in `class-wpglobus-customize-options.php` function `action__process_ajax()`.
+* Fix: (Security) Permission check in `class-wpglobus.php` function `on_process_ajax()`.
+* (Core) General code cleanup using PHPCS (WP and Woo) recommendations. 
+
 2023-05-09 - version 2.12.0
 * (Compatibility) Tested up to WordPress 6.2
 * (Builders/RankMathSEO) Added filter multilingual strings for the options page.

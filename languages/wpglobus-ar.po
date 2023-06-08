@@ -120,7 +120,7 @@ msgstr "هذا ربما يظهر بعض الكتابات بدون ترجمة، �
 #. translators: %s are used to insert HTML link. Keep them in place.
 msgid ""
 "Please contact the theme / plugin author. If they are unable to assist, "
-"consider %s hiring the WPGlobus Team %s to write a custom code for you."
+"consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you."
 msgstr ""
 "من فضلك تواصل مع مالك الإضافة أو الثيم. إذا كانوا لا يستطيعوا المساعدة، فكر "
 "في %s تأجير فريق WPGlobus%s لكي يكتب كود مخصص لك."
@@ -362,6 +362,7 @@ msgstr "عنوان"
 msgid "Description"
 msgstr " الوصف"
 
+#. translators: %s is placeholder for Button
 msgid ""
 "Here you can specify which fields should be considered multilingual by "
 "WPGlobus. To exclude a field, uncheck it and then press the button %s below."
@@ -570,6 +571,7 @@ msgstr "المعلومات التقنية"
 msgid "This information helps us to find the problem source"
 msgstr ""
 
+#. translators: %s - placeholder for email.
 msgid ""
 "Alternatively, please email %s. Do not forget to copy and paste the "
 "technical information to your email message."
