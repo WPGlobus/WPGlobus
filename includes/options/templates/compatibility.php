@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/** @noinspection PhpIncludeInspection */
 require_once WPGlobus::plugin_dir_path() . 'includes/builders/class-wpglobus-builders.php';
 
 if ( ! function_exists( 'is_plugin_active' ) ) {
