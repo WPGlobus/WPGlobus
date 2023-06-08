@@ -198,8 +198,12 @@ jQuery(document).ready(function ($) {
 				beforeSend:function(){},
 				type: 'POST',
 				url: WPGlobusCustomizeOptions.ajaxurl,
-				data: { action:WPGlobusCustomizeOptions.process_ajax, order:order },
+				data: {action:WPGlobusCustomizeOptions.process_ajax, order:order},
 				dataType: 'json' 
+			})
+			.done(function(response){})
+			.fail(function(jqXHR, textStatus){
+				// if jqXHR.status == 0, then internet connection is failed.
 			})
 			.always(function() {
 				location.reload(true);
@@ -277,18 +281,22 @@ jQuery(document).ready(function ($) {
 						}			
 
 					});
-
 				});
-			
 			}
 			
 			$.ajax({
 				beforeSend:function(){},
 				type: 'POST',
 				url: WPGlobusCustomizeOptions.ajaxurl,
-				data: { action:WPGlobusCustomizeOptions.process_ajax, order:order },
+				data: {action:WPGlobusCustomizeOptions.process_ajax, order:order},
 				dataType: 'json' 
-			});		
+			})
+			.done(function(response){})
+			.fail(function(jqXHR, textStatus){
+				// if jqXHR.status == 0, then internet connection is failed.
+			})
+			.always(function (jqXHR, textStatus){
+			});
 		},
 		getChangesetData: function(ajaxData) {
 			/**
@@ -405,7 +413,5 @@ jQuery(document).ready(function ($) {
 	};
 	
 	WPGlobusCustomizeOptions =  $.extend( {}, WPGlobusCustomizeOptions, api );	
-	
 	WPGlobusCustomizeOptions.init();
-
 });	

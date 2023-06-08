@@ -546,13 +546,25 @@ if ( ! class_exists( 'WPGlobus_Customize_Options' ) ) :
 			$result      = true;
 			$ajax_return = array();
 
-			$post_order = WPGlobus_WP::get_http_post_parameter( 'order' );
+			$post_order = WPGlobus_WP::get_http_post_parameter('order');
 
 			$order = array();
 			if ( $post_order ) {
 				$order['action']   = sanitize_text_field( $post_order['action'] );
 				$order['options']  = isset( $post_order['options'] ) ? $post_order['options'] : array();
 				$order['controls'] = isset( $post_order['controls'] ) ? $post_order['controls'] : array();
+			}
+			
+			/**
+			 * Prohibit saving options on the customizer page for an unauthorized user.
+			 *
+			 * @since 2.12.1
+			 */
+			if ( ! current_user_can('manage_options') ) {
+				$response['order'] = $order;
+				$response['status'] = 'error';
+				$response['message'] = 'No access rights';
+				wp_send_json_error($response);
 			}
 
 			switch ( $order['action'] ) {
