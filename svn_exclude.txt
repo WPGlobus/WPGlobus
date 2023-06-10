@@ -6,6 +6,7 @@
 .tx
 .jshintrc
 .phpunit.result.cache
+_Archive
 Gruntfile.js
 Gulpfile.js
 bin
@@ -19,6 +20,8 @@ node_modules
 npm-debug.log
 package.json
 package-lock.json
+phpcs.cmd
+phpcs.xml
 phpunit.xml
 README.md
 tests

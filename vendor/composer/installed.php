@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpglobus/wpglobus',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '37544949ffba3e95691f779a7c76978004d4e4ce',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '10a8e37841d8033cf12f014b4fa9070a4d55479a',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -58,7 +58,7 @@
         'roave/security-advisories' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '4dac38892bfbf1fc7536b70b0a1f60718b39af1c',
+            'reference' => '22b763b5abdc69572b66c462cd85c2b2135f56aa',
             'type' => 'metapackage',
             'install_path' => NULL,
             'aliases' => array(),
@@ -101,9 +101,9 @@
             'dev_requirement' => true,
         ),
         'wpglobus/wpglobus' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '37544949ffba3e95691f779a7c76978004d4e4ce',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '10a8e37841d8033cf12f014b4fa9070a4d55479a',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
