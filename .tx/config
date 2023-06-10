@@ -1,9 +1,9 @@
 [main]
-host = https://www.transifex.com
+host = https://app.transifex.com
 
-[wpglobus-multilingual.wpglobus]
+[o:wp-translations:p:wpglobus-multilingual:r:wpglobus]
 file_filter = languages/wpglobus-<lang>.po
 source_file = languages/wpglobus.pot
 source_lang = en
-type = PO
+type        = PO
 
