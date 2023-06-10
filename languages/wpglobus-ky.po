@@ -1,0 +1,1260 @@
+# Copyright (C) 2023 WPGlobus
+# This file is distributed under the same license as the WPGlobus package.
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: WPGlobus Multilingual\n"
+"PO-Revision-Date: 2015-09-03 17:28+0000\n"
+"Language-Team: Kyrgyz (http://app.transifex.com/wp-translations/wpglobus-"
+"multilingual/language/ky/)\n"
+"Language: ky\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Guide"
+msgstr ""
+
+msgid "WPGlobus Help Desk"
+msgstr ""
+
+msgid "Add-ons"
+msgstr ""
+
+msgid "Quick Start"
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+msgid ""
+"Attention: the Multibyte String PHP extension (`mbstring`) is not loaded!"
+msgstr ""
+
+msgid ""
+"The mbstring extension is required for the full UTF-8 compatibility and "
+"better performance. Without it, some parts of WordPress and WPGlobus may "
+"function incorrectly. Please contact your hosting company or systems "
+"administrator."
+msgstr ""
+
+msgid "Go to WPGlobus Settings"
+msgstr ""
+
+msgid "Easy as 1-2-3:"
+msgstr ""
+
+msgid "Go to WPGlobus admin menu and choose the countries / languages;"
+msgstr ""
+
+msgid ""
+"Enter the translations to the posts, pages, categories, tags and menus using "
+"a clean and simple interface."
+msgstr ""
+
+msgid ""
+"Switch languages at the front-end using a drop-down menu with language names "
+"and country flags."
+msgstr ""
+
+msgid "Links:"
+msgstr ""
+
+msgid "FAQs"
+msgstr ""
+
+msgid "Contact Us"
+msgstr ""
+
+msgid "Please give us 5 stars!"
+msgstr ""
+
+msgid "WPGlobus does not translate texts automatically!"
+msgstr ""
+
+msgid ""
+"There are many translation companies and individual translators who can help "
+"you write and proofread the texts."
+msgstr ""
+
+msgid ""
+"When you choose a translator, please look at their native language, country "
+"of residence, specialization and knowledge of WordPress."
+msgstr ""
+
+msgid "Important notes:"
+msgstr ""
+
+msgid ""
+"WPGlobus only supports the localization URLs in the form of <code>example."
+"com/xx/page/</code>. We do not plan to support subdomains <code>xx.example."
+"com</code> and language queries <code>example.com?lang=xx</code>."
+msgstr ""
+
+msgid "Some themes and plugins are <strong>not multilingual-ready</strong>."
+msgstr ""
+
+msgid ""
+"They might display some texts with no translation, or with all languages "
+"mixed together."
+msgstr ""
+
+#. translators: %s are used to insert HTML link. Keep them in place.
+msgid ""
+"Please contact the theme / plugin author. If they are unable to assist, "
+"consider %1$s hiring the WPGlobus Team %2$s to write a custom code for you."
+msgstr ""
+
+msgid "Language was set on your profile page"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Multilingual Everything!"
+msgstr ""
+
+msgid ""
+"WPGlobus is a family of WordPress plugins assisting you in making "
+"multilingual WordPress blogs and sites."
+msgstr ""
+
+msgid "Remove the WPGlobus settings (not recommended)"
+msgstr ""
+
+msgid "Clean-up Tool"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid ""
+"WARNING: this operation is non-reversible. It is strongly recommended that "
+"you backup your database before proceeding."
+msgstr ""
+
+msgid ""
+"This tool should be used only if you plan to completely uninstall WPGlobus. "
+"By running it, you will remove ALL translations you have entered to your "
+"post, pages, etc., keeping only the MAIN language texts. Please make sure "
+"that all entries have some content in the main language. Otherwise, you "
+"might end up with empty titles, no content, no excerpts, blank comments and "
+"so on."
+msgstr ""
+
+msgid ""
+"Make sure that your active theme does not have any code related to WPGlobus. "
+"Such code could be added by you or by a 3rd party developer. If that code "
+"runs without first verifying that WPGlobus is active, WordPress may die with "
+"a fatal error."
+msgstr ""
+
+#. translators: %1$s - language name, %2$s - language code. Do not remove.
+msgid ""
+"The main language is currently set to %1$s (%2$s). ALL TEXTS THAT ARE NOT IN "
+"%1$s WILL BE DELETED! To change the main language, please go to {{settings}}."
+msgstr ""
+
+msgid "You are about to clean the content of the following database tables:"
+msgstr ""
+
+msgid "The operations log"
+msgstr ""
+
+msgid ""
+"We are going to write a detailed log of all the database changes performed. "
+"It should help in the case you need to restore something important. The log "
+"will be written to the file:"
+msgstr ""
+
+msgid ""
+"Uncheck if you do not want to write the operations log (we recommend to keep "
+"it checked)"
+msgstr ""
+
+msgid "You have been warned..."
+msgstr ""
+
+msgid "Please confirm by checking the box below:"
+msgstr ""
+
+msgid ""
+"I have read and understood everything written on this page. I am aware that "
+"by using this tool I may loose some content of my website. I have made a "
+"database backup and know how to restore it if necessary. I am fully "
+"responsible for the results."
+msgstr ""
+
+msgid "YES, I CONFIRM"
+msgstr ""
+
+msgid "Process with the Clean-up"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Section"
+msgstr ""
+
+msgid "Show all sections"
+msgstr ""
+
+msgid "Check/Uncheck all"
+msgstr ""
+
+msgid "Save &amp; Reload"
+msgstr ""
+
+msgid "WPGlobus"
+msgstr ""
+
+msgid ""
+"You need to update WordPress to 4.5 or later to get Fields Settings section"
+msgstr ""
+
+msgid "Fields Settings"
+msgstr ""
+
+msgid "WPGlobus Settings"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Languages"
+msgstr ""
+
+msgid "Enabled Languages"
+msgstr ""
+
+msgid "These languages are currently enabled on your site."
+msgstr ""
+
+msgid "Choose a language you would like to enable."
+msgstr ""
+
+msgid "Press the [Save & Publish] button to confirm."
+msgstr ""
+
+#. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'
+#. translators: %1$s and %2$s - placeholders to insert HTML link around 'here'.
+msgid "or Add new Language %1$s here %2$s"
+msgstr ""
+
+msgid "Add Languages"
+msgstr ""
+
+msgid "Language Selector Mode"
+msgstr ""
+
+msgid "Two-letter Code with flag (en, ru, it, etc.)"
+msgstr ""
+
+msgid "Full Name (English, Russian, Italian, etc.)"
+msgstr ""
+
+msgid "Full Name with flag (English, Russian, Italian, etc.)"
+msgstr ""
+
+msgid "Flags only"
+msgstr ""
+
+msgid ""
+"Choose the way language name and country flag are shown in the drop-down menu"
+msgstr ""
+
+msgid "select navigation menu"
+msgstr ""
+
+msgid "Language Selector Menu"
+msgstr ""
+
+msgid "Choose the navigation menu where the language selector will be shown"
+msgstr ""
+
+msgid "No menus have been created yet. Create some."
+msgstr ""
+
+msgid "\"All Pages\" menus Language selector"
+msgstr ""
+
+msgid ""
+"Adds language selector to the menus that automatically list all existing "
+"pages (using `wp_list_pages`)"
+msgstr ""
+
+msgid "Custom CSS"
+msgstr ""
+
+msgid ""
+"Here you can enter the CSS rules to adjust the language selector menu for "
+"your theme. Look at the examples in the `style-samples.css` file."
+msgstr ""
+
+msgid "Post types"
+msgstr ""
+
+msgid "Uncheck to disable WPGlobus"
+msgstr ""
+
+msgid "Redirect"
+msgstr ""
+
+msgid "Choose the language automatically, based on:"
+msgstr ""
+
+msgid "Preferred language set in the browser"
+msgstr ""
+
+msgid ""
+"When a user comes to the site for the first time, try to find the best "
+"matching language version of the page."
+msgstr ""
+
+msgid "Custom JS Code"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "(Paste your JS code here.)"
+msgstr ""
+
+msgid ""
+"To add a Custom JS Code in Customizer, you need to upgrade WordPress to "
+"version 4.9 or later."
+msgstr ""
+
+msgid "With your version of WordPress, please use the"
+msgstr ""
+
+msgid "WPGlobus Settings page"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#. translators: %s is placeholder for Button
+msgid ""
+"Here you can specify which fields should be considered multilingual by "
+"WPGlobus. To exclude a field, uncheck it and then press the button %s below."
+msgstr ""
+
+msgid "Thank you for installing WPGlobus!"
+msgstr ""
+
+msgid "Read About WPGlobus"
+msgstr ""
+
+msgid ""
+"Click the <strong>[Languages]</strong> tab at the left to setup the options."
+msgstr ""
+
+msgid ""
+"Should you have any questions or comments, please do not hesitate to contact "
+"us."
+msgstr ""
+
+msgid "Sincerely Yours,"
+msgstr ""
+
+msgid "The WPGlobus Team"
+msgstr ""
+
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+msgid ""
+"We would hate to see you go. If something goes wrong, do not uninstall "
+"WPGlobus yet. Please %1$stalk to us%2$s and let us help!"
+msgstr ""
+
+msgid ""
+"Please note that if you deactivate WPGlobus, your site will show all the "
+"languages together, mixed up. You will need to remove all translations, "
+"keeping only one language."
+msgstr ""
+
+#. translators: %s: link to the Clean-up Tool
+#. translators: %s: link to the Clean-up Tool.
+msgid ""
+"If there are just a few places, you should edit them manually. To "
+"automatically remove all translations at once, you can use the %s. WARNING: "
+"The clean-up operation is irreversible, so use it only if you need to "
+"completely uninstall WPGlobus."
+msgstr ""
+
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+msgid "%1$sClean-up Tool%2$s"
+msgstr ""
+
+#. translators: %s: name of current theme
+msgid "Sorry, WPGlobus customizer doesn't support current theme %s."
+msgstr ""
+
+#. translators: %?$s: HTML codes for hyperlink. Do not remove.
+msgid "Please use %1$sWPGlobus options page%2$s instead."
+msgstr ""
+
+msgid "Expand/Shrink"
+msgstr ""
+
+msgid "WPGlobus News"
+msgstr ""
+
+msgid "Options updated"
+msgstr ""
+
+msgid "Please enter a language code!"
+msgstr ""
+
+msgid "Language code already exists!"
+msgstr ""
+
+msgid "Please specify the language flag!"
+msgstr ""
+
+msgid "Please enter the language name!"
+msgstr ""
+
+msgid "Please enter the language name in English!"
+msgstr ""
+
+msgid "Please enter the locale!"
+msgstr ""
+
+msgid "Add Language"
+msgstr ""
+
+msgid "Delete Language"
+msgstr ""
+
+msgid "Edit Language"
+msgstr ""
+
+msgid "Language Code"
+msgstr ""
+
+msgid ""
+"2-Letter ISO Language Code for the Language you want to insert. (Example: en)"
+msgstr ""
+
+msgid "Language flag"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid ""
+"The name of the language in its native alphabet. (Examples: English, Русский)"
+msgstr ""
+
+msgid "Name in English"
+msgstr ""
+
+msgid "The name of the language in English"
+msgstr ""
+
+msgid "Locale"
+msgstr ""
+
+msgid "PHP/WordPress Locale of the language. (Examples: en_US, ru_RU)"
+msgstr ""
+
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "Back to the WPGlobus Settings"
+msgstr ""
+
+msgid "Current Version"
+msgstr ""
+
+msgid "Premium add-on"
+msgstr ""
+
+msgid "Installed"
+msgstr ""
+
+msgid "Get it now!"
+msgstr ""
+
+#. translators: placeholders are for the HTML tags.
+msgid ""
+"If you have already purchased a WPGlobus premium extension, please read "
+"%1$sthe installation instructions here%2$s"
+msgstr ""
+
+msgid "Widgets with WPGlobus"
+msgstr ""
+
+msgid "Help Desk"
+msgstr ""
+
+msgid "Email not sent. Please fill in the entire form."
+msgstr ""
+
+msgid ""
+"Email not sent. Please verify that your name and email are entered correctly."
+msgstr ""
+
+msgid "Email sent."
+msgstr ""
+
+msgid "Thank you for using WPGlobus!"
+msgstr ""
+
+msgid "Our Support Team is here to answer your questions or concerns."
+msgstr ""
+
+msgid "To help us serve you better:"
+msgstr ""
+
+msgid ""
+"Please check if the problem persists if you switch to a standard WordPress "
+"theme."
+msgstr ""
+
+msgid ""
+"Try deactivating other plugins to see if any of them conflicts with WPGlobus."
+msgstr ""
+
+msgid "Please fill in and submit the contact form:"
+msgstr ""
+
+msgid "Please make sure the email address is correct."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Short description of the problem"
+msgstr ""
+
+msgid "Detailed description"
+msgstr ""
+
+msgid "Technical Information"
+msgstr ""
+
+msgid "This information helps us to find the problem source"
+msgstr ""
+
+#. translators: %s - placeholder for email.
+msgid ""
+"Alternatively, please email %s. Do not forget to copy and paste the "
+"technical information to your email message."
+msgstr ""
+
+msgid "To translate permalinks, please activate the module Slug."
+msgstr ""
+
+msgid "To use module Publish, please activate it."
+msgstr ""
+
+msgid "Translate permalinks with our premium add-on, WPGlobus Plus!"
+msgstr ""
+
+msgid ""
+"With Publish module, you will be able to write a post in one language and "
+"immediately publish it, not waiting for the translation to other languages."
+msgstr ""
+
+msgid "WPGlobus Recommends:"
+msgstr ""
+
+msgid "WPGlobus for WooCommerce"
+msgstr ""
+
+msgid ""
+"Translate product titles and descriptions, product categories, tags and "
+"attributes."
+msgstr ""
+
+msgid "Get it now:"
+msgstr ""
+
+msgid "WooCommerce Multi-Currency"
+msgstr ""
+
+msgid "Accept multiple currencies in your online store!"
+msgstr ""
+
+msgid "Check it out:"
+msgstr ""
+
+#. translators: %1$s - this plugin name. %2$s - the required PHP version.
+msgid "For %1$s to work correctly, PHP version %2$s or later is required."
+msgstr ""
+
+#. translators: %3$s - the current PHP version.
+msgid "The PHP version on your server is %3$s."
+msgstr ""
+
+#. translators: %1$s - this plugin name. %2$s - the required WordPress version.
+msgid ""
+"For %1$s to work correctly, WordPress version %2$s or later is required."
+msgstr ""
+
+msgid "Save draft before using extra language."
+msgstr ""
+
+msgid "Builder"
+msgstr ""
+
+msgid "Сompatibility Settings"
+msgstr ""
+
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+#. translators: ON/OFF status of WPGlobus on the edit pages.
+msgid "ON"
+msgstr ""
+
+msgid "Turn off"
+msgstr ""
+
+msgid "OFF"
+msgstr ""
+
+msgid "Turn on"
+msgstr ""
+
+msgid "Elementor"
+msgstr ""
+
+msgid "WPGlobus languages"
+msgstr ""
+
+msgid "current"
+msgstr ""
+
+msgid ""
+"WPGlobus provides multilingual support for Elementor only when the option "
+"%1$s%2$s%3$s is set to %4$s."
+msgstr ""
+
+msgid "Before switching the language, please save draft or publish."
+msgstr ""
+
+#. translators: Metabox title FOR language.
+msgctxt "filter__seo_meta_box_title"
+msgid "for"
+msgstr ""
+
+msgid "Page is being reloaded. Please wait..."
+msgstr ""
+
+msgid ""
+"Before switching the language, please save draft or publish, then reload "
+"page."
+msgstr ""
+
+msgid ""
+"WPGlobus provides multilingual support for Elementor only when the option "
+"`CSS Print Method` is set to `External File`."
+msgstr ""
+
+msgid "Open Elementor Settings page"
+msgstr ""
+
+msgid "WPGlobus widget"
+msgstr ""
+
+msgid "Add language switcher"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "List with flags"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Select with language code"
+msgstr ""
+
+msgid "Dropdown"
+msgstr ""
+
+msgid "Dropdown with flags"
+msgstr ""
+
+msgid "Selector type"
+msgstr ""
+
+msgid "You cannot disable the main language."
+msgstr ""
+
+msgid "Need a multilingual slug?"
+msgstr ""
+
+msgid "*) Available after the menu is saved."
+msgstr ""
+
+#. translators: %s are for A tags.
+msgid "To have the %1$sImage%2$s widget varying by language,"
+msgstr ""
+
+#. translators: %s are for A tags.
+msgid "please use the %1$sWPGlobus language widgets%2$s add-on"
+msgstr ""
+
+msgid "You must enable Pretty Permalinks to use WPGlobus."
+msgstr ""
+
+msgid ""
+"Please go to Settings > Permalinks > Common Settings and choose a non-"
+"default option."
+msgstr ""
+
+msgid "Language Selector Menu Style"
+msgstr ""
+
+msgid "WPGlobus Plus"
+msgstr ""
+
+msgid "Drop-down languages menu or Flat (in one line)"
+msgstr ""
+
+msgid "Do not change"
+msgstr ""
+
+msgid "Drop-down (vertical)"
+msgstr ""
+
+msgid "Flat (horizontal)"
+msgstr ""
+
+msgid ""
+"If you see this message then your browser may not display the WPGlobus "
+"Settings panel properly. Please try another browser."
+msgstr ""
+
+msgid "Сompatibility"
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid "Click the %1$s[Languages]%2$s tab at the left to setup the options."
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid ""
+"Use the %1$s[Languages Table]%2$s section to add a new language or to edit "
+"the language attributes: name, code, flag icon, etc."
+msgstr ""
+
+msgid "Important notes"
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid "Version %1$s1.9.17%2$s "
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid "Starting from this version, %1$sWPGlobus%2$s operates in two modes"
+msgstr ""
+
+#. translators: placeholders for "strong" tags; compatibility tab link.
+msgid ""
+"%1$sBuilder mode%2$s: WPGlobus turns this mode on automatically when it "
+"discovers any of the plugins/add-ons listed on the %1$s[%3$s]%2$s tab."
+msgstr ""
+
+#. translators: placeholders for "strong" tags; compatibility tab link.
+msgid ""
+"%1$sStandard/Classic mode%2$s: is used when there are no plugins `Builder` "
+"or if you explicitly turned off builder support on the %1$s[%3$s]%2$s tab."
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid "Version %1$s2.2.11%2$s "
+msgstr ""
+
+msgid "Starting from this version"
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid ""
+"The %1$sBuilder mode%2$s is turned OFF by default for all custom post types "
+"(CPT)."
+msgstr ""
+
+#. translators: placeholders for "strong" tags.
+msgid ""
+"To turn on the %1$sBuilder mode%2$s for specific post types, please visit "
+"the %1$s[%3$s]%2$s tab."
+msgstr ""
+
+msgid "Welcome!"
+msgstr ""
+
+msgid "Deactivating / Uninstalling"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "All add-ons"
+msgstr ""
+
+msgid "Mobile Menu"
+msgstr ""
+
+msgid "Language Widgets"
+msgstr ""
+
+msgid "We Recommend..."
+msgstr ""
+
+msgid ""
+"Our premium add-on, WPGlobus Plus, will add several features to your "
+"website, such as:"
+msgstr ""
+
+msgid ""
+"- Ability to write a post in one language and immediately publish it, not "
+"waiting for the translation to other languages;"
+msgstr ""
+
+msgid "- Set different URLs for each translation;"
+msgstr ""
+
+msgid ""
+"- In Yoast SEO, set the focus keyword and do the Page Analysis separately "
+"for each translation;"
+msgstr ""
+
+msgid "- and more..."
+msgstr ""
+
+msgid "Click here to download"
+msgstr ""
+
+msgid ""
+"Thanks for installing WPGlobus! Now you have a multilingual website and can "
+"translate your blog posts and pages to many languages."
+msgstr ""
+
+msgid "The next step is to translate your WooCommerce-based store!"
+msgstr ""
+
+msgid ""
+"With the WPGlobus for WooCommerce premium add-on, you will be able to "
+"translate product titles and descriptions, categories, tags and attributes."
+msgstr ""
+
+msgid "Multi-currency"
+msgstr ""
+
+msgid ""
+"Your WooCommerce-powered store is set to show prices and accept payments in "
+"a single currency only."
+msgstr ""
+
+msgid ""
+"With WPGlobus, you can add multiple currencies to your store and charge UK "
+"customers in Pounds, US customers in Dollars, Spanish clients in Euros, etc. "
+"Accepting multiple currencies will strengthen your competitive edge and "
+"positioning for global growth!"
+msgstr ""
+
+msgid ""
+"The WPGlobus Multi-Currency premium add-on provides switching currencies and "
+"re-calculating prices on-the-fly."
+msgstr ""
+
+msgid "WPGlobus Premium Add-ons"
+msgstr ""
+
+msgid ""
+"We have written several Premium add-ons for WPGlobus. With those add-ons, "
+"you will be able to:"
+msgstr ""
+
+msgid ""
+"<strong>Translate URLs</strong> (/my-page/ translates to /fr/ma-page, /ru/"
+"моя-страница and so on);"
+msgstr ""
+
+msgid ""
+"Postpone translation to some languages and <strong>publish only the "
+"translated texts</strong>;"
+msgstr ""
+
+msgid "Maintain <strong>separate menus and widgets for each language</strong>;"
+msgstr ""
+
+msgid "<strong>Translate WooCommerce</strong> products and taxonomies;"
+msgstr ""
+
+msgid ""
+"Enter separate focus keywords for each language in the <strong>Yoast SEO</"
+"strong>;"
+msgstr ""
+
+msgid "...and more."
+msgstr ""
+
+msgid "Click here to visit the WPGlobus Store"
+msgstr ""
+
+msgid "Select a language"
+msgstr ""
+
+#. translators: %3$s placeholder for the icon (actual picture).
+msgid ""
+"Place the %1$smain language%2$s of your site at the top of the list by "
+"dragging the %3$s icons."
+msgstr ""
+
+#. translators: placeholders for the "strong" HTML tags.
+msgid "%1$sUncheck%2$s the languages you do not plan to use."
+msgstr ""
+
+#. translators: placeholders for the "strong" HTML tags.
+msgid "%1$sAdd%2$s more languages using the section below."
+msgstr ""
+
+msgid "When done, click the [Save Changes] button."
+msgstr ""
+
+#. translators: %s - placeholder for the "Save Changes" button text.
+msgid "Press the %s button to confirm."
+msgstr ""
+
+#. translators: dropdown option meaning that none of the navigation menus should show the language selector.
+msgid "-- none --"
+msgstr ""
+
+msgid "All menus"
+msgstr ""
+
+msgid "Instructions:"
+msgstr ""
+
+msgid "(Found in some themes)"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Languages table"
+msgstr ""
+
+msgid "Use this table to add, edit or delete languages."
+msgstr ""
+
+msgid "NOTE: you cannot remove the main language."
+msgstr ""
+
+msgid "WPGlobus is enabled on these Post Types"
+msgstr ""
+
+msgid "Uncheck to disable"
+msgstr ""
+
+msgid ""
+"Please note that there are post types, which status is managed by other "
+"plugins and cannot be changed here."
+msgstr ""
+
+msgid "Post Types"
+msgstr ""
+
+msgid ""
+"You should put here only the code provided by WPGlobus Support. Do not write "
+"anything else in the sections below as it might break the functionality of "
+"your website!"
+msgstr ""
+
+msgid "Custom Code"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Builders support"
+msgstr ""
+
+msgid "Builder mode is enabled on these Post Types"
+msgstr ""
+
+msgid "Use block editor on the Widgets page"
+msgstr ""
+
+msgid ""
+"You cannot use block editor on the Widgets page because your theme disabled "
+"it."
+msgstr ""
+
+msgid "Block Editor"
+msgstr ""
+
+msgid "Block Editor Options"
+msgstr ""
+
+msgid ""
+"With the current settings, you will see the following lines in the section "
+"HEAD of your site pages"
+msgstr ""
+
+msgid "(example for two languages)"
+msgstr ""
+
+msgid ""
+"Tell search engines about localized versions of your pages using the "
+"hreflang tag"
+msgstr ""
+
+msgid "Output the hreflang tag as"
+msgstr ""
+
+msgid "Language- and region-specific (en-US, ru-RU, etc.)"
+msgstr ""
+
+msgid "Language- and region-specific (en-us, ru-ru, etc.)"
+msgstr ""
+
+msgid "Language code only (en, ru, etc.)"
+msgstr ""
+
+msgid "Use the code `x-default` for the main language"
+msgstr ""
+
+msgid "Multilingual SEO"
+msgstr ""
+
+msgid "Multilingual SEO Options"
+msgstr ""
+
+msgid ""
+"With WPGlobus, you can get translations for posts and pages using REST API."
+msgstr ""
+
+msgid "Go to %1$s%2$s%3$s to see the content in language: %4$s."
+msgstr ""
+
+msgid ""
+"For demonstration, you can try the first post that WordPress creates at the "
+"initial installation."
+msgstr ""
+
+msgid ""
+"Please read the %1$sWordPress REST API documentation%2$s for more "
+"information."
+msgstr ""
+
+msgid ""
+"In the REST API response, you can find the %1$stranslation%2$s field, which "
+"shows whether translations exist for the fields %1$stitle%2$s, %1$scontent"
+"%2$s and %1$sexcerpt%2$s or not, for each language. See the screenshot below:"
+msgstr ""
+
+msgid "Description:"
+msgstr ""
+
+msgid "REST API"
+msgstr ""
+
+msgid "Translate strings"
+msgstr ""
+
+msgid "item"
+msgstr ""
+
+msgid "items"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Flag"
+msgstr ""
+
+msgid "Language name"
+msgstr ""
+
+msgid "English language name"
+msgstr ""
+
+msgid "No items found"
+msgstr ""
+
+msgid "Add new Language"
+msgstr ""
+
+msgid "No items of this type were found."
+msgstr ""
+
+msgid "Select an item"
+msgstr ""
+
+msgid "Multilingual support of this add-on is currently in Beta stage."
+msgstr ""
+
+msgid "We do not recommend using it on production sites."
+msgstr ""
+
+msgid "Please report all problems to %1$sWPGlobus Technical Support%2$s."
+msgstr ""
+
+msgid "WordPress version"
+msgstr ""
+
+msgid "In the WordPress core"
+msgstr ""
+
+msgid "Core"
+msgstr ""
+
+msgid "Current version"
+msgstr ""
+
+msgid "Stage"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Block editor"
+msgstr ""
+
+msgid "production"
+msgstr ""
+
+msgid "List of supported add-ons"
+msgstr ""
+
+msgid "Add-on"
+msgstr ""
+
+msgid "Supported minimum version"
+msgstr ""
+
+msgid "Not installed"
+msgstr ""
+
+msgid "Installed, inactive"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "WPGlobus Customizer is integrated into the Customize Theme panel"
+msgstr ""
+
+msgid "However, some themes do not follow all WordPress standards strictly."
+msgstr ""
+
+msgid "WPGlobus Customizer may behave incorrectly with those themes."
+msgstr ""
+
+msgid "To avoid conflicts, you can switch the WPGlobus Customizer off:"
+msgstr ""
+
+msgid ""
+"Below is the list of themes that do not support the WPGlobus Customizer. "
+"With those themes, WPGlobus Customizer is switched off by default"
+msgstr ""
+
+msgid "The currently active theme is"
+msgstr ""
+
+msgid "In the current version, WPGlobus Customizer does not support"
+msgstr ""
+
+msgid "translation of the navigation menus"
+msgstr ""
+
+msgid "to translate, please go to"
+msgstr ""
+
+msgid "Go to Customizer"
+msgstr ""
+
+msgid "is undefined"
+msgstr ""
+
+msgid "is set to"
+msgstr ""
+
+msgid "by adding to the file wp-config.php"
+msgstr ""
+
+msgid "now"
+msgstr ""
+
+msgid "We rely on your support!"
+msgstr ""
+
+msgid "Please consider a small donation to support the future development."
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+msgid "WPGlobus Plus!"
+msgstr ""
+
+msgid ""
+"Advanced features and tweaks: URL translation, multilingual SEO analysis, "
+"separate publishing and more! "
+msgstr ""
+
+msgid "Get WPGlobus Plus now!"
+msgstr ""
+
+#. translators: %s are for A tags.
+msgid "Use as multilingual with %1$sWPGlobus%2$s"
+msgstr ""
+
+msgid "Multilingual"
+msgstr ""
+
+#. translators: %s are for A tags.
+msgid "To use this field, please activate the %1$sACF Plus%2$s module"
+msgstr ""
+
+msgid ""
+"Bulk editing of the multilingual titles and descriptions is not supported by "
+"the current version."
+msgstr ""
+
+msgid "Therefore, to avoid any data loss, we do not recommend using this."
+msgstr ""
+
+msgid "WPGlobus warning: "
+msgstr ""
+
+msgid "https://github.com/WPGlobus/WPGlobus"
+msgstr ""
+
+msgid ""
+"A WordPress Globalization / Multilingual Plugin. Posts, pages, menus, "
+"widgets and even custom fields - in multiple languages!"
+msgstr ""
+
+msgid "https://wpglobus.com/"
+msgstr ""
