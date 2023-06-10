@@ -1,6 +1,7 @@
 /node_modules/
 /wpsvn/
 *.po~
+*.bak
 .phpunit.result.cache
 package-lock.json
 /vendor/bin/phpcbf
