@@ -217,6 +217,9 @@ WPGlobus Version 2 supports WordPress 5.x, with Gutenberg.
 
 == Changelog ==
 
+= 2.12.2 =
+* Fix: "New posts no longer saving in 2nd language" error introduced in 2.12.1
+
 = 2.12.1 =
 * Fix: (Security) Authentication check in `class-wpglobus.php` function `on_admin_init()`.
 * Fix: (Security) Permission check in `class-wpglobus-customize-options.php` function `action__process_ajax()`.
