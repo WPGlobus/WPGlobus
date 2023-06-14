@@ -3551,6 +3551,22 @@ class WPGlobus {
 
 			$__table = _get_meta_table( 'post' );
 
+			/**
+			 * @since 2.12.2
+			 * Reverted piece of code.
+			 * @see description below.
+			 */
+			$__meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM $__table WHERE meta_key = %s AND post_id = %d", self::LANGUAGE_META_KEY, $postarr['ID'] ) );
+			
+			/**
+			 * Error in debug.log:
+			 *
+			 * WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+			 * for the right syntax to use near ''wp_postmeta' WHERE meta_key = 'wpglobus_language' AND post_id = 20' at line 1 
+			 * for query SELECT meta_value FROM 'wp_postmeta' WHERE meta_key = 'wpglobus_language' AND post_id = 20 made by edit_post, 
+			 * wp_update_post, wp_insert_post, apply_filters('wp_insert_post_data'), WP_Hook->apply_filters, WPGlobus->on_save_post_data
+			 */
+			/*
 			$__meta_ids = $wpdb->get_col(
 				$wpdb->prepare(
 					'SELECT meta_value FROM %s WHERE meta_key = %s AND post_id = %d',
@@ -3559,7 +3575,8 @@ class WPGlobus {
 					$postarr['ID']
 				)
 			);
-
+			// */
+			
 			$_meta = 'meta'; // PHPCS
 			if ( empty( $__meta_ids ) ) {
 				$__data = array(
@@ -3642,11 +3659,16 @@ class WPGlobus {
 
 		endif;  // end ! $devmode.
 
-		if ( ! empty( $has_extra_post_title ) && ! empty( $post_title ) ) {
+		/**
+		 * @since 2.12.2
+		 * Reverted piece of code.
+		 * @see https://wordpress.org/support/topic/new-posts-no-longer-saving-in-2nd-language/
+		 */
+		if ( ! $has_extra_post_title ) {
 			$data['post_title'] = $post_title;
 		}
 
-		if ( ! empty( $has_extra_post_content ) && ! empty( $post_content ) ) {
+		if ( ! $has_extra_post_content ) {
 			$data['post_content'] = $post_content;
 		}
 
@@ -3656,7 +3678,6 @@ class WPGlobus {
 		 * @since 1.2.2
 		 */
 		return apply_filters( 'wpglobus_save_post_data', $data, $postarr, $devmode );
-
 	}
 
 	/**
